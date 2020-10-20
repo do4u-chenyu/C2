@@ -90,9 +90,11 @@ namespace C2
 
             InitializeGlobalVariable();
             InitializeControlsLocation();
+            InitializeTaskBar();
 
             MdiClient = this.mdiWorkSpace1;
             openFileDialog1 = new OpenFileDialog();
+            this.NewDocument();
         }
 
         private void InitializeMainFormEventHandler()
@@ -119,7 +121,6 @@ namespace C2
             //Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
             //Global.SetTopToolBarControl(this.topToolBarControl);
         }
-
         private void RemarkChange(RemarkControl rc)
         {
             SetDocumentDirty();
@@ -132,12 +133,12 @@ namespace C2
         }
         public void SetDocumentDirty()
         {
-            // 已经为dirty了，就不需要再操作了，以提高性能
-            if (this.modelDocumentDao.CurrentDocument.Dirty)
-                return;
-            this.modelDocumentDao.CurrentDocument.Dirty = true;
-            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, true);
+            //// 已经为dirty了，就不需要再操作了，以提高性能
+            //if (this.modelDocumentDao.CurrentDocument.Dirty)
+            //    return;
+            //this.modelDocumentDao.CurrentDocument.Dirty = true;
+            //string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
+            //this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, true);
         }
         public void DeleteCurrentDocument()
         {
@@ -167,14 +168,14 @@ namespace C2
 
         private void SaveAllDocuments()
         {
-            string[] modelTitles = this.modelDocumentDao.SaveAllDocuments();
-            foreach (string modelTitle in modelTitles)
-            {   // 加入左侧我的模型面板
-                if (!this.myModelControl.ContainModel(modelTitle))
-                    this.myModelControl.AddModel(modelTitle);
-                // 清空Dirty标志
-                this.modelTitlePanel.ResetDirtyPictureBox(modelTitle, false);
-            }
+            //string[] modelTitles = this.modelDocumentDao.SaveAllDocuments();
+            //foreach (string modelTitle in modelTitles)
+            //{   // 加入左侧我的模型面板
+            //    if (!this.myModelControl.ContainModel(modelTitle))
+            //        this.myModelControl.AddModel(modelTitle);
+            //    // 清空Dirty标志
+            //    this.modelTitlePanel.ResetDirtyPictureBox(modelTitle, false);
+            //}
         }
 
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
@@ -1057,6 +1058,67 @@ namespace C2
             }
 
             return null;
+        }
+
+        void InitializeTaskBar()
+        {
+            TaskBar = taskBar1;
+            TaskBar.Font = SystemFonts.MenuFont;
+            TaskBar.Height = Math.Max(32, TaskBar.Height);
+            TaskBar.MaxItemSize = 300;
+            //TaskBar.Padding = new Padding(2, 0, 2, 0);
+
+            //BtnStart = new StartMenuButton();
+            //BtnStart.Text = "Menu";
+            //BtnStart.Click += new EventHandler(BtnStart_Click);
+
+            //BtnNew = new TabBarButton();
+            //BtnNew.Icon = Properties.Resources._new;
+            //BtnNew.ToolTipText = "Create New Document";
+            //BtnNew.Click += new EventHandler(MenuNew_Click);
+
+            //BtnOpen = new TabBarButton();
+            //BtnOpen.Icon = Properties.Resources.open;
+            //BtnOpen.ToolTipText = "Open Document...";
+            //BtnOpen.Click += new EventHandler(MenuOpen_Click);
+
+            //BtnHelp = new TabBarButton();
+            //BtnHelp.Icon = Properties.Resources.help;
+            //BtnHelp.Text = "Help";
+            //BtnHelp.Click += new EventHandler(BtnHelp_Click);
+
+            //TaskBar.LeftButtons.Add(BtnStart);
+            //TaskBar.LeftButtons.Add(BtnNew);
+            //TaskBar.LeftButtons.Add(BtnOpen);
+            //TaskBar.RightButtons.Add(BtnHelp);
+            TaskBar.Items.ItemAdded += TaskBar_Items_ItemAdded;
+            TaskBar.Items.ItemRemoved += TaskBar_Items_ItemRemoved;
+
+            //MenuHelps.DropDown = HelpMenu;
+            //MenuQuickHelp.Enabled = Helper.HasQuickHelp();
+
+            //
+            TabNew = new SpecialTabItem(Properties.Resources._new);
+            TabNew.Click += new EventHandler(MenuNew_Click);
+            TaskBar.RightSpecialTabs.Add(TabNew);
+        }
+        void MenuNew_Click(object sender, System.EventArgs e)
+        {
+            NewDocument();
+        }
+        void TaskBar_Items_ItemRemoved(object sender, XListEventArgs<TabItem> e)
+        {
+            RefreshFunctionTaskBarItems();
+        }
+
+        void TaskBar_Items_ItemAdded(object sender, XListEventArgs<TabItem> e)
+        {
+            RefreshFunctionTaskBarItems();
+        }
+        void RefreshFunctionTaskBarItems()
+        {
+            var hasForms = TaskBar.Items.Exists(item => item.Tag is Form);
+            TabNew.Visible = hasForms;
         }
         #endregion
 

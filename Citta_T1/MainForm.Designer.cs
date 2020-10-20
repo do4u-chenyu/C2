@@ -80,9 +80,9 @@ namespace C2
             this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
-            this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
+            this.mdiWorkSpace1 = new C2.WorkSpace.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.modelTitlePanel = new C2.Controls.Title.ModelTitlePanel();
+            this.taskBar1 = new C2.Controls.TaskBar();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -603,21 +603,23 @@ namespace C2
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.modelTitlePanel);
+            this.panel6.Controls.Add(this.taskBar1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(910, 32);
             this.panel6.TabIndex = 9;
             // 
-            // modelTitlePanel
+            // taskBar1
             // 
-            this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
-            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
-            this.modelTitlePanel.Name = "modelTitlePanel";
-            this.modelTitlePanel.Size = new System.Drawing.Size(910, 32);
-            this.modelTitlePanel.TabIndex = 0;
+            this.taskBar1.AeroBackground = false;
+            this.taskBar1.BaseLineSize = 3;
+            this.taskBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.taskBar1.Location = new System.Drawing.Point(0, 0);
+            this.taskBar1.Name = "taskBar1";
+            this.taskBar1.Size = new System.Drawing.Size(910, 32);
+            this.taskBar1.TabIndex = 0;
+            this.taskBar1.Text = "taskBar1";
             // 
             // MainForm
             // 
@@ -712,8 +714,8 @@ namespace C2
         private Panel MainPanel;
         private Panel panel7;
         private Panel panel6;
-        private Controls.Title.ModelTitlePanel modelTitlePanel;
         private Panel BaseWorkSpace;
-        private C2.Controls.MdiWorkSpace mdiWorkSpace1;
+        private C2.WorkSpace.MdiWorkSpace mdiWorkSpace1;
+        private Controls.TaskBar taskBar1;
     }
 }

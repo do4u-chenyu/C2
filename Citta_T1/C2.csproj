@@ -476,6 +476,18 @@
     <Compile Include="Controls\Misc\ImageListBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Views\CanvasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CanvasForm.Designer.cs">
+      <DependentUpon>CanvasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\MciWorkSpace.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\BaseWorkSpace.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WorkSpace\MdiWorkSpace.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1359,6 +1371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\TimerDialog.resx">
       <DependentUpon>TimerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CanvasForm.resx">
+      <DependentUpon>CanvasForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>

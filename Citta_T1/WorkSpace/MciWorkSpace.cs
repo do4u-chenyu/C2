@@ -8,18 +8,14 @@ using System.Threading.Tasks;
 
 namespace C2.WorkSpace
 {
-    public partial class MciWorkSpace : Component
+    public partial class MciWorkSpace : BaseWorkSpace
     {
         public MciWorkSpace()
         {
-            InitializeComponent();
         }
 
         public MciWorkSpace(IContainer container)
         {
-            container.Add(this);
-
-            InitializeComponent();
         }
     }
 }
