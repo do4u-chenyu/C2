@@ -426,13 +426,6 @@ namespace C2
             InitializeControlsLocation();
         }
 
-        private void ImportButton_Click(object sender, EventArgs e)
-        {
-            this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
-            this.inputDataForm.ShowDialog();
-            this.inputDataForm.ReSetParams();
-        }
-
 
         private void NewModelButton_Click(object sender, EventArgs e)
         {
@@ -1063,6 +1056,19 @@ namespace C2
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void ImportDataSource_Click(object sender, EventArgs e)
+        {
+            this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
+            this.inputDataForm.ShowDialog();
+            this.inputDataForm.ReSetParams();
+        }
+
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.NewDocument();
         }
     }
 }

@@ -63,7 +63,6 @@ namespace C2
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.saveAllButton = new System.Windows.Forms.Button();
-            this.ImportButton = new System.Windows.Forms.Button();
             this.saveModelButton = new System.Windows.Forms.Button();
             this.newModelButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -81,6 +80,7 @@ namespace C2
             this.resetButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
+            this.ImportDataSourceButton = new System.Windows.Forms.Button();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
@@ -100,6 +100,7 @@ namespace C2
             this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
             this.modelTitlePanel = new C2.Controls.Title.ModelTitlePanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -172,7 +173,7 @@ namespace C2
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(86, 31);
+            this.usernamelabel.Size = new System.Drawing.Size(58, 22);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "李警官";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
@@ -184,7 +185,7 @@ namespace C2
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(419, 52);
+            this.label1.Size = new System.Drawing.Size(282, 36);
             this.label1.TabIndex = 0;
             this.label1.Text = "IAO解决方案建模平台";
             // 
@@ -269,7 +270,7 @@ namespace C2
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.operatorControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.operatorControl.Location = new System.Drawing.Point(0, 0);
-            this.operatorControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
             this.operatorControl.Name = "operatorControl";
             this.operatorControl.Size = new System.Drawing.Size(185, 558);
             this.operatorControl.TabIndex = 0;
@@ -368,7 +369,7 @@ namespace C2
             this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dragLineControl.Location = new System.Drawing.Point(394, 36);
-            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
             this.dragLineControl.Name = "dragLineControl";
             this.dragLineControl.Size = new System.Drawing.Size(368, 3);
             this.dragLineControl.TabIndex = 3;
@@ -410,7 +411,7 @@ namespace C2
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.logLabel.Location = new System.Drawing.Point(120, 4);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(137, 39);
+            this.logLabel.Size = new System.Drawing.Size(92, 27);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
@@ -422,7 +423,7 @@ namespace C2
             this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.pyControlLabel.Location = new System.Drawing.Point(226, 4);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(107, 39);
+            this.pyControlLabel.Size = new System.Drawing.Size(72, 27);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
@@ -434,7 +435,7 @@ namespace C2
             this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.previewLabel.Location = new System.Drawing.Point(14, 4);
             this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(137, 39);
+            this.previewLabel.Size = new System.Drawing.Size(92, 27);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
@@ -468,19 +469,6 @@ namespace C2
             this.toolTip1.SetToolTip(this.saveAllButton, "保存当前打开的所有模型");
             this.saveAllButton.UseVisualStyleBackColor = false;
             this.saveAllButton.Click += new System.EventHandler(this.SaveAllButton_Click);
-            // 
-            // ImportButton
-            // 
-            this.ImportButton.BackColor = System.Drawing.Color.White;
-            this.ImportButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ImportButton.Image = ((System.Drawing.Image)(resources.GetObject("ImportButton.Image")));
-            this.ImportButton.Location = new System.Drawing.Point(88, 8);
-            this.ImportButton.Name = "ImportButton";
-            this.ImportButton.Size = new System.Drawing.Size(79, 32);
-            this.ImportButton.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.ImportButton, "导入本地数据文件,支持bcp,cvs,txt,xls四种格式");
-            this.ImportButton.UseVisualStyleBackColor = false;
-            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
             // saveModelButton
             // 
@@ -646,6 +634,20 @@ namespace C2
             this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
             this.runButton.UseVisualStyleBackColor = true;
             // 
+            // ImportDataSourceButton
+            // 
+            this.ImportDataSourceButton.BackColor = System.Drawing.Color.GhostWhite;
+            this.ImportDataSourceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ImportDataSourceButton.ForeColor = System.Drawing.Color.GhostWhite;
+            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.importDataSource;
+            this.ImportDataSourceButton.Location = new System.Drawing.Point(66, 0);
+            this.ImportDataSourceButton.Name = "ImportDataSourceButton";
+            this.ImportDataSourceButton.Size = new System.Drawing.Size(32, 32);
+            this.ImportDataSourceButton.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.ImportDataSourceButton, "导入本地数据文件,支持bcp,txt,csv,xls四种格式");
+            this.ImportDataSourceButton.UseVisualStyleBackColor = false;
+            this.ImportDataSourceButton.Click += new System.EventHandler(this.ImportDataSource_Click);
+            // 
             // MainPanel
             // 
             this.MainPanel.Controls.Add(this.panel7);
@@ -668,6 +670,8 @@ namespace C2
             // 
             // BaseWorkSpace
             // 
+            this.BaseWorkSpace.Controls.Add(this.button1);
+            this.BaseWorkSpace.Controls.Add(this.ImportDataSourceButton);
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.canvasPanel);
@@ -726,7 +730,7 @@ namespace C2
             this.progressBarLabel.ForeColor = System.Drawing.Color.Black;
             this.progressBarLabel.Location = new System.Drawing.Point(953, 245);
             this.progressBarLabel.Name = "progressBarLabel";
-            this.progressBarLabel.Size = new System.Drawing.Size(35, 23);
+            this.progressBarLabel.Size = new System.Drawing.Size(24, 16);
             this.progressBarLabel.TabIndex = 32;
             this.progressBarLabel.Text = "0%";
             this.progressBarLabel.Visible = false;
@@ -863,10 +867,24 @@ namespace C2
             // 
             this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
-            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
             this.modelTitlePanel.Name = "modelTitlePanel";
             this.modelTitlePanel.Size = new System.Drawing.Size(910, 32);
             this.modelTitlePanel.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.GhostWhite;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.GhostWhite;
+            this.button1.Image = global::C2.Properties.Resources.importDataSource;
+            this.button1.Location = new System.Drawing.Point(94, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 32);
+            this.button1.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.button1, "临时新建一个DocumentForm窗体");
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // MainForm
             // 
@@ -948,7 +966,6 @@ namespace C2
         private System.Windows.Forms.Button diffButton;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
-        private System.Windows.Forms.Button ImportButton;
         private Controls.Left.OperatorControl operatorControl;
         private Controls.Left.FlowChartControl flowChartControl;
         private Controls.Left.DataSourceControl dataSourceControl;
@@ -987,5 +1004,7 @@ namespace C2
         private Button runButton;
         private Controls.Flow.NaviViewControl naviViewControl;
         private C2.Controls.MdiWorkSpace mdiWorkSpace1;
+        private Button ImportDataSourceButton;
+        private Button button1;
     }
 }
