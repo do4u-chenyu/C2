@@ -23,6 +23,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataFormatOperatorView));
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox0 = new System.Windows.Forms.TextBox();
@@ -38,7 +39,7 @@
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(6, 2);
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 29);
             this.dataSourceTB0.TabIndex = 9;
             // 
             // cancelButton
@@ -56,24 +57,24 @@
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Location = new System.Drawing.Point(44, 4);
-            this.comboBox0.Size = new System.Drawing.Size(116, 25);
+            this.comboBox0.Location = new System.Drawing.Point(44, 2);
+            this.comboBox0.Size = new System.Drawing.Size(116, 29);
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(529, 21);
+            this.topPanel.Size = new System.Drawing.Size(527, 21);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 271);
-            this.bottomPanel.Size = new System.Drawing.Size(529, 52);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 261);
+            this.bottomPanel.Size = new System.Drawing.Size(527, 52);
             // 
             // keyPanel
             // 
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
-            this.keyPanel.Size = new System.Drawing.Size(116, 250);
+            this.keyPanel.Size = new System.Drawing.Size(116, 240);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             // 
@@ -83,7 +84,7 @@
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
-            this.valuePanel.Size = new System.Drawing.Size(413, 250);
+            this.valuePanel.Size = new System.Drawing.Size(411, 240);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
@@ -91,7 +92,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(32, 1);
-            this.label1.Size = new System.Drawing.Size(90, 22);
+            this.label1.Size = new System.Drawing.Size(123, 30);
             // 
             // label2
             // 
@@ -100,7 +101,7 @@
             this.label2.Location = new System.Drawing.Point(32, 59);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 22);
+            this.label2.Size = new System.Drawing.Size(123, 30);
             this.label2.TabIndex = 0;
             this.label2.Text = "添加条件：";
             // 
@@ -126,9 +127,9 @@
             this.textBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox0.ForeColor = System.Drawing.Color.Gray;
-            this.textBox0.Location = new System.Drawing.Point(165, 4);
+            this.textBox0.Location = new System.Drawing.Point(165, 3);
             this.textBox0.Name = "textBox0";
-            this.textBox0.Size = new System.Drawing.Size(114, 23);
+            this.textBox0.Size = new System.Drawing.Size(114, 29);
             this.textBox0.TabIndex = 6;
             this.textBox0.Text = "别名";
             // 
@@ -137,9 +138,9 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(3, 7);
+            this.label3.Location = new System.Drawing.Point(3, 4);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 17);
+            this.label3.Size = new System.Drawing.Size(36, 23);
             this.label3.TabIndex = 7;
             this.label3.Text = "1";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -179,17 +180,20 @@
             // DataFormatOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(529, 323);
+            this.ClientSize = new System.Drawing.Size(527, 313);
+            this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(545, 362);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(545, 362);
             this.Name = "DataFormatOperatorView";
+            this.ShowIcon = true;
             this.Text = "数据标准化算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);
