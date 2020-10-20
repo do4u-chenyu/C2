@@ -47,7 +47,7 @@
             // 
             this.movePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("movePictureBox.Image")));
-            this.movePictureBox.Location = new System.Drawing.Point(18, 5);
+            this.movePictureBox.Location = new System.Drawing.Point(130, 5);
             this.movePictureBox.Name = "movePictureBox";
             this.movePictureBox.Size = new System.Drawing.Size(22, 22);
             this.movePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -93,7 +93,7 @@
             // 
             this.remarkPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
-            this.remarkPictureBox.Location = new System.Drawing.Point(129, 4);
+            this.remarkPictureBox.Location = new System.Drawing.Point(19, 4);
             this.remarkPictureBox.Name = "remarkPictureBox";
             this.remarkPictureBox.Size = new System.Drawing.Size(23, 23);
             this.remarkPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -108,7 +108,7 @@
             // 
             this.framePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
-            this.framePictureBox.Location = new System.Drawing.Point(171, 4);
+            this.framePictureBox.Location = new System.Drawing.Point(167, 4);
             this.framePictureBox.Name = "framePictureBox";
             this.framePictureBox.Size = new System.Drawing.Size(24, 24);
             this.framePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -123,7 +123,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::C2.Properties.Resources.flow;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Controls.Add(this.framePictureBox);
             this.Controls.Add(this.remarkPictureBox);
@@ -134,6 +134,7 @@
             this.DoubleBuffered = true;
             this.Name = "FlowControl";
             this.Size = new System.Drawing.Size(218, 51);
+            this.Load += new System.EventHandler(this.FlowControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.movePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomUpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).EndInit();

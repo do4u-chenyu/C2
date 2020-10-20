@@ -172,12 +172,12 @@ namespace C2.Controls.Flow
             if (flag)
             {
                 this.movePictureBox.Image = global::C2.Properties.Resources.selectDrag;
-                this.movePictureBox.Location = new System.Drawing.Point(13, 3);
+                this.movePictureBox.Location = new System.Drawing.Point(124, 2);
                 this.movePictureBox.Size = new System.Drawing.Size(35, 29);
                 return;
             }
             this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("movePictureBox.Image")));
-            this.movePictureBox.Location = new System.Drawing.Point(18, 5);
+            this.movePictureBox.Location = new System.Drawing.Point(129, 4);
             this.movePictureBox.Size = new System.Drawing.Size(22, 22);
         }
         private void ZoomUpChange(bool flag)
@@ -211,12 +211,12 @@ namespace C2.Controls.Flow
             if (flag)
             {
                 this.remarkPictureBox.Image = global::C2.Properties.Resources.selectRemark;
-                this.remarkPictureBox.Location = new System.Drawing.Point(124, 2);
+                this.remarkPictureBox.Location = new System.Drawing.Point(13, 3);
                 this.remarkPictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
             }
             this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
-            this.remarkPictureBox.Location = new System.Drawing.Point(129, 4);
+            this.remarkPictureBox.Location = new System.Drawing.Point(18, 5);
             this.remarkPictureBox.Size = new System.Drawing.Size(23, 23);
         }
         private void FrameChange(bool flag)
@@ -240,6 +240,11 @@ namespace C2.Controls.Flow
             FrameChange(SelectFrame);
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().Invalidate();
+        }
+
+        private void FlowControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

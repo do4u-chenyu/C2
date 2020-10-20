@@ -286,7 +286,7 @@ namespace C2
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
             this.flowControl.Location     = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50);
-            this.remarkControl.Location   = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50 + this.flowControl.Height + 10);
+            this.remarkControl.Location   = new Point(this.canvasPanel.Width - 200 - this.flowControl.Width, this.flowControl.Height );
             this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 50);
             this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 50 + this.rightHideButton.Width + 10);
             
@@ -1069,6 +1069,11 @@ namespace C2
         private void button1_Click_1(object sender, EventArgs e)
         {
             this.NewDocument();
+        }
+
+        private void flowControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

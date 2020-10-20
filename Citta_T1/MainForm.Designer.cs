@@ -81,18 +81,19 @@ namespace C2
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.ImportDataSourceButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
             this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
+            this.remarkControl = new C2.Controls.Flow.RemarkControl();
             this.canvasPanel = new C2.Controls.CanvasPanel();
+            this.currentModelFinLab = new System.Windows.Forms.Label();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.currentModelFinLab = new System.Windows.Forms.Label();
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.remarkControl = new C2.Controls.Flow.RemarkControl();
             this.flowControl = new C2.Controls.Flow.FlowControl();
             this.rightHideButton = new C2.Controls.Flow.RightHideButton();
             this.rightShowButton = new C2.Controls.Flow.RightShowButton();
@@ -100,7 +101,6 @@ namespace C2
             this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
             this.modelTitlePanel = new C2.Controls.Title.ModelTitlePanel();
-            this.button1 = new System.Windows.Forms.Button();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -116,7 +116,6 @@ namespace C2
             this.MainPanel.SuspendLayout();
             this.panel7.SuspendLayout();
             this.BaseWorkSpace.SuspendLayout();
-            this.topToolBarControl.SuspendLayout();
             this.canvasPanel.SuspendLayout();
             this.currentModelRunBackLab.SuspendLayout();
             this.panel11.SuspendLayout();
@@ -649,6 +648,20 @@ namespace C2
             this.ImportDataSourceButton.UseVisualStyleBackColor = false;
             this.ImportDataSourceButton.Click += new System.EventHandler(this.ImportDataSource_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.GhostWhite;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.GhostWhite;
+            this.button1.Image = global::C2.Properties.Resources.importDataSource;
+            this.button1.Location = new System.Drawing.Point(94, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 32);
+            this.button1.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.button1, "临时新建一个DocumentForm窗体");
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // MainPanel
             // 
             this.MainPanel.Controls.Add(this.panel7);
@@ -676,6 +689,7 @@ namespace C2
             this.BaseWorkSpace.Controls.Add(this.ImportDataSourceButton);
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
+            this.BaseWorkSpace.Controls.Add(this.remarkControl);
             this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -687,23 +701,35 @@ namespace C2
             // topToolBarControl
             // 
             this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
-            this.topToolBarControl.Controls.Add(this.saveModelButton);
-            this.topToolBarControl.Controls.Add(this.saveAllButton);
             this.topToolBarControl.Location = new System.Drawing.Point(0, 2);
             this.topToolBarControl.Name = "topToolBarControl";
             this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
             this.topToolBarControl.TabIndex = 24;
+            this.topToolBarControl.Controls.Add(saveAllButton);
+            this.topToolBarControl.Controls.Add(saveModelButton);
+            // 
+            // remarkControl
+            // 
+            this.remarkControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.remarkControl.BackColor = System.Drawing.Color.Transparent;
+            this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.remarkControl.Location = new System.Drawing.Point(556, 50);
+            this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
+            this.remarkControl.Name = "remarkControl";
+            this.remarkControl.RemarkDescription = "";
+            this.remarkControl.Size = new System.Drawing.Size(120, 120);
+            this.remarkControl.TabIndex = 26;
+            this.remarkControl.Visible = false;
             // 
             // canvasPanel
             // 
             this.canvasPanel.AllowDrop = true;
             this.canvasPanel.BackColor = System.Drawing.Color.White;
+            this.canvasPanel.Controls.Add(this.currentModelFinLab);
             this.canvasPanel.Controls.Add(this.progressBarLabel);
             this.canvasPanel.Controls.Add(this.progressBar1);
-            this.canvasPanel.Controls.Add(this.currentModelFinLab);
             this.canvasPanel.Controls.Add(this.currentModelRunBackLab);
             this.canvasPanel.Controls.Add(this.panel11);
-            this.canvasPanel.Controls.Add(this.remarkControl);
             this.canvasPanel.Controls.Add(this.flowControl);
             this.canvasPanel.Controls.Add(this.rightHideButton);
             this.canvasPanel.Controls.Add(this.rightShowButton);
@@ -724,6 +750,15 @@ namespace C2
             this.canvasPanel.StartC = null;
             this.canvasPanel.StartP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.StartP")));
             this.canvasPanel.TabIndex = 7;
+            // 
+            // currentModelFinLab
+            // 
+            this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
+            this.currentModelFinLab.Location = new System.Drawing.Point(498, 174);
+            this.currentModelFinLab.Name = "currentModelFinLab";
+            this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelFinLab.TabIndex = 30;
+            this.currentModelFinLab.Visible = false;
             // 
             // progressBarLabel
             // 
@@ -748,15 +783,6 @@ namespace C2
             this.progressBar1.Step = 30;
             this.progressBar1.TabIndex = 31;
             this.progressBar1.Visible = false;
-            // 
-            // currentModelFinLab
-            // 
-            this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
-            this.currentModelFinLab.Location = new System.Drawing.Point(498, 174);
-            this.currentModelFinLab.Name = "currentModelFinLab";
-            this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
-            this.currentModelFinLab.TabIndex = 30;
-            this.currentModelFinLab.Visible = false;
             // 
             // currentModelRunBackLab
             // 
@@ -787,23 +813,10 @@ namespace C2
             this.panel11.Size = new System.Drawing.Size(8, 101);
             this.panel11.TabIndex = 1;
             // 
-            // remarkControl
-            // 
-            this.remarkControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.remarkControl.BackColor = System.Drawing.Color.Transparent;
-            this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.remarkControl.Location = new System.Drawing.Point(694, 111);
-            this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
-            this.remarkControl.Name = "remarkControl";
-            this.remarkControl.RemarkDescription = "";
-            this.remarkControl.Size = new System.Drawing.Size(160, 160);
-            this.remarkControl.TabIndex = 26;
-            this.remarkControl.Visible = false;
-            // 
             // flowControl
             // 
             this.flowControl.BackColor = System.Drawing.Color.Transparent;
-            this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
+            this.flowControl.BackgroundImage = global::C2.Properties.Resources.flow;
             this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.flowControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.flowControl.Location = new System.Drawing.Point(687, 50);
@@ -814,6 +827,7 @@ namespace C2
             this.flowControl.SelectRemark = false;
             this.flowControl.Size = new System.Drawing.Size(220, 51);
             this.flowControl.TabIndex = 25;
+            this.flowControl.Load += new System.EventHandler(this.flowControl_Load);
             // 
             // rightHideButton
             // 
@@ -875,20 +889,6 @@ namespace C2
             this.modelTitlePanel.Size = new System.Drawing.Size(910, 32);
             this.modelTitlePanel.TabIndex = 0;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.GhostWhite;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.GhostWhite;
-            this.button1.Image = global::C2.Properties.Resources.importDataSource;
-            this.button1.Location = new System.Drawing.Point(94, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 32);
-            this.button1.TabIndex = 10;
-            this.toolTip1.SetToolTip(this.button1, "临时新建一个DocumentForm窗体");
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -928,7 +928,6 @@ namespace C2
             this.MainPanel.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.BaseWorkSpace.ResumeLayout(false);
-            this.topToolBarControl.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
             this.canvasPanel.PerformLayout();
             this.currentModelRunBackLab.ResumeLayout(false);

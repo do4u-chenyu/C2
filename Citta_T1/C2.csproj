@@ -1649,6 +1649,9 @@
     <None Include="Resources\globe_network.ico" />
     <None Include="Resources\cur_style_brush1.cur" />
     <None Include="Resources\en.US.xml" />
+    <None Include="Resources\flow.bmp" />
+    <None Include="Resources\222.bmp" />
+    <None Include="Resources\flow.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand.png" />
     <None Include="Resources\help.png" />
