@@ -1,5 +1,5 @@
 ﻿
-namespace Citta_T1.Controls.Move.Op
+namespace C2.Controls.Move.Op
 {
     partial class MoveOpControl
     {

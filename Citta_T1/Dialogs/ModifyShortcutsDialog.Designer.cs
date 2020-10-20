@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Dialogs
+﻿namespace C2.Dialogs
 {
     partial class ModifyShortcutsDialog
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.shortcutKeysEditor1 = new Citta_T1.Core.ShortcutKeysEditor();
+            this.shortcutKeysEditor1 = new C2.Core.ShortcutKeysEditor();
             this.LabOperation = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();

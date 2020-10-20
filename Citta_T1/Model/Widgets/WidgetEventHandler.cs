@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Citta_T1.Model.Widgets
+namespace C2.Model.Widgets
 {
     public delegate void WidgetEventHandler(object sender, WidgetEventArgs e);
 

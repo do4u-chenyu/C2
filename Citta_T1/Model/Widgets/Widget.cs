@@ -3,13 +3,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.MindMaps;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Globalization;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Model.Widgets
+namespace C2.Model.Widgets
 {
     public abstract class Widget : ChartObject
         , IHyperlink
@@ -197,7 +197,7 @@ namespace Citta_T1.Model.Widgets
         //}
 
         //[DefaultValue(true), LocalDisplayName("Visible")]
-        //[TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
+        //[TypeConverter(typeof(C2.Design.BoolConverter))]
         //public bool Visible
         //{
         //    get { return _Visible; }
@@ -236,7 +236,7 @@ namespace Citta_T1.Model.Widgets
         public event EventHandler HyperlinkChanged;
 
         [DefaultValue(null), LocalDisplayName("Hyperlink"), LocalCategory("Data")]
-        [Editor(typeof(Citta_T1.Design.HyperlinkEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(C2.Design.HyperlinkEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string Hyperlink
         {
             get

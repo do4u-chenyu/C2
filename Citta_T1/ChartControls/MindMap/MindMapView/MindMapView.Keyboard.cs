@@ -1,9 +1,9 @@
 ﻿using System.Windows.Forms;
-using Citta_T1.Core;
+using C2.Core;
 using System.Collections.Generic;
 using System;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     public partial class MindMapView
     {

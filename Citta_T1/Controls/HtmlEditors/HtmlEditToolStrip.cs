@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using Citta_T1.Globalization;
+using C2.Globalization;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class HtmlEditToolStrip : ToolStripPro
     {

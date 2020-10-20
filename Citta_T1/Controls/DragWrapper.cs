@@ -1,6 +1,6 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class DragWrapper
     {

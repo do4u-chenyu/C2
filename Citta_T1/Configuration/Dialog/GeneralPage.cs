@@ -4,11 +4,11 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Controls;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Configuration.Dialog
+namespace C2.Configuration.Dialog
 {
     partial class GeneralPage : SettingPage
     {

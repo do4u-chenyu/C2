@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Citta_T1.Controls.Interface
+namespace C2.Controls.Interface
 {
 
     // 画布上的所有可移动控件接口

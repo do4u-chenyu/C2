@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     public class TopicStyle : Style
     {

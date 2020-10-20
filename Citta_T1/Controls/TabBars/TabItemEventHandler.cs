@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public delegate void TabItemEventHandler(object sender, TabItemEventArgs e);
 

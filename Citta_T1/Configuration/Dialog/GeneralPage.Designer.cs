@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Configuration.Dialog
+﻿namespace C2.Configuration.Dialog
 {
     partial class GeneralPage
     {
@@ -32,22 +32,22 @@
             this.labUILanguage = new System.Windows.Forms.Label();
             this.labSaveTabs = new System.Windows.Forms.Label();
             this.CmbLanguages = new System.Windows.Forms.ComboBox();
-            this.CmbSaveTabs = new Citta_T1.Controls.SaveTabsDropdownBox();
+            this.CmbSaveTabs = new C2.Controls.SaveTabsDropdownBox();
             this.CkbAssociate = new System.Windows.Forms.CheckBox();
             this.LabUITheme = new System.Windows.Forms.Label();
-            this.uiThemesDropDownList1 = new Citta_T1.Controls.UIThemes.UIThemesDropDownList();
-            this.BtnLanguagesDir = new Citta_T1.Controls.BrowseButton();
-            this.BtnUIThemesDir = new Citta_T1.Controls.BrowseButton();
+            this.uiThemesDropDownList1 = new C2.Controls.UIThemes.UIThemesDropDownList();
+            this.BtnLanguagesDir = new C2.Controls.BrowseButton();
+            this.BtnUIThemesDir = new C2.Controls.BrowseButton();
             this.CkbShowLineCap = new System.Windows.Forms.CheckBox();
             this.CkbShowRemarkIcon = new System.Windows.Forms.CheckBox();
             this.CkbPrintDocumentTitle = new System.Windows.Forms.CheckBox();
-            this.captionBar1 = new Citta_T1.Controls.CaptionBar();
-            this.captionBar2 = new Citta_T1.Controls.CaptionBar();
-            this.captionBar3 = new Citta_T1.Controls.CaptionBar();
-            this.captionBar4 = new Citta_T1.Controls.CaptionBar();
+            this.captionBar1 = new C2.Controls.CaptionBar();
+            this.captionBar2 = new C2.Controls.CaptionBar();
+            this.captionBar3 = new C2.Controls.CaptionBar();
+            this.captionBar4 = new C2.Controls.CaptionBar();
             this.labDefaultFont = new System.Windows.Forms.Label();
-            this.BtnDefaultFont = new Citta_T1.Controls.FontButton();
-            this.BtnClearDefaultFont = new Citta_T1.Controls.FlatButton();
+            this.BtnDefaultFont = new C2.Controls.FontButton();
+            this.BtnClearDefaultFont = new C2.Controls.FlatButton();
             this.CkbSaveRecentFiles = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -233,7 +233,7 @@
             this.captionBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.captionBar1.BackgroundStyle = Citta_T1.Controls.CaptionStyle.BaseLine;
+            this.captionBar1.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
             this.tableLayoutPanel1.SetColumnSpan(this.captionBar1, 4);
             this.captionBar1.Location = new System.Drawing.Point(3, 3);
             this.captionBar1.Name = "captionBar1";
@@ -246,7 +246,7 @@
             this.captionBar2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.captionBar2.BackgroundStyle = Citta_T1.Controls.CaptionStyle.BaseLine;
+            this.captionBar2.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
             this.tableLayoutPanel1.SetColumnSpan(this.captionBar2, 4);
             this.captionBar2.Location = new System.Drawing.Point(3, 91);
             this.captionBar2.Name = "captionBar2";
@@ -259,7 +259,7 @@
             this.captionBar3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.captionBar3.BackgroundStyle = Citta_T1.Controls.CaptionStyle.BaseLine;
+            this.captionBar3.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
             this.tableLayoutPanel1.SetColumnSpan(this.captionBar3, 4);
             this.captionBar3.Location = new System.Drawing.Point(3, 191);
             this.captionBar3.Name = "captionBar3";
@@ -272,7 +272,7 @@
             this.captionBar4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.captionBar4.BackgroundStyle = Citta_T1.Controls.CaptionStyle.BaseLine;
+            this.captionBar4.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
             this.tableLayoutPanel1.SetColumnSpan(this.captionBar4, 4);
             this.captionBar4.Location = new System.Drawing.Point(3, 296);
             this.captionBar4.Name = "captionBar4";
@@ -341,7 +341,7 @@
         private System.Windows.Forms.Label labUILanguage;
         private System.Windows.Forms.Label labSaveTabs;
         private System.Windows.Forms.ComboBox CmbLanguages;
-        private Citta_T1.Controls.SaveTabsDropdownBox CmbSaveTabs;
+        private C2.Controls.SaveTabsDropdownBox CmbSaveTabs;
         private System.Windows.Forms.CheckBox CkbAssociate;
         private System.Windows.Forms.Label LabUITheme;
         private Controls.UIThemes.UIThemesDropDownList uiThemesDropDownList1;

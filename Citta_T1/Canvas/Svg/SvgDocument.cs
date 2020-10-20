@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Canvas.Svg
+namespace C2.Canvas.Svg
 {
     class SvgDocument
     {
@@ -169,7 +169,7 @@ namespace Citta_T1.Canvas.Svg
             svg.SetAttribute("viewBox", string.Format("{0} {1} {2} {3}", 0, 0, Width, Height));
 
             // comment
-            var comment = dom.CreateComment("Create by Citta_T1, you can download it free from http://Citta_T1.org ");
+            var comment = dom.CreateComment("Create by C2, you can download it free from http://C2.org ");
             svg.AppendChild(comment);
 
             // title

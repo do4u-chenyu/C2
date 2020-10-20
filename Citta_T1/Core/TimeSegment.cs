@@ -1,7 +1,7 @@
 ﻿using System;
-using Citta_T1.Globalization;
+using C2.Globalization;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     struct TimeSegment
     {

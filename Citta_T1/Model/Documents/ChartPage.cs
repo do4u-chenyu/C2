@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model.Styles;
+using C2.Core;
+using C2.Globalization;
+using C2.Model.Styles;
 
-namespace Citta_T1.Model.Documents
+namespace C2.Model.Documents
 {
-    public abstract class ChartPage : ModifyObject, Citta_T1.Core.INotifyPropertyChanged, IRemark, ISerializable
+    public abstract class ChartPage : ModifyObject, C2.Core.INotifyPropertyChanged, IRemark, ISerializable
     {
         string _Name;
         string _Remark;
@@ -20,7 +20,7 @@ namespace Citta_T1.Model.Documents
         Padding _Margin = new Padding(20);
 
         public event ChartObjectEventHandler ChartObjectAdded;
-        public event Citta_T1.Core.PropertyChangedEventHandler ChartObjectPropertyChanged;
+        public event C2.Core.PropertyChangedEventHandler ChartObjectPropertyChanged;
         public event EventHandler NameChanged;
         public event EventHandler RemarkChanged;
         public event ChartObjectPropertyEventHandler ObjectStyleChanged;
@@ -114,7 +114,7 @@ namespace Citta_T1.Model.Documents
                 ChartObjectAdded(this, new ChartObjectEventArgs(chartObject));
         }
 
-        public virtual void OnChartObjectPropertyChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
+        public virtual void OnChartObjectPropertyChanged(object sender, C2.Core.PropertyChangedEventArgs e)
         {
             if (e.HasChanges(ChangeTypes.Data))
             {
@@ -413,12 +413,12 @@ namespace Citta_T1.Model.Documents
         #endregion
 
         #region INotifyPropertyChanged
-        public event Citta_T1.Core.PropertyChangedEventHandler PropertyChanged;
+        public event C2.Core.PropertyChangedEventHandler PropertyChanged;
 
         [Browsable(false)]
         public bool PropertyChangeSuspending { get; set; }
 
-        protected virtual void OnPropertyChanged(Citta_T1.Core.PropertyChangedEventArgs e)
+        protected virtual void OnPropertyChanged(C2.Core.PropertyChangedEventArgs e)
         {
             if (PropertyChangeSuspending)
                 return;
@@ -434,12 +434,12 @@ namespace Citta_T1.Model.Documents
 
         protected virtual void OnPropertyChanged(string propertyName, object oldValue, object newValue, ChangeTypes changes)
         {
-            OnPropertyChanged(new Citta_T1.Core.PropertyChangedEventArgs(propertyName, oldValue, newValue, changes, true));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs(propertyName, oldValue, newValue, changes, true));
         }
 
         protected virtual void OnPropertyChanged(string propertyName, object oldValue, object newValue, ChangeTypes changes, bool rollbackable)
         {
-            OnPropertyChanged(new Citta_T1.Core.PropertyChangedEventArgs(propertyName, oldValue, newValue, changes, rollbackable));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs(propertyName, oldValue, newValue, changes, rollbackable));
         }
         #endregion
 

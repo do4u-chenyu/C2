@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Citta_T1.Business.Schedule.Cmd
+namespace C2.Business.Schedule.Cmd
 {
     class FilterOperatorCmd : OperatorCmd
     {

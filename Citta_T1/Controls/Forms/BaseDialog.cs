@@ -5,9 +5,9 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public class BaseDialog : BaseForm
     {

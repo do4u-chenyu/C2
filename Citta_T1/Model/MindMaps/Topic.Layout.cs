@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Text;
-using Citta_T1.Configuration;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Configuration;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     public partial class Topic
     {
@@ -73,7 +73,7 @@ namespace Citta_T1.Model.MindMaps
             get
             {
                 var rect = Bounds;
-                if (this.HaveRemark && Options.Current.GetBool(Citta_T1.Configuration.OptionNames.Charts.ShowRemarkIcon))
+                if (this.HaveRemark && Options.Current.GetBool(C2.Configuration.OptionNames.Charts.ShowRemarkIcon))
                 {
                     rect = Rectangle.Union(rect, RemarkIconBounds);
                 }

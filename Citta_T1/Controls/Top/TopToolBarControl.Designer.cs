@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Controls.Top
+﻿namespace C2.Controls.Top
 {
     partial class TopToolBarControl
     {

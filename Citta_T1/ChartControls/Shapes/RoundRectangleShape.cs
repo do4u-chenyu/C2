@@ -1,11 +1,11 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Xml;
-using Citta_T1.Canvas;
-using Citta_T1.Controls;
-using Citta_T1.Core;
+using C2.Canvas;
+using C2.Controls;
+using C2.Core;
 
-namespace Citta_T1.ChartControls.Shapes
+namespace C2.ChartControls.Shapes
 {
     class RoundRectangleShape : Shape
     {

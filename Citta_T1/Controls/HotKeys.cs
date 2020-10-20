@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public static class HotKeys
     {

@@ -6,16 +6,16 @@ using System.Drawing.Design;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.Styles;
-using Citta_T1.Model.Widgets;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Globalization;
+using C2.Model;
+using C2.Model.Documents;
+using C2.Model.Styles;
+using C2.Model.Widgets;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     public partial class MindMap : ChartPage
     {
@@ -288,7 +288,7 @@ namespace Citta_T1.Model.MindMaps
         #region Topic Events
         //public event TopicEventHandler TopicStyleChanged;
         //public event TopicEventHandler TopicTextChanged;
-        public event Citta_T1.Core.PropertyChangedEventHandler TopicWidgetChanged;
+        public event C2.Core.PropertyChangedEventHandler TopicWidgetChanged;
         public event TopicEventHandler TopicDescriptionChanged;
         public event TopicEventHandler TopicIconChanged;
         public event TopicEventHandler TopicFoldedChanged;
@@ -323,7 +323,7 @@ namespace Citta_T1.Model.MindMaps
         //    }
         //}
 
-        internal void OnTopicWidgetChanged(Topic topic, Widget widget, Citta_T1.Core.PropertyChangedEventArgs e)
+        internal void OnTopicWidgetChanged(Topic topic, Widget widget, C2.Core.PropertyChangedEventArgs e)
         {
             if(e.HasChanges(ChangeTypes.Data))
                 Modified = true;
@@ -469,12 +469,12 @@ namespace Citta_T1.Model.MindMaps
 
         #region Links Events
         [Category("Link Events")]
-        public event Citta_T1.Core.PropertyChangedEventHandler LinkPropertyChanged;
+        public event C2.Core.PropertyChangedEventHandler LinkPropertyChanged;
 
         [Category("Link Events")]
         public event LinkEventHandler LinkVisibleChanged;
 
-        public void OnLinkPropertyChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
+        public void OnLinkPropertyChanged(object sender, C2.Core.PropertyChangedEventArgs e)
         {
             Modified = true;
 

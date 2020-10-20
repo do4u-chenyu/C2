@@ -2,10 +2,10 @@
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Core;
-using Citta_T1.Model;
+using C2.Core;
+using C2.Model;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public class BaseControl : Control, IThemableUI
     {

@@ -1,5 +1,5 @@
-﻿using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Bottom
+namespace C2.Controls.Bottom
 {
     public partial class BottomPreviewControl : UserControl
     {

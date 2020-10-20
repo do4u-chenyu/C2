@@ -4,11 +4,11 @@ using System.ComponentModel;
 using System.Drawing.Design;
 using System.Text;
 using System.Windows.Forms.Design;
-using Citta_T1.Core;
-using Citta_T1.Dialogs;
-using Citta_T1.Model;
+using C2.Core;
+using C2.Dialogs;
+using C2.Model;
 
-namespace Citta_T1.Design
+namespace C2.Design
 {
     class RemarkDesignEditor : UITypeEditor
     {

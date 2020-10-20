@@ -1,6 +1,6 @@
-﻿using Citta_T1.Core;
+﻿using C2.Core;
 
-namespace Citta_T1.OperatorViews.Base
+namespace C2.OperatorViews.Base
 {
     partial class BaseOperatorView
     {
@@ -31,8 +31,8 @@ namespace Citta_T1.OperatorViews.Base
             this.confirmButton = new System.Windows.Forms.Button();
             this.dataSourceTB0 = new System.Windows.Forms.TextBox();
             this.dataSourceTB1 = new System.Windows.Forms.TextBox();
-            this.outListCCBL0 = new Citta_T1.Controls.Common.ComCheckBoxList();
-            this.outListCCBL1 = new Citta_T1.Controls.Common.ComCheckBoxList();
+            this.outListCCBL0 = new C2.Controls.Common.ComCheckBoxList();
+            this.outListCCBL1 = new C2.Controls.Common.ComCheckBoxList();
             this.comboBox0 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.topPanel = new System.Windows.Forms.Panel();
@@ -237,8 +237,8 @@ namespace Citta_T1.OperatorViews.Base
         protected System.Windows.Forms.Button cancelButton;   // 取消键
         protected System.Windows.Forms.Button confirmButton;  // 确认键
         protected System.Windows.Forms.ToolTip toolTip1;      // 浮动提示栏,一个就够了
-        protected Citta_T1.Controls.Common.ComCheckBoxList outListCCBL0;  // 左表输出选项框
-        protected Citta_T1.Controls.Common.ComCheckBoxList outListCCBL1;  // 右表输出选项框
+        protected C2.Controls.Common.ComCheckBoxList outListCCBL0;  // 左表输出选项框
+        protected C2.Controls.Common.ComCheckBoxList outListCCBL1;  // 右表输出选项框
         protected System.Windows.Forms.ComboBox comboBox0;    // 左侧第一行条件选择框
         protected System.Windows.Forms.ComboBox comboBox1;    // 右侧第一行条件选择框
         protected System.ComponentModel.IContainer components;

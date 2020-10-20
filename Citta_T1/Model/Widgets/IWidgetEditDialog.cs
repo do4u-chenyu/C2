@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Citta_T1.Model.Widgets
+namespace C2.Model.Widgets
 {
     public interface IWidgetEditDialog
     {

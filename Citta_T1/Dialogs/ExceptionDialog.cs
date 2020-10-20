@@ -7,10 +7,10 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     partial class ExceptionDialog : BaseDialog
     {
@@ -21,7 +21,7 @@ namespace Citta_T1.Controls
         {
             InitializeComponent();
             MinimumSize = new System.Drawing.Size(250, 120);
-            Icon = Citta_T1.Properties.Resources.exclamation;
+            Icon = C2.Properties.Resources.exclamation;
             var am = AutoScaleMode;
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             Font = SystemFonts.MessageBoxFont;
@@ -31,7 +31,7 @@ namespace Citta_T1.Controls
             Padding = Padding.Empty;
             KeyPreview = true;
 
-            pictureBox1.Image = Citta_T1.Properties.Resources.cross_large;
+            pictureBox1.Image = C2.Properties.Resources.cross_large;
             label1.Padding = new System.Windows.Forms.Padding(4);
             LabExceptionMessage.Padding = new System.Windows.Forms.Padding(4);
             LabExceptionMessage.Font = new System.Drawing.Font(LabExceptionMessage.Font, FontStyle.Bold);

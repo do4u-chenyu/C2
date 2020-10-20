@@ -9,7 +9,7 @@
     <culture id="Dansk"/>
   </compatibility>
 	<words>
-    <item name="About">Om Citta_T1</item>
+    <item name="About">Om C2</item>
     <item name="Menu">MENU</item>
     <item name="Open">Åbn</item>
     <item name="New">Ny(t)</item>
@@ -291,11 +291,11 @@
     <item name="The same filename already exists. Do you want to replace it?">En fil med samme navn findes allerede. Skal den eksisterende erstattes?</item>
     <item name="Save tabs">Gem faneblade ved afslut</item>
     <item name="Do not ask me again">Spørg mig ikke igen.</item>
-    <item name="Do you want Citta_T1 save tabs and open them next startup?">Skal Citta_T1 gemme fanebladene og åbne dem ved næste start?</item>
+    <item name="Do you want C2 save tabs and open them next startup?">Skal C2 gemme fanebladene og åbne dem ved næste start?</item>
     <item name="Format Painter Description">Kopierer formatet fra et objekt og anvender formatet på et andet udvalgt objekt. Dobbeltklik på knappen for at formatere andre objekter.</item>
     <item name="Checking">Kontrollerer</item>
     <item name="There is a new version available">Der findes en nyere version "{0}"</item>
-    <item name="Your current version is the latest">Du bruger den nyeste version af Citta_T1.</item>
+    <item name="Your current version is the latest">Du bruger den nyeste version af C2.</item>
     <item name="Invalid URL">Ugyldig URL</item>
     <item name="Unable to connect to the remote server, please visit our website.">Kan ikke forbinde til serveren. Kontrollér venligst din netværksforbindelse.</item>
     <item name="Please input Url below">Indtast venligst URL nedenfor:</item>

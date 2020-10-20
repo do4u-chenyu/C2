@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 
-namespace Citta_T1.Controls.Bottom
+namespace C2.Controls.Bottom
 {
     public partial class BottomLogControl : UserControl
     {

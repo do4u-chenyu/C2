@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6FE47E67-232B-4A47-B905-8385DEAF2A95}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Citta_T1</RootNamespace>
-    <AssemblyName>Citta_T1</AssemblyName>
+    <RootNamespace>C2</RootNamespace>
+    <AssemblyName>C2</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace Citta_T1.Core.Exports
+namespace C2.Core.Exports
 {
     class BitmapEngine : ImageExportEngine
     {

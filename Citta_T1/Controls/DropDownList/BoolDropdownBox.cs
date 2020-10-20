@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Core;
+using C2.Core;
 using System.ComponentModel;
-using Citta_T1.Globalization;
+using C2.Globalization;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     [DefaultEvent("ValueChanged")]
     class BoolDropdownBox : ComboBox

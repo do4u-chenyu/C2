@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Dialogs
+﻿namespace C2.Dialogs
 {
     partial class AboutDialogBox
     {
@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.imageBox1 = new Citta_T1.Controls.ImageBox();
+            this.imageBox1 = new C2.Controls.ImageBox();
             this.LabProductName = new System.Windows.Forms.Label();
             this.LabVersion = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.LabAboutProduct = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.TxbEmail = new System.Windows.Forms.TextBox();
-            this.LnkWebSite = new Citta_T1.Controls.HyperLink();
+            this.LnkWebSite = new C2.Controls.HyperLink();
             this.LabHomePage = new System.Windows.Forms.Label();
             this.LabEMail = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,14 +55,14 @@
             this.imageBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.imageBox1.AutoScroll = true;
             this.imageBox1.AutoScrollMinSize = new System.Drawing.Size(64, 64);
-            this.imageBox1.Image = global::Citta_T1.Properties.Resources.logo64;
+            this.imageBox1.Image = global::C2.Properties.Resources.logo64;
             this.imageBox1.Location = new System.Drawing.Point(3, 8);
             this.imageBox1.Name = "imageBox1";
             this.tableLayoutPanel1.SetRowSpan(this.imageBox1, 2);
             this.imageBox1.Size = new System.Drawing.Size(64, 64);
             this.imageBox1.TabIndex = 0;
             this.imageBox1.Text = "Logo";
-            this.imageBox1.ZoomType = Citta_T1.Controls.ZoomType.FitPage;
+            this.imageBox1.ZoomType = C2.Controls.ZoomType.FitPage;
             // 
             // LabProductName
             // 
@@ -72,7 +72,7 @@
             this.LabProductName.Name = "LabProductName";
             this.LabProductName.Size = new System.Drawing.Size(47, 12);
             this.LabProductName.TabIndex = 1;
-            this.LabProductName.Text = "Citta_T1";
+            this.LabProductName.Text = "C2";
             // 
             // LabVersion
             // 

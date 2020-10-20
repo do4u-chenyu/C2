@@ -4,10 +4,10 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     class ChartStyle : Style
     {

@@ -1,5 +1,5 @@
-﻿using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Core;
+using C2.Utils;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
@@ -13,7 +13,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
     // 
     public delegate void DelegateInputData(string name, string filePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding);

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     [Flags]
     public enum ColorByte

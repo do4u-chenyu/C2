@@ -1,16 +1,16 @@
-﻿using Citta_T1.Business.DataSource;
-using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Business.Schedule;
-using Citta_T1.Controls.Flow;
-using Citta_T1.Controls.Left;
-using Citta_T1.Controls.Move;
-using Citta_T1.Controls.Move.Dt;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Core;
-using Citta_T1.Core.UndoRedo;
-using Citta_T1.Core.UndoRedo.Command;
-using Citta_T1.Utils;
+﻿using C2.Business.DataSource;
+using C2.Business.Model;
+using C2.Business.Option;
+using C2.Business.Schedule;
+using C2.Controls.Flow;
+using C2.Controls.Left;
+using C2.Controls.Move;
+using C2.Controls.Move.Dt;
+using C2.Controls.Move.Op;
+using C2.Core;
+using C2.Core.UndoRedo;
+using C2.Core.UndoRedo.Command;
+using C2.Utils;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
@@ -18,24 +18,24 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.Model.Documents;
-using Citta_T1;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
-using Citta_T1.Globalization;
+using C2.Controls;
+using C2.Model.Documents;
+using C2;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
+using C2.Globalization;
 #region Blumind
 using System.ComponentModel;
 using System.IO;
 using System.Text;
-using Citta_T1.Configuration;
-using Citta_T1.Controls.OS;
-using Citta_T1.Core.Exports;
-using Citta_T1.Dialogs;
-using Citta_T1.Core.Win32Apis;
+using C2.Configuration;
+using C2.Controls.OS;
+using C2.Core.Exports;
+using C2.Dialogs;
+using C2.Core.Win32Apis;
 #endregion
 
-namespace Citta_T1
+namespace C2
 {
     public partial class MainForm : DocumentManageForm
     {
@@ -57,8 +57,8 @@ namespace Citta_T1
         private bool isLeftViewPanelMinimum;
 
         private string userName;
-        private Citta_T1.Dialogs.InputDataForm inputDataForm;
-        private Citta_T1.Dialogs.CreateNewModelForm createNewModelForm;
+        private C2.Dialogs.InputDataForm inputDataForm;
+        private C2.Dialogs.CreateNewModelForm createNewModelForm;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
         private ModelDocumentDao modelDocumentDao;
@@ -382,7 +382,7 @@ namespace Citta_T1
             {
                 this.isBottomViewPanelMinimum = false;
                 this.bottomViewPanel.Height = 280;
-                this.minMaxPictureBox.Image = global::Citta_T1.Properties.Resources.minfold;
+                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
             }
             InitializeControlsLocation();
             if (bottomViewPanel.Height == 280)
@@ -402,13 +402,13 @@ namespace Citta_T1
             {
                 this.isBottomViewPanelMinimum = false;
                 this.bottomViewPanel.Height = 280;
-                this.minMaxPictureBox.Image = global::Citta_T1.Properties.Resources.minfold;
+                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
             }
             else
             {
                 this.isBottomViewPanelMinimum = true;
                 this.bottomViewPanel.Height = 40;
-                this.minMaxPictureBox.Image = global::Citta_T1.Properties.Resources.maxunfold;
+                this.minMaxPictureBox.Image = global::C2.Properties.Resources.maxunfold;
             }
             InitializeControlsLocation();
             if (bottomViewPanel.Height == 280)
@@ -665,7 +665,7 @@ namespace Citta_T1
                 //点击暂停按钮，均隐藏
                 case ModelStatus.Pause:
                     this.runButton.Name = "continueButton";
-                    this.runButton.Image = global::Citta_T1.Properties.Resources.continual;
+                    this.runButton.Image = global::C2.Properties.Resources.continual;
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.progressBar1.Hide();
@@ -675,8 +675,8 @@ namespace Citta_T1
                 //点击运行按钮
                 case ModelStatus.Running:
                     this.runButton.Name = "pauseButton";
-                    //this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
-                    this.runButton.Image = global::Citta_T1.Properties.Resources.run;
+                    //this.runButton.Image = global::C2.Properties.Resources.pause;
+                    this.runButton.Image = global::C2.Properties.Resources.run;
                     this.runButton.Enabled = false;//暂时隐去暂停功能
                     this.currentModelRunBackLab.Show();
                     this.currentModelRunLab.Show();
@@ -688,12 +688,12 @@ namespace Citta_T1
                     break;
                 case ModelStatus.GifDone:
                     this.runButton.Name = "runButton";
-                    this.runButton.Image = global::Citta_T1.Properties.Resources.run;
+                    this.runButton.Image = global::C2.Properties.Resources.run;
                     this.runButton.Enabled = true;//暂时隐去暂停功能
                     break;
                 default:
                     this.runButton.Name = "runButton";
-                    this.runButton.Image = global::Citta_T1.Properties.Resources.run;
+                    this.runButton.Image = global::C2.Properties.Resources.run;
                     this.runButton.Enabled = true;//暂时隐去暂停功能
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
@@ -904,7 +904,7 @@ namespace Citta_T1
             if (Global.GetCanvasPanel().LeftButtonDown)
                 Global.GetCanvasPanel().LeftButtonDown = false;
         }
-        #region Citta_T1
+        #region C2
         public void NewDocument()
         {
             Document doc = CreateNewMap();
@@ -1043,7 +1043,7 @@ namespace Citta_T1
         }
         public void ShowOptionsDialog()
         {
-            var dialog = new Citta_T1.Configuration.Dialog.SettingDialog();
+            var dialog = new C2.Configuration.Dialog.SettingDialog();
             dialog.ShowDialog(this);
         }
         BaseDocumentForm FindDocumentForm(string filename)

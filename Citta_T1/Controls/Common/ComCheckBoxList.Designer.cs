@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Controls.Common
+﻿namespace C2.Controls.Common
 {
     partial class ComCheckBoxList
     {

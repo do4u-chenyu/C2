@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     static class ColorExtension
     {

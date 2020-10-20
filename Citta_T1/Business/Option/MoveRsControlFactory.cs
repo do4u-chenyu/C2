@@ -1,17 +1,17 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Controls.Move.Rs;
-using Citta_T1.Core;
-using Citta_T1.Core.UndoRedo;
-using Citta_T1.Core.UndoRedo.Command;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Controls.Move.Op;
+using C2.Controls.Move.Rs;
+using C2.Core;
+using C2.Core.UndoRedo;
+using C2.Core.UndoRedo.Command;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace Citta_T1.Business.Option
+namespace C2.Business.Option
 {
     class MoveRsControlFactory
     {

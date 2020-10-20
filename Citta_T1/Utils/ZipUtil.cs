@@ -1,11 +1,11 @@
 ﻿using ICSharpCode.SharpZipLib.Checksum;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
-using Citta_T1.Core;
+using C2.Core;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Citta_T1.Utils
+namespace C2.Utils
 {
     public class ZipUtil
     {

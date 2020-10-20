@@ -1,8 +1,8 @@
-﻿using Citta_T1.Core;
+﻿using C2.Core;
 using log4net;
 using System.Reflection;
 
-namespace Citta_T1.Utils
+namespace C2.Utils
 {
     class LogUtil
     {

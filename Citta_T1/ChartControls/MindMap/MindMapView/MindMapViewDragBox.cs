@@ -4,12 +4,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
+using C2.Core;
+using C2.Globalization;
+using C2.Model;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     enum DragTopicsMethod
     {

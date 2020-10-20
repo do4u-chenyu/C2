@@ -4,9 +4,9 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
+using C2.Configuration;
 
-namespace Citta_T1.Globalization
+namespace C2.Globalization
 {
     static class LanguageManage
     {
@@ -73,7 +73,7 @@ namespace Citta_T1.Globalization
         {
             LoadLanguages();
 
-            var langid = Options.Current.GetString(Citta_T1.Configuration.OptionNames.Localization.LanguageID);
+            var langid = Options.Current.GetString(C2.Configuration.OptionNames.Localization.LanguageID);
             if (string.IsNullOrEmpty(langid))
             {
                 SetDefaultLanguage();
@@ -89,7 +89,7 @@ namespace Citta_T1.Globalization
             //D.Message("LoadLanguages...");
             _Languages.Clear();
 
-            string path = Citta_T1.Configuration.ProgramEnvironment.LanguagesDirectory;
+            string path = C2.Configuration.ProgramEnvironment.LanguagesDirectory;
             LoadLanguages(path);
 
             //AddLanguage(Language.LoadXml(Properties.Resources.ca_ES));

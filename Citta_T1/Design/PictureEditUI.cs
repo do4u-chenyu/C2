@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using Citta_T1.Core;
-using Citta_T1.Dialogs;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
-using Citta_T1.Model.Widgets;
+using C2.Core;
+using C2.Dialogs;
+using C2.Globalization;
+using C2.Model;
+using C2.Model.Widgets;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class PictureEditUI : Control
     {

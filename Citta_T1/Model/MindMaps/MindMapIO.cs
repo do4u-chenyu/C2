@@ -2,10 +2,10 @@
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Xml;
-using Citta_T1.Core.Documents;
-using Citta_T1.Model;
+using C2.Core.Documents;
+using C2.Model;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     class MindMapIO
     {
@@ -164,11 +164,11 @@ namespace Citta_T1.Model.MindMaps
 
             XmlElement document = dom.DocumentElement;
             document.SetAttribute("name", map.Name);
-            document.SetAttribute("document_type", DocumentType.Citta_T1.Name);
+            document.SetAttribute("document_type", DocumentType.C2.Name);
             document.SetAttribute("editor_version", ProductInfo.Version);
 
             // comment
-            XmlComment comment = dom.CreateComment("Create by Citta_T1, you can download it free from http://www.Citta_T1.org ");
+            XmlComment comment = dom.CreateComment("Create by C2, you can download it free from http://www.C2.org ");
             document.AppendChild(comment);
 
             // info

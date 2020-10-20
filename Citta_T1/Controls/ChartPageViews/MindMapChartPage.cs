@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Design;
-using Citta_T1.Dialogs;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Design;
+using C2.Dialogs;
+using C2.Globalization;
+using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
 
-namespace Citta_T1.ChartPageView
+namespace C2.ChartPageView
 {
     class MindMapChartPage : BaseChartPage, IThemableUI
     {
@@ -44,7 +44,7 @@ namespace Citta_T1.ChartPageView
 
         void InitializeComponent()
         {
-            mindMapView1 = new Citta_T1.Controls.MapViews.MindMapView();
+            mindMapView1 = new C2.Controls.MapViews.MindMapView();
             SuspendLayout();
 
             // mindMapView1
@@ -311,7 +311,7 @@ namespace Citta_T1.ChartPageView
                 MenuProperty});
 
             // MenuOpenHyperlink
-            MenuOpenHyperlink.Image = Citta_T1.Properties.Resources.hyperlink;
+            MenuOpenHyperlink.Image = C2.Properties.Resources.hyperlink;
             MenuOpenHyperlink.Name = "MenuOpenHyperlink";
             MenuOpenHyperlink.Text = "&Open Hyperlink";
             MenuOpenHyperlink.Click += new System.EventHandler(MenuOpenHyperlink_Click);
@@ -320,14 +320,14 @@ namespace Citta_T1.ChartPageView
             toolStripSeparator15.Name = "toolStripSeparator15";
 
             // MenuAddTopic
-            MenuAddTopic.Image = Citta_T1.Properties.Resources.add_topic;
+            MenuAddTopic.Image = C2.Properties.Resources.add_topic;
             MenuAddTopic.Name = "MenuAddTopic";
             MenuAddTopic.ShortcutKeyDisplayString = "Enter";
             MenuAddTopic.Text = "Add Topic";
             MenuAddTopic.Click += new System.EventHandler(MenuAddTopic_Click);
 
             // MenuAddSubTopic
-            MenuAddSubTopic.Image = Citta_T1.Properties.Resources.add_sub_topic;
+            MenuAddSubTopic.Image = C2.Properties.Resources.add_sub_topic;
             MenuAddSubTopic.Name = "MenuAddSubTopic";
             MenuAddSubTopic.ShortcutKeyDisplayString = "Tab/Insert";
             MenuAddSubTopic.Text = "Add Sub Topic";
@@ -342,19 +342,19 @@ namespace Citta_T1.ChartPageView
             MenuAdd.Text = "Add";
 
             // MenuAddIcon
-            MenuAddIcon.Image = Citta_T1.Properties.Resources.image;
+            MenuAddIcon.Image = C2.Properties.Resources.image;
             MenuAddIcon.Name = "MenuAddIcon";
             MenuAddIcon.Text = "&Icon";
             MenuAddIcon.Click += new System.EventHandler(MenuAddIcon_Click);
 
             // MenuAddProgressBar
-            MenuAddProgressBar.Image = Citta_T1.Properties.Resources.progress_bar;
+            MenuAddProgressBar.Image = C2.Properties.Resources.progress_bar;
             MenuAddProgressBar.Name = "MenuAddProgressBar";
             MenuAddProgressBar.Text = "&Progress Bar";
             MenuAddProgressBar.Click += new System.EventHandler(MenuAddProgressBar_Click);
 
             // MenuAddRemark
-            MenuAddRemark.Image = Citta_T1.Properties.Resources.notes;
+            MenuAddRemark.Image = C2.Properties.Resources.notes;
             MenuAddRemark.Name = "MenuAddRemark";
             MenuAddRemark.Text = "&Notes";
             MenuAddRemark.Click += new System.EventHandler(MenuAddRemark_Click);
@@ -428,28 +428,28 @@ namespace Citta_T1.ChartPageView
             toolStripMenuItem2.Name = "toolStripMenuItem2";
 
             // MenuCut
-            MenuCut.Image = Citta_T1.Properties.Resources.cut;
+            MenuCut.Image = C2.Properties.Resources.cut;
             MenuCut.Name = "MenuCut";
             MenuCut.ShortcutKeyDisplayString = "Ctrl+X";
             MenuCut.Text = "Cu&t";
             MenuCut.Click += new System.EventHandler(MenuCut_Click);
 
             // MenuCopy
-            MenuCopy.Image = Citta_T1.Properties.Resources.copy;
+            MenuCopy.Image = C2.Properties.Resources.copy;
             MenuCopy.Name = "MenuCopy";
             MenuCopy.ShortcutKeyDisplayString = "Ctrl+C";
             MenuCopy.Text = "&Copy";
             MenuCopy.Click += new System.EventHandler(MenuCopy_Click);
 
             // MenuPaste
-            MenuPaste.Image = Citta_T1.Properties.Resources.paste;
+            MenuPaste.Image = C2.Properties.Resources.paste;
             MenuPaste.Name = "MenuPaste";
             MenuPaste.ShortcutKeyDisplayString = "Ctrl+V";
             MenuPaste.Text = "&Paste";
             MenuPaste.Click += new System.EventHandler(MenuPaste_Click);
 
             // MenuDelete
-            MenuDelete.Image = Citta_T1.Properties.Resources.delete;
+            MenuDelete.Image = C2.Properties.Resources.delete;
             MenuDelete.Name = "MenuDelete";
             MenuDelete.ShortcutKeyDisplayString = "Del";
             MenuDelete.Text = "&Delete";
@@ -469,14 +469,14 @@ namespace Citta_T1.ChartPageView
             MenuNewChartFromHere.Click += MenuNewChartFromHere_Click;
 
             // MenuEdit
-            MenuEdit.Image = Citta_T1.Properties.Resources.edit;
+            MenuEdit.Image = C2.Properties.Resources.edit;
             MenuEdit.Name = "MenuEdit";
             MenuEdit.ShortcutKeyDisplayString = "F2";
             MenuEdit.Text = "&Edit";
             MenuEdit.Click += new System.EventHandler(MenuEdit_Click);
 
             // MenuProperty
-            MenuProperty.Image = Citta_T1.Properties.Resources.property;
+            MenuProperty.Image = C2.Properties.Resources.property;
             MenuProperty.Name = "MenuProperty";
             MenuProperty.Text = "&Property";
             MenuProperty.Click += new System.EventHandler(MenuProperty_Click);

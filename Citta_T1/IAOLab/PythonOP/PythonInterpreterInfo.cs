@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.IAOLab.PythonOP
+﻿namespace C2.IAOLab.PythonOP
 {
     class PythonInterpreterInfo
     {

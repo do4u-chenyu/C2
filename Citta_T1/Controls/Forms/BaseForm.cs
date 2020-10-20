@@ -3,13 +3,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Configuration;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
-    public class BaseForm : Form, IThemableUI//Citta_T1.Controls.Aero.GlassForm//, IGlobalBackground
+    public class BaseForm : Form, IThemableUI//C2.Controls.Aero.GlassForm//, IGlobalBackground
     {
         Image _IconImage = null;
 

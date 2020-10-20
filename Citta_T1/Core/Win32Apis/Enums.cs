@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Citta_T1.Controls.OS
+namespace C2.Controls.OS
 {
     public enum ROP2 : uint
     {

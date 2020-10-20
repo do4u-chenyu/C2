@@ -5,11 +5,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Linq;
-using Citta_T1.Core;
-using Citta_T1.Controls.OS;
-using Citta_T1.Model.Documents;
+using C2.Core;
+using C2.Controls.OS;
+using C2.Model.Documents;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class ListBoxControl : ListBoxControl<object>
     {
@@ -127,7 +127,7 @@ namespace Citta_T1.Controls
                 var cp = base.CreateParams;
                 if (BorderStyle != System.Windows.Forms.BorderStyle.None)
                 {
-                    cp.Style |= (int)Citta_T1.Controls.OS.WindowStyle.WS_BORDER;
+                    cp.Style |= (int)C2.Controls.OS.WindowStyle.WS_BORDER;
                 }
                 return cp;
             }

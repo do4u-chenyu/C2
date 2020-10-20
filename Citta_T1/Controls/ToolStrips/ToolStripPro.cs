@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Linq;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class ToolStripPro : ToolStrip
     {

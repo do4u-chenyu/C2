@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<theme name="Old Eastbourne" type="Citta_T1-ui-theme" version="1.0">
+<theme name="Old Eastbourne" type="C2-ui-theme" version="1.0">
   <colors>
     <color name="Dark" value="#101010" />
     <color name="Light" value="#F7F9E9" />

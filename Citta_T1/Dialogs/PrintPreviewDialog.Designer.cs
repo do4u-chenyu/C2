@@ -1,4 +1,4 @@
-﻿namespace Citta_T1
+﻿namespace C2
 {
     partial class PrintPreviewDialog
     {
@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolStrip1 = new Citta_T1.Controls.ToolStripPro();
+            this.toolStrip1 = new C2.Controls.ToolStripPro();
             this.TsbPrint = new System.Windows.Forms.ToolStripButton();
             this.TsbPrintSetup = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbFirstPage = new System.Windows.Forms.ToolStripButton();
             this.TsbPreviousPage = new System.Windows.Forms.ToolStripButton();
-            this.TsuPageNO = new Citta_T1.Controls.ToolStripNumericUpDown();
+            this.TsuPageNO = new C2.Controls.ToolStripNumericUpDown();
             this.TsbNextPage = new System.Windows.Forms.ToolStripButton();
             this.TsbLastPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -53,7 +53,7 @@
             this.separatorToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbClose = new System.Windows.Forms.ToolStripButton();
             this.pageToolStripLabel = new System.Windows.Forms.ToolStripLabel();
-            this.previewControl = new Citta_T1.Controls.PrintPreviewControl();
+            this.previewControl = new C2.Controls.PrintPreviewControl();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +85,7 @@
             // 
             // TsbPrint
             // 
-            this.TsbPrint.Image = global::Citta_T1.Properties.Resources.print;
+            this.TsbPrint.Image = global::C2.Properties.Resources.print;
             this.TsbPrint.Name = "TsbPrint";
             this.TsbPrint.Padding = new System.Windows.Forms.Padding(2);
             this.TsbPrint.Size = new System.Drawing.Size(58, 27);
@@ -95,7 +95,7 @@
             // TsbPrintSetup
             // 
             this.TsbPrintSetup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbPrintSetup.Image = global::Citta_T1.Properties.Resources.preferences;
+            this.TsbPrintSetup.Image = global::C2.Properties.Resources.preferences;
             this.TsbPrintSetup.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbPrintSetup.Name = "TsbPrintSetup";
             this.TsbPrintSetup.Padding = new System.Windows.Forms.Padding(2);
@@ -112,7 +112,7 @@
             // TsbFirstPage
             // 
             this.TsbFirstPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbFirstPage.Image = global::Citta_T1.Properties.Resources.first;
+            this.TsbFirstPage.Image = global::C2.Properties.Resources.first;
             this.TsbFirstPage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbFirstPage.Name = "TsbFirstPage";
             this.TsbFirstPage.Padding = new System.Windows.Forms.Padding(2);
@@ -123,7 +123,7 @@
             // TsbPreviousPage
             // 
             this.TsbPreviousPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbPreviousPage.Image = global::Citta_T1.Properties.Resources.previous;
+            this.TsbPreviousPage.Image = global::C2.Properties.Resources.previous;
             this.TsbPreviousPage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbPreviousPage.Name = "TsbPreviousPage";
             this.TsbPreviousPage.Padding = new System.Windows.Forms.Padding(2);
@@ -144,7 +144,7 @@
             // TsbNextPage
             // 
             this.TsbNextPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbNextPage.Image = global::Citta_T1.Properties.Resources.next;
+            this.TsbNextPage.Image = global::C2.Properties.Resources.next;
             this.TsbNextPage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbNextPage.Name = "TsbNextPage";
             this.TsbNextPage.Padding = new System.Windows.Forms.Padding(2);
@@ -155,7 +155,7 @@
             // TsbLastPage
             // 
             this.TsbLastPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbLastPage.Image = global::Citta_T1.Properties.Resources.last;
+            this.TsbLastPage.Image = global::C2.Properties.Resources.last;
             this.TsbLastPage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbLastPage.Name = "TsbLastPage";
             this.TsbLastPage.Padding = new System.Windows.Forms.Padding(2);
@@ -172,7 +172,7 @@
             // TsbZoomOut
             // 
             this.TsbZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbZoomOut.Image = global::Citta_T1.Properties.Resources.zoom_out;
+            this.TsbZoomOut.Image = global::C2.Properties.Resources.zoom_out;
             this.TsbZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbZoomOut.Name = "TsbZoomOut";
             this.TsbZoomOut.Padding = new System.Windows.Forms.Padding(2);
@@ -183,7 +183,7 @@
             // TsbZoomIn
             // 
             this.TsbZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbZoomIn.Image = global::Citta_T1.Properties.Resources.zoom_in;
+            this.TsbZoomIn.Image = global::C2.Properties.Resources.zoom_in;
             this.TsbZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbZoomIn.Name = "TsbZoomIn";
             this.TsbZoomIn.Padding = new System.Windows.Forms.Padding(2);
@@ -200,7 +200,7 @@
             this.MenuZoomFitWidth,
             this.MenuZoomFitHeight,
             this.toolStripSeparator3});
-            this.TsbZooms.Image = global::Citta_T1.Properties.Resources.zoom;
+            this.TsbZooms.Image = global::C2.Properties.Resources.zoom;
             this.TsbZooms.Name = "TsbZooms";
             this.TsbZooms.Padding = new System.Windows.Forms.Padding(2);
             this.TsbZooms.Size = new System.Drawing.Size(33, 27);
@@ -244,7 +244,7 @@
             this.MenuOnePage,
             this.MenuTwoPages,
             this.MenuFourPages});
-            this.TsbPages.Image = global::Citta_T1.Properties.Resources.print_pages;
+            this.TsbPages.Image = global::C2.Properties.Resources.print_pages;
             this.TsbPages.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbPages.Name = "TsbPages";
             this.TsbPages.Padding = new System.Windows.Forms.Padding(2);
@@ -280,7 +280,7 @@
             // 
             // TsbClose
             // 
-            this.TsbClose.Image = global::Citta_T1.Properties.Resources.close;
+            this.TsbClose.Image = global::C2.Properties.Resources.close;
             this.TsbClose.Name = "TsbClose";
             this.TsbClose.Padding = new System.Windows.Forms.Padding(2);
             this.TsbClose.Size = new System.Drawing.Size(64, 27);
@@ -325,13 +325,13 @@
         #endregion
 
         private System.Windows.Forms.ToolStripButton TsbClose;
-        private Citta_T1.Controls.ToolStripNumericUpDown TsuPageNO;
+        private C2.Controls.ToolStripNumericUpDown TsuPageNO;
         private System.Windows.Forms.ToolStripLabel pageToolStripLabel;
-        private Citta_T1.Controls.PrintPreviewControl previewControl;
+        private C2.Controls.PrintPreviewControl previewControl;
         private System.Windows.Forms.ToolStripButton TsbPrint;
         private System.Windows.Forms.ToolStripSeparator separatorToolStripSeparator;
         private System.Windows.Forms.ToolStripSeparator separatorToolStripSeparator1;
-        private Citta_T1.Controls.ToolStripPro toolStrip1;
+        private C2.Controls.ToolStripPro toolStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton TsbZoomOut;
         private System.Windows.Forms.ToolStripButton TsbZoomIn;

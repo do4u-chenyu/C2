@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Drawing;
-using Citta_T1.Core;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
+using C2.Core;
+using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     class MindMapLayout : Layouter
     {

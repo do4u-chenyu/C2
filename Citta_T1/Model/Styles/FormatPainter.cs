@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
+using C2.Model;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     class FormatPainter
     {

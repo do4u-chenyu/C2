@@ -4,11 +4,11 @@ using System.ComponentModel;
 using System.Drawing.Design;
 using System.Linq;
 using System.Text;
-using Citta_T1.Core;
-using Citta_T1.Design;
-using Citta_T1.Globalization;
+using C2.Core;
+using C2.Design;
+using C2.Globalization;
 
-namespace Citta_T1.Configuration
+namespace C2.Configuration
 {
     [Serializable]
     [Editor(typeof(EnumEditor<SaveTabsType>), typeof(UITypeEditor))]

@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Core.UndoRedo.Command
+﻿namespace C2.Core.UndoRedo.Command
 {
     // 测试Command,仅作测试UndoRedoManager功能使用
     class TestCommand : BaseCommand

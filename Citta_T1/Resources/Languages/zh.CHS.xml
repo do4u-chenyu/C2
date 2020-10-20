@@ -289,7 +289,7 @@
 		<item name="The format is not supported">不支持的格式</item>
 		<item name="No Pages">没有页面可供显示</item>
 		<item name="Exception Occurs">发生异常</item>
-		<item name="Document File">Citta_T1 思维导向图文件</item>
+		<item name="Document File">C2 思维导向图文件</item>
 		<item name="All Support Formats">所有支持格式</item>
 		<item name="All Image Files">所有的图片文件</item>
 		<item name="All Files">所有文件</item>
@@ -297,7 +297,7 @@
 		<item name="The same filename already exists. Do you want to replace it?">相同的文件名已存在. 是否要替换它?</item>
 		<item name="Save tabs">记住标签页</item>
 		<item name="Do not ask me again">不再询问</item>
-		<item name="Do you want Citta_T1 save tabs and open them next startup?">您是否希望 Citta_T1 记住当前打开的文档名并在下次启动时自动打开它们?</item>
+		<item name="Do you want C2 save tabs and open them next startup?">您是否希望 C2 记住当前打开的文档名并在下次启动时自动打开它们?</item>
 		<item name="Format Painter Description">复制一个主题的格式, 然后将其应用到另一个主题.
 双击此按钮可将相同格式应用到文档中的多个主题.</item>
 
@@ -305,7 +305,7 @@
 		<item name="There is a new version available">有一个新的版本 "{0}" 可以使用</item>
 		<item name="Your current version is the latest">您当前版本已经是最新</item>
 		<item name="Invalid URL">无效的地址</item>
-		<item name="Unable to connect to the remote server, please visit our website.">无法连接到远程服务器, 请访问我们的网站 (http://www.Citta_T1.org)</item>
+		<item name="Unable to connect to the remote server, please visit our website.">无法连接到远程服务器, 请访问我们的网站 (http://www.C2.org)</item>
     <item name="Please input Url below">请在下面输入网址</item>
 
     <item name="Save Recent Files">保存最近使用的文件</item>
@@ -357,7 +357,7 @@
     <item name="External">扩展</item>
     <item name="Decoration">修饰</item>
     <item name="Strike Through">删除线</item>
-    <item name="Support Citta_T1 development, Save the Poor programmer!">支持 Citta_T1 的开发, 拯救苦逼的程序员!</item>
+    <item name="Support C2 development, Save the Poor programmer!">支持 C2 的开发, 拯救苦逼的程序员!</item>
     <item name="Advance">高级</item>
     <item name="New Chart From Here">从此处复制并新建图</item>
     <item name="Text Alignment">文本对齐</item>

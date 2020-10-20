@@ -1,7 +1,7 @@
 ﻿
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Move
+namespace C2.Controls.Move
 {
     partial class MoveBaseControl
     {
@@ -33,7 +33,7 @@ namespace Citta_T1.Controls.Move
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.textBox = new System.Windows.Forms.TextBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.txtButton = new Citta_T1.Controls.Common.NoFocusButton();
+            this.txtButton = new C2.Controls.Common.NoFocusButton();
             this.RenameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
@@ -120,7 +120,7 @@ namespace Citta_T1.Controls.Move
         protected System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         protected System.Windows.Forms.TextBox textBox;
         protected System.Windows.Forms.ToolTip helpToolTip;
-        protected Citta_T1.Controls.Common.NoFocusButton txtButton;
+        protected C2.Controls.Common.NoFocusButton txtButton;
         protected System.Windows.Forms.ToolStripMenuItem RenameMenuItem;
         protected System.ComponentModel.IContainer components;
     }

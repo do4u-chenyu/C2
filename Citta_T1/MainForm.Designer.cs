@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Citta_T1
+namespace C2
 {
     partial class MainForm
     {
@@ -44,16 +44,16 @@ namespace Citta_T1
             this.oprateButton = new System.Windows.Forms.Button();
             this.myModelButton = new System.Windows.Forms.Button();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
-            this.operatorControl = new Citta_T1.Controls.Left.OperatorControl();
-            this.flowChartControl = new Citta_T1.Controls.Left.FlowChartControl();
-            this.dataSourceControl = new Citta_T1.Controls.Left.DataSourceControl();
-            this.myModelControl = new Citta_T1.Controls.Left.MyModelControl();
+            this.operatorControl = new C2.Controls.Left.OperatorControl();
+            this.flowChartControl = new C2.Controls.Left.FlowChartControl();
+            this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
+            this.myModelControl = new C2.Controls.Left.MyModelControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
-            this.bottomPreview = new Citta_T1.Controls.Bottom.BottomPreviewControl();
-            this.bottomLogControl = new Citta_T1.Controls.Bottom.BottomLogControl();
-            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomConsoleControl();
+            this.bottomPreview = new C2.Controls.Bottom.BottomPreviewControl();
+            this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
+            this.bottomPyConsole = new C2.Controls.Bottom.BottomConsoleControl();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
+            this.dragLineControl = new C2.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -84,22 +84,22 @@ namespace Citta_T1
             this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
-            this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
-            this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
+            this.canvasPanel = new C2.Controls.CanvasPanel();
+            this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.currentModelFinLab = new System.Windows.Forms.Label();
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.remarkControl = new Citta_T1.Controls.Flow.RemarkControl();
-            this.flowControl = new Citta_T1.Controls.Flow.FlowControl();
-            this.rightHideButton = new Citta_T1.Controls.Flow.RightHideButton();
-            this.rightShowButton = new Citta_T1.Controls.Flow.RightShowButton();
-            this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
-            this.mdiWorkSpace1 = new Citta_T1.Controls.MdiWorkSpace();
+            this.remarkControl = new C2.Controls.Flow.RemarkControl();
+            this.flowControl = new C2.Controls.Flow.FlowControl();
+            this.rightHideButton = new C2.Controls.Flow.RightHideButton();
+            this.rightShowButton = new C2.Controls.Flow.RightShowButton();
+            this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
+            this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
+            this.modelTitlePanel = new C2.Controls.Title.ModelTitlePanel();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -604,7 +604,7 @@ namespace Citta_T1
             this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.resetButton.Image = global::Citta_T1.Properties.Resources.reset;
+            this.resetButton.Image = global::C2.Properties.Resources.reset;
             this.resetButton.Location = new System.Drawing.Point(507, 354);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(52, 53);
@@ -744,7 +744,7 @@ namespace Citta_T1
             // 
             // currentModelFinLab
             // 
-            this.currentModelFinLab.Image = global::Citta_T1.Properties.Resources.currentModelFin;
+            this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
             this.currentModelFinLab.Location = new System.Drawing.Point(498, 174);
             this.currentModelFinLab.Name = "currentModelFinLab";
             this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
@@ -754,7 +754,7 @@ namespace Citta_T1
             // currentModelRunBackLab
             // 
             this.currentModelRunBackLab.Controls.Add(this.currentModelRunLab);
-            this.currentModelRunBackLab.Image = global::Citta_T1.Properties.Resources.currentModelRunningBack;
+            this.currentModelRunBackLab.Image = global::C2.Properties.Resources.currentModelRunningBack;
             this.currentModelRunBackLab.Location = new System.Drawing.Point(498, 174);
             this.currentModelRunBackLab.Name = "currentModelRunBackLab";
             this.currentModelRunBackLab.Size = new System.Drawing.Size(150, 100);
@@ -764,7 +764,7 @@ namespace Citta_T1
             // currentModelRunLab
             // 
             this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.currentModelRunLab.Image = global::Citta_T1.Properties.Resources.currentModelRunning;
+            this.currentModelRunLab.Image = global::C2.Properties.Resources.currentModelRunning;
             this.currentModelRunLab.Location = new System.Drawing.Point(40, 20);
             this.currentModelRunLab.Name = "currentModelRunLab";
             this.currentModelRunLab.Size = new System.Drawing.Size(73, 47);
@@ -955,12 +955,12 @@ namespace Citta_T1
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
-        private Citta_T1.Controls.Bottom.BottomLogControl bottomLogControl;
-        private Citta_T1.Controls.Bottom.BottomConsoleControl bottomPyConsole;
+        private C2.Controls.Bottom.BottomLogControl bottomLogControl;
+        private C2.Controls.Bottom.BottomConsoleControl bottomPyConsole;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button flowChartButton;
         private Controls.Title.DragLineControl dragLineControl;
-        private Citta_T1.Controls.Bottom.BottomPreviewControl bottomPreview;
+        private C2.Controls.Bottom.BottomPreviewControl bottomPreview;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button blankButton;
         private Button saveAllButton;
@@ -986,6 +986,6 @@ namespace Citta_T1
         private Button stopButton;
         private Button runButton;
         private Controls.Flow.NaviViewControl naviViewControl;
-        private Citta_T1.Controls.MdiWorkSpace mdiWorkSpace1;
+        private C2.Controls.MdiWorkSpace mdiWorkSpace1;
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using Citta_T1.Model.Styles;
+using C2.Model.Styles;
 
-namespace Citta_T1.Dialogs.Components
+namespace C2.Dialogs.Components
 {
     class ThemeNode : TreeNode
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Citta_T1.Core;
-using Citta_T1.Model;
+using C2.Core;
+using C2.Model;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     public class ChartSelection : XList<ChartObject>
     {

@@ -2,12 +2,12 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Globalization;
+using C2.Model;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     [DefaultProperty("Name")]
     public class ChartTheme

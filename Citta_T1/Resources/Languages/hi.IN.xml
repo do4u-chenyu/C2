@@ -290,7 +290,7 @@
     <item name="The same filename already exists. Do you want to replace it?">ईसी नाम की फाइल पहले से ही अस्तित्व हैं. क्या आप उसे प्रतिस्थापित करना चाहते हैं?</item>
     <item name="Save tabs">टॅब सहेजें</item>
     <item name="Do not ask me again">दुबारा ना पुछें</item>
-    <item name="Do you want Citta_T1 save tabs and open them next startup?">क्या आप चाहते हैं की ब्लूमाइंड टैब सहेजकर उन्हें अगली बार शुरू करने पर खोलें?</item>
+    <item name="Do you want C2 save tabs and open them next startup?">क्या आप चाहते हैं की ब्लूमाइंड टैब सहेजकर उन्हें अगली बार शुरू करने पर खोलें?</item>
     <item name="Format Painter Description">किसी एक विषय के प्रारूप की नक़ल बनाकर दुसरे पर लागू करें. यह प्रारूप अनेक विषयों पर लागू करने के लिये डबल-क्लिक करें</item>
     <item name="Checking">जाँच हो रही हैं</item>
     <item name="There is a new version available">"{0}" यह नया व्यवहार्य संस्करण हैं</item>

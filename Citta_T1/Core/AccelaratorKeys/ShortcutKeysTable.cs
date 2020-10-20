@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     class ShortcutKeysTable
     {

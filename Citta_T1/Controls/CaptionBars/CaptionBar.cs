@@ -6,10 +6,10 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     enum CaptionStyle
     {

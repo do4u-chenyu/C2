@@ -291,7 +291,7 @@
     <item name="The same filename already exists. Do you want to replace it?">Soubor se stejným názvem již existuje. Chcete jej nahradit?</item>
     <item name="Save tabs">Uložit karty</item>
     <item name="Do not ask me again">Znovu se nedotazovat</item>
-    <item name="Do you want Citta_T1 save tabs and open them next startup?">Chcete aby Citta_T1 uložil karty a otevřel je při příštím spuštění?</item>
+    <item name="Do you want C2 save tabs and open them next startup?">Chcete aby C2 uložil karty a otevřel je při příštím spuštění?</item>
     <item name="Format Painter Description">Kopírovat formát uzlu a aplikovat jej na jiný.\nDvojitým kliknutím na toto tlačítko použijete formát na více témat.</item>
     <item name="Checking">Kontrola</item>
     <item name="There is a new version available">K dispozici je nová verze {0}</item>

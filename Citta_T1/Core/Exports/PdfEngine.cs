@@ -5,19 +5,19 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Linq;
 using System.Text;
-using Citta_T1.Canvas.Pdf;
-using Citta_T1.Configuration;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Design;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.MindMaps;
+using C2.Canvas.Pdf;
+using C2.Configuration;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Design;
+using C2.Globalization;
+using C2.Model;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace Citta_T1.Core.Exports
+namespace C2.Core.Exports
 {
     class PdfEngine : ChartsExportEngine
     {
@@ -35,7 +35,7 @@ namespace Citta_T1.Core.Exports
             public PageOrientation Orientation { get; set; }
 
             [DefaultValue(true), LocalDisplayName("With Background")]
-            [TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
+            [TypeConverter(typeof(C2.Design.BoolConverter))]
             public bool WithBackground { get; set; }
         }
 

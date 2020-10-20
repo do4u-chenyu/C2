@@ -4,14 +4,14 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Model;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Model;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public abstract class ChartControl : Chart, ICommandHost, IChartControl
     {
@@ -188,7 +188,7 @@ namespace Citta_T1.Controls
         #endregion
 
         #region IChartControl Members
-        public void OnChartObjectPropertyChanged(ChartObject chartObject, Citta_T1.Core.PropertyChangedEventArgs e)
+        public void OnChartObjectPropertyChanged(ChartObject chartObject, C2.Core.PropertyChangedEventArgs e)
         {
         }
 

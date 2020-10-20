@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Controls;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
     partial class SaveTabsDialog : BaseDialog
     {
@@ -41,7 +41,7 @@ namespace Citta_T1.Dialogs
             BtnNo.Text = Lang._("No");
             BtnCancel.Text = Lang._("Cancel");
             CkbDoNotAskMeAgain.Text = Lang._("Do not ask me again");
-            LabMessage.Text = Lang._("Do you want Citta_T1 save tabs and open them next startup?");
+            LabMessage.Text = Lang._("Do you want C2 save tabs and open them next startup?");
         }
 
         private void OnDoNotAskAgainChanged()

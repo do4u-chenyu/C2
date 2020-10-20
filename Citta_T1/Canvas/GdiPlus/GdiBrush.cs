@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace Citta_T1.Canvas.GdiPlus
+namespace C2.Canvas.GdiPlus
 {
     class GdiBrush : IBrush
     {

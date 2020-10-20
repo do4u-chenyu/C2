@@ -1,11 +1,11 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
 
-namespace Citta_T1.Core.UndoRedo.Command
+namespace C2.Core.UndoRedo.Command
 {
     class BatchDeleteCommand : BaseCommand
     {

@@ -5,20 +5,20 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
-using Citta_T1.ChartPageView;
-using Citta_T1.Configuration;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Design;
-using Citta_T1.Dialogs;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
+using C2.ChartPageView;
+using C2.Configuration;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Design;
+using C2.Dialogs;
+using C2.Globalization;
+using C2.Model;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
 
-namespace Citta_T1
+namespace C2
 {
     public partial class DocumentForm : BaseDocumentForm, IThemableUI
     {
@@ -476,8 +476,8 @@ namespace Citta_T1
             //    remarkEditor.Text = Lang._("Remark");
 
             saveFileDialog1.Filter = string.Format("{0} (*{1})|*{1}",
-                Lang._("Citta_T1 Mind Map File"),
-                DocumentType.Citta_T1.DefaultExtension);
+                Lang._("C2 Mind Map File"),
+                DocumentType.C2.DefaultExtension);
 
             multiChartsView1.NotifyCurrentLanguageChanged();
             InitializeTimers();

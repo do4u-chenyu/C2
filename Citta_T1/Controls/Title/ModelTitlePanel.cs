@@ -1,11 +1,11 @@
-﻿using Citta_T1.Utils;
+﻿using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Title
+namespace C2.Controls.Title
 {
     public delegate void NewDocumentEventHandler(string modelTitle);
     public delegate void DocumentSwitchHandler(string modelTitle);

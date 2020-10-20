@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Configuration
+namespace C2.Configuration
 {
     class RecentFilesManage : IEnumerable<RecentFileInfo>
     {

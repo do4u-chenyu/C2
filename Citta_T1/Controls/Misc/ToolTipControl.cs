@@ -2,9 +2,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-using Citta_T1.Controls.OS;
+using C2.Controls.OS;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class ToolTipControl : ToolTip
     {
@@ -152,7 +152,7 @@ namespace Citta_T1.Controls
             {
                 if (User32.IsWindowVisible(Handle))
                 {
-                    User32.ShowWindow(Handle, Citta_T1.Controls.OS.ShowWindowFlags.SW_HIDE);
+                    User32.ShowWindow(Handle, C2.Controls.OS.ShowWindowFlags.SW_HIDE);
                 }
             }
         }

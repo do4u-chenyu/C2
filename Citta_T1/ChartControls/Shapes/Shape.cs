@@ -2,14 +2,14 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Canvas;
-using Citta_T1.Core;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
+using C2.Canvas;
+using C2.Core;
+using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
 using PdfSharp.Drawing;
 
-namespace Citta_T1.ChartControls.Shapes
+namespace C2.ChartControls.Shapes
 {
     abstract class Shape : System.IDisposable
     {
@@ -34,7 +34,7 @@ namespace Citta_T1.ChartControls.Shapes
             rect.Inflate(-2, -2);
             if (rect.Width > 0 && rect.Height > 0)
             {
-                var graphics = new Citta_T1.Canvas.GdiPlus.GdiGraphics(e.Graphics);
+                var graphics = new C2.Canvas.GdiPlus.GdiGraphics(e.Graphics);
                 Fill(graphics, graphics.SolidBrush(Color.Gray), rect);
                 DrawBorder(graphics, graphics.Pen(Color.Black), rect);
             }

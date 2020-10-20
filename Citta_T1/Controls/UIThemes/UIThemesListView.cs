@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.UIThemes
+namespace C2.Controls.UIThemes
 {
     class UIThemesListView : ListView
     {

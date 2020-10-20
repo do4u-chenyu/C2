@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     public static class ExtensionMethods
 

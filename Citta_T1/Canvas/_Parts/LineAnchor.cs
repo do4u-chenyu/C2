@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
 
-namespace Citta_T1.Canvas
+namespace C2.Canvas
 {
     [Serializable]
     public enum LineAnchor

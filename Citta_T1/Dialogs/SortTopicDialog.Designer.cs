@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Dialogs
+﻿namespace C2.Dialogs
 {
     partial class SortTopicDialog
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.sortBox1 = new Citta_T1.Controls.SortBox();
+            this.sortBox1 = new C2.Controls.SortBox();
             this.SuspendLayout();
             // 
             // sortBox1
@@ -54,6 +54,6 @@
 
         #endregion
 
-        private Citta_T1.Controls.SortBox sortBox1;
+        private C2.Controls.SortBox sortBox1;
     }
 }

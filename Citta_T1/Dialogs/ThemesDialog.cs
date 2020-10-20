@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Dialogs.Components;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Dialogs.Components;
+using C2.Globalization;
+using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
 
-namespace Citta_T1
+namespace C2
 {
     partial class ThemesDialog : StandardDialog
     {

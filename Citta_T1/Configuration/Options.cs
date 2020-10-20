@@ -4,11 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Citta_T1.Configuration.Formaters;
-using Citta_T1.Configuration.Models;
-using Citta_T1.Core;
+using C2.Configuration.Formaters;
+using C2.Configuration.Models;
+using C2.Core;
 
-namespace Citta_T1.Configuration
+namespace C2.Configuration
 {
     abstract class Options : ModifyObject
     {
@@ -19,7 +19,7 @@ namespace Citta_T1.Configuration
         Dictionary<string, object> ChangedItems { get; set; }
 
         public event EventHandler OpitonsChanged;
-        public event Citta_T1.Core.PropertyChangedEventHandler OptionChanged;
+        public event C2.Core.PropertyChangedEventHandler OptionChanged;
 
         static Options()
         {

@@ -1,10 +1,10 @@
-﻿using Citta_T1.Utils;
+﻿using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 
 
-namespace Citta_T1.Business.Schedule.Cmd
+namespace C2.Business.Schedule.Cmd
 {
     class CustomOperatorCmd : OperatorCmd
     {

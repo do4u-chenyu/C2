@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml;
 
-namespace Citta_T1.Model
+namespace C2.Model
 {
     interface ISerializable
     {

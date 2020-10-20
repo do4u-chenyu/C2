@@ -1,13 +1,13 @@
 ﻿
-using Citta_T1.Controls.Move.Dt;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+using C2.Controls.Move.Dt;
+using C2.Controls.Move.Op;
+using C2.Core;
+using C2.Utils;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class ClipBoardWrapper
     {

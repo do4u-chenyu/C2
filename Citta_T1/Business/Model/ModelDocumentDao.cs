@@ -1,14 +1,14 @@
-﻿using Citta_T1.Business.Schedule;
-using Citta_T1.Controls.Flow;
-using Citta_T1.Controls.Move;
-using Citta_T1.Core;
+﻿using C2.Business.Schedule;
+using C2.Controls.Flow;
+using C2.Controls.Move;
+using C2.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
 
-namespace Citta_T1.Business.Model
+namespace C2.Business.Model
 {
     class ModelDocumentDao
     {

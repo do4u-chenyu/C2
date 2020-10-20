@@ -1,11 +1,11 @@
-using Citta_T1.Business.Model;
-using Citta_T1.Business.Schedule;
-using Citta_T1.Controls.Interface;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Core;
-using Citta_T1.Core.UndoRedo;
-using Citta_T1.Core.UndoRedo.Command;
-using Citta_T1.Utils;
+using C2.Business.Model;
+using C2.Business.Schedule;
+using C2.Controls.Interface;
+using C2.Controls.Move.Op;
+using C2.Core;
+using C2.Core.UndoRedo;
+using C2.Core.UndoRedo.Command;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,7 +13,7 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Move.Rs
+namespace C2.Controls.Move.Rs
 {
     public partial class MoveRsControl : MoveBaseControl, IMoveControl
     {

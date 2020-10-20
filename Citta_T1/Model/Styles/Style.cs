@@ -3,13 +3,13 @@ using System.ComponentModel;
 using System.Drawing.Design;
 using System.Text;
 using System.Xml;
-using Citta_T1.Globalization;
+using C2.Globalization;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     [TypeConverter(typeof(StyleConverter))]
     [Editor(typeof(StyleEditor), typeof(UITypeEditor))]
-    public abstract class Style : Citta_T1.Model.ISerializable
+    public abstract class Style : C2.Model.ISerializable
     {
         public event EventHandler ValueChanged;
 

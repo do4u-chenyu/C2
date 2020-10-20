@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     public class XListEventArgs<T> : EventArgs
     {

@@ -1,12 +1,12 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Business.Schedule;
-using Citta_T1.Controls.Interface;
-using Citta_T1.Core;
-using Citta_T1.Core.UndoRedo;
-using Citta_T1.Core.UndoRedo.Command;
-using Citta_T1.OperatorViews;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Business.Option;
+using C2.Business.Schedule;
+using C2.Controls.Interface;
+using C2.Core;
+using C2.Core.UndoRedo;
+using C2.Core.UndoRedo.Command;
+using C2.OperatorViews;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,7 +14,7 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Move.Op
+namespace C2.Controls.Move.Op
 {
 
     public partial class MoveOpControl : MoveBaseControl, IMoveControl
@@ -141,51 +141,51 @@ namespace Citta_T1.Controls.Move.Op
             {
                 case "关联算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RelateOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.releateOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.releateOp;
                     break;
                 case "碰撞算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CollideOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.collideOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.collideOp;
                     break;
                 case "取并集":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.UnionOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.unionOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.unionOp;
                     break;
                 case "取差集":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DifferOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.differOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.differOp;
                     break;
                 case "随机采样":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RandomOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.randomOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.randomOp;
                     break;
                 case "条件筛选":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FilterOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.filterOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.filterOp;
                     break;
                 case "取最大值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MaxOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.maxOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.maxOp;
                     break;
                 case "取最小值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.minOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.minOp;
                     break;
                 case "取平均值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.AvgOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.avgOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.avgOp;
                     break;
                 case "频率算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FreqOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.freqOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.freqOp;
                     break;
                 case "排序算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.SortOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.sortOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.sortOp;
                     break;
                 case "分组算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.GroupOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.groupOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.groupOp;
                     break;
                 case "AI实践":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator1HelpInfo);
@@ -198,11 +198,11 @@ namespace Citta_T1.Controls.Move.Op
                     break;
                 case "关键词过滤":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.KeyWordOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.wordFilterOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.wordFilterOp;
                     break;
                 case "数据标准化":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.dataStandarOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.dataStandarOp;
                     break;
                 default:
                     break;

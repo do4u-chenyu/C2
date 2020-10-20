@@ -4,14 +4,14 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
-using Citta_T1.ChartControls.Shapes;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model.Styles;
+using C2.ChartControls.Shapes;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Globalization;
+using C2.Model.Styles;
 
-namespace Citta_T1.Design
+namespace C2.Design
 {
     class TopicShapeEditor : ListEditor<TopicShape> 
     {

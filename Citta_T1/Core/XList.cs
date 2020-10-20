@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     public delegate void XListEventHandler<T>(object sender, XListEventArgs<T> e);
     public delegate void XListValueEventHandler<T>(object sender, XListValueEventArgs<T> e);

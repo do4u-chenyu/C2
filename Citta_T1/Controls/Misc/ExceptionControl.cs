@@ -5,10 +5,10 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class ExceptionControl : Control
     {

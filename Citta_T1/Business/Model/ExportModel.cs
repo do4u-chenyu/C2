@@ -1,6 +1,6 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace Citta_T1.Business.Model
+namespace C2.Business.Model
 {
     public class ExportModel
     {

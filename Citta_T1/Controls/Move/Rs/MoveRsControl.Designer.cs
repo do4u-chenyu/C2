@@ -1,5 +1,5 @@
 ﻿
-namespace Citta_T1.Controls.Move.Rs
+namespace C2.Controls.Move.Rs
 {
     partial class MoveRsControl
     {

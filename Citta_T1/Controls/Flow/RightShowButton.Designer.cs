@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Controls.Flow
+﻿namespace C2.Controls.Flow
 {
     partial class RightShowButton
     {

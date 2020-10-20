@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.MindMaps;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Core.Exports
+namespace C2.Core.Exports
 {
     abstract class ImageExportEngine : ChartsExportEngine
     {

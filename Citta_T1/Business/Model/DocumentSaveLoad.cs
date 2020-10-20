@@ -1,7 +1,7 @@
-﻿using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.OperatorViews.Base;
-using Citta_T1.Utils;
+﻿using C2.Business.Option;
+using C2.Controls.Move.Op;
+using C2.OperatorViews.Base;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace Citta_T1.Business.Model
+namespace C2.Business.Model
 {
     class ModelXmlWriter
     {

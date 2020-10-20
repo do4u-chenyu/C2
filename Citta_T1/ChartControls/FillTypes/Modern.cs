@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
-using Citta_T1.Canvas;
-using Citta_T1.Controls;
+using C2.Canvas;
+using C2.Controls;
 
-namespace Citta_T1.ChartControls.FillTypes
+namespace C2.ChartControls.FillTypes
 {
     class Modern : FillType
     {

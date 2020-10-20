@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 
-namespace Citta_T1.Design
+namespace C2.Design
 {
     abstract class BaseTypeConverter : TypeConverter
     {

@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Controls.Left
+﻿namespace C2.Controls.Left
 {
     partial class ModelButton
     {
@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelButton));
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.lelfPictureBox = new System.Windows.Forms.PictureBox();
-            this.textButton = new Citta_T1.Controls.Common.NoFocusButton();
+            this.textButton = new C2.Controls.Common.NoFocusButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -188,7 +188,7 @@
 
         private System.Windows.Forms.PictureBox rightPictureBox;
         private System.Windows.Forms.PictureBox lelfPictureBox;
-        private Citta_T1.Controls.Common.NoFocusButton textButton;
+        private C2.Controls.Common.NoFocusButton textButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RenameToolStripMenuItem;

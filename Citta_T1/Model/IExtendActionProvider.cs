@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace Citta_T1.Model
+namespace C2.Model
 {
     public interface IExtendActionProvider
     {

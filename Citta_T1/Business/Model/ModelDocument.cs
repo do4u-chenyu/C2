@@ -1,9 +1,9 @@
-using Citta_T1.Business.Model.World;
-using Citta_T1.Business.Schedule;
-using Citta_T1.Controls.Interface;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+using C2.Business.Model.World;
+using C2.Business.Schedule;
+using C2.Controls.Interface;
+using C2.Controls.Move.Op;
+using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace Citta_T1.Business.Model
+namespace C2.Business.Model
 {
     /*
      * 一个文档对应一个模型

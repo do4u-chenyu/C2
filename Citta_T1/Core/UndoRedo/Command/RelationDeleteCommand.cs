@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Citta_T1.Core.UndoRedo.Command
+namespace C2.Core.UndoRedo.Command
 {
 
     class RelationDeleteCommand : BaseCommand

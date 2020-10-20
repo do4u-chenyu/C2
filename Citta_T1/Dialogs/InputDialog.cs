@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using Citta_T1.Controls;
+using C2.Controls;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
-    internal partial class InputDialog : Citta_T1.Controls.StandardDialog
+    internal partial class InputDialog : C2.Controls.StandardDialog
     {
         private bool _AllowEmpty = false;
 

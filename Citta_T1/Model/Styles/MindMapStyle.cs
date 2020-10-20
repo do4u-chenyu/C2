@@ -2,11 +2,11 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Text;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model.Styles;
+using C2.Core;
+using C2.Globalization;
+using C2.Model.Styles;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     class MindMapStyle : ChartStyle
     {

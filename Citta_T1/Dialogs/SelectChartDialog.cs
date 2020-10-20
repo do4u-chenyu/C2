@@ -4,12 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model.Documents;
+using C2.Controls;
+using C2.Core;
+using C2.Globalization;
+using C2.Model.Documents;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
     class SelectChartDialog : StandardDialog
     {

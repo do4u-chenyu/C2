@@ -1,4 +1,4 @@
-﻿using Citta_T1.Utils;
+﻿using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     class FileCache
     {

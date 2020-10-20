@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class TextBoxExDropDownButton : ResizableTextBox.TextBoxExItem
     {

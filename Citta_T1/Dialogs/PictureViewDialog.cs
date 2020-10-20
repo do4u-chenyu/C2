@@ -5,11 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Controls;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
     class PictureViewDialog : BaseDialog
     {
@@ -129,13 +129,13 @@ namespace Citta_T1.Dialogs
 
             // TsbZoomIn
             TsbZoomIn.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbZoomIn.Image = Citta_T1.Properties.Resources.zoom_in;
+            TsbZoomIn.Image = C2.Properties.Resources.zoom_in;
             TsbZoomIn.Text = "Zoom In";
             TsbZoomIn.Click += TsbZoomIn_Click;
 
             //
             TsbZoomOut.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbZoomOut.Image = Citta_T1.Properties.Resources.zoom_out;
+            TsbZoomOut.Image = C2.Properties.Resources.zoom_out;
             TsbZoomOut.Text = "Zoom Out";
             TsbZoomOut.Click += tsbZoomOut_Click;
 
@@ -176,7 +176,7 @@ namespace Citta_T1.Dialogs
 
             // TsbFullScreen
             TsbFullScreen.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbFullScreen.Image = global::Citta_T1.Properties.Resources.full_screen;
+            TsbFullScreen.Image = global::C2.Properties.Resources.full_screen;
             TsbFullScreen.Text = "Full Screen";
             TsbFullScreen.Click += TsbFullScreen_Click;
             

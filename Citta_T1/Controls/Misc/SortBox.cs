@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Collections.Generic;
-using Citta_T1.Controls.MapViews;
+using C2.Controls.MapViews;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class SortBox : BaseControl
     {

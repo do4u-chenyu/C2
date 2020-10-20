@@ -4,15 +4,15 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Dialogs;
-using Citta_T1.Globalization;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.MindMaps;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Dialogs;
+using C2.Globalization;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Model.Widgets
+namespace C2.Model.Widgets
 {
     [DefaultProperty("Text")]
     class NoteWidget : Widget, IRemark

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Drawing;
 
-namespace Citta_T1.Controls.Aero
+namespace C2.Controls.Aero
 {
     internal static class DWMMessages
     {

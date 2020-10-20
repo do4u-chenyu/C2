@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Business.Option
+﻿namespace C2.Business.Option
 {
     public enum ColumnType
     {

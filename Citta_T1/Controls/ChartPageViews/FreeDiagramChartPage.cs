@@ -5,11 +5,11 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.Controls.Charts;
-using Citta_T1.Model.Documents;
+using C2.Controls;
+using C2.Controls.Charts;
+using C2.Model.Documents;
 
-namespace Citta_T1.ChartPageView
+namespace C2.ChartPageView
 {
     partial class FreeDiagramChartPage : BaseChartPage, IThemableUI
     {

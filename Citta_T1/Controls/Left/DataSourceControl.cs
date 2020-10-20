@@ -1,6 +1,6 @@
-﻿using Citta_T1.Business.DataSource;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Business.DataSource;
+using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Left
+namespace C2.Controls.Left
 {
     public partial class DataSourceControl : UserControl
     {

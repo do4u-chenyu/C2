@@ -5,9 +5,9 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using Citta_T1.Controls;
+using C2.Controls;
 
-namespace Citta_T1.Design
+namespace C2.Design
 {
     abstract class ListEditor<T> : UITypeEditor
     {

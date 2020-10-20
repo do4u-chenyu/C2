@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Drawing.Design;
-using Citta_T1.Design;
-using Citta_T1.Globalization;
+using C2.Design;
+using C2.Globalization;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     [Editor(typeof(MindMapLayoutTypeEditor), typeof(UITypeEditor))]
     [TypeConverter(typeof(MindMapLayoutTypeConverter))]

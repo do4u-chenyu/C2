@@ -5,7 +5,7 @@ using System.Security.AccessControl;
 using System.Text;
 using Microsoft.Win32;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     static class RegistryKeyExtensions
     {

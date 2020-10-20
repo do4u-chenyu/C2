@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Common
+namespace C2.Controls.Common
 {
     // 普通的Button由于Focus效果导致算子重命名时在某些情况下会出现不期望的聚焦框
     // 这重写ShowFocusCues方法,去掉所有情况下的聚焦框

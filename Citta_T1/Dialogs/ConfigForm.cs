@@ -1,12 +1,12 @@
-﻿using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Core;
+using C2.Utils;
 using System;
 using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
     public partial class ConfigForm : Form
     {

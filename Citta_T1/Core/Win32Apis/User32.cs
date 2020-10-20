@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Citta_T1.Controls.OS
+namespace C2.Controls.OS
 {
     public static class User32
     {

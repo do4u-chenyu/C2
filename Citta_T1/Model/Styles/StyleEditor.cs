@@ -4,7 +4,7 @@ using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     class StyleEditor : UITypeEditor
     {

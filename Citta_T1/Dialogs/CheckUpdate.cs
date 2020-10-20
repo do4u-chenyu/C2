@@ -6,12 +6,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using Citta_T1.Controls;
+using C2.Controls;
 using System.Text.RegularExpressions;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
     partial class CheckUpdate : BaseDialog
     {
@@ -25,8 +25,8 @@ namespace Citta_T1.Dialogs
 
         Thread CheckThread;
         VersionInfo NewVersionInfo;
-        const string LastVersionUrl = "http://www.Citta_T1.org/products/Citta_T1/last_version.txt";
-        const string ChangesUrl = "http://www.Citta_T1.org/products/Citta_T1/changes.txt";
+        const string LastVersionUrl = "http://www.C2.org/products/C2/last_version.txt";
+        const string ChangesUrl = "http://www.C2.org/products/C2/changes.txt";
 
         private delegate void CheckEndCallBack(bool haveNew, VersionInfo version);
 

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Widgets;
+using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Widgets;
 
-namespace Citta_T1.Core.Documents
+namespace C2.Core.Documents
 {
     class TextSerializer
     {

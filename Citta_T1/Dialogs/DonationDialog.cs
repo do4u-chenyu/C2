@@ -1,5 +1,5 @@
-﻿using Citta_T1.Controls;
-using Citta_T1.Globalization;
+﻿using C2.Controls;
+using C2.Globalization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
     partial class DonationDialog : BaseDialog
     {

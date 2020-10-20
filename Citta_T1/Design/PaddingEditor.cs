@@ -4,10 +4,10 @@ using System.Drawing.Design;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using Citta_T1.Controls;
-using Citta_T1.Core;
+using C2.Controls;
+using C2.Core;
 
-namespace Citta_T1.Design
+namespace C2.Design
 {
     class PaddingEditor : UITypeEditor
     {

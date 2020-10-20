@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Core.UndoRedo
+﻿namespace C2.Core.UndoRedo
 {
 
     class BaseCommand

@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 
-namespace Citta_T1.Controls.Aero
+namespace C2.Controls.Aero
 {
     /// <summary>
     /// Windows Glass Form

@@ -4,9 +4,9 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using System.Collections.Generic;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Globalization
+namespace C2.Globalization
 {
     public class Language
     {

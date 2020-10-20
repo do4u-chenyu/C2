@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace Citta_T1.Controls.Aero
+namespace C2.Controls.Aero
 {
     /// <summary>
     /// A wrapper for a RECT struct

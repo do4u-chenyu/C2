@@ -1,13 +1,13 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls;
-using Citta_T1.Controls.Bottom;
-using Citta_T1.Controls.Flow;
-using Citta_T1.Controls.Left;
-using Citta_T1.Controls.Title;
-using Citta_T1.Controls.Top;
+﻿using C2.Business.Model;
+using C2.Business.Option;
+using C2.Controls;
+using C2.Controls.Bottom;
+using C2.Controls.Flow;
+using C2.Controls.Left;
+using C2.Controls.Title;
+using C2.Controls.Top;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     class Global
     {

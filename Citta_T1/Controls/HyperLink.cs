@@ -5,7 +5,7 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class HyperLink : System.Windows.Forms.Label
     {

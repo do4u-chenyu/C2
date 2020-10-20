@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace Citta_T1.Controls.OS
+namespace C2.Controls.OS
 {
     [StructLayout(LayoutKind.Sequential)]
     public class RECT

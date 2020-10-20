@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using Citta_T1.Model;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.MindMaps;
+using C2.Model;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Core.Imports
+namespace C2.Core.Imports
 {
     class CsvEngine : DocumentImportEngine
     {

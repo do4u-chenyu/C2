@@ -9,10 +9,10 @@ using System.Security.Permissions;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class PrintPreviewControl : ScrollableControl 
     {

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     public interface IModifyObject
     {

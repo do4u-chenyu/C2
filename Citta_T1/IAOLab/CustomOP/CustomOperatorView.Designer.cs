@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.OperatorViews
+﻿namespace C2.OperatorViews
 {
     partial class CustomOperatorView
     {

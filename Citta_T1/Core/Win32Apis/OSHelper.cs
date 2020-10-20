@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Citta_T1.Core.Win32Apis
+namespace C2.Core.Win32Apis
 {
     class OSHelper
     {

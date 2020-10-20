@@ -1,15 +1,15 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Business.Option;
+using C2.Controls.Move.Op;
+using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Permissions;
 using System.Text;
 
-namespace Citta_T1.Business.Schedule.Cmd
+namespace C2.Business.Schedule.Cmd
 {
     class OperatorCmd
     {

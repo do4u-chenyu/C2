@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Citta_T1.Model.Documents.FlowDiagramObjects
+namespace C2.Model.Documents.FlowDiagramObjects
 {
     abstract class FreeDiagramShape : FreeDiagramObject
     {

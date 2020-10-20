@@ -7,21 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.Styles;
-using Citta_T1.Model.Widgets;
+using C2.Controls;
+using C2.Core;
+using C2.Globalization;
+using C2.Model.Documents;
+using C2.Model.Styles;
+using C2.Model.Widgets;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     [DefaultProperty("Text")]
     public partial class Topic : ChartObject
         , ITextObject
         , IWidgetContainer
         , IHyperlink
-        , Citta_T1.Core.INotifyPropertyChanged
+        , C2.Core.INotifyPropertyChanged
         , IColorToolTip
     {
         public Topic()
@@ -55,7 +55,7 @@ namespace Citta_T1.Model.MindMaps
         XList<Widget> _Widgets;
 
         public event EventHandler StyleChanged;
-        //public event Citta_T1.Model.PropertyChangedEventHandler WidgetChanged;
+        //public event C2.Model.PropertyChangedEventHandler WidgetChanged;
         public event EventHandler FoldedChanged;
         public event EventHandler DescriptionChanged;
         public event EventHandler IconChanged;
@@ -168,7 +168,7 @@ namespace Citta_T1.Model.MindMaps
 
         [DefaultValue(null)]
         [LocalDisplayName("Icon"), LocalCategory("Data")]
-        public Citta_T1.Model.Widgets.PictureWidget.PictureDesign Icon
+        public C2.Model.Widgets.PictureWidget.PictureDesign Icon
         {
             get 
             {
@@ -514,7 +514,7 @@ namespace Citta_T1.Model.MindMaps
             }
         }
 
-        private void OnWidgetChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
+        private void OnWidgetChanged(object sender, C2.Core.PropertyChangedEventArgs e)
         {
             //if (WidgetChanged != null)
             //{
@@ -535,7 +535,7 @@ namespace Citta_T1.Model.MindMaps
         public event EventHandler HyperlinkChanged;
 
         [DefaultValue(null), LocalDisplayName("Hyperlink"), LocalCategory("Data")]
-        [Editor(typeof(Citta_T1.Design.HyperlinkEditor), typeof(UITypeEditor))]
+        [Editor(typeof(C2.Design.HyperlinkEditor), typeof(UITypeEditor))]
         public string Hyperlink
         {
             get
@@ -561,7 +561,7 @@ namespace Citta_T1.Model.MindMaps
                 HyperlinkChanged(this, EventArgs.Empty);
             }
 
-            OnPropertyChanged(new Citta_T1.Core.PropertyChangedEventArgs("Hyperlink", old, Hyperlink, ChangeTypes.Data | ChangeTypes.Visual, true));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs("Hyperlink", old, Hyperlink, ChangeTypes.Data | ChangeTypes.Visual, true));
         }
 
         #endregion
@@ -1210,10 +1210,10 @@ namespace Citta_T1.Model.MindMaps
             {
                 e.Item.WidgetContainer = this;
                 e.Item.Chart = this.Chart;
-                e.Item.PropertyChanged += new Citta_T1.Core.PropertyChangedEventHandler(Widget_Changed);
+                e.Item.PropertyChanged += new C2.Core.PropertyChangedEventHandler(Widget_Changed);
             }
 
-            Citta_T1.Core.PropertyChangedEventArgs arg = new Citta_T1.Core.PropertyChangedEventArgs("Items", null, null, ChangeTypes.All, false);
+            C2.Core.PropertyChangedEventArgs arg = new C2.Core.PropertyChangedEventArgs("Items", null, null, ChangeTypes.All, false);
             OnPropertyChanged(arg);
             //OnWidgetChanged(sender, PropertyChangeTypes.All);
         }
@@ -1224,7 +1224,7 @@ namespace Citta_T1.Model.MindMaps
             {
                 if (e.Item.WidgetContainer == this)
                     e.Item.WidgetContainer = null;
-                e.Item.PropertyChanged -= new Citta_T1.Core.PropertyChangedEventHandler(Widget_Changed);
+                e.Item.PropertyChanged -= new C2.Core.PropertyChangedEventHandler(Widget_Changed);
             }
 
             if (MindMap != null)
@@ -1233,7 +1233,7 @@ namespace Citta_T1.Model.MindMaps
             }
         }
 
-        void Widget_Changed(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
+        void Widget_Changed(object sender, C2.Core.PropertyChangedEventArgs e)
         {
             OnWidgetChanged(sender as Widget, e);
         }

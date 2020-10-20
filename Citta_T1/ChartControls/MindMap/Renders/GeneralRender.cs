@@ -4,19 +4,19 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using Citta_T1.Canvas;
-using Citta_T1.Canvas.GdiPlus;
-using Citta_T1.ChartControls.FillTypes;
-using Citta_T1.ChartControls.MindMap.Lines;
-using Citta_T1.ChartControls.Shapes;
-using Citta_T1.Configuration;
-using Citta_T1.Controls.Paint;
-using Citta_T1.Core;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Widgets;
+using C2.Canvas;
+using C2.Canvas.GdiPlus;
+using C2.ChartControls.FillTypes;
+using C2.ChartControls.MindMap.Lines;
+using C2.ChartControls.Shapes;
+using C2.Configuration;
+using C2.Controls.Paint;
+using C2.Core;
+using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Widgets;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     class GeneralRender : IMindMapRender
     {
@@ -687,7 +687,7 @@ namespace Citta_T1.Controls.MapViews
         {
             var pen = graphics.Pen(color, width);
 
-            if (Options.Current.GetBool(Citta_T1.Configuration.OptionNames.Charts.ShowLineArrowCap))
+            if (Options.Current.GetBool(C2.Configuration.OptionNames.Charts.ShowLineArrowCap))
             {
                 /*int arrowSize = width;
                 int arrowSize2 = width * 2;

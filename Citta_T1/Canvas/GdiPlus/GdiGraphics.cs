@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
-using Citta_T1.Controls;
+using C2.Controls;
 
-namespace Citta_T1.Canvas.GdiPlus
+namespace C2.Canvas.GdiPlus
 {
     class GdiGraphics : IGraphics
     {

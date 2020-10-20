@@ -5,9 +5,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Controls.OS;
+using C2.Controls.OS;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     static class ClipboardHelper
     {

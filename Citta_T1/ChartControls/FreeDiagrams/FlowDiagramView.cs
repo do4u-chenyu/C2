@@ -1,7 +1,7 @@
 ﻿using System;
-using Citta_T1.Model.Documents;
+using C2.Model.Documents;
 
-namespace Citta_T1.Controls.Charts
+namespace C2.Controls.Charts
 {
     class FlowDiagramView : ChartControl
     {

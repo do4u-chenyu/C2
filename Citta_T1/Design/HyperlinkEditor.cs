@@ -4,12 +4,12 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Dialogs;
-using Citta_T1.Globalization;
+using C2.Controls;
+using C2.Core;
+using C2.Dialogs;
+using C2.Globalization;
 
-namespace Citta_T1.Design
+namespace C2.Design
 {
     class HyperlinkEditor : UITypeEditor
     {

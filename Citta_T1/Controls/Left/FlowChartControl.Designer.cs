@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Controls.Left
+﻿namespace C2.Controls.Left
 {
     partial class FlowChartControl
     {
@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlowChartControl));
-            this.customOPButton1 = new Citta_T1.Controls.Common.NoFocusButton();
+            this.customOPButton1 = new C2.Controls.Common.NoFocusButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pythonOPButton = new Citta_T1.Controls.Common.NoFocusButton();
+            this.pythonOPButton = new C2.Controls.Common.NoFocusButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.customOPButton2 = new Citta_T1.Controls.Common.NoFocusButton();
+            this.customOPButton2 = new C2.Controls.Common.NoFocusButton();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();

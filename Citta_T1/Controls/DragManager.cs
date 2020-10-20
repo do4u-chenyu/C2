@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Citta_T1.Controls.OS;
-using Citta_T1.Core;
+using C2.Controls.OS;
+using C2.Core;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class DragManager : IDisposable
     {

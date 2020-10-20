@@ -1,8 +1,8 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Business.Option;
+using C2.Controls.Move.Op;
+using C2.Core;
+using C2.Utils;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.OperatorViews.Base
+namespace C2.OperatorViews.Base
 {
 
     public partial class BaseOperatorView : Form

@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
-using Citta_T1.Controls;
+using C2.Controls;
 using System.Xml;
-using Citta_T1.Canvas;
-using Citta_T1.Model.Styles;
+using C2.Canvas;
+using C2.Model.Styles;
 
-namespace Citta_T1.ChartControls.MindMap.Lines
+namespace C2.ChartControls.MindMap.Lines
 {
     interface ILine
     {
