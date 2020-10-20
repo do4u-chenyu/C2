@@ -5,11 +5,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Linq;
-using Citta_T1.Core;
-using Citta_T1.Model;
-using Citta_T1.Globalization;
+using C2.Core;
+using C2.Model;
+using C2.Globalization;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     [DefaultEvent("SelectedItemChanged")]
     public partial class TabBar : BaseControl

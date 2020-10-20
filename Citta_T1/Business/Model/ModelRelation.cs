@@ -1,8 +1,8 @@
-﻿using Citta_T1.Core;
+﻿using C2.Core;
 using System;
 using System.Drawing;
 
-namespace Citta_T1.Business.Model
+namespace C2.Business.Model
 {
     public class ModelRelation
     {

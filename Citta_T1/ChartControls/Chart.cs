@@ -7,11 +7,11 @@ using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
-using Citta_T1.Controls.Charts;
-using Citta_T1.Core;
-using Citta_T1.Model;
+using C2.Controls.Charts;
+using C2.Core;
+using C2.Model;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public abstract class Chart : ScrollableControlBase
     {

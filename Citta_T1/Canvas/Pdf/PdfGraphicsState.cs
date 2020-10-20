@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using PdfSharp.Drawing;
 
-namespace Citta_T1.Canvas.Pdf
+namespace C2.Canvas.Pdf
 {
     class PdfGraphicsState : IGraphicsState
     {

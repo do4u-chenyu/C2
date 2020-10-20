@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Citta_T1
+namespace C2
 {
     static class ProductInfo
     {
@@ -83,32 +83,32 @@ namespace Citta_T1
 
         public static string WebSite
         {
-            get { return "https://github.com/funwaywang/Citta_T1"; }
+            get { return "https://github.com/funwaywang/C2"; }
         }
 
         public static string HelpUrl
         {
-            get { return "https://github.com/funwaywang/Citta_T1/wiki"; }
+            get { return "https://github.com/funwaywang/C2/wiki"; }
         }
 
         public static string UpdateUrl
         {
-            get { return "https://github.com/funwaywang/Citta_T1/releases"; }
+            get { return "https://github.com/funwaywang/C2/releases"; }
         }
 
         public static string FeedbackUrl
         {
-            get { return "https://github.com/funwaywang/Citta_T1/issues"; }
+            get { return "https://github.com/funwaywang/C2/issues"; }
         }
 
         public static string SupportEmail
         {
-            get { return "Citta_T1org@gmail.com"; }
+            get { return "C2org@gmail.com"; }
         }
 
         public static string GetInformation()
         {
-            return "Citta_T1 is a lightweight and powerful mind mapping tool, and it is free for everyone.";
+            return "C2 is a lightweight and powerful mind mapping tool, and it is free for everyone.";
         }
     }
 }

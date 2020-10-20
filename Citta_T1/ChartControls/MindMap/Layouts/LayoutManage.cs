@@ -1,8 +1,8 @@
-﻿using Citta_T1.ChartControls.MindMap.Lines;
-using Citta_T1.Core;
-using Citta_T1.Model.MindMaps;
+﻿using C2.ChartControls.MindMap.Lines;
+using C2.Core;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     class LayoutManage
     {

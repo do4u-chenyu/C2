@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Dialogs
+﻿namespace C2.Dialogs
 {
     partial class ShortcutKeysMapDialog
     {
@@ -41,7 +41,7 @@
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invertSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.BtnReset = new Citta_T1.Controls.PushButton();
+            this.BtnReset = new C2.Controls.PushButton();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 

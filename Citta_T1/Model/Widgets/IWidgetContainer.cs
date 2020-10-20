@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Citta_T1.Model.Widgets
+namespace C2.Model.Widgets
 {
     public interface IWidgetContainer
     {

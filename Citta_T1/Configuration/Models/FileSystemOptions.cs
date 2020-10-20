@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Configuration.Models
+namespace C2.Configuration.Models
 {
     class FileSystemOptions : Options
     {
-        const string FileName = "Citta_T1.xml";
+        const string FileName = "C2.xml";
         const string ForceRunAsPortable = "-p";
 
         public FileSystemOptions()

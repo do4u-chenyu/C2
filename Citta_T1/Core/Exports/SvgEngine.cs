@@ -3,16 +3,16 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
 using System.Xml;
-using Citta_T1.Canvas.Svg;
-using Citta_T1.Configuration;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Model;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Widgets;
+using C2.Canvas.Svg;
+using C2.Configuration;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Model;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
+using C2.Model.Widgets;
 
-namespace Citta_T1.Core.Exports
+namespace C2.Core.Exports
 {
     class SvgEngine : ChartsExportEngine
     {

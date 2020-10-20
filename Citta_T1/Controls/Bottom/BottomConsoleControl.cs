@@ -1,10 +1,10 @@
-﻿using Citta_T1.IAOLab.PythonOP;
-using Citta_T1.Utils;
+﻿using C2.IAOLab.PythonOP;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Bottom
+namespace C2.Controls.Bottom
 {
     public partial class BottomConsoleControl : UserControl
     {

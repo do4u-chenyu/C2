@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using Citta_T1.Controls;
+using C2.Controls;
 
-namespace Citta_T1.ChartPageView
+namespace C2.ChartPageView
 {
     class TabBarNavButton : TabBarButton
     {

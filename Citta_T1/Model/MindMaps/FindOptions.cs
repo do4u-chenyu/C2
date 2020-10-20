@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
-using Citta_T1.Configuration;
+using C2.Configuration;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     public class FindOptions
     {

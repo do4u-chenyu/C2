@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Citta_T1.Model
+namespace C2.Model
 {
     public class PictureLibrary : Dictionary<string, Picture>
     {

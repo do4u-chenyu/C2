@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Common
+namespace C2.Controls.Common
 {
     /// <summary>
     /// 带下拉框的用户控件

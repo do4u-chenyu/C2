@@ -8,12 +8,12 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using System.Linq;
-using Citta_T1.Model.Widgets;
-using Citta_T1.Globalization;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
+using C2.Model.Widgets;
+using C2.Globalization;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     public static class ST
     {
@@ -651,7 +651,7 @@ namespace Citta_T1.Core
             if (iconNode == null || image == null)
                 throw new ArgumentNullException();
 
-            Image image2 = Citta_T1.Controls.PaintHelper.CopyImage(image);
+            Image image2 = C2.Controls.PaintHelper.CopyImage(image);
 
             XmlCDataSection cdata = iconNode.OwnerDocument.CreateCDataSection(ImageBase64String(image2));
             iconNode.AppendChild(cdata);

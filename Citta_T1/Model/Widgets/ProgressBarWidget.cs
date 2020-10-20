@@ -6,14 +6,14 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Canvas;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model.MindMaps;
+using C2.Canvas;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Globalization;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Model.Widgets
+namespace C2.Model.Widgets
 {
     [DefaultProperty("Value")]
     class ProgressBarWidget : Widget, IExtendActionProvider
@@ -78,7 +78,7 @@ namespace Citta_T1.Model.Widgets
         }
 
         [DefaultValue(false), LocalDisplayName("Auto Calculation"), LocalCategory("Data")]
-        [TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
+        [TypeConverter(typeof(C2.Design.BoolConverter))]
         public bool AutoCalculation
         {
             get { return _AutoCalculation; }
@@ -138,7 +138,7 @@ namespace Citta_T1.Model.Widgets
         }
 
         [DefaultValue(false), LocalDisplayName("Show Text"), LocalCategory("Style")]
-        [TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
+        [TypeConverter(typeof(C2.Design.BoolConverter))]
         public bool ShowText
         {
             get { return _ShowText; }
@@ -389,7 +389,7 @@ namespace Citta_T1.Model.Widgets
                 string text = string.Format("{0}%", Value);
                 Rectangle rect = Bounds;
                 rect.Offset(translate);
-                Citta_T1.Core.Exports.SvgEngine.ExportText(text, ForeColor, font, g, rect);
+                C2.Core.Exports.SvgEngine.ExportText(text, ForeColor, font, g, rect);
             }
         }*/
 

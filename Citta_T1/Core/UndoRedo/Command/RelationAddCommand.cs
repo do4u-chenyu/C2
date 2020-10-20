@@ -1,11 +1,11 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls;
-using Citta_T1.Controls.Move;
-using Citta_T1.Controls.Move.Op;
+﻿using C2.Business.Model;
+using C2.Controls;
+using C2.Controls.Move;
+using C2.Controls.Move.Op;
 using System;
 using System.Windows.Forms;
 
-namespace Citta_T1.Core.UndoRedo.Command
+namespace C2.Core.UndoRedo.Command
 {
     class RelationAddCommand : BaseCommand
     {

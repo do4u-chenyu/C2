@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     public class StyleConverter : TypeConverter
     {

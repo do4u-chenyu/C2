@@ -1,7 +1,7 @@
-﻿using Citta_T1.Business.Model;
+﻿using C2.Business.Model;
 using System.Collections.Generic;
 
-namespace Citta_T1.Core.UndoRedo
+namespace C2.Core.UndoRedo
 {
     class UndoRedoStack
     {

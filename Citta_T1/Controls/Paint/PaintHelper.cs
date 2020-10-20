@@ -6,11 +6,11 @@ using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
-using Citta_T1.Canvas;
-using Citta_T1.Controls.OS;
-using Citta_T1.Controls.Paint;
+using C2.Canvas;
+using C2.Controls.OS;
+using C2.Controls.Paint;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     static partial class PaintHelper
     {

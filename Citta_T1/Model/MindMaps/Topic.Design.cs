@@ -2,12 +2,12 @@
 using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
-using Citta_T1.Core;
-using Citta_T1.Design;
-using Citta_T1.Globalization;
-using Citta_T1.Model.Styles;
+using C2.Core;
+using C2.Design;
+using C2.Globalization;
+using C2.Model.Styles;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     //Design Time Only, Style Members
     public partial class Topic
@@ -71,7 +71,7 @@ namespace Citta_T1.Model.MindMaps
 
         [DefaultValue(typeof(Padding), "2, 2, 2, 2")]
         [DesignOnly(true), LocalDisplayName("Padding"), LocalCategory("Layout")]
-        [Editor(typeof(PaddingEditor), typeof(UITypeEditor)), TypeConverter(typeof(Citta_T1.Design.PaddingConverter))]
+        [Editor(typeof(PaddingEditor), typeof(UITypeEditor)), TypeConverter(typeof(C2.Design.PaddingConverter))]
         public Padding Padding
         {
             get { return Style.Padding; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public class ListItem : ListItem<object>
     {

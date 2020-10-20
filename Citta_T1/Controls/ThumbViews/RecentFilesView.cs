@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Citta_T1.Configuration;
+using C2.Configuration;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class RecentFilesView : ThumbView
     {

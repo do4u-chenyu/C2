@@ -1,6 +1,6 @@
 ﻿
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     partial class CanvasPanel
     {

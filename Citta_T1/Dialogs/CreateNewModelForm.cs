@@ -1,12 +1,12 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
 
     public partial class CreateNewModelForm : Form

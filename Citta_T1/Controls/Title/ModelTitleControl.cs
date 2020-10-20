@@ -1,10 +1,10 @@
-﻿using Citta_T1.Business.Schedule;
-using Citta_T1.Core;
+﻿using C2.Business.Schedule;
+using C2.Core;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Title
+namespace C2.Controls.Title
 {
     public delegate void DocumentSwitchEventHandler(string modelTitle);
 

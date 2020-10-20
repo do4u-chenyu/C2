@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
-using Citta_T1.Model.Documents;
+using C2.Model.Documents;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     abstract class DocumentImportEngine
     {
@@ -12,8 +12,8 @@ namespace Citta_T1.Core
         {
             return new DocumentImportEngine[]
             {
-                new Citta_T1.Core.Imports.CsvEngine(),
-                new Citta_T1.Core.Imports.FreeMindEngine()
+                new C2.Core.Imports.CsvEngine(),
+                new C2.Core.Imports.FreeMindEngine()
             };
         }
 

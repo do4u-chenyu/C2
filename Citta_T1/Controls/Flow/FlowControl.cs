@@ -1,8 +1,8 @@
-﻿using Citta_T1.Core;
+﻿using C2.Core;
 using System;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Flow
+namespace C2.Controls.Flow
 {
     public partial class FlowControl : UserControl
     {
@@ -171,7 +171,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.movePictureBox.Image = global::Citta_T1.Properties.Resources.selectDrag;
+                this.movePictureBox.Image = global::C2.Properties.Resources.selectDrag;
                 this.movePictureBox.Location = new System.Drawing.Point(13, 3);
                 this.movePictureBox.Size = new System.Drawing.Size(35, 29);
                 return;
@@ -184,7 +184,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.zoomUpPictureBox.Image = global::Citta_T1.Properties.Resources.selectZommUp;
+                this.zoomUpPictureBox.Image = global::C2.Properties.Resources.selectZommUp;
                 this.zoomUpPictureBox.Location = new System.Drawing.Point(45, 3);
                 this.zoomUpPictureBox.Size = new System.Drawing.Size(35, 29);
                 return;
@@ -197,7 +197,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.zoomDownPictureBox.Image = global::Citta_T1.Properties.Resources.selectZoomDown;
+                this.zoomDownPictureBox.Image = global::C2.Properties.Resources.selectZoomDown;
                 this.zoomDownPictureBox.Location = new System.Drawing.Point(87, 3);
                 this.zoomDownPictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
@@ -210,7 +210,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.remarkPictureBox.Image = global::Citta_T1.Properties.Resources.selectRemark;
+                this.remarkPictureBox.Image = global::C2.Properties.Resources.selectRemark;
                 this.remarkPictureBox.Location = new System.Drawing.Point(124, 2);
                 this.remarkPictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
@@ -225,7 +225,7 @@ namespace Citta_T1.Controls.Flow
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             if (flag)
             {
-                this.framePictureBox.Image = global::Citta_T1.Properties.Resources.selectFrame;
+                this.framePictureBox.Image = global::C2.Properties.Resources.selectFrame;
                 this.framePictureBox.Location = new System.Drawing.Point(167, 2);
                 this.framePictureBox.Size = new System.Drawing.Size(29, 29);
                 return;

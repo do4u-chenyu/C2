@@ -281,7 +281,7 @@
 		<item name="The same filename already exists. Do you want to replace it?">Il nome del file è già esistente. Sicuro di volerlo sovrascrivere?</item>
 		<item name="Save tabs">Salva scheda</item>
 		<item name="Do not ask me again">Non chiedere ancora</item>
-		<item name="Do you want Citta_T1 save tabs and open them next startup?">Vuoi che Citta_T1 salvi la scheda e la apri al prossimo riavvio?</item>
+		<item name="Do you want C2 save tabs and open them next startup?">Vuoi che C2 salvi la scheda e la apri al prossimo riavvio?</item>
 		<item name="Format Painter Description">Copia il formato dell'argomento, e applicalo a un altro. Facendo doppio click di questo pulsante, sarà applicato il formato ai vari argomenti</item>
 		<item name="Checking">Controllo</item>
 		<item name="There is a new version available">C'è una nuova versione "{0}" che può essere usata</item>

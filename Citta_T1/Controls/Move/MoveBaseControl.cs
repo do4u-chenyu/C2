@@ -1,8 +1,8 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Core;
-using Citta_T1.Core.UndoRedo;
-using Citta_T1.Core.UndoRedo.Command;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Core;
+using C2.Core.UndoRedo;
+using C2.Core.UndoRedo.Command;
+using C2.Utils;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Move
+namespace C2.Controls.Move
 {
     public partial class MoveBaseControl : UserControl
     {

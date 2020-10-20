@@ -51,6 +51,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_209823593971EB6C3F39A46124F762C0"
+        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_220F69D5E9CC4F8086792C5022E0AFD4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -183,12 +189,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_756FD62C00C41215ED0E60DD503A50A0"
-        "OwnerKey" = "8:_BC98A6F467604A369A93A758E718DBD0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_7FEC15941A144ABA9DE39C7334181334"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -243,24 +243,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_99D3CBB69A557F188D9073E05B427E2D"
-        "OwnerKey" = "8:_BC98A6F467604A369A93A758E718DBD0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_99D3CBB69A557F188D9073E05B427E2D"
-        "OwnerKey" = "8:_74AC330CAC3A4B279C7A7FCE3A224089"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_99D3CBB69A557F188D9073E05B427E2D"
-        "OwnerKey" = "8:_145164BACA6C40B0AB6ABBB8D972DC17"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9A3A159BCCE740B983087DF6DB1B4211"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -281,12 +263,6 @@
         {
         "MsmKey" = "8:_A09D7DF40E9110AE7BFE4E8AD924CA1E"
         "OwnerKey" = "8:_F45D6D3D85F3C2F3363DA3F32886E9B5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A09D7DF40E9110AE7BFE4E8AD924CA1E"
-        "OwnerKey" = "8:_BC98A6F467604A369A93A758E718DBD0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -323,12 +299,6 @@
         {
         "MsmKey" = "8:_B4BDC7FD2DC209E3A25569C1896D07DE"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B4BDC7FD2DC209E3A25569C1896D07DE"
-        "OwnerKey" = "8:_BC98A6F467604A369A93A758E718DBD0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -393,6 +363,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D74838671EC3C4F8FB77462A8815A94B"
+        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DD836C22A5F8492C89194783D66582E8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -435,32 +411,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F45D6D3D85F3C2F3363DA3F32886E9B5"
-        "OwnerKey" = "8:_BC98A6F467604A369A93A758E718DBD0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F75119EB65DC4BA895C0E3C09CD3CAFF"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F75119EB65DC4BA895C0E3C09CD3CAFF"
-        "OwnerKey" = "8:_BC98A6F467604A369A93A758E718DBD0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F75119EB65DC4BA895C0E3C09CD3CAFF"
-        "OwnerKey" = "8:_74AC330CAC3A4B279C7A7FCE3A224089"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F75119EB65DC4BA895C0E3C09CD3CAFF"
-        "OwnerKey" = "8:_145164BACA6C40B0AB6ABBB8D972DC17"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -484,19 +436,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BC98A6F467604A369A93A758E718DBD0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_74AC330CAC3A4B279C7A7FCE3A224089"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_145164BACA6C40B0AB6ABBB8D972DC17"
+        "OwnerKey" = "8:_209823593971EB6C3F39A46124F762C0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -557,6 +497,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A09D7DF40E9110AE7BFE4E8AD924CA1E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D74838671EC3C4F8FB77462A8815A94B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -677,7 +623,7 @@
         {
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0150C6E60C1C4BE5BA8CFC6526DB111B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\rightfold.png"
+            "SourcePath" = "8:..\\C2\\res\\displaypanel\\rightfold.png"
             "TargetName" = "8:rightfold.png"
             "Tag" = "8:"
             "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
@@ -697,7 +643,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_03A69C2B608341A3A710D0B56A417005"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-2.0.dll"
+            "SourcePath" = "8:..\\C2\\sbin\\msys-2.0.dll"
             "TargetName" = "8:msys-2.0.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -717,7 +663,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0B8A901FF10E46BA87BF4CC2713F76D2"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\grep.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\grep.exe"
             "TargetName" = "8:grep.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -737,7 +683,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F05F70B76B1436D956FC41108AC5D00"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\sort.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\sort.exe"
             "TargetName" = "8:sort.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -762,13 +708,8 @@
             "AssemblyAsmDisplayName" = "8:cat_xls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_145164BACA6C40B0AB6ABBB8D972DC17"
-                    {
-                    "Name" = "8:cat_xls.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\cat_xls.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\cat_xls.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -788,7 +729,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_174859D1CC3C49A3AED884B0E89CB831"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Demo\\demo_excel.xlsx"
+            "SourcePath" = "8:..\\C2\\Demo\\demo_excel.xlsx"
             "TargetName" = "8:demo_excel.xlsx"
             "Tag" = "8:"
             "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
@@ -806,9 +747,40 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_209823593971EB6C3F39A46124F762C0"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_209823593971EB6C3F39A46124F762C0"
+                    {
+                    "Name" = "8:PdfSharp.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:PdfSharp.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_220F69D5E9CC4F8086792C5022E0AFD4"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\xargs.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\xargs.exe"
             "TargetName" = "8:xargs.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -828,7 +800,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_360A4D79EEF84B14B17D01D320248C54"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\iconv.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\iconv.exe"
             "TargetName" = "8:iconv.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -879,7 +851,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_372B25AE809E45BEA7B586D72D831494"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-ncursesw6.dll"
+            "SourcePath" = "8:..\\C2\\sbin\\msys-ncursesw6.dll"
             "TargetName" = "8:msys-ncursesw6.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -899,7 +871,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_39563DB0876144BAA18EA3A76F66DEAA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\minfold.png"
+            "SourcePath" = "8:..\\C2\\res\\displaypanel\\minfold.png"
             "TargetName" = "8:minfold.png"
             "Tag" = "8:"
             "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
@@ -970,7 +942,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_49C4465A52F64CB083B3E9D9CF699E11"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-pcre-1.dll"
+            "SourcePath" = "8:..\\C2\\sbin\\msys-pcre-1.dll"
             "TargetName" = "8:msys-pcre-1.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -990,7 +962,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_568FB08F37CF4CAC818FFF917A2CEE83"
             {
-            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\close.png"
+            "SourcePath" = "8:..\\C2\\res\\displaypanel\\close.png"
             "TargetName" = "8:close.png"
             "Tag" = "8:"
             "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
@@ -1010,7 +982,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_56CC13171A6740D2A92934E560FCAE8D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\head.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\head.exe"
             "TargetName" = "8:head.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1030,7 +1002,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_595716FAE12047F5AFDBDADC77BA356B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\maxunfold.png"
+            "SourcePath" = "8:..\\C2\\res\\displaypanel\\maxunfold.png"
             "TargetName" = "8:maxunfold.png"
             "Tag" = "8:"
             "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
@@ -1050,7 +1022,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_59980B2637564CC5B12079BB3031E11F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\leftfold.png"
+            "SourcePath" = "8:..\\C2\\res\\displaypanel\\leftfold.png"
             "TargetName" = "8:leftfold.png"
             "Tag" = "8:"
             "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
@@ -1070,7 +1042,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_600DB62E2D244632A00E5A877A56C445"
             {
-            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\remark.png"
+            "SourcePath" = "8:..\\C2\\res\\displaypanel\\remark.png"
             "TargetName" = "8:remark.png"
             "Tag" = "8:"
             "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
@@ -1090,7 +1062,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62C0EA6271324A09BAD74279D3EA3BB2"
             {
-            "SourcePath" = "8:..\\Citta_T1\\log4net.config"
+            "SourcePath" = "8:..\\C2\\log4net.config"
             "TargetName" = "8:log4net.config"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -1110,7 +1082,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_667F3762B2A246158C3A064B5F93B031"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-readline7.dll"
+            "SourcePath" = "8:..\\C2\\sbin\\msys-readline7.dll"
             "TargetName" = "8:msys-readline7.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1130,7 +1102,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_67B1831753F341E78F496723F1DF63A7"
             {
-            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\shadow.png"
+            "SourcePath" = "8:..\\C2\\res\\displaypanel\\shadow.png"
             "TargetName" = "8:shadow.png"
             "Tag" = "8:"
             "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
@@ -1150,7 +1122,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_72344091AF244D43B6B18182324BA6CE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-intl-8.dll"
+            "SourcePath" = "8:..\\C2\\sbin\\msys-intl-8.dll"
             "TargetName" = "8:msys-intl-8.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1175,13 +1147,8 @@
             "AssemblyAsmDisplayName" = "8:relate, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_74AC330CAC3A4B279C7A7FCE3A224089"
-                    {
-                    "Name" = "8:relate.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\relate.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\relate.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1201,7 +1168,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_74EF88424DBE46329214762769A0BAAB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\uniq.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\uniq.exe"
             "TargetName" = "8:uniq.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1252,7 +1219,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7FEC15941A144ABA9DE39C7334181334"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\echo.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\echo.exe"
             "TargetName" = "8:echo.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1272,7 +1239,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8611EAEEA7F4419F941FFB9A929DF115"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\join.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\join.exe"
             "TargetName" = "8:join.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1292,7 +1259,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A465C4E4A914E9192DC2A059AB3F21D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\tail.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\tail.exe"
             "TargetName" = "8:tail.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1343,7 +1310,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_950AF2D95DE943BA8140A79C1979BA15"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-gmp-10.dll"
+            "SourcePath" = "8:..\\C2\\sbin\\msys-gmp-10.dll"
             "TargetName" = "8:msys-gmp-10.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1394,7 +1361,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A3A159BCCE740B983087DF6DB1B4211"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\tr.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\tr.exe"
             "TargetName" = "8:tr.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1414,7 +1381,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C31EC94A04C462491D6D1EACB855C6A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Demo\\demo_txt.txt"
+            "SourcePath" = "8:..\\C2\\Demo\\demo_txt.txt"
             "TargetName" = "8:demo_txt.txt"
             "Tag" = "8:"
             "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
@@ -1434,7 +1401,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A0102B5326A345CB922ED94E499C34C4"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\awk.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\awk.exe"
             "TargetName" = "8:awk.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1516,7 +1483,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A92DF9E18DA7402AA65FF626F704E4CE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\blueshadow.png"
+            "SourcePath" = "8:..\\C2\\res\\displaypanel\\blueshadow.png"
             "TargetName" = "8:blueshadow.png"
             "Tag" = "8:"
             "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
@@ -1536,7 +1503,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AD97838B5EE1464F96BCB1B4EBB31E47"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Doc\\IAO解决方案帮助文档v1.chm"
+            "SourcePath" = "8:..\\C2\\Doc\\IAO解决方案帮助文档v1.chm"
             "TargetName" = "8:IAO解决方案帮助文档v1.chm"
             "Tag" = "8:"
             "Folder" = "8:_52663411F5B143C3AE96DDC972E14614"
@@ -1587,7 +1554,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BAE32A61CD1540CABD0A7CB112402251"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Demo\\demo_bcp.bcp"
+            "SourcePath" = "8:..\\C2\\Demo\\demo_bcp.bcp"
             "TargetName" = "8:demo_bcp.bcp"
             "Tag" = "8:"
             "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
@@ -1609,16 +1576,11 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Citta_T1, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
+            "AssemblyAsmDisplayName" = "8:C2, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
-                    "_BC98A6F467604A369A93A758E718DBD0"
-                    {
-                    "Name" = "8:Citta_T1.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Citta_T1.exe"
+            "SourcePath" = "8:..\\C2\\bin\\Release\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -1638,7 +1600,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BD52F80A86EF42FBB05849DAF92665E1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-mpfr-6.dll"
+            "SourcePath" = "8:..\\C2\\sbin\\msys-mpfr-6.dll"
             "TargetName" = "8:msys-mpfr-6.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1658,7 +1620,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C25C34C875DB409BA61F114641A35169"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-iconv-2.dll"
+            "SourcePath" = "8:..\\C2\\sbin\\msys-iconv-2.dll"
             "TargetName" = "8:msys-iconv-2.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1678,7 +1640,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C64EEE9249484B90BA29901D78F4D328"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-gcc_s-seh-1.dll"
+            "SourcePath" = "8:..\\C2\\sbin\\msys-gcc_s-seh-1.dll"
             "TargetName" = "8:msys-gcc_s-seh-1.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1698,7 +1660,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CAE05490DC924763941530F191F601F1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\res\\Icon\\Icon.ico"
+            "SourcePath" = "8:..\\C2\\res\\Icon\\Icon.ico"
             "TargetName" = "8:Icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_654E819E6A884DFC8758DDA90B114F85"
@@ -1747,9 +1709,40 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D74838671EC3C4F8FB77462A8815A94B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D74838671EC3C4F8FB77462A8815A94B"
+                    {
+                    "Name" = "8:Costura.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Costura.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DD836C22A5F8492C89194783D66582E8"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\sleep.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\sleep.exe"
             "TargetName" = "8:sleep.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1769,7 +1762,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E63DE2FAB01244028ACF4B5D3540666F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Demo\\demo_csv.csv"
+            "SourcePath" = "8:..\\C2\\Demo\\demo_csv.csv"
             "TargetName" = "8:demo_csv.csv"
             "Tag" = "8:"
             "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
@@ -1789,7 +1782,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EB97D9C2FFE7471D9BA7113B99A51DC3"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\cat.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\cat.exe"
             "TargetName" = "8:cat.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1809,7 +1802,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ECBC51A8699F473B987FB8BB3C257AFD"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\comm.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\comm.exe"
             "TargetName" = "8:comm.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1829,7 +1822,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F2337DC0E38844B0A6C85E611337076E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\rm.exe"
+            "SourcePath" = "8:..\\C2\\sbin\\rm.exe"
             "TargetName" = "8:rm.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -2901,7 +2894,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\obj\\Release\\Citta_T1.exe"
+            "SourcePath" = "8:..\\C2\\obj\\开发调试\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"

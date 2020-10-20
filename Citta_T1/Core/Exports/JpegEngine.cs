@@ -4,11 +4,11 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
-using Citta_T1.Controls;
-using Citta_T1.Globalization;
+using C2.Configuration;
+using C2.Controls;
+using C2.Globalization;
 
-namespace Citta_T1.Core.Exports
+namespace C2.Core.Exports
 {
     class JpegEngine : ImageExportEngine
     {
@@ -22,7 +22,7 @@ namespace Citta_T1.Core.Exports
             }
 
             [DefaultValue(80), LocalDisplayName("Quality")]
-            [Editor(typeof(Citta_T1.Design.JpegQualityEditor), typeof(UITypeEditor))]
+            [Editor(typeof(C2.Design.JpegQualityEditor), typeof(UITypeEditor))]
             public int Quality
             {
                 get { return _Quality; }

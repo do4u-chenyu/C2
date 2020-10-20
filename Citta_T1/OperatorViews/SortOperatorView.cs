@@ -1,13 +1,13 @@
-﻿using Citta_T1.Controls.Move.Op;
-using Citta_T1.Core;
-using Citta_T1.OperatorViews.Base;
-using Citta_T1.Utils;
+﻿using C2.Controls.Move.Op;
+using C2.Core;
+using C2.OperatorViews.Base;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Citta_T1.OperatorViews
+namespace C2.OperatorViews
 {
     public partial class SortOperatorView : BaseOperatorView
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     class MoveCommand
     {

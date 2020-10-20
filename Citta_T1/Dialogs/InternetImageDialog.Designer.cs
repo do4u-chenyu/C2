@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Dialogs
+﻿namespace C2.Dialogs
 {
     partial class InternetImageDialog
     {
@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.CmbUrl = new System.Windows.Forms.ComboBox();
             this.CkbAddToLibrary = new System.Windows.Forms.CheckBox();
-            this.PicPreview = new Citta_T1.Controls.ImageBox();
+            this.PicPreview = new C2.Controls.ImageBox();
             this.LabInfo = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.CkbLimitImageSize = new System.Windows.Forms.CheckBox();
@@ -83,7 +83,7 @@
             this.PicPreview.Size = new System.Drawing.Size(61, 59);
             this.PicPreview.TabIndex = 10006;
             this.PicPreview.TabStop = false;
-            this.PicPreview.ZoomType = Citta_T1.Controls.ZoomType.FitPage;
+            this.PicPreview.ZoomType = C2.Controls.ZoomType.FitPage;
             // 
             // LabInfo
             // 
@@ -198,7 +198,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CmbUrl;
         private System.Windows.Forms.CheckBox CkbAddToLibrary;
-        private Citta_T1.Controls.ImageBox PicPreview;
+        private C2.Controls.ImageBox PicPreview;
         private System.Windows.Forms.Label LabInfo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button BtnPreview;

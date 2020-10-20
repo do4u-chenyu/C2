@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Core
+﻿namespace C2.Core
 {
     partial class ShortcutKeysEditor
     {

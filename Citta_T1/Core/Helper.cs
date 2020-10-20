@@ -5,12 +5,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Model.Documents;
+using C2.Configuration;
+using C2.Controls;
+using C2.Core;
+using C2.Model.Documents;
 
-namespace Citta_T1
+namespace C2
 {
     static class Helper
     {
@@ -164,12 +164,12 @@ namespace Citta_T1
 
         public static bool HasQuickHelp()
         {
-            return File.Exists(Path.Combine(Application.StartupPath, "Citta_T1 Quick Help.bmd"));
+            return File.Exists(Path.Combine(Application.StartupPath, "C2 Quick Help.bmd"));
         }
 
         public static void OpenQuickHelp()
         {
-            string file = Path.Combine(Application.StartupPath, "Citta_T1 Quick Help.bmd");
+            string file = Path.Combine(Application.StartupPath, "C2 Quick Help.bmd");
             if (File.Exists(file))
             {
                 Program.MainForm.OpenDocument(file, true);

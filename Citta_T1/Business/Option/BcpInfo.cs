@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Citta_T1.Business.Model;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+using C2.Business.Model;
+using C2.Core;
+using C2.Utils;
 
-namespace Citta_T1.Business.Option
+namespace C2.Business.Option
 {
     class BcpInfo
     {

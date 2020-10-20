@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Citta_T1.Resources
+namespace C2.Resources
 {
     public static class RS
     {

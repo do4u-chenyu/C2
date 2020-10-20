@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Dialogs
+﻿namespace C2.Dialogs
 {
     partial class SaveTabsDialog
     {
@@ -30,16 +30,16 @@
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LabMessage = new System.Windows.Forms.Label();
-            this.BtnYes = new Citta_T1.Controls.PushButton();
-            this.BtnNo = new Citta_T1.Controls.PushButton();
+            this.BtnYes = new C2.Controls.PushButton();
+            this.BtnNo = new C2.Controls.PushButton();
             this.CkbDoNotAskMeAgain = new System.Windows.Forms.CheckBox();
-            this.BtnCancel = new Citta_T1.Controls.PushButton();
+            this.BtnCancel = new C2.Controls.PushButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Citta_T1.Properties.Resources.question_large;
+            this.pictureBox1.Image = global::C2.Properties.Resources.question_large;
             this.pictureBox1.Location = new System.Drawing.Point(11, 11);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
@@ -54,7 +54,7 @@
             this.LabMessage.Name = "LabMessage";
             this.LabMessage.Size = new System.Drawing.Size(347, 12);
             this.LabMessage.TabIndex = 3;
-            this.LabMessage.Text = "Do you want Citta_T1 save tabs and open them next startup?";
+            this.LabMessage.Text = "Do you want C2 save tabs and open them next startup?";
             // 
             // BtnYes
             // 
@@ -125,9 +125,9 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LabMessage;
-        private Citta_T1.Controls.PushButton BtnYes;
-        private Citta_T1.Controls.PushButton BtnNo;
+        private C2.Controls.PushButton BtnYes;
+        private C2.Controls.PushButton BtnNo;
         private System.Windows.Forms.CheckBox CkbDoNotAskMeAgain;
-        private Citta_T1.Controls.PushButton BtnCancel;
+        private C2.Controls.PushButton BtnCancel;
     }
 }

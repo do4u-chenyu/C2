@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 
-namespace Citta_T1.Globalization
+namespace C2.Globalization
 {
     class LocalCategoryAttribute : CategoryAttribute
     {

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Citta_T1.Core;
-using Citta_T1.Core.Exports;
-using Citta_T1.Model;
-using Citta_T1.Model.Widgets;
-using Citta_T1.Controls.Charts;
-using Citta_T1.Configuration;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
+using C2.Core;
+using C2.Core.Exports;
+using C2.Model;
+using C2.Model.Widgets;
+using C2.Controls.Charts;
+using C2.Configuration;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     public partial class MindMapView : ChartControl, IDropFilesHandler
     {
@@ -111,16 +111,16 @@ namespace Citta_T1.Controls.MapViews
         {
             if (old != null)
             {
-                old.PropertyChanged -= new Citta_T1.Core.PropertyChangedEventHandler(Map_StyleChanged);
+                old.PropertyChanged -= new C2.Core.PropertyChangedEventHandler(Map_StyleChanged);
                 old.LayoutTypeChanged -= new EventHandler(Map_LayoutTypeChanged);
-                old.ChartObjectPropertyChanged -= new Citta_T1.Core.PropertyChangedEventHandler(Map_ChartObjectPropertyChanged);
+                old.ChartObjectPropertyChanged -= new C2.Core.PropertyChangedEventHandler(Map_ChartObjectPropertyChanged);
 
                 old.TopicAdded -= new TopicEventHandler(Map_TopicAdded);
                 old.TopicRemoved -= new TopicEventHandler(Map_TopicRemoved);
                 old.TopicAfterSort -= new EventHandler(Map_TopicAfterSort);
                 old.ObjectStyleChanged -= new ChartObjectPropertyEventHandler(Chart_ChartObjectStyleChanged);
                 //old.TopicTextChanged -= new TopicEventHandler(Map_TopicTextChanged);
-                old.TopicWidgetChanged -= new Citta_T1.Core.PropertyChangedEventHandler(Map_TopicWidgetChanged);
+                old.TopicWidgetChanged -= new C2.Core.PropertyChangedEventHandler(Map_TopicWidgetChanged);
                 old.TopicDescriptionChanged -= new TopicEventHandler(Map_TopicDescriptionChanged);
                 old.TopicFoldedChanged -= new TopicEventHandler(Map_TopicFoldedChanged);
                 old.TopicWidthChanged -= new TopicEventHandler(Map_TopicWidthChanged);
@@ -131,7 +131,7 @@ namespace Citta_T1.Controls.MapViews
                 old.LinkRemoved -= new LinkEventHandler(Map_LinkRemoved);
                 old.WidgetRemoved -= new WidgetEventHandler(Map_WidgetRemoved);
 
-                old.LinkPropertyChanged -= new Citta_T1.Core.PropertyChangedEventHandler(Map_LinkChanged);
+                old.LinkPropertyChanged -= new C2.Core.PropertyChangedEventHandler(Map_LinkChanged);
                 old.LinkVisibleChanged -= new LinkEventHandler(Map_LinkVisibleChanged);
             }
 
@@ -139,17 +139,17 @@ namespace Citta_T1.Controls.MapViews
             {
                 ChartLayouter = LayoutManage.GetLayouter(Map.LayoutType);
 
-                Map.PropertyChanged += new Citta_T1.Core.PropertyChangedEventHandler(Map_StyleChanged);
+                Map.PropertyChanged += new C2.Core.PropertyChangedEventHandler(Map_StyleChanged);
                 Map.LayoutTypeChanged += new EventHandler(Map_LayoutTypeChanged);
                 Map.ModifiedChanged += new EventHandler(Map_ModifiedChanged);
-                Map.ChartObjectPropertyChanged += new Citta_T1.Core.PropertyChangedEventHandler(Map_ChartObjectPropertyChanged);
+                Map.ChartObjectPropertyChanged += new C2.Core.PropertyChangedEventHandler(Map_ChartObjectPropertyChanged);
 
                 Map.TopicAdded += new TopicEventHandler(Map_TopicAdded);
                 Map.TopicRemoved += new TopicEventHandler(Map_TopicRemoved);
                 Map.TopicAfterSort += new EventHandler(Map_TopicAfterSort);
                 Map.ObjectStyleChanged += new ChartObjectPropertyEventHandler(Chart_ChartObjectStyleChanged);
                 //Map.TopicTextChanged += new TopicEventHandler(Map_TopicTextChanged);
-                Map.TopicWidgetChanged += new Citta_T1.Core.PropertyChangedEventHandler(Map_TopicWidgetChanged);
+                Map.TopicWidgetChanged += new C2.Core.PropertyChangedEventHandler(Map_TopicWidgetChanged);
                 Map.TopicDescriptionChanged += new TopicEventHandler(Map_TopicDescriptionChanged);
                 Map.TopicFoldedChanged += new TopicEventHandler(Map_TopicFoldedChanged);
                 Map.TopicWidthChanged += new TopicEventHandler(Map_TopicWidthChanged);
@@ -160,7 +160,7 @@ namespace Citta_T1.Controls.MapViews
                 Map.LinkRemoved += new LinkEventHandler(Map_LinkRemoved);
                 Map.WidgetRemoved += new WidgetEventHandler(Map_WidgetRemoved);
 
-                Map.LinkPropertyChanged += new Citta_T1.Core.PropertyChangedEventHandler(Map_LinkChanged);
+                Map.LinkPropertyChanged += new C2.Core.PropertyChangedEventHandler(Map_LinkChanged);
                 Map.LinkVisibleChanged += new LinkEventHandler(Map_LinkVisibleChanged);
             }
             else
@@ -181,7 +181,7 @@ namespace Citta_T1.Controls.MapViews
             ScrollToCenter();
         }
 
-        private void Map_ChartObjectPropertyChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
+        private void Map_ChartObjectPropertyChanged(object sender, C2.Core.PropertyChangedEventArgs e)
         {
             if (e.Rollbackable)
             {
@@ -218,7 +218,7 @@ namespace Citta_T1.Controls.MapViews
 
         #region Map & Topic Events
 
-        void Map_StyleChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
+        void Map_StyleChanged(object sender, C2.Core.PropertyChangedEventArgs e)
         {
             if (e.HasChanges(ChangeTypes.Visual))
             {
@@ -271,7 +271,7 @@ namespace Citta_T1.Controls.MapViews
         //    //InvalidateTopic(e.Topic);
         //}
 
-        private void Map_TopicWidgetChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
+        private void Map_TopicWidgetChanged(object sender, C2.Core.PropertyChangedEventArgs e)
         {
             if (!IsUpdating)
             {
@@ -347,7 +347,7 @@ namespace Citta_T1.Controls.MapViews
             }
         }
 
-        private void Map_LinkChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
+        private void Map_LinkChanged(object sender, C2.Core.PropertyChangedEventArgs e)
         {
             if (e.HasChanges(ChangeTypes.Layout))
                 UpdateView(e.Changes);

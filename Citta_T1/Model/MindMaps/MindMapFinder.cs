@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Text.RegularExpressions;
-using Citta_T1.Core.Documents;
-using Citta_T1.Model;
+using C2.Core.Documents;
+using C2.Model;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     public class MindMapFinder
     {

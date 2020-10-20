@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Citta_T1.Controls.OS
+namespace C2.Controls.OS
 {
     public static class Shell32
     {

@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.ChartPageView
+﻿namespace C2.ChartPageView
 {
     partial class FreeDiagramChartPage
     {

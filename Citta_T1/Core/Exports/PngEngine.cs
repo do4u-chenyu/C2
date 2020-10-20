@@ -3,11 +3,11 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
-using Citta_T1.Controls;
-using Citta_T1.Globalization;
+using C2.Configuration;
+using C2.Controls;
+using C2.Globalization;
 
-namespace Citta_T1.Core.Exports
+namespace C2.Core.Exports
 {
     class PngEngine : ImageExportEngine
     {
@@ -15,7 +15,7 @@ namespace Citta_T1.Core.Exports
         class PngExportOptions
         {
             [DefaultValue(true), LocalDisplayName("Transparent Background")]
-            [TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
+            [TypeConverter(typeof(C2.Design.BoolConverter))]
             public bool TransparentBackground { get; set; }
         }
 

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Configuration;
-using Citta_T1.Core;
-using Citta_T1.Core.Documents;
-using Citta_T1.Globalization;
+using C2.Configuration;
+using C2.Core;
+using C2.Core.Documents;
+using C2.Globalization;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     public class ChartThemeManage
     {

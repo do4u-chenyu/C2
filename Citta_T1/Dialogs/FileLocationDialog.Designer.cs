@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Dialogs
+﻿namespace C2.Dialogs
 {
     partial class FileLocationDialog
     {
@@ -30,7 +30,7 @@
         {
             this.BtnClose = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new Citta_T1.Controls.IconBox();
+            this.pictureBox1 = new C2.Controls.IconBox();
             this.BtnOpen = new System.Windows.Forms.Button();
             this.BtnOpenFolder = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -109,7 +109,7 @@
 
         private System.Windows.Forms.Button BtnClose;
         private System.Windows.Forms.TextBox textBox1;
-        private Citta_T1.Controls.IconBox pictureBox1;
+        private C2.Controls.IconBox pictureBox1;
         private System.Windows.Forms.Button BtnOpen;
         private System.Windows.Forms.Button BtnOpenFolder;
     }

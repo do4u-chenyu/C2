@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Citta_T1.Core;
-using Citta_T1.ChartControls.FillTypes;
+using C2.Core;
+using C2.ChartControls.FillTypes;
 
-namespace Citta_T1.Design
+namespace C2.Design
 {
     class FillTypeEditor : ListEditor<string>
     {

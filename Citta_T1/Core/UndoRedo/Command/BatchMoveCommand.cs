@@ -1,9 +1,9 @@
-﻿using Citta_T1.Business.Model.World;
+﻿using C2.Business.Model.World;
 using System.Collections.Generic;
 using System.Drawing;
 
 
-namespace Citta_T1.Core.UndoRedo.Command
+namespace C2.Core.UndoRedo.Command
 {
     class BatchMoveCommand : BaseCommand
     {

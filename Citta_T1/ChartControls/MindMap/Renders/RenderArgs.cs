@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Printing;
-using Citta_T1.Canvas;
-using Citta_T1.Canvas.GdiPlus;
-using Citta_T1.Configuration;
-using Citta_T1.Core;
-using Citta_T1.Model.MindMaps;
+using C2.Canvas;
+using C2.Canvas.GdiPlus;
+using C2.Configuration;
+using C2.Core;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     public class RenderArgs
     {

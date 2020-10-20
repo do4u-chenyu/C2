@@ -2,13 +2,13 @@
 using System.Drawing;
 using System.IO;
 using System.Xml;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public class UIColorTheme
     {
-        const string FileType = "Citta_T1-ui-theme";
+        const string FileType = "C2-ui-theme";
 
         public UIColorTheme()
         {

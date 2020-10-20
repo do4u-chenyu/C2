@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Citta_T1.Model;
+using C2.Model;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class ImageLibraryListBox : CellListBox<Picture>
     {

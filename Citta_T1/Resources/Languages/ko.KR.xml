@@ -286,7 +286,7 @@
     <item name="The same filename already exists. Do you want to replace it?">동일한 파일명이 존재합니다. 대체하기 원하십니까?</item>
     <item name="Save tabs">탭들을 저장하기</item>
     <item name="Do not ask me again">다시는 못지 않습니다.</item>
-    <item name="Do you want Citta_T1 save tabs and open them next startup?">블루마인드가 탭을 저장하고 시작할때 열기 원하십니까?</item>
+    <item name="Do you want C2 save tabs and open them next startup?">블루마인드가 탭을 저장하고 시작할때 열기 원하십니까?</item>
     <item name="Format Painter Description">토픽의 포맷을 복사하고 다른 곳에 적용합니다. 
 여러 개의 토픽에 적용하고 싶으신 경우 이 버튼을 더블클릭 하세요.</item>
     <item name="There is a new version available">새버전 {0) 이 존재합니다.</item>

@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Citta_T1.Controls;
+using C2.Controls;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
     partial class FileLocationDialog : BaseDialog
     {

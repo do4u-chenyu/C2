@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Configuration.Formaters
+namespace C2.Configuration.Formaters
 {
     class FontFormater : IObjectFormater
     {

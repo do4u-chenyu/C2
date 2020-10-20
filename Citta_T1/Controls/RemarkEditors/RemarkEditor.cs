@@ -5,12 +5,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
-using Citta_T1.Dialogs;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
+using C2.Configuration;
+using C2.Dialogs;
+using C2.Globalization;
+using C2.Model;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class RemarkEditor : ModifyControl
     {

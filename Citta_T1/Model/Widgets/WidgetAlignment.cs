@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Text;
-using Citta_T1.Core;
-using Citta_T1.Design;
-using Citta_T1.Globalization;
+using C2.Core;
+using C2.Design;
+using C2.Globalization;
 
-namespace Citta_T1.Model.Widgets
+namespace C2.Model.Widgets
 {
     [Serializable]
     [Editor(typeof(EnumEditor<WidgetAlignment>), typeof(UITypeEditor))]

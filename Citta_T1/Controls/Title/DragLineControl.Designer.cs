@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Controls.Title
+﻿namespace C2.Controls.Title
 {
     partial class DragLineControl
     {

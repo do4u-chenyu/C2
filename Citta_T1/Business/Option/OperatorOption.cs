@@ -1,11 +1,11 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Controls.Move.Op;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Citta_T1.Business.Option
+namespace C2.Business.Option
 {
 
     public class RegisterInfo

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Flow
+namespace C2.Controls.Flow
 {
     public delegate void RemarkChangeEventHandler(RemarkControl ct);
     public partial class RemarkControl : UserControl

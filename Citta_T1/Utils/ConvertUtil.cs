@@ -3,7 +3,7 @@ using System;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Citta_T1.Utils
+namespace C2.Utils
 {
     class ConvertUtil
     {

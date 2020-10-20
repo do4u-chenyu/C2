@@ -1,9 +1,9 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Interface;
-using Citta_T1.Core;
-using Citta_T1.Core.UndoRedo;
-using Citta_T1.Core.UndoRedo.Command;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Controls.Interface;
+using C2.Core;
+using C2.Core.UndoRedo;
+using C2.Core.UndoRedo.Command;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +11,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 
-namespace Citta_T1.Controls.Move.Dt
+namespace C2.Controls.Move.Dt
 {
     public partial class MoveDtControl : MoveBaseControl, IMoveControl
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Citta_T1.ChartPageView
+namespace C2.ChartPageView
 {
     public class NeedShowPropertyEventArgs : EventArgs
     {

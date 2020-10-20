@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Citta_T1.Model.Widgets;
+using C2.Model.Widgets;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     class EditWidgetCommand : Command
     {

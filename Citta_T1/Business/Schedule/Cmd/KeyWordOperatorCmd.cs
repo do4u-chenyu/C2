@@ -1,12 +1,12 @@
-﻿using Citta_T1.OperatorViews;
-using Citta_T1.Utils;
+﻿using C2.OperatorViews;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Citta_T1.Business.Schedule.Cmd
+namespace C2.Business.Schedule.Cmd
 {
     class KeywordOperatorCmd : OperatorCmd
     {

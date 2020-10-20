@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     interface IIconProvider
     {

@@ -1,7 +1,7 @@
-﻿using Citta_T1.Model;
-using Citta_T1.Model.Documents;
+﻿using C2.Model;
+using C2.Model.Documents;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     public abstract class Command
     {

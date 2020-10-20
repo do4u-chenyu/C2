@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.IAOLab.PythonOP
+﻿namespace C2.IAOLab.PythonOP
 {
     partial class PythonOperatorHelper
     {
@@ -173,7 +173,7 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.BackgroundImage = global::Citta_T1.Properties.Resources.pythonHelper3;
+            this.pictureBox3.BackgroundImage = global::C2.Properties.Resources.pythonHelper3;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox3.Location = new System.Drawing.Point(211, 63);
             this.pictureBox3.Name = "pictureBox3";
@@ -196,7 +196,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackgroundImage = global::Citta_T1.Properties.Resources.pythonHelper2;
+            this.pictureBox2.BackgroundImage = global::C2.Properties.Resources.pythonHelper2;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Location = new System.Drawing.Point(94, 258);
             this.pictureBox2.Name = "pictureBox2";
@@ -245,7 +245,7 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.BackgroundImage = global::Citta_T1.Properties.Resources.pythonHelper4;
+            this.pictureBox4.BackgroundImage = global::C2.Properties.Resources.pythonHelper4;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox4.Location = new System.Drawing.Point(148, 46);
             this.pictureBox4.Name = "pictureBox4";
@@ -318,7 +318,7 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.BackgroundImage = global::Citta_T1.Properties.Resources.pythonHelper5;
+            this.pictureBox5.BackgroundImage = global::C2.Properties.Resources.pythonHelper5;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox5.Location = new System.Drawing.Point(16, 151);
             this.pictureBox5.Name = "pictureBox5";

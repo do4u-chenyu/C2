@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace Citta_T1.Canvas.Svg
+namespace C2.Canvas.Svg
 {
     class SvgGraphicsState : IGraphicsState
     {

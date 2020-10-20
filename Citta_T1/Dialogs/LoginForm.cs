@@ -1,10 +1,10 @@
-﻿using Citta_T1.Business;
+﻿using C2.Business;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Citta_T1.Utils;
+using C2.Utils;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
     public partial class LoginForm : Form
     {

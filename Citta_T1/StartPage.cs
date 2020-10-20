@@ -7,12 +7,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Configuration;
+using C2.Controls;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1
+namespace C2
 {
     class StartPage : BaseForm
     {

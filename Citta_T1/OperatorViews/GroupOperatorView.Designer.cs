@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.OperatorViews
+﻿namespace C2.OperatorViews
 {
     partial class GroupOperatorView
     {
@@ -265,7 +265,7 @@
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::Citta_T1.Properties.Resources.add;
+            this.button1.Image = global::C2.Properties.Resources.add;
             this.button1.Location = new System.Drawing.Point(140, 4);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";

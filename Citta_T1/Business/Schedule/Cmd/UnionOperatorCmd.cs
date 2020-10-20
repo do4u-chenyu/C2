@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Citta_T1.Business.Schedule.Cmd
+namespace C2.Business.Schedule.Cmd
 {
     class UnionOperatorCmd : OperatorCmd
     {

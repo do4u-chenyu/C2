@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Dialogs
+﻿namespace C2.Dialogs
 {
     partial class TimerDialog
     {
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.BtnReset = new Citta_T1.Controls.PushButton();
-            this.BtnStartStop = new Citta_T1.Controls.PushButton();
+            this.BtnReset = new C2.Controls.PushButton();
+            this.BtnStartStop = new C2.Controls.PushButton();
             this.NudHour = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.LabHours = new System.Windows.Forms.Label();

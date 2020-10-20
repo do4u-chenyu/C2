@@ -1,11 +1,11 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Core;
+using C2.Utils;
 using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Left
+namespace C2.Controls.Left
 {
     public partial class ModelButton : UserControl
     {
@@ -155,7 +155,7 @@ namespace Citta_T1.Controls.Left
 
         private void ExportModelButton_Click(object sender, EventArgs e)
         {
-            Citta_T1.Business.Model.ExportModel.GetInstance().Export(this.FullFilePath);
+            C2.Business.Model.ExportModel.GetInstance().Export(this.FullFilePath);
         }
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)

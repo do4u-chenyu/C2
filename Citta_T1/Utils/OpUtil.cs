@@ -1,6 +1,6 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Common;
-using Citta_T1.Core;
+﻿using C2.Business.Model;
+using C2.Controls.Common;
+using C2.Core;
 using NPOI.SS.Formula;
 using NPOI.SS.Formula.Functions;
 using System;
@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Utils
+namespace C2.Utils
 {
     public class OpUtil
     {

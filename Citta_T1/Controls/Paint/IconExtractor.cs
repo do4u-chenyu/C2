@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public static class IconExtractor
     {
@@ -193,7 +193,7 @@ namespace Citta_T1.Controls
             Bitmap icon = null;
             if (!string.IsNullOrEmpty(extension))
             {
-                string tempFile = Path.Combine(Path.GetTempPath(), string.Format("Citta_T1_test{0}", extension));
+                string tempFile = Path.Combine(Path.GetTempPath(), string.Format("C2_test{0}", extension));
                 try
                 {
                     if (!File.Exists(tempFile))

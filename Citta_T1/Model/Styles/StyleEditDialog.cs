@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
-using Citta_T1.Controls;
-using Citta_T1.Globalization;
+using C2.Controls;
+using C2.Globalization;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     class StyleEditDialog : PropertyDialog
     {

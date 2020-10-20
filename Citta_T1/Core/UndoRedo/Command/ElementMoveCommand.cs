@@ -1,8 +1,8 @@
-﻿using Citta_T1.Business.Model;
+﻿using C2.Business.Model;
 using System.Drawing;
 
 
-namespace Citta_T1.Core.UndoRedo.Command
+namespace C2.Core.UndoRedo.Command
 {
     class ElementMoveCommand : BaseCommand
     {

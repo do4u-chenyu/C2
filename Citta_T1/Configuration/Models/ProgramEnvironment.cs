@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Citta_T1.Configuration
+namespace C2.Configuration
 {
     /// <summary>
     ///    程序配置文件位置原则
@@ -51,7 +51,7 @@ namespace Citta_T1.Configuration
                     return Application.StartupPath;
                 case ProgramRunMode.Standard:
                 default:
-                    return Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Citta_T1");
+                    return Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "C2");
             }
         }
 

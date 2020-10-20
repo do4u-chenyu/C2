@@ -1,11 +1,11 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Core;
+﻿using C2.Business.Model;
+using C2.Core;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace Citta_T1.Utils
+namespace C2.Utils
 {
     public static class MyPens
     {

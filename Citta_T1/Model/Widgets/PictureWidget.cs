@@ -4,14 +4,14 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Canvas;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model.MindMaps;
+using C2.Canvas;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Globalization;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Model.Widgets
+namespace C2.Model.Widgets
 {
     public enum PictureSource
     {
@@ -141,7 +141,7 @@ namespace Citta_T1.Model.Widgets
         }
 
         [DefaultValue(false), LocalDisplayName("Embed In"), LocalCategory("Data")]
-        [TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
+        [TypeConverter(typeof(C2.Design.BoolConverter))]
         public bool EmbedIn
         {
             get { return _EmbedIn; }
@@ -476,7 +476,7 @@ namespace Citta_T1.Model.Widgets
 
             if (image != null)
             {
-                var dialog = new Citta_T1.Dialogs.PictureViewDialog(image);
+                var dialog = new C2.Dialogs.PictureViewDialog(image);
                 dialog.ImageName = this.Text;
                 dialog.ShowDialog();
             }
@@ -504,7 +504,7 @@ namespace Citta_T1.Model.Widgets
             }
         }
 
-        [Editor(typeof(Citta_T1.Design.PictureEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(C2.Design.PictureEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public class PictureDesign
         {
             public PictureDesign()

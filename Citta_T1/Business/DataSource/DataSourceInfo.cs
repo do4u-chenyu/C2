@@ -1,12 +1,12 @@
-﻿using Citta_T1.Controls.Left;
-using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Controls.Left;
+using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
-namespace Citta_T1.Business.DataSource
+namespace C2.Business.DataSource
 {
     class DataSourceInfo
     {

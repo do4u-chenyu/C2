@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Globalization
+namespace C2.Globalization
 {
     public static class Lang
     {

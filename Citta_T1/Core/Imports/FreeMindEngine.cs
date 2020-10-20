@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.MindMaps;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Core.Imports
+namespace C2.Core.Imports
 {
     class FreeMindEngine : DocumentImportEngine
     {

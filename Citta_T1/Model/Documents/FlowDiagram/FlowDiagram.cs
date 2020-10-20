@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
-using Citta_T1.Model.Styles;
+using C2.Model.Styles;
 
-namespace Citta_T1.Model.Documents
+namespace C2.Model.Documents
 {
     class FlowDiagram : ChartPage
     {

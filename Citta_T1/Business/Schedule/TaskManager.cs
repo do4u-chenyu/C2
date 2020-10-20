@@ -1,6 +1,6 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Schedule.Cmd;
-using Citta_T1.Controls.Move.Op;
+﻿using C2.Business.Model;
+using C2.Business.Schedule.Cmd;
+using C2.Controls.Move.Op;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Citta_T1.Business.Schedule
+namespace C2.Business.Schedule
 {
     public enum ModelStatus
     {

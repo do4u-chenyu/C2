@@ -2,11 +2,11 @@
 using System.ComponentModel;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Controls;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1
+namespace C2
 {
     partial class PrintPreviewDialog : BaseForm
     {
@@ -39,7 +39,7 @@ namespace Citta_T1
         }
 
         [Browsable(false)]
-        public Citta_T1.Controls.PrintPreviewControl PrintPreviewControl
+        public C2.Controls.PrintPreviewControl PrintPreviewControl
         {
             get
             {

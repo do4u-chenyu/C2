@@ -4,9 +4,9 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Citta_T1.Model.Documents;
+using C2.Model.Documents;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class FileThumbItem : ThumbItem
     {

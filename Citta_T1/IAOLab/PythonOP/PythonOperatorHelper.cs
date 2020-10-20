@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1.IAOLab.PythonOP
+namespace C2.IAOLab.PythonOP
 {
     public partial class PythonOperatorHelper : Form
     {

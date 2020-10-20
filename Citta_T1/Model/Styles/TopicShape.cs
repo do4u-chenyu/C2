@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Drawing.Design;
-using Citta_T1.Design;
+using C2.Design;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     [Editor(typeof(TopicShapeEditor), typeof(UITypeEditor))]
     [TypeConverter(typeof(TopicShapeConverter))]

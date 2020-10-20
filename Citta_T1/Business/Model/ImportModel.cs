@@ -1,6 +1,6 @@
-﻿using Citta_T1.Controls.Left;
-using Citta_T1.Controls.Title;
-using Citta_T1.Core;
+﻿using C2.Controls.Left;
+using C2.Controls.Title;
+using C2.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace Citta_T1.Business.Model
+namespace C2.Business.Model
 {
     public class ImportModel
     {

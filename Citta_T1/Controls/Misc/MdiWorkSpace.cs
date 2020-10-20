@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Citta_T1.Controls.OS;
+using C2.Controls.OS;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public class MdiWorkSpace : BaseControl
     {

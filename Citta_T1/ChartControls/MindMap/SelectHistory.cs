@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Citta_T1.Core;
+using C2.Core;
 using System;
-using Citta_T1.Model;
+using C2.Model;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     class SelectHistory
     {

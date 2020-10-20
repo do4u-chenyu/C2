@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     class ChartTooltipLayer : ChartLayer
     {

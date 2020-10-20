@@ -288,7 +288,7 @@
     <item name="The format is not supported">不被支援的格式</item>
     <item name="No Pages">無頁面</item>
     <item name="Exception Occurs">發生異常</item>
-    <item name="Document File">Citta_T1 心智圖案</item>
+    <item name="Document File">C2 心智圖案</item>
     <item name="All Support Formats">所有支援的格式</item>
     <item name="All Image Files">所有圖片</item>
     <item name="All Files">所有檔案</item>
@@ -296,13 +296,13 @@
     <item name="The same filename already exists. Do you want to replace it?">相同的檔案名稱已存在. 是否要取代它?</item>
     <item name="Save tabs">儲存分頁</item>
     <item name="Do not ask me again">別再詢問我</item>
-    <item name="Do you want Citta_T1 save tabs and open them next startup?">您是否希望 Citta_T1 記住目前開啟的分頁，並在下次啟動時開啟它們？</item>
+    <item name="Do you want C2 save tabs and open them next startup?">您是否希望 C2 記住目前開啟的分頁，並在下次啟動時開啟它們？</item>
     <item name="Format Painter Description">複製一個主題格式，並其套用至另一個主題。雙擊此可將相同格式套用至檔案中的多個主題。</item>
     <item name="Checking">正在檢查…</item>
     <item name="There is a new version available">新版本 "{0}" 可以更新</item>
     <item name="Your current version is the latest">您的版本已經是最新的了</item>
     <item name="Invalid URL">無效的網址</item>
-    <item name="Unable to connect to the remote server, please visit our website.">無法連接到遠端伺服器，請拜訪我們的網站 (http://www.Citta_T1.org)</item>
+    <item name="Unable to connect to the remote server, please visit our website.">無法連接到遠端伺服器，請拜訪我們的網站 (http://www.C2.org)</item>
     <item name="Please input Url below">請在下面輸入網址</item>
     
     <item name="Save Recent Files">儲存最近使用的檔案</item>

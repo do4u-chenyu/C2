@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Citta_T1.Core.UndoRedo
+namespace C2.Core.UndoRedo
 {
     // 固定大小的操作堆栈
     // 要自行判断堆栈是否为空

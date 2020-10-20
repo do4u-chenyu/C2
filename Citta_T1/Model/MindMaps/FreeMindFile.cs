@@ -4,13 +4,13 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Canvas;
-using Citta_T1.Controls.Paint;
-using Citta_T1.Core;
-using Citta_T1.Model;
-using Citta_T1.Model.Documents;
+using C2.Canvas;
+using C2.Controls.Paint;
+using C2.Core;
+using C2.Model;
+using C2.Model.Documents;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     class FreeMindFile
     {
@@ -201,7 +201,7 @@ namespace Citta_T1.Model.MindMaps
 
             XmlElement root = dom.CreateElement("map");
             root.SetAttribute("version", "0.9.0");
-            root.AppendChild(dom.CreateComment(@"Export from the Citta_T1, download free mind mapping software Citta_T1 from http://www.Citta_T1.org"));
+            root.AppendChild(dom.CreateComment(@"Export from the C2, download free mind mapping software C2 from http://www.C2.org"));
             root.AppendChild(dom.CreateComment(@"To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net"));
             dom.AppendChild(root);
             SaveMindMap(root, mindMap.Root, mindMap);
@@ -231,9 +231,9 @@ namespace Citta_T1.Model.MindMaps
             if (!string.IsNullOrEmpty(topic.ID))
                 node.SetAttribute("ID", topic.ID);
             
-            if (topic.Vector == Citta_T1.Controls.Vector4.Left)
+            if (topic.Vector == C2.Controls.Vector4.Left)
                 node.SetAttribute("POSITION", "left");
-            else if (topic.Vector == Citta_T1.Controls.Vector4.Right)
+            else if (topic.Vector == C2.Controls.Vector4.Right)
                 node.SetAttribute("POSITION", "right");
 
             node.SetAttribute("TEXT", topic.Text);

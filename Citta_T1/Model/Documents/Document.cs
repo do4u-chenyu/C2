@@ -5,12 +5,12 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Printing;
 using System.Text;
-using Citta_T1.Configuration;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Configuration;
+using C2.Controls;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Model.Documents
+namespace C2.Model.Documents
 {
     public partial class Document : ModifyObject
     {
@@ -195,7 +195,7 @@ namespace Citta_T1.Model.Documents
             PrintDocument doc = new PrintDocument();
 
             var ps = doc.DefaultPageSettings;
-            ps.Landscape = Options.Current.GetBool(Citta_T1.Configuration.OptionNames.PageSettigs.Landscape, true);
+            ps.Landscape = Options.Current.GetBool(C2.Configuration.OptionNames.PageSettigs.Landscape, true);
             //ps.Margins = new Margins(Margins.Left, Margins.Right, Margins.Top, Margins.Bottom);
 
             //_Options.Current.PageSettigs.Assign(doc.DefaultPageSettings);

@@ -3,10 +3,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using Citta_T1.Controls.OS;
-using Citta_T1.Core;
+using C2.Controls.OS;
+using C2.Core;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     public class TopicEditControl : Control
     {

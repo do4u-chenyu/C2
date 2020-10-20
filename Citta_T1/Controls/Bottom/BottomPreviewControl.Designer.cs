@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Citta_T1.Utils;
+using C2.Utils;
 
-namespace Citta_T1.Controls.Bottom
+namespace C2.Controls.Bottom
 {
     partial class BottomPreviewControl
     {

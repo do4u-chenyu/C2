@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Citta_T1.Model;
+using C2.Model;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     public class ChartObjectPropertyEventArgs : EventArgs
     {

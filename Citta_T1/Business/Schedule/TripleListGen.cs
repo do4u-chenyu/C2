@@ -1,8 +1,8 @@
-﻿using Citta_T1.Business.Model;
+﻿using C2.Business.Model;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Citta_T1.Business.Schedule
+namespace C2.Business.Schedule
 {
     /// <summary>
     /// 三元组生成类

@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing;
 using System.IO;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     static class UIColorThemeManage
     {
@@ -54,7 +54,7 @@ namespace Citta_T1.Controls
         {
             AllThemes.Clear();
 
-            string path = Citta_T1.Configuration.ProgramEnvironment.UIThemesDirectory;
+            string path = C2.Configuration.ProgramEnvironment.UIThemesDirectory;
             if (Directory.Exists(path))
             {
                 var files = Directory.GetFiles(path, string.Format("*{0}", ColorThemeFileExtension));

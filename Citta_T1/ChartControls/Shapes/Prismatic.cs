@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using Citta_T1.Canvas;
-using Citta_T1.ChartControls.Shapes;
+using C2.Canvas;
+using C2.ChartControls.Shapes;
 
-namespace Citta_T1.ChartControls.Shapes
+namespace C2.ChartControls.Shapes
 {
     class Prismatic : Shape
     {

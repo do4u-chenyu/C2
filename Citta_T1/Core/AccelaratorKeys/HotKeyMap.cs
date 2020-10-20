@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Collections;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     [DefaultEvent("KeyDown")]
     class HotKeyMap : Component, IMessageFilter, IDisposable

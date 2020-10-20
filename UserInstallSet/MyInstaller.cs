@@ -64,7 +64,7 @@ namespace UserInstallSet
         public void ConfigWrite(string str)
         {
             string configPath = this.Context.Parameters["targetdir"];
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(configPath + @"Citta_T1.exe.config", false))
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(configPath + @"C2.exe.config", false))
             {
                 sw.WriteLine(String.Format(configText, str));
             }

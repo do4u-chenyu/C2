@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Controls.Title
+﻿namespace C2.Controls.Title
 {
     partial class ModelTitleControl
     {
@@ -56,7 +56,7 @@
             // closePictureBox
             // 
             this.closePictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.closePictureBox.Image = global::Citta_T1.Properties.Resources.close;
+            this.closePictureBox.Image = global::C2.Properties.Resources.close;
             this.closePictureBox.Location = new System.Drawing.Point(0, 0);
             this.closePictureBox.Name = "closePictureBox";
             this.closePictureBox.Size = new System.Drawing.Size(14, 26);

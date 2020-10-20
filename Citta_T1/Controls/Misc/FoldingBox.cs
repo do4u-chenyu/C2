@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     [DefaultEvent("FoldedChanged")]
     class FoldingBox : ContainerControl

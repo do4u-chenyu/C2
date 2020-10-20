@@ -1,15 +1,15 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Model.World;
-using Citta_T1.Business.Schedule;
-using Citta_T1.Controls.Interface;
-using Citta_T1.Controls.Move;
-using Citta_T1.Controls.Move.Dt;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Controls.Move.Rs;
-using Citta_T1.Core;
-using Citta_T1.Core.UndoRedo;
-using Citta_T1.Core.UndoRedo.Command;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Business.Model.World;
+using C2.Business.Schedule;
+using C2.Controls.Interface;
+using C2.Controls.Move;
+using C2.Controls.Move.Dt;
+using C2.Controls.Move.Op;
+using C2.Controls.Move.Rs;
+using C2.Core;
+using C2.Core.UndoRedo;
+using C2.Core.UndoRedo.Command;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,7 +17,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public delegate void NewElementEventHandler(MoveBaseControl ct);
 
@@ -129,6 +129,9 @@ namespace Citta_T1.Controls
             {
                 return;
             }
+            // C2不允许数据拖到Canvas
+            if (type == ElementType.DataSource)
+                return;
             float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             int locX = Convert.ToInt32(e.X / screenFactor);
             int locY = Convert.ToInt32(e.Y / screenFactor);
@@ -138,16 +141,9 @@ namespace Citta_T1.Controls
             Point location = Global.GetMainForm().PointToClient(new Point(locX - dx, locY - dy));
             string text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
-            if (type == ElementType.DataSource)
-            {
-                string path = e.Data.GetData("Path").ToString();
-                char separator = (char)e.Data.GetData("Separator");
-                OpUtil.Encoding encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
-                OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
-                AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
-            }
-            else if (type == ElementType.Operator)
-                AddNewOperator(sizeLevel, text,text, location);
+
+            if (type == ElementType.Operator)
+                AddNewOperator(sizeLevel, text, text, location);
             
 
         }

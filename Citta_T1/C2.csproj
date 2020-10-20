@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6FE47E67-232B-4A47-B905-8385DEAF2A95}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Citta_T1</RootNamespace>
-    <AssemblyName>Citta_T1</AssemblyName>
+    <RootNamespace>C2</RootNamespace>
+    <AssemblyName>C2</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -575,6 +575,12 @@
     </Compile>
     <Compile Include="Controls\Title\RightModelTitleControl.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Title\StartPageTitle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Title\StartPageTitle.Designer.cs">
+      <DependentUpon>StartPageTitle.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToolStrips\ToolStripExtensions.cs" />
     <Compile Include="Controls\ToolStrips\ToolStripNumericUpDown.cs">
@@ -1270,6 +1276,9 @@
     <EmbeddedResource Include="Controls\Title\RightModelTitleControl.resx">
       <DependentUpon>RightModelTitleControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Title\StartPageTitle.resx">
+      <DependentUpon>StartPageTitle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Top\TopToolBarControl.resx">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1858,6 +1867,7 @@
     <None Include="Resources\keyboard1.png" />
     <None Include="Resources\languages1.png" />
     <None Include="Resources\keyboard.ico" />
+    <None Include="Resources\importDataSource.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -2190,6 +2200,9 @@
     <None Include="res\toolbox\continual.png" />
     <None Include="res\modeltitlepanel\u700.png" />
     <None Include="res\toolbox\importmodel.png" />
+    <Content Include="res\leftpanelmenu\startPageTitle.jpg" />
+    <Content Include="res\leftpanelmenu\startPageTitle_1.jpg" />
+    <Content Include="res\leftpanelmenu\startPageTitle_gray.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

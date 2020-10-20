@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public class TabItemPaintEventArgs : PaintEventArgs
     {

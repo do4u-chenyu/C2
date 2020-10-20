@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Title
+namespace C2.Controls.Title
 {
     class RightModelTitleControl:UserControl
     {
@@ -15,7 +15,7 @@ namespace Citta_T1.Controls.Title
             // 
             // RightModelTitleControl
             // 
-            this.BackgroundImage = global::Citta_T1.Properties.Resources.u700;
+            this.BackgroundImage = global::C2.Properties.Resources.u700;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.DoubleBuffered = true;
             this.Name = "RightModelTitleControl";

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class ListBoxControlItem<T>
     {

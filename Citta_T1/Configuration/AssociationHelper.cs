@@ -9,11 +9,11 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Core;
-using Citta_T1.Model.Documents;
+using C2.Core;
+using C2.Model.Documents;
 using Microsoft.Win32;
 
-namespace Citta_T1.Configuration
+namespace C2.Configuration
 {
     static class AssociationHelper
     {
@@ -21,8 +21,8 @@ namespace Citta_T1.Configuration
         const string ARG_UNREG_BMD = "-unregbmd";
 
         const string DOC_TYPE_BMD_EXT = Document.Extension;
-        const string DOC_TYPE_BMD_NAME = "Citta_T1.MindMap";
-        const string DOC_TYPE_BMD_DESC = "Citta_T1 Mind Map Document";
+        const string DOC_TYPE_BMD_NAME = "C2.MindMap";
+        const string DOC_TYPE_BMD_DESC = "C2 Mind Map Document";
 
         public static bool TestBmdAssociation()
         {

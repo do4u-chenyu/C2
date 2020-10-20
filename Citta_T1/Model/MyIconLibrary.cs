@@ -2,9 +2,9 @@
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
+using C2.Configuration;
 
-namespace Citta_T1.Model
+namespace C2.Model
 {
     class MyIconLibrary : PictureLibrary
     {

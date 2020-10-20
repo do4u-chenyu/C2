@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Model
+namespace C2.Model
 {
     interface IChartControl
     {

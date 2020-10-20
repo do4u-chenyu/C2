@@ -4,23 +4,23 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Xml;
-using Citta_T1.Canvas;
-using Citta_T1.ChartControls.Shapes;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Controls.Paint;
-using Citta_T1.Core;
-using Citta_T1.Design;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
-using Citta_T1.Model.Documents;
+using C2.Canvas;
+using C2.ChartControls.Shapes;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Controls.Paint;
+using C2.Core;
+using C2.Design;
+using C2.Globalization;
+using C2.Model;
+using C2.Model.Documents;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     public class Link : ChartObject
         , ITextObject
         , IHyperlink
-        , Citta_T1.Core.INotifyPropertyChanged
+        , C2.Core.INotifyPropertyChanged
         //, IColorToolTip
     {
         //string _FromID;
@@ -252,7 +252,7 @@ namespace Citta_T1.Model.MindMaps
         private string _Hyperlink = null;
 
         [DefaultValue(null), LocalDisplayName("Hyperlink"), LocalCategory("Data")]
-        [Editor(typeof(Citta_T1.Design.HyperlinkEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(C2.Design.HyperlinkEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string Hyperlink
         {
             get
@@ -449,7 +449,7 @@ namespace Citta_T1.Model.MindMaps
 
         public void SetChanged()
         {
-            Citta_T1.Core.PropertyChangedEventArgs e = new Citta_T1.Core.PropertyChangedEventArgs(null, null, null, ChangeTypes.All, false);
+            C2.Core.PropertyChangedEventArgs e = new C2.Core.PropertyChangedEventArgs(null, null, null, ChangeTypes.All, false);
             OnPropertyChanged(e);
         }
 

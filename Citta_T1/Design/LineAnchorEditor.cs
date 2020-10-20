@@ -4,13 +4,13 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using Citta_T1.Canvas;
-using Citta_T1.Canvas.GdiPlus;
-using Citta_T1.Controls;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Canvas;
+using C2.Canvas.GdiPlus;
+using C2.Controls;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Design
+namespace C2.Design
 {
     class LineAnchorEditor : ListEditor<LineAnchor>
     {

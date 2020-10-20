@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class SelectionLayer : ChartLayer
     {

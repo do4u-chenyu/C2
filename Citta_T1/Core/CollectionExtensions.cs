@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     delegate bool EqualityComparison<T>(T x, T y);
 

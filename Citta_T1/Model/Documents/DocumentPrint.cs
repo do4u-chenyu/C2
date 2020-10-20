@@ -4,13 +4,13 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
-using Citta_T1.Configuration;
-using Citta_T1.Controls;
-using Citta_T1.Controls.MapViews;
-using Citta_T1.Core;
-using Citta_T1.Model.MindMaps;
+using C2.Configuration;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Model.Documents
+namespace C2.Model.Documents
 {
     class DocumentPrint
     {
@@ -68,7 +68,7 @@ namespace Citta_T1.Model.Documents
                 e.Graphics.Restore(state);
 
                 // print document title
-                if (Options.Current.GetBool(Citta_T1.Configuration.OptionNames.PageSettigs.PrintDocumentTitle))
+                if (Options.Current.GetBool(C2.Configuration.OptionNames.PageSettigs.PrintDocumentTitle))
                 {
                     var ptTitle = e.MarginBounds.Location;
                     var brush = new SolidBrush(Color.Black);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     public enum MoveVector
     {

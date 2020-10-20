@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     [DefaultEvent("ValueChanged")]
     public class ToolStripNumericUpDown : ToolStripControlHost

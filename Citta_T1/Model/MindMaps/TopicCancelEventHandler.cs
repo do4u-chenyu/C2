@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     public delegate void TopicCancelEventHandler(object sender, TopicCancelEventArgs e);
 

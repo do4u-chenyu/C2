@@ -5,9 +5,9 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Canvas.Svg
+namespace C2.Canvas.Svg
 {
     abstract class SvgBrush : IBrush
     {

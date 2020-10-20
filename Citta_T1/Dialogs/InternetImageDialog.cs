@@ -4,14 +4,14 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Configuration;
-using Citta_T1.Controls;
-using Citta_T1.Globalization;
-using Citta_T1.Model;
-using Citta_T1.Model.Widgets;
-using Citta_T1.Resources;
+using C2.Configuration;
+using C2.Controls;
+using C2.Globalization;
+using C2.Model;
+using C2.Model.Widgets;
+using C2.Resources;
 
-namespace Citta_T1.Dialogs
+namespace C2.Dialogs
 {
     partial class InternetImageDialog : StandardDialog
     {
@@ -28,7 +28,7 @@ namespace Citta_T1.Dialogs
             LabInfo.Text = string.Empty;
             MinimumSize = Size;
             this.SetFontNotScale(SystemFonts.MessageBoxFont);
-            ImageEmbedIn = Options.Current.GetBool(Citta_T1.Configuration.OptionNames.Miscellaneous.WebImageEmbedIn);
+            ImageEmbedIn = Options.Current.GetBool(C2.Configuration.OptionNames.Miscellaneous.WebImageEmbedIn);
 
             // list history
             for (int i = HistoryUrls.Count - 1; i >= 0; i--)
@@ -262,7 +262,7 @@ namespace Citta_T1.Dialogs
 
         void CkbEmbedIn_CheckedChanged(object sender, System.EventArgs e)
         {
-            Options.Current.SetValue(Citta_T1.Configuration.OptionNames.Miscellaneous.WebImageEmbedIn, CkbEmbedIn.Checked);
+            Options.Current.SetValue(C2.Configuration.OptionNames.Miscellaneous.WebImageEmbedIn, CkbEmbedIn.Checked);
         }
     }
 }

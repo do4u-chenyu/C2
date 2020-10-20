@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Citta_T1.Controls.Aero
+namespace C2.Controls.Aero
 {
     /// <summary>
     /// Event argument for The GlassAvailabilityChanged event

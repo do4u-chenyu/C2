@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Citta_T1.Controls.Paint
+namespace C2.Controls.Paint
 {
     public struct BezierControlPoint
     {

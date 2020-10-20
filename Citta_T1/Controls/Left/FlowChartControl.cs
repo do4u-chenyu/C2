@@ -1,8 +1,8 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Utils;
+﻿using C2.Business.Model;
+using C2.Utils;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Left
+namespace C2.Controls.Left
 {
     public partial class FlowChartControl : UserControl
     {

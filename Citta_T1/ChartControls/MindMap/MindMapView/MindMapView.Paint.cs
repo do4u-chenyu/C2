@@ -3,11 +3,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
-using Citta_T1.Core;
-using Citta_T1.Model;
+using C2.Configuration;
+using C2.Core;
+using C2.Model;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     public partial class MindMapView
     {
@@ -131,7 +131,7 @@ namespace Citta_T1.Controls.MapViews
                 e.Graphics.Clip = new Region(e.MarginBounds);
 
                 // print document title
-                if (Options.Current.GetBool(Citta_T1.Configuration.OptionNames.PageSettigs.PrintDocumentTitle))
+                if (Options.Current.GetBool(C2.Configuration.OptionNames.PageSettigs.PrintDocumentTitle))
                 {
                     Point ptTitle = e.MarginBounds.Location;
                     var brush = new SolidBrush(Color.Black);

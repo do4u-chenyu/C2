@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Citta_T1.Model;
+using C2.Model;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     public delegate void ChartObjectEventHandler(object sender, ChartObjectEventArgs e);
 

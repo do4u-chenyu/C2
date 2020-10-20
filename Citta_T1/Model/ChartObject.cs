@@ -6,13 +6,13 @@ using System.Drawing.Design;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
-using Citta_T1.Model.Documents;
+using C2.Core;
+using C2.Globalization;
+using C2.Model.Documents;
 
-namespace Citta_T1.Model
+namespace C2.Model
 {
-    public abstract class ChartObject : Citta_T1.Core.INotifyPropertyChanged, IRemark, Citta_T1.Model.ISerializable//, IComponent
+    public abstract class ChartObject : C2.Core.INotifyPropertyChanged, IRemark, C2.Model.ISerializable//, IComponent
     {
         ChartPage _Chart;
         string _Text;
@@ -65,8 +65,8 @@ namespace Citta_T1.Model
         }
 
         [DefaultValue(null), LocalDisplayName("Remark"), LocalCategory("Data")]
-        [Editor(typeof(Citta_T1.Design.RemarkDesignEditor), typeof(UITypeEditor))]
-        [TypeConverter(typeof(Citta_T1.Design.RemarkTypeConverter))]
+        [Editor(typeof(C2.Design.RemarkDesignEditor), typeof(UITypeEditor))]
+        [TypeConverter(typeof(C2.Design.RemarkTypeConverter))]
         public string Remark
         {
             get { return _Remark; }
@@ -114,7 +114,7 @@ namespace Citta_T1.Model
             if (string.IsNullOrEmpty(oldValue) != string.IsNullOrEmpty(Remark))
                 ct |= ChangeTypes.Layout | ChangeTypes.Visual;
 
-            OnPropertyChanged(new Citta_T1.Core.PropertyChangedEventArgs("Remark", oldValue, Remark, ct, true));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs("Remark", oldValue, Remark, ct, true));
         }
 
         protected virtual void OnTextChanged(string oldValue)
@@ -124,7 +124,7 @@ namespace Citta_T1.Model
                 TextChanged(this, EventArgs.Empty);
             }
 
-            OnPropertyChanged(new Citta_T1.Core.PropertyChangedEventArgs("Text", oldValue, Text, ChangeTypes.All, true));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs("Text", oldValue, Text, ChangeTypes.All, true));
         }
 
         protected virtual void OnChartChanged()
@@ -140,7 +140,7 @@ namespace Citta_T1.Model
         }
 
         #region Property Change
-        public event Citta_T1.Core.PropertyChangedEventHandler PropertyChanged;
+        public event C2.Core.PropertyChangedEventHandler PropertyChanged;
 
         [Browsable(false), DefaultValue(false)]
         public bool PropertyChangeSuspending { get; set; }
@@ -155,7 +155,7 @@ namespace Citta_T1.Model
             PropertyChangeSuspending = false;
         }
 
-        protected virtual void OnPropertyChanged(Citta_T1.Core.PropertyChangedEventArgs e)
+        protected virtual void OnPropertyChanged(C2.Core.PropertyChangedEventArgs e)
         {
             if (PropertyChangeSuspending)
                 return;
@@ -173,12 +173,12 @@ namespace Citta_T1.Model
 
         protected virtual void OnPropertyChanged(string propertyName, object oldValue, object newValue, ChangeTypes changes)
         {
-            OnPropertyChanged(new Citta_T1.Core.PropertyChangedEventArgs(propertyName, oldValue, newValue, changes, true));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs(propertyName, oldValue, newValue, changes, true));
         }
 
         protected virtual void OnPropertyChanged(string propertyName, object oldValue, object newValue, ChangeTypes changes, bool rollbackable)
         {
-            OnPropertyChanged(new Citta_T1.Core.PropertyChangedEventArgs(propertyName, oldValue, newValue, changes, rollbackable));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs(propertyName, oldValue, newValue, changes, rollbackable));
         }
 
         #endregion
@@ -200,7 +200,7 @@ namespace Citta_T1.Model
                     _Selected = value;
                     OnSelectedChanged();
 
-                    var e = new Citta_T1.Core.PropertyChangedEventArgs("Selected", old, _Selected, ChangeTypes.Visual, false);
+                    var e = new C2.Core.PropertyChangedEventArgs("Selected", old, _Selected, ChangeTypes.Visual, false);
                     e.Rollbackable = false;
                     OnPropertyChanged(e);
                 }

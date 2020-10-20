@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Linq;
-using Citta_T1.Core.Documents;
-using Citta_T1.Model;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.Widgets;
+using C2.Core.Documents;
+using C2.Model;
+using C2.Model.Documents;
+using C2.Model.Widgets;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     [Serializable]
     struct MapClipboardData

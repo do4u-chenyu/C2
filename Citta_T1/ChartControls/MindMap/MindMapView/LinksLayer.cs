@@ -2,14 +2,14 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using Citta_T1.Canvas;
-using Citta_T1.ChartControls.Shapes;
-using Citta_T1.Controls.Paint;
-using Citta_T1.Core;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
+using C2.Canvas;
+using C2.ChartControls.Shapes;
+using C2.Controls.Paint;
+using C2.Core;
+using C2.Model;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     class LinesLayer : ChartLayer
     {
@@ -121,7 +121,7 @@ namespace Citta_T1.Controls.MapViews
         {
             if (!old.IsEmpty)
             {
-                old.Link.PropertyChanged -= new Citta_T1.Core.PropertyChangedEventHandler(Line_Changed);
+                old.Link.PropertyChanged -= new C2.Core.PropertyChangedEventHandler(Line_Changed);
                 InvalidateLink(old.Link, true);
             }
 
@@ -130,7 +130,7 @@ namespace Citta_T1.Controls.MapViews
                 TempLayout = SelectedObject.Link.LayoutData.Clone();
                 View.Select(SelectedObject.Link);
 
-                SelectedObject.Link.PropertyChanged += new Citta_T1.Core.PropertyChangedEventHandler(Line_Changed);
+                SelectedObject.Link.PropertyChanged += new C2.Core.PropertyChangedEventHandler(Line_Changed);
                 InvalidateLink(SelectedObject.Link, true);
             }
             else
@@ -465,7 +465,7 @@ namespace Citta_T1.Controls.MapViews
             PaintHelper.DrawDot(graphics, PenLine, point, ControlHandleSize);
         }
 
-        void Line_Changed(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
+        void Line_Changed(object sender, C2.Core.PropertyChangedEventArgs e)
         {
             if (!SelectedObject.IsEmpty)
             {

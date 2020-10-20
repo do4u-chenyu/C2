@@ -1,6 +1,6 @@
-﻿using Citta_T1.Core;
-using Citta_T1.Dialogs;
-using Citta_T1.Utils;
+﻿using C2.Core;
+using C2.Dialogs;
+using C2.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace Citta_T1
+namespace C2
 {
 
     //全局类  

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Citta_T1
+namespace C2
 {
     partial class MainForm
     {
@@ -44,16 +44,16 @@ namespace Citta_T1
             this.oprateButton = new System.Windows.Forms.Button();
             this.myModelButton = new System.Windows.Forms.Button();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
-            this.operatorControl = new Citta_T1.Controls.Left.OperatorControl();
-            this.flowChartControl = new Citta_T1.Controls.Left.FlowChartControl();
-            this.dataSourceControl = new Citta_T1.Controls.Left.DataSourceControl();
-            this.myModelControl = new Citta_T1.Controls.Left.MyModelControl();
+            this.operatorControl = new C2.Controls.Left.OperatorControl();
+            this.flowChartControl = new C2.Controls.Left.FlowChartControl();
+            this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
+            this.myModelControl = new C2.Controls.Left.MyModelControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
-            this.bottomPreview = new Citta_T1.Controls.Bottom.BottomPreviewControl();
-            this.bottomLogControl = new Citta_T1.Controls.Bottom.BottomLogControl();
-            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomConsoleControl();
+            this.bottomPreview = new C2.Controls.Bottom.BottomPreviewControl();
+            this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
+            this.bottomPyConsole = new C2.Controls.Bottom.BottomConsoleControl();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
+            this.dragLineControl = new C2.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -63,7 +63,6 @@ namespace Citta_T1
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.saveAllButton = new System.Windows.Forms.Button();
-            this.ImportButton = new System.Windows.Forms.Button();
             this.saveModelButton = new System.Windows.Forms.Button();
             this.newModelButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -81,25 +80,27 @@ namespace Citta_T1
             this.resetButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
+            this.ImportDataSourceButton = new System.Windows.Forms.Button();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
-            this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
-            this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
+            this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
+            this.canvasPanel = new C2.Controls.CanvasPanel();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.currentModelFinLab = new System.Windows.Forms.Label();
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.remarkControl = new Citta_T1.Controls.Flow.RemarkControl();
-            this.flowControl = new Citta_T1.Controls.Flow.FlowControl();
-            this.rightHideButton = new Citta_T1.Controls.Flow.RightHideButton();
-            this.rightShowButton = new Citta_T1.Controls.Flow.RightShowButton();
-            this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
-            this.mdiWorkSpace1 = new Citta_T1.Controls.MdiWorkSpace();
+            this.remarkControl = new C2.Controls.Flow.RemarkControl();
+            this.flowControl = new C2.Controls.Flow.FlowControl();
+            this.rightHideButton = new C2.Controls.Flow.RightHideButton();
+            this.rightShowButton = new C2.Controls.Flow.RightShowButton();
+            this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
+            this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
+            this.modelTitlePanel = new C2.Controls.Title.ModelTitlePanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -115,6 +116,7 @@ namespace Citta_T1
             this.MainPanel.SuspendLayout();
             this.panel7.SuspendLayout();
             this.BaseWorkSpace.SuspendLayout();
+            this.topToolBarControl.SuspendLayout();
             this.canvasPanel.SuspendLayout();
             this.currentModelRunBackLab.SuspendLayout();
             this.panel11.SuspendLayout();
@@ -172,7 +174,7 @@ namespace Citta_T1
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(86, 31);
+            this.usernamelabel.Size = new System.Drawing.Size(58, 22);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "李警官";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
@@ -184,7 +186,7 @@ namespace Citta_T1
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(419, 52);
+            this.label1.Size = new System.Drawing.Size(282, 36);
             this.label1.TabIndex = 0;
             this.label1.Text = "IAO解决方案建模平台";
             // 
@@ -269,7 +271,7 @@ namespace Citta_T1
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.operatorControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.operatorControl.Location = new System.Drawing.Point(0, 0);
-            this.operatorControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
             this.operatorControl.Name = "operatorControl";
             this.operatorControl.Size = new System.Drawing.Size(185, 558);
             this.operatorControl.TabIndex = 0;
@@ -368,7 +370,7 @@ namespace Citta_T1
             this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dragLineControl.Location = new System.Drawing.Point(394, 36);
-            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
             this.dragLineControl.Name = "dragLineControl";
             this.dragLineControl.Size = new System.Drawing.Size(368, 3);
             this.dragLineControl.TabIndex = 3;
@@ -410,7 +412,7 @@ namespace Citta_T1
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.logLabel.Location = new System.Drawing.Point(120, 4);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(137, 39);
+            this.logLabel.Size = new System.Drawing.Size(92, 27);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
@@ -422,7 +424,7 @@ namespace Citta_T1
             this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.pyControlLabel.Location = new System.Drawing.Point(226, 4);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(107, 39);
+            this.pyControlLabel.Size = new System.Drawing.Size(72, 27);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
@@ -434,7 +436,7 @@ namespace Citta_T1
             this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.previewLabel.Location = new System.Drawing.Point(14, 4);
             this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(137, 39);
+            this.previewLabel.Size = new System.Drawing.Size(92, 27);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
@@ -461,26 +463,13 @@ namespace Citta_T1
             this.saveAllButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.saveAllButton.ForeColor = System.Drawing.Color.GhostWhite;
             this.saveAllButton.Image = ((System.Drawing.Image)(resources.GetObject("saveAllButton.Image")));
-            this.saveAllButton.Location = new System.Drawing.Point(1, -1);
+            this.saveAllButton.Location = new System.Drawing.Point(6, 0);
             this.saveAllButton.Name = "saveAllButton";
-            this.saveAllButton.Size = new System.Drawing.Size(33, 33);
+            this.saveAllButton.Size = new System.Drawing.Size(30, 30);
             this.saveAllButton.TabIndex = 3;
             this.toolTip1.SetToolTip(this.saveAllButton, "保存当前打开的所有模型");
             this.saveAllButton.UseVisualStyleBackColor = false;
             this.saveAllButton.Click += new System.EventHandler(this.SaveAllButton_Click);
-            // 
-            // ImportButton
-            // 
-            this.ImportButton.BackColor = System.Drawing.Color.White;
-            this.ImportButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ImportButton.Image = ((System.Drawing.Image)(resources.GetObject("ImportButton.Image")));
-            this.ImportButton.Location = new System.Drawing.Point(88, 8);
-            this.ImportButton.Name = "ImportButton";
-            this.ImportButton.Size = new System.Drawing.Size(79, 32);
-            this.ImportButton.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.ImportButton, "导入本地数据文件,支持bcp,cvs,txt,xls四种格式");
-            this.ImportButton.UseVisualStyleBackColor = false;
-            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
             // saveModelButton
             // 
@@ -489,7 +478,7 @@ namespace Citta_T1
             this.saveModelButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.saveModelButton.ForeColor = System.Drawing.Color.GhostWhite;
             this.saveModelButton.Image = ((System.Drawing.Image)(resources.GetObject("saveModelButton.Image")));
-            this.saveModelButton.Location = new System.Drawing.Point(34, 0);
+            this.saveModelButton.Location = new System.Drawing.Point(45, 0);
             this.saveModelButton.Name = "saveModelButton";
             this.saveModelButton.Size = new System.Drawing.Size(32, 32);
             this.saveModelButton.TabIndex = 1;
@@ -604,7 +593,7 @@ namespace Citta_T1
             this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.resetButton.Image = global::Citta_T1.Properties.Resources.reset;
+            this.resetButton.Image = global::C2.Properties.Resources.reset;
             this.resetButton.Location = new System.Drawing.Point(507, 354);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(52, 53);
@@ -646,6 +635,20 @@ namespace Citta_T1
             this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
             this.runButton.UseVisualStyleBackColor = true;
             // 
+            // ImportDataSourceButton
+            // 
+            this.ImportDataSourceButton.BackColor = System.Drawing.Color.GhostWhite;
+            this.ImportDataSourceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ImportDataSourceButton.ForeColor = System.Drawing.Color.GhostWhite;
+            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.importDataSource;
+            this.ImportDataSourceButton.Location = new System.Drawing.Point(66, 0);
+            this.ImportDataSourceButton.Name = "ImportDataSourceButton";
+            this.ImportDataSourceButton.Size = new System.Drawing.Size(32, 32);
+            this.ImportDataSourceButton.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.ImportDataSourceButton, "导入本地数据文件,支持bcp,txt,csv,xls四种格式");
+            this.ImportDataSourceButton.UseVisualStyleBackColor = false;
+            this.ImportDataSourceButton.Click += new System.EventHandler(this.ImportDataSource_Click);
+            // 
             // MainPanel
             // 
             this.MainPanel.Controls.Add(this.panel7);
@@ -668,6 +671,9 @@ namespace Citta_T1
             // 
             // BaseWorkSpace
             // 
+            this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
+            this.BaseWorkSpace.Controls.Add(this.button1);
+            this.BaseWorkSpace.Controls.Add(this.ImportDataSourceButton);
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.canvasPanel);
@@ -678,11 +684,20 @@ namespace Citta_T1
             this.BaseWorkSpace.Size = new System.Drawing.Size(910, 248);
             this.BaseWorkSpace.TabIndex = 0;
             // 
+            // topToolBarControl
+            // 
+            this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
+            this.topToolBarControl.Controls.Add(this.saveModelButton);
+            this.topToolBarControl.Controls.Add(this.saveAllButton);
+            this.topToolBarControl.Location = new System.Drawing.Point(0, 2);
+            this.topToolBarControl.Name = "topToolBarControl";
+            this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
+            this.topToolBarControl.TabIndex = 24;
+            // 
             // canvasPanel
             // 
             this.canvasPanel.AllowDrop = true;
             this.canvasPanel.BackColor = System.Drawing.Color.White;
-            this.canvasPanel.Controls.Add(this.topToolBarControl);
             this.canvasPanel.Controls.Add(this.progressBarLabel);
             this.canvasPanel.Controls.Add(this.progressBar1);
             this.canvasPanel.Controls.Add(this.currentModelFinLab);
@@ -710,14 +725,6 @@ namespace Citta_T1
             this.canvasPanel.StartP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.StartP")));
             this.canvasPanel.TabIndex = 7;
             // 
-            // topToolBarControl
-            // 
-            this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
-            this.topToolBarControl.Location = new System.Drawing.Point(27, 0);
-            this.topToolBarControl.Name = "topToolBarControl";
-            this.topToolBarControl.Size = new System.Drawing.Size(1275, 32);
-            this.topToolBarControl.TabIndex = 24;
-            // 
             // progressBarLabel
             // 
             this.progressBarLabel.AutoSize = true;
@@ -726,7 +733,7 @@ namespace Citta_T1
             this.progressBarLabel.ForeColor = System.Drawing.Color.Black;
             this.progressBarLabel.Location = new System.Drawing.Point(953, 245);
             this.progressBarLabel.Name = "progressBarLabel";
-            this.progressBarLabel.Size = new System.Drawing.Size(35, 23);
+            this.progressBarLabel.Size = new System.Drawing.Size(24, 16);
             this.progressBarLabel.TabIndex = 32;
             this.progressBarLabel.Text = "0%";
             this.progressBarLabel.Visible = false;
@@ -744,7 +751,7 @@ namespace Citta_T1
             // 
             // currentModelFinLab
             // 
-            this.currentModelFinLab.Image = global::Citta_T1.Properties.Resources.currentModelFin;
+            this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
             this.currentModelFinLab.Location = new System.Drawing.Point(498, 174);
             this.currentModelFinLab.Name = "currentModelFinLab";
             this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
@@ -754,7 +761,7 @@ namespace Citta_T1
             // currentModelRunBackLab
             // 
             this.currentModelRunBackLab.Controls.Add(this.currentModelRunLab);
-            this.currentModelRunBackLab.Image = global::Citta_T1.Properties.Resources.currentModelRunningBack;
+            this.currentModelRunBackLab.Image = global::C2.Properties.Resources.currentModelRunningBack;
             this.currentModelRunBackLab.Location = new System.Drawing.Point(498, 174);
             this.currentModelRunBackLab.Name = "currentModelRunBackLab";
             this.currentModelRunBackLab.Size = new System.Drawing.Size(150, 100);
@@ -764,7 +771,7 @@ namespace Citta_T1
             // currentModelRunLab
             // 
             this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.currentModelRunLab.Image = global::Citta_T1.Properties.Resources.currentModelRunning;
+            this.currentModelRunLab.Image = global::C2.Properties.Resources.currentModelRunning;
             this.currentModelRunLab.Location = new System.Drawing.Point(40, 20);
             this.currentModelRunLab.Name = "currentModelRunLab";
             this.currentModelRunLab.Size = new System.Drawing.Size(73, 47);
@@ -863,10 +870,24 @@ namespace Citta_T1
             // 
             this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
-            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
             this.modelTitlePanel.Name = "modelTitlePanel";
             this.modelTitlePanel.Size = new System.Drawing.Size(910, 32);
             this.modelTitlePanel.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.GhostWhite;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.GhostWhite;
+            this.button1.Image = global::C2.Properties.Resources.importDataSource;
+            this.button1.Location = new System.Drawing.Point(94, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 32);
+            this.button1.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.button1, "临时新建一个DocumentForm窗体");
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // MainForm
             // 
@@ -907,6 +928,7 @@ namespace Citta_T1
             this.MainPanel.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.BaseWorkSpace.ResumeLayout(false);
+            this.topToolBarControl.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
             this.canvasPanel.PerformLayout();
             this.currentModelRunBackLab.ResumeLayout(false);
@@ -948,19 +970,18 @@ namespace Citta_T1
         private System.Windows.Forms.Button diffButton;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
-        private System.Windows.Forms.Button ImportButton;
         private Controls.Left.OperatorControl operatorControl;
         private Controls.Left.FlowChartControl flowChartControl;
         private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
-        private Citta_T1.Controls.Bottom.BottomLogControl bottomLogControl;
-        private Citta_T1.Controls.Bottom.BottomConsoleControl bottomPyConsole;
+        private C2.Controls.Bottom.BottomLogControl bottomLogControl;
+        private C2.Controls.Bottom.BottomConsoleControl bottomPyConsole;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button flowChartButton;
         private Controls.Title.DragLineControl dragLineControl;
-        private Citta_T1.Controls.Bottom.BottomPreviewControl bottomPreview;
+        private C2.Controls.Bottom.BottomPreviewControl bottomPreview;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button blankButton;
         private Button saveAllButton;
@@ -986,6 +1007,8 @@ namespace Citta_T1
         private Button stopButton;
         private Button runButton;
         private Controls.Flow.NaviViewControl naviViewControl;
-        private Citta_T1.Controls.MdiWorkSpace mdiWorkSpace1;
+        private C2.Controls.MdiWorkSpace mdiWorkSpace1;
+        private Button ImportDataSourceButton;
+        private Button button1;
     }
 }

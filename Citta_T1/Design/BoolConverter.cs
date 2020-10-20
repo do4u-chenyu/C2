@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
-using Citta_T1.Core;
-using Citta_T1.Globalization;
+using C2.Core;
+using C2.Globalization;
 
-namespace Citta_T1.Design
+namespace C2.Design
 {
     class BoolConverter : TypeConverter
     {

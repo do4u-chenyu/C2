@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
-using Citta_T1.Core;
-using Citta_T1.Model.MindMaps;
+using C2.Core;
+using C2.Model.MindMaps;
 
-namespace Citta_T1.Model.Documents
+namespace C2.Model.Documents
 {
     public partial class Document
     {
@@ -258,13 +258,13 @@ namespace Citta_T1.Model.Documents
             dom.AppendChild(dom.CreateXmlDeclaration("1.0", "utf-8", null));
 
             XmlElement root = dom.CreateElement("document");
-            root.SetAttribute("type", "Citta_T1");
+            root.SetAttribute("type", "C2");
             root.SetAttribute("editor_version", ProductInfo.Version);
             root.SetAttribute("document_version", Document.DocumentVersion.ToString());
             dom.AppendChild(root);
             
             //
-            XmlComment comment = dom.CreateComment("Create by Citta_T1, you can download it free from http://www.Citta_T1.org");
+            XmlComment comment = dom.CreateComment("Create by C2, you can download it free from http://www.C2.org");
             root.AppendChild(comment); 
 
             // information

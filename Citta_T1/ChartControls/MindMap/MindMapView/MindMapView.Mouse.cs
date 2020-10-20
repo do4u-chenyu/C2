@@ -5,15 +5,15 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
-using Citta_T1.Core;
-using Citta_T1.Dialogs;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
-using Citta_T1.Model.Widgets;
+using C2.Configuration;
+using C2.Core;
+using C2.Dialogs;
+using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
+using C2.Model.Widgets;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     public partial class MindMapView
     {
@@ -38,8 +38,8 @@ namespace Citta_T1.Controls.MapViews
             catch(System.Exception ex)
             {
                 Helper.WriteLog(ex);
-                StyleBrushCursor = Citta_T1.Resources.RS.GetCursor("cur_style_brush");
-                ScrollCursor = Citta_T1.Resources.RS.GetCursor("cur_scroll");
+                StyleBrushCursor = C2.Resources.RS.GetCursor("cur_style_brush");
+                ScrollCursor = C2.Resources.RS.GetCursor("cur_scroll");
             }
 
             DragBox = new MindMapViewDragBox(this);
@@ -538,7 +538,7 @@ namespace Citta_T1.Controls.MapViews
 
                 return new HitTestResult(topic, null, false, false);
             }
-            else if (topic.HaveRemark && Options.Current.GetBool(Citta_T1.Configuration.OptionNames.Charts.ShowRemarkIcon))
+            else if (topic.HaveRemark && Options.Current.GetBool(C2.Configuration.OptionNames.Charts.ShowRemarkIcon))
             {
                 int x1 = x - topic.Bounds.Left;
                 int y1 = y - topic.Bounds.Top;

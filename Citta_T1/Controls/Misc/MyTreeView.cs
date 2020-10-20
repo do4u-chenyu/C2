@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using Citta_T1.Core;
+using C2.Core;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     /*class MyTreeView : MultiSelectTreeView // BaseControl
     {

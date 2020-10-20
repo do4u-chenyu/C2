@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Win32;
 using System.Drawing;
 
-namespace Citta_T1.Model.Styles
+namespace C2.Model.Styles
 {
     class WindowsColorSchemes
     {

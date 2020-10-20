@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Citta_T1.Globalization
+namespace C2.Globalization
 {
     public class AuthorInfo
     {

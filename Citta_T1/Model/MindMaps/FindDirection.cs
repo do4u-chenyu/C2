@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Citta_T1.Model.MindMaps
+namespace C2.Model.MindMaps
 {
     //enum FindDirection
     //{

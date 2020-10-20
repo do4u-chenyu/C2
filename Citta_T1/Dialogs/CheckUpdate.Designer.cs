@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Dialogs
+﻿namespace C2.Dialogs
 {
     partial class CheckUpdate
     {
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BtnCancel = new Citta_T1.Controls.PushButton();
-            this.BtnDownload = new Citta_T1.Controls.PushButton();
+            this.BtnCancel = new C2.Controls.PushButton();
+            this.BtnDownload = new C2.Controls.PushButton();
             this.LabMessage = new System.Windows.Forms.Label();
             this.TxbVersions = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -95,8 +95,8 @@
 
         #endregion
 
-        private Citta_T1.Controls.PushButton BtnCancel;
-        private Citta_T1.Controls.PushButton BtnDownload;
+        private C2.Controls.PushButton BtnCancel;
+        private C2.Controls.PushButton BtnDownload;
         private System.Windows.Forms.Label LabMessage;
         private System.Windows.Forms.TextBox TxbVersions;
     }

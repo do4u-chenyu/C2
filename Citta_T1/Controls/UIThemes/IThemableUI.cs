@@ -1,7 +1,7 @@
 ﻿using System;
-using Citta_T1.Controls;
+using C2.Controls;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public interface IThemableUI
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Citta_T1.Properties {
+namespace C2.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Citta_T1.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Citta_T1.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("C2.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -997,6 +997,16 @@ namespace Citta_T1.Properties {
         internal static System.Drawing.Bitmap import {
             get {
                 object obj = ResourceManager.GetObject("import", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap importDataSource {
+            get {
+                object obj = ResourceManager.GetObject("importDataSource", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2007,6 +2017,16 @@ namespace Citta_T1.Properties {
         internal static System.Drawing.Bitmap splitter_v {
             get {
                 object obj = ResourceManager.GetObject("splitter_v", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap startPageTitle {
+            get {
+                object obj = ResourceManager.GetObject("startPageTitle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

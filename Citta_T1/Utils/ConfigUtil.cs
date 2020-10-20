@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Text;
 
-namespace Citta_T1.Utils
+namespace C2.Utils
 {
     class ConfigUtil
     {

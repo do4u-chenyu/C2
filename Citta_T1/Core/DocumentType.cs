@@ -5,11 +5,11 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Citta_T1.Controls;
-using Citta_T1.Globalization;
-using Citta_T1.Model.Documents;
+using C2.Controls;
+using C2.Globalization;
+using C2.Model.Documents;
 
-namespace Citta_T1.Core
+namespace C2.Core
 {
     public class DocumentType
     {
@@ -25,7 +25,7 @@ namespace Citta_T1.Core
         public static readonly DocumentType Txt;
         public static readonly DocumentType Csv;
         public static readonly DocumentType FreeMind;
-        public static readonly DocumentType Citta_T1;
+        public static readonly DocumentType C2;
         public static readonly DocumentType Pdf;
 
         static DocumentType()
@@ -63,8 +63,8 @@ namespace Citta_T1.Core
             FreeMind = new DocumentType("FreeMind", 
                 "application/freemind",
                 new string[] { ".mm" });
-            Citta_T1 = new DocumentType("Citta_T1",
-                "application/Citta_T1",
+            C2 = new DocumentType("C2",
+                "application/C2",
                 new string[] { Document.Extension });
             Pdf = new DocumentType("PDF",
                 "application/pdf",
@@ -162,7 +162,7 @@ namespace Citta_T1.Core
                  FreeMind,
                  Txt,
                  Csv,
-                 Citta_T1,
+                 C2,
                  Pdf,
             };
         }

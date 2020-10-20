@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-using Citta_T1.Configuration;
+using C2.Configuration;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public class ChartBox : Control
     {

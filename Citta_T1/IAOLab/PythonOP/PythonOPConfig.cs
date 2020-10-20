@@ -1,8 +1,8 @@
-﻿using Citta_T1.Utils;
+﻿using C2.Utils;
 using System;
 using System.Collections.Generic;
 
-namespace Citta_T1.IAOLab.PythonOP
+namespace C2.IAOLab.PythonOP
 {
     class PythonOPConfig
     {

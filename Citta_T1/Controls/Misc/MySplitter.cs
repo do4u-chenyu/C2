@@ -6,7 +6,7 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     class MySplitter : Splitter
     {

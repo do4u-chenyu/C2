@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.ComponentModel;
 
-namespace Citta_T1.Controls
+namespace C2.Controls
 {
     public abstract class TabBarRenderer
     {

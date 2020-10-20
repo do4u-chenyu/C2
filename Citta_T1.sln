@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Citta_T1", "Citta_T1\Citta_T1.csproj", "{6FE47E67-232B-4A47-B905-8385DEAF2A95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2", "Citta_T1\C2.csproj", "{6FE47E67-232B-4A47-B905-8385DEAF2A95}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInstallSet", "UserInstallSet\UserInstallSet.csproj", "{8587D0E2-E1F2-442D-B729-897391FB2881}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IAO解决方案", "IAO解决方案\IAO解决方案.vdproj", "{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blumind", "Blumind\Code\Blumind\Blumind.csproj", "{EE33FCC4-93B5-426B-8F71-5C2B2AEE143E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,12 +32,6 @@ Global
 		{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}.Release|Any CPU.ActiveCfg = Release
 		{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}.开发调试|Any CPU.ActiveCfg = Release
 		{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}.开发调试|Any CPU.Build.0 = Release
-		{EE33FCC4-93B5-426B-8F71-5C2B2AEE143E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE33FCC4-93B5-426B-8F71-5C2B2AEE143E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE33FCC4-93B5-426B-8F71-5C2B2AEE143E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE33FCC4-93B5-426B-8F71-5C2B2AEE143E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE33FCC4-93B5-426B-8F71-5C2B2AEE143E}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
-		{EE33FCC4-93B5-426B-8F71-5C2B2AEE143E}.开发调试|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

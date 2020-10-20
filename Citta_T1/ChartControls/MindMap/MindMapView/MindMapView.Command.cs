@@ -4,15 +4,15 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using System.Linq;
-using Citta_T1.Configuration;
-using Citta_T1.Core;
-using Citta_T1.Model;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Styles;
-using Citta_T1.Model.Widgets;
+using C2.Configuration;
+using C2.Core;
+using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
+using C2.Model.Widgets;
 using System.Collections.Generic;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     public partial class MindMapView 
     {
@@ -188,7 +188,7 @@ namespace Citta_T1.Controls.MapViews
             if (SelectedTopic != null && Clipboard.ContainsImage())
             {
                 PictureWidget template = new PictureWidget();
-                template.Image = Citta_T1.Model.Widgets.PictureWidget.PictureDesign.FromClipboard();
+                template.Image = C2.Model.Widgets.PictureWidget.PictureDesign.FromClipboard();
                 if (template.Image.Data != null)
                 {
                     Size size = template.Image.Data.Size;

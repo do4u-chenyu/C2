@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Controls.Left
+﻿namespace C2.Controls.Left
 {
     partial class DataButton
     {
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataButton));
-            this.txtButton = new Citta_T1.Controls.Common.NoFocusButton();
+            this.txtButton = new C2.Controls.Common.NoFocusButton();
             this.leftPictureBox = new System.Windows.Forms.PictureBox();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -64,7 +64,7 @@
             // 
             // leftPictureBox
             // 
-            this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.u72;
+            this.leftPictureBox.Image = global::C2.Properties.Resources.u72;
             this.leftPictureBox.Location = new System.Drawing.Point(-1, 1);
             this.leftPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.leftPictureBox.Name = "leftPictureBox";
@@ -176,7 +176,7 @@
 
         #endregion
 
-        private Citta_T1.Controls.Common.NoFocusButton txtButton;
+        private C2.Controls.Common.NoFocusButton txtButton;
         private System.Windows.Forms.PictureBox leftPictureBox;
         private System.Windows.Forms.PictureBox rightPictureBox;
         private System.Windows.Forms.ToolTip helpToolTip;

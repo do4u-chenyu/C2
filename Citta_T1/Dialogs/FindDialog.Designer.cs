@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Dialogs
+﻿namespace C2.Dialogs
 {
     partial class FindDialog
     {
@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.myToolStrip1 = new Citta_T1.Controls.ToolStripPro();
+            this.myToolStrip1 = new C2.Controls.ToolStripPro();
             this.TsbFind = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbReplace = new System.Windows.Forms.ToolStripButton();
-            this.FbOptions = new Citta_T1.Controls.FoldingBox();
+            this.FbOptions = new C2.Controls.FoldingBox();
             this.CkbWithHiddenItems = new System.Windows.Forms.CheckBox();
             this.CkbRegularExpression = new System.Windows.Forms.CheckBox();
             this.CkbCaseSensitive = new System.Windows.Forms.CheckBox();
@@ -41,9 +41,9 @@
             this.CmbFindWhat = new System.Windows.Forms.ComboBox();
             this.LabReplaceWith = new System.Windows.Forms.Label();
             this.CmbReplaceWith = new System.Windows.Forms.ComboBox();
-            this.BtnClose = new Citta_T1.Controls.PushButton();
-            this.BtnReplace = new Citta_T1.Controls.PushButton();
-            this.BtnFind = new Citta_T1.Controls.PushButton();
+            this.BtnClose = new C2.Controls.PushButton();
+            this.BtnReplace = new C2.Controls.PushButton();
+            this.BtnFind = new C2.Controls.PushButton();
             this.myToolStrip1.SuspendLayout();
             this.FbOptions.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +62,7 @@
             // 
             // TsbFind
             // 
-            this.TsbFind.Image = global::Citta_T1.Properties.Resources.find;
+            this.TsbFind.Image = global::C2.Properties.Resources.find;
             this.TsbFind.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbFind.Name = "TsbFind";
             this.TsbFind.Padding = new System.Windows.Forms.Padding(2);
@@ -78,7 +78,7 @@
             // 
             // TsbReplace
             // 
-            this.TsbReplace.Image = global::Citta_T1.Properties.Resources.replace;
+            this.TsbReplace.Image = global::C2.Properties.Resources.replace;
             this.TsbReplace.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbReplace.Name = "TsbReplace";
             this.TsbReplace.Padding = new System.Windows.Forms.Padding(2);
@@ -249,11 +249,11 @@
 
         #endregion
 
-        private Citta_T1.Controls.ToolStripPro myToolStrip1;
+        private C2.Controls.ToolStripPro myToolStrip1;
         private System.Windows.Forms.ToolStripButton TsbFind;
         private System.Windows.Forms.ToolStripButton TsbReplace;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private Citta_T1.Controls.FoldingBox FbOptions;
+        private C2.Controls.FoldingBox FbOptions;
         private System.Windows.Forms.CheckBox CkbCaseSensitive;
         private System.Windows.Forms.CheckBox CkbWholeWordOnly;
         private System.Windows.Forms.CheckBox CkbRegularExpression;
@@ -261,9 +261,9 @@
         private System.Windows.Forms.ComboBox CmbFindWhat;
         private System.Windows.Forms.Label LabReplaceWith;
         private System.Windows.Forms.ComboBox CmbReplaceWith;
-        private Citta_T1.Controls.PushButton BtnClose;
-        private Citta_T1.Controls.PushButton BtnReplace;
-        private Citta_T1.Controls.PushButton BtnFind;
+        private C2.Controls.PushButton BtnClose;
+        private C2.Controls.PushButton BtnReplace;
+        private C2.Controls.PushButton BtnFind;
         private System.Windows.Forms.CheckBox CkbWithHiddenItems;
     }
 }

@@ -1,11 +1,11 @@
-﻿using Citta_T1.Core;
-using Citta_T1.Utils;
+﻿using C2.Core;
+using C2.Utils;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Citta_T1.Business.Model.World
+namespace C2.Business.Model.World
 {
     class WorldMapInfo
     {

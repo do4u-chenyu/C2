@@ -1,10 +1,10 @@
-﻿using Citta_T1.Core;
-using Citta_T1.Model;
-using Citta_T1.Model.Documents;
-using Citta_T1.Model.MindMaps;
-using Citta_T1.Model.Widgets;
+﻿using C2.Core;
+using C2.Model;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
+using C2.Model.Widgets;
 
-namespace Citta_T1.Controls.MapViews
+namespace C2.Controls.MapViews
 {
     class AddWidgetCommand : Command
     {

@@ -8,10 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Citta_T1.Controls;
-using Citta_T1.Core;
+using C2.Controls;
+using C2.Core;
 
-namespace Citta_T1.Canvas.Svg
+namespace C2.Canvas.Svg
 {
     class SvgGraphics : IGraphics
     {
