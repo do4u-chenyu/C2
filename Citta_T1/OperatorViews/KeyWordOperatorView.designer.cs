@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KeywordOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -41,14 +42,14 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(218, 4);
-            this.dataSourceTB1.Size = new System.Drawing.Size(121, 23);
+            this.dataSourceTB1.Size = new System.Drawing.Size(121, 29);
             this.dataSourceTB1.TabIndex = 10;
             this.dataSourceTB1.Visible = true;
             // 
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(0, 4);
-            this.dataSourceTB0.Size = new System.Drawing.Size(127, 23);
+            this.dataSourceTB0.Size = new System.Drawing.Size(127, 29);
             this.dataSourceTB0.TabIndex = 9;
             // 
             // cancelButton
@@ -66,34 +67,34 @@
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(4, 86);
-            this.outListCCBL0.Size = new System.Drawing.Size(125, 24);
+            this.outListCCBL0.Size = new System.Drawing.Size(125, 30);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Location = new System.Drawing.Point(2, 44);
-            this.comboBox0.Size = new System.Drawing.Size(126, 25);
+            this.comboBox0.Location = new System.Drawing.Point(2, 39);
+            this.comboBox0.Size = new System.Drawing.Size(124, 29);
             this.comboBox0.TabIndex = 11;
             // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.Location = new System.Drawing.Point(218, 44);
-            this.comboBox1.Size = new System.Drawing.Size(121, 25);
+            this.comboBox1.Location = new System.Drawing.Point(218, 39);
+            this.comboBox1.Size = new System.Drawing.Size(119, 29);
             this.comboBox1.TabIndex = 13;
             this.comboBox1.Visible = true;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.KeywordComBox_SelectedIndexChanged);
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(461, 22);
+            this.topPanel.Size = new System.Drawing.Size(459, 22);
             // 
             // bottomPanel
             // 
             this.bottomPanel.Controls.Add(this.groupBox1);
-            this.bottomPanel.Location = new System.Drawing.Point(0, 145);
-            this.bottomPanel.Size = new System.Drawing.Size(461, 212);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 135);
+            this.bottomPanel.Size = new System.Drawing.Size(459, 212);
             this.bottomPanel.Controls.SetChildIndex(this.confirmButton, 0);
             this.bottomPanel.Controls.SetChildIndex(this.cancelButton, 0);
             this.bottomPanel.Controls.SetChildIndex(this.groupBox1, 0);
@@ -104,7 +105,7 @@
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 22);
-            this.keyPanel.Size = new System.Drawing.Size(102, 123);
+            this.keyPanel.Size = new System.Drawing.Size(102, 113);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             this.keyPanel.Controls.SetChildIndex(this.label3, 0);
@@ -119,7 +120,7 @@
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Location = new System.Drawing.Point(102, 22);
-            this.valuePanel.Size = new System.Drawing.Size(359, 123);
+            this.valuePanel.Size = new System.Drawing.Size(357, 113);
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
@@ -131,7 +132,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(11, 3);
-            this.label1.Size = new System.Drawing.Size(90, 22);
+            this.label1.Size = new System.Drawing.Size(123, 30);
             // 
             // label3
             // 
@@ -140,7 +141,7 @@
             this.label3.Location = new System.Drawing.Point(11, 86);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 22);
+            this.label3.Size = new System.Drawing.Size(123, 30);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段：";
             // 
@@ -151,7 +152,7 @@
             this.label2.Location = new System.Drawing.Point(10, 44);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 22);
+            this.label2.Size = new System.Drawing.Size(123, 30);
             this.label2.TabIndex = 0;
             this.label2.Text = "过滤条件：";
             // 
@@ -174,7 +175,7 @@
             this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.Location = new System.Drawing.Point(6, 47);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(204, 17);
+            this.label7.Size = new System.Drawing.Size(288, 23);
             this.label7.TabIndex = 3;
             this.label7.Text = "[2] 当前算子仅支持100行关键词处理";
             // 
@@ -184,7 +185,7 @@
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(7, 23);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(159, 17);
+            this.label4.Size = new System.Drawing.Size(224, 23);
             this.label4.TabIndex = 1;
             this.label4.Text = "[1] 行与行之间按或运算处理";
             // 
@@ -207,7 +208,7 @@
             this.label6.Location = new System.Drawing.Point(141, 3);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(74, 22);
+            this.label6.Size = new System.Drawing.Size(101, 30);
             this.label6.TabIndex = 1;
             this.label6.Text = "关键词：";
             // 
@@ -217,23 +218,26 @@
             this.conditionSelectBox.FormattingEnabled = true;
             this.conditionSelectBox.Location = new System.Drawing.Point(135, 44);
             this.conditionSelectBox.Name = "conditionSelectBox";
-            this.conditionSelectBox.Size = new System.Drawing.Size(74, 25);
+            this.conditionSelectBox.Size = new System.Drawing.Size(74, 29);
             this.conditionSelectBox.TabIndex = 12;
             // 
             // KeywordOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(461, 357);
+            this.ClientSize = new System.Drawing.Size(459, 347);
+            this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(477, 396);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(477, 396);
             this.Name = "KeywordOperatorView";
+            this.ShowIcon = true;
             this.Text = "关键词过滤算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);

@@ -25,6 +25,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GroupOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -53,7 +54,7 @@
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(6, 2);
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 29);
             this.dataSourceTB0.TabIndex = 9;
             // 
             // cancelButton
@@ -71,16 +72,17 @@
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Size = new System.Drawing.Size(134, 25);
+            this.comboBox0.Location = new System.Drawing.Point(2, 3);
+            this.comboBox0.Size = new System.Drawing.Size(134, 29);
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(527, 21);
+            this.topPanel.Size = new System.Drawing.Size(525, 21);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 387);
-            this.bottomPanel.Size = new System.Drawing.Size(527, 49);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 377);
+            this.bottomPanel.Size = new System.Drawing.Size(525, 49);
             // 
             // keyPanel
             // 
@@ -90,7 +92,7 @@
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
-            this.keyPanel.Size = new System.Drawing.Size(116, 366);
+            this.keyPanel.Size = new System.Drawing.Size(116, 356);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             this.keyPanel.Controls.SetChildIndex(this.label3, 0);
@@ -106,7 +108,7 @@
             this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
-            this.valuePanel.Size = new System.Drawing.Size(411, 366);
+            this.valuePanel.Size = new System.Drawing.Size(409, 356);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
             this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
@@ -117,7 +119,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(32, 2);
-            this.label1.Size = new System.Drawing.Size(90, 22);
+            this.label1.Size = new System.Drawing.Size(123, 30);
             // 
             // label3
             // 
@@ -126,7 +128,7 @@
             this.label3.Location = new System.Drawing.Point(32, 343);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 22);
+            this.label3.Size = new System.Drawing.Size(123, 30);
             this.label3.TabIndex = 0;
             this.label3.Text = "是否去重：";
             // 
@@ -137,7 +139,7 @@
             this.label2.Location = new System.Drawing.Point(32, 58);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 22);
+            this.label2.Size = new System.Drawing.Size(123, 30);
             this.label2.TabIndex = 0;
             this.label2.Text = "分组字段：";
             // 
@@ -148,7 +150,7 @@
             this.label5.Location = new System.Drawing.Point(32, 267);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 22);
+            this.label5.Size = new System.Drawing.Size(123, 30);
             this.label5.TabIndex = 1;
             this.label5.Text = "排序内容：";
             // 
@@ -159,7 +161,7 @@
             this.label4.Location = new System.Drawing.Point(32, 305);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 22);
+            this.label4.Size = new System.Drawing.Size(123, 30);
             this.label4.TabIndex = 0;
             this.label4.Text = "排序方式：";
             // 
@@ -182,7 +184,7 @@
             this.sortByString.Location = new System.Drawing.Point(95, 8);
             this.sortByString.Margin = new System.Windows.Forms.Padding(2);
             this.sortByString.Name = "sortByString";
-            this.sortByString.Size = new System.Drawing.Size(98, 21);
+            this.sortByString.Size = new System.Drawing.Size(133, 27);
             this.sortByString.TabIndex = 1;
             this.sortByString.Text = "按字符串排序";
             this.sortByString.UseVisualStyleBackColor = true;
@@ -195,7 +197,7 @@
             this.sortByNum.Location = new System.Drawing.Point(4, 8);
             this.sortByNum.Margin = new System.Windows.Forms.Padding(2);
             this.sortByNum.Name = "sortByNum";
-            this.sortByNum.Size = new System.Drawing.Size(86, 21);
+            this.sortByNum.Size = new System.Drawing.Size(116, 27);
             this.sortByNum.TabIndex = 0;
             this.sortByNum.TabStop = true;
             this.sortByNum.Text = "按数字排序";
@@ -221,7 +223,7 @@
             this.ascendingOrder.Location = new System.Drawing.Point(4, 6);
             this.ascendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.ascendingOrder.Name = "ascendingOrder";
-            this.ascendingOrder.Size = new System.Drawing.Size(74, 21);
+            this.ascendingOrder.Size = new System.Drawing.Size(99, 27);
             this.ascendingOrder.TabIndex = 1;
             this.ascendingOrder.TabStop = true;
             this.ascendingOrder.Text = "从小到大";
@@ -234,7 +236,7 @@
             this.descendingOrder.Location = new System.Drawing.Point(94, 6);
             this.descendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.descendingOrder.Name = "descendingOrder";
-            this.descendingOrder.Size = new System.Drawing.Size(74, 21);
+            this.descendingOrder.Size = new System.Drawing.Size(99, 27);
             this.descendingOrder.TabIndex = 0;
             this.descendingOrder.Text = "从大到小";
             this.descendingOrder.UseVisualStyleBackColor = true;
@@ -293,7 +295,7 @@
             this.repetition.Location = new System.Drawing.Point(94, 8);
             this.repetition.Margin = new System.Windows.Forms.Padding(2);
             this.repetition.Name = "repetition";
-            this.repetition.Size = new System.Drawing.Size(62, 21);
+            this.repetition.Size = new System.Drawing.Size(82, 27);
             this.repetition.TabIndex = 1;
             this.repetition.TabStop = true;
             this.repetition.Text = "不去重";
@@ -306,7 +308,7 @@
             this.noRepetition.Location = new System.Drawing.Point(4, 8);
             this.noRepetition.Margin = new System.Windows.Forms.Padding(2);
             this.noRepetition.Name = "noRepetition";
-            this.noRepetition.Size = new System.Drawing.Size(50, 21);
+            this.noRepetition.Size = new System.Drawing.Size(65, 27);
             this.noRepetition.TabIndex = 0;
             this.noRepetition.Text = "去重";
             this.noRepetition.UseVisualStyleBackColor = true;
@@ -323,17 +325,20 @@
             // GroupOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(527, 436);
+            this.ClientSize = new System.Drawing.Size(525, 426);
+            this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(543, 475);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(543, 475);
             this.Name = "GroupOperatorView";
+            this.ShowIcon = true;
             this.Text = "分组算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);

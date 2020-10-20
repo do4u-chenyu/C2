@@ -123,4 +123,24 @@
   <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAGABoAwAAFgAAACgAAAAQAAAAIAAAAAEAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAD////////////////////////////////////////////////////////////////////v7++rq6uX
+        l5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5efn5/a2tr////////S0tJTU1NtbW1zc3Nzc3Nzc3NP
+        T09DQ0Nzc3Nzc3Nzc3Nzc3NUVFSfn5/////////Ly8tdXV3i4uL///////////+AgIBWVlb/////////
+        //////9zc3OXl5f////////Ly8tdXV3i4uL///////////+AgIBNTU3///////////////9zc3OXl5f/
+        ///////Ly8tdXV3i4uL///////////+AgIBWVlb///////////////9zc3OXl5f////////Ly8tdXV3i
+        4uL///////////+AgIBWVlb///////////////9zc3OXl5f////////Ly8tdXV3i4uL///////////+A
+        gIBKSkr///////////////9zc3OXl5f////////Ly8tdXV3i4uL///////////+AgIBWVlb/////////
+        //////9zc3OXl5f////////Ly8tdXV3i4uL///////////+AgIBWVlb///////////////9zc3OXl5f/
+        ///////Ly8tdXV3i4uL///////////+AgIBNTU3///////////////9zc3OXl5f////////Ly8tdXV3i
+        4uL///////////+AgIBWVlb///////////////9zc3OXl5f////////MzMw3Nzc9PT1DQ0M+Pj5AQEA3
+        Nzc2NjY+Pj5AQEBCQkI9PT06OjqXl5f////////Y2NhLS0swMDAvLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+        Ly8vLy8+Pj6urq7////////4+PjY2NjMzMzLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vT09Px8fH/
+        //////////////////////////////////////////////////////////////////8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+</value>
+  </data>
 </root>

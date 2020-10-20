@@ -23,6 +23,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RandomOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.randomNumBox = new System.Windows.Forms.TextBox();
@@ -34,7 +35,7 @@
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(0, 1);
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 29);
             this.dataSourceTB0.TabIndex = 3;
             // 
             // cancelButton
@@ -53,7 +54,7 @@
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(0, 106);
             this.outListCCBL0.Margin = new System.Windows.Forms.Padding(0);
-            this.outListCCBL0.Size = new System.Drawing.Size(150, 24);
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 30);
             this.outListCCBL0.TabIndex = 2;
             // 
             // comboBox0
@@ -62,12 +63,12 @@
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(324, 21);
+            this.topPanel.Size = new System.Drawing.Size(322, 21);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 153);
-            this.bottomPanel.Size = new System.Drawing.Size(324, 38);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 143);
+            this.bottomPanel.Size = new System.Drawing.Size(322, 38);
             // 
             // keyPanel
             // 
@@ -75,7 +76,7 @@
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
-            this.keyPanel.Size = new System.Drawing.Size(116, 132);
+            this.keyPanel.Size = new System.Drawing.Size(116, 122);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             this.keyPanel.Controls.SetChildIndex(this.label3, 0);
@@ -86,7 +87,7 @@
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
-            this.valuePanel.Size = new System.Drawing.Size(208, 132);
+            this.valuePanel.Size = new System.Drawing.Size(206, 122);
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             this.valuePanel.Controls.SetChildIndex(this.randomNumBox, 0);
@@ -94,7 +95,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(23, 0);
-            this.label1.Size = new System.Drawing.Size(90, 22);
+            this.label1.Size = new System.Drawing.Size(123, 30);
             // 
             // label3
             // 
@@ -103,7 +104,7 @@
             this.label3.Location = new System.Drawing.Point(23, 105);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 22);
+            this.label3.Size = new System.Drawing.Size(123, 30);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段：";
             // 
@@ -114,7 +115,7 @@
             this.label2.Location = new System.Drawing.Point(23, 54);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 22);
+            this.label2.Size = new System.Drawing.Size(123, 30);
             this.label2.TabIndex = 0;
             this.label2.Text = "随机条数：";
             // 
@@ -124,23 +125,26 @@
             this.randomNumBox.Location = new System.Drawing.Point(0, 54);
             this.randomNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.randomNumBox.Name = "randomNumBox";
-            this.randomNumBox.Size = new System.Drawing.Size(150, 23);
+            this.randomNumBox.Size = new System.Drawing.Size(150, 29);
             this.randomNumBox.TabIndex = 4;
             // 
             // RandomOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(324, 191);
+            this.ClientSize = new System.Drawing.Size(322, 181);
+            this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(340, 230);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(340, 230);
             this.Name = "RandomOperatorView";
+            this.ShowIcon = true;
             this.Text = "随机采样算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);
