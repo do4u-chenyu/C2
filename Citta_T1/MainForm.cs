@@ -236,7 +236,7 @@ namespace C2
             // 穷举当前用户空间的所有模型
             string[] modelTitles = this.modelDocumentDao.LoadSaveModelTitle(this.userName);
             // 多文档面板加载控件
-            this.modelTitlePanel.LoadModelDocument(modelTitles);
+            //this.modelTitlePanel.LoadModelDocument(modelTitles);
             //加载用户空间的所有模型,并加入到canvas面板中
             foreach (string mt in modelTitles)
             {

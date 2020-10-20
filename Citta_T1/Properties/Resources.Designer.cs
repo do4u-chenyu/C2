@@ -1004,6 +1004,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap importmodel {
+            get {
+                object obj = ResourceManager.GetObject("importmodel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap indent {
             get {
                 object obj = ResourceManager.GetObject("indent", resourceCulture);
@@ -1997,6 +2007,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap splitter_v {
             get {
                 object obj = ResourceManager.GetObject("splitter_v", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap startPageTitle {
+            get {
+                object obj = ResourceManager.GetObject("startPageTitle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

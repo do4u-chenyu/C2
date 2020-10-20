@@ -43,7 +43,7 @@
             this.formatButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.formatButton.ForeColor = System.Drawing.Color.GhostWhite;
             this.formatButton.Image = ((System.Drawing.Image)(resources.GetObject("formatButton.Image")));
-            this.formatButton.Location = new System.Drawing.Point(120, 0);
+            this.formatButton.Location = new System.Drawing.Point(124, 1);
             this.formatButton.Name = "formatButton";
             this.formatButton.Size = new System.Drawing.Size(32, 32);
             this.formatButton.TabIndex = 0;
@@ -56,7 +56,7 @@
             this.moreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.moreButton.ForeColor = System.Drawing.Color.GhostWhite;
             this.moreButton.Image = ((System.Drawing.Image)(resources.GetObject("moreButton.Image")));
-            this.moreButton.Location = new System.Drawing.Point(158, 0);
+            this.moreButton.Location = new System.Drawing.Point(164, 1);
             this.moreButton.Name = "moreButton";
             this.moreButton.Size = new System.Drawing.Size(32, 32);
             this.moreButton.TabIndex = 0;
@@ -71,7 +71,7 @@
             this.undoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.undoButton.ForeColor = System.Drawing.Color.GhostWhite;
             this.undoButton.Image = ((System.Drawing.Image)(resources.GetObject("undoButton.Image")));
-            this.undoButton.Location = new System.Drawing.Point(44, 0);
+            this.undoButton.Location = new System.Drawing.Point(44, 1);
             this.undoButton.Name = "undoButton";
             this.undoButton.Size = new System.Drawing.Size(32, 32);
             this.undoButton.TabIndex = 0;
@@ -86,7 +86,7 @@
             this.redoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.redoButton.ForeColor = System.Drawing.Color.GhostWhite;
             this.redoButton.Image = ((System.Drawing.Image)(resources.GetObject("redoButton.Image")));
-            this.redoButton.Location = new System.Drawing.Point(82, 0);
+            this.redoButton.Location = new System.Drawing.Point(84, 1);
             this.redoButton.Name = "redoButton";
             this.redoButton.Size = new System.Drawing.Size(32, 32);
             this.redoButton.TabIndex = 0;
@@ -96,12 +96,15 @@
             // 
             // ImportModel
             // 
-            this.ImportModel.Location = new System.Drawing.Point(207, 5);
+            this.ImportModel.BackColor = System.Drawing.Color.GhostWhite;
+            this.ImportModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ImportModel.ForeColor = System.Drawing.Color.GhostWhite;
+            this.ImportModel.Image = global::Citta_T1.Properties.Resources.importmodel;
+            this.ImportModel.Location = new System.Drawing.Point(204, 1);
             this.ImportModel.Name = "ImportModel";
-            this.ImportModel.Size = new System.Drawing.Size(70, 23);
+            this.ImportModel.Size = new System.Drawing.Size(32, 32);
             this.ImportModel.TabIndex = 1;
-            this.ImportModel.Text = "导入模型";
-            this.ImportModel.UseVisualStyleBackColor = true;
+            this.ImportModel.UseVisualStyleBackColor = false;
             this.ImportModel.Click += new System.EventHandler(this.ImportModel_Click);
             // 
             // TopToolBarControl
