@@ -1867,6 +1867,7 @@
     <None Include="Resources\keyboard1.png" />
     <None Include="Resources\languages1.png" />
     <None Include="Resources\keyboard.ico" />
+    <None Include="Resources\importDataSource.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

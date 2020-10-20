@@ -1004,6 +1004,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap importDataSource {
+            get {
+                object obj = ResourceManager.GetObject("importDataSource", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap importmodel {
             get {
                 object obj = ResourceManager.GetObject("importmodel", resourceCulture);

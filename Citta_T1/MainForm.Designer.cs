@@ -63,7 +63,6 @@ namespace C2
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.saveAllButton = new System.Windows.Forms.Button();
-            this.ImportButton = new System.Windows.Forms.Button();
             this.saveModelButton = new System.Windows.Forms.Button();
             this.newModelButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -81,6 +80,7 @@ namespace C2
             this.resetButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
+            this.ImportDataSourceButton = new System.Windows.Forms.Button();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
@@ -100,6 +100,7 @@ namespace C2
             this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
             this.modelTitlePanel = new C2.Controls.Title.ModelTitlePanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -470,19 +471,6 @@ namespace C2
             this.saveAllButton.UseVisualStyleBackColor = false;
             this.saveAllButton.Click += new System.EventHandler(this.SaveAllButton_Click);
             // 
-            // ImportButton
-            // 
-            this.ImportButton.BackColor = System.Drawing.Color.White;
-            this.ImportButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ImportButton.Image = ((System.Drawing.Image)(resources.GetObject("ImportButton.Image")));
-            this.ImportButton.Location = new System.Drawing.Point(88, 8);
-            this.ImportButton.Name = "ImportButton";
-            this.ImportButton.Size = new System.Drawing.Size(79, 32);
-            this.ImportButton.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.ImportButton, "导入本地数据文件,支持bcp,cvs,txt,xls四种格式");
-            this.ImportButton.UseVisualStyleBackColor = false;
-            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
-            // 
             // saveModelButton
             // 
             this.saveModelButton.BackColor = System.Drawing.Color.GhostWhite;
@@ -647,6 +635,20 @@ namespace C2
             this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
             this.runButton.UseVisualStyleBackColor = true;
             // 
+            // ImportDataSourceButton
+            // 
+            this.ImportDataSourceButton.BackColor = System.Drawing.Color.GhostWhite;
+            this.ImportDataSourceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ImportDataSourceButton.ForeColor = System.Drawing.Color.GhostWhite;
+            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.importDataSource;
+            this.ImportDataSourceButton.Location = new System.Drawing.Point(66, 0);
+            this.ImportDataSourceButton.Name = "ImportDataSourceButton";
+            this.ImportDataSourceButton.Size = new System.Drawing.Size(32, 32);
+            this.ImportDataSourceButton.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.ImportDataSourceButton, "导入本地数据文件,支持bcp,txt,csv,xls四种格式");
+            this.ImportDataSourceButton.UseVisualStyleBackColor = false;
+            this.ImportDataSourceButton.Click += new System.EventHandler(this.ImportDataSource_Click);
+            // 
             // MainPanel
             // 
             this.MainPanel.Controls.Add(this.panel7);
@@ -670,6 +672,10 @@ namespace C2
             // BaseWorkSpace
             // 
             this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
+            this.BaseWorkSpace.Controls.Add(this.button1);
+            this.BaseWorkSpace.Controls.Add(this.ImportDataSourceButton);
+            this.BaseWorkSpace.Controls.Add(this.saveModelButton);
+            this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -869,6 +875,20 @@ namespace C2
             this.modelTitlePanel.Size = new System.Drawing.Size(910, 32);
             this.modelTitlePanel.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.GhostWhite;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.GhostWhite;
+            this.button1.Image = global::C2.Properties.Resources.importDataSource;
+            this.button1.Location = new System.Drawing.Point(94, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 32);
+            this.button1.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.button1, "临时新建一个DocumentForm窗体");
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -950,7 +970,6 @@ namespace C2
         private System.Windows.Forms.Button diffButton;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
-        private System.Windows.Forms.Button ImportButton;
         private Controls.Left.OperatorControl operatorControl;
         private Controls.Left.FlowChartControl flowChartControl;
         private Controls.Left.DataSourceControl dataSourceControl;
@@ -989,5 +1008,7 @@ namespace C2
         private Button runButton;
         private Controls.Flow.NaviViewControl naviViewControl;
         private C2.Controls.MdiWorkSpace mdiWorkSpace1;
+        private Button ImportDataSourceButton;
+        private Button button1;
     }
 }
