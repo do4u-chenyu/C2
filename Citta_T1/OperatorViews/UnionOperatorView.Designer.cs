@@ -23,6 +23,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UnionOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -42,14 +43,14 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(234, 0);
-            this.dataSourceTB1.Size = new System.Drawing.Size(179, 23);
+            this.dataSourceTB1.Size = new System.Drawing.Size(179, 29);
             this.dataSourceTB1.TabIndex = 8;
             this.dataSourceTB1.Visible = true;
             // 
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(4, 0);
-            this.dataSourceTB0.Size = new System.Drawing.Size(179, 23);
+            this.dataSourceTB0.Size = new System.Drawing.Size(179, 29);
             this.dataSourceTB0.TabIndex = 7;
             // 
             // cancelButton
@@ -67,24 +68,24 @@
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.comboBox0.Location = new System.Drawing.Point(2, 3);
-            this.comboBox0.Size = new System.Drawing.Size(86, 25);
+            this.comboBox0.Location = new System.Drawing.Point(2, 2);
+            this.comboBox0.Size = new System.Drawing.Size(86, 29);
             // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.comboBox1.Location = new System.Drawing.Point(92, 3);
-            this.comboBox1.Size = new System.Drawing.Size(86, 25);
+            this.comboBox1.Location = new System.Drawing.Point(92, 2);
+            this.comboBox1.Size = new System.Drawing.Size(86, 29);
             this.comboBox1.Visible = true;
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(553, 37);
+            this.topPanel.Size = new System.Drawing.Size(551, 37);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 334);
-            this.bottomPanel.Size = new System.Drawing.Size(553, 44);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 324);
+            this.bottomPanel.Size = new System.Drawing.Size(551, 44);
             // 
             // keyPanel
             // 
@@ -92,7 +93,7 @@
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Size = new System.Drawing.Size(116, 297);
+            this.keyPanel.Size = new System.Drawing.Size(116, 287);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             this.keyPanel.Controls.SetChildIndex(this.label3, 0);
@@ -105,7 +106,7 @@
             this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Size = new System.Drawing.Size(437, 297);
+            this.valuePanel.Size = new System.Drawing.Size(435, 287);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
             this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
@@ -114,7 +115,7 @@
             // 
             // label1
             // 
-            this.label1.Size = new System.Drawing.Size(90, 22);
+            this.label1.Size = new System.Drawing.Size(123, 30);
             // 
             // label3
             // 
@@ -123,7 +124,7 @@
             this.label3.Location = new System.Drawing.Point(32, 264);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 22);
+            this.label3.Size = new System.Drawing.Size(123, 30);
             this.label3.TabIndex = 0;
             this.label3.Text = "是否去重：";
             // 
@@ -134,7 +135,7 @@
             this.label2.Location = new System.Drawing.Point(32, 59);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 22);
+            this.label2.Size = new System.Drawing.Size(123, 30);
             this.label2.TabIndex = 0;
             this.label2.Text = "并集条件：";
             // 
@@ -183,10 +184,10 @@
             this.textBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox0.ForeColor = System.Drawing.Color.Gray;
-            this.textBox0.Location = new System.Drawing.Point(182, 4);
+            this.textBox0.Location = new System.Drawing.Point(182, 2);
             this.textBox0.Margin = new System.Windows.Forms.Padding(2);
             this.textBox0.Name = "textBox0";
-            this.textBox0.Size = new System.Drawing.Size(86, 23);
+            this.textBox0.Size = new System.Drawing.Size(86, 29);
             this.textBox0.TabIndex = 6;
             this.textBox0.Text = "别名";
             // 
@@ -210,7 +211,7 @@
             this.repetition.Location = new System.Drawing.Point(75, 8);
             this.repetition.Margin = new System.Windows.Forms.Padding(2);
             this.repetition.Name = "repetition";
-            this.repetition.Size = new System.Drawing.Size(62, 21);
+            this.repetition.Size = new System.Drawing.Size(82, 27);
             this.repetition.TabIndex = 1;
             this.repetition.TabStop = true;
             this.repetition.Text = "不去重";
@@ -223,7 +224,7 @@
             this.noRepetition.Location = new System.Drawing.Point(5, 8);
             this.noRepetition.Margin = new System.Windows.Forms.Padding(2);
             this.noRepetition.Name = "noRepetition";
-            this.noRepetition.Size = new System.Drawing.Size(50, 21);
+            this.noRepetition.Size = new System.Drawing.Size(65, 27);
             this.noRepetition.TabIndex = 0;
             this.noRepetition.Text = "去重";
             this.noRepetition.UseVisualStyleBackColor = true;
@@ -240,17 +241,20 @@
             // UnionOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(553, 378);
+            this.ClientSize = new System.Drawing.Size(551, 368);
+            this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(569, 417);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(569, 417);
             this.Name = "UnionOperatorView";
+            this.ShowIcon = true;
             this.Text = "取并集算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);

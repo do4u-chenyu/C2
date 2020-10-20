@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -39,7 +40,7 @@
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(5, 4);
-            this.dataSourceTB0.Size = new System.Drawing.Size(137, 23);
+            this.dataSourceTB0.Size = new System.Drawing.Size(137, 29);
             this.dataSourceTB0.TabIndex = 9;
             // 
             // cancelButton
@@ -57,8 +58,12 @@
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(4, 263);
-            this.outListCCBL0.Size = new System.Drawing.Size(138, 24);
+            this.outListCCBL0.Size = new System.Drawing.Size(138, 30);
             this.outListCCBL0.TabIndex = 8;
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.Location = new System.Drawing.Point(2, 2);
             // 
             // comboBox1
             // 
@@ -69,16 +74,17 @@
             "大于等于 ≥",
             "小于等于 ≦",
             "不等于 ≠"});
+            this.comboBox1.Location = new System.Drawing.Point(92, 2);
             this.comboBox1.Visible = true;
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(589, 37);
+            this.topPanel.Size = new System.Drawing.Size(587, 37);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 339);
-            this.bottomPanel.Size = new System.Drawing.Size(589, 64);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 329);
+            this.bottomPanel.Size = new System.Drawing.Size(587, 64);
             // 
             // keyPanel
             // 
@@ -86,7 +92,7 @@
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Size = new System.Drawing.Size(116, 302);
+            this.keyPanel.Size = new System.Drawing.Size(116, 292);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             this.keyPanel.Controls.SetChildIndex(this.label3, 0);
@@ -98,7 +104,7 @@
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Size = new System.Drawing.Size(473, 302);
+            this.valuePanel.Size = new System.Drawing.Size(471, 292);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
@@ -107,7 +113,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(32, 4);
-            this.label1.Size = new System.Drawing.Size(90, 22);
+            this.label1.Size = new System.Drawing.Size(123, 30);
             // 
             // label3
             // 
@@ -116,7 +122,7 @@
             this.label3.Location = new System.Drawing.Point(32, 261);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 22);
+            this.label3.Size = new System.Drawing.Size(123, 30);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段：";
             // 
@@ -127,7 +133,7 @@
             this.label2.Location = new System.Drawing.Point(32, 60);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 22);
+            this.label2.Size = new System.Drawing.Size(123, 30);
             this.label2.TabIndex = 0;
             this.label2.Text = "过滤条件：";
             // 
@@ -175,10 +181,10 @@
             // 
             this.textBoxEx1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxEx1.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxEx1.Location = new System.Drawing.Point(182, 5);
+            this.textBoxEx1.Location = new System.Drawing.Point(182, 2);
             this.textBoxEx1.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxEx1.Name = "textBoxEx1";
-            this.textBoxEx1.Size = new System.Drawing.Size(86, 22);
+            this.textBoxEx1.Size = new System.Drawing.Size(86, 27);
             this.textBoxEx1.TabIndex = 6;
             // 
             // panel1
@@ -193,17 +199,20 @@
             // FilterOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(589, 403);
+            this.ClientSize = new System.Drawing.Size(587, 393);
+            this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(605, 442);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(605, 442);
             this.Name = "FilterOperatorView";
+            this.ShowIcon = true;
             this.Text = "条件筛选算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);
