@@ -99,7 +99,7 @@
             this.ImportModel.BackColor = System.Drawing.Color.GhostWhite;
             this.ImportModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ImportModel.ForeColor = System.Drawing.Color.GhostWhite;
-            this.ImportModel.Image = global::Citta_T1.Properties.Resources.importmodel;
+            this.ImportModel.Image = global::C2.Properties.Resources.importmodel;
             this.ImportModel.Location = new System.Drawing.Point(204, 1);
             this.ImportModel.Name = "ImportModel";
             this.ImportModel.Size = new System.Drawing.Size(32, 32);

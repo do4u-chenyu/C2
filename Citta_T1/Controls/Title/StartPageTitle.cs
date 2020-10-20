@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Properties;
-using Citta_T1.Utils;
-using Citta_T1.Core;
+using C2.Properties;
+using C2.Utils;
+using C2.Core;
 
-namespace Citta_T1.Controls.Title
+namespace C2.Controls.Title
 {
     public partial class StartPageTitle : UserControl
     {
@@ -24,7 +24,7 @@ namespace Citta_T1.Controls.Title
         protected override void OnPaint(PaintEventArgs e)
         {
             var rectImg = new Rectangle(12, 5, 24, 15);
-            Image img = SetImgcolor(global::Citta_T1.Properties.Resources.startPageTitle);
+            Image img = SetImgcolor(global::C2.Properties.Resources.startPageTitle);
             PaintHelper.DrawImageInRange(e.Graphics, img, rectImg);
         }
 
