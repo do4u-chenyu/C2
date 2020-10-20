@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace C2.OperatorViews.Base
+namespace C2.Dialogs.Base
 {
 
     public partial class BaseOperatorView : Form

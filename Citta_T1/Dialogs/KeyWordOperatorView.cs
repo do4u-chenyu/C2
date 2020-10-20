@@ -1,6 +1,6 @@
 ﻿using C2.Controls.Move.Op;
 using C2.Core;
-using C2.OperatorViews.Base;
+using C2.Dialogs.Base;
 using C2.Utils;
 using NPOI.SS.Formula.Functions;
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace C2.OperatorViews
+namespace C2.Dialogs
 {
 
     public partial class KeywordOperatorView : BaseOperatorView

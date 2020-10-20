@@ -1,7 +1,8 @@
-﻿namespace C2.OperatorViews
+﻿namespace C2.Dialogs
 {
-    partial class CollideOperatorView
+    partial class DifferOperatorView
     {
+        
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -23,7 +24,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CollideOperatorView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DifferOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -37,7 +38,7 @@
             // 
             // dataSourceTB1
             // 
-            this.dataSourceTB1.Location = new System.Drawing.Point(187, 2);
+            this.dataSourceTB1.Location = new System.Drawing.Point(195, 2);
             this.dataSourceTB1.Size = new System.Drawing.Size(144, 29);
             this.dataSourceTB1.TabIndex = 10;
             this.dataSourceTB1.Visible = true;
@@ -50,20 +51,19 @@
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Location = new System.Drawing.Point(473, 19);
+            this.cancelButton.Location = new System.Drawing.Point(485, 19);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
             this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Location = new System.Drawing.Point(370, 19);
+            this.confirmButton.Location = new System.Drawing.Point(380, 19);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
             // outListCCBL0
             // 
-            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL0.Location = new System.Drawing.Point(4, 263);
-            this.outListCCBL0.Size = new System.Drawing.Size(144, 28);
+            this.outListCCBL0.Size = new System.Drawing.Size(144, 30);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox0
@@ -77,12 +77,12 @@
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(539, 37);
+            this.topPanel.Size = new System.Drawing.Size(558, 37);
             // 
             // bottomPanel
             // 
             this.bottomPanel.Location = new System.Drawing.Point(0, 315);
-            this.bottomPanel.Size = new System.Drawing.Size(539, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(558, 64);
             // 
             // keyPanel
             // 
@@ -103,7 +103,7 @@
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Size = new System.Drawing.Size(423, 278);
+            this.valuePanel.Size = new System.Drawing.Size(442, 278);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
@@ -112,7 +112,6 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(32, 2);
             this.label1.Size = new System.Drawing.Size(123, 30);
             // 
             // label3
@@ -135,7 +134,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(123, 30);
             this.label2.TabIndex = 0;
-            this.label2.Text = "碰撞条件：";
+            this.label2.Text = "差集条件：";
             // 
             // tableLayoutPanel2
             // 
@@ -180,28 +179,27 @@
             this.panel1.Location = new System.Drawing.Point(4, 87);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(419, 160);
+            this.panel1.Size = new System.Drawing.Size(425, 160);
             this.panel1.TabIndex = 1;
             // 
-            // CollideOperatorView
+            // DifferOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(539, 379);
+            this.ClientSize = new System.Drawing.Size(558, 379);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
-            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(557, 428);
+            this.MaximumSize = new System.Drawing.Size(576, 428);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(557, 428);
-            this.Name = "CollideOperatorView";
+            this.MinimumSize = new System.Drawing.Size(576, 428);
+            this.Name = "DifferOperatorView";
             this.ShowIcon = true;
-            this.Text = "碰撞算子设置";
+            this.Text = "取差集算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);
             this.keyPanel.PerformLayout();

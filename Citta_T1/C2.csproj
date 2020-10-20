@@ -715,14 +715,44 @@
     <Compile Include="Dialogs\AddIconDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialogs\AvgOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AvgOperatorView.Designer.cs">
+      <DependentUpon>AvgOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Base\BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Base\BaseOperatorView.Designer.cs">
+      <DependentUpon>BaseOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\CheckUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\CheckUpdate.Designer.cs">
       <DependentUpon>CheckUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\CollideOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CollideOperatorView.Designer.cs">
+      <DependentUpon>CollideOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Components\ThemeFolderNode.cs" />
     <Compile Include="Dialogs\Components\ThemeNode.cs" />
+    <Compile Include="Dialogs\DataFormatOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DataFormatOperatorView.Designer.cs">
+      <DependentUpon>DataFormatOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DifferOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DifferOperatorView.Designer.cs">
+      <DependentUpon>DifferOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\DonationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -744,11 +774,29 @@
     <Compile Include="Dialogs\FileLocationDialog.Designer.cs">
       <DependentUpon>FileLocationDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\FilterOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FilterOperatorView.Designer.cs">
+      <DependentUpon>FilterOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\FindDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\FindDialog.Designer.cs">
       <DependentUpon>FindDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FreqOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FreqOperatorView.Designer.cs">
+      <DependentUpon>FreqOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GroupOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GroupOperatorView.Designer.cs">
+      <DependentUpon>GroupOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\InputDialog.cs">
       <SubType>Form</SubType>
@@ -761,6 +809,24 @@
     </Compile>
     <Compile Include="Dialogs\InternetImageDialog.Designer.cs">
       <DependentUpon>InternetImageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\KeyWordOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\KeyWordOperatorView.designer.cs">
+      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\MaxOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\MaxOperatorView.Designer.cs">
+      <DependentUpon>MaxOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\MinOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\MinOperatorView.Designer.cs">
+      <DependentUpon>MinOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ModifyShortcutsDialog.cs">
       <SubType>Form</SubType>
@@ -783,6 +849,18 @@
     <Compile Include="Dialogs\PropertyDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialogs\RandomOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RandomOperatorView.Designer.cs">
+      <DependentUpon>RandomOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RelateOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RelateOperatorView.Designer.cs">
+      <DependentUpon>RelateOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\SaveTabsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -797,6 +875,12 @@
     </Compile>
     <Compile Include="Dialogs\ShortcutKeysMapDialog.Designer.cs">
       <DependentUpon>ShortcutKeysMapDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SortOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SortOperatorView.Designer.cs">
+      <DependentUpon>SortOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\SortTopicDialog.cs">
       <SubType>Form</SubType>
@@ -815,6 +899,12 @@
     </Compile>
     <Compile Include="Dialogs\TimerDialog.Designer.cs">
       <DependentUpon>TimerDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\UnionOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UnionOperatorView.Designer.cs">
+      <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="DocumentForm.cs">
       <SubType>Form</SubType>
@@ -1070,96 +1160,6 @@
     <Compile Include="Model\Widgets\Widget.cs" />
     <Compile Include="Model\Widgets\WidgetAlignment.cs" />
     <Compile Include="Model\Widgets\WidgetEventHandler.cs" />
-    <Compile Include="OperatorViews\AvgOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\AvgOperatorView.Designer.cs">
-      <DependentUpon>AvgOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\Base\BaseOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\Base\BaseOperatorView.Designer.cs">
-      <DependentUpon>BaseOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\CollideOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\CollideOperatorView.Designer.cs">
-      <DependentUpon>CollideOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\DifferOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\DifferOperatorView.Designer.cs">
-      <DependentUpon>DifferOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\FilterOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\FilterOperatorView.Designer.cs">
-      <DependentUpon>FilterOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\FreqOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\FreqOperatorView.Designer.cs">
-      <DependentUpon>FreqOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\GroupOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\GroupOperatorView.Designer.cs">
-      <DependentUpon>GroupOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\KeywordOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\KeywordOperatorView.designer.cs">
-      <DependentUpon>KeywordOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\MaxOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\MaxOperatorView.Designer.cs">
-      <DependentUpon>MaxOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\MinOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\MinOperatorView.Designer.cs">
-      <DependentUpon>MinOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\RandomOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\RandomOperatorView.Designer.cs">
-      <DependentUpon>RandomOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\RelateOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\RelateOperatorView.Designer.cs">
-      <DependentUpon>RelateOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\SortOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\SortOperatorView.Designer.cs">
-      <DependentUpon>SortOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\DataFormatOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\DataFormatOperatorView.Designer.cs">
-      <DependentUpon>DataFormatOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorViews\UnionOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorViews\UnionOperatorView.Designer.cs">
-      <DependentUpon>UnionOperatorView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Bottom\BottomLogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1302,9 +1302,18 @@
     <EmbeddedResource Include="Dialogs\AboutDialogBox.resx">
       <DependentUpon>AboutDialogBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AvgOperatorView.resx">
+      <DependentUpon>AvgOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Base\BaseOperatorView.resx">
+      <DependentUpon>BaseOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckUpdate.resx">
       <DependentUpon>CheckUpdate.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CollideOperatorView.resx">
+      <DependentUpon>CollideOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
@@ -1312,12 +1321,27 @@
     <EmbeddedResource Include="Dialogs\CreateNewModelForm.resx">
       <DependentUpon>CreateNewModelForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DataFormatOperatorView.resx">
+      <DependentUpon>DataFormatOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DifferOperatorView.resx">
+      <DependentUpon>DifferOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DonationDialog.resx">
       <DependentUpon>DonationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FilterOperatorView.resx">
+      <DependentUpon>FilterOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\FindDialog.resx">
       <DependentUpon>FindDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FreqOperatorView.resx">
+      <DependentUpon>FreqOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GroupOperatorView.resx">
+      <DependentUpon>GroupOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InputDialog.resx">
       <DependentUpon>InputDialog.cs</DependentUpon>
@@ -1327,8 +1351,17 @@
       <DependentUpon>InternetImageDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\KeyWordOperatorView.resx">
+      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\MaxOperatorView.resx">
+      <DependentUpon>MaxOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\MinOperatorView.resx">
+      <DependentUpon>MinOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ModifyShortcutsDialog.resx">
       <DependentUpon>ModifyShortcutsDialog.cs</DependentUpon>
@@ -1341,6 +1374,12 @@
       <DependentUpon>PropertyDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RandomOperatorView.resx">
+      <DependentUpon>RandomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RelateOperatorView.resx">
+      <DependentUpon>RelateOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SaveTabsDialog.resx">
       <DependentUpon>SaveTabsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1348,6 +1387,9 @@
     <EmbeddedResource Include="Dialogs\ShortcutKeysMapDialog.resx">
       <DependentUpon>ShortcutKeysMapDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SortOperatorView.resx">
+      <DependentUpon>SortOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SortTopicDialog.resx">
       <DependentUpon>SortTopicDialog.cs</DependentUpon>
@@ -1359,6 +1401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\TimerDialog.resx">
       <DependentUpon>TimerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UnionOperatorView.resx">
+      <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
@@ -1388,51 +1433,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Left\OperatorControl.resx">
       <DependentUpon>OperatorControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\AvgOperatorView.resx">
-      <DependentUpon>AvgOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\Base\BaseOperatorView.resx">
-      <DependentUpon>BaseOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\CollideOperatorView.resx">
-      <DependentUpon>CollideOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\DifferOperatorView.resx">
-      <DependentUpon>DifferOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\FilterOperatorView.resx">
-      <DependentUpon>FilterOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\FreqOperatorView.resx">
-      <DependentUpon>FreqOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\GroupOperatorView.resx">
-      <DependentUpon>GroupOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\KeywordOperatorView.resx">
-      <DependentUpon>KeywordOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\MaxOperatorView.resx">
-      <DependentUpon>MaxOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\MinOperatorView.resx">
-      <DependentUpon>MinOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\RandomOperatorView.resx">
-      <DependentUpon>RandomOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\RelateOperatorView.resx">
-      <DependentUpon>RelateOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\SortOperatorView.resx">
-      <DependentUpon>SortOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\DataFormatOperatorView.resx">
-      <DependentUpon>DataFormatOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\UnionOperatorView.resx">
-      <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

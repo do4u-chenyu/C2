@@ -1,4 +1,4 @@
-﻿namespace C2.OperatorViews
+﻿namespace C2.Dialogs
 {
     partial class KeywordOperatorView
     {
