@@ -1,6 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Utils;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace C2.Controls.Left
@@ -11,6 +12,8 @@ namespace C2.Controls.Left
         {
             InitializeComponent();
             InitializeToolTip();
+            
+            //this.differOpPictureBox.Image = SetImgcolor(global::C2.Properties.Resources.differOp);
         }
 
         private void InitializeToolTip()
@@ -42,6 +45,27 @@ namespace C2.Controls.Left
                 dragDropData.SetData("Text", (sender as Button).Text);
                 (sender as Button).DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
+        }
+
+        private Bitmap SetImgcolor(Bitmap img)
+        {
+            Color initColor = img.GetPixel(0, 0);
+            for (int i = 0; i < img.Height; i++)
+            {
+                for (int j = 0; j < img.Width; j++)
+                {
+                    Color c = img.GetPixel(j, i);
+                    if (c.Equals(initColor))
+                        img.SetPixel(j, i, Color.FromArgb(0, 0, 0, 0));
+                }
+            }
+            img.Save("1.png");
+            return img;
+        }
+
+        private void relateOpPictureBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -44,10 +44,10 @@ namespace C2
             this.oprateButton = new System.Windows.Forms.Button();
             this.myModelButton = new System.Windows.Forms.Button();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
-            this.operatorControl = new C2.Controls.Left.OperatorControl();
             this.flowChartControl = new C2.Controls.Left.FlowChartControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
+            this.operatorControl = new C2.Controls.Left.OperatorControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.bottomPreview = new C2.Controls.Bottom.BottomPreviewControl();
             this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
@@ -236,7 +236,6 @@ namespace C2
             this.oprateButton.Text = "算子";
             this.toolTip1.SetToolTip(this.oprateButton, "数据分析建模所需的所有算法");
             this.oprateButton.UseVisualStyleBackColor = true;
-            this.oprateButton.Click += new System.EventHandler(this.OprateButton_Click);
             // 
             // myModelButton
             // 
@@ -253,7 +252,6 @@ namespace C2
             // leftToolBoxPanel
             // 
             this.leftToolBoxPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.leftToolBoxPanel.Controls.Add(this.operatorControl);
             this.leftToolBoxPanel.Controls.Add(this.flowChartControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.myModelControl);
@@ -262,18 +260,6 @@ namespace C2
             this.leftToolBoxPanel.Name = "leftToolBoxPanel";
             this.leftToolBoxPanel.Size = new System.Drawing.Size(187, 560);
             this.leftToolBoxPanel.TabIndex = 2;
-            // 
-            // operatorControl
-            // 
-            this.operatorControl.AllowDrop = true;
-            this.operatorControl.BackColor = System.Drawing.Color.White;
-            this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.operatorControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.operatorControl.Location = new System.Drawing.Point(0, 0);
-            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
-            this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(185, 558);
-            this.operatorControl.TabIndex = 0;
             // 
             // flowChartControl
             // 
@@ -311,6 +297,18 @@ namespace C2
             this.myModelControl.Name = "myModelControl";
             this.myModelControl.Size = new System.Drawing.Size(185, 558);
             this.myModelControl.TabIndex = 0;
+            // 
+            // operatorControl
+            // 
+            this.operatorControl.AllowDrop = true;
+            this.operatorControl.BackColor = System.Drawing.Color.White;
+            this.operatorControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("operatorControl.BackgroundImage")));
+            this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.operatorControl.Location = new System.Drawing.Point(687, 106);
+            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
+            this.operatorControl.Name = "operatorControl";
+            this.operatorControl.Size = new System.Drawing.Size(210, 245);
+            this.operatorControl.TabIndex = 0;
             // 
             // bottomViewPanel
             // 
@@ -726,6 +724,7 @@ namespace C2
             this.canvasPanel.AllowDrop = true;
             this.canvasPanel.BackColor = System.Drawing.Color.White;
             this.canvasPanel.Controls.Add(this.currentModelFinLab);
+            this.canvasPanel.Controls.Add(this.operatorControl);
             this.canvasPanel.Controls.Add(this.progressBarLabel);
             this.canvasPanel.Controls.Add(this.progressBar1);
             this.canvasPanel.Controls.Add(this.currentModelRunBackLab);
