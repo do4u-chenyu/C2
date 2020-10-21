@@ -354,28 +354,28 @@
     <Compile Include="Controls\Blumind\Buttons\PushButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\CaptionBars\CaptionBar.cs">
+    <Compile Include="Controls\Blumind\CaptionBars\CaptionBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\CaptionBars\CaptionButtonInfo.cs" />
-    <Compile Include="Controls\ChartPageViews\BaseChartPage.cs">
+    <Compile Include="Controls\Blumind\CaptionBars\CaptionButtonInfo.cs" />
+    <Compile Include="Controls\Blumind\ChartPageViews\BaseChartPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ChartPageViews\FreeDiagramChartPage.cs">
+    <Compile Include="Controls\Blumind\ChartPageViews\FreeDiagramChartPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ChartPageViews\FreeDiagramChartPage.Designer.cs">
+    <Compile Include="Controls\Blumind\ChartPageViews\FreeDiagramChartPage.Designer.cs">
       <DependentUpon>FreeDiagramChartPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChartPageViews\MindMapChartPage.cs">
+    <Compile Include="Controls\Blumind\ChartPageViews\MindMapChartPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ChartPageViews\MultiChartsTabRenderer.cs" />
-    <Compile Include="Controls\ChartPageViews\MultiChartsView.cs">
+    <Compile Include="Controls\Blumind\ChartPageViews\MultiChartsTabRenderer.cs" />
+    <Compile Include="Controls\Blumind\ChartPageViews\MultiChartsView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ChartPageViews\NeedShowPropertyEventArgs.cs" />
-    <Compile Include="Controls\ChartPageViews\TabBarNavButton.cs" />
+    <Compile Include="Controls\Blumind\ChartPageViews\NeedShowPropertyEventArgs.cs" />
+    <Compile Include="Controls\Blumind\ChartPageViews\TabBarNavButton.cs" />
     <Compile Include="Controls\ChartTip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -388,34 +388,34 @@
     </Compile>
     <Compile Include="Controls\ControlExtensions.cs" />
     <Compile Include="Controls\DragManager.cs" />
-    <Compile Include="Controls\DropDownControls\DropDownDirection.cs" />
-    <Compile Include="Controls\DropDownControls\DropDownFrame.cs">
+    <Compile Include="Controls\Blumind\DropDownControls\DropDownDirection.cs" />
+    <Compile Include="Controls\Blumind\DropDownControls\DropDownFrame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownControls\DropDownHelper.cs">
+    <Compile Include="Controls\Blumind\DropDownControls\DropDownHelper.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownList\BoolDropdownBox.cs">
+    <Compile Include="Controls\Blumind\DropDownList\BoolDropdownBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownList\EnumDropdownBox.cs">
+    <Compile Include="Controls\Blumind\DropDownList\EnumDropdownBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownList\ListBox2.cs">
+    <Compile Include="Controls\Blumind\DropDownList\ListBox2.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownList\ListBoxControl.cs">
+    <Compile Include="Controls\Blumind\DropDownList\ListBoxControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownList\ListBoxControlItem.cs" />
-    <Compile Include="Controls\DropDownList\ListItem.cs" />
-    <Compile Include="Controls\Editors\ColorEditBox.cs">
+    <Compile Include="Controls\Blumind\DropDownList\ListBoxControlItem.cs" />
+    <Compile Include="Controls\Blumind\DropDownList\ListItem.cs" />
+    <Compile Include="Controls\Blumind\Editors\ColorEditBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Editors\TextBoxEx.cs">
+    <Compile Include="Controls\Blumind\Editors\TextBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Editors\TextBoxExDropDownButton.cs" />
+    <Compile Include="Controls\Blumind\Editors\TextBoxExDropDownButton.cs" />
     <Compile Include="Controls\Fonts\FontButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1236,7 +1236,7 @@
     <EmbeddedResource Include="Controls\CanvasPanel.resx">
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ChartPageViews\MindMapChartPage.resx">
+    <EmbeddedResource Include="Controls\Blumind\ChartPageViews\MindMapChartPage.resx">
       <DependentUpon>MindMapChartPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\ComCheckBoxList.resx">
