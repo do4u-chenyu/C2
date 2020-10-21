@@ -324,34 +324,34 @@
     <Compile Include="Configuration\Options.cs" />
     <Compile Include="Configuration\RecentFiles\RecentFileInfo.cs" />
     <Compile Include="Configuration\RecentFiles\RecentFilesManage.cs" />
-    <Compile Include="Controls\Aero\AeroGlassCompositionChangedEventArgs.cs" />
-    <Compile Include="Controls\Aero\DesktopWindowManagerNativeMethods.cs" />
-    <Compile Include="Controls\Aero\GlassForm.cs">
+    <Compile Include="Controls\Blumind\Aero\AeroGlassCompositionChangedEventArgs.cs" />
+    <Compile Include="Controls\Blumind\Aero\DesktopWindowManagerNativeMethods.cs" />
+    <Compile Include="Controls\Blumind\Aero\GlassForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\Aero\NativeRect.cs" />
-    <Compile Include="Controls\BaseControls\BaseControl.cs">
+    <Compile Include="Controls\Blumind\Aero\NativeRect.cs" />
+    <Compile Include="Controls\Blumind\BaseControls\BaseControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\BaseControls\ControlFullScreenShell.cs">
+    <Compile Include="Controls\Blumind\BaseControls\ControlFullScreenShell.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\BaseControls\UIControlStatus.cs" />
-    <Compile Include="Controls\Buttons\BrowseButton.cs">
+    <Compile Include="Controls\Blumind\BaseControls\UIControlStatus.cs" />
+    <Compile Include="Controls\Blumind\Buttons\BrowseButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Buttons\ButtonEventArgs.cs" />
-    <Compile Include="Controls\Buttons\ButtonInfo.cs" />
-    <Compile Include="Controls\Buttons\ButtonListBox.cs">
+    <Compile Include="Controls\Blumind\Buttons\ButtonEventArgs.cs" />
+    <Compile Include="Controls\Blumind\Buttons\ButtonInfo.cs" />
+    <Compile Include="Controls\Blumind\Buttons\ButtonListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Buttons\FlatButton.cs">
+    <Compile Include="Controls\Blumind\Buttons\FlatButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Buttons\ImageButton.cs">
+    <Compile Include="Controls\Blumind\Buttons\ImageButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Buttons\PushButton.cs">
+    <Compile Include="Controls\Blumind\Buttons\PushButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CaptionBars\CaptionBar.cs">
@@ -2396,7 +2396,9 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\C1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
