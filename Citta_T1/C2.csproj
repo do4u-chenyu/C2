@@ -324,58 +324,58 @@
     <Compile Include="Configuration\Options.cs" />
     <Compile Include="Configuration\RecentFiles\RecentFileInfo.cs" />
     <Compile Include="Configuration\RecentFiles\RecentFilesManage.cs" />
-    <Compile Include="Controls\Aero\AeroGlassCompositionChangedEventArgs.cs" />
-    <Compile Include="Controls\Aero\DesktopWindowManagerNativeMethods.cs" />
-    <Compile Include="Controls\Aero\GlassForm.cs">
+    <Compile Include="Controls\Blumind\Aero\AeroGlassCompositionChangedEventArgs.cs" />
+    <Compile Include="Controls\Blumind\Aero\DesktopWindowManagerNativeMethods.cs" />
+    <Compile Include="Controls\Blumind\Aero\GlassForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\Aero\NativeRect.cs" />
-    <Compile Include="Controls\BaseControls\BaseControl.cs">
+    <Compile Include="Controls\Blumind\Aero\NativeRect.cs" />
+    <Compile Include="Controls\Blumind\BaseControls\BaseControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\BaseControls\ControlFullScreenShell.cs">
+    <Compile Include="Controls\Blumind\BaseControls\ControlFullScreenShell.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\BaseControls\UIControlStatus.cs" />
-    <Compile Include="Controls\Buttons\BrowseButton.cs">
+    <Compile Include="Controls\Blumind\BaseControls\UIControlStatus.cs" />
+    <Compile Include="Controls\Blumind\Buttons\BrowseButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Buttons\ButtonEventArgs.cs" />
-    <Compile Include="Controls\Buttons\ButtonInfo.cs" />
-    <Compile Include="Controls\Buttons\ButtonListBox.cs">
+    <Compile Include="Controls\Blumind\Buttons\ButtonEventArgs.cs" />
+    <Compile Include="Controls\Blumind\Buttons\ButtonInfo.cs" />
+    <Compile Include="Controls\Blumind\Buttons\ButtonListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Buttons\FlatButton.cs">
+    <Compile Include="Controls\Blumind\Buttons\FlatButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Buttons\ImageButton.cs">
+    <Compile Include="Controls\Blumind\Buttons\ImageButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Buttons\PushButton.cs">
+    <Compile Include="Controls\Blumind\Buttons\PushButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\CaptionBars\CaptionBar.cs">
+    <Compile Include="Controls\Blumind\CaptionBars\CaptionBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\CaptionBars\CaptionButtonInfo.cs" />
-    <Compile Include="Controls\ChartPageViews\BaseChartPage.cs">
+    <Compile Include="Controls\Blumind\CaptionBars\CaptionButtonInfo.cs" />
+    <Compile Include="Controls\Blumind\ChartPageViews\BaseChartPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ChartPageViews\FreeDiagramChartPage.cs">
+    <Compile Include="Controls\Blumind\ChartPageViews\FreeDiagramChartPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ChartPageViews\FreeDiagramChartPage.Designer.cs">
+    <Compile Include="Controls\Blumind\ChartPageViews\FreeDiagramChartPage.Designer.cs">
       <DependentUpon>FreeDiagramChartPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChartPageViews\MindMapChartPage.cs">
+    <Compile Include="Controls\Blumind\ChartPageViews\MindMapChartPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ChartPageViews\MultiChartsTabRenderer.cs" />
-    <Compile Include="Controls\ChartPageViews\MultiChartsView.cs">
+    <Compile Include="Controls\Blumind\ChartPageViews\MultiChartsTabRenderer.cs" />
+    <Compile Include="Controls\Blumind\ChartPageViews\MultiChartsView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ChartPageViews\NeedShowPropertyEventArgs.cs" />
-    <Compile Include="Controls\ChartPageViews\TabBarNavButton.cs" />
+    <Compile Include="Controls\Blumind\ChartPageViews\NeedShowPropertyEventArgs.cs" />
+    <Compile Include="Controls\Blumind\ChartPageViews\TabBarNavButton.cs" />
     <Compile Include="Controls\ChartTip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -388,34 +388,34 @@
     </Compile>
     <Compile Include="Controls\ControlExtensions.cs" />
     <Compile Include="Controls\DragManager.cs" />
-    <Compile Include="Controls\DropDownControls\DropDownDirection.cs" />
-    <Compile Include="Controls\DropDownControls\DropDownFrame.cs">
+    <Compile Include="Controls\Blumind\DropDownControls\DropDownDirection.cs" />
+    <Compile Include="Controls\Blumind\DropDownControls\DropDownFrame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownControls\DropDownHelper.cs">
+    <Compile Include="Controls\Blumind\DropDownControls\DropDownHelper.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownList\BoolDropdownBox.cs">
+    <Compile Include="Controls\Blumind\DropDownList\BoolDropdownBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownList\EnumDropdownBox.cs">
+    <Compile Include="Controls\Blumind\DropDownList\EnumDropdownBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownList\ListBox2.cs">
+    <Compile Include="Controls\Blumind\DropDownList\ListBox2.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownList\ListBoxControl.cs">
+    <Compile Include="Controls\Blumind\DropDownList\ListBoxControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDownList\ListBoxControlItem.cs" />
-    <Compile Include="Controls\DropDownList\ListItem.cs" />
-    <Compile Include="Controls\Editors\ColorEditBox.cs">
+    <Compile Include="Controls\Blumind\DropDownList\ListBoxControlItem.cs" />
+    <Compile Include="Controls\Blumind\DropDownList\ListItem.cs" />
+    <Compile Include="Controls\Blumind\Editors\ColorEditBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Editors\TextBoxEx.cs">
+    <Compile Include="Controls\Blumind\Editors\TextBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Editors\TextBoxExDropDownButton.cs" />
+    <Compile Include="Controls\Blumind\Editors\TextBoxExDropDownButton.cs" />
     <Compile Include="Controls\Fonts\FontButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1167,6 +1167,7 @@
     <Compile Include="Model\Widgets\IWidgetContainer.cs" />
     <Compile Include="Model\Widgets\IWidgetEditDialog.cs" />
     <Compile Include="Model\Widgets\NoteWidget.cs" />
+    <Compile Include="Model\Widgets\OperatorWidget.cs" />
     <Compile Include="Model\Widgets\PictureWidget.cs" />
     <Compile Include="Model\Widgets\ProgressBarWidget.cs" />
     <Compile Include="Model\Widgets\Widget.cs" />
@@ -1236,7 +1237,7 @@
     <EmbeddedResource Include="Controls\CanvasPanel.resx">
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ChartPageViews\MindMapChartPage.resx">
+    <EmbeddedResource Include="Controls\Blumind\ChartPageViews\MindMapChartPage.resx">
       <DependentUpon>MindMapChartPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\ComCheckBoxList.resx">
@@ -1650,6 +1651,7 @@
     <None Include="Resources\flow.bmp" />
     <None Include="Resources\222.bmp" />
     <None Include="Resources\flow.png" />
+    <None Include="Resources\AI.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand.png" />
     <None Include="Resources\help.png" />
@@ -2030,6 +2032,9 @@
     <None Include="Resources\logo.ico" />
     <None Include="Resources\preferences_icon.ico" />
     <None Include="Resources\property.ico" />
+    <None Include="Resources\operator_back.bmp" />
+    <None Include="Resources\operator_back.png" />
+    <None Include="Resources\python.png" />
     <Content Include="Resources\resource.h" />
     <None Include="Resources\tab_button.png" />
     <None Include="Resources\taskbar_close_button.png" />
@@ -2197,6 +2202,25 @@
     <None Include="Resources\zoom_out1.png" />
     <None Include="Resources\windows_themes1.xml" />
     <None Include="Resources\zh.CHS.xml" />
+    <None Include="Resources\关联算子.png" />
+    <None Include="Resources\筛选.png" />
+    <None Include="Resources\多源算子.png" />
+    <None Include="Resources\数据标准化.png" />
+    <None Include="Resources\关键词过滤.png" />
+    <None Include="Resources\分组.png" />
+    <None Include="Resources\排序.png" />
+    <None Include="Resources\频率.png" />
+    <None Include="Resources\平均值.png" />
+    <None Include="Resources\差集.png" />
+    <None Include="Resources\差集 1.png" />
+    <None Include="Resources\并集.png" />
+    <None Include="Resources\并集 %281%29.png" />
+    <None Include="Resources\随机.png" />
+    <None Include="Resources\最小值.png" />
+    <None Include="Resources\最大值.png" />
+    <None Include="Resources\最大值 %281%29.png" />
+    <None Include="Resources\最小值 %281%29.png" />
+    <None Include="Resources\碰撞.png" />
     <Content Include="res\datasource\pythonHelper1.png" />
     <Content Include="res\datasource\pythonHelper2.png" />
     <Content Include="res\datasource\pythonHelper3.png" />
@@ -2396,7 +2420,9 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\C1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

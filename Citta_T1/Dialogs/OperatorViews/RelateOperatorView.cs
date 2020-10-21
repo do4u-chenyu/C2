@@ -203,28 +203,36 @@ namespace C2.OperatorViews
         {
             // And OR 选择框
             ComboBox regBox = NewAndORComboBox();
+            //regBox.Size = new System.Drawing.Size(85, 26);
+            regBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
+            
+
             // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            data0ComboBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
 
             Label label = new Label
             {
-                Font = new Font("微软雅黑", 8f, FontStyle.Regular),
+                Font = new Font("宋体", 10f, FontStyle.Regular),
                 Anchor = AnchorStyles.Left | AnchorStyles.Right,
-                Text = "等于=",
+                Text = "等于",
                 TextAlign = ContentAlignment.MiddleCenter
             };
             this.tableLayoutPanel1.Controls.Add(label, 2, addLine);
             // 右表列下拉框
-            ComboBox data1ComboBox = NewColumnsName1ComboBox(); ;
+            ComboBox data1ComboBox = NewColumnsName1ComboBox();
+            data1ComboBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data1ComboBox, 3, addLine);
             // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             this.tableLayoutPanel1.Controls.Add(addButton, 4, addLine);
+            addButton.BackColor = System.Drawing.SystemColors.Window;
             // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             this.tableLayoutPanel1.Controls.Add(delButton, 5, addLine);
+            delButton.BackColor = System.Drawing.SystemColors.Window;
         }
 
 
