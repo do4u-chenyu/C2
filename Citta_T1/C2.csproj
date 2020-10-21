@@ -2063,7 +2063,19 @@
     <None Include="Resources\tab_button2.png" />
     <None Include="Resources\tabs1.png" />
     <None Include="Resources\taskbar_close_button2.png" />
+    <Content Include="Resources\StartPage\bank.png" />
+    <Content Include="Resources\StartPage\bussinessView.png" />
+    <Content Include="Resources\StartPage\dataStorge.png" />
+    <Content Include="Resources\StartPage\dbnet.png" />
+    <Content Include="Resources\StartPage\gunLuntan.png" />
+    <Content Include="Resources\StartPage\logicMap.png" />
+    <Content Include="Resources\StartPage\mindMap.png" />
+    <Content Include="Resources\StartPage\modelTop.png" />
+    <Content Include="Resources\StartPage\organization.png" />
+    <Content Include="Resources\StartPage\ram.png" />
     <Content Include="Resources\StartPage\startPageTitle.png" />
+    <Content Include="Resources\StartPage\tree.png" />
+    <Content Include="Resources\StartPage\yellowGroup.png" />
     <Content Include="Resources\thanks.xml">
       <SubType>Designer</SubType>
     </Content>
