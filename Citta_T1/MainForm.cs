@@ -228,6 +228,7 @@ namespace C2
         }
         private void LoadDocuments()
         {
+            return;
             if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
             {
                 this.modelTitlePanel.AddModel("我的新模型");
