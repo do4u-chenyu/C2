@@ -201,7 +201,6 @@ namespace C2.Controls
             get
             {
                 var items = from item in Items
-                            orderby item.DisplayIndex
                             select item;
                 var count = ActualDimension.Width * ActualDimension.Height;
                 return items.Take(count);
@@ -364,7 +363,7 @@ namespace C2.Controls
             {
                 PaintItem(e, item);
             }
-
+            DrawDesignBackground(e);
             if (DesignMode)
             {
                 DrawDesignBackground(e);
