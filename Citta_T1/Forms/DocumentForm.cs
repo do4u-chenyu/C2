@@ -18,7 +18,7 @@ using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
 
-namespace C2
+namespace C2.Forms
 {
     public partial class DocumentForm : BaseDocumentForm, IThemableUI
     {

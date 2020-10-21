@@ -33,6 +33,7 @@ using C2.Controls.OS;
 using C2.Core.Exports;
 using C2.Dialogs;
 using C2.Core.Win32Apis;
+using C2.Forms;
 #endregion
 
 namespace C2
@@ -94,7 +95,7 @@ namespace C2
 
             MdiClient = this.mdiWorkSpace1;
             openFileDialog1 = new OpenFileDialog();
-            this.NewDocument();
+            this.NewDocument(false);
         }
 
         private void InitializeMainFormEventHandler()
@@ -444,7 +445,7 @@ namespace C2
             //// 模型标题栏添加新标题
             //if (dialogResult == DialogResult.OK)
             //    this.modelTitlePanel.AddModel(this.createNewModelForm.ModelTitle);
-            NewDocument();
+            NewDocument(false);
         }
 
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
@@ -906,12 +907,21 @@ namespace C2
                 Global.GetCanvasPanel().LeftButtonDown = false;
         }
         #region C2
-        public void NewDocument()
+        public void NewDocument(bool isCanvas = true)
         {
-            Document doc = CreateNewMap();
+            if (isCanvas)
+            {
+                Document doc = CreateNewMap();
 
-            DocumentForm form = new DocumentForm(doc);
-            ShowForm(form);
+                DocumentForm form = new DocumentForm(doc);
+                ShowForm(form);
+            }
+            else
+            {
+                //CanvasForm form = new CanvasForm();
+                TestForm form = new TestForm();
+                ShowForm(form);
+            }
         }
 
         Document CreateNewMap()

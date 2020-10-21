@@ -60,7 +60,7 @@ namespace C2.WorkSpace
             form.MaximizeBox = false;
             form.MinimizeBox = false;
             form.ControlBox = false;
-            form.Dock = DockStyle.None;
+            form.Dock = DockStyle.Fill;
             form.Activated += new EventHandler(MdiForm_Activated);
             form.FormClosed += new FormClosedEventHandler(MdiForm_FormClosed);
 

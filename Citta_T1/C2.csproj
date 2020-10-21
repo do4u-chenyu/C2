@@ -476,11 +476,17 @@
     <Compile Include="Controls\Misc\ImageListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\CanvasForm.cs">
+    <Compile Include="Forms\CanvasForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\CanvasForm.Designer.cs">
+    <Compile Include="Forms\CanvasForm.designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkSpace\MciWorkSpace.cs">
       <SubType>Component</SubType>
@@ -828,10 +834,10 @@
     <Compile Include="Dialogs\TimerDialog.Designer.cs">
       <DependentUpon>TimerDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\DocumentForm.cs">
+    <Compile Include="Forms\DocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\DocumentForm.Designer.cs">
+    <Compile Include="Forms\DocumentForm.Designer.cs">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Globalization\AuthorInfo.cs" />
@@ -1372,11 +1378,14 @@
     <EmbeddedResource Include="Dialogs\TimerDialog.resx">
       <DependentUpon>TimerDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\CanvasForm.resx">
+    <EmbeddedResource Include="Forms\CanvasForm.resx">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\DocumentForm.resx">
+    <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IAOLab\CustomOP\CustomOperatorView.resx">
       <DependentUpon>CustomOperatorView.cs</DependentUpon>

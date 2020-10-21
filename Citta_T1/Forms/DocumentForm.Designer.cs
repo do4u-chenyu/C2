@@ -1,4 +1,4 @@
-﻿namespace C2
+﻿namespace C2.Forms
 {
     public partial class DocumentForm
     {

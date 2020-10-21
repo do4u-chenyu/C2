@@ -802,7 +802,8 @@ namespace C2.Controls
 
         private bool SelectFrame()
         {
-            return Global.GetFlowControl().SelectFrame;
+            //return Global.GetFlowControl().SelectFrame;
+            return false;
         }
 
         #region 关于引脚在画线状态的改变
