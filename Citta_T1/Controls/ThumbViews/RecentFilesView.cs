@@ -34,13 +34,13 @@ namespace C2.Controls
 
         void RefreshView()
         {
-            Items.Clear();
-            foreach (var file in RecentFilesManage.Default.Reverse())
-            {
-                var fti = new FileThumbItem(file);
-                fti.CanClose = true;
-                Items.Add(fti);
-            }
+            //Items.Clear();
+            //foreach (var file in RecentFilesManage.Default.Reverse())
+            //{
+            //    var fti = new FileThumbItem(file);
+            //    fti.CanClose = true;
+            //    Items.Add(fti);
+            //}
 
             ViewNeedUpdate = true;
         }

@@ -1,4 +1,5 @@
-﻿using C2.OperatorViews;
+﻿using C2.Dialogs;
+using C2.OperatorViews;
 using C2.Utils;
 using System;
 using System.Collections.Generic;

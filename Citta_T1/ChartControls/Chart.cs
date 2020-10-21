@@ -10,6 +10,7 @@ using System.Linq;
 using C2.Controls.Charts;
 using C2.Core;
 using C2.Model;
+using C2.Business.Model;
 
 namespace C2.Controls
 {
@@ -20,6 +21,7 @@ namespace C2.Controls
         public Chart()
         {
             ChartBox = CreateChartBox();
+            ChartBox.AllowDrop = true;
             ChartBox.Bounds = DisplayRectangle;
             ChartBox.Paint += new PaintEventHandler(ChartBox_Paint);
             ChartBox.MouseDown += new MouseEventHandler(ChartBox_MouseDown);
@@ -32,6 +34,8 @@ namespace C2.Controls
             ChartBox.KeyUp += new KeyEventHandler(ChartBox_KeyUp);
             ChartBox.KeyPress += new KeyPressEventHandler(ChartBox_KeyPress);
             ChartBox.Resize += new EventHandler(ChartBox_Resize);
+            ChartBox.DragEnter += new DragEventHandler(ChartBox_DragEnter);
+            ChartBox.DragDrop += new DragEventHandler(ChartBox_DragDrop);
             Controls.Add(ChartBox);
 
             SetPaintStyles();
@@ -949,6 +953,34 @@ namespace C2.Controls
 
             OnChartMouseDown(e);
         }
+        void ChartBox_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Text))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+        void ChartBox_DragDrop(object sender, DragEventArgs e)
+        {
+            if (!ChartBox.Focused && ChartBox.CanFocus)
+                ChartBox.Focus();
+            ElementType type;
+
+            try
+            {
+                type = (ElementType)e.Data.GetData("Type");
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            if (type == ElementType.DataSource)
+            {
+
+                // 添加挂件
+                OnChartDragDrop(e);
+            }
+        }
 
         void ChartBox_DoubleClick(object sender, EventArgs e)
         {
@@ -970,7 +1002,9 @@ namespace C2.Controls
         {
             OnChartMouseWheel(e);
         }
-
+        protected virtual void OnChartDragDrop(DragEventArgs e)
+        {
+        }
         protected virtual void OnChartMouseDown(MouseEventArgs e)
         {
         }

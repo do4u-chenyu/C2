@@ -83,8 +83,9 @@ namespace C2
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
             this.createNewModelForm = new Dialogs.CreateNewModelForm();
             this.isBottomViewPanelMinimum = false;
-            this.isLeftViewPanelMinimum = false;
-
+            this.isLeftViewPanelMinimum = true;
+            this.leftToolBoxPanel.Width = 10;
+            this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
 
@@ -227,6 +228,7 @@ namespace C2
         }
         private void LoadDocuments()
         {
+            return;
             if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
             {
                 this.modelTitlePanel.AddModel("我的新模型");
@@ -305,14 +307,14 @@ namespace C2
             this.ShowLeftFold();
             this.myModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
-            this.operatorControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 
         private void OprateButton_Click(object sender, EventArgs e)
         {
             this.ShowLeftFold();
-            this.operatorControl.Visible = true;
+            this.mindMapModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.flowChartControl.Visible = false;
             this.myModelControl.Visible = false;
@@ -322,7 +324,7 @@ namespace C2
         {
             this.ShowLeftFold();
             this.dataSourceControl.Visible = true;
-            this.operatorControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
             this.flowChartControl.Visible = false;
             this.myModelControl.Visible = false;
         }
@@ -332,7 +334,7 @@ namespace C2
             this.ShowLeftFold();
             this.flowChartControl.Visible = true;
             this.dataSourceControl.Visible = false;
-            this.operatorControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
         }
 
@@ -443,7 +445,7 @@ namespace C2
         {
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
-            this.operatorControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 

@@ -12,6 +12,7 @@ using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
 using C2.Model.Widgets;
+using C2.Utils;
 
 namespace C2.Controls.MapViews
 {
@@ -129,7 +130,22 @@ namespace C2.Controls.MapViews
                 InvalidateChart();
             }
         }
+        protected override void OnChartDragDrop(DragEventArgs e)
+        {
+            base.OnChartDragDrop(e);
+            // 数据源的信息
+            string path = e.Data.GetData("Path").ToString();
+            char separator = (char)e.Data.GetData("Separator");
+            OpUtil.Encoding encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
+            OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
+            // 获取topic
+            Point pointToClient = this.ChartBox.PointToClient(new Point(e.X, e.Y));
+            var htr = HitTest(pointToClient.X, pointToClient.Y);
+            if (htr != HitTestResult.Empty)
+            {
 
+            }
+        }
         protected override void OnChartMouseDown(MouseEventArgs e)
         {
             base.OnChartMouseDown(e);
