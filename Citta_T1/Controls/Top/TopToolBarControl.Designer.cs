@@ -104,6 +104,7 @@
             this.ImportModel.Name = "ImportModel";
             this.ImportModel.Size = new System.Drawing.Size(32, 32);
             this.ImportModel.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.ImportModel, "导入iao模型");
             this.ImportModel.UseVisualStyleBackColor = false;
             this.ImportModel.Click += new System.EventHandler(this.ImportModel_Click);
             // 
