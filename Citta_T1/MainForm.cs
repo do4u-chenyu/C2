@@ -305,14 +305,14 @@ namespace C2
             this.ShowLeftFold();
             this.myModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
-            this.operatorControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 
         private void OprateButton_Click(object sender, EventArgs e)
         {
             this.ShowLeftFold();
-            this.operatorControl.Visible = true;
+            this.mindMapModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.flowChartControl.Visible = false;
             this.myModelControl.Visible = false;
@@ -322,7 +322,7 @@ namespace C2
         {
             this.ShowLeftFold();
             this.dataSourceControl.Visible = true;
-            this.operatorControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
             this.flowChartControl.Visible = false;
             this.myModelControl.Visible = false;
         }
@@ -332,7 +332,7 @@ namespace C2
             this.ShowLeftFold();
             this.flowChartControl.Visible = true;
             this.dataSourceControl.Visible = false;
-            this.operatorControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
         }
 
@@ -443,7 +443,7 @@ namespace C2
         {
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
-            this.operatorControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 

@@ -44,7 +44,7 @@ namespace C2
             this.oprateButton = new System.Windows.Forms.Button();
             this.myModelButton = new System.Windows.Forms.Button();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
-            this.operatorControl = new C2.Controls.Left.OperatorControl();
+            this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
             this.flowChartControl = new C2.Controls.Left.FlowChartControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
@@ -217,11 +217,11 @@ namespace C2
             // dataButton
             // 
             this.dataButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataButton.Location = new System.Drawing.Point(4, 54);
+            this.dataButton.Location = new System.Drawing.Point(4, 102);
             this.dataButton.Name = "dataButton";
             this.dataButton.Size = new System.Drawing.Size(124, 42);
             this.dataButton.TabIndex = 2;
-            this.dataButton.Text = "数据";
+            this.dataButton.Text = "数据管理";
             this.toolTip1.SetToolTip(this.dataButton, "当前用户已导入的所有数据");
             this.dataButton.UseVisualStyleBackColor = true;
             this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
@@ -229,31 +229,31 @@ namespace C2
             // oprateButton
             // 
             this.oprateButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.oprateButton.Location = new System.Drawing.Point(4, 102);
+            this.oprateButton.Location = new System.Drawing.Point(4, 6);
             this.oprateButton.Name = "oprateButton";
             this.oprateButton.Size = new System.Drawing.Size(124, 42);
             this.oprateButton.TabIndex = 1;
-            this.oprateButton.Text = "算子";
-            this.toolTip1.SetToolTip(this.oprateButton, "数据分析建模所需的所有算法");
+            this.oprateButton.Text = "业务视图";
+            this.toolTip1.SetToolTip(this.oprateButton, "当前用户的所有业务视图");
             this.oprateButton.UseVisualStyleBackColor = true;
             this.oprateButton.Click += new System.EventHandler(this.OprateButton_Click);
             // 
             // myModelButton
             // 
             this.myModelButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.myModelButton.Location = new System.Drawing.Point(4, 6);
+            this.myModelButton.Location = new System.Drawing.Point(4, 54);
             this.myModelButton.Name = "myModelButton";
             this.myModelButton.Size = new System.Drawing.Size(124, 42);
             this.myModelButton.TabIndex = 0;
-            this.myModelButton.Text = "我的模型";
-            this.toolTip1.SetToolTip(this.myModelButton, "当前用户的所有模型");
+            this.myModelButton.Text = "模型市场";
+            this.toolTip1.SetToolTip(this.myModelButton, "当前用户发布的所有模型");
             this.myModelButton.UseVisualStyleBackColor = true;
             this.myModelButton.Click += new System.EventHandler(this.MyModelButton_Click);
             // 
             // leftToolBoxPanel
             // 
             this.leftToolBoxPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.leftToolBoxPanel.Controls.Add(this.operatorControl);
+            this.leftToolBoxPanel.Controls.Add(this.mindMapModelControl);
             this.leftToolBoxPanel.Controls.Add(this.flowChartControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.myModelControl);
@@ -263,17 +263,17 @@ namespace C2
             this.leftToolBoxPanel.Size = new System.Drawing.Size(187, 560);
             this.leftToolBoxPanel.TabIndex = 2;
             // 
-            // operatorControl
+            // mindMapModelControl
             // 
-            this.operatorControl.AllowDrop = true;
-            this.operatorControl.BackColor = System.Drawing.Color.White;
-            this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.operatorControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.operatorControl.Location = new System.Drawing.Point(0, 0);
-            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
-            this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(185, 558);
-            this.operatorControl.TabIndex = 0;
+            this.mindMapModelControl.AllowDrop = true;
+            this.mindMapModelControl.BackColor = System.Drawing.Color.White;
+            this.mindMapModelControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.mindMapModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mindMapModelControl.Location = new System.Drawing.Point(0, 0);
+            this.mindMapModelControl.Margin = new System.Windows.Forms.Padding(4);
+            this.mindMapModelControl.Name = "MindMapModelControl";
+            this.mindMapModelControl.Size = new System.Drawing.Size(185, 558);
+            this.mindMapModelControl.TabIndex = 0;
             // 
             // flowChartControl
             // 
@@ -969,7 +969,7 @@ namespace C2
         private System.Windows.Forms.Button diffButton;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
-        private Controls.Left.OperatorControl operatorControl;
+        private Controls.Left.MindMapModelControl mindMapModelControl;
         private Controls.Left.FlowChartControl flowChartControl;
         private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.MyModelControl myModelControl;

@@ -449,6 +449,18 @@
     </Compile>
     <Compile Include="Controls\IDropFilesHandler.cs" />
     <Compile Include="Controls\IIconProvider.cs" />
+    <Compile Include="Controls\Left\MindMapModelButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Left\MindMapModelButton.Designer.cs">
+      <DependentUpon>MindMapModelButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Left\MindMapModelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Left\MindMapModelControl.Designer.cs">
+      <DependentUpon>MindMapModelControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Misc\BorderPanel.cs">
       <SubType>Component</SubType>
     </Compile>
