@@ -17,9 +17,6 @@ namespace C2
     class StartPage : BaseForm
     {
         RecentFilesView recentFilesView1;
-        ButtonListBox buttonListBox1;
-        SplitContainer splitContainer1;
-        ButtonInfo btnNew, btnOpen, btnOptions;
 
         public StartPage()
         {
@@ -32,65 +29,46 @@ namespace C2
 
         void InitializeComponent()
         {
-            recentFilesView1 = new RecentFilesView();
-            buttonListBox1 = new ButtonListBox();
-            splitContainer1 = new SplitContainer();
-            btnNew = new ButtonInfo("New", Properties.Resources.new_24);
-            btnOpen = new ButtonInfo("Open", Properties.Resources.open_24);
-            btnOptions = new ButtonInfo("Options", Properties.Resources.preferences_24);
-
-            buttonListBox1.SuspendLayout();
-            splitContainer1.SuspendLayout();
+            this.recentFilesView1 = new C2.Controls.RecentFilesView();
             this.SuspendLayout();
-
-            //
-            recentFilesView1.Dock = DockStyle.Fill;
-            recentFilesView1.Dimension = new System.Drawing.Size(4, 3);
-            recentFilesView1.ItemClick += metroBox1_ItemClick;
-
-            //
-            btnNew.Click += btnNew_Click;
-
-            //
-            btnOpen.Click += btnOpen_Click;
-
-            //
-            btnOptions.Click += btnOptions_Click;
-
-            //
-            buttonListBox1.Dock = DockStyle.Fill;
-            buttonListBox1.ButtonSize = 40;
-            buttonListBox1.IconSize = new System.Drawing.Size(24, 24);
-            buttonListBox1.Buttons.AddRange(new ButtonInfo[] { 
-                btnNew,
-                btnOpen,
-                btnOptions
-            });
-
-            //
-            splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.FixedPanel = FixedPanel.Panel1;
-            splitContainer1.IsSplitterFixed = true;
-            splitContainer1.Panel1.Controls.Add(buttonListBox1);
-            splitContainer1.Panel2.Controls.Add(recentFilesView1);
-
-            Controls.Add(splitContainer1);
-
-#if DEBUG
-            Size = new Size(800, 500);
-#endif
-
-            buttonListBox1.ResumeLayout(false);
-            splitContainer1.ResumeLayout(false);
+            // 
+            // recentFilesView1
+            // 
+            this.recentFilesView1.Dimension = new System.Drawing.Size(4, 3);
+            this.recentFilesView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.recentFilesView1.Location = new System.Drawing.Point(0, 0);
+            this.recentFilesView1.Name = "recentFilesView1";
+            this.recentFilesView1.Size = new System.Drawing.Size(730, 462);
+            this.recentFilesView1.TabIndex = 0;
+            /*
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.recentFilesView1);
+            this.splitContainer1.Size = new System.Drawing.Size(784, 462);
+            this.splitContainer1.TabIndex = 0;
+            */
+            // 
+            // StartPage
+            // 
+            this.ClientSize = new System.Drawing.Size(784, 462);
+            this.Controls.Add(this.recentFilesView1);
+            this.Name = "StartPage";
             this.ResumeLayout(false);
+
         }
 
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-
-            //
-            splitContainer1.SplitterDistance = 150;
         }
 
         void metroBox1_ItemClick(object sender, ThumbViewItemEventArgs e)
@@ -104,7 +82,7 @@ namespace C2
                 }
             }
         }
-
+        /*
         public override void ApplyTheme(UITheme theme)
         {
             base.ApplyTheme(theme);
@@ -166,5 +144,6 @@ namespace C2
                 Program.MainForm.NewDocument();
             }
         }
+        */
     }
 }

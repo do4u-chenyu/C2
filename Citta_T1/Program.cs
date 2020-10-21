@@ -73,6 +73,7 @@ namespace C2
 
         private static void RunByVersion()
         {
+
             if (Global.VersionType.Equals(Global.GreenVersion))
             {
                 string userName = "IAO";
@@ -81,6 +82,10 @@ namespace C2
                 lgInfo.WriteUserInfo(userName);
                 lgInfo.WriteLastLogin(userName);
                 Application.Run(new MainForm(userName));
+            }
+            if (Global.VersionType.Equals("test"))
+            {
+                Application.Run(new StartPage());
             }
             else
                 Application.Run(new LoginForm());
