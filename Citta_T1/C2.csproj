@@ -1167,6 +1167,7 @@
     <Compile Include="Model\Widgets\IWidgetContainer.cs" />
     <Compile Include="Model\Widgets\IWidgetEditDialog.cs" />
     <Compile Include="Model\Widgets\NoteWidget.cs" />
+    <Compile Include="Model\Widgets\OperatorWidget.cs" />
     <Compile Include="Model\Widgets\PictureWidget.cs" />
     <Compile Include="Model\Widgets\ProgressBarWidget.cs" />
     <Compile Include="Model\Widgets\Widget.cs" />

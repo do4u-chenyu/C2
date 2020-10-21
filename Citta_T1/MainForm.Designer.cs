@@ -275,7 +275,7 @@ namespace C2
             this.mindMapModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mindMapModelControl.Location = new System.Drawing.Point(0, 0);
             this.mindMapModelControl.Margin = new System.Windows.Forms.Padding(4);
-            this.mindMapModelControl.Name = "MindMapModelControl";
+            this.mindMapModelControl.Name = "mindMapModelControl";
             this.mindMapModelControl.Size = new System.Drawing.Size(185, 558);
             this.mindMapModelControl.TabIndex = 0;
             // 
@@ -701,14 +701,14 @@ namespace C2
             // 
             // BaseWorkSpace
             // 
-            this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
             this.BaseWorkSpace.Controls.Add(this.button1);
             this.BaseWorkSpace.Controls.Add(this.ImportDataSourceButton);
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.remarkControl);
-            this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
+            this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
+            this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.BaseWorkSpace.Name = "BaseWorkSpace";
@@ -722,8 +722,6 @@ namespace C2
             this.topToolBarControl.Name = "topToolBarControl";
             this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
             this.topToolBarControl.TabIndex = 24;
-            this.topToolBarControl.Controls.Add(saveAllButton);
-            this.topToolBarControl.Controls.Add(saveModelButton);
             // 
             // remarkControl
             // 

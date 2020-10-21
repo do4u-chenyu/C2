@@ -104,6 +104,15 @@ namespace C2.Controls.MapViews
             }
         }
 
+        public void AddOperator()
+        {
+            if (SelectedTopics != null && SelectedTopics.Length > 0)
+            {
+                var template = new OperatorWidget("HTTP数据最大值");
+                AddWidget(OperatorWidget.TypeID, template, false);
+            }
+        }
+
         void AddWidget(string typeID, Widget template, bool showDialog)
         {
             if (showDialog)
