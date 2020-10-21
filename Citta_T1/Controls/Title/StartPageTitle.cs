@@ -24,7 +24,7 @@ namespace C2.Controls.Title
         protected override void OnPaint(PaintEventArgs e)
         {
             var rectImg = new Rectangle(12, 5, 24, 15);
-            Image img = SetImgcolor(global::C2.Properties.Resources.startPageTitle);
+            Image img = global::C2.Properties.Resources.startPageTitle;
             PaintHelper.DrawImageInRange(e.Graphics, img, rectImg);
         }
 
@@ -40,6 +40,7 @@ namespace C2.Controls.Title
                         img.SetPixel(j, i, Color.FromArgb(0, 216, 216, 216));
                 }
             }
+            img.Save("startPageTitle.png");
             return img;
         }
 

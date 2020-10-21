@@ -44,7 +44,8 @@ namespace C2.Controls.Common
             {
                 ReadOnly = true,
                 BorderStyle = BorderStyle.None,
-                BackColor = Color.White
+                BackColor = Color.White,
+                Font = new Font("宋体", 9.5f, FontStyle.Regular)
             };
 
             //下拉箭头
@@ -55,7 +56,7 @@ namespace C2.Controls.Common
             //全选
             this.lbSelectAll = new Label();
             lbSelectAll.BackColor = Color.Transparent;
-            lbSelectAll.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
+            lbSelectAll.Font = new Font("宋体", 10f, FontStyle.Regular);
             lbSelectAll.Text = "全选";
             lbSelectAll.Size = new Size(40, 20);
             lbSelectAll.ForeColor = Color.Blue;
@@ -66,7 +67,7 @@ namespace C2.Controls.Common
             //取消
             lbSelectNo = new Label
             {
-                Font = new Font("微软雅黑", 8f, FontStyle.Regular),
+                Font = new Font("宋体", 10f, FontStyle.Regular),
                 BackColor = Color.Transparent,
                 Text = "取消",
                 Size = new Size(40, 20),
@@ -78,7 +79,7 @@ namespace C2.Controls.Common
 
             //生成checkboxlist
             this.checkListBox = new CheckedListBox();
-            checkListBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
+            checkListBox.Font = new Font("宋体", 10f, FontStyle.Regular);
             checkListBox.BorderStyle = BorderStyle.None;
             checkListBox.Location = new Point(0, 25);
             checkListBox.CheckOnClick = true;
@@ -88,7 +89,7 @@ namespace C2.Controls.Common
 
             //生成checkListBoxTmp
             this.checkListBoxTmp = new CheckedListBox();
-            checkListBoxTmp.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
+            checkListBoxTmp.Font = new Font("宋体", 10f, FontStyle.Regular);
             checkListBoxTmp.BorderStyle = BorderStyle.None;
             checkListBoxTmp.Location = new Point(0, 25);
             checkListBoxTmp.CheckOnClick = true;

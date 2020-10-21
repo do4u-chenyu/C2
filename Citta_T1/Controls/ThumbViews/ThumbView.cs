@@ -42,6 +42,7 @@ namespace C2.Controls
             Items = new XList<ThumbItem>();
             Items.ItemAdded += Items_ItemAdded;
             Items.ItemRemoved += Items_ItemRemoved;
+            initItems();
 
             CellBackColor = SystemColors.ControlDark;
             CellForeColor = SystemColors.ControlText;
@@ -50,7 +51,21 @@ namespace C2.Controls
 
             toolTip1 = new ToolTip();
         }
-
+        void initItems()
+        {
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.modelTop));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.dataStorge));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.businessView));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.ram));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.logicMap));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.tree));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.organization));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.mindMap));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.dbnet));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.gunLuntan));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.yellowGroup));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.bank));
+        }
         [DefaultValue(typeof(Size), "4, 2")]
         public Size Dimension
         {
@@ -186,7 +201,6 @@ namespace C2.Controls
             get
             {
                 var items = from item in Items
-                            orderby item.DisplayIndex
                             select item;
                 var count = ActualDimension.Width * ActualDimension.Height;
                 return items.Take(count);
@@ -349,7 +363,7 @@ namespace C2.Controls
             {
                 PaintItem(e, item);
             }
-
+            DrawDesignBackground(e);
             if (DesignMode)
             {
                 DrawDesignBackground(e);

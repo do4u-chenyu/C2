@@ -32,67 +32,79 @@
             // 
             // dataSourceTB0
             // 
+            this.dataSourceTB0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataSourceTB0.Location = new System.Drawing.Point(0, 0);
-            this.dataSourceTB0.Size = new System.Drawing.Size(136, 29);
+            this.dataSourceTB0.Size = new System.Drawing.Size(136, 28);
             this.dataSourceTB0.TabIndex = 2;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Location = new System.Drawing.Point(253, 19);
+            this.cancelButton.Location = new System.Drawing.Point(248, 7);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
+            this.confirmButton.BackColor = System.Drawing.SystemColors.ControlLight;
             this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Location = new System.Drawing.Point(170, 19);
+            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.confirmButton.Location = new System.Drawing.Point(159, 7);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
             // 
             // comboBox0
             // 
-            this.comboBox0.Location = new System.Drawing.Point(0, 59);
-            this.comboBox0.Size = new System.Drawing.Size(134, 28);
+            this.comboBox0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.Location = new System.Drawing.Point(2, 51);
+            this.comboBox0.Size = new System.Drawing.Size(134, 26);
             this.comboBox0.TabIndex = 1;
             // 
             // topPanel
             // 
+            this.topPanel.BackColor = System.Drawing.SystemColors.Window;
             this.topPanel.Size = new System.Drawing.Size(332, 37);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 115);
-            this.bottomPanel.Size = new System.Drawing.Size(332, 64);
+            this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 136);
+            this.bottomPanel.Size = new System.Drawing.Size(332, 43);
             // 
             // keyPanel
             // 
+            this.keyPanel.BackColor = System.Drawing.SystemColors.Window;
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Size = new System.Drawing.Size(116, 78);
+            this.keyPanel.Size = new System.Drawing.Size(116, 99);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             // 
             // valuePanel
             // 
+            this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.comboBox0);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Size = new System.Drawing.Size(216, 78);
+            this.valuePanel.Size = new System.Drawing.Size(216, 99);
             // 
             // label1
             // 
-            this.label1.Size = new System.Drawing.Size(123, 30);
+            this.label1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(32, 4);
+            this.label1.Size = new System.Drawing.Size(85, 19);
+            this.label1.Text = "数据信息";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(32, 62);
+            this.label2.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(32, 60);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 30);
+            this.label2.Size = new System.Drawing.Size(85, 19);
             this.label2.TabIndex = 0;
-            this.label2.Text = "取平均值：";
+            this.label2.Text = "取平均值";
             // 
             // AvgOperatorView
             // 
