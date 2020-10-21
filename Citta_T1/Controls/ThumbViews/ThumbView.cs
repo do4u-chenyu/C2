@@ -43,10 +43,10 @@ namespace C2.Controls
             Items.ItemAdded += Items_ItemAdded;
             Items.ItemRemoved += Items_ItemRemoved;
             initItems();
-
-            CellBackColor = SystemColors.ControlDark;
+            this.BackColor = SystemColors.ControlLightLight;
+            CellBackColor = SystemColors.ControlLightLight;
             CellForeColor = SystemColors.ControlText;
-            ActiveCellBackColor = SystemColors.Highlight;
+            ActiveCellBackColor = SystemColors.ControlLightLight;
             ActiveCellForeColor = SystemColors.HighlightText;
 
             toolTip1 = new ToolTip();
@@ -137,7 +137,7 @@ namespace C2.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public XList<ThumbItem> Items { get; private set; }
 
-        [DefaultValue(typeof(Color), "ControlDark")]
+        [DefaultValue(typeof(Color), "White")]
         public Color CellBackColor
         {
             get { return _CellBackColor; }
@@ -533,14 +533,16 @@ namespace C2.Controls
             foreach (var item in DisplayItems)
             {
                 int x = index % dimension.Width;
+                if (x == 0)
+                    x = 0;
                 int y = index / dimension.Width;
                 var cellBounds = new Rectangle(
                     startX + x * (cellSize.Width + CellSpace.Width),
                     startY + y * (cellSize.Height + CellSpace.Height),
                     cellSize.Width,
                     cellSize.Height);
-                item.Bounds = PaintHelper.GetRectInBounds(cellBounds, CellSize.Width, CellSize.Height);
-
+                item.Bounds = cellBounds;
+                //item.Bounds = PaintHelper.GetRectInBounds(cellBounds, CellSize.Width, CellSize.Height);
                 index++;
             }
         }

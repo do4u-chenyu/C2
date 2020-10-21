@@ -178,25 +178,25 @@ namespace C2.Controls
             e.PaintBackground();
 
             // text
-            var textHeight = e.Font.Height + 6;
-            var rectText = new Rectangle(Left, Bottom - textHeight, Width, textHeight);
-            if (!string.IsNullOrEmpty(Text))
-            {
-                var sf = PaintHelper.SFCenter;
-                sf.Trimming = StringTrimming.EllipsisCharacter;
-                sf.FormatFlags |= StringFormatFlags.NoWrap;
+            //var textHeight = e.Font.Height + 6;
+            //var rectText = new Rectangle(Left, Bottom - textHeight, Width, textHeight);
+            //if (!string.IsNullOrEmpty(Text))
+            //{
+            //    var sf = PaintHelper.SFCenter;
+            //    sf.Trimming = StringTrimming.EllipsisCharacter;
+            //    sf.FormatFlags |= StringFormatFlags.NoWrap;
 
-                e.Graphics.DrawString(Text,
-                    e.Font,
-                    Selected ? new SolidBrush(e.View.ActiveCellForeColor) : new SolidBrush(e.View.CellForeColor),
-                    rectText,
-                    sf);
-            }
+            //    e.Graphics.DrawString(Text,
+            //        e.Font,
+            //        Selected ? new SolidBrush(e.View.ActiveCellForeColor) : new SolidBrush(e.View.CellForeColor),
+            //        rectText,
+            //        sf);
+            //}
 
             // image
             if (Image != null)
             {
-                var rectImg = new Rectangle(Left, Top, Width, Height - textHeight - 4);
+                var rectImg = new Rectangle(Left, Top, Width, Height  - 4);
                 PaintHelper.DrawImageInRange(e.Graphics, Image, rectImg);
             }
 
