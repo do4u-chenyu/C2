@@ -71,5 +71,10 @@ namespace C2.OperatorViews
  
         }
         #endregion
+
+        private void confirmButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
