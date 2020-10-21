@@ -6,6 +6,7 @@ using C2.Core;
 using C2.Core.UndoRedo;
 using C2.Core.UndoRedo.Command;
 using C2.Dialogs;
+using C2.OperatorViews;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
