@@ -25,6 +25,8 @@ namespace C2.Model.Widgets
         int _DisplayIndex;
         int _Padding;
 
+        protected ContextMenuStrip WidgetMenuStrip { get; set; }
+
         public Widget()
         {
         }
@@ -389,6 +391,8 @@ namespace C2.Model.Widgets
                     return new PictureWidget();
                 case NoteWidget.TypeID:
                     return new NoteWidget();
+                case OperatorWidget.TypeID:
+                    return new OperatorWidget("HTTP数据最大值");
                 //case HyperlinkWidget.TypeID:
                 //    return new HyperlinkWidget();
                 default:
