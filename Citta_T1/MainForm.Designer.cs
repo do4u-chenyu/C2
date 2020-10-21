@@ -85,10 +85,12 @@ namespace C2
             this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
-            this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
             this.remarkControl = new C2.Controls.Flow.RemarkControl();
+            this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
+            this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
             this.canvasPanel = new C2.Controls.CanvasPanel();
             this.currentModelFinLab = new System.Windows.Forms.Label();
+            this.operatorControl = new C2.Controls.Left.OperatorControl();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
@@ -98,10 +100,8 @@ namespace C2
             this.rightHideButton = new C2.Controls.Flow.RightHideButton();
             this.rightShowButton = new C2.Controls.Flow.RightShowButton();
             this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
-            this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
             this.modelTitlePanel = new C2.Controls.Title.ModelTitlePanel();
-            this.operatorControl = new C2.Controls.Left.OperatorControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -257,10 +257,6 @@ namespace C2
             this.leftToolBoxPanel.Controls.Add(this.flowChartControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.myModelControl);
-            this.mindMapModelControl.Visible = false;
-            this.flowChartControl.Visible = false;
-            this.dataSourceControl.Visible = true;
-            this.myModelControl.Visible = false;
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftToolBoxPanel.Location = new System.Drawing.Point(136, 46);
             this.leftToolBoxPanel.Name = "leftToolBoxPanel";
@@ -270,6 +266,8 @@ namespace C2
             // mindMapModelControl
             // 
             this.mindMapModelControl.AllowDrop = true;
+            this.mindMapModelControl.AutoScroll = true;
+            this.mindMapModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.mindMapModelControl.BackColor = System.Drawing.Color.White;
             this.mindMapModelControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.mindMapModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -278,6 +276,7 @@ namespace C2
             this.mindMapModelControl.Name = "mindMapModelControl";
             this.mindMapModelControl.Size = new System.Drawing.Size(185, 558);
             this.mindMapModelControl.TabIndex = 0;
+            this.mindMapModelControl.Visible = false;
             // 
             // flowChartControl
             // 
@@ -290,6 +289,7 @@ namespace C2
             this.flowChartControl.Name = "flowChartControl";
             this.flowChartControl.Size = new System.Drawing.Size(185, 558);
             this.flowChartControl.TabIndex = 0;
+            this.flowChartControl.Visible = false;
             // 
             // dataSourceControl
             // 
@@ -315,18 +315,7 @@ namespace C2
             this.myModelControl.Name = "myModelControl";
             this.myModelControl.Size = new System.Drawing.Size(185, 558);
             this.myModelControl.TabIndex = 0;
-            // 
-            // operatorControl
-            // 
-            this.operatorControl.AllowDrop = true;
-            this.operatorControl.BackColor = System.Drawing.Color.White;
-            this.operatorControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("operatorControl.BackgroundImage")));
-            this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.operatorControl.Location = new System.Drawing.Point(687, 106);
-            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
-            this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(210, 245);
-            this.operatorControl.TabIndex = 0;
+            this.myModelControl.Visible = false;
             // 
             // bottomViewPanel
             // 
@@ -598,7 +587,7 @@ namespace C2
             this.leftFoldButton.TabIndex = 0;
             this.leftFoldButton.TabStop = false;
             this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
+            this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
             // resetButton
             // 
@@ -701,27 +690,19 @@ namespace C2
             // 
             // BaseWorkSpace
             // 
+            this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
             this.BaseWorkSpace.Controls.Add(this.button1);
             this.BaseWorkSpace.Controls.Add(this.ImportDataSourceButton);
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.remarkControl);
-            this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
-            this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
             this.BaseWorkSpace.Controls.Add(this.canvasPanel);
+            this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.BaseWorkSpace.Name = "BaseWorkSpace";
             this.BaseWorkSpace.Size = new System.Drawing.Size(910, 248);
             this.BaseWorkSpace.TabIndex = 0;
-            // 
-            // topToolBarControl
-            // 
-            this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
-            this.topToolBarControl.Location = new System.Drawing.Point(0, 2);
-            this.topToolBarControl.Name = "topToolBarControl";
-            this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
-            this.topToolBarControl.TabIndex = 24;
             // 
             // remarkControl
             // 
@@ -735,6 +716,22 @@ namespace C2
             this.remarkControl.Size = new System.Drawing.Size(120, 120);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
+            // 
+            // mdiWorkSpace1
+            // 
+            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
+            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
+            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
+            this.mdiWorkSpace1.TabIndex = 8;
+            // 
+            // topToolBarControl
+            // 
+            this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
+            this.topToolBarControl.Location = new System.Drawing.Point(0, 2);
+            this.topToolBarControl.Name = "topToolBarControl";
+            this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
+            this.topToolBarControl.TabIndex = 24;
             // 
             // canvasPanel
             // 
@@ -775,6 +772,18 @@ namespace C2
             this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
             this.currentModelFinLab.TabIndex = 30;
             this.currentModelFinLab.Visible = false;
+            // 
+            // operatorControl
+            // 
+            this.operatorControl.AllowDrop = true;
+            this.operatorControl.BackColor = System.Drawing.Color.White;
+            this.operatorControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("operatorControl.BackgroundImage")));
+            this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.operatorControl.Location = new System.Drawing.Point(687, 106);
+            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
+            this.operatorControl.Name = "operatorControl";
+            this.operatorControl.Size = new System.Drawing.Size(210, 245);
+            this.operatorControl.TabIndex = 0;
             // 
             // progressBarLabel
             // 
@@ -878,14 +887,6 @@ namespace C2
             this.naviViewControl.Name = "naviViewControl";
             this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 0;
-            // 
-            // mdiWorkSpace1
-            // 
-            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
-            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
-            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
-            this.mdiWorkSpace1.TabIndex = 8;
             // 
             // panel6
             // 
