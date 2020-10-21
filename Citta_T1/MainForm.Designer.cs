@@ -257,6 +257,10 @@ namespace C2
             this.leftToolBoxPanel.Controls.Add(this.flowChartControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.myModelControl);
+            this.mindMapModelControl.Visible = false;
+            this.flowChartControl.Visible = false;
+            this.dataSourceControl.Visible = true;
+            this.myModelControl.Visible = false;
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftToolBoxPanel.Location = new System.Drawing.Point(136, 46);
             this.leftToolBoxPanel.Name = "leftToolBoxPanel";
@@ -582,6 +586,7 @@ namespace C2
             this.leftFoldButton.TabIndex = 0;
             this.leftFoldButton.TabStop = false;
             this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
             // resetButton
             // 

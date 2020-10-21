@@ -83,8 +83,9 @@ namespace C2
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
             this.createNewModelForm = new Dialogs.CreateNewModelForm();
             this.isBottomViewPanelMinimum = false;
-            this.isLeftViewPanelMinimum = false;
-
+            this.isLeftViewPanelMinimum = true;
+            this.leftToolBoxPanel.Width = 10;
+            this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
 
