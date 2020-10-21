@@ -233,6 +233,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap BusinessViewLabel {
+            get {
+                object obj = ResourceManager.GetObject("BusinessViewLabel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap calculator {
             get {
                 object obj = ResourceManager.GetObject("calculator", resourceCulture);
@@ -1417,6 +1427,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap modelTop {
             get {
                 object obj = ResourceManager.GetObject("modelTop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap modelTopLabel {
+            get {
+                object obj = ResourceManager.GetObject("modelTopLabel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
