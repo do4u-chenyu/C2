@@ -21,7 +21,7 @@ namespace C2.Model.Widgets
         //bool _ResponseMouse;
         int? _CustomWidth;
         int? _CustomHeight;
-        WidgetAlignment _Alignment = WidgetAlignment.Bottom;
+        WidgetAlignment _Alignment = WidgetAlignment.Left;
         int _DisplayIndex;
         int _Padding;
 
@@ -116,21 +116,9 @@ namespace C2.Model.Widgets
         {
             get { return base.Text; }
             set { base.Text = value; }
-            //get
-            //{
-            //    return ST.HtmlToText(Remark);
-            //    //return base.Text;
-            //}
-            //set
-            //{
-            //    if (Text != value)
-            //    {
-            //        Remark = value;
-            //    }
-            //}
         }
 
-        [DefaultValue(WidgetAlignment.Bottom), LocalDisplayName("Alignment"), LocalCategory("Layout")]
+        [DefaultValue(WidgetAlignment.Left), LocalDisplayName("Alignment"), LocalCategory("Layout")]
         public virtual WidgetAlignment Alignment
         {
             get { return _Alignment; }
@@ -175,10 +163,10 @@ namespace C2.Model.Widgets
             }
         }
 
-        [Browsable(false)]
+        [Browsable(true)]
         public virtual bool FitContainer
         {
-            get { return false; }
+            get { return true; }
         }
 
         [Browsable(false)]
@@ -369,8 +357,13 @@ namespace C2.Model.Widgets
             widget.Text = Text;
         }
 
-        public virtual void OnMouseClick(MouseEventArgs e)
+        public virtual void CreateMenuStrip()
         {
+        }
+
+        public virtual void OnMouseClick(Control ct,Point point)
+        {
+            WidgetMenuStrip.Show(ct,point);
         }
 
         public virtual  void OnDoubleClick(HandledEventArgs e)
@@ -385,16 +378,18 @@ namespace C2.Model.Widgets
         {
             switch (typeId)
             {
-                case ProgressBarWidget.TypeID:
-                    return new ProgressBarWidget();
-                case PictureWidget.TypeID:
-                    return new PictureWidget();
-                case NoteWidget.TypeID:
-                    return new NoteWidget();
+                //case ProgressBarWidget.TypeID:
+                //    return new ProgressBarWidget();
+                //case PictureWidget.TypeID:
+                //    return new PictureWidget();
+                //case NoteWidget.TypeID:
+                //    return new NoteWidget();
                 case OperatorWidget.TypeID:
-                    return new OperatorWidget("HTTP数据最大值");
-                //case HyperlinkWidget.TypeID:
-                //    return new HyperlinkWidget();
+                    return new OperatorWidget();
+                case DataSourceWidget.TypeID:
+                    return new DataSourceWidget();
+                case ResultWidget.TypeID:
+                    return new ResultWidget();
                 default:
                     return null;
             }

@@ -7,14 +7,13 @@ using System.Xml;
 
 namespace C2.Model.Widgets
 {
-    class OperatorWidget : Widget, IRemark
+    class ResultWidget : Widget, IRemark
     {
-        public const string TypeID = "OPERATOR";
-        private String operatorName = "HTTP数据最大值";
+        public const string TypeID = "RESULT";
 
-        public OperatorWidget()
+        public ResultWidget()
         {
-            DisplayIndex = 1;
+            DisplayIndex = 2;
             CreateMenuStrip();
         }
 
@@ -58,7 +57,7 @@ namespace C2.Model.Widgets
             ToolStripMenuItem MenuPublic = new ToolStripMenuItem();
             ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
 
-            MenuOpenOperator.Text = operatorName;
+            MenuOpenOperator.Text = "x";
             MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuDesign,
                 MenuRunning,
@@ -85,7 +84,7 @@ namespace C2.Model.Widgets
             //base.Paint(e);
 
             Rectangle rect = DisplayRectangle;
-            Image iconRemark = Properties.Resources.operator_w_icon;
+            Image iconRemark = Properties.Resources.result_w_icon;
             rect.X += Math.Max(0, (rect.Width - iconRemark.Width) / 2);
             rect.Y += Math.Max(0, (rect.Height - iconRemark.Height) / 2);
             rect.Width = Math.Min(rect.Width, iconRemark.Width);

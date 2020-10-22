@@ -1164,12 +1164,14 @@
     <Compile Include="Model\Styles\TopicStyle.cs" />
     <Compile Include="Model\Styles\WindowsColorSchemes.cs" />
     <Compile Include="Model\Thanks.cs" />
+    <Compile Include="Model\Widgets\DataSourceWidget.cs" />
     <Compile Include="Model\Widgets\IWidgetContainer.cs" />
     <Compile Include="Model\Widgets\IWidgetEditDialog.cs" />
     <Compile Include="Model\Widgets\NoteWidget.cs" />
     <Compile Include="Model\Widgets\OperatorWidget.cs" />
     <Compile Include="Model\Widgets\PictureWidget.cs" />
     <Compile Include="Model\Widgets\ProgressBarWidget.cs" />
+    <Compile Include="Model\Widgets\ResultWidget.cs" />
     <Compile Include="Model\Widgets\Widget.cs" />
     <Compile Include="Model\Widgets\WidgetAlignment.cs" />
     <Compile Include="Model\Widgets\WidgetEventHandler.cs" />
@@ -2198,6 +2200,9 @@
     <None Include="Resources\zoom_out1.png" />
     <None Include="Resources\windows_themes1.xml" />
     <None Include="Resources\zh.CHS.xml" />
+    <None Include="Resources\WidgetIcon\data_w_icon.png" />
+    <None Include="Resources\WidgetIcon\operator_w_icon.png" />
+    <None Include="Resources\WidgetIcon\reulst_w_icon.png" />
     <Content Include="res\datasource\pythonHelper1.png" />
     <Content Include="res\datasource\pythonHelper2.png" />
     <Content Include="res\datasource\pythonHelper3.png" />

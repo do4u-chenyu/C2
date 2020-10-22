@@ -187,10 +187,9 @@ namespace C2.ChartPageView
             MenuAddTopic.Text = Lang._("Add Topic");
             MenuAddSubTopic.Text = Lang._("Add Sub Topic");
             MenuAdd.Text = Lang._("Add");
-            MenuAddIcon.Text = Lang.GetTextWithEllipsis("Icon");
-            MenuAddProgressBar.Text = Lang.GetTextWithEllipsis("Progress Bar");
-            MenuAddRemark.Text = Lang.GetTextWithEllipsis("Notes");
             MenuAddOperator.Text = Lang.GetTextWithEllipsis("Operator");
+            MenuAddDataSource.Text = Lang.GetTextWithEllipsis("MenuAddDataSource");
+            MenuAddResult.Text = Lang.GetTextWithEllipsis("Result");
             MenuFolding.Text = Lang._("Folding");
             MenuCollapseFolding.Text = Lang._("Collapse");
             MenuExpandFolding.Text = Lang._("Expand");
@@ -222,9 +221,8 @@ namespace C2.ChartPageView
         ToolStripMenuItem MenuAddTopic;
         ToolStripMenuItem MenuAddSubTopic;
         ToolStripMenuItem MenuAdd;
-        ToolStripMenuItem MenuAddIcon;
-        ToolStripMenuItem MenuAddProgressBar;
-        ToolStripMenuItem MenuAddRemark;
+        ToolStripMenuItem MenuAddResult;
+        ToolStripMenuItem MenuAddDataSource;
         ToolStripMenuItem MenuAddOperator;
         ToolStripSeparator toolStripSeparator5;
         ToolStripMenuItem MenuLink;
@@ -267,9 +265,8 @@ namespace C2.ChartPageView
             MenuAddTopic = new ToolStripMenuItem();
             MenuAddSubTopic = new ToolStripMenuItem();
             MenuAdd = new ToolStripMenuItem();
-            MenuAddIcon = new ToolStripMenuItem();
-            MenuAddProgressBar = new ToolStripMenuItem();
-            MenuAddRemark = new ToolStripMenuItem();
+            MenuAddResult = new ToolStripMenuItem();
+            MenuAddDataSource = new ToolStripMenuItem();
             MenuAddOperator = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             MenuLink = new ToolStripMenuItem();
@@ -338,35 +335,28 @@ namespace C2.ChartPageView
 
             // MenuAdd
             MenuAdd.DropDownItems.AddRange(new ToolStripItem[] {
-                MenuAddIcon,
-                MenuAddProgressBar,
-                MenuAddRemark,
-                MenuAddOperator});
+                MenuAddDataSource,
+                MenuAddOperator,
+                MenuAddResult});
             MenuAdd.Name = "MenuAdd";
             MenuAdd.Text = "Add";
 
-            // MenuAddIcon
-            MenuAddIcon.Image = C2.Properties.Resources.image;
-            MenuAddIcon.Name = "MenuAddIcon";
-            MenuAddIcon.Text = "&Icon";
-            MenuAddIcon.Click += new System.EventHandler(MenuAddIcon_Click);
+            // MenuAddResult
+            MenuAddResult.Image = C2.Properties.Resources.result_w_icon;
+            MenuAddResult.Name = "MenuAddResult";
+            MenuAddResult.Text = "Result";
+            MenuAddResult.Click += new System.EventHandler(MenuAddResult_Click);
 
-            // MenuAddProgressBar
-            MenuAddProgressBar.Image = C2.Properties.Resources.progress_bar;
-            MenuAddProgressBar.Name = "MenuAddProgressBar";
-            MenuAddProgressBar.Text = "&Progress Bar";
-            MenuAddProgressBar.Click += new System.EventHandler(MenuAddProgressBar_Click);
-
-            // MenuAddRemark
-            MenuAddRemark.Image = C2.Properties.Resources.notes;
-            MenuAddRemark.Name = "MenuAddRemark";
-            MenuAddRemark.Text = "&Notes";
-            MenuAddRemark.Click += new System.EventHandler(MenuAddRemark_Click);
+            // MenuAddDataSource
+            MenuAddDataSource.Image = C2.Properties.Resources.data_w_icon;
+            MenuAddDataSource.Name = "MenuAddDataSource";
+            MenuAddDataSource.Text = "DataSource";
+            MenuAddDataSource.Click += new System.EventHandler(MenuAddDataSource_Click);
 
             // MenuAddOperator
-            MenuAddOperator.Image = C2.Properties.Resources.notes;
+            MenuAddOperator.Image = C2.Properties.Resources.operator_w_icon;
             MenuAddOperator.Name = "MenuAddOperator";
-            MenuAddOperator.Text = "&Operator";
+            MenuAddOperator.Text = "Operator";
             MenuAddOperator.Click += new System.EventHandler(MenuAddOperator_Click);
 
             // toolStripSeparator5
@@ -500,60 +490,41 @@ namespace C2.ChartPageView
 
         protected override void OnChartContextMenuStripOpening(CancelEventArgs e)
         {
-            /*
-             * 几种情况：
-             * 1、选中对象
-             *    1.1选中的是topic
-             *        不变
-             *    1.2选中的是widget 
-             *        选中的是挂件，所有菜单失效
-             * 2、未选中任何对象
-             *    不变
-             */
-            ChartContextMenuStrip.Enabled = true;
             if (SelectedObjects != null && SelectedObjects.Length > 0)
             {
                 int count = SelectedObjects.Length;
                 Topic topic = mindMapView1.SelectedTopic;
                 int topicCount = mindMapView1.SelectedTopics.Length;
-                if(topic != null && topicCount > 0)
+
+                string urls = null;
+                MenuOpenHyperlink.Enabled = HasAnyUrl(SelectedObjects, out urls);
+                MenuOpenHyperlink.Available = MenuOpenHyperlink.Enabled;
+                MenuOpenHyperlink.ToolTipText = urls;
+
+                MenuAddTopic.Enabled = !ReadOnly && count == 1 && topicCount > 0 && !topic.IsRoot;
+                MenuAddSubTopic.Enabled = !ReadOnly && count == 1 && topicCount > 0;
+                MenuFolding.Available = topicCount > 0 && count == 1 && topic.HasChildren;
+                MenuExpandFolding.Enabled = topicCount > 0 && count == 1 && topic.Folded && !topic.IsRoot;
+                MenuCollapseFolding.Enabled = topicCount > 0 && count == 1 && !topic.Folded && !topic.IsRoot;
+                MenuToggleFolding.Enabled = topicCount > 0 && count == 1 && !topic.IsRoot;
+                MenuExpandAll.Enabled = topicCount > 0 && count == 1;
+                MenuCollapseAll.Enabled = topicCount > 0 && count == 1;
+                MenuAdd.Enabled = true;
+                MenuAddDataSource.Enabled = topicCount > 0;
+                MenuAddResult.Enabled = topicCount > 0;
+                MenuAddOperator.Enabled = topicCount > 0;
+                MenuNewChartFromHere.Available = topicCount == 1;
+
+                bool hasLink = false;
+                foreach (var mo in SelectedObjects)
                 {
-                    string urls = null;
-                    MenuOpenHyperlink.Enabled = HasAnyUrl(SelectedObjects, out urls);
-                    MenuOpenHyperlink.Available = MenuOpenHyperlink.Enabled;
-                    MenuOpenHyperlink.ToolTipText = urls;
-
-                    MenuAddTopic.Enabled = !ReadOnly && count == 1 && topicCount > 0 && !topic.IsRoot;
-                    MenuAddSubTopic.Enabled = !ReadOnly && count == 1 && topicCount > 0;
-                    MenuFolding.Available = topicCount > 0 && count == 1 && topic.HasChildren;
-                    MenuExpandFolding.Enabled = topicCount > 0 && count == 1 && topic.Folded && !topic.IsRoot;
-                    MenuCollapseFolding.Enabled = topicCount > 0 && count == 1 && !topic.Folded && !topic.IsRoot;
-                    MenuToggleFolding.Enabled = topicCount > 0 && count == 1 && !topic.IsRoot;
-                    MenuExpandAll.Enabled = topicCount > 0 && count == 1;
-                    MenuCollapseAll.Enabled = topicCount > 0 && count == 1;
-                    MenuAdd.Enabled = true;
-                    MenuAddIcon.Enabled = topicCount > 0;
-                    MenuAddProgressBar.Enabled = topicCount > 0;
-                    MenuAddRemark.Enabled = topicCount > 0;
-                    MenuAddOperator.Enabled = topicCount > 0;
-                    MenuNewChartFromHere.Available = topicCount == 1;
-
-                    bool hasLink = false;
-                    foreach (var mo in SelectedObjects)
+                    if (mo is Link)
                     {
-                        if (mo is Link)
-                        {
-                            hasLink = true;
-                            break;
-                        }
+                        hasLink = true;
+                        break;
                     }
-                    MenuLink.Available = hasLink;
                 }
-                else
-                {
-                    ChartContextMenuStrip.Enabled = false;
-                    return;
-                }
+                MenuLink.Available = hasLink;
             }
             else
             {
@@ -650,19 +621,14 @@ namespace C2.ChartPageView
             mindMapView1.AddSubTopic();
         }
 
-        void MenuAddIcon_Click(object sender, EventArgs e)
+        void MenuAddResult_Click(object sender, EventArgs e)
         {
-            mindMapView1.AddIcon();
+            mindMapView1.AddResult();
         }
 
-        void MenuAddProgressBar_Click(object sender, EventArgs e)
+        void MenuAddDataSource_Click(object sender, EventArgs e)
         {
-            mindMapView1.AddProgressBar();
-        }
-
-        void MenuAddRemark_Click(object sender, EventArgs e)
-        {
-            mindMapView1.AddRemark();
+            mindMapView1.AddDataSource();
         }
 
         void MenuAddOperator_Click(object sender, EventArgs e)

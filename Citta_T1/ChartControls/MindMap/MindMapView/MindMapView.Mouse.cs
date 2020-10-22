@@ -317,10 +317,11 @@ namespace C2.Controls.MapViews
             // Normal Status
             if (HoverObject != null && HoverObject.Widget != null && HoverObject == PressObject)
             {
-                HoverObject.Widget.OnMouseClick(new MouseEventArgs(e.Button, e.Clicks, e.X, e.Y, e.Delta));
+                if (e.Button == MouseButtons.Left || e.Clicks == 1)
+                    HoverObject.Widget.OnMouseClick(this.ChartBox,e.Location);
             }
 
-            if (e.Button == MouseButtons.Right && ChartContextMenuStrip != null)
+            else if (e.Button == MouseButtons.Right && ChartContextMenuStrip != null)
             {
                 ChartContextMenuStrip.Show(this.ChartBox, new Point(e.X, e.Y));
             }
