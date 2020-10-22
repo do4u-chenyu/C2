@@ -2228,6 +2228,7 @@
     <None Include="Resources\最大值 %281%29.png" />
     <None Include="Resources\最小值 %281%29.png" />
     <None Include="Resources\碰撞.png" />
+    <None Include="Resources\WidgetIcon\result_w_icon.png" />
     <Content Include="res\datasource\pythonHelper1.png" />
     <Content Include="res\datasource\pythonHelper2.png" />
     <Content Include="res\datasource\pythonHelper3.png" />

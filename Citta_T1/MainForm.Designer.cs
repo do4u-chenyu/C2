@@ -85,9 +85,8 @@ namespace C2
             this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
-            this.remarkControl = new C2.Controls.Flow.RemarkControl();
-            this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
             this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
+            this.remarkControl = new C2.Controls.Flow.RemarkControl();
             this.canvasPanel = new C2.Controls.CanvasPanel();
             this.currentModelFinLab = new System.Windows.Forms.Label();
             this.operatorControl = new C2.Controls.Left.OperatorControl();
@@ -100,6 +99,7 @@ namespace C2
             this.rightHideButton = new C2.Controls.Flow.RightHideButton();
             this.rightShowButton = new C2.Controls.Flow.RightShowButton();
             this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
+            this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
             this.modelTitlePanel = new C2.Controls.Title.ModelTitlePanel();
             this.headPanel.SuspendLayout();
@@ -690,19 +690,27 @@ namespace C2
             // 
             // BaseWorkSpace
             // 
-            this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
             this.BaseWorkSpace.Controls.Add(this.button1);
             this.BaseWorkSpace.Controls.Add(this.ImportDataSourceButton);
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.remarkControl);
-            this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
+            this.BaseWorkSpace.Controls.Add(this.canvasPanel);
+            this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.BaseWorkSpace.Name = "BaseWorkSpace";
             this.BaseWorkSpace.Size = new System.Drawing.Size(910, 248);
             this.BaseWorkSpace.TabIndex = 0;
+            // 
+            // topToolBarControl
+            // 
+            this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
+            this.topToolBarControl.Location = new System.Drawing.Point(0, 2);
+            this.topToolBarControl.Name = "topToolBarControl";
+            this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
+            this.topToolBarControl.TabIndex = 24;
             // 
             // remarkControl
             // 
@@ -716,22 +724,6 @@ namespace C2
             this.remarkControl.Size = new System.Drawing.Size(120, 120);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
-            // 
-            // mdiWorkSpace1
-            // 
-            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
-            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
-            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
-            this.mdiWorkSpace1.TabIndex = 8;
-            // 
-            // topToolBarControl
-            // 
-            this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
-            this.topToolBarControl.Location = new System.Drawing.Point(0, 2);
-            this.topToolBarControl.Name = "topToolBarControl";
-            this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
-            this.topToolBarControl.TabIndex = 24;
             // 
             // canvasPanel
             // 
@@ -887,6 +879,14 @@ namespace C2
             this.naviViewControl.Name = "naviViewControl";
             this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 0;
+            // 
+            // mdiWorkSpace1
+            // 
+            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
+            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
+            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
+            this.mdiWorkSpace1.TabIndex = 8;
             // 
             // panel6
             // 
