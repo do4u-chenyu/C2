@@ -415,31 +415,6 @@
         +EtVQ5M8k/Gpee3hQ8ojdwE29yzXgyPPe2MWKBZh/278VfJ5fgPBtfnTonvAjgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="operatorControl.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAANIAAAD1CAIAAACqUjybAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wAAADsABataJCQAABHFJREFUeF7t18tLq0ccx+H8265FQxaieIWIguLWXcSFuFBEMLgREW8L8dLWpm1q
-        izsRO9bhnB66O8e8383zQAKZ983uw8z8Wm//c3t72+v1FhcXO53OGHyXEs/c3Nzm5ub19XUN6z++ye75
-        +XljY2NmZmZ7e/vs7Oz+/v5v+C4lnvPz893d3aWlpW63OxwOa2T/+prd6elpu93e2dl5enqqf4XPcHBw
-        UNI6PDysqX3JrjQ3PT19c3NTX4RP9fDwULa9/f39j97esytna4lRc4zU4+NjyWwwGNTsyn2unK31IYxM
-        v98vo+rr62urzK1lhnCfoxmrq6snJyetXq9X5ta6BiNWBov19fVW2fTOzs7qGoxYmS0mJiZanU7n7u7u
-        L2jK2NhYq3zqL2iE7AiQHQGyI0B2BMiOANkRIDsCZEeA7AiQHQGyI0B2BMiOANkRIDsCanZP0CDZESA7
-        AmRHgOwIkB0BsiNAdgTIjgDZESA7AmRHgOwIkB0BsiNAdgTIjoCa3Z/QINkRIDsCZEeA7AiQHQGyI0B2
-        BMiOANkRIDsCZEeA7AiQHQGyI0B2BMiOANkRIDsCanZDaJDsCJAdAbIjQHYEyI4A2REgOwJkR4DsCJAd
-        AbIjQHYEyI4A2REgOwJkR0DN7g9okOwIkB0BsiNAdgTIjgDZESA7AmRHgOwIkB0BsiNAdgTIjgDZESA7
-        AmRHQM3ud2iQ7AiQHQGyI0B2BMiOANkRIDsCZEeA7AiQHQGyI0B2BMiOANkRIDsCZEeA7Aio2f0GDZId
-        AbIjQHYEyI4A2REgOwJkR4DsCJAdAbIjQHYEyI4A2REgOwJkR4DsCKjZDaBBsiNAdgTIjgDZESA7AmRH
-        gOwIkB0BsiNAdgTIjgDZESA7AmRHgOwIkB0BsiOgZvcrNEh2BMiOANkRIDsCZEeA7AiQHQGyI0B2BMiO
-        ANkRIDsCZEeA7AiQHQGyI6Bm9wgNkh0BsiNAdgTIjgDZESA7AmRHgOwIkB0BsiNAdgTIjgDZESA7AmRH
-        gOwIkB0BNbtfoEGyI0B2BMiOANkRIDsCZEeA7AiQHQGyI0B2BMiOANkRIDsCZEeA7AiQHQGyI6Bm9zM0
-        SHYEyI4A2REgOwJkR4DsCJAdAbIjQHYEyI4A2REgOwJkR4DsCJAdAbIjoGb3EzRIdgTIjgDZESA7AmRH
-        gOwIkB0BsiNAdgTIjgDZESA7AmRHgOwIkB0B79m12+3Ly8u6AKP3nt3s7Ozx8fEDNOLq6mp8fLy1ubm5
-        tbVV12DE9vf3l5eXW9fX1/Pz83UNRmxtba3f77fe3t663e7Ozk5dhpE5Ojqampp6eXl5z244HE5OTl5c
-        XNSHMAI3NzedTuf29rYk955dcXh4uLCwUA7c+gp8qtLcyspKmSI+eqvZFXt7e2XPK9/1Rfgk5Wwt+1xp
-        7vX19SO2r9kVg8Gg7Hnlqre7u+vM5QddXV2VubXMEOU+93G2fvFNdkXp8eTkpLw6MTExBj9gfHx8eXm5
-        zK1lhqh5fXh7+wd16g6bnoUkXQAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="rightHideButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADcAAAA2CAYAAABjhwHjAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO

@@ -695,22 +695,14 @@ namespace C2
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.remarkControl);
-            this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
+            this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.BaseWorkSpace.Name = "BaseWorkSpace";
             this.BaseWorkSpace.Size = new System.Drawing.Size(910, 248);
             this.BaseWorkSpace.TabIndex = 0;
-            // 
-            // topToolBarControl
-            // 
-            this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
-            this.topToolBarControl.Location = new System.Drawing.Point(0, 2);
-            this.topToolBarControl.Name = "topToolBarControl";
-            this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
-            this.topToolBarControl.TabIndex = 24;
             // 
             // remarkControl
             // 
@@ -776,13 +768,13 @@ namespace C2
             // operatorControl
             // 
             this.operatorControl.AllowDrop = true;
-            this.operatorControl.BackColor = System.Drawing.Color.White;
-            this.operatorControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("operatorControl.BackgroundImage")));
+            this.operatorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.operatorControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.operatorControl.Location = new System.Drawing.Point(687, 106);
             this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
             this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(210, 245);
+            this.operatorControl.Size = new System.Drawing.Size(210, 310);
             this.operatorControl.TabIndex = 0;
             // 
             // progressBarLabel
@@ -840,8 +832,7 @@ namespace C2
             // 
             // flowControl
             // 
-            this.flowControl.BackColor = System.Drawing.Color.Transparent;
-            this.flowControl.BackgroundImage = global::C2.Properties.Resources.flow;
+            this.flowControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.flowControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.flowControl.Location = new System.Drawing.Point(687, 50);
@@ -850,7 +841,7 @@ namespace C2
             this.flowControl.SelectDrag = false;
             this.flowControl.SelectFrame = false;
             this.flowControl.SelectRemark = false;
-            this.flowControl.Size = new System.Drawing.Size(220, 51);
+            this.flowControl.Size = new System.Drawing.Size(210, 51);
             this.flowControl.TabIndex = 25;
             this.flowControl.Load += new System.EventHandler(this.flowControl_Load);
             // 
@@ -894,6 +885,7 @@ namespace C2
             this.topToolBarControl.Location = new System.Drawing.Point(0, 2);
             this.topToolBarControl.Name = "topToolBarControl";
             this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
+            this.topToolBarControl.TabIndex = 24;
             // 
             // panel6
             // 
