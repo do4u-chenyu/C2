@@ -40,22 +40,6 @@ namespace C2
             this.recentFilesView1.Name = "recentFilesView1";
             this.recentFilesView1.Size = new System.Drawing.Size(730, 462);
             this.recentFilesView1.TabIndex = 0;
-            /*
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.recentFilesView1);
-            this.splitContainer1.Size = new System.Drawing.Size(784, 462);
-            this.splitContainer1.TabIndex = 0;
-            */
             // 
             // StartPage
             // 

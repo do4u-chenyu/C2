@@ -35,7 +35,7 @@ namespace C2.Controls
             _Dimension = new System.Drawing.Size(4, 2);
             _CellSize = new System.Drawing.Size(210, 180);
             _MinimumCellSize = new System.Drawing.Size(120, 100);
-            _CellSpace = new Size(16, 16);
+            _CellSpace = new Size(16, 100);
             ShowEmptyCells = true;
             SetPaintStyles();
 
@@ -43,10 +43,10 @@ namespace C2.Controls
             Items.ItemAdded += Items_ItemAdded;
             Items.ItemRemoved += Items_ItemRemoved;
             initItems();
-
-            CellBackColor = SystemColors.ControlDark;
+            this.BackColor = SystemColors.ControlLightLight;
+            CellBackColor = SystemColors.ControlLightLight;
             CellForeColor = SystemColors.ControlText;
-            ActiveCellBackColor = SystemColors.Highlight;
+            ActiveCellBackColor = SystemColors.ControlLightLight;
             ActiveCellForeColor = SystemColors.HighlightText;
 
             toolTip1 = new ToolTip();
@@ -65,6 +65,8 @@ namespace C2.Controls
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.gunLuntan));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.yellowGroup));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.bank));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.modelTopLabel));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.BusinessViewLabel));
         }
         [DefaultValue(typeof(Size), "4, 2")]
         public Size Dimension
@@ -86,7 +88,7 @@ namespace C2.Controls
             set { _ActualDimension = value; }
         }
 
-        [DefaultValue(typeof(Size), "16, 16")]
+        [DefaultValue(typeof(Size), "16, 50")]
         public Size CellSpace
         {
             get { return _CellSpace; }
@@ -137,7 +139,7 @@ namespace C2.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public XList<ThumbItem> Items { get; private set; }
 
-        [DefaultValue(typeof(Color), "ControlDark")]
+        [DefaultValue(typeof(Color), "White")]
         public Color CellBackColor
         {
             get { return _CellBackColor; }
@@ -282,7 +284,7 @@ namespace C2.Controls
 
         protected virtual void OnDimensionChanged()
         {
-            PerformLayout();
+            //PerformLayout();
         }
 
         protected virtual void OnMinimumCellSizeChanged()
@@ -358,12 +360,11 @@ namespace C2.Controls
             {
                 InvokePaintBackground(this, e);
             }
-
             foreach (var item in Items)
             {
                 PaintItem(e, item);
             }
-            DrawDesignBackground(e);
+            
             if (DesignMode)
             {
                 DrawDesignBackground(e);
@@ -478,8 +479,8 @@ namespace C2.Controls
             if (e.Item != null && e.Item.View != this)
                 e.Item.View = this;
 
-            PerformLayout();
-            Invalidate();
+            //PerformLayout();
+            //Invalidate();
         }
 
         void Items_ItemRemoved(object sender, XListEventArgs<ThumbItem> e)
@@ -533,15 +534,23 @@ namespace C2.Controls
             foreach (var item in DisplayItems)
             {
                 int x = index % dimension.Width;
+                if (x == 0)
+                    x = 0;
                 int y = index / dimension.Width;
                 var cellBounds = new Rectangle(
                     startX + x * (cellSize.Width + CellSpace.Width),
                     startY + y * (cellSize.Height + CellSpace.Height),
                     cellSize.Width,
                     cellSize.Height);
-                item.Bounds = PaintHelper.GetRectInBounds(cellBounds, CellSize.Width, CellSize.Height);
-
+                item.Bounds = cellBounds;
+                //item.Bounds = PaintHelper.GetRectInBounds(cellBounds, CellSize.Width, CellSize.Height);
                 index++;
+                if (x == 0 & y != 0)
+                    Items[Items.Count - y].Bounds = new Rectangle(cellBounds.X - CellSpace.Width, 
+                                                                  cellBounds.Y - CellSpace.Height / 2, 
+                                                                  cellBounds.Width / 2, 
+                                                                  CellSpace.Height / 2);
+                if (index == 12) break;
             }
         }
 
