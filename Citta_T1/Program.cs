@@ -1,5 +1,6 @@
 ﻿using C2.Core;
 using C2.Dialogs;
+using C2.Globalization;
 using C2.Utils;
 using System;
 using System.Diagnostics;
@@ -33,6 +34,7 @@ namespace C2
 
             ConfigProgram();
             Application.EnableVisualStyles();
+            LanguageManage.Initialize();
             Process instance = RunningInstance();
             if (instance == null)
             {

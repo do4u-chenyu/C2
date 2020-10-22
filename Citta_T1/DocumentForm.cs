@@ -25,6 +25,7 @@ namespace C2
         const string ShowSidebarOptionName = "editor_show_sidebar";
         Document _Document;
         ObjectTreeView objectTree1;
+        ObjectTreeView objectTree2;
         ChartOverviewBox cob;
         TimerDialog MyTimerDialog;
         ChartPageView.BaseChartPage _ActivedChartPage;
@@ -62,7 +63,7 @@ namespace C2
 
             UITheme.Default.Listeners.Add(this);
             ApplyTheme(UITheme.Default);
-
+            OnCurrentLanguageChanged();
             AfterInitialize();
         }
 
@@ -171,6 +172,7 @@ namespace C2
             if (ActiveChartBox != null)
             {
                 objectTree1.ChartPage = ActiveChartBox.ChartPage;
+                objectTree2.ChartPage = ActiveChartBox.ChartPage;
                 ActiveChartBox.CommandHistoryChanged += new EventHandler(ActivedChartBox_CommandHistoryChanged);
                 ActiveChartBox.ZoomChanged += new EventHandler(ActivedChartBox_ZoomChanged);
                 ActiveChartBox.ModifiedChanged += new EventHandler(ActivedChartBox_ModifiedChanged);
@@ -179,6 +181,7 @@ namespace C2
             else
             {
                 objectTree1.ChartPage = null;
+                objectTree2.ChartPage = null;
             }
 
             ResetToolStripItems();
@@ -279,6 +282,7 @@ namespace C2
         {
             //
             this.objectTree1 = new ObjectTreeView();
+            this.objectTree2 = new ObjectTreeView();
             cob = new ChartOverviewBox();
             tabControl2 = new MyTabControl();
             splitContainer2.Panel2.SuspendLayout();
@@ -293,7 +297,15 @@ namespace C2
             objectTree1.TabIndex = 2;
             //objectTree1.TreeViewContextMenuStrip = this.menuMapChart;
             objectTree1.AfterSelect += new TreeViewEventHandler(this.objectTree1_SelectedObjectChanged);
-
+            // 
+            // objectTree2
+            // 
+            objectTree2.Text = "数据大纲";
+            objectTree2.Icon = Properties.Resources.objects;
+            objectTree2.TabIndex = 3;
+            //objectTree1.TreeViewContextMenuStrip = this.menuMapChart;
+            //objectTree2.AfterSelect += new TreeViewEventHandler(this.objectTree1_SelectedObjectChanged);
+           
             //
             cob.Icon = Properties.Resources.zoom;
             cob.Text = "Overview";
@@ -303,6 +315,7 @@ namespace C2
             myTabControl1.SelectedBackColor = Color.White;
             myTabControl1.SelectedForeColor = Color.Black;
             myTabControl1.AddPage(objectTree1);
+            myTabControl1.AddPage(objectTree2);
             myTabControl1.AddPage(cob);
             myTabControl1.SelectedIndex = 0;
 
@@ -310,6 +323,8 @@ namespace C2
             tabControl2.Dock = DockStyle.Fill;
             tabControl2.SelectedBackColor = Color.White;
             tabControl2.SelectedForeColor = Color.Black;
+            Button bt = new Button() { Text = "设计器", TabIndex = 4 };
+            tabControl2.AddPage(bt);//暂时用button顶替个设计器位置
             splitContainer2.Panel2.Controls.Add(tabControl2);
 
             //
@@ -677,6 +692,10 @@ namespace C2
                 {
                     objectTree1.Font = theme.DefaultFont;
                 }
+                if (objectTree2 != null)
+                {
+                    objectTree2.Font = theme.DefaultFont;
+                }
             }
         }
 
@@ -841,7 +860,7 @@ namespace C2
                         tabControl2.TabPages.Remove(CurrentPropertyBox);
                     //tabControl2.Controls.Clear();
                     pb.Dock = DockStyle.Fill;
-                    tabControl2.InsertPage(0, pb, Properties.Resources.property);
+                    tabControl2.InsertPage(1, pb, Properties.Resources.property);
                 }
 
                 CurrentPropertyBox = pb;
