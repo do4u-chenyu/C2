@@ -389,6 +389,12 @@
     <Compile Include="Controls\Common\ComCheckBoxList.Designer.cs">
       <DependentUpon>ComCheckBoxList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Common\DesignerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Common\DesignerControl.Designer.cs">
+      <DependentUpon>DesignerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ControlExtensions.cs" />
     <Compile Include="Controls\DragManager.cs" />
     <Compile Include="Controls\Blumind\DropDownControls\DropDownDirection.cs" />
@@ -1248,6 +1254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\ComCheckBoxList.resx">
       <DependentUpon>ComCheckBoxList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Common\DesignerControl.resx">
+      <DependentUpon>DesignerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Left\DataButton.resx">
       <DependentUpon>DataButton.cs</DependentUpon>

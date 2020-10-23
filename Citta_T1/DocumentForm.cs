@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using C2.ChartPageView;
 using C2.Configuration;
 using C2.Controls;
+using C2.Controls.Common;
 using C2.Controls.MapViews;
 using C2.Core;
 using C2.Design;
@@ -323,8 +324,8 @@ namespace C2
             tabControl2.Dock = DockStyle.Fill;
             tabControl2.SelectedBackColor = Color.White;
             tabControl2.SelectedForeColor = Color.Black;
-            Button bt = new Button() { Text = "设计器", TabIndex = 4 };
-            tabControl2.AddPage(bt);//暂时用button顶替个设计器位置
+            DesignerControl dc = new DesignerControl() { Text = "设计器", TabIndex = 4 };
+            tabControl2.AddPage(dc);
             splitContainer2.Panel2.Controls.Add(tabControl2);
 
             //
