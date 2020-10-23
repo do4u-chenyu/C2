@@ -2026,7 +2026,6 @@
     <None Include="datas\text_utf8.txt" />
     <None Include="datas\text_gbk_1.txt" />
     <None Include="datas\text_utf8_1.txt" />
-    <None Include="Resources\Image1.bmp" />
     <None Include="Resources\u72.png" />
     <None Include="Resources\selectDrag.png" />
     <Content Include="res\displaypanel\blueshadow.png" />
