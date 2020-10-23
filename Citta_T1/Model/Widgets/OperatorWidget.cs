@@ -10,12 +10,11 @@ namespace C2.Model.Widgets
     class OperatorWidget : Widget, IRemark
     {
         public const string TypeID = "OPERATOR";
-        private String operatorName = "HTTP数据最大值";
+        public String operatorName = "HTTP数据最大值";
 
         public OperatorWidget()
         {
             DisplayIndex = 1;
-            CreateMenuStrip();
         }
 
         public override bool ResponseMouse
@@ -48,36 +47,6 @@ namespace C2.Model.Widgets
             base.Deserialize(documentVersion, node);
             //TODO
             //文档持久化
-        }
-
-        public override void CreateMenuStrip()
-        {
-            ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
-            ToolStripMenuItem MenuDesign = new ToolStripMenuItem();
-            ToolStripMenuItem MenuRunning = new ToolStripMenuItem();
-            ToolStripMenuItem MenuPublic = new ToolStripMenuItem();
-            ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
-
-            MenuOpenOperator.Text = operatorName;
-            MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
-                MenuDesign,
-                MenuRunning,
-                MenuPublic,
-                MenuDelete});
-
-            MenuDesign.Text = "修改";
-            MenuDesign.Click += new System.EventHandler(MenuDesign_Click);
-            MenuRunning.Text = "运行";
-            MenuPublic.Text = "发布";
-            MenuDelete.Text = "删除";
-
-            WidgetMenuStrip = new ContextMenuStrip();
-            WidgetMenuStrip.Items.Add(MenuOpenOperator);
-        }
-
-        void MenuDesign_Click(object sender, EventArgs e)
-        {
-
         }
 
         public override void Paint(RenderArgs e)

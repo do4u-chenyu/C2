@@ -188,7 +188,7 @@ namespace C2.ChartPageView
             MenuAddSubTopic.Text = Lang._("Add Sub Topic");
             MenuAdd.Text = Lang._("Add");
             MenuAddOperator.Text = Lang.GetTextWithEllipsis("Operator");
-            MenuAddDataSource.Text = Lang.GetTextWithEllipsis("MenuAddDataSource");
+            MenuAddDataSource.Text = Lang.GetTextWithEllipsis("DataSource");
             MenuAddResult.Text = Lang.GetTextWithEllipsis("Result");
             MenuFolding.Text = Lang._("Folding");
             MenuCollapseFolding.Text = Lang._("Collapse");

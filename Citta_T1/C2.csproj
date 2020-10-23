@@ -247,6 +247,9 @@
     <Compile Include="ChartControls\MindMap\MindMapView\ChartToolTip.cs" />
     <Compile Include="ChartControls\MindMap\MindMapView\ChartTooltipLayer.cs" />
     <Compile Include="ChartControls\MindMap\MindMapView\LinksLayer.cs" />
+    <Compile Include="ChartControls\MindMap\MindMapView\MindMapView.Menu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ChartControls\MindMap\MindMapView\MindMapView.Command.cs">
       <SubType>Component</SubType>
     </Compile>

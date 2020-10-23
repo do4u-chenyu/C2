@@ -25,8 +25,6 @@ namespace C2.Model.Widgets
         int _DisplayIndex;
         int _Padding;
 
-        protected ContextMenuStrip WidgetMenuStrip { get; set; }
-
         public Widget()
         {
         }
@@ -357,13 +355,8 @@ namespace C2.Model.Widgets
             widget.Text = Text;
         }
 
-        public virtual void CreateMenuStrip()
-        {
-        }
-
         public virtual void OnMouseClick(Control ct,Point point)
         {
-            WidgetMenuStrip.Show(ct,point);
         }
 
         public virtual  void OnDoubleClick(HandledEventArgs e)

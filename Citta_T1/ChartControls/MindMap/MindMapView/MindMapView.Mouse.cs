@@ -318,7 +318,11 @@ namespace C2.Controls.MapViews
             if (HoverObject != null && HoverObject.Widget != null && HoverObject == PressObject)
             {
                 if (e.Button == MouseButtons.Left || e.Clicks == 1)
-                    HoverObject.Widget.OnMouseClick(this.ChartBox,e.Location);
+                {
+                    //HoverObject.Widget.OnMouseClick(this.ChartBox,e.Location);
+                    CreateWidgetMenu();
+                    WidgetMenuStrip.Show(this.ChartBox, new Point(e.X, e.Y));
+                }
             }
 
             else if (e.Button == MouseButtons.Right && ChartContextMenuStrip != null)
