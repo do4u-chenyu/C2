@@ -347,9 +347,9 @@ namespace C2
 
         private void ShowBottomPreview()
         {
-            this.bottomLogControl.Visible = false;
-            this.bottomPyConsole.Visible = false;
-            this.bottomPreview.Visible = true;
+            //this.bottomLogControl.Visible = false;
+            //this.bottomPyConsole.Visible = false;
+            //this.bottomPreview.Visible = true;
         }
 
         private void PyControlLabel_Click(object sender, EventArgs e)
@@ -360,9 +360,9 @@ namespace C2
 
         private void ShowPyConsole()
         {
-            this.bottomPyConsole.Visible = true;
-            this.bottomLogControl.Visible = false;
-            this.bottomPreview.Visible = false;
+            //this.bottomPyConsole.Visible = true;
+            //this.bottomLogControl.Visible = false;
+            //this.bottomPreview.Visible = false;
         }
 
         private void LogLabel_Click(object sender, EventArgs e)
@@ -373,54 +373,54 @@ namespace C2
 
         private void ShowLogView()
         {
-            this.bottomLogControl.Visible = true;
-            this.bottomPyConsole.Visible = false;
-            this.bottomPreview.Visible = false;
+            //this.bottomLogControl.Visible = true;
+            //this.bottomPyConsole.Visible = false;
+            //this.bottomPreview.Visible = false;
         }
 
         private void ShowBottomPanel()
         {
-            if (this.isBottomViewPanelMinimum == true)
-            {
-                this.isBottomViewPanelMinimum = false;
-                this.bottomViewPanel.Height = 280;
-                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
-            }
-            InitializeControlsLocation();
-            if (bottomViewPanel.Height == 280)
-            {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
-            }
-            if (bottomViewPanel.Height == 40)
-            {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
-            }
+            //if (this.isBottomViewPanelMinimum == true)
+            //{
+            //    this.isBottomViewPanelMinimum = false;
+            //    this.bottomViewPanel.Height = 280;
+            //    this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
+            //}
+            //InitializeControlsLocation();
+            //if (bottomViewPanel.Height == 280)
+            //{
+            //    this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
+            //}
+            //if (bottomViewPanel.Height == 40)
+            //{
+            //    this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
+            //}
         }
 
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
             //log.Info("MinMaxPictureBox_Click");
-            if (this.isBottomViewPanelMinimum == true)
-            {
-                this.isBottomViewPanelMinimum = false;
-                this.bottomViewPanel.Height = 280;
-                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
-            }
-            else
-            {
-                this.isBottomViewPanelMinimum = true;
-                this.bottomViewPanel.Height = 40;
-                this.minMaxPictureBox.Image = global::C2.Properties.Resources.maxunfold;
-            }
-            InitializeControlsLocation();
-            if (bottomViewPanel.Height == 280)
-            {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
-            }
-            if (bottomViewPanel.Height == 40)
-            {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
-            }
+            //if (this.isBottomViewPanelMinimum == true)
+            //{
+            //    this.isBottomViewPanelMinimum = false;
+            //    this.bottomViewPanel.Height = 280;
+            //    this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
+            //}
+            //else
+            //{
+            //    this.isBottomViewPanelMinimum = true;
+            //    this.bottomViewPanel.Height = 40;
+            //    this.minMaxPictureBox.Image = global::C2.Properties.Resources.maxunfold;
+            //}
+            //InitializeControlsLocation();
+            //if (bottomViewPanel.Height == 280)
+            //{
+            //    this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
+            //}
+            //if (bottomViewPanel.Height == 40)
+            //{
+            //    this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
+            //}
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
@@ -464,9 +464,9 @@ namespace C2
                     MessageBox.Show("该数据文件不存在");
                 return;
             }
-            this.ShowBottomPanel();
-            this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
-            this.ShowBottomPreview();
+            //this.ShowBottomPanel();
+            //this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
+            //this.ShowBottomPreview();
         }
 
         private void MainForm_Load(object sender, EventArgs e)

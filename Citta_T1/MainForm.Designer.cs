@@ -48,18 +48,6 @@ namespace C2
             this.flowChartControl = new C2.Controls.Left.FlowChartControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
-            this.bottomViewPanel = new System.Windows.Forms.Panel();
-            this.bottomPreview = new C2.Controls.Bottom.BottomPreviewControl();
-            this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
-            this.bottomPyConsole = new C2.Controls.Bottom.BottomConsoleControl();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.dragLineControl = new C2.Controls.Title.DragLineControl();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.logLabel = new System.Windows.Forms.Label();
-            this.pyControlLabel = new System.Windows.Forms.Label();
-            this.previewLabel = new System.Windows.Forms.Label();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.saveAllButton = new System.Windows.Forms.Button();
@@ -89,11 +77,6 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
             this.leftToolBoxPanel.SuspendLayout();
-            this.bottomViewPanel.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
-            this.panel8.SuspendLayout();
             this.MainPanel.SuspendLayout();
             this.panel7.SuspendLayout();
             this.BaseWorkSpace.SuspendLayout();
@@ -290,135 +273,6 @@ namespace C2
             this.myModelControl.Size = new System.Drawing.Size(185, 558);
             this.myModelControl.TabIndex = 0;
             // 
-            // bottomViewPanel
-            // 
-            this.bottomViewPanel.Controls.Add(this.bottomPreview);
-            this.bottomViewPanel.Controls.Add(this.bottomLogControl);
-            this.bottomViewPanel.Controls.Add(this.bottomPyConsole);
-            this.bottomViewPanel.Controls.Add(this.panel4);
-            this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomViewPanel.Location = new System.Drawing.Point(323, 326);
-            this.bottomViewPanel.Name = "bottomViewPanel";
-            this.bottomViewPanel.Size = new System.Drawing.Size(910, 280);
-            this.bottomViewPanel.TabIndex = 3;
-            // 
-            // bottomPreview
-            // 
-            this.bottomPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomPreview.Location = new System.Drawing.Point(0, 39);
-            this.bottomPreview.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomPreview.Name = "bottomPreview";
-            this.bottomPreview.Size = new System.Drawing.Size(910, 241);
-            this.bottomPreview.TabIndex = 27;
-            // 
-            // bottomLogControl
-            // 
-            this.bottomLogControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomLogControl.Location = new System.Drawing.Point(0, 39);
-            this.bottomLogControl.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomLogControl.Name = "bottomLogControl";
-            this.bottomLogControl.Size = new System.Drawing.Size(910, 241);
-            this.bottomLogControl.TabIndex = 1;
-            // 
-            // bottomPyConsole
-            // 
-            this.bottomPyConsole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomPyConsole.Location = new System.Drawing.Point(0, 39);
-            this.bottomPyConsole.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomPyConsole.Name = "bottomPyConsole";
-            this.bottomPyConsole.Size = new System.Drawing.Size(910, 241);
-            this.bottomPyConsole.TabIndex = 2;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.panel4.Controls.Add(this.dragLineControl);
-            this.panel4.Controls.Add(this.panel9);
-            this.panel4.Controls.Add(this.panel8);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(910, 39);
-            this.panel4.TabIndex = 0;
-            // 
-            // dragLineControl
-            // 
-            this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
-            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
-            this.dragLineControl.Name = "dragLineControl";
-            this.dragLineControl.Size = new System.Drawing.Size(368, 3);
-            this.dragLineControl.TabIndex = 3;
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.minMaxPictureBox);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(762, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(148, 39);
-            this.panel9.TabIndex = 2;
-            // 
-            // minMaxPictureBox
-            // 
-            this.minMaxPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("minMaxPictureBox.Image")));
-            this.minMaxPictureBox.Location = new System.Drawing.Point(115, 12);
-            this.minMaxPictureBox.Name = "minMaxPictureBox";
-            this.minMaxPictureBox.Size = new System.Drawing.Size(25, 24);
-            this.minMaxPictureBox.TabIndex = 1;
-            this.minMaxPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
-            this.minMaxPictureBox.Click += new System.EventHandler(this.MinMaxPictureBox_Click);
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.logLabel);
-            this.panel8.Controls.Add(this.pyControlLabel);
-            this.panel8.Controls.Add(this.previewLabel);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(0, 0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(394, 39);
-            this.panel8.TabIndex = 0;
-            // 
-            // logLabel
-            // 
-            this.logLabel.AutoSize = true;
-            this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.logLabel.Location = new System.Drawing.Point(120, 4);
-            this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(92, 27);
-            this.logLabel.TabIndex = 3;
-            this.logLabel.Text = "运行日志";
-            this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
-            this.logLabel.Click += new System.EventHandler(this.LogLabel_Click);
-            // 
-            // pyControlLabel
-            // 
-            this.pyControlLabel.AutoSize = true;
-            this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.pyControlLabel.Location = new System.Drawing.Point(226, 4);
-            this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(72, 27);
-            this.pyControlLabel.TabIndex = 2;
-            this.pyControlLabel.Text = "控制台";
-            this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
-            this.pyControlLabel.Click += new System.EventHandler(this.PyControlLabel_Click);
-            // 
-            // previewLabel
-            // 
-            this.previewLabel.AutoSize = true;
-            this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.previewLabel.Location = new System.Drawing.Point(14, 4);
-            this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(92, 27);
-            this.previewLabel.TabIndex = 0;
-            this.previewLabel.Text = "数据预览";
-            this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
-            this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
-            // 
             // commonPanel
             // 
             this.commonPanel.Location = new System.Drawing.Point(0, 0);
@@ -569,7 +423,7 @@ namespace C2
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(323, 46);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(910, 280);
+            this.MainPanel.Size = new System.Drawing.Size(910, 560);
             this.MainPanel.TabIndex = 7;
             this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -579,7 +433,7 @@ namespace C2
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(0, 32);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(910, 248);
+            this.panel7.Size = new System.Drawing.Size(910, 528);
             this.panel7.TabIndex = 10;
             // 
             // BaseWorkSpace
@@ -590,7 +444,7 @@ namespace C2
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.BaseWorkSpace.Name = "BaseWorkSpace";
-            this.BaseWorkSpace.Size = new System.Drawing.Size(910, 248);
+            this.BaseWorkSpace.Size = new System.Drawing.Size(910, 528);
             this.BaseWorkSpace.TabIndex = 0;
             // 
             // mdiWorkSpace1
@@ -598,7 +452,7 @@ namespace C2
             this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
             this.mdiWorkSpace1.Name = "mdiWorkSpace1";
-            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
+            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 528);
             this.mdiWorkSpace1.TabIndex = 8;
             // 
             // panel6
@@ -626,7 +480,6 @@ namespace C2
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1233, 606);
             this.Controls.Add(this.MainPanel);
-            this.Controls.Add(this.bottomViewPanel);
             this.Controls.Add(this.leftToolBoxPanel);
             this.Controls.Add(this.leftMainMenuPanel);
             this.Controls.Add(this.headPanel);
@@ -650,12 +503,6 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
             this.leftToolBoxPanel.ResumeLayout(false);
-            this.bottomViewPanel.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
             this.MainPanel.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.BaseWorkSpace.ResumeLayout(false);
@@ -675,18 +522,10 @@ namespace C2
         private System.Windows.Forms.Button dataButton;
         private System.Windows.Forms.Button oprateButton;
         private System.Windows.Forms.Panel leftToolBoxPanel;
-        private System.Windows.Forms.Panel bottomViewPanel;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button saveModelButton;
         private System.Windows.Forms.Button newModelButton;
         private System.Windows.Forms.Panel commonPanel;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label previewLabel;
-        private System.Windows.Forms.Label pyControlLabel;
-        private System.Windows.Forms.Label logLabel;
-        private System.Windows.Forms.PictureBox minMaxPictureBox;
-        private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Button moreButton;
         private System.Windows.Forms.Button formatButton;
         private System.Windows.Forms.Button groupButton;
@@ -702,12 +541,8 @@ namespace C2
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
-        private C2.Controls.Bottom.BottomLogControl bottomLogControl;
-        private C2.Controls.Bottom.BottomConsoleControl bottomPyConsole;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button flowChartButton;
-        private Controls.Title.DragLineControl dragLineControl;
-        private C2.Controls.Bottom.BottomPreviewControl bottomPreview;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button blankButton;
         private Button saveAllButton;

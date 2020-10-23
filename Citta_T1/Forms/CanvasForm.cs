@@ -30,30 +30,30 @@ namespace C2.Forms
         }
         private void CanvasForm_SizeChanged(object sender, System.EventArgs e)
         {
-            Point rightTop = new Point(this.canvasPanel.Width, 0);
-            Point leftBottom = new Point(0, this.canvasPanel.Height);
-            int x = rightTop.X - 10 - this.naviViewControl.Width;
-            int y = leftBottom.Y - 5 - this.naviViewControl.Height;
-            // 缩略图定位
-            this.naviViewControl.Location = new Point(x, y);
+            //Point rightTop = new Point(this.canvasPanel.Width, 0);
+            //Point leftBottom = new Point(0, this.canvasPanel.Height);
+            //int x = rightTop.X - 10 - this.naviViewControl.Width;
+            //int y = leftBottom.Y - 5 - this.naviViewControl.Height;
+            //// 缩略图定位
+            //this.naviViewControl.Location = new Point(x, y);
 
-            this.naviViewControl.Invalidate();
-            // 底层工具按钮定位
-            int delta = 50;
-            x = x - (this.canvasPanel.Width) / 2 + 100;
-            this.runButton.Location = new Point(x, y + delta);
-            this.stopButton.Location = new Point(x + delta, y + delta);
-            this.resetButton.Location = new Point(x + delta * 2, y + delta);
+            //this.naviViewControl.Invalidate();
+            //// 底层工具按钮定位
+            //int delta = 50;
+            //x = x - (this.canvasPanel.Width) / 2 + 100;
+            //this.runButton.Location = new Point(x, y + delta);
+            //this.stopButton.Location = new Point(x + delta, y + delta);
+            //this.resetButton.Location = new Point(x + delta * 2, y + delta);
 
-            // 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            Point loc = new Point(rightTop.X - 70 - this.canvasPanel.flowControl1.Width, rightTop.Y + 50);
-            Point loc_flowcontrol2 = new Point(rightTop.X - this.rightShowButton.Width, loc.Y);
-            Point loc_flowcontrol3 = new Point(loc_flowcontrol2.X, loc.Y + this.rightHideButton.Width + 10);
-            Point loc_panel3 = new Point(loc.X, loc.Y + this.canvasPanel.flowControl1.Height + 10);
-            this.canvasPanel.flowControl1.Location = loc;
-            this.rightShowButton.Location = loc_flowcontrol2;
-            this.rightHideButton.Location = loc_flowcontrol3;
-            this.remarkControl.Location = loc_panel3;
+            //// 顶层浮动工具栏和右侧工具及隐藏按钮定位
+            //Point loc = new Point(rightTop.X - 70 - this.canvasPanel.flowControl1.Width, rightTop.Y + 50);
+            //Point loc_flowcontrol2 = new Point(rightTop.X - this.rightShowButton.Width, loc.Y);
+            //Point loc_flowcontrol3 = new Point(loc_flowcontrol2.X, loc.Y + this.rightHideButton.Width + 10);
+            //Point loc_panel3 = new Point(loc.X, loc.Y + this.canvasPanel.flowControl1.Height + 10);
+            //this.canvasPanel.flowControl1.Location = loc;
+            //this.rightShowButton.Location = loc_flowcontrol2;
+            //this.rightHideButton.Location = loc_flowcontrol3;
+            //this.remarkControl.Location = loc_panel3;
 
         }
 

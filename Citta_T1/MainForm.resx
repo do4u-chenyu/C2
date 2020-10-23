@@ -277,15 +277,6 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="minMaxPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABoAAAAPCAYAAAD6Ud/mAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAALlJREFUOE9jMDQ09DA2Nr4NxP9pgY2MjB6bmJhEMAANP00LC5DNBFr2mgFIzKa1
-        RUDztzNoaWnxAC07TCvLgGZfNzU1lWAAAVpZhmIJ2CYg0NfXFwBJUMtnQLOeA81UgJmPQoO8SA3LQJYA
-        HayB1RKYIKWWEWUJpZaRZAmyZaRkZFBeIRhcuMISpBHqSkKlxmegWhu8cUJIkgjLKLcE5gg8llHPEjyW
-        Ud8SmGXAUlgHGGfnoYmEpDgBAPxQgOma9/qMAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="saveAllButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAPNJREFUOE/N
