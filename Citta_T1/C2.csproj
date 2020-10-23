@@ -1109,6 +1109,7 @@
     </Compile>
     <Compile Include="Model\ChartObject.cs" />
     <Compile Include="Model\CodeObjectSite.cs" />
+    <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\Documents\ChartPage.cs" />
     <Compile Include="Model\Documents\ChartType.cs" />
     <Compile Include="Model\Documents\Document.cs" />
