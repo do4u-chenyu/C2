@@ -1581,7 +1581,6 @@
     <None Include="Resources\Images\association.png" />
     <None Include="Resources\Images\back_color.png" />
     <None Include="Resources\Images\balloon_small.png" />
-    <None Include="Resources\image2.png" />
     <Content Include="Resources\Images\bar.png" />
     <None Include="Resources\Images\bold.png" />
     <None Include="Resources\Images\calculator.png" />
@@ -1842,8 +1841,6 @@
     <None Include="Resources\tip_close_button.png" />
     <None Include="Resources\tip_pin_button.png" />
     <None Include="Resources\tip_pin_pressed_button.png" />
-    <None Include="Resources\thanks1.xml" />
-    <None Include="Resources\themes1.xml" />
     <Content Include="Resources\UIThemes\Blackish Green.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1917,7 +1914,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\windows_themes.xml" />
-    <None Include="Resources\windows_themes1.xml" />
     <None Include="Resources\WidgetIcon\data_w_icon.png" />
     <None Include="Resources\WidgetIcon\operator_w_icon.png" />
     <None Include="Resources\WidgetIcon\reulst_w_icon.png" />
