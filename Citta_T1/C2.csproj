@@ -988,7 +988,7 @@
     </Compile>
     <Compile Include="Controls\C1\MoveWrapper.cs" />
     <Compile Include="Controls\C1\DragWrapper.cs" />
-    <Compile Include="Controls\Interface\MoveControlInterface.cs" />
+    <Compile Include="Controls\C1\Interface\MoveControlInterface.cs" />
     <Compile Include="Controls\C1\Left\DataButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
