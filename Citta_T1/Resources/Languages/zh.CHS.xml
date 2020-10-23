@@ -60,7 +60,8 @@
 		<item name="Undo">撤销</item>
 		<item name="Redo">重做</item>
 		<item name="Version">版本</item>
-		<item name="Objects">对象</item>
+		<item name="Objects">业务大纲</item>
+    <item name="DataObjects">数据大纲</item>
 		<item name="Property">属性</item>
 		<item name="Themes">样式主题</item>
 		<item name="Format Painter">格式刷</item>

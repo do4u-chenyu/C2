@@ -1653,7 +1653,6 @@
     <None Include="Resources\exclamation.ico" />
     <None Include="Resources\globe_network.ico" />
     <None Include="Resources\cur_style_brush1.cur" />
-    <None Include="Resources\en.US.xml" />
     <None Include="Resources\flow.bmp" />
     <None Include="Resources\222.bmp" />
     <None Include="Resources\flow.png" />
@@ -2228,7 +2227,6 @@
     <None Include="Resources\zoom_in1.png" />
     <None Include="Resources\zoom_out1.png" />
     <None Include="Resources\windows_themes1.xml" />
-    <None Include="Resources\zh.CHS.xml" />
     <None Include="Resources\WidgetIcon\data_w_icon.png" />
     <None Include="Resources\WidgetIcon\operator_w_icon.png" />
     <None Include="Resources\WidgetIcon\reulst_w_icon.png" />

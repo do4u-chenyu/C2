@@ -300,7 +300,7 @@ namespace C2
             // 
             // objectTree2
             // 
-            objectTree2.Text = "数据大纲";
+            objectTree2.Text = "DataObjects";
             objectTree2.Icon = Properties.Resources.objects;
             objectTree2.TabIndex = 3;
             //objectTree1.TreeViewContextMenuStrip = this.menuMapChart;
@@ -485,6 +485,7 @@ namespace C2
             MenuRenameTab.Text = Lang.GetTextWithEllipsis("Rename");
 
             objectTree1.Text = Lang._("Objects");
+            objectTree2.Text = Lang._("DataObjects");
             cob.Text = Lang._("Overview");
 
             //if (remarkEditor != null)

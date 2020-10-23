@@ -364,9 +364,6 @@
   <data name="taskbar_close_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\taskbar_close_button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\en.US.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="wordFilterOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\opControl\wordFilterOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -766,9 +763,6 @@
   <data name="information" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\information.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="zh_CHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\zh.CHS.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="sort" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -918,5 +912,11 @@
   </data>
   <data name="AI2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\AI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Languages\en.US.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="zh_CHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Languages\zh.CHS.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>
