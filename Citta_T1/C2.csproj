@@ -1548,14 +1548,11 @@
     <None Include="Demo\demo_txt.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\avgOp.bmp" />
     <None Include="Resources\cross_large.png" />
     <EmbeddedResource Include="Resources\cur_scroll.cur" />
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
     <None Include="Resources\donation.png" />
     <None Include="Resources\cur_style_brush1.cur" />
-    <None Include="Resources\flow.bmp" />
-    <None Include="Resources\222.bmp" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\AI.png" />
     <None Include="Resources\businessoutline.png" />
@@ -1802,10 +1799,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\NativeResources.res" />
-    <None Include="Resources\operator_back.bmp" />
     <None Include="Resources\operator_back.png" />
     <None Include="Resources\python.png" />
-    <None Include="Resources\operator.bmp" />
     <Content Include="Resources\operator\AI.png" />
     <Content Include="Resources\operator\python.png" />
     <Content Include="Resources\operator\关联.png" />
@@ -1922,7 +1917,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\windows_themes.xml" />
-    <None Include="Resources\_blank.bmp" />
     <None Include="Resources\windows_themes1.xml" />
     <None Include="Resources\WidgetIcon\data_w_icon.png" />
     <None Include="Resources\WidgetIcon\operator_w_icon.png" />
@@ -2030,10 +2024,8 @@
     <None Include="datas\text.txt" />
     <None Include="datas\text_gbk.txt" />
     <None Include="datas\text_utf8.txt" />
-    <None Include="Resources\text_gbk_1.bmp" />
     <None Include="datas\text_gbk_1.txt" />
     <None Include="datas\text_utf8_1.txt" />
-    <None Include="Resources\dataButton.bmp" />
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\u72.png" />
     <None Include="Resources\selectDrag.png" />
