@@ -382,7 +382,7 @@
     <Compile Include="Controls\ChartTip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ClipboardWrapper.cs" />
+    <Compile Include="Controls\C1\ClipboardWrapper.cs" />
     <Compile Include="Controls\C1\Common\ComCheckBoxList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -446,7 +446,7 @@
     <Compile Include="Controls\Forms\StandardDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\FrameWrapper.cs" />
+    <Compile Include="Controls\C1\FrameWrapper.cs" />
     <Compile Include="Controls\FullScreenInfo.cs" />
     <Compile Include="Controls\HotKeys.cs" />
     <Compile Include="Controls\HtmlEditors\HtmlCodeEditor.cs">
@@ -976,18 +976,18 @@
     <Compile Include="Business\Schedule\TaskManager.cs" />
     <Compile Include="Business\Schedule\Triple.cs" />
     <Compile Include="Business\Schedule\TripleListGen.cs" />
-    <Compile Include="Controls\CanvasPanel.cs">
+    <Compile Include="Controls\C1\CanvasPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\CanvasPanel.Designer.cs">
+    <Compile Include="Controls\C1\CanvasPanel.Designer.cs">
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
     <Compile Include="Controls\C1\Common\NoFocusButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\MoveWrapper.cs" />
-    <Compile Include="Controls\DragWrapper.cs" />
+    <Compile Include="Controls\C1\MoveWrapper.cs" />
+    <Compile Include="Controls\C1\DragWrapper.cs" />
     <Compile Include="Controls\Interface\MoveControlInterface.cs" />
     <Compile Include="Controls\C1\Left\DataButton.cs">
       <SubType>UserControl</SubType>
@@ -1049,7 +1049,7 @@
     <Compile Include="Controls\C1\Move\Rs\MoveRsControl.Designer.cs">
       <DependentUpon>MoveRsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\QuickformatWrapper.cs" />
+    <Compile Include="Controls\C1\QuickformatWrapper.cs" />
     <Compile Include="Controls\C1\Title\ModelTitleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1246,7 +1246,7 @@
     <EmbeddedResource Include="Configuration\Dialog\GeneralPage.resx">
       <DependentUpon>GeneralPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CanvasPanel.resx">
+    <EmbeddedResource Include="Controls\C1\CanvasPanel.resx">
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ChartPageViews\MindMapChartPage.resx">
