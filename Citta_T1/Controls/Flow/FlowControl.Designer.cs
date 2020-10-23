@@ -36,23 +36,21 @@
             this.remarkPictureBox = new System.Windows.Forms.PictureBox();
             this.framePictureBox = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.customOPButton1 = new C2.Controls.Common.NoFocusButton();
-            this.noFocusButton1 = new C2.Controls.Common.NoFocusButton();
-            this.noFocusButton2 = new C2.Controls.Common.NoFocusButton();
-            this.noFocusButton3 = new C2.Controls.Common.NoFocusButton();
-            this.noFocusButton4 = new C2.Controls.Common.NoFocusButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.movePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomUpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.remarkPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.framePictureBox)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // movePictureBox
             // 
             this.movePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("movePictureBox.Image")));
-            this.movePictureBox.Location = new System.Drawing.Point(131, 5);
+            this.movePictureBox.Location = new System.Drawing.Point(131, 7);
             this.movePictureBox.Name = "movePictureBox";
             this.movePictureBox.Size = new System.Drawing.Size(22, 22);
             this.movePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -67,7 +65,7 @@
             // 
             this.zoomUpPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomUpPictureBox.Image")));
-            this.zoomUpPictureBox.Location = new System.Drawing.Point(53, 5);
+            this.zoomUpPictureBox.Location = new System.Drawing.Point(57, 7);
             this.zoomUpPictureBox.Name = "zoomUpPictureBox";
             this.zoomUpPictureBox.Size = new System.Drawing.Size(22, 22);
             this.zoomUpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -83,7 +81,7 @@
             this.zoomDownPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.zoomDownPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomDownPictureBox.Image")));
-            this.zoomDownPictureBox.Location = new System.Drawing.Point(92, 5);
+            this.zoomDownPictureBox.Location = new System.Drawing.Point(93, 7);
             this.zoomDownPictureBox.Name = "zoomDownPictureBox";
             this.zoomDownPictureBox.Size = new System.Drawing.Size(22, 22);
             this.zoomDownPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -98,9 +96,9 @@
             // 
             this.remarkPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
-            this.remarkPictureBox.Location = new System.Drawing.Point(13, 4);
+            this.remarkPictureBox.Location = new System.Drawing.Point(3, 2);
             this.remarkPictureBox.Name = "remarkPictureBox";
-            this.remarkPictureBox.Size = new System.Drawing.Size(23, 23);
+            this.remarkPictureBox.Size = new System.Drawing.Size(27, 24);
             this.remarkPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.remarkPictureBox.TabIndex = 3;
             this.remarkPictureBox.TabStop = false;
@@ -113,7 +111,7 @@
             // 
             this.framePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
-            this.framePictureBox.Location = new System.Drawing.Point(171, 4);
+            this.framePictureBox.Location = new System.Drawing.Point(165, 6);
             this.framePictureBox.Name = "framePictureBox";
             this.framePictureBox.Size = new System.Drawing.Size(24, 24);
             this.framePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -124,87 +122,35 @@
             this.framePictureBox.MouseEnter += new System.EventHandler(this.FramePictureBox_MouseEnter);
             this.framePictureBox.MouseLeave += new System.EventHandler(this.FramePictureBox_MouseLeave);
             // 
-            // customOPButton1
+            // panel1
             // 
-            this.customOPButton1.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.customOPButton1.FlatAppearance.BorderSize = 0;
-            this.customOPButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customOPButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.customOPButton1.Location = new System.Drawing.Point(3, 22);
-            this.customOPButton1.Name = "customOPButton1";
-            this.customOPButton1.Size = new System.Drawing.Size(45, 29);
-            this.customOPButton1.TabIndex = 38;
-            this.customOPButton1.Text = "备注";
-            this.customOPButton1.UseVisualStyleBackColor = true;
-            this.customOPButton1.Click += new System.EventHandler(this.customOPButton1_Click);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.remarkPictureBox);
+            this.panel1.Location = new System.Drawing.Point(13, 7);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(48, 48);
+            this.panel1.TabIndex = 5;
             // 
-            // noFocusButton1
+            // label1
             // 
-            this.noFocusButton1.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.noFocusButton1.FlatAppearance.BorderSize = 0;
-            this.noFocusButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.noFocusButton1.Location = new System.Drawing.Point(41, 22);
-            this.noFocusButton1.Name = "noFocusButton1";
-            this.noFocusButton1.Size = new System.Drawing.Size(45, 29);
-            this.noFocusButton1.TabIndex = 39;
-            this.noFocusButton1.Text = "放大";
-            this.noFocusButton1.UseVisualStyleBackColor = true;
-            // 
-            // noFocusButton2
-            // 
-            this.noFocusButton2.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.noFocusButton2.FlatAppearance.BorderSize = 0;
-            this.noFocusButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.noFocusButton2.Location = new System.Drawing.Point(81, 22);
-            this.noFocusButton2.Name = "noFocusButton2";
-            this.noFocusButton2.Size = new System.Drawing.Size(45, 29);
-            this.noFocusButton2.TabIndex = 40;
-            this.noFocusButton2.Text = "缩小";
-            this.noFocusButton2.UseVisualStyleBackColor = true;
-            // 
-            // noFocusButton3
-            // 
-            this.noFocusButton3.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.noFocusButton3.FlatAppearance.BorderSize = 0;
-            this.noFocusButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusButton3.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.noFocusButton3.Location = new System.Drawing.Point(120, 22);
-            this.noFocusButton3.Name = "noFocusButton3";
-            this.noFocusButton3.Size = new System.Drawing.Size(45, 29);
-            this.noFocusButton3.TabIndex = 41;
-            this.noFocusButton3.Text = "拖拽";
-            this.noFocusButton3.UseVisualStyleBackColor = true;
-            // 
-            // noFocusButton4
-            // 
-            this.noFocusButton4.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.noFocusButton4.FlatAppearance.BorderSize = 0;
-            this.noFocusButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusButton4.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.noFocusButton4.Location = new System.Drawing.Point(161, 22);
-            this.noFocusButton4.Name = "noFocusButton4";
-            this.noFocusButton4.Size = new System.Drawing.Size(45, 29);
-            this.noFocusButton4.TabIndex = 42;
-            this.noFocusButton4.Text = "框选";
-            this.noFocusButton4.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "000000000";
             // 
             // FlowControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImage = global::C2.Properties.Resources.flow;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.framePictureBox);
-            this.Controls.Add(this.remarkPictureBox);
             this.Controls.Add(this.zoomDownPictureBox);
             this.Controls.Add(this.zoomUpPictureBox);
             this.Controls.Add(this.movePictureBox);
-            this.Controls.Add(this.noFocusButton4);
-            this.Controls.Add(this.noFocusButton3);
-            this.Controls.Add(this.noFocusButton2);
-            this.Controls.Add(this.noFocusButton1);
-            this.Controls.Add(this.customOPButton1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
             this.Name = "FlowControl";
@@ -215,6 +161,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.remarkPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.framePictureBox)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -227,10 +175,7 @@
         private System.Windows.Forms.PictureBox remarkPictureBox;
         private System.Windows.Forms.PictureBox framePictureBox;
         private System.Windows.Forms.ToolTip toolTip1;
-        private Common.NoFocusButton customOPButton1;
-        private Common.NoFocusButton noFocusButton1;
-        private Common.NoFocusButton noFocusButton2;
-        private Common.NoFocusButton noFocusButton3;
-        private Common.NoFocusButton noFocusButton4;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
     }
 }
