@@ -293,7 +293,7 @@ namespace C2
             // objectTree1
             // 
             objectTree1.Text = "Objects";
-            objectTree1.Icon = Properties.Resources.objects;
+            objectTree1.Icon = Properties.Resources.businessoutline;
             objectTree1.TabIndex = 2;
             //objectTree1.TreeViewContextMenuStrip = this.menuMapChart;
             objectTree1.AfterSelect += new TreeViewEventHandler(this.objectTree1_SelectedObjectChanged);
