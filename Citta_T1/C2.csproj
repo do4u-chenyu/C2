@@ -1544,10 +1544,6 @@
     <EmbeddedResource Include="Resources\cur_scroll.cur" />
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
     <None Include="Resources\donation.png" />
-    <None Include="Resources\check_update.ico" />
-    <None Include="Resources\document.ico" />
-    <None Include="Resources\exclamation.ico" />
-    <None Include="Resources\globe_network.ico" />
     <None Include="Resources\cur_style_brush1.cur" />
     <None Include="Resources\flow.bmp" />
     <None Include="Resources\222.bmp" />
@@ -1555,7 +1551,6 @@
     <None Include="Resources\AI.png" />
     <None Include="Resources\businessoutline.png" />
     <Content Include="Resources\hand.cur" />
-    <None Include="Resources\hourglass_ico.ico" />
     <None Include="Resources\hand_cur.cur" />
     <None Include="Resources\html_content.htm" />
     <Content Include="Resources\Icons\check_update.ico" />
@@ -1581,8 +1576,6 @@
     <None Include="Resources\Images\back_color.png" />
     <None Include="Resources\Images\balloon_small.png" />
     <None Include="Resources\image2.png" />
-    <None Include="Resources\icon_lib.ico" />
-    <None Include="Resources\image.ico" />
     <Content Include="Resources\Images\bar.png" />
     <None Include="Resources\Images\bold.png" />
     <None Include="Resources\Images\calculator.png" />
@@ -1746,7 +1739,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\keyboard.ico" />
     <None Include="Resources\importDataSource.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
@@ -1801,10 +1793,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\NativeResources.res" />
-    <None Include="Resources\layout_type.ico" />
-    <None Include="Resources\logo.ico" />
-    <None Include="Resources\preferences_icon.ico" />
-    <None Include="Resources\property.ico" />
     <None Include="Resources\operator_back.bmp" />
     <None Include="Resources\operator_back.png" />
     <None Include="Resources\python.png" />
