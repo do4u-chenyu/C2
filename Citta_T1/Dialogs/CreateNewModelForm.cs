@@ -99,19 +99,20 @@ namespace C2.Dialogs
 
         private List<string> GetModelTitleList()
         {
+            // TODO
             List<string> titles = new List<string>();
-            try
-            {
-                DirectoryInfo di = new DirectoryInfo(Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName));
-                DirectoryInfo[] modelTitleList = di.GetDirectories();
-                foreach (DirectoryInfo modelTitle in modelTitleList)
-                    titles.Add(modelTitle.ToString());
-            }
-            catch
-            { }
+            //try
+            //{
+            //    DirectoryInfo di = new DirectoryInfo(Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName));
+            //    DirectoryInfo[] modelTitleList = di.GetDirectories();
+            //    foreach (DirectoryInfo modelTitle in modelTitleList)
+            //        titles.Add(modelTitle.ToString());
+            //}
+            //catch
+            //{ }
 
-            foreach (ModelDocument md in Global.GetModelDocumentDao().ModelDocuments)
-                titles.Add(md.ModelTitle);
+            //foreach (ModelDocument md in Global.GetModelDocumentDao().ModelDocuments)
+            //    titles.Add(md.ModelTitle);
             return titles;
         }
     }

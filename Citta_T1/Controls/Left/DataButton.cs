@@ -115,12 +115,12 @@ namespace C2.Controls.Left
 
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            string helpInfo = String.Format(DataButtonFlowTemplate,
-                                        encoding.ToString(),
-                                        this.ExtType,
-                                        Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
-                                        this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
-            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+            //string helpInfo = String.Format(DataButtonFlowTemplate,
+            //                            encoding.ToString(),
+            //                            this.ExtType,
+            //                            Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
+            //                            this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
+            //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)

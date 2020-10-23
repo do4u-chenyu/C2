@@ -125,12 +125,12 @@ namespace C2
         private void RemarkChange(RemarkControl rc)
         {
             SetDocumentDirty();
-            this.modelDocumentDao.UpdateRemark(rc);
+            //this.modelDocumentDao.UpdateRemark(rc);
         }
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
         {
-            this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);
+            //this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);
         }
         public void SetDocumentDirty()
         {
@@ -151,20 +151,20 @@ namespace C2
 
         private void NewDocumentOperator(MoveBaseControl ct)
         {
-            ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
-            SetDocumentDirty();
-            if (ct is MoveDtControl || ct is MoveOpControl)
-            {
-                BaseCommand cmd = new ElementAddCommand(me);
-                UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
-            }
+            //ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
+            //SetDocumentDirty();
+            //if (ct is MoveDtControl || ct is MoveOpControl)
+            //{
+            //    BaseCommand cmd = new ElementAddCommand(me);
+            //    UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
+            //}
         }
 
         public void SaveCurrentDocument()
         {
-            string modelTitle = this.modelDocumentDao.SaveCurrentDocument();
-            if (!this.myModelControl.ContainModel(modelTitle))
-                this.myModelControl.AddModel(modelTitle);
+            //string modelTitle = this.modelDocumentDao.SaveCurrentDocument();
+            //if (!this.myModelControl.ContainModel(modelTitle))
+            //    this.myModelControl.AddModel(modelTitle);
         }
 
         private void SaveAllDocuments()
@@ -585,12 +585,12 @@ namespace C2
         //更新op算子错误信息
         private void UpdateOpErrorMessage(TaskManager manager, int id, string error)
         {
-            this.Invoke(new AsynUpdateOpErrorMessage(delegate ()
-            {
-                ModelDocument model = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-                MoveOpControl op = model.SearchElementByID(id).InnerControl as MoveOpControl;
-                op.SetStatusBoxErrorContent(error);
-            }));
+            //this.Invoke(new AsynUpdateOpErrorMessage(delegate ()
+            //{
+            //    ModelDocument model = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
+            //    MoveOpControl op = model.SearchElementByID(id).InnerControl as MoveOpControl;
+            //    op.SetStatusBoxErrorContent(error);
+            //}));
         }
 
         //更新进度条
@@ -646,16 +646,16 @@ namespace C2
         //完成任务时需要调用
         private void Accomplish(TaskManager manager)
         {
-            ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            doneModel.Save();
-            if (doneModel == Global.GetCurrentDocument())
-            {
-                this.Invoke(new TaskCallBack(delegate ()
-                {
-                    UpdateRunbuttonImageInfo();
-                }));
+            //ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
+            //doneModel.Save();
+            //if (doneModel == Global.GetCurrentDocument())
+            //{
+            //    this.Invoke(new TaskCallBack(delegate ()
+            //    {
+            //        UpdateRunbuttonImageInfo();
+            //    }));
                 
-            }
+            //}
         }
 
         //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档
@@ -730,12 +730,12 @@ namespace C2
         }
         private void EnableRunningControl(TaskManager manager)
         {
-            ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            this.Invoke(new AsynUpdateMask(delegate ()
-            {
-                doneModel.Enable();
-                EnableCommonControl(true);
-            }));
+            //ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
+            //this.Invoke(new AsynUpdateMask(delegate ()
+            //{
+            //    doneModel.Enable();
+            //    EnableCommonControl(true);
+            //}));
         }
 
         private void EnableCommonControl(bool status)
@@ -798,35 +798,35 @@ namespace C2
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.modelDocumentDao.SaveEndDocuments(this.userName);
+            //this.modelDocumentDao.SaveEndDocuments(this.userName);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach (ModelDocument md in this.modelDocumentDao.ModelDocuments)
-            {
-                if (!md.Dirty)
-                    continue;
-                DialogResult result = MessageBox.Show("有尚未保存的模型，是否保存后关闭？",
-                                               "保存", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                // 取消操作
-                if (result == DialogResult.Cancel)
-                {
-                    e.Cancel = true;
-                    return;
-                }
+            //foreach (ModelDocument md in this.modelDocumentDao.ModelDocuments)
+            //{
+            //    if (!md.Dirty)
+            //        continue;
+            //    DialogResult result = MessageBox.Show("有尚未保存的模型，是否保存后关闭？",
+            //                                   "保存", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            //    // 取消操作
+            //    if (result == DialogResult.Cancel)
+            //    {
+            //        e.Cancel = true;
+            //        return;
+            //    }
 
-                // 保存文件
-                if (result == DialogResult.Yes)
-                {
-                    foreach (ModelDocument modelDocument in this.modelDocumentDao.ModelDocuments)
-                        modelDocument.Save();
-                    return;
-                }
-                // 不保存关闭文件
-                if (result == DialogResult.No)
-                    return;
-            }
+            //    // 保存文件
+            //    if (result == DialogResult.Yes)
+            //    {
+            //        foreach (ModelDocument modelDocument in this.modelDocumentDao.ModelDocuments)
+            //            modelDocument.Save();
+            //        return;
+            //    }
+            //    // 不保存关闭文件
+            //    if (result == DialogResult.No)
+            //        return;
+            //}
         }
 
         private void UsernameLabel_MouseEnter(object sender, EventArgs e)
@@ -918,8 +918,8 @@ namespace C2
             }
             else
             {
-                //CanvasForm form = new CanvasForm();
-                TestForm form = new TestForm();
+                ModelDocument doc = new ModelDocument(String.Empty, String.Empty);
+                CanvasForm form = new CanvasForm(doc);
                 ShowForm(form);
             }
         }

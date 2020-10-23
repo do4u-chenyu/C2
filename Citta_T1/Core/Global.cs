@@ -6,6 +6,7 @@ using C2.Controls.Flow;
 using C2.Controls.Left;
 using C2.Controls.Title;
 using C2.Controls.Top;
+using C2.Forms;
 
 namespace C2.Core
 {
@@ -37,7 +38,8 @@ namespace C2.Core
         {
             ModelDocument ret = null;
             if (GetModelDocumentDao() != null)
-                ret = GetModelDocumentDao().CurrentDocument;
+                //ret = GetModelDocumentDao().CurrentDocument;
+                ret = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).Document;
             return ret;
         }
         public static FlowControl GetFlowControl() { return flowControl; }

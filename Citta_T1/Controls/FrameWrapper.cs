@@ -198,6 +198,7 @@ namespace C2.Controls
     }
     class FrameWrapper
     {
+        private CanvasPanel canvasPanel;
         private const bool endSelect = false;
         private const bool startSelect = true;
         private const bool dragStatus = true;
@@ -224,8 +225,9 @@ namespace C2.Controls
         public List<Control> Controls { get => controls; set => controls = value; }
 
         FrameWrapperVFX frameWrapperVFX = new FrameWrapperVFX();
-        public FrameWrapper()
+        public FrameWrapper(CanvasPanel canvas)
         {
+            canvasPanel = canvas;
             p.DashStyle = DashStyle.Dash;
             worldWidth = 2000;
             worldHeight = 1000;
@@ -332,7 +334,6 @@ namespace C2.Controls
                 BaseCommand cmd = new BatchDeleteCommand(mesAndMrs.Item1, mesAndMrs.Item2);
                 UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
             }
-            
         }
         public bool FramePaint(PaintEventArgs e)
         {
@@ -347,7 +348,7 @@ namespace C2.Controls
                 i = null;
                 return true;
             }
-            if (Global.GetFlowControl().SelectFrame & staticImage != null)
+            if (this.canvasPanel.flowControl1.SelectFrame & staticImage != null)
             {
                 Bitmap i = new Bitmap(staticImage);
                 e.Graphics.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));

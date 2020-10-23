@@ -482,12 +482,6 @@
     <Compile Include="Forms\CanvasForm.designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TestForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\TestForm.Designer.cs">
-      <DependentUpon>TestForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="WorkSpace\MciWorkSpace.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1383,9 +1377,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TestForm.resx">
-      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IAOLab\CustomOP\CustomOperatorView.resx">
       <DependentUpon>CustomOperatorView.cs</DependentUpon>
