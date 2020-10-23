@@ -237,6 +237,7 @@ namespace C2
             this.oprateButton.Text = "业务视图";
             this.toolTip1.SetToolTip(this.oprateButton, "当前用户的所有业务视图");
             this.oprateButton.UseVisualStyleBackColor = true;
+            this.oprateButton.Click += new System.EventHandler(this.OprateButton_Click);
             // 
             // myModelButton
             // 
