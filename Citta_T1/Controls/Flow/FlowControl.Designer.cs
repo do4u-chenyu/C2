@@ -36,11 +36,14 @@
             this.remarkPictureBox = new System.Windows.Forms.PictureBox();
             this.framePictureBox = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.movePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomUpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.remarkPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.framePictureBox)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // movePictureBox
@@ -93,9 +96,9 @@
             // 
             this.remarkPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
-            this.remarkPictureBox.Location = new System.Drawing.Point(20, 6);
+            this.remarkPictureBox.Location = new System.Drawing.Point(3, 2);
             this.remarkPictureBox.Name = "remarkPictureBox";
-            this.remarkPictureBox.Size = new System.Drawing.Size(23, 23);
+            this.remarkPictureBox.Size = new System.Drawing.Size(27, 24);
             this.remarkPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.remarkPictureBox.TabIndex = 3;
             this.remarkPictureBox.TabStop = false;
@@ -119,14 +122,32 @@
             this.framePictureBox.MouseEnter += new System.EventHandler(this.FramePictureBox_MouseEnter);
             this.framePictureBox.MouseLeave += new System.EventHandler(this.FramePictureBox_MouseLeave);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.remarkPictureBox);
+            this.panel1.Location = new System.Drawing.Point(13, 7);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(48, 48);
+            this.panel1.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "000000000";
+            // 
             // FlowControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::C2.Properties.Resources.flow;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.framePictureBox);
-            this.Controls.Add(this.remarkPictureBox);
             this.Controls.Add(this.zoomDownPictureBox);
             this.Controls.Add(this.zoomUpPictureBox);
             this.Controls.Add(this.movePictureBox);
@@ -140,6 +161,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.remarkPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.framePictureBox)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -152,5 +175,7 @@
         private System.Windows.Forms.PictureBox remarkPictureBox;
         private System.Windows.Forms.PictureBox framePictureBox;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
     }
 }

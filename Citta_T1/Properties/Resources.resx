@@ -916,4 +916,7 @@
   <data name="频率1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\operator\频率.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AI2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\operator\AI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

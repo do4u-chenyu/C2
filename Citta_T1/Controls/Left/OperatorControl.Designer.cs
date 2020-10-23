@@ -149,7 +149,7 @@
             this.filterOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.filterOpPictureBox.BackgroundImage = global::C2.Properties.Resources.筛_选;
             this.filterOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.filterOpPictureBox.Location = new System.Drawing.Point(97, 10);
+            this.filterOpPictureBox.Location = new System.Drawing.Point(100, 10);
             this.filterOpPictureBox.Name = "filterOpPictureBox";
             this.filterOpPictureBox.Size = new System.Drawing.Size(21, 21);
             this.filterOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -256,7 +256,7 @@
             // 
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox4.Image = global::C2.Properties.Resources.多源;
-            this.pictureBox4.Location = new System.Drawing.Point(101, 251);
+            this.pictureBox4.Location = new System.Drawing.Point(100, 251);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(21, 21);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -348,11 +348,12 @@
             this.leftPanelOpDataStandar.FlatAppearance.BorderSize = 0;
             this.leftPanelOpDataStandar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpDataStandar.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpDataStandar.Location = new System.Drawing.Point(124, 206);
+            this.leftPanelOpDataStandar.Location = new System.Drawing.Point(123, 206);
             this.leftPanelOpDataStandar.Name = "leftPanelOpDataStandar";
-            this.leftPanelOpDataStandar.Size = new System.Drawing.Size(89, 37);
+            this.leftPanelOpDataStandar.Size = new System.Drawing.Size(125, 37);
             this.leftPanelOpDataStandar.TabIndex = 34;
             this.leftPanelOpDataStandar.Text = "数据标准化";
+            this.leftPanelOpDataStandar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpDataStandar.UseMnemonic = false;
             this.leftPanelOpDataStandar.UseVisualStyleBackColor = false;
             this.leftPanelOpDataStandar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
@@ -366,9 +367,10 @@
             this.leftPanelOpWordFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpWordFilter.Location = new System.Drawing.Point(124, 172);
             this.leftPanelOpWordFilter.Name = "leftPanelOpWordFilter";
-            this.leftPanelOpWordFilter.Size = new System.Drawing.Size(89, 37);
+            this.leftPanelOpWordFilter.Size = new System.Drawing.Size(124, 37);
             this.leftPanelOpWordFilter.TabIndex = 32;
             this.leftPanelOpWordFilter.Text = "关键词过滤";
+            this.leftPanelOpWordFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpWordFilter.UseMnemonic = false;
             this.leftPanelOpWordFilter.UseVisualStyleBackColor = false;
             this.leftPanelOpWordFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
@@ -382,9 +384,10 @@
             this.leftPanelOpGroup.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpGroup.Location = new System.Drawing.Point(124, 142);
             this.leftPanelOpGroup.Name = "leftPanelOpGroup";
-            this.leftPanelOpGroup.Size = new System.Drawing.Size(74, 37);
+            this.leftPanelOpGroup.Size = new System.Drawing.Size(141, 37);
             this.leftPanelOpGroup.TabIndex = 31;
             this.leftPanelOpGroup.Text = "分组算子";
+            this.leftPanelOpGroup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpGroup.UseMnemonic = false;
             this.leftPanelOpGroup.UseVisualStyleBackColor = false;
             this.leftPanelOpGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
