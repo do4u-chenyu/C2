@@ -2471,16 +2471,6 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap u72 {
-            get {
-                object obj = ResourceManager.GetObject("u72", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
         internal static System.Drawing.Bitmap underline {
             get {
                 object obj = ResourceManager.GetObject("underline", resourceCulture);

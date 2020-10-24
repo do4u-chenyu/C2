@@ -1555,6 +1555,7 @@
     <None Include="Resources\flow.png" />
     <None Include="Resources\AI.png" />
     <None Include="Resources\businessoutline.png" />
+    <Content Include="Resources\C1\datasource\dataButton.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
     <None Include="Resources\html_content.htm" />
@@ -1923,8 +1924,6 @@
     <Content Include="Resources\C1\datasource\pythonHelper4.png" />
     <Content Include="Resources\C1\datasource\pythonHelper5.png" />
     <Content Include="Resources\C1\datasource\pythonHelper6.png" />
-    <Content Include="Resources\C1\datasource\u72.png" />
-    <Content Include="Resources\C1\datasource\u721.png" />
     <Content Include="Resources\C1\flow\flow.png" />
     <Content Include="Resources\C1\Icon\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -2013,7 +2012,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\X.jpg" />
-    <None Include="Resources\u72.png" />
     <None Include="Resources\selectDrag.png" />
     <Content Include="Resources\C1\displaypanel\blueshadow.png" />
     <Content Include="Resources\C1\displaypanel\close.png" />
