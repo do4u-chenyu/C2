@@ -86,7 +86,7 @@
             // relateOpPictureBox
             // 
             this.relateOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.relateOpPictureBox.BackgroundImage = global::C2.Properties.Resources.关联1;
+            this.relateOpPictureBox.BackgroundImage = global::C2.Properties.Resources.关联;
             this.relateOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.relateOpPictureBox.Location = new System.Drawing.Point(2, 9);
             this.relateOpPictureBox.Name = "relateOpPictureBox";
@@ -99,7 +99,7 @@
             // collideOpPictureBox
             // 
             this.collideOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.collideOpPictureBox.BackgroundImage = global::C2.Properties.Resources.碰撞1;
+            this.collideOpPictureBox.BackgroundImage = global::C2.Properties.Resources.碰撞;
             this.collideOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.collideOpPictureBox.Location = new System.Drawing.Point(2, 42);
             this.collideOpPictureBox.Name = "collideOpPictureBox";
@@ -111,7 +111,7 @@
             // differOpPictureBox
             // 
             this.differOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.differOpPictureBox.BackgroundImage = global::C2.Properties.Resources.差集1;
+            this.differOpPictureBox.BackgroundImage = global::C2.Properties.Resources.差集;
             this.differOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.differOpPictureBox.Location = new System.Drawing.Point(2, 113);
             this.differOpPictureBox.Name = "differOpPictureBox";
@@ -123,7 +123,7 @@
             // randomOpPictureBox
             // 
             this.randomOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.randomOpPictureBox.BackgroundImage = global::C2.Properties.Resources.随机1;
+            this.randomOpPictureBox.BackgroundImage = global::C2.Properties.Resources.随机;
             this.randomOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.randomOpPictureBox.Location = new System.Drawing.Point(2, 148);
             this.randomOpPictureBox.Name = "randomOpPictureBox";
@@ -135,7 +135,7 @@
             // maxOpPictureBox
             // 
             this.maxOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.maxOpPictureBox.BackgroundImage = global::C2.Properties.Resources.最大值1;
+            this.maxOpPictureBox.BackgroundImage = global::C2.Properties.Resources.最大值;
             this.maxOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.maxOpPictureBox.Location = new System.Drawing.Point(2, 213);
             this.maxOpPictureBox.Name = "maxOpPictureBox";
@@ -147,7 +147,7 @@
             // filterOpPictureBox
             // 
             this.filterOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.filterOpPictureBox.BackgroundImage = global::C2.Properties.Resources.筛_选;
+            this.filterOpPictureBox.BackgroundImage = global::C2.Properties.Resources.筛选;
             this.filterOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.filterOpPictureBox.Location = new System.Drawing.Point(100, 10);
             this.filterOpPictureBox.Name = "filterOpPictureBox";
@@ -159,7 +159,7 @@
             // avgOpPictureBox
             // 
             this.avgOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.avgOpPictureBox.BackgroundImage = global::C2.Properties.Resources.平均值__2_;
+            this.avgOpPictureBox.BackgroundImage = global::C2.Properties.Resources.平均值;
             this.avgOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.avgOpPictureBox.Location = new System.Drawing.Point(100, 44);
             this.avgOpPictureBox.Name = "avgOpPictureBox";
@@ -171,7 +171,7 @@
             // minOpPictureBox
             // 
             this.minOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.minOpPictureBox.BackgroundImage = global::C2.Properties.Resources.最小值1;
+            this.minOpPictureBox.BackgroundImage = global::C2.Properties.Resources.最小值;
             this.minOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.minOpPictureBox.Location = new System.Drawing.Point(2, 179);
             this.minOpPictureBox.Name = "minOpPictureBox";
@@ -183,7 +183,7 @@
             // unionOpPictureBox
             // 
             this.unionOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.unionOpPictureBox.BackgroundImage = global::C2.Properties.Resources.并集1;
+            this.unionOpPictureBox.BackgroundImage = global::C2.Properties.Resources.并集;
             this.unionOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.unionOpPictureBox.Location = new System.Drawing.Point(2, 79);
             this.unionOpPictureBox.Name = "unionOpPictureBox";
@@ -195,7 +195,7 @@
             // freqOpPictureBox
             // 
             this.freqOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.freqOpPictureBox.BackgroundImage = global::C2.Properties.Resources.频率1;
+            this.freqOpPictureBox.BackgroundImage = global::C2.Properties.Resources.频率;
             this.freqOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.freqOpPictureBox.Location = new System.Drawing.Point(100, 79);
             this.freqOpPictureBox.Name = "freqOpPictureBox";
@@ -207,7 +207,7 @@
             // sortOpPictureBox
             // 
             this.sortOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.sortOpPictureBox.BackgroundImage = global::C2.Properties.Resources.排序__2_;
+            this.sortOpPictureBox.BackgroundImage = global::C2.Properties.Resources.排序;
             this.sortOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.sortOpPictureBox.Location = new System.Drawing.Point(100, 112);
             this.sortOpPictureBox.Name = "sortOpPictureBox";
@@ -219,7 +219,7 @@
             // groupOpPictureBox
             // 
             this.groupOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.groupOpPictureBox.BackgroundImage = global::C2.Properties.Resources.分组1;
+            this.groupOpPictureBox.BackgroundImage = global::C2.Properties.Resources.分组;
             this.groupOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.groupOpPictureBox.Location = new System.Drawing.Point(100, 148);
             this.groupOpPictureBox.Name = "groupOpPictureBox";
@@ -231,7 +231,7 @@
             // wordFilterOpPictureBox
             // 
             this.wordFilterOpPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.wordFilterOpPictureBox.BackgroundImage = global::C2.Properties.Resources.关键词过滤1;
+            this.wordFilterOpPictureBox.BackgroundImage = global::C2.Properties.Resources.关键词过滤;
             this.wordFilterOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.wordFilterOpPictureBox.Location = new System.Drawing.Point(100, 182);
             this.wordFilterOpPictureBox.Name = "wordFilterOpPictureBox";

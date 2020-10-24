@@ -859,49 +859,49 @@
   <data name="python1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\python.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="关联1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="关联" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\关联.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="关键词过滤1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="关键词过滤" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\关键词过滤.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="分组1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="分组" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\分组.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="多源" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\多源.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="差集1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="差集" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\差集.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="平均值__2_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="平均值" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\平均值.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="并集1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="并集" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\并集.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="排序__2_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="排序" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\排序.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="最大值1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="最大值" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\最大值.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="最小值1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="最小值" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\最小值.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="标准" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\标准.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="碰撞1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="碰撞" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\碰撞.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="筛_选" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="筛选" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\筛选.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="随机1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="随机" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\随机.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="频率1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="频率" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\频率.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
