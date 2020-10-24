@@ -1929,14 +1929,11 @@
     <Content Include="Resources\C1\Icon\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\C1\toolbox\continue.png" />
     <None Include="Resources\C1\toolbox\run.png" />
     <None Include="Resources\C1\toolbox\continual.png" />
     <None Include="Resources\C1\modeltitlepanel\u700.png" />
     <None Include="Resources\C1\toolbox\importmodel.png" />
     <Content Include="Resources\C1\leftpanelmenu\startPageTitle.jpg" />
-    <Content Include="Resources\C1\leftpanelmenu\startPageTitle_1.jpg" />
-    <Content Include="Resources\C1\leftpanelmenu\startPageTitle_gray.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2034,31 +2031,12 @@
     <Content Include="Resources\C1\element\set.png" />
     <Content Include="Resources\C1\element\setSuccess.png" />
     <Content Include="Resources\C1\element\warn.png" />
-    <Content Include="Resources\C1\flowchart\diamond.png" />
-    <Content Include="Resources\C1\flowchart\downarrow.png" />
-    <Content Include="Resources\C1\flowchart\ellipse.png" />
-    <Content Include="Resources\C1\flowchart\flag.png" />
-    <Content Include="Resources\C1\flowchart\leftarrow.png" />
-    <Content Include="Resources\C1\flowchart\person.png" />
-    <Content Include="Resources\C1\flowchart\picture.png" />
-    <Content Include="Resources\C1\flowchart\questionmark.png" />
-    <Content Include="Resources\C1\flowchart\rectange.png" />
-    <Content Include="Resources\C1\flowchart\rightarrow.png" />
-    <Content Include="Resources\C1\flowchart\roundrectange.png" />
-    <Content Include="Resources\C1\flowchart\uparrow.png" />
     <Content Include="Resources\C1\flow\drop.png" />
     <Content Include="Resources\C1\flow\selectDrag.png" />
     <Content Include="Resources\C1\flow\selectFrame.png" />
     <Content Include="Resources\C1\flow\selectRemark.png" />
     <Content Include="Resources\C1\flow\selectZommUp.png" />
     <Content Include="Resources\C1\flow\selectZoomDown.png" />
-    <Content Include="Resources\C1\leftpanelmenu\leftpanel_connect.png" />
-    <Content Include="Resources\C1\leftpanelmenu\leftpanel_filterop.png" />
-    <Content Include="Resources\C1\leftpanelmenu\leftpanel_intersect.png" />
-    <Content Include="Resources\C1\leftpanelmenu\leftpanel_max.png" />
-    <Content Include="Resources\C1\leftpanelmenu\leftpanel_random.png" />
-    <Content Include="Resources\C1\leftpanelmenu\leftpanel_union.png" />
-    <Content Include="Resources\C1\leftpanelmenu\title.png" />
     <Content Include="Resources\C1\menu\controlhelp.png" />
     <Content Include="Resources\C1\menu\head.png" />
     <Content Include="Resources\C1\menu\help.png" />
