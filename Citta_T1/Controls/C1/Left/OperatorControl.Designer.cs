@@ -278,7 +278,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Image = global::C2.Properties.Resources.AI1;
+            this.pictureBox2.Image = global::C2.Properties.Resources.AI;
             this.pictureBox2.Location = new System.Drawing.Point(2, 247);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(21, 21);

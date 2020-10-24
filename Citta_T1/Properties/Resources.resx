@@ -598,9 +598,6 @@
   <data name="redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\redo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AI" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="previous" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\previous.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -856,7 +853,7 @@
   <data name="globe_network" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\globe_network.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AI1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="AI" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\AI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="python1" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -906,9 +903,6 @@
   </data>
   <data name="频率1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\频率.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AI2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\AI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Languages\en.US.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
