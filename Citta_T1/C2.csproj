@@ -2029,7 +2029,7 @@
     <Content Include="Resources\C1\flow\selectDrag.png" />
     <Content Include="Resources\C1\flow\selectFrame.png" />
     <Content Include="Resources\C1\flow\selectRemark.png" />
-    <Content Include="Resources\C1\flow\selectZommUp.png" />
+    <Content Include="Resources\C1\flow\selectZoomUp.png" />
     <Content Include="Resources\C1\flow\selectZoomDown.png" />
     <Content Include="Resources\C1\menu\controlhelp.png" />
     <Content Include="Resources\C1\menu\head.png" />

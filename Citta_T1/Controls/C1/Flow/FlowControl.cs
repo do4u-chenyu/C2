@@ -184,7 +184,7 @@ namespace C2.Controls.Flow
         {
             if (flag)
             {
-                this.zoomUpPictureBox.Image = global::C2.Properties.Resources.selectZommUp;
+                this.zoomUpPictureBox.Image = global::C2.Properties.Resources.selectZoomUp;
                 this.zoomUpPictureBox.Location = new System.Drawing.Point(45, 3);
                 this.zoomUpPictureBox.Size = new System.Drawing.Size(35, 29);
                 return;

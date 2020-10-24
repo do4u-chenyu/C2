@@ -2104,9 +2104,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap selectZommUp {
+        internal static System.Drawing.Bitmap selectZoomDown {
             get {
-                object obj = ResourceManager.GetObject("selectZommUp", resourceCulture);
+                object obj = ResourceManager.GetObject("selectZoomDown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2114,9 +2114,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap selectZoomDown {
+        internal static System.Drawing.Bitmap selectZoomUp {
             get {
-                object obj = ResourceManager.GetObject("selectZoomDown", resourceCulture);
+                object obj = ResourceManager.GetObject("selectZoomUp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
