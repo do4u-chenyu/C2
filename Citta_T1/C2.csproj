@@ -1798,7 +1798,6 @@
     </Content>
     <None Include="Resources\NativeResources.res" />
     <None Include="Resources\operator_back.png" />
-    <None Include="Resources\python.png" />
     <Content Include="Resources\Operators\AI.png" />
     <Content Include="Resources\Operators\python.png" />
     <Content Include="Resources\Operators\关联.png" />

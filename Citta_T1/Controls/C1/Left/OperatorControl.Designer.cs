@@ -267,7 +267,7 @@
             // pictureBox3
             // 
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox3.Image = global::C2.Properties.Resources.python1;
+            this.pictureBox3.Image = global::C2.Properties.Resources.python;
             this.pictureBox3.Location = new System.Drawing.Point(2, 280);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(21, 21);
