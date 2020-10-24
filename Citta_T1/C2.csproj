@@ -1917,75 +1917,75 @@
     <None Include="Resources\WidgetIcon\operator_w_icon.png" />
     <None Include="Resources\WidgetIcon\reulst_w_icon.png" />
     <None Include="Resources\WidgetIcon\result_w_icon.png" />
-    <Content Include="Resources\res\datasource\pythonHelper1.png" />
-    <Content Include="Resources\res\datasource\pythonHelper2.png" />
-    <Content Include="Resources\res\datasource\pythonHelper3.png" />
-    <Content Include="Resources\res\datasource\pythonHelper4.png" />
-    <Content Include="Resources\res\datasource\pythonHelper5.png" />
-    <Content Include="Resources\res\datasource\pythonHelper6.png" />
-    <Content Include="Resources\res\datasource\u72.png" />
-    <Content Include="Resources\res\datasource\u721.png" />
-    <Content Include="Resources\res\flow\flow.png" />
-    <Content Include="Resources\res\Icon\Icon.ico">
+    <Content Include="Resources\C1\datasource\pythonHelper1.png" />
+    <Content Include="Resources\C1\datasource\pythonHelper2.png" />
+    <Content Include="Resources\C1\datasource\pythonHelper3.png" />
+    <Content Include="Resources\C1\datasource\pythonHelper4.png" />
+    <Content Include="Resources\C1\datasource\pythonHelper5.png" />
+    <Content Include="Resources\C1\datasource\pythonHelper6.png" />
+    <Content Include="Resources\C1\datasource\u72.png" />
+    <Content Include="Resources\C1\datasource\u721.png" />
+    <Content Include="Resources\C1\flow\flow.png" />
+    <Content Include="Resources\C1\Icon\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\res\toolbox\continue.png" />
-    <None Include="Resources\res\toolbox\run.png" />
-    <None Include="Resources\res\toolbox\continual.png" />
-    <None Include="Resources\res\modeltitlepanel\u700.png" />
-    <None Include="Resources\res\toolbox\importmodel.png" />
-    <Content Include="Resources\res\leftpanelmenu\startPageTitle.jpg" />
-    <Content Include="Resources\res\leftpanelmenu\startPageTitle_1.jpg" />
-    <Content Include="Resources\res\leftpanelmenu\startPageTitle_gray.png" />
+    <None Include="Resources\C1\toolbox\continue.png" />
+    <None Include="Resources\C1\toolbox\run.png" />
+    <None Include="Resources\C1\toolbox\continual.png" />
+    <None Include="Resources\C1\modeltitlepanel\u700.png" />
+    <None Include="Resources\C1\toolbox\importmodel.png" />
+    <Content Include="Resources\C1\leftpanelmenu\startPageTitle.jpg" />
+    <Content Include="Resources\C1\leftpanelmenu\startPageTitle_1.jpg" />
+    <Content Include="Resources\C1\leftpanelmenu\startPageTitle_gray.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sbin\xargs.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\res\toolbox\saveall.png" />
-    <None Include="Resources\res\toolbox\reset.png" />
-    <None Include="Resources\res\toolbox\redo.png" />
-    <None Include="Resources\res\toolbox\undo.png" />
-    <None Include="Resources\res\leftpanelmenu\LeftpanelOpIcon.png" />
-    <Content Include="Resources\res\opControl\releateOp.png" />
-    <Content Include="Resources\res\opControl\wordFilterOp.png">
+    <None Include="Resources\C1\toolbox\saveall.png" />
+    <None Include="Resources\C1\toolbox\reset.png" />
+    <None Include="Resources\C1\toolbox\redo.png" />
+    <None Include="Resources\C1\toolbox\undo.png" />
+    <None Include="Resources\C1\leftpanelmenu\LeftpanelOpIcon.png" />
+    <Content Include="Resources\C1\opControl\releateOp.png" />
+    <Content Include="Resources\C1\opControl\wordFilterOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\groupOp.png">
+    <Content Include="Resources\C1\opControl\groupOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\differOp.png">
+    <Content Include="Resources\C1\opControl\differOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\avgOp.png">
+    <Content Include="Resources\C1\opControl\avgOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\unionOp.png">
+    <Content Include="Resources\C1\opControl\unionOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\maxOp.png">
+    <Content Include="Resources\C1\opControl\maxOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\minOp.png">
+    <Content Include="Resources\C1\opControl\minOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\sortOp.png">
+    <Content Include="Resources\C1\opControl\sortOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\dataStandarOp.png">
+    <Content Include="Resources\C1\opControl\dataStandarOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\filterOp.png">
+    <Content Include="Resources\C1\opControl\filterOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\collideOp.png">
+    <Content Include="Resources\C1\opControl\collideOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\randomOp.png">
+    <Content Include="Resources\C1\opControl\randomOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\opControl\freqOp.png">
+    <Content Include="Resources\C1\opControl\freqOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sbin\cat_xls.exe">
@@ -2018,74 +2018,74 @@
     <None Include="Resources\X.jpg" />
     <None Include="Resources\u72.png" />
     <None Include="Resources\selectDrag.png" />
-    <Content Include="Resources\res\displaypanel\blueshadow.png" />
-    <Content Include="Resources\res\displaypanel\close.png" />
-    <Content Include="Resources\res\displaypanel\maxunfold.png">
+    <Content Include="Resources\C1\displaypanel\blueshadow.png" />
+    <Content Include="Resources\C1\displaypanel\close.png" />
+    <Content Include="Resources\C1\displaypanel\maxunfold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\displaypanel\minfold.png">
+    <Content Include="Resources\C1\displaypanel\minfold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\res\displaypanel\remark.png" />
-    <Content Include="Resources\res\displaypanel\shadow.png" />
-    <Content Include="Resources\res\element\done.png" />
-    <Content Include="Resources\res\element\resultDone.png" />
-    <Content Include="Resources\res\element\resultNull.png" />
-    <Content Include="Resources\res\element\set.png" />
-    <Content Include="Resources\res\element\setSuccess.png" />
-    <Content Include="Resources\res\element\warn.png" />
-    <Content Include="Resources\res\flowchart\diamond.png" />
-    <Content Include="Resources\res\flowchart\downarrow.png" />
-    <Content Include="Resources\res\flowchart\ellipse.png" />
-    <Content Include="Resources\res\flowchart\flag.png" />
-    <Content Include="Resources\res\flowchart\leftarrow.png" />
-    <Content Include="Resources\res\flowchart\person.png" />
-    <Content Include="Resources\res\flowchart\picture.png" />
-    <Content Include="Resources\res\flowchart\questionmark.png" />
-    <Content Include="Resources\res\flowchart\rectange.png" />
-    <Content Include="Resources\res\flowchart\rightarrow.png" />
-    <Content Include="Resources\res\flowchart\roundrectange.png" />
-    <Content Include="Resources\res\flowchart\uparrow.png" />
-    <Content Include="Resources\res\flow\drop.png" />
-    <Content Include="Resources\res\flow\selectDrag.png" />
-    <Content Include="Resources\res\flow\selectFrame.png" />
-    <Content Include="Resources\res\flow\selectRemark.png" />
-    <Content Include="Resources\res\flow\selectZommUp.png" />
-    <Content Include="Resources\res\flow\selectZoomDown.png" />
-    <Content Include="Resources\res\leftpanelmenu\leftpanel_connect.png" />
-    <Content Include="Resources\res\leftpanelmenu\leftpanel_filterop.png" />
-    <Content Include="Resources\res\leftpanelmenu\leftpanel_intersect.png" />
-    <Content Include="Resources\res\leftpanelmenu\leftpanel_max.png" />
-    <Content Include="Resources\res\leftpanelmenu\leftpanel_random.png" />
-    <Content Include="Resources\res\leftpanelmenu\leftpanel_union.png" />
-    <Content Include="Resources\res\leftpanelmenu\title.png" />
-    <Content Include="Resources\res\menu\controlhelp.png" />
-    <Content Include="Resources\res\menu\head.png" />
-    <Content Include="Resources\res\menu\help.png" />
-    <None Include="Resources\res\toolbox\add.png" />
-    <None Include="Resources\res\menu\modelstep.png" />
-    <Content Include="Resources\res\toolbox\background.png" />
-    <Content Include="Resources\res\toolbox\clicksavebutton.png" />
-    <Content Include="Resources\res\toolbox\connect.png" />
-    <None Include="Resources\res\toolbox\currentModelRunning.gif" />
-    <None Include="Resources\res\toolbox\currentModelFin.png" />
-    <None Include="Resources\res\toolbox\currentModelRunningBack.png" />
-    <Content Include="Resources\res\toolbox\difference.png" />
-    <None Include="Resources\res\toolbox\div.png" />
-    <Content Include="Resources\res\toolbox\filter.png" />
-    <Content Include="Resources\res\toolbox\group.png" />
-    <Content Include="Resources\res\toolbox\histogram.png" />
-    <Content Include="Resources\res\toolbox\importfile.png" />
-    <Content Include="Resources\res\toolbox\intersection.png" />
-    <Content Include="Resources\res\toolbox\MoveOpBackground.png" />
-    <Content Include="Resources\res\toolbox\newfile.png" />
-    <None Include="Resources\res\toolbox\pause.png" />
-    <Content Include="Resources\res\toolbox\RandomButton.png" />
-    <None Include="Resources\res\toolbox\relation.png" />
-    <Content Include="Resources\res\toolbox\savefile.png" />
-    <Content Include="Resources\res\toolbox\typesetting.png" />
-    <Content Include="Resources\res\toolbox\more.png" />
-    <Content Include="Resources\res\toolbox\union.png" />
+    <Content Include="Resources\C1\displaypanel\remark.png" />
+    <Content Include="Resources\C1\displaypanel\shadow.png" />
+    <Content Include="Resources\C1\element\done.png" />
+    <Content Include="Resources\C1\element\resultDone.png" />
+    <Content Include="Resources\C1\element\resultNull.png" />
+    <Content Include="Resources\C1\element\set.png" />
+    <Content Include="Resources\C1\element\setSuccess.png" />
+    <Content Include="Resources\C1\element\warn.png" />
+    <Content Include="Resources\C1\flowchart\diamond.png" />
+    <Content Include="Resources\C1\flowchart\downarrow.png" />
+    <Content Include="Resources\C1\flowchart\ellipse.png" />
+    <Content Include="Resources\C1\flowchart\flag.png" />
+    <Content Include="Resources\C1\flowchart\leftarrow.png" />
+    <Content Include="Resources\C1\flowchart\person.png" />
+    <Content Include="Resources\C1\flowchart\picture.png" />
+    <Content Include="Resources\C1\flowchart\questionmark.png" />
+    <Content Include="Resources\C1\flowchart\rectange.png" />
+    <Content Include="Resources\C1\flowchart\rightarrow.png" />
+    <Content Include="Resources\C1\flowchart\roundrectange.png" />
+    <Content Include="Resources\C1\flowchart\uparrow.png" />
+    <Content Include="Resources\C1\flow\drop.png" />
+    <Content Include="Resources\C1\flow\selectDrag.png" />
+    <Content Include="Resources\C1\flow\selectFrame.png" />
+    <Content Include="Resources\C1\flow\selectRemark.png" />
+    <Content Include="Resources\C1\flow\selectZommUp.png" />
+    <Content Include="Resources\C1\flow\selectZoomDown.png" />
+    <Content Include="Resources\C1\leftpanelmenu\leftpanel_connect.png" />
+    <Content Include="Resources\C1\leftpanelmenu\leftpanel_filterop.png" />
+    <Content Include="Resources\C1\leftpanelmenu\leftpanel_intersect.png" />
+    <Content Include="Resources\C1\leftpanelmenu\leftpanel_max.png" />
+    <Content Include="Resources\C1\leftpanelmenu\leftpanel_random.png" />
+    <Content Include="Resources\C1\leftpanelmenu\leftpanel_union.png" />
+    <Content Include="Resources\C1\leftpanelmenu\title.png" />
+    <Content Include="Resources\C1\menu\controlhelp.png" />
+    <Content Include="Resources\C1\menu\head.png" />
+    <Content Include="Resources\C1\menu\help.png" />
+    <None Include="Resources\C1\toolbox\add.png" />
+    <None Include="Resources\C1\menu\modelstep.png" />
+    <Content Include="Resources\C1\toolbox\background.png" />
+    <Content Include="Resources\C1\toolbox\clicksavebutton.png" />
+    <Content Include="Resources\C1\toolbox\connect.png" />
+    <None Include="Resources\C1\toolbox\currentModelRunning.gif" />
+    <None Include="Resources\C1\toolbox\currentModelFin.png" />
+    <None Include="Resources\C1\toolbox\currentModelRunningBack.png" />
+    <Content Include="Resources\C1\toolbox\difference.png" />
+    <None Include="Resources\C1\toolbox\div.png" />
+    <Content Include="Resources\C1\toolbox\filter.png" />
+    <Content Include="Resources\C1\toolbox\group.png" />
+    <Content Include="Resources\C1\toolbox\histogram.png" />
+    <Content Include="Resources\C1\toolbox\importfile.png" />
+    <Content Include="Resources\C1\toolbox\intersection.png" />
+    <Content Include="Resources\C1\toolbox\MoveOpBackground.png" />
+    <Content Include="Resources\C1\toolbox\newfile.png" />
+    <None Include="Resources\C1\toolbox\pause.png" />
+    <Content Include="Resources\C1\toolbox\RandomButton.png" />
+    <None Include="Resources\C1\toolbox\relation.png" />
+    <Content Include="Resources\C1\toolbox\savefile.png" />
+    <Content Include="Resources\C1\toolbox\typesetting.png" />
+    <Content Include="Resources\C1\toolbox\more.png" />
+    <Content Include="Resources\C1\toolbox\union.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
