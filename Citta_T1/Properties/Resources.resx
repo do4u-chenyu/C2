@@ -766,9 +766,6 @@
   <data name="print_two_pages" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\print_two_pages.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="X" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\X.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="paste_as_remark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\paste_as_remark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

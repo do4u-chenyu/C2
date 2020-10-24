@@ -2010,7 +2010,6 @@
     <Content Include="sbin\tr.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\X.jpg" />
     <None Include="Resources\selectDrag.png" />
     <Content Include="Resources\C1\displaypanel\blueshadow.png" />
     <Content Include="Resources\C1\displaypanel\close.png" />
