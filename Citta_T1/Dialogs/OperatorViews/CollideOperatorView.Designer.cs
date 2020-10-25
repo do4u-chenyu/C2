@@ -38,7 +38,7 @@
             // 
             this.dataSourceTB1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataSourceTB1.Location = new System.Drawing.Point(329, 6);
-            this.dataSourceTB1.Size = new System.Drawing.Size(144, 28);
+            this.dataSourceTB1.Size = new System.Drawing.Size(144, 23);
             this.dataSourceTB1.TabIndex = 10;
             this.dataSourceTB1.Visible = true;
             // 
@@ -46,7 +46,6 @@
             // 
             this.dataSourceTB0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataSourceTB0.Location = new System.Drawing.Point(146, 6);
-            this.dataSourceTB0.Size = new System.Drawing.Size(144, 28);
             this.dataSourceTB0.TabIndex = 9;
             // 
             // cancelButton
@@ -67,32 +66,32 @@
             // 
             this.outListCCBL0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL0.Location = new System.Drawing.Point(146, 53);
-            this.outListCCBL0.Size = new System.Drawing.Size(144, 26);
+            this.outListCCBL0.Size = new System.Drawing.Size(144, 21);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Location = new System.Drawing.Point(2, 2);
-            this.comboBox0.Size = new System.Drawing.Size(86, 26);
+            this.comboBox0.Location = new System.Drawing.Point(2, 5);
+            this.comboBox0.Size = new System.Drawing.Size(86, 21);
             // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.Location = new System.Drawing.Point(92, 2);
-            this.comboBox1.Size = new System.Drawing.Size(86, 26);
+            this.comboBox1.Location = new System.Drawing.Point(92, 5);
+            this.comboBox1.Size = new System.Drawing.Size(86, 21);
             this.comboBox1.Visible = true;
             // 
             // topPanel
             // 
             this.topPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.topPanel.Size = new System.Drawing.Size(539, 37);
+            this.topPanel.Size = new System.Drawing.Size(541, 37);
             // 
             // bottomPanel
             // 
             this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 336);
-            this.bottomPanel.Size = new System.Drawing.Size(539, 43);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 346);
+            this.bottomPanel.Size = new System.Drawing.Size(541, 43);
             // 
             // valuePanel
             // 
@@ -106,7 +105,7 @@
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(0, 37);
-            this.valuePanel.Size = new System.Drawing.Size(539, 299);
+            this.valuePanel.Size = new System.Drawing.Size(541, 309);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
@@ -120,7 +119,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(57, 11);
-            this.label1.Size = new System.Drawing.Size(85, 19);
+            this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.Text = "数据信息";
             // 
             // label3
@@ -130,7 +129,7 @@
             this.label3.Location = new System.Drawing.Point(57, 55);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 19);
+            this.label3.Size = new System.Drawing.Size(63, 14);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段";
             // 
@@ -141,7 +140,7 @@
             this.label2.Location = new System.Drawing.Point(57, 100);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 19);
+            this.label2.Size = new System.Drawing.Size(63, 14);
             this.label2.TabIndex = 0;
             this.label2.Text = "碰撞条件";
             // 
@@ -174,7 +173,6 @@
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::C2.Properties.Resources.add;
             this.button1.Location = new System.Drawing.Point(182, 4);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
@@ -194,7 +192,7 @@
             // CollideOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(539, 379);
+            this.ClientSize = new System.Drawing.Size(541, 389);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.bottomPanel);

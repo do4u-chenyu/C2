@@ -50,7 +50,7 @@
             // 
             // leftPictureBox
             // 
-            this.leftPictureBox.Image = global::C2.Properties.Resources.u72;
+            this.leftPictureBox.Image = global::C2.Properties.Resources.dataButton;
             this.leftPictureBox.Size = new System.Drawing.Size(14, 19);
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 0;
