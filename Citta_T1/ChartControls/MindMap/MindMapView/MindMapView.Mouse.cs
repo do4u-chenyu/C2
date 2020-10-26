@@ -134,10 +134,12 @@ namespace C2.Controls.MapViews
         {
             base.OnChartDragDrop(e);
             // 数据源的信息
-            string path = e.Data.GetData("Path").ToString();
-            char separator = (char)e.Data.GetData("Separator");
-            OpUtil.Encoding encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
-            OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
+            WidgetDataSourceInfo dataSourceInfo = new WidgetDataSourceInfo()
+            { Path = e.Data.GetData("Path").ToString(),
+                Separator = (char)e.Data.GetData("Separator"),
+                Encoding = (OpUtil.Encoding)e.Data.GetData("Encoding"),
+                ExtType = (OpUtil.ExtType)e.Data.GetData("ExtType")
+            };           
             // 获取topic
             Point pointToClient = this.ChartBox.PointToClient(new Point(e.X, e.Y));
             var htr = HitTest(pointToClient.X, pointToClient.Y);

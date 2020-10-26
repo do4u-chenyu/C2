@@ -140,7 +140,7 @@ namespace C2.Controls.Common
             //
             pnlCheck = new Panel
             {
-                BorderStyle = BorderStyle.FixedSingle,
+                BorderStyle = BorderStyle.Fixed3D,
                 BackColor = Color.White
             };
             ;

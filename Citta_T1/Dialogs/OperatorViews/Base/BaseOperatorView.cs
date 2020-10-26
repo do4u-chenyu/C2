@@ -258,7 +258,7 @@ namespace C2.OperatorViews.Base
 
         protected void GroupBox_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(this.BackColor);
+            //e.Graphics.Clear(this.BackColor);
         }
 
         private Button NewButton(string name)

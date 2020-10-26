@@ -26,11 +26,11 @@ namespace C2.OperatorViews
 
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 84);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(347, 84);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
         #region 初始化配置
@@ -177,18 +177,23 @@ namespace C2.OperatorViews
         {
             // And OR 选择框
             ComboBox regBox = NewAndORComboBox();
+            regBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
             // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            data0ComboBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
             // 右表列下拉框
             ComboBox data2Box = NewColumnsName1ComboBox();
+            data2Box.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data2Box, 2, addLine);
             // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
+            addButton.BackColor = System.Drawing.SystemColors.Window;
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
             // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
+            delButton.BackColor = System.Drawing.SystemColors.Window;
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
         }
     }

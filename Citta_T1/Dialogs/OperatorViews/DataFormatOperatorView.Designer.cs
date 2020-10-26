@@ -31,14 +31,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.bottomPanel.SuspendLayout();
-            this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataSourceTB0
             // 
-            this.dataSourceTB0.Location = new System.Drawing.Point(6, 2);
+            this.dataSourceTB0.Location = new System.Drawing.Point(195, 3);
             this.dataSourceTB0.Size = new System.Drawing.Size(150, 29);
             this.dataSourceTB0.TabIndex = 9;
             // 
@@ -51,64 +50,66 @@
             // confirmButton
             // 
             this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.confirmButton.Location = new System.Drawing.Point(358, 11);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            this.confirmButton.UseVisualStyleBackColor = true;
             // 
             // comboBox0
             // 
-            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Location = new System.Drawing.Point(44, 2);
-            this.comboBox0.Size = new System.Drawing.Size(116, 29);
+            this.comboBox0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.Location = new System.Drawing.Point(44, 4);
+            this.comboBox0.Size = new System.Drawing.Size(116, 26);
             // 
             // topPanel
             // 
+            this.topPanel.BackColor = System.Drawing.SystemColors.Window;
             this.topPanel.Size = new System.Drawing.Size(527, 21);
             // 
             // bottomPanel
             // 
+            this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.bottomPanel.Location = new System.Drawing.Point(0, 261);
             this.bottomPanel.Size = new System.Drawing.Size(527, 52);
             // 
-            // keyPanel
-            // 
-            this.keyPanel.Controls.Add(this.label2);
-            this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Location = new System.Drawing.Point(0, 21);
-            this.keyPanel.Size = new System.Drawing.Size(116, 240);
-            this.keyPanel.Controls.SetChildIndex(this.label1, 0);
-            this.keyPanel.Controls.SetChildIndex(this.label2, 0);
-            // 
             // valuePanel
             // 
+            this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
+            this.valuePanel.Controls.Add(this.label2);
+            this.valuePanel.Controls.Add(this.label1);
+            this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
-            this.valuePanel.Controls.Add(this.panel1);
-            this.valuePanel.Location = new System.Drawing.Point(116, 21);
-            this.valuePanel.Size = new System.Drawing.Size(411, 240);
-            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
+            this.valuePanel.Location = new System.Drawing.Point(0, 21);
+            this.valuePanel.Size = new System.Drawing.Size(527, 240);
             this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.label1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.label2, 0);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(32, 1);
-            this.label1.Size = new System.Drawing.Size(123, 30);
+            this.label1.Font = new System.Drawing.Font("宋体", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(32, 9);
+            this.label1.Size = new System.Drawing.Size(80, 18);
+            this.label1.Text = "数据信息";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(32, 59);
+            this.label2.Font = new System.Drawing.Font("宋体", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(32, 55);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 30);
+            this.label2.Size = new System.Drawing.Size(80, 18);
             this.label2.TabIndex = 0;
-            this.label2.Text = "添加条件：";
+            this.label2.Text = "添加条件";
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.BackColor = System.Drawing.SystemColors.Window;
             this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
@@ -120,16 +121,16 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(34, 24);
             this.button1.TabIndex = 5;
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // textBox0
             // 
             this.textBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox0.ForeColor = System.Drawing.Color.Gray;
             this.textBox0.Location = new System.Drawing.Point(165, 3);
             this.textBox0.Name = "textBox0";
-            this.textBox0.Size = new System.Drawing.Size(114, 29);
+            this.textBox0.Size = new System.Drawing.Size(114, 28);
             this.textBox0.TabIndex = 6;
             this.textBox0.Text = "别名";
             // 
@@ -137,10 +138,10 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(3, 4);
+            this.label3.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(3, 6);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 23);
+            this.label3.Size = new System.Drawing.Size(36, 19);
             this.label3.TabIndex = 7;
             this.label3.Text = "1";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -148,7 +149,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(4, 87);
+            this.panel1.Location = new System.Drawing.Point(97, 80);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(405, 160);
@@ -165,7 +166,7 @@
             this.tableLayoutPanel2.Controls.Add(this.comboBox0, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.textBox0, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 54);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(98, 47);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -183,7 +184,6 @@
             this.ClientSize = new System.Drawing.Size(527, 313);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
-            this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -196,8 +196,6 @@
             this.ShowIcon = true;
             this.Text = "数据标准化算子设置";
             this.bottomPanel.ResumeLayout(false);
-            this.keyPanel.ResumeLayout(false);
-            this.keyPanel.PerformLayout();
             this.valuePanel.ResumeLayout(false);
             this.valuePanel.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
