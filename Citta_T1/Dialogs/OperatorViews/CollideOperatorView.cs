@@ -25,11 +25,11 @@ namespace C2.OperatorViews
             this.button1.Click += new EventHandler(this.Add_Click);
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 92F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 92F));
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 84);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(346, 84);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
         #region 初始化配置
@@ -181,19 +181,26 @@ namespace C2.OperatorViews
         {
             // And OR 选择框
             ComboBox regBox = NewAndORComboBox();
+            regBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
             // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            data0ComboBox.Size = new System.Drawing.Size(88, 26);
+            data0ComboBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
             // 右表列下拉框
             ComboBox data1ComboBox = NewColumnsName1ComboBox();
+            data1ComboBox.Size = new System.Drawing.Size(88, 26);
+            data1ComboBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data1ComboBox, 2, addLine);
             // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
+            addButton.BackColor = System.Drawing.SystemColors.Window;
             // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
+            delButton.BackColor = System.Drawing.SystemColors.Window;
         }
 
     }

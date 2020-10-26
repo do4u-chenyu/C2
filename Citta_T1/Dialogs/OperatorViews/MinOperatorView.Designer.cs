@@ -52,7 +52,7 @@
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(9, 96);
-            this.outListCCBL0.Size = new System.Drawing.Size(150, 30);
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 26);
             this.outListCCBL0.TabIndex = 2;
             // 
             // comboBox0

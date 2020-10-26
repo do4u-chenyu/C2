@@ -73,14 +73,14 @@
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Location = new System.Drawing.Point(2, 2);
-            this.comboBox0.Size = new System.Drawing.Size(86, 26);
+            this.comboBox0.Location = new System.Drawing.Point(2, 3);
+            this.comboBox0.Size = new System.Drawing.Size(87, 26);
             // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.Location = new System.Drawing.Point(92, 2);
-            this.comboBox1.Size = new System.Drawing.Size(86, 26);
+            this.comboBox1.Location = new System.Drawing.Point(93, 2);
+            this.comboBox1.Size = new System.Drawing.Size(87, 26);
             this.comboBox1.Visible = true;
             // 
             // topPanel
@@ -150,7 +150,7 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel2.Controls.Add(this.button1, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox0, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 1, 0);
@@ -175,10 +175,10 @@
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::C2.Properties.Resources.add;
-            this.button1.Location = new System.Drawing.Point(182, 4);
+            this.button1.Location = new System.Drawing.Point(184, 4);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(34, 24);
+            this.button1.Size = new System.Drawing.Size(32, 24);
             this.button1.TabIndex = 5;
             this.button1.UseVisualStyleBackColor = false;
             // 
@@ -194,6 +194,7 @@
             // CollideOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(539, 379);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
