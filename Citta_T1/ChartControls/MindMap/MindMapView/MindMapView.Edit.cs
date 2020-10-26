@@ -104,11 +104,24 @@ namespace C2.Controls.MapViews
             }
         }
 
-        public void AddOperator()
+        public void AddOperator(string opType)
         {
+            foreach(Topic topic in SelectedTopics)
+            {
+                foreach(Widget w in topic.Widgets)
+                {
+                    if (w.GetTypeID() == "OPERATOR")
+                    {
+                        MessageBox.Show("已存在算子挂件，请删除原挂件后再添加。");
+                        return;
+                    }
+                }
+            }
+
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
                 var template = new OperatorWidget();
+                template.OpType = opType; 
                 AddWidget(OperatorWidget.TypeID, template, false);
             }
         }

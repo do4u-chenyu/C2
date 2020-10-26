@@ -10,7 +10,6 @@ namespace C2.Model.Widgets
     class OperatorWidget : Widget, IRemark
     {
         public const string TypeID = "OPERATOR";
-        public String operatorName = "HTTP数据最大值";
 
         public OperatorWidget()
         {

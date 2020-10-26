@@ -22,6 +22,7 @@ namespace C2.Model.Widgets
         int? _CustomWidth;
         int? _CustomHeight;
         WidgetAlignment _Alignment = WidgetAlignment.Left;
+        string _OpType = "null";
         int _DisplayIndex;
         int _Padding;
 
@@ -114,6 +115,12 @@ namespace C2.Model.Widgets
         {
             get { return base.Text; }
             set { base.Text = value; }
+        }
+
+        public virtual string OpType
+        {
+            get { return _OpType; }
+            set { _OpType = value; } 
         }
 
         [DefaultValue(WidgetAlignment.Left), LocalDisplayName("Alignment"), LocalCategory("Layout")]
@@ -353,6 +360,7 @@ namespace C2.Model.Widgets
         {
             widget.Alignment = Alignment;
             widget.Text = Text;
+            widget.OpType = OpType;
         }
 
         public virtual void OnMouseClick(Control ct,Point point)
