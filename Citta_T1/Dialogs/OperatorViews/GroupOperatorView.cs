@@ -184,9 +184,11 @@ namespace C2.OperatorViews
             // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             this.tableLayoutPanel1.Controls.Add(addButton, 1, addLine);
+            addButton.BackColor = System.Drawing.SystemColors.Window;
             // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             this.tableLayoutPanel1.Controls.Add(delButton, 2, addLine);
+            delButton.BackColor = System.Drawing.SystemColors.Window;
         }
 
         protected override void AddTableLayoutPanelControls(int lineNumber)

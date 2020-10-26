@@ -54,7 +54,7 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuPublic = new ToolStripMenuItem();
             ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
 
-            MenuOpenOperator.Text = opw.operatorName;
+            MenuOpenOperator.Text = opw.OpType;
             MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuDesign,
                 MenuRunning,

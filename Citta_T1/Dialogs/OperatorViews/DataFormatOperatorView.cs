@@ -203,16 +203,20 @@ namespace C2.OperatorViews
             this.tableLayoutPanel1.Controls.Add(label, 0, addLine);
             // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            data0ComboBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
             // 别名文本框
             TextBox textBox = NewAliasTextBox();
+            textBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
             // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
+            addButton.BackColor = System.Drawing.SystemColors.Window;
             // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
+            delButton.BackColor = System.Drawing.SystemColors.Window;
         }
 
         protected override void AddTableLayoutPanelControls(int lineNumber)

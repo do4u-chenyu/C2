@@ -217,12 +217,14 @@ namespace C2.OperatorViews
         {
             // And OR 选择框
             ComboBox regBox = NewAndORComboBox();
+            regBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
             // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            data0ComboBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
-
             ComboBox filterBox = NewComboBox();
+            filterBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             filterBox.Items.AddRange(this.comparedItems);
             filterBox.SelectionChangeCommitted += new EventHandler(this.GetComparedSelectedItemIndex);
             filterBox.TextUpdate += new System.EventHandler(ComparedComboBox_TextUpdate);
@@ -232,15 +234,19 @@ namespace C2.OperatorViews
 
             TextBox textBox = new TextBox
             {
-                Font = new Font("微软雅黑", 8f, FontStyle.Regular),
-                Anchor = AnchorStyles.Left | AnchorStyles.Right
-            };
+                Font = new Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))),
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                //AutoSize = false,
+                Size = new System.Drawing.Size(86, 26)
+        };
             this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
             // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
+            addButton.BackColor = System.Drawing.SystemColors.Window;
             this.tableLayoutPanel1.Controls.Add(addButton, 4, addLine);
             // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
+            delButton.BackColor = System.Drawing.SystemColors.Window;
             this.tableLayoutPanel1.Controls.Add(delButton, 5, addLine);
         }
 
