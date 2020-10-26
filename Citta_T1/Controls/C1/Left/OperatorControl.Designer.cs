@@ -305,6 +305,7 @@
             // 
             // pythonOPButton
             // 
+            this.pythonOPButton.BackColor = System.Drawing.Color.Transparent;
             this.pythonOPButton.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.pythonOPButton.FlatAppearance.BorderSize = 0;
             this.pythonOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -317,9 +318,11 @@
             this.pythonOPButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.pythonOPButton.UseMnemonic = false;
             this.pythonOPButton.UseVisualStyleBackColor = false;
+            this.pythonOPButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // customOPButton1
             // 
+            this.customOPButton1.BackColor = System.Drawing.Color.Transparent;
             this.customOPButton1.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.customOPButton1.FlatAppearance.BorderSize = 0;
             this.customOPButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -332,6 +335,7 @@
             this.customOPButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.customOPButton1.UseMnemonic = false;
             this.customOPButton1.UseVisualStyleBackColor = false;
+            this.customOPButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // leftPanelOpMin
             // 
@@ -438,6 +442,7 @@
             // 
             // customOPButton2
             // 
+            this.customOPButton2.BackColor = System.Drawing.Color.Transparent;
             this.customOPButton2.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.customOPButton2.FlatAppearance.BorderSize = 0;
             this.customOPButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -451,6 +456,7 @@
             this.customOPButton2.UseMnemonic = false;
             this.customOPButton2.UseVisualStyleBackColor = false;
             this.customOPButton2.Click += new System.EventHandler(this.customOPButton2_Click);
+            this.customOPButton2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // leftPanelOpFilter
             // 

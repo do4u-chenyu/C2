@@ -25,5 +25,10 @@ namespace C2.Controls.Left
                 (sender as Button).DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
+
+        private void customOPButton1_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
