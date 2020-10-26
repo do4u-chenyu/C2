@@ -1,5 +1,7 @@
 ﻿using C2.Controls.MapViews;
+using C2.Utils;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,10 +9,17 @@ using System.Xml;
 
 namespace C2.Model.Widgets
 {
+    class WidgetDataSourceInfo
+    {
+        public string Path { get; set; }
+        public char Separator { get; set; }
+        public  OpUtil.Encoding Encoding { get; set; }
+        public OpUtil.ExtType ExtType { get; set; }
+    }
     class DataSourceWidget : Widget, IRemark
     {
         public const string TypeID = "DATASOURCE";
-
+        public List<WidgetDataSourceInfo> ModelRelations { get; }
         public DataSourceWidget()
         {
             DisplayIndex = 0;
