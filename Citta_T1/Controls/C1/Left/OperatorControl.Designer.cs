@@ -47,23 +47,23 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.customOPButton2 = new C2.Controls.Common.NoFocusButton();
+            this.leftPanelOpRelate = new C2.Controls.Common.NoFocusButton();
             this.pythonOPButton = new C2.Controls.Common.NoFocusButton();
             this.customOPButton1 = new C2.Controls.Common.NoFocusButton();
-            this.leftPanelOpFilter = new C2.Controls.Common.NoFocusButton();
-            this.leftPanelOpDataStandar = new C2.Controls.Common.NoFocusButton();
-            this.leftPanelOpWordFilter = new C2.Controls.Common.NoFocusButton();
-            this.leftPanelOpGroup = new C2.Controls.Common.NoFocusButton();
-            this.leftPanelOpSort = new C2.Controls.Common.NoFocusButton();
-            this.leftPanelOpFreq = new C2.Controls.Common.NoFocusButton();
-            this.leftPanelOpRelate = new C2.Controls.Common.NoFocusButton();
-            this.leftPanelOpAvg = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpMin = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpMax = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpRandom = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpDiffer = new C2.Controls.Common.NoFocusButton();
             this.lefPanelOpUnion = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpCollide = new C2.Controls.Common.NoFocusButton();
+            this.customOPButton2 = new C2.Controls.Common.NoFocusButton();
+            this.leftPanelOpFilter = new C2.Controls.Common.NoFocusButton();
+            this.leftPanelOpDataStandar = new C2.Controls.Common.NoFocusButton();
+            this.leftPanelOpWordFilter = new C2.Controls.Common.NoFocusButton();
+            this.leftPanelOpGroup = new C2.Controls.Common.NoFocusButton();
+            this.leftPanelOpSort = new C2.Controls.Common.NoFocusButton();
+            this.leftPanelOpFreq = new C2.Controls.Common.NoFocusButton();
+            this.leftPanelOpAvg = new C2.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.relateOpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collideOpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.differOpPictureBox)).BeginInit();
@@ -286,21 +286,22 @@
             this.pictureBox2.TabIndex = 36;
             this.pictureBox2.TabStop = false;
             // 
-            // customOPButton2
+            // leftPanelOpRelate
             // 
-            this.customOPButton2.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.customOPButton2.FlatAppearance.BorderSize = 0;
-            this.customOPButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customOPButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.customOPButton2.Location = new System.Drawing.Point(127, 251);
-            this.customOPButton2.Name = "customOPButton2";
-            this.customOPButton2.Size = new System.Drawing.Size(74, 26);
-            this.customOPButton2.TabIndex = 41;
-            this.customOPButton2.Text = "多源算子";
-            this.customOPButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.customOPButton2.UseMnemonic = false;
-            this.customOPButton2.UseVisualStyleBackColor = false;
-            this.customOPButton2.Click += new System.EventHandler(this.customOPButton2_Click);
+            this.leftPanelOpRelate.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpRelate.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpRelate.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpRelate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpRelate.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpRelate.Location = new System.Drawing.Point(30, 4);
+            this.leftPanelOpRelate.Name = "leftPanelOpRelate";
+            this.leftPanelOpRelate.Size = new System.Drawing.Size(76, 30);
+            this.leftPanelOpRelate.TabIndex = 0;
+            this.leftPanelOpRelate.Text = "关联算子";
+            this.leftPanelOpRelate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.leftPanelOpRelate.UseMnemonic = false;
+            this.leftPanelOpRelate.UseVisualStyleBackColor = false;
+            this.leftPanelOpRelate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // pythonOPButton
             // 
@@ -331,142 +332,6 @@
             this.customOPButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.customOPButton1.UseMnemonic = false;
             this.customOPButton1.UseVisualStyleBackColor = false;
-            // 
-            // leftPanelOpFilter
-            // 
-            this.leftPanelOpFilter.BackColor = System.Drawing.Color.Transparent;
-            this.leftPanelOpFilter.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpFilter.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpFilter.Location = new System.Drawing.Point(127, 5);
-            this.leftPanelOpFilter.Name = "leftPanelOpFilter";
-            this.leftPanelOpFilter.Size = new System.Drawing.Size(74, 29);
-            this.leftPanelOpFilter.TabIndex = 22;
-            this.leftPanelOpFilter.Text = "条件筛选";
-            this.leftPanelOpFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.leftPanelOpFilter.UseMnemonic = false;
-            this.leftPanelOpFilter.UseVisualStyleBackColor = false;
-            this.leftPanelOpFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            // 
-            // leftPanelOpDataStandar
-            // 
-            this.leftPanelOpDataStandar.BackColor = System.Drawing.Color.Transparent;
-            this.leftPanelOpDataStandar.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpDataStandar.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpDataStandar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpDataStandar.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpDataStandar.Location = new System.Drawing.Point(127, 218);
-            this.leftPanelOpDataStandar.Name = "leftPanelOpDataStandar";
-            this.leftPanelOpDataStandar.Size = new System.Drawing.Size(87, 28);
-            this.leftPanelOpDataStandar.TabIndex = 34;
-            this.leftPanelOpDataStandar.Text = "数据标准化";
-            this.leftPanelOpDataStandar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.leftPanelOpDataStandar.UseMnemonic = false;
-            this.leftPanelOpDataStandar.UseVisualStyleBackColor = false;
-            this.leftPanelOpDataStandar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            // 
-            // leftPanelOpWordFilter
-            // 
-            this.leftPanelOpWordFilter.BackColor = System.Drawing.Color.Transparent;
-            this.leftPanelOpWordFilter.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpWordFilter.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpWordFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpWordFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpWordFilter.Location = new System.Drawing.Point(127, 183);
-            this.leftPanelOpWordFilter.Name = "leftPanelOpWordFilter";
-            this.leftPanelOpWordFilter.Size = new System.Drawing.Size(87, 29);
-            this.leftPanelOpWordFilter.TabIndex = 32;
-            this.leftPanelOpWordFilter.Text = "关键词过滤";
-            this.leftPanelOpWordFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.leftPanelOpWordFilter.UseMnemonic = false;
-            this.leftPanelOpWordFilter.UseVisualStyleBackColor = false;
-            this.leftPanelOpWordFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            // 
-            // leftPanelOpGroup
-            // 
-            this.leftPanelOpGroup.BackColor = System.Drawing.Color.Transparent;
-            this.leftPanelOpGroup.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpGroup.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpGroup.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpGroup.Location = new System.Drawing.Point(127, 146);
-            this.leftPanelOpGroup.Name = "leftPanelOpGroup";
-            this.leftPanelOpGroup.Size = new System.Drawing.Size(75, 29);
-            this.leftPanelOpGroup.TabIndex = 31;
-            this.leftPanelOpGroup.Text = "分组算子";
-            this.leftPanelOpGroup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.leftPanelOpGroup.UseMnemonic = false;
-            this.leftPanelOpGroup.UseVisualStyleBackColor = false;
-            this.leftPanelOpGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            // 
-            // leftPanelOpSort
-            // 
-            this.leftPanelOpSort.BackColor = System.Drawing.Color.Transparent;
-            this.leftPanelOpSort.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpSort.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpSort.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpSort.Location = new System.Drawing.Point(127, 110);
-            this.leftPanelOpSort.Name = "leftPanelOpSort";
-            this.leftPanelOpSort.Size = new System.Drawing.Size(74, 30);
-            this.leftPanelOpSort.TabIndex = 30;
-            this.leftPanelOpSort.Text = "排序算子";
-            this.leftPanelOpSort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.leftPanelOpSort.UseMnemonic = false;
-            this.leftPanelOpSort.UseVisualStyleBackColor = false;
-            this.leftPanelOpSort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            // 
-            // leftPanelOpFreq
-            // 
-            this.leftPanelOpFreq.BackColor = System.Drawing.Color.Transparent;
-            this.leftPanelOpFreq.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpFreq.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpFreq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpFreq.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpFreq.Location = new System.Drawing.Point(127, 74);
-            this.leftPanelOpFreq.Name = "leftPanelOpFreq";
-            this.leftPanelOpFreq.Size = new System.Drawing.Size(74, 30);
-            this.leftPanelOpFreq.TabIndex = 29;
-            this.leftPanelOpFreq.Text = "频率算子";
-            this.leftPanelOpFreq.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.leftPanelOpFreq.UseMnemonic = false;
-            this.leftPanelOpFreq.UseVisualStyleBackColor = false;
-            this.leftPanelOpFreq.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            // 
-            // leftPanelOpRelate
-            // 
-            this.leftPanelOpRelate.BackColor = System.Drawing.Color.Transparent;
-            this.leftPanelOpRelate.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpRelate.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpRelate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpRelate.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpRelate.Location = new System.Drawing.Point(30, 4);
-            this.leftPanelOpRelate.Name = "leftPanelOpRelate";
-            this.leftPanelOpRelate.Size = new System.Drawing.Size(76, 30);
-            this.leftPanelOpRelate.TabIndex = 0;
-            this.leftPanelOpRelate.Text = "关联算子";
-            this.leftPanelOpRelate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.leftPanelOpRelate.UseMnemonic = false;
-            this.leftPanelOpRelate.UseVisualStyleBackColor = false;
-            this.leftPanelOpRelate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            // 
-            // leftPanelOpAvg
-            // 
-            this.leftPanelOpAvg.BackColor = System.Drawing.Color.Transparent;
-            this.leftPanelOpAvg.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpAvg.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpAvg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpAvg.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpAvg.Location = new System.Drawing.Point(127, 40);
-            this.leftPanelOpAvg.Name = "leftPanelOpAvg";
-            this.leftPanelOpAvg.Size = new System.Drawing.Size(74, 30);
-            this.leftPanelOpAvg.TabIndex = 25;
-            this.leftPanelOpAvg.Text = "取平均值";
-            this.leftPanelOpAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.leftPanelOpAvg.UseMnemonic = false;
-            this.leftPanelOpAvg.UseVisualStyleBackColor = false;
-            this.leftPanelOpAvg.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // leftPanelOpMin
             // 
@@ -570,6 +435,141 @@
             this.leftPanelOpCollide.UseMnemonic = false;
             this.leftPanelOpCollide.UseVisualStyleBackColor = false;
             this.leftPanelOpCollide.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // customOPButton2
+            // 
+            this.customOPButton2.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.customOPButton2.FlatAppearance.BorderSize = 0;
+            this.customOPButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customOPButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.customOPButton2.Location = new System.Drawing.Point(127, 251);
+            this.customOPButton2.Name = "customOPButton2";
+            this.customOPButton2.Size = new System.Drawing.Size(74, 26);
+            this.customOPButton2.TabIndex = 41;
+            this.customOPButton2.Text = "多源算子";
+            this.customOPButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.customOPButton2.UseMnemonic = false;
+            this.customOPButton2.UseVisualStyleBackColor = false;
+            this.customOPButton2.Click += new System.EventHandler(this.customOPButton2_Click);
+            // 
+            // leftPanelOpFilter
+            // 
+            this.leftPanelOpFilter.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpFilter.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpFilter.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpFilter.Location = new System.Drawing.Point(127, 5);
+            this.leftPanelOpFilter.Name = "leftPanelOpFilter";
+            this.leftPanelOpFilter.Size = new System.Drawing.Size(74, 29);
+            this.leftPanelOpFilter.TabIndex = 22;
+            this.leftPanelOpFilter.Text = "条件筛选";
+            this.leftPanelOpFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.leftPanelOpFilter.UseMnemonic = false;
+            this.leftPanelOpFilter.UseVisualStyleBackColor = false;
+            this.leftPanelOpFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // leftPanelOpDataStandar
+            // 
+            this.leftPanelOpDataStandar.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpDataStandar.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpDataStandar.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpDataStandar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpDataStandar.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpDataStandar.Location = new System.Drawing.Point(127, 218);
+            this.leftPanelOpDataStandar.Name = "leftPanelOpDataStandar";
+            this.leftPanelOpDataStandar.Size = new System.Drawing.Size(87, 28);
+            this.leftPanelOpDataStandar.TabIndex = 34;
+            this.leftPanelOpDataStandar.Text = "数据标准化";
+            this.leftPanelOpDataStandar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.leftPanelOpDataStandar.UseMnemonic = false;
+            this.leftPanelOpDataStandar.UseVisualStyleBackColor = false;
+            this.leftPanelOpDataStandar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // leftPanelOpWordFilter
+            // 
+            this.leftPanelOpWordFilter.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpWordFilter.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpWordFilter.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpWordFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpWordFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpWordFilter.Location = new System.Drawing.Point(127, 183);
+            this.leftPanelOpWordFilter.Name = "leftPanelOpWordFilter";
+            this.leftPanelOpWordFilter.Size = new System.Drawing.Size(87, 29);
+            this.leftPanelOpWordFilter.TabIndex = 32;
+            this.leftPanelOpWordFilter.Text = "关键词过滤";
+            this.leftPanelOpWordFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.leftPanelOpWordFilter.UseMnemonic = false;
+            this.leftPanelOpWordFilter.UseVisualStyleBackColor = false;
+            this.leftPanelOpWordFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // leftPanelOpGroup
+            // 
+            this.leftPanelOpGroup.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpGroup.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpGroup.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpGroup.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpGroup.Location = new System.Drawing.Point(127, 146);
+            this.leftPanelOpGroup.Name = "leftPanelOpGroup";
+            this.leftPanelOpGroup.Size = new System.Drawing.Size(75, 29);
+            this.leftPanelOpGroup.TabIndex = 31;
+            this.leftPanelOpGroup.Text = "分组算子";
+            this.leftPanelOpGroup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.leftPanelOpGroup.UseMnemonic = false;
+            this.leftPanelOpGroup.UseVisualStyleBackColor = false;
+            this.leftPanelOpGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // leftPanelOpSort
+            // 
+            this.leftPanelOpSort.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpSort.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpSort.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpSort.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpSort.Location = new System.Drawing.Point(127, 110);
+            this.leftPanelOpSort.Name = "leftPanelOpSort";
+            this.leftPanelOpSort.Size = new System.Drawing.Size(74, 30);
+            this.leftPanelOpSort.TabIndex = 30;
+            this.leftPanelOpSort.Text = "排序算子";
+            this.leftPanelOpSort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.leftPanelOpSort.UseMnemonic = false;
+            this.leftPanelOpSort.UseVisualStyleBackColor = false;
+            this.leftPanelOpSort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // leftPanelOpFreq
+            // 
+            this.leftPanelOpFreq.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpFreq.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpFreq.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpFreq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpFreq.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpFreq.Location = new System.Drawing.Point(127, 74);
+            this.leftPanelOpFreq.Name = "leftPanelOpFreq";
+            this.leftPanelOpFreq.Size = new System.Drawing.Size(74, 30);
+            this.leftPanelOpFreq.TabIndex = 29;
+            this.leftPanelOpFreq.Text = "频率算子";
+            this.leftPanelOpFreq.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.leftPanelOpFreq.UseMnemonic = false;
+            this.leftPanelOpFreq.UseVisualStyleBackColor = false;
+            this.leftPanelOpFreq.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // leftPanelOpAvg
+            // 
+            this.leftPanelOpAvg.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpAvg.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpAvg.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpAvg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpAvg.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpAvg.Location = new System.Drawing.Point(127, 40);
+            this.leftPanelOpAvg.Name = "leftPanelOpAvg";
+            this.leftPanelOpAvg.Size = new System.Drawing.Size(74, 30);
+            this.leftPanelOpAvg.TabIndex = 25;
+            this.leftPanelOpAvg.Text = "取平均值";
+            this.leftPanelOpAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.leftPanelOpAvg.UseMnemonic = false;
+            this.leftPanelOpAvg.UseVisualStyleBackColor = false;
+            this.leftPanelOpAvg.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // OperatorControl
             // 

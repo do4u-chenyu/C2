@@ -33,24 +33,21 @@
             this.movePictureBox = new System.Windows.Forms.PictureBox();
             this.zoomUpPictureBox = new System.Windows.Forms.PictureBox();
             this.zoomDownPictureBox = new System.Windows.Forms.PictureBox();
-            this.remarkPictureBox = new System.Windows.Forms.PictureBox();
             this.framePictureBox = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.remarkPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.movePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomUpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.remarkPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.framePictureBox)).BeginInit();
-            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.remarkPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // movePictureBox
             // 
             this.movePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("movePictureBox.Image")));
-            this.movePictureBox.Location = new System.Drawing.Point(131, 7);
+            this.movePictureBox.Location = new System.Drawing.Point(130, 7);
             this.movePictureBox.Name = "movePictureBox";
             this.movePictureBox.Size = new System.Drawing.Size(22, 22);
             this.movePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -65,10 +62,10 @@
             // 
             this.zoomUpPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomUpPictureBox.Image")));
-            this.zoomUpPictureBox.Location = new System.Drawing.Point(57, 7);
+            this.zoomUpPictureBox.Location = new System.Drawing.Point(56, 9);
             this.zoomUpPictureBox.Name = "zoomUpPictureBox";
-            this.zoomUpPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.zoomUpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.zoomUpPictureBox.Size = new System.Drawing.Size(22, 20);
+            this.zoomUpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.zoomUpPictureBox.TabIndex = 1;
             this.zoomUpPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.zoomUpPictureBox, "放大屏幕中算子并支持三级放大");
@@ -81,9 +78,9 @@
             this.zoomDownPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.zoomDownPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomDownPictureBox.Image")));
-            this.zoomDownPictureBox.Location = new System.Drawing.Point(93, 7);
+            this.zoomDownPictureBox.Location = new System.Drawing.Point(93, 9);
             this.zoomDownPictureBox.Name = "zoomDownPictureBox";
-            this.zoomDownPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.zoomDownPictureBox.Size = new System.Drawing.Size(22, 20);
             this.zoomDownPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.zoomDownPictureBox.TabIndex = 2;
             this.zoomDownPictureBox.TabStop = false;
@@ -92,28 +89,13 @@
             this.zoomDownPictureBox.MouseEnter += new System.EventHandler(this.ZoomDownPictureBox_MouseEnter);
             this.zoomDownPictureBox.MouseLeave += new System.EventHandler(this.ZoomDownPictureBox_MouseLeave);
             // 
-            // remarkPictureBox
-            // 
-            this.remarkPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
-            this.remarkPictureBox.Location = new System.Drawing.Point(3, 2);
-            this.remarkPictureBox.Name = "remarkPictureBox";
-            this.remarkPictureBox.Size = new System.Drawing.Size(27, 24);
-            this.remarkPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.remarkPictureBox.TabIndex = 3;
-            this.remarkPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.remarkPictureBox, "编写备注信息");
-            this.remarkPictureBox.Click += new System.EventHandler(this.RemarkPictureBox_Click);
-            this.remarkPictureBox.MouseEnter += new System.EventHandler(this.RemarkPictureBox_MouseEnter);
-            this.remarkPictureBox.MouseLeave += new System.EventHandler(this.RemarkPictureBox_MouseLeave);
-            // 
             // framePictureBox
             // 
             this.framePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
-            this.framePictureBox.Location = new System.Drawing.Point(165, 6);
+            this.framePictureBox.Location = new System.Drawing.Point(165, 9);
             this.framePictureBox.Name = "framePictureBox";
-            this.framePictureBox.Size = new System.Drawing.Size(24, 24);
+            this.framePictureBox.Size = new System.Drawing.Size(24, 20);
             this.framePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.framePictureBox.TabIndex = 4;
             this.framePictureBox.TabStop = false;
@@ -122,23 +104,20 @@
             this.framePictureBox.MouseEnter += new System.EventHandler(this.FramePictureBox_MouseEnter);
             this.framePictureBox.MouseLeave += new System.EventHandler(this.FramePictureBox_MouseLeave);
             // 
-            // panel1
+            // remarkPictureBox
             // 
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.remarkPictureBox);
-            this.panel1.Location = new System.Drawing.Point(13, 7);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(48, 48);
-            this.panel1.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "000000000";
+            this.remarkPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+            this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
+            this.remarkPictureBox.Location = new System.Drawing.Point(19, 9);
+            this.remarkPictureBox.Name = "remarkPictureBox";
+            this.remarkPictureBox.Size = new System.Drawing.Size(22, 20);
+            this.remarkPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.remarkPictureBox.TabIndex = 3;
+            this.remarkPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.remarkPictureBox, "编写备注信息");
+            this.remarkPictureBox.Click += new System.EventHandler(this.RemarkPictureBox_Click);
+            this.remarkPictureBox.MouseEnter += new System.EventHandler(this.RemarkPictureBox_MouseEnter);
+            this.remarkPictureBox.MouseLeave += new System.EventHandler(this.RemarkPictureBox_MouseLeave);
             // 
             // FlowControl
             // 
@@ -146,23 +125,21 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::C2.Properties.Resources.flow;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.framePictureBox);
-            this.Controls.Add(this.zoomDownPictureBox);
-            this.Controls.Add(this.zoomUpPictureBox);
             this.Controls.Add(this.movePictureBox);
+            this.Controls.Add(this.remarkPictureBox);
+            this.Controls.Add(this.zoomUpPictureBox);
+            this.Controls.Add(this.zoomDownPictureBox);
+            this.Controls.Add(this.framePictureBox);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
             this.Name = "FlowControl";
-            this.Size = new System.Drawing.Size(209, 51);
+            this.Size = new System.Drawing.Size(211, 52);
             this.Load += new System.EventHandler(this.FlowControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.movePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomUpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.remarkPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.framePictureBox)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.remarkPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -172,10 +149,8 @@
         private System.Windows.Forms.PictureBox movePictureBox;
         private System.Windows.Forms.PictureBox zoomUpPictureBox;
         private System.Windows.Forms.PictureBox zoomDownPictureBox;
-        private System.Windows.Forms.PictureBox remarkPictureBox;
         private System.Windows.Forms.PictureBox framePictureBox;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox remarkPictureBox;
     }
 }
