@@ -869,7 +869,8 @@ namespace C2
         }
         private bool IsCurrentModelNotRun()
         {
-            return Global.GetCurrentDocument().TaskManager.ModelStatus == ModelStatus.Running ? false : true;
+            //return Global.GetCurrentDocument().TaskManager.ModelStatus == ModelStatus.Running ? false : true;
+            return false;
         }
 
         private bool IsClickOnUneditableCtr()

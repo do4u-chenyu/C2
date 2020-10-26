@@ -72,8 +72,9 @@ namespace C2.Globalization
         public static void Initialize()
         {
             LoadLanguages();
-
-            var langid = Options.Current.GetString(C2.Configuration.OptionNames.Localization.LanguageID);
+            // 只保留中文界面
+            var langid = "zh-CHS";
+            //var langid = Options.Current.GetString(C2.Configuration.OptionNames.Localization.LanguageID);
             if (string.IsNullOrEmpty(langid))
             {
                 SetDefaultLanguage();
@@ -96,7 +97,7 @@ namespace C2.Globalization
             //AddLanguage(Language.LoadXml(Properties.Resources.cs_CZ));
             //AddLanguage(Language.LoadXml(Properties.Resources.da_DK));
             //AddLanguage(Language.LoadXml(Properties.Resources.de_DE));
-            AddLanguage(Language.LoadXml(Properties.Resources.en_US));
+            //AddLanguage(Language.LoadXml(Properties.Resources.en_US));
             //AddLanguage(Language.LoadXml(Properties.Resources.es_ES));
             //AddLanguage(Language.LoadXml(Properties.Resources.fr_FR));
             //AddLanguage(Language.LoadXml(Properties.Resources.hi_IN));

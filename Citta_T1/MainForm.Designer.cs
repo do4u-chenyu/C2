@@ -86,7 +86,6 @@ namespace C2
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
             this.remarkControl = new C2.Controls.Flow.RemarkControl();
-            this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
             this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
             this.canvasPanel = new C2.Controls.CanvasPanel();
             this.currentModelFinLab = new System.Windows.Forms.Label();
@@ -100,6 +99,7 @@ namespace C2
             this.rightHideButton = new C2.Controls.Flow.RightHideButton();
             this.rightShowButton = new C2.Controls.Flow.RightShowButton();
             this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
+            this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
             this.modelTitlePanel = new C2.Controls.Title.ModelTitlePanel();
             this.headPanel.SuspendLayout();
@@ -174,7 +174,7 @@ namespace C2
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(58, 22);
+            this.usernamelabel.Size = new System.Drawing.Size(79, 30);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "李警官";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
@@ -186,7 +186,7 @@ namespace C2
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(282, 36);
+            this.label1.Size = new System.Drawing.Size(388, 50);
             this.label1.TabIndex = 0;
             this.label1.Text = "IAO解决方案建模平台";
             // 
@@ -237,6 +237,7 @@ namespace C2
             this.oprateButton.Text = "业务视图";
             this.toolTip1.SetToolTip(this.oprateButton, "当前用户的所有业务视图");
             this.oprateButton.UseVisualStyleBackColor = true;
+            this.oprateButton.Click += new System.EventHandler(this.OprateButton_Click);
             // 
             // myModelButton
             // 
@@ -374,7 +375,7 @@ namespace C2
             this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dragLineControl.Location = new System.Drawing.Point(394, 36);
-            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
+            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dragLineControl.Name = "dragLineControl";
             this.dragLineControl.Size = new System.Drawing.Size(368, 3);
             this.dragLineControl.TabIndex = 3;
@@ -416,7 +417,7 @@ namespace C2
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.logLabel.Location = new System.Drawing.Point(120, 4);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(92, 27);
+            this.logLabel.Size = new System.Drawing.Size(127, 36);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
@@ -428,7 +429,7 @@ namespace C2
             this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.pyControlLabel.Location = new System.Drawing.Point(226, 4);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(72, 27);
+            this.pyControlLabel.Size = new System.Drawing.Size(99, 36);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
@@ -440,7 +441,7 @@ namespace C2
             this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.previewLabel.Location = new System.Drawing.Point(14, 4);
             this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(92, 27);
+            this.previewLabel.Size = new System.Drawing.Size(127, 36);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
@@ -690,12 +691,12 @@ namespace C2
             // 
             // BaseWorkSpace
             // 
-            this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
             this.BaseWorkSpace.Controls.Add(this.button1);
             this.BaseWorkSpace.Controls.Add(this.ImportDataSourceButton);
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.remarkControl);
+            this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
             this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -716,14 +717,6 @@ namespace C2
             this.remarkControl.Size = new System.Drawing.Size(120, 120);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
-            // 
-            // mdiWorkSpace1
-            // 
-            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
-            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
-            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
-            this.mdiWorkSpace1.TabIndex = 8;
             // 
             // topToolBarControl
             // 
@@ -776,13 +769,13 @@ namespace C2
             // operatorControl
             // 
             this.operatorControl.AllowDrop = true;
-            this.operatorControl.BackColor = System.Drawing.Color.White;
-            this.operatorControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("operatorControl.BackgroundImage")));
+            this.operatorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.operatorControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.operatorControl.Location = new System.Drawing.Point(687, 106);
-            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
+            this.operatorControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(210, 245);
+            this.operatorControl.Size = new System.Drawing.Size(210, 310);
             this.operatorControl.TabIndex = 0;
             // 
             // progressBarLabel
@@ -793,7 +786,7 @@ namespace C2
             this.progressBarLabel.ForeColor = System.Drawing.Color.Black;
             this.progressBarLabel.Location = new System.Drawing.Point(953, 245);
             this.progressBarLabel.Name = "progressBarLabel";
-            this.progressBarLabel.Size = new System.Drawing.Size(24, 16);
+            this.progressBarLabel.Size = new System.Drawing.Size(31, 20);
             this.progressBarLabel.TabIndex = 32;
             this.progressBarLabel.Text = "0%";
             this.progressBarLabel.Visible = false;
@@ -840,8 +833,8 @@ namespace C2
             // 
             // flowControl
             // 
-            this.flowControl.BackColor = System.Drawing.Color.Transparent;
-            this.flowControl.BackgroundImage = global::C2.Properties.Resources.flow;
+            this.flowControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
             this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.flowControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.flowControl.Location = new System.Drawing.Point(687, 50);
@@ -850,7 +843,7 @@ namespace C2
             this.flowControl.SelectDrag = false;
             this.flowControl.SelectFrame = false;
             this.flowControl.SelectRemark = false;
-            this.flowControl.Size = new System.Drawing.Size(220, 51);
+            this.flowControl.Size = new System.Drawing.Size(210, 51);
             this.flowControl.TabIndex = 25;
             this.flowControl.Load += new System.EventHandler(this.flowControl_Load);
             // 
@@ -888,6 +881,14 @@ namespace C2
             this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 0;
             // 
+            // mdiWorkSpace1
+            // 
+            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
+            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
+            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
+            this.mdiWorkSpace1.TabIndex = 8;
+            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.modelTitlePanel);
@@ -901,7 +902,7 @@ namespace C2
             // 
             this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
-            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
+            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.modelTitlePanel.Name = "modelTitlePanel";
             this.modelTitlePanel.Size = new System.Drawing.Size(910, 32);
             this.modelTitlePanel.TabIndex = 0;

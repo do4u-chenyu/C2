@@ -108,28 +108,34 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
-                var template = new OperatorWidget("HTTP数据最大值");
+                var template = new OperatorWidget();
                 AddWidget(OperatorWidget.TypeID, template, false);
             }
         }
 
+        public void AddDataSource()
+        {
+            if (SelectedTopics != null && SelectedTopics.Length > 0)
+            {
+                var template = new DataSourceWidget();
+                AddWidget(DataSourceWidget.TypeID, template, false);
+            }
+        }
+
+        public void AddResult()
+        {
+            if (SelectedTopics != null && SelectedTopics.Length > 0)
+            {
+                var template = new ResultWidget();
+                AddWidget(ResultWidget.TypeID, template, false);
+            }
+        }
+
+
         void AddWidget(string typeID, Widget template, bool showDialog)
         {
-            if (showDialog)
-            {
-                var dialog = new PropertyDialog();
-                dialog.SelectedObject = template;
-                if (dialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    AddWidgetCommand command = new AddWidgetCommand(SelectedTopics, typeID, template);
-                    ExecuteCommand(command);
-                }
-            }
-            else
-            {
-                AddWidgetCommand command = new AddWidgetCommand(SelectedTopics, typeID, template);
-                ExecuteCommand(command);
-            }
+            AddWidgetCommand command = new AddWidgetCommand(SelectedTopics, typeID, template);
+            ExecuteCommand(command);
         }
 
         public virtual Topic AddTopic(bool atFront)
