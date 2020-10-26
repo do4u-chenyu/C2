@@ -21,8 +21,8 @@ namespace C2.OperatorViews
         private void InitializeComponentManual()
         {
             // 利用Paint方式groupBox附近的虚线留白
-            this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
-            this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
         }
         #region 初始化配置
         private void InitByDataSource()

@@ -1798,6 +1798,24 @@
     </Content>
     <None Include="Resources\NativeResources.res" />
     <None Include="Resources\operator_back.png" />
+    <None Include="Resources\python.png" />
+    <Content Include="Resources\Opcontrol_ico\AI.ico" />
+    <Content Include="Resources\Opcontrol_ico\python.ico" />
+    <Content Include="Resources\Opcontrol_ico\关联算子.ico" />
+    <Content Include="Resources\Opcontrol_ico\关键词过滤.ico" />
+    <Content Include="Resources\Opcontrol_ico\分组.ico" />
+    <Content Include="Resources\Opcontrol_ico\多源算子.ico" />
+    <Content Include="Resources\Opcontrol_ico\差集.ico" />
+    <Content Include="Resources\Opcontrol_ico\平均值.ico" />
+    <Content Include="Resources\Opcontrol_ico\并集.ico" />
+    <Content Include="Resources\Opcontrol_ico\排序.ico" />
+    <Content Include="Resources\Opcontrol_ico\数据标准化.ico" />
+    <Content Include="Resources\Opcontrol_ico\最大值.ico" />
+    <Content Include="Resources\Opcontrol_ico\最小值.ico" />
+    <Content Include="Resources\Opcontrol_ico\碰撞.ico" />
+    <Content Include="Resources\Opcontrol_ico\筛选.ico" />
+    <Content Include="Resources\Opcontrol_ico\随机.ico" />
+    <Content Include="Resources\Opcontrol_ico\频率.ico" />
     <Content Include="Resources\Operators\AI.png" />
     <None Include="Resources\Operators\AI_op.png" />
     <None Include="Resources\Operators\avg_op.png" />

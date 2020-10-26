@@ -28,17 +28,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.repetition = new System.Windows.Forms.RadioButton();
             this.noRepetition = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.descendingOrder = new System.Windows.Forms.RadioButton();
             this.ascendingOrder = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataSourceTB0
@@ -50,19 +50,19 @@
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Location = new System.Drawing.Point(326, 19);
+            this.cancelButton.Location = new System.Drawing.Point(326, 13);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
             this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Location = new System.Drawing.Point(236, 19);
+            this.confirmButton.Location = new System.Drawing.Point(236, 13);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(0, 42);
-            this.outListCCBL0.Size = new System.Drawing.Size(135, 30);
+            this.outListCCBL0.Size = new System.Drawing.Size(135, 26);
             this.outListCCBL0.TabIndex = 1;
             // 
             // comboBox0
@@ -71,21 +71,24 @@
             // 
             // topPanel
             // 
+            this.topPanel.BackColor = System.Drawing.SystemColors.Window;
             this.topPanel.Size = new System.Drawing.Size(415, 37);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 189);
-            this.bottomPanel.Size = new System.Drawing.Size(415, 64);
+            this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 208);
+            this.bottomPanel.Size = new System.Drawing.Size(415, 45);
             // 
             // keyPanel
             // 
+            this.keyPanel.BackColor = System.Drawing.SystemColors.Window;
             this.keyPanel.Controls.Add(this.label4);
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Size = new System.Drawing.Size(116, 152);
+            this.keyPanel.Size = new System.Drawing.Size(116, 171);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             this.keyPanel.Controls.SetChildIndex(this.label3, 0);
@@ -93,16 +96,17 @@
             // 
             // valuePanel
             // 
+            this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
+            this.valuePanel.Controls.Add(this.panel2);
+            this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Controls.Add(this.dataSourceTB0);
-            this.valuePanel.Controls.Add(this.groupBox2);
-            this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Size = new System.Drawing.Size(299, 152);
+            this.valuePanel.Size = new System.Drawing.Size(299, 171);
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.panel2, 0);
             // 
             // label1
             // 
@@ -141,24 +145,12 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "是否去重：";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.repetition);
-            this.groupBox2.Controls.Add(this.noRepetition);
-            this.groupBox2.Location = new System.Drawing.Point(2, 73);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(155, 30);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            // 
             // repetition
             // 
             this.repetition.AutoSize = true;
             this.repetition.Checked = true;
             this.repetition.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.repetition.Location = new System.Drawing.Point(85, 10);
+            this.repetition.Location = new System.Drawing.Point(2, 5);
             this.repetition.Margin = new System.Windows.Forms.Padding(2);
             this.repetition.Name = "repetition";
             this.repetition.Size = new System.Drawing.Size(82, 27);
@@ -171,7 +163,7 @@
             // 
             this.noRepetition.AutoSize = true;
             this.noRepetition.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.noRepetition.Location = new System.Drawing.Point(5, 10);
+            this.noRepetition.Location = new System.Drawing.Point(108, 5);
             this.noRepetition.Margin = new System.Windows.Forms.Padding(2);
             this.noRepetition.Name = "noRepetition";
             this.noRepetition.Size = new System.Drawing.Size(65, 27);
@@ -179,24 +171,12 @@
             this.noRepetition.Text = "去重";
             this.noRepetition.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.descendingOrder);
-            this.groupBox1.Controls.Add(this.ascendingOrder);
-            this.groupBox1.Location = new System.Drawing.Point(2, 114);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(155, 30);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            // 
             // descendingOrder
             // 
             this.descendingOrder.AutoSize = true;
             this.descendingOrder.Checked = true;
             this.descendingOrder.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.descendingOrder.Location = new System.Drawing.Point(85, 10);
+            this.descendingOrder.Location = new System.Drawing.Point(2, 3);
             this.descendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.descendingOrder.Name = "descendingOrder";
             this.descendingOrder.Size = new System.Drawing.Size(99, 27);
@@ -209,13 +189,31 @@
             // 
             this.ascendingOrder.AutoSize = true;
             this.ascendingOrder.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ascendingOrder.Location = new System.Drawing.Point(5, 10);
+            this.ascendingOrder.Location = new System.Drawing.Point(101, 3);
             this.ascendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.ascendingOrder.Name = "ascendingOrder";
             this.ascendingOrder.Size = new System.Drawing.Size(99, 27);
             this.ascendingOrder.TabIndex = 0;
             this.ascendingOrder.Text = "从小到大";
             this.ascendingOrder.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.repetition);
+            this.panel1.Controls.Add(this.noRepetition);
+            this.panel1.Location = new System.Drawing.Point(7, 78);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(178, 41);
+            this.panel1.TabIndex = 8;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.descendingOrder);
+            this.panel2.Controls.Add(this.ascendingOrder);
+            this.panel2.Location = new System.Drawing.Point(9, 115);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 32);
+            this.panel2.TabIndex = 9;
             // 
             // FreqOperatorView
             // 
@@ -240,10 +238,10 @@
             this.keyPanel.PerformLayout();
             this.valuePanel.ResumeLayout(false);
             this.valuePanel.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -252,11 +250,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton repetition;
         private System.Windows.Forms.RadioButton noRepetition;
         private System.Windows.Forms.RadioButton descendingOrder;
         private System.Windows.Forms.RadioButton ascendingOrder;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
     }
 }
