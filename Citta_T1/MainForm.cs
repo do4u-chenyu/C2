@@ -292,7 +292,7 @@ namespace C2
             this.operatorControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 90);
             this.remarkControl.Location   = new Point(this.canvasPanel.Width - 235 - this.flowControl.Width, this.flowControl.Height - 15);
             this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 35);
-            this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 35 + this.rightHideButton.Width + 10);
+            this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 35 + this.rightHideButton.Width);
             
             // 右上用户名，头像
             int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;

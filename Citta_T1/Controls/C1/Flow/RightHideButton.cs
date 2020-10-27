@@ -7,7 +7,7 @@ namespace C2.Controls.Flow
 {
     public partial class RightHideButton : UserControl
     {
-        bool isActive = false;
+        bool isActive = true;
         public RightHideButton()
         {
             InitializeComponent();

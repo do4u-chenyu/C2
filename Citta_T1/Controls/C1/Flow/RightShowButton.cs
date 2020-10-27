@@ -7,7 +7,7 @@ namespace C2.Controls.Flow
 {
     public partial class RightShowButton : UserControl
     {
-        bool isActive = false;
+        bool isActive = true;
         public RightShowButton()
         {
             InitializeComponent();

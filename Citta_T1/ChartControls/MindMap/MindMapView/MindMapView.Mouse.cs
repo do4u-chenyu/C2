@@ -151,14 +151,13 @@ namespace C2.Controls.MapViews
             bool noDSWidget = true;
             foreach (Widget widget in htr.Topic.Widgets)
             {
-                if (widget is DataSourceWidget)
-                {
-                    noDSWidget = false;
-                    (widget as DataSourceWidget).DataItems.Add(dataItem);
-                    break; 
-                }
-                   
-              
+                if (!(widget is DataSourceWidget))
+                    continue;
+                DataSourceWidget dsw = (widget as DataSourceWidget);
+                if (dsw.DataItems.Find ((DataItem x)=>x.FilePath.Equals(dataItem.FilePath))==null)
+                    dsw.DataItems.Add(dataItem);                                  
+                noDSWidget = false;
+                break;
             }
             if (noDSWidget)
             {
