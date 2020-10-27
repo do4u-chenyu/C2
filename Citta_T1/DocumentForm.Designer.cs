@@ -1,4 +1,6 @@
-﻿namespace C2
+﻿using C2.Controls.Common;
+
+namespace C2
 {
     public partial class DocumentForm
     {
@@ -77,6 +79,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new C2.Controls.MySplitter();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.dc = new DesignerControl() { Text = "设计器", TabIndex = 4 };
             this.myTabControl1 = new C2.Controls.MyTabControl();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.MenuStripChartTab.SuspendLayout();
@@ -635,6 +638,7 @@
         private System.Windows.Forms.Panel panel1;
         private Controls.MySplitter splitter1;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private DesignerControl dc;
         private Controls.MyTabControl myTabControl1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }

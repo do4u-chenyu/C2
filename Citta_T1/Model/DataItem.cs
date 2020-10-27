@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace C2.Model
 {
-    class DataItem
+    public class DataItem
     {
         string filePath;
         string fileName;

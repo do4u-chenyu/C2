@@ -18,6 +18,7 @@ using C2.Model;
 using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
+using C2.Model.Widgets;
 
 namespace C2
 {
@@ -218,9 +219,14 @@ namespace C2
         void OnSelectedObjectsChanged(object[] old)
         {
             if (SelectedObjects != null)
+            {
                 ShowProperty(SelectedObjects);
+                ShowDesigner(SelectedObjects[0]);
+            }
+                
             else if (ActivedChartPage != null)
                 ShowProperty(ActivedChartPage.Chart);
+
             else
                 ShowProperty(null);
 
@@ -324,7 +330,6 @@ namespace C2
             tabControl2.Dock = DockStyle.Fill;
             tabControl2.SelectedBackColor = Color.White;
             tabControl2.SelectedForeColor = Color.Black;
-            DesignerControl dc = new DesignerControl() { Text = "设计器", TabIndex = 4 };
             tabControl2.AddPage(dc);
             splitContainer2.Panel2.Controls.Add(tabControl2);
 
@@ -849,6 +854,18 @@ namespace C2
             ShowProperty(new object[] { obj });
         }
 
+        void ShowDesigner(object sob)
+        {
+            Topic st = null;
+            var objectType = sob.GetType();
+            if(objectType.Name == "Topic")
+                st = sob as Topic;
+            else if (objectType.Name.EndsWith("Widget"))
+                st = (sob as Widget).Container as Topic;
+
+            dc.SelectedTopic = st;
+        }
+        
         void ShowProperty(object[] objects)
         {
             var selectedPropertyPage = tabControl2.SelectedPage;
