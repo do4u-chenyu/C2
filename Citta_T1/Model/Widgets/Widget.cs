@@ -360,7 +360,10 @@ namespace C2.Model.Widgets
         {
             widget.Alignment = Alignment;
             widget.Text = Text;
-            widget.OpType = OpType;
+            if (widget is DataSourceWidget)
+                (widget as DataSourceWidget).DataItems =(this as DataSourceWidget).DataItems;
+            if(widget is OperatorWidget)
+                (widget as OperatorWidget).OpType = (this as OperatorWidget).OpType;
         }
 
         public virtual void OnMouseClick(Control ct,Point point)

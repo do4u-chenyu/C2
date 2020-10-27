@@ -134,7 +134,7 @@ namespace C2.Controls.MapViews
         {
             base.OnChartDragDrop(e);
             // 数据源的信息
-            string fileName = Path.GetFileName(e.Data.GetData("Path").ToString());
+            string fileName = Path.GetFileNameWithoutExtension(e.Data.GetData("Path").ToString());
             DataItem dataItem = new DataItem(
             e.Data.GetData("Path").ToString(),
                 fileName,
