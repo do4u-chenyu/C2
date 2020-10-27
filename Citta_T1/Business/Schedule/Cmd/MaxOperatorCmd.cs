@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using C2.Model.Widgets;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace C2.Business.Schedule.Cmd
@@ -6,6 +7,10 @@ namespace C2.Business.Schedule.Cmd
     class MaxOperatorCmd : OperatorCmd
     {
         public MaxOperatorCmd(Triple triple) : base(triple)
+        {
+        }
+
+        public MaxOperatorCmd(OperatorWidget operatorWidget) : base(operatorWidget)
         {
         }
 

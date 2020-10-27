@@ -2,6 +2,7 @@
 using C2.Business.Option;
 using C2.Controls.Move.Op;
 using C2.Core;
+using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace C2.Business.Schedule.Cmd
     {
         public Triple triple;
         public List<string> inputFilePaths = new List<string>();
+        public List<OpUtil.Encoding> inputFileEncodes = new List<OpUtil.Encoding>();
         public OperatorOption option;
         public string outputFilePath;
         public string operatorId;
@@ -25,6 +27,7 @@ namespace C2.Business.Schedule.Cmd
         {
             this.triple = triple;
             triple.DataElements.ForEach(c => inputFilePaths.Add(c.FullFilePath));
+            triple.DataElements.ForEach(c => inputFileEncodes.Add(c.Encoding));
             this.option = (triple.OperateElement.InnerControl as MoveOpControl).Option;
             this.outputFileTitle = this.option.GetOption("columnname0");
             this.outputFilePath = triple.ResultElement.FullFilePath;
@@ -33,8 +36,18 @@ namespace C2.Business.Schedule.Cmd
             InitSeparator();
         }
 
+        public OperatorCmd(OperatorWidget operatorWidget)
+        {
+            this.inputFileEncodes.Add(operatorWidget.DataSourceItem.FileEncoding);
+            this.inputFilePaths.Add(operatorWidget.DataSourceItem.FilePath);
+            this.option = operatorWidget.Option;
+            this.outputFileTitle = this.option.GetOption("columnname0");
+            this.outputFilePath = operatorWidget.ResultItem.FilePath;
+            this.sortConfig = " -S 600M -T " + Global.WorkspaceDirectory;
+            this.separators = new List<string>() { operatorWidget.DataSourceItem.FileSep.ToString()};
+        }
 
-        public void ReWriteBCPFile(string className = "null")
+            public void ReWriteBCPFile(string className = "null")
         {
             using (StreamWriter sw = new StreamWriter(this.outputFilePath, false, Encoding.UTF8))
             {
@@ -206,7 +219,8 @@ namespace C2.Business.Schedule.Cmd
 
         public OpUtil.Encoding JudgeInputFileEncoding(string inputFile)
         {
-            return triple.DataElements[inputFilePaths.IndexOf(inputFile)].Encoding;
+            //return triple.DataElements[inputFilePaths.IndexOf(inputFile)].Encoding;
+            return inputFileEncodes[inputFilePaths.IndexOf(inputFile)];
         }
 
     }

@@ -12,6 +12,9 @@ using C2.Model.Styles;
 using C2.Model.Widgets;
 using System.Collections.Generic;
 using C2.Globalization;
+using C2.Dialogs.C2OperatorViews.Base;
+using C2.Business.Schedule.Cmd;
+using System.Diagnostics;
 
 namespace C2.Controls.MapViews
 {
@@ -63,12 +66,92 @@ namespace C2.Controls.MapViews
                 MenuDelete});
 
             MenuDesign.Text = Lang._("Design");
+            MenuDesign.Click += new System.EventHandler(MenuDesignOp_Click);
             MenuRunning.Text = Lang._("Running");
+            MenuRunning.Click += new System.EventHandler(MenuRunningOp_Click);
             MenuPublic.Text = Lang._("Public");
             MenuDelete.Text = Lang._("Delete");
             MenuDelete.Click += new System.EventHandler(MenuDeleteOp_Click);
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
+        }
+
+        void MenuDesignOp_Click(object sender, EventArgs e)
+        {
+            switch (opw.OpType)
+            {
+                case "最大值":
+                    new C2MaxOperatorView(opw).ShowDialog();
+                    break;
+                case "排序":
+                    //new SortOperatorView(SelectedTopic.FindWidget<OperatorWidget>()).ShowDialog();
+                    break;
+                default:
+                    break;
+            }
+        }
+        void MenuRunningOp_Click(object sender, EventArgs e)
+        {
+            if(opw.Status == OpStatus.Ready)
+            {
+                List<string> cmds = (new MaxOperatorCmd(opw)).GenCmd();
+                MessageBox.Show(RunLinuxCommand(cmds));
+            }
+        }
+
+        public string RunLinuxCommand(List<string> cmds)
+        {
+            // 补充条件检查, cmds 不能为空
+            if (cmds == null || !cmds.Any())
+                return "";
+            string message = String.Empty;
+
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            //p.StartInfo.Arguments = "/c " + string.Join(";",cmds);
+            p.StartInfo.UseShellExecute = false; // 不显示用户界面
+            p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.RedirectStandardInput = true;//可以重定向输入  
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+
+
+            try
+            {
+                if (p.Start())//开始进程  
+                {
+                    p.BeginErrorReadLine();
+                    p.BeginOutputReadLine();
+
+                    p.StandardInput.WriteLine("exit");
+                    p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒
+
+                    message = "成功执行完毕";
+
+                    if (p.ExitCode != 0)
+                    {
+                        message = "执行程序非正常退出，请检查程序后再运行。";
+                    }
+
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+                //没有关联进程的异常，是由于用户点击终止按钮，导致进程被关闭
+                //UpdateLogDelegate("InvalidOperationException: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                //异常停止的处理方法
+                message = ex.Message;
+            }
+            finally
+            {
+                if (p != null)
+                    p.Dispose();//释放资源
+                p.Close();
+            }
+            return message;
         }
 
         void MenuDeleteOp_Click(object sender, EventArgs e)

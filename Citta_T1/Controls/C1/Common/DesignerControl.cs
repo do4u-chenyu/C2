@@ -1,7 +1,7 @@
-﻿using C2.Model;
+﻿using C2.Dialogs.C2OperatorViews.Base;
+using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
-using C2.OperatorViews;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -24,6 +24,7 @@ namespace C2.Controls.Common
             }
         }
 
+        public OperatorWidget OpWidget { get; set; }
         public DataItem SelectedDataSource { get; set; }
         public string SelectedOperator { get; set; }
         public List<DataItem> ComboDataSource { get; set; }
@@ -39,6 +40,7 @@ namespace C2.Controls.Common
             }
             else
             {
+                OpWidget = SelectedTopic.FindWidget<OperatorWidget>();
                 SetSelectedTopic();//设置选中主题
                 SetSelectedDataSource();//设置选中数据源
                 SetComboDataSource();
@@ -54,12 +56,11 @@ namespace C2.Controls.Common
 
         private void SetSelectedDataSource()
         {
-            OperatorWidget opw = SelectedTopic.FindWidget<OperatorWidget>();
-            if (opw != null)
+            if (OpWidget != null)
             {
                 //TODO
                 //dtw.选中数据源;
-                DataItem d1 = opw.DataSourceItem;
+                DataItem d1 = OpWidget.DataSourceItem;
                 if (d1 != null)
                 {
                     SelectedDataSource = d1;
@@ -94,10 +95,8 @@ namespace C2.Controls.Common
 
         private void SetSelectedOperator()
         {
-            OperatorWidget opw = SelectedTopic.FindWidget<OperatorWidget>();
-
-            this.operatorName.Text = opw != null ? opw.OpType : "";
-            SelectedOperator = opw != null ? opw.OpType : "";
+            this.operatorName.Text = OpWidget != null ? OpWidget.OpType : "";
+            SelectedOperator = OpWidget != null ? OpWidget.OpType : "";
         }
 
         public DesignerControl()
@@ -125,10 +124,20 @@ namespace C2.Controls.Common
                 return;
             }
 
+
             switch (SelectedOperator)
             {
                 case "最大值":
-                    //new MaxOperatorView(SelectedTopic.FindWidget<OperatorWidget>()).ShowDialog();
+                    var dialog = new C2MaxOperatorView(OpWidget);
+                    if (dialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        //string path = string.Format("L_{0}.bcp", System.DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+                        if(OpWidget.ResultItem == null)
+                        {
+                            OpWidget.ResultItem = new DataItem("D:\\1.txt", "1", '\t', Utils.OpUtil.Encoding.GBK, Utils.OpUtil.ExtType.Text);
+                        }
+                        OpWidget.Status = OpStatus.Ready;
+                    }
                     break;
                 case "排序":
                     //new SortOperatorView(SelectedTopic.FindWidget<OperatorWidget>()).ShowDialog();

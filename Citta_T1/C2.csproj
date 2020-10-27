@@ -182,6 +182,18 @@
     <Compile Include="Controls\DataCharts\RadarChart.Designer.cs">
       <DependentUpon>RadarChart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\Base\C2BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\Base\C2BaseOperatorView.Designer.cs">
+      <DependentUpon>C2BaseOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2MaxOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2MaxOperatorView.Designer.cs">
+      <DependentUpon>C2MaxOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\OperatorViews\PythonOperatorHelper.cs">
       <SubType>Form</SubType>
     </Compile>
