@@ -101,29 +101,41 @@ namespace C2.Controls.MapViews
         public void CreateDataSourceMenu()
         {
             dtw = HoverObject.Widget as DataSourceWidget;
-            
+            WidgetMenuStrip.SuspendLayout();
             foreach (DataItem dataItem in dtw.DataItems)
             {
-                ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuGetChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
+                ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
+                MenuOpenDataSource.Image = Properties.Resources.data_w_icon;
+
                 MenuOpenDataSource.Text = dataItem.FileName;
-                MenuOpenDataSource.DropDownItems.AddRange(new ToolStripMenuItem[] {
+                MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewData,
                 MenuGetChart,
                 MenuDelete});
-
-                MenuViewData.Text = Lang._("ViewData");
+            
+                MenuViewData.Image = Properties.Resources.viewdata;
                 MenuViewData.Tag = dataItem;
+                MenuViewData.Text = Lang._("ViewData");
+                MenuViewData.Click += MenuViewData_Click;
+
+                MenuGetChart.Image = Properties.Resources.getchart;              
                 MenuGetChart.Text = Lang._("GetChart");
+
+                MenuDelete.Image = Properties.Resources.deletewidget;
                 MenuDelete.Text = Lang._("Delete");
                 MenuDelete.Tag = dataItem;
-                MenuViewData.Click += MenuViewData_Click;
                 MenuDelete.Click += MenuDelete_Click;
-                WidgetMenuStrip.Items.Add(MenuOpenDataSource);
+
+                WidgetMenuStrip.Items.Add(MenuOpenDataSource);           
             }
-            
+            WidgetMenuStrip.ResumeLayout();
+            if (UITheme.Default != null)
+            {
+                WidgetMenuStrip.Renderer = UITheme.Default.ToolStripRenderer;
+            }
         }
 
         public void CreateResultMenu()

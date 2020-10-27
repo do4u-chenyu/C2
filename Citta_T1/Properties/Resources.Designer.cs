@@ -563,6 +563,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap deletewidget {
+            get {
+                object obj = ResourceManager.GetObject("deletewidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap differOp {
             get {
                 object obj = ResourceManager.GetObject("differOp", resourceCulture);
@@ -981,6 +991,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap full_screen_exit {
             get {
                 object obj = ResourceManager.GetObject("full_screen_exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap getchart {
+            get {
+                object obj = ResourceManager.GetObject("getchart", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2634,6 +2654,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap up {
             get {
                 object obj = ResourceManager.GetObject("up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap viewdata {
+            get {
+                object obj = ResourceManager.GetObject("viewdata", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
