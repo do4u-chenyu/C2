@@ -20,7 +20,7 @@ namespace C2.Controls.Left
         {
             this.toolTip1.SetToolTip(this.leftPanelOpRelate, HelpUtil.RelateOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.leftPanelOpCollide, HelpUtil.CollideOperatorHelpInfo);
-            this.toolTip1.SetToolTip(this.lefPanelOpUnion, HelpUtil.UnionOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpUnion, HelpUtil.UnionOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.leftPanelOpDiffer, HelpUtil.DifferOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.leftPanelOpRandom, HelpUtil.RandomOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.leftPanelOpFilter, HelpUtil.FilterOperatorHelpInfo);

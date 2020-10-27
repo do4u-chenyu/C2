@@ -54,7 +54,7 @@
             this.leftPanelOpMax = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpRandom = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpDiffer = new C2.Controls.Common.NoFocusButton();
-            this.lefPanelOpUnion = new C2.Controls.Common.NoFocusButton();
+            this.leftPanelOpUnion = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpCollide = new C2.Controls.Common.NoFocusButton();
             this.customOPButton2 = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpFilter = new C2.Controls.Common.NoFocusButton();
@@ -149,7 +149,7 @@
             this.filterOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.filterOpPictureBox.BackgroundImage = global::C2.Properties.Resources.filt_op;
             this.filterOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.filterOpPictureBox.Location = new System.Drawing.Point(104, 10);
+            this.filterOpPictureBox.Location = new System.Drawing.Point(106, 10);
             this.filterOpPictureBox.Name = "filterOpPictureBox";
             this.filterOpPictureBox.Size = new System.Drawing.Size(21, 21);
             this.filterOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -161,7 +161,7 @@
             this.avgOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.avgOpPictureBox.BackgroundImage = global::C2.Properties.Resources.avg_op;
             this.avgOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.avgOpPictureBox.Location = new System.Drawing.Point(104, 45);
+            this.avgOpPictureBox.Location = new System.Drawing.Point(106, 45);
             this.avgOpPictureBox.Name = "avgOpPictureBox";
             this.avgOpPictureBox.Size = new System.Drawing.Size(21, 21);
             this.avgOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -197,7 +197,7 @@
             this.freqOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.freqOpPictureBox.BackgroundImage = global::C2.Properties.Resources.freq_op;
             this.freqOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.freqOpPictureBox.Location = new System.Drawing.Point(104, 80);
+            this.freqOpPictureBox.Location = new System.Drawing.Point(106, 80);
             this.freqOpPictureBox.Name = "freqOpPictureBox";
             this.freqOpPictureBox.Size = new System.Drawing.Size(21, 21);
             this.freqOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -209,7 +209,7 @@
             this.sortOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.sortOpPictureBox.BackgroundImage = global::C2.Properties.Resources.order_op;
             this.sortOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.sortOpPictureBox.Location = new System.Drawing.Point(102, 115);
+            this.sortOpPictureBox.Location = new System.Drawing.Point(104, 115);
             this.sortOpPictureBox.Name = "sortOpPictureBox";
             this.sortOpPictureBox.Size = new System.Drawing.Size(24, 24);
             this.sortOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -221,7 +221,7 @@
             this.groupOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.groupOpPictureBox.BackgroundImage = global::C2.Properties.Resources.group_op;
             this.groupOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupOpPictureBox.Location = new System.Drawing.Point(105, 150);
+            this.groupOpPictureBox.Location = new System.Drawing.Point(107, 150);
             this.groupOpPictureBox.Name = "groupOpPictureBox";
             this.groupOpPictureBox.Size = new System.Drawing.Size(19, 19);
             this.groupOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -233,7 +233,7 @@
             this.wordFilterOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.wordFilterOpPictureBox.BackgroundImage = global::C2.Properties.Resources.word_op;
             this.wordFilterOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.wordFilterOpPictureBox.Location = new System.Drawing.Point(104, 185);
+            this.wordFilterOpPictureBox.Location = new System.Drawing.Point(106, 185);
             this.wordFilterOpPictureBox.Name = "wordFilterOpPictureBox";
             this.wordFilterOpPictureBox.Size = new System.Drawing.Size(21, 21);
             this.wordFilterOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -245,7 +245,7 @@
             this.dataStandarOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.dataStandarOpPictureBox.BackgroundImage = global::C2.Properties.Resources.stan_op;
             this.dataStandarOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.dataStandarOpPictureBox.Location = new System.Drawing.Point(104, 220);
+            this.dataStandarOpPictureBox.Location = new System.Drawing.Point(106, 220);
             this.dataStandarOpPictureBox.Name = "dataStandarOpPictureBox";
             this.dataStandarOpPictureBox.Size = new System.Drawing.Size(21, 21);
             this.dataStandarOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -256,7 +256,7 @@
             // 
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox4.Image = global::C2.Properties.Resources.multi_op;
-            this.pictureBox4.Location = new System.Drawing.Point(105, 255);
+            this.pictureBox4.Location = new System.Drawing.Point(107, 255);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(19, 19);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -288,14 +288,14 @@
             // 
             // leftPanelOpRelate
             // 
-            this.leftPanelOpRelate.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpRelate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpRelate.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpRelate.FlatAppearance.BorderSize = 0;
             this.leftPanelOpRelate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpRelate.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpRelate.Location = new System.Drawing.Point(30, 5);
             this.leftPanelOpRelate.Name = "leftPanelOpRelate";
-            this.leftPanelOpRelate.Size = new System.Drawing.Size(70, 29);
+            this.leftPanelOpRelate.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpRelate.TabIndex = 0;
             this.leftPanelOpRelate.Text = "关联算子";
             this.leftPanelOpRelate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -305,7 +305,7 @@
             // 
             // pythonOPButton
             // 
-            this.pythonOPButton.BackColor = System.Drawing.Color.Transparent;
+            this.pythonOPButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.pythonOPButton.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.pythonOPButton.FlatAppearance.BorderSize = 0;
             this.pythonOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -322,7 +322,7 @@
             // 
             // customOPButton1
             // 
-            this.customOPButton1.BackColor = System.Drawing.Color.Transparent;
+            this.customOPButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.customOPButton1.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.customOPButton1.FlatAppearance.BorderSize = 0;
             this.customOPButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -339,14 +339,14 @@
             // 
             // leftPanelOpMin
             // 
-            this.leftPanelOpMin.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpMin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpMin.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpMin.FlatAppearance.BorderSize = 0;
             this.leftPanelOpMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpMin.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpMin.Location = new System.Drawing.Point(30, 183);
             this.leftPanelOpMin.Name = "leftPanelOpMin";
-            this.leftPanelOpMin.Size = new System.Drawing.Size(70, 29);
+            this.leftPanelOpMin.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpMin.TabIndex = 24;
             this.leftPanelOpMin.Text = "取最小值";
             this.leftPanelOpMin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -356,14 +356,14 @@
             // 
             // leftPanelOpMax
             // 
-            this.leftPanelOpMax.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpMax.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpMax.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpMax.FlatAppearance.BorderSize = 0;
             this.leftPanelOpMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpMax.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpMax.Location = new System.Drawing.Point(30, 218);
             this.leftPanelOpMax.Name = "leftPanelOpMax";
-            this.leftPanelOpMax.Size = new System.Drawing.Size(70, 29);
+            this.leftPanelOpMax.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpMax.TabIndex = 23;
             this.leftPanelOpMax.Text = "取最大值";
             this.leftPanelOpMax.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -373,14 +373,14 @@
             // 
             // leftPanelOpRandom
             // 
-            this.leftPanelOpRandom.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpRandom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpRandom.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpRandom.FlatAppearance.BorderSize = 0;
             this.leftPanelOpRandom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpRandom.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpRandom.Location = new System.Drawing.Point(30, 146);
             this.leftPanelOpRandom.Name = "leftPanelOpRandom";
-            this.leftPanelOpRandom.Size = new System.Drawing.Size(70, 29);
+            this.leftPanelOpRandom.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpRandom.TabIndex = 21;
             this.leftPanelOpRandom.Text = "随机采样";
             this.leftPanelOpRandom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -390,7 +390,7 @@
             // 
             // leftPanelOpDiffer
             // 
-            this.leftPanelOpDiffer.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpDiffer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpDiffer.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpDiffer.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.leftPanelOpDiffer.FlatAppearance.BorderSize = 0;
@@ -398,7 +398,7 @@
             this.leftPanelOpDiffer.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpDiffer.Location = new System.Drawing.Point(30, 110);
             this.leftPanelOpDiffer.Name = "leftPanelOpDiffer";
-            this.leftPanelOpDiffer.Size = new System.Drawing.Size(70, 29);
+            this.leftPanelOpDiffer.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpDiffer.TabIndex = 20;
             this.leftPanelOpDiffer.Text = "取差集";
             this.leftPanelOpDiffer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -406,33 +406,33 @@
             this.leftPanelOpDiffer.UseVisualStyleBackColor = false;
             this.leftPanelOpDiffer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // lefPanelOpUnion
+            // leftPanelOpUnion
             // 
-            this.lefPanelOpUnion.BackColor = System.Drawing.Color.Transparent;
-            this.lefPanelOpUnion.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.lefPanelOpUnion.FlatAppearance.BorderSize = 0;
-            this.lefPanelOpUnion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lefPanelOpUnion.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.lefPanelOpUnion.Location = new System.Drawing.Point(30, 75);
-            this.lefPanelOpUnion.Name = "lefPanelOpUnion";
-            this.lefPanelOpUnion.Size = new System.Drawing.Size(70, 29);
-            this.lefPanelOpUnion.TabIndex = 19;
-            this.lefPanelOpUnion.Text = "取并集";
-            this.lefPanelOpUnion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lefPanelOpUnion.UseMnemonic = false;
-            this.lefPanelOpUnion.UseVisualStyleBackColor = false;
-            this.lefPanelOpUnion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpUnion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.leftPanelOpUnion.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpUnion.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpUnion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpUnion.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpUnion.Location = new System.Drawing.Point(30, 75);
+            this.leftPanelOpUnion.Name = "leftPanelOpUnion";
+            this.leftPanelOpUnion.Size = new System.Drawing.Size(73, 29);
+            this.leftPanelOpUnion.TabIndex = 19;
+            this.leftPanelOpUnion.Text = "取并集";
+            this.leftPanelOpUnion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.leftPanelOpUnion.UseMnemonic = false;
+            this.leftPanelOpUnion.UseVisualStyleBackColor = false;
+            this.leftPanelOpUnion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // leftPanelOpCollide
             // 
-            this.leftPanelOpCollide.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpCollide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpCollide.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpCollide.FlatAppearance.BorderSize = 0;
             this.leftPanelOpCollide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpCollide.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpCollide.Location = new System.Drawing.Point(30, 40);
             this.leftPanelOpCollide.Name = "leftPanelOpCollide";
-            this.leftPanelOpCollide.Size = new System.Drawing.Size(70, 29);
+            this.leftPanelOpCollide.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpCollide.TabIndex = 18;
             this.leftPanelOpCollide.Text = "碰撞算子";
             this.leftPanelOpCollide.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -442,14 +442,14 @@
             // 
             // customOPButton2
             // 
-            this.customOPButton2.BackColor = System.Drawing.Color.Transparent;
+            this.customOPButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.customOPButton2.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.customOPButton2.FlatAppearance.BorderSize = 0;
             this.customOPButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customOPButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.customOPButton2.Location = new System.Drawing.Point(127, 251);
+            this.customOPButton2.Location = new System.Drawing.Point(129, 251);
             this.customOPButton2.Name = "customOPButton2";
-            this.customOPButton2.Size = new System.Drawing.Size(85, 29);
+            this.customOPButton2.Size = new System.Drawing.Size(73, 29);
             this.customOPButton2.TabIndex = 41;
             this.customOPButton2.Text = "多源算子";
             this.customOPButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -460,14 +460,14 @@
             // 
             // leftPanelOpFilter
             // 
-            this.leftPanelOpFilter.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpFilter.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpFilter.FlatAppearance.BorderSize = 0;
             this.leftPanelOpFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpFilter.Location = new System.Drawing.Point(127, 5);
+            this.leftPanelOpFilter.Location = new System.Drawing.Point(129, 5);
             this.leftPanelOpFilter.Name = "leftPanelOpFilter";
-            this.leftPanelOpFilter.Size = new System.Drawing.Size(85, 29);
+            this.leftPanelOpFilter.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpFilter.TabIndex = 22;
             this.leftPanelOpFilter.Text = "条件筛选";
             this.leftPanelOpFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -477,12 +477,12 @@
             // 
             // leftPanelOpDataStandar
             // 
-            this.leftPanelOpDataStandar.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpDataStandar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpDataStandar.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpDataStandar.FlatAppearance.BorderSize = 0;
             this.leftPanelOpDataStandar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpDataStandar.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpDataStandar.Location = new System.Drawing.Point(127, 218);
+            this.leftPanelOpDataStandar.Location = new System.Drawing.Point(129, 218);
             this.leftPanelOpDataStandar.Name = "leftPanelOpDataStandar";
             this.leftPanelOpDataStandar.Size = new System.Drawing.Size(87, 29);
             this.leftPanelOpDataStandar.TabIndex = 34;
@@ -494,12 +494,12 @@
             // 
             // leftPanelOpWordFilter
             // 
-            this.leftPanelOpWordFilter.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpWordFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpWordFilter.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpWordFilter.FlatAppearance.BorderSize = 0;
             this.leftPanelOpWordFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpWordFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpWordFilter.Location = new System.Drawing.Point(127, 183);
+            this.leftPanelOpWordFilter.Location = new System.Drawing.Point(129, 183);
             this.leftPanelOpWordFilter.Name = "leftPanelOpWordFilter";
             this.leftPanelOpWordFilter.Size = new System.Drawing.Size(85, 29);
             this.leftPanelOpWordFilter.TabIndex = 32;
@@ -511,14 +511,14 @@
             // 
             // leftPanelOpGroup
             // 
-            this.leftPanelOpGroup.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpGroup.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpGroup.FlatAppearance.BorderSize = 0;
             this.leftPanelOpGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpGroup.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpGroup.Location = new System.Drawing.Point(127, 146);
+            this.leftPanelOpGroup.Location = new System.Drawing.Point(129, 146);
             this.leftPanelOpGroup.Name = "leftPanelOpGroup";
-            this.leftPanelOpGroup.Size = new System.Drawing.Size(85, 29);
+            this.leftPanelOpGroup.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpGroup.TabIndex = 31;
             this.leftPanelOpGroup.Text = "分组算子";
             this.leftPanelOpGroup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -528,14 +528,14 @@
             // 
             // leftPanelOpSort
             // 
-            this.leftPanelOpSort.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpSort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpSort.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpSort.FlatAppearance.BorderSize = 0;
             this.leftPanelOpSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpSort.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpSort.Location = new System.Drawing.Point(127, 110);
+            this.leftPanelOpSort.Location = new System.Drawing.Point(129, 110);
             this.leftPanelOpSort.Name = "leftPanelOpSort";
-            this.leftPanelOpSort.Size = new System.Drawing.Size(85, 29);
+            this.leftPanelOpSort.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpSort.TabIndex = 30;
             this.leftPanelOpSort.Text = "排序算子";
             this.leftPanelOpSort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -545,14 +545,14 @@
             // 
             // leftPanelOpFreq
             // 
-            this.leftPanelOpFreq.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpFreq.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpFreq.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpFreq.FlatAppearance.BorderSize = 0;
             this.leftPanelOpFreq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpFreq.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpFreq.Location = new System.Drawing.Point(127, 75);
+            this.leftPanelOpFreq.Location = new System.Drawing.Point(129, 75);
             this.leftPanelOpFreq.Name = "leftPanelOpFreq";
-            this.leftPanelOpFreq.Size = new System.Drawing.Size(85, 29);
+            this.leftPanelOpFreq.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpFreq.TabIndex = 29;
             this.leftPanelOpFreq.Text = "频率算子";
             this.leftPanelOpFreq.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -562,14 +562,14 @@
             // 
             // leftPanelOpAvg
             // 
-            this.leftPanelOpAvg.BackColor = System.Drawing.Color.Transparent;
+            this.leftPanelOpAvg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.leftPanelOpAvg.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpAvg.FlatAppearance.BorderSize = 0;
             this.leftPanelOpAvg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpAvg.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpAvg.Location = new System.Drawing.Point(127, 40);
+            this.leftPanelOpAvg.Location = new System.Drawing.Point(129, 40);
             this.leftPanelOpAvg.Name = "leftPanelOpAvg";
-            this.leftPanelOpAvg.Size = new System.Drawing.Size(85, 29);
+            this.leftPanelOpAvg.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpAvg.TabIndex = 25;
             this.leftPanelOpAvg.Text = "取平均值";
             this.leftPanelOpAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -592,7 +592,7 @@
             this.Controls.Add(this.leftPanelOpMax);
             this.Controls.Add(this.leftPanelOpRandom);
             this.Controls.Add(this.leftPanelOpDiffer);
-            this.Controls.Add(this.lefPanelOpUnion);
+            this.Controls.Add(this.leftPanelOpUnion);
             this.Controls.Add(this.leftPanelOpCollide);
             this.Controls.Add(this.customOPButton2);
             this.Controls.Add(this.pictureBox4);
@@ -655,7 +655,7 @@
         private System.Windows.Forms.PictureBox unionOpPictureBox;
         private C2.Controls.Common.NoFocusButton leftPanelOpRelate;
         private C2.Controls.Common.NoFocusButton leftPanelOpCollide;
-        private C2.Controls.Common.NoFocusButton lefPanelOpUnion;
+        private C2.Controls.Common.NoFocusButton leftPanelOpUnion;
         private C2.Controls.Common.NoFocusButton leftPanelOpDiffer;
         private C2.Controls.Common.NoFocusButton leftPanelOpRandom;
         private C2.Controls.Common.NoFocusButton leftPanelOpFilter;
