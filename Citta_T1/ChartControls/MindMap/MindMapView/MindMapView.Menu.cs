@@ -74,7 +74,13 @@ namespace C2.Controls.MapViews
         {
             Delete(new ChartObject[] { opw });
         }
-
+        void MenuViewData_Click(object sender, EventArgs e)
+        {
+    
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            if (hitItem != null)
+                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
+        }
 
 
         public void CreateDataSourceMenu()
@@ -94,9 +100,10 @@ namespace C2.Controls.MapViews
                 MenuDelete});
 
                 MenuViewData.Text = "查看数据";
+                MenuViewData.Tag = dataItem;
                 MenuGetChart.Text = "生成图表";
                 MenuDelete.Text = "删除";
-
+                MenuViewData.Click += MenuViewData_Click; 
                 WidgetMenuStrip.Items.Add(MenuOpenDataSource);
             }
             
