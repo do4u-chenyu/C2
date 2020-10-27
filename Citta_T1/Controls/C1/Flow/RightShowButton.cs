@@ -7,6 +7,7 @@ namespace C2.Controls.Flow
 {
     public partial class RightShowButton : UserControl
     {
+        bool isActive = false;
         public RightShowButton()
         {
             InitializeComponent();
@@ -26,7 +27,18 @@ namespace C2.Controls.Flow
 
         private void RightShowButton_Click(object sender, EventArgs e)
         {
-            FlowControlShow();
+            if (isActive)
+            {
+                FlowControlHidden();
+                isActive = false;
+            }
+            else
+            {
+                FlowControlShow();
+                isActive = true;
+            }
+
+
         }
 
         private void Label1_MouseEnter(object sender, EventArgs e)
@@ -43,8 +55,17 @@ namespace C2.Controls.Flow
 
         private void Label1_Click(object sender, EventArgs e)
         {
+            if (isActive)
+            {
+                FlowControlHidden();
+                isActive = false;
+            }
+            else
+            {
+                FlowControlShow();
+                isActive = true;
+            }
 
-            FlowControlShow();
 
         }
 
@@ -54,5 +75,16 @@ namespace C2.Controls.Flow
             Global.GetCurrentDocument().FlowControlVisible = true;
 
         }
+        private void FlowControlHidden()
+        {
+            Global.GetFlowControl().Visible = false;
+            Global.GetFlowControl().SelectRemark = false;
+            Global.GetRemarkControl().Visible = false;
+            Global.GetCurrentDocument().RemarkVisible = false;
+            Global.GetCurrentDocument().FlowControlVisible = false;
+            Global.GetFlowControl().RemarkChange(false);
+
+        }
+
     }
 }

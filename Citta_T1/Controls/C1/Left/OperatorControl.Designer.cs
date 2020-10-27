@@ -293,9 +293,9 @@
             this.leftPanelOpRelate.FlatAppearance.BorderSize = 0;
             this.leftPanelOpRelate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpRelate.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpRelate.Location = new System.Drawing.Point(30, 4);
+            this.leftPanelOpRelate.Location = new System.Drawing.Point(30, 5);
             this.leftPanelOpRelate.Name = "leftPanelOpRelate";
-            this.leftPanelOpRelate.Size = new System.Drawing.Size(76, 30);
+            this.leftPanelOpRelate.Size = new System.Drawing.Size(70, 29);
             this.leftPanelOpRelate.TabIndex = 0;
             this.leftPanelOpRelate.Text = "关联算子";
             this.leftPanelOpRelate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -312,7 +312,7 @@
             this.pythonOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.pythonOPButton.Location = new System.Drawing.Point(30, 285);
             this.pythonOPButton.Name = "pythonOPButton";
-            this.pythonOPButton.Size = new System.Drawing.Size(61, 29);
+            this.pythonOPButton.Size = new System.Drawing.Size(70, 29);
             this.pythonOPButton.TabIndex = 39;
             this.pythonOPButton.Text = "Py算子";
             this.pythonOPButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -329,7 +329,7 @@
             this.customOPButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.customOPButton1.Location = new System.Drawing.Point(30, 251);
             this.customOPButton1.Name = "customOPButton1";
-            this.customOPButton1.Size = new System.Drawing.Size(63, 26);
+            this.customOPButton1.Size = new System.Drawing.Size(70, 29);
             this.customOPButton1.TabIndex = 37;
             this.customOPButton1.Text = "AI实践";
             this.customOPButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -344,9 +344,9 @@
             this.leftPanelOpMin.FlatAppearance.BorderSize = 0;
             this.leftPanelOpMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpMin.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpMin.Location = new System.Drawing.Point(30, 182);
+            this.leftPanelOpMin.Location = new System.Drawing.Point(30, 183);
             this.leftPanelOpMin.Name = "leftPanelOpMin";
-            this.leftPanelOpMin.Size = new System.Drawing.Size(74, 30);
+            this.leftPanelOpMin.Size = new System.Drawing.Size(70, 29);
             this.leftPanelOpMin.TabIndex = 24;
             this.leftPanelOpMin.Text = "取最小值";
             this.leftPanelOpMin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -363,7 +363,7 @@
             this.leftPanelOpMax.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpMax.Location = new System.Drawing.Point(30, 218);
             this.leftPanelOpMax.Name = "leftPanelOpMax";
-            this.leftPanelOpMax.Size = new System.Drawing.Size(74, 28);
+            this.leftPanelOpMax.Size = new System.Drawing.Size(70, 29);
             this.leftPanelOpMax.TabIndex = 23;
             this.leftPanelOpMax.Text = "取最大值";
             this.leftPanelOpMax.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -380,7 +380,7 @@
             this.leftPanelOpRandom.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpRandom.Location = new System.Drawing.Point(30, 146);
             this.leftPanelOpRandom.Name = "leftPanelOpRandom";
-            this.leftPanelOpRandom.Size = new System.Drawing.Size(74, 29);
+            this.leftPanelOpRandom.Size = new System.Drawing.Size(70, 29);
             this.leftPanelOpRandom.TabIndex = 21;
             this.leftPanelOpRandom.Text = "随机采样";
             this.leftPanelOpRandom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -398,7 +398,7 @@
             this.leftPanelOpDiffer.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpDiffer.Location = new System.Drawing.Point(30, 110);
             this.leftPanelOpDiffer.Name = "leftPanelOpDiffer";
-            this.leftPanelOpDiffer.Size = new System.Drawing.Size(61, 30);
+            this.leftPanelOpDiffer.Size = new System.Drawing.Size(70, 29);
             this.leftPanelOpDiffer.TabIndex = 20;
             this.leftPanelOpDiffer.Text = "取差集";
             this.leftPanelOpDiffer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -415,7 +415,7 @@
             this.lefPanelOpUnion.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lefPanelOpUnion.Location = new System.Drawing.Point(30, 75);
             this.lefPanelOpUnion.Name = "lefPanelOpUnion";
-            this.lefPanelOpUnion.Size = new System.Drawing.Size(61, 26);
+            this.lefPanelOpUnion.Size = new System.Drawing.Size(70, 29);
             this.lefPanelOpUnion.TabIndex = 19;
             this.lefPanelOpUnion.Text = "取并集";
             this.lefPanelOpUnion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -430,9 +430,9 @@
             this.leftPanelOpCollide.FlatAppearance.BorderSize = 0;
             this.leftPanelOpCollide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpCollide.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpCollide.Location = new System.Drawing.Point(30, 39);
+            this.leftPanelOpCollide.Location = new System.Drawing.Point(30, 40);
             this.leftPanelOpCollide.Name = "leftPanelOpCollide";
-            this.leftPanelOpCollide.Size = new System.Drawing.Size(74, 33);
+            this.leftPanelOpCollide.Size = new System.Drawing.Size(70, 29);
             this.leftPanelOpCollide.TabIndex = 18;
             this.leftPanelOpCollide.Text = "碰撞算子";
             this.leftPanelOpCollide.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -449,7 +449,7 @@
             this.customOPButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.customOPButton2.Location = new System.Drawing.Point(127, 251);
             this.customOPButton2.Name = "customOPButton2";
-            this.customOPButton2.Size = new System.Drawing.Size(74, 26);
+            this.customOPButton2.Size = new System.Drawing.Size(85, 29);
             this.customOPButton2.TabIndex = 41;
             this.customOPButton2.Text = "多源算子";
             this.customOPButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -467,7 +467,7 @@
             this.leftPanelOpFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpFilter.Location = new System.Drawing.Point(127, 5);
             this.leftPanelOpFilter.Name = "leftPanelOpFilter";
-            this.leftPanelOpFilter.Size = new System.Drawing.Size(74, 29);
+            this.leftPanelOpFilter.Size = new System.Drawing.Size(85, 29);
             this.leftPanelOpFilter.TabIndex = 22;
             this.leftPanelOpFilter.Text = "条件筛选";
             this.leftPanelOpFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -484,7 +484,7 @@
             this.leftPanelOpDataStandar.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpDataStandar.Location = new System.Drawing.Point(127, 218);
             this.leftPanelOpDataStandar.Name = "leftPanelOpDataStandar";
-            this.leftPanelOpDataStandar.Size = new System.Drawing.Size(87, 28);
+            this.leftPanelOpDataStandar.Size = new System.Drawing.Size(87, 29);
             this.leftPanelOpDataStandar.TabIndex = 34;
             this.leftPanelOpDataStandar.Text = "数据标准化";
             this.leftPanelOpDataStandar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -501,7 +501,7 @@
             this.leftPanelOpWordFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpWordFilter.Location = new System.Drawing.Point(127, 183);
             this.leftPanelOpWordFilter.Name = "leftPanelOpWordFilter";
-            this.leftPanelOpWordFilter.Size = new System.Drawing.Size(87, 29);
+            this.leftPanelOpWordFilter.Size = new System.Drawing.Size(85, 29);
             this.leftPanelOpWordFilter.TabIndex = 32;
             this.leftPanelOpWordFilter.Text = "关键词过滤";
             this.leftPanelOpWordFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -518,7 +518,7 @@
             this.leftPanelOpGroup.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpGroup.Location = new System.Drawing.Point(127, 146);
             this.leftPanelOpGroup.Name = "leftPanelOpGroup";
-            this.leftPanelOpGroup.Size = new System.Drawing.Size(75, 29);
+            this.leftPanelOpGroup.Size = new System.Drawing.Size(85, 29);
             this.leftPanelOpGroup.TabIndex = 31;
             this.leftPanelOpGroup.Text = "分组算子";
             this.leftPanelOpGroup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -535,7 +535,7 @@
             this.leftPanelOpSort.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpSort.Location = new System.Drawing.Point(127, 110);
             this.leftPanelOpSort.Name = "leftPanelOpSort";
-            this.leftPanelOpSort.Size = new System.Drawing.Size(74, 30);
+            this.leftPanelOpSort.Size = new System.Drawing.Size(85, 29);
             this.leftPanelOpSort.TabIndex = 30;
             this.leftPanelOpSort.Text = "排序算子";
             this.leftPanelOpSort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -550,9 +550,9 @@
             this.leftPanelOpFreq.FlatAppearance.BorderSize = 0;
             this.leftPanelOpFreq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpFreq.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpFreq.Location = new System.Drawing.Point(127, 74);
+            this.leftPanelOpFreq.Location = new System.Drawing.Point(127, 75);
             this.leftPanelOpFreq.Name = "leftPanelOpFreq";
-            this.leftPanelOpFreq.Size = new System.Drawing.Size(74, 30);
+            this.leftPanelOpFreq.Size = new System.Drawing.Size(85, 29);
             this.leftPanelOpFreq.TabIndex = 29;
             this.leftPanelOpFreq.Text = "频率算子";
             this.leftPanelOpFreq.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -569,7 +569,7 @@
             this.leftPanelOpAvg.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpAvg.Location = new System.Drawing.Point(127, 40);
             this.leftPanelOpAvg.Name = "leftPanelOpAvg";
-            this.leftPanelOpAvg.Size = new System.Drawing.Size(74, 30);
+            this.leftPanelOpAvg.Size = new System.Drawing.Size(85, 29);
             this.leftPanelOpAvg.TabIndex = 25;
             this.leftPanelOpAvg.Text = "取平均值";
             this.leftPanelOpAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

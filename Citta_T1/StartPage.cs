@@ -19,7 +19,6 @@ namespace C2
     {
         RecentFilesView recentFilesView1;
         BarChart barChart;
-        HorizontalBar horizontalBar;
         public StartPage()
         {
             Text = "Start";

@@ -164,9 +164,6 @@
     <Compile Include="Controls\DataCharts\BarChart.Designer.cs">
       <DependentUpon>BarChart.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataCharts\HorizontalBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Dialogs\OperatorViews\PythonOperatorHelper.cs">
       <SubType>Form</SubType>
     </Compile>
