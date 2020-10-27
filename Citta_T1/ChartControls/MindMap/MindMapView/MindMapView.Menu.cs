@@ -11,6 +11,7 @@ using C2.Model.MindMaps;
 using C2.Model.Styles;
 using C2.Model.Widgets;
 using System.Collections.Generic;
+using C2.Globalization;
 
 namespace C2.Controls.MapViews
 {
@@ -108,10 +109,10 @@ namespace C2.Controls.MapViews
                 MenuGetChart,
                 MenuDelete});
 
-                MenuViewData.Text = "查看数据";
+                MenuViewData.Text = Lang._("ViewData");
                 MenuViewData.Tag = dataItem;
-                MenuGetChart.Text = "生成图表";
-                MenuDelete.Text = "删除";
+                MenuGetChart.Text = Lang._("GetChart");
+                MenuDelete.Text = Lang._("Delete");
                 MenuDelete.Tag = dataItem;
                 MenuViewData.Click += MenuViewData_Click;
                 MenuDelete.Click += MenuDelete_Click;
