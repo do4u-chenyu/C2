@@ -164,9 +164,6 @@
     <Compile Include="Controls\DataCharts\BarChart.Designer.cs">
       <DependentUpon>BarChart.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataCharts\HorizontalBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Dialogs\OperatorViews\PythonOperatorHelper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2117,12 +2114,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
