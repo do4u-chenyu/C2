@@ -68,7 +68,7 @@ namespace C2.Controls.Common
             {
                 //TODO
                 //dtw.选中数据源;
-                DataItem d1 = new DataItem("d:\file1.txt", "file1", "\t", "UTF8", "datasource");
+                DataItem d1 = new DataItem("d:\\1.txt","1",'\t',Utils.OpUtil.Encoding.UTF8,Utils.OpUtil.ExtType.Text);
                 SelectedDataSource = d1;
                 this.dataSourceCombo.Text = d1.FileName;
             }
@@ -77,10 +77,14 @@ namespace C2.Controls.Common
         private void SetComboDataSource()
         {
             //TODO
-            //数据大纲，父类所有数据源
+            //数据大纲，父类所有数据源,暂用固定列表模拟
             List<DataItem> di = new List<DataItem>();
-            DataItem d1 = new DataItem("d:\file1.txt", "file1", "\t", "UTF8", "datasource");
-            DataItem d2 = new DataItem("d:\file2.txt", "file2", "\t", "UTF8", "datasource");
+            DataItem d1 = new DataItem("d:\\2.txt", "2", '\t', Utils.OpUtil.Encoding.UTF8, Utils.OpUtil.ExtType.Text);
+            DataItem d2 = new DataItem("d:\\1.txt", "1", '\t', Utils.OpUtil.Encoding.UTF8, Utils.OpUtil.ExtType.Text);
+            di.Add(d1);
+            di.Add(d2);
+
+
             this.dataSourceCombo.Items.Clear();
             foreach(DataItem dataItem in di)
             {
