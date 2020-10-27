@@ -1,6 +1,7 @@
 ﻿using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
+using C2.OperatorViews;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -122,7 +123,20 @@ namespace C2.Controls.Common
             {
                 MessageBox.Show("未添加算子,请添加后再配置");
                 return;
-            }  
+            }
+
+            switch (SelectedOperator)
+            {
+                case "最大值":
+                    //new MaxOperatorView(SelectedTopic.FindWidget<OperatorWidget>()).ShowDialog();
+                    break;
+                case "排序":
+                    //new SortOperatorView(SelectedTopic.FindWidget<OperatorWidget>()).ShowDialog();
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         private void dataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)

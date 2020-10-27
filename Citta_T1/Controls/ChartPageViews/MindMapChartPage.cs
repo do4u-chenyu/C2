@@ -641,17 +641,17 @@ namespace C2.ChartPageView
 
         void MenuAddMaxOp_Click(object sender, EventArgs e)
         {
-            mindMapView1.AddOperator("max");
+            mindMapView1.AddOperator(Lang._("max"));
         }
 
         void MenuAddSortOp_Click(object sender, EventArgs e)
         {
-            mindMapView1.AddOperator("sort");
+            mindMapView1.AddOperator(Lang._("sort"));
         }
 
         void MenuAddModelOp_Click(object sender, EventArgs e)
         {
-            mindMapView1.AddOperator("model");
+            mindMapView1.AddOperator(Lang._("model"));
         }
 
 
