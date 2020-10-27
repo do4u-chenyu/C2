@@ -72,19 +72,52 @@ namespace C2.Controls.MapViews
 
         void MenuDelete_Click(object sender, EventArgs e)
         {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            // 剩余最后一个菜单项，删除数据源挂件
+            if (dtw.DataItems.Count == 1)
+                Delete(new ChartObject[] { dtw });
+            else
+                dtw.DataItems.Remove(hitItem);
+        }
+        void DSWidgetMenuDelete_Click(object sender, EventArgs e)
+        {
             Delete(new ChartObject[] { opw });
         }
-
+        void MenuViewData_Click(object sender, EventArgs e)
+        {
+    
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            if (hitItem != null)
+                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
+        }
 
 
         public void CreateDataSourceMenu()
         {
             dtw = HoverObject.Widget as DataSourceWidget;
+            
+            foreach (DataItem dataItem in dtw.DataItems)
+            {
+                ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
+                ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
+                ToolStripMenuItem MenuGetChart = new ToolStripMenuItem();
+                ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
+                MenuOpenDataSource.Text = dataItem.FileName;
+                MenuOpenDataSource.DropDownItems.AddRange(new ToolStripMenuItem[] {
+                MenuViewData,
+                MenuGetChart,
+                MenuDelete});
 
-            ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
-            MenuOpenDataSource.Text = "Data";
-
-            WidgetMenuStrip.Items.Add(MenuOpenDataSource);
+                MenuViewData.Text = "查看数据";
+                MenuViewData.Tag = dataItem;
+                MenuGetChart.Text = "生成图表";
+                MenuDelete.Text = "删除";
+                MenuDelete.Tag = dataItem;
+                MenuViewData.Click += MenuViewData_Click;
+                MenuDelete.Click += MenuDelete_Click;
+                WidgetMenuStrip.Items.Add(MenuOpenDataSource);
+            }
+            
         }
 
         public void CreateResultMenu()

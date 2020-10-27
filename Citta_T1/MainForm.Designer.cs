@@ -174,7 +174,7 @@ namespace C2
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(79, 30);
+            this.usernamelabel.Size = new System.Drawing.Size(58, 22);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "李警官";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
@@ -186,7 +186,7 @@ namespace C2
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(388, 50);
+            this.label1.Size = new System.Drawing.Size(282, 36);
             this.label1.TabIndex = 0;
             this.label1.Text = "IAO解决方案建模平台";
             // 
@@ -375,7 +375,7 @@ namespace C2
             this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dragLineControl.Location = new System.Drawing.Point(394, 36);
-            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
             this.dragLineControl.Name = "dragLineControl";
             this.dragLineControl.Size = new System.Drawing.Size(368, 3);
             this.dragLineControl.TabIndex = 3;
@@ -417,7 +417,7 @@ namespace C2
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.logLabel.Location = new System.Drawing.Point(120, 4);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(127, 36);
+            this.logLabel.Size = new System.Drawing.Size(92, 27);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
@@ -429,7 +429,7 @@ namespace C2
             this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.pyControlLabel.Location = new System.Drawing.Point(226, 4);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(99, 36);
+            this.pyControlLabel.Size = new System.Drawing.Size(72, 27);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
@@ -441,7 +441,7 @@ namespace C2
             this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.previewLabel.Location = new System.Drawing.Point(14, 4);
             this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(127, 36);
+            this.previewLabel.Size = new System.Drawing.Size(92, 27);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
@@ -697,8 +697,8 @@ namespace C2
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.remarkControl);
             this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
-            this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
+            this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.BaseWorkSpace.Name = "BaseWorkSpace";
@@ -710,11 +710,11 @@ namespace C2
             this.remarkControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.remarkControl.BackColor = System.Drawing.Color.Transparent;
             this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.remarkControl.Location = new System.Drawing.Point(556, 50);
+            this.remarkControl.Location = new System.Drawing.Point(518, 50);
             this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
             this.remarkControl.Name = "remarkControl";
             this.remarkControl.RemarkDescription = "";
-            this.remarkControl.Size = new System.Drawing.Size(120, 120);
+            this.remarkControl.Size = new System.Drawing.Size(161, 157);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
             // 
@@ -773,7 +773,7 @@ namespace C2
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.operatorControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.operatorControl.Location = new System.Drawing.Point(687, 106);
-            this.operatorControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
             this.operatorControl.Name = "operatorControl";
             this.operatorControl.Size = new System.Drawing.Size(210, 320);
             this.operatorControl.TabIndex = 0;
@@ -786,7 +786,7 @@ namespace C2
             this.progressBarLabel.ForeColor = System.Drawing.Color.Black;
             this.progressBarLabel.Location = new System.Drawing.Point(953, 245);
             this.progressBarLabel.Name = "progressBarLabel";
-            this.progressBarLabel.Size = new System.Drawing.Size(31, 20);
+            this.progressBarLabel.Size = new System.Drawing.Size(24, 16);
             this.progressBarLabel.TabIndex = 32;
             this.progressBarLabel.Text = "0%";
             this.progressBarLabel.Visible = false;
@@ -902,7 +902,7 @@ namespace C2
             // 
             this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
-            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
             this.modelTitlePanel.Name = "modelTitlePanel";
             this.modelTitlePanel.Size = new System.Drawing.Size(910, 32);
             this.modelTitlePanel.TabIndex = 0;

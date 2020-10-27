@@ -7,6 +7,7 @@ namespace C2.Controls.Flow
 {
     public partial class RightHideButton : UserControl
     {
+        bool isActive = false;
         public RightHideButton()
         {
             InitializeComponent();
@@ -26,7 +27,16 @@ namespace C2.Controls.Flow
 
         private void RightHideButton_Click(object sender, EventArgs e)
         {
-            FlowControlHidden();
+            if (isActive)
+            {
+                GetOperatorControlHidden();
+                isActive = false;
+            }
+            else
+            {
+                OperatorControlShow();
+                isActive = true;
+            }
         }
 
         private void Label1_MouseEnter(object sender, EventArgs e)
@@ -43,18 +53,37 @@ namespace C2.Controls.Flow
 
         private void Label1_Click(object sender, EventArgs e)
         {
-            FlowControlHidden();
+            if (isActive)
+            {
+                GetOperatorControlHidden();
+                isActive = false;
+            }
+            else
+            {
+                OperatorControlShow();
+                isActive = true;
+            }
         }
-        private void FlowControlHidden()
+        private void GetOperatorControlHidden()
         {
-            Global.GetFlowControl().Visible = false;
-            Global.GetFlowControl().SelectRemark = false;
-            Global.GetRemarkControl().Visible = false;
+            Global.GetOperatorControl().Visible = false;
+            //Global.GetOperatorControl().SelectRemark = false;
+            //Global.GetRemarkControl().Visible = false;
             Global.GetCurrentDocument().RemarkVisible = false;
             Global.GetCurrentDocument().FlowControlVisible = false;
-            Global.GetFlowControl().RemarkChange(false);
+            //Global.GetFlowControl().RemarkChange(false);
+
+        }
+        private void OperatorControlShow()
+        {
+            Global.GetOperatorControl().Visible = true;
+            Global.GetCurrentDocument().OperatorControlVisible = true;
 
         }
 
+        private void RightHideButton_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

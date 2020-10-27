@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="panel1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="remarkCtrPanel.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAJ8AAACeCAYAAAAsR9hFAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
-        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAX9SURBVHhe7dtdcxNVHMdx3osV
+        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAX9SURBVHhe7dtdcxNVHMdx3osV
         Xhn6CpQZAWe8FMXxwgvHcbjxgitufRHOkOYB8tCEbZJGSC2hKg9FhvJ3z6bbbk5OupsmzY8234tPmpM9
         u82cfNlNaHvFzACJ5Caq37fd5q3EsDXm7v/Vun38eGj7uY5bXyX87c+2xqbmH419/vZFx9Pf/+vEyTi8
         vy/d7ku378X3HX++P/al21e1f2i8u3XbevV7cVrh6FLJjdvBulftw/anU1+nbRwp+ngxh0dC2y4ii64l
