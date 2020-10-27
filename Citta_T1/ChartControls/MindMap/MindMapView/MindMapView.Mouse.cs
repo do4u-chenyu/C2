@@ -134,19 +134,40 @@ namespace C2.Controls.MapViews
         {
             base.OnChartDragDrop(e);
             // 数据源的信息
-            WidgetDataSourceInfo dataSourceInfo = new WidgetDataSourceInfo()
-            { Path = e.Data.GetData("Path").ToString(),
-                Separator = (char)e.Data.GetData("Separator"),
-                Encoding = (OpUtil.Encoding)e.Data.GetData("Encoding"),
-                ExtType = (OpUtil.ExtType)e.Data.GetData("ExtType")
-            };           
+            string fileName = Path.GetFileName(e.Data.GetData("Path").ToString());
+            DataItem dataItem = new DataItem(
+            e.Data.GetData("Path").ToString(),
+                fileName,
+                (char)e.Data.GetData("Separator"),
+                (OpUtil.Encoding)e.Data.GetData("Encoding"),
+                (OpUtil.ExtType)e.Data.GetData("ExtType")
+            );
             // 获取topic
             Point pointToClient = this.ChartBox.PointToClient(new Point(e.X, e.Y));
             var htr = HitTest(pointToClient.X, pointToClient.Y);
-            if (htr != HitTestResult.Empty)
-            {
 
+            if (htr == HitTestResult.Empty)
+                return;
+            bool noDSWidget = true;
+            foreach (Widget widget in htr.Topic.Widgets)
+            {
+                if (widget is DataSourceWidget)
+                {
+                    noDSWidget = false;
+                    (widget as DataSourceWidget).DataItems.Add(dataItem);
+                    break; 
+                }
+                   
+              
             }
+            if (noDSWidget)
+            {
+                Topic[] hitTopic = new Topic[] { htr.Topic };
+                AddDataSource(hitTopic,dataItem);
+            }
+
+           
+
         }
         protected override void OnChartMouseDown(MouseEventArgs e)
         {
