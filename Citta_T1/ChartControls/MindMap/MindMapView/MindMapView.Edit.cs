@@ -134,7 +134,13 @@ namespace C2.Controls.MapViews
                 AddWidget(DataSourceWidget.TypeID, template, false);
             }
         }
-
+        public void AddDataSource(Topic[] hitTopic,DataItem dataItem)
+        { 
+            var template = new DataSourceWidget();
+            template.DataItems.Add(dataItem);
+            AddWidgetCommand command = new AddWidgetCommand(hitTopic, DataSourceWidget.TypeID, template);
+            ExecuteCommand(command);
+        }
         public void AddResult()
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)

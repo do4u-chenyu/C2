@@ -54,6 +54,7 @@
             this.customOPButton1.TabIndex = 20;
             this.customOPButton1.Text = "AI实践";
             this.customOPButton1.UseVisualStyleBackColor = true;
+            this.customOPButton1.Click += new System.EventHandler(this.customOPButton1_Click);
             this.customOPButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FlowChartControl_MouseDown);
             // 
             // pictureBox2

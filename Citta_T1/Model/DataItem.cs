@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,14 @@ namespace C2.Model
     {
         string filePath;
         string fileName;
-        string fileSep;
-        string fileEncoding;
-        string fileType;
+        char fileSep;
+        OpUtil.Encoding fileEncoding;
+        OpUtil.ExtType fileType;
         public DataItem()
         {
 
         }
-        public DataItem(string filePath,string fileName,string fileSep,string fileEncoding,string fileType)
+        public DataItem(string filePath,string fileName,char fileSep, OpUtil.Encoding fileEncoding, OpUtil.ExtType fileType)
         {
             this.filePath = filePath;
             this.fileName = fileName;
@@ -27,8 +28,8 @@ namespace C2.Model
         }
         public string FilePath { get => filePath; set => filePath = value; }
         public string FileName { get => fileName; set => fileName = value; }
-        public string FileSep { get => fileSep; set => fileSep = value; }
-        public string FileEncoding { get => fileEncoding; set => fileEncoding = value; }
-        public string FileType { get => fileType; set => fileType = value; }
+        public char FileSep { get => fileSep; set => fileSep = value; }
+        public OpUtil.Encoding FileEncoding { get => fileEncoding; set => fileEncoding = value; }
+        public OpUtil.ExtType FileType { get => fileType; set => fileType = value; }
     }
 }

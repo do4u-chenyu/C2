@@ -33,6 +33,7 @@ using C2.Controls.OS;
 using C2.Core.Exports;
 using C2.Dialogs;
 using C2.Core.Win32Apis;
+using C2.Model;
 #endregion
 
 namespace C2
@@ -111,6 +112,7 @@ namespace C2
             Global.SetModelDocumentDao(this.modelDocumentDao);
             Global.SetCanvasPanel(this.canvasPanel);
             Global.SetFlowControl(this.flowControl);
+            Global.SetOperatorControl(this.operatorControl);
             Global.SetMyModelControl(this.myModelControl);
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetRemarkControl(this.remarkControl);
@@ -288,7 +290,7 @@ namespace C2
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
             this.flowControl.Location     = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 35);
             this.operatorControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 90);
-            this.remarkControl.Location   = new Point(this.canvasPanel.Width - 200 - this.flowControl.Width, this.flowControl.Height );
+            this.remarkControl.Location   = new Point(this.canvasPanel.Width - 235 - this.flowControl.Width, this.flowControl.Height - 15);
             this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 35);
             this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 35 + this.rightHideButton.Width + 10);
             
@@ -461,7 +463,17 @@ namespace C2
             this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
             this.ShowBottomPreview();
         }
-
+        public void PreViewDataByFullFilePath(DataItem dataItem, bool isForceRead = false)
+        {
+            if (!System.IO.File.Exists(dataItem.FilePath))
+            {
+                MessageBox.Show("该数据文件不存在");
+                return;
+            }
+            this.ShowBottomPanel();
+            this.bottomPreview.PreViewDataByFullFilePath(dataItem.FilePath, dataItem.FileSep, dataItem.FileType, dataItem.FileEncoding, isForceRead);
+            this.ShowBottomPreview();
+        }
         private void MainForm_Load(object sender, EventArgs e)
         {
             //加载文件及数据源

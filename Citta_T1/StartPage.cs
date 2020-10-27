@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using C2.Configuration;
 using C2.Controls;
+using C2.Controls.DataCharts;
 using C2.Core;
 using C2.Globalization;
 
@@ -17,7 +18,8 @@ namespace C2
     class StartPage : BaseForm
     {
         RecentFilesView recentFilesView1;
-
+        BarChart barChart;
+        PieChart PieChart;
         public StartPage()
         {
             Text = "Start";
@@ -30,21 +32,38 @@ namespace C2
         void InitializeComponent()
         {
             this.recentFilesView1 = new C2.Controls.RecentFilesView();
+            
             this.SuspendLayout();
             // 
             // recentFilesView1
             // 
+            this.recentFilesView1.ActiveCellBackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.recentFilesView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.recentFilesView1.CellBackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.recentFilesView1.CellSpace = new System.Drawing.Size(16, 100);
             this.recentFilesView1.Dimension = new System.Drawing.Size(4, 3);
             this.recentFilesView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recentFilesView1.Location = new System.Drawing.Point(0, 0);
             this.recentFilesView1.Name = "recentFilesView1";
-            this.recentFilesView1.Size = new System.Drawing.Size(730, 462);
+            this.recentFilesView1.Size = new System.Drawing.Size(784, 462);
             this.recentFilesView1.TabIndex = 0;
+
+            //图表展现
+            string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
+            double[] y = new double[] { 541, 574, 345, 854, 684 };
+            this.barChart = new BarChart(x,y);
+            this.barChart.Location = new System.Drawing.Point(15, 15);
+            this.barChart.Size = new System.Drawing.Size(300, 231);
+            this.barChart.BackColor = Color.FromArgb(30, 56, 79);
+
+
+
             // 
             // StartPage
             // 
             this.ClientSize = new System.Drawing.Size(784, 462);
-            this.Controls.Add(this.recentFilesView1);
+            this.Controls.Add(this.barChart);
+            //this.Controls.Add(this.recentFilesView1);
             this.Name = "StartPage";
             this.ResumeLayout(false);
 
