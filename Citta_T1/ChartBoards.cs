@@ -19,10 +19,10 @@ namespace C2
     {
         string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
         double[] y = new double[] { 541, 574, 345, 854, 684 };
-        RecentFilesView recentFilesView1;
         BarChart barChart;
         PieChart pieChart;
         HorizontalBar3D horizontalBar3D;
+        RadarChart radarChart;
         public ChartBoards()
         {
             Text = "Start";
@@ -39,6 +39,7 @@ namespace C2
             this.barChart = new BarChart(x, y);
             this.pieChart = new PieChart(x, y);
             this.horizontalBar3D = new HorizontalBar3D(x, y);
+            this.radarChart = new RadarChart();
 
             // 
             // barChart
@@ -65,12 +66,21 @@ namespace C2
             this.horizontalBar3D.Size = new System.Drawing.Size(600, 231);
             this.horizontalBar3D.TabIndex = 1;
             // 
+            // radarChart
+            // 
+            this.radarChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
+            this.radarChart.Location = new System.Drawing.Point(15, 250);
+            this.radarChart.Name = "radarChart";
+            this.radarChart.Size = new System.Drawing.Size(600, 431);
+            this.radarChart.TabIndex = 1;
+            // 
             // ChartBoards
             // 
             this.ClientSize = new System.Drawing.Size(1598, 800);
             this.Controls.Add(this.barChart);
             this.Controls.Add(this.pieChart);
             this.Controls.Add(this.horizontalBar3D);
+            this.Controls.Add(this.radarChart);
             this.Name = "ChartBoards";
             this.ResumeLayout(false);
 

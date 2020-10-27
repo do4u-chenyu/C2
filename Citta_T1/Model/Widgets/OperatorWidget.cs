@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace C2.Model.Widgets
 {
-    class OperatorWidget : Widget, IRemark
+    public class OperatorWidget : Widget, IRemark
     {
         public const string TypeID = "OPERATOR";
 
@@ -15,6 +15,9 @@ namespace C2.Model.Widgets
         {
             DisplayIndex = 1;
         }
+
+        public string OpType { get; set; }
+        public DataItem DataSourceItem { get; set; }
 
         public override bool ResponseMouse
         {
