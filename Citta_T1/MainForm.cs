@@ -33,6 +33,7 @@ using C2.Controls.OS;
 using C2.Core.Exports;
 using C2.Dialogs;
 using C2.Core.Win32Apis;
+using C2.Model;
 #endregion
 
 namespace C2
@@ -462,7 +463,17 @@ namespace C2
             this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
             this.ShowBottomPreview();
         }
-
+        public void PreViewDataByFullFilePath(DataItem dataItem, bool isForceRead = false)
+        {
+            if (!System.IO.File.Exists(dataItem.FilePath))
+            {
+                MessageBox.Show("该数据文件不存在");
+                return;
+            }
+            this.ShowBottomPanel();
+            this.bottomPreview.PreViewDataByFullFilePath(dataItem.FilePath, dataItem.FileSep, dataItem.FileType, dataItem.FileEncoding, isForceRead);
+            this.ShowBottomPreview();
+        }
         private void MainForm_Load(object sender, EventArgs e)
         {
             //加载文件及数据源

@@ -11,6 +11,7 @@ using C2.Model.MindMaps;
 using C2.Model.Styles;
 using C2.Model.Widgets;
 using System.Collections.Generic;
+using C2.Globalization;
 
 namespace C2.Controls.MapViews
 {
@@ -72,9 +73,24 @@ namespace C2.Controls.MapViews
 
         void MenuDelete_Click(object sender, EventArgs e)
         {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            // 剩余最后一个菜单项，删除数据源挂件
+            if (dtw.DataItems.Count == 1)
+                Delete(new ChartObject[] { dtw });
+            else
+                dtw.DataItems.Remove(hitItem);
+        }
+        void DSWidgetMenuDelete_Click(object sender, EventArgs e)
+        {
             Delete(new ChartObject[] { opw });
         }
-
+        void MenuViewData_Click(object sender, EventArgs e)
+        {
+    
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            if (hitItem != null)
+                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
+        }
 
 
         public void CreateDataSourceMenu()
@@ -93,10 +109,13 @@ namespace C2.Controls.MapViews
                 MenuGetChart,
                 MenuDelete});
 
-                MenuViewData.Text = "查看数据";
-                MenuGetChart.Text = "生成图表";
-                MenuDelete.Text = "删除";
-
+                MenuViewData.Text = Lang._("ViewData");
+                MenuViewData.Tag = dataItem;
+                MenuGetChart.Text = Lang._("GetChart");
+                MenuDelete.Text = Lang._("Delete");
+                MenuDelete.Tag = dataItem;
+                MenuViewData.Click += MenuViewData_Click;
+                MenuDelete.Click += MenuDelete_Click;
                 WidgetMenuStrip.Items.Add(MenuOpenDataSource);
             }
             

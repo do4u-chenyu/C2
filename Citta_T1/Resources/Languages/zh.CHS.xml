@@ -379,5 +379,7 @@
     <item name="The content has changed, do you want to accept the changes?">内容已经发生改变, 是否确认修改?</item>
     <item name="Donation - Thanks for Your Generosity">捐助 - 感谢您的慷慨</item>
     <item name="WeChat">微信</item>
+    <item name="ViewData">查看数据</item>
+	<item name="GetChart">生成图表</item>
 	</words>
 </dictionary>
