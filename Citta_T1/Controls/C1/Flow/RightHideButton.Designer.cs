@@ -38,7 +38,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 19);
+            this.label1.Location = new System.Drawing.Point(11, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 16);
             this.label1.TabIndex = 0;
@@ -63,7 +63,7 @@
             this.DoubleBuffered = true;
             this.Name = "RightHideButton";
             this.Size = new System.Drawing.Size(55, 55);
-            this.toolTip1.SetToolTip(this, "隐藏浮动工具栏");
+            this.toolTip1.SetToolTip(this, "隐藏与显示算子工具栏");
             this.Load += new System.EventHandler(this.RightHideButton_Load);
             this.Click += new System.EventHandler(this.RightHideButton_Click);
             this.MouseEnter += new System.EventHandler(this.RightHideButton_MouseEnter);
