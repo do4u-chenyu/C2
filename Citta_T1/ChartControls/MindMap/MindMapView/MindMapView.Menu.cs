@@ -80,11 +80,26 @@ namespace C2.Controls.MapViews
         public void CreateDataSourceMenu()
         {
             dtw = HoverObject.Widget as DataSourceWidget;
+            
+            foreach (DataItem dataItem in dtw.DataItems)
+            {
+                ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
+                ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
+                ToolStripMenuItem MenuGetChart = new ToolStripMenuItem();
+                ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
+                MenuOpenDataSource.Text = dataItem.FileName;
+                MenuOpenDataSource.DropDownItems.AddRange(new ToolStripMenuItem[] {
+                MenuViewData,
+                MenuGetChart,
+                MenuDelete});
 
-            ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
-            MenuOpenDataSource.Text = "Data";
+                MenuViewData.Text = "查看数据";
+                MenuGetChart.Text = "生成图表";
+                MenuDelete.Text = "删除";
 
-            WidgetMenuStrip.Items.Add(MenuOpenDataSource);
+                WidgetMenuStrip.Items.Add(MenuOpenDataSource);
+            }
+            
         }
 
         public void CreateResultMenu()

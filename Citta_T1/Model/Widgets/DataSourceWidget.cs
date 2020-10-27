@@ -9,20 +9,14 @@ using System.Xml;
 
 namespace C2.Model.Widgets
 {
-    class WidgetDataSourceInfo
-    {
-        public string Path { get; set; }
-        public char Separator { get; set; }
-        public  OpUtil.Encoding Encoding { get; set; }
-        public OpUtil.ExtType ExtType { get; set; }
-    }
     class DataSourceWidget : Widget, IRemark
     {
         public const string TypeID = "DATASOURCE";
-        public List<WidgetDataSourceInfo> ModelRelations { get; }
+        public List<DataItem> DataItems { get; set; }
         public DataSourceWidget()
         {
             DisplayIndex = 0;
+            DataItems = new List<DataItem>();
         }
 
         public override bool ResponseMouse
