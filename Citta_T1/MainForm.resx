@@ -327,9 +327,6 @@
         BGBW/Po+ynzOAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="leftFoldButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAcAAABkCAYAAABKMionAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -421,7 +418,7 @@
   <data name="flowControl.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAANEAAAAzCAIAAACG1HoxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAABq9JREFUeF7tnU1PFFkUhvs/8Uf0j6hb1gQJBojRiAmEhcSNH+wQF8pCJKiduCBq
+        vgAADr4B6kKxwAAABq9JREFUeF7tnU1PFFkUhvs/8Uf0j6hb1gQJBojRiAmEhcSNH+wQF8pCJKiduCBq
         /MAYCDg4PTPNzMSdIc7T9R6Ol6rqprqbrtmcJ7Fz77nnnq96qYaVjZ8F9vb2VldX5+fnp6enx4Ogf1DO
         zZs3V1ZWdnZ2TFUJpzT3/fv3u3fvXr9+/fHjx+/evdvf3/83CPoH5bx//359ff327dsLCwvtdtsUlvFL
         c2/evJmamnry5MnR0dE/QXBOPH/+HF1tbW2ZzlxzCG5ubu7Lly/mGATnx8HBAb+qbWxsSGwdzfGVihJD
