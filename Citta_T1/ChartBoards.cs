@@ -38,6 +38,7 @@ namespace C2
             double[] y = new double[] { 541, 574, 345, 854, 684 };
             this.barChart = new BarChart(x, y);
             this.pieChart = new PieChart(x, y);
+            this.horizontalBar3D = new HorizontalBar3D(x, y);
 
             // 
             // barChart
@@ -56,11 +57,20 @@ namespace C2
             this.pieChart.Size = new System.Drawing.Size(300, 231);
             this.pieChart.TabIndex = 1;
             // 
+            // horizontalBar3D
+            // 
+            this.horizontalBar3D.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
+            this.horizontalBar3D.Location = new System.Drawing.Point(630, 15);
+            this.horizontalBar3D.Name = "horizontalBar3D";
+            this.horizontalBar3D.Size = new System.Drawing.Size(600, 231);
+            this.horizontalBar3D.TabIndex = 1;
+            // 
             // ChartBoards
             // 
             this.ClientSize = new System.Drawing.Size(1598, 800);
             this.Controls.Add(this.barChart);
             this.Controls.Add(this.pieChart);
+            this.Controls.Add(this.horizontalBar3D);
             this.Name = "ChartBoards";
             this.ResumeLayout(false);
 

@@ -170,6 +170,12 @@
     <Compile Include="Controls\DataCharts\PieChart.Designer.cs">
       <DependentUpon>PieChart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataCharts\HorizontalBar3D.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataCharts\HorizontalBar3D.Designer.cs">
+      <DependentUpon>HorizontalBar3D.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\OperatorViews\PythonOperatorHelper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1258,6 +1264,9 @@
     <Compile Include="Utils\ZipUtil.cs" />
     <EmbeddedResource Include="Controls\DataCharts\BarChart.resx">
       <DependentUpon>BarChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataCharts\HorizontalBar3D.resx">
+      <DependentUpon>HorizontalBar3D.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\PieChart.resx">
       <DependentUpon>PieChart.cs</DependentUpon>
