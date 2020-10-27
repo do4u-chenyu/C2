@@ -117,11 +117,7 @@ namespace C2.Model.Widgets
             set { base.Text = value; }
         }
 
-        public virtual string OpType
-        {
-            get { return _OpType; }
-            set { _OpType = value; } 
-        }
+
 
         [DefaultValue(WidgetAlignment.Left), LocalDisplayName("Alignment"), LocalCategory("Layout")]
         public virtual WidgetAlignment Alignment

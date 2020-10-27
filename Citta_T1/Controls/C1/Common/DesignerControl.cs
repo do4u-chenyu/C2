@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using C2.Model;
+﻿using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace C2.Controls.Common
 {
     public partial class DesignerControl : UserControl
     {
         Topic _SelectedTopic;
-        DataItem _SelectedDataSource;
 
         public Topic SelectedTopic
         {
@@ -31,11 +23,9 @@ namespace C2.Controls.Common
             }
         }
 
-        public DataItem SelectedDataSource
-        {
-            get { return _SelectedDataSource; }
-            set { _SelectedDataSource = value; }
-        }
+        public DataItem SelectedDataSource { get; set; }
+        public string SelectedOperator { get; set; }
+        public List<DataItem> ComboDataSource { get; set; }
 
         private void OnSelectedTopicChanged()
         {
@@ -44,7 +34,7 @@ namespace C2.Controls.Common
                 this.topicName.Text = "未选中主题";
                 this.dataSourceCombo.Text = "";
                 this.dataSourceCombo.Items.Clear();
-                this.operatorName.Text = "无选择算子";
+                this.operatorName.Text = "";
             }
             else
             {
@@ -63,45 +53,86 @@ namespace C2.Controls.Common
 
         private void SetSelectedDataSource()
         {
-            DataSourceWidget dtw = SelectedTopic.FindWidget<DataSourceWidget>();
-            if (dtw != null)
+            OperatorWidget opw = SelectedTopic.FindWidget<OperatorWidget>();
+            if (opw != null)
             {
                 //TODO
                 //dtw.选中数据源;
-                DataItem d1 = new DataItem("d:\\1.txt","1",'\t',Utils.OpUtil.Encoding.UTF8,Utils.OpUtil.ExtType.Text);
-                SelectedDataSource = d1;
-                this.dataSourceCombo.Text = d1.FileName;
+                DataItem d1 = opw.DataSourceItem;
+                if (d1 != null)
+                {
+                    SelectedDataSource = d1;
+                    this.dataSourceCombo.Text = d1.FileName;
+                }
+                else
+                {
+                    SelectedDataSource = null;
+                    this.dataSourceCombo.Text = "请选择数据源";
+                }
             }
         }
 
         private void SetComboDataSource()
         {
+            this.dataSourceCombo.Items.Clear();
+
             //TODO
             //数据大纲，父类所有数据源,暂用固定列表模拟
-            List<DataItem> di = new List<DataItem>();
-            DataItem d1 = new DataItem("d:\\2.txt", "2", '\t', Utils.OpUtil.Encoding.UTF8, Utils.OpUtil.ExtType.Text);
-            DataItem d2 = new DataItem("d:\\1.txt", "1", '\t', Utils.OpUtil.Encoding.UTF8, Utils.OpUtil.ExtType.Text);
-            di.Add(d1);
-            di.Add(d2);
-
-
-            this.dataSourceCombo.Items.Clear();
-            foreach(DataItem dataItem in di)
+            DataSourceWidget dtw = SelectedTopic.FindWidget<DataSourceWidget>();
+            if (dtw != null)
             {
-                this.dataSourceCombo.Items.Add(dataItem.FileName);
+                List<DataItem> di = dtw.DataItems;
+                foreach (DataItem dataItem in di)
+                {
+                    this.dataSourceCombo.Items.Add(dataItem.FileName);
+                }
+                ComboDataSource = di;
             }
-            
+
         }
 
         private void SetSelectedOperator()
         {
             OperatorWidget opw = SelectedTopic.FindWidget<OperatorWidget>();
-            this.operatorName.Text = opw != null ? opw.OpType : "未添加算子";
+
+            this.operatorName.Text = opw != null ? opw.OpType : "";
+            SelectedOperator = opw != null ? opw.OpType : "";
         }
 
         public DesignerControl()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            if(this.topicName.Text == "未选中主题")
+            {
+                MessageBox.Show("未选中主题，请选中主题后再配置");
+                return;
+            }
+
+            if (SelectedDataSource == null)
+            {
+                MessageBox.Show("未选中数据源,请添加后再配置");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(SelectedOperator))
+            {
+                MessageBox.Show("未添加算子,请添加后再配置");
+                return;
+            }  
+        }
+
+        private void dataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            OperatorWidget opw = SelectedTopic.FindWidget<OperatorWidget>();
+
+            if (opw != null)
+            {
+                opw.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+            }
         }
     }
 }

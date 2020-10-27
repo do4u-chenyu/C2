@@ -62,13 +62,18 @@ namespace C2.Controls.MapViews
                 MenuPublic,
                 MenuDelete});
 
-            MenuDesign.Text = "修改";
-            MenuRunning.Text = "运行";
-            MenuPublic.Text = "发布";
-            MenuDelete.Text = "删除";
-            MenuDelete.Click += new System.EventHandler(MenuDelete_Click);
+            MenuDesign.Text = Lang._("Design");
+            MenuRunning.Text = Lang._("Running");
+            MenuPublic.Text = Lang._("Public");
+            MenuDelete.Text = Lang._("Delete");
+            MenuDelete.Click += new System.EventHandler(MenuDeleteOp_Click);
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
+        }
+
+        void MenuDeleteOp_Click(object sender, EventArgs e)
+        {
+            Delete(new ChartObject[] { opw });
         }
 
         void MenuDelete_Click(object sender, EventArgs e)

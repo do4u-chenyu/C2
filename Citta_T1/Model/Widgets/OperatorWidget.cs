@@ -16,6 +16,9 @@ namespace C2.Model.Widgets
             DisplayIndex = 1;
         }
 
+        public string OpType { get; set; }
+        public DataItem DataSourceItem { get; set; }
+
         public override bool ResponseMouse
         {
             get

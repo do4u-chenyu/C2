@@ -32,7 +32,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dataSourceCombo = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.changeOpButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.topicName = new System.Windows.Forms.Label();
             this.operatorName = new System.Windows.Forms.Label();
@@ -65,22 +65,24 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "算子配置";
             // 
-            // comboBox1
+            // dataSourceCombo
             // 
             this.dataSourceCombo.FormattingEnabled = true;
             this.dataSourceCombo.Location = new System.Drawing.Point(74, 54);
-            this.dataSourceCombo.Name = "comboBox1";
+            this.dataSourceCombo.Name = "dataSourceCombo";
             this.dataSourceCombo.Size = new System.Drawing.Size(99, 20);
             this.dataSourceCombo.TabIndex = 3;
+            this.dataSourceCombo.SelectedIndexChanged += new System.EventHandler(this.dataSourceCombo_SelectedIndexChanged);
             // 
-            // button1
+            // changeOpButton
             // 
-            this.button1.Location = new System.Drawing.Point(74, 130);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "修改";
-            this.button1.UseVisualStyleBackColor = true;
+            this.changeOpButton.Location = new System.Drawing.Point(74, 130);
+            this.changeOpButton.Name = "changeOpButton";
+            this.changeOpButton.Size = new System.Drawing.Size(98, 23);
+            this.changeOpButton.TabIndex = 5;
+            this.changeOpButton.Text = "修改";
+            this.changeOpButton.UseVisualStyleBackColor = true;
+            this.changeOpButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // label4
             // 
@@ -115,7 +117,7 @@
             this.Controls.Add(this.operatorName);
             this.Controls.Add(this.topicName);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.changeOpButton);
             this.Controls.Add(this.dataSourceCombo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -132,9 +134,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox dataSourceCombo;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox dataSourceCombo;
+        private System.Windows.Forms.Button changeOpButton;
         private System.Windows.Forms.Label topicName;
         private System.Windows.Forms.Label operatorName;
     }
