@@ -47,9 +47,9 @@
             // 
             this.movePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("movePictureBox.Image")));
-            this.movePictureBox.Location = new System.Drawing.Point(130, 7);
+            this.movePictureBox.Location = new System.Drawing.Point(130, 9);
             this.movePictureBox.Name = "movePictureBox";
-            this.movePictureBox.Size = new System.Drawing.Size(22, 22);
+            this.movePictureBox.Size = new System.Drawing.Size(21, 21);
             this.movePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.movePictureBox.TabIndex = 0;
             this.movePictureBox.TabStop = false;
@@ -64,7 +64,7 @@
             this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomUpPictureBox.Image")));
             this.zoomUpPictureBox.Location = new System.Drawing.Point(56, 9);
             this.zoomUpPictureBox.Name = "zoomUpPictureBox";
-            this.zoomUpPictureBox.Size = new System.Drawing.Size(22, 20);
+            this.zoomUpPictureBox.Size = new System.Drawing.Size(21, 21);
             this.zoomUpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.zoomUpPictureBox.TabIndex = 1;
             this.zoomUpPictureBox.TabStop = false;
@@ -80,7 +80,7 @@
             this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomDownPictureBox.Image")));
             this.zoomDownPictureBox.Location = new System.Drawing.Point(93, 9);
             this.zoomDownPictureBox.Name = "zoomDownPictureBox";
-            this.zoomDownPictureBox.Size = new System.Drawing.Size(22, 20);
+            this.zoomDownPictureBox.Size = new System.Drawing.Size(21, 21);
             this.zoomDownPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.zoomDownPictureBox.TabIndex = 2;
             this.zoomDownPictureBox.TabStop = false;
@@ -95,7 +95,7 @@
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
             this.framePictureBox.Location = new System.Drawing.Point(165, 9);
             this.framePictureBox.Name = "framePictureBox";
-            this.framePictureBox.Size = new System.Drawing.Size(24, 20);
+            this.framePictureBox.Size = new System.Drawing.Size(21, 21);
             this.framePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.framePictureBox.TabIndex = 4;
             this.framePictureBox.TabStop = false;
@@ -110,7 +110,7 @@
             this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
             this.remarkPictureBox.Location = new System.Drawing.Point(19, 9);
             this.remarkPictureBox.Name = "remarkPictureBox";
-            this.remarkPictureBox.Size = new System.Drawing.Size(22, 20);
+            this.remarkPictureBox.Size = new System.Drawing.Size(21, 21);
             this.remarkPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.remarkPictureBox.TabIndex = 3;
             this.remarkPictureBox.TabStop = false;
