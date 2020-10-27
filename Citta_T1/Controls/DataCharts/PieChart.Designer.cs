@@ -1,6 +1,6 @@
 ﻿namespace C2.Controls.DataCharts
 {
-    partial class BarChart
+    partial class PieChart
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -37,7 +37,7 @@
             // 
             // chart1
             // 
-            this.chart1.BackColor = System.Drawing.Color.Transparent;
+            this.chart1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -49,18 +49,16 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(400, 300);
+            this.chart1.Size = new System.Drawing.Size(150, 150);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
-            // BarChart
+            // PieChart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
             this.Controls.Add(this.chart1);
-            this.Name = "BarChart";
-            this.Size = new System.Drawing.Size(400, 300);
+            this.Name = "PieChart";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 

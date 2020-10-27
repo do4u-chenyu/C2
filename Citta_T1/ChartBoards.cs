@@ -15,15 +15,17 @@ using C2.Globalization;
 
 namespace C2
 {
-    class StartPage : BaseForm
+    class ChartBoards : BaseForm
     {
+        string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
+        double[] y = new double[] { 541, 574, 345, 854, 684 };
         RecentFilesView recentFilesView1;
         BarChart barChart;
-        PieChart PieChart;
-        public StartPage()
+        PieChart pieChart;
+        HorizontalBar3D horizontalBar3D;
+        public ChartBoards()
         {
             Text = "Start";
-
             InitializeComponent();
 
             AfterInitialize();
@@ -31,40 +33,35 @@ namespace C2
 
         void InitializeComponent()
         {
-            this.recentFilesView1 = new C2.Controls.RecentFilesView();
-            
             this.SuspendLayout();
-            // 
-            // recentFilesView1
-            // 
-            this.recentFilesView1.ActiveCellBackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.recentFilesView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.recentFilesView1.CellBackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.recentFilesView1.CellSpace = new System.Drawing.Size(16, 100);
-            this.recentFilesView1.Dimension = new System.Drawing.Size(4, 3);
-            this.recentFilesView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.recentFilesView1.Location = new System.Drawing.Point(0, 0);
-            this.recentFilesView1.Name = "recentFilesView1";
-            this.recentFilesView1.Size = new System.Drawing.Size(784, 462);
-            this.recentFilesView1.TabIndex = 0;
-
-            //图表展现
             string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
             double[] y = new double[] { 541, 574, 345, 854, 684 };
-            this.barChart = new BarChart(x,y);
+            this.barChart = new BarChart(x, y);
+            this.pieChart = new PieChart(x, y);
+
+            // 
+            // barChart
+            // 
+            this.barChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
             this.barChart.Location = new System.Drawing.Point(15, 15);
+            this.barChart.Name = "barChart";
             this.barChart.Size = new System.Drawing.Size(300, 231);
-            this.barChart.BackColor = Color.FromArgb(30, 56, 79);
-
-
-
+            this.barChart.TabIndex = 0;
             // 
-            // StartPage
+            // pieChart
             // 
-            this.ClientSize = new System.Drawing.Size(784, 462);
+            this.pieChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
+            this.pieChart.Location = new System.Drawing.Point(321, 15);
+            this.pieChart.Name = "pieChart";
+            this.pieChart.Size = new System.Drawing.Size(300, 231);
+            this.pieChart.TabIndex = 1;
+            // 
+            // ChartBoards
+            // 
+            this.ClientSize = new System.Drawing.Size(1598, 800);
             this.Controls.Add(this.barChart);
-            //this.Controls.Add(this.recentFilesView1);
-            this.Name = "StartPage";
+            this.Controls.Add(this.pieChart);
+            this.Name = "ChartBoards";
             this.ResumeLayout(false);
 
         }
