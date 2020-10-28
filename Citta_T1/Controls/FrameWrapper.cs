@@ -348,14 +348,14 @@ namespace C2.Controls
                 i = null;
                 return true;
             }
-            //if (this.canvasPanel.flowControl1.SelectFrame & staticImage != null)
-            //{
-            //    Bitmap i = new Bitmap(staticImage);
-            //    e.Graphics.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
-            //    i.Dispose();
-            //    i = null;
-            //    return true;
-            //}
+            if (Global.GetFlowControl().SelectFrame & staticImage != null)
+            {
+                Bitmap i = new Bitmap(staticImage);
+                e.Graphics.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
+                i.Dispose();
+                i = null;
+                return true;
+            }
             return false;
         }
         #endregion

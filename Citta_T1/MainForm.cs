@@ -54,8 +54,6 @@ namespace C2
         bool ImportMenusHasBuilded;
         StartPage startPage;
         #endregion
-        private bool isBottomViewPanelMinimum;
-        private bool isLeftViewPanelMinimum;
 
         private string userName;
         private C2.Dialogs.InputDataForm inputDataForm;
@@ -83,8 +81,6 @@ namespace C2
             this.inputDataForm = new Dialogs.InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
             this.createNewModelForm = new Dialogs.CreateNewModelForm();
-            this.isBottomViewPanelMinimum = false;
-            this.isLeftViewPanelMinimum = false;
 
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
@@ -97,18 +93,9 @@ namespace C2
             openFileDialog1 = new OpenFileDialog();
             this.NewDocument(false);
         }
-
-        private void InitializeMainFormEventHandler()
-        {
-            //// 新增文档事件
-            //this.modelTitlePanel.NewModelDocument += ModelTitlePanel_NewModelDocument;
-            //this.modelTitlePanel.ModelDocumentSwitch += ModelTitlePanel_DocumentSwitch;
-            //this.canvasPanel.NewElementEvent += NewDocumentOperator;
-            //this.remarkControl.RemarkChangeEvent += RemarkChange;
-        }
         private void InitializeGlobalVariable()
         {
-            //Global.SetMainForm(this);
+            Global.SetMainForm(this);
             //Global.SetModelTitlePanel(this.modelTitlePanel);
             //Global.SetModelDocumentDao(this.modelDocumentDao);
             //Global.SetCanvasPanel(this.canvasPanel);
@@ -128,10 +115,6 @@ namespace C2
             //this.modelDocumentDao.UpdateRemark(rc);
         }
 
-        private void ModelTitlePanel_NewModelDocument(string modelTitle)
-        {
-            //this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);
-        }
         public void SetDocumentDirty()
         {
             //// 已经为dirty了，就不需要再操作了，以提高性能
@@ -149,16 +132,7 @@ namespace C2
             //this.naviViewControl.UpdateNaviView();
         }
 
-        private void NewDocumentOperator(MoveBaseControl ct)
-        {
-            //ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
-            //SetDocumentDirty();
-            //if (ct is MoveDtControl || ct is MoveOpControl)
-            //{
-            //    BaseCommand cmd = new ElementAddCommand(me);
-            //    UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
-            //}
-        }
+
 
         public void SaveCurrentDocument()
         {
@@ -179,34 +153,6 @@ namespace C2
             //}
         }
 
-        private void ModelTitlePanel_DocumentSwitch(string modelTitle)
-        {
-            //this.modelDocumentDao.SwitchDocument(modelTitle);
-            //this.naviViewControl.UpdateNaviView();
-            //// 切换文档时，需要暂时关闭remark的TextChange事件
-            //this.remarkControl.RemarkChangeEvent -= RemarkChange;
-            //this.remarkControl.RemarkDescription = this.modelDocumentDao.RemarkDescription;
-            //this.remarkControl.RemarkChangeEvent += RemarkChange;
-            //// 切换文档时, 显示或隐藏备注控件
-            //if (Global.GetCurrentDocument().RemarkVisible)
-            //    this.remarkControl.Show();
-            //else
-            //    this.remarkControl.Hide();
-            //// 切换文档时，浮动工具栏的显示和隐藏
-            //if (Global.GetCurrentDocument().FlowControlVisible)
-            //    this.flowControl.Show();
-            //else
-            //    this.flowControl.Hide();
-            //// 切换文档时, 浮动框备注框选中状态切换
-            //Global.GetFlowControl().SelectRemark = Global.GetCurrentDocument().RemarkVisible;
-            //Global.GetFlowControl().RemarkChange(Global.GetFlowControl().SelectRemark);
-            //// 重绘所有Relation线
-            //this.canvasPanel.Invalidate(false);
-            ////切换文档时，更新运行按钮图标及进度条
-            //UpdateRunbuttonImageInfo();
-            ////切换文档时,更新撤回/重做按钮状态
-            //UpdateUndoRedoButton();
-        }
 
         private void UpdateUndoRedoButton()
         {
@@ -339,64 +285,6 @@ namespace C2
         }
 
 
-        private void PreviewLabel_Click(object sender, EventArgs e)
-        {
-            this.ShowBottomPanel();
-            this.ShowBottomPreview();
-        }
-
-        private void ShowBottomPreview()
-        {
-            //this.bottomLogControl.Visible = false;
-            //this.bottomPyConsole.Visible = false;
-            //this.bottomPreview.Visible = true;
-        }
-
-        private void PyControlLabel_Click(object sender, EventArgs e)
-        {
-            this.ShowBottomPanel();
-            this.ShowPyConsole();
-        }
-
-        private void ShowPyConsole()
-        {
-            //this.bottomPyConsole.Visible = true;
-            //this.bottomLogControl.Visible = false;
-            //this.bottomPreview.Visible = false;
-        }
-
-        private void LogLabel_Click(object sender, EventArgs e)
-        {
-            this.ShowBottomPanel();
-            this.ShowLogView();
-        }
-
-        private void ShowLogView()
-        {
-            //this.bottomLogControl.Visible = true;
-            //this.bottomPyConsole.Visible = false;
-            //this.bottomPreview.Visible = false;
-        }
-
-        private void ShowBottomPanel()
-        {
-            //if (this.isBottomViewPanelMinimum == true)
-            //{
-            //    this.isBottomViewPanelMinimum = false;
-            //    this.bottomViewPanel.Height = 280;
-            //    this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
-            //}
-            //InitializeControlsLocation();
-            //if (bottomViewPanel.Height == 280)
-            //{
-            //    this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
-            //}
-            //if (bottomViewPanel.Height == 40)
-            //{
-            //    this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
-            //}
-        }
-
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
             //log.Info("MinMaxPictureBox_Click");
@@ -456,26 +344,12 @@ namespace C2
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByFullFilePath(object sender, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
-        {
-            if (!System.IO.File.Exists(fullFilePath))
-            {
-                if (sender is MoveDtControl || sender is DataButton)
-                    MessageBox.Show("该数据文件不存在");
-                return;
-            }
-            //this.ShowBottomPanel();
-            //this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
-            //this.ShowBottomPreview();
-        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             //加载文件及数据源
             LoadDocuments();
             LoadDataSource();
-            InitializeMainFormEventHandler();
-
         }
         private void LoadDataSource()
         {
@@ -796,38 +670,6 @@ namespace C2
             //SaveCurrentDocument();
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //this.modelDocumentDao.SaveEndDocuments(this.userName);
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //foreach (ModelDocument md in this.modelDocumentDao.ModelDocuments)
-            //{
-            //    if (!md.Dirty)
-            //        continue;
-            //    DialogResult result = MessageBox.Show("有尚未保存的模型，是否保存后关闭？",
-            //                                   "保存", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            //    // 取消操作
-            //    if (result == DialogResult.Cancel)
-            //    {
-            //        e.Cancel = true;
-            //        return;
-            //    }
-
-            //    // 保存文件
-            //    if (result == DialogResult.Yes)
-            //    {
-            //        foreach (ModelDocument modelDocument in this.modelDocumentDao.ModelDocuments)
-            //            modelDocument.Save();
-            //        return;
-            //    }
-            //    // 不保存关闭文件
-            //    if (result == DialogResult.No)
-            //        return;
-            //}
-        }
 
         private void UsernameLabel_MouseEnter(object sender, EventArgs e)
         {
@@ -898,12 +740,12 @@ namespace C2
         
         private void MainForm_Deactivate(object sender, EventArgs e)
         {
-            if(Global.GetCanvasPanel().DragWrapper.StartDrag)
+            if(Global.GetCanvasPanel() != null && Global.GetCanvasPanel().DragWrapper.StartDrag)
             {
                 Global.GetCanvasPanel().DragWrapper.StartDrag = false;
                 Global.GetCanvasPanel().DragWrapper.ControlChange();
             }
-            if (Global.GetCanvasPanel().LeftButtonDown)
+            if (Global.GetCanvasPanel() != null && Global.GetCanvasPanel().LeftButtonDown)
                 Global.GetCanvasPanel().LeftButtonDown = false;
         }
         #region C2

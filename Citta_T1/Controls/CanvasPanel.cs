@@ -1,6 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Business.Model.World;
 using C2.Business.Schedule;
+using C2.Controls.Flow;
 using C2.Controls.Interface;
 using C2.Controls.Move;
 using C2.Controls.Move.Dt;
@@ -82,6 +83,7 @@ namespace C2.Controls
                 }
             }
         }
+        public NaviViewControl NaviViewControl { get { return this.naviViewControl; } }
         #region 右上角功能实现部分
         //画布右上角的放大与缩小功能实现
         public void ChangSize(bool isLarger, float factor = Global.Factor)
@@ -144,8 +146,7 @@ namespace C2.Controls
             int locY = Convert.ToInt32(e.Y / screenFactor);
             int dx = Convert.ToInt32(drgOffsetX / screenFactor);
             int dy = Convert.ToInt32(drgOffsetY / screenFactor);
-            Point location = this.Parent.PointToClient(new Point(locX - dx, locY - dy));
-            //Point location = Global.GetMainForm().PointToClient(new Point(locX - dx, locY - dy));
+            Point location = Global.GetMainForm().PointToClient(new Point(locX - dx, locY - dy));
             string text = e.Data.GetData("Text").ToString();
             int sizeLevel = this.Document.WorldMap.SizeLevel;
             if (type == ElementType.DataSource)
@@ -812,8 +813,7 @@ namespace C2.Controls
 
         private bool SelectFrame()
         {
-            //return Global.GetFlowControl().SelectFrame;
-            return false;
+            return Global.GetFlowControl().SelectFrame;
         }
 
         #region 关于引脚在画线状态的改变
