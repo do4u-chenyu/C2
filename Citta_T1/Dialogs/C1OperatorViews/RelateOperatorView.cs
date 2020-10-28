@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class RelateOperatorView : BaseOperatorView
+    public partial class RelateOperatorView : C1BaseOperatorView
     {
 
         public RelateOperatorView(MoveOpControl opControl) : base(opControl)

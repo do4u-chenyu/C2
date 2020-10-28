@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class UnionOperatorView : BaseOperatorView
+    public partial class UnionOperatorView : C1BaseOperatorView
     {
 
         public UnionOperatorView(MoveOpControl opControl) : base(opControl)
