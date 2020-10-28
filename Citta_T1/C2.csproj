@@ -186,6 +186,18 @@
     <Compile Include="Dialogs\Base\BaseOperatorView.Designer.cs">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Base\C1BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Base\C1BaseOperatorView.Designer.cs">
+      <DependentUpon>C1BaseOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Base\C2BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Base\C2BaseOperatorView.Designer.cs">
+      <DependentUpon>C2BaseOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\C1OperatorViews\AvgOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1397,6 +1409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\CustomOperatorView.resx">
       <DependentUpon>CustomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\SortOperatorView.resx">
+      <DependentUpon>SortOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckUpdate.resx">
       <DependentUpon>CheckUpdate.cs</DependentUpon>
