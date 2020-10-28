@@ -14,6 +14,7 @@ namespace C2.Model.Widgets
         public ResultWidget()
         {
             DisplayIndex = 2;
+            widgetIcon = Properties.Resources.result_w_icon;
         }
 
         public override bool ResponseMouse
@@ -48,18 +49,7 @@ namespace C2.Model.Widgets
             //文档持久化
         }
 
-        public override void Paint(RenderArgs e)
-        {
-            //base.Paint(e);
 
-            Rectangle rect = DisplayRectangle;
-            Image iconRemark = Properties.Resources.result_w_icon;
-            rect.X += Math.Max(0, (rect.Width - iconRemark.Width) / 2);
-            rect.Y += Math.Max(0, (rect.Height - iconRemark.Height) / 2);
-            rect.Width = Math.Min(rect.Width, iconRemark.Width);
-            rect.Height = Math.Min(rect.Height, iconRemark.Height);
-            e.Graphics.DrawImage(iconRemark, rect, 0, 0, iconRemark.Width, iconRemark.Height);
-        }
 
     }
 }
