@@ -7,7 +7,7 @@ namespace C2.Business.Schedule
     /// <summary>
     /// 最小处理单位，三元组类
     /// </summary> 
-    class Triple
+    public class Triple
     {
         public List<ModelElement> DataElements { get; }
         public ModelElement OperateElement { get; }

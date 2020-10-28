@@ -1,6 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Business.Model.World;
 using C2.Business.Schedule;
+using C2.Controls.Flow;
 using C2.Controls.Interface;
 using C2.Controls.Move;
 using C2.Controls.Move.Dt;
@@ -29,7 +30,7 @@ namespace C2.Controls
     }
     public partial class CanvasPanel : UserControl
     {
-        
+        ModelDocument _Document;
         private const int drgOffsetX = 380;
         private const int drgOffsetY = 100;
         private static bool leftButtonDown = false;
@@ -62,16 +63,27 @@ namespace C2.Controls
 
         public CanvasPanel()
         {
-            dragWrapper = new DragWrapper();
-            frameWrapper = new FrameWrapper();
+            dragWrapper = new DragWrapper(this);
+            frameWrapper = new FrameWrapper(this);
             InitializeComponent();
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             SetStyle(ControlStyles.ResizeRedraw, true);
-
         }
-
+        public ModelDocument Document
+        {
+            get { return _Document; }
+            set
+            {
+                if (_Document != value)
+                {
+                    ModelDocument old = _Document;
+                    _Document = value;
+                }
+            }
+        }
+        public NaviViewControl NaviViewControl { get { return this.naviViewControl; } }
         #region 右上角功能实现部分
         //画布右上角的放大与缩小功能实现
         public void ChangSize(bool isLarger, float factor = Global.Factor)
@@ -81,17 +93,17 @@ namespace C2.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);//禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);//双缓冲
             this.UpdateStyles();
-            int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
+            int sizeLevel = this.Document.WorldMap.SizeLevel;
             if (isLarger && sizeLevel <= 2)
             {
                 sizeLevel += 1;
 
-                Global.GetCurrentDocument().WorldMap.ScreenFactor *= factor;
-                foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
+                this.Document.WorldMap.ScreenFactor *= factor;
+                foreach (ModelElement me in this.Document.ModelElements)
                 {
                     me.InnerControl.ChangeSize(sizeLevel);
                 }
-                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                foreach (ModelRelation mr in this.Document.ModelRelations)
                 {
                     mr.ZoomIn();
                 }
@@ -100,18 +112,18 @@ namespace C2.Controls
             {
                 sizeLevel -= 1;
 
-                Global.GetCurrentDocument().WorldMap.ScreenFactor /= factor;
-                foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
+                this.Document.WorldMap.ScreenFactor /= factor;
+                foreach (ModelElement me in this.Document.ModelElements)
                 {
                     me.InnerControl.ChangeSize(sizeLevel);
                 }
-                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                foreach (ModelRelation mr in this.Document.ModelRelations)
                 {
                     mr.ZoomOut();
                 }
             }
 
-            Global.GetCurrentDocument().WorldMap.SizeLevel = sizeLevel;
+            this.Document.WorldMap.SizeLevel = sizeLevel;
             Global.GetNaviViewControl().UpdateNaviView();
             
         }
@@ -129,14 +141,19 @@ namespace C2.Controls
             {
                 return;
             }
+<<<<<<< HEAD:Citta_T1/Controls/C1/CanvasPanel.cs
             // C2不允许数据拖到Canvas
             if (type == ElementType.DataSource)
                 return;
             float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+=======
+            float screenFactor = this.Document.WorldMap.ScreenFactor;
+>>>>>>> origin/C2_issue_TaskBar_test:Citta_T1/Controls/CanvasPanel.cs
             int locX = Convert.ToInt32(e.X / screenFactor);
             int locY = Convert.ToInt32(e.Y / screenFactor);
             int dx = Convert.ToInt32(drgOffsetX / screenFactor);
             int dy = Convert.ToInt32(drgOffsetY / screenFactor);
+<<<<<<< HEAD:Citta_T1/Controls/C1/CanvasPanel.cs
             //Point location = this.Parent.PointToClient(new Point(locX - dx, locY - dy));
             Point location = Global.GetMainForm().PointToClient(new Point(locX - dx/2, locY - dy/2 - 30));
 
@@ -146,6 +163,21 @@ namespace C2.Controls
 
             if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, text, location);
+=======
+            Point location = Global.GetMainForm().PointToClient(new Point(locX - dx, locY - dy));
+            string text = e.Data.GetData("Text").ToString();
+            int sizeLevel = this.Document.WorldMap.SizeLevel;
+            if (type == ElementType.DataSource)
+            {
+                string path = e.Data.GetData("Path").ToString();
+                char separator = (char)e.Data.GetData("Separator");
+                OpUtil.Encoding encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
+                OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
+                AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
+            }
+            else if (type == ElementType.Operator)
+                AddNewOperator(sizeLevel, text,text, location);
+>>>>>>> origin/C2_issue_TaskBar_test:Citta_T1/Controls/CanvasPanel.cs
             
 
         }
@@ -155,12 +187,18 @@ namespace C2.Controls
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件
             Global.GetMainForm().BlankButtonFocus();
+<<<<<<< HEAD:Citta_T1/Controls/C1/CanvasPanel.cs
            //// ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
            // if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
            //     this.ClickOnLine(e);
+=======
+            ModelStatus currentModelStatus = this.Document.TaskManager.ModelStatus;
+            if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
+                this.ClickOnLine(e);
+>>>>>>> origin/C2_issue_TaskBar_test:Citta_T1/Controls/CanvasPanel.cs
             if (e.Button == MouseButtons.Right && !leftButtonDown)
             {
-                Point pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
+                Point pw = this.Document.WorldMap.ScreenToWorld(e.Location, false);
                 if (frameWrapper.MinBoundingBox.Contains(pw))
                 {
                     this.DelSelectControl.Show(this, e.Location);
@@ -179,7 +217,7 @@ namespace C2.Controls
                 else if (SelectFrame())
                     frameWrapper.FrameWrapper_MouseDown(e);
                 else if (SelectDrag())
-                    dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
+                    dragWrapper.DragDown(this.Size, this.Document.WorldMap.ScreenFactor, e);
             }
 
         }
@@ -210,7 +248,7 @@ namespace C2.Controls
                 return;
             // 控件移动
             else if (SelectDrag())
-                dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
+                dragWrapper.DragMove(this.Size, this.Document.WorldMap.ScreenFactor, e);
             // 绘制
             else if (cmd == ECommandType.PinDraw)
                 this.MouseMoveWhenPinDraw(e);
@@ -232,7 +270,7 @@ namespace C2.Controls
             // 是否在一轮循环中被多次修正？=> 只要控件不堆叠在一起，就不会出现被多个控件修正的情况
             // 只要在循环中被修正一次，就退出，防止被多个控件修正坐标
             // 遍历一遍之后如果没有被校正，则this.endC=null
-            foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
+            foreach (ModelElement modelEle in this.Document.ModelElements)
             {
                 MoveBaseControl con = modelEle.InnerControl;
                 if (modelEle.Type == ElementType.Operator && con != startC)
@@ -262,7 +300,7 @@ namespace C2.Controls
                 frameWrapper.FrameWrapper_MouseUp(e);
             // 拖拽处理
             else if (SelectDrag())
-                dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
+                dragWrapper.DragUp(this.Size, this.Document.WorldMap.ScreenFactor, e);
             // 非画线落点处理
             else if (cmd == ECommandType.PinDraw)
             {
@@ -303,7 +341,7 @@ namespace C2.Controls
         private bool IsValidModelRelation(ModelRelation mr)
         {
             // 合法的线有 Dt-Op Rs-Op
-            ModelDocument md = Global.GetCurrentDocument();
+            ModelDocument md = this.Document;
             ModelElement sMe = md.SearchElementByID(mr.StartID);
             ModelElement eMe = md.SearchElementByID(mr.EndID);
 
@@ -314,7 +352,7 @@ namespace C2.Controls
             /*
              * 点击规则见0511
              */
-            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            List<ModelRelation> mrs = this.Document.ModelRelations;
             int mrIndex = PointToLine(new PointF(e.X, e.Y));
 
             if (mrIndex == -1)
@@ -361,7 +399,7 @@ namespace C2.Controls
              * 1. 当前线（exceptLineIndex）状态取反
              * 2. 其他线状态置为false
              */
-            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            List<ModelRelation> mrs = this.Document.ModelRelations;
             for (int i = 0; i < mrs.Count; i++)
             {
                 ModelRelation mr = mrs[i];
@@ -389,8 +427,8 @@ namespace C2.Controls
 
         public void DeleteSelectedLinesByIndex()
         {
-            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
-            ModelDocument doc = Global.GetCurrentDocument();
+            List<ModelRelation> mrs = this.Document.ModelRelations;
+            ModelDocument doc = this.Document;
             MoveBaseControl startC;
             MoveBaseControl endC;
             foreach (int i in selectLineIndexs)
@@ -403,7 +441,7 @@ namespace C2.Controls
                 if (startC != null && endC != null)
                 {
                     BaseCommand delRelationCommand = new RelationDeleteCommand(startC.ID, endC.ID, mr.EndPin);
-                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), delRelationCommand);
+                    UndoRedoManager.GetInstance().PushCommand(this.Document, delRelationCommand);
                 }
             }
             selectLineIndexs.Clear();
@@ -412,7 +450,7 @@ namespace C2.Controls
         }
         public void DeleteRelationByCtrID(int startID, int endID, int pinIndex)
         {
-            ModelRelation mr = Global.GetCurrentDocument().ModelRelations.Find(t => t.StartID == startID && t.EndID == endID && t.EndPin == pinIndex);
+            ModelRelation mr = this.Document.ModelRelations.Find(t => t.StartID == startID && t.EndID == endID && t.EndPin == pinIndex);
             if (mr != null)
                 this.DeleteRelation(mr);
         }
@@ -421,7 +459,7 @@ namespace C2.Controls
             try
             {
                 //删除线配置逻辑
-                ModelDocument doc = Global.GetCurrentDocument();
+                ModelDocument doc = this.Document;
                 doc.StatusChangeWhenDeleteLine(mr.EndID); // 这里会改变算子状态
                 doc.RemoveModelRelation(mr);
                 //关联算子引脚自适应改变
@@ -444,7 +482,7 @@ namespace C2.Controls
         }
         public void AddNewRelationByCtrID(int startCID, int endCID, int pinIndex, bool isPushCmd=false)
         {
-            ModelDocument doc = Global.GetCurrentDocument();
+            ModelDocument doc = this.Document;
             MoveBaseControl startC = doc.SearchElementByID(startCID).InnerControl;
             MoveBaseControl endC = doc.SearchElementByID(endCID).InnerControl;
             this.AddNewRelationByCtr(startC, endC, pinIndex, isPushCmd);
@@ -463,7 +501,7 @@ namespace C2.Controls
             // 1. 关系不能重复
             // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
             // 3. 成环不能添加
-            ModelDocument cd = Global.GetCurrentDocument();
+            ModelDocument cd = this.Document;
             CyclicDetector cdt = new CyclicDetector(cd, mr);
             bool isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
             bool isCyclic = cdt.IsCyclic();
@@ -478,7 +516,7 @@ namespace C2.Controls
                 if (isPushCmd)
                 {
                     BaseCommand delRelationCommand = new RelationAddCommand(startC.ID, endC.ID, mr.EndPin);
-                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), delRelationCommand);
+                    UndoRedoManager.GetInstance().PushCommand(this.Document, delRelationCommand);
                 }
             }
             this.Invalidate();
@@ -495,7 +533,7 @@ namespace C2.Controls
             float dist;
             int i = 0;
             int index = 0;
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            foreach (ModelRelation mr in this.Document.ModelRelations)
             {
                 Bezier line = new Bezier(mr.StartP, mr.EndP);
                 dist = line.Distance(p);
@@ -520,7 +558,7 @@ namespace C2.Controls
             // canvasWrp.DrawBackgroud(r);
             // 将`需要重绘`IDrawable对象重绘在静态图上
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            List<ModelRelation> mrs = this.Document.ModelRelations;
             foreach (ModelRelation mr in mrs)
                 LineUtil.DrawBezier(g, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
             g.Dispose();
@@ -583,7 +621,7 @@ namespace C2.Controls
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(this.BackColor);
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            foreach (ModelRelation mr in this.Document.ModelRelations)
                 LineUtil.DrawBezier(g, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
             g.Dispose();
         }
@@ -601,21 +639,21 @@ namespace C2.Controls
         {
             
             // 拖动时的OnPaint处理
-            if (Global.GetCurrentDocument() == null)
+            if (this.Document == null)
                 return;
 
-            if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e))
+            if (dragWrapper.DragPaint(this.Size, this.Document.WorldMap.ScreenFactor, e))
                 return;
             if (frameWrapper.FramePaint(e))
                 return;
             //普通状态下算子的OnPaint处理
             //遍历当前文档所有line,然后画出来
-            ModelDocument doc = Global.GetCurrentDocument();
+            ModelDocument doc = this.Document;
             if (doc == null)
                 return;
             // 将当前文档所有的线全部画出来
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            Global.GetCurrentDocument().UpdateAllLines();
+            this.Document.UpdateAllLines();
             foreach (ModelRelation mr in doc.ModelRelations)
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
         }
@@ -629,7 +667,7 @@ namespace C2.Controls
         }
         public Tuple<List<ModelElement>, List<Tuple<int, int, int>>> DeleteSelectedElesByCtrID(IEnumerable<int> ids)
         {
-            ModelDocument doc = Global.GetCurrentDocument();
+            ModelDocument doc = this.Document;
             List<ModelElement> mes = new List<ModelElement>();
             List<Tuple<int, int, int>> mrs = new List<Tuple<int, int, int>>();
             List<ModelRelation> oriMrs = new List<ModelRelation>(doc.ModelRelations);
@@ -690,7 +728,7 @@ namespace C2.Controls
         public void UndoRedoAddSelectedEles(Dictionary<int, Point> eleWorldCordDict, List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
         {
             this.AddElesAndRels(mes, mrs);
-            WorldMap currWM = Global.GetCurrentDocument().WorldMap;
+            WorldMap currWM = this.Document.WorldMap;
             foreach (ModelElement me in mes)
                 me.Location = currWM.WorldToScreen(eleWorldCordDict[me.ID]);
         }
@@ -701,8 +739,8 @@ namespace C2.Controls
         public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict)
         {
             // 前后两个坐标的世界坐标原点一致时，使用该方法
-            ModelDocument doc = Global.GetCurrentDocument();
-            WorldMap curWorldMap = Global.GetCurrentDocument().WorldMap;
+            ModelDocument doc = this.Document;
+            WorldMap curWorldMap = this.Document.WorldMap;
             List<int> ids = new List<int>(idPtsDict.Keys);
             foreach (int id in ids)
             {
@@ -713,31 +751,31 @@ namespace C2.Controls
                 me.InnerControl.Location = curWorldMap.WorldToScreen(idPtsDict[id]);
                 idPtsDict[id] = curWorldMap.ScreenToWorld(meOldLocation, true);
             }
-            Global.GetCurrentDocument().UpdateAllLines();
+            this.Document.UpdateAllLines();
         }
         public void DeleteEle(ModelElement me)
         {
             this.DeleteCtr(me.InnerControl);
-            Global.GetCurrentDocument().DeleteModelElement(me);
+            this.Document.DeleteModelElement(me);
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();
         }
         public void AddEle(ModelElement me)
         {
             MoveBaseControl mbc = me.InnerControl as MoveBaseControl;
-            mbc.ChangeSize(Global.GetCurrentDocument().WorldMap.SizeLevel); 
+            mbc.ChangeSize(this.Document.WorldMap.SizeLevel); 
             this.AddCtr(mbc);
-            Global.GetCurrentDocument().AddModelElement(me);
+            this.Document.AddModelElement(me);
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();
         }
         public void AddEleWhenUndoRedo(ModelElement me)
         {
             MoveBaseControl mbc = me.InnerControl as MoveBaseControl;
-            mbc.ChangeSize(Global.GetCurrentDocument().WorldMap.SizeLevel);
-            mbc.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(mbc.WorldCord);
+            mbc.ChangeSize(this.Document.WorldMap.SizeLevel);
+            mbc.Location = this.Document.WorldMap.WorldToScreen(mbc.WorldCord);
             this.AddCtr(mbc);
-            Global.GetCurrentDocument().AddModelElement(me);
+            this.Document.AddModelElement(me);
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();
         }
@@ -788,7 +826,7 @@ namespace C2.Controls
         {
             // NewElementEvent中有压栈操作，可以UndoRedo
             this.Controls.Add(btn);
-            Global.GetCurrentDocument().WorldMap.WorldBoundControl(btn.Location, btn);
+            this.Document.WorldMap.WorldBoundControl(btn.Location, btn);
             Global.GetNaviViewControl().UpdateNaviView();
             NewElementEvent?.Invoke(btn);
         }
@@ -808,7 +846,7 @@ namespace C2.Controls
         private void RepaintStartcPin(MoveBaseControl startC, int id)
         {
             //int id = (startC as IMoveControl).GetID();
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            foreach (ModelRelation mr in this.Document.ModelRelations)
             {
                 if (mr.StartID == id)
                     return;

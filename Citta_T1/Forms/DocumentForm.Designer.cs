@@ -1,6 +1,8 @@
-﻿using C2.Controls.Common;
 
-namespace C2
+using C2.Controls.Common;
+
+namespace C2.Forms
+// origin/C2_issue_TaskBar_test:Citta_T1/Forms/DocumentForm.Designer.cs
 {
     public partial class DocumentForm
     {

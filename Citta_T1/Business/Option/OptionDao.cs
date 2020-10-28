@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace C2.Business.Option
 {
-    class OptionDao
+    public class OptionDao
     {
         // 情况1
         // LEFT_ME ----- StartID.MR.EndID ----- RIGHT_ME

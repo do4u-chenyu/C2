@@ -48,18 +48,6 @@ namespace C2
             this.flowChartControl = new C2.Controls.Left.FlowChartControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
-            this.bottomViewPanel = new System.Windows.Forms.Panel();
-            this.bottomPreview = new C2.Controls.Bottom.BottomPreviewControl();
-            this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
-            this.bottomPyConsole = new C2.Controls.Bottom.BottomConsoleControl();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.dragLineControl = new C2.Controls.Title.DragLineControl();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.logLabel = new System.Windows.Forms.Label();
-            this.pyControlLabel = new System.Windows.Forms.Label();
-            this.previewLabel = new System.Windows.Forms.Label();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.saveAllButton = new System.Windows.Forms.Button();
@@ -76,50 +64,21 @@ namespace C2
             this.connectOpButton = new System.Windows.Forms.Button();
             this.blankButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.leftFoldButton = new System.Windows.Forms.PictureBox();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.runButton = new System.Windows.Forms.Button();
-            this.ImportDataSourceButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
-            this.remarkControl = new C2.Controls.Flow.RemarkControl();
-            this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
-            this.canvasPanel = new C2.Controls.CanvasPanel();
-            this.currentModelFinLab = new System.Windows.Forms.Label();
-            this.operatorControl = new C2.Controls.Left.OperatorControl();
-            this.progressBarLabel = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.currentModelRunBackLab = new System.Windows.Forms.Label();
-            this.currentModelRunLab = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.flowControl = new C2.Controls.Flow.FlowControl();
-            this.rightHideButton = new C2.Controls.Flow.RightHideButton();
-            this.rightShowButton = new C2.Controls.Flow.RightShowButton();
-            this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
-            this.mdiWorkSpace1 = new C2.Controls.MdiWorkSpace();
+            this.mdiWorkSpace1 = new C2.WorkSpace.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.modelTitlePanel = new C2.Controls.Title.ModelTitlePanel();
+            this.taskBar1 = new C2.Controls.TaskBar();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
             this.leftToolBoxPanel.SuspendLayout();
-            this.bottomViewPanel.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
-            this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.panel7.SuspendLayout();
             this.BaseWorkSpace.SuspendLayout();
-            this.canvasPanel.SuspendLayout();
-            this.currentModelRunBackLab.SuspendLayout();
-            this.panel11.SuspendLayout();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -278,6 +237,17 @@ namespace C2
             this.mindMapModelControl.Size = new System.Drawing.Size(185, 558);
             this.mindMapModelControl.TabIndex = 0;
             this.mindMapModelControl.Visible = false;
+            // operatorControl
+            // 
+            this.operatorControl.AllowDrop = true;
+            this.operatorControl.BackColor = System.Drawing.Color.White;
+            this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.operatorControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.operatorControl.Location = new System.Drawing.Point(0, 0);
+            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
+            this.operatorControl.Name = "operatorControl";
+            this.operatorControl.Size = new System.Drawing.Size(185, 558);
+            this.operatorControl.TabIndex = 0;
             // 
             // flowChartControl
             // 
@@ -317,135 +287,6 @@ namespace C2
             this.myModelControl.Size = new System.Drawing.Size(185, 558);
             this.myModelControl.TabIndex = 0;
             this.myModelControl.Visible = false;
-            // 
-            // bottomViewPanel
-            // 
-            this.bottomViewPanel.Controls.Add(this.bottomPreview);
-            this.bottomViewPanel.Controls.Add(this.bottomLogControl);
-            this.bottomViewPanel.Controls.Add(this.bottomPyConsole);
-            this.bottomViewPanel.Controls.Add(this.panel4);
-            this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomViewPanel.Location = new System.Drawing.Point(323, 326);
-            this.bottomViewPanel.Name = "bottomViewPanel";
-            this.bottomViewPanel.Size = new System.Drawing.Size(910, 280);
-            this.bottomViewPanel.TabIndex = 3;
-            // 
-            // bottomPreview
-            // 
-            this.bottomPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomPreview.Location = new System.Drawing.Point(0, 39);
-            this.bottomPreview.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomPreview.Name = "bottomPreview";
-            this.bottomPreview.Size = new System.Drawing.Size(910, 241);
-            this.bottomPreview.TabIndex = 27;
-            // 
-            // bottomLogControl
-            // 
-            this.bottomLogControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomLogControl.Location = new System.Drawing.Point(0, 39);
-            this.bottomLogControl.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomLogControl.Name = "bottomLogControl";
-            this.bottomLogControl.Size = new System.Drawing.Size(910, 241);
-            this.bottomLogControl.TabIndex = 1;
-            // 
-            // bottomPyConsole
-            // 
-            this.bottomPyConsole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomPyConsole.Location = new System.Drawing.Point(0, 39);
-            this.bottomPyConsole.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomPyConsole.Name = "bottomPyConsole";
-            this.bottomPyConsole.Size = new System.Drawing.Size(910, 241);
-            this.bottomPyConsole.TabIndex = 2;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.panel4.Controls.Add(this.dragLineControl);
-            this.panel4.Controls.Add(this.panel9);
-            this.panel4.Controls.Add(this.panel8);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(910, 39);
-            this.panel4.TabIndex = 0;
-            // 
-            // dragLineControl
-            // 
-            this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
-            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
-            this.dragLineControl.Name = "dragLineControl";
-            this.dragLineControl.Size = new System.Drawing.Size(368, 3);
-            this.dragLineControl.TabIndex = 3;
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.minMaxPictureBox);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(762, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(148, 39);
-            this.panel9.TabIndex = 2;
-            // 
-            // minMaxPictureBox
-            // 
-            this.minMaxPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("minMaxPictureBox.Image")));
-            this.minMaxPictureBox.Location = new System.Drawing.Point(115, 12);
-            this.minMaxPictureBox.Name = "minMaxPictureBox";
-            this.minMaxPictureBox.Size = new System.Drawing.Size(25, 24);
-            this.minMaxPictureBox.TabIndex = 1;
-            this.minMaxPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
-            this.minMaxPictureBox.Click += new System.EventHandler(this.MinMaxPictureBox_Click);
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.logLabel);
-            this.panel8.Controls.Add(this.pyControlLabel);
-            this.panel8.Controls.Add(this.previewLabel);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(0, 0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(394, 39);
-            this.panel8.TabIndex = 0;
-            // 
-            // logLabel
-            // 
-            this.logLabel.AutoSize = true;
-            this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.logLabel.Location = new System.Drawing.Point(120, 4);
-            this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(92, 27);
-            this.logLabel.TabIndex = 3;
-            this.logLabel.Text = "运行日志";
-            this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
-            this.logLabel.Click += new System.EventHandler(this.LogLabel_Click);
-            // 
-            // pyControlLabel
-            // 
-            this.pyControlLabel.AutoSize = true;
-            this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.pyControlLabel.Location = new System.Drawing.Point(226, 4);
-            this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(72, 27);
-            this.pyControlLabel.TabIndex = 2;
-            this.pyControlLabel.Text = "控制台";
-            this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
-            this.pyControlLabel.Click += new System.EventHandler(this.PyControlLabel_Click);
-            // 
-            // previewLabel
-            // 
-            this.previewLabel.AutoSize = true;
-            this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.previewLabel.Location = new System.Drawing.Point(14, 4);
-            this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(92, 27);
-            this.previewLabel.TabIndex = 0;
-            this.previewLabel.Text = "数据预览";
-            this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
-            this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
             // 
             // commonPanel
             // 
@@ -590,57 +431,6 @@ namespace C2
             this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
-            // resetButton
-            // 
-            this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.resetButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.resetButton.FlatAppearance.BorderSize = 0;
-            this.resetButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.resetButton.Image = global::C2.Properties.Resources.reset;
-            this.resetButton.Location = new System.Drawing.Point(507, 354);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(52, 53);
-            this.resetButton.TabIndex = 21;
-            this.toolTip1.SetToolTip(this.resetButton, "清空模型运算结果,让模型可以重新运算");
-            this.resetButton.UseVisualStyleBackColor = true;
-            // 
-            // stopButton
-            // 
-            this.stopButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.stopButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.stopButton.FlatAppearance.BorderSize = 0;
-            this.stopButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.stopButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
-            this.stopButton.Location = new System.Drawing.Point(450, 354);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(52, 53);
-            this.stopButton.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.stopButton, "停止调试当前模型");
-            this.stopButton.UseVisualStyleBackColor = true;
-            // 
-            // runButton
-            // 
-            this.runButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.runButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.runButton.FlatAppearance.BorderSize = 0;
-            this.runButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.runButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.runButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
-            this.runButton.Location = new System.Drawing.Point(398, 354);
-            this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(52, 53);
-            this.runButton.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
-            this.runButton.UseVisualStyleBackColor = true;
-            // 
             // ImportDataSourceButton
             // 
             this.ImportDataSourceButton.BackColor = System.Drawing.Color.GhostWhite;
@@ -676,7 +466,7 @@ namespace C2
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(323, 46);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(910, 280);
+            this.MainPanel.Size = new System.Drawing.Size(910, 560);
             this.MainPanel.TabIndex = 7;
             this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -686,7 +476,7 @@ namespace C2
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(0, 32);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(910, 248);
+            this.panel7.Size = new System.Drawing.Size(910, 528);
             this.panel7.TabIndex = 10;
             // 
             // BaseWorkSpace
@@ -695,76 +485,12 @@ namespace C2
             this.BaseWorkSpace.Controls.Add(this.ImportDataSourceButton);
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
-            this.BaseWorkSpace.Controls.Add(this.remarkControl);
-            this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
-            this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.BaseWorkSpace.Name = "BaseWorkSpace";
-            this.BaseWorkSpace.Size = new System.Drawing.Size(910, 248);
+            this.BaseWorkSpace.Size = new System.Drawing.Size(910, 528);
             this.BaseWorkSpace.TabIndex = 0;
-            // 
-            // remarkControl
-            // 
-            this.remarkControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.remarkControl.BackColor = System.Drawing.Color.Transparent;
-            this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.remarkControl.Location = new System.Drawing.Point(518, 50);
-            this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
-            this.remarkControl.Name = "remarkControl";
-            this.remarkControl.RemarkDescription = "";
-            this.remarkControl.Size = new System.Drawing.Size(135, 380);
-            this.remarkControl.TabIndex = 26;
-            this.remarkControl.Visible = false;
-            // 
-            // topToolBarControl
-            // 
-            this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
-            this.topToolBarControl.Location = new System.Drawing.Point(0, 2);
-            this.topToolBarControl.Name = "topToolBarControl";
-            this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
-            this.topToolBarControl.TabIndex = 24;
-            // 
-            // canvasPanel
-            // 
-            this.canvasPanel.AllowDrop = true;
-            this.canvasPanel.BackColor = System.Drawing.Color.White;
-            this.canvasPanel.Controls.Add(this.currentModelFinLab);
-            this.canvasPanel.Controls.Add(this.operatorControl);
-            this.canvasPanel.Controls.Add(this.progressBarLabel);
-            this.canvasPanel.Controls.Add(this.progressBar1);
-            this.canvasPanel.Controls.Add(this.currentModelRunBackLab);
-            this.canvasPanel.Controls.Add(this.panel11);
-            this.canvasPanel.Controls.Add(this.flowControl);
-            this.canvasPanel.Controls.Add(this.rightHideButton);
-            this.canvasPanel.Controls.Add(this.rightShowButton);
-            this.canvasPanel.Controls.Add(this.resetButton);
-            this.canvasPanel.Controls.Add(this.stopButton);
-            this.canvasPanel.Controls.Add(this.runButton);
-            this.canvasPanel.Controls.Add(this.naviViewControl);
-            this.canvasPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.canvasPanel.DelEnable = false;
-            this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasPanel.EndC = null;
-            this.canvasPanel.EndP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.EndP")));
-            this.canvasPanel.LeftButtonDown = false;
-            this.canvasPanel.Location = new System.Drawing.Point(0, 0);
-            this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(910, 248);
-            this.canvasPanel.StartC = null;
-            this.canvasPanel.StartP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.StartP")));
-            this.canvasPanel.TabIndex = 7;
-            // 
-            // currentModelFinLab
-            // 
-            this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
-            this.currentModelFinLab.Location = new System.Drawing.Point(498, 174);
-            this.currentModelFinLab.Name = "currentModelFinLab";
-            this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
-            this.currentModelFinLab.TabIndex = 30;
-            this.currentModelFinLab.Visible = false;
             // 
             // operatorControl
             // 
@@ -777,142 +503,40 @@ namespace C2
             this.operatorControl.Name = "operatorControl";
             this.operatorControl.Size = new System.Drawing.Size(209, 320);
             this.operatorControl.TabIndex = 0;
-            // 
-            // progressBarLabel
-            // 
-            this.progressBarLabel.AutoSize = true;
-            this.progressBarLabel.BackColor = System.Drawing.Color.Transparent;
-            this.progressBarLabel.Font = new System.Drawing.Font("微软雅黑", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.progressBarLabel.ForeColor = System.Drawing.Color.Black;
-            this.progressBarLabel.Location = new System.Drawing.Point(953, 245);
-            this.progressBarLabel.Name = "progressBarLabel";
-            this.progressBarLabel.Size = new System.Drawing.Size(24, 16);
-            this.progressBarLabel.TabIndex = 32;
-            this.progressBarLabel.Text = "0%";
-            this.progressBarLabel.Visible = false;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.progressBar1.ForeColor = System.Drawing.Color.Transparent;
-            this.progressBar1.Location = new System.Drawing.Point(823, 245);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(125, 10);
-            this.progressBar1.Step = 30;
-            this.progressBar1.TabIndex = 31;
-            this.progressBar1.Visible = false;
-            // 
-            // currentModelRunBackLab
-            // 
-            this.currentModelRunBackLab.Controls.Add(this.currentModelRunLab);
-            this.currentModelRunBackLab.Image = global::C2.Properties.Resources.currentModelRunningBack;
-            this.currentModelRunBackLab.Location = new System.Drawing.Point(498, 174);
-            this.currentModelRunBackLab.Name = "currentModelRunBackLab";
-            this.currentModelRunBackLab.Size = new System.Drawing.Size(150, 100);
-            this.currentModelRunBackLab.TabIndex = 29;
-            this.currentModelRunBackLab.Visible = false;
-            // 
-            // currentModelRunLab
-            // 
-            this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.currentModelRunLab.Image = global::C2.Properties.Resources.currentModelRunning;
-            this.currentModelRunLab.Location = new System.Drawing.Point(40, 20);
-            this.currentModelRunLab.Name = "currentModelRunLab";
-            this.currentModelRunLab.Size = new System.Drawing.Size(73, 47);
-            this.currentModelRunLab.TabIndex = 28;
-            this.currentModelRunLab.Visible = false;
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.leftFoldButton);
-            this.panel11.Location = new System.Drawing.Point(0, 200);
-            this.panel11.Margin = new System.Windows.Forms.Padding(0);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(8, 101);
-            this.panel11.TabIndex = 1;
-            // 
-            // flowControl
-            // 
-            this.flowControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
-            this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
-            this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.flowControl.Cursor = System.Windows.Forms.Cursors.Default;
-            this.flowControl.Location = new System.Drawing.Point(687, 50);
-            this.flowControl.Margin = new System.Windows.Forms.Padding(4);
-            this.flowControl.Name = "flowControl";
-            this.flowControl.SelectDrag = false;
-            this.flowControl.SelectFrame = false;
-            this.flowControl.SelectRemark = false;
-            this.flowControl.Size = new System.Drawing.Size(209, 51);
-            this.flowControl.TabIndex = 25;
-            this.flowControl.Load += new System.EventHandler(this.flowControl_Load);
-            // 
-            // rightHideButton
-            // 
-            this.rightHideButton.BackColor = System.Drawing.Color.Transparent;
-            this.rightHideButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rightHideButton.BackgroundImage")));
-            this.rightHideButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.rightHideButton.Location = new System.Drawing.Point(909, 111);
-            this.rightHideButton.Margin = new System.Windows.Forms.Padding(4);
-            this.rightHideButton.Name = "rightHideButton";
-            this.rightHideButton.Size = new System.Drawing.Size(55, 55);
-            this.rightHideButton.TabIndex = 23;
-            // 
-            // rightShowButton
-            // 
-            this.rightShowButton.BackColor = System.Drawing.Color.Transparent;
-            this.rightShowButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rightShowButton.BackgroundImage")));
-            this.rightShowButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.rightShowButton.Location = new System.Drawing.Point(909, 50);
-            this.rightShowButton.Margin = new System.Windows.Forms.Padding(4);
-            this.rightShowButton.Name = "rightShowButton";
-            this.rightShowButton.Size = new System.Drawing.Size(55, 55);
-            this.rightShowButton.TabIndex = 22;
-            // 
-            // naviViewControl
-            // 
-            this.naviViewControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.naviViewControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.naviViewControl.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.naviViewControl.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.naviViewControl.Location = new System.Drawing.Point(752, 190);
-            this.naviViewControl.Margin = new System.Windows.Forms.Padding(4);
-            this.naviViewControl.Name = "naviViewControl";
-            this.naviViewControl.Size = new System.Drawing.Size(205, 105);
-            this.naviViewControl.TabIndex = 0;
-            // 
+            //
             // mdiWorkSpace1
             // 
             this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
             this.mdiWorkSpace1.Name = "mdiWorkSpace1";
-            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
+            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 528);
             this.mdiWorkSpace1.TabIndex = 8;
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.modelTitlePanel);
+            this.panel6.Controls.Add(this.taskBar1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(910, 32);
             this.panel6.TabIndex = 9;
             // 
-            // modelTitlePanel
+            // taskBar1
             // 
-            this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
-            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
-            this.modelTitlePanel.Name = "modelTitlePanel";
-            this.modelTitlePanel.Size = new System.Drawing.Size(910, 32);
-            this.modelTitlePanel.TabIndex = 0;
+            this.taskBar1.AeroBackground = false;
+            this.taskBar1.BaseLineSize = 3;
+            this.taskBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.taskBar1.Location = new System.Drawing.Point(0, 0);
+            this.taskBar1.Name = "taskBar1";
+            this.taskBar1.Size = new System.Drawing.Size(910, 32);
+            this.taskBar1.TabIndex = 0;
+            this.taskBar1.Text = "taskBar1";
             // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1233, 606);
             this.Controls.Add(this.MainPanel);
-            this.Controls.Add(this.bottomViewPanel);
             this.Controls.Add(this.leftToolBoxPanel);
             this.Controls.Add(this.leftMainMenuPanel);
             this.Controls.Add(this.headPanel);
@@ -924,8 +548,6 @@ namespace C2
             this.Text = "烽火FiberHome";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Deactivate += new System.EventHandler(this.MainForm_Deactivate);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.headPanel.ResumeLayout(false);
@@ -936,21 +558,9 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
             this.leftToolBoxPanel.ResumeLayout(false);
-            this.bottomViewPanel.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
             this.MainPanel.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.BaseWorkSpace.ResumeLayout(false);
-            this.canvasPanel.ResumeLayout(false);
-            this.canvasPanel.PerformLayout();
-            this.currentModelRunBackLab.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -967,18 +577,10 @@ namespace C2
         private System.Windows.Forms.Button dataButton;
         private System.Windows.Forms.Button oprateButton;
         private System.Windows.Forms.Panel leftToolBoxPanel;
-        private System.Windows.Forms.Panel bottomViewPanel;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button saveModelButton;
         private System.Windows.Forms.Button newModelButton;
         private System.Windows.Forms.Panel commonPanel;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label previewLabel;
-        private System.Windows.Forms.Label pyControlLabel;
-        private System.Windows.Forms.Label logLabel;
-        private System.Windows.Forms.PictureBox minMaxPictureBox;
-        private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Button moreButton;
         private System.Windows.Forms.Button formatButton;
         private System.Windows.Forms.Button groupButton;
@@ -993,40 +595,20 @@ namespace C2
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
-        private C2.Controls.Bottom.BottomLogControl bottomLogControl;
-        private C2.Controls.Bottom.BottomConsoleControl bottomPyConsole;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button flowChartButton;
-        private Controls.Title.DragLineControl dragLineControl;
-        private C2.Controls.Bottom.BottomPreviewControl bottomPreview;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button blankButton;
         private Button saveAllButton;
-        private Controls.Top.TopToolBarControl topToolBarControl;
         private Panel MainPanel;
         private Panel panel7;
         private Panel panel6;
-        private Controls.Title.ModelTitlePanel modelTitlePanel;
         private Panel BaseWorkSpace;
-        private Controls.CanvasPanel canvasPanel;
-        private Label progressBarLabel;
-        private ProgressBar progressBar1;
-        private Label currentModelFinLab;
-        private Label currentModelRunBackLab;
-        private Label currentModelRunLab;
-        private Panel panel11;
-        private PictureBox leftFoldButton;
-        private Controls.Flow.RemarkControl remarkControl;
-        private Controls.Flow.FlowControl flowControl;
-        private Controls.Flow.RightHideButton rightHideButton;
-        private Controls.Flow.RightShowButton rightShowButton;
-        private Button resetButton;
-        private Button stopButton;
-        private Button runButton;
-        private Controls.Flow.NaviViewControl naviViewControl;
-        private C2.Controls.MdiWorkSpace mdiWorkSpace1;
         private Button ImportDataSourceButton;
         private Button button1;
+        private PictureBox leftFoldButton;
         private Controls.Left.OperatorControl operatorControl;
+        private C2.WorkSpace.MdiWorkSpace mdiWorkSpace1;
+        private Controls.TaskBar taskBar1;
     }
 }

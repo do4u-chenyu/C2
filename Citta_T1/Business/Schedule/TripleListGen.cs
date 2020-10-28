@@ -8,7 +8,7 @@ namespace C2.Business.Schedule
     /// 三元组生成类
     /// </summary>
 
-    class TripleListGen
+    public class TripleListGen
     {
         private List<Triple> currentModelTripleList;
         private ModelDocument currentModel;

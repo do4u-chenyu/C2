@@ -6,6 +6,7 @@ using C2.Controls.Flow;
 using C2.Controls.Left;
 using C2.Controls.Title;
 using C2.Controls.Top;
+using C2.Forms;
 
 namespace C2.Core
 {
@@ -29,27 +30,115 @@ namespace C2.Core
 
 
         public static MainForm GetMainForm() { return mainForm; }
+        public static CanvasForm GetCanvsaForm()
+        {
+            CanvasForm cf = null;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+            {
+                cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
+            }
+            return cf;
+        }
         public static ModelTitlePanel GetModelTitlePanel() { return modelTitlePanel; }
-        public static NaviViewControl GetNaviViewControl() { return naviViewControl; }
-        public static CanvasPanel GetCanvasPanel() { return canvasPanel; }
-        public static ModelDocumentDao GetModelDocumentDao() { return modelDocumentDao; }
+        public static NaviViewControl GetNaviViewControl()
+        {
+            NaviViewControl ret = null;
+            CanvasPanel cp;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+            {
+                cp = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).CanvasPanel;
+                ret = cp.NaviViewControl;
+            }
+            return ret;
+        }
+        public static CanvasPanel GetCanvasPanel()
+        {
+            CanvasPanel ret = null;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+                ret = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).CanvasPanel;
+            return ret;
+        }
+        public static ModelDocumentDao GetModelDocumentDao() {
+            ModelDocumentDao ret = null;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+                ret = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).ModelDocumentDao;
+            return ret;
+        }
 
         public static ModelDocument GetCurrentDocument()
         {
             ModelDocument ret = null;
-            if (GetModelDocumentDao() != null)
-                ret = GetModelDocumentDao().CurrentDocument;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+                ret = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).Document;
             return ret;
         }
-        public static FlowControl GetFlowControl() { return flowControl; }
+        public static FlowControl GetFlowControl()
+        {
+            FlowControl ret = null;
+            CanvasForm cf;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+            {
+                cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
+                ret = cf.FlowControl;
+            }
+            return ret;
+        }
         public static OperatorControl GetOperatorControl() { return operatorControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
-        public static RemarkControl GetRemarkControl() { return remarkControl; }
-        public static BottomLogControl GetLogView() { return logView; }
-        public static OptionDao GetOptionDao() { return optionDao; }
+        public static RemarkControl GetRemarkControl()
+        {
+            RemarkControl ret = null;
+            CanvasForm cf;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+            {
+                cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
+                ret = cf.RemarkControl;
+            }
+            return ret;
+        }
+        public static BottomLogControl GetLogView()
+        {
+            BottomLogControl ret = null;
+            CanvasPanel cp;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+            {
+                cp = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).CanvasPanel;
+                //ret = cp.BottomLogControl;
+            }
+            return ret;
+        }
+        public static OptionDao GetOptionDao() {
+            OptionDao ret = null;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+            {
+                CanvasForm cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
+                ret = cf.OptionDao;
+            }
+            return ret;
+        }
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
-        public static BottomConsoleControl GetBottomPythonConsoleControl() { return bottomPythonConsoleControl; }
-        public static TopToolBarControl GetTopToolBarControl() { return topToolBarControl; }
+        public static BottomConsoleControl GetBottomPythonConsoleControl()
+        {
+            BottomConsoleControl ret = null;
+            CanvasPanel cp;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+            {
+                cp = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).CanvasPanel;
+                //ret = cp.bottomConsoleControl;
+            }
+            return ret;
+        }
+
+        public static TopToolBarControl GetTopToolBarControl()
+        {
+            TopToolBarControl ret = null;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+            {
+                CanvasForm cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
+                ret = cf.TopToolBarControl;
+            }
+            return ret;
+        }
 
 
 

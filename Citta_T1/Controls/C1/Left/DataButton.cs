@@ -38,27 +38,27 @@ namespace C2.Controls.Left
 
         private void DataButton_Load(object sender, EventArgs e)
         {
-            // 数据源全路径浮动提示信息
-            String helpInfo = FullFilePath;
-            this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+            //// 数据源全路径浮动提示信息
+            //String helpInfo = FullFilePath;
+            //this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
 
-            // 数据源名称浮动提示信息
-            helpInfo = DataSourceName;
-            this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
+            //// 数据源名称浮动提示信息
+            //helpInfo = DataSourceName;
+            //this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
-            helpInfo = String.Format(DataButtonFlowTemplate,
-                                    encoding.ToString(),
-                                    this.ExtType,
-                                    Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
-                                    this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
-            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+            //helpInfo = String.Format(DataButtonFlowTemplate,
+            //                        encoding.ToString(),
+            //                        this.ExtType,
+            //                        Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
+            //                        this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
+            //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
 
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
+            Global.GetCanvsaForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,12 +115,12 @@ namespace C2.Controls.Left
 
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            string helpInfo = String.Format(DataButtonFlowTemplate,
-                                        encoding.ToString(),
-                                        this.ExtType,
-                                        Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
-                                        this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
-            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+            //string helpInfo = String.Format(DataButtonFlowTemplate,
+            //                            encoding.ToString(),
+            //                            this.ExtType,
+            //                            Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
+            //                            this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
+            //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)

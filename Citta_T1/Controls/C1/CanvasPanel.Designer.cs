@@ -36,6 +36,8 @@ namespace C2.Controls
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.DelSelectControl = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DelControls = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentModelFinLab = new System.Windows.Forms.Label();
+            this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
             this.contextMenuStrip1.SuspendLayout();
             this.DelSelectControl.SuspendLayout();
             this.SuspendLayout();
@@ -70,12 +72,34 @@ namespace C2.Controls
             this.DelControls.Text = "批量删除";
             this.DelControls.Click += new System.EventHandler(this.DelControls_Click);
             // 
+            // currentModelFinLab
+            // 
+            this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
+            this.currentModelFinLab.Location = new System.Drawing.Point(142, 129);
+            this.currentModelFinLab.Name = "currentModelFinLab";
+            this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelFinLab.TabIndex = 30;
+            this.currentModelFinLab.Visible = false;
+            // 
+            // naviViewControl
+            // 
+            this.naviViewControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.naviViewControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.naviViewControl.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.naviViewControl.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.naviViewControl.Location = new System.Drawing.Point(625, 207);
+            this.naviViewControl.Name = "naviViewControl";
+            this.naviViewControl.Size = new System.Drawing.Size(233, 90);
+            this.naviViewControl.TabIndex = 25;
+            // 
             // CanvasPanel
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
+            this.Controls.Add(this.naviViewControl);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "CanvasPanel";
+            this.Size = new System.Drawing.Size(946, 364);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CanvasPanel_Paint);
@@ -96,5 +120,7 @@ namespace C2.Controls
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ContextMenuStrip DelSelectControl;
         private System.Windows.Forms.ToolStripMenuItem DelControls;
+        private System.Windows.Forms.Label currentModelFinLab;
+        private Flow.NaviViewControl naviViewControl;
     }
 }

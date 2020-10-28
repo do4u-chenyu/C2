@@ -3,38 +3,19 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using C2.Controls.OS;
+using C2.Controls;
 
-namespace C2.Controls
+namespace C2.WorkSpace
 {
-    public class MdiWorkSpace : BaseControl
+    public class MdiWorkSpace : BaseWorkSpace
     {
-        Form _ActivedMdiForm = null;
-        List<Form> ActiveForms;
-
         public event System.EventHandler MdiFormActived;
         public event System.EventHandler MdiFormClosed;
 
-        public MdiWorkSpace()
-        {
-            ActiveForms = new List<Form>();
-
-            ResizeRedraw = true;
-        }
-
-        public Form this[int index]
-        {
-            get
-            {
-                if (index < 0 || index >= Controls.Count)
-                    throw new ArgumentOutOfRangeException();
-                return Controls[index] as Form;
-            }
-        }
-
-        public Form ActivedMdiForm
+        public override Form ActivedMdiForm
         {
             get { return _ActivedMdiForm; }
-            private set 
+            protected set 
             {
                 if (_ActivedMdiForm != value)
                 {
@@ -67,7 +48,7 @@ namespace C2.Controls
             }
         }
 
-        public void ShowMdiForm(Form form)
+        public override void ShowMdiForm(Form form)
         {
             if (form == null)
                 throw new ArgumentNullException();
@@ -79,7 +60,7 @@ namespace C2.Controls
             form.MaximizeBox = false;
             form.MinimizeBox = false;
             form.ControlBox = false;
-            form.Dock = DockStyle.None;
+            form.Dock = DockStyle.Fill;
             form.Activated += new EventHandler(MdiForm_Activated);
             form.FormClosed += new FormClosedEventHandler(MdiForm_FormClosed);
 
@@ -87,7 +68,7 @@ namespace C2.Controls
             ActiveMdiForm(form);
         }
 
-        public void ActiveMdiForm(Form form)
+        public override void ActiveMdiForm(Form form)
         {
             if (form == null || !Contains(form))
                 return;
@@ -95,7 +76,7 @@ namespace C2.Controls
             ActivedMdiForm = form;
         }
 
-        public void CloseMdiForm(Form form)
+        public override void CloseMdiForm(Form form)
         {
             if (form == null || !Contains(form))
                 return;
@@ -104,7 +85,7 @@ namespace C2.Controls
                 form.Close();
         }
 
-        public bool CloseAll()
+        public override bool CloseAll()
         {
             for (int i = Controls.Count - 1; i >= 0; i--)
             {
@@ -185,10 +166,7 @@ namespace C2.Controls
 
         void OnMdiFormActived(Form form)
         {
-            if (MdiFormActived != null)
-            {
-                MdiFormActived(form, EventArgs.Empty);
-            }
+            MdiFormActived?.Invoke(form, EventArgs.Empty);
         }
 
         void OnMdiFormClosed(Form form)
@@ -198,10 +176,7 @@ namespace C2.Controls
             if(Controls.Contains(form))
                 Controls.Remove(form);
 
-            if (MdiFormClosed != null)
-            {
-                MdiFormClosed(form, EventArgs.Empty);
-            }
+            MdiFormClosed?.Invoke(form, EventArgs.Empty);
         }
 
         //protected override void OnResize(EventArgs e)

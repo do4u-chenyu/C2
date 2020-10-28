@@ -20,7 +20,7 @@ using C2.Model.MindMaps;
 using C2.Model.Styles;
 using C2.Model.Widgets;
 
-namespace C2
+namespace C2.Forms
 {
     public partial class DocumentForm : BaseDocumentForm, IThemableUI
     {

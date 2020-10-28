@@ -650,7 +650,19 @@
     <Compile Include="Controls\Misc\ImageListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Misc\MdiWorkSpace.cs">
+    <Compile Include="Forms\CanvasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CanvasForm.Designer.cs">
+      <DependentUpon>CanvasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\MciWorkSpace.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\BaseWorkSpace.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\MdiWorkSpace.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Misc\MultiSelectTreeView.cs">
@@ -990,10 +1002,10 @@
     <Compile Include="Dialogs\TimerDialog.Designer.cs">
       <DependentUpon>TimerDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="DocumentForm.cs">
+    <Compile Include="Forms\DocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DocumentForm.Designer.cs">
+    <Compile Include="Forms\DocumentForm.Designer.cs">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Globalization\AuthorInfo.cs" />
@@ -1456,7 +1468,10 @@
     <EmbeddedResource Include="Dialogs\TimerDialog.resx">
       <DependentUpon>TimerDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DocumentForm.resx">
+    <EmbeddedResource Include="Forms\CanvasForm.resx">
+      <DependentUpon>CanvasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

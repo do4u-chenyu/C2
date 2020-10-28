@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace C2.Business.Model
 {
-    class ModelDocumentDao
+    public class ModelDocumentDao
     {
         public List<ModelDocument> ModelDocuments { get; set; }
         public ModelDocument CurrentDocument { get; set; }
@@ -18,6 +18,12 @@ namespace C2.Business.Model
         public ModelDocumentDao()
         {
             ModelDocuments = new List<ModelDocument>();
+        }
+        public ModelDocumentDao(ModelDocument doc)
+        {
+            ModelDocuments = new List<ModelDocument>();
+            ModelDocuments.Add(doc);
+            CurrentDocument = doc;
         }
         public void AddBlankDocument(string modelTitle, string userName)
         {
@@ -202,10 +208,9 @@ namespace C2.Business.Model
         public int CountDataSourceUsage(string ffp)
         {
             int count = 0;
-            foreach (ModelDocument md in this.ModelDocuments)
-                foreach (ModelElement me in md.ModelElements)
-                    if (me.Type == ElementType.DataSource && me.FullFilePath == ffp)
-                        count++;
+            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
+                if (me.Type == ElementType.DataSource && me.FullFilePath == ffp)
+                    count++;
             return count;
         }
 
