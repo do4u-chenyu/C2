@@ -182,6 +182,10 @@
     <Compile Include="Controls\DataCharts\RadarChart.Designer.cs">
       <DependentUpon>RadarChart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Base\BaseOperatorView.cs" />
+    <Compile Include="Dialogs\Base\BaseOperatorView.Designer.cs">
+      <DependentUpon>BaseOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\C2OperatorViews\Base\C2BaseOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,12 +203,6 @@
     </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2MaxOperatorView.Designer.cs">
       <DependentUpon>C2MaxOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\PythonOperatorHelper.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\PythonOperatorHelper.Designer.cs">
-      <DependentUpon>PythonOperatorHelper.cs</DependentUpon>
     </Compile>
     <Compile Include="Canvas\GdiPlus\GdiBrush.cs" />
     <Compile Include="Canvas\GdiPlus\GdiFont.cs" />
@@ -842,110 +840,76 @@
     <Compile Include="Dialogs\ModifyShortcutsDialog.Designer.cs">
       <DependentUpon>ModifyShortcutsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\AvgOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\AvgOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\CollideOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\CollideOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\CustomOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\CustomOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\DataFormatOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\DataFormatOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\DifferOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\DifferOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\FilterOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\FilterOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\FreqOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\FreqOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\GroupOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\GroupOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\KeyWordOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\KeyWordOperatorView.designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\MaxOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\MaxOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\MinOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\MinOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\PythonOperatorHelper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\PythonOperatorHelper.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\PythonOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\PythonOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\RandomOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\RandomOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\SortOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\SortOperatorView.Designer.cs" />
+    <Compile Include="Dialogs\C1OperatorViews\UnionOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\UnionOperatorView.Designer.cs" />
     <Compile Include="Dialogs\NoteWidgetDialog.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\AvgOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\AvgOperatorView.Designer.cs">
-      <DependentUpon>AvgOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\Base\BaseOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\Base\BaseOperatorView.Designer.cs">
-      <DependentUpon>BaseOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\CollideOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\CollideOperatorView.Designer.cs">
-      <DependentUpon>CollideOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\CustomOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\CustomOperatorView.Designer.cs">
-      <DependentUpon>CustomOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\DataFormatOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\DataFormatOperatorView.Designer.cs">
-      <DependentUpon>DataFormatOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\DifferOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\DifferOperatorView.Designer.cs">
-      <DependentUpon>DifferOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\FilterOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\FilterOperatorView.Designer.cs">
-      <DependentUpon>FilterOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\FreqOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\FreqOperatorView.Designer.cs">
-      <DependentUpon>FreqOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\GroupOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\GroupOperatorView.Designer.cs">
-      <DependentUpon>GroupOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\KeyWordOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\KeyWordOperatorView.designer.cs">
-      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\MaxOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\MaxOperatorView.Designer.cs">
-      <DependentUpon>MaxOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\MinOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\MinOperatorView.Designer.cs">
-      <DependentUpon>MinOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\PythonOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\PythonOperatorView.Designer.cs">
-      <DependentUpon>PythonOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\RandomOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\RandomOperatorView.Designer.cs">
-      <DependentUpon>RandomOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\RelateOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\RelateOperatorView.Designer.cs">
-      <DependentUpon>RelateOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\SortOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\SortOperatorView.Designer.cs">
-      <DependentUpon>SortOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\UnionOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OperatorViews\UnionOperatorView.Designer.cs">
-      <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\PictureViewDialog.cs">
       <SubType>Form</SubType>
@@ -1298,9 +1262,6 @@
     <EmbeddedResource Include="Controls\DataCharts\RadarChart.resx">
       <DependentUpon>RadarChart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\PythonOperatorHelper.resx">
-      <DependentUpon>PythonOperatorHelper.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\Dialog\GeneralPage.resx">
       <DependentUpon>GeneralPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -1391,6 +1352,9 @@
     <EmbeddedResource Include="Dialogs\AboutDialogBox.resx">
       <DependentUpon>AboutDialogBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Base\BaseOperatorView.resx">
+      <DependentUpon>BaseOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckUpdate.resx">
       <DependentUpon>CheckUpdate.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1422,57 +1386,23 @@
     <EmbeddedResource Include="Dialogs\ModifyShortcutsDialog.resx">
       <DependentUpon>ModifyShortcutsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\AvgOperatorView.resx">
-      <DependentUpon>AvgOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\Base\BaseOperatorView.resx">
-      <DependentUpon>BaseOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\CollideOperatorView.resx">
-      <DependentUpon>CollideOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\CustomOperatorView.resx">
-      <DependentUpon>CustomOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\DataFormatOperatorView.resx">
-      <DependentUpon>DataFormatOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\DifferOperatorView.resx">
-      <DependentUpon>DifferOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\FilterOperatorView.resx">
-      <DependentUpon>FilterOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\FreqOperatorView.resx">
-      <DependentUpon>FreqOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\GroupOperatorView.resx">
-      <DependentUpon>GroupOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\KeyWordOperatorView.resx">
-      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\MaxOperatorView.resx">
-      <DependentUpon>MaxOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\MinOperatorView.resx">
-      <DependentUpon>MinOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\PythonOperatorView.resx">
-      <DependentUpon>PythonOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\RandomOperatorView.resx">
-      <DependentUpon>RandomOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\RelateOperatorView.resx">
-      <DependentUpon>RelateOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\SortOperatorView.resx">
-      <DependentUpon>SortOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatorViews\UnionOperatorView.resx">
-      <DependentUpon>UnionOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\AvgOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\CollideOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\CustomOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\DataFormatOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\DifferOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\FilterOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\FreqOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\GroupOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\KeyWordOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\MaxOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\MinOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\PythonOperatorHelper.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\PythonOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\RandomOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\RelateOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\SortOperatorView.resx" />
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\UnionOperatorView.resx" />
     <EmbeddedResource Include="Dialogs\PrintPreviewDialog.resx">
       <DependentUpon>PrintPreviewDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
