@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class SortOperatorView : BaseOperatorView
+    public partial class SortOperatorView : C1BaseOperatorView
     {
         private List<int> outList;
 

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace C2.OperatorViews
 {
 
-    public partial class KeywordOperatorView : BaseOperatorView
+    public partial class KeywordOperatorView : C1BaseOperatorView
     {
         private const int colIndexDefault = -1;
         private const int colCountDefault = 0;

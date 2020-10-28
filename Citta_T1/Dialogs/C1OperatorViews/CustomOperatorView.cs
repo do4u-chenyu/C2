@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class CustomOperatorView : BaseOperatorView
+    public partial class CustomOperatorView : C1BaseOperatorView
     {
         private readonly string oldPath;
         private OpUtil.Encoding encoding;

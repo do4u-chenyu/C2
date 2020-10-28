@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace C2.OperatorViews
 {
 
-    public partial class RandomOperatorView : BaseOperatorView
+    public partial class RandomOperatorView : C1BaseOperatorView
     {
         public RandomOperatorView(MoveOpControl opControl) : base(opControl)
         {

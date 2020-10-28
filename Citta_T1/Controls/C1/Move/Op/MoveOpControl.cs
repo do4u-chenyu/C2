@@ -432,7 +432,7 @@ namespace C2.Controls.Move.Op
                 case "多源算子":
                     new CustomOperatorView(this).ShowDialog();
                     break;
-                case "Python算子":
+                case "Py算子":
                     new PythonOperatorView(this).ShowDialog();
                     break;
                 case "关键词过滤":
