@@ -863,7 +863,7 @@ namespace C2
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
 
-            dc.SelectedTopic = st;
+            dc.SetSelectedTopicDesign(st);
         }
         
         void ShowProperty(object[] objects)

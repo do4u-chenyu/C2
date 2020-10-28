@@ -9,28 +9,17 @@ namespace C2.Controls.Common
 {
     public partial class DesignerControl : UserControl
     {
-        Topic _SelectedTopic;
 
-        public Topic SelectedTopic
-        {
-            get { return _SelectedTopic; }
-            set
-            {
-                if (_SelectedTopic != value)
-                {
-                    _SelectedTopic = value;
-                    OnSelectedTopicChanged();
-                }
-            }
-        }
 
+        public Topic SelectedTopic { get; set; }
         public OperatorWidget OpWidget { get; set; }
         public DataItem SelectedDataSource { get; set; }
         public string SelectedOperator { get; set; }
         public List<DataItem> ComboDataSource { get; set; }
 
-        private void OnSelectedTopicChanged()
+        public void SetSelectedTopicDesign(Topic topic)
         {
+            SelectedTopic = topic;
             if(SelectedTopic == null)
             {
                 this.topicName.Text = "未选中主题";
@@ -112,7 +101,7 @@ namespace C2.Controls.Common
                 return;
             }
 
-            if (SelectedDataSource == null)
+            if (OpWidget.DataSourceItem == null)
             {
                 MessageBox.Show("未选中数据源,请添加后再配置");
                 return;
