@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class FreqOperatorView : BaseOperatorView
+    public partial class FreqOperatorView : C1BaseOperatorView
     {
         public FreqOperatorView(MoveOpControl opControl) : base(opControl)
         {

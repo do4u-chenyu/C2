@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class DataFormatOperatorView : BaseOperatorView
+    public partial class DataFormatOperatorView : C1BaseOperatorView
     {
         public DataFormatOperatorView(MoveOpControl opControl) : base(opControl)
         {

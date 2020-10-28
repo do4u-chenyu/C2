@@ -1419,6 +1419,12 @@
     <EmbeddedResource Include="Dialogs\C1OperatorViews\CustomOperatorView.resx">
       <DependentUpon>CustomOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\DataFormatOperatorView.resx">
+      <DependentUpon>DataFormatOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\DifferOperatorView.resx">
+      <DependentUpon>DifferOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\SortOperatorView.resx">
       <DependentUpon>SortOperatorView.cs</DependentUpon>
     </EmbeddedResource>

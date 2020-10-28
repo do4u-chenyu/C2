@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace C2.Dialogs
 {
-    public partial class PythonOperatorView : BaseOperatorView
+    public partial class PythonOperatorView : C1BaseOperatorView
     {
         private readonly string oldPath;
         private string fullOutputFilePath;
