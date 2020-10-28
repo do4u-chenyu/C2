@@ -68,6 +68,10 @@ namespace C2
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
             this.mdiWorkSpace1 = new C2.WorkSpace.MdiWorkSpace();
+            this.operatorControl = new C2.Controls.Left.OperatorControl();
+            this.leftFoldButton = new System.Windows.Forms.PictureBox();
+            this.ImportDataSourceButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.taskBar1 = new C2.Controls.TaskBar();
             this.headPanel.SuspendLayout();

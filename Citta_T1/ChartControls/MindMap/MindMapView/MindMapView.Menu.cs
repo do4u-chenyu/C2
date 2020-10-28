@@ -186,7 +186,7 @@ namespace C2.Controls.MapViews
     
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             if (hitItem != null)
-                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
+                Global.GetCanvsaForm().PreViewDataByFullFilePath(hitItem);
         }
 
 

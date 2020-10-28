@@ -141,20 +141,14 @@ namespace C2.Controls
             {
                 return;
             }
-<<<<<<< HEAD:Citta_T1/Controls/C1/CanvasPanel.cs
             // C2不允许数据拖到Canvas
             if (type == ElementType.DataSource)
                 return;
             float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
-=======
-            float screenFactor = this.Document.WorldMap.ScreenFactor;
->>>>>>> origin/C2_issue_TaskBar_test:Citta_T1/Controls/CanvasPanel.cs
             int locX = Convert.ToInt32(e.X / screenFactor);
             int locY = Convert.ToInt32(e.Y / screenFactor);
             int dx = Convert.ToInt32(drgOffsetX / screenFactor);
             int dy = Convert.ToInt32(drgOffsetY / screenFactor);
-<<<<<<< HEAD:Citta_T1/Controls/C1/CanvasPanel.cs
-            //Point location = this.Parent.PointToClient(new Point(locX - dx, locY - dy));
             Point location = Global.GetMainForm().PointToClient(new Point(locX - dx/2, locY - dy/2 - 30));
 
 
@@ -163,21 +157,6 @@ namespace C2.Controls
 
             if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, text, location);
-=======
-            Point location = Global.GetMainForm().PointToClient(new Point(locX - dx, locY - dy));
-            string text = e.Data.GetData("Text").ToString();
-            int sizeLevel = this.Document.WorldMap.SizeLevel;
-            if (type == ElementType.DataSource)
-            {
-                string path = e.Data.GetData("Path").ToString();
-                char separator = (char)e.Data.GetData("Separator");
-                OpUtil.Encoding encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
-                OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
-                AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
-            }
-            else if (type == ElementType.Operator)
-                AddNewOperator(sizeLevel, text,text, location);
->>>>>>> origin/C2_issue_TaskBar_test:Citta_T1/Controls/CanvasPanel.cs
             
 
         }
@@ -187,15 +166,9 @@ namespace C2.Controls
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件
             Global.GetMainForm().BlankButtonFocus();
-<<<<<<< HEAD:Citta_T1/Controls/C1/CanvasPanel.cs
            //// ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
            // if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
            //     this.ClickOnLine(e);
-=======
-            ModelStatus currentModelStatus = this.Document.TaskManager.ModelStatus;
-            if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
-                this.ClickOnLine(e);
->>>>>>> origin/C2_issue_TaskBar_test:Citta_T1/Controls/CanvasPanel.cs
             if (e.Button == MouseButtons.Right && !leftButtonDown)
             {
                 Point pw = this.Document.WorldMap.ScreenToWorld(e.Location, false);

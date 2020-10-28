@@ -11,6 +11,7 @@ using C2.Controls.Top;
 using C2.Core;
 using C2.Core.UndoRedo;
 using C2.Core.UndoRedo.Command;
+using C2.Model;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -146,6 +147,17 @@ namespace C2.Forms
             this.ShowBottomPreview();
         }
 
+        public void PreViewDataByFullFilePath(DataItem dataItem, bool isForceRead = false)
+        {
+            if (!System.IO.File.Exists(dataItem.FilePath))
+            {
+                MessageBox.Show("该数据文件不存在");
+                return;
+            }
+            this.ShowBottomPanel();
+            this.bottomPreview.PreViewDataByFullFilePath(dataItem.FilePath, dataItem.FileSep, dataItem.FileType, dataItem.FileEncoding, isForceRead);
+            this.ShowBottomPreview();
+        }
         private void ShowLogView()
         {
             this.bottomLogControl.Visible = true;
