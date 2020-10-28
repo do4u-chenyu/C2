@@ -1914,6 +1914,7 @@
     <Content Include="Resources\Operators\筛选.png" />
     <Content Include="Resources\Operators\随机.png" />
     <Content Include="Resources\Operators\频率.png" />
+    <None Include="Resources\remark.png" />
     <Content Include="Resources\resource.h" />
     <None Include="Resources\tab_button.png" />
     <Content Include="Resources\StartPage\bank.png" />

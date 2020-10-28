@@ -290,7 +290,7 @@ namespace C2
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
             this.flowControl.Location     = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 35);
             this.operatorControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 90);
-            this.remarkControl.Location   = new Point(this.canvasPanel.Width - 235 - this.flowControl.Width, this.flowControl.Height - 15);
+            this.remarkControl.Location   = new Point(this.canvasPanel.Width - 205 - this.flowControl.Width, this.flowControl.Height - 15);
             this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 35);
             this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 35 + this.rightHideButton.Width);
             
@@ -901,7 +901,7 @@ namespace C2
         {
             SaveAllDocuments();
         }
-        
+    
         private void MainForm_Deactivate(object sender, EventArgs e)
         {
             if(Global.GetCanvasPanel().DragWrapper.StartDrag)

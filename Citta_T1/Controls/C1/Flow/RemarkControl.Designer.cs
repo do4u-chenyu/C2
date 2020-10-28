@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RemarkControl));
             this.remarkCtrPanel = new System.Windows.Forms.Panel();
             this.remarkCtrTextBox = new System.Windows.Forms.TextBox();
             this.remarkCtrPanel.SuspendLayout();
@@ -37,13 +36,13 @@
             // remarkCtrPanel
             // 
             this.remarkCtrPanel.BackColor = System.Drawing.Color.White;
-            this.remarkCtrPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("remarkCtrPanel.BackgroundImage")));
+            this.remarkCtrPanel.BackgroundImage = global::C2.Properties.Resources.remark;
             this.remarkCtrPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.remarkCtrPanel.Controls.Add(this.remarkCtrTextBox);
             this.remarkCtrPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remarkCtrPanel.Location = new System.Drawing.Point(0, 0);
             this.remarkCtrPanel.Name = "remarkCtrPanel";
-            this.remarkCtrPanel.Size = new System.Drawing.Size(160, 160);
+            this.remarkCtrPanel.Size = new System.Drawing.Size(136, 381);
             this.remarkCtrPanel.TabIndex = 0;
             // 
             // remarkCtrTextBox
@@ -54,7 +53,7 @@
             this.remarkCtrTextBox.Location = new System.Drawing.Point(0, 0);
             this.remarkCtrTextBox.Multiline = true;
             this.remarkCtrTextBox.Name = "remarkCtrTextBox";
-            this.remarkCtrTextBox.Size = new System.Drawing.Size(160, 152);
+            this.remarkCtrTextBox.Size = new System.Drawing.Size(126, 371);
             this.remarkCtrTextBox.TabIndex = 0;
             this.remarkCtrTextBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
@@ -63,11 +62,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImage = global::C2.Properties.Resources.remark;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Controls.Add(this.remarkCtrPanel);
             this.DoubleBuffered = true;
             this.Name = "RemarkControl";
-            this.Size = new System.Drawing.Size(160, 160);
+            this.Size = new System.Drawing.Size(136, 381);
             this.remarkCtrPanel.ResumeLayout(false);
             this.remarkCtrPanel.PerformLayout();
             this.ResumeLayout(false);

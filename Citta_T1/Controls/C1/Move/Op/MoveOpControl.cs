@@ -192,7 +192,7 @@ namespace C2.Controls.Move.Op
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator1HelpInfo);
                     this.leftPictureBox.Image = global::C2.Properties.Resources.AI_op;
                     break;
-                case "Python算子":
+                case "Py算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperatorHelpInfo);
                     this.leftPictureBox.Image = global::C2.Properties.Resources.python_op;
                     break;
