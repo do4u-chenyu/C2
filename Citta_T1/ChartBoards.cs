@@ -24,25 +24,27 @@ namespace C2
         HorizontalBar3D horizontalBar3D;
         RadarChart radarChart;
         RingChart ringChart;
+        LineChart lineChart;
         public ChartBoards()
         {
             Text = "Start";
-            InitializeComponent();
-
-            AfterInitialize();
-        }
-
-        void InitializeComponent()
-        {
-            this.SuspendLayout();
+            
             string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
             double[] y = new double[] { 541, 574, 345, 854, 684 };
             this.barChart = new BarChart(x, y);
             this.pieChart = new PieChart(x, y);
             this.horizontalBar3D = new HorizontalBar3D(x, y);
-            this.radarChart = new RadarChart();
-            this.ringChart = new RingChart();
+            InitializeComponent();
+            AfterInitialize();
+        }
 
+        void InitializeComponent()
+        {
+
+            this.radarChart = new C2.Controls.DataCharts.RadarChart();
+            this.ringChart = new C2.Controls.DataCharts.RingChart();
+            this.lineChart = new C2.Controls.DataCharts.LineChart();
+            this.SuspendLayout();
             // 
             // barChart
             // 
@@ -80,19 +82,28 @@ namespace C2
             // 
             this.ringChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
             this.ringChart.Location = new System.Drawing.Point(635, 250);
-            this.ringChart.Name = "ringchart";
+            this.ringChart.Name = "ringChart";
             this.ringChart.Size = new System.Drawing.Size(600, 431);
             this.ringChart.TabIndex = 1;
-
+            // 
+            // lineChart
+            // 
+            this.lineChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
+            this.lineChart.Location = new System.Drawing.Point(15, 750);
+            this.lineChart.Name = "lineChart";
+            this.lineChart.Size = new System.Drawing.Size(600, 431);
+            this.lineChart.TabIndex = 1;
             // 
             // ChartBoards
             // 
-            this.ClientSize = new System.Drawing.Size(1598, 800);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1604, 882);
             this.Controls.Add(this.barChart);
             this.Controls.Add(this.pieChart);
             this.Controls.Add(this.horizontalBar3D);
             this.Controls.Add(this.radarChart);
             this.Controls.Add(this.ringChart);
+            this.Controls.Add(this.lineChart);
             this.Name = "ChartBoards";
             this.ResumeLayout(false);
 
