@@ -23,8 +23,10 @@ namespace C2.Model.Widgets
             Option = new OperatorOption();
             DisplayIndex = 1;
             Status = OpStatus.Null;
+
         }
 
+        public string OpName { get; set; }
         public DataItem ResultItem { get; set; }
         public OpStatus Status { get; set; }
         public string OpType { get; set; }

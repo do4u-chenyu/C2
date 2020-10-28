@@ -12,9 +12,9 @@ using C2.Model.Styles;
 using C2.Model.Widgets;
 using System.Collections.Generic;
 using C2.Globalization;
-using C2.Dialogs.C2OperatorViews.Base;
 using C2.Business.Schedule.Cmd;
 using System.Diagnostics;
+using C2.Dialogs.C2OperatorViews;
 
 namespace C2.Controls.MapViews
 {
@@ -58,7 +58,7 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuPublic = new ToolStripMenuItem();
             ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
 
-            MenuOpenOperator.Text = opw.OpType;
+            MenuOpenOperator.Text = opw.OpName;
             MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuDesign,
                 MenuRunning,
