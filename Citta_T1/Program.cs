@@ -31,7 +31,7 @@ namespace C2
         static void Main()
         {
             DesignerModelClass.IsDesignerMode = false;
-
+            MainForm = LoginForm.mainForm;
             ConfigProgram();
             Application.EnableVisualStyles();
             LanguageManage.Initialize();
@@ -42,7 +42,6 @@ namespace C2
                 LoginForm loginForm = new LoginForm();
                 RunByVersion();
                 Application.EnableVisualStyles();
-                MainForm = LoginForm.mainForm;
 
             }
             else
@@ -67,8 +66,8 @@ namespace C2
                 workspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "FiberHomeIAOModelDocument");
 
             Global.WorkspaceDirectory = workspaceDirectory;
-            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("versionType", ConfigUtil.DefaultVersionType);
-            if (Global.VersionType.Equals(Global.GreenVersion))
+            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("RunLevel", ConfigUtil.DefaultVersionType);
+            if (Global.VersionType.Equals(Global.GreenLevel))
                 Global.WorkspaceDirectory = Path.Combine(System.Environment.CurrentDirectory, Global.GreenPath);
 
         }
@@ -76,7 +75,7 @@ namespace C2
         private static void RunByVersion()
         {
 
-            if (Global.VersionType.Equals(Global.GreenVersion))
+            if (Global.VersionType.Equals(Global.GreenLevel) || Global.VersionType.Equals(Global.Nolanding))
             {
                 string userName = "IAO";
                 Business.LoginInfo lgInfo = new Business.LoginInfo();
@@ -85,9 +84,9 @@ namespace C2
                 lgInfo.WriteLastLogin(userName);
                 Application.Run(new MainForm(userName));
             }
-            if (Global.VersionType.Equals("test"))
+            else if (Global.VersionType.Equals("test"))
             {
-                Application.Run(new StartPage());
+                Application.Run(new ChartBoards());
             }
             else
                 Application.Run(new LoginForm());

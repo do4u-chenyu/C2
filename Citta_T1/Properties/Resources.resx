@@ -904,4 +904,64 @@
   <data name="zh_CHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Languages\zh.CHS.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="AI_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\AI_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="avg_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\avg_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coll_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\coll_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filt_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\filt_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="freq_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\freq_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="group_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\group_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="max_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\max_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="min_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\min_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="multi_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\multi_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="order_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\order_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="python_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\python_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rand_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\rand_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="relate_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\relate_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stan_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\stan_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="subtra_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\subtra_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="union_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\union_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="word_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\word_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deletewidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\deletewidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="getchart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\getchart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="viewdata" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\viewdata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -40,7 +40,7 @@
             // 
             this.dataSourceTB0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataSourceTB0.Location = new System.Drawing.Point(149, 5);
-            this.dataSourceTB0.Size = new System.Drawing.Size(137, 28);
+            this.dataSourceTB0.Size = new System.Drawing.Size(137, 23);
             this.dataSourceTB0.TabIndex = 9;
             // 
             // cancelButton
@@ -61,7 +61,7 @@
             // 
             this.outListCCBL0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL0.Location = new System.Drawing.Point(148, 47);
-            this.outListCCBL0.Size = new System.Drawing.Size(138, 26);
+            this.outListCCBL0.Size = new System.Drawing.Size(138, 21);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox0
@@ -70,7 +70,7 @@
             this.comboBox0.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox0.Location = new System.Drawing.Point(2, 2);
-            this.comboBox0.Size = new System.Drawing.Size(86, 26);
+            this.comboBox0.Size = new System.Drawing.Size(86, 21);
             // 
             // comboBox1
             // 
@@ -84,19 +84,19 @@
             "小于等于 ≦",
             "不等于 ≠"});
             this.comboBox1.Location = new System.Drawing.Point(92, 2);
-            this.comboBox1.Size = new System.Drawing.Size(86, 26);
+            this.comboBox1.Size = new System.Drawing.Size(86, 21);
             this.comboBox1.Visible = true;
             // 
             // topPanel
             // 
             this.topPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.topPanel.Size = new System.Drawing.Size(587, 37);
+            this.topPanel.Size = new System.Drawing.Size(589, 37);
             // 
             // bottomPanel
             // 
             this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 329);
-            this.bottomPanel.Size = new System.Drawing.Size(587, 64);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 340);
+            this.bottomPanel.Size = new System.Drawing.Size(589, 64);
             // 
             // valuePanel
             // 
@@ -109,7 +109,7 @@
             this.valuePanel.Controls.Add(this.label1);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(0, 37);
-            this.valuePanel.Size = new System.Drawing.Size(587, 292);
+            this.valuePanel.Size = new System.Drawing.Size(589, 303);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.label1, 0);
             this.valuePanel.Controls.SetChildIndex(this.label2, 0);
@@ -122,7 +122,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(60, 9);
-            this.label1.Size = new System.Drawing.Size(85, 19);
+            this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.Text = "数据信息";
             // 
             // label3
@@ -132,7 +132,7 @@
             this.label3.Location = new System.Drawing.Point(60, 50);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 19);
+            this.label3.Size = new System.Drawing.Size(63, 14);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段";
             // 
@@ -143,7 +143,7 @@
             this.label2.Location = new System.Drawing.Point(60, 89);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 19);
+            this.label2.Size = new System.Drawing.Size(63, 14);
             this.label2.TabIndex = 0;
             this.label2.Text = "过滤条件";
             // 
@@ -193,7 +193,7 @@
             this.textBoxEx1.Location = new System.Drawing.Point(182, 2);
             this.textBoxEx1.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxEx1.Name = "textBoxEx1";
-            this.textBoxEx1.Size = new System.Drawing.Size(86, 26);
+            this.textBoxEx1.Size = new System.Drawing.Size(86, 21);
             this.textBoxEx1.TabIndex = 6;
             // 
             // panel1
@@ -208,7 +208,7 @@
             // FilterOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(587, 393);
+            this.ClientSize = new System.Drawing.Size(589, 404);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.bottomPanel);

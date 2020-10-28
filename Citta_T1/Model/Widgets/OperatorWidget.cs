@@ -1,4 +1,5 @@
-﻿using C2.Controls.MapViews;
+﻿using C2.Business.Option;
+using C2.Controls.MapViews;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -7,16 +8,28 @@ using System.Xml;
 
 namespace C2.Model.Widgets
 {
-    class OperatorWidget : Widget, IRemark
+    public enum OpStatus
+    {
+        Null,
+        Ready,
+        Done
+    }
+    public class OperatorWidget : Widget, IRemark
     {
         public const string TypeID = "OPERATOR";
-        public String operatorName = "HTTP数据最大值";
 
         public OperatorWidget()
         {
+            Option = new OperatorOption();
             DisplayIndex = 1;
+            Status = OpStatus.Null;
         }
 
+        public DataItem ResultItem { get; set; }
+        public OpStatus Status { get; set; }
+        public string OpType { get; set; }
+        public DataItem DataSourceItem { get; set; }
+        public OperatorOption Option { get; set; }
         public override bool ResponseMouse
         {
             get

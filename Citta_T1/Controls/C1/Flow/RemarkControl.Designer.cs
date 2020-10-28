@@ -34,10 +34,10 @@
             this.remarkCtrPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // remarkCtrPanel
             // 
             this.remarkCtrPanel.BackColor = System.Drawing.Color.White;
-            this.remarkCtrPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.remarkCtrPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("remarkCtrPanel.BackgroundImage")));
             this.remarkCtrPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.remarkCtrPanel.Controls.Add(this.remarkCtrTextBox);
             this.remarkCtrPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -46,15 +46,15 @@
             this.remarkCtrPanel.Size = new System.Drawing.Size(160, 160);
             this.remarkCtrPanel.TabIndex = 0;
             // 
-            // textBox1
+            // remarkCtrTextBox
             // 
             this.remarkCtrTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(37)))));
             this.remarkCtrTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.remarkCtrTextBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remarkCtrTextBox.Location = new System.Drawing.Point(2, 5);
+            this.remarkCtrTextBox.Location = new System.Drawing.Point(0, 0);
             this.remarkCtrTextBox.Multiline = true;
             this.remarkCtrTextBox.Name = "remarkCtrTextBox";
-            this.remarkCtrTextBox.Size = new System.Drawing.Size(146, 143);
+            this.remarkCtrTextBox.Size = new System.Drawing.Size(160, 152);
             this.remarkCtrTextBox.TabIndex = 0;
             this.remarkCtrTextBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 

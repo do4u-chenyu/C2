@@ -142,68 +142,71 @@ namespace C2.Controls.Move.Op
             {
                 case "关联算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RelateOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.releateOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.relate_op;
                     break;
                 case "碰撞算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CollideOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.collideOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.coll_op;
                     break;
                 case "取并集":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.UnionOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.unionOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.union_op;
                     break;
                 case "取差集":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DifferOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.differOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.subtra_op;
                     break;
                 case "随机采样":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RandomOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.randomOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.rand_op;
                     break;
                 case "条件筛选":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FilterOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.filterOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.filt_op;
                     break;
                 case "取最大值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MaxOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.maxOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.max_op;
                     break;
                 case "取最小值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.minOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.min_op;
                     break;
                 case "取平均值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.AvgOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.avgOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.avg_op;
                     break;
                 case "频率算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FreqOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.freqOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.freq_op;
                     break;
                 case "排序算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.SortOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.sortOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.order_op;
                     break;
                 case "分组算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.GroupOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.groupOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.group_op;
                     break;
                 case "AI实践":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator1HelpInfo);
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.AI_op;
                     break;
                 case "Python算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperatorHelpInfo);
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.python_op;
                     break;
                 case "多源算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator2HelpInfo);
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.multi_op;
                     break;
                 case "关键词过滤":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.KeyWordOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.wordFilterOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.word_op;
                     break;
                 case "数据标准化":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.dataStandarOp;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.stan_op;
                     break;
                 default:
                     break;

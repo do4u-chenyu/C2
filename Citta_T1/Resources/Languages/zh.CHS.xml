@@ -379,5 +379,15 @@
     <item name="The content has changed, do you want to accept the changes?">内容已经发生改变, 是否确认修改?</item>
     <item name="Donation - Thanks for Your Generosity">捐助 - 感谢您的慷慨</item>
     <item name="WeChat">微信</item>
+    <item name="ViewData">查看数据</item>
+	<item name="GetChart">生成图表</item>
+	<item name="Design">修改</item>
+	<item name="Running">运行</item>
+	<item name="Public">发布</item>
+	<item name="Operator">添加算子</item>
+	<item name="Max">最大值</item>
+	<item name="Sort">排序</item>
+	<item name="Model">模型</item>
+	<item name="Result">添加结果</item>
 	</words>
 </dictionary>

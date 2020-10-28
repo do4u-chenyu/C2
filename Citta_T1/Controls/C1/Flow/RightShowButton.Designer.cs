@@ -63,7 +63,7 @@
             this.DoubleBuffered = true;
             this.Name = "RightShowButton";
             this.Size = new System.Drawing.Size(55, 55);
-            this.toolTip1.SetToolTip(this, "显示浮动工具栏");
+            this.toolTip1.SetToolTip(this, "隐藏与显示浮动工具栏");
             this.Click += new System.EventHandler(this.RightShowButton_Click);
             this.MouseEnter += new System.EventHandler(this.RightShowButton_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.RightShowButton_MouseLeave);

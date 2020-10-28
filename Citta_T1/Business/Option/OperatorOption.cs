@@ -56,6 +56,12 @@ namespace C2.Business.Option
             this.opControl = opControl;
             OptionPrefixInit();
         }
+
+        public OperatorOption()
+        {
+            optionDict = new Dictionary<string, string>();
+            OptionPrefixInit();
+        }
         private void OptionPrefixInit()
         {          
             this.allRegisterInfo = new Dictionary<ElementSubType, RegisterInfo[]>

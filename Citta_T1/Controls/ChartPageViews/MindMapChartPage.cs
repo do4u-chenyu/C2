@@ -187,9 +187,11 @@ namespace C2.ChartPageView
             MenuAddTopic.Text = Lang._("Add Topic");
             MenuAddSubTopic.Text = Lang._("Add Sub Topic");
             MenuAdd.Text = Lang._("Add");
-            MenuAddOperator.Text = Lang.GetTextWithEllipsis("Operator");
-            MenuAddDataSource.Text = Lang.GetTextWithEllipsis("DataSource");
-            MenuAddResult.Text = Lang.GetTextWithEllipsis("Result");
+            MenuAddOperator.Text = Lang._("Operator");
+            MenuAddMaxOp.Text = Lang._("Max");
+            MenuAddSortOp.Text = Lang._("Sort");
+            MenuAddModelOp.Text = Lang._("Model");
+            MenuAddResult.Text = Lang._("Result");
             MenuFolding.Text = Lang._("Folding");
             MenuCollapseFolding.Text = Lang._("Collapse");
             MenuExpandFolding.Text = Lang._("Expand");
@@ -222,8 +224,10 @@ namespace C2.ChartPageView
         ToolStripMenuItem MenuAddSubTopic;
         ToolStripMenuItem MenuAdd;
         ToolStripMenuItem MenuAddResult;
-        ToolStripMenuItem MenuAddDataSource;
         ToolStripMenuItem MenuAddOperator;
+        ToolStripMenuItem MenuAddMaxOp;
+        ToolStripMenuItem MenuAddSortOp;
+        ToolStripMenuItem MenuAddModelOp;
         ToolStripSeparator toolStripSeparator5;
         ToolStripMenuItem MenuLink;
         ToolStripMenuItem MenuStraightening;
@@ -266,8 +270,10 @@ namespace C2.ChartPageView
             MenuAddSubTopic = new ToolStripMenuItem();
             MenuAdd = new ToolStripMenuItem();
             MenuAddResult = new ToolStripMenuItem();
-            MenuAddDataSource = new ToolStripMenuItem();
             MenuAddOperator = new ToolStripMenuItem();
+            MenuAddMaxOp = new ToolStripMenuItem();
+            MenuAddSortOp = new ToolStripMenuItem();
+            MenuAddModelOp = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             MenuLink = new ToolStripMenuItem();
             MenuStraightening = new ToolStripMenuItem();
@@ -335,7 +341,6 @@ namespace C2.ChartPageView
 
             // MenuAdd
             MenuAdd.DropDownItems.AddRange(new ToolStripItem[] {
-                MenuAddDataSource,
                 MenuAddOperator,
                 MenuAddResult});
             MenuAdd.Name = "MenuAdd";
@@ -347,17 +352,26 @@ namespace C2.ChartPageView
             MenuAddResult.Text = "Result";
             MenuAddResult.Click += new System.EventHandler(MenuAddResult_Click);
 
-            // MenuAddDataSource
-            MenuAddDataSource.Image = C2.Properties.Resources.data_w_icon;
-            MenuAddDataSource.Name = "MenuAddDataSource";
-            MenuAddDataSource.Text = "DataSource";
-            MenuAddDataSource.Click += new System.EventHandler(MenuAddDataSource_Click);
-
             // MenuAddOperator
+            MenuAddOperator.DropDownItems.AddRange(new ToolStripItem[] {
+                MenuAddMaxOp,
+                MenuAddSortOp,
+                MenuAddModelOp});
             MenuAddOperator.Image = C2.Properties.Resources.operator_w_icon;
             MenuAddOperator.Name = "MenuAddOperator";
             MenuAddOperator.Text = "Operator";
-            MenuAddOperator.Click += new System.EventHandler(MenuAddOperator_Click);
+
+            MenuAddMaxOp.Name = "MenuAddMaxOp";
+            MenuAddMaxOp.Text = "Max";
+            MenuAddMaxOp.Click += new System.EventHandler(MenuAddMaxOp_Click);
+
+            MenuAddSortOp.Name = "MenuAddSortOp";
+            MenuAddSortOp.Text = "Sort";
+            MenuAddSortOp.Click += new System.EventHandler(MenuAddSortOp_Click);
+
+            MenuAddModelOp.Name = "MenuAddModelOp";
+            MenuAddModelOp.Text = "Model";
+            MenuAddModelOp.Click += new System.EventHandler(MenuAddModelOp_Click);
 
             // toolStripSeparator5
             toolStripSeparator5.Name = "toolStripSeparator5";
@@ -510,7 +524,6 @@ namespace C2.ChartPageView
                 MenuExpandAll.Enabled = topicCount > 0 && count == 1;
                 MenuCollapseAll.Enabled = topicCount > 0 && count == 1;
                 MenuAdd.Enabled = true;
-                MenuAddDataSource.Enabled = topicCount > 0;
                 MenuAddResult.Enabled = topicCount > 0;
                 MenuAddOperator.Enabled = topicCount > 0;
                 MenuNewChartFromHere.Available = topicCount == 1;
@@ -626,15 +639,21 @@ namespace C2.ChartPageView
             mindMapView1.AddResult();
         }
 
-        void MenuAddDataSource_Click(object sender, EventArgs e)
+        void MenuAddMaxOp_Click(object sender, EventArgs e)
         {
-            mindMapView1.AddDataSource();
+            mindMapView1.AddOperator(Lang._("max"));
         }
 
-        void MenuAddOperator_Click(object sender, EventArgs e)
+        void MenuAddSortOp_Click(object sender, EventArgs e)
         {
-            mindMapView1.AddOperator();
+            mindMapView1.AddOperator(Lang._("sort"));
         }
+
+        void MenuAddModelOp_Click(object sender, EventArgs e)
+        {
+            mindMapView1.AddOperator(Lang._("model"));
+        }
+
 
         void MenuStraightening_Click(object sender, EventArgs e)
         {

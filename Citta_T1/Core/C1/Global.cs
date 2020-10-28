@@ -17,6 +17,7 @@ namespace C2.Core
         private static CanvasPanel canvasPanel;
         private static ModelDocumentDao modelDocumentDao;   // 用户模型工具类
         private static FlowControl flowControl;
+        private static OperatorControl operatorControl; 
         private static MyModelControl myModelControl;
         private static RemarkControl remarkControl;
         private static BottomLogControl logView;
@@ -41,6 +42,7 @@ namespace C2.Core
             return ret;
         }
         public static FlowControl GetFlowControl() { return flowControl; }
+        public static OperatorControl GetOperatorControl() { return operatorControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static RemarkControl GetRemarkControl() { return remarkControl; }
         public static BottomLogControl GetLogView() { return logView; }
@@ -57,6 +59,7 @@ namespace C2.Core
         public static void SetCanvasPanel(CanvasPanel cp) { canvasPanel = cp; }
         public static void SetModelDocumentDao(ModelDocumentDao mdd) { modelDocumentDao = mdd; }
         public static void SetFlowControl(FlowControl fc) { flowControl = fc; }
+        public static void SetOperatorControl(OperatorControl oc) { operatorControl = oc; }
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
         public static void SetRemarkControl(RemarkControl rc) { remarkControl = rc; }
         public static void SetLogView(BottomLogControl lv) { logView = lv; }
@@ -71,7 +74,8 @@ namespace C2.Core
         public const float Factor = 1.3F;
         private static string versionType;
         public static string VersionType { get => versionType; set => versionType = value; }
-        public const string GreenVersion = "Green";
+        public const string GreenLevel = "Green";
+        public const string Nolanding = "NoLanding";
         public const string GreenPath = "source";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
     }
