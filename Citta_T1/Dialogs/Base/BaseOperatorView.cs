@@ -3,7 +3,6 @@ using C2.Business.Option;
 using C2.Controls.Move.Op;
 using C2.Core;
 using C2.Utils;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -258,7 +257,7 @@ namespace C2.Dialogs.Base
 
         protected void GroupBox_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(this.BackColor);
+            //e.Graphics.Clear(this.BackColor);
         }
 
         private Button NewButton(string name)
