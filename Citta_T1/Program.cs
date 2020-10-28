@@ -31,7 +31,7 @@ namespace C2
         static void Main()
         {
             DesignerModelClass.IsDesignerMode = false;
-
+            MainForm = LoginForm.mainForm;
             ConfigProgram();
             Application.EnableVisualStyles();
             LanguageManage.Initialize();
@@ -42,7 +42,6 @@ namespace C2
                 LoginForm loginForm = new LoginForm();
                 RunByVersion();
                 Application.EnableVisualStyles();
-                MainForm = LoginForm.mainForm;
 
             }
             else
@@ -85,7 +84,7 @@ namespace C2
                 lgInfo.WriteLastLogin(userName);
                 Application.Run(new MainForm(userName));
             }
-            if (Global.VersionType.Equals("test"))
+            else if (Global.VersionType.Equals("test"))
             {
                 Application.Run(new ChartBoards());
             }
