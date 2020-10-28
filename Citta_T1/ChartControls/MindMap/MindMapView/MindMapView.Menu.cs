@@ -173,10 +173,9 @@ namespace C2.Controls.MapViews
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             // 剩余最后一个菜单项，删除数据源挂件
-            if (dtw.DataItems.Count == 1)
+            dtw.DataItems.Remove(hitItem);
+            if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
-            else
-                dtw.DataItems.Remove(hitItem);
         }
         void DSWidgetMenuDelete_Click(object sender, EventArgs e)
         {
