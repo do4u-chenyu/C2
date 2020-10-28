@@ -132,12 +132,10 @@ namespace C2.Controls.MapViews
         }
         protected override void OnChartDragDrop(DragEventArgs e)
         {
-            base.OnChartDragDrop(e);
             // 数据源的信息
-            string fileName = Path.GetFileNameWithoutExtension(e.Data.GetData("Path").ToString());
             DataItem dataItem = new DataItem(
-            e.Data.GetData("Path").ToString(),
-                fileName,
+                (string)e.Data.GetData("Path"),
+                (string)e.Data.GetData("Text"),
                 (char)e.Data.GetData("Separator"),
                 (OpUtil.Encoding)e.Data.GetData("Encoding"),
                 (OpUtil.ExtType)e.Data.GetData("ExtType")
@@ -148,24 +146,17 @@ namespace C2.Controls.MapViews
 
             if (htr == HitTestResult.Empty)
                 return;
-            bool noDSWidget = true;
-            foreach (Widget widget in htr.Topic.Widgets)
-            {
-                if (!(widget is DataSourceWidget))
-                    continue;
-                DataSourceWidget dsw = (widget as DataSourceWidget);
-                if (dsw.DataItems.Find ((DataItem x)=>x.FilePath.Equals(dataItem.FilePath))==null)
-                    dsw.DataItems.Add(dataItem);                                  
-                noDSWidget = false;
-                break;
-            }
-            if (noDSWidget)
+            DataSourceWidget dsw = htr.Topic.FindWidget<DataSourceWidget>();
+            if (dsw == null)
             {
                 Topic[] hitTopic = new Topic[] { htr.Topic };
-                AddDataSource(hitTopic,dataItem);
+                AddDataSource(hitTopic, dataItem);
+                return;
             }
-
-           
+            if (dsw.DataItems.Find((DataItem x) => x.FilePath.Equals(dataItem.FilePath)) == null)
+                dsw.DataItems.Add(dataItem);
+            else
+                MessageBox.Show("  数据源: " + dataItem.FilePath + "已存在，无需重新导入.");
 
         }
         protected override void OnChartMouseDown(MouseEventArgs e)
