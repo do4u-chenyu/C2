@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace C2.Dialogs.Base
+namespace C2.OperatorViews.Base
 {
 
     public partial class BaseOperatorView : Form
@@ -258,7 +258,7 @@ namespace C2.Dialogs.Base
 
         protected void GroupBox_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(this.BackColor);
+            //e.Graphics.Clear(this.BackColor);
         }
 
         private Button NewButton(string name)
