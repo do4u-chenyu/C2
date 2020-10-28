@@ -31,7 +31,7 @@ namespace C2.Dialogs
             //旧状态记录
             this.oldPath = this.fullOutputFilePath;
             InitPreViewText();
-            //注册python算子的ComboBox
+            //注册py算子的ComboBox
             this.comboBoxes.Add(this.pythonChosenComboBox);
         }
 
