@@ -88,7 +88,7 @@ namespace C2.Utils
                 case "多源算子":
                     type = ElementSubType.CustomOperator2;
                     break;
-                case "Python算子":
+                case "Py算子":
                     type = ElementSubType.PythonOperator;
                     break;
                 case "关键词过滤":
@@ -152,7 +152,7 @@ namespace C2.Utils
                     type = "多源算子";
                     break;
                 case "PythonOperator":
-                    type = "Python算子";
+                    type = "Py算子";
                     break;
                 case "KeywordOperator":
                     type = "关键词过滤";

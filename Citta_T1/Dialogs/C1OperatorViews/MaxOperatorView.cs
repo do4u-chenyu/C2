@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class MaxOperatorView : BaseOperatorView
+    public partial class MaxOperatorView : C1BaseOperatorView
     {
         public MaxOperatorView(MoveOpControl opControl) : base(opControl)
         {

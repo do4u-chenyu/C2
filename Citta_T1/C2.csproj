@@ -188,9 +188,23 @@
     <Compile Include="Controls\DataCharts\RingChart.Designer.cs">
       <DependentUpon>RingChart.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Base\BaseOperatorView.cs" />
+    <Compile Include="Dialogs\Base\BaseOperatorView.cs" >
+    <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\Base\BaseOperatorView.Designer.cs">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Base\C1BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Base\C1BaseOperatorView.Designer.cs">
+      <DependentUpon>C1BaseOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Base\C2BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Base\C2BaseOperatorView.Designer.cs">
+      <DependentUpon>C2BaseOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\C1OperatorViews\AvgOperatorView.cs">
       <SubType>Form</SubType>
@@ -1418,6 +1432,48 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\CustomOperatorView.resx">
       <DependentUpon>CustomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\DataFormatOperatorView.resx">
+      <DependentUpon>DataFormatOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\DifferOperatorView.resx">
+      <DependentUpon>DifferOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\FilterOperatorView.resx">
+      <DependentUpon>FilterOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\FreqOperatorView.resx">
+      <DependentUpon>FreqOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\GroupOperatorView.resx">
+      <DependentUpon>GroupOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\KeyWordOperatorView.resx">
+      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\MaxOperatorView.resx">
+      <DependentUpon>MaxOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\MinOperatorView.resx">
+      <DependentUpon>MinOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\PythonOperatorHelper.resx">
+      <DependentUpon>PythonOperatorHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\PythonOperatorView.resx">
+      <DependentUpon>PythonOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\RandomOperatorView.resx">
+      <DependentUpon>RandomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\RelateOperatorView.resx">
+      <DependentUpon>RelateOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\SortOperatorView.resx">
+      <DependentUpon>SortOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\UnionOperatorView.resx">
+      <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckUpdate.resx">
       <DependentUpon>CheckUpdate.cs</DependentUpon>
