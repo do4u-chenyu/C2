@@ -34,13 +34,16 @@ namespace C2.Controls.MapViews
             switch (HoverObject.Widget.GetTypeID())
             {
                 case OperatorWidget.TypeID:
-                    CreateOperatorMenu();
+                    opw = HoverObject.Widget as OperatorWidget;
+                    CreateOperatorMenu(opw);
                     break;
                 case DataSourceWidget.TypeID:
-                    CreateDataSourceMenu();
+                    dtw = HoverObject.Widget as DataSourceWidget;
+                    CreateDataSourceMenu(dtw);
                     break;
                 case ResultWidget.TypeID:
-                    CreateResultMenu();
+                    rsw = HoverObject.Widget as ResultWidget;
+                    CreateResultMenu(rsw);
                     break;
                 default:
                     break;
@@ -48,10 +51,8 @@ namespace C2.Controls.MapViews
            
         }
 
-        public void CreateOperatorMenu()
+        private void CreateOperatorMenu(OperatorWidget opw)
         {
-            opw = HoverObject.Widget as OperatorWidget;
-
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
             ToolStripMenuItem MenuDesign = new ToolStripMenuItem();
             ToolStripMenuItem MenuRunning = new ToolStripMenuItem();
@@ -190,9 +191,9 @@ namespace C2.Controls.MapViews
         }
 
 
-        public void CreateDataSourceMenu()
+        private void CreateDataSourceMenu(DataSourceWidget dtw)
         {
-            dtw = HoverObject.Widget as DataSourceWidget;
+           
             WidgetMenuStrip.SuspendLayout();
             foreach (DataItem dataItem in dtw.DataItems)
             {
@@ -230,9 +231,9 @@ namespace C2.Controls.MapViews
             }
         }
 
-        public void CreateResultMenu()
+        private void CreateResultMenu(ResultWidget rsw)
         {
-            dtw = HoverObject.Widget as DataSourceWidget;
+            
 
             ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
             MenuOpenResult.Text = "Result";
