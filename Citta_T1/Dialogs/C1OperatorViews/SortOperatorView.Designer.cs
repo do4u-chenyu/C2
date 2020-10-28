@@ -118,8 +118,8 @@
             this.valuePanel.Controls.Add(this.label6);
             this.valuePanel.Location = new System.Drawing.Point(116, 19);
             this.valuePanel.Size = new System.Drawing.Size(289, 253);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
+            //this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
+            //this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
             this.valuePanel.Controls.SetChildIndex(this.label6, 0);
             this.valuePanel.Controls.SetChildIndex(this.label7, 0);
             this.valuePanel.Controls.SetChildIndex(this.label8, 0);
