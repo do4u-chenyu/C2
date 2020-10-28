@@ -182,9 +182,27 @@
     <Compile Include="Controls\DataCharts\RadarChart.Designer.cs">
       <DependentUpon>RadarChart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataCharts\RingChart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataCharts\RingChart.Designer.cs">
+      <DependentUpon>RingChart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Base\BaseOperatorView.cs" />
     <Compile Include="Dialogs\Base\BaseOperatorView.Designer.cs">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Base\C1BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Base\C1BaseOperatorView.Designer.cs">
+      <DependentUpon>C1BaseOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Base\C2BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Base\C2BaseOperatorView.Designer.cs">
+      <DependentUpon>C2BaseOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\C1OperatorViews\AvgOperatorView.cs">
       <SubType>Form</SubType>
@@ -1379,6 +1397,9 @@
     <EmbeddedResource Include="Controls\C1\Flow\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataCharts\RingChart.resx">
+      <DependentUpon>RingChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\AccelaratorKeys\ShortcutKeysEditor.resx">
       <DependentUpon>ShortcutKeysEditor.cs</DependentUpon>
