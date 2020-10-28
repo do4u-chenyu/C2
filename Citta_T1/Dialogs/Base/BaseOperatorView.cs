@@ -3,7 +3,6 @@ using C2.Business.Option;
 using C2.Controls.Move.Op;
 using C2.Core;
 using C2.Utils;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,7 +11,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace C2.OperatorViews.Base
+namespace C2.Dialogs.Base
 {
 
     public partial class BaseOperatorView : Form

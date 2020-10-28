@@ -1,6 +1,4 @@
-﻿using C2.Core;
-
-namespace C2.OperatorViews.Base
+﻿namespace C2.Dialogs.Base
 {
     partial class BaseOperatorView
     {
