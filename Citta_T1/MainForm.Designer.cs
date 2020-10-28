@@ -481,8 +481,6 @@ namespace C2
             // 
             // BaseWorkSpace
             // 
-            this.BaseWorkSpace.Controls.Add(this.button1);
-            this.BaseWorkSpace.Controls.Add(this.ImportDataSourceButton);
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
