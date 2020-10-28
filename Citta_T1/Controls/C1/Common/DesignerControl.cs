@@ -1,4 +1,4 @@
-﻿using C2.Dialogs.C2OperatorViews.Base;
+﻿using C2.Dialogs.C2OperatorViews;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
@@ -129,18 +129,15 @@ namespace C2.Controls.Common
             {
                 case "最大值":
                     var dialog = new C2MaxOperatorView(OpWidget);
-                    if (dialog.ShowDialog(this) == DialogResult.OK)
+                    if(dialog.ShowDialog(this) == DialogResult.OK)
                     {
-                        //string path = string.Format("L_{0}.bcp", System.DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-                        if(OpWidget.ResultItem == null)
-                        {
-                            OpWidget.ResultItem = new DataItem("D:\\1.txt", "1", '\t', Utils.OpUtil.Encoding.GBK, Utils.OpUtil.ExtType.Text);
-                        }
-                        OpWidget.Status = OpStatus.Ready;
+                        OpWidget.OpName = OpWidget.DataSourceItem.FileName + "-" + OpWidget.OpType;
+                        DataItem resultItem = OpWidget.ResultItem;
+                        SelectedTopic.Widgets.Add(new ResultWidget());
                     }
                     break;
-                case "排序":
-                    //new SortOperatorView(SelectedTopic.FindWidget<OperatorWidget>()).ShowDialog();
+                case "AI实践":
+                    new C2CustomOperatorView(OpWidget).ShowDialog(this);
                     break;
                 default:
                     break;

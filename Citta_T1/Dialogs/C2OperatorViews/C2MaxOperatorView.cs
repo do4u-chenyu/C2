@@ -1,4 +1,5 @@
-﻿using C2.Model.Widgets;
+﻿using C2.Dialogs.C2OperatorViews.Base;
+using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace C2.Dialogs.C2OperatorViews.Base
+namespace C2.Dialogs.C2OperatorViews
 {
     public partial class C2MaxOperatorView : C2BaseOperatorView
     {

@@ -188,6 +188,12 @@
     <Compile Include="Dialogs\C2OperatorViews\Base\C2BaseOperatorView.Designer.cs">
       <DependentUpon>C2BaseOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2CustomOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2CustomOperatorView.Designer.cs">
+      <DependentUpon>C2CustomOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2MaxOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>

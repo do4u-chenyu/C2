@@ -359,7 +359,11 @@ namespace C2.Model.Widgets
             if (widget is DataSourceWidget)
                 (widget as DataSourceWidget).DataItems =(this as DataSourceWidget).DataItems;
             if(widget is OperatorWidget)
+            {
                 (widget as OperatorWidget).OpType = (this as OperatorWidget).OpType;
+                (widget as OperatorWidget).OpName = (this as OperatorWidget).OpType;
+            }
+                
         }
 
         public virtual void OnMouseClick(Control ct,Point point)
