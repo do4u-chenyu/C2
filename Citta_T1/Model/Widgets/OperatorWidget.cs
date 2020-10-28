@@ -20,18 +20,24 @@ namespace C2.Model.Widgets
 
         public OperatorWidget()
         {
-            Option = new OperatorOption();
             DisplayIndex = 1;
-            Status = OpStatus.Null;
 
+            DataSourceItem = null;
+            Option = null;
+            ResultItem = null;
+            Status = OpStatus.Null;
         }
 
-        public string OpName { get; set; }
-        public DataItem ResultItem { get; set; }
-        public OpStatus Status { get; set; }
-        public string OpType { get; set; }
-        public DataItem DataSourceItem { get; set; }
-        public OperatorOption Option { get; set; }
+        public string OpName { get; set; }  //菜单栏名称
+        public string OpType { get; set; }  //算子类型
+
+        public DataItem DataSourceItem { get; set; }  //选中的数据源
+        public OperatorOption Option { get; set; }  //算子配置内容
+        public DataItem ResultItem { get; set; }  //生成的结果
+        public OpStatus Status { get; set; }  //算子状态
+        
+        
+        
         public override bool ResponseMouse
         {
             get

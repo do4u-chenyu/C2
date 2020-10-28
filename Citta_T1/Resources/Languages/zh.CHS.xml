@@ -383,6 +383,7 @@
 	<item name="GetChart">生成图表</item>
 	<item name="Design">修改</item>
 	<item name="Running">运行</item>
+	<item name="Done">运行完成</item>
 	<item name="Public">发布</item>
 	<item name="Operator">添加算子</item>
 	<item name="Max">最大值</item>

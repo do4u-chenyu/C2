@@ -123,6 +123,7 @@ namespace C2.Controls.Common
                         OpWidget.OpName = OpWidget.DataSourceItem.FileName + "-" + OpWidget.OpType;
                         DataItem resultItem = OpWidget.ResultItem;
                         SelectedTopic.Widgets.Add(new ResultWidget());
+                        OpWidget.Status = OpStatus.Ready;
                     }
                     break;
                 case "AI实践":
