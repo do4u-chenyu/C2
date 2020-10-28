@@ -1,6 +1,4 @@
-﻿using C2.Core;
-
-namespace C2.Dialogs.Base
+﻿namespace C2.Dialogs.Base
 {
     partial class BaseOperatorView
     {
@@ -53,6 +51,7 @@ namespace C2.Dialogs.Base
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
+            this.topPanel.BackColor = System.Drawing.SystemColors.Window;
             this.topPanel.Size = new System.Drawing.Size(0, 0);
             this.topPanel.TabIndex = 0;
             // 
@@ -64,11 +63,13 @@ namespace C2.Dialogs.Base
             this.bottomPanel.Location = new System.Drawing.Point(0, 152);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
+            this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.bottomPanel.Size = new System.Drawing.Size(0, 0);
             this.bottomPanel.TabIndex = 1;
             // 
             // keyPanel
             // 
+            this.keyPanel.BackColor = System.Drawing.SystemColors.Window;
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 18);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
@@ -78,6 +79,7 @@ namespace C2.Dialogs.Base
             // 
             // valuePanel
             // 
+            this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 18);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
@@ -103,19 +105,19 @@ namespace C2.Dialogs.Base
             this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.confirmButton.ForeColor = System.Drawing.SystemColors.WindowText;
             this.confirmButton.Location = new System.Drawing.Point(0, 0);
             this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(75, 23);
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
-            this.confirmButton.UseVisualStyleBackColor = false;
+            this.confirmButton.UseVisualStyleBackColor = true;
             this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // dataSourceTB0
             // 
-            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataSourceTB0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataSourceTB0.Location = new System.Drawing.Point(187, 2);
             this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
             this.dataSourceTB0.Name = "dataSourceTB0";
@@ -127,7 +129,7 @@ namespace C2.Dialogs.Base
             // 
             // dataSourceTB1
             // 
-            this.dataSourceTB1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataSourceTB1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataSourceTB1.Location = new System.Drawing.Point(0, 0);
             this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSourceTB1.Name = "dataSourceTB1";
@@ -141,7 +143,7 @@ namespace C2.Dialogs.Base
             // outListCCBL0
             // 
             this.outListCCBL0.DataSource = null;
-            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outListCCBL0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL0.Location = new System.Drawing.Point(0, 0);
             this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.outListCCBL0.Name = "outListCCBL0";
@@ -151,7 +153,7 @@ namespace C2.Dialogs.Base
             // outListCCBL1
             // 
             this.outListCCBL1.DataSource = null;
-            this.outListCCBL1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outListCCBL1.Font = new System.Drawing.Font("宋体", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL1.Location = new System.Drawing.Point(0, 0);
             this.outListCCBL1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.outListCCBL1.Name = "outListCCBL1";
@@ -159,12 +161,12 @@ namespace C2.Dialogs.Base
             this.outListCCBL1.TabIndex = 0;
             this.outListCCBL1.Visible = false;
             // 
-            // comboBox1
+            // comboBox0
             // 
             this.comboBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox0.FormattingEnabled = true;
             this.comboBox0.Location = new System.Drawing.Point(2, 4);
             this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
@@ -175,12 +177,12 @@ namespace C2.Dialogs.Base
             this.comboBox0.TextUpdate += new System.EventHandler(LeftComboBox_TextUpdate);
             this.comboBox0.DropDownClosed += new System.EventHandler(LeftComboBox_ClosedEvent);
             // 
-            // comboBox2
+            // comboBox1
             // 
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(92, 4);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -195,13 +197,13 @@ namespace C2.Dialogs.Base
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(32, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 0);
             this.label1.TabIndex = 0;
-            this.label1.Text = "数据信息：";
+            this.label1.Text = "数据信息";
             // 
             // tableLayoutPanel1
             // 

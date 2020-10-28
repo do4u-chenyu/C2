@@ -714,7 +714,7 @@ namespace C2
             this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
             this.remarkControl.Name = "remarkControl";
             this.remarkControl.RemarkDescription = "";
-            this.remarkControl.Size = new System.Drawing.Size(161, 157);
+            this.remarkControl.Size = new System.Drawing.Size(135, 380);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
             // 
