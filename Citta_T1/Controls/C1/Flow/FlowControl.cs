@@ -172,26 +172,26 @@ namespace C2.Controls.Flow
             if (flag)
             {
                 this.movePictureBox.Image = global::C2.Properties.Resources.selectDrag;
-                this.movePictureBox.Location = new System.Drawing.Point(124, 2);
-                this.movePictureBox.Size = new System.Drawing.Size(35, 29);
+                this.movePictureBox.Location = new System.Drawing.Point(126,3);
+                this.movePictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
             }
             this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("movePictureBox.Image")));
-            this.movePictureBox.Location = new System.Drawing.Point(129, 4);
-            this.movePictureBox.Size = new System.Drawing.Size(22, 22);
+            this.movePictureBox.Location = new System.Drawing.Point(132, 6);
+            this.movePictureBox.Size = new System.Drawing.Size(21, 21);
         }
         private void ZoomUpChange(bool flag)
         {
             if (flag)
             {
                 this.zoomUpPictureBox.Image = global::C2.Properties.Resources.selectZoomUp;
-                this.zoomUpPictureBox.Location = new System.Drawing.Point(45, 3);
-                this.zoomUpPictureBox.Size = new System.Drawing.Size(35, 29);
+                this.zoomUpPictureBox.Location = new System.Drawing.Point(51, 3);
+                this.zoomUpPictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
             }
             this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomUpPictureBox.Image")));
-            this.zoomUpPictureBox.Location = new System.Drawing.Point(54, 5);
-            this.zoomUpPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.zoomUpPictureBox.Location = new System.Drawing.Point(57, 6);
+            this.zoomUpPictureBox.Size = new System.Drawing.Size(21, 21);
         }
         private void ZoomDownChange(bool flag)
         {
@@ -203,21 +203,21 @@ namespace C2.Controls.Flow
                 return;
             }
             this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomDownPictureBox.Image")));
-            this.zoomDownPictureBox.Location = new System.Drawing.Point(92, 5);
-            this.zoomDownPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.zoomDownPictureBox.Location = new System.Drawing.Point(93, 6);
+            this.zoomDownPictureBox.Size = new System.Drawing.Size(21, 21);
         }
         public void RemarkChange(bool flag)
         {
             if (flag)
             {
                 this.remarkPictureBox.Image = global::C2.Properties.Resources.selectRemark;
-                this.remarkPictureBox.Location = new System.Drawing.Point(13, 3);
+                this.remarkPictureBox.Location = new System.Drawing.Point(14, 3);
                 this.remarkPictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
             }
             this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
-            this.remarkPictureBox.Location = new System.Drawing.Point(18, 5);
-            this.remarkPictureBox.Size = new System.Drawing.Size(23, 23);
+            this.remarkPictureBox.Location = new System.Drawing.Point(20, 6);
+            this.remarkPictureBox.Size = new System.Drawing.Size(21, 21);
         }
         private void FrameChange(bool flag)
         {
@@ -226,13 +226,13 @@ namespace C2.Controls.Flow
             if (flag)
             {
                 this.framePictureBox.Image = global::C2.Properties.Resources.selectFrame;
-                this.framePictureBox.Location = new System.Drawing.Point(167, 2);
+                this.framePictureBox.Location = new System.Drawing.Point(161, 3);
                 this.framePictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
             }
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
-            this.framePictureBox.Location = new System.Drawing.Point(171, 5);
-            this.framePictureBox.Size = new System.Drawing.Size(24, 24);
+            this.framePictureBox.Location = new System.Drawing.Point(167, 6);
+            this.framePictureBox.Size = new System.Drawing.Size(21, 21);
         }
         public void InterruptSelectFrame()
         {
