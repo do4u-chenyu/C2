@@ -1,6 +1,6 @@
 ﻿using C2.Controls.Move.Op;
 using C2.Core;
-using C2.OperatorViews.Base;
+using C2.Dialogs.Base;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class DifferOperatorView : BaseOperatorView
+    public partial class DifferOperatorView : C1BaseOperatorView
     {
 
         public DifferOperatorView(MoveOpControl opControl) : base(opControl)

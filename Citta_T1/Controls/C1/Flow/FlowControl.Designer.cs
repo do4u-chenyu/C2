@@ -47,7 +47,7 @@
             // 
             this.movePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("movePictureBox.Image")));
-            this.movePictureBox.Location = new System.Drawing.Point(130, 9);
+            this.movePictureBox.Location = new System.Drawing.Point(132, 5);
             this.movePictureBox.Name = "movePictureBox";
             this.movePictureBox.Size = new System.Drawing.Size(21, 21);
             this.movePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -62,7 +62,7 @@
             // 
             this.zoomUpPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomUpPictureBox.Image")));
-            this.zoomUpPictureBox.Location = new System.Drawing.Point(56, 9);
+            this.zoomUpPictureBox.Location = new System.Drawing.Point(57, 5);
             this.zoomUpPictureBox.Name = "zoomUpPictureBox";
             this.zoomUpPictureBox.Size = new System.Drawing.Size(21, 21);
             this.zoomUpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -78,7 +78,7 @@
             this.zoomDownPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.zoomDownPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomDownPictureBox.Image")));
-            this.zoomDownPictureBox.Location = new System.Drawing.Point(93, 9);
+            this.zoomDownPictureBox.Location = new System.Drawing.Point(93, 5);
             this.zoomDownPictureBox.Name = "zoomDownPictureBox";
             this.zoomDownPictureBox.Size = new System.Drawing.Size(21, 21);
             this.zoomDownPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -93,7 +93,7 @@
             // 
             this.framePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
-            this.framePictureBox.Location = new System.Drawing.Point(165, 9);
+            this.framePictureBox.Location = new System.Drawing.Point(167, 5);
             this.framePictureBox.Name = "framePictureBox";
             this.framePictureBox.Size = new System.Drawing.Size(21, 21);
             this.framePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -108,7 +108,7 @@
             // 
             this.remarkPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
-            this.remarkPictureBox.Location = new System.Drawing.Point(19, 9);
+            this.remarkPictureBox.Location = new System.Drawing.Point(20, 5);
             this.remarkPictureBox.Name = "remarkPictureBox";
             this.remarkPictureBox.Size = new System.Drawing.Size(21, 21);
             this.remarkPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -133,7 +133,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
             this.Name = "FlowControl";
-            this.Size = new System.Drawing.Size(211, 52);
+            this.Size = new System.Drawing.Size(209, 52);
             this.Load += new System.EventHandler(this.FlowControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.movePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomUpPictureBox)).EndInit();

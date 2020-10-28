@@ -697,8 +697,8 @@ namespace C2
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.remarkControl);
             this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
-            this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
+            this.BaseWorkSpace.Controls.Add(this.canvasPanel);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.BaseWorkSpace.Name = "BaseWorkSpace";
@@ -709,12 +709,13 @@ namespace C2
             // 
             this.remarkControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.remarkControl.BackColor = System.Drawing.Color.Transparent;
+            this.remarkControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("remarkControl.BackgroundImage")));
             this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.remarkControl.Location = new System.Drawing.Point(518, 50);
             this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
             this.remarkControl.Name = "remarkControl";
             this.remarkControl.RemarkDescription = "";
-            this.remarkControl.Size = new System.Drawing.Size(161, 157);
+            this.remarkControl.Size = new System.Drawing.Size(135, 380);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
             // 
@@ -775,7 +776,7 @@ namespace C2
             this.operatorControl.Location = new System.Drawing.Point(687, 106);
             this.operatorControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(210, 320);
+            this.operatorControl.Size = new System.Drawing.Size(209, 320);
             this.operatorControl.TabIndex = 0;
             // 
             // progressBarLabel
@@ -843,7 +844,7 @@ namespace C2
             this.flowControl.SelectDrag = false;
             this.flowControl.SelectFrame = false;
             this.flowControl.SelectRemark = false;
-            this.flowControl.Size = new System.Drawing.Size(210, 51);
+            this.flowControl.Size = new System.Drawing.Size(209, 51);
             this.flowControl.TabIndex = 25;
             this.flowControl.Load += new System.EventHandler(this.flowControl_Load);
             // 

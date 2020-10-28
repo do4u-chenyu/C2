@@ -1,4 +1,4 @@
-﻿using C2.Dialogs.C2OperatorViews.Base;
+﻿using C2.Dialogs.C2OperatorViews;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
@@ -9,28 +9,17 @@ namespace C2.Controls.Common
 {
     public partial class DesignerControl : UserControl
     {
-        Topic _SelectedTopic;
 
-        public Topic SelectedTopic
-        {
-            get { return _SelectedTopic; }
-            set
-            {
-                if (_SelectedTopic != value)
-                {
-                    _SelectedTopic = value;
-                    OnSelectedTopicChanged();
-                }
-            }
-        }
 
+        public Topic SelectedTopic { get; set; }
         public OperatorWidget OpWidget { get; set; }
         public DataItem SelectedDataSource { get; set; }
         public string SelectedOperator { get; set; }
         public List<DataItem> ComboDataSource { get; set; }
 
-        private void OnSelectedTopicChanged()
+        public void SetSelectedTopicDesign(Topic topic)
         {
+            SelectedTopic = topic;
             if(SelectedTopic == null)
             {
                 this.topicName.Text = "未选中主题";
@@ -112,7 +101,7 @@ namespace C2.Controls.Common
                 return;
             }
 
-            if (SelectedDataSource == null)
+            if (OpWidget.DataSourceItem == null)
             {
                 MessageBox.Show("未选中数据源,请添加后再配置");
                 return;
@@ -129,18 +118,16 @@ namespace C2.Controls.Common
             {
                 case "最大值":
                     var dialog = new C2MaxOperatorView(OpWidget);
-                    if (dialog.ShowDialog(this) == DialogResult.OK)
+                    if(dialog.ShowDialog(this) == DialogResult.OK)
                     {
-                        //string path = string.Format("L_{0}.bcp", System.DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-                        if(OpWidget.ResultItem == null)
-                        {
-                            OpWidget.ResultItem = new DataItem("D:\\1.txt", "1", '\t', Utils.OpUtil.Encoding.GBK, Utils.OpUtil.ExtType.Text);
-                        }
+                        OpWidget.OpName = OpWidget.DataSourceItem.FileName + "-" + OpWidget.OpType;
+                        DataItem resultItem = OpWidget.ResultItem;
+                        SelectedTopic.Widgets.Add(new ResultWidget());
                         OpWidget.Status = OpStatus.Ready;
                     }
                     break;
-                case "排序":
-                    //new SortOperatorView(SelectedTopic.FindWidget<OperatorWidget>()).ShowDialog();
+                case "AI实践":
+                    new C2CustomOperatorView(OpWidget).ShowDialog(this);
                     break;
                 default:
                     break;

@@ -9,9 +9,7 @@ namespace C2.Controls.Left
         public FlowChartControl()
         {
             InitializeComponent();
-            this.toolTip1.SetToolTip(this.customOPButton1, HelpUtil.CustomOperator1HelpInfo);
-            this.toolTip1.SetToolTip(this.customOPButton2, HelpUtil.CustomOperator2HelpInfo);
-            this.toolTip1.SetToolTip(this.pythonOPButton, HelpUtil.PythonOperatorHelpInfo);
+            
         }
 
         private void FlowChartControl_MouseDown(object sender, MouseEventArgs e)

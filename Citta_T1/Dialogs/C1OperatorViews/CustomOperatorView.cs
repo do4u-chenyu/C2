@@ -2,7 +2,7 @@
 using C2.Business.Option;
 using C2.Controls.Move.Op;
 using C2.Core;
-using C2.OperatorViews.Base;
+using C2.Dialogs.Base;
 using C2.Utils;
 using System;
 using System.IO;
@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class CustomOperatorView : BaseOperatorView
+    public partial class CustomOperatorView : C1BaseOperatorView
     {
         private readonly string oldPath;
         private OpUtil.Encoding encoding;

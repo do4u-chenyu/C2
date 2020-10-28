@@ -1,6 +1,6 @@
 ﻿using C2.Controls.Move.Op;
 using C2.Core;
-using C2.OperatorViews.Base;
+using C2.Dialogs.Base;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class AvgOperatorView : BaseOperatorView
+    public partial class AvgOperatorView : C1BaseOperatorView
     {
 
         public AvgOperatorView(MoveOpControl opControl) : base(opControl)

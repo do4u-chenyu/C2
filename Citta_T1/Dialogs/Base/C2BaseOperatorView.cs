@@ -8,19 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace C2.IAOLab.PythonOP
+namespace C2.Dialogs.Base
 {
-    public partial class PythonOperatorHelper : Form
+    public partial class C2BaseOperatorView : BaseOperatorView
     {
-        public PythonOperatorHelper()
+        public C2BaseOperatorView()
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-        }
-
     }
 }

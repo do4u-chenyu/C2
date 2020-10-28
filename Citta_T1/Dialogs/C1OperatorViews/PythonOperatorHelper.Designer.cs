@@ -118,7 +118,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(818, 26);
             this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "        python算子主要是用来处理原始数据较复杂，需要执行Python脚本生成结果文件的数据。配置窗口可分成脚本参数配置及结果展示配置两部分。";
+            this.textBox1.Text = "        py算子主要是用来处理原始数据较复杂，需要执行Python脚本生成结果文件的数据。配置窗口可分成脚本参数配置及结果展示配置两部分。";
             // 
             // pictureBox1
             // 
@@ -360,7 +360,7 @@
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Python算子帮助文档";
+            this.Text = "Py算子帮助文档";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

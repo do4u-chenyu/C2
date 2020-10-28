@@ -130,23 +130,35 @@ namespace C2.Controls
                 return;
             }
             // C2不允许数据拖到Canvas
-            if (type == ElementType.DataSource)
-                return;
+            //if (type == ElementType.DataSource)
+            //    return;
             float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             int locX = Convert.ToInt32(e.X / screenFactor);
             int locY = Convert.ToInt32(e.Y / screenFactor);
             int dx = Convert.ToInt32(drgOffsetX / screenFactor);
             int dy = Convert.ToInt32(drgOffsetY / screenFactor);
             //Point location = this.Parent.PointToClient(new Point(locX - dx, locY - dy));
-            Point location = Global.GetMainForm().PointToClient(new Point(locX - dx/2, locY - dy/2 - 30));
-
+            Point location = Global.GetMainForm().PointToClient(new Point(locX - dx / 2, locY - dy / 2 - 30));
 
             string text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
 
             if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, text, location);
-            
+           
+            if (type == ElementType.DataSource)
+            {
+                string path = e.Data.GetData("Path").ToString();
+                char separator = (char)e.Data.GetData("Separator");
+                OpUtil.Encoding encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
+                OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
+                AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
+            }
+                
+
+
+
+
 
         }
 

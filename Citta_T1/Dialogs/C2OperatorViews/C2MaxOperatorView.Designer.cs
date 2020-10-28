@@ -1,4 +1,4 @@
-﻿namespace C2.Dialogs.C2OperatorViews.Base
+﻿namespace C2.Dialogs.C2OperatorViews
 {
     partial class C2MaxOperatorView
     {

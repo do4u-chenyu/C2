@@ -26,8 +26,11 @@ namespace C2.Model.Widgets
         int _DisplayIndex;
         int _Padding;
 
+        protected Bitmap widgetIcon;
+
         public Widget()
         {
+
         }
 
         [Browsable(false)]
@@ -350,6 +353,14 @@ namespace C2.Model.Widgets
 
         public virtual void Paint(RenderArgs e)
         {
+            if (widgetIcon == null)
+                return;
+            Rectangle rect = DisplayRectangle;
+            rect.X += Math.Max(0, (rect.Width - widgetIcon.Width) / 2);
+            rect.Y += Math.Max(0, (rect.Height - widgetIcon.Height) / 2);
+            rect.Width = Math.Min(rect.Width, widgetIcon.Width);
+            rect.Height = Math.Min(rect.Height, widgetIcon.Height);
+            e.Graphics.DrawImage(widgetIcon, rect, 0, 0, widgetIcon.Width, widgetIcon.Height);
         }
 
         public virtual void CopyTo(Widget widget)
@@ -359,7 +370,11 @@ namespace C2.Model.Widgets
             if (widget is DataSourceWidget)
                 (widget as DataSourceWidget).DataItems =(this as DataSourceWidget).DataItems;
             if(widget is OperatorWidget)
+            {
                 (widget as OperatorWidget).OpType = (this as OperatorWidget).OpType;
+                (widget as OperatorWidget).OpName = (this as OperatorWidget).OpType;
+            }
+                
         }
 
         public virtual void OnMouseClick(Control ct,Point point)

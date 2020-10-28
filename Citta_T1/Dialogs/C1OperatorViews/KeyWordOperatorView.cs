@@ -1,6 +1,6 @@
 ﻿using C2.Controls.Move.Op;
 using C2.Core;
-using C2.OperatorViews.Base;
+using C2.Dialogs.Base;
 using C2.Utils;
 using NPOI.SS.Formula.Functions;
 using System;
@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace C2.OperatorViews
 {
 
-    public partial class KeywordOperatorView : BaseOperatorView
+    public partial class KeywordOperatorView : C1BaseOperatorView
     {
         private const int colIndexDefault = -1;
         private const int colCountDefault = 0;

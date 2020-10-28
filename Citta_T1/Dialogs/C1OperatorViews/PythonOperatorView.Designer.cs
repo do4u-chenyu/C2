@@ -460,7 +460,7 @@
             this.MinimumSize = new System.Drawing.Size(547, 518);
             this.Name = "PythonOperatorView";
             this.ShowIcon = true;
-            this.Text = "Python算子设置";
+            this.Text = "Py算子设置";
             this.Load += new System.EventHandler(this.PythonOperatorView_Load);
             this.Controls.SetChildIndex(this.confirmButton, 0);
             this.Controls.SetChildIndex(this.cancelButton, 0);

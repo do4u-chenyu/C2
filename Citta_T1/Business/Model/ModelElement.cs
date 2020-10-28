@@ -35,7 +35,7 @@ namespace C2.Business.Model
         GroupOperator,  //分组算子
         CustomOperator1, //自定义算子, 一元算子
         CustomOperator2, //自定义算子, 二元算子
-        PythonOperator,  //Python算子
+        PythonOperator,  //Py算子
         DataFormatOperator, //数据标准化
         KeywordOperator  //关键词过滤  
     }

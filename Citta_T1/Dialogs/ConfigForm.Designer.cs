@@ -192,7 +192,7 @@
             this.label7.Size = new System.Drawing.Size(119, 17);
             this.label7.TabIndex = 6;
             this.label7.Text = "默认Python虚拟机 :";
-            this.toolTip1.SetToolTip(this.label7, "Python算子默认使用的虚拟机");
+            this.toolTip1.SetToolTip(this.label7, "Py算子默认使用的虚拟机");
             // 
             // pythonConfigCancelButton
             // 

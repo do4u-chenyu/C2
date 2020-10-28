@@ -32,7 +32,6 @@
             // 
             // dataSourceTB0
             // 
-            this.dataSourceTB0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataSourceTB0.Location = new System.Drawing.Point(0, 0);
             this.dataSourceTB0.Size = new System.Drawing.Size(136, 23);
             this.dataSourceTB0.TabIndex = 2;
@@ -50,29 +49,26 @@
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.confirmButton.Location = new System.Drawing.Point(159, 7);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            this.confirmButton.UseVisualStyleBackColor = false;
             this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
             // 
             // comboBox0
             // 
-            this.comboBox0.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox0.Location = new System.Drawing.Point(2, 56);
             this.comboBox0.Size = new System.Drawing.Size(136, 21);
             this.comboBox0.TabIndex = 1;
             // 
             // topPanel
             // 
-            this.topPanel.BackColor = System.Drawing.SystemColors.Window;
             this.topPanel.Size = new System.Drawing.Size(334, 37);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.bottomPanel.Location = new System.Drawing.Point(0, 146);
             this.bottomPanel.Size = new System.Drawing.Size(334, 43);
             // 
             // keyPanel
             // 
-            this.keyPanel.BackColor = System.Drawing.SystemColors.Window;
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
@@ -82,7 +78,6 @@
             // 
             // valuePanel
             // 
-            this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.comboBox0);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
@@ -90,10 +85,8 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(32, 4);
             this.label1.Size = new System.Drawing.Size(63, 14);
-            this.label1.Text = "数据信息";
             // 
             // label2
             // 

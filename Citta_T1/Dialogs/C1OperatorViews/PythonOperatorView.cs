@@ -3,7 +3,7 @@ using C2.Business.Option;
 using C2.Controls.Move.Op;
 using C2.Core;
 using C2.IAOLab.PythonOP;
-using C2.OperatorViews.Base;
+using C2.Dialogs.Base;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace C2.Dialogs
 {
-    public partial class PythonOperatorView : BaseOperatorView
+    public partial class PythonOperatorView : C1BaseOperatorView
     {
         private readonly string oldPath;
         private string fullOutputFilePath;
@@ -31,7 +31,7 @@ namespace C2.Dialogs
             //旧状态记录
             this.oldPath = this.fullOutputFilePath;
             InitPreViewText();
-            //注册python算子的ComboBox
+            //注册py算子的ComboBox
             this.comboBoxes.Add(this.pythonChosenComboBox);
         }
 

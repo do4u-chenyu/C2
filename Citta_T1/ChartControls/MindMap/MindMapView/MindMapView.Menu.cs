@@ -12,9 +12,9 @@ using C2.Model.Styles;
 using C2.Model.Widgets;
 using System.Collections.Generic;
 using C2.Globalization;
-using C2.Dialogs.C2OperatorViews.Base;
 using C2.Business.Schedule.Cmd;
 using System.Diagnostics;
+using C2.Dialogs.C2OperatorViews;
 
 namespace C2.Controls.MapViews
 {
@@ -34,13 +34,16 @@ namespace C2.Controls.MapViews
             switch (HoverObject.Widget.GetTypeID())
             {
                 case OperatorWidget.TypeID:
-                    CreateOperatorMenu();
+                    opw = HoverObject.Widget as OperatorWidget;
+                    CreateOperatorMenu(opw);
                     break;
                 case DataSourceWidget.TypeID:
-                    CreateDataSourceMenu();
+                    dtw = HoverObject.Widget as DataSourceWidget;
+                    CreateDataSourceMenu(dtw);
                     break;
                 case ResultWidget.TypeID:
-                    CreateResultMenu();
+                    rsw = HoverObject.Widget as ResultWidget;
+                    CreateResultMenu(rsw);
                     break;
                 default:
                     break;
@@ -48,17 +51,15 @@ namespace C2.Controls.MapViews
            
         }
 
-        public void CreateOperatorMenu()
+        private void CreateOperatorMenu(OperatorWidget opw)
         {
-            opw = HoverObject.Widget as OperatorWidget;
-
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
             ToolStripMenuItem MenuDesign = new ToolStripMenuItem();
             ToolStripMenuItem MenuRunning = new ToolStripMenuItem();
             ToolStripMenuItem MenuPublic = new ToolStripMenuItem();
             ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
 
-            MenuOpenOperator.Text = opw.OpType;
+            MenuOpenOperator.Text = opw.OpName;
             MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuDesign,
                 MenuRunning,
@@ -66,14 +67,23 @@ namespace C2.Controls.MapViews
                 MenuDelete});
 
             MenuDesign.Text = Lang._("Design");
+            MenuDesign.Enabled = opw.Status != OpStatus.Done;
             MenuDesign.Click += new System.EventHandler(MenuDesignOp_Click);
-            MenuRunning.Text = Lang._("Running");
+
+            MenuRunning.Text = opw.Status == OpStatus.Done ? Lang._("Done") : Lang._("Running") ;
+            MenuRunning.Enabled = opw.Status == OpStatus.Ready ;
             MenuRunning.Click += new System.EventHandler(MenuRunningOp_Click);
+
             MenuPublic.Text = Lang._("Public");
+            MenuPublic.Enabled = opw.OpType == Lang._("Model");
+
             MenuDelete.Text = Lang._("Delete");
             MenuDelete.Click += new System.EventHandler(MenuDeleteOp_Click);
 
+
+
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
+
         }
 
         void MenuDesignOp_Click(object sender, EventArgs e)
@@ -83,8 +93,8 @@ namespace C2.Controls.MapViews
                 case "最大值":
                     new C2MaxOperatorView(opw).ShowDialog();
                     break;
-                case "排序":
-                    //new SortOperatorView(SelectedTopic.FindWidget<OperatorWidget>()).ShowDialog();
+                case "AI实践":
+                    new C2CustomOperatorView(opw).ShowDialog();
                     break;
                 default:
                     break;
@@ -96,6 +106,7 @@ namespace C2.Controls.MapViews
             {
                 List<string> cmds = (new MaxOperatorCmd(opw)).GenCmd();
                 MessageBox.Show(RunLinuxCommand(cmds));
+                opw.Status = OpStatus.Done;
             }
         }
 
@@ -163,10 +174,9 @@ namespace C2.Controls.MapViews
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             // 剩余最后一个菜单项，删除数据源挂件
-            if (dtw.DataItems.Count == 1)
+            dtw.DataItems.Remove(hitItem);
+            if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
-            else
-                dtw.DataItems.Remove(hitItem);
         }
         void DSWidgetMenuDelete_Click(object sender, EventArgs e)
         {
@@ -181,9 +191,9 @@ namespace C2.Controls.MapViews
         }
 
 
-        public void CreateDataSourceMenu()
+        private void CreateDataSourceMenu(DataSourceWidget dtw)
         {
-            dtw = HoverObject.Widget as DataSourceWidget;
+           
             WidgetMenuStrip.SuspendLayout();
             foreach (DataItem dataItem in dtw.DataItems)
             {
@@ -221,9 +231,9 @@ namespace C2.Controls.MapViews
             }
         }
 
-        public void CreateResultMenu()
+        private void CreateResultMenu(ResultWidget rsw)
         {
-            dtw = HoverObject.Widget as DataSourceWidget;
+            
 
             ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
             MenuOpenResult.Text = "Result";

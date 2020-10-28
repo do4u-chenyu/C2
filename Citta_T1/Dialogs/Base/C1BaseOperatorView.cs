@@ -3,7 +3,6 @@ using C2.Business.Option;
 using C2.Controls.Move.Op;
 using C2.Core;
 using C2.Utils;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,10 +11,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace C2.OperatorViews.Base
+namespace C2.Dialogs.Base
 {
-
-    public partial class BaseOperatorView : Form
+    public partial class C1BaseOperatorView : BaseOperatorView
     {
         protected MoveOpControl opControl;          // 对应的OP算子 
         protected string dataSourceFFP0;            // 左表数据源路径
@@ -29,11 +27,11 @@ namespace C2.OperatorViews.Base
         protected List<string> selectedColumns;     // 本次配置用户选择的输出字段名称
         protected string oldOptionDictStr;          // 旧配置字典的字符串表述
         protected int ColumnCount { get => this.tableLayoutPanel1.ColumnCount; }       // 有增减条件的表格步长
-  
+
 
         protected Dictionary<string, string> dataInfo; // 加载左右表数据源基本信息: FFP, Description, EXTType, encoding, sep等
         protected List<ComboBox> comboBoxes;
-        public BaseOperatorView()
+        public C1BaseOperatorView()
         {
             this.opControl = null;
             oldOptionDictStr = String.Empty;
@@ -49,12 +47,14 @@ namespace C2.OperatorViews.Base
             dataInfo = new Dictionary<string, string>();
             InitializeComponent();
         }
-        public BaseOperatorView(MoveOpControl opControl) : this()
+
+        public C1BaseOperatorView(MoveOpControl opControl) : this()
         {
             this.opControl = opControl;
             oldOptionDictStr = opControl.Option.ToString();
             comboBoxes = new List<ComboBox>() { this.comboBox0, this.comboBox1 };
         }
+
         // 初始化左右表数据源
         protected void InitDataSource()
         {
@@ -175,7 +175,7 @@ namespace C2.OperatorViews.Base
         {
             this.toolTip1.SetToolTip(dataSourceTB0, this.dataSourceFFP0);
         }
-       
+
         protected bool IsIllegalFieldName()
         {
             bool isIllegal = true;
@@ -319,7 +319,7 @@ namespace C2.OperatorViews.Base
             comboBoxes.Add(combox);
             return combox;
         }
-        
+
         protected ComboBox NewAndORComboBox()
         {
             ComboBox combox = NewComboBox();
@@ -417,7 +417,7 @@ namespace C2.OperatorViews.Base
             Button button = (Button)sender;
             int lineNumber = int.Parse(button.Name);
 
-            
+
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
                 int buttonPosition = (i * ColumnCount) + ColumnCount - 1;
@@ -432,9 +432,9 @@ namespace C2.OperatorViews.Base
                 }
 
             }
-            
+
             MoveTableLayoutPanelControls(lineNumber);
-            
+
             this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
             this.tableLayoutPanel1.RowCount -= 1;
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
@@ -488,7 +488,7 @@ namespace C2.OperatorViews.Base
         #region 下拉列表关闭后 下拉列表内容重置和选中的索引校验
         public void LeftComboBox_ClosedEvent(object sender, EventArgs e)
         { ComboBox_ClosedEvent(sender as ComboBox, nowColumnsName0); }
-        public void RightComboBox_ClosedEvent(object sender, EventArgs e) 
+        public void RightComboBox_ClosedEvent(object sender, EventArgs e)
         { ComboBox_ClosedEvent(sender as ComboBox, nowColumnsName1); }
         public void ComparedComboBox_ClosedEvent(object sender, EventArgs e)
         { ComboBox_ClosedEvent(sender as ComboBox, comparedItems); }
@@ -496,10 +496,10 @@ namespace C2.OperatorViews.Base
         { ComboBox_ClosedEvent(sender as ComboBox, logicItems); }
         public void ComboBox_ClosedEvent(ComboBox comboBox, string[] nowColumns)
         {
-           
+
             if (nowColumns.Length == 0)
-                return;          
-           
+                return;
+
             // 恢复下拉列表原始字段
             comboBox.Items.Clear();
             comboBox.Items.AddRange(nowColumns);
@@ -565,11 +565,10 @@ namespace C2.OperatorViews.Base
             }
 
             comboBox.Items.AddRange(filterItems.ToArray());
-            comboBox.SelectionStart = comboBox.Text.Length;         
+            comboBox.SelectionStart = comboBox.Text.Length;
             comboBox.DroppedDown = true;
             //保持鼠标指针原来状态，有时候鼠标指针会被下拉框覆盖，所以要进行一次设置。
             Cursor = Cursors.Default;
         }
-       
     }
 }

@@ -17,6 +17,7 @@ namespace C2.Model.Widgets
         {
             DisplayIndex = 0;
             DataItems = new List<DataItem>();
+            widgetIcon = Properties.Resources.data_w_icon;
         }
 
         public override bool ResponseMouse
@@ -40,28 +41,37 @@ namespace C2.Model.Widgets
         public override void Serialize(XmlDocument dom, XmlElement node)
         {
             base.Serialize(dom, node);
-            //TODO
-            //文档持久化
+            if (this.DataItems.Count > 0)
+            {
+                XmlElement dataItemsNode = node.OwnerDocument.CreateElement("data_items");
+                foreach (var dataItem in this.DataItems)
+                {
+                    var dataNode = node.OwnerDocument.CreateElement("data_item");
+                    dataNode.SetAttribute("path", dataItem.FilePath);
+                    dataNode.SetAttribute("name", dataItem.FileName);
+                    dataNode.SetAttribute("separator", dataItem.FileSep.ToString());
+                    dataNode.SetAttribute("encoding", dataItem.FileEncoding.ToString());
+                    dataNode.SetAttribute("file_type", dataItem.FileType.ToString());
+                    dataItemsNode.AppendChild(dataNode);
+                }
+                node.AppendChild(dataItemsNode);
+            }
         }
 
         public override void Deserialize(Version documentVersion, XmlElement node)
         {
             base.Deserialize(documentVersion, node);
-            //TODO
-            //文档持久化
-        }
-
-        public override void Paint(RenderArgs e)
-        {
-            //base.Paint(e);
-
-            Rectangle rect = DisplayRectangle;
-            Image iconRemark = Properties.Resources.data_w_icon;
-            rect.X += Math.Max(0, (rect.Width - iconRemark.Width) / 2);
-            rect.Y += Math.Max(0, (rect.Height - iconRemark.Height) / 2);
-            rect.Width = Math.Min(rect.Width, iconRemark.Width);
-            rect.Height = Math.Min(rect.Height, iconRemark.Height);
-            e.Graphics.DrawImage(iconRemark, rect, 0, 0, iconRemark.Width, iconRemark.Height);
+            var data_items = node.SelectNodes("data_items/data_item");
+            foreach (XmlElement dataItem in data_items)
+            {
+                DataItem item = new DataItem(
+                   dataItem.GetAttribute("path"),
+                   dataItem.GetAttribute("name"),
+                   ConvertUtil.TryParseAscii(dataItem.GetAttribute("separator")),
+                   OpUtil.EncodingEnum(dataItem.GetAttribute("encoding")),
+                   OpUtil.ExtTypeEnum(dataItem.GetAttribute("file_type")));
+                this.DataItems.Add(item);
+            }
         }
 
     }

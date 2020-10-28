@@ -189,7 +189,7 @@ namespace C2.ChartPageView
             MenuAdd.Text = Lang._("Add");
             MenuAddOperator.Text = Lang._("Operator");
             MenuAddMaxOp.Text = Lang._("Max");
-            MenuAddSortOp.Text = Lang._("Sort");
+            MenuAddAIOp.Text = Lang._("AI");
             MenuAddModelOp.Text = Lang._("Model");
             MenuAddResult.Text = Lang._("Result");
             MenuFolding.Text = Lang._("Folding");
@@ -226,7 +226,7 @@ namespace C2.ChartPageView
         ToolStripMenuItem MenuAddResult;
         ToolStripMenuItem MenuAddOperator;
         ToolStripMenuItem MenuAddMaxOp;
-        ToolStripMenuItem MenuAddSortOp;
+        ToolStripMenuItem MenuAddAIOp;
         ToolStripMenuItem MenuAddModelOp;
         ToolStripSeparator toolStripSeparator5;
         ToolStripMenuItem MenuLink;
@@ -272,7 +272,7 @@ namespace C2.ChartPageView
             MenuAddResult = new ToolStripMenuItem();
             MenuAddOperator = new ToolStripMenuItem();
             MenuAddMaxOp = new ToolStripMenuItem();
-            MenuAddSortOp = new ToolStripMenuItem();
+            MenuAddAIOp = new ToolStripMenuItem();
             MenuAddModelOp = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             MenuLink = new ToolStripMenuItem();
@@ -355,7 +355,7 @@ namespace C2.ChartPageView
             // MenuAddOperator
             MenuAddOperator.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuAddMaxOp,
-                MenuAddSortOp,
+                MenuAddAIOp,
                 MenuAddModelOp});
             MenuAddOperator.Image = C2.Properties.Resources.operator_w_icon;
             MenuAddOperator.Name = "MenuAddOperator";
@@ -365,9 +365,9 @@ namespace C2.ChartPageView
             MenuAddMaxOp.Text = "Max";
             MenuAddMaxOp.Click += new System.EventHandler(MenuAddMaxOp_Click);
 
-            MenuAddSortOp.Name = "MenuAddSortOp";
-            MenuAddSortOp.Text = "Sort";
-            MenuAddSortOp.Click += new System.EventHandler(MenuAddSortOp_Click);
+            MenuAddAIOp.Name = "MenuAddAIOp";
+            MenuAddAIOp.Text = "Sort";
+            MenuAddAIOp.Click += new System.EventHandler(MenuAddAIOp_Click);
 
             MenuAddModelOp.Name = "MenuAddModelOp";
             MenuAddModelOp.Text = "Model";
@@ -644,9 +644,9 @@ namespace C2.ChartPageView
             mindMapView1.AddOperator(Lang._("max"));
         }
 
-        void MenuAddSortOp_Click(object sender, EventArgs e)
+        void MenuAddAIOp_Click(object sender, EventArgs e)
         {
-            mindMapView1.AddOperator(Lang._("sort"));
+            mindMapView1.AddOperator(Lang._("ai"));
         }
 
         void MenuAddModelOp_Click(object sender, EventArgs e)

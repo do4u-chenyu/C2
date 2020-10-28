@@ -23,6 +23,7 @@ namespace C2
         PieChart pieChart;
         HorizontalBar3D horizontalBar3D;
         RadarChart radarChart;
+        RingChart ringChart;
         public ChartBoards()
         {
             Text = "Start";
@@ -40,6 +41,7 @@ namespace C2
             this.pieChart = new PieChart(x, y);
             this.horizontalBar3D = new HorizontalBar3D(x, y);
             this.radarChart = new RadarChart();
+            this.ringChart = new RingChart();
 
             // 
             // barChart
@@ -74,6 +76,15 @@ namespace C2
             this.radarChart.Size = new System.Drawing.Size(600, 431);
             this.radarChart.TabIndex = 1;
             // 
+            // ringChart
+            // 
+            this.ringChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
+            this.ringChart.Location = new System.Drawing.Point(635, 250);
+            this.ringChart.Name = "ringchart";
+            this.ringChart.Size = new System.Drawing.Size(600, 431);
+            this.ringChart.TabIndex = 1;
+
+            // 
             // ChartBoards
             // 
             this.ClientSize = new System.Drawing.Size(1598, 800);
@@ -81,6 +92,7 @@ namespace C2
             this.Controls.Add(this.pieChart);
             this.Controls.Add(this.horizontalBar3D);
             this.Controls.Add(this.radarChart);
+            this.Controls.Add(this.ringChart);
             this.Name = "ChartBoards";
             this.ResumeLayout(false);
 
