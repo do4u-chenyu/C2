@@ -64,7 +64,7 @@
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(137, 15);
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 29);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 28);
             this.dataSourceTB0.TabIndex = 12;
             // 
             // cancelButton
@@ -89,7 +89,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(45, 16);
-            this.label1.Size = new System.Drawing.Size(123, 30);
+            this.label1.Size = new System.Drawing.Size(85, 19);
             // 
             // pythonChosenComboBox
             // 
@@ -105,23 +105,23 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("宋体", 10F);
             this.label2.Location = new System.Drawing.Point(3, 60);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(179, 30);
+            this.label2.Size = new System.Drawing.Size(126, 19);
             this.label2.TabIndex = 13;
-            this.label2.Text = "Python虚拟机：";
+            this.label2.Text = "Python虚拟机";
             this.toolTip1.SetToolTip(this.label2, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Font = new System.Drawing.Font("宋体", 10F);
             this.label4.Location = new System.Drawing.Point(13, 144);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(167, 30);
+            this.label4.Size = new System.Drawing.Size(142, 19);
             this.label4.TabIndex = 16;
             this.label4.Text = "脚本传入参数：";
             this.toolTip1.SetToolTip(this.label4, "脚本需要传入的其他参数");
@@ -139,11 +139,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Font = new System.Drawing.Font("宋体", 10F);
             this.label6.Location = new System.Drawing.Point(19, 103);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(157, 30);
+            this.label6.Size = new System.Drawing.Size(126, 19);
             this.label6.TabIndex = 24;
             this.label6.Text = "Python脚本：";
             this.toolTip1.SetToolTip(this.label6, "自定义的第三方Python脚本");
@@ -200,7 +200,7 @@
             // 
             // previewCmdText
             // 
-            this.previewCmdText.BackColor = System.Drawing.SystemColors.Control;
+            this.previewCmdText.BackColor = System.Drawing.SystemColors.Window;
             this.previewCmdText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.previewCmdText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.previewCmdText.Location = new System.Drawing.Point(2, 24);
@@ -432,6 +432,7 @@
             // PythonOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(529, 469);
             this.ControlBox = true;
             this.Controls.Add(this.label11);
