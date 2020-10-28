@@ -28,13 +28,13 @@ namespace C2.OperatorViews
         {
             this.button1.Click += new EventHandler(this.Add_Click);
             // 利用Paint方式groupBox附近的虚线留白
-            this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
-            this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
-            this.groupBox3.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox3.Paint += new PaintEventHandler(this.GroupBox_Paint);
 
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 138F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 35F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(209, 85);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
@@ -180,6 +180,7 @@ namespace C2.OperatorViews
         {
             // 左表列下拉框
             ComboBox data0ComoboBox = NewColumnsName0ComboBox();
+            data0ComoboBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data0ComoboBox, 0, addLine);
             // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
@@ -259,5 +260,10 @@ namespace C2.OperatorViews
 
         }
         #endregion
+
+        private void ascendingOrder_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

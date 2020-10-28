@@ -41,80 +41,88 @@
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Location = new System.Drawing.Point(259, 9);
+            this.cancelButton.Location = new System.Drawing.Point(259, 5);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
             this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Location = new System.Drawing.Point(176, 9);
+            this.confirmButton.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.confirmButton.Location = new System.Drawing.Point(176, 4);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            this.confirmButton.UseVisualStyleBackColor = true;
             // 
             // outListCCBL0
             // 
-            this.outListCCBL0.Location = new System.Drawing.Point(0, 106);
+            this.outListCCBL0.Location = new System.Drawing.Point(0, 101);
             this.outListCCBL0.Size = new System.Drawing.Size(150, 26);
             this.outListCCBL0.TabIndex = 2;
             // 
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Location = new System.Drawing.Point(0, 49);
+            this.comboBox0.Location = new System.Drawing.Point(0, 47);
             this.comboBox0.Size = new System.Drawing.Size(148, 29);
             this.comboBox0.TabIndex = 1;
             // 
             // topPanel
             // 
+            this.topPanel.BackColor = System.Drawing.SystemColors.Window;
             this.topPanel.Size = new System.Drawing.Size(326, 18);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 142);
-            this.bottomPanel.Size = new System.Drawing.Size(326, 43);
+            this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 147);
+            this.bottomPanel.Size = new System.Drawing.Size(326, 38);
             // 
             // keyPanel
             // 
+            this.keyPanel.BackColor = System.Drawing.SystemColors.Window;
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Size = new System.Drawing.Size(116, 124);
+            this.keyPanel.Size = new System.Drawing.Size(116, 129);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             this.keyPanel.Controls.SetChildIndex(this.label3, 0);
             // 
             // valuePanel
             // 
+            this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Controls.Add(this.comboBox0);
-            this.valuePanel.Size = new System.Drawing.Size(210, 124);
+            this.valuePanel.Size = new System.Drawing.Size(210, 129);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(32, 4);
-            this.label1.Size = new System.Drawing.Size(123, 30);
+            this.label1.Font = new System.Drawing.Font("宋体", 10F);
+            this.label1.Location = new System.Drawing.Point(32, 7);
+            this.label1.Size = new System.Drawing.Size(85, 19);
+            this.label1.Text = "数据信息";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(32, 105);
+            this.label3.Font = new System.Drawing.Font("宋体", 10F);
+            this.label3.Location = new System.Drawing.Point(32, 103);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 30);
+            this.label3.Size = new System.Drawing.Size(85, 19);
             this.label3.TabIndex = 0;
-            this.label3.Text = "输出字段：";
+            this.label3.Text = "输出字段";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(32, 55);
+            this.label2.Font = new System.Drawing.Font("宋体", 10F);
+            this.label2.Location = new System.Drawing.Point(32, 56);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 30);
+            this.label2.Size = new System.Drawing.Size(85, 19);
             this.label2.TabIndex = 0;
-            this.label2.Text = "取最大值：";
+            this.label2.Text = "取最大值";
             // 
             // MaxOperatorView
             // 

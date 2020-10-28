@@ -74,7 +74,8 @@ namespace C2.Core
         public const float Factor = 1.3F;
         private static string versionType;
         public static string VersionType { get => versionType; set => versionType = value; }
-        public const string GreenVersion = "Green";
+        public const string GreenLevel = "Green";
+        public const string Nolanding = "NoLanding";
         public const string GreenPath = "source";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
     }

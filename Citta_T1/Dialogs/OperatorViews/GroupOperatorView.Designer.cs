@@ -30,7 +30,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.sortByString = new System.Windows.Forms.RadioButton();
             this.sortByNum = new System.Windows.Forms.RadioButton();
             this.ascendingOrder = new System.Windows.Forms.RadioButton();
@@ -40,13 +39,16 @@
             this.repetition = new System.Windows.Forms.RadioButton();
             this.noRepetition = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataSourceTB0
@@ -105,28 +107,20 @@
             // valuePanel
             // 
             this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
-            this.valuePanel.Controls.Add(this.repetition);
-            this.valuePanel.Controls.Add(this.noRepetition);
-            this.valuePanel.Controls.Add(this.ascendingOrder);
-            this.valuePanel.Controls.Add(this.descendingOrder);
-            this.valuePanel.Controls.Add(this.groupBox3);
+            this.valuePanel.Controls.Add(this.panel4);
+            this.valuePanel.Controls.Add(this.panel3);
+            this.valuePanel.Controls.Add(this.panel2);
             this.valuePanel.Controls.Add(this.dataSourceTB0);
-            this.valuePanel.Controls.Add(this.groupBox2);
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
-            this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Size = new System.Drawing.Size(409, 356);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
             this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox3, 0);
-            this.valuePanel.Controls.SetChildIndex(this.descendingOrder, 0);
-            this.valuePanel.Controls.SetChildIndex(this.ascendingOrder, 0);
-            this.valuePanel.Controls.SetChildIndex(this.noRepetition, 0);
-            this.valuePanel.Controls.SetChildIndex(this.repetition, 0);
+            this.valuePanel.Controls.SetChildIndex(this.panel2, 0);
+            this.valuePanel.Controls.SetChildIndex(this.panel3, 0);
+            this.valuePanel.Controls.SetChildIndex(this.panel4, 0);
             // 
             // label1
             // 
@@ -150,7 +144,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(32, 151);
+            this.label2.Location = new System.Drawing.Point(32, 154);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 19);
@@ -161,7 +155,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(32, 45);
+            this.label5.Location = new System.Drawing.Point(32, 43);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(85, 19);
@@ -179,23 +173,11 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "排序方式";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.sortByString);
-            this.groupBox3.Controls.Add(this.sortByNum);
-            this.groupBox3.Location = new System.Drawing.Point(7, 43);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(208, 25);
-            this.groupBox3.TabIndex = 10;
-            this.groupBox3.TabStop = false;
-            // 
             // sortByString
             // 
             this.sortByString.AutoSize = true;
             this.sortByString.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sortByString.Location = new System.Drawing.Point(91, -2);
+            this.sortByString.Location = new System.Drawing.Point(140, 6);
             this.sortByString.Margin = new System.Windows.Forms.Padding(2);
             this.sortByString.Name = "sortByString";
             this.sortByString.Size = new System.Drawing.Size(144, 23);
@@ -208,7 +190,7 @@
             this.sortByNum.AutoSize = true;
             this.sortByNum.Checked = true;
             this.sortByNum.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sortByNum.Location = new System.Drawing.Point(0, -2);
+            this.sortByNum.Location = new System.Drawing.Point(0, 6);
             this.sortByNum.Margin = new System.Windows.Forms.Padding(2);
             this.sortByNum.Name = "sortByNum";
             this.sortByNum.Size = new System.Drawing.Size(125, 23);
@@ -222,7 +204,7 @@
             this.ascendingOrder.AutoSize = true;
             this.ascendingOrder.Checked = true;
             this.ascendingOrder.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ascendingOrder.Location = new System.Drawing.Point(6, 79);
+            this.ascendingOrder.Location = new System.Drawing.Point(3, -2);
             this.ascendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.ascendingOrder.Name = "ascendingOrder";
             this.ascendingOrder.Size = new System.Drawing.Size(106, 23);
@@ -230,12 +212,13 @@
             this.ascendingOrder.TabStop = true;
             this.ascendingOrder.Text = "从小到大";
             this.ascendingOrder.UseVisualStyleBackColor = true;
+            this.ascendingOrder.CheckedChanged += new System.EventHandler(this.ascendingOrder_CheckedChanged);
             // 
             // descendingOrder
             // 
             this.descendingOrder.AutoSize = true;
             this.descendingOrder.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.descendingOrder.Location = new System.Drawing.Point(96, 79);
+            this.descendingOrder.Location = new System.Drawing.Point(143, -2);
             this.descendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.descendingOrder.Name = "descendingOrder";
             this.descendingOrder.Size = new System.Drawing.Size(106, 23);
@@ -282,7 +265,7 @@
             this.repetition.AutoSize = true;
             this.repetition.Checked = true;
             this.repetition.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.repetition.Location = new System.Drawing.Point(95, 115);
+            this.repetition.Location = new System.Drawing.Point(140, 5);
             this.repetition.Margin = new System.Windows.Forms.Padding(2);
             this.repetition.Name = "repetition";
             this.repetition.Size = new System.Drawing.Size(87, 23);
@@ -295,7 +278,7 @@
             // 
             this.noRepetition.AutoSize = true;
             this.noRepetition.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.noRepetition.Location = new System.Drawing.Point(5, 115);
+            this.noRepetition.Location = new System.Drawing.Point(0, 5);
             this.noRepetition.Margin = new System.Windows.Forms.Padding(2);
             this.noRepetition.Name = "noRepetition";
             this.noRepetition.Size = new System.Drawing.Size(68, 23);
@@ -312,26 +295,32 @@
             this.panel1.Size = new System.Drawing.Size(405, 160);
             this.panel1.TabIndex = 1;
             // 
-            // groupBox2
+            // panel2
             // 
-            this.groupBox2.Location = new System.Drawing.Point(5, 77);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(207, 25);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
+            this.panel2.Controls.Add(this.sortByNum);
+            this.panel2.Controls.Add(this.sortByString);
+            this.panel2.Location = new System.Drawing.Point(5, 35);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(328, 30);
+            this.panel2.TabIndex = 11;
             // 
-            // groupBox1
+            // panel3
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.groupBox1.Location = new System.Drawing.Point(7, 113);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(207, 25);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
+            this.panel3.Controls.Add(this.ascendingOrder);
+            this.panel3.Controls.Add(this.descendingOrder);
+            this.panel3.Location = new System.Drawing.Point(2, 79);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(326, 19);
+            this.panel3.TabIndex = 12;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.noRepetition);
+            this.panel4.Controls.Add(this.repetition);
+            this.panel4.Location = new System.Drawing.Point(5, 109);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(309, 30);
+            this.panel4.TabIndex = 13;
             // 
             // GroupOperatorView
             // 
@@ -356,9 +345,13 @@
             this.keyPanel.PerformLayout();
             this.valuePanel.ResumeLayout(false);
             this.valuePanel.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -375,10 +368,10 @@
         private System.Windows.Forms.RadioButton ascendingOrder;
         private System.Windows.Forms.RadioButton descendingOrder;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton sortByString;
         private System.Windows.Forms.RadioButton sortByNum;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel4;
     }
 }
