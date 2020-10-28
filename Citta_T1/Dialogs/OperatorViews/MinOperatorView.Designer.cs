@@ -65,6 +65,7 @@
             // 
             // topPanel
             // 
+            this.topPanel.BackColor = System.Drawing.SystemColors.Window;
             this.topPanel.Size = new System.Drawing.Size(322, 16);
             // 
             // bottomPanel
@@ -74,6 +75,7 @@
             // 
             // keyPanel
             // 
+            this.keyPanel.BackColor = System.Drawing.SystemColors.Window;
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
@@ -85,6 +87,7 @@
             // 
             // valuePanel
             // 
+            this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Controls.Add(this.comboBox0);

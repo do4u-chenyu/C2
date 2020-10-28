@@ -40,15 +40,17 @@
             // 
             // dataSourceTB1
             // 
-            this.dataSourceTB1.Location = new System.Drawing.Point(320, 3);
-            this.dataSourceTB1.Size = new System.Drawing.Size(121, 29);
+            this.dataSourceTB1.Font = new System.Drawing.Font("宋体", 10F);
+            this.dataSourceTB1.Location = new System.Drawing.Point(331, 3);
+            this.dataSourceTB1.Size = new System.Drawing.Size(110, 28);
             this.dataSourceTB1.TabIndex = 10;
             this.dataSourceTB1.Visible = true;
             // 
             // dataSourceTB0
             // 
+            this.dataSourceTB0.Font = new System.Drawing.Font("宋体", 10F);
             this.dataSourceTB0.Location = new System.Drawing.Point(100, 3);
-            this.dataSourceTB0.Size = new System.Drawing.Size(127, 29);
+            this.dataSourceTB0.Size = new System.Drawing.Size(110, 28);
             this.dataSourceTB0.TabIndex = 9;
             // 
             // cancelButton
@@ -60,27 +62,30 @@
             // confirmButton
             // 
             this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.ForeColor = System.Drawing.SystemColors.WindowText;
             this.confirmButton.Location = new System.Drawing.Point(320, 6);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            this.confirmButton.UseVisualStyleBackColor = true;
             // 
             // outListCCBL0
             // 
+            this.outListCCBL0.Font = new System.Drawing.Font("宋体", 10F);
             this.outListCCBL0.Location = new System.Drawing.Point(100, 82);
             this.outListCCBL0.Size = new System.Drawing.Size(125, 26);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox0
             // 
-            this.comboBox0.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Location = new System.Drawing.Point(100, 43);
-            this.comboBox0.Size = new System.Drawing.Size(110, 24);
+            this.comboBox0.Font = new System.Drawing.Font("宋体", 10F);
+            this.comboBox0.Location = new System.Drawing.Point(100, 42);
+            this.comboBox0.Size = new System.Drawing.Size(110, 26);
             this.comboBox0.TabIndex = 11;
             // 
             // comboBox1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.Location = new System.Drawing.Point(331, 43);
-            this.comboBox1.Size = new System.Drawing.Size(110, 24);
+            this.comboBox1.Font = new System.Drawing.Font("宋体", 10F);
+            this.comboBox1.Location = new System.Drawing.Point(331, 42);
+            this.comboBox1.Size = new System.Drawing.Size(110, 26);
             this.comboBox1.TabIndex = 13;
             this.comboBox1.Visible = true;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.KeywordComBox_SelectedIndexChanged);
@@ -202,11 +207,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("宋体", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Font = new System.Drawing.Font("宋体", 10F);
             this.label6.Location = new System.Drawing.Point(243, 7);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(62, 18);
+            this.label6.Size = new System.Drawing.Size(66, 19);
             this.label6.TabIndex = 1;
             this.label6.Text = "关键词";
             // 
@@ -214,7 +219,7 @@
             // 
             this.conditionSelectBox.Font = new System.Drawing.Font("宋体", 10F);
             this.conditionSelectBox.FormattingEnabled = true;
-            this.conditionSelectBox.Location = new System.Drawing.Point(236, 42);
+            this.conditionSelectBox.Location = new System.Drawing.Point(236, 47);
             this.conditionSelectBox.Name = "conditionSelectBox";
             this.conditionSelectBox.Size = new System.Drawing.Size(74, 26);
             this.conditionSelectBox.TabIndex = 12;
