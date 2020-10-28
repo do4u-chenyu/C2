@@ -66,8 +66,8 @@ namespace C2
                 workspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "FiberHomeIAOModelDocument");
 
             Global.WorkspaceDirectory = workspaceDirectory;
-            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("versionType", ConfigUtil.DefaultVersionType);
-            if (Global.VersionType.Equals(Global.GreenVersion))
+            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("RunLevel", ConfigUtil.DefaultVersionType);
+            if (Global.VersionType.Equals(Global.GreenLevel))
                 Global.WorkspaceDirectory = Path.Combine(System.Environment.CurrentDirectory, Global.GreenPath);
 
         }
@@ -75,7 +75,7 @@ namespace C2
         private static void RunByVersion()
         {
 
-            if (Global.VersionType.Equals(Global.GreenVersion))
+            if (Global.VersionType.Equals(Global.GreenLevel) || Global.VersionType.Equals(Global.Nolanding))
             {
                 string userName = "IAO";
                 Business.LoginInfo lgInfo = new Business.LoginInfo();
