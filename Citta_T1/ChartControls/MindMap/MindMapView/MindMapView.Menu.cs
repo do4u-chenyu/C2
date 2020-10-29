@@ -16,6 +16,7 @@ using C2.Business.Schedule.Cmd;
 using System.Diagnostics;
 using C2.Dialogs.C2OperatorViews;
 using System.IO;
+using C2.Dialogs;
 
 namespace C2.Controls.MapViews
 {
@@ -190,7 +191,11 @@ namespace C2.Controls.MapViews
             if (hitItem != null)
                 Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
         }
-
+        void MenuGetChart_Click(object sender, EventArgs e)
+        {
+            VisualDisplayDialog displayDialog = new VisualDisplayDialog();
+            displayDialog.Show();
+        }
 
         private void CreateDataSourceMenu(DataSourceWidget dtw)
         {
@@ -217,6 +222,7 @@ namespace C2.Controls.MapViews
 
                 MenuGetChart.Image = Properties.Resources.getchart;              
                 MenuGetChart.Text = Lang._("GetChart");
+                MenuGetChart.Click += MenuGetChart_Click;
 
                 MenuDelete.Image = Properties.Resources.deletewidget;
                 MenuDelete.Text = Lang._("Delete");
