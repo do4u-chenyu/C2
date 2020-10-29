@@ -41,6 +41,8 @@ namespace C2
 {
     public partial class MainForm : DocumentManageForm
     {
+        public string UserName { get => this.userName; set => this.userName = value; }
+        public Control BottomViewPanel { get { return this.bottomViewPanel; } }
         #region
         StartMenuButton BtnStart;
         SpecialTabItem TabNew;
@@ -66,7 +68,6 @@ namespace C2
 
         private ModelDocumentDao modelDocumentDao;
         private OptionDao optionDao;
-        public string UserName { get => this.userName; set => this.userName = value; }
 
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
@@ -87,7 +88,7 @@ namespace C2
             this.createNewModelForm = new Dialogs.CreateNewModelForm();
 
             this.isBottomViewPanelMinimum = false;
-            this.isLeftViewPanelMinimum = false;
+            this.isLeftViewPanelMinimum = true;
 
             this.leftToolBoxPanel.Width = 10;
             this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
@@ -163,6 +164,9 @@ namespace C2
         private void InitializeGlobalVariable()
         {
             Global.SetMainForm(this);
+            Global.SetBottomViewPanel(this.bottomViewPanel);
+            Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
+            Global.SetLogView(this.bottomLogControl);
         }
         private void InitializeControlsLocation()
         {
@@ -270,7 +274,7 @@ namespace C2
             this.flowChartControl.Visible = false;
         }
 
-        private void OprateButton_Click(object sender, EventArgs e)
+        private void OperateButton_Click(object sender, EventArgs e)
         {
             this.ShowLeftFold();
             this.mindMapModelControl.Visible = true;

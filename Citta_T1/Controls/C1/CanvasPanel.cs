@@ -156,7 +156,6 @@ namespace C2.Controls
 
             if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, text, location);
-           
             if (type == ElementType.DataSource)
             {
                 string path = e.Data.GetData("Path").ToString();
@@ -165,12 +164,6 @@ namespace C2.Controls
                 OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
                 AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
             }
-                
-
-
-
-
-
         }
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
