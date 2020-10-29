@@ -15,6 +15,7 @@ using C2.Globalization;
 using C2.Business.Schedule.Cmd;
 using System.Diagnostics;
 using C2.Dialogs.C2OperatorViews;
+using System.IO;
 
 namespace C2.Controls.MapViews
 {
@@ -203,7 +204,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 MenuOpenDataSource.Image = Properties.Resources.data_w_icon;
 
-                MenuOpenDataSource.Text = dataItem.FileName;
+                MenuOpenDataSource.Text = String.Format("{0}{1}{2}{3}", dataItem.FileName, " [", Path.GetExtension(dataItem.FilePath).Trim('.'), "]"); 
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewData,
                 MenuGetChart,
