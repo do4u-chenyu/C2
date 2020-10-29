@@ -164,6 +164,12 @@
     <Compile Include="Controls\DataCharts\BarChart.Designer.cs">
       <DependentUpon>BarChart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataCharts\LineChart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataCharts\LineChart.Designer.cs">
+      <DependentUpon>LineChart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DataCharts\PieChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -189,7 +195,7 @@
       <DependentUpon>RingChart.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Base\BaseOperatorView.cs" >
-    <SubType>Form</SubType>
+        <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Base\BaseOperatorView.Designer.cs">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
@@ -1321,6 +1327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\HorizontalBar3D.resx">
       <DependentUpon>HorizontalBar3D.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataCharts\LineChart.resx">
+      <DependentUpon>LineChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\PieChart.resx">
       <DependentUpon>PieChart.cs</DependentUpon>

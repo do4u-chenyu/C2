@@ -87,10 +87,10 @@
             // 
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(888, 413);
+            this.tabPage1.Size = new System.Drawing.Size(888, 408);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "总述";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -103,7 +103,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(882, 407);
+            this.panel2.Size = new System.Drawing.Size(882, 402);
             this.panel2.TabIndex = 2;
             // 
             // textBox1
@@ -134,10 +134,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.panel3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(888, 413);
+            this.tabPage2.Size = new System.Drawing.Size(888, 408);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "step1.脚本参数配置说明";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -153,7 +153,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(882, 407);
+            this.panel3.Size = new System.Drawing.Size(882, 402);
             this.panel3.TabIndex = 0;
             // 
             // textBox4
@@ -222,10 +222,10 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.panel4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Location = new System.Drawing.Point(4, 34);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(888, 413);
+            this.tabPage3.Size = new System.Drawing.Size(888, 408);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "step2.结果展示配置说明";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -240,7 +240,7 @@
             this.panel4.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(882, 407);
+            this.panel4.Size = new System.Drawing.Size(882, 402);
             this.panel4.TabIndex = 0;
             // 
             // pictureBox4
@@ -283,10 +283,10 @@
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.panel5);
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Location = new System.Drawing.Point(4, 34);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(888, 413);
+            this.tabPage4.Size = new System.Drawing.Size(888, 408);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "实际案例展示";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -299,7 +299,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(3, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(882, 407);
+            this.panel5.Size = new System.Drawing.Size(882, 402);
             this.panel5.TabIndex = 3;
             // 
             // textBox7
@@ -348,6 +348,7 @@
             // PythonOperatorHelper
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(896, 498);
             this.ControlBox = false;
             this.Controls.Add(this.button1);

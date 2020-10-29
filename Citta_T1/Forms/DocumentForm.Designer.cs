@@ -497,6 +497,7 @@ namespace C2.Forms
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Padding = new System.Windows.Forms.Padding(2);
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator5.Visible = false;
             // 
             // TsbFullScreen
             // 
@@ -507,6 +508,7 @@ namespace C2.Forms
             this.TsbFullScreen.Padding = new System.Windows.Forms.Padding(2);
             this.TsbFullScreen.Size = new System.Drawing.Size(24, 25);
             this.TsbFullScreen.Text = "Full Screen";
+            this.TsbFullScreen.Visible = false;
             this.TsbFullScreen.Click += new System.EventHandler(this.TsbFullScreen_Click);
             // 
             // TsbSidebar

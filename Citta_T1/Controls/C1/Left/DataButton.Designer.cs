@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataButton));
-            this.txtButton = new C2.Controls.Common.NoFocusButton();
             this.leftPictureBox = new System.Windows.Forms.PictureBox();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -42,34 +41,20 @@
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox = new System.Windows.Forms.TextBox();
+            this.txtButton = new C2.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // txtButton
-            // 
-            this.txtButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtButton.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtButton.FlatAppearance.BorderSize = 0;
-            this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtButton.Location = new System.Drawing.Point(25, 1);
-            this.txtButton.Margin = new System.Windows.Forms.Padding(2);
-            this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(95, 25);
-            this.txtButton.TabIndex = 9;
-            this.txtButton.UseVisualStyleBackColor = false;
-            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
-            // 
             // leftPictureBox
             // 
-            this.leftPictureBox.Image = global::C2.Properties.Resources.dataButton;
+            this.leftPictureBox.Image = global::C2.Properties.Resources.data_w_icon;
             this.leftPictureBox.Location = new System.Drawing.Point(-1, 1);
             this.leftPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.leftPictureBox.Name = "leftPictureBox";
-            this.leftPictureBox.Size = new System.Drawing.Size(23, 23);
-            this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.leftPictureBox.Size = new System.Drawing.Size(24, 24);
+            this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 10;
             this.leftPictureBox.TabStop = false;
             this.leftPictureBox.MouseEnter += new System.EventHandler(this.LeftPictureBox_MouseEnter);
@@ -150,6 +135,21 @@
             this.textBox.Visible = false;
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
+            // 
+            // txtButton
+            // 
+            this.txtButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtButton.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtButton.FlatAppearance.BorderSize = 0;
+            this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtButton.Location = new System.Drawing.Point(25, 1);
+            this.txtButton.Margin = new System.Windows.Forms.Padding(2);
+            this.txtButton.Name = "txtButton";
+            this.txtButton.Size = new System.Drawing.Size(95, 25);
+            this.txtButton.TabIndex = 9;
+            this.txtButton.UseVisualStyleBackColor = false;
+            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             // 
             // DataButton
             // 

@@ -588,6 +588,14 @@ namespace C2
             this.panel8.Size = new System.Drawing.Size(394, 39);
             this.panel8.TabIndex = 0;
             // 
+            // mdiWorkSpace
+            // 
+            this.mdiWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mdiWorkSpace.Location = new System.Drawing.Point(0, 0);
+            this.mdiWorkSpace.Name = "mdiWorkSpace";
+            this.mdiWorkSpace.Size = new System.Drawing.Size(910, 248);
+            this.mdiWorkSpace.TabIndex = 8;
+            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.taskBar);
