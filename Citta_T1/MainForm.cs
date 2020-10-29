@@ -165,6 +165,8 @@ namespace C2
         {
             Global.SetMainForm(this);
             Global.SetBottomViewPanel(this.bottomViewPanel);
+            Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
+            Global.SetLogView(this.bottomLogControl);
         }
         private void InitializeControlsLocation()
         {
