@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class DifferOperatorView : BaseOperatorView
+    public partial class DifferOperatorView : C1BaseOperatorView
     {
 
         public DifferOperatorView(MoveOpControl opControl) : base(opControl)

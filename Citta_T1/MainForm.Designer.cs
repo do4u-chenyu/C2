@@ -88,8 +88,8 @@ namespace C2
             this.remarkControl = new C2.Controls.Flow.RemarkControl();
             this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
             this.canvasPanel = new C2.Controls.CanvasPanel();
-            this.currentModelFinLab = new System.Windows.Forms.Label();
             this.operatorControl = new C2.Controls.Left.OperatorControl();
+            this.currentModelFinLab = new System.Windows.Forms.Label();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
@@ -697,8 +697,8 @@ namespace C2
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
             this.BaseWorkSpace.Controls.Add(this.remarkControl);
             this.BaseWorkSpace.Controls.Add(this.topToolBarControl);
-            this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Controls.Add(this.canvasPanel);
+            this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.BaseWorkSpace.Name = "BaseWorkSpace";
@@ -709,6 +709,7 @@ namespace C2
             // 
             this.remarkControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.remarkControl.BackColor = System.Drawing.Color.Transparent;
+            this.remarkControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("remarkControl.BackgroundImage")));
             this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.remarkControl.Location = new System.Drawing.Point(518, 50);
             this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
@@ -721,7 +722,7 @@ namespace C2
             // topToolBarControl
             // 
             this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
-            this.topToolBarControl.Location = new System.Drawing.Point(0, 2);
+            this.topToolBarControl.Location = new System.Drawing.Point(0, 0);
             this.topToolBarControl.Name = "topToolBarControl";
             this.topToolBarControl.Size = new System.Drawing.Size(1279, 32);
             this.topToolBarControl.TabIndex = 24;
@@ -730,8 +731,8 @@ namespace C2
             // 
             this.canvasPanel.AllowDrop = true;
             this.canvasPanel.BackColor = System.Drawing.Color.White;
-            this.canvasPanel.Controls.Add(this.currentModelFinLab);
             this.canvasPanel.Controls.Add(this.operatorControl);
+            this.canvasPanel.Controls.Add(this.currentModelFinLab);
             this.canvasPanel.Controls.Add(this.progressBarLabel);
             this.canvasPanel.Controls.Add(this.progressBar1);
             this.canvasPanel.Controls.Add(this.currentModelRunBackLab);
@@ -757,15 +758,6 @@ namespace C2
             this.canvasPanel.StartP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.StartP")));
             this.canvasPanel.TabIndex = 7;
             // 
-            // currentModelFinLab
-            // 
-            this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
-            this.currentModelFinLab.Location = new System.Drawing.Point(498, 174);
-            this.currentModelFinLab.Name = "currentModelFinLab";
-            this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
-            this.currentModelFinLab.TabIndex = 30;
-            this.currentModelFinLab.Visible = false;
-            // 
             // operatorControl
             // 
             this.operatorControl.AllowDrop = true;
@@ -777,6 +769,15 @@ namespace C2
             this.operatorControl.Name = "operatorControl";
             this.operatorControl.Size = new System.Drawing.Size(209, 320);
             this.operatorControl.TabIndex = 0;
+            // 
+            // currentModelFinLab
+            // 
+            this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
+            this.currentModelFinLab.Location = new System.Drawing.Point(498, 174);
+            this.currentModelFinLab.Name = "currentModelFinLab";
+            this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelFinLab.TabIndex = 30;
+            this.currentModelFinLab.Visible = false;
             // 
             // progressBarLabel
             // 

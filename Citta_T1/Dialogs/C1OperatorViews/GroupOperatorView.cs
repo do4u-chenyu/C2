@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class GroupOperatorView : BaseOperatorView
+    public partial class GroupOperatorView : C1BaseOperatorView
     {
         private readonly List<int> groupColumn;
         private List<int> outList;

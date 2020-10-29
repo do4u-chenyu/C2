@@ -24,6 +24,7 @@ namespace C2.Model.Widgets
         public NoteWidget()
         {
             Alignment = WidgetAlignment.Right;
+            widgetIcon = Properties.Resources.note_small;
         }
 
         [DefaultValue(WidgetAlignment.Right)]
@@ -149,7 +150,6 @@ namespace C2.Model.Widgets
 
         public override void Paint(RenderArgs e)
         {
-            //base.Paint(e);
             if (string.IsNullOrEmpty(Text))
                 return;
 
@@ -158,14 +158,7 @@ namespace C2.Model.Widgets
                 PaintHelper.DrawHoverBackground(e.Graphics, Bounds,
                     (Container is Topic) ? ((Topic)Container).RealBackColor : SystemColors.Highlight);
             }
-
-            Rectangle rect = DisplayRectangle;
-            Image iconRemark = Properties.Resources.note_small;
-            rect.X += Math.Max(0, (rect.Width - iconRemark.Width) / 2);
-            rect.Y += Math.Max(0, (rect.Height - iconRemark.Height) / 2);
-            rect.Width = Math.Min(rect.Width, iconRemark.Width);
-            rect.Height = Math.Min(rect.Height, iconRemark.Height);
-            e.Graphics.DrawImage(iconRemark, rect, 0, 0, iconRemark.Width, iconRemark.Height);
+            base.Paint(e);
         }
 
         public override void CopyTo(Widget widget)

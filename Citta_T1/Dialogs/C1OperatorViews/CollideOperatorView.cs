@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class CollideOperatorView : BaseOperatorView
+    public partial class CollideOperatorView : C1BaseOperatorView
     {
 
         public CollideOperatorView(MoveOpControl opControl) : base(opControl)

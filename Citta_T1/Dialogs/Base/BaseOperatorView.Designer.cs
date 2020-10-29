@@ -98,7 +98,6 @@
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // confirmButton
             // 
@@ -113,7 +112,6 @@
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = true;
-            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // dataSourceTB0
             // 
@@ -125,7 +123,6 @@
             this.dataSourceTB0.Size = new System.Drawing.Size(144, 23);
             this.dataSourceTB0.TabIndex = 0;
             this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSourceTB0.MouseHover += new System.EventHandler(this.DataSourceTB0_MouseHover);
             // 
             // dataSourceTB1
             // 
@@ -138,7 +135,6 @@
             this.dataSourceTB1.TabIndex = 1;
             this.dataSourceTB1.Visible = false;
             this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSourceTB1.MouseHover += new System.EventHandler(this.DataSourceTB1_MouseHover);
             // 
             // outListCCBL0
             // 
@@ -173,9 +169,6 @@
             this.comboBox0.Name = "comboBox0";
             this.comboBox0.Size = new System.Drawing.Size(86, 24);
             this.comboBox0.TabIndex = 2;
-            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(this.GetLeftSelectedItemIndex);
-            this.comboBox0.TextUpdate += new System.EventHandler(LeftComboBox_TextUpdate);
-            this.comboBox0.DropDownClosed += new System.EventHandler(LeftComboBox_ClosedEvent);
             // 
             // comboBox1
             // 
@@ -190,9 +183,6 @@
             this.comboBox1.Size = new System.Drawing.Size(86, 24);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.Visible = false;
-            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.GetRightSelectedItemIndex);
-            this.comboBox1.TextUpdate += new System.EventHandler(RightComboBox_TextUpdate);
-            this.comboBox1.DropDownClosed += new System.EventHandler(RightComboBox_ClosedEvent);
             // 
             // label1
             // 

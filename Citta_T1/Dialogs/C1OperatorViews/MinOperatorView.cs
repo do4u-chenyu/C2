@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class MinOperatorView : BaseOperatorView
+    public partial class MinOperatorView : C1BaseOperatorView
     {
         public MinOperatorView(MoveOpControl opControl) : base(opControl)
         {

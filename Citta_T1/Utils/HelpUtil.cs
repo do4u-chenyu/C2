@@ -15,7 +15,7 @@
         public static string GroupOperatorHelpInfo  = "分组算子:根据选择字段对文本进行分组展示.";
         public static string RelateOperatorHelpInfo = "关联算子:根据选择的关联条件将两个数据表进行连接,默认左连接.";
         public static string CustomOperator1HelpInfo = "AI实践:灵活配置算子,用于各种模型探索和展示;一元算子,支持一个输入数据源.";
-        public static string PythonOperatorHelpInfo  = "Python算子:调用自定义的第三方Python脚本完成运算.";
+        public static string PythonOperatorHelpInfo  = "Py算子:调用自定义的第三方Python脚本完成运算.";
         public static string KeyWordOperatorHelpInfo = "关键词过滤:根据输入的关键词,对数据进行基础的关键词命中或去噪处理.";
         public static string DataFormatOperatorHelpInfo = "数据标准化:对数据进行输出列选择,顺序调整,列项重命名处理.";
         public static string CustomOperator2HelpInfo = "多源算子:灵活配置算子,用于各种模型探索和展示;二元算子,支持两个输入数据源.";

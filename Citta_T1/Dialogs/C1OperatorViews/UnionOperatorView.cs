@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class UnionOperatorView : BaseOperatorView
+    public partial class UnionOperatorView : C1BaseOperatorView
     {
 
         public UnionOperatorView(MoveOpControl opControl) : base(opControl)
@@ -30,15 +30,15 @@ namespace C2.OperatorViews
             this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
             this.button1.Click += new EventHandler(this.Add_Click);
             // 利用Paint方式groupBox1附近的虚线留白
-            this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
 
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 84);
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(338, 84);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
 
@@ -226,19 +226,24 @@ namespace C2.OperatorViews
         {
             // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            data0ComboBox.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 0, addLine);
             // 右表列下拉框
             ComboBox data1ComboBox = NewColumnsName1ComboBox();
+            data1ComboBox.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(data1ComboBox, 1, addLine);
             // 别名文本框
             TextBox textBox = NewAliasTextBox();
+            textBox.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
             // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
+            addButton.BackColor = System.Drawing.SystemColors.Window;
             // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
+            delButton.BackColor = System.Drawing.SystemColors.Window;
         }
     }
 }

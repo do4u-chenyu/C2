@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace C2.OperatorViews
 {
 
-    public partial class FilterOperatorView : BaseOperatorView
+    public partial class FilterOperatorView : C1BaseOperatorView
     {
         public FilterOperatorView(MoveOpControl opControl) : base(opControl)
         {

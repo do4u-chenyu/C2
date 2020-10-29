@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class SortOperatorView : BaseOperatorView
+    public partial class SortOperatorView : C1BaseOperatorView
     {
         private List<int> outList;
 
@@ -24,9 +24,9 @@ namespace C2.OperatorViews
         private void InitializeComponentManual()
         {
             // 利用Paint方式groupBox附近的虚线留白
-            this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
-            this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
-            this.groupBox3.Paint += new PaintEventHandler(this.GroupBox_Paint);
+           // this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
+           // this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox3.Paint += new PaintEventHandler(this.GroupBox_Paint);
         }
 
         #region 配置初始化
@@ -121,5 +121,9 @@ namespace C2.OperatorViews
         }
         #endregion
 
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

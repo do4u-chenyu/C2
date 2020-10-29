@@ -75,7 +75,7 @@ namespace C2.Core
         private static string versionType;
         public static string VersionType { get => versionType; set => versionType = value; }
         public const string GreenLevel = "Green";
-        public const string Nolanding = "NoLanding";
+        public const string Nolanding = "NoLogin";
         public const string GreenPath = "source";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
     }

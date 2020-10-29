@@ -15,6 +15,7 @@ using C2.Globalization;
 using C2.Business.Schedule.Cmd;
 using System.Diagnostics;
 using C2.Dialogs.C2OperatorViews;
+using System.IO;
 
 namespace C2.Controls.MapViews
 {
@@ -34,13 +35,16 @@ namespace C2.Controls.MapViews
             switch (HoverObject.Widget.GetTypeID())
             {
                 case OperatorWidget.TypeID:
-                    CreateOperatorMenu();
+                    opw = HoverObject.Widget as OperatorWidget;
+                    CreateOperatorMenu(opw);
                     break;
                 case DataSourceWidget.TypeID:
-                    CreateDataSourceMenu();
+                    dtw = HoverObject.Widget as DataSourceWidget;
+                    CreateDataSourceMenu(dtw);
                     break;
                 case ResultWidget.TypeID:
-                    CreateResultMenu();
+                    rsw = HoverObject.Widget as ResultWidget;
+                    CreateResultMenu(rsw);
                     break;
                 default:
                     break;
@@ -48,10 +52,8 @@ namespace C2.Controls.MapViews
            
         }
 
-        public void CreateOperatorMenu()
+        private void CreateOperatorMenu(OperatorWidget opw)
         {
-            opw = HoverObject.Widget as OperatorWidget;
-
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
             ToolStripMenuItem MenuDesign = new ToolStripMenuItem();
             ToolStripMenuItem MenuRunning = new ToolStripMenuItem();
@@ -173,10 +175,9 @@ namespace C2.Controls.MapViews
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             // 剩余最后一个菜单项，删除数据源挂件
-            if (dtw.DataItems.Count == 1)
+            dtw.DataItems.Remove(hitItem);
+            if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
-            else
-                dtw.DataItems.Remove(hitItem);
         }
         void DSWidgetMenuDelete_Click(object sender, EventArgs e)
         {
@@ -191,9 +192,9 @@ namespace C2.Controls.MapViews
         }
 
 
-        public void CreateDataSourceMenu()
+        private void CreateDataSourceMenu(DataSourceWidget dtw)
         {
-            dtw = HoverObject.Widget as DataSourceWidget;
+           
             WidgetMenuStrip.SuspendLayout();
             foreach (DataItem dataItem in dtw.DataItems)
             {
@@ -203,7 +204,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 MenuOpenDataSource.Image = Properties.Resources.data_w_icon;
 
-                MenuOpenDataSource.Text = dataItem.FileName;
+                MenuOpenDataSource.Text = String.Format("{0}{1}{2}{3}", dataItem.FileName, " [", Path.GetExtension(dataItem.FilePath).Trim('.'), "]"); 
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewData,
                 MenuGetChart,
@@ -231,9 +232,9 @@ namespace C2.Controls.MapViews
             }
         }
 
-        public void CreateResultMenu()
+        private void CreateResultMenu(ResultWidget rsw)
         {
-            dtw = HoverObject.Widget as DataSourceWidget;
+            
 
             ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
             MenuOpenResult.Text = "Result";

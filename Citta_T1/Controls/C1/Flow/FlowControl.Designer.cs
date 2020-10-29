@@ -80,7 +80,7 @@
             this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomDownPictureBox.Image")));
             this.zoomDownPictureBox.Location = new System.Drawing.Point(93, 5);
             this.zoomDownPictureBox.Name = "zoomDownPictureBox";
-            this.zoomDownPictureBox.Size = new System.Drawing.Size(21, 21);
+            this.zoomDownPictureBox.Size = new System.Drawing.Size(23, 23);
             this.zoomDownPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.zoomDownPictureBox.TabIndex = 2;
             this.zoomDownPictureBox.TabStop = false;

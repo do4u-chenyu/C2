@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
-    public partial class AvgOperatorView : BaseOperatorView
+    public partial class AvgOperatorView : C1BaseOperatorView
     {
 
         public AvgOperatorView(MoveOpControl opControl) : base(opControl)
