@@ -53,6 +53,7 @@ namespace C2.ChartPageView
             mindMapView1.ShowBorder = false;
             mindMapView1.SelectionChanged += new System.EventHandler(this.mindMapView1_SelectionChanged);
             mindMapView1.ChartBackColorChanged += new System.EventHandler(this.mindMapView1_ChartBackColorChanged);
+            mindMapView1.NeedShowDesigner += new System.EventHandler(this.mindMapView1_NeedShowDesigner);
 
             // MindMapChartPage
             Controls.Add(this.mindMapView1);
@@ -149,6 +150,13 @@ namespace C2.ChartPageView
                 SelectedObjects = so;
         }
 
+        void mindMapView1_NeedShowDesigner(object sender, EventArgs e)
+        {
+            var so = mindMapView1.ShowDesignerObject;
+            if (so != null)
+                ShowDesignerObject = so;
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -191,7 +199,6 @@ namespace C2.ChartPageView
             MenuAddMaxOp.Text = Lang._("Max");
             MenuAddAIOp.Text = Lang._("AI");
             MenuAddModelOp.Text = Lang._("Model");
-            MenuAddResult.Text = Lang._("Result");
             MenuFolding.Text = Lang._("Folding");
             MenuCollapseFolding.Text = Lang._("Collapse");
             MenuExpandFolding.Text = Lang._("Expand");
@@ -223,7 +230,6 @@ namespace C2.ChartPageView
         ToolStripMenuItem MenuAddTopic;
         ToolStripMenuItem MenuAddSubTopic;
         ToolStripMenuItem MenuAdd;
-        ToolStripMenuItem MenuAddResult;
         ToolStripMenuItem MenuAddOperator;
         ToolStripMenuItem MenuAddMaxOp;
         ToolStripMenuItem MenuAddAIOp;
@@ -269,7 +275,6 @@ namespace C2.ChartPageView
             MenuAddTopic = new ToolStripMenuItem();
             MenuAddSubTopic = new ToolStripMenuItem();
             MenuAdd = new ToolStripMenuItem();
-            MenuAddResult = new ToolStripMenuItem();
             MenuAddOperator = new ToolStripMenuItem();
             MenuAddMaxOp = new ToolStripMenuItem();
             MenuAddAIOp = new ToolStripMenuItem();
@@ -342,32 +347,15 @@ namespace C2.ChartPageView
             // MenuAdd
             MenuAdd.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuAddOperator,
-                MenuAddResult});
+                MenuAddModelOp});
             MenuAdd.Name = "MenuAdd";
             MenuAdd.Text = "Add";
 
-            // MenuAddResult
-            MenuAddResult.Image = C2.Properties.Resources.result_w_icon;
-            MenuAddResult.Name = "MenuAddResult";
-            MenuAddResult.Text = "Result";
-            MenuAddResult.Click += new System.EventHandler(MenuAddResult_Click);
 
-            // MenuAddOperator
-            MenuAddOperator.DropDownItems.AddRange(new ToolStripItem[] {
-                MenuAddMaxOp,
-                MenuAddAIOp,
-                MenuAddModelOp});
             MenuAddOperator.Image = C2.Properties.Resources.operator_w_icon;
             MenuAddOperator.Name = "MenuAddOperator";
             MenuAddOperator.Text = "Operator";
-
-            MenuAddMaxOp.Name = "MenuAddMaxOp";
-            MenuAddMaxOp.Text = "Max";
-            MenuAddMaxOp.Click += new System.EventHandler(MenuAddMaxOp_Click);
-
-            MenuAddAIOp.Name = "MenuAddAIOp";
-            MenuAddAIOp.Text = "Sort";
-            MenuAddAIOp.Click += new System.EventHandler(MenuAddAIOp_Click);
+            MenuAddOperator.Click += new System.EventHandler(MenuAddOperator_Click);
 
             MenuAddModelOp.Name = "MenuAddModelOp";
             MenuAddModelOp.Text = "Model";
@@ -524,7 +512,6 @@ namespace C2.ChartPageView
                 MenuExpandAll.Enabled = topicCount > 0 && count == 1;
                 MenuCollapseAll.Enabled = topicCount > 0 && count == 1;
                 MenuAdd.Enabled = true;
-                MenuAddResult.Enabled = topicCount > 0;
                 MenuAddOperator.Enabled = topicCount > 0;
                 MenuNewChartFromHere.Available = topicCount == 1;
 
@@ -634,24 +621,18 @@ namespace C2.ChartPageView
             mindMapView1.AddSubTopic();
         }
 
-        void MenuAddResult_Click(object sender, EventArgs e)
+        void MenuAddOperator_Click(object sender, EventArgs e)
         {
-            mindMapView1.AddResult();
+            //TODO
+            //弹出设计器
+            ShowDesignerObject = mindMapView1.SelectedTopic;
         }
 
-        void MenuAddMaxOp_Click(object sender, EventArgs e)
-        {
-            mindMapView1.AddOperator(Lang._("max"));
-        }
-
-        void MenuAddAIOp_Click(object sender, EventArgs e)
-        {
-            mindMapView1.AddOperator(Lang._("ai"));
-        }
 
         void MenuAddModelOp_Click(object sender, EventArgs e)
         {
-            mindMapView1.AddOperator(Lang._("model"));
+            //TODO
+            //跳到C1模型
         }
 
 

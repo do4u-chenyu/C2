@@ -25,7 +25,7 @@ namespace C2.Controls.Common
                 this.topicName.Text = "未选中主题";
                 this.dataSourceCombo.Text = "";
                 this.dataSourceCombo.Items.Clear();
-                this.operatorName.Text = "";
+                this.operatorCombo.Text = "";
             }
             else
             {
@@ -84,7 +84,7 @@ namespace C2.Controls.Common
 
         private void SetSelectedOperator()
         {
-            this.operatorName.Text = OpWidget != null ? OpWidget.OpType : "";
+            this.operatorCombo.Text = OpWidget != null ? OpWidget.OpType : "";
             SelectedOperator = OpWidget != null ? OpWidget.OpType : "";
         }
 
@@ -101,7 +101,7 @@ namespace C2.Controls.Common
                 return;
             }
 
-            if (OpWidget.DataSourceItem == null)
+            if (SelectedDataSource == null)
             {
                 MessageBox.Show("未选中数据源,请添加后再配置");
                 return;
