@@ -97,7 +97,6 @@
             this.toolTip1.SetToolTip(this.remarkPictureBox, "编写备注信息");
             this.remarkPictureBox.UseVisualStyleBackColor = false;
             this.remarkPictureBox.Click += new System.EventHandler(this.RemarkPictureBox_Click);
-
             // 
             // zoomUpPictureBox
             // 
@@ -134,7 +133,7 @@
             this.movePictureBox.BackColor = System.Drawing.Color.GhostWhite;
             this.movePictureBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.movePictureBox.ForeColor = System.Drawing.Color.GhostWhite;
-            this.movePictureBox.Image = global::C2.Properties.Resources.arrow_move;
+            this.movePictureBox.Image = global::C2.Properties.Resources.cursor;
             this.movePictureBox.Location = new System.Drawing.Point(393, 2);
             this.movePictureBox.Name = "movePictureBox";
             this.movePictureBox.Size = new System.Drawing.Size(32, 32);
@@ -143,7 +142,6 @@
             this.toolTip1.SetToolTip(this.movePictureBox, "拖动当前视野屏幕");
             this.movePictureBox.UseVisualStyleBackColor = false;
             this.movePictureBox.Click += new System.EventHandler(this.MovePictureBox_Click);
-
             // 
             // framePictureBox
             // 
@@ -151,7 +149,7 @@
             this.framePictureBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.framePictureBox.ForeColor = System.Drawing.Color.GhostWhite;
             this.framePictureBox.Image = global::C2.Properties.Resources.hand;
-            this.framePictureBox.Location = new System.Drawing.Point(431, 0);
+            this.framePictureBox.Location = new System.Drawing.Point(430, 2);
             this.framePictureBox.Name = "framePictureBox";
             this.framePictureBox.Size = new System.Drawing.Size(32, 32);
             this.framePictureBox.TabIndex = 6;

@@ -133,9 +133,9 @@ namespace C2.Controls.Top
 
         private void DragChange(bool flag)
         {
-          
+            
         }
-   
+
         public void RemarkChange(bool flag)
         {
           
@@ -143,6 +143,7 @@ namespace C2.Controls.Top
         private void FrameChange(bool flag)
         {
             Global.GetCurrentDocument().Show();
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             
         }
         public void InterruptSelectFrame()
