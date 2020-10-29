@@ -23,7 +23,7 @@ namespace C2.Model.Widgets
             DisplayIndex = 1;
             widgetIcon = Properties.Resources.operator_w_icon;
             DataSourceItem = null;
-            Option = null;
+            Option = new OperatorOption();
             ResultItem = null;
             Status = OpStatus.Null;
         }

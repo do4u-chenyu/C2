@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace C2.Model.Widgets
 {
-    class DataSourceWidget : Widget, IRemark
+    public class DataSourceWidget : Widget, IRemark
     {
         public const string TypeID = "DATASOURCE";
         public List<DataItem> DataItems { get; set; }

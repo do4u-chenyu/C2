@@ -9,7 +9,7 @@ namespace C2.Controls.Common
 {
     public partial class DesignerControl : UserControl
     {
-
+        private string[] ComboOperator = new string[] { "最大值", "AI实践" };
 
         public Topic SelectedTopic { get; set; }
         public OperatorWidget OpWidget { get; set; }
@@ -58,7 +58,7 @@ namespace C2.Controls.Common
                 else
                 {
                     SelectedDataSource = null;
-                    this.dataSourceCombo.Text = "请选择数据源";
+                    this.dataSourceCombo.Text = "";
                 }
             }
         }
@@ -135,13 +135,21 @@ namespace C2.Controls.Common
 
         }
 
-        private void dataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void DataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            OperatorWidget opw = SelectedTopic.FindWidget<OperatorWidget>();
-
-            if (opw != null)
+            if (OpWidget != null)
             {
-                opw.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+                OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+                SelectedDataSource = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+            }
+        }
+
+        private void OperatorCombo_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (OpWidget != null)
+            {
+                OpWidget.OpType = ComboOperator[this.operatorCombo.SelectedIndex];
+                SelectedOperator = ComboOperator[this.operatorCombo.SelectedIndex];
             }
         }
     }
