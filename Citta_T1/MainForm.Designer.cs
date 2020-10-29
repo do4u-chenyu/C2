@@ -308,7 +308,7 @@ namespace C2
             // leftFoldButton
             // 
             this.leftFoldButton.BackColor = System.Drawing.SystemColors.Control;
-            this.leftFoldButton.Cursor = System.Windows.Forms.Cursors.No;
+            this.leftFoldButton.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.leftFoldButton.Image = ((System.Drawing.Image)(resources.GetObject("leftFoldButton.Image")));
             this.leftFoldButton.Location = new System.Drawing.Point(0, 0);
             this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
@@ -519,7 +519,7 @@ namespace C2
             this.mdiWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.mdiWorkSpace.Name = "mdiWorkSpace";
             this.mdiWorkSpace.Size = new System.Drawing.Size(910, 248);
-            this.mdiWorkSpace.TabIndex = 10;
+            this.mdiWorkSpace.TabIndex = 8;
             // 
             // bottomViewPanel
             // 
@@ -587,14 +587,6 @@ namespace C2
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(394, 39);
             this.panel8.TabIndex = 0;
-            // 
-            // mdiWorkSpace
-            // 
-            this.mdiWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mdiWorkSpace.Location = new System.Drawing.Point(0, 0);
-            this.mdiWorkSpace.Name = "mdiWorkSpace";
-            this.mdiWorkSpace.Size = new System.Drawing.Size(910, 248);
-            this.mdiWorkSpace.TabIndex = 8;
             // 
             // panel6
             // 
