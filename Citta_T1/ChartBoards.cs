@@ -29,17 +29,18 @@ namespace C2
         {
             Text = "Start";
             
-            string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
-            double[] y = new double[] { 541, 574, 345, 854, 684 };
-            this.barChart = new BarChart(x, y);
-            this.pieChart = new PieChart(x, y);
-            this.horizontalBar3D = new HorizontalBar3D(x, y);
+
             InitializeComponent();
             AfterInitialize();
         }
 
         void InitializeComponent()
         {
+            string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
+            double[] y = new double[] { 541, 574, 345, 854, 684 };
+            this.barChart = new BarChart(x, y,"柱状图");
+            this.pieChart = new PieChart(x, y);
+            this.horizontalBar3D = new HorizontalBar3D(x, y);
 
             this.radarChart = new C2.Controls.DataCharts.RadarChart();
             this.ringChart = new C2.Controls.DataCharts.RingChart();

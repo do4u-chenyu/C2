@@ -15,26 +15,33 @@ namespace C2.Controls.DataCharts
     {
         private string[] x;
         private double[] y;
-        public BarChart(string[] x, double[] y)
+        private string title;
+        private string xTitle;
+        private string yTitle;
+        public BarChart(string[] x, double[] y, string title = "柱状图")
         {
             InitializeComponent();
             this.x = x;
             this.y = y;
+            this.title = title;
             InitChart();
         }
         public void InitChart()
         {
-            chart1.Titles.Add("");
+            chart1.Titles.Add(title);
             chart1.Titles[0].ForeColor = Color.White;
             chart1.Titles[0].Font = new Font("微软雅黑", 12f, FontStyle.Regular);
             chart1.Titles[0].Alignment = ContentAlignment.TopCenter;
 
-
+            //
+            //图标背景透明化
+            //
             //控件背景
             chart1.BackColor = Color.Transparent;
             //图表区背景
             chart1.ChartAreas[0].BackColor = Color.Transparent;
             chart1.ChartAreas[0].BorderColor = Color.Transparent;
+
             //X轴标签间距
             chart1.ChartAreas[0].AxisX.Interval = 1;
             chart1.ChartAreas[0].AxisX.LabelStyle.IsStaggered = true;

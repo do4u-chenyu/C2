@@ -37,6 +37,7 @@ namespace C2.Forms
         ChartControl _ActiveChartBox;
         bool _ShowSidebar = true;
         object[] _SelectedObjects;
+        object _ShowDesignerObject;
         ShortcutKeysTable ShortcutKeys;
         PrintDialog MyPrintDialog;
         bool HardClose;
@@ -153,6 +154,15 @@ namespace C2.Forms
             }
         }
 
+        object ShowDesignerObject
+        {
+            get { return _ShowDesignerObject; }
+            set
+            {
+                 _ShowDesignerObject = value;
+                OnShowDesignerObjectChanged(_ShowDesignerObject);
+            }
+        }
         void OnShowSidebarChanged()
         {
             splitContainer2.Visible = ShowSidebar;
@@ -194,6 +204,7 @@ namespace C2.Forms
             if (old != null)
             {
                 old.SelectedObjectsChanged -= new EventHandler(ActivedChartPage_SelectedObjectsChanged);
+                old.NeedShowDesigner -= new EventHandler(ActivedChartPage_NeedShowDesigner);
             }
 
             if (ActivedChartPage != null)
@@ -204,6 +215,7 @@ namespace C2.Forms
 
                 SelectedObjects = ActivedChartPage.SelectedObjects;
                 ActivedChartPage.SelectedObjectsChanged += new EventHandler(ActivedChartPage_SelectedObjectsChanged);
+                ActivedChartPage.NeedShowDesigner += new EventHandler(ActivedChartPage_NeedShowDesigner);
             }
             else
             {
@@ -216,12 +228,20 @@ namespace C2.Forms
             ResetControlStatus();
         }
 
+        void OnShowDesignerObjectChanged(object obj)
+        {
+            if(ShowDesignerObject != null)
+            {
+                ShowDesigner(ShowDesignerObject);
+            }
+        }
+
         void OnSelectedObjectsChanged(object[] old)
         {
             if (SelectedObjects != null)
             {
+                //ShowDesigner(SelectedObjects[0]);
                 ShowProperty(SelectedObjects);
-                ShowDesigner(SelectedObjects[0]);
             }
                 
             else if (ActivedChartPage != null)
@@ -809,6 +829,17 @@ namespace C2.Forms
 
             if(ActiveChartBox != null)
                 ActiveChartBox.ResetControlStatus();
+        }
+
+        
+        void ActivedChartPage_NeedShowDesigner(object sender, EventArgs e)
+        {
+            if (ActivedChartPage == sender)
+            {
+                ShowDesignerObject = ActivedChartPage.ShowDesignerObject;
+            }
+
+            ResetControlStatus();
         }
 
         void ActivedChartPage_SelectedObjectsChanged(object sender, EventArgs e)

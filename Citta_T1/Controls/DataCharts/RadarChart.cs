@@ -165,10 +165,10 @@ namespace C2.Controls.DataCharts
             {
                 chart1.Series[2].Points[i].MarkerStyle = MarkerStyle.Circle;//设置折点的风格     
                 chart1.Series[2].Points[i].MarkerColor = Color.Red;//设置seires中折点的颜色   
-                                                                 //    chart1.Series[1].Points[i].MarkerStyle = MarkerStyle.Square;//设置折点的风格     
-                                                                 //    chart1.Series[1].Points[i].MarkerColor = Color.Blue;//设置seires中折点的颜色  
-                                                                 //    chart1.Series[2].Points[i].MarkerStyle = MarkerStyle.Square;//设置折点的风格     
-                                                                 //    chart1.Series[2].Points[i].MarkerColor = Color.Green;//设置seires中折点的颜色  
+                                                                   //    chart1.Series[1].Points[i].MarkerStyle = MarkerStyle.Square;//设置折点的风格     
+                                                                   //    chart1.Series[1].Points[i].MarkerColor = Color.Blue;//设置seires中折点的颜色  
+                                                                   //    chart1.Series[2].Points[i].MarkerStyle = MarkerStyle.Square;//设置折点的风格     
+                                                                   //    chart1.Series[2].Points[i].MarkerColor = Color.Green;//设置seires中折点的颜色  
             }
             for (int i = 0; i < chart1.Series.Count; i++)
             {

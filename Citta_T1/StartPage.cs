@@ -62,7 +62,7 @@ namespace C2
             // StartPage
             // 
             this.ClientSize = new System.Drawing.Size(784, 462);
-            this.Controls.Add(this.barChart);
+            this.Controls.Add(this.recentFilesView1);
             //this.Controls.Add(this.recentFilesView1);
             this.Name = "StartPage";
             this.ResumeLayout(false);
