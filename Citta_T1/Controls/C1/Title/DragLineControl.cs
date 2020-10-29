@@ -19,6 +19,7 @@ namespace C2.Controls.Title
         private Control flowControl;
         private Control rightShowButton;
         private Control rightHideButton;
+        private Control operatorControl;
         private Control remarkControl;
         private Control currentModelRunBackLab;
         private Control currentModelFinLab;
@@ -37,6 +38,7 @@ namespace C2.Controls.Title
         private void DragLineControl_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
+            this.operatorControl = Global.GetOperatorControl();
             this.canvasPanel = Global.GetCanvasPanel();
             this.flowControl = Global.GetFlowControl();
             this.naviViewControl = Global.GetNaviViewControl();
@@ -100,12 +102,14 @@ namespace C2.Controls.Title
             this.progressBar1.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
             this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
 
-            // 顶层浮动工具栏和右侧工具及隐藏按钮定位
+            // 算子工具栏、顶层浮动工具栏和右侧工具及隐藏按钮定位
+            this.operatorControl.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width, 50 + this.rightHideButton.Width + 10);
             this.flowControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50);
             this.remarkControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50 + this.flowControl.Height + 10);
             this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width, 50);
             this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width, 50 + this.rightHideButton.Width + 10);
-
+            
+            
         }
     }
 }
