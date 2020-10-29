@@ -61,11 +61,6 @@ namespace C2.Controls.Top
         }
         #region 拖动
 
-        private void MovePictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            DragChange(true);
-
-        }
         private void MovePictureBox_Click(object sender, EventArgs e)
         {
             // 1. 点击之后图标变色
@@ -77,33 +72,11 @@ namespace C2.Controls.Top
             ChangeCursor();
             FrameChange(SelectFrame);
         }
-        private void MovePictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            DragChange(SelectDrag);
-        }
+
         #endregion
 
         #region 放大缩小
-        private void ZoomUpPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            ZoomUpChange(true);
-        }
-
-        private void ZoomUpPictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            ZoomUpChange(false);
-        }
-
-        private void ZoomDownPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            ZoomDownChange(true);
-        }
-
-        private void ZoomDownPictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            ZoomDownChange(false);
-        }
-
+       
         private void ZoomUpPictureBox_Click(object sender, EventArgs e)
         {
             SelectFrame = false;
@@ -124,15 +97,6 @@ namespace C2.Controls.Top
         #endregion
 
         #region 备注
-        private void RemarkPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            RemarkChange(true);
-        }
-
-        private void RemarkPictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            RemarkChange(SelectRemark);
-        }
 
         private void HideRemarkControl()//单击备注按钮，备注出现和隐藏功能
         {
@@ -156,15 +120,6 @@ namespace C2.Controls.Top
         #endregion
 
         #region 框选
-        private void FramePictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            FrameChange(true);
-        }
-
-        private void FramePictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            FrameChange(SelectFrame);
-        }
 
         private void FramePictureBox_Click(object sender, EventArgs e)
         {
@@ -178,70 +133,17 @@ namespace C2.Controls.Top
 
         private void DragChange(bool flag)
         {
-            if (flag)
-            {
-                this.movePictureBox.Image = global::C2.Properties.Resources.selectDrag;
-                this.movePictureBox.Location = new System.Drawing.Point(126, 3);
-                this.movePictureBox.Size = new System.Drawing.Size(29, 29);
-                return;
-            }
-            this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("movePictureBox.Image")));
-            this.movePictureBox.Location = new System.Drawing.Point(132, 6);
-            this.movePictureBox.Size = new System.Drawing.Size(21, 21);
+          
         }
-        private void ZoomUpChange(bool flag)
-        {
-            if (flag)
-            {
-                this.zoomUpPictureBox.Image = global::C2.Properties.Resources.selectZoomUp;
-                this.zoomUpPictureBox.Location = new System.Drawing.Point(51, 3);
-                this.zoomUpPictureBox.Size = new System.Drawing.Size(29, 29);
-                return;
-            }
-            this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomUpPictureBox.Image")));
-            this.zoomUpPictureBox.Location = new System.Drawing.Point(57, 6);
-            this.zoomUpPictureBox.Size = new System.Drawing.Size(21, 21);
-        }
-        private void ZoomDownChange(bool flag)
-        {
-            if (flag)
-            {
-                this.zoomDownPictureBox.Image = global::C2.Properties.Resources.selectZoomDown;
-                this.zoomDownPictureBox.Location = new System.Drawing.Point(87, 3);
-                this.zoomDownPictureBox.Size = new System.Drawing.Size(29, 29);
-                return;
-            }
-            this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomDownPictureBox.Image")));
-            this.zoomDownPictureBox.Location = new System.Drawing.Point(93, 6);
-            this.zoomDownPictureBox.Size = new System.Drawing.Size(21, 21);
-        }
+   
         public void RemarkChange(bool flag)
         {
-            if (flag)
-            {
-                this.remarkPictureBox.Image = global::C2.Properties.Resources.selectRemark;
-                this.remarkPictureBox.Location = new System.Drawing.Point(14, 3);
-                this.remarkPictureBox.Size = new System.Drawing.Size(29, 29);
-                return;
-            }
-            this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
-            this.remarkPictureBox.Location = new System.Drawing.Point(20, 6);
-            this.remarkPictureBox.Size = new System.Drawing.Size(21, 21);
+          
         }
         private void FrameChange(bool flag)
         {
             Global.GetCurrentDocument().Show();
-            Global.GetCanvasPanel().FrameWrapper.InitFrame();
-            if (flag)
-            {
-                this.framePictureBox.Image = global::C2.Properties.Resources.selectFrame;
-                this.framePictureBox.Location = new System.Drawing.Point(161, 3);
-                this.framePictureBox.Size = new System.Drawing.Size(29, 29);
-                return;
-            }
-            this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
-            this.framePictureBox.Location = new System.Drawing.Point(167, 6);
-            this.framePictureBox.Size = new System.Drawing.Size(21, 21);
+            
         }
         public void InterruptSelectFrame()
         {

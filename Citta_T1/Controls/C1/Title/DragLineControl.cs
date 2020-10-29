@@ -43,7 +43,6 @@ namespace C2.Controls.Title
             }
                 //this.bottomViewPanel.Height = this.bottomViewPanel.Height - e.Y;
             mouseDown = false;
-
             Global.GetCanvasForm()?.InitializeControlsLocation();
         }
     }
