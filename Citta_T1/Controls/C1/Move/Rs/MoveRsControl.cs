@@ -262,7 +262,7 @@ namespace C2.Controls.Move.Rs
             //需要判断模型当前运行状态，正在运行时，无法执行运行到此
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(), "mid", currentOp);
-            Global.GetMainForm().BindUiManagerFunc();
+            Global.GetCanvsaForm().BindUiManagerFunc();
 
             int notReadyNum = currentManager.CurrentModelTripleStatusNum(ElementStatus.Null);
             if (notReadyNum > 0)
@@ -277,7 +277,7 @@ namespace C2.Controls.Move.Rs
                 return;
             }
             currentManager.Start();
-            Global.GetMainForm().UpdateRunbuttonImageInfo();
+            Global.GetCanvsaForm().UpdateRunbuttonImageInfo();
 
         }
         #endregion

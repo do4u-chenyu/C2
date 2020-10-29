@@ -33,14 +33,15 @@ namespace C2.Forms
         public CanvasPanel CanvasPanel{ get { return this.canvasPanel; }}
         public RemarkControl RemarkControl { get { return this.remarkControl; } }
         public FlowControl FlowControl { get { return this.flowControl; } }
+        public OperatorControl OperatorControl { get { return this.operatorControl; } }
         public OptionDao OptionDao { get { return this.optionDao; } }
         public ModelDocumentDao ModelDocumentDao { get { return this.modelDocumentDao; } }
+        public bool isBottomViewPanelMinimum;
+        public bool isLeftViewPanelMinimum;
         private OptionDao optionDao;
         private ModelDocument document;
         private ModelDocumentDao modelDocumentDao;
         private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
-        private bool isBottomViewPanelMinimum;
-        private bool isLeftViewPanelMinimum;
         private string userName;
         #region 运行委托
         delegate void AsynUpdateLog(string logContent);
@@ -211,7 +212,7 @@ namespace C2.Forms
             this.ShowBottomPanel();
             this.ShowLogView();
         }
-        private void InitializeControlsLocation()
+        public void InitializeControlsLocation()
         {
             int x = this.canvasPanel.Width - 10 - this.canvasPanel.NaviViewControl.Width;
             int y = this.canvasPanel.Height - 5 - this.canvasPanel.NaviViewControl.Height;
@@ -233,12 +234,13 @@ namespace C2.Forms
             this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            this.flowControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50);
-            this.remarkControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50 + this.flowControl.Height + 10);
-            this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width, 50);
-            this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width, 50 + this.rightHideButton.Width + 10);
+            this.flowControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 35);
+            this.operatorControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 90);
+            this.remarkControl.Location = new Point(this.canvasPanel.Width - 205 - this.flowControl.Width, this.flowControl.Height - 15);
+            this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width, 35);
+            this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width, 35 + this.rightHideButton.Width);
 
-            // 右上用户名，头像
+            //// 右上用户名，头像
             //int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
             //int rightMargin = (this.userName.Length - (count / 3) - 3) * 14;
             //this.usernamelabel.Text = this.userName;
@@ -511,38 +513,8 @@ namespace C2.Forms
         {
             this.topToolBarControl.Enabled = status;
             //this.panel5.Enabled = status;
-            this.leftToolBoxPanel.Enabled = status;
+            //this.leftToolBoxPanel.Enabled = status;
             this.flowControl.Enabled = status;
-        }
-        #endregion
-
-        #region 左侧缩放工具
-        private void ShowLeftFold()
-        {
-            if (this.isLeftViewPanelMinimum)
-            {
-                this.isLeftViewPanelMinimum = false;
-                this.leftToolBoxPanel.Width = 187;
-                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            }
-            InitializeControlsLocation();
-        }
-        private void LeftFoldButton_Click(object sender, EventArgs e)
-        {
-            if (this.isLeftViewPanelMinimum)
-            {
-                this.isLeftViewPanelMinimum = false;
-                this.leftToolBoxPanel.Width = 187;
-                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            }
-            else
-            {
-                this.isLeftViewPanelMinimum = true;
-                this.leftToolBoxPanel.Width = 10;
-                this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
-            }
-
-            InitializeControlsLocation();
         }
         #endregion
 
@@ -578,6 +550,30 @@ namespace C2.Forms
                 if (result == DialogResult.No)
                     return;
             }
+        }
+        #endregion
+
+        #region UndoRedo
+        private void UpdateUndoRedoButton()
+        {
+            //topToolBarControl.SetUndoButtonEnable(!UndoRedoManager.GetInstance().IsUndoStackEmpty(modelDocumentDao.CurrentDocument));
+            //topToolBarControl.SetRedoButtonEnable(!UndoRedoManager.GetInstance().IsRedoStackEmpty(modelDocumentDao.CurrentDocument));
+        }
+        #endregion
+
+        #region 文档加载
+        public void LoadDocument(string modelTitle)
+        {
+            //this.modelTitlePanel.AddModel(modelTitle);
+            //this.modelDocumentDao.CurrentDocument.Load();
+            //this.modelDocumentDao.CurrentDocument.ReCountDocumentMaxElementID();
+            //this.modelDocumentDao.CurrentDocument.Show();
+            //this.modelDocumentDao.CurrentDocument.Dirty = false;
+            //CanvasAddElement(this.modelDocumentDao.CurrentDocument);
+            //// 加载文档时，需要暂时关闭remark的TextChange事件
+            //this.remarkControl.RemarkChangeEvent -= RemarkChange;
+            //this.remarkControl.RemarkDescription = this.modelDocumentDao.RemarkDescription;
+            //this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
         #endregion
     }

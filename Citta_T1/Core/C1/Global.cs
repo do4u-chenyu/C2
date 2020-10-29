@@ -83,7 +83,16 @@ namespace C2.Core
             }
             return ret;
         }
-        public static OperatorControl GetOperatorControl() { return operatorControl; }
+        public static OperatorControl GetOperatorControl() {
+            OperatorControl ret = null;
+            CanvasForm cf;
+            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+            {
+                cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
+                ret = cf.OperatorControl;
+            }
+            return ret;
+        }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static RemarkControl GetRemarkControl()
         {

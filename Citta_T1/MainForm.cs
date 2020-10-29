@@ -45,6 +45,7 @@ namespace C2
         SpecialTabItem TabNew;
         TabBarButton BtnOpen;
         TabBarButton BtnHelp;
+        TabBarButton BtnNew;
         AboutDialogBox AboutDialog;
         FindDialog MyFindDialog;
         ShortcutKeysMapDialog ShortcutsMapDialog;
@@ -88,21 +89,132 @@ namespace C2
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
 
+            InitializeTaskBar();
+            InitializeShortcutKeys();
             InitializeGlobalVariable();
             InitializeControlsLocation();
+            InitializeLeftFold();
 
             MdiClient = this.mdiWorkSpace1;
             openFileDialog1 = new OpenFileDialog();
             this.NewDocument(false);
         }
+        #region 初始化
+        void InitializeTaskBar()
+        {
+            TaskBar = taskBar;
+            TaskBar.Font = SystemFonts.MenuFont;
+            TaskBar.Height = Math.Max(32, TaskBar.Height);
+            TaskBar.MaxItemSize = 300;
+            //TaskBar.Padding = new Padding(2, 0, 2, 0);
+
+            BtnNew = new TabBarButton();
+            BtnNew.Icon = Properties.Resources._new;
+            BtnNew.ToolTipText = "Create New Document";
+            BtnNew.Click += new EventHandler(MenuNew_Click);
+
+            TaskBar.LeftButtons.Add(BtnNew);
+            TaskBar.Items.ItemAdded += TaskBar_Items_ItemAdded;
+            TaskBar.Items.ItemRemoved += TaskBar_Items_ItemRemoved;
+
+            TabNew = new SpecialTabItem(Properties.Resources._new);
+            TabNew.Click += new EventHandler(MenuNew_Click);
+            TaskBar.RightSpecialTabs.Add(TabNew);
+        }
+
+        void InitializeWindowStates()
+        {
+            if (Options.Current.GetValue(OptionNames.Customizations.MainWindowMaximized, true))
+                WindowState = FormWindowState.Maximized;
+            else
+                WindowState = FormWindowState.Normal;
+
+            if (Options.Current.Contains(OptionNames.Customizations.MainWindowSize))
+            {
+                Size = Options.Current.GetValue(OptionNames.Customizations.MainWindowSize, Size);
+                SetAGoodLocation();
+            }
+        }
+        #region Blumnd Hotkey
+        void InitializeShortcutKeys()
+        {
+            KeyMap.Default.KeyManChanged += new EventHandler(Default_KeyManChanged);
+            Default_KeyManChanged(null, EventArgs.Empty);
+
+            ShortcutKeys = new ShortcutKeysTable();
+            ShortcutKeys.Register(KeyMap.New, delegate () { NewDocument(); });
+            ShortcutKeys.Register(KeyMap.Open, delegate () { OpenDocument(); });
+            ShortcutKeys.Register(KeyMap.NextTab, delegate () { taskBar.SelectNextTab(false); });
+            ShortcutKeys.Register(KeyMap.PreviousTab, delegate () { taskBar.SelectNextTab(true); });
+        }
+        void Default_KeyManChanged(object sender, EventArgs e)
+        {
+            //MenuNew.ShortcutKeyDisplayString = KeyMap.New.ToString();
+            //MenuOpen.ShortcutKeyDisplayString = KeyMap.Open.ToString();
+            //MenuSave.ShortcutKeyDisplayString = KeyMap.Save.ToString();
+            //MenuQuickHelp.ShortcutKeys = KeyMap.Help.Keys;
+        }
+        #endregion
         private void InitializeGlobalVariable()
         {
             Global.SetMainForm(this);
         }
-        private void RemarkChange(RemarkControl rc)
+        private void InitializeControlsLocation()
         {
-            SetDocumentDirty();
-            //this.modelDocumentDao.UpdateRemark(rc);
+            //int x = this.canvasPanel.Width - 10 - this.naviViewControl.Width;
+            //int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
+
+            //// 缩略图定位
+            //this.naviViewControl.Location = new Point(x, y);
+            //this.naviViewControl.Invalidate();
+
+            //// 底层工具按钮定位
+            //x = x - (this.canvasPanel.Width) / 2 + 100;
+            //this.resetButton.Location = new Point(x + 100, y + 50);
+            //this.stopButton.Location = new Point(x + 50, y + 50);
+            //this.runButton.Location = new Point(x, y + 50);
+
+            ////运行状态动图、进度条定位
+            //this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
+            //this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
+            //this.progressBar1.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
+            //this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
+
+            //// 顶层浮动工具栏和右侧工具及隐藏按钮定位
+            //this.flowControl.Location     = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50);
+            //this.remarkControl.Location   = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50 + this.flowControl.Height + 10);
+            //this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 50);
+            //this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 50 + this.rightHideButton.Width + 10);
+
+            //// 右上用户名，头像
+            //int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
+            //int rightMargin = (this.userName.Length - (count / 3) - 3) * 14;
+            //this.usernamelabel.Text = this.userName;
+            //Point userNameLocation = new Point(185, 10);
+            //this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
+            //this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y + 1);
+            //this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
+        }
+        private void InitializeLeftFold()
+        {
+            this.leftFoldPanel.Location = new Point(this.leftFoldPanel.Location.X + this.mindMapModelControl.Width, this.leftFoldPanel.Location.Y);
+        }
+        #endregion
+        void SetAGoodLocation()
+        {
+            if (WindowState == FormWindowState.Normal)
+            {
+                Rectangle rect = Screen.GetWorkingArea(this);
+                Location = new Point(Math.Max(rect.X, Math.Min(rect.Right - Width, Location.X)),
+                    Math.Max(rect.Y, Math.Min(rect.Bottom - Height, Location.Y)));
+            }
+        }
+
+        protected override void AfterInitialize()
+        {
+            base.AfterInitialize();
+
+            InitializeWindowStates();
         }
 
         public void SetDocumentDirty()
@@ -142,27 +254,6 @@ namespace C2
             //    this.modelTitlePanel.ResetDirtyPictureBox(modelTitle, false);
             //}
         }
-
-
-        private void UpdateUndoRedoButton()
-        {
-            //topToolBarControl.SetUndoButtonEnable(!UndoRedoManager.GetInstance().IsUndoStackEmpty(modelDocumentDao.CurrentDocument));
-            //topToolBarControl.SetRedoButtonEnable(!UndoRedoManager.GetInstance().IsRedoStackEmpty(modelDocumentDao.CurrentDocument));
-        }
-
-        public void LoadDocument(string modelTitle)
-        {
-            //this.modelTitlePanel.AddModel(modelTitle);
-            //this.modelDocumentDao.CurrentDocument.Load();
-            //this.modelDocumentDao.CurrentDocument.ReCountDocumentMaxElementID();
-            //this.modelDocumentDao.CurrentDocument.Show();
-            //this.modelDocumentDao.CurrentDocument.Dirty = false;
-            //CanvasAddElement(this.modelDocumentDao.CurrentDocument);
-            //// 加载文档时，需要暂时关闭remark的TextChange事件
-            //this.remarkControl.RemarkChangeEvent -= RemarkChange;
-            //this.remarkControl.RemarkDescription = this.modelDocumentDao.RemarkDescription;
-            //this.remarkControl.RemarkChangeEvent += RemarkChange;
-        }
         private void LoadDocuments()
         {
             //if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
@@ -201,43 +292,6 @@ namespace C2
             //doc.UpdateAllLines();
         }
 
-        private void InitializeControlsLocation()
-        {
-            //int x = this.canvasPanel.Width - 10 - this.naviViewControl.Width;
-            //int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
-
-            //// 缩略图定位
-            //this.naviViewControl.Location = new Point(x, y);
-            //this.naviViewControl.Invalidate();
-
-            //// 底层工具按钮定位
-            //x = x - (this.canvasPanel.Width) / 2 + 100;
-            //this.resetButton.Location = new Point(x + 100, y + 50);
-            //this.stopButton.Location = new Point(x + 50, y + 50);
-            //this.runButton.Location = new Point(x, y + 50);
-
-            ////运行状态动图、进度条定位
-            //this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
-            //this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
-            //this.progressBar1.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
-            //this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
-
-            //// 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            //this.flowControl.Location     = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50);
-            //this.remarkControl.Location   = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50 + this.flowControl.Height + 10);
-            //this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 50);
-            //this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 50 + this.rightHideButton.Width + 10);
-            
-            //// 右上用户名，头像
-            //int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
-            //int rightMargin = (this.userName.Length - (count / 3) - 3) * 14;
-            //this.usernamelabel.Text = this.userName;
-            //Point userNameLocation = new Point(185, 10);
-            //this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
-            //this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y + 1);
-            //this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
-        }
-
         private void MyModelButton_Click(object sender, EventArgs e)
         {
             this.ShowLeftFold();
@@ -274,32 +328,6 @@ namespace C2
             this.myModelControl.Visible = false;
         }
 
-
-        private void MinMaxPictureBox_Click(object sender, EventArgs e)
-        {
-            //log.Info("MinMaxPictureBox_Click");
-            //if (this.isBottomViewPanelMinimum == true)
-            //{
-            //    this.isBottomViewPanelMinimum = false;
-            //    this.bottomViewPanel.Height = 280;
-            //    this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
-            //}
-            //else
-            //{
-            //    this.isBottomViewPanelMinimum = true;
-            //    this.bottomViewPanel.Height = 40;
-            //    this.minMaxPictureBox.Image = global::C2.Properties.Resources.maxunfold;
-            //}
-            //InitializeControlsLocation();
-            //if (bottomViewPanel.Height == 280)
-            //{
-            //    this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
-            //}
-            //if (bottomViewPanel.Height == 40)
-            //{
-            //    this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
-            //}
-        }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
@@ -341,293 +369,32 @@ namespace C2
                 this.dataSourceControl.GenDataButton(dataButton);
         }
 
-        private void ResetButton_Click(object sender, EventArgs e)
-        {
-            //重置前打断框选、选中线
-            Global.GetFlowControl().InterruptSelectFrame();
-            Global.GetCanvasPanel().ClearAllLineStatus();
-
-            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
-
-            //在模型运行完成，及终止的情况下，可以重置
-            //Console.WriteLine(currentManager.ModelStatus.ToString());
-            if (currentManager.ModelStatus != ModelStatus.GifDone && currentManager.ModelStatus != ModelStatus.Pause && currentManager.ModelStatus != ModelStatus.Running)
-            {
-                currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(),"all");
-                currentManager.Reset();
-                //SetDocumentDirty();//需不需要dirty
-                MessageBox.Show("当前模型的运算结果已重置，点击‘运行’可以重新运算了", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-
-        private void StopButton_Click(object sender, EventArgs e)
-        {
-            ////终止前打断框选、选中线
-            //Global.GetFlowControl().InterruptSelectFrame();
-            //Global.GetCanvasPanel().ClearAllLineStatus();
-
-            //if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
-            //{
-            //    Global.GetCurrentDocument().TaskManager.Stop();
-            //    UpdateRunbuttonImageInfo();
-            //}
-        }
-
-        private void RunButton_Click(object sender, EventArgs e)
-        {
-            ////运算前打断框选、选中线
-            //Global.GetFlowControl().InterruptSelectFrame();
-            //Global.GetCanvasPanel().ClearAllLineStatus();
-
-            //TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
-            //BindUiManagerFunc();
-
-            //if (this.runButton.Name == "runButton")
-            //{
-            //    if (Global.GetCurrentDocument().Dirty)
-            //    {
-            //        MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        return;
-            //    }
-            //    currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(),"all");
-            //    //int notReadyNum = currentManager.CountOpStatus(ElementStatus.Null);
-            //    int notReadyNum = currentManager.CountOpNullAndNoRelation();
-            //    if (notReadyNum > 0)
-            //    {
-            //        MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        return;
-            //    }
-
-            //    if (currentManager.IsAllOperatorDone())
-            //    {
-            //        MessageBox.Show("当前模型的算子均已运算完毕，重新运算需要先点击‘重置’按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        return;
-            //    }
-            //    currentManager.Start();
-            //    int taskNum = currentManager.CountOpStatus(ElementStatus.Ready);
-            //    this.progressBar1.Step = taskNum > 0 ? 100 / taskNum : 100;
-
-            //    this.progressBar1.Value = 0;
-            //    this.progressBarLabel.Text = "0%";
-            //}
-            //else if (this.runButton.Name == "pauseButton")
-            //{
-            //    currentManager.Pause(); 
-            //}
-            //else if (this.runButton.Name == "continueButton")
-            //{
-            //    currentManager.Continue();
-            //}
-
-            //UpdateRunbuttonImageInfo();
-        }
-
-        public void BindUiManagerFunc()
-        {
-            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
-            //初次运行时，绑定线程与ui交互的委托
-            if (currentManager.ModelStatus == ModelStatus.Null)
-            {
-                currentManager.UpdateLogDelegate = UpdateLogStatus;
-                currentManager.TaskCallBack = Accomplish;
-                currentManager.UpdateGifDelegate = UpdateRunningGif;
-                currentManager.UpdateBarDelegate = UpdateProgressBar;
-                currentManager.UpdateOpErrorDelegate = UpdateOpErrorMessage;
-                currentManager.UpdateMaskDelegate = EnableRunningControl;
-            }
-        }
-
-        //更新op算子错误信息
-        private void UpdateOpErrorMessage(TaskManager manager, int id, string error)
-        {
-            //this.Invoke(new AsynUpdateOpErrorMessage(delegate ()
-            //{
-            //    ModelDocument model = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            //    MoveOpControl op = model.SearchElementByID(id).InnerControl as MoveOpControl;
-            //    op.SetStatusBoxErrorContent(error);
-            //}));
-        }
-
-        //更新进度条
-        private void UpdateProgressBar(TaskManager manager)
-        {
-            //ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            //if (doneModel != Global.GetCurrentDocument())
-            //    return;
-
-
-            //if (manager.ModelStatus == ModelStatus.Running)
-            //    this.Invoke(new AsynUpdateProgressBar(delegate ()
-            //    {
-            //        this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
-            //        this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
-            //    }));
-        }
-
-
-        //更新log
-        private void UpdateLogStatus(string logContent)
-        {
-            this.Invoke(new AsynUpdateLog(delegate (string tlog)
-            {
-                log.Info(tlog);
-            }), logContent);
-        }
-
-
-        private void UpdateRunningGif(TaskManager manager)
-        {
-            //ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            //if (doneModel != Global.GetCurrentDocument())
-            //    return;
-
-            //if (manager.ModelStatus == ModelStatus.GifDone)
-            //    this.Invoke(new AsynUpdateGif(delegate ()
-            //    {
-            //        this.currentModelRunBackLab.Hide();
-            //        this.currentModelRunLab.Hide();
-            //        this.currentModelFinLab.Show();
-            //    }));
-            //else if (manager.ModelStatus == ModelStatus.Done)
-            //    this.Invoke(new AsynUpdateGif(delegate ()
-            //    {
-            //        this.progressBar1.Hide();
-            //        this.progressBarLabel.Hide();
-            //        this.currentModelFinLab.Hide();
-            //    }));
-
-        }
-
-        //完成任务时需要调用
-        private void Accomplish(TaskManager manager)
-        {
-            //ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            //doneModel.Save();
-            //if (doneModel == Global.GetCurrentDocument())
-            //{
-            //    this.Invoke(new TaskCallBack(delegate ()
-            //    {
-            //        UpdateRunbuttonImageInfo();
-            //    }));
-                
-            //}
-        }
-
-        //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档
-        public void UpdateRunbuttonImageInfo()
-        {
-            //TaskManager manager = Global.GetCurrentDocument().TaskManager;
-            //switch (manager.ModelStatus)
-            //{
-            //    //点击暂停按钮，均隐藏
-            //    case ModelStatus.Pause:
-            //        this.runButton.Name = "continueButton";
-            //        this.runButton.Image = global::C2.Properties.Resources.continual;
-            //        this.currentModelRunBackLab.Hide();
-            //        this.currentModelRunLab.Hide();
-            //        this.progressBar1.Hide();
-            //        this.progressBarLabel.Hide();
-            //        EnableRunningRsControl();
-            //        break;
-            //    //点击运行按钮
-            //    case ModelStatus.Running:
-            //        this.runButton.Name = "pauseButton";
-            //        //this.runButton.Image = global::C2.Properties.Resources.pause;
-            //        this.runButton.Image = global::C2.Properties.Resources.run;
-            //        this.runButton.Enabled = false;//暂时隐去暂停功能
-            //        this.currentModelRunBackLab.Show();
-            //        this.currentModelRunLab.Show();
-            //        this.progressBar1.Show();
-            //        this.progressBarLabel.Show();
-            //        this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
-            //        this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
-            //        UnEnableRunningControl();
-            //        break;
-            //    case ModelStatus.GifDone:
-            //        this.runButton.Name = "runButton";
-            //        this.runButton.Image = global::C2.Properties.Resources.run;
-            //        this.runButton.Enabled = true;//暂时隐去暂停功能
-            //        break;
-            //    default:
-            //        this.runButton.Name = "runButton";
-            //        this.runButton.Image = global::C2.Properties.Resources.run;
-            //        this.runButton.Enabled = true;//暂时隐去暂停功能
-            //        this.currentModelRunBackLab.Hide();
-            //        this.currentModelRunLab.Hide();
-            //        this.currentModelFinLab.Hide();
-            //        this.progressBar1.Hide();
-            //        this.progressBarLabel.Hide();
-            //        EnableRunningControl();
-            //        break;
-            //}
-        }
-
-        private void UnEnableRunningControl()
-        {
-            //禁止的控件
-            /*
-             * 1、当前模型的element
-             * 2、右上方菜单栏
-             * 3、左侧菜单栏
-             */
-            Global.GetCurrentDocument().UnEnable();
-            EnableCommonControl(false);
-        }
-        private void EnableRunningControl()
-        {
-            Global.GetCurrentDocument().Enable();
-            EnableCommonControl(true);
-        }
-        private void EnableRunningRsControl()
-        {
-            Global.GetCurrentDocument().EnableRs();
-            EnableCommonControl(false);
-        }
-        private void EnableRunningControl(TaskManager manager)
-        {
-            //ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            //this.Invoke(new AsynUpdateMask(delegate ()
-            //{
-            //    doneModel.Enable();
-            //    EnableCommonControl(true);
-            //}));
-        }
-
-        private void EnableCommonControl(bool status)
-        {
-            //this.topToolBarControl.Enabled = status;
-            //this.panel5.Enabled = status;
-            //this.leftToolBoxPanel.Enabled = status;
-            //this.flowControl.Enabled = status;
-        }
-
         private void ShowLeftFold()
         {
-            //if (this.isLeftViewPanelMinimum)
-            //{
-            //    this.isLeftViewPanelMinimum = false;
-            //    this.leftToolBoxPanel.Width = 187;
-            //    this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            //}
-            //InitializeControlsLocation();
+            if (Global.GetCanvsaForm().isLeftViewPanelMinimum)
+            {
+                Global.GetCanvsaForm().isLeftViewPanelMinimum = false;
+                this.leftToolBoxPanel.Width = 187;
+                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+            }
+            Global.GetCanvsaForm().InitializeControlsLocation();
         }
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
-            //if (this.isLeftViewPanelMinimum)
-            //{
-            //    this.isLeftViewPanelMinimum = false;
-            //    this.leftToolBoxPanel.Width = 187;
-            //    this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            //}
-            //else
-            //{
-            //    this.isLeftViewPanelMinimum = true;
-            //    this.leftToolBoxPanel.Width = 10;
-            //    this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
-            //}
+            if (Global.GetCanvsaForm().isLeftViewPanelMinimum)
+            {
+                Global.GetCanvsaForm().isLeftViewPanelMinimum = false;
+                this.leftToolBoxPanel.Width = 187;
+                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+            }
+            else
+            {
+                Global.GetCanvsaForm().isLeftViewPanelMinimum = true;
+                this.leftToolBoxPanel.Width = 10;
+                this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
+            }
 
-            //InitializeControlsLocation();
+            InitializeControlsLocation();
         }
 
         private void HelpPictureBox_Click(object sender, EventArgs e)
@@ -732,7 +499,7 @@ namespace C2
                 Global.GetCanvasPanel().LeftButtonDown = false;
         }
         #region C2
-        public void NewDocument(bool isCanvas = true)
+        private void NewDocument(bool isCanvas = true)
         {
             if (isCanvas)
             {
@@ -748,6 +515,11 @@ namespace C2
                 ShowForm(form);
             }
         }
+        public void NewDocumentForm()
+        {
+            this.NewDocument(false);
+        }
+        public 
 
         Document CreateNewMap()
         {
@@ -894,10 +666,23 @@ namespace C2
 
             return null;
         }
-
+        void BtnStart_Click(object sender, EventArgs e)
+        {
+            //StartMenu.Show(taskBar1, new Point(BtnStart.Bounds.Left, BtnStart.Bounds.Bottom + 1), ToolStripDropDownDirection.BelowRight);
+            //BtnStart.ShowMenu(StartMenu);
+        }
         void MenuNew_Click(object sender, System.EventArgs e)
         {
             NewDocument();
+        }
+        void MenuOpen_Click(object sender, EventArgs e)
+        {
+            OpenDocument();
+        }
+        void BtnHelp_Click(object sender, EventArgs e)
+        {
+            //MenuHelps.DropDown.Show(TaskBar, BtnHelp.Bounds.X, BtnHelp.Bounds.Bottom);
+            //BtnHelp.ShowMenu(MenuHelps.DropDown);
         }
         void TaskBar_Items_ItemRemoved(object sender, XListEventArgs<TabItem> e)
         {
@@ -931,11 +716,6 @@ namespace C2
         private void button1_Click_1(object sender, EventArgs e)
         {
             this.NewDocument();
-        }
-
-        private void flowControl_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
