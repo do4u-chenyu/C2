@@ -22,7 +22,6 @@ namespace C2.Controls.Title
 
         private void DragLineControl_MouseDown(object sender, MouseEventArgs e)
         {
-            // TODO 找控件
             mouseDown = true;
         }
 
