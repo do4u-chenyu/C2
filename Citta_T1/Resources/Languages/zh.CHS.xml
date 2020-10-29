@@ -388,7 +388,7 @@
 	<item name="Operator">添加算子</item>
 	<item name="Max">最大值</item>
 	<item name="AI">AI实践</item>
-	<item name="Model">模型</item>
+	<item name="Model">添加模型</item>
 	<item name="Result">添加结果</item>
 	</words>
 </dictionary>
