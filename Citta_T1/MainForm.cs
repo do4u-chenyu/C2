@@ -496,7 +496,7 @@ namespace C2
         private void NewStartForm()
         {
             StartForm form = new StartForm();
-            ShowForm(form);
+            ShowForm(form, true, false);
         }
         
         Document CreateNewMap()
