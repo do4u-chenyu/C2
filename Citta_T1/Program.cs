@@ -84,10 +84,10 @@ namespace C2
                 lgInfo.WriteLastLogin(userName);
                 Application.Run(new MainForm(userName));
             }
-            else if (Global.VersionType.Equals("test"))
-            {
-                Application.Run(new StartPage());
-            }
+            //else if (Global.VersionType.Equals("test"))
+            //{
+            //    Application.Run(new StartPage());
+            //}
             else
                 Application.Run(new LoginForm());
         }
