@@ -346,7 +346,6 @@ namespace C2
                 this.leftToolBoxPanel.Width = 187;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             }
-            Global.GetCanvasForm().InitializeControlsLocation();
         }
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
@@ -362,8 +361,6 @@ namespace C2
                 this.leftToolBoxPanel.Width = 10;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
             }
-
-            InitializeControlsLocation();
         }
 
         private void HelpPictureBox_Click(object sender, EventArgs e)
@@ -748,7 +745,6 @@ namespace C2
                 this.bottomViewPanel.Height = 280;
                 this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
             }
-            InitializeControlsLocation();
             if (bottomViewPanel.Height == 280)
             {
                 this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
@@ -776,5 +772,30 @@ namespace C2
             this.ShowLogView();
         }
         #endregion
+
+        private void minMaxPictureBox_Click(object sender, EventArgs e)
+        { 
+            //log.Info("MinMaxPictureBox_Click");
+            if (this.isBottomViewPanelMinimum == true)
+            {
+                this.isBottomViewPanelMinimum = false;
+                this.bottomViewPanel.Height = 280;
+                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
+            }
+            else
+            {
+                this.isBottomViewPanelMinimum = true;
+                this.bottomViewPanel.Height = 40;
+                this.minMaxPictureBox.Image = global::C2.Properties.Resources.maxunfold;
+            }
+            if (bottomViewPanel.Height == 280)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
+            }
+            if (bottomViewPanel.Height == 40)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
+            }
+        }
     }
 }
