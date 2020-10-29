@@ -86,7 +86,7 @@ namespace C2
             }
             else if (Global.VersionType.Equals("test"))
             {
-                Application.Run(new ChartBoards());
+                Application.Run(new StartPage());
             }
             else
                 Application.Run(new LoginForm());

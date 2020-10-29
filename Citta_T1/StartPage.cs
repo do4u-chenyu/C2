@@ -18,8 +18,6 @@ namespace C2
     class StartPage : BaseForm
     {
         RecentFilesView recentFilesView1;
-        BarChart barChart;
-        PieChart PieChart;
         public StartPage()
         {
             Text = "Start";
@@ -48,13 +46,6 @@ namespace C2
             this.recentFilesView1.Size = new System.Drawing.Size(784, 462);
             this.recentFilesView1.TabIndex = 0;
 
-            //图表展现
-            string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
-            double[] y = new double[] { 541, 574, 345, 854, 684 };
-            this.barChart = new BarChart(x,y);
-            this.barChart.Location = new System.Drawing.Point(15, 15);
-            this.barChart.Size = new System.Drawing.Size(300, 231);
-            this.barChart.BackColor = Color.FromArgb(30, 56, 79);
 
 
 
