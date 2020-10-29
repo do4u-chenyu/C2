@@ -470,6 +470,7 @@ namespace C2
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
+            this.logLabel.Click += new System.EventHandler(this.LogLabel_Click);
             // 
             // pyControlLabel
             // 
@@ -481,6 +482,7 @@ namespace C2
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
+            this.pyControlLabel.Click += new System.EventHandler(this.PyControlLabel_Click);
             // 
             // previewLabel
             // 
@@ -492,6 +494,7 @@ namespace C2
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
+            this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
             // 
             // MainPanel
             // 
