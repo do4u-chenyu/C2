@@ -33,7 +33,7 @@ namespace C2.Controls.DataCharts
             chart1.ChartAreas[0].BorderColor = Color.Transparent;
             chart1.Titles.Add("某行业各公司市场占有率调查报告");
             chart1.Titles[0].Font = new Font("宋体", 20);
-
+            
             chart1.Series.Add("data");
             chart1.Series["data"].ChartType = SeriesChartType.Doughnut; //这一行与上个例子不同
             chart1.Series["data"]["PieLabelStyle"] = "Outside";

@@ -32,7 +32,7 @@ namespace C2.Controls.DataCharts
             chart1.Titles[1].ForeColor = Color.White;
             chart1.Titles[1].Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             chart1.Titles[1].Alignment = ContentAlignment.TopRight;
-
+            chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
             //控件背景
             chart1.BackColor = Color.Transparent;
             //图表区背景
