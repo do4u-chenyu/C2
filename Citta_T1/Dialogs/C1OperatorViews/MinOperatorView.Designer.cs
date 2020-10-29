@@ -33,8 +33,8 @@
             // 
             // dataSourceTB0
             // 
-            this.dataSourceTB0.Location = new System.Drawing.Point(9, 2);
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 29);
+            this.dataSourceTB0.Location = new System.Drawing.Point(9, 0);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 28);
             this.dataSourceTB0.TabIndex = 3;
             // 
             // cancelButton
@@ -51,75 +51,72 @@
             // 
             // outListCCBL0
             // 
-            this.outListCCBL0.Location = new System.Drawing.Point(9, 96);
+            this.outListCCBL0.Location = new System.Drawing.Point(9, 94);
             this.outListCCBL0.Size = new System.Drawing.Size(150, 26);
             this.outListCCBL0.TabIndex = 2;
             // 
             // comboBox0
             // 
             this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Location = new System.Drawing.Point(9, 42);
-            this.comboBox0.Size = new System.Drawing.Size(148, 29);
+            this.comboBox0.Font = new System.Drawing.Font("宋体", 10F);
+            this.comboBox0.Location = new System.Drawing.Point(9, 43);
+            this.comboBox0.Size = new System.Drawing.Size(148, 26);
             this.comboBox0.TabIndex = 1;
             // 
             // topPanel
             // 
-            this.topPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.topPanel.Size = new System.Drawing.Size(322, 16);
+            this.topPanel.Size = new System.Drawing.Size(322, 14);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 139);
-            this.bottomPanel.Size = new System.Drawing.Size(322, 42);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 143);
+            this.bottomPanel.Size = new System.Drawing.Size(322, 38);
             // 
             // keyPanel
             // 
-            this.keyPanel.BackColor = System.Drawing.SystemColors.Window;
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Location = new System.Drawing.Point(0, 16);
-            this.keyPanel.Size = new System.Drawing.Size(116, 123);
+            this.keyPanel.Location = new System.Drawing.Point(0, 14);
+            this.keyPanel.Size = new System.Drawing.Size(116, 129);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             this.keyPanel.Controls.SetChildIndex(this.label3, 0);
             // 
             // valuePanel
             // 
-            this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Controls.Add(this.comboBox0);
-            this.valuePanel.Location = new System.Drawing.Point(116, 16);
-            this.valuePanel.Size = new System.Drawing.Size(206, 123);
+            this.valuePanel.Location = new System.Drawing.Point(116, 14);
+            this.valuePanel.Size = new System.Drawing.Size(206, 129);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(31, 3);
-            this.label1.Size = new System.Drawing.Size(123, 30);
+            this.label1.Location = new System.Drawing.Point(31, 5);
+            this.label1.Size = new System.Drawing.Size(85, 19);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Font = new System.Drawing.Font("宋体", 10F);
             this.label3.Location = new System.Drawing.Point(31, 96);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 30);
+            this.label3.Size = new System.Drawing.Size(85, 19);
             this.label3.TabIndex = 0;
-            this.label3.Text = "输出字段：";
+            this.label3.Text = "输出字段";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("宋体", 10F);
             this.label2.Location = new System.Drawing.Point(31, 50);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 30);
+            this.label2.Size = new System.Drawing.Size(85, 19);
             this.label2.TabIndex = 0;
-            this.label2.Text = "取最小值：";
+            this.label2.Text = "取最小值";
             // 
             // MinOperatorView
             // 

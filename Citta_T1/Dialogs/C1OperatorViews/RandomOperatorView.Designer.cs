@@ -35,7 +35,7 @@
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(0, 1);
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 29);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 28);
             this.dataSourceTB0.TabIndex = 3;
             // 
             // cancelButton
@@ -52,7 +52,7 @@
             // 
             // outListCCBL0
             // 
-            this.outListCCBL0.Location = new System.Drawing.Point(0, 106);
+            this.outListCCBL0.Location = new System.Drawing.Point(0, 97);
             this.outListCCBL0.Margin = new System.Windows.Forms.Padding(0);
             this.outListCCBL0.Size = new System.Drawing.Size(150, 26);
             this.outListCCBL0.TabIndex = 2;
@@ -63,7 +63,7 @@
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(322, 21);
+            this.topPanel.Size = new System.Drawing.Size(322, 18);
             // 
             // bottomPanel
             // 
@@ -75,8 +75,7 @@
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Location = new System.Drawing.Point(0, 21);
-            this.keyPanel.Size = new System.Drawing.Size(116, 122);
+            this.keyPanel.Size = new System.Drawing.Size(116, 125);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             this.keyPanel.Controls.SetChildIndex(this.label3, 0);
@@ -86,43 +85,42 @@
             this.valuePanel.Controls.Add(this.randomNumBox);
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.outListCCBL0);
-            this.valuePanel.Location = new System.Drawing.Point(116, 21);
-            this.valuePanel.Size = new System.Drawing.Size(206, 122);
+            this.valuePanel.Size = new System.Drawing.Size(206, 125);
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             this.valuePanel.Controls.SetChildIndex(this.randomNumBox, 0);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(23, 0);
-            this.label1.Size = new System.Drawing.Size(123, 30);
+            this.label1.Location = new System.Drawing.Point(23, 4);
+            this.label1.Size = new System.Drawing.Size(85, 19);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(23, 105);
+            this.label3.Font = new System.Drawing.Font("宋体", 10F);
+            this.label3.Location = new System.Drawing.Point(23, 99);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 30);
+            this.label3.Size = new System.Drawing.Size(85, 19);
             this.label3.TabIndex = 0;
-            this.label3.Text = "输出字段：";
+            this.label3.Text = "输出字段";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(23, 54);
+            this.label2.Font = new System.Drawing.Font("宋体", 10F);
+            this.label2.Location = new System.Drawing.Point(23, 53);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 30);
+            this.label2.Size = new System.Drawing.Size(85, 19);
             this.label2.TabIndex = 0;
-            this.label2.Text = "随机条数：";
+            this.label2.Text = "随机条数";
             // 
             // randomNumBox
             // 
             this.randomNumBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.randomNumBox.Location = new System.Drawing.Point(0, 54);
+            this.randomNumBox.Location = new System.Drawing.Point(0, 48);
             this.randomNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.randomNumBox.Name = "randomNumBox";
             this.randomNumBox.Size = new System.Drawing.Size(150, 29);
