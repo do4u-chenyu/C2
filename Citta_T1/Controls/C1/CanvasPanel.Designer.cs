@@ -37,7 +37,6 @@ namespace C2.Controls
             this.DelSelectControl = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DelControls = new System.Windows.Forms.ToolStripMenuItem();
             this.currentModelFinLab = new System.Windows.Forms.Label();
-            this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
             this.contextMenuStrip1.SuspendLayout();
             this.DelSelectControl.SuspendLayout();
             this.SuspendLayout();
@@ -81,22 +80,10 @@ namespace C2.Controls
             this.currentModelFinLab.TabIndex = 30;
             this.currentModelFinLab.Visible = false;
             // 
-            // naviViewControl
-            // 
-            this.naviViewControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.naviViewControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.naviViewControl.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.naviViewControl.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.naviViewControl.Location = new System.Drawing.Point(625, 207);
-            this.naviViewControl.Name = "naviViewControl";
-            this.naviViewControl.Size = new System.Drawing.Size(233, 90);
-            this.naviViewControl.TabIndex = 25;
-            // 
             // CanvasPanel
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.Controls.Add(this.naviViewControl);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "CanvasPanel";
             this.Size = new System.Drawing.Size(946, 364);
@@ -121,6 +108,5 @@ namespace C2.Controls
         private System.Windows.Forms.ContextMenuStrip DelSelectControl;
         private System.Windows.Forms.ToolStripMenuItem DelControls;
         private System.Windows.Forms.Label currentModelFinLab;
-        private Flow.NaviViewControl naviViewControl;
     }
 }

@@ -1299,7 +1299,7 @@
     <Compile Include="ChartBoards.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StartPage.cs">
+    <Compile Include="Forms\StartForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utils\ConfigUtil.cs" />
@@ -1612,8 +1612,8 @@
     <EmbeddedResource Include="ChartBoards.resx">
       <DependentUpon>ChartBoards.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StartPage.resx">
-      <DependentUpon>StartPage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\StartForm.resx">
+      <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Demo\demo_bcp.bcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

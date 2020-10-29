@@ -39,24 +39,22 @@ using C2.Model;
 
 namespace C2
 {
+    public enum FormType
+    {
+        DocumentForm,
+        CanvasForm,
+        StartForm
+    }
     public partial class MainForm : DocumentManageForm
     {
         public string UserName { get => this.userName; set => this.userName = value; }
         public Control BottomViewPanel { get { return this.bottomViewPanel; } }
         #region
-        StartMenuButton BtnStart;
         SpecialTabItem TabNew;
-        TabBarButton BtnOpen;
-        TabBarButton BtnHelp;
         TabBarButton BtnNew;
-        AboutDialogBox AboutDialog;
         FindDialog MyFindDialog;
-        ShortcutKeysMapDialog ShortcutsMapDialog;
-        CheckUpdate CheckUpdateForm;
-        ToolStripMenuItem MenuClearRecentFiles;
         ShortcutKeysTable ShortcutKeys;
-        bool ImportMenusHasBuilded;
-        StartPage startPage;
+        StartForm startPage;
         #endregion
 
         private string userName;
@@ -83,18 +81,15 @@ namespace C2
             this.UserName = userName;
 
             InitializeComponent();
+            // 数据导入
             this.inputDataForm = new Dialogs.InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
             this.createNewModelForm = new Dialogs.CreateNewModelForm();
-
+            // 左侧
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = true;
-
             this.leftToolBoxPanel.Width = 10;
             this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
-
-            this.modelDocumentDao = new ModelDocumentDao();
-            this.optionDao = new OptionDao();
 
             InitializeTaskBar();
             InitializeShortcutKeys();
@@ -103,7 +98,7 @@ namespace C2
 
             MdiClient = this.mdiWorkSpace;
             openFileDialog1 = new OpenFileDialog();
-            this.NewDocument(false);
+            this.NewForm(FormType.StartForm);
         }
         #region 初始化
         void InitializeTaskBar()
@@ -117,14 +112,14 @@ namespace C2
             BtnNew = new TabBarButton();
             BtnNew.Icon = Properties.Resources._new;
             BtnNew.ToolTipText = "Create New Document";
-            BtnNew.Click += new EventHandler(NewDocumentForm_Click);
+            BtnNew.Click += new EventHandler(NewCanvasForm_Click);
 
             TaskBar.LeftButtons.Add(BtnNew);
             TaskBar.Items.ItemAdded += TaskBar_Items_ItemAdded;
             TaskBar.Items.ItemRemoved += TaskBar_Items_ItemRemoved;
 
             TabNew = new SpecialTabItem(Properties.Resources._new);
-            TabNew.Click += new EventHandler(NewCanvasForm_Click);
+            TabNew.Click += new EventHandler(NewDocumentForm_Click);
             TaskBar.RightSpecialTabs.Add(TabNew);
         }
 
@@ -148,7 +143,7 @@ namespace C2
             Default_KeyManChanged(null, EventArgs.Empty);
 
             ShortcutKeys = new ShortcutKeysTable();
-            ShortcutKeys.Register(KeyMap.New, delegate () { NewDocument(); });
+            //ShortcutKeys.Register(KeyMap.New, delegate () { NewForm(); });
             ShortcutKeys.Register(KeyMap.Open, delegate () { OpenDocument(); });
             ShortcutKeys.Register(KeyMap.NextTab, delegate () { taskBar.SelectNextTab(false); });
             ShortcutKeys.Register(KeyMap.PreviousTab, delegate () { taskBar.SelectNextTab(true); });
@@ -317,7 +312,7 @@ namespace C2
             //// 模型标题栏添加新标题
             //if (dialogResult == DialogResult.OK)
             //    this.modelTitlePanel.AddModel(this.createNewModelForm.ModelTitle);
-            NewDocument(false);
+            NewForm(FormType.CanvasForm);
         }
 
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
@@ -469,31 +464,41 @@ namespace C2
                 Global.GetCanvasPanel().LeftButtonDown = false;
         }
         #region C2
-        private void NewDocument(bool isCanvas = true)
+        public void NewForm(FormType formType)
         {
-            if (isCanvas)
+            switch (formType)
             {
-                Document doc = CreateNewMap();
-
-                DocumentForm form = new DocumentForm(doc);
-                ShowForm(form);
+                case FormType.DocumentForm:
+                    NewCanvasForm();
+                    break;
+                case FormType.CanvasForm:
+                    NewCanvasForm();
+                    break;
+                case FormType.StartForm:
+                    NewStartForm();
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                ModelDocument doc = new ModelDocument(String.Empty, String.Empty);
-                CanvasForm form = new CanvasForm(doc);
-                ShowForm(form);
-            }
         }
-        public void NewDocumentForm()
+        private void NewDocumentForm()
         {
-            this.NewDocument(false);
+            Document doc = CreateNewMap();
+            DocumentForm form = new DocumentForm(doc);
+            ShowForm(form);
         }
-        public void NewCanvasForm()
+        private void NewCanvasForm()
         {
-            this.NewDocument();
+            ModelDocument doc = new ModelDocument(String.Empty, String.Empty);
+            CanvasForm form = new CanvasForm(doc);
+            ShowForm(form);
         }
-
+        private void NewStartForm()
+        {
+            StartForm form = new StartForm();
+            ShowForm(form, true, false);
+        }
+        
         Document CreateNewMap()
         {
             MindMap map = new MindMap();
@@ -639,19 +644,6 @@ namespace C2
 
             return null;
         }
-        void BtnStart_Click(object sender, EventArgs e)
-        {
-            //StartMenu.Show(taskBar1, new Point(BtnStart.Bounds.Left, BtnStart.Bounds.Bottom + 1), ToolStripDropDownDirection.BelowRight);
-            //BtnStart.ShowMenu(StartMenu);
-        }
-        void MenuNew_Click(object sender, System.EventArgs e)
-        {
-            NewDocument();
-        }
-        void MenuOpen_Click(object sender, EventArgs e)
-        {
-            OpenDocument();
-        }
         void NewDocumentForm_Click(object sender, System.EventArgs e)
         {
             this.NewDocumentForm();
@@ -691,12 +683,6 @@ namespace C2
             this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
             this.inputDataForm.ShowDialog();
             this.inputDataForm.ReSetParams();
-        }
-
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            this.NewDocument();
         }
         #region 底部控件事件
         public void PreViewDataByFullFilePath(object sender, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)

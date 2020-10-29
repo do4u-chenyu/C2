@@ -36,6 +36,7 @@ namespace C2.Forms
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
         public OptionDao OptionDao { get { return this.optionDao; } }
         public ModelDocumentDao ModelDocumentDao { get { return this.modelDocumentDao; } }
+        public NaviViewControl NaviViewControl { get { return this.naviViewControl; } }
         private OptionDao optionDao;
         private ModelDocument document;
         private ModelDocumentDao modelDocumentDao;
@@ -137,12 +138,12 @@ namespace C2.Forms
         }
         public void InitializeControlsLocation()
         {
-            int x = this.canvasPanel.Width - 10 - this.canvasPanel.NaviViewControl.Width;
-            int y = this.canvasPanel.Height - 5 - this.canvasPanel.NaviViewControl.Height;
+            int x = this.canvasPanel.Width - 10 - this.naviViewControl.Width;
+            int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
 
             // 缩略图定位
-            this.canvasPanel.NaviViewControl.Location = new Point(x, y);
-            this.canvasPanel.NaviViewControl.Invalidate();
+            this.naviViewControl.Location = new Point(x, y);
+            this.naviViewControl.Invalidate();
 
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
