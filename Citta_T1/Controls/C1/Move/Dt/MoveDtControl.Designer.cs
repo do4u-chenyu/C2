@@ -50,8 +50,9 @@
             // 
             // leftPictureBox
             // 
-            this.leftPictureBox.Image = global::C2.Properties.Resources.dataButton;
-            this.leftPictureBox.Size = new System.Drawing.Size(14, 19);
+            this.leftPictureBox.Image = global::C2.Properties.Resources.data_w_icon;
+            this.leftPictureBox.Location = new System.Drawing.Point(10, 4);
+            this.leftPictureBox.Size = new System.Drawing.Size(18, 19);
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 0;
             this.leftPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseDown);
