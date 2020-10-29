@@ -41,7 +41,7 @@ namespace C2
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
             this.flowChartButton = new System.Windows.Forms.Button();
             this.dataButton = new System.Windows.Forms.Button();
-            this.oprateButton = new System.Windows.Forms.Button();
+            this.operateButton = new System.Windows.Forms.Button();
             this.myModelButton = new System.Windows.Forms.Button();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
             this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
@@ -82,6 +82,7 @@ namespace C2
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.taskBar = new C2.Controls.TaskBar();
+            this.dragLineControl = new C2.Controls.Title.DragLineControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -172,7 +173,7 @@ namespace C2
             this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(97)))), ((int)(((byte)(125)))));
             this.leftMainMenuPanel.Controls.Add(this.flowChartButton);
             this.leftMainMenuPanel.Controls.Add(this.dataButton);
-            this.leftMainMenuPanel.Controls.Add(this.oprateButton);
+            this.leftMainMenuPanel.Controls.Add(this.operateButton);
             this.leftMainMenuPanel.Controls.Add(this.myModelButton);
             this.leftMainMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftMainMenuPanel.Location = new System.Drawing.Point(0, 46);
@@ -204,17 +205,17 @@ namespace C2
             this.dataButton.UseVisualStyleBackColor = true;
             this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
-            // oprateButton
+            // operateButton
             // 
-            this.oprateButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.oprateButton.Location = new System.Drawing.Point(4, 6);
-            this.oprateButton.Name = "oprateButton";
-            this.oprateButton.Size = new System.Drawing.Size(124, 42);
-            this.oprateButton.TabIndex = 1;
-            this.oprateButton.Text = "业务视图";
-            this.toolTip1.SetToolTip(this.oprateButton, "当前用户的所有业务视图");
-            this.oprateButton.UseVisualStyleBackColor = true;
-            this.oprateButton.Click += new System.EventHandler(this.OprateButton_Click);
+            this.operateButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.operateButton.Location = new System.Drawing.Point(4, 6);
+            this.operateButton.Name = "operateButton";
+            this.operateButton.Size = new System.Drawing.Size(124, 42);
+            this.operateButton.TabIndex = 1;
+            this.operateButton.Text = "业务视图";
+            this.toolTip1.SetToolTip(this.operateButton, "当前用户的所有业务视图");
+            this.operateButton.UseVisualStyleBackColor = true;
+            this.operateButton.Click += new System.EventHandler(this.OperateButton_Click);
             // 
             // myModelButton
             // 
@@ -561,6 +562,7 @@ namespace C2
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.panel4.Controls.Add(this.dragLineControl);
             this.panel4.Controls.Add(this.panel9);
             this.panel4.Controls.Add(this.panel8);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -608,6 +610,16 @@ namespace C2
             this.taskBar.Size = new System.Drawing.Size(910, 32);
             this.taskBar.TabIndex = 0;
             this.taskBar.Text = "taskBar1";
+            // 
+            // dragLineControl
+            // 
+            this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
+            this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
+            this.dragLineControl.Name = "dragLineControl";
+            this.dragLineControl.Size = new System.Drawing.Size(368, 3);
+            this.dragLineControl.TabIndex = 3;
             // 
             // MainForm
             // 
@@ -660,7 +672,7 @@ namespace C2
         private System.Windows.Forms.Panel leftMainMenuPanel;
         private System.Windows.Forms.Button myModelButton;
         private System.Windows.Forms.Button dataButton;
-        private System.Windows.Forms.Button oprateButton;
+        private System.Windows.Forms.Button operateButton;
         private System.Windows.Forms.Panel leftToolBoxPanel;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button newModelButton;
@@ -703,5 +715,6 @@ namespace C2
         private Label pyControlLabel;
         private Label previewLabel;
         private WorkSpace.MdiWorkSpace mdiWorkSpace;
+        private Controls.Title.DragLineControl dragLineControl;
     }
 }

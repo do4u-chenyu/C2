@@ -7,6 +7,7 @@ using C2.Controls.Left;
 using C2.Controls.Title;
 using C2.Controls.Top;
 using C2.Forms;
+using System.Windows.Forms;
 
 namespace C2.Core
 {
@@ -26,12 +27,14 @@ namespace C2.Core
         private static DataSourceControl dataSourceControl; // 左侧数据源面板
         private static BottomConsoleControl bottomPythonConsoleControl; //底层控制台面板
         private static TopToolBarControl topToolBarControl; // 顶层右侧工具栏
+        private static Panel bottomViewPanle;
 
 
 
         public static MainForm GetMainForm() { return mainForm; }
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
         public static BottomConsoleControl GetBottomPythonConsoleControl() { return bottomPythonConsoleControl; }
+        public static Control GetBottomViewPanel() { return bottomViewPanle; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static ModelTitlePanel GetModelTitlePanel() { return modelTitlePanel; }
         public static CanvasForm GetCanvasForm()
@@ -124,6 +127,7 @@ namespace C2.Core
         public static void SetDataSourceControl(DataSourceControl dsc) { dataSourceControl = dsc; }
         public static void SetBottomPythonConsoleControl(BottomConsoleControl bpcc) { bottomPythonConsoleControl = bpcc; }
         public static void SetTopToolBarControl(TopToolBarControl ttbc) { topToolBarControl = ttbc; }
+        public static void SetBottomViewPanel(Panel bv) { bottomViewPanle = bv; }
 
         private static string workspaceDirectory;           // 用户模型工作目录
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
