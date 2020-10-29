@@ -142,8 +142,8 @@ namespace C2.Controls
                 return;
             }
             // C2不允许数据拖到Canvas
-            if (type == ElementType.DataSource)
-                return;
+            //if (type == ElementType.DataSource)
+            //    return;
             float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             int locX = Convert.ToInt32(e.X / screenFactor);
             int locY = Convert.ToInt32(e.Y / screenFactor);
@@ -155,8 +155,15 @@ namespace C2.Controls
             int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
 
             if (type == ElementType.Operator)
-                AddNewOperator(sizeLevel, text, text, location);                       
-
+                AddNewOperator(sizeLevel, text, text, location);
+            if (type == ElementType.DataSource)
+            {
+                string path = e.Data.GetData("Path").ToString();
+                char separator = (char)e.Data.GetData("Separator");
+                OpUtil.Encoding encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
+                OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
+                AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
+            }
         }
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
