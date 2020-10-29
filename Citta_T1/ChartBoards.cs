@@ -38,7 +38,9 @@ namespace C2
         {
             string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
             double[] y = new double[] { 541, 574, 345, 854, 684 };
-            this.barChart = new BarChart(x, y,"柱状图");
+            string[] y1 = new string[] { "541", "574", "345", "854", "684" };
+            List<string> x1 = new List<string> { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
+            this.barChart = new BarChart(x1, y, "柱状图");
             this.pieChart = new PieChart(x, y);
             this.horizontalBar3D = new HorizontalBar3D(x, y);
 

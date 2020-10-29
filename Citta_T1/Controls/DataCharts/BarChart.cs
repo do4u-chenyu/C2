@@ -13,17 +13,24 @@ namespace C2.Controls.DataCharts
 {
     public partial class BarChart : UserControl
     {
-        private string[] x;
+        private List<string> x;
         private double[] y;
         private string title;
-        private string xTitle;
-        private string yTitle;
-        public BarChart(string[] x, double[] y, string title = "柱状图")
+        private List<List<string>> dataList;
+        public BarChart(List<string> x, double[] y, string title = "柱状图")
         {
             InitializeComponent();
             this.x = x;
             this.y = y;
             this.title = title;
+            InitChart();
+        }
+
+        public BarChart(List<List<string>> dataList, List<string> title)
+        {
+            InitializeComponent();
+            this.x = dataList[0];
+            this.title = title[0];
             InitChart();
         }
         public void InitChart()

@@ -46,6 +46,7 @@
             this.remarkControl = new C2.Controls.Flow.RemarkControl();
             this.flowControl = new C2.Controls.Flow.FlowControl();
             this.operatorControl = new C2.Controls.Left.OperatorControl();
+            this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
             this.SuspendLayout();
             // 
             // canvasPanel
@@ -73,6 +74,9 @@
             this.topToolBarControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.topToolBarControl.Location = new System.Drawing.Point(0, 0);
             this.topToolBarControl.Name = "topToolBarControl";
+            this.topToolBarControl.SelectDrag = false;
+            this.topToolBarControl.SelectFrame = false;
+            this.topToolBarControl.SelectRemark = false;
             this.topToolBarControl.Size = new System.Drawing.Size(1106, 33);
             this.topToolBarControl.TabIndex = 25;
             // 
@@ -237,11 +241,23 @@
             this.operatorControl.Size = new System.Drawing.Size(215, 320);
             this.operatorControl.TabIndex = 40;
             // 
+            // naviViewControl
+            // 
+            this.naviViewControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.naviViewControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.naviViewControl.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.naviViewControl.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.naviViewControl.Location = new System.Drawing.Point(824, 330);
+            this.naviViewControl.Name = "naviViewControl";
+            this.naviViewControl.Size = new System.Drawing.Size(205, 105);
+            this.naviViewControl.TabIndex = 41;
+            // 
             // CanvasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1106, 508);
+            this.Controls.Add(this.naviViewControl);
             this.Controls.Add(this.operatorControl);
             this.Controls.Add(this.remarkControl);
             this.Controls.Add(this.flowControl);
@@ -285,5 +301,6 @@
         private Controls.Flow.RemarkControl remarkControl;
         private Controls.Flow.FlowControl flowControl;
         private Controls.Left.OperatorControl operatorControl;
+        private Controls.Flow.NaviViewControl naviViewControl;
     }
 }

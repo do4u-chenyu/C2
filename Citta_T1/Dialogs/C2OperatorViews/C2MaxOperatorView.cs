@@ -1,4 +1,4 @@
-﻿using C2.Dialogs.C2OperatorViews.Base;
+﻿using C2.Dialogs.Base;
 using C2.Model.Widgets;
 using C2.Utils;
 using System;

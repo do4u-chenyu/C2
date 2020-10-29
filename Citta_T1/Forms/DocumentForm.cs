@@ -151,6 +151,7 @@ namespace C2.Forms
                     _SelectedObjects = value;
                     OnSelectedObjectsChanged(old);
                 }
+                ShowDesigner(_SelectedObjects[0]);
             }
         }
 
@@ -910,7 +911,7 @@ namespace C2.Forms
                         tabControl2.TabPages.Remove(CurrentPropertyBox);
                     //tabControl2.Controls.Clear();
                     pb.Dock = DockStyle.Fill;
-                    tabControl2.InsertPage(1, pb, Properties.Resources.property);
+                    tabControl2.InsertPage(0, pb, Properties.Resources.property);
                 }
 
                 CurrentPropertyBox = pb;

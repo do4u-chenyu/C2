@@ -81,7 +81,7 @@ namespace C2.Forms
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new C2.Controls.MySplitter();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.dc = new DesignerControl() { Text = "设计器", TabIndex = 4 };
+            this.dc = new DesignerControl() { Text = "设计器", TabIndex = 1};
             this.myTabControl1 = new C2.Controls.MyTabControl();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.MenuStripChartTab.SuspendLayout();

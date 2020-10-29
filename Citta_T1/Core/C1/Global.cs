@@ -56,9 +56,9 @@ namespace C2.Core
         public static NaviViewControl GetNaviViewControl()
         {
             NaviViewControl ret = null;
-            if (Global.GetCanvasPanel() != null)
+            if (Global.GetCanvasForm() != null)
             {
-                ret = Global.GetCanvasPanel().NaviViewControl;
+                ret = Global.GetCanvasForm().NaviViewControl;
             }
             return ret;
         }

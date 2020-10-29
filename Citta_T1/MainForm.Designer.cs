@@ -447,7 +447,6 @@ namespace C2
             this.button1.TabIndex = 10;
             this.toolTip1.SetToolTip(this.button1, "临时新建一个DocumentForm窗体");
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // minMaxPictureBox
             // 
