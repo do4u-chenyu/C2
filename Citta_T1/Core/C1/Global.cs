@@ -30,125 +30,84 @@ namespace C2.Core
 
 
         public static MainForm GetMainForm() { return mainForm; }
-        public static CanvasForm GetCanvsaForm()
+        public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
+        public static BottomConsoleControl GetBottomPythonConsoleControl() { return bottomPythonConsoleControl; }
+        public static MyModelControl GetMyModelControl() { return myModelControl; }
+        public static ModelTitlePanel GetModelTitlePanel() { return modelTitlePanel; }
+        public static CanvasForm GetCanvasForm()
         {
             CanvasForm cf = null;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
+            if (mainForm != null && mainForm.MdiClient != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
             {
                 cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
             }
             return cf;
         }
-        public static ModelTitlePanel GetModelTitlePanel() { return modelTitlePanel; }
-        public static NaviViewControl GetNaviViewControl()
-        {
-            NaviViewControl ret = null;
-            CanvasPanel cp;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-            {
-                cp = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).CanvasPanel;
-                ret = cp.NaviViewControl;
-            }
-            return ret;
-        }
         public static CanvasPanel GetCanvasPanel()
         {
             CanvasPanel ret = null;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-                ret = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).CanvasPanel;
+            if (Global.GetCanvasForm() != null)
+                ret = Global.GetCanvasForm().CanvasPanel;
+            return ret;
+        }
+        public static NaviViewControl GetNaviViewControl()
+        {
+            NaviViewControl ret = null;
+            if (Global.GetCanvasPanel() != null)
+            {
+                ret = Global.GetCanvasPanel().NaviViewControl;
+            }
             return ret;
         }
         public static ModelDocumentDao GetModelDocumentDao() {
             ModelDocumentDao ret = null;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-                ret = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).ModelDocumentDao;
+            if (Global.GetCanvasForm() != null)
+                ret = Global.GetCanvasForm().ModelDocumentDao;
             return ret;
         }
 
         public static ModelDocument GetCurrentDocument()
         {
             ModelDocument ret = null;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-                ret = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).Document;
+            if (Global.GetCanvasForm() != null)
+                ret = Global.GetCanvasForm().Document;
             return ret;
         }
         public static FlowControl GetFlowControl()
         {
             FlowControl ret = null;
-            CanvasForm cf;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-            {
-                cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
-                ret = cf.FlowControl;
-            }
+            if (Global.GetCanvasForm() != null)
+                ret = Global.GetCanvasForm().FlowControl;
             return ret;
         }
         public static OperatorControl GetOperatorControl() {
             OperatorControl ret = null;
-            CanvasForm cf;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-            {
-                cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
-                ret = cf.OperatorControl;
-            }
+            if (Global.GetCanvasForm() != null)
+                ret = Global.GetCanvasForm().OperatorControl;
             return ret;
         }
-        public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static RemarkControl GetRemarkControl()
         {
             RemarkControl ret = null;
-            CanvasForm cf;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-            {
-                cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
-                ret = cf.RemarkControl;
-            }
+            if (Global.GetCanvasForm() != null)
+                ret = Global.GetCanvasForm().RemarkControl;
             return ret;
         }
-        public static BottomLogControl GetLogView()
-        {
-            BottomLogControl ret = null;
-            CanvasPanel cp;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-            {
-                cp = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).CanvasPanel;
-                //ret = cp.BottomLogControl;
-            }
-            return ret;
-        }
+        public static BottomLogControl GetLogView(){ return logView;}
         public static OptionDao GetOptionDao() {
             OptionDao ret = null;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-            {
-                CanvasForm cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
-                ret = cf.OptionDao;
-            }
-            return ret;
-        }
-        public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
-        public static BottomConsoleControl GetBottomPythonConsoleControl()
-        {
-            BottomConsoleControl ret = null;
-            CanvasPanel cp;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-            {
-                cp = (mainForm.MdiClient.ActivedMdiForm as CanvasForm).CanvasPanel;
-                //ret = cp.bottomConsoleControl;
-            }
+            if (Global.GetCanvasForm() != null)
+                ret = Global.GetCanvasForm().OptionDao;
             return ret;
         }
 
         public static TopToolBarControl GetTopToolBarControl()
         {
             TopToolBarControl ret = null;
-            if (mainForm != null && mainForm.MdiClient.ActivedMdiForm is CanvasForm)
-            {
-                CanvasForm cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
-                ret = cf.TopToolBarControl;
-            }
+            if (Global.GetCanvasForm() != null)
+                ret = Global.GetCanvasForm().TopToolBarControl;
             return ret;
         }
-
 
 
         public static void SetMainForm(MainForm mf) { mainForm = mf; }

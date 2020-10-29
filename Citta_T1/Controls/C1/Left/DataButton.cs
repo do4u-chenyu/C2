@@ -58,7 +58,7 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetCanvsaForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
+            Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)

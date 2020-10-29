@@ -34,6 +34,7 @@ using C2.Core.Exports;
 using C2.Dialogs;
 using C2.Core.Win32Apis;
 using C2.Forms;
+using C2.Model;
 #endregion
 
 namespace C2
@@ -57,6 +58,8 @@ namespace C2
         #endregion
 
         private string userName;
+        private bool isBottomViewPanelMinimum;
+        private bool isLeftViewPanelMinimum;
         private C2.Dialogs.InputDataForm inputDataForm;
         private C2.Dialogs.CreateNewModelForm createNewModelForm;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
@@ -83,6 +86,9 @@ namespace C2
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
             this.createNewModelForm = new Dialogs.CreateNewModelForm();
 
+            this.isBottomViewPanelMinimum = false;
+            this.isLeftViewPanelMinimum = false;
+
             this.leftToolBoxPanel.Width = 10;
             this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
 
@@ -93,9 +99,8 @@ namespace C2
             InitializeShortcutKeys();
             InitializeGlobalVariable();
             InitializeControlsLocation();
-            InitializeLeftFold();
 
-            MdiClient = this.mdiWorkSpace1;
+            MdiClient = this.mdiWorkSpace;
             openFileDialog1 = new OpenFileDialog();
             this.NewDocument(false);
         }
@@ -111,14 +116,14 @@ namespace C2
             BtnNew = new TabBarButton();
             BtnNew.Icon = Properties.Resources._new;
             BtnNew.ToolTipText = "Create New Document";
-            BtnNew.Click += new EventHandler(MenuNew_Click);
+            BtnNew.Click += new EventHandler(NewDocumentForm_Click);
 
             TaskBar.LeftButtons.Add(BtnNew);
             TaskBar.Items.ItemAdded += TaskBar_Items_ItemAdded;
             TaskBar.Items.ItemRemoved += TaskBar_Items_ItemRemoved;
 
             TabNew = new SpecialTabItem(Properties.Resources._new);
-            TabNew.Click += new EventHandler(MenuNew_Click);
+            TabNew.Click += new EventHandler(NewCanvasForm_Click);
             TaskBar.RightSpecialTabs.Add(TabNew);
         }
 
@@ -161,43 +166,7 @@ namespace C2
         }
         private void InitializeControlsLocation()
         {
-            //int x = this.canvasPanel.Width - 10 - this.naviViewControl.Width;
-            //int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
-
-            //// 缩略图定位
-            //this.naviViewControl.Location = new Point(x, y);
-            //this.naviViewControl.Invalidate();
-
-            //// 底层工具按钮定位
-            //x = x - (this.canvasPanel.Width) / 2 + 100;
-            //this.resetButton.Location = new Point(x + 100, y + 50);
-            //this.stopButton.Location = new Point(x + 50, y + 50);
-            //this.runButton.Location = new Point(x, y + 50);
-
-            ////运行状态动图、进度条定位
-            //this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
-            //this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
-            //this.progressBar1.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
-            //this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
-
-            //// 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            //this.flowControl.Location     = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50);
-            //this.remarkControl.Location   = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50 + this.flowControl.Height + 10);
-            //this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 50);
-            //this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 50 + this.rightHideButton.Width + 10);
-
-            //// 右上用户名，头像
-            //int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
-            //int rightMargin = (this.userName.Length - (count / 3) - 3) * 14;
-            //this.usernamelabel.Text = this.userName;
-            //Point userNameLocation = new Point(185, 10);
-            //this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
-            //this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y + 1);
-            //this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
-        }
-        private void InitializeLeftFold()
-        {
-            this.leftFoldPanel.Location = new Point(this.leftFoldPanel.Location.X + this.mindMapModelControl.Width, this.leftFoldPanel.Location.Y);
+            Global.GetCanvasForm()?.InitializeControlsLocation();
         }
         #endregion
         void SetAGoodLocation()
@@ -371,25 +340,25 @@ namespace C2
 
         private void ShowLeftFold()
         {
-            if (Global.GetCanvsaForm().isLeftViewPanelMinimum)
+            if (this.isLeftViewPanelMinimum)
             {
-                Global.GetCanvsaForm().isLeftViewPanelMinimum = false;
+                this.isLeftViewPanelMinimum = false;
                 this.leftToolBoxPanel.Width = 187;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             }
-            Global.GetCanvsaForm().InitializeControlsLocation();
+            Global.GetCanvasForm().InitializeControlsLocation();
         }
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
-            if (Global.GetCanvsaForm().isLeftViewPanelMinimum)
+            if (this.isLeftViewPanelMinimum)
             {
-                Global.GetCanvsaForm().isLeftViewPanelMinimum = false;
+                this.isLeftViewPanelMinimum = false;
                 this.leftToolBoxPanel.Width = 187;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             }
             else
             {
-                Global.GetCanvsaForm().isLeftViewPanelMinimum = true;
+                this.isLeftViewPanelMinimum = true;
                 this.leftToolBoxPanel.Width = 10;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
             }
@@ -519,7 +488,10 @@ namespace C2
         {
             this.NewDocument(false);
         }
-        public 
+        public void NewCanvasForm()
+        {
+            this.NewDocument();
+        }
 
         Document CreateNewMap()
         {
@@ -679,6 +651,14 @@ namespace C2
         {
             OpenDocument();
         }
+        void NewDocumentForm_Click(object sender, System.EventArgs e)
+        {
+            this.NewDocumentForm();
+        }
+        void NewCanvasForm_Click(object sender, System.EventArgs e)
+        {
+            this.NewCanvasForm();
+        }
         void BtnHelp_Click(object sender, EventArgs e)
         {
             //MenuHelps.DropDown.Show(TaskBar, BtnHelp.Bounds.X, BtnHelp.Bounds.Bottom);
@@ -717,5 +697,84 @@ namespace C2
         {
             this.NewDocument();
         }
+        #region 底部控件事件
+        public void PreViewDataByFullFilePath(object sender, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
+        {
+            if (!System.IO.File.Exists(fullFilePath))
+            {
+                if (sender is MoveDtControl || sender is DataButton)
+                    MessageBox.Show("该数据文件不存在");
+                return;
+            }
+            //this.ShowBottomPanel();
+            this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
+            this.ShowBottomPreview();
+        }
+
+        public void PreViewDataByFullFilePath(DataItem dataItem, bool isForceRead = false)
+        {
+            if (!System.IO.File.Exists(dataItem.FilePath))
+            {
+                MessageBox.Show("该数据文件不存在");
+                return;
+            }
+            this.ShowBottomPanel();
+            this.bottomPreview.PreViewDataByFullFilePath(dataItem.FilePath, dataItem.FileSep, dataItem.FileType, dataItem.FileEncoding, isForceRead);
+            this.ShowBottomPreview();
+        }
+        private void ShowLogView()
+        {
+            this.bottomLogControl.Visible = true;
+            this.bottomPyConsole.Visible = false;
+            this.bottomPreview.Visible = false;
+        }
+        private void ShowPyConsole()
+        {
+            this.bottomPyConsole.Visible = true;
+            this.bottomLogControl.Visible = false;
+            this.bottomPreview.Visible = false;
+        }
+        private void ShowBottomPreview()
+        {
+            this.bottomLogControl.Visible = false;
+            this.bottomPyConsole.Visible = false;
+            this.bottomPreview.Visible = true;
+        }
+        private void ShowBottomPanel()
+        {
+            if (this.isBottomViewPanelMinimum == true)
+            {
+                this.isBottomViewPanelMinimum = false;
+                this.bottomViewPanel.Height = 280;
+                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
+            }
+            InitializeControlsLocation();
+            if (bottomViewPanel.Height == 280)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
+            }
+            if (bottomViewPanel.Height == 40)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
+            }
+        }
+        private void PreviewLabel_Click(object sender, EventArgs e)
+        {
+            this.ShowBottomPanel();
+            this.ShowBottomPreview();
+        }
+
+        private void PyControlLabel_Click(object sender, EventArgs e)
+        {
+            this.ShowBottomPanel();
+            this.ShowPyConsole();
+        }
+
+        private void LogLabel_Click(object sender, EventArgs e)
+        {
+            this.ShowBottomPanel();
+            this.ShowLogView();
+        }
+        #endregion
     }
 }

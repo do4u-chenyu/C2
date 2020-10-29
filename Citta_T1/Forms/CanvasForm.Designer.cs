@@ -31,19 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CanvasForm));
             this.canvasPanel = new C2.Controls.CanvasPanel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.leftFoldButton = new System.Windows.Forms.PictureBox();
-            this.bottomViewPanel = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.logLabel = new System.Windows.Forms.Label();
-            this.errorLabel = new System.Windows.Forms.Label();
-            this.previewLabel = new System.Windows.Forms.Label();
-            this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
-            this.bottomPyConsole = new C2.Controls.Bottom.BottomConsoleControl();
-            this.bottomPreview = new C2.Controls.Bottom.BottomPreviewControl();
             this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelFinLab = new System.Windows.Forms.Label();
@@ -59,21 +46,12 @@
             this.remarkControl = new C2.Controls.Flow.RemarkControl();
             this.flowControl = new C2.Controls.Flow.FlowControl();
             this.operatorControl = new C2.Controls.Left.OperatorControl();
-            this.canvasPanel.SuspendLayout();
-            this.panel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
-            this.bottomViewPanel.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
-            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // canvasPanel
             // 
             this.canvasPanel.AllowDrop = true;
             this.canvasPanel.BackColor = System.Drawing.Color.White;
-            this.canvasPanel.Controls.Add(this.panel11);
             this.canvasPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.canvasPanel.DelEnable = false;
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -84,136 +62,10 @@
             this.canvasPanel.Location = new System.Drawing.Point(0, 33);
             this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(1106, 195);
+            this.canvasPanel.Size = new System.Drawing.Size(1106, 475);
             this.canvasPanel.StartC = null;
             this.canvasPanel.StartP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.StartP")));
             this.canvasPanel.TabIndex = 8;
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.leftFoldButton);
-            this.panel11.Location = new System.Drawing.Point(0, 200);
-            this.panel11.Margin = new System.Windows.Forms.Padding(0);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(8, 101);
-            this.panel11.TabIndex = 1;
-            // 
-            // leftFoldButton
-            // 
-            this.leftFoldButton.Image = ((System.Drawing.Image)(resources.GetObject("leftFoldButton.Image")));
-            this.leftFoldButton.Location = new System.Drawing.Point(0, 0);
-            this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
-            this.leftFoldButton.Name = "leftFoldButton";
-            this.leftFoldButton.Size = new System.Drawing.Size(7, 100);
-            this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.leftFoldButton.TabIndex = 0;
-            this.leftFoldButton.TabStop = false;
-            // 
-            // bottomViewPanel
-            // 
-            this.bottomViewPanel.Controls.Add(this.panel4);
-            this.bottomViewPanel.Controls.Add(this.bottomLogControl);
-            this.bottomViewPanel.Controls.Add(this.bottomPyConsole);
-            this.bottomViewPanel.Controls.Add(this.bottomPreview);
-            this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomViewPanel.Location = new System.Drawing.Point(0, 228);
-            this.bottomViewPanel.Name = "bottomViewPanel";
-            this.bottomViewPanel.Size = new System.Drawing.Size(1106, 280);
-            this.bottomViewPanel.TabIndex = 24;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.panel4.Controls.Add(this.panel9);
-            this.panel4.Controls.Add(this.panel8);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1106, 39);
-            this.panel4.TabIndex = 0;
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.minMaxPictureBox);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(958, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(148, 39);
-            this.panel9.TabIndex = 2;
-            // 
-            // minMaxPictureBox
-            // 
-            this.minMaxPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("minMaxPictureBox.Image")));
-            this.minMaxPictureBox.Location = new System.Drawing.Point(115, 12);
-            this.minMaxPictureBox.Name = "minMaxPictureBox";
-            this.minMaxPictureBox.Size = new System.Drawing.Size(25, 24);
-            this.minMaxPictureBox.TabIndex = 1;
-            this.minMaxPictureBox.TabStop = false;
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.logLabel);
-            this.panel8.Controls.Add(this.errorLabel);
-            this.panel8.Controls.Add(this.previewLabel);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(0, 0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(394, 39);
-            this.panel8.TabIndex = 0;
-            // 
-            // logLabel
-            // 
-            this.logLabel.AutoSize = true;
-            this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.logLabel.Location = new System.Drawing.Point(120, 4);
-            this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(92, 27);
-            this.logLabel.TabIndex = 3;
-            this.logLabel.Text = "运行日志";
-            // 
-            // errorLabel
-            // 
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.errorLabel.Location = new System.Drawing.Point(226, 4);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(92, 27);
-            this.errorLabel.TabIndex = 2;
-            this.errorLabel.Text = "报错信息";
-            // 
-            // previewLabel
-            // 
-            this.previewLabel.AutoSize = true;
-            this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.previewLabel.Location = new System.Drawing.Point(14, 4);
-            this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(92, 27);
-            this.previewLabel.TabIndex = 0;
-            this.previewLabel.Text = "数据预览";
-            // 
-            // bottomLogControl
-            // 
-            this.bottomLogControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomLogControl.Location = new System.Drawing.Point(0, 0);
-            this.bottomLogControl.Name = "bottomLogControl";
-            this.bottomLogControl.Size = new System.Drawing.Size(1106, 280);
-            this.bottomLogControl.TabIndex = 3;
-            // 
-            // bottomPyConsole
-            // 
-            this.bottomPyConsole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomPyConsole.Location = new System.Drawing.Point(0, 0);
-            this.bottomPyConsole.Name = "bottomPyConsole";
-            this.bottomPyConsole.Size = new System.Drawing.Size(1106, 280);
-            this.bottomPyConsole.TabIndex = 2;
-            // 
-            // bottomPreview
-            // 
-            this.bottomPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomPreview.Location = new System.Drawing.Point(0, 0);
-            this.bottomPreview.Name = "bottomPreview";
-            this.bottomPreview.Size = new System.Drawing.Size(1106, 280);
-            this.bottomPreview.TabIndex = 1;
             // 
             // topToolBarControl
             // 
@@ -405,22 +257,11 @@
             this.Controls.Add(this.currentModelRunBackLab);
             this.Controls.Add(this.canvasPanel);
             this.Controls.Add(this.topToolBarControl);
-            this.Controls.Add(this.bottomViewPanel);
             this.Name = "CanvasForm";
             this.Text = "CanvasForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CanvasForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CanvasForm_FormClosed);
             this.SizeChanged += new System.EventHandler(this.CanvasForm_SizeChanged);
-            this.canvasPanel.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
-            this.bottomViewPanel.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -429,20 +270,7 @@
         #endregion
 
         private Controls.CanvasPanel canvasPanel;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.PictureBox leftFoldButton;
-        private System.Windows.Forms.Panel bottomViewPanel;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.PictureBox minMaxPictureBox;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label logLabel;
-        private System.Windows.Forms.Label errorLabel;
-        private System.Windows.Forms.Label previewLabel;
         private Controls.Top.TopToolBarControl topToolBarControl;
-        private Controls.Bottom.BottomLogControl bottomLogControl;
-        private Controls.Bottom.BottomConsoleControl bottomPyConsole;
-        private Controls.Bottom.BottomPreviewControl bottomPreview;
         private System.Windows.Forms.Label currentModelRunBackLab;
         private System.Windows.Forms.Label currentModelFinLab;
         private System.Windows.Forms.Label currentModelRunLab;

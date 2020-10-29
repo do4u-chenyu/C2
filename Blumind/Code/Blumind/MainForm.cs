@@ -667,11 +667,11 @@ namespace Blumind
             }
         }
 
-        void BtnStart_Click(object sender, EventArgs e)
-        {
-            //StartMenu.Show(taskBar1, new Point(BtnStart.Bounds.Left, BtnStart.Bounds.Bottom + 1), ToolStripDropDownDirection.BelowRight);
-            BtnStart.ShowMenu(StartMenu);
-        }
+            void BtnStart_Click(object sender, EventArgs e)
+            {
+                //StartMenu.Show(taskBar1, new Point(BtnStart.Bounds.Left, BtnStart.Bounds.Bottom + 1), ToolStripDropDownDirection.BelowRight);
+                BtnStart.ShowMenu(StartMenu);
+            }
 
         protected override void OnResizeEnd(EventArgs e)
         {

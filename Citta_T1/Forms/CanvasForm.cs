@@ -36,8 +36,6 @@ namespace C2.Forms
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
         public OptionDao OptionDao { get { return this.optionDao; } }
         public ModelDocumentDao ModelDocumentDao { get { return this.modelDocumentDao; } }
-        public bool isBottomViewPanelMinimum;
-        public bool isLeftViewPanelMinimum;
         private OptionDao optionDao;
         private ModelDocument document;
         private ModelDocumentDao modelDocumentDao;
@@ -60,8 +58,6 @@ namespace C2.Forms
             this.modelDocumentDao = new ModelDocumentDao(modelDoc);
             this.optionDao = new OptionDao();
             this.userName = "Admin";
-            this.isBottomViewPanelMinimum = false;
-            this.isLeftViewPanelMinimum = false;
             InitializeMainFormEventHandler();
         }
 
@@ -134,83 +130,10 @@ namespace C2.Forms
         }
         #endregion
 
-        #region 底部控件事件
-        public void PreViewDataByFullFilePath(object sender, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
-        {
-            if (!System.IO.File.Exists(fullFilePath))
-            {
-                if (sender is MoveDtControl || sender is DataButton)
-                    MessageBox.Show("该数据文件不存在");
-                return;
-            }
-            //this.ShowBottomPanel();
-            this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
-            this.ShowBottomPreview();
-        }
 
-        public void PreViewDataByFullFilePath(DataItem dataItem, bool isForceRead = false)
+        private void CanvasForm_SizeChanged(object sender, EventArgs e)
         {
-            if (!System.IO.File.Exists(dataItem.FilePath))
-            {
-                MessageBox.Show("该数据文件不存在");
-                return;
-            }
-            this.ShowBottomPanel();
-            this.bottomPreview.PreViewDataByFullFilePath(dataItem.FilePath, dataItem.FileSep, dataItem.FileType, dataItem.FileEncoding, isForceRead);
-            this.ShowBottomPreview();
-        }
-        private void ShowLogView()
-        {
-            this.bottomLogControl.Visible = true;
-            this.bottomPyConsole.Visible = false;
-            this.bottomPreview.Visible = false;
-        }
-        private void ShowPyConsole()
-        {
-            this.bottomPyConsole.Visible = true;
-            this.bottomLogControl.Visible = false;
-            this.bottomPreview.Visible = false;
-        }
-        private void ShowBottomPreview()
-        {
-            this.bottomLogControl.Visible = false;
-            this.bottomPyConsole.Visible = false;
-            this.bottomPreview.Visible = true;
-        }
-        private void ShowBottomPanel()
-        {
-            if (this.isBottomViewPanelMinimum == true)
-            {
-                this.isBottomViewPanelMinimum = false;
-                this.bottomViewPanel.Height = 280;
-                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
-            }
             InitializeControlsLocation();
-            if (bottomViewPanel.Height == 280)
-            {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
-            }
-            if (bottomViewPanel.Height == 40)
-            {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
-            }
-        }
-        private void PreviewLabel_Click(object sender, EventArgs e)
-        {
-            this.ShowBottomPanel();
-            this.ShowBottomPreview();
-        }
-
-        private void PyControlLabel_Click(object sender, EventArgs e)
-        {
-            this.ShowBottomPanel();
-            this.ShowPyConsole();
-        }
-
-        private void LogLabel_Click(object sender, EventArgs e)
-        {
-            this.ShowBottomPanel();
-            this.ShowLogView();
         }
         public void InitializeControlsLocation()
         {
@@ -248,12 +171,6 @@ namespace C2.Forms
             //this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
             //this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y + 1);
             //this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
-        }
-        #endregion
-
-        private void CanvasForm_SizeChanged(object sender, EventArgs e)
-        {
-            InitializeControlsLocation();
         }
         #region 运行相关部分
         private void ResetButton_Click(object sender, EventArgs e)

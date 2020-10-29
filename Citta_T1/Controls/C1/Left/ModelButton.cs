@@ -31,7 +31,7 @@ namespace C2.Controls.Left
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 文件打开后,不能重复打开,不能删除,不能重命名
-            Global.GetCanvsaForm().LoadDocument(this.textButton.Text);
+            Global.GetCanvasForm().LoadDocument(this.textButton.Text);
             this.OpenToolStripMenuItem.Enabled = false;
             this.RenameToolStripMenuItem.Enabled = false;
             this.DeleteToolStripMenuItem.Enabled = false;

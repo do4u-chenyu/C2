@@ -117,7 +117,7 @@ namespace C2.Controls.Move.Dt
         }
         private void PreViewMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetCanvsaForm().PreViewDataByFullFilePath(this, this.FullFilePath, this.Separator, this.ExtType, this.Encoding);
+            Global.GetMainForm().PreViewDataByFullFilePath(this, this.FullFilePath, this.Separator, this.ExtType, this.Encoding);
         }
         #endregion
 
