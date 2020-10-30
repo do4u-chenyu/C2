@@ -19,15 +19,12 @@ namespace C2.Controls.Left
             InitializeComponent();
             InitializeComponent();
             InitializeToolTip();
-
             this.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
         }
 
-
         // 圆角
-        // ===============================================================================================
         private int _Radius = 30;  // 圆角弧度
 
         /// <summary>圆角弧度(0为不要圆角)</summary>
@@ -47,11 +44,9 @@ namespace C2.Controls.Left
             }
         }
 
-
         // 圆角代码
         public void Round(System.Drawing.Region region)
         {
-            // -----------------------------------------------------------------------------------------------
             // 已经是.net提供给我们的最容易的改窗体的属性了(以前要自己调API)
             System.Drawing.Drawing2D.GraphicsPath oPath = new System.Drawing.Drawing2D.GraphicsPath();
             int x = 0;
@@ -69,7 +64,7 @@ namespace C2.Controls.Left
                 oPath.CloseAllFigures();
                 Region = new System.Drawing.Region(oPath);
             }
-            // -----------------------------------------------------------------------------------------------
+            
             else
             {
                 oPath.AddLine(x + angle, y, thisWidth - angle, y);                         // 顶端
@@ -80,8 +75,6 @@ namespace C2.Controls.Left
                 Region = new System.Drawing.Region(oPath);
             }
         }
-        // ===============================================================================================
-
 
         public OperatorControl(IContainer container)
         {
@@ -101,16 +94,6 @@ namespace C2.Controls.Left
             base.OnResize(eventargs);
             base.Refresh();
         }
-        //public OperatorControl()
-        //{
-        //    InitializeComponent();
-        //    InitializeToolTip();
-            
-        //    //this.differOpPictureBox.Image = SetImgcolor(global::C2.Properties.Resources.differOp);
-        //}
-
-
-
 
         private void InitializeToolTip()
         {
