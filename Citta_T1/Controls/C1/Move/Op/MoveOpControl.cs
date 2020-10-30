@@ -218,7 +218,7 @@ namespace C2.Controls.Move.Op
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
             bool isNeedMoveLine = false;
-            if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
+            if (Global.GetTopToolBarControl().SelectDrag || (Global.GetTopToolBarControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
                 return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
 
@@ -255,7 +255,7 @@ namespace C2.Controls.Move.Op
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             if (e.Button == MouseButtons.Left)
             {
@@ -280,7 +280,7 @@ namespace C2.Controls.Move.Op
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
@@ -320,7 +320,7 @@ namespace C2.Controls.Move.Op
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
 
             if (e.Button == MouseButtons.Left)
@@ -508,7 +508,7 @@ namespace C2.Controls.Move.Op
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
+            if (Global.GetTopToolBarControl().SelectDrag || (Global.GetTopToolBarControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
                 return;
 
             this.DeleteMyself();

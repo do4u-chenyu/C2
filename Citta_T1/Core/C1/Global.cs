@@ -16,6 +16,10 @@ namespace C2.Core
     {
         private static MainForm mainForm;
         private static CanvasPanel canvasPanel;
+<<<<<<< HEAD
+=======
+        private static ModelDocumentDao modelDocumentDao;   // 用户模型工具类
+>>>>>>> b9c598cfe4e4c9a05551152ad1f022e0fad4e5a1
         private static OperatorControl operatorControl; 
         private static MyModelControl myModelControl;
         private static BottomLogControl logView;
@@ -74,13 +78,7 @@ namespace C2.Core
                 ret = Global.GetCanvasForm().Document;
             return ret;
         }
-        public static FlowControl GetFlowControl()
-        {
-            FlowControl ret = null;
-            if (Global.GetCanvasForm() != null)
-                ret = Global.GetCanvasForm().FlowControl;
-            return ret;
-        }
+       
         public static OperatorControl GetOperatorControl() {
             OperatorControl ret = null;
             if (Global.GetCanvasForm() != null)

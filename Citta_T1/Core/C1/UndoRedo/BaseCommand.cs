@@ -6,16 +6,16 @@
         // 对应redo操作
         public bool Redo()
         {
-            Global.GetFlowControl().InterruptSelectFrame();
-            Global.GetFlowControl().ResetStatus();
+            Global.GetTopToolBarControl().InterruptSelectFrame();
+            Global.GetTopToolBarControl().ResetStatus();
             bool retCode = this._Redo();
             return retCode;
         }
         // 对应undo操作
         public bool Undo()
         {
-            Global.GetFlowControl().InterruptSelectFrame();
-            Global.GetFlowControl().ResetStatus();
+            Global.GetTopToolBarControl().InterruptSelectFrame();
+            Global.GetTopToolBarControl().ResetStatus();
             bool retCode = this._Undo();
             return retCode;
         }

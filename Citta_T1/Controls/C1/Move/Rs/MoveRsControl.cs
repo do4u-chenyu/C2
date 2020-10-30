@@ -97,7 +97,7 @@ namespace C2.Controls.Move.Rs
         #region MOC的事件
         private void MoveRsControl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (cmd == ECommandType.Null)
@@ -135,7 +135,7 @@ namespace C2.Controls.Move.Rs
         }
         private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             if (e.Button == MouseButtons.Left)
             {
@@ -159,7 +159,7 @@ namespace C2.Controls.Move.Rs
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
@@ -171,7 +171,7 @@ namespace C2.Controls.Move.Rs
 
         private void MoveRsControl_MouseUp(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             if (e.Button == MouseButtons.Left)
             {

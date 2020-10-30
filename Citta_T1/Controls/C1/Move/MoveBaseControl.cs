@@ -83,7 +83,7 @@ namespace C2.Controls.Move
 
         protected void RenameMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             this.textBox.ReadOnly = false;
             this.oldTextString = this.textBox.Text;
@@ -201,7 +201,7 @@ namespace C2.Controls.Move
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             // 按下回车键
             if (e.KeyChar == 13)
@@ -212,7 +212,7 @@ namespace C2.Controls.Move
 
         private void TextBox_Leave(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             FinishTextChange();
         }
