@@ -126,6 +126,13 @@ namespace C2.Controls.MapViews
             AddWidgetCommand command = new AddWidgetCommand(hitTopic, DataSourceWidget.TypeID, template);
             ExecuteCommand(command);
         }
+        public void AddResult(Topic[] hitTopic, DataItem dataItem)
+        {
+            var template = new ResultWidget();
+            template.DataItems.Add(dataItem);
+            AddWidgetCommand command = new AddWidgetCommand(hitTopic, ResultWidget.TypeID, template);
+            ExecuteCommand(command);
+        }
 
         void AddWidget(string typeID, Widget template, bool showDialog)
         {

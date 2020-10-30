@@ -180,6 +180,9 @@ namespace C2.Controls.MapViews
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
         }
+        void MenuJoinPool_Click(object sender, EventArgs e)
+        {
+        }
         void DSWidgetMenuDelete_Click(object sender, EventArgs e)
         {
             Delete(new ChartObject[] { opw });
@@ -195,6 +198,9 @@ namespace C2.Controls.MapViews
         {
             VisualDisplayDialog displayDialog = new VisualDisplayDialog();
             displayDialog.Show();
+        }
+        void MenuDealData_Click(object sender, EventArgs e)
+        {
         }
 
         private void CreateDataSourceMenu(DataSourceWidget dtw)
@@ -242,12 +248,51 @@ namespace C2.Controls.MapViews
         {
             
 
-            ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
-            MenuOpenResult.Text = "Result";
+            //ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
+            //MenuOpenResult.Text = "Result";
 
-            WidgetMenuStrip.Items.Add(MenuOpenResult);
+            //WidgetMenuStrip.Items.Add(MenuOpenResult);
+
+            //改
+            WidgetMenuStrip.SuspendLayout();
+            foreach (DataItem dataItem in rsw.DataItems)
+            {
+                ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
+                ToolStripMenuItem MenuGetChart = new ToolStripMenuItem();
+                ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
+                ToolStripMenuItem MenuDealData = new ToolStripMenuItem();
+                ToolStripMenuItem MenuJoinPool = new ToolStripMenuItem();
+
+                ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
+                MenuOpenResult.Image = Properties.Resources.result_w_icon;
+
+                MenuOpenResult.Text = String.Format("{0}{1}{2}{3}", dataItem.FileName, " [", Path.GetExtension(dataItem.FilePath).Trim('.'), "]");
+                MenuOpenResult.DropDownItems.AddRange(new ToolStripItem[] {
+                MenuViewData,
+                MenuDealData,
+                MenuJoinPool});
+
+                MenuViewData.Image = Properties.Resources.viewdata;
+                MenuViewData.Tag = dataItem;
+                MenuViewData.Text = Lang._("ViewData");
+                MenuViewData.Click += MenuViewData_Click;
+
+                MenuDealData.Image = Properties.Resources.dealData;
+                MenuDealData.Text = Lang._("DealData");
+                MenuDealData.Click += MenuDealData_Click;
+
+                MenuJoinPool.Image = Properties.Resources.joinPool;
+                MenuJoinPool.Text = Lang._("JoinPool");
+                MenuJoinPool.Tag = dataItem;
+                MenuJoinPool.Click += MenuJoinPool_Click;
+
+                WidgetMenuStrip.Items.Add(MenuOpenResult);
+            }
+            WidgetMenuStrip.ResumeLayout();
+            if (UITheme.Default != null)
+            {
+                WidgetMenuStrip.Renderer = UITheme.Default.ToolStripRenderer;
+            }
         }
-
-
     }
 }

@@ -1711,6 +1711,7 @@
     <None Include="Resources\Images\fore_color.png" />
     <None Include="Resources\Images\format_painter.png" />
     <None Include="Resources\Images\deletewidget.png" />
+    <None Include="Resources\Images\dealData.png" />
     <Content Include="Resources\Images\freemind_butterfly.png" />
     <None Include="Resources\Images\full_screen.png" />
     <None Include="Resources\Images\full_screen_exit.png" />
@@ -1728,6 +1729,7 @@
     <None Include="Resources\Images\information.png" />
     <None Include="Resources\Images\internet.png" />
     <None Include="Resources\Images\italic.png" />
+    <None Include="Resources\Images\joinPool.png" />
     <Content Include="Resources\Images\keyboard.png" />
     <None Include="Resources\Images\languages.png" />
     <None Include="Resources\Images\last.png" />
@@ -2042,8 +2044,8 @@
     </Content>
     <None Include="Resources\windows_themes.xml" />
     <None Include="Resources\WidgetIcon\data_w_icon.png" />
-    <None Include="Resources\WidgetIcon\operator_w_icon.png" />
     <None Include="Resources\WidgetIcon\result_w_icon.png" />
+    <None Include="Resources\WidgetIcon\operator_w_icon.png" />
     <Content Include="Resources\C1\datasource\pythonHelper1.png" />
     <Content Include="Resources\C1\datasource\pythonHelper2.png" />
     <Content Include="Resources\C1\datasource\pythonHelper3.png" />

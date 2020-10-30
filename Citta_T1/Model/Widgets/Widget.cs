@@ -368,7 +368,10 @@ namespace C2.Model.Widgets
             widget.Alignment = Alignment;
             widget.Text = Text;
             if (widget is DataSourceWidget)
-                (widget as DataSourceWidget).DataItems =(this as DataSourceWidget).DataItems;                
+                (widget as DataSourceWidget).DataItems =(this as DataSourceWidget).DataItems;
+            else if (widget is ResultWidget)
+                (widget as ResultWidget).DataItems = (this as ResultWidget).DataItems;
+
         }
 
         public virtual void OnMouseClick(Control ct,Point point)
