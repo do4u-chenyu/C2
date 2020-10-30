@@ -29,123 +29,138 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisualDisplayDialog));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comCheckBoxList1 = new C2.Controls.Common.ComCheckBoxList();
+            this.chartType = new System.Windows.Forms.Label();
+            this.x = new System.Windows.Forms.Label();
+            this.y = new System.Windows.Forms.Label();
+            this.chartTypesList = new System.Windows.Forms.ComboBox();
+            this.xValue = new System.Windows.Forms.ComboBox();
+            this.confirm = new System.Windows.Forms.Button();
+            this.cancle = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.yValue = new C2.Controls.Common.ComCheckBoxList();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // chartType
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(90, 79);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "图表类型：";
+            this.chartType.AutoSize = true;
+            this.chartType.BackColor = System.Drawing.Color.White;
+            this.chartType.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chartType.Location = new System.Drawing.Point(79, 72);
+            this.chartType.Name = "chartType";
+            this.chartType.Size = new System.Drawing.Size(84, 20);
+            this.chartType.TabIndex = 0;
+            this.chartType.Text = "图表类型：";
             // 
-            // label2
+            // x
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.White;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(90, 116);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "输入维度：";
+            this.x.AutoSize = true;
+            this.x.BackColor = System.Drawing.Color.White;
+            this.x.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.x.Location = new System.Drawing.Point(79, 109);
+            this.x.Name = "x";
+            this.x.Size = new System.Drawing.Size(84, 20);
+            this.x.TabIndex = 1;
+            this.x.Text = "输入维度：";
             // 
-            // label3
+            // y
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.White;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(90, 153);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "输出维度：";
+            this.y.AutoSize = true;
+            this.y.BackColor = System.Drawing.Color.White;
+            this.y.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.y.Location = new System.Drawing.Point(79, 146);
+            this.y.Name = "y";
+            this.y.Size = new System.Drawing.Size(84, 20);
+            this.y.TabIndex = 2;
+            this.y.Text = "输出维度：";
             // 
-            // comboBox1
+            // chartTypesList
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(203, 75);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(150, 22);
-            this.comboBox1.TabIndex = 3;
+            this.chartTypesList.AllowDrop = true;
+            this.chartTypesList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.chartTypesList.FormattingEnabled = true;
+            this.chartTypesList.ItemHeight = 14;
+            this.chartTypesList.Items.AddRange(new object[] {
+            "饼图",
+            "折线图",
+            "雷达图",
+            "圆环图"});
+            this.chartTypesList.Location = new System.Drawing.Point(182, 73);
+            this.chartTypesList.Name = "chartTypesList";
+            this.chartTypesList.Size = new System.Drawing.Size(150, 22);
+            this.chartTypesList.TabIndex = 3;
             // 
-            // comboBox2
+            // xValue
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(203, 109);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(150, 22);
-            this.comboBox2.TabIndex = 4;
+            this.xValue.FormattingEnabled = true;
+            this.xValue.Location = new System.Drawing.Point(182, 110);
+            this.xValue.Name = "xValue";
+            this.xValue.Size = new System.Drawing.Size(150, 22);
+            this.xValue.TabIndex = 4;
             // 
-            // button1
+            // confirm
             // 
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(332, 287);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 32);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "确认";
-            this.button1.UseVisualStyleBackColor = true;
+            this.confirm.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.confirm.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.confirm.Location = new System.Drawing.Point(287, 257);
+            this.confirm.Margin = new System.Windows.Forms.Padding(0);
+            this.confirm.Name = "confirm";
+            this.confirm.Size = new System.Drawing.Size(77, 32);
+            this.confirm.TabIndex = 6;
+            this.confirm.Text = "确认";
+            this.confirm.UseVisualStyleBackColor = true;
+            this.confirm.Click += new System.EventHandler(this.confirm_Click);
             // 
-            // button2
+            // cancle
             // 
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(418, 287);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(74, 32);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "取消";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // comCheckBoxList1
-            // 
-            this.comCheckBoxList1.DataSource = null;
-            this.comCheckBoxList1.Location = new System.Drawing.Point(203, 153);
-            this.comCheckBoxList1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.comCheckBoxList1.Name = "comCheckBoxList1";
-            this.comCheckBoxList1.Size = new System.Drawing.Size(153, 21);
-            this.comCheckBoxList1.TabIndex = 5;
+            this.cancle.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cancle.Location = new System.Drawing.Point(373, 257);
+            this.cancle.Name = "cancle";
+            this.cancle.Size = new System.Drawing.Size(74, 32);
+            this.cancle.TabIndex = 7;
+            this.cancle.Text = "取消";
+            this.cancle.UseVisualStyleBackColor = true;
+            this.cancle.Click += new System.EventHandler(this.cancle_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.Controls.Add(this.comboBox2);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.comCheckBoxList1);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.xValue);
+            this.panel1.Controls.Add(this.chartTypesList);
+            this.panel1.Controls.Add(this.y);
+            this.panel1.Controls.Add(this.x);
+            this.panel1.Controls.Add(this.yValue);
+            this.panel1.Controls.Add(this.chartType);
             this.panel1.Location = new System.Drawing.Point(0, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(505, 277);
+            this.panel1.Size = new System.Drawing.Size(461, 247);
             this.panel1.TabIndex = 8;
+            // 
+            // yValue
+            // 
+            this.yValue.DataSource = null;
+            this.yValue.Location = new System.Drawing.Point(182, 146);
+            this.yValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.yValue.Name = "yValue";
+            this.yValue.Size = new System.Drawing.Size(150, 21);
+            this.yValue.TabIndex = 5;
             // 
             // VisualDisplayDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(504, 325);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(459, 296);
+            this.Controls.Add(this.cancle);
+            this.Controls.Add(this.confirm);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "VisualDisplayDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "可视化展示";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -155,14 +170,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private Controls.Common.ComCheckBoxList comCheckBoxList1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label chartType;
+        private System.Windows.Forms.Label x;
+        private System.Windows.Forms.Label y;
+        private System.Windows.Forms.ComboBox chartTypesList;
+        private System.Windows.Forms.ComboBox xValue;
+        private Controls.Common.ComCheckBoxList yValue;
+        private System.Windows.Forms.Button confirm;
+        private System.Windows.Forms.Button cancle;
         private System.Windows.Forms.Panel panel1;
     }
 }
