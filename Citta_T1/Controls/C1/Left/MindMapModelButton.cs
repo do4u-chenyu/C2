@@ -62,7 +62,7 @@ namespace C2.Controls.Left
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //  容错处理, 标题栏中文档未关闭时,不能重命名
-            if (Global.GetModelTitlePanel().ContainModel(this.ModelTitle))
+            if (Global.GetTaskBar().ContainModel(this.ModelTitle))
                 return;
 
             this.textBox.Text = ModelTitle;
@@ -77,7 +77,7 @@ namespace C2.Controls.Left
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 容错处理, 标题栏中文档未关闭时,不能删除
-            if (Global.GetModelTitlePanel().ContainModel(this.ModelTitle))
+            if (Global.GetTaskBar().ContainModel(this.ModelTitle))
                 return;
             // 删除前用对话框确认
             DialogResult rs = MessageBox.Show(String.Format("删除模型 {0}, 继续删除请点击 \"确定\"", ModelTitle),
