@@ -48,7 +48,7 @@ namespace C2
 
             this.barChart = new BarChart(data, titles);
             this.pieChart = new PieChart(x, y);
-            this.horizontalBar3D = new HorizontalBar3D(x, y);
+            this.horizontalBar3D = new HorizontalBar3D(data, titles);
 
             this.radarChart = new C2.Controls.DataCharts.RadarChart();
             this.ringChart = new C2.Controls.DataCharts.RingChart();
