@@ -43,7 +43,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.remarkControl = new C2.Controls.Flow.RemarkControl();
-            this.operatorControl = new C2.Controls.Left.OperatorControl();
+            this.operatorControl = new C2.Controls.Left.OperatorControl(this.components);
             this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
             this.SuspendLayout();
             // 
@@ -68,7 +68,7 @@
             // 
             // topToolBarControl
             // 
-            this.topToolBarControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.topToolBarControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.topToolBarControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.topToolBarControl.Location = new System.Drawing.Point(0, 0);
             this.topToolBarControl.Name = "topToolBarControl";
@@ -205,11 +205,13 @@
             // 
             // operatorControl
             // 
+            this.operatorControl._setRoundRadius = 30;
             this.operatorControl.AllowDrop = true;
             this.operatorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.operatorControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.operatorControl.ForeColor = System.Drawing.SystemColors.ControlText;
             this.operatorControl.Location = new System.Drawing.Point(435, 61);
+            this.operatorControl.Margin = new System.Windows.Forms.Padding(0);
             this.operatorControl.Name = "operatorControl";
             this.operatorControl.Size = new System.Drawing.Size(215, 320);
             this.operatorControl.TabIndex = 40;

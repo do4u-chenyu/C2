@@ -157,9 +157,9 @@ namespace C2.Forms
             this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            this.operatorControl.Location = new Point(this.canvasPanel.Width -280 , 35);
-            this.remarkControl.Location = new Point(this.canvasPanel.Width - 420 , 33);
-            this.rightHideButton.Location = new Point(this.canvasPanel.Width - 60, 35);
+            this.operatorControl.Location = new Point(this.canvasPanel.Width -280 , 38);
+            this.remarkControl.Location = new Point(this.canvasPanel.Width - 420 , 35);
+            this.rightHideButton.Location = new Point(this.canvasPanel.Width - 60, 38);
 
             //// 右上用户名，头像
             //int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
