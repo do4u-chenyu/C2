@@ -25,14 +25,6 @@ namespace C2.Business.Model
             ModelDocuments.Add(doc);
             CurrentDocument = doc;
         }
-        public void AddBlankDocument(string modelTitle, string userName)
-        {
-            ModelDocument modelDocument = new ModelDocument(modelTitle, userName);
-            ModelDocuments.ForEach(md => md.Hide());
-            ModelDocuments.Add(modelDocument);
-            CurrentDocument = modelDocument;
-            Global.GetCanvasPanel().FrameWrapper.InitFrame();
-        }
         public string SaveCurrentDocument()
         {
             CurrentDocument.Save();
@@ -40,21 +32,7 @@ namespace C2.Business.Model
             return CurrentDocument.ModelTitle;
         }
 
-        public string[] SaveAllDocuments()
-        {
-            List<string> titles = new List<string>();
-            foreach (ModelDocument md in ModelDocuments)
-            {
-                // 不Dirty的大文档, 不重复保存,减少硬盘写
-                if (!md.Dirty && md.ModelElements.Count > 10)
-                    continue;
 
-                md.Save();
-                md.Dirty = false;
-                titles.Add(md.ModelTitle);
-            }
-            return titles.ToArray();
-        }
         public ModelDocument LoadDocument(string modelTitle, string userName)
         {
 
@@ -68,18 +46,7 @@ namespace C2.Business.Model
             return md;
 
         }
-        public void SwitchDocument(string modelTitle)
-        {
-            CurrentDocument = FindModelDocument(modelTitle);
-            foreach (ModelDocument md in ModelDocuments)
-            {
-                if (md.ModelTitle == modelTitle)
-                    md.Show();
-                else
-                    md.Hide();
-            }
-            Global.GetCanvasPanel().FrameWrapper.InitFrame();
-        }
+
         public ModelElement AddDocumentOperator(MoveBaseControl ct)
         {
             ct.ID = this.CurrentDocument.ElementCount++;
@@ -88,10 +55,7 @@ namespace C2.Business.Model
             return e;
         }
 
-        public ModelDocument FindModelDocument(string modelTitle)
-        {
-            return this.ModelDocuments.Find(md => md.ModelTitle == modelTitle);
-        }
+
 
         public List<ModelElement> DeleteCurrentDocument()
         {
@@ -100,25 +64,23 @@ namespace C2.Business.Model
             this.ModelDocuments.Remove(CurrentDocument);
             return CurrentDocument.ModelElements;
         }
-        public void UpdateRemark(RemarkControl remarkControl)
+
+
+        public ModelDocument GetManagerRelateModel(TaskManager manager)
         {
-            if (this.CurrentDocument != null)
-                this.CurrentDocument.RemarkDescription = remarkControl.RemarkDescription;
+            return ModelDocuments.Find(md => md.TaskManager == manager);
         }
 
-        public string RemarkDescription => CurrentDocument == null ? String.Empty : CurrentDocument.RemarkDescription;
-
-        public bool WithoutDocumentLogin(string userName)
+        // 特定Datasource在当前所有打开模型中的引用次数
+        public int CountDataSourceUsage(string ffp)
         {
-            //新用户登录
-            string userDir = Path.Combine(Global.WorkspaceDirectory, userName);
-            if (!Directory.Exists(userDir))
-                return true;
-            //非新用户但无模型文档
-            DirectoryInfo di = new DirectoryInfo(userDir);
-            DirectoryInfo[] directoryInfos = di.GetDirectories();
-            return (directoryInfos.Length == 0);
+            int count = 0;
+            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
+                if (me.Type == ElementType.DataSource && me.FullFilePath == ffp)
+                    count++;
+            return count;
         }
+        #region 文档保存
         public void SaveEndDocuments(string userName)
         {
 
@@ -158,30 +120,6 @@ namespace C2.Business.Model
 
 
         }
-        public string[] LoadSaveModelTitle(string userName)
-        {
-            List<string> modelTitleList = new List<string>();
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(userInfoPath);
-
-            XmlNodeList userNode = xDoc.GetElementsByTagName("user");
-            foreach (XmlNode xn in userNode)
-            {
-                if (xn.SelectSingleNode("name") != null && xn.SelectSingleNode("name").InnerText == userName)
-                {
-                    XmlNodeList childNodes = xn.SelectNodes("modeltitle");
-                    foreach (XmlNode xn2 in childNodes)
-                    {
-                        string modelTitle = xn2.InnerText;
-                        if (Directory.Exists(System.IO.Path.Combine(Global.WorkspaceDirectory, userName, modelTitle)))
-                            modelTitleList.Add(modelTitle);
-                    }
-                    if (modelTitleList.Count > 0)
-                        return modelTitleList.Distinct().ToArray();
-                }
-            }
-            return LoadAllModelTitle(userName);
-        }
         public string[] LoadAllModelTitle(string userName)
         {
             string[] modelTitles = new string[0];
@@ -194,25 +132,96 @@ namespace C2.Business.Model
             catch { }
             return modelTitles;
         }
+        public ModelDocument FindModelDocument(string modelTitle)
+        {
+            return this.ModelDocuments.Find(md => md.ModelTitle == modelTitle);
+        }
+        #endregion
+        #region 被干掉的方法
+        //public string RemarkDescription => CurrentDocument == null ? String.Empty : CurrentDocument.RemarkDescription;
 
-        public ModelDocument GetManagerRelateModel(TaskManager manager)
-        {
-            return ModelDocuments.Find(md => md.TaskManager == manager);
-        }
-        // 统计当前用户有多少元素
-        public int CountAllModelElements()
-        {
-            return this.ModelDocuments.Sum(md => md.ModelElements.Count);
-        }
-        // 特定Datasource在当前所有打开模型中的引用次数
-        public int CountDataSourceUsage(string ffp)
-        {
-            int count = 0;
-            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
-                if (me.Type == ElementType.DataSource && me.FullFilePath == ffp)
-                    count++;
-            return count;
-        }
 
+
+        //public string[] LoadSaveModelTitle(string userName)
+        //{
+        //    List<string> modelTitleList = new List<string>();
+        //    XmlDocument xDoc = new XmlDocument();
+        //    xDoc.Load(userInfoPath);
+
+        //    XmlNodeList userNode = xDoc.GetElementsByTagName("user");
+        //    foreach (XmlNode xn in userNode)
+        //    {
+        //        if (xn.SelectSingleNode("name") != null && xn.SelectSingleNode("name").InnerText == userName)
+        //        {
+        //            XmlNodeList childNodes = xn.SelectNodes("modeltitle");
+        //            foreach (XmlNode xn2 in childNodes)
+        //            {
+        //                string modelTitle = xn2.InnerText;
+        //                if (Directory.Exists(System.IO.Path.Combine(Global.WorkspaceDirectory, userName, modelTitle)))
+        //                    modelTitleList.Add(modelTitle);
+        //            }
+        //            if (modelTitleList.Count > 0)
+        //                return modelTitleList.Distinct().ToArray();
+        //        }
+        //    }
+        //    return LoadAllModelTitle(userName);
+        //}
+        //public void AddBlankDocument(string modelTitle, string userName)
+        //{
+        //    ModelDocument modelDocument = new ModelDocument(modelTitle, userName);
+        //    ModelDocuments.ForEach(md => md.Hide());
+        //    ModelDocuments.Add(modelDocument);
+        //    CurrentDocument = modelDocument;
+        //    Global.GetCanvasPanel().FrameWrapper.InitFrame();
+        //}
+        //public string[] SaveAllDocuments()
+        //{
+        //    List<string> titles = new List<string>();
+        //    foreach (ModelDocument md in ModelDocuments)
+        //    {
+        //        // 不Dirty的大文档, 不重复保存,减少硬盘写
+        //        if (!md.Dirty && md.ModelElements.Count > 10)
+        //            continue;
+
+        //        md.Save();
+        //        md.Dirty = false;
+        //        titles.Add(md.ModelTitle);
+        //    }
+        //    return titles.ToArray();
+        //}
+        //public void SwitchDocument(string modelTitle)
+        //{
+        //    CurrentDocument = FindModelDocument(modelTitle);
+        //    foreach (ModelDocument md in ModelDocuments)
+        //    {
+        //        if (md.ModelTitle == modelTitle)
+        //            md.Show();
+        //        else
+        //            md.Hide();
+        //    }
+        //    Global.GetCanvasPanel().FrameWrapper.InitFrame();
+        //}
+        //public void UpdateRemark(RemarkControl remarkControl)
+        //{
+        //    if (this.CurrentDocument != null)
+        //        this.CurrentDocument.RemarkDescription = remarkControl.RemarkDescription;
+        //}
+        //public bool WithoutDocumentLogin(string userName)
+        //{
+        //    //新用户登录
+        //    string userDir = Path.Combine(Global.WorkspaceDirectory, userName);
+        //    if (!Directory.Exists(userDir))
+        //        return true;
+        //    //非新用户但无模型文档
+        //    DirectoryInfo di = new DirectoryInfo(userDir);
+        //    DirectoryInfo[] directoryInfos = di.GetDirectories();
+        //    return (directoryInfos.Length == 0);
+        //}
+        //// 统计当前用户有多少元素
+        //public int CountAllModelElements()
+        //{
+        //    return this.ModelDocuments.Sum(md => md.ModelElements.Count);
+        //}
+        #endregion
     }
 }

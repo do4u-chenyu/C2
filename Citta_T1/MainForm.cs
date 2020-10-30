@@ -474,7 +474,7 @@ namespace C2
             switch (formType)
             {
                 case FormType.DocumentForm:
-                    NewCanvasForm();
+                    NewDocumentForm();
                     break;
                 case FormType.CanvasForm:
                     NewCanvasForm();
