@@ -101,7 +101,7 @@ namespace C2.Controls.Flow
             startY = e.Y;
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
-            Global.GetFlowControl().ResetStatus();
+            Global.GetTopToolBarControl().ResetStatus();
         }
 
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)

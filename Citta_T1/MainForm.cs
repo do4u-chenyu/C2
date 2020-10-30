@@ -735,10 +735,10 @@ namespace C2
             if (this.isBottomViewPanelMinimum == true)
             {
                 this.isBottomViewPanelMinimum = false;
-                this.bottomViewPanel.Height = 280;
+                this.bottomViewPanel.Height = 200;
                 this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
             }
-            if (bottomViewPanel.Height == 280)
+            if (bottomViewPanel.Height == 200)
             {
                 this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
             }
@@ -772,7 +772,7 @@ namespace C2
             if (this.isBottomViewPanelMinimum == true)
             {
                 this.isBottomViewPanelMinimum = false;
-                this.bottomViewPanel.Height = 280;
+                this.bottomViewPanel.Height = 200;
                 this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
             }
             else
@@ -781,7 +781,7 @@ namespace C2
                 this.bottomViewPanel.Height = 40;
                 this.minMaxPictureBox.Image = global::C2.Properties.Resources.maxunfold;
             }
-            if (bottomViewPanel.Height == 280)
+            if (bottomViewPanel.Height == 200)
             {
                 this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
             }

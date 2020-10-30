@@ -584,7 +584,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.leftPanelOpRelate);
             this.Controls.Add(this.pythonOPButton);
             this.Controls.Add(this.customOPButton1);
@@ -619,8 +618,9 @@
             this.Controls.Add(this.avgOpPictureBox);
             this.Controls.Add(this.unionOpPictureBox);
             this.Controls.Add(this.collideOpPictureBox);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "OperatorControl";
-            this.Size = new System.Drawing.Size(215, 320);
+            this.Size = new System.Drawing.Size(217, 322);
             ((System.ComponentModel.ISupportInitialize)(this.relateOpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collideOpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.differOpPictureBox)).EndInit();
