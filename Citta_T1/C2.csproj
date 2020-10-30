@@ -682,9 +682,6 @@
     <Compile Include="Forms\CanvasForm.Designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WorkSpace\MciWorkSpace.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="WorkSpace\BaseWorkSpace.cs">
       <SubType>Component</SubType>
     </Compile>
