@@ -17,6 +17,7 @@ using System.Diagnostics;
 using C2.Dialogs.C2OperatorViews;
 using System.IO;
 using C2.Dialogs;
+using C2.Business.Option;
 
 namespace C2.Controls.MapViews
 {
@@ -196,7 +197,8 @@ namespace C2.Controls.MapViews
         }
         void MenuGetChart_Click(object sender, EventArgs e)
         {
-            VisualDisplayDialog displayDialog = new VisualDisplayDialog();
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;        
+            VisualDisplayDialog displayDialog = new VisualDisplayDialog(hitItem);
             displayDialog.Show();
         }
         void MenuDealData_Click(object sender, EventArgs e)
@@ -229,6 +231,7 @@ namespace C2.Controls.MapViews
 
                 MenuGetChart.Image = Properties.Resources.getchart;              
                 MenuGetChart.Text = Lang._("GetChart");
+                MenuGetChart.Tag = dataItem;
                 MenuGetChart.Click += MenuGetChart_Click;
 
                 MenuDelete.Image = Properties.Resources.deletewidget;

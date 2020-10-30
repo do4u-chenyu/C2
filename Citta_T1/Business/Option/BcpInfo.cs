@@ -14,9 +14,9 @@ namespace C2.Business.Option
         private ElementType type;             //对应的类型:数据源 或 Result
         private OpUtil.Encoding encoding;     //BCP文件对应的编码
         private char[] separator;             //BCP文件对应的分隔符
-
+        private string[] columnArray = new string[] { };
         public string ColumnLine { get; set; }
-        public string[] ColumnArray { get; set; }
+        public string[] ColumnArray { get=> this.columnArray; set => this.columnArray = value; }
 
         public BcpInfo(ModelElement me)
         {
