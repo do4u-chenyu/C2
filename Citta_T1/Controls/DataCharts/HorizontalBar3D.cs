@@ -15,6 +15,7 @@ namespace C2.Controls.DataCharts
     {
         private string[] x;
         private double[] y;
+        private string title;
         public HorizontalBar3D(string[] x,double[] y)
         {
             InitializeComponent();
@@ -22,6 +23,15 @@ namespace C2.Controls.DataCharts
             this.y = y;
             InitChart();
         }
+        public HorizontalBar3D(List<List<string>> dataList, List<string> title)
+        {
+            InitializeComponent();
+            this.title = title[0];
+            InitChart();
+
+            DataBind(dataList[0], dataList[1]);
+        }
+
         void InitChart()
         {
             chart1.Titles.Add("交通违法行为TOP5");
@@ -111,11 +121,25 @@ namespace C2.Controls.DataCharts
             //饼图折线
             chart1.Series[0]["PieLineColor"] = "White";
             //绑定数据
-            chart1.Series[0].Points.DataBindXY(x, y);
+            //chart1.Series[0].Points.DataBindXY(x, y);
 
             //chart1.Series[0].Points[0].Color = Color.White;
             //绑定颜色
             chart1.Series[0].Palette = ChartColorPalette.BrightPastel;
+        }
+        void DataBind(List<string> x, List<string> y)
+        {
+            try
+            {
+                List<double> y_double = y.ConvertAll(d => Convert.ToDouble(d));
+                chart1.Series[0].Points.DataBindXY(x, y_double);
+                //chart1.Series[0].Points[0].Color = Color.White;
+                chart1.Series[0].Palette = ChartColorPalette.Bright;
+            }
+            catch
+            {
+                return;
+            }
         }
     }
 }

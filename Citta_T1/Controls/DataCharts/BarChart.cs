@@ -24,15 +24,18 @@ namespace C2.Controls.DataCharts
             this.y = y;
             this.title = title;
             InitChart();
+            
         }
 
         public BarChart(List<List<string>> dataList, List<string> title)
         {
             InitializeComponent();
-            this.x = dataList[0];
             this.title = title[0];
             InitChart();
+            
+            DataBind(dataList[0], dataList[1]);
         }
+        
         public void InitChart()
         {
             chart1.Titles.Add(title);
@@ -105,10 +108,24 @@ namespace C2.Controls.DataCharts
             chart1.Legends[0].Position.Auto = false;
 
 
-            //绑定数据
-            chart1.Series[0].Points.DataBindXY(x, y);
-            chart1.Series[0].Points[0].Color = Color.White;
-            chart1.Series[0].Palette = ChartColorPalette.Bright;
+            ////绑定数据
+            //chart1.Series[0].Points.DataBindXY(x, y);
+            //chart1.Series[0].Points[0].Color = Color.White;
+            //chart1.Series[0].Palette = ChartColorPalette.Bright;
+        }
+        void DataBind(List<string> x,List<string> y)
+        {
+            try
+            {
+                List<double> y_double = y.ConvertAll(d => Convert.ToDouble(d));
+                chart1.Series[0].Points.DataBindXY(x, y_double);
+                chart1.Series[0].Points[0].Color = Color.White;
+                chart1.Series[0].Palette = ChartColorPalette.Bright;
+            }
+            catch
+            {
+                return;
+            }
         }
         public void save()
         {

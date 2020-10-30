@@ -38,11 +38,17 @@ namespace C2
         {
             string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
             double[] y = new double[] { 541, 574, 345, 854, 684 };
-            string[] y1 = new string[] { "541", "574", "345", "854", "684" };
+            List<string> y1 = new List<string> { "541", "574", "345", "854", "684" };
+            double[] y2 = new double[] { };
             List<string> x1 = new List<string> { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
-            this.barChart = new BarChart(x1, y, "柱状图");
+            List<List<string>> data = new List<List<string>>();
+            List<string> titles = new List<string>{"柱状图"};
+            data.Add(x1);
+            data.Add(y1);
+
+            this.barChart = new BarChart(data, titles);
             this.pieChart = new PieChart(x, y);
-            this.horizontalBar3D = new HorizontalBar3D(x, y);
+            this.horizontalBar3D = new HorizontalBar3D(data, titles);
 
             this.radarChart = new C2.Controls.DataCharts.RadarChart();
             this.ringChart = new C2.Controls.DataCharts.RingChart();
