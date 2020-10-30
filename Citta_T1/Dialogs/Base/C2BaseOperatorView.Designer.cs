@@ -28,6 +28,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Text = "C2BaseOperatorView";
+
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
         }
 
         #endregion

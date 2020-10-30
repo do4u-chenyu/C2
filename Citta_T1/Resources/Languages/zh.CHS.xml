@@ -390,5 +390,7 @@
 	<item name="AI">AI实践</item>
 	<item name="Model">添加模型</item>
 	<item name="Result">添加结果</item>
+    <item name="DealData">对数据进行处理</item>
+	<item name="JoinPool">数据加入数据池</item>	
 	</words>
 </dictionary>

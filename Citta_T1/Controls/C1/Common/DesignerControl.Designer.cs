@@ -72,7 +72,7 @@
             this.dataSourceCombo.Name = "dataSourceCombo";
             this.dataSourceCombo.Size = new System.Drawing.Size(99, 20);
             this.dataSourceCombo.TabIndex = 3;
-            this.dataSourceCombo.SelectedIndexChanged += new System.EventHandler(this.dataSourceCombo_SelectedIndexChanged);
+            this.dataSourceCombo.SelectedIndexChanged += new System.EventHandler(this.DataSourceCombo_SelectedIndexChanged);
             // 
             // changeOpButton
             // 
@@ -111,6 +111,7 @@
             this.operatorCombo.Name = "operatorCombo";
             this.operatorCombo.Size = new System.Drawing.Size(99, 20);
             this.operatorCombo.TabIndex = 8;
+            this.operatorCombo.SelectedIndexChanged += new System.EventHandler(this.OperatorCombo_SelectedIndexChanged);
             // 
             // DesignerControl
             // 

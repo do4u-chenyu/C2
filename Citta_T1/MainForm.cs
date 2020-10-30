@@ -82,6 +82,7 @@ namespace C2
             this.UserName = userName;
 
             InitializeComponent();
+            this.usernamelabel.Text = this.UserName;
             // 数据导入
             this.inputDataForm = new Dialogs.InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;

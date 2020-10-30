@@ -369,12 +369,9 @@ namespace C2.Model.Widgets
             widget.Text = Text;
             if (widget is DataSourceWidget)
                 (widget as DataSourceWidget).DataItems =(this as DataSourceWidget).DataItems;
-            if(widget is OperatorWidget)
-            {
-                (widget as OperatorWidget).OpType = (this as OperatorWidget).OpType;
-                (widget as OperatorWidget).OpName = (this as OperatorWidget).OpType;
-            }
-                
+            else if (widget is ResultWidget)
+                (widget as ResultWidget).DataItems = (this as ResultWidget).DataItems;
+
         }
 
         public virtual void OnMouseClick(Control ct,Point point)

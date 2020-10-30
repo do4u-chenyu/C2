@@ -626,6 +626,7 @@ namespace C2.ChartPageView
             //TODO
             //弹出设计器
             ShowDesignerObject = mindMapView1.SelectedTopic;
+            mindMapView1.AddOperator();
         }
 
 

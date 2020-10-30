@@ -314,12 +314,6 @@
     <Compile Include="Dialogs\C1OperatorViews\UnionOperatorView.Designer.cs">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\C2OperatorViews\Base\C2BaseOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\C2OperatorViews\Base\C2BaseOperatorView.Designer.cs">
-      <DependentUpon>C2BaseOperatorView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2CustomOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -675,6 +669,12 @@
     </Compile>
     <Compile Include="Controls\Misc\ImageListBox.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\VisualDisplayDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\VisualDisplayDialog.Designer.cs">
+      <DependentUpon>VisualDisplayDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CanvasForm.cs">
       <SubType>Form</SubType>
@@ -1542,6 +1542,9 @@
     <EmbeddedResource Include="Dialogs\TimerDialog.resx">
       <DependentUpon>TimerDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VisualDisplayDialog.resx">
+      <DependentUpon>VisualDisplayDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CanvasForm.resx">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1813,6 +1816,7 @@
     <None Include="Resources\Images\stop.png" />
     <None Include="Resources\Images\strike.png" />
     <None Include="Resources\Images\svg.png" />
+    <None Include="Resources\Images\saveAllButton.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
     <None Include="Resources\Images\theme.png" />

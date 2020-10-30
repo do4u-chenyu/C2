@@ -810,12 +810,12 @@ namespace C2.Controls
 
         private bool SelectDrag()
         {
-            return Global.GetFlowControl().SelectDrag;
+            return Global.GetTopToolBarControl().SelectDrag;
         }
 
         private bool SelectFrame()
         {
-            return Global.GetFlowControl().SelectFrame;
+            return Global.GetTopToolBarControl().SelectFrame; 
         }
 
         #region 关于引脚在画线状态的改变

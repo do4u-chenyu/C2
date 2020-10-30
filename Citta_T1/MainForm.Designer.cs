@@ -462,10 +462,10 @@ namespace C2
             // logLabel
             // 
             this.logLabel.AutoSize = true;
-            this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.logLabel.Location = new System.Drawing.Point(120, 4);
+            this.logLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.logLabel.Location = new System.Drawing.Point(120, 8);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(92, 27);
+            this.logLabel.Size = new System.Drawing.Size(74, 22);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
@@ -474,10 +474,11 @@ namespace C2
             // pyControlLabel
             // 
             this.pyControlLabel.AutoSize = true;
-            this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.pyControlLabel.Location = new System.Drawing.Point(226, 4);
+            this.pyControlLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pyControlLabel.Location = new System.Drawing.Point(236, 8);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(72, 27);
+            this.pyControlLabel.Size = new System.Drawing.Size(58, 22);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
@@ -486,10 +487,11 @@ namespace C2
             // previewLabel
             // 
             this.previewLabel.AutoSize = true;
-            this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.previewLabel.Location = new System.Drawing.Point(14, 4);
+            this.previewLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.previewLabel.Location = new System.Drawing.Point(14, 8);
             this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(92, 27);
+            this.previewLabel.Size = new System.Drawing.Size(74, 22);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
@@ -516,14 +518,6 @@ namespace C2
             this.workSpacePanel.Name = "workSpacePanel";
             this.workSpacePanel.Size = new System.Drawing.Size(910, 528);
             this.workSpacePanel.TabIndex = 10;
-            // 
-            // mdiWorkSpace
-            // 
-            this.mdiWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mdiWorkSpace.Location = new System.Drawing.Point(0, 0);
-            this.mdiWorkSpace.Name = "mdiWorkSpace";
-            this.mdiWorkSpace.Size = new System.Drawing.Size(910, 248);
-            this.mdiWorkSpace.TabIndex = 8;
             // 
             // bottomViewPanel
             // 
@@ -602,6 +596,14 @@ namespace C2
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(394, 39);
             this.panel8.TabIndex = 0;
+            // 
+            // mdiWorkSpace
+            // 
+            this.mdiWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mdiWorkSpace.Location = new System.Drawing.Point(0, 0);
+            this.mdiWorkSpace.Name = "mdiWorkSpace";
+            this.mdiWorkSpace.Size = new System.Drawing.Size(910, 528);
+            this.mdiWorkSpace.TabIndex = 8;
             // 
             // tabPanel
             // 

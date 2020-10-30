@@ -104,36 +104,21 @@ namespace C2.Controls.MapViews
             }
         }
 
-        public void AddOperator(string opType)
+        public void AddOperator()
         {
             foreach(Topic topic in SelectedTopics)
             {
-                foreach(Widget w in topic.Widgets)
-                {
-                    if (w.GetTypeID() == "OPERATOR")
-                    {
-                        MessageBox.Show("已存在算子挂件，请删除原挂件后再添加。");
-                        return;
-                    }
-                }
+                if (topic.FindWidget<OperatorWidget>() != null)
+                    return;
             }
 
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
                 var template = new OperatorWidget();
-                template.OpType = opType; 
                 AddWidget(OperatorWidget.TypeID, template, false);
             }
         }
 
-        public void AddDataSource()
-        {
-            if (SelectedTopics != null && SelectedTopics.Length > 0)
-            {
-                var template = new DataSourceWidget();
-                AddWidget(DataSourceWidget.TypeID, template, false);
-            }
-        }
         public void AddDataSource(Topic[] hitTopic,DataItem dataItem)
         { 
             var template = new DataSourceWidget();
@@ -141,15 +126,13 @@ namespace C2.Controls.MapViews
             AddWidgetCommand command = new AddWidgetCommand(hitTopic, DataSourceWidget.TypeID, template);
             ExecuteCommand(command);
         }
-        public void AddResult()
+        public void AddResult(Topic[] hitTopic, DataItem dataItem)
         {
-            if (SelectedTopics != null && SelectedTopics.Length > 0)
-            {
-                var template = new ResultWidget();
-                AddWidget(ResultWidget.TypeID, template, false);
-            }
+            var template = new ResultWidget();
+            template.DataItems.Add(dataItem);
+            AddWidgetCommand command = new AddWidgetCommand(hitTopic, ResultWidget.TypeID, template);
+            ExecuteCommand(command);
         }
-
 
         void AddWidget(string typeID, Widget template, bool showDialog)
         {

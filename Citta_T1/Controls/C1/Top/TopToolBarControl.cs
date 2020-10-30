@@ -44,7 +44,8 @@ namespace C2.Controls.Top
             // 拖拽
             if (SelectDrag)
             {
-                Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
+                //Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
+                Global.GetCanvasPanel().Cursor = Helper.LoadCursor(Properties.Resources.hand_cur);
             }
             // 框选
             else if (SelectFrame)
@@ -133,9 +134,9 @@ namespace C2.Controls.Top
 
         private void DragChange(bool flag)
         {
-          
+            
         }
-   
+
         public void RemarkChange(bool flag)
         {
           
@@ -143,6 +144,7 @@ namespace C2.Controls.Top
         private void FrameChange(bool flag)
         {
             Global.GetCurrentDocument().Show();
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             
         }
         public void InterruptSelectFrame()

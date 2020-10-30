@@ -24,7 +24,7 @@ namespace C2.Core
         public bool IsEmpty()
         {
             // 必须有表头,如果连表头都没有,就认定为空
-            // TODO dk 然而存在表头为空的文件
+            // dk 然而存在表头为空的文件
             return String.IsNullOrEmpty(headColumnLine) && String.IsNullOrEmpty(previewFileContent);
         }
 
