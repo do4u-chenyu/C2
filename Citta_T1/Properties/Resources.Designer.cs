@@ -1053,6 +1053,7 @@ namespace C2.Properties {
                 object obj = ResourceManager.GetObject("hand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
+
         }
         
         /// <summary>
@@ -1063,6 +1064,7 @@ namespace C2.Properties {
                 object obj = ResourceManager.GetObject("hand_cur", resourceCulture);
                 return ((byte[])(obj));
             }
+            
         }
         
         /// <summary>

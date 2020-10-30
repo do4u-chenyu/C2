@@ -133,7 +133,7 @@
             this.movePictureBox.BackColor = System.Drawing.Color.GhostWhite;
             this.movePictureBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.movePictureBox.ForeColor = System.Drawing.Color.GhostWhite;
-            this.movePictureBox.Image = global::C2.Properties.Resources.cursor;
+            this.movePictureBox.Image = global::C2.Properties.Resources.hand;
             this.movePictureBox.Location = new System.Drawing.Point(393, 2);
             this.movePictureBox.Name = "movePictureBox";
             this.movePictureBox.Size = new System.Drawing.Size(32, 32);
@@ -148,7 +148,7 @@
             this.framePictureBox.BackColor = System.Drawing.Color.GhostWhite;
             this.framePictureBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.framePictureBox.ForeColor = System.Drawing.Color.GhostWhite;
-            this.framePictureBox.Image = global::C2.Properties.Resources.hand;
+            this.framePictureBox.Image = global::C2.Properties.Resources.cursor;
             this.framePictureBox.Location = new System.Drawing.Point(430, 2);
             this.framePictureBox.Name = "framePictureBox";
             this.framePictureBox.Size = new System.Drawing.Size(32, 32);
