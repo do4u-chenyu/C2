@@ -85,7 +85,7 @@ namespace C2.Controls.Title
             ////文档没有被选中返回
             //if (this.BorderStyle != BorderStyle.FixedSingle)
             //    return;
-            //ModelTitlePanel parentPanel = Global.GetModelTitlePanel();
+            //ModelTitlePanel parentPanel = Global.GetTaskBar();
             //CanvasForm mainForm = Global.GetCanvsaForm();
             ////判断当前模型是否正在运行，运行中的不能关闭
             //if(Global.GetCurrentDocument().TaskManager.ModelStatus == ModelStatus.Running || Global.GetCurrentDocument().TaskManager.ModelStatus == ModelStatus.Pause)

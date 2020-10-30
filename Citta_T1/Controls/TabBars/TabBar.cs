@@ -2324,5 +2324,9 @@ namespace C2.Controls
         {
             return HalfDisplayItems != null && HalfDisplayItems.Contains(item);
         }
+        public bool ContainModel(string modelName)
+        {
+            return GetItemByTag(modelName) != null;
+        }
     }
 }

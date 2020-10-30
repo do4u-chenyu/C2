@@ -57,7 +57,7 @@ namespace C2.Forms
             this.canvasPanel.Document = modelDoc;
             this.modelDocumentDao = new ModelDocumentDao(modelDoc);
             this.optionDao = new OptionDao();
-            this.userName = "Admin";
+            this.userName = Global.GetMainForm().UserName;
             InitializeMainFormEventHandler();
         }
 
@@ -69,40 +69,8 @@ namespace C2.Forms
             //this.modelTitlePanel.NewModelDocument += ModelTitlePanel_NewModelDocument;
             //this.modelTitlePanel.ModelDocumentSwitch += ModelTitlePanel_DocumentSwitch;
             this.canvasPanel.NewElementEvent += NewDocumentOperator;
-            this.remarkControl.RemarkChangeEvent += RemarkChange;
+            //this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
-        //private void ModelTitlePanel_NewModelDocument(string modelTitle)
-        //{
-        //    this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);
-        //}
-        //private void ModelTitlePanel_DocumentSwitch(string modelTitle)
-        //{
-        //    this.modelDocumentDao.SwitchDocument(modelTitle);
-        //    this.naviViewControl.UpdateNaviView();
-        //    // 切换文档时，需要暂时关闭remark的TextChange事件
-        //    this.remarkControl.RemarkChangeEvent -= RemarkChange;
-        //    this.remarkControl.RemarkDescription = this.modelDocumentDao.RemarkDescription;
-        //    this.remarkControl.RemarkChangeEvent += RemarkChange;
-        //    // 切换文档时, 显示或隐藏备注控件
-        //    if (Global.GetCurrentDocument().RemarkVisible)
-        //        this.remarkControl.Show();
-        //    else
-        //        this.remarkControl.Hide();
-        //    // 切换文档时，浮动工具栏的显示和隐藏
-        //    if (Global.GetCurrentDocument().FlowControlVisible)
-        //        this.flowControl.Show();
-        //    else
-        //        this.flowControl.Hide();
-        //    // 切换文档时, 浮动框备注框选中状态切换
-        //    Global.GetFlowControl().SelectRemark = Global.GetCurrentDocument().RemarkVisible;
-        //    Global.GetFlowControl().RemarkChange(Global.GetFlowControl().SelectRemark);
-        //    // 重绘所有Relation线
-        //    this.canvasPanel.Invalidate(false);
-        //    //切换文档时，更新运行按钮图标及进度条
-        //    UpdateRunbuttonImageInfo();
-        //    //切换文档时,更新撤回/重做按钮状态
-        //    UpdateUndoRedoButton();
-        //}
         private void NewDocumentOperator(MoveBaseControl ct)
         {
             ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
@@ -112,11 +80,6 @@ namespace C2.Forms
                 BaseCommand cmd = new ElementAddCommand(me);
                 UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
             }
-        }
-        private void RemarkChange(RemarkControl rc)
-        {
-            SetDocumentDirty();
-            this.modelDocumentDao.UpdateRemark(rc);
         }
         public void SetDocumentDirty()
         {
@@ -479,6 +442,10 @@ namespace C2.Forms
         #region 文档加载
         public void LoadDocument(string modelTitle)
         {
+            // TODO 就不该有多个doc
+            this.modelDocumentDao.CurrentDocument = new ModelDocument(modelTitle, userName);
+            this.modelDocumentDao.CurrentDocument.Load();
+            this.Show();
             //this.modelTitlePanel.AddModel(modelTitle);
             //this.modelDocumentDao.CurrentDocument.Load();
             //this.modelDocumentDao.CurrentDocument.ReCountDocumentMaxElementID();
@@ -490,6 +457,13 @@ namespace C2.Forms
             //this.remarkControl.RemarkDescription = this.modelDocumentDao.RemarkDescription;
             //this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
+        #endregion
+        #region 被干掉的方法
+        //private void RemarkChange(RemarkControl rc)
+        //{
+        //    SetDocumentDirty();
+        //    this.modelDocumentDao.UpdateRemark(rc);
+        //}
         #endregion
     }
 }
