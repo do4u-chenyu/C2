@@ -277,11 +277,11 @@ namespace C2.Controls.MapViews
                 MenuViewData.Text = Lang._("ViewData");
                 MenuViewData.Click += MenuViewData_Click;
 
-                MenuDealData.Image = Properties.Resources.getchart;
+                MenuDealData.Image = Properties.Resources.dealData;
                 MenuDealData.Text = Lang._("DealData");
                 MenuDealData.Click += MenuDealData_Click;
 
-                MenuJoinPool.Image = Properties.Resources.deletewidget;
+                MenuJoinPool.Image = Properties.Resources.joinPool;
                 MenuJoinPool.Text = Lang._("JoinPool");
                 MenuJoinPool.Tag = dataItem;
                 MenuJoinPool.Click += MenuJoinPool_Click;
