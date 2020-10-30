@@ -151,6 +151,7 @@ namespace C2.Controls.MapViews
             {
                 Topic[] hitTopic = new Topic[] { htr.Topic };
                 AddDataSource(hitTopic, dataItem);
+                AddResult(hitTopic, dataItem);
                 return;
             }
             if (dsw.DataItems.Find((DataItem x) => x.FilePath.Equals(dataItem.FilePath)) == null)
