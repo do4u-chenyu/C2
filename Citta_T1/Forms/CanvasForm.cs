@@ -154,7 +154,7 @@ namespace C2.Forms
             //运行状态动图、进度条定位
             this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
             this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
-            this.progressBar1.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
+            this.progressBar.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
             this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
@@ -239,9 +239,9 @@ namespace C2.Forms
                 }
                 currentManager.Start();
                 int taskNum = currentManager.CountOpStatus(ElementStatus.Ready);
-                this.progressBar1.Step = taskNum > 0 ? 100 / taskNum : 100;
+                this.progressBar.Step = taskNum > 0 ? 100 / taskNum : 100;
 
-                this.progressBar1.Value = 0;
+                this.progressBar.Value = 0;
                 this.progressBarLabel.Text = "0%";
             }
             else if (this.runButton.Name == "pauseButton")
@@ -293,8 +293,8 @@ namespace C2.Forms
             if (manager.ModelStatus == ModelStatus.Running)
                 this.Invoke(new AsynUpdateProgressBar(delegate ()
                 {
-                    this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
-                    this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
+                    this.progressBar.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
+                    this.progressBarLabel.Text = this.progressBar.Value.ToString() + "%";
                 }));
         }
 
@@ -325,7 +325,7 @@ namespace C2.Forms
             else if (manager.ModelStatus == ModelStatus.Done)
                 this.Invoke(new AsynUpdateGif(delegate ()
                 {
-                    this.progressBar1.Hide();
+                    this.progressBar.Hide();
                     this.progressBarLabel.Hide();
                     this.currentModelFinLab.Hide();
                 }));
@@ -359,7 +359,7 @@ namespace C2.Forms
                     this.runButton.Image = global::C2.Properties.Resources.continual;
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
-                    this.progressBar1.Hide();
+                    this.progressBar.Hide();
                     this.progressBarLabel.Hide();
                     EnableRunningRsControl();
                     break;
@@ -371,10 +371,10 @@ namespace C2.Forms
                     this.runButton.Enabled = false;//暂时隐去暂停功能
                     this.currentModelRunBackLab.Show();
                     this.currentModelRunLab.Show();
-                    this.progressBar1.Show();
+                    this.progressBar.Show();
                     this.progressBarLabel.Show();
-                    this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
-                    this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
+                    this.progressBar.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
+                    this.progressBarLabel.Text = this.progressBar.Value.ToString() + "%";
                     UnEnableRunningControl();
                     break;
                 case ModelStatus.GifDone:
@@ -389,7 +389,7 @@ namespace C2.Forms
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Hide();
-                    this.progressBar1.Hide();
+                    this.progressBar.Hide();
                     this.progressBarLabel.Hide();
                     EnableRunningControl();
                     break;
@@ -430,8 +430,8 @@ namespace C2.Forms
         private void EnableCommonControl(bool status)
         {
             this.topToolBarControl.Enabled = status;
-            //this.panel5.Enabled = status;
-            //this.leftToolBoxPanel.Enabled = status;
+            this.operatorControl.Enabled = status;
+            Global.GetLeftToolBoxPanel().Enabled = status;
             this.flowControl.Enabled = status;
         }
         #endregion

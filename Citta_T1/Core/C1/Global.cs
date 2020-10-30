@@ -7,6 +7,7 @@ using C2.Controls.Left;
 using C2.Controls.Title;
 using C2.Controls.Top;
 using C2.Forms;
+using C2.WorkSpace;
 using System.Windows.Forms;
 
 namespace C2.Core
@@ -32,6 +33,8 @@ namespace C2.Core
 
 
         public static MainForm GetMainForm() { return mainForm; }
+        public static MdiWorkSpace GetMdiWorkSpace() { return mainForm.MdiClient; }
+        public static Panel GetLeftToolBoxPanel() { return mainForm.LeftToolBoxPanel; }
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
         public static BottomConsoleControl GetBottomPythonConsoleControl() { return bottomPythonConsoleControl; }
         public static Control GetBottomViewPanel() { return bottomViewPanle; }

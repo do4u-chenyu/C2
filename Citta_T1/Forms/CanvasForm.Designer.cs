@@ -33,20 +33,21 @@
             this.canvasPanel = new C2.Controls.CanvasPanel();
             this.topToolBarControl = new C2.Controls.Top.TopToolBarControl();
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
-            this.currentModelFinLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
+            this.currentModelFinLab = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.resetButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.rightShowButton = new C2.Controls.Flow.RightShowButton();
             this.rightHideButton = new C2.Controls.Flow.RightHideButton();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.remarkControl = new C2.Controls.Flow.RemarkControl();
             this.flowControl = new C2.Controls.Flow.FlowControl();
             this.operatorControl = new C2.Controls.Left.OperatorControl();
             this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
+            this.currentModelRunBackLab.SuspendLayout();
             this.SuspendLayout();
             // 
             // canvasPanel
@@ -80,15 +81,6 @@
             this.topToolBarControl.Size = new System.Drawing.Size(1106, 33);
             this.topToolBarControl.TabIndex = 25;
             // 
-            // currentModelRunBackLab
-            // 
-            this.currentModelRunBackLab.Image = global::C2.Properties.Resources.currentModelRunningBack;
-            this.currentModelRunBackLab.Location = new System.Drawing.Point(300, 68);
-            this.currentModelRunBackLab.Name = "currentModelRunBackLab";
-            this.currentModelRunBackLab.Size = new System.Drawing.Size(150, 100);
-            this.currentModelRunBackLab.TabIndex = 26;
-            this.currentModelRunBackLab.Visible = false;
-            // 
             // currentModelFinLab
             // 
             this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
@@ -98,12 +90,24 @@
             this.currentModelFinLab.TabIndex = 27;
             this.currentModelFinLab.Visible = false;
             // 
+            // currentModelRunBackLab
+            // 
+            this.currentModelRunBackLab.Controls.Add(this.currentModelRunLab);
+            this.currentModelRunBackLab.Image = global::C2.Properties.Resources.currentModelRunningBack;
+            this.currentModelRunBackLab.Location = new System.Drawing.Point(300, 68);
+            this.currentModelRunBackLab.Name = "currentModelRunBackLab";
+            this.currentModelRunBackLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelRunBackLab.TabIndex = 26;
+            this.currentModelRunBackLab.Visible = false;
+            // 
             // currentModelRunLab
             // 
+            this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.currentModelRunLab.Cursor = System.Windows.Forms.Cursors.Hand;
             this.currentModelRunLab.Image = global::C2.Properties.Resources.currentModelRunning;
-            this.currentModelRunLab.Location = new System.Drawing.Point(456, 68);
+            this.currentModelRunLab.Location = new System.Drawing.Point(336, 87);
             this.currentModelRunLab.Name = "currentModelRunLab";
-            this.currentModelRunLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelRunLab.Size = new System.Drawing.Size(73, 47);
             this.currentModelRunLab.TabIndex = 28;
             this.currentModelRunLab.Visible = false;
             // 
@@ -181,13 +185,13 @@
             this.rightHideButton.Size = new System.Drawing.Size(55, 55);
             this.rightHideButton.TabIndex = 33;
             // 
-            // progressBar1
+            // progressBar
             // 
-            this.progressBar1.Location = new System.Drawing.Point(806, 107);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(125, 10);
-            this.progressBar1.TabIndex = 35;
-            this.progressBar1.Visible = false;
+            this.progressBar.Location = new System.Drawing.Point(806, 107);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(125, 10);
+            this.progressBar.TabIndex = 35;
+            this.progressBar.Visible = false;
             // 
             // progressBarLabel
             // 
@@ -236,7 +240,7 @@
             this.operatorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.operatorControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.operatorControl.Location = new System.Drawing.Point(435, -61);
+            this.operatorControl.Location = new System.Drawing.Point(257, 171);
             this.operatorControl.Name = "operatorControl";
             this.operatorControl.Size = new System.Drawing.Size(215, 320);
             this.operatorControl.TabIndex = 40;
@@ -262,13 +266,12 @@
             this.Controls.Add(this.remarkControl);
             this.Controls.Add(this.flowControl);
             this.Controls.Add(this.progressBarLabel);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.rightShowButton);
             this.Controls.Add(this.rightHideButton);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.runButton);
-            this.Controls.Add(this.currentModelRunLab);
             this.Controls.Add(this.currentModelFinLab);
             this.Controls.Add(this.currentModelRunBackLab);
             this.Controls.Add(this.canvasPanel);
@@ -278,6 +281,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CanvasForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CanvasForm_FormClosed);
             this.SizeChanged += new System.EventHandler(this.CanvasForm_SizeChanged);
+            this.currentModelRunBackLab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,7 +300,7 @@
         private System.Windows.Forms.Button runButton;
         private Controls.Flow.RightShowButton rightShowButton;
         private Controls.Flow.RightHideButton rightHideButton;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label progressBarLabel;
         private Controls.Flow.RemarkControl remarkControl;
         private Controls.Flow.FlowControl flowControl;

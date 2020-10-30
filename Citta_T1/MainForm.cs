@@ -49,6 +49,7 @@ namespace C2
     {
         public string UserName { get => this.userName; set => this.userName = value; }
         public Control BottomViewPanel { get { return this.bottomViewPanel; } }
+        public Panel LeftToolBoxPanel { get { return this.leftToolBoxPanel; } }
         #region
         SpecialTabItem TabNew;
         TabBarButton BtnNew;
@@ -162,6 +163,7 @@ namespace C2
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
             Global.SetLogView(this.bottomLogControl);
+            Global.SetMyModelControl(this.myModelControl);
         }
         private void InitializeControlsLocation()
         {
