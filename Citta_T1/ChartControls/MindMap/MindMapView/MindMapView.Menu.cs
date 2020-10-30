@@ -201,6 +201,7 @@ namespace C2.Controls.MapViews
         }
         void MenuDealData_Click(object sender, EventArgs e)
         {
+            AddSubTopic(rsw.Container as Topic, null, false);
         }
 
         private void CreateDataSourceMenu(DataSourceWidget dtw)
