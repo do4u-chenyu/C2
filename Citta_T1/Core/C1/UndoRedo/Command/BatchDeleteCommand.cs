@@ -34,13 +34,13 @@ namespace C2.Core.UndoRedo.Command
         private bool DoDelete()
         {
             Global.GetCanvasPanel().UndoRedoDelSelectedEles(this.mes, this.mrs);
-            Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetTopToolBarControl().InterruptSelectFrame();
             return true;
         }
         private bool DoAdd()
         {
             Global.GetCanvasPanel().UndoRedoAddSelectedEles(this.eleWorldCordDict, this.mes, this.mrs);
-            Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetTopToolBarControl().InterruptSelectFrame();
             return true;
         }
     }

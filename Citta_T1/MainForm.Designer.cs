@@ -528,7 +528,7 @@ namespace C2
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomViewPanel.Location = new System.Drawing.Point(0, 248);
             this.bottomViewPanel.Name = "bottomViewPanel";
-            this.bottomViewPanel.Size = new System.Drawing.Size(910, 280);
+            this.bottomViewPanel.Size = new System.Drawing.Size(910, 250);
             this.bottomViewPanel.TabIndex = 11;
             // 
             // bottomPreview

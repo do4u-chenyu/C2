@@ -1110,12 +1110,6 @@
     <Compile Include="Controls\C1\Flow\RemarkControl.Designer.cs">
       <DependentUpon>RemarkControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\C1\Flow\RightShowButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Flow\RightShowButton.Designer.cs">
-      <DependentUpon>RightShowButton.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\C1\Flow\RightHideButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1270,12 +1264,6 @@
     <Compile Include="Controls\C1\Bottom\BottomLogControl.Designer.cs">
       <DependentUpon>BottomLogControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\C1\Flow\FlowControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Flow\FlowControl.Designer.cs">
-      <DependentUpon>FlowControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1375,10 +1363,6 @@
       <DependentUpon>RemarkControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Flow\RightShowButton.resx">
-      <DependentUpon>RightShowButton.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Flow\RightHideButton.resx">
       <DependentUpon>RightHideButton.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1416,10 +1400,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Bottom\BottomConsoleControl.resx">
       <DependentUpon>BottomConsoleControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Flow\FlowControl.resx">
-      <DependentUpon>FlowControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\RingChart.resx">
       <DependentUpon>RingChart.cs</DependentUpon>

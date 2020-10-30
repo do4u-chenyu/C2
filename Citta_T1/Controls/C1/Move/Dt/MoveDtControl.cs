@@ -60,7 +60,7 @@ namespace C2.Controls.Move.Dt
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
+            if (Global.GetTopToolBarControl().SelectDrag || (Global.GetTopToolBarControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
                 return;
             this.DeleteMyself();
         }
@@ -140,7 +140,7 @@ namespace C2.Controls.Move.Dt
         private void MoveDtControl_MouseMove(object sender, MouseEventArgs e)
         {
             bool isNeedMoveLine = false;
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (cmd == ECommandType.Null)
@@ -186,7 +186,7 @@ namespace C2.Controls.Move.Dt
 
         private void MoveDtControl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             if (e.Button == MouseButtons.Left)
             {
@@ -211,7 +211,7 @@ namespace C2.Controls.Move.Dt
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
@@ -224,7 +224,7 @@ namespace C2.Controls.Move.Dt
 
         private void MoveDtControl_MouseUp(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             if (e.Button == MouseButtons.Left)
             {
@@ -274,7 +274,7 @@ namespace C2.Controls.Move.Dt
         #region 右键菜单
         private void OptionMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
         }
         #endregion

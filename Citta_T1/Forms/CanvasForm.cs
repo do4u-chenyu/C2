@@ -32,7 +32,6 @@ namespace C2.Forms
         public ModelDocument Document { get { return this.document; } }
         public CanvasPanel CanvasPanel{ get { return this.canvasPanel; }}
         public RemarkControl RemarkControl { get { return this.remarkControl; } }
-        public FlowControl FlowControl { get { return this.flowControl; } }
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
         public OptionDao OptionDao { get { return this.optionDao; } }
         public ModelDocumentDao ModelDocumentDao { get { return this.modelDocumentDao; } }
@@ -158,11 +157,9 @@ namespace C2.Forms
             this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            this.flowControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 35);
-            this.operatorControl.Location = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 90);
-            this.remarkControl.Location = new Point(this.canvasPanel.Width - 205 - this.flowControl.Width, this.flowControl.Height - 15);
-            this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width, 35);
-            this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width, 35 + this.rightHideButton.Width);
+            this.operatorControl.Location = new Point(this.canvasPanel.Width -280 , 35);
+            this.remarkControl.Location = new Point(this.canvasPanel.Width - 420 , 33);
+            this.rightHideButton.Location = new Point(this.canvasPanel.Width - 60, 35);
 
             //// 右上用户名，头像
             //int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
@@ -177,7 +174,7 @@ namespace C2.Forms
         private void ResetButton_Click(object sender, EventArgs e)
         {
             //重置前打断框选、选中线
-            Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetTopToolBarControl().InterruptSelectFrame();
             Global.GetCanvasPanel().ClearAllLineStatus();
 
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
@@ -197,7 +194,7 @@ namespace C2.Forms
         private void StopButton_Click(object sender, EventArgs e)
         {
             //终止前打断框选、选中线
-            Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetTopToolBarControl().InterruptSelectFrame();
             Global.GetCanvasPanel().ClearAllLineStatus();
 
             if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
@@ -210,7 +207,7 @@ namespace C2.Forms
         private void RunButton_Click(object sender, EventArgs e)
         {
             //运算前打断框选、选中线
-            Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetTopToolBarControl().InterruptSelectFrame();
             Global.GetCanvasPanel().ClearAllLineStatus();
 
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
@@ -432,7 +429,7 @@ namespace C2.Forms
             this.topToolBarControl.Enabled = status;
             //this.panel5.Enabled = status;
             //this.leftToolBoxPanel.Enabled = status;
-            this.flowControl.Enabled = status;
+   
         }
         #endregion
 

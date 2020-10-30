@@ -39,12 +39,10 @@
             this.resetButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
-            this.rightShowButton = new C2.Controls.Flow.RightShowButton();
             this.rightHideButton = new C2.Controls.Flow.RightHideButton();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.remarkControl = new C2.Controls.Flow.RemarkControl();
-            this.flowControl = new C2.Controls.Flow.FlowControl();
             this.operatorControl = new C2.Controls.Left.OperatorControl();
             this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
             this.SuspendLayout();
@@ -161,16 +159,6 @@
             this.runButton.UseVisualStyleBackColor = false;
             this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
-            // rightShowButton
-            // 
-            this.rightShowButton.BackColor = System.Drawing.Color.Transparent;
-            this.rightShowButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rightShowButton.BackgroundImage")));
-            this.rightShowButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.rightShowButton.Location = new System.Drawing.Point(122, 39);
-            this.rightShowButton.Name = "rightShowButton";
-            this.rightShowButton.Size = new System.Drawing.Size(55, 55);
-            this.rightShowButton.TabIndex = 34;
-            // 
             // rightHideButton
             // 
             this.rightHideButton.BackColor = System.Drawing.Color.Transparent;
@@ -215,28 +203,13 @@
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
             // 
-            // flowControl
-            // 
-            this.flowControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
-            this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
-            this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.flowControl.Cursor = System.Windows.Forms.Cursors.Default;
-            this.flowControl.Location = new System.Drawing.Point(687, 50);
-            this.flowControl.Margin = new System.Windows.Forms.Padding(4);
-            this.flowControl.Name = "flowControl";
-            this.flowControl.SelectDrag = false;
-            this.flowControl.SelectFrame = false;
-            this.flowControl.SelectRemark = false;
-            this.flowControl.Size = new System.Drawing.Size(209, 51);
-            this.flowControl.TabIndex = 25;
-            // 
             // operatorControl
             // 
             this.operatorControl.AllowDrop = true;
             this.operatorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.operatorControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.operatorControl.Location = new System.Drawing.Point(435, -61);
+            this.operatorControl.Location = new System.Drawing.Point(435, 61);
             this.operatorControl.Name = "operatorControl";
             this.operatorControl.Size = new System.Drawing.Size(215, 320);
             this.operatorControl.TabIndex = 40;
@@ -260,10 +233,8 @@
             this.Controls.Add(this.naviViewControl);
             this.Controls.Add(this.operatorControl);
             this.Controls.Add(this.remarkControl);
-            this.Controls.Add(this.flowControl);
             this.Controls.Add(this.progressBarLabel);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.rightShowButton);
             this.Controls.Add(this.rightHideButton);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.stopButton);
@@ -294,12 +265,10 @@
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button runButton;
-        private Controls.Flow.RightShowButton rightShowButton;
         private Controls.Flow.RightHideButton rightHideButton;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label progressBarLabel;
         private Controls.Flow.RemarkControl remarkControl;
-        private Controls.Flow.FlowControl flowControl;
         private Controls.Left.OperatorControl operatorControl;
         private Controls.Flow.NaviViewControl naviViewControl;
     }

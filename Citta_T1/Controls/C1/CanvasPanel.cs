@@ -182,7 +182,7 @@ namespace C2.Controls
                     return;
                 }
                 
-                Global.GetFlowControl().ResetStatus();
+                Global.GetTopToolBarControl().ResetStatus();
                 frameWrapper.MinBoundingBox = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态 
                 this.Invalidate();
             }

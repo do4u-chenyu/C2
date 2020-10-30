@@ -18,7 +18,6 @@ namespace C2.Core
         private static NaviViewControl naviViewControl;
         private static CanvasPanel canvasPanel;
         private static ModelDocumentDao modelDocumentDao;   // 用户模型工具类
-        private static FlowControl flowControl;
         private static OperatorControl operatorControl; 
         private static MyModelControl myModelControl;
         private static RemarkControl remarkControl;
@@ -76,13 +75,7 @@ namespace C2.Core
                 ret = Global.GetCanvasForm().Document;
             return ret;
         }
-        public static FlowControl GetFlowControl()
-        {
-            FlowControl ret = null;
-            if (Global.GetCanvasForm() != null)
-                ret = Global.GetCanvasForm().FlowControl;
-            return ret;
-        }
+       
         public static OperatorControl GetOperatorControl() {
             OperatorControl ret = null;
             if (Global.GetCanvasForm() != null)
@@ -118,7 +111,7 @@ namespace C2.Core
         public static void SetNaviViewControl(NaviViewControl nvc) { naviViewControl = nvc; }
         public static void SetCanvasPanel(CanvasPanel cp) { canvasPanel = cp; }
         public static void SetModelDocumentDao(ModelDocumentDao mdd) { modelDocumentDao = mdd; }
-        public static void SetFlowControl(FlowControl fc) { flowControl = fc; }
+        //public static void SetFlowControl(FlowControl fc) { flowControl = fc; }
         public static void SetOperatorControl(OperatorControl oc) { operatorControl = oc; }
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
         public static void SetRemarkControl(RemarkControl rc) { remarkControl = rc; }
