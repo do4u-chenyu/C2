@@ -1053,7 +1053,6 @@ namespace C2.Properties {
                 object obj = ResourceManager.GetObject("hand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
-
         }
         
         /// <summary>
@@ -1064,7 +1063,6 @@ namespace C2.Properties {
                 object obj = ResourceManager.GetObject("hand_cur", resourceCulture);
                 return ((byte[])(obj));
             }
-            
         }
         
         /// <summary>
@@ -2229,6 +2227,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap saveall {
             get {
                 object obj = ResourceManager.GetObject("saveall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap saveAllButton {
+            get {
+                object obj = ResourceManager.GetObject("saveAllButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

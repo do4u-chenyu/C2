@@ -70,7 +70,7 @@
             // 
             // topToolBarControl
             // 
-            this.topToolBarControl.BackColor = System.Drawing.Color.GhostWhite;
+            this.topToolBarControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.topToolBarControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.topToolBarControl.Location = new System.Drawing.Point(0, 0);
             this.topToolBarControl.Name = "topToolBarControl";
