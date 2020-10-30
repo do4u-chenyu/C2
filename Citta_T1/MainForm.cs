@@ -161,10 +161,12 @@ namespace C2
         private void InitializeGlobalVariable()
         {
             Global.SetMainForm(this);
-            Global.SetBottomViewPanel(this.bottomViewPanel);
-            Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
-            Global.SetLogView(this.bottomLogControl);
+            Global.SetTaskBar(this.TaskBar);
+            Global.SetLeftToolBoxPanel(this.leftToolBoxPanel);
+            Global.SetDataSourceControl(this.dataSourceControl);
             Global.SetMyModelControl(this.myModelControl);
+            Global.SetLogView(this.bottomLogControl);
+            Global.SetBottomViewPanel(this.bottomViewPanel);
         }
         private void InitializeControlsLocation()
         {
