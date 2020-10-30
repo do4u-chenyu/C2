@@ -71,7 +71,7 @@ namespace C2
             this.pyControlLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.mainWorkSpace = new System.Windows.Forms.Panel();
+            this.workSpacePanel = new System.Windows.Forms.Panel();
             this.mdiWorkSpace = new C2.WorkSpace.MdiWorkSpace();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.bottomPreview = new C2.Controls.Bottom.BottomPreviewControl();
@@ -93,7 +93,7 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.MainPanel.SuspendLayout();
-            this.mainWorkSpace.SuspendLayout();
+            this.workSpacePanel.SuspendLayout();
             this.bottomViewPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -497,7 +497,7 @@ namespace C2
             // 
             // MainPanel
             // 
-            this.MainPanel.Controls.Add(this.mainWorkSpace);
+            this.MainPanel.Controls.Add(this.workSpacePanel);
             this.MainPanel.Controls.Add(this.tabPanel);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(323, 46);
@@ -506,16 +506,16 @@ namespace C2
             this.MainPanel.TabIndex = 7;
             this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
-            // mainWorkSpace
+            // workSpacePanel
             // 
-            this.mainWorkSpace.Controls.Add(this.leftFoldPanel);
-            this.mainWorkSpace.Controls.Add(this.mdiWorkSpace);
-            this.mainWorkSpace.Controls.Add(this.bottomViewPanel);
-            this.mainWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainWorkSpace.Location = new System.Drawing.Point(0, 32);
-            this.mainWorkSpace.Name = "mainWorkSpace";
-            this.mainWorkSpace.Size = new System.Drawing.Size(910, 528);
-            this.mainWorkSpace.TabIndex = 10;
+            this.workSpacePanel.Controls.Add(this.leftFoldPanel);
+            this.workSpacePanel.Controls.Add(this.mdiWorkSpace);
+            this.workSpacePanel.Controls.Add(this.bottomViewPanel);
+            this.workSpacePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.workSpacePanel.Location = new System.Drawing.Point(0, 32);
+            this.workSpacePanel.Name = "workSpacePanel";
+            this.workSpacePanel.Size = new System.Drawing.Size(910, 528);
+            this.workSpacePanel.TabIndex = 10;
             // 
             // mdiWorkSpace
             // 
@@ -654,7 +654,7 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
-            this.mainWorkSpace.ResumeLayout(false);
+            this.workSpacePanel.ResumeLayout(false);
             this.bottomViewPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
@@ -704,7 +704,7 @@ namespace C2
         private PictureBox leftFoldButton;
         private Controls.TaskBar taskBar;
         private Panel leftFoldPanel;
-        private Panel mainWorkSpace;
+        private Panel workSpacePanel;
         private Panel bottomViewPanel;
         private Controls.Bottom.BottomPreviewControl bottomPreview;
         private Controls.Bottom.BottomLogControl bottomLogControl;
