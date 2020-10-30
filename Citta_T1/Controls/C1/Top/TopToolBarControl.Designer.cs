@@ -41,14 +41,16 @@
             this.framePictureBox = new System.Windows.Forms.Button();
             this.undoButton = new System.Windows.Forms.Button();
             this.redoButton = new System.Windows.Forms.Button();
+            this.saveAllButton = new System.Windows.Forms.Button();
+            this.saveModelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // formatButton
             // 
             this.formatButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.formatButton.ForeColor = System.Drawing.Color.GhostWhite;
+            this.formatButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.formatButton.Image = ((System.Drawing.Image)(resources.GetObject("formatButton.Image")));
-            this.formatButton.Location = new System.Drawing.Point(161, 1);
+            this.formatButton.Location = new System.Drawing.Point(231, 0);
             this.formatButton.Name = "formatButton";
             this.formatButton.Size = new System.Drawing.Size(32, 32);
             this.formatButton.TabIndex = 0;
@@ -59,9 +61,9 @@
             // moreButton
             // 
             this.moreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moreButton.ForeColor = System.Drawing.Color.GhostWhite;
+            this.moreButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.moreButton.Image = ((System.Drawing.Image)(resources.GetObject("moreButton.Image")));
-            this.moreButton.Location = new System.Drawing.Point(201, 1);
+            this.moreButton.Location = new System.Drawing.Point(421, 0);
             this.moreButton.Name = "moreButton";
             this.moreButton.Size = new System.Drawing.Size(32, 32);
             this.moreButton.TabIndex = 0;
@@ -72,11 +74,11 @@
             // 
             // ImportModel
             // 
-            this.ImportModel.BackColor = System.Drawing.Color.GhostWhite;
+            this.ImportModel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.ImportModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ImportModel.ForeColor = System.Drawing.Color.GhostWhite;
+            this.ImportModel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.ImportModel.Image = global::C2.Properties.Resources.importmodel;
-            this.ImportModel.Location = new System.Drawing.Point(241, 0);
+            this.ImportModel.Location = new System.Drawing.Point(79, 0);
             this.ImportModel.Name = "ImportModel";
             this.ImportModel.Size = new System.Drawing.Size(32, 32);
             this.ImportModel.TabIndex = 1;
@@ -86,11 +88,11 @@
             // 
             // remarkPictureBox
             // 
-            this.remarkPictureBox.BackColor = System.Drawing.Color.GhostWhite;
+            this.remarkPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.remarkPictureBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.remarkPictureBox.ForeColor = System.Drawing.Color.GhostWhite;
-            this.remarkPictureBox.Image = global::C2.Properties.Resources.appearance;
-            this.remarkPictureBox.Location = new System.Drawing.Point(279, 2);
+            this.remarkPictureBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.remarkPictureBox.Image = global::C2.Properties.Resources.notes;
+            this.remarkPictureBox.Location = new System.Drawing.Point(193, 0);
             this.remarkPictureBox.Name = "remarkPictureBox";
             this.remarkPictureBox.Size = new System.Drawing.Size(32, 32);
             this.remarkPictureBox.TabIndex = 2;
@@ -100,13 +102,13 @@
             // 
             // zoomUpPictureBox
             // 
-            this.zoomUpPictureBox.BackColor = System.Drawing.Color.GhostWhite;
+            this.zoomUpPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.zoomUpPictureBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.zoomUpPictureBox.ForeColor = System.Drawing.Color.GhostWhite;
+            this.zoomUpPictureBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.zoomUpPictureBox.Image = global::C2.Properties.Resources.zoom_in;
-            this.zoomUpPictureBox.Location = new System.Drawing.Point(317, 2);
+            this.zoomUpPictureBox.Location = new System.Drawing.Point(269, 0);
             this.zoomUpPictureBox.Name = "zoomUpPictureBox";
-            this.zoomUpPictureBox.Size = new System.Drawing.Size(32, 31);
+            this.zoomUpPictureBox.Size = new System.Drawing.Size(32, 32);
             this.zoomUpPictureBox.TabIndex = 3;
             this.zoomUpPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.zoomUpPictureBox, "放大屏幕中算子并支持三级放大");
@@ -115,11 +117,11 @@
             // 
             // zoomDownPictureBox
             // 
-            this.zoomDownPictureBox.BackColor = System.Drawing.Color.GhostWhite;
+            this.zoomDownPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.zoomDownPictureBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.zoomDownPictureBox.ForeColor = System.Drawing.Color.GhostWhite;
+            this.zoomDownPictureBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.zoomDownPictureBox.Image = global::C2.Properties.Resources.zoom_out;
-            this.zoomDownPictureBox.Location = new System.Drawing.Point(355, 2);
+            this.zoomDownPictureBox.Location = new System.Drawing.Point(307, 0);
             this.zoomDownPictureBox.Name = "zoomDownPictureBox";
             this.zoomDownPictureBox.Size = new System.Drawing.Size(32, 32);
             this.zoomDownPictureBox.TabIndex = 4;
@@ -130,11 +132,11 @@
             // 
             // movePictureBox
             // 
-            this.movePictureBox.BackColor = System.Drawing.Color.GhostWhite;
+            this.movePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.movePictureBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.movePictureBox.ForeColor = System.Drawing.Color.GhostWhite;
-            this.movePictureBox.Image = global::C2.Properties.Resources.cursor;
-            this.movePictureBox.Location = new System.Drawing.Point(393, 2);
+            this.movePictureBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.movePictureBox.Image = global::C2.Properties.Resources.hand;
+            this.movePictureBox.Location = new System.Drawing.Point(383, 0);
             this.movePictureBox.Name = "movePictureBox";
             this.movePictureBox.Size = new System.Drawing.Size(32, 32);
             this.movePictureBox.TabIndex = 5;
@@ -145,11 +147,11 @@
             // 
             // framePictureBox
             // 
-            this.framePictureBox.BackColor = System.Drawing.Color.GhostWhite;
+            this.framePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.framePictureBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.framePictureBox.ForeColor = System.Drawing.Color.GhostWhite;
-            this.framePictureBox.Image = global::C2.Properties.Resources.hand;
-            this.framePictureBox.Location = new System.Drawing.Point(430, 2);
+            this.framePictureBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.framePictureBox.Image = global::C2.Properties.Resources.cursor;
+            this.framePictureBox.Location = new System.Drawing.Point(345, 0);
             this.framePictureBox.Name = "framePictureBox";
             this.framePictureBox.Size = new System.Drawing.Size(32, 32);
             this.framePictureBox.TabIndex = 6;
@@ -162,9 +164,9 @@
             // 
             this.undoButton.Enabled = false;
             this.undoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.undoButton.ForeColor = System.Drawing.Color.GhostWhite;
+            this.undoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.undoButton.Image = ((System.Drawing.Image)(resources.GetObject("undoButton.Image")));
-            this.undoButton.Location = new System.Drawing.Point(83, 3);
+            this.undoButton.Location = new System.Drawing.Point(117, 0);
             this.undoButton.Name = "undoButton";
             this.undoButton.Size = new System.Drawing.Size(32, 32);
             this.undoButton.TabIndex = 0;
@@ -174,12 +176,12 @@
             // 
             // redoButton
             // 
-            this.redoButton.BackColor = System.Drawing.Color.GhostWhite;
+            this.redoButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.redoButton.Enabled = false;
             this.redoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.redoButton.ForeColor = System.Drawing.Color.GhostWhite;
+            this.redoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.redoButton.Image = ((System.Drawing.Image)(resources.GetObject("redoButton.Image")));
-            this.redoButton.Location = new System.Drawing.Point(121, 1);
+            this.redoButton.Location = new System.Drawing.Point(155, 0);
             this.redoButton.Name = "redoButton";
             this.redoButton.Size = new System.Drawing.Size(32, 32);
             this.redoButton.TabIndex = 0;
@@ -187,10 +189,38 @@
             this.redoButton.UseVisualStyleBackColor = false;
             this.redoButton.Click += new System.EventHandler(this.RedoButton_Click);
             // 
+            // saveAllButton
+            // 
+            this.saveAllButton.Enabled = false;
+            this.saveAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveAllButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.saveAllButton.Image = global::C2.Properties.Resources.saveAllButton;
+            this.saveAllButton.Location = new System.Drawing.Point(3, 0);
+            this.saveAllButton.Name = "saveAllButton";
+            this.saveAllButton.Size = new System.Drawing.Size(32, 32);
+            this.saveAllButton.TabIndex = 7;
+            this.saveAllButton.TabStop = false;
+            this.saveAllButton.UseVisualStyleBackColor = true;
+            // 
+            // saveModelButton
+            // 
+            this.saveModelButton.Enabled = false;
+            this.saveModelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveModelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.saveModelButton.Image = global::C2.Properties.Resources.save;
+            this.saveModelButton.Location = new System.Drawing.Point(41, 0);
+            this.saveModelButton.Name = "saveModelButton";
+            this.saveModelButton.Size = new System.Drawing.Size(32, 32);
+            this.saveModelButton.TabIndex = 8;
+            this.saveModelButton.TabStop = false;
+            this.saveModelButton.UseVisualStyleBackColor = true;
+            // 
             // TopToolBarControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.GhostWhite;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.Controls.Add(this.saveModelButton);
+            this.Controls.Add(this.saveAllButton);
             this.Controls.Add(this.framePictureBox);
             this.Controls.Add(this.movePictureBox);
             this.Controls.Add(this.zoomDownPictureBox);
@@ -220,5 +250,7 @@
         private System.Windows.Forms.Button zoomDownPictureBox;
         private System.Windows.Forms.Button movePictureBox;
         private System.Windows.Forms.Button framePictureBox;
+        private System.Windows.Forms.Button saveAllButton;
+        private System.Windows.Forms.Button saveModelButton;
     }
 }

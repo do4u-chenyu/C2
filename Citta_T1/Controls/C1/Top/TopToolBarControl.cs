@@ -44,7 +44,8 @@ namespace C2.Controls.Top
             // 拖拽
             if (SelectDrag)
             {
-                Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
+                //Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
+                Global.GetCanvasPanel().Cursor = Helper.LoadCursor(Properties.Resources.hand_cur);
             }
             // 框选
             else if (SelectFrame)
