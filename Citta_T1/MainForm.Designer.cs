@@ -519,6 +519,14 @@ namespace C2
             this.workSpacePanel.Size = new System.Drawing.Size(910, 528);
             this.workSpacePanel.TabIndex = 10;
             // 
+            // mdiWorkSpace
+            // 
+            this.mdiWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mdiWorkSpace.Location = new System.Drawing.Point(0, 0);
+            this.mdiWorkSpace.Name = "mdiWorkSpace";
+            this.mdiWorkSpace.Size = new System.Drawing.Size(910, 278);
+            this.mdiWorkSpace.TabIndex = 8;
+            // 
             // bottomViewPanel
             // 
             this.bottomViewPanel.Controls.Add(this.bottomPreview);
@@ -526,9 +534,9 @@ namespace C2
             this.bottomViewPanel.Controls.Add(this.bottomPyConsole);
             this.bottomViewPanel.Controls.Add(this.panel4);
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomViewPanel.Location = new System.Drawing.Point(0, 248);
+            this.bottomViewPanel.Location = new System.Drawing.Point(0, 278);
             this.bottomViewPanel.Name = "bottomViewPanel";
-            this.bottomViewPanel.Size = new System.Drawing.Size(910, 250);
+            this.bottomViewPanel.Size = new System.Drawing.Size(910, 200);
             this.bottomViewPanel.TabIndex = 11;
             // 
             // bottomPreview
@@ -536,7 +544,7 @@ namespace C2
             this.bottomPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomPreview.Location = new System.Drawing.Point(0, 39);
             this.bottomPreview.Name = "bottomPreview";
-            this.bottomPreview.Size = new System.Drawing.Size(910, 241);
+            this.bottomPreview.Size = new System.Drawing.Size(910, 211);
             this.bottomPreview.TabIndex = 3;
             // 
             // bottomLogControl
@@ -544,7 +552,7 @@ namespace C2
             this.bottomLogControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomLogControl.Location = new System.Drawing.Point(0, 39);
             this.bottomLogControl.Name = "bottomLogControl";
-            this.bottomLogControl.Size = new System.Drawing.Size(910, 241);
+            this.bottomLogControl.Size = new System.Drawing.Size(910, 211);
             this.bottomLogControl.TabIndex = 2;
             // 
             // bottomPyConsole
@@ -552,12 +560,12 @@ namespace C2
             this.bottomPyConsole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomPyConsole.Location = new System.Drawing.Point(0, 39);
             this.bottomPyConsole.Name = "bottomPyConsole";
-            this.bottomPyConsole.Size = new System.Drawing.Size(910, 241);
+            this.bottomPyConsole.Size = new System.Drawing.Size(910, 211);
             this.bottomPyConsole.TabIndex = 1;
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.panel4.Controls.Add(this.dragLineControl);
             this.panel4.Controls.Add(this.panel9);
             this.panel4.Controls.Add(this.panel8);
@@ -596,14 +604,6 @@ namespace C2
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(394, 39);
             this.panel8.TabIndex = 0;
-            // 
-            // mdiWorkSpace
-            // 
-            this.mdiWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mdiWorkSpace.Location = new System.Drawing.Point(0, 0);
-            this.mdiWorkSpace.Name = "mdiWorkSpace";
-            this.mdiWorkSpace.Size = new System.Drawing.Size(910, 528);
-            this.mdiWorkSpace.TabIndex = 8;
             // 
             // tabPanel
             // 

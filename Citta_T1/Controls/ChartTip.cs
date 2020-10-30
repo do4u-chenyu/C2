@@ -21,10 +21,10 @@ namespace C2.Controls
         ChartTip()
         {
             tipControl = new ChartTipControl();
-            tipControl.Size = new System.Drawing.Size(400, 250);
+            tipControl.Size = new System.Drawing.Size(400, 200);
             this.CustomControl = tipControl;
 
-            Size = new System.Drawing.Size(400, 250);
+            Size = new System.Drawing.Size(400, 200);
             if (Options.Current.Contains(SIZE_CONFIG))
                 Size = Options.Current.GetValue(SIZE_CONFIG, Size);
 
