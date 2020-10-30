@@ -140,7 +140,7 @@ namespace C2.Controls
             {
                 return;
             }
-            // C2不允许数据拖到Canvas
+            // TODO C2不允许数据拖到Canvas
             //if (type == ElementType.DataSource)
             //    return;
             float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
@@ -148,7 +148,7 @@ namespace C2.Controls
             int locY = Convert.ToInt32(e.Y / screenFactor);
             int dx = Convert.ToInt32(drgOffsetX / screenFactor);
             int dy = Convert.ToInt32(drgOffsetY / screenFactor);
-            Point location = Global.GetMainForm().PointToClient(new Point(locX - dx/2, locY - dy/2 - 30));
+            Point location = Global.GetCanvasForm().PointToClient(new Point(locX - dx / 2, locY - dy / 2 - 30));
 
             string text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
@@ -170,9 +170,9 @@ namespace C2.Controls
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件
             Global.GetMainForm().BlankButtonFocus();
-           //// ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
-           // if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
-           //     this.ClickOnLine(e);
+            ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
+            if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
+                this.ClickOnLine(e);
             if (e.Button == MouseButtons.Right && !leftButtonDown)
             {
                 Point pw = this.Document.WorldMap.ScreenToWorld(e.Location, false);

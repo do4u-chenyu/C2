@@ -71,7 +71,8 @@ namespace C2
             this.pyControlLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.mainWorkSpace = new System.Windows.Forms.Panel();
+            this.workSpacePanel = new System.Windows.Forms.Panel();
+            this.mdiWorkSpace = new C2.WorkSpace.MdiWorkSpace();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.bottomPreview = new C2.Controls.Bottom.BottomPreviewControl();
             this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
@@ -80,8 +81,7 @@ namespace C2
             this.dragLineControl = new C2.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.mdiWorkSpace = new C2.WorkSpace.MdiWorkSpace();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.tabPanel = new System.Windows.Forms.Panel();
             this.taskBar = new C2.Controls.TaskBar();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -93,12 +93,12 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.MainPanel.SuspendLayout();
-            this.mainWorkSpace.SuspendLayout();
+            this.workSpacePanel.SuspendLayout();
             this.bottomViewPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.tabPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // headPanel
@@ -152,9 +152,9 @@ namespace C2
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(58, 22);
+            this.usernamelabel.Size = new System.Drawing.Size(40, 22);
             this.usernamelabel.TabIndex = 3;
-            this.usernamelabel.Text = "李警官";
+            this.usernamelabel.Text = "IAO";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
             // 
             // label1
@@ -499,8 +499,8 @@ namespace C2
             // 
             // MainPanel
             // 
-            this.MainPanel.Controls.Add(this.mainWorkSpace);
-            this.MainPanel.Controls.Add(this.panel6);
+            this.MainPanel.Controls.Add(this.workSpacePanel);
+            this.MainPanel.Controls.Add(this.tabPanel);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(323, 46);
             this.MainPanel.Name = "MainPanel";
@@ -508,16 +508,16 @@ namespace C2
             this.MainPanel.TabIndex = 7;
             this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
-            // mainWorkSpace
+            // workSpacePanel
             // 
-            this.mainWorkSpace.Controls.Add(this.leftFoldPanel);
-            this.mainWorkSpace.Controls.Add(this.bottomViewPanel);
-            this.mainWorkSpace.Controls.Add(this.mdiWorkSpace);
-            this.mainWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainWorkSpace.Location = new System.Drawing.Point(0, 32);
-            this.mainWorkSpace.Name = "mainWorkSpace";
-            this.mainWorkSpace.Size = new System.Drawing.Size(910, 528);
-            this.mainWorkSpace.TabIndex = 10;
+            this.workSpacePanel.Controls.Add(this.leftFoldPanel);
+            this.workSpacePanel.Controls.Add(this.mdiWorkSpace);
+            this.workSpacePanel.Controls.Add(this.bottomViewPanel);
+            this.workSpacePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.workSpacePanel.Location = new System.Drawing.Point(0, 32);
+            this.workSpacePanel.Name = "workSpacePanel";
+            this.workSpacePanel.Size = new System.Drawing.Size(910, 528);
+            this.workSpacePanel.TabIndex = 10;
             // 
             // bottomViewPanel
             // 
@@ -605,14 +605,14 @@ namespace C2
             this.mdiWorkSpace.Size = new System.Drawing.Size(910, 528);
             this.mdiWorkSpace.TabIndex = 8;
             // 
-            // panel6
+            // tabPanel
             // 
-            this.panel6.Controls.Add(this.taskBar);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(910, 32);
-            this.panel6.TabIndex = 9;
+            this.tabPanel.Controls.Add(this.taskBar);
+            this.tabPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tabPanel.Location = new System.Drawing.Point(0, 0);
+            this.tabPanel.Name = "tabPanel";
+            this.tabPanel.Size = new System.Drawing.Size(910, 32);
+            this.tabPanel.TabIndex = 9;
             // 
             // taskBar
             // 
@@ -656,13 +656,13 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
-            this.mainWorkSpace.ResumeLayout(false);
+            this.workSpacePanel.ResumeLayout(false);
             this.bottomViewPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            this.panel6.ResumeLayout(false);
+            this.tabPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -700,13 +700,13 @@ namespace C2
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button blankButton;
         private Panel MainPanel;
-        private Panel panel6;
+        private Panel tabPanel;
         private Button ImportDataSourceButton;
         private Button button1;
         private PictureBox leftFoldButton;
         private Controls.TaskBar taskBar;
         private Panel leftFoldPanel;
-        private Panel mainWorkSpace;
+        private Panel workSpacePanel;
         private Panel bottomViewPanel;
         private Controls.Bottom.BottomPreviewControl bottomPreview;
         private Controls.Bottom.BottomLogControl bottomLogControl;
