@@ -1798,7 +1798,7 @@
     <None Include="Resources\Images\stop.png" />
     <None Include="Resources\Images\strike.png" />
     <None Include="Resources\Images\svg.png" />
-    <None Include="Resources\Images\saveAllButton.png" />
+    <None Include="Resources\Images\ToolImage\saveAllButton.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
     <None Include="Resources\Images\theme.png" />
