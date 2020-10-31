@@ -3,6 +3,7 @@ using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace C2.Controls.Common
@@ -10,7 +11,8 @@ namespace C2.Controls.Common
     public partial class DesignerControl : UserControl
     {
         private string[] ComboOperator = new string[] { "最大值", "AI实践" };
-
+        [Browsable(true)]
+        public override string Text {get; set; }
         public Topic SelectedTopic { get; set; }
         public OperatorWidget OpWidget { get; set; }
         public DataItem SelectedDataSource { get; set; }
@@ -91,6 +93,7 @@ namespace C2.Controls.Common
         public DesignerControl()
         {
             InitializeComponent();
+            
         }
 
         private void button1_Click(object sender, System.EventArgs e)

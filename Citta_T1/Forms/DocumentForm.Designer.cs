@@ -585,7 +585,7 @@ namespace C2.Forms
             this.dc.SelectedOperator = null;
             this.dc.SelectedTopic = null;
             this.dc.Size = new System.Drawing.Size(186, 260);
-            this.dc.TabIndex = 0;
+            this.dc.TabIndex = 1;
             // 
             // DocumentForm
             // 
