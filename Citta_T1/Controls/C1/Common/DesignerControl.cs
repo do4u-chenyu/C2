@@ -93,7 +93,7 @@ namespace C2.Controls.Common
         public DesignerControl()
         {
             InitializeComponent();
-            
+            Text = "算子设计器";
         }
 
         private void button1_Click(object sender, System.EventArgs e)
