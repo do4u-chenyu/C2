@@ -2,10 +2,6 @@
 {
     partial class VisualDisplayDialog
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -33,11 +29,9 @@
             this.x = new System.Windows.Forms.Label();
             this.y = new System.Windows.Forms.Label();
             this.chartTypesList = new System.Windows.Forms.ComboBox();
-            this.xValue = new System.Windows.Forms.ComboBox();
             this.confirm = new System.Windows.Forms.Button();
             this.cancle = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.yValue = new C2.Controls.Common.ComCheckBoxList();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,11 +86,11 @@
             // 
             // xValue
             // 
-            this.xValue.FormattingEnabled = true;
-            this.xValue.Location = new System.Drawing.Point(182, 110);
-            this.xValue.Name = "xValue";
-            this.xValue.Size = new System.Drawing.Size(150, 22);
-            this.xValue.TabIndex = 4;
+            this.comboBox0.FormattingEnabled = true;
+            this.comboBox0.Location = new System.Drawing.Point(182, 110);
+            this.comboBox0.Name = "xValue";
+            this.comboBox0.Size = new System.Drawing.Size(150, 22);
+            this.comboBox0.TabIndex = 4;
             // 
             // confirm
             // 
@@ -109,7 +103,7 @@
             this.confirm.TabIndex = 6;
             this.confirm.Text = "确认";
             this.confirm.UseVisualStyleBackColor = true;
-            this.confirm.Click += new System.EventHandler(this.confirm_Click);
+            this.confirm.Click += new System.EventHandler(this.Confirm_Click);
             // 
             // cancle
             // 
@@ -125,11 +119,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.Controls.Add(this.xValue);
+            this.panel1.Controls.Add(this.comboBox0);
             this.panel1.Controls.Add(this.chartTypesList);
             this.panel1.Controls.Add(this.y);
             this.panel1.Controls.Add(this.x);
-            this.panel1.Controls.Add(this.yValue);
+            this.panel1.Controls.Add(this.outListCCBL0);
             this.panel1.Controls.Add(this.chartType);
             this.panel1.Location = new System.Drawing.Point(0, 2);
             this.panel1.Name = "panel1";
@@ -138,12 +132,12 @@
             // 
             // yValue
             // 
-            this.yValue.DataSource = null;
-            this.yValue.Location = new System.Drawing.Point(182, 146);
-            this.yValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.yValue.Name = "yValue";
-            this.yValue.Size = new System.Drawing.Size(150, 21);
-            this.yValue.TabIndex = 5;
+            this.outListCCBL0.DataSource = null;
+            this.outListCCBL0.Location = new System.Drawing.Point(182, 146);
+            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.outListCCBL0.Name = "yValue";
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 21);
+            this.outListCCBL0.TabIndex = 5;
             // 
             // VisualDisplayDialog
             // 
@@ -174,8 +168,6 @@
         private System.Windows.Forms.Label x;
         private System.Windows.Forms.Label y;
         private System.Windows.Forms.ComboBox chartTypesList;
-        private System.Windows.Forms.ComboBox xValue;
-        private Controls.Common.ComCheckBoxList yValue;
         private System.Windows.Forms.Button confirm;
         private System.Windows.Forms.Button cancle;
         private System.Windows.Forms.Panel panel1;
