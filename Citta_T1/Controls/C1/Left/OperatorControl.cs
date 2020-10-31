@@ -1,14 +1,9 @@
 ﻿using C2.Business.Model;
 using C2.Utils;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 namespace C2.Controls.Left
 {

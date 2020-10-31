@@ -81,12 +81,13 @@ namespace C2.Forms
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new C2.Controls.MySplitter();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.dc = new DesignerControl() { Text = "设计器", TabIndex = 1};
             this.myTabControl1 = new C2.Controls.MyTabControl();
+            this.dc = new C2.Controls.Common.DesignerControl();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.MenuStripChartTab.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
@@ -98,7 +99,8 @@ namespace C2.Forms
             this.multiChartsView1.Location = new System.Drawing.Point(0, 0);
             this.multiChartsView1.Name = "multiChartsView1";
             this.multiChartsView1.SelectedIndex = -1;
-            this.multiChartsView1.Size = new System.Drawing.Size(593, 407);
+            this.multiChartsView1.SelectedPage = null;
+            this.multiChartsView1.Size = new System.Drawing.Size(574, 410);
             this.multiChartsView1.TabIndex = 0;
             this.multiChartsView1.TabsMenuStrip = this.MenuStripChartTab;
             this.multiChartsView1.NewChartPage += new System.EventHandler(this.multiChartsView1_NewChartPage);
@@ -146,7 +148,6 @@ namespace C2.Forms
             // toolStrip1
             // 
             this.toolStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
-
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TsbSave,
             this.toolStripSeparator1,
@@ -177,7 +178,7 @@ namespace C2.Forms
             this.TsbSidebar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(804, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(804, 28);
             this.toolStrip1.TabIndex = 2;
             // 
             // TsbSave
@@ -531,17 +532,17 @@ namespace C2.Forms
             this.panel1.Controls.Add(this.splitter1);
             this.panel1.Controls.Add(this.splitContainer2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 31);
+            this.panel1.Location = new System.Drawing.Point(0, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(804, 407);
+            this.panel1.Size = new System.Drawing.Size(804, 410);
             this.panel1.TabIndex = 3;
             // 
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(593, 0);
+            this.splitter1.Location = new System.Drawing.Point(574, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 407);
+            this.splitter1.Size = new System.Drawing.Size(3, 410);
             this.splitter1.TabIndex = 1;
             this.splitter1.TabStop = false;
             this.splitter1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter1_SplitterMoved);
@@ -550,15 +551,15 @@ namespace C2.Forms
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitContainer2.Location = new System.Drawing.Point(596, 0);
+            this.splitContainer2.Location = new System.Drawing.Point(577, 0);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.myTabControl1);
-            this.splitContainer2.Size = new System.Drawing.Size(208, 407);
-            this.splitContainer2.SplitterDistance = 168;
+            this.splitContainer2.Size = new System.Drawing.Size(227, 410);
+            this.splitContainer2.SplitterDistance = 169;
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -568,9 +569,23 @@ namespace C2.Forms
             this.myTabControl1.Location = new System.Drawing.Point(0, 0);
             this.myTabControl1.Name = "myTabControl1";
             this.myTabControl1.SelectedIndex = -1;
-            this.myTabControl1.Size = new System.Drawing.Size(208, 168);
+            this.myTabControl1.SelectedPage = null;
+            this.myTabControl1.Size = new System.Drawing.Size(227, 169);
             this.myTabControl1.TabIndex = 3;
             this.myTabControl1.Text = "myTabControl1";
+            // 
+            // dc
+            // 
+            this.dc.BackColor = System.Drawing.Color.White;
+            this.dc.ComboDataSource = null;
+            this.dc.Location = new System.Drawing.Point(0, 0);
+            this.dc.Name = "dc";
+            this.dc.OpWidget = null;
+            this.dc.SelectedDataSource = null;
+            this.dc.SelectedOperator = null;
+            this.dc.SelectedTopic = null;
+            this.dc.Size = new System.Drawing.Size(186, 260);
+            this.dc.TabIndex = 0;
             // 
             // DocumentForm
             // 
@@ -587,6 +602,7 @@ namespace C2.Forms
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
