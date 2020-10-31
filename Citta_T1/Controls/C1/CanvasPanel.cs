@@ -169,7 +169,7 @@ namespace C2.Controls
         {
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件
-            Global.GetMainForm().BlankButtonFocus();
+            Global.GetCanvasForm().BlankButtonFocus();
             ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
             if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
                 this.ClickOnLine(e);

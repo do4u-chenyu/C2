@@ -394,11 +394,6 @@ namespace C2
         {
             this.toolTip1.SetToolTip(this.usernamelabel, this.userName + "已登录");
         }
-
-        public void BlankButtonFocus()
-        {
-            this.blankButton.Focus();
-        }
         protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, System.Windows.Forms.Keys keyData) //激活回车键
         {
             //int WM_KEYDOWN = 256;

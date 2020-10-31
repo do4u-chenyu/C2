@@ -133,7 +133,7 @@ namespace C2.Controls.Left
         private void DataSourceControl_MouseDown(object sender, MouseEventArgs e)
         {
             // 强制编辑控件失去焦点,触发重命名控件的Leave事件 
-            Global.GetMainForm().BlankButtonFocus();
+            Global.GetCanvasForm().BlankButtonFocus();
         }
     }
 }

@@ -133,6 +133,10 @@ namespace C2.Forms
             //this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y + 1);
             //this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
         }
+        public void BlankButtonFocus()
+        {
+            this.blankButton.Focus();
+        }
         #region 运行相关部分
         private void ResetButton_Click(object sender, EventArgs e)
         {
@@ -458,6 +462,7 @@ namespace C2.Forms
             //this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
         #endregion
+
         #region 被干掉的方法
         //private void RemarkChange(RemarkControl rc)
         //{

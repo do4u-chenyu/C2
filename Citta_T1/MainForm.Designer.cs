@@ -62,7 +62,6 @@ namespace C2
             this.diffButton = new System.Windows.Forms.Button();
             this.filterButton = new System.Windows.Forms.Button();
             this.connectOpButton = new System.Windows.Forms.Button();
-            this.blankButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ImportDataSourceButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -152,7 +151,7 @@ namespace C2
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(40, 22);
+            this.usernamelabel.Size = new System.Drawing.Size(60, 31);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "IAO";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
@@ -164,7 +163,7 @@ namespace C2
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(282, 36);
+            this.label1.Size = new System.Drawing.Size(419, 52);
             this.label1.TabIndex = 0;
             this.label1.Text = "IAO解决方案建模平台";
             // 
@@ -411,16 +410,6 @@ namespace C2
             this.connectOpButton.Size = new System.Drawing.Size(75, 23);
             this.connectOpButton.TabIndex = 0;
             // 
-            // blankButton
-            // 
-            this.blankButton.Location = new System.Drawing.Point(461, 40);
-            this.blankButton.Margin = new System.Windows.Forms.Padding(2);
-            this.blankButton.Name = "blankButton";
-            this.blankButton.Size = new System.Drawing.Size(0, 0);
-            this.blankButton.TabIndex = 6;
-            this.blankButton.Text = "button1";
-            this.blankButton.UseVisualStyleBackColor = true;
-            // 
             // ImportDataSourceButton
             // 
             this.ImportDataSourceButton.BackColor = System.Drawing.Color.GhostWhite;
@@ -465,7 +454,7 @@ namespace C2
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.logLabel.Location = new System.Drawing.Point(120, 8);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(74, 22);
+            this.logLabel.Size = new System.Drawing.Size(110, 31);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
@@ -478,7 +467,7 @@ namespace C2
             this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pyControlLabel.Location = new System.Drawing.Point(236, 8);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(58, 22);
+            this.pyControlLabel.Size = new System.Drawing.Size(86, 31);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
@@ -491,7 +480,7 @@ namespace C2
             this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.previewLabel.Location = new System.Drawing.Point(14, 8);
             this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(74, 22);
+            this.previewLabel.Size = new System.Drawing.Size(110, 31);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
@@ -524,7 +513,7 @@ namespace C2
             this.mdiWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mdiWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.mdiWorkSpace.Name = "mdiWorkSpace";
-            this.mdiWorkSpace.Size = new System.Drawing.Size(910, 278);
+            this.mdiWorkSpace.Size = new System.Drawing.Size(910, 328);
             this.mdiWorkSpace.TabIndex = 8;
             // 
             // bottomViewPanel
@@ -534,7 +523,7 @@ namespace C2
             this.bottomViewPanel.Controls.Add(this.bottomPyConsole);
             this.bottomViewPanel.Controls.Add(this.panel4);
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomViewPanel.Location = new System.Drawing.Point(0, 278);
+            this.bottomViewPanel.Location = new System.Drawing.Point(0, 328);
             this.bottomViewPanel.Name = "bottomViewPanel";
             this.bottomViewPanel.Size = new System.Drawing.Size(910, 200);
             this.bottomViewPanel.TabIndex = 11;
@@ -544,7 +533,7 @@ namespace C2
             this.bottomPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomPreview.Location = new System.Drawing.Point(0, 39);
             this.bottomPreview.Name = "bottomPreview";
-            this.bottomPreview.Size = new System.Drawing.Size(910, 211);
+            this.bottomPreview.Size = new System.Drawing.Size(910, 161);
             this.bottomPreview.TabIndex = 3;
             // 
             // bottomLogControl
@@ -552,7 +541,7 @@ namespace C2
             this.bottomLogControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomLogControl.Location = new System.Drawing.Point(0, 39);
             this.bottomLogControl.Name = "bottomLogControl";
-            this.bottomLogControl.Size = new System.Drawing.Size(910, 211);
+            this.bottomLogControl.Size = new System.Drawing.Size(910, 161);
             this.bottomLogControl.TabIndex = 2;
             // 
             // bottomPyConsole
@@ -560,7 +549,7 @@ namespace C2
             this.bottomPyConsole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomPyConsole.Location = new System.Drawing.Point(0, 39);
             this.bottomPyConsole.Name = "bottomPyConsole";
-            this.bottomPyConsole.Size = new System.Drawing.Size(910, 211);
+            this.bottomPyConsole.Size = new System.Drawing.Size(910, 161);
             this.bottomPyConsole.TabIndex = 1;
             // 
             // panel4
@@ -581,6 +570,7 @@ namespace C2
             this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dragLineControl.Location = new System.Drawing.Point(394, 36);
+            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dragLineControl.Name = "dragLineControl";
             this.dragLineControl.Size = new System.Drawing.Size(368, 3);
             this.dragLineControl.TabIndex = 3;
@@ -633,7 +623,6 @@ namespace C2
             this.Controls.Add(this.leftToolBoxPanel);
             this.Controls.Add(this.leftMainMenuPanel);
             this.Controls.Add(this.headPanel);
-            this.Controls.Add(this.blankButton);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -698,7 +687,6 @@ namespace C2
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button flowChartButton;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button blankButton;
         private Panel MainPanel;
         private Panel tabPanel;
         private Button ImportDataSourceButton;
