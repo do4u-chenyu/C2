@@ -586,6 +586,7 @@ namespace C2.Forms
             this.dc.SelectedTopic = null;
             this.dc.Size = new System.Drawing.Size(186, 260);
             this.dc.TabIndex = 1;
+            this.dc.Text = "Ëã×ÓÉè¼ÆÆ÷";
             // 
             // DocumentForm
             // 

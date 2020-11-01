@@ -1,24 +1,22 @@
-﻿using System;
+﻿using C2.ChartPageView;
+using C2.Configuration;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Design;
+using C2.Dialogs;
+using C2.Globalization;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
+using C2.Model.Widgets;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
-using C2.ChartPageView;
-using C2.Configuration;
-using C2.Controls;
-using C2.Controls.Common;
-using C2.Controls.MapViews;
-using C2.Core;
-using C2.Design;
-using C2.Dialogs;
-using C2.Globalization;
-using C2.Model;
-using C2.Model.Documents;
-using C2.Model.MindMaps;
-using C2.Model.Styles;
-using C2.Model.Widgets;
 
 namespace C2.Forms
 {
@@ -351,7 +349,7 @@ namespace C2.Forms
             tabControl2.Dock = DockStyle.Fill;
             tabControl2.SelectedBackColor = Color.White;
             tabControl2.SelectedForeColor = Color.Black;
-            tabControl2.AddPage(dc);
+            tabControl2.AddPage(dc, Properties.Resources.property);
             splitContainer2.Panel2.Controls.Add(tabControl2);
 
             //

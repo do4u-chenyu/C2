@@ -8,11 +8,9 @@ using System.Windows.Forms;
 
 namespace C2.Controls.Common
 {
-    public partial class DesignerControl : UserControl
+    public partial class DesignerControl : BorderPanel
     {
         private string[] ComboOperator = new string[] { "最大值", "AI实践" };
-        [Browsable(true)]
-        public override string Text {get; set; }
         public Topic SelectedTopic { get; set; }
         public OperatorWidget OpWidget { get; set; }
         public DataItem SelectedDataSource { get; set; }
@@ -93,7 +91,7 @@ namespace C2.Controls.Common
         public DesignerControl()
         {
             InitializeComponent();
-            Text = "算子设计器";
+            Font = UITheme.Default.DefaultFont;
         }
 
         private void button1_Click(object sender, System.EventArgs e)
