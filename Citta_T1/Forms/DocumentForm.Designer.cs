@@ -1,5 +1,6 @@
 
 using C2.Controls.Common;
+using C2.Model;
 
 namespace C2.Forms
 // origin/C2_issue_TaskBar_test:Citta_T1/Forms/DocumentForm.Designer.cs
@@ -581,7 +582,7 @@ namespace C2.Forms
             this.dc.Location = new System.Drawing.Point(0, 0);
             this.dc.Name = "dc";
             this.dc.OpWidget = null;
-            this.dc.SelectedDataSource = null;
+            this.dc.SelectedDataSource = DataItem.Empty;  // 尽量不要用null赋初值,毕竟空指针异常时最容易出的错误
             this.dc.SelectedOperator = null;
             this.dc.SelectedTopic = null;
             this.dc.Size = new System.Drawing.Size(186, 260);

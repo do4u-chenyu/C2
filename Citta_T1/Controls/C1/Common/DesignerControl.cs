@@ -2,8 +2,8 @@
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace C2.Controls.Common
@@ -23,9 +23,9 @@ namespace C2.Controls.Common
             if(SelectedTopic == null)
             {
                 this.topicName.Text = "未选中主题";
-                this.dataSourceCombo.Text = "";
+                this.dataSourceCombo.Text = String.Empty;
                 this.dataSourceCombo.Items.Clear();
-                this.operatorCombo.Text = "";
+                this.operatorCombo.Text = String.Empty;
             }
             else
             {
@@ -50,16 +50,8 @@ namespace C2.Controls.Common
                 //TODO
                 //dtw.选中数据源;
                 DataItem d1 = OpWidget.DataSourceItem;
-                if (d1 != null)
-                {
-                    SelectedDataSource = d1;
-                    this.dataSourceCombo.Text = d1.FileName;
-                }
-                else
-                {
-                    SelectedDataSource = null;
-                    this.dataSourceCombo.Text = "";
-                }
+                SelectedDataSource = d1;
+                this.dataSourceCombo.Text = d1.FileName;
             }
         }
 
@@ -84,8 +76,8 @@ namespace C2.Controls.Common
 
         private void SetSelectedOperator()
         {
-            this.operatorCombo.Text = OpWidget != null ? OpWidget.OpType : "";
-            SelectedOperator = OpWidget != null ? OpWidget.OpType : "";
+            this.operatorCombo.Text = OpWidget != null ? OpWidget.OpType : String.Empty;
+            SelectedOperator = OpWidget != null ? OpWidget.OpType : String.Empty;
         }
 
         public DesignerControl()
@@ -94,7 +86,7 @@ namespace C2.Controls.Common
             Font = UITheme.Default.DefaultFont;
         }
 
-        private void button1_Click(object sender, System.EventArgs e)
+        private void Button1_Click(object sender, System.EventArgs e)
         {
             if(this.topicName.Text == "未选中主题")
             {
@@ -102,7 +94,7 @@ namespace C2.Controls.Common
                 return;
             }
 
-            if (SelectedDataSource == null)
+            if (SelectedDataSource.IsEmpty())
             {
                 MessageBox.Show("未选中数据源,请添加后再配置");
                 return;

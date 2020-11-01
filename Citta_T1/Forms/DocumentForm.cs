@@ -349,7 +349,7 @@ namespace C2.Forms
             tabControl2.Dock = DockStyle.Fill;
             tabControl2.SelectedBackColor = Color.White;
             tabControl2.SelectedForeColor = Color.Black;
-            tabControl2.AddPage(dc, Properties.Resources.property);
+            tabControl2.AddPage(dc, Properties.Resources.designer);
             splitContainer2.Panel2.Controls.Add(tabControl2);
 
             //

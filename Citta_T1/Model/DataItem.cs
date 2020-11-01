@@ -1,32 +1,34 @@
 ﻿using C2.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C2.Model
 {
     public class DataItem
     {
-        string filePath;
+        string fullFilePath;
         string fileName;
         char fileSep;
         OpUtil.Encoding fileEncoding;
         OpUtil.ExtType fileType;
-        public DataItem()
+
+        public static readonly DataItem Empty = new DataItem();
+
+        public bool IsEmpty()
+        {
+            return fileType == OpUtil.ExtType.Unknow;
+        }
+        private DataItem()
         {
 
         }
-        public DataItem(string filePath,string fileName,char fileSep, OpUtil.Encoding fileEncoding, OpUtil.ExtType fileType)
+        public DataItem(string filePath, string fileName, char fileSep, OpUtil.Encoding fileEncoding, OpUtil.ExtType fileType)
         {
-            this.filePath = filePath;
+            this.fullFilePath = filePath;
             this.fileName = fileName;
             this.fileSep = fileSep;
             this.fileEncoding = fileEncoding;
             this.fileType = fileType;
         }
-        public string FilePath { get => filePath; set => filePath = value; }
+        public string FilePath { get => fullFilePath; set => fullFilePath = value; }
         public string FileName { get => fileName; set => fileName = value; }
         public char FileSep { get => fileSep; set => fileSep = value; }
         public OpUtil.Encoding FileEncoding { get => fileEncoding; set => fileEncoding = value; }

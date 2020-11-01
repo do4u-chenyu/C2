@@ -1,8 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Controls.Common;
 using C2.Core;
-using NPOI.SS.Formula;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -175,9 +173,9 @@ namespace C2.Utils
         }
         public enum ExtType
         {
+            Unknow,  // 默认值放在第一位
             Excel,
-            Text,
-            Unknow
+            Text   
         }
 
         public static Encoding EncodingEnum(string encoding,Encoding defaultEncoding = Encoding.GBK)

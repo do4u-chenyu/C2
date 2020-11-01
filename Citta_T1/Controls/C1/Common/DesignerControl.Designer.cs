@@ -82,7 +82,7 @@
             this.changeOpButton.TabIndex = 5;
             this.changeOpButton.Text = "修改";
             this.changeOpButton.UseVisualStyleBackColor = true;
-            this.changeOpButton.Click += new System.EventHandler(this.button1_Click);
+            this.changeOpButton.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label4
             // 
