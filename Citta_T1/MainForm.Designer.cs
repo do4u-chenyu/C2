@@ -76,7 +76,7 @@ namespace C2
             this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
             this.bottomPyConsole = new C2.Controls.Bottom.BottomConsoleControl();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dragLineControl = new C2.Controls.Title.DragLineControl();
+            this.dragLineControl = new C2.Controls.Bottom.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.tabPanel = new System.Windows.Forms.Panel();
@@ -692,6 +692,6 @@ namespace C2
         private Label pyControlLabel;
         private Label previewLabel;
         private WorkSpace.MdiWorkSpace mdiWorkSpace;
-        private Controls.Title.DragLineControl dragLineControl;
+        private Controls.Bottom.DragLineControl dragLineControl;
     }
 }

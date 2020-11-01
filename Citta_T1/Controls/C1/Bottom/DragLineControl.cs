@@ -1,17 +1,14 @@
 ﻿using C2.Core;
 using C2.Utils;
-using NPOI.SS.Formula.Functions;
-using System;
-using System.Drawing;
 using System.Windows.Forms;
 
-namespace C2.Controls.Title
+namespace C2.Controls.Bottom
 {
     public partial class DragLineControl : UserControl
     {
         private bool mouseDown;
-        private int maxHeight = 500;
-        private int minHeight = 100;
+        private readonly int maxHeight = 500;
+        private readonly int minHeight = 100;
 
         private static LogUtil log = LogUtil.GetInstance("DragLineControl"); // 获取日志模块
         public DragLineControl()
