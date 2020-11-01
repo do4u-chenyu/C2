@@ -151,7 +151,7 @@ namespace C2
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(60, 31);
+            this.usernamelabel.Size = new System.Drawing.Size(40, 22);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "IAO";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
@@ -163,7 +163,7 @@ namespace C2
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(419, 52);
+            this.label1.Size = new System.Drawing.Size(282, 36);
             this.label1.TabIndex = 0;
             this.label1.Text = "IAO解决方案建模平台";
             // 
@@ -454,7 +454,7 @@ namespace C2
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.logLabel.Location = new System.Drawing.Point(120, 8);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(110, 31);
+            this.logLabel.Size = new System.Drawing.Size(74, 22);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
@@ -467,7 +467,7 @@ namespace C2
             this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pyControlLabel.Location = new System.Drawing.Point(236, 8);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(86, 31);
+            this.pyControlLabel.Size = new System.Drawing.Size(58, 22);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
@@ -480,7 +480,7 @@ namespace C2
             this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.previewLabel.Location = new System.Drawing.Point(14, 8);
             this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(110, 31);
+            this.previewLabel.Size = new System.Drawing.Size(74, 22);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
@@ -570,10 +570,11 @@ namespace C2
             this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dragLineControl.Location = new System.Drawing.Point(394, 36);
-            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
             this.dragLineControl.Name = "dragLineControl";
             this.dragLineControl.Size = new System.Drawing.Size(368, 3);
             this.dragLineControl.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.dragLineControl, "按住鼠标左键可以上下拖动改变预览面板的大小.");
             // 
             // panel9
             // 
