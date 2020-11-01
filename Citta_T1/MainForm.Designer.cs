@@ -45,7 +45,6 @@ namespace C2
             this.myModelButton = new System.Windows.Forms.Button();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
             this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
-            this.flowChartControl = new C2.Controls.Left.FlowChartControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
             this.leftFoldPanel = new System.Windows.Forms.Panel();
@@ -232,7 +231,6 @@ namespace C2
             // 
             this.leftToolBoxPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.leftToolBoxPanel.Controls.Add(this.mindMapModelControl);
-            this.leftToolBoxPanel.Controls.Add(this.flowChartControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.myModelControl);
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -255,19 +253,6 @@ namespace C2
             this.mindMapModelControl.Size = new System.Drawing.Size(185, 558);
             this.mindMapModelControl.TabIndex = 0;
             this.mindMapModelControl.Visible = false;
-            // 
-            // flowChartControl
-            // 
-            this.flowChartControl.AllowDrop = true;
-            this.flowChartControl.BackColor = System.Drawing.Color.White;
-            this.flowChartControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.flowChartControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowChartControl.Location = new System.Drawing.Point(0, 0);
-            this.flowChartControl.Margin = new System.Windows.Forms.Padding(4);
-            this.flowChartControl.Name = "flowChartControl";
-            this.flowChartControl.Size = new System.Drawing.Size(185, 558);
-            this.flowChartControl.TabIndex = 0;
-            this.flowChartControl.Visible = false;
             // 
             // dataSourceControl
             // 
@@ -680,7 +665,6 @@ namespace C2
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
         private Controls.Left.MindMapModelControl mindMapModelControl;
-        private Controls.Left.FlowChartControl flowChartControl;
         private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;

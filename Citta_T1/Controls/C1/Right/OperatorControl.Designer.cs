@@ -1,4 +1,4 @@
-﻿namespace C2.Controls.Left
+﻿namespace C2.Controls.Right
 {
     partial class OperatorControl
     {

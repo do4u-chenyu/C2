@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace C2.Controls.Left
+namespace C2.Controls.Right
 {
     public partial class OperatorControl : UserControl
     {

@@ -4,10 +4,9 @@ using C2.Controls;
 using C2.Controls.Bottom;
 using C2.Controls.Flow;
 using C2.Controls.Left;
-using C2.Controls.Title;
+using C2.Controls.Right;
 using C2.Controls.Top;
 using C2.Forms;
-using C2.WorkSpace;
 using System.Windows.Forms;
 
 namespace C2.Core

@@ -271,7 +271,6 @@ namespace C2
             this.myModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
-            this.flowChartControl.Visible = false;
         }
 
         private void OperateButton_Click(object sender, EventArgs e)
@@ -279,7 +278,6 @@ namespace C2
             this.ShowLeftFold();
             this.mindMapModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
-            this.flowChartControl.Visible = false;
             this.myModelControl.Visible = false;
         }
 
@@ -288,14 +286,12 @@ namespace C2
             this.ShowLeftFold();
             this.dataSourceControl.Visible = true;
             this.mindMapModelControl.Visible = false;
-            this.flowChartControl.Visible = false;
             this.myModelControl.Visible = false;
         }
 
         private void FlowChartButton_Click(object sender, EventArgs e)
         {
             this.ShowLeftFold();
-            this.flowChartControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
@@ -325,7 +321,6 @@ namespace C2
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
             this.mindMapModelControl.Visible = false;
-            this.flowChartControl.Visible = false;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
