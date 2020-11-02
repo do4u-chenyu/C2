@@ -39,16 +39,14 @@ namespace C2
             string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
             double[] y = new double[] { 541, 574, 345, 854, 684 };
             List<string> y1 = new List<string> { "541", "574", "345", "854", "684" };
-            double[] y2 = new double[] { };
             List<string> x1 = new List<string> { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
             List<List<string>> data = new List<List<string>>();
-            List<string> titles = new List<string>{"柱状图"};
             data.Add(x1);
             data.Add(y1);
 
-            this.barChart = new BarChart(data, titles);
-            this.pieChart = new PieChart(x, y);
-            this.horizontalBar3D = new HorizontalBar3D(data, titles);
+            this.barChart = new BarChart(data, new List<string> { "柱状图" });
+            this.pieChart = new PieChart(data, new List<string> { "饼图" });
+            this.horizontalBar3D = new HorizontalBar3D(data, new List<string> { "横条图" });
 
             this.radarChart = new C2.Controls.DataCharts.RadarChart();
             this.ringChart = new C2.Controls.DataCharts.RingChart();
@@ -134,68 +132,5 @@ namespace C2
                 }
             }
         }
-        /*
-        public override void ApplyTheme(UITheme theme)
-        {
-            base.ApplyTheme(theme);
-
-            this.Font = theme.DefaultFont;
-            this.BackColor = theme.Colors. MediumLight;
-
-            if (recentFilesView1 != null)
-            {
-                recentFilesView1.BackColor = theme.Colors.MediumLight;
-                recentFilesView1.CellBackColor = Color.Transparent;// metroBox1.BackColor;
-                recentFilesView1.CellForeColor = PaintHelper.FarthestColor(recentFilesView1.BackColor, theme.Colors.Dark, theme.Colors.Light);
-                recentFilesView1.ActiveCellBackColor = Color.FromArgb(128, theme.Colors.Sharp);
-                recentFilesView1.ActiveCellForeColor = theme.Colors.SharpText;
-            }
-
-            if (buttonListBox1 != null)
-            {
-                buttonListBox1.BackColor = PaintHelper.GetDarkColor(theme.Colors.MediumLight, 0.1f);
-                buttonListBox1.ButtonBackColor = Color.Transparent;// theme.Colors.MediumDark;
-                buttonListBox1.ButtonForeColor = PaintHelper.FarthestColor(buttonListBox1.BackColor, theme.Colors.Dark, theme.Colors.Light);
-                buttonListBox1.ButtonHoverBackColor = theme.Colors.Sharp;
-                buttonListBox1.ButtonHoverForeColor = theme.Colors.SharpText;
-            }
-        }
-
-        protected override void OnCurrentLanguageChanged()
-        {
-            base.OnCurrentLanguageChanged();
-
-            if (buttonListBox1 != null)
-            {
-                btnNew.Text = Lang._("New");
-                btnOpen.Text = Lang._("Open");
-                btnOptions.Text = Lang._("Options");
-            }
-        }
-
-        void btnOptions_Click(object sender, EventArgs e)
-        {
-            if (Program.MainForm != null)
-            {
-                Program.MainForm.ShowOptionsDialog();
-            }
-        }
-
-        void btnOpen_Click(object sender, EventArgs e)
-        {
-            if (Program.MainForm != null)
-            {
-                Program.MainForm.OpenDocument();
-            }
-        }
-
-        void btnNew_Click(object sender, EventArgs e)
-        {
-            if (Program.MainForm != null)
-            {
-                Program.MainForm.NewDocument();
-            }
-        }
-        */
     }
 }
