@@ -40,13 +40,13 @@ namespace C2.OperatorViews
             this.button1.Click += new EventHandler(this.Add_Click);
 
             this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Size = new Size(435, 84);
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.Size = new Size(506, 84);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
 
@@ -215,6 +215,7 @@ namespace C2.OperatorViews
 
         protected override void CreateLine(int addLine)
         {
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(60, 1);
             // And OR 选择框
             ComboBox regBox = NewAndORComboBox();
             regBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -290,6 +291,8 @@ namespace C2.OperatorViews
                 ctlNext5.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k));
             }
+            if (this.tableLayoutPanel1.RowCount == 1)
+                this.tableLayoutPanel2.Location = new System.Drawing.Point(60, 41);
         }
     }
 }

@@ -391,7 +391,7 @@ namespace C2.Controls.Move.Op
             switch (SubTypeName)
             {
                 case "关联算子":
-                    new RelateOperatorView(this).ShowDialog();
+                    new RelateOperatorView_v5(this).ShowDialog();
                     break;
                 case "碰撞算子":
                     new CollideOperatorView(this).ShowDialog();

@@ -194,7 +194,9 @@
     <Compile Include="Controls\DataCharts\RingChart.Designer.cs">
       <DependentUpon>RingChart.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Base\BaseOperatorView.cs" />
+    <Compile Include="Dialogs\Base\BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\Base\BaseOperatorView.Designer.cs">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
     </Compile>
@@ -245,6 +247,12 @@
     </Compile>
     <Compile Include="Dialogs\C1OperatorViews\FilterOperatorView.Designer.cs">
       <DependentUpon>FilterOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\RelateOperator_v5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\RelateOperator_v5.Designer.cs">
+      <DependentUpon>RelateOperator_v5.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\C1OperatorViews\FreqOperatorView.cs">
       <SubType>Form</SubType>
@@ -1419,6 +1427,12 @@
     <EmbeddedResource Include="Dialogs\Base\BaseOperatorView.resx">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Base\C1BaseOperatorView.resx">
+      <DependentUpon>C1BaseOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Base\C2BaseOperatorView.resx">
+      <DependentUpon>C2BaseOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\AvgOperatorView.resx">
       <DependentUpon>AvgOperatorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1463,6 +1477,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\RelateOperatorView.resx">
       <DependentUpon>RelateOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\RelateOperator_v5.resx">
+      <DependentUpon>RelateOperator_v5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\SortOperatorView.resx">
       <DependentUpon>SortOperatorView.cs</DependentUpon>
