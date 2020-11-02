@@ -1,14 +1,13 @@
-﻿using System;
+﻿using C2.Globalization;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using C2.Core;
-using C2.Globalization;
 
 namespace C2.Controls
 {
-    class BorderPanel : BaseControl
+    public class BorderPanel : BaseControl
     {
         int _RoundSize = 0;
         Color _ContentBackColor = Color.White;

@@ -13,28 +13,45 @@ namespace C2.Controls.DataCharts
 {
     public partial class BarChart : UserControl
     {
-        private string[] x;
+        private List<string> x;
         private double[] y;
-        public BarChart(string[] x, double[] y)
+        private string title;
+        private List<List<string>> dataList;
+        public BarChart(List<string> x, double[] y, string title = "柱状图")
         {
             InitializeComponent();
             this.x = x;
             this.y = y;
+            this.title = title;
             InitChart();
+            
         }
+
+        public BarChart(List<List<string>> dataList, List<string> title)
+        {
+            InitializeComponent();
+            this.title = title[0];
+            InitChart();
+            
+            DataBind(dataList[0], dataList[1]);
+        }
+        
         public void InitChart()
         {
-            chart1.Titles.Add("");
+            chart1.Titles.Add(title);
             chart1.Titles[0].ForeColor = Color.White;
             chart1.Titles[0].Font = new Font("微软雅黑", 12f, FontStyle.Regular);
             chart1.Titles[0].Alignment = ContentAlignment.TopCenter;
 
-
+            //
+            //图标背景透明化
+            //
             //控件背景
             chart1.BackColor = Color.Transparent;
             //图表区背景
             chart1.ChartAreas[0].BackColor = Color.Transparent;
             chart1.ChartAreas[0].BorderColor = Color.Transparent;
+
             //X轴标签间距
             chart1.ChartAreas[0].AxisX.Interval = 1;
             chart1.ChartAreas[0].AxisX.LabelStyle.IsStaggered = true;
@@ -91,10 +108,24 @@ namespace C2.Controls.DataCharts
             chart1.Legends[0].Position.Auto = false;
 
 
-            //绑定数据
-            chart1.Series[0].Points.DataBindXY(x, y);
-            chart1.Series[0].Points[0].Color = Color.White;
-            chart1.Series[0].Palette = ChartColorPalette.Bright;
+            ////绑定数据
+            //chart1.Series[0].Points.DataBindXY(x, y);
+            //chart1.Series[0].Points[0].Color = Color.White;
+            //chart1.Series[0].Palette = ChartColorPalette.Bright;
+        }
+        void DataBind(List<string> x,List<string> y)
+        {
+            try
+            {
+                List<double> y_double = y.ConvertAll(d => Convert.ToDouble(d));
+                chart1.Series[0].Points.DataBindXY(x, y_double);
+                chart1.Series[0].Points[0].Color = Color.White;
+                chart1.Series[0].Palette = ChartColorPalette.Bright;
+            }
+            catch
+            {
+                return;
+            }
         }
         public void save()
         {

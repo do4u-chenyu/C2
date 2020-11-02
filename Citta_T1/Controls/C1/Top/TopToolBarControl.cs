@@ -15,12 +15,151 @@ namespace C2.Controls.Top
 {
     public partial class TopToolBarControl : UserControl
     {
+        private bool selectRemark;
+        private bool selectFrame;
+        private bool selectDrag;
+        public bool SelectRemark { get => selectRemark; set => selectRemark = value; }
+        public bool SelectDrag { get => selectDrag; set => selectDrag = value; }
+        public bool SelectFrame { get => selectFrame; set => selectFrame = value; }
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopToolBarControl));
         public TopToolBarControl()
         {
             InitializeComponent();
             InitializeToolTip();
             InitializeUndoRedoManger();
+            SelectDrag = false;
+            SelectFrame = false;
+            SelectRemark = false;
+        } // 恢复到编辑模式
+        public void ResetStatus()
+        {
+            SelectDrag = false;
+            SelectFrame = false;
+            DragChange(SelectDrag);
+            FrameChange(SelectFrame);
+            ChangeCursor();
         }
+        private void ChangeCursor()
+        {
+            // 拖拽
+            if (SelectDrag)
+            {
+                //Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
+                Global.GetCanvasPanel().Cursor = Helper.LoadCursor(Properties.Resources.hand_cur);
+            }
+            // 框选
+            else if (SelectFrame)
+            {
+                Global.GetCanvasPanel().Cursor = Cursors.Default;
+            }
+            // 编辑
+            else
+            {
+                Global.GetCanvasPanel().Cursor = Cursors.Hand;
+            }
+            // FlowControl本身的图标不变
+            this.Cursor = Cursors.Default;
+        }
+        #region 拖动
+
+        private void MovePictureBox_Click(object sender, EventArgs e)
+        {
+            // 1. 点击之后图标变色
+            // 2. 鼠标变成手的图标
+            // 3. 画布中触发MouseDown MouseMove MouseUp动作
+            Global.GetCanvasPanel().ClearAllLineStatus();
+            SelectDrag = !SelectDrag;
+            SelectFrame = false;
+            ChangeCursor();
+            FrameChange(SelectFrame);
+        }
+
+        #endregion
+
+        #region 放大缩小
+       
+        private void ZoomUpPictureBox_Click(object sender, EventArgs e)
+        {
+            SelectFrame = false;
+            ChangeCursor();
+            FrameChange(SelectFrame);
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            Global.GetCanvasPanel().ChangSize(true);
+        }
+
+        private void ZoomDownPictureBox_Click(object sender, EventArgs e)
+        {
+            SelectFrame = false;
+            ChangeCursor();
+            FrameChange(SelectFrame);
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            Global.GetCanvasPanel().ChangSize(false);
+        }
+        #endregion
+
+        #region 备注
+
+        private void HideRemarkControl()//单击备注按钮，备注出现和隐藏功能
+        {
+            Global.GetRemarkControl().Visible = false;
+        }
+
+        private void ShowRemarkControl()//单击备注按钮，备注出现和隐藏功能
+        {
+            Global.GetRemarkControl().Visible = true;
+        }
+
+        private void RemarkPictureBox_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
+        {
+            Global.GetCurrentDocument().RemarkVisible = !Global.GetCurrentDocument().RemarkVisible;
+            SelectRemark = Global.GetCurrentDocument().RemarkVisible;
+            if (SelectRemark)
+                ShowRemarkControl();
+            else
+                HideRemarkControl();
+        }
+        #endregion
+
+        #region 框选
+
+        private void FramePictureBox_Click(object sender, EventArgs e)
+        {
+            Global.GetCanvasPanel().ClearAllLineStatus();
+            SelectFrame = !SelectFrame;
+            SelectDrag = false;
+            ChangeCursor();
+            DragChange(SelectDrag);
+        }
+        #endregion
+
+        private void DragChange(bool flag)
+        {
+            
+        }
+
+        public void RemarkChange(bool flag)
+        {
+          
+        }
+        private void FrameChange(bool flag)
+        {
+            Global.GetCurrentDocument().Show();
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            
+        }
+        public void InterruptSelectFrame()
+        {
+            SelectFrame = false;
+            FrameChange(SelectFrame);
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            Global.GetCanvasPanel().Invalidate();
+        }
+
+        private void FlowControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
 
         private void InitializeUndoRedoManger()
         {

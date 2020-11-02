@@ -12,6 +12,7 @@ namespace C2.Controls
 {
     class DragWrapper
     {
+        private CanvasPanel canvasPanel;
         public int Width { get; set; }
         public int Height { get; set; }
         public float Factor { get; set; }
@@ -22,8 +23,9 @@ namespace C2.Controls
         public Point Now { get; set; }
         public Bitmap StaticImage { get; set; }
 
-        public DragWrapper()
+        public DragWrapper(CanvasPanel canvas)
         {
+            canvasPanel = canvas;
             WorldWidth = 2000;
             WorldHeight = 1000;
             StartDrag = false;

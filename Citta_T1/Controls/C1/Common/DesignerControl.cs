@@ -2,15 +2,15 @@
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace C2.Controls.Common
 {
-    public partial class DesignerControl : UserControl
+    public partial class DesignerControl : BorderPanel
     {
-
-
+        private string[] ComboOperator = new string[] { "最大值", "AI实践" };
         public Topic SelectedTopic { get; set; }
         public OperatorWidget OpWidget { get; set; }
         public DataItem SelectedDataSource { get; set; }
@@ -23,9 +23,9 @@ namespace C2.Controls.Common
             if(SelectedTopic == null)
             {
                 this.topicName.Text = "未选中主题";
-                this.dataSourceCombo.Text = "";
+                this.dataSourceCombo.Text = String.Empty;
                 this.dataSourceCombo.Items.Clear();
-                this.operatorName.Text = "";
+                this.operatorCombo.Text = String.Empty;
             }
             else
             {
@@ -50,16 +50,8 @@ namespace C2.Controls.Common
                 //TODO
                 //dtw.选中数据源;
                 DataItem d1 = OpWidget.DataSourceItem;
-                if (d1 != null)
-                {
-                    SelectedDataSource = d1;
-                    this.dataSourceCombo.Text = d1.FileName;
-                }
-                else
-                {
-                    SelectedDataSource = null;
-                    this.dataSourceCombo.Text = "请选择数据源";
-                }
+                SelectedDataSource = d1;
+                this.dataSourceCombo.Text = d1.FileName;
             }
         }
 
@@ -84,16 +76,17 @@ namespace C2.Controls.Common
 
         private void SetSelectedOperator()
         {
-            this.operatorName.Text = OpWidget != null ? OpWidget.OpType : "";
-            SelectedOperator = OpWidget != null ? OpWidget.OpType : "";
+            this.operatorCombo.Text = OpWidget != null ? OpWidget.OpType : String.Empty;
+            SelectedOperator = OpWidget != null ? OpWidget.OpType : String.Empty;
         }
 
         public DesignerControl()
         {
             InitializeComponent();
+            Font = UITheme.Default.DefaultFont;
         }
 
-        private void button1_Click(object sender, System.EventArgs e)
+        private void Button1_Click(object sender, System.EventArgs e)
         {
             if(this.topicName.Text == "未选中主题")
             {
@@ -101,7 +94,7 @@ namespace C2.Controls.Common
                 return;
             }
 
-            if (OpWidget.DataSourceItem == null)
+            if (SelectedDataSource.IsEmpty())
             {
                 MessageBox.Show("未选中数据源,请添加后再配置");
                 return;
@@ -135,13 +128,21 @@ namespace C2.Controls.Common
 
         }
 
-        private void dataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void DataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            OperatorWidget opw = SelectedTopic.FindWidget<OperatorWidget>();
-
-            if (opw != null)
+            if (OpWidget != null)
             {
-                opw.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+                OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+                SelectedDataSource = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+            }
+        }
+
+        private void OperatorCombo_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (OpWidget != null)
+            {
+                OpWidget.OpType = ComboOperator[this.operatorCombo.SelectedIndex];
+                SelectedOperator = ComboOperator[this.operatorCombo.SelectedIndex];
             }
         }
     }

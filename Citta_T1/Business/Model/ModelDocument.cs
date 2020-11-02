@@ -16,7 +16,7 @@ namespace C2.Business.Model
     /*
      * 一个文档对应一个模型
      */
-    class ModelDocument
+    public class ModelDocument
     {
 
         /*

@@ -15,23 +15,29 @@ namespace C2.Controls.DataCharts
     {
         private string[] x;
         private double[] y;
+        private string title;
         public PieChart(string[] x,double[] y)
         {
             InitializeComponent();
             this.x = x;
             this.y = y;
-            initChart();
+            this.title = "饼图";
+            InitChart();
         }
-        public void initChart()
+        public PieChart(List<List<string>> dataList, List<string> title)
         {
-            chart1.Titles.Add("饼图数据分析");
+            InitializeComponent();
+            this.title = title[0];
+            InitChart();
+
+            DataBind(dataList[0], dataList[1]);
+        }
+        public void InitChart()
+        {
+            chart1.Titles.Add(this.title);
             chart1.Titles[0].ForeColor = Color.White;
             chart1.Titles[0].Font = new Font("微软雅黑", 12f, FontStyle.Regular);
             chart1.Titles[0].Alignment = ContentAlignment.TopCenter;
-            chart1.Titles.Add("合计：25412 宗");
-            chart1.Titles[1].ForeColor = Color.White;
-            chart1.Titles[1].Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            chart1.Titles[1].Alignment = ContentAlignment.TopRight;
 
             //控件背景
             chart1.BackColor = Color.Transparent;
@@ -108,13 +114,29 @@ namespace C2.Controls.DataCharts
             chart1.Series[0].ShadowOffset = 0;
 
             //饼图折线
-            chart1.Series[0]["PieLineColor"] = "White";
-            //绑定数据
-            chart1.Series[0].Points.DataBindXY(x, y);
-            chart1.Series[0].Points[0].Color = Color.White;
-            //绑定颜色
-            chart1.Series[0].Palette = ChartColorPalette.BrightPastel;
+            //chart1.Series[0]["PieLineColor"] = "White";
+            ////绑定数据
+            //chart1.Series[0].Points.DataBindXY(x, y);
+            //chart1.Series[0].Points[0].Color = Color.White;
+            ////绑定颜色
+            //chart1.Series[0].Palette = ChartColorPalette.BrightPastel;
 
+        }
+        void DataBind(List<string> x, List<string> y)
+        {
+            try
+            {
+                chart1.Series[0]["PieLineColor"] = "Gray";
+                List<double> y_double = y.ConvertAll(d => Convert.ToDouble(d));
+                chart1.Series[0].Points.DataBindXY(x, y_double);
+                chart1.Series[0].Points[0].Color = Color.Gray;
+                chart1.Series[0].Palette = ChartColorPalette.BrightPastel;
+                chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
+            }
+            catch
+            {
+                return;
+            }
         }
     }
 }

@@ -47,17 +47,18 @@ namespace C2.Controls.Flow
                 startX = e.X;
                 startY = e.Y;
                 // 界面删除元素时缓存并不及时删除, 采用积累到一定程度后, 定期清空,
-                int bufCount = this.elementWorldLocDict.Count;
-                int usrCount = Global.GetModelDocumentDao().CountAllModelElements();
+                //int bufCount = this.elementWorldLocDict.Count;
+                //int usrCount = Global.GetModelDocumentDao().CountAllModelElements();
                 // 删除的元素太多,重置缓存
-                if (Math.Abs(bufCount - usrCount) > Math.Max(128, this.elementWorldLocDict.Count / 2))
-                {
-                    this.elementWorldLocDict.Clear();
-                    foreach (ModelDocument md in Global.GetModelDocumentDao().ModelDocuments)
-                        PushModelDocument(md);
-                }
-                else
-                    PushModelDocument(Global.GetModelDocumentDao().CurrentDocument);
+                //if (Math.Abs(bufCount - usrCount) > Math.Max(128, this.elementWorldLocDict.Count / 2))
+                //{
+                //    this.elementWorldLocDict.Clear();
+                //    foreach (ModelDocument md in Global.GetModelDocumentDao().ModelDocuments)
+                //        PushModelDocument(md);
+                //}
+                //else
+                //    PushModelDocument(Global.GetCurrentDocument());
+                PushModelDocument(Global.GetCurrentDocument());
             }
         }
 
@@ -100,7 +101,7 @@ namespace C2.Controls.Flow
             startY = e.Y;
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
-            Global.GetFlowControl().ResetStatus();
+            Global.GetTopToolBarControl().ResetStatus();
         }
 
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)

@@ -25,15 +25,15 @@ namespace C2.OperatorViews
         private void InitializeComponentManual()
         {
             this.button1.Click += new EventHandler(this.Add_Click);
- 
+
             this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Size = new Size(435, 84);
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 55F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.Size = new Size(471, 84);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
 
@@ -67,9 +67,9 @@ namespace C2.OperatorViews
                 {
                     if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL0, index))
                         continue;
-                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString()); 
+                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
                 }
-                   
+
             }
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield1")))
             {
@@ -81,16 +81,16 @@ namespace C2.OperatorViews
                 {
                     if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL1, index))
                         continue;
-                    this.oldOutName1.Add(this.outListCCBL1.Items[index].ToString()); 
+                    this.oldOutName1.Add(this.outListCCBL1.Items[index].ToString());
                 }
-                   
+
             }
 
 
             int[] itemsList0 = Array.ConvertAll(this.opControl.Option.GetOptionSplit("factor0"), int.Parse);
             if (itemsList0.Length > 1)
             {
-                
+
                 if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, itemsList0[0]))
                 {
                     this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
@@ -100,9 +100,9 @@ namespace C2.OperatorViews
                 {
                     this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
                     this.comboBox1.Tag = itemsList0[1].ToString();
-                }             
+                }
             }
-                
+
             int count = this.opControl.Option.KeysCount("factor") - 1;
             if (count < 1)
                 return;
@@ -114,7 +114,7 @@ namespace C2.OperatorViews
                 int[] itemsList1 = Array.ConvertAll(this.opControl.Option.GetOptionSplit(name), int.Parse);
                 if (itemsList1.Length < 3) continue;
 
-                Control control1 = this.tableLayoutPanel1.Controls[i * 6 + 0];  
+                Control control1 = this.tableLayoutPanel1.Controls[i * 6 + 0];
                 Control control2 = this.tableLayoutPanel1.Controls[i * 6 + 1];
                 Control control3 = this.tableLayoutPanel1.Controls[i * 6 + 3];
                 if (!OpUtil.IsArrayIndexOutOfBounds(control1, itemsList1[0]))
@@ -131,8 +131,8 @@ namespace C2.OperatorViews
                 {
                     control3.Text = (control3 as ComboBox).Items[itemsList1[2]].ToString();
                     control3.Tag = itemsList1[2].ToString();
-                }                             
-            }          
+                }
+            }
         }
         protected override void SaveOption()
         {
@@ -200,13 +200,15 @@ namespace C2.OperatorViews
 
 
         protected override void CreateLine(int addLine)
+
         {
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(62, 0);
             // And OR 选择框
             ComboBox regBox = NewAndORComboBox();
             //regBox.Size = new System.Drawing.Size(85, 26);
             regBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
-            
+
 
             // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
@@ -255,6 +257,7 @@ namespace C2.OperatorViews
                 ctlNext5.Name = (k + 1).ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k + 1));
             }
+            
         }
 
         protected override void MoveTableLayoutPanelControls(int delLine)
@@ -276,6 +279,14 @@ namespace C2.OperatorViews
                 ctlNext5.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k));
             }
+            if(this.tableLayoutPanel1.RowCount==1)
+                this.tableLayoutPanel2.Location = new System.Drawing.Point(62, 39);
+
+        }
+
+        private void valuePanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

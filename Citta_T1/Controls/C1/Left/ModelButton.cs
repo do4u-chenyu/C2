@@ -31,7 +31,7 @@ namespace C2.Controls.Left
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 文件打开后,不能重复打开,不能删除,不能重命名
-            Global.GetMainForm().LoadDocument(this.textButton.Text);
+            Global.GetCanvasForm().LoadDocument(this.textButton.Text);
             this.OpenToolStripMenuItem.Enabled = false;
             this.RenameToolStripMenuItem.Enabled = false;
             this.DeleteToolStripMenuItem.Enabled = false;
@@ -61,7 +61,7 @@ namespace C2.Controls.Left
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //  容错处理, 标题栏中文档未关闭时,不能重命名
-            if (Global.GetModelTitlePanel().ContainModel(this.ModelTitle))
+            if (Global.GetTaskBar().ContainModel(this.ModelTitle))
                 return;
 
             this.textBox.Text = ModelTitle;
@@ -76,7 +76,7 @@ namespace C2.Controls.Left
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 容错处理, 标题栏中文档未关闭时,不能删除
-            if (Global.GetModelTitlePanel().ContainModel(this.ModelTitle))
+            if (Global.GetTaskBar().ContainModel(this.ModelTitle))
                 return;
             // 删除前用对话框确认
             DialogResult rs = MessageBox.Show(String.Format("删除模型 {0}, 继续删除请点击 \"确定\"", ModelTitle),
@@ -160,12 +160,12 @@ namespace C2.Controls.Left
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-           ModelDocument model = Global.GetModelDocumentDao().FindModelDocument(this.ModelTitle);
-            //模型没打开能够导出，否则文档非dirty才能导出
-            if (model == null)
-                this.ExportModel.Enabled = true;
-            else
-                this.ExportModel.Enabled = !model.Dirty;
+           //ModelDocument model = Global.GetModelDocumentDao().FindModelDocument(this.ModelTitle);
+           // //模型没打开能够导出，否则文档非dirty才能导出
+           // if (model == null)
+           //     this.ExportModel.Enabled = true;
+           // else
+           //     this.ExportModel.Enabled = !model.Dirty;
         }
     }
 

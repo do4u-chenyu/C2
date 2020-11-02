@@ -1,26 +1,24 @@
-﻿using System;
+﻿using C2.ChartPageView;
+using C2.Configuration;
+using C2.Controls;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Design;
+using C2.Dialogs;
+using C2.Globalization;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
+using C2.Model.Widgets;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
-using C2.ChartPageView;
-using C2.Configuration;
-using C2.Controls;
-using C2.Controls.Common;
-using C2.Controls.MapViews;
-using C2.Core;
-using C2.Design;
-using C2.Dialogs;
-using C2.Globalization;
-using C2.Model;
-using C2.Model.Documents;
-using C2.Model.MindMaps;
-using C2.Model.Styles;
-using C2.Model.Widgets;
 
-namespace C2
+namespace C2.Forms
 {
     public partial class DocumentForm : BaseDocumentForm, IThemableUI
     {
@@ -37,6 +35,7 @@ namespace C2
         ChartControl _ActiveChartBox;
         bool _ShowSidebar = true;
         object[] _SelectedObjects;
+        object _ShowDesignerObject;
         ShortcutKeysTable ShortcutKeys;
         PrintDialog MyPrintDialog;
         bool HardClose;
@@ -150,9 +149,19 @@ namespace C2
                     _SelectedObjects = value;
                     OnSelectedObjectsChanged(old);
                 }
+                ShowDesigner(_SelectedObjects[0]);
             }
         }
 
+        object ShowDesignerObject
+        {
+            get { return _ShowDesignerObject; }
+            set
+            {
+                 _ShowDesignerObject = value;
+                OnShowDesignerObjectChanged(_ShowDesignerObject);
+            }
+        }
         void OnShowSidebarChanged()
         {
             splitContainer2.Visible = ShowSidebar;
@@ -194,6 +203,7 @@ namespace C2
             if (old != null)
             {
                 old.SelectedObjectsChanged -= new EventHandler(ActivedChartPage_SelectedObjectsChanged);
+                old.NeedShowDesigner -= new EventHandler(ActivedChartPage_NeedShowDesigner);
             }
 
             if (ActivedChartPage != null)
@@ -204,6 +214,7 @@ namespace C2
 
                 SelectedObjects = ActivedChartPage.SelectedObjects;
                 ActivedChartPage.SelectedObjectsChanged += new EventHandler(ActivedChartPage_SelectedObjectsChanged);
+                ActivedChartPage.NeedShowDesigner += new EventHandler(ActivedChartPage_NeedShowDesigner);
             }
             else
             {
@@ -216,12 +227,20 @@ namespace C2
             ResetControlStatus();
         }
 
+        void OnShowDesignerObjectChanged(object obj)
+        {
+            if(ShowDesignerObject != null)
+            {
+                ShowDesigner(ShowDesignerObject);
+            }
+        }
+
         void OnSelectedObjectsChanged(object[] old)
         {
             if (SelectedObjects != null)
             {
+                //ShowDesigner(SelectedObjects[0]);
                 ShowProperty(SelectedObjects);
-                ShowDesigner(SelectedObjects[0]);
             }
                 
             else if (ActivedChartPage != null)
@@ -330,7 +349,7 @@ namespace C2
             tabControl2.Dock = DockStyle.Fill;
             tabControl2.SelectedBackColor = Color.White;
             tabControl2.SelectedForeColor = Color.Black;
-            tabControl2.AddPage(dc);
+            tabControl2.AddPage(dc, Properties.Resources.designer);
             splitContainer2.Panel2.Controls.Add(tabControl2);
 
             //
@@ -811,6 +830,17 @@ namespace C2
                 ActiveChartBox.ResetControlStatus();
         }
 
+        
+        void ActivedChartPage_NeedShowDesigner(object sender, EventArgs e)
+        {
+            if (ActivedChartPage == sender)
+            {
+                ShowDesignerObject = ActivedChartPage.ShowDesignerObject;
+            }
+
+            ResetControlStatus();
+        }
+
         void ActivedChartPage_SelectedObjectsChanged(object sender, EventArgs e)
         {
             if (ActivedChartPage == sender)
@@ -879,7 +909,7 @@ namespace C2
                         tabControl2.TabPages.Remove(CurrentPropertyBox);
                     //tabControl2.Controls.Clear();
                     pb.Dock = DockStyle.Fill;
-                    tabControl2.InsertPage(1, pb, Properties.Resources.property);
+                    tabControl2.InsertPage(0, pb, Properties.Resources.property);
                 }
 
                 CurrentPropertyBox = pb;

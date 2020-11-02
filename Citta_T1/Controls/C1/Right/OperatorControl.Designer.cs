@@ -1,4 +1,4 @@
-﻿namespace C2.Controls.Left
+﻿namespace C2.Controls.Right
 {
     partial class OperatorControl
     {
@@ -113,7 +113,7 @@
             this.differOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.differOpPictureBox.BackgroundImage = global::C2.Properties.Resources.subtra_op;
             this.differOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.differOpPictureBox.Location = new System.Drawing.Point(7, 115);
+            this.differOpPictureBox.Location = new System.Drawing.Point(8, 115);
             this.differOpPictureBox.Name = "differOpPictureBox";
             this.differOpPictureBox.Size = new System.Drawing.Size(21, 21);
             this.differOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -209,7 +209,7 @@
             this.sortOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.sortOpPictureBox.BackgroundImage = global::C2.Properties.Resources.order_op;
             this.sortOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.sortOpPictureBox.Location = new System.Drawing.Point(104, 115);
+            this.sortOpPictureBox.Location = new System.Drawing.Point(104, 112);
             this.sortOpPictureBox.Name = "sortOpPictureBox";
             this.sortOpPictureBox.Size = new System.Drawing.Size(24, 24);
             this.sortOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -268,7 +268,7 @@
             // 
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox3.Image = global::C2.Properties.Resources.python_op;
-            this.pictureBox3.Location = new System.Drawing.Point(7, 289);
+            this.pictureBox3.Location = new System.Drawing.Point(8, 289);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(20, 20);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -584,7 +584,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.leftPanelOpRelate);
             this.Controls.Add(this.pythonOPButton);
             this.Controls.Add(this.customOPButton1);
@@ -619,8 +618,9 @@
             this.Controls.Add(this.avgOpPictureBox);
             this.Controls.Add(this.unionOpPictureBox);
             this.Controls.Add(this.collideOpPictureBox);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "OperatorControl";
-            this.Size = new System.Drawing.Size(215, 320);
+            this.Size = new System.Drawing.Size(217, 322);
             ((System.ComponentModel.ISupportInitialize)(this.relateOpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collideOpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.differOpPictureBox)).EndInit();

@@ -218,7 +218,7 @@ namespace C2.Controls.Move.Op
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
             bool isNeedMoveLine = false;
-            if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
+            if (Global.GetTopToolBarControl().SelectDrag || (Global.GetTopToolBarControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
                 return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
 
@@ -255,7 +255,7 @@ namespace C2.Controls.Move.Op
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             if (e.Button == MouseButtons.Left)
             {
@@ -280,7 +280,7 @@ namespace C2.Controls.Move.Op
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
@@ -305,7 +305,7 @@ namespace C2.Controls.Move.Op
             else if (e.Clicks == 2)
             {
                 // 清空焦点
-                Global.GetMainForm().BlankButtonFocus();
+                Global.GetCanvasForm().BlankButtonFocus();
                 // 显示配置
                 if (this.OptionMenuItem.Enabled)
                     ShowOptionDialog();
@@ -320,7 +320,7 @@ namespace C2.Controls.Move.Op
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
 
             if (e.Button == MouseButtons.Left)
@@ -391,7 +391,7 @@ namespace C2.Controls.Move.Op
             switch (SubTypeName)
             {
                 case "关联算子":
-                    new RelateOperatorView_v5(this).ShowDialog();
+                    new RelateOperatorView(this).ShowDialog();
                     break;
                 case "碰撞算子":
                     new CollideOperatorView(this).ShowDialog();
@@ -474,7 +474,7 @@ namespace C2.Controls.Move.Op
             //需要判断模型当前运行状态，正在运行时，无法执行运行到此
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(), "mid", currentOp);
-            Global.GetMainForm().BindUiManagerFunc();
+            Global.GetCanvasForm().BindUiManagerFunc();
 
             int notReadyNum = currentManager.CurrentModelTripleStatusNum(ElementStatus.Null);
             if (notReadyNum > 0)
@@ -492,7 +492,7 @@ namespace C2.Controls.Move.Op
 
 
             currentManager.Start();
-            Global.GetMainForm().UpdateRunbuttonImageInfo();
+            Global.GetCanvasForm().UpdateRunbuttonImageInfo();
         }
 
         private void PushUndoStackWhenDel()
@@ -508,7 +508,7 @@ namespace C2.Controls.Move.Op
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
+            if (Global.GetTopToolBarControl().SelectDrag || (Global.GetTopToolBarControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
                 return;
 
             this.DeleteMyself();

@@ -248,11 +248,11 @@
     <Compile Include="Dialogs\C1OperatorViews\FilterOperatorView.Designer.cs">
       <DependentUpon>FilterOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\C1OperatorViews\RelateOperator_v5.cs">
+    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\C1OperatorViews\RelateOperator_v5.Designer.cs">
-      <DependentUpon>RelateOperator_v5.cs</DependentUpon>
+    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.Designer.cs">
+      <DependentUpon>RelateOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\C1OperatorViews\FreqOperatorView.cs">
       <SubType>Form</SubType>
@@ -302,12 +302,6 @@
     <Compile Include="Dialogs\C1OperatorViews\RandomOperatorView.Designer.cs">
       <DependentUpon>RandomOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.Designer.cs">
-      <DependentUpon>RelateOperatorView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\C1OperatorViews\SortOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,12 +313,6 @@
     </Compile>
     <Compile Include="Dialogs\C1OperatorViews\UnionOperatorView.Designer.cs">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\C2OperatorViews\Base\C2BaseOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\C2OperatorViews\Base\C2BaseOperatorView.Designer.cs">
-      <DependentUpon>C2BaseOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2CustomOperatorView.cs">
       <SubType>Form</SubType>
@@ -565,7 +553,7 @@
       <DependentUpon>ComCheckBoxList.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Common\DesignerControl.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\C1\Common\DesignerControl.Designer.cs">
       <DependentUpon>DesignerControl.cs</DependentUpon>
@@ -682,7 +670,22 @@
     <Compile Include="Controls\Misc\ImageListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Misc\MdiWorkSpace.cs">
+    <Compile Include="Dialogs\VisualDisplayDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\VisualDisplayDialog.Designer.cs">
+      <DependentUpon>VisualDisplayDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CanvasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CanvasForm.Designer.cs">
+      <DependentUpon>CanvasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\BaseWorkSpace.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\MdiWorkSpace.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Misc\MultiSelectTreeView.cs">
@@ -1022,10 +1025,10 @@
     <Compile Include="Dialogs\TimerDialog.Designer.cs">
       <DependentUpon>TimerDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="DocumentForm.cs">
+    <Compile Include="Forms\DocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DocumentForm.Designer.cs">
+    <Compile Include="Forms\DocumentForm.Designer.cs">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Globalization\AuthorInfo.cs" />
@@ -1074,12 +1077,6 @@
     <Compile Include="Controls\C1\Left\DataSourceControl.Designer.cs">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\C1\Left\FlowChartControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Left\FlowChartControl.Designer.cs">
-      <DependentUpon>FlowChartControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\C1\Left\ModelButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1104,12 +1101,6 @@
     <Compile Include="Controls\C1\Flow\RemarkControl.Designer.cs">
       <DependentUpon>RemarkControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\C1\Flow\RightShowButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Flow\RightShowButton.Designer.cs">
-      <DependentUpon>RightShowButton.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\C1\Flow\RightHideButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1129,10 +1120,10 @@
     <Compile Include="Controls\C1\Title\ModelTitleControl.Designer.cs">
       <DependentUpon>ModelTitleControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\C1\Title\DragLineControl.cs">
+    <Compile Include="Controls\C1\Bottom\DragLineControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\C1\Title\DragLineControl.Designer.cs">
+    <Compile Include="Controls\C1\Bottom\DragLineControl.Designer.cs">
       <DependentUpon>DragLineControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Title\ModelTitlePanel.cs">
@@ -1264,22 +1255,16 @@
     <Compile Include="Controls\C1\Bottom\BottomLogControl.Designer.cs">
       <DependentUpon>BottomLogControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\C1\Flow\FlowControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Flow\FlowControl.Designer.cs">
-      <DependentUpon>FlowControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\C1\Left\OperatorControl.cs">
+    <Compile Include="Controls\C1\Right\OperatorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\C1\Left\OperatorControl.Designer.cs">
+    <Compile Include="Controls\C1\Right\OperatorControl.Designer.cs">
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -1299,7 +1284,7 @@
     <Compile Include="ChartBoards.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StartPage.cs">
+    <Compile Include="Forms\StartForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utils\ConfigUtil.cs" />
@@ -1353,9 +1338,6 @@
     <EmbeddedResource Include="Controls\C1\Left\DataSourceControl.resx">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Left\FlowChartControl.resx">
-      <DependentUpon>FlowChartControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\ModelButton.resx">
       <DependentUpon>ModelButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -1367,10 +1349,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Flow\RemarkControl.resx">
       <DependentUpon>RemarkControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Flow\RightShowButton.resx">
-      <DependentUpon>RightShowButton.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Flow\RightHideButton.resx">
@@ -1386,7 +1364,7 @@
     <EmbeddedResource Include="Controls\C1\Title\ModelTitleControl.resx">
       <DependentUpon>ModelTitleControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Title\DragLineControl.resx">
+    <EmbeddedResource Include="Controls\C1\Bottom\DragLineControl.resx">
       <DependentUpon>DragLineControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Title\ModelTitlePanel.resx">
@@ -1410,10 +1388,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Bottom\BottomConsoleControl.resx">
       <DependentUpon>BottomConsoleControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Flow\FlowControl.resx">
-      <DependentUpon>FlowControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\RingChart.resx">
       <DependentUpon>RingChart.cs</DependentUpon>
@@ -1477,9 +1451,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\RelateOperatorView.resx">
       <DependentUpon>RelateOperatorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\C1OperatorViews\RelateOperator_v5.resx">
-      <DependentUpon>RelateOperator_v5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\SortOperatorView.resx">
       <DependentUpon>SortOperatorView.cs</DependentUpon>
@@ -1545,7 +1516,13 @@
     <EmbeddedResource Include="Dialogs\TimerDialog.resx">
       <DependentUpon>TimerDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DocumentForm.resx">
+    <EmbeddedResource Include="Dialogs\VisualDisplayDialog.resx">
+      <DependentUpon>VisualDisplayDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CanvasForm.resx">
+      <DependentUpon>CanvasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -1562,7 +1539,7 @@
       <DependentUpon>NaviViewControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Left\OperatorControl.resx">
+    <EmbeddedResource Include="Controls\C1\Right\OperatorControl.resx">
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -1618,8 +1595,8 @@
     <EmbeddedResource Include="ChartBoards.resx">
       <DependentUpon>ChartBoards.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StartPage.resx">
-      <DependentUpon>StartPage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\StartForm.resx">
+      <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Demo\demo_bcp.bcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -1727,13 +1704,14 @@
     <None Include="Resources\Images\font_size.png" />
     <None Include="Resources\Images\fore_color.png" />
     <None Include="Resources\Images\format_painter.png" />
-    <None Include="Resources\Images\deletewidget.png" />
+    <None Include="Resources\Images\WidgetImage\deletewidget.png" />
+    <None Include="Resources\Images\WidgetImage\dealData.png" />
     <Content Include="Resources\Images\freemind_butterfly.png" />
     <None Include="Resources\Images\full_screen.png" />
     <None Include="Resources\Images\full_screen_exit.png" />
     <None Include="Resources\Images\hand.png" />
     <None Include="Resources\Images\hand_cur.cur" />
-    <None Include="Resources\Images\getchart.png" />
+    <None Include="Resources\Images\WidgetImage\getchart.png" />
     <Content Include="Resources\Images\help.png" />
     <None Include="Resources\Images\hourglass.png" />
     <None Include="Resources\Images\html_content.htm" />
@@ -1745,6 +1723,7 @@
     <None Include="Resources\Images\information.png" />
     <None Include="Resources\Images\internet.png" />
     <None Include="Resources\Images\italic.png" />
+    <None Include="Resources\Images\WidgetImage\joinPool.png" />
     <Content Include="Resources\Images\keyboard.png" />
     <None Include="Resources\Images\languages.png" />
     <None Include="Resources\Images\last.png" />
@@ -1813,6 +1792,7 @@
     <None Include="Resources\Images\stop.png" />
     <None Include="Resources\Images\strike.png" />
     <None Include="Resources\Images\svg.png" />
+    <None Include="Resources\Images\ToolImage\saveAllButton.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
     <None Include="Resources\Images\theme.png" />
@@ -1852,7 +1832,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\importDataSource.png" />
-    <None Include="Resources\Images\viewdata.png" />
+    <None Include="Resources\Images\WidgetImage\viewdata.png" />
+    <None Include="Resources\Images\WidgetImage\designer.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1907,7 +1888,6 @@
     </Content>
     <None Include="Resources\NativeResources.res" />
     <None Include="Resources\operator_back.png" />
-    <None Include="Resources\python.png" />
     <Content Include="Resources\Opcontrol_ico\AI.ico" />
     <Content Include="Resources\Opcontrol_ico\python.ico" />
     <Content Include="Resources\Opcontrol_ico\关联算子.ico" />
@@ -2058,8 +2038,8 @@
     </Content>
     <None Include="Resources\windows_themes.xml" />
     <None Include="Resources\WidgetIcon\data_w_icon.png" />
-    <None Include="Resources\WidgetIcon\operator_w_icon.png" />
     <None Include="Resources\WidgetIcon\result_w_icon.png" />
+    <None Include="Resources\WidgetIcon\operator_w_icon.png" />
     <Content Include="Resources\C1\datasource\pythonHelper1.png" />
     <Content Include="Resources\C1\datasource\pythonHelper2.png" />
     <Content Include="Resources\C1\datasource\pythonHelper3.png" />

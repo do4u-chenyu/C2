@@ -25,7 +25,7 @@ namespace C2.Business.Schedule
     /// <summary>
     /// 后台调度类
     /// </summary> 
-    class TaskManager
+    public class TaskManager
     {
 
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托

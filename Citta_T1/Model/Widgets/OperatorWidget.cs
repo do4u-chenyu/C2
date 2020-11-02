@@ -1,9 +1,7 @@
 ﻿using C2.Business.Option;
 using C2.Controls.MapViews;
 using System;
-using System.ComponentModel;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace C2.Model.Widgets
@@ -22,9 +20,9 @@ namespace C2.Model.Widgets
         {
             DisplayIndex = 1;
             widgetIcon = Properties.Resources.operator_w_icon;
-            DataSourceItem = null;
-            Option = null;
-            ResultItem = null;
+            DataSourceItem = DataItem.Empty;  // 尽量不要用null作为初值,避免空指针异常
+            Option = new OperatorOption();
+            ResultItem = DataItem.Empty;
             Status = OpStatus.Null;
         }
 

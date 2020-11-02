@@ -196,6 +196,7 @@ namespace C2.Controls
 
         #region Selection
         public event System.EventHandler SelectionChanged;
+        public event System.EventHandler NeedShowDesigner;
 
         protected ChartSelection Selection { get; private set; }
 
@@ -204,6 +205,7 @@ namespace C2.Controls
 
         [Browsable(false)]
         public ChartObject[] SelectedObjects { get; private set; }
+        public ChartObject ShowDesignerObject { get; set; }
 
         [Browsable(false)]
         public ChartObject SelectedObject
@@ -269,6 +271,9 @@ namespace C2.Controls
             Selection.Update(mapObjects, exclusive);
             OnSelectionChanged();
 
+            //new
+            ShowDesigner();
+
             EndUpdateView(ChangeTypes.Visual);
         }
 
@@ -306,6 +311,14 @@ namespace C2.Controls
             if (SelectionChanged != null)
             {
                 SelectionChanged(this, EventArgs.Empty);
+            }
+        }
+
+        protected virtual void ShowDesigner()
+        {
+            if (NeedShowDesigner != null)
+            {
+                NeedShowDesigner(this, EventArgs.Empty);
             }
         }
 

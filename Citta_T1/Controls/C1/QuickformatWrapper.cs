@@ -284,7 +284,7 @@ namespace C2.Controls
             ForamtSingleNode(leavelList, 0, count, modelElements);
             this.currentModel.UpdateAllLines();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
-            Global.GetFlowControl().ResetStatus();
+            Global.GetTopToolBarControl().ResetStatus();
             Global.GetCanvasPanel().Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();
         }

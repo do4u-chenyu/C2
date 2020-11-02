@@ -1,4 +1,4 @@
-﻿namespace C2.Controls.Title
+﻿namespace C2.Controls.Bottom
 {
     partial class DragLineControl
     {

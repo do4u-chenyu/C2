@@ -35,7 +35,7 @@
             this.changeOpButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.topicName = new System.Windows.Forms.Label();
-            this.operatorName = new System.Windows.Forms.Label();
+            this.operatorCombo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -72,7 +72,7 @@
             this.dataSourceCombo.Name = "dataSourceCombo";
             this.dataSourceCombo.Size = new System.Drawing.Size(99, 20);
             this.dataSourceCombo.TabIndex = 3;
-            this.dataSourceCombo.SelectedIndexChanged += new System.EventHandler(this.dataSourceCombo_SelectedIndexChanged);
+            this.dataSourceCombo.SelectedIndexChanged += new System.EventHandler(this.DataSourceCombo_SelectedIndexChanged);
             // 
             // changeOpButton
             // 
@@ -82,7 +82,7 @@
             this.changeOpButton.TabIndex = 5;
             this.changeOpButton.Text = "修改";
             this.changeOpButton.UseVisualStyleBackColor = true;
-            this.changeOpButton.Click += new System.EventHandler(this.button1_Click);
+            this.changeOpButton.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label4
             // 
@@ -101,20 +101,22 @@
             this.topicName.Size = new System.Drawing.Size(0, 12);
             this.topicName.TabIndex = 7;
             // 
-            // operatorName
+            // operatorCombo
             // 
-            this.operatorName.AutoSize = true;
-            this.operatorName.Location = new System.Drawing.Point(74, 95);
-            this.operatorName.Name = "operatorName";
-            this.operatorName.Size = new System.Drawing.Size(0, 12);
-            this.operatorName.TabIndex = 8;
+            this.operatorCombo.FormattingEnabled = true;
+            this.operatorCombo.Items.AddRange(new object[] {
+            "最大值",
+            "AI实践"});
+            this.operatorCombo.Location = new System.Drawing.Point(74, 93);
+            this.operatorCombo.Name = "operatorCombo";
+            this.operatorCombo.Size = new System.Drawing.Size(99, 20);
+            this.operatorCombo.TabIndex = 8;
+            this.operatorCombo.SelectedIndexChanged += new System.EventHandler(this.OperatorCombo_SelectedIndexChanged);
             // 
             // DesignerControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.operatorName);
+            this.Controls.Add(this.operatorCombo);
             this.Controls.Add(this.topicName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.changeOpButton);
@@ -138,6 +140,6 @@
         private System.Windows.Forms.ComboBox dataSourceCombo;
         private System.Windows.Forms.Button changeOpButton;
         private System.Windows.Forms.Label topicName;
-        private System.Windows.Forms.Label operatorName;
+        private System.Windows.Forms.ComboBox operatorCombo;
     }
 }
