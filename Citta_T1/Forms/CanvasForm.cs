@@ -29,18 +29,18 @@ namespace C2.Forms
 {
     public partial class CanvasForm : BaseForm
     {
-        public ModelDocument Document { get { return this.document; } }
+        private OptionDao optionDao;
+        private ModelDocument document;
+        private ModelDocumentDao modelDocumentDao;
+        private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
+        private string userName;
         public CanvasPanel CanvasPanel{ get { return this.canvasPanel; }}
         public RemarkControl RemarkControl { get { return this.remarkControl; } }
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
         public OptionDao OptionDao { get { return this.optionDao; } }
         public ModelDocumentDao ModelDocumentDao { get { return this.modelDocumentDao; } }
         public NaviViewControl NaviViewControl { get { return this.naviViewControl; } }
-        private OptionDao optionDao;
-        private ModelDocument document;
-        private ModelDocumentDao modelDocumentDao;
-        private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
-        private string userName;
+        public event EventHandler DocumentActived;
         #region 运行委托
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
@@ -62,6 +62,18 @@ namespace C2.Forms
         }
 
         public TopToolBarControl TopToolBarControl { get { return this.topToolBarControl; } }
+        public ModelDocument Document
+        {
+            get { return document; }
+            private set
+            {
+                if (document != value)
+                {
+                    document = value;
+                    OnDocumentChanged();
+                }
+            }
+        }
         #region C1文档切换
         private void InitializeMainFormEventHandler()
         {
@@ -70,6 +82,11 @@ namespace C2.Forms
             //this.modelTitlePanel.ModelDocumentSwitch += ModelTitlePanel_DocumentSwitch;
             this.canvasPanel.NewElementEvent += NewDocumentOperator;
             //this.remarkControl.RemarkChangeEvent += RemarkChange;
+        }
+        void OnDocumentChanged()
+        {
+            this.canvasPanel.Document = document;
+            this.ModelDocumentDao.CurrentDocument = document;
         }
         private void NewDocumentOperator(MoveBaseControl ct)
         {
@@ -447,19 +464,22 @@ namespace C2.Forms
         public void LoadDocument(string modelTitle)
         {
             // TODO 就不该有多个doc
-            this.modelDocumentDao.CurrentDocument = new ModelDocument(modelTitle, userName);
+            CanvasRemoveAllEle();
+            ModelDocument modelDoc = new ModelDocument(modelTitle, userName);
+            this.Document = modelDoc;
             this.modelDocumentDao.CurrentDocument.Load();
-            this.Show();
-            //this.modelTitlePanel.AddModel(modelTitle);
-            //this.modelDocumentDao.CurrentDocument.Load();
-            //this.modelDocumentDao.CurrentDocument.ReCountDocumentMaxElementID();
-            //this.modelDocumentDao.CurrentDocument.Show();
-            //this.modelDocumentDao.CurrentDocument.Dirty = false;
-            //CanvasAddElement(this.modelDocumentDao.CurrentDocument);
-            //// 加载文档时，需要暂时关闭remark的TextChange事件
-            //this.remarkControl.RemarkChangeEvent -= RemarkChange;
-            //this.remarkControl.RemarkDescription = this.modelDocumentDao.RemarkDescription;
-            //this.remarkControl.RemarkChangeEvent += RemarkChange;
+            this.CanvasAddElement(modelDoc);
+        }
+        private void CanvasRemoveAllEle()
+        {
+            this.canvasPanel.Controls.Clear();
+            this.naviViewControl.UpdateNaviView();
+        }
+        private void CanvasAddElement(ModelDocument doc)
+        {
+            doc.ModelElements.ForEach(me => this.canvasPanel.Controls.Add(me.InnerControl));
+            this.naviViewControl.UpdateNaviView();
+            doc.UpdateAllLines();
         }
         #endregion
 

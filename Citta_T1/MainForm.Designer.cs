@@ -480,7 +480,6 @@ namespace C2
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(910, 560);
             this.MainPanel.TabIndex = 7;
-            this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // workSpacePanel
             // 

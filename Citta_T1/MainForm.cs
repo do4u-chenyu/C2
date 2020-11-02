@@ -668,10 +668,6 @@ namespace C2
         }
         #endregion
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void ImportDataSource_Click(object sender, EventArgs e)
         {
