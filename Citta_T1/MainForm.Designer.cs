@@ -287,7 +287,7 @@ namespace C2
             this.leftFoldPanel.Location = new System.Drawing.Point(0, 200);
             this.leftFoldPanel.Margin = new System.Windows.Forms.Padding(0);
             this.leftFoldPanel.Name = "leftFoldPanel";
-            this.leftFoldPanel.Size = new System.Drawing.Size(8, 101);
+            this.leftFoldPanel.Size = new System.Drawing.Size(7, 100);
             this.leftFoldPanel.TabIndex = 1;
             this.leftFoldPanel.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
