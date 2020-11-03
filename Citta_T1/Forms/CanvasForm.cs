@@ -138,7 +138,7 @@ namespace C2.Forms
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
             this.operatorControl.Location = new Point(this.canvasPanel.Width -280 , 38);
-            this.remarkControl.Location = new Point(this.canvasPanel.Width - 460 , 38);
+            this.remarkControl.Location = new Point(this.canvasPanel.Width - 505 , 38);
             this.rightHideButton.Location = new Point(this.canvasPanel.Width - 60, 38);
 
             //// 右上用户名，头像

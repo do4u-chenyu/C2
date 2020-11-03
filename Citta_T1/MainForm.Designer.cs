@@ -477,10 +477,10 @@ namespace C2
             this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
+            this.dragLineControl.Location = new System.Drawing.Point(394, 34);
             this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
             this.dragLineControl.Name = "dragLineControl";
-            this.dragLineControl.Size = new System.Drawing.Size(368, 3);
+            this.dragLineControl.Size = new System.Drawing.Size(366, 3);
             this.dragLineControl.TabIndex = 3;
             this.toolTip1.SetToolTip(this.dragLineControl, "按住鼠标左键可以上下拖动改变预览面板的大小.");
             // 
@@ -552,6 +552,7 @@ namespace C2
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.dragLineControl);
             this.panel4.Controls.Add(this.panel9);
             this.panel4.Controls.Add(this.panel8);
@@ -565,9 +566,9 @@ namespace C2
             // 
             this.panel9.Controls.Add(this.minMaxPictureBox);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(762, 0);
+            this.panel9.Location = new System.Drawing.Point(760, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(148, 39);
+            this.panel9.Size = new System.Drawing.Size(148, 37);
             this.panel9.TabIndex = 2;
             // 
             // panel8
@@ -578,7 +579,7 @@ namespace C2
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(394, 39);
+            this.panel8.Size = new System.Drawing.Size(394, 37);
             this.panel8.TabIndex = 0;
             // 
             // tabPanel

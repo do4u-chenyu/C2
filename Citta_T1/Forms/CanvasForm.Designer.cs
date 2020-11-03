@@ -206,7 +206,7 @@
             this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
             this.remarkControl.Name = "remarkControl";
             this.remarkControl.RemarkDescription = "";
-            this.remarkControl.Size = new System.Drawing.Size(178, 329);
+            this.remarkControl.Size = new System.Drawing.Size(224, 329);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
             // 
