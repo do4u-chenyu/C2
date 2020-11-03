@@ -60,10 +60,10 @@
             this.canvasPanel.EndC = null;
             this.canvasPanel.EndP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.EndP")));
             this.canvasPanel.LeftButtonDown = false;
-            this.canvasPanel.Location = new System.Drawing.Point(0, 33);
+            this.canvasPanel.Location = new System.Drawing.Point(0, 28);
             this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(913, 466);
+            this.canvasPanel.Size = new System.Drawing.Size(913, 471);
             this.canvasPanel.StartC = null;
             this.canvasPanel.StartP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.StartP")));
             this.canvasPanel.TabIndex = 8;
@@ -71,13 +71,14 @@
             // topToolBarControl
             // 
             this.topToolBarControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.topToolBarControl.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.topToolBarControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.topToolBarControl.Location = new System.Drawing.Point(0, 0);
             this.topToolBarControl.Name = "topToolBarControl";
             this.topToolBarControl.SelectDrag = false;
             this.topToolBarControl.SelectFrame = false;
             this.topToolBarControl.SelectRemark = false;
-            this.topToolBarControl.Size = new System.Drawing.Size(913, 33);
+            this.topToolBarControl.Size = new System.Drawing.Size(913, 28);
             this.topToolBarControl.TabIndex = 25;
             // 
             // currentModelRunBackLab
@@ -169,6 +170,7 @@
             this.rightHideButton.BackColor = System.Drawing.Color.Transparent;
             this.rightHideButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rightHideButton.BackgroundImage")));
             this.rightHideButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.rightHideButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rightHideButton.Location = new System.Drawing.Point(183, 39);
             this.rightHideButton.Name = "rightHideButton";
             this.rightHideButton.Size = new System.Drawing.Size(55, 55);
@@ -201,10 +203,10 @@
             this.remarkControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("remarkControl.BackgroundImage")));
             this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.remarkControl.Location = new System.Drawing.Point(518, 50);
-            this.remarkControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
             this.remarkControl.Name = "remarkControl";
             this.remarkControl.RemarkDescription = "";
-            this.remarkControl.Size = new System.Drawing.Size(178, 329);
+            this.remarkControl.Size = new System.Drawing.Size(224, 329);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
             // 
@@ -236,7 +238,7 @@
             // blankButton
             // 
             this.blankButton.Location = new System.Drawing.Point(553, 254);
-            this.blankButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.blankButton.Margin = new System.Windows.Forms.Padding(1);
             this.blankButton.Name = "blankButton";
             this.blankButton.Size = new System.Drawing.Size(0, 0);
             this.blankButton.TabIndex = 42;
@@ -248,9 +250,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 499);
+            this.Controls.Add(this.operatorControl);
             this.Controls.Add(this.blankButton);
             this.Controls.Add(this.naviViewControl);
-            this.Controls.Add(this.operatorControl);
             this.Controls.Add(this.remarkControl);
             this.Controls.Add(this.progressBarLabel);
             this.Controls.Add(this.progressBar);

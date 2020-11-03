@@ -59,7 +59,7 @@
             // 
             // comboBox0
             // 
-            this.comboBox0.Location = new System.Drawing.Point(44, 2);
+            this.comboBox0.Location = new System.Drawing.Point(44, 3);
             this.comboBox0.Size = new System.Drawing.Size(145, 26);
             // 
             // topPanel

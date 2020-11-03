@@ -33,10 +33,10 @@ namespace C2.OperatorViews
             //this.groupBox3.Paint += new PaintEventHandler(this.GroupBox_Paint);
 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 138F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(209, 85);
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(206, 85);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
 
@@ -178,6 +178,8 @@ namespace C2.OperatorViews
 
         protected override void CreateLine(int addLine)
         {
+
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(1, 2);
             // 左表列下拉框
             ComboBox data0ComoboBox = NewColumnsName0ComboBox();
             data0ComoboBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -220,6 +222,8 @@ namespace C2.OperatorViews
                 ctlNext2.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
             }
+            if (this.tableLayoutPanel1.RowCount == 1)
+                this.tableLayoutPanel2.Location = new System.Drawing.Point(1, 38);
         }
 
         #region 分组字段重复选择判断
