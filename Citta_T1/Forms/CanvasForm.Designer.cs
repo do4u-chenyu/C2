@@ -250,9 +250,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 499);
+            this.Controls.Add(this.operatorControl);
             this.Controls.Add(this.blankButton);
             this.Controls.Add(this.naviViewControl);
-            this.Controls.Add(this.operatorControl);
             this.Controls.Add(this.remarkControl);
             this.Controls.Add(this.progressBarLabel);
             this.Controls.Add(this.progressBar);

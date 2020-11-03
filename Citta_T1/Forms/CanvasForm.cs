@@ -121,7 +121,7 @@ namespace C2.Forms
             int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
 
             // 缩略图定位
-            this.naviViewControl.Location = new Point(x, y+33);
+            this.naviViewControl.Location = new Point(x, y+30);
             this.naviViewControl.Invalidate();
 
             // 底层工具按钮定位
