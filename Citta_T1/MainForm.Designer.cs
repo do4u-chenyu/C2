@@ -68,6 +68,7 @@ namespace C2
             this.logLabel = new System.Windows.Forms.Label();
             this.pyControlLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
+            this.dragLineControl = new C2.Controls.Bottom.DragLineControl();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.workSpacePanel = new System.Windows.Forms.Panel();
             this.mdiWorkSpace = new C2.WorkSpace.MdiWorkSpace();
@@ -76,11 +77,11 @@ namespace C2
             this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
             this.bottomPyConsole = new C2.Controls.Bottom.BottomConsoleControl();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dragLineControl = new C2.Controls.Bottom.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.tabPanel = new System.Windows.Forms.Panel();
             this.taskBar = new C2.Controls.TaskBar();
+            this.blankButton = new System.Windows.Forms.Button();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -286,7 +287,7 @@ namespace C2
             this.leftFoldPanel.Location = new System.Drawing.Point(0, 200);
             this.leftFoldPanel.Margin = new System.Windows.Forms.Padding(0);
             this.leftFoldPanel.Name = "leftFoldPanel";
-            this.leftFoldPanel.Size = new System.Drawing.Size(8, 101);
+            this.leftFoldPanel.Size = new System.Drawing.Size(7, 100);
             this.leftFoldPanel.TabIndex = 1;
             this.leftFoldPanel.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
@@ -424,7 +425,7 @@ namespace C2
             // 
             // minMaxPictureBox
             // 
-            this.minMaxPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("minMaxPictureBox.Image")));
+            this.minMaxPictureBox.Image = global::C2.Properties.Resources.maxunfold;
             this.minMaxPictureBox.Location = new System.Drawing.Point(115, 12);
             this.minMaxPictureBox.Name = "minMaxPictureBox";
             this.minMaxPictureBox.Size = new System.Drawing.Size(25, 24);
@@ -470,6 +471,18 @@ namespace C2
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
+            // 
+            // dragLineControl
+            // 
+            this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
+            this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dragLineControl.Location = new System.Drawing.Point(394, 34);
+            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
+            this.dragLineControl.Name = "dragLineControl";
+            this.dragLineControl.Size = new System.Drawing.Size(366, 3);
+            this.dragLineControl.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.dragLineControl, "按住鼠标左键可以上下拖动改变预览面板的大小.");
             // 
             // MainPanel
             // 
@@ -539,6 +552,7 @@ namespace C2
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.dragLineControl);
             this.panel4.Controls.Add(this.panel9);
             this.panel4.Controls.Add(this.panel8);
@@ -548,25 +562,13 @@ namespace C2
             this.panel4.Size = new System.Drawing.Size(910, 39);
             this.panel4.TabIndex = 0;
             // 
-            // dragLineControl
-            // 
-            this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
-            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
-            this.dragLineControl.Name = "dragLineControl";
-            this.dragLineControl.Size = new System.Drawing.Size(368, 3);
-            this.dragLineControl.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.dragLineControl, "按住鼠标左键可以上下拖动改变预览面板的大小.");
-            // 
             // panel9
             // 
             this.panel9.Controls.Add(this.minMaxPictureBox);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(762, 0);
+            this.panel9.Location = new System.Drawing.Point(760, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(148, 39);
+            this.panel9.Size = new System.Drawing.Size(148, 37);
             this.panel9.TabIndex = 2;
             // 
             // panel8
@@ -577,7 +579,7 @@ namespace C2
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(394, 39);
+            this.panel8.Size = new System.Drawing.Size(394, 37);
             this.panel8.TabIndex = 0;
             // 
             // tabPanel
@@ -600,10 +602,21 @@ namespace C2
             this.taskBar.TabIndex = 0;
             this.taskBar.Text = "taskBar1";
             // 
+            // blankButton
+            // 
+            this.blankButton.Location = new System.Drawing.Point(616, 303);
+            this.blankButton.Margin = new System.Windows.Forms.Padding(1);
+            this.blankButton.Name = "blankButton";
+            this.blankButton.Size = new System.Drawing.Size(0, 0);
+            this.blankButton.TabIndex = 43;
+            this.blankButton.Text = "button1";
+            this.blankButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1233, 606);
+            this.Controls.Add(this.blankButton);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.leftToolBoxPanel);
             this.Controls.Add(this.leftMainMenuPanel);
@@ -692,5 +705,6 @@ namespace C2
         private Label previewLabel;
         private WorkSpace.MdiWorkSpace mdiWorkSpace;
         private Controls.Bottom.DragLineControl dragLineControl;
+        private Button blankButton;
     }
 }

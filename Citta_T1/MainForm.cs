@@ -88,7 +88,8 @@ namespace C2
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
             this.createNewModelForm = new Dialogs.CreateNewModelForm();
             // 左侧
-            this.isBottomViewPanelMinimum = false;
+            this.isBottomViewPanelMinimum = true;
+            this.bottomViewPanel.Height = 40;
             this.isLeftViewPanelMinimum = true;
             this.leftToolBoxPanel.Width = 10;
             this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
@@ -207,7 +208,10 @@ namespace C2
             //this.naviViewControl.UpdateNaviView();
         }
 
-
+        public void BlankButtonFocus()
+        {
+            this.blankButton.Focus();
+        }
 
         public void SaveCurrentDocument()
         {

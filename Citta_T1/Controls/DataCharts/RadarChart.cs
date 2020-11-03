@@ -13,21 +13,22 @@ namespace C2.Controls.DataCharts
 {
     public partial class RadarChart : UserControl
     {
-        public RadarChart()
-        { 
+        private int series = 0;
+        private string title;
+        public RadarChart(List<List<string>> dataList, List<string> title)
+        {
+            this.title = title[0];
             InitializeComponent();
             InitChart();
+            DataBind(dataList[0], dataList[1], title[1]);
         }
+
         void InitChart()
         {
-            chart1.Titles.Add("交通违法行为TOP5");
+            chart1.Titles.Add(this.title);
             chart1.Titles[0].ForeColor = Color.White;
             chart1.Titles[0].Font = new Font("微软雅黑", 12f, FontStyle.Regular);
             chart1.Titles[0].Alignment = ContentAlignment.TopCenter;
-            chart1.Titles.Add("合计：25412 宗 ");
-            chart1.Titles[1].ForeColor = Color.White;
-            chart1.Titles[1].Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            chart1.Titles[1].Alignment = ContentAlignment.TopRight;
 
             //控件背景
             chart1.BackColor = Color.Transparent;
@@ -123,72 +124,108 @@ namespace C2.Controls.DataCharts
             chart1.Series[0].LegendText = "2015年";
             chart1.Series[0].IsValueShownAsLabel = true;
 
-            //Series2
-            chart1.Series.Add(new Series("Series2"));
-            chart1.Series[1].Label = "#VAL";
-            chart1.Series[1].LabelForeColor = Color.White;
-            chart1.Series[1].ToolTip = "#LEGENDTEXT:#VAL(宗)";
-            chart1.Series[1].ChartType = SeriesChartType.Radar;
-            chart1.Series[1]["RadarDrawingStyle"] = "Line";
-            chart1.Series[1].LegendText = "2016年";
-            chart1.Series[1].IsValueShownAsLabel = true;
+            ////Series2
+            //chart1.Series.Add(new Series("Series2"));
+            //chart1.Series[1].Label = "#VAL";
+            //chart1.Series[1].LabelForeColor = Color.White;
+            //chart1.Series[1].ToolTip = "#LEGENDTEXT:#VAL(宗)";
+            //chart1.Series[1].ChartType = SeriesChartType.Radar;
+            //chart1.Series[1]["RadarDrawingStyle"] = "Line";
+            //chart1.Series[1].LegendText = "2016年";
+            //chart1.Series[1].IsValueShownAsLabel = true;
 
-            //Series3
-            chart1.Series.Add(new Series("Series3"));
-            chart1.Series[2].Label = "#VAL";
-            chart1.Series[2].LabelForeColor = Color.White;
-            chart1.Series[2].ToolTip = "#LEGENDTEXT:#VAL(宗)";
-            chart1.Series[2].ChartType = SeriesChartType.Radar;
-            chart1.Series[2]["RadarDrawingStyle"] = "Line";
-            chart1.Series[2].LegendText = "2017年";
-            chart1.Series[2].IsValueShownAsLabel = true;
-
-
-            double[] yValues = { 65.62, 75.54, 60.45, 34.73, 85.42, 55.9, 63.6, 55.2, 77.1 };
-            string[] xValues = { "France", "Canada", "Germany", "USA", "Italy", "Spain", "Russia", "Sweden", "Japan" };
+            ////Series3
+            //chart1.Series.Add(new Series("Series3"));
+            //chart1.Series[2].Label = "#VAL";
+            //chart1.Series[2].LabelForeColor = Color.White;
+            //chart1.Series[2].ToolTip = "#LEGENDTEXT:#VAL(宗)";
+            //chart1.Series[2].ChartType = SeriesChartType.Radar;
+            //chart1.Series[2]["RadarDrawingStyle"] = "Line";
+            //chart1.Series[2].LegendText = "2017年";
+            //chart1.Series[2].IsValueShownAsLabel = true;
 
 
-            //Seris2  
-            double[] y2 = { 45.62, 65.54, 70.45, 84.73, 35.42, 55.9, 63.6 };
-            double[] y3 = { 88.62, 35.54, 52.45, 45.73, 88.42, 14.9, 33.6 };
-            this.chart1.Series[0].Points.DataBindXY(xValues, yValues);
-            this.chart1.Series[1].Points.DataBindY(y2);
-            this.chart1.Series[2].Points.DataBindY(y3);
+            //double[] yValues = { 65.62, 75.54, 60.45, 34.73, 85.42, 55.9, 63.6, 55.2, 77.1 };
+            //string[] xValues = { "France", "Canada", "Germany", "USA", "Italy", "Spain", "Russia", "Sweden", "Japan" };
+
+
+            ////Seris2  
+            //double[] y2 = { 45.62, 65.54, 70.45, 84.73, 35.42, 55.9, 63.6 };
+            //double[] y3 = { 88.62, 35.54, 52.45, 45.73, 88.42, 14.9, 33.6 };
+            //this.chart1.Series[0].Points.DataBindXY(xValues, yValues);
+            //this.chart1.Series[1].Points.DataBindY(y2);
+            //this.chart1.Series[2].Points.DataBindY(y3);
 
 
             //设置X轴显示间隔为1,X轴数据比较多的时候比较有用  
-            chart1.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
-            //设置XY轴标题的名称所在位置位远  
-            chart1.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Near;
+            //chart1.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
+            ////设置XY轴标题的名称所在位置位远  
+            //chart1.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Near;
 
-            for (int i = 0; i < chart1.Series[2].Points.Count; i++)
-            {
-                chart1.Series[2].Points[i].MarkerStyle = MarkerStyle.Circle;//设置折点的风格     
-                chart1.Series[2].Points[i].MarkerColor = Color.Red;//设置seires中折点的颜色   
-                                                                   //    chart1.Series[1].Points[i].MarkerStyle = MarkerStyle.Square;//设置折点的风格     
-                                                                   //    chart1.Series[1].Points[i].MarkerColor = Color.Blue;//设置seires中折点的颜色  
-                                                                   //    chart1.Series[2].Points[i].MarkerStyle = MarkerStyle.Square;//设置折点的风格     
-                                                                   //    chart1.Series[2].Points[i].MarkerColor = Color.Green;//设置seires中折点的颜色  
-            }
-            for (int i = 0; i < chart1.Series.Count; i++)
-            {
-                for (int j = 0; j < chart1.Series[i].Points.Count; j++)
-                {
-                    chart1.Series[i].Points[j].Label = " ";
-                    //chart1.Series[i].Points[j].LabelToolTip = "string.Empty";
-                }
-            }
+            //for (int i = 0; i < chart1.Series[2].Points.Count; i++)
+            //{
+            //    chart1.Series[2].Points[i].MarkerStyle = MarkerStyle.Circle;//设置折点的风格     
+            //    chart1.Series[2].Points[i].MarkerColor = Color.Red;//设置seires中折点的颜色   
+            //                                                       //    chart1.Series[1].Points[i].MarkerStyle = MarkerStyle.Square;//设置折点的风格     
+            //                                                       //    chart1.Series[1].Points[i].MarkerColor = Color.Blue;//设置seires中折点的颜色  
+            //                                                       //    chart1.Series[2].Points[i].MarkerStyle = MarkerStyle.Square;//设置折点的风格     
+            //                                                       //    chart1.Series[2].Points[i].MarkerColor = Color.Green;//设置seires中折点的颜色  
+            //}
+            //for (int i = 0; i < chart1.Series.Count; i++)
+            //{
+            //    for (int j = 0; j < chart1.Series[i].Points.Count; j++)
+            //    {
+            //        chart1.Series[i].Points[j].Label = " ";
+            //        //chart1.Series[i].Points[j].LabelToolTip = "string.Empty";
+            //    }
+            //}
             //chart1.ImageType = ChartImageType.Jpeg;
             //反锯齿  
-            chart1.AntiAliasing = AntiAliasingStyles.All;
-            //调色板 磨沙:SemiTransparent  
-            chart1.Palette = ChartColorPalette.BrightPastel;
+            //chart1.AntiAliasing = AntiAliasingStyles.All;
+            ////调色板 磨沙:SemiTransparent  
+            //chart1.Palette = ChartColorPalette.BrightPastel;
 
-            chart1.Series[0].ChartType = SeriesChartType.Radar;
-            chart1.Series[1].ChartType = SeriesChartType.Radar;
-            chart1.Series[2].ChartType = SeriesChartType.Radar;
-            chart1.Width = 500;
-            chart1.Height = 350;
+            //chart1.Series[0].ChartType = SeriesChartType.Radar;
+            ////chart1.Series[1].ChartType = SeriesChartType.Radar;
+            ////chart1.Series[2].ChartType = SeriesChartType.Radar;
+            //chart1.Width = 500;
+            //chart1.Height = 350;
+        }
+        void DataBind(List<string> x, List<string> y,string legendText)
+        {
+            try
+            {
+                if (!series.Equals(0))
+                    chart1.Series.Add(new Series(string.Format("Series{0}", series)));
+                chart1.Series[series].XValueType = ChartValueType.String;
+                chart1.Series[series].Label = "#VAL";
+                chart1.Series[series].LabelForeColor = Color.White;
+                chart1.Series[series].ToolTip = "#LEGENDTEXT:#VAL";
+                chart1.Series[series].ChartType = SeriesChartType.Radar;
+                chart1.Series[series]["RadarDrawingStyle"] = "Line";
+                chart1.Series[series].LegendText = legendText;
+                chart1.Series[series].IsValueShownAsLabel = true;
+                List<double> y_double = y.ConvertAll(d => Convert.ToDouble(d));
+                this.chart1.Series[series].Points.DataBindXY(x, y_double);
+                chart1.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
+                //设置XY轴标题的名称所在位置位远  
+                chart1.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Near;
+                for (int i = 0; i < chart1.Series[series].Points.Count; i++)
+                {
+                    chart1.Series[series].Points[i].MarkerStyle = MarkerStyle.Circle;//设置折点的风格                                                                      //    chart1.Series[2].Points[i].MarkerColor = Color.Green;//设置seires中折点的颜色  
+                }
+                chart1.AntiAliasing = AntiAliasingStyles.All;
+                //调色板 磨沙:SemiTransparent  
+                chart1.Palette = ChartColorPalette.BrightPastel;
+                chart1.Series[series].ChartType = SeriesChartType.Radar;
+                chart1.Width = 500;
+                chart1.Height = 350;
+            }
+            catch
+            {
+                return;
+            }
+
         }
     }
 }
