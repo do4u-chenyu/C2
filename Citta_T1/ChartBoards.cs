@@ -41,14 +41,15 @@ namespace C2
             List<string> y1 = new List<string> { "541", "574", "345", "854", "684" };
             List<string> x1 = new List<string> { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
             List<List<string>> data = new List<List<string>>();
+
             data.Add(x1);
             data.Add(y1);
+
 
             this.barChart = new BarChart(data, new List<string> { "柱状图" });
             this.pieChart = new PieChart(data, new List<string> { "饼图" });
             this.horizontalBar3D = new HorizontalBar3D(data, new List<string> { "横条图" });
-
-            this.radarChart = new C2.Controls.DataCharts.RadarChart();
+            this.radarChart = new C2.Controls.DataCharts.RadarChart(data, new List<string> { "雷达图","2015年" });
             this.ringChart = new C2.Controls.DataCharts.RingChart();
             this.lineChart = new C2.Controls.DataCharts.LineChart();
             this.SuspendLayout();
