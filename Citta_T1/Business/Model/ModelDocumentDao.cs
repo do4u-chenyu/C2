@@ -12,8 +12,22 @@ namespace C2.Business.Model
 {
     public class ModelDocumentDao
     {
+        ModelDocument _CurrentDocument;
         public List<ModelDocument> ModelDocuments { get; set; }
-        public ModelDocument CurrentDocument { get; set; }
+        public ModelDocument CurrentDocument {
+            get { return _CurrentDocument; }
+            set
+            {
+                if (ModelDocuments == null)
+                    ModelDocuments = new List<ModelDocument>() { value };
+                else
+                {
+                    _CurrentDocument = value;
+                    ModelDocuments.Clear();
+                    ModelDocuments.Add(value);
+                }
+            }
+        }
         private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         public ModelDocumentDao()
         {

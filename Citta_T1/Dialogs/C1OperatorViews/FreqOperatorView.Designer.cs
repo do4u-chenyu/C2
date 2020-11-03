@@ -57,10 +57,8 @@
             // confirmButton
             // 
             this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.ForeColor = System.Drawing.SystemColors.WindowText;
             this.confirmButton.Location = new System.Drawing.Point(236, 11);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.UseVisualStyleBackColor = true;
             // 
             // outListCCBL0
             // 
@@ -75,18 +73,15 @@
             // 
             // topPanel
             // 
-            this.topPanel.BackColor = System.Drawing.SystemColors.Window;
             this.topPanel.Size = new System.Drawing.Size(415, 35);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.bottomPanel.Location = new System.Drawing.Point(0, 208);
             this.bottomPanel.Size = new System.Drawing.Size(415, 45);
             // 
             // keyPanel
             // 
-            this.keyPanel.BackColor = System.Drawing.SystemColors.Window;
             this.keyPanel.Controls.Add(this.label4);
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
@@ -100,7 +95,6 @@
             // 
             // valuePanel
             // 
-            this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
             this.valuePanel.Controls.Add(this.panel2);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Controls.Add(this.dataSourceTB0);
@@ -116,7 +110,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("宋体", 10F);
             this.label1.Location = new System.Drawing.Point(30, 5);
-            this.label1.Size = new System.Drawing.Size(104, 19);
+            this.label1.Size = new System.Drawing.Size(85, 19);
             // 
             // label3
             // 

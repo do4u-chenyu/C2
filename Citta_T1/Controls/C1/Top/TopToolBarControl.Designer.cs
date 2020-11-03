@@ -231,7 +231,7 @@
             this.Controls.Add(this.undoButton);
             this.Controls.Add(this.moreButton);
             this.Controls.Add(this.formatButton);
-            this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "TopToolBarControl";
             this.Size = new System.Drawing.Size(990, 33);
             this.Load += new System.EventHandler(this.TopToolBarControl_Load);

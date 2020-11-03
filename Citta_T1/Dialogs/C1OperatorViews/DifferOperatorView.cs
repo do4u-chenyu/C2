@@ -25,12 +25,12 @@ namespace C2.OperatorViews
             this.button1.Click += new EventHandler(this.Add_Click);
 
             this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(347, 84);
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(417, 84);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
         #region 初始化配置
@@ -175,6 +175,8 @@ namespace C2.OperatorViews
         #endregion
         protected override void CreateLine(int addLine)
         {
+
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(62, 3);
             // And OR 选择框
             ComboBox regBox = NewAndORComboBox();
             regBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -195,6 +197,35 @@ namespace C2.OperatorViews
             Button delButton = NewDelButton(addLine.ToString());
             delButton.BackColor = System.Drawing.SystemColors.Window;
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
+        }
+
+        protected override void MoveTableLayoutPanelControls(int delLine)
+        {
+            for (int k = delLine; k < this.tableLayoutPanel1.RowCount - 1; k++)
+            {
+                Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k + 1);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k));
+                Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k + 1);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k));
+                Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
+                Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k + 1);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k));
+                Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k + 1);
+                ctlNext4.Name = k.ToString();
+                this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
+                //Control ctlNext5 = this.tableLayoutPanel1.GetControlFromPosition(5, k + 1);
+                //ctlNext5.Name = k.ToString();
+                //this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k));
+            }
+            if (this.tableLayoutPanel1.RowCount == 1)
+                this.tableLayoutPanel2.Location = new System.Drawing.Point(62, 44);
+
+        }
+
+        private void valuePanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

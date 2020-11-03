@@ -207,7 +207,10 @@ namespace C2
             //this.naviViewControl.UpdateNaviView();
         }
 
-
+        public void BlankButtonFocus()
+        {
+            this.blankButton.Focus();
+        }
 
         public void SaveCurrentDocument()
         {
@@ -668,10 +671,6 @@ namespace C2
         }
         #endregion
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void ImportDataSource_Click(object sender, EventArgs e)
         {
