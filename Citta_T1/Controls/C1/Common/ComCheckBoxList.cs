@@ -45,7 +45,7 @@ namespace C2.Controls.Common
                 ReadOnly = true,
                 BorderStyle = BorderStyle.None,
                 BackColor = Color.White,
-                Font = new Font("宋体", 9.5f, FontStyle.Regular)
+                Font = new Font("宋体", 11f, FontStyle.Regular)
             };
 
             //下拉箭头

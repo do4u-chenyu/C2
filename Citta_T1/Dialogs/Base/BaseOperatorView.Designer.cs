@@ -143,17 +143,17 @@
             this.outListCCBL0.Location = new System.Drawing.Point(0, 0);
             this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.outListCCBL0.Name = "outListCCBL0";
-            this.outListCCBL0.Size = new System.Drawing.Size(149, 24);
+            this.outListCCBL0.Size = new System.Drawing.Size(149, 26);
             this.outListCCBL0.TabIndex = 0;
             // 
             // outListCCBL1
             // 
             this.outListCCBL1.DataSource = null;
-            this.outListCCBL1.Font = new System.Drawing.Font("宋体", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outListCCBL1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL1.Location = new System.Drawing.Point(0, 0);
             this.outListCCBL1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.outListCCBL1.Name = "outListCCBL1";
-            this.outListCCBL1.Size = new System.Drawing.Size(149, 24);
+            this.outListCCBL1.Size = new System.Drawing.Size(149, 26);
             this.outListCCBL1.TabIndex = 0;
             this.outListCCBL1.Visible = false;
             // 
@@ -197,7 +197,7 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 35);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Size = new System.Drawing.Size(0, 0);

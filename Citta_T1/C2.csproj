@@ -248,6 +248,12 @@
     <Compile Include="Dialogs\C1OperatorViews\FilterOperatorView.Designer.cs">
       <DependentUpon>FilterOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.Designer.cs">
+      <DependentUpon>RelateOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\C1OperatorViews\FreqOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -295,12 +301,6 @@
     </Compile>
     <Compile Include="Dialogs\C1OperatorViews\RandomOperatorView.Designer.cs">
       <DependentUpon>RandomOperatorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.Designer.cs">
-      <DependentUpon>RelateOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\C1OperatorViews\SortOperatorView.cs">
       <SubType>Form</SubType>
@@ -553,7 +553,7 @@
       <DependentUpon>ComCheckBoxList.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Common\DesignerControl.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\C1\Common\DesignerControl.Designer.cs">
       <DependentUpon>DesignerControl.cs</DependentUpon>
@@ -1400,6 +1400,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Base\BaseOperatorView.resx">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Base\C1BaseOperatorView.resx">
+      <DependentUpon>C1BaseOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Base\C2BaseOperatorView.resx">
+      <DependentUpon>C2BaseOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\AvgOperatorView.resx">
       <DependentUpon>AvgOperatorView.cs</DependentUpon>

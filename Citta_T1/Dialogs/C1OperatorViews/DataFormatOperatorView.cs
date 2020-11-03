@@ -29,11 +29,11 @@ namespace C2.OperatorViews
   
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 42F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Size = new Size(358, 85);
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.Size = new Size(398, 85);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
 
@@ -191,6 +191,8 @@ namespace C2.OperatorViews
 
         protected override void CreateLine(int addLine)
         {
+
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
             // 添加控件
             Label label = new Label
             {
@@ -258,6 +260,14 @@ namespace C2.OperatorViews
                 ctlNext4.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
             }
+
+            if (this.tableLayoutPanel1.RowCount == 1)
+                this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 41);
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -81,6 +81,7 @@ namespace C2
             this.panel8 = new System.Windows.Forms.Panel();
             this.tabPanel = new System.Windows.Forms.Panel();
             this.taskBar = new C2.Controls.TaskBar();
+            this.blankButton = new System.Windows.Forms.Button();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -492,7 +493,6 @@ namespace C2
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(910, 560);
             this.MainPanel.TabIndex = 7;
-            this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // workSpacePanel
             // 
@@ -601,10 +601,21 @@ namespace C2
             this.taskBar.TabIndex = 0;
             this.taskBar.Text = "taskBar1";
             // 
+            // blankButton
+            // 
+            this.blankButton.Location = new System.Drawing.Point(616, 303);
+            this.blankButton.Margin = new System.Windows.Forms.Padding(1);
+            this.blankButton.Name = "blankButton";
+            this.blankButton.Size = new System.Drawing.Size(0, 0);
+            this.blankButton.TabIndex = 43;
+            this.blankButton.Text = "button1";
+            this.blankButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1233, 606);
+            this.Controls.Add(this.blankButton);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.leftToolBoxPanel);
             this.Controls.Add(this.leftMainMenuPanel);
@@ -693,5 +704,6 @@ namespace C2
         private Label previewLabel;
         private WorkSpace.MdiWorkSpace mdiWorkSpace;
         private Controls.Bottom.DragLineControl dragLineControl;
+        private Button blankButton;
     }
 }

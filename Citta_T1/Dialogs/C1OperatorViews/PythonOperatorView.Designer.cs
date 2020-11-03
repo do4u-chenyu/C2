@@ -70,7 +70,7 @@
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Location = new System.Drawing.Point(462, 437);
+            this.cancelButton.Location = new System.Drawing.Point(462, 446);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 2;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
@@ -78,7 +78,7 @@
             // confirmButton
             // 
             this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Location = new System.Drawing.Point(377, 437);
+            this.confirmButton.Location = new System.Drawing.Point(377, 446);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 1;
             // 
@@ -86,9 +86,14 @@
             // 
             this.comboBox0.Visible = false;
             // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Location = new System.Drawing.Point(0, 429);
+            this.bottomPanel.Size = new System.Drawing.Size(529, 40);
+            // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(45, 16);
+            this.label1.Location = new System.Drawing.Point(16, 19);
             this.label1.Size = new System.Drawing.Size(85, 19);
             // 
             // pythonChosenComboBox
@@ -106,7 +111,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 10F);
-            this.label2.Location = new System.Drawing.Point(9, 60);
+            this.label2.Location = new System.Drawing.Point(19, 61);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 19);
@@ -118,7 +123,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("宋体", 10F);
-            this.label4.Location = new System.Drawing.Point(13, 144);
+            this.label4.Location = new System.Drawing.Point(17, 148);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(123, 19);
@@ -140,7 +145,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 10F);
-            this.label6.Location = new System.Drawing.Point(19, 103);
+            this.label6.Location = new System.Drawing.Point(19, 106);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 19);
@@ -189,7 +194,7 @@
             // 
             this.previewCmdGroup.Controls.Add(this.previewCmdText);
             this.previewCmdGroup.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.previewCmdGroup.Location = new System.Drawing.Point(10, 185);
+            this.previewCmdGroup.Location = new System.Drawing.Point(10, 183);
             this.previewCmdGroup.Margin = new System.Windows.Forms.Padding(2);
             this.previewCmdGroup.Name = "previewCmdGroup";
             this.previewCmdGroup.Padding = new System.Windows.Forms.Padding(2);
@@ -314,7 +319,7 @@
             this.groupBox1.Controls.Add(this.browseChosenTextBox);
             this.groupBox1.Controls.Add(this.rsChosenButton);
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(10, 297);
+            this.groupBox1.Location = new System.Drawing.Point(10, 287);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(511, 135);
             this.groupBox1.TabIndex = 36;
@@ -390,7 +395,7 @@
             // label9
             // 
             this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label9.Location = new System.Drawing.Point(10, 281);
+            this.label9.Location = new System.Drawing.Point(10, 276);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(512, 2);
             this.label9.TabIndex = 38;
@@ -453,6 +458,7 @@
             this.Controls.Add(this.pythonChosenComboBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
+            this.Controls.Add(this.bottomPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(547, 518);
@@ -462,6 +468,7 @@
             this.ShowIcon = true;
             this.Text = "Py算子设置";
             this.Load += new System.EventHandler(this.PythonOperatorView_Load);
+            this.Controls.SetChildIndex(this.bottomPanel, 0);
             this.Controls.SetChildIndex(this.confirmButton, 0);
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.pythonChosenComboBox, 0);
