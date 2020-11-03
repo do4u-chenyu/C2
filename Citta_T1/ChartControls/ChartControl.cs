@@ -272,7 +272,7 @@ namespace C2.Controls
             OnSelectionChanged();
 
             //new
-            ShowDesigner();
+            ShowDesigner(SelectedObjects[0]);
 
             EndUpdateView(ChangeTypes.Visual);
         }
@@ -314,8 +314,9 @@ namespace C2.Controls
             }
         }
 
-        protected virtual void ShowDesigner()
+        protected virtual void ShowDesigner(ChartObject co)
         {
+            ShowDesignerObject = co;
             if (NeedShowDesigner != null)
             {
                 NeedShowDesigner(this, EventArgs.Empty);

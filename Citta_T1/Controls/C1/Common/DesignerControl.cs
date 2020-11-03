@@ -10,12 +10,21 @@ namespace C2.Controls.Common
 {
     public partial class DesignerControl : BorderPanel
     {
-        private string[] ComboOperator = new string[] { "最大值", "AI实践" };
+        private string[] ComboOperator;
         public Topic SelectedTopic { get; set; }
         public OperatorWidget OpWidget { get; set; }
         public DataItem SelectedDataSource { get; set; }
         public string SelectedOperator { get; set; }
         public List<DataItem> ComboDataSource { get; set; }
+
+        public DesignerControl()
+        {
+            InitializeComponent();
+            Font = UITheme.Default.DefaultFont;
+            ComboDataSource = new List<DataItem>();
+            ComboOperator = new string[] { "最大值", "AI实践" };
+        }
+
 
         public void SetSelectedTopicDesign(Topic topic)
         {
@@ -31,9 +40,9 @@ namespace C2.Controls.Common
             {
                 OpWidget = SelectedTopic.FindWidget<OperatorWidget>();
                 SetSelectedTopic();//设置选中主题
-                SetSelectedDataSource();//设置选中数据源
                 SetComboDataSource();
                 SetSelectedOperator();
+                SetSelectedDataSource();//设置选中数据源
             }
 
         }
@@ -50,8 +59,22 @@ namespace C2.Controls.Common
                 //TODO
                 //dtw.选中数据源;
                 DataItem d1 = OpWidget.DataSourceItem;
-                SelectedDataSource = d1;
-                this.dataSourceCombo.Text = d1.FileName;
+                if(ComboDataSource == null || d1 == null)
+                {
+                    return;
+                }
+                if (ComboDataSource.Contains(d1))
+                {
+                    SelectedDataSource = d1;
+                    this.dataSourceCombo.Text = d1.FileName;
+                }
+                else
+                {
+                    SelectedDataSource = null;
+                    this.dataSourceCombo.Text = string.Empty;
+                    OpWidget.DataSourceItem = null;
+                }
+
             }
         }
 
@@ -76,21 +99,25 @@ namespace C2.Controls.Common
 
         private void SetSelectedOperator()
         {
-            this.operatorCombo.Text = OpWidget != null ? OpWidget.OpType : String.Empty;
-            SelectedOperator = OpWidget != null ? OpWidget.OpType : String.Empty;
+            if(OpWidget != null && OpWidget.OpType != null)
+            {
+                this.operatorCombo.Text = OpWidget.OpType;
+                SelectedOperator = OpWidget.OpType;
+            }
         }
 
-        public DesignerControl()
-        {
-            InitializeComponent();
-            Font = UITheme.Default.DefaultFont;
-        }
 
         private void Button1_Click(object sender, System.EventArgs e)
         {
             if(this.topicName.Text == "未选中主题")
             {
                 MessageBox.Show("未选中主题，请选中主题后再配置");
+                return;
+            }
+
+            if(OpWidget == null)
+            {
+                MessageBox.Show("未添加算子挂件，请添加后再配置");
                 return;
             }
 
@@ -105,7 +132,6 @@ namespace C2.Controls.Common
                 MessageBox.Show("未添加算子,请添加后再配置");
                 return;
             }
-
 
             switch (SelectedOperator)
             {
@@ -131,19 +157,15 @@ namespace C2.Controls.Common
         private void DataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (OpWidget != null)
-            {
                 OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
-                SelectedDataSource = ComboDataSource[this.dataSourceCombo.SelectedIndex];
-            }
+            SelectedDataSource = ComboDataSource[this.dataSourceCombo.SelectedIndex];
         }
 
         private void OperatorCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (OpWidget != null)
-            {
                 OpWidget.OpType = ComboOperator[this.operatorCombo.SelectedIndex];
-                SelectedOperator = ComboOperator[this.operatorCombo.SelectedIndex];
-            }
+            SelectedOperator = ComboOperator[this.operatorCombo.SelectedIndex];
         }
     }
 }
