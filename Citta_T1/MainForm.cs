@@ -207,7 +207,10 @@ namespace C2
             //this.naviViewControl.UpdateNaviView();
         }
 
-
+        public void BlankButtonFocus()
+        {
+            this.blankButton.Focus();
+        }
 
         public void SaveCurrentDocument()
         {
