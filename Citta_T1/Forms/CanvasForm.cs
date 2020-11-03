@@ -29,6 +29,7 @@ namespace C2.Forms
 {
     public partial class CanvasForm : BaseForm
     {
+        private bool dirty;
         private OptionDao optionDao;
         private ModelDocument document;
         private ModelDocumentDao modelDocumentDao;
@@ -74,6 +75,15 @@ namespace C2.Forms
                 }
             }
         }
+
+        public bool Dirty {
+            get { return dirty; } 
+            private set 
+            {
+                dirty = value;
+                ResetFormTitle();
+            }
+        }
         #region C1文档切换
         private void InitializeMainFormEventHandler()
         {
@@ -91,22 +101,24 @@ namespace C2.Forms
         private void NewDocumentOperator(MoveBaseControl ct)
         {
             ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
-            SetDocumentDirty();
+            ResetFormTitle();
             if (ct is MoveDtControl || ct is MoveOpControl)
             {
                 BaseCommand cmd = new ElementAddCommand(me);
                 UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
             }
         }
-        public void SetDocumentDirty()
+        public void ResetFormTitle()
         {
-            // 已经为dirty了，就不需要再操作了，以提高性能
-            // TODO 采用Blumind的Dirty逻辑
-            //if (this.modelDocumentDao.CurrentDocument.Dirty)
-            //    return;
-            //this.modelDocumentDao.CurrentDocument.Dirty = true;
-            //string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            //this.canvasPanel.ModelTitlePanel.ResetDirtyPictureBox(currentModelTitle, true);
+            if (Document != null)
+            {
+                this.Dirty = true;
+                Text = string.Format("{0} *", Document.Name);
+            }
+            else
+            {
+                Text = string.Empty;
+            }
         }
         #endregion
 

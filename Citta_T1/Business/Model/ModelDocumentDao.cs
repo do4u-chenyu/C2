@@ -43,7 +43,7 @@ namespace C2.Business.Model
         {
             CurrentDocument.Save();
             CurrentDocument.Dirty = false;
-            return CurrentDocument.ModelTitle;
+            return CurrentDocument.Name;
         }
 
 
@@ -114,14 +114,14 @@ namespace C2.Business.Model
                         return;
                     foreach (ModelDocument mb in this.ModelDocuments)
                     {
-                        if (!saveTitle._Contains(mb.ModelTitle))
+                        if (!saveTitle._Contains(mb.Name))
                             continue;
                         XmlElement childElement = xDoc.CreateElement("modeltitle");
-                        childElement.InnerText = mb.ModelTitle;
+                        childElement.InnerText = mb.Name;
                         xn.AppendChild(childElement);
                     }
                     //关闭界面，用户只留下一个未保存的文档，则加载时随机打开一个文档
-                    if (this.ModelDocuments.Count == 1 && !saveTitle._Contains(this.ModelDocuments[0].ModelTitle))
+                    if (this.ModelDocuments.Count == 1 && !saveTitle._Contains(this.ModelDocuments[0].Name))
                     {
                         XmlElement childElement = xDoc.CreateElement("modeltitle");
                         childElement.InnerText = saveTitle[0];
@@ -148,7 +148,7 @@ namespace C2.Business.Model
         }
         public ModelDocument FindModelDocument(string modelTitle)
         {
-            return this.ModelDocuments.Find(md => md.ModelTitle == modelTitle);
+            return this.ModelDocuments.Find(md => md.Name == modelTitle);
         }
         #endregion
         #region 被干掉的方法

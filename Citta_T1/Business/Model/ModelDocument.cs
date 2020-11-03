@@ -22,7 +22,7 @@ namespace C2.Business.Model
         /*
          * 传入参数为模型文档名称，当前用户名
          */
-        public string ModelTitle { get; }   // 文档标题
+        public string Name { get; }   // 文档标题
         public bool Dirty { get; set; }     // 字段表示模型是否被修改
 
         public int ElementCount { get; set; }
@@ -48,7 +48,7 @@ namespace C2.Business.Model
 
         public ModelDocument(string modelTitle, string userName)
         {
-            this.ModelTitle = modelTitle;
+            this.Name = modelTitle;
             this.ModelElements = new List<ModelElement>();
             this.ModelRelations = new List<ModelRelation>();
             this.ModelGraphDict = new Dictionary<int, List<int>>();
@@ -176,7 +176,7 @@ namespace C2.Business.Model
 
         public void Load()
         {
-            if (File.Exists(Path.Combine(SavePath, ModelTitle + ".xml")))
+            if (File.Exists(Path.Combine(SavePath, Name + ".xml")))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
                 dSaveLoad.ReadXml();

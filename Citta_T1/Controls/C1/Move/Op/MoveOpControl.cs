@@ -305,7 +305,7 @@ namespace C2.Controls.Move.Op
             else if (e.Clicks == 2)
             {
                 // 清空焦点
-                Global.GetCanvasForm().BlankButtonFocus();
+                Global.GetCanvasForm()?.BlankButtonFocus();
                 // 显示配置
                 if (this.OptionMenuItem.Enabled)
                     ShowOptionDialog();
