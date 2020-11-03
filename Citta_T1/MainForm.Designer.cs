@@ -68,6 +68,7 @@ namespace C2
             this.logLabel = new System.Windows.Forms.Label();
             this.pyControlLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
+            this.dragLineControl = new C2.Controls.Bottom.DragLineControl();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.workSpacePanel = new System.Windows.Forms.Panel();
             this.mdiWorkSpace = new C2.WorkSpace.MdiWorkSpace();
@@ -76,7 +77,6 @@ namespace C2
             this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
             this.bottomPyConsole = new C2.Controls.Bottom.BottomConsoleControl();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dragLineControl = new C2.Controls.Bottom.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.tabPanel = new System.Windows.Forms.Panel();
@@ -424,7 +424,7 @@ namespace C2
             // 
             // minMaxPictureBox
             // 
-            this.minMaxPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("minMaxPictureBox.Image")));
+            this.minMaxPictureBox.Image = global::C2.Properties.Resources.maxunfold;
             this.minMaxPictureBox.Location = new System.Drawing.Point(115, 12);
             this.minMaxPictureBox.Name = "minMaxPictureBox";
             this.minMaxPictureBox.Size = new System.Drawing.Size(25, 24);
@@ -470,6 +470,18 @@ namespace C2
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
+            // 
+            // dragLineControl
+            // 
+            this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
+            this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
+            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
+            this.dragLineControl.Name = "dragLineControl";
+            this.dragLineControl.Size = new System.Drawing.Size(368, 3);
+            this.dragLineControl.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.dragLineControl, "按住鼠标左键可以上下拖动改变预览面板的大小.");
             // 
             // MainPanel
             // 
@@ -548,18 +560,6 @@ namespace C2
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(910, 39);
             this.panel4.TabIndex = 0;
-            // 
-            // dragLineControl
-            // 
-            this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
-            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
-            this.dragLineControl.Name = "dragLineControl";
-            this.dragLineControl.Size = new System.Drawing.Size(368, 3);
-            this.dragLineControl.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.dragLineControl, "按住鼠标左键可以上下拖动改变预览面板的大小.");
             // 
             // panel9
             // 

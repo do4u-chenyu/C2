@@ -52,7 +52,7 @@
             this.formatButton.Image = ((System.Drawing.Image)(resources.GetObject("formatButton.Image")));
             this.formatButton.Location = new System.Drawing.Point(231, 0);
             this.formatButton.Name = "formatButton";
-            this.formatButton.Size = new System.Drawing.Size(32, 32);
+            this.formatButton.Size = new System.Drawing.Size(24, 25);
             this.formatButton.TabIndex = 0;
             this.formatButton.TabStop = false;
             this.formatButton.UseVisualStyleBackColor = true;
@@ -65,7 +65,7 @@
             this.moreButton.Image = ((System.Drawing.Image)(resources.GetObject("moreButton.Image")));
             this.moreButton.Location = new System.Drawing.Point(421, 0);
             this.moreButton.Name = "moreButton";
-            this.moreButton.Size = new System.Drawing.Size(32, 32);
+            this.moreButton.Size = new System.Drawing.Size(24, 25);
             this.moreButton.TabIndex = 0;
             this.moreButton.TabStop = false;
             this.toolTip1.SetToolTip(this.moreButton, "首选项配置,配置程序的各项参数");
@@ -80,7 +80,7 @@
             this.ImportModel.Image = global::C2.Properties.Resources.importmodel;
             this.ImportModel.Location = new System.Drawing.Point(79, 0);
             this.ImportModel.Name = "ImportModel";
-            this.ImportModel.Size = new System.Drawing.Size(32, 32);
+            this.ImportModel.Size = new System.Drawing.Size(24, 25);
             this.ImportModel.TabIndex = 1;
             this.toolTip1.SetToolTip(this.ImportModel, "导入iao模型");
             this.ImportModel.UseVisualStyleBackColor = false;
@@ -94,7 +94,7 @@
             this.remarkPictureBox.Image = global::C2.Properties.Resources.notes;
             this.remarkPictureBox.Location = new System.Drawing.Point(193, 0);
             this.remarkPictureBox.Name = "remarkPictureBox";
-            this.remarkPictureBox.Size = new System.Drawing.Size(32, 32);
+            this.remarkPictureBox.Size = new System.Drawing.Size(24, 25);
             this.remarkPictureBox.TabIndex = 2;
             this.toolTip1.SetToolTip(this.remarkPictureBox, "编写备注信息");
             this.remarkPictureBox.UseVisualStyleBackColor = false;
@@ -108,7 +108,7 @@
             this.zoomUpPictureBox.Image = global::C2.Properties.Resources.zoom_in;
             this.zoomUpPictureBox.Location = new System.Drawing.Point(269, 0);
             this.zoomUpPictureBox.Name = "zoomUpPictureBox";
-            this.zoomUpPictureBox.Size = new System.Drawing.Size(32, 32);
+            this.zoomUpPictureBox.Size = new System.Drawing.Size(24, 25);
             this.zoomUpPictureBox.TabIndex = 3;
             this.zoomUpPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.zoomUpPictureBox, "放大屏幕中算子并支持三级放大");
@@ -123,7 +123,7 @@
             this.zoomDownPictureBox.Image = global::C2.Properties.Resources.zoom_out;
             this.zoomDownPictureBox.Location = new System.Drawing.Point(307, 0);
             this.zoomDownPictureBox.Name = "zoomDownPictureBox";
-            this.zoomDownPictureBox.Size = new System.Drawing.Size(32, 32);
+            this.zoomDownPictureBox.Size = new System.Drawing.Size(24, 25);
             this.zoomDownPictureBox.TabIndex = 4;
             this.zoomDownPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.zoomDownPictureBox, "缩小当前屏幕中算子");
@@ -138,7 +138,7 @@
             this.movePictureBox.Image = global::C2.Properties.Resources.hand;
             this.movePictureBox.Location = new System.Drawing.Point(383, 0);
             this.movePictureBox.Name = "movePictureBox";
-            this.movePictureBox.Size = new System.Drawing.Size(32, 32);
+            this.movePictureBox.Size = new System.Drawing.Size(24, 25);
             this.movePictureBox.TabIndex = 5;
             this.movePictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.movePictureBox, "拖动当前视野屏幕");
@@ -153,7 +153,7 @@
             this.framePictureBox.Image = global::C2.Properties.Resources.cursor;
             this.framePictureBox.Location = new System.Drawing.Point(345, 0);
             this.framePictureBox.Name = "framePictureBox";
-            this.framePictureBox.Size = new System.Drawing.Size(32, 32);
+            this.framePictureBox.Size = new System.Drawing.Size(24, 25);
             this.framePictureBox.TabIndex = 6;
             this.framePictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.framePictureBox, "框选屏幕中算子进行整体拖动");
@@ -168,7 +168,7 @@
             this.undoButton.Image = ((System.Drawing.Image)(resources.GetObject("undoButton.Image")));
             this.undoButton.Location = new System.Drawing.Point(117, 0);
             this.undoButton.Name = "undoButton";
-            this.undoButton.Size = new System.Drawing.Size(32, 32);
+            this.undoButton.Size = new System.Drawing.Size(24, 25);
             this.undoButton.TabIndex = 0;
             this.undoButton.TabStop = false;
             this.undoButton.UseVisualStyleBackColor = true;
@@ -183,7 +183,7 @@
             this.redoButton.Image = ((System.Drawing.Image)(resources.GetObject("redoButton.Image")));
             this.redoButton.Location = new System.Drawing.Point(155, 0);
             this.redoButton.Name = "redoButton";
-            this.redoButton.Size = new System.Drawing.Size(32, 32);
+            this.redoButton.Size = new System.Drawing.Size(24, 25);
             this.redoButton.TabIndex = 0;
             this.redoButton.TabStop = false;
             this.redoButton.UseVisualStyleBackColor = false;
@@ -197,7 +197,7 @@
             this.saveAllButton.Image = global::C2.Properties.Resources.saveAllButton;
             this.saveAllButton.Location = new System.Drawing.Point(3, 0);
             this.saveAllButton.Name = "saveAllButton";
-            this.saveAllButton.Size = new System.Drawing.Size(32, 32);
+            this.saveAllButton.Size = new System.Drawing.Size(24, 25);
             this.saveAllButton.TabIndex = 7;
             this.saveAllButton.TabStop = false;
             this.saveAllButton.UseVisualStyleBackColor = true;
@@ -210,7 +210,7 @@
             this.saveModelButton.Image = global::C2.Properties.Resources.save;
             this.saveModelButton.Location = new System.Drawing.Point(41, 0);
             this.saveModelButton.Name = "saveModelButton";
-            this.saveModelButton.Size = new System.Drawing.Size(32, 32);
+            this.saveModelButton.Size = new System.Drawing.Size(24, 25);
             this.saveModelButton.TabIndex = 8;
             this.saveModelButton.TabStop = false;
             this.saveModelButton.UseVisualStyleBackColor = true;
@@ -233,7 +233,7 @@
             this.Controls.Add(this.formatButton);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "TopToolBarControl";
-            this.Size = new System.Drawing.Size(990, 33);
+            this.Size = new System.Drawing.Size(990, 28);
             this.Load += new System.EventHandler(this.TopToolBarControl_Load);
             this.ResumeLayout(false);
 

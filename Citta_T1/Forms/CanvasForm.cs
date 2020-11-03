@@ -104,14 +104,14 @@ namespace C2.Forms
             int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
 
             // 缩略图定位
-            this.naviViewControl.Location = new Point(x, y);
+            this.naviViewControl.Location = new Point(x, y+33);
             this.naviViewControl.Invalidate();
 
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
-            this.resetButton.Location = new Point(x + 100, y + 50);
-            this.stopButton.Location = new Point(x + 50, y + 50);
-            this.runButton.Location = new Point(x, y + 50);
+            this.resetButton.Location = new Point(x + 100, y + 83);
+            this.stopButton.Location = new Point(x + 50, y + 83);
+            this.runButton.Location = new Point(x, y + 83);
 
             //运行状态动图、进度条定位
             this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
