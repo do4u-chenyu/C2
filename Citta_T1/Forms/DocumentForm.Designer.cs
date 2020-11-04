@@ -85,6 +85,7 @@ namespace C2.Forms
             this.myTabControl1 = new C2.Controls.MyTabControl();
             this.dc = new C2.Controls.Common.DesignerControl();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ImportDataSourceButton = new System.Windows.Forms.ToolStripButton();
             this.MenuStripChartTab.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -150,6 +151,7 @@ namespace C2.Forms
             // 
             this.toolStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ImportDataSourceButton,
             this.TsbSave,
             this.toolStripSeparator1,
             this.TsbUndo,
@@ -590,6 +592,17 @@ namespace C2.Forms
             this.dc.TabIndex = 1;
             this.dc.Text = "算子设计器";
             // 
+            // ImportDataSourceButton
+            // 
+            this.ImportDataSourceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.paste;
+            this.ImportDataSourceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ImportDataSourceButton.Name = "ImportDataSourceButton";
+            this.ImportDataSourceButton.Padding = new System.Windows.Forms.Padding(2);
+            this.ImportDataSourceButton.Size = new System.Drawing.Size(24, 25);
+            this.ImportDataSourceButton.ToolTipText = "导入本地数据文件,支持bcp,txt,csv,xls四种格式";
+            this.ImportDataSourceButton.Click += new System.EventHandler(this.ImportDataSourceButton_Click);
+            // 
             // DocumentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -664,5 +677,7 @@ namespace C2.Forms
         private DesignerControl dc;
         private Controls.MyTabControl myTabControl1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripButton ImportDataSourceButton;
+        private Controls.Left.DataSourceControl dataSourceControl;
     }
 }
