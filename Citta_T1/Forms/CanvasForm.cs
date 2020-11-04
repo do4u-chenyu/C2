@@ -41,7 +41,7 @@ namespace C2.Forms
         delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
         #endregion
-        private static LogUtil log = LogUtil.GetInstance("CanvasForm-i"); // 获取日志模块
+        private static readonly LogUtil log = LogUtil.GetInstance("CanvasForm-i"); // 获取日志模块
         public CanvasForm(ModelDocument modelDoc)
         {
             InitializeComponent();
@@ -51,6 +51,7 @@ namespace C2.Forms
             this.optionDao = new OptionDao();
             this.userName = Global.GetMainForm().UserName;
             InitializeMainFormEventHandler();
+            InitializeControlsLocation();
         }
 
         public TopToolBarControl TopToolBarControl { get { return this.topToolBarControl; } }
