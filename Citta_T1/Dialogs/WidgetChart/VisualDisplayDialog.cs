@@ -22,9 +22,11 @@ namespace C2.Dialogs
         private string filePath;
         private OpUtil.Encoding fileEncoding;
         private char fileSep;
+        private string fileName;
         public VisualDisplayDialog(DataItem hitItem)
         {
             this.filePath = hitItem.FilePath;
+            this.fileName = hitItem.FileName;
             this.fileEncoding = hitItem.FileEncoding;
             this.fileSep = hitItem.FileSep;
             InitializeComponent();
@@ -41,18 +43,18 @@ namespace C2.Dialogs
 
         private void Confirm_Click(object sender, EventArgs e)
         {
-
             if (OptionNotReady())
                 return;
-            int maxNumOfFile = 100;
+            int upperLimit = 100;
 
             int xIndex = comboBox0.Tag == null ? comboBox0.SelectedIndex : ConvertUtil.TryParseInt(comboBox0.Tag.ToString());
             List<int> yIndexs = outListCCBL0.GetItemCheckIndex();          
             List<string> xValue = new List<string>();
             List<List<string>> yValues = new List<List<string>>();
-
+            // 获取选中输入、输出各列数据
             List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(filePath, fileEncoding).Split('\n'));
-            for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
+            upperLimit = Math.Min(rows.Count, upperLimit);
+            for (int i = 0; i < upperLimit; i++)
             {
                 string row = rows[i].TrimEnd('\r');
                 if (row.IsEmpty())
@@ -75,7 +77,8 @@ namespace C2.Dialogs
 
             }
             yValues.Insert(0, xValue);
-            PaintChart(yValues, new List<string>() { "图形标题"});
+            PaintChart(yValues, new List<string>() { this.fileName, this.fileName });
+            Close();
         }
         private void PaintChart(List<List<string>> xyValues, List<string> titles)
         {
@@ -89,8 +92,10 @@ namespace C2.Dialogs
                     chartDialog.GetPieChart();
                     break;
                 case "折线图":
+                    chartDialog.GetLineChart();
                     break;
                 case "雷达图":
+                    chartDialog.GetRadarChart();
                     break;
                 case "圆环图":
                     break;

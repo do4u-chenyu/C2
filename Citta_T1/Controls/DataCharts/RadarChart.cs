@@ -15,6 +15,7 @@ namespace C2.Controls.DataCharts
     {
         private int series = 0;
         private string title;
+        public System.Windows.Forms.DataVisualization.Charting.Chart GetChart { get => this.chart1; }
         public RadarChart(List<List<string>> dataList, List<string> title)
         {
             this.title = title[0];

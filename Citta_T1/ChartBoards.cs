@@ -51,7 +51,7 @@ namespace C2
             this.horizontalBar3D = new HorizontalBar3D(data, new List<string> { "横条图" });
             this.radarChart = new C2.Controls.DataCharts.RadarChart(data, new List<string> { "雷达图","2015年" });
             this.ringChart = new C2.Controls.DataCharts.RingChart();
-            this.lineChart = new C2.Controls.DataCharts.LineChart();
+            this.lineChart = new C2.Controls.DataCharts.LineChart(data, new List<string> { "折线图"});
             this.SuspendLayout();
             // 
             // barChart

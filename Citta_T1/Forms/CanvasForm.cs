@@ -3,27 +3,19 @@ using C2.Business.Option;
 using C2.Business.Schedule;
 using C2.Controls;
 using C2.Controls.Flow;
-using C2.Controls.Right;
 using C2.Controls.Move;
 using C2.Controls.Move.Dt;
 using C2.Controls.Move.Op;
+using C2.Controls.Right;
 using C2.Controls.Top;
 using C2.Core;
 using C2.Core.UndoRedo;
 using C2.Core.UndoRedo.Command;
-using C2.Model;
 using C2.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace C2.Forms
 {
@@ -49,7 +41,7 @@ namespace C2.Forms
         delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
         #endregion
-        private static LogUtil log = LogUtil.GetInstance("CanvasForm-i"); // 获取日志模块
+        private static readonly LogUtil log = LogUtil.GetInstance("CanvasForm-i"); // 获取日志模块
         public CanvasForm(ModelDocument modelDoc)
         {
             InitializeComponent();
@@ -59,6 +51,7 @@ namespace C2.Forms
             this.optionDao = new OptionDao();
             this.userName = Global.GetMainForm().UserName;
             InitializeMainFormEventHandler();
+            InitializeControlsLocation();
         }
 
         public TopToolBarControl TopToolBarControl { get { return this.topToolBarControl; } }

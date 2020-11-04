@@ -18,6 +18,7 @@ namespace C2.Controls.DataCharts
         private double[] y;
         private string title;
         private List<List<string>> dataList;
+        public System.Windows.Forms.DataVisualization.Charting.Chart GetChart { get => this.chart1; }
         public BarChart(List<string> x, double[] y, string title = "柱状图")
         {
             InitializeComponent();
@@ -126,14 +127,6 @@ namespace C2.Controls.DataCharts
             {
                 return;
             }
-        }
-        public Image Save()
-        {           
-            MemoryStream mstream = new MemoryStream();
-            chart1.SaveImage(mstream, System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Png);
-            Image chartImage = Image.FromStream(mstream);
-            mstream.Close();
-            return chartImage;
         }
     }
 }
