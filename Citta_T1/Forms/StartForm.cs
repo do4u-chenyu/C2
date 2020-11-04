@@ -20,7 +20,7 @@ namespace C2.Forms
         RecentFilesView recentFilesView1;
         public StartForm()
         {
-            Text = "Start";
+            Text = Lang._("StartPage");
 
             InitializeComponent();
 
