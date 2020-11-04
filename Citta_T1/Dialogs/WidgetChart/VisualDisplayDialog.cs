@@ -77,7 +77,7 @@ namespace C2.Dialogs
 
             }
             yValues.Insert(0, xValue);
-            PaintChart(yValues, new List<string>() { this.fileName });
+            PaintChart(yValues, new List<string>() { this.fileName, this.fileName });
             Close();
         }
         private void PaintChart(List<List<string>> xyValues, List<string> titles)
@@ -92,8 +92,10 @@ namespace C2.Dialogs
                     chartDialog.GetPieChart();
                     break;
                 case "折线图":
+                    chartDialog.GetLineChart();
                     break;
                 case "雷达图":
+                    chartDialog.GetRadarChart();
                     break;
                 case "圆环图":
                     break;
