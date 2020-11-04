@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.IO;
 
 namespace C2.Controls.DataCharts
 {
@@ -32,7 +33,6 @@ namespace C2.Controls.DataCharts
             InitializeComponent();
             this.title = title[0];
             InitChart();
-            
             DataBind(dataList[0], dataList[1]);
         }
         
@@ -127,9 +127,13 @@ namespace C2.Controls.DataCharts
                 return;
             }
         }
-        public void save()
-        {
-            chart1.SaveImage("test.png",System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Png);
+        public Image Save()
+        {           
+            MemoryStream mstream = new MemoryStream();
+            chart1.SaveImage(mstream, System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Png);
+            Image chartImage = Image.FromStream(mstream);
+            mstream.Close();
+            return chartImage;
         }
     }
 }

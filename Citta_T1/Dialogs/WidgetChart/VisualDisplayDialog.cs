@@ -1,6 +1,7 @@
 ﻿using C2.Business.Option;
 using C2.Core;
 using C2.Dialogs.Base;
+using C2.Dialogs.WidgetChart;
 using C2.Model;
 using C2.Utils;
 using System;
@@ -40,30 +41,53 @@ namespace C2.Dialogs
 
         private void Confirm_Click(object sender, EventArgs e)
         {
-           
+
             if (OptionNotReady())
                 return;
             int maxNumOfFile = 100;
-            List<List<string>> datas=new List<List<string>>()
-                ;
-            int xValue = comboBox0.Tag == null ? comboBox0.SelectedIndex : ConvertUtil.TryParseInt(comboBox0.Tag.ToString());
-            List<int> yValues = outListCCBL0.GetItemCheckIndex();
+
+            int xIndex = comboBox0.Tag == null ? comboBox0.SelectedIndex : ConvertUtil.TryParseInt(comboBox0.Tag.ToString());
+            List<int> yIndexs = outListCCBL0.GetItemCheckIndex();          
+            List<string> xValue = new List<string>();
+            List<List<string>> yValues = new List<List<string>>();
+
             List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(filePath, fileEncoding).Split('\n'));
             for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
             {
                 string row = rows[i].TrimEnd('\r');
-                if (!row.IsEmpty())
-                    datas.Add(new List<string>(row.Split(fileSep)));
-            }
-                                                             
-        }
-        private void PaintChart()
-        {
-            switch (this.chartType.Text)
-            {
-                case "饼图":
-                    break;
+                if (row.IsEmpty())
+                    continue;
+                string[] rowElement = row.Split(fileSep);
+                if (rowElement.Length < Math.Max(xIndex, yIndexs.Max())
+                    || Math.Min(xIndex, yIndexs.Min()) < 0)
+                {
+                    MessageBox.Show("索引越界");
+                    return;
+                }
+                xValue.Add(rowElement[xIndex]);
+                for (int j = 0; j < yIndexs.Count; j++)
+                {
+                    if (yValues.Count < j+1)
+                        yValues.Add(new List<string>());
+                    yValues[j].Add(rowElement[yIndexs[j]]);
 
+                }
+
+            }
+            yValues.Insert(0, xValue);
+            PaintChart(yValues, new List<string>() { "图形标题"});
+        }
+        private void PaintChart(List<List<string>> xyValues, List<string> titles)
+        {
+            WidgetChartDialog chartDialog = new WidgetChartDialog(xyValues, titles);
+            switch (this.chartTypesList.Text)
+            {
+                case "柱状图":
+                    chartDialog.GetbarChart();                   
+                    break;
+                case "饼图":
+                    chartDialog.GetPieChart();
+                    break;
                 case "折线图":
                     break;
                 case "雷达图":
@@ -71,6 +95,7 @@ namespace C2.Dialogs
                 case "圆环图":
                     break;
             }
+            chartDialog.ShowDialog();
         }
         private bool OptionNotReady()
         {

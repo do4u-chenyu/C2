@@ -92,7 +92,7 @@ namespace C2.Controls
             //TopMost = true;
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Normal;
-            Bounds = Screen.GetBounds(Program.MainForm);
+            Bounds = Screen.GetBounds(Global.GetMainForm());
             ShowInTaskbar = false;
 
             FullScreenInfomation = info;
