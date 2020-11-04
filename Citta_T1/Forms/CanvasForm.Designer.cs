@@ -212,7 +212,7 @@
             // 
             // operatorControl
             // 
-            this.operatorControl._setRoundRadius = 30;
+            this.operatorControl.RoundRadius = 30;
             this.operatorControl.AllowDrop = true;
             this.operatorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;

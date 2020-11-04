@@ -44,9 +44,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.wordFilterOpPictureBox = new System.Windows.Forms.PictureBox();
             this.dataStandarOpPictureBox = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.custom2OpPictureBox = new System.Windows.Forms.PictureBox();
+            this.pythonOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.custom1OpPictureBox = new System.Windows.Forms.PictureBox();
             this.leftPanelOpRelate = new C2.Controls.Common.NoFocusButton();
             this.pythonOPButton = new C2.Controls.Common.NoFocusButton();
             this.customOPButton1 = new C2.Controls.Common.NoFocusButton();
@@ -78,9 +78,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupOpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordFilterOpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataStandarOpPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.custom2OpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pythonOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.custom1OpPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // relateOpPictureBox
@@ -252,39 +252,38 @@
             this.dataStandarOpPictureBox.TabIndex = 35;
             this.dataStandarOpPictureBox.TabStop = false;
             // 
-            // pictureBox4
+            // custom2OpPictureBox
             // 
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox4.Image = global::C2.Properties.Resources.multi_op;
-            this.pictureBox4.Location = new System.Drawing.Point(107, 255);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(19, 19);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 40;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            this.custom2OpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.custom2OpPictureBox.Image = global::C2.Properties.Resources.multi_op;
+            this.custom2OpPictureBox.Location = new System.Drawing.Point(107, 255);
+            this.custom2OpPictureBox.Name = "custom2OpPictureBox";
+            this.custom2OpPictureBox.Size = new System.Drawing.Size(19, 19);
+            this.custom2OpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.custom2OpPictureBox.TabIndex = 40;
+            this.custom2OpPictureBox.TabStop = false;
             // 
-            // pictureBox3
+            // pythonOpPictureBox
             // 
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox3.Image = global::C2.Properties.Resources.python_op;
-            this.pictureBox3.Location = new System.Drawing.Point(8, 289);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 38;
-            this.pictureBox3.TabStop = false;
+            this.pythonOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pythonOpPictureBox.Image = global::C2.Properties.Resources.python_op;
+            this.pythonOpPictureBox.Location = new System.Drawing.Point(8, 289);
+            this.pythonOpPictureBox.Name = "pythonOpPictureBox";
+            this.pythonOpPictureBox.Size = new System.Drawing.Size(20, 20);
+            this.pythonOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pythonOpPictureBox.TabIndex = 38;
+            this.pythonOpPictureBox.TabStop = false;
             // 
-            // pictureBox2
+            // custom1OpPictureBox
             // 
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Image = global::C2.Properties.Resources.AI_op;
-            this.pictureBox2.Location = new System.Drawing.Point(7, 253);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(21, 21);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 36;
-            this.pictureBox2.TabStop = false;
+            this.custom1OpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.custom1OpPictureBox.Image = global::C2.Properties.Resources.AI_op;
+            this.custom1OpPictureBox.Location = new System.Drawing.Point(7, 253);
+            this.custom1OpPictureBox.Name = "custom1OpPictureBox";
+            this.custom1OpPictureBox.Size = new System.Drawing.Size(21, 21);
+            this.custom1OpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.custom1OpPictureBox.TabIndex = 36;
+            this.custom1OpPictureBox.TabStop = false;
             // 
             // leftPanelOpRelate
             // 
@@ -456,7 +455,6 @@
             this.customOPButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.customOPButton2.UseMnemonic = false;
             this.customOPButton2.UseVisualStyleBackColor = false;
-            this.customOPButton2.Click += new System.EventHandler(this.customOPButton2_Click);
             this.customOPButton2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // leftPanelOpFilter
@@ -595,9 +593,9 @@
             this.Controls.Add(this.leftPanelOpUnion);
             this.Controls.Add(this.leftPanelOpCollide);
             this.Controls.Add(this.customOPButton2);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.custom2OpPictureBox);
+            this.Controls.Add(this.pythonOpPictureBox);
+            this.Controls.Add(this.custom1OpPictureBox);
             this.Controls.Add(this.maxOpPictureBox);
             this.Controls.Add(this.randomOpPictureBox);
             this.Controls.Add(this.filterOpPictureBox);
@@ -620,6 +618,7 @@
             this.Controls.Add(this.unionOpPictureBox);
             this.Controls.Add(this.collideOpPictureBox);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "OperatorControl";
             this.Size = new System.Drawing.Size(217, 322);
             ((System.ComponentModel.ISupportInitialize)(this.relateOpPictureBox)).EndInit();
@@ -636,9 +635,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupOpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordFilterOpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataStandarOpPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.custom2OpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pythonOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.custom1OpPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -676,10 +675,10 @@
         private System.Windows.Forms.PictureBox dataStandarOpPictureBox;
         internal System.Windows.Forms.PictureBox filterOpPictureBox;
         private Common.NoFocusButton customOPButton2;
-        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox custom2OpPictureBox;
         private Common.NoFocusButton pythonOPButton;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pythonOpPictureBox;
         private Common.NoFocusButton customOPButton1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox custom1OpPictureBox;
     }
 }
