@@ -41,7 +41,7 @@ namespace C2.Dialogs
             this.chartTypesList.SelectedIndex = 0;
         }
 
-        private void Confirm_Click(object sender, EventArgs e)
+        protected override void  ConfirmButton_Click(object sender, EventArgs e)
         {
             if (OptionNotReady())
                 return;
@@ -77,7 +77,7 @@ namespace C2.Dialogs
 
             }
             yValues.Insert(0, xValue);
-            PaintChart(yValues, new List<string>() { this.fileName });
+            PaintChart(yValues, new List<string>() { this.fileName, this.fileName });
             Close();
         }
         private void PaintChart(List<List<string>> xyValues, List<string> titles)
@@ -92,8 +92,10 @@ namespace C2.Dialogs
                     chartDialog.GetPieChart();
                     break;
                 case "折线图":
+                    chartDialog.GetLineChart();
                     break;
                 case "雷达图":
+                    chartDialog.GetRadarChart();
                     break;
                 case "圆环图":
                     break;
@@ -130,7 +132,7 @@ namespace C2.Dialogs
             return false;
         }
  
-        private void cancle_Click(object sender, EventArgs e)
+        protected override void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }

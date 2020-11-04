@@ -97,7 +97,6 @@ namespace C2
             InitializeTaskBar();
             InitializeShortcutKeys();
             InitializeGlobalVariable();
-            InitializeControlsLocation();
 
             MdiClient = this.mdiWorkSpace;
             openFileDialog1 = new OpenFileDialog();
@@ -169,10 +168,7 @@ namespace C2
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
         }
-        private void InitializeControlsLocation()
-        {
-            Global.GetCanvasForm()?.InitializeControlsLocation();
-        }
+
         #endregion
         void SetAGoodLocation()
         {
@@ -193,12 +189,7 @@ namespace C2
 
         public void SetDocumentDirty()
         {
-            //// 已经为dirty了，就不需要再操作了，以提高性能
-            //if (this.modelDocumentDao.CurrentDocument.Dirty)
-            //    return;
-            //this.modelDocumentDao.CurrentDocument.Dirty = true;
-            //string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            //this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, true);
+            Global.GetCurrentDocument().Modified = true;
         }
         public void DeleteCurrentDocument()
         {
@@ -300,13 +291,6 @@ namespace C2
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
         }
-
-
-        private void MainForm_SizeChanged(object sender, EventArgs e)
-        {
-            InitializeControlsLocation();
-        }
-
 
         private void NewModelButton_Click(object sender, EventArgs e)
         {
@@ -488,7 +472,7 @@ namespace C2
         }
         private void NewCanvasForm()
         {
-            ModelDocument doc = new ModelDocument(String.Empty, String.Empty);
+            ModelDocument doc = new ModelDocument("新模型", this.UserName);
             CanvasForm form = new CanvasForm(doc);
             ShowForm(form);
         }

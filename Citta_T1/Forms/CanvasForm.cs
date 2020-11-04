@@ -3,27 +3,19 @@ using C2.Business.Option;
 using C2.Business.Schedule;
 using C2.Controls;
 using C2.Controls.Flow;
-using C2.Controls.Right;
 using C2.Controls.Move;
 using C2.Controls.Move.Dt;
 using C2.Controls.Move.Op;
+using C2.Controls.Right;
 using C2.Controls.Top;
 using C2.Core;
 using C2.Core.UndoRedo;
 using C2.Core.UndoRedo.Command;
-using C2.Model;
 using C2.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace C2.Forms
 {
@@ -49,32 +41,37 @@ namespace C2.Forms
         delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
         #endregion
-        private static LogUtil log = LogUtil.GetInstance("CanvasForm-i"); // 获取日志模块
-        public CanvasForm(ModelDocument modelDoc)
+        private static readonly LogUtil log = LogUtil.GetInstance("CanvasForm-i"); // 获取日志模块
+        public CanvasForm()
         {
             InitializeComponent();
-            this.document = modelDoc;
-            this.canvasPanel.Document = modelDoc;
-            this.modelDocumentDao = new ModelDocumentDao(modelDoc);
+            this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
             this.userName = Global.GetMainForm().UserName;
             InitializeMainFormEventHandler();
+            InitializeControlsLocation();
+        }
+        public CanvasForm(ModelDocument document)
+            :this()
+        {
+            Document = document;
         }
 
         public TopToolBarControl TopToolBarControl { get { return this.topToolBarControl; } }
         public ModelDocument Document
         {
             get { return document; }
-            private set
+            set
             {
                 if (document != value)
                 {
+                    ModelDocument old = document;
                     document = value;
-                    OnDocumentChanged();
+                    OnDocumentChanged(old);
                 }
             }
         }
-        #region C1文档切换
+        #region C1文档切换、修改
         private void InitializeMainFormEventHandler()
         {
             // 新增文档事件
@@ -83,30 +80,50 @@ namespace C2.Forms
             this.canvasPanel.NewElementEvent += NewDocumentOperator;
             //this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
-        void OnDocumentChanged()
+        void OnDocumentChanged(ModelDocument old)
         {
-            this.canvasPanel.Document = document;
-            this.ModelDocumentDao.CurrentDocument = document;
+            if (old != null)
+            {
+                old.NameChanged -= new EventHandler(Document_NameChanged);
+                old.ModifiedChanged -= new EventHandler(Document_ModifiedChanged);
+            }
+            if (Document != null)
+            {
+                this.canvasPanel.Document = document;
+                this.ModelDocumentDao.CurrentDocument = document;
+                Document.NameChanged += new EventHandler(Document_NameChanged);
+                Document.ModifiedChanged += new EventHandler(Document_ModifiedChanged);
+            }
+            ResetFormTitle();
+        }
+        void Document_NameChanged(object sender, EventArgs e)
+        {
+            ResetFormTitle();
+        }
+        void Document_ModifiedChanged(object sender, EventArgs e)
+        {
+            ResetFormTitle();
         }
         private void NewDocumentOperator(MoveBaseControl ct)
         {
             ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
-            SetDocumentDirty();
+            ResetFormTitle();
             if (ct is MoveDtControl || ct is MoveOpControl)
             {
                 BaseCommand cmd = new ElementAddCommand(me);
                 UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
             }
         }
-        public void SetDocumentDirty()
+        public void ResetFormTitle()
         {
-            // 已经为dirty了，就不需要再操作了，以提高性能
-            // TODO 采用Blumind的Dirty逻辑
-            //if (this.modelDocumentDao.CurrentDocument.Dirty)
-            //    return;
-            //this.modelDocumentDao.CurrentDocument.Dirty = true;
-            //string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            //this.canvasPanel.ModelTitlePanel.ResetDirtyPictureBox(currentModelTitle, true);
+            if (Document != null)
+            {
+                Text = string.Format("{0} *", Document.Name);
+            }
+            else
+            {
+                Text = string.Empty;
+            }
         }
         #endregion
 
@@ -199,7 +216,7 @@ namespace C2.Forms
 
             if (this.runButton.Name == "runButton")
             {
-                if (Global.GetCurrentDocument().Dirty)
+                if (Global.GetCurrentDocument().Modified)
                 {
                     MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -427,7 +444,7 @@ namespace C2.Forms
         {
             foreach (ModelDocument md in this.modelDocumentDao.ModelDocuments)
             {
-                if (!md.Dirty)
+                if (!md.Modified)
                     continue;
                 DialogResult result = MessageBox.Show("有尚未保存的模型，是否保存后关闭？",
                                                "保存", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);

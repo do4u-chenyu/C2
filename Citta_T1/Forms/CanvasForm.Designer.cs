@@ -35,7 +35,7 @@
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.currentModelFinLab = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.resetButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
@@ -85,7 +85,7 @@
             // 
             this.currentModelRunBackLab.Controls.Add(this.currentModelRunLab);
             this.currentModelRunBackLab.Image = global::C2.Properties.Resources.currentModelRunningBack;
-            this.currentModelRunBackLab.Location = new System.Drawing.Point(300, 68);
+            this.currentModelRunBackLab.Location = new System.Drawing.Point(232, 49);
             this.currentModelRunBackLab.Name = "currentModelRunBackLab";
             this.currentModelRunBackLab.Size = new System.Drawing.Size(150, 100);
             this.currentModelRunBackLab.TabIndex = 26;
@@ -105,7 +105,7 @@
             // currentModelFinLab
             // 
             this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
-            this.currentModelFinLab.Location = new System.Drawing.Point(612, 68);
+            this.currentModelFinLab.Location = new System.Drawing.Point(232, 165);
             this.currentModelFinLab.Name = "currentModelFinLab";
             this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
             this.currentModelFinLab.TabIndex = 27;
@@ -122,7 +122,7 @@
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.resetButton.Image = global::C2.Properties.Resources.reset;
-            this.resetButton.Location = new System.Drawing.Point(223, 133);
+            this.resetButton.Location = new System.Drawing.Point(525, 434);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(52, 53);
             this.resetButton.TabIndex = 32;
@@ -140,7 +140,7 @@
             this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
-            this.stopButton.Location = new System.Drawing.Point(138, 133);
+            this.stopButton.Location = new System.Drawing.Point(456, 434);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(52, 53);
             this.stopButton.TabIndex = 31;
@@ -158,7 +158,7 @@
             this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.runButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
-            this.runButton.Location = new System.Drawing.Point(56, 133);
+            this.runButton.Location = new System.Drawing.Point(398, 434);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(52, 53);
             this.runButton.TabIndex = 30;
@@ -171,14 +171,14 @@
             this.rightHideButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rightHideButton.BackgroundImage")));
             this.rightHideButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rightHideButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rightHideButton.Location = new System.Drawing.Point(183, 39);
+            this.rightHideButton.Location = new System.Drawing.Point(858, 34);
             this.rightHideButton.Name = "rightHideButton";
             this.rightHideButton.Size = new System.Drawing.Size(55, 55);
             this.rightHideButton.TabIndex = 33;
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(806, 107);
+            this.progressBar.Location = new System.Drawing.Point(234, 152);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(125, 10);
             this.progressBar.TabIndex = 35;
@@ -202,7 +202,7 @@
             this.remarkControl.BackColor = System.Drawing.Color.Transparent;
             this.remarkControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("remarkControl.BackgroundImage")));
             this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.remarkControl.Location = new System.Drawing.Point(518, 50);
+            this.remarkControl.Location = new System.Drawing.Point(412, 35);
             this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
             this.remarkControl.Name = "remarkControl";
             this.remarkControl.RemarkDescription = "";
@@ -212,13 +212,12 @@
             // 
             // operatorControl
             // 
-            this.operatorControl.RoundRadius = 30;
             this.operatorControl.AllowDrop = true;
             this.operatorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.operatorControl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.operatorControl.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.operatorControl.Location = new System.Drawing.Point(435, 61);
+            this.operatorControl.Location = new System.Drawing.Point(640, 34);
             this.operatorControl.Margin = new System.Windows.Forms.Padding(0);
             this.operatorControl.Name = "operatorControl";
             this.operatorControl.Size = new System.Drawing.Size(215, 320);
@@ -230,7 +229,7 @@
             this.naviViewControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.naviViewControl.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.naviViewControl.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.naviViewControl.Location = new System.Drawing.Point(824, 330);
+            this.naviViewControl.Location = new System.Drawing.Point(696, 382);
             this.naviViewControl.Name = "naviViewControl";
             this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 41;

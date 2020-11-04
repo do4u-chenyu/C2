@@ -170,7 +170,7 @@ namespace C2.Controls.Left
             if (model == null)
                 this.ExportModel.Enabled = true;
             else
-                this.ExportModel.Enabled = !model.Dirty;
+                this.ExportModel.Enabled = !model.Modified;
         }
 
     }
