@@ -107,9 +107,9 @@ namespace C2.Dialogs
             int status0 = String.IsNullOrEmpty(this.chartTypesList.Text) ? 1 : 0;
             int status1 = String.IsNullOrEmpty(this.comboBox0.Text) ? 2 : 0;
             int status2 = this.outListCCBL0.GetItemCheckIndex().Count == 0 ? 4 : 0;
-            if ((status0& status1&status2) >0)
+            if ((status0 | status1 | status2) > 0)
             {
-                switch (status0 & status1 & status2)
+                switch (status0 | status1 | status2)
                 {
                     case 7:
                     case 5:
