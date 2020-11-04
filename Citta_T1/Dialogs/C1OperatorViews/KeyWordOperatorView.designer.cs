@@ -42,7 +42,7 @@
             // 
             this.dataSourceTB1.Font = new System.Drawing.Font("宋体", 10F);
             this.dataSourceTB1.Location = new System.Drawing.Point(331, 3);
-            this.dataSourceTB1.Size = new System.Drawing.Size(110, 28);
+            this.dataSourceTB1.Size = new System.Drawing.Size(110, 23);
             this.dataSourceTB1.TabIndex = 10;
             this.dataSourceTB1.Visible = true;
             // 
@@ -50,7 +50,7 @@
             // 
             this.dataSourceTB0.Font = new System.Drawing.Font("宋体", 10F);
             this.dataSourceTB0.Location = new System.Drawing.Point(100, 3);
-            this.dataSourceTB0.Size = new System.Drawing.Size(110, 28);
+            this.dataSourceTB0.Size = new System.Drawing.Size(110, 23);
             this.dataSourceTB0.TabIndex = 9;
             // 
             // cancelButton
@@ -62,48 +62,43 @@
             // confirmButton
             // 
             this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.ForeColor = System.Drawing.SystemColors.WindowText;
             this.confirmButton.Location = new System.Drawing.Point(320, 6);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.UseVisualStyleBackColor = true;
             // 
             // outListCCBL0
             // 
             this.outListCCBL0.Font = new System.Drawing.Font("宋体", 10F);
             this.outListCCBL0.Location = new System.Drawing.Point(100, 82);
-            this.outListCCBL0.Size = new System.Drawing.Size(125, 26);
+            this.outListCCBL0.Size = new System.Drawing.Size(125, 23);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("宋体", 10F);
-            this.comboBox0.Location = new System.Drawing.Point(100, 42);
-            this.comboBox0.Size = new System.Drawing.Size(110, 26);
+            this.comboBox0.Location = new System.Drawing.Point(100, 47);
+            this.comboBox0.Size = new System.Drawing.Size(112, 21);
             this.comboBox0.TabIndex = 11;
             // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("宋体", 10F);
-            this.comboBox1.Location = new System.Drawing.Point(331, 42);
-            this.comboBox1.Size = new System.Drawing.Size(110, 26);
+            this.comboBox1.Location = new System.Drawing.Point(331, 47);
+            this.comboBox1.Size = new System.Drawing.Size(112, 21);
             this.comboBox1.TabIndex = 13;
             this.comboBox1.Visible = true;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.KeywordComBox_SelectedIndexChanged);
             // 
             // topPanel
             // 
-            this.topPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.topPanel.Size = new System.Drawing.Size(459, 10);
+            this.topPanel.Size = new System.Drawing.Size(461, 10);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 311);
-            this.bottomPanel.Size = new System.Drawing.Size(459, 36);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 321);
+            this.bottomPanel.Size = new System.Drawing.Size(461, 36);
             // 
             // valuePanel
             // 
-            this.valuePanel.BackColor = System.Drawing.SystemColors.Window;
             this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.label3);
             this.valuePanel.Controls.Add(this.label2);
@@ -116,7 +111,7 @@
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Location = new System.Drawing.Point(0, 10);
-            this.valuePanel.Size = new System.Drawing.Size(459, 301);
+            this.valuePanel.Size = new System.Drawing.Size(461, 311);
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
@@ -133,8 +128,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("宋体", 10F);
             this.label1.Location = new System.Drawing.Point(13, 7);
-            this.label1.Size = new System.Drawing.Size(85, 19);
-            this.label1.Text = "数据信息";
+            this.label1.Size = new System.Drawing.Size(63, 14);
             // 
             // label3
             // 
@@ -143,7 +137,7 @@
             this.label3.Location = new System.Drawing.Point(13, 84);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 19);
+            this.label3.Size = new System.Drawing.Size(63, 14);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段";
             // 
@@ -154,7 +148,7 @@
             this.label2.Location = new System.Drawing.Point(14, 47);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 19);
+            this.label2.Size = new System.Drawing.Size(63, 14);
             this.label2.TabIndex = 0;
             this.label2.Text = "过滤条件";
             // 
@@ -178,7 +172,7 @@
             this.label7.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.Location = new System.Drawing.Point(6, 47);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(326, 19);
+            this.label7.Size = new System.Drawing.Size(238, 14);
             this.label7.TabIndex = 3;
             this.label7.Text = "[2] 当前算子仅支持100行关键词处理";
             // 
@@ -188,7 +182,7 @@
             this.label4.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(7, 23);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(258, 19);
+            this.label4.Size = new System.Drawing.Size(189, 14);
             this.label4.TabIndex = 1;
             this.label4.Text = "[1] 行与行之间按或运算处理";
             // 
@@ -211,7 +205,7 @@
             this.label6.Location = new System.Drawing.Point(243, 7);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 19);
+            this.label6.Size = new System.Drawing.Size(49, 14);
             this.label6.TabIndex = 1;
             this.label6.Text = "关键词";
             // 
@@ -221,13 +215,13 @@
             this.conditionSelectBox.FormattingEnabled = true;
             this.conditionSelectBox.Location = new System.Drawing.Point(236, 47);
             this.conditionSelectBox.Name = "conditionSelectBox";
-            this.conditionSelectBox.Size = new System.Drawing.Size(74, 26);
+            this.conditionSelectBox.Size = new System.Drawing.Size(74, 21);
             this.conditionSelectBox.TabIndex = 12;
             // 
             // KeywordOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(459, 347);
+            this.ClientSize = new System.Drawing.Size(461, 357);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.bottomPanel);

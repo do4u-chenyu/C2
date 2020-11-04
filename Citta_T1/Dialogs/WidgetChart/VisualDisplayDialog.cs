@@ -41,7 +41,7 @@ namespace C2.Dialogs
             this.chartTypesList.SelectedIndex = 0;
         }
 
-        private void Confirm_Click(object sender, EventArgs e)
+        protected override void  ConfirmButton_Click(object sender, EventArgs e)
         {
             if (OptionNotReady())
                 return;
@@ -132,7 +132,7 @@ namespace C2.Dialogs
             return false;
         }
  
-        private void cancle_Click(object sender, EventArgs e)
+        protected override void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
