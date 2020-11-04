@@ -148,7 +148,7 @@ namespace C2.Controls
             int locY = Convert.ToInt32(e.Y / screenFactor);
             int dx = Convert.ToInt32(drgOffsetX / screenFactor);
             int dy = Convert.ToInt32(drgOffsetY / screenFactor);
-            Point location = Global.GetCanvasForm().PointToClient(new Point(locX - dx / 2, locY - dy / 2 - 30));
+            Point location = Global.GetCanvasForm().PointToClient(new Point(locX - dx / 2 + 130, locY - dy / 2 + 10));
 
             string text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
