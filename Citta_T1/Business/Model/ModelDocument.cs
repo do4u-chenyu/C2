@@ -16,14 +16,13 @@ namespace C2.Business.Model
     /*
      * 一个文档对应一个模型
      */
-    public class ModelDocument
+    public class ModelDocument: ModifyObject
     {
+        string _FileName;
+        string _Name;
 
-        /*
-         * 传入参数为模型文档名称，当前用户名
-         */
-        public string Name { get; }   // 文档标题
-        public bool Dirty { get; set; }     // 字段表示模型是否被修改
+        public event EventHandler FileNameChanged;
+        public event EventHandler NameChanged;
 
         public int ElementCount { get; set; }
         public string SavePath { get; }
@@ -61,6 +60,23 @@ namespace C2.Business.Model
             this.ElementCount = 0;
             this.TaskManager = new TaskManager();
             this.WorldMap = new WorldMap();
+        }
+        public string Name
+        {
+            get { return _Name; }
+            set
+            {
+                if (_Name != value)
+                {
+                    _Name = value;
+                    OnNameChanged();
+                }
+            }
+        }
+        void OnNameChanged()
+        {
+            if (NameChanged != null)
+                NameChanged(this, EventArgs.Empty);
         }
         /*
          * 保存功能

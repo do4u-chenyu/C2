@@ -29,7 +29,6 @@ namespace C2.Forms
 {
     public partial class CanvasForm : BaseForm
     {
-        private bool dirty;
         private OptionDao optionDao;
         private ModelDocument document;
         private ModelDocumentDao modelDocumentDao;
@@ -51,40 +50,35 @@ namespace C2.Forms
         delegate void AsynUpdateOpErrorMessage();
         #endregion
         private static LogUtil log = LogUtil.GetInstance("CanvasForm-i"); // 获取日志模块
-        public CanvasForm(ModelDocument modelDoc)
+        public CanvasForm()
         {
             InitializeComponent();
-            this.document = modelDoc;
-            this.canvasPanel.Document = modelDoc;
-            this.modelDocumentDao = new ModelDocumentDao(modelDoc);
+            this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
             this.userName = Global.GetMainForm().UserName;
             InitializeMainFormEventHandler();
+        }
+        public CanvasForm(ModelDocument document)
+            :this()
+        {
+            Document = document;
         }
 
         public TopToolBarControl TopToolBarControl { get { return this.topToolBarControl; } }
         public ModelDocument Document
         {
             get { return document; }
-            private set
+            set
             {
                 if (document != value)
                 {
+                    ModelDocument old = document;
                     document = value;
-                    OnDocumentChanged();
+                    OnDocumentChanged(old);
                 }
             }
         }
-
-        public bool Dirty {
-            get { return dirty; } 
-            private set 
-            {
-                dirty = value;
-                ResetFormTitle();
-            }
-        }
-        #region C1文档切换
+        #region C1文档切换、修改
         private void InitializeMainFormEventHandler()
         {
             // 新增文档事件
@@ -93,10 +87,29 @@ namespace C2.Forms
             this.canvasPanel.NewElementEvent += NewDocumentOperator;
             //this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
-        void OnDocumentChanged()
+        void OnDocumentChanged(ModelDocument old)
         {
-            this.canvasPanel.Document = document;
-            this.ModelDocumentDao.CurrentDocument = document;
+            if (old != null)
+            {
+                old.NameChanged -= new EventHandler(Document_NameChanged);
+                old.ModifiedChanged -= new EventHandler(Document_ModifiedChanged);
+            }
+            if (Document != null)
+            {
+                this.canvasPanel.Document = document;
+                this.ModelDocumentDao.CurrentDocument = document;
+                Document.NameChanged += new EventHandler(Document_NameChanged);
+                Document.ModifiedChanged += new EventHandler(Document_ModifiedChanged);
+            }
+            ResetFormTitle();
+        }
+        void Document_NameChanged(object sender, EventArgs e)
+        {
+            ResetFormTitle();
+        }
+        void Document_ModifiedChanged(object sender, EventArgs e)
+        {
+            ResetFormTitle();
         }
         private void NewDocumentOperator(MoveBaseControl ct)
         {
@@ -112,7 +125,6 @@ namespace C2.Forms
         {
             if (Document != null)
             {
-                this.Dirty = true;
                 Text = string.Format("{0} *", Document.Name);
             }
             else
@@ -211,7 +223,7 @@ namespace C2.Forms
 
             if (this.runButton.Name == "runButton")
             {
-                if (Global.GetCurrentDocument().Dirty)
+                if (Global.GetCurrentDocument().Modified)
                 {
                     MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -439,7 +451,7 @@ namespace C2.Forms
         {
             foreach (ModelDocument md in this.modelDocumentDao.ModelDocuments)
             {
-                if (!md.Dirty)
+                if (!md.Modified)
                     continue;
                 DialogResult result = MessageBox.Show("有尚未保存的模型，是否保存后关闭？",
                                                "保存", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);

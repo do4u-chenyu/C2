@@ -42,7 +42,7 @@ namespace C2.Business.Model
         public string SaveCurrentDocument()
         {
             CurrentDocument.Save();
-            CurrentDocument.Dirty = false;
+            CurrentDocument.Modified = false;
             return CurrentDocument.Name;
         }
 
