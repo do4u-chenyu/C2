@@ -134,6 +134,11 @@ namespace C2.Controls.MapViews
             {
                 if (p.Start())//开始进程  
                 {
+                    foreach (string cmd in cmds)
+                    {
+                        p.StandardInput.WriteLine(cmd);
+                    }
+
                     p.BeginErrorReadLine();
                     p.BeginOutputReadLine();
 

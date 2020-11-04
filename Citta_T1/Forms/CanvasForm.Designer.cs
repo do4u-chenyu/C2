@@ -35,7 +35,7 @@
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.currentModelFinLab = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.resetButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
@@ -212,7 +212,6 @@
             // 
             // operatorControl
             // 
-            this.operatorControl.RoundRadius = 30;
             this.operatorControl.AllowDrop = true;
             this.operatorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;

@@ -1,4 +1,5 @@
 ﻿using C2.Business.Option;
+using C2.Core;
 using C2.Model;
 using C2.Model.Widgets;
 using C2.Utils;
@@ -106,7 +107,7 @@ namespace C2.Dialogs.Base
             this.DialogResult = DialogResult.OK;
 
             operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + operatorWidget.OpType;
-            string path = String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+            string path = Path.Combine(Global.WorkspaceDirectory, String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
             string name = Path.GetFileNameWithoutExtension(path);
             char separator = OpUtil.DefaultSeparator;
             operatorWidget.ResultItem = new DataItem(path, name, separator, OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
