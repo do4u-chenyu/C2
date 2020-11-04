@@ -893,7 +893,7 @@ namespace C2.Forms
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
 
-            dc.SetSelectedTopicDesign(st);
+            dc.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
         }
         
         void ShowProperty(object[] objects)
