@@ -14,6 +14,7 @@ namespace C2.Controls.DataCharts
     public partial class LineChart : UserControl
     {
         private string title;
+        public System.Windows.Forms.DataVisualization.Charting.Chart GetChart { get => this.chart1; }
         public LineChart()
         {
             InitializeComponent();
