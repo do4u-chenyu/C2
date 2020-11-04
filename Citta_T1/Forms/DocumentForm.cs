@@ -11,6 +11,7 @@ using C2.Model.MindMaps;
 using C2.Model.Styles;
 using C2.Model.Widgets;
 using System;
+using C2.Utils;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -45,11 +46,13 @@ namespace C2.Forms
         List<ToolStripItem> CurrentChartBoxItems = new List<ToolStripItem>();
 
         public event EventHandler ReadOnlyChanged;
+        private C2.Dialogs.InputDataForm inputDataForm;
 
         public DocumentForm()
         {
             InitializeComponent();
-
+            this.inputDataForm = new Dialogs.InputDataForm();
+            this.inputDataForm.InputDataEvent += InputDataFormEvent;
             Icon = Properties.Resources.document_icon;
             FormatPainter_DataChanged(null, EventArgs.Empty);
             FormatPainter.Default.DataChanged += new EventHandler(FormatPainter_DataChanged);
@@ -60,6 +63,7 @@ namespace C2.Forms
             InitializeControls();
             InitializeZoomMenu();
             InitializeShortcutKeys();
+            InitializeGlobalVariable();
             //InitializeTimers();
 
             UITheme.Default.Listeners.Add(this);
@@ -109,7 +113,12 @@ namespace C2.Forms
                 }
             }
         }
-
+        private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        {
+            this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
+            this.dataSourceControl.Visible = true;
+        
+        }
         public ChartControl ActiveChartBox
         {
             get { return _ActiveChartBox; }
@@ -273,6 +282,11 @@ namespace C2.Forms
         }
 
         #region Initializetions
+        private void InitializeGlobalVariable()
+        {
+            Global.SetDataSourceControl(this.dataSourceControl);
+        }
+
         void InitializeZoomMenu()
         {
             float[] zooms = new float[] { 0.25f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f, 3.0f, 4.0f };
@@ -1573,6 +1587,13 @@ namespace C2.Forms
         void ActiveChart(ChartPage chartPage)
         {
             multiChartsView1.ActiveChartPage(chartPage);
+        }
+
+        private void ImportDataSourceButton_Click(object sender, EventArgs e)
+        {
+            this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
+            this.inputDataForm.ShowDialog();
+            this.inputDataForm.ReSetParams();
         }
     }
 }

@@ -134,6 +134,11 @@ namespace C2.Controls.MapViews
             {
                 if (p.Start())//开始进程  
                 {
+                    foreach (string cmd in cmds)
+                    {
+                        p.StandardInput.WriteLine(cmd);
+                    }
+
                     p.BeginErrorReadLine();
                     p.BeginOutputReadLine();
 
@@ -170,7 +175,11 @@ namespace C2.Controls.MapViews
 
         void MenuDeleteOp_Click(object sender, EventArgs e)
         {
-            Delete(new ChartObject[] { opw });
+            ResultWidget rs = (opw.Container as Topic).FindWidget<ResultWidget>();
+            if(rs == null)
+                Delete(new ChartObject[] { opw });
+            else
+                Delete(new ChartObject[] { opw,rs });
         }
 
         void MenuDelete_Click(object sender, EventArgs e)
@@ -178,6 +187,7 @@ namespace C2.Controls.MapViews
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             // 剩余最后一个菜单项，删除数据源挂件
             dtw.DataItems.Remove(hitItem);
+            ShowDesigner(dtw.Container);
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
         }

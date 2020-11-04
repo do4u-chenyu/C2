@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.IO;
 
 namespace C2.Controls.DataCharts
 {
@@ -17,6 +18,7 @@ namespace C2.Controls.DataCharts
         private double[] y;
         private string title;
         private List<List<string>> dataList;
+        public System.Windows.Forms.DataVisualization.Charting.Chart GetChart { get => this.chart1; }
         public BarChart(List<string> x, double[] y, string title = "柱状图")
         {
             InitializeComponent();
@@ -32,7 +34,6 @@ namespace C2.Controls.DataCharts
             InitializeComponent();
             this.title = title[0];
             InitChart();
-            
             DataBind(dataList[0], dataList[1]);
         }
         
@@ -126,10 +127,6 @@ namespace C2.Controls.DataCharts
             {
                 return;
             }
-        }
-        public void save()
-        {
-            chart1.SaveImage("test.png",System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Png);
         }
     }
 }
