@@ -1,9 +1,7 @@
-﻿using System;
+﻿using C2.Controls;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
-using C2.Controls;
-using C2.Controls.OS;
 
 namespace C2.WorkSpace
 {
@@ -11,9 +9,6 @@ namespace C2.WorkSpace
     {
         protected Form _ActivedMdiForm = null;
         protected List<Form> ActiveForms;
-
-        public event System.EventHandler MdiFormActived;
-        public event System.EventHandler MdiFormClosed;
 
         public BaseWorkSpace()
         {
