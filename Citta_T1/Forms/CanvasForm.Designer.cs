@@ -35,7 +35,7 @@
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.currentModelFinLab = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
             this.resetButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
@@ -43,7 +43,7 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.remarkControl = new C2.Controls.Flow.RemarkControl();
-            this.operatorControl = new C2.Controls.Right.OperatorControl(this.components);
+            this.operatorControl = new C2.Controls.Right.OperatorControl();
             this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
             this.blankButton = new System.Windows.Forms.Button();
             this.currentModelRunBackLab.SuspendLayout();
@@ -212,7 +212,7 @@
             // 
             // operatorControl
             // 
-            this.operatorControl._setRoundRadius = 30;
+            this.operatorControl.RoundRadius = 30;
             this.operatorControl.AllowDrop = true;
             this.operatorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
