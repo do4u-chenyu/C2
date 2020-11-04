@@ -21,6 +21,7 @@ namespace C2.Dialogs.WidgetChart
         {
             this.xyData = xyValues;
             this.titles = titles;
+            this.Icon = Properties.Resources.logo_icon;
         }
 
         public void GetbarChart()
