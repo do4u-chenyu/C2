@@ -16,6 +16,7 @@ namespace C2.Controls.DataCharts
         private string[] x;
         private double[] y;
         private string title;
+        public System.Windows.Forms.DataVisualization.Charting.Chart GetChart { get => this.chart1; }
         public PieChart(string[] x,double[] y)
         {
             InitializeComponent();
