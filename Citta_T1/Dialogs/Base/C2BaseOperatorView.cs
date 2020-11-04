@@ -4,6 +4,7 @@ using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -103,6 +104,12 @@ namespace C2.Dialogs.Base
             if (IsDuplicateSelect()) return;//数据标准化窗口
             SaveOption();
             this.DialogResult = DialogResult.OK;
+
+            operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + operatorWidget.OpType;
+            string path = String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+            string name = Path.GetFileNameWithoutExtension(path);
+            char separator = OpUtil.DefaultSeparator;
+            operatorWidget.ResultItem = new DataItem(path, name, separator, OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
         }
 
         protected bool IsIllegalFieldName()

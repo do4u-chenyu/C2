@@ -2,8 +2,10 @@
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace C2.Controls.Common
@@ -39,9 +41,9 @@ namespace C2.Controls.Common
             else
             {
                 OpWidget = SelectedTopic.FindWidget<OperatorWidget>();
-                SetSelectedTopic();//设置选中主题
-                SetComboDataSource();
-                SetSelectedOperator();
+                SetSelectedTopic();//设置选中主题√
+                SetComboDataSource();//设置数据源下拉选项√
+                SetSelectedOperator();//设置选中算子
                 SetSelectedDataSource();//设置选中数据源
             }
 
@@ -54,27 +56,40 @@ namespace C2.Controls.Common
 
         private void SetSelectedDataSource()
         {
-            if (OpWidget != null)
+            /*
+             * 1、当算子挂件不存在时，置空
+             * 2、算子挂件存在时
+             *      2.1  opw.DataSourceItem 为空，置空
+             *      2.2                                  不为空，赋值
+             *      
+             *  算子挂件中存的数据源，和下拉数据源对比问题：
+             *  (1)有数据源，有下拉数据源，比较是否包含
+             *       包含：正常显示
+             *       不包含：置空
+             *  (2)至少有一个为空，直接置空
+             */
+            if(OpWidget == null)
             {
-                //TODO
-                //dtw.选中数据源;
-                DataItem d1 = OpWidget.DataSourceItem;
-                if(ComboDataSource == null || d1 == null)
-                {
-                    return;
-                }
-                if (ComboDataSource.Contains(d1))
-                {
-                    SelectedDataSource = d1;
-                    this.dataSourceCombo.Text = d1.FileName;
-                }
-                else
-                {
-                    SelectedDataSource = null;
-                    this.dataSourceCombo.Text = string.Empty;
-                    OpWidget.DataSourceItem = null;
-                }
+                SelectedDataSource = null;
+                this.dataSourceCombo.Text = string.Empty;
+                return;
+            }
 
+            DataItem d1 = OpWidget.DataSourceItem;
+            if(ComboDataSource == null || d1 == null)
+            {
+                SelectedDataSource = null;
+                this.dataSourceCombo.Text = string.Empty;
+            }
+            else if (ComboDataSource.Contains(d1))
+            {
+                SelectedDataSource = d1;
+                this.dataSourceCombo.Text = d1.FileName;
+            }
+            else
+            {
+                SelectedDataSource = null;
+                this.dataSourceCombo.Text = string.Empty;
             }
         }
 
@@ -104,6 +119,11 @@ namespace C2.Controls.Common
                 this.operatorCombo.Text = OpWidget.OpType;
                 SelectedOperator = OpWidget.OpType;
             }
+            else
+            {
+                this.operatorCombo.Text = string.Empty;
+                SelectedOperator = string.Empty;
+            }
         }
 
 
@@ -121,7 +141,7 @@ namespace C2.Controls.Common
                 return;
             }
 
-            if (SelectedDataSource.IsEmpty())
+            if (SelectedDataSource ==null || SelectedDataSource.IsEmpty())
             {
                 MessageBox.Show("未选中数据源,请添加后再配置");
                 return;
@@ -133,20 +153,41 @@ namespace C2.Controls.Common
                 return;
             }
 
+            OpWidget.OpType = ComboOperator[this.operatorCombo.SelectedIndex];
+            OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+
             switch (SelectedOperator)
             {
                 case "最大值":
                     var dialog = new C2MaxOperatorView(OpWidget);
                     if(dialog.ShowDialog(this) == DialogResult.OK)
                     {
+                        
+                        DataItem resultItem = OpWidget.ResultItem;
+                        ResultWidget rsw = SelectedTopic.FindWidget<ResultWidget>();
+                        if(rsw == null)
+                        {
+                            var template = new ResultWidget();
+                            template.DataItems.Add(resultItem);
+                            SelectedTopic.Widgets.Add(template);
+                        }
+                        else
+                        {
+                            rsw.DataItems.Clear();
+                            rsw.DataItems.Add(resultItem);
+                        }
+                        OpWidget.Status = OpStatus.Ready;
+                    }
+                    break;
+                case "AI实践":
+                    var dialog2 = new C2CustomOperatorView(OpWidget);
+                    if (dialog2.ShowDialog(this) == DialogResult.OK)
+                    {
                         OpWidget.OpName = OpWidget.DataSourceItem.FileName + "-" + OpWidget.OpType;
                         DataItem resultItem = OpWidget.ResultItem;
                         SelectedTopic.Widgets.Add(new ResultWidget());
                         OpWidget.Status = OpStatus.Ready;
                     }
-                    break;
-                case "AI实践":
-                    new C2CustomOperatorView(OpWidget).ShowDialog(this);
                     break;
                 default:
                     break;
@@ -156,15 +197,11 @@ namespace C2.Controls.Common
 
         private void DataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (OpWidget != null)
-                OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
             SelectedDataSource = ComboDataSource[this.dataSourceCombo.SelectedIndex];
         }
 
         private void OperatorCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (OpWidget != null)
-                OpWidget.OpType = ComboOperator[this.operatorCombo.SelectedIndex];
             SelectedOperator = ComboOperator[this.operatorCombo.SelectedIndex];
         }
     }

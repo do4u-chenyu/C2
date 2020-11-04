@@ -170,7 +170,11 @@ namespace C2.Controls.MapViews
 
         void MenuDeleteOp_Click(object sender, EventArgs e)
         {
-            Delete(new ChartObject[] { opw });
+            ResultWidget rs = (opw.Container as Topic).FindWidget<ResultWidget>();
+            if(rs == null)
+                Delete(new ChartObject[] { opw });
+            else
+                Delete(new ChartObject[] { opw,rs });
         }
 
         void MenuDelete_Click(object sender, EventArgs e)
