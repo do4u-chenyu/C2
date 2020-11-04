@@ -43,7 +43,7 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.remarkControl = new C2.Controls.Flow.RemarkControl();
-            this.operatorControl = new C2.Controls.Right.OperatorControl(this.components);
+            this.operatorControl = new C2.Controls.Right.OperatorControl();
             this.naviViewControl = new C2.Controls.Flow.NaviViewControl();
             this.blankButton = new System.Windows.Forms.Button();
             this.currentModelRunBackLab.SuspendLayout();

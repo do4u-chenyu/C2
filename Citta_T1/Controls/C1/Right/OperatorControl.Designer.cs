@@ -85,6 +85,7 @@
             // 
             // relateOpPictureBox
             // 
+
             this.relateOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.relateOpPictureBox.BackgroundImage = global::C2.Properties.Resources.relate_op;
             this.relateOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -94,7 +95,6 @@
             this.relateOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.relateOpPictureBox.TabIndex = 1;
             this.relateOpPictureBox.TabStop = false;
-            this.relateOpPictureBox.Click += new System.EventHandler(this.relateOpPictureBox_Click);
             // 
             // collideOpPictureBox
             // 
@@ -336,6 +336,7 @@
             this.customOPButton1.UseMnemonic = false;
             this.customOPButton1.UseVisualStyleBackColor = false;
             this.customOPButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+    
             // 
             // leftPanelOpMin
             // 

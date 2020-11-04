@@ -12,7 +12,6 @@ namespace C2.Controls.Right
         public OperatorControl()
         {
             InitializeComponent();
-            InitializeComponent();
             InitializeToolTip();
             this.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
