@@ -65,37 +65,14 @@ namespace C2.Dialogs
                 Close(); 
                 return;
             }
-
-            PaintChart(columnValues, new List<string>() { this.fileName, this.fileName });
+       
+            Utils.ControlUtil.PaintChart(columnValues, new List<string>() { this.fileName, this.fileName }, this.chartTypesList.Text);
             // 存储图表挂件需要的数据
             hitItem.ChartType = this.chartTypesList.Text;
             hitItem.SelectedIndexs = xIndex;
             this.DialogResult = DialogResult.OK;
             Close();
-        }
-        private void PaintChart(List<List<string>> xyValues, List<string> titles)
-        {
-            WidgetChartDialog chartDialog = new WidgetChartDialog(xyValues, titles);
-            switch (this.chartTypesList.Text)
-            {
-                case "柱状图":
-                    chartDialog.GetbarChart();                   
-                    break;
-                case "饼图":
-                    chartDialog.GetPieChart();
-                    break;
-                case "折线图":
-                    chartDialog.GetLineChart();
-                    break;
-                case "雷达图":
-                    chartDialog.GetRadarChart();
-                    break;
-                case "圆环图":
-                    chartDialog.GetRingChart();
-                    break;
-            }
-            chartDialog.ShowDialog();
-        }
+        }      
         private bool OptionNotReady()
         {
             int status0 = String.IsNullOrEmpty(this.chartTypesList.Text) ? 1 : 0;

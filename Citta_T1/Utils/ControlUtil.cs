@@ -2,6 +2,7 @@
 using C2.Business.Model.World;
 using C2.Controls.Move;
 using C2.Core;
+using C2.Dialogs.WidgetChart;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -74,6 +75,29 @@ namespace C2.Utils
                     continue;
                 me.Location = wm.WorldToScreen(eleWorldCordDict[eleID]);
             }
+        }
+        public static void PaintChart(List<List<string>> xyValues, List<string> titles,string chartType)
+        {
+            WidgetChartDialog chartDialog = new WidgetChartDialog(xyValues, titles);
+            switch (chartType)
+            {
+                case "柱状图":
+                    chartDialog.GetbarChart();
+                    break;
+                case "饼图":
+                    chartDialog.GetPieChart();
+                    break;
+                case "折线图":
+                    chartDialog.GetLineChart();
+                    break;
+                case "雷达图":
+                    chartDialog.GetRadarChart();
+                    break;
+                case "圆环图":
+                    chartDialog.GetRingChart();
+                    break;
+            }
+            chartDialog.ShowDialog();
         }
     }
 }
