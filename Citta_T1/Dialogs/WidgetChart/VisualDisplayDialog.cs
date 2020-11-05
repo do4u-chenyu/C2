@@ -58,6 +58,8 @@ namespace C2.Dialogs
             upperLimit = Math.Min(rows.Count, upperLimit);
             for (int i = 0; i < upperLimit; i++)
             {
+                if (i == 0)
+                    continue;
                 string row = rows[i].TrimEnd('\r');
                 if (row.IsEmpty())
                     continue;
@@ -65,7 +67,8 @@ namespace C2.Dialogs
                 if (rowElement.Length < Math.Max(xIndex, yIndexs.Max())
                     || Math.Min(xIndex, yIndexs.Min()) < 0)
                 {
-                    MessageBox.Show("索引越界");
+                    MessageBox.Show(String.Format("{0}:第{1}行数据可能不完整",filePath,i));
+                    Close();
                     return;
                 }
                 xValue.Add(rowElement[xIndex]);
