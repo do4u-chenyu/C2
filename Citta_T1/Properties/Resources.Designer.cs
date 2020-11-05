@@ -1744,6 +1744,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap opDone {
+            get {
+                object obj = ResourceManager.GetObject("opDone", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap open {
             get {
                 object obj = ResourceManager.GetObject("open", resourceCulture);
@@ -1807,6 +1817,36 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap opRunning {
             get {
                 object obj = ResourceManager.GetObject("opRunning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap opSet {
+            get {
+                object obj = ResourceManager.GetObject("opSet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap opSetSuccess {
+            get {
+                object obj = ResourceManager.GetObject("opSetSuccess", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap opWarn {
+            get {
+                object obj = ResourceManager.GetObject("opWarn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

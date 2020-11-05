@@ -112,6 +112,7 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
             MenuOpenOperator.Text = Lang._("OpenDesigner");
             MenuOpenOperator.Image = Properties.Resources.operator_w_icon;
+            MenuOpenOperator.Click += new System.EventHandler(MenuOpenOperatorDesigner_Click);
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
         }
@@ -143,7 +144,7 @@ namespace C2.Controls.MapViews
 
             MenuOpPublic.Image = Properties.Resources.opModelPublic;
             MenuOpPublic.Text = Lang._("Public");
-            MenuOpPublic.Enabled = opw.OpType == Lang._("Model");
+            MenuOpPublic.Enabled = opw.OpType == OpType.ModelOperator;
 
             MenuOpDelete.Image = Properties.Resources.deletewidget;
             MenuOpDelete.Text = Lang._("Delete");
@@ -157,13 +158,13 @@ namespace C2.Controls.MapViews
             switch (opStatus)
             {
                 case OpStatus.Null:
-                    return Properties.Resources.set;
+                    return Properties.Resources.opSet;
                 case OpStatus.Ready:
-                    return Properties.Resources.setSuccess;
+                    return Properties.Resources.opSetSuccess;
                 case OpStatus.Done:
-                    return Properties.Resources.done;
+                    return Properties.Resources.opDone;
                 case OpStatus.Warn:
-                    return Properties.Resources.warn;
+                    return Properties.Resources.opWarn;
                 default:
                     return Properties.Resources.operator_w_icon;
             }
@@ -173,16 +174,22 @@ namespace C2.Controls.MapViews
         {
             switch (opw.OpType)
             {
-                case "最大值":
+                case OpType.MaxOperator:
                     new C2MaxOperatorView(opw).ShowDialog();
                     break;
-                case "AI实践":
+                case OpType.CustomOperator:
                     new C2CustomOperatorView(opw).ShowDialog();
                     break;
                 default:
                     break;
             }
         }
+
+        void MenuOpenOperatorDesigner_Click(object sender, EventArgs e)
+        {
+            ShowDesigner(opw.Container);
+        }
+
         void MenuRunningOp_Click(object sender, EventArgs e)
         {
             if(opw.Status == OpStatus.Ready)
