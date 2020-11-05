@@ -70,7 +70,40 @@ namespace C2.Controls.MapViews
 
         #region 图表挂件
         private void CreateChartWidgetMenu(ChartWidget cw)
-        { }
+        {
+            WidgetMenuStrip.SuspendLayout();
+            foreach (DataItem dataItem in cw.DataItems)
+            {
+
+                ToolStripMenuItem MenuGetChart = new ToolStripMenuItem();
+                ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
+                ToolStripMenuItem MenuViewChart = new ToolStripMenuItem();
+                MenuViewChart.Image = Properties.Resources.chart_w_icon;
+
+                MenuViewChart.Text = String.Format("{0}{1}{2}{3}", dataItem.FileName, " [", dataItem.ChartType, "]");
+                MenuViewChart.DropDownItems.AddRange(new ToolStripItem[] {
+                MenuGetChart,
+                MenuDelete});
+
+                MenuGetChart.Image = Properties.Resources.getchart;
+                MenuGetChart.Text = Lang._("GetChart");
+                MenuGetChart.Tag = dataItem;
+                //MenuGetChart.Click += MenuGetChart_Click;
+
+                MenuDelete.Image = Properties.Resources.deletewidget;
+                MenuDelete.Text = Lang._("Delete");
+                MenuDelete.Tag = dataItem;
+                // MenuDelete.Click += MenuDelete_Click;
+
+                WidgetMenuStrip.Items.Add(MenuViewChart);
+            }
+            WidgetMenuStrip.ResumeLayout();
+            if (UITheme.Default != null)
+            {
+                WidgetMenuStrip.Renderer = UITheme.Default.ToolStripRenderer;
+            }
+        }
+
         #endregion
 
         #region 算子挂件
@@ -292,7 +325,14 @@ namespace C2.Controls.MapViews
         void MenuGetChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            VisualDisplayDialog displayDialog = new VisualDisplayDialog(hitItem);
+            DataItem dataCopy = new DataItem(
+               hitItem.FilePath,
+               hitItem.FileName,
+               hitItem.FileSep,
+               hitItem.FileEncoding,
+               hitItem.FileType);
+
+            VisualDisplayDialog displayDialog = new VisualDisplayDialog(dataCopy);
             if (DialogResult.OK != displayDialog.ShowDialog())
                 return;
             ChartWidget cw = currentTopic.FindWidget<ChartWidget>();
@@ -302,7 +342,16 @@ namespace C2.Controls.MapViews
                 Topic[] hitTopic = new Topic[] { currentTopic };
                 AddChartWidget(hitTopic);
             }
-            currentTopic.FindWidget<ChartWidget>().DataItems.Add(hitItem);
+            UpdateChartWidgetMenu(currentTopic.FindWidget<ChartWidget>(), dataCopy);
+        }
+        void UpdateChartWidgetMenu(ChartWidget widget, DataItem hitItem)
+        {
+            DataItem item = widget.DataItems.Find((DataItem d) => d.FileName == hitItem.FileName && d.ChartType == hitItem.ChartType);
+            if (item != null)
+            {
+                widget.DataItems.Remove(item);
+            }
+            widget.DataItems.Add(hitItem);
         }
         #endregion
 
