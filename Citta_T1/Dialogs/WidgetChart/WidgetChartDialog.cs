@@ -70,5 +70,15 @@ namespace C2.Dialogs.WidgetChart
             lineChart.TabIndex = 1;
             this.Image = ConvertToImage(lineChart.GetChart);
         }
+        public void GetRingChart()
+        {
+            RingChart ringChart = new RingChart(xyData, titles);
+            ringChart.GetChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
+            ringChart.Location = new System.Drawing.Point(635, 250);
+            ringChart.Name = "ringChart";
+            ringChart.Size = new System.Drawing.Size(600, 431);
+            ringChart.TabIndex = 1;
+            this.Image = ConvertToImage(ringChart.GetChart);
+        }
     }
 }
