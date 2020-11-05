@@ -132,8 +132,8 @@ namespace C2.Controls.Common
         {
             if (OpWidget != null && OpWidget.OpType != OpType.Null)
             {
-                this.operatorCombo.Text = OpWidget.OpType.ToString();
-                SelectedOperator = OpWidget.OpType.ToString();
+                this.operatorCombo.Text = Lang._(OpWidget.OpType.ToString());
+                SelectedOperator = Lang._(OpWidget.OpType.ToString());
             }
             else
             {
