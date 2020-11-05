@@ -154,6 +154,7 @@ namespace C2
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetPictureBox(this.minMaxPictureBox);
+            Global.SetMindMapModelControl(this.mindMapModelControl);
             //Global.SetBottomViewPanelMinimum(this.isBottomViewPanelMinimum);
             //this.isBottomViewPanelMinimum = false;
 
