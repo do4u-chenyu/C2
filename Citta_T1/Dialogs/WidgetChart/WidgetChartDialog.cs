@@ -32,7 +32,7 @@ namespace C2.Dialogs.WidgetChart
             BarChart barChart = new BarChart(xyData, titles);
             barChart.Location = new System.Drawing.Point(15, 15);
             barChart.Name = "barChart";
-            barChart.Size = new System.Drawing.Size(500, 431);
+            barChart.Size = new System.Drawing.Size(500, 450);
             barChart.TabIndex = 0;
             barChart.GetChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
            this.Image= ConvertToImage(barChart.GetChart);
@@ -46,7 +46,7 @@ namespace C2.Dialogs.WidgetChart
             pieChart.GetChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
             pieChart.Location = new System.Drawing.Point(321, 15);
             pieChart.Name = "pieChart";
-            pieChart.Size = new System.Drawing.Size(300, 231);
+            pieChart.Size = new System.Drawing.Size(500, 450);
             pieChart.TabIndex = 1;
             this.Image = ConvertToImage(pieChart.GetChart);
         }
@@ -56,7 +56,7 @@ namespace C2.Dialogs.WidgetChart
             radarChart.GetChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
             radarChart.Location = new System.Drawing.Point(15, 250);
             radarChart.Name = "radarChart";
-            radarChart.Size = new System.Drawing.Size(600, 431);
+            radarChart.Size = new System.Drawing.Size(500, 450);
             radarChart.TabIndex = 1;
             this.Image = ConvertToImage(radarChart.GetChart);
         }
@@ -66,7 +66,7 @@ namespace C2.Dialogs.WidgetChart
             lineChart.GetChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
             lineChart.Location = new System.Drawing.Point(15, 750);
             lineChart.Name = "lineChart";
-            lineChart.Size = new System.Drawing.Size(600, 431);
+            lineChart.Size = new System.Drawing.Size(500, 450);
             lineChart.TabIndex = 1;
             this.Image = ConvertToImage(lineChart.GetChart);
         }
@@ -76,7 +76,7 @@ namespace C2.Dialogs.WidgetChart
             ringChart.GetChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(56)))), ((int)(((byte)(79)))));
             ringChart.Location = new System.Drawing.Point(635, 250);
             ringChart.Name = "ringChart";
-            ringChart.Size = new System.Drawing.Size(600, 431);
+            ringChart.Size = new System.Drawing.Size(500, 450);
             ringChart.TabIndex = 1;
             this.Image = ConvertToImage(ringChart.GetChart);
         }
