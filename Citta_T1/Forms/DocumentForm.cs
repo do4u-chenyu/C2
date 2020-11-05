@@ -63,7 +63,6 @@ namespace C2.Forms
             InitializeControls();
             InitializeZoomMenu();
             InitializeShortcutKeys();
-            InitializeGlobalVariable();
             //InitializeTimers();
 
             UITheme.Default.Listeners.Add(this);
@@ -282,10 +281,6 @@ namespace C2.Forms
         }
 
         #region Initializetions
-        private void InitializeGlobalVariable()
-        {
-            Global.SetDataSourceControl(this.dataSourceControl);
-        }
 
         void InitializeZoomMenu()
         {
