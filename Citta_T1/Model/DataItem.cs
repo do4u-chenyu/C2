@@ -35,7 +35,7 @@ namespace C2.Model
         public OpUtil.Encoding FileEncoding { get => fileEncoding; set => fileEncoding = value; }
         public OpUtil.ExtType FileType { get => fileType; set => fileType = value; }
         public string ChartType { get; set; }
-        public int SelectedIndexs { get; set; }
+        public List<int> SelectedIndexs { get; set; }
 
     }
 }

@@ -88,7 +88,7 @@ namespace C2.Controls.MapViews
                 MenuGetChart.Image = Properties.Resources.getchart;
                 MenuGetChart.Text = Lang._("ViewChart");
                 MenuGetChart.Tag = dataItem;
-                //MenuGetChart.Click += MenuGetChart_Click;
+                MenuGetChart.Click += MenuViewChart_Click;
 
                 MenuDelete.Image = Properties.Resources.deletewidget;
                 MenuDelete.Text = Lang._("Delete");
@@ -355,6 +355,20 @@ namespace C2.Controls.MapViews
                 AddChartWidget(hitTopic);
             }
             UpdateChartWidgetMenu(currentTopic.FindWidget<ChartWidget>(), dataCopy);
+        }
+        void MenuViewChart_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            string path = hitItem.FilePath;
+            Utils.OpUtil.Encoding encoding = hitItem.FileEncoding;
+            // 获取选中输入、输出各列数据
+            List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(path, encoding).Split('\n'));
+            // 最多绘制前100行数据
+            int upperLimit = Math.Min(rows.Count, 100);
+            List<List<string>> columnValues = Utils.FileUtil.GetColumns(hitItem.SelectedIndexs, hitItem, rows, upperLimit);
+            if (columnValues.Count == 0)
+                return;
+            Utils.ControlUtil.PaintChart(columnValues, new List<string>() { hitItem.FileName, hitItem.FileName }, hitItem.ChartType);
         }
         void UpdateChartWidgetMenu(ChartWidget widget, DataItem hitItem)
         {

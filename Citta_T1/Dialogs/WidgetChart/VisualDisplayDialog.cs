@@ -69,7 +69,7 @@ namespace C2.Dialogs
             Utils.ControlUtil.PaintChart(columnValues, new List<string>() { this.fileName, this.fileName }, this.chartTypesList.Text);
             // 存储图表挂件需要的数据
             hitItem.ChartType = this.chartTypesList.Text;
-            hitItem.SelectedIndexs = xIndex;
+            hitItem.SelectedIndexs = indexs;
             this.DialogResult = DialogResult.OK;
             Close();
         }      
