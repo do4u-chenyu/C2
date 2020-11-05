@@ -293,5 +293,10 @@ namespace C2.Controls.Top
         {
             C2.Business.Model.ImportModel.GetInstance().ImportIaoFile(Global.GetMainForm().UserName);
         }
+
+        private void SaveModelButton_Click(object sender, EventArgs e)
+        {
+            Global.GetCurrentDocument().Save();
+        }
     }
 }
