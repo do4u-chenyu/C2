@@ -64,7 +64,6 @@ namespace C2.Forms
             InitializeControls();
             InitializeZoomMenu();
             InitializeShortcutKeys();
-            InitializeGlobalVariable();
             //InitializeTimers();
 
             UITheme.Default.Listeners.Add(this);
@@ -116,8 +115,8 @@ namespace C2.Forms
         }
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
-            this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
-            this.dataSourceControl.Visible = true;
+            Global.GetDataSourceControl().GenDataButton(name, fullFilePath, separator, extType, encoding);
+            Global.GetDataSourceControl().Visible = true;
         
         }
         public ChartControl ActiveChartBox
@@ -283,10 +282,6 @@ namespace C2.Forms
         }
 
         #region Initializetions
-        private void InitializeGlobalVariable()
-        {
-            Global.SetDataSourceControl(this.dataSourceControl);
-        }
 
         void InitializeZoomMenu()
         {

@@ -42,6 +42,7 @@ namespace C2.Forms
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuRenameTab = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new C2.Controls.ToolStripPro();
+            this.ImportDataSourceButton = new System.Windows.Forms.ToolStripButton();
             this.TsbSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbUndo = new System.Windows.Forms.ToolStripButton();
@@ -85,7 +86,6 @@ namespace C2.Forms
             this.myTabControl1 = new C2.Controls.MyTabControl();
             this.dc = new C2.Controls.Common.DesignerControl();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.ImportDataSourceButton = new System.Windows.Forms.ToolStripButton();
             this.MenuStripChartTab.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -183,6 +183,17 @@ namespace C2.Forms
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(804, 28);
             this.toolStrip1.TabIndex = 2;
+            // 
+            // ImportDataSourceButton
+            // 
+            this.ImportDataSourceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.paste;
+            this.ImportDataSourceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ImportDataSourceButton.Name = "ImportDataSourceButton";
+            this.ImportDataSourceButton.Padding = new System.Windows.Forms.Padding(2);
+            this.ImportDataSourceButton.Size = new System.Drawing.Size(24, 25);
+            this.ImportDataSourceButton.ToolTipText = "导入本地数据文件,支持bcp,txt,csv,xls四种格式";
+            this.ImportDataSourceButton.Click += new System.EventHandler(this.ImportDataSourceButton_Click);
             // 
             // TsbSave
             // 
@@ -592,17 +603,6 @@ namespace C2.Forms
             this.dc.TabIndex = 1;
             this.dc.Text = "算子设计器";
             // 
-            // ImportDataSourceButton
-            // 
-            this.ImportDataSourceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.paste;
-            this.ImportDataSourceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ImportDataSourceButton.Name = "ImportDataSourceButton";
-            this.ImportDataSourceButton.Padding = new System.Windows.Forms.Padding(2);
-            this.ImportDataSourceButton.Size = new System.Drawing.Size(24, 25);
-            this.ImportDataSourceButton.ToolTipText = "导入本地数据文件,支持bcp,txt,csv,xls四种格式";
-            this.ImportDataSourceButton.Click += new System.EventHandler(this.ImportDataSourceButton_Click);
-            // 
             // DocumentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -610,6 +610,7 @@ namespace C2.Forms
             this.ClientSize = new System.Drawing.Size(804, 438);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
+            this.IconImage = global::C2.Properties.Resources.业务视图;
             this.KeyPreview = true;
             this.Name = "DocumentForm";
             this.Text = "DocumentForm";
