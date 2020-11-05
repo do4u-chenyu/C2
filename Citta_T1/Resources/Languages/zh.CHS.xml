@@ -394,5 +394,17 @@
 	<item name="Result">添加结果</item>
     <item name="DealData">对数据进行处理</item>
 	<item name="JoinPool">数据加入数据池</item>	
+	<item name="RandomOperator">随机采样</item>	
+	<item name="FilterOperator">过滤算子</item>	
+	<item name="MaxOperator">最大值</item>	
+	<item name="MinOperator">最小值</item>	
+	<item name="AvgOperator">平均值</item>	
+	<item name="SortOperator">排序</item>	
+	<item name="FreqOperator">频率</item>	
+	<item name="GroupOperator">分组</item>	
+	<item name="CustomOperator">AI实践</item>	
+	<item name="DataFormatOperator">数据标准化</item>	
+	<item name="ModelOperator">模型</item>	
+
 	</words>
 </dictionary>

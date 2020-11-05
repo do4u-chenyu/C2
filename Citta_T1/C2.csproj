@@ -1853,6 +1853,10 @@
     <None Include="Resources\Images\WidgetImage\opDesign.png" />
     <None Include="Resources\Images\WidgetImage\opModelPublic.png" />
     <None Include="Resources\Images\WidgetImage\opRunning.png" />
+    <None Include="Resources\Images\WidgetImage\opDone.png" />
+    <None Include="Resources\Images\WidgetImage\opSetSuccess.png" />
+    <None Include="Resources\Images\WidgetImage\opSet.png" />
+    <None Include="Resources\Images\WidgetImage\opWarn.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
