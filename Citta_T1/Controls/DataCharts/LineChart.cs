@@ -31,7 +31,7 @@ namespace C2.Controls.DataCharts
         {
 
 
-            chart1.Titles.Add("测试");
+            chart1.Titles.Add(this.title);
             chart1.Titles[0].ForeColor = Color.White;
             chart1.Titles[0].Font = new Font("微软雅黑", 12f, FontStyle.Regular);
             chart1.Titles[0].Alignment = ContentAlignment.TopCenter;

@@ -688,6 +688,7 @@
     <Compile Include="Forms\CanvasForm.Designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Widgets\ChartWidget.cs" />
     <Compile Include="WorkSpace\BaseWorkSpace.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -2064,6 +2065,7 @@
     <None Include="Resources\C1\modeltitlepanel\u700.png" />
     <None Include="Resources\C1\toolbox\importmodel.png" />
     <Content Include="Resources\C1\leftpanelmenu\startPageTitle.jpg" />
+    <None Include="Resources\WidgetIcon\chart_w_icon.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

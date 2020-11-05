@@ -328,6 +328,7 @@
     <item name="Minutes">分</item>
     <item name="Seconds">秒</item>
     <item name="Start">启动</item>
+    <item name="StartPage">首页</item>
     <item name="Pause">暂停</item>
     <item name="Time is over!">时间到!</item>
     <item name="{0} Minutes">{0} 分钟</item>

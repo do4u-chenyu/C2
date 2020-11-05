@@ -74,7 +74,8 @@ namespace C2.Controls.Left
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
+            // TODO 这一块先不做，按设计来说模型文档是不可以导入数据的，检测引用要看业务视图
+            //int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
             DialogResult rs = DialogResult.OK;
 
             // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用

@@ -23,8 +23,10 @@ namespace C2.Dialogs
         private OpUtil.Encoding fileEncoding;
         private char fileSep;
         private string fileName;
+        private DataItem hitItem;
         public VisualDisplayDialog(DataItem hitItem)
         {
+            this.hitItem = hitItem;
             this.filePath = hitItem.FilePath;
             this.fileName = hitItem.FileName;
             this.fileEncoding = hitItem.FileEncoding;
@@ -78,6 +80,11 @@ namespace C2.Dialogs
             }
             yValues.Insert(0, xValue);
             PaintChart(yValues, new List<string>() { this.fileName, this.fileName });
+            // 存储图表挂件需要的数据
+            hitItem.ChartType = this.chartTypesList.Text;
+            hitItem.SelectedXIndex = xIndex;
+            hitItem.SelectedYIndexs = yIndexs;
+            this.DialogResult = DialogResult.OK;
             Close();
         }
         private void PaintChart(List<List<string>> xyValues, List<string> titles)
@@ -98,6 +105,7 @@ namespace C2.Dialogs
                     chartDialog.GetRadarChart();
                     break;
                 case "圆环图":
+                    chartDialog.GetRingChart();
                     break;
             }
             chartDialog.ShowDialog();
@@ -107,9 +115,9 @@ namespace C2.Dialogs
             int status0 = String.IsNullOrEmpty(this.chartTypesList.Text) ? 1 : 0;
             int status1 = String.IsNullOrEmpty(this.comboBox0.Text) ? 2 : 0;
             int status2 = this.outListCCBL0.GetItemCheckIndex().Count == 0 ? 4 : 0;
-            if ((status0& status1&status2) >0)
+            if ((status0 | status1 | status2) > 0)
             {
-                switch (status0 & status1 & status2)
+                switch (status0 | status1 | status2)
                 {
                     case 7:
                     case 5:

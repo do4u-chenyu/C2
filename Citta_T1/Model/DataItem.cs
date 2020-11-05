@@ -1,4 +1,5 @@
 ﻿using C2.Utils;
+using System.Collections.Generic;
 
 namespace C2.Model
 {
@@ -33,5 +34,8 @@ namespace C2.Model
         public char FileSep { get => fileSep; set => fileSep = value; }
         public OpUtil.Encoding FileEncoding { get => fileEncoding; set => fileEncoding = value; }
         public OpUtil.ExtType FileType { get => fileType; set => fileType = value; }
+        public string ChartType { get; set; }
+        public int SelectedXIndex { get; set; }
+        public List<int> SelectedYIndexs { get; set; }
     }
 }

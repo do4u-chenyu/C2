@@ -28,7 +28,8 @@ namespace C2.Controls.MapViews
         private DataSourceWidget dtw;
         private OperatorWidget opw;
         private ResultWidget rsw;
-
+        private ChartWidget cw;
+        private Topic currentTopic;
 
         public void CreateWidgetMenu()
         {
@@ -42,18 +43,24 @@ namespace C2.Controls.MapViews
                     break;
                 case DataSourceWidget.TypeID:
                     dtw = HoverObject.Widget as DataSourceWidget;
+                    currentTopic = HoverObject.Topic;
                     CreateDataSourceMenu(dtw);
                     break;
                 case ResultWidget.TypeID:
                     rsw = HoverObject.Widget as ResultWidget;
                     CreateResultMenu(rsw);
                     break;
+                case ChartWidget.TypeID:
+                    cw = HoverObject.Widget as ChartWidget;
+                    CreateChartWidgetMenu(cw);
+                    break;
                 default:
                     break;
             }
            
         }
-
+        private void CreateChartWidgetMenu(ChartWidget cw)
+        { }
         private void CreateOperatorMenu(OperatorWidget opw)
         {
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
@@ -207,9 +214,18 @@ namespace C2.Controls.MapViews
         }
         void MenuGetChart_Click(object sender, EventArgs e)
         {
-            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;        
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             VisualDisplayDialog displayDialog = new VisualDisplayDialog(hitItem);
-            displayDialog.Show();
+            if (DialogResult.OK != displayDialog.ShowDialog())
+                return;
+            ChartWidget cw = currentTopic.FindWidget<ChartWidget>();
+            // 生成图表挂件
+            if (cw == null)
+            {
+                Topic[] hitTopic = new Topic[] { currentTopic };
+                AddChartWidget(hitTopic);
+            }
+            currentTopic.FindWidget<ChartWidget>().DataItems.Add(hitItem);
         }
         void MenuDealData_Click(object sender, EventArgs e)
         {
