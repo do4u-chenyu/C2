@@ -98,6 +98,7 @@ namespace C2.Dialogs
                     chartDialog.GetRadarChart();
                     break;
                 case "圆环图":
+                    chartDialog.GetRingChart();
                     break;
             }
             chartDialog.ShowDialog();
