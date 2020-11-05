@@ -49,44 +49,27 @@ namespace C2.Dialogs
                 return;
             int upperLimit = 100;
 
+            // 获得x,y轴数据的列索引
             int xIndex = comboBox0.Tag == null ? comboBox0.SelectedIndex : ConvertUtil.TryParseInt(comboBox0.Tag.ToString());
-            List<int> yIndexs = outListCCBL0.GetItemCheckIndex();          
-            List<string> xValue = new List<string>();
-            List<List<string>> yValues = new List<List<string>>();
+            List<int> indexs = new List<int>() { xIndex };
+            indexs.AddRange(outListCCBL0.GetItemCheckIndex());
+        
+
             // 获取选中输入、输出各列数据
             List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(filePath, fileEncoding).Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
-            for (int i = 0; i < upperLimit; i++)
-            {
-                if (i == 0)
-                    continue;
-                string row = rows[i].TrimEnd('\r');
-                if (row.IsEmpty())
-                    continue;
-                string[] rowElement = row.Split(fileSep);
-                if (rowElement.Length < Math.Max(xIndex, yIndexs.Max())
-                    || Math.Min(xIndex, yIndexs.Min()) < 0)
-                {
-                    MessageBox.Show(String.Format("{0}:第{1}行数据可能不完整",filePath,i));
-                    Close();
-                    return;
-                }
-                xValue.Add(rowElement[xIndex]);
-                for (int j = 0; j < yIndexs.Count; j++)
-                {
-                    if (yValues.Count < j+1)
-                        yValues.Add(new List<string>());
-                    yValues[j].Add(rowElement[yIndexs[j]]);
 
-                }
-
+            List<List<string>> columnValues= Utils.FileUtil.GetColumns(indexs, hitItem, rows, upperLimit);
+            if (columnValues.Count == 0)
+            { 
+                Close(); 
+                return;
             }
-            yValues.Insert(0, xValue);
-            PaintChart(yValues, new List<string>() { this.fileName, this.fileName });
+
+            PaintChart(columnValues, new List<string>() { this.fileName, this.fileName });
             // 存储图表挂件需要的数据
             hitItem.ChartType = this.chartTypesList.Text;
-            hitItem.SelectedXIndex = xIndex;
-            hitItem.SelectedYIndexs = yIndexs;
+            hitItem.SelectedIndexs = xIndex;
             this.DialogResult = DialogResult.OK;
             Close();
         }
