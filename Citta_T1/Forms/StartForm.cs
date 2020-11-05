@@ -39,6 +39,7 @@ namespace C2.Forms
             // 
             this.ClientSize = new System.Drawing.Size(784, 462);
             this.Controls.Add(this.recentFilesView1);
+            this.IconImage = global::C2.Properties.Resources.首页;
             this.Name = "StartForm";
             this.VisibleChanged += new System.EventHandler(this.StartForm_VisibleChanged);
             this.ResumeLayout(false);
