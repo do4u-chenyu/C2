@@ -164,23 +164,7 @@ namespace C2.Controls.Common
                 case "最大值":
                     var dialog = new C2MaxOperatorView(OpWidget);
                     if(dialog.ShowDialog(this) == DialogResult.OK)
-                    {
-                        
-                        DataItem resultItem = OpWidget.ResultItem;
-                        ResultWidget rsw = SelectedTopic.FindWidget<ResultWidget>();
-                        if(rsw == null)
-                        {
-                            var template = new ResultWidget();
-                            template.DataItems.Add(resultItem);
-                            SelectedTopic.Widgets.Add(template);
-                        }
-                        else
-                        {
-                            rsw.DataItems.Clear();
-                            rsw.DataItems.Add(resultItem);
-                        }
                         OpWidget.Status = OpStatus.Ready;
-                    }
                     break;
                 case "AI实践":
                     var dialog2 = new C2CustomOperatorView(OpWidget);

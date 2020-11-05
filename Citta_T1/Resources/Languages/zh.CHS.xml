@@ -387,6 +387,7 @@
 	<item name="Done">运行完成</item>
 	<item name="Public">发布</item>
 	<item name="Operator">添加算子</item>
+	<item name="OpenDesigner">打开设计器</item>
 	<item name="Max">最大值</item>
 	<item name="AI">AI实践</item>
 	<item name="Model">添加模型</item>

@@ -10,7 +10,8 @@ namespace C2.Model.Widgets
     {
         Null,
         Ready,
-        Done
+        Done,
+        Warn
     }
     public class OperatorWidget : Widget, IRemark
     {
