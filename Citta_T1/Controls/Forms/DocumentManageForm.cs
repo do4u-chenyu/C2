@@ -248,6 +248,8 @@ namespace C2.Controls
             {
                 Form form = (Form)sender;
                 TaskBar.SelectByTag(form);
+                if (sender is C2.Forms.CanvasForm)
+                    (sender as C2.Forms.CanvasForm).BlankButtonFocus();
             }
         }
 

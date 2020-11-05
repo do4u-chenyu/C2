@@ -458,7 +458,7 @@ namespace C2
         }
         private void NewCanvasForm()
         {
-            ModelDocument doc = new ModelDocument("新模型", this.UserName);
+            ModelDocument doc = new ModelDocument("模型视图", this.UserName);
             CanvasForm form = new CanvasForm(doc);
             ShowForm(form);
         }

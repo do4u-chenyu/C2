@@ -60,6 +60,7 @@ namespace C2.Business.Model
             this.ElementCount = 0;
             this.TaskManager = new TaskManager();
             this.WorldMap = new WorldMap();
+            this.Modified = true;
         }
         public string Name
         {
@@ -85,6 +86,7 @@ namespace C2.Business.Model
         {
             DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
             dSaveLoad.WriteXml();
+            this.Modified = false;
         }
         public void AddModelElement(ModelElement modelElement)
         {
