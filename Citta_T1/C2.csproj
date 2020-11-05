@@ -1803,6 +1803,9 @@
     <None Include="Resources\Images\strike.png" />
     <None Include="Resources\Images\svg.png" />
     <None Include="Resources\Images\ToolImage\saveAllButton.png" />
+    <Content Include="Resources\Images\TabBarImage\业务视图.png" />
+    <Content Include="Resources\Images\TabBarImage\模型视图.png" />
+    <Content Include="Resources\Images\TabBarImage\首页.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
     <None Include="Resources\Images\theme.png" />

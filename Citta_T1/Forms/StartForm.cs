@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using C2.Configuration;
-using C2.Controls;
-using C2.Controls.DataCharts;
+﻿using C2.Controls;
 using C2.Core;
 using C2.Globalization;
+using System;
 
 namespace C2.Forms
 {
