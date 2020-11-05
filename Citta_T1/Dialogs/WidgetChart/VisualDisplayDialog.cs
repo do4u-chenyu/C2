@@ -23,8 +23,10 @@ namespace C2.Dialogs
         private OpUtil.Encoding fileEncoding;
         private char fileSep;
         private string fileName;
+        private DataItem hitItem;
         public VisualDisplayDialog(DataItem hitItem)
         {
+            this.hitItem = hitItem;
             this.filePath = hitItem.FilePath;
             this.fileName = hitItem.FileName;
             this.fileEncoding = hitItem.FileEncoding;
@@ -78,6 +80,11 @@ namespace C2.Dialogs
             }
             yValues.Insert(0, xValue);
             PaintChart(yValues, new List<string>() { this.fileName, this.fileName });
+            // 存储图表挂件需要的数据
+            hitItem.ChartType = this.chartTypesList.Text;
+            hitItem.SelectedXIndex = xIndex;
+            hitItem.SelectedYIndexs = yIndexs;
+            this.DialogResult = DialogResult.OK;
             Close();
         }
         private void PaintChart(List<List<string>> xyValues, List<string> titles)
