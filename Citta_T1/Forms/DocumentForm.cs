@@ -18,6 +18,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
+using C2.ChartControls.MindMap;
 
 namespace C2.Forms
 {
@@ -114,8 +115,8 @@ namespace C2.Forms
         }
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
-            this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
-            this.dataSourceControl.Visible = true;
+            Global.GetDataSourceControl().GenDataButton(name, fullFilePath, separator, extType, encoding);
+            Global.GetDataSourceControl().Visible = true;
         
         }
         public ChartControl ActiveChartBox
@@ -317,7 +318,7 @@ namespace C2.Forms
         {
             //
             this.objectTree1 = new ObjectTreeView();
-            this.objectTree2 = new ObjectTreeView();
+            this.objectTree2 = new DataTreeView();
             cob = new ChartOverviewBox();
             tabControl2 = new MyTabControl();
             splitContainer2.Panel2.SuspendLayout();

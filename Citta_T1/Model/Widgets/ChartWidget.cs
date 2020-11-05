@@ -8,9 +8,16 @@ using System.Threading.Tasks;
 
 namespace C2.Model.Widgets
 {
-    class ChartWidget: Widget
+    class ChartWidget : Widget
     {
         public const string TypeID = "CHART";
+        public List<DataItem> DataItems { get; set; }
+        public ChartWidget()
+        {
+            DisplayIndex = 3;
+            DataItems = new List<DataItem>();
+            widgetIcon = Properties.Resources.chart_w_icon; 
+        }
         public override bool ResponseMouse
         {
             get

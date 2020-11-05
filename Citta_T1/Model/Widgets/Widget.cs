@@ -371,6 +371,9 @@ namespace C2.Model.Widgets
                 (widget as DataSourceWidget).DataItems =(this as DataSourceWidget).DataItems;
             else if (widget is ResultWidget)
                 (widget as ResultWidget).DataItems = (this as ResultWidget).DataItems;
+            else if(widget is ChartWidget)
+                (widget as ChartWidget).DataItems = (this as ChartWidget).DataItems;
+
 
         }
 
@@ -402,6 +405,8 @@ namespace C2.Model.Widgets
                     return new DataSourceWidget();
                 case ResultWidget.TypeID:
                     return new ResultWidget();
+                case ChartWidget.TypeID:
+                    return new ChartWidget();
                 default:
                     return null;
             }
