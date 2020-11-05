@@ -1809,6 +1809,8 @@
     <None Include="Resources\Images\theme_manage.png" />
     <None Include="Resources\Images\tick.png" />
     <None Include="Resources\Images\tick_small.png" />
+    <None Include="Resources\Images\ToolImage\open.png" />
+    <None Include="Resources\Images\ToolImage\openDataFile.png" />
     <Content Include="Resources\Images\tool_button.png" />
     <Content Include="Resources\Images\topic.png" />
     <None Include="Resources\Images\underline.png" />
