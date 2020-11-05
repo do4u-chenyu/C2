@@ -20,8 +20,6 @@ namespace C2.Controls.Left
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataSourceName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
         public int Count { get => this.count; set => this.count = value; }
-
-
         private static string DataButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
@@ -59,6 +57,8 @@ namespace C2.Controls.Left
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
+            Global.GetMainForm().ShowBottomViewPanel();
+
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)

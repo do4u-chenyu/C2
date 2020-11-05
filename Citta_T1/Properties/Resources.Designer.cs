@@ -1774,6 +1774,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap openDataFile {
+            get {
+                object obj = ResourceManager.GetObject("openDataFile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap operator_back {
             get {
                 object obj = ResourceManager.GetObject("operator_back", resourceCulture);

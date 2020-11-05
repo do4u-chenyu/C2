@@ -153,6 +153,10 @@ namespace C2
             Global.SetMyModelControl(this.myModelControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
+            Global.SetPictureBox(this.minMaxPictureBox);
+            //Global.SetBottomViewPanelMinimum(this.isBottomViewPanelMinimum);
+            //this.isBottomViewPanelMinimum = false;
+
         }
 
         #endregion
@@ -713,6 +717,7 @@ namespace C2
         {
             this.ShowBottomPanel();
             this.ShowBottomPreview();
+         
         }
 
         private void PyControlLabel_Click(object sender, EventArgs e)
@@ -727,9 +732,8 @@ namespace C2
             this.ShowLogView();
         }
         #endregion
-
-        private void minMaxPictureBox_Click(object sender, EventArgs e)
-        { 
+        public void ShowBottomViewPanel()
+        {
             //log.Info("MinMaxPictureBox_Click");
             if (this.isBottomViewPanelMinimum == true)
             {
@@ -751,6 +755,11 @@ namespace C2
             {
                 this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
             }
+        }
+
+        private void minMaxPictureBox_Click(object sender, EventArgs e)
+        {
+            ShowBottomViewPanel();
         }
     }
 }
