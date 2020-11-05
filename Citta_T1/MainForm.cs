@@ -1,38 +1,24 @@
 ﻿using C2.Business.DataSource;
 using C2.Business.Model;
 using C2.Business.Option;
-using C2.Business.Schedule;
-using C2.Controls.Flow;
 using C2.Controls.Left;
-using C2.Controls.Move;
 using C2.Controls.Move.Dt;
-using C2.Controls.Move.Op;
 using C2.Core;
-using C2.Core.UndoRedo;
-using C2.Core.UndoRedo.Command;
 using C2.Utils;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using C2.Controls;
 using C2.Model.Documents;
-using C2;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
 using C2.Globalization;
 #region Blumind
-using System.ComponentModel;
 using System.IO;
-using System.Text;
 using C2.Configuration;
-using C2.Controls.OS;
-using C2.Core.Exports;
 using C2.Dialogs;
-using C2.Core.Win32Apis;
 using C2.Forms;
 using C2.Model;
 #endregion
@@ -476,7 +462,7 @@ namespace C2
         }
         private void NewCanvasForm()
         {
-            ModelDocument doc = new ModelDocument("新模型", this.UserName);
+            ModelDocument doc = new ModelDocument("模型视图", this.UserName);
             CanvasForm form = new CanvasForm(doc);
             ShowForm(form);
         }

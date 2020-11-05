@@ -18,6 +18,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
+using C2.ChartControls.MindMap;
 
 namespace C2.Forms
 {
@@ -317,7 +318,7 @@ namespace C2.Forms
         {
             //
             this.objectTree1 = new ObjectTreeView();
-            this.objectTree2 = new ObjectTreeView();
+            this.objectTree2 = new DataTreeView();
             cob = new ChartOverviewBox();
             tabControl2 = new MyTabControl();
             splitContainer2.Panel2.SuspendLayout();
@@ -902,7 +903,7 @@ namespace C2.Forms
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
 
-            dc.SetSelectedTopicDesign(st);
+            dc.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
         }
         
         void ShowProperty(object[] objects)

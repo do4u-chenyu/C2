@@ -206,7 +206,18 @@ namespace C2.Controls.DataCharts
                 chart1.Series[series]["RadarDrawingStyle"] = "Line";
                 chart1.Series[series].LegendText = legendText;
                 chart1.Series[series].IsValueShownAsLabel = true;
-                List<double> y_double = y.ConvertAll(d => Convert.ToDouble(d));
+                List<double> y_double = new List<double>();
+                foreach (string tmp in y)
+                {
+                    try
+                    {
+                        y_double.Add(Convert.ToDouble(tmp));
+                    }
+                    catch
+                    {
+                        y_double.Add(0);
+                    }
+                }
                 this.chart1.Series[series].Points.DataBindXY(x, y_double);
                 chart1.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
                 //设置XY轴标题的名称所在位置位远  

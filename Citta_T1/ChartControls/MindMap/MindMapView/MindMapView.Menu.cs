@@ -28,65 +28,112 @@ namespace C2.Controls.MapViews
         private DataSourceWidget dtw;
         private OperatorWidget opw;
         private ResultWidget rsw;
-
+        private ChartWidget cw;
+        private Topic currentTopic;
 
         public void CreateWidgetMenu()
         {
+            WidgetMenuStrip.SuspendLayout();
             WidgetMenuStrip.Items.Clear();
 
             switch (HoverObject.Widget.GetTypeID())
             {
                 case OperatorWidget.TypeID:
                     opw = HoverObject.Widget as OperatorWidget;
-                    CreateOperatorMenu(opw);
+                    if (opw.Status == OpStatus.Null)
+                        CreateInitOperatorMenu(opw);
+                    else
+                        CreateOperatorMenu(opw);                        
                     break;
                 case DataSourceWidget.TypeID:
                     dtw = HoverObject.Widget as DataSourceWidget;
+                    currentTopic = HoverObject.Topic;
                     CreateDataSourceMenu(dtw);
                     break;
                 case ResultWidget.TypeID:
                     rsw = HoverObject.Widget as ResultWidget;
                     CreateResultMenu(rsw);
                     break;
+                case ChartWidget.TypeID:
+                    cw = HoverObject.Widget as ChartWidget;
+                    CreateChartWidgetMenu(cw);
+                    break;
                 default:
                     break;
             }
-           
+            WidgetMenuStrip.ResumeLayout();
+            if (UITheme.Default != null)
+            {
+                WidgetMenuStrip.Renderer = UITheme.Default.ToolStripRenderer;
+            }
         }
 
+        #region 图表挂件
+        private void CreateChartWidgetMenu(ChartWidget cw)
+        { }
+        #endregion
+
+        #region 算子挂件
+        private void CreateInitOperatorMenu(OperatorWidget opw)
+        {
+            ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
+            MenuOpenOperator.Text = Lang._("OpenDesigner");
+            MenuOpenOperator.Image = Properties.Resources.operator_w_icon;
+
+            WidgetMenuStrip.Items.Add(MenuOpenOperator);
+        }
         private void CreateOperatorMenu(OperatorWidget opw)
         {
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
-            ToolStripMenuItem MenuDesign = new ToolStripMenuItem();
-            ToolStripMenuItem MenuRunning = new ToolStripMenuItem();
-            ToolStripMenuItem MenuPublic = new ToolStripMenuItem();
-            ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
+            ToolStripMenuItem MenuOpDesign = new ToolStripMenuItem();
+            ToolStripMenuItem MenuOpRunning = new ToolStripMenuItem();
+            ToolStripMenuItem MenuOpPublic = new ToolStripMenuItem();
+            ToolStripMenuItem MenuOpDelete = new ToolStripMenuItem();
 
+            MenuOpenOperator.Image = GetOpOpenOperatorImage(opw.Status);
             MenuOpenOperator.Text = opw.OpName;
             MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
-                MenuDesign,
-                MenuRunning,
-                MenuPublic,
-                MenuDelete});
+                MenuOpDesign,
+                MenuOpRunning,
+                MenuOpPublic,
+                MenuOpDelete});
 
-            MenuDesign.Text = Lang._("Design");
-            MenuDesign.Enabled = opw.Status != OpStatus.Done;
-            MenuDesign.Click += new System.EventHandler(MenuDesignOp_Click);
+            MenuOpDesign.Image = Properties.Resources.opDesign;
+            MenuOpDesign.Text = Lang._("Design");
+            MenuOpDesign.Enabled = opw.Status != OpStatus.Done;
+            MenuOpDesign.Click += new System.EventHandler(MenuDesignOp_Click);
 
-            MenuRunning.Text = opw.Status == OpStatus.Done ? Lang._("Done") : Lang._("Running") ;
-            MenuRunning.Enabled = opw.Status == OpStatus.Ready ;
-            MenuRunning.Click += new System.EventHandler(MenuRunningOp_Click);
+            MenuOpRunning.Image = Properties.Resources.opRunning;
+            MenuOpRunning.Text = Lang._("Running") ;
+            MenuOpRunning.Enabled = opw.Status != OpStatus.Null ;
+            MenuOpRunning.Click += new System.EventHandler(MenuRunningOp_Click);
 
-            MenuPublic.Text = Lang._("Public");
-            MenuPublic.Enabled = opw.OpType == Lang._("Model");
+            MenuOpPublic.Image = Properties.Resources.opModelPublic;
+            MenuOpPublic.Text = Lang._("Public");
+            MenuOpPublic.Enabled = opw.OpType == Lang._("Model");
 
-            MenuDelete.Text = Lang._("Delete");
-            MenuDelete.Click += new System.EventHandler(MenuDeleteOp_Click);
-
-
+            MenuOpDelete.Image = Properties.Resources.deletewidget;
+            MenuOpDelete.Text = Lang._("Delete");
+            MenuOpDelete.Click += new System.EventHandler(MenuDeleteOp_Click);
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
+        }
 
+        private Image GetOpOpenOperatorImage(OpStatus opStatus)
+        {
+            switch (opStatus)
+            {
+                case OpStatus.Null:
+                    return Properties.Resources.set;
+                case OpStatus.Ready:
+                    return Properties.Resources.setSuccess;
+                case OpStatus.Done:
+                    return Properties.Resources.done;
+                case OpStatus.Warn:
+                    return Properties.Resources.warn;
+                default:
+                    return Properties.Resources.operator_w_icon;
+            }
         }
 
         void MenuDesignOp_Click(object sender, EventArgs e)
@@ -109,6 +156,15 @@ namespace C2.Controls.MapViews
             {
                 List<string> cmds = (new MaxOperatorCmd(opw)).GenCmd();
                 MessageBox.Show(RunLinuxCommand(cmds));
+                DataItem resultItem = opw.ResultItem;
+                ResultWidget rsw = (opw.Container as Topic).FindWidget<ResultWidget>();
+                if (rsw == null)
+                    AddResult(new Topic[] { opw.Container as Topic },resultItem);
+                else
+                {
+                    rsw.DataItems.Clear();
+                    rsw.DataItems.Add(resultItem);
+                }
                 opw.Status = OpStatus.Done;
             }
         }
@@ -181,45 +237,11 @@ namespace C2.Controls.MapViews
             else
                 Delete(new ChartObject[] { opw,rs });
         }
+        #endregion
 
-        void MenuDelete_Click(object sender, EventArgs e)
-        {
-            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            // 剩余最后一个菜单项，删除数据源挂件
-            dtw.DataItems.Remove(hitItem);
-            ShowDesigner(dtw.Container);
-            if (dtw.DataItems.IsEmpty())
-                Delete(new ChartObject[] { dtw });
-        }
-        void MenuJoinPool_Click(object sender, EventArgs e)
-        {
-        }
-        void DSWidgetMenuDelete_Click(object sender, EventArgs e)
-        {
-            Delete(new ChartObject[] { opw });
-        }
-        void MenuViewData_Click(object sender, EventArgs e)
-        {
-    
-            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            if (hitItem != null)
-                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
-        }
-        void MenuGetChart_Click(object sender, EventArgs e)
-        {
-            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;        
-            VisualDisplayDialog displayDialog = new VisualDisplayDialog(hitItem);
-            displayDialog.Show();
-        }
-        void MenuDealData_Click(object sender, EventArgs e)
-        {
-            AddSubTopic(rsw.Container as Topic, null, false);
-        }
-
+        #region 数据挂件
         private void CreateDataSourceMenu(DataSourceWidget dtw)
         {
-           
-            WidgetMenuStrip.SuspendLayout();
             foreach (DataItem dataItem in dtw.DataItems)
             {
                 ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
@@ -251,13 +273,40 @@ namespace C2.Controls.MapViews
 
                 WidgetMenuStrip.Items.Add(MenuOpenDataSource);           
             }
-            WidgetMenuStrip.ResumeLayout();
-            if (UITheme.Default != null)
-            {
-                WidgetMenuStrip.Renderer = UITheme.Default.ToolStripRenderer;
-            }
+        }
+        void MenuDelete_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            // 剩余最后一个菜单项，删除数据源挂件
+            dtw.DataItems.Remove(hitItem);
+            ShowDesigner(dtw.Container);
+            if (dtw.DataItems.IsEmpty())
+                Delete(new ChartObject[] { dtw });
         }
 
+        void DSWidgetMenuDelete_Click(object sender, EventArgs e)
+        {
+            Delete(new ChartObject[] { opw });
+        }
+
+        void MenuGetChart_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            VisualDisplayDialog displayDialog = new VisualDisplayDialog(hitItem);
+            if (DialogResult.OK != displayDialog.ShowDialog())
+                return;
+            ChartWidget cw = currentTopic.FindWidget<ChartWidget>();
+            // 生成图表挂件
+            if (cw == null)
+            {
+                Topic[] hitTopic = new Topic[] { currentTopic };
+                AddChartWidget(hitTopic);
+            }
+            currentTopic.FindWidget<ChartWidget>().DataItems.Add(hitItem);
+        }
+        #endregion
+
+        #region 结果挂件
         private void CreateResultMenu(ResultWidget rsw)
         {
             
@@ -268,7 +317,6 @@ namespace C2.Controls.MapViews
             //WidgetMenuStrip.Items.Add(MenuOpenResult);
 
             //改
-            WidgetMenuStrip.SuspendLayout();
             foreach (DataItem dataItem in rsw.DataItems)
             {
                 ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
@@ -302,11 +350,22 @@ namespace C2.Controls.MapViews
 
                 WidgetMenuStrip.Items.Add(MenuOpenResult);
             }
-            WidgetMenuStrip.ResumeLayout();
-            if (UITheme.Default != null)
-            {
-                WidgetMenuStrip.Renderer = UITheme.Default.ToolStripRenderer;
-            }
         }
+
+        void MenuViewData_Click(object sender, EventArgs e)
+        {
+
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            if (hitItem != null)
+                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
+        }
+        void MenuDealData_Click(object sender, EventArgs e)
+        {
+            AddSubTopic(rsw.Container as Topic, null, false);
+        }
+        void MenuJoinPool_Click(object sender, EventArgs e)
+        {
+        }
+        #endregion
     }
 }

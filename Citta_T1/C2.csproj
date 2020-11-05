@@ -158,6 +158,9 @@
     <Compile Include="Business\Option\PythonInterpreterInfo.cs" />
     <Compile Include="Business\Option\PythonOPConfig.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
+    <Compile Include="ChartControls\MindMap\DataTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DataCharts\BarChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -689,6 +692,11 @@
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Widgets\ChartWidget.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="WorkSpace\BaseWorkSpace.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1282,11 +1290,6 @@
     <Compile Include="Controls\C1\Move\Op\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Resources\RecommendedResources.cs" />
     <Compile Include="ChartBoards.cs">
       <SubType>Form</SubType>
@@ -1803,6 +1806,15 @@
     <None Include="Resources\Images\strike.png" />
     <None Include="Resources\Images\svg.png" />
     <None Include="Resources\Images\ToolImage\saveAllButton.png" />
+    <Content Include="Resources\Images\TabBarImage\业务视图.png" />
+    <None Include="Resources\Images\TabBarImage\业务视图2.png" />
+    <None Include="Resources\Images\TabBarImage\业务视图3.png" />
+    <Content Include="Resources\Images\TabBarImage\模型视图.png" />
+    <None Include="Resources\Images\TabBarImage\模型视图2.png" />
+    <None Include="Resources\Images\TabBarImage\模型视图3.png" />
+    <Content Include="Resources\Images\TabBarImage\首页.png" />
+    <None Include="Resources\Images\TabBarImage\首页2.png" />
+    <None Include="Resources\Images\TabBarImage\首页3.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
     <None Include="Resources\Images\theme.png" />
@@ -1846,6 +1858,9 @@
     <None Include="Resources\importDataSource.png" />
     <None Include="Resources\Images\WidgetImage\viewdata.png" />
     <None Include="Resources\Images\WidgetImage\designer.png" />
+    <None Include="Resources\Images\WidgetImage\opDesign.png" />
+    <None Include="Resources\Images\WidgetImage\opModelPublic.png" />
+    <None Include="Resources\Images\WidgetImage\opRunning.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -214,6 +214,7 @@
             this.saveModelButton.TabIndex = 8;
             this.saveModelButton.TabStop = false;
             this.saveModelButton.UseVisualStyleBackColor = true;
+            this.saveModelButton.Click += new System.EventHandler(this.SaveModelButton_Click);
             // 
             // TopToolBarControl
             // 

@@ -1,4 +1,5 @@
-﻿using C2.Dialogs.C2OperatorViews;
+﻿using C2.Controls.MapViews;
+using C2.Dialogs.C2OperatorViews;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
@@ -14,6 +15,7 @@ namespace C2.Controls.Common
     {
         private string[] ComboOperator;
         public Topic SelectedTopic { get; set; }
+        public MindMapView MindmapView { get; set; }
         public OperatorWidget OpWidget { get; set; }
         public DataItem SelectedDataSource { get; set; }
         public string SelectedOperator { get; set; }
@@ -28,9 +30,10 @@ namespace C2.Controls.Common
         }
 
 
-        public void SetSelectedTopicDesign(Topic topic)
+        public void SetSelectedTopicDesign(Topic topic,MindMapView mindmapview)
         {
             SelectedTopic = topic;
+            MindmapView = mindmapview;
             if(SelectedTopic == null)
             {
                 this.topicName.Text = "未选中主题";
@@ -135,12 +138,6 @@ namespace C2.Controls.Common
                 return;
             }
 
-            if(OpWidget == null)
-            {
-                MessageBox.Show("未添加算子挂件，请添加后再配置");
-                return;
-            }
-
             if (SelectedDataSource ==null || SelectedDataSource.IsEmpty())
             {
                 MessageBox.Show("未选中数据源,请添加后再配置");
@@ -153,6 +150,12 @@ namespace C2.Controls.Common
                 return;
             }
 
+            if (OpWidget == null)
+            {
+                MindmapView.AddOperator(new Topic[] { SelectedTopic });
+                OpWidget = SelectedTopic.FindWidget<OperatorWidget>();
+            }
+
             OpWidget.OpType = ComboOperator[this.operatorCombo.SelectedIndex];
             OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
 
@@ -161,23 +164,7 @@ namespace C2.Controls.Common
                 case "最大值":
                     var dialog = new C2MaxOperatorView(OpWidget);
                     if(dialog.ShowDialog(this) == DialogResult.OK)
-                    {
-                        
-                        DataItem resultItem = OpWidget.ResultItem;
-                        ResultWidget rsw = SelectedTopic.FindWidget<ResultWidget>();
-                        if(rsw == null)
-                        {
-                            var template = new ResultWidget();
-                            template.DataItems.Add(resultItem);
-                            SelectedTopic.Widgets.Add(template);
-                        }
-                        else
-                        {
-                            rsw.DataItems.Clear();
-                            rsw.DataItems.Add(resultItem);
-                        }
                         OpWidget.Status = OpStatus.Ready;
-                    }
                     break;
                 case "AI实践":
                     var dialog2 = new C2CustomOperatorView(OpWidget);

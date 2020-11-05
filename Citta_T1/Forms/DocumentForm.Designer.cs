@@ -188,6 +188,7 @@ namespace C2.Forms
             // 
             this.ImportDataSourceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ImportDataSourceButton.Image = global::C2.Properties.Resources.openDataFile;
+            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.paste;
             this.ImportDataSourceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ImportDataSourceButton.Name = "ImportDataSourceButton";
             this.ImportDataSourceButton.Padding = new System.Windows.Forms.Padding(2);
@@ -610,6 +611,7 @@ namespace C2.Forms
             this.ClientSize = new System.Drawing.Size(804, 438);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
+            this.IconImage = global::C2.Properties.Resources.“µŒÒ ”Õº;
             this.KeyPreview = true;
             this.Name = "DocumentForm";
             this.Text = "DocumentForm";
