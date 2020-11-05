@@ -98,10 +98,6 @@ namespace C2.Controls.MapViews
                 WidgetMenuStrip.Items.Add(MenuViewChart);
             }
             WidgetMenuStrip.ResumeLayout();
-            if (UITheme.Default != null)
-            {
-                WidgetMenuStrip.Renderer = UITheme.Default.ToolStripRenderer;
-            }
         }
 
         #endregion
