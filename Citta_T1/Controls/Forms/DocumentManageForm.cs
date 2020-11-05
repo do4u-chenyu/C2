@@ -152,7 +152,7 @@ namespace C2.Controls
                 ti.CanClose = canClose;
                 ti.Tag = form;
                 if (form is BaseForm)
-                    ti.Icon = ((BaseForm)form).IconImage;
+                    ti.Icon = form.IconImage;
                 else
                     ti.Icon = PaintHelper.IconToImage(form.Icon);
                 TaskBar.Items.Add(ti);
@@ -248,6 +248,8 @@ namespace C2.Controls
             {
                 Form form = (Form)sender;
                 TaskBar.SelectByTag(form);
+                if (sender is C2.Forms.CanvasForm)
+                    (sender as C2.Forms.CanvasForm).BlankButtonFocus();
             }
         }
 

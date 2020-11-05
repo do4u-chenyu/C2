@@ -170,8 +170,19 @@ namespace C2.Controls.DataCharts
         {
             try
             {
-               // chart1.Series[0]["PieLineColor"] = "Gray";
-                List<double> y_double = y.ConvertAll(d => Convert.ToDouble(d));
+                // chart1.Series[0]["PieLineColor"] = "Gray";
+                List<double> y_double = new List<double>();
+                foreach (string tmp in y)
+                {
+                    try
+                    {
+                        y_double.Add(Convert.ToDouble(tmp));
+                    }
+                    catch
+                    {
+                        y_double.Add(0);
+                    }
+                }
                 chart1.Series[0].Points.DataBindXY(x, y_double);
             }
             catch

@@ -263,6 +263,7 @@
             this.Controls.Add(this.currentModelRunBackLab);
             this.Controls.Add(this.canvasPanel);
             this.Controls.Add(this.topToolBarControl);
+            this.IconImage = global::C2.Properties.Resources.模型视图;
             this.Name = "CanvasForm";
             this.Text = "CanvasForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CanvasForm_FormClosing);

@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using C2.Configuration;
-using C2.Controls;
-using C2.Controls.DataCharts;
+﻿using C2.Controls;
 using C2.Core;
 using C2.Globalization;
+using System;
 
 namespace C2.Forms
 {
@@ -49,6 +39,7 @@ namespace C2.Forms
             // 
             this.ClientSize = new System.Drawing.Size(784, 462);
             this.Controls.Add(this.recentFilesView1);
+            this.IconImage = global::C2.Properties.Resources.首页;
             this.Name = "StartForm";
             this.VisibleChanged += new System.EventHandler(this.StartForm_VisibleChanged);
             this.ResumeLayout(false);

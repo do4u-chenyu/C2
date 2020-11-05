@@ -97,7 +97,7 @@
 		<item name="Restore Default">恢复默认值</item>
 		<item name="Center Topic">中心主题</item>
 		<item name="Sub Topic">子主题</item>
-		<item name="NewDocument">新文档</item>
+		<item name="NewDocument">业务视图</item>
 		<item name="Appearance">外观</item>
 		<item name="Associations">文件关联</item>
 		<item name="Customization">自定义</item>
@@ -341,7 +341,7 @@
     <item name="Remove Chart">移除页</item>
     <item name="Rename">重命名</item>
     <item name="Please enter the new name">请输入新名字</item>
-    <item name="New Document">新文档</item>
+    <item name="New Document">业务视图</item>
     <item name="New Chart">新页面</item>
     <item name="Are you sure delete the tab &quot;{0}&quot;?">确定要删除页面"{0}"吗?</item>
     

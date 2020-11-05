@@ -20,7 +20,8 @@ namespace C2.Controls.MapViews
             il.ColorDepth = ColorDepth.Depth32Bit;
             il.Images.Add(Properties.Resources.document);
             il.Images.Add(Properties.Resources.topic);
-
+            il.Images.Add(Properties.Resources.result_w_icon);
+            il.Images.Add(Properties.Resources.data_w_icon);
             ImageList = il;
             Dock = System.Windows.Forms.DockStyle.Fill;
             HideSelection = false;
@@ -189,7 +190,7 @@ namespace C2.Controls.MapViews
                 if (node is DocumentTreeNode)
                     node.ImageIndex = node.SelectedImageIndex = 0;
                 else if (node is TopicTreeNode)
-                    node.ImageIndex = node.SelectedImageIndex = 1;
+                    node.ImageIndex = node.SelectedImageIndex = 2;
                 else
                     node.ImageIndex = node.SelectedImageIndex = -1;
             }
