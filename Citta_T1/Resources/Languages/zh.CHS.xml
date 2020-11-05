@@ -382,6 +382,7 @@
     <item name="WeChat">微信</item>
     <item name="ViewData">预览数据</item>
 	<item name="GetChart">生成图表</item>
+    <item name="ViewChart">查看图表</item>
 	<item name="Design">修改</item>
 	<item name="Running">运行</item>
 	<item name="Done">运行完成</item>

@@ -86,14 +86,14 @@ namespace C2.Controls.MapViews
                 MenuDelete});
 
                 MenuGetChart.Image = Properties.Resources.getchart;
-                MenuGetChart.Text = Lang._("GetChart");
+                MenuGetChart.Text = Lang._("ViewChart");
                 MenuGetChart.Tag = dataItem;
                 //MenuGetChart.Click += MenuGetChart_Click;
 
                 MenuDelete.Image = Properties.Resources.deletewidget;
                 MenuDelete.Text = Lang._("Delete");
                 MenuDelete.Tag = dataItem;
-                // MenuDelete.Click += MenuDelete_Click;
+                MenuDelete.Click += ChartMenuDelete_Click;
 
                 WidgetMenuStrip.Items.Add(MenuViewChart);
             }
@@ -318,6 +318,15 @@ namespace C2.Controls.MapViews
             ShowDesigner(dtw.Container);
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
+        }
+        void ChartMenuDelete_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            // 剩余最后一个菜单项，删除数据源挂件
+            cw.DataItems.Remove(hitItem);
+            ShowDesigner(cw.Container);
+            if (cw.DataItems.IsEmpty())
+                Delete(new ChartObject[] { cw });
         }
 
         void DSWidgetMenuDelete_Click(object sender, EventArgs e)
