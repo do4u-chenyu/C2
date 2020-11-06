@@ -393,12 +393,12 @@ namespace C2.Model.Widgets
         {
             switch (typeId)
             {
-                //case ProgressBarWidget.TypeID:
-                //    return new ProgressBarWidget();
-                //case PictureWidget.TypeID:
-                //    return new PictureWidget();
-                //case NoteWidget.TypeID:
-                //    return new NoteWidget();
+                //case AttementWiget.TypeID:
+                //    return new AttementWiget();
+                case PictureWidget.TypeID:
+                    return new PictureWidget();
+                case NoteWidget.TypeID:
+                    return new NoteWidget();
                 case OperatorWidget.TypeID:
                     return new OperatorWidget();
                 case DataSourceWidget.TypeID:

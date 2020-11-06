@@ -58,6 +58,7 @@ namespace C2.Controls.MapViews
                     cw = HoverObject.Widget as ChartWidget;
                     CreateChartWidgetMenu(cw);
                     break;
+
                 default:
                     break;
             }
@@ -463,6 +464,10 @@ namespace C2.Controls.MapViews
         void MenuJoinPool_Click(object sender, EventArgs e)
         {
         }
+        #endregion
+
+        #region 附件挂件
+
         #endregion
     }
 }

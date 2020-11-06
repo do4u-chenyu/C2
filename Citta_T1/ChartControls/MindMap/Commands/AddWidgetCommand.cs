@@ -34,17 +34,7 @@ namespace C2.Controls.MapViews
             {
                 Topic topic = Topics[i];
                 if (topic.Widgets.Contains(Widgets[i]))
-                {
-                    //new 结果挂件不入栈，但是删算子挂件要同步删掉结果挂件
-                    if(Widgets[i] is OperatorWidget)
-                    {
-                        ResultWidget tmpRs = topic.FindWidget<ResultWidget>();
-                        if (tmpRs != null)
-                            topic.Widgets.Remove(tmpRs);
-                    }
                     topic.Widgets.Remove(Widgets[i]);
-                }
-                    
             }
 
             return true;
