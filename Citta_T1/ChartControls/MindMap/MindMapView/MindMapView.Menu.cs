@@ -70,7 +70,36 @@ namespace C2.Controls.MapViews
 
         #region 图表挂件
         private void CreateChartWidgetMenu(ChartWidget cw)
-        { }
+        {
+            WidgetMenuStrip.SuspendLayout();
+            foreach (DataItem dataItem in cw.DataItems)
+            {
+
+                ToolStripMenuItem MenuGetChart = new ToolStripMenuItem();
+                ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
+                ToolStripMenuItem MenuViewChart = new ToolStripMenuItem();
+                MenuViewChart.Image = Properties.Resources.chart_w_icon;
+
+                MenuViewChart.Text = String.Format("{0}{1}{2}{3}", dataItem.FileName, " [", dataItem.ChartType, "]");
+                MenuViewChart.DropDownItems.AddRange(new ToolStripItem[] {
+                MenuGetChart,
+                MenuDelete});
+
+                MenuGetChart.Image = Properties.Resources.getchart;
+                MenuGetChart.Text = Lang._("ViewChart");
+                MenuGetChart.Tag = dataItem;
+                MenuGetChart.Click += MenuViewChart_Click;
+
+                MenuDelete.Image = Properties.Resources.deletewidget;
+                MenuDelete.Text = Lang._("Delete");
+                MenuDelete.Tag = dataItem;
+                MenuDelete.Click += ChartMenuDelete_Click;
+
+                WidgetMenuStrip.Items.Add(MenuViewChart);
+            }
+            WidgetMenuStrip.ResumeLayout();
+        }
+
         #endregion
 
         #region 算子挂件
@@ -79,6 +108,7 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
             MenuOpenOperator.Text = Lang._("OpenDesigner");
             MenuOpenOperator.Image = Properties.Resources.operator_w_icon;
+            MenuOpenOperator.Click += new System.EventHandler(MenuOpenOperatorDesigner_Click);
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
         }
@@ -110,7 +140,7 @@ namespace C2.Controls.MapViews
 
             MenuOpPublic.Image = Properties.Resources.opModelPublic;
             MenuOpPublic.Text = Lang._("Public");
-            MenuOpPublic.Enabled = opw.OpType == Lang._("Model");
+            MenuOpPublic.Enabled = opw.OpType == OpType.ModelOperator;
 
             MenuOpDelete.Image = Properties.Resources.deletewidget;
             MenuOpDelete.Text = Lang._("Delete");
@@ -124,13 +154,13 @@ namespace C2.Controls.MapViews
             switch (opStatus)
             {
                 case OpStatus.Null:
-                    return Properties.Resources.set;
+                    return Properties.Resources.opSet;
                 case OpStatus.Ready:
-                    return Properties.Resources.setSuccess;
+                    return Properties.Resources.opSetSuccess;
                 case OpStatus.Done:
-                    return Properties.Resources.done;
+                    return Properties.Resources.opDone;
                 case OpStatus.Warn:
-                    return Properties.Resources.warn;
+                    return Properties.Resources.opWarn;
                 default:
                     return Properties.Resources.operator_w_icon;
             }
@@ -140,16 +170,22 @@ namespace C2.Controls.MapViews
         {
             switch (opw.OpType)
             {
-                case "最大值":
+                case OpType.MaxOperator:
                     new C2MaxOperatorView(opw).ShowDialog();
                     break;
-                case "AI实践":
+                case OpType.CustomOperator:
                     new C2CustomOperatorView(opw).ShowDialog();
                     break;
                 default:
                     break;
             }
         }
+
+        void MenuOpenOperatorDesigner_Click(object sender, EventArgs e)
+        {
+            ShowDesigner(opw.Container);
+        }
+
         void MenuRunningOp_Click(object sender, EventArgs e)
         {
             if(opw.Status == OpStatus.Ready)
@@ -283,6 +319,15 @@ namespace C2.Controls.MapViews
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
         }
+        void ChartMenuDelete_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            // 剩余最后一个菜单项，删除数据源挂件
+            cw.DataItems.Remove(hitItem);
+            ShowDesigner(cw.Container);
+            if (cw.DataItems.IsEmpty())
+                Delete(new ChartObject[] { cw });
+        }
 
         void DSWidgetMenuDelete_Click(object sender, EventArgs e)
         {
@@ -292,7 +337,14 @@ namespace C2.Controls.MapViews
         void MenuGetChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            VisualDisplayDialog displayDialog = new VisualDisplayDialog(hitItem);
+            DataItem dataCopy = new DataItem(
+               hitItem.FilePath,
+               hitItem.FileName,
+               hitItem.FileSep,
+               hitItem.FileEncoding,
+               hitItem.FileType);
+
+            VisualDisplayDialog displayDialog = new VisualDisplayDialog(dataCopy);
             if (DialogResult.OK != displayDialog.ShowDialog())
                 return;
             ChartWidget cw = currentTopic.FindWidget<ChartWidget>();
@@ -302,7 +354,30 @@ namespace C2.Controls.MapViews
                 Topic[] hitTopic = new Topic[] { currentTopic };
                 AddChartWidget(hitTopic);
             }
-            currentTopic.FindWidget<ChartWidget>().DataItems.Add(hitItem);
+            UpdateChartWidgetMenu(currentTopic.FindWidget<ChartWidget>(), dataCopy);
+        }
+        void MenuViewChart_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            string path = hitItem.FilePath;
+            Utils.OpUtil.Encoding encoding = hitItem.FileEncoding;
+            // 获取选中输入、输出各列数据
+            List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(path, encoding).Split('\n'));
+            // 最多绘制前100行数据
+            int upperLimit = Math.Min(rows.Count, 100);
+            List<List<string>> columnValues = Utils.FileUtil.GetColumns(hitItem.SelectedIndexs, hitItem, rows, upperLimit);
+            if (columnValues.Count == 0)
+                return;
+            Utils.ControlUtil.PaintChart(columnValues, new List<string>() { hitItem.FileName, hitItem.FileName }, hitItem.ChartType);
+        }
+        void UpdateChartWidgetMenu(ChartWidget widget, DataItem hitItem)
+        {
+            DataItem item = widget.DataItems.Find((DataItem d) => d.FileName == hitItem.FileName && d.ChartType == hitItem.ChartType);
+            if (item != null)
+            {
+                widget.DataItems.Remove(item);
+            }
+            widget.DataItems.Add(hitItem);
         }
         #endregion
 

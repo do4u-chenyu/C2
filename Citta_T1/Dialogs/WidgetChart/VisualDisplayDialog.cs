@@ -49,67 +49,30 @@ namespace C2.Dialogs
                 return;
             int upperLimit = 100;
 
+            // 获得x,y轴数据的列索引
             int xIndex = comboBox0.Tag == null ? comboBox0.SelectedIndex : ConvertUtil.TryParseInt(comboBox0.Tag.ToString());
-            List<int> yIndexs = outListCCBL0.GetItemCheckIndex();          
-            List<string> xValue = new List<string>();
-            List<List<string>> yValues = new List<List<string>>();
+            List<int> indexs = new List<int>() { xIndex };
+            indexs.AddRange(outListCCBL0.GetItemCheckIndex());
+        
+
             // 获取选中输入、输出各列数据
             List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(filePath, fileEncoding).Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
-            for (int i = 0; i < upperLimit; i++)
-            {
-                string row = rows[i].TrimEnd('\r');
-                if (row.IsEmpty())
-                    continue;
-                string[] rowElement = row.Split(fileSep);
-                if (rowElement.Length < Math.Max(xIndex, yIndexs.Max())
-                    || Math.Min(xIndex, yIndexs.Min()) < 0)
-                {
-                    MessageBox.Show("索引越界");
-                    return;
-                }
-                xValue.Add(rowElement[xIndex]);
-                for (int j = 0; j < yIndexs.Count; j++)
-                {
-                    if (yValues.Count < j+1)
-                        yValues.Add(new List<string>());
-                    yValues[j].Add(rowElement[yIndexs[j]]);
 
-                }
-
+            List<List<string>> columnValues= Utils.FileUtil.GetColumns(indexs, hitItem, rows, upperLimit);
+            if (columnValues.Count == 0)
+            { 
+                Close(); 
+                return;
             }
-            yValues.Insert(0, xValue);
-            PaintChart(yValues, new List<string>() { this.fileName, this.fileName });
+       
+            Utils.ControlUtil.PaintChart(columnValues, new List<string>() { this.fileName, this.fileName }, this.chartTypesList.Text);
             // 存储图表挂件需要的数据
             hitItem.ChartType = this.chartTypesList.Text;
-            hitItem.SelectedXIndex = xIndex;
-            hitItem.SelectedYIndexs = yIndexs;
+            hitItem.SelectedIndexs = indexs;
             this.DialogResult = DialogResult.OK;
             Close();
-        }
-        private void PaintChart(List<List<string>> xyValues, List<string> titles)
-        {
-            WidgetChartDialog chartDialog = new WidgetChartDialog(xyValues, titles);
-            switch (this.chartTypesList.Text)
-            {
-                case "柱状图":
-                    chartDialog.GetbarChart();                   
-                    break;
-                case "饼图":
-                    chartDialog.GetPieChart();
-                    break;
-                case "折线图":
-                    chartDialog.GetLineChart();
-                    break;
-                case "雷达图":
-                    chartDialog.GetRadarChart();
-                    break;
-                case "圆环图":
-                    chartDialog.GetRingChart();
-                    break;
-            }
-            chartDialog.ShowDialog();
-        }
+        }      
         private bool OptionNotReady()
         {
             int status0 = String.IsNullOrEmpty(this.chartTypesList.Text) ? 1 : 0;

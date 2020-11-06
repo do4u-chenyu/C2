@@ -1,4 +1,6 @@
-﻿using NPOI.HSSF.UserModel;
+﻿using C2.Core;
+using C2.Model;
+using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using OfficeOpenXml;
 using System;
@@ -464,6 +466,31 @@ namespace C2.Utils
             {
                 dgv.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
+        }
+        public static  List<List<string>> GetColumns(List<int> indexs, DataItem dataItem, List<string> rows, int upperLimit)
+        {
+            List<List<string>> columnValues = new List<List<string>>();
+            for (int i = 0; i < upperLimit; i++)
+            {
+                if (i == 0)
+                    continue;
+                string row = rows[i].TrimEnd('\r');
+                if (String.IsNullOrEmpty(row))
+                    continue;
+                string[] rowElement = row.Split(dataItem.FileSep);
+                if (rowElement.Length < indexs.Max() || indexs.Min() < 0)
+                {
+                    MessageBox.Show(String.Format("{0}:第{1}行数据可能不完整", dataItem.FilePath, i));
+                    return new List<List<string>>();
+                }
+                for (int j = 0; j < indexs.Count; j++)
+                {
+                    if (columnValues.Count < j + 1)
+                        columnValues.Add(new List<string>());
+                    columnValues[j].Add(rowElement[indexs[j]]);
+                }
+            }
+            return columnValues;
         }
     }
 }

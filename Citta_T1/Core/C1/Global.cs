@@ -26,8 +26,9 @@ namespace C2.Core
         private static TaskBar taskBar;
         private static PictureBox minMaxPictureBox;
         private static bool bottomViewPanelMinimum;
+        private static MindMapModelControl mindMapModelControl;
 
-      
+
 
 
 
@@ -38,7 +39,7 @@ namespace C2.Core
         public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static BottomLogControl GetLogView() { return logView; }
         public static Control GetBottomViewPanel() { return bottomViewPanle; }
-       
+        public static MindMapModelControl GetMindMapModelControl() { return mindMapModelControl; }
 
         public static CanvasForm GetCanvasForm()
         {
@@ -119,8 +120,7 @@ namespace C2.Core
         public static void SetBottomViewPanel(Panel bv) { bottomViewPanle = bv; }
         public static void SetPictureBox(PictureBox mmpb) { minMaxPictureBox = mmpb; }
         public static void SetBottomViewPanelMinimum(bool bvpm) { bottomViewPanelMinimum = bvpm; }
-        
-      
+        public static void SetMindMapModelControl(MindMapModelControl mmmc) { mindMapModelControl = mmmc; }
         private static string workspaceDirectory;           // 用户模型工作目录
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
 

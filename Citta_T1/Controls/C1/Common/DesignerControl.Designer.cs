@@ -104,9 +104,6 @@
             // operatorCombo
             // 
             this.operatorCombo.FormattingEnabled = true;
-            this.operatorCombo.Items.AddRange(new object[] {
-            "最大值",
-            "AI实践"});
             this.operatorCombo.Location = new System.Drawing.Point(74, 93);
             this.operatorCombo.Name = "operatorCombo";
             this.operatorCombo.Size = new System.Drawing.Size(99, 20);
