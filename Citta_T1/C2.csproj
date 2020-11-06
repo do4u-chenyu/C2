@@ -318,11 +318,23 @@
     <Compile Include="Dialogs\C1OperatorViews\UnionOperatorView.Designer.cs">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2AvgOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2AvgOperatorView.Designer.cs">
+      <DependentUpon>C2AvgOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2CustomOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2CustomOperatorView.Designer.cs">
       <DependentUpon>C2CustomOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2DataFormatOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2DataFormatOperatorView.Designer.cs">
+      <DependentUpon>C2DataFormatOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2MaxOperatorView.cs">
       <SubType>Form</SubType>

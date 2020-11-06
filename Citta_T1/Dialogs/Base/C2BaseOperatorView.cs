@@ -6,6 +6,7 @@ using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -26,6 +27,7 @@ namespace C2.Dialogs.Base
         protected DataItem dataInfo; // 加载左右表数据源基本信息: FFP, Description, EXTType, encoding, sep等
         protected List<ComboBox> comboBoxes;
         protected string[] firstDataSourceColumns { get; set; }  //第一个入度的表头配置
+        protected readonly Dictionary<int, int> filterDict = new Dictionary<int, int>();
         public C2BaseOperatorView()
         {
             operatorWidget = null;
@@ -167,5 +169,297 @@ namespace C2.Dialogs.Base
                 return OpUtil.ExtType.Text;
             return OpUtil.ExtType.Unknow;
         }
+        #region
+        //TODO
+        //先写这，全部窗体写完后，重复方法抽到base类
+        protected void Add_Click(object sender, EventArgs e)
+        {
+            this.tableLayoutPanel1.SuspendLayout();
+            Button button = sender as Button;
+            int lineNumber = 0;
+
+            this.tableLayoutPanel1.RowCount++;
+            this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+            this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+
+            if (this.tableLayoutPanel1.RowCount > 1)
+            {
+                lineNumber = button.Name == "button1" ? 0 : int.Parse(button.Name) + 1;
+                AddTableLayoutPanelControls(lineNumber);
+            }
+            CreateLine(lineNumber);
+            this.tableLayoutPanel1.ResumeLayout(true);
+        }
+        protected virtual void AddTableLayoutPanelControls(int lineNumber)
+        {
+            for (int k = this.tableLayoutPanel1.RowCount - 2; k >= lineNumber; k--)
+            {
+                Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k + 1));
+                Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k + 1));
+                Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
+                Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k);
+                ctlNext3.Name = (k + 1).ToString();
+                this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k + 1));
+                Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
+                ctlNext4.Name = (k + 1).ToString();
+                this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
+            }
+        }
+
+        protected virtual void CreateLine(int addLine)
+        {
+
+        }
+
+
+        protected void AliasTextBox_Enter(object sender, EventArgs e)
+        {
+            TextBox TextBoxEx = sender as TextBox;
+            if (TextBoxEx.Text == "别名")
+            {
+                TextBoxEx.Text = String.Empty;
+            }
+            TextBoxEx.ForeColor = Color.Black;
+        }
+
+        protected void AliasTextBox_Leave(object sender, EventArgs e)
+        {
+            TextBox TextBoxEx = sender as TextBox;
+            if (TextBoxEx.Text == String.Empty)
+            {
+                TextBoxEx.Text = "别名";
+                TextBoxEx.ForeColor = SystemColors.ActiveCaption;
+            }
+        }
+
+        protected void InitNewFactorControl(int count)
+        {
+            for (int line = 0; line < count; line++)
+            {
+                this.tableLayoutPanel1.RowCount++;
+                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+                CreateLine(line);
+            }
+        }
+
+        protected ComboBox NewColumnsName0ComboBox()
+        {
+            ComboBox combox = NewComboBox();
+            combox.Items.AddRange(this.nowColumnsName0);
+            combox.SelectionChangeCommitted += new EventHandler(this.GetLeftSelectedItemIndex);
+            combox.TextUpdate += new System.EventHandler(LeftComboBox_TextUpdate);
+            combox.DropDownClosed += new System.EventHandler(LeftComboBox_ClosedEvent);
+            return combox;
+        }
+
+        protected ComboBox NewComboBox()
+        {
+            ComboBox combox = new ComboBox
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Font = new Font("微软雅黑", 8f, FontStyle.Regular)
+            };
+            comboBoxes.Add(combox);
+            return combox;
+        }
+
+        protected void GetLeftSelectedItemIndex(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            GetSelectedItemIndex(comboBox, nowColumnsName0);
+        }
+
+        protected void GetSelectedItemIndex(ComboBox comboBox, string[] nowColumns)
+        {
+            if (nowColumns.Length == 0)
+                return;
+            List<string> filterItems = new List<string>();
+            for (int i = 0; i < comboBox.Items.Count; i++)
+                filterItems.Add(comboBox.Items[i].ToString());
+
+
+            // 下拉列表中选取值
+            if (filterItems.SequenceEqual(nowColumns))
+            {
+                comboBox.Tag = comboBox.SelectedIndex.ToString();
+                return;
+            }
+
+            // 保存下拉列表选择字段的索引
+            if (filterDict.Keys.Contains(comboBox.SelectedIndex))
+                comboBox.Tag = filterDict[comboBox.SelectedIndex];
+
+        }
+
+        public void LeftComboBox_TextUpdate(object sender, EventArgs e)
+        { ComboBox_TextUpdate(sender as ComboBox, nowColumnsName0); }
+        public void ComboBox_TextUpdate(ComboBox comboBox, string[] nowColumns)
+        {
+            comboBox.SelectedIndex = -1;
+            comboBox.Tag = null;
+            int count = nowColumns.Length;
+            if (comboBox.Text == "" || count == 0)
+            {
+                comboBox.DroppedDown = false;
+                return;
+            }
+
+            filterDict.Clear();
+
+            //每次搜索文本改变，就是对字典重新赋值
+            comboBox.Items.Clear();
+            List<string> filterItems = new List<string>();
+
+            for (int i = 0; i < count; i++)
+            {
+                if (nowColumns[i].Contains(comboBox.Text))
+                {
+                    filterItems.Add(nowColumns[i]);
+                    // 模糊搜索得到的下拉列表字段索引对应原始下拉列表字段索引
+                    filterDict[filterItems.Count - 1] = i;
+                }
+            }
+
+            comboBox.Items.AddRange(filterItems.ToArray());
+            comboBox.SelectionStart = comboBox.Text.Length;
+            comboBox.DroppedDown = true;
+            //保持鼠标指针原来状态，有时候鼠标指针会被下拉框覆盖，所以要进行一次设置。
+            Cursor = Cursors.Default;
+        }
+        public void LeftComboBox_ClosedEvent(object sender, EventArgs e)
+        { ComboBox_ClosedEvent(sender as ComboBox, nowColumnsName0); }
+        public void ComboBox_ClosedEvent(ComboBox comboBox, string[] nowColumns)
+        {
+
+            if (nowColumns.Length == 0)
+                return;
+
+            // 恢复下拉列表原始字段
+            comboBox.Items.Clear();
+            comboBox.Items.AddRange(nowColumns);
+            if (comboBox.Tag != null && !comboBox.Tag.ToString().Equals("-1") && ConvertUtil.IsInt(comboBox.Tag.ToString()))
+            {
+                int index = Convert.ToInt32(comboBox.Tag.ToString());
+                comboBox.SelectedIndex = index;
+                comboBox.Text = nowColumns[index];
+            }
+
+            // 手动将字段全部输入，这时候selectItem.index=-1,我们将设成下拉列表第一个匹配字段的索引
+            if (comboBox.SelectedIndex == -1 && !string.IsNullOrEmpty(comboBox.Text))
+            {
+                for (int i = 0; i < nowColumns.Length; i++)
+                {
+                    if (nowColumns[i].Equals(comboBox.Text))
+                    {
+                        comboBox.SelectedIndex = i;
+                        comboBox.Tag = i;
+                        break;
+                    }
+                }
+            }
+
+        }
+
+
+        protected TextBox NewAliasTextBox()
+        {
+            TextBox textBox = new TextBox
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Text = "别名",
+                Font = new Font("微软雅黑", 9f, FontStyle.Regular),
+                ForeColor = SystemColors.ActiveCaption
+            };
+            textBox.Enter += AliasTextBox_Enter;
+            textBox.Leave += AliasTextBox_Leave;
+            return textBox;
+        }
+
+        protected Button NewAddButton(string name)
+        {
+            Button addButton = NewButton(name);
+            addButton.BackgroundImage = Properties.Resources.add;
+            addButton.Click += new EventHandler(this.Add_Click);
+            return addButton;
+        }
+
+        protected Button NewDelButton(string name)
+        {
+            Button delButton = NewButton(name);
+            delButton.BackgroundImage = Properties.Resources.div;
+            delButton.Click += new EventHandler(this.Del_Click);
+            return delButton;
+        }
+
+        private Button NewButton(string name)
+        {
+            Button delButton = new Button();
+            delButton.FlatAppearance.BorderColor = SystemColors.Control;
+            delButton.FlatAppearance.BorderSize = 0;
+            delButton.FlatAppearance.MouseDownBackColor = SystemColors.Control;
+            delButton.FlatAppearance.MouseOverBackColor = SystemColors.Control;
+            delButton.FlatStyle = FlatStyle.Flat;
+            delButton.BackColor = SystemColors.Control;
+            delButton.UseVisualStyleBackColor = true;
+            delButton.BackgroundImageLayout = ImageLayout.Center;
+            delButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            delButton.Name = name;
+            return delButton;
+        }
+
+        protected void Del_Click(object sender, EventArgs e)
+        {
+            this.tableLayoutPanel1.SuspendLayout();
+            Button button = (Button)sender;
+            int lineNumber = int.Parse(button.Name);
+
+
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
+            {
+                int buttonPosition = (i * ColumnCount) + ColumnCount - 1;
+                Control bt1 = this.tableLayoutPanel1.Controls[buttonPosition];
+                if (bt1.Name == button.Name)
+                {
+                    for (int j = buttonPosition; j >= (i * ColumnCount); j--)
+                    {
+                        this.tableLayoutPanel1.Controls.RemoveAt(j);
+                    }
+                    break;
+                }
+
+            }
+
+            MoveTableLayoutPanelControls(lineNumber);
+
+            this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
+            this.tableLayoutPanel1.RowCount -= 1;
+            this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+
+            this.tableLayoutPanel1.ResumeLayout(true);
+        }
+
+        protected virtual void MoveTableLayoutPanelControls(int lineNumber)
+        {
+            for (int k = lineNumber; k < this.tableLayoutPanel1.RowCount - 1; k++)
+            {
+                Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k + 1);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k));
+                Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k + 1);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k));
+                Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
+                Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k + 1);
+                ctlNext3.Name = k.ToString();
+                this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k));
+                Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k + 1);
+                ctlNext4.Name = k.ToString();
+                this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
+            }
+        }
+        #endregion
     }
 }

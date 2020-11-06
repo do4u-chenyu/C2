@@ -200,6 +200,8 @@ namespace C2.Controls.MapViews
                     AddResult(new Topic[] { opw.Container as Topic },resultItem);
                 else
                 {
+                    //TODO
+                    //是否对undo redo有影响
                     rsw.DataItems.Clear();
                     rsw.DataItems.Add(resultItem);
                 }
@@ -214,6 +216,13 @@ namespace C2.Controls.MapViews
                 case OpType.MaxOperator: return (new MaxOperatorCmd(opw)).GenCmd();
                 case OpType.CustomOperator: return  (new CustomOperatorCmd(opw)).GenCmd();
                 case OpType.MinOperator: return  (new MinOperatorCmd(opw)).GenCmd();
+                case OpType.RandomOperator: return  (new RandomOperatorCmd(opw)).GenCmd();
+                case OpType.FilterOperator: return  (new FilterOperatorCmd(opw)).GenCmd();
+                case OpType.AvgOperator: return  (new AvgOperatorCmd(opw)).GenCmd();
+                case OpType.SortOperator: return  (new SortOperatorCmd(opw)).GenCmd();
+                case OpType.FreqOperator: return  (new FreqOperatorCmd(opw)).GenCmd();
+                case OpType.GroupOperator: return  (new GroupOperatorCmd(opw)).GenCmd();
+                case OpType.DataFormatOperator: return  (new DataFormatOperatorCmd(opw)).GenCmd();
                 default: return null;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using C2.Model.Widgets;
 
 namespace C2.Business.Schedule.Cmd
 {
@@ -9,7 +10,9 @@ namespace C2.Business.Schedule.Cmd
         public GroupOperatorCmd(Triple triple) : base(triple)
         {
         }
-
+        public GroupOperatorCmd(OperatorWidget operatorWidget) : base(operatorWidget)
+        {
+        }
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();

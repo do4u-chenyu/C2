@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using C2.Model.Widgets;
 
 namespace C2.Business.Schedule.Cmd
 {
     class FilterOperatorCmd : OperatorCmd
     {
         public FilterOperatorCmd(Triple triple) : base(triple)
+        {
+        }
+        public FilterOperatorCmd(OperatorWidget operatorWidget) : base(operatorWidget)
         {
         }
         public List<string> GenCmd()
