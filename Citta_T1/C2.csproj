@@ -158,6 +158,7 @@
     <Compile Include="Business\Option\PythonInterpreterInfo.cs" />
     <Compile Include="Business\Option\PythonOPConfig.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
+    <Compile Include="ChartControls\MindMap\DataTreeNode.cs" />
     <Compile Include="ChartControls\MindMap\DataTreeView.cs">
       <SubType>Component</SubType>
     </Compile>

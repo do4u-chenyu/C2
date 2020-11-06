@@ -113,7 +113,7 @@ namespace C2.Controls.MapViews
         }
         #endregion
 
-        void BuildTree()
+        public virtual void BuildTree()
         {
             Nodes.Clear();
 
@@ -139,7 +139,7 @@ namespace C2.Controls.MapViews
             }
         }
 
-        TreeNode BuildTree(Topic topic, TreeNodeCollection nodes)
+        public virtual TreeNode BuildTree(Topic topic, TreeNodeCollection nodes)
         {
             TopicTreeNode node = new TopicTreeNode(topic);
             node.ImageIndex = node.SelectedImageIndex = 1;
