@@ -375,7 +375,7 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.bottomPanel);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = Properties.Resources.ai_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(490, 359);
             this.MinimizeBox = false;
