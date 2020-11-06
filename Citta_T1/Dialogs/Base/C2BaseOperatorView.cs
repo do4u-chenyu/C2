@@ -150,5 +150,22 @@ namespace C2.Dialogs.Base
         {
             return false;
         }
+
+        protected virtual OpUtil.ExtType JudgeFileExtType(string path)
+        {
+            if (String.IsNullOrWhiteSpace(path))
+                return OpUtil.ExtType.Unknow;
+            if (path.EndsWith(".xlsx", true, System.Globalization.CultureInfo.CurrentCulture))
+                return OpUtil.ExtType.Excel;
+            if (path.EndsWith(".xls", true, System.Globalization.CultureInfo.CurrentCulture))
+                return OpUtil.ExtType.Excel;
+            if (path.EndsWith(".txt", true, System.Globalization.CultureInfo.CurrentCulture))
+                return OpUtil.ExtType.Text;
+            if (path.EndsWith(".bcp", true, System.Globalization.CultureInfo.CurrentCulture))
+                return OpUtil.ExtType.Text;
+            if (path.EndsWith(".csv", true, System.Globalization.CultureInfo.CurrentCulture))
+                return OpUtil.ExtType.Text;
+            return OpUtil.ExtType.Unknow;
+        }
     }
 }

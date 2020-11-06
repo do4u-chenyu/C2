@@ -1,4 +1,5 @@
 ﻿using C2.Controls.MapViews;
+using C2.Dialogs.Base;
 using C2.Dialogs.C2OperatorViews;
 using C2.Globalization;
 using C2.Model;
@@ -172,22 +173,22 @@ namespace C2.Controls.Common
             OpWidget.OpType =ComboOperator[this.operatorCombo.SelectedIndex];
             OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
 
+            C2BaseOperatorView dialog = GenerateOperatorView();
+            if (dialog != null && dialog.ShowDialog(this) == DialogResult.OK)
+                OpWidget.Status = OpStatus.Ready;
+
+
+        }
+
+        private C2BaseOperatorView GenerateOperatorView()
+        {
             switch (OpWidget.OpType)
             {
-                case OpType.MaxOperator:
-                    var dialog = new C2MaxOperatorView(OpWidget);
-                    if(dialog.ShowDialog(this) == DialogResult.OK)
-                        OpWidget.Status = OpStatus.Ready;
-                    break;
-                case OpType.CustomOperator:
-                    var dialog2 = new C2CustomOperatorView(OpWidget);
-                    if (dialog2.ShowDialog(this) == DialogResult.OK)
-                        OpWidget.Status = OpStatus.Ready;
-                    break;
-                default:
-                    break;
+                case OpType.MaxOperator:return new C2MaxOperatorView(OpWidget);
+                case OpType.CustomOperator:return new C2CustomOperatorView(OpWidget);
+                case OpType.MinOperator:return new C2MinOperatorView(OpWidget);
+                default:return null;
             }
-
         }
 
         private void DataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)

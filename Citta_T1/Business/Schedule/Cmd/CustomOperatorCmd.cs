@@ -1,4 +1,5 @@
-﻿using C2.Utils;
+﻿using C2.Model.Widgets;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -12,7 +13,9 @@ namespace C2.Business.Schedule.Cmd
 
         public CustomOperatorCmd(Triple triple) : base(triple)
         {
-
+        }
+        public CustomOperatorCmd(OperatorWidget operatorWidget) : base(operatorWidget)
+        {
         }
 
         public List<string> GenCmd()

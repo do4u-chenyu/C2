@@ -1,5 +1,7 @@
 ﻿using C2.Core;
 using C2.Dialogs.Base;
+using C2.Globalization;
+using C2.Model;
 using C2.Model.Widgets;
 using C2.Utils;
 using System;
@@ -7,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -119,7 +122,17 @@ namespace C2.Dialogs.C2OperatorViews
         #endregion
 
         #region 添加取消
-
+        protected override void ConfirmButton_Click(object sender, System.EventArgs e)
+        {
+            if (IsOptionNotReady()) return;
+            if (IsIllegalFieldName()) return;
+            this.DialogResult = DialogResult.OK;
+            SaveOption();
+            operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + Lang._(operatorWidget.OpType.ToString());
+            string path = this.rsFullFilePathTextBox.Text;
+            string name = Path.GetFileNameWithoutExtension(path);
+            operatorWidget.ResultItem = new DataItem(path, name, separator, encoding, JudgeFileExtType(path));
+        }
 
         protected override bool IsOptionNotReady()
         {

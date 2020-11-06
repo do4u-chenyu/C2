@@ -18,21 +18,18 @@ namespace C2.Business.Model
      */
     public class ModelDocument: ModifyObject
     {
-        string _FileName;
+        string _SavePath;
         string _Name;
 
         public event EventHandler FileNameChanged;
         public event EventHandler NameChanged;
 
         public int ElementCount { get; set; }
-        public string SavePath { get; }
         public List<ModelRelation> ModelRelations { get; } // 所有线关系
         public List<ModelElement> ModelElements { get; }   // 所有元素
 
         public string RemarkDescription { get; set; }      // 备注描述
         public TaskManager TaskManager { get; }
-
-
         public string UserPath { get; set; }
         public bool RemarkVisible { get; set; }
         public bool FlowControlVisible { get; set; }
@@ -73,6 +70,28 @@ namespace C2.Business.Model
                     OnNameChanged();
                 }
             }
+        }
+        public string SavePath
+        {
+            get { return _SavePath; }
+            set
+            {
+                if (_SavePath != value)
+                {
+                    _SavePath = value;
+                    OnFileNameChanged();
+                }
+            }
+        }
+        protected virtual void OnFileNameChanged()
+        {
+            if (!string.IsNullOrEmpty(SavePath))
+                Name = Path.GetFileNameWithoutExtension(SavePath);
+            else
+                Name = null;
+
+            if (FileNameChanged != null)
+                FileNameChanged(this, EventArgs.Empty);
         }
         void OnNameChanged()
         {
