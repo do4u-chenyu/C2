@@ -29,6 +29,7 @@ namespace C2.OperatorViews
                 this.dataSourceTB1.Visible = true;
                 this.outListCCBL1.Visible = true;
                 this.Text = "多源算子设置";
+                this.Icon = Properties.Resources.custom_icon;
             }
             else
                 this.Text = "AI实践算子设置";

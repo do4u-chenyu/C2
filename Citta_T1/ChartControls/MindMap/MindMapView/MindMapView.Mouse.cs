@@ -161,7 +161,10 @@ namespace C2.Controls.MapViews
                 ShowDesigner(dsw.Container);
             }
             else
-                MessageBox.Show("  数据源: " + dataItem.FilePath + "已存在，无需重新导入.");
+                MessageBox.Show(String.Format("数据源{0}:[{1}]已存在,可以删除后重新导入.", dataItem.FileName, dataItem.FilePath),
+                    "数据源已存在",                // 标题
+                    MessageBoxButtons.OK,          // 按钮样式
+                    MessageBoxIcon.Information);   // 图标样式
 
         }
         protected override void OnChartMouseDown(MouseEventArgs e)

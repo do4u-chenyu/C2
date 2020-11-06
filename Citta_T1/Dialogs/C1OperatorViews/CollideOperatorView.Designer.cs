@@ -224,7 +224,7 @@
             this.Controls.Add(this.topPanel);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = Properties.Resources.collide_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(470, 428);
             this.MinimizeBox = false;
