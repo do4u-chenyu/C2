@@ -689,7 +689,6 @@ namespace C2
                     MessageBox.Show("该数据文件不存在");
                 return;
             }
-            //this.ShowBottomPanel();
             this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
             this.ShowBottomPreview();
         }

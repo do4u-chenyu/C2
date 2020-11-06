@@ -124,7 +124,8 @@ namespace C2.Controls.Left
 
         private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding, true);
+            Global.GetMainForm().ShowBottomViewPanel();
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)

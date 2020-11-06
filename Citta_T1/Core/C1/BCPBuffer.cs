@@ -133,10 +133,9 @@ namespace C2.Core
             dataPreviewDict.Remove(bcpFullPath);
         }
 
-        private void PreLoadExcelFileNew(string fullFilePath, string sheetName = "")
+        private void PreLoadExcelFileNew(string fullFilePath)
         {
-            List<List<String>> rowContentList = new List<List<String>>();
-            rowContentList = FileUtil.ReadExcel(fullFilePath, maxRow);
+            List<List<String>> rowContentList = FileUtil.ReadExcel(fullFilePath, maxRow);
             if (rowContentList.Count == 0)
                 return;
             StringBuilder sb = new StringBuilder(1024 * 16);
