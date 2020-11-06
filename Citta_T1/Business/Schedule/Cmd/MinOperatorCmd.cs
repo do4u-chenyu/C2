@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using C2.Model.Widgets;
 
 namespace C2.Business.Schedule.Cmd
 {
     class MinOperatorCmd : OperatorCmd
     {
         public MinOperatorCmd(Triple triple) : base(triple)
+        {
+        }
+        public MinOperatorCmd(OperatorWidget operatorWidget) : base(operatorWidget)
         {
         }
 

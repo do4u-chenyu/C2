@@ -213,6 +213,7 @@ namespace C2.Controls.MapViews
             {
                 case OpType.MaxOperator: return (new MaxOperatorCmd(opw)).GenCmd();
                 case OpType.CustomOperator: return  (new CustomOperatorCmd(opw)).GenCmd();
+                case OpType.MinOperator: return  (new MinOperatorCmd(opw)).GenCmd();
                 default: return null;
             }
         }
