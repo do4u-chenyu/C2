@@ -97,7 +97,7 @@
             this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.currentModelRunLab.Cursor = System.Windows.Forms.Cursors.Hand;
             this.currentModelRunLab.Image = global::C2.Properties.Resources.currentModelRunning;
-            this.currentModelRunLab.Location = new System.Drawing.Point(336, 87);
+            this.currentModelRunLab.Location = new System.Drawing.Point(269, 69);
             this.currentModelRunLab.Name = "currentModelRunLab";
             this.currentModelRunLab.Size = new System.Drawing.Size(73, 47);
             this.currentModelRunLab.TabIndex = 28;
