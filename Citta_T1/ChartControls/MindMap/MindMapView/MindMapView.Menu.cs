@@ -190,7 +190,9 @@ namespace C2.Controls.MapViews
         {
             if(opw.Status == OpStatus.Ready)
             {
-                List<string> cmds = (new MaxOperatorCmd(opw)).GenCmd();
+                List<string> cmds = GenerateCmd();
+                if (cmds == null)
+                    return;
                 MessageBox.Show(RunLinuxCommand(cmds));
                 DataItem resultItem = opw.ResultItem;
                 ResultWidget rsw = (opw.Container as Topic).FindWidget<ResultWidget>();
@@ -202,6 +204,16 @@ namespace C2.Controls.MapViews
                     rsw.DataItems.Add(resultItem);
                 }
                 opw.Status = OpStatus.Done;
+            }
+        }
+
+        private List<string> GenerateCmd()
+        {
+            switch (opw.OpType)
+            {
+                case OpType.MaxOperator: return (new MaxOperatorCmd(opw)).GenCmd();
+                case OpType.CustomOperator: return  (new CustomOperatorCmd(opw)).GenCmd();
+                default: return null;
             }
         }
 
