@@ -23,7 +23,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UnionOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -46,14 +45,14 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(290, 36);
-            this.dataSourceTB1.Size = new System.Drawing.Size(179, 23);
+            this.dataSourceTB1.Size = new System.Drawing.Size(179, 28);
             this.dataSourceTB1.TabIndex = 8;
             this.dataSourceTB1.Visible = true;
             // 
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(60, 36);
-            this.dataSourceTB0.Size = new System.Drawing.Size(179, 23);
+            this.dataSourceTB0.Size = new System.Drawing.Size(179, 28);
             this.dataSourceTB0.TabIndex = 7;
             // 
             // cancelButton
@@ -71,24 +70,24 @@
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("宋体", 10F);
-            this.comboBox0.Location = new System.Drawing.Point(2, 5);
-            this.comboBox0.Size = new System.Drawing.Size(146, 21);
+            this.comboBox0.Location = new System.Drawing.Point(2, 2);
+            this.comboBox0.Size = new System.Drawing.Size(146, 26);
             // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("宋体", 10F);
-            this.comboBox1.Location = new System.Drawing.Point(152, 5);
-            this.comboBox1.Size = new System.Drawing.Size(146, 21);
+            this.comboBox1.Location = new System.Drawing.Point(152, 2);
+            this.comboBox1.Size = new System.Drawing.Size(146, 26);
             this.comboBox1.Visible = true;
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(534, 10);
+            this.topPanel.Size = new System.Drawing.Size(532, 10);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 317);
-            this.bottomPanel.Size = new System.Drawing.Size(534, 44);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 307);
+            this.bottomPanel.Size = new System.Drawing.Size(532, 44);
             // 
             // valuePanel
             // 
@@ -103,7 +102,7 @@
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(0, 10);
-            this.valuePanel.Size = new System.Drawing.Size(534, 307);
+            this.valuePanel.Size = new System.Drawing.Size(532, 297);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
@@ -118,7 +117,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(3, 5);
-            this.label1.Size = new System.Drawing.Size(63, 14);
+            this.label1.Size = new System.Drawing.Size(85, 19);
             // 
             // label3
             // 
@@ -127,7 +126,7 @@
             this.label3.Location = new System.Drawing.Point(1, 72);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 14);
+            this.label3.Size = new System.Drawing.Size(85, 19);
             this.label3.TabIndex = 0;
             this.label3.Text = "是否去重";
             // 
@@ -138,7 +137,7 @@
             this.label2.Location = new System.Drawing.Point(3, 142);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 14);
+            this.label2.Size = new System.Drawing.Size(85, 19);
             this.label2.TabIndex = 0;
             this.label2.Text = "并集条件";
             // 
@@ -187,10 +186,10 @@
             this.textBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox0.Font = new System.Drawing.Font("宋体", 10F);
             this.textBox0.ForeColor = System.Drawing.Color.Gray;
-            this.textBox0.Location = new System.Drawing.Point(302, 4);
+            this.textBox0.Location = new System.Drawing.Point(302, 2);
             this.textBox0.Margin = new System.Windows.Forms.Padding(2);
             this.textBox0.Name = "textBox0";
-            this.textBox0.Size = new System.Drawing.Size(86, 23);
+            this.textBox0.Size = new System.Drawing.Size(86, 28);
             this.textBox0.TabIndex = 6;
             this.textBox0.Text = "别名";
             // 
@@ -202,7 +201,7 @@
             this.repetition.Location = new System.Drawing.Point(231, 6);
             this.repetition.Margin = new System.Windows.Forms.Padding(2);
             this.repetition.Name = "repetition";
-            this.repetition.Size = new System.Drawing.Size(67, 18);
+            this.repetition.Size = new System.Drawing.Size(87, 23);
             this.repetition.TabIndex = 1;
             this.repetition.TabStop = true;
             this.repetition.Text = "不去重";
@@ -215,7 +214,7 @@
             this.noRepetition.Location = new System.Drawing.Point(2, 6);
             this.noRepetition.Margin = new System.Windows.Forms.Padding(2);
             this.noRepetition.Name = "noRepetition";
-            this.noRepetition.Size = new System.Drawing.Size(53, 18);
+            this.noRepetition.Size = new System.Drawing.Size(68, 23);
             this.noRepetition.TabIndex = 0;
             this.noRepetition.Text = "去重";
             this.noRepetition.UseVisualStyleBackColor = true;
@@ -269,19 +268,20 @@
             // UnionOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(534, 361);
+            this.ClientSize = new System.Drawing.Size(532, 351);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Icon = Properties.Resources.union_icon;
+            this.Icon = global::C2.Properties.Resources.union_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(550, 400);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(550, 400);
             this.Name = "UnionOperatorView";
             this.ShowIcon = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "取并集算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.valuePanel.ResumeLayout(false);
