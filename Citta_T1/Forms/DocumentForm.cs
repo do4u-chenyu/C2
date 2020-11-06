@@ -1159,7 +1159,8 @@ namespace C2.Forms
 
                 RecentFilesManage.Default.Push(Document.FileName, Document.CreateThumbImage());
             }
-            //Global.GetMindMapModelControl().AddMindMapModel(Document.FileName);
+            if(!Global.GetMindMapModelControl().ContainModel(Document.Name))
+                Global.GetMindMapModelControl().AddMindMapModel(Document.Name);
             return true;
         }
 

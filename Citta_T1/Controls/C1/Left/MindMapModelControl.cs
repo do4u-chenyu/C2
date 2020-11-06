@@ -42,8 +42,8 @@ namespace C2.Controls.Left
         {
             foreach (Control ct in this.Controls)
             {
-                if (ct is ModelButton)
-                    if ((ct as ModelButton).ModelTitle == modelTitle)
+                if (ct is MindMapModelButton)
+                    if ((ct as MindMapModelButton).ModelTitle == modelTitle)
                         return true;
             }
             return false;
