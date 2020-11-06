@@ -1,4 +1,5 @@
-﻿using C2.Utils;
+﻿using C2.Model.Widgets;
+using C2.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,7 +10,9 @@ namespace C2.Business.Schedule.Cmd
         public RandomOperatorCmd(Triple triple) : base(triple)
         {
         }
-
+        public RandomOperatorCmd(OperatorWidget operatorWidget) : base(operatorWidget)
+        {
+        }
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();

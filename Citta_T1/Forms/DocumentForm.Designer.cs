@@ -188,7 +188,6 @@ namespace C2.Forms
             // 
             this.ImportDataSourceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ImportDataSourceButton.Image = global::C2.Properties.Resources.openDataFile;
-            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.paste;
             this.ImportDataSourceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ImportDataSourceButton.Name = "ImportDataSourceButton";
             this.ImportDataSourceButton.Padding = new System.Windows.Forms.Padding(2);
@@ -595,6 +594,7 @@ namespace C2.Forms
             this.dc.ComboDataSource = null;
             this.dc.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 9F);
             this.dc.Location = new System.Drawing.Point(0, 0);
+            this.dc.MindmapView = null;
             this.dc.Name = "dc";
             this.dc.OpWidget = null;
             this.dc.SelectedDataSource = null;

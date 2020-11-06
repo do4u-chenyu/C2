@@ -187,6 +187,8 @@ namespace C2.Controls.Common
                 case OpType.MaxOperator:return new C2MaxOperatorView(OpWidget);
                 case OpType.CustomOperator:return new C2CustomOperatorView(OpWidget);
                 case OpType.MinOperator:return new C2MinOperatorView(OpWidget);
+                case OpType.AvgOperator:return new C2AvgOperatorView(OpWidget);
+                case OpType.DataFormatOperator:return new C2DataFormatOperatorView(OpWidget);
                 default:return null;
             }
         }
