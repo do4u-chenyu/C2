@@ -107,7 +107,6 @@ namespace C2.Controls.Bottom
         {
             List<List<string>> datas = new List<List<string>> { };
             List<string> rows;
-            List<string> blankRow = new List<string> { };
             // 将来有可能新增文件类型,这里不能只用二元逻辑
             if (extType == OpUtil.ExtType.Excel)
             {
@@ -124,7 +123,6 @@ namespace C2.Controls.Bottom
             datas = FileUtil.FormatDatas(datas, maxNumOfFile);
             List<string> headers = datas[0];
             datas.RemoveAt(0);
-            int numOfCols = headers.Count;
 
             DvgClean();
             FileUtil.FillTable(this.dataGridView, headers, datas, maxNumOfFile - 1);
