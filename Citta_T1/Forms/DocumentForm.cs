@@ -1121,11 +1121,23 @@ namespace C2.Forms
         //        ActiveChartBox.ExportImage(filename, typeMime);
         //    }
         //}
-
+        private string GetModelPath()
+        {
+            string modelPath = Path.Combine(Global.UserWorkspacePath, Document.Name);
+            if (!modelPath.EndsWith("\\"))
+                modelPath += "\\";
+            return modelPath;
+        }
         public override bool Save()
         {
+            string modelPath = GetModelPath();
+            string filePath = string.Join("", modelPath, Document.Name, ".bmd");
+            Directory.CreateDirectory(modelPath);
+
+            Document.FileName = filePath;
             if (string.IsNullOrEmpty(Document.FileName))
             {
+                //永远不进入此分支， 去掉另存为功能
                 SaveAs();
             }
             else
