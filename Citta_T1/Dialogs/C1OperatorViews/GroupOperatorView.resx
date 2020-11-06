@@ -117,38 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA
-        AABQUFCLUFBQ+VFRUf9RUVH/UVFR/1BQUN9QUFAuAAAAAAAAAABQUFAuUFBQ4VFRUf9RUVH/UVFR/1BQ
-        UPlQUFCJUFBQ+1FRUf9RUVH/UVFR/1FRUf9RUVH/UFBQhQAAAAAAAAAAUFBQh1FRUf9RUVH/UVFR/1FR
-        Uf9RUVH/UFBQ+VFRUf1RUVH/UVFR/1FRUf9RUVH/UVFR/1BQUIkAAAAAAAAAAFFRUYtRUVH/UVFR/1FR
-        Uf9RUVH/UVFR/1BQUP1RUVH9UVFR/1FRUf9RUVH/UVFR/1FRUf9QUFCJAAAAAAAAAABRUVGLUVFR/1FR
-        Uf9RUVH/UVFR/1FRUf9QUFD9UFBQ/VFRUf9RUVH/UVFR/1FRUf9RUVH/UFBQiQAAAAAAAAAAUFBQiVFR
-        Uf9RUVH/UVFR/1FRUf9RUVH/UFBQ+1BQUKVRUVH/UVFR/1FRUf9RUVH/UFBQ8VBQUDwAAAAAAAAAAFBQ
-        UD5QUFDzUVFR/1FRUf9RUVH/UVFR/1BQUKNOTk4AUFBQFFBQUFRQUFDJUFBQGlBQUAgAAAAAAAAAAAAA
-        AAAAAAAAUFBQCFBQUBpQUFDRUFBQSlBQUBRVVVUAAAAAAAAAAABQUFBAUFBQ4VBQUIFQUFCBUFBQgVBQ
-        UIFQUFCBUFBQgVBQUIFQUFCBUFBQ5VFRUTYAAAAAAAAAAAAAAAAAAAAAUFBQEFBQUG5QUFBwUFBQcFBQ
-        UHBQUFDVUFBQnVBQUHBQUFBwUFBQcFBQUG5QUFAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBQ
-        UApQUFAaUFBQu1BQUGBQUFAaT09PAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBQ
-        UCxQUFDvUVFR/1FRUf9RUVH/UVFR/1BQULtQUFACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AABQUFBwUVFR/1FRUf9RUVH/UVFR/1FRUf9RUVH/UFBQFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAUVFRclFRUf9RUVH/UVFR/1FRUf9RUVH/UVFR/1FRURQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAFFRUXJRUVH/UVFR/1FRUf9RUVH/UVFR/1FRUf9RUVEUAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAABQUFBuUVFR/1FRUf9RUVH/UVFR/1FRUf9QUFD/UFBQEgAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAUFBQIFBQUNlQUFD/UVFR/1FRUf9QUFD7UFBQn1FRUQAAAAAAAAAAAAAA
-        AAAAAAAAA8AAAAGAAAABgAAAAYAAAAGAAAADwAAA7/cAAOAHAAD+fwAA/v8AAPgfAAD4HwAA+B8AAPgf
-        AAD4HwAA+B8AAA==
-</value>
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
 </root>

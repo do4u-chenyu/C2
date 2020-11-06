@@ -109,7 +109,7 @@ namespace C2.Forms
         private void NewDocumentOperator(MoveBaseControl ct)
         {
             ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
-            ResetFormTitle();
+            Global.GetMainForm().SetDocumentDirty();
             if (ct is MoveDtControl || ct is MoveOpControl)
             {
                 BaseCommand cmd = new ElementAddCommand(me);
@@ -120,7 +120,10 @@ namespace C2.Forms
         {
             if (Document != null)
             {
-                Text = string.Format("{0} *", Document.Name);
+                if (Document.Modified)
+                    Text = string.Format("{0} *", Document.Name);
+                else
+                    Text = Document.Name;
             }
             else
             {
