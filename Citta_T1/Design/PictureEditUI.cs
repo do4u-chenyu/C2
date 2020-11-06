@@ -39,6 +39,7 @@ namespace C2.Controls
             BtnUrl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             //BtnUrl.FlatStyle = FlatStyle.Popup;
             BtnUrl.Click += new EventHandler(BtnUrl_Click);
+            BtnUrl.Visible = false;
 
             //LsbDocLibrary = new ImageLibraryListBox();
             //LsbDocLibrary.Height = LsbDocLibrary.CellSize.Height + 2 + SystemInformation.HorizontalScrollBarHeight;
