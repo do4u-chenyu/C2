@@ -85,7 +85,15 @@ namespace C2.Controls
 
             return tabs.ToArray();
         }
+        protected List<string> OpendDocuments()
+        {
+            char[] Chars = new char[] { ' ','*' };
+            var tabs = from f in GetForms<BaseDocumentForm>()
+                       let fn = f.Text
+                       select fn.TrimEnd(Chars);
 
+            return tabs.ToList();
+        }
         private void OnTaskBarChanged()
         {
             if (TaskBar != null)
