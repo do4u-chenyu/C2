@@ -12,76 +12,57 @@ namespace C2.Controls.Right
         public OperatorControl()
         {
             InitializeComponent();
-            InitializeComponent();
             InitializeToolTip();
-            this.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
         }
 
         // 圆角
-        private int _Radius = 30;  // 圆角弧度
+        private int radius = 30;  // 圆角弧度
 
-        /// <summary>圆角弧度(0为不要圆角)</summary>
-        [Browsable(true)]
+        [Browsable(true), DefaultValue(30)]
         [Description("圆角弧度(0为不要圆角)")]
-        public int _setRoundRadius
+        public int RoundRadius
         {
             get
             {
-                return _Radius;
+                return radius;
             }
             set
             {
-                if (value < 0) { _Radius = 0; }
-                else { _Radius = value; }
+                radius = Math.Max(0, value);
                 base.Refresh();
             }
         }
 
         // 圆角代码
-        public void Round(System.Drawing.Region region)
+        public void Round()
         {
             // 已经是.net提供给我们的最容易的改窗体的属性了(以前要自己调API)
             System.Drawing.Drawing2D.GraphicsPath oPath = new System.Drawing.Drawing2D.GraphicsPath();
-            int x = 0;
-            int y = 0;
             int thisWidth = this.Width;
             int thisHeight = this.Height;
-            int angle = _Radius;
+            int angle = radius;
             if (angle > 0)
             {
-                System.Drawing.Graphics g = CreateGraphics();
-                oPath.AddArc(x, y, angle, angle, 180, 90);                                 // 左上角
-                oPath.AddArc(thisWidth - angle, y, angle, angle, 270, 90);                 // 右上角
+                oPath.AddArc(0, 0, angle, angle, 180, 90);                                 // 左上角
+                oPath.AddArc(thisWidth - angle, 0, angle, angle, 270, 90);                 // 右上角
                 oPath.AddArc(thisWidth - angle, thisHeight - angle, angle, angle, 0, 90);  // 右下角
-                oPath.AddArc(x, thisHeight - angle, angle, angle, 90, 90);                 // 左下角
-                oPath.CloseAllFigures();
-                Region = new System.Drawing.Region(oPath);
-            }
-            
+                oPath.AddArc(0, thisHeight - angle, angle, angle, 90, 90);                 // 左下角
+            }   
             else
             {
-                oPath.AddLine(x + angle, y, thisWidth - angle, y);                         // 顶端
-                oPath.AddLine(thisWidth, y + angle, thisWidth, thisHeight - angle);        // 右边
-                oPath.AddLine(thisWidth - angle, thisHeight, x + angle, thisHeight);       // 底边
-                oPath.AddLine(x, y + angle, x, thisHeight - angle);                        // 左边
-                oPath.CloseAllFigures();
-                Region = new System.Drawing.Region(oPath);
+                oPath.AddLine(0, 0, thisWidth, 0);                         // 顶端
+                oPath.AddLine(thisWidth, 0, thisWidth, thisHeight);        // 右边
+                oPath.AddLine(thisWidth, thisHeight, 0, thisHeight);       // 底边
+                oPath.AddLine(0, 0 , 0, thisHeight);                       // 左边
             }
+            oPath.CloseAllFigures();
+            Region = new Region(oPath);
         }
 
-        public OperatorControl(IContainer container)
+        protected override void OnPaint(PaintEventArgs pe)
         {
-            container.Add(this);
-
-            InitializeComponent();
-        }
-
-        protected override void OnPaint(System.Windows.Forms.PaintEventArgs pe)
-        {
-            base.OnPaint(pe);
-            Round(this.Region);  // 圆角
+            Round();  // 圆角
+            base.OnPaint(pe);  
         }
 
         protected override void OnResize(EventArgs eventargs)
@@ -122,37 +103,6 @@ namespace C2.Controls.Right
                 dragDropData.SetData("Text", (sender as Button).Text);
                 (sender as Button).DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
-        }
-
-        private Bitmap SetImgcolor(Bitmap img)
-        {
-            Color initColor = img.GetPixel(0, 0);
-            for (int i = 0; i < img.Height; i++)
-            {
-                for (int j = 0; j < img.Width; j++)
-                {
-                    Color c = img.GetPixel(j, i);
-                    if (c.Equals(initColor))
-                        img.SetPixel(j, i, Color.FromArgb(0, 0, 0, 0));
-                }
-            }
-            img.Save("1.png");
-            return img;
-        }
-
-        private void relateOpPictureBox_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void customOPButton2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

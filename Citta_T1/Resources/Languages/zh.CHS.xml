@@ -97,7 +97,7 @@
 		<item name="Restore Default">恢复默认值</item>
 		<item name="Center Topic">中心主题</item>
 		<item name="Sub Topic">子主题</item>
-		<item name="NewDocument">新文档</item>
+		<item name="NewDocument">业务视图</item>
 		<item name="Appearance">外观</item>
 		<item name="Associations">文件关联</item>
 		<item name="Customization">自定义</item>
@@ -328,6 +328,7 @@
     <item name="Minutes">分</item>
     <item name="Seconds">秒</item>
     <item name="Start">启动</item>
+    <item name="StartPage">首页</item>
     <item name="Pause">暂停</item>
     <item name="Time is over!">时间到!</item>
     <item name="{0} Minutes">{0} 分钟</item>
@@ -340,7 +341,7 @@
     <item name="Remove Chart">移除页</item>
     <item name="Rename">重命名</item>
     <item name="Please enter the new name">请输入新名字</item>
-    <item name="New Document">新文档</item>
+    <item name="New Document">业务视图</item>
     <item name="New Chart">新页面</item>
     <item name="Are you sure delete the tab &quot;{0}&quot;?">确定要删除页面"{0}"吗?</item>
     
@@ -381,16 +382,30 @@
     <item name="WeChat">微信</item>
     <item name="ViewData">预览数据</item>
 	<item name="GetChart">生成图表</item>
+    <item name="ViewChart">查看图表</item>
 	<item name="Design">修改</item>
 	<item name="Running">运行</item>
 	<item name="Done">运行完成</item>
 	<item name="Public">发布</item>
 	<item name="Operator">添加算子</item>
+	<item name="OpenDesigner">打开设计器</item>
 	<item name="Max">最大值</item>
 	<item name="AI">AI实践</item>
 	<item name="Model">添加模型</item>
 	<item name="Result">添加结果</item>
     <item name="DealData">对数据进行处理</item>
 	<item name="JoinPool">数据加入数据池</item>	
+	<item name="RandomOperator">随机采样</item>	
+	<item name="FilterOperator">过滤算子</item>	
+	<item name="MaxOperator">最大值</item>	
+	<item name="MinOperator">最小值</item>	
+	<item name="AvgOperator">平均值</item>	
+	<item name="SortOperator">排序</item>	
+	<item name="FreqOperator">频率</item>	
+	<item name="GroupOperator">分组</item>	
+	<item name="CustomOperator">AI实践</item>	
+	<item name="DataFormatOperator">数据标准化</item>	
+	<item name="ModelOperator">模型</item>	
+
 	</words>
 </dictionary>

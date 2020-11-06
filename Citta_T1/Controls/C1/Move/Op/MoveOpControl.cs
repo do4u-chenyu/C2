@@ -305,7 +305,7 @@ namespace C2.Controls.Move.Op
             else if (e.Clicks == 2)
             {
                 // 清空焦点
-                Global.GetCanvasForm().BlankButtonFocus();
+                Global.GetCanvasForm()?.BlankButtonFocus();
                 // 显示配置
                 if (this.OptionMenuItem.Enabled)
                     ShowOptionDialog();
@@ -459,7 +459,7 @@ namespace C2.Controls.Move.Op
             }
 
             //判断模型是否保存
-            if (Global.GetCurrentDocument().Dirty)
+            if (Global.GetCurrentDocument().Modified)
             {
                 MessageBox.Show("当前模型没有保存，请保存后再运行模型。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

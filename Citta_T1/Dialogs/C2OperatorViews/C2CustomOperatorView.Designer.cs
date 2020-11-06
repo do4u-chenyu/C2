@@ -50,6 +50,12 @@
             this.outputFileSeparatorSettingGroup.SuspendLayout();
             this.SuspendLayout();
             // 
+            // dataSourceTB1
+            // 
+            this.dataSourceTB1.Location = new System.Drawing.Point(296, 13);
+            this.dataSourceTB1.Size = new System.Drawing.Size(150, 29);
+            this.dataSourceTB1.TabIndex = 11;
+            // 
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(90, 13);
@@ -78,6 +84,13 @@
             this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.outListCCBL0.Size = new System.Drawing.Size(150, 26);
             this.outListCCBL0.TabIndex = 23;
+            // 
+            // outListCCBL1
+            // 
+            this.outListCCBL1.Location = new System.Drawing.Point(296, 107);
+            this.outListCCBL1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.outListCCBL1.Size = new System.Drawing.Size(150, 26);
+            this.outListCCBL1.TabIndex = 24;
             // 
             // comboBox0
             // 
@@ -344,6 +357,7 @@
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.rsFullFilePathTextBox);
             this.Controls.Add(this.label7);
+            this.Controls.Add(this.outListCCBL1);
             this.Controls.Add(this.outListCCBL0);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -355,11 +369,13 @@
             this.Controls.Add(this.fixSecondTextBox);
             this.Controls.Add(this.fixRadioButton);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.dataSourceTB1);
             this.Controls.Add(this.dataSourceTB0);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.bottomPanel);
+            this.Icon = Properties.Resources.ai_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(490, 359);
             this.MinimizeBox = false;
@@ -372,6 +388,7 @@
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.Controls.SetChildIndex(this.dataSourceTB1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.fixRadioButton, 0);
             this.Controls.SetChildIndex(this.fixSecondTextBox, 0);
@@ -383,6 +400,7 @@
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.outListCCBL0, 0);
+            this.Controls.SetChildIndex(this.outListCCBL1, 0);
             this.Controls.SetChildIndex(this.label7, 0);
             this.Controls.SetChildIndex(this.rsFullFilePathTextBox, 0);
             this.Controls.SetChildIndex(this.browseButton, 0);
@@ -394,6 +412,7 @@
             this.outputFileSeparatorSettingGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

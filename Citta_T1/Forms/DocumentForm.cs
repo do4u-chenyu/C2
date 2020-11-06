@@ -11,12 +11,14 @@ using C2.Model.MindMaps;
 using C2.Model.Styles;
 using C2.Model.Widgets;
 using System;
+using C2.Utils;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
+using C2.ChartControls.MindMap;
 
 namespace C2.Forms
 {
@@ -45,11 +47,13 @@ namespace C2.Forms
         List<ToolStripItem> CurrentChartBoxItems = new List<ToolStripItem>();
 
         public event EventHandler ReadOnlyChanged;
+        private C2.Dialogs.InputDataForm inputDataForm;
 
         public DocumentForm()
         {
             InitializeComponent();
-
+            this.inputDataForm = new Dialogs.InputDataForm();
+            this.inputDataForm.InputDataEvent += InputDataFormEvent;
             Icon = Properties.Resources.document_icon;
             FormatPainter_DataChanged(null, EventArgs.Empty);
             FormatPainter.Default.DataChanged += new EventHandler(FormatPainter_DataChanged);
@@ -109,7 +113,12 @@ namespace C2.Forms
                 }
             }
         }
-
+        private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        {
+            Global.GetDataSourceControl().GenDataButton(name, fullFilePath, separator, extType, encoding);
+            Global.GetDataSourceControl().Visible = true;
+        
+        }
         public ChartControl ActiveChartBox
         {
             get { return _ActiveChartBox; }
@@ -273,6 +282,7 @@ namespace C2.Forms
         }
 
         #region Initializetions
+
         void InitializeZoomMenu()
         {
             float[] zooms = new float[] { 0.25f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f, 3.0f, 4.0f };
@@ -308,7 +318,7 @@ namespace C2.Forms
         {
             //
             this.objectTree1 = new ObjectTreeView();
-            this.objectTree2 = new ObjectTreeView();
+            this.objectTree2 = new DataTreeView();
             cob = new ChartOverviewBox();
             tabControl2 = new MyTabControl();
             splitContainer2.Panel2.SuspendLayout();
@@ -893,7 +903,7 @@ namespace C2.Forms
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
 
-            dc.SetSelectedTopicDesign(st);
+            dc.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
         }
         
         void ShowProperty(object[] objects)
@@ -1137,7 +1147,7 @@ namespace C2.Forms
 
                 RecentFilesManage.Default.Push(Document.FileName, Document.CreateThumbImage());
             }
-
+            //Global.GetMindMapModelControl().AddMindMapModel(Document.FileName);
             return true;
         }
 
@@ -1573,6 +1583,13 @@ namespace C2.Forms
         void ActiveChart(ChartPage chartPage)
         {
             multiChartsView1.ActiveChartPage(chartPage);
+        }
+
+        private void ImportDataSourceButton_Click(object sender, EventArgs e)
+        {
+            this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
+            this.inputDataForm.ShowDialog();
+            this.inputDataForm.ReSetParams();
         }
     }
 }

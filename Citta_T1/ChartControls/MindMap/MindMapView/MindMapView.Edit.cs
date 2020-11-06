@@ -116,7 +116,15 @@ namespace C2.Controls.MapViews
             {
                 var template = new OperatorWidget();
                 AddWidget(OperatorWidget.TypeID, template, false);
+                ShowDesigner(SelectedTopics[0]);
             }
+        }
+
+        public void AddOperator(Topic[] topics)
+        {
+            var template = new OperatorWidget();
+            AddWidgetCommand command = new AddWidgetCommand(topics, OperatorWidget.TypeID, template);
+            ExecuteCommand(command);
         }
 
         public void AddDataSource(Topic[] hitTopic,DataItem dataItem)
@@ -133,7 +141,12 @@ namespace C2.Controls.MapViews
             AddWidgetCommand command = new AddWidgetCommand(hitTopic, ResultWidget.TypeID, template);
             ExecuteCommand(command);
         }
-
+        public void AddChartWidget(Topic[] hitTopic)
+        {
+            var template = new ChartWidget();
+            AddWidgetCommand command = new AddWidgetCommand(hitTopic, ChartWidget.TypeID, template);
+            ExecuteCommand(command);
+        }
         void AddWidget(string typeID, Widget template, bool showDialog)
         {
             AddWidgetCommand command = new AddWidgetCommand(SelectedTopics, typeID, template);

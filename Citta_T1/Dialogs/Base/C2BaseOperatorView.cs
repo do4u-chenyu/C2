@@ -1,9 +1,12 @@
 ﻿using C2.Business.Option;
+using C2.Core;
+using C2.Globalization;
 using C2.Model;
 using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -103,6 +106,12 @@ namespace C2.Dialogs.Base
             if (IsDuplicateSelect()) return;//数据标准化窗口
             SaveOption();
             this.DialogResult = DialogResult.OK;
+
+            operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + Lang._(operatorWidget.OpType.ToString());
+            string path = Path.Combine(Global.WorkspaceDirectory, String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+            string name = Path.GetFileNameWithoutExtension(path);
+            char separator = OpUtil.DefaultSeparator;
+            operatorWidget.ResultItem = new DataItem(path, name, separator, OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
         }
 
         protected bool IsIllegalFieldName()
@@ -140,6 +149,23 @@ namespace C2.Dialogs.Base
         protected virtual bool IsDuplicateSelect()
         {
             return false;
+        }
+
+        protected virtual OpUtil.ExtType JudgeFileExtType(string path)
+        {
+            if (String.IsNullOrWhiteSpace(path))
+                return OpUtil.ExtType.Unknow;
+            if (path.EndsWith(".xlsx", true, System.Globalization.CultureInfo.CurrentCulture))
+                return OpUtil.ExtType.Excel;
+            if (path.EndsWith(".xls", true, System.Globalization.CultureInfo.CurrentCulture))
+                return OpUtil.ExtType.Excel;
+            if (path.EndsWith(".txt", true, System.Globalization.CultureInfo.CurrentCulture))
+                return OpUtil.ExtType.Text;
+            if (path.EndsWith(".bcp", true, System.Globalization.CultureInfo.CurrentCulture))
+                return OpUtil.ExtType.Text;
+            if (path.EndsWith(".csv", true, System.Globalization.CultureInfo.CurrentCulture))
+                return OpUtil.ExtType.Text;
+            return OpUtil.ExtType.Unknow;
         }
     }
 }

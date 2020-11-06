@@ -124,7 +124,7 @@ namespace C2.Business.Model
         public DocumentSaveLoad(ModelDocument model)
         {
             this.modelPath = model.SavePath;
-            this.modelFilePath = Path.Combine(this.modelPath, model.ModelTitle + ".xml");
+            this.modelFilePath = Path.Combine(this.modelPath, model.Name + ".xml");
             this.modelDocument = model;
             this.screenFactor = model.WorldMap.ScreenFactor;
         }

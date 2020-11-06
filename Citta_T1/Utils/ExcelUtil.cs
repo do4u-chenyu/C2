@@ -354,8 +354,7 @@ namespace C2.Utils
 				if (IsDateFormat(formatID, formatString))
                 {
 					if (cell.Value is DateTime)
-						//cellValue = ((DateTime)cell.Value).ToString(formatString); // TODO 有误
-						cellValue = ExcelUtil.COMMON_DATE_FORMAT.Format((DateTime)cell.Value); // TODO 补全的时候会出问题，可能只有时间差一个H或者一个M或者一个S
+						cellValue = ExcelUtil.COMMON_DATE_FORMAT.Format((DateTime)cell.Value); // 补全的时候会出问题，可能只有时间差一个H或者一个M或者一个S
 					else if (cell.Value is double)
 						cellValue = ExcelUtil.GetFormatDateStringValue(
 							formatID,

@@ -42,6 +42,7 @@ namespace C2.Forms
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuRenameTab = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new C2.Controls.ToolStripPro();
+            this.ImportDataSourceButton = new System.Windows.Forms.ToolStripButton();
             this.TsbSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbUndo = new System.Windows.Forms.ToolStripButton();
@@ -150,6 +151,7 @@ namespace C2.Forms
             // 
             this.toolStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ImportDataSourceButton,
             this.TsbSave,
             this.toolStripSeparator1,
             this.TsbUndo,
@@ -181,6 +183,18 @@ namespace C2.Forms
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(804, 28);
             this.toolStrip1.TabIndex = 2;
+            // 
+            // ImportDataSourceButton
+            // 
+            this.ImportDataSourceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.openDataFile;
+            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.paste;
+            this.ImportDataSourceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ImportDataSourceButton.Name = "ImportDataSourceButton";
+            this.ImportDataSourceButton.Padding = new System.Windows.Forms.Padding(2);
+            this.ImportDataSourceButton.Size = new System.Drawing.Size(24, 25);
+            this.ImportDataSourceButton.ToolTipText = "导入本地数据文件,支持bcp,txt,csv,xls四种格式";
+            this.ImportDataSourceButton.Click += new System.EventHandler(this.ImportDataSourceButton_Click);
             // 
             // TsbSave
             // 
@@ -597,6 +611,7 @@ namespace C2.Forms
             this.ClientSize = new System.Drawing.Size(804, 438);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
+            this.IconImage = global::C2.Properties.Resources.业务视图;
             this.KeyPreview = true;
             this.Name = "DocumentForm";
             this.Text = "DocumentForm";
@@ -664,5 +679,7 @@ namespace C2.Forms
         private DesignerControl dc;
         private Controls.MyTabControl myTabControl1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripButton ImportDataSourceButton;
+        private Controls.Left.DataSourceControl dataSourceControl;
     }
 }

@@ -20,8 +20,6 @@ namespace C2.Controls.Left
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataSourceName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
         public int Count { get => this.count; set => this.count = value; }
-
-
         private static string DataButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
@@ -59,6 +57,8 @@ namespace C2.Controls.Left
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
+            Global.GetMainForm().ShowBottomViewPanel();
+
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -74,7 +74,8 @@ namespace C2.Controls.Left
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
+            // TODO 这一块先不做，按设计来说模型文档是不可以导入数据的，检测引用要看业务视图
+            //int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
             DialogResult rs = DialogResult.OK;
 
             // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用

@@ -29,11 +29,45 @@
             this.x = new System.Windows.Forms.Label();
             this.y = new System.Windows.Forms.Label();
             this.chartTypesList = new System.Windows.Forms.ComboBox();
-            this.confirm = new System.Windows.Forms.Button();
-            this.cancle = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cancelButton.Location = new System.Drawing.Point(373, 257);
+            this.cancelButton.Size = new System.Drawing.Size(74, 32);
+            this.cancelButton.TabIndex = 7;
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.confirmButton.Location = new System.Drawing.Point(287, 257);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(0);
+            this.confirmButton.Size = new System.Drawing.Size(77, 32);
+            this.confirmButton.TabIndex = 6;
+            // 
+            // outListCCBL0
+            // 
+            this.outListCCBL0.Location = new System.Drawing.Point(182, 146);
+            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2);
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 23);
+            this.outListCCBL0.TabIndex = 5;
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.Location = new System.Drawing.Point(182, 110);
+            this.comboBox0.Size = new System.Drawing.Size(150, 21);
+            this.comboBox0.TabIndex = 4;
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Location = new System.Drawing.Point(0, 249);
+            this.bottomPanel.Size = new System.Drawing.Size(459, 47);
             // 
             // chartType
             // 
@@ -84,38 +118,6 @@
             this.chartTypesList.Size = new System.Drawing.Size(150, 22);
             this.chartTypesList.TabIndex = 3;
             // 
-            // xValue
-            // 
-            this.comboBox0.FormattingEnabled = true;
-            this.comboBox0.Location = new System.Drawing.Point(182, 110);
-            this.comboBox0.Name = "xValue";
-            this.comboBox0.Size = new System.Drawing.Size(150, 22);
-            this.comboBox0.TabIndex = 4;
-            // 
-            // confirm
-            // 
-            this.confirm.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.confirm.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.confirm.Location = new System.Drawing.Point(287, 257);
-            this.confirm.Margin = new System.Windows.Forms.Padding(0);
-            this.confirm.Name = "confirm";
-            this.confirm.Size = new System.Drawing.Size(77, 32);
-            this.confirm.TabIndex = 6;
-            this.confirm.Text = "确认";
-            this.confirm.UseVisualStyleBackColor = true;
-            this.confirm.Click += new System.EventHandler(this.Confirm_Click);
-            // 
-            // cancle
-            // 
-            this.cancle.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cancle.Location = new System.Drawing.Point(373, 257);
-            this.cancle.Name = "cancle";
-            this.cancle.Size = new System.Drawing.Size(74, 32);
-            this.cancle.TabIndex = 7;
-            this.cancle.Text = "取消";
-            this.cancle.UseVisualStyleBackColor = true;
-            this.cancle.Click += new System.EventHandler(this.cancle_Click);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -129,15 +131,12 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(461, 247);
             this.panel1.TabIndex = 8;
-            // 
-            // yValue
-            // 
-            this.outListCCBL0.DataSource = null;
-            this.outListCCBL0.Location = new System.Drawing.Point(182, 146);
-            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.outListCCBL0.Name = "yValue";
-            this.outListCCBL0.Size = new System.Drawing.Size(150, 21);
-            this.outListCCBL0.TabIndex = 5;
+            this.panel1.Controls.SetChildIndex(this.chartType, 0);
+            this.panel1.Controls.SetChildIndex(this.outListCCBL0, 0);
+            this.panel1.Controls.SetChildIndex(this.x, 0);
+            this.panel1.Controls.SetChildIndex(this.y, 0);
+            this.panel1.Controls.SetChildIndex(this.chartTypesList, 0);
+            this.panel1.Controls.SetChildIndex(this.comboBox0, 0);
             // 
             // VisualDisplayDialog
             // 
@@ -146,9 +145,10 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(459, 296);
-            this.Controls.Add(this.cancle);
-            this.Controls.Add(this.confirm);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.bottomPanel);
             this.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -156,6 +156,10 @@
             this.Name = "VisualDisplayDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "可视化展示";
+            this.Controls.SetChildIndex(this.bottomPanel, 0);
+            this.Controls.SetChildIndex(this.panel1, 0);
+            this.Controls.SetChildIndex(this.confirmButton, 0);
+            this.Controls.SetChildIndex(this.cancelButton, 0);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -168,8 +172,6 @@
         private System.Windows.Forms.Label x;
         private System.Windows.Forms.Label y;
         private System.Windows.Forms.ComboBox chartTypesList;
-        private System.Windows.Forms.Button confirm;
-        private System.Windows.Forms.Button cancle;
         private System.Windows.Forms.Panel panel1;
     }
 }

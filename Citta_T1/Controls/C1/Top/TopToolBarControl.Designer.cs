@@ -204,7 +204,6 @@
             // 
             // saveModelButton
             // 
-            this.saveModelButton.Enabled = false;
             this.saveModelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveModelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.saveModelButton.Image = global::C2.Properties.Resources.save;
@@ -214,6 +213,7 @@
             this.saveModelButton.TabIndex = 8;
             this.saveModelButton.TabStop = false;
             this.saveModelButton.UseVisualStyleBackColor = true;
+            this.saveModelButton.Click += new System.EventHandler(this.SaveModelButton_Click);
             // 
             // TopToolBarControl
             // 

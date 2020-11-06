@@ -1,38 +1,24 @@
 ﻿using C2.Business.DataSource;
 using C2.Business.Model;
 using C2.Business.Option;
-using C2.Business.Schedule;
-using C2.Controls.Flow;
 using C2.Controls.Left;
-using C2.Controls.Move;
 using C2.Controls.Move.Dt;
-using C2.Controls.Move.Op;
 using C2.Core;
-using C2.Core.UndoRedo;
-using C2.Core.UndoRedo.Command;
 using C2.Utils;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using C2.Controls;
 using C2.Model.Documents;
-using C2;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
 using C2.Globalization;
 #region Blumind
-using System.ComponentModel;
 using System.IO;
-using System.Text;
 using C2.Configuration;
-using C2.Controls.OS;
-using C2.Core.Exports;
 using C2.Dialogs;
-using C2.Core.Win32Apis;
 using C2.Forms;
 using C2.Model;
 #endregion
@@ -97,11 +83,12 @@ namespace C2
             InitializeTaskBar();
             InitializeShortcutKeys();
             InitializeGlobalVariable();
-            InitializeControlsLocation();
 
             MdiClient = this.mdiWorkSpace;
             openFileDialog1 = new OpenFileDialog();
             this.NewForm(FormType.StartForm);
+            if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
+                OpenSavedTabs();
         }
         #region 初始化
         void InitializeTaskBar()
@@ -168,10 +155,25 @@ namespace C2
             Global.SetMyModelControl(this.myModelControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
+            Global.SetPictureBox(this.minMaxPictureBox);
+            Global.SetMindMapModelControl(this.mindMapModelControl);
+            //Global.SetBottomViewPanelMinimum(this.isBottomViewPanelMinimum);
+            //this.isBottomViewPanelMinimum = false;
+
         }
-        private void InitializeControlsLocation()
+        void OpenSavedTabs()
         {
-            Global.GetCanvasForm()?.InitializeControlsLocation();
+            var tabs = Options.Current.GetValue<string[]>(OptionNames.Miscellaneous.LastOpenTabs);
+            if (!tabs.IsNullOrEmpty())
+            {
+                foreach (var filename in tabs)
+                {
+                    if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
+                    {
+                        OpenDocument(filename);
+                    }
+                }
+            }
         }
         #endregion
         void SetAGoodLocation()
@@ -193,12 +195,7 @@ namespace C2
 
         public void SetDocumentDirty()
         {
-            //// 已经为dirty了，就不需要再操作了，以提高性能
-            //if (this.modelDocumentDao.CurrentDocument.Dirty)
-            //    return;
-            //this.modelDocumentDao.CurrentDocument.Dirty = true;
-            //string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            //this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, true);
+            Global.GetCurrentDocument().Modified = true;
         }
         public void DeleteCurrentDocument()
         {
@@ -300,13 +297,6 @@ namespace C2
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
         }
-
-
-        private void MainForm_SizeChanged(object sender, EventArgs e)
-        {
-            InitializeControlsLocation();
-        }
-
 
         private void NewModelButton_Click(object sender, EventArgs e)
         {
@@ -488,7 +478,7 @@ namespace C2
         }
         private void NewCanvasForm()
         {
-            ModelDocument doc = new ModelDocument(String.Empty, String.Empty);
+            ModelDocument doc = new ModelDocument("模型视图", this.UserName);
             CanvasForm form = new CanvasForm(doc);
             ShowForm(form);
         }
@@ -558,6 +548,7 @@ namespace C2
 
         public void OpenDocument(string filename, bool readOnly)
         {
+            // TODO DK 加载C1的文档
             BaseDocumentForm form = FindDocumentForm(filename);
             if (form != null)
             {
@@ -743,6 +734,7 @@ namespace C2
         {
             this.ShowBottomPanel();
             this.ShowBottomPreview();
+         
         }
 
         private void PyControlLabel_Click(object sender, EventArgs e)
@@ -757,10 +749,28 @@ namespace C2
             this.ShowLogView();
         }
         #endregion
+        public void ShowBottomViewPanel()
+        {
+            //log.Info("MinMaxPictureBox_Click");
+            if (this.isBottomViewPanelMinimum == true)
+            {
+                this.isBottomViewPanelMinimum = false;
+                this.bottomViewPanel.Height = 200;
+                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
+            }
+            
+            if (bottomViewPanel.Height == 200)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
+            }
+            if (bottomViewPanel.Height == 40)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
+            }
+        }
 
         private void minMaxPictureBox_Click(object sender, EventArgs e)
-        { 
-            //log.Info("MinMaxPictureBox_Click");
+        {
             if (this.isBottomViewPanelMinimum == true)
             {
                 this.isBottomViewPanelMinimum = false;
@@ -781,6 +791,65 @@ namespace C2
             {
                 this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
             }
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (!TrySaveTabs())
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            if (!mdiWorkSpace.CloseAll())
+            {
+                e.Cancel = true;
+            }
+        }
+        bool TrySaveTabs()
+        {
+            var saveTabs = Options.Current.GetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
+            if (saveTabs == SaveTabsType.No)
+            {
+                return true;
+            }
+
+            // ensure document saved
+            bool cancel = false;
+            ComfirmSaveDocuments(ref cancel);
+            if (cancel)
+            {
+                return false;
+            }
+
+            // ask and save
+            string[] tabs = GetOpendDocuments();
+
+            if (tabs.Length > 0 && saveTabs == SaveTabsType.Ask)
+            {
+                if (tabs.Length > 0)
+                {
+                    var dialog = new SaveTabsDialog();
+                    var dr = dialog.ShowDialog(this);
+                    if (dr == DialogResult.Cancel)
+                        return false;
+
+                    if (dialog.DoNotAskAgain)
+                        Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, (dr == DialogResult.Yes) ? SaveTabsType.Yes : SaveTabsType.No);
+                    else
+                        Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
+
+                    if (dr == DialogResult.No)
+                    {
+                        Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, null);
+                        return true;
+                    }
+                }
+            }
+
+            Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, tabs);
+            return true;
         }
     }
 }

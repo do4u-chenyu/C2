@@ -148,7 +148,7 @@ namespace C2.Controls
             int locY = Convert.ToInt32(e.Y / screenFactor);
             int dx = Convert.ToInt32(drgOffsetX / screenFactor);
             int dy = Convert.ToInt32(drgOffsetY / screenFactor);
-            Point location = Global.GetCanvasForm().PointToClient(new Point(locX - dx / 2, locY - dy / 2 - 30));
+            Point location = Global.GetCanvasForm().PointToClient(new Point(locX - dx / 2 + 130, locY - dy / 2 + 10));
 
             string text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
@@ -169,7 +169,7 @@ namespace C2.Controls
         {
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件
-            Global.GetCanvasForm().BlankButtonFocus();
+            Global.GetCanvasForm()?.BlankButtonFocus();
             ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
             if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
                 this.ClickOnLine(e);

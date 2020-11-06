@@ -10,7 +10,24 @@ namespace C2.Model.Widgets
     {
         Null,
         Ready,
-        Done
+        Done,
+        Warn
+    }
+
+    public enum OpType
+    {
+        Null,
+        RandomOperator, //随机采样
+        FilterOperator, //过滤算子
+        MaxOperator,    //取最大值
+        MinOperator,    //取最小值
+        AvgOperator,    //平均
+        SortOperator,   //排序算子
+        FreqOperator,   //频率算子 
+        GroupOperator,  //分组算子
+        CustomOperator, //AI实践
+        DataFormatOperator, //数据标准化
+        ModelOperator //模型
     }
     public class OperatorWidget : Widget, IRemark
     {
@@ -24,10 +41,11 @@ namespace C2.Model.Widgets
             Option = new OperatorOption();
             ResultItem = DataItem.Empty;
             Status = OpStatus.Null;
+            OpType = OpType.Null;
         }
 
         public string OpName { get; set; }  //菜单栏名称
-        public string OpType { get; set; }  //算子类型
+        public OpType OpType { get; set; }  //算子类型
 
         public DataItem DataSourceItem { get; set; }  //选中的数据源
         public OperatorOption Option { get; set; }  //算子配置内容

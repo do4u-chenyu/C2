@@ -979,4 +979,91 @@
   <data name="designer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\designer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="chart_w_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\chart_w_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="openDataFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\ToolImage\openDataFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opDesign" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opDesign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opModelPublic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opModelPublic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opRunning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opRunning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="业务视图" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\业务视图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="模型视图" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\模型视图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="首页" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\首页.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opDone" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opDone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opSet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opSet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opSetSuccess" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opSetSuccess.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opWarn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opWarn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ai_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\AI.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="avg_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\平均值.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dataformat_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\数据标准化.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="differ_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\差集.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filter_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\筛选.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="group_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\分组.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="keyword_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\关键词过滤.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="max_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\最大值.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="min_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\最小值.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="python_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\python.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="random_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\随机.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="relate_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\关联算子.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sort_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\排序.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="union_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\并集.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="collide_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\碰撞.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="custom_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\多源算子.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="freq_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\频率.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

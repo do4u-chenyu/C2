@@ -113,7 +113,7 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = Properties.Resources.avg_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(315, 200);
             this.MinimizeBox = false;

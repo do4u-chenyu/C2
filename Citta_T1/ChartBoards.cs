@@ -38,7 +38,7 @@ namespace C2
         {
             string[] x = new string[] { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
             double[] y = new double[] { 541, 574, 345, 854, 684 };
-            List<string> y1 = new List<string> { "541", "574", "345", "854", "684" };
+            List<string> y1 = new List<string> { "541", "574", "guw", "854", "684" };
             List<string> x1 = new List<string> { "南山大队", "福田大队", "罗湖大队", "宝安大队", "指挥处" };
             List<List<string>> data = new List<List<string>>();
 
@@ -50,8 +50,8 @@ namespace C2
             this.pieChart = new PieChart(data, new List<string> { "饼图" });
             this.horizontalBar3D = new HorizontalBar3D(data, new List<string> { "横条图" });
             this.radarChart = new C2.Controls.DataCharts.RadarChart(data, new List<string> { "雷达图","2015年" });
-            this.ringChart = new C2.Controls.DataCharts.RingChart();
-            this.lineChart = new C2.Controls.DataCharts.LineChart();
+            this.ringChart = new C2.Controls.DataCharts.RingChart(data, new List<string> { "圆环图" });
+            this.lineChart = new C2.Controls.DataCharts.LineChart(data, new List<string> { "折线图"});
             this.SuspendLayout();
             // 
             // barChart

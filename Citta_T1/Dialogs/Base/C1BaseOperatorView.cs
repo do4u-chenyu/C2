@@ -84,7 +84,7 @@ namespace C2.Dialogs.Base
 
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        protected virtual void CancelButton_Click(object sender, EventArgs e)
         {
             /*
              * 外部Xml文件修改等情况，检查并处理异常配置内容

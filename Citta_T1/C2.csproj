@@ -158,6 +158,10 @@
     <Compile Include="Business\Option\PythonInterpreterInfo.cs" />
     <Compile Include="Business\Option\PythonOPConfig.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
+    <Compile Include="ChartControls\MindMap\DataTreeNode.cs" />
+    <Compile Include="ChartControls\MindMap\DataTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DataCharts\BarChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -670,17 +674,35 @@
     <Compile Include="Controls\Misc\ImageListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Dialogs\VisualDisplayDialog.cs">
+    <Compile Include="Dialogs\C2OperatorViews\C2MinOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\VisualDisplayDialog.Designer.cs">
+    <Compile Include="Dialogs\C2OperatorViews\C2MinOperatorView.Designer.cs">
+      <DependentUpon>C2MinOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WidgetChart\VisualDisplayDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WidgetChart\VisualDisplayDialog.Designer.cs">
       <DependentUpon>VisualDisplayDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WidgetChart\WidgetChartDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WidgetChart\WidgetChartDialog.Designer.cs">
+      <DependentUpon>WidgetChartDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CanvasForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\CanvasForm.Designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Widgets\ChartWidget.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="WorkSpace\BaseWorkSpace.cs">
       <SubType>Component</SubType>
@@ -1275,11 +1297,6 @@
     <Compile Include="Controls\C1\Move\Op\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Resources\RecommendedResources.cs" />
     <Compile Include="ChartBoards.cs">
       <SubType>Form</SubType>
@@ -1516,8 +1533,11 @@
     <EmbeddedResource Include="Dialogs\TimerDialog.resx">
       <DependentUpon>TimerDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\VisualDisplayDialog.resx">
+    <EmbeddedResource Include="Dialogs\WidgetChart\VisualDisplayDialog.resx">
       <DependentUpon>VisualDisplayDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WidgetChart\WidgetChartDialog.resx">
+      <DependentUpon>WidgetChartDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CanvasForm.resx">
       <DependentUpon>CanvasForm.cs</DependentUpon>
@@ -1793,12 +1813,23 @@
     <None Include="Resources\Images\strike.png" />
     <None Include="Resources\Images\svg.png" />
     <None Include="Resources\Images\ToolImage\saveAllButton.png" />
+    <Content Include="Resources\Images\TabBarImage\业务视图.png" />
+    <None Include="Resources\Images\TabBarImage\业务视图2.png" />
+    <None Include="Resources\Images\TabBarImage\业务视图3.png" />
+    <Content Include="Resources\Images\TabBarImage\模型视图.png" />
+    <None Include="Resources\Images\TabBarImage\模型视图2.png" />
+    <None Include="Resources\Images\TabBarImage\模型视图3.png" />
+    <Content Include="Resources\Images\TabBarImage\首页.png" />
+    <None Include="Resources\Images\TabBarImage\首页2.png" />
+    <None Include="Resources\Images\TabBarImage\首页3.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
     <None Include="Resources\Images\theme.png" />
     <None Include="Resources\Images\theme_manage.png" />
     <None Include="Resources\Images\tick.png" />
     <None Include="Resources\Images\tick_small.png" />
+    <None Include="Resources\Images\ToolImage\open.png" />
+    <None Include="Resources\Images\ToolImage\openDataFile.png" />
     <Content Include="Resources\Images\tool_button.png" />
     <Content Include="Resources\Images\topic.png" />
     <None Include="Resources\Images\underline.png" />
@@ -1834,6 +1865,13 @@
     <None Include="Resources\importDataSource.png" />
     <None Include="Resources\Images\WidgetImage\viewdata.png" />
     <None Include="Resources\Images\WidgetImage\designer.png" />
+    <None Include="Resources\Images\WidgetImage\opDesign.png" />
+    <None Include="Resources\Images\WidgetImage\opModelPublic.png" />
+    <None Include="Resources\Images\WidgetImage\opRunning.png" />
+    <None Include="Resources\Images\WidgetImage\opDone.png" />
+    <None Include="Resources\Images\WidgetImage\opSetSuccess.png" />
+    <None Include="Resources\Images\WidgetImage\opSet.png" />
+    <None Include="Resources\Images\WidgetImage\opWarn.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -2055,6 +2093,7 @@
     <None Include="Resources\C1\modeltitlepanel\u700.png" />
     <None Include="Resources\C1\toolbox\importmodel.png" />
     <Content Include="Resources\C1\leftpanelmenu\startPageTitle.jpg" />
+    <None Include="Resources\WidgetIcon\chart_w_icon.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
