@@ -246,6 +246,7 @@
             this.MinimumSize = new System.Drawing.Size(555, 410);
             this.Name = "FilterOperatorView";
             this.ShowIcon = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "条件筛选算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.valuePanel.ResumeLayout(false);

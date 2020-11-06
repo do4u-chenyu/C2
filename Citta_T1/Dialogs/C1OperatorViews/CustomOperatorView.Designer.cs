@@ -23,7 +23,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomOperatorView));
             this.label2 = new System.Windows.Forms.Label();
             this.fixRadioButton = new System.Windows.Forms.RadioButton();
             this.fixSecondTextBox = new System.Windows.Forms.TextBox();
@@ -53,13 +52,13 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(296, 13);
-            this.dataSourceTB1.Size = new System.Drawing.Size(150, 29);
+            this.dataSourceTB1.Size = new System.Drawing.Size(150, 28);
             this.dataSourceTB1.TabIndex = 11;
             // 
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(90, 13);
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 29);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 28);
             this.dataSourceTB0.TabIndex = 10;
             // 
             // cancelButton
@@ -76,20 +75,19 @@
             this.confirmButton.Location = new System.Drawing.Point(305, 286);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 1;
-            this.confirmButton.UseVisualStyleBackColor = true;
             // 
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(92, 107);
             this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.outListCCBL0.Size = new System.Drawing.Size(150, 26);
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 29);
             this.outListCCBL0.TabIndex = 23;
             // 
             // outListCCBL1
             // 
             this.outListCCBL1.Location = new System.Drawing.Point(296, 107);
             this.outListCCBL1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.outListCCBL1.Size = new System.Drawing.Size(150, 26);
+            this.outListCCBL1.Size = new System.Drawing.Size(150, 29);
             this.outListCCBL1.TabIndex = 24;
             // 
             // comboBox0
@@ -98,16 +96,13 @@
             // 
             // bottomPanel
             // 
-            this.bottomPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.bottomPanel.Location = new System.Drawing.Point(0, 267);
             this.bottomPanel.Size = new System.Drawing.Size(472, 43);
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(13, 17);
             this.label1.Size = new System.Drawing.Size(85, 19);
-            this.label1.Text = "数据信息";
             // 
             // label2
             // 
@@ -375,13 +370,14 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.bottomPanel);
-            this.Icon = Properties.Resources.ai_icon;
+            this.Icon = global::C2.Properties.Resources.ai_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(490, 359);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(490, 359);
             this.Name = "CustomOperatorView";
             this.ShowIcon = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AI实践算子设置";
             this.Controls.SetChildIndex(this.bottomPanel, 0);
             this.Controls.SetChildIndex(this.confirmButton, 0);

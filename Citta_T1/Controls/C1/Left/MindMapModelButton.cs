@@ -17,7 +17,7 @@ namespace C2.Controls.Left
             InitializeComponent();
             this.textButton.Text = modelTitle;
             this.oldTextString = modelTitle;
-            fullFilePath = Path.Combine(Global.GetCurrentDocument().UserPath, this.textButton.Text, this.textButton.Text + ".xml");
+            fullFilePath = Path.Combine(Global.UserWorkspacePath, this.textButton.Text, this.textButton.Text + ".bmd");
         }
 
         public string ModelTitle => this.textButton.Text;

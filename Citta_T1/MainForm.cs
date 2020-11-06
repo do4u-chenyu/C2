@@ -470,9 +470,11 @@ namespace C2
                     break;
             }
         }
-        private void NewDocumentForm()
+        private void NewDocumentForm(string titile = "")
         {
             Document doc = CreateNewMap();
+            if (!string.IsNullOrEmpty(titile))
+                doc.Name = titile;
             DocumentForm form = new DocumentForm(doc);
             ShowForm(form);
         }
@@ -636,7 +638,15 @@ namespace C2
         }
         void NewDocumentForm_Click(object sender, System.EventArgs e)
         {
-            this.NewDocumentForm();
+            // 文档重命名
+            this.createNewModelForm.StartPosition = FormStartPosition.CenterScreen;
+            this.createNewModelForm.Owner = this;
+
+            this.createNewModelForm.OpenDocuments = OpendDocuments();
+            DialogResult dialogResult = this.createNewModelForm.ShowDialog();
+            // 新建业务视图
+            if (dialogResult == DialogResult.OK)
+                this.NewDocumentForm(this.createNewModelForm.ModelTitle);
         }
         void NewCanvasForm_Click(object sender, System.EventArgs e)
         {

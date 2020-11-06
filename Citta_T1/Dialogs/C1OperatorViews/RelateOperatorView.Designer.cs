@@ -23,7 +23,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelateOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -42,14 +41,14 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(272, 43);
-            this.dataSourceTB1.Size = new System.Drawing.Size(148, 23);
+            this.dataSourceTB1.Size = new System.Drawing.Size(148, 28);
             this.dataSourceTB1.TabIndex = 12;
             this.dataSourceTB1.Visible = true;
             // 
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(70, 43);
-            this.dataSourceTB0.Size = new System.Drawing.Size(148, 23);
+            this.dataSourceTB0.Size = new System.Drawing.Size(148, 28);
             this.dataSourceTB0.TabIndex = 11;
             // 
             // cancelButton
@@ -71,36 +70,36 @@
             // 
             this.outListCCBL0.Font = new System.Drawing.Font("宋体", 14F);
             this.outListCCBL0.Location = new System.Drawing.Point(70, 124);
-            this.outListCCBL0.Size = new System.Drawing.Size(150, 23);
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 29);
             this.outListCCBL0.TabIndex = 8;
             // 
             // outListCCBL1
             // 
             this.outListCCBL1.Location = new System.Drawing.Point(272, 124);
-            this.outListCCBL1.Size = new System.Drawing.Size(150, 23);
+            this.outListCCBL1.Size = new System.Drawing.Size(150, 29);
             this.outListCCBL1.TabIndex = 13;
             this.outListCCBL1.Visible = true;
             // 
             // comboBox0
             // 
-            this.comboBox0.Location = new System.Drawing.Point(2, 5);
-            this.comboBox0.Size = new System.Drawing.Size(145, 21);
+            this.comboBox0.Location = new System.Drawing.Point(2, 2);
+            this.comboBox0.Size = new System.Drawing.Size(145, 26);
             // 
             // comboBox1
             // 
-            this.comboBox1.Location = new System.Drawing.Point(206, 5);
-            this.comboBox1.Size = new System.Drawing.Size(145, 21);
+            this.comboBox1.Location = new System.Drawing.Point(206, 2);
+            this.comboBox1.Size = new System.Drawing.Size(145, 26);
             this.comboBox1.TabIndex = 6;
             this.comboBox1.Visible = true;
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(504, 10);
+            this.topPanel.Size = new System.Drawing.Size(502, 10);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 338);
-            this.bottomPanel.Size = new System.Drawing.Size(504, 43);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 328);
+            this.bottomPanel.Size = new System.Drawing.Size(502, 43);
             // 
             // valuePanel
             // 
@@ -116,7 +115,7 @@
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(0, 10);
-            this.valuePanel.Size = new System.Drawing.Size(504, 328);
+            this.valuePanel.Size = new System.Drawing.Size(502, 318);
             this.valuePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.valuePanel_Paint);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
@@ -133,7 +132,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(6, 7);
-            this.label1.Size = new System.Drawing.Size(63, 14);
+            this.label1.Size = new System.Drawing.Size(85, 19);
             // 
             // label3
             // 
@@ -142,7 +141,7 @@
             this.label3.Location = new System.Drawing.Point(6, 88);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 14);
+            this.label3.Size = new System.Drawing.Size(85, 19);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段";
             // 
@@ -153,7 +152,7 @@
             this.label2.Location = new System.Drawing.Point(6, 168);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 14);
+            this.label2.Size = new System.Drawing.Size(85, 19);
             this.label2.TabIndex = 0;
             this.label2.Text = "连接条件";
             // 
@@ -185,10 +184,10 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(151, 9);
+            this.label5.Location = new System.Drawing.Point(151, 6);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 14);
+            this.label5.Size = new System.Drawing.Size(51, 19);
             this.label5.TabIndex = 7;
             this.label5.Text = "等于";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -251,20 +250,21 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(504, 381);
+            this.ClientSize = new System.Drawing.Size(502, 371);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Icon = Properties.Resources.relate_icon;
+            this.Icon = global::C2.Properties.Resources.relate_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(520, 420);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(520, 420);
             this.Name = "RelateOperatorView";
             this.ShowIcon = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "关联算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.valuePanel.ResumeLayout(false);
