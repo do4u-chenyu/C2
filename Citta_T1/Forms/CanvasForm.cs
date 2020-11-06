@@ -19,8 +19,9 @@ using System.Windows.Forms;
 
 namespace C2.Forms
 {
-    public partial class CanvasForm : BaseForm
+    public partial class CanvasForm : BaseDocumentForm
     {
+        bool HardClose;
         private OptionDao optionDao;
         private ModelDocument document;
         private ModelDocumentDao modelDocumentDao;
@@ -71,7 +72,7 @@ namespace C2.Forms
                 }
             }
         }
-        #region C1文档切换、修改
+        #region C1文档切换、修改、关闭
         private void InitializeMainFormEventHandler()
         {
             // 新增文档事件
@@ -127,6 +128,101 @@ namespace C2.Forms
             {
                 Text = string.Empty;
             }
+        }
+        private void CanvasForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.modelDocumentDao.SaveEndDocuments(this.userName);
+        }
+
+        private void CanvasForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (ModelDocument md in this.modelDocumentDao.ModelDocuments)
+            {
+                if (!HardClose && Document != null && Document.Modified && !ReadOnly)
+                {
+                    DialogResult result = MessageBox.Show("有尚未保存的模型，是否保存后关闭？",
+                               "保存", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    // 取消操作
+                    if (result == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+
+                    // 保存文件
+                    if (result == DialogResult.Yes)
+                    {
+                        foreach (ModelDocument modelDocument in this.modelDocumentDao.ModelDocuments)
+                            modelDocument.Save();
+                        return;
+                    }
+                    // 不保存关闭文件
+                    if (result == DialogResult.No)
+                        return;
+                }
+            }
+        }
+        public override void AskSave(ref bool cancel)
+        {
+            if (!HardClose && Document != null && Document.Modified && !ReadOnly)
+            {
+                DialogResult dr = this.ShowMessage("Confirm Save", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    Save();
+                }
+                else if (dr == DialogResult.Cancel)
+                {
+                    cancel = true;
+                    return;
+                }
+                else
+                {
+                    HardClose = true;
+                    Close();
+                }
+            }
+
+            base.AskSave(ref cancel);
+        }
+        public override bool Save()
+        {
+            if (string.IsNullOrEmpty(Document.SavePath))
+            {
+                SaveAs();
+            }
+            else
+            {
+                //OnBeforeSave(Document);
+                try
+                {
+                    Document.Save();
+                    //MindMapIO.Save(Map, Map.Filename);
+                    //mapView1.Modified = false;
+                }
+                catch (System.Exception ex)
+                {
+                    Helper.WriteLog(ex);
+                    this.ShowMessage(ex.Message, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                //RecentFilesManage.Default.Push(Document.FileName, Document.CreateThumbImage());
+            }
+            //Global.GetMindMapModelControl().AddMindMapModel(Document.FileName);
+            return true;
+        }
+        public override bool SaveAs()
+        {
+            // TODO DK 文档另存为
+            return true;
+        }
+        public override string GetFileName()
+        {
+            if (Document != null)
+                return Document.SavePath;
+            else
+                return null;
         }
         #endregion
 
@@ -437,40 +533,6 @@ namespace C2.Forms
         }
         #endregion
 
-        #region C1文档关闭
-        private void CanvasForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.modelDocumentDao.SaveEndDocuments(this.userName);
-        }
-
-        private void CanvasForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            foreach (ModelDocument md in this.modelDocumentDao.ModelDocuments)
-            {
-                if (!md.Modified)
-                    continue;
-                DialogResult result = MessageBox.Show("有尚未保存的模型，是否保存后关闭？",
-                                               "保存", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                // 取消操作
-                if (result == DialogResult.Cancel)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-
-                // 保存文件
-                if (result == DialogResult.Yes)
-                {
-                    foreach (ModelDocument modelDocument in this.modelDocumentDao.ModelDocuments)
-                        modelDocument.Save();
-                    return;
-                }
-                // 不保存关闭文件
-                if (result == DialogResult.No)
-                    return;
-            }
-        }
-        #endregion
 
         #region UndoRedo
         private void UpdateUndoRedoButton()
