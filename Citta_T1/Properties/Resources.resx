@@ -982,6 +982,18 @@
   <data name="chart_w_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WidgetIcon\chart_w_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="openDataFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\ToolImage\openDataFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+ <data name="opDesign" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opDesign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opModelPublic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opModelPublic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opRunning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opRunning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="业务视图" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\业务视图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -990,5 +1002,17 @@
   </data>
   <data name="首页" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\首页.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opDone" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opDone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opSet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opSet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opSetSuccess" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opSetSuccess.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opWarn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opWarn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

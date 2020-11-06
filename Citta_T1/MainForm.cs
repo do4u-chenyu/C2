@@ -153,6 +153,11 @@ namespace C2
             Global.SetMyModelControl(this.myModelControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
+            Global.SetPictureBox(this.minMaxPictureBox);
+            Global.SetMindMapModelControl(this.mindMapModelControl);
+            //Global.SetBottomViewPanelMinimum(this.isBottomViewPanelMinimum);
+            //this.isBottomViewPanelMinimum = false;
+
         }
 
         #endregion
@@ -713,6 +718,7 @@ namespace C2
         {
             this.ShowBottomPanel();
             this.ShowBottomPreview();
+         
         }
 
         private void PyControlLabel_Click(object sender, EventArgs e)
@@ -727,10 +733,28 @@ namespace C2
             this.ShowLogView();
         }
         #endregion
+        public void ShowBottomViewPanel()
+        {
+            //log.Info("MinMaxPictureBox_Click");
+            if (this.isBottomViewPanelMinimum == true)
+            {
+                this.isBottomViewPanelMinimum = false;
+                this.bottomViewPanel.Height = 200;
+                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
+            }
+            
+            if (bottomViewPanel.Height == 200)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
+            }
+            if (bottomViewPanel.Height == 40)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
+            }
+        }
 
         private void minMaxPictureBox_Click(object sender, EventArgs e)
-        { 
-            //log.Info("MinMaxPictureBox_Click");
+        {
             if (this.isBottomViewPanelMinimum == true)
             {
                 this.isBottomViewPanelMinimum = false;

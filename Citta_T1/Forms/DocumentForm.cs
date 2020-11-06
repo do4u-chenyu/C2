@@ -903,7 +903,7 @@ namespace C2.Forms
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
 
-            dc.SetSelectedTopicDesign(st);
+            dc.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
         }
         
         void ShowProperty(object[] objects)
@@ -1147,7 +1147,7 @@ namespace C2.Forms
 
                 RecentFilesManage.Default.Push(Document.FileName, Document.CreateThumbImage());
             }
-
+            //Global.GetMindMapModelControl().AddMindMapModel(Document.FileName);
             return true;
         }
 

@@ -1,4 +1,6 @@
-﻿using C2.Dialogs.C2OperatorViews;
+﻿using C2.Controls.MapViews;
+using C2.Dialogs.C2OperatorViews;
+using C2.Globalization;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
@@ -12,8 +14,9 @@ namespace C2.Controls.Common
 {
     public partial class DesignerControl : BorderPanel
     {
-        private string[] ComboOperator;
+        private List<OpType> ComboOperator;
         public Topic SelectedTopic { get; set; }
+        public MindMapView MindmapView { get; set; }
         public OperatorWidget OpWidget { get; set; }
         public DataItem SelectedDataSource { get; set; }
         public string SelectedOperator { get; set; }
@@ -24,13 +27,26 @@ namespace C2.Controls.Common
             InitializeComponent();
             Font = UITheme.Default.DefaultFont;
             ComboDataSource = new List<DataItem>();
-            ComboOperator = new string[] { "最大值", "AI实践" };
+            InitComboOperator();
         }
 
+        private void InitComboOperator()
+        {
+            ComboOperator = new List<OpType>();
+            foreach (OpType opType in Enum.GetValues(typeof(OpType)))
+            {
+                if(opType==OpType.Null)
+                    continue;
+                string tmpOpType = Lang._(opType.ToString());
+                ComboOperator.Add(opType);
+                this.operatorCombo.Items.Add(tmpOpType);
+            }
+        }
 
-        public void SetSelectedTopicDesign(Topic topic)
+        public void SetSelectedTopicDesign(Topic topic,MindMapView mindmapview)
         {
             SelectedTopic = topic;
+            MindmapView = mindmapview;
             if(SelectedTopic == null)
             {
                 this.topicName.Text = "未选中主题";
@@ -114,10 +130,10 @@ namespace C2.Controls.Common
 
         private void SetSelectedOperator()
         {
-            if(OpWidget != null && OpWidget.OpType != null)
+            if (OpWidget != null && OpWidget.OpType != OpType.Null)
             {
-                this.operatorCombo.Text = OpWidget.OpType;
-                SelectedOperator = OpWidget.OpType;
+                this.operatorCombo.Text = Lang._(OpWidget.OpType.ToString());
+                SelectedOperator = Lang._(OpWidget.OpType.ToString());
             }
             else
             {
@@ -135,12 +151,6 @@ namespace C2.Controls.Common
                 return;
             }
 
-            if(OpWidget == null)
-            {
-                MessageBox.Show("未添加算子挂件，请添加后再配置");
-                return;
-            }
-
             if (SelectedDataSource ==null || SelectedDataSource.IsEmpty())
             {
                 MessageBox.Show("未选中数据源,请添加后再配置");
@@ -153,41 +163,26 @@ namespace C2.Controls.Common
                 return;
             }
 
-            OpWidget.OpType = ComboOperator[this.operatorCombo.SelectedIndex];
+            if (OpWidget == null)
+            {
+                MindmapView.AddOperator(new Topic[] { SelectedTopic });
+                OpWidget = SelectedTopic.FindWidget<OperatorWidget>();
+            }
+
+            OpWidget.OpType =ComboOperator[this.operatorCombo.SelectedIndex];
             OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
 
-            switch (SelectedOperator)
+            switch (OpWidget.OpType)
             {
-                case "最大值":
+                case OpType.MaxOperator:
                     var dialog = new C2MaxOperatorView(OpWidget);
                     if(dialog.ShowDialog(this) == DialogResult.OK)
-                    {
-                        
-                        DataItem resultItem = OpWidget.ResultItem;
-                        ResultWidget rsw = SelectedTopic.FindWidget<ResultWidget>();
-                        if(rsw == null)
-                        {
-                            var template = new ResultWidget();
-                            template.DataItems.Add(resultItem);
-                            SelectedTopic.Widgets.Add(template);
-                        }
-                        else
-                        {
-                            rsw.DataItems.Clear();
-                            rsw.DataItems.Add(resultItem);
-                        }
                         OpWidget.Status = OpStatus.Ready;
-                    }
                     break;
-                case "AI实践":
+                case OpType.CustomOperator:
                     var dialog2 = new C2CustomOperatorView(OpWidget);
                     if (dialog2.ShowDialog(this) == DialogResult.OK)
-                    {
-                        OpWidget.OpName = OpWidget.DataSourceItem.FileName + "-" + OpWidget.OpType;
-                        DataItem resultItem = OpWidget.ResultItem;
-                        SelectedTopic.Widgets.Add(new ResultWidget());
                         OpWidget.Status = OpStatus.Ready;
-                    }
                     break;
                 default:
                     break;
@@ -202,7 +197,7 @@ namespace C2.Controls.Common
 
         private void OperatorCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            SelectedOperator = ComboOperator[this.operatorCombo.SelectedIndex];
+            SelectedOperator = Lang._(ComboOperator[this.operatorCombo.SelectedIndex].ToString());
         }
     }
 }

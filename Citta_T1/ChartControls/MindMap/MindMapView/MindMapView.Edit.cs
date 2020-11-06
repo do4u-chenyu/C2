@@ -120,6 +120,13 @@ namespace C2.Controls.MapViews
             }
         }
 
+        public void AddOperator(Topic[] topics)
+        {
+            var template = new OperatorWidget();
+            AddWidgetCommand command = new AddWidgetCommand(topics, OperatorWidget.TypeID, template);
+            ExecuteCommand(command);
+        }
+
         public void AddDataSource(Topic[] hitTopic,DataItem dataItem)
         { 
             var template = new DataSourceWidget();
