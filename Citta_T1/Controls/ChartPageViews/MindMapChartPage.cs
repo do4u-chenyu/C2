@@ -195,6 +195,8 @@ namespace C2.ChartPageView
             MenuAddTopic.Text = Lang._("Add Topic");
             MenuAddSubTopic.Text = Lang._("Add Sub Topic");
             MenuAdd.Text = Lang._("Add");
+            MenuAddIcon.Text = Lang.GetTextWithEllipsis("Icon");
+            MenuAddRemark.Text = Lang.GetTextWithEllipsis("Notes");
             MenuAddOperator.Text = Lang._("Operator");
             MenuAddMaxOp.Text = Lang._("Max");
             MenuAddAIOp.Text = Lang._("AI");
@@ -230,6 +232,8 @@ namespace C2.ChartPageView
         ToolStripMenuItem MenuAddTopic;
         ToolStripMenuItem MenuAddSubTopic;
         ToolStripMenuItem MenuAdd;
+        ToolStripMenuItem MenuAddIcon;
+        ToolStripMenuItem MenuAddRemark;
         ToolStripMenuItem MenuAddOperator;
         ToolStripMenuItem MenuAddMaxOp;
         ToolStripMenuItem MenuAddAIOp;
@@ -275,6 +279,8 @@ namespace C2.ChartPageView
             MenuAddTopic = new ToolStripMenuItem();
             MenuAddSubTopic = new ToolStripMenuItem();
             MenuAdd = new ToolStripMenuItem();
+            MenuAddIcon = new ToolStripMenuItem();
+            MenuAddRemark = new ToolStripMenuItem();
             MenuAddOperator = new ToolStripMenuItem();
             MenuAddMaxOp = new ToolStripMenuItem();
             MenuAddAIOp = new ToolStripMenuItem();
@@ -346,12 +352,27 @@ namespace C2.ChartPageView
 
             // MenuAdd
             MenuAdd.DropDownItems.AddRange(new ToolStripItem[] {
+                MenuAddIcon,
+                MenuAddRemark,
                 MenuAddOperator,
                 MenuAddModelOp});
             MenuAdd.Name = "MenuAdd";
             MenuAdd.Text = "Add";
 
 
+            // MenuAddIcon
+            MenuAddIcon.Image = Properties.Resources.image;
+            MenuAddIcon.Name = "MenuAddIcon";
+            MenuAddIcon.Text = "&Icon";
+            MenuAddIcon.Click += new System.EventHandler(MenuAddIcon_Click);
+
+            // MenuAddRemark
+            MenuAddRemark.Image = Properties.Resources.note_w_icon;
+            MenuAddRemark.Name = "MenuAddRemark";
+            MenuAddRemark.Text = "&Notes";
+            MenuAddRemark.Click += new System.EventHandler(MenuAddRemark_Click);
+
+            //MenuAddOperator
             MenuAddOperator.Image = C2.Properties.Resources.operator_w_icon;
             MenuAddOperator.Name = "MenuAddOperator";
             MenuAddOperator.Text = "Operator";
@@ -619,6 +640,16 @@ namespace C2.ChartPageView
         void MenuAddSubTopic_Click(object sender, EventArgs e)
         {
             mindMapView1.AddSubTopic();
+        }
+
+        void MenuAddIcon_Click(object sender, EventArgs e)
+        {
+            mindMapView1.AddIcon();
+        }
+
+        void MenuAddRemark_Click(object sender, EventArgs e)
+        {
+            mindMapView1.AddRemark();
         }
 
         void MenuAddOperator_Click(object sender, EventArgs e)

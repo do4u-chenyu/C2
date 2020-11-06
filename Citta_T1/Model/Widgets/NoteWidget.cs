@@ -23,8 +23,9 @@ namespace C2.Model.Widgets
 
         public NoteWidget()
         {
-            Alignment = WidgetAlignment.Right;
-            widgetIcon = Properties.Resources.note_small;
+            DisplayIndex = 4;
+            Alignment = WidgetAlignment.Left;
+            widgetIcon = Properties.Resources.note_w_icon;
         }
 
         [DefaultValue(WidgetAlignment.Right)]
@@ -113,10 +114,7 @@ namespace C2.Model.Widgets
 
         public override Size CalculateSize(MindMapLayoutArgs e)
         {
-            if (string.IsNullOrEmpty(Text))
-                return Size.Empty;
-            else
-                return new Size(16, 16);
+                return new Size(20, 20);
         }
 
         public override string GetTypeID()

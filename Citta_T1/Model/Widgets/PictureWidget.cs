@@ -44,7 +44,8 @@ namespace C2.Model.Widgets
 
         public PictureWidget()
         {
-            _SizeType = PictureSizeType.Thumb;
+            DisplayIndex = 5;
+            _SizeType = PictureSizeType.Customize;
             Alignment = WidgetAlignment.Left;
         }
 
@@ -248,10 +249,10 @@ namespace C2.Model.Widgets
                     if (Data != null)
                         size = Data.Size;
                     else
-                        return new Size(16, 16);
+                        return new Size(20, 20);
                     break;
                 case PictureSizeType.Customize:
-                    size = new Size(CustomWidth ?? 16, CustomHeight ?? 16);
+                    size = new Size(CustomWidth ?? 20, CustomHeight ?? 20);
                     break;
             }
 
