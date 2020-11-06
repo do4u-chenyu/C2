@@ -108,7 +108,7 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
             MenuOpenOperator.Text = Lang._("OpenDesigner");
             MenuOpenOperator.Image = Properties.Resources.operator_w_icon;
-            MenuOpenOperator.Click += new System.EventHandler(MenuOpenOperatorDesigner_Click);
+            MenuOpenOperator.Click += MenuOpenOperatorDesigner_Click;
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
         }
@@ -131,12 +131,12 @@ namespace C2.Controls.MapViews
             MenuOpDesign.Image = Properties.Resources.opDesign;
             MenuOpDesign.Text = Lang._("Design");
             MenuOpDesign.Enabled = opw.Status != OpStatus.Done;
-            MenuOpDesign.Click += new System.EventHandler(MenuDesignOp_Click);
+            MenuOpDesign.Click += MenuDesignOp_Click;
 
             MenuOpRunning.Image = Properties.Resources.opRunning;
             MenuOpRunning.Text = Lang._("Running") ;
             MenuOpRunning.Enabled = opw.Status != OpStatus.Null ;
-            MenuOpRunning.Click += new System.EventHandler(MenuRunningOp_Click);
+            MenuOpRunning.Click += MenuRunningOp_Click;
 
             MenuOpPublic.Image = Properties.Resources.opModelPublic;
             MenuOpPublic.Text = Lang._("Public");
@@ -144,7 +144,7 @@ namespace C2.Controls.MapViews
 
             MenuOpDelete.Image = Properties.Resources.deletewidget;
             MenuOpDelete.Text = Lang._("Delete");
-            MenuOpDelete.Click += new System.EventHandler(MenuDeleteOp_Click);
+            MenuOpDelete.Click += MenuDeleteOp_Click;
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
         }
