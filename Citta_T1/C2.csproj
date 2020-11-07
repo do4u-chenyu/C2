@@ -336,6 +336,24 @@
     <Compile Include="Dialogs\C2OperatorViews\C2DataFormatOperatorView.Designer.cs">
       <DependentUpon>C2DataFormatOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2FilterOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2FilterOperatorView.Designer.cs">
+      <DependentUpon>C2FilterOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2FreqOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2FreqOperatorView.Designer.cs">
+      <DependentUpon>C2FreqOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2GroupOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2GroupOperatorView.Designer.cs">
+      <DependentUpon>C2GroupOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2MaxOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -691,6 +709,24 @@
     </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2MinOperatorView.Designer.cs">
       <DependentUpon>C2MinOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2PythonOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2PythonOperatorView.Designer.cs">
+      <DependentUpon>C2PythonOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2RandomOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2RandomOperatorView.Designer.cs">
+      <DependentUpon>C2RandomOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2SortOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2SortOperatorView.Designer.cs">
+      <DependentUpon>C2SortOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\WidgetChart\VisualDisplayDialog.cs">
       <SubType>Form</SubType>
@@ -1486,6 +1522,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\UnionOperatorView.resx">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2FilterOperatorView.resx">
+      <DependentUpon>C2FilterOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckUpdate.resx">
       <DependentUpon>CheckUpdate.cs</DependentUpon>

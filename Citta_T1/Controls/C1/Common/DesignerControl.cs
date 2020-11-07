@@ -189,6 +189,12 @@ namespace C2.Controls.Common
                 case OpType.MinOperator:return new C2MinOperatorView(OpWidget);
                 case OpType.AvgOperator:return new C2AvgOperatorView(OpWidget);
                 case OpType.DataFormatOperator:return new C2DataFormatOperatorView(OpWidget);
+                case OpType.RandomOperator:return new C2RandomOperatorView(OpWidget);
+                case OpType.FreqOperator:return new C2FreqOperatorView(OpWidget);
+                case OpType.SortOperator:return new C2SortOperatorView(OpWidget);
+                case OpType.FilterOperator:return new C2FilterOperatorView(OpWidget);
+                case OpType.GroupOperator:return new C2GroupOperatorView(OpWidget);
+                case OpType.PythonOperator:return new C2PythonOperatorView(OpWidget);
                 default:return null;
             }
         }

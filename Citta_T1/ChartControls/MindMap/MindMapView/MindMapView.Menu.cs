@@ -224,6 +224,7 @@ namespace C2.Controls.MapViews
                 case OpType.FreqOperator: return  (new FreqOperatorCmd(opw)).GenCmd();
                 case OpType.GroupOperator: return  (new GroupOperatorCmd(opw)).GenCmd();
                 case OpType.DataFormatOperator: return  (new DataFormatOperatorCmd(opw)).GenCmd();
+                case OpType.PythonOperator: return  (new PythonOperatorCmd(opw)).GenCmd();
                 default: return null;
             }
         }
