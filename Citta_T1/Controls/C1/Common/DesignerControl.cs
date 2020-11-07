@@ -36,7 +36,7 @@ namespace C2.Controls.Common
             ComboOperator = new List<OpType>();
             foreach (OpType opType in Enum.GetValues(typeof(OpType)))
             {
-                if(opType==OpType.Null)
+                if(opType==OpType.Null || opType == OpType.ModelOperator)
                     continue;
                 string tmpOpType = Lang._(opType.ToString());
                 ComboOperator.Add(opType);
