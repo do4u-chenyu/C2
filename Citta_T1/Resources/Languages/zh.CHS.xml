@@ -405,6 +405,7 @@
 	<item name="GroupOperator">分组</item>	
 	<item name="CustomOperator">AI实践</item>	
 	<item name="DataFormatOperator">数据标准化</item>	
+	<item name="PythonOperator">Python</item>	
 	<item name="ModelOperator">模型</item>	
 
 	</words>

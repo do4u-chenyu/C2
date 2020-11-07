@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using C2.Model.Widgets;
 
 namespace C2.Business.Schedule.Cmd
 {
     class FreqOperatorCmd : OperatorCmd
     {
         public FreqOperatorCmd(Triple triple) : base(triple)
+        {
+        }
+        public FreqOperatorCmd(OperatorWidget operatorWidget) : base(operatorWidget)
         {
         }
         public List<string> GenCmd()

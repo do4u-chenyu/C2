@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using C2.Model.Widgets;
 
 namespace C2.Business.Schedule.Cmd
 {
@@ -8,7 +9,9 @@ namespace C2.Business.Schedule.Cmd
         public AvgOperatorCmd(Triple triple) : base(triple)
         {
         }
-
+        public AvgOperatorCmd(OperatorWidget operatorWidget) : base(operatorWidget)
+        {
+        }
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();

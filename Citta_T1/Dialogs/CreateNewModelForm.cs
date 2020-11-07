@@ -3,6 +3,7 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -14,10 +15,18 @@ namespace C2.Dialogs
         private int titlePostfix;  // 模型建议命名的数字后缀
         private string modelTitle;
         public string ModelTitle { get => modelTitle; }
+        public string ModelType { set => this.label1.Text = value; }
+        public List<string> OpenDocuments { get; set; }
+
 
         public CreateNewModelForm()
         {
             InitializeComponent();
+            OpenDocuments = new List<string>();
+            this.label1.Text = "新建业务视图";
+            this.Text = "新建业务视图";
+            this.label1.Location = new Point(70,47);
+            this.label2.Location = new Point(50,47);
             modelTitle = "";
             titlePostfix = 1;
         }
@@ -35,24 +44,24 @@ namespace C2.Dialogs
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            string inputTitleModel = this.textBox.Text.Trim();
+            string titleName = this.textBox.Text.Trim();
 
-            if (inputTitleModel.Length == 0)
+            if (titleName.Length == 0)
                 return;
-            if (FileUtil.ContainIllegalCharacters(inputTitleModel, "模型名")
-               || FileUtil.NameTooLong(inputTitleModel, "模型名"))
+            if (FileUtil.ContainIllegalCharacters(titleName, "业务视图名")
+               || FileUtil.NameTooLong(titleName, "业务视图名"))
             {
                 this.textBox.Text = String.Empty;
                 return;
             }
-            // 模型已存在,提示并推出
-            if (CheckModelTitelExists(inputTitleModel))
+            // 业务视图已存在,提示并退出
+            if (CheckModelTitelExists(titleName))
             {
-                MessageBox.Show(inputTitleModel + "，已存在，请重新命名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(titleName + "，已存在，请重新命名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            this.modelTitle = inputTitleModel;
+            this.modelTitle = titleName;
             this.DialogResult = DialogResult.OK;
         }
 
@@ -78,11 +87,11 @@ namespace C2.Dialogs
 
         private void CreateNewModel_Load(object sender, EventArgs e)
         {
-            string title = String.Format("我的新模型{0}", this.titlePostfix);
+            string title = String.Format("业务视图{0}", this.titlePostfix);
             List<string> currentTitles = GetModelTitleList();
 
             while (currentTitles.Contains(title))
-                title = String.Format("我的新模型{0}", ++this.titlePostfix);
+                title = String.Format("业务视图{0}", ++this.titlePostfix);
             this.textBox.Text = title;
             this.textBox.ForeColor = System.Drawing.SystemColors.ActiveCaption;
         }
@@ -99,20 +108,17 @@ namespace C2.Dialogs
 
         private List<string> GetModelTitleList()
         {
-            // TODO
             List<string> titles = new List<string>();
-            //try
-            //{
-            //    DirectoryInfo di = new DirectoryInfo(Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName));
-            //    DirectoryInfo[] modelTitleList = di.GetDirectories();
-            //    foreach (DirectoryInfo modelTitle in modelTitleList)
-            //        titles.Add(modelTitle.ToString());
-            //}
-            //catch
-            //{ }
-
-            //foreach (ModelDocument md in Global.GetModelDocumentDao().ModelDocuments)
-            //    titles.Add(md.ModelTitle);
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName,"业务视图"));
+                DirectoryInfo[] titleList = di.GetDirectories();
+                foreach (DirectoryInfo title in titleList)
+                    titles.Add(title.ToString());
+            }
+            catch
+            { }
+            titles.AddRange(OpenDocuments);
             return titles;
         }
     }

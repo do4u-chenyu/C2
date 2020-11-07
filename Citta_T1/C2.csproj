@@ -318,11 +318,41 @@
     <Compile Include="Dialogs\C1OperatorViews\UnionOperatorView.Designer.cs">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2AvgOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2AvgOperatorView.Designer.cs">
+      <DependentUpon>C2AvgOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2CustomOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2CustomOperatorView.Designer.cs">
       <DependentUpon>C2CustomOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2DataFormatOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2DataFormatOperatorView.Designer.cs">
+      <DependentUpon>C2DataFormatOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2FilterOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2FilterOperatorView.Designer.cs">
+      <DependentUpon>C2FilterOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2FreqOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2FreqOperatorView.Designer.cs">
+      <DependentUpon>C2FreqOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2GroupOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2GroupOperatorView.Designer.cs">
+      <DependentUpon>C2GroupOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2MaxOperatorView.cs">
       <SubType>Form</SubType>
@@ -673,6 +703,30 @@
     </Compile>
     <Compile Include="Controls\Misc\ImageListBox.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2MinOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2MinOperatorView.Designer.cs">
+      <DependentUpon>C2MinOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2PythonOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2PythonOperatorView.Designer.cs">
+      <DependentUpon>C2PythonOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2RandomOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2RandomOperatorView.Designer.cs">
+      <DependentUpon>C2RandomOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2SortOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2SortOperatorView.Designer.cs">
+      <DependentUpon>C2SortOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\WidgetChart\VisualDisplayDialog.cs">
       <SubType>Form</SubType>
@@ -1312,6 +1366,9 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
+    <EmbeddedResource Include="Controls\C1\Left\MindMapModelButton.resx">
+      <DependentUpon>MindMapModelButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\BarChart.resx">
       <DependentUpon>BarChart.cs</DependentUpon>
     </EmbeddedResource>
@@ -1468,6 +1525,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\UnionOperatorView.resx">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2FilterOperatorView.resx">
+      <DependentUpon>C2FilterOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckUpdate.resx">
       <DependentUpon>CheckUpdate.cs</DependentUpon>
@@ -1808,14 +1868,8 @@
     <None Include="Resources\Images\svg.png" />
     <None Include="Resources\Images\ToolImage\saveAllButton.png" />
     <Content Include="Resources\Images\TabBarImage\业务视图.png" />
-    <None Include="Resources\Images\TabBarImage\业务视图2.png" />
-    <None Include="Resources\Images\TabBarImage\业务视图3.png" />
     <Content Include="Resources\Images\TabBarImage\模型视图.png" />
-    <None Include="Resources\Images\TabBarImage\模型视图2.png" />
-    <None Include="Resources\Images\TabBarImage\模型视图3.png" />
     <Content Include="Resources\Images\TabBarImage\首页.png" />
-    <None Include="Resources\Images\TabBarImage\首页2.png" />
-    <None Include="Resources\Images\TabBarImage\首页3.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
     <None Include="Resources\Images\theme.png" />
@@ -2088,6 +2142,7 @@
     <None Include="Resources\C1\toolbox\importmodel.png" />
     <Content Include="Resources\C1\leftpanelmenu\startPageTitle.jpg" />
     <None Include="Resources\WidgetIcon\chart_w_icon.png" />
+    <None Include="Resources\WidgetIcon\note_w_icon.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

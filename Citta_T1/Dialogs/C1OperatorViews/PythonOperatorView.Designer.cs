@@ -23,7 +23,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PythonOperatorView));
             this.pythonChosenComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -459,13 +458,14 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.bottomPanel);
-            this.Icon = Properties.Resources.python_icon;
+            this.Icon = global::C2.Properties.Resources.python_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(547, 518);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(547, 518);
             this.Name = "PythonOperatorView";
             this.ShowIcon = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Py算子设置";
             this.Load += new System.EventHandler(this.PythonOperatorView_Load);
             this.Controls.SetChildIndex(this.bottomPanel, 0);

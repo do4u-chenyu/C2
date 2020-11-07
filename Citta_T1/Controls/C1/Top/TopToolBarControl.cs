@@ -72,6 +72,8 @@ namespace C2.Controls.Top
             SelectFrame = false;
             ChangeCursor();
             FrameChange(SelectFrame);
+            this.movePictureBox.BackColor = Color.FromArgb(200, 200, 200);
+            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
 
         #endregion
@@ -85,6 +87,8 @@ namespace C2.Controls.Top
             FrameChange(SelectFrame);
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(true);
+            //this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
 
         private void ZoomDownPictureBox_Click(object sender, EventArgs e)
@@ -94,6 +98,8 @@ namespace C2.Controls.Top
             FrameChange(SelectFrame);
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(false);
+            //this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
         #endregion
 
@@ -129,6 +135,8 @@ namespace C2.Controls.Top
             SelectDrag = false;
             ChangeCursor();
             DragChange(SelectDrag);
+            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.framePictureBox.BackColor = Color.FromArgb(200, 200, 200);
         }
         #endregion
 
@@ -139,13 +147,14 @@ namespace C2.Controls.Top
 
         public void RemarkChange(bool flag)
         {
-          
+
         }
         private void FrameChange(bool flag)
         {
             Global.GetCurrentDocument().Show();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
-            
+           
+
         }
         public void InterruptSelectFrame()
         {
@@ -190,8 +199,7 @@ namespace C2.Controls.Top
         }
 
         private void InitializeToolTip()
-        {
-         
+        {    
             this.toolTip1.SetToolTip(this.formatButton, HelpUtil.FormatOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.undoButton, HelpUtil.UndoButtonHelpInfo);
             this.toolTip1.SetToolTip(this.redoButton, HelpUtil.RedoButtonHelpInfo);
@@ -250,6 +258,8 @@ namespace C2.Controls.Top
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();
             Global.GetMainForm().SetDocumentDirty();
+            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
 
 
@@ -263,12 +273,16 @@ namespace C2.Controls.Top
         {
             UndoRedoManager.GetInstance().Undo(Global.GetCurrentDocument());
             Global.GetMainForm().SetDocumentDirty();
+            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
 
         public void RedoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Redo(Global.GetCurrentDocument());
             Global.GetMainForm().SetDocumentDirty();
+            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
 
         private void TopToolBarControl_Load(object sender, EventArgs e)

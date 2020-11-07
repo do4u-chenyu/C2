@@ -24,7 +24,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -43,7 +42,7 @@
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(65, 44);
-            this.dataSourceTB0.Size = new System.Drawing.Size(146, 23);
+            this.dataSourceTB0.Size = new System.Drawing.Size(146, 28);
             this.dataSourceTB0.TabIndex = 9;
             // 
             // cancelButton
@@ -62,7 +61,7 @@
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(67, 120);
-            this.outListCCBL0.Size = new System.Drawing.Size(146, 23);
+            this.outListCCBL0.Size = new System.Drawing.Size(146, 29);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox0
@@ -70,7 +69,7 @@
             this.comboBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBox0.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox0.Location = new System.Drawing.Point(2, 2);
-            this.comboBox0.Size = new System.Drawing.Size(146, 21);
+            this.comboBox0.Size = new System.Drawing.Size(146, 26);
             // 
             // comboBox1
             // 
@@ -83,17 +82,17 @@
             "小于等于 ≦",
             "不等于 ≠"});
             this.comboBox1.Location = new System.Drawing.Point(152, 2);
-            this.comboBox1.Size = new System.Drawing.Size(146, 21);
+            this.comboBox1.Size = new System.Drawing.Size(146, 26);
             this.comboBox1.Visible = true;
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(539, 10);
+            this.topPanel.Size = new System.Drawing.Size(537, 10);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 328);
-            this.bottomPanel.Size = new System.Drawing.Size(539, 43);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 318);
+            this.bottomPanel.Size = new System.Drawing.Size(537, 43);
             // 
             // valuePanel
             // 
@@ -107,7 +106,7 @@
             this.valuePanel.Controls.Add(this.label1);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(0, 10);
-            this.valuePanel.Size = new System.Drawing.Size(539, 318);
+            this.valuePanel.Size = new System.Drawing.Size(537, 308);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.label1, 0);
             this.valuePanel.Controls.SetChildIndex(this.label2, 0);
@@ -121,7 +120,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(5, 9);
-            this.label1.Size = new System.Drawing.Size(63, 14);
+            this.label1.Size = new System.Drawing.Size(85, 19);
             // 
             // label3
             // 
@@ -130,7 +129,7 @@
             this.label3.Location = new System.Drawing.Point(5, 82);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 14);
+            this.label3.Size = new System.Drawing.Size(85, 19);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段";
             // 
@@ -141,7 +140,7 @@
             this.label2.Location = new System.Drawing.Point(5, 154);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 14);
+            this.label2.Size = new System.Drawing.Size(85, 19);
             this.label2.TabIndex = 0;
             this.label2.Text = "过滤条件";
             // 
@@ -191,7 +190,7 @@
             this.textBoxEx1.Location = new System.Drawing.Point(302, 2);
             this.textBoxEx1.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxEx1.Name = "textBoxEx1";
-            this.textBoxEx1.Size = new System.Drawing.Size(86, 21);
+            this.textBoxEx1.Size = new System.Drawing.Size(86, 26);
             this.textBoxEx1.TabIndex = 6;
             // 
             // panel1
@@ -234,19 +233,20 @@
             // FilterOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(539, 371);
+            this.ClientSize = new System.Drawing.Size(537, 361);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Icon = Properties.Resources.filter_icon;
+            this.Icon = global::C2.Properties.Resources.filter_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(555, 410);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(555, 410);
             this.Name = "FilterOperatorView";
             this.ShowIcon = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "条件筛选算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.valuePanel.ResumeLayout(false);

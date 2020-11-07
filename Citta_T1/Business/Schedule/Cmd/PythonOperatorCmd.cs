@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using C2.Model.Widgets;
 
 namespace C2.Business.Schedule.Cmd
 {
@@ -7,9 +8,10 @@ namespace C2.Business.Schedule.Cmd
 
         public PythonOperatorCmd(Triple triple) : base(triple)
         {
-
         }
-
+        public PythonOperatorCmd(OperatorWidget operatorWidget) : base(operatorWidget)
+        {
+        }
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();

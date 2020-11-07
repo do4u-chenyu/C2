@@ -91,7 +91,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 6;
-            this.label4.Text = "选中主题";
+            this.label4.Text = "选中节点";
             // 
             // topicName
             // 

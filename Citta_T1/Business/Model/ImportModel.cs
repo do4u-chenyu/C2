@@ -242,9 +242,7 @@ namespace C2.Business.Model
         }
         private bool IsSameModelTitle(string modelTitle)
         {
-            // TODO dk 本地和内存中同名模型文档判断
             return (Global.GetMyModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));
-
         }
 
     }

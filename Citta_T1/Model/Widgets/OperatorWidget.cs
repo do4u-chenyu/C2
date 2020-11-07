@@ -27,6 +27,7 @@ namespace C2.Model.Widgets
         GroupOperator,  //分组算子
         CustomOperator, //AI实践
         DataFormatOperator, //数据标准化
+        PythonOperator, //python算子
         ModelOperator //模型
     }
     public class OperatorWidget : Widget, IRemark

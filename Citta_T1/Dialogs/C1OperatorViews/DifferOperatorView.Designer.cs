@@ -24,7 +24,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DifferOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -42,7 +41,7 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(246, 47);
-            this.dataSourceTB1.Size = new System.Drawing.Size(144, 23);
+            this.dataSourceTB1.Size = new System.Drawing.Size(144, 28);
             this.dataSourceTB1.TabIndex = 10;
             this.dataSourceTB1.Visible = true;
             // 
@@ -67,28 +66,28 @@
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(62, 129);
-            this.outListCCBL0.Size = new System.Drawing.Size(144, 23);
+            this.outListCCBL0.Size = new System.Drawing.Size(144, 29);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox0
             // 
-            this.comboBox0.Location = new System.Drawing.Point(2, 5);
-            this.comboBox0.Size = new System.Drawing.Size(145, 21);
+            this.comboBox0.Location = new System.Drawing.Point(2, 3);
+            this.comboBox0.Size = new System.Drawing.Size(145, 26);
             // 
             // comboBox1
             // 
-            this.comboBox1.Location = new System.Drawing.Point(151, 5);
-            this.comboBox1.Size = new System.Drawing.Size(146, 21);
+            this.comboBox1.Location = new System.Drawing.Point(151, 3);
+            this.comboBox1.Size = new System.Drawing.Size(146, 26);
             this.comboBox1.Visible = true;
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(444, 10);
+            this.topPanel.Size = new System.Drawing.Size(442, 10);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 348);
-            this.bottomPanel.Size = new System.Drawing.Size(444, 43);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 338);
+            this.bottomPanel.Size = new System.Drawing.Size(442, 43);
             // 
             // valuePanel
             // 
@@ -103,7 +102,7 @@
             this.valuePanel.Controls.Add(this.dataSourceTB1);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(0, 10);
-            this.valuePanel.Size = new System.Drawing.Size(444, 338);
+            this.valuePanel.Size = new System.Drawing.Size(442, 328);
             this.valuePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.valuePanel_Paint);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
@@ -119,7 +118,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(5, 9);
-            this.label1.Size = new System.Drawing.Size(63, 14);
+            this.label1.Size = new System.Drawing.Size(85, 19);
             // 
             // label3
             // 
@@ -128,7 +127,7 @@
             this.label3.Location = new System.Drawing.Point(5, 89);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 14);
+            this.label3.Size = new System.Drawing.Size(85, 19);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段";
             // 
@@ -139,7 +138,7 @@
             this.label2.Location = new System.Drawing.Point(5, 171);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 14);
+            this.label2.Size = new System.Drawing.Size(85, 19);
             this.label2.TabIndex = 0;
             this.label2.Text = "差集条件";
             // 
@@ -220,19 +219,20 @@
             // DifferOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(444, 391);
+            this.ClientSize = new System.Drawing.Size(442, 381);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Icon = Properties.Resources.differ_icon;
+            this.Icon = global::C2.Properties.Resources.differ_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(460, 430);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(460, 430);
             this.Name = "DifferOperatorView";
             this.ShowIcon = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "取差集算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.valuePanel.ResumeLayout(false);

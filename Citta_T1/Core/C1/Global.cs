@@ -7,6 +7,7 @@ using C2.Controls.Left;
 using C2.Controls.Right;
 using C2.Controls.Top;
 using C2.Forms;
+using System.IO;
 using System.Windows.Forms;
 
 namespace C2.Core
@@ -123,7 +124,7 @@ namespace C2.Core
         public static void SetMindMapModelControl(MindMapModelControl mmmc) { mindMapModelControl = mmmc; }
         private static string workspaceDirectory;           // 用户模型工作目录
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
-
+        public static string UserWorkspacePath { get => Path.Combine( workspaceDirectory,mainForm.UserName); }
         public const float Factor = 1.3F;
         private static string versionType;
         public static string VersionType { get => versionType; set => versionType = value; }

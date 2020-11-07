@@ -36,13 +36,13 @@ namespace C2.Controls.Left
 
         private void DataButton_Load(object sender, EventArgs e)
         {
-            //// 数据源全路径浮动提示信息
-            //String helpInfo = FullFilePath;
-            //this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+            // 数据源全路径浮动提示信息
+            String helpInfo = FullFilePath;
+            this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
 
-            //// 数据源名称浮动提示信息
-            //helpInfo = DataSourceName;
-            //this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
+            // 数据源名称浮动提示信息
+            helpInfo = DataSourceName;
+            this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
             //helpInfo = String.Format(DataButtonFlowTemplate,
             //                        encoding.ToString(),
@@ -58,7 +58,6 @@ namespace C2.Controls.Left
         {
             Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
             Global.GetMainForm().ShowBottomViewPanel();
-
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,7 +97,6 @@ namespace C2.Controls.Left
             // 引用不为0时,有可能还会预览该数据源的数据,此时不用移除buffer
             //if (count == 0)//不管是否有引用，均清空缓存
             BCPBuffer.GetInstance().Remove(this.FullFilePath);
-
         }
         #endregion
 
@@ -122,6 +120,12 @@ namespace C2.Controls.Left
             //                            Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
             //                            this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
             //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+        }
+
+        private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding, true);
+            Global.GetMainForm().ShowBottomViewPanel();
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -181,5 +185,7 @@ namespace C2.Controls.Left
             Global.GetDataSourceControl().SaveDataSourceInfo();
             this.helpToolTip.SetToolTip(this.txtButton, DataSourceName);
         }
+
+
     }
 }

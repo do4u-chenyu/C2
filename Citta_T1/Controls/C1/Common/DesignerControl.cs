@@ -1,4 +1,5 @@
 ﻿using C2.Controls.MapViews;
+using C2.Dialogs.Base;
 using C2.Dialogs.C2OperatorViews;
 using C2.Globalization;
 using C2.Model;
@@ -35,7 +36,7 @@ namespace C2.Controls.Common
             ComboOperator = new List<OpType>();
             foreach (OpType opType in Enum.GetValues(typeof(OpType)))
             {
-                if(opType==OpType.Null)
+                if(opType==OpType.Null || opType == OpType.ModelOperator)
                     continue;
                 string tmpOpType = Lang._(opType.ToString());
                 ComboOperator.Add(opType);
@@ -172,22 +173,30 @@ namespace C2.Controls.Common
             OpWidget.OpType =ComboOperator[this.operatorCombo.SelectedIndex];
             OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
 
+            C2BaseOperatorView dialog = GenerateOperatorView();
+            if (dialog != null && dialog.ShowDialog(this) == DialogResult.OK)
+                OpWidget.Status = OpStatus.Ready;
+
+
+        }
+
+        private C2BaseOperatorView GenerateOperatorView()
+        {
             switch (OpWidget.OpType)
             {
-                case OpType.MaxOperator:
-                    var dialog = new C2MaxOperatorView(OpWidget);
-                    if(dialog.ShowDialog(this) == DialogResult.OK)
-                        OpWidget.Status = OpStatus.Ready;
-                    break;
-                case OpType.CustomOperator:
-                    var dialog2 = new C2CustomOperatorView(OpWidget);
-                    if (dialog2.ShowDialog(this) == DialogResult.OK)
-                        OpWidget.Status = OpStatus.Ready;
-                    break;
-                default:
-                    break;
+                case OpType.MaxOperator:return new C2MaxOperatorView(OpWidget);
+                case OpType.CustomOperator:return new C2CustomOperatorView(OpWidget);
+                case OpType.MinOperator:return new C2MinOperatorView(OpWidget);
+                case OpType.AvgOperator:return new C2AvgOperatorView(OpWidget);
+                case OpType.DataFormatOperator:return new C2DataFormatOperatorView(OpWidget);
+                case OpType.RandomOperator:return new C2RandomOperatorView(OpWidget);
+                case OpType.FreqOperator:return new C2FreqOperatorView(OpWidget);
+                case OpType.SortOperator:return new C2SortOperatorView(OpWidget);
+                case OpType.FilterOperator:return new C2FilterOperatorView(OpWidget);
+                case OpType.GroupOperator:return new C2GroupOperatorView(OpWidget);
+                case OpType.PythonOperator:return new C2PythonOperatorView(OpWidget);
+                default:return null;
             }
-
         }
 
         private void DataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)

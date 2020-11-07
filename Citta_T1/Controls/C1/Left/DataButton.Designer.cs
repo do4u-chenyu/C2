@@ -38,6 +38,7 @@
             this.RenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.RefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox = new System.Windows.Forms.TextBox();
@@ -77,16 +78,18 @@
             this.RenameToolStripMenuItem,
             this.RemoveToolStripMenuItem,
             this.toolStripSeparator1,
+            this.RefreshToolStripMenuItem,
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 164);
             // 
             // ReviewToolStripMenuItem
             // 
             this.ReviewToolStripMenuItem.Name = "ReviewToolStripMenuItem";
             this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.ReviewToolStripMenuItem.Text = "预览";
+            this.ReviewToolStripMenuItem.ToolTipText = "预览数据源部分信息";
             this.ReviewToolStripMenuItem.Click += new System.EventHandler(this.ReviewToolStripMenuItem_Click);
             // 
             // RenameToolStripMenuItem
@@ -101,12 +104,21 @@
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
             this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.RemoveToolStripMenuItem.Text = "卸载";
+            this.RemoveToolStripMenuItem.ToolTipText = "仅从数据源资源池中移除数据源,不修改数据源对应文件";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
+            // 
+            // RefreshToolStripMenuItem
+            // 
+            this.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem";
+            this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.RefreshToolStripMenuItem.Text = "刷新";
+            this.RefreshToolStripMenuItem.ToolTipText = "刷新程序缓存,重新加载数据源";
+            this.RefreshToolStripMenuItem.Click += new System.EventHandler(this.RefreshToolStripMenuItem_Click);
             // 
             // ExplorerToolStripMenuItem
             // 
@@ -188,5 +200,6 @@
         private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyFilePathToClipboardToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox;
+        private System.Windows.Forms.ToolStripMenuItem RefreshToolStripMenuItem;
     }
 }

@@ -58,6 +58,7 @@ namespace C2.Controls.MapViews
                     cw = HoverObject.Widget as ChartWidget;
                     CreateChartWidgetMenu(cw);
                     break;
+
                 default:
                     break;
             }
@@ -190,7 +191,9 @@ namespace C2.Controls.MapViews
         {
             if(opw.Status == OpStatus.Ready)
             {
-                List<string> cmds = (new MaxOperatorCmd(opw)).GenCmd();
+                List<string> cmds = GenerateCmd();
+                if (cmds == null)
+                    return;
                 MessageBox.Show(RunLinuxCommand(cmds));
                 DataItem resultItem = opw.ResultItem;
                 ResultWidget rsw = (opw.Container as Topic).FindWidget<ResultWidget>();
@@ -198,10 +201,31 @@ namespace C2.Controls.MapViews
                     AddResult(new Topic[] { opw.Container as Topic },resultItem);
                 else
                 {
+                    //TODO
+                    //是否对undo redo有影响
                     rsw.DataItems.Clear();
                     rsw.DataItems.Add(resultItem);
                 }
                 opw.Status = OpStatus.Done;
+            }
+        }
+
+        private List<string> GenerateCmd()
+        {
+            switch (opw.OpType)
+            {
+                case OpType.MaxOperator: return (new MaxOperatorCmd(opw)).GenCmd();
+                case OpType.CustomOperator: return  (new CustomOperatorCmd(opw)).GenCmd();
+                case OpType.MinOperator: return  (new MinOperatorCmd(opw)).GenCmd();
+                case OpType.RandomOperator: return  (new RandomOperatorCmd(opw)).GenCmd();
+                case OpType.FilterOperator: return  (new FilterOperatorCmd(opw)).GenCmd();
+                case OpType.AvgOperator: return  (new AvgOperatorCmd(opw)).GenCmd();
+                case OpType.SortOperator: return  (new SortOperatorCmd(opw)).GenCmd();
+                case OpType.FreqOperator: return  (new FreqOperatorCmd(opw)).GenCmd();
+                case OpType.GroupOperator: return  (new GroupOperatorCmd(opw)).GenCmd();
+                case OpType.DataFormatOperator: return  (new DataFormatOperatorCmd(opw)).GenCmd();
+                case OpType.PythonOperator: return  (new PythonOperatorCmd(opw)).GenCmd();
+                default: return null;
             }
         }
 
@@ -441,6 +465,10 @@ namespace C2.Controls.MapViews
         void MenuJoinPool_Click(object sender, EventArgs e)
         {
         }
+        #endregion
+
+        #region 附件挂件
+
         #endregion
     }
 }

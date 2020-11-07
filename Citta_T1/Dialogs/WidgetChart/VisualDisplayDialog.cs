@@ -1,17 +1,11 @@
 ﻿using C2.Business.Option;
+using C2.Controls;
 using C2.Core;
 using C2.Dialogs.Base;
-using C2.Dialogs.WidgetChart;
 using C2.Model;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Dialogs
@@ -19,28 +13,24 @@ namespace C2.Dialogs
     public partial class VisualDisplayDialog : C1BaseOperatorView
     {
         private BcpInfo bcpInfo;
-        private string filePath;
-        private OpUtil.Encoding fileEncoding;
-        private char fileSep;
-        private string fileName;
         private DataItem hitItem;
+        private string FilePath { get => hitItem.FilePath; }
+
+        private OpUtil.Encoding FileEncoding { get => hitItem.FileEncoding; }
+        private char FileSep { get => hitItem.FileSep; }
+        private string FileName { get => hitItem.FileName; }
+
         public VisualDisplayDialog(DataItem hitItem)
         {
             this.hitItem = hitItem;
-            this.filePath = hitItem.FilePath;
-            this.fileName = hitItem.FileName;
-            this.fileEncoding = hitItem.FileEncoding;
-            this.fileSep = hitItem.FileSep;
             InitializeComponent();
-            InitializeDropDown(hitItem);
+            InitializeDropDown();
         }
-        private void InitializeDropDown(DataItem hitItem)
+        private void InitializeDropDown()
         {
-            this.bcpInfo = new BcpInfo(filePath, fileEncoding, new char[] { fileSep });
+            this.bcpInfo = new BcpInfo(FilePath, FileEncoding, new char[] { FileSep });
             this.comboBox0.Items.AddRange(bcpInfo.ColumnArray);
             this.outListCCBL0.Items.AddRange(bcpInfo.ColumnArray);
-            this.chartTypesList.Items.Insert(0, "柱状图");
-            this.chartTypesList.SelectedIndex = 0;
         }
 
         protected override void  ConfirmButton_Click(object sender, EventArgs e)
@@ -56,7 +46,7 @@ namespace C2.Dialogs
         
 
             // 获取选中输入、输出各列数据
-            List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(filePath, fileEncoding).Split('\n'));
+            List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(FilePath, FileEncoding).Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
 
             List<List<string>> columnValues= Utils.FileUtil.GetColumns(indexs, hitItem, rows, upperLimit);
@@ -66,7 +56,7 @@ namespace C2.Dialogs
                 return;
             }
        
-            Utils.ControlUtil.PaintChart(columnValues, new List<string>() { this.fileName, this.fileName }, this.chartTypesList.Text);
+            Utils.ControlUtil.PaintChart(columnValues, new List<string>() { this.FileName, this.FileName }, this.chartTypesList.Text);
             // 存储图表挂件需要的数据
             hitItem.ChartType = this.chartTypesList.Text;
             hitItem.SelectedIndexs = indexs;
@@ -75,32 +65,32 @@ namespace C2.Dialogs
         }      
         private bool OptionNotReady()
         {
+            bool notReady = true;
             int status0 = String.IsNullOrEmpty(this.chartTypesList.Text) ? 1 : 0;
             int status1 = String.IsNullOrEmpty(this.comboBox0.Text) ? 2 : 0;
             int status2 = this.outListCCBL0.GetItemCheckIndex().Count == 0 ? 4 : 0;
-            if ((status0 | status1 | status2) > 0)
+            switch (status0 | status1 | status2)
             {
-                switch (status0 | status1 | status2)
-                {
-                    case 7:
-                    case 5:
-                    case 3:
-                    case 1:
-                        MessageBox.Show("请设置图表类型.");
-                        break;
-                    case 6:
-                    case 2:
-                        MessageBox.Show("请设置输入维度.");
-                        break;
-                    case 4:
-                        MessageBox.Show("请设置输出维度.");
-                        break;
-
-                }
-               
-                return true;
-            }
-            return false;
+                case 0:
+                    notReady = false;
+                    break;
+                case 7:
+                case 5:
+                case 3:
+                case 1:
+                    MessageBox.Show("请设置图表类型.");
+                    break;
+                case 6:
+                case 2:
+                    MessageBox.Show("请设置输入维度.");
+                    break;
+                case 4:
+                    MessageBox.Show("请设置输出维度.");
+                    break;
+                default:
+                    break;
+            }        
+            return notReady;
         }
  
         protected override void CancelButton_Click(object sender, EventArgs e)

@@ -87,6 +87,8 @@ namespace C2
             MdiClient = this.mdiWorkSpace;
             openFileDialog1 = new OpenFileDialog();
             this.NewForm(FormType.StartForm);
+            if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
+                OpenSavedTabs();
         }
         #region 初始化
         void InitializeTaskBar()
@@ -159,7 +161,20 @@ namespace C2
             //this.isBottomViewPanelMinimum = false;
 
         }
-
+        void OpenSavedTabs()
+        {
+            var tabs = Options.Current.GetValue<string[]>(OptionNames.Miscellaneous.LastOpenTabs);
+            if (!tabs.IsNullOrEmpty())
+            {
+                foreach (var filename in tabs)
+                {
+                    if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
+                    {
+                        OpenDocument(filename);
+                    }
+                }
+            }
+        }
         #endregion
         void SetAGoodLocation()
         {
@@ -455,9 +470,11 @@ namespace C2
                     break;
             }
         }
-        private void NewDocumentForm()
+        private void NewDocumentForm(string titile = "")
         {
             Document doc = CreateNewMap();
+            if (!string.IsNullOrEmpty(titile))
+                doc.Name = titile;
             DocumentForm form = new DocumentForm(doc);
             ShowForm(form);
         }
@@ -533,6 +550,7 @@ namespace C2
 
         public void OpenDocument(string filename, bool readOnly)
         {
+            // TODO DK 加载C1的文档
             BaseDocumentForm form = FindDocumentForm(filename);
             if (form != null)
             {
@@ -620,7 +638,15 @@ namespace C2
         }
         void NewDocumentForm_Click(object sender, System.EventArgs e)
         {
-            this.NewDocumentForm();
+            // 文档重命名
+            this.createNewModelForm.StartPosition = FormStartPosition.CenterScreen;
+            this.createNewModelForm.Owner = this;
+
+            this.createNewModelForm.OpenDocuments = OpendDocuments();
+            DialogResult dialogResult = this.createNewModelForm.ShowDialog();
+            // 新建业务视图
+            if (dialogResult == DialogResult.OK)
+                this.NewDocumentForm(this.createNewModelForm.ModelTitle);
         }
         void NewCanvasForm_Click(object sender, System.EventArgs e)
         {
@@ -663,7 +689,6 @@ namespace C2
                     MessageBox.Show("该数据文件不存在");
                 return;
             }
-            //this.ShowBottomPanel();
             this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
             this.ShowBottomPreview();
         }
@@ -775,6 +800,65 @@ namespace C2
             {
                 this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
             }
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (!TrySaveTabs())
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            if (!mdiWorkSpace.CloseAll())
+            {
+                e.Cancel = true;
+            }
+        }
+        bool TrySaveTabs()
+        {
+            var saveTabs = Options.Current.GetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
+            if (saveTabs == SaveTabsType.No)
+            {
+                return true;
+            }
+
+            // ensure document saved
+            bool cancel = false;
+            ComfirmSaveDocuments(ref cancel);
+            if (cancel)
+            {
+                return false;
+            }
+
+            // ask and save
+            string[] tabs = GetOpendDocuments();
+
+            if (tabs.Length > 0 && saveTabs == SaveTabsType.Ask)
+            {
+                if (tabs.Length > 0)
+                {
+                    var dialog = new SaveTabsDialog();
+                    var dr = dialog.ShowDialog(this);
+                    if (dr == DialogResult.Cancel)
+                        return false;
+
+                    if (dialog.DoNotAskAgain)
+                        Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, (dr == DialogResult.Yes) ? SaveTabsType.Yes : SaveTabsType.No);
+                    else
+                        Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
+
+                    if (dr == DialogResult.No)
+                    {
+                        Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, null);
+                        return true;
+                    }
+                }
+            }
+
+            Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, tabs);
+            return true;
         }
     }
 }

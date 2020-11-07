@@ -17,7 +17,7 @@ namespace C2.Controls.Left
             InitializeComponent();
             this.textButton.Text = modelTitle;
             this.oldTextString = modelTitle;
-            fullFilePath = Path.Combine(Global.GetCurrentDocument().UserPath, this.textButton.Text, this.textButton.Text + ".xml");
+            fullFilePath = Path.Combine(Global.UserWorkspacePath, this.textButton.Text, this.textButton.Text + ".bmd");
         }
 
         public string ModelTitle => this.textButton.Text;
@@ -33,9 +33,7 @@ namespace C2.Controls.Left
             //Global.GetMainForm().LoadDocument(this.textButton.Text);
             //TODO
             //打开blu模型
-            this.OpenToolStripMenuItem.Enabled = false;
-            this.RenameToolStripMenuItem.Enabled = false;
-            this.DeleteToolStripMenuItem.Enabled = false;
+
         }
 
         private void MindMapModelButton_Load(object sender, EventArgs e)
@@ -165,12 +163,19 @@ namespace C2.Controls.Left
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ModelDocument model = Global.GetModelDocumentDao().FindModelDocument(this.ModelTitle);
-            //模型没打开能够导出，否则文档非dirty才能导出
-            if (model == null)
-                this.ExportModel.Enabled = true;
+            if (Global.GetMainForm().OpendDocuments().Contains(ModelTitle))
+            {
+                this.OpenToolStripMenuItem.Enabled = false;
+                this.RenameToolStripMenuItem.Enabled = false;
+                this.DeleteToolStripMenuItem.Enabled = false;
+            }
             else
-                this.ExportModel.Enabled = !model.Modified;
+            {
+                this.OpenToolStripMenuItem.Enabled = true;
+                this.RenameToolStripMenuItem.Enabled = true;
+                this.DeleteToolStripMenuItem.Enabled = true;
+            }
+
         }
 
     }
