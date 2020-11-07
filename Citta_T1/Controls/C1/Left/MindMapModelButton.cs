@@ -74,7 +74,7 @@ namespace C2.Controls.Left
             if (Global.GetTaskBar().ContainModel(this.ModelTitle))
                 return;
             // 删除前用对话框确认
-            DialogResult rs = MessageBox.Show(String.Format("删除模型 {0}, 继续删除请点击 \"确定\"", ModelTitle),
+            DialogResult rs = MessageBox.Show(String.Format("删除模型: {0}, 继续删除请点击 \"确定\"", ModelTitle),
                     "删除 " + this.ModelTitle,
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Information);
@@ -82,11 +82,9 @@ namespace C2.Controls.Left
             if (rs != DialogResult.OK)
                 return;
 
-            string modelDic = System.IO.Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle);
+            string modelDic = System.IO.Path.Combine(Global.UserWorkspacePath, "业务视图", ModelTitle);
             FileUtil.DeleteDirectory(modelDic);
-            //Global.GetMyModelControl().RemoveModelButton(this);
-            //TODO
-            //删除blu模型
+            Global.GetMindMapModelControl().RemoveModelButton(this);
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)

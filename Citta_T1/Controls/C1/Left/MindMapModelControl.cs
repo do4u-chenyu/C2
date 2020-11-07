@@ -61,7 +61,7 @@ namespace C2.Controls.Left
 
         }
 
-        public void RemoveModelButton(ModelButton modelButton)
+        public void RemoveModelButton(MindMapModelButton modelButton)
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
             if (this.Controls.Count > 0)
