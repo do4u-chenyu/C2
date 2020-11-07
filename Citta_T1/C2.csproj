@@ -1366,6 +1366,9 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
+    <EmbeddedResource Include="Controls\C1\Left\MindMapModelButton.resx">
+      <DependentUpon>MindMapModelButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\BarChart.resx">
       <DependentUpon>BarChart.cs</DependentUpon>
     </EmbeddedResource>

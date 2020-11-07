@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelButton));
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.lelfPictureBox = new System.Windows.Forms.PictureBox();
             this.textButton = new C2.Controls.Common.NoFocusButton();
@@ -50,7 +49,6 @@
             // 
             // rightPictureBox
             // 
-            this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
             this.rightPictureBox.Location = new System.Drawing.Point(123, 3);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(23, 23);
@@ -60,11 +58,11 @@
             // 
             // lelfPictureBox
             // 
-            this.lelfPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("lelfPictureBox.Image")));
-            this.lelfPictureBox.Location = new System.Drawing.Point(2, 1);
-            this.lelfPictureBox.Margin = new System.Windows.Forms.Padding(2);
+            this.lelfPictureBox.Image = global::C2.Properties.Resources.业务视图;
+            this.lelfPictureBox.Location = new System.Drawing.Point(2, 7);
+            this.lelfPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.lelfPictureBox.Name = "lelfPictureBox";
-            this.lelfPictureBox.Size = new System.Drawing.Size(23, 23);
+            this.lelfPictureBox.Size = new System.Drawing.Size(16, 16);
             this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.lelfPictureBox.TabIndex = 1;
             this.lelfPictureBox.TabStop = false;
@@ -94,7 +92,7 @@
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 142);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // OpenToolStripMenuItem
@@ -181,6 +179,7 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
