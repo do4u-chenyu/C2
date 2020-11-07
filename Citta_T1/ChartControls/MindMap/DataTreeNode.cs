@@ -13,5 +13,7 @@ namespace C2.Controls.MapViews
         public DataTreeNode(Topic topic) : base(topic)
         {
         }
+
+        
     }
 }
