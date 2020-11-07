@@ -1,6 +1,5 @@
 ﻿using C2.Business.DataSource;
 using C2.Business.Model;
-using C2.Business.Option;
 using C2.Controls.Left;
 using C2.Controls.Move.Dt;
 using C2.Core;
@@ -47,13 +46,9 @@ namespace C2
         private string userName;
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
-        private C2.Dialogs.InputDataForm inputDataForm;
-        private C2.Dialogs.CreateNewModelForm createNewModelForm;
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-
-        private ModelDocumentDao modelDocumentDao;
-        private OptionDao optionDao;
-
+        private InputDataForm inputDataForm;
+        private CreateNewModelForm createNewModelForm;
+   
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
         delegate void TaskCallBack();
@@ -61,7 +56,6 @@ namespace C2
         delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
 
-        private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         private OpenFileDialog openFileDialog1;
         public MainForm(string userName)
         {
