@@ -85,7 +85,7 @@ namespace C2.Controls
 
             return tabs.ToArray();
         }
-        protected List<string> OpendDocuments()
+        public List<string> OpendDocuments()
         {
             char[] Chars = new char[] { ' ','*' };
             var tabs = from f in GetForms<BaseDocumentForm>()

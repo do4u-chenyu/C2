@@ -89,6 +89,7 @@
             this.ReviewToolStripMenuItem.Name = "ReviewToolStripMenuItem";
             this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.ReviewToolStripMenuItem.Text = "预览";
+            this.ReviewToolStripMenuItem.ToolTipText = "预览数据源部分信息";
             this.ReviewToolStripMenuItem.Click += new System.EventHandler(this.ReviewToolStripMenuItem_Click);
             // 
             // RenameToolStripMenuItem
@@ -103,6 +104,7 @@
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
             this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.RemoveToolStripMenuItem.Text = "卸载";
+            this.RemoveToolStripMenuItem.ToolTipText = "仅从数据源资源池中移除数据源,不修改数据源对应文件";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -115,6 +117,7 @@
             this.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem";
             this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.RefreshToolStripMenuItem.Text = "刷新";
+            this.RefreshToolStripMenuItem.ToolTipText = "刷新程序缓存,重新加载数据源";
             this.RefreshToolStripMenuItem.Click += new System.EventHandler(this.RefreshToolStripMenuItem_Click);
             // 
             // ExplorerToolStripMenuItem
