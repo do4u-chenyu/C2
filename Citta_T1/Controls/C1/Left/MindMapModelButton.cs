@@ -17,7 +17,7 @@ namespace C2.Controls.Left
             InitializeComponent();
             this.textButton.Text = modelTitle;
             this.oldTextString = modelTitle;
-            fullFilePath = Path.Combine(Global.UserWorkspacePath, this.textButton.Text, this.textButton.Text + ".bmd");
+            fullFilePath = Path.Combine(Global.UserWorkspacePath,"业务视图", this.textButton.Text, this.textButton.Text + ".bmd");
         }
 
         public string ModelTitle => this.textButton.Text;
@@ -29,11 +29,7 @@ namespace C2.Controls.Left
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // 文件打开后,不能重复打开,不能删除,不能重命名
-            //Global.GetMainForm().LoadDocument(this.textButton.Text);
-            //TODO
-            //打开blu模型
-
+            Global.GetMainForm().OpenDocument(fullFilePath);
         }
 
         private void MindMapModelButton_Load(object sender, EventArgs e)
