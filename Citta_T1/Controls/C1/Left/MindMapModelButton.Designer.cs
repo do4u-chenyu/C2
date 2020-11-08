@@ -50,7 +50,6 @@
             // 
             // rightPictureBox
             // 
-            this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
             this.rightPictureBox.Location = new System.Drawing.Point(123, 3);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(23, 23);

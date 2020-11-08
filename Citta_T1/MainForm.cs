@@ -72,7 +72,6 @@ namespace C2
             this.bottomViewPanel.Height = 40;
             this.isLeftViewPanelMinimum = true;
             this.leftToolBoxPanel.Width = 10;
-            this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
 
             InitializeTaskBar();
             InitializeShortcutKeys();
