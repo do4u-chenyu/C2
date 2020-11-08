@@ -10,15 +10,14 @@ using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
 using C2.Model.Widgets;
-using System;
 using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
-using C2.ChartControls.MindMap;
 
 namespace C2.Forms
 {

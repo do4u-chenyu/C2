@@ -102,6 +102,7 @@ namespace C2.Forms
             this.multiChartsView1.Name = "multiChartsView1";
             this.multiChartsView1.SelectedIndex = -1;
             this.multiChartsView1.SelectedPage = null;
+            this.multiChartsView1.ShowBorder = C2.Controls.BoderType.NoLeft;
             this.multiChartsView1.Size = new System.Drawing.Size(574, 410);
             this.multiChartsView1.TabIndex = 0;
             this.multiChartsView1.TabsMenuStrip = this.MenuStripChartTab;
