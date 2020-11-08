@@ -47,7 +47,7 @@ namespace C2
             this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
-            this.leftFoldPanel = new System.Windows.Forms.Panel();
+            this.leftFoldPanel = new Controls.C1.Left.LeftFoldButton();
             this.leftFoldButton = new System.Windows.Forms.PictureBox();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -283,7 +283,6 @@ namespace C2
             // 
             // leftFoldPanel
             // 
-            this.leftFoldPanel.Controls.Add(this.leftFoldButton);
             this.leftFoldPanel.Location = new System.Drawing.Point(0, 200);
             this.leftFoldPanel.Margin = new System.Windows.Forms.Padding(0);
             this.leftFoldPanel.Name = "leftFoldPanel";
@@ -689,7 +688,7 @@ namespace C2
         private Button button1;
         private PictureBox leftFoldButton;
         private Controls.TaskBar taskBar;
-        private Panel leftFoldPanel;
+        private Controls.C1.Left.LeftFoldButton leftFoldPanel;
         private Panel workSpacePanel;
         private Panel bottomViewPanel;
         private Controls.Bottom.BottomPreviewControl bottomPreview;

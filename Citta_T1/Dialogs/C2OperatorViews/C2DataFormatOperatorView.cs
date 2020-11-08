@@ -19,7 +19,7 @@ namespace C2.Dialogs.C2OperatorViews
         {
             InitializeComponent();
             InitializeComponentManual(); // 设计器不支持复用基类中的tablelayoutpanel,需要手工初始化。
-            InitByDataSource();
+            InitializeDataSource();
             LoadOption();
 
         }
@@ -41,11 +41,11 @@ namespace C2.Dialogs.C2OperatorViews
         }
 
         #region 初始化配置
-        private void InitByDataSource()
+        protected override void InitializeDataSource()
         {
 
             // 初始化左右表数据源配置信息
-            this.InitDataSource();
+            this.InitializeDataSource();
             // 窗体自定义的初始化逻辑
             this.comboBox0.Items.AddRange(nowColumnsName0);
             this.oldOutName0 = this.operatorWidget.Option.GetOptionSplit("outname").ToList();

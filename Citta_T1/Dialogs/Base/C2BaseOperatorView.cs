@@ -48,7 +48,7 @@ namespace C2.Dialogs.Base
             comboBoxes = new List<ComboBox>() { this.comboBox0 };
         }
 
-        protected void InitDataSource()
+        protected virtual void InitializeDataSource()
         {
             dataInfo = operatorWidget.DataSourceItem;
 

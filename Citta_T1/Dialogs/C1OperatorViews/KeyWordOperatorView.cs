@@ -28,7 +28,7 @@ namespace C2.OperatorViews
             this.comparedItems = new string[] {
             "命中提取",
             "过滤去噪"};
-            InitByDataSource();
+            InitializeDataSource();
             LoadOption();
         }
        
@@ -39,10 +39,10 @@ namespace C2.OperatorViews
         }
 
         #region 加载连接数据
-        private void InitByDataSource()
+        protected override void InitializeDataSource()
         {
             // 初始化左右表数据源配置信息
-            this.InitDataSource();
+            base.InitializeDataSource();
             // 每个控件自定义的数据源配置逻辑
             dataInfo.TryGetValue("encoding1", out keywordEncoding);
             dataInfo.TryGetValue("extType1", out keywordExtType);

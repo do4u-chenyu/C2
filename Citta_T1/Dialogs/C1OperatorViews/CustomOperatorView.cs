@@ -41,17 +41,17 @@ namespace C2.OperatorViews
             this.oldOutList1 = this.outListCCBL1.GetItemCheckIndex();
 
             //初始化配置内容
-            InitByDataSource();
+            InitializeDataSource();
             //加载配置内容
             LoadOption();
             oldResultColumns = opControl.Option.GetOption("resultColumns");
         }
 
         #region 初始化配置
-        private void InitByDataSource()
+        protected override void InitializeDataSource()
         {
             // 初始化左右表数据源配置信息
-            this.InitDataSource();
+            base.InitializeDataSource();
             // 窗体自定义的初始化逻辑
 
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
