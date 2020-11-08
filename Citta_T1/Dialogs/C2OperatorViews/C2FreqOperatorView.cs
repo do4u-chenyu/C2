@@ -26,7 +26,7 @@ namespace C2.Dialogs.C2OperatorViews
         protected override void InitializeDataSource()
         {
             // 初始化左右表数据源配置信息
-            this.InitializeDataSource();
+            base.InitializeDataSource();
             // 窗体自定义的初始化逻辑
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
 

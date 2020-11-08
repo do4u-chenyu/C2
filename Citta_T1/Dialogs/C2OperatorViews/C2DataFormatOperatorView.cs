@@ -45,7 +45,7 @@ namespace C2.Dialogs.C2OperatorViews
         {
 
             // 初始化左右表数据源配置信息
-            this.InitializeDataSource();
+            base.InitializeDataSource();
             // 窗体自定义的初始化逻辑
             this.comboBox0.Items.AddRange(nowColumnsName0);
             this.oldOutName0 = this.operatorWidget.Option.GetOptionSplit("outname").ToList();
