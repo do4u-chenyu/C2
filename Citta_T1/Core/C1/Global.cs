@@ -23,8 +23,6 @@ namespace C2.Core
         private static Panel bottomViewPanle;
         private static Panel leftToolBoxPanel;
         private static TaskBar taskBar;
-        private static PictureBox minMaxPictureBox;
-        private static bool bottomViewPanelMinimum;
         private static MindMapModelControl mindMapModelControl;
 
 
@@ -134,12 +132,11 @@ namespace C2.Core
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
         public static void SetLogView(BottomLogControl lv) { logView = lv; }
         public static void SetBottomViewPanel(Panel bv) { bottomViewPanle = bv; }
-        public static void SetPictureBox(PictureBox mmpb) { minMaxPictureBox = mmpb; }
-        public static void SetBottomViewPanelMinimum(bool bvpm) { bottomViewPanelMinimum = bvpm; }
         public static void SetMindMapModelControl(MindMapModelControl mmmc) { mindMapModelControl = mmmc; }
         private static string workspaceDirectory;           // 用户模型工作目录
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
         public static string UserWorkspacePath { get => Path.Combine( workspaceDirectory,mainForm.UserName); }
+        public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public const float Factor = 1.3F;
         private static string versionType;
         public static string VersionType { get => versionType; set => versionType = value; }

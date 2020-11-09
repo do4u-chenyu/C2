@@ -33,7 +33,6 @@ namespace C2.Forms
         public OptionDao OptionDao { get { return this.optionDao; } }
         public ModelDocumentDao ModelDocumentDao { get { return this.modelDocumentDao; } }
         public NaviViewControl NaviViewControl { get { return this.naviViewControl; } }
-        public event EventHandler DocumentActived;
         #region 运行委托
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
@@ -46,14 +45,18 @@ namespace C2.Forms
         public CanvasForm()
         {
             InitializeComponent();
+            InitializeDao();
+            InitializeMainFormEventHandler();
+            InitializeControlsLocation();
+        }
+
+        private void InitializeDao()
+        {
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
             this.userName = Global.GetMainForm().UserName;
-            InitializeMainFormEventHandler();
-            InitializeControlsLocation();
-
-            
         }
+
         public CanvasForm(ModelDocument document)
             :this()
         {

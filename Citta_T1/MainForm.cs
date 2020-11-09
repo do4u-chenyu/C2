@@ -40,7 +40,6 @@ namespace C2
         TabBarButton BtnNew;
         FindDialog MyFindDialog;
         ShortcutKeysTable ShortcutKeys;
-        StartForm startPage;
         #endregion
 
         private string userName;
@@ -148,11 +147,7 @@ namespace C2
             Global.SetMyModelControl(this.myModelControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
-            Global.SetPictureBox(this.minMaxPictureBox);
             Global.SetMindMapModelControl(this.mindMapModelControl);
-            //Global.SetBottomViewPanelMinimum(this.isBottomViewPanelMinimum);
-            //this.isBottomViewPanelMinimum = false;
-
         }
         void OpenSavedTabs()
         {
@@ -223,6 +218,10 @@ namespace C2
         }
         private void LoadDocuments()
         {
+            // 将用户本地保存的模型文档加载到左侧myModelControl
+            string[] bsTitles = ModelsInfo.LoadAllModelTitle(Global.BusinessViewPath);
+            foreach (string title in bsTitles)
+                this.mindMapModelControl.AddMindMapModel(title);
             //if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
             //{
             //    this.modelTitlePanel.AddModel("我的新模型");
