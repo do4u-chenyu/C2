@@ -13,7 +13,6 @@ namespace C2.ChartPageView
     public class MultiChartsView : MyTabControl
     {
         Document _Document;
-        SpecialTabItem BtnNewChart;
         List<ToolStripItem> LastCustomTabMenus { get; set; }
 
         public event EventHandler NewChartPage;
