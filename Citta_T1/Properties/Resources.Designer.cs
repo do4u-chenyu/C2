@@ -181,6 +181,16 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap attachment_w_icon {
+            get {
+                object obj = ResourceManager.GetObject("attachment_w_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Icon avg_icon {
@@ -3108,7 +3118,8 @@ namespace C2.Properties {
         ///		&lt;item name=&quot;About&quot;&gt;关于&lt;/item&gt;
         ///		&lt;item name=&quot;Menu&quot;&gt;菜 单&lt;/item&gt;
         ///		&lt;item name=&quot;Open&quot;&gt;打开&lt;/item&gt;
-        ///		&lt;item name=&quot;N [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;item name=&quot;New&quot;&gt;新建&lt;/item&gt;
+        ///		&lt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string zh_CHS {
             get {

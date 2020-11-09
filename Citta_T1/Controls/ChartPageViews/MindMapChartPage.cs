@@ -198,6 +198,7 @@ namespace C2.ChartPageView
             MenuAddIcon.Text = Lang.GetTextWithEllipsis("Icon");
             MenuAddRemark.Text = Lang.GetTextWithEllipsis("Notes");
             MenuAddOperator.Text = Lang._("Operator");
+            MenuAddAttachment.Text = Lang._("Attachment");
             MenuAddMaxOp.Text = Lang._("Max");
             MenuAddAIOp.Text = Lang._("AI");
             MenuAddModelOp.Text = Lang._("Model");
@@ -235,6 +236,7 @@ namespace C2.ChartPageView
         ToolStripMenuItem MenuAddIcon;
         ToolStripMenuItem MenuAddRemark;
         ToolStripMenuItem MenuAddOperator;
+        ToolStripMenuItem MenuAddAttachment;
         ToolStripMenuItem MenuAddMaxOp;
         ToolStripMenuItem MenuAddAIOp;
         ToolStripMenuItem MenuAddModelOp;
@@ -282,6 +284,7 @@ namespace C2.ChartPageView
             MenuAddIcon = new ToolStripMenuItem();
             MenuAddRemark = new ToolStripMenuItem();
             MenuAddOperator = new ToolStripMenuItem();
+            MenuAddAttachment = new ToolStripMenuItem();
             MenuAddMaxOp = new ToolStripMenuItem();
             MenuAddAIOp = new ToolStripMenuItem();
             MenuAddModelOp = new ToolStripMenuItem();
@@ -355,7 +358,8 @@ namespace C2.ChartPageView
                 MenuAddIcon,
                 MenuAddRemark,
                 MenuAddOperator,
-                MenuAddModelOp});
+                MenuAddModelOp,
+                MenuAddAttachment});
             MenuAdd.Name = "MenuAdd";
             MenuAdd.Text = "Add";
 
@@ -377,6 +381,12 @@ namespace C2.ChartPageView
             MenuAddOperator.Name = "MenuAddOperator";
             MenuAddOperator.Text = "Operator";
             MenuAddOperator.Click += new System.EventHandler(MenuAddOperator_Click);
+
+            //MenuAddAttachment
+            MenuAddAttachment.Image = C2.Properties.Resources.attachment_w_icon;
+            MenuAddAttachment.Name = "MenuAddAttachment";
+            MenuAddAttachment.Text = "Attachment";
+            MenuAddAttachment.Click += new System.EventHandler(MenuAddAttachment_Click);
 
             MenuAddModelOp.Name = "MenuAddModelOp";
             MenuAddModelOp.Text = "Model";
@@ -507,9 +517,6 @@ namespace C2.ChartPageView
             //
             contextMenu.ResumeLayout();
         }
-
-
-
 
         protected override void OnChartContextMenuStripOpening(CancelEventArgs e)
         {
@@ -660,6 +667,10 @@ namespace C2.ChartPageView
             mindMapView1.AddOperator();
         }
 
+        void MenuAddAttachment_Click(object sender, EventArgs e)
+        {
+            
+        }
 
         void MenuAddModelOp_Click(object sender, EventArgs e)
         {
