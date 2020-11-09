@@ -44,7 +44,7 @@ namespace C2.Controls.MapViews
         }
         public override TreeNode BuildTree(Topic topic, TreeNodeCollection nodes)
         {
-            DataTreeNode node = new DataTreeNode(topic);
+            TopicTreeNode node = new TopicTreeNode(topic);
             node.ImageIndex = node.SelectedImageIndex = 0;
             nodes.Add(node);
             AddWidgetData(topic, node.Nodes);
@@ -62,7 +62,6 @@ namespace C2.Controls.MapViews
         {
             DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
             ResultWidget rs      = topic.FindWidget<ResultWidget>();
-            List<DataItem> dataItems = new List<DataItem> { };
             if (dtw != null)
             {
                 foreach (DataItem dataItem in dtw.DataItems)

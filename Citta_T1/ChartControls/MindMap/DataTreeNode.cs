@@ -5,21 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace C2.Controls.MapViews
 {
-    class DataTreeNode : TopicTreeNode
+    class DataTreeNode : TreeNode
     {
         private String _text;
-        public DataTreeNode(Topic topic) : base(topic)
-        {
-        }
-
-        public DataTreeNode(String text)
-        {
-            Text1 = text;
-        }
-
-        public string Text1 { get => _text; set => _text = value; }
     }
 }
