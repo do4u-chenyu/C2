@@ -897,11 +897,11 @@ namespace C2.Forms
                 st = (sob as Widget).Container as Topic;
 
             designerControl.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
+
         }
         
         void ShowProperty(object[] objects)
         {
-            var selectedPropertyPage = tabControl2.SelectedPage;
             var objectType = objects.GetType().GetElementType();
             var pb = GetPropertyBox(objectType);//[0].GetType()
             if (pb != null)
@@ -915,7 +915,6 @@ namespace C2.Forms
                     tabControl2.InsertPage(0, pb, Properties.Resources.property);
                     
                 }
-                tabControl2.ActivePage(pb);
                 CurrentPropertyBox = pb;
                 pb.SelectedObjects = objects;
             }
@@ -945,8 +944,7 @@ namespace C2.Forms
             //}
 
             //
-            if (selectedPropertyPage != null && tabControl2.TabPages.Contains(selectedPropertyPage) && tabControl2.SelectedPage != selectedPropertyPage)
-                tabControl2.SelectedPage = selectedPropertyPage;
+            tabControl2.SelectedPage = pb;
 
             //
             objectTree1.SelectedObjects = objects;
