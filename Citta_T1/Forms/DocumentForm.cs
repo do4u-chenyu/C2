@@ -1047,7 +1047,7 @@ namespace C2.Forms
         void ShowFindDialog(FindDialog.FindDialogMode mode)
         {
             {
-                Program.MainForm.ShowFindDialog(this.ActiveChartBox, mode);
+                Global.GetMainForm().ShowFindDialog(this.ActiveChartBox, mode);
             }
         }
 
