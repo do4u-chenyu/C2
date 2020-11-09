@@ -484,28 +484,19 @@ namespace C2
         
         Document CreateNewMap()
         {
-            Document doc = new Document();
-            doc.Name = Lang._("New Document");
-            doc.Author = System.Environment.UserName;
-
-            for (int i = 0; i < Global.ChartNum; i++)
-            {
-                MindMap map = new MindMap();
-                var name = Global.ChartNames[i];
-                map.Name = string.Format("{0}", name);
-                
-                map.LayoutType = Global.ChartOptions[name];
-                map.Root.Text = Lang._("Center Topic");
-                map.Author = System.Environment.UserName;
-                if (ChartThemeManage.Default.DefaultTheme != null)
-                {
-                    map.ApplyTheme(ChartThemeManage.Default.DefaultTheme);
-                }
-                doc.Charts.Add(map);
-                //doc.Modified = true;
-            }
+            Document doc = LoadDocumentTemplate();
+            doc.Modified = true;
             return doc;
         }
+
+        private Document LoadDocumentTemplate()
+        {
+            Document doc = Document.LoadXml("组织架构图", Properties.Resources.组织架构图);
+            if (doc.Charts.Count == 3 && doc.Charts[1].Name == "组织架构视图" && doc.Charts[1] is MindMap)
+                return doc;
+            return null;
+        }
+
         public void ShowFindDialog(ChartControl chartControl, FindDialog.FindDialogMode mode)
         {
             if (MyFindDialog == null || MyFindDialog.IsDisposed)
