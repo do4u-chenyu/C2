@@ -200,9 +200,9 @@ namespace C2.Controls.Top
 
         private void InitializeToolTip()
         {    
-            this.toolTip1.SetToolTip(this.formatButton, HelpUtil.FormatOperatorHelpInfo);
-            this.toolTip1.SetToolTip(this.undoButton, HelpUtil.UndoButtonHelpInfo);
-            this.toolTip1.SetToolTip(this.redoButton, HelpUtil.RedoButtonHelpInfo);
+            //this.toolTip1.SetToolTip(this.formatButton, HelpUtil.FormatOperatorHelpInfo);
+            //this.toolTip1.SetToolTip(this.undoButton, HelpUtil.UndoButtonHelpInfo);
+            //this.toolTip1.SetToolTip(this.redoButton, HelpUtil.RedoButtonHelpInfo);
         }
 
         private void CommonUse_MouseDown(object sender, MouseEventArgs e)
@@ -243,23 +243,8 @@ namespace C2.Controls.Top
             return text;
         }
 
-        private void FormatButton_MouseClick(object sender, MouseEventArgs e)
+         void FormatButton_MouseClick(object sender, MouseEventArgs e)
         {
-            ModelDocument currentModel = Global.GetCurrentModelDocument();
-            WorldMap curWorldMap = Global.GetCurrentModelDocument().WorldMap;
-            // 文档为空时,返回,不需要触发dirty动作
-            if (currentModel.ModelElements.Count == 0)
-                return;
-            Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
-            idPtsDict = ControlUtil.SaveElesWorldCord(currentModel.ModelElements);
-            BaseCommand cmd = new BatchMoveCommand(idPtsDict);
-            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), cmd);
-
-            QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
-            quickformatWrapper.TreeGroup();
-            Global.GetMainForm().SetDocumentDirty();
-            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
 
 
@@ -311,6 +296,25 @@ namespace C2.Controls.Top
         private void SaveModelButton_Click(object sender, EventArgs e)
         {
             Global.GetCurrentModelDocument().Save();
+        }
+
+        private void formatButton_Click(object sender, EventArgs e)
+        {
+            ModelDocument currentModel = Global.GetCurrentModelDocument();
+            WorldMap curWorldMap = Global.GetCurrentModelDocument().WorldMap;
+            // 文档为空时,返回,不需要触发dirty动作
+            if (currentModel.ModelElements.Count == 0)
+                return;
+            Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
+            idPtsDict = ControlUtil.SaveElesWorldCord(currentModel.ModelElements);
+            BaseCommand cmd = new BatchMoveCommand(idPtsDict);
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), cmd);
+
+            QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
+            quickformatWrapper.TreeGroup();
+            Global.GetMainForm().SetDocumentDirty();
+            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
     }
 }
