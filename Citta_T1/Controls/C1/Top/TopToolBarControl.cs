@@ -248,12 +248,6 @@ namespace C2.Controls.Top
         }
 
 
-        private void MoreButton_MouseClick(object sender, MouseEventArgs e)
-        {
-            ConfigForm config = new ConfigForm();
-            config.ShowDialog();
-        }
-
         public void UndoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Undo(Global.GetCurrentModelDocument());
@@ -315,6 +309,12 @@ namespace C2.Controls.Top
             Global.GetMainForm().SetDocumentDirty();
             this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
             this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+        }
+
+        private void moreButton_Click(object sender, EventArgs e)
+        {
+            ConfigForm config = new ConfigForm();
+            config.ShowDialog();
         }
     }
 }

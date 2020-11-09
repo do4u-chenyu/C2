@@ -47,6 +47,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +69,7 @@
             this.moreButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moreButton.Name = "moreButton";
             this.moreButton.Size = new System.Drawing.Size(23, 22);
-            this.moreButton.Click += new System.EventHandler(this.formatButton_Click);
+            this.moreButton.Click += new System.EventHandler(this.moreButton_Click);
             // 
             // ImportModel
             // 
@@ -118,7 +119,7 @@
             this.movePictureBox.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePictureBox.Name = "movePictureBox";
             this.movePictureBox.Size = new System.Drawing.Size(23, 22);
-            this.movePictureBox.Click += new System.EventHandler(this.formatButton_Click);
+            this.movePictureBox.Click += new System.EventHandler(this.MovePictureBox_Click);
             // 
             // framePictureBox
             // 
@@ -182,13 +183,14 @@
             this.toolStripSeparator2,
             this.ImportModel,
             this.formatButton,
-            this.moreButton,
             this.remarkPictureBox,
             this.toolStripSeparator3,
             this.zoomUpPictureBox,
             this.zoomDownPictureBox,
+            this.toolStripSeparator4,
             this.movePictureBox,
-            this.framePictureBox});
+            this.framePictureBox,
+            this.moreButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(990, 25);
@@ -209,6 +211,11 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator3";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // TopToolBarControl
             // 
@@ -244,6 +251,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private Controls.ToolStripPro toolStrip1;
 
     }
