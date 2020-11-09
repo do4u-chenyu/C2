@@ -1,4 +1,5 @@
-﻿namespace C2.Utils
+﻿using System.Windows.Forms;
+namespace C2.Utils
 {
     class HelpUtil
     {
@@ -24,5 +25,10 @@
         public static string UndoButtonHelpInfo = "撤销按钮:撤销当前操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的撤销.";
         public static string RedoButtonHelpInfo = "恢复按钮:恢复上一步的撤销操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的恢复.";
         public static string FormatOperatorHelpInfo = "一键排版:智能调整元素版面位置.";
+
+        public static DialogResult ShowMessageBox(string message, string caption, MessageBoxIcon type = MessageBoxIcon.Information)
+        {
+            return MessageBox.Show(message, caption, MessageBoxButtons.OK, type);
+        }
     }
 }
