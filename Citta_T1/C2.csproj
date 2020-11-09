@@ -1532,6 +1532,9 @@
     <EmbeddedResource Include="Dialogs\C1OperatorViews\UnionOperatorView.resx">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2AvgOperatorView.resx">
+      <DependentUpon>C2AvgOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2FilterOperatorView.resx">
       <DependentUpon>C2FilterOperatorView.cs</DependentUpon>
     </EmbeddedResource>

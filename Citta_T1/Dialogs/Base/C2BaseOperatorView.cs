@@ -17,7 +17,6 @@ namespace C2.Dialogs.Base
     public partial class C2BaseOperatorView : BaseOperatorView
     {
         protected OperatorWidget operatorWidget;
-        protected string dataSourceFFP0;            // 左表数据源路径
         protected string[] nowColumnsName0;         // 当前左表(pin0)数据源表头字段(columnName)
         protected List<string> oldOutName0;         // 上一次（左输出）输出表头字段
         protected List<int> oldOutList0;            // 上一次用户选择的左表输出字段的索引
