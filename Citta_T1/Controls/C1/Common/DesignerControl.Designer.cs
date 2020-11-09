@@ -80,7 +80,7 @@
             this.changeOpButton.Name = "changeOpButton";
             this.changeOpButton.Size = new System.Drawing.Size(98, 23);
             this.changeOpButton.TabIndex = 5;
-            this.changeOpButton.Text = "修改";
+            this.changeOpButton.Text = "配置";
             this.changeOpButton.UseVisualStyleBackColor = true;
             this.changeOpButton.Click += new System.EventHandler(this.Button1_Click);
             // 

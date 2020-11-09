@@ -120,7 +120,7 @@ namespace C2.Controls.MapViews
             if (ChartPage != null)
             {
                 DocumentTreeNode nodeDoc = new DocumentTreeNode(ChartPage);
-                nodeDoc.ImageIndex = nodeDoc.SelectedImageIndex = 0;
+                nodeDoc.ImageIndex = nodeDoc.SelectedImageIndex = 1;
                 Nodes.Add(nodeDoc);
 
                 //========
@@ -142,7 +142,7 @@ namespace C2.Controls.MapViews
         public virtual TreeNode BuildTree(Topic topic, TreeNodeCollection nodes)
         {
             TopicTreeNode node = new TopicTreeNode(topic);
-            node.ImageIndex = node.SelectedImageIndex = 1;
+            node.ImageIndex = node.SelectedImageIndex = 0;
             nodes.Add(node);
 
             foreach (Topic subTopic in topic.Children)

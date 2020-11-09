@@ -753,6 +753,7 @@
     <Compile Include="Forms\CanvasForm.Designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Widgets\AttachmentWidget.cs" />
     <Compile Include="Model\Widgets\ChartWidget.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -915,9 +916,6 @@
     <Compile Include="Core\Delegates\PropertyChangedEventArgs.cs" />
     <Compile Include="Core\DocumentType.cs" />
     <Compile Include="Core\DocumentTypeGroup.cs" />
-    <Compile Include="Core\DotNet3\ExtensionAttribute.cs" />
-    <Compile Include="Core\DotNet3\Func.cs" />
-    <Compile Include="Core\DotNet3\ListExtensions.cs" />
     <Compile Include="Core\Exports\BitmapEngine.cs" />
     <Compile Include="Core\Exports\ChartsExportEngine.cs" />
     <Compile Include="Core\Exports\CsvEngine.cs" />

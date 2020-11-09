@@ -30,6 +30,8 @@ namespace C2.Model.Widgets
 
         public ProgressBarWidget()
         {
+            DisplayIndex = 7;
+            Alignment = WidgetAlignment.Bottom;
         }
 
         [DefaultValue(100), Browsable(false)]

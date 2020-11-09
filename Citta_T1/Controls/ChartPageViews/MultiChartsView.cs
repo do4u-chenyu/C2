@@ -13,7 +13,6 @@ namespace C2.ChartPageView
     public class MultiChartsView : MyTabControl
     {
         Document _Document;
-        SpecialTabItem BtnNewChart;
         List<ToolStripItem> LastCustomTabMenus { get; set; }
 
         public event EventHandler NewChartPage;
@@ -237,7 +236,7 @@ namespace C2.ChartPageView
                 menuItems = ((BaseChartPage)TabPages[item.DisplayIndex]).CustomTabMenuItems();
                 if (menuItems != null && menuItems.Count > 0)
                 {
-                    int index = 2;
+                    int index = 1;
                     foreach (var mi in menuItems)
                         TabsMenuStrip.Items.Insert(index++, mi);
                 }

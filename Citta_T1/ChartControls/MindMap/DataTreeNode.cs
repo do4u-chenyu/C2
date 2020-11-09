@@ -5,15 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace C2.Controls.MapViews
 {
-    class DataTreeNode : TopicTreeNode
+    class DataTreeNode : TreeNode
     {
-        public DataTreeNode(Topic topic) : base(topic)
-        {
-        }
-
-        
+        private String _text;
     }
 }

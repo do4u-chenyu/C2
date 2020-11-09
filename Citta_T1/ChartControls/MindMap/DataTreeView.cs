@@ -11,6 +11,7 @@ using System.Drawing;
 using C2.Core;
 using C2.Model.Documents;
 using C2.Model;
+using C2.Model.Widgets;
 
 namespace C2.Controls.MapViews
 {
@@ -23,7 +24,7 @@ namespace C2.Controls.MapViews
             if (ChartPage != null)
             {
                 DocumentTreeNode nodeDoc = new DocumentTreeNode(ChartPage);
-                nodeDoc.ImageIndex = nodeDoc.SelectedImageIndex = 0;
+                nodeDoc.ImageIndex = nodeDoc.SelectedImageIndex = 1;
                 Nodes.Add(nodeDoc);
 
                 //========
@@ -43,9 +44,10 @@ namespace C2.Controls.MapViews
         }
         public override TreeNode BuildTree(Topic topic, TreeNodeCollection nodes)
         {
-            DataTreeNode node = new DataTreeNode(topic);
-            node.ImageIndex = node.SelectedImageIndex = 3;
+            TopicTreeNode node = new TopicTreeNode(topic);
+            node.ImageIndex = node.SelectedImageIndex = 0;
             nodes.Add(node);
+            AddWidgetData(topic, node.Nodes);
 
             foreach (Topic subTopic in topic.Children)
             {
@@ -55,6 +57,29 @@ namespace C2.Controls.MapViews
             if (!topic.Folded)
                 node.Expand();
             return node;
+        }
+        private void AddWidgetData(Topic topic, TreeNodeCollection nodes)
+        {
+            DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
+            ResultWidget rs      = topic.FindWidget<ResultWidget>();
+            if (dtw != null)
+            {
+                foreach (DataItem dataItem in dtw.DataItems)
+                {
+                    TreeNode node = new TreeNode(dataItem.FileName);
+                    node.ImageIndex = node.SelectedImageIndex = 3;
+                    nodes.Add(node);
+                }
+            }
+            if (rs != null)
+            {
+                foreach (DataItem dataItem in rs.DataItems)
+                {
+                    TreeNode node = new TreeNode(dataItem.FileName);
+                    node.ImageIndex = node.SelectedImageIndex = 2;
+                    nodes.Add(node);
+                }
+            }
         }
     }
 }
