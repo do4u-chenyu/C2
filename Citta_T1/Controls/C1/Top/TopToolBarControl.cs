@@ -8,6 +8,7 @@ using C2.Dialogs;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -18,8 +19,11 @@ namespace C2.Controls.Top
         private bool selectRemark;
         private bool selectFrame;
         private bool selectDrag;
+        [Browsable(false)]
         public bool SelectRemark { get => selectRemark; set => selectRemark = value; }
+        [Browsable(false)]
         public bool SelectDrag { get => selectDrag; set => selectDrag = value; }
+        [Browsable(false)]
         public bool SelectFrame { get => selectFrame; set => selectFrame = value; }
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopToolBarControl));
         public TopToolBarControl()
@@ -30,6 +34,8 @@ namespace C2.Controls.Top
             SelectDrag = false;
             SelectFrame = false;
             SelectRemark = false;
+            this.toolStrip1.BackColor = Color.FromArgb(230, 237, 246);
+            this.toolStrip1.ForeColor = Color.FromArgb(40, 90, 177);
         } // 恢复到编辑模式
         public void ResetStatus()
         {

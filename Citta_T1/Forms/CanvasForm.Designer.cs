@@ -73,12 +73,13 @@
             this.topToolBarControl.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.topToolBarControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.topToolBarControl.Location = new System.Drawing.Point(0, 0);
+            this.topToolBarControl.Margin = new System.Windows.Forms.Padding(0);
             this.topToolBarControl.Name = "topToolBarControl";
             this.topToolBarControl.SelectDrag = false;
             this.topToolBarControl.SelectFrame = false;
             this.topToolBarControl.SelectRemark = false;
             this.topToolBarControl.Size = new System.Drawing.Size(913, 28);
-            this.topToolBarControl.TabIndex = 25;
+            this.topToolBarControl.TabIndex = 43;
             this.topToolBarControl.Paint += new System.Windows.Forms.PaintEventHandler(this.topToolBarControl_Load);
             // 
             // currentModelRunBackLab
