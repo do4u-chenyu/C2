@@ -25,7 +25,17 @@ namespace C2.Utils
         public static string UndoButtonHelpInfo = "撤销按钮:撤销当前操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的撤销.";
         public static string RedoButtonHelpInfo = "恢复按钮:恢复上一步的撤销操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的恢复.";
         public static string FormatOperatorHelpInfo = "一键排版:智能调整元素版面位置.";
-
+        /// <summary>
+        /// MessageBoxIcon.Hand 
+        /// MessageBoxIcon.Asterisk      星号
+        /// MessageBoxIcon.Exclamation
+        /// MessageBoxIcon.Information   通知
+        /// MessageBoxIcon.Warning       警告
+        /// MessageBoxIcon.Error         错误
+        /// MessageBoxIcon.Question      疑问
+        /// MessageBoxIcon.Stop         
+        /// MessageBoxIcon.None          无图标
+        /// </summary>
         public static DialogResult ShowMessageBox(string message, string caption, MessageBoxIcon type = MessageBoxIcon.Information)
         {
             return MessageBox.Show(message, caption, MessageBoxButtons.OK, type);
