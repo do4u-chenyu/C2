@@ -51,7 +51,7 @@ namespace C2.Controls
                 this.StaticImage = null;
             }
             this.StaticImage = this.CreateWorldImage();
-            ModelDocument currentDoc = Global.GetCurrentDocument();
+            ModelDocument currentDoc = Global.GetCurrentModelDocument();
             Point mapOrigin = currentDoc.WorldMap.MapOrigin;
             float factor = currentDoc.WorldMap.ScreenFactor;
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * factor);
@@ -75,7 +75,7 @@ namespace C2.Controls
 
         public void InitDragWrapper()
         {
-            Factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            Factor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
         }
         public void DragUp( MouseEventArgs e)
         {
@@ -117,7 +117,7 @@ namespace C2.Controls
         private void RepaintCtrs()
         {
             CanvasPanel cp = Global.GetCanvasPanel();
-            List<ModelElement> md = Global.GetCurrentDocument().ModelElements;
+            List<ModelElement> md = Global.GetCurrentModelDocument().ModelElements;
 
             foreach (ModelElement me in md)
             {

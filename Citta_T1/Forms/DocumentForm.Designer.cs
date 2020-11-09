@@ -681,6 +681,5 @@ namespace C2.Forms
         private Controls.MyTabControl myTabControl1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripButton ImportDataSourceButton;
-        private Controls.Left.DataSourceControl dataSourceControl;
     }
 }

@@ -68,7 +68,7 @@ namespace C2.Controls.Move.Dt
         private void DeleteMyself()
         {
             CanvasPanel cp = Global.GetCanvasPanel();
-            ModelDocument doc = Global.GetCurrentDocument();
+            ModelDocument doc = Global.GetCurrentModelDocument();
 
             // 状态改变
             doc.StatusChangeWhenDeleteControl(this.ID);
@@ -86,7 +86,7 @@ namespace C2.Controls.Move.Dt
             }
             cp.Invalidate();
             ModelElement me = doc.SearchElementByID(ID);
-            BaseCommand cmd = new ElementDeleteCommand(Global.GetCurrentDocument().WorldMap, me, relations);
+            BaseCommand cmd = new ElementDeleteCommand(Global.GetCurrentModelDocument().WorldMap, me, relations);
             UndoRedoManager.GetInstance().PushCommand(doc, cmd);
             // 删控件
             cp.DeleteEle(me);
@@ -161,7 +161,7 @@ namespace C2.Controls.Move.Dt
                 #region 控件移动部分
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
-                Global.GetCurrentDocument().WorldMap
+                Global.GetCurrentModelDocument().WorldMap
                       .WorldBoundControl(new Point(left, top), this);
                 #endregion
                 /*
@@ -169,7 +169,7 @@ namespace C2.Controls.Move.Dt
                  * 2. 如果关系中的startC 是当前控件，则更新关系的坐标
                  * 3. 重绘线
                  */
-                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                foreach (ModelRelation mr in Global.GetCurrentModelDocument().ModelRelations)
                 {
                     if (mr.StartID == this.ID)
                     {
@@ -242,12 +242,12 @@ namespace C2.Controls.Move.Dt
             if (oldControlPosition != this.Location)
             {
                 // 构造移动命令类,压入undo栈
-                ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                ModelElement element = Global.GetCurrentModelDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
+                    Point oldControlPostionInWorld = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
                     BaseCommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
-                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), moveCommand);
                 }
                 Global.GetMainForm().SetDocumentDirty();
             }

@@ -23,6 +23,7 @@ namespace C2.Dialogs.C2OperatorViews
         private readonly string oldPath;
         private OpUtil.Encoding encoding;
         private char separator;
+
         public C2CustomOperatorView(OperatorWidget operatorWidget) : base(operatorWidget)
         {
             InitializeComponent();

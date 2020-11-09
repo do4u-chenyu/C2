@@ -7,6 +7,8 @@ using C2.Controls.Left;
 using C2.Controls.Right;
 using C2.Controls.Top;
 using C2.Forms;
+using C2.Model.Documents;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -15,18 +17,12 @@ namespace C2.Core
     class Global
     {
         private static MainForm mainForm;
-        private static CanvasPanel canvasPanel;
-        private static OperatorControl operatorControl; 
         private static MyModelControl myModelControl;
         private static BottomLogControl logView;
         private static DataSourceControl dataSourceControl; // 左侧数据源面板
-        private static BottomConsoleControl bottomPythonConsoleControl; //底层控制台面板
-        private static TopToolBarControl topToolBarControl; // 顶层右侧工具栏
         private static Panel bottomViewPanle;
         private static Panel leftToolBoxPanel;
         private static TaskBar taskBar;
-        private static PictureBox minMaxPictureBox;
-        private static bool bottomViewPanelMinimum;
         private static MindMapModelControl mindMapModelControl;
 
 
@@ -50,6 +46,15 @@ namespace C2.Core
                 cf = mainForm.MdiClient.ActivedMdiForm as CanvasForm;
             }
             return cf;
+        }
+        public static DocumentForm GetDocumentForm()
+        {
+            DocumentForm df = null;
+            if (mainForm != null && mainForm.MdiClient != null && mainForm.MdiClient.ActivedMdiForm is DocumentForm)
+            {
+                df = mainForm.MdiClient.ActivedMdiForm as DocumentForm;
+            }
+            return df;
         }
 
         public static CanvasPanel GetCanvasPanel()
@@ -75,11 +80,19 @@ namespace C2.Core
             return ret;
         }
 
-        public static ModelDocument GetCurrentDocument()
+        public static ModelDocument GetCurrentModelDocument()
         {
             ModelDocument ret = null;
             if (Global.GetCanvasForm() != null)
                 ret = Global.GetCanvasForm().Document;
+            return ret;
+        }
+
+        public static Document GetCurrentDocument()
+        {
+            Document ret = null;
+            if (Global.GetDocumentForm() != null)
+                ret = Global.GetDocumentForm().Document;
             return ret;
         }
        
@@ -119,12 +132,11 @@ namespace C2.Core
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
         public static void SetLogView(BottomLogControl lv) { logView = lv; }
         public static void SetBottomViewPanel(Panel bv) { bottomViewPanle = bv; }
-        public static void SetPictureBox(PictureBox mmpb) { minMaxPictureBox = mmpb; }
-        public static void SetBottomViewPanelMinimum(bool bvpm) { bottomViewPanelMinimum = bvpm; }
         public static void SetMindMapModelControl(MindMapModelControl mmmc) { mindMapModelControl = mmmc; }
         private static string workspaceDirectory;           // 用户模型工作目录
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
         public static string UserWorkspacePath { get => Path.Combine( workspaceDirectory,mainForm.UserName); }
+        public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public const float Factor = 1.3F;
         private static string versionType;
         public static string VersionType { get => versionType; set => versionType = value; }
@@ -132,5 +144,7 @@ namespace C2.Core
         public const string Nolanding = "NoLogin";
         public const string GreenPath = "source";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
+        public const int ChartNum = 3;
+        public const string chartNames = "业务拓展视图;运作模式视图;组织架构视图";
     }
 }

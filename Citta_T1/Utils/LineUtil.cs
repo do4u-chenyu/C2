@@ -31,7 +31,7 @@ namespace C2.Utils
         }
         public static void ChangeLoc(float dx, float dy)
         {
-            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
+            List<ModelRelation> modelRelations = Global.GetCurrentModelDocument().ModelRelations;
             foreach (ModelRelation mr in modelRelations)
             {
                 mr.ChangeLoc(dx, dy);

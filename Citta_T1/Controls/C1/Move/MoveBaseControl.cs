@@ -229,16 +229,16 @@ namespace C2.Controls.Move
 
             SetOpControlName(this.textBox.Text);
             // 构造重命名命令类,压入undo栈
-            ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+            ModelElement element = Global.GetCurrentModelDocument().SearchElementByID(ID);
             if (element != ModelElement.Empty)
             {
                 BaseCommand renameCommand = new ElementRenameCommand(element, oldTextString);
-                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), renameCommand);
             }
 
             this.oldTextString = this.textBox.Text;
             Global.GetMainForm().SetDocumentDirty();
-            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCurrentModelDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
         }
 
@@ -246,10 +246,10 @@ namespace C2.Controls.Move
         {
             // TODO 需要处理坐标原点变化的情况
             oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
+            this.Location = Global.GetCurrentModelDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
+            return Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
         }
 
         public string UndoRedoChangeTextName(string des)
@@ -257,7 +257,7 @@ namespace C2.Controls.Move
             oldTextString = Description;
             Description = des;
             SetOpControlName(Description);
-            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCurrentModelDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
             return oldTextString;
         }

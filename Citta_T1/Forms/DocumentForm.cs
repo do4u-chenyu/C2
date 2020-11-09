@@ -589,7 +589,7 @@ namespace C2.Forms
             return name;
         }
 
-        MindMap CreateNewMap()
+        public MindMap CreateNewMap()
         {
             var map = new MindMap();
             map.Name = GetNewChartName(null);

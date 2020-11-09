@@ -57,9 +57,9 @@ namespace C2.ChartPageView
         {
             Alignment = System.Windows.Forms.TabAlignment.Bottom;
 
-            BtnNewChart = new SpecialTabItem(Properties.Resources._new);
-            BtnNewChart.Click += new EventHandler(BtnNewChart_Click);
-            TabBar.RightSpecialTabs.Add(BtnNewChart);
+            //BtnNewChart = new SpecialTabItem(Properties.Resources._new);
+            //BtnNewChart.Click += new EventHandler(BtnNewChart_Click);
+            //TabBar.RightSpecialTabs.Add(BtnNewChart);
 
             var navBtnFirst = new TabBarNavButton(Lang._("First"), Properties.Resources.nav_small_first);
             navBtnFirst.Click += navBtnFirst_Click;
