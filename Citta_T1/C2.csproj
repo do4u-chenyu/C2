@@ -754,6 +754,7 @@
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Widgets\AttachmentWidget.cs" />
+    <Compile Include="Model\Widgets\C2BaseWidget.cs" />
     <Compile Include="Model\Widgets\ChartWidget.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -1,38 +1,19 @@
-﻿using C2.Controls.MapViews;
-using C2.Utils;
+﻿using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace C2.Model.Widgets
 {
-    public class DataSourceWidget : Widget, IRemark
+    public class DataSourceWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "DATASOURCE";
-        public List<DataItem> DataItems { get; set; }
         public DataSourceWidget()
         {
             DisplayIndex = 0;
             DataItems = new List<DataItem>();
             widgetIcon = Properties.Resources.data_w_icon;
         }
-
-        public override bool ResponseMouse
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override Size CalculateSize(MindMapLayoutArgs e)
-        {
-            return new Size(20, 20);
-        }
-
         public override string GetTypeID()
         {
             return TypeID;

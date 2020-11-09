@@ -1,38 +1,20 @@
-﻿using C2.Controls.MapViews;
-using C2.Utils;
+﻿using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace C2.Model.Widgets
 {
-    class ResultWidget : Widget, IRemark
+    class ResultWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "RESULT";
-        public List<DataItem> DataItems { get; set; }
+        
         public ResultWidget()
         {
             DisplayIndex = 2;
             widgetIcon = Properties.Resources.result_w_icon;
             DataItems = new List<DataItem>();
         }
-
-        public override bool ResponseMouse
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override Size CalculateSize(MindMapLayoutArgs e)
-        {
-            return new Size(20, 20);
-        }
-
         public override string GetTypeID()
         {
             return TypeID;
@@ -77,8 +59,5 @@ namespace C2.Model.Widgets
                 this.DataItems.Add(item);
             }
         }
-
-
-
     }
 }
