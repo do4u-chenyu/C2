@@ -508,8 +508,6 @@ namespace C2.Forms
             TsbTimer.Text = Lang._("Timer");
             MenuStartTimer.Text = Lang.GetTextWithEllipsis("Start Timer");
 
-            MenuInsertTab.Text = Lang._("Insert Chart");
-            MenuDeleteTab.Text = Lang.GetTextWithEllipsis("Remove Chart");
             MenuRenameTab.Text = Lang.GetTextWithEllipsis("Rename");
 
             objectTree1.Text = Lang._("Objects");

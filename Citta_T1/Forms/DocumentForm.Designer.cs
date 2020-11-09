@@ -37,9 +37,6 @@ namespace C2.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocumentForm));
             this.multiChartsView1 = new C2.ChartPageView.MultiChartsView();
             this.MenuStripChartTab = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuInsertTab = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuDeleteTab = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuRenameTab = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new C2.Controls.ToolStripPro();
             this.ImportDataSourceButton = new System.Windows.Forms.ToolStripButton();
@@ -113,15 +110,9 @@ namespace C2.Forms
             // MenuStripChartTab
             // 
             this.MenuStripChartTab.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
             this.MenuRenameTab});
             this.MenuStripChartTab.Name = "MenuStripChartTab";
             this.MenuStripChartTab.Size = new System.Drawing.Size(133, 76);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(129, 6);
             // 
             // MenuRenameTab
             // 
@@ -615,9 +606,6 @@ namespace C2.Forms
 
         private C2.ChartPageView.MultiChartsView multiChartsView1;
         private System.Windows.Forms.ContextMenuStrip MenuStripChartTab;
-        private System.Windows.Forms.ToolStripMenuItem MenuInsertTab;
-        private System.Windows.Forms.ToolStripMenuItem MenuDeleteTab;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem MenuRenameTab;
         private Controls.ToolStripPro toolStrip1;
         private System.Windows.Forms.ToolStripButton TsbSave;
