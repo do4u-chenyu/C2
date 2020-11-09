@@ -1,6 +1,7 @@
 ﻿using C2.Business.Option;
 using C2.Controls.MapViews;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Xml;
 
@@ -45,12 +46,17 @@ namespace C2.Model.Widgets
             OpType = OpType.Null;
         }
 
+        [Browsable(false)]
         public string OpName { get; set; }  //菜单栏名称
+        [Browsable(false)]
         public OpType OpType { get; set; }  //算子类型
-
+        [Browsable(false)]
         public DataItem DataSourceItem { get; set; }  //选中的数据源
+        [Browsable(false)]
         public OperatorOption Option { get; set; }  //算子配置内容
+        [Browsable(false)]
         public DataItem ResultItem { get; set; }  //生成的结果
+        [Browsable(false)]
         public OpStatus Status { get; set; }  //算子状态
         
         

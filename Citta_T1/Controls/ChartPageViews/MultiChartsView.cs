@@ -131,7 +131,7 @@ namespace C2.ChartPageView
                 ContentBackColor = SelectedPage.BackColor;
         }
 
-        void OnTabsMenuStripChanged(System.Windows.Forms.ContextMenuStrip old)
+        void OnTabsMenuStripChanged(ContextMenuStrip old)
         {
         }
 
@@ -219,7 +219,7 @@ namespace C2.ChartPageView
             }
         }
 
-        void CustomTabMenu(TabItem item, System.Windows.Forms.ContextMenuStrip TabsMenuStrip)
+        void CustomTabMenu(TabItem item, ContextMenuStrip TabsMenuStrip)
         {
             if (LastCustomTabMenus != null)
             {
