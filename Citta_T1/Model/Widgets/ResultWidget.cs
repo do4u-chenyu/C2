@@ -45,10 +45,10 @@ namespace C2.Model.Widgets
             //文档持久化
             if (this.DataItems.Count > 0)
             {
-                XmlElement dataItemsNode = node.OwnerDocument.CreateElement("data_items");
+                XmlElement dataItemsNode = node.OwnerDocument.CreateElement("result_items");
                 foreach (var dataItem in this.DataItems)
                 {
-                    var dataNode = node.OwnerDocument.CreateElement("data_item");
+                    var dataNode = node.OwnerDocument.CreateElement("result_item");
                     dataNode.SetAttribute("path", dataItem.FilePath);
                     dataNode.SetAttribute("name", dataItem.FileName);
                     dataNode.SetAttribute("separator", dataItem.FileSep.ToString());
@@ -65,7 +65,7 @@ namespace C2.Model.Widgets
             base.Deserialize(documentVersion, node);
             //TODO
             //文档持久化
-            var data_items = node.SelectNodes("data_items/data_item");
+            var data_items = node.SelectNodes("result_items/result_item");
             foreach (XmlElement dataItem in data_items)
             {
                 DataItem item = new DataItem(

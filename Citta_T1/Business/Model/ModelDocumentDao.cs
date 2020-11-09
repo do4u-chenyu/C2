@@ -88,7 +88,7 @@ namespace C2.Business.Model
         public int CountDataSourceUsage(string ffp)
         {
             int count = 0;
-            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
+            foreach (ModelElement me in Global.GetCurrentModelDocument().ModelElements)
                 if (me.Type == ElementType.DataSource && me.FullFilePath == ffp)
                     count++;
             return count;

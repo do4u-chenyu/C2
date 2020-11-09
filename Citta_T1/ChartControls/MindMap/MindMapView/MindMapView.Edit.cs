@@ -149,8 +149,21 @@ namespace C2.Controls.MapViews
         }
         void AddWidget(string typeID, Widget template, bool showDialog)
         {
-            AddWidgetCommand command = new AddWidgetCommand(SelectedTopics, typeID, template);
-            ExecuteCommand(command);
+            if (showDialog)
+            {
+                var dialog = new PropertyDialog();
+                dialog.SelectedObject = template;
+                if (dialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    AddWidgetCommand command = new AddWidgetCommand(SelectedTopics, typeID, template);
+                    ExecuteCommand(command);
+                }
+            }
+            else
+            {
+                AddWidgetCommand command = new AddWidgetCommand(SelectedTopics, typeID, template);
+                ExecuteCommand(command);
+            }
         }
 
         public virtual Topic AddTopic(bool atFront)

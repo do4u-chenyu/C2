@@ -30,7 +30,7 @@ namespace C2.Controls
         #region 静态图生成相关特效
         public Bitmap CreateWorldImage(int worldWidth, int worldHeight, List<Control> controls, bool mode)
         {
-            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            float screenFactor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
             
             Bitmap staticImage = new Bitmap(Convert.ToInt32(worldWidth * screenFactor), Convert.ToInt32(worldHeight * screenFactor));
             Graphics g = Graphics.FromImage(staticImage);
@@ -72,32 +72,32 @@ namespace C2.Controls
         }
         private void DrawAllLines(Graphics g)
         {
-            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
+            List<ModelRelation> modelRelations = Global.GetCurrentModelDocument().ModelRelations;
 
             // 先画线，避免线盖住控件
             foreach (ModelRelation mr in modelRelations)
             {
 
-                Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(mr.GetBoundingRect().Location, false);
+                Point Pw = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(mr.GetBoundingRect().Location, false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
 
-                PointF s = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.StartP, false);
-                PointF a = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.A, false);
-                PointF b = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.B, false);
-                PointF e = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.EndP, false);
+                PointF s = Global.GetCurrentModelDocument().WorldMap.ScreenToWorldF(mr.StartP, false);
+                PointF a = Global.GetCurrentModelDocument().WorldMap.ScreenToWorldF(mr.A, false);
+                PointF b = Global.GetCurrentModelDocument().WorldMap.ScreenToWorldF(mr.B, false);
+                PointF e = Global.GetCurrentModelDocument().WorldMap.ScreenToWorldF(mr.EndP, false);
                 LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
             }
         }
         private void DrawAllControls(Bitmap staticImage)
         {
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            List<ModelElement> modelElements = Global.GetCurrentModelDocument().ModelElements;
             // 反向遍历,解决Move时旧控件压在新控件上
             for (int i = 0; i < modelElements.Count; i++)
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.InnerControl;
-                Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(ct.Location, false);
+                Point Pw = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(ct.Location, false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
                 ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
@@ -108,7 +108,7 @@ namespace C2.Controls
         {
             foreach (Control ct in controls)
             {
-                Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(ct.Location, false);
+                Point Pw = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(ct.Location, false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
                 ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
@@ -250,8 +250,8 @@ namespace C2.Controls
         }
         private void FramePropertySet()
         {
-            mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;
-            screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            mapOrigin = Global.GetCurrentModelDocument().WorldMap.MapOrigin;
+            screenFactor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
         }
         #endregion
         #region 框选后画布鼠标基本操作事件
@@ -259,7 +259,7 @@ namespace C2.Controls
         {
             FramePropertySet();
           
-            startP = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
+            startP = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(e.Location, false);
             if (e.Button == MouseButtons.Right)
             {
                 return;
@@ -274,7 +274,7 @@ namespace C2.Controls
 
         public void FrameWrapper_MouseMove(MouseEventArgs e)
         {
-            endP = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
+            endP = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(e.Location, false);
             
             if (e.Button != MouseButtons.Left)
             {
@@ -292,7 +292,7 @@ namespace C2.Controls
         }
         public void FrameWrapper_MouseUp(MouseEventArgs e)
         {
-            endP = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
+            endP = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(e.Location, false);
             if (e.Button != MouseButtons.Left)
                 return;
             if (selectStatus.Equals(startSelect))
@@ -317,8 +317,8 @@ namespace C2.Controls
             //foreach (Control ct in controls)
             //(ct as IMoveControl).DeleteMenuItem_Click(sender, e); // TODO [DK] 批量删除
             Tuple<List<ModelElement>, List<Tuple<int, int, int>>> mesAndMrs = Global.GetCanvasPanel().DeleteSelectedElesByCtrID(this.controls.Select(t => (t as MoveBaseControl).ID));
-            Global.GetCurrentDocument().Show();
-            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCurrentModelDocument().Show();
+            Global.GetCurrentModelDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
             minBoundingBox = new Rectangle(0, 0, 0, 0);
             if (!staticImage.Equals(null))
@@ -332,7 +332,7 @@ namespace C2.Controls
                 //if (mesAndMrs != null && mesAndMrs.Item1.Count != 0 && mesAndMrs.Item2.Count != 0)
             {
                 BaseCommand cmd = new BatchDeleteCommand(mesAndMrs.Item1, mesAndMrs.Item2);
-                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), cmd);
             }
         }
         public bool FramePaint(PaintEventArgs e)
@@ -400,7 +400,7 @@ namespace C2.Controls
         }
         private void DragFrame_MouseUp()
         {
-            WorldMap wm = Global.GetCurrentDocument().WorldMap;
+            WorldMap wm = Global.GetCurrentModelDocument().WorldMap;
             Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
             //DragFrame_MouseMove();
             foreach (Control ct in controls)
@@ -411,11 +411,11 @@ namespace C2.Controls
             }
 
             BaseCommand cmd = new BatchMoveCommand(idPtsDict);
-            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), cmd);
 
 
-            Global.GetCurrentDocument().Show();
-            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCurrentModelDocument().Show();
+            Global.GetCurrentModelDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
             staticImage = frameWrapperVFX.CreateWorldImage(worldWidth, worldHeight, controls, false);
@@ -440,7 +440,7 @@ namespace C2.Controls
         }
         private void FindControl()
         {
-            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
+            foreach (ModelElement me in Global.GetCurrentModelDocument().ModelElements)
             {
                 Control ct = me.InnerControl;
                 UpdateMinBoundingBuff(ct);
@@ -459,7 +459,7 @@ namespace C2.Controls
         private void UpdateMinBoundingBuff(Control ct)
         {
 
-            Point ctW = Global.GetCurrentDocument().WorldMap.ScreenToWorld(ct.Location, false);
+            Point ctW = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(ct.Location, false);
             if (!frameRec.Contains(ctW) || !frameRec.Contains(new Point(ctW.X + ct.Width, ctW.Y + ct.Height)))
             {
                 return;
@@ -480,7 +480,7 @@ namespace C2.Controls
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
-            moveOffset = Global.GetCurrentDocument().WorldMap
+            moveOffset = Global.GetCurrentModelDocument().WorldMap
                                .WorldBoundControl(new Point(minBoundingBox.X + dx, minBoundingBox.Y + dy),
                                                   minBoundingBox);
             g.DrawImage(moveImage, minBoundingBox.X + dx + moveOffset.X, minBoundingBox.Y + dy + moveOffset.Y);

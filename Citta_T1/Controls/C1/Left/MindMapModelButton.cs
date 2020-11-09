@@ -125,8 +125,8 @@ namespace C2.Controls.Left
             if (ModelTitle == oldTextString)
                 return;
 
-            string newModelDirectory = Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle);
-            string oldModelDirectory = Path.Combine(Global.GetCurrentDocument().UserPath, oldTextString);
+            string newModelDirectory = Path.Combine(Global.GetCurrentModelDocument().UserPath, ModelTitle);
+            string oldModelDirectory = Path.Combine(Global.GetCurrentModelDocument().UserPath, oldTextString);
             string tmpFFP = Path.Combine(newModelDirectory, oldTextString + ".xml");
             string newFFP = Path.Combine(newModelDirectory, ModelTitle + ".xml");
 

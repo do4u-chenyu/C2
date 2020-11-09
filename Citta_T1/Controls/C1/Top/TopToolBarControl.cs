@@ -117,8 +117,8 @@ namespace C2.Controls.Top
 
         private void RemarkPictureBox_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
         {
-            Global.GetCurrentDocument().RemarkVisible = !Global.GetCurrentDocument().RemarkVisible;
-            SelectRemark = Global.GetCurrentDocument().RemarkVisible;
+            Global.GetCurrentModelDocument().RemarkVisible = !Global.GetCurrentModelDocument().RemarkVisible;
+            SelectRemark = Global.GetCurrentModelDocument().RemarkVisible;
             if (SelectRemark)
                 ShowRemarkControl();
             else
@@ -151,7 +151,7 @@ namespace C2.Controls.Top
         }
         private void FrameChange(bool flag)
         {
-            Global.GetCurrentDocument().Show();
+            Global.GetCurrentModelDocument().Show();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
            
 
@@ -245,15 +245,15 @@ namespace C2.Controls.Top
 
         private void FormatButton_MouseClick(object sender, MouseEventArgs e)
         {
-            ModelDocument currentModel = Global.GetCurrentDocument();
-            WorldMap curWorldMap = Global.GetCurrentDocument().WorldMap;
+            ModelDocument currentModel = Global.GetCurrentModelDocument();
+            WorldMap curWorldMap = Global.GetCurrentModelDocument().WorldMap;
             // 文档为空时,返回,不需要触发dirty动作
             if (currentModel.ModelElements.Count == 0)
                 return;
             Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
             idPtsDict = ControlUtil.SaveElesWorldCord(currentModel.ModelElements);
             BaseCommand cmd = new BatchMoveCommand(idPtsDict);
-            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), cmd);
 
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();
@@ -271,7 +271,7 @@ namespace C2.Controls.Top
 
         public void UndoButton_Click(object sender, EventArgs e)
         {
-            UndoRedoManager.GetInstance().Undo(Global.GetCurrentDocument());
+            UndoRedoManager.GetInstance().Undo(Global.GetCurrentModelDocument());
             Global.GetMainForm().SetDocumentDirty();
             this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
             this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
@@ -279,7 +279,7 @@ namespace C2.Controls.Top
 
         public void RedoButton_Click(object sender, EventArgs e)
         {
-            UndoRedoManager.GetInstance().Redo(Global.GetCurrentDocument());
+            UndoRedoManager.GetInstance().Redo(Global.GetCurrentModelDocument());
             Global.GetMainForm().SetDocumentDirty();
             this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
             this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
@@ -310,7 +310,7 @@ namespace C2.Controls.Top
 
         private void SaveModelButton_Click(object sender, EventArgs e)
         {
-            Global.GetCurrentDocument().Save();
+            Global.GetCurrentModelDocument().Save();
         }
     }
 }

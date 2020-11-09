@@ -229,10 +229,10 @@ namespace C2.Controls.Move.Op
                 #region 控件移动
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
-                Global.GetCurrentDocument().WorldMap
+                Global.GetCurrentModelDocument().WorldMap
                       .WorldBoundControl(new Point(left, top), this);
                 #endregion
-                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                foreach (ModelRelation mr in Global.GetCurrentModelDocument().ModelRelations)
                 {
                     if (mr.StartID == this.ID)
                     {
@@ -333,12 +333,12 @@ namespace C2.Controls.Move.Op
             if (oldControlPosition != this.Location )
             {
                 // 构造移动命令类,压入undo栈
-                ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                ModelElement element = Global.GetCurrentModelDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
+                    Point oldControlPostionInWorld = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
                     BaseCommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
-                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), moveCommand);
                 }
                 Global.GetMainForm().SetDocumentDirty();
             }
@@ -451,7 +451,7 @@ namespace C2.Controls.Move.Op
         {
             //运行到此
             //判断该算子是否配置完成
-            ModelElement currentOp = Global.GetCurrentDocument().SearchElementByID(this.ID);
+            ModelElement currentOp = Global.GetCurrentModelDocument().SearchElementByID(this.ID);
             if (currentOp.Status == ElementStatus.Null)
             {
                 MessageBox.Show("该算子未配置，请配置后再运行。", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -459,21 +459,21 @@ namespace C2.Controls.Move.Op
             }
 
             //判断模型是否保存
-            if (Global.GetCurrentDocument().Modified)
+            if (Global.GetCurrentModelDocument().Modified)
             {
                 MessageBox.Show("当前模型没有保存，请保存后再运行模型。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (Global.GetCurrentDocument().SearchResultElementByOpID(this.ID) == ModelElement.Empty)
+            if (Global.GetCurrentModelDocument().SearchResultElementByOpID(this.ID) == ModelElement.Empty)
             {
                 MessageBox.Show("该算子未找到结果算子，请重新配置。", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             //需要判断模型当前运行状态，正在运行时，无法执行运行到此
-            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
-            currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(), "mid", currentOp);
+            TaskManager currentManager = Global.GetCurrentModelDocument().TaskManager;
+            currentManager.GetCurrentModelTripleList(Global.GetCurrentModelDocument(), "mid", currentOp);
             Global.GetCanvasForm().BindUiManagerFunc();
 
             int notReadyNum = currentManager.CurrentModelTripleStatusNum(ElementStatus.Null);
@@ -516,11 +516,11 @@ namespace C2.Controls.Move.Op
         private void DeleteMyself()
         {
             CanvasPanel cp = Global.GetCanvasPanel();
-            ModelDocument doc = Global.GetCurrentDocument();
+            ModelDocument doc = Global.GetCurrentModelDocument();
 
             ModelElement me = doc.SearchElementByID(ID);
 
-            List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
+            List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentModelDocument().ModelRelations);
             List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
             ModelElement rsEles = null;
             ElementStatus opStatus = me.Status;
@@ -548,7 +548,7 @@ namespace C2.Controls.Move.Op
             cp.Invalidate();
 
             me.Status = opStatus;
-            BaseCommand cmd = new ElementDeleteCommand(Global.GetCurrentDocument().WorldMap, me, relations, rsEles); // 此时压栈，me状态已经改变了, 需要改成删除之前的状态
+            BaseCommand cmd = new ElementDeleteCommand(Global.GetCurrentModelDocument().WorldMap, me, relations, rsEles); // 此时压栈，me状态已经改变了, 需要改成删除之前的状态
             UndoRedoManager.GetInstance().PushCommand(doc, cmd);
 
             //删除自身
@@ -559,7 +559,7 @@ namespace C2.Controls.Move.Op
         {
             // modelRelations = deepcopy(Global.GetCurrentDocument().modelRelations)
             CanvasPanel cp = Global.GetCanvasPanel();
-            ModelDocument doc = Global.GetCurrentDocument();
+            ModelDocument doc = Global.GetCurrentModelDocument();
 
             List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
             ModelElement rsEles = null;
@@ -576,7 +576,7 @@ namespace C2.Controls.Move.Op
                 }
             }
             cp.Invalidate();
-            List<ModelElement> modelElements = new List<ModelElement>(Global.GetCurrentDocument().ModelElements);
+            List<ModelElement> modelElements = new List<ModelElement>(Global.GetCurrentModelDocument().ModelElements);
             // 删除与之相连的结果算子
             foreach (ModelElement me in modelElements)
             {
@@ -745,7 +745,7 @@ namespace C2.Controls.Move.Op
 
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
-                int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
+                int sizeLevel = Global.GetCurrentModelDocument().WorldMap.SizeLevel;
                 double multiper = Math.Pow(Global.Factor, sizeLevel);
                 Rectangle leftPinRect = new Rectangle(
                     new Point(

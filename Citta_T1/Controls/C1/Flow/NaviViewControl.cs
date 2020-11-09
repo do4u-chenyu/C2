@@ -58,7 +58,7 @@ namespace C2.Controls.Flow
                 //}
                 //else
                 //    PushModelDocument(Global.GetCurrentDocument());
-                PushModelDocument(Global.GetCurrentDocument());
+                PushModelDocument(Global.GetCurrentModelDocument());
             }
         }
 
@@ -81,22 +81,22 @@ namespace C2.Controls.Flow
         private void NaviViewControl_MouseUp(object sender, MouseEventArgs e)
         {
 
-            float factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
-            Point mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;
+            float factor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
+            Point mapOrigin = Global.GetCurrentModelDocument().WorldMap.MapOrigin;
 
             int dx = Convert.ToInt32((startX - e.X) * rate / factor);
             int dy = Convert.ToInt32((startY - e.Y) * rate / factor);
-            Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+            Global.GetCurrentModelDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
             // 更新canvas所有元素的位置
-            Point moveOffset = Global.GetCurrentDocument().WorldMap
+            Point moveOffset = Global.GetCurrentModelDocument().WorldMap
                                      .WorldBoundControl(factor, Parent.Width, Parent.Height);
-            Global.GetCurrentDocument().WorldMap.MapOrigin = mapOrigin;
+            Global.GetCurrentModelDocument().WorldMap.MapOrigin = mapOrigin;
             // 修改线的位置，线的位置修改了空间位置修改不一样，需要重绘一下才能生效
             LineUtil.ChangeLoc((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
             Global.GetCanvasPanel().Invalidate();
             OpUtil.CanvasDragLocation((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
 
-            Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
+            Global.GetCurrentModelDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
             Global.GetNaviViewControl().UpdateNaviView();
@@ -106,7 +106,7 @@ namespace C2.Controls.Flow
 
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)
         {
-            ModelDocument currentDocument = Global.GetCurrentDocument();
+            ModelDocument currentDocument = Global.GetCurrentModelDocument();
             if (currentDocument == null)
                 return;
 
@@ -118,13 +118,13 @@ namespace C2.Controls.Flow
             Point viewBoxPosition;
 
 
-            float factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            float factor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
             try
             {
 
                 mapOrigin = currentDocument.WorldMap.MapOrigin;
 
-                Point moveOffset = Global.GetCurrentDocument().WorldMap
+                Point moveOffset = Global.GetCurrentModelDocument().WorldMap
                                          .WorldBoundControl(factor, Parent.Width, Parent.Height);
                 OpUtil.CanvasDragLocation(-Convert.ToInt32(moveOffset.X * factor), 
                                           -Convert.ToInt32(moveOffset.Y * factor));
@@ -149,7 +149,7 @@ namespace C2.Controls.Flow
 
         private void UpdateImage(int width, int height, float factor, Point mapOrigin)
         {
-            ModelDocument currentDocument = Global.GetCurrentDocument();
+            ModelDocument currentDocument = Global.GetCurrentModelDocument();
             if (currentDocument == null)
                 return;
 

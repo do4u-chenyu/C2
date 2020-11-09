@@ -143,7 +143,7 @@ namespace C2.Controls
             // TODO C2不允许数据拖到Canvas
             //if (type == ElementType.DataSource)
             //    return;
-            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            float screenFactor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
             int locX = Convert.ToInt32(e.X / screenFactor);
             int locY = Convert.ToInt32(e.Y / screenFactor);
             int dx = Convert.ToInt32(drgOffsetX / screenFactor);
@@ -151,7 +151,7 @@ namespace C2.Controls
             Point location = Global.GetCanvasForm().PointToClient(new Point(locX - dx / 2 + 130, locY - dy / 2 + 10));
 
             string text = e.Data.GetData("Text").ToString();
-            int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
+            int sizeLevel = Global.GetCurrentModelDocument().WorldMap.SizeLevel;
 
             if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, text, location);
@@ -170,7 +170,7 @@ namespace C2.Controls
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件
             Global.GetCanvasForm()?.BlankButtonFocus();
-            ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
+            ModelStatus currentModelStatus = Global.GetCurrentModelDocument().TaskManager.ModelStatus;
             if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
                 this.ClickOnLine(e);
             if (e.Button == MouseButtons.Right && !leftButtonDown)

@@ -64,7 +64,7 @@ namespace C2.Forms
         }
 
         public TopToolBarControl TopToolBarControl { get { return this.topToolBarControl; } }
-        public ModelDocument Document
+        public new ModelDocument Document
         {
             get { return document; }
             set
@@ -282,13 +282,13 @@ namespace C2.Forms
             Global.GetTopToolBarControl().InterruptSelectFrame();
             Global.GetCanvasPanel().ClearAllLineStatus();
 
-            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
+            TaskManager currentManager = Global.GetCurrentModelDocument().TaskManager;
 
             //在模型运行完成，及终止的情况下，可以重置
             //Console.WriteLine(currentManager.ModelStatus.ToString());
             if (currentManager.ModelStatus != ModelStatus.GifDone && currentManager.ModelStatus != ModelStatus.Pause && currentManager.ModelStatus != ModelStatus.Running)
             {
-                currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(), "all");
+                currentManager.GetCurrentModelTripleList(Global.GetCurrentModelDocument(), "all");
                 currentManager.Reset();
                 //SetDocumentDirty();//需不需要dirty
                 MessageBox.Show("当前模型的运算结果已重置，点击‘运行’可以重新运算了", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -304,7 +304,7 @@ namespace C2.Forms
 
             if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
             {
-                Global.GetCurrentDocument().TaskManager.Stop();
+                Global.GetCurrentModelDocument().TaskManager.Stop();
                 UpdateRunbuttonImageInfo();
             }
         }
@@ -315,17 +315,17 @@ namespace C2.Forms
             Global.GetTopToolBarControl().InterruptSelectFrame();
             Global.GetCanvasPanel().ClearAllLineStatus();
 
-            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
+            TaskManager currentManager = Global.GetCurrentModelDocument().TaskManager;
             BindUiManagerFunc();
 
             if (this.runButton.Name == "runButton")
             {
-                if (Global.GetCurrentDocument().Modified)
+                if (Global.GetCurrentModelDocument().Modified)
                 {
                     MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(), "all");
+                currentManager.GetCurrentModelTripleList(Global.GetCurrentModelDocument(), "all");
                 //int notReadyNum = currentManager.CountOpStatus(ElementStatus.Null);
                 int notReadyNum = currentManager.CountOpNullAndNoRelation();
                 if (notReadyNum > 0)
@@ -360,7 +360,7 @@ namespace C2.Forms
 
         public void BindUiManagerFunc()
         {
-            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
+            TaskManager currentManager = Global.GetCurrentModelDocument().TaskManager;
             //初次运行时，绑定线程与ui交互的委托
             if (currentManager.ModelStatus == ModelStatus.Null)
             {
@@ -388,7 +388,7 @@ namespace C2.Forms
         private void UpdateProgressBar(TaskManager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            if (doneModel != Global.GetCurrentDocument())
+            if (doneModel != Global.GetCurrentModelDocument())
                 return;
 
 
@@ -414,7 +414,7 @@ namespace C2.Forms
         private void UpdateRunningGif(TaskManager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            if (doneModel != Global.GetCurrentDocument())
+            if (doneModel != Global.GetCurrentModelDocument())
                 return;
 
             if (manager.ModelStatus == ModelStatus.GifDone)
@@ -439,7 +439,7 @@ namespace C2.Forms
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
             doneModel.Save();
-            if (doneModel == Global.GetCurrentDocument())
+            if (doneModel == Global.GetCurrentModelDocument())
             {
                 this.Invoke(new TaskCallBack(delegate ()
                 {
@@ -452,7 +452,7 @@ namespace C2.Forms
         //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档
         public void UpdateRunbuttonImageInfo()
         {
-            TaskManager manager = Global.GetCurrentDocument().TaskManager;
+            TaskManager manager = Global.GetCurrentModelDocument().TaskManager;
             switch (manager.ModelStatus)
             {
                 //点击暂停按钮，均隐藏
@@ -506,17 +506,17 @@ namespace C2.Forms
              * 2、右上方菜单栏
              * 3、左侧菜单栏
              */
-            Global.GetCurrentDocument().UnEnable();
+            Global.GetCurrentModelDocument().UnEnable();
             EnableCommonControl(false);
         }
         private void EnableRunningControl()
         {
-            Global.GetCurrentDocument().Enable();
+            Global.GetCurrentModelDocument().Enable();
             EnableCommonControl(true);
         }
         private void EnableRunningRsControl()
         {
-            Global.GetCurrentDocument().EnableRs();
+            Global.GetCurrentModelDocument().EnableRs();
             EnableCommonControl(false);
         }
         private void EnableRunningControl(TaskManager manager)

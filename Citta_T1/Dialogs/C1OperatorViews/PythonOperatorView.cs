@@ -40,15 +40,15 @@ namespace C2.Dialogs
             // 初始化左右表数据源配置信息
             this.InitializeDataSource();
             //初始化输入输出路径
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            ModelElement resultElement = Global.GetCurrentModelDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement != ModelElement.Empty)
             {
                 this.fullOutputFilePath = resultElement.FullFilePath;
             }
             else
             {
-                string tmpOutFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-                this.fullOutputFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, tmpOutFileName);
+                string tmpOutFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentModelDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+                this.fullOutputFilePath = Path.Combine(Global.GetCurrentModelDocument().SavePath, tmpOutFileName);
                 this.opControl.Option.SetOption("browseChosen", this.fullOutputFilePath);
                 this.browseChosenTextBox.Text = fullOutputFilePath;
             }
@@ -125,7 +125,7 @@ namespace C2.Dialogs
                 Global.GetMainForm().SetDocumentDirty();
 
             // 生成结果控件,创建relation,bcp结果文件
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            ModelElement resultElement = Global.GetCurrentModelDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
                 MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.fullOutputFilePath);
@@ -140,7 +140,7 @@ namespace C2.Dialogs
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
 
-            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            ModelElement hasResultNew = Global.GetCurrentModelDocument().SearchResultElementByOpID(this.opControl.ID);
             // 修改结果算子内容
             //hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.fullOutputFilePath);
             //hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
@@ -174,7 +174,7 @@ namespace C2.Dialogs
                 || oldEncoding != hasResultNew.Encoding
                 || oldSeparator != hasResultNew.Separator)
 
-                Global.GetCurrentDocument().SetChildrenStatusNull(opControl.ID);
+                Global.GetCurrentModelDocument().SetChildrenStatusNull(opControl.ID);
         }
         protected override bool IsOptionNotReady()
         {
@@ -364,10 +364,10 @@ namespace C2.Dialogs
 
         public void CreateNewBlankBCPFile(string fullFilePath)
         {
-            if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
+            if (!Directory.Exists(Global.GetCurrentModelDocument().SavePath))
             {
-                Directory.CreateDirectory(Global.GetCurrentDocument().SavePath);
-                FileUtil.AddPathPower(Global.GetCurrentDocument().SavePath, "FullControl");
+                Directory.CreateDirectory(Global.GetCurrentModelDocument().SavePath);
+                FileUtil.AddPathPower(Global.GetCurrentModelDocument().SavePath, "FullControl");
             }
 
             if (!File.Exists(fullFilePath))
@@ -395,7 +395,7 @@ namespace C2.Dialogs
         }
 
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        protected override void CancelButton_Click(object sender, EventArgs e)
         {
             bool isReady = this.opControl.Status == ElementStatus.Done || this.opControl.Status == ElementStatus.Ready;
             bool notHasVirtualMachine = this.pythonChosenComboBox.Text == "未配置Python虚拟机";

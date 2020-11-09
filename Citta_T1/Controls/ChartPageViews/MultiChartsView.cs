@@ -13,7 +13,6 @@ namespace C2.ChartPageView
     public class MultiChartsView : MyTabControl
     {
         Document _Document;
-        SpecialTabItem BtnNewChart;
         List<ToolStripItem> LastCustomTabMenus { get; set; }
 
         public event EventHandler NewChartPage;
@@ -57,9 +56,9 @@ namespace C2.ChartPageView
         {
             Alignment = System.Windows.Forms.TabAlignment.Bottom;
 
-            BtnNewChart = new SpecialTabItem(Properties.Resources._new);
-            BtnNewChart.Click += new EventHandler(BtnNewChart_Click);
-            TabBar.RightSpecialTabs.Add(BtnNewChart);
+            //BtnNewChart = new SpecialTabItem(Properties.Resources._new);
+            //BtnNewChart.Click += new EventHandler(BtnNewChart_Click);
+            //TabBar.RightSpecialTabs.Add(BtnNewChart);
 
             var navBtnFirst = new TabBarNavButton(Lang._("First"), Properties.Resources.nav_small_first);
             navBtnFirst.Click += navBtnFirst_Click;
@@ -237,7 +236,7 @@ namespace C2.ChartPageView
                 menuItems = ((BaseChartPage)TabPages[item.DisplayIndex]).CustomTabMenuItems();
                 if (menuItems != null && menuItems.Count > 0)
                 {
-                    int index = 2;
+                    int index = 1;
                     foreach (var mi in menuItems)
                         TabsMenuStrip.Items.Insert(index++, mi);
                 }

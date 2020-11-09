@@ -17,7 +17,7 @@ namespace C2.Controls.Left
             InitializeComponent();
             this.textButton.Text = modelTitle;
             this.oldTextString = modelTitle;
-            fullFilePath = Path.Combine(Global.GetCurrentDocument().UserPath, this.textButton.Text, this.textButton.Text + ".xml");
+            fullFilePath = Path.Combine(Global.GetCurrentModelDocument().UserPath, this.textButton.Text, this.textButton.Text + ".xml");
         }
 
 
@@ -87,7 +87,7 @@ namespace C2.Controls.Left
             if (rs != DialogResult.OK)
                 return;
 
-            string modelDic = System.IO.Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle);
+            string modelDic = System.IO.Path.Combine(Global.GetCurrentModelDocument().UserPath, ModelTitle);
             FileUtil.DeleteDirectory(modelDic);
             Global.GetMyModelControl().RemoveModelButton(this);
         }
@@ -130,8 +130,8 @@ namespace C2.Controls.Left
             if (ModelTitle == oldTextString)
                 return;
 
-            string newModelDirectory = Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle);
-            string oldModelDirectory = Path.Combine(Global.GetCurrentDocument().UserPath, oldTextString);
+            string newModelDirectory = Path.Combine(Global.GetCurrentModelDocument().UserPath, ModelTitle);
+            string oldModelDirectory = Path.Combine(Global.GetCurrentModelDocument().UserPath, oldTextString);
             string tmpFFP = Path.Combine(newModelDirectory, oldTextString + ".xml");
             string newFFP = Path.Combine(newModelDirectory, ModelTitle + ".xml");
 

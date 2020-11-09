@@ -69,15 +69,15 @@ namespace C2.Controls.Flow
             Global.GetOperatorControl().Visible = false;
             //Global.GetOperatorControl().SelectRemark = false;
             //Global.GetRemarkControl().Visible = false;
-            Global.GetCurrentDocument().RemarkVisible = false;
-            Global.GetCurrentDocument().FlowControlVisible = false;
+            Global.GetCurrentModelDocument().RemarkVisible = false;
+            Global.GetCurrentModelDocument().FlowControlVisible = false;
             //Global.GetFlowControl().RemarkChange(false);
 
         }
         private void OperatorControlShow()
         {
             Global.GetOperatorControl().Visible = true;
-            Global.GetCurrentDocument().OperatorControlVisible = true;
+            Global.GetCurrentModelDocument().OperatorControlVisible = true;
 
         }
 

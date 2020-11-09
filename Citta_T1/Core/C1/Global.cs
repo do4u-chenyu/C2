@@ -7,6 +7,9 @@ using C2.Controls.Left;
 using C2.Controls.Right;
 using C2.Controls.Top;
 using C2.Forms;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -45,6 +48,15 @@ namespace C2.Core
             }
             return cf;
         }
+        public static DocumentForm GetDocumentForm()
+        {
+            DocumentForm df = null;
+            if (mainForm != null && mainForm.MdiClient != null && mainForm.MdiClient.ActivedMdiForm is DocumentForm)
+            {
+                df = mainForm.MdiClient.ActivedMdiForm as DocumentForm;
+            }
+            return df;
+        }
 
         public static CanvasPanel GetCanvasPanel()
         {
@@ -69,11 +81,19 @@ namespace C2.Core
             return ret;
         }
 
-        public static ModelDocument GetCurrentDocument()
+        public static ModelDocument GetCurrentModelDocument()
         {
             ModelDocument ret = null;
             if (Global.GetCanvasForm() != null)
                 ret = Global.GetCanvasForm().Document;
+            return ret;
+        }
+
+        public static Document GetCurrentDocument()
+        {
+            Document ret = null;
+            if (Global.GetDocumentForm() != null)
+                ret = Global.GetDocumentForm().Document;
             return ret;
         }
        
@@ -125,5 +145,11 @@ namespace C2.Core
         public const string Nolanding = "NoLogin";
         public const string GreenPath = "source";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
+        public const int ChartNum = 3;
+        public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
+        public static Dictionary<string, MindMapLayoutType> ChartOptions = new Dictionary<string, MindMapLayoutType>
+        {
+            { "业务拓展视图", MindMapLayoutType.MindMap}, {"组织架构视图", MindMapLayoutType.OrganizationDown}, { "运作模式视图", MindMapLayoutType.MindMap}
+        };
     }
 }

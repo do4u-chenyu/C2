@@ -120,7 +120,7 @@ namespace C2.Dialogs.Base
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
             // 生成结果控件,relation,bcp结果文件
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            ModelElement resultElement = Global.GetCurrentModelDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
                 MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
@@ -130,10 +130,10 @@ namespace C2.Dialogs.Base
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             // 判断结果算子有没有异常删除，或者结果算子存储的路径与当前工作路径不一致
             string path = resultElement.FullFilePath;
-            string filePath = Path.Combine(Global.GetCurrentDocument().SavePath, Path.GetFileName(path));
+            string filePath = Path.Combine(Global.GetCurrentModelDocument().SavePath, Path.GetFileName(path));
             if (filePath != path)
                 resultElement.FullFilePath = filePath;
-            if (Directory.Exists(Global.GetCurrentDocument().SavePath) && !File.Exists(filePath))
+            if (Directory.Exists(Global.GetCurrentModelDocument().SavePath) && !File.Exists(filePath))
                 File.Create(filePath);
 
             // 输出字段变化，重写BCP文件
@@ -237,7 +237,7 @@ namespace C2.Dialogs.Base
             this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
+                Global.GetCurrentModelDocument().DegradeChildrenStatus(this.opControl.ID);
         }
 
         protected void InitNewFactorControl(int count)
