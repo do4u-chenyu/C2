@@ -1228,7 +1228,7 @@ namespace C2.Forms
             MyPrintDialog.Document = Document.Print(charts);// ActiveChartBox.ReadyPrint();
             if (pageSettings != null)
                 MyPrintDialog.Document.DefaultPageSettings = pageSettings;
-            if (MyPrintDialog.ShowDialog(Program.MainForm) == DialogResult.OK)
+            if (MyPrintDialog.ShowDialog(Global.GetMainForm()) == DialogResult.OK)
             {
                 MyPrintDialog.Document.Print();
                 return true;

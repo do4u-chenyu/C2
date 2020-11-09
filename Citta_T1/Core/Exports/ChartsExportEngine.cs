@@ -130,7 +130,7 @@ namespace C2.Core.Exports
             {
                 var dialog = new FolderBrowserDialog();
                 dialog.Description = Lang._("Select a folder to export charts");
-                if (dialog.ShowDialog(Program.MainForm) == DialogResult.OK)
+                if (dialog.ShowDialog(Global.GetMainForm()) == DialogResult.OK)
                 {
                     ExportChartsToFolder(document, charts, dialog.SelectedPath);
                 }
@@ -142,13 +142,13 @@ namespace C2.Core.Exports
                 dialog.DefaultExt = documentType.DefaultExtension;
                 dialog.Title = Lang._("Export");
                 dialog.FileName = ST.EscapeFileName(document.Name);
-                if (dialog.ShowDialog(Program.MainForm) == DialogResult.OK)
+                if (dialog.ShowDialog(Global.GetMainForm()) == DialogResult.OK)
                 {
                     if (ExportChartsToFile(document, charts, dialog.FileName))
                     {
                         var fld = new FileLocationDialog(dialog.FileName, dialog.FileName);
                         fld.Text = Lang._("Export Success");
-                        fld.ShowDialog(Program.MainForm);
+                        fld.ShowDialog(Global.GetMainForm());
                     }
                 }
             }
