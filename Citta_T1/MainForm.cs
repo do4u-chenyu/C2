@@ -40,7 +40,6 @@ namespace C2
         TabBarButton BtnNew;
         FindDialog MyFindDialog;
         ShortcutKeysTable ShortcutKeys;
-        StartForm startPage;
         #endregion
 
         private string userName;
@@ -148,11 +147,7 @@ namespace C2
             Global.SetMyModelControl(this.myModelControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
-            Global.SetPictureBox(this.minMaxPictureBox);
             Global.SetMindMapModelControl(this.mindMapModelControl);
-            //Global.SetBottomViewPanelMinimum(this.isBottomViewPanelMinimum);
-            //this.isBottomViewPanelMinimum = false;
-
         }
         void OpenSavedTabs()
         {
