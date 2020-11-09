@@ -84,7 +84,7 @@ namespace C2.Forms
             this.splitter1 = new C2.Controls.MySplitter();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.myTabControl1 = new C2.Controls.MyTabControl();
-            this.dc = new C2.Controls.Common.DesignerControl();
+            this.designerControl = new C2.Controls.Common.DesignerControl();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.MenuStripChartTab.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -588,21 +588,21 @@ namespace C2.Forms
             this.myTabControl1.TabIndex = 3;
             this.myTabControl1.Text = "myTabControl1";
             // 
-            // dc
+            // designerControl
             // 
-            this.dc.BackColor = System.Drawing.Color.White;
-            this.dc.ComboDataSource = null;
-            this.dc.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 9F);
-            this.dc.Location = new System.Drawing.Point(0, 0);
-            this.dc.MindmapView = null;
-            this.dc.Name = "dc";
-            this.dc.OpWidget = null;
-            this.dc.SelectedDataSource = null;
-            this.dc.SelectedOperator = null;
-            this.dc.SelectedTopic = null;
-            this.dc.Size = new System.Drawing.Size(186, 260);
-            this.dc.TabIndex = 1;
-            this.dc.Text = "Ëã×ÓÉè¼ÆÆ÷";
+            this.designerControl.BackColor = System.Drawing.Color.White;
+            this.designerControl.ComboDataSource = null;
+            this.designerControl.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 9F);
+            this.designerControl.Location = new System.Drawing.Point(0, 0);
+            this.designerControl.MindmapView = null;
+            this.designerControl.Name = "designerControl";
+            this.designerControl.OpWidget = null;
+            this.designerControl.SelectedDataSource = null;
+            this.designerControl.SelectedOperator = null;
+            this.designerControl.SelectedTopic = null;
+            this.designerControl.Size = new System.Drawing.Size(186, 260);
+            this.designerControl.TabIndex = 1;
+            this.designerControl.Text = "Ëã×ÓÉè¼ÆÆ÷";
             // 
             // DocumentForm
             // 
@@ -676,7 +676,7 @@ namespace C2.Forms
         private System.Windows.Forms.Panel panel1;
         private Controls.MySplitter splitter1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private DesignerControl dc;
+        private DesignerControl designerControl;
         private Controls.MyTabControl myTabControl1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripButton ImportDataSourceButton;

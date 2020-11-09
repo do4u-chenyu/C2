@@ -359,7 +359,7 @@ namespace C2.Forms
             tabControl2.Dock = DockStyle.Fill;
             tabControl2.SelectedBackColor = Color.White;
             tabControl2.SelectedForeColor = Color.Black;
-            tabControl2.AddPage(dc, Properties.Resources.designer);
+            tabControl2.AddPage(designerControl, Properties.Resources.designer);
             splitContainer2.Panel2.Controls.Add(tabControl2);
 
             //
@@ -903,7 +903,7 @@ namespace C2.Forms
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
 
-            dc.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
+            designerControl.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
         }
         
         void ShowProperty(object[] objects)
@@ -920,8 +920,9 @@ namespace C2.Forms
                     //tabControl2.Controls.Clear();
                     pb.Dock = DockStyle.Fill;
                     tabControl2.InsertPage(0, pb, Properties.Resources.property);
+                    
                 }
-
+                tabControl2.ActivePage(pb);
                 CurrentPropertyBox = pb;
                 pb.SelectedObjects = objects;
             }
