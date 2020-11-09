@@ -395,7 +395,7 @@ namespace C2.Dialogs
         }
 
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        protected override void CancelButton_Click(object sender, EventArgs e)
         {
             bool isReady = this.opControl.Status == ElementStatus.Done || this.opControl.Status == ElementStatus.Ready;
             bool notHasVirtualMachine = this.pythonChosenComboBox.Text == "未配置Python虚拟机";

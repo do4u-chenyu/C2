@@ -22,7 +22,6 @@ namespace C2.Model.Widgets
         int? _CustomWidth;
         int? _CustomHeight;
         WidgetAlignment _Alignment = WidgetAlignment.Left;
-        string _OpType = "null";
         int _DisplayIndex;
         int _Padding;
 
