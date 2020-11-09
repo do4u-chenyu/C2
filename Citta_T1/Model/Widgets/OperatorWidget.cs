@@ -1,8 +1,6 @@
 ﻿using C2.Business.Option;
-using C2.Controls.MapViews;
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Xml;
 
 namespace C2.Model.Widgets
@@ -31,7 +29,7 @@ namespace C2.Model.Widgets
         PythonOperator, //python算子
         ModelOperator //模型
     }
-    public class OperatorWidget : Widget, IRemark
+    public class OperatorWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "OPERATOR";
 
@@ -42,8 +40,6 @@ namespace C2.Model.Widgets
             DataSourceItem = DataItem.Empty;  // 尽量不要用null作为初值,避免空指针异常
             Option = new OperatorOption();
             ResultItem = DataItem.Empty;
-            Status = OpStatus.Null;
-            OpType = OpType.Null;
         }
 
         [Browsable(false)]
@@ -58,22 +54,7 @@ namespace C2.Model.Widgets
         public DataItem ResultItem { get; set; }  //生成的结果
         [Browsable(false)]
         public OpStatus Status { get; set; }  //算子状态
-        
-        
-        
-        public override bool ResponseMouse
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override Size CalculateSize(MindMapLayoutArgs e)
-        {
-            return new Size(20, 20);
-        }
-
+         
         public override string GetTypeID()
         {
             return TypeID;

@@ -1,6 +1,5 @@
 ﻿using C2.Utils;
 using System;
-using System.Collections.Generic;
 using System.Xml;
 
 namespace C2.Model.Widgets
@@ -13,7 +12,6 @@ namespace C2.Model.Widgets
         {
             DisplayIndex = 2;
             widgetIcon = Properties.Resources.result_w_icon;
-            DataItems = new List<DataItem>();
         }
         public override string GetTypeID()
         {
