@@ -43,10 +43,14 @@ namespace C2.Dialogs
             int xIndex = comboBox0.Tag == null ? comboBox0.SelectedIndex : ConvertUtil.TryParseInt(comboBox0.Tag.ToString());
             List<int> indexs = new List<int>() { xIndex };
             indexs.AddRange(outListCCBL0.GetItemCheckIndex());
-        
 
             // 获取选中输入、输出各列数据
-            List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(FilePath, FileEncoding).Split('\n'));
+            string fileContent;
+            if (hitItem.FileType == OpUtil.ExtType.Excel)
+                fileContent = BCPBuffer.GetInstance().GetCachePreViewExcelContent(FilePath);
+            else
+                fileContent = BCPBuffer.GetInstance().GetCachePreViewBcpContent(FilePath, FileEncoding);
+            List<string> rows = new List<string>(fileContent.Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
 
             List<List<string>> columnValues= Utils.FileUtil.GetColumns(indexs, hitItem, rows, upperLimit);

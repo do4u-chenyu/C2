@@ -18,6 +18,7 @@ using C2.Dialogs.C2OperatorViews;
 using System.IO;
 using C2.Dialogs;
 using C2.Business.Option;
+using C2.Utils;
 
 namespace C2.Controls.MapViews
 {
@@ -386,7 +387,12 @@ namespace C2.Controls.MapViews
             string path = hitItem.FilePath;
             Utils.OpUtil.Encoding encoding = hitItem.FileEncoding;
             // 获取选中输入、输出各列数据
-            List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(path, encoding).Split('\n'));
+            string fileContent;
+            if (hitItem.FileType == OpUtil.ExtType.Excel)
+                fileContent = BCPBuffer.GetInstance().GetCachePreViewExcelContent(path);
+            else
+                fileContent = BCPBuffer.GetInstance().GetCachePreViewBcpContent(path, encoding);
+            List<string> rows = new List<string>(fileContent.Split('\n'));
             // 最多绘制前100行数据
             int upperLimit = Math.Min(rows.Count, 100);
             List<List<string>> columnValues = Utils.FileUtil.GetColumns(hitItem.SelectedIndexs, hitItem, rows, upperLimit);
