@@ -123,6 +123,7 @@
             this.dataSourceTB0.Size = new System.Drawing.Size(144, 23);
             this.dataSourceTB0.TabIndex = 0;
             this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSourceTB0.MouseHover += new System.EventHandler(this.DataSourceTB0_MouseHover);
             // 
             // dataSourceTB1
             // 
@@ -135,6 +136,7 @@
             this.dataSourceTB1.TabIndex = 1;
             this.dataSourceTB1.Visible = false;
             this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSourceTB1.MouseHover += new System.EventHandler(this.DataSourceTB1_MouseHover);
             // 
             // outListCCBL0
             // 

@@ -166,7 +166,7 @@ namespace C2.Model.Widgets
             }
         }
 
-        [Browsable(true)]
+        [Browsable(false)]
         public virtual bool FitContainer
         {
             get { return true; }

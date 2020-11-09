@@ -16,8 +16,6 @@ namespace C2.Dialogs.Base
     public partial class C1BaseOperatorView : BaseOperatorView
     {
         protected MoveOpControl opControl;          // 对应的OP算子 
-        protected string dataSourceFFP0;            // 左表数据源路径
-        protected string dataSourceFFP1;            // 右表数据源路径
         protected string[] nowColumnsName0;         // 当前左表(pin0)数据源表头字段(columnName)
         protected string[] nowColumnsName1;         // 当前右表(pin1)数据源表头字段
         protected List<string> oldOutName0;         // 上一次（左输出）输出表头字段
@@ -164,16 +162,6 @@ namespace C2.Dialogs.Base
             {
                 textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
-        }
-
-        private void DataSourceTB1_MouseHover(object sender, EventArgs e)
-        {
-            this.toolTip1.SetToolTip(dataSourceTB1, this.dataSourceFFP1);
-        }
-
-        private void DataSourceTB0_MouseHover(object sender, EventArgs e)
-        {
-            this.toolTip1.SetToolTip(dataSourceTB0, this.dataSourceFFP0);
         }
 
         protected bool IsIllegalFieldName()
