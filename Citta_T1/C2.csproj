@@ -1722,6 +1722,7 @@
     <None Include="Resources\businessoutline.png" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\displaypanel\leftfold.png" />
+    <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
     <None Include="Resources\html_content.htm" />

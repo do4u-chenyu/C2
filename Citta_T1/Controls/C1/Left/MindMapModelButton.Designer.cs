@@ -56,6 +56,7 @@
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.rightPictureBox.TabIndex = 0;
             this.rightPictureBox.TabStop = false;
+            this.rightPictureBox.Image= global::C2.Properties.Resources.leftcontrolhelp;
             // 
             // lelfPictureBox
             // 
