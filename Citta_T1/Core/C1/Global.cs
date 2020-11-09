@@ -117,6 +117,7 @@ namespace C2.Core
         private static string workspaceDirectory;           // 用户模型工作目录
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
         public static string UserWorkspacePath { get => Path.Combine( workspaceDirectory,mainForm.UserName); }
+        public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public const float Factor = 1.3F;
         private static string versionType;
         public static string VersionType { get => versionType; set => versionType = value; }
