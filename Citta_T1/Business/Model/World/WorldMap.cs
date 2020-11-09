@@ -159,9 +159,9 @@ namespace C2.Business.Model.World
             {
                 Pm.X = 15;
             }
-            if (Pw.Y < 40)
+            if (Pw.Y < 5)
             {
-                Pm.Y = 40;
+                Pm.Y = 5;
             }
             if (Pw.X > 2000 - ct.Width)
             {
@@ -176,13 +176,13 @@ namespace C2.Business.Model.World
         public Point WorldBoundControl(Point Pm, Rectangle minBoundingBox)
         {
             Point off = new Point(0, 0);
-            if (Pm.X < 20)
+            if (Pm.X < 10)
             {
-                off.X = 20 - Pm.X;
+                off.X = 10 - Pm.X;
             }
-            if (Pm.Y < 70)
+            if (Pm.Y < 10)
             {
-                off.Y = 70 - Pm.Y;
+                off.Y = 10 - Pm.Y;
             }
             if (Pm.X > Convert.ToInt32(2000 * ScreenFactor) - minBoundingBox.Width)
             {
