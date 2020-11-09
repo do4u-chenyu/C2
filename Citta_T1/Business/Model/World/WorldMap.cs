@@ -108,7 +108,7 @@ namespace C2.Business.Model.World
             /*
              * 结果算子位置不超过地图右边界、下边界
              */
-            float factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            float factor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
             int rightBorder = 2000 - 2 * moc.Width;
             int lowerBorder = 980 - moc.Height;
             int interval = moc.Height + Convert.ToInt32(factor * 5);

@@ -188,7 +188,7 @@ namespace C2
 
         public void SetDocumentDirty()
         {
-            Global.GetCurrentDocument().Modified = true;
+            Global.GetCurrentModelDocument().Modified = true;
         }
         public void DeleteCurrentDocument()
         {
@@ -485,21 +485,25 @@ namespace C2
         
         Document CreateNewMap()
         {
-            MindMap map = new MindMap();
-            map.Name = string.Format("{0} 1", Lang._("New Chart"));
-            map.Root.Text = Lang._("Center Topic");
-            map.Author = System.Environment.UserName;
-
-            if (ChartThemeManage.Default.DefaultTheme != null)
-            {
-                map.ApplyTheme(ChartThemeManage.Default.DefaultTheme);
-            }
-
             Document doc = new Document();
             doc.Name = Lang._("New Document");
             doc.Author = System.Environment.UserName;
-            doc.Charts.Add(map);
-            //doc.Modified = true;
+
+            string[] chartNames = Global.chartNames.Split(';');
+
+            for (int i = 0; i < Global.ChartNum; i++)
+            {
+                MindMap map = new MindMap();
+                map.Name = string.Format("{0}", chartNames[i]);
+                map.Root.Text = Lang._("Center Topic");
+                map.Author = System.Environment.UserName;
+                if (ChartThemeManage.Default.DefaultTheme != null)
+                {
+                    map.ApplyTheme(ChartThemeManage.Default.DefaultTheme);
+                }
+                doc.Charts.Add(map);
+                //doc.Modified = true;
+            }
             return doc;
         }
         public void ShowFindDialog(ChartControl chartControl, FindDialog.FindDialogMode mode)

@@ -115,9 +115,9 @@ namespace C2.Controls.Move.Rs
             {
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
-                Global.GetCurrentDocument
+                Global.GetCurrentModelDocument
                     ().WorldMap.WorldBoundControl(new Point(left, top), this);
-                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                foreach (ModelRelation mr in Global.GetCurrentModelDocument().ModelRelations)
                 {
                     if (mr.StartID == this.ID)
                     {
@@ -189,12 +189,12 @@ namespace C2.Controls.Move.Rs
             if (oldControlPosition != this.Location)
             {
                 // 构造移动命令类,压入undo栈
-                ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                ModelElement element = Global.GetCurrentModelDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
+                    Point oldControlPostionInWorld = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
                     BaseCommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
-                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), moveCommand);
                 }
                 Global.GetMainForm().SetDocumentDirty();
             }
@@ -231,11 +231,11 @@ namespace C2.Controls.Move.Rs
             //运行到此
             //找到对应的op算子
             ModelElement currentOp = ModelElement.Empty;
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            foreach (ModelRelation mr in Global.GetCurrentModelDocument().ModelRelations)
             {
                 if (mr.EndID == this.ID)
                 {
-                    currentOp = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
+                    currentOp = Global.GetCurrentModelDocument().SearchElementByID(mr.StartID);
                 }
             }
 
@@ -253,15 +253,15 @@ namespace C2.Controls.Move.Rs
             }
 
             //判断模型是否保存
-            if (Global.GetCurrentDocument().Modified)
+            if (Global.GetCurrentModelDocument().Modified)
             {
                 MessageBox.Show("当前模型没有保存，请保存后再运行模型。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             //需要判断模型当前运行状态，正在运行时，无法执行运行到此
-            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
-            currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(), "mid", currentOp);
+            TaskManager currentManager = Global.GetCurrentModelDocument().TaskManager;
+            currentManager.GetCurrentModelTripleList(Global.GetCurrentModelDocument(), "mid", currentOp);
             Global.GetCanvasForm().BindUiManagerFunc();
 
             int notReadyNum = currentManager.CurrentModelTripleStatusNum(ElementStatus.Null);

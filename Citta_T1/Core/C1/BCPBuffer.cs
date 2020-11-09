@@ -204,13 +204,13 @@ namespace C2.Core
         }
         public string CreateNewBCPFile(string fileName, List<string> columnsName)
         {
-            if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
+            if (!Directory.Exists(Global.GetCurrentModelDocument().SavePath))
             {
-                Directory.CreateDirectory(Global.GetCurrentDocument().SavePath);
-                FileUtil.AddPathPower(Global.GetCurrentDocument().SavePath, "FullControl");
+                Directory.CreateDirectory(Global.GetCurrentModelDocument().SavePath);
+                FileUtil.AddPathPower(Global.GetCurrentModelDocument().SavePath, "FullControl");
             }
 
-            string fullFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, fileName);
+            string fullFilePath = Path.Combine(Global.GetCurrentModelDocument().SavePath, fileName);
             ReWriteBCPFile(fullFilePath, columnsName);
             return fullFilePath;
         }

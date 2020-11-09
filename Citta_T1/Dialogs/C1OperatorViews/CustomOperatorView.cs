@@ -177,7 +177,7 @@ namespace C2.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp 结果文件
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            ModelElement resultElement = Global.GetCurrentModelDocument().SearchResultElementByOpID(this.opControl.ID);
 
          
 
@@ -191,7 +191,7 @@ namespace C2.OperatorViews
                 resultElement.FullFilePath = this.rsFullFilePathTextBox.Text;
 
 
-            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            ModelElement hasResultNew = Global.GetCurrentModelDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
             //hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text);
             //hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
@@ -211,7 +211,7 @@ namespace C2.OperatorViews
                 || oldEncoding != encoding
                 || oldSeparator != separator)
 
-                Global.GetCurrentDocument().SetChildrenStatusNull(opControl.ID);
+                Global.GetCurrentModelDocument().SetChildrenStatusNull(opControl.ID);
 
         }
 
