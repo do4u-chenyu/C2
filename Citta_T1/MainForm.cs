@@ -218,6 +218,10 @@ namespace C2
         }
         private void LoadDocuments()
         {
+            // 将用户本地保存的模型文档加载到左侧myModelControl
+            string[] bsTitles = ModelsInfo.LoadAllModelTitle(Global.BusinessViewPath);
+            foreach (string title in bsTitles)
+                this.mindMapModelControl.AddMindMapModel(title);
             //if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
             //{
             //    this.modelTitlePanel.AddModel("我的新模型");
