@@ -488,12 +488,13 @@ namespace C2
             doc.Name = Lang._("New Document");
             doc.Author = System.Environment.UserName;
 
-            string[] chartNames = Global.chartNames.Split(';');
-
             for (int i = 0; i < Global.ChartNum; i++)
             {
                 MindMap map = new MindMap();
-                map.Name = string.Format("{0}", chartNames[i]);
+                var name = Global.ChartNames[i];
+                map.Name = string.Format("{0}", name);
+                
+                map.LayoutType = Global.ChartOptions[name];
                 map.Root.Text = Lang._("Center Topic");
                 map.Author = System.Environment.UserName;
                 if (ChartThemeManage.Default.DefaultTheme != null)

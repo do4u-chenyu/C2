@@ -8,6 +8,7 @@ using C2.Controls.Right;
 using C2.Controls.Top;
 using C2.Forms;
 using C2.Model.Documents;
+using C2.Model.MindMaps;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -145,6 +146,10 @@ namespace C2.Core
         public const string GreenPath = "source";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
         public const int ChartNum = 3;
-        public const string chartNames = "业务拓展视图;运作模式视图;组织架构视图";
+        public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
+        public static Dictionary<string, MindMapLayoutType> ChartOptions = new Dictionary<string, MindMapLayoutType>
+        {
+            { "业务拓展视图", MindMapLayoutType.MindMap}, {"组织架构视图", MindMapLayoutType.OrganizationDown}, { "运作模式视图", MindMapLayoutType.MindMap}
+        };
     }
 }

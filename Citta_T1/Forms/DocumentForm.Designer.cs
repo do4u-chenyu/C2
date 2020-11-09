@@ -113,27 +113,10 @@ namespace C2.Forms
             // MenuStripChartTab
             // 
             this.MenuStripChartTab.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuInsertTab,
-            this.MenuDeleteTab,
             this.toolStripMenuItem1,
             this.MenuRenameTab});
             this.MenuStripChartTab.Name = "MenuStripChartTab";
             this.MenuStripChartTab.Size = new System.Drawing.Size(133, 76);
-            // 
-            // MenuInsertTab
-            // 
-            this.MenuInsertTab.Name = "MenuInsertTab";
-            this.MenuInsertTab.Size = new System.Drawing.Size(132, 22);
-            this.MenuInsertTab.Text = "&Insert";
-            this.MenuInsertTab.Click += new System.EventHandler(this.MenuInsertTab_Click);
-            // 
-            // MenuDeleteTab
-            // 
-            this.MenuDeleteTab.Image = global::C2.Properties.Resources.delete;
-            this.MenuDeleteTab.Name = "MenuDeleteTab";
-            this.MenuDeleteTab.Size = new System.Drawing.Size(132, 22);
-            this.MenuDeleteTab.Text = "&Delete...";
-            this.MenuDeleteTab.Click += new System.EventHandler(this.MenuDeleteTab_Click);
             // 
             // toolStripMenuItem1
             // 

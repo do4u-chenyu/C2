@@ -423,12 +423,6 @@ namespace C2.Forms
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-
-#if DEBUG
-            ToolStripMenuItem miAddFreeDiagram = new ToolStripMenuItem("Add Free Diagram");
-            miAddFreeDiagram.Click += new EventHandler(miAddFreeDiagram_Click);
-            MenuStripChartTab.Items.Add(miAddFreeDiagram);
-#endif
         }
         
         protected override void OnFormClosing(FormClosingEventArgs e)
