@@ -127,9 +127,9 @@ namespace C2
             if (e.Item is FileThumbItem)
             {
                 var item = (FileThumbItem)e.Item;
-                if (Program.MainForm != null && !string.IsNullOrEmpty(item.Filename))
+                if (Global.GetMainForm() != null && !string.IsNullOrEmpty(item.Filename))
                 {
-                    Program.MainForm.OpenDocument(item.Filename);
+                    Global.GetMainForm().OpenDocument(item.Filename);
                 }
             }
         }

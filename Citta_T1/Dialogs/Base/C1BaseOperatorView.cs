@@ -56,7 +56,7 @@ namespace C2.Dialogs.Base
         }
 
         // 初始化左右表数据源
-        protected void InitDataSource()
+        protected virtual void InitializeDataSource()
         {
             dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
             // 左表

@@ -26,7 +26,7 @@ namespace C2.Dialogs.C2OperatorViews
         {
             InitializeComponent();
 
-            InitByDataSource();//初始化配置内容
+            InitializeDataSource();//初始化配置内容
             PythonInterpreterInfoLoad();//加载虚拟机
             LoadOption();//加载配置内容
 
@@ -38,10 +38,10 @@ namespace C2.Dialogs.C2OperatorViews
         }
 
         #region 初始化配置
-        private void InitByDataSource()
+        protected override void InitializeDataSource()
         {
             // 初始化左右表数据源配置信息
-            this.InitDataSource();
+            base.InitializeDataSource();
             //初始化输入输出路径
             //ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //if (resultElement != ModelElement.Empty)

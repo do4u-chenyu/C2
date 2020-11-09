@@ -26,14 +26,14 @@ namespace C2
                 try
                 {
                     if (File.Exists(url) && StringComparer.OrdinalIgnoreCase.Equals(Path.GetExtension(url), Document.Extension))
-                        Program.MainForm.OpenDocument(url);
+                        Global.GetMainForm().OpenDocument(url);
                     else
                         Process.Start(url);
                 }
                 catch (System.Exception ex)
                 {
                     Helper.WriteLog(ex);
-                    Program.MainForm.ShowMessage(ex);
+                    Global.GetMainForm().ShowMessage(ex);
                 }
             }
         }
@@ -59,7 +59,7 @@ namespace C2
             catch (System.Exception ex)
             {
                 Helper.WriteLog(ex);
-                Program.MainForm.ShowMessage(ex);
+                Global.GetMainForm().ShowMessage(ex);
             }
         }
 
@@ -172,7 +172,7 @@ namespace C2
             string file = Path.Combine(Application.StartupPath, "C2 Quick Help.bmd");
             if (File.Exists(file))
             {
-                Program.MainForm.OpenDocument(file, true);
+                Global.GetMainForm().OpenDocument(file, true);
             }
         }
     }

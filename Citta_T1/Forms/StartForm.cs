@@ -56,9 +56,9 @@ namespace C2.Forms
             if (e.Item is FileThumbItem)
             {
                 var item = (FileThumbItem)e.Item;
-                if (Program.MainForm != null && !string.IsNullOrEmpty(item.Filename))
+                if (Global.GetMainForm() != null && !string.IsNullOrEmpty(item.Filename))
                 {
-                    Program.MainForm.OpenDocument(item.Filename);
+                    Global.GetMainForm().OpenDocument(item.Filename);
                 }
             }
         }
@@ -109,25 +109,25 @@ btnOptions.Text = Lang._("Options");
 
 void btnOptions_Click(object sender, EventArgs e)
 {
-if (Program.MainForm != null)
+if (Global.GetMainForm() != null)
 {
-Program.MainForm.ShowOptionsDialog();
+Global.GetMainForm().ShowOptionsDialog();
 }
 }
 
 void btnOpen_Click(object sender, EventArgs e)
 {
-if (Program.MainForm != null)
+if (Global.GetMainForm() != null)
 {
-Program.MainForm.OpenDocument();
+Global.GetMainForm().OpenDocument();
 }
 }
 
 void btnNew_Click(object sender, EventArgs e)
 {
-if (Program.MainForm != null)
+if (Global.GetMainForm() != null)
 {
-Program.MainForm.NewDocument();
+Global.GetMainForm().NewDocument();
 }
 }
 */

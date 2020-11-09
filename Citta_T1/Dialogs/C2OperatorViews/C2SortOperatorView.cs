@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using C2.Dialogs.Base;
+﻿using C2.Dialogs.Base;
 using C2.Model.Widgets;
 using C2.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace C2.Dialogs.C2OperatorViews
 {
@@ -19,15 +14,15 @@ namespace C2.Dialogs.C2OperatorViews
         public C2SortOperatorView(OperatorWidget operatorWidget) : base(operatorWidget)
         {
             InitializeComponent();
-            InitByDataSource();
+            InitializeDataSource();
             LoadOption();
         }
 
         #region 配置初始化
-        private void InitByDataSource()
+        protected override void InitializeDataSource()
         {
             // 初始化左右表数据源配置信息
-            this.InitDataSource();
+            base.InitializeDataSource();
             // 窗体自定义的初始化逻辑
             this.comboBox0.Items.AddRange(nowColumnsName0);
             this.outList = Enumerable.Range(0, this.nowColumnsName0.Length).ToList();

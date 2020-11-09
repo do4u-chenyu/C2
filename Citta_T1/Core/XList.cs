@@ -11,6 +11,7 @@ namespace C2.Core
 
     public class XList<T> : Collection<T>
     {
+        public event XListEventHandler<T> DataAdded;
         public event XListEventHandler<T> ItemAdded;
         public event XListEventHandler<T> ItemRemoved;
         public event XListValueEventHandler<T> ItemChanged;

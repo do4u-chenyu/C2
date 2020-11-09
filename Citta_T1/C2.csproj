@@ -162,6 +162,12 @@
     <Compile Include="ChartControls\MindMap\DataTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\C1\Left\LeftFoldButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\LeftFoldButton.Designer.cs">
+      <DependentUpon>LeftFoldButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DataCharts\BarChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -725,7 +731,7 @@
     <Compile Include="Dialogs\C2OperatorViews\C2SortOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\C2OperatorViews\C2SortOperatorView.Designer.cs">
+    <Compile Include="Dialogs\C2OperatorViews\C2SortOperatorView.designer.cs">
       <DependentUpon>C2SortOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\WidgetChart\VisualDisplayDialog.cs">
@@ -1366,8 +1372,8 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
-    <EmbeddedResource Include="Controls\C1\Left\MindMapModelButton.resx">
-      <DependentUpon>MindMapModelButton.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\C1\Left\LeftFoldButton.resx">
+      <DependentUpon>LeftFoldButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\BarChart.resx">
       <DependentUpon>BarChart.cs</DependentUpon>
@@ -1528,6 +1534,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2FilterOperatorView.resx">
       <DependentUpon>C2FilterOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SortOperatorView.resx">
+      <DependentUpon>C2SortOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckUpdate.resx">
       <DependentUpon>CheckUpdate.cs</DependentUpon>
@@ -1712,6 +1721,8 @@
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
+    <None Include="Resources\C1\displaypanel\leftfold.png" />
+    <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
     <None Include="Resources\html_content.htm" />
@@ -1868,8 +1879,14 @@
     <None Include="Resources\Images\svg.png" />
     <None Include="Resources\Images\ToolImage\saveAllButton.png" />
     <Content Include="Resources\Images\TabBarImage\业务视图.png" />
+    <None Include="Resources\Images\TabBarImage\业务视图2.png" />
+    <None Include="Resources\Images\TabBarImage\业务视图3.png" />
     <Content Include="Resources\Images\TabBarImage\模型视图.png" />
+    <None Include="Resources\Images\TabBarImage\模型视图2.png" />
+    <None Include="Resources\Images\TabBarImage\模型视图3.png" />
     <Content Include="Resources\Images\TabBarImage\首页.png" />
+    <None Include="Resources\Images\TabBarImage\首页2.png" />
+    <None Include="Resources\Images\TabBarImage\首页3.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
     <None Include="Resources\Images\theme.png" />

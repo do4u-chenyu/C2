@@ -1,11 +1,9 @@
 ﻿using C2.Business.Schedule;
-using C2.Controls.Flow;
 using C2.Controls.Move;
 using C2.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Xml;
 
 namespace C2.Business.Model
@@ -13,6 +11,7 @@ namespace C2.Business.Model
     public class ModelDocumentDao
     {
         ModelDocument _CurrentDocument;
+
         public List<ModelDocument> ModelDocuments { get; set; }
         public ModelDocument CurrentDocument {
             get { return _CurrentDocument; }

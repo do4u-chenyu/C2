@@ -47,8 +47,7 @@ namespace C2
             this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
-            this.leftFoldPanel = new System.Windows.Forms.Panel();
-            this.leftFoldButton = new System.Windows.Forms.PictureBox();
+            this.leftFoldButton = new Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.newModelButton = new System.Windows.Forms.Button();
@@ -88,8 +87,7 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
             this.leftToolBoxPanel.SuspendLayout();
-            this.leftFoldPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
+            this.leftFoldButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.workSpacePanel.SuspendLayout();
@@ -283,27 +281,11 @@ namespace C2
             // 
             // leftFoldPanel
             // 
-            this.leftFoldPanel.Controls.Add(this.leftFoldButton);
-            this.leftFoldPanel.Location = new System.Drawing.Point(0, 200);
-            this.leftFoldPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.leftFoldPanel.Name = "leftFoldPanel";
-            this.leftFoldPanel.Size = new System.Drawing.Size(7, 100);
-            this.leftFoldPanel.TabIndex = 1;
-            this.leftFoldPanel.Click += new System.EventHandler(this.LeftFoldButton_Click);
-            // 
-            // leftFoldButton
-            // 
-            this.leftFoldButton.BackColor = System.Drawing.SystemColors.Control;
-            this.leftFoldButton.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.leftFoldButton.Image = ((System.Drawing.Image)(resources.GetObject("leftFoldButton.Image")));
-            this.leftFoldButton.Location = new System.Drawing.Point(0, 0);
+            this.leftFoldButton.Location = new System.Drawing.Point(0, 200);
             this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
-            this.leftFoldButton.Name = "leftFoldButton";
+            this.leftFoldButton.Name = "leftFoldPanel";
             this.leftFoldButton.Size = new System.Drawing.Size(7, 100);
-            this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.leftFoldButton.TabIndex = 0;
-            this.leftFoldButton.TabStop = false;
-            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+            this.leftFoldButton.TabIndex = 1;
             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
             // commonPanel
@@ -496,7 +478,7 @@ namespace C2
             // 
             // workSpacePanel
             // 
-            this.workSpacePanel.Controls.Add(this.leftFoldPanel);
+            this.workSpacePanel.Controls.Add(this.leftFoldButton);
             this.workSpacePanel.Controls.Add(this.mdiWorkSpace);
             this.workSpacePanel.Controls.Add(this.bottomViewPanel);
             this.workSpacePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -637,9 +619,8 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
             this.leftToolBoxPanel.ResumeLayout(false);
-            this.leftFoldPanel.ResumeLayout(false);
-            this.leftFoldPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
+            this.leftFoldButton.ResumeLayout(false);
+            this.leftFoldButton.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
             this.workSpacePanel.ResumeLayout(false);
@@ -687,9 +668,8 @@ namespace C2
         private Panel tabPanel;
         private Button ImportDataSourceButton;
         private Button button1;
-        private PictureBox leftFoldButton;
         private Controls.TaskBar taskBar;
-        private Panel leftFoldPanel;
+        private Controls.C1.Left.LeftFoldButton leftFoldButton;
         private Panel workSpacePanel;
         private Panel bottomViewPanel;
         private Controls.Bottom.BottomPreviewControl bottomPreview;

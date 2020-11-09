@@ -61,7 +61,6 @@
             this.canvasPanel.EndP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.EndP")));
             this.canvasPanel.LeftButtonDown = false;
             this.canvasPanel.Location = new System.Drawing.Point(0, 28);
-            this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.canvasPanel.Name = "canvasPanel";
             this.canvasPanel.Size = new System.Drawing.Size(913, 471);
             this.canvasPanel.StartC = null;

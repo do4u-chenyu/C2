@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.IO;
+using C2.Core;
 
 namespace C2.Controls
 {
@@ -81,7 +82,7 @@ namespace C2.Controls
                 }
                 catch (System.Exception ex)
                 {
-                    Program.MainForm.ShowMessage(ex);
+                    Global.GetMainForm().ShowMessage(ex);
                     return;
                 }
             }
@@ -97,7 +98,7 @@ namespace C2.Controls
                 }
                 catch (System.Exception ex)
                 {
-                    Program.MainForm.ShowMessage(ex);
+                    Global.GetMainForm().ShowMessage(ex);
                 }
             }
         }

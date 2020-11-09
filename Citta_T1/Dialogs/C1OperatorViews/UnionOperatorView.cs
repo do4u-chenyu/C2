@@ -17,7 +17,7 @@ namespace C2.OperatorViews
         {
             InitializeComponent();
             InitializeComponentManual();
-            InitByDataSource();
+            InitializeDataSource();
             LoadOption();
 
 
@@ -43,10 +43,10 @@ namespace C2.OperatorViews
         }
 
         #region 初始化配置
-        private void InitByDataSource()
+        protected override void InitializeDataSource()
         {
             // 初始化左右表数据源配置信息
-            this.InitDataSource();
+            this.InitializeDataSource();
             // 窗体自定义的初始化逻辑
             this.oldOutName0 = this.opControl.Option.GetOptionSplit("outname").ToList();
             this.comboBox0.Items.AddRange(nowColumnsName0);

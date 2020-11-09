@@ -97,7 +97,7 @@ namespace C2.Controls.MapViews
                 return;
 
             TopicTreeNode node = new TopicTreeNode(e.Item);
-            node.ImageIndex = node.SelectedImageIndex = 3;
+            node.ImageIndex = node.SelectedImageIndex = 0;
             Nodes.Add(node);
             
             //if (TreeView is ObjectTree)

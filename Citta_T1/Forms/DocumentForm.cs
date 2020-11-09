@@ -10,15 +10,14 @@ using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
 using C2.Model.Widgets;
-using System;
 using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
-using C2.ChartControls.MindMap;
 
 namespace C2.Forms
 {
@@ -1049,7 +1048,7 @@ namespace C2.Forms
         void ShowFindDialog(FindDialog.FindDialogMode mode)
         {
             {
-                Program.MainForm.ShowFindDialog(this.ActiveChartBox, mode);
+                Global.GetMainForm().ShowFindDialog(this.ActiveChartBox, mode);
             }
         }
 
@@ -1124,7 +1123,7 @@ namespace C2.Forms
         //}
         private string GetModelPath()
         {
-            string modelPath = Path.Combine(Global.UserWorkspacePath, Document.Name);
+            string modelPath = Path.Combine(Global.UserWorkspacePath,"业务视图",Document.Name);
             if (!modelPath.EndsWith("\\"))
                 modelPath += "\\";
             return modelPath;
@@ -1230,7 +1229,7 @@ namespace C2.Forms
             MyPrintDialog.Document = Document.Print(charts);// ActiveChartBox.ReadyPrint();
             if (pageSettings != null)
                 MyPrintDialog.Document.DefaultPageSettings = pageSettings;
-            if (MyPrintDialog.ShowDialog(Program.MainForm) == DialogResult.OK)
+            if (MyPrintDialog.ShowDialog(Global.GetMainForm()) == DialogResult.OK)
             {
                 MyPrintDialog.Document.Print();
                 return true;

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MindMapModelButton));
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.lelfPictureBox = new System.Windows.Forms.PictureBox();
             this.textButton = new C2.Controls.Common.NoFocusButton();
@@ -55,6 +56,7 @@
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.rightPictureBox.TabIndex = 0;
             this.rightPictureBox.TabStop = false;
+            this.rightPictureBox.Image= global::C2.Properties.Resources.leftcontrolhelp;
             // 
             // lelfPictureBox
             // 

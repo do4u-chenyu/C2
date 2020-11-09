@@ -18,15 +18,15 @@ namespace C2.Dialogs.C2OperatorViews
         public C2FreqOperatorView(OperatorWidget operatorWidget) : base(operatorWidget)
         {
             InitializeComponent();
-            InitByDataSource();
+            InitializeDataSource();
             LoadOption();
         }
 
         #region 初始化配置
-        private void InitByDataSource()
+        protected override void InitializeDataSource()
         {
             // 初始化左右表数据源配置信息
-            this.InitDataSource();
+            base.InitializeDataSource();
             // 窗体自定义的初始化逻辑
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
 

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using C2.ChartPageView;
-using C2.Controls;
-using C2.Controls.MapViews;
+﻿using C2.Controls;
 using C2.Core;
 using C2.Globalization;
 using C2.Model.Documents;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace C2.ChartPageView
 {

@@ -13,6 +13,7 @@ namespace C2.Controls.Right
         {
             InitializeComponent();
             InitializeToolTip();
+            CustomBorderRound(); // 自定义边界圆角
         }
 
         // 圆角
@@ -29,12 +30,13 @@ namespace C2.Controls.Right
             set
             {
                 radius = Math.Max(0, value);
+                CustomBorderRound();
                 base.Refresh();
             }
         }
 
         // 圆角代码
-        public void Round()
+        private void CustomBorderRound()
         {
             // 已经是.net提供给我们的最容易的改窗体的属性了(以前要自己调API)
             System.Drawing.Drawing2D.GraphicsPath oPath = new System.Drawing.Drawing2D.GraphicsPath();
@@ -57,18 +59,6 @@ namespace C2.Controls.Right
             }
             oPath.CloseAllFigures();
             Region = new Region(oPath);
-        }
-
-        protected override void OnPaint(PaintEventArgs pe)
-        {
-            Round();  // 圆角
-            base.OnPaint(pe);  
-        }
-
-        protected override void OnResize(EventArgs eventargs)
-        {
-            base.OnResize(eventargs);
-            base.Refresh();
         }
 
         private void InitializeToolTip()

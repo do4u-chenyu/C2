@@ -1,13 +1,17 @@
-﻿using System;
+﻿using C2.Core;
+using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using System.Linq;
-using C2.Core;
 
 namespace C2.Controls
 {
+    public enum BoderType  // 边框的类型
+    {
+        All,               // 四边
+        NoLeft,            // 不画左边框
+        None,              // 无边框
+    }
     public class MyTabControl : BaseControl
     {
         //TabBar TabBar;
@@ -16,7 +20,7 @@ namespace C2.Controls
         //Panel ControlContainer;
         int BorderSize = 1;
         int _SelectedIndex = -1;
-        bool _ShowBorder = true;
+        BoderType _ShowBorder = BoderType.All;  // 默认有边框
         int _RoundSize = 5;
         XList<Control> _TabPages;
         Color _ContentBackColor = Color.White;
@@ -128,8 +132,8 @@ namespace C2.Controls
             set { TabBar.ItemForeColor = value; }
         }
 
-        [DefaultValue(true)]
-        public bool ShowBorder
+        [DefaultValue(BoderType.All)]
+        public BoderType ShowBorder
         {
             get { return _ShowBorder; }
             set
@@ -187,7 +191,7 @@ namespace C2.Controls
             {
                 Rectangle rect = ClientRectangle.Inflate(Padding);
 
-                if (ShowBorder)
+                if (ShowBorder != BoderType.None)
                     rect.Inflate(-BorderSize, -BorderSize);
 
                 switch (Alignment)
@@ -427,21 +431,33 @@ namespace C2.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (ShowBorder)
+            Rectangle rect = ClientRectangle;
+            switch (ShowBorder)
             {
-                e.Graphics.ExcludeClip(TabBar.Bounds);
-                e.Graphics.Clear(BackColor);
+                case BoderType.All:
+                    e.Graphics.ExcludeClip(TabBar.Bounds);
+                    e.Graphics.Clear(BackColor);
+                    e.Graphics.DrawRectangle(new Pen(TabBar.BaseLineColor),
+                        rect.X,
+                        rect.Y,
+                        rect.Width - 1,
+                        rect.Height - 1);
+                    break;
+                case BoderType.NoLeft:
+                    e.Graphics.ExcludeClip(TabBar.Bounds);
+                    e.Graphics.Clear(BackColor);
+                    e.Graphics.DrawLines(new Pen(TabBar.BaseLineColor), new Point[]
+                    {
+                        new Point(rect.X, rect.Y),                                    //左上
+                        new Point(rect.X + rect.Width - 1, rect.Y),                   //右上
+                        new Point(rect.X + rect.Width - 1, rect.Y + rect.Height - 1), //右下
+                        new Point(rect.X, rect.Y + rect.Height - 1)                   //左下
+                    });
+                    break;
+                case BoderType.None:
+                    base.OnPaint(e);
+                    break;
                 
-                Rectangle rect = ClientRectangle;
-                e.Graphics.DrawRectangle(new Pen(TabBar.BaseLineColor),
-                    rect.X,
-                    rect.Y,
-                    rect.Width - 1,
-                    rect.Height - 1);
-            }
-            else
-            {
-                base.OnPaint(e);
             }
         }
 

@@ -19,7 +19,7 @@ namespace C2.Dialogs.C2OperatorViews
         public C2MinOperatorView(OperatorWidget operatorWidget) : base(operatorWidget)
         {
             InitializeComponent();
-            InitByDataSource();
+            InitializeDataSource();
             LoadOption();
         }
         #region 判断是否配置完毕
@@ -82,9 +82,9 @@ namespace C2.Dialogs.C2OperatorViews
         }
         #endregion
         #region 初始化配置
-        private void InitByDataSource()
+        protected override void InitializeDataSource()
         {
-            this.InitDataSource();
+            base.InitializeDataSource();
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
             this.comboBox0.Items.AddRange(nowColumnsName0);
         }
