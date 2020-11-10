@@ -46,6 +46,7 @@
             this.movePictureBox = new System.Windows.Forms.ToolStripButton();
             this.framePictureBox = new System.Windows.Forms.ToolStripButton();
             this.moreButton = new System.Windows.Forms.ToolStripButton();
+            this.LinePanel = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -247,10 +248,21 @@
             this.moreButton.Size = new System.Drawing.Size(24, 25);
             this.moreButton.Click += new System.EventHandler(this.MoreButton_Click);
             // 
+            // LinePanel
+            // 
+            this.LinePanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.LinePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.LinePanel.ForeColor = System.Drawing.Color.Black;
+            this.LinePanel.Location = new System.Drawing.Point(0, 27);
+            this.LinePanel.Name = "LinePanel";
+            this.LinePanel.Size = new System.Drawing.Size(990, 1);
+            this.LinePanel.TabIndex = 3;
+            // 
             // TopToolBarControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.LinePanel);
             this.Controls.Add(this.toolStrip1);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
@@ -283,5 +295,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private Controls.ToolStripPro toolStrip1;
+        private System.Windows.Forms.Panel LinePanel;
     }
 }
