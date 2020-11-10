@@ -478,7 +478,7 @@ namespace C2.Utils
                 if (String.IsNullOrEmpty(row))
                     continue;
                 string[] rowElement = row.Split(dataItem.FileSep);
-                if (rowElement.Length < indexs.Max() || indexs.Min() < 0)
+                if (rowElement.Length <= indexs.Max() || indexs.Min() < 0)
                 {
                     MessageBox.Show(String.Format("{0}:第{1}行数据可能不完整", dataItem.FilePath, i));
                     return new List<List<string>>();
