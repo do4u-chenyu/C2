@@ -17,6 +17,8 @@ namespace C2.Controls.MapViews
 {
     class DataTreeView: ObjectTreeView
     {
+        private const int srcDataImage = 3;
+        private const int rsDataImage = 2;
         public override void BuildTree()
         {
             Nodes.Clear();
@@ -48,7 +50,7 @@ namespace C2.Controls.MapViews
             node.ImageIndex = node.SelectedImageIndex = 0;
             nodes.Add(node);
 
-            AddWidgetData(topic);
+            AddTopicData(topic);
             foreach (Topic subTopic in topic.Children)
             {
                 BuildTree(subTopic, node.Nodes);
@@ -57,33 +59,39 @@ namespace C2.Controls.MapViews
                 node.Expand();
             return node;
         }
-        public void AddWidgetData(Topic topic)
+        private bool FindNode(TreeNodeCollection nodes, string text)
+        {
+            foreach (TreeNode node in nodes)
+            {
+                if (node.Text == text && node.ImageIndex != 0)
+                    return true;
+            }
+            return false;
+        }
+        public void AddTopicData(Topic topic)
         {
             TreeNodeCollection nodes = FindNode(topic).Nodes;
             DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
             ResultWidget rs      = topic.FindWidget<ResultWidget>();
             if (dtw != null)
             {
-                foreach (DataItem dataItem in dtw.DataItems)
-                {
-                    TreeNode node = new TreeNode(dataItem.FileName);
-                    node.ImageIndex = node.SelectedImageIndex = 3;
-                    //if (!nodes.Contains(node)) nodes.Add(node);
-                    var isExist = false;
-                    foreach (TreeNode tmp in nodes)
-                        if (tmp.Text == dataItem.FileName)
-                            isExist = true;
-                    if (!isExist) nodes.Add(node);
-                }
+                AddWidgetData(nodes, dtw.DataItems,srcDataImage);
             }
             if (rs != null)
             {
-                foreach (DataItem dataItem in rs.DataItems)
-                {
-                    TreeNode node = new TreeNode(dataItem.FileName);
-                    node.ImageIndex = node.SelectedImageIndex = 2;
-                    if (!nodes.Contains(node)) nodes.Add(node);
-                }
+                AddWidgetData(nodes, rs.DataItems,rsDataImage);
+            }
+        }
+        public void AddWidgetData(TreeNodeCollection nodes,
+                                  List<DataItem> dataItems,
+                                  int imageIndex)
+        {
+            foreach (DataItem dataItem in dataItems)
+            {
+                TreeNode node = new TreeNode(dataItem.FileName);
+                node.ImageIndex = node.SelectedImageIndex = imageIndex;
+                if (!FindNode(nodes, dataItem.FileName))
+                    nodes.Add(node);
             }
         }
     }
