@@ -47,19 +47,19 @@ namespace C2.Controls.MapViews
             TopicTreeNode node = new TopicTreeNode(topic);
             node.ImageIndex = node.SelectedImageIndex = 0;
             nodes.Add(node);
-            AddWidgetData(topic, node.Nodes);
 
+            AddWidgetData(topic);
             foreach (Topic subTopic in topic.Children)
             {
                 BuildTree(subTopic, node.Nodes);
             }
-
             if (!topic.Folded)
                 node.Expand();
             return node;
         }
-        private void AddWidgetData(Topic topic, TreeNodeCollection nodes)
+        public void AddWidgetData(Topic topic)
         {
+            TreeNodeCollection nodes = FindNode(topic).Nodes;
             DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
             ResultWidget rs      = topic.FindWidget<ResultWidget>();
             if (dtw != null)
@@ -68,7 +68,7 @@ namespace C2.Controls.MapViews
                 {
                     TreeNode node = new TreeNode(dataItem.FileName);
                     node.ImageIndex = node.SelectedImageIndex = 3;
-                    nodes.Add(node);
+                    if (!nodes.Contains(node)) nodes.Add(node);
                 }
             }
             if (rs != null)
@@ -77,7 +77,7 @@ namespace C2.Controls.MapViews
                 {
                     TreeNode node = new TreeNode(dataItem.FileName);
                     node.ImageIndex = node.SelectedImageIndex = 2;
-                    nodes.Add(node);
+                    if (!nodes.Contains(node)) nodes.Add(node);
                 }
             }
         }

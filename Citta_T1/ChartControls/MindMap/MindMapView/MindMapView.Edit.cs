@@ -116,7 +116,7 @@ namespace C2.Controls.MapViews
             {
                 var template = new OperatorWidget();
                 AddWidget(OperatorWidget.TypeID, template, false);
-                ShowDesigner(SelectedTopics[0]);
+                //ShowDesigner(SelectedTopics[0],false);
             }
         }
 
