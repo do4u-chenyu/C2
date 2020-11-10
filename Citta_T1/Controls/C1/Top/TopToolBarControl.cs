@@ -1,6 +1,5 @@
 ﻿using C2.Business.Model;
 using C2.Business.Model.World;
-using C2.Controls.Move;
 using C2.Core;
 using C2.Core.UndoRedo;
 using C2.Core.UndoRedo.Command;
@@ -16,33 +15,24 @@ namespace C2.Controls.Top
 {
     public partial class TopToolBarControl : UserControl
     {
-        private bool selectRemark;
-        private bool selectFrame;
-        private bool selectDrag;
         [Browsable(false)]
-        public bool SelectRemark { get => selectRemark; set => selectRemark = value; }
+        public bool SelectRemark { get; set; } = false;
         [Browsable(false)]
-        public bool SelectDrag { get => selectDrag; set => selectDrag = value; }
+        public bool SelectDrag { get; set; } = false;
         [Browsable(false)]
-        public bool SelectFrame { get => selectFrame; set => selectFrame = value; }
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopToolBarControl));
+        public bool SelectFrame { get; set; } = false;
+
         public TopToolBarControl()
         {
             InitializeComponent();
             InitializeToolTip();
             InitializeUndoRedoManger();
-            SelectDrag = false;
-            SelectFrame = false;
-            SelectRemark = false;
-            this.toolStrip1.BackColor = Color.FromArgb(230, 237, 246);
-            this.toolStrip1.ForeColor = Color.FromArgb(40, 90, 177);
         } // 恢复到编辑模式
         public void ResetStatus()
         {
             SelectDrag = false;
             SelectFrame = false;
-            DragChange(SelectDrag);
-            FrameChange(SelectFrame);
+            FrameChange();
             ChangeCursor();
         }
         private void ChangeCursor()
@@ -50,7 +40,6 @@ namespace C2.Controls.Top
             // 拖拽
             if (SelectDrag)
             {
-                //Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
                 Global.GetCanvasPanel().Cursor = Helper.LoadCursor(Properties.Resources.hand_cur);
             }
             // 框选
@@ -63,8 +52,6 @@ namespace C2.Controls.Top
             {
                 Global.GetCanvasPanel().Cursor = Cursors.Hand;
             }
-            // FlowControl本身的图标不变
-            this.Cursor = Cursors.Default;
         }
         #region 拖动
 
@@ -77,7 +64,7 @@ namespace C2.Controls.Top
             SelectDrag = !SelectDrag;
             SelectFrame = false;
             ChangeCursor();
-            FrameChange(SelectFrame);
+            FrameChange();
             this.movePictureBox.BackColor = Color.FromArgb(200, 200, 200);
             this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
@@ -90,10 +77,9 @@ namespace C2.Controls.Top
         {
             SelectFrame = false;
             ChangeCursor();
-            FrameChange(SelectFrame);
+            FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(true);
-            //this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
             this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
 
@@ -101,10 +87,9 @@ namespace C2.Controls.Top
         {
             SelectFrame = false;
             ChangeCursor();
-            FrameChange(SelectFrame);
+            FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(false);
-            //this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
             this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
         #endregion
@@ -140,41 +125,24 @@ namespace C2.Controls.Top
             SelectFrame = !SelectFrame;
             SelectDrag = false;
             ChangeCursor();
-            DragChange(SelectDrag);
+
             this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
             this.framePictureBox.BackColor = Color.FromArgb(200, 200, 200);
         }
         #endregion
 
-        private void DragChange(bool flag)
-        {
-            
-        }
-
-        public void RemarkChange(bool flag)
-        {
-
-        }
-        private void FrameChange(bool flag)
+        private void FrameChange()
         {
             Global.GetCurrentModelDocument().Show();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
-           
-
         }
         public void InterruptSelectFrame()
         {
             SelectFrame = false;
-            FrameChange(SelectFrame);
+            FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().Invalidate();
         }
-
-        private void FlowControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void InitializeUndoRedoManger()
         {
@@ -205,54 +173,12 @@ namespace C2.Controls.Top
         }
 
         private void InitializeToolTip()
-        {    
-            //this.toolTip1.SetToolTip(this.formatButton, HelpUtil.FormatOperatorHelpInfo);
-            //this.toolTip1.SetToolTip(this.undoButton, HelpUtil.UndoButtonHelpInfo);
-            //this.toolTip1.SetToolTip(this.redoButton, HelpUtil.RedoButtonHelpInfo);
-        }
-
-        private void CommonUse_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && sender is Button)
-            {
-                DataObject dragDropData = new DataObject();
-                dragDropData.SetData("Type", ElementType.Operator);
-                dragDropData.SetData("Path", "");
-                dragDropData.SetData("Text", NameTranslate((sender as Button).Name));
-              //  this.relateButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
-            }
+            this.formatButton.ToolTipText = HelpUtil.FormatOperatorHelpInfo;
+            this.undoButton.ToolTipText = HelpUtil.UndoButtonHelpInfo;
+            this.redoButton.ToolTipText = HelpUtil.RedoButtonHelpInfo;
+            //TODO 功能暂时没实现
         }
-        private string NameTranslate(string name)
-        {
-            String text = String.Empty;
-            switch (name)
-            {
-                case "relateButton":
-                    text = "关联算子";
-                    break;
-                case "collideButton":
-                    text = "碰撞算子";
-                    break;
-                case "unionButton":
-                    text = "取并集";
-                    break;
-                case "differButton":
-                    text = "取差集";
-                    break;
-                case "filterButton":
-                    text = "关键词过滤";
-                    break;
-                case "randomButton":
-                    text = "随机采样";
-                    break;
-            }
-            return text;
-        }
-
-         void FormatButton_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
-
 
         public void UndoButton_Click(object sender, EventArgs e)
         {
@@ -278,16 +204,6 @@ namespace C2.Controls.Top
             //UndoRedoManager.GetInstance().DoCommand(new TestCommand());
         }
 
-        public void SetUndoButtonEnable(bool value)
-        {
-            this.undoButton.Enabled = value;
-        }
-
-        public void SetRedoButtonEnable(bool value)
-        {
-            this.redoButton.Enabled = value;
-        }
-
         private void ImportModel_Click(object sender, EventArgs e)
         {
             C2.Business.Model.ImportModel.GetInstance().ImportIaoFile(Global.GetMainForm().UserName);
@@ -298,7 +214,7 @@ namespace C2.Controls.Top
             Global.GetCurrentModelDocument().Save();
         }
 
-        private void formatButton_Click(object sender, EventArgs e)
+        private void FormatButton_Click(object sender, EventArgs e)
         {
             ModelDocument currentModel = Global.GetCurrentModelDocument();
             WorldMap curWorldMap = Global.GetCurrentModelDocument().WorldMap;
@@ -317,7 +233,7 @@ namespace C2.Controls.Top
             this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
 
-        private void moreButton_Click(object sender, EventArgs e)
+        private void MoreButton_Click(object sender, EventArgs e)
         {
             ConfigForm config = new ConfigForm();
             config.ShowDialog();
