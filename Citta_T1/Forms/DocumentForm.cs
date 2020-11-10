@@ -26,7 +26,7 @@ namespace C2.Forms
         const string ShowSidebarOptionName = "editor_show_sidebar";
         Document _Document;
         ObjectTreeView objectTree1;
-        ObjectTreeView objectTree2;
+        DataTreeView objectTree2;
         ChartOverviewBox cob;
         TimerDialog MyTimerDialog;
         ChartPageView.BaseChartPage _ActivedChartPage;
@@ -895,7 +895,7 @@ namespace C2.Forms
                 st = sob as Topic;
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
-
+           
             designerControl.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
 
             //目前只有右键未配置的算子挂件，才会主动显示设计器，其他时候只做更新
