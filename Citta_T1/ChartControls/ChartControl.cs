@@ -197,6 +197,8 @@ namespace C2.Controls
         #region Selection
         public delegate void NeedShowEventHandler(bool isNeedShow);
         public event System.EventHandler SelectionChanged;
+
+        public event System.EventHandler TopicDataChanged;
         public event NeedShowEventHandler NeedShowDesigner;
 
         protected ChartSelection Selection { get; private set; }
@@ -207,7 +209,7 @@ namespace C2.Controls
         [Browsable(false)]
         public ChartObject[] SelectedObjects { get; private set; }
         public ChartObject ShowDesignerObject { get; set; }
-
+        public ChartObject DataChangeObject { get; set; }
         [Browsable(false)]
         public ChartObject SelectedObject
         {
@@ -319,6 +321,14 @@ namespace C2.Controls
         {
             ShowDesignerObject = co;
             NeedShowDesigner?.Invoke(needShow);
+        }
+        protected virtual void TopicUpdate(ChartObject co)
+        {
+            DataChangeObject = co;
+            if (TopicDataChanged != null)
+            {
+                TopicDataChanged (this, EventArgs.Empty);
+            }
         }
 
         public virtual void EnsureVisible(ChartObject chartObject)

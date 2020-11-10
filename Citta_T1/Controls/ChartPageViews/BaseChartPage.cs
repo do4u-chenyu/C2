@@ -18,6 +18,7 @@ namespace C2.ChartPageView
         Model.Documents.ChartPage _Chart;
         object[] _SelectedObjects;
         object _ShowDesignerObject;
+        object _DataChangeObject;
         bool _ReadOnly;
         Image _Icon;
 
@@ -27,7 +28,7 @@ namespace C2.ChartPageView
         public event EventHandler SelectedObjectsChanged;
         public event NeedShowPropertyEventHandler NeedShowProperty;
         public event EventHandler IconChanged;
-
+        public event EventHandler TopicDataChanged;
         public BaseChartPage()
         {
             InitializationChartContextMenuStrip();
@@ -88,6 +89,16 @@ namespace C2.ChartPageView
             {
                 _ShowDesignerObject = value;
                 OnShowDesignerObjectChanged();
+            }
+        }
+        
+        public object DataChangeObject
+        {
+            get { return _DataChangeObject; }
+            set
+            {
+                _DataChangeObject = value;
+                OnTopicDataChanged();
             }
         }
 
@@ -331,7 +342,11 @@ namespace C2.ChartPageView
         {
             NeedShowDesigner?.Invoke(this,NeedShowControl);
         }
-
+        protected virtual void OnTopicDataChanged()
+        {
+            if (NeedShowDesigner != null)
+                TopicDataChanged(this, EventArgs.Empty);
+        }
         protected virtual void ResetControlStatus()
         {
         }

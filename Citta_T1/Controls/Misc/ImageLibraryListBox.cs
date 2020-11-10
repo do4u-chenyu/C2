@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using C2.Model;
 
@@ -9,6 +10,7 @@ namespace C2.Controls
     {
         public ImageLibraryListBox()
         {
+            CellSize = new Size(32, 62);
             RefreshItems();
         }
 
@@ -18,7 +20,13 @@ namespace C2.Controls
             if (picture == null || picture.Data == null)
                 return;
 
-            PaintHelper.DrawImageInRange(e.Graphics, picture.Data, rect);
+            //PaintHelper.DrawImageInRange(e.Graphics, picture.Data, rect);
+
+            Rectangle rect1 = new Rectangle(rect.Location, new Size(32, 46));
+            Rectangle rect2 = new Rectangle(rect.Location, new Size(32, 16));
+            rect2.Offset(0, 46);
+            PaintHelper.DrawImageInRange(e.Graphics, picture.Data, rect1);
+            PaintHelper.DrawStringDefault(e.Graphics, picture.SName, rect2);
         }
 
         public void RefreshItems()
@@ -37,6 +45,13 @@ namespace C2.Controls
                 SelectedIndex = old;
 
             ResumeLayout();
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            this.ResumeLayout(false);
+
         }
     }
 }
