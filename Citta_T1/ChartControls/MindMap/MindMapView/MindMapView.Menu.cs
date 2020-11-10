@@ -19,6 +19,7 @@ using System.IO;
 using C2.Dialogs;
 using C2.Business.Option;
 using C2.Utils;
+using C2.Dialogs.Base;
 
 namespace C2.Controls.MapViews
 {
@@ -132,7 +133,7 @@ namespace C2.Controls.MapViews
 
             MenuOpDesign.Image = Properties.Resources.opDesign;
             MenuOpDesign.Text = Lang._("Design");
-            MenuOpDesign.Enabled = opw.Status != OpStatus.Done;
+            //MenuOpDesign.Enabled = opw.Status != OpStatus.Done;
             MenuOpDesign.Click += MenuDesignOp_Click;
 
             MenuOpRunning.Image = Properties.Resources.opRunning;
@@ -170,16 +171,26 @@ namespace C2.Controls.MapViews
 
         void MenuDesignOp_Click(object sender, EventArgs e)
         {
+            C2BaseOperatorView dialog = GenerateOperatorView();
+            if (dialog != null && dialog.ShowDialog(this) == DialogResult.OK)
+                opw.Status = OpStatus.Ready;
+        }
+        private C2BaseOperatorView GenerateOperatorView()
+        {
             switch (opw.OpType)
             {
-                case OpType.MaxOperator:
-                    new C2MaxOperatorView(opw).ShowDialog();
-                    break;
-                case OpType.CustomOperator:
-                    new C2CustomOperatorView(opw).ShowDialog();
-                    break;
-                default:
-                    break;
+                case OpType.MaxOperator: return new C2MaxOperatorView(opw);
+                case OpType.CustomOperator: return new C2CustomOperatorView(opw);
+                case OpType.MinOperator: return new C2MinOperatorView(opw);
+                case OpType.AvgOperator: return new C2AvgOperatorView(opw);
+                case OpType.DataFormatOperator: return new C2DataFormatOperatorView(opw);
+                case OpType.RandomOperator: return new C2RandomOperatorView(opw);
+                case OpType.FreqOperator: return new C2FreqOperatorView(opw);
+                case OpType.SortOperator: return new C2SortOperatorView(opw);
+                case OpType.FilterOperator: return new C2FilterOperatorView(opw);
+                case OpType.GroupOperator: return new C2GroupOperatorView(opw);
+                case OpType.PythonOperator: return new C2PythonOperatorView(opw);
+                default: return null;
             }
         }
 
