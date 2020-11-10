@@ -160,7 +160,7 @@ namespace C2.Controls.MapViews
             SelectedNode = FindNode(obj);
         }
 
-        TreeNode FindNode(object obj)
+        public TreeNode FindNode(object obj)
         {
             return FindNode(Nodes, obj);
         }

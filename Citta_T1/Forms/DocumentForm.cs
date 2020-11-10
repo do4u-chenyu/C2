@@ -26,7 +26,7 @@ namespace C2.Forms
         const string ShowSidebarOptionName = "editor_show_sidebar";
         Document _Document;
         ObjectTreeView objectTree1;
-        ObjectTreeView objectTree2;
+        DataTreeView objectTree2;
         ChartOverviewBox cob;
         TimerDialog MyTimerDialog;
         ChartPageView.BaseChartPage _ActivedChartPage;
@@ -890,13 +890,7 @@ namespace C2.Forms
             Topic st = null;
             var objectType = sob.GetType();
             if(objectType.Name == "Topic")
-            {
                 st = sob as Topic;
-                //小白偷懒
-                objectTree2.SuspendLayout();
-                objectTree2.BuildTree();
-                objectTree2.ResumeLayout(false);
-            }
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
            
