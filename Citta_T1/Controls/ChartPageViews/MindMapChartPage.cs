@@ -671,7 +671,18 @@ namespace C2.ChartPageView
         }
         void MenuAddAttachment_Click(object sender, EventArgs e)
         {
-            
+            OpenFileDialog fd = new OpenFileDialog
+            {
+                Filter = "files|*.txt;*.bcp;*.xls;*.xlsx",
+                Title = "添加附件"
+            };
+
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                //this.rsFullFilePathTextBox.Text = fd.FileName;
+            }
+
+            mindMapView1.AddAttachment();
         }
 
         void MenuAddModelOp_Click(object sender, EventArgs e)

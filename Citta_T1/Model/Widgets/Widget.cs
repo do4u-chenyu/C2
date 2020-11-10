@@ -406,6 +406,8 @@ namespace C2.Model.Widgets
                     return new ResultWidget();
                 case ChartWidget.TypeID:
                     return new ChartWidget();
+                case AttachmentWidget.TypeID:
+                    return new AttachmentWidget();
                 default:
                     return null;
             }
