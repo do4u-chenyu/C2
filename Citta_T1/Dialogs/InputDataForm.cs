@@ -1,15 +1,9 @@
 ﻿using C2.Core;
 using C2.Utils;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.Formula.Functions;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -54,14 +48,14 @@ namespace C2.Dialogs
 
             this.extType = OpUtil.ExtType.Text;
 
-            this.Clean();
+            this.Clear();
         }
         private void PreviewButton_Click(object sender, EventArgs e)
         {
             /*
              * 数据预览
              */
-            string fileName = "";
+            string fileName = String.Empty;
             string ext;
             OpenFileDialog fd = new OpenFileDialog
             {
@@ -73,13 +67,14 @@ namespace C2.Dialogs
                 this.encoding = OpUtil.Encoding.UTF8;
             if (fd.ShowDialog() == DialogResult.OK)
             {
+                
+                this.Cursor = Cursors.WaitCursor;
                 fullFilePath = fd.FileName;
                 fileName = Path.GetFileNameWithoutExtension(fullFilePath);
                 ext = Path.GetExtension(fullFilePath);
                 if (ext == ".xls" || ext == ".xlsx")
                 {
                     this.extType = OpUtil.ExtType.Excel;
-                    //PreViewExcelFile();
                     PreViewExcelFileNew();
                 }
                 else
@@ -87,8 +82,8 @@ namespace C2.Dialogs
                     this.extType = OpUtil.ExtType.Text;
                     PreViewBcpFile();
                 }
+                this.Cursor = Cursors.Default;
             }
-            //if (this.textBox1.Text == "请输入数据名称" || this.textBox1.Text == "")
             this.textBox1.Text = fileName;
             ControlUtil.DisableOrder(this.dataGridView1);
         }
@@ -137,7 +132,7 @@ namespace C2.Dialogs
                     return;
                 }
                 InputDataEvent(name, this.fullFilePath, this.separator, this.extType, this.encoding);
-                DvgClean();
+                DvgClear();
                 Close();
             }
             this.extType = OpUtil.ExtType.Unknow;
@@ -160,7 +155,7 @@ namespace C2.Dialogs
         private void CancelButton_Click(object sender, EventArgs e)
         {
             // 关闭按钮
-            DvgClean();
+            DvgClear();
             this.ReSetParams();
             Close();
         }
@@ -175,12 +170,12 @@ namespace C2.Dialogs
                 PreViewBcpFile();
             }
         }
-        private void Clean()
+        private void Clear()
         {
             this.fullFilePath = null;
             this.textBox1.Text = null;
             this.textBoxEx1.Text = null;
-            this.DvgClean();
+            this.DvgClear();
         }
 
         
@@ -190,7 +185,7 @@ namespace C2.Dialogs
             if (headersAndRows.Item1.Count == 0 && headersAndRows.Item2.Count == 0)
             {
                 MessageBox.Show("导入文件错误，文件\"" + this.fullFilePath + "\" 为空");
-                this.Clean();
+                this.Clear();
                 return;
             }
             // 特殊情况，表头有一行数据
@@ -204,17 +199,16 @@ namespace C2.Dialogs
 
         private void PreViewExcelFileNew(string sheetName = null, bool isFirstRowColumn = true)
         {
-            List<List<String>> rowContentList = new List<List<String>>();
-            rowContentList = FileUtil.ReadExcel(this.fullFilePath, maxNumOfRow);
+            List<List<String>> rowContentList = FileUtil.ReadExcel(this.fullFilePath, maxNumOfRow);
             if (rowContentList.Count == 0)
             {
-                this.Clean();
+                this.Clear();
                 return;
             }
 
             int cellCount = rowContentList[0].Count;
             DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[cellCount];
-            DvgClean(false);
+            DvgClear(false);
             for (int i = 0; i < cellCount; i++)
             {
                 ColumnList[i] = new DataGridViewTextBoxColumn
@@ -233,99 +227,7 @@ namespace C2.Dialogs
             }
         }
 
-
-        private void PreViewExcelFile(string sheetName = null, bool isFirstRowColumn = true)
-        {
-            ISheet sheet = null;
-            IWorkbook workbook = null;
-            FileStream fs = null;
-            int startRow = 0;
-            //
-            try
-            {
-                fs = new FileStream(this.fullFilePath, FileMode.Open, FileAccess.Read);
-                if (this.fullFilePath.IndexOf(".xlsx") > 0) // 2007版本
-                    workbook = new XSSFWorkbook(fs);
-                else
-                    workbook = new HSSFWorkbook(fs);   // 2003版本
-                if (sheetName != null)
-                    sheet = workbook.GetSheet(sheetName);
-                else
-                    sheet = workbook.GetSheetAt(0);
-
-                if (sheet == null)
-                {
-                    fs.Close();
-                    return;
-                }
-
-                IRow firstRow = sheet.GetRow(0);
-                int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
-                DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[cellCount];
-                DvgClean(false);
-                if (isFirstRowColumn)
-                {
-                    for (int i = firstRow.FirstCellNum; i < cellCount; ++i)
-                    {
-                        ColumnList[i] = new DataGridViewTextBoxColumn
-                        {
-                            HeaderText = firstRow.GetCell(i).StringCellValue,
-                            Name = "Col " + i.ToString()
-                        };
-                    }
-                    this.dataGridView1.Columns.AddRange(ColumnList);
-                    startRow = sheet.FirstRowNum + 1;
-                }
-                else
-                {
-                    startRow = sheet.FirstRowNum;
-                }
-                //最后一列的标号
-                int rowCount = sheet.LastRowNum;
-                for (int i = 0; i <= Math.Min(maxNumOfRow, rowCount); ++i)
-                {
-                    IRow row = sheet.GetRow(i + startRow);
-                    if (row == null) continue; //没有数据的行默认是null　　　　　　　
-
-                    DataGridViewRow dr = new DataGridViewRow();
-                    this.dataGridView1.Rows.Add(dr);
-                    for (int j = row.FirstCellNum; j < cellCount; ++j)
-                    {
-                        if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null
-                        {
-                            string content = row.GetCell(j).ToString();
-                            this.dataGridView1.Rows[i].Cells[j].Value = content;
-                        }
-                    }
-                }
-            }
-            catch (System.IO.IOException ex)
-            {
-                MessageBox.Show(string.Format("文件{0}已被打开，请先关闭该文件", this.fullFilePath));
-                log.Error("预读Excel: " + this.fullFilePath + " 失败, error: " + ex.Message);
-            }
-            catch (Exception ex)
-            {
-                log.Error("预读Excel: " + this.fullFilePath + " 失败, error: " + ex.Message);
-            }
-            finally
-            {
-                if (fs != null)
-                {
-                    fs.Close();
-                    fs.Dispose();
-                }
-                if (workbook != null)
-                {
-                    workbook.Close();
-                    workbook = null;
-                }
-                if (sheet != null)
-                    sheet = null;
-            }
-        }
-
-        public void DvgClean(bool isCleanDataName = true)
+        public void DvgClear(bool isCleanDataName = true)
         {
             if (isCleanDataName) { this.textBox1.Text = null; }
             this.dataGridView1.DataSource = null; // System.InvalidOperationException:“操作无效，原因是它导致对 SetCurrentCellAddressCore 函数的可重入调用。”
@@ -449,7 +351,7 @@ namespace C2.Dialogs
         }
 
 
-        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
                 this.dataGridView1.RowHeadersWidth - 4, e.RowBounds.Height);

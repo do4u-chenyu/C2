@@ -55,12 +55,18 @@ namespace C2.Dialogs
 
             List<List<string>> columnValues= Utils.FileUtil.GetColumns(indexs, hitItem, rows, upperLimit);
             if (columnValues.Count == 0)
-            { 
+            {
+                HelpUtil.ShowMessageBox("文件内容为空", "提示信息", MessageBoxIcon.Information);
                 Close(); 
                 return;
             }
-       
-            Utils.ControlUtil.PaintChart(columnValues, new List<string>() { this.FileName, this.FileName }, this.chartTypesList.Text);
+            // xy轴标题名
+            string xName = comboBox0.SelectedItem.ToString();
+            List<string> yNames = outListCCBL0.GetItemCheckText();
+            yNames.Insert(0,this.FileName);
+            yNames.Insert(1, xName);
+
+            Utils.ControlUtil.PaintChart(columnValues, yNames, this.chartTypesList.Text);
             // 存储图表挂件需要的数据
             hitItem.ChartType = this.chartTypesList.Text;
             hitItem.SelectedIndexs = indexs;
@@ -81,15 +87,15 @@ namespace C2.Dialogs
                 case 7:
                 case 5:
                 case 3:
-                case 1:
-                    MessageBox.Show("请设置图表类型.");
+                case 1:         
+                    HelpUtil.ShowMessageBox("请设置图表类型", "提示信息", MessageBoxIcon.Information);
                     break;
                 case 6:
                 case 2:
-                    MessageBox.Show("请设置输入维度.");
+                    HelpUtil.ShowMessageBox("请设置输入维度", "提示信息", MessageBoxIcon.Information);
                     break;
                 case 4:
-                    MessageBox.Show("请设置输出维度.");
+                    HelpUtil.ShowMessageBox("请设置输出维度", "提示信息", MessageBoxIcon.Information);
                     break;
                 default:
                     break;

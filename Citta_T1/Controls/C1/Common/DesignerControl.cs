@@ -116,18 +116,34 @@ namespace C2.Controls.Common
 
             //TODO
             //数据大纲，父类所有数据源,暂用固定列表模拟
-            DataSourceWidget dtw = SelectedTopic.FindWidget<DataSourceWidget>();
-            if (dtw != null)
+            ComboDataSource = new List<DataItem>();
+            GetParentDatas(SelectedTopic);
+            foreach (DataItem dataItem in ComboDataSource)
             {
-                List<DataItem> di = dtw.DataItems;
-                foreach (DataItem dataItem in di)
-                {
-                    this.dataSourceCombo.Items.Add(dataItem.FileName);
-                }
-                ComboDataSource = di;
+                this.dataSourceCombo.Items.Add(dataItem.FileName);
             }
-
         }
+
+        void GetParentDatas(Topic topic)
+        {
+            if (!topic.IsRoot)
+            {
+                Topic parentTopic = topic.ParentTopic;
+                GetParentDatas(parentTopic);
+            }
+            GetCurrentTopicDatas(topic);
+        }
+
+        void GetCurrentTopicDatas(Topic topic)
+        {
+            DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
+            ResultWidget rsw = topic.FindWidget<ResultWidget>();
+            if (dtw != null)
+                dtw.DataItems.ForEach(c => ComboDataSource.Add(c));
+            if (rsw != null)
+                rsw.DataItems.ForEach(c => ComboDataSource.Add(c));
+        }
+
 
         private void SetSelectedOperator()
         {
