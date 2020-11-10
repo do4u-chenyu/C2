@@ -23,7 +23,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(C2AvgOperatorView));
             this.label2 = new System.Windows.Forms.Label();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -33,7 +32,7 @@
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(0, 0);
-            this.dataSourceTB0.Size = new System.Drawing.Size(136, 28);
+            this.dataSourceTB0.Size = new System.Drawing.Size(136, 23);
             this.dataSourceTB0.TabIndex = 2;
             // 
             // cancelButton
@@ -53,29 +52,25 @@
             // 
             // comboBox0
             // 
-            this.comboBox0.Location = new System.Drawing.Point(1, 51);
-            this.comboBox0.Size = new System.Drawing.Size(135, 26);
+            this.comboBox0.Location = new System.Drawing.Point(1, 56);
+            this.comboBox0.Size = new System.Drawing.Size(137, 21);
             this.comboBox0.TabIndex = 1;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Size = new System.Drawing.Size(86, 26);
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(297, 10);
+            this.topPanel.Size = new System.Drawing.Size(299, 10);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 108);
-            this.bottomPanel.Size = new System.Drawing.Size(297, 43);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 118);
+            this.bottomPanel.Size = new System.Drawing.Size(299, 43);
             // 
             // keyPanel
             // 
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 10);
-            this.keyPanel.Size = new System.Drawing.Size(116, 98);
+            this.keyPanel.Size = new System.Drawing.Size(116, 108);
             this.keyPanel.Controls.SetChildIndex(this.label1, 0);
             this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             // 
@@ -84,12 +79,12 @@
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.comboBox0);
             this.valuePanel.Location = new System.Drawing.Point(116, 10);
-            this.valuePanel.Size = new System.Drawing.Size(181, 98);
+            this.valuePanel.Size = new System.Drawing.Size(183, 108);
             // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(32, 4);
-            this.label1.Size = new System.Drawing.Size(85, 19);
+            this.label1.Size = new System.Drawing.Size(63, 14);
             // 
             // label2
             // 
@@ -98,26 +93,26 @@
             this.label2.Location = new System.Drawing.Point(32, 59);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 19);
+            this.label2.Size = new System.Drawing.Size(63, 14);
             this.label2.TabIndex = 0;
             this.label2.Text = "取平均值";
             // 
-            // AvgOperatorView
+            // C2AvgOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(297, 151);
+            this.ClientSize = new System.Drawing.Size(299, 161);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Icon = Properties.Resources.avg_icon;
+            this.Icon = global::C2.Properties.Resources.avg_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(315, 200);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(315, 200);
-            this.Name = "AvgOperatorView";
+            this.Name = "C2AvgOperatorView";
             this.ShowIcon = true;
             this.Text = "取平均值算子设置";
             this.bottomPanel.ResumeLayout(false);

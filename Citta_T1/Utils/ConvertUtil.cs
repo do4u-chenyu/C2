@@ -1,5 +1,7 @@
 ﻿using NPOI.SS.Formula.Functions;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -67,7 +69,26 @@ namespace C2.Utils
             }
             return notInt;
         }
-
+        public static List<int> TryParseIntList(string text,char defaultValue = ',')
+        {
+            List<int> result = new List<int>();
+            try
+            {              
+                List<string> itemList = text.Split(defaultValue).ToList();
+                foreach (string item in itemList)
+                {
+                    if (IsInt(item))
+                        result.Add(TryParseInt(item));
+                    else
+                        return new List<int>();
+                }
+            }
+            catch
+            {
+                return new List<int>();
+            }
+            return result;
+        }
         public static char TryParseAscii(string asciiChar, char defaultValue = '\t')
         {
             int ascii = TryParseInt(asciiChar, defaultValue);

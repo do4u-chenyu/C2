@@ -48,6 +48,7 @@ namespace C2.Controls.Move.Op
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox.ReadOnly = true;
             this.textBox.TabIndex = 5;
+            this.textBox.Text = "b";
             this.textBox.Visible = false;
             // 
             // txtButton
@@ -57,6 +58,7 @@ namespace C2.Controls.Move.Op
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.TabIndex = 8;
+            this.txtButton.TabStop = false;
             this.txtButton.UseVisualStyleBackColor = false;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);

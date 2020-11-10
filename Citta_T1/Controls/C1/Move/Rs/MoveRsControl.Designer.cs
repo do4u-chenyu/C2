@@ -77,6 +77,7 @@ namespace C2.Controls.Move.Rs
             this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.Size = new System.Drawing.Size(110, 23);
             this.txtButton.TabIndex = 8;
+            this.txtButton.TabStop = false;
             this.txtButton.UseVisualStyleBackColor = true;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseMove);
@@ -93,7 +94,6 @@ namespace C2.Controls.Move.Rs
             this.PreviewMenuItem.Text = "预览";
             this.PreviewMenuItem.ToolTipText = "会在底层数据预览面板展示运算结果的前100行";
             this.PreviewMenuItem.Click += new System.EventHandler(this.PreviewMenuItem_Click);
-
             // 
             // SaveAsToolStripMenuItem
             // 

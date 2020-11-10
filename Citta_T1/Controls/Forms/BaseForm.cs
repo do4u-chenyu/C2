@@ -15,7 +15,7 @@ namespace C2.Controls
 
         public BaseForm()
         {
-            Icon = Properties.Resources.logo_icon;
+            Icon = Properties.Resources.logo;
 
 #if DEBUG
             if (!DesignMode && CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft)

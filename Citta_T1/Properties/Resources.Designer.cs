@@ -1564,9 +1564,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Icon logo_icon {
+        internal static System.Drawing.Icon logo {
             get {
-                object obj = ResourceManager.GetObject("logo_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("logo", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

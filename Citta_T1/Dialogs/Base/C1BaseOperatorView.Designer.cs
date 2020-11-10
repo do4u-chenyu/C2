@@ -26,14 +26,6 @@
             this.bottomPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataSourceTB1
-            // 
-            this.dataSourceTB1.MouseHover += new System.EventHandler(this.DataSourceTB1_MouseHover);
-            // 
-            // dataSourceTB0
-            // 
-            this.dataSourceTB0.MouseHover += new System.EventHandler(this.DataSourceTB0_MouseHover);
-            // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
