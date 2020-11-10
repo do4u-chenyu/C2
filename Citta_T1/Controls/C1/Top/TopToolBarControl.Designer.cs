@@ -92,6 +92,7 @@
             this.saveAllButton.Margin = new System.Windows.Forms.Padding(0);
             this.saveAllButton.Name = "saveAllButton";
             this.saveAllButton.Size = new System.Drawing.Size(24, 25);
+            this.saveAllButton.ToolTipText = "保存所有模型";
             this.saveAllButton.Click += new System.EventHandler(this.FormatButton_Click);
             // 
             // saveModelButton
@@ -104,6 +105,7 @@
             this.saveModelButton.Margin = new System.Windows.Forms.Padding(0);
             this.saveModelButton.Name = "saveModelButton";
             this.saveModelButton.Size = new System.Drawing.Size(24, 25);
+            this.saveModelButton.ToolTipText = "保存模型";
             this.saveModelButton.Click += new System.EventHandler(this.SaveModelButton_Click);
             // 
             // toolStripSeparator1
@@ -122,6 +124,7 @@
             this.undoButton.Margin = new System.Windows.Forms.Padding(0);
             this.undoButton.Name = "undoButton";
             this.undoButton.Size = new System.Drawing.Size(24, 25);
+            this.undoButton.ToolTipText = "撤销按钮:撤销当前操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的撤销.";
             this.undoButton.Click += new System.EventHandler(this.UndoButton_Click);
             // 
             // redoButton
@@ -134,6 +137,7 @@
             this.redoButton.Margin = new System.Windows.Forms.Padding(0);
             this.redoButton.Name = "redoButton";
             this.redoButton.Size = new System.Drawing.Size(24, 25);
+            this.redoButton.ToolTipText = "恢复按钮:恢复上一步的撤销操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的恢复.";
             this.redoButton.Click += new System.EventHandler(this.RedoButton_Click);
             // 
             // toolStripSeparator2
@@ -151,6 +155,7 @@
             this.ImportModel.Margin = new System.Windows.Forms.Padding(0);
             this.ImportModel.Name = "ImportModel";
             this.ImportModel.Size = new System.Drawing.Size(24, 25);
+            this.ImportModel.ToolTipText = "导入模型";
             this.ImportModel.Click += new System.EventHandler(this.ImportModel_Click);
             // 
             // formatButton
@@ -175,6 +180,7 @@
             this.remarkPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.remarkPictureBox.Name = "remarkPictureBox";
             this.remarkPictureBox.Size = new System.Drawing.Size(24, 25);
+            this.remarkPictureBox.ToolTipText = "编写备注信息";
             this.remarkPictureBox.Click += new System.EventHandler(this.RemarkPictureBox_Click);
             // 
             // toolStripSeparator3
@@ -192,7 +198,7 @@
             this.zoomUpPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.zoomUpPictureBox.Name = "zoomUpPictureBox";
             this.zoomUpPictureBox.Size = new System.Drawing.Size(24, 25);
-            this.zoomUpPictureBox.ToolTipText = "1";
+            this.zoomUpPictureBox.ToolTipText = "放大屏幕中算子并支持三级放大";
             this.zoomUpPictureBox.Click += new System.EventHandler(this.ZoomUpPictureBox_Click);
             // 
             // zoomDownPictureBox
@@ -205,6 +211,7 @@
             this.zoomDownPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.zoomDownPictureBox.Name = "zoomDownPictureBox";
             this.zoomDownPictureBox.Size = new System.Drawing.Size(24, 25);
+            this.zoomDownPictureBox.ToolTipText = "缩小当前屏幕中算子";
             this.zoomDownPictureBox.Click += new System.EventHandler(this.ZoomDownPictureBox_Click);
             // 
             // toolStripSeparator4
@@ -222,6 +229,7 @@
             this.movePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.movePictureBox.Name = "movePictureBox";
             this.movePictureBox.Size = new System.Drawing.Size(24, 25);
+            this.movePictureBox.ToolTipText = "拖动当前视野屏幕";
             this.movePictureBox.Click += new System.EventHandler(this.MovePictureBox_Click);
             // 
             // framePictureBox
@@ -234,6 +242,7 @@
             this.framePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.framePictureBox.Name = "framePictureBox";
             this.framePictureBox.Size = new System.Drawing.Size(24, 25);
+            this.framePictureBox.ToolTipText = "框选屏幕中算子进行整体拖动";
             this.framePictureBox.Click += new System.EventHandler(this.FramePictureBox_Click);
             // 
             // moreButton
@@ -246,11 +255,12 @@
             this.moreButton.Margin = new System.Windows.Forms.Padding(0);
             this.moreButton.Name = "moreButton";
             this.moreButton.Size = new System.Drawing.Size(24, 25);
+            this.moreButton.ToolTipText = "首选项配置,配置程序的各项参数";
             this.moreButton.Click += new System.EventHandler(this.MoreButton_Click);
             // 
             // LinePanel
             // 
-            this.LinePanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.LinePanel.BackColor = System.Drawing.Color.DarkGray;
             this.LinePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.LinePanel.ForeColor = System.Drawing.Color.Black;
             this.LinePanel.Location = new System.Drawing.Point(0, 27);

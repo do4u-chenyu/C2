@@ -80,7 +80,6 @@
             this.topToolBarControl.SelectRemark = false;
             this.topToolBarControl.Size = new System.Drawing.Size(913, 28);
             this.topToolBarControl.TabIndex = 43;
-            this.topToolBarControl.Paint += new System.Windows.Forms.PaintEventHandler(this.topToolBarControl_Load);
             // 
             // currentModelRunBackLab
             // 
