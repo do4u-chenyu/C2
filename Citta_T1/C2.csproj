@@ -1480,6 +1480,9 @@
     <EmbeddedResource Include="Dialogs\AboutDialogBox.resx">
       <DependentUpon>AboutDialogBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddIconDialog.resx">
+      <DependentUpon>AddIconDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Base\BaseOperatorView.resx">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
     </EmbeddedResource>

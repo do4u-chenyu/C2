@@ -30,7 +30,7 @@ namespace C2.Dialogs
             Controls.Add(CkbMore);
 
             MinimumSize = Size;
-            Size = new Size(300, 400);
+            Size = new Size(300, 600);
             AfterInitialize();
         }
 
@@ -72,6 +72,18 @@ namespace C2.Dialogs
         private void CkbMore_CheckedChanged(object sender, EventArgs e)
         {
             NeedMoreOptions = CkbMore.Checked;
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // AddIconDialog
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "AddIconDialog";
+            this.ResumeLayout(false);
+
         }
     }
 }
