@@ -159,7 +159,7 @@
             this.RemarkButton.Margin = new System.Windows.Forms.Padding(0);
             this.RemarkButton.Name = "RemarkButton";
             this.RemarkButton.Size = new System.Drawing.Size(24, 25);
-            this.RemarkButton.Click += new System.EventHandler(this.RemarkPictureBox_Click);
+            this.RemarkButton.Click += new System.EventHandler(this.RemarkButton_Click);
             // 
             // toolStripSeparator3
             // 
@@ -176,7 +176,7 @@
             this.ZoomUpButton.Margin = new System.Windows.Forms.Padding(0);
             this.ZoomUpButton.Name = "ZoomUpButton";
             this.ZoomUpButton.Size = new System.Drawing.Size(24, 25);
-            this.ZoomUpButton.Click += new System.EventHandler(this.ZoomUpPictureBox_Click);
+            this.ZoomUpButton.Click += new System.EventHandler(this.ZoomUpButton_Click);
             // 
             // ZoomDownButton
             // 
@@ -188,7 +188,7 @@
             this.ZoomDownButton.Margin = new System.Windows.Forms.Padding(0);
             this.ZoomDownButton.Name = "ZoomDownButton";
             this.ZoomDownButton.Size = new System.Drawing.Size(24, 25);
-            this.ZoomDownButton.Click += new System.EventHandler(this.ZoomDownPictureBox_Click);
+            this.ZoomDownButton.Click += new System.EventHandler(this.ZoomDownButton_Click);
             // 
             // toolStripSeparator4
             // 
@@ -205,7 +205,7 @@
             this.MoveButton.Margin = new System.Windows.Forms.Padding(0);
             this.MoveButton.Name = "MoveButton";
             this.MoveButton.Size = new System.Drawing.Size(24, 25);
-            this.MoveButton.Click += new System.EventHandler(this.MovePictureBox_Click);
+            this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
             // 
             // FrameButton
             // 
@@ -217,7 +217,7 @@
             this.FrameButton.Margin = new System.Windows.Forms.Padding(0);
             this.FrameButton.Name = "FrameButton";
             this.FrameButton.Size = new System.Drawing.Size(24, 25);
-            this.FrameButton.Click += new System.EventHandler(this.FramePictureBox_Click);
+            this.FrameButton.Click += new System.EventHandler(this.FrameButton_Click);
             // 
             // MoreButton
             // 
