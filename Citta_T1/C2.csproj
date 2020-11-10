@@ -1471,11 +1471,17 @@
     <EmbeddedResource Include="Controls\DataCharts\RingChart.resx">
       <DependentUpon>RingChart.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Misc\ImageLibraryListBox.resx">
+      <DependentUpon>ImageLibraryListBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\AccelaratorKeys\ShortcutKeysEditor.resx">
       <DependentUpon>ShortcutKeysEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AboutDialogBox.resx">
       <DependentUpon>AboutDialogBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddIconDialog.resx">
+      <DependentUpon>AddIconDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Base\BaseOperatorView.resx">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>

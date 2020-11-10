@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Windows.Forms.Design;
-using C2.Core;
-using C2.Dialogs;
+﻿using C2.Dialogs;
 using C2.Globalization;
 using C2.Model;
 using C2.Model.Widgets;
+using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
 namespace C2.Controls
 {
