@@ -548,8 +548,10 @@ namespace C2.ChartPageView
                 MenuToggleFolding.Enabled = topicCount > 0 && count == 1 && !topic.IsRoot;
                 MenuExpandAll.Enabled = topicCount > 0 && count == 1;
                 MenuCollapseAll.Enabled = topicCount > 0 && count == 1;
-                MenuAdd.Enabled = true;
-                MenuAddOperator.Enabled = topicCount > 0;
+                MenuAdd.Enabled = !ReadOnly && count == 1 && topicCount > 0;
+                MenuAddOperator.Enabled = topicCount > 0 && count == 1;
+                MenuAddAttachment.Enabled = topicCount > 0 && count == 1;
+                MenuAddModelOp.Enabled = topicCount > 0 && count == 1;
                 MenuNewChartFromHere.Available = topicCount == 1;
 
                 bool hasLink = false;
