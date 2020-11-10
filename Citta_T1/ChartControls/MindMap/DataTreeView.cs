@@ -68,7 +68,12 @@ namespace C2.Controls.MapViews
                 {
                     TreeNode node = new TreeNode(dataItem.FileName);
                     node.ImageIndex = node.SelectedImageIndex = 3;
-                    if (!nodes.Contains(node)) nodes.Add(node);
+                    //if (!nodes.Contains(node)) nodes.Add(node);
+                    var isExist = false;
+                    foreach (TreeNode tmp in nodes)
+                        if (tmp.Text == dataItem.FileName)
+                            isExist = true;
+                    if (!isExist) nodes.Add(node);
                 }
             }
             if (rs != null)
