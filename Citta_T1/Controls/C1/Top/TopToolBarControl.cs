@@ -196,14 +196,6 @@ namespace C2.Controls.Top
             this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
         }
 
-        private void TopToolBarControl_Load(object sender, EventArgs e)
-        {
-            // 测试用
-            //UndoRedoManager.GetInstance().DoCommand(new TestCommand());
-            //UndoRedoManager.GetInstance().DoCommand(new TestCommand());
-            //UndoRedoManager.GetInstance().DoCommand(new TestCommand());
-        }
-
         private void ImportModel_Click(object sender, EventArgs e)
         {
             C2.Business.Model.ImportModel.GetInstance().ImportIaoFile(Global.GetMainForm().UserName);

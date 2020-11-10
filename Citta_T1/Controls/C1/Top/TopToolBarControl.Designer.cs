@@ -257,7 +257,6 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "TopToolBarControl";
             this.Size = new System.Drawing.Size(990, 28);
-            this.Load += new System.EventHandler(this.TopToolBarControl_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
