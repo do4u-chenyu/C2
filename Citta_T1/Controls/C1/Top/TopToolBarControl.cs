@@ -27,7 +27,14 @@ namespace C2.Controls.Top
             InitializeComponent();
             InitializeToolTip();
             InitializeUndoRedoManger();
+            InitializeOther();
         } // 恢复到编辑模式
+
+        private void InitializeOther()
+        {
+            this.toolStrip1.Renderer = DefaultToolStripRenderer.Default;
+        }
+
         public void ResetStatus()
         {
             SelectDrag = false;
