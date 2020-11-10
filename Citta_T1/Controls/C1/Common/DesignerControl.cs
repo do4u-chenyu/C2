@@ -170,14 +170,24 @@ namespace C2.Controls.Common
                 OpWidget = SelectedTopic.FindWidget<OperatorWidget>();
             }
 
+            OpType tmpOpType = OpWidget.OpType;
+            DataItem tmpDataItem = OpWidget.DataSourceItem;
+
             OpWidget.OpType =ComboOperator[this.operatorCombo.SelectedIndex];
             OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
 
             C2BaseOperatorView dialog = GenerateOperatorView();
-            if (dialog != null && dialog.ShowDialog(this) == DialogResult.OK)
+            if (dialog == null)
+                return;
+            DialogResult dr = dialog.ShowDialog(this);
+            if (dr == DialogResult.OK)
                 OpWidget.Status = OpStatus.Ready;
-
-
+            else if(dr == DialogResult.Cancel)
+            {
+                OpWidget.OpType = tmpOpType;
+                OpWidget.DataSourceItem = tmpDataItem;
+                SetSelectedTopicDesign(SelectedTopic, MindmapView);
+            }
         }
 
         private C2BaseOperatorView GenerateOperatorView()
