@@ -13,7 +13,7 @@ namespace C2.Business.Model
         ModelDocument _CurrentDocument;
 
         public List<ModelDocument> ModelDocuments { get; set; }
-        public ModelDocument CurrentDocument {
+        public ModelDocument CurrentDocument {  // TODO DK 改成返回 ModelDocuments[0]
             get { return _CurrentDocument; }
             set
             {

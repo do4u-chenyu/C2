@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -536,9 +536,6 @@ namespace C2.ChartPageView
 
                 MenuAddTopic.Enabled = !ReadOnly && count == 1 && topicCount > 0 && !topic.IsRoot;
                 MenuAddSubTopic.Enabled = !ReadOnly && count == 1 && topicCount > 0;
-                MenuAddOperator.Enabled = topicCount > 0 && count == 1 ;
-                MenuAddModelOp.Enabled = topicCount > 0 && count == 1 ;
-                MenuAddAttachment.Enabled = topicCount > 0 && count == 1 ;
                 MenuFolding.Available = topicCount > 0 && count == 1 && topic.HasChildren;
                 MenuExpandFolding.Enabled = topicCount > 0 && count == 1 && topic.Folded && !topic.IsRoot;
                 MenuCollapseFolding.Enabled = topicCount > 0 && count == 1 && !topic.Folded && !topic.IsRoot;
@@ -546,6 +543,7 @@ namespace C2.ChartPageView
                 MenuExpandAll.Enabled = topicCount > 0 && count == 1;
                 MenuCollapseAll.Enabled = topicCount > 0 && count == 1;
                 MenuAdd.Enabled = true;
+                MenuAddOperator.Enabled = topicCount > 0;
                 MenuNewChartFromHere.Available = topicCount == 1;
 
                 bool hasLink = false;
@@ -671,7 +669,6 @@ namespace C2.ChartPageView
             ShowDesignerObject = mindMapView1.SelectedTopic;
             mindMapView1.AddOperator();
         }
-
         void MenuAddAttachment_Click(object sender, EventArgs e)
         {
             

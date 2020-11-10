@@ -85,7 +85,6 @@
             // 
             // relateOpPictureBox
             // 
-
             this.relateOpPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.relateOpPictureBox.BackgroundImage = global::C2.Properties.Resources.relate_op;
             this.relateOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -296,6 +295,7 @@
             this.leftPanelOpRelate.Name = "leftPanelOpRelate";
             this.leftPanelOpRelate.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpRelate.TabIndex = 0;
+            this.leftPanelOpRelate.TabStop = false;
             this.leftPanelOpRelate.Text = "关联算子";
             this.leftPanelOpRelate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpRelate.UseMnemonic = false;
@@ -313,6 +313,7 @@
             this.pythonOPButton.Name = "pythonOPButton";
             this.pythonOPButton.Size = new System.Drawing.Size(70, 29);
             this.pythonOPButton.TabIndex = 39;
+            this.pythonOPButton.TabStop = false;
             this.pythonOPButton.Text = "Py算子";
             this.pythonOPButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.pythonOPButton.UseMnemonic = false;
@@ -330,12 +331,12 @@
             this.customOPButton1.Name = "customOPButton1";
             this.customOPButton1.Size = new System.Drawing.Size(70, 29);
             this.customOPButton1.TabIndex = 37;
+            this.customOPButton1.TabStop = false;
             this.customOPButton1.Text = "AI实践";
             this.customOPButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.customOPButton1.UseMnemonic = false;
             this.customOPButton1.UseVisualStyleBackColor = false;
             this.customOPButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-    
             // 
             // leftPanelOpMin
             // 
@@ -348,6 +349,7 @@
             this.leftPanelOpMin.Name = "leftPanelOpMin";
             this.leftPanelOpMin.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpMin.TabIndex = 24;
+            this.leftPanelOpMin.TabStop = false;
             this.leftPanelOpMin.Text = "取最小值";
             this.leftPanelOpMin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpMin.UseMnemonic = false;
@@ -365,6 +367,7 @@
             this.leftPanelOpMax.Name = "leftPanelOpMax";
             this.leftPanelOpMax.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpMax.TabIndex = 23;
+            this.leftPanelOpMax.TabStop = false;
             this.leftPanelOpMax.Text = "取最大值";
             this.leftPanelOpMax.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpMax.UseMnemonic = false;
@@ -382,6 +385,7 @@
             this.leftPanelOpRandom.Name = "leftPanelOpRandom";
             this.leftPanelOpRandom.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpRandom.TabIndex = 21;
+            this.leftPanelOpRandom.TabStop = false;
             this.leftPanelOpRandom.Text = "随机采样";
             this.leftPanelOpRandom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpRandom.UseMnemonic = false;
@@ -400,6 +404,7 @@
             this.leftPanelOpDiffer.Name = "leftPanelOpDiffer";
             this.leftPanelOpDiffer.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpDiffer.TabIndex = 20;
+            this.leftPanelOpDiffer.TabStop = false;
             this.leftPanelOpDiffer.Text = "取差集";
             this.leftPanelOpDiffer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpDiffer.UseMnemonic = false;
@@ -417,6 +422,7 @@
             this.leftPanelOpUnion.Name = "leftPanelOpUnion";
             this.leftPanelOpUnion.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpUnion.TabIndex = 19;
+            this.leftPanelOpUnion.TabStop = false;
             this.leftPanelOpUnion.Text = "取并集";
             this.leftPanelOpUnion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpUnion.UseMnemonic = false;
@@ -434,6 +440,7 @@
             this.leftPanelOpCollide.Name = "leftPanelOpCollide";
             this.leftPanelOpCollide.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpCollide.TabIndex = 18;
+            this.leftPanelOpCollide.TabStop = false;
             this.leftPanelOpCollide.Text = "碰撞算子";
             this.leftPanelOpCollide.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpCollide.UseMnemonic = false;
@@ -451,6 +458,7 @@
             this.customOPButton2.Name = "customOPButton2";
             this.customOPButton2.Size = new System.Drawing.Size(73, 29);
             this.customOPButton2.TabIndex = 41;
+            this.customOPButton2.TabStop = false;
             this.customOPButton2.Text = "多源算子";
             this.customOPButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.customOPButton2.UseMnemonic = false;
@@ -468,6 +476,7 @@
             this.leftPanelOpFilter.Name = "leftPanelOpFilter";
             this.leftPanelOpFilter.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpFilter.TabIndex = 22;
+            this.leftPanelOpFilter.TabStop = false;
             this.leftPanelOpFilter.Text = "条件筛选";
             this.leftPanelOpFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpFilter.UseMnemonic = false;
@@ -485,6 +494,7 @@
             this.leftPanelOpDataStandar.Name = "leftPanelOpDataStandar";
             this.leftPanelOpDataStandar.Size = new System.Drawing.Size(87, 29);
             this.leftPanelOpDataStandar.TabIndex = 34;
+            this.leftPanelOpDataStandar.TabStop = false;
             this.leftPanelOpDataStandar.Text = "数据标准化";
             this.leftPanelOpDataStandar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpDataStandar.UseMnemonic = false;
@@ -502,6 +512,7 @@
             this.leftPanelOpWordFilter.Name = "leftPanelOpWordFilter";
             this.leftPanelOpWordFilter.Size = new System.Drawing.Size(85, 29);
             this.leftPanelOpWordFilter.TabIndex = 32;
+            this.leftPanelOpWordFilter.TabStop = false;
             this.leftPanelOpWordFilter.Text = "关键词过滤";
             this.leftPanelOpWordFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpWordFilter.UseMnemonic = false;
@@ -519,6 +530,7 @@
             this.leftPanelOpGroup.Name = "leftPanelOpGroup";
             this.leftPanelOpGroup.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpGroup.TabIndex = 31;
+            this.leftPanelOpGroup.TabStop = false;
             this.leftPanelOpGroup.Text = "分组算子";
             this.leftPanelOpGroup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpGroup.UseMnemonic = false;
@@ -536,6 +548,7 @@
             this.leftPanelOpSort.Name = "leftPanelOpSort";
             this.leftPanelOpSort.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpSort.TabIndex = 30;
+            this.leftPanelOpSort.TabStop = false;
             this.leftPanelOpSort.Text = "排序算子";
             this.leftPanelOpSort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpSort.UseMnemonic = false;
@@ -553,6 +566,7 @@
             this.leftPanelOpFreq.Name = "leftPanelOpFreq";
             this.leftPanelOpFreq.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpFreq.TabIndex = 29;
+            this.leftPanelOpFreq.TabStop = false;
             this.leftPanelOpFreq.Text = "频率算子";
             this.leftPanelOpFreq.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpFreq.UseMnemonic = false;
@@ -570,6 +584,7 @@
             this.leftPanelOpAvg.Name = "leftPanelOpAvg";
             this.leftPanelOpAvg.Size = new System.Drawing.Size(73, 29);
             this.leftPanelOpAvg.TabIndex = 25;
+            this.leftPanelOpAvg.TabStop = false;
             this.leftPanelOpAvg.Text = "取平均值";
             this.leftPanelOpAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.leftPanelOpAvg.UseMnemonic = false;
@@ -617,6 +632,7 @@
             this.Controls.Add(this.avgOpPictureBox);
             this.Controls.Add(this.unionOpPictureBox);
             this.Controls.Add(this.collideOpPictureBox);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "OperatorControl";
