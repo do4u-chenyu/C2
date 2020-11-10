@@ -72,8 +72,8 @@ namespace C2.Controls.Top
             SelectFrame = false;
             ChangeCursor();
             FrameChange();
-            this.movePictureBox.BackColor = Color.FromArgb(200, 200, 200);
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.MoveButton.BackColor = Color.FromArgb(200, 200, 200);
+            this.FrameButton.BackColor = Color.FromArgb(230, 237, 246);
         }
 
         #endregion
@@ -87,7 +87,7 @@ namespace C2.Controls.Top
             FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(true);
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.FrameButton.BackColor = Color.FromArgb(230, 237, 246);
         }
 
         private void ZoomDownPictureBox_Click(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace C2.Controls.Top
             FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(false);
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.FrameButton.BackColor = Color.FromArgb(230, 237, 246);
         }
         #endregion
 
@@ -133,8 +133,8 @@ namespace C2.Controls.Top
             SelectDrag = false;
             ChangeCursor();
 
-            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
-            this.framePictureBox.BackColor = Color.FromArgb(200, 200, 200);
+            this.MoveButton.BackColor = Color.FromArgb(230, 237, 246);
+            this.FrameButton.BackColor = Color.FromArgb(200, 200, 200);
         }
         #endregion
 
@@ -161,54 +161,53 @@ namespace C2.Controls.Top
 
         private void TopToolBarControl_UndoStackNotEmpty()
         {
-            this.undoButton.Enabled = true;
+            this.UndoButton.Enabled = true;
         }
 
         private void TopToolBarControl_UndoStackEmpty()
         {
-            this.undoButton.Enabled = false;
+            this.UndoButton.Enabled = false;
         }
 
         private void TopToolBarControl_RedoStackNotEmpty()
         {
-            this.redoButton.Enabled = true;
+            this.RedoButton.Enabled = true;
         }
 
         private void TopToolBarControl_RedoStackEmpty()
         {
-            this.redoButton.Enabled = false;
+            this.RedoButton.Enabled = false;
         }
 
         private void InitializeToolTip()
         {
-            this.saveModelButton.ToolTipText = HelpUtil.SaveModelButtonHelpInfo;
-            this.saveAllButton.ToolTipText = HelpUtil.SaveAllButtonHelpInfo;
-            this.undoButton.ToolTipText = HelpUtil.UndoButtonHelpInfo;
-            this.redoButton.ToolTipText = HelpUtil.RedoButtonHelpInfo;
-            this.ImportModel.ToolTipText = HelpUtil.ImportModelHelpInfo;
-            this.formatButton.ToolTipText = HelpUtil.FormatOperatorHelpInfo;
-            this.remarkPictureBox.ToolTipText = HelpUtil.RemarkPictureBoxHelpInfo;
-            this.zoomUpPictureBox.ToolTipText = HelpUtil.ZoomUpPictureBoxHelpInfo;
-            this.zoomDownPictureBox.ToolTipText = HelpUtil.zoomDownPictureBoxHelpInfo;
-            this.movePictureBox.ToolTipText = HelpUtil.MovePictureBoxHelpInfo;
-            this.framePictureBox.ToolTipText = HelpUtil.FramePictureBoxHelpInfo;
-            this.moreButton.ToolTipText = HelpUtil.moreButtonHelpInfo;
+            this.SaveModelButton.ToolTipText = HelpUtil.SaveModelButtonHelpInfo;
+            this.UndoButton.ToolTipText = HelpUtil.UndoButtonHelpInfo;
+            this.RedoButton.ToolTipText = HelpUtil.RedoButtonHelpInfo;
+            this.ImportModelButton.ToolTipText = HelpUtil.ImportModelHelpInfo;
+            this.FormatButton.ToolTipText = HelpUtil.FormatOperatorHelpInfo;
+            this.RemarkButton.ToolTipText = HelpUtil.RemarkPictureBoxHelpInfo;
+            this.ZoomUpButton.ToolTipText = HelpUtil.ZoomUpPictureBoxHelpInfo;
+            this.ZoomDownButton.ToolTipText = HelpUtil.zoomDownPictureBoxHelpInfo;
+            this.MoveButton.ToolTipText = HelpUtil.MovePictureBoxHelpInfo;
+            this.FrameButton.ToolTipText = HelpUtil.FramePictureBoxHelpInfo;
+            this.MoreButton.ToolTipText = HelpUtil.moreButtonHelpInfo;
         }
 
         public void UndoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Undo(Global.GetCurrentModelDocument());
             Global.GetMainForm().SetDocumentDirty();
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
-            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.FrameButton.BackColor = Color.FromArgb(230, 237, 246);
+            this.MoveButton.BackColor = Color.FromArgb(230, 237, 246);
         }
 
         public void RedoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Redo(Global.GetCurrentModelDocument());
             Global.GetMainForm().SetDocumentDirty();
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
-            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.FrameButton.BackColor = Color.FromArgb(230, 237, 246);
+            this.MoveButton.BackColor = Color.FromArgb(230, 237, 246);
         }
 
         private void ImportModel_Click(object sender, EventArgs e)
@@ -236,8 +235,8 @@ namespace C2.Controls.Top
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();
             Global.GetMainForm().SetDocumentDirty();
-            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.MoveButton.BackColor = Color.FromArgb(230, 237, 246);
+            this.FrameButton.BackColor = Color.FromArgb(230, 237, 246);
         }
 
         private void MoreButton_Click(object sender, EventArgs e)

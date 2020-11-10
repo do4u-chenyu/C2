@@ -30,22 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopToolBarControl));
             this.toolStrip1 = new C2.Controls.ToolStripPro();
-            this.saveAllButton = new System.Windows.Forms.ToolStripButton();
-            this.saveModelButton = new System.Windows.Forms.ToolStripButton();
+            this.SaveModelButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.undoButton = new System.Windows.Forms.ToolStripButton();
-            this.redoButton = new System.Windows.Forms.ToolStripButton();
+            this.UndoButton = new System.Windows.Forms.ToolStripButton();
+            this.RedoButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.ImportModel = new System.Windows.Forms.ToolStripButton();
-            this.formatButton = new System.Windows.Forms.ToolStripButton();
-            this.remarkPictureBox = new System.Windows.Forms.ToolStripButton();
+            this.ImportModelButton = new System.Windows.Forms.ToolStripButton();
+            this.FormatButton = new System.Windows.Forms.ToolStripButton();
+            this.RemarkButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.zoomUpPictureBox = new System.Windows.Forms.ToolStripButton();
-            this.zoomDownPictureBox = new System.Windows.Forms.ToolStripButton();
+            this.ZoomUpButton = new System.Windows.Forms.ToolStripButton();
+            this.ZoomDownButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.movePictureBox = new System.Windows.Forms.ToolStripButton();
-            this.framePictureBox = new System.Windows.Forms.ToolStripButton();
-            this.moreButton = new System.Windows.Forms.ToolStripButton();
+            this.MoveButton = new System.Windows.Forms.ToolStripButton();
+            this.FrameButton = new System.Windows.Forms.ToolStripButton();
+            this.MoreButton = new System.Windows.Forms.ToolStripButton();
             this.LinePanel = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -57,22 +56,21 @@
             this.toolStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.toolStrip1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveAllButton,
-            this.saveModelButton,
+            this.ImportModelButton,
+            this.SaveModelButton,
             this.toolStripSeparator1,
-            this.undoButton,
-            this.redoButton,
+            this.UndoButton,
+            this.RedoButton,
             this.toolStripSeparator2,
-            this.ImportModel,
-            this.formatButton,
-            this.remarkPictureBox,
+            this.FormatButton,
+            this.RemarkButton,
             this.toolStripSeparator3,
-            this.zoomUpPictureBox,
-            this.zoomDownPictureBox,
+            this.ZoomUpButton,
+            this.ZoomDownButton,
             this.toolStripSeparator4,
-            this.movePictureBox,
-            this.framePictureBox,
-            this.moreButton});
+            this.MoveButton,
+            this.FrameButton,
+            this.MoreButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
@@ -80,181 +78,158 @@
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 2;
             // 
-            // saveAllButton
+            // SaveModelButton
             // 
-            this.saveAllButton.AutoSize = false;
-            this.saveAllButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveAllButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.saveAllButton.Image = global::C2.Properties.Resources.saveAllButton;
-            this.saveAllButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveAllButton.Margin = new System.Windows.Forms.Padding(0);
-            this.saveAllButton.Name = "saveAllButton";
-            this.saveAllButton.Size = new System.Drawing.Size(24, 25);
-            this.saveAllButton.ToolTipText = "保存所有模型";
-            this.saveAllButton.Click += new System.EventHandler(this.FormatButton_Click);
-            // 
-            // saveModelButton
-            // 
-            this.saveModelButton.AutoSize = false;
-            this.saveModelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveModelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.saveModelButton.Image = global::C2.Properties.Resources.save;
-            this.saveModelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveModelButton.Margin = new System.Windows.Forms.Padding(0);
-            this.saveModelButton.Name = "saveModelButton";
-            this.saveModelButton.Size = new System.Drawing.Size(24, 25);
-            this.saveModelButton.ToolTipText = "保存模型";
-            this.saveModelButton.Click += new System.EventHandler(this.SaveModelButton_Click);
+            this.SaveModelButton.AutoSize = false;
+            this.SaveModelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SaveModelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.SaveModelButton.Image = global::C2.Properties.Resources.save;
+            this.SaveModelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SaveModelButton.Margin = new System.Windows.Forms.Padding(0);
+            this.SaveModelButton.Name = "SaveModelButton";
+            this.SaveModelButton.Size = new System.Drawing.Size(24, 25);
+            this.SaveModelButton.Click += new System.EventHandler(this.SaveModelButton_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Padding = new System.Windows.Forms.Padding(2);
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 29);
             // 
-            // undoButton
+            // UndoButton
             // 
-            this.undoButton.AutoSize = false;
-            this.undoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.undoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.undoButton.Image = ((System.Drawing.Image)(resources.GetObject("undoButton.Image")));
-            this.undoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.undoButton.Margin = new System.Windows.Forms.Padding(0);
-            this.undoButton.Name = "undoButton";
-            this.undoButton.Size = new System.Drawing.Size(24, 25);
-            this.undoButton.ToolTipText = "撤销按钮:撤销当前操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的撤销.";
-            this.undoButton.Click += new System.EventHandler(this.UndoButton_Click);
+            this.UndoButton.AutoSize = false;
+            this.UndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.UndoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.UndoButton.Image = ((System.Drawing.Image)(resources.GetObject("UndoButton.Image")));
+            this.UndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.UndoButton.Margin = new System.Windows.Forms.Padding(0);
+            this.UndoButton.Name = "UndoButton";
+            this.UndoButton.Size = new System.Drawing.Size(24, 25);
+            this.UndoButton.Click += new System.EventHandler(this.UndoButton_Click);
             // 
-            // redoButton
+            // RedoButton
             // 
-            this.redoButton.AutoSize = false;
-            this.redoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.redoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.redoButton.Image = ((System.Drawing.Image)(resources.GetObject("redoButton.Image")));
-            this.redoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.redoButton.Margin = new System.Windows.Forms.Padding(0);
-            this.redoButton.Name = "redoButton";
-            this.redoButton.Size = new System.Drawing.Size(24, 25);
-            this.redoButton.ToolTipText = "恢复按钮:恢复上一步的撤销操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的恢复.";
-            this.redoButton.Click += new System.EventHandler(this.RedoButton_Click);
+            this.RedoButton.AutoSize = false;
+            this.RedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.RedoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.RedoButton.Image = ((System.Drawing.Image)(resources.GetObject("RedoButton.Image")));
+            this.RedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RedoButton.Margin = new System.Windows.Forms.Padding(0);
+            this.RedoButton.Name = "RedoButton";
+            this.RedoButton.Size = new System.Drawing.Size(24, 25);
+            this.RedoButton.Click += new System.EventHandler(this.RedoButton_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 29);
             // 
-            // ImportModel
+            // ImportModelButton
             // 
-            this.ImportModel.AutoSize = false;
-            this.ImportModel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ImportModel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.ImportModel.Image = global::C2.Properties.Resources.importmodel;
-            this.ImportModel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ImportModel.Margin = new System.Windows.Forms.Padding(0);
-            this.ImportModel.Name = "ImportModel";
-            this.ImportModel.Size = new System.Drawing.Size(24, 25);
-            this.ImportModel.ToolTipText = "导入模型";
-            this.ImportModel.Click += new System.EventHandler(this.ImportModel_Click);
+            this.ImportModelButton.AutoSize = false;
+            this.ImportModelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ImportModelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.ImportModelButton.Image = global::C2.Properties.Resources.importmodel;
+            this.ImportModelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ImportModelButton.Margin = new System.Windows.Forms.Padding(0);
+            this.ImportModelButton.Name = "ImportModelButton";
+            this.ImportModelButton.Size = new System.Drawing.Size(24, 25);
+            this.ImportModelButton.Click += new System.EventHandler(this.ImportModel_Click);
             // 
-            // formatButton
+            // FormatButton
             // 
-            this.formatButton.AutoSize = false;
-            this.formatButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.formatButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.formatButton.Image = ((System.Drawing.Image)(resources.GetObject("formatButton.Image")));
-            this.formatButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.formatButton.Margin = new System.Windows.Forms.Padding(0);
-            this.formatButton.Name = "formatButton";
-            this.formatButton.Size = new System.Drawing.Size(24, 25);
-            this.formatButton.Click += new System.EventHandler(this.FormatButton_Click);
+            this.FormatButton.AutoSize = false;
+            this.FormatButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FormatButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.FormatButton.Image = ((System.Drawing.Image)(resources.GetObject("FormatButton.Image")));
+            this.FormatButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FormatButton.Margin = new System.Windows.Forms.Padding(0);
+            this.FormatButton.Name = "FormatButton";
+            this.FormatButton.Size = new System.Drawing.Size(24, 25);
+            this.FormatButton.Click += new System.EventHandler(this.FormatButton_Click);
             // 
-            // remarkPictureBox
+            // RemarkButton
             // 
-            this.remarkPictureBox.AutoSize = false;
-            this.remarkPictureBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.remarkPictureBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.remarkPictureBox.Image = global::C2.Properties.Resources.notes;
-            this.remarkPictureBox.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.remarkPictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.remarkPictureBox.Name = "remarkPictureBox";
-            this.remarkPictureBox.Size = new System.Drawing.Size(24, 25);
-            this.remarkPictureBox.ToolTipText = "编写备注信息";
-            this.remarkPictureBox.Click += new System.EventHandler(this.RemarkPictureBox_Click);
+            this.RemarkButton.AutoSize = false;
+            this.RemarkButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.RemarkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.RemarkButton.Image = global::C2.Properties.Resources.notes;
+            this.RemarkButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RemarkButton.Margin = new System.Windows.Forms.Padding(0);
+            this.RemarkButton.Name = "RemarkButton";
+            this.RemarkButton.Size = new System.Drawing.Size(24, 25);
+            this.RemarkButton.Click += new System.EventHandler(this.RemarkPictureBox_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 29);
             // 
-            // zoomUpPictureBox
+            // ZoomUpButton
             // 
-            this.zoomUpPictureBox.AutoSize = false;
-            this.zoomUpPictureBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.zoomUpPictureBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.zoomUpPictureBox.Image = global::C2.Properties.Resources.zoom_in;
-            this.zoomUpPictureBox.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.zoomUpPictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.zoomUpPictureBox.Name = "zoomUpPictureBox";
-            this.zoomUpPictureBox.Size = new System.Drawing.Size(24, 25);
-            this.zoomUpPictureBox.ToolTipText = "放大屏幕中算子并支持三级放大";
-            this.zoomUpPictureBox.Click += new System.EventHandler(this.ZoomUpPictureBox_Click);
+            this.ZoomUpButton.AutoSize = false;
+            this.ZoomUpButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ZoomUpButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.ZoomUpButton.Image = global::C2.Properties.Resources.zoom_in;
+            this.ZoomUpButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ZoomUpButton.Margin = new System.Windows.Forms.Padding(0);
+            this.ZoomUpButton.Name = "ZoomUpButton";
+            this.ZoomUpButton.Size = new System.Drawing.Size(24, 25);
+            this.ZoomUpButton.Click += new System.EventHandler(this.ZoomUpPictureBox_Click);
             // 
-            // zoomDownPictureBox
+            // ZoomDownButton
             // 
-            this.zoomDownPictureBox.AutoSize = false;
-            this.zoomDownPictureBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.zoomDownPictureBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.zoomDownPictureBox.Image = global::C2.Properties.Resources.zoom_out;
-            this.zoomDownPictureBox.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.zoomDownPictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.zoomDownPictureBox.Name = "zoomDownPictureBox";
-            this.zoomDownPictureBox.Size = new System.Drawing.Size(24, 25);
-            this.zoomDownPictureBox.ToolTipText = "缩小当前屏幕中算子";
-            this.zoomDownPictureBox.Click += new System.EventHandler(this.ZoomDownPictureBox_Click);
+            this.ZoomDownButton.AutoSize = false;
+            this.ZoomDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ZoomDownButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.ZoomDownButton.Image = global::C2.Properties.Resources.zoom_out;
+            this.ZoomDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ZoomDownButton.Margin = new System.Windows.Forms.Padding(0);
+            this.ZoomDownButton.Name = "ZoomDownButton";
+            this.ZoomDownButton.Size = new System.Drawing.Size(24, 25);
+            this.ZoomDownButton.Click += new System.EventHandler(this.ZoomDownPictureBox_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 29);
             // 
-            // movePictureBox
+            // MoveButton
             // 
-            this.movePictureBox.AutoSize = false;
-            this.movePictureBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.movePictureBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.movePictureBox.Image = global::C2.Properties.Resources.hand;
-            this.movePictureBox.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.movePictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.movePictureBox.Name = "movePictureBox";
-            this.movePictureBox.Size = new System.Drawing.Size(24, 25);
-            this.movePictureBox.ToolTipText = "拖动当前视野屏幕";
-            this.movePictureBox.Click += new System.EventHandler(this.MovePictureBox_Click);
+            this.MoveButton.AutoSize = false;
+            this.MoveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.MoveButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.MoveButton.Image = global::C2.Properties.Resources.hand;
+            this.MoveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.MoveButton.Margin = new System.Windows.Forms.Padding(0);
+            this.MoveButton.Name = "MoveButton";
+            this.MoveButton.Size = new System.Drawing.Size(24, 25);
+            this.MoveButton.Click += new System.EventHandler(this.MovePictureBox_Click);
             // 
-            // framePictureBox
+            // FrameButton
             // 
-            this.framePictureBox.AutoSize = false;
-            this.framePictureBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.framePictureBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.framePictureBox.Image = global::C2.Properties.Resources.cursor;
-            this.framePictureBox.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.framePictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.framePictureBox.Name = "framePictureBox";
-            this.framePictureBox.Size = new System.Drawing.Size(24, 25);
-            this.framePictureBox.ToolTipText = "框选屏幕中算子进行整体拖动";
-            this.framePictureBox.Click += new System.EventHandler(this.FramePictureBox_Click);
+            this.FrameButton.AutoSize = false;
+            this.FrameButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FrameButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.FrameButton.Image = global::C2.Properties.Resources.cursor;
+            this.FrameButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FrameButton.Margin = new System.Windows.Forms.Padding(0);
+            this.FrameButton.Name = "FrameButton";
+            this.FrameButton.Size = new System.Drawing.Size(24, 25);
+            this.FrameButton.Click += new System.EventHandler(this.FramePictureBox_Click);
             // 
-            // moreButton
+            // MoreButton
             // 
-            this.moreButton.AutoSize = false;
-            this.moreButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.moreButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.moreButton.Image = ((System.Drawing.Image)(resources.GetObject("moreButton.Image")));
-            this.moreButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.moreButton.Margin = new System.Windows.Forms.Padding(0);
-            this.moreButton.Name = "moreButton";
-            this.moreButton.Size = new System.Drawing.Size(24, 25);
-            this.moreButton.ToolTipText = "首选项配置,配置程序的各项参数";
-            this.moreButton.Click += new System.EventHandler(this.MoreButton_Click);
+            this.MoreButton.AutoSize = false;
+            this.MoreButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.MoreButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.MoreButton.Image = ((System.Drawing.Image)(resources.GetObject("MoreButton.Image")));
+            this.MoreButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.MoreButton.Margin = new System.Windows.Forms.Padding(0);
+            this.MoreButton.Name = "MoreButton";
+            this.MoreButton.Size = new System.Drawing.Size(24, 25);
+            this.MoreButton.Click += new System.EventHandler(this.MoreButton_Click);
             // 
             // LinePanel
             // 
@@ -285,19 +260,18 @@
         }
 
         #endregion
-        private System.Windows.Forms.ToolStripButton formatButton;
+        private System.Windows.Forms.ToolStripButton FormatButton;
         //private System.Windows.Forms.Button formatButton;
-        private System.Windows.Forms.ToolStripButton moreButton;
-        private System.Windows.Forms.ToolStripButton undoButton;
-        private System.Windows.Forms.ToolStripButton redoButton;
-        private System.Windows.Forms.ToolStripButton ImportModel;
-        private System.Windows.Forms.ToolStripButton remarkPictureBox;
-        private System.Windows.Forms.ToolStripButton zoomUpPictureBox;
-        private System.Windows.Forms.ToolStripButton zoomDownPictureBox;
-        private System.Windows.Forms.ToolStripButton movePictureBox;
-        private System.Windows.Forms.ToolStripButton framePictureBox;
-        private System.Windows.Forms.ToolStripButton saveAllButton;
-        private System.Windows.Forms.ToolStripButton saveModelButton;
+        private System.Windows.Forms.ToolStripButton MoreButton;
+        private System.Windows.Forms.ToolStripButton UndoButton;
+        private System.Windows.Forms.ToolStripButton RedoButton;
+        private System.Windows.Forms.ToolStripButton ImportModelButton;
+        private System.Windows.Forms.ToolStripButton RemarkButton;
+        private System.Windows.Forms.ToolStripButton ZoomUpButton;
+        private System.Windows.Forms.ToolStripButton ZoomDownButton;
+        private System.Windows.Forms.ToolStripButton MoveButton;
+        private System.Windows.Forms.ToolStripButton FrameButton;
+        private System.Windows.Forms.ToolStripButton SaveModelButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
