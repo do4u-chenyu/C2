@@ -54,9 +54,9 @@
             this.TsbFind,
             this.toolStripSeparator1,
             this.TsbReplace});
-            this.myToolStrip1.Location = new System.Drawing.Point(8, 7);
+            this.myToolStrip1.Location = new System.Drawing.Point(0, 0);
             this.myToolStrip1.Name = "myToolStrip1";
-            this.myToolStrip1.Size = new System.Drawing.Size(332, 32);
+            this.myToolStrip1.Size = new System.Drawing.Size(348, 28);
             this.myToolStrip1.TabIndex = 8;
             this.myToolStrip1.Text = "myToolStrip1";
             // 
@@ -84,6 +84,7 @@
             this.TsbReplace.Padding = new System.Windows.Forms.Padding(2);
             this.TsbReplace.Size = new System.Drawing.Size(78, 25);
             this.TsbReplace.Text = "Replace";
+            this.TsbReplace.Visible = false;
             this.TsbReplace.Click += new System.EventHandler(this.TsbReplace_Click);
             // 
             // FbOptions

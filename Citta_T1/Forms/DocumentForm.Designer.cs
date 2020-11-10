@@ -112,7 +112,7 @@ namespace C2.Forms
             this.MenuStripChartTab.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuRenameTab});
             this.MenuStripChartTab.Name = "MenuStripChartTab";
-            this.MenuStripChartTab.Size = new System.Drawing.Size(133, 76);
+            this.MenuStripChartTab.Size = new System.Drawing.Size(133, 26);
             // 
             // MenuRenameTab
             // 
@@ -289,6 +289,7 @@ namespace C2.Forms
             this.TsbReplace.Padding = new System.Windows.Forms.Padding(2);
             this.TsbReplace.Size = new System.Drawing.Size(24, 25);
             this.TsbReplace.Text = "Replace";
+            this.TsbReplace.Visible = false;
             this.TsbReplace.Click += new System.EventHandler(this.TsbReplace_Click);
             // 
             // toolStripSeparator6

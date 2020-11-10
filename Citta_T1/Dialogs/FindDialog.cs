@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
-using C2.Controls;
-using C2.Controls.MapViews;
-using C2.Core;
-using C2.Core.Documents;
+﻿using C2.Controls;
 using C2.Forms;
 using C2.Globalization;
 using C2.Model;
 using C2.Model.MindMaps;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace C2.Dialogs
 {
