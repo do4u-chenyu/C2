@@ -113,13 +113,13 @@ namespace C2.Controls.Top
         #endregion
 
         #region 框选
-
         private void FrameButton_Click(object sender, EventArgs e)
         {
             Global.GetCanvasPanel().ClearAllLineStatus();
             SelectFrame = !SelectFrame;
             SelectDrag = false;
             ChangeCursor();
+            FrameChange();
 
             this.MoveButton.BackColor = ReleaseColor;
             this.FrameButton.BackColor = ChoosenColor;
