@@ -151,7 +151,7 @@ namespace C2.Controls.MapViews
             {
                 Topic[] hitTopic = new Topic[] { htr.Topic };
                 AddDataSource(hitTopic, dataItem);
-                //AddResult(hitTopic, dataItem);
+                TopicUpdate(hitTopic[0]);
                 ShowDesigner(hitTopic[0]);
                 return;
             }

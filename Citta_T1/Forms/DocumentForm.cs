@@ -37,6 +37,7 @@ namespace C2.Forms
         bool _ShowSidebar = true;
         object[] _SelectedObjects;
         object _ShowDesignerObject;
+        object _DataChangedObject;
         ShortcutKeysTable ShortcutKeys;
         PrintDialog MyPrintDialog;
         bool HardClose;
@@ -160,7 +161,7 @@ namespace C2.Forms
                 ShowDesigner(_SelectedObjects[0]);
             }
         }
-
+        
         object ShowDesignerObject
         {
             get { return _ShowDesignerObject; }
@@ -170,6 +171,7 @@ namespace C2.Forms
                 OnShowDesignerObjectChanged(_ShowDesignerObject);
             }
         }
+
         void OnShowSidebarChanged()
         {
             splitContainer2.Visible = ShowSidebar;
@@ -223,6 +225,7 @@ namespace C2.Forms
                 SelectedObjects = ActivedChartPage.SelectedObjects;
                 ActivedChartPage.SelectedObjectsChanged += new EventHandler(ActivedChartPage_SelectedObjectsChanged);
                 ActivedChartPage.NeedShowDesigner += new EventHandler(ActivedChartPage_NeedShowDesigner);
+                ActivedChartPage.TopicDataChanged += new EventHandler(ActivedChartPage_DataChanged);
             }
             else
             {
@@ -242,7 +245,20 @@ namespace C2.Forms
                 ShowDesigner(ShowDesignerObject);
             }
         }
-
+        object DataChangedObject
+        {
+            get { return _DataChangedObject; }
+            set
+            {
+                _DataChangedObject = value;
+                OnTopicDataChanged(_DataChangedObject);
+            }
+        }
+        void OnTopicDataChanged(object obj)
+        {
+            if (obj != null)
+                AddSubWidget(obj);
+        }
         void OnSelectedObjectsChanged(object[] old)
         {
             if (SelectedObjects != null)
@@ -841,7 +857,15 @@ namespace C2.Forms
 
             ResetControlStatus();
         }
+        void ActivedChartPage_DataChanged(object sender, EventArgs e)
+        {
+            if (ActivedChartPage == sender)
+            {
+                DataChangedObject = ActivedChartPage.DataChangeObject;
+            }
 
+            ResetControlStatus();
+        }
         void ActivedChartPage_SelectedObjectsChanged(object sender, EventArgs e)
         {
             if (ActivedChartPage == sender)
@@ -893,11 +917,18 @@ namespace C2.Forms
                 st = sob as Topic;
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
-           
             designerControl.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
-
         }
-        
+        void AddSubWidget(object sob)
+        {
+            Topic st = null;
+            var objectType = sob.GetType();
+            if (objectType.Name == "Topic")
+            {
+                st = sob as Topic;
+                objectTree2.AddWidgetData(st);
+            } 
+        }
         void ShowProperty(object[] objects)
         {
             var objectType = objects.GetType().GetElementType();

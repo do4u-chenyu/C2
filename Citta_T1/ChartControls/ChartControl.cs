@@ -197,7 +197,7 @@ namespace C2.Controls
         #region Selection
         public event System.EventHandler SelectionChanged;
         public event System.EventHandler NeedShowDesigner;
-
+        public event System.EventHandler TopicDataChanged;
         protected ChartSelection Selection { get; private set; }
 
         [DefaultValue(true)]
@@ -206,7 +206,7 @@ namespace C2.Controls
         [Browsable(false)]
         public ChartObject[] SelectedObjects { get; private set; }
         public ChartObject ShowDesignerObject { get; set; }
-
+        public ChartObject DataChangeObject { get; set; }
         [Browsable(false)]
         public ChartObject SelectedObject
         {
@@ -320,6 +320,14 @@ namespace C2.Controls
             if (NeedShowDesigner != null)
             {
                 NeedShowDesigner(this, EventArgs.Empty);
+            }
+        }
+        protected virtual void TopicUpdate(ChartObject co)
+        {
+            DataChangeObject = co;
+            if (TopicDataChanged != null)
+            {
+                TopicDataChanged (this, EventArgs.Empty);
             }
         }
 

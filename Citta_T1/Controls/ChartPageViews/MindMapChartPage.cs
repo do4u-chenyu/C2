@@ -54,7 +54,7 @@ namespace C2.ChartPageView
             mindMapView1.SelectionChanged += new System.EventHandler(this.mindMapView1_SelectionChanged);
             mindMapView1.ChartBackColorChanged += new System.EventHandler(this.mindMapView1_ChartBackColorChanged);
             mindMapView1.NeedShowDesigner += new System.EventHandler(this.mindMapView1_NeedShowDesigner);
-
+            mindMapView1.TopicDataChanged += new System.EventHandler(this.mindMapView1_TopicDataChanged);
             // MindMapChartPage
             Controls.Add(this.mindMapView1);
             Name = "MindMapChartPage";
@@ -156,7 +156,12 @@ namespace C2.ChartPageView
             if (so != null)
                 ShowDesignerObject = so;
         }
-
+        void mindMapView1_TopicDataChanged(object sender, EventArgs e)
+        {
+            var so = mindMapView1.DataChangeObject;
+            if (so != null)
+                DataChangeObject = so;
+        }
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
