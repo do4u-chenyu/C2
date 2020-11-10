@@ -123,7 +123,7 @@
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.resetButton.Image = global::C2.Properties.Resources.reset;
-            this.resetButton.Location = new System.Drawing.Point(525, 434);
+            this.resetButton.Location = new System.Drawing.Point(524, 434);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(52, 53);
             this.resetButton.TabIndex = 32;
@@ -142,7 +142,7 @@
             this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
-            this.stopButton.Location = new System.Drawing.Point(456, 434);
+            this.stopButton.Location = new System.Drawing.Point(461, 434);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(52, 53);
             this.stopButton.TabIndex = 31;

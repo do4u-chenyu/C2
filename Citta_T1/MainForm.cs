@@ -719,7 +719,7 @@ namespace C2
             this.bottomPyConsole.Visible = false;
             this.bottomPreview.Visible = true;
         }
-        private void ShowBottomPanel()
+        public void ShowBottomPanel()
         {
             if (this.isBottomViewPanelMinimum == true)
             {
@@ -755,26 +755,6 @@ namespace C2
             this.ShowLogView();
         }
         #endregion
-        public void ShowBottomViewPanel()
-        {
-            //log.Info("MinMaxPictureBox_Click");
-            if (this.isBottomViewPanelMinimum == true)
-            {
-                this.isBottomViewPanelMinimum = false;
-                this.bottomViewPanel.Height = 200;
-                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
-            }
-            
-            if (bottomViewPanel.Height == 200)
-            {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
-            }
-            if (bottomViewPanel.Height == 40)
-            {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
-            }
-        }
-
         private void minMaxPictureBox_Click(object sender, EventArgs e)
         {
             if (this.isBottomViewPanelMinimum == true)

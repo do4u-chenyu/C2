@@ -57,7 +57,7 @@ namespace C2.Controls.Left
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
-            Global.GetMainForm().ShowBottomViewPanel();
+            Global.GetMainForm().ShowBottomPanel();
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -125,7 +125,7 @@ namespace C2.Controls.Left
         private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding, true);
-            Global.GetMainForm().ShowBottomViewPanel();
+            Global.GetMainForm().ShowBottomPanel();
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
