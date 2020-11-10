@@ -21,7 +21,9 @@ namespace C2.ChartPageView
         bool _ReadOnly;
         Image _Icon;
 
-        public event EventHandler NeedShowDesigner;
+
+        public delegate void NeedShowEventHandler(BaseChartPage baseChart,bool isNeedShow);
+        public event NeedShowEventHandler NeedShowDesigner;
         public event EventHandler SelectedObjectsChanged;
         public event NeedShowPropertyEventHandler NeedShowProperty;
         public event EventHandler IconChanged;
@@ -77,6 +79,7 @@ namespace C2.ChartPageView
                 }
             }
         }
+        public bool NeedShowControl { set; get; }
 
         public object ShowDesignerObject
         {
@@ -87,6 +90,7 @@ namespace C2.ChartPageView
                 OnShowDesignerObjectChanged();
             }
         }
+
 
         [DefaultValue(false)]
         public bool ReadOnly
@@ -325,8 +329,7 @@ namespace C2.ChartPageView
 
         protected virtual void OnShowDesignerObjectChanged()
         {
-            if (NeedShowDesigner != null)
-                NeedShowDesigner(this, EventArgs.Empty);
+            NeedShowDesigner?.Invoke(this,NeedShowControl);
         }
 
         protected virtual void ResetControlStatus()

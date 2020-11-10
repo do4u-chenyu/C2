@@ -31,9 +31,9 @@ namespace C2.Business.Option
             string path;
             char separator = OpUtil.DefaultSeparator;
             OpUtil.Encoding encoding = OpUtil.Encoding.UTF8;
-            Point location = Global.GetCurrentDocument().WorldMap.WorldBoundRSControl(moc);
-            int id = Global.GetCurrentDocument().ElementCount;
-            int sizeL = Global.GetCurrentDocument().WorldMap.SizeLevel;
+            Point location = Global.GetCurrentModelDocument().WorldMap.WorldBoundRSControl(moc);
+            int id = Global.GetCurrentModelDocument().ElementCount;
+            int sizeL = Global.GetCurrentModelDocument().WorldMap.SizeLevel;
 
             if (resultFilePath == string.Empty)
                 path = String.Format("L{0}_{1}.bcp", id, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
@@ -67,7 +67,7 @@ namespace C2.Business.Option
                                 startPoint,
                                 endPoint,
                                 0);
-            Global.GetCurrentDocument().AddModelRelation(newModelRelation);
+            Global.GetCurrentModelDocument().AddModelRelation(newModelRelation);
             Global.GetMainForm().SetDocumentDirty();
             moc.OutPinInit("lineExit");
             mrc.RectInAdd(1);
@@ -89,8 +89,8 @@ namespace C2.Business.Option
 
             // UndoRedo
             List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
-            ModelDocument doc = Global.GetCurrentDocument();
-            ModelElement me = Global.GetCurrentDocument().SearchElementByID(mrc.ID);
+            ModelDocument doc = Global.GetCurrentModelDocument();
+            ModelElement me = Global.GetCurrentModelDocument().SearchElementByID(mrc.ID);
             ModelElement opEle = null;
             foreach (ModelRelation mr in doc.ModelRelations.Where(t => t.EndID == me.ID))
             {
@@ -98,7 +98,7 @@ namespace C2.Business.Option
                 opEle = doc.SearchElementByID(mr.StartID);
             }
             BaseCommand cmd = new ElementAddCommand(me, relations, opEle);
-            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), cmd);
         }
         public void CreateNewMoveRsControl(MoveOpControl moc, string path)
         {
@@ -107,8 +107,8 @@ namespace C2.Business.Option
 
             // UndoRedo
             List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
-            ModelDocument doc = Global.GetCurrentDocument();
-            ModelElement me = Global.GetCurrentDocument().SearchElementByID(mrc.ID);
+            ModelDocument doc = Global.GetCurrentModelDocument();
+            ModelElement me = Global.GetCurrentModelDocument().SearchElementByID(mrc.ID);
             ModelElement opEle = null;
             foreach (ModelRelation mr in doc.ModelRelations.Where(t => t.EndID == me.ID))
             {
@@ -116,7 +116,7 @@ namespace C2.Business.Option
                 opEle = doc.SearchElementByID(mr.StartID);
             }
             BaseCommand cmd = new ElementAddCommand(me, relations, opEle);
-            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentModelDocument(), cmd);
         }
     }
 }

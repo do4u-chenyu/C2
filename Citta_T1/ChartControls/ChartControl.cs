@@ -195,8 +195,9 @@ namespace C2.Controls
         #endregion
 
         #region Selection
+        public delegate void NeedShowEventHandler(bool isNeedShow);
         public event System.EventHandler SelectionChanged;
-        public event System.EventHandler NeedShowDesigner;
+        public event NeedShowEventHandler NeedShowDesigner;
 
         protected ChartSelection Selection { get; private set; }
 
@@ -272,7 +273,7 @@ namespace C2.Controls
             OnSelectionChanged();
 
             //new
-            ShowDesigner(SelectedObjects[0]);
+            ShowDesigner(SelectedObjects[0],false);
 
             EndUpdateView(ChangeTypes.Visual);
         }
@@ -314,13 +315,10 @@ namespace C2.Controls
             }
         }
 
-        protected virtual void ShowDesigner(ChartObject co)
+        protected virtual void ShowDesigner(ChartObject co,bool needShow)
         {
             ShowDesignerObject = co;
-            if (NeedShowDesigner != null)
-            {
-                NeedShowDesigner(this, EventArgs.Empty);
-            }
+            NeedShowDesigner?.Invoke(needShow);
         }
 
         public virtual void EnsureVisible(ChartObject chartObject)

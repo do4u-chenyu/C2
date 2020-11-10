@@ -26,7 +26,7 @@ namespace C2.Forms
         const string ShowSidebarOptionName = "editor_show_sidebar";
         Document _Document;
         ObjectTreeView objectTree1;
-        ObjectTreeView objectTree2;
+        DataTreeView objectTree2;
         ChartOverviewBox cob;
         TimerDialog MyTimerDialog;
         ChartPageView.BaseChartPage _ActivedChartPage;
@@ -161,6 +161,7 @@ namespace C2.Forms
             }
         }
 
+        bool NeedShowDesigner { set; get; }
         object ShowDesignerObject
         {
             get { return _ShowDesignerObject; }
@@ -211,7 +212,7 @@ namespace C2.Forms
             if (old != null)
             {
                 old.SelectedObjectsChanged -= new EventHandler(ActivedChartPage_SelectedObjectsChanged);
-                old.NeedShowDesigner -= new EventHandler(ActivedChartPage_NeedShowDesigner);
+                old.NeedShowDesigner -= ActivedChartPage_NeedShowDesigner;
             }
 
             if (ActivedChartPage != null)
@@ -222,7 +223,7 @@ namespace C2.Forms
 
                 SelectedObjects = ActivedChartPage.SelectedObjects;
                 ActivedChartPage.SelectedObjectsChanged += new EventHandler(ActivedChartPage_SelectedObjectsChanged);
-                ActivedChartPage.NeedShowDesigner += new EventHandler(ActivedChartPage_NeedShowDesigner);
+                ActivedChartPage.NeedShowDesigner += ActivedChartPage_NeedShowDesigner;
             }
             else
             {
@@ -423,12 +424,6 @@ namespace C2.Forms
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-
-#if DEBUG
-            ToolStripMenuItem miAddFreeDiagram = new ToolStripMenuItem("Add Free Diagram");
-            miAddFreeDiagram.Click += new EventHandler(miAddFreeDiagram_Click);
-            MenuStripChartTab.Items.Add(miAddFreeDiagram);
-#endif
         }
         
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -514,8 +509,6 @@ namespace C2.Forms
             TsbTimer.Text = Lang._("Timer");
             MenuStartTimer.Text = Lang.GetTextWithEllipsis("Start Timer");
 
-            MenuInsertTab.Text = Lang._("Insert Chart");
-            MenuDeleteTab.Text = Lang.GetTextWithEllipsis("Remove Chart");
             MenuRenameTab.Text = Lang.GetTextWithEllipsis("Rename");
 
             objectTree1.Text = Lang._("Objects");
@@ -589,7 +582,7 @@ namespace C2.Forms
             return name;
         }
 
-        MindMap CreateNewMap()
+        public MindMap CreateNewMap()
         {
             var map = new MindMap();
             map.Name = GetNewChartName(null);
@@ -840,10 +833,11 @@ namespace C2.Forms
         }
 
         
-        void ActivedChartPage_NeedShowDesigner(object sender, EventArgs e)
+        void ActivedChartPage_NeedShowDesigner(BaseChartPage baseChart, bool needShow)
         {
-            if (ActivedChartPage == sender)
+            if (ActivedChartPage == baseChart)
             {
+                NeedShowDesigner = needShow;
                 ShowDesignerObject = ActivedChartPage.ShowDesignerObject;
             }
 
@@ -901,13 +895,20 @@ namespace C2.Forms
                 st = sob as Topic;
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
-
+           
             designerControl.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
+
+            //目前只有右键未配置的算子挂件，才会主动显示设计器，其他时候只做更新
+            if (NeedShowDesigner)
+            {
+                tabControl2.SelectedPage = designerControl;
+                NeedShowDesigner = false;
+            }
+
         }
         
         void ShowProperty(object[] objects)
         {
-            var selectedPropertyPage = tabControl2.SelectedPage;
             var objectType = objects.GetType().GetElementType();
             var pb = GetPropertyBox(objectType);//[0].GetType()
             if (pb != null)
@@ -921,7 +922,6 @@ namespace C2.Forms
                     tabControl2.InsertPage(0, pb, Properties.Resources.property);
                     
                 }
-                tabControl2.ActivePage(pb);
                 CurrentPropertyBox = pb;
                 pb.SelectedObjects = objects;
             }
@@ -951,8 +951,7 @@ namespace C2.Forms
             //}
 
             //
-            if (selectedPropertyPage != null && tabControl2.TabPages.Contains(selectedPropertyPage) && tabControl2.SelectedPage != selectedPropertyPage)
-                tabControl2.SelectedPage = selectedPropertyPage;
+            tabControl2.SelectedPage = pb;
 
             //
             objectTree1.SelectedObjects = objects;

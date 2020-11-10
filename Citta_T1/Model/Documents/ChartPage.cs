@@ -182,7 +182,7 @@ namespace C2.Model.Documents
         }
 
         #region Style
-        public const int DefaultWidgetMargin = 1;
+        public const int DefaultWidgetMargin = 2;
         Color _BackColor = Color.White;
         Color _ForeColor = Color.Black;
         Color _LineColor = Color.Black;
@@ -192,7 +192,7 @@ namespace C2.Model.Documents
         Font _Font;
         int _LineWidth = 1;
         int _BorderWidth = 1;
-        int _WidgetMargin = 1;
+        int _WidgetMargin = 2;
         Size _PictureThumbSize = new Size(100, 100);
 
         [DefaultValue(typeof(Color), "White")]

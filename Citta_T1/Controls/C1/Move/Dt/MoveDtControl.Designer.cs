@@ -76,6 +76,7 @@
             this.txtButton.Margin = new System.Windows.Forms.Padding(0);
             this.txtButton.Size = new System.Drawing.Size(110, 14);
             this.txtButton.TabIndex = 8;
+            this.txtButton.TabStop = false;
             this.txtButton.UseVisualStyleBackColor = true;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);

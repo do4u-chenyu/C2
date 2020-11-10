@@ -94,21 +94,21 @@ namespace C2.Controls
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
 
             g.Clear(Color.White);
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
+            List<ModelElement> modelElements = Global.GetCurrentModelDocument().ModelElements;
+            List<ModelRelation> modelRelations = Global.GetCurrentModelDocument().ModelRelations;
 
 
             // 先画线，避免线盖住控件
             foreach (ModelRelation mr in modelRelations)
             {
-                Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(mr.GetBoundingRect().Location, false);
+                Point Pw = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(mr.GetBoundingRect().Location, false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
 
-                PointF s = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.StartP, false);
-                PointF a = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.A, false);
-                PointF b = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.B, false);
-                PointF e = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.EndP, false);
+                PointF s = Global.GetCurrentModelDocument().WorldMap.ScreenToWorldF(mr.StartP, false);
+                PointF a = Global.GetCurrentModelDocument().WorldMap.ScreenToWorldF(mr.A, false);
+                PointF b = Global.GetCurrentModelDocument().WorldMap.ScreenToWorldF(mr.B, false);
+                PointF e = Global.GetCurrentModelDocument().WorldMap.ScreenToWorldF(mr.EndP, false);
                 LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
             }
             // 反向遍历,解决Move时旧控件压在新控件上
@@ -116,7 +116,7 @@ namespace C2.Controls
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.InnerControl;
-                Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(ct.Location, false);
+                Point Pw = Global.GetCurrentModelDocument().WorldMap.ScreenToWorld(ct.Location, false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
                 ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
@@ -147,22 +147,22 @@ namespace C2.Controls
             OpUtil.CanvasDragLocation(Now.X - Start.X - moveOffset.X * Factor, Now.Y - Start.Y - moveOffset.Y * Factor);
             // 获得移动获得世界坐标原点
 
-            Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
+            Global.GetCurrentModelDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
             // 将所有控件都显示出来
-            Global.GetCurrentDocument().ModelElements.ForEach(me => me.Show());
+            Global.GetCurrentModelDocument().ModelElements.ForEach(me => me.Show());
 
-            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCurrentModelDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
             Global.GetNaviViewControl().UpdateNaviView();
         }
         private void DragEdgeCheck(out Point mapOrigin, out Point moveOffset)
         {
-            mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;
+            mapOrigin = Global.GetCurrentModelDocument().WorldMap.MapOrigin;
             int dx = Convert.ToInt32((Now.X - Start.X) / Factor);
             int dy = Convert.ToInt32((Now.Y - Start.Y) / Factor);
-            Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-            moveOffset = Global.GetCurrentDocument().WorldMap.WorldBoundControl(Factor, Width, Height);
-            Global.GetCurrentDocument().WorldMap.MapOrigin = mapOrigin;
+            Global.GetCurrentModelDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+            moveOffset = Global.GetCurrentModelDocument().WorldMap.WorldBoundControl(Factor, Width, Height);
+            Global.GetCurrentModelDocument().WorldMap.MapOrigin = mapOrigin;
         }
     }
 }

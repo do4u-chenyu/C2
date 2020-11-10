@@ -16,8 +16,6 @@ namespace C2.Dialogs.Base
     public partial class C1BaseOperatorView : BaseOperatorView
     {
         protected MoveOpControl opControl;          // 对应的OP算子 
-        protected string dataSourceFFP0;            // 左表数据源路径
-        protected string dataSourceFFP1;            // 右表数据源路径
         protected string[] nowColumnsName0;         // 当前左表(pin0)数据源表头字段(columnName)
         protected string[] nowColumnsName1;         // 当前右表(pin1)数据源表头字段
         protected List<string> oldOutName0;         // 上一次（左输出）输出表头字段
@@ -120,7 +118,7 @@ namespace C2.Dialogs.Base
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
             // 生成结果控件,relation,bcp结果文件
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            ModelElement resultElement = Global.GetCurrentModelDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
                 MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
@@ -130,10 +128,10 @@ namespace C2.Dialogs.Base
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             // 判断结果算子有没有异常删除，或者结果算子存储的路径与当前工作路径不一致
             string path = resultElement.FullFilePath;
-            string filePath = Path.Combine(Global.GetCurrentDocument().SavePath, Path.GetFileName(path));
+            string filePath = Path.Combine(Global.GetCurrentModelDocument().SavePath, Path.GetFileName(path));
             if (filePath != path)
                 resultElement.FullFilePath = filePath;
-            if (Directory.Exists(Global.GetCurrentDocument().SavePath) && !File.Exists(filePath))
+            if (Directory.Exists(Global.GetCurrentModelDocument().SavePath) && !File.Exists(filePath))
                 File.Create(filePath);
 
             // 输出字段变化，重写BCP文件
@@ -164,16 +162,6 @@ namespace C2.Dialogs.Base
             {
                 textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
-        }
-
-        private void DataSourceTB1_MouseHover(object sender, EventArgs e)
-        {
-            this.toolTip1.SetToolTip(dataSourceTB1, this.dataSourceFFP1);
-        }
-
-        private void DataSourceTB0_MouseHover(object sender, EventArgs e)
-        {
-            this.toolTip1.SetToolTip(dataSourceTB0, this.dataSourceFFP0);
         }
 
         protected bool IsIllegalFieldName()
@@ -237,7 +225,7 @@ namespace C2.Dialogs.Base
             this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
+                Global.GetCurrentModelDocument().DegradeChildrenStatus(this.opControl.ID);
         }
 
         protected void InitNewFactorControl(int count)

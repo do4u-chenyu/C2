@@ -23,7 +23,7 @@ namespace C2.Controls
             foreach(Control ct in clipBoardCts)
             {
                 string description = ct.Controls["textBox"].Text;
-                int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;  
+                int sizeLevel = Global.GetCurrentModelDocument().WorldMap.SizeLevel;  
                 Point location = new Point(ct.Left + ct.Width/2,ct.Top + ct.Height/2);
                 if (ct.Name.Equals("MoveOpControl"))
                 {

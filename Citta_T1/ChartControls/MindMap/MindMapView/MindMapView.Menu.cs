@@ -18,6 +18,7 @@ using C2.Dialogs.C2OperatorViews;
 using System.IO;
 using C2.Dialogs;
 using C2.Business.Option;
+using C2.Utils;
 
 namespace C2.Controls.MapViews
 {
@@ -184,7 +185,7 @@ namespace C2.Controls.MapViews
 
         void MenuOpenOperatorDesigner_Click(object sender, EventArgs e)
         {
-            ShowDesigner(opw.Container);
+            ShowDesigner(opw.Container,true);
         }
 
         void MenuRunningOp_Click(object sender, EventArgs e)
@@ -339,7 +340,7 @@ namespace C2.Controls.MapViews
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             // 剩余最后一个菜单项，删除数据源挂件
             dtw.DataItems.Remove(hitItem);
-            ShowDesigner(dtw.Container);
+            ShowDesigner(dtw.Container,false);
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
         }
@@ -348,7 +349,7 @@ namespace C2.Controls.MapViews
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             // 剩余最后一个菜单项，删除数据源挂件
             cw.DataItems.Remove(hitItem);
-            ShowDesigner(cw.Container);
+            ShowDesigner(cw.Container,false);
             if (cw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { cw });
         }
@@ -386,7 +387,12 @@ namespace C2.Controls.MapViews
             string path = hitItem.FilePath;
             Utils.OpUtil.Encoding encoding = hitItem.FileEncoding;
             // 获取选中输入、输出各列数据
-            List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(path, encoding).Split('\n'));
+            string fileContent;
+            if (hitItem.FileType == OpUtil.ExtType.Excel)
+                fileContent = BCPBuffer.GetInstance().GetCachePreViewExcelContent(path);
+            else
+                fileContent = BCPBuffer.GetInstance().GetCachePreViewBcpContent(path, encoding);
+            List<string> rows = new List<string>(fileContent.Split('\n'));
             // 最多绘制前100行数据
             int upperLimit = Math.Min(rows.Count, 100);
             List<List<string>> columnValues = Utils.FileUtil.GetColumns(hitItem.SelectedIndexs, hitItem, rows, upperLimit);

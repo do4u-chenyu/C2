@@ -22,7 +22,7 @@ namespace C2.Business.Option
         // 更新子图的配置状态
         public void EnableOpOptionView(ModelRelation mr)
         {
-            ModelElement rightMe = Global.GetCurrentDocument().SearchElementByID(mr.EndID);
+            ModelElement rightMe = Global.GetCurrentModelDocument().SearchElementByID(mr.EndID);
             // 手工划线时关系的ENDID必须为OPControl
             if (rightMe == ModelElement.Empty || rightMe.Type != ElementType.Operator)
                 return;
@@ -37,7 +37,7 @@ namespace C2.Business.Option
             // 情况2
             else
             {
-                List<ModelRelation> brothers = Global.GetCurrentDocument().SearchBrotherRelations(mr);
+                List<ModelRelation> brothers = Global.GetCurrentModelDocument().SearchBrotherRelations(mr);
                 if (brothers.Count != 2) return;
                 moveOpControl.EnableOption = true;
                 DoInputComare(rightMe, brothers[0], brothers[1]);
@@ -69,12 +69,12 @@ namespace C2.Business.Option
                 if (oldColumns1.Length == 0)
                     return;
 
-            ModelElement startElement0 = Global.GetCurrentDocument().SearchElementByID(mr0.StartID);
+            ModelElement startElement0 = Global.GetCurrentModelDocument().SearchElementByID(mr0.StartID);
             LoadColumns(startElement0, newColumns0);
 
             if (moveOpControl.IsBinaryDimension())// 二元算子
             {
-                ModelElement startElement1 = Global.GetCurrentDocument().SearchElementByID(mr1.StartID);
+                ModelElement startElement1 = Global.GetCurrentModelDocument().SearchElementByID(mr1.StartID);
                 LoadColumns(startElement1, newColumns1);
                 // newColumns0对应第一个入度的表头
                 // newColumns1对应第二个入度的表头
@@ -92,7 +92,7 @@ namespace C2.Business.Option
                 me.Status = RestoreOptionStatus(me);
                 return;
             }
-            Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
+            Global.GetCurrentModelDocument().SetChildrenStatusNull(me.ID);
         }
 
         private void Swap(ref List<string> A, ref List<string> B)
@@ -197,7 +197,7 @@ namespace C2.Business.Option
             if (nowCount == oldCount && oldColumns.SequenceEqual(nowColumns))
                 return;
             bool isContain = nowCount > oldCount && oldCount > 0;
-            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
+            string path = Global.GetCurrentModelDocument().SearchResultElementByOpID(ID).FullFilePath;
             if (isContain && oldColumns.SequenceEqual(nowColumns.Take(oldCount)))
             {            
                 BCPBuffer.GetInstance().ReWriteBCPFile(path, nowColumns);
@@ -209,7 +209,7 @@ namespace C2.Business.Option
         public void IsNewOut(List<string> nowColumns, int ID, string fullFilePath)
         { 
             BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, nowColumns);
-            Global.GetCurrentDocument().SetChildrenStatusNull(ID);
+            Global.GetCurrentModelDocument().SetChildrenStatusNull(ID);
         }
 
 
@@ -217,10 +217,10 @@ namespace C2.Business.Option
         public Dictionary<string, string> GetDataSourceInfoDict(int ID)
         {
             Dictionary<string, string> dataSourceInfoDict = new Dictionary<string, string>();
-            List<ModelRelation> relations = Global.GetCurrentDocument().ModelRelations.FindAll(mr => mr.EndID == ID);
+            List<ModelRelation> relations = Global.GetCurrentModelDocument().ModelRelations.FindAll(mr => mr.EndID == ID);
             foreach (ModelRelation mr in relations)
             {
-                ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
+                ModelElement me = Global.GetCurrentModelDocument().SearchElementByID(mr.StartID);
                 dataSourceInfoDict["dataPath" + mr.EndPin] = me.FullFilePath;
                 dataSourceInfoDict["encoding" + mr.EndPin] = me.Encoding.ToString();
                 dataSourceInfoDict["separator" + mr.EndPin] = me.Separator.ToString();
@@ -233,10 +233,10 @@ namespace C2.Business.Option
         {
             Dictionary<string, string> dataSourceInfoDict = new Dictionary<string, string>();
             List<ModelElement> dataSources = new List<ModelElement>();
-            List<ModelRelation> relations = Global.GetCurrentDocument().ModelRelations.FindAll(mr => mr.EndID == ID);
+            List<ModelRelation> relations = Global.GetCurrentModelDocument().ModelRelations.FindAll(mr => mr.EndID == ID);
             foreach (ModelRelation mr in relations)
             {
-                ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
+                ModelElement me = Global.GetCurrentModelDocument().SearchElementByID(mr.StartID);
                 dataSources.Add(me);
             }
             return dataSources;

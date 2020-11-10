@@ -139,6 +139,7 @@
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\Model\ExportModel.cs" />
     <Compile Include="Business\Model\ImportModel.cs" />
+    <Compile Include="Business\Model\ModelsInfo.cs" />
     <Compile Include="Business\Model\World\WorldMap.cs" />
     <Compile Include="Business\Option\BcpInfo.cs" />
     <Compile Include="Business\Option\ColumnInfo.cs" />
@@ -158,7 +159,6 @@
     <Compile Include="Business\Option\PythonInterpreterInfo.cs" />
     <Compile Include="Business\Option\PythonOPConfig.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
-    <Compile Include="ChartControls\MindMap\DataTreeNode.cs" />
     <Compile Include="ChartControls\MindMap\DataTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -758,6 +758,8 @@
     <Compile Include="Forms\CanvasForm.Designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Widgets\AttachmentWidget.cs" />
+    <Compile Include="Model\Widgets\C2BaseWidget.cs" />
     <Compile Include="Model\Widgets\ChartWidget.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -920,9 +922,6 @@
     <Compile Include="Core\Delegates\PropertyChangedEventArgs.cs" />
     <Compile Include="Core\DocumentType.cs" />
     <Compile Include="Core\DocumentTypeGroup.cs" />
-    <Compile Include="Core\DotNet3\ExtensionAttribute.cs" />
-    <Compile Include="Core\DotNet3\Func.cs" />
-    <Compile Include="Core\DotNet3\ListExtensions.cs" />
     <Compile Include="Core\Exports\BitmapEngine.cs" />
     <Compile Include="Core\Exports\ChartsExportEngine.cs" />
     <Compile Include="Core\Exports\CsvEngine.cs" />
@@ -1541,6 +1540,9 @@
     <EmbeddedResource Include="Dialogs\C1OperatorViews\UnionOperatorView.resx">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2AvgOperatorView.resx">
+      <DependentUpon>C2AvgOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2FilterOperatorView.resx">
       <DependentUpon>C2FilterOperatorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1713,6 +1715,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Templates\组织架构图.bmd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -1720,6 +1723,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\组织架构图.xml" />
     <None Include="Demo\demo_txt.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -2447,6 +2451,7 @@
     <Content Include="Resources\StartPage\startPageTitle.png" />
     <Content Include="Resources\StartPage\tree.png" />
     <Content Include="Resources\StartPage\yellowGroup.png" />
+    <Content Include="Resources\Templates\组织架构图.xml" />
     <Content Include="Resources\thanks.xml">
       <SubType>Designer</SubType>
     </Content>

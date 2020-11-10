@@ -13,7 +13,7 @@ namespace C2.Business.Model
         ModelDocument _CurrentDocument;
 
         public List<ModelDocument> ModelDocuments { get; set; }
-        public ModelDocument CurrentDocument {
+        public ModelDocument CurrentDocument {  // TODO DK 改成返回 ModelDocuments[0]
             get { return _CurrentDocument; }
             set
             {
@@ -88,7 +88,7 @@ namespace C2.Business.Model
         public int CountDataSourceUsage(string ffp)
         {
             int count = 0;
-            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
+            foreach (ModelElement me in Global.GetCurrentModelDocument().ModelElements)
                 if (me.Type == ElementType.DataSource && me.FullFilePath == ffp)
                     count++;
             return count;

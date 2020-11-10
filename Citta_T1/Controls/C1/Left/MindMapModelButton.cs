@@ -17,7 +17,7 @@ namespace C2.Controls.Left
             InitializeComponent();
             this.textButton.Text = modelTitle;
             this.oldTextString = modelTitle;
-            fullFilePath = Path.Combine(Global.UserWorkspacePath,"业务视图", this.textButton.Text, this.textButton.Text + ".bmd");
+            fullFilePath = Path.Combine(Global.BusinessViewPath, this.textButton.Text, this.textButton.Text + ".bmd");
         }
 
         public string ModelTitle => this.textButton.Text;
@@ -125,8 +125,8 @@ namespace C2.Controls.Left
             if (ModelTitle == oldTextString)
                 return;
 
-            string newModelDirectory = Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle);
-            string oldModelDirectory = Path.Combine(Global.GetCurrentDocument().UserPath, oldTextString);
+            string newModelDirectory = Path.Combine(Global.GetCurrentModelDocument().UserPath, ModelTitle);
+            string oldModelDirectory = Path.Combine(Global.GetCurrentModelDocument().UserPath, oldTextString);
             string tmpFFP = Path.Combine(newModelDirectory, oldTextString + ".xml");
             string newFFP = Path.Combine(newModelDirectory, ModelTitle + ".xml");
 
@@ -166,7 +166,7 @@ namespace C2.Controls.Left
             else
             {
                 this.OpenToolStripMenuItem.Enabled = true;
-                this.RenameToolStripMenuItem.Enabled = true;
+                //this.RenameToolStripMenuItem.Enabled = true;
                 this.DeleteToolStripMenuItem.Enabled = true;
             }
 

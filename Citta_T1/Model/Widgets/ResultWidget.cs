@@ -1,38 +1,18 @@
-﻿using C2.Controls.MapViews;
-using C2.Utils;
+﻿using C2.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace C2.Model.Widgets
 {
-    class ResultWidget : Widget, IRemark
+    class ResultWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "RESULT";
-        public List<DataItem> DataItems { get; set; }
+        
         public ResultWidget()
         {
             DisplayIndex = 2;
             widgetIcon = Properties.Resources.result_w_icon;
-            DataItems = new List<DataItem>();
         }
-
-        public override bool ResponseMouse
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override Size CalculateSize(MindMapLayoutArgs e)
-        {
-            return new Size(20, 20);
-        }
-
         public override string GetTypeID()
         {
             return TypeID;
@@ -45,10 +25,10 @@ namespace C2.Model.Widgets
             //文档持久化
             if (this.DataItems.Count > 0)
             {
-                XmlElement dataItemsNode = node.OwnerDocument.CreateElement("data_items");
+                XmlElement dataItemsNode = node.OwnerDocument.CreateElement("result_items");
                 foreach (var dataItem in this.DataItems)
                 {
-                    var dataNode = node.OwnerDocument.CreateElement("data_item");
+                    var dataNode = node.OwnerDocument.CreateElement("result_item");
                     dataNode.SetAttribute("path", dataItem.FilePath);
                     dataNode.SetAttribute("name", dataItem.FileName);
                     dataNode.SetAttribute("separator", dataItem.FileSep.ToString());
@@ -65,7 +45,7 @@ namespace C2.Model.Widgets
             base.Deserialize(documentVersion, node);
             //TODO
             //文档持久化
-            var data_items = node.SelectNodes("data_items/data_item");
+            var data_items = node.SelectNodes("result_items/result_item");
             foreach (XmlElement dataItem in data_items)
             {
                 DataItem item = new DataItem(
@@ -77,8 +57,5 @@ namespace C2.Model.Widgets
                 this.DataItems.Add(item);
             }
         }
-
-
-
     }
 }

@@ -22,7 +22,6 @@ namespace C2.Model.Widgets
         int? _CustomWidth;
         int? _CustomHeight;
         WidgetAlignment _Alignment = WidgetAlignment.Left;
-        string _OpType = "null";
         int _DisplayIndex;
         int _Padding;
 
@@ -167,7 +166,7 @@ namespace C2.Model.Widgets
             }
         }
 
-        [Browsable(true)]
+        [Browsable(false)]
         public virtual bool FitContainer
         {
             get { return true; }
@@ -393,8 +392,8 @@ namespace C2.Model.Widgets
         {
             switch (typeId)
             {
-                //case AttementWiget.TypeID:
-                //    return new AttementWiget();
+                case ProgressBarWidget.TypeID:
+                    return new ProgressBarWidget();
                 case PictureWidget.TypeID:
                     return new PictureWidget();
                 case NoteWidget.TypeID:

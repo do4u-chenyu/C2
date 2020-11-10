@@ -33,8 +33,8 @@ namespace C2.Utils
         // 当前文档在canvas里整体拖动dx, dy
         public static void CanvasDragLocation(float dx, float dy)
         {
-            Global.GetCurrentDocument().ModelElements.ForEach(me => me.InnerControl.ChangeLoc(dx, dy));
-            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCurrentModelDocument().ModelElements.ForEach(me => me.InnerControl.ChangeLoc(dx, dy));
+            Global.GetCurrentModelDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
         }
 

@@ -162,7 +162,7 @@ namespace C2.Controls
         }
         private void FormatLoc(int id, int dx, int dy, List<ModelElement> modelElements)
         {
-            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            float screenFactor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
             foreach (ModelElement me in modelElements)
             {
                 if (me.ID == id)
@@ -170,7 +170,7 @@ namespace C2.Controls
                     Control ct = me.InnerControl;
                     int left = dx + Convert.ToInt32(40 * screenFactor);
                     int top = dy + Convert.ToInt32(100 * screenFactor);
-                    Global.GetCurrentDocument().WorldMap
+                    Global.GetCurrentModelDocument().WorldMap
                                              .WorldBoundControl(new Point(left, top), ct);
                     ctWidths.Add(ct.Width);
                     ctHeight = ctHeight + ct.Height + Convert.ToInt32(10 * screenFactor);
@@ -181,7 +181,7 @@ namespace C2.Controls
         {
             int count = 0;
             this.ctWidths = new List<int>();
-            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            float screenFactor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
             foreach (ModelElement me in modelElements)
             {
                 Control ct = me.InnerControl;
@@ -189,7 +189,7 @@ namespace C2.Controls
                 {
                     int left = dx + Convert.ToInt32(60 * screenFactor);
                     int top =  dy + Convert.ToInt32(100 * screenFactor);
-                    Global.GetCurrentDocument().WorldMap
+                    Global.GetCurrentModelDocument().WorldMap
                                              .WorldBoundControl(new Point(left, top),ct);
 
                     dx += ct.Width;
@@ -247,10 +247,10 @@ namespace C2.Controls
                     TreeComplete(this.treeGroup[i], this.treeGroup[j]);
                 }
             }
-            modelElements = Global.GetCurrentDocument().ModelElements;
+            modelElements = Global.GetCurrentModelDocument().ModelElements;
 
-            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
-            Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(0, 0);
+            float screenFactor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
+            Global.GetCurrentModelDocument().WorldMap.MapOrigin = new Point(0, 0);
             int countDeep = 0;
             ctHeight = 0;
             List<int> countWidthList = new List<int>();

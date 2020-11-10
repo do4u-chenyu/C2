@@ -36,9 +36,9 @@
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.currentModelFinLab = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.resetButton = new System.Windows.Forms.Button();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.runButton = new System.Windows.Forms.Button();
+            this.resetButton = new C2.Controls.Common.NoFocusButton();
+            this.stopButton = new C2.Controls.Common.NoFocusButton();
+            this.runButton = new C2.Controls.Common.NoFocusButton();
             this.rightHideButton = new C2.Controls.Flow.RightHideButton();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.progressBarLabel = new System.Windows.Forms.Label();
@@ -73,13 +73,13 @@
             this.topToolBarControl.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.topToolBarControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.topToolBarControl.Location = new System.Drawing.Point(0, 0);
+            this.topToolBarControl.Margin = new System.Windows.Forms.Padding(0);
             this.topToolBarControl.Name = "topToolBarControl";
             this.topToolBarControl.SelectDrag = false;
             this.topToolBarControl.SelectFrame = false;
             this.topToolBarControl.SelectRemark = false;
             this.topToolBarControl.Size = new System.Drawing.Size(913, 28);
-            this.topToolBarControl.TabIndex = 25;
-            this.topToolBarControl.Paint += new System.Windows.Forms.PaintEventHandler(this.topToolBarControl_Load);
+            this.topToolBarControl.TabIndex = 43;
             // 
             // currentModelRunBackLab
             // 
@@ -122,10 +122,11 @@
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.resetButton.Image = global::C2.Properties.Resources.reset;
-            this.resetButton.Location = new System.Drawing.Point(525, 434);
+            this.resetButton.Location = new System.Drawing.Point(524, 434);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(52, 53);
             this.resetButton.TabIndex = 32;
+            this.resetButton.TabStop = false;
             this.resetButton.UseVisualStyleBackColor = false;
             this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
@@ -140,10 +141,11 @@
             this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
-            this.stopButton.Location = new System.Drawing.Point(456, 434);
+            this.stopButton.Location = new System.Drawing.Point(461, 434);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(52, 53);
             this.stopButton.TabIndex = 31;
+            this.stopButton.TabStop = false;
             this.stopButton.UseVisualStyleBackColor = false;
             this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
@@ -162,6 +164,7 @@
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(52, 53);
             this.runButton.TabIndex = 30;
+            this.runButton.TabStop = false;
             this.runButton.UseVisualStyleBackColor = false;
             this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
@@ -283,9 +286,9 @@
         private System.Windows.Forms.Label currentModelFinLab;
         private System.Windows.Forms.Label currentModelRunLab;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Button stopButton;
-        private System.Windows.Forms.Button runButton;
+        private C2.Controls.Common.NoFocusButton resetButton;
+        private C2.Controls.Common.NoFocusButton stopButton;
+        private C2.Controls.Common.NoFocusButton runButton;
         private Controls.Flow.RightHideButton rightHideButton;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label progressBarLabel;

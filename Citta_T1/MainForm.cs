@@ -40,7 +40,6 @@ namespace C2
         TabBarButton BtnNew;
         FindDialog MyFindDialog;
         ShortcutKeysTable ShortcutKeys;
-        StartForm startPage;
         #endregion
 
         private string userName;
@@ -148,11 +147,7 @@ namespace C2
             Global.SetMyModelControl(this.myModelControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
-            Global.SetPictureBox(this.minMaxPictureBox);
             Global.SetMindMapModelControl(this.mindMapModelControl);
-            //Global.SetBottomViewPanelMinimum(this.isBottomViewPanelMinimum);
-            //this.isBottomViewPanelMinimum = false;
-
         }
         void OpenSavedTabs()
         {
@@ -188,7 +183,7 @@ namespace C2
 
         public void SetDocumentDirty()
         {
-            Global.GetCurrentDocument().Modified = true;
+            Global.GetCurrentModelDocument().Modified = true;
         }
         public void DeleteCurrentDocument()
         {
@@ -223,6 +218,10 @@ namespace C2
         }
         private void LoadDocuments()
         {
+            // 将用户本地保存的模型文档加载到左侧myModelControl
+            string[] bsTitles = ModelsInfo.LoadAllModelTitle(Global.BusinessViewPath);
+            foreach (string title in bsTitles)
+                this.mindMapModelControl.AddMindMapModel(title);
             //if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
             //{
             //    this.modelTitlePanel.AddModel("我的新模型");
@@ -485,23 +484,19 @@ namespace C2
         
         Document CreateNewMap()
         {
-            MindMap map = new MindMap();
-            map.Name = string.Format("{0} 1", Lang._("New Chart"));
-            map.Root.Text = Lang._("Center Topic");
-            map.Author = System.Environment.UserName;
-
-            if (ChartThemeManage.Default.DefaultTheme != null)
-            {
-                map.ApplyTheme(ChartThemeManage.Default.DefaultTheme);
-            }
-
-            Document doc = new Document();
-            doc.Name = Lang._("New Document");
-            doc.Author = System.Environment.UserName;
-            doc.Charts.Add(map);
-            //doc.Modified = true;
+            Document doc = LoadDocumentTemplate();
+            doc.Modified = true;
             return doc;
         }
+
+        private Document LoadDocumentTemplate()
+        {
+            Document doc = Document.LoadXml("组织架构图", Properties.Resources.组织架构图);
+            if (doc.Charts.Count == 3 && doc.Charts[1].Name == "组织架构视图" && doc.Charts[1] is MindMap)
+                return doc;
+            return null;
+        }
+
         public void ShowFindDialog(ChartControl chartControl, FindDialog.FindDialogMode mode)
         {
             if (MyFindDialog == null || MyFindDialog.IsDisposed)
@@ -715,7 +710,7 @@ namespace C2
             this.bottomPyConsole.Visible = false;
             this.bottomPreview.Visible = true;
         }
-        private void ShowBottomPanel()
+        public void ShowBottomPanel()
         {
             if (this.isBottomViewPanelMinimum == true)
             {
@@ -751,26 +746,6 @@ namespace C2
             this.ShowLogView();
         }
         #endregion
-        public void ShowBottomViewPanel()
-        {
-            //log.Info("MinMaxPictureBox_Click");
-            if (this.isBottomViewPanelMinimum == true)
-            {
-                this.isBottomViewPanelMinimum = false;
-                this.bottomViewPanel.Height = 200;
-                this.minMaxPictureBox.Image = global::C2.Properties.Resources.minfold;
-            }
-            
-            if (bottomViewPanel.Height == 200)
-            {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
-            }
-            if (bottomViewPanel.Height == 40)
-            {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
-            }
-        }
-
         private void minMaxPictureBox_Click(object sender, EventArgs e)
         {
             if (this.isBottomViewPanelMinimum == true)

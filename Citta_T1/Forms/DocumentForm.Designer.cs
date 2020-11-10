@@ -37,9 +37,6 @@ namespace C2.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocumentForm));
             this.multiChartsView1 = new C2.ChartPageView.MultiChartsView();
             this.MenuStripChartTab = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuInsertTab = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuDeleteTab = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuRenameTab = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new C2.Controls.ToolStripPro();
             this.ImportDataSourceButton = new System.Windows.Forms.ToolStripButton();
@@ -113,32 +110,9 @@ namespace C2.Forms
             // MenuStripChartTab
             // 
             this.MenuStripChartTab.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuInsertTab,
-            this.MenuDeleteTab,
-            this.toolStripMenuItem1,
             this.MenuRenameTab});
             this.MenuStripChartTab.Name = "MenuStripChartTab";
-            this.MenuStripChartTab.Size = new System.Drawing.Size(133, 76);
-            // 
-            // MenuInsertTab
-            // 
-            this.MenuInsertTab.Name = "MenuInsertTab";
-            this.MenuInsertTab.Size = new System.Drawing.Size(132, 22);
-            this.MenuInsertTab.Text = "&Insert";
-            this.MenuInsertTab.Click += new System.EventHandler(this.MenuInsertTab_Click);
-            // 
-            // MenuDeleteTab
-            // 
-            this.MenuDeleteTab.Image = global::C2.Properties.Resources.delete;
-            this.MenuDeleteTab.Name = "MenuDeleteTab";
-            this.MenuDeleteTab.Size = new System.Drawing.Size(132, 22);
-            this.MenuDeleteTab.Text = "&Delete...";
-            this.MenuDeleteTab.Click += new System.EventHandler(this.MenuDeleteTab_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(129, 6);
+            this.MenuStripChartTab.Size = new System.Drawing.Size(133, 26);
             // 
             // MenuRenameTab
             // 
@@ -315,6 +289,7 @@ namespace C2.Forms
             this.TsbReplace.Padding = new System.Windows.Forms.Padding(2);
             this.TsbReplace.Size = new System.Drawing.Size(24, 25);
             this.TsbReplace.Text = "Replace";
+            this.TsbReplace.Visible = false;
             this.TsbReplace.Click += new System.EventHandler(this.TsbReplace_Click);
             // 
             // toolStripSeparator6
@@ -632,9 +607,6 @@ namespace C2.Forms
 
         private C2.ChartPageView.MultiChartsView multiChartsView1;
         private System.Windows.Forms.ContextMenuStrip MenuStripChartTab;
-        private System.Windows.Forms.ToolStripMenuItem MenuInsertTab;
-        private System.Windows.Forms.ToolStripMenuItem MenuDeleteTab;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem MenuRenameTab;
         private Controls.ToolStripPro toolStrip1;
         private System.Windows.Forms.ToolStripButton TsbSave;
@@ -681,6 +653,5 @@ namespace C2.Forms
         private Controls.MyTabControl myTabControl1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripButton ImportDataSourceButton;
-        private Controls.Left.DataSourceControl dataSourceControl;
     }
 }

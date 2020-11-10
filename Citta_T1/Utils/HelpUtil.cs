@@ -1,4 +1,5 @@
-﻿namespace C2.Utils
+﻿using System.Windows.Forms;
+namespace C2.Utils
 {
     class HelpUtil
     {
@@ -19,10 +20,34 @@
         public static string KeyWordOperatorHelpInfo = "关键词过滤:根据输入的关键词,对数据进行基础的关键词命中或去噪处理.";
         public static string DataFormatOperatorHelpInfo = "数据标准化:对数据进行输出列选择,顺序调整,列项重命名处理.";
         public static string CustomOperator2HelpInfo = "多源算子:灵活配置算子,用于各种模型探索和展示;二元算子,支持两个输入数据源.";
-
-
-        public static string UndoButtonHelpInfo = "撤销按钮:撤销当前操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的撤销.";
-        public static string RedoButtonHelpInfo = "恢复按钮:恢复上一步的撤销操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的恢复.";
-        public static string FormatOperatorHelpInfo = "一键排版:智能调整元素版面位置.";
+        public static string UndoButtonHelpInfo = "撤销按钮:撤销当前操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的撤销";
+        public static string RedoButtonHelpInfo = "恢复按钮:恢复上一步的撤销操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的恢复";
+        public static string FormatOperatorHelpInfo = "一键排版:智能调整元素版面位置";
+        public static string SaveModelButtonHelpInfo = "保存模型";
+        public static string SaveAllButtonHelpInfo = "保存所有模型";
+        public static string ImportModelHelpInfo = "导入模型";
+        public static string RemarkPictureBoxHelpInfo = "编写备注信息";
+        public static string ZoomUpPictureBoxHelpInfo = "发大屏幕中算子并支持三级放大";
+        public static string zoomDownPictureBoxHelpInfo = "缩小当前屏幕中算子";
+        public static string MovePictureBoxHelpInfo = "拖动当前视野算子";
+        public static string FramePictureBoxHelpInfo = "框选屏幕中算子进行整体拖动";
+        public static string moreButtonHelpInfo = "首选项配置:配置程序的各项参数";
+ 
+          
+        /// <summary>
+        /// MessageBoxIcon.Hand 
+        /// MessageBoxIcon.Asterisk      星号
+        /// MessageBoxIcon.Exclamation
+        /// MessageBoxIcon.Information   通知
+        /// MessageBoxIcon.Warning       警告
+        /// MessageBoxIcon.Error         错误
+        /// MessageBoxIcon.Question      疑问
+        /// MessageBoxIcon.Stop         
+        /// MessageBoxIcon.None          无图标
+        /// </summary>
+        public static DialogResult ShowMessageBox(string message, string caption, MessageBoxIcon type = MessageBoxIcon.Information)
+        {
+            return MessageBox.Show(message, caption, MessageBoxButtons.OK, type);
+        }
     }
 }

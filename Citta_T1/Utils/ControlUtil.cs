@@ -54,7 +54,7 @@ namespace C2.Utils
         public static Dictionary<int, Point> SaveElesWorldCord(List<ModelElement> mes)
         {
             Dictionary<int, Point> eleWorldCordDict = new Dictionary<int, Point>();
-            WorldMap wm = Global.GetCurrentDocument().WorldMap;
+            WorldMap wm = Global.GetCurrentModelDocument().WorldMap;
             foreach (ModelElement me in mes)
             {
                 if (me == null)
@@ -66,7 +66,7 @@ namespace C2.Utils
         }
         public static void UpdateElesWorldCord(Dictionary<int, Point> eleWorldCordDict, bool onlyUpdateRs=false)
         {
-            ModelDocument doc = Global.GetCurrentDocument();
+            ModelDocument doc = Global.GetCurrentModelDocument();
             WorldMap wm = doc.WorldMap;
             foreach(int eleID in eleWorldCordDict.Keys)
             {
