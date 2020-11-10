@@ -210,7 +210,11 @@ namespace C2.Controls.MapViews
                 DataItem resultItem = opw.ResultItem;
                 ResultWidget rsw = (opw.Container as Topic).FindWidget<ResultWidget>();
                 if (rsw == null)
-                    AddResult(new Topic[] { opw.Container as Topic },resultItem);
+                {
+                    AddResult(new Topic[] { opw.Container as Topic }, resultItem);
+                    TopicUpdate(opw.Container as Topic); 
+                }
+                   
                 else
                 {
                     //TODO
