@@ -61,6 +61,7 @@ namespace C2.Controls.MapViews
         }
         private bool FindNode(TreeNodeCollection nodes, string text)
         {
+            int count = 0;
             foreach (TreeNode node in nodes)
             {
                 if (node.Text == text && node.ImageIndex != 0)
@@ -88,11 +89,24 @@ namespace C2.Controls.MapViews
         {
             foreach (DataItem dataItem in dataItems)
             {
-                TreeNode node = new TreeNode(dataItem.FileName);
-                node.ImageIndex = node.SelectedImageIndex = imageIndex;
-                if (!FindNode(nodes, dataItem.FileName))
-                    nodes.Add(node);
+                InsertNode(nodes, dataItem.FileName, imageIndex);
             }
+        }
+
+        public void InsertNode(TreeNodeCollection nodes, 
+                               string text, 
+                               int imageIndex)
+        {
+            TreeNode node = new TreeNode(text);
+            node.ImageIndex = node.SelectedImageIndex = imageIndex;
+            int count = 0;
+            foreach (TreeNode nodeTmp in nodes)
+            {
+                count += 1;
+                if (nodeTmp.Text == text && nodeTmp.ImageIndex != 0)
+                    return;
+            }
+            nodes.Insert(imageIndex == srcDataImage? 0:count-1, node);
         }
     }
 }
