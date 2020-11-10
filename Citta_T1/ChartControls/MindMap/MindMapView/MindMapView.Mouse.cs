@@ -152,13 +152,13 @@ namespace C2.Controls.MapViews
                 Topic[] hitTopic = new Topic[] { htr.Topic };
                 AddDataSource(hitTopic, dataItem);
                 //AddResult(hitTopic, dataItem);
-                ShowDesigner(hitTopic[0]);
+                ShowDesigner(hitTopic[0],false);
                 return;
             }
             if (dsw.DataItems.Find((DataItem x) => x.FilePath.Equals(dataItem.FilePath)) == null)
             {
                 dsw.DataItems.Add(dataItem);
-                ShowDesigner(dsw.Container);
+                ShowDesigner(dsw.Container,false);
             }
             else
                 MessageBox.Show(String.Format("数据源{0}:[{1}]已存在,可以删除后重新导入.", dataItem.FileName, dataItem.FilePath),
