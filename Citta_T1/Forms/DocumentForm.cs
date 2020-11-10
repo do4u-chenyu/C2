@@ -26,7 +26,7 @@ namespace C2.Forms
         const string ShowSidebarOptionName = "editor_show_sidebar";
         Document _Document;
         ObjectTreeView objectTree1;
-        ObjectTreeView objectTree2;
+        DataTreeView objectTree2;
         ChartOverviewBox cob;
         TimerDialog MyTimerDialog;
         ChartPageView.BaseChartPage _ActivedChartPage;
@@ -37,6 +37,7 @@ namespace C2.Forms
         bool _ShowSidebar = true;
         object[] _SelectedObjects;
         object _ShowDesignerObject;
+        object _DataChangedObject;
         ShortcutKeysTable ShortcutKeys;
         PrintDialog MyPrintDialog;
         bool HardClose;
@@ -161,6 +162,9 @@ namespace C2.Forms
             }
         }
 
+
+        bool NeedShowDesigner { set; get; }
+
         object ShowDesignerObject
         {
             get { return _ShowDesignerObject; }
@@ -170,6 +174,7 @@ namespace C2.Forms
                 OnShowDesignerObjectChanged(_ShowDesignerObject);
             }
         }
+
         void OnShowSidebarChanged()
         {
             splitContainer2.Visible = ShowSidebar;
@@ -211,7 +216,7 @@ namespace C2.Forms
             if (old != null)
             {
                 old.SelectedObjectsChanged -= new EventHandler(ActivedChartPage_SelectedObjectsChanged);
-                old.NeedShowDesigner -= new EventHandler(ActivedChartPage_NeedShowDesigner);
+                old.NeedShowDesigner -= ActivedChartPage_NeedShowDesigner;
             }
 
             if (ActivedChartPage != null)
@@ -222,7 +227,9 @@ namespace C2.Forms
 
                 SelectedObjects = ActivedChartPage.SelectedObjects;
                 ActivedChartPage.SelectedObjectsChanged += new EventHandler(ActivedChartPage_SelectedObjectsChanged);
-                ActivedChartPage.NeedShowDesigner += new EventHandler(ActivedChartPage_NeedShowDesigner);
+                ActivedChartPage.TopicDataChanged += new EventHandler(ActivedChartPage_DataChanged);
+                ActivedChartPage.NeedShowDesigner += ActivedChartPage_NeedShowDesigner;
+
             }
             else
             {
@@ -242,7 +249,20 @@ namespace C2.Forms
                 ShowDesigner(ShowDesignerObject);
             }
         }
-
+        object DataChangedObject
+        {
+            get { return _DataChangedObject; }
+            set
+            {
+                _DataChangedObject = value;
+                OnTopicDataChanged(_DataChangedObject);
+            }
+        }
+        void OnTopicDataChanged(object obj)
+        {
+            if (obj != null)
+                AddSubWidget(obj);
+        }
         void OnSelectedObjectsChanged(object[] old)
         {
             if (SelectedObjects != null)
@@ -832,16 +852,25 @@ namespace C2.Forms
         }
 
         
-        void ActivedChartPage_NeedShowDesigner(object sender, EventArgs e)
+        void ActivedChartPage_NeedShowDesigner(BaseChartPage baseChart, bool needShow)
         {
-            if (ActivedChartPage == sender)
+            if (ActivedChartPage == baseChart)
             {
+                NeedShowDesigner = needShow;
                 ShowDesignerObject = ActivedChartPage.ShowDesignerObject;
             }
 
             ResetControlStatus();
         }
+        void ActivedChartPage_DataChanged(object sender, EventArgs e)
+        {
+            if (ActivedChartPage == sender)
+            {
+                DataChangedObject = ActivedChartPage.DataChangeObject;
+            }
 
+            ResetControlStatus();
+        }
         void ActivedChartPage_SelectedObjectsChanged(object sender, EventArgs e)
         {
             if (ActivedChartPage == sender)
@@ -893,11 +922,25 @@ namespace C2.Forms
                 st = sob as Topic;
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
-
             designerControl.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
+            //目前只有右键未配置的算子挂件，才会主动显示设计器，其他时候只做更新
+            if (NeedShowDesigner)
+            {
+                tabControl2.SelectedPage = designerControl;
+                NeedShowDesigner = false;
+            }
 
         }
-        
+        void AddSubWidget(object sob)
+        {
+            Topic st = null;
+            var objectType = sob.GetType();
+            if (objectType.Name == "Topic")
+            {
+                st = sob as Topic;
+                objectTree2.AddWidgetData(st);
+            } 
+        }
         void ShowProperty(object[] objects)
         {
             var objectType = objects.GetType().GetElementType();

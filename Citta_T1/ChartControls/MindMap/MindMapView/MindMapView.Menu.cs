@@ -185,7 +185,7 @@ namespace C2.Controls.MapViews
 
         void MenuOpenOperatorDesigner_Click(object sender, EventArgs e)
         {
-            ShowDesigner(opw.Container);
+            ShowDesigner(opw.Container,true);
         }
 
         void MenuRunningOp_Click(object sender, EventArgs e)
@@ -340,7 +340,7 @@ namespace C2.Controls.MapViews
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             // 剩余最后一个菜单项，删除数据源挂件
             dtw.DataItems.Remove(hitItem);
-            ShowDesigner(dtw.Container);
+            ShowDesigner(dtw.Container,false);
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
         }
@@ -349,7 +349,7 @@ namespace C2.Controls.MapViews
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             // 剩余最后一个菜单项，删除数据源挂件
             cw.DataItems.Remove(hitItem);
-            ShowDesigner(cw.Container);
+            ShowDesigner(cw.Container,false);
             if (cw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { cw });
         }

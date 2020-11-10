@@ -38,7 +38,7 @@ namespace C2.Dialogs
         protected override void InitializeDataSource()
         {
             // 初始化左右表数据源配置信息
-            this.InitializeDataSource();
+            base.InitializeDataSource();
             //初始化输入输出路径
             ModelElement resultElement = Global.GetCurrentModelDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement != ModelElement.Empty)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -53,7 +53,8 @@ namespace C2.ChartPageView
             mindMapView1.ShowBorder = false;
             mindMapView1.SelectionChanged += new System.EventHandler(this.mindMapView1_SelectionChanged);
             mindMapView1.ChartBackColorChanged += new System.EventHandler(this.mindMapView1_ChartBackColorChanged);
-            mindMapView1.NeedShowDesigner += new System.EventHandler(this.mindMapView1_NeedShowDesigner);
+            mindMapView1.TopicDataChanged += new System.EventHandler(this.mindMapView1_TopicDataChanged);
+            mindMapView1.NeedShowDesigner += mindMapView1_NeedShowDesigner;
 
             // MindMapChartPage
             Controls.Add(this.mindMapView1);
@@ -150,13 +151,21 @@ namespace C2.ChartPageView
                 SelectedObjects = so;
         }
 
-        void mindMapView1_NeedShowDesigner(object sender, EventArgs e)
+        void mindMapView1_NeedShowDesigner(bool needShow)
         {
             var so = mindMapView1.ShowDesignerObject;
             if (so != null)
+            {
+                NeedShowControl = needShow;
                 ShowDesignerObject = so;
+            }
         }
-
+        void mindMapView1_TopicDataChanged(object sender, EventArgs e)
+        {
+            var so = mindMapView1.DataChangeObject;
+            if (so != null)
+                DataChangeObject = so;
+        }
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -666,10 +675,20 @@ namespace C2.ChartPageView
             ShowDesignerObject = mindMapView1.SelectedTopic;
             mindMapView1.AddOperator();
         }
-
         void MenuAddAttachment_Click(object sender, EventArgs e)
         {
-            
+            OpenFileDialog fd = new OpenFileDialog
+            {
+                Filter = "files|*.txt;*.bcp;*.xls;*.xlsx",
+                Title = "添加附件"
+            };
+
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                //this.rsFullFilePathTextBox.Text = fd.FileName;
+            }
+
+            mindMapView1.AddAttachment();
         }
 
         void MenuAddModelOp_Click(object sender, EventArgs e)

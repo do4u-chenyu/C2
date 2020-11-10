@@ -174,10 +174,18 @@ namespace C2.Controls.Top
 
         private void InitializeToolTip()
         {
-            this.formatButton.ToolTipText = HelpUtil.FormatOperatorHelpInfo;
+            this.saveModelButton.ToolTipText = HelpUtil.SaveModelButtonHelpInfo;
+            this.saveAllButton.ToolTipText = HelpUtil.SaveAllButtonHelpInfo;
             this.undoButton.ToolTipText = HelpUtil.UndoButtonHelpInfo;
             this.redoButton.ToolTipText = HelpUtil.RedoButtonHelpInfo;
-            //TODO 功能暂时没实现
+            this.ImportModel.ToolTipText = HelpUtil.ImportModelHelpInfo;
+            this.formatButton.ToolTipText = HelpUtil.FormatOperatorHelpInfo;
+            this.remarkPictureBox.ToolTipText = HelpUtil.RemarkPictureBoxHelpInfo;
+            this.zoomUpPictureBox.ToolTipText = HelpUtil.ZoomUpPictureBoxHelpInfo;
+            this.zoomDownPictureBox.ToolTipText = HelpUtil.zoomDownPictureBoxHelpInfo;
+            this.movePictureBox.ToolTipText = HelpUtil.MovePictureBoxHelpInfo;
+            this.framePictureBox.ToolTipText = HelpUtil.FramePictureBoxHelpInfo;
+            this.moreButton.ToolTipText = HelpUtil.moreButtonHelpInfo;
         }
 
         public void UndoButton_Click(object sender, EventArgs e)

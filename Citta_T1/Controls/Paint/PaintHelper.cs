@@ -1130,6 +1130,11 @@ namespace C2.Controls
                 , bounds.Top + (bounds.Height - h) / 2, w, h);
         }
 
+        public static void DrawStringDefault(Graphics grf, string text, Rectangle rect)
+        {
+            DrawString(grf, text, UITheme.Default.DefaultFont, Brushes.Black, rect, UITheme.Default.DefaultStringFormat, Orientation.Horizontal);
+        }
+
         public static void DrawString(Graphics grf, string text, Font font, Brush brush, Rectangle rect, StringFormat stringFormat, Orientation orientation)
         {
             GraphicsState gs = null;
