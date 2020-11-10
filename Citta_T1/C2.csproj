@@ -2244,6 +2244,7 @@
     <Content Include="Resources\StartPage\startPageTitle.png" />
     <Content Include="Resources\StartPage\tree.png" />
     <Content Include="Resources\StartPage\yellowGroup.png" />
+    <Content Include="Resources\Templates\组织架构图.xml" />
     <Content Include="Resources\thanks.xml">
       <SubType>Designer</SubType>
     </Content>
