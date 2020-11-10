@@ -55,7 +55,6 @@
             this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
-            this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(10, 0, 2, 0);
             this.toolStrip1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveAllButton,
@@ -74,11 +73,10 @@
             this.movePictureBox,
             this.framePictureBox,
             this.moreButton});
-            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(990, 28);
+            this.toolStrip1.Size = new System.Drawing.Size(990, 29);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 2;
             // 
@@ -263,7 +261,7 @@
             this.LinePanel.BackColor = System.Drawing.Color.DarkGray;
             this.LinePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.LinePanel.ForeColor = System.Drawing.Color.Black;
-            this.LinePanel.Location = new System.Drawing.Point(0, 27);
+            this.LinePanel.Location = new System.Drawing.Point(0, 28);
             this.LinePanel.Name = "LinePanel";
             this.LinePanel.Size = new System.Drawing.Size(990, 1);
             this.LinePanel.TabIndex = 3;
@@ -278,7 +276,7 @@
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "TopToolBarControl";
-            this.Size = new System.Drawing.Size(990, 28);
+            this.Size = new System.Drawing.Size(990, 29);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
