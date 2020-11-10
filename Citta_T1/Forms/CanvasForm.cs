@@ -578,13 +578,6 @@ namespace C2.Forms
         //}
         #endregion
 
-        private void topToolBarControl_Load(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, topToolBarControl.ClientRectangle,
-            Color.Red, 1, ButtonBorderStyle.None, //左边
-            Color.Red, 1, ButtonBorderStyle.None, //上边
-            Color.Red, 1, ButtonBorderStyle.None, //右边
-            Color.Gray, 1, ButtonBorderStyle.Solid);//底边
-        }
+       
     }
 }

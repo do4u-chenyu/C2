@@ -258,6 +258,12 @@
     <Compile Include="Dialogs\C1OperatorViews\FilterOperatorView.Designer.cs">
       <DependentUpon>FilterOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView_v2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView_v2.Designer.cs">
+      <DependentUpon>RelateOperatorView_v2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\C1OperatorViews\RelateOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1522,6 +1528,9 @@
     <EmbeddedResource Include="Dialogs\C1OperatorViews\RandomOperatorView.resx">
       <DependentUpon>RandomOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\RelateOperatorView_v2.resx">
+      <DependentUpon>RelateOperatorView_v2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\RelateOperatorView.resx">
       <DependentUpon>RelateOperatorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -2047,7 +2056,52 @@
     <Content Include="Resources\Operators\随机.png" />
     <Content Include="Resources\Operators\频率.png" />
     <None Include="Resources\remark.png" />
+    <Content Include="Resources\PictureIconLib\apk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\BCP.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\FP.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\HIVE.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\IMEI.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\IMSI.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\IP.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\Python.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\qq号.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\Spark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\url.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\VPN.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\上网账号.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PictureIconLib\不等于.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\交管.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\人员管控.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\人物1.png">
@@ -2071,13 +2125,43 @@
     <Content Include="Resources\PictureIconLib\人物7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\PictureIconLib\人物画像.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\人物轨迹.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\伴随.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\保险.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PictureIconLib\信号.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\假币.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\全文.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\关键词.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\分类.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\刑事案件.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\勾.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\叉.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\取证.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\号乘.png">
@@ -2092,7 +2176,13 @@
     <Content Include="Resources\PictureIconLib\号除.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\PictureIconLib\地下钱庄.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PictureIconLib\地点.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\基站.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\头像1.png">
@@ -2105,6 +2195,30 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\奖杯.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\密码.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\微信号.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\手机号.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\打击传销.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\打标.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\指标.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\提取.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\支付.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\收藏.png">
@@ -2137,6 +2251,9 @@
     <Content Include="Resources\PictureIconLib\数字9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\PictureIconLib\数据库.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PictureIconLib\星星1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2158,16 +2275,79 @@
     <Content Include="Resources\PictureIconLib\星星7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\PictureIconLib\服务器.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\案情.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\案由.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\民事.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\法律依据.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\海关.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\海量.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\涉军.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\涉恐.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\涉政.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\涉枪.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\涉毒.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\涉税.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\涉藏.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\涉诈.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\涉赌.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\涉黄.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PictureIconLib\漏斗.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\PictureIconLib\用户名.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\碰撞.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PictureIconLib\社交.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\票据.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\符号.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\等于.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\红包赌博.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\红旗1.png">
@@ -2189,6 +2369,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\红旗7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\经济犯罪.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\群聊.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\走私.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\身份证.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\过滤.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\进度10.png">
@@ -2221,6 +2416,12 @@
     <Content Include="Resources\PictureIconLib\重点.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\PictureIconLib\重点场所.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\重点物品.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PictureIconLib\银行卡.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2228,6 +2429,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\锁开.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\黑灰产.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\resource.h" />
@@ -2360,45 +2564,19 @@
     <None Include="Resources\C1\toolbox\undo.png" />
     <None Include="Resources\C1\leftpanelmenu\LeftpanelOpIcon.png" />
     <Content Include="Resources\C1\opControl\releateOp.png" />
-    <Content Include="Resources\C1\opControl\wordFilterOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\groupOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\differOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\avgOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\unionOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\maxOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\minOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\sortOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\dataStandarOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\filterOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\collideOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\randomOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\freqOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\C1\opControl\wordFilterOp.png" />
+    <Content Include="Resources\C1\opControl\groupOp.png" />
+    <Content Include="Resources\C1\opControl\differOp.png" />
+    <Content Include="Resources\C1\opControl\avgOp.png" />
+    <Content Include="Resources\C1\opControl\unionOp.png" />
+    <Content Include="Resources\C1\opControl\maxOp.png" />
+    <Content Include="Resources\C1\opControl\minOp.png" />
+    <Content Include="Resources\C1\opControl\sortOp.png" />
+    <Content Include="Resources\C1\opControl\dataStandarOp.png" />
+    <Content Include="Resources\C1\opControl\filterOp.png" />
+    <Content Include="Resources\C1\opControl\collideOp.png" />
+    <Content Include="Resources\C1\opControl\randomOp.png" />
+    <Content Include="Resources\C1\opControl\freqOp.png" />
     <Content Include="sbin\cat_xls.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2428,12 +2606,8 @@
     </Content>
     <Content Include="Resources\C1\displaypanel\blueshadow.png" />
     <Content Include="Resources\C1\displaypanel\close.png" />
-    <Content Include="Resources\C1\displaypanel\maxunfold.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\displaypanel\minfold.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\C1\displaypanel\maxunfold.png" />
+    <Content Include="Resources\C1\displaypanel\minfold.png" />
     <Content Include="Resources\C1\displaypanel\remark.png" />
     <Content Include="Resources\C1\displaypanel\shadow.png" />
     <Content Include="Resources\C1\element\done.png" />
@@ -2450,7 +2624,6 @@
     <Content Include="Resources\C1\flow\selectZoomDown.png" />
     <Content Include="Resources\C1\menu\controlhelp.png" />
     <Content Include="Resources\C1\menu\head.png" />
-    <Content Include="Resources\C1\menu\help.png" />
     <None Include="Resources\C1\toolbox\add.png" />
     <None Include="Resources\C1\menu\modelstep.png" />
     <Content Include="Resources\C1\toolbox\background.png" />

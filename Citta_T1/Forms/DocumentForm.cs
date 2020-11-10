@@ -161,7 +161,10 @@ namespace C2.Forms
                 ShowDesigner(_SelectedObjects[0]);
             }
         }
-        
+
+
+        bool NeedShowDesigner { set; get; }
+
         object ShowDesignerObject
         {
             get { return _ShowDesignerObject; }
@@ -213,7 +216,7 @@ namespace C2.Forms
             if (old != null)
             {
                 old.SelectedObjectsChanged -= new EventHandler(ActivedChartPage_SelectedObjectsChanged);
-                old.NeedShowDesigner -= new EventHandler(ActivedChartPage_NeedShowDesigner);
+                old.NeedShowDesigner -= ActivedChartPage_NeedShowDesigner;
             }
 
             if (ActivedChartPage != null)
@@ -224,8 +227,9 @@ namespace C2.Forms
 
                 SelectedObjects = ActivedChartPage.SelectedObjects;
                 ActivedChartPage.SelectedObjectsChanged += new EventHandler(ActivedChartPage_SelectedObjectsChanged);
-                ActivedChartPage.NeedShowDesigner += new EventHandler(ActivedChartPage_NeedShowDesigner);
                 ActivedChartPage.TopicDataChanged += new EventHandler(ActivedChartPage_DataChanged);
+                ActivedChartPage.NeedShowDesigner += ActivedChartPage_NeedShowDesigner;
+
             }
             else
             {
@@ -848,10 +852,11 @@ namespace C2.Forms
         }
 
         
-        void ActivedChartPage_NeedShowDesigner(object sender, EventArgs e)
+        void ActivedChartPage_NeedShowDesigner(BaseChartPage baseChart, bool needShow)
         {
-            if (ActivedChartPage == sender)
+            if (ActivedChartPage == baseChart)
             {
+                NeedShowDesigner = needShow;
                 ShowDesignerObject = ActivedChartPage.ShowDesignerObject;
             }
 
@@ -918,6 +923,13 @@ namespace C2.Forms
             else if (objectType.Name.EndsWith("Widget"))
                 st = (sob as Widget).Container as Topic;
             designerControl.SetSelectedTopicDesign(st,ActiveChartBox as MindMapView);
+            //目前只有右键未配置的算子挂件，才会主动显示设计器，其他时候只做更新
+            if (NeedShowDesigner)
+            {
+                tabControl2.SelectedPage = designerControl;
+                NeedShowDesigner = false;
+            }
+
         }
         void AddSubWidget(object sob)
         {

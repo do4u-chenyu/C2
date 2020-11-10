@@ -116,7 +116,7 @@ namespace C2.Controls.MapViews
             {
                 var template = new OperatorWidget();
                 AddWidget(OperatorWidget.TypeID, template, false);
-                ShowDesigner(SelectedTopics[0]);
+                ShowDesigner(SelectedTopics[0],false);
             }
         }
 
@@ -125,6 +125,16 @@ namespace C2.Controls.MapViews
             var template = new OperatorWidget();
             AddWidgetCommand command = new AddWidgetCommand(topics, OperatorWidget.TypeID, template);
             ExecuteCommand(command);
+        }
+
+        public void AddAttachment()
+        {          
+            if (SelectedTopics != null && SelectedTopics.Length > 0)
+            {
+                var template = new AttachmentWidget();
+                AddWidget(AttachmentWidget.TypeID, template, false);
+                //ShowDesigner(SelectedTopics[0],false);
+            }
         }
 
         public void AddDataSource(Topic[] hitTopic,DataItem dataItem)

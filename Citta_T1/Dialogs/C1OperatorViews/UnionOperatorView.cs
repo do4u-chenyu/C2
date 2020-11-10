@@ -46,7 +46,7 @@ namespace C2.OperatorViews
         protected override void InitializeDataSource()
         {
             // 初始化左右表数据源配置信息
-            this.InitializeDataSource();
+            base.InitializeDataSource();
             // 窗体自定义的初始化逻辑
             this.oldOutName0 = this.opControl.Option.GetOptionSplit("outname").ToList();
             this.comboBox0.Items.AddRange(nowColumnsName0);
