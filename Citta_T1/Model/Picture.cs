@@ -44,6 +44,11 @@ namespace C2.Model
             set { _Name = value; }
         }
 
+        public string SName
+        {
+            get { return Path.GetFileNameWithoutExtension(Name); }
+        }
+
         public Image Data
         {
             get { return _Data; }

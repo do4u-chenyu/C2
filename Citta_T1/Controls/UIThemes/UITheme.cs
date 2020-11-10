@@ -22,6 +22,7 @@ namespace C2.Controls
         private UITheme()
         {
             Listeners = new List<IThemableUI>();
+            DefaultStringFormat.Alignment = StringAlignment.Center;
         }
 
         public static UITheme Default
@@ -94,6 +95,8 @@ namespace C2.Controls
         {
             get { return SystemFonts.MessageBoxFont; }
         }
+
+        public StringFormat DefaultStringFormat { get; } = StringFormat.GenericDefault;
 
         public List<IThemableUI> Listeners
         {
