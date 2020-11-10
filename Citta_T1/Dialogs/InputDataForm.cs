@@ -73,6 +73,8 @@ namespace C2.Dialogs
                 this.encoding = OpUtil.Encoding.UTF8;
             if (fd.ShowDialog() == DialogResult.OK)
             {
+                
+                this.Cursor = Cursors.WaitCursor;
                 fullFilePath = fd.FileName;
                 fileName = Path.GetFileNameWithoutExtension(fullFilePath);
                 ext = Path.GetExtension(fullFilePath);
@@ -87,6 +89,7 @@ namespace C2.Dialogs
                     this.extType = OpUtil.ExtType.Text;
                     PreViewBcpFile();
                 }
+                this.Cursor = Cursors.Default;
             }
             //if (this.textBox1.Text == "请输入数据名称" || this.textBox1.Text == "")
             this.textBox1.Text = fileName;
