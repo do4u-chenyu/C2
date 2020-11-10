@@ -2360,45 +2360,19 @@
     <None Include="Resources\C1\toolbox\undo.png" />
     <None Include="Resources\C1\leftpanelmenu\LeftpanelOpIcon.png" />
     <Content Include="Resources\C1\opControl\releateOp.png" />
-    <Content Include="Resources\C1\opControl\wordFilterOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\groupOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\differOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\avgOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\unionOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\maxOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\minOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\sortOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\dataStandarOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\filterOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\collideOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\randomOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\opControl\freqOp.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\C1\opControl\wordFilterOp.png" />
+    <Content Include="Resources\C1\opControl\groupOp.png" />
+    <Content Include="Resources\C1\opControl\differOp.png" />
+    <Content Include="Resources\C1\opControl\avgOp.png" />
+    <Content Include="Resources\C1\opControl\unionOp.png" />
+    <Content Include="Resources\C1\opControl\maxOp.png" />
+    <Content Include="Resources\C1\opControl\minOp.png" />
+    <Content Include="Resources\C1\opControl\sortOp.png" />
+    <Content Include="Resources\C1\opControl\dataStandarOp.png" />
+    <Content Include="Resources\C1\opControl\filterOp.png" />
+    <Content Include="Resources\C1\opControl\collideOp.png" />
+    <Content Include="Resources\C1\opControl\randomOp.png" />
+    <Content Include="Resources\C1\opControl\freqOp.png" />
     <Content Include="sbin\cat_xls.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2428,12 +2402,8 @@
     </Content>
     <Content Include="Resources\C1\displaypanel\blueshadow.png" />
     <Content Include="Resources\C1\displaypanel\close.png" />
-    <Content Include="Resources\C1\displaypanel\maxunfold.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\C1\displaypanel\minfold.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\C1\displaypanel\maxunfold.png" />
+    <Content Include="Resources\C1\displaypanel\minfold.png" />
     <Content Include="Resources\C1\displaypanel\remark.png" />
     <Content Include="Resources\C1\displaypanel\shadow.png" />
     <Content Include="Resources\C1\element\done.png" />
@@ -2450,7 +2420,6 @@
     <Content Include="Resources\C1\flow\selectZoomDown.png" />
     <Content Include="Resources\C1\menu\controlhelp.png" />
     <Content Include="Resources\C1\menu\head.png" />
-    <Content Include="Resources\C1\menu\help.png" />
     <None Include="Resources\C1\toolbox\add.png" />
     <None Include="Resources\C1\menu\modelstep.png" />
     <Content Include="Resources\C1\toolbox\background.png" />
