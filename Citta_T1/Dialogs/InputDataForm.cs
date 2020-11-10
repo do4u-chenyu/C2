@@ -1,15 +1,9 @@
 ﻿using C2.Core;
 using C2.Utils;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.Formula.Functions;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -54,14 +48,14 @@ namespace C2.Dialogs
 
             this.extType = OpUtil.ExtType.Text;
 
-            this.Clean();
+            this.Clear();
         }
         private void PreviewButton_Click(object sender, EventArgs e)
         {
             /*
              * 数据预览
              */
-            string fileName = "";
+            string fileName = String.Empty;
             string ext;
             OpenFileDialog fd = new OpenFileDialog
             {
@@ -79,7 +73,6 @@ namespace C2.Dialogs
                 if (ext == ".xls" || ext == ".xlsx")
                 {
                     this.extType = OpUtil.ExtType.Excel;
-                    //PreViewExcelFile();
                     PreViewExcelFileNew();
                 }
                 else
@@ -88,7 +81,6 @@ namespace C2.Dialogs
                     PreViewBcpFile();
                 }
             }
-            //if (this.textBox1.Text == "请输入数据名称" || this.textBox1.Text == "")
             this.textBox1.Text = fileName;
             ControlUtil.DisableOrder(this.dataGridView1);
         }
@@ -137,7 +129,7 @@ namespace C2.Dialogs
                     return;
                 }
                 InputDataEvent(name, this.fullFilePath, this.separator, this.extType, this.encoding);
-                DvgClean();
+                DvgClear();
                 Close();
             }
             this.extType = OpUtil.ExtType.Unknow;
@@ -160,7 +152,7 @@ namespace C2.Dialogs
         private void CancelButton_Click(object sender, EventArgs e)
         {
             // 关闭按钮
-            DvgClean();
+            DvgClear();
             this.ReSetParams();
             Close();
         }
@@ -175,12 +167,12 @@ namespace C2.Dialogs
                 PreViewBcpFile();
             }
         }
-        private void Clean()
+        private void Clear()
         {
             this.fullFilePath = null;
             this.textBox1.Text = null;
             this.textBoxEx1.Text = null;
-            this.DvgClean();
+            this.DvgClear();
         }
 
         
@@ -190,7 +182,7 @@ namespace C2.Dialogs
             if (headersAndRows.Item1.Count == 0 && headersAndRows.Item2.Count == 0)
             {
                 MessageBox.Show("导入文件错误，文件\"" + this.fullFilePath + "\" 为空");
-                this.Clean();
+                this.Clear();
                 return;
             }
             // 特殊情况，表头有一行数据
@@ -204,17 +196,16 @@ namespace C2.Dialogs
 
         private void PreViewExcelFileNew(string sheetName = null, bool isFirstRowColumn = true)
         {
-            List<List<String>> rowContentList = new List<List<String>>();
-            rowContentList = FileUtil.ReadExcel(this.fullFilePath, maxNumOfRow);
+            List<List<String>> rowContentList = FileUtil.ReadExcel(this.fullFilePath, maxNumOfRow);
             if (rowContentList.Count == 0)
             {
-                this.Clean();
+                this.Clear();
                 return;
             }
 
             int cellCount = rowContentList[0].Count;
             DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[cellCount];
-            DvgClean(false);
+            DvgClear(false);
             for (int i = 0; i < cellCount; i++)
             {
                 ColumnList[i] = new DataGridViewTextBoxColumn
@@ -233,7 +224,7 @@ namespace C2.Dialogs
             }
         }
 
-        public void DvgClean(bool isCleanDataName = true)
+        public void DvgClear(bool isCleanDataName = true)
         {
             if (isCleanDataName) { this.textBox1.Text = null; }
             this.dataGridView1.DataSource = null; // System.InvalidOperationException:“操作无效，原因是它导致对 SetCurrentCellAddressCore 函数的可重入调用。”
@@ -357,7 +348,7 @@ namespace C2.Dialogs
         }
 
 
-        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
                 this.dataGridView1.RowHeadersWidth - 4, e.RowBounds.Height);
