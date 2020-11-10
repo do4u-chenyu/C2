@@ -78,7 +78,19 @@ namespace C2.Model.Documents
                 return doc;
             }
         }
-
+        public static Document LoadXml(string fileName, string xmlString)
+        {
+            if (string.IsNullOrEmpty(xmlString))
+                throw new ArgumentNullException();
+            XmlDocument dom = new XmlDocument();
+            dom.LoadXml(xmlString);
+            Document doc = Load(dom);
+            if (doc != null)
+            {
+                doc.FileName = fileName;
+            }
+            return doc;
+        }
         public static Document Load(FileStream stream)
         {
             XmlDocument dom = new XmlDocument();

@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopToolBarControl));
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolStrip1 = new C2.Controls.ToolStripPro();
             this.saveAllButton = new System.Windows.Forms.ToolStripButton();
             this.saveModelButton = new System.Windows.Forms.ToolStripButton();
@@ -48,12 +46,13 @@
             this.movePictureBox = new System.Windows.Forms.ToolStripButton();
             this.framePictureBox = new System.Windows.Forms.ToolStripButton();
             this.moreButton = new System.Windows.Forms.ToolStripButton();
+            this.LinePanel = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(10, 0, 2, 0);
@@ -93,7 +92,7 @@
             this.saveAllButton.Margin = new System.Windows.Forms.Padding(0);
             this.saveAllButton.Name = "saveAllButton";
             this.saveAllButton.Size = new System.Drawing.Size(24, 25);
-            this.saveAllButton.Click += new System.EventHandler(this.formatButton_Click);
+            this.saveAllButton.Click += new System.EventHandler(this.FormatButton_Click);
             // 
             // saveModelButton
             // 
@@ -164,7 +163,7 @@
             this.formatButton.Margin = new System.Windows.Forms.Padding(0);
             this.formatButton.Name = "formatButton";
             this.formatButton.Size = new System.Drawing.Size(24, 25);
-            this.formatButton.Click += new System.EventHandler(this.formatButton_Click);
+            this.formatButton.Click += new System.EventHandler(this.FormatButton_Click);
             // 
             // remarkPictureBox
             // 
@@ -193,6 +192,7 @@
             this.zoomUpPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.zoomUpPictureBox.Name = "zoomUpPictureBox";
             this.zoomUpPictureBox.Size = new System.Drawing.Size(24, 25);
+            this.zoomUpPictureBox.ToolTipText = "1";
             this.zoomUpPictureBox.Click += new System.EventHandler(this.ZoomUpPictureBox_Click);
             // 
             // zoomDownPictureBox
@@ -246,18 +246,29 @@
             this.moreButton.Margin = new System.Windows.Forms.Padding(0);
             this.moreButton.Name = "moreButton";
             this.moreButton.Size = new System.Drawing.Size(24, 25);
-            this.moreButton.Click += new System.EventHandler(this.moreButton_Click);
+            this.moreButton.Click += new System.EventHandler(this.MoreButton_Click);
+            // 
+            // LinePanel
+            // 
+            this.LinePanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.LinePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.LinePanel.ForeColor = System.Drawing.Color.Black;
+            this.LinePanel.Location = new System.Drawing.Point(0, 27);
+            this.LinePanel.Name = "LinePanel";
+            this.LinePanel.Size = new System.Drawing.Size(990, 1);
+            this.LinePanel.TabIndex = 3;
             // 
             // TopToolBarControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.LinePanel);
             this.Controls.Add(this.toolStrip1);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "TopToolBarControl";
             this.Size = new System.Drawing.Size(990, 28);
-            this.Load += new System.EventHandler(this.TopToolBarControl_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -284,6 +295,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private Controls.ToolStripPro toolStrip1;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel LinePanel;
     }
 }

@@ -1706,6 +1706,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Templates\组织架构图.bmd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -1713,6 +1714,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\组织架构图.xml" />
     <None Include="Demo\demo_txt.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -2245,6 +2247,7 @@
     <Content Include="Resources\StartPage\startPageTitle.png" />
     <Content Include="Resources\StartPage\tree.png" />
     <Content Include="Resources\StartPage\yellowGroup.png" />
+    <Content Include="Resources\Templates\组织架构图.xml" />
     <Content Include="Resources\thanks.xml">
       <SubType>Designer</SubType>
     </Content>
