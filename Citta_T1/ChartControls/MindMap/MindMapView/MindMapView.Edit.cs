@@ -127,6 +127,16 @@ namespace C2.Controls.MapViews
             ExecuteCommand(command);
         }
 
+        public void AddAttachment()
+        {          
+            if (SelectedTopics != null && SelectedTopics.Length > 0)
+            {
+                var template = new AttachmentWidget();
+                AddWidget(AttachmentWidget.TypeID, template, false);
+                //ShowDesigner(SelectedTopics[0],false);
+            }
+        }
+
         public void AddDataSource(Topic[] hitTopic,DataItem dataItem)
         { 
             var template = new DataSourceWidget();
