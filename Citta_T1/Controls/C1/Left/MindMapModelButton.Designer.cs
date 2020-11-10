@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MindMapModelButton));
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.lelfPictureBox = new System.Windows.Forms.PictureBox();
             this.textButton = new C2.Controls.Common.NoFocusButton();
@@ -50,13 +49,13 @@
             // 
             // rightPictureBox
             // 
+            this.rightPictureBox.Image = global::C2.Properties.Resources.leftcontrolhelp;
             this.rightPictureBox.Location = new System.Drawing.Point(123, 3);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(23, 23);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.rightPictureBox.TabIndex = 0;
             this.rightPictureBox.TabStop = false;
-            this.rightPictureBox.Image= global::C2.Properties.Resources.leftcontrolhelp;
             // 
             // lelfPictureBox
             // 
@@ -68,6 +67,7 @@
             this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.lelfPictureBox.TabIndex = 1;
             this.lelfPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.lelfPictureBox, "业务视角的思维模型");
             // 
             // textButton
             // 
