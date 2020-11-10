@@ -158,6 +158,7 @@ namespace C2.Controls.MapViews
             if (dsw.DataItems.Find((DataItem x) => x.FilePath.Equals(dataItem.FilePath)) == null)
             {
                 dsw.DataItems.Add(dataItem);
+                TopicUpdate(dsw.Container);
                 ShowDesigner(dsw.Container,false);
             }
             else
