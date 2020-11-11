@@ -74,12 +74,6 @@ namespace C2.Core
             }
             return ret;
         }
-        public static ModelDocumentDao GetModelDocumentDao() {
-            ModelDocumentDao ret = null;
-            if (Global.GetCanvasForm() != null)
-                ret = Global.GetCanvasForm().ModelDocumentDao;
-            return ret;
-        }
 
         public static ModelDocument GetCurrentModelDocument()
         {
