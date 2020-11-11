@@ -1,6 +1,6 @@
 ﻿namespace C2.Core.UndoRedo
 {
-    class UndoRedoEvent
+    public class UndoRedoEvent
     {
         // Undo堆栈不空=>为空时发生,用来通知界面更新UI状态
         public delegate void UndoStackEmptyEventHandler();

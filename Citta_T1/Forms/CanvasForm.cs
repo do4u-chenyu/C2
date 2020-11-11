@@ -23,6 +23,7 @@ namespace C2.Forms
     {
         bool HardClose;
         private OptionDao optionDao;
+        private UndoRedoManager undoRedoManager;
         private ModelDocument document;
         private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         private string userName;
@@ -30,6 +31,7 @@ namespace C2.Forms
         public RemarkControl RemarkControl { get { return this.remarkControl; } }
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
         public OptionDao OptionDao { get { return this.optionDao; } }
+        public UndoRedoManager UndoRedoManager { get { return this.undoRedoManager; } }
         public NaviViewControl NaviViewControl { get { return this.naviViewControl; } }
         #region 运行委托
         delegate void AsynUpdateLog(string logContent);
@@ -46,12 +48,24 @@ namespace C2.Forms
             InitializeDao();
             InitializeMainFormEventHandler();
             InitializeControlsLocation();
+            InitializeUndoRedoManager();
         }
 
         private void InitializeDao()
         {
             this.optionDao = new OptionDao();
             this.userName = Global.GetMainForm().UserName;
+        }
+        
+        private void InitializeUndoRedoManager()
+        {
+            this.topToolBarControl.Disable_UndoButton();
+            this.topToolBarControl.Disable_RedoButton();
+            this.undoRedoManager = new UndoRedoManager();
+            this.undoRedoManager.RedoStackEmpty += TopToolBarControl_RedoStackEmpty;
+            this.undoRedoManager.RedoStackNotEmpty += TopToolBarControl_RedoStackNotEmpty;
+            this.undoRedoManager.UndoStackEmpty += TopToolBarControl_UndoStackEmpty;
+            this.undoRedoManager.UndoStackNotEmpty += TopToolBarControl_UndoStackNotEmpty;
         }
 
         public CanvasForm(ModelDocument document)
@@ -504,10 +518,24 @@ namespace C2.Forms
 
 
         #region UndoRedo
-        private void UpdateUndoRedoButton()
+        private void TopToolBarControl_UndoStackNotEmpty()
         {
-            //topToolBarControl.SetUndoButtonEnable(!UndoRedoManager.GetInstance().IsUndoStackEmpty(modelDocumentDao.CurrentDocument));
-            //topToolBarControl.SetRedoButtonEnable(!UndoRedoManager.GetInstance().IsRedoStackEmpty(modelDocumentDao.CurrentDocument));
+            this.topToolBarControl.Enable_UndoButton();
+        }
+
+        private void TopToolBarControl_UndoStackEmpty()
+        {
+            this.topToolBarControl.Disable_UndoButton();
+        }
+
+        private void TopToolBarControl_RedoStackNotEmpty()
+        {
+            this.topToolBarControl.Enable_RedoButton();
+        }
+
+        private void TopToolBarControl_RedoStackEmpty()
+        {
+            this.topToolBarControl.Disable_RedoButton();
         }
         #endregion
 
