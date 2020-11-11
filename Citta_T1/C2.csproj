@@ -2083,10 +2083,10 @@
     <Content Include="Resources\PictureIconLib\IP.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\Python.png">
+    <Content Include="Resources\PictureIconLib\PY.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\qq号.png">
+    <Content Include="Resources\PictureIconLib\QQ.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\Spark.png">
