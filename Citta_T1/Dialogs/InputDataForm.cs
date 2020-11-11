@@ -67,8 +67,6 @@ namespace C2.Dialogs
                 this.encoding = OpUtil.Encoding.UTF8;
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                
-                this.Cursor = Cursors.WaitCursor;
                 fullFilePath = fd.FileName;
                 fileName = Path.GetFileNameWithoutExtension(fullFilePath);
                 ext = Path.GetExtension(fullFilePath);
@@ -82,7 +80,6 @@ namespace C2.Dialogs
                     this.extType = OpUtil.ExtType.Text;
                     PreViewBcpFile();
                 }
-                this.Cursor = Cursors.Default;
             }
             this.textBox1.Text = fileName;
             ControlUtil.DisableOrder(this.dataGridView1);
@@ -197,9 +194,11 @@ namespace C2.Dialogs
             FileUtil.FillTable(this.dataGridView1, headersAndRows.Item1, rows, this.maxNumOfRow - 1);
         }
 
-        private void PreViewExcelFileNew(string sheetName = null, bool isFirstRowColumn = true)
+        private void PreViewExcelFileNew()
         {
+            this.Cursor = Cursors.WaitCursor;
             List<List<String>> rowContentList = FileUtil.ReadExcel(this.fullFilePath, maxNumOfRow);
+            this.Cursor = Cursors.Default;
             if (rowContentList.Count == 0)
             {
                 this.Clear();

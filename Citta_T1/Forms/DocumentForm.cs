@@ -6,6 +6,7 @@ using C2.Core;
 using C2.Design;
 using C2.Dialogs;
 using C2.Globalization;
+using C2.Model;
 using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
@@ -260,8 +261,14 @@ namespace C2.Forms
         }
         void OnTopicDataChanged(object obj)
         {
-            if (obj != null)
-                AddSubWidget(obj);
+            if (obj == null)
+                return;
+            if (ActivedChartPage.DataChangeItem != null)
+            {
+                DelSubWidget(obj, ActivedChartPage.DataChangeItem);
+                return;
+            }
+            AddSubWidget(obj);
         }
         void OnSelectedObjectsChanged(object[] old)
         {
@@ -933,13 +940,19 @@ namespace C2.Forms
         }
         void AddSubWidget(object sob)
         {
-            Topic st = null;
             var objectType = sob.GetType();
             if (objectType.Name == "Topic")
             {
-                st = sob as Topic;
-                objectTree2.AddWidgetData(st);
+                objectTree2.AddTopicData(sob as Topic);
             } 
+        }
+        void DelSubWidget(object sob,DataItem dataItem)
+        {
+            var objectType = sob.GetType();
+            if (objectType.Name == "Topic")
+            {
+                objectTree2.DelTopicData(sob as Topic, dataItem);
+            }
         }
         void ShowProperty(object[] objects)
         {

@@ -15,8 +15,6 @@ namespace C2.Controls.Top
 {
     public partial class TopToolBarControl : UserControl
     {
-        private static readonly Color ReleaseColor = Color.FromArgb(230, 237, 246);
-        private static readonly Color ChoosenColor = Color.FromArgb(200, 200, 200);
         [Browsable(false)]
         public bool SelectRemark { get; set; } = false;
         [Browsable(false)]
@@ -28,7 +26,6 @@ namespace C2.Controls.Top
         {
             InitializeComponent();
             InitializeToolTip();
-            InitializeUndoRedoManger();
             InitializeOther();
         } // 恢复到编辑模式
 
@@ -74,8 +71,6 @@ namespace C2.Controls.Top
             SelectFrame = false;
             ChangeCursor();
             FrameChange();
-            this.MoveButton.BackColor = ChoosenColor;
-            this.FrameButton.BackColor = ReleaseColor;
         }
 
         #endregion
@@ -89,7 +84,6 @@ namespace C2.Controls.Top
             FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(true);
-            this.FrameButton.BackColor = ReleaseColor;
         }
 
         private void ZoomDownButton_Click(object sender, EventArgs e)
@@ -99,7 +93,6 @@ namespace C2.Controls.Top
             FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(false);
-            this.FrameButton.BackColor = ReleaseColor;
         }
         #endregion
 
@@ -113,16 +106,13 @@ namespace C2.Controls.Top
         #endregion
 
         #region 框选
-
         private void FrameButton_Click(object sender, EventArgs e)
         {
             Global.GetCanvasPanel().ClearAllLineStatus();
             SelectFrame = !SelectFrame;
             SelectDrag = false;
             ChangeCursor();
-
-            this.MoveButton.BackColor = ReleaseColor;
-            this.FrameButton.BackColor = ChoosenColor;
+            FrameChange();
         }
         #endregion
 
@@ -139,33 +129,6 @@ namespace C2.Controls.Top
             Global.GetCanvasPanel().Invalidate();
         }
 
-        private void InitializeUndoRedoManger()
-        {
-            UndoRedoManager.GetInstance().RedoStackEmpty += TopToolBarControl_RedoStackEmpty;
-            UndoRedoManager.GetInstance().RedoStackNotEmpty += TopToolBarControl_RedoStackNotEmpty;
-            UndoRedoManager.GetInstance().UndoStackEmpty += TopToolBarControl_UndoStackEmpty;
-            UndoRedoManager.GetInstance().UndoStackNotEmpty += TopToolBarControl_UndoStackNotEmpty;
-        }
-
-        private void TopToolBarControl_UndoStackNotEmpty()
-        {
-            this.UndoButton.Enabled = true;
-        }
-
-        private void TopToolBarControl_UndoStackEmpty()
-        {
-            this.UndoButton.Enabled = false;
-        }
-
-        private void TopToolBarControl_RedoStackNotEmpty()
-        {
-            this.RedoButton.Enabled = true;
-        }
-
-        private void TopToolBarControl_RedoStackEmpty()
-        {
-            this.RedoButton.Enabled = false;
-        }
 
         private void InitializeToolTip()
         {
@@ -186,16 +149,12 @@ namespace C2.Controls.Top
         {
             UndoRedoManager.GetInstance().Undo(Global.GetCurrentModelDocument());
             Global.GetMainForm().SetDocumentDirty();
-            this.FrameButton.BackColor = ReleaseColor;
-            this.MoveButton.BackColor = ReleaseColor;
         }
 
         public void RedoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Redo(Global.GetCurrentModelDocument());
             Global.GetMainForm().SetDocumentDirty();
-            this.FrameButton.BackColor = ReleaseColor;
-            this.MoveButton.BackColor = ReleaseColor;
         }
 
         private void ImportModel_Click(object sender, EventArgs e)
@@ -223,13 +182,27 @@ namespace C2.Controls.Top
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();
             Global.GetMainForm().SetDocumentDirty();
-            this.MoveButton.BackColor = ReleaseColor;
-            this.FrameButton.BackColor = ReleaseColor;
         }
 
         private void MoreButton_Click(object sender, EventArgs e)
         {
             new ConfigForm().ShowDialog();
+        }
+        public void Enable_UndoButton()
+        {
+            this.UndoButton.Enabled = true;
+        }
+        public void Disable_UndoButton()
+        {
+            this.UndoButton.Enabled = false;
+        }
+        public void Enable_RedoButton()
+        {
+            this.RedoButton.Enabled = true;
+        }
+        public void Disable_RedoButton()
+        {
+            this.RedoButton.Enabled = false;
         }
     }
 }

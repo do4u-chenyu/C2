@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Xml;
 using C2.Canvas;
 using C2.Controls;
 using C2.Controls.MapViews;
 using C2.Core;
+using C2.Design;
 using C2.Globalization;
 using C2.Model.MindMaps;
 
@@ -101,6 +103,8 @@ namespace C2.Model.Widgets
 
         [DefaultValue(PictureSizeType.Thumb)]
         [LocalDisplayName("Size Type"), LocalCategory("Layout")]
+        [Editor(typeof(SizeTypeEditor), typeof(UITypeEditor))]
+        [TypeConverter(typeof(SizeTypeConvert))]
         public PictureSizeType SizeType
         {
             get { return _SizeType; }

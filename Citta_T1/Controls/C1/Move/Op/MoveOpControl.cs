@@ -295,15 +295,9 @@ namespace C2.Controls.Move.Op
         private void StatusBox_MouseDown(object sender, MouseEventArgs e)
         {   // 只处理左键点击
             //log.Info(Global.GetCurrentDocument().Dirty.ToString());
-            if (e.Button != MouseButtons.Left)
-                return;
-            // 单击视为移动,按父控件鼠标点击处理
-            if (e.Clicks == 1)
+            if (e.Button == MouseButtons.Left && e.Clicks == 2)
             {
-                base.OnMouseDown(e);
-            }// 双击,弹出配置窗口
-            else if (e.Clicks == 2)
-            {
+                // 双击,弹出配置窗口
                 // 清空焦点
                 Global.GetCanvasForm()?.BlankButtonFocus();
                 // 显示配置
@@ -314,8 +308,9 @@ namespace C2.Controls.Move.Op
                         "没有对应的数据源",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-
             }
+            else
+                base.OnMouseDown(e);
         }
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)

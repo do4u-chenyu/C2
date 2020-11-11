@@ -368,6 +368,9 @@
     <item name="Widget Margin">边距</item>
     <item name="Display Index">序号</item>
     <item name="Original Size">原始尺寸</item>
+	<item name="Original">原始</item>
+	<item name="Thumb">缩略</item>
+	<item name="Customize">标准</item>
     <item name="Embed In">嵌入</item>
     <item name="Size Type">尺寸类型</item>
     <item name="Auto Calculate">自动计算</item>

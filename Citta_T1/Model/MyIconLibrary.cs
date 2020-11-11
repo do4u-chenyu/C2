@@ -31,13 +31,26 @@ namespace C2.Model
             Refresh(BaseDirectory2);
         }
 
+
         private void Refresh(string dir)
         {
             if (Directory.Exists(dir))
             {
                 string[] files = Directory.GetFiles(dir);
+
+                //string[] topfiles = ["hongqi1", "2",""];
+                 
+               // Add(name, new Picture(name, image));
+
+
+
+
+
+
+
                 foreach (string file in files)
                 {
+                    //if (file not in topfils))
                     string ext = Path.GetExtension(file).ToLower();
                     if (ext == ".png" || ext == ".jpg" || ext == ".jpeg" || ext == ".gif" || ext == ".bmp")
                     {

@@ -8,30 +8,18 @@ namespace C2.Controls.DataCharts
 {
     public partial class BarChart : UserControl
     {
-        private List<string> x;
-        private double[] y;
-        private string title;
-        private List<List<string>> dataList;
+
         public System.Windows.Forms.DataVisualization.Charting.Chart GetChart { get => this.chart1; }
-        public BarChart(List<string> x, double[] y, string title = "柱状图")
-        {
-            InitializeComponent();
-            this.x = x;
-            this.y = y;
-            this.title = title;
-            InitChart();
-            
-        }
+
 
         public BarChart(List<List<string>> dataList, List<string> title)
         {
             InitializeComponent();
-            this.title = title[0];
-            InitChart();
+            InitChart(title[0], title[1], title[2]);
             DataBind(dataList[0], dataList[1]);
         }
         
-        public void InitChart()
+        public void InitChart(string title,string xTitle,string yTitle)
         {
             chart1.Titles.Add(title);
             chart1.Titles[0].ForeColor = Color.White;
@@ -59,11 +47,11 @@ namespace C2.Controls.DataCharts
             chart1.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
             chart1.ChartAreas[0].AxisX.LabelStyle.Font = new Font("微软雅黑", 10f, FontStyle.Regular);
             //X坐标轴标题
-            //chart1.ChartAreas[0].AxisX.Title = "数量(宗)";
-            //chart1.ChartAreas[0].AxisX.TitleFont = new Font("微软雅黑", 10f, FontStyle.Regular);
-            //chart1.ChartAreas[0].AxisX.TitleForeColor = Color.White;
-            //chart1.ChartAreas[0].AxisX.TextOrientation = TextOrientation.Horizontal;
-            //chart1.ChartAreas[0].AxisX.ToolTip = "数量(宗)";
+            chart1.ChartAreas[0].AxisX.Title = xTitle;
+            chart1.ChartAreas[0].AxisX.TitleFont = new Font("微软雅黑", 10f, FontStyle.Regular);
+            chart1.ChartAreas[0].AxisX.TitleForeColor = Color.White;
+            chart1.ChartAreas[0].AxisX.TextOrientation = TextOrientation.Horizontal;
+            chart1.ChartAreas[0].AxisX.ToolTip = xTitle;
             //X轴网络线条
             chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
             chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = ColorTranslator.FromHtml("#2c4c6d");
@@ -73,11 +61,11 @@ namespace C2.Controls.DataCharts
             chart1.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.White;
             chart1.ChartAreas[0].AxisY.LabelStyle.Font = new Font("微软雅黑", 10f, FontStyle.Regular);
             //Y坐标轴标题
-            chart1.ChartAreas[0].AxisY.Title = "数量(宗)";
+            chart1.ChartAreas[0].AxisY.Title = yTitle;
             chart1.ChartAreas[0].AxisY.TitleFont = new Font("微软雅黑", 10f, FontStyle.Regular);
             chart1.ChartAreas[0].AxisY.TitleForeColor = Color.White;
             chart1.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
-            chart1.ChartAreas[0].AxisY.ToolTip = "数量(宗)";
+            chart1.ChartAreas[0].AxisY.ToolTip = yTitle;
             //Y轴网格线条
             chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
             chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = ColorTranslator.FromHtml("#2c4c6d");

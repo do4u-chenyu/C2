@@ -55,6 +55,7 @@ namespace C2.Controls
             LnkManageLib.AutoSize = true;
             LnkManageLib.Text = Lang.GetTextWithEllipsis("Manage My Icon Library");
             LnkManageLib.LinkClicked += new LinkLabelLinkClickedEventHandler(BtnManageLib_LinkClicked);
+            LnkManageLib.Visible = false;
 
             LnkRefreshLib = new LinkLabel();
             LnkRefreshLib.Anchor = AnchorStyles.Right;
