@@ -1724,7 +1724,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Templates\组织架构图.bmd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -1732,7 +1731,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\组织架构图.xml" />
     <None Include="Demo\demo_txt.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -2065,6 +2063,15 @@
     <Content Include="Resources\Operators\随机.png" />
     <Content Include="Resources\Operators\频率.png" />
     <None Include="Resources\remark.png" />
+    <Content Include="Resources\PictureIconLib\1_涉赌.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\2_涉黄.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\3_涉诈.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PictureIconLib\APK.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2264,15 +2271,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\涉藏.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\PictureIconLib\涉诈.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\PictureIconLib\涉赌.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\PictureIconLib\涉黄.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\漏斗.png">
