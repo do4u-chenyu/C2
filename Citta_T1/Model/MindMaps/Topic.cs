@@ -115,6 +115,33 @@ namespace C2.Model.MindMaps
             }
         }
 
+
+        public List<DataItem> GetParentDatas()
+        {
+            List<DataItem> dataItems = new List<DataItem>();
+            GetParentDatas(this, dataItems);
+            return dataItems;
+        }
+        private void GetParentDatas(Topic topic, List<DataItem> dataItems)
+        {
+            if (!topic.IsRoot)
+            {
+                Topic parentTopic = topic.ParentTopic;
+                GetParentDatas(parentTopic,dataItems);
+            }
+            GetCurrentTopicDatas(topic, dataItems);
+        }
+
+        private void GetCurrentTopicDatas(Topic topic, List<DataItem> dataItems)
+        {
+            DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
+            ResultWidget rsw = topic.FindWidget<ResultWidget>();
+            if (dtw != null)
+                dataItems.AddRange(dtw.DataItems);
+            if (rsw != null)
+                dataItems.AddRange(rsw.DataItems);
+        }
+
         public override ChartObject Parent
         {
             get
