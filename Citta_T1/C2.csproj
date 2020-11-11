@@ -204,6 +204,7 @@
     <Compile Include="Controls\DataCharts\RingChart.Designer.cs">
       <DependentUpon>RingChart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Design\SizeTypeConvert.cs" />
     <Compile Include="Dialogs\Base\BaseOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
