@@ -26,7 +26,6 @@ namespace C2.Controls.Top
         {
             InitializeComponent();
             InitializeToolTip();
-            InitializeUndoRedoManger();
             InitializeOther();
         } // 恢复到编辑模式
 
@@ -130,35 +129,6 @@ namespace C2.Controls.Top
             Global.GetCanvasPanel().Invalidate();
         }
 
-        private void InitializeUndoRedoManger()
-        {
-            this.UndoButton.Enabled = false;
-            this.RedoButton.Enabled = false;
-            UndoRedoManager.GetInstance().RedoStackEmpty += TopToolBarControl_RedoStackEmpty;
-            UndoRedoManager.GetInstance().RedoStackNotEmpty += TopToolBarControl_RedoStackNotEmpty;
-            UndoRedoManager.GetInstance().UndoStackEmpty += TopToolBarControl_UndoStackEmpty;
-            UndoRedoManager.GetInstance().UndoStackNotEmpty += TopToolBarControl_UndoStackNotEmpty;
-        }
-
-        private void TopToolBarControl_UndoStackNotEmpty()
-        {
-            this.UndoButton.Enabled = true;
-        }
-
-        private void TopToolBarControl_UndoStackEmpty()
-        {
-            this.UndoButton.Enabled = false;
-        }
-
-        private void TopToolBarControl_RedoStackNotEmpty()
-        {
-            this.RedoButton.Enabled = true;
-        }
-
-        private void TopToolBarControl_RedoStackEmpty()
-        {
-            this.RedoButton.Enabled = false;
-        }
 
         private void InitializeToolTip()
         {
@@ -217,6 +187,22 @@ namespace C2.Controls.Top
         private void MoreButton_Click(object sender, EventArgs e)
         {
             new ConfigForm().ShowDialog();
+        }
+        public void Enable_UndoButton()
+        {
+            this.UndoButton.Enabled = true;
+        }
+        public void Disable_UndoButton()
+        {
+            this.UndoButton.Enabled = false;
+        }
+        public void Enable_RedoButton()
+        {
+            this.RedoButton.Enabled = true;
+        }
+        public void Disable_RedoButton()
+        {
+            this.RedoButton.Enabled = false;
         }
     }
 }

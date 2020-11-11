@@ -144,7 +144,6 @@
     <Compile Include="Business\Option\BcpInfo.cs" />
     <Compile Include="Business\Option\ColumnInfo.cs" />
     <Compile Include="Business\Model\DocumentSaveLoad.cs" />
-    <Compile Include="Business\Model\ModelDocumentDao.cs" />
     <Compile Include="Business\Model\ModelDocument.cs" />
     <Compile Include="Business\Model\ModelElement.cs" />
     <Compile Include="Business\Model\ModelRelation.cs" />

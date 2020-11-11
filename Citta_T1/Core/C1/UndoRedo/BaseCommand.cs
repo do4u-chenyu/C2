@@ -1,7 +1,7 @@
 ﻿namespace C2.Core.UndoRedo
 {
 
-    class BaseCommand
+    public class BaseCommand
     {
         // 对应redo操作
         public bool Redo()
