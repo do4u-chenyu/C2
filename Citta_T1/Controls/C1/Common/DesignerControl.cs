@@ -116,18 +116,34 @@ namespace C2.Controls.Common
 
             //TODO
             //数据大纲，父类所有数据源,暂用固定列表模拟
-            DataSourceWidget dtw = SelectedTopic.FindWidget<DataSourceWidget>();
-            if (dtw != null)
+            ComboDataSource = new List<DataItem>();
+            GetParentDatas(SelectedTopic);
+            foreach (DataItem dataItem in ComboDataSource)
             {
-                List<DataItem> di = dtw.DataItems;
-                foreach (DataItem dataItem in di)
-                {
-                    this.dataSourceCombo.Items.Add(dataItem.FileName);
-                }
-                ComboDataSource = di;
+                this.dataSourceCombo.Items.Add(dataItem.FileName);
             }
-
         }
+
+        void GetParentDatas(Topic topic)
+        {
+            if (!topic.IsRoot)
+            {
+                Topic parentTopic = topic.ParentTopic;
+                GetParentDatas(parentTopic);
+            }
+            GetCurrentTopicDatas(topic);
+        }
+
+        void GetCurrentTopicDatas(Topic topic)
+        {
+            DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
+            ResultWidget rsw = topic.FindWidget<ResultWidget>();
+            if (dtw != null)
+                dtw.DataItems.ForEach(c => ComboDataSource.Add(c));
+            if (rsw != null)
+                rsw.DataItems.ForEach(c => ComboDataSource.Add(c));
+        }
+
 
         private void SetSelectedOperator()
         {
@@ -170,14 +186,24 @@ namespace C2.Controls.Common
                 OpWidget = SelectedTopic.FindWidget<OperatorWidget>();
             }
 
+            OpType tmpOpType = OpWidget.OpType;
+            DataItem tmpDataItem = OpWidget.DataSourceItem;
+
             OpWidget.OpType =ComboOperator[this.operatorCombo.SelectedIndex];
             OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
 
             C2BaseOperatorView dialog = GenerateOperatorView();
-            if (dialog != null && dialog.ShowDialog(this) == DialogResult.OK)
+            if (dialog == null)
+                return;
+            DialogResult dr = dialog.ShowDialog(this);
+            if (dr == DialogResult.OK)
                 OpWidget.Status = OpStatus.Ready;
-
-
+            else if(dr == DialogResult.Cancel)
+            {
+                OpWidget.OpType = tmpOpType;
+                OpWidget.DataSourceItem = tmpDataItem;
+                SetSelectedTopicDesign(SelectedTopic, MindmapView);
+            }
         }
 
         private C2BaseOperatorView GenerateOperatorView()

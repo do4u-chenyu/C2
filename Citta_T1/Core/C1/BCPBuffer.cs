@@ -47,6 +47,7 @@ namespace C2.Core
         private static readonly LogUtil log = LogUtil.GetInstance("BCPBuffer");
         private static readonly Regex regexXls = new Regex(@"\.xl(s?[xmb]?|t[xm]|am)$");
         private static readonly int maxRow = 100;
+
         public string GetCachePreViewBcpContent(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Text, encoding, isForceRead);
@@ -101,6 +102,7 @@ namespace C2.Core
 
         public void TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding, char separator)
         {
+           
             // 命中缓存,直接返回,不再加载文件
             if (HitCache(fullFilePath))
                 return;

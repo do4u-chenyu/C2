@@ -27,11 +27,11 @@ namespace C2.Utils
         public static string SaveAllButtonHelpInfo = "保存所有模型";
         public static string ImportModelHelpInfo = "导入模型";
         public static string RemarkPictureBoxHelpInfo = "编写备注信息";
-        public static string ZoomUpPictureBoxHelpInfo = "发大屏幕中算子并支持三级放大";
-        public static string zoomDownPictureBoxHelpInfo = "缩小当前屏幕中算子";
-        public static string MovePictureBoxHelpInfo = "拖动当前视野算子";
+        public static string ZoomUpPictureBoxHelpInfo = "放大屏幕,支持三级缩放";
+        public static string zoomDownPictureBoxHelpInfo = "缩小屏幕,支持三级缩放";
+        public static string MovePictureBoxHelpInfo = "拖动当前视野框";
         public static string FramePictureBoxHelpInfo = "框选屏幕中算子进行整体拖动";
-        public static string moreButtonHelpInfo = "首选项配置:配置程序的各项参数";
+        public static string moreButtonHelpInfo = "首选项:配置程序的各项参数";
  
           
         /// <summary>

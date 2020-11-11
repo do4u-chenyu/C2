@@ -1380,6 +1380,9 @@
     <EmbeddedResource Include="Controls\C1\Left\LeftFoldButton.resx">
       <DependentUpon>LeftFoldButton.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\MindMapModelButton.resx">
+      <DependentUpon>MindMapModelButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\BarChart.resx">
       <DependentUpon>BarChart.cs</DependentUpon>
     </EmbeddedResource>

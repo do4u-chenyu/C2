@@ -938,7 +938,7 @@ namespace C2.Forms
             if (objectType.Name == "Topic")
             {
                 st = sob as Topic;
-                objectTree2.AddWidgetData(st);
+                objectTree2.AddTopicData(st);
             } 
         }
         void ShowProperty(object[] objects)
