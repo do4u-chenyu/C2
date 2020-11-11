@@ -17,12 +17,10 @@ namespace C2.Core.UndoRedo
             redoStack = new FixedCommandStack(capacity);
         }
     }
-    class UndoRedoManager
+    public class UndoRedoManager
     {
         // 每个文档对应一个撤回/重做栈
         private Dictionary<ModelDocument, UndoRedoStack> undoRedoDict;
-
-        private static UndoRedoManager Manager = null;
 
         public event UndoRedoEvent.UndoStackEmptyEventHandler UndoStackEmpty;
         public event UndoRedoEvent.UndoStackNotEmptyEventHandler UndoStackNotEmpty;
@@ -30,16 +28,14 @@ namespace C2.Core.UndoRedo
         public event UndoRedoEvent.RedoStackEmptyEventHandler RedoStackEmpty;
         public event UndoRedoEvent.RedoStackNotEmptyEventHandler RedoStackNotEmpty;
 
-        private UndoRedoManager()
+        public  UndoRedoManager()
         {
             undoRedoDict = new Dictionary<ModelDocument, UndoRedoStack>();
         }
 
         public static UndoRedoManager GetInstance()
         {
-            if (Manager == null)
-                Manager = new UndoRedoManager();
-            return Manager;
+            return Global.GetCanvasForm().UndoRedoManager;
         }
 
         // 后面文档切换时,更新 TopToolBarControl用

@@ -1,8 +1,10 @@
 ﻿using C2.Controls.MapViews;
+using C2.Core;
 using C2.Dialogs.Base;
 using C2.Dialogs.C2OperatorViews;
 using C2.Globalization;
 using C2.Model;
+using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
 using C2.Utils;
@@ -50,7 +52,7 @@ namespace C2.Controls.Common
             MindmapView = mindmapview;
             if(SelectedTopic == null)
             {
-                this.topicName.Text = "未选中主题";
+                this.topicName.Text = "未选中节点";
                 this.dataSourceCombo.Text = String.Empty;
                 this.dataSourceCombo.Items.Clear();
                 this.operatorCombo.Text = String.Empty;
@@ -113,37 +115,22 @@ namespace C2.Controls.Common
         private void SetComboDataSource()
         {
             this.dataSourceCombo.Items.Clear();
-
             //TODO
-            //数据大纲，父类所有数据源,暂用固定列表模拟
-            ComboDataSource = new List<DataItem>();
-            GetParentDatas(SelectedTopic);
-            foreach (DataItem dataItem in ComboDataSource)
-            {
-                this.dataSourceCombo.Items.Add(dataItem.FileName);
-            }
-        }
+            //数据大纲，父类所有数据源
+            //ComboDataSource = SelectedTopic.GetParentDatas();
 
-        void GetParentDatas(Topic topic)
-        {
-            if (!topic.IsRoot)
-            {
-                Topic parentTopic = topic.ParentTopic;
-                GetParentDatas(parentTopic);
-            }
-            GetCurrentTopicDatas(topic);
-        }
-
-        void GetCurrentTopicDatas(Topic topic)
-        {
-            DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
-            ResultWidget rsw = topic.FindWidget<ResultWidget>();
+            //暂用当前topic数据列表
+            DataSourceWidget dtw = SelectedTopic.FindWidget<DataSourceWidget>();
             if (dtw != null)
-                dtw.DataItems.ForEach(c => ComboDataSource.Add(c));
-            if (rsw != null)
-                rsw.DataItems.ForEach(c => ComboDataSource.Add(c));
+            {
+                List<DataItem> di = dtw.DataItems;
+                foreach (DataItem dataItem in di)
+                {
+                    this.dataSourceCombo.Items.Add(dataItem.FileName);
+                }
+                ComboDataSource = di;
+            }
         }
-
 
         private void SetSelectedOperator()
         {
@@ -162,21 +149,21 @@ namespace C2.Controls.Common
 
         private void Button1_Click(object sender, System.EventArgs e)
         {
-            if(this.topicName.Text == "未选中主题")
+            if(this.topicName.Text == "未选中节点")
             {
-                MessageBox.Show("未选中主题，请选中主题后再配置");
+                HelpUtil.ShowMessageBox("未选中节点，请选中主题后再配置","未选中节点",MessageBoxIcon.Information);
                 return;
             }
 
             if (SelectedDataSource ==null || SelectedDataSource.IsEmpty())
             {
-                MessageBox.Show("未选中数据源,请添加后再配置");
+                HelpUtil.ShowMessageBox("未选中数据源,请添加后再配置", "未选中数据源", MessageBoxIcon.Information);
                 return;
             }
 
             if (string.IsNullOrEmpty(SelectedOperator))
             {
-                MessageBox.Show("未添加算子,请添加后再配置");
+                HelpUtil.ShowMessageBox("未添加算子,请添加后再配置", "未选择算子", MessageBoxIcon.Information);
                 return;
             }
 

@@ -91,7 +91,7 @@ namespace C2.ChartPageView
                 OnShowDesignerObjectChanged();
             }
         }
-        
+        public DataItem DataChangeItem { get; set; }
         public object DataChangeObject
         {
             get { return _DataChangeObject; }

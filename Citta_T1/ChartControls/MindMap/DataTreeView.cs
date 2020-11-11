@@ -59,16 +59,6 @@ namespace C2.Controls.MapViews
                 node.Expand();
             return node;
         }
-        private bool FindNode(TreeNodeCollection nodes, string text)
-        {
-            int count = 0;
-            foreach (TreeNode node in nodes)
-            {
-                if (node.Text == text && node.ImageIndex != 0)
-                    return true;
-            }
-            return false;
-        }
         public void AddTopicData(Topic topic)
         {
             TreeNodeCollection nodes = FindNode(topic).Nodes;
@@ -109,6 +99,22 @@ namespace C2.Controls.MapViews
                     return;
             }
             nodes.Insert(imageIndex == srcDataImage? 0:count, node);
+        }
+        public void DelTopicData(Topic topic, DataItem dataItem)
+        {
+            TreeNodeCollection nodes = FindNode(topic).Nodes;
+            TreeNode node = new TreeNode();
+            foreach (TreeNode nodeTmp in nodes)
+            {
+                if (nodeTmp.ImageIndex == 0)
+                    return;
+                if (nodeTmp.Text == dataItem.FileName)
+                {
+                    node = nodeTmp;
+                    break;
+                }          
+            }
+            nodes.Remove(node);
         }
     }
 }

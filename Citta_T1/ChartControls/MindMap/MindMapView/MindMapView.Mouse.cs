@@ -151,14 +151,14 @@ namespace C2.Controls.MapViews
             {
                 Topic[] hitTopic = new Topic[] { htr.Topic };
                 AddDataSource(hitTopic, dataItem);
-                TopicUpdate(hitTopic[0]);
+                TopicUpdate(hitTopic[0], null);
                 ShowDesigner(hitTopic[0],false);
                 return;
             }
             if (dsw.DataItems.Find((DataItem x) => x.FilePath.Equals(dataItem.FilePath)) == null)
             {
                 dsw.DataItems.Add(dataItem);
-                TopicUpdate(dsw.Container);
+                TopicUpdate(dsw.Container, null);
                 ShowDesigner(dsw.Container,false);
             }
             else
