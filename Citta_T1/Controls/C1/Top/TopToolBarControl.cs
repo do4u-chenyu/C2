@@ -15,8 +15,6 @@ namespace C2.Controls.Top
 {
     public partial class TopToolBarControl : UserControl
     {
-        private static readonly Color ReleaseColor = Color.FromArgb(230, 237, 246);
-        private static readonly Color ChoosenColor = Color.FromArgb(200, 200, 200);
         [Browsable(false)]
         public bool SelectRemark { get; set; } = false;
         [Browsable(false)]
@@ -74,8 +72,6 @@ namespace C2.Controls.Top
             SelectFrame = false;
             ChangeCursor();
             FrameChange();
-            this.MoveButton.BackColor = ChoosenColor;
-            this.FrameButton.BackColor = ReleaseColor;
         }
 
         #endregion
@@ -89,7 +85,6 @@ namespace C2.Controls.Top
             FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(true);
-            this.FrameButton.BackColor = ReleaseColor;
         }
 
         private void ZoomDownButton_Click(object sender, EventArgs e)
@@ -99,7 +94,6 @@ namespace C2.Controls.Top
             FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(false);
-            this.FrameButton.BackColor = ReleaseColor;
         }
         #endregion
 
@@ -120,9 +114,6 @@ namespace C2.Controls.Top
             SelectDrag = false;
             ChangeCursor();
             FrameChange();
-
-            this.MoveButton.BackColor = ReleaseColor;
-            this.FrameButton.BackColor = ChoosenColor;
         }
         #endregion
 
@@ -141,6 +132,8 @@ namespace C2.Controls.Top
 
         private void InitializeUndoRedoManger()
         {
+            this.UndoButton.Enabled = false;
+            this.RedoButton.Enabled = false;
             UndoRedoManager.GetInstance().RedoStackEmpty += TopToolBarControl_RedoStackEmpty;
             UndoRedoManager.GetInstance().RedoStackNotEmpty += TopToolBarControl_RedoStackNotEmpty;
             UndoRedoManager.GetInstance().UndoStackEmpty += TopToolBarControl_UndoStackEmpty;
@@ -186,16 +179,12 @@ namespace C2.Controls.Top
         {
             UndoRedoManager.GetInstance().Undo(Global.GetCurrentModelDocument());
             Global.GetMainForm().SetDocumentDirty();
-            this.FrameButton.BackColor = ReleaseColor;
-            this.MoveButton.BackColor = ReleaseColor;
         }
 
         public void RedoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Redo(Global.GetCurrentModelDocument());
             Global.GetMainForm().SetDocumentDirty();
-            this.FrameButton.BackColor = ReleaseColor;
-            this.MoveButton.BackColor = ReleaseColor;
         }
 
         private void ImportModel_Click(object sender, EventArgs e)
@@ -223,8 +212,6 @@ namespace C2.Controls.Top
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();
             Global.GetMainForm().SetDocumentDirty();
-            this.MoveButton.BackColor = ReleaseColor;
-            this.FrameButton.BackColor = ReleaseColor;
         }
 
         private void MoreButton_Click(object sender, EventArgs e)
