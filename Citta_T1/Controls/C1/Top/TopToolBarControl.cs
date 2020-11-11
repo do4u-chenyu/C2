@@ -141,6 +141,8 @@ namespace C2.Controls.Top
 
         private void InitializeUndoRedoManger()
         {
+            this.UndoButton.Enabled = false;
+            this.RedoButton.Enabled = false;
             UndoRedoManager.GetInstance().RedoStackEmpty += TopToolBarControl_RedoStackEmpty;
             UndoRedoManager.GetInstance().RedoStackNotEmpty += TopToolBarControl_RedoStackNotEmpty;
             UndoRedoManager.GetInstance().UndoStackEmpty += TopToolBarControl_UndoStackEmpty;
