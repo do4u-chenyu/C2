@@ -212,7 +212,7 @@ namespace C2.Controls.MapViews
                 if (rsw == null)
                 {
                     AddResult(new Topic[] { opw.Container as Topic }, resultItem);
-                    TopicUpdate(opw.Container as Topic); 
+                    TopicUpdate(opw.Container as Topic,null); 
                 }
                    
                 else
@@ -355,6 +355,7 @@ namespace C2.Controls.MapViews
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             // 剩余最后一个菜单项，删除数据源挂件
             dtw.DataItems.Remove(hitItem);
+            TopicUpdate(dtw.Container,hitItem);
             ShowDesigner(dtw.Container,false);
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
