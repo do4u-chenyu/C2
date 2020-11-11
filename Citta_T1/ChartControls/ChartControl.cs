@@ -210,6 +210,7 @@ namespace C2.Controls
         public ChartObject[] SelectedObjects { get; private set; }
         public ChartObject ShowDesignerObject { get; set; }
         public ChartObject DataChangeObject { get; set; }
+        public DataItem DataChangeItem { get; set; }
         [Browsable(false)]
         public ChartObject SelectedObject
         {
@@ -322,9 +323,10 @@ namespace C2.Controls
             ShowDesignerObject = co;
             NeedShowDesigner?.Invoke(needShow);
         }
-        protected virtual void TopicUpdate(ChartObject co)
+        protected virtual void TopicUpdate(ChartObject co, DataItem dataItem)
         {
             DataChangeObject = co;
+            DataChangeItem = dataItem;
             if (TopicDataChanged != null)
             {
                 TopicDataChanged (this, EventArgs.Empty);

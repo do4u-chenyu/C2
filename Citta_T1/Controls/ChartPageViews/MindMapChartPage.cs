@@ -163,8 +163,11 @@ namespace C2.ChartPageView
         void mindMapView1_TopicDataChanged(object sender, EventArgs e)
         {
             var so = mindMapView1.DataChangeObject;
+            var item = mindMapView1.DataChangeItem;
+            DataChangeItem = item;
             if (so != null)
                 DataChangeObject = so;
+            
         }
         protected override void OnLoad(EventArgs e)
         {
