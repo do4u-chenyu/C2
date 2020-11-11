@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using C2.Configuration;
 using C2.Core;
 using C2.Dialogs;
+using C2.Globalization;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
@@ -661,7 +662,7 @@ namespace C2.Controls.MapViews
                 toolTip1.ShowAlways = true;
    
                 Point tipLocation = PointToReal(pointPoint);               
-                toolTip1.Show(chartObject.GetTypeID(), Global.GetDocumentForm(), tipLocation);
+                toolTip1.Show(Lang._(chartObject.GetTypeID()), Global.GetDocumentForm(), tipLocation);
             }
                 
 
