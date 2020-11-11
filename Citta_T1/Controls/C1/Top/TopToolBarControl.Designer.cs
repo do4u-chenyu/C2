@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopToolBarControl));
             this.toolStrip1 = new C2.Controls.ToolStripPro();
+            this.ImportModelButton = new System.Windows.Forms.ToolStripButton();
             this.SaveModelButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.UndoButton = new System.Windows.Forms.ToolStripButton();
             this.RedoButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.ImportModelButton = new System.Windows.Forms.ToolStripButton();
             this.FormatButton = new System.Windows.Forms.ToolStripButton();
             this.RemarkButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -51,7 +51,6 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.toolStrip1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -75,14 +74,25 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip1.Size = new System.Drawing.Size(990, 29);
-            this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 2;
+            // 
+            // ImportModelButton
+            // 
+            this.ImportModelButton.AutoSize = false;
+            this.ImportModelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ImportModelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
+            this.ImportModelButton.Image = global::C2.Properties.Resources.importmodel;
+            this.ImportModelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ImportModelButton.Margin = new System.Windows.Forms.Padding(0);
+            this.ImportModelButton.Name = "ImportModelButton";
+            this.ImportModelButton.Size = new System.Drawing.Size(24, 25);
+            this.ImportModelButton.Click += new System.EventHandler(this.ImportModel_Click);
             // 
             // SaveModelButton
             // 
             this.SaveModelButton.AutoSize = false;
             this.SaveModelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SaveModelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.SaveModelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.SaveModelButton.Image = global::C2.Properties.Resources.save;
             this.SaveModelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SaveModelButton.Margin = new System.Windows.Forms.Padding(0);
@@ -100,7 +110,7 @@
             // 
             this.UndoButton.AutoSize = false;
             this.UndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.UndoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.UndoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.UndoButton.Image = ((System.Drawing.Image)(resources.GetObject("UndoButton.Image")));
             this.UndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.UndoButton.Margin = new System.Windows.Forms.Padding(0);
@@ -112,7 +122,7 @@
             // 
             this.RedoButton.AutoSize = false;
             this.RedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.RedoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.RedoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.RedoButton.Image = ((System.Drawing.Image)(resources.GetObject("RedoButton.Image")));
             this.RedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.RedoButton.Margin = new System.Windows.Forms.Padding(0);
@@ -125,23 +135,11 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 29);
             // 
-            // ImportModelButton
-            // 
-            this.ImportModelButton.AutoSize = false;
-            this.ImportModelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ImportModelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
-            this.ImportModelButton.Image = global::C2.Properties.Resources.importmodel;
-            this.ImportModelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ImportModelButton.Margin = new System.Windows.Forms.Padding(0);
-            this.ImportModelButton.Name = "ImportModelButton";
-            this.ImportModelButton.Size = new System.Drawing.Size(24, 25);
-            this.ImportModelButton.Click += new System.EventHandler(this.ImportModel_Click);
-            // 
             // FormatButton
             // 
             this.FormatButton.AutoSize = false;
             this.FormatButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FormatButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.FormatButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.FormatButton.Image = ((System.Drawing.Image)(resources.GetObject("FormatButton.Image")));
             this.FormatButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.FormatButton.Margin = new System.Windows.Forms.Padding(0);
@@ -153,7 +151,7 @@
             // 
             this.RemarkButton.AutoSize = false;
             this.RemarkButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.RemarkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.RemarkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.RemarkButton.Image = global::C2.Properties.Resources.notes;
             this.RemarkButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.RemarkButton.Margin = new System.Windows.Forms.Padding(0);
@@ -170,7 +168,7 @@
             // 
             this.ZoomUpButton.AutoSize = false;
             this.ZoomUpButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ZoomUpButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.ZoomUpButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.ZoomUpButton.Image = global::C2.Properties.Resources.zoom_in;
             this.ZoomUpButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ZoomUpButton.Margin = new System.Windows.Forms.Padding(0);
@@ -182,7 +180,7 @@
             // 
             this.ZoomDownButton.AutoSize = false;
             this.ZoomDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ZoomDownButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.ZoomDownButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.ZoomDownButton.Image = global::C2.Properties.Resources.zoom_out;
             this.ZoomDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ZoomDownButton.Margin = new System.Windows.Forms.Padding(0);
@@ -199,7 +197,7 @@
             // 
             this.MoveButton.AutoSize = false;
             this.MoveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.MoveButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.MoveButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.MoveButton.Image = global::C2.Properties.Resources.hand;
             this.MoveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MoveButton.Margin = new System.Windows.Forms.Padding(0);
@@ -211,7 +209,7 @@
             // 
             this.FrameButton.AutoSize = false;
             this.FrameButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FrameButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.FrameButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.FrameButton.Image = global::C2.Properties.Resources.cursor;
             this.FrameButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.FrameButton.Margin = new System.Windows.Forms.Padding(0);
@@ -223,7 +221,7 @@
             // 
             this.MoreButton.AutoSize = false;
             this.MoreButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.MoreButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.MoreButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.MoreButton.Image = ((System.Drawing.Image)(resources.GetObject("MoreButton.Image")));
             this.MoreButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MoreButton.Margin = new System.Windows.Forms.Padding(0);
