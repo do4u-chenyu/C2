@@ -62,10 +62,9 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
-            this.rightPictureBox.Location = new System.Drawing.Point(125, 3);
+            this.rightPictureBox.Location = new System.Drawing.Point(125, 6);
             this.rightPictureBox.Name = "rightPictureBox";
-            this.rightPictureBox.Size = new System.Drawing.Size(19, 21);
-            this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.rightPictureBox.Size = new System.Drawing.Size(16, 16);
             this.rightPictureBox.TabIndex = 11;
             this.rightPictureBox.TabStop = false;
             // 
