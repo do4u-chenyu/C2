@@ -114,7 +114,6 @@ namespace C2.Controls.Top
             SelectDrag = false;
             ChangeCursor();
             FrameChange();
-            //this.FrameButton.Checked = true;
         }
         #endregion
 
