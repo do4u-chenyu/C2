@@ -92,7 +92,6 @@ namespace C2.Controls.MapViews
                 InsertNode(nodes, dataItem.FileName, imageIndex);
             }
         }
-
         public void InsertNode(TreeNodeCollection nodes, 
                                string text, 
                                int imageIndex)
@@ -102,11 +101,14 @@ namespace C2.Controls.MapViews
             int count = 0;
             foreach (TreeNode nodeTmp in nodes)
             {
-                count += 1;
-                if (nodeTmp.Text == text && nodeTmp.ImageIndex != 0)
+                if (nodeTmp.ImageIndex == srcDataImage)
+                    count += 1;
+                if (nodeTmp.ImageIndex == 0)
+                    break;
+                if (nodeTmp.Text == text && nodeTmp.ImageIndex == imageIndex)
                     return;
             }
-            nodes.Insert(imageIndex == srcDataImage? 0:count-1, node);
+            nodes.Insert(imageIndex == srcDataImage? 0:count, node);
         }
     }
 }
