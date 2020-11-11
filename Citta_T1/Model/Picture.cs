@@ -34,7 +34,7 @@ namespace C2.Model
 
         public string ID
         {
-            get { return Regex.Match(Name, @"\d+_").Value; }
+            get { return Regex.Match(Name, @"^\d+").Value; }
             set { _ID = value; }
         }
 

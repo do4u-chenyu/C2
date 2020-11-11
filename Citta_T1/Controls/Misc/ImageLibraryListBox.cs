@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using C2.Model;
+using C2.Utils;
 
 namespace C2.Controls
 {
@@ -39,7 +40,7 @@ namespace C2.Controls
 
             Clear();
             //按前缀数字逆序排序
-            Items.AddRange(MyIconLibrary.Share.Values.OrderBy(s => s.ID).Reverse());
+            Items.AddRange(MyIconLibrary.Share.Values.OrderBy(s => ConvertUtil.TryParseInt(s.ID)));
 
             if (old > -1 && old < Items.Count)
                 SelectedIndex = old;
