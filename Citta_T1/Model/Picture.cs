@@ -1,11 +1,11 @@
-﻿using System;
+﻿using C2.Controls;
+using C2.Globalization;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using C2.Controls;
-using C2.Core;
-using C2.Globalization;
+using System.Text.RegularExpressions;
 
 namespace C2.Model
 {
@@ -15,6 +15,12 @@ namespace C2.Model
         private string _Url;
         private string _Name;
         private Image _Data;
+
+        private static readonly Char[] _RemoveChars = new Char[] { 
+            '0', '1' , '2' , '3' , '4',
+            '5', '6' , '7' , '8' , '9', 
+            '_'
+        };
 
         public Picture()
         {
@@ -28,7 +34,7 @@ namespace C2.Model
 
         public string ID
         {
-            get { return _ID; }
+            get { return Regex.Match(Name, @"^\d+").Value; }
             set { _ID = value; }
         }
 
@@ -46,8 +52,10 @@ namespace C2.Model
 
         public string SName
         {
-            get { return Path.GetFileNameWithoutExtension(Name); }
+            get { return Path.GetFileNameWithoutExtension(Name).TrimStart(_RemoveChars); }
         }
+
+
 
         public Image Data
         {

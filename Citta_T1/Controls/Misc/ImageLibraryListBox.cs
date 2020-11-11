@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using C2.Model;
+using C2.Utils;
 
 namespace C2.Controls
 {
@@ -34,12 +37,10 @@ namespace C2.Controls
             SuspendLayout();
 
             int old = SelectedIndex;
+
             Clear();
-            foreach (KeyValuePair<string, Picture> obj in MyIconLibrary.Share)
-            {
-                if (obj.Value.Data != null)
-                    Items.Add(obj.Value);
-            }
+            //按前缀数字逆序排序
+            Items.AddRange(MyIconLibrary.Share.Values.OrderBy(s => ConvertUtil.TryParseInt(s.ID)));
 
             if (old > -1 && old < Items.Count)
                 SelectedIndex = old;

@@ -26,7 +26,6 @@ namespace C2.Model
         public void Refresh()
         {
             Clear();
-
             Refresh(BaseDirectory);
             Refresh(BaseDirectory2);
         }
@@ -37,17 +36,6 @@ namespace C2.Model
             if (Directory.Exists(dir))
             {
                 string[] files = Directory.GetFiles(dir);
-
-                //string[] topfiles = ["hongqi1", "2",""];
-                 
-               // Add(name, new Picture(name, image));
-
-
-
-
-
-
-
                 foreach (string file in files)
                 {
                     //if (file not in topfils))
