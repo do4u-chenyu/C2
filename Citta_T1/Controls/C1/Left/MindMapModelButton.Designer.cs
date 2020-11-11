@@ -49,11 +49,11 @@
             // 
             // rightPictureBox
             // 
-            this.rightPictureBox.Image = global::C2.Properties.Resources.leftcontrolhelp;
-            this.rightPictureBox.Location = new System.Drawing.Point(123, 3);
+            this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
+            this.rightPictureBox.Location = new System.Drawing.Point(123, 7);
             this.rightPictureBox.Name = "rightPictureBox";
-            this.rightPictureBox.Size = new System.Drawing.Size(23, 23);
-            this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.rightPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.rightPictureBox.TabIndex = 0;
             this.rightPictureBox.TabStop = false;
             // 

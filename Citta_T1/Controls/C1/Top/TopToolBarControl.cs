@@ -21,9 +21,6 @@ namespace C2.Controls.Top
         public bool SelectDrag { get; set; } = false;
         [Browsable(false)]
         public bool SelectFrame { get; set; } = false;
-        public bool MoveColor { get; set; } = false;
-        [Browsable(false)]
-        public bool FrameColor { get; set; } = false;
 
         public TopToolBarControl()
         {
@@ -44,8 +41,6 @@ namespace C2.Controls.Top
             FrameChange();
             ChangeCursor();
             ChangeCursorColor();
-
-
         }
         private void ChangeCursor()
         {

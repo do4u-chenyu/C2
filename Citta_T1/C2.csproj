@@ -2496,6 +2496,7 @@
     <Content Include="Resources\C1\leftpanelmenu\startPageTitle.jpg" />
     <None Include="Resources\WidgetIcon\chart_w_icon.png" />
     <None Include="Resources\WidgetIcon\note_w_icon.png" />
+    <None Include="Resources\提示1.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
