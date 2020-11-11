@@ -15,6 +15,8 @@ namespace C2.Controls.Top
 {
     public partial class TopToolBarControl : UserControl
     {
+        private static readonly Color ReleaseColor = Color.FromArgb(230, 237, 246);
+        private static readonly Color ChoosenColor = Color.FromArgb(200, 200, 200);
         [Browsable(false)]
         public bool SelectRemark { get; set; } = false;
         [Browsable(false)]
@@ -27,7 +29,14 @@ namespace C2.Controls.Top
             InitializeComponent();
             InitializeToolTip();
             InitializeUndoRedoManger();
+            InitializeOther();
         } // 恢复到编辑模式
+
+        private void InitializeOther()
+        {
+            this.toolStrip1.Renderer = DefaultToolStripRenderer.Default;
+        }
+
         public void ResetStatus()
         {
             SelectDrag = false;
@@ -55,7 +64,7 @@ namespace C2.Controls.Top
         }
         #region 拖动
 
-        private void MovePictureBox_Click(object sender, EventArgs e)
+        private void MoveButton_Click(object sender, EventArgs e)
         {
             // 1. 点击之后图标变色
             // 2. 鼠标变成手的图标
@@ -65,69 +74,55 @@ namespace C2.Controls.Top
             SelectFrame = false;
             ChangeCursor();
             FrameChange();
-            this.movePictureBox.BackColor = Color.FromArgb(200, 200, 200);
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.MoveButton.BackColor = ChoosenColor;
+            this.FrameButton.BackColor = ReleaseColor;
         }
 
         #endregion
 
         #region 放大缩小
        
-        private void ZoomUpPictureBox_Click(object sender, EventArgs e)
+        private void ZoomUpButton_Click(object sender, EventArgs e)
         {
             SelectFrame = false;
             ChangeCursor();
             FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(true);
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.FrameButton.BackColor = ReleaseColor;
         }
 
-        private void ZoomDownPictureBox_Click(object sender, EventArgs e)
+        private void ZoomDownButton_Click(object sender, EventArgs e)
         {
             SelectFrame = false;
             ChangeCursor();
             FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(false);
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.FrameButton.BackColor = ReleaseColor;
         }
         #endregion
 
         #region 备注
-
-        private void HideRemarkControl()//单击备注按钮，备注出现和隐藏功能
-        {
-            Global.GetRemarkControl().Visible = false;
-        }
-
-        private void ShowRemarkControl()//单击备注按钮，备注出现和隐藏功能
-        {
-            Global.GetRemarkControl().Visible = true;
-        }
-
-        private void RemarkPictureBox_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
+        private void RemarkButton_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
         {
             Global.GetCurrentModelDocument().RemarkVisible = !Global.GetCurrentModelDocument().RemarkVisible;
             SelectRemark = Global.GetCurrentModelDocument().RemarkVisible;
-            if (SelectRemark)
-                ShowRemarkControl();
-            else
-                HideRemarkControl();
+            Global.GetRemarkControl().Visible = SelectRemark;
         }
         #endregion
 
         #region 框选
-
-        private void FramePictureBox_Click(object sender, EventArgs e)
+        private void FrameButton_Click(object sender, EventArgs e)
         {
             Global.GetCanvasPanel().ClearAllLineStatus();
             SelectFrame = !SelectFrame;
             SelectDrag = false;
             ChangeCursor();
+            FrameChange();
 
-            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
-            this.framePictureBox.BackColor = Color.FromArgb(200, 200, 200);
+            this.MoveButton.BackColor = ReleaseColor;
+            this.FrameButton.BackColor = ChoosenColor;
         }
         #endregion
 
@@ -154,59 +149,58 @@ namespace C2.Controls.Top
 
         private void TopToolBarControl_UndoStackNotEmpty()
         {
-            this.undoButton.Enabled = true;
+            this.UndoButton.Enabled = true;
         }
 
         private void TopToolBarControl_UndoStackEmpty()
         {
-            this.undoButton.Enabled = false;
+            this.UndoButton.Enabled = false;
         }
 
         private void TopToolBarControl_RedoStackNotEmpty()
         {
-            this.redoButton.Enabled = true;
+            this.RedoButton.Enabled = true;
         }
 
         private void TopToolBarControl_RedoStackEmpty()
         {
-            this.redoButton.Enabled = false;
+            this.RedoButton.Enabled = false;
         }
 
         private void InitializeToolTip()
         {
-            this.saveModelButton.ToolTipText = HelpUtil.SaveModelButtonHelpInfo;
-            this.saveAllButton.ToolTipText = HelpUtil.SaveAllButtonHelpInfo;
-            this.undoButton.ToolTipText = HelpUtil.UndoButtonHelpInfo;
-            this.redoButton.ToolTipText = HelpUtil.RedoButtonHelpInfo;
-            this.ImportModel.ToolTipText = HelpUtil.ImportModelHelpInfo;
-            this.formatButton.ToolTipText = HelpUtil.FormatOperatorHelpInfo;
-            this.remarkPictureBox.ToolTipText = HelpUtil.RemarkPictureBoxHelpInfo;
-            this.zoomUpPictureBox.ToolTipText = HelpUtil.ZoomUpPictureBoxHelpInfo;
-            this.zoomDownPictureBox.ToolTipText = HelpUtil.zoomDownPictureBoxHelpInfo;
-            this.movePictureBox.ToolTipText = HelpUtil.MovePictureBoxHelpInfo;
-            this.framePictureBox.ToolTipText = HelpUtil.FramePictureBoxHelpInfo;
-            this.moreButton.ToolTipText = HelpUtil.moreButtonHelpInfo;
+            this.SaveModelButton.ToolTipText = HelpUtil.SaveModelButtonHelpInfo;
+            this.UndoButton.ToolTipText = HelpUtil.UndoButtonHelpInfo;
+            this.RedoButton.ToolTipText = HelpUtil.RedoButtonHelpInfo;
+            this.ImportModelButton.ToolTipText = HelpUtil.ImportModelHelpInfo;
+            this.FormatButton.ToolTipText = HelpUtil.FormatOperatorHelpInfo;
+            this.RemarkButton.ToolTipText = HelpUtil.RemarkPictureBoxHelpInfo;
+            this.ZoomUpButton.ToolTipText = HelpUtil.ZoomUpPictureBoxHelpInfo;
+            this.ZoomDownButton.ToolTipText = HelpUtil.zoomDownPictureBoxHelpInfo;
+            this.MoveButton.ToolTipText = HelpUtil.MovePictureBoxHelpInfo;
+            this.FrameButton.ToolTipText = HelpUtil.FramePictureBoxHelpInfo;
+            this.MoreButton.ToolTipText = HelpUtil.moreButtonHelpInfo;
         }
 
         public void UndoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Undo(Global.GetCurrentModelDocument());
             Global.GetMainForm().SetDocumentDirty();
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
-            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.FrameButton.BackColor = ReleaseColor;
+            this.MoveButton.BackColor = ReleaseColor;
         }
 
         public void RedoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Redo(Global.GetCurrentModelDocument());
             Global.GetMainForm().SetDocumentDirty();
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
-            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.FrameButton.BackColor = ReleaseColor;
+            this.MoveButton.BackColor = ReleaseColor;
         }
 
         private void ImportModel_Click(object sender, EventArgs e)
         {
-            C2.Business.Model.ImportModel.GetInstance().ImportIaoFile(Global.GetMainForm().UserName);
+            ImportModel.GetInstance().ImportIaoFile(Global.GetMainForm().UserName);
         }
 
         private void SaveModelButton_Click(object sender, EventArgs e)
@@ -229,14 +223,13 @@ namespace C2.Controls.Top
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();
             Global.GetMainForm().SetDocumentDirty();
-            this.movePictureBox.BackColor = Color.FromArgb(230, 237, 246);
-            this.framePictureBox.BackColor = Color.FromArgb(230, 237, 246);
+            this.MoveButton.BackColor = ReleaseColor;
+            this.FrameButton.BackColor = ReleaseColor;
         }
 
         private void MoreButton_Click(object sender, EventArgs e)
         {
-            ConfigForm config = new ConfigForm();
-            config.ShowDialog();
+            new ConfigForm().ShowDialog();
         }
     }
 }
