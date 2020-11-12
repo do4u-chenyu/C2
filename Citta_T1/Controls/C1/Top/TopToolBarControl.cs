@@ -169,7 +169,6 @@ namespace C2.Controls.Top
             this.ZoomDownButton.ToolTipText = HelpUtil.zoomDownPictureBoxHelpInfo;
             this.MoveButton.ToolTipText = HelpUtil.MovePictureBoxHelpInfo;
             this.FrameButton.ToolTipText = HelpUtil.FramePictureBoxHelpInfo;
-            this.MoreButton.ToolTipText = HelpUtil.moreButtonHelpInfo;
         }
 
         public void UndoButton_Click(object sender, EventArgs e)
@@ -209,11 +208,6 @@ namespace C2.Controls.Top
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();
             Global.GetMainForm().SetDocumentDirty();
-        }
-
-        private void MoreButton_Click(object sender, EventArgs e)
-        {
-            new ConfigForm().ShowDialog();
         }
         public void Enable_UndoButton()
         {
