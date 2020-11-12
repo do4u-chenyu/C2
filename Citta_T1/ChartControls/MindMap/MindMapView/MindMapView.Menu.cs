@@ -560,7 +560,8 @@ namespace C2.Controls.MapViews
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
-            //FileUtil.ExploreDirectory();
+            //string path = atw.FullFilePaths;
+            //FileUtil.ExploreDirectory(path);
         }
 
 
