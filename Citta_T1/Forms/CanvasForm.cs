@@ -151,9 +151,16 @@ namespace C2.Forms
                 Text = string.Empty;
             }
         }
+
+        public void SaveDocAndTopic()
+        {
+            Save();
+            UpdateTopicResults();
+        }
+
         private void CanvasForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Document.Save();
+            SaveDocAndTopic();
         }
 
         private void CanvasForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -172,7 +179,7 @@ namespace C2.Forms
                 // 保存文件
                 if (result == DialogResult.Yes)
                 {
-                    Document.Save();
+                    SaveDocAndTopic();
                     return;
                 }
                 // 不保存关闭文件
@@ -431,7 +438,7 @@ namespace C2.Forms
         //完成任务时需要调用
         private void Accomplish(TaskManager manager)
         {
-            Document.Save();
+            Save();
             this.Invoke(new TaskCallBack(delegate ()
             {
                 UpdateRunbuttonImageInfo();
@@ -441,6 +448,13 @@ namespace C2.Forms
 
         public void UpdateTopicResults()
         {
+            if (RelateTopic == null)
+                return;
+            OperatorWidget opw = RelateTopic.FindWidget<OperatorWidget>();
+            if(opw != null)
+                RelateTopic.Remove(opw);
+            RelateTopic.Add(new OperatorWidget { OpType = OpType.ModelOperator, OpName = document.Name });
+
             List<int> starNodes = new List<int>();
             List<int> endNodes = new List<int>();
             document.ModelRelations.ForEach(mr => { starNodes.Add(mr.StartID); endNodes.Add(mr.EndID); });
@@ -451,6 +465,9 @@ namespace C2.Forms
                 DataItem tmpDataItem = new DataItem(rsElement.FullFilePath,rsElement.Description,rsElement.Separator,rsElement.Encoding,rsElement.ExtType);
                 rsDataItems.Add(tmpDataItem);
             }
+            if (rsDataItems.Count == 0)
+                return;
+
             ResultWidget rsw = RelateTopic.FindWidget<ResultWidget>();
             if (rsw == null)
             {

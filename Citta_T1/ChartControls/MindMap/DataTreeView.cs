@@ -61,6 +61,8 @@ namespace C2.Controls.MapViews
         }
         public void AddTopicData(Topic topic)
         {
+            if (FindNode(topic) == null)
+                return;
             TreeNodeCollection nodes = FindNode(topic).Nodes;
             DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
             ResultWidget rs      = topic.FindWidget<ResultWidget>();
