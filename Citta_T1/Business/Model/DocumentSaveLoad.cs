@@ -233,21 +233,7 @@ namespace C2.Business.Model
             mexw.Write("type", "Remark")
                 .Write("name", remarkDescription);
         }
-        private string GetXmlNodeInnerText(XmlNode node, string nodeName)
-        {
-            string text = String.Empty;
-            try
-            {
-                if (node.SelectSingleNode(nodeName) == null)
-                    return text;
-                text = node.SelectSingleNode(nodeName).InnerText;
-            }
-            catch (Exception e)
-            {
-                log.Error("DocumentSaveLoad 读取InnerText: " + e.Message);
-            }
-            return text;
-        }
+       
         public void ReadXml()
         {
             XmlNodeList nodeLists;
@@ -256,7 +242,7 @@ namespace C2.Business.Model
                 XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(modelFilePath);
                 XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
-                this.modelDocument.WorldMap.MapOrigin = OpUtil.ToPointType(GetXmlNodeInnerText(rootNode, "MapOrigin"));
+                this.modelDocument.WorldMap.MapOrigin = OpUtil.ToPointType(Utils.XmlUtil.GetInnerText(rootNode, "MapOrigin"));
                 nodeLists = rootNode.SelectNodes("ModelElement");
                 if (rootNode == null || nodeLists == null)
                     return;
@@ -269,9 +255,9 @@ namespace C2.Business.Model
 
             foreach (XmlNode xn in nodeLists)
             {
-                string type = GetXmlNodeInnerText(xn, "type");
+                string type = Utils.XmlUtil.GetInnerText(xn, "type");
                 if (type == "Remark")
-                    this.modelDocument.RemarkDescription = GetXmlNodeInnerText(xn, "name");
+                    this.modelDocument.RemarkDescription = Utils.XmlUtil.GetInnerText(xn, "name");
                 else if (type == "Relation")
                 {
                     ModelXmlReader mxr1 = new ModelXmlReader(xn);

@@ -70,9 +70,6 @@ namespace C2.Model.Widgets
             base.Serialize(dom, node);
             if (OpName == null)
                 return;
-            /*
-             * 算子持久化
-             */
             XmlElement opItemNode = node.OwnerDocument.CreateElement("op_items");          
             ModelXmlWriter mxw = new ModelXmlWriter("op_item", opItemNode);
             mxw.Write("name", OpName)
@@ -84,9 +81,7 @@ namespace C2.Model.Widgets
             {
                 node.AppendChild(opItemNode);
                 return;
-            }
-              
-
+            }             
             /*
              *  单算子配置
              */
@@ -111,8 +106,21 @@ namespace C2.Model.Widgets
         public override void Deserialize(Version documentVersion, XmlElement node)
         {
             base.Deserialize(documentVersion, node);
-            //TODO
-            //文档持久化
+            var opitems = node.SelectNodes("op_items/op_item");
+            foreach (XmlElement opItem in opitems)
+            {
+                string subtype = Utils.XmlUtil.GetInnerText(opItem, "subtype");
+                if (string.IsNullOrEmpty(subtype))
+                    return;
+                // 读取模型算子
+                if (subtype == OpType.ModelOperator.ToString())
+                {
+
+                    return;
+                }
+                // 读取单算子
+  
+            }
         }
     }
 }
