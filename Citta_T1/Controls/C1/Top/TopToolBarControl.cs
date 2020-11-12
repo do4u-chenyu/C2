@@ -107,6 +107,7 @@ namespace C2.Controls.Top
             SelectFrame = false;
             ChangeCursor();
             FrameChange();
+            ChangeCursorColor();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(true);
         }
@@ -115,6 +116,7 @@ namespace C2.Controls.Top
         {
             SelectFrame = false;
             ChangeCursor();
+            ChangeCursorColor();
             FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(false);
