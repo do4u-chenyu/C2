@@ -38,7 +38,7 @@ namespace C2.Controls.Common
             ComboOperator = new List<OpType>();
             foreach (OpType opType in Enum.GetValues(typeof(OpType)))
             {
-                if(opType==OpType.Null || opType == OpType.ModelOperator)
+                if(opType==OpType.Null)
                     continue;
                 string tmpOpType = Lang._(opType.ToString());
                 ComboOperator.Add(opType);
@@ -155,7 +155,8 @@ namespace C2.Controls.Common
                 return;
             }
 
-            if (SelectedDataSource ==null || SelectedDataSource.IsEmpty())
+            //模型算子选中时，可以不用选中数据源
+            if ( (SelectedDataSource ==null || SelectedDataSource.IsEmpty() ) && SelectedOperator != Lang._(OpType.ModelOperator.ToString()))
             {
                 HelpUtil.ShowMessageBox("未选中数据源,请添加后再配置", "未选中数据源", MessageBoxIcon.Information);
                 return;
@@ -164,6 +165,15 @@ namespace C2.Controls.Common
             if (string.IsNullOrEmpty(SelectedOperator))
             {
                 HelpUtil.ShowMessageBox("未添加算子,请添加后再配置", "未选择算子", MessageBoxIcon.Information);
+                return;
+            }
+            if (SelectedOperator == Lang._(OpType.ModelOperator.ToString()))
+            {
+                List<DataItem> dataItems = new List<DataItem>();
+                DataSourceWidget dtw = SelectedTopic.FindWidget<DataSourceWidget>();
+                if (dtw != null)
+                    dataItems = dtw.DataItems;
+                Global.GetMainForm().NewCanvasFormByMindMap(string.Format("{0}-模型视图", SelectedTopic.Text), dataItems, SelectedTopic);
                 return;
             }
 
@@ -178,7 +188,6 @@ namespace C2.Controls.Common
 
             OpWidget.OpType =ComboOperator[this.operatorCombo.SelectedIndex];
             OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
-
             C2BaseOperatorView dialog = GenerateOperatorView();
             if (dialog == null)
                 return;
