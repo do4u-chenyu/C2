@@ -53,8 +53,7 @@ namespace C2.Forms
         public DocumentForm()
         {
             InitializeComponent();
-            this.inputDataForm = new Dialogs.InputDataForm();
-            this.inputDataForm.InputDataEvent += InputDataFormEvent;
+            InitializeInputDataForm();
             Icon = Properties.Resources.document_icon;
             FormatPainter_DataChanged(null, EventArgs.Empty);
             FormatPainter.Default.DataChanged += new EventHandler(FormatPainter_DataChanged);
@@ -339,7 +338,11 @@ namespace C2.Forms
                 TsbTimer.DropDownItems.Add(mi);
             }
         }
-
+        void InitializeInputDataForm()
+        {
+            this.inputDataForm = new Dialogs.InputDataForm();
+            this.inputDataForm.InputDataEvent += InputDataFormEvent;
+        }
         void InitializeControls()
         {
             //

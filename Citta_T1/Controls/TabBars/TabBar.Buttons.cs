@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using C2.Core;
+using C2.Dialogs;
+using C2.Utils;
 
 namespace C2.Controls
 {
@@ -15,6 +17,7 @@ namespace C2.Controls
         float ButtonSpace = 4;
         float StandardButtonSize = 24;
         TabBarButton DropDownButton;
+        TabBarButton PreferencesButton;
         bool _ShowDropDownButton;
 
         public void InitializeButtons()
@@ -30,9 +33,15 @@ namespace C2.Controls
             DropDownButton.Icon = Properties.Resources.chevron;
             DropDownButton.Visible = ShowDropDownButton;
             DropDownButton.Click +=new EventHandler(DropDownButton_Click);
-            //DropDownButton.Paint += new UIPaintEventHandler(DropDownButton_Paint);
-            RightButtons.Add(DropDownButton);
 
+            PreferencesButton = new TabBarButton();
+            PreferencesButton.Icon = Properties.Resources.preferences_16;
+            PreferencesButton.Visible = true;
+            PreferencesButton.Click += new EventHandler(MoreButton_Click);
+            PreferencesButton.ToolTipText = HelpUtil.moreButtonHelpInfo;
+
+            RightButtons.Add(DropDownButton);
+            RightButtons.Add(PreferencesButton);
             //
             InitializeSpecialTabs();
         }
@@ -241,7 +250,10 @@ namespace C2.Controls
         {
             DropDownMenu();
         }
-
+        void MoreButton_Click(object sender, EventArgs e)
+        {
+            new ConfigForm().ShowDialog();
+        }
         void OnButtonClick(int index)
         {
             TabBarButton button = GetButton(index);

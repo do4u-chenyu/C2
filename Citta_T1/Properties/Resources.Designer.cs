@@ -2114,6 +2114,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap preferences_16 {
+            get {
+                object obj = ResourceManager.GetObject("preferences_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap preferences_24 {
             get {
                 object obj = ResourceManager.GetObject("preferences_24", resourceCulture);
