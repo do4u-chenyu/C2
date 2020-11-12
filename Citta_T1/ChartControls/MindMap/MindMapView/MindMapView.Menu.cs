@@ -29,6 +29,7 @@ namespace C2.Controls.MapViews
         
         private DataSourceWidget dtw;
         private OperatorWidget opw;
+        private AttachmentWidget atw;
         private ResultWidget rsw;
         private ChartWidget cw;
         private Topic currentTopic;
@@ -59,6 +60,10 @@ namespace C2.Controls.MapViews
                 case ChartWidget.TypeID:
                     cw = HoverObject.Widget as ChartWidget;
                     CreateChartWidgetMenu(cw);
+                    break;
+                case AttachmentWidget.TypeID:
+                    atw = HoverObject.Widget as AttachmentWidget;
+                    CreateAttachmentWidgetMenu(atw);
                     break;
 
                 default:
@@ -492,7 +497,77 @@ namespace C2.Controls.MapViews
         #endregion
 
         #region 附件挂件
+        private void CreateAttachmentWidgetMenu(AttachmentWidget atw)
+        {
+            foreach (string path in atw.FullFilePaths)
+            {
+                ToolStripMenuItem MenuOpenData = new ToolStripMenuItem();
+                ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
+                ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
+                ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
 
+                MenuOpenDataSource.Text = String.Format("{0}{1}{2}{3}", Path.GetFileNameWithoutExtension(path), " [", Path.GetExtension(path).Trim('.'), "]");
+                switch (Path.GetExtension(path).Trim('.'))
+                {
+                    case "txt":
+                        MenuOpenDataSource.Image = Properties.Resources.txtData;
+                        break;
+                    case "bcp":
+                        MenuOpenDataSource.Image = Properties.Resources.bcpData;
+                        break;
+                    case "doc":
+                    case "docx":
+                        MenuOpenDataSource.Image = Properties.Resources.docData;
+                        break;
+                    case "xls":
+                    case "xlsx":
+                        MenuOpenDataSource.Image = Properties.Resources.xlsData;
+                        break;
+                    case "pdf":
+                        MenuOpenDataSource.Image = Properties.Resources.pdfData;
+                        break;
+                    default:
+                        break;
+                }
+                MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
+                MenuOpenData,
+                MenuExploreDirectory,
+                MenuDelete});
+
+                MenuOpenData.Image = Properties.Resources.opendata;
+                MenuOpenData.Tag = path;
+                MenuOpenData.Text = Lang._("OpenData");
+                MenuOpenData.Click += MenuOpenData_Click;
+
+                MenuExploreDirectory.Image = Properties.Resources.datadirectory;
+                MenuExploreDirectory.Text = Lang._("ExploreDirectory");
+                MenuExploreDirectory.Tag = path;
+                MenuExploreDirectory.Click += MenuExploreDirectory_Click;
+
+                MenuDelete.Image = Properties.Resources.deletewidget;
+                MenuDelete.Text = Lang._("Delete");
+                MenuDelete.Tag = path;
+                MenuDelete.Click += AttachmentMenuDelete_Click;
+
+                WidgetMenuStrip.Items.Add(MenuOpenDataSource);
+            }
+        }
+
+        void MenuOpenData_Click(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void MenuExploreDirectory_Click(object sender, EventArgs e)
+        {
+            //FileUtil.ExploreDirectory();
+        }
+
+
+        void AttachmentMenuDelete_Click(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
         #endregion
     }
 }

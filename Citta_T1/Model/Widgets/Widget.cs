@@ -372,6 +372,8 @@ namespace C2.Model.Widgets
                 (widget as ResultWidget).DataItems = (this as ResultWidget).DataItems;
             else if(widget is ChartWidget)
                 (widget as ChartWidget).DataItems = (this as ChartWidget).DataItems;
+            else if (widget is AttachmentWidget)
+                (widget as AttachmentWidget).FullFilePaths = (this as AttachmentWidget).FullFilePaths;
 
 
         }

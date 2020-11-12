@@ -1,4 +1,5 @@
 ﻿using C2.Controls.MapViews;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace C2.Model.Widgets
@@ -6,7 +7,7 @@ namespace C2.Model.Widgets
     class AttachmentWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "ATTACHMENT";
-
+        public List<string> FullFilePaths { get; set; }
         public AttachmentWidget()
         {
             DisplayIndex = 6;

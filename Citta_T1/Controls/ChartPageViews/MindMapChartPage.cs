@@ -675,23 +675,12 @@ namespace C2.ChartPageView
 
         void MenuAddOperator_Click(object sender, EventArgs e)
         {
-            //TODO
-            //弹出设计器
             ShowDesignerObject = mindMapView1.SelectedTopic;
             mindMapView1.AddOperator();
         }
         void MenuAddAttachment_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog
-            {
-                Filter = "文件|*.docx;*.xlsx;*.doc;*.xls;*.pdf;*.txt;*.bcp;*.xmind",
-                Title = Lang._("Attachment")
-        };
-            if (fd.ShowDialog() == DialogResult.OK)
-            {
-                //this.rsFullFilePathTextBox.Text = fd.FileName;
-            }
-
+           
             mindMapView1.AddAttachment();
         }
 
@@ -699,7 +688,7 @@ namespace C2.ChartPageView
         {
             //TODO
             //跳到C1模型,待做  新建模型的名称、是否主动添加当前节点数据到模型中
-            Global.GetMainForm().NewForm(FormType.CanvasForm);
+            mindMapView1.AddModelOp();
         }
 
 

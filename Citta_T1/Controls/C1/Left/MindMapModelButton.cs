@@ -101,13 +101,13 @@ namespace C2.Controls.Left
             FinishTextChange();
         }
 
-        private void TextButton_MouseDown(object sender, MouseEventArgs e)
-        {
-            // 鼠标左键双击触发
-            if (e.Button != MouseButtons.Left || e.Clicks != 2)
-                return;
-            RenameToolStripMenuItem_Click(sender, e);
-        }
+        //private void TextButton_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    // 鼠标左键双击触发
+        //    if (e.Button != MouseButtons.Left || e.Clicks != 2)
+        //        return;
+        //    RenameToolStripMenuItem_Click(sender, e);
+        //}
 
 
         private void FinishTextChange()
