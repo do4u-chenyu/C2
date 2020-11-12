@@ -417,5 +417,10 @@
 	<item name="PROGRESSBAR">进度条挂件</item>
 	<item name="RESULT">结果挂件</item>
 	<item name="ATTACHMENT">附件挂件</item>
+	<item name="Attachment">添加附件</item>
+	<item name="OpenData">打开</item>
+	<item name="ExploreDirectory">打开所在路径</item>
+
+
 	</words>
 </dictionary>

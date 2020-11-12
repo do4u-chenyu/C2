@@ -1957,6 +1957,13 @@
     <None Include="Resources\Images\WidgetImage\opSetSuccess.png" />
     <None Include="Resources\Images\WidgetImage\opSet.png" />
     <None Include="Resources\Images\WidgetImage\opWarn.png" />
+    <None Include="Resources\Images\WidgetImage\bcpData.png" />
+    <None Include="Resources\Images\WidgetImage\datadirectory.png" />
+    <None Include="Resources\Images\WidgetImage\docData.png" />
+    <None Include="Resources\Images\WidgetImage\opendata.png" />
+    <None Include="Resources\Images\WidgetImage\pdfData.png" />
+    <None Include="Resources\Images\WidgetImage\txtData.png" />
+    <None Include="Resources\Images\WidgetImage\xlsData.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
