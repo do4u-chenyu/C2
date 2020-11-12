@@ -49,6 +49,7 @@ namespace C2.Model.Widgets
             DisplayIndex = 6;
             _SizeType = PictureSizeType.Customize;
             Alignment = WidgetAlignment.Left;
+            EmbedIn = true;//默认嵌入，这样才能持久化
         }
 
         [DefaultValue(null), Browsable(false)]
