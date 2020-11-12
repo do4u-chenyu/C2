@@ -206,13 +206,15 @@ namespace C2.Controls.MapViews
 
         void MenuRunningOp_Click(object sender, EventArgs e)
         {
-            if (Global.GetCurrentDocument().Modified)
-            {
-                HelpUtil.ShowMessageBox("业务视图未保存，请保存后再运行。", "未保存", MessageBoxIcon.Information);
-                return;
-            }
+            //if (Global.GetCurrentDocument().Modified)
+            //{
+            //    HelpUtil.ShowMessageBox("业务视图未保存，请保存后再运行。", "未保存", MessageBoxIcon.Information);
+            //    return;
+            //}
+            Global.GetCurrentDocument().Save();
+            Global.GetCurrentDocument().Modified = false;
 
-            if(opw.Status == OpStatus.Ready || opw.Status == OpStatus.Done)
+            if (opw.Status == OpStatus.Ready || opw.Status == OpStatus.Done)
             {
                 List<string> cmds = GenerateCmd();
                 if (cmds == null)
