@@ -766,6 +766,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\XmlUtil.cs" />
     <Compile Include="WorkSpace\BaseWorkSpace.cs">
       <SubType>Component</SubType>
     </Compile>
