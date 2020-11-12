@@ -421,7 +421,7 @@ namespace C2.Controls.MapViews
             List<List<string>> columnValues = Utils.FileUtil.GetColumns(hitItem.SelectedIndexs, hitItem, rows, upperLimit);
             if (columnValues.Count == 0)
                 return;
-            Utils.ControlUtil.PaintChart(columnValues, new List<string>() { hitItem.FileName, hitItem.FileName }, hitItem.ChartType);
+            Utils.ControlUtil.PaintChart(columnValues, hitItem.SelectedItems, hitItem.ChartType);
         }
         void UpdateChartWidgetMenu(ChartWidget widget, DataItem hitItem)
         {
