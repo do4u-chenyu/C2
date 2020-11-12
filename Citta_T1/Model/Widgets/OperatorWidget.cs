@@ -1,5 +1,7 @@
-﻿using C2.Business.Option;
+﻿using C2.Business.Model;
+using C2.Business.Option;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml;
 
@@ -40,6 +42,8 @@ namespace C2.Model.Widgets
             DataSourceItem = DataItem.Empty;  // 尽量不要用null作为初值,避免空指针异常
             Option = new OperatorOption();
             ResultItem = DataItem.Empty;
+            OpType = OpType.Null;
+            Status = OpStatus.Null;
         }
 
         [Browsable(false)]
@@ -63,8 +67,44 @@ namespace C2.Model.Widgets
         public override void Serialize(XmlDocument dom, XmlElement node)
         {
             base.Serialize(dom, node);
-            //TODO
-            //文档持久化
+            if (OpName == null)
+                return;
+            /*
+             * 算子持久化
+             */
+            XmlElement opItemNode = node.OwnerDocument.CreateElement("op_items");          
+            ModelXmlWriter mxw = new ModelXmlWriter("op_item", opItemNode);
+            mxw.Write("name", OpName)
+               .Write("subtype", OpType)
+               .Write("status", Status);
+
+            // 模型算子无后续信息，直接返回
+            if (OpType == OpType.ModelOperator)
+            {
+                node.AppendChild(opItemNode);
+                return;
+            }
+              
+
+            /*
+             *  单算子配置
+             */
+            ModelXmlWriter opWrite = new ModelXmlWriter("option", mxw.Element);
+            foreach (KeyValuePair<string, string> kvp in Option.OptionDict)
+            {
+                opWrite.Write(kvp.Key, kvp.Value);
+            }
+            /*
+            *  单算子的数据源持久化
+            */
+            if (DataSourceItem != null)
+                WriteAttribute(opItemNode, DataSourceItem, "data_item");
+            /*
+            *  单算子的结果持久化
+            */
+            if (ResultItem != null)
+                WriteAttribute(opItemNode, ResultItem, "result_item");
+            node.AppendChild(opItemNode);
         }
 
         public override void Deserialize(Version documentVersion, XmlElement node)
