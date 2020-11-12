@@ -553,19 +553,20 @@ namespace C2.Controls.MapViews
             }
         }
 
-        private void AttachmentMenuDelete_Click(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void MenuOpenData_Click(object sender, EventArgs e)
+        void MenuOpenData_Click(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
         }
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
-            //FileUtil.ExploreDirectory(FullFilePath);
+            //FileUtil.ExploreDirectory();
+        }
+
+
+        void AttachmentMenuDelete_Click(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
         }
         #endregion
     }
