@@ -135,7 +135,7 @@ namespace C2.Controls.MapViews
                 DataSourceWidget dtw = SelectedTopics[0].FindWidget<DataSourceWidget>();
                 if (dtw != null)
                     dataItems = dtw.DataItems;
-                Global.GetMainForm().NewCanvasForm(string.Format("{0}-模型视图",SelectedTopics[0].Text), dataItems);
+                Global.GetMainForm().NewCanvasFormByMindMap(string.Format("{0}-模型视图",SelectedTopics[0].Text), dataItems,SelectedTopics[0]);
             }
         }
           public void AddAttachment()

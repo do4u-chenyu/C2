@@ -12,6 +12,8 @@ using C2.Core;
 using C2.Core.UndoRedo;
 using C2.Core.UndoRedo.Command;
 using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -75,6 +77,12 @@ namespace C2.Forms
         {
             Document = document;
         }
+        public CanvasForm(ModelDocument document,Topic topic) : this()
+        {
+            Document = document;
+            RelateTopic = topic; 
+        }
+        public Topic RelateTopic { set; get; }
 
         public TopToolBarControl TopToolBarControl { get { return this.topToolBarControl; } }
         public new ModelDocument Document
@@ -427,7 +435,36 @@ namespace C2.Forms
             this.Invoke(new TaskCallBack(delegate ()
             {
                 UpdateRunbuttonImageInfo();
+                UpdateTopicResults();
             }));
+        }
+
+        public void UpdateTopicResults()
+        {
+            List<int> starNodes = new List<int>();
+            List<int> endNodes = new List<int>();
+            document.ModelRelations.ForEach(mr => { starNodes.Add(mr.StartID); endNodes.Add(mr.EndID); });
+            List<ModelElement> rsElements = document.ModelElements.FindAll(me => me.Type == ElementType.Result&&me.Status == ElementStatus.Done).FindAll(me => endNodes.Contains(me.ID)&&!starNodes.Contains(me.ID));
+            List<DataItem> rsDataItems = new List<DataItem>();
+            foreach(ModelElement rsElement in rsElements)
+            {
+                DataItem tmpDataItem = new DataItem(rsElement.FullFilePath,rsElement.Description,rsElement.Separator,rsElement.Encoding,rsElement.ExtType);
+                rsDataItems.Add(tmpDataItem);
+            }
+            ResultWidget rsw = RelateTopic.FindWidget<ResultWidget>();
+            if (rsw == null)
+            {
+                rsw = new ResultWidget {  DataItems = rsDataItems  };
+                RelateTopic.Add(rsw);
+            }
+            else
+            {
+                rsw.DataItems.Clear();
+                rsw.DataItems.AddRange(rsDataItems);
+            }
+
+            //ResultWidget rsw = new ResultWidget();
+            //RelateTopic.Add(rsw);
         }
 
         //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档
