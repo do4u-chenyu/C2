@@ -38,12 +38,23 @@ namespace C2.Controls.MapViews
 
             if (PasteObjects != null)
             {
-                foreach (Topic topic in PasteObjects)
+                foreach (var obj in PasteObjects)
                 {
-                    if (topic.ParentTopic != null)
+                    //撤回的时候，原先是直接判断为topic，存在bug
+                    if(obj is Topic)
                     {
-                        topic.ParentTopic.Children.Remove(topic);
+                        Topic topic = obj as Topic;
+                        if (topic.ParentTopic != null)
+                        {
+                            topic.ParentTopic.Children.Remove(topic);
+                        }
                     }
+                    else if(obj is Widget)
+                    {
+                        Widget widget = obj as Widget;
+                        (widget.Container as Topic).Remove(widget);
+                    }
+
                 }
 
                 PasteObjects = null;
@@ -146,7 +157,7 @@ namespace C2.Controls.MapViews
                                 t.Links.Remove(line);
                         }
                     }
-                    else if (co is Widget)
+                    else if (co is NoteWidget || co is PictureWidget || co is ProgressBarWidget)
                     {
                         target.Widgets.Add((Widget)co);
                     }

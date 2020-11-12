@@ -396,7 +396,7 @@
 	<item name="AI">AI实践</item>
 	<item name="Model">高级模型</item>
 	<item name="Result">结果</item>
-    <item name="DealData">对数据进行处理</item>
+  <item name="DealData">对数据进行处理</item>
 	<item name="JoinPool">数据加入数据池</item>	
 	<item name="RandomOperator">随机采样</item>	
 	<item name="FilterOperator">过滤算子</item>	

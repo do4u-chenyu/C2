@@ -56,7 +56,7 @@ namespace C2.Dialogs
             List<List<string>> columnValues= Utils.FileUtil.GetColumns(indexs, hitItem, rows, upperLimit);
             if (columnValues.Count == 0)
             {
-                HelpUtil.ShowMessageBox("文件内容为空", "提示信息", MessageBoxIcon.Information);
+                HelpUtil.ShowMessageBox("文件内容为空");
                 Close(); 
                 return;
             }
@@ -89,14 +89,14 @@ namespace C2.Dialogs
                 case 5:
                 case 3:
                 case 1:         
-                    HelpUtil.ShowMessageBox("请设置图表类型", "提示信息", MessageBoxIcon.Information);
+                    HelpUtil.ShowMessageBox("请设置图表类型");
                     break;
                 case 6:
                 case 2:
-                    HelpUtil.ShowMessageBox("请设置输入维度", "提示信息", MessageBoxIcon.Information);
+                    HelpUtil.ShowMessageBox("请设置输入维度");
                     break;
                 case 4:
-                    HelpUtil.ShowMessageBox("请设置输出维度", "提示信息", MessageBoxIcon.Information);
+                    HelpUtil.ShowMessageBox("请设置输出维度");
                     break;
                 default:
                     break;
