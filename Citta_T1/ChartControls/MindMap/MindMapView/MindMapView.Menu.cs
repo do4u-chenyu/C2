@@ -43,7 +43,7 @@ namespace C2.Controls.MapViews
             {
                 case OperatorWidget.TypeID:
                     opw = HoverObject.Widget as OperatorWidget;
-                    if (opw.Status == OpStatus.Null)
+                    if (opw.OpType == OpType.Null)
                         CreateInitOperatorMenu(opw);
                     else
                         CreateOperatorMenu(opw);                        
