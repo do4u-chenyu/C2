@@ -44,7 +44,6 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.MoveButton = new System.Windows.Forms.ToolStripButton();
             this.FrameButton = new System.Windows.Forms.ToolStripButton();
-            this.MoreButton = new System.Windows.Forms.ToolStripButton();
             this.LinePanel = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -68,8 +67,7 @@
             this.ZoomDownButton,
             this.toolStripSeparator4,
             this.MoveButton,
-            this.FrameButton,
-            this.MoreButton});
+            this.FrameButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
@@ -217,18 +215,6 @@
             this.FrameButton.Size = new System.Drawing.Size(24, 25);
             this.FrameButton.Click += new System.EventHandler(this.FrameButton_Click);
             // 
-            // MoreButton
-            // 
-            this.MoreButton.AutoSize = false;
-            this.MoreButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.MoreButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
-            this.MoreButton.Image = ((System.Drawing.Image)(resources.GetObject("MoreButton.Image")));
-            this.MoreButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.MoreButton.Margin = new System.Windows.Forms.Padding(0);
-            this.MoreButton.Name = "MoreButton";
-            this.MoreButton.Size = new System.Drawing.Size(24, 25);
-            this.MoreButton.Click += new System.EventHandler(this.MoreButton_Click);
-            // 
             // LinePanel
             // 
             this.LinePanel.BackColor = System.Drawing.Color.DarkGray;
@@ -259,8 +245,6 @@
 
         #endregion
         private System.Windows.Forms.ToolStripButton FormatButton;
-        //private System.Windows.Forms.Button formatButton;
-        private System.Windows.Forms.ToolStripButton MoreButton;
         private System.Windows.Forms.ToolStripButton UndoButton;
         private System.Windows.Forms.ToolStripButton RedoButton;
         private System.Windows.Forms.ToolStripButton ImportModelButton;
