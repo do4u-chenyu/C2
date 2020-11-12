@@ -476,10 +476,10 @@ namespace C2
             CanvasForm form = new CanvasForm(doc);
             ShowForm(form);
         }
-        public void NewCanvasForm(string modelDocumentName, List<DataItem> dataItems)
+        public void NewCanvasFormByMindMap(string modelDocumentName, List<DataItem> dataItems, Topic topic)
         {
             ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName);
-            CanvasForm form = new CanvasForm(doc);
+            CanvasForm form = new CanvasForm(doc,topic);
             ShowForm(form);
             form.GenMindMapDataSources(dataItems);
         }
