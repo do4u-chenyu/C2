@@ -394,7 +394,7 @@
 	<item name="OpenDesigner">打开设计器</item>
 	<item name="Max">最大值</item>
 	<item name="AI">AI实践</item>
-	<item name="Model">添加模型</item>
+	<item name="Model">添加高级模型</item>
 	<item name="Result">添加结果</item>
     <item name="DealData">对数据进行处理</item>
 	<item name="JoinPool">数据加入数据池</item>	
@@ -409,7 +409,7 @@
 	<item name="CustomOperator">AI实践</item>	
 	<item name="DataFormatOperator">数据标准化</item>	
 	<item name="PythonOperator">Python</item>	
-	<item name="ModelOperator">模型</item>
+	<item name="ModelOperator">高级模型</item>
 	<item name="CHART">图表挂件</item>
 	<item name="DATASOURCE">数据源挂件</item>
 	<item name="OPERATOR">算子挂件</item>

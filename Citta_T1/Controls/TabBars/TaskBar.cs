@@ -17,6 +17,7 @@ namespace C2.Controls
         public TaskBar()
         {
             ShowDropDownButton = true;
+            ShowPreferencesButton = true;
             BaseLineSize = 3;
             ItemPadding = new Padding(10, 0, 10, 0);
         }
