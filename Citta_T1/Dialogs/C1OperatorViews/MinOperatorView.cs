@@ -89,5 +89,10 @@ namespace C2.OperatorViews
             this.comboBox0.Items.AddRange(nowColumnsName0);          
         }
         #endregion
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

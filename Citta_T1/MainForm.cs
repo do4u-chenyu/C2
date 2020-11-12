@@ -20,6 +20,7 @@ using C2.Configuration;
 using C2.Dialogs;
 using C2.Forms;
 using C2.Model;
+using C2.Model.Widgets;
 #endregion
 
 namespace C2
@@ -476,11 +477,16 @@ namespace C2
             CanvasForm form = new CanvasForm(doc);
             ShowForm(form);
         }
-        public void NewCanvasFormByMindMap(string modelDocumentName, List<DataItem> dataItems, Topic topic)
+        public void NewCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
-            ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName);
+            ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName, mindMapName);
             CanvasForm form = new CanvasForm(doc,topic);
             ShowForm(form);
+
+            List<DataItem> dataItems = new List<DataItem>();
+            DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
+            if (dtw != null)
+                dataItems = dtw.DataItems;
             form.GenMindMapDataSources(dataItems);
         }
         private void NewStartForm()

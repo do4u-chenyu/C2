@@ -169,11 +169,7 @@ namespace C2.Controls.Common
             }
             if (SelectedOperator == Lang._(OpType.ModelOperator.ToString()))
             {
-                List<DataItem> dataItems = new List<DataItem>();
-                DataSourceWidget dtw = SelectedTopic.FindWidget<DataSourceWidget>();
-                if (dtw != null)
-                    dataItems = dtw.DataItems;
-                Global.GetMainForm().NewCanvasFormByMindMap(string.Format("{0}-模型视图", SelectedTopic.Text), dataItems, SelectedTopic);
+                Global.GetMainForm().NewCanvasFormByMindMap(string.Format("{0}-模型视图", SelectedTopic.Text), Global.GetCurrentDocument().Name, SelectedTopic);
                 return;
             }
 
