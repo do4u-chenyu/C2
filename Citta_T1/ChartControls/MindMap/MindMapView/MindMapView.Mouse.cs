@@ -656,7 +656,6 @@ namespace C2.Controls.MapViews
                 ShowC2BaseWidgetTip(HoverObject.Topic, chartObject as C2BaseWidget); // 显示C2的挂件信息,图标挂件回头再加
             else
                 ChartTip.Global.Show(this, chartObject);
-
         }
 
         private void ShowC2BaseWidgetTip(Topic topic, C2BaseWidget widget)

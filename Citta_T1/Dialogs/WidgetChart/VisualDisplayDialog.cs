@@ -70,6 +70,7 @@ namespace C2.Dialogs
             // 存储图表挂件需要的数据
             hitItem.ChartType = this.chartTypesList.Text;
             hitItem.SelectedIndexs = indexs;
+            hitItem.SelectedItems = yNames;
             this.DialogResult = DialogResult.OK;
             Close();
         }      
