@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -126,7 +127,17 @@ namespace C2.Controls.MapViews
             AddWidgetCommand command = new AddWidgetCommand(topics, OperatorWidget.TypeID, template);
             ExecuteCommand(command);
         }
-
+        public void AddModelOp()
+        {
+            if (SelectedTopics != null && SelectedTopics.Length > 0)
+            {
+                List<DataItem> dataItems = new List<DataItem>();
+                DataSourceWidget dtw = SelectedTopics[0].FindWidget<DataSourceWidget>();
+                if (dtw != null)
+                    dataItems = dtw.DataItems;
+                Global.GetMainForm().NewCanvasForm(string.Format("{0}-模型视图",SelectedTopics[0].Text), dataItems);
+            }
+        }
         public void AddAttachment()
         {          
             if (SelectedTopics != null && SelectedTopics.Length > 0)

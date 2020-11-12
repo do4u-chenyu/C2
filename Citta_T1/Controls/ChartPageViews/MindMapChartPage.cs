@@ -675,8 +675,6 @@ namespace C2.ChartPageView
 
         void MenuAddOperator_Click(object sender, EventArgs e)
         {
-            //TODO
-            //弹出设计器
             ShowDesignerObject = mindMapView1.SelectedTopic;
             mindMapView1.AddOperator();
         }
@@ -700,7 +698,7 @@ namespace C2.ChartPageView
         {
             //TODO
             //跳到C1模型,待做  新建模型的名称、是否主动添加当前节点数据到模型中
-            Global.GetMainForm().NewForm(FormType.CanvasForm);
+            mindMapView1.AddModelOp();
         }
 
 
