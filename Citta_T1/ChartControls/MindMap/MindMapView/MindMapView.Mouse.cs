@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -28,10 +28,14 @@ namespace C2.Controls.MapViews
         Cursor ScrollCursor;
         MindMapViewDragBox DragBox;
         Point LastMousePos = Point.Empty;
+        private ToolTip widgetTip;
         //ChartToolTip LastToolTip = null;
 
         void InitializeMouse()
         {
+           
+            widgetTip = new ToolTip();
+
             try
             {
                 StyleBrushCursor = Helper.LoadCursor(Properties.Resources.cur_style_brush);
@@ -67,7 +71,7 @@ namespace C2.Controls.MapViews
         {
             if (ShowToolTips)
             { 
-                this.toolTip1.ShowAlways = false; 
+                this.widgetTip.ShowAlways = false; 
             }
         }
         internal HitTestResult PressObject
@@ -107,8 +111,23 @@ namespace C2.Controls.MapViews
                 {
                     if ((HoverObject.Topic != null) && !HoverObject.IsFoldingButton)
                     {
-                        ShowToolTip(HoverObject);
-                       
+                        if (HoverObject.Widget != null)
+                        {
+                            ShowToolTip(HoverObject.Widget);
+                            //if (HoverObject.Widget is IColorToolTip)
+                            //    ShowToolTip((IColorToolTip)HoverObject.Widget);
+                            //else
+                            //    HideToolTip();
+                            //if (HoverObject.Widget is NotesWidget)
+                            //    ShowToolTip(HoverObject.Widget.Tooltip, HoverObject.Widget.Hyperlink, ((NotesWidget)HoverObject.Widget).BackColor, true);
+                            //else
+                            //    ShowToolTip(HoverObject.Widget.Tooltip, HoverObject.Widget.Hyperlink, Color.Empty, true);
+                        }
+                        else
+                        {
+                            ShowToolTip(HoverObject.Topic);//.Tooltip, HoverObject.Topic.Hyperlink, Color.Empty, false);// .Notes);
+                        }
+
                     }
                     else
                     {
@@ -643,28 +662,22 @@ namespace C2.Controls.MapViews
         //        , tootipObject.ToolTipHyperlinks
         //        , tootipObject.ToolTipShowAlway);
         //}
-        private ToolTip toolTip1=new ToolTip();
-        private void ShowToolTip(HitTestResult HoverObject)
+       
+        private void ShowToolTip(ChartObject chartObject)
         {
-            
-            if (HoverObject.Widget == null)
-                return;
-            Point pointPoint = HoverObject.Topic.Location;
-            Widget chartObject = HoverObject.Widget;
-            if (chartObject is NoteWidget)
-                ChartTip.Global.Show(this, chartObject);
-            else 
+            if (chartObject is Widget && !(chartObject is NoteWidget))
             {
-              
-                toolTip1.AutoPopDelay = 1000;
-                toolTip1.InitialDelay = 2000;
-                toolTip1.ReshowDelay = 1000;
-                toolTip1.ShowAlways = true;
-   
-                Point tipLocation = PointToReal(pointPoint);               
-                toolTip1.Show(Lang._(chartObject.GetTypeID()), Global.GetDocumentForm(), tipLocation);
+                Point tipPoint = HoverObject.Topic.Location;
+                tipPoint.X += chartObject.Left;
+                tipPoint.Y = HoverObject.Topic.Bottom + HoverObject.Topic.Height/2;
+                Widget widget = HoverObject.Widget;
+                widgetTip.ShowAlways = true;
+                Point tipLocation = PointToReal(tipPoint);
+                widgetTip.Show(Lang._(widget.GetTypeID()), Global.GetDocumentForm(), tipLocation);
+                return;
             }
-                
+
+            ChartTip.Global.Show(this, chartObject);
 
         }
 
