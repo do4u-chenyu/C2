@@ -10,6 +10,7 @@ using C2.Controls.Move.Rs;
 using C2.Core;
 using C2.Core.UndoRedo;
 using C2.Core.UndoRedo.Command;
+using C2.Model;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -774,7 +775,42 @@ namespace C2.Controls
             
             AddNewElement(btn);
         }
-        public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+
+        public void AddMindMapDataSource(List<DataItem> dataItems)
+        {
+            if (dataItems == null)
+                return;
+
+            int diX = 10;
+            int diY = 10;
+            int marginX = 200;
+            int marginY = 40;
+            int sizeLevel = Global.GetCurrentModelDocument().WorldMap.SizeLevel;
+            float screenFactor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
+
+            foreach (DataItem di in dataItems)
+            {
+                string text = di.FileName;
+                string path = di.FilePath;
+                char separator = di.FileSep;
+                OpUtil.Encoding encoding = di.FileEncoding;
+                OpUtil.ExtType extType = di.FileType;
+                Point location = new Point(Convert.ToInt32(diX / screenFactor), Convert.ToInt32(diY / screenFactor));
+                //转世界坐标，目前看起来没有用，有显示错误之后再调整
+                //PointF locationWorld = Global.GetCurrentModelDocument().WorldMap.ScreenToWorldF(location, false);
+                if (diY + marginY > 930)
+                {
+                    diX += marginX;
+                    diY = 10;
+                }
+                else
+                    diY += marginY;
+
+                AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
+
+            }
+        }
+            public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,

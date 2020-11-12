@@ -476,6 +476,13 @@ namespace C2
             CanvasForm form = new CanvasForm(doc);
             ShowForm(form);
         }
+        public void NewCanvasForm(string modelDocumentName, List<DataItem> dataItems)
+        {
+            ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName);
+            CanvasForm form = new CanvasForm(doc);
+            ShowForm(form);
+            form.GenMindMapDataSources(dataItems);
+        }
         private void NewStartForm()
         {
             StartForm form = new StartForm();

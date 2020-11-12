@@ -37,7 +37,7 @@ namespace C2.Controls
             PreferencesButton = new TabBarButton();
             PreferencesButton.Icon = Properties.Resources.preferences_16;
             PreferencesButton.Visible = true;
-            PreferencesButton.Click += new EventHandler(MoreButton_Click);
+            PreferencesButton.Click += new EventHandler(PreferencesButton_Click);
             PreferencesButton.ToolTipText = HelpUtil.moreButtonHelpInfo;
 
             RightButtons.Add(DropDownButton);
@@ -250,7 +250,7 @@ namespace C2.Controls
         {
             DropDownMenu();
         }
-        void MoreButton_Click(object sender, EventArgs e)
+        void PreferencesButton_Click(object sender, EventArgs e)
         {
             new ConfigForm().ShowDialog();
         }

@@ -11,8 +11,10 @@ using C2.Controls.Top;
 using C2.Core;
 using C2.Core.UndoRedo;
 using C2.Core.UndoRedo.Command;
+using C2.Model;
 using C2.Utils;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -568,6 +570,11 @@ namespace C2.Forms
             ModelElement e = ModelElement.CreateModelElement(ct);
             Document.AddModelElement(e);
             return e;
+        }
+
+        public void GenMindMapDataSources(List<DataItem> dataItems)
+        {
+            this.canvasPanel.AddMindMapDataSource(dataItems);
         }
     }
 }
