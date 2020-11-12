@@ -145,7 +145,7 @@ namespace C2.Controls.MapViews
                 OpenFileDialog fd = new OpenFileDialog
                 {
                     Filter = "文件|*.docx;*.xlsx;*.doc;*.xls;*.pdf;*.txt;*.bcp;*.xmind",
-                    Title = Lang._("Attachment")
+                    Title = Lang._("AddAttachment")
                 };
 
                 if (fd.ShowDialog() == DialogResult.OK)
