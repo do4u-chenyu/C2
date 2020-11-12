@@ -35,6 +35,7 @@ namespace C2.Utils
  
           
         /// <summary>
+        /// 默认为Information,除非有非常严重的错误,否则一般尽量用温和的提示信息.
         /// MessageBoxIcon.Hand 
         /// MessageBoxIcon.Asterisk      星号
         /// MessageBoxIcon.Exclamation
@@ -45,7 +46,7 @@ namespace C2.Utils
         /// MessageBoxIcon.Stop         
         /// MessageBoxIcon.None          无图标
         /// </summary>
-        public static DialogResult ShowMessageBox(string message, string caption, MessageBoxIcon type = MessageBoxIcon.Information)
+        public static DialogResult ShowMessageBox(string message, string caption = "提示信息", MessageBoxIcon type = MessageBoxIcon.Information)
         {
             return MessageBox.Show(message, caption, MessageBoxButtons.OK, type);
         }
