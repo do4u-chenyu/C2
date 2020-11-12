@@ -28,12 +28,18 @@ namespace C2.Utils
         public static string ImportModelHelpInfo = "导入模型";
         public static string RemarkPictureBoxHelpInfo = "编写备注信息";
         public static string ZoomUpPictureBoxHelpInfo = "放大屏幕,支持三级缩放";
-        public static string zoomDownPictureBoxHelpInfo = "缩小屏幕,支持三级缩放";
+        public static string ZoomDownPictureBoxHelpInfo = "缩小屏幕,支持三级缩放";
         public static string MovePictureBoxHelpInfo = "拖动当前视野框";
         public static string FramePictureBoxHelpInfo = "框选屏幕中算子进行整体拖动";
-        public static string moreButtonHelpInfo = "首选项:配置程序的各项参数";
- 
-          
+        public static string MoreButtonHelpInfo = "首选项:配置程序的各项参数";
+
+        public static string AttachmentWidgetHelpInfo = "附件:支持添加多个附件,支持多种类型文档";
+        public static string ChartWidgetHelpInfo = "图表:柱状图,折线图,饼图,环形图,雷达图等";
+        public static string OperatorWidgetHelpInfo = "算子:内置多种算子,支持Python脚本和自主建模";
+        public static string ResultWidgetHelpInfo = "运算结果:支持预览,支付复用";
+        public static string DataSourceWidgetHelpInfo = "数据源:支持添加多个数据源,支持多种类型文档";
+
+
         /// <summary>
         /// 默认为Information,除非有非常严重的错误,否则一般尽量用温和的提示信息.
         /// MessageBoxIcon.Hand 

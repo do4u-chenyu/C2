@@ -208,7 +208,7 @@ namespace C2.Controls.MapViews
         {
             if (Global.GetCurrentDocument().Modified)
             {
-                HelpUtil.ShowMessageBox("业务视图未保存，请保存后再运行。", "未保存", MessageBoxIcon.Information);
+                HelpUtil.ShowMessageBox("业务视图未保存，请保存后再运行。", "未保存");
                 return;
             }
 

@@ -39,7 +39,7 @@ namespace C2.Controls
             PreferencesButton.Icon = Properties.Resources.preferences_16;
             PreferencesButton.Visible = ShowPreferencesButton;
             PreferencesButton.Click += new EventHandler(PreferencesButton_Click);
-            PreferencesButton.ToolTipText = HelpUtil.moreButtonHelpInfo;
+            PreferencesButton.ToolTipText = HelpUtil.MoreButtonHelpInfo;
 
             RightButtons.Add(DropDownButton);
             RightButtons.Add(PreferencesButton);

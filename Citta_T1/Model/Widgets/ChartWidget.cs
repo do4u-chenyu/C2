@@ -8,6 +8,8 @@ namespace C2.Model.Widgets
     class ChartWidget : C2BaseWidget
     {
         public const string TypeID = "CHART";
+
+        public override string Description => HelpUtil.ChartWidgetHelpInfo;
         public ChartWidget()
         {
             DisplayIndex = 3;
