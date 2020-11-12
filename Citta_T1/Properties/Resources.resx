@@ -2214,4 +2214,25 @@
   <data name="提示" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\提示1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bcpData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\bcpData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="datadirectory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\datadirectory.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="docData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\docData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opendata" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opendata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pdfData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\pdfData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="txtData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\txtData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xlsData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\xlsData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

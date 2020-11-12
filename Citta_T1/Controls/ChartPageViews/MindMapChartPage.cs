@@ -682,16 +682,7 @@ namespace C2.ChartPageView
         }
         void MenuAddAttachment_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog
-            {
-                Filter = "文件|*.docx;*.xlsx;*.doc;*.xls;*.pdf;*.txt;*.bcp;*.xmind",
-                Title = Lang._("Attachment")
-        };
-            if (fd.ShowDialog() == DialogResult.OK)
-            {
-                //this.rsFullFilePathTextBox.Text = fd.FileName;
-            }
-
+           
             mindMapView1.AddAttachment();
         }
 

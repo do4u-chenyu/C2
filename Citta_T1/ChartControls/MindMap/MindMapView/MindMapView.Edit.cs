@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -128,12 +129,39 @@ namespace C2.Controls.MapViews
         }
 
         public void AddAttachment()
-        {          
+        {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
-                var template = new AttachmentWidget();
-                AddWidget(AttachmentWidget.TypeID, template, false);
-                //ShowDesigner(SelectedTopics[0],false);
+                OpenFileDialog fd = new OpenFileDialog
+                {
+                    Filter = "files|*.txt;*.bcp;*.pdf;*.doc;*.docx;*.xls;*.xlsx",
+                    Title = "添加附件"
+                };
+
+                if (fd.ShowDialog() == DialogResult.OK)
+                {
+                    Topic hitTopic = SelectedTopics[0];
+
+                    AttachmentWidget atw = hitTopic.FindWidget<AttachmentWidget>();
+                    if (atw == null)
+                    {
+                        var template = new AttachmentWidget();
+                        template.FullFilePaths = new List<string>() { fd.FileName };
+                        AddWidget(AttachmentWidget.TypeID, template, false);
+                        ShowDesigner(hitTopic, false);
+                        return;
+                    }
+                    if (atw.FullFilePaths.Find(x => x.Equals(fd.FileName)) == null)
+                    {
+                        atw.FullFilePaths.Add(fd.FileName);
+                        ShowDesigner(atw.Container, false);
+                    }
+                    else
+                        MessageBox.Show(String.Format("数据源{0}已存在,可以删除后重新导入.", fd.FileName),
+                            "数据源已存在",                // 标题
+                            MessageBoxButtons.OK,          // 按钮样式
+                            MessageBoxIcon.Information);   // 图标样式
+                }
             }
         }
 
