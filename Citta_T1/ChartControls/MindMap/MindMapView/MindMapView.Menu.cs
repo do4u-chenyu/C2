@@ -560,8 +560,9 @@ namespace C2.Controls.MapViews
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
-            //string path = atw.FullFilePaths;
-            //FileUtil.ExploreDirectory(path);
+            string directory = (sender as ToolStripMenuItem).Tag as string;
+            if (directory != null)
+                FileUtil.ExploreDirectory(directory);
         }
 
 
