@@ -568,7 +568,10 @@ namespace C2.Controls.MapViews
 
         void AttachmentMenuDelete_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            string directory = (sender as ToolStripMenuItem).Tag as string;
+            atw.FullFilePaths.Remove(directory);           
+            if (atw.FullFilePaths.IsEmpty())
+                Delete(new ChartObject[] { atw });
         }
         #endregion
     }
