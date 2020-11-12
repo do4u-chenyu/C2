@@ -43,7 +43,7 @@ namespace C2.Controls.MapViews
             {
                 case OperatorWidget.TypeID:
                     opw = HoverObject.Widget as OperatorWidget;
-                    if (opw.Status == OpStatus.Null)
+                    if (opw.OpType == OpType.Null)
                         CreateInitOperatorMenu(opw);
                     else
                         CreateOperatorMenu(opw);                        
@@ -421,7 +421,7 @@ namespace C2.Controls.MapViews
             List<List<string>> columnValues = Utils.FileUtil.GetColumns(hitItem.SelectedIndexs, hitItem, rows, upperLimit);
             if (columnValues.Count == 0)
                 return;
-            Utils.ControlUtil.PaintChart(columnValues, new List<string>() { hitItem.FileName, hitItem.FileName }, hitItem.ChartType);
+            Utils.ControlUtil.PaintChart(columnValues, hitItem.SelectedItems, hitItem.ChartType);
         }
         void UpdateChartWidgetMenu(ChartWidget widget, DataItem hitItem)
         {
@@ -553,19 +553,35 @@ namespace C2.Controls.MapViews
             }
         }
 
-        private void AttachmentMenuDelete_Click(object sender, EventArgs e)
+        void MenuOpenData_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
-        }
-
-        private void MenuOpenData_Click(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
+            string directory = (sender as ToolStripMenuItem).Tag as string;
+            try
+            {
+                Process.Start(directory);
+            }
+            catch {
+                MessageBox.Show("该类型文件无法打开.",
+                    "打开错误",                // 标题
+                    MessageBoxButtons.OK,          // 按钮样式
+                    MessageBoxIcon.Information);   // 图标样式
+            }
         }
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
-            //FileUtil.ExploreDirectory(FullFilePath);
+            string directory = (sender as ToolStripMenuItem).Tag as string;
+            if (directory != null)
+                FileUtil.ExploreDirectory(directory);
+        }
+
+
+        void AttachmentMenuDelete_Click(object sender, EventArgs e)
+        {
+            string directory = (sender as ToolStripMenuItem).Tag as string;
+            atw.FullFilePaths.Remove(directory);           
+            if (atw.FullFilePaths.IsEmpty())
+                Delete(new ChartObject[] { atw });
         }
         #endregion
     }

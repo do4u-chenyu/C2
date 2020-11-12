@@ -1,16 +1,14 @@
-﻿using System;
+using C2.Configuration;
+using C2.Core;
+using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Styles;
+using C2.Model.Widgets;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using C2.Core;
-using C2.Core.Exports;
-using C2.Model;
-using C2.Model.Widgets;
-using C2.Controls.Charts;
-using C2.Configuration;
-using C2.Model.MindMaps;
-using C2.Model.Styles;
 
 namespace C2.Controls.MapViews
 {
@@ -38,6 +36,7 @@ namespace C2.Controls.MapViews
             Layers.Add(ToolTipLayer);
 
             ResetChartStyle();
+            
 
             InitializeMouse();
             InitializeKeyBoard();

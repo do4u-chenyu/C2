@@ -36,6 +36,6 @@ namespace C2.Model
         public OpUtil.ExtType FileType { get => fileType; set => fileType = value; }
         public string ChartType { get; set; }
         public List<int> SelectedIndexs { get; set; }
-
+        public List<string> SelectedItems { get; set; }
     }
 }

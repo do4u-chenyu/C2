@@ -1877,6 +1877,7 @@
     <None Include="Resources\Images\preferences_24.png" />
     <None Include="Resources\Images\preview.png" />
     <None Include="Resources\Images\previous.png" />
+    <None Include="Resources\Images\preferences_16.png" />
     <Content Include="Resources\Images\print.png" />
     <None Include="Resources\Images\print_pages.png" />
     <None Include="Resources\Images\print_single_page.png" />
@@ -1960,13 +1961,6 @@
     <None Include="Resources\Images\WidgetImage\opSetSuccess.png" />
     <None Include="Resources\Images\WidgetImage\opSet.png" />
     <None Include="Resources\Images\WidgetImage\opWarn.png" />
-    <None Include="Resources\Images\WidgetImage\bcpData.png" />
-    <None Include="Resources\Images\WidgetImage\datadirectory.png" />
-    <None Include="Resources\Images\WidgetImage\docData.png" />
-    <None Include="Resources\Images\WidgetImage\opendata.png" />
-    <None Include="Resources\Images\WidgetImage\pdfData.png" />
-    <None Include="Resources\Images\WidgetImage\txtData.png" />
-    <None Include="Resources\Images\WidgetImage\xlsData.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

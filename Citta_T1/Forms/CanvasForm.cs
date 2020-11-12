@@ -12,6 +12,8 @@ using C2.Core;
 using C2.Core.UndoRedo;
 using C2.Core.UndoRedo.Command;
 using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -75,6 +77,12 @@ namespace C2.Forms
         {
             Document = document;
         }
+        public CanvasForm(ModelDocument document,Topic topic) : this()
+        {
+            Document = document;
+            RelateTopic = topic; 
+        }
+        public Topic RelateTopic { set; get; }
 
         public TopToolBarControl TopToolBarControl { get { return this.topToolBarControl; } }
         public new ModelDocument Document
@@ -143,9 +151,16 @@ namespace C2.Forms
                 Text = string.Empty;
             }
         }
+
+        public void SaveDocAndTopic()
+        {
+            Save();
+            UpdateTopicResults();
+        }
+
         private void CanvasForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Document.Save();
+            SaveDocAndTopic();
         }
 
         private void CanvasForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -164,7 +179,7 @@ namespace C2.Forms
                 // 保存文件
                 if (result == DialogResult.Yes)
                 {
-                    Document.Save();
+                    SaveDocAndTopic();
                     return;
                 }
                 // 不保存关闭文件
@@ -423,11 +438,50 @@ namespace C2.Forms
         //完成任务时需要调用
         private void Accomplish(TaskManager manager)
         {
-            Document.Save();
+            Save();
             this.Invoke(new TaskCallBack(delegate ()
             {
                 UpdateRunbuttonImageInfo();
+                UpdateTopicResults();
             }));
+        }
+
+        public void UpdateTopicResults()
+        {
+            if (RelateTopic == null)
+                return;
+            OperatorWidget opw = RelateTopic.FindWidget<OperatorWidget>();
+            if(opw != null)
+                RelateTopic.Remove(opw);
+            RelateTopic.Add(new OperatorWidget { OpType = OpType.ModelOperator, OpName = document.Name });
+
+            List<int> starNodes = new List<int>();
+            List<int> endNodes = new List<int>();
+            document.ModelRelations.ForEach(mr => { starNodes.Add(mr.StartID); endNodes.Add(mr.EndID); });
+            List<ModelElement> rsElements = document.ModelElements.FindAll(me => me.Type == ElementType.Result&&me.Status == ElementStatus.Done).FindAll(me => endNodes.Contains(me.ID)&&!starNodes.Contains(me.ID));
+            List<DataItem> rsDataItems = new List<DataItem>();
+            foreach(ModelElement rsElement in rsElements)
+            {
+                DataItem tmpDataItem = new DataItem(rsElement.FullFilePath,rsElement.Description,rsElement.Separator,rsElement.Encoding,rsElement.ExtType);
+                rsDataItems.Add(tmpDataItem);
+            }
+            if (rsDataItems.Count == 0)
+                return;
+
+            ResultWidget rsw = RelateTopic.FindWidget<ResultWidget>();
+            if (rsw == null)
+            {
+                rsw = new ResultWidget {  DataItems = rsDataItems  };
+                RelateTopic.Add(rsw);
+            }
+            else
+            {
+                rsw.DataItems.Clear();
+                rsw.DataItems.AddRange(rsDataItems);
+            }
+
+            //ResultWidget rsw = new ResultWidget();
+            //RelateTopic.Add(rsw);
         }
 
         //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -28,6 +28,7 @@ namespace C2.Controls.MapViews
         Cursor ScrollCursor;
         MindMapViewDragBox DragBox;
         Point LastMousePos = Point.Empty;
+        ToolTip C2WidgetTip = new ToolTip();
         //ChartToolTip LastToolTip = null;
 
         void InitializeMouse()
@@ -58,16 +59,6 @@ namespace C2.Controls.MapViews
                     _HoverObject = value;
                     OnHoverObjectChanged(old);
                 }
-                if (value.Widget == null)
-                    OnLeaveWidget();
-
-            }
-        }
-        void OnLeaveWidget()
-        {
-            if (ShowToolTips)
-            { 
-                this.toolTip1.ShowAlways = false; 
             }
         }
         internal HitTestResult PressObject
@@ -107,8 +98,23 @@ namespace C2.Controls.MapViews
                 {
                     if ((HoverObject.Topic != null) && !HoverObject.IsFoldingButton)
                     {
-                        ShowToolTip(HoverObject);
-                       
+                        if (HoverObject.Widget != null)
+                        {
+                            ShowToolTip(HoverObject.Widget);
+                            //if (HoverObject.Widget is IColorToolTip)
+                            //    ShowToolTip((IColorToolTip)HoverObject.Widget);
+                            //else
+                            //    HideToolTip();
+                            //if (HoverObject.Widget is NotesWidget)
+                            //    ShowToolTip(HoverObject.Widget.Tooltip, HoverObject.Widget.Hyperlink, ((NotesWidget)HoverObject.Widget).BackColor, true);
+                            //else
+                            //    ShowToolTip(HoverObject.Widget.Tooltip, HoverObject.Widget.Hyperlink, Color.Empty, true);
+                        }
+                        else
+                        {
+                            ShowToolTip(HoverObject.Topic);//.Tooltip, HoverObject.Topic.Hyperlink, Color.Empty, false);// .Notes);
+                        }
+
                     }
                     else
                     {
@@ -643,29 +649,20 @@ namespace C2.Controls.MapViews
         //        , tootipObject.ToolTipHyperlinks
         //        , tootipObject.ToolTipShowAlway);
         //}
-        private ToolTip toolTip1=new ToolTip();
-        private void ShowToolTip(HitTestResult HoverObject)
+       
+        private void ShowToolTip(ChartObject chartObject)
         {
-            
-            if (HoverObject.Widget == null)
-                return;
-            Point pointPoint = HoverObject.Topic.Location;
-            Widget chartObject = HoverObject.Widget;
-            if (chartObject is NoteWidget)
+            if (chartObject is C2BaseWidget)
+                ShowC2BaseWidgetTip(HoverObject.Topic, chartObject as C2BaseWidget); // 显示C2的挂件信息,图标挂件回头再加
+            else
                 ChartTip.Global.Show(this, chartObject);
-            else 
-            {
-              
-                toolTip1.AutoPopDelay = 1000;
-                toolTip1.InitialDelay = 2000;
-                toolTip1.ReshowDelay = 1000;
-                toolTip1.ShowAlways = true;
-   
-                Point tipLocation = PointToReal(pointPoint);               
-                toolTip1.Show(Lang._(chartObject.GetTypeID()), Global.GetDocumentForm(), tipLocation);
-            }
-                
+        }
 
+        private void ShowC2BaseWidgetTip(Topic topic, C2BaseWidget widget)
+        {
+            Point tipLoc = topic.Location;    // 确定提示框位置
+            tipLoc.Offset(widget.Location);
+            C2WidgetTip.Show(Lang._(widget.GetTypeID()), Global.GetDocumentForm(), PointToReal(tipLoc), 1750);
         }
 
         public void ShowToolTip(string text, string hyperlink, bool alwayVisible)
@@ -707,8 +704,6 @@ namespace C2.Controls.MapViews
             //if (LastToolTip != null)
             //    LastToolTip.Hide(true);
             ChartTip.Global.Hide();
- 
-           
         }
 
         void _ResetCursor()
