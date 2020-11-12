@@ -10,7 +10,7 @@ namespace C2.Model.Widgets
         public List<string> FullFilePaths { get; set; }
         public AttachmentWidget()
         {
-            DisplayIndex = 6;
+            DisplayIndex = 4;
             Alignment = WidgetAlignment.Right;//默认位置改成右侧,让图标挂件和主题文字紧挨着
             widgetIcon = Properties.Resources.attachment_w_icon;
 

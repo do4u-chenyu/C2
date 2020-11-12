@@ -21,7 +21,7 @@ namespace C2.Model.Widgets
         //bool _ResponseMouse;
         int? _CustomWidth;
         int? _CustomHeight;
-        WidgetAlignment _Alignment = WidgetAlignment.Left;
+        WidgetAlignment _Alignment = WidgetAlignment.Right;
         int _DisplayIndex;
         int _Padding;
 
