@@ -147,6 +147,8 @@ namespace C2.Controls.MapViews
                     {
                         var t = (Topic)co;
                         target.Children.Add(t);
+                        List<Widget> widgets = new List<Widget>();
+                        t.Widgets.RemoveAll(w => w is DataSourceWidget || w is OperatorWidget || w is ResultWidget || w is AttachmentWidget);
 
                         for (int j = t.Links.Count - 1; j >= 0; j--)
                         {

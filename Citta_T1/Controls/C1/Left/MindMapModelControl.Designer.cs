@@ -35,11 +35,12 @@
             // 
             // ItemLabel
             // 
+            this.ItemLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ItemLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ItemLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ItemLabel.Location = new System.Drawing.Point(41, -2);
+            this.ItemLabel.Location = new System.Drawing.Point(0, 0);
             this.ItemLabel.Name = "ItemLabel";
-            this.ItemLabel.Size = new System.Drawing.Size(106, 51);
+            this.ItemLabel.Size = new System.Drawing.Size(187, 51);
             this.ItemLabel.TabIndex = 0;
             this.ItemLabel.Text = "我的业务视图";
             this.ItemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -47,7 +48,8 @@
             // Itempanel
             // 
             this.Itempanel.Controls.Add(this.ItemLabel);
-            this.Itempanel.Location = new System.Drawing.Point(0, 3);
+            this.Itempanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Itempanel.Location = new System.Drawing.Point(0, 0);
             this.Itempanel.Name = "Itempanel";
             this.Itempanel.Size = new System.Drawing.Size(187, 51);
             this.Itempanel.TabIndex = 1;
