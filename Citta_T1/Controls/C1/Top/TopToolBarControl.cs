@@ -190,7 +190,8 @@ namespace C2.Controls.Top
 
         private void SaveModelButton_Click(object sender, EventArgs e)
         {
-            Global.GetCurrentModelDocument().Save();
+            Global.GetCanvasForm().SaveDocAndTopic();
+            //Global.GetCurrentModelDocument().Save();
         }
 
         private void FormatButton_Click(object sender, EventArgs e)
