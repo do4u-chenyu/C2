@@ -76,7 +76,9 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
+                this.Cursor = Cursors.WaitCursor;
                 var dialog = new AddIconDialog();
+                this.Cursor = Cursors.Default;
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
                     var template = new PictureWidget();
@@ -253,7 +255,7 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopic != null)
             {
-                return AddSubTopic(SelectedTopic, null, false);
+                return AddSubTopic(SelectedTopic, null, true);
             }
             else
             {

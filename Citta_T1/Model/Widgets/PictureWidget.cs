@@ -46,7 +46,7 @@ namespace C2.Model.Widgets
 
         public PictureWidget()
         {
-            DisplayIndex = 5;
+            DisplayIndex = 6;
             _SizeType = PictureSizeType.Customize;
             Alignment = WidgetAlignment.Left;
         }
