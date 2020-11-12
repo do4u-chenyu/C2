@@ -40,7 +40,10 @@ namespace C2.Business.Model
         public WorldMap WorldMap { get; }
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
-
+        public ModelDocument(string modelTitle, string userName,string mindMapName) : this(modelTitle, userName)
+        {
+            this.SavePath = Path.Combine(this.UserPath, "业务视图", mindMapName, modelTitle);
+        }
 
         public ModelDocument(string modelTitle, string userName)
         {

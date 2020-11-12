@@ -131,11 +131,17 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
-                List<DataItem> dataItems = new List<DataItem>();
-                DataSourceWidget dtw = SelectedTopics[0].FindWidget<DataSourceWidget>();
-                if (dtw != null)
-                    dataItems = dtw.DataItems;
-                Global.GetMainForm().NewCanvasFormByMindMap(string.Format("{0}-模型视图",SelectedTopics[0].Text), dataItems,SelectedTopics[0]);
+                Topic topic = SelectedTopics[0];
+                //TODO
+                //这里后期考虑弹窗设置名字
+                string modelDocumentName = string.Format("{0}-模型视图", topic.Text);
+
+                OperatorWidget opw = topic.FindWidget<OperatorWidget>();
+                if (opw != null)
+                    topic.Remove(opw);
+                topic.Add(new OperatorWidget { OpType = OpType.ModelOperator, OpName = modelDocumentName });
+                
+                Global.GetMainForm().NewCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
             }
         }
           public void AddAttachment()
