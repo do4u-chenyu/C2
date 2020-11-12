@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -13,7 +8,6 @@ namespace C2.Controls.DataCharts
 {
     public partial class LineChart : UserControl
     {
-        private string title;
         public System.Windows.Forms.DataVisualization.Charting.Chart GetChart { get => this.chart1; }
         public LineChart(List<List<string>> dataList, List<string> title)
         {

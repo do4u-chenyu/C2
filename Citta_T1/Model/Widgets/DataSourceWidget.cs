@@ -8,6 +8,7 @@ namespace C2.Model.Widgets
     public class DataSourceWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "DATASOURCE";
+        public override string Description => HelpUtil.DataSourceWidgetHelpInfo;
         public DataSourceWidget()
         {
             DisplayIndex = 0;

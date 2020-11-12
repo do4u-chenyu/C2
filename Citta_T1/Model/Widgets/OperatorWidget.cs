@@ -1,5 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Business.Option;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +35,7 @@ namespace C2.Model.Widgets
     public class OperatorWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "OPERATOR";
-
+        public override string Description => HelpUtil.OperatorWidgetHelpInfo;
         public OperatorWidget()
         {
             DisplayIndex = 1;

@@ -7,7 +7,7 @@ namespace C2.Model.Widgets
     class ResultWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "RESULT";
-        
+        public override string Description => HelpUtil.ResultWidgetHelpInfo;
         public ResultWidget()
         {
             DisplayIndex = 2;
