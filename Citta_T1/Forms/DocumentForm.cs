@@ -1011,6 +1011,7 @@ namespace C2.Forms
 
             //
             objectTree1.SelectedObjects = objects;
+            objectTree2.SelectedObjects = objects;
         }
 
         PropertyBox GetPropertyBox(Type type)
