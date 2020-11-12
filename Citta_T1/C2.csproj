@@ -2406,6 +2406,10 @@
     <Content Include="Resources\thanks.xml">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Resources\Templates\思维导图.bmd" />
+    <None Include="Resources\Templates\树状图.bmd" />
+    <None Include="Resources\Templates\组织架构图.bmd" />
+    <None Include="Resources\Templates\逻辑图.bmd" />
     <None Include="Resources\themes.xml" />
     <None Include="Resources\tip_close_button.png" />
     <None Include="Resources\tip_pin_button.png" />
