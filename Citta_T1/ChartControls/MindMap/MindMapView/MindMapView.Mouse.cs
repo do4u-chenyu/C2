@@ -28,14 +28,11 @@ namespace C2.Controls.MapViews
         Cursor ScrollCursor;
         MindMapViewDragBox DragBox;
         Point LastMousePos = Point.Empty;
-        private ToolTip widgetTip;
+        ToolTip C2WidgetTip = new ToolTip();
         //ChartToolTip LastToolTip = null;
 
         void InitializeMouse()
         {
-           
-            widgetTip = new ToolTip();
-
             try
             {
                 StyleBrushCursor = Helper.LoadCursor(Properties.Resources.cur_style_brush);
@@ -62,16 +59,6 @@ namespace C2.Controls.MapViews
                     _HoverObject = value;
                     OnHoverObjectChanged(old);
                 }
-                if (value.Widget == null)
-                    OnLeaveWidget();
-
-            }
-        }
-        void OnLeaveWidget()
-        {
-            if (ShowToolTips)
-            { 
-                this.widgetTip.ShowAlways = false; 
             }
         }
         internal HitTestResult PressObject
@@ -665,20 +652,18 @@ namespace C2.Controls.MapViews
        
         private void ShowToolTip(ChartObject chartObject)
         {
-            if (chartObject is Widget && !(chartObject is NoteWidget))
-            {
-                Point tipPoint = HoverObject.Topic.Location;
-                tipPoint.X += chartObject.Left;
-                tipPoint.Y = HoverObject.Topic.Bottom + HoverObject.Topic.Height/2;
-                Widget widget = HoverObject.Widget;
-                widgetTip.ShowAlways = true;
-                Point tipLocation = PointToReal(tipPoint);
-                widgetTip.Show(Lang._(widget.GetTypeID()), Global.GetDocumentForm(), tipLocation);
-                return;
-            }
+            if (chartObject is C2BaseWidget)
+                ShowC2BaseWidgetTip(HoverObject.Topic, chartObject as C2BaseWidget); // 显示C2的挂件信息,图标挂件回头再加
+            else
+                ChartTip.Global.Show(this, chartObject);
 
-            ChartTip.Global.Show(this, chartObject);
+        }
 
+        private void ShowC2BaseWidgetTip(Topic topic, C2BaseWidget widget)
+        {
+            Point tipLoc = topic.Location;    // 确定提示框位置
+            tipLoc.Offset(widget.Location);
+            C2WidgetTip.Show(Lang._(widget.GetTypeID()), Global.GetDocumentForm(), PointToReal(tipLoc), 1750);
         }
 
         public void ShowToolTip(string text, string hyperlink, bool alwayVisible)
@@ -720,8 +705,6 @@ namespace C2.Controls.MapViews
             //if (LastToolTip != null)
             //    LastToolTip.Hide(true);
             ChartTip.Global.Hide();
- 
-           
         }
 
         void _ResetCursor()
