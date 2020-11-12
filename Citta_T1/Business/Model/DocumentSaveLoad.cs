@@ -26,7 +26,12 @@ namespace C2.Business.Model
             Element = doc.CreateElement(nodeName);
             doc.AppendChild(Element);
         }
-
+        public ModelXmlWriter(string nodeName, XmlElement parent)
+        {
+            doc = parent.OwnerDocument;
+            Element = doc.CreateElement(nodeName);
+            parent.AppendChild(Element);
+        }
         public XmlElement Element { get; }
 
         public ModelXmlWriter Write(string key, string value)
@@ -36,7 +41,7 @@ namespace C2.Business.Model
             Element.AppendChild(xe);
             return this;
         }
-
+        
         public ModelXmlWriter Write(string key, Enum value)
         {
             return Write(key, value.ToString());
@@ -52,6 +57,20 @@ namespace C2.Business.Model
             return Write(key, value.ToString());
         }
         public ModelXmlWriter Write(string key, Point value)
+        {
+            return Write(key, value.ToString());
+        }
+
+        public ModelXmlWriter WriteAttribute(string key, string value)
+        {
+            Element.SetAttribute(key, value);
+            return this;
+        }
+        public ModelXmlWriter WriteAttribute(string key, Enum value)
+        {
+            return WriteAttribute(key, value.ToString());
+        }
+        public ModelXmlWriter WriteAttribute(string key, int value)
         {
             return Write(key, value.ToString());
         }
@@ -174,7 +193,7 @@ namespace C2.Business.Model
             }
         }
         #region 配置信息存到xml
-        private void WriteModelOption(OperatorOption option, XmlDocument xDoc, XmlElement modelElementXml)
+        public void WriteModelOption(OperatorOption option, XmlDocument xDoc, XmlElement modelElementXml)
         {
             XmlElement optionNode = xDoc.CreateElement("option");
             modelElementXml.AppendChild(optionNode);
