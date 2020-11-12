@@ -211,7 +211,7 @@ namespace C2.Controls.MapViews
             //    HelpUtil.ShowMessageBox("业务视图未保存，请保存后再运行。", "未保存", MessageBoxIcon.Information);
             //    return;
             //}
-            Global.GetCurrentDocument().Save();
+            Global.GetDocumentForm().Save();
             Global.GetCurrentDocument().Modified = false;
 
             if (opw.Status == OpStatus.Ready || opw.Status == OpStatus.Done)
@@ -225,6 +225,7 @@ namespace C2.Controls.MapViews
                 if (rsw == null)
                 {
                     AddResult(new Topic[] { opw.Container as Topic }, resultItem);
+                    Global.GetCurrentDocument().Modified = false; //新建了一个挂件，此时文档dirty，需要置false
                     TopicUpdate(opw.Container as Topic,null); 
                 }
                    
