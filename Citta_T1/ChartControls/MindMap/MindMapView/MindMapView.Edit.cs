@@ -253,7 +253,7 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopic != null)
             {
-                return AddSubTopic(SelectedTopic, null, false);
+                return AddSubTopic(SelectedTopic, null, true);
             }
             else
             {
