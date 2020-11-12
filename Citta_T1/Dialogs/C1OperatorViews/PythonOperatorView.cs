@@ -399,8 +399,12 @@ namespace C2.Dialogs
         {
             bool isReady = this.opControl.Status == ElementStatus.Done || this.opControl.Status == ElementStatus.Ready;
             bool notHasVirtualMachine = this.pythonChosenComboBox.Text == "未配置Python虚拟机";
+            
             if (isReady && notHasVirtualMachine)
                 this.opControl.Status = ElementStatus.Null;
+                opControl.Option.OptionValidating();
+                this.DialogResult = DialogResult.Cancel;
+                Close();
         }
 
 

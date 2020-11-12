@@ -41,6 +41,7 @@
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(219, 7);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // confirmButton
             // 

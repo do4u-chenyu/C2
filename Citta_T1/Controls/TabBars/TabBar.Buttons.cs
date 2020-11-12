@@ -19,6 +19,7 @@ namespace C2.Controls
         TabBarButton DropDownButton;
         TabBarButton PreferencesButton;
         bool _ShowDropDownButton;
+        bool _ShowPreferencesButton;
 
         public void InitializeButtons()
         {
@@ -36,7 +37,7 @@ namespace C2.Controls
 
             PreferencesButton = new TabBarButton();
             PreferencesButton.Icon = Properties.Resources.preferences_16;
-            PreferencesButton.Visible = true;
+            PreferencesButton.Visible = ShowPreferencesButton;
             PreferencesButton.Click += new EventHandler(PreferencesButton_Click);
             PreferencesButton.ToolTipText = HelpUtil.moreButtonHelpInfo;
 
@@ -104,10 +105,30 @@ namespace C2.Controls
                 }
             }
         }
+        public virtual bool ShowPreferencesButton
+        {
+            get { return _ShowPreferencesButton; }
+            set
+            {
+                if (_ShowPreferencesButton != value)
+                {
+                    _ShowPreferencesButton = value;
+                    OnShowPreferencesButtonChanged();
+                }
+            }
+        }
 
         protected virtual void OnShowDropDownButtonChanged()
         {
             DropDownButton.Visible = ShowDropDownButton;
+            if (LayoutItems())
+            {
+                Invalidate();
+            }
+        }
+        protected virtual void OnShowPreferencesButtonChanged()
+        {
+            PreferencesButton.Visible = ShowPreferencesButton;
             if (LayoutItems())
             {
                 Invalidate();
