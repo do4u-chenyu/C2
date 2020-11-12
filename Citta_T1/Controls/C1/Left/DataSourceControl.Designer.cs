@@ -38,7 +38,7 @@
             // 
             // dataSourceFrame
             // 
-            this.dataSourceFrame.BackColor = System.Drawing.Color.White;
+            this.dataSourceFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.dataSourceFrame.Controls.Add(this.externalDataLabel);
             this.dataSourceFrame.Controls.Add(this.localDataLabel);
             this.dataSourceFrame.Dock = System.Windows.Forms.DockStyle.Top;
@@ -77,7 +77,7 @@
             // 
             this.localFrame.AutoScroll = true;
             this.localFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.localFrame.BackColor = System.Drawing.Color.White;
+            this.localFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.localFrame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.localFrame.Location = new System.Drawing.Point(0, 51);
             this.localFrame.Name = "localFrame";
@@ -89,7 +89,7 @@
             // 
             this.externalFrame.AutoScroll = true;
             this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.externalFrame.BackColor = System.Drawing.Color.White;
+            this.externalFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(236)))));
             this.externalFrame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.externalFrame.Location = new System.Drawing.Point(0, 51);
             this.externalFrame.Name = "externalFrame";
