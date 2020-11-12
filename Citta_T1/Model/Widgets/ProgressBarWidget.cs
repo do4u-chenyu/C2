@@ -25,7 +25,7 @@ namespace C2.Model.Widgets
         Color _Color = Color.Green;
         Color _BackColor = Color.White;
         Color _ForeColor = Color.Black;
-        bool _ShowText = false;
+        bool _ShowText = true; // 改成默认显示文字,不然使用者不太明白进度条挂件到底是啥
         bool _AutoCalculation = false;
 
         public ProgressBarWidget()

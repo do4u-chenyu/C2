@@ -40,6 +40,7 @@ namespace C2.Controls.Top
             SelectFrame = false;
             FrameChange();
             ChangeCursor();
+            ChangeCursorColor();
         }
         private void ChangeCursor()
         {
@@ -59,6 +60,28 @@ namespace C2.Controls.Top
                 Global.GetCanvasPanel().Cursor = Cursors.Hand;
             }
         }
+        private void ChangeCursorColor()
+        {
+            // 拖拽
+            if (SelectDrag)
+            {
+                this.MoveButton.Checked = true;
+                this.FrameButton.Checked = false;
+
+            }
+            // 框选
+            else if (SelectFrame)
+            {
+                this.FrameButton.Checked = true;
+                this.MoveButton.Checked = false;
+            }
+            // 编辑
+            else
+            {
+                this.FrameButton.Checked = false;
+                this.MoveButton.Checked = false;
+            }
+        }
         #region 拖动
 
         private void MoveButton_Click(object sender, EventArgs e)
@@ -71,6 +94,8 @@ namespace C2.Controls.Top
             SelectFrame = false;
             ChangeCursor();
             FrameChange();
+            ChangeCursorColor();
+
         }
 
         #endregion
@@ -113,6 +138,8 @@ namespace C2.Controls.Top
             SelectDrag = false;
             ChangeCursor();
             FrameChange();
+            ChangeCursorColor();
+ 
         }
         #endregion
 

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using C2.Configuration;
 using C2.Core;
 using C2.Dialogs;
+using C2.Globalization;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
@@ -57,9 +58,18 @@ namespace C2.Controls.MapViews
                     _HoverObject = value;
                     OnHoverObjectChanged(old);
                 }
+                if (value.Widget == null)
+                    OnLeaveWidget();
+
             }
         }
-
+        void OnLeaveWidget()
+        {
+            if (ShowToolTips)
+            { 
+                this.toolTip1.ShowAlways = false; 
+            }
+        }
         internal HitTestResult PressObject
         {
             get { return _PressObject; }
@@ -97,22 +107,8 @@ namespace C2.Controls.MapViews
                 {
                     if ((HoverObject.Topic != null) && !HoverObject.IsFoldingButton)
                     {
-                        if (HoverObject.Widget != null)
-                        {
-                            ShowToolTip(HoverObject.Widget);
-                            //if (HoverObject.Widget is IColorToolTip)
-                            //    ShowToolTip((IColorToolTip)HoverObject.Widget);
-                            //else
-                            //    HideToolTip();
-                            //if (HoverObject.Widget is NotesWidget)
-                            //    ShowToolTip(HoverObject.Widget.Tooltip, HoverObject.Widget.Hyperlink, ((NotesWidget)HoverObject.Widget).BackColor, true);
-                            //else
-                            //    ShowToolTip(HoverObject.Widget.Tooltip, HoverObject.Widget.Hyperlink, Color.Empty, true);
-                        }
-                        else
-                        {
-                            ShowToolTip(HoverObject.Topic);//.Tooltip, HoverObject.Topic.Hyperlink, Color.Empty, false);// .Notes);
-                        }
+                        ShowToolTip(HoverObject);
+                       
                     }
                     else
                     {
@@ -647,9 +643,29 @@ namespace C2.Controls.MapViews
         //        , tootipObject.ToolTipHyperlinks
         //        , tootipObject.ToolTipShowAlway);
         //}
-        public void ShowToolTip(ChartObject chartObject)
+        private ToolTip toolTip1=new ToolTip();
+        private void ShowToolTip(HitTestResult HoverObject)
         {
-            ChartTip.Global.Show(this, chartObject);
+            
+            if (HoverObject.Widget == null)
+                return;
+            Point pointPoint = HoverObject.Topic.Location;
+            Widget chartObject = HoverObject.Widget;
+            if (chartObject is NoteWidget)
+                ChartTip.Global.Show(this, chartObject);
+            else 
+            {
+              
+                toolTip1.AutoPopDelay = 1000;
+                toolTip1.InitialDelay = 2000;
+                toolTip1.ReshowDelay = 1000;
+                toolTip1.ShowAlways = true;
+   
+                Point tipLocation = PointToReal(pointPoint);               
+                toolTip1.Show(Lang._(chartObject.GetTypeID()), Global.GetDocumentForm(), tipLocation);
+            }
+                
+
         }
 
         public void ShowToolTip(string text, string hyperlink, bool alwayVisible)
@@ -691,6 +707,8 @@ namespace C2.Controls.MapViews
             //if (LastToolTip != null)
             //    LastToolTip.Hide(true);
             ChartTip.Global.Hide();
+ 
+           
         }
 
         void _ResetCursor()

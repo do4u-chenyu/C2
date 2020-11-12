@@ -682,10 +682,9 @@ namespace C2.ChartPageView
         {
             OpenFileDialog fd = new OpenFileDialog
             {
-                Filter = "files|*.txt;*.bcp;*.xls;*.xlsx",
-                Title = "添加附件"
-            };
-
+                Filter = "文件|*.docx;*.xlsx;*.doc;*.xls;*.pdf;*.txt;*.bcp;*.xmind",
+                Title = Lang._("Attachment")
+        };
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 //this.rsFullFilePathTextBox.Text = fd.FileName;

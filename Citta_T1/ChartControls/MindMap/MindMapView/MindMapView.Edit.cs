@@ -174,7 +174,7 @@ namespace C2.Controls.MapViews
             {
                 var dialog = new PropertyDialog();
                 dialog.SelectedObject = template;
-                if (dialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
                     AddWidgetCommand command = new AddWidgetCommand(SelectedTopics, typeID, template);
                     ExecuteCommand(command);

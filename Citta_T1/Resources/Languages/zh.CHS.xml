@@ -410,7 +410,12 @@
 	<item name="DataFormatOperator">数据标准化</item>	
 	<item name="PythonOperator">Python</item>	
 	<item name="ModelOperator">模型</item>
-	<item name="Attachment">添加附件</item>
-
+	<item name="CHART">图表挂件</item>
+	<item name="DATASOURCE">数据源挂件</item>
+	<item name="OPERATOR">算子挂件</item>
+	<item name="PICTURE">图片挂件</item>
+	<item name="PROGRESSBAR">进度条挂件</item>
+	<item name="RESULT">结果挂件</item>
+	<item name="ATTACHMENT">附件挂件</item>
 	</words>
 </dictionary>

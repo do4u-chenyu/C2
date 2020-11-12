@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataButton));
             this.leftPictureBox = new System.Windows.Forms.PictureBox();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -62,11 +61,10 @@
             // 
             // rightPictureBox
             // 
-            this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(125, 3);
+            this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
+            this.rightPictureBox.Location = new System.Drawing.Point(125, 6);
             this.rightPictureBox.Name = "rightPictureBox";
-            this.rightPictureBox.Size = new System.Drawing.Size(19, 21);
-            this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.rightPictureBox.Size = new System.Drawing.Size(16, 16);
             this.rightPictureBox.TabIndex = 11;
             this.rightPictureBox.TabStop = false;
             // 
@@ -82,7 +80,7 @@
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 142);
             // 
             // ReviewToolStripMenuItem
             // 
