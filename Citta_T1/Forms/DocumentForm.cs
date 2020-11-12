@@ -222,7 +222,8 @@ namespace C2.Forms
             if (ActivedChartPage != null)
             {
                 ActiveChartBox = ActivedChartPage.ChartBox;
-                if(Document != null)
+                ActiveChartBox.TopicDataUndoRedo += new EventHandler(ActiveChartBox_DataChanged);
+                if (Document != null)
                     Document.ActiveChart = ActivedChartPage.Chart;
 
                 SelectedObjects = ActivedChartPage.SelectedObjects;
@@ -249,7 +250,7 @@ namespace C2.Forms
                 ShowDesigner(ShowDesignerObject);
             }
         }
-        object DataChangedObject
+        object UndoRedodObject
         {
             get { return _DataChangedObject; }
             set
@@ -872,11 +873,12 @@ namespace C2.Forms
 
             ResetControlStatus();
         }
+
         void ActivedChartPage_DataChanged(object sender, EventArgs e)
         {
             if (ActivedChartPage == sender)
             {
-                DataChangedObject = ActivedChartPage.DataChangeObject;
+                OnTopicDataChanged( ActivedChartPage.DataChangeObject);
             }
 
             ResetControlStatus();
@@ -895,7 +897,11 @@ namespace C2.Forms
         {
             ResetControlStatus();
         }
-
+        void ActiveChartBox_DataChanged(object sender, EventArgs e)
+        {
+            if (ActiveChartBox == sender)
+                objectTree2.BuildTree();
+        }
         void ActivedChartBox_ModifiedChanged(object sender, EventArgs e)
         {
             if (ActiveChartBox != null && ActiveChartBox.Modified)
@@ -1317,12 +1323,16 @@ namespace C2.Forms
         {
             Save();
         }
-
+        void ActiveChartBox_Update(object sender, EventArgs e)
+        {
+            objectTree2.BuildTree();
+        }
         void TsbUndo_Click(object sender, EventArgs e)
         {
             if (ActiveChartBox != null && ActiveChartBox.CanUndo)
             {
                 ActiveChartBox.Undo();
+                //objectTree2.BuildTree();
             }
         }
 
@@ -1331,6 +1341,7 @@ namespace C2.Forms
             if (ActiveChartBox != null && ActiveChartBox.CanRedo)
             {
                 ActiveChartBox.Redo();
+                //objectTree2.BuildTree();
             }
         }
 
