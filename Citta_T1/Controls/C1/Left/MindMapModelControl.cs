@@ -17,9 +17,9 @@ namespace C2.Controls.Left
         {
             InitializeComponent();
         }
-
-        private static readonly int ButtonLeftX = 15;
-        private static readonly int ButtonBottomOffsetY = 12;
+        private static readonly int ButtonGapHeight = 50;
+        private static readonly int ButtonLeftX = 17;
+        private static readonly int ButtonBottomOffsetY = 100;
         private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
         public void AddMindMapModel(string modelName)
         {
@@ -31,10 +31,10 @@ namespace C2.Controls.Left
 
         private void LayoutModelButtonLocation(Control ct)
         {
-            if (this.Controls.Count > 0)
-                this.startPoint = this.Controls[this.Controls.Count - 1].Location;
+            if (this.ItemLabel.Controls.Count > 0)
+                this.startPoint = this.ItemLabel.Controls[this.ItemLabel.Controls.Count - 1].Location;
 
-            this.startPoint.Y += ct.Height + ButtonBottomOffsetY;
+            startPoint.Y += ButtonGapHeight;
             ct.Location = this.startPoint;
         }
 
@@ -65,8 +65,8 @@ namespace C2.Controls.Left
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
             if (this.Controls.Count > 0)
-                this.startPoint.Y = Controls[0].Location.Y - Controls[0].Height - ButtonBottomOffsetY;
-
+                
+                this.startPoint.Y = Controls[0].Location.Y - ButtonGapHeight;
             this.Controls.Remove(modelButton);
             // 重新布局
             ReLayoutLocalFrame();

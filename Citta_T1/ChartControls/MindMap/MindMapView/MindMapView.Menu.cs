@@ -555,7 +555,17 @@ namespace C2.Controls.MapViews
 
         void MenuOpenData_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            string directory = (sender as ToolStripMenuItem).Tag as string;
+            try
+            {
+                Process.Start(directory);
+            }
+            catch {
+                MessageBox.Show("该类型文件无法打开.",
+                    "打开错误",                // 标题
+                    MessageBoxButtons.OK,          // 按钮样式
+                    MessageBoxIcon.Information);   // 图标样式
+            }
         }
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)

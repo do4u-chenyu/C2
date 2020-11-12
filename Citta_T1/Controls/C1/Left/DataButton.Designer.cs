@@ -50,7 +50,7 @@
             // leftPictureBox
             // 
             this.leftPictureBox.Image = global::C2.Properties.Resources.data_w_icon;
-            this.leftPictureBox.Location = new System.Drawing.Point(-1, 1);
+            this.leftPictureBox.Location = new System.Drawing.Point(1, 1);
             this.leftPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.leftPictureBox.Name = "leftPictureBox";
             this.leftPictureBox.Size = new System.Drawing.Size(24, 24);
@@ -134,13 +134,13 @@
             // 
             // textBox
             // 
-            this.textBox.BackColor = System.Drawing.Color.White;
-            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.textBox.Location = new System.Drawing.Point(25, 3);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(94, 23);
+            this.textBox.Size = new System.Drawing.Size(94, 16);
             this.textBox.TabIndex = 12;
             this.textBox.Visible = false;
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
@@ -148,7 +148,7 @@
             // 
             // txtButton
             // 
-            this.txtButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.txtButton.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -166,7 +166,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.rightPictureBox);
