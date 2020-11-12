@@ -17,7 +17,8 @@ namespace C2.Controls
     {
         public event EventHandler ModifiedChanged;
         public event ChartObjectEventHandler ChartObjectAdded;
-
+        public event EventHandler TopicDataChanged;
+        public event EventHandler TopicDataUndoRedo;
         public ChartControl()
         {
             Selection = new ChartSelection();
@@ -41,7 +42,6 @@ namespace C2.Controls
                 }
             }
         }
-
         protected void OnModifiedChanged()
         {
             if (ModifiedChanged != null)
@@ -65,11 +65,13 @@ namespace C2.Controls
         public void Undo()
         {
             Undo(1);
+            TopicDataUndoRedo(this, EventArgs.Empty);
         }
 
         public void Redo()
         {
             Redo(1);
+            TopicDataUndoRedo(this, EventArgs.Empty);
         }
 
         protected virtual void OnCommandHistoryChanged()
@@ -198,7 +200,6 @@ namespace C2.Controls
         public delegate void NeedShowEventHandler(bool isNeedShow);
         public event System.EventHandler SelectionChanged;
 
-        public event System.EventHandler TopicDataChanged;
         public event NeedShowEventHandler NeedShowDesigner;
 
         protected ChartSelection Selection { get; private set; }
