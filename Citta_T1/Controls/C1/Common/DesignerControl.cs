@@ -179,6 +179,8 @@ namespace C2.Controls.Common
 
             OpWidget.OpType =ComboOperator[this.operatorCombo.SelectedIndex];
             OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+            Cursor tempCursor = this.Cursor;
+            this.Cursor = Cursors.WaitCursor;
             C2BaseOperatorView dialog = GenerateOperatorView();
             if (dialog == null)
                 return;
@@ -191,6 +193,7 @@ namespace C2.Controls.Common
                 OpWidget.DataSourceItem = tmpDataItem;
                 SetSelectedTopicDesign(SelectedTopic, MindmapView);
             }
+            this.Cursor = tempCursor;
         }
 
         private C2BaseOperatorView GenerateOperatorView()
