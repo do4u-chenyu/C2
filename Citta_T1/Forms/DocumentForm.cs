@@ -1685,5 +1685,21 @@ namespace C2.Forms
         {
             InitializeControlsLocation();
         }
+        public void ShowRunLab()
+        {
+            this.currentModelRunBackLab.Visible = true;
+            this.currentModelFinLab.Visible = true;
+            this.currentModelRunLab.Visible = true;
+            this.progressBar.Visible = true;
+            this.progressBarLabel.Visible = true;
+        }
+        public void HideRunLab()
+        {
+            this.currentModelRunBackLab.Visible = false;
+            this.currentModelFinLab.Visible = false;
+            this.currentModelRunLab.Visible = false;
+            this.progressBar.Visible = false;
+            this.progressBarLabel.Visible = false;
+        }
     }
 }
