@@ -256,7 +256,7 @@ namespace C2.Controls.MapViews
                 {
                     //TODO
                     //是否对undo redo有影响
-                    rsw.DataItems.Clear();
+                    rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.SingleOp);
                     rsw.DataItems.Add(resultItem);
                 }
                 opw.Status = OpStatus.Done;
@@ -552,6 +552,7 @@ namespace C2.Controls.MapViews
             {
                 ToolStripMenuItem MenuOpenData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
+                ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
 
@@ -584,6 +585,7 @@ namespace C2.Controls.MapViews
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuOpenData,
                 MenuExploreDirectory,
+                MenuCopyFilePathToClipboard,
                 MenuDelete});
 
                 MenuOpenData.Image = Properties.Resources.opendata;
@@ -595,6 +597,11 @@ namespace C2.Controls.MapViews
                 MenuExploreDirectory.Text = Lang._("ExploreDirectory");
                 MenuExploreDirectory.Tag = path;
                 MenuExploreDirectory.Click += MenuExploreDirectory_Click;
+
+                MenuCopyFilePathToClipboard.Image = Properties.Resources.copy;
+                MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
+                MenuCopyFilePathToClipboard.Tag = path;
+                MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;
 
                 MenuDelete.Image = Properties.Resources.deleteattachment;
                 MenuDelete.Text = Lang._("DeleteAttachment");
@@ -622,9 +629,15 @@ namespace C2.Controls.MapViews
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
-            string directory = (sender as ToolStripMenuItem).Tag as string;
-            if(directory != null)
-                FileUtil.ExploreDirectory(directory);
+            string ffp = (sender as ToolStripMenuItem).Tag as string;
+            if(ffp != null)
+                FileUtil.ExploreDirectory(ffp);
+        }
+
+        void MenuCopyFilePathToClipboard_Click(object sender, EventArgs e) 
+        {
+            string ffp = (sender as ToolStripMenuItem).Tag as string;
+            FileUtil.TryClipboardSetText(ffp);
         }
 
 

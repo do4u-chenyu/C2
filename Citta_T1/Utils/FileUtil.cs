@@ -66,7 +66,7 @@ namespace C2.Utils
                     FileName = "explorer.exe",  //资源管理器
                     Arguments = "/e,/select," + fullFilePath
                 };
-                System.Diagnostics.Process.Start(processStartInfo);
+                Process.Start(processStartInfo);
             }
             catch (Exception)
             {
@@ -83,9 +83,9 @@ namespace C2.Utils
                 ProcessStartInfo processStartInfo = new ProcessStartInfo
                 {
                     FileName = "explorer.exe",  //资源管理器
-                    Arguments = System.IO.Path.GetDirectoryName(fullFilePath)
+                    Arguments = Path.GetDirectoryName(fullFilePath)
                 };
-                System.Diagnostics.Process.Start(processStartInfo);
+                Process.Start(processStartInfo);
             }
             catch { }; // 非核心功能, Double异常就不用管了
         }

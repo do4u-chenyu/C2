@@ -132,6 +132,7 @@ namespace C2.Dialogs.C2OperatorViews
             OpUtil.Encoding encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
 
             operatorWidget.ResultItem = new DataItem(path, name, separator, encoding, JudgeFileExtType(path));
+            operatorWidget.ResultItem.ResultDataType = DataItem.ResultType.SingleOp;
         }
         protected override bool IsOptionNotReady()
         {

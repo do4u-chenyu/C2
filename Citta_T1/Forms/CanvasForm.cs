@@ -466,7 +466,10 @@ namespace C2.Forms
             List<DataItem> rsDataItems = new List<DataItem>();
             foreach(ModelElement rsElement in rsElements)
             {
-                DataItem tmpDataItem = new DataItem(rsElement.FullFilePath,rsElement.Description,rsElement.Separator,rsElement.Encoding,rsElement.ExtType);
+                DataItem tmpDataItem = new DataItem(rsElement.FullFilePath, rsElement.Description, rsElement.Separator, rsElement.Encoding, rsElement.ExtType)
+                {
+                    ResultDataType = DataItem.ResultType.ModelOp
+                };
                 rsDataItems.Add(tmpDataItem);
             }
             if (rsDataItems.Count == 0)
@@ -480,7 +483,7 @@ namespace C2.Forms
             }
             else
             {
-                rsw.DataItems.Clear();
+                rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.ModelOp);
                 rsw.DataItems.AddRange(rsDataItems);
             }
 
