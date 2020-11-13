@@ -78,6 +78,11 @@ namespace C2.Forms
             this.TsbFullScreen = new System.Windows.Forms.ToolStripButton();
             this.TsbSidebar = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.progressBarLabel = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.currentModelFinLab = new System.Windows.Forms.Label();
+            this.currentModelRunBackLab = new System.Windows.Forms.Label();
+            this.currentModelRunLab = new System.Windows.Forms.Label();
             this.splitter1 = new C2.Controls.MySplitter();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.myTabControl1 = new C2.Controls.MyTabControl();
@@ -86,6 +91,7 @@ namespace C2.Forms
             this.MenuStripChartTab.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.currentModelRunBackLab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -518,6 +524,10 @@ namespace C2.Forms
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.progressBarLabel);
+            this.panel1.Controls.Add(this.progressBar);
+            this.panel1.Controls.Add(this.currentModelFinLab);
+            this.panel1.Controls.Add(this.currentModelRunBackLab);
             this.panel1.Controls.Add(this.multiChartsView1);
             this.panel1.Controls.Add(this.splitter1);
             this.panel1.Controls.Add(this.splitContainer2);
@@ -526,6 +536,56 @@ namespace C2.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(804, 410);
             this.panel1.TabIndex = 3;
+            // 
+            // progressBarLabel
+            // 
+            this.progressBarLabel.AutoSize = true;
+            this.progressBarLabel.BackColor = System.Drawing.Color.Transparent;
+            this.progressBarLabel.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 8.25F);
+            this.progressBarLabel.ForeColor = System.Drawing.Color.Black;
+            this.progressBarLabel.Location = new System.Drawing.Point(402, 197);
+            this.progressBarLabel.Name = "progressBarLabel";
+            this.progressBarLabel.Size = new System.Drawing.Size(0, 16);
+            this.progressBarLabel.TabIndex = 39;
+            this.progressBarLabel.Visible = false;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(329, 200);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(125, 10);
+            this.progressBar.TabIndex = 38;
+            this.progressBar.Visible = false;
+            // 
+            // currentModelFinLab
+            // 
+            this.currentModelFinLab.Image = global::C2.Properties.Resources.currentModelFin;
+            this.currentModelFinLab.Location = new System.Drawing.Point(327, 213);
+            this.currentModelFinLab.Name = "currentModelFinLab";
+            this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelFinLab.TabIndex = 37;
+            this.currentModelFinLab.Visible = false;
+            // 
+            // currentModelRunBackLab
+            // 
+            this.currentModelRunBackLab.Controls.Add(this.currentModelRunLab);
+            this.currentModelRunBackLab.Image = global::C2.Properties.Resources.currentModelRunningBack;
+            this.currentModelRunBackLab.Location = new System.Drawing.Point(327, 97);
+            this.currentModelRunBackLab.Name = "currentModelRunBackLab";
+            this.currentModelRunBackLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelRunBackLab.TabIndex = 36;
+            this.currentModelRunBackLab.Visible = false;
+            // 
+            // currentModelRunLab
+            // 
+            this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.currentModelRunLab.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.currentModelRunLab.Image = global::C2.Properties.Resources.currentModelRunning;
+            this.currentModelRunLab.Location = new System.Drawing.Point(0, 0);
+            this.currentModelRunLab.Name = "currentModelRunLab";
+            this.currentModelRunLab.Size = new System.Drawing.Size(73, 47);
+            this.currentModelRunLab.TabIndex = 28;
+            this.currentModelRunLab.Visible = false;
             // 
             // splitter1
             // 
@@ -591,10 +651,13 @@ namespace C2.Forms
             this.KeyPreview = true;
             this.Name = "DocumentForm";
             this.Text = "DocumentForm";
+            this.SizeChanged += new System.EventHandler(this.DocumentForm_SizeChanged);
             this.MenuStripChartTab.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.currentModelRunBackLab.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
@@ -653,5 +716,10 @@ namespace C2.Forms
         private Controls.MyTabControl myTabControl1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripButton ImportDataSourceButton;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label currentModelFinLab;
+        private System.Windows.Forms.Label currentModelRunBackLab;
+        private System.Windows.Forms.Label currentModelRunLab;
+        private System.Windows.Forms.Label progressBarLabel;
     }
 }

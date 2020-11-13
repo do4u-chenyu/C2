@@ -54,6 +54,7 @@ namespace C2.Forms
         {
             InitializeComponent();
             InitializeInputDataForm();
+            InitializeControlsLocation();
             Icon = Properties.Resources.document_icon;
             FormatPainter_DataChanged(null, EventArgs.Empty);
             FormatPainter.Default.DataChanged += new EventHandler(FormatPainter_DataChanged);
@@ -343,6 +344,20 @@ namespace C2.Forms
         {
             this.inputDataForm = new Dialogs.InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
+        }
+        public void InitializeControlsLocation()
+        {
+            int x = this.multiChartsView1.Width / 2 - this.currentModelRunBackLab.Width / 2;
+            int y = this.multiChartsView1.Height / 2 - this.currentModelRunBackLab.Height / 2;
+
+            //运行状态动图、进度条定位
+            this.currentModelRunLab.Location = new Point(
+                (this.currentModelRunBackLab.Width - this.currentModelRunLab.Width) / 2,
+                (this.currentModelRunBackLab.Height - this.currentModelRunLab.Height) / 2 - 10);
+            this.currentModelRunBackLab.Location = new Point(x, y - 50);
+            this.currentModelFinLab.Location = new Point(x, y - 50);
+            this.progressBar.Location = new Point(x, y + 54);
+            this.progressBarLabel.Location = new Point(x + 125, y + 50);
         }
         void InitializeControls()
         {
@@ -1664,6 +1679,27 @@ namespace C2.Forms
             this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
             this.inputDataForm.ShowDialog();
             this.inputDataForm.ReSetParams();
+        }
+
+        private void DocumentForm_SizeChanged(object sender, EventArgs e)
+        {
+            InitializeControlsLocation();
+        }
+        public void ShowRunLab()
+        {
+            this.currentModelRunBackLab.Visible = true;
+            this.currentModelFinLab.Visible = true;
+            this.currentModelRunLab.Visible = true;
+            this.progressBar.Visible = true;
+            this.progressBarLabel.Visible = true;
+        }
+        public void HideRunLab()
+        {
+            this.currentModelRunBackLab.Visible = false;
+            this.currentModelFinLab.Visible = false;
+            this.currentModelRunLab.Visible = false;
+            this.progressBar.Visible = false;
+            this.progressBarLabel.Visible = false;
         }
     }
 }
