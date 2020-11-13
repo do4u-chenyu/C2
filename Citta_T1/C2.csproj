@@ -2404,7 +2404,6 @@
     <Content Include="Resources\StartPage\yellowGroup.png" />
     <None Include="Resources\Templates\树状图.xml" />
     <None Include="Resources\Templates\思维导图.xml" />
-    <None Include="Resources\Templates\组织图.xml" />
     <None Include="Resources\Templates\空模板.xml" />
     <Content Include="Resources\Templates\组织架构图.xml" />
     <None Include="Resources\Templates\逻辑图.xml" />
@@ -2616,12 +2615,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
