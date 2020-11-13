@@ -73,12 +73,12 @@ namespace C2.Dialogs
                 if (ext == ".xls" || ext == ".xlsx")
                 {
                     this.extType = OpUtil.ExtType.Excel;
-                    PreViewExcelFileNew();
+                    PreviewExcelFileNew();
                 }
                 else
                 {
                     this.extType = OpUtil.ExtType.Text;
-                    PreViewBcpFile();
+                    PreviewBcpFile();
                 }
             }
             this.textBox1.Text = fileName;
@@ -164,7 +164,7 @@ namespace C2.Dialogs
                 this.gbkLable.Font = font;
                 this.utf8Lable.Font = bold_font;
                 this.encoding = OpUtil.Encoding.UTF8;
-                PreViewBcpFile();
+                PreviewBcpFile();
             }
         }
         private void Clear()
@@ -176,7 +176,7 @@ namespace C2.Dialogs
         }
 
         
-        private void PreViewBcpFile()
+        private void PreviewBcpFile()
         {
             Tuple<List<string>, List<List<string>>> headersAndRows = FileUtil.ReadBcpFile(this.fullFilePath, this.encoding, this.separator, this.maxNumOfRow);
             if (headersAndRows.Item1.Count == 0 && headersAndRows.Item2.Count == 0)
@@ -194,10 +194,11 @@ namespace C2.Dialogs
             FileUtil.FillTable(this.dataGridView1, headersAndRows.Item1, rows, this.maxNumOfRow - 1);
         }
 
-        private void PreViewExcelFileNew()
+        private void PreviewExcelFileNew()
         {
             this.Cursor = Cursors.WaitCursor;
-            List<List<String>> rowContentList = FileUtil.ReadExcel(this.fullFilePath, maxNumOfRow);
+            BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding, this.separator);
+            List<List<String>> rowContentList = StringTo2DList(BCPBuffer.GetInstance().GetCachePreViewExcelContent(this.fullFilePath), '\t');
             this.Cursor = Cursors.Default;
             if (rowContentList.Count == 0)
             {
@@ -226,6 +227,21 @@ namespace C2.Dialogs
             }
         }
 
+        private List<List<String>> StringTo2DList(string raw, char sep)
+        {
+            /*
+             * raw = ""date\tdelay\tdistance\torigin\tdestination\r\n1011245\t6\t602\tABE\tATL\r\n"
+             */
+            char[] lineSep = "\r\n".ToCharArray();
+            List<List<String>> rawContents = new List<List<string>>();
+            foreach (string line in raw.Split(lineSep))
+            {
+                if (line != "")
+                    rawContents.Add(new List<string>(line.Split(sep)));
+            }
+            return rawContents;
+        }
+
         public void DvgClear(bool isCleanDataName = true)
         {
             if (isCleanDataName) { this.textBox1.Text = null; }
@@ -241,7 +257,7 @@ namespace C2.Dialogs
                 this.gbkLable.Font = bold_font;
                 this.utf8Lable.Font = font;
                 this.encoding = OpUtil.Encoding.GBK;
-                PreViewBcpFile();
+                PreviewBcpFile();
             }
 
         }
@@ -251,14 +267,14 @@ namespace C2.Dialogs
             if (this.extType != OpUtil.ExtType.Text)
                 return;
             this.separator = '\t';
-            PreViewBcpFile();
+            PreviewBcpFile();
         }
         private void RadioButton2_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != OpUtil.ExtType.Text)
                 return;
             this.separator = ',';
-            PreViewBcpFile();
+            PreviewBcpFile();
 
         }
         private void RadioButton3_MouseDown(object sender, MouseEventArgs e)
@@ -275,7 +291,7 @@ namespace C2.Dialogs
             try
             {
                 this.separator = Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
-                PreViewBcpFile();
+                PreviewBcpFile();
             }
             catch (Exception)
             {
@@ -299,7 +315,7 @@ namespace C2.Dialogs
                     if (seps.Length > 0)
                         this.separator = seps[0];
                 }
-                PreViewBcpFile();
+                PreviewBcpFile();
             }
         }
 
