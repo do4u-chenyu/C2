@@ -36,6 +36,8 @@ namespace C2
         public string UserName { get => this.userName; set => this.userName = value; }
         public Control BottomViewPanel { get { return this.bottomViewPanel; } }
         public Panel LeftToolBoxPanel { get { return this.leftToolBoxPanel; } }
+
+        public bool operateButtonSelect { get; private set; }
         #region
         SpecialTabItem TabNew;
         TabBarButton BtnNew;
@@ -72,6 +74,7 @@ namespace C2
             this.bottomViewPanel.Height = 40;
             this.isLeftViewPanelMinimum = true;
             this.leftToolBoxPanel.Width = 10;
+            this.dataButton.BackColor = Color.FromArgb(228, 60, 89);
 
             InitializeTaskBar();
             InitializeShortcutKeys();
@@ -265,6 +268,7 @@ namespace C2
             this.myModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
+            this.dataButton.BackColor = Color.FromArgb(76, 97, 125);
         }
 
         private void OperateButton_Click(object sender, EventArgs e)
@@ -273,6 +277,7 @@ namespace C2
             this.mindMapModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.myModelControl.Visible = false;
+            this.dataButton.BackColor = Color.FromArgb(76, 97, 125);
         }
 
         private void DataButton_Click(object sender, EventArgs e)
@@ -281,6 +286,7 @@ namespace C2
             this.dataSourceControl.Visible = true;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
+            
         }
 
         private void FlowChartButton_Click(object sender, EventArgs e)
@@ -289,6 +295,7 @@ namespace C2
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
+            this.dataButton.BackColor = Color.FromArgb(76, 97, 125);
         }
 
         private void NewModelButton_Click(object sender, EventArgs e)
@@ -865,5 +872,48 @@ namespace C2
             Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, tabs);
             return true;
         }
+
+      
+        private void operateButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.operateButton.BackColor = Color.FromArgb(228, 60, 89);
+        }
+
+        private void operateButton_Leave(object sender, EventArgs e)
+        {
+            this.operateButton.BackColor = Color.FromArgb(76, 97, 125);
+        }
+
+        private void myModelButton_Leave(object sender, EventArgs e)
+        {
+            this.myModelButton.BackColor = Color.FromArgb(76, 97, 125);
+        }
+
+        private void myModelButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.myModelButton.BackColor = Color.FromArgb(228, 60, 89);
+        }
+
+        private void dataButton_Leave(object sender, EventArgs e)
+        {
+            this.dataButton.BackColor = Color.FromArgb(76, 97, 125);
+        }
+
+        private void dataButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.dataButton.BackColor = Color.FromArgb(228, 60, 89); 
+        }
+
+        private void flowChartButton_Leave(object sender, EventArgs e)
+        {
+            this.flowChartButton.BackColor = Color.FromArgb(76, 97, 125);
+        }
+
+        private void flowChartButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.flowChartButton.BackColor = Color.FromArgb(228,60,89); 
+        }
+
+    
     }
 }

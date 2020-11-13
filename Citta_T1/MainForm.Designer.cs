@@ -99,7 +99,7 @@ namespace C2
             // 
             // headPanel
             // 
-            this.headPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(67)))), ((int)(((byte)(101)))));
+            this.headPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(60)))), ((int)(((byte)(85)))));
             this.headPanel.Controls.Add(this.panel2);
             this.headPanel.Controls.Add(this.label1);
             this.headPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -166,7 +166,7 @@ namespace C2
             // 
             // leftMainMenuPanel
             // 
-            this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(97)))), ((int)(((byte)(125)))));
+            this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(60)))), ((int)(((byte)(85)))));
             this.leftMainMenuPanel.Controls.Add(this.flowChartButton);
             this.leftMainMenuPanel.Controls.Add(this.dataButton);
             this.leftMainMenuPanel.Controls.Add(this.operateButton);
@@ -179,51 +179,71 @@ namespace C2
             // 
             // flowChartButton
             // 
-            this.flowChartButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.flowChartButton.Location = new System.Drawing.Point(4, 150);
+            this.flowChartButton.FlatAppearance.BorderSize = 0;
+            this.flowChartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.flowChartButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.flowChartButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.flowChartButton.Location = new System.Drawing.Point(0, 182);
             this.flowChartButton.Name = "flowChartButton";
-            this.flowChartButton.Size = new System.Drawing.Size(124, 42);
+            this.flowChartButton.Size = new System.Drawing.Size(137, 42);
             this.flowChartButton.TabIndex = 3;
             this.flowChartButton.Text = "IAO实验室";
             this.toolTip1.SetToolTip(this.flowChartButton, "数据分析建模需要的复杂模型探索");
             this.flowChartButton.UseVisualStyleBackColor = true;
             this.flowChartButton.Click += new System.EventHandler(this.FlowChartButton_Click);
+            this.flowChartButton.Leave += new System.EventHandler(this.flowChartButton_Leave);
+            this.flowChartButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.flowChartButton_MouseDown);
             // 
             // dataButton
             // 
-            this.dataButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataButton.Location = new System.Drawing.Point(4, 102);
+            this.dataButton.FlatAppearance.BorderSize = 0;
+            this.dataButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dataButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.dataButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataButton.Location = new System.Drawing.Point(0, 122);
             this.dataButton.Name = "dataButton";
-            this.dataButton.Size = new System.Drawing.Size(124, 42);
+            this.dataButton.Size = new System.Drawing.Size(137, 42);
             this.dataButton.TabIndex = 2;
             this.dataButton.Text = "数据管理";
             this.toolTip1.SetToolTip(this.dataButton, "当前用户已导入的所有数据");
             this.dataButton.UseVisualStyleBackColor = true;
             this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
+            this.dataButton.Leave += new System.EventHandler(this.dataButton_Leave);
+            this.dataButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataButton_MouseDown);
             // 
             // operateButton
             // 
-            this.operateButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.operateButton.Location = new System.Drawing.Point(4, 6);
+            this.operateButton.FlatAppearance.BorderSize = 0;
+            this.operateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.operateButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.operateButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.operateButton.Location = new System.Drawing.Point(0, 2);
             this.operateButton.Name = "operateButton";
-            this.operateButton.Size = new System.Drawing.Size(124, 42);
+            this.operateButton.Size = new System.Drawing.Size(137, 42);
             this.operateButton.TabIndex = 1;
             this.operateButton.Text = "业务视图";
             this.toolTip1.SetToolTip(this.operateButton, "当前用户的所有业务视图");
             this.operateButton.UseVisualStyleBackColor = true;
             this.operateButton.Click += new System.EventHandler(this.OperateButton_Click);
+            this.operateButton.Leave += new System.EventHandler(this.operateButton_Leave);
+            this.operateButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operateButton_MouseDown);
             // 
             // myModelButton
             // 
-            this.myModelButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.myModelButton.Location = new System.Drawing.Point(4, 54);
+            this.myModelButton.FlatAppearance.BorderSize = 0;
+            this.myModelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.myModelButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.myModelButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.myModelButton.Location = new System.Drawing.Point(0, 62);
             this.myModelButton.Name = "myModelButton";
-            this.myModelButton.Size = new System.Drawing.Size(124, 42);
+            this.myModelButton.Size = new System.Drawing.Size(137, 42);
             this.myModelButton.TabIndex = 0;
             this.myModelButton.Text = "模型市场";
             this.toolTip1.SetToolTip(this.myModelButton, "当前用户发布的所有模型");
             this.myModelButton.UseVisualStyleBackColor = true;
             this.myModelButton.Click += new System.EventHandler(this.MyModelButton_Click);
+            this.myModelButton.Leave += new System.EventHandler(this.myModelButton_Leave);
+            this.myModelButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.myModelButton_MouseDown);
             // 
             // leftToolBoxPanel
             // 
@@ -582,6 +602,7 @@ namespace C2
             this.taskBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.taskBar.Location = new System.Drawing.Point(0, 0);
             this.taskBar.Name = "taskBar";
+            this.taskBar.ShowPreferencesButton = true;
             this.taskBar.Size = new System.Drawing.Size(910, 32);
             this.taskBar.TabIndex = 0;
             this.taskBar.Text = "taskBar1";
