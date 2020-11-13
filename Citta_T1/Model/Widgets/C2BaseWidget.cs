@@ -42,6 +42,13 @@ namespace C2.Model.Widgets
                 .WriteAttribute("separator", dataItem.FileSep.ToString())
                 .WriteAttribute("encoding", dataItem.FileEncoding)
                 .WriteAttribute("file_type", dataItem.FileType);
+            // 图标挂件属性写入
+            if (!string.IsNullOrEmpty(dataItem.ChartType))
+            {
+                mexw.WriteAttribute("chart_type", dataItem.ChartType)
+                    .WriteAttribute("selected_indexs", string.Join(",", dataItem.SelectedIndexs))
+                    .WriteAttribute("selected_items", string.Join(",", dataItem.SelectedItems));
+            }
         }
         protected void ReadAttribute(XmlNodeList data_items,List<DataItem> DataItems)
         {
@@ -53,6 +60,14 @@ namespace C2.Model.Widgets
                    ConvertUtil.TryParseAscii(dataItem.GetAttribute("separator")),
                    OpUtil.EncodingEnum(dataItem.GetAttribute("encoding")),
                    OpUtil.ExtTypeEnum(dataItem.GetAttribute("file_type")));
+
+                // 图表格挂件属性读取
+                item.ChartType = dataItem.GetAttribute("chart_type");
+                if (!string.IsNullOrEmpty(item.ChartType))
+                {
+                    item.SelectedIndexs = Utils.ConvertUtil.TryParseIntList(dataItem.GetAttribute("selected_indexs"));
+                    item.SelectedItems = new List<string>(dataItem.GetAttribute("selected_items").Split(','));
+                }                               
                 DataItems.Add(item);
             }
         }

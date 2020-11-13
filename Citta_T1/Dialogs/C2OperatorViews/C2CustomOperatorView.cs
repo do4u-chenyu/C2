@@ -131,6 +131,7 @@ namespace C2.Dialogs.C2OperatorViews
             string path = this.rsFullFilePathTextBox.Text;
             string name = Path.GetFileNameWithoutExtension(path);
             operatorWidget.ResultItem = new DataItem(path, name, separator, encoding, JudgeFileExtType(path));
+            operatorWidget.ResultItem.ResultDataType = DataItem.ResultType.SingleOp;
         }
 
         protected override bool IsOptionNotReady()

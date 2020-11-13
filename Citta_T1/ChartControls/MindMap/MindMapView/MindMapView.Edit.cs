@@ -9,6 +9,7 @@ using C2.Globalization;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
+using C2.Utils;
 
 namespace C2.Controls.MapViews
 {
@@ -138,11 +139,24 @@ namespace C2.Controls.MapViews
                 //这里后期考虑弹窗设置名字
                 string modelDocumentName = string.Format("{0}-模型视图", topic.Text);
 
+                //11.13 现在单算子和模型共存了
                 OperatorWidget opw = topic.FindWidget<OperatorWidget>();
-                if (opw != null)
-                    topic.Remove(opw);
-                topic.Add(new OperatorWidget { OpType = OpType.ModelOperator, OpName = modelDocumentName });
-                
+                DataItem modelDataItem = new DataItem("", modelDocumentName, '\t', OpUtil.Encoding.NoNeed, OpUtil.ExtType.Unknow);
+                if ( opw == null)
+                {
+                    topic.Add(new OperatorWidget { HasModelOperator = true, ModelDataItem = modelDataItem });
+                }
+                else if (opw.HasModelOperator)
+                {
+                    HelpUtil.ShowMessageBox("该节点已存在高级模型，请右键算子挂件，选择对应模型进行修改或删除。", "已存在", MessageBoxIcon.Information);
+                    return;
+                }
+                else
+                {
+                    opw.HasModelOperator = true;
+                    opw.ModelDataItem = modelDataItem;
+                }
+
                 Global.GetMainForm().NewCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
             }
         }

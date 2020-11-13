@@ -43,10 +43,11 @@ namespace C2.Controls.MapViews
             {
                 case OperatorWidget.TypeID:
                     opw = HoverObject.Widget as OperatorWidget;
-                    if (opw.OpType == OpType.Null)
-                        CreateInitOperatorMenu(opw);
+                    //没有单算子 且 没有模型
+                    if (opw.OpType == OpType.Null && !opw.HasModelOperator)
+                        CreateInitOperatorMenu();
                     else
-                        CreateOperatorMenu(opw);                        
+                        CreateOperatorMenu();                        
                     break;
                 case DataSourceWidget.TypeID:
                     dtw = HoverObject.Widget as DataSourceWidget;
@@ -111,7 +112,7 @@ namespace C2.Controls.MapViews
         #endregion
 
         #region 算子挂件
-        private void CreateInitOperatorMenu(OperatorWidget opw)
+        private void CreateInitOperatorMenu()
         {
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
             MenuOpenOperator.Text = Lang._("OpenDesigner");
@@ -120,7 +121,15 @@ namespace C2.Controls.MapViews
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
         }
-        private void CreateOperatorMenu(OperatorWidget opw)
+        private void CreateOperatorMenu()
+        {
+            if(opw.OpType != OpType.Null)
+                WidgetMenuStrip.Items.Add(GenOpSingleMenu("single"));
+            if(opw.HasModelOperator)
+                WidgetMenuStrip.Items.Add(GenOpSingleMenu("model"));
+        }
+
+        private ToolStripMenuItem GenOpSingleMenu(string type)
         {
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
             ToolStripMenuItem MenuOpDesign = new ToolStripMenuItem();
@@ -128,8 +137,8 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuOpPublic = new ToolStripMenuItem();
             ToolStripMenuItem MenuOpDelete = new ToolStripMenuItem();
 
-            MenuOpenOperator.Image = GetOpOpenOperatorImage(opw.Status);
-            MenuOpenOperator.Text = opw.OpName;
+            MenuOpenOperator.Image = type == "single" ? GetOpOpenOperatorImage(opw.Status) : Properties.Resources.operator_w_icon;
+            MenuOpenOperator.Text = type == "single" ? opw.OpName: opw.ModelDataItem.FileName;
             MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuOpDesign,
                 MenuOpRunning,
@@ -138,23 +147,28 @@ namespace C2.Controls.MapViews
 
             MenuOpDesign.Image = Properties.Resources.opDesign;
             MenuOpDesign.Text = Lang._("Design");
-            //MenuOpDesign.Enabled = opw.Status != OpStatus.Done;
-            MenuOpDesign.Click += MenuDesignOp_Click;
+            if (type == "single")
+                MenuOpDesign.Click += MenuDesignOp_Click;
+            else
+                MenuOpDesign.Click += MenuDesignModel_Click;
 
             MenuOpRunning.Image = Properties.Resources.opRunning;
-            MenuOpRunning.Text = Lang._("Running") ;
-            MenuOpRunning.Enabled = opw.Status != OpStatus.Null ;
+            MenuOpRunning.Text = Lang._("Running");
+            MenuOpRunning.Enabled = type == "single" ? opw.Status != OpStatus.Null : !opw.HasModelOperator;
             MenuOpRunning.Click += MenuRunningOp_Click;
 
             MenuOpPublic.Image = Properties.Resources.opModelPublic;
             MenuOpPublic.Text = Lang._("Public");
-            MenuOpPublic.Enabled = opw.OpType == OpType.ModelOperator;
+            MenuOpPublic.Enabled = type == "single" ? false : true;
 
             MenuOpDelete.Image = Properties.Resources.deletewidget;
             MenuOpDelete.Text = Lang._("Delete");
-            MenuOpDelete.Click += MenuDeleteOp_Click;
+            if(type == "single")
+                MenuOpDelete.Click += MenuDeleteSingleOp_Click;
+            else    
+                MenuOpDelete.Click += MenuDeleteModelOp_Click;
 
-            WidgetMenuStrip.Items.Add(MenuOpenOperator);
+            return MenuOpenOperator;
         }
 
         private Image GetOpOpenOperatorImage(OpStatus opStatus)
@@ -173,6 +187,11 @@ namespace C2.Controls.MapViews
                     return Properties.Resources.operator_w_icon;
             }
         }
+        void MenuDesignModel_Click(object sender, EventArgs e)
+        {
+            //TODO
+            //跳转到
+        }
 
         void MenuDesignOp_Click(object sender, EventArgs e)
         {
@@ -180,6 +199,7 @@ namespace C2.Controls.MapViews
             if (dialog != null && dialog.ShowDialog(this) == DialogResult.OK)
                 opw.Status = OpStatus.Ready;
         }
+
         private C2BaseOperatorView GenerateOperatorView()
         {
             switch (opw.OpType)
@@ -216,10 +236,14 @@ namespace C2.Controls.MapViews
 
             if (opw.Status == OpStatus.Ready || opw.Status == OpStatus.Done)
             {
+                //Global.GetDocumentForm().ShowRunLab();
                 List<string> cmds = GenerateCmd();
                 if (cmds == null)
                     return;
+                this.Cursor = Cursors.WaitCursor;
                 MessageBox.Show(RunLinuxCommand(cmds));
+                this.Cursor = Cursors.Default;
+                //Global.GetDocumentForm().HideRunLab();
                 DataItem resultItem = opw.ResultItem;
                 ResultWidget rsw = (opw.Container as Topic).FindWidget<ResultWidget>();
                 if (rsw == null)
@@ -233,7 +257,7 @@ namespace C2.Controls.MapViews
                 {
                     //TODO
                     //是否对undo redo有影响
-                    rsw.DataItems.Clear();
+                    rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.SingleOp);
                     rsw.DataItems.Add(resultItem);
                 }
                 opw.Status = OpStatus.Done;
@@ -319,9 +343,32 @@ namespace C2.Controls.MapViews
             return message;
         }
 
-        void MenuDeleteOp_Click(object sender, EventArgs e)
+        void MenuDeleteSingleOp_Click(object sender, EventArgs e)
         {
-             Delete(new ChartObject[] { opw });
+            ClearSingleOpContent();
+            if(!opw.HasModelOperator)
+                Delete(new ChartObject[] { opw });
+        }
+        void MenuDeleteModelOp_Click(object sender, EventArgs e)
+        {
+            ClearModelOpContent();
+            if (opw.OpType == OpType.Null)
+                Delete(new ChartObject[] { opw });
+        }
+
+        private void ClearSingleOpContent()
+        {
+            opw.Status = OpStatus.Null;
+            opw.DataSourceItem = null;
+            opw.ResultItem = null;
+            opw.OpType = OpType.Null;
+            opw.Option = new OperatorOption();
+        }
+
+        private void ClearModelOpContent()
+        {
+            opw.ModelDataItem = null;
+            opw.HasModelOperator = false;
         }
         #endregion
 
@@ -506,6 +553,7 @@ namespace C2.Controls.MapViews
             {
                 ToolStripMenuItem MenuOpenData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
+                ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
 
@@ -538,6 +586,7 @@ namespace C2.Controls.MapViews
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuOpenData,
                 MenuExploreDirectory,
+                MenuCopyFilePathToClipboard,
                 MenuDelete});
 
                 MenuOpenData.Image = Properties.Resources.opendata;
@@ -549,6 +598,11 @@ namespace C2.Controls.MapViews
                 MenuExploreDirectory.Text = Lang._("ExploreDirectory");
                 MenuExploreDirectory.Tag = path;
                 MenuExploreDirectory.Click += MenuExploreDirectory_Click;
+
+                MenuCopyFilePathToClipboard.Image = Properties.Resources.copy;
+                MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
+                MenuCopyFilePathToClipboard.Tag = path;
+                MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;
 
                 MenuDelete.Image = Properties.Resources.deleteattachment;
                 MenuDelete.Text = Lang._("DeleteAttachment");
@@ -576,9 +630,15 @@ namespace C2.Controls.MapViews
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
-            string directory = (sender as ToolStripMenuItem).Tag as string;
-            if(directory != null)
-                FileUtil.ExploreDirectory(directory);
+            string ffp = (sender as ToolStripMenuItem).Tag as string;
+            if(ffp != null)
+                FileUtil.ExploreDirectory(ffp);
+        }
+
+        void MenuCopyFilePathToClipboard_Click(object sender, EventArgs e) 
+        {
+            string ffp = (sender as ToolStripMenuItem).Tag as string;
+            FileUtil.TryClipboardSetText(ffp);
         }
 
 

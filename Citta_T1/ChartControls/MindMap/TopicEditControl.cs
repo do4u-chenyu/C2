@@ -126,7 +126,7 @@ namespace C2.Controls.MapViews
 
         private void InternalTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (ShortcutKeys.Haldle(e.KeyData))
+            if (ShortcutKeys.Handle(e.KeyData))
             {
                 e.SuppressKeyPress = true;
                 return;

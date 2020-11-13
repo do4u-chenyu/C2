@@ -113,6 +113,7 @@ namespace C2.Dialogs.Base
             string name = Path.GetFileNameWithoutExtension(path);
             char separator = OpUtil.DefaultSeparator;
             operatorWidget.ResultItem = new DataItem(path, name, separator, OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
+            operatorWidget.ResultItem.ResultDataType = DataItem.ResultType.SingleOp;
         }
 
         protected bool IsIllegalFieldName()

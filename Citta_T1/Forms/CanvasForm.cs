@@ -26,6 +26,7 @@ namespace C2.Forms
     public partial class CanvasForm : BaseDocumentForm
     {
         bool HardClose;
+        private ShortcutKeysTable ShortcutKeys;
         private OptionDao optionDao;
         private UndoRedoManager undoRedoManager;
         private ModelDocument document;
@@ -50,9 +51,10 @@ namespace C2.Forms
         {
             InitializeComponent();
             InitializeDao();
-            InitializeMainFormEventHandler();
+            InitializeEventHandler();
             InitializeControlsLocation();
             InitializeUndoRedoManager();
+            InitializeKeyBoard();
         }
 
         private void InitializeDao()
@@ -60,7 +62,12 @@ namespace C2.Forms
             this.optionDao = new OptionDao();
             this.userName = Global.GetMainForm().UserName;
         }
-        
+        private void InitializeEventHandler()
+        {
+            // 新增文档事件
+            this.canvasPanel.NewElementEvent += NewDocumentOperator;
+            //this.canvasPanel.KeyDown += new KeyEventHandler(CanvasPanel_KeyDown);
+        }
         private void InitializeUndoRedoManager()
         {
             this.topToolBarControl.Disable_UndoButton();
@@ -71,7 +78,35 @@ namespace C2.Forms
             this.undoRedoManager.UndoStackEmpty += TopToolBarControl_UndoStackEmpty;
             this.undoRedoManager.UndoStackNotEmpty += TopToolBarControl_UndoStackNotEmpty;
         }
+        public void InitializeControlsLocation()
+        {
+            int x = this.canvasPanel.Width - 10 - this.naviViewControl.Width;
+            int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
 
+            // 缩略图定位
+            this.naviViewControl.Location = new Point(x, y + 30);
+            this.naviViewControl.Invalidate();
+
+            // 底层工具按钮定位
+            x = x - (this.canvasPanel.Width) / 2 + 100;
+            this.resetButton.Location = new Point(x + 100, y + 83);
+            this.stopButton.Location = new Point(x + 50, y + 83);
+            this.runButton.Location = new Point(x, y + 83);
+
+            //运行状态动图、进度条定位
+            this.currentModelRunLab.Location = new Point(
+                (this.currentModelRunBackLab.Width - this.currentModelRunLab.Width) / 2,
+                (this.currentModelRunBackLab.Height - this.currentModelRunLab.Height) / 2 - 10);
+            this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
+            this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
+            this.progressBar.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
+            this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
+
+            // 顶层浮动工具栏和右侧工具及隐藏按钮定位
+            this.operatorControl.Location = new Point(this.canvasPanel.Width - 280, 38);
+            this.remarkControl.Location = new Point(this.canvasPanel.Width - 505, 38);
+            this.rightHideButton.Location = new Point(this.canvasPanel.Width - 60, 38);
+        }
         public CanvasForm(ModelDocument document)
             :this()
         {
@@ -99,11 +134,6 @@ namespace C2.Forms
             }
         }
         #region C1文档切换、修改、关闭
-        private void InitializeMainFormEventHandler()
-        {
-            // 新增文档事件
-            this.canvasPanel.NewElementEvent += NewDocumentOperator;
-        }
         void OnDocumentChanged(ModelDocument old)
         {
             if (old != null)
@@ -255,35 +285,6 @@ namespace C2.Forms
         private void CanvasForm_SizeChanged(object sender, EventArgs e)
         {
             InitializeControlsLocation();
-        }
-        public void InitializeControlsLocation()
-        {
-            int x = this.canvasPanel.Width - 10 - this.naviViewControl.Width;
-            int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
-
-            // 缩略图定位
-            this.naviViewControl.Location = new Point(x, y+30);
-            this.naviViewControl.Invalidate();
-
-            // 底层工具按钮定位
-            x = x - (this.canvasPanel.Width) / 2 + 100;
-            this.resetButton.Location = new Point(x + 100, y + 83);
-            this.stopButton.Location = new Point(x + 50, y + 83);
-            this.runButton.Location = new Point(x, y + 83);
-
-            //运行状态动图、进度条定位
-            this.currentModelRunLab.Location = new Point(
-                (this.currentModelRunBackLab.Width - this.currentModelRunLab.Width) / 2,
-                (this.currentModelRunBackLab.Height - this.currentModelRunLab.Height) / 2 - 10);
-            this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
-            this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
-            this.progressBar.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
-            this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
-
-            // 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            this.operatorControl.Location = new Point(this.canvasPanel.Width -280 , 38);
-            this.remarkControl.Location = new Point(this.canvasPanel.Width - 505 , 38);
-            this.rightHideButton.Location = new Point(this.canvasPanel.Width - 60, 38);
         }
         public void BlankButtonFocus()
         {
@@ -453,10 +454,10 @@ namespace C2.Forms
         {
             if (RelateTopic == null)
                 return;
-            OperatorWidget opw = RelateTopic.FindWidget<OperatorWidget>();
-            if(opw != null)
-                RelateTopic.Remove(opw);
-            RelateTopic.Add(new OperatorWidget { OpType = OpType.ModelOperator, OpName = document.Name });
+            //OperatorWidget opw = RelateTopic.FindWidget<OperatorWidget>();
+            //if(opw != null)
+            //    RelateTopic.Remove(opw);
+            //RelateTopic.Add(new OperatorWidget { HasModelOperator = true, OpName = document.Name });
 
             List<int> starNodes = new List<int>();
             List<int> endNodes = new List<int>();
@@ -465,7 +466,10 @@ namespace C2.Forms
             List<DataItem> rsDataItems = new List<DataItem>();
             foreach(ModelElement rsElement in rsElements)
             {
-                DataItem tmpDataItem = new DataItem(rsElement.FullFilePath,rsElement.Description,rsElement.Separator,rsElement.Encoding,rsElement.ExtType);
+                DataItem tmpDataItem = new DataItem(rsElement.FullFilePath, rsElement.Description, rsElement.Separator, rsElement.Encoding, rsElement.ExtType)
+                {
+                    ResultDataType = DataItem.ResultType.ModelOp
+                };
                 rsDataItems.Add(tmpDataItem);
             }
             if (rsDataItems.Count == 0)
@@ -479,7 +483,7 @@ namespace C2.Forms
             }
             else
             {
-                rsw.DataItems.Clear();
+                rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.ModelOp);
                 rsw.DataItems.AddRange(rsDataItems);
             }
 
@@ -596,6 +600,14 @@ namespace C2.Forms
         {
             this.topToolBarControl.Disable_RedoButton();
         }
+        public void Undo()
+        {
+            this.topToolBarControl.UndoButton_Click(this, EventArgs.Empty);
+        }
+        public void Redo()
+        {
+            this.topToolBarControl.RedoButton_Click(this, EventArgs.Empty);
+        }
         #endregion
 
         #region 文档加载
@@ -618,6 +630,34 @@ namespace C2.Forms
             doc.ModelElements.ForEach(me => this.canvasPanel.Controls.Add(me.InnerControl));
             this.naviViewControl.UpdateNaviView();
             doc.UpdateAllLines();
+        }
+        #endregion
+        #region 快捷键
+        private bool IsCurrentModelNotRun()
+        {
+            return Document.TaskManager.ModelStatus == ModelStatus.Running ? false : true;
+        }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (Visible && IsCurrentModelNotRun())
+            {
+                if (ShortcutKeys.Handle(e.KeyData))
+                {
+                    e.SuppressKeyPress = true;
+                }
+            }
+
+            base.OnKeyDown(e);
+        }
+        private void InitializeKeyBoard()
+        {
+            ShortcutKeys = new ShortcutKeysTable();
+            ShortcutKeys.Register(KeyMap.Undo, delegate () { Undo(); });
+            ShortcutKeys.Register(KeyMap.Redo, delegate () { Redo(); });
+            ShortcutKeys.Register(KeyMap.Save, delegate () { this.Document.Save(); });
+            ShortcutKeys.Register(KeyMap.Copy, delegate () { this.CanvasPanel.ControlSelect_Copy(); });
+            ShortcutKeys.Register(KeyMap.Paste, delegate () { this.CanvasPanel.ControlSelect_paste(); });
+            ShortcutKeys.Register(KeyMap.Delete, delegate () { this.CanvasPanel.DeleteSelectedLinesByIndex(); });
         }
         #endregion
 

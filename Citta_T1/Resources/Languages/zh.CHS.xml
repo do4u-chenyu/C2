@@ -421,7 +421,7 @@
 	<item name="OpenData">打开</item>
 	<item name="DeleteAttachment">取消</item>
 	<item name="ExploreDirectory">打开所在文件夹</item>
-
+  <item name="CopyFilePathToClipboard">复制文件路径到剪切板</item>
 
 
 	</words>
