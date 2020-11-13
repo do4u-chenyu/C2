@@ -65,7 +65,7 @@ namespace C2.Controls.MapViews
             //    keys |= Keys.Alt;
 
             //
-            if (ShortcutKeys.Haldle(e.KeyData))
+            if (ShortcutKeys.Handle(e.KeyData))
             {
                 e.SuppressKeyPress = true;
                 return;

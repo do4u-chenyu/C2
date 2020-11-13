@@ -505,7 +505,7 @@ namespace C2.Forms
         {
             if (Visible)
             {
-                if (ShortcutKeys.Haldle(e.KeyData))
+                if (ShortcutKeys.Handle(e.KeyData))
                 {
                     e.SuppressKeyPress = true;
                 }
