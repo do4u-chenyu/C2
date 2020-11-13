@@ -8,9 +8,9 @@ namespace C2.Model.Widgets
     class AttachmentWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "ATTACHMENT";
-        [Browsable(false)]
-        public List<string> FullFilePaths { get; set; }
 
+        [Browsable(false)]
+        public List<string> FullFilePaths { get; set; }= new List<string>();
         public override string Description => HelpUtil.AttachmentWidgetHelpInfo;
 
         public AttachmentWidget()

@@ -1962,6 +1962,8 @@
     <None Include="Resources\Images\WidgetImage\opSetSuccess.png" />
     <None Include="Resources\Images\WidgetImage\opSet.png" />
     <None Include="Resources\Images\WidgetImage\opWarn.png" />
+    <None Include="Resources\Images\WidgetImage\xmindData.png" />
+    <None Include="Resources\Images\WidgetImage\deleteattachment.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -2400,7 +2402,12 @@
     <Content Include="Resources\StartPage\startPageTitle.png" />
     <Content Include="Resources\StartPage\tree.png" />
     <Content Include="Resources\StartPage\yellowGroup.png" />
+    <None Include="Resources\Templates\树状图.xml" />
+    <None Include="Resources\Templates\思维导图.xml" />
+    <None Include="Resources\Templates\组织图.xml" />
+    <None Include="Resources\Templates\空模板.xml" />
     <Content Include="Resources\Templates\组织架构图.xml" />
+    <None Include="Resources\Templates\逻辑图.xml" />
     <Content Include="Resources\thanks.xml">
       <SubType>Designer</SubType>
     </Content>

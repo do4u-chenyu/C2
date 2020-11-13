@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml;
 using C2.Business.Model;
+using C2.Utils;
 
 namespace C2.Model.Widgets
 {
@@ -41,6 +42,19 @@ namespace C2.Model.Widgets
                 .WriteAttribute("separator", dataItem.FileSep.ToString())
                 .WriteAttribute("encoding", dataItem.FileEncoding)
                 .WriteAttribute("file_type", dataItem.FileType);
+        }
+        protected void ReadAttribute(XmlNodeList data_items,List<DataItem> DataItems)
+        {
+            foreach (XmlElement dataItem in data_items)
+            {
+                DataItem item = new DataItem(
+                   dataItem.GetAttribute("path"),
+                   dataItem.GetAttribute("name"),
+                   ConvertUtil.TryParseAscii(dataItem.GetAttribute("separator")),
+                   OpUtil.EncodingEnum(dataItem.GetAttribute("encoding")),
+                   OpUtil.ExtTypeEnum(dataItem.GetAttribute("file_type")));
+                DataItems.Add(item);
+            }
         }
         #endregion
     }

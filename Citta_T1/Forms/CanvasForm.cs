@@ -272,6 +272,9 @@ namespace C2.Forms
             this.runButton.Location = new Point(x, y + 83);
 
             //运行状态动图、进度条定位
+            this.currentModelRunLab.Location = new Point(
+                (this.currentModelRunBackLab.Width - this.currentModelRunLab.Width) / 2,
+                (this.currentModelRunBackLab.Height - this.currentModelRunLab.Height) / 2 - 10);
             this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
             this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
             this.progressBar.Location = new Point(x, this.canvasPanel.Height / 2 + 54);

@@ -27,7 +27,6 @@ namespace C2.Controls
         ToolTip toolTip1;
         string _ToolTipText;
 
-        public event ThumbViewItemEventHandler ItemClick;
         public event ThumbViewItemCancelEventHandler ItemClosing;
         public event ThumbViewItemEventHandler ItemClosed;
 
@@ -58,10 +57,10 @@ namespace C2.Controls
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.dataStorge));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.businessView));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.ram));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.logicMap));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.tree));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.organization));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.mindMap));
+            Items.Add(new ThumbItem("逻辑图", global::C2.Properties.Resources.logicMap));
+            Items.Add(new ThumbItem("树状图", global::C2.Properties.Resources.tree));
+            Items.Add(new ThumbItem("组织架构图", global::C2.Properties.Resources.organization));
+            Items.Add(new ThumbItem("思维导图", global::C2.Properties.Resources.mindMap));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.dbnet));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.gunLuntan));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.yellowGroup));
@@ -557,11 +556,11 @@ namespace C2.Controls
 
         protected virtual void OnItemClick(ThumbItem item)
         {
-            item.NotifyClick();
-
-            if (ItemClick != null)
-                ItemClick(this, new ThumbViewItemEventArgs(item));
+            if (item.Text.Equals(""))
+                return;
+            Global.GetMainForm().NewDocumentForm_Click(item.Text);
         }
+            //ItemClick(this, new ThumbViewItemEventArgs(item)); 
 
         void OnItemClose(ThumbItem item)
         {

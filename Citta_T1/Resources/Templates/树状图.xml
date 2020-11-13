@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document type="C2" editor_version="1.0.0.0" document_version="3.0.0.0">
+  <!--Create by C2, you can download it free from http://www.C2.org-->
+  <information>
+    <author>xk</author>
+    <company>
+    </company>
+    <version>3.0</version>
+    <description>
+    </description>
+  </information>
+  <attributes>
+    <item name="editor_show_sidebar">True</item>
+  </attributes>
+  <charts active_chart="0">
+    <chart name="业务拓展视图" type="MindMap">
+      <remark>
+      </remark>
+      <layout>TREE_RIGHT</layout>
+      <style>
+        <back_color>White</back_color>
+        <fore_color>Black</fore_color>
+        <line_color>Black</line_color>
+        <border_color>#5A4EB1</border_color>
+        <node_back_color>#AEA8D9</node_back_color>
+        <node_fore_color>Black</node_fore_color>
+        <select_color>#5A4EB1</select_color>
+        <hover_color>#5A4EB1</hover_color>
+        <link_line_color>#5A4EB1</link_line_color>
+        <widget_margin>2</widget_margin>
+        <picture_thumb_size>100, 100</picture_thumb_size>
+      </style>
+      <nodes>
+        <node id="1" text="xxx会战" x="349" y="101" width="146" height="66" text_b="12, 12, 122, 42">
+          <style>
+            <back_color>#5A4EB1</back_color>
+            <fore_color>White</fore_color>
+            <border_color>#B68FCB</border_color>
+            <round_radius>5</round_radius>
+            <padding>12</padding>
+            <font font_family="微软雅黑" size="21.75" style="Bold" />
+          </style>
+          <nodes>
+            <node id="1" text="XX专项" x="502" y="177" width="117" height="38" text_b="36, 3, 79, 32" fold_btn_b="489, 190, 13, 13">
+              <style>
+                <round_radius>5</round_radius>
+                <font font_family="微软雅黑" size="15.75" style="Regular" />
+              </style>
+              <widgets>
+                <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\旗子 (2).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                  <text>旗子 (2)</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOISURBVHhe7Z2xa9RgGMa7qIiuIjbJVaQgFhFEQUQUQRB1UBBHJwc3QQedHJwEcaq6FAShl3xn8iXFXcRdHN10EHEQlC7+AZrIQzl7X+vp+yZ9vT4/eIa7+/LlzfO7S2+6ThFCCCGEECsszQwO+Ci752O3UMbpKTytSj6d768Sd7GI3Z06N6qeu1L20hNlL9uXx/l2LNvc5NPZ8TJxP0LxibuFZX9FHi/OlknqQnuOn7Q/mBnsxZabg+adGS5jKLG7i+XrUsXuXBml74J7COOT9JOP0ss4lQmau0kzGx7qsPrC1wqWB/l1iwsc01Z8kj3AqTun+cQWSfZmeB68pMPwxuulSNxNHLJCGbm3obXdJfvse4MzGKc1Fo4sbKniwf3wDIpCfNQ/HTpBONlrHLZCeN3GpP6C8LG+rV3CaGLqW/n1cd9wOETOJAkZTfq9/kLy2Cf9k80XjMXdizsw9grzs/Pb8l5/rr7lXvNx+iq8z5+D7eRMtpDugjrkUIhOUIccCtEJ6pBDITpBHXIoRCeoQw6F6AR1yKEQnaAOORSiE9Qhh0J0gjrkUIhOUIccCtEJ6pBDITpBHXIoRCeoQw6F6AR1yKEQnaAOORSiE9Qhh0J0gjrkUIhOUIccCtEJ6pBDITpBHXIoRCeoQw6F6AR1yKEQnaAOORSiE9Qhh0J0gjrkUIhOUIccCtEJ6pBDITpBHXIoRCeoQw6F6AR1yKEQnaAOORSiE9Qhh0J0gjrkUIhOUIccCtEJ6pBDITpBHXIoRCeoQw6F6AR1yKEQnaAOORSiE9Qhh0J0gjrktC4kcsvNL+a86OVzOGQsfOSuFrF7GdzTYDC2nDaE+CR9hJfVqAUda84fOt9Gpp5ruepVezCmHC0hzWA+cUfxdKv4pH+2SNy332frNvX1PsM4ukiF+Cj9UMwVW/Gwc6o4W/Mnk7RTX+uXMsou4NTtIBVihWJXsbP+hD4Nz/3v8clgqf40HMJp2mdShKymip8frOd9WM/9dfQ6wvFJ9r75+1d/Es5jm+6ZVCH/LRRiDAoxBoUYg0KMQSHGoBBjUIgxKMQYFGIMCjEGhRiDQoxBIcagEGNQiDEoxBgUYgwKMQaFGINCjEEhxqAQY1CIMSjEGBRiDAoxBoUYg0KMQSEGCZc/Gj/jDuMQ0ibj/ttqLCddEBIwHCwjXVLG2e1RGdkTvEwIIYQQQog5pqZ+AkzHNVbQw23HAAAAAElFTkSuQmCC]]></thumb>
+                </widget>
+              </widgets>
+              <nodes>
+                <node id="2" text="分析任务1" x="640" y="225" width="135" height="38" text_b="36, 4, 97, 30">
+                  <style>
+                    <back_color>Lavender</back_color>
+                    <round_radius>5</round_radius>
+                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                  </style>
+                  <widgets>
+                    <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\任务 (2).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                      <text>任务 (2)</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHySURBVHhe7doxTutAFEbhdJSJLQRiGzSIjjIFTeyE2KFnDZQsgBaxC7aAhMQC6GmQWAMtGOkWlvnjEbbHHlvnk07rOzO3iXhvBgAAAAAAAAAAAAAYtd0ivdxG6R3Vlx1lx/Zk/uTx+pv+UZQ+2dN1rxjw9mcgObPn654aRu628/TCnrBbahi5YyGBxUIaZtdsRX2XhTTMrtmK+i4LaZhdsxX1XRbSMLtmK+q7LKRhds1W1HdZSMPsmq2o77KQwGIhgcVCAsvnQl6rw8idPZ8faiDt7/ffRezpAAAAMB7FT7nH6k872p89mx/bKHlQQ6k+e77uqWHk7mq+OrUn7JYaRu7442JgTWYh1f8rO4bkPaayEBs7KuoeLGRA6h4sZEDqHixkQOoeLGRA6h6TWchUYiGBxUICy9tCskXyqQZSffZ8fqiBVFf6bk/nTzHkPo/Wz1RfFq9X9mQAAAAOxa+H8zxOPvRPPKr0Ys/mRxanZ2IoObLn616+SL7UQKpvOVse2BN2Sw0jd/xxMbBYSGCxkFJ29N6oM7CQUnb03qgzsJBSdvTeqDOwkFJ29N6oM7CQUnb03qgzsJBy4h+OvCbOwEICi4UEFgsJrOvD1Yk9YbfyaHOrBlJ99nx+7KLNjRpKOns2AAAAAAAAAAAAAMDYzGY/7LKRQchAxFUAAAAASUVORK5CYII=]]></thumb>
+                    </widget>
+                  </widgets>
+                </node>
+                <node id="3" text="分析任务2" x="640" y="273" width="135" height="38" text_b="36, 4, 97, 30">
+                  <style>
+                    <back_color>Lavender</back_color>
+                    <round_radius>5</round_radius>
+                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                  </style>
+                  <widgets>
+                    <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\任务 (3).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                      <text>任务 (3)</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHzSURBVHhe7do/SsRAGIbx7TyCeA0bsbO0sLHIzoq9nbVJtPAAksRCvIVXEAQPYG8jeAZb/8BXhPXdZElmkkl4fvC0mZnva0RdAAAAAAAAAAAAAAAm7cZVJ1lS3lJLq2rXRhZO7qpv2r5sWT7Z6PzLk+JNHUrN2fj8U4dRe1euPLIR+qUOo/ZYSGSxkI7ZM3tR32UhHbNn9qK+y0I6Zs/sRX2XhXTMntmL+i4L6Zg9sxf1XRbSMXtmL+q7LCSyWEhksZDICraQNCle1YHUnI0vDHUgbe7v7yI2OgAAAExHtiwf1Y93pLOxhZG58kEdSs3Z+PxTh9EWLYt9G6Ff8jBqjV8uRtZsFvLvf2UnkHrHbBZix06KegcLGZF6BwsZkXoHCxmRegcLGZF6x2wWMpdYSGSxkMgKtpDUVZ/qQGrOxheGOpA2lybFu40unNyVd1lSPVNz+ao6tZEBAAC0SM/Kw9wVH+pHPForqV5sbGGkq/JAHkyN2fj8+/341/ph1N7l8f2OjdAvdRi1xy8XI4uFRBYLqWVXH4y6AwupZVcfjLoDC6llVx+MugMLqWVXH4y6AwupZVcfjLoDC6ml/nAUMnUHFhJZLCSyWEhsnRd7NkK/rl2VygOpMRtfGLm7v1CHks7GBgAAAAAAAAAAAACYmsXiByhcTQxOGYJJAAAAAElFTkSuQmCC]]></thumb>
+                    </widget>
+                  </widgets>
+                </node>
+              </nodes>
+              <lines>
+                <line target="2" begin_side="Bottom" end_side="Left" begin_rect="502, 177, 117, 38" end_rect="640, 225, 135, 38" />
+                <line target="3" begin_side="Bottom" end_side="Left" begin_rect="502, 177, 117, 38" end_rect="640, 273, 135, 38" />
+              </lines>
+            </node>
+            <node id="4" text="XX专项" x="502" y="321" width="117" height="38" text_b="36, 3, 79, 32" fold_btn_b="489, 334, 13, 13">
+              <style>
+                <round_radius>5</round_radius>
+                <font font_family="微软雅黑" size="15.75" style="Regular" />
+              </style>
+              <widgets>
+                <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\旗子(3).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                  <text>旗子(3)</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOfSURBVHhe7Z29ixNRFMW3EysrwUJN3ssigoIgfhVioY0gNiIIFlpbKApq5s0iiP4HNlaCCgqCYOVXa2mjzptEELSwFBHEwlJnlsOyu1yX6L2TvbjnB6fY5H3l/EKS6u0MIYQQQgjxwmhwdUcO6XaO5aMcyuN42IxRf+5Qs/65JtfbVLG4kAfFqfbxelDMft58aT2Grm1yf7irHpS/xMTyGob9FeNQbGvKfiauOWFyv3yQB3NbsOTaYBzTTqmMpSluYviKjGI6kmP6Jq+hSw7DL+NeeQBbuSD309P2bPjThuUv/E/BcJGmrCfSnM4S02NsPXXqODzcvjkWnwdP6fkwmzYuXnil5FhcxLQFchy+l8ZOM+Ot5W4cpzPq3uVNzZvgtbR/GwzTk0OxV9pATCjuYdoC4rhVSvPxUdVx7iCOpqYO6fT8msJey4MpeqpY7pE2kFIN0l1MW0Aa5yVVKL7Pf8aHMrXfbR/jcAOOvYT5X5b98kzVTw+ldSYJltIz6hf7pQ2kvIvpPqYtII1bi0EdeijEJqhDD4XYBHXooRCboA49FGIT1KGHQmyCOvRQiE1Qhx4KsQnq0EMhNkEdeijEJqhDD4XYBHXooRCboA49FGIT1KGHQmyCOvRQiE1Qhx4KsQnq0EMhNkEdeijEJqhDD4XYBHXooRCboA49FGIT1KGHQmyCOvRQiE1Qhx4KsQnq0EMhNkEdeijEJqhDD4XYBHXooRCboA49FGIT1KGHQmyCOvRQiE1Qhx4KsQnq0EMhNkEdeijEJqhDD4XYBHXooRCboA49FGIT1KGHQmyCOvRQiE1Qhx4KsQnq0EMhNkEdeupQ7pM2kPKvQnJIN6pe2o4pE9HeoVWF9Fxaz2NwbD1dXK2RQ3kLT5vRvnGqMBxJ+6122qs5cEw9VpfPVLH42a6FhzuljsXZJedahTSv9w2OY4tWSGcHm5BGzgvxrB2kvcym8wvUtEK8UIXyWPOd81U8tyLt7XhNTmCb7vlfhCymvYYpx/JKHdNb8XWslJhe1r3iKJaaPtqfvcQYCnEGhTiDQpxBIc6gEGdQiDMoxBkU4gwKcQaFOINCnEEhzqAQZ1CIMyjEGRTiDApxBoU4g0KcQSHOoBBnUIgzKMQZFOIMCnEGhTiDQpxBIc5o//W1VL6UHIs7mEa6RCpfTEgnMYV0SRWKH6KAZcFwMg0kAYvzYfb8Ogwl0yLH4avlIprvjU94mhBCCCGEEHfMzPwGts9SbradfY8AAAAASUVORK5CYII=]]></thumb>
+                </widget>
+              </widgets>
+              <nodes>
+                <node id="5" text="分析任务1" x="640" y="369" width="135" height="38" text_b="36, 4, 97, 30">
+                  <style>
+                    <back_color>Lavender</back_color>
+                    <round_radius>5</round_radius>
+                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                  </style>
+                  <widgets>
+                    <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\任务 (2).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                      <text>任务 (2)</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHySURBVHhe7doxTutAFEbhdJSJLQRiGzSIjjIFTeyE2KFnDZQsgBaxC7aAhMQC6GmQWAMtGOkWlvnjEbbHHlvnk07rOzO3iXhvBgAAAAAAAAAAAAAYtd0ivdxG6R3Vlx1lx/Zk/uTx+pv+UZQ+2dN1rxjw9mcgObPn654aRu628/TCnrBbahi5YyGBxUIaZtdsRX2XhTTMrtmK+i4LaZhdsxX1XRbSMLtmK+q7LKRhds1W1HdZSMPsmq2o77KQwGIhgcVCAsvnQl6rw8idPZ8faiDt7/ffRezpAAAAMB7FT7nH6k872p89mx/bKHlQQ6k+e77uqWHk7mq+OrUn7JYaRu7442JgTWYh1f8rO4bkPaayEBs7KuoeLGRA6h4sZEDqHixkQOoeLGRA6h6TWchUYiGBxUICy9tCskXyqQZSffZ8fqiBVFf6bk/nTzHkPo/Wz1RfFq9X9mQAAAAOxa+H8zxOPvRPPKr0Ys/mRxanZ2IoObLn616+SL7UQKpvOVse2BN2Sw0jd/xxMbBYSGCxkFJ29N6oM7CQUnb03qgzsJBSdvTeqDOwkFJ29N6oM7CQUnb03qgzsJBy4h+OvCbOwEICi4UEFgsJrOvD1Yk9YbfyaHOrBlJ99nx+7KLNjRpKOns2AAAAAAAAAAAAAMDYzGY/7LKRQchAxFUAAAAASUVORK5CYII=]]></thumb>
+                    </widget>
+                  </widgets>
+                </node>
+                <node id="6" text="分析任务2" x="640" y="417" width="135" height="38" text_b="36, 4, 97, 30">
+                  <style>
+                    <back_color>Lavender</back_color>
+                    <round_radius>5</round_radius>
+                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                  </style>
+                  <widgets>
+                    <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\任务 (3).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                      <text>任务 (3)</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHzSURBVHhe7do/SsRAGIbx7TyCeA0bsbO0sLHIzoq9nbVJtPAAksRCvIVXEAQPYG8jeAZb/8BXhPXdZElmkkl4fvC0mZnva0RdAAAAAAAAAAAAAAAm7cZVJ1lS3lJLq2rXRhZO7qpv2r5sWT7Z6PzLk+JNHUrN2fj8U4dRe1euPLIR+qUOo/ZYSGSxkI7ZM3tR32UhHbNn9qK+y0I6Zs/sRX2XhXTMntmL+i4L6Zg9sxf1XRbSMXtmL+q7LCSyWEhksZDICraQNCle1YHUnI0vDHUgbe7v7yI2OgAAAExHtiwf1Y93pLOxhZG58kEdSs3Z+PxTh9EWLYt9G6Ff8jBqjV8uRtZsFvLvf2UnkHrHbBZix06KegcLGZF6BwsZkXoHCxmRegcLGZF6x2wWMpdYSGSxkMgKtpDUVZ/qQGrOxheGOpA2lybFu40unNyVd1lSPVNz+ao6tZEBAAC0SM/Kw9wVH+pHPForqV5sbGGkq/JAHkyN2fj8+/341/ph1N7l8f2OjdAvdRi1xy8XI4uFRBYLqWVXH4y6AwupZVcfjLoDC6llVx+MugMLqWVXH4y6AwupZVcfjLoDC6ml/nAUMnUHFhJZLCSyWEhsnRd7NkK/rl2VygOpMRtfGLm7v1CHks7GBgAAAAAAAAAAAACYmsXiByhcTQxOGYJJAAAAAElFTkSuQmCC]]></thumb>
+                    </widget>
+                  </widgets>
+                </node>
+              </nodes>
+              <lines>
+                <line target="5" begin_side="Bottom" end_side="Left" begin_rect="502, 321, 117, 38" end_rect="640, 369, 135, 38" />
+                <line target="6" begin_side="Bottom" end_side="Left" begin_rect="502, 321, 117, 38" end_rect="640, 417, 135, 38" />
+              </lines>
+            </node>
+            <node id="7" text="XX专项" x="502" y="465" width="117" height="38" text_b="36, 3, 79, 32" fold_btn_b="489, 478, 13, 13">
+              <style>
+                <round_radius>5</round_radius>
+                <font font_family="微软雅黑" size="15.75" style="Regular" />
+              </style>
+              <widgets>
+                <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\旗子(6).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                  <text>旗子(6)</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOqSURBVHhe7Z09axRRFIa3E0XNzF2EIEl27hJEUBDEr0IstBHERgTBQmsLRUHdOxME0X9gYyWooCAIVn61ljaKIHb+ABFBLCx1Jrwsm+UYVs+ZzcG8D7xFdu9X3ifZTHXTIYQQQgghXsjnr+8KsbwbYvUki9VJvGxGViwdyWJ5IY/lzSahSJfyIp1pXt86lxY7c1c2Yuj6JisGe7r96peUUFQ3MOyv2BLTjhDTC2nNSVPv/SjfvjSPJdcH+Vy5WypjNHlMtzF8Vbr98lj9G/ZNWkObUAy+hF51CFu5IBTl8+Zs+NKG8W/8T8FwkTwOnklz2kpWlE+x9dSZWRgcbX44Rs+Dt/Rsni23jS68WkI/Xca0IbWIT9LYaWZmodqL47TGpt7V2bxXvpX2b4Jherox7Zc2EBPTA0wbIo5bo9QfHx/y/tJhHE1N/fBxtllT2ms8mKJna7/aJ20gpX4quo9pQ6RxXpIV6XvzGV8/MZbN37a8P5jBsVew/GRZVOfqsY+ldSYJltJTP3YelDaQUgt5iGlDpHHrMahDD4XYBHXooRCboA49FGIT1KGHQmyCOvRQiE1Qhx4KsQnq0EMhNkEdeijEJqhDD4XYBHXooRCboA49FGIT1KGHQmyCOvRQiE1Qhx4KsQnq0EMhNkEdeijEJqhDD4XYBHXooRCboA49FGIT1KGHQmyCOvRQiE1Qhx4KsQnq0EMhNkEdeijEJqhDD4XYBHXooRCboA49FGIT1KGHQmyCOvRQiE1Qhx4KsQnq0EMhNkEdeijEJqhDD4XYBHXooRCboA49FGIT1KGHQmyCOvRQiE1Qhx4KsQnq0EMhNkEdeijEJqhDT4jVAWkDKf8qpJ53q9srd2LKRDR3aIVYvpTW8xgcW08bV2vksbqDt81ofnCyOPgo7bfWaa7mwDH1WF0+k8f0s1kLL7dK/TF7fsW51iAhpnc4ji1aIa0dbELq/V+JZ20hy5fZtH2BmlaIF7JYnaj/5nwVz61Iczte6JensE37/C9CRmmuYcqL6lpd5nvx+1glWSxf5710HEtNH+1jLzGGQpxBIc6gEGdQiDMoxBkU4gwKcQaFOINCnEEhzqAQZ1CIMyjEGRTiDApxBoU4g0KcQSHOoBBnUIgzKMQZFOIMCnEGhTiDQpxBIc6gEGdQiDOaf30tlS8lK9I9TCNtIpUvJcTyNKaQNsmL9EMSMB4MJ9NAEjCazuLFDRhKpkXoDd6MiwgxfcbbhBBCCCGEuKPT+Q0uE+4stzzv7wAAAABJRU5ErkJggg==]]></thumb>
+                </widget>
+              </widgets>
+              <nodes>
+                <node id="8" text="分析任务1" x="640" y="513" width="135" height="38" text_b="36, 4, 97, 30">
+                  <style>
+                    <back_color>Lavender</back_color>
+                    <round_radius>5</round_radius>
+                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                  </style>
+                  <widgets>
+                    <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\任务 (2).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                      <text>任务 (2)</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHySURBVHhe7doxTutAFEbhdJSJLQRiGzSIjjIFTeyE2KFnDZQsgBaxC7aAhMQC6GmQWAMtGOkWlvnjEbbHHlvnk07rOzO3iXhvBgAAAAAAAAAAAAAYtd0ivdxG6R3Vlx1lx/Zk/uTx+pv+UZQ+2dN1rxjw9mcgObPn654aRu628/TCnrBbahi5YyGBxUIaZtdsRX2XhTTMrtmK+i4LaZhdsxX1XRbSMLtmK+q7LKRhds1W1HdZSMPsmq2o77KQwGIhgcVCAsvnQl6rw8idPZ8faiDt7/ffRezpAAAAMB7FT7nH6k872p89mx/bKHlQQ6k+e77uqWHk7mq+OrUn7JYaRu7442JgTWYh1f8rO4bkPaayEBs7KuoeLGRA6h4sZEDqHixkQOoeLGRA6h6TWchUYiGBxUICy9tCskXyqQZSffZ8fqiBVFf6bk/nTzHkPo/Wz1RfFq9X9mQAAAAOxa+H8zxOPvRPPKr0Ys/mRxanZ2IoObLn616+SL7UQKpvOVse2BN2Sw0jd/xxMbBYSGCxkFJ29N6oM7CQUnb03qgzsJBSdvTeqDOwkFJ29N6oM7CQUnb03qgzsJBy4h+OvCbOwEICi4UEFgsJrOvD1Yk9YbfyaHOrBlJ99nx+7KLNjRpKOns2AAAAAAAAAAAAAMDYzGY/7LKRQchAxFUAAAAASUVORK5CYII=]]></thumb>
+                    </widget>
+                  </widgets>
+                </node>
+                <node id="9" text="分析任务2" x="640" y="561" width="135" height="38" text_b="36, 4, 97, 30">
+                  <style>
+                    <back_color>Lavender</back_color>
+                    <round_radius>5</round_radius>
+                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                  </style>
+                  <widgets>
+                    <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\任务 (3).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                      <text>任务 (3)</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHzSURBVHhe7do/SsRAGIbx7TyCeA0bsbO0sLHIzoq9nbVJtPAAksRCvIVXEAQPYG8jeAZb/8BXhPXdZElmkkl4fvC0mZnva0RdAAAAAAAAAAAAAAAm7cZVJ1lS3lJLq2rXRhZO7qpv2r5sWT7Z6PzLk+JNHUrN2fj8U4dRe1euPLIR+qUOo/ZYSGSxkI7ZM3tR32UhHbNn9qK+y0I6Zs/sRX2XhXTMntmL+i4L6Zg9sxf1XRbSMXtmL+q7LCSyWEhksZDICraQNCle1YHUnI0vDHUgbe7v7yI2OgAAAExHtiwf1Y93pLOxhZG58kEdSs3Z+PxTh9EWLYt9G6Ff8jBqjV8uRtZsFvLvf2UnkHrHbBZix06KegcLGZF6BwsZkXoHCxmRegcLGZF6x2wWMpdYSGSxkMgKtpDUVZ/qQGrOxheGOpA2lybFu40unNyVd1lSPVNz+ao6tZEBAAC0SM/Kw9wVH+pHPForqV5sbGGkq/JAHkyN2fj8+/341/ph1N7l8f2OjdAvdRi1xy8XI4uFRBYLqWVXH4y6AwupZVcfjLoDC6llVx+MugMLqWVXH4y6AwupZVcfjLoDC6ml/nAUMnUHFhJZLCSyWEhsnRd7NkK/rl2VygOpMRtfGLm7v1CHks7GBgAAAAAAAAAAAACYmsXiByhcTQxOGYJJAAAAAElFTkSuQmCC]]></thumb>
+                    </widget>
+                  </widgets>
+                </node>
+              </nodes>
+              <lines>
+                <line target="8" begin_side="Bottom" end_side="Left" begin_rect="502, 465, 117, 38" end_rect="640, 513, 135, 38" />
+                <line target="9" begin_side="Bottom" end_side="Left" begin_rect="502, 465, 117, 38" end_rect="640, 561, 135, 38" />
+              </lines>
+            </node>
+            <node id="10" text="XX专项" x="502" y="609" width="117" height="38" text_b="36, 3, 79, 32" fold_btn_b="489, 622, 13, 13">
+              <style>
+                <round_radius>5</round_radius>
+                <font font_family="微软雅黑" size="15.75" style="Regular" />
+              </style>
+              <widgets>
+                <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\旗子(5).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                  <text>旗子(5)</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOqSURBVHhe7Z09iBNRFIXTibKbeW9BsLETERQE8a8QC20EsRFBsNDaRmwsLATR2mLNvFm3EFRQEAQr/1pLG0UQnTfJLliKCGJhqTN6iDE8l+i9k72454PDssn72/OFJNXbDiGEEEIIsYLPq+1ZUS24UN53IR7Dw2q4vDzoinjWh+pyE1eU5+qfJ5vHu3m1pXPt/XoMXdu4haWdc0X1LRWXx0sY9lfM9gZbszw+Tq05abK8ulsL24wl1wa+6O9IlTEaH+JVDF+RLO8f9nn5KbWGNLWYD3NF3I+tTJCF+Kg5G37VYfwP/1MwPIkv4sPUnLbiwrsH2HrqZEX/0M8Xx6/z4Ck5M/Nx4+jCKyUr4nlMG1J/zrxNjZ1msl61C8dpjQ358ibXiy9S+zfBMDndMNiT2iAV34u3MW1IatxqpX77eO3zwQEcTUz95eNUs2Zqr/Fgipzujf7u1Aap+DzewrQhqXFW4kL1uXmPr39e/PHZtjjIcOzfaL5Z1mNO12PvpdaZJFhKzmxe7kttkIoP5R1MG5IatxaDOuRQiE5QhxwK0QnqkEMhOkEdcihEJ6hDDoXoBHXIoRCdoA45FKIT1CGHQnSCOuRQiE5QhxwK0QnqkEMhOkEdcihEJ6hDDoXoBHXIoRCdoA45FKIT1CGHQnSCOuRQiE5QhxwK0QnqkEMhOkEdcihEJ6hDDoXoBHXIoRCdoA45FKIT1CGHQnSCOuRQiE5QhxwK0QnqkEMhOkEdcihEJ6hDDoXoBHXIoRCdoA45FKIT1CGHQnSCOuRQiE5QhxwK0QnqkEMhOkEdcihEJ6hDDoXoBHXIoRCdoA45FKIT1CGHQnSCOuR0FwZ7Uxuk8q9CfKiuzCwub8OUiWju0MpC+SS1nsXg2HLauFrDF/E6nlajeeG4vHqT2m+101zNgWPK0bp8xuXl12YtPNwqruifGT3XasSH+BLH0UUqpLWDTchcKJ+mztpGmstsWr9ATSrECi70j9Yvjo+pc0vS3I6Xhf5xbNM+/4uQUZprmHxRXqgFvUr9HSvF9apn9WfCESw1faRfe4kyFGIMCjEGhRiDQoxBIcagEGNQiDEoxBgUYgwKMQaFGINCjEEhxqAQY1CIMSjEGBRiDAoxBoUYg0KMQSHGoBBjUIgxKMQYFGIMCjEGhRiDQozR/OvrVPmpuFDdxDTSJqnyU8nyeAJTSJu4EL+kBIwHw8k0SAkYTWc+rsNQMi18Hp+Pi/AhLuFpQgghhBBCzNHpfAdKrndzeEVmVAAAAABJRU5ErkJggg==]]></thumb>
+                </widget>
+              </widgets>
+              <nodes>
+                <node id="11" text="分析任务1" x="640" y="657" width="135" height="38" text_b="36, 4, 97, 30">
+                  <style>
+                    <back_color>Lavender</back_color>
+                    <round_radius>5</round_radius>
+                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                  </style>
+                  <widgets>
+                    <widget type="PICTURE" x="4" y="4" width="30" height="30" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" image_url="C:\Users\lenovo\Desktop\C2\Icons\任务 (2).png" size_type="Thumb" original_size="200, 200" embed_in="False">
+                      <text>任务 (2)</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHySURBVHhe7doxTutAFEbhdJSJLQRiGzSIjjIFTeyE2KFnDZQsgBaxC7aAhMQC6GmQWAMtGOkWlvnjEbbHHlvnk07rOzO3iXhvBgAAAAAAAAAAAAAYtd0ivdxG6R3Vlx1lx/Zk/uTx+pv+UZQ+2dN1rxjw9mcgObPn654aRu628/TCnrBbahi5YyGBxUIaZtdsRX2XhTTMrtmK+i4LaZhdsxX1XRbSMLtmK+q7LKRhds1W1HdZSMPsmq2o77KQwGIhgcVCAsvnQl6rw8idPZ8faiDt7/ffRezpAAAAMB7FT7nH6k872p89mx/bKHlQQ6k+e77uqWHk7mq+OrUn7JYaRu7442JgTWYh1f8rO4bkPaayEBs7KuoeLGRA6h4sZEDqHixkQOoeLGRA6h6TWchUYiGBxUICy9tCskXyqQZSffZ8fqiBVFf6bk/nTzHkPo/Wz1RfFq9X9mQAAAAOxa+H8zxOPvRPPKr0Ys/mRxanZ2IoObLn616+SL7UQKpvOVse2BN2Sw0jd/xxMbBYSGCxkFJ29N6oM7CQUnb03qgzsJBSdvTeqDOwkFJ29N6oM7CQUnb03qgzsJBy4h+OvCbOwEICi4UEFgsJrOvD1Yk9YbfyaHOrBlJ99nx+7KLNjRpKOns2AAAAAAAAAAAAAMDYzGY/7LKRQchAxFUAAAAASUVORK5CYII=]]></thumb>
+                    </widget>
+                  </widgets>
+                </node>
+              </nodes>
+              <lines>
+                <line target="11" begin_side="Bottom" end_side="Left" begin_rect="502, 609, 117, 38" end_rect="640, 657, 135, 38" />
+              </lines>
+            </node>
+          </nodes>
+          <lines>
+            <line target="1" begin_side="Bottom" end_side="Left" begin_rect="349, 101, 146, 66" end_rect="489, 177, 130, 38" />
+            <line target="4" begin_side="Bottom" end_side="Left" begin_rect="349, 101, 146, 66" end_rect="489, 321, 130, 38" />
+            <line target="7" begin_side="Bottom" end_side="Left" begin_rect="349, 101, 146, 66" end_rect="489, 465, 130, 38" />
+            <line target="10" begin_side="Bottom" end_side="Left" begin_rect="349, 101, 146, 66" end_rect="489, 609, 130, 38" />
+          </lines>
+        </node>
+      </nodes>
+    </chart>
+    <chart name="组织架构视图" type="MindMap">
+      <remark>
+      </remark>
+      <layout>ORGANIZATION_DOWN</layout>
+      <style>
+        <back_color>White</back_color>
+        <fore_color>Black</fore_color>
+        <line_color>LightSlateGray</line_color>
+        <border_color>SlateGray</border_color>
+        <node_back_color>LightGray</node_back_color>
+        <node_fore_color>Black</node_fore_color>
+        <select_color>RoyalBlue</select_color>
+        <hover_color>MediumSlateBlue</hover_color>
+        <link_line_color>Green</link_line_color>
+        <widget_margin>2</widget_margin>
+        <picture_thumb_size>100, 100</picture_thumb_size>
+      </style>
+      <nodes>
+        <node id="2" text="组织架构视图" x="510" y="235" width="103" height="42" text_b="12, 12, 79, 18">
+          <style>
+            <back_color>Silver</back_color>
+            <fore_color>Black</fore_color>
+            <border_color>Black</border_color>
+            <padding>12</padding>
+          </style>
+          <nodes>
+            <node id="3" text="子主题 5" x="399" y="357" width="57" height="22" text_b="2, 2, 52, 18" fold_btn_b="421, 379, 13, 13">
+              <nodes>
+                <node id="4" text="子主题 1" x="399" y="459" width="57" height="22" text_b="2, 2, 52, 18" />
+              </nodes>
+              <lines>
+                <line target="4" begin_side="Bottom" end_side="Top" begin_rect="399, 357, 57, 35" end_rect="399, 459, 57, 22" />
+              </lines>
+            </node>
+            <node id="5" text="子主题 4" x="466" y="357" width="57" height="22" text_b="2, 2, 52, 18" fold_btn_b="488, 379, 13, 13">
+              <nodes>
+                <node id="6" text="子主题 1" x="466" y="459" width="57" height="22" text_b="2, 2, 52, 18" />
+              </nodes>
+              <lines>
+                <line target="6" begin_side="Bottom" end_side="Top" begin_rect="466, 357, 57, 35" end_rect="466, 459, 57, 22" />
+              </lines>
+            </node>
+            <node id="7" text="子主题 3" x="533" y="357" width="57" height="22" text_b="2, 2, 52, 18" fold_btn_b="555, 379, 13, 13">
+              <nodes>
+                <node id="8" text="子主题 1" x="533" y="459" width="57" height="22" text_b="2, 2, 52, 18" />
+              </nodes>
+              <lines>
+                <line target="8" begin_side="Bottom" end_side="Top" begin_rect="533, 357, 57, 35" end_rect="533, 459, 57, 22" />
+              </lines>
+            </node>
+            <node id="9" text="子主题 2" x="600" y="357" width="57" height="22" text_b="2, 2, 52, 18" fold_btn_b="622, 379, 13, 13">
+              <nodes>
+                <node id="10" text="子主题 1" x="600" y="459" width="57" height="22" text_b="2, 2, 52, 18" />
+              </nodes>
+              <lines>
+                <line target="10" begin_side="Bottom" end_side="Top" begin_rect="600, 357, 57, 35" end_rect="600, 459, 57, 22" />
+              </lines>
+            </node>
+            <node id="11" text="子主题 1" x="667" y="357" width="57" height="22" text_b="2, 2, 52, 18" fold_btn_b="689, 379, 13, 13">
+              <nodes>
+                <node id="12" text="子主题 1" x="667" y="459" width="57" height="22" text_b="2, 2, 52, 18" />
+              </nodes>
+              <lines>
+                <line target="12" begin_side="Bottom" end_side="Top" begin_rect="667, 357, 57, 35" end_rect="667, 459, 57, 22" />
+              </lines>
+            </node>
+          </nodes>
+          <lines>
+            <line target="3" begin_side="Bottom" end_side="Top" begin_rect="510, 235, 103, 42" end_rect="399, 357, 57, 22" />
+            <line target="5" begin_side="Bottom" end_side="Top" begin_rect="510, 235, 103, 42" end_rect="466, 357, 57, 22" />
+            <line target="7" begin_side="Bottom" end_side="Top" begin_rect="510, 235, 103, 42" end_rect="533, 357, 57, 22" />
+            <line target="9" begin_side="Bottom" end_side="Top" begin_rect="510, 235, 103, 42" end_rect="600, 357, 57, 22" />
+            <line target="11" begin_side="Bottom" end_side="Top" begin_rect="510, 235, 103, 42" end_rect="667, 357, 57, 22" />
+          </lines>
+        </node>
+      </nodes>
+    </chart>
+    <chart name="运作模式视图" type="MindMap">
+      <remark>
+      </remark>
+      <layout>MIND_MAP</layout>
+      <style>
+        <back_color>White</back_color>
+        <fore_color>Black</fore_color>
+        <line_color>LightSlateGray</line_color>
+        <border_color>SlateGray</border_color>
+        <node_back_color>LightGray</node_back_color>
+        <node_fore_color>Black</node_fore_color>
+        <select_color>RoyalBlue</select_color>
+        <hover_color>MediumSlateBlue</hover_color>
+        <link_line_color>Green</link_line_color>
+        <widget_margin>2</widget_margin>
+        <picture_thumb_size>100, 100</picture_thumb_size>
+      </style>
+      <nodes>
+        <node id="13" text="中心主题" x="0" y="0" width="0" height="0">
+          <style>
+            <back_color>Silver</back_color>
+            <fore_color>Black</fore_color>
+            <border_color>Black</border_color>
+            <padding>12</padding>
+          </style>
+        </node>
+      </nodes>
+    </chart>
+  </charts>
+</document>

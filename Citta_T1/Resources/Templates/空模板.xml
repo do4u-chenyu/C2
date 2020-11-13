@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document type="C2" editor_version="1.0.0.0" document_version="3.0.0.0">
+  <!--Create by C2, you can download it free from http://www.C2.org-->
+  <information>
+    <author>xk</author>
+    <company>
+    </company>
+    <version>3.0</version>
+    <description>
+    </description>
+  </information>
+  <attributes>
+    <item name="editor_show_sidebar">True</item>
+  </attributes>
+  <charts active_chart="0">
+    <chart name="业务拓展视图" type="MindMap">
+      <remark>
+      </remark>
+      <layout>MIND_MAP</layout>
+      <style>
+        <back_color>White</back_color>
+        <fore_color>Black</fore_color>
+        <line_color>LightSlateGray</line_color>
+        <border_color>SlateGray</border_color>
+        <node_back_color>LightGray</node_back_color>
+        <node_fore_color>Black</node_fore_color>
+        <select_color>RoyalBlue</select_color>
+        <hover_color>MediumSlateBlue</hover_color>
+        <link_line_color>Green</link_line_color>
+        <widget_margin>2</widget_margin>
+        <picture_thumb_size>100, 100</picture_thumb_size>
+      </style>
+      <nodes>
+        <node id="1" text="中心主题" x="523" y="377" width="78" height="42" text_b="12, 12, 54, 18">
+          <style>
+            <back_color>Silver</back_color>
+            <fore_color>Black</fore_color>
+            <border_color>Black</border_color>
+            <padding>12</padding>
+          </style>
+        </node>
+      </nodes>
+    </chart>
+    <chart name="组织架构视图" type="MindMap">
+      <remark>
+      </remark>
+      <layout>ORGANIZATION_DOWN</layout>
+      <style>
+        <back_color>White</back_color>
+        <fore_color>Black</fore_color>
+        <line_color>LightSlateGray</line_color>
+        <border_color>SlateGray</border_color>
+        <node_back_color>LightGray</node_back_color>
+        <node_fore_color>Black</node_fore_color>
+        <select_color>RoyalBlue</select_color>
+        <hover_color>MediumSlateBlue</hover_color>
+        <link_line_color>Green</link_line_color>
+        <widget_margin>2</widget_margin>
+        <picture_thumb_size>100, 100</picture_thumb_size>
+      </style>
+      <nodes>
+        <node id="2" text="组织架构视图" x="510" y="235" width="103" height="42" text_b="12, 12, 79, 18">
+          <style>
+            <back_color>Silver</back_color>
+            <fore_color>Black</fore_color>
+            <border_color>Black</border_color>
+            <padding>12</padding>
+          </style>
+          <nodes>
+            <node id="3" text="子主题 5" x="399" y="357" width="57" height="22" text_b="2, 2, 52, 18" fold_btn_b="421, 379, 13, 13">
+              <nodes>
+                <node id="4" text="子主题 1" x="399" y="459" width="57" height="22" text_b="2, 2, 52, 18" />
+              </nodes>
+              <lines>
+                <line target="4" begin_side="Bottom" end_side="Top" begin_rect="399, 357, 57, 35" end_rect="399, 459, 57, 22" />
+              </lines>
+            </node>
+            <node id="5" text="子主题 4" x="466" y="357" width="57" height="22" text_b="2, 2, 52, 18" fold_btn_b="488, 379, 13, 13">
+              <nodes>
+                <node id="6" text="子主题 1" x="466" y="459" width="57" height="22" text_b="2, 2, 52, 18" />
+              </nodes>
+              <lines>
+                <line target="6" begin_side="Bottom" end_side="Top" begin_rect="466, 357, 57, 35" end_rect="466, 459, 57, 22" />
+              </lines>
+            </node>
+            <node id="7" text="子主题 3" x="533" y="357" width="57" height="22" text_b="2, 2, 52, 18" fold_btn_b="555, 379, 13, 13">
+              <nodes>
+                <node id="8" text="子主题 1" x="533" y="459" width="57" height="22" text_b="2, 2, 52, 18" />
+              </nodes>
+              <lines>
+                <line target="8" begin_side="Bottom" end_side="Top" begin_rect="533, 357, 57, 35" end_rect="533, 459, 57, 22" />
+              </lines>
+            </node>
+            <node id="9" text="子主题 2" x="600" y="357" width="57" height="22" text_b="2, 2, 52, 18" fold_btn_b="622, 379, 13, 13">
+              <nodes>
+                <node id="10" text="子主题 1" x="600" y="459" width="57" height="22" text_b="2, 2, 52, 18" />
+              </nodes>
+              <lines>
+                <line target="10" begin_side="Bottom" end_side="Top" begin_rect="600, 357, 57, 35" end_rect="600, 459, 57, 22" />
+              </lines>
+            </node>
+            <node id="11" text="子主题 1" x="667" y="357" width="57" height="22" text_b="2, 2, 52, 18" fold_btn_b="689, 379, 13, 13">
+              <nodes>
+                <node id="12" text="子主题 1" x="667" y="459" width="57" height="22" text_b="2, 2, 52, 18" />
+              </nodes>
+              <lines>
+                <line target="12" begin_side="Bottom" end_side="Top" begin_rect="667, 357, 57, 35" end_rect="667, 459, 57, 22" />
+              </lines>
+            </node>
+          </nodes>
+          <lines>
+            <line target="3" begin_side="Bottom" end_side="Top" begin_rect="510, 235, 103, 42" end_rect="399, 357, 57, 22" />
+            <line target="5" begin_side="Bottom" end_side="Top" begin_rect="510, 235, 103, 42" end_rect="466, 357, 57, 22" />
+            <line target="7" begin_side="Bottom" end_side="Top" begin_rect="510, 235, 103, 42" end_rect="533, 357, 57, 22" />
+            <line target="9" begin_side="Bottom" end_side="Top" begin_rect="510, 235, 103, 42" end_rect="600, 357, 57, 22" />
+            <line target="11" begin_side="Bottom" end_side="Top" begin_rect="510, 235, 103, 42" end_rect="667, 357, 57, 22" />
+          </lines>
+        </node>
+      </nodes>
+    </chart>
+    <chart name="运作模式视图" type="MindMap">
+      <remark>
+      </remark>
+      <layout>MIND_MAP</layout>
+      <style>
+        <back_color>White</back_color>
+        <fore_color>Black</fore_color>
+        <line_color>LightSlateGray</line_color>
+        <border_color>SlateGray</border_color>
+        <node_back_color>LightGray</node_back_color>
+        <node_fore_color>Black</node_fore_color>
+        <select_color>RoyalBlue</select_color>
+        <hover_color>MediumSlateBlue</hover_color>
+        <link_line_color>Green</link_line_color>
+        <widget_margin>2</widget_margin>
+        <picture_thumb_size>100, 100</picture_thumb_size>
+      </style>
+      <nodes>
+        <node id="13" text="中心主题" x="0" y="0" width="0" height="0">
+          <style>
+            <back_color>Silver</back_color>
+            <fore_color>Black</fore_color>
+            <border_color>Black</border_color>
+            <padding>12</padding>
+          </style>
+        </node>
+      </nodes>
+    </chart>
+  </charts>
+</document>

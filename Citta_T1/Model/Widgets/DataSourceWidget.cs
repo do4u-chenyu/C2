@@ -29,16 +29,7 @@ namespace C2.Model.Widgets
         {
             base.Deserialize(documentVersion, node);
             var data_items = node.SelectNodes("data_items/data_item");
-            foreach (XmlElement dataItem in data_items)
-            {
-                DataItem item = new DataItem(
-                   dataItem.GetAttribute("path"),
-                   dataItem.GetAttribute("name"),
-                   ConvertUtil.TryParseAscii(dataItem.GetAttribute("separator")),
-                   OpUtil.EncodingEnum(dataItem.GetAttribute("encoding")),
-                   OpUtil.ExtTypeEnum(dataItem.GetAttribute("file_type")));
-                this.DataItems.Add(item);
-            }
+            ReadAttribute(data_items, this.DataItems);         
         }
 
     }
