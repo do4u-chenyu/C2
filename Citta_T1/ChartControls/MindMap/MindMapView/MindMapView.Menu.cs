@@ -253,7 +253,7 @@ namespace C2.Controls.MapViews
                 {
                     //TODO
                     //是否对undo redo有影响
-                    rsw.DataItems.Clear();
+                    rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.SingleOp);
                     rsw.DataItems.Add(resultItem);
                 }
                 opw.Status = OpStatus.Done;
