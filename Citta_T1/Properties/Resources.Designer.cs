@@ -663,6 +663,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap deleteattachment {
+            get {
+                object obj = ResourceManager.GetObject("deleteattachment", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap deletewidget {
             get {
                 object obj = ResourceManager.GetObject("deletewidget", resourceCulture);
@@ -3156,6 +3166,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap xlsData {
             get {
                 object obj = ResourceManager.GetObject("xlsData", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap xmindData {
+            get {
+                object obj = ResourceManager.GetObject("xmindData", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

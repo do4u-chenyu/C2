@@ -526,6 +526,9 @@ namespace C2.Controls.MapViews
                     case "pdf":
                         MenuOpenDataSource.Image = Properties.Resources.pdfData;
                         break;
+                    case "xmind":
+                        MenuOpenDataSource.Image = Properties.Resources.xmindData;
+                        break;
                     default:
                         break;
                 }
@@ -544,8 +547,8 @@ namespace C2.Controls.MapViews
                 MenuExploreDirectory.Tag = path;
                 MenuExploreDirectory.Click += MenuExploreDirectory_Click;
 
-                MenuDelete.Image = Properties.Resources.deletewidget;
-                MenuDelete.Text = Lang._("Delete");
+                MenuDelete.Image = Properties.Resources.deleteattachment;
+                MenuDelete.Text = Lang._("DeleteAttachment");
                 MenuDelete.Tag = path;
                 MenuDelete.Click += AttachmentMenuDelete_Click;
 
@@ -561,7 +564,7 @@ namespace C2.Controls.MapViews
                 Process.Start(directory);
             }
             catch {
-                MessageBox.Show("该类型文件无法打开.",
+                MessageBox.Show("该文件无法打开.",
                     "打开错误",                // 标题
                     MessageBoxButtons.OK,          // 按钮样式
                     MessageBoxIcon.Information);   // 图标样式
@@ -571,7 +574,7 @@ namespace C2.Controls.MapViews
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
             string directory = (sender as ToolStripMenuItem).Tag as string;
-            if (directory != null)
+            if(directory != null)
                 FileUtil.ExploreDirectory(directory);
         }
 

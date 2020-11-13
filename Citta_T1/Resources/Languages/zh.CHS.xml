@@ -420,6 +420,7 @@
 	<item name="AddAttachment">添加附件</item>
 	<item name="OpenData">打开</item>
 	<item name="ExploreDirectory">打开所在路径</item>
+	<item name="DeleteAttachment">取消</item>
 
 
 	</words>

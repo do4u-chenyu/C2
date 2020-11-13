@@ -7,7 +7,7 @@ namespace C2.Model.Widgets
     class AttachmentWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "ATTACHMENT";
-        public List<string> FullFilePaths { get; set; }
+        public List<string> FullFilePaths { get; set; }= new List<string>();
         public AttachmentWidget()
         {
             DisplayIndex = 6;
