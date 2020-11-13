@@ -400,6 +400,7 @@ namespace C2.ChartPageView
             MenuAddAttachment.Text = "Attachment";
             MenuAddAttachment.Click += new System.EventHandler(MenuAddAttachment_Click);
 
+            MenuAddModelOp.Image = C2.Properties.Resources.模型视图;
             MenuAddModelOp.Name = "MenuAddModelOp";
             MenuAddModelOp.Text = "Model";
             MenuAddModelOp.Click += new System.EventHandler(MenuAddModelOp_Click);
