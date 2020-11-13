@@ -28,19 +28,9 @@ namespace C2.Model.Widgets
         public override void Deserialize(Version documentVersion, XmlElement node)
         {
             base.Deserialize(documentVersion, node);
-            //TODO
-            //文档持久化
             var data_items = node.SelectNodes("result_items/result_item");
-            foreach (XmlElement dataItem in data_items)
-            {
-                DataItem item = new DataItem(
-                   dataItem.GetAttribute("path"),
-                   dataItem.GetAttribute("name"),
-                   ConvertUtil.TryParseAscii(dataItem.GetAttribute("separator")),
-                   OpUtil.EncodingEnum(dataItem.GetAttribute("encoding")),
-                   OpUtil.ExtTypeEnum(dataItem.GetAttribute("file_type")));
-                this.DataItems.Add(item);
-            }
+            ReadAttribute(data_items, this.DataItems);
+            
         }
     }
 }
