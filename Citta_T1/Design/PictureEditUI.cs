@@ -203,8 +203,10 @@ namespace C2.Controls
 
         void LnkRefreshLib_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             MyIconLibrary.Share.Refresh();
             LsbShareLibrary.RefreshItems();
+            this.Cursor = Cursors.Default;
         }
 
         protected override void OnGotFocus(EventArgs e)

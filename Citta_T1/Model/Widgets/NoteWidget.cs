@@ -23,8 +23,7 @@ namespace C2.Model.Widgets
 
         public NoteWidget()
         {
-            DisplayIndex = 4;
-            Alignment = WidgetAlignment.Left;
+            DisplayIndex = 5;
             widgetIcon = Properties.Resources.note_w_icon;
         }
 

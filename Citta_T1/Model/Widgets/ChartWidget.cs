@@ -8,6 +8,8 @@ namespace C2.Model.Widgets
     class ChartWidget : C2BaseWidget
     {
         public const string TypeID = "CHART";
+
+        public override string Description => HelpUtil.ChartWidgetHelpInfo;
         public ChartWidget()
         {
             DisplayIndex = 3;
@@ -26,13 +28,14 @@ namespace C2.Model.Widgets
                 foreach (var dataItem in this.DataItems)
                 {
                     var dataNode = node.OwnerDocument.CreateElement("chart_item");
-                    dataNode.SetAttribute("charttype", dataItem.ChartType);
-                    dataNode.SetAttribute("selectedindexs", string.Join(",", dataItem.SelectedIndexs));
-                    dataNode.SetAttribute("file_path", dataItem.FilePath);
-                    dataNode.SetAttribute("file_name", dataItem.FileName);
-                    dataNode.SetAttribute("file_separator", dataItem.FileSep.ToString());
-                    dataNode.SetAttribute("file_encoding", dataItem.FileEncoding.ToString());
-                    dataNode.SetAttribute("file_type", dataItem.FileType.ToString());
+                    dataNode.SetAttribute("chart_type", dataItem.ChartType);
+                    dataNode.SetAttribute("selected_indexs", string.Join(",", dataItem.SelectedIndexs));
+                    dataNode.SetAttribute("selected_items", string.Join(",", dataItem.SelectedItems));
+                    dataNode.SetAttribute("path", dataItem.FilePath);
+                    dataNode.SetAttribute("name", dataItem.FileName);
+                    dataNode.SetAttribute("separator", dataItem.FileSep.ToString());
+                    dataNode.SetAttribute("encoding", dataItem.FileEncoding.ToString());
+                    dataNode.SetAttribute("type", dataItem.FileType.ToString());
                     dataItemsNode.AppendChild(dataNode);
                 }
                 node.AppendChild(dataItemsNode);
@@ -45,13 +48,14 @@ namespace C2.Model.Widgets
             foreach (XmlElement dataItem in data_items)
             {
                 DataItem item = new DataItem(
-                   dataItem.GetAttribute("file_path"),
-                   dataItem.GetAttribute("file_name"),
-                   ConvertUtil.TryParseAscii(dataItem.GetAttribute("file_separator")),
-                   OpUtil.EncodingEnum(dataItem.GetAttribute("file_encoding")),
-                   OpUtil.ExtTypeEnum(dataItem.GetAttribute("file_type")));
-                item.ChartType = dataItem.GetAttribute("charttype");
-                item.SelectedIndexs = Utils.ConvertUtil.TryParseIntList(dataItem.GetAttribute("selectedindexs"));
+                   dataItem.GetAttribute("path"),
+                   dataItem.GetAttribute("name"),
+                   ConvertUtil.TryParseAscii(dataItem.GetAttribute("separator")),
+                   OpUtil.EncodingEnum(dataItem.GetAttribute("encoding")),
+                   OpUtil.ExtTypeEnum(dataItem.GetAttribute("type")));
+                item.ChartType = dataItem.GetAttribute("chart_type");
+                item.SelectedIndexs = Utils.ConvertUtil.TryParseIntList(dataItem.GetAttribute("selected_indexs"));
+                item.SelectedItems = new List<string>(dataItem.GetAttribute("selected_items").Split(','));
                 this.DataItems.Add(item);
             }
         }

@@ -28,20 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.ItemLabel = new System.Windows.Forms.Label();
+            this.Itempanel = new System.Windows.Forms.Panel();
+            this.Itempanel.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // ItemLabel
+            // 
+            this.ItemLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ItemLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ItemLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ItemLabel.Location = new System.Drawing.Point(0, 0);
+            this.ItemLabel.Name = "ItemLabel";
+            this.ItemLabel.Size = new System.Drawing.Size(187, 51);
+            this.ItemLabel.TabIndex = 0;
+            this.ItemLabel.Text = "我的业务视图";
+            this.ItemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Itempanel
+            // 
+            this.Itempanel.Controls.Add(this.ItemLabel);
+            this.Itempanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Itempanel.Location = new System.Drawing.Point(0, 0);
+            this.Itempanel.Name = "Itempanel";
+            this.Itempanel.Size = new System.Drawing.Size(187, 51);
+            this.Itempanel.TabIndex = 1;
             // 
             // MindMapModelControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.Controls.Add(this.Itempanel);
             this.Name = "MindMapModelControl";
             this.Size = new System.Drawing.Size(187, 637);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MindMapModelControl_MouseDown);
+            this.Itempanel.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
         #endregion
+        private System.Windows.Forms.Label ItemLabel;
+        private System.Windows.Forms.Panel Itempanel;
     }
 }

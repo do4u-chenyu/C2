@@ -766,6 +766,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\XmlUtil.cs" />
     <Compile Include="WorkSpace\BaseWorkSpace.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1382,6 +1383,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\MindMapModelButton.resx">
       <DependentUpon>MindMapModelButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\MindMapModelControl.resx">
+      <DependentUpon>MindMapModelControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\BarChart.resx">
       <DependentUpon>BarChart.cs</DependentUpon>

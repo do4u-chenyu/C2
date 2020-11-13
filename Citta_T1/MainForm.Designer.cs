@@ -47,7 +47,7 @@ namespace C2
             this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
-            this.leftFoldButton = new Controls.C1.Left.LeftFoldButton();
+            this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.newModelButton = new System.Windows.Forms.Button();
@@ -87,7 +87,6 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
             this.leftToolBoxPanel.SuspendLayout();
-            this.leftFoldButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.workSpacePanel.SuspendLayout();
@@ -243,7 +242,7 @@ namespace C2
             this.mindMapModelControl.AllowDrop = true;
             this.mindMapModelControl.AutoScroll = true;
             this.mindMapModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mindMapModelControl.BackColor = System.Drawing.Color.White;
+            this.mindMapModelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.mindMapModelControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.mindMapModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mindMapModelControl.Location = new System.Drawing.Point(0, 0);
@@ -257,7 +256,7 @@ namespace C2
             // 
             this.dataSourceControl.AllowDrop = true;
             this.dataSourceControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dataSourceControl.BackColor = System.Drawing.Color.White;
+            this.dataSourceControl.BackColor = System.Drawing.Color.DarkRed;
             this.dataSourceControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
@@ -270,7 +269,7 @@ namespace C2
             // 
             this.myModelControl.AutoScroll = true;
             this.myModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.myModelControl.BackColor = System.Drawing.Color.White;
+            this.myModelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myModelControl.Location = new System.Drawing.Point(0, 0);
             this.myModelControl.Margin = new System.Windows.Forms.Padding(4);
@@ -279,11 +278,14 @@ namespace C2
             this.myModelControl.TabIndex = 0;
             this.myModelControl.Visible = false;
             // 
-            // leftFoldPanel
+            // leftFoldButton
             // 
+            this.leftFoldButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(195)))), ((int)(((byte)(195)))));
+            this.leftFoldButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.leftFoldButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.leftFoldButton.Location = new System.Drawing.Point(0, 200);
             this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
-            this.leftFoldButton.Name = "leftFoldPanel";
+            this.leftFoldButton.Name = "leftFoldButton";
             this.leftFoldButton.Size = new System.Drawing.Size(7, 100);
             this.leftFoldButton.TabIndex = 1;
             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
@@ -605,7 +607,7 @@ namespace C2
             this.Controls.Add(this.headPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = Properties.Resources.logo;
+            this.Icon = global::C2.Properties.Resources.logo;
             this.Name = "MainForm";
             this.Text = "烽火FiberHome";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -619,8 +621,6 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
             this.leftToolBoxPanel.ResumeLayout(false);
-            this.leftFoldButton.ResumeLayout(false);
-            this.leftFoldButton.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
             this.workSpacePanel.ResumeLayout(false);
