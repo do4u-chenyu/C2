@@ -71,7 +71,40 @@ namespace C2.Forms
             this.undoRedoManager.UndoStackEmpty += TopToolBarControl_UndoStackEmpty;
             this.undoRedoManager.UndoStackNotEmpty += TopToolBarControl_UndoStackNotEmpty;
         }
+        public void InitializeControlsLocation()
+        {
+            int x = this.canvasPanel.Width - 10 - this.naviViewControl.Width;
+            int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
 
+            // 缩略图定位
+            this.naviViewControl.Location = new Point(x, y + 30);
+            this.naviViewControl.Invalidate();
+
+            // 底层工具按钮定位
+            x = x - (this.canvasPanel.Width) / 2 + 100;
+            this.resetButton.Location = new Point(x + 100, y + 83);
+            this.stopButton.Location = new Point(x + 50, y + 83);
+            this.runButton.Location = new Point(x, y + 83);
+
+            //运行状态动图、进度条定位
+            this.currentModelRunLab.Location = new Point(
+                (this.currentModelRunBackLab.Width - this.currentModelRunLab.Width) / 2,
+                (this.currentModelRunBackLab.Height - this.currentModelRunLab.Height) / 2 - 10);
+            this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
+            this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
+            this.progressBar.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
+            this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
+
+            // 顶层浮动工具栏和右侧工具及隐藏按钮定位
+            this.operatorControl.Location = new Point(this.canvasPanel.Width - 280, 38);
+            this.remarkControl.Location = new Point(this.canvasPanel.Width - 505, 38);
+            this.rightHideButton.Location = new Point(this.canvasPanel.Width - 60, 38);
+        }
+        private void InitializeMainFormEventHandler()
+        {
+            // 新增文档事件
+            this.canvasPanel.NewElementEvent += NewDocumentOperator;
+        }
         public CanvasForm(ModelDocument document)
             :this()
         {
@@ -99,11 +132,6 @@ namespace C2.Forms
             }
         }
         #region C1文档切换、修改、关闭
-        private void InitializeMainFormEventHandler()
-        {
-            // 新增文档事件
-            this.canvasPanel.NewElementEvent += NewDocumentOperator;
-        }
         void OnDocumentChanged(ModelDocument old)
         {
             if (old != null)
@@ -255,35 +283,6 @@ namespace C2.Forms
         private void CanvasForm_SizeChanged(object sender, EventArgs e)
         {
             InitializeControlsLocation();
-        }
-        public void InitializeControlsLocation()
-        {
-            int x = this.canvasPanel.Width - 10 - this.naviViewControl.Width;
-            int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
-
-            // 缩略图定位
-            this.naviViewControl.Location = new Point(x, y+30);
-            this.naviViewControl.Invalidate();
-
-            // 底层工具按钮定位
-            x = x - (this.canvasPanel.Width) / 2 + 100;
-            this.resetButton.Location = new Point(x + 100, y + 83);
-            this.stopButton.Location = new Point(x + 50, y + 83);
-            this.runButton.Location = new Point(x, y + 83);
-
-            //运行状态动图、进度条定位
-            this.currentModelRunLab.Location = new Point(
-                (this.currentModelRunBackLab.Width - this.currentModelRunLab.Width) / 2,
-                (this.currentModelRunBackLab.Height - this.currentModelRunLab.Height) / 2 - 10);
-            this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
-            this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
-            this.progressBar.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
-            this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
-
-            // 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            this.operatorControl.Location = new Point(this.canvasPanel.Width -280 , 38);
-            this.remarkControl.Location = new Point(this.canvasPanel.Width - 505 , 38);
-            this.rightHideButton.Location = new Point(this.canvasPanel.Width - 60, 38);
         }
         public void BlankButtonFocus()
         {
