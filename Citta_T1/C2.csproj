@@ -2560,7 +2560,7 @@
     <Content Include="sbin\tr.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\C1\displaypanel\blueshadow.png" />
+    <None Include="Resources\C1\displaypanel\blueshadow.png" />
     <Content Include="Resources\C1\displaypanel\close.png" />
     <Content Include="Resources\C1\displaypanel\maxunfold.png" />
     <Content Include="Resources\C1\displaypanel\minfold.png" />
