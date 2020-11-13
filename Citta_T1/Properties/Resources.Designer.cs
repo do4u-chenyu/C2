@@ -183,6 +183,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Artificialintelligence {
+            get {
+                object obj = ResourceManager.GetObject("Artificialintelligence", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap attachment_w_icon {
             get {
                 object obj = ResourceManager.GetObject("attachment_w_icon", resourceCulture);
@@ -306,6 +316,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap BusinessViewLabel {
             get {
                 object obj = ResourceManager.GetObject("BusinessViewLabel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Businessvw {
+            get {
+                object obj = ResourceManager.GetObject("Businessvw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -607,6 +627,16 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("dataformat_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Datamanagement {
+            get {
+                object obj = ResourceManager.GetObject("Datamanagement", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1454,6 +1484,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Laboratory {
+            get {
+                object obj = ResourceManager.GetObject("Laboratory", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap languages {
             get {
                 object obj = ResourceManager.GetObject("languages", resourceCulture);
@@ -1757,6 +1797,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap minOp {
             get {
                 object obj = ResourceManager.GetObject("minOp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Modelmarket {
+            get {
+                object obj = ResourceManager.GetObject("Modelmarket", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3338,10 +3388,10 @@ namespace C2.Properties {
         
         /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;document type=&quot;BLUMIND&quot; editor_version=&quot;3.17.621.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
-        ///  &lt;!--Create by Blumind, you can download it free from http://www.blumind.org--&gt;
+        ///&lt;document type=&quot;C2&quot; editor_version=&quot;1.0.0.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
+        ///  &lt;!--Create by C2, you can download it free from http://www.C2.org--&gt;
         ///  &lt;information&gt;
-        ///    &lt;author&gt;IAO&lt;/author&gt;
+        ///    &lt;author&gt;xk&lt;/author&gt;
         ///    &lt;company&gt;
         ///    &lt;/company&gt;
         ///    &lt;version&gt;3.0&lt;/version&gt;
@@ -3352,7 +3402,8 @@ namespace C2.Properties {
         ///    &lt;item name=&quot;editor_show_sidebar&quot;&gt;True&lt;/item&gt;
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
-        ///    &lt;chart name=&quot;新页面 1&quot; type=&quot;MindMap [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 思维导图 {
             get {
@@ -3412,10 +3463,10 @@ namespace C2.Properties {
         
         /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;document type=&quot;BLUMIND&quot; editor_version=&quot;3.17.621.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
-        ///  &lt;!--Create by Blumind, you can download it free from http://www.blumind.org--&gt;
+        ///&lt;document type=&quot;C2&quot; editor_version=&quot;1.0.0.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
+        ///  &lt;!--Create by C2, you can download it free from http://www.C2.org--&gt;
         ///  &lt;information&gt;
-        ///    &lt;author&gt;IAO&lt;/author&gt;
+        ///    &lt;author&gt;xk&lt;/author&gt;
         ///    &lt;company&gt;
         ///    &lt;/company&gt;
         ///    &lt;version&gt;3.0&lt;/version&gt;
@@ -3426,7 +3477,8 @@ namespace C2.Properties {
         ///    &lt;item name=&quot;editor_show_sidebar&quot;&gt;True&lt;/item&gt;
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
-        ///    &lt;chart name=&quot;新页面 1&quot; type=&quot;MindMap [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 树状图 {
             get {
@@ -3491,10 +3543,10 @@ namespace C2.Properties {
         
         /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;document type=&quot;BLUMIND&quot; editor_version=&quot;3.17.621.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
-        ///  &lt;!--Create by Blumind, you can download it free from http://www.blumind.org--&gt;
+        ///&lt;document type=&quot;C2&quot; editor_version=&quot;1.0.0.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
+        ///  &lt;!--Create by C2, you can download it free from http://www.C2.org--&gt;
         ///  &lt;information&gt;
-        ///    &lt;author&gt;IAO&lt;/author&gt;
+        ///    &lt;author&gt;xk&lt;/author&gt;
         ///    &lt;company&gt;
         ///    &lt;/company&gt;
         ///    &lt;version&gt;3.0&lt;/version&gt;
@@ -3505,7 +3557,8 @@ namespace C2.Properties {
         ///    &lt;item name=&quot;editor_show_sidebar&quot;&gt;True&lt;/item&gt;
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
-        ///    &lt;chart name=&quot;新页面 1&quot; type=&quot;MindMap [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 组织架构图 {
             get {
@@ -3515,10 +3568,10 @@ namespace C2.Properties {
         
         /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;document type=&quot;BLUMIND&quot; editor_version=&quot;3.17.621.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
-        ///  &lt;!--Create by Blumind, you can download it free from http://www.blumind.org--&gt;
+        ///&lt;document type=&quot;C2&quot; editor_version=&quot;1.0.0.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
+        ///  &lt;!--Create by C2, you can download it free from http://www.C2.org--&gt;
         ///  &lt;information&gt;
-        ///    &lt;author&gt;IAO&lt;/author&gt;
+        ///    &lt;author&gt;xk&lt;/author&gt;
         ///    &lt;company&gt;
         ///    &lt;/company&gt;
         ///    &lt;version&gt;3.0&lt;/version&gt;
@@ -3529,7 +3582,8 @@ namespace C2.Properties {
         ///    &lt;item name=&quot;editor_show_sidebar&quot;&gt;True&lt;/item&gt;
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
-        ///    &lt;chart name=&quot;新页面 1&quot; type=&quot;MindMap [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 逻辑图 {
             get {

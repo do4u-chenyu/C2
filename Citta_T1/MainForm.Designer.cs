@@ -39,9 +39,13 @@ namespace C2
             this.usernamelabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.flowChartButton = new System.Windows.Forms.Button();
             this.dataButton = new System.Windows.Forms.Button();
             this.operateButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.myModelButton = new System.Windows.Forms.Button();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
             this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
@@ -86,6 +90,11 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.operateButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.leftToolBoxPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.MainPanel.SuspendLayout();
@@ -167,6 +176,9 @@ namespace C2
             // leftMainMenuPanel
             // 
             this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(60)))), ((int)(((byte)(85)))));
+            this.leftMainMenuPanel.Controls.Add(this.pictureBox4);
+            this.leftMainMenuPanel.Controls.Add(this.pictureBox3);
+            this.leftMainMenuPanel.Controls.Add(this.pictureBox2);
             this.leftMainMenuPanel.Controls.Add(this.flowChartButton);
             this.leftMainMenuPanel.Controls.Add(this.dataButton);
             this.leftMainMenuPanel.Controls.Add(this.operateButton);
@@ -176,6 +188,39 @@ namespace C2
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
             this.leftMainMenuPanel.Size = new System.Drawing.Size(136, 560);
             this.leftMainMenuPanel.TabIndex = 1;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox4.Image = global::C2.Properties.Resources.Artificialintelligence;
+            this.pictureBox4.Location = new System.Drawing.Point(12, 192);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox4.TabIndex = 16;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox3.Image = global::C2.Properties.Resources.Datamanagement;
+            this.pictureBox3.Location = new System.Drawing.Point(19, 135);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox3.TabIndex = 15;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox2.Image = global::C2.Properties.Resources.Modelmarket;
+            this.pictureBox2.Location = new System.Drawing.Point(18, 75);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox2.TabIndex = 14;
+            this.pictureBox2.TabStop = false;
             // 
             // flowChartButton
             // 
@@ -187,7 +232,7 @@ namespace C2
             this.flowChartButton.Name = "flowChartButton";
             this.flowChartButton.Size = new System.Drawing.Size(137, 42);
             this.flowChartButton.TabIndex = 3;
-            this.flowChartButton.Text = "IAO实验室";
+            this.flowChartButton.Text = "      IAO实验室";
             this.toolTip1.SetToolTip(this.flowChartButton, "数据分析建模需要的复杂模型探索");
             this.flowChartButton.UseVisualStyleBackColor = true;
             this.flowChartButton.Click += new System.EventHandler(this.FlowChartButton_Click);
@@ -204,7 +249,7 @@ namespace C2
             this.dataButton.Name = "dataButton";
             this.dataButton.Size = new System.Drawing.Size(137, 42);
             this.dataButton.TabIndex = 2;
-            this.dataButton.Text = "数据管理";
+            this.dataButton.Text = "      数据管理";
             this.toolTip1.SetToolTip(this.dataButton, "当前用户已导入的所有数据");
             this.dataButton.UseVisualStyleBackColor = true;
             this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
@@ -213,6 +258,7 @@ namespace C2
             // 
             // operateButton
             // 
+            this.operateButton.Controls.Add(this.pictureBox1);
             this.operateButton.FlatAppearance.BorderSize = 0;
             this.operateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.operateButton.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -221,12 +267,23 @@ namespace C2
             this.operateButton.Name = "operateButton";
             this.operateButton.Size = new System.Drawing.Size(137, 42);
             this.operateButton.TabIndex = 1;
-            this.operateButton.Text = "业务视图";
+            this.operateButton.Text = "    业务视图";
             this.toolTip1.SetToolTip(this.operateButton, "当前用户的所有业务视图");
             this.operateButton.UseVisualStyleBackColor = true;
             this.operateButton.Click += new System.EventHandler(this.OperateButton_Click);
             this.operateButton.Leave += new System.EventHandler(this.operateButton_Leave);
             this.operateButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operateButton_MouseDown);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = global::C2.Properties.Resources.Businessvw;
+            this.pictureBox1.Location = new System.Drawing.Point(18, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
             // 
             // myModelButton
             // 
@@ -238,7 +295,7 @@ namespace C2
             this.myModelButton.Name = "myModelButton";
             this.myModelButton.Size = new System.Drawing.Size(137, 42);
             this.myModelButton.TabIndex = 0;
-            this.myModelButton.Text = "模型市场";
+            this.myModelButton.Text = "     模型市场";
             this.toolTip1.SetToolTip(this.myModelButton, "当前用户发布的所有模型");
             this.myModelButton.UseVisualStyleBackColor = true;
             this.myModelButton.Click += new System.EventHandler(this.MyModelButton_Click);
@@ -262,7 +319,7 @@ namespace C2
             this.mindMapModelControl.AllowDrop = true;
             this.mindMapModelControl.AutoScroll = true;
             this.mindMapModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mindMapModelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.mindMapModelControl.BackColor = System.Drawing.Color.White;
             this.mindMapModelControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.mindMapModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mindMapModelControl.Location = new System.Drawing.Point(0, 0);
@@ -641,6 +698,11 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.operateButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.leftToolBoxPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
@@ -706,5 +768,9 @@ namespace C2
         private WorkSpace.MdiWorkSpace mdiWorkSpace;
         private Controls.Bottom.DragLineControl dragLineControl;
         private Button blankButton;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox2;
     }
 }

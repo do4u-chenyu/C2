@@ -136,7 +136,7 @@
             // 
             // textBox
             // 
-            this.textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.textBox.BackColor = System.Drawing.Color.White;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
@@ -151,7 +151,7 @@
             // 
             // textButton
             // 
-            this.textButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.textButton.BackColor = System.Drawing.Color.White;
             this.textButton.FlatAppearance.BorderSize = 0;
             this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.textButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -167,7 +167,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.textButton);
             this.Controls.Add(this.lelfPictureBox);

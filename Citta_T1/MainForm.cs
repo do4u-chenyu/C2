@@ -269,7 +269,7 @@ namespace C2
             this.myModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
-            this.dataButton.BackColor = Color.FromArgb(76, 97, 125);
+            this.dataButton.BackColor = Color.FromArgb(41, 60, 85);
         }
 
         private void OperateButton_Click(object sender, EventArgs e)
@@ -278,7 +278,7 @@ namespace C2
             this.mindMapModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.myModelControl.Visible = false;
-            this.dataButton.BackColor = Color.FromArgb(76, 97, 125);
+            this.dataButton.BackColor = Color.FromArgb(41, 60, 85);
         }
 
         private void DataButton_Click(object sender, EventArgs e)
@@ -296,7 +296,7 @@ namespace C2
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
-            this.dataButton.BackColor = Color.FromArgb(76, 97, 125);
+            this.dataButton.BackColor = Color.FromArgb(41, 60, 85);
         }
 
         private void NewModelButton_Click(object sender, EventArgs e)
@@ -830,12 +830,12 @@ namespace C2
 
         private void operateButton_Leave(object sender, EventArgs e)
         {
-            this.operateButton.BackColor = Color.FromArgb(76, 97, 125);
+            this.operateButton.BackColor = Color.FromArgb(41, 60, 85);
         }
 
         private void myModelButton_Leave(object sender, EventArgs e)
         {
-            this.myModelButton.BackColor = Color.FromArgb(76, 97, 125);
+            this.myModelButton.BackColor = Color.FromArgb(41, 60, 85);
         }
 
         private void myModelButton_MouseDown(object sender, MouseEventArgs e)
@@ -845,7 +845,7 @@ namespace C2
 
         private void dataButton_Leave(object sender, EventArgs e)
         {
-            this.dataButton.BackColor = Color.FromArgb(76, 97, 125);
+            this.dataButton.BackColor = Color.FromArgb(41, 60, 85);
         }
 
         private void dataButton_MouseDown(object sender, MouseEventArgs e)
@@ -855,7 +855,7 @@ namespace C2
 
         private void flowChartButton_Leave(object sender, EventArgs e)
         {
-            this.flowChartButton.BackColor = Color.FromArgb(76, 97, 125);
+            this.flowChartButton.BackColor = Color.FromArgb(41, 60, 85);
         }
 
         private void flowChartButton_MouseDown(object sender, MouseEventArgs e)

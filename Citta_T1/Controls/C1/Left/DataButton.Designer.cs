@@ -134,7 +134,7 @@
             // 
             // textBox
             // 
-            this.textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.textBox.BackColor = System.Drawing.Color.White;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.textBox.Location = new System.Drawing.Point(25, 3);
@@ -148,7 +148,7 @@
             // 
             // txtButton
             // 
-            this.txtButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.txtButton.BackColor = System.Drawing.Color.White;
             this.txtButton.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -166,7 +166,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.rightPictureBox);

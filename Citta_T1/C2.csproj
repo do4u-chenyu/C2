@@ -1750,7 +1750,11 @@
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
     <None Include="Resources\html_content.htm" />
+    <None Include="Resources\Icons\Artificialintelligence.png" />
+    <None Include="Resources\Icons\Businessview.png" />
+    <None Include="Resources\Icons\Businessvw.png" />
     <Content Include="Resources\Icons\check_update.ico" />
+    <None Include="Resources\Icons\Datamanagement.png" />
     <Content Include="Resources\Icons\document.ico" />
     <Content Include="Resources\Icons\exclamation.ico" />
     <Content Include="Resources\Icons\globe_network.ico" />
@@ -1758,8 +1762,10 @@
     <Content Include="Resources\Icons\icon_lib.ico" />
     <None Include="Resources\Icons\image.ico" />
     <Content Include="Resources\Icons\keyboard.ico" />
+    <None Include="Resources\Icons\Laboratory.png" />
     <Content Include="Resources\Icons\layout_type.ico" />
     <Content Include="Resources\Icons\logo.ico" />
+    <None Include="Resources\Icons\Modelmarket.png" />
     <Content Include="Resources\Icons\preferences_icon.ico" />
     <None Include="Resources\Icons\property.ico" />
     <None Include="Resources\Images\_blank.png" />
@@ -1772,6 +1778,9 @@
     <None Include="Resources\Images\association.png" />
     <None Include="Resources\Images\back_color.png" />
     <None Include="Resources\Images\balloon_small.png" />
+    <None Include="Resources\Icons\主数据管理系统.png" />
+    <None Include="Resources\Icons\业务视图 %282%29.png" />
+    <None Include="Resources\Icons\模型市场 %281%29.png" />
     <Content Include="Resources\Images\bar.png" />
     <None Include="Resources\Images\bold.png" />
     <None Include="Resources\Images\calculator.png" />

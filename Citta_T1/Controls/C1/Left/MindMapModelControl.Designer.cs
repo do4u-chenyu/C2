@@ -59,7 +59,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.Itempanel);
             this.Name = "MindMapModelControl";
             this.Size = new System.Drawing.Size(187, 637);
