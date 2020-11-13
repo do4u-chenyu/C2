@@ -27,7 +27,6 @@ namespace C2.Controls
         ToolTip toolTip1;
         string _ToolTipText;
 
-        public event ThumbViewItemEventHandler ItemClick;
         public event ThumbViewItemCancelEventHandler ItemClosing;
         public event ThumbViewItemEventHandler ItemClosed;
 
@@ -557,13 +556,9 @@ namespace C2.Controls
 
         protected virtual void OnItemClick(ThumbItem item)
         {
-            //item.NotifyClick();
+            if (item.Text.Equals(""))
+                return;
             Global.GetMainForm().NewDocumentForm_Click(item.Text);
-            //if (ItemClick != null)
-            //{
-            //    Global.GetMainForm().NewDocumentForm_Click1();
-            //}
-
         }
             //ItemClick(this, new ThumbViewItemEventArgs(item)); 
 
