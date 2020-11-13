@@ -156,7 +156,7 @@ namespace C2.Controls.Common
             }
 
             //模型算子选中时，可以不用选中数据源
-            if ( (SelectedDataSource == null || SelectedDataSource.IsEmpty() ) && SelectedOperator != Lang._(OpType.ModelOperator.ToString()))
+            if ( SelectedDataSource == null || SelectedDataSource.IsEmpty() )
             {
                 HelpUtil.ShowMessageBox("未选中数据源,请添加后再配置", "未选中数据源");
                 return;
@@ -165,11 +165,6 @@ namespace C2.Controls.Common
             if (string.IsNullOrEmpty(SelectedOperator))
             {
                 HelpUtil.ShowMessageBox("未添加算子,请添加后再配置", "未选择算子");
-                return;
-            }
-            if (SelectedOperator == Lang._(OpType.ModelOperator.ToString()))
-            {
-                Global.GetMainForm().NewCanvasFormByMindMap(string.Format("{0}-模型视图", SelectedTopic.Text), Global.GetCurrentDocument().Name, SelectedTopic);
                 return;
             }
 

@@ -450,10 +450,10 @@ namespace C2.Forms
         {
             if (RelateTopic == null)
                 return;
-            OperatorWidget opw = RelateTopic.FindWidget<OperatorWidget>();
-            if(opw != null)
-                RelateTopic.Remove(opw);
-            RelateTopic.Add(new OperatorWidget { OpType = OpType.ModelOperator, OpName = document.Name });
+            //OperatorWidget opw = RelateTopic.FindWidget<OperatorWidget>();
+            //if(opw != null)
+            //    RelateTopic.Remove(opw);
+            //RelateTopic.Add(new OperatorWidget { HasModelOperator = true, OpName = document.Name });
 
             List<int> starNodes = new List<int>();
             List<int> endNodes = new List<int>();

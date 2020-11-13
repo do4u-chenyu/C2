@@ -30,7 +30,6 @@ namespace C2.Model.Widgets
         CustomOperator, //AI实践
         DataFormatOperator, //数据标准化
         PythonOperator, //python算子
-        ModelOperator //模型
     }
     public class OperatorWidget : C2BaseWidget, IRemark
     {
@@ -46,7 +45,11 @@ namespace C2.Model.Widgets
             OpType = OpType.Null;
             Status = OpStatus.Null;
         }
+        [Browsable(false)]
+        public bool HasModelOperator { get; set; }//是否包含模型算子
 
+        [Browsable(false)]
+        public DataItem ModelDataItem { get; set; }//模型相关属性
         [Browsable(false)]
         public string OpName { get; set; }  //菜单栏名称
         [Browsable(false)]
@@ -77,11 +80,11 @@ namespace C2.Model.Widgets
                .Write("status", Status);
 
             // 模型算子无后续信息，直接返回
-            if (OpType == OpType.ModelOperator)
-            {
-                node.AppendChild(opItemNode);
-                return;
-            }             
+            //if (OpType == OpType.ModelOperator)
+            //{
+            //    node.AppendChild(opItemNode);
+            //    return;
+            //}             
             /*
              *  单算子配置
              */
@@ -113,11 +116,11 @@ namespace C2.Model.Widgets
                 if (string.IsNullOrEmpty(subtype))
                     return;
                 // 读取模型算子
-                if (subtype == OpType.ModelOperator.ToString())
-                {
+                //if (subtype == OpType.ModelOperator.ToString())
+                //{
 
-                    return;
-                }
+                //    return;
+                //}
                 // 读取单算子
   
             }
