@@ -231,18 +231,19 @@ namespace C2.Controls.MapViews
             //    HelpUtil.ShowMessageBox("业务视图未保存，请保存后再运行。", "未保存", MessageBoxIcon.Information);
             //    return;
             //}
-            Global.GetDocumentForm().ShowRunLab();
             Global.GetDocumentForm().Save();
             Global.GetCurrentDocument().Modified = false;
 
             if (opw.Status == OpStatus.Ready || opw.Status == OpStatus.Done)
             {
+                //Global.GetDocumentForm().ShowRunLab();
                 List<string> cmds = GenerateCmd();
                 if (cmds == null)
                     return;
-                RunLinuxCommand(cmds);
-                //MessageBox.Show();
-                Global.GetDocumentForm().HideRunLab();
+                this.Cursor = Cursors.WaitCursor;
+                MessageBox.Show(RunLinuxCommand(cmds));
+                this.Cursor = Cursors.Default;
+                //Global.GetDocumentForm().HideRunLab();
                 DataItem resultItem = opw.ResultItem;
                 ResultWidget rsw = (opw.Container as Topic).FindWidget<ResultWidget>();
                 if (rsw == null)
