@@ -3218,8 +3218,7 @@ namespace C2.Properties {
         ///		&lt;item name=&quot;About&quot;&gt;关于&lt;/item&gt;
         ///		&lt;item name=&quot;Menu&quot;&gt;菜 单&lt;/item&gt;
         ///		&lt;item name=&quot;Open&quot;&gt;打开&lt;/item&gt;
-        ///		&lt;item name=&quot;New&quot;&gt;新建&lt;/item&gt;
-        ///		&lt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;item name=&quot;N [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string zh_CHS {
             get {
@@ -3338,6 +3337,30 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;document type=&quot;BLUMIND&quot; editor_version=&quot;3.17.621.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
+        ///  &lt;!--Create by Blumind, you can download it free from http://www.blumind.org--&gt;
+        ///  &lt;information&gt;
+        ///    &lt;author&gt;IAO&lt;/author&gt;
+        ///    &lt;company&gt;
+        ///    &lt;/company&gt;
+        ///    &lt;version&gt;3.0&lt;/version&gt;
+        ///    &lt;description&gt;
+        ///    &lt;/description&gt;
+        ///  &lt;/information&gt;
+        ///  &lt;attributes&gt;
+        ///    &lt;item name=&quot;editor_show_sidebar&quot;&gt;True&lt;/item&gt;
+        ///  &lt;/attributes&gt;
+        ///  &lt;charts active_chart=&quot;0&quot;&gt;
+        ///    &lt;chart name=&quot;新页面 1&quot; type=&quot;MindMap [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 思维导图 {
+            get {
+                return ResourceManager.GetString("思维导图", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap 排序 {
@@ -3388,6 +3411,30 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;document type=&quot;BLUMIND&quot; editor_version=&quot;3.17.621.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
+        ///  &lt;!--Create by Blumind, you can download it free from http://www.blumind.org--&gt;
+        ///  &lt;information&gt;
+        ///    &lt;author&gt;IAO&lt;/author&gt;
+        ///    &lt;company&gt;
+        ///    &lt;/company&gt;
+        ///    &lt;version&gt;3.0&lt;/version&gt;
+        ///    &lt;description&gt;
+        ///    &lt;/description&gt;
+        ///  &lt;/information&gt;
+        ///  &lt;attributes&gt;
+        ///    &lt;item name=&quot;editor_show_sidebar&quot;&gt;True&lt;/item&gt;
+        ///  &lt;/attributes&gt;
+        ///  &lt;charts active_chart=&quot;0&quot;&gt;
+        ///    &lt;chart name=&quot;新页面 1&quot; type=&quot;MindMap [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 树状图 {
+            get {
+                return ResourceManager.GetString("树状图", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap 模型视图 {
@@ -3403,16 +3450,6 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap 碰撞 {
             get {
                 object obj = ResourceManager.GetObject("碰撞", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 筛选 {
-            get {
-                object obj = ResourceManager.GetObject("筛选", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3434,12 +3471,69 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt;
-        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 空模板 {
+            get {
+                return ResourceManager.GetString("空模板", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 筛选 {
+            get {
+                object obj = ResourceManager.GetObject("筛选", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;document type=&quot;BLUMIND&quot; editor_version=&quot;3.17.621.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
+        ///  &lt;!--Create by Blumind, you can download it free from http://www.blumind.org--&gt;
+        ///  &lt;information&gt;
+        ///    &lt;author&gt;IAO&lt;/author&gt;
+        ///    &lt;company&gt;
+        ///    &lt;/company&gt;
+        ///    &lt;version&gt;3.0&lt;/version&gt;
+        ///    &lt;description&gt;
+        ///    &lt;/description&gt;
+        ///  &lt;/information&gt;
+        ///  &lt;attributes&gt;
+        ///    &lt;item name=&quot;editor_show_sidebar&quot;&gt;True&lt;/item&gt;
+        ///  &lt;/attributes&gt;
+        ///  &lt;charts active_chart=&quot;0&quot;&gt;
+        ///    &lt;chart name=&quot;新页面 1&quot; type=&quot;MindMap [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 组织架构图 {
             get {
                 return ResourceManager.GetString("组织架构图", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;document type=&quot;BLUMIND&quot; editor_version=&quot;3.17.621.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
+        ///  &lt;!--Create by Blumind, you can download it free from http://www.blumind.org--&gt;
+        ///  &lt;information&gt;
+        ///    &lt;author&gt;IAO&lt;/author&gt;
+        ///    &lt;company&gt;
+        ///    &lt;/company&gt;
+        ///    &lt;version&gt;3.0&lt;/version&gt;
+        ///    &lt;description&gt;
+        ///    &lt;/description&gt;
+        ///  &lt;/information&gt;
+        ///  &lt;attributes&gt;
+        ///    &lt;item name=&quot;editor_show_sidebar&quot;&gt;True&lt;/item&gt;
+        ///  &lt;/attributes&gt;
+        ///  &lt;charts active_chart=&quot;0&quot;&gt;
+        ///    &lt;chart name=&quot;新页面 1&quot; type=&quot;MindMap [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 逻辑图 {
+            get {
+                return ResourceManager.GetString("逻辑图", resourceCulture);
             }
         }
         

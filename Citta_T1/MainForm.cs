@@ -451,7 +451,7 @@ namespace C2
             switch (formType)
             {
                 case FormType.DocumentForm:
-                    NewDocumentForm();
+                    NewDocumentForm("");
                     break;
                 case FormType.CanvasForm:
                     NewCanvasForm();
@@ -463,9 +463,9 @@ namespace C2
                     break;
             }
         }
-        private void NewDocumentForm(string titile = "")
+        private void NewDocumentForm(string name,string titile = "")
         {
-            Document doc = CreateNewMap();
+            Document doc = CreateNewMap(name);
             if (!string.IsNullOrEmpty(titile))
                 doc.Name = titile;
             DocumentForm form = new DocumentForm(doc);
@@ -495,19 +495,37 @@ namespace C2
             ShowForm(form, true, false);
         }
         
-        Document CreateNewMap()
+        Document CreateNewMap(string templateName)
         {
-            Document doc = LoadDocumentTemplate();
+            Document doc = LoadDocumentTemplate(templateName);
             doc.Modified = true;
             return doc;
         }
-
-        private Document LoadDocumentTemplate()
+        private Document LoadDocumentTemplate(string templateName)
         {
-            Document doc = Document.LoadXml("组织架构图", Properties.Resources.组织架构图);
-            if (doc.Charts.Count == 3 && doc.Charts[1].Name == "组织架构视图" && doc.Charts[1] is MindMap)
-                return doc;
-            return null;
+            Document doc;
+            switch (templateName)
+            {
+                case "逻辑图":
+                    doc = Document.LoadXml("逻辑图", Properties.Resources.逻辑图); ;
+                    break;
+                case "树状图":
+                    doc = Document.LoadXml("树状图", Properties.Resources.树状图); ;
+                    break;
+                case "组织架构图":
+                    doc = Document.LoadXml("组织架构图", Properties.Resources.组织架构图); ;
+                    break;
+                case "思维导图":
+                    doc = Document.LoadXml("思维导图", Properties.Resources.思维导图); ;
+                    break;
+                default:
+                    doc = Document.LoadXml("空模板", Properties.Resources.空模板);
+                    break;
+            }
+            return doc;
+            //if (doc.Charts.Count == 3 && doc.Charts[1].Name == "组织架构视图" && doc.Charts[1] is MindMap)
+            //    return doc;
+            //return null;
         }
 
         public void ShowFindDialog(ChartControl chartControl, FindDialog.FindDialogMode mode)
@@ -637,9 +655,14 @@ namespace C2
 
             return null;
         }
+
         void NewDocumentForm_Click(object sender, System.EventArgs e)
         {
             // 文档重命名
+            NewDocumentForm_Click("");
+        }
+        public void NewDocumentForm_Click(string templateName)
+        {
             this.createNewModelForm.StartPosition = FormStartPosition.CenterScreen;
             this.createNewModelForm.Owner = this;
 
@@ -647,7 +670,7 @@ namespace C2
             DialogResult dialogResult = this.createNewModelForm.ShowDialog();
             // 新建业务视图
             if (dialogResult == DialogResult.OK)
-                this.NewDocumentForm(this.createNewModelForm.ModelTitle);
+                this.NewDocumentForm(templateName,this.createNewModelForm.ModelTitle);
         }
         void NewCanvasForm_Click(object sender, System.EventArgs e)
         {
