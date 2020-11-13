@@ -16,11 +16,13 @@ namespace C2.Controls.Left
         public MindMapModelControl()
         {
             InitializeComponent();
+            startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+            startPoint.Y += 23;
         }
 
         private static readonly int ButtonLeftX = 15;
-        private static readonly int ButtonBottomOffsetY = 12;
-        private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+        private static readonly int ButtonBottomOffsetY = 23;
+        private Point startPoint;
         public void AddMindMapModel(string modelName)
         {
             MindMapModelButton mb = new MindMapModelButton(modelName);
@@ -31,9 +33,10 @@ namespace C2.Controls.Left
 
         private void LayoutModelButtonLocation(Control ct)
         {
-            if (this.Controls.Count > 0)
+            if (this.Controls.Count > 2)
+            {
                 this.startPoint = this.Controls[this.Controls.Count - 1].Location;
-
+            }
             this.startPoint.Y += ct.Height + ButtonBottomOffsetY;
             ct.Location = this.startPoint;
         }

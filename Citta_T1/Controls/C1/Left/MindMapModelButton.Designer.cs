@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.lelfPictureBox = new System.Windows.Forms.PictureBox();
-            this.textButton = new C2.Controls.Common.NoFocusButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +41,7 @@
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox = new System.Windows.Forms.TextBox();
+            this.textButton = new C2.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lelfPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -50,7 +50,7 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
-            this.rightPictureBox.Location = new System.Drawing.Point(123, 7);
+            this.rightPictureBox.Location = new System.Drawing.Point(125, 6);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(16, 16);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -60,28 +60,14 @@
             // lelfPictureBox
             // 
             this.lelfPictureBox.Image = global::C2.Properties.Resources.业务视图;
-            this.lelfPictureBox.Location = new System.Drawing.Point(2, 7);
-            this.lelfPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.lelfPictureBox.Location = new System.Drawing.Point(1, 1);
+            this.lelfPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.lelfPictureBox.Name = "lelfPictureBox";
-            this.lelfPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.lelfPictureBox.Size = new System.Drawing.Size(24, 24);
             this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.lelfPictureBox.TabIndex = 1;
             this.lelfPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.lelfPictureBox, "业务视角的思维模型");
-            // 
-            // textButton
-            // 
-            this.textButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textButton.FlatAppearance.BorderSize = 0;
-            this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.textButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textButton.Location = new System.Drawing.Point(29, 3);
-            this.textButton.Name = "textButton";
-            this.textButton.Size = new System.Drawing.Size(91, 25);
-            this.textButton.TabIndex = 9;
-            this.textButton.Text = "模型";
-            this.textButton.UseVisualStyleBackColor = false;
-            //this.textButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseDown);
             // 
             // contextMenuStrip1
             // 
@@ -150,29 +136,44 @@
             // 
             // textBox
             // 
-            this.textBox.BackColor = System.Drawing.Color.White;
-            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox.Location = new System.Drawing.Point(29, 2);
+            this.textBox.Location = new System.Drawing.Point(25, 3);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(91, 23);
+            this.textBox.Size = new System.Drawing.Size(94, 16);
             this.textBox.TabIndex = 12;
             this.textBox.Visible = false;
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
+            // textButton
+            // 
+            this.textButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.textButton.FlatAppearance.BorderSize = 0;
+            this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.textButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textButton.Location = new System.Drawing.Point(25, 1);
+            this.textButton.Margin = new System.Windows.Forms.Padding(2);
+            this.textButton.Name = "textButton";
+            this.textButton.Size = new System.Drawing.Size(95, 25);
+            this.textButton.TabIndex = 9;
+            this.textButton.Text = "模型";
+            this.textButton.UseVisualStyleBackColor = false;
+            // 
             // MindMapModelButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.textButton);
             this.Controls.Add(this.lelfPictureBox);
             this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.textBox);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MindMapModelButton";
             this.Size = new System.Drawing.Size(145, 27);
             this.Load += new System.EventHandler(this.MindMapModelButton_Load);

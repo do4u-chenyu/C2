@@ -21,9 +21,9 @@ namespace C2.Controls.Left
            
         }
 
-        private static readonly int ButtonGapHeight = 50;
+        private static readonly int ButtonGapHeight = 50;//上下间隔
         private static readonly int ButtonLeftX = 17;
-        private static readonly int ButtonBottomOffsetY = 40;
+        private static readonly int ButtonBottomOffsetY = 100;
         private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
 
         private Dictionary<string, DataButton> dataSourceDictI2B;

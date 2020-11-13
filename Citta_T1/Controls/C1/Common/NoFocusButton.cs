@@ -9,7 +9,7 @@ namespace C2.Controls.Common
         public NoFocusButton()
         {
             FlatStyle = FlatStyle.Flat;
-            FlatAppearance.BorderSize = 0;
+            FlatAppearance.BorderSize = 1;
         }
         /// <summary>
         /// 取消捕获焦点后的聚焦框

@@ -121,7 +121,9 @@ namespace C2.Controls.MapViews
             }
             else if (SelectedObject is Widget)// && ((Widget)SelectedObject).CanCopy)
             {
-                var widgets = SelectedObjects.Where(o => o is Widget).ToArray();
+                var widgets = SelectedObjects.Where(w=> w is NoteWidget || w is PictureWidget || w is ProgressBarWidget).ToArray();
+                if (widgets.Count() == 0)
+                    return;
                 Copy(widgets, false);
             }
         }

@@ -1,4 +1,5 @@
-﻿using C2.Utils;
+﻿using C2.Business.Model;
+using C2.Utils;
 using System;
 using System.Xml;
 
@@ -7,6 +8,7 @@ namespace C2.Model.Widgets
     public class DataSourceWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "DATASOURCE";
+        public override string Description => HelpUtil.DataSourceWidgetHelpInfo;
         public DataSourceWidget()
         {
             DisplayIndex = 0;
@@ -19,22 +21,8 @@ namespace C2.Model.Widgets
 
         public override void Serialize(XmlDocument dom, XmlElement node)
         {
-            base.Serialize(dom, node);
-            if (this.DataItems.Count > 0)
-            {
-                XmlElement dataItemsNode = node.OwnerDocument.CreateElement("data_items");
-                foreach (var dataItem in this.DataItems)
-                {
-                    var dataNode = node.OwnerDocument.CreateElement("data_item");
-                    dataNode.SetAttribute("path", dataItem.FilePath);
-                    dataNode.SetAttribute("name", dataItem.FileName);
-                    dataNode.SetAttribute("separator", dataItem.FileSep.ToString());
-                    dataNode.SetAttribute("encoding", dataItem.FileEncoding.ToString());
-                    dataNode.SetAttribute("file_type", dataItem.FileType.ToString());
-                    dataItemsNode.AppendChild(dataNode);
-                }
-                node.AppendChild(dataItemsNode);
-            }
+            base.Serialize(dom, node);           
+            WriteDataItem(node, this.DataItems, "data_items");
         }
 
         public override void Deserialize(Version documentVersion, XmlElement node)

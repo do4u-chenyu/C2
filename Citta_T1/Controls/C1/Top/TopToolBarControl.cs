@@ -107,6 +107,7 @@ namespace C2.Controls.Top
             SelectFrame = false;
             ChangeCursor();
             FrameChange();
+            ChangeCursorColor();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(true);
         }
@@ -115,6 +116,7 @@ namespace C2.Controls.Top
         {
             SelectFrame = false;
             ChangeCursor();
+            ChangeCursorColor();
             FrameChange();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(false);
@@ -166,7 +168,7 @@ namespace C2.Controls.Top
             this.FormatButton.ToolTipText = HelpUtil.FormatOperatorHelpInfo;
             this.RemarkButton.ToolTipText = HelpUtil.RemarkPictureBoxHelpInfo;
             this.ZoomUpButton.ToolTipText = HelpUtil.ZoomUpPictureBoxHelpInfo;
-            this.ZoomDownButton.ToolTipText = HelpUtil.zoomDownPictureBoxHelpInfo;
+            this.ZoomDownButton.ToolTipText = HelpUtil.ZoomDownPictureBoxHelpInfo;
             this.MoveButton.ToolTipText = HelpUtil.MovePictureBoxHelpInfo;
             this.FrameButton.ToolTipText = HelpUtil.FramePictureBoxHelpInfo;
         }

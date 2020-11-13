@@ -151,20 +151,20 @@ namespace C2.Controls.Common
         {
             if(this.topicName.Text == "未选中节点")
             {
-                HelpUtil.ShowMessageBox("未选中节点，请选中主题后再配置","未选中节点",MessageBoxIcon.Information);
+                HelpUtil.ShowMessageBox("未选中节点，请选中主题后再配置","未选中节点");
                 return;
             }
 
             //模型算子选中时，可以不用选中数据源
-            if ( (SelectedDataSource ==null || SelectedDataSource.IsEmpty() ) && SelectedOperator != Lang._(OpType.ModelOperator.ToString()))
+            if ( (SelectedDataSource == null || SelectedDataSource.IsEmpty() ) && SelectedOperator != Lang._(OpType.ModelOperator.ToString()))
             {
-                HelpUtil.ShowMessageBox("未选中数据源,请添加后再配置", "未选中数据源", MessageBoxIcon.Information);
+                HelpUtil.ShowMessageBox("未选中数据源,请添加后再配置", "未选中数据源");
                 return;
             }
 
             if (string.IsNullOrEmpty(SelectedOperator))
             {
-                HelpUtil.ShowMessageBox("未添加算子,请添加后再配置", "未选择算子", MessageBoxIcon.Information);
+                HelpUtil.ShowMessageBox("未添加算子,请添加后再配置", "未选择算子");
                 return;
             }
             if (SelectedOperator == Lang._(OpType.ModelOperator.ToString()))
