@@ -205,7 +205,7 @@ namespace C2
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox3.Image = global::C2.Properties.Resources.Datamanagement;
-            this.pictureBox3.Location = new System.Drawing.Point(19, 135);
+            this.pictureBox3.Location = new System.Drawing.Point(18, 135);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(20, 20);
             this.pictureBox3.TabIndex = 15;
@@ -249,7 +249,7 @@ namespace C2
             this.dataButton.Name = "dataButton";
             this.dataButton.Size = new System.Drawing.Size(137, 42);
             this.dataButton.TabIndex = 2;
-            this.dataButton.Text = "      数据管理";
+            this.dataButton.Text = "     数据管理";
             this.toolTip1.SetToolTip(this.dataButton, "当前用户已导入的所有数据");
             this.dataButton.UseVisualStyleBackColor = true;
             this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
