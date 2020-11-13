@@ -35,7 +35,7 @@ namespace C2.Controls
             _Dimension = new System.Drawing.Size(4, 2);
             _CellSize = new System.Drawing.Size(210, 180);
             _MinimumCellSize = new System.Drawing.Size(120, 100);
-            _CellSpace = new Size(16, 100);
+            _CellSpace = new Size(16, 50);
             ShowEmptyCells = true;
             SetPaintStyles();
 
@@ -478,9 +478,6 @@ namespace C2.Controls
         {
             if (e.Item != null && e.Item.View != this)
                 e.Item.View = this;
-
-            //PerformLayout();
-            //Invalidate();
         }
 
         void Items_ItemRemoved(object sender, XListEventArgs<ThumbItem> e)
@@ -517,17 +514,15 @@ namespace C2.Controls
             // calculate cell size
             var cellSize = new Size(
                 (rect.Width - dimension.Width * CellSpace.Width) / dimension.Width,
-                (rect.Height - dimension.Height * CellSpace.Height) / dimension.Height);
-            cellSize.Width = Math.Min(CellSize.Width, Math.Max(MinimumCellSize.Width, cellSize.Width));
-            cellSize.Height = Math.Min(CellSize.Height, Math.Max(MinimumCellSize.Height, cellSize.Height));
+                (rect.Height - (dimension.Height - 1) * CellSpace.Height) / dimension.Height);
+            cellSize.Width = Math.Min(CellSize.Width, Math.Max(MinimumCellSize.Width, cellSize.Width)); 
             ActualCellSize = cellSize;
 
             // calculate start location
             var startX = rect.X + (rect.Width - ((cellSize.Width + CellSpace.Width) * dimension.Width)) / 2;
-            var startY = rect.Y + (rect.Height - ((cellSize.Height + CellSpace.Height) * dimension.Height)) / 2;
             startX = Math.Max(rect.X, startX) + CellSpace.Width / 2;
-            startY = Math.Max(rect.Y, startY) + CellSpace.Height / 2;
-            StartLocation = new Point(startX, startY);
+            var startY = rect.Y;
+            StartLocation = new Point(startX, rect.Y);
 
             // calculate cell bounds
             int index = 0;
@@ -543,13 +538,12 @@ namespace C2.Controls
                     cellSize.Width,
                     cellSize.Height);
                 item.Bounds = cellBounds;
-                //item.Bounds = PaintHelper.GetRectInBounds(cellBounds, CellSize.Width, CellSize.Height);
                 index++;
                 if (x == 0 & y != 0)
-                    Items[Items.Count - y].Bounds = new Rectangle(cellBounds.X - CellSpace.Width, 
-                                                                  cellBounds.Y - CellSpace.Height / 2, 
-                                                                  cellBounds.Width / 2, 
-                                                                  CellSpace.Height / 2);
+                    Items[Items.Count - y].Bounds = new Rectangle(cellBounds.X - CellSpace.Width * 3, 
+                                                                  cellBounds.Y - CellSpace.Height + 10, 
+                                                                  cellBounds.Width , 
+                                                                  CellSpace.Height );
                 if (index == 12) break;
             }
         }
@@ -560,14 +554,12 @@ namespace C2.Controls
                 return;
             Global.GetMainForm().NewDocumentForm_Click(item.Text);
         }
-            //ItemClick(this, new ThumbViewItemEventArgs(item)); 
 
         void OnItemClose(ThumbItem item)
         {
             if (item == null)
                 throw new ArgumentNullException();
 
-            //
             if (Items.Contains(item))
             {
                 var e = new ThumbViewItemCancelEventArgs(item);

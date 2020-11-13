@@ -26,6 +26,7 @@ namespace C2.Forms
     public partial class CanvasForm : BaseDocumentForm
     {
         bool HardClose;
+        private ShortcutKeysTable ShortcutKeys;
         private OptionDao optionDao;
         private UndoRedoManager undoRedoManager;
         private ModelDocument document;
@@ -50,9 +51,10 @@ namespace C2.Forms
         {
             InitializeComponent();
             InitializeDao();
-            InitializeMainFormEventHandler();
+            InitializeEventHandler();
             InitializeControlsLocation();
             InitializeUndoRedoManager();
+            InitializeKeyBoard();
         }
 
         private void InitializeDao()
@@ -60,7 +62,12 @@ namespace C2.Forms
             this.optionDao = new OptionDao();
             this.userName = Global.GetMainForm().UserName;
         }
-        
+        private void InitializeEventHandler()
+        {
+            // 新增文档事件
+            this.canvasPanel.NewElementEvent += NewDocumentOperator;
+            //this.canvasPanel.KeyDown += new KeyEventHandler(CanvasPanel_KeyDown);
+        }
         private void InitializeUndoRedoManager()
         {
             this.topToolBarControl.Disable_UndoButton();
@@ -99,11 +106,6 @@ namespace C2.Forms
             this.operatorControl.Location = new Point(this.canvasPanel.Width - 280, 38);
             this.remarkControl.Location = new Point(this.canvasPanel.Width - 505, 38);
             this.rightHideButton.Location = new Point(this.canvasPanel.Width - 60, 38);
-        }
-        private void InitializeMainFormEventHandler()
-        {
-            // 新增文档事件
-            this.canvasPanel.NewElementEvent += NewDocumentOperator;
         }
         public CanvasForm(ModelDocument document)
             :this()
@@ -598,6 +600,14 @@ namespace C2.Forms
         {
             this.topToolBarControl.Disable_RedoButton();
         }
+        public void Undo()
+        {
+            this.topToolBarControl.UndoButton_Click(this, EventArgs.Empty);
+        }
+        public void Redo()
+        {
+            this.topToolBarControl.RedoButton_Click(this, EventArgs.Empty);
+        }
         #endregion
 
         #region 文档加载
@@ -620,6 +630,34 @@ namespace C2.Forms
             doc.ModelElements.ForEach(me => this.canvasPanel.Controls.Add(me.InnerControl));
             this.naviViewControl.UpdateNaviView();
             doc.UpdateAllLines();
+        }
+        #endregion
+        #region 快捷键
+        private bool IsCurrentModelNotRun()
+        {
+            return Document.TaskManager.ModelStatus == ModelStatus.Running ? false : true;
+        }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (Visible && IsCurrentModelNotRun())
+            {
+                if (ShortcutKeys.Handle(e.KeyData))
+                {
+                    e.SuppressKeyPress = true;
+                }
+            }
+
+            base.OnKeyDown(e);
+        }
+        private void InitializeKeyBoard()
+        {
+            ShortcutKeys = new ShortcutKeysTable();
+            ShortcutKeys.Register(KeyMap.Undo, delegate () { Undo(); });
+            ShortcutKeys.Register(KeyMap.Redo, delegate () { Redo(); });
+            ShortcutKeys.Register(KeyMap.Save, delegate () { this.Document.Save(); });
+            ShortcutKeys.Register(KeyMap.Copy, delegate () { this.CanvasPanel.ControlSelect_Copy(); });
+            ShortcutKeys.Register(KeyMap.Paste, delegate () { this.CanvasPanel.ControlSelect_paste(); });
+            ShortcutKeys.Register(KeyMap.Delete, delegate () { this.CanvasPanel.DeleteSelectedLinesByIndex(); });
         }
         #endregion
 

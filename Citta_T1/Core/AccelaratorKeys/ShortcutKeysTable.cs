@@ -18,7 +18,7 @@ namespace C2.Core
             Table.Add(new ShortcutKeyAction(key, handler));
         }
 
-        public bool Haldle(System.Windows.Forms.Keys keys)
+        public bool Handle(System.Windows.Forms.Keys keys)
         {
             foreach (ShortcutKeyAction action in Table)
             {

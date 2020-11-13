@@ -21,6 +21,7 @@ using C2.Dialogs;
 using C2.Forms;
 using C2.Model;
 using C2.Model.Widgets;
+using C2.Business.Schedule;
 #endregion
 
 namespace C2
@@ -383,59 +384,7 @@ namespace C2
         {
             this.toolTip1.SetToolTip(this.usernamelabel, this.userName + "已登录");
         }
-        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, System.Windows.Forms.Keys keyData) //激活回车键
-        {
-            //int WM_KEYDOWN = 256;
-            //int WM_SYSKEYDOWN = 260;
 
-            //if (this.IsCurrentModelNotRun() && this.IsClickOnUneditableCtr() && (msg.Msg == WM_KEYDOWN | msg.Msg == WM_SYSKEYDOWN))
-            //{
-            //    if (keyData == Keys.Delete)
-            //        this.canvasPanel.DeleteSelectedLinesByIndex();
-            //    if (keyData == (Keys.C | Keys.Control))
-            //        this.canvasPanel.ControlSelect_Copy();
-            //    if (keyData == (Keys.V | Keys.Control))
-            //        this.canvasPanel.ControlSelect_paste();
-            //    if (keyData == (Keys.S | Keys.Control))
-            //        this.SaveModelButton_Click(this, null);
-            //    if (keyData == (Keys.Z | Keys.Control))
-            //        this.topToolBarControl.UndoButton_Click(this, null);
-            //    if (keyData == (Keys.Y | Keys.Control))
-            //        this.topToolBarControl.RedoButton_Click(this, null);
-            //}
-            return false;
-        }
-        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        internal static extern IntPtr GetFocus();
-        ///获取 当前拥有焦点的控件
-        private Control GetFocusedControl()
-        {
-            Control focusedControl = null;
-            // To get hold of the focused control:
-            IntPtr focusedHandle = GetFocus();
-            if (focusedHandle != IntPtr.Zero)
-                //focusedControl = Control.FromHandle(focusedHandle)
-                focusedControl = Control.FromChildHandle(focusedHandle);
-            return focusedControl;
-
-        }
-        private bool IsCurrentModelNotRun()
-        {
-            //return Global.GetCurrentDocument().TaskManager.ModelStatus == ModelStatus.Running ? false : true;
-            return false;
-        }
-
-        private bool IsClickOnUneditableCtr()
-        {
-            // TODO 目前解决方案属于穷举法，最好能找到当前控件是否有可编辑的属性
-            Control focusedCtr = GetFocusedControl();
-            if (focusedCtr is TextBox)
-                return (focusedCtr as TextBox).ReadOnly;
-            else if (focusedCtr is RichTextBox)
-                return (focusedCtr as RichTextBox).ReadOnly;
-            else
-                return true;
-        }
 
         private void SaveAllButton_Click(object sender, EventArgs e)
         {

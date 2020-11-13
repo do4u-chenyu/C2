@@ -236,10 +236,14 @@ namespace C2.Controls.MapViews
 
             if (opw.Status == OpStatus.Ready || opw.Status == OpStatus.Done)
             {
+                //Global.GetDocumentForm().ShowRunLab();
                 List<string> cmds = GenerateCmd();
                 if (cmds == null)
                     return;
+                this.Cursor = Cursors.WaitCursor;
                 MessageBox.Show(RunLinuxCommand(cmds));
+                this.Cursor = Cursors.Default;
+                //Global.GetDocumentForm().HideRunLab();
                 DataItem resultItem = opw.ResultItem;
                 ResultWidget rsw = (opw.Container as Topic).FindWidget<ResultWidget>();
                 if (rsw == null)
