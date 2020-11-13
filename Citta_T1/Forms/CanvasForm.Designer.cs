@@ -72,6 +72,7 @@
             this.topToolBarControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
             this.topToolBarControl.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.topToolBarControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topToolBarControl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.topToolBarControl.Location = new System.Drawing.Point(0, 0);
             this.topToolBarControl.Margin = new System.Windows.Forms.Padding(0);
             this.topToolBarControl.Name = "topToolBarControl";
@@ -267,6 +268,7 @@
             this.Controls.Add(this.canvasPanel);
             this.Controls.Add(this.topToolBarControl);
             this.IconImage = global::C2.Properties.Resources.模型视图;
+            this.KeyPreview = true;
             this.Name = "CanvasForm";
             this.Text = "CanvasForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CanvasForm_FormClosing);
