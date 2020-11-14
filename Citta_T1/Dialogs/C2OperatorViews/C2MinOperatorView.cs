@@ -30,12 +30,12 @@ namespace C2.Dialogs.C2OperatorViews
                 return notReady;
             if (String.IsNullOrWhiteSpace(this.comboBox0.Text))
             {
-                MessageBox.Show("请选择最小值字段!");
+                HelpUtil.ShowMessageBox("请选择最小值字段");
                 return notReady;
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
-                MessageBox.Show("请选择输出字段!");
+                HelpUtil.ShowMessageBox("请选择输出字段");
                 return notReady;
             }
             return !notReady;

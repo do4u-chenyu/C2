@@ -70,12 +70,12 @@ namespace C2.Dialogs.C2OperatorViews
             }
             if (ConvertUtil.ControlTextTryParseInt(randomNumBox))
             {
-                MessageBox.Show("请输入小于" + int.MaxValue + "的正整数.");
+                HelpUtil.ShowMessageBox("请输入小于" + int.MaxValue + "的正整数.");
                 return notReady;
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
-                MessageBox.Show("请选择算子要输出的字段");
+                HelpUtil.ShowMessageBox("请选择算子要输出的字段");
                 return notReady;
             }
             return !notReady;

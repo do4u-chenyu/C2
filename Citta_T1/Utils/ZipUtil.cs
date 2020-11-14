@@ -1,7 +1,5 @@
-﻿using ICSharpCode.SharpZipLib.Checksum;
+﻿using C2.Core;
 using ICSharpCode.SharpZipLib.Zip;
-using System;
-using C2.Core;
 using System.IO;
 using System.Windows.Forms;
 
@@ -24,7 +22,7 @@ namespace C2.Utils
         {
             if (!File.Exists(zipFilePath))
             {
-                MessageBox.Show("未能找到: " + zipFilePath); ;
+                HelpUtil.ShowMessageBox("未能找到: " + zipFilePath); ;
                 return;
             }
             // 获取模型文件名称

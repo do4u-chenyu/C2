@@ -663,10 +663,10 @@ namespace C2
         #region 底部控件事件
         public void PreViewDataByFullFilePath(object sender, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
         {
-            if (!System.IO.File.Exists(fullFilePath))
+            if (!File.Exists(fullFilePath))
             {
                 if (sender is MoveDtControl || sender is DataButton)
-                    MessageBox.Show("该数据文件不存在");
+                    HelpUtil.ShowMessageBox("该数据文件不存在");
                 return;
             }
             this.ShowBottomPanel();
@@ -676,9 +676,9 @@ namespace C2
 
         public void PreViewDataByFullFilePath(DataItem dataItem, bool isForceRead = false)
         {
-            if (!System.IO.File.Exists(dataItem.FilePath))
+            if (!File.Exists(dataItem.FilePath))
             {
-                MessageBox.Show("该数据文件不存在");
+                HelpUtil.ShowMessageBox("该数据文件不存在");
                 return;
             }
             this.ShowBottomPanel();

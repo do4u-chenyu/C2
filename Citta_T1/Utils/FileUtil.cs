@@ -165,9 +165,9 @@ namespace C2.Utils
         {
             FileStream fs = null;
             List<List<string>> rowContentList = new List<List<string>>();
-            if (!System.IO.File.Exists(fullFilePath))
+            if (!File.Exists(fullFilePath))
             {
-                MessageBox.Show(fullFilePath + "文件不存在");
+                HelpUtil.ShowMessageBox(fullFilePath + "文件不存在");
                 return rowContentList;
             }
 

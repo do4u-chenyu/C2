@@ -36,7 +36,7 @@ namespace C2.OperatorViews
             if (this.dataSourceTB0.Text == "") return notReady;
             if (this.comboBox0.Text == "")
             {
-                MessageBox.Show("请选择平均值字段!");
+                HelpUtil.ShowMessageBox("请选择平均值字段");
                 return notReady;
             }
             return !notReady;

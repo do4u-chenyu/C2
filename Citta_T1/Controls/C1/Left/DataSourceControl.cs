@@ -47,7 +47,7 @@ namespace C2.Controls.Left
             if (this.DataSourceDictI2B.ContainsKey(fullFilePath))
             {
                 String name = this.DataSourceDictI2B[fullFilePath].DataSourceName;
-                MessageBox.Show("该文件已存在，数据名为：" + name);
+                HelpUtil.ShowMessageBox("该文件已存在，数据名为：" + name);
                 return;
             }
             this.DataSourceDictI2B.Add(fullFilePath, dataButton);

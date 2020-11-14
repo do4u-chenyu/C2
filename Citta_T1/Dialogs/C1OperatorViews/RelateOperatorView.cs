@@ -177,7 +177,7 @@ namespace C2.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
-                    MessageBox.Show("请填写连接条件");
+                    HelpUtil.ShowMessageBox("请填写连接条件");
                     return notReady;
                 }
             }
@@ -185,13 +185,13 @@ namespace C2.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
-                    MessageBox.Show("请填写连接条件");
+                    HelpUtil.ShowMessageBox("请填写连接条件");
                     return notReady;
                 }
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0 || this.outListCCBL1.GetItemCheckIndex().Count == 0)
             {
-                MessageBox.Show("请填写输出字段");
+                HelpUtil.ShowMessageBox("请填写输出字段");
                 return notReady;
             }
             return !notReady;

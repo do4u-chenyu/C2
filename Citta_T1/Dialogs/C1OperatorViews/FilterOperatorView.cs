@@ -63,12 +63,12 @@ namespace C2.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
-                    MessageBox.Show("请填写过滤条件");
+                    HelpUtil.ShowMessageBox("请填写过滤条件");
                     return notReady;
                 }
                 if (ctl is TextBox && IsIllegalCharacter(ctl))
                 {
-                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
+                    HelpUtil.ShowMessageBox("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
@@ -76,18 +76,18 @@ namespace C2.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
-                    MessageBox.Show("请填写过滤条件");
+                    HelpUtil.ShowMessageBox("请填写过滤条件");
                     return notReady;
                 }
                 if (ctl is TextBox && IsIllegalCharacter(ctl))
                 {
-                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
+                    HelpUtil.ShowMessageBox("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
-                MessageBox.Show("请填写输出字段");
+                HelpUtil.ShowMessageBox("请填写输出字段");
                 return notReady;
             }
             return !notReady;

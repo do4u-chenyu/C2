@@ -155,7 +155,7 @@ namespace C2.Dialogs.C2OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
-                    MessageBox.Show("请填写分组字段!");
+                    HelpUtil.ShowMessageBox("请填写分组字段");
                     return notReady;
                 }
             }
@@ -163,7 +163,7 @@ namespace C2.Dialogs.C2OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
-                    MessageBox.Show("请填写分组字段!");
+                    HelpUtil.ShowMessageBox("请填写分组字段");
                     return notReady;
                 }
             }

@@ -73,17 +73,17 @@ namespace C2.OperatorViews
 
             if (String.IsNullOrEmpty(this.randomNumBox.Text))
             {
-                MessageBox.Show("随机条数字段不能为空,请输入一个整数");
+                HelpUtil.ShowMessageBox("随机条数字段不能为空,请输入一个整数");
                 return notReady;
             }
             if (ConvertUtil.ControlTextTryParseInt(randomNumBox))
             {
-                MessageBox.Show("请输入小于" + int.MaxValue + "的正整数.");
+                HelpUtil.ShowMessageBox("请输入小于" + int.MaxValue + "的正整数.");
                 return notReady;
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
-                MessageBox.Show("请选择算子要输出的字段");
+                HelpUtil.ShowMessageBox("请选择算子要输出的字段");
                 return notReady;
             }
             return !notReady;

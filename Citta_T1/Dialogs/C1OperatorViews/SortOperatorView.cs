@@ -49,23 +49,23 @@ namespace C2.OperatorViews
            
             if (String.IsNullOrWhiteSpace(this.comboBox0.Text))
             {
-                MessageBox.Show("请选择排序字段!");
+                HelpUtil.ShowMessageBox("请选择排序字段");
                 return notReady;
             }
             if (String.IsNullOrWhiteSpace(firstText))
             {
-                MessageBox.Show("请选择输出行数!");
+                HelpUtil.ShowMessageBox("请选择输出行数");
                 return notReady;
             }
             if (ConvertUtil.ControlTextTryParseInt(firstRow) 
                 || !String.IsNullOrWhiteSpace(endText)&& ConvertUtil.ControlTextTryParseInt(endRow))
             {
-                MessageBox.Show("请输入小于" + int.MaxValue + "的正整数.");
+                HelpUtil.ShowMessageBox("请输入小于" + int.MaxValue + "的正整数.");
                 return notReady;
             }
             if (!String.IsNullOrEmpty(endText) && Convert.ToInt32(firstText) > Convert.ToInt32(endText))
             {
-                MessageBox.Show("输出行数选择中，起始行数大于结束行数");
+                HelpUtil.ShowMessageBox("输出行数选择中，起始行数大于结束行数");
                 return notReady;
             }
             return !notReady;

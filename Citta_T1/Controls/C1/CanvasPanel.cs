@@ -345,7 +345,7 @@ namespace C2.Controls
                         selectLineIndexs.Add(mrIndex);
                     else
                     {
-                        MessageBox.Show("算子与结果之间的连线是系统自动维护的，不能被人为选中、添加或删除。");
+                        HelpUtil.ShowMessageBox("算子与结果之间的连线是系统自动维护的，不能被人为选中、添加或删除。");
                         return;
                     }
                 else

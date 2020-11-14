@@ -185,19 +185,19 @@ namespace C2.Dialogs
             //虚拟机是否勾选
             if (string.IsNullOrEmpty(this.pythonChosenComboBox.Text))
             {
-                MessageBox.Show("请选择python虚拟机，若无选项请前往‘首选项-python引擎’中配置。");
+                HelpUtil.ShowMessageBox("请选择python虚拟机，若无选项请前往‘首选项-python引擎’中配置。");
                 return notReady;
             }
             //脚本是否导入
             if (String.IsNullOrEmpty(pyFullFilePathTextBox.Text))
             {
-                MessageBox.Show("没有配置需要运行的Python脚本，请点击浏览按钮导入脚本。");
+                HelpUtil.ShowMessageBox("没有配置需要运行的Python脚本，请点击浏览按钮导入脚本。");
                 return notReady;
             }
             //分隔符-其他，是否有值
             if (GetControlRadioName(this.outputFileSeparatorSettingGroup) == "otherSeparatorRadio" && String.IsNullOrEmpty(this.otherSeparatorText.Text))
             {
-                MessageBox.Show("未输入其他类型分隔符内容");
+                HelpUtil.ShowMessageBox("未输入其他类型分隔符内容");
                 return notReady;
             }
 

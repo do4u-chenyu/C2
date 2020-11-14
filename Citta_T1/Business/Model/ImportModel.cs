@@ -1,4 +1,5 @@
 ﻿using C2.Core;
+using C2.Utils;
 using ICSharpCode.SharpZipLib.Zip;
 using System.Collections.Generic;
 using System.IO;
@@ -54,7 +55,7 @@ namespace C2.Business.Model
                 RenameFile(dirs, this.modelFilePath);
                 // 将导入模型添加到左侧模型面板
                 MyModelControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
-                MessageBox.Show("模型导入成功。");
+                HelpUtil.ShowMessageBox("模型导入成功");
             }
 
         }

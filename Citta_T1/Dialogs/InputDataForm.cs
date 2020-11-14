@@ -104,13 +104,13 @@ namespace C2.Dialogs
              */
             string name = this.textBox1.Text;
             if (name == "请输入数据名称" || name == "" || String.IsNullOrEmpty(name))
-                MessageBox.Show("请输入数据名称！");
+                HelpUtil.ShowMessageBox("请输入数据名称！");
             else if (String.IsNullOrEmpty(this.fullFilePath))
-                MessageBox.Show("请选择数据路径！");
+                HelpUtil.ShowMessageBox("请选择数据路径！");
             else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(this.fullFilePath))
             {
                 String dsName = Global.GetDataSourceControl().DataSourceDictI2B[this.fullFilePath].DataSourceName;
-                MessageBox.Show("该文件已导入，数据源名为：" + dsName + ", 如需重新导入请先卸载该数据");
+                HelpUtil.ShowMessageBox("该文件已导入，数据源名为：" + dsName + ", 如需重新导入请先卸载该数据");
             }
             else if (IsContainsInvalidChars(this.fullFilePath))
                 MessageBox.Show(String.Format("数据源路径中不能有空格、&、\"等特殊字符,当前选择的路径为: {0}", this.fullFilePath));
@@ -125,7 +125,7 @@ namespace C2.Dialogs
                 if (BCPBuffer.GetInstance().IsEmptyHeader(this.fullFilePath))
                 {
                     BCPBuffer.GetInstance().Remove(this.fullFilePath);
-                    MessageBox.Show("数据源表头不能为空，请检查数据源文件。");
+                    HelpUtil.ShowMessageBox("数据源表头不能为空，请检查数据源文件。");
                     return;
                 }
                 InputDataEvent(name, this.fullFilePath, this.separator, this.extType, this.encoding);

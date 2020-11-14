@@ -33,7 +33,7 @@ namespace C2.Dialogs
             string userName = this.userNameComboBox.Text;
             if (String.IsNullOrEmpty(userName))
             {
-                MessageBox.Show("请输入用户名");
+                HelpUtil.ShowMessageBox("请输入用户名");
                 return;
             }
             if (FileUtil.ContainIllegalCharacters(userName, "用户名")

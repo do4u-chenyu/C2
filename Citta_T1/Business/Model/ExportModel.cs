@@ -1,5 +1,4 @@
-﻿using C2.Business.Model;
-using C2.Core;
+﻿using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -38,7 +37,7 @@ namespace C2.Business.Model
             // 模型文档不存在返回
             if (!File.Exists(FullXmlFilePath))
             {
-                MessageBox.Show("模型文档不存在，可能已被删除");
+                HelpUtil.ShowMessageBox("模型文档不存在，可能已被删除");
                 return;
             }
             this.FullXmlFilePath = FullXmlFilePath;
@@ -54,9 +53,8 @@ namespace C2.Business.Model
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string fileName = saveFileDialog1.FileName;
-                Utils.ZipUtil.CreateZip(newModelPath, fileName);
-                MessageBox.Show("模型导出成功,存储路径：" + fileName);
-
+                ZipUtil.CreateZip(newModelPath, fileName);
+                HelpUtil.ShowMessageBox("模型导出成功,存储路径：" + fileName);
             }
 
             // 清场
@@ -247,7 +245,7 @@ namespace C2.Business.Model
                 return copySuccess;
             if (!File.Exists(path))
             {
-                MessageBox.Show(path + "文件不存在，无法完成模型导出。");
+                HelpUtil.ShowMessageBox(path + "文件不存在，无法完成模型导出。");
                 return !copySuccess;
             }
 

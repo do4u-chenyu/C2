@@ -141,42 +141,42 @@ namespace C2.Dialogs.C2OperatorViews
 
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
-                MessageBox.Show("请选择文件输出字段");
+                HelpUtil.ShowMessageBox("请选择文件输出字段");
                 return notReady;
             }
 
             if (this.rsFullFilePathTextBox.Text == "")
             {
-                MessageBox.Show("请选择结果文件路径");
+                HelpUtil.ShowMessageBox("请选择结果文件路径");
                 return notReady;
             }
 
             //有任一框中非数字
             if (!IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
             {
-                MessageBox.Show("输入时间非纯数字，请重新输入");
+                HelpUtil.ShowMessageBox("输入时间非纯数字，请重新输入");
                 return notReady;
             }
             //设定时间空值检测
             if (this.fixRadioButton.Checked && String.IsNullOrEmpty(this.fixSecondTextBox.Text))
             {
-                MessageBox.Show("请设置固定运行时间");
+                HelpUtil.ShowMessageBox("请设置固定运行时间");
                 return notReady;
             }
             if (this.randomRadioButton.Checked && (String.IsNullOrEmpty(this.randomBeginTextBox.Text) || String.IsNullOrEmpty(this.randomEndTextBox.Text)))
             {
-                MessageBox.Show("请设置随机运行时间");
+                HelpUtil.ShowMessageBox("请设置随机运行时间");
                 return notReady;
             }
             //分隔符-其他，是否有值
             if (GetControlRadioName(this.outputFileSeparatorSettingGroup) == "otherSeparatorRadio" && String.IsNullOrEmpty(this.otherSeparatorText.Text))
             {
-                MessageBox.Show("未输入其他类型分隔符内容");
+                HelpUtil.ShowMessageBox("未输入其他类型分隔符内容");
                 return notReady;
             }
             if (Convert.ToInt32(randomBeginTextBox.Text) > Convert.ToInt32(randomEndTextBox.Text))
             {
-                MessageBox.Show("随机运行时间设置中，起始时间大于结束时间");
+                HelpUtil.ShowMessageBox("随机运行时间设置中，起始时间大于结束时间");
                 return notReady;
             }
             return !notReady;

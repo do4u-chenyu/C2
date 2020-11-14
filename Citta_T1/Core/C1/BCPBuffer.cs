@@ -153,7 +153,7 @@ namespace C2.Core
         {
             if (!File.Exists(fullFilePath))
             {
-                MessageBox.Show(fullFilePath + "该文件不存在");
+                HelpUtil.ShowMessageBox(fullFilePath + "该文件不存在");
                 return;
             }
 

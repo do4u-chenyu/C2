@@ -153,7 +153,7 @@ namespace C2.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
-                    MessageBox.Show("请填写取差集条件!");
+                    HelpUtil.ShowMessageBox("请填写取差集条件");
                     return notReady;
                 }
             }
@@ -161,13 +161,13 @@ namespace C2.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
-                    MessageBox.Show("请填写取差集条件!");
+                    HelpUtil.ShowMessageBox("请填写取差集条件");
                     return notReady;
                 }
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
-                MessageBox.Show("请填写输出字段!");
+                HelpUtil.ShowMessageBox("请填写输出字段");
                 return notReady;
             }
             return !notReady;

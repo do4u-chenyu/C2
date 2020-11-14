@@ -126,12 +126,12 @@ namespace C2.Dialogs.Base
                 if (!cbb.Items.Contains(cbb.Text))
                 {
                     cbb.Text = String.Empty;
-                    MessageBox.Show("未输入正确字段名，请从下拉列表中选择正确字段名");
+                    HelpUtil.ShowMessageBox("未输入正确字段名，请从下拉列表中选择正确字段名");
                     return isIllegal;
                 }
                 if (IsIllegalCharacter(cbb))
                 {
-                    MessageBox.Show("字段名中包含分隔符TAB，请检查与算子相连数据源的分隔符选择是否正确");
+                    HelpUtil.ShowMessageBox("字段名中包含分隔符TAB，请检查与算子相连数据源的分隔符选择是否正确");
                     return isIllegal;
                 }
             }

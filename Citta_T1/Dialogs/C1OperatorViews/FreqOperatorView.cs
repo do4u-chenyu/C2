@@ -40,17 +40,18 @@ namespace C2.OperatorViews
             bool notReady = true;
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
-                MessageBox.Show("请选择输出字段!");
+                HelpUtil.ShowMessageBox("请选择输出字段");
                 return notReady;
             }
             if (!this.noRepetition.Checked && !this.repetition.Checked)
             {
-                MessageBox.Show("请选择数据是否进行去重");
+                HelpUtil.ShowMessageBox("请选择数据是否进行去重");
                 return notReady;
             }
             if (!this.ascendingOrder.Checked && !this.descendingOrder.Checked)
             {
-                MessageBox.Show("请选择数据排序");
+                HelpUtil.ShowMessageBox("请选择数据排序");
+                HelpUtil.ShowMessageBox("请选择数据排序");
                 return notReady;
             }
             return !notReady;

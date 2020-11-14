@@ -180,7 +180,7 @@ namespace C2.OperatorViews
             var duplicateValues = factors.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
             foreach (var item in duplicateValues)
             {
-                MessageBox.Show("取并集条件存在完全重复选项,请重新选择并集条件");
+                HelpUtil.ShowMessageBox("取并集条件存在完全重复选项,请重新选择并集条件");
                 return true;
             }
             return false;
@@ -197,12 +197,12 @@ namespace C2.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
-                    MessageBox.Show("请填写并集条件");
+                    HelpUtil.ShowMessageBox("请填写并集条件");
                     return notReady;
                 }
                 if (ctl is TextBox && IsIllegalCharacter(ctl))
                 {
-                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
+                    HelpUtil.ShowMessageBox("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
@@ -210,12 +210,12 @@ namespace C2.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
-                    MessageBox.Show("请填写并集条件");
+                    HelpUtil.ShowMessageBox("请填写并集条件");
                     return notReady;
                 }
                 if (ctl is TextBox && IsIllegalCharacter(ctl))
                 {
-                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
+                    HelpUtil.ShowMessageBox("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
