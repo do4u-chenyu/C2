@@ -242,7 +242,7 @@ namespace C2
             // 
             this.DataButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.DataButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.DataButtonPictureBox.Image = global::C2.Properties.Resources.Modelmarket;
+            this.DataButtonPictureBox.Image = global::C2.Properties.Resources.Datamanagement;
             this.DataButtonPictureBox.Location = new System.Drawing.Point(18, 13);
             this.DataButtonPictureBox.Name = "DataButtonPictureBox";
             this.DataButtonPictureBox.Size = new System.Drawing.Size(20, 20);
@@ -302,7 +302,7 @@ namespace C2
             // 
             this.ModelButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.ModelButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ModelButtonPictureBox.Image = global::C2.Properties.Resources.Datamanagement;
+            this.ModelButtonPictureBox.Image = global::C2.Properties.Resources.Modelmarket;
             this.ModelButtonPictureBox.Location = new System.Drawing.Point(18, 13);
             this.ModelButtonPictureBox.Name = "ModelButtonPictureBox";
             this.ModelButtonPictureBox.Size = new System.Drawing.Size(20, 20);
