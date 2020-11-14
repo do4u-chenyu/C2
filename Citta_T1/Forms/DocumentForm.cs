@@ -55,7 +55,7 @@ namespace C2.Forms
             InitializeComponent();
             InitializeInputDataForm();
             InitializeControlsLocation();
-            Icon = Properties.Resources.document_icon;
+            
             FormatPainter_DataChanged(null, EventArgs.Empty);
             FormatPainter.Default.DataChanged += new EventHandler(FormatPainter_DataChanged);
 
@@ -411,6 +411,8 @@ namespace C2.Forms
             splitContainer2.Panel2.ResumeLayout(false);
             splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
+
+            Icon = Properties.Resources.document_icon;
         }
 
         void InitializeShortcutKeys()
