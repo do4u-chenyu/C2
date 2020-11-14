@@ -39,13 +39,13 @@ namespace C2
             this.usernamelabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
-            this.IAOLabButton = new System.Windows.Forms.Button();
+            this.IAOLabButton = new C2.Controls.Common.NoFocusButton();
             this.IAOLabButtonPictureBox = new System.Windows.Forms.PictureBox();
-            this.DataSourceButton = new System.Windows.Forms.Button();
+            this.DataSourceButton = new C2.Controls.Common.NoFocusButton();
             this.DataButtonPictureBox = new System.Windows.Forms.PictureBox();
-            this.MindMapButton = new System.Windows.Forms.Button();
+            this.MindMapButton = new C2.Controls.Common.NoFocusButton();
             this.MindMapButtonPictureBox = new System.Windows.Forms.PictureBox();
-            this.ModelMarketButton = new System.Windows.Forms.Button();
+            this.ModelMarketButton = new C2.Controls.Common.NoFocusButton();
             this.ModelButtonPictureBox = new System.Windows.Forms.PictureBox();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
             this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
@@ -200,6 +200,7 @@ namespace C2
             this.IAOLabButton.Name = "IAOLabButton";
             this.IAOLabButton.Size = new System.Drawing.Size(137, 42);
             this.IAOLabButton.TabIndex = 3;
+            this.IAOLabButton.TabStop = false;
             this.IAOLabButton.Text = "      IAO实验室";
             this.toolTip1.SetToolTip(this.IAOLabButton, "数据分析建模需要的复杂模型探索");
             this.IAOLabButton.UseVisualStyleBackColor = true;
@@ -212,7 +213,7 @@ namespace C2
             this.IAOLabButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.IAOLabButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.IAOLabButtonPictureBox.Image = global::C2.Properties.Resources.Artificialintelligence;
-            this.IAOLabButtonPictureBox.Location = new System.Drawing.Point(18, 12);
+            this.IAOLabButtonPictureBox.Location = new System.Drawing.Point(18, 13);
             this.IAOLabButtonPictureBox.Name = "IAOLabButtonPictureBox";
             this.IAOLabButtonPictureBox.Size = new System.Drawing.Size(20, 20);
             this.IAOLabButtonPictureBox.TabIndex = 16;
@@ -229,6 +230,7 @@ namespace C2
             this.DataSourceButton.Name = "DataSourceButton";
             this.DataSourceButton.Size = new System.Drawing.Size(137, 42);
             this.DataSourceButton.TabIndex = 2;
+            this.DataSourceButton.TabStop = false;
             this.DataSourceButton.Text = "     数据管理";
             this.toolTip1.SetToolTip(this.DataSourceButton, "当前用户已导入的所有数据");
             this.DataSourceButton.UseVisualStyleBackColor = true;
@@ -241,7 +243,7 @@ namespace C2
             this.DataButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.DataButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.DataButtonPictureBox.Image = global::C2.Properties.Resources.Modelmarket;
-            this.DataButtonPictureBox.Location = new System.Drawing.Point(18, 12);
+            this.DataButtonPictureBox.Location = new System.Drawing.Point(18, 13);
             this.DataButtonPictureBox.Name = "DataButtonPictureBox";
             this.DataButtonPictureBox.Size = new System.Drawing.Size(20, 20);
             this.DataButtonPictureBox.TabIndex = 14;
@@ -258,7 +260,8 @@ namespace C2
             this.MindMapButton.Name = "MindMapButton";
             this.MindMapButton.Size = new System.Drawing.Size(137, 42);
             this.MindMapButton.TabIndex = 1;
-            this.MindMapButton.Text = "    业务视图";
+            this.MindMapButton.TabStop = false;
+            this.MindMapButton.Text = "     业务视图";
             this.toolTip1.SetToolTip(this.MindMapButton, "当前用户的所有业务视图");
             this.MindMapButton.UseVisualStyleBackColor = true;
             this.MindMapButton.Click += new System.EventHandler(this.OperateButton_Click);
@@ -270,7 +273,7 @@ namespace C2
             this.MindMapButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.MindMapButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.MindMapButtonPictureBox.Image = global::C2.Properties.Resources.Businessvw;
-            this.MindMapButtonPictureBox.Location = new System.Drawing.Point(18, 12);
+            this.MindMapButtonPictureBox.Location = new System.Drawing.Point(18, 13);
             this.MindMapButtonPictureBox.Name = "MindMapButtonPictureBox";
             this.MindMapButtonPictureBox.Size = new System.Drawing.Size(20, 20);
             this.MindMapButtonPictureBox.TabIndex = 13;
@@ -287,6 +290,7 @@ namespace C2
             this.ModelMarketButton.Name = "ModelMarketButton";
             this.ModelMarketButton.Size = new System.Drawing.Size(137, 42);
             this.ModelMarketButton.TabIndex = 0;
+            this.ModelMarketButton.TabStop = false;
             this.ModelMarketButton.Text = "     模型市场";
             this.toolTip1.SetToolTip(this.ModelMarketButton, "当前用户发布的所有模型");
             this.ModelMarketButton.UseVisualStyleBackColor = true;
@@ -299,7 +303,7 @@ namespace C2
             this.ModelButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.ModelButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ModelButtonPictureBox.Image = global::C2.Properties.Resources.Datamanagement;
-            this.ModelButtonPictureBox.Location = new System.Drawing.Point(18, 12);
+            this.ModelButtonPictureBox.Location = new System.Drawing.Point(18, 13);
             this.ModelButtonPictureBox.Name = "ModelButtonPictureBox";
             this.ModelButtonPictureBox.Size = new System.Drawing.Size(20, 20);
             this.ModelButtonPictureBox.TabIndex = 15;
@@ -730,9 +734,9 @@ namespace C2
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label usernamelabel;
         private System.Windows.Forms.Panel leftMainMenuPanel;
-        private System.Windows.Forms.Button ModelMarketButton;
-        private System.Windows.Forms.Button DataSourceButton;
-        private System.Windows.Forms.Button MindMapButton;
+        private Controls.Common.NoFocusButton ModelMarketButton;
+        private Controls.Common.NoFocusButton DataSourceButton;
+        private Controls.Common.NoFocusButton MindMapButton;
         private System.Windows.Forms.Panel leftToolBoxPanel;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button newModelButton;
@@ -751,7 +755,7 @@ namespace C2
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button IAOLabButton;
+        private Controls.Common.NoFocusButton IAOLabButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private Panel MainPanel;
         private Panel tabPanel;
