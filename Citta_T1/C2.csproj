@@ -867,15 +867,6 @@
     <Compile Include="Controls\Tip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\C1\Title\RightModelTitleControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Title\StartPageTitle.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Title\StartPageTitle.Designer.cs">
-      <DependentUpon>StartPageTitle.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ToolStrips\ToolStripExtensions.cs" />
     <Compile Include="Controls\ToolStrips\ToolStripNumericUpDown.cs">
       <SubType>Component</SubType>
@@ -1196,23 +1187,11 @@
       <DependentUpon>MoveRsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\QuickformatWrapper.cs" />
-    <Compile Include="Controls\C1\Title\ModelTitleControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Title\ModelTitleControl.Designer.cs">
-      <DependentUpon>ModelTitleControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\C1\Bottom\DragLineControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\C1\Bottom\DragLineControl.Designer.cs">
       <DependentUpon>DragLineControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\C1\Title\ModelTitlePanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Title\ModelTitlePanel.Designer.cs">
-      <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Top\TopToolBarControl.cs">
       <SubType>UserControl</SubType>
@@ -1447,20 +1426,8 @@
     <EmbeddedResource Include="Controls\C1\Move\Rs\MoveRsControl.resx">
       <DependentUpon>MoveRsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Title\ModelTitleControl.resx">
-      <DependentUpon>ModelTitleControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Bottom\DragLineControl.resx">
       <DependentUpon>DragLineControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Title\ModelTitlePanel.resx">
-      <DependentUpon>ModelTitlePanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Title\RightModelTitleControl.resx">
-      <DependentUpon>RightModelTitleControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Title\StartPageTitle.resx">
-      <DependentUpon>StartPageTitle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Top\TopToolBarControl.resx">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
@@ -2624,12 +2591,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

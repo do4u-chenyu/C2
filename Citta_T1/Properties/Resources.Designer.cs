@@ -403,16 +403,6 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap clicksavebutton {
-            get {
-                object obj = ResourceManager.GetObject("clicksavebutton", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
         internal static System.Drawing.Bitmap close {
             get {
                 object obj = ResourceManager.GetObject("close", resourceCulture);
@@ -3064,16 +3054,6 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap txtData {
             get {
                 object obj = ResourceManager.GetObject("txtData", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap u700 {
-            get {
-                object obj = ResourceManager.GetObject("u700", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
