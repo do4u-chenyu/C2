@@ -39,14 +39,14 @@ namespace C2
             this.usernamelabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.flowChartButton = new System.Windows.Forms.Button();
-            this.dataButton = new System.Windows.Forms.Button();
-            this.operateButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.myModelButton = new System.Windows.Forms.Button();
+            this.IAOLabButton = new System.Windows.Forms.Button();
+            this.IAOLabButtonPictureBox = new System.Windows.Forms.PictureBox();
+            this.DataSourceButton = new System.Windows.Forms.Button();
+            this.DataButtonPictureBox = new System.Windows.Forms.PictureBox();
+            this.MindMapButton = new System.Windows.Forms.Button();
+            this.MindMapButtonPictureBox = new System.Windows.Forms.PictureBox();
+            this.ModelMarketButton = new System.Windows.Forms.Button();
+            this.ModelButtonPictureBox = new System.Windows.Forms.PictureBox();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
             this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
@@ -90,11 +90,14 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.operateButton.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.IAOLabButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IAOLabButtonPictureBox)).BeginInit();
+            this.DataSourceButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataButtonPictureBox)).BeginInit();
+            this.MindMapButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MindMapButtonPictureBox)).BeginInit();
+            this.ModelMarketButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ModelButtonPictureBox)).BeginInit();
             this.leftToolBoxPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.MainPanel.SuspendLayout();
@@ -176,131 +179,131 @@ namespace C2
             // leftMainMenuPanel
             // 
             this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(60)))), ((int)(((byte)(85)))));
-            this.leftMainMenuPanel.Controls.Add(this.pictureBox4);
-            this.leftMainMenuPanel.Controls.Add(this.pictureBox3);
-            this.leftMainMenuPanel.Controls.Add(this.pictureBox2);
-            this.leftMainMenuPanel.Controls.Add(this.flowChartButton);
-            this.leftMainMenuPanel.Controls.Add(this.dataButton);
-            this.leftMainMenuPanel.Controls.Add(this.operateButton);
-            this.leftMainMenuPanel.Controls.Add(this.myModelButton);
+            this.leftMainMenuPanel.Controls.Add(this.IAOLabButton);
+            this.leftMainMenuPanel.Controls.Add(this.DataSourceButton);
+            this.leftMainMenuPanel.Controls.Add(this.MindMapButton);
+            this.leftMainMenuPanel.Controls.Add(this.ModelMarketButton);
             this.leftMainMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftMainMenuPanel.Location = new System.Drawing.Point(0, 46);
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
             this.leftMainMenuPanel.Size = new System.Drawing.Size(136, 560);
             this.leftMainMenuPanel.TabIndex = 1;
             // 
-            // pictureBox4
+            // IAOLabButton
             // 
-            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox4.Image = global::C2.Properties.Resources.Artificialintelligence;
-            this.pictureBox4.Location = new System.Drawing.Point(12, 192);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox4.TabIndex = 16;
-            this.pictureBox4.TabStop = false;
+            this.IAOLabButton.Controls.Add(this.IAOLabButtonPictureBox);
+            this.IAOLabButton.FlatAppearance.BorderSize = 0;
+            this.IAOLabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IAOLabButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.IAOLabButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.IAOLabButton.Location = new System.Drawing.Point(0, 182);
+            this.IAOLabButton.Name = "IAOLabButton";
+            this.IAOLabButton.Size = new System.Drawing.Size(137, 42);
+            this.IAOLabButton.TabIndex = 3;
+            this.IAOLabButton.Text = "      IAO实验室";
+            this.toolTip1.SetToolTip(this.IAOLabButton, "数据分析建模需要的复杂模型探索");
+            this.IAOLabButton.UseVisualStyleBackColor = true;
+            this.IAOLabButton.Click += new System.EventHandler(this.FlowChartButton_Click);
+            this.IAOLabButton.Leave += new System.EventHandler(this.flowChartButton_Leave);
+            this.IAOLabButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.flowChartButton_MouseDown);
             // 
-            // pictureBox3
+            // IAOLabButtonPictureBox
             // 
-            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox3.Image = global::C2.Properties.Resources.Datamanagement;
-            this.pictureBox3.Location = new System.Drawing.Point(18, 135);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox3.TabIndex = 15;
-            this.pictureBox3.TabStop = false;
+            this.IAOLabButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.IAOLabButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.IAOLabButtonPictureBox.Image = global::C2.Properties.Resources.Artificialintelligence;
+            this.IAOLabButtonPictureBox.Location = new System.Drawing.Point(18, 12);
+            this.IAOLabButtonPictureBox.Name = "IAOLabButtonPictureBox";
+            this.IAOLabButtonPictureBox.Size = new System.Drawing.Size(20, 20);
+            this.IAOLabButtonPictureBox.TabIndex = 16;
+            this.IAOLabButtonPictureBox.TabStop = false;
             // 
-            // pictureBox2
+            // DataSourceButton
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox2.Image = global::C2.Properties.Resources.Modelmarket;
-            this.pictureBox2.Location = new System.Drawing.Point(18, 75);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox2.TabIndex = 14;
-            this.pictureBox2.TabStop = false;
+            this.DataSourceButton.Controls.Add(this.DataButtonPictureBox);
+            this.DataSourceButton.FlatAppearance.BorderSize = 0;
+            this.DataSourceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DataSourceButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.DataSourceButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.DataSourceButton.Location = new System.Drawing.Point(0, 122);
+            this.DataSourceButton.Name = "DataSourceButton";
+            this.DataSourceButton.Size = new System.Drawing.Size(137, 42);
+            this.DataSourceButton.TabIndex = 2;
+            this.DataSourceButton.Text = "     数据管理";
+            this.toolTip1.SetToolTip(this.DataSourceButton, "当前用户已导入的所有数据");
+            this.DataSourceButton.UseVisualStyleBackColor = true;
+            this.DataSourceButton.Click += new System.EventHandler(this.DataButton_Click);
+            this.DataSourceButton.Leave += new System.EventHandler(this.dataButton_Leave);
+            this.DataSourceButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataButton_MouseDown);
             // 
-            // flowChartButton
+            // DataButtonPictureBox
             // 
-            this.flowChartButton.FlatAppearance.BorderSize = 0;
-            this.flowChartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flowChartButton.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.flowChartButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.flowChartButton.Location = new System.Drawing.Point(0, 182);
-            this.flowChartButton.Name = "flowChartButton";
-            this.flowChartButton.Size = new System.Drawing.Size(137, 42);
-            this.flowChartButton.TabIndex = 3;
-            this.flowChartButton.Text = "      IAO实验室";
-            this.toolTip1.SetToolTip(this.flowChartButton, "数据分析建模需要的复杂模型探索");
-            this.flowChartButton.UseVisualStyleBackColor = true;
-            this.flowChartButton.Click += new System.EventHandler(this.FlowChartButton_Click);
-            this.flowChartButton.Leave += new System.EventHandler(this.flowChartButton_Leave);
-            this.flowChartButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.flowChartButton_MouseDown);
+            this.DataButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.DataButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.DataButtonPictureBox.Image = global::C2.Properties.Resources.Modelmarket;
+            this.DataButtonPictureBox.Location = new System.Drawing.Point(18, 12);
+            this.DataButtonPictureBox.Name = "DataButtonPictureBox";
+            this.DataButtonPictureBox.Size = new System.Drawing.Size(20, 20);
+            this.DataButtonPictureBox.TabIndex = 14;
+            this.DataButtonPictureBox.TabStop = false;
             // 
-            // dataButton
+            // MindMapButton
             // 
-            this.dataButton.FlatAppearance.BorderSize = 0;
-            this.dataButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataButton.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.dataButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataButton.Location = new System.Drawing.Point(0, 122);
-            this.dataButton.Name = "dataButton";
-            this.dataButton.Size = new System.Drawing.Size(137, 42);
-            this.dataButton.TabIndex = 2;
-            this.dataButton.Text = "     数据管理";
-            this.toolTip1.SetToolTip(this.dataButton, "当前用户已导入的所有数据");
-            this.dataButton.UseVisualStyleBackColor = true;
-            this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
-            this.dataButton.Leave += new System.EventHandler(this.dataButton_Leave);
-            this.dataButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataButton_MouseDown);
+            this.MindMapButton.Controls.Add(this.MindMapButtonPictureBox);
+            this.MindMapButton.FlatAppearance.BorderSize = 0;
+            this.MindMapButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MindMapButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.MindMapButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.MindMapButton.Location = new System.Drawing.Point(0, 2);
+            this.MindMapButton.Name = "MindMapButton";
+            this.MindMapButton.Size = new System.Drawing.Size(137, 42);
+            this.MindMapButton.TabIndex = 1;
+            this.MindMapButton.Text = "    业务视图";
+            this.toolTip1.SetToolTip(this.MindMapButton, "当前用户的所有业务视图");
+            this.MindMapButton.UseVisualStyleBackColor = true;
+            this.MindMapButton.Click += new System.EventHandler(this.OperateButton_Click);
+            this.MindMapButton.Leave += new System.EventHandler(this.operateButton_Leave);
+            this.MindMapButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operateButton_MouseDown);
             // 
-            // operateButton
+            // MindMapButtonPictureBox
             // 
-            this.operateButton.Controls.Add(this.pictureBox1);
-            this.operateButton.FlatAppearance.BorderSize = 0;
-            this.operateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.operateButton.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.operateButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.operateButton.Location = new System.Drawing.Point(0, 2);
-            this.operateButton.Name = "operateButton";
-            this.operateButton.Size = new System.Drawing.Size(137, 42);
-            this.operateButton.TabIndex = 1;
-            this.operateButton.Text = "    业务视图";
-            this.toolTip1.SetToolTip(this.operateButton, "当前用户的所有业务视图");
-            this.operateButton.UseVisualStyleBackColor = true;
-            this.operateButton.Click += new System.EventHandler(this.OperateButton_Click);
-            this.operateButton.Leave += new System.EventHandler(this.operateButton_Leave);
-            this.operateButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operateButton_MouseDown);
+            this.MindMapButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.MindMapButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.MindMapButtonPictureBox.Image = global::C2.Properties.Resources.Businessvw;
+            this.MindMapButtonPictureBox.Location = new System.Drawing.Point(18, 12);
+            this.MindMapButtonPictureBox.Name = "MindMapButtonPictureBox";
+            this.MindMapButtonPictureBox.Size = new System.Drawing.Size(20, 20);
+            this.MindMapButtonPictureBox.TabIndex = 13;
+            this.MindMapButtonPictureBox.TabStop = false;
             // 
-            // pictureBox1
+            // ModelMarketButton
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = global::C2.Properties.Resources.Businessvw;
-            this.pictureBox1.Location = new System.Drawing.Point(18, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
+            this.ModelMarketButton.Controls.Add(this.ModelButtonPictureBox);
+            this.ModelMarketButton.FlatAppearance.BorderSize = 0;
+            this.ModelMarketButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ModelMarketButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.ModelMarketButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ModelMarketButton.Location = new System.Drawing.Point(0, 62);
+            this.ModelMarketButton.Name = "ModelMarketButton";
+            this.ModelMarketButton.Size = new System.Drawing.Size(137, 42);
+            this.ModelMarketButton.TabIndex = 0;
+            this.ModelMarketButton.Text = "     模型市场";
+            this.toolTip1.SetToolTip(this.ModelMarketButton, "当前用户发布的所有模型");
+            this.ModelMarketButton.UseVisualStyleBackColor = true;
+            this.ModelMarketButton.Click += new System.EventHandler(this.MyModelButton_Click);
+            this.ModelMarketButton.Leave += new System.EventHandler(this.myModelButton_Leave);
+            this.ModelMarketButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.myModelButton_MouseDown);
             // 
-            // myModelButton
+            // ModelButtonPictureBox
             // 
-            this.myModelButton.FlatAppearance.BorderSize = 0;
-            this.myModelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.myModelButton.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.myModelButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.myModelButton.Location = new System.Drawing.Point(0, 62);
-            this.myModelButton.Name = "myModelButton";
-            this.myModelButton.Size = new System.Drawing.Size(137, 42);
-            this.myModelButton.TabIndex = 0;
-            this.myModelButton.Text = "     模型市场";
-            this.toolTip1.SetToolTip(this.myModelButton, "当前用户发布的所有模型");
-            this.myModelButton.UseVisualStyleBackColor = true;
-            this.myModelButton.Click += new System.EventHandler(this.MyModelButton_Click);
-            this.myModelButton.Leave += new System.EventHandler(this.myModelButton_Leave);
-            this.myModelButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.myModelButton_MouseDown);
+            this.ModelButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.ModelButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ModelButtonPictureBox.Image = global::C2.Properties.Resources.Datamanagement;
+            this.ModelButtonPictureBox.Location = new System.Drawing.Point(18, 12);
+            this.ModelButtonPictureBox.Name = "ModelButtonPictureBox";
+            this.ModelButtonPictureBox.Size = new System.Drawing.Size(20, 20);
+            this.ModelButtonPictureBox.TabIndex = 15;
+            this.ModelButtonPictureBox.TabStop = false;
             // 
             // leftToolBoxPanel
             // 
@@ -698,11 +701,14 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.operateButton.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.IAOLabButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.IAOLabButtonPictureBox)).EndInit();
+            this.DataSourceButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataButtonPictureBox)).EndInit();
+            this.MindMapButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MindMapButtonPictureBox)).EndInit();
+            this.ModelMarketButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ModelButtonPictureBox)).EndInit();
             this.leftToolBoxPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
@@ -724,9 +730,9 @@ namespace C2
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label usernamelabel;
         private System.Windows.Forms.Panel leftMainMenuPanel;
-        private System.Windows.Forms.Button myModelButton;
-        private System.Windows.Forms.Button dataButton;
-        private System.Windows.Forms.Button operateButton;
+        private System.Windows.Forms.Button ModelMarketButton;
+        private System.Windows.Forms.Button DataSourceButton;
+        private System.Windows.Forms.Button MindMapButton;
         private System.Windows.Forms.Panel leftToolBoxPanel;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button newModelButton;
@@ -745,7 +751,7 @@ namespace C2
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button flowChartButton;
+        private System.Windows.Forms.Button IAOLabButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private Panel MainPanel;
         private Panel tabPanel;
@@ -768,9 +774,9 @@ namespace C2
         private WorkSpace.MdiWorkSpace mdiWorkSpace;
         private Controls.Bottom.DragLineControl dragLineControl;
         private Button blankButton;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox4;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox2;
+        private PictureBox MindMapButtonPictureBox;
+        private PictureBox IAOLabButtonPictureBox;
+        private PictureBox ModelButtonPictureBox;
+        private PictureBox DataButtonPictureBox;
     }
 }
