@@ -85,7 +85,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuViewChart = new ToolStripMenuItem();
                 MenuViewChart.Image = Properties.Resources.chart_w_icon;
 
-                MenuViewChart.Text = String.Format("{0}{1}{2}{3}", dataItem.FileName, " [", dataItem.ChartType, "]");
+                MenuViewChart.Text = String.Format("{0}[{1}]", dataItem.FileName, dataItem.ChartType);
                 MenuViewChart.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuGetChart,
                 MenuDelete});
@@ -379,12 +379,12 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 MenuOpenDataSource.Image = Properties.Resources.data_w_icon;
 
-                MenuOpenDataSource.Text = String.Format("{0}{1}{2}{3}", dataItem.FileName, " [", Path.GetExtension(dataItem.FilePath).Trim('.'), "]"); 
+                MenuOpenDataSource.Text = String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.'));
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewData,
                 MenuGetChart,
                 MenuDelete});
-            
+
                 MenuViewData.Image = Properties.Resources.viewdata;
                 MenuViewData.Tag = dataItem;
                 MenuViewData.Text = Lang._("ViewData");
@@ -502,7 +502,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
                 MenuOpenResult.Image = Properties.Resources.result_w_icon;
 
-                MenuOpenResult.Text = String.Format("{0}{1}{2}{3}", dataItem.FileName, " [", Path.GetExtension(dataItem.FilePath).Trim('.'), "]");
+                MenuOpenResult.Text = String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.'));
                 MenuOpenResult.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewData,
                 MenuDealData,
