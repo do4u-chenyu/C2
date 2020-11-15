@@ -418,7 +418,7 @@
 	<item name="RESULT">结果挂件</item>
 	<item name="ATTACHMENT">附件挂件</item>
 	<item name="AddAttachment">附件</item>
-	<item name="OpenData">打开</item>
+	<item name="OpenAttachment">打开</item>
 	<item name="DeleteAttachment">取消</item>
 	<item name="ExploreDirectory">打开所在文件夹</item>
   <item name="CopyFilePathToClipboard">复制文件路径到剪切板</item>

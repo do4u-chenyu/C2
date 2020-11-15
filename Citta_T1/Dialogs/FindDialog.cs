@@ -140,7 +140,7 @@ namespace C2.Dialogs
                 e.Cancel = true;
             }
             base.OnFormClosing(e);
-            MainForm?.Focus(); // 修正查找不到内容时关闭查找窗口会导致主窗体聚焦框丢失的问题.但目前的修改方法过于粗狂,暂时没找到优美的方法
+            MainForm?.Focus(); // 修正查找不到内容时关闭查找窗导致主窗体聚焦框丢失的问题.但此方法过于粗狂,暂时没找到优美的方法
         }
 
         protected override void OnLayout(LayoutEventArgs e)

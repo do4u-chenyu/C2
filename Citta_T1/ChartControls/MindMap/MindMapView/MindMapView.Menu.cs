@@ -551,48 +551,48 @@ namespace C2.Controls.MapViews
         {
             foreach (string path in atw.FullFilePaths)
             {
-                ToolStripMenuItem MenuOpenData = new ToolStripMenuItem();
+                ToolStripMenuItem MenuOpenAttachment = new ToolStripMenuItem();
                 ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
                 ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
-                ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
-                ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
+                ToolStripMenuItem MenuDeleteAttachment = new ToolStripMenuItem();
+                ToolStripMenuItem MenuAttachment = new ToolStripMenuItem();
 
-                MenuOpenDataSource.Text = String.Format("{0}{1}{2}{3}", Path.GetFileNameWithoutExtension(path), " [", Path.GetExtension(path).Trim('.'), "]");
-                switch (Path.GetExtension(path).Trim('.'))
+                MenuAttachment.Text = String.Format("{0}[{1}]", Path.GetFileNameWithoutExtension(path), Path.GetExtension(path).TrimStart('.'));
+                switch (Path.GetExtension(path))
                 {
-                    case "txt":
-                        MenuOpenDataSource.Image = Properties.Resources.txtData;
+                    case ".txt":
+                        MenuAttachment.Image = Properties.Resources.txtData;
                         break;
-                    case "bcp":
-                        MenuOpenDataSource.Image = Properties.Resources.bcpData;
+                    case ".bcp":
+                        MenuAttachment.Image = Properties.Resources.bcpData;
                         break;
-                    case "doc":
-                    case "docx":
-                        MenuOpenDataSource.Image = Properties.Resources.docData;
+                    case ".doc":
+                    case ".docx":
+                        MenuAttachment.Image = Properties.Resources.docData;
                         break;
-                    case "xls":
-                    case "xlsx":
-                        MenuOpenDataSource.Image = Properties.Resources.xlsData;
+                    case ".xls":
+                    case ".xlsx":
+                        MenuAttachment.Image = Properties.Resources.xlsData;
                         break;
-                    case "pdf":
-                        MenuOpenDataSource.Image = Properties.Resources.pdfData;
+                    case ".pdf":
+                        MenuAttachment.Image = Properties.Resources.pdfData;
                         break;
-                    case "xmind":
-                        MenuOpenDataSource.Image = Properties.Resources.xmindData;
+                    case ".xmind":
+                        MenuAttachment.Image = Properties.Resources.xmindData;
                         break;
                     default:
                         break;
                 }
-                MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
-                MenuOpenData,
+                MenuAttachment.DropDownItems.AddRange(new ToolStripItem[] {
+                MenuOpenAttachment,
                 MenuExploreDirectory,
                 MenuCopyFilePathToClipboard,
-                MenuDelete});
+                MenuDeleteAttachment});
 
-                MenuOpenData.Image = Properties.Resources.opendata;
-                MenuOpenData.Tag = path;
-                MenuOpenData.Text = Lang._("OpenData");
-                MenuOpenData.Click += MenuOpenData_Click;
+                MenuOpenAttachment.Image = Properties.Resources.opendata;
+                MenuOpenAttachment.Tag = path;
+                MenuOpenAttachment.Text = Lang._("OpenAttachment");
+                MenuOpenAttachment.Click += MenuOpenAttachment_Click;
 
                 MenuExploreDirectory.Image = Properties.Resources.datadirectory;
                 MenuExploreDirectory.Text = Lang._("ExploreDirectory");
@@ -604,16 +604,16 @@ namespace C2.Controls.MapViews
                 MenuCopyFilePathToClipboard.Tag = path;
                 MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;
 
-                MenuDelete.Image = Properties.Resources.deleteattachment;
-                MenuDelete.Text = Lang._("DeleteAttachment");
-                MenuDelete.Tag = path;
-                MenuDelete.Click += AttachmentMenuDelete_Click;
+                MenuDeleteAttachment.Image = Properties.Resources.deleteattachment;
+                MenuDeleteAttachment.Text = Lang._("DeleteAttachment");
+                MenuDeleteAttachment.Tag = path;
+                MenuDeleteAttachment.Click += AttachmentMenuDelete_Click;
 
-                WidgetMenuStrip.Items.Add(MenuOpenDataSource);
+                WidgetMenuStrip.Items.Add(MenuAttachment);
             }
         }
 
-        void MenuOpenData_Click(object sender, EventArgs e)
+        void MenuOpenAttachment_Click(object sender, EventArgs e)
         {
             string directory = (sender as ToolStripMenuItem).Tag as string;
             try
@@ -621,10 +621,7 @@ namespace C2.Controls.MapViews
                 Process.Start(directory);
             }
             catch {
-                MessageBox.Show("该文件无法打开.",
-                    "打开错误",                // 标题
-                    MessageBoxButtons.OK,          // 按钮样式
-                    MessageBoxIcon.Information);   // 图标样式
+                HelpUtil.ShowMessageBox("该文件无法打开.", "打开错误");
             }
         }
 
@@ -644,8 +641,8 @@ namespace C2.Controls.MapViews
 
         void AttachmentMenuDelete_Click(object sender, EventArgs e)
         {
-            string directory = (sender as ToolStripMenuItem).Tag as string;
-            atw.FullFilePaths.Remove(directory);           
+            string ffp = (sender as ToolStripMenuItem).Tag as string;
+            atw.FullFilePaths.Remove(ffp);           
             if (atw.FullFilePaths.IsEmpty())
                 Delete(new ChartObject[] { atw });
         }

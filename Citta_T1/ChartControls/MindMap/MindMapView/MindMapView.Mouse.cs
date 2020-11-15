@@ -341,12 +341,17 @@ namespace C2.Controls.MapViews
             // Normal Status
             if (HoverObject != null && HoverObject.Widget != null && HoverObject == PressObject)
             {
-                //new 右键点击弹出菜单
                 if (e.Button == MouseButtons.Right && e.Clicks == 1)
                 {
+
+                    //new 右键点击弹出菜单
                     //HoverObject.Widget.OnMouseClick(this.ChartBox,e.Location);
                     CreateWidgetMenu();
                     WidgetMenuStrip.Show(this.ChartBox, new Point(e.X, e.Y));
+                }
+                else if (e.Button == MouseButtons.Left && e.Clicks == 2)
+                {
+                    // 处理鼠标左键双击
                 }
             }
 
