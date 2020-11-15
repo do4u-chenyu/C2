@@ -384,7 +384,7 @@
     <item name="Donation - Thanks for Your Generosity">捐助 - 感谢您的慷慨</item>
     <item name="WeChat">微信</item>
     <item name="ViewData">预览数据</item>
-	<item name="GetChart">生成图表</item>
+	  <item name="CreateChart">生成图表</item>
     <item name="ViewChart">查看图表</item>
 	<item name="Design">修改</item>
 	<item name="Running">运行</item>
@@ -396,7 +396,7 @@
 	<item name="AI">AI实践</item>
 	<item name="Model">高级模型</item>
 	<item name="Result">结果</item>
-  <item name="DealData">对数据进行处理</item>
+  <item name="ProcessData">对数据进行处理</item>
 	<item name="JoinPool">数据加入数据池</item>	
 	<item name="RandomOperator">随机采样</item>	
 	<item name="FilterOperator">过滤算子</item>	

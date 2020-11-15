@@ -80,27 +80,27 @@ namespace C2.Controls.MapViews
             foreach (DataItem dataItem in cw.DataItems)
             {
 
-                ToolStripMenuItem MenuGetChart = new ToolStripMenuItem();
-                ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
-                ToolStripMenuItem MenuViewChart = new ToolStripMenuItem();
-                MenuViewChart.Image = Properties.Resources.chart_w_icon;
+                ToolStripMenuItem MenuViewDataChart = new ToolStripMenuItem();
+                ToolStripMenuItem MenuDeleteDataChart = new ToolStripMenuItem();
+                ToolStripMenuItem MenuDataChartParent = new ToolStripMenuItem();
+                MenuDataChartParent.Image = Properties.Resources.chart_w_icon;
 
-                MenuViewChart.Text = String.Format("{0}[{1}]", dataItem.FileName, dataItem.ChartType);
-                MenuViewChart.DropDownItems.AddRange(new ToolStripItem[] {
-                MenuGetChart,
-                MenuDelete});
+                MenuDataChartParent.Text = String.Format("{0}[{1}]", dataItem.FileName, dataItem.ChartType);
+                MenuDataChartParent.DropDownItems.AddRange(new ToolStripItem[] {
+                MenuViewDataChart,
+                MenuDeleteDataChart});
 
-                MenuGetChart.Image = Properties.Resources.getchart;
-                MenuGetChart.Text = Lang._("ViewChart");
-                MenuGetChart.Tag = dataItem;
-                MenuGetChart.Click += MenuViewChart_Click;
+                MenuViewDataChart.Image = Properties.Resources.datachart;
+                MenuViewDataChart.Text = Lang._("ViewChart");
+                MenuViewDataChart.Tag = dataItem;
+                MenuViewDataChart.Click += MenuViewDataChart_Click;
 
-                MenuDelete.Image = Properties.Resources.deletewidget;
-                MenuDelete.Text = Lang._("Delete");
-                MenuDelete.Tag = dataItem;
-                MenuDelete.Click += ChartMenuDelete_Click;
+                MenuDeleteDataChart.Image = Properties.Resources.deletewidget;
+                MenuDeleteDataChart.Text = Lang._("Delete");
+                MenuDeleteDataChart.Tag = dataItem;
+                MenuDeleteDataChart.Click += MenuDeleteDataChart_Click;
 
-                WidgetMenuStrip.Items.Add(MenuViewChart);
+                WidgetMenuStrip.Items.Add(MenuDataChartParent);
             }
             WidgetMenuStrip.ResumeLayout();
         }
@@ -374,7 +374,7 @@ namespace C2.Controls.MapViews
             foreach (DataItem dataItem in dtw.DataItems)
             {
                 ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
-                ToolStripMenuItem MenuGetChart = new ToolStripMenuItem();
+                ToolStripMenuItem MenuCreateChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 MenuOpenDataSource.Image = Properties.Resources.data_w_icon;
@@ -382,7 +382,7 @@ namespace C2.Controls.MapViews
                 MenuOpenDataSource.Text = String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.'));
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewData,
-                MenuGetChart,
+                MenuCreateChart,
                 MenuDelete});
 
                 MenuViewData.Image = Properties.Resources.viewdata;
@@ -390,10 +390,10 @@ namespace C2.Controls.MapViews
                 MenuViewData.Text = Lang._("ViewData");
                 MenuViewData.Click += MenuViewData_Click;
 
-                MenuGetChart.Image = Properties.Resources.getchart;              
-                MenuGetChart.Text = Lang._("GetChart");
-                MenuGetChart.Tag = dataItem;
-                MenuGetChart.Click += MenuGetChart_Click;
+                MenuCreateChart.Image = Properties.Resources.datachart;              
+                MenuCreateChart.Text = Lang._("CreateChart");
+                MenuCreateChart.Tag = dataItem;
+                MenuCreateChart.Click += MenuCreateDataChart_Click;
 
                 MenuDelete.Image = Properties.Resources.deletewidget;
                 MenuDelete.Text = Lang._("Delete");
@@ -413,7 +413,7 @@ namespace C2.Controls.MapViews
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
         }
-        void ChartMenuDelete_Click(object sender, EventArgs e)
+        void MenuDeleteDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             // 剩余最后一个菜单项，删除数据源挂件
@@ -423,12 +423,7 @@ namespace C2.Controls.MapViews
                 Delete(new ChartObject[] { cw });
         }
 
-        void DSWidgetMenuDelete_Click(object sender, EventArgs e)
-        {
-            Delete(new ChartObject[] { opw });
-        }
-
-        void MenuGetChart_Click(object sender, EventArgs e)
+        void MenuCreateDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             DataItem dataCopy = new DataItem(
@@ -450,7 +445,7 @@ namespace C2.Controls.MapViews
             }
             UpdateChartWidgetMenu(currentTopic.FindWidget<ChartWidget>(), dataCopy);
         }
-        void MenuViewChart_Click(object sender, EventArgs e)
+        void MenuViewDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             string path = hitItem.FilePath;
@@ -493,10 +488,9 @@ namespace C2.Controls.MapViews
             //改
             foreach (DataItem dataItem in rsw.DataItems)
             {
-                ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
-                ToolStripMenuItem MenuGetChart = new ToolStripMenuItem();
+                ToolStripMenuItem MenuPreViewData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
-                ToolStripMenuItem MenuDealData = new ToolStripMenuItem();
+                ToolStripMenuItem MenuProcessData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuJoinPool = new ToolStripMenuItem();
 
                 ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
@@ -504,18 +498,18 @@ namespace C2.Controls.MapViews
 
                 MenuOpenResult.Text = String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.'));
                 MenuOpenResult.DropDownItems.AddRange(new ToolStripItem[] {
-                MenuViewData,
-                MenuDealData,
+                MenuPreViewData,
+                MenuProcessData,
                 MenuJoinPool});
 
-                MenuViewData.Image = Properties.Resources.viewdata;
-                MenuViewData.Tag = dataItem;
-                MenuViewData.Text = Lang._("ViewData");
-                MenuViewData.Click += MenuViewData_Click;
+                MenuPreViewData.Image = Properties.Resources.viewdata;
+                MenuPreViewData.Tag = dataItem;
+                MenuPreViewData.Text = Lang._("ViewData");
+                MenuPreViewData.Click += MenuViewData_Click;
 
-                MenuDealData.Image = Properties.Resources.dealData;
-                MenuDealData.Text = Lang._("DealData");
-                MenuDealData.Click += MenuDealData_Click;
+                MenuProcessData.Image = Properties.Resources.dealData;
+                MenuProcessData.Text = Lang._("ProcessData");
+                MenuProcessData.Click += MenuProcessData_Click;
 
                 MenuJoinPool.Image = Properties.Resources.joinPool;
                 MenuJoinPool.Text = Lang._("JoinPool");
@@ -531,7 +525,7 @@ namespace C2.Controls.MapViews
             DataSourceWidget.DoPreViewDataSource((sender as ToolStripMenuItem).Tag as DataItem);
         }
 
-        void MenuDealData_Click(object sender, EventArgs e)
+        void MenuProcessData_Click(object sender, EventArgs e)
         {
             AddSubTopic(rsw.Container as Topic, null, false);
         }

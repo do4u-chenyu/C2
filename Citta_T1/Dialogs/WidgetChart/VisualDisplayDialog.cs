@@ -1,5 +1,4 @@
 ﻿using C2.Business.Option;
-using C2.Controls;
 using C2.Core;
 using C2.Dialogs.Base;
 using C2.Model;
@@ -63,7 +62,7 @@ namespace C2.Dialogs
             // xy轴标题名
             string xName = comboBox0.SelectedItem.ToString();
             List<string> yNames = outListCCBL0.GetItemCheckText();
-            yNames.Insert(0,this.FileName);
+            yNames.Insert(0, this.FileName);
             yNames.Insert(1, xName);
 
             Utils.ControlUtil.PaintChart(columnValues, yNames, this.chartTypesList.Text);

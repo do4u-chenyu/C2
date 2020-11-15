@@ -1,6 +1,5 @@
 ﻿using C2.Utils;
 using System;
-using System.Collections.Generic;
 using System.Xml;
 
 namespace C2.Model.Widgets
