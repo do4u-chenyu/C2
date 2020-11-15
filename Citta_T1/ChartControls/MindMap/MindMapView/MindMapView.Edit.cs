@@ -178,14 +178,14 @@ namespace C2.Controls.MapViews
                     if (atw == null)
                     {
                         var template = new AttachmentWidget();
-                        template.FullFilePaths = new List<string>() { fd.FileName };
+                        template.AttachmentPaths = new List<string>() { fd.FileName };
                         AddWidget(AttachmentWidget.TypeID, template, false);
                         ShowDesigner(hitTopic, false);
                         return;
                     }
-                    if (atw.FullFilePaths.Find(x => x.Equals(fd.FileName)) == null)
+                    if (atw.AttachmentPaths.Find(x => x.Equals(fd.FileName)) == null)
                     {
-                        atw.FullFilePaths.Add(fd.FileName);
+                        atw.AttachmentPaths.Add(fd.FileName);
                         ShowDesigner(atw.Container, false);
                     }
                     else

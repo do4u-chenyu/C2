@@ -3,6 +3,7 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Xml;
 
 namespace C2.Model.Widgets
@@ -12,7 +13,7 @@ namespace C2.Model.Widgets
         public const string TypeID = "ATTACHMENT";
 
         [Browsable(false)]
-        public List<string> FullFilePaths { get; set; }= new List<string>();
+        public List<string> AttachmentPaths { get; set; } = new List<string>();
         public override string Description => HelpUtil.AttachmentWidgetHelpInfo;
 
         public AttachmentWidget()
@@ -29,7 +30,7 @@ namespace C2.Model.Widgets
         {
             base.Serialize(dom, node);
             XmlElement attachItems = node.OwnerDocument.CreateElement("attach_items");
-            foreach (string attachPath in FullFilePaths)
+            foreach (string attachPath in AttachmentPaths)
             {
                 new ModelXmlWriter("attach_item", attachItems).WriteAttribute("path", attachPath);              
             }
@@ -46,9 +47,28 @@ namespace C2.Model.Widgets
                 path = attach_item.GetAttribute("path");
                 if (!string.IsNullOrEmpty(path))
                 { 
-                    FullFilePaths.Add(path);
+                    AttachmentPaths.Add(path);
                 }
                   
+            }
+        }
+
+        public override void OnDoubleClick(HandledEventArgs e)
+        {
+            if (AttachmentPaths.Count > 0)
+                DoOpenAttachment(AttachmentPaths[0]);
+            base.OnDoubleClick(e);
+        }
+
+        public static void DoOpenAttachment(string ffp)
+        {
+            try
+            {
+                Process.Start(ffp);
+            }
+            catch
+            {
+                HelpUtil.ShowMessageBox("该文件无法打开.", "打开错误");
             }
         }
 

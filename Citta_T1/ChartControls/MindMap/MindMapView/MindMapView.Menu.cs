@@ -549,7 +549,7 @@ namespace C2.Controls.MapViews
         #region 附件挂件
         private void CreateAttachmentWidgetMenu(AttachmentWidget atw)
         {
-            foreach (string path in atw.FullFilePaths)
+            foreach (string path in atw.AttachmentPaths)
             {
                 ToolStripMenuItem MenuOpenAttachment = new ToolStripMenuItem();
                 ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
@@ -615,14 +615,7 @@ namespace C2.Controls.MapViews
 
         void MenuOpenAttachment_Click(object sender, EventArgs e)
         {
-            string directory = (sender as ToolStripMenuItem).Tag as string;
-            try
-            {
-                Process.Start(directory);
-            }
-            catch {
-                HelpUtil.ShowMessageBox("该文件无法打开.", "打开错误");
-            }
+            AttachmentWidget.DoOpenAttachment((sender as ToolStripMenuItem).Tag as string);
         }
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)
@@ -642,8 +635,8 @@ namespace C2.Controls.MapViews
         void AttachmentMenuDelete_Click(object sender, EventArgs e)
         {
             string ffp = (sender as ToolStripMenuItem).Tag as string;
-            atw.FullFilePaths.Remove(ffp);           
-            if (atw.FullFilePaths.IsEmpty())
+            atw.AttachmentPaths.Remove(ffp);           
+            if (atw.AttachmentPaths.IsEmpty())
                 Delete(new ChartObject[] { atw });
         }
         #endregion
