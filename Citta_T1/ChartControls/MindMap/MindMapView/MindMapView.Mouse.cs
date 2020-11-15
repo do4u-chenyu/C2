@@ -262,27 +262,13 @@ namespace C2.Controls.MapViews
         {
             if (MouseState == ChartMouseState.Drag)
             {
-                if (DragBox.Visible && !DragBox.Topics.IsNullOrEmpty())
-                {
-                    var htr = HitTest(e.X, e.Y);
-                    if (!htr.IsEmpty && !htr.IsFoldingButton && TestDragDrop(DragBox.Topics, htr.Topic, CurrentDragMethod))
-                    {
-                        DargDropTo(DragBox.Topics, htr.Topic, CurrentDragMethod);
-                    }
-                }
-
-                CancelDrag();
+                DoChartDrag(e);  // 处理拖拽动作
                 return;
             }
 
             if (MouseState == ChartMouseState.Select)
             {
-                Topic[] topics = GetTopicsInRect(LastSelectionBox);
-                if (topics != null && topics.Length > 0)
-                    Select(topics, !Helper.TestModifierKeys(Keys.Control));
-                //SelectTopics(topics, !Helper.TestModifierKeys(Keys.Control));
-                ExitSelectMode();
-                //ClearSelectionBox();
+                DoChartSelect(); // 处理节点选择
                 return;
             }
 
@@ -294,14 +280,7 @@ namespace C2.Controls.MapViews
 
             if (!FormatPainter.Default.IsEmpty && !ReadOnly)
             {
-                HitTestResult htr = HitTest(e.X, e.Y);
-                if (!htr.IsEmpty && !htr.IsFoldingButton && e.Button == MouseButtons.Left)
-                {
-                    FormatPainter.Default.Assign(htr.Topic);
-                }
-
-                if (!FormatPainter.Default.HoldOn && !Helper.TestModifierKeys(Keys.Control))
-                    FormatPainter.Default.Clear();
+                DoFormat(e); // 处理格式刷动作
                 return;
             }
 
@@ -309,16 +288,12 @@ namespace C2.Controls.MapViews
                 && e.Button == MouseButtons.Left
                 && (PressObject.Widget != null || PressObject.Topic != null))
             {
-                // Open Url
-                if (PressObject.Widget != null && !string.IsNullOrEmpty(PressObject.Widget.Hyperlink))
-                    Helper.OpenUrl(PressObject.Widget.Hyperlink);
-                else if (PressObject.Topic != null && !string.IsNullOrEmpty(PressObject.Topic.Hyperlink))
-                    Helper.OpenUrl(PressObject.Topic.Hyperlink);
+                DoOpenUrl();  // 处理打开链接
                 return;
             }
 
             if (Helper.TestModifierKeys(Keys.Control)
-                && e.Button == System.Windows.Forms.MouseButtons.Left
+                && e.Button == MouseButtons.Left
                 && SelectedObjects.Length <= 1)
             {
                 if (PressObject.Topic != null 
@@ -343,22 +318,77 @@ namespace C2.Controls.MapViews
             {
                 if (e.Button == MouseButtons.Right && e.Clicks == 1)
                 {
-
-                    //new 右键点击弹出菜单
-                    //HoverObject.Widget.OnMouseClick(this.ChartBox,e.Location);
-                    CreateWidgetMenu();
-                    WidgetMenuStrip.Show(this.ChartBox, new Point(e.X, e.Y));
+                    DoWidgetMenu(e); // 处理挂件菜单
+                    return;
                 }
                 else if (e.Button == MouseButtons.Left && e.Clicks == 2)
                 {
                     // 处理鼠标左键双击
+                    HoverObject.Widget.OnDoubleClick(new HandledEventArgs());
+                    return;
                 }
             }
 
             else if (e.Button == MouseButtons.Right && ChartContextMenuStrip != null)
             {
                 ChartContextMenuStrip.Show(this.ChartBox, new Point(e.X, e.Y));
+                return;
             }
+        }
+
+        private void DoOpenUrl()
+        {
+            // Open Url
+            if (PressObject.Widget != null && !string.IsNullOrEmpty(PressObject.Widget.Hyperlink))
+                Helper.OpenUrl(PressObject.Widget.Hyperlink);
+            else if (PressObject.Topic != null && !string.IsNullOrEmpty(PressObject.Topic.Hyperlink))
+                Helper.OpenUrl(PressObject.Topic.Hyperlink);
+        }
+
+        private void DoWidgetMenu(MouseEventArgs e)
+        {
+            //new 右键点击弹出菜单
+            HoverObject.Widget.OnMouseClick(this.ChartBox, e.Location);
+            CreateWidgetMenu();
+            WidgetMenuStrip.Show(this.ChartBox, new Point(e.X, e.Y));
+        }
+
+        private void DoFormat(MouseEventArgs e)
+        {
+            HitTestResult htr = HitTest(e.X, e.Y);
+            if (!htr.IsEmpty && !htr.IsFoldingButton && e.Button == MouseButtons.Left)
+            {
+                FormatPainter.Default.Assign(htr.Topic);
+            }
+
+            if (!FormatPainter.Default.HoldOn && !Helper.TestModifierKeys(Keys.Control))
+                FormatPainter.Default.Clear();
+        }
+
+        private void DoChartSelect()
+        {
+            Topic[] topics = GetTopicsInRect(LastSelectionBox);
+            if (topics != null && topics.Length > 0)
+                Select(topics, !Helper.TestModifierKeys(Keys.Control));
+            //SelectTopics(topics, !Helper.TestModifierKeys(Keys.Control));
+            ExitSelectMode();
+            //ClearSelectionBox();
+            return;
+        }
+
+        private void DoChartDrag(MouseEventArgs e)
+        {
+            if (DragBox.Visible && !DragBox.Topics.IsNullOrEmpty())
+            {
+                var htr = HitTest(e.X, e.Y);
+                if (!htr.IsEmpty && !htr.IsFoldingButton && TestDragDrop(DragBox.Topics, htr.Topic, CurrentDragMethod))
+                {
+                    DargDropTo(DragBox.Topics, htr.Topic, CurrentDragMethod);
+                }
+            }
+
+            CancelDrag();
+            return;
         }
 
         protected override void OnChartMouseMove(MouseEventArgs e)
