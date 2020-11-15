@@ -1,25 +1,21 @@
-﻿using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Windows.Forms;
-using System.Linq;
-using C2.Configuration;
+﻿using C2.Business.Option;
+using C2.Business.Schedule.Cmd;
 using C2.Core;
+using C2.Dialogs;
+using C2.Dialogs.Base;
+using C2.Dialogs.C2OperatorViews;
+using C2.Globalization;
 using C2.Model;
 using C2.Model.MindMaps;
-using C2.Model.Styles;
 using C2.Model.Widgets;
-using System.Collections.Generic;
-using C2.Globalization;
-using C2.Business.Schedule.Cmd;
-using System.Diagnostics;
-using C2.Dialogs.C2OperatorViews;
-using System.IO;
-using C2.Dialogs;
-using C2.Business.Option;
 using C2.Utils;
-using C2.Dialogs.Base;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace C2.Controls.MapViews
 {
@@ -532,11 +528,9 @@ namespace C2.Controls.MapViews
 
         void MenuViewData_Click(object sender, EventArgs e)
         {
-
-            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            if (hitItem != null)
-                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
+            DataSourceWidget.DoPreViewDataSource((sender as ToolStripMenuItem).Tag as DataItem);
         }
+
         void MenuDealData_Click(object sender, EventArgs e)
         {
             AddSubTopic(rsw.Container as Topic, null, false);
@@ -620,8 +614,7 @@ namespace C2.Controls.MapViews
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
-            string ffp = (sender as ToolStripMenuItem).Tag as string;
-            if(ffp != null)
+            if ((sender as ToolStripMenuItem).Tag is string ffp)
                 FileUtil.ExploreDirectory(ffp);
         }
 

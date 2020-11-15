@@ -1,6 +1,8 @@
 ﻿using C2.Business.Model;
+using C2.Core;
 using C2.Utils;
 using System;
+using System.ComponentModel;
 using System.Xml;
 
 namespace C2.Model.Widgets
@@ -30,6 +32,19 @@ namespace C2.Model.Widgets
             base.Deserialize(documentVersion, node);
             var data_items = node.SelectNodes("data_items/data_item");
             ReadAttribute(data_items, this.DataItems);         
+        }
+
+        public override void OnDoubleClick(HandledEventArgs e)
+        {
+            if (DataItems.Count > 0)
+                DoPreViewDataSource(DataItems[0]);
+            base.OnDoubleClick(e);
+        }
+
+        public static void DoPreViewDataSource(DataItem hitItem)
+        {
+            if (hitItem != null)
+                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
         }
 
     }
