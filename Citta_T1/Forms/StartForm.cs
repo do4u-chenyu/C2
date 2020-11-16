@@ -27,7 +27,7 @@ namespace C2.Forms
             this.recentFilesView1.ActiveCellBackColor = System.Drawing.SystemColors.ControlLightLight;
             this.recentFilesView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.recentFilesView1.CellBackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.recentFilesView1.CellSpace = new System.Drawing.Size(16, 60);
+            this.recentFilesView1.CellSpace = new System.Drawing.Size(20, 60);
             this.recentFilesView1.Dimension = new System.Drawing.Size(4, 2);
             this.recentFilesView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recentFilesView1.Location = new System.Drawing.Point(0, 0);

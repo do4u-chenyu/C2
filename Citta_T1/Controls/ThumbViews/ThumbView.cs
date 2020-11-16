@@ -515,8 +515,8 @@ namespace C2.Controls
             ActualCellSize = cellSize;
 
             // calculate start location
-            var startX = rect.X + (rect.Width - ((cellSize.Width + CellSpace.Width) * dimension.Width)) / 2;
-            startX = Math.Max(rect.X, startX) + CellSpace.Width / 2;
+            
+            var startX = rect.X + CellSpace.Width/2;
             var startY = rect.Y + CellSpace.Height;
             StartLocation = new Point(startX, rect.Y);
 
