@@ -161,6 +161,9 @@
     <Compile Include="ChartControls\MindMap\DataTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ChartControls\MindMap\MindMapView\MindMapView.Schedule.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\C1\Left\LeftFoldButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
