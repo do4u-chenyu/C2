@@ -180,9 +180,23 @@ namespace C2.Controls.MapViews
         }
         void MenuDesignOp_Click(object sender, EventArgs e)
         {
+            Cursor tempCursor = this.Cursor;
+            OpType tmpOpType = opw.OpType;
+            DataItem tmpDataItem = opw.DataSourceItem;
+
+            this.Cursor = Cursors.WaitCursor;
             C2BaseOperatorView dialog = GenerateOperatorView();
-            if (dialog != null && dialog.ShowDialog(this) == DialogResult.OK)
+            if (dialog == null)
+                return;
+            DialogResult dr = dialog.ShowDialog(this);
+            if (dr == DialogResult.OK)
                 opw.Status = OpStatus.Ready;
+            else if (dr == DialogResult.Cancel)
+            {
+                opw.OpType = tmpOpType;
+                opw.DataSourceItem = tmpDataItem;
+            }
+            this.Cursor = tempCursor;
         }
         void MenuOpenOperatorDesigner_Click(object sender, EventArgs e)
         {

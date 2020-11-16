@@ -24,6 +24,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(this.GetLeftSelectedItemIndex);
+            this.comboBox0.TextUpdate += new System.EventHandler(this.LeftComboBox_TextUpdate);
+            this.comboBox0.DropDownClosed += new System.EventHandler(this.LeftComboBox_ClosedEvent);
+
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
