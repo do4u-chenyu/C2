@@ -12,7 +12,7 @@ namespace C2.Model.Widgets
         public ResultWidget()
         {
             DisplayIndex = 2;
-            widgetIcon = Properties.Resources.result_w_icon;
+            widgetIcon = Properties.Resources.结果;
         }
         public override string GetTypeID()
         {

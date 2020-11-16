@@ -79,14 +79,14 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuViewDataChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDeleteDataChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDataChartParent = new ToolStripMenuItem();
-                MenuDataChartParent.Image = Properties.Resources.chart_w_icon;
+                MenuDataChartParent.Image = Properties.Resources.图表;
 
                 MenuDataChartParent.Text = String.Format("{0}[{1}]", dataItem.FileName, dataItem.ChartType);
                 MenuDataChartParent.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewDataChart,
                 MenuDeleteDataChart});
 
-                MenuViewDataChart.Image = Properties.Resources.datachart;
+                MenuViewDataChart.Image = Properties.Resources.getchart;
                 MenuViewDataChart.Text = Lang._("ViewChart");
                 MenuViewDataChart.Tag = dataItem;
                 MenuViewDataChart.Click += MenuViewDataChart_Click;
@@ -108,7 +108,7 @@ namespace C2.Controls.MapViews
         {
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
             MenuOpenOperator.Text = Lang._("OpenDesigner");
-            MenuOpenOperator.Image = Properties.Resources.operator_w_icon;
+            MenuOpenOperator.Image = Properties.Resources.算子;
             MenuOpenOperator.Click += MenuOpenOperatorDesigner_Click;
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
@@ -220,7 +220,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuCreateChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
-                MenuOpenDataSource.Image = Properties.Resources.data_w_icon;
+                MenuOpenDataSource.Image = Properties.Resources.数据;
 
                 MenuOpenDataSource.Text = String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.'));
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
@@ -233,7 +233,7 @@ namespace C2.Controls.MapViews
                 MenuViewData.Text = Lang._("ViewData");
                 MenuViewData.Click += MenuPreViewData_Click;
 
-                MenuCreateChart.Image = Properties.Resources.datachart;              
+                MenuCreateChart.Image = Properties.Resources.getchart;              
                 MenuCreateChart.Text = Lang._("CreateChart");
                 MenuCreateChart.Tag = dataItem;
                 MenuCreateChart.Click += MenuCreateDataChart_Click;
@@ -330,7 +330,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuJoinPool = new ToolStripMenuItem();
 
                 ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
-                MenuOpenResult.Image = Properties.Resources.result_w_icon;
+                MenuOpenResult.Image = Properties.Resources.结果;
 
                 MenuOpenResult.Text = String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.'));
                 MenuOpenResult.DropDownItems.AddRange(new ToolStripItem[] {

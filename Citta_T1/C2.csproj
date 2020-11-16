@@ -2487,6 +2487,12 @@
     <None Include="Resources\WidgetIcon\chart_w_icon.png" />
     <None Include="Resources\WidgetIcon\note_w_icon.png" />
     <None Include="Resources\提示1.png" />
+    <None Include="Resources\WidgetIcon\数据.png" />
+    <None Include="Resources\WidgetIcon\算子.png" />
+    <None Include="Resources\WidgetIcon\图表.png" />
+    <None Include="Resources\WidgetIcon\备注.png" />
+    <None Include="Resources\WidgetIcon\附件.png" />
+    <None Include="Resources\WidgetIcon\结果.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

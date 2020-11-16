@@ -20,7 +20,7 @@ namespace C2.Model.Widgets
         {
             DisplayIndex = 4;
             Alignment = WidgetAlignment.Right;//默认位置改成右侧,让图标挂件和主题文字紧挨着
-            widgetIcon = Properties.Resources.attachment_w_icon;
+            widgetIcon = Properties.Resources.附件;
         }
         public override string GetTypeID()
         {

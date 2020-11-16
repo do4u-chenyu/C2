@@ -20,8 +20,8 @@ namespace C2.Controls.MapViews
             il.ColorDepth = ColorDepth.Depth32Bit;
             il.Images.Add(Properties.Resources.document);
             il.Images.Add(Properties.Resources.topic);
-            il.Images.Add(Properties.Resources.result_w_icon);
-            il.Images.Add(Properties.Resources.data_w_icon);
+            il.Images.Add(Properties.Resources.结果);
+            il.Images.Add(Properties.Resources.数据);
             ImageList = il;
             Dock = System.Windows.Forms.DockStyle.Fill;
             HideSelection = false;
