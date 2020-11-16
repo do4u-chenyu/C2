@@ -2493,6 +2493,12 @@
     <None Include="Resources\WidgetIcon\备注.png" />
     <None Include="Resources\WidgetIcon\附件.png" />
     <None Include="Resources\WidgetIcon\结果.png" />
+    <None Include="Resources\图表.png" />
+    <None Include="Resources\数据.png" />
+    <None Include="Resources\算子.png" />
+    <None Include="Resources\结果.png" />
+    <None Include="Resources\附件.png" />
+    <None Include="Resources\备注.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
