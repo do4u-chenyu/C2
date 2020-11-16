@@ -27,9 +27,9 @@ namespace C2.Model.Widgets
     [Serializable]
     public enum PictureSizeType
     {
+        Customize,
         Thumb,
         Original,
-        Customize,
     }
 
     [DefaultProperty("Image")]
@@ -47,8 +47,9 @@ namespace C2.Model.Widgets
         public PictureWidget()
         {
             DisplayIndex = 6;
-            _SizeType = PictureSizeType.Customize;
             Alignment = WidgetAlignment.Left;
+            //EmbedIn = true;//默认嵌入，这样才能持久化
+            //SizeType = PictureSizeType.Customize;
         }
 
         [DefaultValue(null), Browsable(false)]
@@ -228,6 +229,9 @@ namespace C2.Model.Widgets
             {
                 Data = ST.ReadImageNode(node, "data");
             }
+
+           if (Data == null)
+                TryLoadData();
 
             EmbedIn = ST.GetBool(node.GetAttribute("embed_in"), EmbedIn);
         }

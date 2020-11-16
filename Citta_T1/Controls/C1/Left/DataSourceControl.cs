@@ -18,14 +18,15 @@ namespace C2.Controls.Left
         {
             dataSourceDictI2B = new Dictionary<string, DataButton>();
             InitializeComponent();
-           
+            startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+            startPoint.Y += 50;
         }
 
         private static readonly int ButtonGapHeight = 50;//上下间隔
-        private static readonly int ButtonLeftX = 17;
+        private static readonly int ButtonLeftX = 18;
         private static readonly int ButtonBottomOffsetY = 100;
-        private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
-
+        //private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+        private Point startPoint;
         private Dictionary<string, DataButton> dataSourceDictI2B;
 
         // 这个控件属性不需要在属性面板显示和序列化,不加这个标签,在引用这个控件的Designer中,会序列化它

@@ -1,5 +1,6 @@
 ﻿using C2.Utils;
 using System;
+using System.ComponentModel;
 using System.Xml;
 
 namespace C2.Model.Widgets
@@ -31,6 +32,13 @@ namespace C2.Model.Widgets
             var data_items = node.SelectNodes("result_items/result_item");
             ReadAttribute(data_items, this.DataItems);
             
+        }
+
+        public override void OnDoubleClick(HandledEventArgs e)
+        {
+            if (DataItems.Count > 0)
+                DoPreViewDataSource(DataItems[0]);
+            base.OnDoubleClick(e);
         }
     }
 }

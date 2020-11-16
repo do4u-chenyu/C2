@@ -384,6 +384,8 @@ namespace C2.Controls.MapViews
                 if (!htr.IsEmpty && !htr.IsFoldingButton && TestDragDrop(DragBox.Topics, htr.Topic, CurrentDragMethod))
                 {
                     DargDropTo(DragBox.Topics, htr.Topic, CurrentDragMethod);
+                    foreach(Topic topic in DragBox.Topics)
+                        TopicUpdate(topic, null);
                 }
             }
 

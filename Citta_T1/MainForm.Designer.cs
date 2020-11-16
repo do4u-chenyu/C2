@@ -273,7 +273,7 @@ namespace C2
             this.MindMapButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.MindMapButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.MindMapButtonPictureBox.Image = global::C2.Properties.Resources.Businessvw;
-            this.MindMapButtonPictureBox.Location = new System.Drawing.Point(18, 13);
+            this.MindMapButtonPictureBox.Location = new System.Drawing.Point(19, 13);
             this.MindMapButtonPictureBox.Name = "MindMapButtonPictureBox";
             this.MindMapButtonPictureBox.Size = new System.Drawing.Size(20, 20);
             this.MindMapButtonPictureBox.TabIndex = 13;
