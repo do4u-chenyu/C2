@@ -20,7 +20,7 @@ namespace C2.Controls.Left
             startPoint.Y += 23;
         }
 
-        private static readonly int ButtonLeftX = 15;
+        private static readonly int ButtonLeftX = 18;
         private static readonly int ButtonBottomOffsetY = 23;
         private Point startPoint;
         public void AddMindMapModel(string modelName)
