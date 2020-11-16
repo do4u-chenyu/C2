@@ -129,7 +129,7 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuOpPublic = new ToolStripMenuItem();
             ToolStripMenuItem MenuOpDelete = new ToolStripMenuItem();
 
-            MenuOpenOperator.Image = type == "single" ? GetOpOpenOperatorImage(opw.Status) : Properties.Resources.operator_w_icon;
+            MenuOpenOperator.Image = opw.GetOpOpenOperatorImage();
             MenuOpenOperator.Text = type == "single" ? opw.OpName: opw.ModelDataItem.FileName;
             MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuOpDesign,
@@ -163,22 +163,6 @@ namespace C2.Controls.MapViews
             return MenuOpenOperator;
         }
 
-        private Image GetOpOpenOperatorImage(OpStatus opStatus)
-        {
-            switch (opStatus)
-            {
-                case OpStatus.Null:
-                    return Properties.Resources.opSet;
-                case OpStatus.Ready:
-                    return Properties.Resources.opSetSuccess;
-                case OpStatus.Done:
-                    return Properties.Resources.opDone;
-                case OpStatus.Warn:
-                    return Properties.Resources.opWarn;
-                default:
-                    return Properties.Resources.operator_w_icon;
-            }
-        }
         void MenuDesignModel_Click(object sender, EventArgs e)
         {
             //TODO

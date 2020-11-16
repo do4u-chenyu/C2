@@ -4,6 +4,7 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Xml;
 
 namespace C2.Model.Widgets
@@ -123,6 +124,23 @@ namespace C2.Model.Widgets
                 //}
                 // 读取单算子
   
+            }
+        }
+
+        public Image GetOpOpenOperatorImage()
+        {
+            switch (Status)
+            {
+                case OpStatus.Null:
+                    return Properties.Resources.opSet;
+                case OpStatus.Ready:
+                    return Properties.Resources.opSetSuccess;
+                case OpStatus.Done:
+                    return Properties.Resources.opDone;
+                case OpStatus.Warn:
+                    return Properties.Resources.opWarn;
+                default:
+                    return Properties.Resources.operator_w_icon;
             }
         }
     }
