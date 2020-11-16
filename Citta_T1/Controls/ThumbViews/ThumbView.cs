@@ -35,7 +35,7 @@ namespace C2.Controls
             _Dimension = new System.Drawing.Size(4, 2);
             _CellSize = new System.Drawing.Size(210, 180);
             _MinimumCellSize = new System.Drawing.Size(120, 100);
-            _CellSpace = new Size(16, 50);
+            _CellSpace = new Size(16, 30);
             ShowEmptyCells = true;
             SetPaintStyles();
 
@@ -53,10 +53,6 @@ namespace C2.Controls
         }
         void initItems()
         {
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.modelTop));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.dataStorge));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.businessView));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.ram));
             Items.Add(new ThumbItem("逻辑图", global::C2.Properties.Resources.logicMap));
             Items.Add(new ThumbItem("树状图", global::C2.Properties.Resources.tree));
             Items.Add(new ThumbItem("组织架构图", global::C2.Properties.Resources.organization));
@@ -363,6 +359,7 @@ namespace C2.Controls
             foreach (var item in Items)
             {
                 PaintItem(e, item);
+                //e.Graphics.DrawRectangle(new Pen(Color.Red), item.Bounds);
             }
             
             if (DesignMode)
@@ -514,14 +511,13 @@ namespace C2.Controls
             // calculate cell size
             var cellSize = new Size(
                 (rect.Width - dimension.Width * CellSpace.Width) / dimension.Width,
-                (rect.Height - (dimension.Height - 1) * CellSpace.Height) / dimension.Height);
-            cellSize.Width = Math.Min(CellSize.Width, Math.Max(MinimumCellSize.Width, cellSize.Width)); 
+                (rect.Height - dimension.Height * CellSpace.Height) / dimension.Height);
             ActualCellSize = cellSize;
 
             // calculate start location
             var startX = rect.X + (rect.Width - ((cellSize.Width + CellSpace.Width) * dimension.Width)) / 2;
             startX = Math.Max(rect.X, startX) + CellSpace.Width / 2;
-            var startY = rect.Y;
+            var startY = rect.Y + CellSpace.Height;
             StartLocation = new Point(startX, rect.Y);
 
             // calculate cell bounds
@@ -529,8 +525,6 @@ namespace C2.Controls
             foreach (var item in DisplayItems)
             {
                 int x = index % dimension.Width;
-                if (x == 0)
-                    x = 0;
                 int y = index / dimension.Width;
                 var cellBounds = new Rectangle(
                     startX + x * (cellSize.Width + CellSpace.Width),
@@ -539,12 +533,13 @@ namespace C2.Controls
                     cellSize.Height);
                 item.Bounds = cellBounds;
                 index++;
-                if (x == 0 & y != 0)
-                    Items[Items.Count - y].Bounds = new Rectangle(cellBounds.X - CellSpace.Width * 3, 
-                                                                  cellBounds.Y - CellSpace.Height + 10, 
-                                                                  cellBounds.Width , 
-                                                                  CellSpace.Height );
-                if (index == 12) break;
+                if (x == 0)
+                    Items[Items.Count - y -1].Bounds = new Rectangle(cellBounds.X, 
+                                                                     cellBounds.Y - CellSpace.Height, 
+                                                                     cellBounds.Width/2, 
+                                                                     CellSpace.Height );
+                if (index == 8) 
+                    break;
             }
         }
 

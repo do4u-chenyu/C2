@@ -1113,19 +1113,9 @@ namespace C2.Controls
         {
             int w;
             int h;
-
-            if (width <= bounds.Width && height <= bounds.Height)
-            {
-                w = width;
-                h = height;
-            }
-            else
-            {
-                decimal r = Math.Min((decimal)bounds.Width / width, (decimal)bounds.Height / height);
-                w = (int)Math.Ceiling(width * r);
-                h = (int)Math.Ceiling(height * r);
-            }
-
+            decimal r = Math.Min((decimal)bounds.Width / width, (decimal)bounds.Height / height);
+            w = (int)Math.Ceiling(width * r);
+            h = (int)Math.Ceiling(height * r);
             return new Rectangle(bounds.Left + (bounds.Width - w) / 2
                 , bounds.Top + (bounds.Height - h) / 2, w, h);
         }

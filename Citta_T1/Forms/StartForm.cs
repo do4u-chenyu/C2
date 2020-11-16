@@ -27,8 +27,8 @@ namespace C2.Forms
             this.recentFilesView1.ActiveCellBackColor = System.Drawing.SystemColors.ControlLightLight;
             this.recentFilesView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.recentFilesView1.CellBackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.recentFilesView1.CellSpace = new System.Drawing.Size(16, 50);
-            this.recentFilesView1.Dimension = new System.Drawing.Size(4, 3);
+            this.recentFilesView1.CellSpace = new System.Drawing.Size(16, 60);
+            this.recentFilesView1.Dimension = new System.Drawing.Size(4, 2);
             this.recentFilesView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recentFilesView1.Location = new System.Drawing.Point(0, 0);
             this.recentFilesView1.Name = "recentFilesView1";
@@ -67,69 +67,5 @@ namespace C2.Forms
         {
             Global.GetBottomViewPanel().Visible = !this.Visible;
         }
-
-        /*
-public override void ApplyTheme(UITheme theme)
-{
-base.ApplyTheme(theme);
-
-this.Font = theme.DefaultFont;
-this.BackColor = theme.Colors. MediumLight;
-
-if (recentFilesView1 != null)
-{
-recentFilesView1.BackColor = theme.Colors.MediumLight;
-recentFilesView1.CellBackColor = Color.Transparent;// metroBox1.BackColor;
-recentFilesView1.CellForeColor = PaintHelper.FarthestColor(recentFilesView1.BackColor, theme.Colors.Dark, theme.Colors.Light);
-recentFilesView1.ActiveCellBackColor = Color.FromArgb(128, theme.Colors.Sharp);
-recentFilesView1.ActiveCellForeColor = theme.Colors.SharpText;
-}
-
-if (buttonListBox1 != null)
-{
-buttonListBox1.BackColor = PaintHelper.GetDarkColor(theme.Colors.MediumLight, 0.1f);
-buttonListBox1.ButtonBackColor = Color.Transparent;// theme.Colors.MediumDark;
-buttonListBox1.ButtonForeColor = PaintHelper.FarthestColor(buttonListBox1.BackColor, theme.Colors.Dark, theme.Colors.Light);
-buttonListBox1.ButtonHoverBackColor = theme.Colors.Sharp;
-buttonListBox1.ButtonHoverForeColor = theme.Colors.SharpText;
-}
-}
-
-protected override void OnCurrentLanguageChanged()
-{
-base.OnCurrentLanguageChanged();
-
-if (buttonListBox1 != null)
-{
-btnNew.Text = Lang._("New");
-btnOpen.Text = Lang._("Open");
-btnOptions.Text = Lang._("Options");
-}
-}
-
-void btnOptions_Click(object sender, EventArgs e)
-{
-if (Global.GetMainForm() != null)
-{
-Global.GetMainForm().ShowOptionsDialog();
-}
-}
-
-void btnOpen_Click(object sender, EventArgs e)
-{
-if (Global.GetMainForm() != null)
-{
-Global.GetMainForm().OpenDocument();
-}
-}
-
-void btnNew_Click(object sender, EventArgs e)
-{
-if (Global.GetMainForm() != null)
-{
-Global.GetMainForm().NewDocument();
-}
-}
-*/
     }
 }
