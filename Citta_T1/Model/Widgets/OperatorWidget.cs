@@ -1,5 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Business.Option;
+using C2.Controls;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,8 @@ namespace C2.Model.Widgets
         }
         [Browsable(false)]
         public bool HasModelOperator { get; set; }//是否包含模型算子
-
+        [Browsable(false)]
+        public TabItem ModelRelateTab { get; set; }//模型对应的tab
         [Browsable(false)]
         public DataItem ModelDataItem { get; set; }//模型相关属性
         [Browsable(false)]
