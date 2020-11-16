@@ -454,7 +454,7 @@ namespace C2.Controls.MapViews
                 MenuDeleteAttachment.Image = Properties.Resources.deleteattachment;
                 MenuDeleteAttachment.Text = Lang._("DeleteAttachment");
                 MenuDeleteAttachment.Tag = path;
-                MenuDeleteAttachment.Click += AttachmentMenuDelete_Click;
+                MenuDeleteAttachment.Click += MenuDeleteAttachment_Click;
 
                 WidgetMenuStrip.Items.Add(MenuAttachment);
             }
@@ -478,7 +478,7 @@ namespace C2.Controls.MapViews
         }
 
 
-        void AttachmentMenuDelete_Click(object sender, EventArgs e)
+        void MenuDeleteAttachment_Click(object sender, EventArgs e)
         {
             string ffp = (sender as ToolStripMenuItem).Tag as string;
             atw.AttachmentPaths.Remove(ffp);           

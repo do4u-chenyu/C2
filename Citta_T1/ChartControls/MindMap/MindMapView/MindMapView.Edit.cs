@@ -164,7 +164,7 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
-                OpenFileDialog fd = new OpenFileDialog
+                OpenFileDialog fd = new OpenFileDialog  //TODO: 可能要改成出现在中间位置,目前是出现在左上角
                 {
                     Filter = "文件|*.docx;*.xlsx;*.doc;*.xls;*.pdf;*.txt;*.bcp;*.xmind",
                     Title = Lang._("AddAttachment")
@@ -178,21 +178,17 @@ namespace C2.Controls.MapViews
                     if (atw == null)
                     {
                         var template = new AttachmentWidget();
-                        template.AttachmentPaths = new List<string>() { fd.FileName };
+                        template.AttachmentPaths.Add(fd.FileName);
                         AddWidget(AttachmentWidget.TypeID, template, false);
-                        ShowDesigner(hitTopic, false);
                         return;
                     }
                     if (atw.AttachmentPaths.Find(x => x.Equals(fd.FileName)) == null)
                     {
-                        atw.AttachmentPaths.Add(fd.FileName);
-                        ShowDesigner(atw.Container, false);
+                        atw.AttachmentPaths.Add(fd.FileName); // 估计永远都不会返回null
                     }
                     else
-                        MessageBox.Show(String.Format("数据源{0}已存在,可以删除后重新导入.", fd.FileName),
-                            "数据源已存在",                // 标题
-                            MessageBoxButtons.OK,          // 按钮样式
-                            MessageBoxIcon.Information);   // 图标样式
+                        HelpUtil.ShowMessageBox(String.Format("数据源{0}已存在,可以删除后重新导入.", fd.FileName), 
+                            "数据源已存在");
                 }
             }
         }
