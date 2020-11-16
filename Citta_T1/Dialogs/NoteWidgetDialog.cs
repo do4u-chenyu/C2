@@ -117,7 +117,7 @@ namespace C2.Dialogs
             if (Widget is NoteWidget)
             {
                 var nw = (NoteWidget)Widget;
-                nw.Text = Remark;
+                nw.Text = Remark ?? string.Empty;
             }
             else if (string.IsNullOrEmpty(Remark))
             {

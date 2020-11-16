@@ -2466,9 +2466,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\windows_themes.xml" />
-    <None Include="Resources\WidgetIcon\data_w_icon.png" />
-    <None Include="Resources\WidgetIcon\result_w_icon.png" />
-    <None Include="Resources\WidgetIcon\operator_w_icon.png" />
     <Content Include="Resources\C1\datasource\pythonHelper1.png" />
     <Content Include="Resources\C1\datasource\pythonHelper2.png" />
     <Content Include="Resources\C1\datasource\pythonHelper3.png" />
@@ -2484,8 +2481,6 @@
     <None Include="Resources\C1\modeltitlepanel\u700.png" />
     <None Include="Resources\C1\toolbox\importmodel.png" />
     <Content Include="Resources\C1\leftpanelmenu\startPageTitle.jpg" />
-    <None Include="Resources\WidgetIcon\chart_w_icon.png" />
-    <None Include="Resources\WidgetIcon\note_w_icon.png" />
     <None Include="Resources\提示1.png" />
     <None Include="Resources\WidgetIcon\数据.png" />
     <None Include="Resources\WidgetIcon\算子.png" />
