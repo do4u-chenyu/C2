@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using C2.Core;
 using C2.Dialogs;
@@ -141,7 +142,9 @@ namespace C2.Controls.MapViews
 
                 //11.13 现在单算子和模型共存了
                 OperatorWidget opw = topic.FindWidget<OperatorWidget>();
-                DataItem modelDataItem = new DataItem("", modelDocumentName, '\t', OpUtil.Encoding.NoNeed, OpUtil.ExtType.Unknow);
+                string modelUserPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "业务视图", Global.GetCurrentDocument().Name);
+                string modelSavePath = Path.Combine(modelUserPath, modelDocumentName, modelDocumentName + ".xml");
+                DataItem modelDataItem = new DataItem(modelSavePath, modelDocumentName, '\t', OpUtil.Encoding.NoNeed, OpUtil.ExtType.Unknow);
                 if ( opw == null)
                 {
                     topic.Add(new OperatorWidget { HasModelOperator = true, ModelDataItem = modelDataItem });

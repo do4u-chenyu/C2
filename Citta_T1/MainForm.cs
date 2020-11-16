@@ -444,6 +444,21 @@ namespace C2
             if (dtw != null)
                 dataItems = dtw.DataItems;
             form.GenMindMapDataSources(dataItems);
+            OperatorWidget opw = topic.FindWidget<OperatorWidget>();
+            if(opw != null)
+                opw.ModelRelateTab = TaskBar.SelectedItem;
+        }
+        public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
+        {
+            ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName, mindMapName);
+            CanvasForm form = new CanvasForm(doc, topic);
+            ShowForm(form);
+
+            doc.Load();
+            form.CanvasAddElement(doc);
+            OperatorWidget opw = topic.FindWidget<OperatorWidget>();
+            if (opw != null)
+                opw.ModelRelateTab = TaskBar.SelectedItem;
         }
         private void NewStartForm()
         {

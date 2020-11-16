@@ -183,6 +183,16 @@ namespace C2.Controls.MapViews
         {
             //TODO
             //跳转到
+            TabItem tab = opw.ModelRelateTab;
+            TabBar tabBar = Global.GetMainForm().TaskBar;
+            if (tabBar.Items.Contains(tab))
+                tabBar.SelectedItem = tab;
+            else
+            {
+                Topic topic = opw.Container as Topic;
+                string modelDocumentName = string.Format("{0}-模型视图", topic.Text);
+                Global.GetMainForm().LoadCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
+            }
         }
         void MenuDesignOp_Click(object sender, EventArgs e)
         {
