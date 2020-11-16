@@ -383,19 +383,19 @@ namespace C2.ChartPageView
             MenuAddIcon.Click += new System.EventHandler(MenuAddIcon_Click);
 
             // MenuAddRemark
-            MenuAddRemark.Image = Properties.Resources.note_w_icon;
+            MenuAddRemark.Image = Properties.Resources.备注;
             MenuAddRemark.Name = "MenuAddRemark";
             MenuAddRemark.Text = "&Notes";
             MenuAddRemark.Click += new System.EventHandler(MenuAddRemark_Click);
 
             //MenuAddOperator
-            MenuAddOperator.Image = C2.Properties.Resources.operator_w_icon;
+            MenuAddOperator.Image = C2.Properties.Resources.算子;
             MenuAddOperator.Name = "MenuAddOperator";
             MenuAddOperator.Text = "Operator";
             MenuAddOperator.Click += new System.EventHandler(MenuAddOperator_Click);
 
             //MenuAddAttachment
-            MenuAddAttachment.Image = C2.Properties.Resources.attachment_w_icon;
+            MenuAddAttachment.Image = C2.Properties.Resources.附件;
             MenuAddAttachment.Name = "MenuAddAttachment";
             MenuAddAttachment.Text = "Attachment";
             MenuAddAttachment.Click += new System.EventHandler(MenuAddAttachment_Click);

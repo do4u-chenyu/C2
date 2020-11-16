@@ -40,7 +40,7 @@ namespace C2.Model.Widgets
         public OperatorWidget()
         {
             DisplayIndex = 1;
-            widgetIcon = Properties.Resources.operator_w_icon;
+            widgetIcon = Properties.Resources.算子;
             DataSourceItem = DataItem.Empty;  // 尽量不要用null作为初值,避免空指针异常
             Option = new OperatorOption();
             ResultItem = DataItem.Empty;
@@ -142,7 +142,7 @@ namespace C2.Model.Widgets
                 case OpStatus.Warn:
                     return Properties.Resources.opWarn;
                 default:
-                    return Properties.Resources.operator_w_icon;
+                    return Properties.Resources.算子;
             }
         }
     }
