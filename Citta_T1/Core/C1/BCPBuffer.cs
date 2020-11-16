@@ -50,15 +50,15 @@ namespace C2.Core
 
         public string GetCachePreViewBcpContent(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
-            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Text, encoding, isForceRead);
+            return GetCachePreviewFileContent(fullFilePath, OpUtil.ExtType.Text, encoding, isForceRead);
         }
 
-        public string GetCachePreViewExcelContent(string fullFilePath, bool isForceRead = false)
+        public string GetCachePreviewExcelContent(string fullFilePath, bool isForceRead = false)
         {
-            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, isForceRead);
+            return GetCachePreviewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, isForceRead);
         }
 
-        private string GetCachePreViewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
+        private string GetCachePreviewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = String.Empty;
             // 数据不存在 或 需要强制读取时 按照路径重新读取
@@ -100,25 +100,26 @@ namespace C2.Core
         }
 
 
-        public void TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding, char separator)
+        public bool TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding, char separator)
         {
-           
+            bool returnVar = true;
             // 命中缓存,直接返回,不再加载文件
             if (HitCache(fullFilePath))
-                return;
+                return returnVar;
 
             switch (extType)
             {
                 case OpUtil.ExtType.Excel:
-                    PreLoadExcelFileNew(fullFilePath);
+                    returnVar = PreLoadExcelFileNew(fullFilePath);
                     break;
                 case OpUtil.ExtType.Text:
-                    PreLoadBcpFile(fullFilePath, encoding);  // 按行读取文件 不分割
+                    returnVar = PreLoadBcpFile(fullFilePath, encoding);  // 按行读取文件 不分割
                     break;
                 case OpUtil.ExtType.Unknow:
                 default:
                     break;
             }
+            return returnVar;
         }
 
         private bool HitCache(string fullFilePath)
@@ -135,29 +136,35 @@ namespace C2.Core
             dataPreviewDict.Remove(bcpFullPath);
         }
 
-        private void PreLoadExcelFileNew(string fullFilePath)
+        private bool PreLoadExcelFileNew(string fullFilePath)
         {
-            List<List<String>> rowContentList = FileUtil.ReadExcel(fullFilePath, maxRow);
-            if (rowContentList.Count == 0)
-                return;
+            ReadRst rrst = FileUtil.ReadExcel(fullFilePath, maxRow);
+            if (rrst.ReturnCode <= 0 || rrst.ReturnCode > 0 && rrst.Result.Count == 0)
+            {
+                HelpUtil.ShowMessageBox(rrst.Msg);
+                return false;
+            }
+            List<List<string>> rowContentList = rrst.Result;
             StringBuilder sb = new StringBuilder(1024 * 16);
             string firstLine = String.Join("\t", rowContentList[0]);
             for (int i = 0; i < rowContentList.Count; i++)
                 sb.AppendLine(String.Join("\t", rowContentList[i]));
             dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
+            return true;
         }
         /*
          * 按行读取文件，不分割
          */
-        private void PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
+        private bool PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
         {
             if (!File.Exists(fullFilePath))
             {
                 HelpUtil.ShowMessageBox(fullFilePath + "该文件不存在");
-                return;
+                return false;
             }
 
             StreamReader sr = null;
+            bool returnVar = true;
             try
             {
                 if (encoding == OpUtil.Encoding.UTF8)
@@ -178,12 +185,14 @@ namespace C2.Core
             catch (Exception e)
             {
                 log.Error("BCPBuffer 预加载BCP文件出错: " + e.ToString());
+                returnVar = false;
             }
             finally
             {
                 if (sr != null)
                     sr.Close();
             }
+            return returnVar;
         }
 
 

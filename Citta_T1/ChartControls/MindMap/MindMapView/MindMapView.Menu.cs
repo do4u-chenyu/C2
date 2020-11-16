@@ -320,7 +320,7 @@ namespace C2.Controls.MapViews
             // 获取选中输入、输出各列数据
             string fileContent;
             if (hitItem.FileType == OpUtil.ExtType.Excel)
-                fileContent = BCPBuffer.GetInstance().GetCachePreViewExcelContent(path);
+                fileContent = BCPBuffer.GetInstance().GetCachePreviewExcelContent(path);
             else
                 fileContent = BCPBuffer.GetInstance().GetCachePreViewBcpContent(path, encoding);
             List<string> rows = new List<string>(fileContent.Split('\n'));

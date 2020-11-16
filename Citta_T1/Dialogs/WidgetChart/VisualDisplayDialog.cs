@@ -46,7 +46,7 @@ namespace C2.Dialogs
             // 获取选中输入、输出各列数据
             string fileContent;
             if (hitItem.FileType == OpUtil.ExtType.Excel)
-                fileContent = BCPBuffer.GetInstance().GetCachePreViewExcelContent(FilePath);
+                fileContent = BCPBuffer.GetInstance().GetCachePreviewExcelContent(FilePath);
             else
                 fileContent = BCPBuffer.GetInstance().GetCachePreViewBcpContent(FilePath, FileEncoding);
             List<string> rows = new List<string>(fileContent.Split('\n'));

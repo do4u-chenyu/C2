@@ -111,7 +111,7 @@ namespace C2.Controls.Bottom
             if (extType == OpUtil.ExtType.Excel)
             {
                 separator = OpUtil.DefaultSeparator;  // 当文件类型是Excel是,内部分隔符自动为'\t',此时用其他分隔符没有意义
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath, isForceRead).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewExcelContent(fullFilePath, isForceRead).Split('\n'));
             }
             else if (extType == OpUtil.ExtType.Text)
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath, encoding, isForceRead).Split('\n'));
