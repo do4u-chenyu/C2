@@ -190,7 +190,7 @@ namespace C2.Controls.MapViews
             if (SelectedTopic != null && Clipboard.ContainsImage())
             {
                 PictureWidget template = new PictureWidget();
-                template.Image = C2.Model.Widgets.PictureWidget.PictureDesign.FromClipboard();
+                template.Image = PictureWidget.PictureDesign.FromClipboard();
                 if (template.Image.Data != null)
                 {
                     Size size = template.Image.Data.Size;

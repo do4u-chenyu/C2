@@ -1,9 +1,11 @@
 ﻿using C2.Business.Model;
 using C2.Business.Option;
+using C2.Controls;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Xml;
 
 namespace C2.Model.Widgets
@@ -38,7 +40,7 @@ namespace C2.Model.Widgets
         public OperatorWidget()
         {
             DisplayIndex = 1;
-            widgetIcon = Properties.Resources.operator_w_icon;
+            widgetIcon = Properties.Resources.算子;
             DataSourceItem = DataItem.Empty;  // 尽量不要用null作为初值,避免空指针异常
             Option = new OperatorOption();
             ResultItem = DataItem.Empty;
@@ -47,7 +49,8 @@ namespace C2.Model.Widgets
         }
         [Browsable(false)]
         public bool HasModelOperator { get; set; }//是否包含模型算子
-
+        [Browsable(false)]
+        public TabItem ModelRelateTab { get; set; }//模型对应的tab
         [Browsable(false)]
         public DataItem ModelDataItem { get; set; }//模型相关属性
         [Browsable(false)]
@@ -123,6 +126,23 @@ namespace C2.Model.Widgets
                 //}
                 // 读取单算子
   
+            }
+        }
+
+        public Image GetOpOpenOperatorImage()
+        {
+            switch (Status)
+            {
+                case OpStatus.Null:
+                    return Properties.Resources.opSet;
+                case OpStatus.Ready:
+                    return Properties.Resources.opSetSuccess;
+                case OpStatus.Done:
+                    return Properties.Resources.opDone;
+                case OpStatus.Warn:
+                    return Properties.Resources.opWarn;
+                default:
+                    return Properties.Resources.算子;
             }
         }
     }

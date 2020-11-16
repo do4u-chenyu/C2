@@ -79,14 +79,14 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuViewDataChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDeleteDataChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDataChartParent = new ToolStripMenuItem();
-                MenuDataChartParent.Image = Properties.Resources.chart_w_icon;
+                MenuDataChartParent.Image = Properties.Resources.图表;
 
                 MenuDataChartParent.Text = String.Format("{0}[{1}]", dataItem.FileName, dataItem.ChartType);
                 MenuDataChartParent.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewDataChart,
                 MenuDeleteDataChart});
 
-                MenuViewDataChart.Image = Properties.Resources.datachart;
+                MenuViewDataChart.Image = Properties.Resources.getchart;
                 MenuViewDataChart.Text = Lang._("ViewChart");
                 MenuViewDataChart.Tag = dataItem;
                 MenuViewDataChart.Click += MenuViewDataChart_Click;
@@ -108,7 +108,7 @@ namespace C2.Controls.MapViews
         {
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
             MenuOpenOperator.Text = Lang._("OpenDesigner");
-            MenuOpenOperator.Image = Properties.Resources.operator_w_icon;
+            MenuOpenOperator.Image = Properties.Resources.算子;
             MenuOpenOperator.Click += MenuOpenOperatorDesigner_Click;
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
@@ -129,7 +129,7 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuOpPublic = new ToolStripMenuItem();
             ToolStripMenuItem MenuOpDelete = new ToolStripMenuItem();
 
-            MenuOpenOperator.Image = type == "single" ? GetOpOpenOperatorImage(opw.Status) : Properties.Resources.operator_w_icon;
+            MenuOpenOperator.Image = opw.GetOpOpenOperatorImage();
             MenuOpenOperator.Text = type == "single" ? opw.OpName: opw.ModelDataItem.FileName;
             MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuOpDesign,
@@ -163,32 +163,40 @@ namespace C2.Controls.MapViews
             return MenuOpenOperator;
         }
 
-        private Image GetOpOpenOperatorImage(OpStatus opStatus)
-        {
-            switch (opStatus)
-            {
-                case OpStatus.Null:
-                    return Properties.Resources.opSet;
-                case OpStatus.Ready:
-                    return Properties.Resources.opSetSuccess;
-                case OpStatus.Done:
-                    return Properties.Resources.opDone;
-                case OpStatus.Warn:
-                    return Properties.Resources.opWarn;
-                default:
-                    return Properties.Resources.operator_w_icon;
-            }
-        }
         void MenuDesignModel_Click(object sender, EventArgs e)
         {
             //TODO
             //跳转到
+            TabItem tab = opw.ModelRelateTab;
+            TabBar tabBar = Global.GetMainForm().TaskBar;
+            if (tabBar.Items.Contains(tab))
+                tabBar.SelectedItem = tab;
+            else
+            {
+                Topic topic = opw.Container as Topic;
+                string modelDocumentName = string.Format("{0}-模型视图", topic.Text);
+                Global.GetMainForm().LoadCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
+            }
         }
         void MenuDesignOp_Click(object sender, EventArgs e)
         {
+            Cursor tempCursor = this.Cursor;
+            OpType tmpOpType = opw.OpType;
+            DataItem tmpDataItem = opw.DataSourceItem;
+
+            this.Cursor = Cursors.WaitCursor;
             C2BaseOperatorView dialog = GenerateOperatorView();
-            if (dialog != null && dialog.ShowDialog(this) == DialogResult.OK)
+            if (dialog == null)
+                return;
+            DialogResult dr = dialog.ShowDialog(this);
+            if (dr == DialogResult.OK)
                 opw.Status = OpStatus.Ready;
+            else if (dr == DialogResult.Cancel)
+            {
+                opw.OpType = tmpOpType;
+                opw.DataSourceItem = tmpDataItem;
+            }
+            this.Cursor = tempCursor;
         }
         void MenuOpenOperatorDesigner_Click(object sender, EventArgs e)
         {
@@ -236,7 +244,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuCreateChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
-                MenuOpenDataSource.Image = Properties.Resources.data_w_icon;
+                MenuOpenDataSource.Image = Properties.Resources.数据;
 
                 MenuOpenDataSource.Text = String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.'));
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
@@ -247,9 +255,9 @@ namespace C2.Controls.MapViews
                 MenuViewData.Image = Properties.Resources.viewdata;
                 MenuViewData.Tag = dataItem;
                 MenuViewData.Text = Lang._("ViewData");
-                MenuViewData.Click += MenuViewData_Click;
+                MenuViewData.Click += MenuPreViewData_Click;
 
-                MenuCreateChart.Image = Properties.Resources.datachart;              
+                MenuCreateChart.Image = Properties.Resources.getchart;              
                 MenuCreateChart.Text = Lang._("CreateChart");
                 MenuCreateChart.Tag = dataItem;
                 MenuCreateChart.Click += MenuCreateDataChart_Click;
@@ -338,13 +346,6 @@ namespace C2.Controls.MapViews
         private void CreateResultMenu(ResultWidget rsw)
         {
             
-
-            //ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
-            //MenuOpenResult.Text = "Result";
-
-            //WidgetMenuStrip.Items.Add(MenuOpenResult);
-
-            //改
             foreach (DataItem dataItem in rsw.DataItems)
             {
                 ToolStripMenuItem MenuPreViewData = new ToolStripMenuItem();
@@ -353,7 +354,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuJoinPool = new ToolStripMenuItem();
 
                 ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
-                MenuOpenResult.Image = Properties.Resources.result_w_icon;
+                MenuOpenResult.Image = Properties.Resources.结果;
 
                 MenuOpenResult.Text = String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.'));
                 MenuOpenResult.DropDownItems.AddRange(new ToolStripItem[] {
@@ -364,7 +365,7 @@ namespace C2.Controls.MapViews
                 MenuPreViewData.Image = Properties.Resources.viewdata;
                 MenuPreViewData.Tag = dataItem;
                 MenuPreViewData.Text = Lang._("ViewData");
-                MenuPreViewData.Click += MenuViewData_Click;
+                MenuPreViewData.Click += MenuPreViewData_Click;
 
                 MenuProcessData.Image = Properties.Resources.dealData;
                 MenuProcessData.Text = Lang._("ProcessData");
@@ -379,9 +380,9 @@ namespace C2.Controls.MapViews
             }
         }
 
-        void MenuViewData_Click(object sender, EventArgs e)
+        void MenuPreViewData_Click(object sender, EventArgs e)
         {
-            DataSourceWidget.DoPreViewDataSource((sender as ToolStripMenuItem).Tag as DataItem);
+            C2BaseWidget.DoPreViewDataSource((sender as ToolStripMenuItem).Tag as DataItem);
         }
 
         void MenuProcessData_Click(object sender, EventArgs e)

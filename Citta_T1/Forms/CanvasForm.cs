@@ -625,7 +625,7 @@ namespace C2.Forms
             this.canvasPanel.Controls.Clear();
             this.naviViewControl.UpdateNaviView();
         }
-        private void CanvasAddElement(ModelDocument doc)
+        public void CanvasAddElement(ModelDocument doc)
         {
             doc.ModelElements.ForEach(me => this.canvasPanel.Controls.Add(me.InnerControl));
             this.naviViewControl.UpdateNaviView();

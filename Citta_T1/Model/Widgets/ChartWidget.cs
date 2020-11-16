@@ -12,7 +12,7 @@ namespace C2.Model.Widgets
         public ChartWidget()
         {
             DisplayIndex = 3;
-            widgetIcon = Properties.Resources.chart_w_icon; 
+            widgetIcon = Properties.Resources.图表; 
         }
         public override string GetTypeID()
         {

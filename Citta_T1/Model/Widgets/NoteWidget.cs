@@ -24,7 +24,7 @@ namespace C2.Model.Widgets
         public NoteWidget()
         {
             DisplayIndex = 5;
-            widgetIcon = Properties.Resources.note_w_icon;
+            widgetIcon = Properties.Resources.备注;
         }
 
         [DefaultValue(WidgetAlignment.Right)]
@@ -147,7 +147,7 @@ namespace C2.Model.Widgets
 
         public override void Paint(RenderArgs e)
         {
-            if (string.IsNullOrEmpty(Text))
+            if (Text == null) // 修改当备注框内容为图片或者空时,备注挂件图标不显示的bug
                 return;
 
             if (this.Hover)

@@ -220,6 +220,7 @@ namespace C2.Business.Model
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
                 dSaveLoad.ReadXml();
+                ReCountDocumentMaxElementID();
             }
         }
 

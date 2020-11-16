@@ -169,14 +169,8 @@
   <data name="bank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StartPage\bank.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="operator_w_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WidgetIcon\operator_w_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="data_w_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WidgetIcon\data_w_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="donation" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\donation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -258,9 +252,6 @@
   </data>
   <data name="navigation_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\navigation_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="result_w_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WidgetIcon\result_w_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit_alignment" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\edit_alignment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -970,9 +961,6 @@
   <data name="designer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\designer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="chart_w_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WidgetIcon\chart_w_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="openDataFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\ToolImage\openDataFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1057,17 +1045,11 @@
   <data name="freq_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\频率.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="note_w_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WidgetIcon\note_w_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="leftfold" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\displaypanel\leftfold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="leftcontrolhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\menu\leftcontrolhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="attachment_w_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WidgetIcon\attachment_w_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="组织架构图" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Templates\组织架构图.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -2264,5 +2246,23 @@
   </data>
   <data name="Modelmarket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Modelmarket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="图表" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\图表.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="备注" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\备注.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="数据" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\数据.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="算子" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\算子.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="结果" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\结果.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="附件" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\附件.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

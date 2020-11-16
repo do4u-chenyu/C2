@@ -28,7 +28,7 @@ namespace C2.Controls.MapViews
                 if (cmds == null)
                     return;
                 this.Cursor = Cursors.WaitCursor;
-                MessageBox.Show(RunLinuxCommand(cmds));
+                HelpUtil.ShowMessageBox(RunLinuxCommand(cmds), "运行完毕"); // 这个对话框还是挺丑的.后面要优化
                 this.Cursor = Cursors.Default;
                 //Global.GetDocumentForm().HideRunLab();
                 DataItem resultItem = opw.ResultItem;
@@ -39,7 +39,6 @@ namespace C2.Controls.MapViews
                     Global.GetCurrentDocument().Modified = false; //新建了一个挂件，此时文档dirty，需要置false
                     TopicUpdate(opw.Container as Topic, null);
                 }
-
                 else
                 {
                     //TODO
@@ -125,7 +124,7 @@ namespace C2.Controls.MapViews
                     p.StandardInput.WriteLine("exit");
                     p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒
 
-                    message = "成功执行完毕";
+                    message = "算子成功执行完毕";
 
                     if (p.ExitCode != 0)
                     {

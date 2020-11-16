@@ -18,7 +18,7 @@ namespace C2.Controls
             Forms = new List<BaseForm>();
         }
 
-        protected TaskBar TaskBar
+        public TaskBar TaskBar
         {
             get { return _TaskBar; }
             set
