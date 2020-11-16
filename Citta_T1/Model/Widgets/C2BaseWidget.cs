@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Xml;
 using C2.Business.Model;
 using C2.Utils;
+using C2.Core;
 
 namespace C2.Model.Widgets
 {
@@ -72,5 +73,11 @@ namespace C2.Model.Widgets
             }
         }
         #endregion
+
+        public static void DoPreViewDataSource(DataItem hitItem)
+        {
+            if (hitItem != null)
+                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
+        }
     }
 }

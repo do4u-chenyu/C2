@@ -36,7 +36,7 @@ namespace C2.Utils
         public static string AttachmentWidgetHelpInfo = "附件:支持添加多个附件,支持多种类型文档";
         public static string ChartWidgetHelpInfo = "图表:柱状图,折线图,饼图,环形图,雷达图等";
         public static string OperatorWidgetHelpInfo = "算子:内置多种算子,支持Python脚本和自主建模";
-        public static string ResultWidgetHelpInfo = "运算结果:支持预览,支付复用";
+        public static string ResultWidgetHelpInfo = "运算结果:算子和高级模型运算后生成的结果,支持预览";
         public static string DataSourceWidgetHelpInfo = "数据源:支持添加多个数据源,支持多种类型文档";
 
 

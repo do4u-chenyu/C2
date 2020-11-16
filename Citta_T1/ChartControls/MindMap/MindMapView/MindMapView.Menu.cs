@@ -247,7 +247,7 @@ namespace C2.Controls.MapViews
                 MenuViewData.Image = Properties.Resources.viewdata;
                 MenuViewData.Tag = dataItem;
                 MenuViewData.Text = Lang._("ViewData");
-                MenuViewData.Click += MenuViewData_Click;
+                MenuViewData.Click += MenuPreViewData_Click;
 
                 MenuCreateChart.Image = Properties.Resources.datachart;              
                 MenuCreateChart.Text = Lang._("CreateChart");
@@ -338,13 +338,6 @@ namespace C2.Controls.MapViews
         private void CreateResultMenu(ResultWidget rsw)
         {
             
-
-            //ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
-            //MenuOpenResult.Text = "Result";
-
-            //WidgetMenuStrip.Items.Add(MenuOpenResult);
-
-            //改
             foreach (DataItem dataItem in rsw.DataItems)
             {
                 ToolStripMenuItem MenuPreViewData = new ToolStripMenuItem();
@@ -364,7 +357,7 @@ namespace C2.Controls.MapViews
                 MenuPreViewData.Image = Properties.Resources.viewdata;
                 MenuPreViewData.Tag = dataItem;
                 MenuPreViewData.Text = Lang._("ViewData");
-                MenuPreViewData.Click += MenuViewData_Click;
+                MenuPreViewData.Click += MenuPreViewData_Click;
 
                 MenuProcessData.Image = Properties.Resources.dealData;
                 MenuProcessData.Text = Lang._("ProcessData");
@@ -379,9 +372,9 @@ namespace C2.Controls.MapViews
             }
         }
 
-        void MenuViewData_Click(object sender, EventArgs e)
+        void MenuPreViewData_Click(object sender, EventArgs e)
         {
-            DataSourceWidget.DoPreViewDataSource((sender as ToolStripMenuItem).Tag as DataItem);
+            C2BaseWidget.DoPreViewDataSource((sender as ToolStripMenuItem).Tag as DataItem);
         }
 
         void MenuProcessData_Click(object sender, EventArgs e)

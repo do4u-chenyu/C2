@@ -40,12 +40,5 @@ namespace C2.Model.Widgets
                 DoPreViewDataSource(DataItems[0]);
             base.OnDoubleClick(e);
         }
-
-        public static void DoPreViewDataSource(DataItem hitItem)
-        {
-            if (hitItem != null)
-                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
-        }
-
     }
 }
