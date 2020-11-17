@@ -22,6 +22,7 @@ using C2.Forms;
 using C2.Model;
 using C2.Model.Widgets;
 using C2.Business.Schedule;
+using C2.ChartPageView;
 #endregion
 
 namespace C2
@@ -108,6 +109,21 @@ namespace C2
             TabNew = new SpecialTabItem(Properties.Resources._new);
             TabNew.Click += new EventHandler(NewDocumentForm_Click);
             TaskBar.RightSpecialTabs.Add(TabNew);
+
+            var navBtnFirst = new TabBarNavButton(Lang._("First"), Properties.Resources.nav_small_first_white);
+            navBtnFirst.Click += navBtnFirst_Click;
+            var navBtnPrev = new TabBarNavButton(Lang._("Previous"), Properties.Resources.nav_small_prev_white);
+            navBtnPrev.Click += navBtnPrev_Click;
+            var navBtnNext = new TabBarNavButton(Lang._("Next"), Properties.Resources.nav_small_next_white);
+            navBtnNext.Click += navBtnNext_Click;
+            var navBtnLast = new TabBarNavButton(Lang._("Last"), Properties.Resources.nav_small_last_white);
+            navBtnLast.Click += navBtnLast_Click;
+            TaskBar.LeftButtons.Add(navBtnFirst);
+            TaskBar.LeftButtons.Add(navBtnPrev);
+            TaskBar.RightButtons.Add(navBtnNext);
+            TaskBar.RightButtons.Add(navBtnLast);
+
+            TaskBar.AllowScrollPage = true;
         }
 
         void InitializeWindowStates()
@@ -130,8 +146,6 @@ namespace C2
             Default_KeyManChanged(null, EventArgs.Empty);
 
             ShortcutKeys = new ShortcutKeysTable();
-            //ShortcutKeys.Register(KeyMap.New, delegate () { NewForm(); });
-            ShortcutKeys.Register(KeyMap.Open, delegate () { OpenDocument(); });
             ShortcutKeys.Register(KeyMap.NextTab, delegate () { taskBar.SelectNextTab(false); });
             ShortcutKeys.Register(KeyMap.PreviousTab, delegate () { taskBar.SelectNextTab(true); });
         }
@@ -362,7 +376,7 @@ namespace C2
             if (Global.VersionType.Equals(Global.GreenLevel))
                 return;
             string helpfile = Application.StartupPath;
-            helpfile += @"\Doc\IAO解决方案帮助文档v1.chm";
+            helpfile += @"\Resources\Help\C2帮助文档.chm";
             Help.ShowHelp(this, helpfile);
         }
 
@@ -627,6 +641,25 @@ namespace C2
             return null;
         }
 
+        void navBtnLast_Click(object sender, EventArgs e)
+        {
+            TaskBar.ScrollToLast();
+        }
+
+        void navBtnPrev_Click(object sender, EventArgs e)
+        {
+            TaskBar.ScrollToPrev();
+        }
+
+        void navBtnNext_Click(object sender, EventArgs e)
+        {
+            TaskBar.ScrollToNext();
+        }
+
+        void navBtnFirst_Click(object sender, EventArgs e)
+        {
+            TaskBar.ScrollToFirst();
+        }
         void NewDocumentForm_Click(object sender, System.EventArgs e)
         {
             // 文档重命名
@@ -840,7 +873,14 @@ namespace C2
       
         private void operateButton_MouseDown(object sender, MouseEventArgs e)
         {
-            this.MindMapButton.BackColor = Color.FromArgb(228, 60, 89);
+      
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.MindMapButton.BackColor = Color.FromArgb(228, 60, 89);
+                    break;
+            }
         }
 
         private void operateButton_Leave(object sender, EventArgs e)
@@ -855,7 +895,14 @@ namespace C2
 
         private void myModelButton_MouseDown(object sender, MouseEventArgs e)
         {
-            this.ModelMarketButton.BackColor = Color.FromArgb(228, 60, 89);
+            
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.ModelMarketButton.BackColor = Color.FromArgb(228, 60, 89);
+                    break;
+            }
         }
 
         private void dataButton_Leave(object sender, EventArgs e)
@@ -865,7 +912,14 @@ namespace C2
 
         private void dataButton_MouseDown(object sender, MouseEventArgs e)
         {
-            this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89); 
+           
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+                    break;
+            }
         }
 
         private void flowChartButton_Leave(object sender, EventArgs e)
@@ -875,7 +929,14 @@ namespace C2
 
         private void flowChartButton_MouseDown(object sender, MouseEventArgs e)
         {
-            this.IAOLabButton.BackColor = Color.FromArgb(228,60,89); 
+            
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.IAOLabButton.BackColor = Color.FromArgb(228, 60, 89);
+                    break;
+            }
         }
 
     

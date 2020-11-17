@@ -60,21 +60,7 @@ namespace C2.ChartPageView
             //BtnNewChart.Click += new EventHandler(BtnNewChart_Click);
             //TabBar.RightSpecialTabs.Add(BtnNewChart);
 
-            var navBtnFirst = new TabBarNavButton(Lang._("First"), Properties.Resources.nav_small_first);
-            navBtnFirst.Click += navBtnFirst_Click;
-            var navBtnPrev = new TabBarNavButton(Lang._("Previous"), Properties.Resources.nav_small_prev);
-            navBtnPrev.Click += navBtnPrev_Click;
-            var navBtnNext = new TabBarNavButton(Lang._("Next"), Properties.Resources.nav_small_next);
-            navBtnNext.Click += navBtnNext_Click;
-            var navBtnLast = new TabBarNavButton(Lang._("Last"), Properties.Resources.nav_small_last);
-            navBtnLast.Click += navBtnLast_Click;
-            TabBar.LeftButtons.Add(navBtnFirst);
-            TabBar.LeftButtons.Add(navBtnPrev);
-            TabBar.RightButtons.Add(navBtnNext);
-            TabBar.RightButtons.Add(navBtnLast);
-
             TabBar.MaxItemSize = 250;
-            TabBar.AllowScrollPage = true;
             TabBar.Renderer = new MultiChartsTabRenderer(TabBar);
             TabBar.Padding = new System.Windows.Forms.Padding(TabBar.Padding.Left + 2, TabBar.Padding.Top, TabBar.Padding.Right, TabBar.Padding.Bottom);
             TabBar.MouseDown += new MouseEventHandler(TabBar_MouseDown);

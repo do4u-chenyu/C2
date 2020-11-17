@@ -1824,9 +1824,29 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap nav_small_first_white {
+            get {
+                object obj = ResourceManager.GetObject("nav_small_first_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap nav_small_last {
             get {
                 object obj = ResourceManager.GetObject("nav_small_last", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap nav_small_last_white {
+            get {
+                object obj = ResourceManager.GetObject("nav_small_last_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1844,9 +1864,29 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap nav_small_next_white {
+            get {
+                object obj = ResourceManager.GetObject("nav_small_next_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap nav_small_prev {
             get {
                 object obj = ResourceManager.GetObject("nav_small_prev", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap nav_small_prev_white {
+            get {
+                object obj = ResourceManager.GetObject("nav_small_prev_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
