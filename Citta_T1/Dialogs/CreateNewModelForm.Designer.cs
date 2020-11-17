@@ -39,18 +39,17 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 14F);
-            this.label1.Location = new System.Drawing.Point(92, 48);
+            this.label1.Location = new System.Drawing.Point(70, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "新建模型";
-            this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("宋体", 15F);
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(67, 47);
+            this.label2.Location = new System.Drawing.Point(50, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(19, 31);
             this.label2.TabIndex = 1;
@@ -109,8 +108,7 @@
             this.MinimizeBox = false;
             this.Name = "CreateNewModelForm";
             this.ShowIcon = false;
-            this.Text = "新建模型";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreateNewModel_FormClosed);
+            this.Text = "新建视图";
             this.Load += new System.EventHandler(this.CreateNewModel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

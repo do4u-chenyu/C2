@@ -50,7 +50,6 @@ namespace C2
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
         private InputDataForm inputDataForm;
-        private CreateNewModelForm createNewModelForm;
    
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
@@ -69,7 +68,7 @@ namespace C2
             // 数据导入
             this.inputDataForm = new Dialogs.InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
-            this.createNewModelForm = new Dialogs.CreateNewModelForm();
+            
             // 左侧
             this.isBottomViewPanelMinimum = true;
             this.bottomViewPanel.Height = 40;
@@ -634,14 +633,19 @@ namespace C2
         }
         public void NewDocumentForm_Click(string templateName)
         {
-            this.createNewModelForm.StartPosition = FormStartPosition.CenterScreen;
-            this.createNewModelForm.Owner = this;
+            CreateNewModelForm createNewModelForm = new CreateNewModelForm
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                Owner = this,
+                OpenDocuments = OpendDocuments(),
+                NewFormType = FormType.DocumentForm,
+                ModelType = "新建业务视图"
+            };
 
-            this.createNewModelForm.OpenDocuments = OpendDocuments();
-            DialogResult dialogResult = this.createNewModelForm.ShowDialog();
+            DialogResult dialogResult = createNewModelForm.ShowDialog();
             // 新建业务视图
             if (dialogResult == DialogResult.OK)
-                this.NewDocumentForm(templateName,this.createNewModelForm.ModelTitle);
+                this.NewDocumentForm(templateName,createNewModelForm.ModelTitle);
         }
         void NewCanvasForm_Click(object sender, System.EventArgs e)
         {
