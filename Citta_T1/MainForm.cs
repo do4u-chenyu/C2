@@ -110,13 +110,13 @@ namespace C2
             TabNew.Click += new EventHandler(NewDocumentForm_Click);
             TaskBar.RightSpecialTabs.Add(TabNew);
 
-            var navBtnFirst = new TabBarNavButton(Lang._("First"), Properties.Resources.nav_small_first);
+            var navBtnFirst = new TabBarNavButton(Lang._("First"), Properties.Resources.nav_small_first_white);
             navBtnFirst.Click += navBtnFirst_Click;
-            var navBtnPrev = new TabBarNavButton(Lang._("Previous"), Properties.Resources.nav_small_prev);
+            var navBtnPrev = new TabBarNavButton(Lang._("Previous"), Properties.Resources.nav_small_prev_white);
             navBtnPrev.Click += navBtnPrev_Click;
-            var navBtnNext = new TabBarNavButton(Lang._("Next"), Properties.Resources.nav_small_next);
+            var navBtnNext = new TabBarNavButton(Lang._("Next"), Properties.Resources.nav_small_next_white);
             navBtnNext.Click += navBtnNext_Click;
-            var navBtnLast = new TabBarNavButton(Lang._("Last"), Properties.Resources.nav_small_last);
+            var navBtnLast = new TabBarNavButton(Lang._("Last"), Properties.Resources.nav_small_last_white);
             navBtnLast.Click += navBtnLast_Click;
             TaskBar.LeftButtons.Add(navBtnFirst);
             TaskBar.LeftButtons.Add(navBtnPrev);
