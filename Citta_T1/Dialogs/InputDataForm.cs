@@ -197,9 +197,11 @@ namespace C2.Dialogs
         private void PreviewExcelFileNew()
         {
             this.Cursor = Cursors.WaitCursor;
-            BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding, this.separator);
-            List<List<String>> rowContentList = StringTo2DList(BCPBuffer.GetInstance().GetCachePreViewExcelContent(this.fullFilePath), '\t');
+            bool isReadSucc = BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding, this.separator);
             this.Cursor = Cursors.Default;
+            if (!isReadSucc)
+                return;
+            List<List<String>> rowContentList = StringTo2DList(BCPBuffer.GetInstance().GetCachePreviewExcelContent(this.fullFilePath), '\t');
             if (rowContentList.Count == 0)
             {
                 this.Clear();

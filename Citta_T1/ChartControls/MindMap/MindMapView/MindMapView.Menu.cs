@@ -320,7 +320,7 @@ namespace C2.Controls.MapViews
             // 获取选中输入、输出各列数据
             string fileContent;
             if (hitItem.FileType == OpUtil.ExtType.Excel)
-                fileContent = BCPBuffer.GetInstance().GetCachePreViewExcelContent(path);
+                fileContent = BCPBuffer.GetInstance().GetCachePreviewExcelContent(path);
             else
                 fileContent = BCPBuffer.GetInstance().GetCachePreViewBcpContent(path, encoding);
             List<string> rows = new List<string>(fileContent.Split('\n'));
@@ -455,7 +455,7 @@ namespace C2.Controls.MapViews
                 MenuDeleteAttachment.Image = Properties.Resources.deleteattachment;
                 MenuDeleteAttachment.Text = Lang._("DeleteAttachment");
                 MenuDeleteAttachment.Tag = path;
-                MenuDeleteAttachment.Click += AttachmentMenuDelete_Click;
+                MenuDeleteAttachment.Click += MenuDeleteAttachment_Click;
 
                 WidgetMenuStrip.Items.Add(MenuAttachment);
             }
@@ -479,7 +479,7 @@ namespace C2.Controls.MapViews
         }
 
 
-        void AttachmentMenuDelete_Click(object sender, EventArgs e)
+        void MenuDeleteAttachment_Click(object sender, EventArgs e)
         {
             string ffp = (sender as ToolStripMenuItem).Tag as string;
             atw.AttachmentPaths.Remove(ffp);           

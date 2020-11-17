@@ -64,7 +64,7 @@ namespace C2.Model.Widgets
         {
             try
             {
-                Process.Start(ffp);
+                Process.Start(ffp); // 太粗暴了,资源泄露,测试有没有资源泄露
             }
             catch
             {

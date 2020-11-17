@@ -14,6 +14,27 @@ using System.Windows.Forms;
 
 namespace C2.Utils
 {
+    class ReadRst
+    {
+        List<List<string>> result;
+        int returnCode;
+        string msg;
+        public List<List<string>> Result { get { return this.result; } }
+        public int ReturnCode { get { return this.returnCode; } }
+        public string Msg { get { return this.msg; } }
+        public ReadRst()
+        {
+            result = null;
+            returnCode = 0;
+            msg = "";
+        }
+        public ReadRst(List<List<string>> rst , int rtc, string m)
+        {
+            result = rst;
+            returnCode = rtc;
+            msg = m;
+        }
+    }
     class FileUtil
     {
         public static LogUtil log = LogUtil.GetInstance("FileUtil");
@@ -161,14 +182,18 @@ namespace C2.Utils
             }
         }
 
-        public static List<List<string>> ReadExcel(string fullFilePath, int maxRow, string sheetName = "")
+        public static ReadRst ReadExcel(string fullFilePath, int maxRow, string sheetName = "")
         {
             FileStream fs = null;
-            List<List<string>> rowContentList = new List<List<string>>();
+            List<List<string>> rst = new List<List<string>>();
+            int returnCode = 1;
+            string errMsg = "";
             if (!File.Exists(fullFilePath))
             {
-                HelpUtil.ShowMessageBox(fullFilePath + "文件不存在");
-                return rowContentList;
+                returnCode = 0;
+                errMsg = fullFilePath + "文件不存在";
+                log.Error(errMsg);
+                return new ReadRst(rst, returnCode, errMsg);
             }
 
             try
@@ -184,7 +209,7 @@ namespace C2.Utils
                         if (worksheet == null)
                         {
                             fs.Close();
-                            return rowContentList;
+                            return new ReadRst(rst, 0, "");
                         }
                         int rowCount = worksheet.Dimension.End.Row;
                         int colCount = worksheet.Dimension.End.Column;
@@ -208,7 +233,7 @@ namespace C2.Utils
                                 string unit = ExcelUtil.GetCellValue(cell).Replace('\n',' ');
                                 tmpRowValueList.Add(unit);
                             }
-                            rowContentList.Add(tmpRowValueList);
+                            rst.Add(tmpRowValueList);
                         }
                     }
                 }
@@ -219,13 +244,15 @@ namespace C2.Utils
                     if (sheet == null)
                     {
                         fs.Close();
-                        return rowContentList;
+                        return new ReadRst(rst, 0, ""); ;
                     }
                     IRow firstRow = sheet.GetRow(0);
                     if (firstRow == null)
                     {
-                        MessageBox.Show("不支持预览和导入没有表头的xls文件，请给文件添加合适的表头");
-                        return rowContentList;
+                        returnCode = -1;
+                        errMsg = "不支持预览和导入没有表头的xls文件，请给文件添加合适的表头";
+                        log.Error(errMsg);
+                        return new ReadRst(rst, returnCode, errMsg);
                     }
                     int rowCount = sheet.LastRowNum + 1;
                     int cellCount = firstRow is null ? 1 : firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
@@ -246,20 +273,21 @@ namespace C2.Utils
                                 tmpRowValueList.Add(unit);
                             }
                         }
-                        rowContentList.Add(tmpRowValueList);
+                        rst.Add(tmpRowValueList);
                     }
-
                 }
             }
             catch (System.IO.IOException)
             {
-                string errorMsg = string.Format("文件{0}可能是空文件或者已被其他应用打开。", fullFilePath);
-                MessageBox.Show(errorMsg);
-                log.Error(errorMsg);
+                returnCode = -2;
+                errMsg = string.Format("文件{0}可能是空文件或者已被其他应用打开。", fullFilePath);
+                log.Error(errMsg);
             }
             catch (Exception ex)
             {
-                log.Error("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
+                returnCode = -3;
+                errMsg = "预读Excel: " + fullFilePath + " 失败, error: " + ex.Message;
+                log.Error(errMsg);
             }
             finally
             {
@@ -267,7 +295,7 @@ namespace C2.Utils
                     fs.Close();
             }
 
-            return rowContentList;
+            return new ReadRst(rst, returnCode, errMsg);
         }
         public static List<List<string>> FormatDatas(List<List<string>> datas, int maxNumOfRow)
         {

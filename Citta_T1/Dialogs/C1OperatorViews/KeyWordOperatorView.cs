@@ -188,7 +188,7 @@ namespace C2.OperatorViews
             if (extType == OpUtil.ExtType.Excel)
             {
                 separator = "\t".ToCharArray();
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewExcelContent(fullFilePath).Split('\n'));
             }
             else if (extType == OpUtil.ExtType.Text)
             {

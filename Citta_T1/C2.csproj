@@ -1719,6 +1719,9 @@
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
+    <None Include="Resources\Help\C2帮助文档.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\html_content.htm" />
     <None Include="Resources\Icons\Artificialintelligence.png" />
     <None Include="Resources\Icons\Businessview.png" />
@@ -1837,6 +1840,14 @@
     <None Include="Resources\Images\nav_small_next.png" />
     <None Include="Resources\Images\nav_small_prev.png" />
     <Content Include="Resources\Images\navigation_button.png" />
+    <None Include="Resources\Images\nav_small_first_black.png" />
+    <None Include="Resources\Images\nav_small_last_black.png" />
+    <None Include="Resources\Images\nav_small_next_black.png" />
+    <None Include="Resources\Images\nav_small_prev_black.png" />
+    <None Include="Resources\Images\nav_small_first_white.png" />
+    <None Include="Resources\Images\nav_small_last_white.png" />
+    <None Include="Resources\Images\nav_small_next_white.png" />
+    <None Include="Resources\Images\nav_small_prev_white.png" />
     <Content Include="Resources\Images\new.png" />
     <None Include="Resources\Images\new_24.png" />
     <None Include="Resources\Images\next.png" />
@@ -1997,6 +2008,7 @@
     </Content>
     <None Include="Resources\NativeResources.res" />
     <None Include="Resources\operator_back.png" />
+    <None Include="Resources\nav_small_first_black.bmp" />
     <Content Include="Resources\Opcontrol_ico\AI.ico" />
     <Content Include="Resources\Opcontrol_ico\python.ico" />
     <Content Include="Resources\Opcontrol_ico\关联算子.ico" />
@@ -2466,9 +2478,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\windows_themes.xml" />
-    <None Include="Resources\WidgetIcon\data_w_icon.png" />
-    <None Include="Resources\WidgetIcon\result_w_icon.png" />
-    <None Include="Resources\WidgetIcon\operator_w_icon.png" />
     <Content Include="Resources\C1\datasource\pythonHelper1.png" />
     <Content Include="Resources\C1\datasource\pythonHelper2.png" />
     <Content Include="Resources\C1\datasource\pythonHelper3.png" />
@@ -2484,8 +2493,6 @@
     <None Include="Resources\C1\modeltitlepanel\u700.png" />
     <None Include="Resources\C1\toolbox\importmodel.png" />
     <Content Include="Resources\C1\leftpanelmenu\startPageTitle.jpg" />
-    <None Include="Resources\WidgetIcon\chart_w_icon.png" />
-    <None Include="Resources\WidgetIcon\note_w_icon.png" />
     <None Include="Resources\提示1.png" />
     <None Include="Resources\WidgetIcon\数据.png" />
     <None Include="Resources\WidgetIcon\算子.png" />
