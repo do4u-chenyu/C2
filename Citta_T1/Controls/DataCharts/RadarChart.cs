@@ -17,8 +17,10 @@ namespace C2.Controls.DataCharts
         private int series = 0;
         private string title;
         public System.Windows.Forms.DataVisualization.Charting.Chart GetChart { get => this.chart1; }
+        public bool EmptyInput { get; set; }
         public RadarChart(List<List<string>> dataList, List<string> title)
         {
+            EmptyInput = false;
             this.title = title[0];
             InitializeComponent();
             InitChart(title[0], title[1], title[2]);
@@ -195,6 +197,7 @@ namespace C2.Controls.DataCharts
         }
         void DataBind(List<string> x, List<string> y,string legendText)
         {
+            int count = 0;
             try
             {
                 if (!series.Equals(0))
@@ -217,7 +220,12 @@ namespace C2.Controls.DataCharts
                     catch
                     {
                         y_double.Add(0);
+                        count++;
                     }
+                }
+                if (y.Count == count)
+                {
+                    EmptyInput = true;
                 }
                 this.chart1.Series[series].Points.DataBindXY(x, y_double);
                 chart1.ChartAreas[0].AxisX.LabelStyle.Interval = 1;

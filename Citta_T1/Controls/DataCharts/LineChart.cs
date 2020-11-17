@@ -9,8 +9,11 @@ namespace C2.Controls.DataCharts
     public partial class LineChart : UserControl
     {
         public System.Windows.Forms.DataVisualization.Charting.Chart GetChart { get => this.chart1; }
+
+        public bool EmptyInput { get; set; }
         public LineChart(List<List<string>> dataList, List<string> title)
         {
+            EmptyInput = false;
             InitializeComponent();
             InitChart(title[0], title[1], title[2]);
             DataBind(dataList[0], dataList[1]);
@@ -93,6 +96,7 @@ namespace C2.Controls.DataCharts
         }
         void DataBind(List<string> x, List<string> y)
         {
+            int count = 0;
             try
             {
                 List<double> y_double = new List<double>();
@@ -105,6 +109,11 @@ namespace C2.Controls.DataCharts
                     catch
                     {
                         y_double.Add(0);
+                        count++;
+                    }
+                    if (y.Count == count)
+                    {
+                        EmptyInput = true;
                     }
                 }
                 chart1.Series[0].Points.DataBindXY(x, y_double);
