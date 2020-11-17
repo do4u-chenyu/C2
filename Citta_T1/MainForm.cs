@@ -123,7 +123,6 @@ namespace C2
             TaskBar.RightButtons.Add(navBtnNext);
             TaskBar.RightButtons.Add(navBtnLast);
 
-            TaskBar.MaxItemSize = 250;
             TaskBar.AllowScrollPage = true;
         }
 
