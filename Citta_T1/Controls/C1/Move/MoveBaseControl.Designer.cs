@@ -33,8 +33,8 @@ namespace C2.Controls.Move
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.textBox = new System.Windows.Forms.TextBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.txtButton = new C2.Controls.Common.NoFocusButton();
             this.RenameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtButton = new C2.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             this.SuspendLayout();
