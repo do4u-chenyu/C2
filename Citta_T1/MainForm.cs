@@ -22,6 +22,7 @@ using C2.Forms;
 using C2.Model;
 using C2.Model.Widgets;
 using C2.Business.Schedule;
+using C2.ChartPageView;
 #endregion
 
 namespace C2
@@ -108,6 +109,22 @@ namespace C2
             TabNew = new SpecialTabItem(Properties.Resources._new);
             TabNew.Click += new EventHandler(NewDocumentForm_Click);
             TaskBar.RightSpecialTabs.Add(TabNew);
+
+            var navBtnFirst = new TabBarNavButton(Lang._("First"), Properties.Resources.nav_small_first);
+            navBtnFirst.Click += navBtnFirst_Click;
+            var navBtnPrev = new TabBarNavButton(Lang._("Previous"), Properties.Resources.nav_small_prev);
+            navBtnPrev.Click += navBtnPrev_Click;
+            var navBtnNext = new TabBarNavButton(Lang._("Next"), Properties.Resources.nav_small_next);
+            navBtnNext.Click += navBtnNext_Click;
+            var navBtnLast = new TabBarNavButton(Lang._("Last"), Properties.Resources.nav_small_last);
+            navBtnLast.Click += navBtnLast_Click;
+            TaskBar.LeftButtons.Add(navBtnFirst);
+            TaskBar.LeftButtons.Add(navBtnPrev);
+            TaskBar.RightButtons.Add(navBtnNext);
+            TaskBar.RightButtons.Add(navBtnLast);
+
+            TaskBar.MaxItemSize = 250;
+            TaskBar.AllowScrollPage = true;
         }
 
         void InitializeWindowStates()
@@ -130,8 +147,6 @@ namespace C2
             Default_KeyManChanged(null, EventArgs.Empty);
 
             ShortcutKeys = new ShortcutKeysTable();
-            //ShortcutKeys.Register(KeyMap.New, delegate () { NewForm(); });
-            ShortcutKeys.Register(KeyMap.Open, delegate () { OpenDocument(); });
             ShortcutKeys.Register(KeyMap.NextTab, delegate () { taskBar.SelectNextTab(false); });
             ShortcutKeys.Register(KeyMap.PreviousTab, delegate () { taskBar.SelectNextTab(true); });
         }
@@ -627,6 +642,25 @@ namespace C2
             return null;
         }
 
+        void navBtnLast_Click(object sender, EventArgs e)
+        {
+            TaskBar.ScrollToLast();
+        }
+
+        void navBtnPrev_Click(object sender, EventArgs e)
+        {
+            TaskBar.ScrollToPrev();
+        }
+
+        void navBtnNext_Click(object sender, EventArgs e)
+        {
+            TaskBar.ScrollToNext();
+        }
+
+        void navBtnFirst_Click(object sender, EventArgs e)
+        {
+            TaskBar.ScrollToFirst();
+        }
         void NewDocumentForm_Click(object sender, System.EventArgs e)
         {
             // 文档重命名
