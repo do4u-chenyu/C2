@@ -70,7 +70,9 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
-                AddWidget(ProgressBarWidget.TypeID, new ProgressBarWidget(), true);
+                ProgressBarWidget pbw = SelectedTopics[0].FindWidget<ProgressBarWidget>();
+                if(pbw == null)
+                    AddWidget(ProgressBarWidget.TypeID, new ProgressBarWidget(), true);
             }
         }
 
@@ -96,15 +98,22 @@ namespace C2.Controls.MapViews
             {
                 var dialog = new NoteWidgetDialog();
 
-                //
                 if (Clipboard.ContainsText())
                     dialog.Remark = ClipboardHelper.GetHtml();
 
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
-                    var template = new NoteWidget();
-                    template.Remark = dialog.Remark;
-                    AddWidget(NoteWidget.TypeID, template, false);
+                    NoteWidget nw = SelectedTopics[0].FindWidget<NoteWidget>();
+                    if(nw == null)
+                    {
+                        var template = new NoteWidget();
+                        template.Remark = dialog.Remark;
+                        AddWidget(NoteWidget.TypeID, template, false);
+                    }
+                    else
+                    {
+                        nw.Remark = dialog.Remark;
+                    }
                 }
             }
         }
