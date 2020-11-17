@@ -175,8 +175,12 @@ namespace C2.OperatorViews
         #endregion
         protected override void CreateLine(int addLine)
         {
+            if (this.tableLayoutPanel1.RowCount == 1)
+            {
+                this.tableLayoutPanel2.Location = new System.Drawing.Point(62, 3);
+            }
 
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(62, 3);
+           
             // And OR 选择框
             ComboBox regBox = NewAndORComboBox();
             regBox.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

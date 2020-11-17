@@ -1,4 +1,5 @@
-﻿namespace C2.Dialogs.Base
+﻿
+namespace C2.Dialogs.Base
 {
     partial class BaseOperatorView
     {

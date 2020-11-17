@@ -202,7 +202,11 @@ namespace C2.OperatorViews
         protected override void CreateLine(int addLine)
 
         {
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(62, 0);
+            if (this.tableLayoutPanel1.RowCount == 1)
+            {
+                this.tableLayoutPanel2.Location = new System.Drawing.Point(62, 0);
+            }
+
             // And OR 选择框
             ComboBox regBox = NewAndORComboBox();
             //regBox.Size = new System.Drawing.Size(85, 26);
@@ -280,7 +284,10 @@ namespace C2.OperatorViews
                 this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k));
             }
             if(this.tableLayoutPanel1.RowCount==1)
+            {
                 this.tableLayoutPanel2.Location = new System.Drawing.Point(62, 39);
+            }
+               
 
         }
 
