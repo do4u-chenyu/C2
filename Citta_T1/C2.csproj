@@ -1719,6 +1719,9 @@
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
+    <None Include="Resources\Help\C2帮助文档.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\html_content.htm" />
     <None Include="Resources\Icons\Artificialintelligence.png" />
     <None Include="Resources\Icons\Businessview.png" />

@@ -362,7 +362,7 @@ namespace C2
             if (Global.VersionType.Equals(Global.GreenLevel))
                 return;
             string helpfile = Application.StartupPath;
-            helpfile += @"\Doc\IAO解决方案帮助文档v1.chm";
+            helpfile += @"\Resources\Help\C2帮助文档.chm";
             Help.ShowHelp(this, helpfile);
         }
 
