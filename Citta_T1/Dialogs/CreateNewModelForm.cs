@@ -1,8 +1,13 @@
 ﻿using C2.Business.Model;
+using C2.Controls.MapViews;
 using C2.Core;
+using C2.Forms;
+using C2.Model.MindMaps;
+using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -12,28 +17,17 @@ namespace C2.Dialogs
 
     public partial class CreateNewModelForm : Form
     {
-        private int titlePostfix;  // 模型建议命名的数字后缀
-        private string modelTitle;
-        public string ModelTitle { get => modelTitle; }
+        public int TitlePostfix { set; get; }  // 模型建议命名的数字后缀
+        public string ModelTitle { set; get; }
         public string ModelType { set => this.label1.Text = value; }
         public List<string> OpenDocuments { get; set; }
-
+        public FormType NewFormType { set; get; }
+        public MindMapView RelateMindMapView { set; get; }
 
         public CreateNewModelForm()
         {
             InitializeComponent();
-            OpenDocuments = new List<string>();
-            this.label1.Text = "新建业务视图";
-            this.Text = "新建业务视图";
-            this.label1.Location = new Point(70,47);
-            this.label2.Location = new Point(50,47);
-            modelTitle = "";
-            titlePostfix = 1;
-        }
-
-        private void Label1_Click(object sender, EventArgs e)
-        {
-
+            TitlePostfix = 1;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -45,31 +39,22 @@ namespace C2.Dialogs
         private void AddButton_Click(object sender, EventArgs e)
         {
             string titleName = this.textBox.Text.Trim();
-
             if (titleName.Length == 0)
                 return;
-            if (FileUtil.ContainIllegalCharacters(titleName, "业务视图名")
-               || FileUtil.NameTooLong(titleName, "业务视图名"))
+
+            string target = NewFormType == FormType.DocumentForm ? "业务视图名" : "模型视图名";
+            if (FileUtil.ContainIllegalCharacters(titleName, target) || FileUtil.NameTooLong(titleName, target))
             {
                 this.textBox.Text = String.Empty;
                 return;
             }
-            // 业务视图已存在,提示并退出
+
+            // 视图已存在,提示并退出
             if (CheckModelTitelExists(titleName))
-            {
-                MessageBox.Show(titleName + "，已存在，请重新命名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
 
-            this.modelTitle = titleName;
+            ModelTitle = titleName;
             this.DialogResult = DialogResult.OK;
-        }
-
-        private void CreateNewModel_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.textBox.Text = "";
-            if (this.DialogResult != DialogResult.OK)
-                this.modelTitle = "";
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -80,20 +65,34 @@ namespace C2.Dialogs
             {
                 if (this.textBox.Text.Length == 0)
                     return;
-                this.modelTitle = this.textBox.Text;
+                ModelTitle = this.textBox.Text;
                 this.DialogResult = DialogResult.OK;
             }
         }
 
         private void CreateNewModel_Load(object sender, EventArgs e)
         {
-            string title = String.Format("业务视图{0}", this.titlePostfix);
-            List<string> currentTitles = GetModelTitleList();
+            //现在load的时候需要分两种
+            string title = "";
+            if(NewFormType == FormType.DocumentForm)
+            {
+                title = String.Format("业务视图{0}", TitlePostfix);
+                List<string> currentTitles = GetModelTitleList();
 
-            while (currentTitles.Contains(title))
-                title = String.Format("业务视图{0}", ++this.titlePostfix);
+                while (currentTitles.Contains(title))
+                    title = String.Format("业务视图{0}", ++TitlePostfix);
+            }
+            else if(NewFormType == FormType.CanvasForm)
+            {
+                title = String.Format("模型视图{0}", TitlePostfix);
+                List<string> currentTitles = GetMindMapTitleList();
+
+                while (currentTitles.Contains(title))
+                    title = String.Format("模型视图{0}", ++TitlePostfix);
+            }
+
             this.textBox.Text = title;
-            this.textBox.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.textBox.ForeColor = SystemColors.ActiveCaption;
         }
 
         private void TextBox_MouseDown(object sender, MouseEventArgs e)
@@ -103,7 +102,28 @@ namespace C2.Dialogs
 
         private bool CheckModelTitelExists(string inputModelTitle)
         {
-            return GetModelTitleList().Contains(inputModelTitle);
+            if((NewFormType == FormType.DocumentForm && GetModelTitleList().Contains(inputModelTitle)) || (NewFormType == FormType.CanvasForm && GetMindMapTitleList().Contains(inputModelTitle)))
+            {
+                MessageBox.Show(inputModelTitle + "，已存在，请重新命名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private List<string> GetMindMapTitleList()
+        {
+            List<string> titles = new List<string>();
+            Topic[] topics = RelateMindMapView.Map.GetTopics(false);
+            foreach(Topic topic in topics)
+            {
+                OperatorWidget opw = topic.FindWidget<OperatorWidget>();
+                if(opw!=null && opw.HasModelOperator)
+                {
+                    titles.Add(opw.ModelDataItem.FileName);
+                }
+            }
+            return titles;
         }
 
         private List<string> GetModelTitleList()

@@ -209,6 +209,7 @@ namespace C2.ChartPageView
             MenuAdd.Text = Lang._("Add");
             MenuAddIcon.Text = Lang.GetTextWithEllipsis("Icon");
             MenuAddRemark.Text = Lang.GetTextWithEllipsis("Notes");
+            MenuAddProgressBar.Text = Lang.GetTextWithEllipsis("Progress Bar");
             MenuAddOperator.Text = Lang._("Operator");
             MenuAddAttachment.Text = Lang._("AddAttachment");
             MenuAddMaxOp.Text = Lang._("Max");
@@ -247,6 +248,7 @@ namespace C2.ChartPageView
         ToolStripMenuItem MenuAdd;
         ToolStripMenuItem MenuAddIcon;
         ToolStripMenuItem MenuAddRemark;
+        ToolStripMenuItem MenuAddProgressBar;
         ToolStripMenuItem MenuAddOperator;
         ToolStripMenuItem MenuAddAttachment;
         ToolStripMenuItem MenuAddMaxOp;
@@ -295,6 +297,7 @@ namespace C2.ChartPageView
             MenuAdd = new ToolStripMenuItem();
             MenuAddIcon = new ToolStripMenuItem();
             MenuAddRemark = new ToolStripMenuItem();
+            MenuAddProgressBar = new ToolStripMenuItem();
             MenuAddOperator = new ToolStripMenuItem();
             MenuAddAttachment = new ToolStripMenuItem();
             MenuAddMaxOp = new ToolStripMenuItem();
@@ -369,6 +372,7 @@ namespace C2.ChartPageView
             MenuAdd.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuAddIcon,
                 MenuAddRemark,
+                MenuAddProgressBar,
                 MenuAddOperator,
                 MenuAddModelOp,
                 MenuAddAttachment});
@@ -387,6 +391,12 @@ namespace C2.ChartPageView
             MenuAddRemark.Name = "MenuAddRemark";
             MenuAddRemark.Text = "&Notes";
             MenuAddRemark.Click += new System.EventHandler(MenuAddRemark_Click);
+
+            // MenuAddProgressBar
+            MenuAddProgressBar.Image = Properties.Resources.progress_bar;
+            MenuAddProgressBar.Name = "MenuAddProgressBar";
+            MenuAddProgressBar.Text = "&Progress Bar";
+            MenuAddProgressBar.Click += new System.EventHandler(MenuAddProgressBar_Click);
 
             //MenuAddOperator
             MenuAddOperator.Image = C2.Properties.Resources.算子;
@@ -555,6 +565,7 @@ namespace C2.ChartPageView
                 MenuAdd.Enabled = !ReadOnly && count == 1 && topicCount > 0;
                 MenuAddOperator.Enabled = topicCount > 0 && count == 1;
                 MenuAddAttachment.Enabled = topicCount > 0 && count == 1;
+                MenuAddProgressBar.Enabled = topicCount > 0;
                 MenuAddModelOp.Enabled = topicCount > 0 && count == 1;
                 MenuNewChartFromHere.Available = topicCount == 1;
 
@@ -673,7 +684,10 @@ namespace C2.ChartPageView
         {
             mindMapView1.AddRemark();
         }
-
+        void MenuAddProgressBar_Click(object sender, EventArgs e)
+        {
+            mindMapView1.AddProgressBar();
+        }
         void MenuAddOperator_Click(object sender, EventArgs e)
         {
             ShowDesignerObject = mindMapView1.SelectedTopic;

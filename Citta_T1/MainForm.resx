@@ -117,6 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="headPanel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panel2.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="helpPictureBox.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="helpPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -293,6 +303,149 @@
     <value>17, 17</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
   </metadata>
+  <data name="portraitpictureBox.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="usernamelabel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="leftMainMenuPanel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="IAOLabButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="DataSourceButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="MindMapButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ModelMarketButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="leftToolBoxPanel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mindMapModelControl.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="dataSourceControl.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="myModelControl.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="leftFoldButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="commonPanel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panel5.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="newModelButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="moreButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="formatButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="groupButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="interOpButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="unionButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="diffButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="filterButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="connectOpButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ImportDataSourceButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="button1.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="minMaxPictureBox.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="logLabel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="pyControlLabel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="previewLabel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="dragLineControl.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="MainPanel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="workSpacePanel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mdiWorkSpace.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="bottomViewPanel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="bottomPreview.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="bottomLogControl.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="bottomPyConsole.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panel4.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panel9.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panel8.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tabPanel.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskBar.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="blankButton.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
 </root>

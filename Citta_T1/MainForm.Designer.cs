@@ -145,10 +145,11 @@ namespace C2
             // 
             // portraitpictureBox
             // 
-            this.portraitpictureBox.Image = ((System.Drawing.Image)(resources.GetObject("portraitpictureBox.Image")));
+            this.portraitpictureBox.Image = global::C2.Properties.Resources.head;
             this.portraitpictureBox.Location = new System.Drawing.Point(222, 10);
             this.portraitpictureBox.Name = "portraitpictureBox";
             this.portraitpictureBox.Size = new System.Drawing.Size(24, 24);
+            this.portraitpictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.portraitpictureBox.TabIndex = 3;
             this.portraitpictureBox.TabStop = false;
             // 
