@@ -36,7 +36,8 @@ namespace C2.Controls
             DropDownButton.Click +=new EventHandler(DropDownButton_Click);
 
             PreferencesButton = new TabBarButton();
-            PreferencesButton.Icon = Properties.Resources.preferences_16;
+            //PreferencesButton.Icon = Properties.Resources.preferences_16;
+            PreferencesButton.Icon = Properties.Resources.designer;
             PreferencesButton.Visible = ShowPreferencesButton;
             PreferencesButton.Click += new EventHandler(PreferencesButton_Click);
             PreferencesButton.ToolTipText = HelpUtil.MoreButtonHelpInfo;
