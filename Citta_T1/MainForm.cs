@@ -377,7 +377,7 @@ namespace C2
             if (Global.VersionType.Equals(Global.GreenLevel))
                 return;
             string helpfile = Application.StartupPath;
-            helpfile += @"\Doc\IAO解决方案帮助文档v1.chm";
+            helpfile += @"\Resources\Help\C2帮助文档.chm";
             Help.ShowHelp(this, helpfile);
         }
 
@@ -874,7 +874,14 @@ namespace C2
       
         private void operateButton_MouseDown(object sender, MouseEventArgs e)
         {
-            this.MindMapButton.BackColor = Color.FromArgb(228, 60, 89);
+      
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.MindMapButton.BackColor = Color.FromArgb(228, 60, 89);
+                    break;
+            }
         }
 
         private void operateButton_Leave(object sender, EventArgs e)
@@ -889,7 +896,14 @@ namespace C2
 
         private void myModelButton_MouseDown(object sender, MouseEventArgs e)
         {
-            this.ModelMarketButton.BackColor = Color.FromArgb(228, 60, 89);
+            
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.ModelMarketButton.BackColor = Color.FromArgb(228, 60, 89);
+                    break;
+            }
         }
 
         private void dataButton_Leave(object sender, EventArgs e)
@@ -899,7 +913,14 @@ namespace C2
 
         private void dataButton_MouseDown(object sender, MouseEventArgs e)
         {
-            this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89); 
+           
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+                    break;
+            }
         }
 
         private void flowChartButton_Leave(object sender, EventArgs e)
@@ -909,7 +930,14 @@ namespace C2
 
         private void flowChartButton_MouseDown(object sender, MouseEventArgs e)
         {
-            this.IAOLabButton.BackColor = Color.FromArgb(228,60,89); 
+            
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.IAOLabButton.BackColor = Color.FromArgb(228, 60, 89);
+                    break;
+            }
         }
 
     

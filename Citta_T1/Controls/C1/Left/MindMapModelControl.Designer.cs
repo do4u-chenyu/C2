@@ -35,7 +35,7 @@
             // 
             // ItemLabel
             // 
-            this.ItemLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ItemLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.ItemLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ItemLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ItemLabel.Location = new System.Drawing.Point(0, 0);
