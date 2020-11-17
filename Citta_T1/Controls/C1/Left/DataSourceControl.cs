@@ -136,5 +136,58 @@ namespace C2.Controls.Left
             // 强制编辑控件失去焦点,触发重命名控件的Leave事件 
             Global.GetMainForm().BlankButtonFocus();
         }
+
+        private void externalFrame_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics,
+                        this.externalFrame.ClientRectangle,
+                        Color.FromArgb(195, 195, 195),//7f9db9                              
+                        1,
+                        ButtonBorderStyle.Solid,
+                        Color.FromArgb(195, 195, 195),
+                        1,
+                        ButtonBorderStyle.Solid,
+                        Color.FromArgb(195, 195, 195),
+                        1,
+                        ButtonBorderStyle.Solid,
+                        Color.FromArgb(230, 230, 230),
+                        1,
+                        ButtonBorderStyle.Solid);
+        }
+
+        private void localFrame_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics,
+                           this.localFrame.ClientRectangle,
+                           Color.FromArgb(195, 195, 195),//7f9db9                              
+                           1,
+                           ButtonBorderStyle.Solid,
+                          Color.FromArgb(195, 195, 195),
+                           1,
+                           ButtonBorderStyle.Solid,
+                           Color.FromArgb(195, 195, 195),
+                           1,
+                           ButtonBorderStyle.Solid,
+                           Color.FromArgb(195, 195, 195),
+                           1,
+                           ButtonBorderStyle.Solid);
+
+        }
+
+        private void DataSourceControl_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;  //Graphics g =  this.CreateGraphics();
+            Pen p = new Pen(Color.Black, 2);  //黑色画笔 2宽度.
+            //p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot; //系统中的虚线样式
+            //g.DrawLine(p, 10, 10, 500, 10);
+            //p = new Pen(Color.Black, 4);  //黑色画笔 4宽度.
+            //p.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; //自定义样式
+            //p.DashPattern = new float[] { 5, 5 };
+            //g.DrawLine(p, 10, 30, 500, 30);
+            p = new Pen(Color.FromArgb(195, 195, 195), 1);  //黑色画笔 8宽度.
+            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+            p.DashPattern = new float[] { 4, 4 };
+            g.DrawLine(p, 0, 30, 200, 30);
+        }
     }
 }

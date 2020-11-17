@@ -340,7 +340,7 @@ namespace C2
             // 
             this.dataSourceControl.AllowDrop = true;
             this.dataSourceControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dataSourceControl.BackColor = System.Drawing.Color.DarkRed;
+            this.dataSourceControl.BackColor = System.Drawing.Color.White;
             this.dataSourceControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
