@@ -1706,7 +1706,6 @@
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
-    <None Include="Resources\C1\displaypanel\leftfold.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <Content Include="Resources\C1\opControl_ico\AI.ico" />
     <Content Include="Resources\C1\opControl_ico\avgOp.ico" />
@@ -2510,7 +2509,6 @@
     <None Include="Resources\C1\toolbox\run.png" />
     <None Include="Resources\C1\toolbox\continual.png" />
     <None Include="Resources\C1\toolbox\importmodel.png" />
-    <Content Include="Resources\C1\leftpanelmenu\startPageTitle.jpg" />
     <None Include="Resources\提示1.png" />
     <None Include="Resources\WidgetIcon\数据.png" />
     <None Include="Resources\WidgetIcon\算子.png" />

@@ -262,9 +262,6 @@
   <data name="operator_back" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\operator_back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="startPageTitle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StartPage\startPageTitle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="image_resize" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\image_resize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -354,9 +351,6 @@
   </data>
   <data name="筛选" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\筛选.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="leftfold" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\displaypanel\leftfold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -534,9 +528,6 @@
   </data>
   <data name="首页" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\首页.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="modelTop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StartPage\modelTop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="sort_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\排序.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -2159,9 +2150,6 @@
   </data>
   <data name="question_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\question_large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dataStorge" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StartPage\dataStorge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folding_expand" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\folding_expand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
