@@ -35,7 +35,6 @@ namespace C2.Controls
         public void RefreshItems()
         {
             SuspendLayout();
-
             int old = SelectedIndex;
 
             Clear();

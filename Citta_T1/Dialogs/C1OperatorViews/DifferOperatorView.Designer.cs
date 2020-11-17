@@ -71,12 +71,12 @@
             // 
             // comboBox0
             // 
-            this.comboBox0.Location = new System.Drawing.Point(2, 3);
+            this.comboBox0.Location = new System.Drawing.Point(2, 2);
             this.comboBox0.Size = new System.Drawing.Size(145, 26);
             // 
             // comboBox1
             // 
-            this.comboBox1.Location = new System.Drawing.Point(151, 3);
+            this.comboBox1.Location = new System.Drawing.Point(151, 2);
             this.comboBox1.Size = new System.Drawing.Size(146, 26);
             this.comboBox1.Visible = true;
             // 

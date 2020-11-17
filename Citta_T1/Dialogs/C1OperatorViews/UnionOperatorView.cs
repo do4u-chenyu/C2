@@ -224,7 +224,11 @@ namespace C2.OperatorViews
         #endregion
         protected override void CreateLine(int addLine)
         {
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(1, 1);
+            if (this.tableLayoutPanel1.RowCount == 1)
+            {
+                this.tableLayoutPanel2.Location = new System.Drawing.Point(1, 1);
+            }
+            
             // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
             data0ComboBox.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
