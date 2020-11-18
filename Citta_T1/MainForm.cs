@@ -120,8 +120,8 @@ namespace C2
             navBtnLast.Click += navBtnLast_Click;
             TaskBar.LeftButtons.Add(navBtnFirst);
             TaskBar.LeftButtons.Add(navBtnPrev);
-            TaskBar.RightButtons.Add(navBtnNext);
-            TaskBar.RightButtons.Add(navBtnLast);
+            TaskBar.RightButtons.Insert(0, navBtnNext);
+            TaskBar.RightButtons.Insert(1, navBtnLast);
 
             TaskBar.AllowScrollPage = true;
         }
