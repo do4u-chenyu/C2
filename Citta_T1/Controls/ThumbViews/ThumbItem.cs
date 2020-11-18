@@ -197,7 +197,9 @@ namespace C2.Controls
             if (Image != null)
             {
                 var rectImg = new Rectangle(Left, Top, Width, Height  - 4);
-                PaintHelper.DrawImageInRange(e.Graphics, Image, rectImg);
+                // modified by DK: 小白的缩略图需要放大。
+                // 图标大小修改，需要改一下PaintHelp方法
+                PaintHelper.DrawImageInRange(e.Graphics, Image, rectImg, true);
             }
 
             return true;

@@ -275,19 +275,19 @@ namespace C2.Controls
             }
         }
 
-        public static bool DrawImageInRange(Graphics grf, Image image, Rectangle rect)
+        public static bool DrawImageInRange(Graphics grf, Image image, Rectangle rect, bool picZoomIn = false)
         {
-            return DrawImageInRange(grf, image, rect, new Rectangle(0, 0, image.Width, image.Height));
+            return DrawImageInRange(grf, image, rect, new Rectangle(0, 0, image.Width, image.Height), picZoomIn);
         }
 
-        public static bool DrawImageInRange(Graphics grf, Image image, Rectangle rectD, Rectangle rectS)
+        public static bool DrawImageInRange(Graphics grf, Image image, Rectangle rectD, Rectangle rectS, bool picZoomIn = false)
         {
             if (grf == null || image == null || rectD.Width <= 0 || rectD.Height <= 0)
             {
                 return false;
             }
 
-            Rectangle rectImage = GetRectInBounds(rectD, rectS.Width, rectS.Height);
+            Rectangle rectImage = GetRectInBounds(rectD, rectS.Width, rectS.Height, picZoomIn);
             if (rectImage.Width > 0 && rectImage.Height > 0)
             {
                 grf.DrawImage(image, rectImage, rectS.Left, rectS.Top, rectS.Width, rectS.Height, GraphicsUnit.Pixel);
@@ -1109,13 +1109,30 @@ namespace C2.Controls
             User32.ReleaseDC(IntPtr.Zero, dc);
         }
 
-        public static Rectangle GetRectInBounds(Rectangle bounds, int width, int height)
+        public static Rectangle GetRectInBounds(Rectangle bounds, int width, int height, bool picZoomIn=false)
         {
             int w;
             int h;
-            decimal r = Math.Min((decimal)bounds.Width / width, (decimal)bounds.Height / height);
-            w = (int)Math.Ceiling(width * r);
-            h = (int)Math.Ceiling(height * r);
+            if (picZoomIn)
+            {
+                decimal r = Math.Min((decimal)bounds.Width / width, (decimal)bounds.Height / height);
+                w = (int)Math.Ceiling(width * r);
+                h = (int)Math.Ceiling(height * r);
+            }
+            else
+            {
+                if (width <= bounds.Width && height <= bounds.Height)
+                {
+                    w = width;
+                    h = height;
+                }
+                else
+                {
+                    decimal r = Math.Min((decimal)bounds.Width / width, (decimal)bounds.Height / height);
+                    w = (int)Math.Ceiling(width * r);
+                    h = (int)Math.Ceiling(height * r);
+                }
+            }
             return new Rectangle(bounds.Left + (bounds.Width - w) / 2
                 , bounds.Top + (bounds.Height - h) / 2, w, h);
         }
