@@ -487,8 +487,12 @@ namespace C2.Forms
                 else if (dr == DialogResult.Cancel)
                 {
                     e.Cancel = true;
+                    return;
                 }
             }
+            // 释放提示信息
+            if (this.ActiveChartBox is MindMapView)
+                (this.ActiveChartBox as MindMapView).C2WidgetTip.Dispose();
         }
 
         protected override void OnGotFocus(EventArgs e)
