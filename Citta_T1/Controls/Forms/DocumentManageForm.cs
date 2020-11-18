@@ -1,4 +1,5 @@
-﻿using C2.WorkSpace;
+﻿using C2.Forms;
+using C2.WorkSpace;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -164,7 +165,11 @@ namespace C2.Controls
                     ti.Icon = form.IconImage;
                 else
                     ti.Icon = PaintHelper.IconToImage(form.Icon);
-                TaskBar.Items.Add(ti);
+
+                if(form is CanvasForm)
+                    TaskBar.Items.Insert(TaskBar.Items.IndexOf(TaskBar.SelectedItem)+1 ,ti);
+                else
+                    TaskBar.Items.Add(ti);
 
                 TaskBar.SelectedItem = ti;
             }
@@ -206,10 +211,21 @@ namespace C2.Controls
         {
             if (e.Item != null && e.Item.Tag is Form)
             {
-                if (MdiClient != null)
-                    MdiClient.CloseMdiForm((Form)e.Item.Tag);
-                else
+                if( MdiClient == null)
                     ((Form)e.Item.Tag).Close();
+                else if(e.Item.Tag is DocumentForm)
+                {
+                    //不仅仅关闭当前form，关联form也要关掉
+                    TabItem[] relateItem = TaskBar.Items.Where(ti=> ti.Tag is CanvasForm).Where(ti => ti.ToolTipText.Split('-')[0] == e.Item.Text).ToArray();
+                    foreach(TabItem ti in relateItem)
+                    {
+                        MdiClient.CloseMdiForm((Form)ti.Tag);
+                    }
+                    if(TaskBar.Items.Where(ti => ti.Tag is CanvasForm).Where(ti => ti.ToolTipText.Split('-')[0] == e.Item.Text).ToArray().Count() == 0)
+                        MdiClient.CloseMdiForm((Form)e.Item.Tag);
+                }
+                else
+                    MdiClient.CloseMdiForm((Form)e.Item.Tag);                    
             }
         }
 
