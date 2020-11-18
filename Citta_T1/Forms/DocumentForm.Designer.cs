@@ -505,7 +505,6 @@ namespace C2.Forms
             this.TsbFullScreen.Padding = new System.Windows.Forms.Padding(2);
             this.TsbFullScreen.Size = new System.Drawing.Size(24, 25);
             this.TsbFullScreen.Text = "Full Screen";
-            this.TsbFullScreen.Visible = false;
             this.TsbFullScreen.Click += new System.EventHandler(this.TsbFullScreen_Click);
             // 
             // TsbSidebar
