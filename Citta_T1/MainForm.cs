@@ -361,12 +361,16 @@ namespace C2
                 this.isLeftViewPanelMinimum = false;
                 this.leftToolBoxPanel.Width = 187;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+                this.dataSourceControl.Visible = true;
+                this.mindMapModelControl.Visible = true;
             }
             else
             {
                 this.isLeftViewPanelMinimum = true;
                 this.leftToolBoxPanel.Width = 10;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
+                this.dataSourceControl.Visible = false;
+                this.mindMapModelControl.Visible = false;
             }
         }
 

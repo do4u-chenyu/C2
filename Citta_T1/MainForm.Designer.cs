@@ -683,6 +683,8 @@ namespace C2
             // 
             // MainForm
             // 
+            this.dataSourceControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1233, 606);
             this.Controls.Add(this.blankButton);
