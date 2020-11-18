@@ -60,7 +60,7 @@ namespace C2.Core
             Csv = new DocumentType("CSV",
                 "text/csv",
                 new string[] { ".csv" });
-            FreeMind = new DocumentType("FreeMind", 
+            FreeMind = new DocumentType("FreeMind",
                 "application/freemind",
                 new string[] { ".mm" });
             C2 = new DocumentType("C2",
