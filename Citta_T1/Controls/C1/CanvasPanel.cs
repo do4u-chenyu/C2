@@ -37,7 +37,6 @@ namespace C2.Controls
         private static bool leftButtonDown = false;
         private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public event NewElementEventHandler NewElementEvent;
-        private Bitmap staticImage;
         //屏幕拖动涉及的变量
         private readonly DragWrapper dragWrapper;
         private FrameWrapper frameWrapper;
@@ -47,6 +46,7 @@ namespace C2.Controls
         private MoveBaseControl startC;
         private MoveBaseControl endC;
         private Rectangle invalidateRectWhenMoving;
+        private Rectangle oldInvalidateRectWhenMoving;
         private Bezier lineWhenMoving;
         private List<int> selectLineIndexs = new List<int> { };
         private bool delEnable = false;
@@ -204,16 +204,6 @@ namespace C2.Controls
             this.cmd = ECommandType.PinDraw;
             this.StartC = sender as MoveBaseControl;
             this.StartP = new PointF(e.X, e.Y);
-            if (this.staticImage != null)
-            {
-                this.staticImage.Dispose();
-                this.staticImage = null;
-            }
-            this.staticImage = new Bitmap(this.Width, this.Height);
-            Graphics g = Graphics.FromImage(this.staticImage);
-            g.Clear(this.BackColor);
-            this.RepaintStatic(g);
-            g.Dispose();
         }
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
@@ -241,9 +231,9 @@ namespace C2.Controls
              */
             PointF nowP = e.Location;
             if (this.lineWhenMoving != null)
-                invalidateRectWhenMoving = LineUtil.ConvertRect(this.lineWhenMoving.GetBoundingRect());
+                oldInvalidateRectWhenMoving = LineUtil.ConvertRect(this.lineWhenMoving.GetBoundingRect());
             else
-                invalidateRectWhenMoving = new Rectangle();
+                oldInvalidateRectWhenMoving = new Rectangle();
             // 遍历所有OpControl的leftPin
             // 是否在一轮循环中被多次修正？=> 只要控件不堆叠在一起，就不会出现被多个控件修正的情况
             // 只要在循环中被修正一次，就退出，防止被多个控件修正坐标
@@ -262,11 +252,10 @@ namespace C2.Controls
             }
             EndP = nowP;
             this.lineWhenMoving = new Bezier(StartP, nowP);
-            // 不应该挡住其他的线
-            CoverPanelByRect(invalidateRectWhenMoving);
             this.lineWhenMoving.OnMouseMove(nowP);
-            // 重绘曲线
-            RepaintObject(this.lineWhenMoving);
+            invalidateRectWhenMoving = LineUtil.ConvertRect(this.lineWhenMoving.GetBoundingRect());
+            this.Invalidate(oldInvalidateRectWhenMoving);
+            this.Invalidate(invalidateRectWhenMoving);
         }
         public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
         {
@@ -552,31 +541,6 @@ namespace C2.Controls
             g.Dispose();
         }
 
-
-        /*
-         * 使用静态图的指定位置的指定大小来覆盖当前屏幕的指定位置的指定大小
-         */
-        public void CoverPanelByRect(Rectangle r)
-        {
-            if (this.staticImage == null)
-                return;
-            Graphics g = this.CreateGraphics();
-            if (r.X < 0) r.X = 0;
-            if (r.X > this.staticImage.Width) r.X = 0;
-            if (r.Y < 0) r.Y = 0;
-            if (r.Y > this.staticImage.Height) r.Y = 0;
-
-            if (r.Width > this.staticImage.Width || r.Width < 0)
-                r.Width = this.staticImage.Width;
-            if (r.Height > this.staticImage.Height || r.Height < 0)
-                r.Height = this.staticImage.Height;
-            // 用保存好的图来局部覆盖当前背景图
-            r.Inflate(1, 1);
-            g.DrawImage(this.staticImage, r, r, GraphicsUnit.Pixel);
-            g.Dispose();
-
-        }
-
         private bool CanNotPinDraw()
         {
             // return this.endC == null || !(this.endC is MoveOpControl) || !(this.startC is MoveDtControl || this.startC is MoveRsControl);
@@ -632,6 +596,11 @@ namespace C2.Controls
             // 将当前文档所有的线全部画出来
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             this.Document.UpdateAllLines();
+            if (this.lineWhenMoving != null)
+            {
+                Bezier b = this.lineWhenMoving;
+                LineUtil.DrawBezier(e.Graphics, b.StartP, b.A, b.B, b.EndP, false);
+            }
             foreach (ModelRelation mr in doc.ModelRelations)
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
         }
