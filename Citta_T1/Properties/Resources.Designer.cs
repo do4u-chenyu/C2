@@ -483,6 +483,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap copyfilepath {
+            get {
+                object obj = ResourceManager.GetObject("copyfilepath", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap cross_large {
             get {
                 object obj = ResourceManager.GetObject("cross_large", resourceCulture);
@@ -3198,7 +3208,8 @@ namespace C2.Properties {
         ///		&lt;item name=&quot;About&quot;&gt;关于&lt;/item&gt;
         ///		&lt;item name=&quot;Menu&quot;&gt;菜 单&lt;/item&gt;
         ///		&lt;item name=&quot;Open&quot;&gt;打开&lt;/item&gt;
-        ///		&lt;item name=&quot;N [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;item name=&quot;New&quot;&gt;新建&lt;/item&gt;
+        ///		&lt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string zh_CHS {
             get {
@@ -3353,7 +3364,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 思维导图 {
             get {
@@ -3438,7 +3450,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 树状图 {
             get {
@@ -3483,7 +3496,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 空模板 {
             get {
@@ -3528,7 +3542,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 组织架构图 {
             get {
@@ -3563,7 +3578,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 逻辑图 {
             get {

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using C2.Configuration;
+﻿using C2.Configuration;
 using C2.Controls;
 using C2.Core;
 using C2.Globalization;
 using C2.Model.Documents;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace C2.Dialogs
 {
@@ -101,13 +99,13 @@ namespace C2.Dialogs
 
             // labExportType
             labExportType.Anchor = AnchorStyles.Left;
-            labExportType.Text = "Export Type";
+            labExportType.Text = Lang._("Export Type");
             labExportType.AutoSize = true;
             labExportType.Padding = new Padding(0, 2, 0, 2);
 
             // labCharts
             labCharts.Anchor = AnchorStyles.Left;
-            labCharts.Text = "Charts";
+            labCharts.Text = Lang._("Charts");
             labCharts.AutoSize = true;
             labCharts.Padding = new Padding(0, 2, 0, 2);
 
@@ -125,7 +123,7 @@ namespace C2.Dialogs
             // ExportDocumentDialog
             ClientSize = new Size(600, 400);
             Controls.Add(this.tableLayoutPanel1);
-            Text = "Export Document";
+            Text = Lang._("Export Document");
             tableLayoutPanel1.ResumeLayout();
             ResumeLayout();
         }

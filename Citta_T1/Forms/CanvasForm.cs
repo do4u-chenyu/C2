@@ -198,7 +198,7 @@ namespace C2.Forms
         {
             if (!HardClose && Document != null && Document.Modified && !ReadOnly)
             {
-                DialogResult result = MessageBox.Show("有尚未保存的模型，是否保存后关闭？",
+                DialogResult result = MessageBox.Show(Document.Name+" 尚未保存，是否保存后关闭？",
                             "保存", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 // 取消操作
                 if (result == DialogResult.Cancel)

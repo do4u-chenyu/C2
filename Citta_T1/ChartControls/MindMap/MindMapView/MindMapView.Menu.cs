@@ -447,7 +447,7 @@ namespace C2.Controls.MapViews
                 MenuExploreDirectory.Tag = path;
                 MenuExploreDirectory.Click += MenuExploreDirectory_Click;
 
-                MenuCopyFilePathToClipboard.Image = Properties.Resources.copy;
+                MenuCopyFilePathToClipboard.Image = Properties.Resources.copyfilepath;
                 MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
                 MenuCopyFilePathToClipboard.Tag = path;
                 MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;

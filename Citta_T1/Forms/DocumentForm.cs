@@ -1162,8 +1162,7 @@ namespace C2.Forms
                     DocumentType.Gif, 
                     DocumentType.Tiff,}),
                 new DocumentTypeGroup("XML", new DocumentType[]{
-                    DocumentType.Svg,
-                    DocumentType.FreeMind}),
+                    DocumentType.Svg}),
                 new DocumentTypeGroup("Text", new DocumentType[]{
                     DocumentType.Txt,
                     DocumentType.Csv}),
@@ -1179,7 +1178,7 @@ namespace C2.Forms
         //}
         private string GetModelPath()
         {
-            string modelPath = Path.Combine(Global.UserWorkspacePath,"业务视图",Document.Name);
+            string modelPath = Path.Combine(Global.UserWorkspacePath, "业务视图",Document.Name);
             if (!modelPath.EndsWith("\\"))
                 modelPath += "\\";
             return modelPath;

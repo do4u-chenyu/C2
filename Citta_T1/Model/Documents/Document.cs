@@ -160,8 +160,8 @@ namespace C2.Model.Documents
         public DocumentTypeGroup[] GetExportDocumentTypes()
         {
             return new DocumentTypeGroup[] {
-                new DocumentTypeGroup("PDF", new DocumentType[]{
-                    DocumentType.Pdf}),
+                //new DocumentTypeGroup("PDF", new DocumentType[]{
+                //    DocumentType.Pdf}),
                 new DocumentTypeGroup("Image", new DocumentType[]{
                     DocumentType.Png, 
                     DocumentType.Jpeg, 
@@ -169,8 +169,7 @@ namespace C2.Model.Documents
                     DocumentType.Gif, 
                     DocumentType.Tiff,}),
                 new DocumentTypeGroup("XML", new DocumentType[]{
-                    DocumentType.Svg,
-                    DocumentType.FreeMind}),
+                    DocumentType.Svg}),
                 new DocumentTypeGroup("Text", new DocumentType[]{
                     DocumentType.Txt,
                     DocumentType.Csv}),

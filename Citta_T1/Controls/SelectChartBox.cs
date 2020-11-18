@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using C2.Configuration;
-using C2.Core;
+﻿using C2.Configuration;
 using C2.Globalization;
 using C2.Model.Documents;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace C2.Controls
 {
@@ -135,21 +131,21 @@ namespace C2.Controls
             radioButton1.Anchor = AnchorStyles.Left;
             radioButton1.AutoSize = true;
             radioButton1.TabIndex = 1;
-            radioButton1.Text = "All Charts";
+            radioButton1.Text = Lang._("All Charts");
             radioButton1.CheckedChanged += radioButton1_CheckedChanged;
 
             // radioButton2
             radioButton2.Anchor = AnchorStyles.Left;
             radioButton2.AutoSize = true;
             radioButton2.TabIndex = 2;
-            radioButton2.Text = "Current Chart";
+            radioButton2.Text = Lang._("Current Chart");
             radioButton2.CheckedChanged += radioButton2_CheckedChanged;
 
             // radioButton3
             radioButton3.Anchor = AnchorStyles.Left;
             radioButton3.AutoSize = true;
             radioButton3.TabIndex = 3;
-            radioButton3.Text = "Select Below:";
+            radioButton3.Text = Lang._("Select Below");
             radioButton3.CheckedChanged += radioButton3_CheckedChanged;
 
             // listBoxEx2
@@ -162,7 +158,7 @@ namespace C2.Controls
             // ExportDocumentDialog
             ClientSize = new Size(600, 400);
             Controls.Add(this.tableLayoutPanel1);
-            Text = "Export Document";
+            Text = Lang._("Export Document");
             tableLayoutPanel1.ResumeLayout();
             ResumeLayout();
         }
