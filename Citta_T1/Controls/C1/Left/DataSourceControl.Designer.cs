@@ -78,11 +78,11 @@
             this.localFrame.AutoScroll = true;
             this.localFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.localFrame.BackColor = System.Drawing.Color.White;
+            this.localFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.localFrame.Location = new System.Drawing.Point(3, 36);
             this.localFrame.Name = "localFrame";
             this.localFrame.Size = new System.Drawing.Size(179, 620);
             this.localFrame.TabIndex = 1;
-            this.localFrame.Paint += new System.Windows.Forms.PaintEventHandler(this.localFrame_Paint);
             this.localFrame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataSourceControl_MouseDown);
             // 
             // externalFrame
@@ -90,12 +90,12 @@
             this.externalFrame.AutoScroll = true;
             this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.externalFrame.BackColor = System.Drawing.Color.White;
+            this.externalFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.externalFrame.Location = new System.Drawing.Point(3, 36);
             this.externalFrame.Name = "externalFrame";
             this.externalFrame.Size = new System.Drawing.Size(179, 620);
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
-            this.externalFrame.Paint += new System.Windows.Forms.PaintEventHandler(this.externalFrame_Paint);
             // 
             // DataSourceControl
             // 
