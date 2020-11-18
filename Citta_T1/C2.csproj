@@ -1941,6 +1941,7 @@
     <None Include="Resources\Images\WidgetImage\xmindData.png" />
     <None Include="Resources\Images\WidgetImage\deleteattachment.png" />
     <None Include="Resources\Images\WidgetImage\copyfilepath.png" />
+    <None Include="Resources\Images\WidgetImage\modelUpdate.png" />
     <Content Include="Resources\Languages\hi.IN.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
