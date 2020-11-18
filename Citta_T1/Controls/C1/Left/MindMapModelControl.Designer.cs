@@ -52,7 +52,7 @@
             this.Itempanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.Itempanel.Location = new System.Drawing.Point(0, 0);
             this.Itempanel.Name = "Itempanel";
-            this.Itempanel.Size = new System.Drawing.Size(182, 30);
+            this.Itempanel.Size = new System.Drawing.Size(185, 30);
             this.Itempanel.TabIndex = 1;
             // 
             // MindMapPaintPanel
@@ -69,13 +69,12 @@
             // MindMapModelControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.Itempanel);
             this.Controls.Add(this.MindMapPaintPanel);
             this.Name = "MindMapModelControl";
-            this.Size = new System.Drawing.Size(168, 620);
+            this.Size = new System.Drawing.Size(185, 637);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MindMapModelControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MindMapModelControl_MouseDown);
             this.Itempanel.ResumeLayout(false);
