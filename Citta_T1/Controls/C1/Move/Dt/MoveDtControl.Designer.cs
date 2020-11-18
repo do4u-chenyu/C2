@@ -38,9 +38,10 @@
             // 
             // rightPictureBox
             // 
+            this.rightPictureBox.BackColor = System.Drawing.SystemColors.Window;
             this.rightPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(151, 5);
+            this.rightPictureBox.Location = new System.Drawing.Point(158, 6);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.rightPictureBox.TabIndex = 1;
             this.rightPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseDown);
@@ -64,7 +65,7 @@
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox.Location = new System.Drawing.Point(27, 0);
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(111, 23);
+            this.textBox.Size = new System.Drawing.Size(111, 29);
             this.textBox.TabIndex = 5;
             this.textBox.Visible = false;
             // 
@@ -174,7 +175,7 @@
         }
 
         #endregion
-    
+
         private System.Windows.Forms.ToolStripMenuItem OptionMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RunMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LogMenuItem;
