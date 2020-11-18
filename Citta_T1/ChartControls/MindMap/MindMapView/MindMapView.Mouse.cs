@@ -74,6 +74,7 @@ namespace C2.Controls.MapViews
         }
 
         DragTopicsMethod CurrentDragMethod { get; set; }
+        public ToolTip C2WidgetTip1 { get => C2WidgetTip; set => C2WidgetTip = value; }
 
         void OnHoverObjectChanged(HitTestResult old)
         {
@@ -698,7 +699,7 @@ namespace C2.Controls.MapViews
         {
             Point tipLoc = topic.Location;    // 确定提示框位置
             tipLoc.Offset(widget.Location);
-            C2WidgetTip.Show(widget.Description, Global.GetMainForm().MdiClient, PointToReal(tipLoc), 3000);
+            C2WidgetTip.Show(widget.Description, Global.GetDocumentForm(), PointToReal(tipLoc), 3000);
         }
 
         public void ShowToolTip(string text, string hyperlink, bool alwayVisible)
