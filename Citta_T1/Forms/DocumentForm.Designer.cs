@@ -75,7 +75,7 @@ namespace C2.Forms
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbZoomIn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.TsbFullScreen = new System.Windows.Forms.ToolStripButton();
+            this.TsbExport = new System.Windows.Forms.ToolStripButton();
             this.TsbSidebar = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.progressBarLabel = new System.Windows.Forms.Label();
@@ -158,7 +158,7 @@ namespace C2.Forms
             this.TsbZoom,
             this.TsbZoomIn,
             this.toolStripSeparator5,
-            this.TsbFullScreen,
+            this.TsbExport,
             this.TsbSidebar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -494,18 +494,17 @@ namespace C2.Forms
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Padding = new System.Windows.Forms.Padding(2);
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 28);
-            this.toolStripSeparator5.Visible = false;
             // 
-            // TsbFullScreen
+            // TsbExport
             // 
-            this.TsbFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbFullScreen.Image = global::C2.Properties.Resources.full_screen;
-            this.TsbFullScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbFullScreen.Name = "TsbFullScreen";
-            this.TsbFullScreen.Padding = new System.Windows.Forms.Padding(2);
-            this.TsbFullScreen.Size = new System.Drawing.Size(24, 25);
-            this.TsbFullScreen.Text = "Full Screen";
-            this.TsbFullScreen.Click += new System.EventHandler(this.TsbFullScreen_Click);
+            this.TsbExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbExport.Image = global::C2.Properties.Resources.full_screen;
+            this.TsbExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbExport.Name = "TsbExport";
+            this.TsbExport.Padding = new System.Windows.Forms.Padding(2);
+            this.TsbExport.Size = new System.Drawing.Size(24, 25);
+            this.TsbExport.Text = "Export";
+            this.TsbExport.Click += new System.EventHandler(this.TsbExport_Click);
             // 
             // TsbSidebar
             // 
@@ -706,7 +705,7 @@ namespace C2.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton TsbZoomIn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripButton TsbFullScreen;
+        private System.Windows.Forms.ToolStripButton TsbExport;
         private System.Windows.Forms.ToolStripButton TsbSidebar;
         private System.Windows.Forms.Panel panel1;
         private Controls.MySplitter splitter1;

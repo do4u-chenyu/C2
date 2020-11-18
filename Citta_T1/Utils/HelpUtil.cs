@@ -38,6 +38,7 @@ namespace C2.Utils
         public static string OperatorWidgetHelpInfo = "算子:内置多种算子,支持Python脚本和自主建模";
         public static string ResultWidgetHelpInfo = "运算结果:算子和高级模型运算后生成的结果,支持预览";
         public static string DataSourceWidgetHelpInfo = "数据源:支持添加多个数据源,支持多种类型文档";
+        public static string ExportImageHelpInfo = "导出:支持导出成多种格式的图片";
 
 
         /// <summary>
