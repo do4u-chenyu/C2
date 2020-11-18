@@ -26,6 +26,8 @@ namespace C2.Controls
             Options.Current.OpitonsChanged += new EventHandler(Options_OpitonsChanged);
             //Options.Default.UISettingChanged += new EventHandler(Options_UISettingChanged);
         }
+        [Browsable(false)]
+        public virtual string FormNameToolTip { set; get; }
 
         [DefaultValue(null)]
         public Image IconImage

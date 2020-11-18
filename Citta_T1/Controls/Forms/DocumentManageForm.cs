@@ -159,6 +159,7 @@ namespace C2.Controls
                 ti.Text = form.Text;
                 ti.CanClose = canClose;
                 ti.Tag = form;
+                ti.ToolTipText = form.FormNameToolTip;
                 if (form is BaseForm)
                     ti.Icon = form.IconImage;
                 else
