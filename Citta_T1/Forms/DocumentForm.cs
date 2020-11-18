@@ -3,6 +3,7 @@ using C2.Configuration;
 using C2.Controls;
 using C2.Controls.MapViews;
 using C2.Core;
+using C2.Core.Exports;
 using C2.Design;
 using C2.Dialogs;
 using C2.Globalization;
@@ -487,8 +488,12 @@ namespace C2.Forms
                 else if (dr == DialogResult.Cancel)
                 {
                     e.Cancel = true;
+                    return;
                 }
             }
+            // 释放提示信息
+            if (this.ActiveChartBox is MindMapView)
+                (this.ActiveChartBox as MindMapView).C2WidgetTip.Dispose();
         }
 
         protected override void OnGotFocus(EventArgs e)
@@ -1440,7 +1445,20 @@ namespace C2.Forms
 
         void TsbFullScreen_Click(object sender, EventArgs e)
         {
-            FullScreen = !FullScreen;
+            //FullScreen = !FullScreen;
+            if (Document == null)
+                return;
+            
+            var dialog = new ExportDocumentDialog(Document);
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                var engine = ChartsExportEngine.GetEngine(dialog.DocumentType.TypeMime);
+                if (engine == null)
+                    this.ShowMessage("The format is not supported", MessageBoxIcon.Error);
+                else
+                    engine.Export(dialog.Document, dialog.SelectedCharts);
+            }
+            
         }
 
         void TsbFind_Click(object sender, EventArgs e)

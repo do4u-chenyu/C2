@@ -112,10 +112,11 @@ namespace C2.Forms
         {
             Document = document;
         }
-        public CanvasForm(ModelDocument document,Topic topic) : this()
+        public CanvasForm(ModelDocument document,Topic topic,string mindMapName) : this()
         {
             Document = document;
-            RelateTopic = topic; 
+            RelateTopic = topic;
+            FormNameToolTip = string.Format("{0}-{1}-{2}", mindMapName, topic.Text,document.Name);
         }
         public Topic RelateTopic { set; get; }
 

@@ -129,9 +129,9 @@ namespace C2.Controls.MapViews
                 TsbAddLink.Enabled = hasSelected;
                 TsbAddSubTopic.Enabled = hasSelected;
                 TsbAddTopic.Enabled = hasSelected && !SelectedTopic.IsRoot;
-                TsbAddIcon.Enabled = hasSelected;
-                TsbAddRemark.Enabled = hasSelected;
-                TsbAddProgressBar.Enabled = hasSelected;
+                TsbAddIcon.Enabled = hasSelected && SelectedTopics.Length ==1;
+                TsbAddRemark.Enabled = hasSelected && SelectedTopics.Length == 1;
+                TsbAddProgressBar.Enabled = hasSelected && SelectedTopics.Length == 1;
             }
         }
 
