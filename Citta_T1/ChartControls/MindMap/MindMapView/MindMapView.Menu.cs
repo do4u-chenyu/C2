@@ -129,7 +129,7 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuOpPublic = new ToolStripMenuItem();
             ToolStripMenuItem MenuOpDelete = new ToolStripMenuItem();
 
-            MenuOpenOperator.Image = opw.GetOpOpenOperatorImage();
+            MenuOpenOperator.Image = type == "single" ? opw.GetOpOpenOperatorImage() : Properties.Resources.算子; 
             MenuOpenOperator.Text = type == "single" ? opw.OpName: opw.ModelDataItem.FileName;
             MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuOpDesign,
@@ -174,7 +174,7 @@ namespace C2.Controls.MapViews
             else
             {
                 Topic topic = opw.Container as Topic;
-                string modelDocumentName = string.Format("{0}-模型视图", topic.Text);
+                string modelDocumentName = opw.ModelDataItem.FileName;
                 Global.GetMainForm().LoadCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
             }
         }
