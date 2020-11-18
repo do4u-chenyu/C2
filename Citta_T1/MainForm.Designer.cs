@@ -354,7 +354,7 @@ namespace C2
             // 
             this.myModelControl.AutoScroll = true;
             this.myModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.myModelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.myModelControl.BackColor = System.Drawing.Color.White;
             this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myModelControl.Location = new System.Drawing.Point(0, 0);
             this.myModelControl.Margin = new System.Windows.Forms.Padding(4);

@@ -449,7 +449,7 @@ namespace C2
         public void NewCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
             ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName, mindMapName);
-            CanvasForm form = new CanvasForm(doc,topic);
+            CanvasForm form = new CanvasForm(doc,topic, mindMapName);
             ShowForm(form);
 
             List<DataItem> dataItems = new List<DataItem>();
@@ -464,7 +464,7 @@ namespace C2
         public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
             ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName, mindMapName);
-            CanvasForm form = new CanvasForm(doc, topic);
+            CanvasForm form = new CanvasForm(doc, topic, mindMapName);
             ShowForm(form);
 
             doc.Load();
