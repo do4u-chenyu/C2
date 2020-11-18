@@ -3,6 +3,7 @@ using C2.Configuration;
 using C2.Controls;
 using C2.Controls.MapViews;
 using C2.Core;
+using C2.Core.Exports;
 using C2.Design;
 using C2.Dialogs;
 using C2.Globalization;
@@ -487,8 +488,12 @@ namespace C2.Forms
                 else if (dr == DialogResult.Cancel)
                 {
                     e.Cancel = true;
+                    return;
                 }
             }
+            // 释放提示信息
+            if (this.ActiveChartBox is MindMapView)
+                (this.ActiveChartBox as MindMapView).C2WidgetTip.Dispose();
         }
 
         protected override void OnGotFocus(EventArgs e)
@@ -530,8 +535,8 @@ namespace C2.Forms
             TsbThemes.Text = Lang._("Themes");
             TsbSave.Text = Lang._("Save");
             TsbSave.ToolTipText = Lang._("Save", KeyMap.Save.Keys);
-            TsbFullScreen.Text = FullScreen ? Lang._("Exit Full Screen") : Lang._("Full Screen");
-            TsbFullScreen.ToolTipText = Lang._(TsbFullScreen.Text, KeyMap.FullScreen.Keys);
+            TsbExport.Text = Lang._("Export Image");
+            TsbExport.ToolTipText = HelpUtil.ExportImageHelpInfo;
             TsbZoomIn.Text = Lang._("Zoom In");
             TsbZoomIn.ToolTipText = Lang._("Zoom In", KeyMap.ZoomIn.Keys);
             TsbZoomOut.Text = Lang._("Zoom Out");
@@ -696,28 +701,6 @@ namespace C2.Forms
 
             //if (!Focused && CanFocus)
             //    Focus();
-        }
-
-        protected override void OnFullScreenChanged()
-        {
-            base.OnFullScreenChanged();
-
-            if (FullScreen)
-            {
-                TsbFullScreen.Image = Properties.Resources.full_screen_exit;
-                TsbFullScreen.Text = Lang._("Exit Full Screen");
-                TsbFullScreen.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            }
-            else
-            {
-                TsbFullScreen.Image = Properties.Resources.full_screen;
-                TsbFullScreen.Text = Lang._("Full Screen");
-                TsbFullScreen.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            }
-
-            splitContainer2.Visible = !FullScreen;
-            splitter1.Visible = !FullScreen;
-            TsbFullScreen.ToolTipText = Lang._(TsbFullScreen.Text, Keys.F11);
         }
 
         public override string GetFileName()
@@ -1438,9 +1421,21 @@ namespace C2.Forms
             //panel1.GlobalBackground.Update();
         }
 
-        void TsbFullScreen_Click(object sender, EventArgs e)
+        void TsbExport_Click(object sender, EventArgs e)
         {
-            FullScreen = !FullScreen;
+            if (Document == null)
+                return;
+            
+            var dialog = new ExportDocumentDialog(Document);
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                var engine = ChartsExportEngine.GetEngine(dialog.DocumentType.TypeMime);
+                if (engine == null)
+                    this.ShowMessage("不支持该格式的导出", MessageBoxIcon.Error);
+                else
+                    engine.Export(dialog.Document, dialog.SelectedCharts);
+            }
+            
         }
 
         void TsbFind_Click(object sender, EventArgs e)

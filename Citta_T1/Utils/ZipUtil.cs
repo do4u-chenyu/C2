@@ -1,7 +1,7 @@
 ﻿using C2.Core;
+using ICSharpCode.SharpZipLib.Checksum;
 using ICSharpCode.SharpZipLib.Zip;
 using System.IO;
-using System.Windows.Forms;
 
 namespace C2.Utils
 {
@@ -46,6 +46,8 @@ namespace C2.Utils
             Directory.CreateDirectory(workPath);
 
             (new FastZip()).ExtractZip(zipFilePath, targetPath, "");
+            Crc32 crc32 = new Crc32();
+            crc32.Update(new byte[] { 0x00, 0x01, 0x11 });
 
         }
 

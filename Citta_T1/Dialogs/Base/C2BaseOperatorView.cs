@@ -17,16 +17,13 @@ namespace C2.Dialogs.Base
     public partial class C2BaseOperatorView : BaseOperatorView
     {
         protected OperatorWidget operatorWidget;
-        protected string[] nowColumnsName0;         // 当前左表(pin0)数据源表头字段(columnName)
         protected List<string> oldOutName0;         // 上一次（左输出）输出表头字段
         protected List<int> oldOutList0;            // 上一次用户选择的左表输出字段的索引
         protected List<string> selectedColumns;     // 本次配置用户选择的输出字段名称
         protected string oldOptionDictStr;          // 旧配置字典的字符串表述
         protected int ColumnCount { get => this.tableLayoutPanel1.ColumnCount; }       // 有增减条件的表格步长
         protected DataItem dataInfo; // 加载左右表数据源基本信息: FFP, Description, EXTType, encoding, sep等
-        protected List<ComboBox> comboBoxes;
         protected string[] firstDataSourceColumns { get; set; }  //第一个入度的表头配置
-        protected readonly Dictionary<int, int> filterDict = new Dictionary<int, int>();
         public C2BaseOperatorView()
         {
             operatorWidget = null;
@@ -255,115 +252,6 @@ namespace C2.Dialogs.Base
             combox.DropDownClosed += new System.EventHandler(LeftComboBox_ClosedEvent);
             return combox;
         }
-
-        protected ComboBox NewComboBox()
-        {
-            ComboBox combox = new ComboBox
-            {
-                Anchor = AnchorStyles.Left | AnchorStyles.Right,
-                Font = new Font("微软雅黑", 8f, FontStyle.Regular)
-            };
-            comboBoxes.Add(combox);
-            return combox;
-        }
-
-        protected void GetLeftSelectedItemIndex(object sender, EventArgs e)
-        {
-            ComboBox comboBox = sender as ComboBox;
-            GetSelectedItemIndex(comboBox, nowColumnsName0);
-        }
-
-        protected void GetSelectedItemIndex(ComboBox comboBox, string[] nowColumns)
-        {
-            if (nowColumns.Length == 0)
-                return;
-            List<string> filterItems = new List<string>();
-            for (int i = 0; i < comboBox.Items.Count; i++)
-                filterItems.Add(comboBox.Items[i].ToString());
-
-
-            // 下拉列表中选取值
-            if (filterItems.SequenceEqual(nowColumns))
-            {
-                comboBox.Tag = comboBox.SelectedIndex.ToString();
-                return;
-            }
-
-            // 保存下拉列表选择字段的索引
-            if (filterDict.Keys.Contains(comboBox.SelectedIndex))
-                comboBox.Tag = filterDict[comboBox.SelectedIndex];
-
-        }
-
-        public void LeftComboBox_TextUpdate(object sender, EventArgs e)
-        { ComboBox_TextUpdate(sender as ComboBox, nowColumnsName0); }
-        public void ComboBox_TextUpdate(ComboBox comboBox, string[] nowColumns)
-        {
-            comboBox.SelectedIndex = -1;
-            comboBox.Tag = null;
-            int count = nowColumns.Length;
-            if (comboBox.Text == "" || count == 0)
-            {
-                comboBox.DroppedDown = false;
-                return;
-            }
-
-            filterDict.Clear();
-
-            //每次搜索文本改变，就是对字典重新赋值
-            comboBox.Items.Clear();
-            List<string> filterItems = new List<string>();
-
-            for (int i = 0; i < count; i++)
-            {
-                if (nowColumns[i].Contains(comboBox.Text))
-                {
-                    filterItems.Add(nowColumns[i]);
-                    // 模糊搜索得到的下拉列表字段索引对应原始下拉列表字段索引
-                    filterDict[filterItems.Count - 1] = i;
-                }
-            }
-
-            comboBox.Items.AddRange(filterItems.ToArray());
-            comboBox.SelectionStart = comboBox.Text.Length;
-            comboBox.DroppedDown = true;
-            //保持鼠标指针原来状态，有时候鼠标指针会被下拉框覆盖，所以要进行一次设置。
-            Cursor = Cursors.Default;
-        }
-        public void LeftComboBox_ClosedEvent(object sender, EventArgs e)
-        { ComboBox_ClosedEvent(sender as ComboBox, nowColumnsName0); }
-        public void ComboBox_ClosedEvent(ComboBox comboBox, string[] nowColumns)
-        {
-
-            if (nowColumns.Length == 0)
-                return;
-
-            // 恢复下拉列表原始字段
-            comboBox.Items.Clear();
-            comboBox.Items.AddRange(nowColumns);
-            if (comboBox.Tag != null && !comboBox.Tag.ToString().Equals("-1") && ConvertUtil.IsInt(comboBox.Tag.ToString()))
-            {
-                int index = Convert.ToInt32(comboBox.Tag.ToString());
-                comboBox.SelectedIndex = index;
-                comboBox.Text = nowColumns[index];
-            }
-
-            // 手动将字段全部输入，这时候selectItem.index=-1,我们将设成下拉列表第一个匹配字段的索引
-            if (comboBox.SelectedIndex == -1 && !string.IsNullOrEmpty(comboBox.Text))
-            {
-                for (int i = 0; i < nowColumns.Length; i++)
-                {
-                    if (nowColumns[i].Equals(comboBox.Text))
-                    {
-                        comboBox.SelectedIndex = i;
-                        comboBox.Tag = i;
-                        break;
-                    }
-                }
-            }
-
-        }
-
 
         protected TextBox NewAliasTextBox()
         {
