@@ -14,8 +14,10 @@ namespace C2.Controls.DataCharts
     public partial class RingChart : UserControl
     {
         public System.Windows.Forms.DataVisualization.Charting.Chart GetChart { get => this.chart1; }
+        public bool EmptyInput { get; set; }
         public RingChart(List<List<string>> dataList, List<string> title)
         {
+            EmptyInput = false;
             InitializeComponent();
             InitChart(title[0], title[1],title[2]);
 
@@ -161,6 +163,7 @@ namespace C2.Controls.DataCharts
         }
         void DataBind(List<string> x, List<string> y)
         {
+            int count = 0;
             try
             {
                 // chart1.Series[0]["PieLineColor"] = "Gray";
@@ -174,7 +177,12 @@ namespace C2.Controls.DataCharts
                     catch
                     {
                         y_double.Add(0);
+                        count++;
                     }
+                }
+                if (y.Count == count)
+                {
+                    EmptyInput = true;
                 }
                 chart1.Series[0].Points.DataBindXY(x, y_double);
             }

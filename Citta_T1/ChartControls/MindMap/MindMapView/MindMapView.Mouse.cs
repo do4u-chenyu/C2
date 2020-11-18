@@ -698,7 +698,7 @@ namespace C2.Controls.MapViews
         {
             Point tipLoc = topic.Location;    // 确定提示框位置
             tipLoc.Offset(widget.Location);
-            C2WidgetTip.Show(widget.Description, Global.GetDocumentForm(), PointToReal(tipLoc), 1750);
+            C2WidgetTip.Show(widget.Description, Global.GetMainForm().MdiClient, PointToReal(tipLoc), 3000);
         }
 
         public void ShowToolTip(string text, string hyperlink, bool alwayVisible)

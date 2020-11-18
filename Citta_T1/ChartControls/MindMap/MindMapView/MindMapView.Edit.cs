@@ -70,7 +70,9 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
-                AddWidget(ProgressBarWidget.TypeID, new ProgressBarWidget(), true);
+                ProgressBarWidget pbw = SelectedTopics[0].FindWidget<ProgressBarWidget>();
+                if(pbw == null)
+                    AddWidget(ProgressBarWidget.TypeID, new ProgressBarWidget(), true);
             }
         }
 
@@ -96,15 +98,22 @@ namespace C2.Controls.MapViews
             {
                 var dialog = new NoteWidgetDialog();
 
-                //
                 if (Clipboard.ContainsText())
                     dialog.Remark = ClipboardHelper.GetHtml();
 
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
-                    var template = new NoteWidget();
-                    template.Remark = dialog.Remark;
-                    AddWidget(NoteWidget.TypeID, template, false);
+                    NoteWidget nw = SelectedTopics[0].FindWidget<NoteWidget>();
+                    if(nw == null)
+                    {
+                        var template = new NoteWidget();
+                        template.Remark = dialog.Remark;
+                        AddWidget(NoteWidget.TypeID, template, false);
+                    }
+                    else
+                    {
+                        nw.Remark = dialog.Remark;
+                    }
                 }
             }
         }
@@ -138,7 +147,27 @@ namespace C2.Controls.MapViews
                 Topic topic = SelectedTopics[0];
                 //TODO
                 //这里后期考虑弹窗设置名字
-                string modelDocumentName = string.Format("{0}-模型视图", topic.Text);
+                //string modelDocumentName = string.Format("{0}-模型视图", topic.Text);
+                string modelDocumentName = "";
+
+                CreateNewModelForm createNewModelForm = new CreateNewModelForm
+                {
+                    StartPosition = FormStartPosition.CenterScreen,
+                    RelateMindMapView = this,
+                    OpenDocuments = Global.GetMainForm().OpendDocuments(),
+                    NewFormType = FormType.CanvasForm,
+                    ModelType = "新建模型视图"
+                };
+
+                DialogResult dialogResult = createNewModelForm.ShowDialog();
+                // 新建业务视图
+                if (dialogResult == DialogResult.OK)
+                    modelDocumentName = createNewModelForm.ModelTitle;
+                else
+                    return;
+
+
+                
 
                 //11.13 现在单算子和模型共存了
                 OperatorWidget opw = topic.FindWidget<OperatorWidget>();

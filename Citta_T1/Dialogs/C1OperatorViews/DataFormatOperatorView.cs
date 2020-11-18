@@ -191,8 +191,11 @@ namespace C2.OperatorViews
 
         protected override void CreateLine(int addLine)
         {
+            if (this.tableLayoutPanel1.RowCount == 1)
+            {
+                this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
+            }
 
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
             // 添加控件
             Label label = new Label
             {
