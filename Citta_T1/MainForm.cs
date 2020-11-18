@@ -670,6 +670,7 @@ namespace C2
         }
         public void NewDocumentForm_Click(string templateName)
         {
+            
             CreateNewModelForm createNewModelForm = new CreateNewModelForm
             {
                 StartPosition = FormStartPosition.CenterScreen,
