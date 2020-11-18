@@ -27,7 +27,7 @@ namespace C2.Controls.MapViews
         Cursor ScrollCursor;
         MindMapViewDragBox DragBox;
         Point LastMousePos = Point.Empty;
-        ToolTip C2WidgetTip = new ToolTip();
+
         //ChartToolTip LastToolTip = null;
 
         void InitializeMouse()
@@ -74,7 +74,7 @@ namespace C2.Controls.MapViews
         }
 
         DragTopicsMethod CurrentDragMethod { get; set; }
-        public ToolTip C2WidgetTip1 { get => C2WidgetTip; set => C2WidgetTip = value; }
+        public ToolTip C2WidgetTip { get; set; } = new ToolTip();
 
         void OnHoverObjectChanged(HitTestResult old)
         {
@@ -699,7 +699,7 @@ namespace C2.Controls.MapViews
         {
             Point tipLoc = topic.Location;    // 确定提示框位置
             tipLoc.Offset(widget.Location);
-            C2WidgetTip.Show(widget.Description, Global.GetDocumentForm(), PointToReal(tipLoc), 3000);
+            C2WidgetTip.Show(widget.Description, Global.GetDocumentForm(), PointToReal(tipLoc), 1750);
         }
 
         public void ShowToolTip(string text, string hyperlink, bool alwayVisible)

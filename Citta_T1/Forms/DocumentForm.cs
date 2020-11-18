@@ -491,7 +491,8 @@ namespace C2.Forms
                 }
             }
             // 释放提示信息
-            (this.ActiveChartBox as MindMapView).C2WidgetTip1.Dispose();
+            if (this.ActiveChartBox is MindMapView)
+                (this.ActiveChartBox as MindMapView).C2WidgetTip.Dispose();
         }
 
         protected override void OnGotFocus(EventArgs e)
