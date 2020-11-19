@@ -1,4 +1,5 @@
-﻿using C2.Forms;
+﻿using C2.Core;
+using C2.Forms;
 using C2.WorkSpace;
 using System;
 using System.Collections.Generic;
@@ -303,6 +304,7 @@ namespace C2.Controls
             if (MdiClient != null)
             {
                 MdiClient.ActiveMdiForm(SelectedForm);
+                Global.GetBottomViewPanel().Visible = !(Global.GetMainForm().MdiClient.ActivedMdiForm is StartForm);
             }
         }
     }

@@ -41,7 +41,6 @@ namespace C2.Forms
             this.Controls.Add(this.recentFilesView1);
             this.IconImage = global::C2.Properties.Resources.首页;
             this.Name = "StartForm";
-            this.VisibleChanged += new System.EventHandler(this.StartForm_VisibleChanged);
             this.ResumeLayout(false);
 
         }
@@ -61,11 +60,6 @@ namespace C2.Forms
                     Global.GetMainForm().OpenDocument(item.Filename);
                 }
             }
-        }
-
-        private void StartForm_VisibleChanged(object sender, EventArgs e)
-        {
-            Global.GetBottomViewPanel().Visible = Global.GetMainForm().MdiClient.ActivedMdiForm != this;
         }
     }
 }
