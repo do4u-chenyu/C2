@@ -44,12 +44,11 @@ namespace C2.Controls.Left
 
         public bool ContainModel(string modelTitle)
         {
-            foreach (MindMapModelButton ct in this.MindMapPaintPanel.Controls)
+            foreach (Control ct in this.MindMapPaintPanel.Controls)
             {
-                if ((ct as MindMapModelButton).ModelTitle == modelTitle)
+                if ((ct is MindMapModelButton) && (ct as MindMapModelButton).ModelTitle == modelTitle)
                     return true;
             }
-
             return false;
         }
         // 文档关闭后, 菜单栏可以打开,删除,重命名
