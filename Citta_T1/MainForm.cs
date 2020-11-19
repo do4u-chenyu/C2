@@ -42,7 +42,6 @@ namespace C2
         public bool operateButtonSelect { get; private set; }
         #region
         SpecialTabItem TabNew;
-        TabBarButton BtnNew;
         FindDialog MyFindDialog;
         ShortcutKeysTable ShortcutKeys;
         #endregion
@@ -59,35 +58,43 @@ namespace C2
         delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
 
-        private OpenFileDialog openFileDialog1;
         public MainForm(string userName)
         {
             this.UserName = userName;
 
             InitializeComponent();
             this.usernamelabel.Text = this.UserName;
-            // 数据导入
-            this.inputDataForm = new Dialogs.InputDataForm();
-            this.inputDataForm.InputDataEvent += InputDataFormEvent;
-            
-            // 左侧
-            this.isBottomViewPanelMinimum = true;
-            this.bottomViewPanel.Height = 40;
-            this.isLeftViewPanelMinimum = true;
-            this.leftToolBoxPanel.Width = 10;
-            this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+
+            InitializeInputDataForm();
+            InitializeBottomPrviewPanel();
+            InitializeLeftToolPanel();
 
             InitializeTaskBar();
             InitializeShortcutKeys();
             InitializeGlobalVariable();
 
-            MdiClient = this.mdiWorkSpace;
-            openFileDialog1 = new OpenFileDialog();
-            this.NewForm(FormType.StartForm);
+            InitializeMdiClient();
+            InitializeStartForm();
             if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
                 OpenSavedTabs();
         }
         #region 初始化
+        void InitializeInputDataForm()
+        {
+            this.inputDataForm = new Dialogs.InputDataForm();
+            this.inputDataForm.InputDataEvent += InputDataFormEvent;
+        }
+        void InitializeBottomPrviewPanel()
+        {
+            this.isBottomViewPanelMinimum = true;
+            this.bottomViewPanel.Height = 40;
+        }
+        void InitializeLeftToolPanel()
+        {
+            this.isLeftViewPanelMinimum = true;
+            this.leftToolBoxPanel.Width = 10;
+            this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+        }
         void InitializeTaskBar()
         {
             TaskBar = taskBar;
@@ -96,12 +103,6 @@ namespace C2
             TaskBar.MaxItemSize = 300;
             //TaskBar.Padding = new Padding(2, 0, 2, 0);
 
-            BtnNew = new TabBarButton();
-            BtnNew.Icon = Properties.Resources._new;
-            BtnNew.ToolTipText = "Create New Document";
-            BtnNew.Click += new EventHandler(NewCanvasForm_Click);
-
-            TaskBar.LeftButtons.Add(BtnNew);
             TaskBar.Items.ItemAdded += TaskBar_Items_ItemAdded;
             TaskBar.Items.ItemRemoved += TaskBar_Items_ItemRemoved;
 
@@ -156,7 +157,7 @@ namespace C2
             //MenuQuickHelp.ShortcutKeys = KeyMap.Help.Keys;
         }
         #endregion
-        private void InitializeGlobalVariable()
+        void InitializeGlobalVariable()
         {
             Global.SetMainForm(this);
             Global.SetTaskBar(this.TaskBar);
@@ -166,6 +167,14 @@ namespace C2
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetMindMapModelControl(this.mindMapModelControl);
+        }
+        void InitializeMdiClient()
+        {
+            MdiClient = this.mdiWorkSpace;
+        }
+        void InitializeStartForm()
+        {
+            this.NewForm(FormType.StartForm);
         }
         #endregion
         void SetAGoodLocation()
