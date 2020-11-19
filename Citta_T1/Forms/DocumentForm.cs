@@ -78,6 +78,7 @@ namespace C2.Forms
             : this()
         {
             Document = document;
+            FormNameToolTip = document.Name;
         }
 
         public DocumentForm(string filename)
