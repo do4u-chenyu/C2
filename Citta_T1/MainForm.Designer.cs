@@ -85,6 +85,7 @@ namespace C2
             this.tabPanel = new System.Windows.Forms.Panel();
             this.taskBar = new C2.Controls.TaskBar();
             this.blankButton = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -348,6 +349,7 @@ namespace C2
             this.dataSourceControl.Name = "dataSourceControl";
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
+            this.dataSourceControl.Visible = false;
             // 
             // myModelControl
             // 
@@ -681,10 +683,12 @@ namespace C2
             this.blankButton.Text = "button1";
             this.blankButton.UseVisualStyleBackColor = true;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog2";
+            // 
             // MainForm
             // 
-            this.dataSourceControl.Visible = false;
-            this.mindMapModelControl.Visible = false;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1233, 606);
             this.Controls.Add(this.blankButton);
@@ -784,5 +788,6 @@ namespace C2
         private PictureBox IAOLabButtonPictureBox;
         private PictureBox ModelButtonPictureBox;
         private PictureBox DataButtonPictureBox;
+        private OpenFileDialog openFileDialog1;
     }
 }

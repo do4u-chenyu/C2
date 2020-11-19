@@ -42,7 +42,6 @@ namespace C2
         public bool operateButtonSelect { get; private set; }
         #region
         SpecialTabItem TabNew;
-        TabBarButton BtnNew;
         FindDialog MyFindDialog;
         ShortcutKeysTable ShortcutKeys;
         #endregion
@@ -59,35 +58,43 @@ namespace C2
         delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
 
-        private OpenFileDialog openFileDialog1;
         public MainForm(string userName)
         {
             this.UserName = userName;
 
             InitializeComponent();
             this.usernamelabel.Text = this.UserName;
-            // 数据导入
-            this.inputDataForm = new Dialogs.InputDataForm();
-            this.inputDataForm.InputDataEvent += InputDataFormEvent;
-            
-            // 左侧
-            this.isBottomViewPanelMinimum = true;
-            this.bottomViewPanel.Height = 40;
-            this.isLeftViewPanelMinimum = true;
-            this.leftToolBoxPanel.Width = 10;
-            this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+
+            InitializeInputDataForm();
+            InitializeBottomPrviewPanel();
+            InitializeLeftToolPanel();
 
             InitializeTaskBar();
             InitializeShortcutKeys();
             InitializeGlobalVariable();
 
-            MdiClient = this.mdiWorkSpace;
-            openFileDialog1 = new OpenFileDialog();
-            this.NewForm(FormType.StartForm);
+            InitializeMdiClient();
+            InitializeStartForm();
             if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
                 OpenSavedTabs();
         }
         #region 初始化
+        void InitializeInputDataForm()
+        {
+            this.inputDataForm = new Dialogs.InputDataForm();
+            this.inputDataForm.InputDataEvent += InputDataFormEvent;
+        }
+        void InitializeBottomPrviewPanel()
+        {
+            this.isBottomViewPanelMinimum = true;
+            this.bottomViewPanel.Height = 40;
+        }
+        void InitializeLeftToolPanel()
+        {
+            this.isLeftViewPanelMinimum = true;
+            this.leftToolBoxPanel.Width = 10;
+            this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+        }
         void InitializeTaskBar()
         {
             TaskBar = taskBar;
@@ -96,12 +103,6 @@ namespace C2
             TaskBar.MaxItemSize = 300;
             //TaskBar.Padding = new Padding(2, 0, 2, 0);
 
-            BtnNew = new TabBarButton();
-            BtnNew.Icon = Properties.Resources._new;
-            BtnNew.ToolTipText = "Create New Document";
-            BtnNew.Click += new EventHandler(NewCanvasForm_Click);
-
-            TaskBar.LeftButtons.Add(BtnNew);
             TaskBar.Items.ItemAdded += TaskBar_Items_ItemAdded;
             TaskBar.Items.ItemRemoved += TaskBar_Items_ItemRemoved;
 
@@ -156,7 +157,7 @@ namespace C2
             //MenuQuickHelp.ShortcutKeys = KeyMap.Help.Keys;
         }
         #endregion
-        private void InitializeGlobalVariable()
+        void InitializeGlobalVariable()
         {
             Global.SetMainForm(this);
             Global.SetTaskBar(this.TaskBar);
@@ -167,19 +168,13 @@ namespace C2
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetMindMapModelControl(this.mindMapModelControl);
         }
-        void OpenSavedTabs()
+        void InitializeMdiClient()
         {
-            var tabs = Options.Current.GetValue<string[]>(OptionNames.Miscellaneous.LastOpenTabs);
-            if (!tabs.IsNullOrEmpty())
-            {
-                foreach (var filename in tabs)
-                {
-                    if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
-                    {
-                        OpenDocument(filename);
-                    }
-                }
-            }
+            MdiClient = this.mdiWorkSpace;
+        }
+        void InitializeStartForm()
+        {
+            this.NewForm(FormType.StartForm);
         }
         #endregion
         void SetAGoodLocation()
@@ -203,77 +198,10 @@ namespace C2
         {
             Global.GetCurrentModelDocument().Modified = true;
         }
-        public void DeleteCurrentDocument()
-        {
-            //UndoRedoManager.GetInstance().Remove(modelDocumentDao.CurrentDocument);
-            //List<ModelElement> modelElements = modelDocumentDao.DeleteCurrentDocument();
-            //modelElements.ForEach(me => canvasPanel.Controls.Remove(me.InnerControl));
-            //this.naviViewControl.UpdateNaviView();
-        }
 
         public void BlankButtonFocus()
         {
             this.blankButton.Focus();
-        }
-
-        public void SaveCurrentDocument()
-        {
-            //string modelTitle = this.modelDocumentDao.SaveCurrentDocument();
-            //if (!this.myModelControl.ContainModel(modelTitle))
-            //    this.myModelControl.AddModel(modelTitle);
-        }
-
-        private void SaveAllDocuments()
-        {
-            //string[] modelTitles = this.modelDocumentDao.SaveAllDocuments();
-            //foreach (string modelTitle in modelTitles)
-            //{   // 加入左侧我的模型面板
-            //    if (!this.myModelControl.ContainModel(modelTitle))
-            //        this.myModelControl.AddModel(modelTitle);
-            //    // 清空Dirty标志
-            //    this.modelTitlePanel.ResetDirtyPictureBox(modelTitle, false);
-            //}
-        }
-        private void LoadDocuments()
-        {
-            // 将用户本地保存的模型文档加载到左侧myModelControl
-            string[] bsTitles = ModelsInfo.LoadAllModelTitle(Global.BusinessViewPath);
-            foreach (string title in bsTitles)
-                this.mindMapModelControl.AddMindMapModel(title);
-            //if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
-            //{
-            //    this.modelTitlePanel.AddModel("我的新模型");
-            //    this.modelDocumentDao.AddBlankDocument("我的新模型", this.userName);
-            //    return;
-            //}
-            //// 穷举当前用户空间的所有模型
-            //string[] modelTitles = this.modelDocumentDao.LoadSaveModelTitle(this.userName);
-            //// 多文档面板加载控件
-            ////this.modelTitlePanel.LoadModelDocument(modelTitles);
-            ////加载用户空间的所有模型,并加入到canvas面板中
-            //foreach (string mt in modelTitles)
-            //{
-            //    ModelDocument doc = this.modelDocumentDao.LoadDocument(mt, this.userName);
-            //    CanvasAddElement(doc);
-            //}
-            //// 将用户本地保存的模型文档加载到左侧myModelControl
-            //string[] allModelTitle = this.modelDocumentDao.LoadAllModelTitle(this.userName);
-            //foreach (string modelTitle in allModelTitle)
-            //{
-            //    this.myModelControl.AddModel(modelTitle);
-            //    if (!modelTitles._Contains(modelTitle))
-            //        this.myModelControl.EnableClosedDocumentMenu(modelTitle);
-            //}
-            //// 显示当前模型
-            //this.modelDocumentDao.CurrentDocument.Show();
-            //// 更新当前模型备注信息
-            //this.remarkControl.RemarkDescription = this.modelDocumentDao.RemarkDescription;
-        }
-        private void CanvasAddElement(ModelDocument doc)
-        {
-            //doc.ModelElements.ForEach(me => this.canvasPanel.Controls.Add(me.InnerControl));
-            //this.naviViewControl.UpdateNaviView();
-            //doc.UpdateAllLines();
         }
 
         private void MyModelButton_Click(object sender, EventArgs e)
@@ -314,13 +242,6 @@ namespace C2
 
         private void NewModelButton_Click(object sender, EventArgs e)
         {
-            //this.createNewModelForm.StartPosition = FormStartPosition.CenterScreen;
-            //this.createNewModelForm.Owner = this;
-            //DialogResult dialogResult = this.createNewModelForm.ShowDialog();
-
-            //// 模型标题栏添加新标题
-            //if (dialogResult == DialogResult.OK)
-            //    this.modelTitlePanel.AddModel(this.createNewModelForm.ModelTitle);
             NewForm(FormType.CanvasForm);
         }
 
@@ -336,6 +257,13 @@ namespace C2
             //加载文件及数据源
             LoadDocuments();
             LoadDataSource();
+        }
+        private void LoadDocuments()
+        {
+            // 将用户本地保存的模型文档加载到左侧myModelControl	
+            string[] bsTitles = ModelsInfo.LoadAllModelTitle(Global.BusinessViewPath);
+            foreach (string title in bsTitles)
+                this.mindMapModelControl.AddMindMapModel(title);
         }
         private void LoadDataSource()
         {
@@ -383,29 +311,10 @@ namespace C2
             Help.ShowHelp(this, helpfile);
         }
 
-        private void SaveModelButton_Click(object sender, EventArgs e)
-        {
-            //// 如果文档不dirty的情况下, 对于大文档, 不做重复保存,以提高性能
-            //if (!this.modelDocumentDao.CurrentDocument.Dirty)
-            //    if (this.modelDocumentDao.CurrentDocument.ModelElements.Count > 10)
-            //        return;
-
-            //string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            //this.modelDocumentDao.UpdateRemark(this.remarkControl);
-            //this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, false);
-            //SaveCurrentDocument();
-        }
-
 
         private void UsernameLabel_MouseEnter(object sender, EventArgs e)
         {
             this.toolTip1.SetToolTip(this.usernamelabel, this.userName + "已登录");
-        }
-
-
-        private void SaveAllButton_Click(object sender, EventArgs e)
-        {
-            SaveAllDocuments();
         }
     
         private void MainForm_Deactivate(object sender, EventArgs e)
@@ -517,9 +426,6 @@ namespace C2
                     break;
             }
             return doc;
-            //if (doc.Charts.Count == 3 && doc.Charts[1].Name == "组织架构视图" && doc.Charts[1] is MindMap)
-            //    return doc;
-            //return null;
         }
 
         public void ShowFindDialog(ChartControl chartControl, FindDialog.FindDialogMode mode)
@@ -676,6 +582,7 @@ namespace C2
         }
         public void NewDocumentForm_Click(string templateName)
         {
+            
             CreateNewModelForm createNewModelForm = new CreateNewModelForm
             {
                 StartPosition = FormStartPosition.CenterScreen,
@@ -693,11 +600,6 @@ namespace C2
         void NewCanvasForm_Click(object sender, System.EventArgs e)
         {
             this.NewCanvasForm();
-        }
-        void BtnHelp_Click(object sender, EventArgs e)
-        {
-            //MenuHelps.DropDown.Show(TaskBar, BtnHelp.Bounds.X, BtnHelp.Bounds.Bottom);
-            //BtnHelp.ShowMenu(MenuHelps.DropDown);
         }
         void TaskBar_Items_ItemRemoved(object sender, XListEventArgs<TabItem> e)
         {
@@ -883,8 +785,20 @@ namespace C2
             Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, tabs);
             return true;
         }
-
-      
+        void OpenSavedTabs()
+        {
+            var tabs = Options.Current.GetValue<string[]>(OptionNames.Miscellaneous.LastOpenTabs);
+            if (!tabs.IsNullOrEmpty())
+            {
+                foreach (var filename in tabs)
+                {
+                    if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
+                    {
+                        OpenDocument(filename);
+                    }
+                }
+            }
+        }
         private void operateButton_MouseDown(object sender, MouseEventArgs e)
         {
       

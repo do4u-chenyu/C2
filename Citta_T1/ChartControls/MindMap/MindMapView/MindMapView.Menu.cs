@@ -164,6 +164,7 @@ namespace C2.Controls.MapViews
             MenuOpPublic.Image = Properties.Resources.opModelPublic;
             MenuOpPublic.Text = Lang._("Public");
             MenuOpPublic.Enabled = type == "single" ? false : true;
+            MenuOpPublic.Click += MenuOpPublic_Click;
 
             MenuOpDelete.Image = Properties.Resources.deletewidget;
             MenuOpDelete.Text = Lang._("Delete");
@@ -217,6 +218,14 @@ namespace C2.Controls.MapViews
             Global.GetDocumentForm().Save();
             Global.GetCurrentDocument().Modified = false;
             GenRunCmds();
+        }
+        void MenuOpPublic_Click(object sender, EventArgs e)
+        {
+            if (!opw.HasModelOperator || opw.ModelDataItem == null)
+                return;
+            string modelName = opw.ModelDataItem.FileName;
+            if (!Global.GetMyModelControl().ContainModel(modelName))
+                    Global.GetMyModelControl().AddModel(modelName);
         }
         void MenuModelUpdate_Click(object sender, EventArgs e)
         {
@@ -296,6 +305,7 @@ namespace C2.Controls.MapViews
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
         }
+
         void MenuDeleteDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
@@ -376,6 +386,7 @@ namespace C2.Controls.MapViews
                 MenuOpenResult.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuPreViewData,
                 MenuProcessData,
+                MenuDelete,
                 MenuJoinPool});
 
                 MenuPreViewData.Image = Properties.Resources.viewdata;
@@ -392,6 +403,11 @@ namespace C2.Controls.MapViews
                 MenuJoinPool.Tag = dataItem;
                 MenuJoinPool.Click += MenuJoinPool_Click;
 
+                MenuDelete.Image = Properties.Resources.deletewidget;
+                MenuDelete.Text = Lang._("Delete");
+                MenuDelete.Tag = dataItem;
+                MenuDelete.Click += MenuDeleteRes_Click;
+
                 WidgetMenuStrip.Items.Add(MenuOpenResult);
             }
         }
@@ -405,8 +421,28 @@ namespace C2.Controls.MapViews
         {
             AddSubTopic(rsw.Container as Topic, null, false);
         }
+        void MenuDeleteRes_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            // 剩余最后一个菜单项，删除数据源挂件
+            rsw.DataItems.Remove(hitItem);
+            TopicUpdate(rsw.Container, hitItem);
+            if (rsw.DataItems.IsEmpty())
+                Delete(new ChartObject[] { rsw });
+        }
         void MenuJoinPool_Click(object sender, EventArgs e)
         {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            string destDirectory = Path.Combine(Global.UserWorkspacePath, "数据池");
+            string destFilePath = Path.Combine(destDirectory, hitItem.FileName);
+            Directory.CreateDirectory(destDirectory);
+            File.Copy(hitItem.FilePath, destFilePath, true);
+            Global.GetDataSourceControl().GenDataButton(hitItem.FileName,
+                                                        destFilePath,
+                                                        hitItem.FileSep,
+                                                        hitItem.FileType,
+                                                        hitItem.FileEncoding);
+            Global.GetDataSourceControl().Visible = true;
         }
         #endregion
 

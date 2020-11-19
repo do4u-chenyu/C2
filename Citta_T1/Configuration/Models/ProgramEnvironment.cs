@@ -69,5 +69,9 @@ namespace C2.Configuration
         {
             get { return Path.Combine(ApplicationDataDirectory, "Recents.xml"); }
         }
+        public static string DataBufferFilename
+        {
+            get { return Path.Combine(ApplicationDataDirectory, "DataBuffer.xml"); }
+        }
     }
 }

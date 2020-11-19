@@ -9,12 +9,10 @@ namespace C2.Model
     {
         public static readonly MyIconLibrary Share;
         public static readonly string BaseDirectory;
-        public static readonly string BaseDirectory2;
 
         static MyIconLibrary()
         {
-            BaseDirectory2 = Path.Combine(Application.StartupPath, "Resources", "PictureIconLib");
-            BaseDirectory = BaseDirectory2;
+            BaseDirectory = Path.Combine(Application.StartupPath, "Resources", "PictureIconLib");
             Share = new MyIconLibrary();
         }
 
@@ -27,7 +25,6 @@ namespace C2.Model
         {
             Clear();
             Refresh(BaseDirectory);
-            Refresh(BaseDirectory2);
         }
 
 
@@ -72,7 +69,7 @@ namespace C2.Model
             else if (file.Length > 50)
                 file = file.Substring(file.Length - 50, 50);
 
-            string dir = BaseDirectory2;
+            string dir = BaseDirectory;
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
@@ -143,11 +140,11 @@ namespace C2.Model
             
             string name = Path.GetFileNameWithoutExtension(filename);
             string ext = Path.GetExtension(filename);
-            string tf = Path.Combine(BaseDirectory2, Path.GetFileName(filename));
+            string tf = Path.Combine(BaseDirectory, Path.GetFileName(filename));
             int index = 1;
             while (File.Exists(tf))
             {
-                tf = Path.Combine(BaseDirectory2, name + index.ToString() + ext);
+                tf = Path.Combine(BaseDirectory, name + index.ToString() + ext);
                 index++;
             }
 
@@ -175,7 +172,7 @@ namespace C2.Model
 
             try
             {
-                File.Delete(Path.Combine(BaseDirectory2, picture.Name));
+                File.Delete(Path.Combine(BaseDirectory, picture.Name));
             }
             catch(System.Exception ex)
             {

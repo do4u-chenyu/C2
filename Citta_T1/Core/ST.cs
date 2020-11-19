@@ -828,6 +828,7 @@ namespace C2.Core
         public static T GetEnumValue<T>(string text, T defaultValue)
             where T : struct
         {
+            if (string.IsNullOrEmpty(text)) return defaultValue;
             try
             {
                 object obj = Enum.Parse(typeof(T), text, true);
@@ -1104,8 +1105,12 @@ namespace C2.Core
             foreach (var c in value)
             {
                 if (c == ';' && lastc != '\\')
+                {
                     list.Add(sb.ToString());
-                sb.Append(c);
+                    sb.Clear();
+                }
+                else
+                    sb.Append(c);
                 lastc = c;
             }
 
