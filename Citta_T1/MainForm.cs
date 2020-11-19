@@ -291,6 +291,7 @@ namespace C2
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
                 this.dataSourceControl.Visible = true;
                 this.mindMapModelControl.Visible = true;
+                this.myModelControl.Visible = true;
             }
             else
             {
@@ -299,6 +300,7 @@ namespace C2
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
                 this.dataSourceControl.Visible = false;
                 this.mindMapModelControl.Visible = false;
+                this.myModelControl.Visible = false;
             }
         }
 
