@@ -1,4 +1,6 @@
-﻿namespace C2.Controls.Left
+﻿using C2.Core;
+
+namespace C2.Controls.Left
 {
     partial class DataButton
     {
@@ -89,6 +91,7 @@
             this.ReviewToolStripMenuItem.Text = "预览";
             this.ReviewToolStripMenuItem.ToolTipText = "预览数据源部分信息";
             this.ReviewToolStripMenuItem.Click += new System.EventHandler(this.ReviewToolStripMenuItem_Click);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // RenameToolStripMenuItem
             // 
