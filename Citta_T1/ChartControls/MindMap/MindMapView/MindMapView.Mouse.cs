@@ -152,7 +152,7 @@ namespace C2.Controls.MapViews
             if (dsw == null)
             {
                 Topic[] hitTopic = new Topic[] { htr.Topic };
-                AddDataSource(hitTopic, dataItem);
+                hitTopic[0].Widgets.Add(new DataSourceWidget { DataItems = new List<DataItem> { dataItem } });
                 TopicUpdate(hitTopic[0], null);
                 ShowDesigner(hitTopic[0],false);
                 return;
