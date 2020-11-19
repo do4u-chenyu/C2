@@ -525,7 +525,7 @@ namespace C2.Utils
 
         public static long  GetFileCRC32Value(string filePath)
         {
-            FileStream fs;
+            FileStream fs = null;
             byte[] buffer;
             crc32.Reset();
             try
@@ -538,7 +538,13 @@ namespace C2.Utils
             catch
             {
                 return 0;
-            }                
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Close();
+            }
+
             crc32.Update(buffer);
             return crc32.Value;
         }

@@ -143,6 +143,12 @@ namespace C2.Core
 
         private bool PreLoadExcelFileNew(string fullFilePath)
         {
+            // 查看是否命中本地大文件缓存
+            if (HasCache(fullFilePath, ProgramEnvironment.DataBufferFilename))
+            {
+                return true;
+            }
+
             ReadRst rrst = FileUtil.ReadExcel(fullFilePath, maxRow);
             if (rrst.ReturnCode <= 0 || rrst.ReturnCode > 0 && rrst.Result.Count == 0)
             {
@@ -203,6 +209,37 @@ namespace C2.Core
             }
             xDoc.Save(bufferPath);
             
+        }
+        private bool HasCache(string fullFilePath,string bufferPath)
+        {
+            XmlDocument xDoc = new XmlDocument();
+            XmlNodeList nodeList;
+            try
+            {
+                xDoc.Load(bufferPath);
+                XmlNode rootNode = xDoc.SelectSingleNode("DataCache");
+                nodeList = xDoc.SelectNodes(String.Format("//DataItem[path='{0}']", fullFilePath));
+            }
+           
+            catch
+            { 
+                return false;
+            }
+            if (nodeList.Count == 0)
+                return false;
+            long crcValue=FileUtil.GetFileCRC32Value(fullFilePath);
+            foreach (XmlNode node in nodeList)
+            {
+               string oldCrc= node.SelectSingleNode("crc32").InnerText;
+                if (string.IsNullOrEmpty(oldCrc)|| !string.Equals(oldCrc, crcValue.ToString()))
+                {
+                    return false;
+                }
+                dataPreviewDict[fullFilePath] = new FileCache(node.SelectSingleNode("content").InnerText,
+                                                              node.SelectSingleNode("head").InnerText);
+                dataPreviewDict[fullFilePath].CrcValue = crcValue;
+            }
+            return true;
         }
         /*
          * 按行读取文件，不分割
