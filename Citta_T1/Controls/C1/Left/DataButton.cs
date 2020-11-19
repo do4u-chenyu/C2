@@ -185,7 +185,9 @@ namespace C2.Controls.Left
             Global.GetDataSourceControl().SaveDataSourceInfo();
             this.helpToolTip.SetToolTip(this.txtButton, DataSourceName);
         }
-
-
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.ReviewToolStripMenuItem.Enabled = Global.GetBottomViewPanel().Visible;
+        }
     }
 }

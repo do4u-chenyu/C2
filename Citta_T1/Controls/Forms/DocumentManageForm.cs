@@ -217,12 +217,12 @@ namespace C2.Controls
                 else if(e.Item.Tag is DocumentForm)
                 {
                     //不仅仅关闭当前form，关联form也要关掉
-                    TabItem[] relateItem = TaskBar.Items.Where(ti=> ti.Tag is CanvasForm).Where(ti => ti.ToolTipText.Split('-')[0] == e.Item.Text).ToArray();
+                    TabItem[] relateItem = TaskBar.Items.Where(ti=> ti.Tag is CanvasForm).Where(ti => ti.ToolTipText != null && ti.ToolTipText.StartsWith(e.Item.ToolTipText+"-")).ToArray();
                     foreach(TabItem ti in relateItem)
                     {
                         MdiClient.CloseMdiForm((Form)ti.Tag);
                     }
-                    if(TaskBar.Items.Where(ti => ti.Tag is CanvasForm).Where(ti => ti.ToolTipText.Split('-')[0] == e.Item.Text).ToArray().Count() == 0)
+                    if(TaskBar.Items.Where(ti => ti.Tag is CanvasForm).Where(ti => ti.ToolTipText!=null && ti.ToolTipText.StartsWith(e.Item.ToolTipText+"-")).ToArray().Count() == 0)
                         MdiClient.CloseMdiForm((Form)e.Item.Tag);
                 }
                 else
