@@ -24,6 +24,7 @@ namespace C2.Utils
 
         public static int TryParseInt(string value, int defaultValue = 0)
         {
+            if (string.IsNullOrEmpty(value)) return default;
             try
             {
                 return int.Parse(value);

@@ -296,6 +296,15 @@ namespace C2.Controls.MapViews
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
         }
+        void MenuDeleteRes_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            // 剩余最后一个菜单项，删除数据源挂件
+            rsw.DataItems.Remove(hitItem);
+            TopicUpdate(rsw.Container, hitItem);
+            if (rsw.DataItems.IsEmpty())
+                Delete(new ChartObject[] { rsw });
+        }
         void MenuDeleteDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
@@ -376,6 +385,7 @@ namespace C2.Controls.MapViews
                 MenuOpenResult.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuPreViewData,
                 MenuProcessData,
+                MenuDelete,
                 MenuJoinPool});
 
                 MenuPreViewData.Image = Properties.Resources.viewdata;
@@ -391,6 +401,11 @@ namespace C2.Controls.MapViews
                 MenuJoinPool.Text = Lang._("JoinPool");
                 MenuJoinPool.Tag = dataItem;
                 MenuJoinPool.Click += MenuJoinPool_Click;
+
+                MenuDelete.Image = Properties.Resources.deletewidget;
+                MenuDelete.Text = Lang._("Delete");
+                MenuDelete.Tag = dataItem;
+                MenuDelete.Click += MenuDeleteRes_Click;
 
                 WidgetMenuStrip.Items.Add(MenuOpenResult);
             }

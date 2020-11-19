@@ -57,13 +57,16 @@
             // 
             // MindMapPaintPanel
             // 
+            this.MindMapPaintPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MindMapPaintPanel.AutoScroll = true;
             this.MindMapPaintPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.MindMapPaintPanel.BackColor = System.Drawing.Color.White;
             this.MindMapPaintPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MindMapPaintPanel.Location = new System.Drawing.Point(3, 36);
+            this.MindMapPaintPanel.Location = new System.Drawing.Point(3, 35);
             this.MindMapPaintPanel.Name = "MindMapPaintPanel";
-            this.MindMapPaintPanel.Size = new System.Drawing.Size(179, 620);
+            this.MindMapPaintPanel.Size = new System.Drawing.Size(179, 621);
             this.MindMapPaintPanel.TabIndex = 2;
             // 
             // MindMapModelControl
@@ -74,7 +77,7 @@
             this.Controls.Add(this.Itempanel);
             this.Controls.Add(this.MindMapPaintPanel);
             this.Name = "MindMapModelControl";
-            this.Size = new System.Drawing.Size(185, 637);
+            this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MindMapModelControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MindMapModelControl_MouseDown);
             this.Itempanel.ResumeLayout(false);
