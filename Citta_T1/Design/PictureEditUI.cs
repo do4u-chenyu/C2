@@ -184,11 +184,11 @@ namespace C2.Controls
 
         void BtnManageLib_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(MyIconLibrary.BaseDirectory2) && !Directory.Exists(MyIconLibrary.BaseDirectory2))
+            if (!string.IsNullOrEmpty(MyIconLibrary.BaseDirectory) && !Directory.Exists(MyIconLibrary.BaseDirectory))
             {
                 try
                 {
-                    Directory.CreateDirectory(MyIconLibrary.BaseDirectory2);
+                    Directory.CreateDirectory(MyIconLibrary.BaseDirectory);
                 }
                 catch (System.Exception ex)
                 {
@@ -198,7 +198,7 @@ namespace C2.Controls
                 }
             }
 
-            Helper.OpenUrl(MyIconLibrary.BaseDirectory2);
+            Helper.OpenUrl(MyIconLibrary.BaseDirectory);
         }
 
         void LnkRefreshLib_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
