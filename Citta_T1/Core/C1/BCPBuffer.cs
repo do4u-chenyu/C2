@@ -1,10 +1,13 @@
-﻿using C2.Utils;
+﻿using C2.Business.Model;
+using C2.Configuration;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace C2.Core
 {
@@ -12,12 +15,13 @@ namespace C2.Core
     {
         private string previewFileContent;     // 文件内容
         private string headColumnLine;         // 表头
-        private bool dirty;
+        private bool dirty;                
 
         public FileCache(string content, string headLine)
         {
             previewFileContent = content;
             headColumnLine = headLine;
+
             dirty = false;
         }
 
@@ -38,6 +42,7 @@ namespace C2.Core
         public string HeadColumnLine { get => headColumnLine; set => headColumnLine = value; }
         public bool Dirty { get => dirty; set => dirty = value; }
         public bool NotDirty { get => !Dirty; }
+        public long CrcValue { get; set; } //文件内容crc校验码
     }
     class BCPBuffer
     {
@@ -150,7 +155,54 @@ namespace C2.Core
             for (int i = 0; i < rowContentList.Count; i++)
                 sb.AppendLine(String.Join("\t", rowContentList[i]));
             dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
+
+            // 大文件内容写入本地缓存
+            FileInfo fi = new FileInfo(fullFilePath);
+            long fileSize = fi.Length / 1024;
+            if (fileSize > 1000)
+            {
+                WriteBuffer(fullFilePath, sb, firstLine);
+            }                   
             return true;
+        }
+        // 数据缓存信息写入xml
+        private void WriteBuffer(string fullFilePath, StringBuilder sb, string firstLine)
+        {
+            XmlDocument xDoc = new XmlDocument();
+            string bufferPath = ProgramEnvironment.DataBufferFilename;
+
+            if (!File.Exists(bufferPath))
+            {
+                
+                XmlElement root = xDoc.CreateElement("DataCache");
+                xDoc.AppendChild(root);
+                xDoc.Save(bufferPath);
+            }
+
+            xDoc.Load(bufferPath);
+            Utils.FileUtil.AddPathPower(bufferPath, "FullControl");
+            XmlNode rootNode = xDoc.SelectSingleNode("DataCache");
+            XmlNodeList nodeList = xDoc.SelectNodes(String.Format("//DataItem[path='{0}']", fullFilePath));
+            if (nodeList.Count > 0)
+            {
+                foreach (XmlNode node in nodeList)
+                {
+                    node.SelectSingleNode("crc32").InnerText = dataPreviewDict[fullFilePath].CrcValue.ToString();
+                    node.SelectSingleNode("content").InnerText = sb.ToString();
+                    node.SelectSingleNode("head").InnerText = firstLine;
+                }
+            }
+            else
+            {
+                
+                ModelXmlWriter mxw = new ModelXmlWriter("DataItem", rootNode);
+                mxw.Write("path", fullFilePath)
+                   .Write("crc32", FileUtil.GetFileCRC32Value(fullFilePath).ToString())
+                   .Write("head", firstLine)
+                   .Write("content", sb.ToString());
+            }
+            xDoc.Save(bufferPath);
+            
         }
         /*
          * 按行读取文件，不分割

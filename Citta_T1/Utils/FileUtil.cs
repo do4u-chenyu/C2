@@ -1,5 +1,6 @@
 ﻿using C2.Core;
 using C2.Model;
+using ICSharpCode.SharpZipLib.Checksum;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using OfficeOpenXml;
@@ -38,6 +39,7 @@ namespace C2.Utils
     class FileUtil
     {
         public static LogUtil log = LogUtil.GetInstance("FileUtil");
+        private static Crc32 crc32 = new Crc32();
         public static void AddPathPower(string pathName, string power)
         {
             string userName = System.Environment.UserName;
@@ -519,6 +521,26 @@ namespace C2.Utils
                 }
             }
             return columnValues;
+        }
+
+        public static long  GetFileCRC32Value(string filePath)
+        {
+            FileStream fs;
+            byte[] buffer;
+            crc32.Reset();
+            try
+            {
+                fs = new FileStream(filePath, FileMode.Open);
+                int size_to_read = Math.Min(100 * 1024 * 1024, (int)fs.Length);
+                buffer = new byte[size_to_read];
+                fs.Read(buffer, 0, buffer.Length);
+            }
+            catch
+            {
+                return 0;
+            }                
+            crc32.Update(buffer);
+            return crc32.Value;
         }
     }
 }
