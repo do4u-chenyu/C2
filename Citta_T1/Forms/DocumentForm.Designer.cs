@@ -498,7 +498,7 @@ namespace C2.Forms
             // TsbExport
             // 
             this.TsbExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbExport.Image = global::C2.Properties.Resources.full_screen;
+            this.TsbExport.Image = global::C2.Properties.Resources.export_image;
             this.TsbExport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbExport.Name = "TsbExport";
             this.TsbExport.Padding = new System.Windows.Forms.Padding(2);

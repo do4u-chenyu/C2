@@ -483,6 +483,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap copyfilepath {
+            get {
+                object obj = ResourceManager.GetObject("copyfilepath", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap cross_large {
             get {
                 object obj = ResourceManager.GetObject("cross_large", resourceCulture);
@@ -1777,6 +1787,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap modelTopLabel {
             get {
                 object obj = ResourceManager.GetObject("modelTopLabel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap modelUpdate {
+            get {
+                object obj = ResourceManager.GetObject("modelUpdate", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

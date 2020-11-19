@@ -7,6 +7,7 @@ using C2.Business.Option;
 using C2.Core;
 using C2.Dialogs;
 using C2.Dialogs.Base;
+using C2.Forms;
 using C2.Globalization;
 using C2.Model;
 using C2.Model.MindMaps;
@@ -144,10 +145,21 @@ namespace C2.Controls.MapViews
             else
                 MenuOpDesign.Click += MenuDesignModel_Click;
 
-            MenuOpRunning.Image = Properties.Resources.opRunning;
-            MenuOpRunning.Text = Lang._("Running");
-            MenuOpRunning.Enabled = type == "single" ? opw.Status != OpStatus.Null : !opw.HasModelOperator;
-            MenuOpRunning.Click += MenuRunningOp_Click;
+            if(type == "single")
+            {
+                MenuOpRunning.Image = Properties.Resources.opRunning;
+                MenuOpRunning.Text = Lang._("Running");
+                MenuOpRunning.Enabled = type == "single" ? opw.Status != OpStatus.Null : !opw.HasModelOperator;
+                MenuOpRunning.Click += MenuRunningOp_Click;
+            }
+            else
+            {
+                MenuOpRunning.Image = Properties.Resources.modelUpdate;
+                MenuOpRunning.Text = Lang._("ModelUpdate");
+                MenuOpRunning.Enabled = Global.GetMainForm().TaskBar.Items.Contains(opw.ModelRelateTab);
+                MenuOpRunning.Click += MenuModelUpdate_Click;
+            }
+
 
             MenuOpPublic.Image = Properties.Resources.opModelPublic;
             MenuOpPublic.Text = Lang._("Public");
@@ -165,8 +177,6 @@ namespace C2.Controls.MapViews
 
         void MenuDesignModel_Click(object sender, EventArgs e)
         {
-            //TODO
-            //跳转到
             TabItem tab = opw.ModelRelateTab;
             TabBar tabBar = Global.GetMainForm().TaskBar;
             if (tabBar.Items.Contains(tab))
@@ -207,6 +217,12 @@ namespace C2.Controls.MapViews
             Global.GetDocumentForm().Save();
             Global.GetCurrentDocument().Modified = false;
             GenRunCmds();
+        }
+        void MenuModelUpdate_Click(object sender, EventArgs e)
+        {
+            TabItem tab = opw.ModelRelateTab;
+            if (Global.GetMainForm().TaskBar.Items.Contains(tab))
+                (opw.ModelRelateTab.Tag as CanvasForm).UpdateTopicResults(opw.Container as Topic);
         }
         void MenuDeleteSingleOp_Click(object sender, EventArgs e)
         {
@@ -447,7 +463,7 @@ namespace C2.Controls.MapViews
                 MenuExploreDirectory.Tag = path;
                 MenuExploreDirectory.Click += MenuExploreDirectory_Click;
 
-                MenuCopyFilePathToClipboard.Image = Properties.Resources.copy;
+                MenuCopyFilePathToClipboard.Image = Properties.Resources.copyfilepath;
                 MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
                 MenuCopyFilePathToClipboard.Tag = path;
                 MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;

@@ -186,7 +186,7 @@ namespace C2.Forms
         public void SaveDocAndTopic()
         {
             Save();
-            UpdateTopicResults();
+            UpdateTopicResults(RelateTopic);
         }
 
         private void CanvasForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -198,7 +198,7 @@ namespace C2.Forms
         {
             if (!HardClose && Document != null && Document.Modified && !ReadOnly)
             {
-                DialogResult result = MessageBox.Show("有尚未保存的模型，是否保存后关闭？",
+                DialogResult result = MessageBox.Show(Document.Name+" 尚未保存，是否保存后关闭？",
                             "保存", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 // 取消操作
                 if (result == DialogResult.Cancel)
@@ -447,13 +447,13 @@ namespace C2.Forms
             this.Invoke(new TaskCallBack(delegate ()
             {
                 UpdateRunbuttonImageInfo();
-                UpdateTopicResults();
+                UpdateTopicResults(RelateTopic);
             }));
         }
 
-        public void UpdateTopicResults()
+        public void UpdateTopicResults(Topic topic)
         {
-            if (RelateTopic == null)
+            if (topic == null)
                 return;
             //OperatorWidget opw = RelateTopic.FindWidget<OperatorWidget>();
             //if(opw != null)
@@ -476,11 +476,11 @@ namespace C2.Forms
             if (rsDataItems.Count == 0)
                 return;
 
-            ResultWidget rsw = RelateTopic.FindWidget<ResultWidget>();
+            ResultWidget rsw = topic.FindWidget<ResultWidget>();
             if (rsw == null)
             {
                 rsw = new ResultWidget {  DataItems = rsDataItems  };
-                RelateTopic.Add(rsw);
+                topic.Add(rsw);
             }
             else
             {
