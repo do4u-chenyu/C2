@@ -75,25 +75,31 @@
             // 
             // localFrame
             // 
+            this.localFrame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.localFrame.AutoScroll = true;
             this.localFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.localFrame.BackColor = System.Drawing.Color.White;
             this.localFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.localFrame.Location = new System.Drawing.Point(3, 36);
+            this.localFrame.Location = new System.Drawing.Point(3, 35);
             this.localFrame.Name = "localFrame";
-            this.localFrame.Size = new System.Drawing.Size(179, 620);
+            this.localFrame.Size = new System.Drawing.Size(179, 622);
             this.localFrame.TabIndex = 1;
             this.localFrame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataSourceControl_MouseDown);
             // 
             // externalFrame
             // 
+            this.externalFrame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.externalFrame.AutoScroll = true;
             this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.externalFrame.BackColor = System.Drawing.Color.White;
             this.externalFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.externalFrame.Location = new System.Drawing.Point(3, 36);
+            this.externalFrame.Location = new System.Drawing.Point(3, 35);
             this.externalFrame.Name = "externalFrame";
-            this.externalFrame.Size = new System.Drawing.Size(179, 620);
+            this.externalFrame.Size = new System.Drawing.Size(179, 621);
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
             // 
@@ -105,7 +111,7 @@
             this.Controls.Add(this.localFrame);
             this.Controls.Add(this.dataSourceFrame);
             this.Name = "DataSourceControl";
-            this.Size = new System.Drawing.Size(185, 637);
+            this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DataSourceControl_Paint);
             this.dataSourceFrame.ResumeLayout(false);
             this.ResumeLayout(false);
