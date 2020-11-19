@@ -395,6 +395,7 @@
 	<item name="Running">运行</item>
 	<item name="Done">运行完成</item>
 	<item name="Public">发布</item>
+	<item name="ModelUpdate">同步</item>
 	<item name="Operator">算子</item>
 	<item name="OpenDesigner">打开设计器</item>
 	<item name="Max">最大值</item>

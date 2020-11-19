@@ -212,9 +212,24 @@ namespace C2.Controls.Move
 
         private void TextBox_Leave(object sender, EventArgs e)
         {
+            // 修正C2下模型视图更改算子名词未失焦时,切换文档会崩的bug
+            if (Global.GetTopToolBarControl() == null)
+            {
+                CancelTextChange();
+                return;
+            }
+                
             if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
                 return;
             FinishTextChange();
+        }
+
+        private void CancelTextChange()
+        {
+            this.textBox.Text = this.oldTextString;
+            this.textBox.ReadOnly = true;
+            this.textBox.Visible = false;
+            this.txtButton.Visible = true;
         }
 
         public void FinishTextChange()

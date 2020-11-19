@@ -325,7 +325,6 @@ namespace C2
             // mindMapModelControl
             // 
             this.mindMapModelControl.AllowDrop = true;
-            this.mindMapModelControl.AutoScroll = true;
             this.mindMapModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.mindMapModelControl.BackColor = System.Drawing.Color.White;
             this.mindMapModelControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -684,6 +683,8 @@ namespace C2
             // 
             // MainForm
             // 
+            this.dataSourceControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1233, 606);
             this.Controls.Add(this.blankButton);
