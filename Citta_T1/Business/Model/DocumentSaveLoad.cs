@@ -11,7 +11,7 @@ namespace C2.Business.Model
 {
     class ModelXmlWriter
     {
-        private  readonly XmlDocument doc;
+        private readonly XmlDocument doc;
 
         public ModelXmlWriter(string nodeName, XmlDocument xmlDoc, XmlElement parent)
         {
@@ -27,6 +27,12 @@ namespace C2.Business.Model
             doc.AppendChild(Element);
         }
         public ModelXmlWriter(string nodeName, XmlElement parent)
+        {
+            doc = parent.OwnerDocument;
+            Element = doc.CreateElement(nodeName);
+            parent.AppendChild(Element);
+        }
+        public ModelXmlWriter(string nodeName, XmlNode parent)
         {
             doc = parent.OwnerDocument;
             Element = doc.CreateElement(nodeName);

@@ -30,7 +30,7 @@ namespace C2.Dialogs
             Controls.Add(CkbMore);
 
             MinimumSize = Size;
-            Size = new Size(300, 600);
+            Size = new Size(315, 600);
             AfterInitialize();
         }
 

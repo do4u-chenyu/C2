@@ -13,7 +13,7 @@ namespace C2.Controls
     {
         public ImageLibraryListBox()
         {
-            CellSize = new Size(32, 62);
+            CellSize = new Size(55, 62);
             RefreshItems();
         }
 
@@ -25,8 +25,8 @@ namespace C2.Controls
 
             //PaintHelper.DrawImageInRange(e.Graphics, picture.Data, rect);
 
-            Rectangle rect1 = new Rectangle(rect.Location, new Size(32, 46));
-            Rectangle rect2 = new Rectangle(rect.Location, new Size(32, 16));
+            Rectangle rect1 = new Rectangle(rect.Location, new Size(55, 46));
+            Rectangle rect2 = new Rectangle(rect.Location, new Size(55, 16));
             rect2.Offset(0, 46);
             PaintHelper.DrawImageInRange(e.Graphics, picture.Data, rect1);
             PaintHelper.DrawStringDefault(e.Graphics, picture.SName, rect2);
