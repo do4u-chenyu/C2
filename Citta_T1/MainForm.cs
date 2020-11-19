@@ -67,15 +67,9 @@ namespace C2
             InitializeComponent();
             this.usernamelabel.Text = this.UserName;
             // 数据导入
-            this.inputDataForm = new Dialogs.InputDataForm();
-            this.inputDataForm.InputDataEvent += InputDataFormEvent;
-            
-            // 左侧
-            this.isBottomViewPanelMinimum = true;
-            this.bottomViewPanel.Height = 40;
-            this.isLeftViewPanelMinimum = true;
-            this.leftToolBoxPanel.Width = 10;
-            this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+            InitializeInputDataForm();
+            InitializeBottomPrviewPanel();
+            InitializeLeftToolPanel();
 
             InitializeTaskBar();
             InitializeShortcutKeys();
@@ -88,6 +82,22 @@ namespace C2
                 OpenSavedTabs();
         }
         #region 初始化
+        void InitializeInputDataForm()
+        {
+            this.inputDataForm = new Dialogs.InputDataForm();
+            this.inputDataForm.InputDataEvent += InputDataFormEvent;
+        }
+        void InitializeBottomPrviewPanel()
+        {
+            this.isBottomViewPanelMinimum = true;
+            this.bottomViewPanel.Height = 40;
+        }
+        void InitializeLeftToolPanel()
+        {
+            this.isLeftViewPanelMinimum = true;
+            this.leftToolBoxPanel.Width = 10;
+            this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+        }
         void InitializeTaskBar()
         {
             TaskBar = taskBar;

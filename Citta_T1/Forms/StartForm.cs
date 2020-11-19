@@ -65,7 +65,7 @@ namespace C2.Forms
 
         private void StartForm_VisibleChanged(object sender, EventArgs e)
         {
-            Global.GetBottomViewPanel().Visible = !this.Visible;
+            Global.GetBottomViewPanel().Visible = Global.GetMainForm().MdiClient.ActivedMdiForm != this;
         }
     }
 }
