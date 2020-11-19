@@ -96,12 +96,6 @@ namespace C2
             TaskBar.MaxItemSize = 300;
             //TaskBar.Padding = new Padding(2, 0, 2, 0);
 
-            BtnNew = new TabBarButton();
-            BtnNew.Icon = Properties.Resources._new;
-            BtnNew.ToolTipText = "Create New Document";
-            BtnNew.Click += new EventHandler(NewCanvasForm_Click);
-
-            TaskBar.LeftButtons.Add(BtnNew);
             TaskBar.Items.ItemAdded += TaskBar_Items_ItemAdded;
             TaskBar.Items.ItemRemoved += TaskBar_Items_ItemRemoved;
 
