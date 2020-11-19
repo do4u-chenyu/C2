@@ -78,7 +78,7 @@ namespace C2.Controls.Left
         private void ReLayoutLocalFrame()
         {
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
-            this.SuspendLayout();
+            this.MindMapPaintPanel.SuspendLayout();
             // 清空位置
             List<Control> tmp = new List<Control>();
             foreach (Control ct in this.MindMapPaintPanel.Controls)
@@ -93,8 +93,8 @@ namespace C2.Controls.Left
             }
 
 
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.MindMapPaintPanel.ResumeLayout(false);
+            this.MindMapPaintPanel.PerformLayout();
         }
 
         private void MindMapModelControl_MouseDown(object sender, MouseEventArgs e)
