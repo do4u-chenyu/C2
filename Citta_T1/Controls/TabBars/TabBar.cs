@@ -1815,7 +1815,7 @@ namespace C2.Controls
             return 0.5f;
         }
 
-        bool EnsureItemVisible(TabItem item)
+        public bool EnsureItemVisible(TabItem item)
         {
             if (item == null || !AllowScrollPage)
                 return false;
@@ -2148,6 +2148,18 @@ namespace C2.Controls
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
+            if (AllowScrollPage)
+            {
+                ScrollToFirst();
+                foreach (TabItem ti in DisplayItems)
+                {
+                    if (this.SelectedItem == ti)
+                    {
+                        EnsureItemVisible(ti);
+                        break;
+                    }
+                }
+            }
 
             if (LayoutItems())
             {
