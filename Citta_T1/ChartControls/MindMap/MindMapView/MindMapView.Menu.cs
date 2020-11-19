@@ -164,6 +164,7 @@ namespace C2.Controls.MapViews
             MenuOpPublic.Image = Properties.Resources.opModelPublic;
             MenuOpPublic.Text = Lang._("Public");
             MenuOpPublic.Enabled = type == "single" ? false : true;
+            MenuOpPublic.Click += MenuOpPublic_Click;
 
             MenuOpDelete.Image = Properties.Resources.deletewidget;
             MenuOpDelete.Text = Lang._("Delete");
@@ -217,6 +218,14 @@ namespace C2.Controls.MapViews
             Global.GetDocumentForm().Save();
             Global.GetCurrentDocument().Modified = false;
             GenRunCmds();
+        }
+        void MenuOpPublic_Click(object sender, EventArgs e)
+        {
+            if (!opw.HasModelOperator || opw.ModelDataItem == null)
+                return;
+            string modelName = opw.ModelDataItem.FileName;
+            if (!Global.GetMyModelControl().ContainModel(modelName))
+                    Global.GetMyModelControl().AddModel(modelName);
         }
         void MenuModelUpdate_Click(object sender, EventArgs e)
         {
