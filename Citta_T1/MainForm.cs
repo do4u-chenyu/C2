@@ -465,6 +465,12 @@ namespace C2
             if(opw != null)
                 opw.ModelRelateTab = TaskBar.SelectedItem;
         }
+
+        internal void OpenModelDocument_Click()
+        {
+            //throw new NotImplementedException();
+        }
+
         public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
             ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName, mindMapName);
