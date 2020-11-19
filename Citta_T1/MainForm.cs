@@ -167,20 +167,6 @@ namespace C2
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetMindMapModelControl(this.mindMapModelControl);
         }
-        void OpenSavedTabs()
-        {
-            var tabs = Options.Current.GetValue<string[]>(OptionNames.Miscellaneous.LastOpenTabs);
-            if (!tabs.IsNullOrEmpty())
-            {
-                foreach (var filename in tabs)
-                {
-                    if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
-                    {
-                        OpenDocument(filename);
-                    }
-                }
-            }
-        }
         #endregion
         void SetAGoodLocation()
         {
@@ -878,8 +864,20 @@ namespace C2
             Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, tabs);
             return true;
         }
-
-      
+        void OpenSavedTabs()
+        {
+            var tabs = Options.Current.GetValue<string[]>(OptionNames.Miscellaneous.LastOpenTabs);
+            if (!tabs.IsNullOrEmpty())
+            {
+                foreach (var filename in tabs)
+                {
+                    if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
+                    {
+                        OpenDocument(filename);
+                    }
+                }
+            }
+        }
         private void operateButton_MouseDown(object sender, MouseEventArgs e)
         {
       
