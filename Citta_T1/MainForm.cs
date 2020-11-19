@@ -42,7 +42,6 @@ namespace C2
         public bool operateButtonSelect { get; private set; }
         #region
         SpecialTabItem TabNew;
-        TabBarButton BtnNew;
         FindDialog MyFindDialog;
         ShortcutKeysTable ShortcutKeys;
         #endregion
@@ -59,14 +58,13 @@ namespace C2
         delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
 
-        private OpenFileDialog openFileDialog1;
         public MainForm(string userName)
         {
             this.UserName = userName;
 
             InitializeComponent();
             this.usernamelabel.Text = this.UserName;
-            // 数据导入
+
             InitializeInputDataForm();
             InitializeBottomPrviewPanel();
             InitializeLeftToolPanel();
@@ -75,9 +73,8 @@ namespace C2
             InitializeShortcutKeys();
             InitializeGlobalVariable();
 
-            MdiClient = this.mdiWorkSpace;
-            openFileDialog1 = new OpenFileDialog();
-            this.NewForm(FormType.StartForm);
+            InitializeMdiClient();
+            InitializeStartForm();
             if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
                 OpenSavedTabs();
         }
@@ -160,7 +157,7 @@ namespace C2
             //MenuQuickHelp.ShortcutKeys = KeyMap.Help.Keys;
         }
         #endregion
-        private void InitializeGlobalVariable()
+        void InitializeGlobalVariable()
         {
             Global.SetMainForm(this);
             Global.SetTaskBar(this.TaskBar);
@@ -170,6 +167,14 @@ namespace C2
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetMindMapModelControl(this.mindMapModelControl);
+        }
+        void InitializeMdiClient()
+        {
+            MdiClient = this.mdiWorkSpace;
+        }
+        void InitializeStartForm()
+        {
+            this.NewForm(FormType.StartForm);
         }
         #endregion
         void SetAGoodLocation()
