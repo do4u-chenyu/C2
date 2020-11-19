@@ -1,12 +1,18 @@
-﻿using C2.Core;
+﻿using C2.Configuration;
+using C2.Controls;
+using C2.Controls.OS;
+using C2.Core;
+using C2.Core.Win32Apis;
 using C2.Dialogs;
 using C2.Globalization;
 using C2.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 
 namespace C2
@@ -22,14 +28,43 @@ namespace C2
     }
     static class Program
     {
+        public const long OPEN_FILES_MESSAGE = 0x0999;
+        public static bool IsRunTime { get; private set; }
         public static MainForm MainForm { get; set; }
 
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(params string[] args)
         {
+            #region
+            if (PreProcessApplicationArgs(args))
+                return;
+
+            // 如果需要打开文件, 偿试寻找是否有已经存在的应用实例打开
+            if (!args.IsNullOrEmpty() && TryOpenByOtherInstance(args))
+                return;
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            IsRunTime = true;
+
+            Options.Current.OpitonsChanged += Current_OpitonsChanged;
+            Options.Current.Load(args);
+
+            //D.Message("ProgramEnvironment.RunMode is {0}", ProgramEnvironment.RunMode);
+            //D.Message("ApplicationDataDirectory is {0}", ProgramEnvironment.ApplicationDataDirectory);
+            //D.Message(new string('-', 40));
+
+            UIColorThemeManage.Initialize();
+            //D.Message("LanguageManage.Initialize");
+            LanguageManage.Initialize();
+            RecentFilesManage.Default.Initialize();
+
+            Current_OpitonsChanged(null, EventArgs.Empty);
+            #endregion
             DesignerModelClass.IsDesignerMode = false;
             MainForm = LoginForm.mainForm;
             ConfigProgram();
@@ -49,6 +84,7 @@ namespace C2
                 //1.2 已经有一个实例在运行
                 HandleRunningInstance(instance);
             }
+            C2.Configuration.Options.Current.Save();
 
         }
 
@@ -123,5 +159,51 @@ namespace C2
         [DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(System.IntPtr hWnd);
         #endregion
+        static bool TryOpenByOtherInstance(string[] args)
+        {
+            var files = args.Where(arg => !arg.StartsWith("-")).ToArray();
+            if (files.IsEmpty())
+                return false;
+
+            var name = Process.GetCurrentProcess().ProcessName;
+            var otherInstances = Process.GetProcessesByName(name)
+                .Where(inst => inst != Process.GetCurrentProcess() && inst.MainWindowHandle != IntPtr.Zero)
+                .ToArray();
+            if (!otherInstances.IsNullOrEmpty())
+            {
+                var inst = otherInstances.First();
+                var data = Encoding.UTF8.GetBytes(files.JoinString(";"));
+                var buffer = OSHelper.IntPtrAlloc(data);
+
+                var cds = new COPYDATASTRUCT();
+                cds.dwData = new IntPtr(OPEN_FILES_MESSAGE);
+                cds.cbData = data.Length;
+                cds.lpData = buffer;
+                var cbs_buffer = OSHelper.IntPtrAlloc(cds);
+                IntPtr result = User32.SendMessage(inst.MainWindowHandle, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
+                OSHelper.IntPtrFree(cbs_buffer);
+                OSHelper.IntPtrFree(buffer);
+
+                return result != IntPtr.Zero;
+            }
+
+            return false;
+        }
+
+        static bool PreProcessApplicationArgs(string[] args)
+        {
+            if (AssociationHelper.PreProcessApplicationArgs(args))
+                return true;
+
+            return false;
+        }
+
+        static void Current_OpitonsChanged(object sender, EventArgs e)
+        {
+            UITheme.Default.Colors = UIColorThemeManage.GetNamedTheme(CommonOptions.Appearances.UIThemeName);
+            LanguageManage.ChangeLanguage(CommonOptions.Localization.LanguageID);
+
+            //D.Message(string.Format("Test: Options => {0}", Lang._("Options")));
+        }
     }
 }

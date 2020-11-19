@@ -1105,8 +1105,12 @@ namespace C2.Core
             foreach (var c in value)
             {
                 if (c == ';' && lastc != '\\')
+                {
                     list.Add(sb.ToString());
-                sb.Append(c);
+                    sb.Clear();
+                }
+                else
+                    sb.Append(c);
                 lastc = c;
             }
 
