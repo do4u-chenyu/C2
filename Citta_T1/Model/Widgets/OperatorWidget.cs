@@ -77,20 +77,28 @@ namespace C2.Model.Widgets
         public override void Serialize(XmlDocument dom, XmlElement node)
         {
             base.Serialize(dom, node);
+            XmlElement opItemNode = node.OwnerDocument.CreateElement("op_items");
+            // 模型算子持久化
+            if (HasModelOperator)
+            {
+                ModelXmlWriter modelOp = new ModelXmlWriter("op_item", opItemNode);
+                modelOp.Write("name", ModelDataItem.FileName)
+                       .Write("path", ModelDataItem.FilePath)
+                       .Write("subtype", "model");
+            }
+
+            // 单算子持久化
             if (OpName == null)
+            {
+                node.AppendChild(opItemNode);
                 return;
-            XmlElement opItemNode = node.OwnerDocument.CreateElement("op_items");          
+            }
+
             ModelXmlWriter mxw = new ModelXmlWriter("op_item", opItemNode);
             mxw.Write("name", OpName)
                .Write("subtype", OpType)
                .Write("status", Status);
 
-            // 模型算子无后续信息，直接返回
-            //if (OpType == OpType.ModelOperator)
-            //{
-            //    node.AppendChild(opItemNode);
-            //    return;
-            //}             
             /*
              *  单算子配置
              */
@@ -103,12 +111,12 @@ namespace C2.Model.Widgets
             *  单算子的数据源持久化
             */
             if (DataSourceItem != null)
-                WriteAttribute(opItemNode, DataSourceItem, "data_item");
+                WriteAttribute(mxw.Element, DataSourceItem, "data_item");
             /*
             *  单算子的结果持久化
             */
             if (ResultItem != null)
-                WriteAttribute(opItemNode, ResultItem, "result_item");
+                WriteAttribute(mxw.Element, ResultItem, "result_item");
             node.AppendChild(opItemNode);
         }
 
@@ -121,14 +129,19 @@ namespace C2.Model.Widgets
                 string subtype = Utils.XmlUtil.GetInnerText(opItem, "subtype");
                 if (string.IsNullOrEmpty(subtype))
                     return;
-                // 读取模型算子
-                //if (subtype == OpType.ModelOperator.ToString())
-                //{
+                if (subtype == "model")
+                {
+                    // 读取模型算子
 
-                //    return;
-                //}
-                // 读取单算子
-  
+                }
+                else
+                {
+                    // 读取单算子
+
+
+                }
+
+
             }
         }
 
