@@ -377,9 +377,35 @@ namespace C2
                 opw.ModelRelateTab = TaskBar.SelectedItem;
         }
 
-        internal void OpenModelDocument_Click()
+        internal void OpenModelDocument_Click(string templateName)
         {
-            //throw new NotImplementedException();
+            switch (templateName)
+            {
+                case "QQ视频模型":
+                    LoadCanvasFormByXml(Properties.Resources.QQ视频模型); ;
+                    break;
+                case "微信接单模型":
+                    LoadCanvasFormByXml(Properties.Resources.微信接单模型); ;
+                    break;
+                case "公交色狼模型":
+                    LoadCanvasFormByXml(Properties.Resources.公交色狼模型); ;
+                    break;
+                case "赌博网站模型":
+                    LoadCanvasFormByXml(Properties.Resources.赌博网站模型); ;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void LoadCanvasFormByXml(string xmlString)
+        {
+            ModelDocument doc = new ModelDocument(xmlString);
+            CanvasForm form = new CanvasForm(doc);
+            ShowForm(form);
+
+            doc.Load();
+            form.CanvasAddElement(doc);
         }
 
         public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)

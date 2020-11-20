@@ -1,18 +1,13 @@
-﻿using NPOI.SS.Formula.Functions;
-using NPOI.SS.UserModel;
+﻿using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 using NPOI.Util;
-using NPOI.XSSF.UserModel;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C2.Utils
 {
-	public static class Constants {
+    public static class Constants {
 		/**
 		 * 星期 默认格式
 		 */
@@ -345,7 +340,9 @@ namespace C2.Utils
 		public static String GetCellValue(ExcelRange cell)
         {
 			String cellValue = String.Empty;
-            try
+			if (cell == null || cell.Value == null)
+				return cellValue;
+			try
             {
 				if (cell == null)
 					return cellValue;
@@ -355,8 +352,8 @@ namespace C2.Utils
 				string formatString = cell.Style.Numberformat.Format;
 				if (IsDateFormat(formatID, formatString))
                 {
-					if (cell.Value is DateTime)
-						cellValue = ExcelUtil.COMMON_DATE_FORMAT.Format((DateTime)cell.Value); // 补全的时候会出问题，可能只有时间差一个H或者一个M或者一个S
+					if (cell.Value is DateTime time)
+						cellValue = ExcelUtil.COMMON_DATE_FORMAT.Format(time); // 补全的时候会出问题，可能只有时间差一个H或者一个M或者一个S
 					else if (cell.Value is double)
 						cellValue = ExcelUtil.GetFormatDateStringValue(
 							formatID,
@@ -367,8 +364,8 @@ namespace C2.Utils
 				}
 				else if (IsTimeFormat(formatID, formatString))
                 {
-					if (cell.Value is DateTime)
-						cellValue = ExcelUtil.COMMON_TIME_FORMAT.Format((DateTime)cell.Value);
+					if (cell.Value is DateTime time)
+						cellValue = ExcelUtil.COMMON_TIME_FORMAT.Format(time);
 					else if (cell.Value is double)
 						cellValue = ExcelUtil.GetFormatTimeStringValue(
 							formatID,
@@ -376,7 +373,7 @@ namespace C2.Utils
 							Convert.ToDouble(cell.Value));
 				}
 				else
-					cellValue = cell.Value != null ? cell.Value.ToString() : string.Empty;
+					cellValue = cell.Value.ToString();
 			}
 			catch (Exception e)
             {

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelButton));
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.lelfPictureBox = new System.Windows.Forms.PictureBox();
             this.textButton = new C2.Controls.Common.NoFocusButton();
@@ -50,22 +49,21 @@
             // 
             // rightPictureBox
             // 
-            this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(123, 3);
+            this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
+            this.rightPictureBox.Location = new System.Drawing.Point(125, 6);
             this.rightPictureBox.Name = "rightPictureBox";
-            this.rightPictureBox.Size = new System.Drawing.Size(23, 23);
-            this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.rightPictureBox.Size = new System.Drawing.Size(16, 16);
             this.rightPictureBox.TabIndex = 0;
             this.rightPictureBox.TabStop = false;
             // 
             // lelfPictureBox
             // 
-            this.lelfPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("lelfPictureBox.Image")));
-            this.lelfPictureBox.Location = new System.Drawing.Point(2, 1);
+            this.lelfPictureBox.Image = global::C2.Properties.Resources.模型视图;
+            this.lelfPictureBox.Location = new System.Drawing.Point(3, 6);
             this.lelfPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.lelfPictureBox.Name = "lelfPictureBox";
-            this.lelfPictureBox.Size = new System.Drawing.Size(23, 23);
-            this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.lelfPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.lelfPictureBox.TabIndex = 1;
             this.lelfPictureBox.TabStop = false;
             // 
