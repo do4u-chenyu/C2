@@ -2519,14 +2519,20 @@
     <None Include="Resources\Templates\树状图.xml" />
     <None Include="Resources\Templates\思维导图.xml" />
     <None Include="Resources\Templates\空模板.xml" />
-    <None Include="Resources\Templates\QQ视频模型.xml">
+    <None Include="Resources\Templates\QQ视频模型\QQ视频模型.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Templates\公交色狼模型.xml" />
-    <None Include="Resources\Templates\微信接单模型.xml" />
+    <None Include="Resources\Templates\公交色狼模型\公交色狼模型.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Templates\微信接单模型\微信接单模型.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\Templates\组织架构图.xml" />
     <None Include="Resources\Templates\逻辑图.xml" />
-    <None Include="Resources\Templates\赌博网站模型.xml" />
+    <None Include="Resources\Templates\赌博网站模型\赌博网站模型.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\thanks.xml">
       <SubType>Designer</SubType>
     </Content>
