@@ -344,10 +344,6 @@ namespace C2.Utils
 				return cellValue;
 			try
             {
-				if (cell == null)
-					return cellValue;
-				if (cell.Value == null)
-					return string.Empty;
 				short formatID = Convert.ToInt16(cell.Style.Numberformat.NumFmtID);
 				string formatString = cell.Style.Numberformat.Format;
 				if (IsDateFormat(formatID, formatString))
