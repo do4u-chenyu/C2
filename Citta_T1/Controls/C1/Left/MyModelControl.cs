@@ -57,7 +57,6 @@ namespace C2.Controls.Left
                     mb.EnableDeleteDocumentMenu();
                     mb.EnableRenameDocumentMenu();
                 }
-
         }
 
 
