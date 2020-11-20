@@ -61,8 +61,8 @@ namespace C2.Controls
             Items.Add(new ThumbItem("微信接单模型", global::C2.Properties.Resources.gunLuntan, ThumbItem.ModelTypes.Model));
             Items.Add(new ThumbItem("公交色狼模型", global::C2.Properties.Resources.yellowGroup, ThumbItem.ModelTypes.Model));
             Items.Add(new ThumbItem("赌博网站模型", global::C2.Properties.Resources.bank, ThumbItem.ModelTypes.Model));
-            //Items.Add(new ThumbItem("", global::C2.Properties.Resources.modelTopLabel));
-            //Items.Add(new ThumbItem("", global::C2.Properties.Resources.BusinessViewLabel));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.modelTopLabel, ThumbItem.ModelTypes.Null));
+            Items.Add(new ThumbItem("", global::C2.Properties.Resources.BusinessViewLabel, ThumbItem.ModelTypes.Null));
         }
         [DefaultValue(typeof(Size), "4, 2")]
         public Size Dimension
@@ -553,7 +553,7 @@ namespace C2.Controls
                     Global.GetMainForm().NewDocumentForm_Click(item.Text);
                     break;
                 case ThumbItem.ModelTypes.Model:
-                    Global.GetMainForm().OpenModelDocument_Click();
+                    Global.GetMainForm().OpenModelDocument_Click(item.Text);
                     break;
                 default:
                     break;
