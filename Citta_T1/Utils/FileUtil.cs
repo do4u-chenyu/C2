@@ -204,11 +204,11 @@ namespace C2.Utils
                 //npoi的索引从0开始，epplus的索引从1开始
                 if (fullFilePath.EndsWith(".xlsx"))
                 {
-                    using (ExcelPackage package = new ExcelPackage(fs))
+                    using (ExcelPackage package = new ExcelPackage(fs))    //  此步骤, 100W_test.xlsx加载需要2.6秒, 后续要优化
                     {
                         ExcelWorksheet worksheet; // 为了测试性能,将三元语句拆开
-                        if (string.IsNullOrEmpty(sheetName))
-                            worksheet = package.Workbook.Worksheets[0];
+                        if (string.IsNullOrEmpty(sheetName))  
+                            worksheet = package.Workbook.Worksheets[0];    //  此步骤, 100W_test.xlsx加载需要17秒, 后续要优化
                         else
                             worksheet = package.Workbook.Worksheets[sheetName];
                         
