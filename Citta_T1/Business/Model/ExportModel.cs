@@ -44,6 +44,11 @@ namespace C2.Business.Model
             // 准备要导出的模型文档
             if (!CopyModelAndDataFiles())
                 return;
+        }
+
+        public void GenExportIAO()
+        {
+            //newModelPath应该要变
 
             // 导出Iao模型
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -60,15 +65,14 @@ namespace C2.Business.Model
             // 清场
             if (Directory.Exists(newModelPath))
                 Directory.Delete(newModelPath, true);
-
-
         }
+
         private bool CopyModelAndDataFiles()
         {
-
+            string exportPath = Path.Combine(Global.UserWorkspacePath, "模型市场");
             string modelPath = Path.GetDirectoryName(this.FullXmlFilePath);
             string modelName = Path.GetFileNameWithoutExtension(this.FullXmlFilePath);
-            newModelPath = Path.Combine(modelPath, modelName);
+            newModelPath = Path.Combine(exportPath, modelName);
             Directory.CreateDirectory(newModelPath);
             string[] filePaths = Directory.GetFiles(modelPath, "*.*");
             foreach (string file in filePaths)

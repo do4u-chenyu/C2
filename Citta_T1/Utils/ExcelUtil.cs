@@ -344,7 +344,6 @@ namespace C2.Utils
 				return cellValue;
 			try
             {
-
 				short formatID = Convert.ToInt16(cell.Style.Numberformat.NumFmtID);
 				string formatString = cell.Style.Numberformat.Format;
 				if (IsDateFormat(formatID, formatString))

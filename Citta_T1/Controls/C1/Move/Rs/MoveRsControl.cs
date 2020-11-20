@@ -66,7 +66,7 @@ namespace C2.Controls.Move.Rs
 
             InitializeOpPinPicture();
             ChangeSize(size);
-            this.moveWrapper = new MoveWrapper();
+            this.moveWrapper = new MoveWrapper(this);
 
             endLineIndexs.Add(-1);
             oldControlPosition = this.Location;
@@ -130,7 +130,7 @@ namespace C2.Controls.Move.Rs
                         mr.UpdatePoints();
                     }
                 }
-                this.moveWrapper.DragMove(e);
+                this.moveWrapper.MouseMove(new Point(left, top));
             }
         }
         private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
@@ -153,8 +153,8 @@ namespace C2.Controls.Move.Rs
                 mouseOffset.Y = e.Y;
                 cmd = ECommandType.Hold;
             }
+            this.moveWrapper.MouseDown(this.Location);
             oldControlPosition = this.Location;
-            this.moveWrapper.DragDown(e);
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -182,7 +182,7 @@ namespace C2.Controls.Move.Rs
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
                 }
                 else if (cmd == ECommandType.Hold)
-                    this.moveWrapper.DragUp(e);
+                    this.moveWrapper.MouseUp();
                 Global.GetNaviViewControl().UpdateNaviView();
             }
             cmd = ECommandType.Null;

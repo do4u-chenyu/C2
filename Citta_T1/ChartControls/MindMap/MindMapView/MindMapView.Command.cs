@@ -141,13 +141,18 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
+                //TODO
+                //目前连同topic可以一起被剪切复制，不知道后续是否会存在逻辑不封闭
                 var topics = SelectedTopics.OrderBy(t => t.Level).ToArray();
                 var command = new CutCommand(topics);
                 ExecuteCommand(command);
             }
             else if (SelectedObject is Widget)
             {
-                var widgets = SelectedObjects.Where(o => o is Widget).ToArray();
+                //只有blu挂件可以被剪切
+                var widgets = SelectedObjects.Where(o => o is NoteWidget || o is ProgressBarWidget || o is PictureWidget).ToArray();
+                if (widgets.Count() == 0)
+                    return;
                 var command = new CutCommand(widgets);
                 ExecuteCommand(command);
             }
