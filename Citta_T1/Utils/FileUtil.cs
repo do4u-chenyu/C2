@@ -1,5 +1,4 @@
-﻿using C2.Core;
-using C2.Model;
+﻿using C2.Model;
 using ICSharpCode.SharpZipLib.Checksum;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
@@ -207,7 +206,14 @@ namespace C2.Utils
                 {
                     using (ExcelPackage package = new ExcelPackage(fs))
                     {
-                        ExcelWorksheet worksheet = string.IsNullOrEmpty(sheetName) ? package.Workbook.Worksheets[0] : package.Workbook.Worksheets[sheetName];
+                        ExcelWorksheet worksheet; // 为了测试性能,将三元语句拆开
+                        if (string.IsNullOrEmpty(sheetName))
+                            worksheet = package.Workbook.Worksheets[0];
+                        else
+                            worksheet = package.Workbook.Worksheets[sheetName];
+                        
+
+
                         if (worksheet == null)
                         {
                             fs.Close();
