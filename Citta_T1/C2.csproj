@@ -170,7 +170,6 @@
     <Compile Include="Controls\C1\Left\LeftFoldButton.Designer.cs">
       <DependentUpon>LeftFoldButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\C1\MoveWrapper1.cs" />
     <Compile Include="Controls\DataCharts\BarChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
