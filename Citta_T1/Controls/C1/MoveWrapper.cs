@@ -1,131 +1,156 @@
 ﻿using C2.Business.Model;
+using C2.Controls.Move;
+using C2.Controls.Move.Op;
 using C2.Core;
-using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Controls
 {
     class MoveWrapper
     {
-        private Point start, now;
-        private bool startDrag;
-
-        private int worldWidth;
-        private int worldHeight;
-        private Bitmap staticImage;
-
-
-        public float Factor { get; set; }
-        public bool StartDrag { get => startDrag; set => startDrag = value; }
-        public int WorldWidth { get => worldWidth; set => worldWidth = value; }
-        public int WorldHeight { get => worldHeight; set => worldHeight = value; }
-        public Point Start { get => start; set => start = value; }
-        public Point Now { get => now; set => now = value; }
-        public Bitmap StaticImage { get => staticImage; set => staticImage = value; }
-
-        public MoveWrapper()
+        private Point now;
+        private bool on;
+        private MoveBaseControl moc;
+        private List<ModelRelation> startRels;
+        private List<ModelRelation> endRels;
+        public MoveWrapper(MoveBaseControl moc)
         {
-            this.worldWidth = 2000;
-            this.worldHeight = 1000;
-            this.startDrag = false;
+            this.moc = moc;
         }
-        public Bitmap CreateWorldImage()
+        public Point Now
         {
-            Bitmap staticImage = new Bitmap(Convert.ToInt32(this.WorldWidth * Factor), Convert.ToInt32(this.WorldHeight * Factor));
-            Graphics g = Graphics.FromImage(staticImage);
-            g.Clear(Color.White);
-            g.Dispose();
-            return staticImage;
-        }
-
-        public void MoveWorldImage(Graphics n)
-        {
-            // 每次Move都需要画一张新图
-            if (this.StaticImage != null)
+            get { return this.now; }
+            set
             {
-                this.StaticImage.Dispose();
-                this.StaticImage = null;
+                if (value != now)
+                {
+                    Point old = now;
+                    now = value;
+                    if (on)
+                        OnNowPointChange(old);
+                }
             }
-            this.StaticImage = this.CreateWorldImage();
-            ModelDocument currentDoc = Global.GetCurrentModelDocument();
-            Point mapOrigin = currentDoc.WorldMap.MapOrigin;
-            float factor = currentDoc.WorldMap.ScreenFactor;
-            mapOrigin.X = Convert.ToInt32(mapOrigin.X * factor);
-            mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * factor);
-            Graphics g = Graphics.FromImage(StaticImage);
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            foreach (ModelRelation mr in currentDoc.ModelRelations)
-            {
-                PointF s = currentDoc.WorldMap.ScreenToWorldF(mr.StartP, false);
-                PointF a = currentDoc.WorldMap.ScreenToWorldF(mr.A, false);
-                PointF b = currentDoc.WorldMap.ScreenToWorldF(mr.B, false);
-                PointF e = currentDoc.WorldMap.ScreenToWorldF(mr.EndP, false);
-                LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
-            }
-            g.Dispose();
-            n.DrawImageUnscaled(StaticImage, mapOrigin);
-            this.StaticImage.Dispose();
-            this.StaticImage = null;
-            this.RepaintCtrs();
+        }
+        public void MouseDown(Point p)
+        {
+            this.on = true;
+            this.now = p;
+            this.startRels = Global.GetCurrentModelDocument().ModelRelations.Where(rel => rel.StartID == this.moc.ID).ToList();
+            this.endRels = Global.GetCurrentModelDocument().ModelRelations.Where(rel => rel.EndID == this.moc.ID).ToList();
+        }
+        public void MouseMove(Point p)
+        {
+            this.Now = p;
+        }
+        public void MouseUp()
+        {
+            this.on = false;
+        }
+        private void OnNowPointChange(Point old)
+        {
+            Rectangle oldRegion = GetRegion(old);
+            Rectangle newRegion = GetRegion(Now);
+            oldRegion.Inflate(1, 1);
+            newRegion.Inflate(1, 1);
+            Invalidate(oldRegion);
+            Invalidate(newRegion);
         }
 
-        public void InitDragWrapper()
+        private void Invalidate(Rectangle region)
         {
-            Factor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
+            Global.GetCanvasPanel().Invalidate(region);
         }
-        public void DragUp( MouseEventArgs e)
-        {
-            Graphics n = Global.GetCanvasPanel().CreateGraphics();
-            this.Now = e.Location;
-            this.InitDragWrapper();
-            this.MoveWorldImage(n);
-            Global.GetCanvasPanel().Invalidate();
-            n.Dispose();
-            this.StartDrag = false;
-            this.Start = e.Location;
-        }
-        public void DragDown(MouseEventArgs e)
-        {
-            this.startDrag = true;
-            this.start = e.Location;
-            if (this.staticImage != null)
-            {   // bitmap是重型资源,需要强制释放
-                this.staticImage.Dispose();
-                this.staticImage = null;
-            }
-            this.InitDragWrapper();
-            this.staticImage = this.CreateWorldImage();
-        }
-        public void DragMove(MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-                return;
-            this.now = e.Location;
-            this.InitDragWrapper();
-            Graphics n = Global.GetCanvasPanel().CreateGraphics();
 
-            this.MoveWorldImage(n);
-            n.Dispose();
-        }
-        /// <summary>
-        ///  重绘碰到的控件
-        /// </summary>
-        private void RepaintCtrs()
+        private Rectangle GetRegion(Point p)
         {
-            CanvasPanel cp = Global.GetCanvasPanel();
-            List<ModelElement> md = Global.GetCurrentModelDocument().ModelElements;
+            int left = Math.Min(Math.Min(p.X, this.MinStartRelsLeft()), this.MinEndRelsLeft());
+            int top = Math.Min(Math.Min(p.Y, this.MinStartRelsTop()), this.MinEndRelsTop()); 
+            int right = Math.Max(Math.Max(p.X + this.moc.Width, this.MaxStartRelsRight()), this.MaxEndRelsRight()); 
+            int bottom = Math.Max(Math.Max(p.Y + this.moc.Height, this.MaxStartRelsBottom()), this.MaxEndRelsBottom());
+            return new Rectangle(left, top, right - left, bottom - top);
+        }
 
-            foreach (ModelElement me in md)
-            {
-                Control ctr = me.InnerControl;
-                Rectangle ctrRect = new Rectangle(me.Location, ctr.Size);
-                cp.Invalidate(ctrRect);
-                cp.Update();
-            }
+
+        private int MinStartRelsLeft()
+        {
+            if (this.startRels.Count == 0)
+                return this.moc.Location.X;
+            float min = this.startRels[0].EndP.X;
+            foreach (ModelRelation mr in this.startRels)
+                min = Math.Min(min, mr.EndP.X);
+            return (int)min;
+        }
+        private int MinEndRelsLeft()
+        {
+            if (this.endRels.Count == 0)
+                return this.moc.Location.X;
+            float min = this.endRels[0].StartP.X;
+            foreach (ModelRelation mr in this.endRels)
+                min = Math.Min(min, mr.StartP.X);
+            return (int)min;
+        }
+
+        private int MinStartRelsTop()
+        {
+            if (this.startRels.Count == 0)
+                return this.moc.Location.Y;
+            float min = this.startRels[0].EndP.Y;
+            foreach (ModelRelation mr in this.startRels)
+                min = Math.Min(min, mr.EndP.Y);
+            return (int)min;
+        }
+        private int MinEndRelsTop()
+        {
+            if (this.endRels.Count == 0)
+                return this.moc.Location.Y;
+            float min = this.endRels[0].StartP.Y;
+            foreach (ModelRelation mr in this.endRels)
+                min = Math.Min(min, mr.StartP.Y);
+            return (int)min;
+        }
+        private int MaxStartRelsRight()
+        {
+            if (this.startRels.Count == 0)
+                return this.moc.Location.Y + this.moc.Width;
+            float max = this.startRels[0].EndP.X;
+            foreach (ModelRelation mr in this.startRels)
+                max = Math.Max(max, mr.EndP.X);
+            return (int)max;
+        }
+
+        private int MaxEndRelsRight()
+        {
+            if (this.endRels.Count == 0)
+                return this.moc.Location.Y + this.moc.Width;
+            float max = this.endRels[0].StartP.X;
+            foreach (ModelRelation mr in this.endRels)
+                max = Math.Max(max, mr.StartP.X);
+            return (int)max;
+        }
+        private int MaxStartRelsBottom()
+        {
+            if (this.startRels.Count == 0)
+                return this.moc.Location.Y + this.moc.Height;
+            float max = this.startRels[0].EndP.Y;
+            foreach (ModelRelation mr in this.startRels)
+                max = Math.Max(max, mr.EndP.Y);
+            return (int)max;
+        }
+
+        private int MaxEndRelsBottom()
+        {
+            if (this.endRels.Count == 0)
+                return this.moc.Location.Y + this.moc.Height;
+            float max = this.endRels[0].StartP.Y;
+            foreach (ModelRelation mr in this.endRels)
+                max = Math.Max(max, mr.StartP.Y);
+            return (int)max;
         }
     }
 }

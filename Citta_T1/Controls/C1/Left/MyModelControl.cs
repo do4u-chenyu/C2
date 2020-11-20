@@ -47,14 +47,13 @@ namespace C2.Controls.Left
         // 文档关闭后, 菜单栏可以打开,删除,重命名
         public void EnableClosedDocumentMenu(string modelTitle)
         {
-            foreach (ModelButton mb in this.Controls)
+            foreach (ModelButton mb in this.MyModelPaintPanel.Controls)
                 if (mb.ModelTitle == modelTitle)
                 {
                     mb.EnableOpenDocumentMenu();
                     mb.EnableDeleteDocumentMenu();
                     mb.EnableRenameDocumentMenu();
                 }
-
         }
 
 
