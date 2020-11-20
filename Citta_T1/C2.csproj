@@ -2166,13 +2166,13 @@
     <Content Include="Resources\PictureIconLib\41_打击传销.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\44_钱庄.png">
+    <Content Include="Resources\PictureIconLib\44_地下钱庄.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\50_个人极端.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\54交管.png">
+    <Content Include="Resources\PictureIconLib\54_交管.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\62_Hive.png">
@@ -2400,7 +2400,7 @@
     <Content Include="Resources\PictureIconLib\98_海量.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\9_黑产.png">
+    <Content Include="Resources\PictureIconLib\9_黑灰产.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\resource.h" />
