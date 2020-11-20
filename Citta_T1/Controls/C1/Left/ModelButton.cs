@@ -34,7 +34,7 @@ namespace C2.Controls.Left
         {
             // 文件打开后,不能重复打开,不能删除,不能重命名
             //现在需要手动new一个canvasform
-            Global.GetMainForm().LoadCanvasFormDoc(this.textButton.Text);
+            Global.GetMainForm().LoadCanvasFormByXml( Path.Combine(Global.UserWorkspacePath, "模型市场"), this.textButton.Text);
 
             this.OpenToolStripMenuItem.Enabled = false;
             this.RenameToolStripMenuItem.Enabled = false;
