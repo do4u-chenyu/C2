@@ -17,8 +17,8 @@ namespace C2.Controls.Left
             InitializeComponent();
             this.textButton.Text = modelTitle;
             this.oldTextString = modelTitle;
-            fullFilePath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场",this.textButton.Text + ".xml");
-            //fullFilePath = Path.Combine(Global.GetCurrentModelDocument().UserPath, this.textButton.Text, this.textButton.Text + ".xml");
+            fullFilePath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场", this.textButton.Text + ".xml");
+           
         }
 
 
