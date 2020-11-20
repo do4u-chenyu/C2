@@ -385,25 +385,26 @@ namespace C2
             switch (templateName)
             {
                 case "QQ视频模型":
-                    LoadCanvasFormByXml(Properties.Resources.QQ视频模型); ;
+                    LoadCanvasFormByXml(templateName); ;
                     break;
                 case "微信接单模型":
-                    LoadCanvasFormByXml(Properties.Resources.微信接单模型); ;
+                    LoadCanvasFormByXml(templateName); ;
                     break;
                 case "公交色狼模型":
-                    LoadCanvasFormByXml(Properties.Resources.公交色狼模型); ;
+                    LoadCanvasFormByXml(templateName); ;
                     break;
                 case "赌博网站模型":
-                    LoadCanvasFormByXml(Properties.Resources.赌博网站模型); ;
+                    LoadCanvasFormByXml(templateName); ;
                     break;
                 default:
                     break;
             }
         }
 
-        private void LoadCanvasFormByXml(string xmlString)
+        private void LoadCanvasFormByXml(string modelTitle)
         {
-            ModelDocument doc = new ModelDocument(xmlString);
+            ModelDocument doc = new ModelDocument(modelTitle, userName);
+            doc.SavePath = Path.Combine(Application.StartupPath, "Resources\\Templates", modelTitle); ;
             CanvasForm form = new CanvasForm(doc);
             ShowForm(form);
 

@@ -44,13 +44,7 @@ namespace C2.Business.Model
         {
             this.SavePath = Path.Combine(this.UserPath, "业务视图", mindMapName, modelTitle);
         }
-        public ModelDocument(string xmlString)
-        {
-            if (string.IsNullOrEmpty(xmlString))
-                throw new ArgumentNullException();
-            XmlDocument dom = new XmlDocument();
-            dom.LoadXml(xmlString);
-        }
+
         public ModelDocument(string modelTitle, string userName)
         {
             this.Name = modelTitle;
