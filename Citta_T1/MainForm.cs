@@ -408,6 +408,18 @@ namespace C2
             form.CanvasAddElement(doc);
         }
 
+        public void LoadCanvasFormDoc(string fileTitle)
+        {
+            ModelDocument doc = new ModelDocument(fileTitle, this.UserName)
+            {
+                SavePath = Path.Combine(Global.UserWorkspacePath, "模型市场", fileTitle)
+            };
+            CanvasForm form = new CanvasForm(doc);
+            ShowForm(form);
+            doc.Load();
+            form.CanvasAddElement(doc);
+        }
+
         public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
             ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName, mindMapName);
