@@ -48,11 +48,14 @@ namespace C2.Model.Widgets
             Status = OpStatus.Null;
         }
         [Browsable(false)]
+        #region 模型算子属性
         public bool HasModelOperator { get; set; }//是否包含模型算子
         [Browsable(false)]
         public TabItem ModelRelateTab { get; set; }//模型对应的tab
         [Browsable(false)]
         public DataItem ModelDataItem { get; set; }//模型相关属性
+        #endregion
+        #region 单算子属性
         [Browsable(false)]
         public string OpName { get; set; }  //菜单栏名称
         [Browsable(false)]
@@ -65,7 +68,7 @@ namespace C2.Model.Widgets
         public DataItem ResultItem { get; set; }  //生成的结果
         [Browsable(false)]
         public OpStatus Status { get; set; }  //算子状态
-         
+        #endregion
         public override string GetTypeID()
         {
             return TypeID;
