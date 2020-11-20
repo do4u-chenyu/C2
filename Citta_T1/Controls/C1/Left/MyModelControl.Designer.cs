@@ -58,6 +58,7 @@
             this.MyModelCreateButton.Size = new System.Drawing.Size(25, 25);
             this.MyModelCreateButton.TabIndex = 1;
             this.MyModelCreateButton.UseVisualStyleBackColor = false;
+            this.MyModelCreateButton.Click += new System.EventHandler(this.MyModelCreateButton_Click);
             // 
             // ItemLabel
             // 

@@ -1,4 +1,5 @@
-﻿using C2.Core;
+﻿using C2.Business.Model;
+using C2.Core;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -49,7 +50,7 @@ namespace C2.Controls.Left
         // 文档关闭后, 菜单栏可以打开,删除,重命名
         public void EnableClosedDocumentMenu(string modelTitle)
         {
-            foreach (ModelButton mb in this.Controls)
+            foreach (ModelButton mb in this.MyModelPaintPanel.Controls)
                 if (mb.ModelTitle == modelTitle)
                 {
                     mb.EnableOpenDocumentMenu();
@@ -106,6 +107,11 @@ namespace C2.Controls.Left
             p.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
             p.DashPattern = new float[] { 4, 4 };
             g.DrawLine(p, 0, 30, 200, 30);//x1,y1,x2,y2
+        }
+
+        private void MyModelCreateButton_Click(object sender, EventArgs e)
+        {
+            ImportModel.GetInstance().ImportIaoFile(Global.GetMainForm().UserName);
         }
     }
 }
