@@ -2412,6 +2412,30 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找类似 &lt;ModelDocument&gt;
+        ///  &lt;Version&gt;V1.0&lt;/Version&gt;
+        ///  &lt;MapOrigin&gt;{X=0,Y=-10}&lt;/MapOrigin&gt;
+        ///  &lt;ModelElement&gt;
+        ///    &lt;id&gt;4&lt;/id&gt;
+        ///    &lt;type&gt;Operator&lt;/type&gt;
+        ///    &lt;name&gt;统计群ID命中次数&lt;/name&gt;
+        ///    &lt;subtype&gt;FreqOperator&lt;/subtype&gt;
+        ///    &lt;location&gt;{X=56,Y=291}&lt;/location&gt;
+        ///    &lt;status&gt;Done&lt;/status&gt;
+        ///    &lt;enableoption&gt;True&lt;/enableoption&gt;
+        ///    &lt;option&gt;
+        ///      &lt;columnname0&gt;GROUPCODE	QQNUM	CAPTURE_TIME	IP	IPAREAID	CONTENT	_QUERY_MATCHTERMS	DotIP	Position&lt;/columnname0&gt;
+        ///      &lt;outfield0&gt;0&lt;/outfield0&gt;
+        ///      &lt;repetition&gt;True&lt;/repetition&gt;
+        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string QQ视频模型 {
+            get {
+                return ResourceManager.GetString("QQ视频模型", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap question_large {
@@ -3218,7 +3242,8 @@ namespace C2.Properties {
         ///		&lt;item name=&quot;About&quot;&gt;关于&lt;/item&gt;
         ///		&lt;item name=&quot;Menu&quot;&gt;菜 单&lt;/item&gt;
         ///		&lt;item name=&quot;Open&quot;&gt;打开&lt;/item&gt;
-        ///		&lt;item name=&quot;N [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;item name=&quot;New&quot;&gt;新建&lt;/item&gt;
+        ///		&lt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string zh_CHS {
             get {
@@ -3263,6 +3288,33 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("业务视图", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;ModelDocument&gt;
+        ///  &lt;Version&gt;V1.0&lt;/Version&gt;
+        ///  &lt;MapOrigin&gt;{X=20,Y=0}&lt;/MapOrigin&gt;
+        ///  &lt;ModelElement&gt;
+        ///    &lt;id&gt;7&lt;/id&gt;
+        ///    &lt;type&gt;DataSource&lt;/type&gt;
+        ///    &lt;name&gt;两群数据&lt;/name&gt;
+        ///    &lt;subtype&gt;Null&lt;/subtype&gt;
+        ///    &lt;location&gt;{X=20,Y=105}&lt;/location&gt;
+        ///    &lt;status&gt;Done&lt;/status&gt;
+        ///    &lt;path&gt;C:\Users\Administrator\Desktop\to相若晨\公交色狼\公交色狼群聊1.txt&lt;/path&gt;
+        ///    &lt;separator&gt;9&lt;/separator&gt;
+        ///    &lt;encoding&gt;UTF8&lt;/encoding&gt;
+        ///  &lt;/ModelElement&gt;
+        ///  &lt;ModelElement&gt;
+        ///    &lt;id&gt;8&lt;/id&gt;
+        ///    &lt;type&gt;Operator&lt;/type&gt;
+        ///    &lt;name&gt;正向关键词提取&lt;/name&gt;
+        ///    &lt;subtyp [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 公交色狼模型 {
+            get {
+                return ResourceManager.GetString("公交色狼模型", resourceCulture);
             }
         }
         
@@ -3357,6 +3409,33 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找类似 &lt;ModelDocument&gt;
+        ///  &lt;Version&gt;V1.0&lt;/Version&gt;
+        ///  &lt;MapOrigin&gt;{X=20,Y=0}&lt;/MapOrigin&gt;
+        ///  &lt;ModelElement&gt;
+        ///    &lt;id&gt;0&lt;/id&gt;
+        ///    &lt;type&gt;DataSource&lt;/type&gt;
+        ///    &lt;name&gt;两群数据&lt;/name&gt;
+        ///    &lt;subtype&gt;Null&lt;/subtype&gt;
+        ///    &lt;location&gt;{X=53,Y=127}&lt;/location&gt;
+        ///    &lt;status&gt;Done&lt;/status&gt;
+        ///    &lt;path&gt;C:\Users\Administrator\Desktop\to相若晨\微信接单\群聊1.txt&lt;/path&gt;
+        ///    &lt;separator&gt;9&lt;/separator&gt;
+        ///    &lt;encoding&gt;UTF8&lt;/encoding&gt;
+        ///  &lt;/ModelElement&gt;
+        ///  &lt;ModelElement&gt;
+        ///    &lt;id&gt;1&lt;/id&gt;
+        ///    &lt;type&gt;Operator&lt;/type&gt;
+        ///    &lt;name&gt;关键词过滤&lt;/name&gt;
+        ///    &lt;subtype&gt;Keyw [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 微信接单模型 {
+            get {
+                return ResourceManager.GetString("微信接单模型", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;document type=&quot;C2&quot; editor_version=&quot;1.0.0.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
         ///  &lt;!--Create by C2, you can download it free from http://www.C2.org--&gt;
@@ -3373,7 +3452,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 思维导图 {
             get {
@@ -3458,7 +3538,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 树状图 {
             get {
@@ -3503,7 +3584,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 空模板 {
             get {
@@ -3548,7 +3630,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 组织架构图 {
             get {
@@ -3563,6 +3646,33 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("结果", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;ModelDocument&gt;
+        ///  &lt;Version&gt;V1.0&lt;/Version&gt;
+        ///  &lt;MapOrigin&gt;{X=20,Y=0}&lt;/MapOrigin&gt;
+        ///  &lt;ModelElement&gt;
+        ///    &lt;id&gt;3&lt;/id&gt;
+        ///    &lt;type&gt;DataSource&lt;/type&gt;
+        ///    &lt;name&gt;原始数据&lt;/name&gt;
+        ///    &lt;subtype&gt;Null&lt;/subtype&gt;
+        ///    &lt;location&gt;{X=20,Y=134}&lt;/location&gt;
+        ///    &lt;status&gt;Done&lt;/status&gt;
+        ///    &lt;path&gt;D:\FiberHomeIAOModelDocument\datas\加密数据.txt&lt;/path&gt;
+        ///    &lt;separator&gt;9&lt;/separator&gt;
+        ///    &lt;encoding&gt;UTF8&lt;/encoding&gt;
+        ///  &lt;/ModelElement&gt;
+        ///  &lt;ModelElement&gt;
+        ///    &lt;id&gt;4&lt;/id&gt;
+        ///    &lt;type&gt;Operator&lt;/type&gt;
+        ///    &lt;name&gt;数据提取&lt;/name&gt;
+        ///    &lt;subtype&gt;PythonOpera [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 赌博网站模型 {
+            get {
+                return ResourceManager.GetString("赌博网站模型", resourceCulture);
             }
         }
         
@@ -3583,7 +3693,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string 逻辑图 {
             get {

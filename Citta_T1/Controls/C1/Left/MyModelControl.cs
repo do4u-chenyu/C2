@@ -96,5 +96,14 @@ namespace C2.Controls.Left
             // 强制编辑控件失去焦点,触发重命名控件的Leave事件 
             Global.GetMainForm().BlankButtonFocus();
         }
+
+        private void MyModelControl_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Pen p = new Pen(Color.FromArgb(195, 195, 195), 1);  //画笔 1宽度.
+            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+            p.DashPattern = new float[] { 4, 4 };
+            g.DrawLine(p, 0, 30, 200, 30);//x1,y1,x2,y2
+        }
     }
 }

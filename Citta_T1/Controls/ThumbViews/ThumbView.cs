@@ -53,16 +53,16 @@ namespace C2.Controls
         }
         void initItems()
         {
-            Items.Add(new ThumbItem("逻辑图", global::C2.Properties.Resources.logicMap));
-            Items.Add(new ThumbItem("树状图", global::C2.Properties.Resources.tree));
-            Items.Add(new ThumbItem("组织架构图", global::C2.Properties.Resources.organization));
-            Items.Add(new ThumbItem("思维导图", global::C2.Properties.Resources.mindMap));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.dbnet));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.gunLuntan));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.yellowGroup));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.bank));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.modelTopLabel));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.BusinessViewLabel));
+            Items.Add(new ThumbItem("逻辑图", global::C2.Properties.Resources.logicMap, ThumbItem.ModelTypes.Business));
+            Items.Add(new ThumbItem("树状图", global::C2.Properties.Resources.tree, ThumbItem.ModelTypes.Business));
+            Items.Add(new ThumbItem("组织架构图", global::C2.Properties.Resources.organization, ThumbItem.ModelTypes.Business));
+            Items.Add(new ThumbItem("思维导图", global::C2.Properties.Resources.mindMap, ThumbItem.ModelTypes.Business));
+            Items.Add(new ThumbItem("QQ视频模型", global::C2.Properties.Resources.dbnet, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("微信接单模型", global::C2.Properties.Resources.gunLuntan, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("公交色狼模型", global::C2.Properties.Resources.yellowGroup, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("赌博网站模型", global::C2.Properties.Resources.bank, ThumbItem.ModelTypes.Model));
+            //Items.Add(new ThumbItem("", global::C2.Properties.Resources.modelTopLabel));
+            //Items.Add(new ThumbItem("", global::C2.Properties.Resources.BusinessViewLabel));
         }
         [DefaultValue(typeof(Size), "4, 2")]
         public Size Dimension
@@ -547,7 +547,18 @@ namespace C2.Controls
         {
             if (item.Text.Equals(""))
                 return;
-            Global.GetMainForm().NewDocumentForm_Click(item.Text);
+            switch (item.Types)
+            {
+                case ThumbItem.ModelTypes.Business:
+                    Global.GetMainForm().NewDocumentForm_Click(item.Text);
+                    break;
+                case ThumbItem.ModelTypes.Model:
+                    Global.GetMainForm().OpenModelDocument_Click();
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         void OnItemClose(ThumbItem item)

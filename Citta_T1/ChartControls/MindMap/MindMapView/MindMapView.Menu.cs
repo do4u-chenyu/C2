@@ -333,8 +333,7 @@ namespace C2.Controls.MapViews
             // 生成图表挂件
             if (cw == null)
             {
-                Topic[] hitTopic = new Topic[] { currentTopic };
-                AddChartWidget(hitTopic);
+                currentTopic.Widgets.Add(new ChartWidget { DataItems = new List<DataItem> { dataCopy } });
             }
             UpdateChartWidgetMenu(currentTopic.FindWidget<ChartWidget>(), dataCopy);
         }

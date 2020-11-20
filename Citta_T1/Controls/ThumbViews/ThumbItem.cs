@@ -25,11 +25,19 @@ namespace C2.Controls
         {
             Text = text;
         }
+        public enum ModelTypes
+        {
+            Null,
+            Business,
+            Model
+        }
+        public ModelTypes Types { get; set; }
 
-        public ThumbItem(string text, Image image)
+        public ThumbItem(string text, Image image, ModelTypes types)
         {
             Text = text;
             Image = image;
+            Types = types;
         }
 
         public ThumbView View { get; internal set; }
