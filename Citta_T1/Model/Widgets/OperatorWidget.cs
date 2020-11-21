@@ -46,6 +46,9 @@ namespace C2.Model.Widgets
             ResultItem = DataItem.Empty;
             OpType = OpType.Null;
             Status = OpStatus.Null;
+            ModelDataItem = new DataItem();
+
+
         }
         [Browsable(false)]
         #region 模型算子属性
@@ -123,7 +126,7 @@ namespace C2.Model.Widgets
         public override void Deserialize(Version documentVersion, XmlElement node)
         {
             base.Deserialize(documentVersion, node);
-            var opitems = node.SelectNodes("op_items/op_item");
+            XmlNodeList opitems = node.SelectNodes("op_items/op_item");
             foreach (XmlElement opItem in opitems)
             {
                 string subtype = Utils.XmlUtil.GetInnerText(opItem, "subtype");
@@ -132,13 +135,40 @@ namespace C2.Model.Widgets
                 if (subtype == "model")
                 {
                     // 读取模型算子
-
+                    this.HasModelOperator = true;
+                    this.ModelDataItem.FileName = opItem.SelectSingleNode("name").InnerText;
+                    this.ModelDataItem.FilePath = opItem.SelectSingleNode("path").InnerText;
                 }
                 else
                 {
                     // 读取单算子
+                    this.OpName = opItem.SelectSingleNode("name").InnerText;
+                    this.OpType = OpUtil.OpType(opItem.SelectSingleNode("subtype").InnerText);
+                    this.Status = OpUtil.OpStatus(opItem.SelectSingleNode("status").InnerText);
 
 
+
+                    XmlNode option = opItem.SelectSingleNode("option");
+                    if (option != null)
+                    {
+                        foreach (XmlNode child in option.ChildNodes)
+                            this.Option.SetOption(child.Name, child.InnerText);
+                    }
+                   
+                    List<DataItem> tmp = new List<DataItem>();
+                    XmlNodeList dataItems = opItem.SelectNodes("data_item");
+                    ReadAttribute(dataItems, tmp);
+                    if (tmp.Count > 0)
+                    {
+                        this.DataSourceItem = new List<DataItem>(tmp)[0];
+                    }
+                    XmlNodeList resultItems = opItem.SelectNodes("result_item");
+                    tmp.Clear();
+                    ReadAttribute(resultItems,tmp);
+                    if (tmp.Count > 0)
+                    {
+                        this.ResultItem = new List<DataItem>(tmp)[0];
+                    }
                 }
 
 
