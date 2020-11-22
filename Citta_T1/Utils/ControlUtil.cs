@@ -82,7 +82,7 @@ namespace C2.Utils
             switch (chartType)
             {
                 case "柱状图":
-                    chartDialog.GetbarChart();
+                    chartDialog.GetBarChart();
                     break;
                 case "饼图":
                     chartDialog.GetPieChart();
