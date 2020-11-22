@@ -1,6 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Controls.Common;
 using C2.Core;
+using C2.Model.Widgets;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -199,7 +200,18 @@ namespace C2.Utils
             return outStatus;
         }
 
-
+        public static OpStatus OpStatus(string status, OpStatus defaultStatus = C2.Model.Widgets.OpStatus.Null)
+        {
+            if (!Enum.TryParse(status, true, out OpStatus outStatus))
+                return defaultStatus;
+            return outStatus;
+        }
+        public static OpType OpType(string status, OpType defaultStatus = C2.Model.Widgets.OpType.Null)
+        {
+            if (!Enum.TryParse(status, true, out OpType outType))
+                return defaultStatus;
+            return outType;
+        }
         public static PointF ToPointFType(string point)
         {
             PointF location = new PointF();
