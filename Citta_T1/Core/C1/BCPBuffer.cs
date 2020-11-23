@@ -168,7 +168,7 @@ namespace C2.Core
             if (fileSize > 1000)
             {
                 WriteBuffer(fullFilePath, sb, firstLine);
-            }                   
+            }
             return true;
         }
         // 数据缓存信息写入xml
