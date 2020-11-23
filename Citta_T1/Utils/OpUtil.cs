@@ -1,11 +1,13 @@
 ﻿using C2.Business.Model;
 using C2.Controls.Common;
 using C2.Core;
+using C2.Model.Widgets;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static C2.Model.DataItem;
 
 namespace C2.Utils
 {
@@ -192,6 +194,13 @@ namespace C2.Utils
             return outType;
         }
 
+        public static ResultType ResultTypeEnum(string type, ResultType defaultType = ResultType.Null)
+        {
+            if (!Enum.TryParse(type, true, out ResultType outType))
+                return defaultType;
+            return outType;
+        }
+
         public static ElementStatus EStatus(string status, ElementStatus defaultStatus = ElementStatus.Null)
         {
             if (!Enum.TryParse(status, true, out ElementStatus outStatus))
@@ -199,7 +208,18 @@ namespace C2.Utils
             return outStatus;
         }
 
-
+        public static OpStatus OpStatus(string status, OpStatus defaultStatus = C2.Model.Widgets.OpStatus.Null)
+        {
+            if (!Enum.TryParse(status, true, out OpStatus outStatus))
+                return defaultStatus;
+            return outStatus;
+        }
+        public static OpType OpType(string status, OpType defaultStatus = C2.Model.Widgets.OpType.Null)
+        {
+            if (!Enum.TryParse(status, true, out OpType outType))
+                return defaultStatus;
+            return outType;
+        }
         public static PointF ToPointFType(string point)
         {
             PointF location = new PointF();

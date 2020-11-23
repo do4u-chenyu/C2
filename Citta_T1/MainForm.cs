@@ -262,8 +262,11 @@ namespace C2
         {
             // 将用户本地保存的模型文档加载到左侧myModelControl	
             string[] bsTitles = ModelsInfo.LoadAllModelTitle(Global.BusinessViewPath);
+            string[] mtTitles = ModelsInfo.LoadAllModelTitle(Global.MarketViewPath);
             foreach (string title in bsTitles)
                 this.mindMapModelControl.AddMindMapModel(title);
+            foreach (string title in mtTitles)
+                this.myModelControl.AddModel(title);
         }
         private void LoadDataSource()
         {
@@ -377,30 +380,12 @@ namespace C2
                 opw.ModelRelateTab = TaskBar.SelectedItem;
         }
 
-        internal void OpenModelDocument_Click(string templateName)
+        public void LoadCanvasFormByXml(string savaPath ,string modelTitle)
         {
-            switch (templateName)
+            ModelDocument doc = new ModelDocument(modelTitle, userName)
             {
-                case "QQ视频模型":
-                    LoadCanvasFormByXml(Properties.Resources.QQ视频模型); ;
-                    break;
-                case "微信接单模型":
-                    LoadCanvasFormByXml(Properties.Resources.微信接单模型); ;
-                    break;
-                case "公交色狼模型":
-                    LoadCanvasFormByXml(Properties.Resources.公交色狼模型); ;
-                    break;
-                case "赌博网站模型":
-                    LoadCanvasFormByXml(Properties.Resources.赌博网站模型); ;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void LoadCanvasFormByXml(string xmlString)
-        {
-            ModelDocument doc = new ModelDocument(xmlString);
+                SavePath = Path.Combine(savaPath, modelTitle)
+            };
             CanvasForm form = new CanvasForm(doc);
             ShowForm(form);
 
@@ -410,12 +395,8 @@ namespace C2
 
         public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
-            ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName, mindMapName);
-            CanvasForm form = new CanvasForm(doc, topic, mindMapName);
-            ShowForm(form);
+            LoadCanvasFormByXml(Path.Combine(Global.WorkspaceDirectory, this.UserName, "业务视图", mindMapName), modelDocumentName);
 
-            doc.Load();
-            form.CanvasAddElement(doc);
             OperatorWidget opw = topic.FindWidget<OperatorWidget>();
             if (opw != null)
                 opw.ModelRelateTab = TaskBar.SelectedItem;

@@ -207,9 +207,9 @@ namespace C2.ChartPageView
             MenuAddTopic.Text = Lang._("Add Topic");
             MenuAddSubTopic.Text = Lang._("Add Sub Topic");
             MenuAdd.Text = Lang._("Add");
-            MenuAddIcon.Text = Lang.GetTextWithEllipsis("Icon");
-            MenuAddRemark.Text = Lang.GetTextWithEllipsis("Notes");
-            MenuAddProgressBar.Text = Lang.GetTextWithEllipsis("Progress Bar");
+            MenuAddIcon.Text = Lang._("Icon");
+            MenuAddRemark.Text = Lang._("Notes");
+            MenuAddProgressBar.Text = Lang._("Progress Bar");
             MenuAddOperator.Text = Lang._("Operator");
             MenuAddAttachment.Text = Lang._("AddAttachment");
             MenuAddMaxOp.Text = Lang._("Max");

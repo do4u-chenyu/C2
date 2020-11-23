@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -553,7 +554,7 @@ namespace C2.Controls
                     Global.GetMainForm().NewDocumentForm_Click(item.Text);
                     break;
                 case ThumbItem.ModelTypes.Model:
-                    Global.GetMainForm().OpenModelDocument_Click(item.Text);
+                    Global.GetMainForm().LoadCanvasFormByXml( Path.Combine(Application.StartupPath, "Resources\\Templates"), item.Text);
                     break;
                 default:
                     break;

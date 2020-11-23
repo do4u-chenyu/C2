@@ -17,7 +17,7 @@ namespace C2.Model
         {
             return FileType == OpUtil.ExtType.Unknow;
         }
-        private DataItem()
+        public DataItem()
         {
 
         }

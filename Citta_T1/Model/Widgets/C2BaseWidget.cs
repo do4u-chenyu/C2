@@ -43,6 +43,11 @@ namespace C2.Model.Widgets
                 .WriteAttribute("separator", dataItem.FileSep.ToString())
                 .WriteAttribute("encoding", dataItem.FileEncoding)
                 .WriteAttribute("file_type", dataItem.FileType);
+            // 结果算子写入类型
+            if (dataItem.ResultDataType != DataItem.ResultType.Null)
+            {
+                mexw.WriteAttribute("result_type", dataItem.ResultDataType);
+            }
             // 图标挂件属性写入
             if (!string.IsNullOrEmpty(dataItem.ChartType))
             {
@@ -61,8 +66,13 @@ namespace C2.Model.Widgets
                    ConvertUtil.TryParseAscii(dataItem.GetAttribute("separator")),
                    OpUtil.EncodingEnum(dataItem.GetAttribute("encoding")),
                    OpUtil.ExtTypeEnum(dataItem.GetAttribute("file_type")));
-
-                // 图表格挂件属性读取
+                // 结果挂件类型读取
+                string resultType = dataItem.GetAttribute("result_type");
+                if (!string.IsNullOrEmpty(resultType))
+                {
+                    item.ResultDataType = OpUtil.ResultTypeEnum(resultType);
+                }
+                // 图表挂件属性读取
                 item.ChartType = dataItem.GetAttribute("chart_type");
                 if (!string.IsNullOrEmpty(item.ChartType))
                 {
