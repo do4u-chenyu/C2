@@ -100,7 +100,8 @@ namespace C2.Controls.Common
                 SelectedDataSource = null;
                 this.dataSourceCombo.Text = string.Empty;
             }
-            else if (ComboDataSource.Contains(d1))
+            //不能用contains，只能比较文件路径是否一致
+            else if (ComboDataSource.Find(d => d.FilePath==d1.FilePath) != null)
             {
                 SelectedDataSource = d1;
                 this.dataSourceCombo.Text = d1.FileName;

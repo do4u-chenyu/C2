@@ -407,6 +407,7 @@ namespace C2.Forms
             tabControl2.SelectedBackColor = Color.White;
             tabControl2.SelectedForeColor = Color.Black;
             tabControl2.AddPage(designerControl, Properties.Resources.designer);
+            tabControl2.SelectedPage = tabControl2.Controls[0];
             splitContainer2.Panel2.Controls.Add(tabControl2);
 
             //
