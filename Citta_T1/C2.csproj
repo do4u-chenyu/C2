@@ -2109,10 +2109,10 @@
     <Content Include="Resources\PictureIconLib\205_头像.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\242_箭头上.png">
+    <Content Include="Resources\PictureIconLib\242_向上箭头.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\243_箭头下 .png">
+    <Content Include="Resources\PictureIconLib\243_向下箭头 .png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\309_星星.png">
