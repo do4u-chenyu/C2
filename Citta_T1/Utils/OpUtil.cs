@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static C2.Model.DataItem;
 
 namespace C2.Utils
 {
@@ -189,6 +190,13 @@ namespace C2.Utils
         public static ExtType ExtTypeEnum(string type, ExtType defaultType = ExtType.Unknow) 
         {
             if (!Enum.TryParse(type, true, out ExtType outType))
+                return defaultType;
+            return outType;
+        }
+
+        public static ResultType ResultTypeEnum(string type, ResultType defaultType = ResultType.Null)
+        {
+            if (!Enum.TryParse(type, true, out ResultType outType))
                 return defaultType;
             return outType;
         }
