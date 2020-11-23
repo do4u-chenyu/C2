@@ -162,6 +162,7 @@ namespace C2.Controls.MapViews
                 if ( opw == null)
                 {
                     topic.Add(new OperatorWidget { HasModelOperator = true, ModelDataItem = modelDataItem });
+
                 }
                 else if (opw.HasModelOperator)
                 {
@@ -172,6 +173,7 @@ namespace C2.Controls.MapViews
                 {
                     opw.HasModelOperator = true;
                     opw.ModelDataItem = modelDataItem;
+                    Global.GetCurrentDocument().Modified = true;
                 }
 
                 Global.GetMainForm().NewCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
