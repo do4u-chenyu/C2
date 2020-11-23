@@ -219,24 +219,23 @@ namespace C2.Core
                 xDoc.Load(bufferPath);
                 XmlNode rootNode = xDoc.SelectSingleNode("DataCache");
                 nodeList = xDoc.SelectNodes(String.Format("//DataItem[path='{0}']", fullFilePath));
-            }
-           
+            }          
             catch
             { 
                 return false;
             }
             if (nodeList.Count == 0)
                 return false;
-            long crcValue=FileUtil.GetFileCRC32Value(fullFilePath);
+            long crcValue = FileUtil.GetFileCRC32Value(fullFilePath);
             foreach (XmlNode node in nodeList)
             {
-               string oldCrc= node.SelectSingleNode("crc32").InnerText;
+                string oldCrc = XmlUtil.GetInnerText(node, "crc32");
                 if (string.IsNullOrEmpty(oldCrc)|| !string.Equals(oldCrc, crcValue.ToString()))
                 {
                     return false;
                 }
-                dataPreviewDict[fullFilePath] = new FileCache(node.SelectSingleNode("content").InnerText,
-                                                              node.SelectSingleNode("head").InnerText);
+                dataPreviewDict[fullFilePath] = new FileCache(XmlUtil.GetInnerText(node, "content"),
+                                                              XmlUtil.GetInnerText(node, "head"));
                 dataPreviewDict[fullFilePath].CrcValue = crcValue;
             }
             return true;
