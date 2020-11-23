@@ -64,7 +64,7 @@ namespace C2.Controls.Left
             // rightPictureBox
             // 
             this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
-            this.rightPictureBox.Location = new System.Drawing.Point(125, 6);
+            this.rightPictureBox.Location = new System.Drawing.Point(122, 6);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(16, 16);
             this.rightPictureBox.TabIndex = 11;
@@ -83,6 +83,7 @@ namespace C2.Controls.Left
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(197, 142);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // ReviewToolStripMenuItem
             // 
@@ -91,7 +92,6 @@ namespace C2.Controls.Left
             this.ReviewToolStripMenuItem.Text = "预览";
             this.ReviewToolStripMenuItem.ToolTipText = "预览数据源部分信息";
             this.ReviewToolStripMenuItem.Click += new System.EventHandler(this.ReviewToolStripMenuItem_Click);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // RenameToolStripMenuItem
             // 
@@ -177,7 +177,7 @@ namespace C2.Controls.Left
             this.Controls.Add(this.txtButton);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DataButton";
-            this.Size = new System.Drawing.Size(145, 27);
+            this.Size = new System.Drawing.Size(140, 27);
             this.Load += new System.EventHandler(this.DataButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();

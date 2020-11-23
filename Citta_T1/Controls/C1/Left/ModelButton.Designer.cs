@@ -50,7 +50,7 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
-            this.rightPictureBox.Location = new System.Drawing.Point(125, 6);
+            this.rightPictureBox.Location = new System.Drawing.Point(122, 6);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(16, 16);
             this.rightPictureBox.TabIndex = 0;
@@ -172,7 +172,7 @@
             this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.textBox);
             this.Name = "ModelButton";
-            this.Size = new System.Drawing.Size(145, 27);
+            this.Size = new System.Drawing.Size(140, 27);
             this.Load += new System.EventHandler(this.ModelButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lelfPictureBox)).EndInit();
