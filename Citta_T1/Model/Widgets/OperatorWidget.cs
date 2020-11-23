@@ -46,13 +46,19 @@ namespace C2.Model.Widgets
             ResultItem = DataItem.Empty;
             OpType = OpType.Null;
             Status = OpStatus.Null;
+            ModelDataItem = new DataItem();
+
+
         }
         [Browsable(false)]
+        #region 模型算子属性
         public bool HasModelOperator { get; set; }//是否包含模型算子
         [Browsable(false)]
         public TabItem ModelRelateTab { get; set; }//模型对应的tab
         [Browsable(false)]
         public DataItem ModelDataItem { get; set; }//模型相关属性
+        #endregion
+        #region 单算子属性
         [Browsable(false)]
         public string OpName { get; set; }  //菜单栏名称
         [Browsable(false)]
@@ -65,7 +71,7 @@ namespace C2.Model.Widgets
         public DataItem ResultItem { get; set; }  //生成的结果
         [Browsable(false)]
         public OpStatus Status { get; set; }  //算子状态
-         
+        #endregion
         public override string GetTypeID()
         {
             return TypeID;
@@ -74,20 +80,28 @@ namespace C2.Model.Widgets
         public override void Serialize(XmlDocument dom, XmlElement node)
         {
             base.Serialize(dom, node);
+            XmlElement opItemNode = node.OwnerDocument.CreateElement("op_items");
+            // 模型算子持久化
+            if (HasModelOperator)
+            {
+                ModelXmlWriter modelOp = new ModelXmlWriter("op_item", opItemNode);
+                modelOp.Write("name", ModelDataItem.FileName)
+                       .Write("path", ModelDataItem.FilePath)
+                       .Write("subtype", "model");
+            }
+
+            // 单算子持久化
             if (OpName == null)
+            {
+                node.AppendChild(opItemNode);
                 return;
-            XmlElement opItemNode = node.OwnerDocument.CreateElement("op_items");          
+            }
+
             ModelXmlWriter mxw = new ModelXmlWriter("op_item", opItemNode);
             mxw.Write("name", OpName)
                .Write("subtype", OpType)
                .Write("status", Status);
 
-            // 模型算子无后续信息，直接返回
-            //if (OpType == OpType.ModelOperator)
-            //{
-            //    node.AppendChild(opItemNode);
-            //    return;
-            //}             
             /*
              *  单算子配置
              */
@@ -100,32 +114,64 @@ namespace C2.Model.Widgets
             *  单算子的数据源持久化
             */
             if (DataSourceItem != null)
-                WriteAttribute(opItemNode, DataSourceItem, "data_item");
+                WriteAttribute(mxw.Element, DataSourceItem, "data_item");
             /*
             *  单算子的结果持久化
             */
             if (ResultItem != null)
-                WriteAttribute(opItemNode, ResultItem, "result_item");
+                WriteAttribute(mxw.Element, ResultItem, "result_item");
             node.AppendChild(opItemNode);
         }
 
         public override void Deserialize(Version documentVersion, XmlElement node)
         {
             base.Deserialize(documentVersion, node);
-            var opitems = node.SelectNodes("op_items/op_item");
+            XmlNodeList opitems = node.SelectNodes("op_items/op_item");
             foreach (XmlElement opItem in opitems)
             {
                 string subtype = Utils.XmlUtil.GetInnerText(opItem, "subtype");
                 if (string.IsNullOrEmpty(subtype))
                     return;
-                // 读取模型算子
-                //if (subtype == OpType.ModelOperator.ToString())
-                //{
+                if (subtype == "model")
+                {
+                    // 读取模型算子
+                    this.HasModelOperator = true;
+                    this.ModelDataItem.FileName = opItem.SelectSingleNode("name").InnerText;
+                    this.ModelDataItem.FilePath = opItem.SelectSingleNode("path").InnerText;
+                }
+                else
+                {
+                    // 读取单算子
+                    this.OpName = opItem.SelectSingleNode("name").InnerText;
+                    this.OpType = OpUtil.OpType(opItem.SelectSingleNode("subtype").InnerText);
+                    this.Status = OpUtil.OpStatus(opItem.SelectSingleNode("status").InnerText);
 
-                //    return;
-                //}
-                // 读取单算子
-  
+
+
+                    XmlNode option = opItem.SelectSingleNode("option");
+                    if (option != null)
+                    {
+                        foreach (XmlNode child in option.ChildNodes)
+                            this.Option.SetOption(child.Name, child.InnerText);
+                    }
+                   
+                    List<DataItem> tmp = new List<DataItem>();
+                    XmlNodeList dataItems = opItem.SelectNodes("data_item");
+                    ReadAttribute(dataItems, tmp);
+                    if (tmp.Count > 0)
+                    {
+                        this.DataSourceItem = new List<DataItem>(tmp)[0];
+                    }
+                    XmlNodeList resultItems = opItem.SelectNodes("result_item");
+                    tmp.Clear();
+                    ReadAttribute(resultItems,tmp);
+                    if (tmp.Count > 0)
+                    {
+                        this.ResultItem = new List<DataItem>(tmp)[0];
+                    }
+                }
+
+
             }
         }
 

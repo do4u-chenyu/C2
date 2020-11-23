@@ -1,5 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Core;
+using C2.Forms;
 using C2.Utils;
 using System;
 using System.IO;
@@ -17,8 +18,8 @@ namespace C2.Controls.Left
             InitializeComponent();
             this.textButton.Text = modelTitle;
             this.oldTextString = modelTitle;
-            fullFilePath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场",this.textButton.Text + ".xml");
-            //fullFilePath = Path.Combine(Global.GetCurrentModelDocument().UserPath, this.textButton.Text, this.textButton.Text + ".xml");
+            fullFilePath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场", this.textButton.Text + ".xml");
+           
         }
 
 
@@ -32,10 +33,17 @@ namespace C2.Controls.Left
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 文件打开后,不能重复打开,不能删除,不能重命名
-            Global.GetCanvasForm().LoadDocument(this.textButton.Text);
+            //现在需要手动new一个canvasform
+            Global.GetMainForm().LoadCanvasFormByXml( Path.Combine(Global.UserWorkspacePath, "模型市场"), this.textButton.Text);
+
             this.OpenToolStripMenuItem.Enabled = false;
             this.RenameToolStripMenuItem.Enabled = false;
             this.DeleteToolStripMenuItem.Enabled = false;
+        }
+
+        private void ShowForm(CanvasForm form)
+        {
+            throw new NotImplementedException();
         }
 
         private void ModelButton_Load(object sender, EventArgs e)

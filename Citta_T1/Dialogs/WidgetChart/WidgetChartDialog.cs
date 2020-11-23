@@ -26,7 +26,7 @@ namespace C2.Dialogs.WidgetChart
             mstream.Close();
             return chartImage;
         }
-        public void GetbarChart()
+        public void GetBarChart()
         {
 
             BarChart barChart = new BarChart(xyData, titles);

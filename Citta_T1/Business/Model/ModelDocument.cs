@@ -62,6 +62,7 @@ namespace C2.Business.Model
             this.WorldMap = new WorldMap();
             this.Modified = true;
         }
+
         public string Name
         {
             get { return _Name; }

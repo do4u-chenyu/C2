@@ -1,6 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Business.Option;
 using C2.Business.Schedule;
+using C2.Controls.C1;
 using C2.Controls.Interface;
 using C2.Core;
 using C2.Core.UndoRedo;
@@ -22,7 +23,7 @@ namespace C2.Controls.Move.Op
     {
         private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
 
-        private MoveWrapper moveWrapper;
+        private MoveWrapper moveWrapper1;
         private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
 
 
@@ -81,7 +82,7 @@ namespace C2.Controls.Move.Op
             Option = new OperatorOption(this);
 
             doublelPinFlag = doublePin.Contains(SubTypeName);
-            this.moveWrapper = new MoveWrapper();
+            this.moveWrapper1 = new MoveWrapper(this);
 
             changeStatus = new Size(0, 29);
             normalStatus = new Size(72, 29);
@@ -229,8 +230,7 @@ namespace C2.Controls.Move.Op
                 #region 控件移动
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
-                Global.GetCurrentModelDocument().WorldMap
-                      .WorldBoundControl(new Point(left, top), this);
+                Global.GetCurrentModelDocument().WorldMap.WorldBoundControl(new Point(left, top), this);
                 #endregion
                 foreach (ModelRelation mr in Global.GetCurrentModelDocument().ModelRelations)
                 {
@@ -248,7 +248,7 @@ namespace C2.Controls.Move.Op
                     }
                 }
                 if (isNeedMoveLine)
-                    this.moveWrapper.DragMove(e);
+                    this.moveWrapper1.MouseMove(new Point(left, top));
             }
         }
 
@@ -274,7 +274,7 @@ namespace C2.Controls.Move.Op
                 mouseOffset.Y = e.Y;
                 cmd = ECommandType.Hold;
             }
-            this.moveWrapper.DragDown(e);
+            this.moveWrapper1.MouseDown(this.Location);
             oldControlPosition = this.Location;
         }
 
@@ -321,7 +321,7 @@ namespace C2.Controls.Move.Op
             if (e.Button == MouseButtons.Left)
             {
                 if (cmd == ECommandType.Hold)
-                    this.moveWrapper.DragUp(e);
+                    this.moveWrapper1.MouseUp();
                 Global.GetNaviViewControl().UpdateNaviView();
             }
             cmd = ECommandType.Null;

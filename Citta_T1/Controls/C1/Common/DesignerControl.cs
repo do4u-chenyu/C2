@@ -170,7 +170,7 @@ namespace C2.Controls.Common
 
             if (OpWidget == null)
             {
-                MindmapView.AddOperator(new Topic[] { SelectedTopic });
+                SelectedTopic.Widgets.Add(new OperatorWidget());
                 OpWidget = SelectedTopic.FindWidget<OperatorWidget>();
             }
 

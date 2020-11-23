@@ -32,12 +32,13 @@ namespace C2.Controls.MapViews
                 this.Cursor = Cursors.Default;
                 //Global.GetDocumentForm().HideRunLab();
                 DataItem resultItem = opw.ResultItem;
-                ResultWidget rsw = (opw.Container as Topic).FindWidget<ResultWidget>();
+                Topic topic = opw.Container as Topic;
+                ResultWidget rsw = topic.FindWidget<ResultWidget>();
                 if (rsw == null)
                 {
-                    AddResult(new Topic[] { opw.Container as Topic }, resultItem);
+                    topic.Widgets.Add(new ResultWidget { DataItems = new List<DataItem> { resultItem } });
                     Global.GetCurrentDocument().Modified = false; //新建了一个挂件，此时文档dirty，需要置false
-                    TopicUpdate(opw.Container as Topic, null);
+                    TopicUpdate(topic, null);
                 }
                 else
                 {

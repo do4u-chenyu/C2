@@ -48,7 +48,7 @@ namespace C2.Controls.Move.Dt
             normalStatus = new Size(53, 28);
             InitializeOpPinPicture();
             ChangeSize(sizeL);
-            this.moveWrapper = new MoveWrapper();
+            this.moveWrapper = new MoveWrapper(this);
             oldControlPosition = this.Location;
         }
 
@@ -156,13 +156,12 @@ namespace C2.Controls.Move.Dt
 
                 return;
             }
-            else
+            else if (cmd == ECommandType.Hold)
             {
                 #region 控件移动部分
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
-                Global.GetCurrentModelDocument().WorldMap
-                      .WorldBoundControl(new Point(left, top), this);
+                Global.GetCurrentModelDocument().WorldMap.WorldBoundControl(new Point(left, top), this);
                 #endregion
                 /*
                  * 1. 遍历所有关系
@@ -179,7 +178,7 @@ namespace C2.Controls.Move.Dt
                     }
                 }
                 if (isNeedMoveLine)
-                    this.moveWrapper.DragMove(e);
+                    this.moveWrapper.MouseMove(new Point(left,top));
             }
         }
 
@@ -204,8 +203,8 @@ namespace C2.Controls.Move.Dt
                 mouseOffset.Y = e.Y;
                 cmd = ECommandType.Hold;
             }
+            this.moveWrapper.MouseDown(this.Location);
             oldControlPosition = this.Location;
-            this.moveWrapper.DragDown( e);
         }
 
 
@@ -235,7 +234,7 @@ namespace C2.Controls.Move.Dt
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
                 }
                 else if (cmd == ECommandType.Hold)
-                    this.moveWrapper.DragUp(e);
+                    this.moveWrapper.MouseUp();
                 Global.GetNaviViewControl().UpdateNaviView();
             }
             cmd = ECommandType.Null;

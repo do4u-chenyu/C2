@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using C2.Business.Model;
 using C2.Business.Option;
 using C2.Core;
 using C2.Dialogs;
@@ -224,6 +225,9 @@ namespace C2.Controls.MapViews
             if (!opw.HasModelOperator || opw.ModelDataItem == null)
                 return;
             string modelName = opw.ModelDataItem.FileName;
+            string modelPath = opw.ModelDataItem.FilePath;
+            ExportModel.GetInstance().Export(modelPath);
+
             if (!Global.GetMyModelControl().ContainModel(modelName))
                     Global.GetMyModelControl().AddModel(modelName);
         }
@@ -333,8 +337,7 @@ namespace C2.Controls.MapViews
             // 生成图表挂件
             if (cw == null)
             {
-                Topic[] hitTopic = new Topic[] { currentTopic };
-                AddChartWidget(hitTopic);
+                currentTopic.Widgets.Add(new ChartWidget { DataItems = new List<DataItem> { dataCopy } });
             }
             UpdateChartWidgetMenu(currentTopic.FindWidget<ChartWidget>(), dataCopy);
         }

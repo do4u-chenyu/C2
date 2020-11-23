@@ -57,7 +57,6 @@ namespace C2.Controls.MapViews
                     this.Focus();
             }
         }
-
         public void AddLink()
         {
             if (SelectedTopic != null)
@@ -66,6 +65,7 @@ namespace C2.Controls.MapViews
             }
         }
 
+        #region 添加blu挂件
         public void AddProgressBar()
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
@@ -117,7 +117,9 @@ namespace C2.Controls.MapViews
                 }
             }
         }
+        #endregion
 
+        #region 添加C2挂件
         public void AddOperator()
         {
             foreach(Topic topic in SelectedTopics)
@@ -128,28 +130,16 @@ namespace C2.Controls.MapViews
 
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
-                var template = new OperatorWidget();
-                AddWidget(OperatorWidget.TypeID, template, false);
+                SelectedTopics[0].Widgets.Add(new OperatorWidget());
                 ShowDesigner(SelectedTopics[0],false);
             }
         }
 
-        public void AddOperator(Topic[] topics)
-        {
-            var template = new OperatorWidget();
-            AddWidgetCommand command = new AddWidgetCommand(topics, OperatorWidget.TypeID, template);
-            ExecuteCommand(command);
-        }
         public void AddModelOp()
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
                 Topic topic = SelectedTopics[0];
-                //TODO
-                //这里后期考虑弹窗设置名字
-                //string modelDocumentName = string.Format("{0}-模型视图", topic.Text);
-                string modelDocumentName = "";
-
                 CreateNewModelForm createNewModelForm = new CreateNewModelForm
                 {
                     StartPosition = FormStartPosition.CenterScreen,
@@ -158,22 +148,17 @@ namespace C2.Controls.MapViews
                     NewFormType = FormType.CanvasForm,
                     ModelType = "新建模型视图"
                 };
-
                 DialogResult dialogResult = createNewModelForm.ShowDialog();
-                // 新建业务视图
-                if (dialogResult == DialogResult.OK)
-                    modelDocumentName = createNewModelForm.ModelTitle;
-                else
+                if (dialogResult != DialogResult.OK)
                     return;
 
-
-                
-
-                //11.13 现在单算子和模型共存了
-                OperatorWidget opw = topic.FindWidget<OperatorWidget>();
+                // 新建业务视图
+                string modelDocumentName = createNewModelForm.ModelTitle;
                 string modelUserPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "业务视图", Global.GetCurrentDocument().Name);
                 string modelSavePath = Path.Combine(modelUserPath, modelDocumentName, modelDocumentName + ".xml");
                 DataItem modelDataItem = new DataItem(modelSavePath, modelDocumentName, '\t', OpUtil.Encoding.NoNeed, OpUtil.ExtType.Unknow);
+
+                OperatorWidget opw = topic.FindWidget<OperatorWidget>();
                 if ( opw == null)
                 {
                     topic.Add(new OperatorWidget { HasModelOperator = true, ModelDataItem = modelDataItem });
@@ -192,7 +177,7 @@ namespace C2.Controls.MapViews
                 Global.GetMainForm().NewCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
             }
         }
-          public void AddAttachment()
+        public void AddAttachment()
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
@@ -209,42 +194,18 @@ namespace C2.Controls.MapViews
                     AttachmentWidget atw = hitTopic.FindWidget<AttachmentWidget>();
                     if (atw == null)
                     {
-                        var template = new AttachmentWidget();
-                        template.AttachmentPaths.Add(fd.FileName);
-                        AddWidget(AttachmentWidget.TypeID, template, false);
+                        hitTopic.Widgets.Add(new AttachmentWidget { AttachmentPaths = new List<string> { fd.FileName} });
                         return;
                     }
                     if (atw.AttachmentPaths.Find(x => x.Equals(fd.FileName)) == null)
-                    {
                         atw.AttachmentPaths.Add(fd.FileName); // 估计永远都不会返回null
-                    }
                     else
-                        HelpUtil.ShowMessageBox(String.Format("数据源{0}已存在,可以删除后重新导入.", fd.FileName), 
-                            "数据源已存在");
+                        HelpUtil.ShowMessageBox(String.Format("附件{0}已存在,可以删除后重新导入.", fd.FileName),  "附件已存在");
                 }
             }
         }
+        #endregion
 
-        public void AddDataSource(Topic[] hitTopic,DataItem dataItem)
-        { 
-            var template = new DataSourceWidget();
-            template.DataItems.Add(dataItem);
-            AddWidgetCommand command = new AddWidgetCommand(hitTopic, DataSourceWidget.TypeID, template);
-            ExecuteCommand(command);
-        }
-        public void AddResult(Topic[] hitTopic, DataItem dataItem)
-        {
-            var template = new ResultWidget();
-            template.DataItems.Add(dataItem);
-            AddWidgetCommand command = new AddWidgetCommand(hitTopic, ResultWidget.TypeID, template);
-            ExecuteCommand(command);
-        }
-        public void AddChartWidget(Topic[] hitTopic)
-        {
-            var template = new ChartWidget();
-            AddWidgetCommand command = new AddWidgetCommand(hitTopic, ChartWidget.TypeID, template);
-            ExecuteCommand(command);
-        }
         void AddWidget(string typeID, Widget template, bool showDialog)
         {
             if (showDialog)
