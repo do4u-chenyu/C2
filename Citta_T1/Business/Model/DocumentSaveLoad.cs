@@ -12,6 +12,10 @@ namespace C2.Business.Model
     class ModelXmlWriter
     {
         private readonly XmlDocument doc;
+        public ModelXmlWriter(XmlNode node)
+        {
+            Node = node;
+        }
 
         public ModelXmlWriter(string nodeName, XmlDocument xmlDoc, XmlElement parent)
         {
@@ -39,6 +43,7 @@ namespace C2.Business.Model
             parent.AppendChild(Element);
         }
         public XmlElement Element { get; }
+        public XmlNode Node { get; }
 
         public ModelXmlWriter Write(string key, string value)
         {
@@ -79,6 +84,17 @@ namespace C2.Business.Model
         public ModelXmlWriter WriteAttribute(string key, int value)
         {
             return Write(key, value.ToString());
+        }
+
+        public ModelXmlWriter ReWriteInnerText(string key, string value)
+        {
+            try 
+            { 
+                Node.SelectSingleNode(key).InnerText = value; 
+            }
+            catch
+            { }          
+            return this;
         }
     }
     class ModelXmlReader

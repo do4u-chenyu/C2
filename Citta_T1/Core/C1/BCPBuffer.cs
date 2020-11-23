@@ -188,14 +188,24 @@ namespace C2.Core
             xDoc.Load(bufferPath);
             Utils.FileUtil.AddPathPower(bufferPath, "FullControl");
             XmlNode rootNode = xDoc.SelectSingleNode("DataCache");
-            XmlNodeList nodeList = xDoc.SelectNodes(String.Format("//DataItem[path='{0}']", fullFilePath));
-            if (nodeList.Count > 0)
+            XmlNodeList nodeList;
+            try 
+            {
+                nodeList = xDoc.SelectNodes(String.Format("//DataItem[path='{0}']", fullFilePath));
+            }
+            catch 
+            { 
+                nodeList = null;
+            }
+
+            if (nodeList != null && nodeList.Count > 0)
             {
                 foreach (XmlNode node in nodeList)
                 {
-                    node.SelectSingleNode("crc32").InnerText = dataPreviewDict[fullFilePath].CrcValue.ToString();
-                    node.SelectSingleNode("content").InnerText = sb.ToString();
-                    node.SelectSingleNode("head").InnerText = firstLine;
+                    ModelXmlWriter mxw = new ModelXmlWriter(node);
+                    mxw.ReWriteInnerText("crc32", dataPreviewDict[fullFilePath].CrcValue.ToString())
+                       .ReWriteInnerText("content", sb.ToString())
+                       .ReWriteInnerText("head", firstLine);
                 }
             }
             else
