@@ -2060,9 +2060,6 @@
     <Content Include="Resources\PictureIconLib\140_身份证.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\160_原因.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\PictureIconLib\165_法律依据.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
