@@ -550,7 +550,6 @@ namespace C2.Utils
                 if (fs != null)
                     fs.Close();
             }
-
             crc32.Update(buffer);
             return crc32.Value;
         }
