@@ -60,7 +60,6 @@ namespace C2.Business.Model
             this.ElementCount = 0;
             this.TaskManager = new TaskManager();
             this.WorldMap = new WorldMap();
-            this.Modified = true;
         }
 
         public string Name
