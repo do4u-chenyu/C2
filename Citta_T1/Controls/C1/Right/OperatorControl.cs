@@ -18,7 +18,7 @@ namespace C2.Controls.Right
         // 圆角
         private int radius = 20;  // 圆角弧度
 
-        [Browsable(true), DefaultValue(30)]
+        [Browsable(true), DefaultValue(20)]
         [Description("圆角弧度(0为不要圆角)")]
         public int RoundRadius
         {
