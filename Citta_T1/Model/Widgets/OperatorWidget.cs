@@ -1,6 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Business.Option;
 using C2.Controls;
+using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace C2.Model.Widgets
     }
     public class OperatorWidget : C2BaseWidget, IRemark
     {
+        private OpStatus _status;
         public const string TypeID = "OPERATOR";
         public override string Description => HelpUtil.OperatorWidgetHelpInfo;
         public OperatorWidget()
@@ -47,7 +49,7 @@ namespace C2.Model.Widgets
             OpType = OpType.Null;
             Status = OpStatus.Null;
             ModelDataItem = new DataItem();
-
+            _status = OpStatus.Null;
 
         }
         [Browsable(false)]
@@ -70,7 +72,20 @@ namespace C2.Model.Widgets
         [Browsable(false)]
         public DataItem ResultItem { get; set; }  //生成的结果
         [Browsable(false)]
-        public OpStatus Status { get; set; }  //算子状态
+        public OpStatus Status 
+        {
+            get {return _status; }
+            set
+            {
+                if (_status != value)
+                {                 
+                    Global.GetCurrentDocument().Modified = true;
+                }
+                _status = value;
+            }
+        }  //算子状态
+
+
         #endregion
         public override string GetTypeID()
         {
