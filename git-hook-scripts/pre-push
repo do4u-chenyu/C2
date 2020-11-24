@@ -1,5 +1,5 @@
 #! env/python.exe
-from os.path import split, splitext, getctime, join, exists, isfile
+from os.path import split, splitext, getctime, join, exists, isfile, abspath
 from os import chdir, getcwd
 from subprocess import Popen, PIPE
 import re
@@ -86,5 +86,6 @@ def main(file_path: str) -> None:
 
 
 if __name__ == '__main__':
-    file_path = "../git-hook-scripts/vs_path"
+    file_path = "../../git-hook-scripts/vs_path"
+    print(abspath(file_path))
     main(file_path)
