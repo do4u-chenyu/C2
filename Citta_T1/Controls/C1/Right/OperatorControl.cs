@@ -13,11 +13,10 @@ namespace C2.Controls.Right
         {
             InitializeComponent();
             InitializeToolTip();
-            CustomBorderRound(); // 自定义边界圆角
         }
 
         // 圆角
-        private int radius = 30;  // 圆角弧度
+        private int radius = 20;  // 圆角弧度
 
         [Browsable(true), DefaultValue(30)]
         [Description("圆角弧度(0为不要圆角)")]
@@ -30,13 +29,11 @@ namespace C2.Controls.Right
             set
             {
                 radius = Math.Max(0, value);
-                CustomBorderRound();
                 base.Refresh();
             }
         }
-
         // 圆角代码
-        private void CustomBorderRound()
+        public void CustomBorderRound()
         {
             // 已经是.net提供给我们的最容易的改窗体的属性了(以前要自己调API)
             System.Drawing.Drawing2D.GraphicsPath oPath = new System.Drawing.Drawing2D.GraphicsPath();
@@ -49,18 +46,28 @@ namespace C2.Controls.Right
                 oPath.AddArc(thisWidth - angle, 0, angle, angle, 270, 90);                 // 右上角
                 oPath.AddArc(thisWidth - angle, thisHeight - angle, angle, angle, 0, 90);  // 右下角
                 oPath.AddArc(0, thisHeight - angle, angle, angle, 90, 90);                 // 左下角
-            }   
+            }
             else
             {
                 oPath.AddLine(0, 0, thisWidth, 0);                         // 顶端
                 oPath.AddLine(thisWidth, 0, thisWidth, thisHeight);        // 右边
                 oPath.AddLine(thisWidth, thisHeight, 0, thisHeight);       // 底边
-                oPath.AddLine(0, 0 , 0, thisHeight);                       // 左边
+                oPath.AddLine(0, 0, 0, thisHeight);                       // 左边
             }
             oPath.CloseAllFigures();
             Region = new Region(oPath);
         }
 
+        protected override void OnPaint(PaintEventArgs pe)
+        {
+            CustomBorderRound();  // 圆角
+            base.OnPaint(pe);
+        }
+        protected override void OnResize(EventArgs eventargs)
+        {
+            base.OnResize(eventargs);
+            base.Refresh();
+        }
         private void InitializeToolTip()
         {
             this.toolTip1.SetToolTip(this.leftPanelOpRelate, HelpUtil.RelateOperatorHelpInfo);
