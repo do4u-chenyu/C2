@@ -86,6 +86,8 @@ namespace C2.Model.Widgets
         #endregion
         protected static void OnModifiedChange()
         {
+            if (Global.GetCurrentDocument() == null)
+                return;
             if (!Global.GetCurrentDocument().Modified)
                 Global.GetCurrentDocument().Modified = true;
         }
