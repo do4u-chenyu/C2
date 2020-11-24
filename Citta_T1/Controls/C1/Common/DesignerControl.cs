@@ -75,18 +75,6 @@ namespace C2.Controls.Common
 
         private void SetSelectedDataSource()
         {
-            /*
-             * 1、当算子挂件不存在时，置空
-             * 2、算子挂件存在时
-             *      2.1  opw.DataSourceItem 为空，置空
-             *      2.2                                  不为空，赋值
-             *      
-             *  算子挂件中存的数据源，和下拉数据源对比问题：
-             *  (1)有数据源，有下拉数据源，比较是否包含
-             *       包含：正常显示
-             *       不包含：置空
-             *  (2)至少有一个为空，直接置空
-             */
             if(OpWidget == null)
             {
                 SelectedDataSource = null;
