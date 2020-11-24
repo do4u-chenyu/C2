@@ -53,7 +53,7 @@ def set_crlf() -> None:
 
 
 def compile(vs_path: str) -> None:
-    sln_path = "\\".join(getcwd().split("\\")[:-1])
+    sln_path = getcwd()
     # vs_path = r"E:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
     compile_cmd = r"Common7\Tools\VsDevCmd.bat & chdir /d {} & devenv Citta_T1.sln /Build 开发调试 /Project Citta_T1\C2.csproj".format(sln_path)
     info, err = ex_cmd(compile_cmd, vs_path)
@@ -86,6 +86,6 @@ def main(file_path: str) -> None:
 
 
 if __name__ == '__main__':
-    file_path = "../../git-hook-scripts/vs_path"
+    file_path = "git-hook-scripts/vs_path"
     print(abspath(file_path))
     main(file_path)
