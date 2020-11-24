@@ -17,14 +17,13 @@ namespace C2.Controls.Common
 {
     public partial class DesignerControl : BorderPanel
     {
-        private List<OpType> ComboOperator;
-        public Topic SelectedTopic { get; set; }
         public MindMapView MindmapView { get; set; }
         public OperatorWidget OpWidget { get; set; }
-        public DataItem SelectedDataSource { get; set; }
-        public string SelectedOperator { get; set; }
-        public List<DataItem> ComboDataSource { get; set; }
-
+        public Topic SelectedTopic { get; set; }//选中节点
+        public string SelectedOperator { get; set; }//选中算子
+        public DataItem SelectedDataSource { get; set; }//选中数据
+        public List<DataItem> ComboDataSource { get; set; }//下拉数据
+        public List<OpType> ComboOperator { get; set; }//下拉算子
         public DesignerControl()
         {
             InitializeComponent();
@@ -56,12 +55,14 @@ namespace C2.Controls.Common
                 this.dataSourceCombo.Text = String.Empty;
                 this.dataSourceCombo.Items.Clear();
                 this.operatorCombo.Text = String.Empty;
+                this.operatorCombo.Items.Clear();
             }
             else
             {
                 OpWidget = SelectedTopic.FindWidget<OperatorWidget>();
-                SetSelectedTopic();//设置选中主题√
-                SetComboDataSource();//设置数据源下拉选项√
+                SetSelectedTopic();//设置选中主题
+                SetComboDataSource();//设置数据源下拉选项
+                SetComboOperator();//设置算子下拉选项
                 SetSelectedOperator();//设置选中算子
                 SetSelectedDataSource();//设置选中数据源
             }
@@ -75,18 +76,6 @@ namespace C2.Controls.Common
 
         private void SetSelectedDataSource()
         {
-            /*
-             * 1、当算子挂件不存在时，置空
-             * 2、算子挂件存在时
-             *      2.1  opw.DataSourceItem 为空，置空
-             *      2.2                                  不为空，赋值
-             *      
-             *  算子挂件中存的数据源，和下拉数据源对比问题：
-             *  (1)有数据源，有下拉数据源，比较是否包含
-             *       包含：正常显示
-             *       不包含：置空
-             *  (2)至少有一个为空，直接置空
-             */
             if(OpWidget == null)
             {
                 SelectedDataSource = null;
@@ -95,13 +84,7 @@ namespace C2.Controls.Common
             }
 
             DataItem d1 = OpWidget.DataSourceItem;
-            if(ComboDataSource == null || d1 == null)
-            {
-                SelectedDataSource = null;
-                this.dataSourceCombo.Text = string.Empty;
-            }
-            //不能用contains，只能比较文件路径是否一致
-            else if (ComboDataSource.Find(d => d.FilePath==d1.FilePath) != null)
+            if(ComboDataSource != null && d1 != null && ComboDataSource.Find(d => d.FilePath == d1.FilePath) != null)
             {
                 SelectedDataSource = d1;
                 this.dataSourceCombo.Text = d1.FileName;
@@ -113,14 +96,16 @@ namespace C2.Controls.Common
             }
         }
 
+        private void SetComboOperator()
+        {
+            this.operatorCombo.Items.Clear();
+            ComboOperator.ForEach(o => this.operatorCombo.Items.Add(Lang._(o.ToString())));
+        }
+
         private void SetComboDataSource()
         {
             this.dataSourceCombo.Items.Clear();
-            //TODO
-            //数据大纲，父类所有数据源
-            //ComboDataSource = SelectedTopic.GetParentDatas();
 
-            //暂用当前topic数据列表
             DataSourceWidget dtw = SelectedTopic.FindWidget<DataSourceWidget>();
             if (dtw != null)
             {
