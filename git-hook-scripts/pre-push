@@ -73,15 +73,18 @@ def compile(vs_path: str) -> None:
             sys.exit(-1)
         sys.exit(1)
     print(err.decode("gbk"))
-    sys.exit(-2)
 
 def main(file_path: str) -> None:
     set_crlf()
+    if not exists(file_path):
+        print("找不到文件：{}".format(abspath(file_path)))
+        sys.exit(-1)
     vs_paths = read_paths(file_path)
     for path in vs_paths:
         if exists(path):
             compile(path)
-            sys.exit(1)
+            sys.exit(0)
+    sys.exit(-1)
 
 
 
