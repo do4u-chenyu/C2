@@ -69,6 +69,7 @@
             // 
             this.dataSourceCombo.FormattingEnabled = true;
             this.dataSourceCombo.Location = new System.Drawing.Point(74, 54);
+            this.dataSourceCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dataSourceCombo.Name = "dataSourceCombo";
             this.dataSourceCombo.Size = new System.Drawing.Size(99, 20);
             this.dataSourceCombo.TabIndex = 3;
@@ -105,6 +106,7 @@
             // 
             this.operatorCombo.FormattingEnabled = true;
             this.operatorCombo.Location = new System.Drawing.Point(74, 93);
+            this.operatorCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.operatorCombo.Name = "operatorCombo";
             this.operatorCombo.Size = new System.Drawing.Size(99, 20);
             this.operatorCombo.TabIndex = 8;
