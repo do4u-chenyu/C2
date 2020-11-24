@@ -84,7 +84,7 @@ namespace C2.Core.Exports
                 new TxtEngine(),
                 new CsvEngine(),
                 new FreeMindEngine(),
-                new PdfEngine(),
+                
             };
         }
 

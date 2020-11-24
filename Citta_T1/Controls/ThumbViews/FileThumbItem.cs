@@ -64,7 +64,7 @@ namespace C2.Controls
                 switch (Path.GetExtension(Filename).ToLower())
                 {
                     case Document.Extension:
-                        Image = CreateBmdImage();
+                        //Image = CreateBmdImage();
                         break;
                     default:
                         Image = IconExtractor.ExtractLargeIconByExtension(Path.GetExtension(Filename));
@@ -73,10 +73,10 @@ namespace C2.Controls
             }
         }
 
-        Image CreateBmdImage()
-        {
-            return Properties.Resources.document_128;//.logo_trans;
-        }
+        //Image CreateBmdImage()
+        //{
+            //return Properties.Resources.document_128;//.logo_trans;
+        //}
 
         void OnFilenameChanged()
         {

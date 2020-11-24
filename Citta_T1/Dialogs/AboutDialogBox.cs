@@ -28,11 +28,7 @@ namespace C2.Dialogs
             LnkWebSite.Text = ProductInfo.WebSite;
             LnkWebSite.LinkUrl = ProductInfo.WebSite;
 
-            LabAboutProduct.Text = string.Format("{0}\n{1}\n\n{2}\n{3}",
-                ProductInfo.GetInformation(),
-                ProductInfo.Copyright,
-                "Some Icons are Copyright © Yusuke Kamiyamane.",
-                string.Format("Pdfsharp {0}({1})", Lang._("Version"), PdfSharp.ProductVersionInfo.Version));
+            LabAboutProduct.Text = string.Empty;
 
             AfterInitialize();
         }

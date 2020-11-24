@@ -105,12 +105,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0EC650D0C4FB4766858862F06E804E4B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0EFBDBE3DD244F75B2C1A290A1553B86"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -213,12 +207,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1DD31B9B0C334D2C9D32FFFFD5DBB1B7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1E143F8C89E94A1CB01955FC28303317"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -238,12 +226,6 @@
         "Entry"
         {
         "MsmKey" = "8:_1FCADFB3625346528E2C5343EE17A98D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_21D72BF7198242DC88E942310AA3394F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -292,12 +274,6 @@
         "Entry"
         {
         "MsmKey" = "8:_283123EEA8EC4BEEB38C678C09AB5006"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_287D95F7A84F4104BC735B375F55436A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -376,12 +352,6 @@
         "Entry"
         {
         "MsmKey" = "8:_3144E33793BF4E12B3602C947CF94282"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_322C4CF23E3F439AA20CFBF4ADD9508D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -501,12 +471,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_41753E64776246E5B6CA27A49CC5CFA3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_41A1F41803684FE5934B293032161B2B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -525,12 +489,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_45238B0B7F824DFE81E302E4D8F05398"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_457F04CC4A5E4C62A100B741AB6A64A0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -538,12 +496,6 @@
         "Entry"
         {
         "MsmKey" = "8:_461EA3ECB6C64BB1A987C752C0781DB3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_46B528ACC46F42DD86DBAF356641EB1D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -682,13 +634,13 @@
         "Entry"
         {
         "MsmKey" = "8:_581709CB6A16204F12F59FEEFE1CF665"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_581709CB6A16204F12F59FEEFE1CF665"
-        "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -712,18 +664,6 @@
         "Entry"
         {
         "MsmKey" = "8:_5D582AE4D1344F54810DD306B39CAE3A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_60570E577D484D7FA80BC528C82C00DA"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6128E46910524A88966414C19012A848"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -777,25 +717,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_66F1D7F0B531484E87FFD7814FD07D41"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6776CBE809344519B29FACA7874F512F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_6920738F0C0E474DAE9036A9837EEFF2"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6C35226DAE7948C589A2FC52811CD1C9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -807,25 +729,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6D07D748B78A4905B702388266B39465"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_726315AAF8E446AA8E2357A147C8C7DF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_72DA7162CBE34B34B4440ABF0CE09DF4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_72E29A018BBC4D23BBE95E12E4462890"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -844,12 +748,6 @@
         "Entry"
         {
         "MsmKey" = "8:_78C75F56B80A4F5CB89E150CD979306B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7A166D9311394A4BB9C1AB81E1CA3394"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -874,13 +772,13 @@
         "Entry"
         {
         "MsmKey" = "8:_8499BAC1E9471AE83FDA4CD610E8680A"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8499BAC1E9471AE83FDA4CD610E8680A"
-        "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -934,12 +832,6 @@
         "Entry"
         {
         "MsmKey" = "8:_8B41AA94C0334F119E1BEDB2C493DD95"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8BAD00C699784C6E9C795BAC596BC5A2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1011,12 +903,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9AE82674A0E941ECB0403B41EBEB9AEF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9B78C5B5E3A846358BB0DFD8BA9E3D84"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1035,26 +921,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9C61AE1E3D6D42A7BF54CD5468E66301"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9E204D2342434B529C1869147BB7A9D0"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A30A0C61FF9A26AE511895FEDA18B301"
-        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A30A0C61FF9A26AE511895FEDA18B301"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1108,12 +976,6 @@
         "Entry"
         {
         "MsmKey" = "8:_AC57485011DF43D39503496EFF694BD8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_ADFDDDA9F83E467A878AC10E253E9EEF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1287,12 +1149,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C6C166117007487BA483EECFB03E2443"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_C732569066264DCD896DC9076B67A44E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1306,24 +1162,6 @@
         "Entry"
         {
         "MsmKey" = "8:_C8DF7029B0F24767856631E74C96C027"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CB769B84492D49B090D7791BD4AD0839"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CC17D2A8D66A4F5FA81BEB1D8EFEBA49"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CCB683DA464A499D8589A3B8BBE37439"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1431,12 +1269,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DCCA15C43CC247AC9A8DF9DA9BE000BC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_DCF30913D0A743AC99B40EBFCFCAF1E4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1456,12 +1288,6 @@
         "Entry"
         {
         "MsmKey" = "8:_DF5E443E11BF4D16BD699850A942745C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E134817FCFA446689E1F0951B3379DED"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1528,12 +1354,6 @@
         "Entry"
         {
         "MsmKey" = "8:_EC97F527589D4EA19570C331E340871C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_ED79C7D18CBA42A29D2A00C77AB5F453"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1630,25 +1450,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1FCADFB3625346528E2C5343EE17A98D"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A30A0C61FF9A26AE511895FEDA18B301"
+        "OwnerKey" = "8:_1FCADFB3625346528E2C5343EE17A98D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2133,26 +1947,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0EC650D0C4FB4766858862F06E804E4B"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\da.DK.xml"
-            "TargetName" = "8:da.DK.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0EFBDBE3DD244F75B2C1A290A1553B86"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\409_任务.png"
@@ -2493,26 +2287,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1DD31B9B0C334D2C9D32FFFFD5DBB1B7"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\pl.PL.xml"
-            "TargetName" = "8:pl.PL.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E143F8C89E94A1CB01955FC28303317"
             {
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Thin Green.xml"
@@ -2588,26 +2362,6 @@
                 }
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\relate.exe"
             "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_21D72BF7198242DC88E942310AA3394F"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-gcc_s-seh-1.dll"
-            "TargetName" = "8:msys-gcc_s-seh-1.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
             "Condition" = "8:"
@@ -2770,26 +2524,6 @@
             "TargetName" = "8:97_全文.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_287D95F7A84F4104BC735B375F55436A"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\mk.MK.xml"
-            "TargetName" = "8:mk.MK.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3050,26 +2784,6 @@
             "TargetName" = "8:149_用户名.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_322C4CF23E3F439AA20CFBF4ADD9508D"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\de.DE.xml"
-            "TargetName" = "8:de.DE.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3486,26 +3200,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_41753E64776246E5B6CA27A49CC5CFA3"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\sv.SE.xml"
-            "TargetName" = "8:sv.SE.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_41A1F41803684FE5934B293032161B2B"
             {
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\sort.exe"
@@ -3566,26 +3260,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_45238B0B7F824DFE81E302E4D8F05398"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\es.ES.xml"
-            "TargetName" = "8:es.ES.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_457F04CC4A5E4C62A100B741AB6A64A0"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\75_服务器.png"
@@ -3612,26 +3286,6 @@
             "TargetName" = "8:179_支付.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_46B528ACC46F42DD86DBAF356641EB1D"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\sr.CS.xml"
-            "TargetName" = "8:sr.CS.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4079,46 +3733,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_60570E577D484D7FA80BC528C82C00DA"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\cs.CZ.xml"
-            "TargetName" = "8:cs.CZ.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6128E46910524A88966414C19012A848"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\zh.CHT.xml"
-            "TargetName" = "8:zh.CHT.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6234EE6878534D84A8AA1741EB15F61F"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\69_Imsi.png"
@@ -4250,72 +3864,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_66F1D7F0B531484E87FFD7814FD07D41"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-2.0.dll"
-            "TargetName" = "8:msys-2.0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6776CBE809344519B29FACA7874F512F"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\ja.JP.xml"
-            "TargetName" = "8:ja.JP.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6920738F0C0E474DAE9036A9837EEFF2"
             {
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Bluish Violet.xml"
             "TargetName" = "8:Bluish Violet.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6C35226DAE7948C589A2FC52811CD1C9"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\ca.ES.xml"
-            "TargetName" = "8:ca.ES.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4350,72 +3904,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D07D748B78A4905B702388266B39465"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-intl-8.dll"
-            "TargetName" = "8:msys-intl-8.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_726315AAF8E446AA8E2357A147C8C7DF"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\nl.NL.xml"
-            "TargetName" = "8:nl.NL.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_72DA7162CBE34B34B4440ABF0CE09DF4"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\201_头像.png"
             "TargetName" = "8:201_头像.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_72E29A018BBC4D23BBE95E12E4462890"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-ncursesw6.dll"
-            "TargetName" = "8:msys-ncursesw6.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4476,26 +3970,6 @@
             "TargetName" = "8:37_涉税.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A166D9311394A4BB9C1AB81E1CA3394"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\ko.KR.xml"
-            "TargetName" = "8:ko.KR.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4701,26 +4175,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8BAD00C699784C6E9C795BAC596BC5A2"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\hi.IN.xml"
-            "TargetName" = "8:hi.IN.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F0A78B9EAD346CAAC8F3198B3C2C323"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\41_打击传销.png"
@@ -4912,26 +4366,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9AE82674A0E941ECB0403B41EBEB9AEF"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-mpfr-6.dll"
-            "TargetName" = "8:msys-mpfr-6.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B78C5B5E3A846358BB0DFD8BA9E3D84"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\86_浏览量.png"
@@ -5003,26 +4437,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C61AE1E3D6D42A7BF54CD5468E66301"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\ru.RU.xml"
-            "TargetName" = "8:ru.RU.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9E204D2342434B529C1869147BB7A9D0"
             {
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Brilliant Yellow.xml"
@@ -5041,37 +4455,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A30A0C61FF9A26AE511895FEDA18B301"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_A30A0C61FF9A26AE511895FEDA18B301"
-                    {
-                    "Name" = "8:PdfSharp.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:PdfSharp.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A33AAB65149841F5A3A6D154DE5F50C3"
@@ -5240,26 +4623,6 @@
             "TargetName" = "8:System.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ADFDDDA9F83E467A878AC10E253E9EEF"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\it.IT.xml"
-            "TargetName" = "8:it.IT.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -5807,26 +5170,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C6C166117007487BA483EECFB03E2443"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\mr-IN.xml"
-            "TargetName" = "8:mr-IN.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C732569066264DCD896DC9076B67A44E"
             {
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Simple.xml"
@@ -5873,66 +5216,6 @@
             "TargetName" = "8:245_黄旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB769B84492D49B090D7791BD4AD0839"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-iconv-2.dll"
-            "TargetName" = "8:msys-iconv-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC17D2A8D66A4F5FA81BEB1D8EFEBA49"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-pcre-1.dll"
-            "TargetName" = "8:msys-pcre-1.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CCB683DA464A499D8589A3B8BBE37439"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-readline7.dll"
-            "TargetName" = "8:msys-readline7.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6278,26 +5561,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCCA15C43CC247AC9A8DF9DA9BE000BC"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\fr.FR.xml"
-            "TargetName" = "8:fr.FR.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCF30913D0A743AC99B40EBFCFCAF1E4"
             {
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\tr.exe"
@@ -6364,26 +5627,6 @@
             "TargetName" = "8:413_任务.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E134817FCFA446689E1F0951B3379DED"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-gmp-10.dll"
-            "TargetName" = "8:msys-gmp-10.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6604,26 +5847,6 @@
             "TargetName" = "8:33_涉军.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED79C7D18CBA42A29D2A00C77AB5F453"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\tr.TR.xml"
-            "TargetName" = "8:tr.TR.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7067,7 +6290,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{E7CCCC19-DFEA-4B09-BC97-6343D74101E5}"
+        "PackageCode" = "8:{6529E8AB-B9C9-47B4-BE3C-DAFD6A8E9C89}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

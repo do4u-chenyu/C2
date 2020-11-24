@@ -55,7 +55,7 @@
             this.imageBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.imageBox1.AutoScroll = true;
             this.imageBox1.AutoScrollMinSize = new System.Drawing.Size(64, 64);
-            this.imageBox1.Image = global::C2.Properties.Resources.logo64;
+            //this.imageBox1.Image = global::C2.Properties.Resources.logo64;
             this.imageBox1.Location = new System.Drawing.Point(3, 8);
             this.imageBox1.Name = "imageBox1";
             this.tableLayoutPanel1.SetRowSpan(this.imageBox1, 2);

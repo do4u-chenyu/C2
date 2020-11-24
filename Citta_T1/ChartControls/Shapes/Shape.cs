@@ -7,7 +7,6 @@ using C2.Core;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
-using PdfSharp.Drawing;
 
 namespace C2.ChartControls.Shapes
 {

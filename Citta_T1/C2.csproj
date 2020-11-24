@@ -116,9 +116,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
-    <Reference Include="PdfSharp">
-      <HintPath>..\ThirdPartyLibrary\PdfSharp\PdfSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -382,12 +379,6 @@
     <Compile Include="Canvas\IGraphicsPath.cs" />
     <Compile Include="Canvas\IGraphicsState.cs" />
     <Compile Include="Canvas\IPen.cs" />
-    <Compile Include="Canvas\Pdf\PdfBrush.cs" />
-    <Compile Include="Canvas\Pdf\PdfFont.cs" />
-    <Compile Include="Canvas\Pdf\PdfGraphics.cs" />
-    <Compile Include="Canvas\Pdf\PdfGraphicsPath.cs" />
-    <Compile Include="Canvas\Pdf\PdfGraphicsState.cs" />
-    <Compile Include="Canvas\Pdf\PdfPen.cs" />
     <Compile Include="Canvas\Svg\SvgBrush.cs" />
     <Compile Include="Canvas\Svg\SvgDocument.cs" />
     <Compile Include="Canvas\Svg\SvgFont.cs" />
@@ -918,7 +909,6 @@
     <Compile Include="Core\Exports\GifEngine.cs" />
     <Compile Include="Core\Exports\ImageExportEngine.cs" />
     <Compile Include="Core\Exports\JpegEngine.cs" />
-    <Compile Include="Core\Exports\PdfEngine.cs" />
     <Compile Include="Core\Exports\PngEngine.cs" />
     <Compile Include="Core\Exports\SvgEngine.cs" />
     <Compile Include="Core\Exports\TiffEngine.cs" />
@@ -1906,26 +1896,7 @@
     <None Include="Resources\Images\zoom.png" />
     <None Include="Resources\Images\zoom_in.png" />
     <None Include="Resources\Images\zoom_out.png" />
-    <None Include="Resources\Languages\ca.ES.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Languages\cs.CZ.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Languages\da.DK.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Languages\de.DE.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Languages\en.US.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Languages\es.ES.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Languages\fr.FR.xml">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\importDataSource.png" />
@@ -1942,52 +1913,8 @@
     <None Include="Resources\Images\WidgetImage\deleteattachment.png" />
     <None Include="Resources\Images\WidgetImage\copyfilepath.png" />
     <None Include="Resources\Images\WidgetImage\modelUpdate.png" />
-    <Content Include="Resources\Languages\hi.IN.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Languages\it.IT.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Resources\Languages\ja.JP.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="Resources\Languages\ko.KR.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Resources\Languages\mk.MK.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="Resources\Languages\mr-IN.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Resources\Languages\nl.NL.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="Resources\Languages\pl.PL.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Resources\Languages\ru.RU.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Languages\sr.CS.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="Resources\Languages\sv.SE.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Resources\Languages\tr.TR.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Languages\zh.CHS.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Languages\zh.CHT.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Resources\Languages\_Template.xml">
