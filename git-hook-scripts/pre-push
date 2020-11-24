@@ -21,7 +21,7 @@ def ex_cmd(cmd: str, cwd=None):
     ret = Popen(cmd, cwd=cwd, shell=True, stdout=PIPE).communicate()
     return ret
 
-def re_findall(pat: re.Pattern, raw: str) -> str:
+def re_findall(pat, raw: str) -> str:
     rst = pat.findall(raw)
     return rst[0] if len(rst) != 0 else ""
          
