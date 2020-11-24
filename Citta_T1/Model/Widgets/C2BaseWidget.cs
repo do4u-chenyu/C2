@@ -16,6 +16,7 @@ namespace C2.Model.Widgets
 
         [Browsable(false)]
         public List<DataItem> DataItems { get; set; } = new List<DataItem>();
+
         public override bool ResponseMouse { get => true; }
 
         public override Size CalculateSize(MindMapLayoutArgs e)
@@ -83,7 +84,11 @@ namespace C2.Model.Widgets
             }
         }
         #endregion
-
+        protected static void OnModifiedChange()
+        {
+            if (!Global.GetCurrentDocument().Modified)
+                Global.GetCurrentDocument().Modified = true;
+        }
         public static void DoPreViewDataSource(DataItem hitItem)
         {
             if (hitItem != null)

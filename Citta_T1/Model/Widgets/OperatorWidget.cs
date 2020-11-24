@@ -78,8 +78,8 @@ namespace C2.Model.Widgets
             set
             {
                 if (_status != value)
-                {                 
-                    Global.GetCurrentDocument().Modified = true;
+                {
+                    OnModifiedChange();
                 }
                 _status = value;
             }
