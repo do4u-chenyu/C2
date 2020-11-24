@@ -1,3 +1,4 @@
+#! env/python.exe
 from os.path import split, splitext, getctime, join, exists, isfile
 from os import chdir, getcwd
 from subprocess import Popen, PIPE
@@ -24,6 +25,19 @@ def re_findall(pat: re.Pattern, raw: str) -> str:
     rst = pat.findall(raw)
     return rst[0] if len(rst) != 0 else ""
          
+def set_hookspath() -> None:
+    print("设置hooks默认路径")
+    msg, err = ex_cmd("git config --global core.safecrlf true")
+    if err != None:
+        print("git命令有误，请检查是否配置git环境变量")
+        sys.exit(-1)
+    msg, err = ex_cmd("git config --global core.safecrlf")
+    if msg.decode("utf8").strip() == "true":
+        print("设置成功")
+    else:
+        print("设置失败，请检查是否配置git环境变量")
+        sys.exit(-1)
+
 def set_crlf() -> None:
     print("设置禁止混合换行符")
     msg, err = ex_cmd("git config --global core.safecrlf true")
@@ -62,6 +76,7 @@ def compile(vs_path: str) -> None:
     sys.exit(-2)
 
 def main(file_path: str) -> None:
+    set_hookspath()
     set_crlf()
     vs_paths = read_paths(file_path)
     for path in vs_paths:
