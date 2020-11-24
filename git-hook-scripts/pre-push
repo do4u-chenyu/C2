@@ -76,7 +76,6 @@ def compile(vs_path: str) -> None:
     sys.exit(-2)
 
 def main(file_path: str) -> None:
-    set_hookspath()
     set_crlf()
     vs_paths = read_paths(file_path)
     for path in vs_paths:
