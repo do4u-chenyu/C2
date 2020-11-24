@@ -71,7 +71,7 @@ def compile(vs_path: str) -> None:
         skip_num = re.findall(pat_skip_num, info)
         if succ_num == "0" or fail_num != "0":
             sys.exit(-1)
-        sys.exit(0)
+        sys.exit(1)
     print(err.decode("gbk"))
     sys.exit(-2)
 
