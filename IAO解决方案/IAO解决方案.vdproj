@@ -87,6 +87,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0D33D3B3281B419CB916191389ADCD8A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0D6A81CAD6494DB1B67EE857CFF9B1BB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -399,6 +405,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_37EA6429B1574FD8B53FB87B6D351DB4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -454,6 +466,12 @@
         "Entry"
         {
         "MsmKey" = "8:_3D211DFE15DF4BC5AD0C25E6A09A171A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3D83DA2BE340405FAD13014EA689B1C3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -538,7 +556,7 @@
         "Entry"
         {
         "MsmKey" = "8:_471C8E5D2AD24868BEF7CC8609F37E8D"
-        "OwnerKey" = "8:_744608C46B864D548719833095E2A0C4"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -574,7 +592,7 @@
         "Entry"
         {
         "MsmKey" = "8:_482A20198E5CA15C60E741F15ACD3758"
-        "OwnerKey" = "8:_744608C46B864D548719833095E2A0C4"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -664,13 +682,13 @@
         "Entry"
         {
         "MsmKey" = "8:_581709CB6A16204F12F59FEEFE1CF665"
-        "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_581709CB6A16204F12F59FEEFE1CF665"
-        "OwnerKey" = "8:_744608C46B864D548719833095E2A0C4"
+        "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -813,12 +831,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_744608C46B864D548719833095E2A0C4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_745B2AA652054B248A4312FDC965B3B3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -862,13 +874,13 @@
         "Entry"
         {
         "MsmKey" = "8:_8499BAC1E9471AE83FDA4CD610E8680A"
-        "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8499BAC1E9471AE83FDA4CD610E8680A"
-        "OwnerKey" = "8:_744608C46B864D548719833095E2A0C4"
+        "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -964,7 +976,7 @@
         "Entry"
         {
         "MsmKey" = "8:_939605B25E548810ECE2C34C26AE3247"
-        "OwnerKey" = "8:_744608C46B864D548719833095E2A0C4"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1042,7 +1054,7 @@
         "Entry"
         {
         "MsmKey" = "8:_A30A0C61FF9A26AE511895FEDA18B301"
-        "OwnerKey" = "8:_744608C46B864D548719833095E2A0C4"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1120,7 +1132,7 @@
         "Entry"
         {
         "MsmKey" = "8:_AEEBFC491139ECBDCB6F697589134BA3"
-        "OwnerKey" = "8:_744608C46B864D548719833095E2A0C4"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1294,12 +1306,6 @@
         "Entry"
         {
         "MsmKey" = "8:_C8DF7029B0F24767856631E74C96C027"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C9E1A534A0E647ED8F91432CBAE95D6C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1539,18 +1545,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EF4B8ABE67684C75AA90CC9AA5DB5CDD"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F069B0B9B3D345E3B9B9F4CC79A351DF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1636,13 +1630,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_744608C46B864D548719833095E2A0C4"
+        "OwnerKey" = "8:_C2D1145BD075474D92C2651B08EAEB46"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1775,11 +1769,11 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\IAO解决方案_C2.msi"
+        "OutputFilename" = "8:Release\\IAO解决方案C2.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
-        "Compression" = "3:2"
+        "Compression" = "3:3"
         "SignOutput" = "11:FALSE"
         "CertificateFile" = "8:"
         "PrivateKeyFile" = "8:"
@@ -2065,6 +2059,26 @@
             "TargetName" = "8:472_星期五.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0D33D3B3281B419CB916191389ADCD8A"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\log4net.config"
+            "TargetName" = "8:log4net.config"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3141,6 +3155,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_37039095DF6C4402A22713B87BCB6EBB"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:C2, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
+                "ScatterAssemblies"
+                {
+                    "_37039095DF6C4402A22713B87BCB6EBB"
+                    {
+                    "Name" = "8:C2.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\C2.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_37EA6429B1574FD8B53FB87B6D351DB4"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\369_进度.png"
@@ -3327,6 +3372,26 @@
             "TargetName" = "8:433_方向.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D83DA2BE340405FAD13014EA689B1C3"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\C2.exe.config"
+            "TargetName" = "8:C2.exe.config"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4351,37 +4416,6 @@
             "TargetName" = "8:msys-ncursesw6.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_744608C46B864D548719833095E2A0C4"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:C2, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
-                "ScatterAssemblies"
-                {
-                    "_744608C46B864D548719833095E2A0C4"
-                    {
-                    "Name" = "8:C2.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\C2.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -5853,26 +5887,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C9E1A534A0E647ED8F91432CBAE95D6C"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\C2.pdb"
-            "TargetName" = "8:C2.pdb"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB769B84492D49B090D7791BD4AD0839"
             {
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-iconv-2.dll"
@@ -6644,46 +6658,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EF4B8ABE67684C75AA90CC9AA5DB5CDD"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\C2.exe.config"
-            "TargetName" = "8:C2.exe.config"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F069B0B9B3D345E3B9B9F4CC79A351DF"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\log4net.config"
-            "TargetName" = "8:log4net.config"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F160B1124930413F8AA4DF6E9FB5AE3B"
             {
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\awk.exe"
@@ -7093,7 +7067,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{AC902F73-24A9-4C57-9957-54DDB2B422A5}"
+        "PackageCode" = "8:{E7CCCC19-DFEA-4B09-BC97-6343D74101E5}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -7116,7 +7090,7 @@
         "UseSystemSearchPath" = "11:TRUE"
         "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
-        "PostBuildEvent" = "8:copy $(BuiltOuputPath) $(ProjectDir)$(Configuration)\\IAO解决方案_%date:~0,4%%date:~5,2%%date:~8,2%.msi"
+        "PostBuildEvent" = "8:copy $(BuiltOuputPath) $(ProjectDir)$(Configuration)\\IAO解决方案C2_%date:~0,4%%date:~5,2%%date:~8,2%.msi"
         "RunPostBuildEvent" = "3:0"
         }
         "Registry"
@@ -7213,7 +7187,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8F00B4FDEF2F4ABBB3DE974D73ABE4D5"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_32482B648E2448728F934BF06B00CE63"
             {
             "Name" = "8:IAO解决方案.exe"
             "Arguments" = "8:"
@@ -7221,13 +7195,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_744608C46B864D548719833095E2A0C4"
+            "Target" = "8:_37039095DF6C4402A22713B87BCB6EBB"
             "Folder" = "8:_818FD6E8713C45D99CF6673836F38C69"
             "WorkingFolder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
             "Icon" = "8:_C3C45A24B7CE40249E406F3C6AD70B64"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B37FB44F93AD411E8C876915EDBDDC23"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4192C56CB163417CA17BBD60CE657D24"
             {
             "Name" = "8:IAO解决方案.exe"
             "Arguments" = "8:"
@@ -7235,7 +7209,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_744608C46B864D548719833095E2A0C4"
+            "Target" = "8:_37039095DF6C4402A22713B87BCB6EBB"
             "Folder" = "8:_5C964F8FC9FA4C3EB02497E87114E179"
             "WorkingFolder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
             "Icon" = "8:_C3C45A24B7CE40249E406F3C6AD70B64"

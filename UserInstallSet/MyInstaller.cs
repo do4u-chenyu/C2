@@ -15,7 +15,9 @@ namespace UserInstallSet
         "    </startup>\r\n" +
         "    <appSettings>\r\n" +
         "      <add key = \"workspace\" value=\"{0}\"/>\r\n" +
+        "      <add key = \"RunLevel\" value=\"NoLogin\"/>\r\n" +
         "      <add key=\"EPPlus:ExcelPackage.LicenseContext\" value=\"NonCommercial\" />\r\n" +
+        "      <add key=\"ClientSettingsProvider.ServiceUri\" value=\"\" />\r\n" +
         "    </appSettings>\r\n" +
         "</configuration>";
         public MyInstaller()
