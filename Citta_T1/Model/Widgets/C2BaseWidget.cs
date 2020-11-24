@@ -6,6 +6,7 @@ using System.Xml;
 using C2.Business.Model;
 using C2.Utils;
 using C2.Core;
+using System;
 
 namespace C2.Model.Widgets
 {
@@ -41,7 +42,7 @@ namespace C2.Model.Widgets
             ModelXmlWriter mexw = new ModelXmlWriter(nodeName, parentNode);
             mexw.WriteAttribute("path", dataItem.FilePath)
                 .WriteAttribute("name", dataItem.FileName)
-                .WriteAttribute("separator", dataItem.FileSep.ToString())
+                .WriteAttribute("separator", Convert.ToInt32(dataItem.FileSep).ToString())
                 .WriteAttribute("encoding", dataItem.FileEncoding)
                 .WriteAttribute("file_type", dataItem.FileType);
             // 结果算子写入类型
