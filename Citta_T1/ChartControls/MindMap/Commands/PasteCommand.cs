@@ -159,8 +159,11 @@ namespace C2.Controls.MapViews
                                 t.Links.Remove(line);
                         }
                     }
-                    else if (co is NoteWidget || co is PictureWidget || co is ProgressBarWidget)
+                    else if (!(co is C2BaseWidget))
                     {
+                        //TODO
+                        //这里是直接添加，也需要做判断是否已经存在,否则会出现一个节点多个同样的挂件
+                        //else if (!co is NoteWidget || co is PictureWidget || co is ProgressBarWidget)    
                         target.Widgets.Add((Widget)co);
                     }
                 }
