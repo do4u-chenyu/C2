@@ -152,7 +152,7 @@ namespace C2.Controls.Common
         {
             if(this.topicName.Text == "未选中节点")
             {
-                HelpUtil.ShowMessageBox("未选中节点，请选中主题后再配置","未选中节点");
+                HelpUtil.ShowMessageBox("未选中节点，请选中节点后再配置","未选中节点");
                 return;
             }
 
@@ -165,7 +165,7 @@ namespace C2.Controls.Common
 
             if (string.IsNullOrEmpty(SelectedOperator))
             {
-                HelpUtil.ShowMessageBox("未添加算子,请添加后再配置", "未选择算子");
+                HelpUtil.ShowMessageBox("未选择算子,请添加后再配置", "未选择算子");
                 return;
             }
 
