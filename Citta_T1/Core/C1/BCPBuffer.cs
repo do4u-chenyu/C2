@@ -66,6 +66,9 @@ namespace C2.Core
         private string GetCachePreviewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = String.Empty;
+            // 超过100M Excel不处理
+            if (IsBigFile(fullFilePath))
+                return ret;
             // 数据不存在 或 需要强制读取时 按照路径重新读取
             if (!HitCache(fullFilePath) || isForceRead)
                 switch (type)
@@ -89,9 +92,11 @@ namespace C2.Core
         }
         public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
-
             string ret = String.Empty;
             OpUtil.ExtType type = OpUtil.ExtType.Unknow;
+            // 超过100M Excel不处理
+            if (IsBigFile(fullFilePath))
+                return ret;
             //现在支持excel和bcp，以后增加格式这边可能要改
             if (!HitCache(fullFilePath) || isForceRead)
             {
@@ -111,7 +116,25 @@ namespace C2.Core
             }
             return ret;
         }
-
+        private bool IsBigFile(string fullFilePath)
+        {
+            // 100M Excel大文件不处理，提示信息
+            if (!regexXls.IsMatch(fullFilePath))
+                return false;
+            try
+            {
+                FileInfo fi = new FileInfo(fullFilePath);
+                long fileSize = fi.Length / 1024 / 1024;
+                if (fileSize > 100)
+                {
+                    MessageBox.Show("Excel文件过大，超过100M，无法处理.", "文件过大", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return true;
+                }
+            }
+            catch
+            { }
+            return false;
+        }
         private void IsUpdateCache(OpUtil.ExtType type,string fullFilePath)
         {
             if (type != OpUtil.ExtType.Excel)
@@ -126,14 +149,16 @@ namespace C2.Core
         public bool TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding, char separator)
         {
             bool returnVar = true;
+
+            // 超过100M Excel不处理
+            if (IsBigFile(fullFilePath))
+                return !returnVar;
             // 命中缓存,直接返回,不再加载文件
             if (HitCache(fullFilePath))
             {
                 IsUpdateCache(extType,fullFilePath);
                 return returnVar;
-            }
-              
-
+            }             
             switch (extType)
             {
                 case OpUtil.ExtType.Excel:
