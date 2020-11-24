@@ -26,8 +26,9 @@ namespace C2.Controls.MapViews
                 if (SelectedTopics != null && SelectedTopics.Length > 0)
                     return true;
 
-                if (SelectedObject is Widget)// && ((Widget)SelectedObject).CanCopy)
+                if (SelectedObject is Widget && !(SelectedObject is C2BaseWidget))
                     return true;
+
 
                 return false;
             }
@@ -44,7 +45,7 @@ namespace C2.Controls.MapViews
                 if (!SelectedTopics.IsNullOrEmpty() && !SelectedTopics.Exists(t=>t.IsRoot))
                     return true;
 
-                if (SelectedObject is Widget)
+                if (SelectedObject is Widget && !(SelectedObject is C2BaseWidget))
                     return true;
 
                 return false;
