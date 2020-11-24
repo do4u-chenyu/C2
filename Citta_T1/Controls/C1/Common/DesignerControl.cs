@@ -75,18 +75,6 @@ namespace C2.Controls.Common
 
         private void SetSelectedDataSource()
         {
-            /*
-             * 1、当算子挂件不存在时，置空
-             * 2、算子挂件存在时
-             *      2.1  opw.DataSourceItem 为空，置空
-             *      2.2                                  不为空，赋值
-             *      
-             *  算子挂件中存的数据源，和下拉数据源对比问题：
-             *  (1)有数据源，有下拉数据源，比较是否包含
-             *       包含：正常显示
-             *       不包含：置空
-             *  (2)至少有一个为空，直接置空
-             */
             if(OpWidget == null)
             {
                 SelectedDataSource = null;
@@ -152,7 +140,7 @@ namespace C2.Controls.Common
         {
             if(this.topicName.Text == "未选中节点")
             {
-                HelpUtil.ShowMessageBox("未选中节点，请选中主题后再配置","未选中节点");
+                HelpUtil.ShowMessageBox("未选中节点，请选中节点后再配置","未选中节点");
                 return;
             }
 
@@ -165,7 +153,7 @@ namespace C2.Controls.Common
 
             if (string.IsNullOrEmpty(SelectedOperator))
             {
-                HelpUtil.ShowMessageBox("未添加算子,请添加后再配置", "未选择算子");
+                HelpUtil.ShowMessageBox("未选择算子,请添加后再配置", "未选择算子");
                 return;
             }
 
