@@ -546,8 +546,6 @@ namespace C2.Controls
 
         protected virtual void OnItemClick(ThumbItem item)
         {
-            if (item.Text.Equals(""))
-                return;
             switch (item.Types)
             {
                 case ThumbItem.ModelTypes.Business:

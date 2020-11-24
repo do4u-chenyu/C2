@@ -81,36 +81,58 @@ namespace C2.Core
                 }
             // 防止文件读取时发生错误, 重新判断下是否存在
             if (HitCache(fullFilePath))
+            {
+                IsUpdateCache(type,fullFilePath);
                 ret = dataPreviewDict[fullFilePath].PreviewFileContent;
+            }              
             return ret;
         }
         public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
 
             string ret = String.Empty;
+            OpUtil.ExtType type = OpUtil.ExtType.Unknow;
             //现在支持excel和bcp，以后增加格式这边可能要改
             if (!HitCache(fullFilePath) || isForceRead)
             {
                 if (regexXls.IsMatch(fullFilePath))
                 {
                     PreLoadExcelFileNew(fullFilePath);
+                    type = OpUtil.ExtType.Excel;
                 }
                 else
                     PreLoadBcpFile(fullFilePath, encoding);
 
             }
             if (HitCache(fullFilePath))
+            {
+                IsUpdateCache(type,fullFilePath);
                 ret = dataPreviewDict[fullFilePath].HeadColumnLine;
+            }
             return ret;
         }
 
-
+        private void IsUpdateCache(OpUtil.ExtType type,string fullFilePath)
+        {
+            if (type != OpUtil.ExtType.Excel)
+                return;
+            long crcValue = FileUtil.GetFileCRC32Value(fullFilePath);
+            long oldCrc = dataPreviewDict[fullFilePath].CrcValue;
+            if (crcValue != oldCrc)
+            {
+                PreLoadExcelFileNew(fullFilePath);
+            }
+        }
         public bool TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding, char separator)
         {
             bool returnVar = true;
             // 命中缓存,直接返回,不再加载文件
             if (HitCache(fullFilePath))
+            {
+                IsUpdateCache(extType,fullFilePath);
                 return returnVar;
+            }
+              
 
             switch (extType)
             {
@@ -161,11 +183,12 @@ namespace C2.Core
             for (int i = 0; i < rowContentList.Count; i++)
                 sb.AppendLine(String.Join("\t", rowContentList[i]));
             dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
+            dataPreviewDict[fullFilePath].CrcValue= FileUtil.GetFileCRC32Value(fullFilePath);
 
             // 大文件内容写入本地缓存
             FileInfo fi = new FileInfo(fullFilePath);
-            long fileSize = fi.Length / 1024;
-            if (fileSize > 1000)
+            long fileSize = fi.Length /1024/1024;
+            if (fileSize > 10)
             {
                 WriteBuffer(fullFilePath, sb, firstLine);
             }
