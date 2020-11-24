@@ -187,8 +187,8 @@ namespace C2.Core
 
             // 大文件内容写入本地缓存
             FileInfo fi = new FileInfo(fullFilePath);
-            long fileSize = fi.Length / 1024;
-            if (fileSize > 1000)
+            long fileSize = fi.Length /1024/1024;
+            if (fileSize > 10)
             {
                 WriteBuffer(fullFilePath, sb, firstLine);
             }
