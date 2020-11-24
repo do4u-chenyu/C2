@@ -40,6 +40,9 @@ namespace C2.Utils
         public static string DataSourceWidgetHelpInfo = "数据源:支持添加多个数据源,支持多种类型文档";
         public static string ExportImageHelpInfo = "导出图片:支持导出成多种格式的图片";
 
+        public static string ReviewToolStripMenuItemInfo = "首页状态下无法预览数据，请点击左侧面板打开一个业务视图后再试";
+
+
 
         /// <summary>
         /// 默认为Information,除非有非常严重的错误,否则一般尽量用温和的提示信息.

@@ -188,6 +188,7 @@ namespace C2.Controls.Left
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.ReviewToolStripMenuItem.Enabled = Global.GetBottomViewPanel().Visible;
+            this.ReviewToolStripMenuItem.ToolTipText = this.ReviewToolStripMenuItem.Enabled ? "预览数据源部分信息" : HelpUtil.ReviewToolStripMenuItemInfo;
         }
     }
 }
