@@ -133,6 +133,7 @@ namespace C2.Core
         public static string UserWorkspacePath { get => Path.Combine( workspaceDirectory,mainForm.UserName); }
         public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "模型市场"); }
+        public static string HotModelPath { get => Path.Combine(Application.StartupPath, "Resources\\Templates"); }
 
         public const float Factor = 1.3F;
         private static string versionType;

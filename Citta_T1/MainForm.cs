@@ -263,9 +263,12 @@ namespace C2
             // 将用户本地保存的模型文档加载到左侧myModelControl	
             string[] bsTitles = ModelsInfo.LoadAllModelTitle(Global.BusinessViewPath);
             string[] mtTitles = ModelsInfo.LoadAllModelTitle(Global.MarketViewPath);
+            string[] hotTitles = ModelsInfo.LoadAllModelTitle(Global.HotModelPath);
             foreach (string title in bsTitles)
                 this.mindMapModelControl.AddMindMapModel(title);
             foreach (string title in mtTitles)
+                this.myModelControl.AddModel(title);
+            foreach (string title in hotTitles)
                 this.myModelControl.AddModel(title);
         }
         private void LoadDataSource()
