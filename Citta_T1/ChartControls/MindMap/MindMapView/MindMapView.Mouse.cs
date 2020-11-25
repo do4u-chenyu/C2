@@ -160,6 +160,7 @@ namespace C2.Controls.MapViews
             if (dsw.DataItems.Find((DataItem x) => x.FilePath.Equals(dataItem.FilePath)) == null)
             {
                 dsw.DataItems.Add(dataItem);
+                Global.GetCurrentDocument().Modified = true;
                 TopicUpdate(dsw.Container, null);
                 ShowDesigner(dsw.Container,false);
             }

@@ -18,7 +18,7 @@ namespace C2.Dialogs
         {
             InitializeComponent();
 
-            imageDonation = Properties.Resources.donation;
+            //imageDonation = Properties.Resources.donation;
             ClientSize = imageDonation.Size;
             Text = Lang.GetText(Text);
         }
