@@ -975,12 +975,6 @@
     <Compile Include="Design\PropertyViewAttribute.cs" />
     <Compile Include="Design\RemarkDesignEditor.cs" />
     <Compile Include="Design\TopicShapeEditor.cs" />
-    <Compile Include="Dialogs\AboutDialogBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\AboutDialogBox.Designer.cs">
-      <DependentUpon>AboutDialogBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\AddIconDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -992,12 +986,6 @@
     </Compile>
     <Compile Include="Dialogs\Components\ThemeFolderNode.cs" />
     <Compile Include="Dialogs\Components\ThemeNode.cs" />
-    <Compile Include="Dialogs\DonationDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\DonationDialog.Designer.cs">
-      <DependentUpon>DonationDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\ExceptionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1438,9 +1426,6 @@
     <EmbeddedResource Include="Core\AccelaratorKeys\ShortcutKeysEditor.resx">
       <DependentUpon>ShortcutKeysEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AboutDialogBox.resx">
-      <DependentUpon>AboutDialogBox.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AddIconDialog.resx">
       <DependentUpon>AddIconDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1522,9 +1507,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CreateNewModelForm.resx">
       <DependentUpon>CreateNewModelForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\DonationDialog.resx">
-      <DependentUpon>DonationDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\FindDialog.resx">
       <DependentUpon>FindDialog.cs</DependentUpon>

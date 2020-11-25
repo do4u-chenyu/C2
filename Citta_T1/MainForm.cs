@@ -221,10 +221,10 @@ namespace C2
             this.myModelControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
         }
-
+        
         private void DataButton_Click(object sender, EventArgs e)
         {
-            this.ShowLeftFold();
+            this.ShowLeftFold();// 建议放最后 代码审批
             this.dataSourceControl.Visible = true;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
@@ -284,8 +284,8 @@ namespace C2
             if (this.isLeftViewPanelMinimum)
             {
                 this.isLeftViewPanelMinimum = false;
-                this.leftToolBoxPanel.Width = 187;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+                this.leftToolBoxPanel.Width = 187;
             }
         }
         private void LeftFoldButton_Click(object sender, EventArgs e)
@@ -369,7 +369,10 @@ namespace C2
         }
         public void NewCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
-            ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName, mindMapName);
+            ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName)
+            {
+                SavePath = Path.Combine(Global.WorkspaceDirectory, this.UserName, "业务视图", mindMapName, modelDocumentName)
+            };
             CanvasForm form = new CanvasForm(doc,topic, mindMapName);
             ShowForm(form);
 
@@ -385,7 +388,7 @@ namespace C2
 
         public void LoadCanvasFormByXml(string savaPath ,string modelTitle)
         {
-            ModelDocument doc = new ModelDocument(modelTitle, userName)
+            ModelDocument doc = new ModelDocument(modelTitle, this.UserName)
             {
                 SavePath = Path.Combine(savaPath, modelTitle)
             };
@@ -398,7 +401,15 @@ namespace C2
 
         public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
-            LoadCanvasFormByXml(Path.Combine(Global.WorkspaceDirectory, this.UserName, "业务视图", mindMapName), modelDocumentName);
+            ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName)
+            {
+                SavePath = Path.Combine(Global.WorkspaceDirectory, this.UserName, "业务视图", mindMapName, modelDocumentName)
+            };
+            CanvasForm form = new CanvasForm(doc, topic, mindMapName);
+            ShowForm(form);
+
+            doc.Load();
+            form.CanvasAddElement(doc);
 
             OperatorWidget opw = topic.FindWidget<OperatorWidget>();
             if (opw != null)

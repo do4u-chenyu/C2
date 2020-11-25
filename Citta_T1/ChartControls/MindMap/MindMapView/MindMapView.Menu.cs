@@ -242,12 +242,14 @@ namespace C2.Controls.MapViews
             ClearSingleOpContent();
             if(!opw.HasModelOperator)
                 Delete(new ChartObject[] { opw });
+            Global.OnModifiedChange();
         }
         void MenuDeleteModelOp_Click(object sender, EventArgs e)
         {
             ClearModelOpContent();
             if (opw.OpType == OpType.Null)
                 Delete(new ChartObject[] { opw });
+            Global.OnModifiedChange();
         }
         private void ClearSingleOpContent()
         {
@@ -308,6 +310,7 @@ namespace C2.Controls.MapViews
             ShowDesigner(dtw.Container,false);
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
+            Global.OnModifiedChange();
         }
 
         void MenuDeleteDataChart_Click(object sender, EventArgs e)
@@ -318,6 +321,7 @@ namespace C2.Controls.MapViews
             ShowDesigner(cw.Container,false);
             if (cw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { cw });
+            Global.OnModifiedChange();
         }
 
         void MenuCreateDataChart_Click(object sender, EventArgs e)
@@ -340,6 +344,7 @@ namespace C2.Controls.MapViews
                 currentTopic.Widgets.Add(new ChartWidget { DataItems = new List<DataItem> { dataCopy } });
             }
             UpdateChartWidgetMenu(currentTopic.FindWidget<ChartWidget>(), dataCopy);
+            Global.OnModifiedChange();
         }
         void MenuViewDataChart_Click(object sender, EventArgs e)
         {
@@ -432,6 +437,7 @@ namespace C2.Controls.MapViews
             TopicUpdate(rsw.Container, hitItem);
             if (rsw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { rsw });
+            Global.OnModifiedChange();
         }
         void MenuJoinPool_Click(object sender, EventArgs e)
         {
