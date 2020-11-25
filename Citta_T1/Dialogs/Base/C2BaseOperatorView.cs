@@ -102,7 +102,17 @@ namespace C2.Dialogs.Base
             if (IsOptionNotReady()) return;
             if (IsIllegalFieldName()) return;
             if (IsDuplicateSelect()) return;//数据标准化窗口
+            // 原始算子配置
+            Dictionary<string, string> oldOption = new Dictionary<string, string>(this.operatorWidget.Option.OptionDict);
             SaveOption();
+
+            // 配置项改变,文件Dirty
+            var unContained0 = oldOption.Where(x => !this.operatorWidget.Option.OptionDict.Contains(x));
+            var unContained1 = this.operatorWidget.Option.OptionDict.Where(x => !oldOption.Contains(x));
+            if (unContained0.Count() > 0 || unContained1.Count() > 0)
+                Global.OnModifiedChange();
+
+
             this.DialogResult = DialogResult.OK;
 
             operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + Lang._(operatorWidget.OpType.ToString());
