@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="关联" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\关联.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="结果" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WidgetIcon\结果.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -160,9 +157,6 @@
   <data name="keyword_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\关键词过滤.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="selectRemark" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\flow\selectRemark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Modelmarket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Modelmarket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -184,9 +178,6 @@
   <data name="_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="并集" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\并集.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="hyperlink" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\hyperlink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -204,9 +195,6 @@
   </data>
   <data name="split_btn_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\split_btn_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="selectDrag" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\flow\selectDrag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="coll_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\coll_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,9 +220,6 @@
   <data name="avg_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\平均值.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="selectZoomUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\flow\selectZoomUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="opDone" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\opDone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -249,9 +234,6 @@
   </data>
   <data name="rand_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\rand_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="分组" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\分组.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="layout_tree_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\layout_tree_right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -289,9 +271,6 @@
   <data name="stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="筛选" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\筛选.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -307,17 +286,11 @@
   <data name="previous" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\previous.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="最大值" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\最大值.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="模型视图" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\模型视图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Datamanagement" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Datamanagement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="排序" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\排序.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="freq_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\freq_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -337,20 +310,11 @@
   <data name="stan_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\stan_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="平均值" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\平均值.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="wordFilterOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\opControl\wordFilterOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="树状图" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Templates\树状图.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="sortOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\opControl\sortOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="xmindData" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\xmindData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -399,9 +363,6 @@
   </data>
   <data name="multi_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\multi_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="selectFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\flow\selectFrame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="div" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\toolbox\div.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -490,17 +451,8 @@
   <data name="theme" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\theme.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="随机" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\随机.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="opRunning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\opRunning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="splitter_v" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\splitter_v.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="多源" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\多源.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\objects.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -510,9 +462,6 @@
   </data>
   <data name="keyboard_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\keyboard.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="yes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\yes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="logo" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -1698,9 +1647,6 @@
   <data name="theme_manage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\theme_manage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="关键词过滤" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\关键词过滤.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="tip_pin_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tip_pin_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1712,9 +1658,6 @@
   </data>
   <data name="zoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\zoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="频率" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\频率.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rotate_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\rotate_left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1730,9 +1673,6 @@
   </data>
   <data name="AI_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\AI_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="标准" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\标准.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder_sys" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\folder_sys.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1751,9 +1691,6 @@
   </data>
   <data name="layout_org_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\layout_org_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="svg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\svg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="opSetSuccess" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\opSetSuccess.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1785,17 +1722,8 @@
   <data name="strike" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\strike.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tool_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\tool_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="碰撞" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\碰撞.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="sidebar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\sidebar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="最小值" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\最小值.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pdfData" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\pdfData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1814,9 +1742,6 @@
   </data>
   <data name="format_painter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\format_painter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="tick_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\tick_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="warn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\element\warn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1853,9 +1778,6 @@
   </data>
   <data name="union_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\union_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="splitter_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\splitter_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit_alignment" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\edit_alignment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1911,9 +1833,6 @@
   <data name="cut" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\cut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="web" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\web.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="modelTopLabel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StartPage\modelTopLabel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1931,9 +1850,6 @@
   </data>
   <data name="globe_network" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\globe_network.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="差集" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\差集.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pythonHelper3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\datasource\pythonHelper3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1980,9 +1896,6 @@
   <data name="hourglass_ico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\hourglass_ico.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sort" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\sort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Languages\en.US.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -1991,9 +1904,6 @@
   </data>
   <data name="navigation_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\navigation_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="unionOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\opControl\unionOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="附件" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WidgetIcon\附件.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -2031,17 +1941,11 @@
   <data name="resultDone" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\element\resultDone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="selectZoomDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\flow\selectZoomDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="topic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\topic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="close_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\close_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="tabs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\tabs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tip_pin_pressed_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tip_pin_pressed_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
