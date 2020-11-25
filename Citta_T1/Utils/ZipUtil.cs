@@ -41,7 +41,7 @@ namespace C2.Utils
                     }
                 }
             }
-            string workPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName);
+            string workPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName,"模型市场");
             string targetPath = Path.Combine(workPath, modelTitle);
             Directory.CreateDirectory(workPath);
 

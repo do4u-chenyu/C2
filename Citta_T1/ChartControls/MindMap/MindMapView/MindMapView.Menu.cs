@@ -334,6 +334,7 @@ namespace C2.Controls.MapViews
             ShowDesigner(cw.Container,false);
             if (cw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { cw });
+            Global.OnModifiedChange();
         }
 
         void MenuCreateDataChart_Click(object sender, EventArgs e)
@@ -356,6 +357,7 @@ namespace C2.Controls.MapViews
                 currentTopic.Widgets.Add(new ChartWidget { DataItems = new List<DataItem> { dataCopy } });
             }
             UpdateChartWidgetMenu(currentTopic.FindWidget<ChartWidget>(), dataCopy);
+            Global.OnModifiedChange();
         }
         void MenuViewDataChart_Click(object sender, EventArgs e)
         {

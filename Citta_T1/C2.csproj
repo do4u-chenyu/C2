@@ -1674,7 +1674,6 @@
     <None Include="Resources\cross_large.png" />
     <EmbeddedResource Include="Resources\cur_scroll.cur" />
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
-    <None Include="Resources\donation.png" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <Content Include="Resources\C1\datasource\dataButton.png" />

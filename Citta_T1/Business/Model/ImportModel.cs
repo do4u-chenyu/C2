@@ -44,7 +44,6 @@ namespace C2.Business.Model
         }
         private void UnZipIaoFile(string fullFilePath, string userName)
         {
-            ;
             if (!File.Exists(fullFilePath))
                 return;
             if (HasUnZipIaoFile(fullFilePath, userName))
@@ -81,7 +80,7 @@ namespace C2.Business.Model
                         continue;
                     fileName = Path.GetFileName(theEntry.Name);
                     modelName = Path.GetFileNameWithoutExtension(theEntry.Name);
-                    modelPath = Path.Combine(Global.WorkspaceDirectory, userName, modelName);
+                    modelPath = Path.Combine(Global.WorkspaceDirectory, userName, "模型市场", modelName);
                     break;
                 }
             }
@@ -89,7 +88,7 @@ namespace C2.Business.Model
             // 未找到xml文件
             if (string.IsNullOrEmpty(fileName))
                 return !hasUnZip;
-            this.modelDir = Path.Combine(Global.WorkspaceDirectory, userName, modelName);
+            this.modelDir = Path.Combine(Global.WorkspaceDirectory, userName, "模型市场");
             this.modelFilePath = Path.Combine(this.modelDir, fileName);
             // 是否包含同名模型文档
             if (!IsSameModelTitle(modelName))
