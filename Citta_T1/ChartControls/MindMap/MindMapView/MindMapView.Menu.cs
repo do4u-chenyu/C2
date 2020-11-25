@@ -258,6 +258,8 @@ namespace C2.Controls.MapViews
         }
         void MenuDeleteModelOp_Click(object sender, EventArgs e)
         {
+            //模型删除本地文件
+            //FileUtil.DeleteDirectory(Path.GetDirectoryName(opw.ModelDataItem.FilePath));
             ClearModelOpContent();
             if (opw.OpType == OpType.Null)
                 Delete(new ChartObject[] { opw });

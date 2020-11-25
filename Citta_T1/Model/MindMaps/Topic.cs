@@ -115,6 +115,21 @@ namespace C2.Model.MindMaps
             }
         }
 
+        public List<Topic> GetAllChildren()
+        {
+            List<Topic> allChildren = new List<Topic>();
+            GetChildren(this, allChildren);
+            return allChildren;
+        }
+
+        private void GetChildren(Topic topic,List<Topic> allChildren)
+        {
+            foreach(Topic t in topic.Children)
+            {
+                GetChildren(t, allChildren);
+            }
+            allChildren.AddRange(topic.Children);
+        }
 
         public List<DataItem> GetParentDatas()
         {
