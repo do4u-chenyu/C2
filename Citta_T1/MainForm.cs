@@ -29,6 +29,7 @@ namespace C2
 {
     public enum FormType
     {
+        Null,
         DocumentForm,
         CanvasForm,
         StartForm
