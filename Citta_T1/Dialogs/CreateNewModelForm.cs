@@ -120,9 +120,9 @@ namespace C2.Dialogs
         {
             if((NewFormType == FormType.DocumentForm && GetModelTitleList().Contains(inputModelTitle)) ||
                 (NewFormType == FormType.CanvasForm && GetMindMapTitleList().Contains(inputModelTitle)) ||
-                (NewFormType == FormType.Null && GetMindMapTitleList().Contains(inputModelTitle)))
+                (NewFormType == FormType.Null && Global.GetMyModelControl().ContainModel(inputModelTitle)))
             {
-                MessageBox.Show(inputModelTitle + "，已存在，请重新命名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(inputModelTitle + "，已存在，请重新命名", "已存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return true;
             }
             else

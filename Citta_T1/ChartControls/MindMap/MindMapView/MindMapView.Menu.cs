@@ -237,7 +237,6 @@ namespace C2.Controls.MapViews
                 return;
 
             string modelNewName = createNewModelForm.ModelTitle;
-            //string modelName = opw.ModelDataItem.FileName;
             string modelPath = opw.ModelDataItem.FilePath;
             ExportModel.GetInstance().Export(modelPath, modelNewName);
 
