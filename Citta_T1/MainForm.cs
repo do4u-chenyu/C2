@@ -221,10 +221,10 @@ namespace C2
             this.myModelControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
         }
-
+        
         private void DataButton_Click(object sender, EventArgs e)
         {
-            this.ShowLeftFold();
+            this.ShowLeftFold();// 建议放最后 代码审批
             this.dataSourceControl.Visible = true;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
@@ -284,8 +284,8 @@ namespace C2
             if (this.isLeftViewPanelMinimum)
             {
                 this.isLeftViewPanelMinimum = false;
-                this.leftToolBoxPanel.Width = 187;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+                this.leftToolBoxPanel.Width = 187;
             }
         }
         private void LeftFoldButton_Click(object sender, EventArgs e)
