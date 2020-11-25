@@ -79,7 +79,7 @@ namespace C2.Model.Widgets
             {
                 if (_status != value)
                 {
-                    OnModifiedChange();
+                    Global.OnModifiedChange();
                 }
                 _status = value;
             }

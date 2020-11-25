@@ -242,12 +242,14 @@ namespace C2.Controls.MapViews
             ClearSingleOpContent();
             if(!opw.HasModelOperator)
                 Delete(new ChartObject[] { opw });
+            Global.OnModifiedChange();
         }
         void MenuDeleteModelOp_Click(object sender, EventArgs e)
         {
             ClearModelOpContent();
             if (opw.OpType == OpType.Null)
                 Delete(new ChartObject[] { opw });
+            Global.OnModifiedChange();
         }
         private void ClearSingleOpContent()
         {
@@ -308,6 +310,7 @@ namespace C2.Controls.MapViews
             ShowDesigner(dtw.Container,false);
             if (dtw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { dtw });
+            Global.OnModifiedChange();
         }
 
         void MenuDeleteDataChart_Click(object sender, EventArgs e)
@@ -432,6 +435,7 @@ namespace C2.Controls.MapViews
             TopicUpdate(rsw.Container, hitItem);
             if (rsw.DataItems.IsEmpty())
                 Delete(new ChartObject[] { rsw });
+            Global.OnModifiedChange();
         }
         void MenuJoinPool_Click(object sender, EventArgs e)
         {
