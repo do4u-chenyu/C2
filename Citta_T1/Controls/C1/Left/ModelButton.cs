@@ -96,7 +96,8 @@ namespace C2.Controls.Left
             if (rs != DialogResult.OK)
                 return;
 
-            string modelDic = System.IO.Path.Combine(Global.GetCurrentModelDocument().UserPath, ModelTitle);
+            string modelDic = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场", this.textButton.Text );
+            //Global.GetMainForm().LoadCanvasFormByXml(Path.Combine(Global.UserWorkspacePath, "模型市场"), this.textButton.Text);
             FileUtil.DeleteDirectory(modelDic);
             Global.GetMyModelControl().RemoveModelButton(this);
         }
