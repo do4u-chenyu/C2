@@ -66,7 +66,7 @@ namespace C2.Controls.Left
             if (this.MyModelPaintPanel.Controls.Count > 0)
                 this.startPoint.Y = MyModelPaintPanel.Controls[0].Location.Y - MyModelPaintPanel.Controls[0].Height - ButtonBottomOffsetY;
 
-            this.Controls.Remove(modelButton);
+            this.MyModelPaintPanel.Controls.Remove(modelButton);
             // 重新布局
             ReLayoutLocalFrame();           
         }
@@ -77,10 +77,10 @@ namespace C2.Controls.Left
             this.SuspendLayout();
             // 清空位置
             List<Control> tmp = new List<Control>();
-            foreach (Control ct in Controls)
+            foreach (Control ct in MyModelPaintPanel.Controls)
                 tmp.Add(ct);
 
-            Controls.Clear();
+            MyModelPaintPanel.Controls.Clear();
             // 重新排序
             foreach (Control ct in tmp)
             {
