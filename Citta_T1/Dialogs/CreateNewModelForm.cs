@@ -42,7 +42,7 @@ namespace C2.Dialogs
             if (titleName.Length == 0)
                 return;
 
-            string target = NewFormType == FormType.DocumentForm ? "业务视图名" : "模型视图名";
+            string target = GenTargetName(NewFormType);
             if (FileUtil.ContainIllegalCharacters(titleName, target) || FileUtil.NameTooLong(titleName, target))
             {
                 this.textBox.Text = String.Empty;
@@ -55,6 +55,19 @@ namespace C2.Dialogs
 
             ModelTitle = titleName;
             this.DialogResult = DialogResult.OK;
+        }
+
+        private  string GenTargetName(FormType formType)
+        {
+            switch (formType)
+            {
+                case FormType.DocumentForm:
+                    return "业务视图名";
+                case FormType.CanvasForm:
+                    return "模型视图名";
+                default:
+                    return "视图名";
+            }
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -90,7 +103,10 @@ namespace C2.Dialogs
                 while (currentTitles.Contains(title))
                     title = String.Format("模型视图{0}", ++TitlePostfix);
             }
-
+            else
+            {
+                title = ModelTitle;
+            }
             this.textBox.Text = title;
             this.textBox.ForeColor = SystemColors.ActiveCaption;
         }
@@ -102,9 +118,11 @@ namespace C2.Dialogs
 
         private bool CheckModelTitelExists(string inputModelTitle)
         {
-            if((NewFormType == FormType.DocumentForm && GetModelTitleList().Contains(inputModelTitle)) || (NewFormType == FormType.CanvasForm && GetMindMapTitleList().Contains(inputModelTitle)))
+            if((NewFormType == FormType.DocumentForm && GetModelTitleList().Contains(inputModelTitle)) ||
+                (NewFormType == FormType.CanvasForm && GetMindMapTitleList().Contains(inputModelTitle)) ||
+                (NewFormType == FormType.Null && Global.GetMyModelControl().ContainModel(inputModelTitle)))
             {
-                MessageBox.Show(inputModelTitle + "，已存在，请重新命名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(inputModelTitle + "，已存在，请重新命名", "已存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return true;
             }
             else

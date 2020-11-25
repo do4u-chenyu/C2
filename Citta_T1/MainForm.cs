@@ -29,6 +29,7 @@ namespace C2
 {
     public enum FormType
     {
+        Null,
         DocumentForm,
         CanvasForm,
         StartForm
@@ -255,20 +256,32 @@ namespace C2
         private void MainForm_Load(object sender, EventArgs e)
         {
             //加载文件及数据源
+            LoadHotModel();
             LoadDocuments();
             LoadDataSource();
         }
+
+        private void LoadHotModel()
+        {
+
+            string HotModelPath = Path.Combine(Application.StartupPath, "Resources\\Templates");
+            string[] ModelFiles = Directory.GetFiles(HotModelPath, "*.iao");
+            
+            foreach (string file in ModelFiles)
+            {
+                ImportModel.GetInstance().UnZipIaoFile(file, userName, false);
+            }
+            
+        }
+
         private void LoadDocuments()
         {
             // 将用户本地保存的模型文档加载到左侧myModelControl	
             string[] bsTitles = ModelsInfo.LoadAllModelTitle(Global.BusinessViewPath);
             string[] mtTitles = ModelsInfo.LoadAllModelTitle(Global.MarketViewPath);
-            string[] hotTitles = ModelsInfo.LoadAllModelTitle(Global.HotModelPath);
             foreach (string title in bsTitles)
                 this.mindMapModelControl.AddMindMapModel(title);
             foreach (string title in mtTitles)
-                this.myModelControl.AddModel(title);
-            foreach (string title in hotTitles)
                 this.myModelControl.AddModel(title);
         }
         private void LoadDataSource()

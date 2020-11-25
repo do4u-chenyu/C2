@@ -108,7 +108,7 @@
             this.MinimizeBox = false;
             this.Name = "CreateNewModelForm";
             this.ShowIcon = false;
-            this.Text = "新建视图";
+            this.Text = "新建";
             this.Load += new System.EventHandler(this.CreateNewModel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
