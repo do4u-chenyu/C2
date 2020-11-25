@@ -39,7 +39,7 @@ namespace C2.Controls.Left
 
         public bool ContainModel(string modelTitle)
         {
-            foreach (Control ct in this.Controls)
+            foreach (Control ct in this.MyModelPaintPanel.Controls)
             {
                 if (ct is ModelButton)
                     if ((ct as ModelButton).ModelTitle == modelTitle)
