@@ -415,7 +415,7 @@ namespace C2.Forms
             splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
-            Icon = Properties.Resources.document_icon;
+            //Icon = Properties.Resources.document_icon;
         }
 
         void InitializeShortcutKeys()

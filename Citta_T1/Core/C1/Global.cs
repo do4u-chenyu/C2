@@ -154,5 +154,12 @@ namespace C2.Core
             if (!GetCurrentDocument().Modified)
                 GetCurrentDocument().Modified = true;
         }
+
+        public static List<BaseDocumentForm> SearchDocumentForm(string formName)
+        {
+            if (GetMainForm() == null)
+                return new List<BaseDocumentForm>();
+            return GetMainForm().SearchDocument(formName);
+        }
     }
 }

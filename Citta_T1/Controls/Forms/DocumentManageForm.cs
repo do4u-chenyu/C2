@@ -3,6 +3,7 @@ using C2.Forms;
 using C2.WorkSpace;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -132,7 +133,21 @@ namespace C2.Controls
                 SelectedForm = form;
             }
         }
+        public List<BaseDocumentForm> SearchDocument(string name)
+        {
+            try
+            {
+                var tabs = from f in GetForms<BaseDocumentForm>()
+                           where string.Equals(Path.GetFileNameWithoutExtension(f.GetFileName()), name)
+                           select f;
+                return tabs.ToList();
+            }
+            catch
+            {
+                return new List<BaseDocumentForm>();
+            }
 
+        }
         protected virtual void ShowForm(BaseForm form, bool showTab, bool canClose)
         {
             if (form == null)

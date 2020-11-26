@@ -22,7 +22,7 @@ namespace C2.Controls.MapViews
         {
             ImageList il = new ImageList();
             il.ColorDepth = ColorDepth.Depth32Bit;
-            il.Images.Add(Properties.Resources.document);
+            //il.Images.Add(Properties.Resources.document);
             il.Images.Add(Properties.Resources.topic);
 
             InnerTreeView = new MultiSelectTreeView();
