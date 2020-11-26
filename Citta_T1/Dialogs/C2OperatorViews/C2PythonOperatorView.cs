@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using C2.Core;
 using C2.Dialogs.Base;
 using C2.Globalization;
 using C2.IAOLab.PythonOP;
@@ -43,21 +44,19 @@ namespace C2.Dialogs.C2OperatorViews
             // 初始化左右表数据源配置信息
             base.InitializeDataSource();
             //初始化输入输出路径
-            //ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            //if (resultElement != ModelElement.Empty)
-            //{
-            //    this.fullOutputFilePath = resultElement.FullFilePath;
-            //}
-            //else
-            //{
-            //    string tmpOutFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            //    this.fullOutputFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, tmpOutFileName);
-            //    this.opControl.Option.SetOption("browseChosen", this.fullOutputFilePath);
-            //    this.browseChosenTextBox.Text = fullOutputFilePath;
-            //}
-
-            //this.paramInputFileFullPath.Text = dataInfo["dataPath0"];
-            //this.rsFullFileNameTextBox.Text = noChangedOutputFilePath;
+            string oldOutFilePath = this.operatorWidget.Option.GetOption("browseChosen");
+            if (string.IsNullOrEmpty(oldOutFilePath))
+            {
+                operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + Lang._(operatorWidget.OpType.ToString());
+                string tmpOutFilePath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                this.fullOutputFilePath = tmpOutFilePath;
+                this.operatorWidget.Option.SetOption("browseChosen", this.fullOutputFilePath);
+                this.browseChosenTextBox.Text = fullOutputFilePath;
+            }
+            else
+            {
+                this.fullOutputFilePath = oldOutFilePath;
+            }
         }
 
         private void InitPreViewText()
@@ -66,10 +65,6 @@ namespace C2.Dialogs.C2OperatorViews
             this.previewTextList[0] = GetVirtualMachinFullPath(this.pythonChosenComboBox.Text);
             this.previewTextList[1] = this.pyFullFilePathTextBox.Text;
             this.previewTextList[2] = this.pyParamTextBox.Text;
-            //string previewInput = GetControlRadioName(this.inputFileSettingTab) == "paramInputFileRadio" ? this.paramInputFileTextBox.Text + " " + this.paramInputFileFullPath.Text : "";
-            //this.previewTextList[3] = previewInput;
-            //string previewOutput = GetControlRadioName(this.outputFileSettingTab) == "paramRadioButton" ? this.paramPrefixTagTextBox.Text + " " + this.rsFullFileNameTextBox.Text : GetControlRadioName(this.outputFileSettingTab) == "stdoutRadioButton" ? " > " + this.fullOutputFilePath : "";
-            //this.previewTextList[4] = previewOutput;
             this.previewCmdText.Text = string.Join(" ", this.previewTextList);
         }
         #endregion

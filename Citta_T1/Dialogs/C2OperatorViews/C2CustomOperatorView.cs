@@ -91,9 +91,9 @@ namespace C2.Dialogs.C2OperatorViews
         {
             this.fixRadioButton.Checked = Convert.ToBoolean(operatorWidget.Option.GetOption("fix", "True"));
             this.randomRadioButton.Checked = Convert.ToBoolean(operatorWidget.Option.GetOption("random", "False"));
-            this.fixSecondTextBox.Text = this.operatorWidget.Option.GetOption("fixSecond");
-            this.randomBeginTextBox.Text = this.operatorWidget.Option.GetOption("randomBegin");
-            this.randomEndTextBox.Text = this.operatorWidget.Option.GetOption("randomEnd");
+            this.fixSecondTextBox.Text = string.IsNullOrEmpty(this.operatorWidget.Option.GetOption("fixSecond"))? "30" : this.operatorWidget.Option.GetOption("fixSecond");
+            this.randomBeginTextBox.Text = string.IsNullOrEmpty(this.operatorWidget.Option.GetOption("randomBegin")) ? "10": this.operatorWidget.Option.GetOption("randomBegin");
+            this.randomEndTextBox.Text = string.IsNullOrEmpty(this.operatorWidget.Option.GetOption("randomEnd")) ? "60": this.operatorWidget.Option.GetOption("randomEnd");
             this.rsFullFilePathTextBox.Text = this.operatorWidget.Option.GetOption("path");
 
 
@@ -174,7 +174,7 @@ namespace C2.Dialogs.C2OperatorViews
                 HelpUtil.ShowMessageBox("未输入其他类型分隔符内容");
                 return notReady;
             }
-            if (Convert.ToInt32(randomBeginTextBox.Text) > Convert.ToInt32(randomEndTextBox.Text))
+            if (this.randomRadioButton.Checked && Convert.ToInt32(randomBeginTextBox.Text) > Convert.ToInt32(randomEndTextBox.Text))
             {
                 HelpUtil.ShowMessageBox("随机运行时间设置中，起始时间大于结束时间");
                 return notReady;
