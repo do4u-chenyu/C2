@@ -21,15 +21,23 @@ namespace C2.Controls.MapViews
         private static LogUtil log = LogUtil.GetInstance("MindMapView");
         private void GenRunCmds()
         {
-            if (opw.Status == OpStatus.Ready || opw.Status == OpStatus.Done)
+            //除了未配置状态，其余情况下全部重新运行
+            if (opw.Status != OpStatus.Null)
             {
                 //Global.GetDocumentForm().ShowRunLab();
                 List<string> cmds = GenerateCmd();
                 if (cmds == null)
                     return;
                 this.Cursor = Cursors.WaitCursor;
-                HelpUtil.ShowMessageBox(RunLinuxCommand(cmds), "运行完毕"); // 这个对话框还是挺丑的.后面要优化
+                string runMessage = RunLinuxCommand(cmds);
+                opw.Status = runMessage == "算子成功执行完毕" ? OpStatus.Done : OpStatus.Warn;
+                HelpUtil.ShowMessageBox(runMessage, "运行"); // 这个对话框还是挺丑的.后面要优化
                 this.Cursor = Cursors.Default;
+
+                //没能成功运行，直接返回
+                if (opw.Status != OpStatus.Done)
+                    return;
+
                 //Global.GetDocumentForm().HideRunLab();
                 DataItem resultItem = opw.ResultItem;
                 Topic topic = opw.Container as Topic;
@@ -47,7 +55,7 @@ namespace C2.Controls.MapViews
                     rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.SingleOp);
                     rsw.DataItems.Add(resultItem);
                 }
-                opw.Status = OpStatus.Done;
+                
             }
         }
 
@@ -95,7 +103,7 @@ namespace C2.Controls.MapViews
         {
             // 补充条件检查, cmds 不能为空
             if (cmds == null || !cmds.Any())
-                return "";
+                return "执行命令为空";
             string message = String.Empty;
 
             Process p = new Process();
@@ -112,13 +120,13 @@ namespace C2.Controls.MapViews
             {
                 if (p.Start())//开始进程  
                 {
-                    log.Info("=====运算开始====");
+                    log.Info("=====运算开始=====");
                     foreach (string cmd in cmds)
                     {
                         log.Info(cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
-                    log.Info("=====运算结束====");
+                    log.Info("=====运算结束=====");
                     p.BeginErrorReadLine();
                     p.BeginOutputReadLine();
 
