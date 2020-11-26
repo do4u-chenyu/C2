@@ -49,7 +49,7 @@ namespace C2.Business.Model
             if (HasUnZipIaoFile(fullFilePath, userName))
             {
                 // 脚本、数据源存储路径
-                string dirs = Path.Combine(this.modelDir, "_data");
+                string dirs = Path.Combine(this.modelDir, "_datas");
                 // 修改XML文件中数据源路径
                 RenameFile(dirs, this.modelFilePath);
                 if (judge == true)
@@ -91,7 +91,7 @@ namespace C2.Business.Model
             // 未找到xml文件
             if (string.IsNullOrEmpty(fileName))
                 return !hasUnZip;
-            this.modelDir = Path.Combine(Global.WorkspaceDirectory, userName, "模型市场");
+            this.modelDir = Path.Combine(Global.WorkspaceDirectory, userName, "模型市场", modelName);
             this.modelFilePath = Path.Combine(this.modelDir, fileName);
             // 是否包含同名模型文档
             if (!IsSameModelTitle(modelName))
@@ -118,7 +118,7 @@ namespace C2.Business.Model
 
         }
 
-        private void RenameFile(string dirs, string newModelFilePath)
+        public void RenameFile(string dirs, string newModelFilePath)
         {
             Dictionary<string, string> dataSourcePath = new Dictionary<string, string>();
             if (Directory.Exists(dirs))

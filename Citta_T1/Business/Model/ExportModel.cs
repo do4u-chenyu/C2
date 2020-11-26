@@ -87,7 +87,7 @@ namespace C2.Business.Model
             }
                 
             // 创建存储数据的_data文件夹
-            this.dataPath = Path.Combine(newModelPath, "_data");
+            this.dataPath = Path.Combine(newModelPath, "_datas");
             Directory.CreateDirectory(dataPath);
             return CopyDataSourceFiles();
         }
