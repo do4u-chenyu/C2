@@ -18,7 +18,6 @@ namespace C2.Dialogs
         ImageBox imageBox1;
         ToolStrip toolStrip1;
         ToolStripButton TsbSave;
-        ToolStripButton TsbCopy;
         ToolStripButton TsbRotateLeft;
         ToolStripButton TsbRotateRight;
         ToolStripButton TsbZoomOut;
@@ -90,7 +89,6 @@ namespace C2.Dialogs
 
         void InitializeToolStrip()
         {
-            TsbCopy = new ToolStripButton();
             TsbSave = new ToolStripButton();
             TsbRotateLeft = new ToolStripButton();
             TsbRotateRight = new ToolStripButton();
@@ -106,52 +104,47 @@ namespace C2.Dialogs
             //
             TsbSave.DisplayStyle = ToolStripItemDisplayStyle.Image;
             TsbSave.Image = Properties.Resources.save;
-            TsbSave.Text = "Save As";
+            TsbSave.Text = Lang._("Save As");
             TsbSave.Click += TsbSave_Click;
 
-            //
-            TsbCopy.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbCopy.Image = Properties.Resources.copy;
-            TsbCopy.Text = "Copy";
-            TsbCopy.Click += TsbCopy_Click;
 
             //
             TsbRotateLeft.DisplayStyle = ToolStripItemDisplayStyle.Image;
             TsbRotateLeft.Image = Properties.Resources.rotate_left;
-            TsbRotateLeft.Text = "Rotate Left";
+            TsbRotateLeft.Text = Lang._("Rotate Left");
             TsbRotateLeft.Click += TsbRotateLeft_Click;
 
             // TsbRotateRight
             TsbRotateRight.DisplayStyle = ToolStripItemDisplayStyle.Image;
             TsbRotateRight.Image = Properties.Resources.rotate_right;
-            TsbRotateRight.Text = "Rotate Right";
+            TsbRotateRight.Text = Lang._("Rotate Right");
             TsbRotateRight.Click += TsbRotateRight_Click;
 
             // TsbZoomIn
             TsbZoomIn.DisplayStyle = ToolStripItemDisplayStyle.Image;
             TsbZoomIn.Image = C2.Properties.Resources.zoom_in;
-            TsbZoomIn.Text = "Zoom In";
+            TsbZoomIn.Text = Lang._("Zoom In");
             TsbZoomIn.Click += TsbZoomIn_Click;
 
             //
             TsbZoomOut.DisplayStyle = ToolStripItemDisplayStyle.Image;
             TsbZoomOut.Image = C2.Properties.Resources.zoom_out;
-            TsbZoomOut.Text = "Zoom Out";
+            TsbZoomOut.Text = Lang._("Zoom Out");
             TsbZoomOut.Click += tsbZoomOut_Click;
 
             // MenuZoomFitPage
             MenuZoomFitPage.Name = "MenuZoomFitPage";
-            MenuZoomFitPage.Text = "&Fit Page";
+            MenuZoomFitPage.Text = Lang._("Fit Page");
             MenuZoomFitPage.Click += MenuZoomFitPage_Click;
 
             // MenuZoomFitWidth
             MenuZoomFitWidth.Name = "MenuZoomFitWidth";
-            MenuZoomFitWidth.Text = "Fit Width";
+            MenuZoomFitWidth.Text = Lang._("Fit Width");
             MenuZoomFitWidth.Click += MenuZoomFitWidth_Click;
 
             // MenuZoomFitHeight
             MenuZoomFitHeight.Name = "MenuZoomFitHeight";
-            MenuZoomFitHeight.Text = "Fit Height";
+            MenuZoomFitHeight.Text = Lang._("Fit Height");
             MenuZoomFitHeight.Click += MenuZoomFitHeight_Click;
 
             //
@@ -177,14 +170,13 @@ namespace C2.Dialogs
             // TsbFullScreen
             TsbFullScreen.DisplayStyle = ToolStripItemDisplayStyle.Image;
             TsbFullScreen.Image = global::C2.Properties.Resources.full_screen;
-            TsbFullScreen.Text = "Full Screen";
+            TsbFullScreen.Text = Lang._("Full Screen");
             TsbFullScreen.Click += TsbFullScreen_Click;
             
             //
             toolStrip1.Dock = DockStyle.Top;
             toolStrip1.Items.AddRange(new ToolStripItem[]{
                 TsbSave,
-                TsbCopy,
                 new ToolStripSeparator(),
                 TsbRotateLeft,
                 TsbRotateRight,
@@ -198,20 +190,6 @@ namespace C2.Dialogs
             toolStrip1.ResumeLayout();
         }
 
-        void TsbCopy_Click(object sender, EventArgs e)
-        {
-            if (imageBox1.Image != null)
-            {
-                try
-                {
-                    Clipboard.SetImage(imageBox1.Image);
-                }
-                catch(System.Exception ex)
-                {
-                    this.ShowMessage(ex);
-                }
-            }
-        }
 
         void TsbSave_Click(object sender, EventArgs e)
         {

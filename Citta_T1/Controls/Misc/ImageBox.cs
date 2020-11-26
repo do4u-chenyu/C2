@@ -9,6 +9,8 @@ namespace C2.Controls
     {
         Image _Image;
         bool _TransparentBackground;
+        const float MaxZoom = 10.0f;
+        const float MinZoom = 0.25f;
 
         public event EventHandler ZoomChanged;
 
@@ -284,6 +286,7 @@ namespace C2.Controls
             get { return _Zoom; }
             set
             {
+                value = Math.Max(MinZoom, Math.Min(MaxZoom, value));
                 if (_Zoom != value)
                 {
                     _Zoom = value;
@@ -303,8 +306,9 @@ namespace C2.Controls
 
         public void ZoomOut()
         {
-            Zoom = (int)(ZoomValue / 0.25f - 1) * 0.25f;
-            ZoomType = C2.Controls.ZoomType.Custom;
+            Zoom = (int)(Zoom / 0.25f - 1) * 0.25f;
+            //Zoom = (int)(ZoomValue / 0.25f - 1) * 0.25f;
+           // ZoomType = C2.Controls.ZoomType.Custom;
         }
         #endregion
     }

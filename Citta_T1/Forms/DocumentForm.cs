@@ -556,7 +556,7 @@ namespace C2.Forms
             MenuRefreshThemes.Text = Lang._("Refresh");
             MenuSaveThemeAs.Text = Lang.GetTextWithEllipsis("Save Current Theme");
             TsbFind.Text = Lang._("Find");
-            TsbFind.ToolTipText = Lang._(Lang.GetTextWithEllipsis("Find"), KeyMap.Find.Keys);
+            TsbFind.ToolTipText = Lang._(Lang._("Find"), KeyMap.Find.Keys);
             TsbReplace.Text = Lang._("Replace");
             TsbReplace.ToolTipText = Lang._(Lang.GetTextWithEllipsis("Replace"), KeyMap.Replace.Keys);
             TsbSidebar.Text = Lang._("Sidebar");
