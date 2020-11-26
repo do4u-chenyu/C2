@@ -187,7 +187,11 @@ namespace C2.Forms
 
         public void SaveDocAndTopic()
         {
+            bool oldStatus = Global.GetCurrentModelDocument().Modified;
             Save();
+            // 父文档dirty
+            if (oldStatus && !Global.GetCurrentModelDocument().Modified)
+                DocumentFormDirty(this.mindMapName);
             UpdateTopicResults(RelateTopic);
         }
 
@@ -381,8 +385,9 @@ namespace C2.Forms
             List<BaseDocumentForm> parentDocumentForm = Global.SearchDocumentForm(formName);
             foreach (BaseDocumentForm form in parentDocumentForm)
             {
-                if (form is DocumentForm)
-                    (form as DocumentForm).Document.Modified = true;
+                
+                if (form is DocumentForm && !form.Document.Modified)
+                    form.Document.Modified = true;
             }
         }
         public void BindUiManagerFunc()
@@ -484,8 +489,7 @@ namespace C2.Forms
                 };
                 rsDataItems.Add(tmpDataItem);
             }
-            if (rsDataItems.Count == 0)
-                return;
+
 
             ResultWidget rsw = topic.FindWidget<ResultWidget>();
             if (rsw == null)
@@ -496,6 +500,8 @@ namespace C2.Forms
             else
             {
                 rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.ModelOp);
+                //if (rsDataItems.Count == 0)
+                //    return;
                 rsw.DataItems.AddRange(rsDataItems);
             }
 

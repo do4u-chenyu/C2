@@ -248,6 +248,7 @@ namespace C2.Controls.MapViews
             TabItem tab = opw.ModelRelateTab;
             if (Global.GetMainForm().TaskBar.Items.Contains(tab))
                 (opw.ModelRelateTab.Tag as CanvasForm).UpdateTopicResults(opw.Container as Topic);
+            Global.OnModifiedChange();
         }
         void MenuDeleteSingleOp_Click(object sender, EventArgs e)
         {

@@ -94,7 +94,7 @@ namespace C2
         {
             this.isLeftViewPanelMinimum = true;
             this.leftToolBoxPanel.Width = 10;
-            this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+            this.MindMapButton.BackColor = Color.FromArgb(228, 60, 89);
         }
         void InitializeTaskBar()
         {
@@ -207,38 +207,38 @@ namespace C2
 
         private void MyModelButton_Click(object sender, EventArgs e)
         {
-            this.ShowLeftFold();
             this.myModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.ShowLeftFold();
         }
 
         private void OperateButton_Click(object sender, EventArgs e)
         {
-            this.ShowLeftFold();
             this.mindMapModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.myModelControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.ShowLeftFold();
         }
         
         private void DataButton_Click(object sender, EventArgs e)
         {
-            this.ShowLeftFold();// 建议放最后 代码审批
             this.dataSourceControl.Visible = true;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
-            
+            this.ShowLeftFold();
+
         }
 
         private void FlowChartButton_Click(object sender, EventArgs e)
         {
-            this.ShowLeftFold();
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.ShowLeftFold();
         }
 
         private void NewModelButton_Click(object sender, EventArgs e)
@@ -249,8 +249,6 @@ namespace C2
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
-            this.dataSourceControl.Visible = true;
-            this.mindMapModelControl.Visible = false;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -308,9 +306,7 @@ namespace C2
                 this.isLeftViewPanelMinimum = false;
                 this.leftToolBoxPanel.Width = 187;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-                this.dataSourceControl.Visible = true;
                 this.mindMapModelControl.Visible = true;
-                this.myModelControl.Visible = true;
             }
             else
             {
@@ -865,6 +861,7 @@ namespace C2
                 case MouseButtons.Left:
                     // Left click
                     this.ModelMarketButton.BackColor = Color.FromArgb(228, 60, 89);
+                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
                     break;
             }
         }
@@ -882,6 +879,7 @@ namespace C2
                 case MouseButtons.Left:
                     // Left click
                     this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
                     break;
             }
         }
@@ -899,6 +897,7 @@ namespace C2
                 case MouseButtons.Left:
                     // Left click
                     this.IAOLabButton.BackColor = Color.FromArgb(228, 60, 89);
+                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
                     break;
             }
         }
