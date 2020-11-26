@@ -187,7 +187,11 @@ namespace C2.Forms
 
         public void SaveDocAndTopic()
         {
+            bool oldStatus = Global.GetCurrentModelDocument().Modified;
             Save();
+            // 父文档dirty
+            if (oldStatus && !Global.GetCurrentModelDocument().Modified)
+                DocumentFormDirty(this.mindMapName);
             UpdateTopicResults(RelateTopic);
         }
 
@@ -381,8 +385,9 @@ namespace C2.Forms
             List<BaseDocumentForm> parentDocumentForm = Global.SearchDocumentForm(formName);
             foreach (BaseDocumentForm form in parentDocumentForm)
             {
-                if (form is DocumentForm)
-                    (form as DocumentForm).Document.Modified = true;
+                
+                if (form is DocumentForm && !form.Document.Modified)
+                    form.Document.Modified = true;
             }
         }
         public void BindUiManagerFunc()
