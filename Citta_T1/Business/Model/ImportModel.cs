@@ -52,10 +52,13 @@ namespace C2.Business.Model
                 string dirs = Path.Combine(this.modelDir, "_data");
                 // 修改XML文件中数据源路径
                 RenameFile(dirs, this.modelFilePath);
-                // 将导入模型添加到左侧模型面板
-                MyModelControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
-                if(judge==true)
+                if (judge == true)
+                {
+                    // 将导入模型添加到左侧模型面板
+                    MyModelControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
                     HelpUtil.ShowMessageBox("模型导入成功");
+                }
+                    
             }
         }
         public string modelFilePath;

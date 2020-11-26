@@ -53,12 +53,13 @@
             this.MyModelCreateButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.MyModelCreateButton.FlatAppearance.BorderSize = 0;
             this.MyModelCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MyModelCreateButton.Location = new System.Drawing.Point(141, 2);
+            this.MyModelCreateButton.Location = new System.Drawing.Point(124, 2);
             this.MyModelCreateButton.Name = "MyModelCreateButton";
             this.MyModelCreateButton.Size = new System.Drawing.Size(25, 25);
             this.MyModelCreateButton.TabIndex = 1;
             this.MyModelCreateButton.UseVisualStyleBackColor = false;
             this.MyModelCreateButton.Click += new System.EventHandler(this.MyModelCreateButton_Click);
+            this.MyModelCreateButton.MouseHover += new System.EventHandler(this.MyModelCreateButton_MouseHover);
             // 
             // ItemLabel
             // 
@@ -69,7 +70,7 @@
             this.ItemLabel.Name = "ItemLabel";
             this.ItemLabel.Size = new System.Drawing.Size(182, 30);
             this.ItemLabel.TabIndex = 0;
-            this.ItemLabel.Text = "我的模型市场";
+            this.ItemLabel.Text = "我的模型";
             this.ItemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MyModelPaintPanel

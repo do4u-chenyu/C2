@@ -43,7 +43,6 @@ namespace C2.Utils
         public static string ReviewToolStripMenuItemInfo = "首页状态下无法预览数据，请点击左侧面板打开一个业务视图后再试";
 
 
-
         /// <summary>
         /// 默认为Information,除非有非常严重的错误,否则一般尽量用温和的提示信息.
         /// MessageBoxIcon.Hand 

@@ -32,6 +32,7 @@ namespace C2.Forms
         private ModelDocument document;
         private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         private string userName;
+        private string mindMapName;
         public CanvasPanel CanvasPanel{ get { return this.canvasPanel; }}
         public RemarkControl RemarkControl { get { return this.remarkControl; } }
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
@@ -114,6 +115,7 @@ namespace C2.Forms
         }
         public CanvasForm(ModelDocument document,Topic topic,string mindMapName) : this()
         {
+            this.mindMapName = mindMapName;
             Document = document;
             RelateTopic = topic;
             FormNameToolTip = string.Format("{0}-{1}-{2}", mindMapName, topic.Text,document.Name);
@@ -185,7 +187,11 @@ namespace C2.Forms
 
         public void SaveDocAndTopic()
         {
+            bool oldStatus = Global.GetCurrentModelDocument().Modified;
             Save();
+            // 父文档dirty
+            if (oldStatus && !Global.GetCurrentModelDocument().Modified)
+                DocumentFormDirty(this.mindMapName);
             UpdateTopicResults(RelateTopic);
         }
 
@@ -359,6 +365,9 @@ namespace C2.Forms
 
                 this.progressBar.Value = 0;
                 this.progressBarLabel.Text = "0%";
+                // 业务视图Dirty
+                if (!string.IsNullOrEmpty(this.mindMapName))
+                    DocumentFormDirty(this.mindMapName);
             }
             else if (this.runButton.Name == "pauseButton")
             {
@@ -371,7 +380,16 @@ namespace C2.Forms
 
             UpdateRunbuttonImageInfo();
         }
-
+        private void DocumentFormDirty(string formName)
+        {
+            List<BaseDocumentForm> parentDocumentForm = Global.SearchDocumentForm(formName);
+            foreach (BaseDocumentForm form in parentDocumentForm)
+            {
+                
+                if (form is DocumentForm && !form.Document.Modified)
+                    form.Document.Modified = true;
+            }
+        }
         public void BindUiManagerFunc()
         {
             TaskManager currentManager = Global.GetCurrentModelDocument().TaskManager;
@@ -471,8 +489,7 @@ namespace C2.Forms
                 };
                 rsDataItems.Add(tmpDataItem);
             }
-            if (rsDataItems.Count == 0)
-                return;
+
 
             ResultWidget rsw = topic.FindWidget<ResultWidget>();
             if (rsw == null)
@@ -483,6 +500,8 @@ namespace C2.Forms
             else
             {
                 rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.ModelOp);
+                //if (rsDataItems.Count == 0)
+                //    return;
                 rsw.DataItems.AddRange(rsDataItems);
             }
 

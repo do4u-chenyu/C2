@@ -1,5 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -19,6 +20,7 @@ namespace C2.Controls.Left
         private static readonly int ButtonLeftX = 18;
         private static readonly int ButtonBottomOffsetY = 23;
         private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+
         public void AddModel(string modelName)
         {
             ModelButton mb = new ModelButton(modelName);
@@ -111,6 +113,12 @@ namespace C2.Controls.Left
         private void MyModelCreateButton_Click(object sender, EventArgs e)
         {
             ImportModel.GetInstance().ImportIaoFile(Global.GetMainForm().UserName);
+        }
+
+        private void MyModelCreateButton_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.SetToolTip(this.MyModelCreateButton, "导入模型");
         }
     }
 }

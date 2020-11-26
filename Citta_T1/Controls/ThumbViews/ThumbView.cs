@@ -552,7 +552,10 @@ namespace C2.Controls
                     Global.GetMainForm().NewDocumentForm_Click(item.Text);
                     break;
                 case ThumbItem.ModelTypes.Model:
-                    Global.GetMainForm().LoadCanvasFormByXml( Path.Combine(Global.UserWorkspacePath, "模型市场"), item.Text);
+                    if (Global.GetMainForm().OpendDocuments().Contains(item.Text))
+                        return;
+                    else
+                        Global.GetMainForm().LoadCanvasFormByXml( Path.Combine(Global.UserWorkspacePath, "模型市场"), item.Text);
                     break;
                 default:
                     break;
