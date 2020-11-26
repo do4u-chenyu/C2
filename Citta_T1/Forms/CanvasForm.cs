@@ -484,8 +484,7 @@ namespace C2.Forms
                 };
                 rsDataItems.Add(tmpDataItem);
             }
-            if (rsDataItems.Count == 0)
-                return;
+
 
             ResultWidget rsw = topic.FindWidget<ResultWidget>();
             if (rsw == null)
@@ -496,6 +495,8 @@ namespace C2.Forms
             else
             {
                 rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.ModelOp);
+                //if (rsDataItems.Count == 0)
+                //    return;
                 rsw.DataItems.AddRange(rsDataItems);
             }
 
