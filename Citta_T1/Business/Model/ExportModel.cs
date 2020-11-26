@@ -15,12 +15,14 @@ namespace C2.Business.Model
         private string finallyName;
         private string newModelPath;
         private string FullXmlFilePath;
+        private string ModelNewName;
         public ExportModel()
         {
             this.dataPath = string.Empty;
             this.finallyName = string.Empty;
             this.newModelPath = string.Empty;
             this.FullXmlFilePath = string.Empty;
+            this.ModelNewName = string.Empty;
         }
 
         private static ExportModel ExportModelInstance;
@@ -32,15 +34,16 @@ namespace C2.Business.Model
             }
             return ExportModelInstance;
         }
-        public void Export(string FullXmlFilePath)
+        public void Export(string fullXmlFilePath,string modelNewName)
         {
             // 模型文档不存在返回
-            if (!File.Exists(FullXmlFilePath))
+            if (!File.Exists(fullXmlFilePath))
             {
                 HelpUtil.ShowMessageBox("模型文档不存在，可能已被删除");
                 return;
             }
-            this.FullXmlFilePath = FullXmlFilePath;
+            this.FullXmlFilePath = fullXmlFilePath;
+            this.ModelNewName = modelNewName;
             // 准备要导出的模型文档
             if (!CopyModelAndDataFiles())
                 return;
@@ -71,12 +74,18 @@ namespace C2.Business.Model
         {
             string exportPath = Path.Combine(Global.UserWorkspacePath, "模型市场");
             string modelPath = Path.GetDirectoryName(this.FullXmlFilePath);
-            string modelName = Path.GetFileNameWithoutExtension(this.FullXmlFilePath);
-            newModelPath = Path.Combine(exportPath, modelName);
+            //string modelName = Path.GetFileNameWithoutExtension(this.FullXmlFilePath);
+            newModelPath = Path.Combine(exportPath, ModelNewName);
             Directory.CreateDirectory(newModelPath);
             string[] filePaths = Directory.GetFiles(modelPath, "*.*");
             foreach (string file in filePaths)
-                File.Copy(file, Path.Combine(newModelPath, Path.GetFileName(file)), true);
+            {
+                //xml文件重命名
+                string sourceFileName = Path.GetFileName(file);
+                string destFileName = sourceFileName == Path.GetFileNameWithoutExtension(this.FullXmlFilePath) + ".xml" ? ModelNewName + ".xml" : sourceFileName;
+                File.Copy(file, Path.Combine(newModelPath, destFileName), true);
+            }
+                
             // 创建存储数据的_data文件夹
             this.dataPath = Path.Combine(newModelPath, "_data");
             Directory.CreateDirectory(dataPath);

@@ -164,7 +164,7 @@ namespace C2.Controls.Left
 
         private void ExportModelButton_Click(object sender, EventArgs e)
         {
-            C2.Business.Model.ExportModel.GetInstance().Export(this.FullFilePath);
+            C2.Business.Model.ExportModel.GetInstance().Export(this.FullFilePath, Path.GetFileNameWithoutExtension(this.FullFilePath));
         }
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)

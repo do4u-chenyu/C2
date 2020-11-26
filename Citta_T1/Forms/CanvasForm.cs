@@ -336,11 +336,9 @@ namespace C2.Forms
 
             if (this.runButton.Name == "runButton")
             {
-                if (Global.GetCurrentModelDocument().Modified)
-                {
-                    MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                //运行前自动保存
+                Global.GetCurrentModelDocument().Modified = false;
+
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentModelDocument(), "all");
                 //int notReadyNum = currentManager.CountOpStatus(ElementStatus.Null);
                 int notReadyNum = currentManager.CountOpNullAndNoRelation();

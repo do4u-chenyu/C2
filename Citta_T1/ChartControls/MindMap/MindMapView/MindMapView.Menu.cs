@@ -224,12 +224,24 @@ namespace C2.Controls.MapViews
         {
             if (!opw.HasModelOperator || opw.ModelDataItem == null)
                 return;
-            string modelName = opw.ModelDataItem.FileName;
-            string modelPath = opw.ModelDataItem.FilePath;
-            ExportModel.GetInstance().Export(modelPath);
 
-            if (!Global.GetMyModelControl().ContainModel(modelName))
-                    Global.GetMyModelControl().AddModel(modelName);
+            CreateNewModelForm createNewModelForm = new CreateNewModelForm
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                RelateMindMapView = this,
+                ModelType = "添加模型市场",
+                ModelTitle = opw.ModelDataItem.FileName
+            };
+            DialogResult dialogResult = createNewModelForm.ShowDialog();
+            if (dialogResult != DialogResult.OK)
+                return;
+
+            string modelNewName = createNewModelForm.ModelTitle;
+            string modelPath = opw.ModelDataItem.FilePath;
+            ExportModel.GetInstance().Export(modelPath, modelNewName);
+
+            if (!Global.GetMyModelControl().ContainModel(modelNewName))
+                    Global.GetMyModelControl().AddModel(modelNewName);
         }
         void MenuModelUpdate_Click(object sender, EventArgs e)
         {
@@ -246,6 +258,8 @@ namespace C2.Controls.MapViews
         }
         void MenuDeleteModelOp_Click(object sender, EventArgs e)
         {
+            //模型删除本地文件
+            //FileUtil.DeleteDirectory(Path.GetDirectoryName(opw.ModelDataItem.FilePath));
             ClearModelOpContent();
             if (opw.OpType == OpType.Null)
                 Delete(new ChartObject[] { opw });

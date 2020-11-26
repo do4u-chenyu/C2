@@ -102,15 +102,38 @@ namespace C2.Controls.MapViews
             {
                 foreach (ChartObject mapObject in mapObjects)
                 {
+                    OperatorWidget tmpOpw = null;
+
                     if (mapObject is Topic && ((Topic)mapObject).IsRoot)
                     {
                         return;
+                    }
+                    if(mapObject is Topic)
+                    {
+                        //因为删除的时候直接remove，需要手动遍历所有孩子节点的算子挂件
+                        Topic tmpTopic = (Topic)mapObject;
+                        foreach(Topic ct in tmpTopic.GetAllChildren())
+                        {
+                            tmpOpw = ct.FindWidget<OperatorWidget>();
+                            CloseRelateOpTab(tmpOpw);
+                        }
+                    }
+                    else if(mapObject is OperatorWidget)
+                    {
+                        tmpOpw = (OperatorWidget)mapObject;
+                        CloseRelateOpTab(tmpOpw);
                     }
                 }
 
                 DeleteCommand command = new DeleteCommand(mapObjects);
                 ExecuteCommand(command);
             }
+        }
+
+        private void CloseRelateOpTab(OperatorWidget tmpOpw)
+        {
+            if (tmpOpw != null && tmpOpw.HasModelOperator && tmpOpw.ModelRelateTab !=null && Global.GetMainForm().TaskBar.Items.Contains(tmpOpw.ModelRelateTab))
+                Global.GetMainForm().MdiClient.CloseMdiForm((Form)tmpOpw.ModelRelateTab.Tag);
         }
 
         public override void Copy()

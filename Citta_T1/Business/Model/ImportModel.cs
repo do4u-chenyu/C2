@@ -38,11 +38,11 @@ namespace C2.Business.Model
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 string fullFilePath = fd.FileName;
-                UnZipIaoFile(fullFilePath, userName);
+                UnZipIaoFile(fullFilePath, userName,true);
             }
 
         }
-        private void UnZipIaoFile(string fullFilePath, string userName)
+        public void UnZipIaoFile(string fullFilePath, string userName,bool judge)
         {
             if (!File.Exists(fullFilePath))
                 return;
@@ -54,13 +54,13 @@ namespace C2.Business.Model
                 RenameFile(dirs, this.modelFilePath);
                 // 将导入模型添加到左侧模型面板
                 MyModelControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
-                HelpUtil.ShowMessageBox("模型导入成功");
+                if(judge==true)
+                    HelpUtil.ShowMessageBox("模型导入成功");
             }
-
         }
-        private string modelFilePath;
-        private string modelDir;
-        private bool HasUnZipIaoFile(string zipFilePath, string userName)
+        public string modelFilePath;
+        public string modelDir;
+        public bool HasUnZipIaoFile(string zipFilePath, string userName)
         {
             /*
              * 是否存在同名模型文档
@@ -227,7 +227,7 @@ namespace C2.Business.Model
             if (dataSourcePath.ContainsKey(name))
                 node.InnerText = dataSourcePath[name];
         }
-        private void MyModelControlAddItem(string modelTitle)
+        public void MyModelControlAddItem(string modelTitle)
         {
             if (Global.GetMyModelControl().ContainModel(modelTitle))
                 return;
@@ -236,7 +236,7 @@ namespace C2.Business.Model
             // 菜单项可以打开
             Global.GetMyModelControl().EnableClosedDocumentMenu(modelTitle);
         }
-        private bool IsSameModelTitle(string modelTitle)
+        public bool IsSameModelTitle(string modelTitle)
         {
             return (Global.GetMyModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));
         }
