@@ -187,10 +187,14 @@ namespace C2.Forms
 
         public void SaveDocAndTopic()
         {
-            bool oldStatus = Global.GetCurrentModelDocument().Modified;
+            bool oldStatus = false; 
+            if (Global.GetCurrentModelDocument()!=null)
+            {
+                oldStatus = Global.GetCurrentModelDocument().Modified;
+            }        
             Save();
             // 父文档dirty
-            if (oldStatus && !Global.GetCurrentModelDocument().Modified)
+            if (Global.GetCurrentModelDocument() != null && oldStatus && !Global.GetCurrentModelDocument().Modified)
                 DocumentFormDirty(this.mindMapName);
             UpdateTopicResults(RelateTopic);
         }

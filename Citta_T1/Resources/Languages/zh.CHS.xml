@@ -426,6 +426,8 @@
 	<item name="AddAttachment">附件</item>
 	<item name="OpenAttachment">打开</item>
 	<item name="DeleteAttachment">删除</item>
+	<item name="Rotate Left">向左旋转</item>
+	<item name="Rotate Right">向右旋转</item>
 	<item name="ExploreDirectory">打开所在文件夹</item>
   <item name="CopyFilePathToClipboard">复制文件路径到剪切板</item>
 
