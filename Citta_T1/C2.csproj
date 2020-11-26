@@ -1687,7 +1687,6 @@
     </None>
     <None Include="Resources\html_content.htm" />
     <None Include="Resources\Icons\Artificialintelligence.png" />
-    <None Include="Resources\Icons\Businessview.png" />
     <None Include="Resources\Icons\Businessvw.png" />
     <Content Include="Resources\Icons\check_update.ico" />
     <None Include="Resources\Icons\Datamanagement.png" />
@@ -1714,9 +1713,6 @@
     <None Include="Resources\Images\association.png" />
     <None Include="Resources\Images\back_color.png" />
     <None Include="Resources\Images\balloon_small.png" />
-    <None Include="Resources\Icons\主数据管理系统.png" />
-    <None Include="Resources\Icons\业务视图 %282%29.png" />
-    <None Include="Resources\Icons\模型市场 %281%29.png" />
     <Content Include="Resources\Images\bar.png" />
     <None Include="Resources\Images\bold.png" />
     <None Include="Resources\Images\calculator.png" />
