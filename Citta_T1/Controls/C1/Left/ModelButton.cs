@@ -167,9 +167,10 @@ namespace C2.Controls.Left
             C2.Business.Model.ExportModel.GetInstance().Export(this.FullFilePath, Path.GetFileNameWithoutExtension(this.FullFilePath));
         }
 
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ContextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Global.GetMainForm().OpendDocuments().Contains(ModelTitle))
+            CanvasForm cf = Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.UserWorkspacePath, "模型市场", ModelTitle));
+            if (cf != null)
             {
                 this.OpenToolStripMenuItem.Enabled = false;
                 this.RenameToolStripMenuItem.Enabled = false;

@@ -194,8 +194,11 @@ namespace C2.Controls
                 else
                     ti.Icon = PaintHelper.IconToImage(form.Icon);
 
-                if(form is CanvasForm)
-                    TaskBar.Items.Insert(TaskBar.Items.IndexOf(TaskBar.SelectedItem)+1 ,ti);
+                if (form is CanvasForm && !string.IsNullOrEmpty(form.FormNameToolTip))
+                    TaskBar.Items.Insert(TaskBar.Items.IndexOf(TaskBar.SelectedItem) + 1, ti);
+                else if (form is CanvasForm)
+                    //模型市场的模型默认在最前面打开
+                    TaskBar.Items.Insert(1, ti);
                 else
                     TaskBar.Items.Add(ti);
 
