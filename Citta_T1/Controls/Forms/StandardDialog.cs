@@ -118,7 +118,7 @@ namespace C2.Controls
             }
         }
 
-        void BtnOK_Click(object sender, EventArgs e)
+        public virtual void BtnOK_Click(object sender, EventArgs e)
         {
             OnOKButtonClick();
         }

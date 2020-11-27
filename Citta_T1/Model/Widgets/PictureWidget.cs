@@ -287,10 +287,12 @@ namespace C2.Model.Widgets
             }
             else
             {
+                /*
                 e.Graphics.FillRectangle(e.Graphics.SolidBrush(Color.White), rect);
                 e.Graphics.DrawRectangle(e.Graphics.Pen(Color.Red), rect.X, rect.Y, rect.Width, rect.Height);
                 e.Graphics.DrawLine(e.Graphics.Pen(Color.Red), rect.X, rect.Y, rect.Right - 1, rect.Bottom - 1);
                 e.Graphics.DrawLine(e.Graphics.Pen(Color.Red), rect.Right - 1, rect.Y, rect.Left, rect.Bottom - 1);
+                */
             }
         }
 

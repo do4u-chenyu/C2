@@ -118,7 +118,8 @@ namespace C2.Controls.Move.Op
             // statusBox
             // 
             this.statusBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.statusBox.Image = ((System.Drawing.Image)(resources.GetObject("statusBox.Image")));
+            //this.statusBox.Image = ((System.Drawing.Image)(resources.GetObject("statusBox.Image")));
+            this.statusBox.Image = Properties.Resources.opSet;
             this.statusBox.Location = new System.Drawing.Point(98, 7);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(14, 14);
