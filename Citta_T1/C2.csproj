@@ -1689,6 +1689,7 @@
     <None Include="Resources\businessoutline.png" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
+    <None Include="Resources\document.bmp" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
     <None Include="Resources\Help\C2帮助文档.chm">

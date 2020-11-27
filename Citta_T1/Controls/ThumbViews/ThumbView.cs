@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using C2.Controls.DataCharts;
 using C2.Core;
+using C2.Forms;
 
 namespace C2.Controls
 {
@@ -552,10 +553,16 @@ namespace C2.Controls
                     Global.GetMainForm().NewDocumentForm_Click(item.Text);
                     break;
                 case ThumbItem.ModelTypes.Model:
-                    if (Global.GetMainForm().OpendDocuments().Contains(item.Text))
-                        return;
+                    CanvasForm cf = Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.UserWorkspacePath, "模型市场", item.Text));
+                    if (cf != null)
+                    {
+                        TabBar tabBar = Global.GetMainForm().TaskBar;
+                        TabItem tab = tabBar.GetItemByTag(cf);
+                        if (tab != null)
+                            tabBar.SelectedItem = tab;
+                    }
                     else
-                        Global.GetMainForm().LoadCanvasFormByXml( Path.Combine(Global.UserWorkspacePath, "模型市场"), item.Text);
+                        Global.GetMainForm().LoadCanvasFormByXml(Path.Combine(Global.UserWorkspacePath, "模型市场"), item.Text);
                     break;
                 default:
                     break;
