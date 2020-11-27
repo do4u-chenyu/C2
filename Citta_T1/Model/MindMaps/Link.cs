@@ -251,7 +251,7 @@ namespace C2.Model.MindMaps
         #region IHyperlink
         private string _Hyperlink = null;
 
-        [DefaultValue(null), LocalDisplayName("Hyperlink"), LocalCategory("Data")]
+        [Browsable(false)]
         [Editor(typeof(C2.Design.HyperlinkEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string Hyperlink
         {

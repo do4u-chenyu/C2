@@ -64,7 +64,7 @@ namespace C2.Model
             }
         }
 
-        [DefaultValue(null), LocalDisplayName("Remark"), LocalCategory("Data")]
+        [Browsable(false)]
         [Editor(typeof(C2.Design.RemarkDesignEditor), typeof(UITypeEditor))]
         [TypeConverter(typeof(C2.Design.RemarkTypeConverter))]
         public string Remark

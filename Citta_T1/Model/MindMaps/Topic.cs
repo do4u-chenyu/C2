@@ -576,7 +576,7 @@ namespace C2.Model.MindMaps
 
         public event EventHandler HyperlinkChanged;
 
-        [DefaultValue(null), LocalDisplayName("Hyperlink"), LocalCategory("Data")]
+        [Browsable(false)]
         [Editor(typeof(C2.Design.HyperlinkEditor), typeof(UITypeEditor))]
         public string Hyperlink
         {
