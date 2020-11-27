@@ -238,17 +238,13 @@ namespace C2.Controls.Move.Rs
                     currentOp = Global.GetCurrentModelDocument().SearchElementByID(mr.StartID);
                 }
             }
+            //运行前自动保存
+            Global.GetCanvasForm().Save();
 
             //未找到op算子？？
             if (currentOp == ModelElement.Empty)
             {
                 MessageBox.Show("该算子没有对应的操作算子，请检查模型后再运行。", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (currentOp.Status == ElementStatus.Null)
-            {
-                MessageBox.Show("该算子对应的操作算子未配置，请配置后再运行。", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

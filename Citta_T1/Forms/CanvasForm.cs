@@ -347,7 +347,8 @@ namespace C2.Forms
             if (this.runButton.Name == "runButton")
             {
                 //运行前自动保存
-                Global.GetCurrentModelDocument().Modified = false;
+                //Global.GetCurrentModelDocument().Modified = false;
+                Save();
 
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentModelDocument(), "all");
                 //int notReadyNum = currentManager.CountOpStatus(ElementStatus.Null);
