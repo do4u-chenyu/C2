@@ -34,7 +34,7 @@ namespace C2.Forms
         private string userName;
         private string mindMapName;
         public CanvasPanel CanvasPanel{ get { return this.canvasPanel; }}
-        public RemarkControl RemarkControl { get { return this.remarkControl; } }
+        public RemarkControl RemarkControl {  get { return this.remarkControl; }  }
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
         public OptionDao OptionDao { get { return this.optionDao; } }
         public UndoRedoManager UndoRedoManager { get { return this.undoRedoManager; } }
