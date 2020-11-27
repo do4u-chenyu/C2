@@ -148,6 +148,18 @@ namespace C2.Controls
             }
 
         }
+
+        public CanvasForm SearchCanvasForm(string path)
+        {
+            var cf = from f in GetForms<CanvasForm>()
+                        where f.Document.SavePath == path
+                        select f;
+            List<CanvasForm> forms = cf.ToList();
+            if (forms != null && forms.Count() > 0)
+                return forms.First();
+            else
+                return null;
+        }
         protected virtual void ShowForm(BaseForm form, bool showTab, bool canClose)
         {
             if (form == null)
