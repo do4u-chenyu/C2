@@ -68,6 +68,7 @@ namespace C2.Forms
             // 新增文档事件
             this.canvasPanel.NewElementEvent += NewDocumentOperator;
             //this.canvasPanel.KeyDown += new KeyEventHandler(CanvasPanel_KeyDown);
+            this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
         private void InitializeUndoRedoManager()
         {
@@ -112,6 +113,11 @@ namespace C2.Forms
             :this()
         {
             Document = document;
+        }
+        private void RemarkChange(RemarkControl rc)
+        {
+            Global.GetMainForm().SetDocumentDirty();
+            this.document.RemarkDescription = rc.RemarkDescription;
         }
         public CanvasForm(ModelDocument document,Topic topic,string mindMapName) : this()
         {

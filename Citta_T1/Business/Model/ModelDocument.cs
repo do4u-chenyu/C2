@@ -1,5 +1,6 @@
 using C2.Business.Model.World;
 using C2.Business.Schedule;
+using C2.Controls.Flow;
 using C2.Controls.Interface;
 using C2.Controls.Move.Op;
 using C2.Core;
@@ -27,7 +28,7 @@ namespace C2.Business.Model
         public int ElementCount { get; set; }
         public List<ModelRelation> ModelRelations { get; } // 所有线关系
         public List<ModelElement> ModelElements { get; }   // 所有元素
-
+        public ModelDocument Document { get; set; }
         public string RemarkDescription { get; set; }      // 备注描述
         public TaskManager TaskManager { get; }
         public string UserPath { get; set; }
@@ -161,6 +162,13 @@ namespace C2.Business.Model
                 (me.InnerControl as MoveOpControl).EnableOption = false;
             DegradeChildrenStatus(me.ID);
         }
+
+        internal void UpdateRemark(RemarkControl rc)
+        {
+            if (this.Document != null)
+                this.Document.RemarkDescription = rc.RemarkDescription;
+        }
+
         public void DegradeChildrenStatus(int opID)
         {
             foreach (ModelRelation mr in this.ModelRelations)

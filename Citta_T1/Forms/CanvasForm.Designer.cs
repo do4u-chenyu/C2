@@ -206,11 +206,11 @@
             this.remarkControl.BackColor = System.Drawing.Color.Transparent;
             this.remarkControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("remarkControl.BackgroundImage")));
             this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.remarkControl.Location = new System.Drawing.Point(412, 35);
+            this.remarkControl.Location = new System.Drawing.Point(412, 34);
             this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
             this.remarkControl.Name = "remarkControl";
             this.remarkControl.RemarkDescription = "";
-            this.remarkControl.Size = new System.Drawing.Size(224, 329);
+            this.remarkControl.Size = new System.Drawing.Size(224, 320);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
             // 
