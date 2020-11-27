@@ -50,6 +50,7 @@ namespace C2
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
             this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
+            this.iaoModelControl = new C2.Controls.Left.IaoModelControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
@@ -316,6 +317,7 @@ namespace C2
             this.leftToolBoxPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.leftToolBoxPanel.Controls.Add(this.mindMapModelControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
+            this.leftToolBoxPanel.Controls.Add(this.iaoModelControl);
             this.leftToolBoxPanel.Controls.Add(this.myModelControl);
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftToolBoxPanel.Location = new System.Drawing.Point(136, 46);
@@ -350,6 +352,20 @@ namespace C2
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
             this.dataSourceControl.Visible = false;
+            // 
+            // iaoModelControl
+            // 
+            this.iaoModelControl.AllowDrop = true;
+            this.iaoModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.iaoModelControl.BackColor = System.Drawing.Color.White;
+            this.iaoModelControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.iaoModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iaoModelControl.Location = new System.Drawing.Point(0, 0);
+            this.iaoModelControl.Margin = new System.Windows.Forms.Padding(4);
+            this.iaoModelControl.Name = "iaoModelControl";
+            this.iaoModelControl.Size = new System.Drawing.Size(185, 558);
+            this.iaoModelControl.TabIndex = 0;
+            this.iaoModelControl.Visible = false;
             // 
             // myModelControl
             // 
@@ -757,6 +773,7 @@ namespace C2
         private System.Windows.Forms.Button connectOpButton;
         private Controls.Left.MindMapModelControl mindMapModelControl;
         private Controls.Left.DataSourceControl dataSourceControl;
+        private Controls.Left.IaoModelControl iaoModelControl;
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;

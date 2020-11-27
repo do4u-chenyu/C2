@@ -210,6 +210,7 @@ namespace C2
             this.myModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
+            this.iaoModelControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
             this.ShowLeftFold();
         }
@@ -219,6 +220,7 @@ namespace C2
             this.mindMapModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.myModelControl.Visible = false;
+            this.iaoModelControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
             this.ShowLeftFold();
         }
@@ -228,6 +230,7 @@ namespace C2
             this.dataSourceControl.Visible = true;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
+            this.iaoModelControl.Visible = false;
             this.ShowLeftFold();
 
         }
@@ -237,6 +240,7 @@ namespace C2
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
+            this.iaoModelControl.Visible = true;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
             this.ShowLeftFold();
         }
@@ -316,6 +320,7 @@ namespace C2
                 this.dataSourceControl.Visible = false;
                 this.mindMapModelControl.Visible = false;
                 this.myModelControl.Visible = false;
+                this.iaoModelControl.Visible = false;
             }
         }
 
