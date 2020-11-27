@@ -279,7 +279,10 @@ namespace C2.Business.Model
             {
                 string type = Utils.XmlUtil.GetInnerText(xn, "type");
                 if (type == "Remark")
-                    this.modelDocument.RemarkDescription = Utils.XmlUtil.GetInnerText(xn, "name");
+                { 
+                    this.modelDocument.RemarkDescription = Utils.XmlUtil.GetInnerText(xn, "name"); 
+                }
+                   
                 else if (type == "Relation")
                 {
                     ModelXmlReader mxr1 = new ModelXmlReader(xn);

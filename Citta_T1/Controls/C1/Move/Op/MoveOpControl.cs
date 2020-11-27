@@ -583,11 +583,11 @@ namespace C2.Controls.Move.Op
         private void OptionDirty(ElementStatus status)
         {
             if (status == ElementStatus.Null)
-                this.statusBox.Image = Properties.Resources.set;
+                this.statusBox.Image = Properties.Resources.opSet;
             else if (status == ElementStatus.Done)
                 this.statusBox.Image = Properties.Resources.done;
             else if (status == ElementStatus.Ready || status == ElementStatus.Stop || status == ElementStatus.Runnnig || status == ElementStatus.Suspend)
-                this.statusBox.Image = Properties.Resources.setSuccess;
+                this.statusBox.Image = Properties.Resources.opSetSuccess;
             else if (status == ElementStatus.Warn)
                 this.statusBox.Image = Properties.Resources.warn;
         }

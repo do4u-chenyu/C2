@@ -406,10 +406,10 @@ namespace C2
             {
                 SavePath = Path.Combine(savaPath, modelTitle)
             };
-            CanvasForm form = new CanvasForm(doc);
+            CanvasForm form = new CanvasForm(doc);         
             ShowForm(form);
-
             doc.Load();
+            form.RemarkControl.RemarkDescription = doc.RemarkDescription;
             form.CanvasAddElement(doc);
         }
 

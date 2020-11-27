@@ -34,7 +34,7 @@ namespace C2.Forms
         private string userName;
         private string mindMapName;
         public CanvasPanel CanvasPanel{ get { return this.canvasPanel; }}
-        public RemarkControl RemarkControl { get { return this.remarkControl; } }
+        public RemarkControl RemarkControl {  get { return this.remarkControl; }  }
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
         public OptionDao OptionDao { get { return this.optionDao; } }
         public UndoRedoManager UndoRedoManager { get { return this.undoRedoManager; } }
@@ -68,6 +68,7 @@ namespace C2.Forms
             // 新增文档事件
             this.canvasPanel.NewElementEvent += NewDocumentOperator;
             //this.canvasPanel.KeyDown += new KeyEventHandler(CanvasPanel_KeyDown);
+            this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
         private void InitializeUndoRedoManager()
         {
@@ -112,6 +113,11 @@ namespace C2.Forms
             :this()
         {
             Document = document;
+        }
+        private void RemarkChange(RemarkControl rc)
+        {
+            Global.GetMainForm().SetDocumentDirty();
+            this.document.RemarkDescription = rc.RemarkDescription;
         }
         public CanvasForm(ModelDocument document,Topic topic,string mindMapName) : this()
         {

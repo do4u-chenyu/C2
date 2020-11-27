@@ -6,6 +6,7 @@ using C2.Controls;
 using C2.Core;
 using C2.Globalization;
 using C2.Model.Widgets;
+using C2.Utils;
 
 namespace C2.Dialogs
 {
@@ -52,6 +53,12 @@ namespace C2.Dialogs
                     return null;
             }
         }
+        protected override bool OnOKButtonClick()
+        {
+            HelpUtil.ShowMessageBox("请选择一个图标进行添加");
+            return true;
+        }
+
 
         protected override void OnCurrentLanguageChanged()
         {
