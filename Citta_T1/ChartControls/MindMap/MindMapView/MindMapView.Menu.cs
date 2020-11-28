@@ -357,7 +357,12 @@ namespace C2.Controls.MapViews
                hitItem.FileSep,
                hitItem.FileEncoding,
                hitItem.FileType);
-
+            if (!File.Exists(hitItem.FilePath))
+            {
+                MessageBox.Show(hitItem.FilePath+"文件不存在","文件不存在",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
+               
             VisualDisplayDialog displayDialog = new VisualDisplayDialog(dataCopy);
             if (DialogResult.OK != displayDialog.ShowDialog())
                 return;
