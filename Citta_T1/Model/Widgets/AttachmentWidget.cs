@@ -72,7 +72,7 @@ namespace C2.Model.Widgets
             }
             else
             {
-                HelpUtil.ShowMessageBox("该文件无法打开.", "打开错误");
+                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
             }
         }
 
