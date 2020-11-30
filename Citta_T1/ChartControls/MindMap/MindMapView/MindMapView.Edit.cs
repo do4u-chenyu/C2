@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using C2.Core;
 using C2.Dialogs;
+using C2.Forms;
 using C2.Globalization;
 using C2.Model;
 using C2.Model.MindMaps;
@@ -151,8 +152,10 @@ namespace C2.Controls.MapViews
                 DialogResult dialogResult = createNewModelForm.ShowDialog();
                 if (dialogResult != DialogResult.OK)
                     return;
+                //新建模型前保存一次，防止出现用户一直未保存导致模型视图路径逻辑出错
+                Global.GetDocumentForm().Save();
 
-                // 新建业务视图
+                // 新建模型视图
                 string modelDocumentName = createNewModelForm.ModelTitle;
                 string modelUserPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "业务视图", Global.GetCurrentDocument().Name);
                 string modelSavePath = Path.Combine(modelUserPath, modelDocumentName, modelDocumentName + ".xml");

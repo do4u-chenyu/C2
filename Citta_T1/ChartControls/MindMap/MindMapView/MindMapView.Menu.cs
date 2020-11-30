@@ -236,6 +236,9 @@ namespace C2.Controls.MapViews
             if (dialogResult != DialogResult.OK)
                 return;
 
+            //发布前先保存一次模型视图，否则会出现一直未保存模型导致发布路径逻辑出错
+            (opw.ModelRelateTab.Tag as CanvasForm).Save();
+
             string modelNewName = createNewModelForm.ModelTitle;
             string modelPath = opw.ModelDataItem.FilePath;
             ExportModel.GetInstance().Export(modelPath, modelNewName);
