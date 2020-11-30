@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using C2.Controls;
 using C2.Core;
 using C2.Globalization;
+using C2.Utils;
 
 namespace C2.Dialogs
 {

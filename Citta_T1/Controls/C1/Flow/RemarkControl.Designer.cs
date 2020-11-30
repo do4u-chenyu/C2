@@ -54,7 +54,7 @@
             this.remarkCtrTextBox.Location = new System.Drawing.Point(0, 0);
             this.remarkCtrTextBox.Multiline = true;
             this.remarkCtrTextBox.Name = "remarkCtrTextBox";
-            this.remarkCtrTextBox.Size = new System.Drawing.Size(211, 314);
+            this.remarkCtrTextBox.Size = new System.Drawing.Size(219, 314);
             this.remarkCtrTextBox.TabIndex = 0;
             this.remarkCtrTextBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 

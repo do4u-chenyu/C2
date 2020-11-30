@@ -445,18 +445,14 @@ namespace C2.Controls.Move.Op
         public void RunMenuItem_Click(object sender, EventArgs e)
         {
             //运行到此
+            //运行前自动保存
+            Global.GetCanvasForm().Save();
+
             //判断该算子是否配置完成
             ModelElement currentOp = Global.GetCurrentModelDocument().SearchElementByID(this.ID);
             if (currentOp.Status == ElementStatus.Null)
             {
                 MessageBox.Show("该算子未配置，请配置后再运行。", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            //判断模型是否保存
-            if (Global.GetCurrentModelDocument().Modified)
-            {
-                MessageBox.Show("当前模型没有保存，请保存后再运行模型。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -587,11 +583,11 @@ namespace C2.Controls.Move.Op
         private void OptionDirty(ElementStatus status)
         {
             if (status == ElementStatus.Null)
-                this.statusBox.Image = Properties.Resources.set;
+                this.statusBox.Image = Properties.Resources.opSet;
             else if (status == ElementStatus.Done)
                 this.statusBox.Image = Properties.Resources.done;
             else if (status == ElementStatus.Ready || status == ElementStatus.Stop || status == ElementStatus.Runnnig || status == ElementStatus.Suspend)
-                this.statusBox.Image = Properties.Resources.setSuccess;
+                this.statusBox.Image = Properties.Resources.opSetSuccess;
             else if (status == ElementStatus.Warn)
                 this.statusBox.Image = Properties.Resources.warn;
         }
