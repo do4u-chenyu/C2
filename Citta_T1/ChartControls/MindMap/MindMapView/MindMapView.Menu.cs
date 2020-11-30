@@ -553,14 +553,20 @@ namespace C2.Controls.MapViews
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
-            if ((sender as ToolStripMenuItem).Tag is string ffp)
+            string ffp = (sender as ToolStripMenuItem).Tag as string;
+            if (File.Exists(ffp))
                 FileUtil.ExploreDirectory(ffp);
+            else
+                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
         }
 
         void MenuCopyFilePathToClipboard_Click(object sender, EventArgs e) 
         {
             string ffp = (sender as ToolStripMenuItem).Tag as string;
-            FileUtil.TryClipboardSetText(ffp);
+            if(File.Exists(ffp))
+                FileUtil.TryClipboardSetText(ffp);
+            else
+                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
         }
 
 
