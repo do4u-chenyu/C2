@@ -518,11 +518,13 @@ namespace C2.ChartPageView
             MenuAdvance.Name = "MenuAdvance";
             MenuAdvance.Text = "Advance";
             MenuAdvance.DropDownItems.AddRange(new ToolStripItem[] { MenuNewChartFromHere });
+            MenuAdvance.Enabled = false;
 
             // MenuNewChartFromHere
             MenuNewChartFromHere.Name = "MenuNewChartFromHere";
             MenuNewChartFromHere.Text = "New Chart From Here";
             MenuNewChartFromHere.Click += MenuNewChartFromHere_Click;
+            //MenuNewChartFromHere.Enabled = false;
 
             // MenuEdit
             MenuEdit.Image = C2.Properties.Resources.edit;
