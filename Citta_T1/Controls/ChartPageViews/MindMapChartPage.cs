@@ -333,9 +333,9 @@ namespace C2.ChartPageView
                 MenuAddSubTopic,
                 MenuAdd,
                 toolStripSeparator5,
-                MenuLink,
+                //MenuLink,
                 MenuFolding,
-                MenuAdvance,
+                //MenuAdvance,
                 toolStripMenuItem2,
                 MenuCut,
                 MenuCopy,
@@ -608,15 +608,16 @@ namespace C2.ChartPageView
         {
             var actions = new List<ExtendActionInfo>();
 
-            if (mindMapView1.CanPasteAsRemark && Clipboard.ContainsText())
-            {
-                actions.Add(new ExtendActionInfo("Paste as Note", Properties.Resources.paste_as_remark, MenuPasteAsNote_Click));
-            }
+            //暂时隐去粘帖为备注、粘帖为图片功能
+            //if (mindMapView1.CanPasteAsRemark && Clipboard.ContainsText())
+            //{
+            //    actions.Add(new ExtendActionInfo("Paste as Note", Properties.Resources.paste_as_remark, MenuPasteAsNote_Click));
+            //}
 
-            if (mindMapView1.CanPaste && Clipboard.ContainsImage())
-            {
-                actions.Add(new ExtendActionInfo("Paste as Image", Properties.Resources.paste_as_image, MenuPasteAsImage_Click));
-            }
+            //if (mindMapView1.CanPaste && Clipboard.ContainsImage())
+            //{
+            //    actions.Add(new ExtendActionInfo("Paste as Image", Properties.Resources.paste_as_image, MenuPasteAsImage_Click));
+            //}
 
             Topic topic = mindMapView1.SelectedTopic;
             if (topic != null && !ReadOnly)
