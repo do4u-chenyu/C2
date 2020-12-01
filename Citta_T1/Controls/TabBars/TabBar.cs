@@ -840,7 +840,8 @@ namespace C2.Controls
             {
                 TabBarButton button = GetButton(HoverHitResult.ButtonIndex);
                 if (button != null)
-                    ShowToolTip(button.ToolTipText);
+                    MyToolTip.SetToolTip(this, button.ToolTipText); 
+                    //ShowToolTip(button.ToolTipText);
             }
             else if (HoverHitResult.Item != null)
             {
