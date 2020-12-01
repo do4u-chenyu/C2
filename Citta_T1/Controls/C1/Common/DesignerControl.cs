@@ -17,18 +17,35 @@ namespace C2.Controls.Common
 {
     public partial class DesignerControl : BorderPanel
     {
+        private Topic _SelectedTopic;
+        ToolTip DcToolTip;
         public MindMapView MindmapView { get; set; }
         public OperatorWidget OpWidget { get; set; }
-        public Topic SelectedTopic { get; set; }//选中节点
+        //选中节点
+        public Topic SelectedTopic
+        {
+            get { return _SelectedTopic; }
+            set
+            {
+                if (_SelectedTopic != value)
+                {
+                    Topic old = _SelectedTopic;
+                    _SelectedTopic = value;
+                    OnTopicChanged(old);
+                }
+            }
+        }
         public string SelectedOperator { get; set; }//选中算子
         public DataItem SelectedDataSource { get; set; }//选中数据
         public List<DataItem> ComboDataSource { get; set; }//下拉数据
         public List<OpType> ComboOperator { get; set; }//下拉算子
+
         public DesignerControl()
         {
             InitializeComponent();
             Font = UITheme.Default.DefaultFont;
             ComboDataSource = new List<DataItem>();
+            DcToolTip = new ToolTip();
             InitComboOperator();
         }
 
@@ -52,6 +69,7 @@ namespace C2.Controls.Common
             if(SelectedTopic == null)
             {
                 this.topicName.Text = "未选中节点";
+                DcToolTip.SetToolTip(this.topicName, "");
                 this.dataSourceCombo.Text = String.Empty;
                 this.dataSourceCombo.Items.Clear();
                 this.operatorCombo.Text = String.Empty;
@@ -72,6 +90,7 @@ namespace C2.Controls.Common
         private void SetSelectedTopic()
         {
             this.topicName.Text = SelectedTopic.Text;
+            DcToolTip.SetToolTip(this.topicName, SelectedTopic.Text);
         }
 
         private void SetSelectedDataSource()
@@ -209,6 +228,26 @@ namespace C2.Controls.Common
         private void OperatorCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             SelectedOperator = Lang._(ComboOperator[this.operatorCombo.SelectedIndex].ToString());
+        }
+        private void OnTopicChanged(Topic old)
+        {
+            if (old != null)
+            {
+                old.TextChanged -= new EventHandler(Topic_TextChanged);
+            }
+
+            if (SelectedTopic != null)
+            {
+                SelectedTopic.TextChanged += new EventHandler(Topic_TextChanged);
+            }
+        }
+        private void Topic_TextChanged(object sender, EventArgs e)
+        {
+            if (SelectedTopic != null)
+            {
+                this.topicName.Text = SelectedTopic.Text;
+                DcToolTip.SetToolTip(this.topicName, SelectedTopic.Text);
+            }
         }
     }
 }
