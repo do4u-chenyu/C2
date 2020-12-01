@@ -32,11 +32,12 @@
             // 
             // DragLineControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(246)))));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "DragLineControl";
-            this.Size = new System.Drawing.Size(150, 3);
+            this.Size = new System.Drawing.Size(225, 4);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DragLineControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DragLineControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DragLineControl_MouseUp);
