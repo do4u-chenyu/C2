@@ -285,6 +285,7 @@ namespace C2.Controls.MapViews
         }
         private void ClearModelOpContent()
         {
+            CloseRelateOpTab(opw);
             opw.ModelDataItem = null;
             opw.HasModelOperator = false;
         }
