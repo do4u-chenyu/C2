@@ -192,10 +192,13 @@ namespace C2.Controls.MapViews
         }
         void MenuDesignOp_Click(object sender, EventArgs e)
         {
-            Cursor tempCursor = this.Cursor;
-            OpType tmpOpType = opw.OpType;
-            DataItem tmpDataItem = opw.DataSourceItem;
+            if(opw.DataSourceItem != null && !string.IsNullOrEmpty(opw.DataSourceItem.FilePath) && !File.Exists(opw.DataSourceItem.FilePath))
+            {
+                HelpUtil.ShowMessageBox(opw.DataSourceItem.FilePath + " 该文件不存在");
+                return;
+            }
 
+            Cursor tempCursor = this.Cursor;
             this.Cursor = Cursors.WaitCursor;
             C2BaseOperatorView dialog = GenerateOperatorView();
             if (dialog == null)
@@ -203,11 +206,7 @@ namespace C2.Controls.MapViews
             DialogResult dr = dialog.ShowDialog(this);
             if (dr == DialogResult.OK)
                 opw.Status = OpStatus.Ready;
-            else if (dr == DialogResult.Cancel)
-            {
-                opw.OpType = tmpOpType;
-                opw.DataSourceItem = tmpDataItem;
-            }
+ 
             this.Cursor = tempCursor;
         }
         void MenuOpenOperatorDesigner_Click(object sender, EventArgs e)
@@ -217,7 +216,6 @@ namespace C2.Controls.MapViews
         void MenuRunningOp_Click(object sender, EventArgs e)
         {
             Global.GetDocumentForm().Save();
-            Global.GetCurrentDocument().Modified = false;
             GenRunCmds();
         }
         void MenuOpPublic_Click(object sender, EventArgs e)
