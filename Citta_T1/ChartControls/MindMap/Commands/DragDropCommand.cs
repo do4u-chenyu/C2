@@ -55,7 +55,10 @@ namespace C2.Controls.MapViews
                     return false;
             }
         }
-
+        public override bool Redo()
+        {
+            return Execute();
+        }
         public override bool Execute()
         {
             if (DragObjects.IsNullOrEmpty() || Target == null || DragDropMethod == DragTopicsMethod.None)

@@ -18,6 +18,8 @@ namespace C2.Controls.MapViews
 
         public abstract bool Execute();
 
+        public abstract bool Redo();
+
         public override string ToString()
         {
             return Name;

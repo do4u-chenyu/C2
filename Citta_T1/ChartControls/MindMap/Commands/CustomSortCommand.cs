@@ -63,7 +63,10 @@ namespace C2.Controls.MapViews
 
             return true;
         }
-
+        public override bool Redo()
+        {
+            return Execute();
+        }
         public override bool Execute()
         {
             if (Parent == null || NewIndices == null || NewIndices.Length > Parent.Children.Count)

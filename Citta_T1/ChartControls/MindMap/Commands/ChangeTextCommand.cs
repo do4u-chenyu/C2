@@ -24,7 +24,10 @@ namespace C2.Controls.MapViews
             TheObject.Text = OldText;
             return true;
         }
-
+        public override bool Redo()
+        {
+            return Execute();
+        }
         public override bool Execute()
         {
             OldText = TheObject.Text;

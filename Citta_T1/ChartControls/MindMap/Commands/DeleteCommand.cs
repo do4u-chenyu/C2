@@ -32,7 +32,10 @@ namespace C2.Controls.MapViews
         {
             return UndeleteObjects(MapObjects, Parents, Indices);
         }
-
+        public override bool Redo()
+        {
+            return Execute();
+        }
         public override bool Execute()
         {
             Parents = new Dictionary<ChartObject, object>();

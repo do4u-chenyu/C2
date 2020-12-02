@@ -30,7 +30,10 @@ namespace C2.Controls.MapViews
             else
                 return false;
         }
-
+        public override bool Redo()
+        {
+            return Execute();
+        }
         public override bool Execute()
         {
             var copyCommand = new CopyCommand(ChartObjects, true);

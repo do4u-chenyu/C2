@@ -42,5 +42,14 @@ namespace C2.Controls.MapViews
                 FromTopic.Links.Remove(NewLink);
             return true;
         }
+
+        public override bool Redo()
+        {
+            if (FromTopic == null || NewLink == null)
+                return false;
+            else
+                FromTopic.Links.Add(NewLink);
+            return true;
+        }
     }
 }

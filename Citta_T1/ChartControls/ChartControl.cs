@@ -165,7 +165,7 @@ namespace C2.Controls
                 if (UndoCommandHistory.Count > 0)
                 {
                     Command comd = UndoCommandHistory.Pop();
-                    comd.Execute();
+                    comd.Redo();
                     CommandHistory.Push(comd);
                     changed = true;
 

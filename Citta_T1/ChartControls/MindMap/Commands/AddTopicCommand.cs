@@ -53,6 +53,10 @@ namespace C2.Controls.MapViews
 
             return true;
         }
+        public override bool Redo()
+        {
+            return Execute();
+        }
 
         public override bool Execute()
         {
