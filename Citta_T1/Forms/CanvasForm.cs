@@ -503,7 +503,11 @@ namespace C2.Forms
 
 
             ResultWidget rsw = topic.FindWidget<ResultWidget>();
-            if (rsw == null)
+
+            //没有挂件且没有结果更新时，直接返回
+            if (rsw == null && rsDataItems.Count == 0)
+                return;
+            else if (rsw == null)
             {
                 rsw = new ResultWidget {  DataItems = rsDataItems  };
                 topic.Add(rsw);
@@ -511,13 +515,8 @@ namespace C2.Forms
             else
             {
                 rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.ModelOp);
-                //if (rsDataItems.Count == 0)
-                //    return;
                 rsw.DataItems.AddRange(rsDataItems);
             }
-
-            //ResultWidget rsw = new ResultWidget();
-            //RelateTopic.Add(rsw);
         }
 
         //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档

@@ -367,6 +367,7 @@ namespace C2.Controls.Move.Op
 
         private void ShowOptionDialog()
         {
+            FileStream fs = null;
             if (!this.OptionMenuItem.Enabled)
             {
                 MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
@@ -381,6 +382,21 @@ namespace C2.Controls.Move.Op
                 {
                     MessageBox.Show(dataSource.FullFilePath + " 该文件不存在");
                     return;
+                }
+                try
+                {
+                    fs = new FileStream(dataSource.FullFilePath, FileMode.Open, FileAccess.Read);
+                }
+                catch
+                {
+                    string errMsg = string.Format("文件{0}可能是空文件或者已被其他应用打开。", dataSource.FullFilePath);
+                    MessageBox.Show(errMsg,"",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    return;
+                }
+                finally
+                {
+                    if (fs != null)
+                        fs.Close();
                 }
             }
             switch (SubTypeName)
