@@ -74,19 +74,34 @@ namespace C2.Business.Model
             string modelName = string.Empty;
             string modelPath = string.Empty;
             DialogResult result;
-            using (ZipInputStream s = new ZipInputStream(File.OpenRead(zipFilePath)))
+            ZipInputStream s = null;
+            try
             {
-                ZipEntry theEntry;
-                while ((theEntry = s.GetNextEntry()) != null)
+                using (s = new ZipInputStream(File.OpenRead(zipFilePath)))
                 {
-                    if (!Path.GetFileName(theEntry.Name).EndsWith(".xml"))
-                        continue;
-                    fileName = Path.GetFileName(theEntry.Name);
-                    modelName = Path.GetFileNameWithoutExtension(theEntry.Name);
-                    modelPath = Path.Combine(Global.WorkspaceDirectory, userName, "模型市场", modelName);
-                    break;
+                    ZipEntry theEntry;
+                    while ((theEntry = s.GetNextEntry()) != null)
+                    {
+                        if (!Path.GetFileName(theEntry.Name).EndsWith(".xml"))
+                            continue;
+                        fileName = Path.GetFileName(theEntry.Name);
+                        modelName = Path.GetFileNameWithoutExtension(theEntry.Name);
+                        modelPath = Path.Combine(Global.WorkspaceDirectory, userName, "模型市场", modelName);
+                        break;
+                    }
                 }
             }
+            catch
+            {
+                MessageBox.Show("文件内容可能破损:" + zipFilePath);
+                return !hasUnZip;
+            }
+            finally 
+            {
+                if (s != null)
+                    s.Close();
+            }
+           
 
             // 未找到xml文件
             if (string.IsNullOrEmpty(fileName))
