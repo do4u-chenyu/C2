@@ -471,7 +471,7 @@ namespace C2.Controls.MapViews
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             string destDirectory = Path.Combine(Global.UserWorkspacePath, "数据池");
-            string destFilePath = Path.Combine(destDirectory, hitItem.FileName);
+            string destFilePath = Path.Combine(destDirectory, Path.GetFileName(hitItem.FilePath));
             Directory.CreateDirectory(destDirectory);
             File.Copy(hitItem.FilePath, destFilePath, true);
             Global.GetDataSourceControl().GenDataButton(hitItem.FileName,
