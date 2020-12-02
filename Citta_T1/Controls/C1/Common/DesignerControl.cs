@@ -173,6 +173,12 @@ namespace C2.Controls.Common
                 return;
             }
 
+            if (!File.Exists(SelectedDataSource.FilePath))
+            {
+                HelpUtil.ShowMessageBox(SelectedDataSource.FilePath + " 该文件不存在","文件不存在");
+                return;
+            }
+
             if (OpWidget == null)
             {
                 SelectedTopic.Widgets.Add(new OperatorWidget());
