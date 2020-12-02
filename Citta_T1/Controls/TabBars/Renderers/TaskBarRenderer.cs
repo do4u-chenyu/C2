@@ -54,10 +54,22 @@ namespace C2.Controls
             {
                 StringFormat sf = PaintHelper.SFCenter;
                 sf.FormatFlags |= StringFormatFlags.NoWrap;
-                e.Graphics.DrawString(e.Item.Text, e.Font, new SolidBrush(foreColor), rect, sf);
+                String revisedText = ReviseText(e.Item.Text, rect.Width);
+                e.Graphics.DrawString(revisedText, e.Font, new SolidBrush(foreColor), rect, sf);
             }
         }
-
+        private String ReviseText(String text, int size)
+        {
+            float validItemTextLength = size;
+            float textLength = TextRenderer.MeasureText(text, this.TaskBar.Font).Width;
+            if (validItemTextLength > textLength)
+                return text;
+            float perLengthChar = text.Length / textLength;
+            if (text.EndsWith("*"))
+                return text.Substring(0, (int)(validItemTextLength * perLengthChar) - 5) + "... *";
+            else
+                return text.Substring(0, (int)(validItemTextLength * perLengthChar) - 3) + "...";
+        }
         protected override void DrawItemBackground(TabItemPaintEventArgs e)
         {
             //base.DrawItemBackground(e);

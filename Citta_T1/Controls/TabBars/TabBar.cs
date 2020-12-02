@@ -884,7 +884,7 @@ namespace C2.Controls
                 HitResult hr = HitTest(e.X, e.Y);
                 if (HitResult.IsTabItem(hr))
                 {
-                    if (hr.Item.Selectable)
+                    if (hr.Item.Selectable && !hr.InCloseButton)
                         SelectedItem = hr.Item;
                     MouseDownItem = hr.Item;
                 }
