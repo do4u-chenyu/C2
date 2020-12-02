@@ -322,8 +322,8 @@ namespace C2.Controls.MapViews
                     if (w.FitContainer)
                     {
                         rw.X = x;
-                        rw.Y = rect.Y + e.Chart.WidgetMargin;
-                        rw.Height = rect.Height - e.Chart.WidgetMargin * 2;
+                        rw.Y = rect.Y + e.Chart.WidgetMargin +(rect.Height-w.Height)/2;
+                        rw.Height = w.Height - e.Chart.WidgetMargin * 2;
                         x += rw.Width + e.Chart.WidgetMargin;
                     }
                     else
@@ -359,9 +359,9 @@ namespace C2.Controls.MapViews
 
                     if (w.FitContainer)
                     {
-                        rw.X = rect.X + e.Chart.WidgetMargin;
+                        rw.X = rect.X + e.Chart.WidgetMargin+(rect.Width-w.Width)/2;
                         rw.Y = y;
-                        rw.Width = rect.Width - e.Chart.WidgetMargin * 2;
+                        rw.Width = w.Width - e.Chart.WidgetMargin * 2;
                         y += rw.Height + e.Chart.WidgetMargin;
                     }
                     else
