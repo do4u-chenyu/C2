@@ -186,7 +186,7 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
-                OpenFileDialog fd = new OpenFileDialog  //TODO: 可能要改成出现在中间位置,目前是出现在左上角
+                OpenFileDialog fd = new OpenFileDialog
                 {
                     Filter = "文件|*.docx;*.xlsx;*.doc;*.xls;*.pdf;*.txt;*.bcp;*.xmind",
                     Title = Lang._("AddAttachment")

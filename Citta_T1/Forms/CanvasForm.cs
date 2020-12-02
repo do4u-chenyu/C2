@@ -34,7 +34,7 @@ namespace C2.Forms
         private string userName;
         private string mindMapName;
         public CanvasPanel CanvasPanel{ get { return this.canvasPanel; }}
-        public RemarkControl RemarkControl { get { return this.remarkControl; } }
+        public RemarkControl RemarkControl {  get { return this.remarkControl; }  }
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
         public OptionDao OptionDao { get { return this.optionDao; } }
         public UndoRedoManager UndoRedoManager { get { return this.undoRedoManager; } }
@@ -353,7 +353,8 @@ namespace C2.Forms
             if (this.runButton.Name == "runButton")
             {
                 //运行前自动保存
-                Global.GetCurrentModelDocument().Modified = false;
+                //Global.GetCurrentModelDocument().Modified = false;
+                Save();
 
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentModelDocument(), "all");
                 //int notReadyNum = currentManager.CountOpStatus(ElementStatus.Null);
@@ -502,7 +503,11 @@ namespace C2.Forms
 
 
             ResultWidget rsw = topic.FindWidget<ResultWidget>();
-            if (rsw == null)
+
+            //没有挂件且没有结果更新时，直接返回
+            if (rsw == null && rsDataItems.Count == 0)
+                return;
+            else if (rsw == null)
             {
                 rsw = new ResultWidget {  DataItems = rsDataItems  };
                 topic.Add(rsw);
@@ -510,13 +515,8 @@ namespace C2.Forms
             else
             {
                 rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.ModelOp);
-                //if (rsDataItems.Count == 0)
-                //    return;
                 rsw.DataItems.AddRange(rsDataItems);
             }
-
-            //ResultWidget rsw = new ResultWidget();
-            //RelateTopic.Add(rsw);
         }
 
         //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档

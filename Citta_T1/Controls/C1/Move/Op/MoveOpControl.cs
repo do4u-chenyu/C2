@@ -367,6 +367,7 @@ namespace C2.Controls.Move.Op
 
         private void ShowOptionDialog()
         {
+            FileStream fs = null;
             if (!this.OptionMenuItem.Enabled)
             {
                 MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
@@ -381,6 +382,21 @@ namespace C2.Controls.Move.Op
                 {
                     MessageBox.Show(dataSource.FullFilePath + " 该文件不存在");
                     return;
+                }
+                try
+                {
+                    fs = new FileStream(dataSource.FullFilePath, FileMode.Open, FileAccess.Read);
+                }
+                catch
+                {
+                    string errMsg = string.Format("文件{0}可能是空文件或者已被其他应用打开。", dataSource.FullFilePath);
+                    MessageBox.Show(errMsg,"",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    return;
+                }
+                finally
+                {
+                    if (fs != null)
+                        fs.Close();
                 }
             }
             switch (SubTypeName)
@@ -445,18 +461,14 @@ namespace C2.Controls.Move.Op
         public void RunMenuItem_Click(object sender, EventArgs e)
         {
             //运行到此
+            //运行前自动保存
+            Global.GetCanvasForm().Save();
+
             //判断该算子是否配置完成
             ModelElement currentOp = Global.GetCurrentModelDocument().SearchElementByID(this.ID);
             if (currentOp.Status == ElementStatus.Null)
             {
                 MessageBox.Show("该算子未配置，请配置后再运行。", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            //判断模型是否保存
-            if (Global.GetCurrentModelDocument().Modified)
-            {
-                MessageBox.Show("当前模型没有保存，请保存后再运行模型。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

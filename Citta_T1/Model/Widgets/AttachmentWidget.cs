@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Xml;
 
 namespace C2.Model.Widgets
@@ -62,13 +63,16 @@ namespace C2.Model.Widgets
 
         public static void DoOpenAttachment(string ffp)
         {
-            try
+            if(File.Exists(ffp))
             {
-                Process.Start(ffp); // 太粗暴了,资源泄露,测试有没有资源泄露
+                ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                processStartInfo.FileName = "explorer.exe";  //资源管理器
+                processStartInfo.Arguments = ffp;
+                Process.Start(processStartInfo);
             }
-            catch
+            else
             {
-                HelpUtil.ShowMessageBox("该文件无法打开.", "打开错误");
+                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
             }
         }
 

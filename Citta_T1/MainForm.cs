@@ -400,16 +400,16 @@ namespace C2
                 opw.ModelRelateTab = TaskBar.SelectedItem;
         }
 
-        public void LoadCanvasFormByXml(string savaPath ,string modelTitle)
+        public void LoadCanvasFormByXml(string savePath ,string modelTitle)
         {
             ModelDocument doc = new ModelDocument(modelTitle, this.UserName)
             {
-                SavePath = Path.Combine(savaPath, modelTitle)
+                SavePath = Path.Combine(savePath, modelTitle)
             };
-            CanvasForm form = new CanvasForm(doc);
+            CanvasForm form = new CanvasForm(doc);         
             ShowForm(form);
-
             doc.Load();
+            form.RemarkControl.RemarkDescription = doc.RemarkDescription;
             form.CanvasAddElement(doc);
         }
 

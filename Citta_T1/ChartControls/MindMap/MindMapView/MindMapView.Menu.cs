@@ -192,10 +192,13 @@ namespace C2.Controls.MapViews
         }
         void MenuDesignOp_Click(object sender, EventArgs e)
         {
-            Cursor tempCursor = this.Cursor;
-            OpType tmpOpType = opw.OpType;
-            DataItem tmpDataItem = opw.DataSourceItem;
+            if(opw.DataSourceItem != null && !string.IsNullOrEmpty(opw.DataSourceItem.FilePath) && !File.Exists(opw.DataSourceItem.FilePath))
+            {
+                HelpUtil.ShowMessageBox(opw.DataSourceItem.FilePath + " 该文件不存在");
+                return;
+            }
 
+            Cursor tempCursor = this.Cursor;
             this.Cursor = Cursors.WaitCursor;
             C2BaseOperatorView dialog = GenerateOperatorView();
             if (dialog == null)
@@ -203,11 +206,7 @@ namespace C2.Controls.MapViews
             DialogResult dr = dialog.ShowDialog(this);
             if (dr == DialogResult.OK)
                 opw.Status = OpStatus.Ready;
-            else if (dr == DialogResult.Cancel)
-            {
-                opw.OpType = tmpOpType;
-                opw.DataSourceItem = tmpDataItem;
-            }
+ 
             this.Cursor = tempCursor;
         }
         void MenuOpenOperatorDesigner_Click(object sender, EventArgs e)
@@ -217,7 +216,6 @@ namespace C2.Controls.MapViews
         void MenuRunningOp_Click(object sender, EventArgs e)
         {
             Global.GetDocumentForm().Save();
-            Global.GetCurrentDocument().Modified = false;
             GenRunCmds();
         }
         void MenuOpPublic_Click(object sender, EventArgs e)
@@ -285,6 +283,7 @@ namespace C2.Controls.MapViews
         }
         private void ClearModelOpContent()
         {
+            CloseRelateOpTab(opw);
             opw.ModelDataItem = null;
             opw.HasModelOperator = false;
         }
@@ -357,7 +356,12 @@ namespace C2.Controls.MapViews
                hitItem.FileSep,
                hitItem.FileEncoding,
                hitItem.FileType);
-
+            if (!File.Exists(hitItem.FilePath))
+            {
+                MessageBox.Show(hitItem.FilePath+"文件不存在","文件不存在",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
+               
             VisualDisplayDialog displayDialog = new VisualDisplayDialog(dataCopy);
             if (DialogResult.OK != displayDialog.ShowDialog())
                 return;
@@ -467,7 +471,7 @@ namespace C2.Controls.MapViews
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             string destDirectory = Path.Combine(Global.UserWorkspacePath, "数据池");
-            string destFilePath = Path.Combine(destDirectory, hitItem.FileName);
+            string destFilePath = Path.Combine(destDirectory, Path.GetFileName(hitItem.FilePath));
             Directory.CreateDirectory(destDirectory);
             File.Copy(hitItem.FilePath, destFilePath, true);
             Global.GetDataSourceControl().GenDataButton(hitItem.FileName,
@@ -553,14 +557,20 @@ namespace C2.Controls.MapViews
 
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
-            if ((sender as ToolStripMenuItem).Tag is string ffp)
+            string ffp = (sender as ToolStripMenuItem).Tag as string;
+            if (File.Exists(ffp))
                 FileUtil.ExploreDirectory(ffp);
+            else
+                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
         }
 
         void MenuCopyFilePathToClipboard_Click(object sender, EventArgs e) 
         {
             string ffp = (sender as ToolStripMenuItem).Tag as string;
-            FileUtil.TryClipboardSetText(ffp);
+            if(File.Exists(ffp))
+                FileUtil.TryClipboardSetText(ffp);
+            else
+                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
         }
 
 

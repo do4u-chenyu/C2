@@ -56,7 +56,7 @@ namespace C2.Controls.Common
             //全选
             this.lbSelectAll = new Label();
             lbSelectAll.BackColor = Color.Transparent;
-            lbSelectAll.Font = new Font("宋体", 10f, FontStyle.Regular);
+            lbSelectAll.Font = new Font("宋体", 9f, FontStyle.Regular);
             lbSelectAll.Text = "全选";
             lbSelectAll.Size = new Size(40, 20);
             lbSelectAll.ForeColor = Color.Blue;
@@ -67,7 +67,7 @@ namespace C2.Controls.Common
             //取消
             lbSelectNo = new Label
             {
-                Font = new Font("宋体", 10f, FontStyle.Regular),
+                Font = new Font("宋体", 9f, FontStyle.Regular),
                 BackColor = Color.Transparent,
                 Text = "取消",
                 Size = new Size(40, 20),

@@ -124,7 +124,7 @@ namespace C2.Model
                 TextChanged(this, EventArgs.Empty);
             }
 
-            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs("Text", oldValue, Text, ChangeTypes.All, true));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs("Text", oldValue, Text, ChangeTypes.All, false));
         }
 
         protected virtual void OnChartChanged()

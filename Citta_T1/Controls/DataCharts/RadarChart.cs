@@ -50,11 +50,11 @@ namespace C2.Controls.DataCharts
             chart1.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
             chart1.ChartAreas[0].AxisX.LabelStyle.Font = new Font("微软雅黑", 10f, FontStyle.Regular);
             //X坐标轴标题
-            chart1.ChartAreas[0].AxisX.Title = "xTitle";
+            chart1.ChartAreas[0].AxisX.Title = xTitle;
             chart1.ChartAreas[0].AxisX.TitleFont = new Font("微软雅黑", 10f, FontStyle.Regular);
             chart1.ChartAreas[0].AxisX.TitleForeColor = Color.White;
             chart1.ChartAreas[0].AxisX.TextOrientation = TextOrientation.Auto;
-            chart1.ChartAreas[0].AxisX.ToolTip = "xTitle";
+            chart1.ChartAreas[0].AxisX.ToolTip = xTitle;
             //X轴网络线条
             chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
             chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = ColorTranslator.FromHtml("#2c4c6d");
