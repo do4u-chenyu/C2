@@ -45,7 +45,7 @@ namespace C2.Controls.MapViews
                 if (rsw == null)
                 {
                     topic.Widgets.Add(new ResultWidget { DataItems = new List<DataItem> { resultItem } });
-                    Global.GetCurrentDocument().Modified = false; //新建了一个挂件，此时文档dirty，需要置false
+                    //Global.GetCurrentDocument().Modified = false; //新建了一个挂件，此时文档dirty，需要置false
                     TopicUpdate(topic, null);
                 }
                 else

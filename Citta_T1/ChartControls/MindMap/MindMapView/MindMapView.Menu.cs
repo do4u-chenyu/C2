@@ -216,7 +216,6 @@ namespace C2.Controls.MapViews
         void MenuRunningOp_Click(object sender, EventArgs e)
         {
             Global.GetDocumentForm().Save();
-            Global.GetCurrentDocument().Modified = false;
             GenRunCmds();
         }
         void MenuOpPublic_Click(object sender, EventArgs e)
