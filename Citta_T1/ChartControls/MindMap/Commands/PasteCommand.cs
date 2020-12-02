@@ -146,7 +146,7 @@ namespace C2.Controls.MapViews
                     if (co is Topic)
                     {
                         var t = (Topic)co;
-                        target.Children.Add(t);
+                        target.Children.Add(t);//增加节点
                         List<Widget> widgets = new List<Widget>();
                         t.Widgets.RemoveAll(w => w is C2BaseWidget);
 

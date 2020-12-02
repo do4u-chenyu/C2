@@ -96,16 +96,22 @@ namespace C2.Controls.MapViews
             if (FindNode(e.Item) != null)
                 return;
 
-            TopicTreeNode node = new TopicTreeNode(e.Item);
-            node.ImageIndex = node.SelectedImageIndex = 0;
-            Nodes.Add(node);
-            
-            //if (TreeView is ObjectTree)
-            //{
-            //    ((ObjectTree)TreeView).OnNodeAdded(node);
-            //}
+            TopicAdd(e.Item, Nodes);
         }
+        private void TopicAdd(Topic topic, TreeNodeCollection nodes)
+        {
+            TopicTreeNode node = new TopicTreeNode(topic);
+            node.ImageIndex = node.SelectedImageIndex = 0;
+            nodes.Add(node);
 
+            foreach (Topic subTopic in topic.Children)
+            {
+                TopicAdd(subTopic, node.Nodes);
+            }
+
+            if (!topic.Folded)
+                node.Expand();
+        }
         private void Topic_Children_AfterSort(object sender, EventArgs e)
         {
 
