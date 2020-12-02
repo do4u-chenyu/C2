@@ -320,13 +320,16 @@ namespace C2.Controls.MapViews
             Topic topic = View.GetTopicAt(e.X, e.Y);
             if (topic != null && topic != NewLineFrom)
             {
-                Link link = Link.CreateNew(NewLineFrom, topic);
-                if (link != null)
-                {
-                    link.RefreshLayout();
-                    View.Select(link);
-                    SelectedObject = new HitTestResult(link, BezierPoint.None);
-                }
+                var command = new AddLinkCommand(NewLineFrom, topic);
+                View.ExecuteCommand(command);
+
+                //Link link = Link.CreateNew(NewLineFrom, topic);
+                //if (link != null)
+                //{
+                //    link.RefreshLayout();
+                //    View.Select(link);
+                //    SelectedObject = new HitTestResult(link, BezierPoint.None);
+                //}
             }
 
             NewLineFrom = null;
