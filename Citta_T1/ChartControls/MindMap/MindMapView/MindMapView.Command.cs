@@ -94,6 +94,7 @@ namespace C2.Controls.MapViews
             {
                 Delete(Selection.ToArray());
             }
+
         }
 
         private void Delete(ChartObject[] mapObjects)
@@ -103,25 +104,32 @@ namespace C2.Controls.MapViews
                 foreach (ChartObject mapObject in mapObjects)
                 {
                     OperatorWidget tmpOpw = null;
-
                     if (mapObject is Topic && ((Topic)mapObject).IsRoot)
                     {
                         return;
                     }
-                    if(mapObject is Topic)
+                    if (mapObject is Topic)
                     {
                         //因为删除的时候直接remove，需要手动遍历所有孩子节点的算子挂件
                         Topic tmpTopic = (Topic)mapObject;
-                        foreach(Topic ct in tmpTopic.GetAllChildren())
+                        foreach (Topic ct in tmpTopic.GetAllChildren())
                         {
                             tmpOpw = ct.FindWidget<OperatorWidget>();
                             CloseRelateOpTab(tmpOpw);
                         }
                     }
-                    else if(mapObject is OperatorWidget)
+                    else if (mapObject is OperatorWidget)
                     {
                         tmpOpw = (OperatorWidget)mapObject;
                         CloseRelateOpTab(tmpOpw);
+                    }
+                    else if (mapObject is DataSourceWidget)
+                    {
+                        DelAllItems((Topic)mapObject.Container, ((DataSourceWidget)mapObject).DataItems);
+                    }
+                    else if (mapObject is ResultWidget)
+                    {
+                        DelAllItems((Topic)mapObject.Container, ((ResultWidget)mapObject).DataItems);
                     }
                 }
 
@@ -129,7 +137,13 @@ namespace C2.Controls.MapViews
                 ExecuteCommand(command);
             }
         }
-
+        private void DelAllItems(Topic topic,List<DataItem> dataItems)
+        {
+            foreach(DataItem dataItem in dataItems)
+            {
+                TopicUpdate(topic, dataItem);
+            }
+        }
         private void CloseRelateOpTab(OperatorWidget tmpOpw)
         {
             if (tmpOpw != null && tmpOpw.HasModelOperator && tmpOpw.ModelRelateTab !=null && Global.GetMainForm().TaskBar.Items.Contains(tmpOpw.ModelRelateTab))
