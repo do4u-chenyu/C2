@@ -170,6 +170,12 @@ namespace C2.Controls.Left
         {
             if (this.textBox.Text.Trim().Length == 0)
                 this.textBox.Text = this.oldTextString;
+
+            if (this.textBox.Text.Length > 125)
+            {
+                this.textBox.Text = this.oldTextString;
+                MessageBox.Show("重命名内容过长,超过125个字节.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             this.textBox.ReadOnly = true;
             this.textBox.Visible = false;
             this.txtButton.Visible = true;
