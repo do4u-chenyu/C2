@@ -325,7 +325,7 @@ namespace C2.Controls.MapViews
                     if (w is ProgressBarWidget || (w is PictureWidget && (w as PictureWidget).SizeType != PictureSizeType.Customize))
                         w.Bounds = rw;
                     else
-                        w.Bounds = new Rectangle(rw.X,rw.Y+(rw.Height-20)/2,20,20);
+                        w.Bounds = new Rectangle(rw.X, rw.Y + (rw.Height - 20) / 2, 20, 20);
                 }
             }
             else if (alignment == WidgetAlignment.Top || alignment == WidgetAlignment.Bottom)
@@ -361,7 +361,11 @@ namespace C2.Controls.MapViews
                         dx += rw.Width + widgetPadding;
                     }
 
-                    w.Bounds = rw;
+                    //w.Bounds = rw;
+                    if (w is ProgressBarWidget || (w is PictureWidget && (w as PictureWidget).SizeType != PictureSizeType.Customize))
+                        w.Bounds = rw;
+                    else
+                        w.Bounds = new Rectangle(rw.X + (rw.Width - 20) / 2, rw.Y, 20, 20);
                 }
             }
         }
