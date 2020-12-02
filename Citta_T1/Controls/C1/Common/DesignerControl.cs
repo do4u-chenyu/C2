@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace C2.Controls.Common
 {
-    public partial class DesignerControl : BorderPanel
+    public partial class DesignerControl: UserControl
     {
         private Topic _SelectedTopic;
         ToolTip DcToolTip;
@@ -173,9 +173,10 @@ namespace C2.Controls.Common
                 return;
             }
 
-            if (!File.Exists(SelectedDataSource.FilePath))
+            string message = FileUtil.FileExistOrUse(SelectedDataSource.FilePath);
+            if (!string.IsNullOrEmpty(message))
             {
-                HelpUtil.ShowMessageBox(SelectedDataSource.FilePath + " 该文件不存在","文件不存在");
+                MessageBox.Show(message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

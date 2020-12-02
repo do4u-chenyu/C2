@@ -114,6 +114,7 @@
             // 
             // DesignerControl
             // 
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.operatorCombo);
             this.Controls.Add(this.topicName);

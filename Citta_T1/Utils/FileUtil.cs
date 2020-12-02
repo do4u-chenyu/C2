@@ -182,6 +182,27 @@ namespace C2.Utils
                 return new string[0];
             }
         }
+        public static string FileExistOrUse(string fullFilePath)
+        {
+            if (!File.Exists(fullFilePath))
+                return fullFilePath + " 该文件不存在";
+
+            FileStream fs = null;
+            try
+            {
+                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
+            }
+            catch
+            {
+                return string.Format("文件{0}可能是空文件或者已被其他应用打开。", fullFilePath);
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Close();
+            }
+            return "";
+        }
 
         public static ReadRst ReadExcel(string fullFilePath, int maxRow, string sheetName = "")
         {

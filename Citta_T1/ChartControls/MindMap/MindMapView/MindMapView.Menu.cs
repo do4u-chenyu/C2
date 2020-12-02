@@ -192,10 +192,14 @@ namespace C2.Controls.MapViews
         }
         void MenuDesignOp_Click(object sender, EventArgs e)
         {
-            if(opw.DataSourceItem != null && !string.IsNullOrEmpty(opw.DataSourceItem.FilePath) && !File.Exists(opw.DataSourceItem.FilePath))
+            if(opw.DataSourceItem != null && !string.IsNullOrEmpty(opw.DataSourceItem.FilePath))
             {
-                HelpUtil.ShowMessageBox(opw.DataSourceItem.FilePath + " 该文件不存在");
-                return;
+                string message = FileUtil.FileExistOrUse(opw.DataSourceItem.FilePath);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    MessageBox.Show(message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
             }
 
             Cursor tempCursor = this.Cursor;
