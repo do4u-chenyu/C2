@@ -272,7 +272,7 @@
             this.Name = "CanvasForm";
             this.Text = "CanvasForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CanvasForm_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CanvasForm_FormClosed);
+            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CanvasForm_FormClosed);
             this.SizeChanged += new System.EventHandler(this.CanvasForm_SizeChanged);
             this.currentModelRunBackLab.ResumeLayout(false);
             this.ResumeLayout(false);

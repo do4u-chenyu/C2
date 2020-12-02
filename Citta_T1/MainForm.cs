@@ -398,6 +398,7 @@ namespace C2
             OperatorWidget opw = topic.FindWidget<OperatorWidget>();
             if(opw != null)
                 opw.ModelRelateTab = TaskBar.SelectedItem;
+            form.Save();
         }
 
         public void LoadCanvasFormByXml(string savePath ,string modelTitle)
