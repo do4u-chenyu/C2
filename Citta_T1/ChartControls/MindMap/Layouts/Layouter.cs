@@ -222,14 +222,29 @@ namespace C2.Controls.MapViews
             {
                 var rectW = new Rectangle(Point.Empty, widget.CalculateSize(e));
                 rectW.Inflate(widget.Padding, widget.Padding);
-                if (widget.CustomWidth.HasValue)
-                    rectW.Width = widget.CustomWidth.Value;
-                if (widget.CustomHeight.HasValue)
-                    rectW.Height = widget.CustomHeight.Value;
-                widget.Bounds = rectW;
 
-                rectW.Width += e.Chart.WidgetMargin;
-                rectW.Height += e.Chart.WidgetMargin;
+                if (widget is ProgressBarWidget || (widget is PictureWidget && (widget as PictureWidget).SizeType != PictureSizeType.Customize))
+                {
+                    if (widget.CustomWidth.HasValue)
+                        rectW.Width = widget.CustomWidth.Value;
+                    if (widget.CustomHeight.HasValue)
+                        rectW.Height = widget.CustomHeight.Value;
+                    widget.Bounds = rectW;
+
+                    rectW.Width += e.Chart.WidgetMargin;
+                    rectW.Height += e.Chart.WidgetMargin;
+                }
+                if (widget is PictureWidget && (widget as PictureWidget).SizeType == PictureSizeType.Customize)
+                {
+                    if (widget.CustomWidth.HasValue)
+                        rectW.Width = 20;
+                    if (widget.CustomHeight.HasValue)
+                        rectW.Height = 20;
+                    widget.Bounds = rectW;
+
+                    rectW.Width += e.Chart.WidgetMargin;
+                    rectW.Height += e.Chart.WidgetMargin;
+                }
 
                 //
                 switch (alignment)
