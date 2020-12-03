@@ -161,7 +161,7 @@ namespace C2.Controls.Common
             }
 
             //模型算子选中时，可以不用选中数据源
-            if ( SelectedDataSource == null || SelectedDataSource.IsEmpty() )
+            if ( SelectedDataSource == null || SelectedDataSource.IsEmpty() || this.dataSourceCombo.SelectedIndex<0)
             {
                 HelpUtil.ShowMessageBox("未选中数据源,请添加后再配置", "未选中数据源");
                 return;
