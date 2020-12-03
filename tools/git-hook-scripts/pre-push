@@ -84,6 +84,7 @@ def main(file_path: str) -> None:
     for path in vs_paths:
         if exists(path):
             compile(path)
+    exit(-5)
 
 
 
