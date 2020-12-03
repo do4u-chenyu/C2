@@ -387,7 +387,7 @@ namespace C2
             {
                 SavePath = Path.Combine(Global.WorkspaceDirectory, this.UserName, "业务视图", mindMapName, modelDocumentName)
             };
-            CanvasForm form = new CanvasForm(doc,topic, mindMapName);
+            CanvasForm form = new CanvasForm(doc,topic, Global.GetDocumentForm());
             ShowForm(form);
 
             List<DataItem> dataItems = new List<DataItem>();
@@ -420,7 +420,7 @@ namespace C2
             {
                 SavePath = Path.Combine(Global.WorkspaceDirectory, this.UserName, "业务视图", mindMapName, modelDocumentName)
             };
-            CanvasForm form = new CanvasForm(doc, topic, mindMapName);
+            CanvasForm form = new CanvasForm(doc, topic, Global.GetDocumentForm());
             ShowForm(form);
 
             doc.Load();

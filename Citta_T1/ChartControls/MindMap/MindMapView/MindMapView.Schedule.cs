@@ -46,16 +46,15 @@ namespace C2.Controls.MapViews
                 {
                     topic.Widgets.Add(new ResultWidget { DataItems = new List<DataItem> { resultItem } });
                     //Global.GetCurrentDocument().Modified = false; //新建了一个挂件，此时文档dirty，需要置false
-                    TopicUpdate(topic, null);
                 }
                 else
                 {
                     //TODO
                     //是否对undo redo有影响
                     rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.SingleOp);
-                    rsw.DataItems.Add(resultItem);
+                    rsw.DataItems.Add(resultItem);                   
                 }
-                
+                TopicUpdate(topic, null);
             }
         }
 
