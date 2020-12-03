@@ -33,6 +33,7 @@ namespace C2.Forms
         private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         private string userName;
         private string mindMapName;
+        private DocumentForm mindMapDoc;
         public CanvasPanel CanvasPanel{ get { return this.canvasPanel; }}
         public RemarkControl RemarkControl {  get { return this.remarkControl; }  }
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
@@ -119,9 +120,10 @@ namespace C2.Forms
             Global.GetMainForm().SetDocumentDirty();
             this.document.RemarkDescription = rc.RemarkDescription;
         }
-        public CanvasForm(ModelDocument document,Topic topic,string mindMapName) : this()
+        public CanvasForm(ModelDocument document,Topic topic,DocumentForm mindMapForm) : this()
         {
-            this.mindMapName = mindMapName;
+            this.mindMapName = mindMapForm.Name;
+            this.mindMapDoc = mindMapForm;
             Document = document;
             RelateTopic = topic;
             FormNameToolTip = string.Format("{0}-{1}-{2}", mindMapName, topic.Text,document.Name);
@@ -504,7 +506,11 @@ namespace C2.Forms
 
             ResultWidget rsw = topic.FindWidget<ResultWidget>();
 
-            //没有挂件且没有结果更新时，直接返回
+            /*
+             * 1、没有挂件且没有结果更新时，直接返回
+             * 2、没有挂件且有结果更新时，新建挂件，add
+             * 3、有挂件,没有单算子结果，没有模型更新的结果，删除
+             */
             if (rsw == null && rsDataItems.Count == 0)
                 return;
             else if (rsw == null)
@@ -512,11 +518,16 @@ namespace C2.Forms
                 rsw = new ResultWidget {  DataItems = rsDataItems  };
                 topic.Add(rsw);
             }
+            else if (rsDataItems.Count == 0 && rsw.DataItems.FindAll(di => di.ResultDataType == DataItem.ResultType.SingleOp).Count == 0)
+            {
+                (rsw.Container as Topic).Widgets.Remove(rsw);
+            }
             else
             {
                 rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.ModelOp);
                 rsw.DataItems.AddRange(rsDataItems);
             }
+            this.mindMapDoc.AddSubWidget(topic);
         }
 
         //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档
