@@ -949,7 +949,7 @@ namespace C2.Forms
             }
 
         }
-        void AddSubWidget(object sob)
+        public void AddSubWidget(object sob)
         {
             var objectType = sob.GetType();
             if (objectType.Name == "Topic")

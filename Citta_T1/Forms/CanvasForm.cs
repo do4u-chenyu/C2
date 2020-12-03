@@ -33,6 +33,7 @@ namespace C2.Forms
         private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         private string userName;
         private string mindMapName;
+        private DocumentForm mindMapDoc;
         public CanvasPanel CanvasPanel{ get { return this.canvasPanel; }}
         public RemarkControl RemarkControl {  get { return this.remarkControl; }  }
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
@@ -119,9 +120,10 @@ namespace C2.Forms
             Global.GetMainForm().SetDocumentDirty();
             this.document.RemarkDescription = rc.RemarkDescription;
         }
-        public CanvasForm(ModelDocument document,Topic topic,string mindMapName) : this()
+        public CanvasForm(ModelDocument document,Topic topic,DocumentForm mindMapForm) : this()
         {
-            this.mindMapName = mindMapName;
+            this.mindMapName = mindMapForm.Name;
+            this.mindMapDoc = mindMapForm;
             Document = document;
             RelateTopic = topic;
             FormNameToolTip = string.Format("{0}-{1}-{2}", mindMapName, topic.Text,document.Name);
@@ -517,6 +519,7 @@ namespace C2.Forms
                 rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.ModelOp);
                 rsw.DataItems.AddRange(rsDataItems);
             }
+            this.mindMapDoc.AddSubWidget(topic);
         }
 
         //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档

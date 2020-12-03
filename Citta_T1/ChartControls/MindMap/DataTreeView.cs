@@ -64,8 +64,15 @@ namespace C2.Controls.MapViews
             if (FindNode(topic) == null)
                 return;
             TreeNodeCollection nodes = FindNode(topic).Nodes;
+            for(int i = nodes.Count-1;i >= 0;i--)
+            {
+                if (nodes[i].ImageIndex == rsDataImage)
+                    nodes[i].Remove();
+            }
+
             DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
             ResultWidget rs      = topic.FindWidget<ResultWidget>();
+
             if (dtw != null)
             {
                 AddWidgetData(nodes, dtw.DataItems,srcDataImage);
