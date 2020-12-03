@@ -424,6 +424,7 @@ namespace C2
             ShowForm(form);
 
             doc.Load();
+            form.RemarkControl.RemarkDescription = doc.RemarkDescription;
             form.CanvasAddElement(doc);
 
             OperatorWidget opw = topic.FindWidget<OperatorWidget>();

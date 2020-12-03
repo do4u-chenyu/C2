@@ -75,7 +75,7 @@ namespace C2.Controls.MapViews
         {
             get
             {
-                return !ReadOnly && Selection.Count > 0 && (SelectedTopic == null || !SelectedTopic.IsRoot);
+                 return !ReadOnly && Selection.Count > 0 && (SelectedTopic == null || !SelectedTopic.IsRoot) && (SelectedObject is Widget && !(SelectedObject is C2BaseWidget));
             }
         }
 
@@ -92,7 +92,7 @@ namespace C2.Controls.MapViews
         {
             if (Selection.Count > 0)
             {
-                Delete(Selection.ToArray());
+                Delete(Selection.FindAll(c => ! (c is C2BaseWidget)).ToArray());
             }
 
         }
