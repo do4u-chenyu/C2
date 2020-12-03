@@ -250,7 +250,7 @@ namespace C2.Controls.MapViews
                 {
                     SubTitleSize = TextRenderer.MeasureText(SubTitle, SystemFonts.MenuFont);
                     SubTitleSize = new Size(SubTitleSize.Width + 2, SubTitleSize.Height + 6);
-                    Bounds.Size = new Size(Math.Max(Bounds.Width, SubTitleSize.Width + 18), Bounds.Height + SubTitleSize.Height);
+                    Bounds.Size = new Size(Math.Max(Bounds.Width, SubTitleSize.Width + SubTitleIcon.Width + 2 * Padding), Bounds.Height + SubTitleSize.Height);
                 }
                 else
                 {

@@ -66,6 +66,7 @@
             this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.lelfPictureBox.TabIndex = 1;
             this.lelfPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.lelfPictureBox, "高级技战法模型");
             // 
             // textButton
             // 
