@@ -264,8 +264,9 @@ namespace C2.Controls.MapViews
         void MenuDeleteSingleOp_Click(object sender, EventArgs e)
         {
             ClearSingleOpContent();
-            if(!opw.HasModelOperator)
-                Delete(new ChartObject[] { opw });
+            if (!opw.HasModelOperator)
+                (opw.Container as Topic).Widgets.Remove(opw);
+                //Delete(new ChartObject[] { opw });
             Global.OnModifiedChange();
         }
         void MenuDeleteModelOp_Click(object sender, EventArgs e)
@@ -274,7 +275,8 @@ namespace C2.Controls.MapViews
             //FileUtil.DeleteDirectory(Path.GetDirectoryName(opw.ModelDataItem.FilePath));
             ClearModelOpContent();
             if (opw.OpType == OpType.Null)
-                Delete(new ChartObject[] { opw });
+                (opw.Container as Topic).Widgets.Remove(opw);
+                //Delete(new ChartObject[] { opw });
             Global.OnModifiedChange();
         }
         private void ClearSingleOpContent()
@@ -336,7 +338,8 @@ namespace C2.Controls.MapViews
             TopicUpdate(dtw.Container,hitItem);
             ShowDesigner(dtw.Container,false);
             if (dtw.DataItems.IsEmpty())
-                Delete(new ChartObject[] { dtw });
+                (dtw.Container as Topic).Widgets.Remove(dtw);
+                //Delete(new ChartObject[] { dtw });
             Global.OnModifiedChange();
         }
 
@@ -347,7 +350,8 @@ namespace C2.Controls.MapViews
             cw.DataItems.Remove(hitItem);
             ShowDesigner(cw.Container,false);
             if (cw.DataItems.IsEmpty())
-                Delete(new ChartObject[] { cw });
+                (cw.Container as Topic).Widgets.Remove(cw);
+                //Delete(new ChartObject[] { cw });
             Global.OnModifiedChange();
         }
 
@@ -468,7 +472,8 @@ namespace C2.Controls.MapViews
             rsw.DataItems.Remove(hitItem);
             TopicUpdate(rsw.Container, hitItem);
             if (rsw.DataItems.IsEmpty())
-                Delete(new ChartObject[] { rsw });
+                (rsw.Container as Topic).Widgets.Remove(rsw);
+                //Delete(new ChartObject[] { rsw });
             Global.OnModifiedChange();
         }
         void MenuJoinPool_Click(object sender, EventArgs e)
@@ -583,7 +588,8 @@ namespace C2.Controls.MapViews
             string ffp = (sender as ToolStripMenuItem).Tag as string;
             atw.AttachmentPaths.Remove(ffp);           
             if (atw.AttachmentPaths.IsEmpty())
-                Delete(new ChartObject[] { atw });
+                (atw.Container as Topic).Widgets.Remove(atw);
+                //Delete(new ChartObject[] { atw });
         }
         #endregion
     }
