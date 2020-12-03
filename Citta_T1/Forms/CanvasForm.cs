@@ -504,13 +504,21 @@ namespace C2.Forms
 
             ResultWidget rsw = topic.FindWidget<ResultWidget>();
 
-            //没有挂件且没有结果更新时，直接返回
+            /*
+             * 1、没有挂件且没有结果更新时，直接返回
+             * 2、没有挂件且有结果更新时，新建挂件，add
+             * 3、有挂件,没有单算子结果，没有模型更新的结果，删除
+             */
             if (rsw == null && rsDataItems.Count == 0)
                 return;
             else if (rsw == null)
             {
                 rsw = new ResultWidget {  DataItems = rsDataItems  };
                 topic.Add(rsw);
+            }
+            else if (rsDataItems.Count == 0 && rsw.DataItems.FindAll(di => di.ResultDataType == DataItem.ResultType.SingleOp).Count == 0)
+            {
+                (rsw.Container as Topic).Widgets.Remove(rsw);
             }
             else
             {
