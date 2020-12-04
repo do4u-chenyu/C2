@@ -189,6 +189,10 @@ namespace C2.Controls
 
             }
 
+            form.TextChanged += new EventHandler(Form_TextChanged);
+            form.Activated += new EventHandler(Form_Activated);
+            form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+
             if (MdiClient != null)
             {
                 MdiClient.ShowMdiForm(form);
@@ -202,10 +206,7 @@ namespace C2.Controls
                 form.Show();
             }
 
-            form.TextChanged += new EventHandler(Form_TextChanged);
-            form.Activated += new EventHandler(Form_Activated);
-            form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
-            Global.GetBottomViewPanel().Visible = !(Global.GetMainForm().MdiClient.ActivedMdiForm is StartForm);
+
             if (!Forms.Contains(form))
             {
                 Forms.Add(form);
@@ -335,7 +336,8 @@ namespace C2.Controls
         {
             if (MdiClient != null)
             {
-                MdiClient.ActiveMdiForm(SelectedForm);            
+                MdiClient.ActiveMdiForm(SelectedForm);
+                Global.GetBottomViewPanel().Visible = !(Global.GetMainForm().MdiClient.ActivedMdiForm is StartForm);
             }
         }
     }
