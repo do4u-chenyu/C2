@@ -407,11 +407,11 @@ namespace C2
             {
                 SavePath = Path.Combine(savePath, modelTitle)
             };
-            CanvasForm form = new CanvasForm(doc);         
-            ShowForm(form);
+            CanvasForm form = new CanvasForm(doc);
             doc.Load();
-            form.RemarkControl.RemarkDescription = doc.RemarkDescription;
             form.CanvasAddElement(doc);
+            ShowForm(form);
+            form.RemarkControl.RemarkDescription = doc.RemarkDescription;
         }
 
         public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
