@@ -152,8 +152,7 @@ namespace C2.Controls.MapViews
                 DialogResult dialogResult = createNewModelForm.ShowDialog();
                 if (dialogResult != DialogResult.OK)
                     return;
-                //新建模型前保存一次，防止出现用户一直未保存导致模型视图路径逻辑出错
-                Global.GetDocumentForm().Save();
+
 
                 // 新建模型视图
                 string modelDocumentName = createNewModelForm.ModelTitle;
@@ -178,6 +177,8 @@ namespace C2.Controls.MapViews
                     opw.ModelDataItem = modelDataItem;
                     Global.GetCurrentDocument().Modified = true;
                 }
+                //新建模型前保存一次，防止出现用户一直未保存导致模型视图路径逻辑出错
+                Global.GetDocumentForm().Save();
 
                 Global.GetMainForm().NewCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
             }
