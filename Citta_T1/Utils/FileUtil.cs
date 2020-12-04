@@ -80,21 +80,32 @@ namespace C2.Utils
             return ret;
         }
         public static void ExploreDirectory(string fullFilePath)
-        {
-            try
+        {//判断文件的存在
+            if (System.IO.File.Exists(fullFilePath))
             {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo
+                //存在文件
+                try
                 {
-                    FileName = "explorer.exe",  //资源管理器
-                    Arguments = "/e,/select," + fullFilePath
-                };
-                Process.Start(processStartInfo);
+                    ProcessStartInfo processStartInfo = new ProcessStartInfo
+                    {
+                        FileName = "explorer.exe",  //资源管理器
+                        Arguments = "/e,/select," + fullFilePath
+                    };
+                    Process.Start(processStartInfo);
+                }
+                catch (Exception)
+                {
+                    //某些机器直接打开文档目录会报“拒绝访问”错误，此时换一种打开方式
+                    FileUtil.AnotherOpenFilePathMethod(fullFilePath);
+                }
             }
-            catch (Exception)
+            else
             {
-                //某些机器直接打开文档目录会报“拒绝访问”错误，此时换一种打开方式
-                FileUtil.AnotherOpenFilePathMethod(fullFilePath);
+                //不存在文件
+                HelpUtil.ShowMessageBox("该文件已被删除!");
+
             }
+            
         }
 
 
