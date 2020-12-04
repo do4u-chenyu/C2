@@ -165,23 +165,6 @@ namespace C2.Controls
             if (form == null)
                 throw new ArgumentNullException();
 
-            if (MdiClient != null)
-            {
-                MdiClient.ShowMdiForm(form);
-            }
-            else if (IsMdiContainer)
-            {
-                form.MdiParent = this;
-                form.WindowState = FormWindowState.Maximized;
-                //form.FormBorderStyle = FormBorderStyle.None;
-                form.ControlBox = false;
-                form.Show();
-            }
-
-            form.TextChanged += new EventHandler(Form_TextChanged);
-            form.Activated += new EventHandler(Form_Activated);
-            form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
-
             if (showTab && TaskBar != null)
             {
                 var ti = new TabItem();
@@ -203,12 +186,31 @@ namespace C2.Controls
                     TaskBar.Items.Add(ti);
 
                 TaskBar.SelectedItem = ti;
+
             }
 
+            if (MdiClient != null)
+            {
+                MdiClient.ShowMdiForm(form);
+            }
+            else if (IsMdiContainer)
+            {
+                form.MdiParent = this;
+                form.WindowState = FormWindowState.Maximized;
+                //form.FormBorderStyle = FormBorderStyle.None;
+                form.ControlBox = false;
+                form.Show();
+            }
+
+            form.TextChanged += new EventHandler(Form_TextChanged);
+            form.Activated += new EventHandler(Form_Activated);
+            form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+            Global.GetBottomViewPanel().Visible = !(Global.GetMainForm().MdiClient.ActivedMdiForm is StartForm);
             if (!Forms.Contains(form))
             {
                 Forms.Add(form);
             }
+            
         }
 
         protected void ComfirmSaveDocuments(ref bool cancel)
@@ -333,8 +335,7 @@ namespace C2.Controls
         {
             if (MdiClient != null)
             {
-                MdiClient.ActiveMdiForm(SelectedForm);
-                Global.GetBottomViewPanel().Visible = !(Global.GetMainForm().MdiClient.ActivedMdiForm is StartForm);
+                MdiClient.ActiveMdiForm(SelectedForm);            
             }
         }
     }
