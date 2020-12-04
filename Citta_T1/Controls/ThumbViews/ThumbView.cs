@@ -62,7 +62,7 @@ namespace C2.Controls
             Items.Add(new ThumbItem("QQ视频模型", global::C2.Properties.Resources.dbnet, ThumbItem.ModelTypes.Model));
             Items.Add(new ThumbItem("微信接单模型", global::C2.Properties.Resources.gunLuntan, ThumbItem.ModelTypes.Model));
             Items.Add(new ThumbItem("公交色狼模型", global::C2.Properties.Resources.yellowGroup, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem("赌博网站模型", global::C2.Properties.Resources.bank, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("地下钱庄线索发现", global::C2.Properties.Resources.bank, ThumbItem.ModelTypes.Model));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.modelTopLabel, ThumbItem.ModelTypes.Null));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.BusinessViewLabel, ThumbItem.ModelTypes.Null));
         }
