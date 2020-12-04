@@ -60,16 +60,16 @@ namespace C2.Controls.Left
             Global.GetMainForm().ShowBottomPanel();
         }
 
-        private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.textBox.ReadOnly = false;
-            this.oldTextString = DataSourceName;
-            this.textBox.Text = DataSourceName;
-            this.txtButton.Visible = false;
-            this.textBox.Visible = true;
-            this.textBox.Focus();//获取焦点
-            this.textBox.Select(this.textBox.TextLength, 0);
-        }
+        //private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    this.textBox.ReadOnly = false;
+        //    this.oldTextString = DataSourceName;
+        //    this.textBox.Text = DataSourceName;
+        //    this.txtButton.Visible = false;
+        //    this.textBox.Visible = true;
+        //    this.textBox.Focus();//获取焦点
+        //    this.textBox.Select(this.textBox.TextLength, 0);
+        //}
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -146,10 +146,10 @@ namespace C2.Controls.Left
                 dragDropData.SetData("Encoding", Encoding);
                 this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
-            else if (e.Clicks == 2)
-            {   // 双击改名 
-                RenameToolStripMenuItem_Click(sender, e);
-            }
+            //else if (e.Clicks == 2)
+            //{   // 双击改名 
+            //    RenameToolStripMenuItem_Click(sender, e);
+            //}
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
