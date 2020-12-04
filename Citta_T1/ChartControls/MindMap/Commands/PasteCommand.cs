@@ -150,17 +150,24 @@ namespace C2.Controls.MapViews
                     {
                         var t = (Topic)co;
                         target.Children.Add(t);//增加节点
-                        List<Widget> widgets = new List<Widget>();
                         t.Widgets.RemoveAll(w => w is C2BaseWidget);
-
                         for (int j = t.Links.Count - 1; j >= 0; j--)
                         {
                             Link line = t.Links[j];
-                            if (newids.ContainsKey(line.TargetID))
-                                line.TargetID = (string)newids[line.TargetID];
-                            else
-                                t.Links.Remove(line);
+                            t.Links.Remove(line);
                         }
+
+                        //t的所有子孙节点也要移除C2挂件、link
+                        foreach (Topic ct in t.GetAllChildren())
+                        {
+                            ct.Widgets.RemoveAll(w => w is C2BaseWidget);
+                            for (int j = ct.Links.Count - 1; j >= 0; j--)
+                            {
+                                Link line = ct.Links[j];
+                                ct.Links.Remove(line);
+                            }
+                        }
+
                     }
                     else if (!(co is C2BaseWidget))
                     {
