@@ -704,8 +704,6 @@ namespace C2.ChartPageView
 
         void MenuAddModelOp_Click(object sender, EventArgs e)
         {
-            //TODO
-            //跳到C1模型,待做  新建模型的名称、是否主动添加当前节点数据到模型中
             mindMapView1.AddModelOp();
         }
 

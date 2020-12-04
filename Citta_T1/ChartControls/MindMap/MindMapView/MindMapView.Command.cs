@@ -75,7 +75,12 @@ namespace C2.Controls.MapViews
         {
             get
             {
-                 return !ReadOnly && Selection.Count > 0 && (SelectedTopic == null || !SelectedTopic.IsRoot) && (SelectedObject is Widget && !(SelectedObject is C2BaseWidget));
+                if (!ReadOnly && Selection.Count > 0 && (SelectedTopic == null || !SelectedTopic.IsRoot) && !(SelectedObject is Widget))
+                    return true;
+                else if (SelectedObject is Widget && !(SelectedObject is C2BaseWidget))
+                    return true;
+                else
+                    return false;
             }
         }
 
@@ -112,6 +117,7 @@ namespace C2.Controls.MapViews
                     {
                         //因为删除的时候直接remove，需要手动遍历所有孩子节点的算子挂件
                         Topic tmpTopic = (Topic)mapObject;
+                        CloseRelateOpTab(tmpTopic.FindWidget<OperatorWidget>());
                         foreach (Topic ct in tmpTopic.GetAllChildren())
                         {
                             tmpOpw = ct.FindWidget<OperatorWidget>();
@@ -159,7 +165,7 @@ namespace C2.Controls.MapViews
             }
             else if (SelectedObject is Widget)// && ((Widget)SelectedObject).CanCopy)
             {
-                var widgets = SelectedObjects.Where(w=> w is NoteWidget || w is PictureWidget || w is ProgressBarWidget).ToArray();
+                var widgets = SelectedObjects.Where(w=> !(w is C2BaseWidget)).ToArray();
                 if (widgets.Count() == 0)
                     return;
                 Copy(widgets, false);
