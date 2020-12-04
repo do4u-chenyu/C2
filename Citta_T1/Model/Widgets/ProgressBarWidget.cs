@@ -195,9 +195,14 @@ namespace C2.Model.Widgets
         }
 
         protected virtual void OnValueChanged(float old)
-        {
-            OnPropertyChanged("Value", old, _Value, ChangeTypes.Data | ChangeTypes.Visual);
+        {   if (_Value >= 0)
+                OnPropertyChanged("Value", old, _Value, ChangeTypes.Data | ChangeTypes.Visual);
+            else
+            {
+                _Value = -_Value;
+                OnPropertyChanged("Value", old, _Value, ChangeTypes.Data | ChangeTypes.Visual);
 
+            }
             NotifyParentAutoCalculation(null);
         }
 
