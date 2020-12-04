@@ -111,10 +111,10 @@ namespace C2.Controls.DataCharts
                         y_double.Add(0);
                         count++;
                     }
-                    if (y.Count == count)
-                    {
-                        EmptyInput = true;
-                    }
+                }
+                if (y.Count == count)
+                {
+                    EmptyInput = true;
                 }
                 chart1.Series[0].Points.DataBindXY(x, y_double);
                 //chart1.Series[0].Points[0].Color = Color.White;
