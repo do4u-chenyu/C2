@@ -234,7 +234,7 @@ namespace C2.Controls.MapViews
                     rectW.Width += e.Chart.WidgetMargin;
                     rectW.Height += e.Chart.WidgetMargin;
                 }
-                if (widget is PictureWidget && (widget as PictureWidget).SizeType == PictureSizeType.Customize)
+                else
                 {
                     if (widget.CustomWidth.HasValue)
                         rectW.Width = 20;
@@ -245,6 +245,7 @@ namespace C2.Controls.MapViews
                     rectW.Width += e.Chart.WidgetMargin;
                     rectW.Height += e.Chart.WidgetMargin;
                 }
+                
 
                 //
                 switch (alignment)
@@ -322,7 +323,9 @@ namespace C2.Controls.MapViews
                     if (w.FitContainer)
                     {
                         rw.X = x;
+
                         rw.Y = rect.Y + e.Chart.WidgetMargin +(rect.Height-w.Height)/2;
+                        //rw.Y = rect.Y + e.Chart.WidgetMargin;
                         rw.Height = w.Height - e.Chart.WidgetMargin * 2;
                         x += rw.Width + e.Chart.WidgetMargin;
                     }
@@ -360,6 +363,7 @@ namespace C2.Controls.MapViews
                     if (w.FitContainer)
                     {
                         rw.X = rect.X + e.Chart.WidgetMargin+(rect.Width-w.Width)/2;
+                        //rw.X = rect.X + e.Chart.WidgetMargin;
                         rw.Y = y;
                         rw.Width = w.Width - e.Chart.WidgetMargin * 2;
                         y += rw.Height + e.Chart.WidgetMargin;
