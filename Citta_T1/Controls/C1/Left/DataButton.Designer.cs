@@ -36,7 +36,6 @@ namespace C2.Controls.Left
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ReviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.RefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,7 +74,6 @@ namespace C2.Controls.Left
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(22, 22);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ReviewToolStripMenuItem,
-            this.RenameToolStripMenuItem,
             this.RemoveToolStripMenuItem,
             this.toolStripSeparator1,
             this.RefreshToolStripMenuItem,
@@ -92,13 +90,6 @@ namespace C2.Controls.Left
             this.ReviewToolStripMenuItem.Text = "预览";
             this.ReviewToolStripMenuItem.ToolTipText = "预览数据源部分信息";
             this.ReviewToolStripMenuItem.Click += new System.EventHandler(this.ReviewToolStripMenuItem_Click);
-            // 
-            // RenameToolStripMenuItem
-            // 
-            this.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem";
-            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.RenameToolStripMenuItem.Text = "重命名";
-            this.RenameToolStripMenuItem.Click += new System.EventHandler(this.RenameToolStripMenuItem_Click);
             // 
             // RemoveToolStripMenuItem
             // 
@@ -195,7 +186,6 @@ namespace C2.Controls.Left
         private System.Windows.Forms.ToolTip helpToolTip;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ReviewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RenameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RemoveToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
