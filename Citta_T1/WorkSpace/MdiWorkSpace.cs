@@ -63,7 +63,6 @@ namespace C2.WorkSpace
             form.Dock = DockStyle.Fill;
             form.Activated += new EventHandler(MdiForm_Activated);
             form.FormClosed += new FormClosedEventHandler(MdiForm_FormClosed);
-
             Controls.Add(form);
             ActiveMdiForm(form);
         }

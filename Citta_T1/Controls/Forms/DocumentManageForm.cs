@@ -165,23 +165,6 @@ namespace C2.Controls
             if (form == null)
                 throw new ArgumentNullException();
 
-            if (MdiClient != null)
-            {
-                MdiClient.ShowMdiForm(form);
-            }
-            else if (IsMdiContainer)
-            {
-                form.MdiParent = this;
-                form.WindowState = FormWindowState.Maximized;
-                //form.FormBorderStyle = FormBorderStyle.None;
-                form.ControlBox = false;
-                form.Show();
-            }
-
-            form.TextChanged += new EventHandler(Form_TextChanged);
-            form.Activated += new EventHandler(Form_Activated);
-            form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
-
             if (showTab && TaskBar != null)
             {
                 var ti = new TabItem();
@@ -203,12 +186,32 @@ namespace C2.Controls
                     TaskBar.Items.Add(ti);
 
                 TaskBar.SelectedItem = ti;
+
             }
+
+            form.TextChanged += new EventHandler(Form_TextChanged);
+            form.Activated += new EventHandler(Form_Activated);
+            form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+
+            if (MdiClient != null)
+            {
+                MdiClient.ShowMdiForm(form);
+            }
+            else if (IsMdiContainer)
+            {
+                form.MdiParent = this;
+                form.WindowState = FormWindowState.Maximized;
+                //form.FormBorderStyle = FormBorderStyle.None;
+                form.ControlBox = false;
+                form.Show();
+            }
+
 
             if (!Forms.Contains(form))
             {
                 Forms.Add(form);
             }
+            
         }
 
         protected void ComfirmSaveDocuments(ref bool cancel)
