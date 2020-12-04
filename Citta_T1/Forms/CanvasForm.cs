@@ -122,7 +122,7 @@ namespace C2.Forms
         }
         public CanvasForm(ModelDocument document,Topic topic,DocumentForm mindMapForm) : this()
         {
-            this.mindMapName = mindMapForm.Name;
+            this.mindMapName = mindMapForm.Document.Name;
             this.mindMapDoc = mindMapForm;
             Document = document;
             RelateTopic = topic;
