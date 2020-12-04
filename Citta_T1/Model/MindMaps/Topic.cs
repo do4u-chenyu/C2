@@ -738,10 +738,10 @@ namespace C2.Model.MindMaps
 
         void Links_ItemRemoved(object sender, XListEventArgs<Link> e)
         {
-            if (e.Item != null && e.Item.From == this)
-            {
-                e.Item.From = null;
-            }
+            //if (e.Item != null && e.Item.From == this)
+            //{
+            //    e.Item.From = null;
+            //}
 
             if (MindMap != null)
             {

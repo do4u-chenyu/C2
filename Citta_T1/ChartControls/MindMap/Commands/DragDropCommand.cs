@@ -18,6 +18,7 @@ namespace C2.Controls.MapViews
         DragTopicsMethod DragDropMethod;
         Dictionary<ChartObject, object> Parents;
         Dictionary<ChartObject, int> Indices;
+        Dictionary<ChartObject, List<Link>> Links;
         ChartObject[] NewObjects;
 
         public DragDropCommand(Document document, IEnumerable<ChartObject> objects, Topic target, DragTopicsMethod method)
@@ -50,7 +51,7 @@ namespace C2.Controls.MapViews
                     NewObjects = null;
                     return true;
                 case DragTopicsMethod.Move:
-                    return DeleteCommand.UndeleteObjects(DragObjects, Parents, Indices);
+                    return DeleteCommand.UndeleteObjects(DragObjects, Parents, Indices, Links, true);
                 default:
                     return false;
             }
@@ -66,7 +67,7 @@ namespace C2.Controls.MapViews
 
             Parents = new Dictionary<ChartObject, object>();
             Indices = new Dictionary<ChartObject, int>();
-                        
+            Links = new Dictionary<ChartObject, List<Link>>();
             switch (DragDropMethod)
             {
                 case DragTopicsMethod.Copy:
@@ -75,11 +76,12 @@ namespace C2.Controls.MapViews
                     AfterSelection = NewObjects;
                     return true;
                 case DragTopicsMethod.Move:
-                    if (DeleteCommand.DeleteObjects(DragObjects, Parents, Indices))
+                    if (DeleteCommand.DeleteObjects(DragObjects, Parents, Indices, Links,true))
                     {
                         foreach (var co in DragObjects)
                         {
                             co.Parent = Target;
+
                         }
                         AfterSelection = DragObjects;
                         return true;

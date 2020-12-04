@@ -41,7 +41,17 @@ namespace C2.Controls.MapViews
         }
         public override bool Redo()
         {
-            return Execute();
+            if (Topics == null || Topics.Length == 0 || Widgets == null || Widgets.Length != Topics.Length)
+                return false;
+            for (int i = 0; i < Topics.Length; i++)
+            {
+                //恢复的时候给每一个topic添加widget
+                Topic topic = Topics[i];
+                if (!topic.Widgets.Contains(Widgets[i]))
+                    topic.Widgets.Add(Widgets[i]);
+            }
+
+            return true;
         }
         public override bool Execute()
         {
