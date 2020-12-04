@@ -50,6 +50,11 @@
             // 
             // IaoModelPanel
             // 
+            this.IaoModelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.IaoModelPanel.AutoScroll = true;
+            this.IaoModelPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.IaoModelPanel.BackColor = System.Drawing.Color.White;
             this.IaoModelPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IaoModelPanel.Controls.Add(this.PointLabel);
