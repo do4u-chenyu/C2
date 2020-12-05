@@ -18,7 +18,7 @@ namespace C2.Controls.Left
         public OpUtil.ExtType ExtType { get => extType; set => extType = value; }
         public char Separator { get => separator; set => separator = value; }
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
-        public string DataSourceName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
+        public string DataSourceName { get; set; }
         public int Count { get => this.count; set => this.count = value; }
         private static string DataButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
@@ -27,11 +27,12 @@ namespace C2.Controls.Left
         {
             InitializeComponent();
             txtButton.Name = ffp;
-            txtButton.Text = dataSourceName;
+            txtButton.Text = Utils.FileUtil.ReName(dataSourceName);
             this.separator = separator;
             this.extType = extType;
             this.encoding = encoding;
-            this.oldTextString = txtButton.Text;
+            this.oldTextString = dataSourceName;
+            DataSourceName = dataSourceName;
         }
 
         private void DataButton_Load(object sender, EventArgs e)
@@ -181,8 +182,8 @@ namespace C2.Controls.Left
             this.txtButton.Visible = true;
             if (this.oldTextString == this.textBox.Text)
                 return;
-
-            this.txtButton.Text = this.textBox.Text;
+            DataSourceName = this.textBox.Text;
+            this.txtButton.Text = Utils.FileUtil.ReName(this.textBox.Text);
             if (this.oldTextString != this.textBox.Text)
             {
                 this.oldTextString = this.textBox.Text;

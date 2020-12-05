@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace C2.Utils
@@ -388,6 +389,25 @@ namespace C2.Utils
                 }
             }
             return false;
+        }
+        public static string ReName(string name)
+        {
+            string newName;
+            int maxLength = 6;
+
+            if (name.Length <= maxLength)
+            {
+                return name;
+            }
+
+            int specialChars = Regex.Matches(name.Substring(0, maxLength), "[a-zA-Z0-9* \\ / $  + - & % # ! ~ `   \\t \\n \\r :]").Count;
+            if (specialChars < 4)
+                newName = name.Substring(0, maxLength);
+            else
+            {
+                newName = name.Substring(0, Math.Min(8, name.Length));
+            }
+            return newName;
         }
         public static bool NameTooLong(string userName, string target)
         {
