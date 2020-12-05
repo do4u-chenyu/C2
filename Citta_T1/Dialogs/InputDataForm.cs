@@ -377,5 +377,10 @@ namespace C2.Dialogs
                 this.dataGridView1.RowHeadersDefaultCellStyle.ForeColor,
                 TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
+
+        private void InputDataForm_Load(object sender, EventArgs e)
+        {
+            this.textBox1.Text = "请输入数据名称";
+        }
     }
 }
