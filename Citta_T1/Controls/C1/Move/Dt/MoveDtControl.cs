@@ -261,7 +261,7 @@ namespace C2.Controls.Move.Dt
             if (f != 1)
                 pading += 1;
             this.Size = new Size((int)(controlSize.Width * f), (int)(controlSize.Height * f));
-            this.rightPictureBox.Location = new Point(this.Width - (int)(25 * f), (int)(5 * f)+2);
+            this.rightPictureBox.Location = new Point(this.Width - (int)(25 * f), (int)(5 * f) + 2);
             this.rectOut.Location = new Point(this.Width - (int)(10 * f), (int)(10 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
             this.textBox.Size = new Size((int)(txtWidth * f), this.Height - (int)(4 * f));
