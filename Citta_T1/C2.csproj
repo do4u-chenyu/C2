@@ -187,9 +187,6 @@
     <Compile Include="Controls\DataCharts\LineChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataCharts\LineChart.Designer.cs">
-      <DependentUpon>LineChart.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DataCharts\PieChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1360,9 +1357,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\HorizontalBar3D.resx">
       <DependentUpon>HorizontalBar3D.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DataCharts\LineChart.resx">
-      <DependentUpon>LineChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\PieChart.resx">
       <DependentUpon>PieChart.cs</DependentUpon>
