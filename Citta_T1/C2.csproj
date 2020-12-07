@@ -180,8 +180,9 @@
     <Compile Include="Controls\DataCharts\BarChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataCharts\BarChart.Designer.cs">
-      <DependentUpon>BarChart.cs</DependentUpon>
+    <Compile Include="Controls\DataCharts\BaseChart.cs" />
+    <Compile Include="Controls\DataCharts\BaseChart.Designer.cs">
+      <DependentUpon>BaseChart.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataCharts\LineChart.cs">
       <SubType>UserControl</SubType>
@@ -1354,8 +1355,8 @@
     <EmbeddedResource Include="Controls\C1\Left\IaoModelControl.resx">
       <DependentUpon>IaoModelControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DataCharts\BarChart.resx">
-      <DependentUpon>BarChart.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\DataCharts\BaseChart.resx">
+      <DependentUpon>BaseChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\HorizontalBar3D.resx">
       <DependentUpon>HorizontalBar3D.cs</DependentUpon>

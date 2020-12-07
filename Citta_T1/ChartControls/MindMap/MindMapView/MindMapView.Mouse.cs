@@ -471,7 +471,7 @@ namespace C2.Controls.MapViews
         protected override void OnChartDoubleClick(EventArgs e)
         {
             base.OnChartDoubleClick(e);
-
+            
             //
             if (EditMode)
             {
@@ -479,6 +479,7 @@ namespace C2.Controls.MapViews
             }
             else
             {
+                
                 var hr = HitTest(ChartMouseDownPoint.X, ChartMouseDownPoint.Y);
                 if (!hr.IsEmpty && !hr.IsFoldingButton)
                 {
