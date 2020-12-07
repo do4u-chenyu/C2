@@ -2008,7 +2008,10 @@
     <Content Include="Resources\PictureIconLib\179_支付.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\197_开锁.png">
+    <Content Include="Resources\PictureIconLib\195_开锁.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\197_原因.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\198_时间.png">
@@ -2392,10 +2395,16 @@
     <Content Include="Resources\PictureIconLib\89_人员管控.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\93_人员伴随.png">
+    <Content Include="Resources\PictureIconLib\90_人员伴随.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\95_人物画像.png">
+    <Content Include="Resources\PictureIconLib\92_人物画像.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\94_分析任务.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PictureIconLib\95_取证分析.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\96_态势分析.png">
