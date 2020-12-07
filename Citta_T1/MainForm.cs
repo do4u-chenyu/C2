@@ -167,6 +167,7 @@ namespace C2
             Global.SetMyModelControl(this.myModelControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
+            Global.SetWorkSpacePanel(this.workSpacePanel);
             Global.SetMindMapModelControl(this.mindMapModelControl);
         }
         void InitializeMdiClient()

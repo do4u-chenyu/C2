@@ -206,7 +206,7 @@ namespace C2.Controls
                 form.Show();
             }
 
-
+            Global.GetWorkSpacePanel().ResumeLayout();
             if (!Forms.Contains(form))
             {
                 Forms.Add(form);
@@ -336,6 +336,7 @@ namespace C2.Controls
         {
             if (MdiClient != null)
             {
+                Global.GetWorkSpacePanel().SuspendLayout();
                 MdiClient.ActiveMdiForm(SelectedForm);
                 Global.GetBottomViewPanel().Visible = !(Global.GetMainForm().MdiClient.ActivedMdiForm is StartForm);
             }
