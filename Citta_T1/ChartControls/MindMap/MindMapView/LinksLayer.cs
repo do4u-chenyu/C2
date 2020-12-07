@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -122,6 +123,7 @@ namespace C2.Controls.MapViews
             if (!old.IsEmpty)
             {
                 old.Link.PropertyChanged -= new C2.Core.PropertyChangedEventHandler(Line_Changed);
+                old.Link.RelateTopicChanged -= new EventHandler(Line_RelateTopicChanged);
                 InvalidateLink(old.Link, true);
             }
 
@@ -131,6 +133,7 @@ namespace C2.Controls.MapViews
                 View.Select(SelectedObject.Link);
 
                 SelectedObject.Link.PropertyChanged += new C2.Core.PropertyChangedEventHandler(Line_Changed);
+                SelectedObject.Link.RelateTopicChanged += new EventHandler(Line_RelateTopicChanged);
                 InvalidateLink(SelectedObject.Link, true);
             }
             else
@@ -472,6 +475,15 @@ namespace C2.Controls.MapViews
             Brush brush =  new SolidBrush(hover ? color : Color.FromArgb(180, color));
             PaintHelper.FillDot(graphics, brush, point, ControlHandleSize);
             PaintHelper.DrawDot(graphics, PenLine, point, ControlHandleSize);
+        }
+
+        void Line_RelateTopicChanged(object sender, EventArgs e)
+        {
+            if (!SelectedObject.IsEmpty)
+            {
+                TempLayout = SelectedObject.Link.LayoutData;
+                InvalidateLink(SelectedObject.Link, true);
+            }
         }
 
         void Line_Changed(object sender, C2.Core.PropertyChangedEventArgs e)

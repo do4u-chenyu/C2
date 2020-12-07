@@ -36,6 +36,7 @@ namespace C2.Model.MindMaps
         LineAnchor _EndCap = LineAnchor.Arrow;
 
         //public event EventHandler VisibleChanged;
+        public event EventHandler RelateTopicChanged;
 
         public Link()
         {
@@ -240,7 +241,7 @@ namespace C2.Model.MindMaps
         [Browsable(false)]
         public bool Visible
         {
-            get { return From != null && Target != null && From != Target && From.Visible && Target.Visible; }
+            get { return From != null && Target != null && From != Target && From.Links.Contains(this) &&From.Visible && Target.Visible; }
         }
 
         public Point[] GetBezierPoints()
@@ -277,7 +278,15 @@ namespace C2.Model.MindMaps
         }
 
         #endregion
-        
+
+        private void OnRelateTopicChanged()
+        {
+            if (RelateTopicChanged != null)
+            {
+                RelateTopicChanged(this, EventArgs.Empty);
+            }
+        }
+
         private void OnFromChanged(Topic old)
         {
             if (old != null && old.Links.Contains(this))
@@ -296,6 +305,7 @@ namespace C2.Model.MindMaps
             }
 
             OnVisibleChanged();
+            OnRelateTopicChanged();
         }
 
         private void OnTargetChanged()
@@ -303,6 +313,7 @@ namespace C2.Model.MindMaps
             //RefreshLayout();
 
             OnVisibleChanged();
+            OnRelateTopicChanged();
         }
 
         //private void OnChanged()
