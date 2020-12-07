@@ -205,12 +205,18 @@ namespace C2.Controls.MapViews
                         case BezierPoint.StartPoint:
                             topic = View.GetTopicAt(e.X, e.Y);
                             if (line.CanStartFrom(topic))
-                                line.From = topic;
+                            {
+                                var command = new ChangeLinkCommand(line, topic,null);
+                                View.ExecuteCommand(command);
+                            }
                             break;
                         case BezierPoint.EndPoint:
                             topic = View.GetTopicAt(e.X, e.Y);
                             if (line.CanEndTo(topic))
-                                line.Target = topic;
+                            {
+                                var command = new ChangeLinkCommand(line, null, topic);
+                                View.ExecuteCommand(command);
+                            }
                             break;
                         case BezierPoint.ControlPoint1:
                             pts = PaintHelper.CenterPoint(line.LayoutData.StartBounds);
