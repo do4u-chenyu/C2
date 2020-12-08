@@ -413,6 +413,7 @@ namespace C2
             form.CanvasAddElement(doc);
             ShowForm(form);
             form.RemarkControl.RemarkDescription = doc.RemarkDescription;
+            Global.GetCanvasForm().Save();
         }
 
         public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
