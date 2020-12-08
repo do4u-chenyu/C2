@@ -24,6 +24,10 @@ namespace C2.Model.Widgets
         WidgetAlignment _Alignment = WidgetAlignment.Right;
         int _DisplayIndex;
         int _Padding;
+        const int MaxWidgetWidth = 10000;
+        const int MinWidgetWidth = 20;
+        const int MaxWidgetHeight = 10000;
+        const int MinWidgetHeight = 20;
 
         protected Bitmap widgetIcon;
 
@@ -142,12 +146,17 @@ namespace C2.Model.Widgets
             get { return _CustomWidth; }
             set
             {
-                if (_CustomWidth != value)
+                if (value != null)
                 {
-                    int? old = _CustomWidth;
-                    _CustomWidth = value;
-                    OnPropertyChanged("CustomWidth", old, _CustomWidth, ChangeTypes.All);
+                    value = Math.Max(MinWidgetWidth, Math.Min(MaxWidgetWidth, (int)value));
+                    if (_CustomWidth != value)
+                    {
+                        int? old = _CustomWidth;
+                        _CustomWidth = value;
+                        OnPropertyChanged("CustomWidth", old, _CustomWidth, ChangeTypes.All);
+                    }
                 }
+                    
             }
         }
 
@@ -157,11 +166,15 @@ namespace C2.Model.Widgets
             get { return _CustomHeight; }
             set
             {
-                if (_CustomHeight != value)
+                if (value != null)
                 {
-                    int? old = _CustomHeight;
-                    _CustomHeight = value;
-                    OnPropertyChanged("CustomHeight", old, _CustomHeight, ChangeTypes.All);
+                    value = Math.Max(MinWidgetHeight, Math.Min(MaxWidgetHeight, (int)value));
+                    if (_CustomHeight != value)
+                    {
+                        int? old = _CustomHeight;
+                        _CustomHeight = value;
+                        OnPropertyChanged("CustomHeight", old, _CustomHeight, ChangeTypes.All);
+                    }
                 }
             }
         }
