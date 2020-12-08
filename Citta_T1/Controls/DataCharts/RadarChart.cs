@@ -40,7 +40,7 @@ namespace C2.Controls.DataCharts
             Chart1.Legends[0].Position.Auto = true;
             //背景渐变
             Chart1.ChartAreas[0].BackGradientStyle = GradientStyle.None;
-            //设置XY轴标题的名称所在位置位远  
+            //设置XY轴标题的名称所在位置位远
             Chart1.Series[series].XValueType = ChartValueType.String;
             Chart1.Series[series].Label = "#VAL";
             Chart1.Series[series].LabelForeColor = Color.White;

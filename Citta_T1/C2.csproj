@@ -199,14 +199,8 @@
     <Compile Include="Controls\DataCharts\RadarChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataCharts\RadarChart.Designer.cs">
-      <DependentUpon>RadarChart.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DataCharts\RingChart.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\DataCharts\RingChart.Designer.cs">
-      <DependentUpon>RingChart.cs</DependentUpon>
     </Compile>
     <Compile Include="Design\SizeTypeConvert.cs" />
     <Compile Include="Dialogs\Base\BaseOperatorView.cs">
@@ -1355,9 +1349,6 @@
     <EmbeddedResource Include="Controls\DataCharts\HorizontalBar3D.resx">
       <DependentUpon>HorizontalBar3D.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DataCharts\RadarChart.resx">
-      <DependentUpon>RadarChart.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\Dialog\GeneralPage.resx">
       <DependentUpon>GeneralPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -1418,9 +1409,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Bottom\BottomConsoleControl.resx">
       <DependentUpon>BottomConsoleControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DataCharts\RingChart.resx">
-      <DependentUpon>RingChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Misc\ImageLibraryListBox.resx">
       <DependentUpon>ImageLibraryListBox.cs</DependentUpon>
