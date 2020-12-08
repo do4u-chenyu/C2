@@ -481,11 +481,12 @@ namespace C2.Controls.MapViews
             {
                 
                 var hr = HitTest(ChartMouseDownPoint.X, ChartMouseDownPoint.Y);
-                if (!hr.IsEmpty && !hr.IsFoldingButton)
+                if (!hr.IsEmpty && !hr.IsFoldingButton&& ChartMouseDownButton == MouseButtons.Left)
                 {
                     if (hr.Widget != null)
                     {
                         var he = new HandledEventArgs();
+                        //if (ChartMouseDownButton == MouseButtons.Left)
                         hr.Widget.OnDoubleClick(he);
 
                         if (!he.Handled)

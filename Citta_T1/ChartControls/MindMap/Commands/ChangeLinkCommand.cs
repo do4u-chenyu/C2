@@ -37,6 +37,7 @@ namespace C2.Controls.MapViews
                 ChangeLink.From = NewFromTopic;
             else if (NewToTopic != null)
                 ChangeLink.Target = NewToTopic;
+            ChangeLink.RefreshLayout();
 
             return true;
         }
@@ -49,7 +50,7 @@ namespace C2.Controls.MapViews
                 ChangeLink.From = OldFromTopic;
             else if (NewToTopic != null)
                 ChangeLink.Target = OldToTopic;
-
+            ChangeLink.RefreshLayout();
             return true;
         }
 
