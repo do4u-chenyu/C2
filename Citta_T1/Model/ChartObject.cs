@@ -114,7 +114,7 @@ namespace C2.Model
             if (string.IsNullOrEmpty(oldValue) != string.IsNullOrEmpty(Remark))
                 ct |= ChangeTypes.Layout | ChangeTypes.Visual;
 
-            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs("Remark", oldValue, Remark, ct, true));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs("Remark", oldValue, Remark, ct, false));
         }
 
         protected virtual void OnTextChanged(string oldValue)

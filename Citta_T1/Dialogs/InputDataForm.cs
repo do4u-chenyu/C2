@@ -121,7 +121,9 @@ namespace C2.Dialogs
                 else
                     this.extType = OpUtil.ExtType.Text;
 
-                BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding, this.separator);
+                bool success = BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding, this.separator);
+                if (!success)
+                    return;
                 if (BCPBuffer.GetInstance().IsEmptyHeader(this.fullFilePath))
                 {
                     BCPBuffer.GetInstance().Remove(this.fullFilePath);
