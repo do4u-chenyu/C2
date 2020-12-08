@@ -15,7 +15,6 @@ namespace C2.Controls.MapViews
         ToolStripButton TsbAddIcon;
         ToolStripButton TsbAddRemark;
         ToolStripButton TsbAddProgressBar;
-        ToolStripSeparator toolStripSeparator1;
 
         bool ToolStripItemsInited;
 
@@ -34,7 +33,6 @@ namespace C2.Controls.MapViews
                 TsbAddIcon,
                 TsbAddRemark,
                 TsbAddProgressBar,
-                toolStripSeparator1
             };
         }
 
@@ -46,7 +44,6 @@ namespace C2.Controls.MapViews
             TsbAddIcon = new ToolStripButton();
             TsbAddRemark = new ToolStripButton();
             TsbAddProgressBar = new ToolStripButton();
-            toolStripSeparator1 = new ToolStripSeparator(); 
 
             // TsbAddTopic
             TsbAddTopic.DisplayStyle = ToolStripItemDisplayStyle.Image;
