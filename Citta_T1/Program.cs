@@ -121,10 +121,6 @@ namespace C2
                 lgInfo.WriteLastLogin(userName);
                 Application.Run(new MainForm(userName));
             }
-            else if (Global.VersionType.Equals("test"))
-            {
-                Application.Run(new ChartBoards());
-            }
             else
                 Application.Run(new LoginForm());
         }

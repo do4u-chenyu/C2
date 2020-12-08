@@ -66,7 +66,7 @@ namespace C2.Controls.MapViews
             TreeNodeCollection nodes = FindNode(topic).Nodes;
             for(int i = nodes.Count-1;i >= 0;i--)
             {
-                if (nodes[i].ImageIndex == rsDataImage)
+                if ((nodes[i].ImageIndex == rsDataImage) || (nodes[i].ImageIndex == srcDataImage))
                     nodes[i].Remove();
             }
 
@@ -104,8 +104,6 @@ namespace C2.Controls.MapViews
                     count += 1;
                 if (nodeTmp.ImageIndex == 0)
                     break;
-                if (nodeTmp.Text == text && nodeTmp.ImageIndex == imageIndex)
-                    return;
             }
             nodes.Insert(imageIndex == srcDataImage? 0:count, node);
         }
