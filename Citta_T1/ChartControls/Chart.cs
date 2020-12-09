@@ -965,17 +965,23 @@ namespace C2.Controls
             if (!ChartBox.Focused && ChartBox.CanFocus)
                 ChartBox.Focus();
             ElementType type;
-
+            string chartName=string.Empty;
             try
             {
                 type = (ElementType)e.Data.GetData("Type");
+                chartName = Global.GetCurrentDocument().ActiveChart.Name;
             }
             catch (Exception)
             {
                 return;
             }
+            if (!string.Equals("业务拓展视图", chartName))
+            {
+                return;
+            }
             if (type == ElementType.DataSource)
             {
+                
 
                 // 添加挂件
                 OnChartDragDrop(e);
