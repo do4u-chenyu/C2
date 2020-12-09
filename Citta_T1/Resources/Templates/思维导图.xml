@@ -41,73 +41,68 @@
             <font font_family="微软雅黑" size="21.75" style="Bold" />
           </style>
           <nodes>
-            <node id="2" text="时间" x="278" y="302" width="96" height="39" text_b="36, 2, 58, 35">
+            <node id="2" text="时间" x="288" y="302" width="86" height="39" text_b="26, 2, 58, 35">
               <style>
                 <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="4" width="30" height="31" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" size_type="Thumb" original_size="200, 200" embed_in="True">
-                  <text>时间</text>
-                  <thumb><![CDATA[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]]></thumb>
+                <widget type="PICTURE" x="4" y="9" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="198_时间.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                  <text>198_时间</text>
                 </widget>
               </widgets>
             </node>
-            <node id="3" text="地点" x="278" y="378" width="96" height="39" text_b="36, 2, 58, 35">
+            <node id="3" text="地点" x="288" y="378" width="86" height="39" text_b="26, 2, 58, 35">
               <style>
                 <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="4" width="30" height="31" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0"  size_type="Thumb" original_size="200, 200" embed_in="True">
-                  <text>地点</text>
-                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQlSURBVHhe7Z3trdQwEEVfCZRACXQAHUAH0AF0AB1AB9ABdAAdQAfQAXQAvtJGisLdZOzx2GN7jnT+PL2NM846/vY+BEEQBEEQBMF/PE2+Tr7dib89TgbGvEz+TP4t8H0yqMCzJMtgjR+TQSYoDSwza/o9GVyAdz/LPEujxNzhc5JlWCsfJYMbLIN6+CK5NPhWsozp6dKvMJYhHlzyobCM8OSH5DKwDPDok+T0oP3Pgvfq1PToZ2j9nZwWFnANv938tftbTTGEMx2vkizYEpH5V9RMD04HCzLXP8lcaj2YqUoJWissyBw/JTWwa+Y6DagYWYBStQ9jg107x2lgwUlFRV0LbSvvXXJ4tK+r2qBBwNKROjxfkiwwibVeVUdYWlKHhwUl1Qq01lh6EoeHBSXVCk1TePjxLRaUxB9JS1iaEofvj7CgJFoPf7M0JQ7f0mJBSbQOnKUpcdkHIhmv0sDSlLjsA4FWaObyl61DoBWon1h6EodfLsSCkmq1aJqlJXV4NEMVFrN12vGs4dHOR9QuJSyNHKeABZZjLbDeil1fas2R566w4HLVUmPm8E1yClhwJZaCDTvserlOg6aZeRTb1qTUXjs8FSxAjdi+cK/Cx75D9hmN09QfGyzIkZxuqwKG01mgozgd2g5ZT0vWgw0BC3YEp1xKCrBogQXs3alhAXvWel6mO5oVHz2cnpEq92kr8yMseI/WHml2S+29G1YuBcsAT07b1L2H91KyJCwjPLhc6djwWkqWhmVIT5c4LOAMvB5YxvQySLCM6WGcmXXDwzFN080Iauk9gRUQWEa1cIrdtRZg3RPLMGuDE1iGWbrMAGIpLSt4632M06DZ255jkAHLwJouO15VwvOkdqX6ldsvKQQ7kCHWGZ8jzoPEMtRlQIXd+0jxHLGDCz8MMB2eSkGpeDhD1zsoDdqDy7w6XKn5mmSBSMXiNAxn7L+R2vVc20guOoKYGMMqylrXdA278TOxmUfaW2afl4gHIAH/lzvIKb12F9gNH0XApcMVJb14TW9cOrbmcnCS3ejeWhteEDy7/j1rcbXf3tWY2NliBYudR9ITrC04q3fcwG4OWsLS22vZRL23rcJNJd/r5li60OrwzD2spLipS443BlvAjqBtNTfOVsu42UtyvDHYimP91QrWAnP9QFq2z7d3ekuO8UI3fZJ7rR7XnSYFLFbohrMOm8WZV73AHAqLEbqbDr7aYYsHM+q6WclotUuk40D4GW7Ps3Uo8TknCLnpfzCuSgpzm6nrFRi+HKUTZ0NwVqfkiqF8vLsxz15SqvCaxOdwDWR6rZ/tG/KHJ1nnaXRbjAI0odVaKyun/iXpmifMWYle99Bz6BrQgbyab7AUHVsMDMY63wvQOMC3FJmFB1by0JDZ+ByugfGnZb/1QRAEQRAEq/Lw8A+1Jl4RBEnOQwAAAABJRU5ErkJggg==]]></thumb>
+                <widget type="PICTURE" x="4" y="9" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="199_地点.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                  <text>199_地点</text>
                 </widget>
               </widgets>
             </node>
-            <node id="4" text="人物" x="278" y="454" width="96" height="39" text_b="36, 2, 58, 35">
+            <node id="4" text="人物" x="288" y="454" width="86" height="39" text_b="26, 2, 58, 35">
               <style>
                 <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="4" width="30" height="31" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" size_type="Thumb" original_size="200, 200" embed_in="True">
-                  <text>人物</text>
-                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAR4SURBVHhe7ZyBrdQwDIbfCIzACIzABrABbAAbwAawAWwAG8AGsAFsABtAfulZsqL/2sROWqfnT/okhE/30qaNEze9hyRJkiRJkiRJkiRJkiRJkiRJkiQkT4vvit8e/af+/aqYHMCT4q8iTn6rn4rJBH4U2Qlv9WUxGQDuCnaCLaJTEyfsxHrMTnHATugIvxSTTrw5Y0/M0pJGRuaNLe+aN0V2UkS9dvhTZJ8Z7euiBlNk9jnxEusbWbTt+bkosPgsha9FFmd+KC4JO5hbCh+LLD5LDI8AOYXFt1wKdgBbCiw2U9wZAovvuQS9OeB7UWDx2QostieONTRIlKzhW+qyBovPVsCFweJ7hi7LsAbvKeDAWHy2wvsii7cYkmdF1tg9Bc8J8fi8CKzth/UUOgS9pXFRsA4ZXqVDAIu3Gg7WyBaFs+8QwOKthoM1skVh9Q4JVR/zjL+CZYY2QlkcAhZvFRdUGHCVsUa2OCKpetSweKt6PXU6ng7RVxaLz1bD4q1epkP0apfFZytY6llaXYY5He/BCCw2079F4W2RfabVUDkEsEa2Kon16JmWXtBZ11Ginq2FgDWy1bOfhwAW7zEcrJE9Ciw2S2HEY+Nw4CpnDW0V015wVJFRD1feTRW/iyFhje1RYLHRali8R7mYwsEa26OUHzzT6Bb13dH63H/LsIw4kQKmpCw+QmFE7gg33a1hje5RTx9Z3KuGxXsNz8gZy+j6lh7rR+z/Cps7arzbefT+21FV4JGzKqjXTkvws8gOpFVdFvfeKaPvDBzbkng7RWMdCjXetRIMVdW1gEUTO7BWNZbv0rB4j2EXgD14C4aa3lV8fTWzz/QYforbwsgO6c0l9c5Cb1su0SGesnY9k7Ek5BrPgrPu4OXAu+TswFqsny9YO5a9V+jZA7bk6wjWJ4hImvV2Grwowz7ba93B3qec9feFxHqQbGx+UWSf9VqvrjGd9swE0c5wWIuK7CrzDHM9slfUcEFZcwxe2zudkR0xogxukf38Bu4aa8fggjoc69Ck60kA3zOilDFCTBpqPIXSwzrGMtupaz/ehDpTXCC6jgasIwGcVhG2Nko3KHJH1LI1h7U2N/wnPfbe4WbqTWjAu+/pLJHbNJ5NGEOwPNvQQ9So5xlnq+90T25xYRlidLlj9m+WHG09I2Of2dNVfmFfuKWurkaZPY1W5wPrnVJPGpphX3ZLnTNWzRet6rxiqSCbH/+yL7ulcNbrzUercwqL79lNzzRXr7xZ/KoKlrukm57ZkYbFr6qGxbfspvUOwbRY8L70spq6FMTiW3bT2iF6xsDiV1dgsS1NsC+q1bD41RV6thi59nXtJSzh6B8fi6IM2S0jinm6e4v6pOs/4N0Ut7JC/f9YKOsZ6FSQO3T+8GwcWFm9ID7s5LdgLSOsbv3QLRT3Nu11JeejuJc7BSWipUDH9Pwe7goiX4TKEx5wIKslfgxJl9jP2wMegqGzcOC4o47qNPwdiL+LxHyZKz9JkiRJkiRJkiRJkiRJkiRJkiQuDw//AaoSilyJmYr6AAAAAElFTkSuQmCC]]></thumb>
+                <widget type="PICTURE" x="4" y="9" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="397_人物.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                  <text>397_人物</text>
                 </widget>
               </widgets>
             </node>
-            <node id="5" text="事件" x="750" y="337" width="96" height="39" text_b="36, 2, 58, 35">
+            <node id="5" text="事件" x="750" y="337" width="86" height="39" text_b="26, 2, 58, 35">
               <style>
                 <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="4" width="30" height="31" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" size_type="Thumb" original_size="200, 200" embed_in="True">
-                  <text>事件</text>
-                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHFSURBVHhe7d0xSkNREIXh7EJtRBfhQkQt3ZLLENTKRhAbO1fgJqws7HVSeXmcXIjcXM9M/h++7oHzcoiV4IqIiIiIiIiIiIiIiIiIfjsK34O9BfpDx0F9oCN8Bdoy9UGOdBZoi9SHONJj2Luug/owlu7DMvXcaMvUM0vPIWWfQb2QcheWqedGW6ae2eQkpOkmqJfYJOMga2lSx/dk+pXVOggpUsf3qEH+I3Vbz1VIkTq+h0F2nDq+h0F2nDq+h0F2nDq+5yO8GlC39VyGFKnjKyr7DcmKQcwwiBkGMcMgZhjEDIOYKTNIlhdRt7cYZHLq9haDTE7d3mKQyanbW2UGqYJBzDCIGQYxwyBmGMQMg5hhEDNlBsnyIur2FoNMTt3eYpDJqdtbDDI5dXurzCDvQf2hmht1e4s/lDNT5htSBYOYYRAzDGKGQcwwiBkGMVNmkBkv8hDUzx6JQbaIQZrU8S0GmZw6vsUgk1PHV8QgZhjEDIOYYRAzDGKGQcwwiBkGMcMgZhjEDIOYYRAzDGKGQcwwiBkGMXMRUqSOryjNf0g4D+oFqknVS1AvUcVpSNdhuA3qhbJ6CkRERERERERERHveavUD3NcYLc78fJYAAAAASUVORK5CYII=]]></thumb>
+                <widget type="PICTURE" x="4" y="9" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="99_事件.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                  <text>99_事件</text>
                 </widget>
               </widgets>
             </node>
-            <node id="6" text="原由" x="750" y="418" width="96" height="39" text_b="36, 2, 58, 35">
+            <node id="6" text="原由" x="750" y="418" width="86" height="39" text_b="26, 2, 58, 35">
               <style>
                 <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="4" width="30" height="31" custom_width="30" custom_height="30" align="Left" hyperlink="" display_index="6" padding="0" size_type="Thumb" original_size="200, 200" embed_in="True">
-                  <text>原因</text>
-                  <thumb><![CDATA[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]]></thumb>
+                <widget type="PICTURE" x="4" y="9" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="197_原因.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                  <text>197_原因</text>
                 </widget>
               </widgets>
             </node>
           </nodes>
           <lines>
-            <line target="2" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="278, 302, 96, 39" />
-            <line target="3" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="278, 378, 96, 39" />
-            <line target="4" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="278, 454, 96, 39" />
-            <line target="5" begin_side="Right" end_side="Left" begin_rect="454, 364, 216, 66" end_rect="750, 337, 96, 39" />
-            <line target="6" begin_side="Right" end_side="Left" begin_rect="454, 364, 216, 66" end_rect="750, 418, 96, 39" />
+            <line target="2" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="288, 302, 86, 39" />
+            <line target="3" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="288, 378, 86, 39" />
+            <line target="4" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="288, 454, 86, 39" />
+            <line target="5" begin_side="Right" end_side="Left" begin_rect="454, 364, 216, 66" end_rect="750, 337, 86, 39" />
+            <line target="6" begin_side="Right" end_side="Left" begin_rect="454, 364, 216, 66" end_rect="750, 418, 86, 39" />
           </lines>
         </node>
       </nodes>
