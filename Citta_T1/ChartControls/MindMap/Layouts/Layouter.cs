@@ -33,7 +33,9 @@ namespace C2.Controls.MapViews
         //protected const int NodeSpace_V = 10;
         //protected const int IconSpace = 5;
         //public const int FoldingButtonSize = 13;
-        protected readonly Size MinNodeSize = new Size(20, 10);
+        //Size(宽度，高度)
+        protected readonly Size MinNodeSize = new Size(20, 20);
+        protected readonly Size MaxNodeSize = new Size(10000, 10000);
 
         public static readonly int LineAnchorSize = 4;
 
@@ -102,10 +104,12 @@ namespace C2.Controls.MapViews
 
             //
             Size proposedSize = Size.Empty;
+            //proposedSize.Width  = 0;
+            proposedSize.Height = 0;
             if (topic.CustomWidth.HasValue && topic.CustomWidth.Value > 0)
-                proposedSize.Width = topic.CustomWidth.Value - topic.Style.Padding.Horizontal;
-            if (topic.CustomHeight.HasValue && topic.CustomHeight.Value > 0)
-                proposedSize.Height = topic.CustomHeight.Value - topic.Style.Padding.Vertical;
+                proposedSize.Width = Math.Max(20,topic.CustomWidth.Value - topic.Style.Padding.Horizontal);
+            //if (topic.CustomHeight.HasValue && topic.CustomHeight.Value > 0)
+            //    proposedSize.Height = topic.CustomHeight.Value - topic.Style.Padding.Vertical;
 
             // Icon Size
             //Rectangle iconBounds = Rectangle.Empty;
@@ -144,17 +148,28 @@ namespace C2.Controls.MapViews
             
             // Calculate Size
             Size size = new Size(maxWidth + topic.Padding.Horizontal, totalHeight + topic.Padding.Vertical);
+            
             //if (!iconBounds.IsEmpty)
             //{
             //    size.Width += topic.IconPadding + iconBounds.Width;
             //    size.Height = Math.Max(topic.IconPadding + iconBounds.Height, size.Height);
             //}
+           
             size.Width = Math.Max(MinNodeSize.Width, size.Width);
             size.Height = Math.Max(MinNodeSize.Height, size.Height);
             if (topic.CustomWidth.HasValue)
-                size.Width = topic.CustomWidth.Value;
-            else if (topic.CustomHeight.HasValue)
-                size.Height = topic.CustomHeight.Value;
+            {
+                //size.Width = Math.Max(topic.CustomWidth.Value, size.Width);
+                size.Width = Math.Min(10000, Math.Max(topic.CustomWidth.Value,size.Width));
+            }
+               
+            if (topic.CustomHeight.HasValue)
+            {
+                size.Height = Math.Max(topic.CustomHeight.Value, size.Height);
+                size.Height = Math.Min(10000, Math.Max(topic.CustomHeight.Value, size.Height));
+       
+            }
+               
 
             // 
             var rect = new Rectangle(0, 0, size.Width, size.Height);
@@ -323,9 +338,7 @@ namespace C2.Controls.MapViews
                     if (w.FitContainer)
                     {
                         rw.X = x;
-
                         rw.Y = rect.Y + e.Chart.WidgetMargin +(rect.Height-w.Height)/2;
-                        //rw.Y = rect.Y + e.Chart.WidgetMargin;
                         rw.Height = w.Height - e.Chart.WidgetMargin * 2;
                         x += rw.Width + e.Chart.WidgetMargin;
                     }
@@ -363,7 +376,6 @@ namespace C2.Controls.MapViews
                     if (w.FitContainer)
                     {
                         rw.X = rect.X + e.Chart.WidgetMargin+(rect.Width-w.Width)/2;
-                        //rw.X = rect.X + e.Chart.WidgetMargin;
                         rw.Y = y;
                         rw.Width = w.Width - e.Chart.WidgetMargin * 2;
                         y += rw.Height + e.Chart.WidgetMargin;

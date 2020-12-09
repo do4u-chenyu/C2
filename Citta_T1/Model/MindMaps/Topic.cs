@@ -1315,6 +1315,7 @@ namespace C2.Model.MindMaps
         {
             get { return _XmlElementName; }
         }
+  
 
         public override void Serialize(XmlDocument dom, XmlElement node)
         {
