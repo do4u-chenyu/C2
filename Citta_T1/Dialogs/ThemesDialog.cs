@@ -250,7 +250,7 @@ namespace C2
             TsbNew.Text = Lang._("New");
             TsbRefresh.Text = Lang._("Refresh");
 
-            CkbDefaultTheme.Text = Lang._("Is Default");
+            //CkbDefaultTheme.Text = Lang._("Is Default");
         }
 
         void OnCurrentThemeChanged()
@@ -265,7 +265,7 @@ namespace C2
                 TsbDelete.Enabled = !CurrentTheme.IsInternal;
                 TxbRemark.Text = CurrentTheme.Description;
                 TxbRemark.ReadOnly = CurrentTheme.IsInternal;
-                CkbDefaultTheme.Checked = IsDefaultTheme(CurrentTheme);
+                //CkbDefaultTheme.Checked = IsDefaultTheme(CurrentTheme);
             }
             else
             {
@@ -276,7 +276,7 @@ namespace C2
                 TsbDelete.Enabled = false;
                 TxbRemark.Text = string.Empty;
                 TxbRemark.ReadOnly = true;
-                CkbDefaultTheme.Checked = false;
+                //CkbDefaultTheme.Checked = false;
             }
 
             ThemeNode node = FindTreeNode(CurrentTheme);
@@ -449,21 +449,6 @@ namespace C2
             if (CurrentTheme != null && !CurrentTheme.IsInternal)
             {
                 CurrentTheme.Description = TxbRemark.Text;
-            }
-        }
-
-        void CkbDefaultTheme_CheckedChanged(object sender, EventArgs e)
-        {
-            if (CurrentTheme != null)
-            {
-                if (CkbDefaultTheme.Checked)
-                {
-                    DefaultTheme = CurrentTheme;
-                }
-                else if (DefaultTheme == CurrentTheme)
-                {
-                    DefaultTheme = null;
-                }
             }
         }
 
