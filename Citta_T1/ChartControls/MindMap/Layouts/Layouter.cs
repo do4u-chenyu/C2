@@ -104,10 +104,12 @@ namespace C2.Controls.MapViews
 
             //
             Size proposedSize = Size.Empty;
+            //proposedSize.Width  = 0;
+            proposedSize.Height = 0;
             if (topic.CustomWidth.HasValue && topic.CustomWidth.Value > 0)
-                proposedSize.Width = topic.CustomWidth.Value - topic.Style.Padding.Horizontal;
-            if (topic.CustomHeight.HasValue && topic.CustomHeight.Value > 0)
-                proposedSize.Height = topic.CustomHeight.Value - topic.Style.Padding.Vertical;
+                proposedSize.Width = Math.Max(20,topic.CustomWidth.Value - topic.Style.Padding.Horizontal);
+            //if (topic.CustomHeight.HasValue && topic.CustomHeight.Value > 0)
+            //    proposedSize.Height = topic.CustomHeight.Value - topic.Style.Padding.Vertical;
 
             // Icon Size
             //Rectangle iconBounds = Rectangle.Empty;
@@ -157,14 +159,15 @@ namespace C2.Controls.MapViews
             size.Height = Math.Max(MinNodeSize.Height, size.Height);
             if (topic.CustomWidth.HasValue)
             {
-                size.Width = topic.CustomWidth.Value;
-                //size.Width = Math.Max(MinNodeSize.Width, Math.Min(MaxNodeSize.Width, Math.Max(topic.CustomWidth.Value, size.Width)));
+                //size.Width = Math.Max(topic.CustomWidth.Value, size.Width);
+                size.Width = Math.Min(10000, Math.Max(topic.CustomWidth.Value,size.Width));
             }
                
             if (topic.CustomHeight.HasValue)
             {
-                size.Height = topic.CustomHeight.Value;
-                //size.Height = Math.Max(MinNodeSize.Height, Math.Min(MaxNodeSize.Height, Math.Max(topic.CustomHeight.Value, size.Height)));
+                size.Height = Math.Max(topic.CustomHeight.Value, size.Height);
+                size.Height = Math.Min(10000, Math.Max(topic.CustomHeight.Value, size.Height));
+       
             }
                
 
