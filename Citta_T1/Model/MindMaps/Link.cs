@@ -274,7 +274,7 @@ namespace C2.Model.MindMaps
         [DefaultValue(null)]
         protected virtual void OnHyperlinkChanged(string old)
         {
-            OnPropertyChanged("Hyperlink", old, Hyperlink, ChangeTypes.Data | ChangeTypes.Visual, true);
+            OnPropertyChanged("Hyperlink", old, Hyperlink, ChangeTypes.Data | ChangeTypes.Visual, false); // 没有超链接
         }
 
         #endregion
