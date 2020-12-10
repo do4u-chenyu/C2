@@ -116,7 +116,7 @@ namespace C2.Forms
             // MenuStripChartTab
             // 
             this.MenuStripChartTab.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuRenameTab});
+            });
             this.MenuStripChartTab.Name = "MenuStripChartTab";
             this.MenuStripChartTab.Size = new System.Drawing.Size(133, 26);
             // 
