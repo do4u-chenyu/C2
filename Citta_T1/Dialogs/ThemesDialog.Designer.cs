@@ -34,7 +34,6 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new C2.Controls.MyTabControl();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.CkbDefaultTheme = new System.Windows.Forms.CheckBox();
             this.TxbThemeName = new System.Windows.Forms.TextBox();
             this.LalName = new System.Windows.Forms.Label();
             this.toolStrip1 = new C2.Controls.ToolStripPro();
@@ -103,7 +102,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.CkbDefaultTheme);
             this.panel1.Controls.Add(this.TxbThemeName);
             this.panel1.Controls.Add(this.LalName);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -111,17 +109,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(430, 58);
             this.panel1.TabIndex = 0;
-            // 
-            // CkbDefaultTheme
-            // 
-            this.CkbDefaultTheme.AutoSize = true;
-            this.CkbDefaultTheme.Location = new System.Drawing.Point(45, 32);
-            this.CkbDefaultTheme.Name = "CkbDefaultTheme";
-            this.CkbDefaultTheme.Size = new System.Drawing.Size(84, 16);
-            this.CkbDefaultTheme.TabIndex = 2;
-            this.CkbDefaultTheme.Text = "Is Default";
-            this.CkbDefaultTheme.UseVisualStyleBackColor = true;
-            this.CkbDefaultTheme.CheckedChanged += new System.EventHandler(this.CkbDefaultTheme_CheckedChanged);
             // 
             // TxbThemeName
             // 
@@ -266,6 +253,5 @@
         private C2.Controls.PushButton BtnApply;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton TsbRefresh;
-        private System.Windows.Forms.CheckBox CkbDefaultTheme;
     }
 }

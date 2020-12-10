@@ -222,7 +222,7 @@ namespace C2.ChartPageView
                 menuItems = ((BaseChartPage)TabPages[item.DisplayIndex]).CustomTabMenuItems();
                 if (menuItems != null && menuItems.Count > 0)
                 {
-                    int index = 1;
+                    int index = 0;
                     foreach (var mi in menuItems)
                         TabsMenuStrip.Items.Insert(index++, mi);
                 }

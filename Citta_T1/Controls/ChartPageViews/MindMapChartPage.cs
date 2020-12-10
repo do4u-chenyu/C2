@@ -550,6 +550,7 @@ namespace C2.ChartPageView
                 int count = SelectedObjects.Length;
                 Topic topic = mindMapView1.SelectedTopic;
                 int topicCount = mindMapView1.SelectedTopics.Length;
+                string chartName = Global.GetCurrentDocument().ActiveChart.Name;
 
                 string urls = null;
                 MenuOpenHyperlink.Enabled = HasAnyUrl(SelectedObjects, out urls);
@@ -565,10 +566,10 @@ namespace C2.ChartPageView
                 MenuExpandAll.Enabled = topicCount > 0 && count == 1;
                 MenuCollapseAll.Enabled = topicCount > 0 && count == 1;
                 MenuAdd.Enabled = !ReadOnly && count == 1 && topicCount > 0;
-                MenuAddOperator.Enabled = topicCount > 0 && count == 1;
+                MenuAddOperator.Enabled = topicCount > 0 && count == 1 && string.Equals("业务拓展视图",chartName);
                 MenuAddAttachment.Enabled = topicCount > 0 && count == 1;
                 MenuAddProgressBar.Enabled = topicCount > 0;
-                MenuAddModelOp.Enabled = topicCount > 0 && count == 1;
+                MenuAddModelOp.Enabled = topicCount > 0 && count == 1 && string.Equals("业务拓展视图", chartName);
                 MenuNewChartFromHere.Available = topicCount == 1;
 
                 bool hasLink = false;

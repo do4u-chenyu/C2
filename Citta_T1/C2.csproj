@@ -180,7 +180,9 @@
     <Compile Include="Controls\DataCharts\BarChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataCharts\BaseChart.cs" />
+    <Compile Include="Controls\DataCharts\BaseChart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\DataCharts\BaseChart.Designer.cs">
       <DependentUpon>BaseChart.cs</DependentUpon>
     </Compile>
@@ -580,7 +582,7 @@
       <DependentUpon>ComCheckBoxList.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Common\DesignerControl.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\C1\Common\DesignerControl.Designer.cs">
       <DependentUpon>DesignerControl.cs</DependentUpon>
@@ -1877,6 +1879,8 @@
     <None Include="Resources\NativeResources.res" />
     <None Include="Resources\operator_back.png" />
     <None Include="Resources\nav_small_first_black.bmp" />
+    <None Include="Resources\logicMap.png" />
+    <None Include="Resources\mindMap.png" />
     <Content Include="Resources\Opcontrol_ico\AI.ico" />
     <Content Include="Resources\Opcontrol_ico\python.ico" />
     <Content Include="Resources\Opcontrol_ico\关联算子.ico" />
@@ -1928,6 +1932,7 @@
     <Content Include="Resources\Operators\筛选.png" />
     <Content Include="Resources\Operators\随机.png" />
     <Content Include="Resources\Operators\频率.png" />
+    <None Include="Resources\organization.png" />
     <Content Include="Resources\PictureIconLib\119_提取.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2408,7 +2413,7 @@
     <None Include="Resources\Templates\公交色狼模型.iao">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Templates\地下钱庄发现模型.iao">
+    <None Include="Resources\Templates\地下钱庄线索发现.iao">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Templates\微信接单模型.iao">
@@ -2426,6 +2431,7 @@
     <None Include="Resources\tip_close_button.png" />
     <None Include="Resources\tip_pin_button.png" />
     <None Include="Resources\tip_pin_pressed_button.png" />
+    <None Include="Resources\tree.png" />
     <Content Include="Resources\UIThemes\Blackish Green.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

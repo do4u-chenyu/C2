@@ -173,7 +173,7 @@ namespace C2.Model
 
         protected virtual void OnPropertyChanged(string propertyName, object oldValue, object newValue, ChangeTypes changes)
         {
-            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs(propertyName, oldValue, newValue, changes, true));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs(propertyName, oldValue, newValue, changes, false));
         }
 
         protected virtual void OnPropertyChanged(string propertyName, object oldValue, object newValue, ChangeTypes changes, bool rollbackable)

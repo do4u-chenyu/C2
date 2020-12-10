@@ -36,7 +36,7 @@ namespace C2.Dialogs
                 HelpUtil.ShowMessageBox("请输入用户名");
                 return;
             }
-            if (FileUtil.ContainIllegalCharacters(userName, "用户名")
+            if (FileUtil.IsContainIllegalCharacters(userName, "用户名")
                 || FileUtil.NameTooLong(userName, "用户名"))
             {
                 this.userNameComboBox.Text = String.Empty;

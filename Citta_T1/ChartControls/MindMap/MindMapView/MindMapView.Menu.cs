@@ -109,11 +109,18 @@ namespace C2.Controls.MapViews
         private void CreateInitOperatorMenu()
         {
             ToolStripMenuItem MenuOpenOperator = new ToolStripMenuItem();
+            ToolStripMenuItem MenuDeleteOperator = new ToolStripMenuItem();
+
             MenuOpenOperator.Text = Lang._("OpenDesigner");
             MenuOpenOperator.Image = Properties.Resources.算子;
             MenuOpenOperator.Click += MenuOpenOperatorDesigner_Click;
 
+            MenuDeleteOperator.Text = Lang._("Delete");
+            MenuDeleteOperator.Image = Properties.Resources.deletewidget;
+            MenuDeleteOperator.Click += MenuDeleteSingleOp_Click;
+
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
+            WidgetMenuStrip.Items.Add(MenuDeleteOperator);
         }
         private void CreateOperatorMenu()
         {

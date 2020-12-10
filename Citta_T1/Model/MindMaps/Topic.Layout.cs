@@ -6,6 +6,7 @@ using System.Text;
 using C2.Configuration;
 using C2.Core;
 using C2.Globalization;
+using NPOI.SS.Formula.Functions;
 
 namespace C2.Model.MindMaps
 {
@@ -13,6 +14,11 @@ namespace C2.Model.MindMaps
     {
         int? _CustomWidth;
         int? _CustomHeight;
+        //const int MaxWidth = 10000;
+        //const int MinWidth = 10;
+        //const int MaxHeight = 10000;
+        //const int MinHeight = 10;
+
         //Rectangle _TextBounds;
 
         [DefaultValue(null), LocalDisplayName("Custom Width"), LocalCategory("Layout")]
@@ -35,6 +41,8 @@ namespace C2.Model.MindMaps
             get { return _CustomHeight; }
             set
             {
+                //if(value!=null)
+                   // value = Math.Max(MinHeight, Math.Min(MaxHeight,(int)value));
                 if (_CustomHeight != value)
                 {
                     _CustomHeight = value;

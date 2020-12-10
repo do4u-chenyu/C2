@@ -603,7 +603,7 @@ namespace C2.Model.MindMaps
                 HyperlinkChanged(this, EventArgs.Empty);
             }
 
-            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs("Hyperlink", old, Hyperlink, ChangeTypes.Data | ChangeTypes.Visual, true));
+            OnPropertyChanged(new C2.Core.PropertyChangedEventArgs("Hyperlink", old, Hyperlink, ChangeTypes.Data | ChangeTypes.Visual, false)); // 没有超链接这一说
         }
 
         #endregion
@@ -1315,6 +1315,7 @@ namespace C2.Model.MindMaps
         {
             get { return _XmlElementName; }
         }
+  
 
         public override void Serialize(XmlDocument dom, XmlElement node)
         {
