@@ -14,7 +14,7 @@ namespace C2.Dialogs
     public partial class InputDataForm : Form
     {
         private static LogUtil log = LogUtil.GetInstance("InputDataForm"); // 获取日志模块
-
+        private string[] illegalCharacters = new string[] { "*", "\\", "/", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", " ", "\\t", "\\n", "\\r", ":" };
         private OpUtil.Encoding encoding = OpUtil.Encoding.GBK;
         private OpUtil.ExtType extType = OpUtil.ExtType.Unknow;
         private string fullFilePath;
@@ -105,6 +105,8 @@ namespace C2.Dialogs
             string name = this.textBox1.Text;
             if (name == "请输入数据名称" || name == "" || String.IsNullOrEmpty(name))
                 HelpUtil.ShowMessageBox("请输入数据名称！");
+            else if (FileUtil.IsContainIllegalCharacters(name, "数据名称", false))
+                HelpUtil.ShowMessageBox("数据名称中存在非法字符，请检查数据名称！非法字符" + System.Environment.NewLine + "非法字符包含：*, \\, $, [, ], +, -, &, %, #, !, ~, `, \\t, \\n, \\r, :, 空格");
             else if (String.IsNullOrEmpty(this.fullFilePath))
                 HelpUtil.ShowMessageBox("请选择数据路径！");
             else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(this.fullFilePath))

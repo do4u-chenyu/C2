@@ -377,14 +377,15 @@ namespace C2.Utils
             return datas;
         }
 
-        public static bool ContainIllegalCharacters(string userName, string target)
+        public static bool IsContainIllegalCharacters(string userName, string target, bool isShowMsg=true)
         {
             string[] illegalCharacters = new string[] { "*", "\\", "/", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", " ", "\\t", "\\n", "\\r", ":" };
             foreach (string character in illegalCharacters)
             {
                 if (userName.Contains(character))
                 {
-                    MessageBox.Show(target + "包含非法字符，请输入新的" + target + "." + System.Environment.NewLine + "非法字符包含：*, \\, $, [, ], +, -, &, %, #, !, ~, `, \\t, \\n, \\r, :, 空格");
+                    if (isShowMsg)
+                        MessageBox.Show(target + "包含非法字符，请输入新的" + target + "." + System.Environment.NewLine + "非法字符包含：*, \\, $, [, ], +, -, &, %, #, !, ~, `, \\t, \\n, \\r, :, 空格");
                     return true;
                 }
             }

@@ -43,7 +43,7 @@ namespace C2.Dialogs
                 return;
 
             string target = GenTargetName(NewFormType);
-            if (FileUtil.ContainIllegalCharacters(titleName, target) || FileUtil.NameTooLong(titleName, target))
+            if (FileUtil.IsContainIllegalCharacters(titleName, target) || FileUtil.NameTooLong(titleName, target))
             {
                 this.textBox.Text = String.Empty;
                 return;
