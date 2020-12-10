@@ -339,7 +339,7 @@ namespace C2.Controls.MapViews
                     {
                         rw.X = x;
                         rw.Y = rect.Y + e.Chart.WidgetMargin +(rect.Height-w.Height)/2;
-                        rw.Height = w.Height;
+                        //rw.Height = w.Height - e.Chart.WidgetMargin * 2;
                         x += rw.Width + e.Chart.WidgetMargin;
                     }
                     else
