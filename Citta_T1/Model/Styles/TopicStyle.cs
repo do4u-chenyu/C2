@@ -34,12 +34,25 @@ namespace C2.Model.Styles
 
             if (!Styles.ContainsKey(name))
                 Styles.Add(name, value);
+
             else if (Styles[name] != value)
                 Styles[name] = value;
             else
                 return;
 
             OnValueChanged();
+        }
+        Padding UpdateValue(Padding value)
+        {
+            if (value.Left <= 0 )
+                value.Left = 0;
+            if (value.Right <= 0)
+                value.Right = 0;
+            if (value.Bottom <= 0)
+                value.Bottom = 0;
+            if (value.Top <= 0)
+                value.Top = 0;
+            return value;
         }
 
         public object GetValue(string name)
@@ -108,7 +121,7 @@ namespace C2.Model.Styles
         public Padding Padding
         {
             get { return GetValue("Padding", new Padding(DefaultNodePadding)); }
-            set { SetValue("Padding", value); }
+            set { SetValue("Padding", UpdateValue(value)); }
         }
 
         public HorizontalAlignment TextAlignment
