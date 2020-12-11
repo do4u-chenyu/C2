@@ -32,7 +32,7 @@ namespace C2.Dialogs
 
             SuspendLayout();
             Controls.Add(htmlEditor);
-            MinimumSize = new Size(550, 300);
+            MinimumSize = new Size(495, 300);
             if (Options.Current.Contains(NoteWidgetDialogSize))
                 Size = Options.Current.GetValue(NoteWidgetDialogSize, Size);
             ResumeLayout(false);
