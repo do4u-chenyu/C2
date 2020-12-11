@@ -352,6 +352,8 @@ namespace C2.Model.Documents
             get { return _WidgetMargin; }
             set 
             {
+                if (value < 0)
+                    return;
                 if (_WidgetMargin != value)
                 {
                     var old = _WidgetMargin;

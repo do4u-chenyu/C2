@@ -562,6 +562,8 @@ namespace C2.Model.MindMaps
             get { return _LayerSpace; }
             set
             {
+                if (value < 0)
+                    return;
                 if (_LayerSpace != value)
                 {
                     var old = _LayerSpace;
@@ -578,6 +580,8 @@ namespace C2.Model.MindMaps
             get { return _ItemsSpace; }
             set
             {
+                if (value < 0)
+                    return;
                 if (_ItemsSpace != value)
                 {
                     var old = _ItemsSpace;
