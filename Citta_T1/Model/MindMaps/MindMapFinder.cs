@@ -3,6 +3,7 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using C2.Core.Documents;
 using C2.Model;
+using C2.Utils;
 
 namespace C2.Model.MindMaps
 {
@@ -13,7 +14,8 @@ namespace C2.Model.MindMaps
         FindOptions _Options;
         ArrayList AccessTable;
         int _FoundCount;
-
+        private bool OptionFlag = true;
+           
         public MindMapFinder()
         {
             Options = FindOptions.Default;
@@ -93,7 +95,17 @@ namespace C2.Model.MindMaps
 
             if (LastRegex == null || LastRegex.Options != ro || LastFindWhat != findWhat)
             {
-                LastRegex = new Regex(findWhat, ro);
+                try
+                {
+                    LastRegex = new Regex(findWhat, ro);
+                    OptionFlag = true;
+                }
+                catch (Exception e)
+                {
+                    HelpUtil.ShowMessageBox("请使用正确的正则表达式!");
+                    Helper.WriteLog(e);
+                    OptionFlag = false;
+                }
             }
         }
 
@@ -151,8 +163,11 @@ namespace C2.Model.MindMaps
             if (!AccessTable.Contains(node))
             {
                 AccessTable.Add(node);
-                if (TestMatch(node.Text, findWhat))
-                    return node;
+                if (OptionFlag)
+                {
+                    if (TestMatch(node.Text, findWhat))
+                        return node;
+                }
             }
 
             // 1. find children
@@ -277,6 +292,8 @@ namespace C2.Model.MindMaps
                     return text.IndexOf(findWhat, sc) > -1;
                 }
             }
-        }
+
+        }  
+       
     }
 }
