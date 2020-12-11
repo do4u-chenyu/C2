@@ -37,12 +37,12 @@ namespace C2.Model.Widgets
     {
         public const string TypeID = "PICTURE";
         Image _Data;
-        string _ImageUrl;
+        string _ImageUrl; 
         PictureSource _SourceType;
-        PictureDesign _Image;
+        PictureDesign _Image; //图像
         PictureSizeType _SizeType;
         bool _EmbedIn;
-        Image _ThumbImage;
+        Image _ThumbImage; //图像
 
         public PictureWidget()
         {
@@ -74,7 +74,10 @@ namespace C2.Model.Widgets
         public string ImageUrl
         {
             get { return _ImageUrl; }
-            set { _ImageUrl = value; }
+            set { 
+                _ImageUrl = value;
+                //_Image.Data = Picture.LoadImageFromUrl(ImageUrl);
+            }
         }
 
         [DefaultValue(WidgetAlignment.Left)]
@@ -196,6 +199,7 @@ namespace C2.Model.Widgets
             node.SetAttribute("size_type", this.SizeType.ToString());
             node.SetAttribute("original_size", ST.ToString(OriginalSize));
             node.SetAttribute("embed_in", ST.ToString(EmbedIn));
+            
 
             if (ThumbImage != null)
             {
@@ -219,7 +223,12 @@ namespace C2.Model.Widgets
             OriginalSize = ST.GetValue(node.GetAttribute("original_size"), Size.Empty);
 
             if (ST.HasImageNode(node, "thumb"))
+            {
                 ThumbImage = ST.ReadImageNode(node, "thumb");
+
+            }
+            //Image.Data = Picture.LoadImageFromUrl(ImageUrl);
+            //Image.Url = ImageUrl; 
 
             if (ST.HasImageNode(node))
             {
@@ -287,12 +296,12 @@ namespace C2.Model.Widgets
             }
             else
             {
-                /*
+                
                 e.Graphics.FillRectangle(e.Graphics.SolidBrush(Color.White), rect);
                 e.Graphics.DrawRectangle(e.Graphics.Pen(Color.Red), rect.X, rect.Y, rect.Width, rect.Height);
                 e.Graphics.DrawLine(e.Graphics.Pen(Color.Red), rect.X, rect.Y, rect.Right - 1, rect.Bottom - 1);
                 e.Graphics.DrawLine(e.Graphics.Pen(Color.Red), rect.Right - 1, rect.Y, rect.Left, rect.Bottom - 1);
-                */
+                
             }
         }
 
@@ -412,6 +421,11 @@ namespace C2.Model.Widgets
                     CreateThumbImage();
                 else if (Data == null && ThumbImage != null && ThumbImage.Size != Chart.PictureThumbSize)
                     CreateThumbImage();
+            }
+            if (Chart != null && Data != null && ThumbImage == null)
+            {
+                Image sourceImage = Data;
+                ThumbImage = PaintHelper.CreateThumbImage(sourceImage, Chart.PictureThumbSize);
             }
         }
 

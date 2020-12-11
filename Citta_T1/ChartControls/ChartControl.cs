@@ -154,6 +154,10 @@ namespace C2.Controls
 
             if (lastSelectionCommand != null && lastSelectionCommand.AfterSelection != null)
                 Select(lastSelectionCommand.AfterSelection);
+
+            LinesLayer linesLayer = Layers.Find(c => c is LinesLayer) as LinesLayer;
+            if (linesLayer != null)
+                linesLayer.CleanControlHandle();
         }
 
         public void Redo(int step)
@@ -185,6 +189,10 @@ namespace C2.Controls
 
             if (lastSelectionCommand != null && lastSelectionCommand.AfterSelection != null)
                 Select(lastSelectionCommand.AfterSelection);
+
+            LinesLayer linesLayer = Layers.Find(c => c is LinesLayer) as LinesLayer;
+            if (linesLayer != null)
+                linesLayer.CleanControlHandle();
         }
 
         #endregion

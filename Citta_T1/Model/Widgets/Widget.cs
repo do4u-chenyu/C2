@@ -107,6 +107,8 @@ namespace C2.Model.Widgets
             get { return _Padding; }
             set 
             {
+                if (value < 0)
+                    return;
                 if (_Padding != value)
                 {
                     var old = _Padding;

@@ -34,7 +34,7 @@ namespace C2.Controls
         ToolStripDropDownButton tsbIndents;
         ToolStripMenuItem tsbIndent;
         ToolStripMenuItem tsbUnIndent;
-        ToolStripButton tsbImage;
+        //ToolStripButton tsbImage;
         ToolStripDropDownButton tsbFontSize;
         //ToolStripMenuItem tsbFontSizeUp;
         //ToolStripMenuItem tsbFontSizeDown;
@@ -44,14 +44,14 @@ namespace C2.Controls
         ToolStripButton tsbUndo;
         ToolStripButton tsbRedo;
         ToolStripButton tsbDelete;
-        ToolStripButton tsbHyperLink;
+        //ToolStripButton tsbHyperLink;
         ToolStripButton tsbShowCode;
         ToolStripSeparator toolStripSeparator1;
         ToolStripSeparator toolStripSeparator2;
         ToolStripSeparator toolStripSeparator3;
         ToolStripSeparator toolStripSeparator4;
         ToolStripSeparator toolStripSeparator6;
-        ToolStripSeparator toolStripSeparator7;
+        //ToolStripSeparator toolStripSeparator7;
         ToolStripSeparator toolStripSeparator8;
 
         public HtmlEditToolStrip()
@@ -67,8 +67,8 @@ namespace C2.Controls
                     tsbForeColor,
                     tsbBackColor,
                     toolStripSeparator4,
-                    tsbHyperLink,
-                    tsbImage,
+                    //tsbHyperLink,
+                    //tsbImage,
                     //tsbUnIndent,
                     //tsbIndent,
                     //tsbFontSize,
@@ -83,8 +83,8 @@ namespace C2.Controls
                     tsbForeColor,
                     tsbBackColor,
                     toolStripSeparator4,
-                    tsbHyperLink,
-                    tsbImage,
+                    //tsbHyperLink,
+                    //tsbImage,
                     tsbIndents,
                     tsbFontSize,
                     tsbUndo,
@@ -99,7 +99,7 @@ namespace C2.Controls
                     toolStripSeparator1,
                     toolStripSeparator2,
                     toolStripSeparator6,
-                    toolStripSeparator7,
+                    //toolStripSeparator7,
                     toolStripSeparator8,
             });
 
@@ -200,7 +200,7 @@ namespace C2.Controls
             tsbDecoration = new ToolStripSplitButton();
             tsbUnderline = new ToolStripMenuItem();
             tsbStrikeThrough = new ToolStripMenuItem();
-            tsbImage = new ToolStripButton();
+            //tsbImage = new ToolStripButton();
             tsbAlignment = new ToolStripDropDownButton();
             tsbAlignLeft = new ToolStripMenuItem();
             tsbAlignCenter = new ToolStripMenuItem();
@@ -218,14 +218,14 @@ namespace C2.Controls
             //tsbFontSizeDown = new ToolStripMenuItem();
             tsbForeColor = new ToolStripButton();
             tsbBackColor = new ToolStripButton();
-            tsbHyperLink = new ToolStripButton();
+            //tsbHyperLink = new ToolStripButton();
             tsbShowCode = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripSeparator2 = new ToolStripSeparator();
             toolStripSeparator3 = new ToolStripSeparator();
             toolStripSeparator4 = new ToolStripSeparator();
             toolStripSeparator6 = new ToolStripSeparator();
-            toolStripSeparator7 = new ToolStripSeparator();
+            //toolStripSeparator7 = new ToolStripSeparator();
             toolStripSeparator8 = new ToolStripSeparator();
             SuspendLayout();
 
@@ -250,10 +250,11 @@ namespace C2.Controls
                 toolStripSeparator4,
                 tsbAlignment,
                 tsbList,
-                tsbIndents,                toolStripSeparator6,
-                tsbImage,
-                tsbHyperLink,
-                toolStripSeparator7,
+                tsbIndents,                
+                toolStripSeparator6,
+                //tsbImage,
+                //tsbHyperLink,
+                //toolStripSeparator7,
                 tsbFont,
                 tsbFontSize,
                 toolStripSeparator8,
@@ -295,16 +296,16 @@ namespace C2.Controls
             tsbDelete.Click += tsbDelete_Click;
 
             // tsbHyperLink
-            tsbHyperLink.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tsbHyperLink.Image = Properties.Resources.hyperlink;
-            tsbHyperLink.Text = "Hyper Link";
-            tsbHyperLink.Click += tsbHyperLink_Click;
+            //tsbHyperLink.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            //tsbHyperLink.Image = Properties.Resources.hyperlink;
+            //tsbHyperLink.Text = "Hyper Link";
+            //tsbHyperLink.Click += tsbHyperLink_Click;
 
             // tsbImage
-            tsbImage.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tsbImage.Image = Properties.Resources.image;
-            tsbImage.Text = "Image";
-            tsbImage.Click += tsbImage_Click;
+            //tsbImage.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            //tsbImage.Image = Properties.Resources.image;
+            //tsbImage.Text = "Image";
+            //tsbImage.Click += tsbImage_Click;
 
             // tsbBold
             tsbBold.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -570,7 +571,7 @@ namespace C2.Controls
             }
         }
 
-        void tsbHyperLink_Click(object sender, EventArgs e)
+        /*void tsbHyperLink_Click(object sender, EventArgs e)
         {
             if (htmlBox != null)
             {
@@ -584,7 +585,7 @@ namespace C2.Controls
             {
                 htmlBox.AddImage();
             }
-        }
+        }*/
 
         void tsbShowCode_Click(object sender, EventArgs e)
         {
@@ -647,8 +648,8 @@ namespace C2.Controls
             tsbCopy.Text = Lang._("Copy");
             tsbPaste.Text = Lang._("Paste");
             tsbDelete.Text = Lang._("Delete");
-            tsbHyperLink.Text = Lang._("Hyper Link");
-            tsbImage.Text = Lang._("Image");
+            //tsbHyperLink.Text = Lang._("Hyper Link");
+            //tsbImage.Text = Lang._("Image");
             tsbBold.Text = Lang._("Bold");
             tsbItalic.Text = Lang._("Italic");
             tsbDecoration.Text = Lang._("Decoration");

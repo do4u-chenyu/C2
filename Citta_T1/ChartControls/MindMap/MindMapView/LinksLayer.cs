@@ -479,11 +479,16 @@ namespace C2.Controls.MapViews
 
         void Line_RelateTopicChanged(object sender, EventArgs e)
         {
-            if (!SelectedObject.IsEmpty)
+            if (!SelectedObject.IsEmpty && SelectedObject.Link != null)
             {
                 TempLayout = SelectedObject.Link.LayoutData;
                 InvalidateLink(SelectedObject.Link, true);
             }
+        }
+
+        public void CleanControlHandle()
+        {
+            TempLayout = null;
         }
 
         void Line_Changed(object sender, C2.Core.PropertyChangedEventArgs e)
@@ -601,7 +606,6 @@ namespace C2.Controls.MapViews
                 Link = link;
                 ControlHandle = controlHandle;
             }
-
             public bool IsEmpty
             {
                 get

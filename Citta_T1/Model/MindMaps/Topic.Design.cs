@@ -78,6 +78,7 @@ namespace C2.Model.MindMaps
             set { Style.Padding = value; }
         }
 
+
         [DefaultValue(TopicStyle.DefaultRoundRadius)]
         [DesignOnly(true), LocalDisplayName("Round Radius"), LocalCategory("Appearance")]
         public int RoundRadius

@@ -278,7 +278,6 @@ namespace C2.Controls
 
         public Bitmap SaveAsImage()
         {
-            //Bitmap bmp = new Bitmap(ContentSize.Width, ContentSize.Height);
             Bitmap bmp = new Bitmap(ClientSize.Width, ClientSize.Height);
 
             using (Graphics grf = Graphics.FromImage(bmp))

@@ -38,6 +38,10 @@ namespace C2.Dialogs
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+            CheckName();
+        }
+        private void CheckName()
+        {
             string titleName = this.textBox.Text.Trim();
             if (titleName.Length == 0)
                 return;
@@ -56,7 +60,6 @@ namespace C2.Dialogs
             ModelTitle = titleName;
             this.DialogResult = DialogResult.OK;
         }
-
         private  string GenTargetName(FormType formType)
         {
             switch (formType)
@@ -76,10 +79,7 @@ namespace C2.Dialogs
             // 按下回车键
             if (e.KeyChar == 13)
             {
-                if (this.textBox.Text.Length == 0)
-                    return;
-                ModelTitle = this.textBox.Text;
-                this.DialogResult = DialogResult.OK;
+                CheckName();
             }
         }
 
