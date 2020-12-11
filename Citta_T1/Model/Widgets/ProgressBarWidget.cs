@@ -270,7 +270,7 @@ namespace C2.Model.Widgets
                 size = TextRenderer.MeasureText("100%", e.Font, size);
             else
                 size = Size.Ceiling(e.Graphics.MeasureString("100%", e.Font, new SizeF(size.Width, size.Height)));
-
+            size.Width += 5;
             if (Alignment == WidgetAlignment.Left || Alignment == WidgetAlignment.Right)
             {
                 size = new Size(size.Height, size.Width);
