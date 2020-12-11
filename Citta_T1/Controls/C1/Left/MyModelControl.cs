@@ -91,8 +91,8 @@ namespace C2.Controls.Left
             }
 
 
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.MyModelPaintPanel.ResumeLayout(false);
+            this.MyModelPaintPanel.PerformLayout();
         }
 
         private void MyModelControl_MouseDown(object sender, MouseEventArgs e)
