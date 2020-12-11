@@ -15,9 +15,13 @@ namespace C2.Controls.MapViews
     {
         Topic Topic;
         ChartObject[] PasteObjects;
+        object ClipboardData;
 
         public PasteCommand(Document document, Topic topic)
         {
+            /*
+             * 需要保存
+             */
             Document = document;
             Topic = topic;
 
@@ -34,6 +38,9 @@ namespace C2.Controls.MapViews
 
         public override bool Rollback()
         {
+            /*
+             * 不是真的删除Topic，而是存起来
+             */
             AfterSelection = null;
 
             if (PasteObjects != null)
@@ -57,7 +64,7 @@ namespace C2.Controls.MapViews
 
                 }
 
-                PasteObjects = null;
+                //PasteObjects = null;
                 return true;
             }
             else
@@ -67,7 +74,24 @@ namespace C2.Controls.MapViews
         }
         public override bool Redo()
         {
-            return Execute();
+            /* Topic在Undo的时候不能真的删掉
+             * 需要存起来，Redo的时候直接用这个Topic，而不是使用Clipboard data 新建一个
+             * Redo的时候，不能直接把粘贴板的数据弄过来
+             */
+            AfterSelection = null;
+
+            if (ClipboardData is string)
+            {
+                return PasteText(Topic, ClipboardData as string);
+            }
+            else if (ClipboardData is object)
+            {
+                return PasteTopic(Topic, ClipboardData, true);
+            }
+            else
+            {
+                return false;
+            }
         }
         public override bool Execute()
         {
@@ -91,6 +115,7 @@ namespace C2.Controls.MapViews
         {
             if (!string.IsNullOrEmpty(text))
             {
+                ClipboardData = text;
                 var ts = new TextSerializer();
                 var topics = ts.DeserializeTopic(text);
                 if (topics != null && topics.Length > 0)
@@ -107,19 +132,29 @@ namespace C2.Controls.MapViews
             return true;
         }
 
-        bool PasteTopic(Topic topic, object data)
+        bool PasteTopic(Topic topic, object data, bool isRedo=false)
         {
             if (data is MapClipboardData)
             {
-                var tcd = (MapClipboardData)data;
-                //var topics = tcd.GetTopics();
-                var chartObjects = PasteObjectsTo(tcd, Document, topic);
+                ChartObject[] chartObjects = null;
+                if (isRedo)
+                {
+                    chartObjects = PasteObjectsTo(PasteObjects, Document, topic); // Redo的时候不可以直接粘贴，需要把PasteObjects直接贴进去
+                }
+                else
+                {
+                    var tcd = (MapClipboardData)data;
+                    //var topics = tcd.GetTopics();
+                    chartObjects = PasteObjectsTo(tcd, Document, topic); // Redo的时候不可以直接粘贴，需要把PasteObjects直接贴进去
+                }
                 if (chartObjects.IsNullOrEmpty())
                     return true;
 
                 PasteObjects = chartObjects;
                 AfterSelection = chartObjects;
 
+                if (ClipboardData == null)
+                    ClipboardData = data;
                 return true;
             }
             else
@@ -131,6 +166,10 @@ namespace C2.Controls.MapViews
         public static ChartObject[] PasteObjectsTo(MapClipboardData data, Document document, Topic target)
         {
             var chartObjects = data.GetChartObjects();
+            return PasteObjectsTo(chartObjects, document, target);
+        }
+        public static ChartObject[] PasteObjectsTo(ChartObject[] chartObjects, Document document, Topic target)
+        {
             if (!chartObjects.IsNullOrEmpty())
             {
                 var newids = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
