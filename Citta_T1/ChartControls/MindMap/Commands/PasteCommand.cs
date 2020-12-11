@@ -82,7 +82,7 @@ namespace C2.Controls.MapViews
 
             if (ClipboardData is string)
             {
-                return PasteText(Topic, ClipboardData as string);
+                return PasteText(Topic, ClipboardData as string, true);
             }
             else if (ClipboardData is object)
             {
@@ -111,13 +111,13 @@ namespace C2.Controls.MapViews
             }
         }
 
-        bool PasteText(Topic topic, string text)
+        bool PasteText(Topic topic, string text, bool isRedo=false)
         {
             if (!string.IsNullOrEmpty(text))
             {
                 ClipboardData = text;
                 var ts = new TextSerializer();
-                var topics = ts.DeserializeTopic(text);
+                var topics = isRedo ? PasteObjects : ts.DeserializeTopic(text); 
                 if (topics != null && topics.Length > 0)
                 {
                     foreach (Topic ct in topics)
