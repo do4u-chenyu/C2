@@ -209,7 +209,8 @@ namespace C2.Model.MindMaps
         }
 
         [DefaultValue(null)]
-        [LocalDisplayName("Icon"), LocalCategory("Data")]
+        //[LocalDisplayName("Icon"), LocalCategory("Data")]
+        [Browsable(false)]
         public C2.Model.Widgets.PictureWidget.PictureDesign Icon
         {
             get 

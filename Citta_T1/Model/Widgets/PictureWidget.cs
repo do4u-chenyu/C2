@@ -137,8 +137,10 @@ namespace C2.Model.Widgets
                 }
             }
         }
-        
-        [DefaultValue(null), DesignOnly(true), LocalDisplayName("Image"), LocalCategory("Data")]
+
+        //[DefaultValue(null), DesignOnly(true), LocalDisplayName("Image"), LocalCategory("Data")]
+        [Browsable(false)]
+
         public PictureDesign Image
         {
             get { return _Image; }
@@ -149,8 +151,10 @@ namespace C2.Model.Widgets
             }
         }
 
-        [DefaultValue(false), LocalDisplayName("Embed In"), LocalCategory("Data")]
-        [TypeConverter(typeof(C2.Design.BoolConverter))]
+        //[DefaultValue(false), LocalDisplayName("Embed In"), LocalCategory("Data")]
+        //[TypeConverter(typeof(C2.Design.BoolConverter))]
+        [Browsable(false)]
+
         public bool EmbedIn
         {
             get { return _EmbedIn; }

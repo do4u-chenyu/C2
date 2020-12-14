@@ -101,7 +101,9 @@ namespace C2.Model.Widgets
             }
         }
 
-        [DefaultValue(0), LocalDisplayName("Padding"), LocalCategory("Layout")]
+        //[DefaultValue(0), LocalDisplayName("Padding"), LocalCategory("Layout")]
+        [Browsable(false)]
+
         public int Padding
         {
             get { return _Padding; }

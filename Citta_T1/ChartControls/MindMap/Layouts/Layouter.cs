@@ -328,6 +328,7 @@ namespace C2.Controls.MapViews
                 var widgetMargin = Math.Max(e.Chart.WidgetMargin, (rect.Height - totalHeight) / (dynamicWidgets.Length + 1));
 
                 int y = rect.Y + widgetMargin;
+                //int y = rect.Y;
                 int x = rect.X + e.Chart.WidgetMargin;
                 int dx = -1;
                 int dy = y;
@@ -338,8 +339,9 @@ namespace C2.Controls.MapViews
                     if (w.FitContainer)
                     {
                         rw.X = x;
-                        rw.Y = rect.Y + e.Chart.WidgetMargin +(rect.Height-w.Height)/2;
+                        rw.Y = rect.Y  +(rect.Height-w.Height)/2;
                         //rw.Height = w.Height - e.Chart.WidgetMargin * 2;
+                        rw.Height = w.Height;
                         x += rw.Width + e.Chart.WidgetMargin;
                     }
                     else
@@ -375,9 +377,9 @@ namespace C2.Controls.MapViews
 
                     if (w.FitContainer)
                     {
-                        rw.X = rect.X + e.Chart.WidgetMargin+(rect.Width-w.Width)/2;
+                        rw.X = rect.X +(rect.Width-w.Width)/2;
                         rw.Y = y;
-                        rw.Width = w.Width - e.Chart.WidgetMargin * 2;
+                        rw.Width = w.Width;
                         y += rw.Height + e.Chart.WidgetMargin;
                     }
                     else
