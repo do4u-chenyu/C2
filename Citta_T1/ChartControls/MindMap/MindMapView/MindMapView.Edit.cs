@@ -123,16 +123,21 @@ namespace C2.Controls.MapViews
         #region 添加C2挂件
         public void AddOperator()
         {
-            foreach(Topic topic in SelectedTopics)
+            foreach (Topic topic in SelectedTopics)
             {
                 if (topic.FindWidget<OperatorWidget>() != null)
+                {
+                    ShowDesigner(topic.FindWidget<OperatorWidget>(), true);
                     return;
+                }
+                    
             }
 
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
                 SelectedTopics[0].Widgets.Add(new OperatorWidget());
-                ShowDesigner(SelectedTopics[0],false);
+                //ShowDesigner(SelectedTopics[0],false);
+                ShowDesigner(SelectedTopics[0].FindWidget<OperatorWidget>(), true);
             }
         }
 

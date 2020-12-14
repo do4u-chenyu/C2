@@ -229,11 +229,15 @@ namespace C2.Controls.Common
 
         private void DataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            if (ComboDataSource == null || this.dataSourceCombo.SelectedIndex < 0 || ComboDataSource.Count <= this.dataSourceCombo.SelectedIndex )
+                return;
             SelectedDataSource = ComboDataSource[this.dataSourceCombo.SelectedIndex];
         }
 
         private void OperatorCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            if (ComboOperator == null || ComboOperator.Count <= this.operatorCombo.SelectedIndex || this.operatorCombo.SelectedIndex < 0)
+                return;
             SelectedOperator = Lang._(ComboOperator[this.operatorCombo.SelectedIndex].ToString());
         }
         private void OnTopicChanged(Topic old)
