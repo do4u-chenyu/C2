@@ -67,8 +67,13 @@ namespace C2.Design
                 Padding? padding = ST.GetPadding((string)value);
                 if (padding.HasValue)
                     return padding.Value;
-            }
+                else
+                {
+                    value = 2;
+                    return value;
+                }
 
+            }
             return base.ConvertFrom(context, culture, value);
         }
 

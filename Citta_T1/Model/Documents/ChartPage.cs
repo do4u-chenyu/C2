@@ -228,7 +228,7 @@ namespace C2.Model.Documents
         }
 
         [DefaultValue(null)]
-        [LocalDisplayName("Font"), LocalCategory("Appearance")]
+        [Browsable(false)]
         public virtual Font Font
         {
             get { return _Font; }
@@ -364,7 +364,8 @@ namespace C2.Model.Documents
         }
 
         [DefaultValue(typeof(Size), "100, 100")]
-        [DesignOnly(true), LocalDisplayName("Picture Thumb Size"), LocalCategory("Layout")]
+        // [DesignOnly(true), LocalDisplayName("Picture Thumb Size"), LocalCategory("Layout")]
+        [Browsable(false)]
         public Size PictureThumbSize
         {
             get { return _PictureThumbSize; }
