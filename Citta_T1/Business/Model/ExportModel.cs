@@ -34,7 +34,7 @@ namespace C2.Business.Model
             }
             return ExportModelInstance;
         }
-        public void Export(string fullXmlFilePath,string modelNewName)
+        public void Export(string fullXmlFilePath,string modelNewName,string exportFilePath)
         {
             // 模型文档不存在返回
             if (!File.Exists(fullXmlFilePath))
@@ -45,7 +45,7 @@ namespace C2.Business.Model
             this.FullXmlFilePath = fullXmlFilePath;
             this.ModelNewName = modelNewName;
             // 准备要导出的模型文档
-            if (!CopyModelAndDataFiles())
+            if (!CopyModelAndDataFiles(exportFilePath))
                 return;
         }
 
@@ -70,9 +70,9 @@ namespace C2.Business.Model
                 Directory.Delete(newModelPath, true);
         }
 
-        private bool CopyModelAndDataFiles()
+        private bool CopyModelAndDataFiles(string exportFilePath)
         {
-            string exportPath = Path.Combine(Global.UserWorkspacePath, "模型市场");
+            string exportPath = exportFilePath;
             string modelPath = Path.GetDirectoryName(this.FullXmlFilePath);
             //string modelName = Path.GetFileNameWithoutExtension(this.FullXmlFilePath);
             newModelPath = Path.Combine(exportPath, ModelNewName);

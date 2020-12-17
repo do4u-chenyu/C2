@@ -167,7 +167,7 @@ namespace C2.Controls.MapViews
                 return;
 
             OperatorWidget opw = htr.Topic.FindWidget<OperatorWidget>();
-            string modelDocumentName = modelTitle;
+            string modelDocumentName = createNewModelForm.ModelTitle;
             string modelUserPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "业务视图", Global.GetCurrentDocument().Name);
             string modelSavePath = Path.Combine(modelUserPath, modelDocumentName, modelDocumentName + ".xml");
             DataItem modelDataItem = new DataItem(modelSavePath, modelDocumentName, '\t', OpUtil.Encoding.NoNeed, OpUtil.ExtType.Unknow);
@@ -190,12 +190,13 @@ namespace C2.Controls.MapViews
             }
             //新建模型前保存一次，防止出现用户一直未保存导致模型视图路径逻辑出错
             Global.GetDocumentForm().Save();
+
             //需要拷贝模型市场文件夹到当前模型路径
             //复制之后修改XML文件中数据源路径
-            //string modelDir = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场", modelNewName);
-            //string modelFilePath = Path.Combine(modelDir, modelNewName + ".xml");
-            //string dirs = Path.Combine(modelDir, "_datas");
-            //ImportModel.GetInstance().RenameFile(dirs, modelFilePath);
+            ExportModel.GetInstance().Export(modelFullFilePath, modelDocumentName, modelUserPath);
+            
+            string dirs = Path.Combine(modelUserPath, modelDocumentName, "_datas");
+            ImportModel.GetInstance().RenameFile(dirs, modelSavePath);
 
             //Global.GetMainForm().NewCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, htr.Topic);
         }

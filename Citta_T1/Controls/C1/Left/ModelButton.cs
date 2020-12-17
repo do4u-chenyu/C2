@@ -170,7 +170,7 @@ namespace C2.Controls.Left
 
         private void ExportModelButton_Click(object sender, EventArgs e)
         {
-            C2.Business.Model.ExportModel.GetInstance().Export(this.FullFilePath, Path.GetFileNameWithoutExtension(this.FullFilePath));
+            C2.Business.Model.ExportModel.GetInstance().Export(this.FullFilePath, Path.GetFileNameWithoutExtension(this.FullFilePath), Path.Combine(Global.UserWorkspacePath, "模型市场"));
         }
 
         private void ContextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
