@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInstallSet", "UserInsta
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IAO解决方案", "IAO解决方案\IAO解决方案.vdproj", "{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2自动化测试样例", "C2自动化测试样例\C2自动化测试样例.csproj", "{DAC1F3E3-691C-4B51-817A-C8D31818F080}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,12 @@ Global
 		{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}.Release|Any CPU.ActiveCfg = Release
 		{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}.开发调试|Any CPU.ActiveCfg = Release
 		{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}.开发调试|Any CPU.Build.0 = Release
+		{DAC1F3E3-691C-4B51-817A-C8D31818F080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC1F3E3-691C-4B51-817A-C8D31818F080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC1F3E3-691C-4B51-817A-C8D31818F080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC1F3E3-691C-4B51-817A-C8D31818F080}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC1F3E3-691C-4B51-817A-C8D31818F080}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC1F3E3-691C-4B51-817A-C8D31818F080}.开发调试|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

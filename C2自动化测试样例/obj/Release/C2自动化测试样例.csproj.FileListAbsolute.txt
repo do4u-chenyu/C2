@@ -1,0 +1,5 @@
+D:\work\C2\C2自动化测试样例\obj\Release\C2自动化测试样例.csproj.CoreCompileInputs.cache
+D:\work\C2\C2自动化测试样例\bin\Release\C2自动化测试样例.dll
+D:\work\C2\C2自动化测试样例\bin\Release\C2自动化测试样例.pdb
+D:\work\C2\C2自动化测试样例\obj\Release\C2自动化测试样例.dll
+D:\work\C2\C2自动化测试样例\obj\Release\C2自动化测试样例.pdb

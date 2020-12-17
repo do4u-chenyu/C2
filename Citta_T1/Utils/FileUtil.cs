@@ -368,6 +368,7 @@ namespace C2.Utils
                 if (i >= datas.Count)
                     datas.Add(blankRow);
                 else
+    
                 {
                     int numOfCurRow = datas[i].Count;
                     for (int j = 0; j < maxNumOfCol - numOfCurRow; j++)
