@@ -260,7 +260,7 @@ namespace C2.Controls.MapViews
             ImportModel.GetInstance().RenameFile(dirs, modelFilePath);
 
             if (!Global.GetMyModelControl().ContainModel(modelNewName))
-                    Global.GetMyModelControl().AddModel(modelNewName);
+                Global.GetMyModelControl().AddModel(modelNewName);
         }
         void MenuModelUpdate_Click(object sender, EventArgs e)
         {

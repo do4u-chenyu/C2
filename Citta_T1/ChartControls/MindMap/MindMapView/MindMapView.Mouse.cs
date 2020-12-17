@@ -1,3 +1,4 @@
+using C2.Business.Model;
 using C2.Configuration;
 using C2.Core;
 using C2.Dialogs;
@@ -134,6 +135,73 @@ namespace C2.Controls.MapViews
         }
         protected override void OnChartDragDrop(DragEventArgs e)
         {
+            ElementType type = (ElementType)e.Data.GetData("Type");
+            if (type == ElementType.DataSource)
+                AddDataButtonToTopic(e);
+            else if (type == ElementType.Empty)
+                AddModelButtonToTopic(e);
+
+        }
+        private void AddModelButtonToTopic(DragEventArgs e)
+        {
+            // 模型市场信息
+            string modelFullFilePath = (string)e.Data.GetData("Path");
+            string modelTitle = (string)e.Data.GetData("Text");
+            // 获取topic
+            Point pointToClient = this.ChartBox.PointToClient(new Point(e.X, e.Y));
+            var htr = HitTest(pointToClient.X, pointToClient.Y);
+
+            if (htr == HitTestResult.Empty)
+                return;
+
+            CreateNewModelForm createNewModelForm = new CreateNewModelForm
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                RelateMindMapView = this,
+                OpenDocuments = Global.GetMainForm().OpendDocuments(),
+                NewFormType = FormType.CanvasForm,
+                ModelType = "新建模型视图"
+            };
+            DialogResult dialogResult = createNewModelForm.ShowDialog();
+            if (dialogResult != DialogResult.OK)
+                return;
+
+            OperatorWidget opw = htr.Topic.FindWidget<OperatorWidget>();
+            string modelDocumentName = modelTitle;
+            string modelUserPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "业务视图", Global.GetCurrentDocument().Name);
+            string modelSavePath = Path.Combine(modelUserPath, modelDocumentName, modelDocumentName + ".xml");
+            DataItem modelDataItem = new DataItem(modelSavePath, modelDocumentName, '\t', OpUtil.Encoding.NoNeed, OpUtil.ExtType.Unknow);
+
+            if (opw == null)
+            {
+                htr.Topic.Add(new OperatorWidget { HasModelOperator = true, ModelDataItem = modelDataItem });
+
+            }
+            else if (opw.HasModelOperator)
+            {
+                HelpUtil.ShowMessageBox("该节点已存在高级模型，请右键算子挂件，选择对应模型进行修改或删除。", "已存在", MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                opw.HasModelOperator = true;
+                opw.ModelDataItem = modelDataItem;
+                Global.GetCurrentDocument().Modified = true;
+            }
+            //新建模型前保存一次，防止出现用户一直未保存导致模型视图路径逻辑出错
+            Global.GetDocumentForm().Save();
+            //需要拷贝模型市场文件夹到当前模型路径
+            //复制之后修改XML文件中数据源路径
+            //string modelDir = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场", modelNewName);
+            //string modelFilePath = Path.Combine(modelDir, modelNewName + ".xml");
+            //string dirs = Path.Combine(modelDir, "_datas");
+            //ImportModel.GetInstance().RenameFile(dirs, modelFilePath);
+
+            //Global.GetMainForm().NewCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, htr.Topic);
+        }
+
+        private void AddDataButtonToTopic(DragEventArgs e)
+        {
             // 数据源的信息
             DataItem dataItem = new DataItem(
                 (string)e.Data.GetData("Path"),
@@ -154,7 +222,7 @@ namespace C2.Controls.MapViews
                 Topic[] hitTopic = new Topic[] { htr.Topic };
                 hitTopic[0].Widgets.Add(new DataSourceWidget { DataItems = new List<DataItem> { dataItem } });
                 TopicUpdate(hitTopic[0], null);
-                ShowDesigner(hitTopic[0],false);
+                ShowDesigner(hitTopic[0], false);
                 return;
             }
             if (dsw.DataItems.Find((DataItem x) => x.FilePath.Equals(dataItem.FilePath)) == null)
@@ -162,14 +230,13 @@ namespace C2.Controls.MapViews
                 dsw.DataItems.Add(dataItem);
                 Global.GetCurrentDocument().Modified = true;
                 TopicUpdate(dsw.Container, null);
-                ShowDesigner(dsw.Container,false);
+                ShowDesigner(dsw.Container, false);
             }
             else
                 MessageBox.Show(String.Format("数据源{0}:[{1}]已存在,可以删除后重新导入.", dataItem.FileName, dataItem.FilePath),
                     "数据源已存在",                // 标题
                     MessageBoxButtons.OK,          // 按钮样式
                     MessageBoxIcon.Information);   // 图标样式
-
         }
         protected override void OnChartMouseDown(MouseEventArgs e)
         {

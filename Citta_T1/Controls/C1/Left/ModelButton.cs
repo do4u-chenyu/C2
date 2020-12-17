@@ -117,12 +117,18 @@ namespace C2.Controls.Left
 
         private void TextButton_MouseDown(object sender, MouseEventArgs e)
         {
-            // 鼠标左键双击触发
-            if (e.Button != MouseButtons.Left || e.Clicks != 2)
+            if (e.Button != MouseButtons.Left)
                 return;
-            RenameToolStripMenuItem_Click(sender, e);
-        }
 
+            if (e.Clicks == 1) // 单击拖拽
+            {
+                DataObject dragDropData = new DataObject();
+                dragDropData.SetData("Path", FullFilePath);    // 模型全路径
+                dragDropData.SetData("Type", ElementType.Empty);    // 模型为了统一逻辑，暂定为empty
+                dragDropData.SetData("Text", ModelTitle); 
+                this.textButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+            }
+        }
 
         private void FinishTextChange()
         {

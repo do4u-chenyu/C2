@@ -80,6 +80,7 @@
             this.textButton.TabIndex = 9;
             this.textButton.Text = "模型";
             this.textButton.UseVisualStyleBackColor = false;
+            this.textButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseDown);
             // 
             // contextMenuStrip1
             // 

@@ -978,13 +978,8 @@ namespace C2.Controls
             {
                 return;
             }
-            if (type == ElementType.DataSource)
-            {
-                
-
-                // 添加挂件
-                OnChartDragDrop(e);
-            }
+            // 添加挂件
+            OnChartDragDrop(e);
         }
 
         void ChartBox_DoubleClick(object sender, EventArgs e)
