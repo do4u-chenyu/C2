@@ -199,6 +199,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Design\SizeTypeConvert.cs" />
+    <Compile Include="Dialogs\AddDatabaseDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AddDatabaseDialog.Designer.cs">
+      <DependentUpon>AddDatabaseDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Base\BaseOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1405,6 +1411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Core\AccelaratorKeys\ShortcutKeysEditor.resx">
       <DependentUpon>ShortcutKeysEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddDatabaseDialog.resx">
+      <DependentUpon>AddDatabaseDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AddIconDialog.resx">
       <DependentUpon>AddIconDialog.cs</DependentUpon>

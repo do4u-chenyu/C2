@@ -33,7 +33,9 @@
             this.localDataLabel = new System.Windows.Forms.Label();
             this.localFrame = new System.Windows.Forms.Panel();
             this.externalFrame = new System.Windows.Forms.Panel();
+            this.addConnectLabel = new System.Windows.Forms.Label();
             this.dataSourceFrame.SuspendLayout();
+            this.externalFrame.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataSourceFrame
@@ -97,11 +99,24 @@
             this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.externalFrame.BackColor = System.Drawing.Color.White;
             this.externalFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.externalFrame.Controls.Add(this.addConnectLabel);
             this.externalFrame.Location = new System.Drawing.Point(3, 35);
             this.externalFrame.Name = "externalFrame";
             this.externalFrame.Size = new System.Drawing.Size(179, 621);
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
+            // 
+            // addConnectLabel
+            // 
+            this.addConnectLabel.AutoSize = true;
+            this.addConnectLabel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.addConnectLabel.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.addConnectLabel.Location = new System.Drawing.Point(4, 4);
+            this.addConnectLabel.Name = "label1";
+            this.addConnectLabel.Size = new System.Drawing.Size(77, 14);
+            this.addConnectLabel.TabIndex = 0;
+            this.addConnectLabel.Text = "+ 添加连接";
+            this.addConnectLabel.Click += new System.EventHandler(this.AddConnectLabel_Click);
             // 
             // DataSourceControl
             // 
@@ -114,6 +129,8 @@
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DataSourceControl_Paint);
             this.dataSourceFrame.ResumeLayout(false);
+            this.externalFrame.ResumeLayout(false);
+            this.externalFrame.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -125,5 +142,6 @@
         private System.Windows.Forms.Panel externalFrame;
         private System.Windows.Forms.Label externalDataLabel;
         private System.Windows.Forms.Label localDataLabel;
+        private System.Windows.Forms.Label addConnectLabel;
     }
 }

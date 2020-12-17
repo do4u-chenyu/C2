@@ -1,5 +1,6 @@
 ﻿using C2.Business.DataSource;
 using C2.Core;
+using C2.Dialogs;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -144,6 +145,20 @@ namespace C2.Controls.Left
             p.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
             p.DashPattern = new float[] { 4, 4 };
             g.DrawLine(p, 0, 30, 200, 30);//x1,y1,x2,y2
+        }
+
+        private void AddConnectLabel_Click(object sender, EventArgs e)
+        {
+            var dialog = new AddDatabaseDialog();
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                ConnectDatabase(dialog.DatabaseInfo);
+            }
+        }
+
+        private void ConnectDatabase(DatabaseObject databaseInfo)
+        {
+            MessageBox.Show(databaseInfo.DatabaseType + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
         }
     }
 }

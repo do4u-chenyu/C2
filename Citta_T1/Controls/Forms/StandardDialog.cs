@@ -22,19 +22,19 @@ namespace C2.Controls
             AutoClose = true;
 
             BtnOK = new Button();
-            BtnOK.Text = "&OK";
+            BtnOK.Text = Lang._("OK");
             BtnOK.TabIndex = 10000;
             BtnOK.UseVisualStyleBackColor = true;
             BtnOK.Click += new EventHandler(BtnOK_Click);
 
             BtnCancel = new Button();
-            BtnCancel.Text = "&Cancel";
+            BtnCancel.Text = Lang._("Cancel");
             BtnCancel.TabIndex = 10001;
             BtnCancel.UseVisualStyleBackColor = true;
             BtnCancel.Click += new EventHandler(BtnCancel_Click);
 
             BtnApply = new Button();
-            BtnApply.Text = "&Apply";
+            BtnApply.Text = Lang._("Apply");
             BtnApply.TabIndex = 10002;
             BtnApply.Visible = ShowApplyButton;
             BtnApply.UseVisualStyleBackColor = true;
