@@ -74,6 +74,7 @@ namespace C2.Controls.MapViews
                 case OpType.FilterOperator: return new C2FilterOperatorView(opw);
                 case OpType.GroupOperator: return new C2GroupOperatorView(opw);
                 case OpType.PythonOperator: return new C2PythonOperatorView(opw);
+                case OpType.SqlOperator: return new C2SqlOperatorView();
                 default: return null;
             }
         }
