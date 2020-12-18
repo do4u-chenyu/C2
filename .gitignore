@@ -63,3 +63,9 @@ UpgradeLog*
 Citta_T1/Templates/
 /Citta_T1/datas/100W_test.csv
 /Citta_T1/datas/100W_test.tsv
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/

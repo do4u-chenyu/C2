@@ -118,6 +118,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\ThirdPartyLibrary\Oracle.ManagedDataAccess.19.10.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -198,6 +201,12 @@
     <Compile Include="Controls\DataCharts\RingChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Database\Connection.cs" />
+    <Compile Include="Database\CursorHelper.cs" />
+    <Compile Include="Database\DbHelper.cs" />
+    <Compile Include="Database\Schema.cs" />
+    <Compile Include="Database\Settings.cs" />
+    <Compile Include="Database\Table.cs" />
     <Compile Include="Design\SizeTypeConvert.cs" />
     <Compile Include="Dialogs\AddDatabaseDialog.cs">
       <SubType>Form</SubType>
@@ -755,6 +764,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\DbUtil.cs" />
     <Compile Include="Utils\XmlUtil.cs" />
     <Compile Include="WorkSpace\BaseWorkSpace.cs">
       <SubType>Component</SubType>
