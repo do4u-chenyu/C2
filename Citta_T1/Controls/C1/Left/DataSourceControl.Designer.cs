@@ -33,12 +33,12 @@
             this.localDataLabel = new System.Windows.Forms.Label();
             this.localFrame = new System.Windows.Forms.Panel();
             this.externalFrame = new System.Windows.Forms.Panel();
-            this.addConnectLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.linkPanel = new System.Windows.Forms.Panel();
             this.frameCombo = new System.Windows.Forms.ComboBox();
+            this.linkPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.addConnectLabel = new System.Windows.Forms.Label();
             this.dataTabelCheckBoxList = new C2.Controls.Common.ComCheckBoxList();
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
@@ -118,27 +118,31 @@
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
             // 
-            // addConnectLabel
+            // frameCombo
             // 
-            this.addConnectLabel.AutoSize = true;
-            this.addConnectLabel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.addConnectLabel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.addConnectLabel.Location = new System.Drawing.Point(4, 4);
-            this.addConnectLabel.Name = "addConnectLabel";
-            this.addConnectLabel.Size = new System.Drawing.Size(77, 14);
-            this.addConnectLabel.TabIndex = 0;
-            this.addConnectLabel.Text = "+ 添加连接";
-            this.addConnectLabel.Click += new System.EventHandler(this.AddConnectLabel_Click);
+            this.frameCombo.FormattingEnabled = true;
+            this.frameCombo.Location = new System.Drawing.Point(10, 219);
+            this.frameCombo.Name = "frameCombo";
+            this.frameCombo.Size = new System.Drawing.Size(159, 20);
+            this.frameCombo.TabIndex = 5;
             // 
-            // label1
+            // linkPanel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(3, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 19);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "连接";
+            this.linkPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.linkPanel.Location = new System.Drawing.Point(10, 59);
+            this.linkPanel.Name = "linkPanel";
+            this.linkPanel.Size = new System.Drawing.Size(159, 124);
+            this.linkPanel.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(3, 254);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 19);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "数据表";
             // 
             // label2
             // 
@@ -150,31 +154,27 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "架构";
             // 
-            // label3
+            // label1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(3, 254);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 19);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "数据表";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(3, 37);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 19);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "连接";
             // 
-            // linkPanel
+            // addConnectLabel
             // 
-            this.linkPanel.Location = new System.Drawing.Point(10, 59);
-            this.linkPanel.Name = "linkPanel";
-            this.linkPanel.Size = new System.Drawing.Size(159, 124);
-            this.linkPanel.TabIndex = 4;
-            // 
-            // frameCombo
-            // 
-            this.frameCombo.FormattingEnabled = true;
-            this.frameCombo.Location = new System.Drawing.Point(10, 219);
-            this.frameCombo.Name = "frameCombo";
-            this.frameCombo.Size = new System.Drawing.Size(159, 20);
-            this.frameCombo.TabIndex = 5;
+            this.addConnectLabel.AutoSize = true;
+            this.addConnectLabel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.addConnectLabel.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.addConnectLabel.Location = new System.Drawing.Point(4, 4);
+            this.addConnectLabel.Name = "addConnectLabel";
+            this.addConnectLabel.Size = new System.Drawing.Size(77, 14);
+            this.addConnectLabel.TabIndex = 0;
+            this.addConnectLabel.Text = "+ 添加连接";
+            this.addConnectLabel.Click += new System.EventHandler(this.AddConnectLabel_Click);
             // 
             // dataTabelCheckBoxList
             // 

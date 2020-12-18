@@ -160,10 +160,24 @@ namespace C2.Controls.Left
         {
             MessageBox.Show(databaseInfo.DatabaseType + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
         }
-
-        private void label3_Click(object sender, EventArgs e)
+        public void GenLinkButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
+            // 根据导入数据动态生成一个button
+            DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding);
+            LayoutModelButtonLocation(dataButton);
 
+            // 判断是否有路径文件
+            if (this.DataSourceDictI2B.ContainsKey(fullFilePath))
+            {
+                String name = this.DataSourceDictI2B[fullFilePath].DataSourceName;
+                HelpUtil.ShowMessageBox("该文件已存在，数据名为：" + name);
+                return;
+            }
+            this.DataSourceDictI2B.Add(fullFilePath, dataButton);
+            this.localFrame.Controls.Add(dataButton);
+            //数据源持久化存储
+            DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
+            dataSource.WriteDataSourceInfo(dataButton);
         }
     }
 }
