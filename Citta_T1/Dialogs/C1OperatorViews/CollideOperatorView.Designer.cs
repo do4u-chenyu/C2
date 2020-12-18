@@ -40,7 +40,7 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(252, 45);
-            this.dataSourceTB1.Size = new System.Drawing.Size(144, 28);
+            this.dataSourceTB1.Size = new System.Drawing.Size(144, 23);
             this.dataSourceTB1.TabIndex = 10;
             this.dataSourceTB1.Visible = true;
             // 
@@ -64,28 +64,28 @@
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(69, 126);
-            this.outListCCBL0.Size = new System.Drawing.Size(144, 29);
+            this.outListCCBL0.Size = new System.Drawing.Size(144, 23);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox0
             // 
-            this.comboBox0.Location = new System.Drawing.Point(2, 2);
-            this.comboBox0.Size = new System.Drawing.Size(145, 26);
+            this.comboBox0.Location = new System.Drawing.Point(2, 5);
+            this.comboBox0.Size = new System.Drawing.Size(145, 21);
             // 
             // comboBox1
             // 
-            this.comboBox1.Location = new System.Drawing.Point(151, 2);
-            this.comboBox1.Size = new System.Drawing.Size(145, 26);
+            this.comboBox1.Location = new System.Drawing.Point(151, 5);
+            this.comboBox1.Size = new System.Drawing.Size(145, 21);
             this.comboBox1.Visible = true;
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(452, 15);
+            this.topPanel.Size = new System.Drawing.Size(454, 15);
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 336);
-            this.bottomPanel.Size = new System.Drawing.Size(452, 43);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 347);
+            this.bottomPanel.Size = new System.Drawing.Size(454, 43);
             // 
             // valuePanel
             // 
@@ -100,7 +100,7 @@
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(0, 15);
-            this.valuePanel.Size = new System.Drawing.Size(452, 321);
+            this.valuePanel.Size = new System.Drawing.Size(454, 332);
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
@@ -115,7 +115,7 @@
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(4, 10);
-            this.label1.Size = new System.Drawing.Size(85, 19);
+            this.label1.Size = new System.Drawing.Size(63, 14);
             // 
             // label3
             // 
@@ -124,7 +124,7 @@
             this.label3.Location = new System.Drawing.Point(4, 89);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 19);
+            this.label3.Size = new System.Drawing.Size(63, 14);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段";
             // 
@@ -135,7 +135,7 @@
             this.label2.Location = new System.Drawing.Point(4, 164);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 19);
+            this.label2.Size = new System.Drawing.Size(63, 14);
             this.label2.TabIndex = 0;
             this.label2.Text = "碰撞条件";
             // 
@@ -216,7 +216,7 @@
             // CollideOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(452, 379);
+            this.ClientSize = new System.Drawing.Size(454, 390);
             this.ControlBox = true;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.bottomPanel);

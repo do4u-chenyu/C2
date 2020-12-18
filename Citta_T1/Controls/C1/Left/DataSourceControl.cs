@@ -160,5 +160,10 @@ namespace C2.Controls.Left
         {
             MessageBox.Show(databaseInfo.DatabaseType + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

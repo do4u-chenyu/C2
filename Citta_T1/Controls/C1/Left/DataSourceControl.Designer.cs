@@ -34,6 +34,12 @@
             this.localFrame = new System.Windows.Forms.Panel();
             this.externalFrame = new System.Windows.Forms.Panel();
             this.addConnectLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.linkPanel = new System.Windows.Forms.Panel();
+            this.frameCombo = new System.Windows.Forms.ComboBox();
+            this.dataTabelCheckBoxList = new C2.Controls.Common.ComCheckBoxList();
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
             this.SuspendLayout();
@@ -99,6 +105,12 @@
             this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.externalFrame.BackColor = System.Drawing.Color.White;
             this.externalFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.externalFrame.Controls.Add(this.dataTabelCheckBoxList);
+            this.externalFrame.Controls.Add(this.frameCombo);
+            this.externalFrame.Controls.Add(this.linkPanel);
+            this.externalFrame.Controls.Add(this.label3);
+            this.externalFrame.Controls.Add(this.label2);
+            this.externalFrame.Controls.Add(this.label1);
             this.externalFrame.Controls.Add(this.addConnectLabel);
             this.externalFrame.Location = new System.Drawing.Point(3, 35);
             this.externalFrame.Name = "externalFrame";
@@ -112,11 +124,66 @@
             this.addConnectLabel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.addConnectLabel.ForeColor = System.Drawing.SystemColors.Highlight;
             this.addConnectLabel.Location = new System.Drawing.Point(4, 4);
-            this.addConnectLabel.Name = "label1";
+            this.addConnectLabel.Name = "addConnectLabel";
             this.addConnectLabel.Size = new System.Drawing.Size(77, 14);
             this.addConnectLabel.TabIndex = 0;
             this.addConnectLabel.Text = "+ 添加连接";
             this.addConnectLabel.Click += new System.EventHandler(this.AddConnectLabel_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(3, 37);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 19);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "连接";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(3, 193);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 19);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "架构";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(3, 254);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 19);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "数据表";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // linkPanel
+            // 
+            this.linkPanel.Location = new System.Drawing.Point(10, 59);
+            this.linkPanel.Name = "linkPanel";
+            this.linkPanel.Size = new System.Drawing.Size(159, 124);
+            this.linkPanel.TabIndex = 4;
+            // 
+            // frameCombo
+            // 
+            this.frameCombo.FormattingEnabled = true;
+            this.frameCombo.Location = new System.Drawing.Point(10, 219);
+            this.frameCombo.Name = "frameCombo";
+            this.frameCombo.Size = new System.Drawing.Size(159, 20);
+            this.frameCombo.TabIndex = 5;
+            // 
+            // dataTabelCheckBoxList
+            // 
+            this.dataTabelCheckBoxList.DataSource = null;
+            this.dataTabelCheckBoxList.Location = new System.Drawing.Point(10, 279);
+            this.dataTabelCheckBoxList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataTabelCheckBoxList.Name = "dataTabelCheckBoxList";
+            this.dataTabelCheckBoxList.Size = new System.Drawing.Size(159, 23);
+            this.dataTabelCheckBoxList.TabIndex = 6;
             // 
             // DataSourceControl
             // 
@@ -143,5 +210,11 @@
         private System.Windows.Forms.Label externalDataLabel;
         private System.Windows.Forms.Label localDataLabel;
         private System.Windows.Forms.Label addConnectLabel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel linkPanel;
+        private System.Windows.Forms.ComboBox frameCombo;
+        private Common.ComCheckBoxList dataTabelCheckBoxList;
     }
 }
