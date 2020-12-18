@@ -1503,6 +1503,9 @@
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SortOperatorView.resx">
       <DependentUpon>C2SortOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SqlOperatorView.resx">
+      <DependentUpon>C2SqlOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckUpdate.resx">
       <DependentUpon>CheckUpdate.cs</DependentUpon>
       <SubType>Designer</SubType>
