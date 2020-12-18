@@ -223,7 +223,7 @@ namespace C2.Controls.Common
                 case OpType.FilterOperator:return new C2FilterOperatorView(OpWidget);
                 case OpType.GroupOperator:return new C2GroupOperatorView(OpWidget);
                 case OpType.PythonOperator:return new C2PythonOperatorView(OpWidget);
-                case OpType.SqlOperator:return new C2SqlOperatorView();
+                case OpType.SqlOperator:return new C2SqlOperatorView(OpWidget);
                 default:return null;
             }
         }
