@@ -49,6 +49,13 @@ namespace C2.Dialogs
         {
             DatabaseInfo.Password = this.passwordTextBox.Text;
         }
+
+        protected override bool OnOKButtonClick()
+        {
+            
+
+            return base.OnOKButtonClick();
+        }
     }
 
     class DatabaseObject

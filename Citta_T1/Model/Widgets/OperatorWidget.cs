@@ -33,6 +33,7 @@ namespace C2.Model.Widgets
         CustomOperator, //AI实践
         DataFormatOperator, //数据标准化
         PythonOperator, //python算子
+        SqlOperator     //sql算子
     }
     public class OperatorWidget : C2BaseWidget, IRemark
     {

@@ -415,6 +415,7 @@
 	<item name="CustomOperator">AI实践</item>	
 	<item name="DataFormatOperator">数据标准化</item>	
 	<item name="PythonOperator">Python</item>	
+	<item name="SqlOperator">自定义Sql</item>	
 	<item name="ModelOperator">高级模型</item>
 	<item name="CHART">图表挂件</item>
 	<item name="DATASOURCE">数据源挂件</item>
