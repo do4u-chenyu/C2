@@ -40,6 +40,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.addConnectLabel = new System.Windows.Forms.Label();
             this.dataTabelCheckBoxList = new C2.Controls.Common.ComCheckBoxList();
+            this.dataTabelPanel = new System.Windows.Forms.Panel();
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
             this.SuspendLayout();
@@ -105,6 +106,7 @@
             this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.externalFrame.BackColor = System.Drawing.Color.White;
             this.externalFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.externalFrame.Controls.Add(this.dataTabelPanel);
             this.externalFrame.Controls.Add(this.dataTabelCheckBoxList);
             this.externalFrame.Controls.Add(this.frameCombo);
             this.externalFrame.Controls.Add(this.linkPanel);
@@ -185,6 +187,14 @@
             this.dataTabelCheckBoxList.Size = new System.Drawing.Size(159, 23);
             this.dataTabelCheckBoxList.TabIndex = 6;
             // 
+            // dataTabelPanel
+            // 
+            this.dataTabelPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataTabelPanel.Location = new System.Drawing.Point(10, 320);
+            this.dataTabelPanel.Name = "dataTabelPanel";
+            this.dataTabelPanel.Size = new System.Drawing.Size(159, 124);
+            this.dataTabelPanel.TabIndex = 5;
+            // 
             // DataSourceControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -216,5 +226,6 @@
         private System.Windows.Forms.Panel linkPanel;
         private System.Windows.Forms.ComboBox frameCombo;
         private Common.ComCheckBoxList dataTabelCheckBoxList;
+        private System.Windows.Forms.Panel dataTabelPanel;
     }
 }
