@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,63 +14,34 @@ namespace C2.Dialogs
 {
     partial class AddDatabaseDialog : StandardDialog
     {
-        public DatabaseObject DatabaseInfo { get; }
+        public DatabaseItem DatabaseInfo { get; }
         public AddDatabaseDialog()
         {
             InitializeComponent();
-            DatabaseInfo = new DatabaseObject();
-        }
-
-        private void DatabaseTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DatabaseInfo.DatabaseType = this.databaseTypeComboBox.Text;
-        }
-
-        private void ServerTextBox_TextChanged(object sender, EventArgs e)
-        {
-            DatabaseInfo.Server = this.serverTextBox.Text;
-        }
-
-        private void ServiceTextBox_TextChanged(object sender, EventArgs e)
-        {
-            DatabaseInfo.Service = this.serviceTextBox.Text;
-        }
-
-        private void PortTextBox_TextChanged(object sender, EventArgs e)
-        {
-            DatabaseInfo.Port = this.portTextBox.Text;
-        }
-
-        private void UserTextBox_TextChanged(object sender, EventArgs e)
-        {
-            DatabaseInfo.User = this.userTextBox.Text;
-        }
-
-        private void PasswordTextBox_TextChanged(object sender, EventArgs e)
-        {
-            DatabaseInfo.Password = this.passwordTextBox.Text;
+            DatabaseInfo = new DatabaseItem();
         }
 
         protected override bool OnOKButtonClick()
         {
-            
+            //判断输入框是否有空值
+            InputHasEmpty();
+
+            //必填项都有值时给batabseinfo赋值
+            DatabaseInfo.Type = (DatabaseType)this.databaseTypeComboBox.SelectedIndex;
+            DatabaseInfo.Server = this.serverTextBox.Text;
+            DatabaseInfo.Service = this.serviceTextBox.Text;
+            DatabaseInfo.Port = this.portTextBox.Text;
+            DatabaseInfo.User = this.userTextBox.Text;
+            DatabaseInfo.Password = this.passwordTextBox.Text;
 
             return base.OnOKButtonClick();
         }
-    }
-
-    class DatabaseObject
-    {
-        public string DatabaseType { set; get; }
-        public string Server { set; get; }
-        public string Service { set; get; }
-        public string Port { set; get; }
-        public string User { set; get; }
-        public string Password { set; get; }
-
-        public DatabaseObject()
+        
+        private bool InputHasEmpty()
         {
 
+
+            return false;
         }
     }
 }

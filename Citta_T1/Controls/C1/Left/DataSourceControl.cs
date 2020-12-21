@@ -1,6 +1,7 @@
 ﻿using C2.Business.DataSource;
 using C2.Core;
 using C2.Dialogs;
+using C2.Model;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -156,9 +157,9 @@ namespace C2.Controls.Left
             }
         }
 
-        private void ConnectDatabase(DatabaseObject databaseInfo)
+        private void ConnectDatabase(DatabaseItem databaseInfo)
         {
-            MessageBox.Show(databaseInfo.DatabaseType + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
+            MessageBox.Show(databaseInfo.Type + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
         }
         public void GenLinkButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
@@ -178,6 +179,7 @@ namespace C2.Controls.Left
             //数据源持久化存储
             DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
             dataSource.WriteDataSourceInfo(dataButton);
+        
         }
     }
 }
