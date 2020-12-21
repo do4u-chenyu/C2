@@ -390,12 +390,7 @@ namespace C2
             };
             CanvasForm form = new CanvasForm(doc,topic, Global.GetDocumentForm());
             ShowForm(form);
-
-            List<DataItem> dataItems = new List<DataItem>();
-            DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
-            if (dtw != null)
-                dataItems = dtw.DataItems;
-            form.GenMindMapDataSources(dataItems);
+            form.GenMindMapDataSources(topic);
             OperatorWidget opw = topic.FindWidget<OperatorWidget>();
             if(opw != null)
                 opw.ModelRelateTab = TaskBar.SelectedItem;
@@ -428,7 +423,7 @@ namespace C2
             doc.Load();
             form.RemarkControl.RemarkDescription = doc.RemarkDescription;
             form.CanvasAddElement(doc);
-
+            form.GenMindMapDataSources(topic);
             OperatorWidget opw = topic.FindWidget<OperatorWidget>();
             if (opw != null)
                 opw.ModelRelateTab = TaskBar.SelectedItem;

@@ -168,6 +168,12 @@
     <Compile Include="ChartControls\MindMap\MindMapView\MindMapView.Schedule.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\C1\Left\LinkButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\LinkButton.Designer.cs">
+      <DependentUpon>LinkButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\C1\Left\LeftFoldButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -737,6 +743,12 @@
     </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2SortOperatorView.designer.cs">
       <DependentUpon>C2SortOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2SqlOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C2OperatorViews\C2SqlOperatorView.Designer.cs">
+      <DependentUpon>C2SqlOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\WidgetChart\VisualDisplayDialog.cs">
       <SubType>Form</SubType>
@@ -1340,6 +1352,10 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
+    <EmbeddedResource Include="Controls\C1\Left\LinkButton.resx">
+      <DependentUpon>LinkButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\LeftFoldButton.resx">
       <DependentUpon>LeftFoldButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -1496,6 +1512,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SortOperatorView.resx">
       <DependentUpon>C2SortOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SqlOperatorView.resx">
+      <DependentUpon>C2SqlOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckUpdate.resx">
       <DependentUpon>CheckUpdate.cs</DependentUpon>
@@ -2543,6 +2562,7 @@
     <None Include="Resources\WidgetIcon\备注.png" />
     <None Include="Resources\WidgetIcon\附件.png" />
     <None Include="Resources\WidgetIcon\结果.png" />
+    <None Include="Resources\WidgetIcon\ORACLE.png" />
     <Content Include="Resources\提示1.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

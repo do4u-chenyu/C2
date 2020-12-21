@@ -69,3 +69,5 @@ Citta_T1/Templates/
 [Rr]eleases/
 x64/
 x86/
+C2自动化测试样例/obj
+C2自动化测试样例/bin

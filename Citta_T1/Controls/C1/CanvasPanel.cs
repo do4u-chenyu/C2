@@ -751,7 +751,7 @@ namespace C2.Controls
                 return;
 
             int diX = 10;
-            int diY = 10;
+            int diY = Global.GetCurrentModelDocument().ModelElements == null || Global.GetCurrentModelDocument().ModelElements.Count<=0 ? 10 : Global.GetCurrentModelDocument().ModelElements.Max(c => c.Location.Y)+40;
             int marginX = 200;
             int marginY = 40;
             int sizeLevel = Global.GetCurrentModelDocument().WorldMap.SizeLevel;
@@ -761,6 +761,11 @@ namespace C2.Controls
             {
                 string text = di.FileName;
                 string path = di.FilePath;
+
+                //每次仅加入新增的数据源
+                if (Global.GetCurrentModelDocument().ModelElements.Find(c => c.FullFilePath == path) != null)
+                    continue;
+
                 char separator = di.FileSep;
                 OpUtil.Encoding encoding = di.FileEncoding;
                 OpUtil.ExtType extType = di.FileType;

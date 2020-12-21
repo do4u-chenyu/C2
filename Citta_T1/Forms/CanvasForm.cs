@@ -708,8 +708,12 @@ namespace C2.Forms
             return e;
         }
 
-        public void GenMindMapDataSources(List<DataItem> dataItems)
+        public void GenMindMapDataSources(Topic topic)
         {
+            List<DataItem> dataItems = new List<DataItem>();
+            DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
+            if (dtw != null)
+                dataItems = dtw.DataItems;
             this.canvasPanel.AddMindMapDataSource(dataItems);
         }
     }
