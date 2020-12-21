@@ -36,11 +36,11 @@
             this.dataTabelPanel = new System.Windows.Forms.Panel();
             this.frameCombo = new System.Windows.Forms.ComboBox();
             this.linkPanel = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.dataTableLabel = new System.Windows.Forms.Label();
+            this.frameLabel = new System.Windows.Forms.Label();
+            this.linkLabel = new System.Windows.Forms.Label();
             this.addConnectLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dataTableTextBox = new System.Windows.Forms.TextBox();
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
             this.SuspendLayout();
@@ -106,13 +106,13 @@
             this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.externalFrame.BackColor = System.Drawing.Color.White;
             this.externalFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.externalFrame.Controls.Add(this.textBox1);
+            this.externalFrame.Controls.Add(this.dataTableTextBox);
             this.externalFrame.Controls.Add(this.dataTabelPanel);
             this.externalFrame.Controls.Add(this.frameCombo);
             this.externalFrame.Controls.Add(this.linkPanel);
-            this.externalFrame.Controls.Add(this.label3);
-            this.externalFrame.Controls.Add(this.label2);
-            this.externalFrame.Controls.Add(this.label1);
+            this.externalFrame.Controls.Add(this.dataTableLabel);
+            this.externalFrame.Controls.Add(this.frameLabel);
+            this.externalFrame.Controls.Add(this.linkLabel);
             this.externalFrame.Controls.Add(this.addConnectLabel);
             this.externalFrame.Location = new System.Drawing.Point(3, 35);
             this.externalFrame.Name = "externalFrame";
@@ -144,35 +144,35 @@
             this.linkPanel.Size = new System.Drawing.Size(159, 124);
             this.linkPanel.TabIndex = 4;
             // 
-            // label3
+            // dataTableLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(3, 254);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 19);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "数据表";
+            this.dataTableLabel.AutoSize = true;
+            this.dataTableLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataTableLabel.Location = new System.Drawing.Point(3, 254);
+            this.dataTableLabel.Name = "dataTableLabel";
+            this.dataTableLabel.Size = new System.Drawing.Size(48, 19);
+            this.dataTableLabel.TabIndex = 3;
+            this.dataTableLabel.Text = "数据表";
             // 
-            // label2
+            // frameLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(3, 193);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 19);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "架构";
+            this.frameLabel.AutoSize = true;
+            this.frameLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.frameLabel.Location = new System.Drawing.Point(3, 193);
+            this.frameLabel.Name = "frameLabel";
+            this.frameLabel.Size = new System.Drawing.Size(35, 19);
+            this.frameLabel.TabIndex = 2;
+            this.frameLabel.Text = "架构";
             // 
-            // label1
+            // linkLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(3, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 19);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "连接";
+            this.linkLabel.AutoSize = true;
+            this.linkLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.linkLabel.Location = new System.Drawing.Point(3, 37);
+            this.linkLabel.Name = "linkLabel";
+            this.linkLabel.Size = new System.Drawing.Size(35, 19);
+            this.linkLabel.TabIndex = 1;
+            this.linkLabel.Text = "连接";
             // 
             // addConnectLabel
             // 
@@ -186,12 +186,12 @@
             this.addConnectLabel.Text = "+ 添加连接";
             this.addConnectLabel.Click += new System.EventHandler(this.AddConnectLabel_Click);
             // 
-            // textBox1
+            // dataTableTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(10, 285);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(159, 21);
-            this.textBox1.TabIndex = 7;
+            this.dataTableTextBox.Location = new System.Drawing.Point(10, 285);
+            this.dataTableTextBox.Name = "dataTableTextBox";
+            this.dataTableTextBox.Size = new System.Drawing.Size(159, 21);
+            this.dataTableTextBox.TabIndex = 7;
             // 
             // DataSourceControl
             // 
@@ -218,12 +218,12 @@
         private System.Windows.Forms.Label externalDataLabel;
         private System.Windows.Forms.Label localDataLabel;
         private System.Windows.Forms.Label addConnectLabel;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label dataTableLabel;
+        private System.Windows.Forms.Label frameLabel;
+        private System.Windows.Forms.Label linkLabel;
         private System.Windows.Forms.Panel linkPanel;
         private System.Windows.Forms.ComboBox frameCombo;
         private System.Windows.Forms.Panel dataTabelPanel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox dataTableTextBox;
     }
 }
