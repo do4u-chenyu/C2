@@ -119,7 +119,7 @@
       <HintPath>..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess">
-      <HintPath>..\ThirdPartyLibrary\Oracle.ManagedDataAccess.19.10.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <HintPath>..\ThirdPartyLibrary\Oracle.ManagedDataAccess.19.10.0\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
