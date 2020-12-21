@@ -11,7 +11,7 @@ namespace C2.Model
         Oracle,
         Hive
     }
-    class DatabaseItem
+  public  class DatabaseItem
     {
 
         public DatabaseType Type { set; get; }
@@ -25,6 +25,17 @@ namespace C2.Model
         public DatabaseItem()
         {
 
+        }
+
+        public DatabaseItem(DatabaseType type, string server, string service, string port, string user, string password, string table)
+        {
+            Type = type;
+            Server = server;
+            Service = service;
+            Port = port;
+            User = user;
+            Password = password;
+            Table = table;
         }
     }
 }

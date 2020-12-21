@@ -55,7 +55,7 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
+            //Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
             Global.GetMainForm().ShowBottomPanel();
         }
 
@@ -124,11 +124,11 @@ namespace C2.Controls.Left
             if (e.Clicks == 1) // 单击拖拽
             {
                 // 使用`DataObject`对象来传参数，更加自由
-                DataObject dragDropData = new DataObject();
-                dragDropData.SetData("Type", ElementType.DataSource);
-                dragDropData.SetData("Path", FullFilePath);    // 数据源文件全路径
-                dragDropData.SetData("Text", LinkSourceName);  // 数据源名称
-                this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+                DataObject dragDropDataTable = new DataObject();
+                dragDropDataTable.SetData("Type", ElementType.DataSource);
+                dragDropDataTable.SetData("Path", FullFilePath);    // 数据源文件全路径
+                dragDropDataTable.SetData("Text", LinkSourceName);  // 数据源名称
+                this.txtButton.DoDragDrop(dragDropDataTable, DragDropEffects.Copy | DragDropEffects.Move);
             }
             //else if (e.Clicks == 2)
             //{   // 双击改名 
