@@ -768,6 +768,7 @@
     <Compile Include="Forms\CanvasForm.Designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\DatabaseItem.cs" />
     <Compile Include="Model\Widgets\AttachmentWidget.cs" />
     <Compile Include="Model\Widgets\C2BaseWidget.cs" />
     <Compile Include="Model\Widgets\ChartWidget.cs" />

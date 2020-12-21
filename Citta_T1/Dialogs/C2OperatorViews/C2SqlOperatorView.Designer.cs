@@ -44,10 +44,19 @@
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Location = new System.Drawing.Point(689, 7);
+            this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
             this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Location = new System.Drawing.Point(590, 7);
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Location = new System.Drawing.Point(0, 385);
+            this.bottomPanel.Size = new System.Drawing.Size(763, 40);
             // 
             // treeConnections
             // 
@@ -55,7 +64,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.treeConnections.Location = new System.Drawing.Point(8, 37);
             this.treeConnections.Name = "treeConnections";
-            this.treeConnections.Size = new System.Drawing.Size(232, 377);
+            this.treeConnections.Size = new System.Drawing.Size(232, 343);
             this.treeConnections.TabIndex = 3;
             // 
             // lblConn
@@ -71,7 +80,7 @@
             // 
             this.bnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bnHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bnHelp.Location = new System.Drawing.Point(696, 7);
+            this.bnHelp.Location = new System.Drawing.Point(700, 7);
             this.bnHelp.Name = "bnHelp";
             this.bnHelp.Size = new System.Drawing.Size(56, 22);
             this.bnHelp.TabIndex = 7;
@@ -139,8 +148,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gridOutput);
-            this.splitContainer1.Size = new System.Drawing.Size(504, 377);
-            this.splitContainer1.SplitterDistance = 132;
+            this.splitContainer1.Size = new System.Drawing.Size(508, 343);
+            this.splitContainer1.SplitterDistance = 119;
             this.splitContainer1.TabIndex = 9;
             // 
             // textEditorControl1
@@ -149,7 +158,7 @@
             this.textEditorControl1.Font = new System.Drawing.Font("Courier New", 10F);
             this.textEditorControl1.Location = new System.Drawing.Point(0, 0);
             this.textEditorControl1.Name = "textEditorControl1";
-            this.textEditorControl1.Size = new System.Drawing.Size(504, 23);
+            this.textEditorControl1.Size = new System.Drawing.Size(508, 23);
             this.textEditorControl1.TabIndex = 9;
             // 
             // gridOutput
@@ -157,18 +166,17 @@
             this.gridOutput.AllowUserToAddRows = false;
             this.gridOutput.AllowUserToDeleteRows = false;
             this.gridOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridOutput.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridOutput.Location = new System.Drawing.Point(0, 0);
             this.gridOutput.Name = "gridOutput";
-            this.gridOutput.Size = new System.Drawing.Size(504, 241);
+            this.gridOutput.Size = new System.Drawing.Size(504, 217);
             this.gridOutput.TabIndex = 7;
             // 
             // C2SqlOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(759, 422);
+            this.ClientSize = new System.Drawing.Size(763, 425);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.bnHelp);
             this.Controls.Add(this.bnEdit);
@@ -177,9 +185,21 @@
             this.Controls.Add(this.bnExecute);
             this.Controls.Add(this.lblConn);
             this.Controls.Add(this.treeConnections);
+            this.Controls.Add(this.bottomPanel);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(558, 203);
             this.Name = "C2SqlOperatorView";
             this.Text = "Oracle Explorer";
+            this.Controls.SetChildIndex(this.bottomPanel, 0);
+            this.Controls.SetChildIndex(this.treeConnections, 0);
+            this.Controls.SetChildIndex(this.lblConn, 0);
+            this.Controls.SetChildIndex(this.bnExecute, 0);
+            this.Controls.SetChildIndex(this.bnNew, 0);
+            this.Controls.SetChildIndex(this.bnDelete, 0);
+            this.Controls.SetChildIndex(this.bnEdit, 0);
+            this.Controls.SetChildIndex(this.bnHelp, 0);
+            this.Controls.SetChildIndex(this.splitContainer1, 0);
             this.bottomPanel.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
