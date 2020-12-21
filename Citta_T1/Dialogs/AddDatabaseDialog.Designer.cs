@@ -93,7 +93,6 @@
             this.serverTextBox.Name = "serverTextBox";
             this.serverTextBox.Size = new System.Drawing.Size(265, 21);
             this.serverTextBox.TabIndex = 10009;
-            this.serverTextBox.TextChanged += new System.EventHandler(this.ServerTextBox_TextChanged);
             // 
             // portLabel
             // 
@@ -110,7 +109,6 @@
             this.serviceTextBox.Name = "serviceTextBox";
             this.serviceTextBox.Size = new System.Drawing.Size(84, 21);
             this.serviceTextBox.TabIndex = 10011;
-            this.serviceTextBox.TextChanged += new System.EventHandler(this.ServiceTextBox_TextChanged);
             // 
             // portTextBox
             // 
@@ -118,7 +116,6 @@
             this.portTextBox.Name = "portTextBox";
             this.portTextBox.Size = new System.Drawing.Size(84, 21);
             this.portTextBox.TabIndex = 10012;
-            this.portTextBox.TextChanged += new System.EventHandler(this.PortTextBox_TextChanged);
             // 
             // userTextBox
             // 
@@ -126,7 +123,6 @@
             this.userTextBox.Name = "userTextBox";
             this.userTextBox.Size = new System.Drawing.Size(265, 21);
             this.userTextBox.TabIndex = 10013;
-            this.userTextBox.TextChanged += new System.EventHandler(this.UserTextBox_TextChanged);
             // 
             // passwordTextBox
             // 
@@ -134,7 +130,6 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(265, 21);
             this.passwordTextBox.TabIndex = 10014;
-            this.passwordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
             // 
             // databaseTypeComboBox
             // 
@@ -146,7 +141,6 @@
             this.databaseTypeComboBox.Name = "databaseTypeComboBox";
             this.databaseTypeComboBox.Size = new System.Drawing.Size(265, 20);
             this.databaseTypeComboBox.TabIndex = 10015;
-            this.databaseTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.DatabaseTypeComboBox_SelectedIndexChanged);
             // 
             // AddDatabaseDialog
             // 
