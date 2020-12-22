@@ -5,22 +5,17 @@ using C2.Utils;
 using System;
 using System.Windows.Forms;
 using C2.Model;
+using C2.Controls;
+using C2.Dialogs;
 namespace C2.Controls.Left
 {
     public partial class LinkButton : UserControl
     {
-        private OpUtil.Encoding encoding;
-        private OpUtil.ExtType extType;
-        private char separator;
-        private int count = 0;
+       private int count = 0;
         private string oldTextString;
-        public OpUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
-        public OpUtil.ExtType ExtType { get => extType; set => extType = value; }
-        public char Separator { get => separator; set => separator = value; }
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string LinkSourceName { get; set; }
         public int Count { get => this.count; set => this.count = value; }
-        private static string DataButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
         public DatabaseItem DatabaseItem { get; set; }
 
         public LinkButton(string linkname, string linkSourceName,DatabaseItem item)
@@ -35,28 +30,22 @@ namespace C2.Controls.Left
 
         private void LinkButton_Load(object sender, EventArgs e)
         {
-            // 数据源全路径浮动提示信息
-            String helpInfo = FullFilePath;
-            this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+            //// 数据源全路径浮动提示信息
+            //String helpInfo = FullFilePath;
+            //// 数据源名称浮动提示信息
+            //helpInfo = LinkSourceName;
+            //this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
-            // 数据源名称浮动提示信息
-            helpInfo = LinkSourceName;
-            this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
-
-            helpInfo = String.Format(DataButtonFlowTemplate,
-                                    encoding.ToString(),
-                                    this.ExtType,
-                                    0,
-                                    this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
-            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+            //helpInfo = String.Format(DataButtonFlowTemplate,
+            //                        0
+            //                       );
+            //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
-
         #region 右键菜单
-        private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EiditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
-            Global.GetMainForm().ShowBottomPanel();
+
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,18 +91,10 @@ namespace C2.Controls.Left
       
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            string helpInfo = String.Format(DataButtonFlowTemplate,
-                                        encoding.ToString(),
-                                        this.ExtType,
-                                        0,
-                                        this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
-            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
-        }
-
-        private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding, true);
-            Global.GetMainForm().ShowBottomPanel();
+            //string helpInfo = String.Format(DataButtonFlowTemplate,
+            //                            0
+            //                           );
+            //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -175,10 +156,6 @@ namespace C2.Controls.Left
             Global.GetDataSourceControl().SaveDataSourceInfo();
             this.helpToolTip.SetToolTip(this.txtButton, LinkSourceName);
         }
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            this.ReviewToolStripMenuItem.Enabled = Global.GetBottomViewPanel().Visible;
-            this.ReviewToolStripMenuItem.ToolTipText = this.ReviewToolStripMenuItem.Enabled ? "预览数据源部分信息" : HelpUtil.ReviewToolStripMenuItemInfo;
-        }
+       
     }
 }
