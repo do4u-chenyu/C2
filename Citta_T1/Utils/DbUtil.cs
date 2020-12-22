@@ -86,5 +86,29 @@ namespace C2.Utils
                 HelpUtil.ShowMessageBox(ex.Message);
             }
         }
+
+        internal static List<string> GetUsers(Connection conn)
+        {
+            List<string> users = new List<string>();
+            // select distinct owner from sys.all_objects
+            // http://forums.devshed.com/oracle-development-96/need-help-to-view-all-schemas-using-sql-plus-218002.html
+            using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+            {
+                con.Open();
+                string sql = String.Format(@"select distinct owner from sys.all_objects where object_type in ('TABLE','VIEW')");
+                using (OracleCommand comm = new OracleCommand(sql, con))
+                {
+                    using (OracleDataReader rdr = comm.ExecuteReader())
+                    {
+                        while (rdr.Read())
+                        {
+                            users.Add(rdr.GetString(0));
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return users;
+        }
     }
 }

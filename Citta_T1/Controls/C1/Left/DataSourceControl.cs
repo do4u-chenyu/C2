@@ -4,6 +4,7 @@ using C2.Database;
 using C2.Dialogs;
 using C2.Model;
 using C2.Utils;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,7 +63,7 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(DataButton ct)
         {
-            
+
             if (this.localFrame.Controls.Count > 0)
                 startPoint = this.localFrame.Controls[this.localFrame.Controls.Count - 1].Location;
 
@@ -126,7 +127,7 @@ namespace C2.Controls.Left
             // 重新布局
             ReLayoutLocalFrame();
             // 保存
-            SaveDataSourceInfo();   
+            SaveDataSourceInfo();
         }
         public void SaveDataSourceInfo()
         {
@@ -162,7 +163,7 @@ namespace C2.Controls.Left
         private void GenConnectButton(DatabaseItem databaseInfo)
         {
             // TODO 生成一个button
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void ConnectDatabase(DatabaseItem databaseInfo)
@@ -170,23 +171,26 @@ namespace C2.Controls.Left
             MessageBox.Show(databaseInfo.Type + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
             // Name, User, Pass, Host, Sid, Service, Port;
             Connection conn = new Connection(databaseInfo.Server, databaseInfo.User, databaseInfo.Password, databaseInfo.Server, databaseInfo.Service, databaseInfo.Service, databaseInfo.Port);
-            //this.GenLinkButton();
-            this.UpdateLinkPanel(conn);
-            this.UpdateFrameCombo(conn);
-            this.UpdateTables(conn);
+            List<Schema> schemas = conn.Schemas;
+            if (schemas == null)
+                return;
+            List<string> users = DbUtil.GetUsers(conn);
+            this.UpdateFrameCombo(schemas);
+            this.UpdateTables(schemas);
         }
 
-        private void UpdateTables(Connection conn)
+        private void UpdateTables(List<Schema> schemas)
         {
             throw new NotImplementedException();
         }
 
-        private void UpdateFrameCombo(Connection conn)
+        private void UpdateFrameCombo(List<Schema> schemas)
         {
             throw new NotImplementedException();
         }
 
-        private void UpdateLinkPanel(Connection conn)
+
+        private void GenLinkButton(Connection conn)
         {
             throw new NotImplementedException();
         }
@@ -209,7 +213,7 @@ namespace C2.Controls.Left
             //数据源持久化存储
             DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
             dataSource.WriteDataSourceInfo(dataButton);
-        
+
         }
     }
 }
