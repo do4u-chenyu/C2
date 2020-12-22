@@ -209,6 +209,7 @@ namespace C2.Controls.Left
             //数据源持久化存储
             DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
             dataSource.WriteDataSourceInfo(dataButton);
+        
         }
     }
 }

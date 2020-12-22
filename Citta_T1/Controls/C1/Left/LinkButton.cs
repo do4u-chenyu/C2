@@ -4,7 +4,7 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.Windows.Forms;
-
+using C2.Model;
 namespace C2.Controls.Left
 {
     public partial class LinkButton : UserControl
@@ -18,21 +18,19 @@ namespace C2.Controls.Left
         public OpUtil.ExtType ExtType { get => extType; set => extType = value; }
         public char Separator { get => separator; set => separator = value; }
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
-        public string DataSourceName { get; set; }
+        public string LinkSourceName { get; set; }
         public int Count { get => this.count; set => this.count = value; }
         private static string DataButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
+        public DatabaseItem DatabaseItem { get; set; }
 
-
-        public LinkButton(string ffp, string dataSourceName, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        public LinkButton(string linkname, string linkSourceName)
         {
             InitializeComponent();
-            txtButton.Name = ffp;
-            txtButton.Text = Utils.FileUtil.ReName(dataSourceName);
-            this.separator = separator;
-            this.extType = extType;
-            this.encoding = encoding;
-            this.oldTextString = dataSourceName;
-            DataSourceName = dataSourceName;
+            DatabaseItem =new DatabaseItem();
+            txtButton.Name = linkname;
+            txtButton.Text = Utils.FileUtil.ReName(linkSourceName);
+            this.oldTextString = linkSourceName;
+            LinkSourceName = linkSourceName;
         }
 
         private void LinkButton_Load(object sender, EventArgs e)
@@ -42,7 +40,7 @@ namespace C2.Controls.Left
             this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
 
             // 数据源名称浮动提示信息
-            helpInfo = DataSourceName;
+            helpInfo = LinkSourceName;
             this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
             helpInfo = String.Format(DataButtonFlowTemplate,
@@ -57,20 +55,20 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
+            //Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
             Global.GetMainForm().ShowBottomPanel();
         }
 
-        //private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    this.textBox.ReadOnly = false;
-        //    this.oldTextString = DataSourceName;
-        //    this.textBox.Text = DataSourceName;
-        //    this.txtButton.Visible = false;
-        //    this.textBox.Visible = true;
-        //    this.textBox.Focus();//获取焦点
-        //    this.textBox.Select(this.textBox.TextLength, 0);
-        //}
+        private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.textBox.ReadOnly = false;
+            this.oldTextString = LinkSourceName;
+            this.textBox.Text = LinkSourceName;
+            this.txtButton.Visible = false;
+            this.textBox.Visible = true;
+            this.textBox.Focus();//获取焦点
+            this.textBox.Select(this.textBox.TextLength, 0);
+        }
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -81,12 +79,12 @@ namespace C2.Controls.Left
             // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用
             if (count > 0)
                 rs = MessageBox.Show("有模型在使用此数据, 继续卸载请点击 \"确定\"",
-                    "卸载 " + this.DataSourceName,
+                    "卸载 " + this.LinkSourceName,
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Information);
             else // count == 0, 不需要特别的警告信息
                 rs = MessageBox.Show("卸载数据源,请点击 \"确定\"",
-                    "卸载 " + this.DataSourceName,
+                    "卸载 " + this.LinkSourceName,
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Information);
 
@@ -101,18 +99,7 @@ namespace C2.Controls.Left
         }
         #endregion
 
-        private void OpenFilePathMenuItem_Click(object sender, EventArgs e)
-        {
-            FileUtil.ExploreDirectory(FullFilePath);
-        }
-
-
-
-        private void CopyFullFilePathToClipboard(object sender, EventArgs e)
-        {
-            FileUtil.TryClipboardSetText(FullFilePath);
-        }
-
+      
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
         {
             string helpInfo = String.Format(DataButtonFlowTemplate,
@@ -137,15 +124,11 @@ namespace C2.Controls.Left
             if (e.Clicks == 1) // 单击拖拽
             {
                 // 使用`DataObject`对象来传参数，更加自由
-                DataObject dragDropData = new DataObject();
-                dragDropData.SetData("Type", ElementType.DataSource);
-                dragDropData.SetData("Path", FullFilePath);    // 数据源文件全路径
-                dragDropData.SetData("Text", DataSourceName);  // 数据源名称
-                dragDropData.SetData("Separator", Separator);  // 分隔符
-                dragDropData.SetData("ExtType", ExtType);      // 扩展名,文件类型
-                // 需要记录他的编码格式
-                dragDropData.SetData("Encoding", Encoding);
-                this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+                DataObject dragDropDataTable = new DataObject();
+                dragDropDataTable.SetData("Type", ElementType.DataSource);
+                dragDropDataTable.SetData("Path", FullFilePath);    // 数据源文件全路径
+                dragDropDataTable.SetData("Text", LinkSourceName);  // 数据源名称
+                this.txtButton.DoDragDrop(dragDropDataTable, DragDropEffects.Copy | DragDropEffects.Move);
             }
             //else if (e.Clicks == 2)
             //{   // 双击改名 
@@ -182,7 +165,7 @@ namespace C2.Controls.Left
             this.txtButton.Visible = true;
             if (this.oldTextString == this.textBox.Text)
                 return;
-            DataSourceName = this.textBox.Text;
+            LinkSourceName = this.textBox.Text;
             this.txtButton.Text = Utils.FileUtil.ReName(this.textBox.Text);
             if (this.oldTextString != this.textBox.Text)
             {
@@ -190,7 +173,7 @@ namespace C2.Controls.Left
             }
             // 保存
             Global.GetDataSourceControl().SaveDataSourceInfo();
-            this.helpToolTip.SetToolTip(this.txtButton, DataSourceName);
+            this.helpToolTip.SetToolTip(this.txtButton, LinkSourceName);
         }
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
