@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-
-//using System.Data.OracleClient;
+using C2.Model;
 using Oracle.ManagedDataAccess.Client;
 
 namespace C2.Database
@@ -12,6 +11,17 @@ namespace C2.Database
     {
         public string Name, User, Pass, Host, Sid, Service, Port;
         public Connection() { }
+        public Connection(DatabaseItem dbi)
+        {
+            this.Name = dbi.Server;
+            this.User = dbi.User;
+            this.Pass = dbi.Password;
+            this.Host = dbi.Server;
+            this.Sid = dbi.SID;
+            this.Service = dbi.Service;
+            this.Port = dbi.Port;
+
+        }
         public Connection(string name, string user, string pass, string host, string sid, string service, string port)
         {
             this.Name = name;
@@ -70,21 +80,11 @@ namespace C2.Database
                         conn.Close();
                         return _Schemas;
                     }
-                    catch { }
-                    try
+                    catch (Exception ex)
                     {
-                        this.Service = "";
-                        conn = new OracleConnection(ConnectionString);
-                        conn.Open();
-                        AfterConnDb(conn);
-                        conn.Close();
-                    }
-                    catch
-                    {
-                        MessageBox.Show("连接数据库失败");
+                        MessageBox.Show("连接数据库失败, 详情：" + ex.ToString());
                         return null;
                     }
-                    conn.Close();
                 }
                 return _Schemas;
             }

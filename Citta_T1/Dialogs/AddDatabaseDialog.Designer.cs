@@ -30,16 +30,18 @@
         {
             this.databaseTypeLabel = new System.Windows.Forms.Label();
             this.serverLabel = new System.Windows.Forms.Label();
-            this.serviceLabel = new System.Windows.Forms.Label();
             this.userLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.serverTextBox = new System.Windows.Forms.TextBox();
             this.portLabel = new System.Windows.Forms.Label();
-            this.serviceTextBox = new System.Windows.Forms.TextBox();
             this.portTextBox = new System.Windows.Forms.TextBox();
             this.userTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.databaseTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.serviceRadiobutton = new System.Windows.Forms.RadioButton();
+            this.sidRadiobutton = new System.Windows.Forms.RadioButton();
+            this.serviceTextBox = new System.Windows.Forms.TextBox();
+            this.sidTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // databaseTypeLabel
@@ -60,19 +62,10 @@
             this.serverLabel.TabIndex = 10004;
             this.serverLabel.Text = "服务器（V）";
             // 
-            // serviceLabel
-            // 
-            this.serviceLabel.AutoSize = true;
-            this.serviceLabel.Location = new System.Drawing.Point(19, 95);
-            this.serviceLabel.Name = "serviceLabel";
-            this.serviceLabel.Size = new System.Drawing.Size(53, 12);
-            this.serviceLabel.TabIndex = 10005;
-            this.serviceLabel.Text = "服务（S)";
-            // 
             // userLabel
             // 
             this.userLabel.AutoSize = true;
-            this.userLabel.Location = new System.Drawing.Point(19, 132);
+            this.userLabel.Location = new System.Drawing.Point(19, 96);
             this.userLabel.Name = "userLabel";
             this.userLabel.Size = new System.Drawing.Size(71, 12);
             this.userLabel.TabIndex = 10006;
@@ -81,7 +74,7 @@
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(19, 170);
+            this.passwordLabel.Location = new System.Drawing.Point(19, 134);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(59, 12);
             this.passwordLabel.TabIndex = 10007;
@@ -91,42 +84,35 @@
             // 
             this.serverTextBox.Location = new System.Drawing.Point(100, 56);
             this.serverTextBox.Name = "serverTextBox";
-            this.serverTextBox.Size = new System.Drawing.Size(265, 21);
+            this.serverTextBox.Size = new System.Drawing.Size(95, 21);
             this.serverTextBox.TabIndex = 10009;
             // 
             // portLabel
             // 
             this.portLabel.AutoSize = true;
-            this.portLabel.Location = new System.Drawing.Point(216, 95);
+            this.portLabel.Location = new System.Drawing.Point(216, 61);
             this.portLabel.Name = "portLabel";
             this.portLabel.Size = new System.Drawing.Size(59, 12);
             this.portLabel.TabIndex = 10010;
             this.portLabel.Text = "端口（R）";
             // 
-            // serviceTextBox
-            // 
-            this.serviceTextBox.Location = new System.Drawing.Point(100, 90);
-            this.serviceTextBox.Name = "serviceTextBox";
-            this.serviceTextBox.Size = new System.Drawing.Size(84, 21);
-            this.serviceTextBox.TabIndex = 10011;
-            // 
             // portTextBox
             // 
-            this.portTextBox.Location = new System.Drawing.Point(281, 90);
+            this.portTextBox.Location = new System.Drawing.Point(281, 56);
             this.portTextBox.Name = "portTextBox";
             this.portTextBox.Size = new System.Drawing.Size(84, 21);
             this.portTextBox.TabIndex = 10012;
             // 
             // userTextBox
             // 
-            this.userTextBox.Location = new System.Drawing.Point(100, 129);
+            this.userTextBox.Location = new System.Drawing.Point(100, 93);
             this.userTextBox.Name = "userTextBox";
             this.userTextBox.Size = new System.Drawing.Size(265, 21);
             this.userTextBox.TabIndex = 10013;
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(100, 167);
+            this.passwordTextBox.Location = new System.Drawing.Point(100, 131);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(265, 21);
             this.passwordTextBox.TabIndex = 10014;
@@ -142,21 +128,59 @@
             this.databaseTypeComboBox.Size = new System.Drawing.Size(265, 20);
             this.databaseTypeComboBox.TabIndex = 10015;
             // 
+            // serviceRadiobutton
+            // 
+            this.serviceRadiobutton.AutoSize = true;
+            this.serviceRadiobutton.Checked = true;
+            this.serviceRadiobutton.Location = new System.Drawing.Point(21, 168);
+            this.serviceRadiobutton.Name = "serviceRadiobutton";
+            this.serviceRadiobutton.Size = new System.Drawing.Size(59, 16);
+            this.serviceRadiobutton.TabIndex = 10017;
+            this.serviceRadiobutton.TabStop = true;
+            this.serviceRadiobutton.Text = "服务名";
+            this.serviceRadiobutton.UseVisualStyleBackColor = true;
+            // 
+            // sidRadiobutton
+            // 
+            this.sidRadiobutton.AutoSize = true;
+            this.sidRadiobutton.Location = new System.Drawing.Point(21, 200);
+            this.sidRadiobutton.Name = "sidRadiobutton";
+            this.sidRadiobutton.Size = new System.Drawing.Size(41, 16);
+            this.sidRadiobutton.TabIndex = 10018;
+            this.sidRadiobutton.Text = "SID";
+            this.sidRadiobutton.UseVisualStyleBackColor = true;
+            // 
+            // serviceTextBox
+            // 
+            this.serviceTextBox.Location = new System.Drawing.Point(100, 167);
+            this.serviceTextBox.Name = "serviceTextBox";
+            this.serviceTextBox.Size = new System.Drawing.Size(265, 21);
+            this.serviceTextBox.TabIndex = 10019;
+            // 
+            // sidTextBox
+            // 
+            this.sidTextBox.Location = new System.Drawing.Point(100, 199);
+            this.sidTextBox.Name = "sidTextBox";
+            this.sidTextBox.Size = new System.Drawing.Size(265, 21);
+            this.sidTextBox.TabIndex = 10020;
+            // 
             // AddDatabaseDialog
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(403, 270);
+            this.Controls.Add(this.sidTextBox);
+            this.Controls.Add(this.serviceTextBox);
+            this.Controls.Add(this.sidRadiobutton);
+            this.Controls.Add(this.serviceRadiobutton);
             this.Controls.Add(this.databaseTypeComboBox);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.userTextBox);
             this.Controls.Add(this.portTextBox);
-            this.Controls.Add(this.serviceTextBox);
             this.Controls.Add(this.portLabel);
             this.Controls.Add(this.serverTextBox);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.userLabel);
-            this.Controls.Add(this.serviceLabel);
             this.Controls.Add(this.serverLabel);
             this.Controls.Add(this.databaseTypeLabel);
             this.Name = "AddDatabaseDialog";
@@ -164,16 +188,18 @@
             this.Text = "新增数据源";
             this.Controls.SetChildIndex(this.databaseTypeLabel, 0);
             this.Controls.SetChildIndex(this.serverLabel, 0);
-            this.Controls.SetChildIndex(this.serviceLabel, 0);
             this.Controls.SetChildIndex(this.userLabel, 0);
             this.Controls.SetChildIndex(this.passwordLabel, 0);
             this.Controls.SetChildIndex(this.serverTextBox, 0);
             this.Controls.SetChildIndex(this.portLabel, 0);
-            this.Controls.SetChildIndex(this.serviceTextBox, 0);
             this.Controls.SetChildIndex(this.portTextBox, 0);
             this.Controls.SetChildIndex(this.userTextBox, 0);
             this.Controls.SetChildIndex(this.passwordTextBox, 0);
             this.Controls.SetChildIndex(this.databaseTypeComboBox, 0);
+            this.Controls.SetChildIndex(this.serviceRadiobutton, 0);
+            this.Controls.SetChildIndex(this.sidRadiobutton, 0);
+            this.Controls.SetChildIndex(this.serviceTextBox, 0);
+            this.Controls.SetChildIndex(this.sidTextBox, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,15 +209,17 @@
 
         private System.Windows.Forms.Label databaseTypeLabel;
         private System.Windows.Forms.Label serverLabel;
-        private System.Windows.Forms.Label serviceLabel;
         private System.Windows.Forms.Label userLabel;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox serverTextBox;
         private System.Windows.Forms.Label portLabel;
-        private System.Windows.Forms.TextBox serviceTextBox;
         private System.Windows.Forms.TextBox portTextBox;
         private System.Windows.Forms.TextBox userTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.ComboBox databaseTypeComboBox;
+        private System.Windows.Forms.RadioButton serviceRadiobutton;
+        private System.Windows.Forms.RadioButton sidRadiobutton;
+        private System.Windows.Forms.TextBox serviceTextBox;
+        private System.Windows.Forms.TextBox sidTextBox;
     }
 }

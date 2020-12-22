@@ -110,5 +110,23 @@ namespace C2.Utils
             }
             return users;
         }
+
+        internal static bool TestConn(Connection conn)
+        {
+            using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+            {
+                try
+                {
+                    con.Open();
+                    con.Close();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                    return false;
+                }
+            }
+        }
     }
 }

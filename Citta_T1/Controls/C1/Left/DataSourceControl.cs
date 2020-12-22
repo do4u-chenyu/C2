@@ -171,7 +171,7 @@ namespace C2.Controls.Left
         {
             MessageBox.Show(databaseInfo.Type + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
             // Name, User, Pass, Host, Sid, Service, Port;
-            Connection conn = new Connection(databaseInfo.Server, databaseInfo.User, databaseInfo.Password, databaseInfo.Server, databaseInfo.Service, databaseInfo.Service, databaseInfo.Port);
+            Connection conn = new Connection(databaseInfo);
             List<Schema> schemas = conn.Schemas;
             if (schemas == null)
                 return;
