@@ -23,10 +23,7 @@ namespace C2.Model
         public string Group { set; get; }//架构
         public string Table { set; get; }//表名
 
-        public DatabaseItem()
-        {
-
-        }
+     
 
         public DatabaseItem(DatabaseType type, string server, string service, string port, string user, string password, string group, string table)
         {
