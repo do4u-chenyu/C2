@@ -21,17 +21,20 @@ namespace C2.Controls.Left
         public DataSourceControl()
         {
             dataSourceDictI2B = new Dictionary<string, DataButton>();
+            linkSourceDictI2B = new Dictionary<string, LinkButton>();
             InitializeComponent();
             startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
             startPoint.Y += 65;
         }
-
+     
         private static readonly int ButtonGapHeight = 50;//上下间隔
         private static readonly int ButtonLeftX = 18;
         private static readonly int ButtonBottomOffsetY = 100;
         //private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
         private Point startPoint;
+        private Point linkPoint = new Point(0,0);
         private Dictionary<string, DataButton> dataSourceDictI2B;
+        private Dictionary<string, LinkButton> linkSourceDictI2B;
 
         // 这个控件属性不需要在属性面板显示和序列化,不加这个标签,在引用这个控件的Designer中,会序列化它
         // 然后就是各种奇葩问题
@@ -40,6 +43,7 @@ namespace C2.Controls.Left
         // MergableProperty(false) 不知道是干嘛的, 看网上帖子就加进去了
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), MergableProperty(false)]
         public Dictionary<string, DataButton> DataSourceDictI2B { get => dataSourceDictI2B; }
+        public Dictionary<string, LinkButton> LinkSourceDictI2B { get => linkSourceDictI2B; }
 
         // 手工导入时调用
         public void GenDataButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
@@ -70,6 +74,13 @@ namespace C2.Controls.Left
             startPoint.Y += ButtonGapHeight;
             ct.Location = startPoint;
         }
+        private void LayoutModelButtonLocation(LinkButton lb)
+        {
+            if (this.linkPanel.Controls.Count > 0)
+                linkPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
+            linkPoint.Y += ButtonGapHeight;
+            lb.Location = linkPoint;
+        }
         // 程序启动加载时调用
         public void GenDataButton(DataButton dataButton)
         {
@@ -79,7 +90,26 @@ namespace C2.Controls.Left
             this.DataSourceDictI2B.Add(dataButton.FullFilePath, dataButton);
             this.localFrame.Controls.Add(dataButton);
         }
+        public void GenLinkButton(LinkButton linkButton)
+        {
+            // 供load时调用
 
+            LayoutModelButtonLocation(linkButton); // 递增
+            //this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
+            this.linkPanel.Controls.Add(linkButton);
+   
+        }
+        private void GenConnectButton(DatabaseItem databaseInfo)
+        {
+            // TODO 生成一个button
+            //throw new NotImplementedException();
+            // 根据导入数据动态生成一个button
+            LinkButton linkButton = new LinkButton(databaseInfo);
+
+            GenLinkButton(linkButton);
+
+
+        }
         private void ExternalData_Click(object sender, EventArgs e)
         {
             this.externalDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Bold);
@@ -115,7 +145,25 @@ namespace C2.Controls.Left
             this.localFrame.ResumeLayout(false);
             this.localFrame.PerformLayout();
         }
+        private void ReLayoutExternalFrame()
+        {
+            // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
+            this.linkPanel.SuspendLayout();
+            List<Control> tmp = new List<Control>();
+            foreach (LinkButton lb in this.linkPanel.Controls)
+                tmp.Add(lb);
 
+            this.linkPanel.Controls.Clear();
+            // 重新排序
+            foreach (Control lb in tmp)
+            {
+                LayoutModelButtonLocation(lb as LinkButton);
+                this.linkPanel.Controls.Add(lb);
+            }
+
+            this.linkPanel.ResumeLayout(false);
+            this.linkPanel.PerformLayout();
+        }
         public void RemoveDataButton(DataButton dataButton)
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
@@ -124,6 +172,19 @@ namespace C2.Controls.Left
 
             this.DataSourceDictI2B.Remove(dataButton.FullFilePath);
             this.localFrame.Controls.Remove(dataButton);
+            // 重新布局
+            ReLayoutLocalFrame();
+            // 保存
+            SaveDataSourceInfo();
+        }
+        public void RemoveLinkButton(LinkButton linkButton)
+        {
+            // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
+            if (this.linkPanel.Controls.Count > 0)
+                this.startPoint.Y = this.linkPanel.Controls[0].Location.Y - ButtonGapHeight;
+
+            this.DataSourceDictI2B.Remove(linkButton.FullFilePath);
+            this.linkPanel.Controls.Remove(linkButton);
             // 重新布局
             ReLayoutLocalFrame();
             // 保存
@@ -157,15 +218,10 @@ namespace C2.Controls.Left
             {
                 GenConnectButton(dialog.DatabaseInfo);
                 ConnectDatabase(dialog.DatabaseInfo);
-                new LinkButton("", "", dialog.DatabaseInfo);
             }
         }
 
-        private void GenConnectButton(DatabaseItem databaseInfo)
-        {
-            // TODO 生成一个button
-            //throw new NotImplementedException();
-        }
+      
 
         private void ConnectDatabase(DatabaseItem databaseInfo)
         {
@@ -176,8 +232,8 @@ namespace C2.Controls.Left
             if (schemas == null)
                 return;
             List<string> users = DbUtil.GetUsers(conn);
-            this.UpdateFrameCombo(schemas);
-            this.UpdateTables(schemas);
+            //this.UpdateFrameCombo(schemas);
+            //this.UpdateTables(schemas);
         }
 
         private void UpdateTables(List<Schema> schemas)
@@ -214,6 +270,11 @@ namespace C2.Controls.Left
             //数据源持久化存储
             DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
             dataSource.WriteDataSourceInfo(dataButton);
+
+        }
+
+        private void linkPanel_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }
