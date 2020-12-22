@@ -1,5 +1,6 @@
 ﻿using C2.Business.DataSource;
 using C2.Core;
+using C2.Database;
 using C2.Dialogs;
 using C2.Model;
 using C2.Utils;
@@ -153,14 +154,43 @@ namespace C2.Controls.Left
             var dialog = new AddDatabaseDialog();
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
+                GenConnectButton(dialog.DatabaseInfo);
                 ConnectDatabase(dialog.DatabaseInfo);
             }
+        }
+
+        private void GenConnectButton(DatabaseItem databaseInfo)
+        {
+            // TODO 生成一个button
+            throw new NotImplementedException();
         }
 
         private void ConnectDatabase(DatabaseItem databaseInfo)
         {
             MessageBox.Show(databaseInfo.Type + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
+            // Name, User, Pass, Host, Sid, Service, Port;
+            Connection conn = new Connection(databaseInfo.Server, databaseInfo.User, databaseInfo.Password, databaseInfo.Server, databaseInfo.Service, databaseInfo.Service, databaseInfo.Port);
+            //this.GenLinkButton();
+            this.UpdateLinkPanel(conn);
+            this.UpdateFrameCombo(conn);
+            this.UpdateTables(conn);
         }
+
+        private void UpdateTables(Connection conn)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateFrameCombo(Connection conn)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateLinkPanel(Connection conn)
+        {
+            throw new NotImplementedException();
+        }
+
         public void GenLinkButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             // 根据导入数据动态生成一个button
