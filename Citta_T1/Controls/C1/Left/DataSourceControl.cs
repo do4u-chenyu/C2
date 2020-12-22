@@ -154,6 +154,7 @@ namespace C2.Controls.Left
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
                 ConnectDatabase(dialog.DatabaseInfo);
+                new LinkButton("", "", dialog.DatabaseInfo);
             }
         }
 
