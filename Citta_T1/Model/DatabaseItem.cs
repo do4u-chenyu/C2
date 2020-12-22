@@ -22,10 +22,7 @@ namespace C2.Model
         public string Password { set; get; }
         public string Table { set; get; }
 
-        public DatabaseItem()
-        {
-
-        }
+     
 
         public DatabaseItem(DatabaseType type, string server, string service, string port, string user, string password, string table)
         {

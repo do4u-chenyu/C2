@@ -23,11 +23,11 @@ namespace C2.Controls.Left
         private static string DataButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
         public DatabaseItem DatabaseItem { get; set; }
 
-        public LinkButton(string linkname, string linkSourceName)
+        public LinkButton(string linkname, string linkSourceName,DatabaseItem item)
         {
             InitializeComponent();
-            DatabaseItem =new DatabaseItem();
-            txtButton.Name = linkname;
+            DatabaseItem =item;
+            txtButton.Name = DatabaseItem.Server;
             txtButton.Text = Utils.FileUtil.ReName(linkSourceName);
             this.oldTextString = linkSourceName;
             LinkSourceName = linkSourceName;

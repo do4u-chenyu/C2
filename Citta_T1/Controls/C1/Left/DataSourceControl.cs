@@ -157,6 +157,7 @@ namespace C2.Controls.Left
             {
                 GenConnectButton(dialog.DatabaseInfo);
                 ConnectDatabase(dialog.DatabaseInfo);
+                new LinkButton("", "", dialog.DatabaseInfo);
             }
         }
 

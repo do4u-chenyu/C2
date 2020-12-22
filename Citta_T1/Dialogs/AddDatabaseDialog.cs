@@ -18,7 +18,6 @@ namespace C2.Dialogs
         public AddDatabaseDialog()
         {
             InitializeComponent();
-            DatabaseInfo = new DatabaseItem();
         }
 
         protected override bool OnOKButtonClick()
