@@ -395,7 +395,7 @@ namespace C2.Utils
         public static string ReName(string name)
         {
             string newName;
-            int maxLength = 6;
+            int maxLength = 12;
 
             if (name.Length <= maxLength)
             {
@@ -407,7 +407,7 @@ namespace C2.Utils
                 newName = name.Substring(0, maxLength);
             else
             {
-                newName = name.Substring(0, Math.Min(8, name.Length));
+                newName = name.Substring(0, Math.Min(12, name.Length));
             }
             return newName;
         }

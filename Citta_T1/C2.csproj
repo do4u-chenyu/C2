@@ -1875,6 +1875,7 @@
     <None Include="Resources\Images\ToolImage\saveAllButton.png" />
     <None Include="Resources\Images\TabBarImage\ORACLE.png" />
     <None Include="Resources\Images\TabBarImage\Excel.png" />
+    <None Include="Resources\Images\TabBarImage\Table.png" />
     <Content Include="Resources\Images\TabBarImage\业务视图.png" />
     <None Include="Resources\Images\TabBarImage\业务视图2.png" />
     <None Include="Resources\Images\TabBarImage\业务视图3.png" />

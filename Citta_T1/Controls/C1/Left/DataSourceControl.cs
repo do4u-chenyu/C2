@@ -246,7 +246,8 @@ namespace C2.Controls.Left
         private void UpdateFrameCombo(List<string> users)
         {
             //throw new NotImplementedException();
-            this.frameCombo.Text =users[4].ToString();
+            this.frameCombo.Text =users[4].ToString();//这边是不是4太粗暴了?
+            users.ForEach(x => frameCombo.Items.Add(x.ToString()));
         }
 
 
@@ -286,6 +287,7 @@ namespace C2.Controls.Left
             if (ComboTableSource == null || this.frameCombo.SelectedIndex < 0 || ComboTableSource.Count <= this.frameCombo.SelectedIndex)
                 return;
             SelectedTableSource = ComboTableSource[this.frameCombo.SelectedIndex];//这边还有点没写完
+
         }
     }
 }
