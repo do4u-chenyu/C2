@@ -17,7 +17,8 @@ namespace C2.Controls.Left
     public partial class DataSourceControl : UserControl
     {
         // 从`FormInputData.cs`导入模块收到的数据，以索引的形式存储
-
+        public DataItem SelectedTableSource { get; set; }//选中数据
+        public List<DataItem> ComboTableSource { get; set; }//下拉数据
         public DataSourceControl()
         {
             dataSourceDictI2B = new Dictionary<string, DataButton>();
@@ -232,7 +233,7 @@ namespace C2.Controls.Left
             if (schemas == null)
                 return;
             List<string> users = DbUtil.GetUsers(conn);
-            //this.UpdateFrameCombo(schemas);
+            this.UpdateFrameCombo(users);
             //this.UpdateTables(schemas);
         }
 
@@ -241,9 +242,10 @@ namespace C2.Controls.Left
             throw new NotImplementedException();
         }
 
-        private void UpdateFrameCombo(List<Schema> schemas)
+        private void UpdateFrameCombo(List<string> users)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            this.frameCombo.Text =users[4].ToString();
         }
 
 
@@ -276,6 +278,13 @@ namespace C2.Controls.Left
         private void linkPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void frameCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ComboTableSource == null || this.frameCombo.SelectedIndex < 0 || ComboTableSource.Count <= this.frameCombo.SelectedIndex)
+                return;
+            SelectedTableSource = ComboTableSource[this.frameCombo.SelectedIndex];//这边还有点没写完
         }
     }
 }

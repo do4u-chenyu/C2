@@ -142,6 +142,7 @@
             this.frameCombo.Name = "frameCombo";
             this.frameCombo.Size = new System.Drawing.Size(159, 20);
             this.frameCombo.TabIndex = 5;
+            this.frameCombo.SelectedIndexChanged += new System.EventHandler(this.frameCombo_SelectedIndexChanged);
             // 
             // linkPanel
             // 

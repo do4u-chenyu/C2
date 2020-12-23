@@ -1873,6 +1873,8 @@
     <None Include="Resources\Images\strike.png" />
     <None Include="Resources\Images\svg.png" />
     <None Include="Resources\Images\ToolImage\saveAllButton.png" />
+    <None Include="Resources\Images\TabBarImage\ORACLE.png" />
+    <None Include="Resources\Images\TabBarImage\Excel.png" />
     <Content Include="Resources\Images\TabBarImage\业务视图.png" />
     <None Include="Resources\Images\TabBarImage\业务视图2.png" />
     <None Include="Resources\Images\TabBarImage\业务视图3.png" />
@@ -2574,6 +2576,7 @@
     <None Include="Resources\WidgetIcon\附件.png" />
     <None Include="Resources\WidgetIcon\结果.png" />
     <None Include="Resources\WidgetIcon\ORACLE.png" />
+    <None Include="Resources\WidgetIcon\Excel.png" />
     <Content Include="Resources\提示1.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
