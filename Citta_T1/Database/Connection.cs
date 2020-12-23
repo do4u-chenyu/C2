@@ -32,7 +32,18 @@ namespace C2.Database
             this.Service = service;
             this.Port = port;
         }
-
+        public Connection Clone()
+        {
+            Connection tmp = new Connection();
+            tmp.Name = this.Name;
+            tmp.User = this.User;
+            tmp.Pass = this.Pass;
+            tmp.Host = this.Host;
+            tmp.Sid = this.Sid;
+            tmp.Service = this.Service;
+            tmp.Port = this.Port;
+            return tmp;
+        }
         /// <summary>
         /// Returns the connection string for this connection
         /// </summary>

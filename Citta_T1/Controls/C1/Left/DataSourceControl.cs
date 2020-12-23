@@ -233,6 +233,7 @@ namespace C2.Controls.Left
             if (schemas == null)
                 return;
             List<string> users = DbUtil.GetUsers(conn);
+            //List<string> tables = DbUtil.GetTablesByUser(conn, "SYS");
             this.UpdateFrameCombo(users);
             //this.UpdateTables(schemas);
         }
