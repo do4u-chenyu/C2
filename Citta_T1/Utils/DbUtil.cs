@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace C2.Utils
 {
-    class DbUtil
+    public static class DbUtil
     {
         //private void executeSQL(Connection connection, string sqlText)
         //{
@@ -56,7 +56,7 @@ namespace C2.Utils
         //    OracleDataAdapter oda = new OracleDataAdapter(oconn);
         //    oda.Fill()
         //}
-        public void TestConnection(Connection connection)
+        public static void TestConnection(Connection connection)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace C2.Utils
             return users;
         }
 
-        internal static bool TestConn(Connection conn)
+        public static bool TestConn(Connection conn)
         {
             using (OracleConnection con = new OracleConnection(conn.ConnectionString))
             {
@@ -127,6 +127,48 @@ namespace C2.Utils
                     return false;
                 }
             }
+        }
+
+        public static List<string> GetTablesByUser(Connection conn, string user)
+        {
+            List<string> tables = null;
+            Connection tmpConn = conn.Clone();
+            using (OracleConnection con = new OracleConnection(tmpConn.ConnectionString))
+            {
+                try
+                {
+                    con.Open();
+                    tables = DbUtil.GetTables(con, user);
+                    con.Close();
+                }
+                catch (Exception ex)
+                {
+                    // TODO 有两种异常, 连接异常和查询异常，需要分开处理
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + "详情：" + ex.ToString());
+                }
+                return tables;
+            }
+        }
+        private static List<string> GetTables(OracleConnection conn, string user)
+        {
+            string sql = String.Format(@"
+                            select object_name, object_type
+                            from sys.all_objects
+                            where owner='{0}' and object_type in ('TABLE','VIEW')
+                            order by object_name",
+                            DbHelper.Sanitise(user.ToUpper()));
+            List<string> tables = new List<string>();
+            using (OracleCommand comm = new OracleCommand(sql, conn))
+            {
+                using (OracleDataReader rdr = comm.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        tables.Add(rdr.GetString(0));
+                    }
+                }
+            }
+            return tables;
         }
     }
 }
