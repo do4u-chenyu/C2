@@ -86,6 +86,7 @@
             this.serverTextBox.Name = "serverTextBox";
             this.serverTextBox.Size = new System.Drawing.Size(95, 21);
             this.serverTextBox.TabIndex = 10009;
+            this.serverTextBox.Text = "114.55.248.85";
             // 
             // portLabel
             // 
@@ -102,6 +103,7 @@
             this.portTextBox.Name = "portTextBox";
             this.portTextBox.Size = new System.Drawing.Size(84, 21);
             this.portTextBox.TabIndex = 10012;
+            this.portTextBox.Text = "1521";
             // 
             // userTextBox
             // 
@@ -109,6 +111,7 @@
             this.userTextBox.Name = "userTextBox";
             this.userTextBox.Size = new System.Drawing.Size(265, 21);
             this.userTextBox.TabIndex = 10013;
+            this.userTextBox.Text = "test";
             // 
             // passwordTextBox
             // 
@@ -116,6 +119,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(265, 21);
             this.passwordTextBox.TabIndex = 10014;
+            this.passwordTextBox.Text = "test";
             // 
             // databaseTypeComboBox
             // 
@@ -131,22 +135,22 @@
             // serviceRadiobutton
             // 
             this.serviceRadiobutton.AutoSize = true;
-            this.serviceRadiobutton.Checked = true;
             this.serviceRadiobutton.Location = new System.Drawing.Point(21, 168);
             this.serviceRadiobutton.Name = "serviceRadiobutton";
             this.serviceRadiobutton.Size = new System.Drawing.Size(59, 16);
             this.serviceRadiobutton.TabIndex = 10017;
-            this.serviceRadiobutton.TabStop = true;
             this.serviceRadiobutton.Text = "服务名";
             this.serviceRadiobutton.UseVisualStyleBackColor = true;
             // 
             // sidRadiobutton
             // 
             this.sidRadiobutton.AutoSize = true;
+            this.sidRadiobutton.Checked = true;
             this.sidRadiobutton.Location = new System.Drawing.Point(21, 200);
             this.sidRadiobutton.Name = "sidRadiobutton";
             this.sidRadiobutton.Size = new System.Drawing.Size(41, 16);
             this.sidRadiobutton.TabIndex = 10018;
+            this.sidRadiobutton.TabStop = true;
             this.sidRadiobutton.Text = "SID";
             this.sidRadiobutton.UseVisualStyleBackColor = true;
             // 
@@ -163,6 +167,7 @@
             this.sidTextBox.Name = "sidTextBox";
             this.sidTextBox.Size = new System.Drawing.Size(265, 21);
             this.sidTextBox.TabIndex = 10020;
+            this.sidTextBox.Text = "orcl";
             // 
             // AddDatabaseDialog
             // 

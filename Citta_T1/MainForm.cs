@@ -291,8 +291,12 @@ namespace C2
         {
             DataSourceInfo dataSource = new DataSourceInfo(this.userName);
             List<DataButton> dataButtons = dataSource.LoadDataSourceInfo();
+            //List<LinkButton> linkButtons = dataSource.LoadDataSourceInfo();
             foreach (DataButton dataButton in dataButtons)
                 this.dataSourceControl.GenDataButton(dataButton);
+
+            //foreach (LinkButton linkButton in linkButtons)
+            //    this.dataSourceControl.GenLinkButton(linkButton);
         }
 
         private void ShowLeftFold()

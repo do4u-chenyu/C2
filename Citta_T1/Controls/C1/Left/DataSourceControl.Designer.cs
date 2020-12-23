@@ -33,6 +33,7 @@
             this.localDataLabel = new System.Windows.Forms.Label();
             this.localFrame = new System.Windows.Forms.Panel();
             this.externalFrame = new System.Windows.Forms.Panel();
+            this.dataTableTextBox = new System.Windows.Forms.TextBox();
             this.dataTabelPanel = new System.Windows.Forms.Panel();
             this.frameCombo = new System.Windows.Forms.ComboBox();
             this.linkPanel = new System.Windows.Forms.Panel();
@@ -40,7 +41,6 @@
             this.frameLabel = new System.Windows.Forms.Label();
             this.linkLabel = new System.Windows.Forms.Label();
             this.addConnectLabel = new System.Windows.Forms.Label();
-            this.dataTableTextBox = new System.Windows.Forms.TextBox();
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
             this.SuspendLayout();
@@ -120,6 +120,13 @@
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
             // 
+            // dataTableTextBox
+            // 
+            this.dataTableTextBox.Location = new System.Drawing.Point(10, 285);
+            this.dataTableTextBox.Name = "dataTableTextBox";
+            this.dataTableTextBox.Size = new System.Drawing.Size(159, 21);
+            this.dataTableTextBox.TabIndex = 7;
+            // 
             // dataTabelPanel
             // 
             this.dataTabelPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -135,14 +142,16 @@
             this.frameCombo.Name = "frameCombo";
             this.frameCombo.Size = new System.Drawing.Size(159, 20);
             this.frameCombo.TabIndex = 5;
+            this.frameCombo.SelectedIndexChanged += new System.EventHandler(this.frameCombo_SelectedIndexChanged);
             // 
             // linkPanel
             // 
             this.linkPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.linkPanel.Location = new System.Drawing.Point(10, 59);
+            this.linkPanel.Location = new System.Drawing.Point(10, 69);
             this.linkPanel.Name = "linkPanel";
-            this.linkPanel.Size = new System.Drawing.Size(159, 124);
+            this.linkPanel.Size = new System.Drawing.Size(159, 121);
             this.linkPanel.TabIndex = 4;
+            this.linkPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.linkPanel_Paint);
             // 
             // dataTableLabel
             // 
@@ -185,13 +194,6 @@
             this.addConnectLabel.TabIndex = 0;
             this.addConnectLabel.Text = "+ 添加连接";
             this.addConnectLabel.Click += new System.EventHandler(this.AddConnectLabel_Click);
-            // 
-            // dataTableTextBox
-            // 
-            this.dataTableTextBox.Location = new System.Drawing.Point(10, 285);
-            this.dataTableTextBox.Name = "dataTableTextBox";
-            this.dataTableTextBox.Size = new System.Drawing.Size(159, 21);
-            this.dataTableTextBox.TabIndex = 7;
             // 
             // DataSourceControl
             // 

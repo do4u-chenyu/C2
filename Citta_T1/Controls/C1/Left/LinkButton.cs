@@ -18,14 +18,14 @@ namespace C2.Controls.Left
         public int Count { get => this.count; set => this.count = value; }
         public DatabaseItem DatabaseItem { get; set; }
 
-        public LinkButton(string linkname, string linkSourceName,DatabaseItem item)
+        public LinkButton(DatabaseItem item)
         {
             InitializeComponent();
             DatabaseItem =item;
             txtButton.Name = DatabaseItem.Server;
-            txtButton.Text = Utils.FileUtil.ReName(linkSourceName);
-            this.oldTextString = linkSourceName;
-            LinkSourceName = linkSourceName;
+            txtButton.Text = Utils.FileUtil.ReName(DatabaseItem.Server);
+            this.oldTextString = DatabaseItem.Server;
+            LinkSourceName = DatabaseItem.Server;
         }
 
         private void LinkButton_Load(object sender, EventArgs e)

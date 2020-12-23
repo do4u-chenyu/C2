@@ -168,6 +168,12 @@
     <Compile Include="ChartControls\MindMap\MindMapView\MindMapView.Schedule.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\C1\Left\TableButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\TableButton.Designer.cs">
+      <DependentUpon>TableButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\C1\Left\LinkButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1353,6 +1359,10 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
+    <EmbeddedResource Include="Controls\C1\Left\TableButton.resx">
+      <DependentUpon>TableButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\LinkButton.resx">
       <DependentUpon>LinkButton.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1863,6 +1873,8 @@
     <None Include="Resources\Images\strike.png" />
     <None Include="Resources\Images\svg.png" />
     <None Include="Resources\Images\ToolImage\saveAllButton.png" />
+    <None Include="Resources\Images\TabBarImage\ORACLE.png" />
+    <None Include="Resources\Images\TabBarImage\Excel.png" />
     <Content Include="Resources\Images\TabBarImage\业务视图.png" />
     <None Include="Resources\Images\TabBarImage\业务视图2.png" />
     <None Include="Resources\Images\TabBarImage\业务视图3.png" />
@@ -2564,6 +2576,7 @@
     <None Include="Resources\WidgetIcon\附件.png" />
     <None Include="Resources\WidgetIcon\结果.png" />
     <None Include="Resources\WidgetIcon\ORACLE.png" />
+    <None Include="Resources\WidgetIcon\Excel.png" />
     <Content Include="Resources\提示1.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -2672,12 +2685,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
