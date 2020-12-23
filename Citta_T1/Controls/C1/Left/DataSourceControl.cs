@@ -17,7 +17,7 @@ namespace C2.Controls.Left
     public partial class DataSourceControl : UserControl
     {
         // 从`FormInputData.cs`导入模块收到的数据，以索引的形式存储
-        public DataItem SelectedTableSource { get; set; }//选中数据
+        public int SelectedTableSource { get; set; }//选中数据
         public List<DataItem> ComboTableSource { get; set; }//下拉数据
         public DataSourceControl()
         {
@@ -283,10 +283,16 @@ namespace C2.Controls.Left
 
         private void frameCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ComboTableSource == null || this.frameCombo.SelectedIndex < 0 || ComboTableSource.Count <= this.frameCombo.SelectedIndex)
+            SetComboTableSource();//每次清空一下
+            SelectedTableSource = this.frameCombo.SelectedIndex;
+            if (ComboTableSource == null || this.frameCombo.SelectedIndex < 0)
                 return;
-            SelectedTableSource = ComboTableSource[this.frameCombo.SelectedIndex];//这边还有点没写完
+            //这边还有点没写完
 
+        }
+        private void SetComboTableSource()
+        {
+            //this.frameCombo.Items.Clear();
         }
     }
 }

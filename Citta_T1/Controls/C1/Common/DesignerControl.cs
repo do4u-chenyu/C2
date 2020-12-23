@@ -135,6 +135,7 @@ namespace C2.Controls.Common
                 }
                 ComboDataSource = di;
             }
+           
         }
 
         private void SetSelectedOperator()
