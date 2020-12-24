@@ -260,11 +260,11 @@ namespace C2.Controls.Left
 
         private void UpdateFrameCombo(List<string> users,string loginUser)
         {
-            this.frameCombo.Text = loginUser.ToUpper();
+            this.frameCombo.Text = users.Find( x => x.Equals(loginUser.ToUpper())) == null ? "选择架构" : loginUser.ToUpper();
             users.ForEach(x => frameCombo.Items.Add(x.ToString()));
         }
 
-        private void frameCombo_SelectedIndexChanged(object sender, EventArgs e)
+        private void FrameCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             //根据架构改变数据表
             //Connection conn = new Connection(databaseInfo);
