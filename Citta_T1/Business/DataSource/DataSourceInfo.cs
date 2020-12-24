@@ -45,10 +45,6 @@ namespace C2.Business.DataSource
         {
             XmlElement rootElement = xDoc.CreateElement("DataSourceDocument");
             xDoc.AppendChild(rootElement);
-
-            XmlElement versionElement = xDoc.CreateElement("Version");
-            versionElement.InnerText = "V1.0";
-            rootElement.AppendChild(versionElement);
             xDoc.Save(dataSourcePath);
         }
         #region 本地数据保存加载

@@ -105,7 +105,7 @@ namespace C2.Controls.Left
         {
             LayoutModelButtonLocation(linkButton); // 递增
             //TODO 判断是否同名？
-            //this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
+            this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
             this.linkPanel.Controls.Add(linkButton);
         }
 
@@ -195,7 +195,7 @@ namespace C2.Controls.Left
             // 重新布局
             ReLayoutLocalFrame();
             // 保存
-            SaveDataSourceInfo();
+            SaveExternalData();
         }
         public void SaveDataSourceInfo()
         {
@@ -203,6 +203,11 @@ namespace C2.Controls.Left
             dataSource.SaveDataSourceInfo(DataSourceDictI2B.Values.ToArray());
         }
 
+        public void SaveExternalData()
+        {
+            DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName, "ExternalDataInformation.xml");
+            dataSource.SaveExternalDataInfo(linkSourceDictI2B.Values.ToArray());
+        }
         private void DataSourceControl_MouseDown(object sender, MouseEventArgs e)
         {
             // 强制编辑控件失去焦点,触发重命名控件的Leave事件 
@@ -227,6 +232,7 @@ namespace C2.Controls.Left
                 GenLinkButton(linkButton);
 
                 ConnectDatabase(dialog.DatabaseInfo);//连接一次数据库，刷新架构及数据表
+                SaveExternalData();
             }
         }
 
