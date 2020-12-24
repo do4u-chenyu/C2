@@ -1,4 +1,5 @@
-﻿using C2.Controls.Left;
+﻿using C2.Business.Model;
+using C2.Controls.Left;
 using C2.Core;
 using C2.Utils;
 using System;
@@ -13,11 +14,12 @@ namespace C2.Business.DataSource
         private readonly string userPath;
         private readonly string dataSourcePath;
         private readonly static LogUtil log = LogUtil.GetInstance("DataSourceInfo");
-        public DataSourceInfo(string userName)
+        public DataSourceInfo(string userName, string filePath = "DataSourceInformation.xml")
         {
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
-            this.dataSourcePath = Path.Combine(this.userPath, "DataSourceInformation.xml");
+            this.dataSourcePath = Path.Combine(this.userPath, filePath);
         }
+
 
         public void WriteDataSourceInfo(DataButton db)
         {
@@ -49,11 +51,11 @@ namespace C2.Business.DataSource
             rootElement.AppendChild(versionElement);
             xDoc.Save(dataSourcePath);
         }
-        public void SaveDataSourceInfo(DataButton[] dbs)
+        public void SaveDataSourceInfo(DataButton[] dbs, string rootName = "DataSourceDocument")
         {
             Directory.CreateDirectory(userPath);
             XmlDocument xDoc = new XmlDocument();
-            XmlElement rootElement = xDoc.CreateElement("DataSourceDocument");
+            XmlElement rootElement = xDoc.CreateElement(rootName);
             xDoc.AppendChild(rootElement);
 
             foreach (DataButton db in dbs)
@@ -65,31 +67,16 @@ namespace C2.Business.DataSource
         private void WriteOneDataSource(DataButton db, XmlDocument xDoc)
         {
             XmlNode node = xDoc.SelectSingleNode("DataSourceDocument");
-            XmlElement dataSourceNode = xDoc.CreateElement("DataSource");
-            node.AppendChild(dataSourceNode);
-            XmlElement nameNode = xDoc.CreateElement("name");
-            nameNode.InnerText = db.DataSourceName;
-            dataSourceNode.AppendChild(nameNode);
 
-            XmlElement sepNode = xDoc.CreateElement("separator");
-            sepNode.InnerText = Convert.ToInt32(db.Separator).ToString();
-            dataSourceNode.AppendChild(sepNode);
+            ModelXmlWriter mxw = new ModelXmlWriter("DataSource" , node);
 
-            XmlElement extTypeNode = xDoc.CreateElement("extType");
-            extTypeNode.InnerText = db.ExtType.ToString();
-            dataSourceNode.AppendChild(extTypeNode);
+           mxw.Write("name", db.DataSourceName)
+                .Write("separator", Convert.ToInt32(db.Separator))
+                .Write("extType", db.ExtType)
+                .Write("encoding", db.Encoding)
+                .Write("path", db.FullFilePath)
+                .Write("count", "0");//默认为0
 
-            XmlElement codeNode = xDoc.CreateElement("encoding");
-            codeNode.InnerText = db.Encoding.ToString();
-            dataSourceNode.AppendChild(codeNode);
-
-            XmlElement pathNode = xDoc.CreateElement("path");
-            pathNode.InnerText = db.FullFilePath;
-            dataSourceNode.AppendChild(pathNode);
-
-            XmlElement countNode = xDoc.CreateElement("count");
-            countNode.InnerText = "0";//默认为0
-            dataSourceNode.AppendChild(countNode);
         }
 
         public List<DataButton> LoadDataSourceInfo()
