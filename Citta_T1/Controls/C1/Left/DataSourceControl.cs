@@ -22,7 +22,9 @@ namespace C2.Controls.Left
             dataSourceDictI2B = new Dictionary<string, DataButton>();
             linkSourceDictI2B = new Dictionary<string, LinkButton>();
             InitializeComponent();
-            
+            startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            linkPoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
         }
      
         private static readonly int ButtonGapHeight = 50;//上下间隔
@@ -30,6 +32,8 @@ namespace C2.Controls.Left
         private static readonly int ButtonBottomOffsetY = 100;
         //private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
         private Point startPoint;
+        private Point linkPoint;
+        private Point tablePoint;
         private Dictionary<string, DataButton> dataSourceDictI2B;
         private Dictionary<string, LinkButton> linkSourceDictI2B;
 
@@ -68,7 +72,6 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(DataButton ct)
         {
-            startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.localFrame.Controls.Count > 0)
                 startPoint = this.localFrame.Controls[this.localFrame.Controls.Count - 1].Location;
 
@@ -77,19 +80,17 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(LinkButton lb)
         {
-            startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.linkPanel.Controls.Count > 0)
-                startPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
-            startPoint.Y += ButtonGapHeight;
-            lb.Location = startPoint;
+                linkPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
+            linkPoint.Y += ButtonGapHeight;
+            lb.Location = linkPoint;
         }
         private void LayoutModelButtonLocation(TableButton tb)
         {
-            startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.dataTabelPanel.Controls.Count > 0)
-                startPoint = this.dataTabelPanel.Controls[this.dataTabelPanel.Controls.Count - 1].Location;
-            startPoint.Y += ButtonGapHeight;
-            tb.Location = startPoint;
+                tablePoint = this.dataTabelPanel.Controls[this.dataTabelPanel.Controls.Count - 1].Location;
+            tablePoint.Y += ButtonGapHeight;
+            tb.Location = tablePoint;
         }
         // 程序启动加载时调用
         public void GenDataButton(DataButton dataButton)
