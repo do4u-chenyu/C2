@@ -23,7 +23,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(C2FilterOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -230,7 +229,7 @@
             this.label_line2.Size = new System.Drawing.Size(600, 2);
             this.label_line2.TabIndex = 43;
             // 
-            // FilterOperatorView
+            // C2FilterOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(539, 371);
@@ -239,12 +238,12 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Icon = Properties.Resources.filter_icon;
+            this.Icon = global::C2.Properties.Resources.filter_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(555, 410);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(555, 410);
-            this.Name = "FilterOperatorView";
+            this.Name = "C2FilterOperatorView";
             this.ShowIcon = true;
             this.Text = "条件筛选算子设置";
             this.bottomPanel.ResumeLayout(false);

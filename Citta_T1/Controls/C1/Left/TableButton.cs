@@ -17,7 +17,7 @@ namespace C2.Controls.Left
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataSourceName { get; set; }
         public int Count { get => this.count; set => this.count = value; }
-        private static string TableButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
+        //private static string TableButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
         public DatabaseItem TableItem { get; set; }
         public string LinkSourceName { get; set; }

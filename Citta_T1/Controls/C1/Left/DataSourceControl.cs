@@ -29,7 +29,7 @@ namespace C2.Controls.Left
      
         private static readonly int ButtonGapHeight = 50;//上下间隔
         private static readonly int ButtonLeftX = 18;
-        private static readonly int ButtonBottomOffsetY = 100;
+        //private static readonly int ButtonBottomOffsetY = 100;
         //private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
         private Point startPoint;
         private Point linkPoint;
