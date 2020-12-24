@@ -21,14 +21,22 @@ namespace C2.Model
         {
 
         }
-        public DataItem(string filePath, string fileName, char fileSep, OpUtil.Encoding fileEncoding, OpUtil.ExtType fileType)
+        public DataItem(string filePath, string fileName, char fileSep, OpUtil.Encoding fileEncoding, OpUtil.ExtType fileType, DatabaseType databaseType = DatabaseType.Null)
         {
             this.FilePath = filePath;
             this.FileName = fileName;
             this.FileSep = fileSep;
             this.FileEncoding = fileEncoding;
             this.FileType = fileType;
+            this.DataType = databaseType;
         }
+
+        public DataItem(DatabaseType dataType, DatabaseItem database)
+        {
+            DataType = dataType;
+            Database = database;
+        }
+
         public string FilePath { get; set; }
         public string FileName { get; set; }
         public char FileSep { get; set; }
@@ -38,5 +46,7 @@ namespace C2.Model
         public List<int> SelectedIndexs { get; set; }
         public List<string> SelectedItems { get; set; }
         public ResultType ResultDataType { get; set; }
+        public DatabaseType DataType { get; set; }
+        public DatabaseItem Database { get; set; }
     }
 }

@@ -9,14 +9,10 @@ namespace C2.Controls.Left
 {
     public partial class TableButton : UserControl
     {
-        private OpUtil.Encoding encoding;
-        private OpUtil.ExtType extType;
-        private char separator;
+        
         private int count = 0;
         private string oldTextString;
-        public OpUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
-        public OpUtil.ExtType ExtType { get => extType; set => extType = value; }
-        public char Separator { get => separator; set => separator = value; }
+        
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataSourceName { get; set; }
         public int Count { get => this.count; set => this.count = value; }
@@ -28,9 +24,6 @@ namespace C2.Controls.Left
             InitializeComponent();
             txtButton.Name = ffp;
             txtButton.Text = Utils.FileUtil.ReName(dataSourceName);
-            this.separator = separator;
-            this.extType = extType;
-            this.encoding = encoding;
             this.oldTextString = dataSourceName;
             DataSourceName = dataSourceName;
         }
@@ -46,10 +39,7 @@ namespace C2.Controls.Left
             this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
             helpInfo = String.Format(TableButtonFlowTemplate,
-                                    encoding.ToString(),
-                                    this.ExtType,
-                                    0,
-                                    this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
+                                    0);
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
@@ -57,7 +47,6 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding);
             Global.GetMainForm().ShowBottomPanel();
         }
 
@@ -72,16 +61,13 @@ namespace C2.Controls.Left
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
         {
             string helpInfo = String.Format(TableButtonFlowTemplate,
-                                        encoding.ToString(),
-                                        this.ExtType,
-                                        0,
-                                        this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
+                                        0 );
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
         private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByFullFilePath(this, FullFilePath, this.separator, this.extType, this.encoding, true);
+            
             Global.GetMainForm().ShowBottomPanel();
         }
 
@@ -97,10 +83,7 @@ namespace C2.Controls.Left
                 dragDropData.SetData("Type", ElementType.DataSource);
                 dragDropData.SetData("Path", FullFilePath);    // 数据源文件全路径
                 dragDropData.SetData("Text", DataSourceName);  // 数据源名称
-                dragDropData.SetData("Separator", Separator);  // 分隔符
-                dragDropData.SetData("ExtType", ExtType);      // 扩展名,文件类型
-                // 需要记录他的编码格式
-                dragDropData.SetData("Encoding", Encoding);
+         
                 this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
             //else if (e.Clicks == 2)

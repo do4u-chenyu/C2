@@ -27,6 +27,7 @@ namespace C2.Controls.Left
             InitializeComponent();
             startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
             startPoint.Y += 65;
+            linkPoint = new Point(0, -ButtonGapHeight);
         }
      
         private static readonly int ButtonGapHeight = 50;//上下间隔
@@ -34,7 +35,7 @@ namespace C2.Controls.Left
         private static readonly int ButtonBottomOffsetY = 100;
         //private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
         private Point startPoint;
-        private Point linkPoint = new Point(0,0);
+        private Point linkPoint;
         private Dictionary<string, DataButton> dataSourceDictI2B;
         private Dictionary<string, LinkButton> linkSourceDictI2B;
 
@@ -227,7 +228,7 @@ namespace C2.Controls.Left
 
         private void ConnectDatabase(DatabaseItem databaseInfo)
         {
-            MessageBox.Show(databaseInfo.Type + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
+            //MessageBox.Show(databaseInfo.Type + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
             // Name, User, Pass, Host, Sid, Service, Port;
             Connection conn = new Connection(databaseInfo);
 
@@ -237,7 +238,7 @@ namespace C2.Controls.Left
             DataTable dt = new DataTable();
             for (int i = 0; i <= schemas[0].Tables.Count; i++)
             {
-                schemas[0].Tables[i].Name.ToString();
+                //schemas[0].Tables[i].Name.ToString();
                 
             }
 
@@ -245,7 +246,7 @@ namespace C2.Controls.Left
             List<string> users = DbUtil.GetUsers(conn);
 
             //List<string> tables = DbUtil.GetTablesByUser(conn, "SYS");
-            this.UpdateFrameCombo(users);
+            this.UpdateFrameCombo(users,databaseInfo.User);
             //this.UpdateTables(schemas);
         }
 
@@ -254,10 +255,10 @@ namespace C2.Controls.Left
             throw new NotImplementedException();
         }
 
-        private void UpdateFrameCombo(List<string> users)
+        private void UpdateFrameCombo(List<string> users,string loginUser)
         {
             //throw new NotImplementedException();
-            this.frameCombo.Text =users[4].ToString();//这边是不是4太粗暴了?
+            this.frameCombo.Text = loginUser.ToUpper();
             users.ForEach(x => frameCombo.Items.Add(x.ToString()));
         }
 
@@ -288,7 +289,7 @@ namespace C2.Controls.Left
 
         }
 
-         private void frameCombo_SelectedIndexChanged(object sender, EventArgs e)
+        private void frameCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetComboTableSource();//每次清空一下
             SelectedTableSource = this.frameCombo.SelectedIndex;

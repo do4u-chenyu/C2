@@ -129,7 +129,6 @@
             // 
             // dataTabelPanel
             // 
-            this.dataTabelPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataTabelPanel.Location = new System.Drawing.Point(10, 320);
             this.dataTabelPanel.Name = "dataTabelPanel";
             this.dataTabelPanel.Size = new System.Drawing.Size(159, 124);
@@ -146,10 +145,10 @@
             // 
             // linkPanel
             // 
-            this.linkPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.linkPanel.Location = new System.Drawing.Point(10, 69);
+            this.linkPanel.AutoScroll = true;
+            this.linkPanel.Location = new System.Drawing.Point(10, 59);
             this.linkPanel.Name = "linkPanel";
-            this.linkPanel.Size = new System.Drawing.Size(159, 121);
+            this.linkPanel.Size = new System.Drawing.Size(168, 131);
             this.linkPanel.TabIndex = 4;
             // 
             // dataTableLabel
