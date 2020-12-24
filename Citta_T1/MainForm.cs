@@ -289,14 +289,16 @@ namespace C2
         }
         private void LoadDataSource()
         {
-            DataSourceInfo dataSource = new DataSourceInfo(this.userName);
-            List<DataButton> dataButtons = dataSource.LoadDataSourceInfo();
-            //List<LinkButton> linkButtons = dataSource.LoadDataSourceInfo();
+            DataSourceInfo dataSource0 = new DataSourceInfo(this.userName);
+            List<DataButton> dataButtons = dataSource0.LoadDataSourceInfo();
+           
             foreach (DataButton dataButton in dataButtons)
                 this.dataSourceControl.GenDataButton(dataButton);
-
-            //foreach (LinkButton linkButton in linkButtons)
-            //    this.dataSourceControl.GenLinkButton(linkButton);
+            // 外部数据源加载
+            DataSourceInfo dataSource1 = new DataSourceInfo(this.userName,"ExternalDataInformation.xml");
+            List<LinkButton> linkButtons = dataSource1.LoadExternalData();
+            foreach (LinkButton linkButton in linkButtons)
+                this.dataSourceControl.GenLinkButton(linkButton);
         }
 
         private void ShowLeftFold()
