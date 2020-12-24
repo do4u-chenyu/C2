@@ -17,17 +17,12 @@ namespace C2.Controls.Left
 {
     public partial class DataSourceControl : UserControl
     {
-        // 从`FormInputData.cs`导入模块收到的数据，以索引的形式存储
-        public int SelectedTableSource { get; set; }//选中数据
-        public List<DataItem> ComboTableSource { get; set; }//下拉数据
         public DataSourceControl()
         {
             dataSourceDictI2B = new Dictionary<string, DataButton>();
             linkSourceDictI2B = new Dictionary<string, LinkButton>();
             InitializeComponent();
-            startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
-            startPoint.Y += 65;
-            linkPoint = new Point(0, -ButtonGapHeight);
+            
         }
      
         private static readonly int ButtonGapHeight = 50;//上下间隔
@@ -35,7 +30,6 @@ namespace C2.Controls.Left
         private static readonly int ButtonBottomOffsetY = 100;
         //private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
         private Point startPoint;
-        private Point linkPoint;
         private Dictionary<string, DataButton> dataSourceDictI2B;
         private Dictionary<string, LinkButton> linkSourceDictI2B;
 
@@ -47,6 +41,10 @@ namespace C2.Controls.Left
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), MergableProperty(false)]
         public Dictionary<string, DataButton> DataSourceDictI2B { get => dataSourceDictI2B; }
         public Dictionary<string, LinkButton> LinkSourceDictI2B { get => linkSourceDictI2B; }
+
+
+        //数据库相关属性
+        public LinkButton SelectLinkButton { set; get; }
 
         // 手工导入时调用
         public void GenDataButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
@@ -70,7 +68,7 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(DataButton ct)
         {
-
+            startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.localFrame.Controls.Count > 0)
                 startPoint = this.localFrame.Controls[this.localFrame.Controls.Count - 1].Location;
 
@@ -79,10 +77,19 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(LinkButton lb)
         {
+            startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.linkPanel.Controls.Count > 0)
-                linkPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
-            linkPoint.Y += ButtonGapHeight;
-            lb.Location = linkPoint;
+                startPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
+            startPoint.Y += ButtonGapHeight;
+            lb.Location = startPoint;
+        }
+        private void LayoutModelButtonLocation(TableButton tb)
+        {
+            startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            if (this.dataTabelPanel.Controls.Count > 0)
+                startPoint = this.dataTabelPanel.Controls[this.dataTabelPanel.Controls.Count - 1].Location;
+            startPoint.Y += ButtonGapHeight;
+            tb.Location = startPoint;
         }
         // 程序启动加载时调用
         public void GenDataButton(DataButton dataButton)
@@ -95,24 +102,20 @@ namespace C2.Controls.Left
         }
         public void GenLinkButton(LinkButton linkButton)
         {
-            // 供load时调用
-
             LayoutModelButtonLocation(linkButton); // 递增
+            //TODO 判断是否同名？
             //this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
             this.linkPanel.Controls.Add(linkButton);
-   
         }
-        private void GenConnectButton(DatabaseItem databaseInfo)
+
+        private void GenTableButton(TableButton tableButton)
         {
-            // TODO 生成一个button
-            //throw new NotImplementedException();
-            // 根据导入数据动态生成一个button
-            LinkButton linkButton = new LinkButton(databaseInfo);
-
-            GenLinkButton(linkButton);
-
-
+            LayoutModelButtonLocation(tableButton); // 递增
+            //TODO 判断是否同名？
+            //this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
+            this.dataTabelPanel.Controls.Add(tableButton);
         }
+
         private void ExternalData_Click(object sender, EventArgs e)
         {
             this.externalDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Bold);
@@ -219,89 +222,53 @@ namespace C2.Controls.Left
             var dialog = new AddDatabaseDialog();
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-                GenConnectButton(dialog.DatabaseInfo);
-                ConnectDatabase(dialog.DatabaseInfo);
+                LinkButton linkButton = new LinkButton(dialog.DatabaseInfo);
+                GenLinkButton(linkButton);
+
+                ConnectDatabase(dialog.DatabaseInfo);//连接一次数据库，刷新架构及数据表
             }
         }
-
-      
 
         private void ConnectDatabase(DatabaseItem databaseInfo)
         {
-            //MessageBox.Show(databaseInfo.Type + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
-            // Name, User, Pass, Host, Sid, Service, Port;
+            //连接数据库
             Connection conn = new Connection(databaseInfo);
 
+            //刷新架构
+            List<string> users = DbUtil.GetUsers(conn);
+            this.UpdateFrameCombo(users, databaseInfo.User);
+
+            //刷新数据表
             List<Schema> schemas = conn.Schemas;
             if (schemas == null)
                 return;
-            DataTable dt = new DataTable();
-            for (int i = 0; i <= schemas[0].Tables.Count; i++)
-            {
-                //schemas[0].Tables[i].Name.ToString();
-                
-            }
+            this.UpdateTables(schemas, databaseInfo);
 
-
-            List<string> users = DbUtil.GetUsers(conn);
-
-            //List<string> tables = DbUtil.GetTablesByUser(conn, "SYS");
-            this.UpdateFrameCombo(users,databaseInfo.User);
-            //this.UpdateTables(schemas);
         }
 
-        private void UpdateTables(List<Schema> schemas)
+        private void UpdateTables(List<Schema> schemas, DatabaseItem databaseInfo)
         {
-            throw new NotImplementedException();
+            foreach (Table tmpTable in schemas[0].Tables)
+            {
+                DatabaseItem tmpDatabaseItem = databaseInfo;
+                tmpDatabaseItem.DataTable = tmpTable;
+                TableButton tableButton = new TableButton(tmpDatabaseItem);
+                GenTableButton(tableButton);//生成数据表按钮
+            }
         }
 
         private void UpdateFrameCombo(List<string> users,string loginUser)
         {
-            //throw new NotImplementedException();
             this.frameCombo.Text = loginUser.ToUpper();
             users.ForEach(x => frameCombo.Items.Add(x.ToString()));
         }
 
-
-        private void GenLinkButton(Connection conn)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GenLinkButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
-        {
-            // 根据导入数据动态生成一个button
-            DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding);
-            LayoutModelButtonLocation(dataButton);
-
-            // 判断是否有路径文件
-            if (this.DataSourceDictI2B.ContainsKey(fullFilePath))
-            {
-                String name = this.DataSourceDictI2B[fullFilePath].DataSourceName;
-                HelpUtil.ShowMessageBox("该文件已存在，数据名为：" + name);
-                return;
-            }
-            this.DataSourceDictI2B.Add(fullFilePath, dataButton);
-            this.localFrame.Controls.Add(dataButton);
-            //数据源持久化存储
-            DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
-            dataSource.WriteDataSourceInfo(dataButton);
-
-        }
-
         private void frameCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetComboTableSource();//每次清空一下
-            SelectedTableSource = this.frameCombo.SelectedIndex;
-            if (ComboTableSource == null || this.frameCombo.SelectedIndex < 0)
-                return;
-
-
-
+            //根据架构改变数据表
+            //Connection conn = new Connection(databaseInfo);
+            //List<string> tables = DbUtil.GetTablesByUser(conn, "SYS");
         }
-        private void SetComboTableSource()
-        {
-            //this.frameCombo.Items.Clear();
-        }
+
     }
 }

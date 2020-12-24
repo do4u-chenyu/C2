@@ -102,7 +102,6 @@
             this.externalFrame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.externalFrame.AutoScroll = true;
             this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.externalFrame.BackColor = System.Drawing.Color.White;
             this.externalFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -129,9 +128,10 @@
             // 
             // dataTabelPanel
             // 
-            this.dataTabelPanel.Location = new System.Drawing.Point(10, 320);
+            this.dataTabelPanel.AutoScroll = true;
+            this.dataTabelPanel.Location = new System.Drawing.Point(-1, 320);
             this.dataTabelPanel.Name = "dataTabelPanel";
-            this.dataTabelPanel.Size = new System.Drawing.Size(159, 124);
+            this.dataTabelPanel.Size = new System.Drawing.Size(179, 279);
             this.dataTabelPanel.TabIndex = 5;
             // 
             // frameCombo
@@ -146,9 +146,9 @@
             // linkPanel
             // 
             this.linkPanel.AutoScroll = true;
-            this.linkPanel.Location = new System.Drawing.Point(10, 59);
+            this.linkPanel.Location = new System.Drawing.Point(0, 59);
             this.linkPanel.Name = "linkPanel";
-            this.linkPanel.Size = new System.Drawing.Size(168, 131);
+            this.linkPanel.Size = new System.Drawing.Size(178, 131);
             this.linkPanel.TabIndex = 4;
             // 
             // dataTableLabel

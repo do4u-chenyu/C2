@@ -1,6 +1,7 @@
 ﻿
 using C2.Business.Model;
 using C2.Core;
+using C2.Model;
 using C2.Utils;
 using System;
 using System.Windows.Forms;
@@ -18,29 +19,32 @@ namespace C2.Controls.Left
         public int Count { get => this.count; set => this.count = value; }
         private static string TableButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
+        public DatabaseItem TableItem { get; set; }
+        public string LinkSourceName { get; set; }
 
-        public TableButton(string ffp, string dataSourceName, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        public TableButton(DatabaseItem tableItem)
         {
             InitializeComponent();
-            txtButton.Name = ffp;
-            txtButton.Text = Utils.FileUtil.ReName(dataSourceName);
-            this.oldTextString = dataSourceName;
-            DataSourceName = dataSourceName;
+            TableItem = tableItem;
+            txtButton.Name = tableItem.DataTable.Name;
+            txtButton.Text = FileUtil.ReName(tableItem.DataTable.Name);
+            this.oldTextString = tableItem.DataTable.Name;
+            LinkSourceName = tableItem.DataTable.Name;
         }
 
         private void TableButton_Load(object sender, EventArgs e)
         {
             // 数据源全路径浮动提示信息
-            String helpInfo = FullFilePath;
-            this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+            //String helpInfo = FullFilePath;
+            //this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
 
-            // 数据源名称浮动提示信息
-            helpInfo = DataSourceName;
-            this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
+            //// 数据源名称浮动提示信息
+            //helpInfo = DataSourceName;
+            //this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
-            helpInfo = String.Format(TableButtonFlowTemplate,
-                                    0);
-            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+            //helpInfo = String.Format(TableButtonFlowTemplate,
+            //                        0);
+            //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
 
@@ -60,9 +64,9 @@ namespace C2.Controls.Left
 
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            string helpInfo = String.Format(TableButtonFlowTemplate,
-                                        0 );
-            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+            //string helpInfo = String.Format(TableButtonFlowTemplate,
+            //                            0 );
+            //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
         private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,11 +23,11 @@ namespace C2.Model
         public string User { set; get; }//用户
         public string Password { set; get; }//密码
         public string Group { set; get; }//架构
-        public string Table { set; get; }//表名
+        public Table DataTable { set; get; }//表名
 
 
         public DatabaseItem() { }
-        public DatabaseItem(DatabaseType type, string server, string sid, string service, string port, string user, string password, string group = "", string table="")
+        public DatabaseItem(DatabaseType type, string server, string sid, string service, string port, string user, string password, string group = "", Table table =null)
         {
             Type = type;
             Server = server;
@@ -36,7 +37,7 @@ namespace C2.Model
             User = user;
             Password = password;
             Group = group;
-            Table = table;
+            DataTable = table;
         }
     }
 }
