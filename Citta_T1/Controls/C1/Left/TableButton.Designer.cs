@@ -36,11 +36,9 @@ namespace C2.Controls.Left
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ReviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ReviewStruToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyTablePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox = new System.Windows.Forms.TextBox();
             this.txtButton = new C2.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
@@ -74,57 +72,41 @@ namespace C2.Controls.Left
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(22, 22);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ReviewToolStripMenuItem,
-            this.RemoveToolStripMenuItem,
-            this.toolStripSeparator1,
+            this.ReviewStruToolStripMenuItem,
             this.RefreshToolStripMenuItem,
-            this.ExplorerToolStripMenuItem,
-            this.CopyFilePathToClipboardToolStripMenuItem});
+            this.CopyTablePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(185, 114);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // ReviewToolStripMenuItem
             // 
             this.ReviewToolStripMenuItem.Name = "ReviewToolStripMenuItem";
-            this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.ReviewToolStripMenuItem.Text = "预览";
-            this.ReviewToolStripMenuItem.ToolTipText = "预览数据源部分信息";
+            this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.ReviewToolStripMenuItem.Text = "表预览";
+            this.ReviewToolStripMenuItem.ToolTipText = "预览表内容";
             this.ReviewToolStripMenuItem.Click += new System.EventHandler(this.ReviewToolStripMenuItem_Click);
             // 
-            // RemoveToolStripMenuItem
+            // ReviewStruToolStripMenuItem
             // 
-            this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
-            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.RemoveToolStripMenuItem.Text = "卸载";
-            this.RemoveToolStripMenuItem.ToolTipText = "仅从数据源资源池中移除数据源,不修改数据源对应文件";
-            this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
+            this.ReviewStruToolStripMenuItem.Name = "ReviewStruToolStripMenuItem";
+            this.ReviewStruToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.ReviewStruToolStripMenuItem.Text = "表结构预览";
             // 
             // RefreshToolStripMenuItem
             // 
             this.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem";
-            this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.RefreshToolStripMenuItem.Text = "刷新";
             this.RefreshToolStripMenuItem.ToolTipText = "刷新程序缓存,重新加载数据源";
             this.RefreshToolStripMenuItem.Click += new System.EventHandler(this.RefreshToolStripMenuItem_Click);
             // 
-            // ExplorerToolStripMenuItem
+            // CopyTablePathToClipboardToolStripMenuItem
             // 
-            this.ExplorerToolStripMenuItem.Name = "ExplorerToolStripMenuItem";
-            this.ExplorerToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.ExplorerToolStripMenuItem.Text = "打开所在文件夹";
-            this.ExplorerToolStripMenuItem.Click += new System.EventHandler(this.OpenFilePathMenuItem_Click);
-            // 
-            // CopyFilePathToClipboardToolStripMenuItem
-            // 
-            this.CopyFilePathToClipboardToolStripMenuItem.Name = "CopyFilePathToClipboardToolStripMenuItem";
-            this.CopyFilePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.CopyFilePathToClipboardToolStripMenuItem.Text = "复制文件路径到剪切板";
-            this.CopyFilePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFullFilePathToClipboard);
+            this.CopyTablePathToClipboardToolStripMenuItem.Name = "CopyTablePathToClipboardToolStripMenuItem";
+            this.CopyTablePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.CopyTablePathToClipboardToolStripMenuItem.Text = "复制表路径到剪切板";
+            this.CopyTablePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFullFilePathToClipboard);
             // 
             // textBox
             // 
@@ -137,8 +119,6 @@ namespace C2.Controls.Left
             this.textBox.Size = new System.Drawing.Size(94, 16);
             this.textBox.TabIndex = 12;
             this.textBox.Visible = false;
-            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
-            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // txtButton
             // 
@@ -186,10 +166,8 @@ namespace C2.Controls.Left
         private System.Windows.Forms.ToolTip helpToolTip;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ReviewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RemoveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CopyFilePathToClipboardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ReviewStruToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyTablePathToClipboardToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ToolStripMenuItem RefreshToolStripMenuItem;
     }

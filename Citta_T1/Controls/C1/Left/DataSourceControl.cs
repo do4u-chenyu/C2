@@ -8,6 +8,7 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -229,10 +230,20 @@ namespace C2.Controls.Left
             MessageBox.Show(databaseInfo.Type + databaseInfo.Server + databaseInfo.Service + databaseInfo.Port + databaseInfo.User + databaseInfo.Password);
             // Name, User, Pass, Host, Sid, Service, Port;
             Connection conn = new Connection(databaseInfo);
+
             List<Schema> schemas = conn.Schemas;
             if (schemas == null)
                 return;
+            DataTable dt = new DataTable();
+            for (int i = 0; i <= schemas[0].Tables.Count; i++)
+            {
+                schemas[0].Tables[i].Name.ToString();
+                
+            }
+
+
             List<string> users = DbUtil.GetUsers(conn);
+
             //List<string> tables = DbUtil.GetTablesByUser(conn, "SYS");
             this.UpdateFrameCombo(users);
             //this.UpdateTables(schemas);
@@ -277,18 +288,14 @@ namespace C2.Controls.Left
 
         }
 
-        private void linkPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void frameCombo_SelectedIndexChanged(object sender, EventArgs e)
+         private void frameCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetComboTableSource();//每次清空一下
             SelectedTableSource = this.frameCombo.SelectedIndex;
             if (ComboTableSource == null || this.frameCombo.SelectedIndex < 0)
                 return;
-            //这边还有点没写完
+
+
 
         }
         private void SetComboTableSource()

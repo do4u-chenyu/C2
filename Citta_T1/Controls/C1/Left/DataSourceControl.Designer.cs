@@ -151,7 +151,6 @@
             this.linkPanel.Name = "linkPanel";
             this.linkPanel.Size = new System.Drawing.Size(159, 121);
             this.linkPanel.TabIndex = 4;
-            this.linkPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.linkPanel_Paint);
             // 
             // dataTableLabel
             // 
