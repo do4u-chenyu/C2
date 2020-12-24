@@ -32,7 +32,7 @@ namespace C2.Dialogs
             }
             DatabaseInfo = new DatabaseItem();
             //必填项都有值时给batabseinfo赋值
-            DatabaseInfo.Type = (DatabaseType)databaseTypeComboBox.SelectedIndex;
+            DatabaseInfo.Type = (DatabaseType)(databaseTypeComboBox.SelectedIndex+1);
             DatabaseInfo.Server = this.serverTextBox.Text;
             DatabaseInfo.SID = this.sidRadiobutton.Checked ? this.sidTextBox.Text : "";
             DatabaseInfo.Service = this.serviceRadiobutton.Checked ? this.serviceTextBox.Text : "";

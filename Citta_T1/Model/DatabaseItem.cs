@@ -8,6 +8,7 @@ namespace C2.Model
 {
     public enum DatabaseType
     {
+        Null,
         Oracle,
         Hive
     }
