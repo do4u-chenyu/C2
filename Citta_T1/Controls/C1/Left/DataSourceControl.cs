@@ -315,7 +315,7 @@ namespace C2.Controls.Left
         {
             //根据架构改变数据表
             Connection conn = new Connection(SelectLinkButton.DatabaseItem);
-            List<string> tables = DbUtil.GetTablesByUser(conn, "SYS");
+            List<Table> tables = DbUtil.GetTablesByUser(conn, "SYS");
         }
     }
 }
