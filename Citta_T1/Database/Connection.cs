@@ -20,7 +20,6 @@ namespace C2.Database
             this.Sid = dbi.SID;
             this.Service = dbi.Service;
             this.Port = dbi.Port;
-
         }
         public Connection(string name, string user, string pass, string host, string sid, string service, string port)
         {
