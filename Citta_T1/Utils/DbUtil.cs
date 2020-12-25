@@ -100,44 +100,14 @@ namespace C2.Utils
             }
         }
 
-        public static List<string> GetTablesByUser(Connection conn, string user)
+        public static List<Table> GetTablesByUser(Connection conn, string user)
         {
-            List<string> tables = null;
+            List<Table> tables = new List<Table>();
             Connection tmpConn = conn.Clone();
-            using (OracleConnection con = new OracleConnection(tmpConn.ConnectionString))
-            {
-                try
-                {
-                    con.Open();
-                    tables = DbUtil.GetTablesByUser(con, user);
-                }
-                catch (Exception ex)
-                {
-                    // TODO 有两种异常, 连接异常和查询异常，需要分开处理
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + "详情：" + ex.ToString());
-                }
-            }
-            return tables;
-        }
-        private static List<string> GetTablesByUser(OracleConnection conn, string user)
-        {
-            string sql = String.Format(@"
-                            select object_name, object_type
-                            from sys.all_objects
-                            where owner='{0}' and object_type in ('TABLE','VIEW')
-                            order by object_name",
-                            DbHelper.Sanitise(user.ToUpper()));
-            List<string> tables = new List<string>();
-            using (OracleCommand comm = new OracleCommand(sql, conn))
-            {
-                using (OracleDataReader rdr = comm.ExecuteReader())
-                {
-                    while (rdr.Read())
-                    {
-                        tables.Add(rdr.GetString(0));
-                    }
-                }
-            }
+            tmpConn.User = user;
+            List<Schema> schemas = tmpConn.Schemas;
+            if (schemas == null && schemas.Count > 0)
+                tables = schemas[0].Tables;
             return tables;
         }
 
