@@ -9,14 +9,37 @@ using C2.Controls;
 using C2.Dialogs;
 namespace C2.Controls.Left
 {
+    public class SelectLinkButtonEventArgs : EventArgs
+    {
+        public LinkButton linkButton;
+    }
+
     public partial class LinkButton : UserControl
     {
-       private int count = 0;
+        private int count = 0;
         private string oldTextString;
-        public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
+        public string FullFilePath { get => DatabaseItem.AllDatabaeInfo; }
         public string LinkSourceName { get; set; }
-        public int Count { get => this.count; set => this.count = value; }
-        public DatabaseItem DatabaseItem { get; set; }
+
+
+        public event EventHandler DatabaseItemChanged;
+        public event EventHandler<SelectLinkButtonEventArgs> LinkButtonSelected;
+        private DatabaseItem _DatabaseItem;
+        public DatabaseItem DatabaseItem
+        {
+            get
+            {
+                return _DatabaseItem;
+            }
+            set 
+            {
+                if(_DatabaseItem != value)
+                {
+                    _DatabaseItem = value;
+                    OnDatabaseItemChange();
+                }
+            }
+        }
 
         public LinkButton(DatabaseItem item)
         {
@@ -45,7 +68,13 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void EiditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var dialog = new AddDatabaseDialog(DatabaseItem);
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                if (DatabaseItem.AllDatabaeInfo.Equals(dialog.DatabaseInfo.AllDatabaeInfo))
+                    return;
+                DatabaseItem = dialog.DatabaseInfo;
+            }
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,14 +131,12 @@ namespace C2.Controls.Left
             if (e.Button != MouseButtons.Left)
                 return;
 
-            if (e.Clicks == 1) // 单击拖拽
+            if (e.Clicks == 1)//单击选中
             {
-                // 使用`DataObject`对象来传参数，更加自由
-                DataObject dragDropDataTable = new DataObject();
-                dragDropDataTable.SetData("Type", ElementType.DataSource);
-                dragDropDataTable.SetData("Path", FullFilePath);    // 数据源文件全路径
-                dragDropDataTable.SetData("Text", LinkSourceName);  // 数据源名称
-                this.txtButton.DoDragDrop(dragDropDataTable, DragDropEffects.Copy | DragDropEffects.Move);
+                if (LinkButtonSelected != null)
+                {
+                    LinkButtonSelected(this, new SelectLinkButtonEventArgs() { linkButton = this});
+                }
             }
             //else if (e.Clicks == 2)
             //{   // 双击改名 
@@ -156,6 +183,14 @@ namespace C2.Controls.Left
             Global.GetDataSourceControl().SaveExternalData();
             this.helpToolTip.SetToolTip(this.txtButton, LinkSourceName);
         }
-       
+
+        private void OnDatabaseItemChange()
+        {
+            if (DatabaseItemChanged != null)
+            {
+                DatabaseItemChanged(this, EventArgs.Empty);
+            }
+        }
+
     }
 }

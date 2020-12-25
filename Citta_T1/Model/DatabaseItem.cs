@@ -24,8 +24,14 @@ namespace C2.Model
         public string Password { set; get; }//密码
         public string Group { set; get; }//架构
         public Table DataTable { set; get; }//表名
-
-
+        //所有信息合并字符串，便于比较是否一致
+        public string AllDatabaeInfo 
+        {
+            get
+            { 
+                return string.Join("", Type.ToString(), Server, SID, Service, Port, User, Password); 
+            }
+        }
         public DatabaseItem() { }
         public DatabaseItem(DatabaseType type, string server, string sid, string service, string port, string user, string password, string group = "", Table table =null)
         {

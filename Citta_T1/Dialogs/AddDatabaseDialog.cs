@@ -17,9 +17,31 @@ namespace C2.Dialogs
     partial class AddDatabaseDialog : StandardDialog
     {
         public DatabaseItem DatabaseInfo { get; set; }
+
+        public AddDatabaseDialog(DatabaseItem databaseInfo)
+        {
+            InitializeComponent();
+
+            DatabaseInfo = databaseInfo;
+            InitializeContent();
+        }
+
         public AddDatabaseDialog()
         {
             InitializeComponent();
+        }
+
+        public void InitializeContent()
+        {
+            databaseTypeComboBox.SelectedIndex = (int)DatabaseInfo.Type-1;
+            this.serverTextBox.Text = DatabaseInfo.Server ;
+            this.sidRadiobutton.Checked = DatabaseInfo.SID == "" ? false : true;
+            this.sidTextBox.Text = DatabaseInfo.SID;
+            this.serviceRadiobutton.Checked = DatabaseInfo.Service == "" ? false : true;
+            this.serviceTextBox.Text = DatabaseInfo.Service;
+            this.portTextBox.Text = DatabaseInfo.Port;
+            this.userTextBox.Text = DatabaseInfo.User;
+            this.passwordTextBox.Text = DatabaseInfo.Password;
         }
 
         protected override bool OnOKButtonClick()

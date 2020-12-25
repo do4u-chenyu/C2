@@ -46,10 +46,29 @@ namespace C2.Controls.Left
         public Dictionary<string, DataButton> DataSourceDictI2B { get => dataSourceDictI2B; }
         public Dictionary<string, LinkButton> LinkSourceDictI2B { get => linkSourceDictI2B; }
 
-
+        private LinkButton _SelectLinkButton;
         //数据库相关属性
-        public LinkButton SelectLinkButton { set; get; }
+        public LinkButton SelectLinkButton 
+        {
+            set
+            {
+                if (_SelectLinkButton != value)
+                {
+                    _SelectLinkButton = value;
+                    OnSelectLinkButton(value);
+                }
+            }
+            get 
+            {
+                return _SelectLinkButton;
+            }
+        }
 
+        public void OnSelectLinkButton(LinkButton linkButton)
+        {
+            //改变选中的button,刷新架构，默认显示用户名登陆的表结构
+            ConnectDatabase(linkButton.DatabaseItem);//连接一次数据库，刷新架构及数据表
+        }
         // 手工导入时调用
         public void GenDataButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
@@ -104,9 +123,28 @@ namespace C2.Controls.Left
         public void GenLinkButton(LinkButton linkButton)
         {
             LayoutModelButtonLocation(linkButton); // 递增
-            //TODO 判断是否同名？
+            //判断是否为同一链接
+            if (this.LinkSourceDictI2B.ContainsKey(linkButton.FullFilePath))
+            {
+                String name = this.LinkSourceDictI2B[linkButton.FullFilePath].Name;
+                HelpUtil.ShowMessageBox("该数据库连接已存在，数据库名为：" + name);
+                return;
+            }
             this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
+            linkButton.DatabaseItemChanged += Link_DatabaseItemChanged;
+            linkButton.LinkButtonSelected += Link_LinkButtonSelected;
             this.linkPanel.Controls.Add(linkButton);
+        }
+        void Link_LinkButtonSelected(object sender, SelectLinkButtonEventArgs e)
+        {
+            SelectLinkButton = e.linkButton;
+        }
+
+        void Link_DatabaseItemChanged(object sender, EventArgs e)
+        {
+            if (SelectLinkButton == null)
+                return;
+            ConnectDatabase(SelectLinkButton.DatabaseItem);//连接一次数据库，刷新架构及数据表
         }
 
         private void GenTableButton(TableButton tableButton)
@@ -230,6 +268,7 @@ namespace C2.Controls.Left
             {
                 LinkButton linkButton = new LinkButton(dialog.DatabaseInfo);
                 GenLinkButton(linkButton);
+                SelectLinkButton = linkButton;
 
                 ConnectDatabase(dialog.DatabaseInfo);//连接一次数据库，刷新架构及数据表
                 SaveExternalData();
@@ -247,14 +286,16 @@ namespace C2.Controls.Left
 
             //刷新数据表
             List<Schema> schemas = conn.Schemas;
-            if (schemas == null)
+            if (schemas == null || schemas.Count<=0)
                 return;
             this.UpdateTables(schemas, databaseInfo);
 
         }
-
         private void UpdateTables(List<Schema> schemas, DatabaseItem databaseInfo)
         {
+            //先清空上一次的数据表内容
+            this.dataTabelPanel.Controls.Clear();
+
             foreach (Table tmpTable in schemas[0].Tables)
             {
                 DatabaseItem tmpDatabaseItem = databaseInfo;
@@ -273,9 +314,8 @@ namespace C2.Controls.Left
         private void FrameCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             //根据架构改变数据表
-            //Connection conn = new Connection(databaseInfo);
-            //List<string> tables = DbUtil.GetTablesByUser(conn, "SYS");
+            Connection conn = new Connection(SelectLinkButton.DatabaseItem);
+            List<string> tables = DbUtil.GetTablesByUser(conn, "SYS");
         }
-
     }
 }
