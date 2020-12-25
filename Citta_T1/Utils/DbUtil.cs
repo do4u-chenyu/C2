@@ -106,7 +106,7 @@ namespace C2.Utils
             Connection tmpConn = conn.Clone();
             tmpConn.User = user;
             List<Schema> schemas = tmpConn.Schemas;
-            if (schemas == null && schemas.Count > 0)
+            if (schemas != null && schemas.Count > 0)
                 tables = schemas[0].Tables;
             return tables;
         }

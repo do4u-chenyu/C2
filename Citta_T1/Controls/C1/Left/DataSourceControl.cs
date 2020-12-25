@@ -106,6 +106,7 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(TableButton tb)
         {
+            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.dataTabelPanel.Controls.Count > 0)
                 tablePoint = this.dataTabelPanel.Controls[this.dataTabelPanel.Controls.Count - 1].Location;
             tablePoint.Y += ButtonGapHeight;
@@ -150,8 +151,6 @@ namespace C2.Controls.Left
         private void GenTableButton(TableButton tableButton)
         {
             LayoutModelButtonLocation(tableButton); // 递增
-            //TODO 判断是否同名？
-            //this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
             this.dataTabelPanel.Controls.Add(tableButton);
         }
 
@@ -282,21 +281,23 @@ namespace C2.Controls.Left
 
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
-            this.UpdateFrameCombo(users, databaseInfo.User);
+            if (users == null)
+                return;
+            UpdateFrameCombo(users, databaseInfo.User);
 
             //刷新数据表
-            List<Schema> schemas = conn.Schemas;
-            if (schemas == null || schemas.Count<=0)
-                return;
-            this.UpdateTables(schemas, databaseInfo);
+            List<Table> tables = DbUtil.GetTablesByUser(conn, databaseInfo.User);
+            UpdateTables(tables, databaseInfo);
 
         }
-        private void UpdateTables(List<Schema> schemas, DatabaseItem databaseInfo)
+        private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo)
         {
             //先清空上一次的数据表内容
             this.dataTabelPanel.Controls.Clear();
 
-            foreach (Table tmpTable in schemas[0].Tables)
+            if (tables == null)
+                return;
+            foreach (Table tmpTable in tables)
             {
                 DatabaseItem tmpDatabaseItem = databaseInfo;
                 tmpDatabaseItem.DataTable = tmpTable;
@@ -315,7 +316,8 @@ namespace C2.Controls.Left
         {
             //根据架构改变数据表
             Connection conn = new Connection(SelectLinkButton.DatabaseItem);
-            List<Table> tables = DbUtil.GetTablesByUser(conn, "SYS");
+            List<Table> tables = DbUtil.GetTablesByUser(conn, this.frameCombo.Text);
+            UpdateTables(tables, SelectLinkButton.DatabaseItem);
         }
     }
 }
