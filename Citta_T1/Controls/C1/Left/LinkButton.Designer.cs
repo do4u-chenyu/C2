@@ -60,8 +60,9 @@ namespace C2.Controls.Left
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(22, 22);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EiditToolStripMenuItem,
-            this.RemoveToolStripMenuItem,
-            this.RefreshToolStripMenuItem});
+            this.RefreshToolStripMenuItem,
+            this.RemoveToolStripMenuItem
+            });
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(125, 70);
             // 
@@ -77,16 +78,17 @@ namespace C2.Controls.Left
             // 
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
             this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.RemoveToolStripMenuItem.Text = "重命名";
-            this.RemoveToolStripMenuItem.ToolTipText = "修改数据源名称";
+            this.RemoveToolStripMenuItem.Text = "删除";
+            this.RemoveToolStripMenuItem.ToolTipText = "连接数据源删除";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // RefreshToolStripMenuItem
             // 
             this.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem";
             this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.RefreshToolStripMenuItem.Text = "删除";
-            this.RefreshToolStripMenuItem.ToolTipText = "连接数据源删除";
+            this.RefreshToolStripMenuItem.Text = "重命名";
+            this.RefreshToolStripMenuItem.ToolTipText = "修改数据源名称";
+            this.RefreshToolStripMenuItem.Enabled = false;
             // 
             // textBox
             // 

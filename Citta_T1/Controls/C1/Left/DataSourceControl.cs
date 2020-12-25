@@ -99,6 +99,7 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(LinkButton lb)
         {
+            linkPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.linkPanel.Controls.Count > 0)
                 linkPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
             linkPoint.Y += ButtonGapHeight;
@@ -141,10 +142,15 @@ namespace C2.Controls.Left
             SelectLinkButton = e.linkButton;
         }
 
-        void Link_DatabaseItemChanged(object sender, EventArgs e)
+        void Link_DatabaseItemChanged(object sender, ChangeDatabaseItemEventArgs e)
         {
             if (SelectLinkButton == null)
                 return;
+            //改变持久化dict的key值
+            if (this.LinkSourceDictI2B.ContainsKey(e.databaseItem.AllDatabaeInfo))
+            {
+                this.LinkSourceDictI2B.Remove(e.databaseItem.AllDatabaeInfo);
+            }
             ConnectDatabase(SelectLinkButton.DatabaseItem);//连接一次数据库，刷新架构及数据表
         }
 
@@ -221,16 +227,17 @@ namespace C2.Controls.Left
             // 保存
             SaveDataSourceInfo();
         }
+
         public void RemoveLinkButton(LinkButton linkButton)
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
             if (this.linkPanel.Controls.Count > 0)
                 this.startPoint.Y = this.linkPanel.Controls[0].Location.Y - ButtonGapHeight;
 
-            this.DataSourceDictI2B.Remove(linkButton.FullFilePath);
+            this.LinkSourceDictI2B.Remove(linkButton.FullFilePath);
             this.linkPanel.Controls.Remove(linkButton);
             // 重新布局
-            ReLayoutLocalFrame();
+            ReLayoutExternalFrame();
             // 保存
             SaveExternalData();
         }
@@ -281,8 +288,6 @@ namespace C2.Controls.Left
 
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
-            if (users == null)
-                return;
             UpdateFrameCombo(users, databaseInfo.User);
 
             //刷新数据表
@@ -308,6 +313,10 @@ namespace C2.Controls.Left
 
         private void UpdateFrameCombo(List<string> users,string loginUser)
         {
+            this.frameCombo.Items.Clear();
+            if (users == null)
+                return;
+
             this.frameCombo.Text = users.Find( x => x.Equals(loginUser.ToUpper())) == null ? "选择架构" : loginUser.ToUpper();
             users.ForEach(x => frameCombo.Items.Add(x.ToString()));
         }

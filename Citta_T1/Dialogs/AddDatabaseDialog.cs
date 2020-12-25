@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Core;
 using C2.Database;
 using C2.Model;
 using C2.Utils;
@@ -61,6 +62,12 @@ namespace C2.Dialogs
             DatabaseInfo.Port = this.portTextBox.Text;
             DatabaseInfo.User = this.userTextBox.Text;
             DatabaseInfo.Password = this.passwordTextBox.Text;
+
+            if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(DatabaseInfo.AllDatabaeInfo))
+            {
+                HelpUtil.ShowMessageBox("该连接已存在","已存在",MessageBoxIcon.Warning);
+                return false;
+            }
 
             Connection conn = new Connection(DatabaseInfo);
             if (!DbUtil.TestConn(conn))

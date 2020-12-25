@@ -13,6 +13,10 @@ namespace C2.Controls.Left
     {
         public LinkButton linkButton;
     }
+    public class ChangeDatabaseItemEventArgs : EventArgs
+    {
+        public DatabaseItem databaseItem;
+    }
 
     public partial class LinkButton : UserControl
     {
@@ -22,7 +26,7 @@ namespace C2.Controls.Left
         public string LinkSourceName { get; set; }
 
 
-        public event EventHandler DatabaseItemChanged;
+        public event EventHandler<ChangeDatabaseItemEventArgs> DatabaseItemChanged;
         public event EventHandler<SelectLinkButtonEventArgs> LinkButtonSelected;
         private DatabaseItem _DatabaseItem;
         public DatabaseItem DatabaseItem
@@ -35,8 +39,9 @@ namespace C2.Controls.Left
             {
                 if(_DatabaseItem != value)
                 {
+                    DatabaseItem old = _DatabaseItem;
                     _DatabaseItem = value;
-                    OnDatabaseItemChange();
+                    OnDatabaseItemChange(old);
                 }
             }
         }
@@ -68,11 +73,17 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void EiditToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /*
+             * 编辑连接
+             * 1、如果编辑后的dialog.data与link本身的data一致，不做操作
+             * 2、如果不一致，先要判断dialog.data是否在dict里，在里面不能重复添加
+             */
             var dialog = new AddDatabaseDialog(DatabaseItem);
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
                 if (DatabaseItem.AllDatabaeInfo.Equals(dialog.DatabaseInfo.AllDatabaeInfo))
                     return;
+
                 DatabaseItem = dialog.DatabaseInfo;
             }
         }
@@ -90,8 +101,6 @@ namespace C2.Controls.Left
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO 这一块先不做，按设计来说模型文档是不可以导入数据的，检测引用要看业务视图
-            //int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
             DialogResult rs = DialogResult.OK;
 
             // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用
@@ -109,11 +118,8 @@ namespace C2.Controls.Left
             if (rs != DialogResult.OK)
                 return;
 
-            //// 卸载数据源
-            //Global.GetDataSourceControl().RemoveDataButton(this);
-            // 引用不为0时,有可能还会预览该数据源的数据,此时不用移除buffer
-            //if (count == 0)//不管是否有引用，均清空缓存
-            BCPBuffer.GetInstance().Remove(this.FullFilePath);
+            // 卸载数据源
+            Global.GetDataSourceControl().RemoveLinkButton(this);
         }
         #endregion
 
@@ -184,11 +190,11 @@ namespace C2.Controls.Left
             this.helpToolTip.SetToolTip(this.txtButton, LinkSourceName);
         }
 
-        private void OnDatabaseItemChange()
+        private void OnDatabaseItemChange(DatabaseItem databaseItem)
         {
             if (DatabaseItemChanged != null)
             {
-                DatabaseItemChanged(this, EventArgs.Empty);
+                DatabaseItemChanged(this, new ChangeDatabaseItemEventArgs() { databaseItem = databaseItem});
             }
         }
 
