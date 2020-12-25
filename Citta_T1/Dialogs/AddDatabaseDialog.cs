@@ -62,7 +62,6 @@ namespace C2.Dialogs
             DatabaseInfo.User = this.userTextBox.Text;
             DatabaseInfo.Password = this.passwordTextBox.Text;
 
-            // TODO 测试连接
             Connection conn = new Connection(DatabaseInfo);
             if (!DbUtil.TestConn(conn))
                 return false;
