@@ -153,7 +153,7 @@ namespace C2.Controls.Left
                 this.oldTextString = this.textBox.Text;
             }
             // 保存
-            Global.GetDataSourceControl().SaveDataSourceInfo();
+            Global.GetDataSourceControl().SaveExternalData();
             this.helpToolTip.SetToolTip(this.txtButton, LinkSourceName);
         }
        

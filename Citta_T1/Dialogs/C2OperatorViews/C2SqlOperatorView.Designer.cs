@@ -53,6 +53,10 @@
             this.confirmButton.Location = new System.Drawing.Point(590, 7);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
+            // topPanel
+            // 
+            this.topPanel.Size = new System.Drawing.Size(763, 0);
+            // 
             // bottomPanel
             // 
             this.bottomPanel.Location = new System.Drawing.Point(0, 385);
@@ -186,11 +190,9 @@
             this.Controls.Add(this.lblConn);
             this.Controls.Add(this.treeConnections);
             this.Controls.Add(this.bottomPanel);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(558, 203);
             this.Name = "C2SqlOperatorView";
-            this.Text = "Oracle Explorer";
+            this.Text = "Sql算子设置";
+            this.Controls.SetChildIndex(this.topPanel, 0);
             this.Controls.SetChildIndex(this.bottomPanel, 0);
             this.Controls.SetChildIndex(this.treeConnections, 0);
             this.Controls.SetChildIndex(this.lblConn, 0);
