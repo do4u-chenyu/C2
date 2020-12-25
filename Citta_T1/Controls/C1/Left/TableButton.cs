@@ -54,10 +54,15 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO 数据预览
             PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm();
-            DbUtil.FillTables(previewDbDataForm.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name, previewDbDataForm.MaxNum);
+            previewDbDataForm.MaxNumChanged += new MaxNumChangedEventHandler(OnDataGridViewMaxNumChanged);
+            DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name, previewDbDataForm.MaxNum);
             previewDbDataForm.Show();
+        }
+        private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
+        {
+            PreviewDbDataForm pddf = (sender as PreviewDbDataForm);
+            DbUtil.FillDGVWithTbContent(pddf.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name, pddf.MaxNum);
         }
 
         #endregion
@@ -106,6 +111,14 @@ namespace C2.Controls.Left
         {
             //this.ReviewToolStripMenuItem.Enabled = Global.GetBottomViewPanel().Visible;
             this.ReviewToolStripMenuItem.ToolTipText = this.ReviewToolStripMenuItem.Enabled ? "预览数据源部分信息" : HelpUtil.ReviewToolStripMenuItemInfo;
+        }
+
+        private void ReviewStruToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // TODO
+            PreviewTableSchema previewTableSchema = new PreviewTableSchema();
+            DbUtil.FillDGVWithTbSchema(previewTableSchema.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name);
+            previewTableSchema.Show();
         }
     }
 }

@@ -140,7 +140,45 @@ namespace C2.Utils
             }
             return tables;
         }
-        public static void FillTables(DataGridView gridOutput, Connection conn, string tableName, int maxNum)
+
+        public static void FillDGVWithTbSchema(DataGridView gridOutput, Connection conn, string tableName)
+        {
+            try
+            {
+                using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                {
+                    con.Open();
+                    string sql = String.Format(@"select A.COLUMN_NAME,A.DATA_TYPE  from user_tab_columns A where TABLE_NAME='{0}'", tableName.ToUpper());
+                    using (OracleCommand comm = new OracleCommand(sql, con))
+                    {
+                        using (OracleDataReader rdr = comm.ExecuteReader())
+                        {
+                            // Grab all the column names
+                            gridOutput.Rows.Clear();
+                            gridOutput.Columns.Clear();
+                            for (int i = 0; i < rdr.FieldCount; i++)
+                            {
+                                gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
+                            }
+                            int rows = 0;
+                            while (rdr.Read())
+                            {
+                                string[] objs = new string[rdr.FieldCount];
+                                for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
+                                gridOutput.Rows.Add(objs);
+                                rows++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) // Better catch in case they have bad sql
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+            }
+        }
+
+        public static void FillDGVWithTbContent(DataGridView gridOutput, Connection conn, string tableName, int maxNum)
         {
             try
             {

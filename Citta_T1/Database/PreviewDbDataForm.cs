@@ -12,10 +12,14 @@ using System.Windows.Forms;
 
 namespace C2.Database
 {
+    public delegate void MaxNumChangedEventHandler(object sender, int maxNum);
     public partial class PreviewDbDataForm : Form
     {
         public DataGridView DataGridView { get { return this.dataGridView; } }
         public int MaxNum { get { return GetIntFromTextBox(); } }
+
+        public MaxNumChangedEventHandler MaxNumChanged;
+
         public PreviewDbDataForm()
         {
             InitializeComponent();
@@ -33,6 +37,10 @@ namespace C2.Database
                 HelpUtil.ShowMessageBox(HelpUtil.CastStringToIntFailedInfo);
                 return 0;
             }
+        }
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            MaxNumChanged(this, MaxNum);
         }
     }
 }

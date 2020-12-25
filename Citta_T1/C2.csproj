@@ -222,6 +222,12 @@
     <Compile Include="Database\PreviewDbDataForm.Designer.cs">
       <DependentUpon>PreviewDbDataForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Database\PreviewTableSchema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Database\PreviewTableSchema.Designer.cs">
+      <DependentUpon>PreviewTableSchema.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database\Schema.cs" />
     <Compile Include="Database\Settings.cs" />
     <Compile Include="Database\Table.cs" />
@@ -1457,6 +1463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Database\PreviewDbDataForm.resx">
       <DependentUpon>PreviewDbDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Database\PreviewTableSchema.resx">
+      <DependentUpon>PreviewTableSchema.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AddDatabaseDialog.resx">
       <DependentUpon>AddDatabaseDialog.cs</DependentUpon>
