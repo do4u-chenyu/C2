@@ -24,12 +24,15 @@ namespace C2.Database
         {
             get
             {
+                /*
+                 * 1. 查该用户的所有表
+                 * 2. 查每个表的所有列
+                 */
                 if (_Tables == null)
                 {
                     // select distinct owner from sys.all_objects
                     using (OracleConnection conn = new OracleConnection(ParentConnection.ConnectionString))
                     {
-                        conn.Open();
                         string sql = String.Format(@"
                             select object_name, object_type
                             from sys.all_objects
@@ -43,26 +46,14 @@ namespace C2.Database
                                 _Tables = new List<Table>();
                                 while (rdr.Read())
                                 {
-                                    Table table = new Table(this);
+                                    //Table table = new Table(this);
+                                    Table table = new Table(this.Name);
                                     table.Name = rdr.GetString(0);
                                     table.View = rdr.GetString(1) == "VIEW";
                                     _Tables.Add(table);
                                 }
                             }
                         }
-                        foreach(Table table in _Tables)
-                        {
-                            sql = "select * from " + table.ParentSchema.Name + "." + table.Name;
-                            using (OracleCommand comm = new OracleCommand(sql, conn))
-                            {
-                                using (OracleDataReader rdr = comm.ExecuteReader())
-                                {
-                                    for (int i = 0; i < rdr.FieldCount; i++)
-                                        table.Columns.Add(rdr.GetName(i));
-                                }
-                            }
-                        }
-                        conn.Close();
                     }
                 }
                 return _Tables;

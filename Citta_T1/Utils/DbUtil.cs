@@ -57,31 +57,6 @@ namespace C2.Utils
         //    OracleDataAdapter oda = new OracleDataAdapter(oconn);
         //    oda.Fill()
         //}
-
-        public static List<string> GetUsers(Connection conn)
-        {
-            List<string> users = new List<string>();
-            // select distinct owner from sys.all_objects
-            // http://forums.devshed.com/oracle-development-96/need-help-to-view-all-schemas-using-sql-plus-218002.html
-            using (OracleConnection con = new OracleConnection(conn.ConnectionString))
-            {
-                con.Open();
-                string sql = String.Format(@"select distinct owner from sys.all_objects where object_type in ('TABLE','VIEW')");
-                using (OracleCommand comm = new OracleCommand(sql, con))
-                {
-                    using (OracleDataReader rdr = comm.ExecuteReader())
-                    {
-                        while (rdr.Read())
-                        {
-                            users.Add(rdr.GetString(0));
-                        }
-                    }
-                }
-                con.Close();
-            }
-            return users;
-        }
-
         public static bool TestConn(Connection conn)
         {
             using (OracleConnection con = new OracleConnection(conn.ConnectionString))
@@ -99,15 +74,79 @@ namespace C2.Utils
                 }
             }
         }
-
-        public static List<Table> GetTablesByUser(Connection conn, string user)
+        public static List<string> GetUsers(Connection conn)
         {
+            List<string> users = new List<string>();
+            try
+            {
+                using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                {
+                    con.Open();
+                    string sql = String.Format(@"select distinct owner from sys.all_objects where object_type in ('TABLE','VIEW')");
+                    using (OracleCommand comm = new OracleCommand(sql, con))
+                    {
+                        using (OracleDataReader rdr = comm.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                users.Add(rdr.GetString(0));
+                            }
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+            }
+            return users;
+        }
+
+        public static List<Table> GetTablesByUser(Connection conn, string userName, bool owner = false)
+        {
+            /* TODO DK 实现有误，需要修改
+             * 应该使用当前用户去查询all_tables
+             */
             List<Table> tables = new List<Table>();
-            Connection tmpConn = conn.Clone();
-            tmpConn.User = user;
-            List<Schema> schemas = tmpConn.Schemas;
-            if (schemas != null && schemas.Count > 0)
-                tables = schemas[0].Tables;
+            try
+            {
+                using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                {
+                    con.Open();
+                    string sql = owner ?
+                            String.Format(@"
+                            select object_name, object_type
+                            from sys.all_objects
+                            where owner='{0}' and object_type in ('TABLE','VIEW')
+                            order by object_name",
+                          DbHelper.Sanitise(userName))
+                            :
+                            String.Format(@"
+                            select object_name, object_type
+                            from sys.all_objects 
+                            where object_type in ('TABLE','VIEW')
+                            order by object_name");
+                    using (OracleCommand comm = new OracleCommand(sql, con))
+                    {
+                        using (OracleDataReader rdr = comm.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                Table table = new Table(userName);
+                                table.Name = rdr.GetString(0);
+                                table.View = rdr.GetString(1) == "VIEW";
+                                tables.Add(table);
+                            }
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+            }
             return tables;
         }
 

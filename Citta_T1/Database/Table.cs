@@ -9,12 +9,11 @@ namespace C2.Database
     {
         public string Name;
         public bool View = false;
-        public List<string> Columns = new List<string>();
-        public Schema ParentSchema;
+        public string UserName;
 
-        public Table(Schema Parent)
+        public Table(string userName)
         {
-            ParentSchema = Parent;
+            UserName = userName;
         }
     }
 }
