@@ -103,30 +103,24 @@ namespace C2.Utils
             return users;
         }
 
-        public static List<Table> GetTablesByUser(Connection conn, string userName, bool owner = false)
+        public static List<Table> GetTablesByUser(Connection conn, string userName)
         {
             /* TODO DK 实现有误，需要修改
              * 应该使用当前用户去查询all_tables
              */
+            //bool owner = conn.User.ToUpper() == userName.ToUpper();
             List<Table> tables = new List<Table>();
             try
             {
                 using (OracleConnection con = new OracleConnection(conn.ConnectionString))
                 {
                     con.Open();
-                    string sql = owner ?
-                            String.Format(@"
+                    string sql = String.Format(@"
                             select object_name, object_type
                             from sys.all_objects
                             where owner='{0}' and object_type in ('TABLE','VIEW')
                             order by object_name",
-                          DbHelper.Sanitise(userName))
-                            :
-                            String.Format(@"
-                            select object_name, object_type
-                            from sys.all_objects 
-                            where object_type in ('TABLE','VIEW')
-                            order by object_name");
+                          DbHelper.Sanitise(userName));
                     using (OracleCommand comm = new OracleCommand(sql, con))
                     {
                         using (OracleDataReader rdr = comm.ExecuteReader())
