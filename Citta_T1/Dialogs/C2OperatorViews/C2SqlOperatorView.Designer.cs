@@ -25,7 +25,6 @@ namespace C2.Dialogs.C2OperatorViews
         private void InitializeComponent()
         {
             this.treeConnections = new System.Windows.Forms.TreeView();
-            this.bnHelp = new System.Windows.Forms.Button();
             this.bnExecute = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.textEditorControl1 = new ICSharpCode.TextEditor.TextEditorControlEx();
@@ -37,6 +36,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
+            this.bnHelp = new System.Windows.Forms.Button();
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -75,23 +75,13 @@ namespace C2.Dialogs.C2OperatorViews
             this.treeConnections.Size = new System.Drawing.Size(182, 284);
             this.treeConnections.TabIndex = 3;
             // 
-            // bnHelp
-            // 
-            this.bnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bnHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bnHelp.Location = new System.Drawing.Point(710, 10);
-            this.bnHelp.Name = "bnHelp";
-            this.bnHelp.Size = new System.Drawing.Size(42, 22);
-            this.bnHelp.TabIndex = 7;
-            this.bnHelp.Text = "帮助";
-            this.bnHelp.UseVisualStyleBackColor = true;
-            // 
             // bnExecute
             // 
+            this.bnExecute.Image = global::C2.Properties.Resources.control_play_blue;
             this.bnExecute.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bnExecute.Location = new System.Drawing.Point(196, 9);
             this.bnExecute.Name = "bnExecute";
-            this.bnExecute.Size = new System.Drawing.Size(96, 22);
+            this.bnExecute.Size = new System.Drawing.Size(80, 22);
             this.bnExecute.TabIndex = 4;
             this.bnExecute.Text = "执行SQL";
             this.bnExecute.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -199,12 +189,25 @@ namespace C2.Dialogs.C2OperatorViews
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 134);
+            this.label4.Location = new System.Drawing.Point(6, 132);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 12);
             this.label4.TabIndex = 16;
             this.label4.Text = "表预览:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // bnHelp
+            // 
+            this.bnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bnHelp.Image = global::C2.Properties.Resources.sql_help;
+            this.bnHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bnHelp.Location = new System.Drawing.Point(689, 9);
+            this.bnHelp.Name = "bnHelp";
+            this.bnHelp.Size = new System.Drawing.Size(63, 22);
+            this.bnHelp.TabIndex = 7;
+            this.bnHelp.Text = "帮助";
+            this.bnHelp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bnHelp.UseVisualStyleBackColor = true;
             // 
             // C2SqlOperatorView
             // 
@@ -252,7 +255,6 @@ namespace C2.Dialogs.C2OperatorViews
 
         private System.Windows.Forms.TreeView treeConnections;
         private System.Windows.Forms.Button bnExecute;
-        private System.Windows.Forms.Button bnHelp;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private ICSharpCode.TextEditor.TextEditorControlEx textEditorControl1;
         private System.Windows.Forms.DataGridView gridOutput;
@@ -263,5 +265,6 @@ namespace C2.Dialogs.C2OperatorViews
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button bnHelp;
     }
 }

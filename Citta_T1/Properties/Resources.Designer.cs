@@ -343,6 +343,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap control_play_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_play_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap controlhelp {
             get {
                 object obj = ResourceManager.GetObject("controlhelp", resourceCulture);
@@ -1957,6 +1967,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap split_btn_v {
             get {
                 object obj = ResourceManager.GetObject("split_btn_v", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap sql_help {
+            get {
+                object obj = ResourceManager.GetObject("sql_help", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
