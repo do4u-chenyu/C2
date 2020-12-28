@@ -143,7 +143,7 @@ namespace C2.Utils
             return tables;
         }
 
-        public static void FillDGVWithTbSchema(DataGridView gridOutput, Connection conn, string tableName)
+        public static bool FillDGVWithTbSchema(DataGridView gridOutput, Connection conn, string tableName)
         {
             try
             {
@@ -174,15 +174,17 @@ namespace C2.Utils
                     }
                     DgvUtil.ResetColumnsWidth(gridOutput);
                     con.Close();
+                    return true;
                 }
             }
             catch (Exception ex) // Better catch in case they have bad sql
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                return false;
             }
         }
 
-        public static void FillDGVWithTbContent(DataGridView gridOutput, Connection conn, string tableName, int maxNum)
+        public static bool FillDGVWithTbContent(DataGridView gridOutput, Connection conn, string tableName, int maxNum)
         {
             try
             {
@@ -213,11 +215,13 @@ namespace C2.Utils
                     }
                     DgvUtil.ResetColumnsWidth(gridOutput);
                     con.Close();
+                    return true;
                 }
             }
             catch (Exception ex) // Better catch in case they have bad sql
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                return false;
             }
         }
     }

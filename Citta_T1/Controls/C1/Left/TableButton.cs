@@ -56,8 +56,8 @@ namespace C2.Controls.Left
         {
             PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm();
             previewDbDataForm.MaxNumChanged += new MaxNumChangedEventHandler(OnDataGridViewMaxNumChanged);
-            DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name, previewDbDataForm.MaxNum);
-            previewDbDataForm.Show();
+            if (DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name, previewDbDataForm.MaxNum))
+                previewDbDataForm.Show();
         }
         private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
         {
