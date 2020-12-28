@@ -29,7 +29,7 @@ namespace C2.Model
         {
             get
             { 
-                return string.Join("", Type.ToString(), Server, SID, Service, Port, User, Password); 
+                return string.Join(",", Type.ToString(), Server, SID, Service, Port, User, Password); 
             }
         }
         public DatabaseItem() { }
