@@ -120,7 +120,7 @@ namespace C2.Utils
                             from sys.all_objects
                             where owner='{0}' and object_type in ('TABLE','VIEW')
                             order by object_name",
-                          DbHelper.Sanitise(userName));
+                          DbHelper.Sanitise(userName.ToUpper()));
                     using (OracleCommand comm = new OracleCommand(sql, con))
                     {
                         using (OracleDataReader rdr = comm.ExecuteReader())
@@ -173,6 +173,7 @@ namespace C2.Utils
                             }
                         }
                     }
+                    con.Close();
                 }
             }
             catch (Exception ex) // Better catch in case they have bad sql
@@ -210,6 +211,7 @@ namespace C2.Utils
                             }
                         }
                     }
+                    con.Close();
                 }
             }
             catch (Exception ex) // Better catch in case they have bad sql
