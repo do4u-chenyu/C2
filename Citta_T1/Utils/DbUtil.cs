@@ -82,7 +82,7 @@ namespace C2.Utils
                 using (OracleConnection con = new OracleConnection(conn.ConnectionString))
                 {
                     con.Open();
-                    string sql = String.Format(@"select distinct owner from sys.all_objects where object_type in ('TABLE','VIEW')");
+                    string sql = String.Format(@"select distinct owner from all_tables");
                     using (OracleCommand comm = new OracleCommand(sql, con))
                     {
                         using (OracleDataReader rdr = comm.ExecuteReader())
@@ -116,10 +116,10 @@ namespace C2.Utils
                 {
                     con.Open();
                     string sql = String.Format(@"
-                            select object_name, object_type
-                            from sys.all_objects
-                            where owner='{0}' and object_type in ('TABLE','VIEW')
-                            order by object_name",
+                            select table_name
+                            from all_tables
+                            where owner='{0}'
+                            order by table_name",
                           DbHelper.Sanitise(userName.ToUpper()));
                     using (OracleCommand comm = new OracleCommand(sql, con))
                     {
@@ -129,7 +129,6 @@ namespace C2.Utils
                             {
                                 Table table = new Table(userName);
                                 table.Name = rdr.GetString(0);
-                                table.View = rdr.GetString(1) == "VIEW";
                                 tables.Add(table);
                             }
                         }
@@ -173,6 +172,7 @@ namespace C2.Utils
                             }
                         }
                     }
+                    DgvUtil.ResetColumnsWidth(gridOutput);
                     con.Close();
                 }
             }
@@ -211,6 +211,7 @@ namespace C2.Utils
                             }
                         }
                     }
+                    DgvUtil.ResetColumnsWidth(gridOutput);
                     con.Close();
                 }
             }

@@ -115,7 +115,6 @@ namespace C2.Controls.Left
 
         private void ReviewStruToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO
             PreviewTableSchema previewTableSchema = new PreviewTableSchema();
             DbUtil.FillDGVWithTbSchema(previewTableSchema.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name);
             previewTableSchema.Show();
