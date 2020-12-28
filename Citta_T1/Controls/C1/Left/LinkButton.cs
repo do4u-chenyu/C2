@@ -9,14 +9,42 @@ using C2.Controls;
 using C2.Dialogs;
 namespace C2.Controls.Left
 {
+    public class SelectLinkButtonEventArgs : EventArgs
+    {
+        public LinkButton linkButton;
+    }
+    public class ChangeDatabaseItemEventArgs : EventArgs
+    {
+        public DatabaseItem databaseItem;
+    }
+
     public partial class LinkButton : UserControl
     {
-       private int count = 0;
+        private int count = 0;
         private string oldTextString;
-        public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
+        public string FullFilePath { get => DatabaseItem.AllDatabaeInfo; }
         public string LinkSourceName { get; set; }
-        public int Count { get => this.count; set => this.count = value; }
-        public DatabaseItem DatabaseItem { get; set; }
+
+
+        public event EventHandler<ChangeDatabaseItemEventArgs> DatabaseItemChanged;
+        public event EventHandler<SelectLinkButtonEventArgs> LinkButtonSelected;
+        private DatabaseItem _DatabaseItem;
+        public DatabaseItem DatabaseItem
+        {
+            get
+            {
+                return _DatabaseItem;
+            }
+            set 
+            {
+                if(_DatabaseItem != value)
+                {
+                    DatabaseItem old = _DatabaseItem;
+                    _DatabaseItem = value;
+                    OnDatabaseItemChange(old);
+                }
+            }
+        }
 
         public LinkButton(DatabaseItem item)
         {
@@ -45,7 +73,22 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void EiditToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /*
+             * 编辑连接
+             * 1、如果编辑后的dialog.data与link本身的data一致，不做操作
+             * 2、如果不一致，先要判断dialog.data是否在dict里，在里面先移除原来的key再添加
+             */
+            var dialog = new AddDatabaseDialog(DatabaseItem);
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                if (DatabaseItem.AllDatabaeInfo.Equals(dialog.DatabaseInfo.AllDatabaeInfo))
+                    return;
+                else if(Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(DatabaseItem.AllDatabaeInfo))
+                    Global.GetDataSourceControl().LinkSourceDictI2B.Remove(DatabaseItem.AllDatabaeInfo);
+                Global.GetDataSourceControl().LinkSourceDictI2B.Add(dialog.DatabaseInfo.AllDatabaeInfo, this);
 
+                DatabaseItem = dialog.DatabaseInfo;
+            }
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,8 +104,6 @@ namespace C2.Controls.Left
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO 这一块先不做，按设计来说模型文档是不可以导入数据的，检测引用要看业务视图
-            //int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
             DialogResult rs = DialogResult.OK;
 
             // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用
@@ -80,11 +121,8 @@ namespace C2.Controls.Left
             if (rs != DialogResult.OK)
                 return;
 
-            //// 卸载数据源
-            //Global.GetDataSourceControl().RemoveDataButton(this);
-            // 引用不为0时,有可能还会预览该数据源的数据,此时不用移除buffer
-            //if (count == 0)//不管是否有引用，均清空缓存
-            BCPBuffer.GetInstance().Remove(this.FullFilePath);
+            // 卸载数据源
+            Global.GetDataSourceControl().RemoveLinkButton(this);
         }
         #endregion
 
@@ -102,14 +140,12 @@ namespace C2.Controls.Left
             if (e.Button != MouseButtons.Left)
                 return;
 
-            if (e.Clicks == 1) // 单击拖拽
+            if (e.Clicks == 1)//单击选中
             {
-                // 使用`DataObject`对象来传参数，更加自由
-                DataObject dragDropDataTable = new DataObject();
-                dragDropDataTable.SetData("Type", ElementType.DataSource);
-                dragDropDataTable.SetData("Path", FullFilePath);    // 数据源文件全路径
-                dragDropDataTable.SetData("Text", LinkSourceName);  // 数据源名称
-                this.txtButton.DoDragDrop(dragDropDataTable, DragDropEffects.Copy | DragDropEffects.Move);
+                if (LinkButtonSelected != null)
+                {
+                    LinkButtonSelected(this, new SelectLinkButtonEventArgs() { linkButton = this});
+                }
             }
             //else if (e.Clicks == 2)
             //{   // 双击改名 
@@ -156,6 +192,14 @@ namespace C2.Controls.Left
             Global.GetDataSourceControl().SaveExternalData();
             this.helpToolTip.SetToolTip(this.txtButton, LinkSourceName);
         }
-       
+
+        private void OnDatabaseItemChange(DatabaseItem databaseItem)
+        {
+            if (DatabaseItemChanged != null)
+            {
+                DatabaseItemChanged(this, new ChangeDatabaseItemEventArgs() { databaseItem = databaseItem});
+            }
+        }
+
     }
 }

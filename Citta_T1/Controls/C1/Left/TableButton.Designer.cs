@@ -92,6 +92,7 @@ namespace C2.Controls.Left
             this.ReviewStruToolStripMenuItem.Name = "ReviewStruToolStripMenuItem";
             this.ReviewStruToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.ReviewStruToolStripMenuItem.Text = "表结构预览";
+            this.ReviewStruToolStripMenuItem.Click += new System.EventHandler(this.ReviewStruToolStripMenuItem_Click);
             // 
             // RefreshToolStripMenuItem
             // 

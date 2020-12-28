@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Core;
 using C2.Database;
 using C2.Model;
 using C2.Utils;
@@ -17,9 +18,31 @@ namespace C2.Dialogs
     partial class AddDatabaseDialog : StandardDialog
     {
         public DatabaseItem DatabaseInfo { get; set; }
+
+        public AddDatabaseDialog(DatabaseItem databaseInfo)
+        {
+            InitializeComponent();
+
+            DatabaseInfo = databaseInfo;
+            InitializeContent();
+        }
+
         public AddDatabaseDialog()
         {
             InitializeComponent();
+        }
+
+        public void InitializeContent()
+        {
+            databaseTypeComboBox.SelectedIndex = (int)DatabaseInfo.Type-1;
+            this.serverTextBox.Text = DatabaseInfo.Server ;
+            this.sidRadiobutton.Checked = DatabaseInfo.SID == "" ? false : true;
+            this.sidTextBox.Text = DatabaseInfo.SID;
+            this.serviceRadiobutton.Checked = DatabaseInfo.Service == "" ? false : true;
+            this.serviceTextBox.Text = DatabaseInfo.Service;
+            this.portTextBox.Text = DatabaseInfo.Port;
+            this.userTextBox.Text = DatabaseInfo.User;
+            this.passwordTextBox.Text = DatabaseInfo.Password;
         }
 
         protected override bool OnOKButtonClick()
@@ -30,20 +53,31 @@ namespace C2.Dialogs
                 HelpUtil.ShowMessageBox(HelpUtil.DbInfoIsEmptyInfo);
                 return false;
             }
-            DatabaseInfo = new DatabaseItem();
-            //必填项都有值时给batabseinfo赋值
-            DatabaseInfo.Type = (DatabaseType)(databaseTypeComboBox.SelectedIndex+1);
-            DatabaseInfo.Server = this.serverTextBox.Text;
-            DatabaseInfo.SID = this.sidRadiobutton.Checked ? this.sidTextBox.Text : "";
-            DatabaseInfo.Service = this.serviceRadiobutton.Checked ? this.serviceTextBox.Text : "";
-            DatabaseInfo.Port = this.portTextBox.Text;
-            DatabaseInfo.User = this.userTextBox.Text;
-            DatabaseInfo.Password = this.passwordTextBox.Text;
 
-            // TODO 测试连接
-            Connection conn = new Connection(DatabaseInfo);
+            DatabaseItem tmpDatabaseInfo = new DatabaseItem();
+            tmpDatabaseInfo.Type = (DatabaseType)(databaseTypeComboBox.SelectedIndex+1);
+            tmpDatabaseInfo.Server = this.serverTextBox.Text;
+            tmpDatabaseInfo.SID = this.sidRadiobutton.Checked ? this.sidTextBox.Text : "";
+            tmpDatabaseInfo.Service = this.serviceRadiobutton.Checked ? this.serviceTextBox.Text : "";
+            tmpDatabaseInfo.Port = this.portTextBox.Text;
+            tmpDatabaseInfo.User = this.userTextBox.Text;
+            tmpDatabaseInfo.Password = this.passwordTextBox.Text;
+
+            //如果新旧一致，直接返回了
+            if (DatabaseInfo.AllDatabaeInfo.Equals(tmpDatabaseInfo.AllDatabaeInfo))
+                return base.OnOKButtonClick();
+
+            if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(tmpDatabaseInfo.AllDatabaeInfo))
+            {
+                HelpUtil.ShowMessageBox("该连接已存在","已存在",MessageBoxIcon.Warning);
+                return false;
+            }
+
+            Connection conn = new Connection(tmpDatabaseInfo);
             if (!DbUtil.TestConn(conn))
                 return false;
+
+            DatabaseInfo = tmpDatabaseInfo;
             return base.OnOKButtonClick();
         }
         
@@ -53,6 +87,5 @@ namespace C2.Dialogs
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||
                 string.IsNullOrEmpty(this.userTextBox.Text) || string.IsNullOrEmpty(this.passwordTextBox.Text);
         }
-
     }
 }

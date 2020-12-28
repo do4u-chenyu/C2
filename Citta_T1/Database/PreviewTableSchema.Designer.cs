@@ -1,6 +1,6 @@
 ﻿namespace C2.Database
 {
-    partial class PreviewDbDataForm
+    partial class PreviewTableSchema
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,7 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.queryBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.queryBox)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -44,51 +41,28 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView.Location = new System.Drawing.Point(1, 28);
+            this.dataGridView.Location = new System.Drawing.Point(-1, 0);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 23;
-            this.dataGridView.Size = new System.Drawing.Size(800, 420);
+            this.dataGridView.Size = new System.Drawing.Size(436, 161);
             this.dataGridView.TabIndex = 0;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(1, 1);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "1000";
-            // 
-            // queryBox
-            // 
-            this.queryBox.Location = new System.Drawing.Point(83, 3);
-            this.queryBox.Name = "queryBox";
-            this.queryBox.Size = new System.Drawing.Size(17, 17);
-            this.queryBox.TabIndex = 2;
-            this.queryBox.TabStop = false;
-            this.queryBox.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // PreviewDbDataForm
+            // PreviewTableSchema
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.queryBox);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(434, 162);
             this.Controls.Add(this.dataGridView);
-            this.Name = "PreviewDbDataForm";
+            this.Name = "PreviewTableSchema";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "查看数据";
+            this.Text = "表结构预览";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.queryBox)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.PictureBox queryBox;
     }
 }

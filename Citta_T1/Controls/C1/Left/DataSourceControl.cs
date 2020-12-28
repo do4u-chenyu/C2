@@ -46,10 +46,29 @@ namespace C2.Controls.Left
         public Dictionary<string, DataButton> DataSourceDictI2B { get => dataSourceDictI2B; }
         public Dictionary<string, LinkButton> LinkSourceDictI2B { get => linkSourceDictI2B; }
 
-
+        private LinkButton _SelectLinkButton;
         //数据库相关属性
-        public LinkButton SelectLinkButton { set; get; }
+        public LinkButton SelectLinkButton 
+        {
+            set
+            {
+                if (_SelectLinkButton != value)
+                {
+                    _SelectLinkButton = value;
+                    OnSelectLinkButton(value);
+                }
+            }
+            get 
+            {
+                return _SelectLinkButton;
+            }
+        }
 
+        public void OnSelectLinkButton(LinkButton linkButton)
+        {
+            //改变选中的button,刷新架构，默认显示用户名登陆的表结构
+            ConnectDatabase(linkButton.DatabaseItem);//连接一次数据库，刷新架构及数据表
+        }
         // 手工导入时调用
         public void GenDataButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
@@ -80,6 +99,7 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(LinkButton lb)
         {
+            linkPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.linkPanel.Controls.Count > 0)
                 linkPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
             linkPoint.Y += ButtonGapHeight;
@@ -87,6 +107,7 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(TableButton tb)
         {
+            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.dataTabelPanel.Controls.Count > 0)
                 tablePoint = this.dataTabelPanel.Controls[this.dataTabelPanel.Controls.Count - 1].Location;
             tablePoint.Y += ButtonGapHeight;
@@ -104,16 +125,38 @@ namespace C2.Controls.Left
         public void GenLinkButton(LinkButton linkButton)
         {
             LayoutModelButtonLocation(linkButton); // 递增
-            //TODO 判断是否同名？
+            //判断是否为同一链接
+            if (this.LinkSourceDictI2B.ContainsKey(linkButton.FullFilePath))
+            {
+                String name = this.LinkSourceDictI2B[linkButton.FullFilePath].Name;
+                HelpUtil.ShowMessageBox("该数据库连接已存在，数据库名为：" + name);
+                return;
+            }
             this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
+            linkButton.DatabaseItemChanged += Link_DatabaseItemChanged;
+            linkButton.LinkButtonSelected += Link_LinkButtonSelected;
             this.linkPanel.Controls.Add(linkButton);
+        }
+        void Link_LinkButtonSelected(object sender, SelectLinkButtonEventArgs e)
+        {
+            SelectLinkButton = e.linkButton;
+        }
+
+        void Link_DatabaseItemChanged(object sender, ChangeDatabaseItemEventArgs e)
+        {
+            if (SelectLinkButton == null)
+                return;
+            //改变持久化dict的key值
+            if (this.LinkSourceDictI2B.ContainsKey(e.databaseItem.AllDatabaeInfo))
+            {
+                this.LinkSourceDictI2B.Remove(e.databaseItem.AllDatabaeInfo);
+            }
+            ConnectDatabase(SelectLinkButton.DatabaseItem);//连接一次数据库，刷新架构及数据表
         }
 
         private void GenTableButton(TableButton tableButton)
         {
             LayoutModelButtonLocation(tableButton); // 递增
-            //TODO 判断是否同名？
-            //this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
             this.dataTabelPanel.Controls.Add(tableButton);
         }
 
@@ -184,16 +227,17 @@ namespace C2.Controls.Left
             // 保存
             SaveDataSourceInfo();
         }
+
         public void RemoveLinkButton(LinkButton linkButton)
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
             if (this.linkPanel.Controls.Count > 0)
                 this.startPoint.Y = this.linkPanel.Controls[0].Location.Y - ButtonGapHeight;
 
-            this.DataSourceDictI2B.Remove(linkButton.FullFilePath);
+            this.LinkSourceDictI2B.Remove(linkButton.FullFilePath);
             this.linkPanel.Controls.Remove(linkButton);
             // 重新布局
-            ReLayoutLocalFrame();
+            ReLayoutExternalFrame();
             // 保存
             SaveExternalData();
         }
@@ -230,6 +274,7 @@ namespace C2.Controls.Left
             {
                 LinkButton linkButton = new LinkButton(dialog.DatabaseInfo);
                 GenLinkButton(linkButton);
+                SelectLinkButton = linkButton;
 
                 ConnectDatabase(dialog.DatabaseInfo);//连接一次数据库，刷新架构及数据表
                 SaveExternalData();
@@ -243,19 +288,21 @@ namespace C2.Controls.Left
 
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
-            this.UpdateFrameCombo(users, databaseInfo.User);
+            UpdateFrameCombo(users, databaseInfo.User);
 
             //刷新数据表
-            List<Schema> schemas = conn.Schemas;
-            if (schemas == null)
-                return;
-            this.UpdateTables(schemas, databaseInfo);
+            List<Table> tables = DbUtil.GetTablesByUser(conn, databaseInfo.User);
+            UpdateTables(tables, databaseInfo);
 
         }
-
-        private void UpdateTables(List<Schema> schemas, DatabaseItem databaseInfo)
+        private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo)
         {
-            foreach (Table tmpTable in schemas[0].Tables)
+            //先清空上一次的数据表内容
+            this.dataTabelPanel.Controls.Clear();
+
+            if (tables == null)
+                return;
+            foreach (Table tmpTable in tables)
             {
                 DatabaseItem tmpDatabaseItem = databaseInfo;
                 tmpDatabaseItem.DataTable = tmpTable;
@@ -266,6 +313,10 @@ namespace C2.Controls.Left
 
         private void UpdateFrameCombo(List<string> users,string loginUser)
         {
+            this.frameCombo.Items.Clear();
+            if (users == null)
+                return;
+
             this.frameCombo.Text = users.Find( x => x.Equals(loginUser.ToUpper())) == null ? "选择架构" : loginUser.ToUpper();
             users.ForEach(x => frameCombo.Items.Add(x.ToString()));
         }
@@ -273,9 +324,9 @@ namespace C2.Controls.Left
         private void FrameCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             //根据架构改变数据表
-            //Connection conn = new Connection(databaseInfo);
-            //List<string> tables = DbUtil.GetTablesByUser(conn, "SYS");
+            Connection conn = new Connection(SelectLinkButton.DatabaseItem);
+            List<Table> tables = DbUtil.GetTablesByUser(conn, this.frameCombo.Text);
+            UpdateTables(tables, SelectLinkButton.DatabaseItem);
         }
-
     }
 }

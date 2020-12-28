@@ -81,7 +81,7 @@ namespace C2.Controls.Bottom
             }
             view = new DataView(table);
             this.dataGridView.DataSource = view;
-            FileUtil.ResetColumnsWidth(this.dataGridView);
+            DgvUtil.ResetColumnsWidth(this.dataGridView);
 
             // 取消重命名
             for (int i = 0; i < this.dataGridView.Columns.Count; i++)

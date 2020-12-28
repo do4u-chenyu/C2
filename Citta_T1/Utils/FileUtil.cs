@@ -471,7 +471,7 @@ namespace C2.Utils
         }
         public static void FillTable(DataGridView dgv, List<string> headers, List<List<string>> rows, int maxNumOfRow=100)
         {
-            CleanDgv(dgv);
+            DgvUtil.CleanDgv(dgv);
             try
             {
                 DataTable table = new DataTable();
@@ -514,7 +514,7 @@ namespace C2.Utils
 
                 view = new DataView(table);
                 dgv.DataSource = view;
-                FileUtil.ResetColumnsWidth(dgv);
+                DgvUtil.ResetColumnsWidth(dgv);
 
 
                 // 取消重命名
@@ -538,23 +538,6 @@ namespace C2.Utils
             finally
             {
 
-            }
-        }
-        public static void CleanDgv(DataGridView dgv)
-        {
-            dgv.DataSource = null; // System.InvalidOperationException:“操作无效，原因是它导致对 SetCurrentCellAddressCore 函数的可重入调用。”
-            dgv.Rows.Clear();
-            dgv.Columns.Clear();
-        }
-        public static void ResetColumnsWidth(DataGridView dgv, int minWidth = 50)
-        {
-            for (int i = 0; i < dgv.Columns.Count; i++)
-            {
-                dgv.Columns[i].MinimumWidth = minWidth;
-            }
-            for (int i = 0; i < dgv.Columns.Count; i++)
-            {
-                dgv.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
         }
         public static  List<List<string>> GetColumns(List<int> indexs, DataItem dataItem, List<string> rows, int upperLimit)

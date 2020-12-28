@@ -1,6 +1,7 @@
 ﻿
 using C2.Business.Model;
 using C2.Core;
+using C2.Database;
 using C2.Model;
 using C2.Utils;
 using System;
@@ -21,6 +22,7 @@ namespace C2.Controls.Left
 
         public DatabaseItem TableItem { get; set; }
         public string LinkSourceName { get; set; }
+        public Connection connection;
 
         public TableButton(DatabaseItem tableItem)
         {
@@ -30,6 +32,7 @@ namespace C2.Controls.Left
             txtButton.Text = FileUtil.ReName(tableItem.DataTable.Name);
             this.oldTextString = tableItem.DataTable.Name;
             LinkSourceName = tableItem.DataTable.Name;
+            connection = new Connection(this.TableItem);
         }
 
         private void TableButton_Load(object sender, EventArgs e)
@@ -51,7 +54,15 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().ShowBottomPanel();
+            PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm();
+            previewDbDataForm.MaxNumChanged += new MaxNumChangedEventHandler(OnDataGridViewMaxNumChanged);
+            if (DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name, previewDbDataForm.MaxNum))
+                previewDbDataForm.Show();
+        }
+        private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
+        {
+            PreviewDbDataForm pddf = (sender as PreviewDbDataForm);
+            DbUtil.FillDGVWithTbContent(pddf.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name, pddf.MaxNum);
         }
 
         #endregion
@@ -98,8 +109,15 @@ namespace C2.Controls.Left
         
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this.ReviewToolStripMenuItem.Enabled = Global.GetBottomViewPanel().Visible;
+            //this.ReviewToolStripMenuItem.Enabled = Global.GetBottomViewPanel().Visible;
             this.ReviewToolStripMenuItem.ToolTipText = this.ReviewToolStripMenuItem.Enabled ? "预览数据源部分信息" : HelpUtil.ReviewToolStripMenuItemInfo;
+        }
+
+        private void ReviewStruToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PreviewTableSchema previewTableSchema = new PreviewTableSchema();
+            DbUtil.FillDGVWithTbSchema(previewTableSchema.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name);
+            previewTableSchema.Show();
         }
     }
 }
