@@ -76,13 +76,16 @@ namespace C2.Controls.Left
             /*
              * 编辑连接
              * 1、如果编辑后的dialog.data与link本身的data一致，不做操作
-             * 2、如果不一致，先要判断dialog.data是否在dict里，在里面不能重复添加
+             * 2、如果不一致，先要判断dialog.data是否在dict里，在里面先移除原来的key再添加
              */
             var dialog = new AddDatabaseDialog(DatabaseItem);
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
                 if (DatabaseItem.AllDatabaeInfo.Equals(dialog.DatabaseInfo.AllDatabaeInfo))
                     return;
+                else if(Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(DatabaseItem.AllDatabaeInfo))
+                    Global.GetDataSourceControl().LinkSourceDictI2B.Remove(DatabaseItem.AllDatabaeInfo);
+                Global.GetDataSourceControl().LinkSourceDictI2B.Add(dialog.DatabaseInfo.AllDatabaeInfo, this);
 
                 DatabaseItem = dialog.DatabaseInfo;
             }
