@@ -1,4 +1,5 @@
-﻿namespace C2.Dialogs.C2OperatorViews
+﻿
+namespace C2.Dialogs.C2OperatorViews
 {
     partial class C2SqlOperatorView
     {
@@ -31,7 +32,7 @@
             this.bnNew = new System.Windows.Forms.Button();
             this.bnExecute = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textEditorControl1 = new System.Windows.Forms.TextBox();
+            this.textEditorControl1 = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.gridOutput = new System.Windows.Forms.DataGridView();
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -153,16 +154,18 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gridOutput);
             this.splitContainer1.Size = new System.Drawing.Size(508, 343);
-            this.splitContainer1.SplitterDistance = 119;
+            this.splitContainer1.SplitterDistance = 123;
             this.splitContainer1.TabIndex = 9;
             // 
             // textEditorControl1
             // 
             this.textEditorControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textEditorControl1.FoldingStrategy = "XML";
             this.textEditorControl1.Font = new System.Drawing.Font("Courier New", 10F);
             this.textEditorControl1.Location = new System.Drawing.Point(0, 0);
             this.textEditorControl1.Name = "textEditorControl1";
-            this.textEditorControl1.Size = new System.Drawing.Size(508, 23);
+            this.textEditorControl1.Size = new System.Drawing.Size(508, 123);
+            this.textEditorControl1.SyntaxHighlighting = "SQL";
             this.textEditorControl1.TabIndex = 9;
             // 
             // gridOutput
@@ -170,10 +173,11 @@
             this.gridOutput.AllowUserToAddRows = false;
             this.gridOutput.AllowUserToDeleteRows = false;
             this.gridOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridOutput.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridOutput.Location = new System.Drawing.Point(0, 0);
             this.gridOutput.Name = "gridOutput";
-            this.gridOutput.Size = new System.Drawing.Size(504, 217);
+            this.gridOutput.Size = new System.Drawing.Size(508, 216);
             this.gridOutput.TabIndex = 7;
             // 
             // C2SqlOperatorView
@@ -203,7 +207,6 @@
             this.Controls.SetChildIndex(this.splitContainer1, 0);
             this.bottomPanel.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -223,7 +226,7 @@
         private System.Windows.Forms.Button bnEdit;
         private System.Windows.Forms.Button bnHelp;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox textEditorControl1;
+        private ICSharpCode.TextEditor.TextEditorControlEx textEditorControl1;
         private System.Windows.Forms.DataGridView gridOutput;
     }
 }
