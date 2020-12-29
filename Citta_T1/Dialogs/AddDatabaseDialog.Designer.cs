@@ -42,8 +42,6 @@
             this.sidRadiobutton = new System.Windows.Forms.RadioButton();
             this.serviceTextBox = new System.Windows.Forms.TextBox();
             this.sidTextBox = new System.Windows.Forms.TextBox();
-            this.TestButton = new System.Windows.Forms.Button();
-            this.SaveButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // databaseTypeLabel
@@ -171,33 +169,11 @@
             this.sidTextBox.TabIndex = 10020;
             this.sidTextBox.Text = "orcl";
             // 
-            // TestButton
-            // 
-            this.TestButton.Location = new System.Drawing.Point(150, 231);
-            this.TestButton.Name = "TestButton";
-            this.TestButton.Size = new System.Drawing.Size(75, 27);
-            this.TestButton.TabIndex = 10022;
-            this.TestButton.Text = "测试";
-            this.TestButton.UseVisualStyleBackColor = true;
-            this.TestButton.Click += new System.EventHandler(this.TestButton_Click);
-            // 
-            // SaveButton
-            // 
-            this.SaveButton.Location = new System.Drawing.Point(67, 231);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 27);
-            this.SaveButton.TabIndex = 10023;
-            this.SaveButton.Text = "保存";
-            this.SaveButton.UseVisualStyleBackColor = true;
-            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
             // AddDatabaseDialog
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(403, 270);
-            this.Controls.Add(this.SaveButton);
-            this.Controls.Add(this.TestButton);
             this.Controls.Add(this.sidTextBox);
             this.Controls.Add(this.serviceTextBox);
             this.Controls.Add(this.sidRadiobutton);
@@ -229,8 +205,6 @@
             this.Controls.SetChildIndex(this.sidRadiobutton, 0);
             this.Controls.SetChildIndex(this.serviceTextBox, 0);
             this.Controls.SetChildIndex(this.sidTextBox, 0);
-            this.Controls.SetChildIndex(this.TestButton, 0);
-            this.Controls.SetChildIndex(this.SaveButton, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,7 +226,5 @@
         private System.Windows.Forms.RadioButton sidRadiobutton;
         private System.Windows.Forms.TextBox serviceTextBox;
         private System.Windows.Forms.TextBox sidTextBox;
-        private System.Windows.Forms.Button TestButton;
-        private System.Windows.Forms.Button SaveButton;
     }
 }

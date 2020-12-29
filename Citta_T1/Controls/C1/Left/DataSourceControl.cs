@@ -120,12 +120,6 @@ namespace C2.Controls.Left
             this.DataSourceDictI2B.Add(dataButton.FullFilePath, dataButton);
             this.localFrame.Controls.Add(dataButton);
         }
-        public void UpdateLinkButton(LinkButton linkButton, DatabaseItem tmpDatabaseInfo)
-        {
-            this.LinkSourceDictI2B.Remove(linkButton.FullFilePath);
-            linkButton.DatabaseItem = tmpDatabaseInfo;
-            this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
-        }
         public void GenLinkButton(LinkButton linkButton)
         {
             LayoutModelButtonLocation(linkButton); // 递增
