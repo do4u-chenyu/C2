@@ -213,9 +213,9 @@ namespace C2.Dialogs.C2OperatorViews
             // 
             // C2SqlOperatorView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(759, 481);
+            this.ControlBox = true;
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
@@ -228,7 +228,11 @@ namespace C2.Dialogs.C2OperatorViews
             this.Controls.Add(this.bnExecute);
             this.Controls.Add(this.treeConnections);
             this.Controls.Add(this.bottomPanel);
+            this.Icon = global::C2.Properties.Resources.sql_icon;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "C2SqlOperatorView";
+            this.ShowIcon = true;
             this.Text = "自定义Sql算子设置";
             this.Controls.SetChildIndex(this.bottomPanel, 0);
             this.Controls.SetChildIndex(this.treeConnections, 0);
