@@ -190,7 +190,7 @@
             this.Controls.Add(this.databaseTypeLabel);
             this.Name = "AddDatabaseDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "新增数据源";
+            this.Text = "数据库连接设置";
             this.Controls.SetChildIndex(this.databaseTypeLabel, 0);
             this.Controls.SetChildIndex(this.serverLabel, 0);
             this.Controls.SetChildIndex(this.userLabel, 0);

@@ -192,7 +192,6 @@
             this.Controls.Add(this.bottomPanel);
             this.Name = "C2SqlOperatorView";
             this.Text = "Sql算子设置";
-            this.Controls.SetChildIndex(this.topPanel, 0);
             this.Controls.SetChildIndex(this.bottomPanel, 0);
             this.Controls.SetChildIndex(this.treeConnections, 0);
             this.Controls.SetChildIndex(this.lblConn, 0);
