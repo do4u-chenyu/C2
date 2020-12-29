@@ -23,7 +23,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(C2MinOperatorView));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.bottomPanel.SuspendLayout();
@@ -62,10 +61,6 @@
             this.comboBox0.Location = new System.Drawing.Point(2, 48);
             this.comboBox0.Size = new System.Drawing.Size(150, 21);
             this.comboBox0.TabIndex = 1;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Size = new System.Drawing.Size(86, 21);
             // 
             // topPanel
             // 
@@ -122,7 +117,7 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "取最小值";
             // 
-            // MinOperatorView
+            // C2MinOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(299, 191);
@@ -132,12 +127,12 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Icon = Properties.Resources.min_icon;
+            this.Icon = global::C2.Properties.Resources.min_icon;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(315, 230);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(315, 230);
-            this.Name = "MinOperatorView";
+            this.Name = "C2MinOperatorView";
             this.ShowIcon = true;
             this.Text = "取最小值算子设置";
             this.bottomPanel.ResumeLayout(false);

@@ -1535,6 +1535,9 @@
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2FilterOperatorView.resx">
       <DependentUpon>C2FilterOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2MinOperatorView.resx">
+      <DependentUpon>C2MinOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SortOperatorView.resx">
       <DependentUpon>C2SortOperatorView.cs</DependentUpon>
     </EmbeddedResource>
