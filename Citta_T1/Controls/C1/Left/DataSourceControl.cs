@@ -297,7 +297,8 @@ namespace C2.Controls.Left
              */
             //连接数据库
             Connection conn = new Connection(databaseInfo);
-
+            if (!DbUtil.TestConn(conn, true))
+                return;
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
             UpdateFrameCombo(users, databaseInfo.User);
