@@ -136,10 +136,11 @@ namespace C2.Dialogs.C2OperatorViews
             // 
             // comboBoxDataBase
             // 
+            this.comboBoxDataBase.Font = new System.Drawing.Font("宋体", 10F);
             this.comboBoxDataBase.FormattingEnabled = true;
             this.comboBoxDataBase.Location = new System.Drawing.Point(6, 94);
             this.comboBoxDataBase.Name = "comboBoxDataBase";
-            this.comboBoxDataBase.Size = new System.Drawing.Size(133, 20);
+            this.comboBoxDataBase.Size = new System.Drawing.Size(133, 21);
             this.comboBoxDataBase.TabIndex = 11;
             // 
             // label2
@@ -188,22 +189,26 @@ namespace C2.Dialogs.C2OperatorViews
             // 
             // button1
             // 
+            this.button1.Image = global::C2.Properties.Resources.db_connect;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.Location = new System.Drawing.Point(145, 37);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 22);
+            this.button1.Size = new System.Drawing.Size(65, 23);
             this.button1.TabIndex = 17;
             this.button1.Text = "连接库";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
+            this.button2.Image = global::C2.Properties.Resources.table_view;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.Location = new System.Drawing.Point(145, 94);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(64, 22);
+            this.button2.Size = new System.Drawing.Size(65, 23);
             this.button2.TabIndex = 18;
             this.button2.Text = "预览表";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.UseVisualStyleBackColor = true;
             // 
             // C2SqlOperatorView

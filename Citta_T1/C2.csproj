@@ -1978,6 +1978,8 @@
     <None Include="Resources\organization.png" />
     <None Include="Resources\Operators\control_play_blue.png" />
     <None Include="Resources\Operators\sql_help.png" />
+    <None Include="Resources\Operators\db_connect.png" />
+    <None Include="Resources\Operators\table_view.png" />
     <Content Include="Resources\PictureIconLib\119_提取.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
