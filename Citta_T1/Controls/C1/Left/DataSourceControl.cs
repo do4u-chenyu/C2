@@ -272,17 +272,22 @@ namespace C2.Controls.Left
             var dialog = new AddDatabaseDialog();
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-                LinkButton linkButton = new LinkButton(dialog.DatabaseInfo);
-                GenLinkButton(linkButton);
-                SelectLinkButton = linkButton;
-
-                ConnectDatabase(dialog.DatabaseInfo);//连接一次数据库，刷新架构及数据表
-                SaveExternalData();
+                GenLinkButton(dialog.DatabaseInfo, true);
             }
+        }
+        public void GenLinkButton(DatabaseItem dbinfo, bool updateFrameAndTables=false)
+        {
+            LinkButton linkButton = new LinkButton(dbinfo);
+            GenLinkButton(linkButton);
+            SelectLinkButton = linkButton;
+
+            ConnectDatabase(dbinfo);//连接一次数据库，刷新架构及数据表
+            SaveExternalData();
         }
 
         private void ConnectDatabase(DatabaseItem databaseInfo)
         {
+            // TODO Dk 优化代码
             //连接数据库
             Connection conn = new Connection(databaseInfo);
 

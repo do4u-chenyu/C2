@@ -44,6 +44,18 @@ namespace C2.Dialogs
             this.userTextBox.Text = DatabaseInfo.User;
             this.passwordTextBox.Text = DatabaseInfo.Password;
         }
+        private DatabaseItem GenDatabaseInfoFormDialog()
+        {
+            DatabaseItem tmpDatabaseInfo = new DatabaseItem();
+            tmpDatabaseInfo.Type = (DatabaseType)(databaseTypeComboBox.SelectedIndex + 1);
+            tmpDatabaseInfo.Server = this.serverTextBox.Text;
+            tmpDatabaseInfo.SID = this.sidRadiobutton.Checked ? this.sidTextBox.Text : "";
+            tmpDatabaseInfo.Service = this.serviceRadiobutton.Checked ? this.serviceTextBox.Text : "";
+            tmpDatabaseInfo.Port = this.portTextBox.Text;
+            tmpDatabaseInfo.User = this.userTextBox.Text;
+            tmpDatabaseInfo.Password = this.passwordTextBox.Text;
+            return tmpDatabaseInfo;
+        }
 
         protected override bool OnOKButtonClick()
         {
@@ -54,14 +66,7 @@ namespace C2.Dialogs
                 return false;
             }
 
-            DatabaseItem tmpDatabaseInfo = new DatabaseItem();
-            tmpDatabaseInfo.Type = (DatabaseType)(databaseTypeComboBox.SelectedIndex+1);
-            tmpDatabaseInfo.Server = this.serverTextBox.Text;
-            tmpDatabaseInfo.SID = this.sidRadiobutton.Checked ? this.sidTextBox.Text : "";
-            tmpDatabaseInfo.Service = this.serviceRadiobutton.Checked ? this.serviceTextBox.Text : "";
-            tmpDatabaseInfo.Port = this.portTextBox.Text;
-            tmpDatabaseInfo.User = this.userTextBox.Text;
-            tmpDatabaseInfo.Password = this.passwordTextBox.Text;
+            DatabaseItem tmpDatabaseInfo = GenDatabaseInfoFormDialog();
 
             //如果新旧一致，直接返回了
             if (DatabaseInfo.AllDatabaeInfo.Equals(tmpDatabaseInfo.AllDatabaeInfo))
@@ -71,7 +76,7 @@ namespace C2.Dialogs
             {
                 HelpUtil.ShowMessageBox("该连接已存在","已存在",MessageBoxIcon.Warning);
                 return false;
-            }
+            } 
 
             Connection conn = new Connection(tmpDatabaseInfo);
             if (!DbUtil.TestConn(conn))
@@ -80,12 +85,42 @@ namespace C2.Dialogs
             DatabaseInfo = tmpDatabaseInfo;
             return base.OnOKButtonClick();
         }
-        
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            /*
+             * 保存按钮
+             * 只要有IP，就能存
+             */
+            if (string.IsNullOrEmpty(this.serverTextBox.Text))
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbServerInfoIsEmptyInfo);
+                return;
+            }
+            DatabaseItem tmpDatabaseInfo = GenDatabaseInfoFormDialog();
+            //如果新旧一致，直接返回了
+            if (DatabaseInfo.AllDatabaeInfo.Equals(tmpDatabaseInfo.AllDatabaeInfo))
+                return;
+
+            if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(tmpDatabaseInfo.AllDatabaeInfo))
+            {
+                HelpUtil.ShowMessageBox("该连接已存在", "已存在", MessageBoxIcon.Warning);
+                return;
+            }
+            Global.GetDataSourceControl().GenLinkButton(this.DatabaseInfo);
+        }
+
         private bool InputHasEmpty()
         {
             return (databaseTypeComboBox.SelectedIndex == -1) || string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||
                 string.IsNullOrEmpty(this.userTextBox.Text) || string.IsNullOrEmpty(this.passwordTextBox.Text);
+        }
+
+
+
+        private void TestButton_Click(object sender, EventArgs e)
+        {
+            //DbUtil.TestConn();
         }
     }
 }
