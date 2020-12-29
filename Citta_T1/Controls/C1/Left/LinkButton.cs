@@ -9,15 +9,6 @@ using C2.Controls;
 using C2.Dialogs;
 namespace C2.Controls.Left
 {
-    public class SelectLinkButtonEventArgs : EventArgs
-    {
-        public LinkButton linkButton;
-    }
-    public class ChangeDatabaseItemEventArgs : EventArgs
-    {
-        public DatabaseItem databaseItem;
-    }
-
     public partial class LinkButton : UserControl
     {
         private int count = 0;
@@ -35,9 +26,9 @@ namespace C2.Controls.Left
             {
                 return _DatabaseItem;
             }
-            set 
+            set
             {
-                if(_DatabaseItem != value)
+                if (_DatabaseItem != value)
                 {
                     DatabaseItem old = _DatabaseItem;
                     _DatabaseItem = value;
@@ -49,7 +40,7 @@ namespace C2.Controls.Left
         public LinkButton(DatabaseItem item)
         {
             InitializeComponent();
-            DatabaseItem =item;
+            DatabaseItem = item;
             txtButton.Name = DatabaseItem.Server;
             txtButton.Text = Utils.FileUtil.ReName(DatabaseItem.Server);
             this.oldTextString = DatabaseItem.Server;
@@ -71,19 +62,19 @@ namespace C2.Controls.Left
         }
 
         #region 右键菜单
-        private void EiditToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /*
              * 编辑连接
              * 1、如果编辑后的dialog.data与link本身的data一致，不做操作
              * 2、如果不一致，先要判断dialog.data是否在dict里，在里面先移除原来的key再添加
              */
-            var dialog = new AddDatabaseDialog(DatabaseItem);
+            var dialog = new AddDatabaseDialog(DatabaseItem, DatabaseDialogMode.Edit, this);
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
                 if (DatabaseItem.AllDatabaeInfo.Equals(dialog.DatabaseInfo.AllDatabaeInfo))
                     return;
-                else if(Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(DatabaseItem.AllDatabaeInfo))
+                else if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(DatabaseItem.AllDatabaeInfo))
                     Global.GetDataSourceControl().LinkSourceDictI2B.Remove(DatabaseItem.AllDatabaeInfo);
                 Global.GetDataSourceControl().LinkSourceDictI2B.Add(dialog.DatabaseInfo.AllDatabaeInfo, this);
 
@@ -126,7 +117,7 @@ namespace C2.Controls.Left
         }
         #endregion
 
-      
+
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
         {
             //string helpInfo = String.Format(DataButtonFlowTemplate,
@@ -140,17 +131,13 @@ namespace C2.Controls.Left
             if (e.Button != MouseButtons.Left)
                 return;
 
-            if (e.Clicks == 1)//单击选中
+            if (e.Clicks == 2) // 双击连接
             {
                 if (LinkButtonSelected != null)
                 {
-                    LinkButtonSelected(this, new SelectLinkButtonEventArgs() { linkButton = this});
+                    LinkButtonSelected(this, new SelectLinkButtonEventArgs() { linkButton = this });
                 }
             }
-            //else if (e.Clicks == 2)
-            //{   // 双击改名 
-            //    RenameToolStripMenuItem_Click(sender, e);
-            //}
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -197,9 +184,21 @@ namespace C2.Controls.Left
         {
             if (DatabaseItemChanged != null)
             {
-                DatabaseItemChanged(this, new ChangeDatabaseItemEventArgs() { databaseItem = databaseItem});
+                DatabaseItemChanged(this, new ChangeDatabaseItemEventArgs() { databaseItem = databaseItem });
             }
         }
 
+        private void ConnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LinkButtonSelected(this, new SelectLinkButtonEventArgs() { linkButton = this });
+        }
+    }
+    public class SelectLinkButtonEventArgs : EventArgs
+    {
+        public LinkButton linkButton;
+    }
+    public class ChangeDatabaseItemEventArgs : EventArgs
+    {
+        public DatabaseItem databaseItem;
     }
 }

@@ -57,171 +57,183 @@ namespace C2.Utils
         //    OracleDataAdapter oda = new OracleDataAdapter(oconn);
         //    oda.Fill()
         //}
-        public static bool TestConn(Connection conn)
+        public static bool TestConn(OraConnection conn, bool showDetail=false)
         {
-            using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            {
+                using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                {
+                    try
+                    {
+                        con.Open();
+                        con.Close();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        if (showDetail)
+                            HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                        return false;
+                    }
+                }
+            }
+        }
+        public static List<string> GetUsers(OraConnection conn)
+        {
+            List<string> users = new List<string>();
+            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
             {
                 try
                 {
-                    con.Open();
-                    con.Close();
-                    return true;
+                    using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                    {
+                        con.Open();
+                        string sql = String.Format(@"select distinct owner from all_tables");
+                        using (OracleCommand comm = new OracleCommand(sql, con))
+                        {
+                            using (OracleDataReader rdr = comm.ExecuteReader())
+                            {
+                                while (rdr.Read())
+                                {
+                                    users.Add(rdr.GetString(0));
+                                }
+                            }
+                        }
+                        con.Close();
+                    }
                 }
                 catch (Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                }
+            }
+            return users;
+        }
+
+        public static List<Table> GetTablesByUser(OraConnection conn, string userName)
+        {
+            List<Table> tables = new List<Table>();
+            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                    {
+                        con.Open();
+                        string sql = String.Format(@"
+                            select table_name
+                            from all_tables
+                            where owner='{0}'
+                            order by table_name",
+                              DbHelper.Sanitise(userName.ToUpper()));
+                        using (OracleCommand comm = new OracleCommand(sql, con))
+                        {
+                            using (OracleDataReader rdr = comm.ExecuteReader())
+                            {
+                                while (rdr.Read())
+                                {
+                                    Table table = new Table(userName);
+                                    table.Name = rdr.GetString(0);
+                                    tables.Add(table);
+                                }
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                }
+            }
+            return tables;
+        }
+
+        public static bool FillDGVWithTbSchema(DataGridView gridOutput, OraConnection conn, string tableName)
+        {
+            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                    {
+                        con.Open();
+                        string sql = String.Format(@"select A.COLUMN_NAME,A.DATA_TYPE  from user_tab_columns A where TABLE_NAME='{0}'", tableName.ToUpper());
+                        using (OracleCommand comm = new OracleCommand(sql, con))
+                        {
+                            using (OracleDataReader rdr = comm.ExecuteReader())
+                            {
+                                // Grab all the column names
+                                gridOutput.Rows.Clear();
+                                gridOutput.Columns.Clear();
+                                for (int i = 0; i < rdr.FieldCount; i++)
+                                {
+                                    gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
+                                }
+                                int rows = 0;
+                                while (rdr.Read())
+                                {
+                                    string[] objs = new string[rdr.FieldCount];
+                                    for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
+                                    gridOutput.Rows.Add(objs);
+                                    rows++;
+                                }
+                            }
+                        }
+                        DgvUtil.ResetColumnsWidth(gridOutput);
+                        con.Close();
+                        return true;
+                    }
+                }
+                catch (Exception ex) // Better catch in case they have bad sql
                 {
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                     return false;
                 }
             }
         }
-        public static List<string> GetUsers(Connection conn)
-        {
-            List<string> users = new List<string>();
-            try
-            {
-                using (OracleConnection con = new OracleConnection(conn.ConnectionString))
-                {
-                    con.Open();
-                    string sql = String.Format(@"select distinct owner from all_tables");
-                    using (OracleCommand comm = new OracleCommand(sql, con))
-                    {
-                        using (OracleDataReader rdr = comm.ExecuteReader())
-                        {
-                            while (rdr.Read())
-                            {
-                                users.Add(rdr.GetString(0));
-                            }
-                        }
-                    }
-                    con.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-            }
-            return users;
-        }
 
-        public static List<Table> GetTablesByUser(Connection conn, string userName)
+        public static bool FillDGVWithTbContent(DataGridView gridOutput, OraConnection conn, string tableName, int maxNum)
         {
-            /* TODO DK 实现有误，需要修改
-             * 应该使用当前用户去查询all_tables
-             */
-            //bool owner = conn.User.ToUpper() == userName.ToUpper();
-            List<Table> tables = new List<Table>();
-            try
+            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
             {
-                using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                try
                 {
-                    con.Open();
-                    string sql = String.Format(@"
-                            select table_name
-                            from all_tables
-                            where owner='{0}'
-                            order by table_name",
-                          DbHelper.Sanitise(userName.ToUpper()));
-                    using (OracleCommand comm = new OracleCommand(sql, con))
+                    using (OracleConnection con = new OracleConnection(conn.ConnectionString))
                     {
-                        using (OracleDataReader rdr = comm.ExecuteReader())
+                        con.Open();
+                        string sql = String.Format(@"select * from {0}", tableName);
+                        using (OracleCommand comm = new OracleCommand(sql, con))
                         {
-                            while (rdr.Read())
+                            using (OracleDataReader rdr = comm.ExecuteReader())
                             {
-                                Table table = new Table(userName);
-                                table.Name = rdr.GetString(0);
-                                tables.Add(table);
+                                // Grab all the column names
+                                gridOutput.Rows.Clear();
+                                gridOutput.Columns.Clear();
+                                for (int i = 0; i < rdr.FieldCount; i++)
+                                {
+                                    gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
+                                }
+                                int rows = 0;
+                                while (rdr.Read() && rows < maxNum)
+                                {
+                                    string[] objs = new string[rdr.FieldCount];
+                                    for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
+                                    gridOutput.Rows.Add(objs);
+                                    rows++;
+                                }
                             }
                         }
+                        DgvUtil.ResetColumnsWidth(gridOutput);
+                        con.Close();
+                        return true;
                     }
-                    con.Close();
                 }
-            }
-            catch (Exception ex)
-            {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-            }
-            return tables;
-        }
-
-        public static bool FillDGVWithTbSchema(DataGridView gridOutput, Connection conn, string tableName)
-        {
-            try
-            {
-                using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                catch (Exception ex) // Better catch in case they have bad sql
                 {
-                    con.Open();
-                    string sql = String.Format(@"select A.COLUMN_NAME,A.DATA_TYPE  from user_tab_columns A where TABLE_NAME='{0}'", tableName.ToUpper());
-                    using (OracleCommand comm = new OracleCommand(sql, con))
-                    {
-                        using (OracleDataReader rdr = comm.ExecuteReader())
-                        {
-                            // Grab all the column names
-                            gridOutput.Rows.Clear();
-                            gridOutput.Columns.Clear();
-                            for (int i = 0; i < rdr.FieldCount; i++)
-                            {
-                                gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
-                            }
-                            int rows = 0;
-                            while (rdr.Read())
-                            {
-                                string[] objs = new string[rdr.FieldCount];
-                                for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
-                                gridOutput.Rows.Add(objs);
-                                rows++;
-                            }
-                        }
-                    }
-                    DgvUtil.ResetColumnsWidth(gridOutput);
-                    con.Close();
-                    return true;
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                    return false;
                 }
-            }
-            catch (Exception ex) // Better catch in case they have bad sql
-            {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                return false;
-            }
-        }
-
-        public static bool FillDGVWithTbContent(DataGridView gridOutput, Connection conn, string tableName, int maxNum)
-        {
-            try
-            {
-                using (OracleConnection con = new OracleConnection(conn.ConnectionString))
-                {
-                    con.Open();
-                    string sql = String.Format(@"select * from {0}", tableName);
-                    using (OracleCommand comm = new OracleCommand(sql, con))
-                    {
-                        using (OracleDataReader rdr = comm.ExecuteReader())
-                        {
-                            // Grab all the column names
-                            gridOutput.Rows.Clear();
-                            gridOutput.Columns.Clear();
-                            for (int i = 0; i < rdr.FieldCount; i++)
-                            {
-                                gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
-                            }
-                            int rows = 0;
-                            while (rdr.Read() && rows < maxNum)
-                            {
-                                string[] objs = new string[rdr.FieldCount];
-                                for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
-                                gridOutput.Rows.Add(objs);
-                                rows++;
-                            }
-                        }
-                    }
-                    DgvUtil.ResetColumnsWidth(gridOutput);
-                    con.Close();
-                    return true;
-                }
-            }
-            catch (Exception ex) // Better catch in case they have bad sql
-            {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                return false;
             }
         }
     }

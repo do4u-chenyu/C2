@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Controls.Left;
 using C2.Core;
 using C2.Database;
 using C2.Model;
@@ -18,18 +19,21 @@ namespace C2.Dialogs
     partial class AddDatabaseDialog : StandardDialog
     {
         public DatabaseItem DatabaseInfo { get; set; }
-
-        public AddDatabaseDialog(DatabaseItem databaseInfo)
+        private DatabaseDialogMode Mode;
+        private LinkButton LinkButton;
+        public AddDatabaseDialog(DatabaseItem databaseInfo=null, DatabaseDialogMode mode=DatabaseDialogMode.New, LinkButton linkButton=null)
         {
             InitializeComponent();
-
-            DatabaseInfo = databaseInfo;
-            InitializeContent();
-        }
-
-        public AddDatabaseDialog()
-        {
-            InitializeComponent();
+            if (databaseInfo != null)
+            {
+                DatabaseInfo = databaseInfo;
+                InitializeContent();
+            }
+            Mode = mode;
+            if (linkButton != null)
+            {
+                LinkButton = linkButton;
+            }
         }
 
         public void InitializeContent()
@@ -44,6 +48,18 @@ namespace C2.Dialogs
             this.userTextBox.Text = DatabaseInfo.User;
             this.passwordTextBox.Text = DatabaseInfo.Password;
         }
+        private DatabaseItem GenDatabaseInfoFormDialog()
+        {
+            DatabaseItem tmpDatabaseInfo = new DatabaseItem();
+            tmpDatabaseInfo.Type = (DatabaseType)(databaseTypeComboBox.SelectedIndex + 1);
+            tmpDatabaseInfo.Server = this.serverTextBox.Text;
+            tmpDatabaseInfo.SID = this.sidRadiobutton.Checked ? this.sidTextBox.Text : "";
+            tmpDatabaseInfo.Service = this.serviceRadiobutton.Checked ? this.serviceTextBox.Text : "";
+            tmpDatabaseInfo.Port = this.portTextBox.Text;
+            tmpDatabaseInfo.User = this.userTextBox.Text;
+            tmpDatabaseInfo.Password = this.passwordTextBox.Text;
+            return tmpDatabaseInfo;
+        }
 
         protected override bool OnOKButtonClick()
         {
@@ -54,14 +70,7 @@ namespace C2.Dialogs
                 return false;
             }
 
-            DatabaseItem tmpDatabaseInfo = new DatabaseItem();
-            tmpDatabaseInfo.Type = (DatabaseType)(databaseTypeComboBox.SelectedIndex+1);
-            tmpDatabaseInfo.Server = this.serverTextBox.Text;
-            tmpDatabaseInfo.SID = this.sidRadiobutton.Checked ? this.sidTextBox.Text : "";
-            tmpDatabaseInfo.Service = this.serviceRadiobutton.Checked ? this.serviceTextBox.Text : "";
-            tmpDatabaseInfo.Port = this.portTextBox.Text;
-            tmpDatabaseInfo.User = this.userTextBox.Text;
-            tmpDatabaseInfo.Password = this.passwordTextBox.Text;
+            DatabaseItem tmpDatabaseInfo = GenDatabaseInfoFormDialog();
 
             //如果新旧一致，直接返回了
             if (DatabaseInfo != null && DatabaseInfo.AllDatabaeInfo.Equals(tmpDatabaseInfo.AllDatabaeInfo))
@@ -71,21 +80,26 @@ namespace C2.Dialogs
             {
                 HelpUtil.ShowMessageBox("该连接已存在","已存在",MessageBoxIcon.Warning);
                 return false;
-            }
+            } 
 
-            Connection conn = new Connection(tmpDatabaseInfo);
-            if (!DbUtil.TestConn(conn))
+            OraConnection conn = new OraConnection(tmpDatabaseInfo);
+            if (!DbUtil.TestConn(conn, true))
                 return false;
 
             DatabaseInfo = tmpDatabaseInfo;
             return base.OnOKButtonClick();
         }
-        
+
         private bool InputHasEmpty()
         {
             return (databaseTypeComboBox.SelectedIndex == -1) || string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||
                 string.IsNullOrEmpty(this.userTextBox.Text) || string.IsNullOrEmpty(this.passwordTextBox.Text);
         }
+    }
+    public enum DatabaseDialogMode
+    {
+        Edit,
+        New
     }
 }

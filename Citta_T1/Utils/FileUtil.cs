@@ -395,7 +395,7 @@ namespace C2.Utils
         public static string ReName(string name)
         {
             string newName;
-            int maxLength = 12;
+            int maxLength = 16;
 
             if (name.Length <= maxLength)
             {

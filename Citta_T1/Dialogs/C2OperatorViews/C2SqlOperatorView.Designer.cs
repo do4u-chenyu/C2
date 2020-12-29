@@ -35,8 +35,8 @@ namespace C2.Dialogs.C2OperatorViews
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.bnHelp = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.bnConnect = new System.Windows.Forms.Button();
+            this.bnView = new System.Windows.Forms.Button();
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -172,7 +172,6 @@ namespace C2.Dialogs.C2OperatorViews
             this.label4.Size = new System.Drawing.Size(56, 14);
             this.label4.TabIndex = 16;
             this.label4.Text = "表预览:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // bnHelp
             // 
@@ -187,37 +186,37 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnHelp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnHelp.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // bnConnect
             // 
-            this.button1.Image = global::C2.Properties.Resources.db_connect;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(145, 37);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(65, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "连接库";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.UseVisualStyleBackColor = true;
+            this.bnConnect.Image = global::C2.Properties.Resources.db_connect;
+            this.bnConnect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bnConnect.Location = new System.Drawing.Point(145, 37);
+            this.bnConnect.Name = "bnConnect";
+            this.bnConnect.Size = new System.Drawing.Size(65, 23);
+            this.bnConnect.TabIndex = 17;
+            this.bnConnect.Text = "连接库";
+            this.bnConnect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bnConnect.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // bnView
             // 
-            this.button2.Image = global::C2.Properties.Resources.table_view;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(145, 94);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(65, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "预览表";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.UseVisualStyleBackColor = true;
+            this.bnView.Image = global::C2.Properties.Resources.table_view;
+            this.bnView.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bnView.Location = new System.Drawing.Point(145, 94);
+            this.bnView.Name = "bnView";
+            this.bnView.Size = new System.Drawing.Size(65, 23);
+            this.bnView.TabIndex = 18;
+            this.bnView.Text = "预览表";
+            this.bnView.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bnView.UseVisualStyleBackColor = true;
             // 
             // C2SqlOperatorView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(759, 481);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ControlBox = true;
+            this.Controls.Add(this.bnView);
+            this.Controls.Add(this.bnConnect);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -228,7 +227,11 @@ namespace C2.Dialogs.C2OperatorViews
             this.Controls.Add(this.bnExecute);
             this.Controls.Add(this.treeConnections);
             this.Controls.Add(this.bottomPanel);
+            this.Icon = global::C2.Properties.Resources.sql_icon;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "C2SqlOperatorView";
+            this.ShowIcon = true;
             this.Text = "自定义Sql算子设置";
             this.Controls.SetChildIndex(this.bottomPanel, 0);
             this.Controls.SetChildIndex(this.treeConnections, 0);
@@ -240,8 +243,8 @@ namespace C2.Dialogs.C2OperatorViews
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
-            this.Controls.SetChildIndex(this.button2, 0);
+            this.Controls.SetChildIndex(this.bnConnect, 0);
+            this.Controls.SetChildIndex(this.bnView, 0);
             this.bottomPanel.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -266,7 +269,7 @@ namespace C2.Dialogs.C2OperatorViews
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button bnHelp;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button bnConnect;
+        private System.Windows.Forms.Button bnView;
     }
 }

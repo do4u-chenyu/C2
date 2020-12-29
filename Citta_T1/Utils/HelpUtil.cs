@@ -42,8 +42,11 @@ namespace C2.Utils
 
         public static string ReviewToolStripMenuItemInfo = "首页状态下无法预览数据，请点击左侧面板打开一个业务视图后再试";
         public static string DbInfoIsEmptyInfo = "输入信息不能为空，请检查输入后再次尝试添加信息";
+        public static string DbServerInfoIsEmptyInfo = "需要一个有效的IP，请检查输入后再次尝试添加信息";
         public static string DbCannotBeConnectedInfo = "连接数据库发生错误，请检查信息后再次尝试连接";
         public static string CastStringToIntFailedInfo = "仅支持整数输入，请检查后重新输入";
+        public static string DbConnectSucceeded = "连接成功";
+        public static string DbConnectFailed = "连接失败";
 
 
         /// <summary>

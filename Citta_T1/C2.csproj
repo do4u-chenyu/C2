@@ -790,6 +790,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CursorUtil.cs" />
     <Compile Include="Utils\DbUtil.cs" />
     <Compile Include="Utils\DgvUtil.cs" />
     <Compile Include="Utils\XmlUtil.cs" />
@@ -1943,6 +1944,7 @@
     <None Include="Resources\mindMap.png" />
     <Content Include="Resources\Opcontrol_ico\AI.ico" />
     <Content Include="Resources\Opcontrol_ico\python.ico" />
+    <None Include="Resources\Opcontrol_ico\sql.ico" />
     <Content Include="Resources\Opcontrol_ico\关联算子.ico" />
     <Content Include="Resources\Opcontrol_ico\关键词过滤.ico" />
     <Content Include="Resources\Opcontrol_ico\分组.ico" />
