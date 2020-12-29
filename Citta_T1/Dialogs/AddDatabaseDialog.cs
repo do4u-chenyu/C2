@@ -64,7 +64,7 @@ namespace C2.Dialogs
             tmpDatabaseInfo.Password = this.passwordTextBox.Text;
 
             //如果新旧一致，直接返回了
-            if (DatabaseInfo.AllDatabaeInfo.Equals(tmpDatabaseInfo.AllDatabaeInfo))
+            if (DatabaseInfo != null && DatabaseInfo.AllDatabaeInfo.Equals(tmpDatabaseInfo.AllDatabaeInfo))
                 return base.OnOKButtonClick();
 
             if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(tmpDatabaseInfo.AllDatabaeInfo))
