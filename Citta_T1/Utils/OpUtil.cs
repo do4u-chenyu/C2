@@ -177,7 +177,8 @@ namespace C2.Utils
         {
             Unknow,  // 默认值放在第一位
             Excel,
-            Text   
+            Text,
+            Database
         }
 
         public static Encoding EncodingEnum(string encoding,Encoding defaultEncoding = Encoding.GBK)

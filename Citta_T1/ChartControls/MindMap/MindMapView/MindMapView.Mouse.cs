@@ -203,14 +203,13 @@ namespace C2.Controls.MapViews
 
         private void AddDataButtonToTopic(DragEventArgs e)
         {
-            // 数据源的信息
-            DataItem dataItem = new DataItem(
-                (string)e.Data.GetData("Path"),
-                (string)e.Data.GetData("Text"),
-                (char)e.Data.GetData("Separator"),
-                (OpUtil.Encoding)e.Data.GetData("Encoding"),
-                (OpUtil.ExtType)e.Data.GetData("ExtType")
-            );
+            DataItem dataItem;
+            DatabaseType databaseType = (DatabaseType)e.Data.GetData("DataType");
+            if (databaseType == DatabaseType.Null)
+                dataItem = new DataItem((string)e.Data.GetData("Path"), (string)e.Data.GetData("Text"), (char)e.Data.GetData("Separator"), (OpUtil.Encoding)e.Data.GetData("Encoding"), (OpUtil.ExtType)e.Data.GetData("ExtType"));
+            else
+                dataItem = new DataItem((DatabaseType)e.Data.GetData("DataType"),(DatabaseItem)e.Data.GetData("TableInfo"));
+
             // 获取topic
             Point pointToClient = this.ChartBox.PointToClient(new Point(e.X, e.Y));
             var htr = HitTest(pointToClient.X, pointToClient.Y);
