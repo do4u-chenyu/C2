@@ -325,7 +325,6 @@ namespace C2.Controls.MapViews
                 MenuViewData.Text = Lang._("ViewData");
                 MenuViewData.Click += MenuPreViewData_Click;
 
-                MenuCreateChart.Enabled = dataItem.DataType == DatabaseType.Null ? false : true;
                 MenuCreateChart.Image = Properties.Resources.getchart;              
                 MenuCreateChart.Text = Lang._("CreateChart");
                 MenuCreateChart.Tag = dataItem;
