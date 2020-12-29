@@ -38,7 +38,6 @@ namespace C2.Controls.Left
             this.ReviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReviewStruToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopyTablePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox = new System.Windows.Forms.TextBox();
             this.txtButton = new C2.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
@@ -73,16 +72,15 @@ namespace C2.Controls.Left
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ReviewToolStripMenuItem,
             this.ReviewStruToolStripMenuItem,
-            this.RefreshToolStripMenuItem,
-            this.CopyTablePathToClipboardToolStripMenuItem});
+            this.RefreshToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(185, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // ReviewToolStripMenuItem
             // 
             this.ReviewToolStripMenuItem.Name = "ReviewToolStripMenuItem";
-            this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ReviewToolStripMenuItem.Text = "表预览";
             this.ReviewToolStripMenuItem.ToolTipText = "预览表内容";
             this.ReviewToolStripMenuItem.Click += new System.EventHandler(this.ReviewToolStripMenuItem_Click);
@@ -90,24 +88,17 @@ namespace C2.Controls.Left
             // ReviewStruToolStripMenuItem
             // 
             this.ReviewStruToolStripMenuItem.Name = "ReviewStruToolStripMenuItem";
-            this.ReviewStruToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.ReviewStruToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ReviewStruToolStripMenuItem.Text = "表结构预览";
             this.ReviewStruToolStripMenuItem.Click += new System.EventHandler(this.ReviewStruToolStripMenuItem_Click);
             // 
             // RefreshToolStripMenuItem
             // 
             this.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem";
-            this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.RefreshToolStripMenuItem.Text = "刷新";
             this.RefreshToolStripMenuItem.ToolTipText = "刷新程序缓存,重新加载数据源";
             this.RefreshToolStripMenuItem.Click += new System.EventHandler(this.RefreshToolStripMenuItem_Click);
-            // 
-            // CopyTablePathToClipboardToolStripMenuItem
-            // 
-            this.CopyTablePathToClipboardToolStripMenuItem.Name = "CopyTablePathToClipboardToolStripMenuItem";
-            this.CopyTablePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.CopyTablePathToClipboardToolStripMenuItem.Text = "复制表路径到剪切板";
-            this.CopyTablePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFullFilePathToClipboard);
             // 
             // textBox
             // 
@@ -168,7 +159,6 @@ namespace C2.Controls.Left
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ReviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ReviewStruToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CopyTablePathToClipboardToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ToolStripMenuItem RefreshToolStripMenuItem;
     }
