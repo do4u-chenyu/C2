@@ -11,9 +11,5 @@ namespace C2.Dialogs.C2OperatorViews
             InitializeComponent();
         }
 
-        private void label4_Click(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }

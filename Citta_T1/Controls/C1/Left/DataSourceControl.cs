@@ -52,11 +52,8 @@ namespace C2.Controls.Left
         {
             set
             {
-                if (_SelectLinkButton != value)
-                {
-                    _SelectLinkButton = value;
-                    OnSelectLinkButton(value);
-                }
+                _SelectLinkButton = value;
+                OnSelectLinkButton(value);
             }
             get 
             {

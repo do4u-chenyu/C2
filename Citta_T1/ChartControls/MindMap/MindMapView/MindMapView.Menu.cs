@@ -314,7 +314,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 MenuOpenDataSource.Image = Properties.Resources.数据;
 
-                MenuOpenDataSource.Text = String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.'));
+                MenuOpenDataSource.Text = dataItem.DataType == DatabaseType.Null ? String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.')) : String.Format("{0}[{1}]", dataItem.FileName, dataItem.DataType);
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewData,
                 MenuCreateChart,
@@ -325,6 +325,7 @@ namespace C2.Controls.MapViews
                 MenuViewData.Text = Lang._("ViewData");
                 MenuViewData.Click += MenuPreViewData_Click;
 
+                MenuCreateChart.Enabled = dataItem.DataType == DatabaseType.Null ? false : true;
                 MenuCreateChart.Image = Properties.Resources.getchart;              
                 MenuCreateChart.Text = Lang._("CreateChart");
                 MenuCreateChart.Tag = dataItem;

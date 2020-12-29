@@ -1535,6 +1535,9 @@
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2FilterOperatorView.resx">
       <DependentUpon>C2FilterOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2MinOperatorView.resx">
+      <DependentUpon>C2MinOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SortOperatorView.resx">
       <DependentUpon>C2SortOperatorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1940,6 +1943,7 @@
     <None Include="Resources\mindMap.png" />
     <Content Include="Resources\Opcontrol_ico\AI.ico" />
     <Content Include="Resources\Opcontrol_ico\python.ico" />
+    <None Include="Resources\Opcontrol_ico\sql.ico" />
     <Content Include="Resources\Opcontrol_ico\关联算子.ico" />
     <Content Include="Resources\Opcontrol_ico\关键词过滤.ico" />
     <Content Include="Resources\Opcontrol_ico\分组.ico" />
@@ -1975,6 +1979,8 @@
     <None Include="Resources\organization.png" />
     <None Include="Resources\Operators\control_play_blue.png" />
     <None Include="Resources\Operators\sql_help.png" />
+    <None Include="Resources\Operators\db_connect.png" />
+    <None Include="Resources\Operators\table_view.png" />
     <Content Include="Resources\PictureIconLib\119_提取.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

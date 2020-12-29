@@ -1962,4 +1962,13 @@
   <data name="sql_help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\sql_help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="db_connect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\db_connect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sql_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Opcontrol_ico\sql.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="table_view" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\table_view.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

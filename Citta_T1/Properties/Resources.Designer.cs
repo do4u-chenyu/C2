@@ -493,6 +493,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap db_connect {
+            get {
+                object obj = ResourceManager.GetObject("db_connect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap dbnet {
             get {
                 object obj = ResourceManager.GetObject("dbnet", resourceCulture);
@@ -1982,6 +1992,16 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon sql_icon {
+            get {
+                object obj = ResourceManager.GetObject("sql_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap stan_op {
@@ -2037,6 +2057,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap Table {
             get {
                 object obj = ResourceManager.GetObject("Table", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap table_view {
+            get {
+                object obj = ResourceManager.GetObject("table_view", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

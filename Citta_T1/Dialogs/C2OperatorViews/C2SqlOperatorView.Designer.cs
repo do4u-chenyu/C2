@@ -33,10 +33,10 @@ namespace C2.Dialogs.C2OperatorViews
             this.comboBoxDataBase = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.bnHelp = new System.Windows.Forms.Button();
+            this.bnConnect = new System.Windows.Forms.Button();
+            this.bnView = new System.Windows.Forms.Button();
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -68,14 +68,14 @@ namespace C2.Dialogs.C2OperatorViews
             | System.Windows.Forms.AnchorStyles.Left)));
             this.treeConnections.Location = new System.Drawing.Point(8, 152);
             this.treeConnections.Name = "treeConnections";
-            this.treeConnections.Size = new System.Drawing.Size(182, 284);
+            this.treeConnections.Size = new System.Drawing.Size(201, 284);
             this.treeConnections.TabIndex = 3;
             // 
             // bnExecute
             // 
             this.bnExecute.Image = global::C2.Properties.Resources.control_play_blue;
             this.bnExecute.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bnExecute.Location = new System.Drawing.Point(196, 9);
+            this.bnExecute.Location = new System.Drawing.Point(215, 9);
             this.bnExecute.Name = "bnExecute";
             this.bnExecute.Size = new System.Drawing.Size(80, 22);
             this.bnExecute.TabIndex = 4;
@@ -88,7 +88,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(196, 37);
+            this.splitContainer1.Location = new System.Drawing.Point(215, 37);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -99,7 +99,7 @@ namespace C2.Dialogs.C2OperatorViews
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gridOutput);
-            this.splitContainer1.Size = new System.Drawing.Size(556, 399);
+            this.splitContainer1.Size = new System.Drawing.Size(537, 399);
             this.splitContainer1.SplitterDistance = 143;
             this.splitContainer1.TabIndex = 9;
             // 
@@ -110,7 +110,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.textEditorControl1.Font = new System.Drawing.Font("Courier New", 10F);
             this.textEditorControl1.Location = new System.Drawing.Point(0, 0);
             this.textEditorControl1.Name = "textEditorControl1";
-            this.textEditorControl1.Size = new System.Drawing.Size(556, 143);
+            this.textEditorControl1.Size = new System.Drawing.Size(537, 143);
             this.textEditorControl1.SyntaxHighlighting = "SQL";
             this.textEditorControl1.TabIndex = 9;
             // 
@@ -123,7 +123,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.gridOutput.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridOutput.Location = new System.Drawing.Point(0, 0);
             this.gridOutput.Name = "gridOutput";
-            this.gridOutput.Size = new System.Drawing.Size(556, 252);
+            this.gridOutput.Size = new System.Drawing.Size(537, 252);
             this.gridOutput.TabIndex = 7;
             // 
             // comboBoxConnection
@@ -131,66 +131,47 @@ namespace C2.Dialogs.C2OperatorViews
             this.comboBoxConnection.FormattingEnabled = true;
             this.comboBoxConnection.Location = new System.Drawing.Point(6, 38);
             this.comboBoxConnection.Name = "comboBoxConnection";
-            this.comboBoxConnection.Size = new System.Drawing.Size(184, 20);
+            this.comboBoxConnection.Size = new System.Drawing.Size(133, 20);
             this.comboBoxConnection.TabIndex = 10;
             // 
             // comboBoxDataBase
             // 
+            this.comboBoxDataBase.Font = new System.Drawing.Font("宋体", 10F);
             this.comboBoxDataBase.FormattingEnabled = true;
             this.comboBoxDataBase.Location = new System.Drawing.Point(6, 94);
             this.comboBoxDataBase.Name = "comboBoxDataBase";
-            this.comboBoxDataBase.Size = new System.Drawing.Size(184, 20);
+            this.comboBoxDataBase.Size = new System.Drawing.Size(133, 21);
             this.comboBoxDataBase.TabIndex = 11;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 10F);
             this.label2.Location = new System.Drawing.Point(6, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
+            this.label2.Size = new System.Drawing.Size(70, 14);
             this.label2.TabIndex = 12;
-            this.label2.Text = "当前连接:";
+            this.label2.Text = "已配连接:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 10F);
             this.label3.Location = new System.Drawing.Point(6, 71);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.Size = new System.Drawing.Size(42, 14);
             this.label3.TabIndex = 13;
             this.label3.Text = "架构:";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(304, 12);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(47, 16);
-            this.radioButton1.TabIndex = 14;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "实时";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(360, 12);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(47, 16);
-            this.radioButton2.TabIndex = 15;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "提取";
-            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 10F);
             this.label4.Location = new System.Drawing.Point(6, 132);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 12);
+            this.label4.Size = new System.Drawing.Size(56, 14);
             this.label4.TabIndex = 16;
             this.label4.Text = "表预览:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // bnHelp
             // 
@@ -205,14 +186,38 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnHelp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnHelp.UseVisualStyleBackColor = true;
             // 
+            // bnConnect
+            // 
+            this.bnConnect.Image = global::C2.Properties.Resources.db_connect;
+            this.bnConnect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bnConnect.Location = new System.Drawing.Point(145, 37);
+            this.bnConnect.Name = "bnConnect";
+            this.bnConnect.Size = new System.Drawing.Size(65, 23);
+            this.bnConnect.TabIndex = 17;
+            this.bnConnect.Text = "连接库";
+            this.bnConnect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bnConnect.UseVisualStyleBackColor = true;
+            // 
+            // bnView
+            // 
+            this.bnView.Image = global::C2.Properties.Resources.table_view;
+            this.bnView.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bnView.Location = new System.Drawing.Point(145, 94);
+            this.bnView.Name = "bnView";
+            this.bnView.Size = new System.Drawing.Size(65, 23);
+            this.bnView.TabIndex = 18;
+            this.bnView.Text = "预览表";
+            this.bnView.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bnView.UseVisualStyleBackColor = true;
+            // 
             // C2SqlOperatorView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(759, 481);
+            this.ControlBox = true;
+            this.Controls.Add(this.bnView);
+            this.Controls.Add(this.bnConnect);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxDataBase);
@@ -222,8 +227,12 @@ namespace C2.Dialogs.C2OperatorViews
             this.Controls.Add(this.bnExecute);
             this.Controls.Add(this.treeConnections);
             this.Controls.Add(this.bottomPanel);
+            this.Icon = global::C2.Properties.Resources.sql_icon;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "C2SqlOperatorView";
-            this.Text = "Sql算子设置";
+            this.ShowIcon = true;
+            this.Text = "自定义Sql算子设置";
             this.Controls.SetChildIndex(this.bottomPanel, 0);
             this.Controls.SetChildIndex(this.treeConnections, 0);
             this.Controls.SetChildIndex(this.bnExecute, 0);
@@ -233,9 +242,9 @@ namespace C2.Dialogs.C2OperatorViews
             this.Controls.SetChildIndex(this.comboBoxDataBase, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.radioButton1, 0);
-            this.Controls.SetChildIndex(this.radioButton2, 0);
             this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.bnConnect, 0);
+            this.Controls.SetChildIndex(this.bnView, 0);
             this.bottomPanel.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -258,9 +267,9 @@ namespace C2.Dialogs.C2OperatorViews
         private System.Windows.Forms.ComboBox comboBoxDataBase;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button bnHelp;
+        private System.Windows.Forms.Button bnConnect;
+        private System.Windows.Forms.Button bnView;
     }
 }
