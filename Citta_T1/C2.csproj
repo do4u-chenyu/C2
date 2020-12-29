@@ -1767,9 +1767,6 @@
     <Content Include="Resources\Images\cut.png" />
     <None Include="Resources\Images\delete.png" />
     <None Include="Resources\Images\document.png" />
-    <None Include="Resources\Images\document_128.png" />
-    <None Include="Resources\Images\document_16.png" />
-    <None Include="Resources\Images\document_64.png" />
     <None Include="Resources\Images\down.png" />
     <None Include="Resources\Images\edit.png" />
     <None Include="Resources\Images\edit_alignment.png" />
@@ -1824,11 +1821,6 @@
     <None Include="Resources\Images\layout_tree_right.png" />
     <None Include="Resources\Images\list_bullets.png" />
     <None Include="Resources\Images\list_numbered.png" />
-    <None Include="Resources\Images\logo_background.png" />
-    <None Include="Resources\Images\logo_large.png" />
-    <None Include="Resources\Images\logo_trans.png" />
-    <None Include="Resources\Images\logo128.png" />
-    <None Include="Resources\Images\logo64.png" />
     <Content Include="Resources\Images\mail.png" />
     <None Include="Resources\Images\mask.png" />
     <None Include="Resources\Images\menu.png" />
@@ -1963,7 +1955,6 @@
     <Content Include="Resources\Opcontrol_ico\筛选.ico" />
     <Content Include="Resources\Opcontrol_ico\随机.ico" />
     <Content Include="Resources\Opcontrol_ico\频率.ico" />
-    <Content Include="Resources\Operators\AI.png" />
     <None Include="Resources\Operators\AI_op.png" />
     <None Include="Resources\Operators\avg_op.png" />
     <None Include="Resources\Operators\coll_op.png" />
@@ -1974,7 +1965,6 @@
     <None Include="Resources\Operators\min_op.png" />
     <None Include="Resources\Operators\multi_op.png" />
     <None Include="Resources\Operators\order_op.png" />
-    <Content Include="Resources\Operators\python.png" />
     <None Include="Resources\Operators\python_op.png" />
     <None Include="Resources\Operators\rand_op.png" />
     <None Include="Resources\Operators\relate_op.png" />
@@ -1982,22 +1972,9 @@
     <None Include="Resources\Operators\subtra_op.png" />
     <None Include="Resources\Operators\union_op.png" />
     <None Include="Resources\Operators\word_op.png" />
-    <Content Include="Resources\Operators\关联.png" />
-    <Content Include="Resources\Operators\关键词过滤.png" />
-    <Content Include="Resources\Operators\分组.png" />
-    <Content Include="Resources\Operators\多源.png" />
-    <Content Include="Resources\Operators\差集.png" />
-    <Content Include="Resources\Operators\平均值.png" />
-    <Content Include="Resources\Operators\并集.png" />
-    <Content Include="Resources\Operators\排序.png" />
-    <Content Include="Resources\Operators\最大值.png" />
-    <Content Include="Resources\Operators\最小值.png" />
-    <Content Include="Resources\Operators\标准.png" />
-    <Content Include="Resources\Operators\碰撞.png" />
-    <Content Include="Resources\Operators\筛选.png" />
-    <Content Include="Resources\Operators\随机.png" />
-    <Content Include="Resources\Operators\频率.png" />
     <None Include="Resources\organization.png" />
+    <None Include="Resources\Operators\control_play_blue.png" />
+    <None Include="Resources\Operators\sql_help.png" />
     <Content Include="Resources\PictureIconLib\119_提取.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

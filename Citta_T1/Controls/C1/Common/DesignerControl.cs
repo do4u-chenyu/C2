@@ -174,11 +174,15 @@ namespace C2.Controls.Common
                 return;
             }
 
-            string message = FileUtil.FileExistOrUse(SelectedDataSource.FilePath);
-            if (!string.IsNullOrEmpty(message))
+            //非数据库数据源需要判断文件是否存在或被使用
+            if(SelectedDataSource.DataType == DatabaseType.Null)
             {
-                MessageBox.Show(message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                string message = FileUtil.FileExistOrUse(SelectedDataSource.FilePath);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    MessageBox.Show(message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
             }
 
             if (OpWidget == null)

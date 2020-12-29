@@ -1,6 +1,7 @@
 ﻿
 using C2.Business.Model;
 using C2.Core;
+using C2.Model;
 using C2.Utils;
 using System;
 using System.Windows.Forms;
@@ -139,10 +140,11 @@ namespace C2.Controls.Left
                 // 使用`DataObject`对象来传参数，更加自由
                 DataObject dragDropData = new DataObject();
                 dragDropData.SetData("Type", ElementType.DataSource);
-                dragDropData.SetData("Path", FullFilePath);    // 数据源文件全路径
-                dragDropData.SetData("Text", DataSourceName);  // 数据源名称
-                dragDropData.SetData("Separator", Separator);  // 分隔符
-                dragDropData.SetData("ExtType", ExtType);      // 扩展名,文件类型
+                dragDropData.SetData("DataType", DatabaseType.Null);  //本地数据还是外部数据
+                dragDropData.SetData("Path", FullFilePath);           // 数据源文件全路径
+                dragDropData.SetData("Text", DataSourceName);         // 数据源名称
+                dragDropData.SetData("Separator", Separator);         // 分隔符
+                dragDropData.SetData("ExtType", ExtType);             // 扩展名,文件类型
                 // 需要记录他的编码格式
                 dragDropData.SetData("Encoding", Encoding);
                 this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);

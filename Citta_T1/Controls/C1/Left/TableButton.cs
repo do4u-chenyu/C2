@@ -96,8 +96,9 @@ namespace C2.Controls.Left
                 // 使用`DataObject`对象来传参数，更加自由
                 DataObject dragDropData = new DataObject();
                 dragDropData.SetData("Type", ElementType.DataSource);
-                dragDropData.SetData("Path", FullFilePath);    // 数据源文件全路径
-                dragDropData.SetData("Text", DataSourceName);  // 数据源名称
+                dragDropData.SetData("DataType", DatabaseType.Oracle);   //本地数据还是外部数据
+                dragDropData.SetData("TableInfo", TableItem);            // 数据表信息
+                dragDropData.SetData("Text", TableItem.DataTable.Name);  // 数据表名
          
                 this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }

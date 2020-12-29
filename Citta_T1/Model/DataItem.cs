@@ -35,6 +35,9 @@ namespace C2.Model
         {
             DataType = dataType;
             Database = database;
+            FilePath = database.AllDatabaeInfo;
+            FileName = database.DataTable.Name;
+            FileType = OpUtil.ExtType.Database;
         }
 
         public string FilePath { get; set; }
