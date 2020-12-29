@@ -790,6 +790,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CursorUtil.cs" />
     <Compile Include="Utils\DbUtil.cs" />
     <Compile Include="Utils\DgvUtil.cs" />
     <Compile Include="Utils\XmlUtil.cs" />

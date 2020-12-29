@@ -110,6 +110,7 @@ namespace C2.Controls.Left
             tablePoint.Y += ButtonGapHeight;
             tb.Location = tablePoint;
         }
+
         // 程序启动加载时调用
         public void GenDataButton(DataButton dataButton)
         {
@@ -118,6 +119,12 @@ namespace C2.Controls.Left
             LayoutModelButtonLocation(dataButton); // 递增
             this.DataSourceDictI2B.Add(dataButton.FullFilePath, dataButton);
             this.localFrame.Controls.Add(dataButton);
+        }
+        public void UpdateLinkButton(LinkButton linkButton, DatabaseItem tmpDatabaseInfo)
+        {
+            this.LinkSourceDictI2B.Remove(linkButton.FullFilePath);
+            linkButton.DatabaseItem = tmpDatabaseInfo;
+            this.LinkSourceDictI2B.Add(linkButton.FullFilePath, linkButton);
         }
         public void GenLinkButton(LinkButton linkButton)
         {
@@ -276,15 +283,18 @@ namespace C2.Controls.Left
         {
             LinkButton linkButton = new LinkButton(dbinfo);
             GenLinkButton(linkButton);
-            SelectLinkButton = linkButton;
-
-            ConnectDatabase(dbinfo);//连接一次数据库，刷新架构及数据表
+            if (updateFrameAndTables)
+                ConnectDatabase(dbinfo);//连接一次数据库，刷新架构及数据表
             SaveExternalData();
         }
 
         private void ConnectDatabase(DatabaseItem databaseInfo)
         {
-            // TODO Dk 优化代码
+            /* 
+             * TODO Dk 优化代码
+             * 1. 优化函数名称，首先这个名字取得不怎么好
+             * 2. 优化代码逻辑，一旦出现连接不上的问题依然会查两次数据库，等待时间很长，每次连接的时候最好测试一下连接
+             */
             //连接数据库
             Connection conn = new Connection(databaseInfo);
 

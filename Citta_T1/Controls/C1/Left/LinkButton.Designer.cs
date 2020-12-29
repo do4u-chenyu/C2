@@ -73,7 +73,7 @@ namespace C2.Controls.Left
             this.EditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.EditToolStripMenuItem.Text = "编辑连接";
             this.EditToolStripMenuItem.ToolTipText = "数据源配置\r\n";
-            this.EditToolStripMenuItem.Click += new System.EventHandler(this.EiditToolStripMenuItem_Click);
+            this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // ConnectToolStripMenuItem
             // 

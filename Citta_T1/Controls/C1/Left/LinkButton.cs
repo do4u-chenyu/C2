@@ -62,14 +62,14 @@ namespace C2.Controls.Left
         }
 
         #region 右键菜单
-        private void EiditToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /*
              * 编辑连接
              * 1、如果编辑后的dialog.data与link本身的data一致，不做操作
              * 2、如果不一致，先要判断dialog.data是否在dict里，在里面先移除原来的key再添加
              */
-            var dialog = new AddDatabaseDialog(DatabaseItem);
+            var dialog = new AddDatabaseDialog(DatabaseItem, DatabaseDialogMode.Edit, this);
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
                 if (DatabaseItem.AllDatabaeInfo.Equals(dialog.DatabaseInfo.AllDatabaeInfo))
