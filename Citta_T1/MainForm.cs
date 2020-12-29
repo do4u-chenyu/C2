@@ -511,7 +511,6 @@ namespace C2
 
         public void OpenDocument(string filename, bool readOnly)
         {
-            // TODO DK 加载C1的文档
             BaseDocumentForm form = FindDocumentForm(filename);
             if (form != null)
             {

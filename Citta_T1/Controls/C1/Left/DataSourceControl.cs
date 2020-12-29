@@ -296,7 +296,7 @@ namespace C2.Controls.Left
              * 2. 优化代码逻辑，一旦出现连接不上的问题依然会查两次数据库，等待时间很长，每次连接的时候最好测试一下连接
              */
             //连接数据库
-            Connection conn = new Connection(databaseInfo);
+            OraConnection conn = new OraConnection(databaseInfo);
             if (!DbUtil.TestConn(conn, true))
                 return;
             //刷新架构
@@ -337,7 +337,7 @@ namespace C2.Controls.Left
         private void FrameCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             //根据架构改变数据表
-            Connection conn = new Connection(SelectLinkButton.DatabaseItem);
+            OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
             List<Table> tables = DbUtil.GetTablesByUser(conn, this.frameCombo.Text);
             UpdateTables(tables, SelectLinkButton.DatabaseItem);
         }

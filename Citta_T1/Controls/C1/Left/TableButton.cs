@@ -22,7 +22,7 @@ namespace C2.Controls.Left
 
         public DatabaseItem TableItem { get; set; }
         public string LinkSourceName { get; set; }
-        public Connection connection;
+        public OraConnection connection;
 
         public TableButton(DatabaseItem tableItem)
         {
@@ -32,7 +32,7 @@ namespace C2.Controls.Left
             txtButton.Text = FileUtil.ReName(tableItem.DataTable.Name);
             this.oldTextString = tableItem.DataTable.Name;
             LinkSourceName = tableItem.DataTable.Name;
-            connection = new Connection(this.TableItem);
+            connection = new OraConnection(this.TableItem);
         }
 
         private void TableButton_Load(object sender, EventArgs e)
@@ -56,13 +56,13 @@ namespace C2.Controls.Left
         {
             PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm();
             previewDbDataForm.MaxNumChanged += new MaxNumChangedEventHandler(OnDataGridViewMaxNumChanged);
-            if (DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name, previewDbDataForm.MaxNum))
+            if (DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable.Name, previewDbDataForm.MaxNum))
                 previewDbDataForm.Show();
         }
         private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
         {
             PreviewDbDataForm pddf = (sender as PreviewDbDataForm);
-            DbUtil.FillDGVWithTbContent(pddf.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name, pddf.MaxNum);
+            DbUtil.FillDGVWithTbContent(pddf.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable.Name, pddf.MaxNum);
         }
 
         #endregion
@@ -117,7 +117,7 @@ namespace C2.Controls.Left
         private void ReviewStruToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PreviewTableSchema previewTableSchema = new PreviewTableSchema();
-            DbUtil.FillDGVWithTbSchema(previewTableSchema.DataGridView, new Connection(TableItem), this.TableItem.DataTable.Name);
+            DbUtil.FillDGVWithTbSchema(previewTableSchema.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable.Name);
             previewTableSchema.Show();
         }
     }

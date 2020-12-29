@@ -9,9 +9,9 @@ namespace C2.Database
     public class Schema
     {
         public string Name;
-        public Connection ParentConnection;
+        public OraConnection ParentConnection;
 
-        public Schema(Connection Parent)
+        public Schema(OraConnection Parent)
         {
             ParentConnection = Parent;
         }

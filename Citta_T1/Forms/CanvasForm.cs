@@ -288,7 +288,6 @@ namespace C2.Forms
         }
         public override bool SaveAs()
         {
-            // TODO DK 文档另存为
             return true;
         }
         public override string GetFileName()

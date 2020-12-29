@@ -82,7 +82,7 @@ namespace C2.Dialogs
                 return false;
             } 
 
-            Connection conn = new Connection(tmpDatabaseInfo);
+            OraConnection conn = new OraConnection(tmpDatabaseInfo);
             if (!DbUtil.TestConn(conn, true))
                 return false;
 
@@ -129,7 +129,7 @@ namespace C2.Dialogs
             DatabaseItem tmpDatabaseInfo = GenDatabaseInfoFormDialog();
             //如果新旧一致，直接返回了
 
-            Connection conn = new Connection(tmpDatabaseInfo);
+            OraConnection conn = new OraConnection(tmpDatabaseInfo);
             if (DbUtil.TestConn(conn))
                 HelpUtil.ShowMessageBox(HelpUtil.DbConnectSucceeded, "连接成功", MessageBoxIcon.Information);
             else

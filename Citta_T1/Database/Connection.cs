@@ -7,11 +7,11 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace C2.Database
 {
-    public class Connection
+    public class OraConnection
     {
         public string Name, User, Pass, Host, Sid, Service, Port;
-        public Connection() { }
-        public Connection(DatabaseItem dbi)
+        public OraConnection() { }
+        public OraConnection(DatabaseItem dbi)
         {
             this.Name = dbi.Server;
             this.User = dbi.User;
@@ -21,7 +21,7 @@ namespace C2.Database
             this.Service = dbi.Service;
             this.Port = dbi.Port;
         }
-        public Connection(string name, string user, string pass, string host, string sid, string service, string port)
+        public OraConnection(string name, string user, string pass, string host, string sid, string service, string port)
         {
             this.Name = name;
             this.User = user;
@@ -31,9 +31,9 @@ namespace C2.Database
             this.Service = service;
             this.Port = port;
         }
-        public Connection Clone()
+        public OraConnection Clone()
         {
-            Connection tmp = new Connection();
+            OraConnection tmp = new OraConnection();
             tmp.Name = this.Name;
             tmp.User = this.User;
             tmp.Pass = this.Pass;

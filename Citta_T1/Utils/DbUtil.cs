@@ -57,7 +57,7 @@ namespace C2.Utils
         //    OracleDataAdapter oda = new OracleDataAdapter(oconn);
         //    oda.Fill()
         //}
-        public static bool TestConn(Connection conn, bool showDetail=false)
+        public static bool TestConn(OraConnection conn, bool showDetail=false)
         {
             using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
             {
@@ -78,7 +78,7 @@ namespace C2.Utils
                 }
             }
         }
-        public static List<string> GetUsers(Connection conn)
+        public static List<string> GetUsers(OraConnection conn)
         {
             List<string> users = new List<string>();
             using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
@@ -110,12 +110,8 @@ namespace C2.Utils
             return users;
         }
 
-        public static List<Table> GetTablesByUser(Connection conn, string userName)
+        public static List<Table> GetTablesByUser(OraConnection conn, string userName)
         {
-            /* TODO DK 实现有误，需要修改
-             * 应该使用当前用户去查询all_tables
-             */
-            //bool owner = conn.User.ToUpper() == userName.ToUpper();
             List<Table> tables = new List<Table>();
             using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
             {
@@ -153,7 +149,7 @@ namespace C2.Utils
             return tables;
         }
 
-        public static bool FillDGVWithTbSchema(DataGridView gridOutput, Connection conn, string tableName)
+        public static bool FillDGVWithTbSchema(DataGridView gridOutput, OraConnection conn, string tableName)
         {
             using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
             {
@@ -197,7 +193,7 @@ namespace C2.Utils
             }
         }
 
-        public static bool FillDGVWithTbContent(DataGridView gridOutput, Connection conn, string tableName, int maxNum)
+        public static bool FillDGVWithTbContent(DataGridView gridOutput, OraConnection conn, string tableName, int maxNum)
         {
             using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
             {
