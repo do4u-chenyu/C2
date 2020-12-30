@@ -1,10 +1,8 @@
 ﻿using C2.Database;
+using C2.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Utils
@@ -77,6 +75,22 @@ namespace C2.Utils
                     }
                 }
             }
+        }
+
+        public static bool TestConn(DataItem item, bool showDetail = false)
+        {
+            bool ret = false;
+            switch (item.DataType)
+            {
+                case DatabaseType.Oracle:
+                    ret = TestConn(new OraConnection(item));
+                    break;
+                case DatabaseType.Hive:
+                    break;
+                default:
+                    break;
+            }
+            return ret;
         }
         public static List<string> GetUsers(OraConnection conn)
         {

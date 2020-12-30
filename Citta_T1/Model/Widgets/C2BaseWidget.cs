@@ -88,7 +88,7 @@ namespace C2.Model.Widgets
         public static void DoPreViewDataSource(DataItem hitItem)
         {
             if (hitItem != null)
-                Global.GetMainForm().PreViewDataByFullFilePath(hitItem);
+                Global.GetMainForm().PreViewDataSource(hitItem);
         }
     }
 }

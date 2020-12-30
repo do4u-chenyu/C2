@@ -17,6 +17,11 @@ namespace C2.Model
         {
             return FileType == OpUtil.ExtType.Unknow;
         }
+
+        public bool IsDatabase()
+        {
+            return FileType == OpUtil.ExtType.Database;
+        }
         public DataItem()
         {
 
@@ -34,7 +39,7 @@ namespace C2.Model
         public DataItem(DatabaseType dataType, DatabaseItem database)
         {
             DataType = dataType;
-            Database = database;
+            DBItem = database;
             FilePath = database.AllDatabaeInfo;
             FileName = database.DataTable.Name;
             FileType = OpUtil.ExtType.Database;
@@ -50,6 +55,7 @@ namespace C2.Model
         public List<string> SelectedItems { get; set; }
         public ResultType ResultDataType { get; set; }
         public DatabaseType DataType { get; set; }
-        public DatabaseItem Database { get; set; }
+        public DatabaseItem DBItem { get; set; }
+
     }
 }

@@ -129,6 +129,8 @@ namespace C2.Controls.Bottom
             ControlUtil.DisableOrder(this.dataGridView);
         }
 
+        public void PreViewDataByDatabase()
+        { }
         private void dataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,

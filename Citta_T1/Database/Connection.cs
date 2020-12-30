@@ -21,6 +21,10 @@ namespace C2.Database
             this.Service = dbi.Service;
             this.Port = dbi.Port;
         }
+
+        public OraConnection(DataItem item) : this(item.DBItem)
+        {
+        }
         public OraConnection(string name, string user, string pass, string host, string sid, string service, string port)
         {
             this.Name = name;

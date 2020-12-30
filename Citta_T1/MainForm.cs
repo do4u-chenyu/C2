@@ -679,15 +679,28 @@ namespace C2
             this.ShowBottomPreview();
         }
 
-        public void PreViewDataByFullFilePath(DataItem dataItem, bool isForceRead = false)
+        public void PreViewDataSource(DataItem item, bool isForceRead = false)
         {
-            if (!File.Exists(dataItem.FilePath))
+            if (item.IsDatabase())
+            {
+                if (DbUtil.TestConn(item))
+                {
+                    this.ShowBottomPanel();
+                    this.bottomPreview.PreViewDataByDatabase();
+                    this.ShowBottomPreview();
+                }
+                else 
+                    HelpUtil.ShowMessageBox("该数据库无法连接");
+                return;
+            }
+
+            if (!File.Exists(item.FilePath))
             {
                 HelpUtil.ShowMessageBox("该数据文件不存在");
                 return;
             }
             this.ShowBottomPanel();
-            this.bottomPreview.PreViewDataByFullFilePath(dataItem.FilePath, dataItem.FileSep, dataItem.FileType, dataItem.FileEncoding, isForceRead);
+            this.bottomPreview.PreViewDataByFullFilePath(item.FilePath, item.FileSep, item.FileType, item.FileEncoding, isForceRead);
             this.ShowBottomPreview();
         }
         private void ShowLogView()
