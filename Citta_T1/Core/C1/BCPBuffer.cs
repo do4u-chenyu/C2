@@ -63,6 +63,11 @@ namespace C2.Core
             return GetCachePreviewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, isForceRead);
         }
 
+        public List<string> GetCachePreviewOracleTable()
+        {
+            return new List<String>();
+        }
+
         private string GetCachePreviewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = String.Empty;
