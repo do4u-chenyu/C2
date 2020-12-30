@@ -158,7 +158,7 @@ namespace C2.Utils
                     using (OracleConnection con = new OracleConnection(conn.ConnectionString))
                     {
                         con.Open();
-                        string sql = String.Format(@"select A.COLUMN_NAME,A.DATA_TYPE  from user_tab_columns A where TABLE_NAME='{0}'", tableName.ToUpper());
+                        string sql = String.Format(@"select a.column_name, a.data_type from all_tab_columns a where TABLE_NAME='{0}'", tableName.ToUpper());
                         using (OracleCommand comm = new OracleCommand(sql, con))
                         {
                             using (OracleDataReader rdr = comm.ExecuteReader())
@@ -193,7 +193,7 @@ namespace C2.Utils
             }
         }
 
-        public static bool FillDGVWithTbContent(DataGridView gridOutput, OraConnection conn, string tableName, int maxNum)
+        public static bool FillDGVWithTbContent(DataGridView gridOutput, OraConnection conn, Table table, int maxNum)
         {
             using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
             {
@@ -202,7 +202,7 @@ namespace C2.Utils
                     using (OracleConnection con = new OracleConnection(conn.ConnectionString))
                     {
                         con.Open();
-                        string sql = String.Format(@"select * from {0}", tableName);
+                        string sql = String.Format(@"select * from {0}.{1}", table.UserName.ToUpper(), table.Name);
                         using (OracleCommand comm = new OracleCommand(sql, con))
                         {
                             using (OracleDataReader rdr = comm.ExecuteReader())

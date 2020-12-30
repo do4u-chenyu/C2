@@ -56,13 +56,13 @@ namespace C2.Controls.Left
         {
             PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm();
             previewDbDataForm.MaxNumChanged += new MaxNumChangedEventHandler(OnDataGridViewMaxNumChanged);
-            if (DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable.Name, previewDbDataForm.MaxNum))
+            if (DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable, previewDbDataForm.MaxNum))
                 previewDbDataForm.Show();
         }
         private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
         {
             PreviewDbDataForm pddf = (sender as PreviewDbDataForm);
-            DbUtil.FillDGVWithTbContent(pddf.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable.Name, pddf.MaxNum);
+            DbUtil.FillDGVWithTbContent(pddf.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable, pddf.MaxNum);
         }
 
         #endregion
