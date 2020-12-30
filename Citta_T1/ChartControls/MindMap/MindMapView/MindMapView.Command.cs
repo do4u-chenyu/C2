@@ -185,8 +185,6 @@ namespace C2.Controls.MapViews
         {
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
-                //TODO
-                //目前连同topic可以一起被剪切复制，不知道后续是否会存在逻辑不封闭
                 var topics = SelectedTopics.OrderBy(t => t.Level).ToArray();
                 var command = new CutCommand(topics);
                 ExecuteCommand(command);

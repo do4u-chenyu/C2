@@ -26,7 +26,7 @@ namespace C2.Business.Schedule.Cmd
 
             //拼接分组字段
             string groupFieldCmd = "-k" + TransInputLine(option.GetOption("factor0"));
-            //TODO
+
             for (int i = 1; i < GetOptionFactorCount(); i++)
             {
                 string tmpFactor = option.GetOption("factor" + i.ToString());
