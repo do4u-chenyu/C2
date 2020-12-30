@@ -351,18 +351,16 @@ namespace C2.Utils
                 List<List<string>> result = new List<List<string>>();
                 for (int i = 0; i < maxNumOfRow; i++)
                 {
-                    List<string> row = new List<string> { "" };
-                    result.AddRange((IEnumerable<List<string>>)row);
+                    result.Add(new List<string> { String.Empty });
                 }
                 return result;
             }
             int maxNumOfCol = 0;
             List<string> blankRow = new List<string> { };
-            List<string> headers = datas[0];
             for (int i = 0; i < datas.Count; i++)
                 maxNumOfCol = Math.Max(datas[i].Count, maxNumOfCol);
             for (int i = 0; i < maxNumOfCol; i++)
-                blankRow.Add("");
+                blankRow.Add(String.Empty);
             for (int i = 0; i < Math.Max(maxNumOfRow, datas.Count); i++)
             {
                 if (i >= datas.Count)

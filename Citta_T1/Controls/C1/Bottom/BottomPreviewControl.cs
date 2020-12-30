@@ -1,4 +1,5 @@
 ﻿using C2.Core;
+using C2.Model;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -129,8 +130,36 @@ namespace C2.Controls.Bottom
             ControlUtil.DisableOrder(this.dataGridView);
         }
 
-        public void PreViewDataByDatabase()
-        { }
+        public void PreViewDataByDatabase(DataItem item)
+        { 
+            switch (item.DataType)
+            {
+                case DatabaseType.Oracle:
+                    PreViewDataByOracle(item.DBItem);
+                    break;
+                case DatabaseType.Hive:
+                default:
+                    break;
+            }
+        }
+
+        private void PreViewDataByOracle(DatabaseItem dbItem, int mNumOfLine = 100)
+        {
+            // TODO 调数据库实现真正预览
+            List<List<string>> datas = new List<List<string>> { };
+            List<string> rows = BCPBuffer.GetInstance().GetCachePreviewOracleTable();
+
+            for (int i = 0; i < Math.Min(rows.Count, mNumOfLine); i++)
+                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(OpUtil.DefaultSeparator)));                                                 // TODO 没考虑到分隔符
+            datas = FileUtil.FormatDatas(datas, mNumOfLine);
+            List<string> headers = datas[0];
+            datas.RemoveAt(0);
+
+            DvgClean();
+            FileUtil.FillTable(this.dataGridView, headers, datas, mNumOfLine - 1);
+            ControlUtil.DisableOrder(this.dataGridView);
+
+        }
         private void dataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,

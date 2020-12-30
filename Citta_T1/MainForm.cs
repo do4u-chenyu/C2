@@ -686,7 +686,7 @@ namespace C2
                 if (DbUtil.TestConn(item))
                 {
                     this.ShowBottomPanel();
-                    this.bottomPreview.PreViewDataByDatabase();
+                    this.bottomPreview.PreViewDataByDatabase(item);
                     this.ShowBottomPreview();
                 }
                 else 
