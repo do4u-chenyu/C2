@@ -89,6 +89,23 @@ namespace C2.Dialogs
             DatabaseInfo = tmpDatabaseInfo;
             return base.OnOKButtonClick();
         }
+        private void TestButton_Click(object sender, EventArgs e)
+        {
+            if (InputHasEmpty())
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbInfoIsEmptyInfo);
+                return;
+            }
+
+            DatabaseItem tmpDatabaseInfo = GenDatabaseInfoFormDialog();
+            //如果新旧一致，直接返回了
+
+            OraConnection conn = new OraConnection(tmpDatabaseInfo);
+            if (DbUtil.TestConn(conn))
+                HelpUtil.ShowMessageBox(HelpUtil.DbConnectSucceeded, "连接成功", MessageBoxIcon.Information);
+            else
+                HelpUtil.ShowMessageBox(HelpUtil.DbConnectFailed, "连接失败", MessageBoxIcon.Information);
+        }
 
         private bool InputHasEmpty()
         {
