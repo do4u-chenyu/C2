@@ -133,6 +133,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.comboBoxConnection.Name = "comboBoxConnection";
             this.comboBoxConnection.Size = new System.Drawing.Size(133, 20);
             this.comboBoxConnection.TabIndex = 10;
+            this.comboBoxConnection.SelectedIndexChanged += new System.EventHandler(this.ComboBoxConnection_SelectedIndexChanged);
             // 
             // comboBoxDataBase
             // 
@@ -210,6 +211,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnView.Text = "预览表";
             this.bnView.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnView.UseVisualStyleBackColor = true;
+            this.bnView.Click += BnView_Click;
             // 
             // C2SqlOperatorView
             // 
