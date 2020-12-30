@@ -24,7 +24,6 @@ namespace C2.Dialogs.C2OperatorViews
         /// </summary>
         private void InitializeComponent()
         {
-            this.treeConnections = new System.Windows.Forms.TreeView();
             this.bnExecute = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.textEditorControl1 = new ICSharpCode.TextEditor.TextEditorControlEx();
@@ -37,6 +36,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnHelp = new System.Windows.Forms.Button();
             this.bnConnect = new System.Windows.Forms.Button();
             this.bnView = new System.Windows.Forms.Button();
+            this.tableListBox = new System.Windows.Forms.ListBox();
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -61,15 +61,6 @@ namespace C2.Dialogs.C2OperatorViews
             // 
             this.bottomPanel.Location = new System.Drawing.Point(0, 441);
             this.bottomPanel.Size = new System.Drawing.Size(759, 40);
-            // 
-            // treeConnections
-            // 
-            this.treeConnections.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.treeConnections.Location = new System.Drawing.Point(8, 152);
-            this.treeConnections.Name = "treeConnections";
-            this.treeConnections.Size = new System.Drawing.Size(201, 284);
-            this.treeConnections.TabIndex = 3;
             // 
             // bnExecute
             // 
@@ -198,7 +189,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnConnect.Text = "连接库";
             this.bnConnect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnConnect.UseVisualStyleBackColor = true;
-            this.bnConnect.Click += BnConnect_Click;
+            this.bnConnect.Click += new System.EventHandler(this.BnConnect_Click);
             // 
             // bnView
             // 
@@ -211,13 +202,23 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnView.Text = "预览表";
             this.bnView.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnView.UseVisualStyleBackColor = true;
-            this.bnView.Click += BnView_Click;
+            this.bnView.Click += new System.EventHandler(this.BnView_Click);
+            // 
+            // tableListBox
+            // 
+            this.tableListBox.FormattingEnabled = true;
+            this.tableListBox.ItemHeight = 12;
+            this.tableListBox.Location = new System.Drawing.Point(6, 156);
+            this.tableListBox.Name = "tableListBox";
+            this.tableListBox.Size = new System.Drawing.Size(203, 280);
+            this.tableListBox.TabIndex = 19;
             // 
             // C2SqlOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(759, 481);
             this.ControlBox = true;
+            this.Controls.Add(this.tableListBox);
             this.Controls.Add(this.bnView);
             this.Controls.Add(this.bnConnect);
             this.Controls.Add(this.label4);
@@ -228,7 +229,6 @@ namespace C2.Dialogs.C2OperatorViews
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.bnHelp);
             this.Controls.Add(this.bnExecute);
-            this.Controls.Add(this.treeConnections);
             this.Controls.Add(this.bottomPanel);
             this.Icon = global::C2.Properties.Resources.sql_icon;
             this.MaximizeBox = false;
@@ -237,7 +237,6 @@ namespace C2.Dialogs.C2OperatorViews
             this.ShowIcon = true;
             this.Text = "自定义Sql算子设置";
             this.Controls.SetChildIndex(this.bottomPanel, 0);
-            this.Controls.SetChildIndex(this.treeConnections, 0);
             this.Controls.SetChildIndex(this.bnExecute, 0);
             this.Controls.SetChildIndex(this.bnHelp, 0);
             this.Controls.SetChildIndex(this.splitContainer1, 0);
@@ -248,6 +247,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.bnConnect, 0);
             this.Controls.SetChildIndex(this.bnView, 0);
+            this.Controls.SetChildIndex(this.tableListBox, 0);
             this.bottomPanel.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -260,8 +260,6 @@ namespace C2.Dialogs.C2OperatorViews
         }
 
         #endregion
-
-        private System.Windows.Forms.TreeView treeConnections;
         private System.Windows.Forms.Button bnExecute;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private ICSharpCode.TextEditor.TextEditorControlEx textEditorControl1;
@@ -274,5 +272,6 @@ namespace C2.Dialogs.C2OperatorViews
         private System.Windows.Forms.Button bnHelp;
         private System.Windows.Forms.Button bnConnect;
         private System.Windows.Forms.Button bnView;
+        private System.Windows.Forms.ListBox tableListBox;
     }
 }

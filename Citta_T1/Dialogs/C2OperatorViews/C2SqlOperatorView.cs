@@ -53,6 +53,8 @@ namespace C2.Dialogs.C2OperatorViews
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
             this.comboBoxDataBase.Items.Clear();
+            if (users == null || users.Count <= 0)
+                return;
             if (databaseItems != null && databaseItems.Count > 0)
             {
                 this.comboBoxDataBase.Text = users.Find(x => x.Equals(SelectDatabaseItem.User.ToUpper())) == null ? "选择架构" : SelectDatabaseItem.User.ToUpper();
@@ -73,7 +75,11 @@ namespace C2.Dialogs.C2OperatorViews
 
             //刷新数据表
             List<Table> tables = DbUtil.GetTablesByUser(conn, this.comboBoxDataBase.Text);
-
+            this.tableListBox.Items.Clear();
+            if (tables == null || tables.Count <= 0)
+                return;
+            foreach (Table table in tables)
+                tableListBox.Items.Add(table.Name);
         }
 
         private void ComboBoxConnection_SelectedIndexChanged(object sender, System.EventArgs e)
