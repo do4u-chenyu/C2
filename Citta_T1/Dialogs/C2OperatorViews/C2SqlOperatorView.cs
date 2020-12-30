@@ -11,6 +11,17 @@ namespace C2.Dialogs.C2OperatorViews
     public partial class C2SqlOperatorView : C2BaseOperatorView
     {
         private List<DatabaseItem> databaseItems;
+        private DatabaseItem SelectDatabaseItem
+        {
+            get
+            {
+                int idx = this.comboBoxConnection.SelectedIndex;
+                if (idx >= 0 && idx < databaseItems.Count)
+                    return databaseItems[idx];
+                else
+                    return null;
+            }
+        }
 
         public C2SqlOperatorView(OperatorWidget operatorWidget) : base(operatorWidget)
         {
@@ -31,25 +42,44 @@ namespace C2.Dialogs.C2OperatorViews
 
         private void BnConnect_Click(object sender, System.EventArgs e)
         {
-            DatabaseItem selectDatabaseItem = new DatabaseItem();
-            int idx = this.comboBoxConnection.SelectedIndex;
-            if (idx >= 0 && idx < databaseItems.Count)
-                selectDatabaseItem = databaseItems[idx];
+            if (SelectDatabaseItem == null)
+                return;
 
             //连接数据库
-            OraConnection conn = new OraConnection(selectDatabaseItem);
+            OraConnection conn = new OraConnection(SelectDatabaseItem);
             if (!DbUtil.TestConn(conn, true))
                 return;
+
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
-
             this.comboBoxDataBase.Items.Clear();
             if (databaseItems != null && databaseItems.Count > 0)
             {
-                this.comboBoxDataBase.Text = users.Find(x => x.Equals(selectDatabaseItem.User.ToUpper())) == null ? "选择架构" : selectDatabaseItem.User.ToUpper();
+                this.comboBoxDataBase.Text = users.Find(x => x.Equals(SelectDatabaseItem.User.ToUpper())) == null ? "选择架构" : SelectDatabaseItem.User.ToUpper();
                 this.comboBoxDataBase.Items.AddRange(users.ToArray());
             }
 
+        }
+
+        private void BnView_Click(object sender, System.EventArgs e)
+        {
+            if (SelectDatabaseItem == null || string.IsNullOrEmpty(this.comboBoxDataBase.Text) )
+                return;
+
+            //连接数据库
+            OraConnection conn = new OraConnection(SelectDatabaseItem);
+            if (!DbUtil.TestConn(conn, true))
+                return;
+
+            //刷新数据表
+            List<Table> tables = DbUtil.GetTablesByUser(conn, this.comboBoxDataBase.Text);
+
+        }
+
+        private void ComboBoxConnection_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            this.comboBoxDataBase.Items.Clear();
+            this.comboBoxDataBase.Text = string.Empty;
         }
     }
 }
