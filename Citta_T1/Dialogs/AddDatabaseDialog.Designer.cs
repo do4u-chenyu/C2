@@ -217,7 +217,7 @@
             this.Controls.SetChildIndex(this.sidRadiobutton, 0);
             this.Controls.SetChildIndex(this.serviceTextBox, 0);
             this.Controls.SetChildIndex(this.sidTextBox, 0);
-            this.Controls.SetChildIndex(this.TestButton, 0);
+             this.Controls.SetChildIndex(this.TestButton, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 

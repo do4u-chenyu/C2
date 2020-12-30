@@ -120,7 +120,6 @@ namespace C2.Controls.Left
             this.DataSourceDictI2B.Add(dataButton.FullFilePath, dataButton);
             this.localFrame.Controls.Add(dataButton);
         }
-
         public void GenLinkButton(LinkButton linkButton)
         {
             LayoutModelButtonLocation(linkButton); // 递增
@@ -335,6 +334,18 @@ namespace C2.Controls.Left
             OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
             List<Table> tables = DbUtil.GetTablesByUser(conn, this.frameCombo.Text);
             UpdateTables(tables, SelectLinkButton.DatabaseItem);
+        }
+
+        public List<DatabaseItem> GetAllExternalData()
+        {
+            List<DatabaseItem> allExternalData = new List<DatabaseItem>();
+            if (this.linkPanel.Controls.Count > 0)
+            {
+                foreach (LinkButton linkButton in this.linkPanel.Controls)
+                    allExternalData.Add(linkButton.DatabaseItem);
+            }
+
+            return allExternalData;
         }
     }
 }
