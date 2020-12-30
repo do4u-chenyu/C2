@@ -335,5 +335,17 @@ namespace C2.Controls.Left
             List<Table> tables = DbUtil.GetTablesByUser(conn, this.frameCombo.Text);
             UpdateTables(tables, SelectLinkButton.DatabaseItem);
         }
+
+        public List<DatabaseItem> GetAllExternalData()
+        {
+            List<DatabaseItem> allExternalData = new List<DatabaseItem>();
+            if (this.linkPanel.Controls.Count > 0)
+            {
+                foreach (LinkButton linkButton in this.linkPanel.Controls)
+                    allExternalData.Add(linkButton.DatabaseItem);
+            }
+
+            return allExternalData;
+        }
     }
 }

@@ -32,6 +32,15 @@ namespace C2.Model
                 return string.Join(",", Type.ToString(), Server, SID, Service, Port, User, Password); 
             }
         }
+        //
+        public string PrettyDatabaeInfo
+        {
+            get
+            {
+                string serviceName = string.IsNullOrEmpty(Service) ? SID : Service; 
+                return string.Format("{0}@//{1}:{2}/{3}", User, Server,Port,serviceName);
+            }
+        }
         public DatabaseItem() { }
         public DatabaseItem(DatabaseType type, string server, string sid, string service, string port, string user, string password, string group = "", Table table =null)
         {

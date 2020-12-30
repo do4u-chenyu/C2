@@ -197,6 +197,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnConnect.Text = "连接库";
             this.bnConnect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnConnect.UseVisualStyleBackColor = true;
+            this.bnConnect.Click += BnConnect_Click;
             // 
             // bnView
             // 
