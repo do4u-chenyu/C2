@@ -86,6 +86,13 @@ namespace C2.Dialogs.C2OperatorViews
         {
             this.comboBoxDataBase.Items.Clear();
             this.comboBoxDataBase.Text = string.Empty;
+
+            this.tableListBox.Items.Clear();
+        }
+
+        private void ComboBoxDataBase_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            this.tableListBox.Items.Clear();
         }
     }
 }
