@@ -65,6 +65,7 @@ namespace C2.Core
 
         public List<string> GetCachePreviewOracleTable()
         {
+            //TODO 访问数据库
             return new List<String>();
         }
 

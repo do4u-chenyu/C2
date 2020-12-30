@@ -366,18 +366,14 @@ namespace C2.Controls.MapViews
         void MenuCreateDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            DataItem dataCopy = new DataItem(
-               hitItem.FilePath,
-               hitItem.FileName,
-               hitItem.FileSep,
-               hitItem.FileEncoding,
-               hitItem.FileType);
             if (!File.Exists(hitItem.FilePath))
             {
-                MessageBox.Show(hitItem.FilePath+"文件不存在","文件不存在",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(hitItem.FilePath + "文件不存在", "文件不存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-               
+
+            DataItem dataCopy = hitItem.Clone();
+     
             VisualDisplayDialog displayDialog = new VisualDisplayDialog(dataCopy);
             if (DialogResult.OK != displayDialog.ShowDialog())
                 return;

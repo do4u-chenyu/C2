@@ -145,7 +145,6 @@ namespace C2.Controls.Bottom
 
         private void PreViewDataByOracle(DatabaseItem dbItem, int mNumOfLine = 100)
         {
-            // TODO 调数据库实现真正预览
             List<List<string>> datas = new List<List<string>> { };
             List<string> rows = BCPBuffer.GetInstance().GetCachePreviewOracleTable();
 

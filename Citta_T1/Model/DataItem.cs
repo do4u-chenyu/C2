@@ -36,6 +36,24 @@ namespace C2.Model
             this.DataType = databaseType;
         }
 
+        public DataItem Clone()
+        {
+            return new DataItem
+            {
+                FilePath = this.FilePath,
+                FileName = this.FileName,
+                FileSep = this.FileSep,
+                FileEncoding = this.FileEncoding,
+                FileType = this.FileType,
+                DataType = this.DataType,
+                ResultDataType = this.ResultDataType,
+                ChartType = this.ChartType,
+                SelectedIndexs = this.SelectedIndexs,  // 浅拷贝
+                SelectedItems = this.SelectedItems,    // 浅拷贝
+                DBItem = this.DBItem,                  // 浅拷贝     
+            }; 
+        }
+
         public DataItem(DatabaseType dataType, DatabaseItem database)
         {
             DataType = dataType;
