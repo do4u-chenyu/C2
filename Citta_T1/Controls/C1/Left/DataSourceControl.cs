@@ -311,7 +311,7 @@ namespace C2.Controls.Left
                 return;
             foreach (Table tmpTable in tables)
             {
-                DatabaseItem tmpDatabaseItem = databaseInfo;
+                DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
                 tmpDatabaseItem.DataTable = tmpTable;
                 tmpDatabaseItem.Group = this.frameCombo.Text;
                 TableButton tableButton = new TableButton(tmpDatabaseItem);
