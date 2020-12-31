@@ -26,7 +26,7 @@ namespace C2.Controls.Left
         public TableButton(DatabaseItem tableItem)
         {
             InitializeComponent();
-            TableItem = tableItem;
+            TableItem = tableItem.Clone();
             txtButton.Name = tableItem.DataTable.Name;
             txtButton.Text = FileUtil.ReName(tableItem.DataTable.Name);
             this.oldTextString = tableItem.DataTable.Name;

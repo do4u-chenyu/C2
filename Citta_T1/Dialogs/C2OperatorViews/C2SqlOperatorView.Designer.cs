@@ -73,6 +73,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnExecute.Text = "执行SQL";
             this.bnExecute.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnExecute.UseVisualStyleBackColor = true;
+            this.bnExecute.Click += new System.EventHandler(this.bnExecute_Click);
             // 
             // splitContainer1
             // 

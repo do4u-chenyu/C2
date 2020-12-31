@@ -53,5 +53,19 @@ namespace C2.Model
             Group = group;
             DataTable = table;
         }
+        public DatabaseItem Clone()
+        {
+            DatabaseItem tmpDatabaseItem = new DatabaseItem();
+            tmpDatabaseItem.Type = this.Type;
+            tmpDatabaseItem.Server = this.Server;
+            tmpDatabaseItem.SID = this.SID;
+            tmpDatabaseItem.Service = this.Service;
+            tmpDatabaseItem.Port = this.Port;
+            tmpDatabaseItem.User = this.User;
+            tmpDatabaseItem.Password = this.Password;
+            tmpDatabaseItem.Group = this.Group;
+            tmpDatabaseItem.DataTable = this.DataTable;
+            return tmpDatabaseItem;
+        }
     }
 }

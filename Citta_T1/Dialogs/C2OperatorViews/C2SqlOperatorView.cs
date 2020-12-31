@@ -4,6 +4,8 @@ using C2.Dialogs.Base;
 using C2.Model;
 using C2.Model.Widgets;
 using C2.Utils;
+using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 
 namespace C2.Dialogs.C2OperatorViews
@@ -93,6 +95,49 @@ namespace C2.Dialogs.C2OperatorViews
         private void ComboBoxDataBase_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             this.tableListBox.Items.Clear();
+        }
+
+        private void bnExecute_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                using (new CursorHelper(this)) // Display the hourglass
+                {
+                    using (OracleConnection conn = new OracleConnection(new OraConnection(SelectDatabaseItem).ConnectionString))
+                    {
+                        conn.Open();
+                        string sql = textEditorControl1.Text;
+                        using (OracleCommand comm = new OracleCommand(sql, conn))
+                        {
+                            using (OracleDataReader rdr = comm.ExecuteReader())
+                            {
+                                // Grab all the column names
+                                gridOutput.Rows.Clear();
+                                gridOutput.Columns.Clear();
+                                for (int i = 0; i < rdr.FieldCount; i++)
+                                {
+                                    gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
+                                }
+
+                                // Read up to 1000 rows
+                                int rows = 0;
+                                while (rdr.Read() && rows < 1000)
+                                {
+                                    string[] objs = new string[rdr.FieldCount];
+                                    for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
+                                    gridOutput.Rows.Add(objs);
+                                    rows++;
+                                }
+                            }
+                        }
+                        conn.Close();
+                    }
+                }
+            }
+            catch (Exception ex) // Better catch in case they have bad sql
+            {
+                HelpUtil.ShowMessageBox(ex.Message);
+            }
         }
     }
 }
