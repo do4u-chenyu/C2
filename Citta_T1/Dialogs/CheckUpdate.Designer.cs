@@ -85,6 +85,7 @@
             this.Controls.Add(this.LabMessage);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnDownload);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CheckUpdate";
             this.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Text = "Check Update";
