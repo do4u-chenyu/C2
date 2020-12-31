@@ -44,7 +44,7 @@ namespace C2.Dialogs
             this.utf8Lable.Font = font;
 
             this.radioButton1.Checked = true;
-            this.separator = OpUtil.DefaultSeparator;
+            this.separator = OpUtil.DefaultFieldSeparator;
 
             this.extType = OpUtil.ExtType.Text;
 
@@ -82,7 +82,7 @@ namespace C2.Dialogs
                 }
             }
             this.textBox1.Text = fileName;
-            ControlUtil.DisableOrder(this.dataGridView1);
+            DgvUtil.DisableOrder(this.dataGridView1);
         }
 
 

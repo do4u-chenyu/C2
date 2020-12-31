@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,13 @@ namespace C2.Utils
             for (int i = 0; i < dgv.Columns.Count; i++)
             {
                 dgv.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+        }
+        public static void DisableOrder(DataGridView dgv)
+        {
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                dgv.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
     }

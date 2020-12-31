@@ -12,6 +12,7 @@ namespace C2.Controls.Bottom
 {
     public partial class BottomPreviewControl : UserControl
     {
+        private int maxNumOfRows = 20;
         public BottomPreviewControl()
         {
             InitializeComponent();
@@ -32,13 +33,7 @@ namespace C2.Controls.Bottom
             //_InitializeColumns(headers);
             //_InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
             InitializeDGV(datas, headers, numOfCols);
-            ControlUtil.DisableOrder(this.dataGridView);
-        }
-        public void DvgClean(bool isCleanDataName = true)
-        {
-            this.dataGridView.DataSource = null;
-            this.dataGridView.Rows.Clear();
-            this.dataGridView.Columns.Clear();
+            DgvUtil.DisableOrder(this.dataGridView);
         }
         private void InitializeDGV(List<List<string>> datas, List<string> headers, int numOfCol)
         {
@@ -111,7 +106,7 @@ namespace C2.Controls.Bottom
             // 将来有可能新增文件类型,这里不能只用二元逻辑
             if (extType == OpUtil.ExtType.Excel)
             {
-                separator = OpUtil.DefaultSeparator;  // 当文件类型是Excel是,内部分隔符自动为'\t',此时用其他分隔符没有意义
+                separator = OpUtil.DefaultFieldSeparator;  // 当文件类型是Excel是,内部分隔符自动为'\t',此时用其他分隔符没有意义
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewExcelContent(fullFilePath, isForceRead).Split('\n'));
             }
             else if (extType == OpUtil.ExtType.Text)
@@ -125,9 +120,8 @@ namespace C2.Controls.Bottom
             List<string> headers = datas[0];
             datas.RemoveAt(0);
 
-            DvgClean();
+            DgvUtil.CleanDgv(this.dataGridView);
             FileUtil.FillTable(this.dataGridView, headers, datas, maxNumOfFile - 1);
-            ControlUtil.DisableOrder(this.dataGridView);
         }
 
         public void PreViewDataByDatabase(DataItem item)
@@ -142,22 +136,19 @@ namespace C2.Controls.Bottom
                     break;
             }
         }
-
-        private void PreViewDataByOracle(DatabaseItem dbItem, int mNumOfLine = 100)
+        private void PreViewDataByOracle(DatabaseItem dbItem, int maxNumOfFile = 100)
         {
             List<List<string>> datas = new List<List<string>> { };
-            List<string> rows = BCPBuffer.GetInstance().GetCachePreviewOracleTable();
+            List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewOracleTable(dbItem, maxNumOfFile).Split(OpUtil.DefaultLineSeparator));
 
-            for (int i = 0; i < Math.Min(rows.Count, mNumOfLine); i++)
-                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(OpUtil.DefaultSeparator)));                                                 // TODO 没考虑到分隔符
-            datas = FileUtil.FormatDatas(datas, mNumOfLine);
+            for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
+                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(OpUtil.DefaultFieldSeparator)));                                                 // TODO 没考虑到分隔符
+            datas = FileUtil.FormatDatas(datas, maxNumOfFile);
             List<string> headers = datas[0];
             datas.RemoveAt(0);
 
-            DvgClean();
-            FileUtil.FillTable(this.dataGridView, headers, datas, mNumOfLine - 1);
-            ControlUtil.DisableOrder(this.dataGridView);
-
+            DgvUtil.CleanDgv(this.dataGridView);
+            FileUtil.FillTable(this.dataGridView, headers, datas, maxNumOfFile - 1);
         }
         private void dataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {

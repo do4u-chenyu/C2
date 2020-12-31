@@ -123,7 +123,7 @@ namespace C2.Dialogs.C2OperatorViews
             if (separatorRadio == "commaradio")
                 separator = ',';
             else if (separatorRadio == "otherseparatorradio")
-                separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? OpUtil.DefaultSeparator : this.otherSeparatorText.Text[0];
+                separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? OpUtil.DefaultFieldSeparator : this.otherSeparatorText.Text[0];
             OpUtil.Encoding encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
             if (!File.Exists(path))
                 File.Create(path);

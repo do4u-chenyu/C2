@@ -498,10 +498,10 @@ namespace C2.Utils
                 }
                 // 表头
                 table.Columns.AddRange(cols);
-
+                // TODO DK 有隐患
                 for (int rowIndex = 0; rowIndex < Math.Max(maxNumOfRow, rows.Count); rowIndex++)
                 {
-                    List<string> row = rows[rowIndex];
+                    List<string> row = rows[rowIndex]; // ????
                     newRow = table.NewRow();
                     for (int colIndex = 0; colIndex < row.Count; colIndex++)
                         newRow[colIndex] = row[colIndex];
@@ -531,12 +531,13 @@ namespace C2.Utils
             }
             catch (Exception ex)
             {
-                Console.WriteLine("FromInputData.OverViewFile occurs error! " + ex);
+                Console.WriteLine("FromInputData.FillTable occurs error! " + ex);
             }
             finally
             {
 
             }
+            DgvUtil.DisableOrder(dgv);
         }
         public static  List<List<string>> GetColumns(List<int> indexs, DataItem dataItem, List<string> rows, int upperLimit)
         {

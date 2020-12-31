@@ -56,7 +56,7 @@ namespace C2.Controls.Move.Rs
             Location = loc;
             FullFilePath = String.Empty;
             Encoding = OpUtil.Encoding.GBK;
-            Separator = OpUtil.DefaultSeparator;
+            Separator = OpUtil.DefaultFieldSeparator;
             Status = ElementStatus.Null;
 
             

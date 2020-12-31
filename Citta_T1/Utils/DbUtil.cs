@@ -3,6 +3,7 @@ using C2.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 
 namespace C2.Utils
@@ -162,7 +163,91 @@ namespace C2.Utils
             }
             return tables;
         }
+        public static List<List<string>> GetTbContent(OraConnection conn, Table table, int maxNum)
+        {
+            List<List<string>> ret = new List<List<string>>();
+            string contentString = DbUtil.GetOracleTbContentString(conn, table, maxNum);
+            ret = DbUtil.StringTo2DString(contentString);
+            return ret;
+        }
 
+        private static List<List<string>> StringTo2DString(string contentString)
+        {
+            List<List<string>> ret = new List<List<string>>();
+            string[] lines = contentString.Split(OpUtil.DefaultLineSeparator);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                ret.Add(new List<string>(lines[i].Split(OpUtil.DefaultFieldSeparator)));
+            }
+            return ret;
+        }
+        public static string GetTbContentString(DatabaseItem databaseItem, int maxNum)
+        {
+            OraConnection conn = new OraConnection(databaseItem);
+            string ret = String.Empty;
+            switch (databaseItem.Type)
+            {
+                case DatabaseType.Oracle:
+                    ret = DbUtil.GetOracleTbContentString(conn, databaseItem.DataTable, maxNum);
+                    break;
+                case DatabaseType.Hive:
+                    ret = DbUtil.GetHiveTbContentString();
+                    break;
+                default:
+                    break;
+            }
+            return ret;
+        }
+
+        private static string GetHiveTbContentString()
+        {
+            // TODO DK 实现Hive查表
+            throw new NotImplementedException();
+        }
+
+        public static string GetOracleTbContentString(OraConnection conn, Table table, int maxNum)
+        {
+            StringBuilder sb = new StringBuilder(1024 * 16);
+            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                    {
+                        con.Open();
+                        string sql = String.Format(@"select * from {0}.{1}", table.UserName.ToUpper(), table.Name);
+                        using (OracleCommand comm = new OracleCommand(sql, con))
+                        {
+                            using (OracleDataReader rdr = comm.ExecuteReader())
+                            {
+                                // headers
+                                List<string> headers = new List<string>();
+                                for (int i = 0; i < rdr.FieldCount; i++)
+                                {
+                                    headers.Add(rdr.GetName(i));
+                                }
+                                sb.Append(String.Join(OpUtil.DefaultFieldSeparator.ToString(), headers) + OpUtil.DefaultLineSeparator.ToString());
+                                // rows
+                                int rows = 0;
+                                while (rdr.Read() && rows < maxNum)
+                                {
+                                    string[] objs = new string[rdr.FieldCount];
+                                    for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
+                                    sb.Append(String.Join(OpUtil.DefaultFieldSeparator.ToString(), objs) + OpUtil.DefaultLineSeparator.ToString());
+                                    rows++;
+                                }
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+                catch (Exception ex) // Better catch in case they have bad sql
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                }
+                return sb.ToString();
+            }
+        }
         public static bool FillDGVWithTbSchema(DataGridView gridOutput, OraConnection conn, string tableName)
         {
             using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
@@ -209,46 +294,13 @@ namespace C2.Utils
 
         public static bool FillDGVWithTbContent(DataGridView gridOutput, OraConnection conn, Table table, int maxNum)
         {
-            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
-            {
-                try
-                {
-                    using (OracleConnection con = new OracleConnection(conn.ConnectionString))
-                    {
-                        con.Open();
-                        string sql = String.Format(@"select * from {0}.{1}", table.UserName.ToUpper(), table.Name);
-                        using (OracleCommand comm = new OracleCommand(sql, con))
-                        {
-                            using (OracleDataReader rdr = comm.ExecuteReader())
-                            {
-                                // Grab all the column names
-                                gridOutput.Rows.Clear();
-                                gridOutput.Columns.Clear();
-                                for (int i = 0; i < rdr.FieldCount; i++)
-                                {
-                                    gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
-                                }
-                                int rows = 0;
-                                while (rdr.Read() && rows < maxNum)
-                                {
-                                    string[] objs = new string[rdr.FieldCount];
-                                    for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
-                                    gridOutput.Rows.Add(objs);
-                                    rows++;
-                                }
-                            }
-                        }
-                        DgvUtil.ResetColumnsWidth(gridOutput);
-                        con.Close();
-                        return true;
-                    }
-                }
-                catch (Exception ex) // Better catch in case they have bad sql
-                {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                    return false;
-                }
-            }
+            List<List<string>> ret = DbUtil.GetTbContent(conn, table, maxNum);
+            if (ret.Count <= 0)
+                return false;
+            List<string> headers = ret[0];
+            ret.RemoveAt(0);
+            FileUtil.FillTable(gridOutput, headers, ret, maxNum);
+            return true;
         }
     }
 }

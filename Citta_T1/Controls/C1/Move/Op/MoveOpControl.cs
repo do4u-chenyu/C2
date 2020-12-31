@@ -76,7 +76,7 @@ namespace C2.Controls.Move.Op
             Location = loc;
             FullFilePath = String.Empty;
             Encoding = OpUtil.Encoding.NoNeed;
-            Separator = OpUtil.DefaultSeparator;
+            Separator = OpUtil.DefaultFieldSeparator;
 
             SubTypeName = subTypeName;
             Option = new OperatorOption(this);

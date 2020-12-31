@@ -7,7 +7,6 @@ namespace C2.Controls.Bottom
     partial class BottomPreviewControl
     {
         private System.Windows.Forms.DataGridView dataGridView;
-        private int maxNumOfRows = 20;
 
         /// <summary> 
         /// 必需的设计器变量。

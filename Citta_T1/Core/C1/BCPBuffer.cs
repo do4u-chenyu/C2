@@ -1,5 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Configuration;
+using C2.Database;
+using C2.Model;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -52,23 +54,21 @@ namespace C2.Core
         private static readonly LogUtil log = LogUtil.GetInstance("BCPBuffer");
         private static readonly Regex regexXls = new Regex(@"\.xl(s?[xmb]?|t[xm]|am)$");
         private static readonly int maxRow = 100;
-
+        #region 获取缓存的方法
         public string GetCachePreViewBcpContent(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             return GetCachePreviewFileContent(fullFilePath, OpUtil.ExtType.Text, encoding, isForceRead);
         }
-
         public string GetCachePreviewExcelContent(string fullFilePath, bool isForceRead = false)
         {
             return GetCachePreviewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, isForceRead);
         }
-
-        public List<string> GetCachePreviewOracleTable()
+        public string GetCachePreviewOracleTable(DatabaseItem databaseItem, int mNumOfLine, bool isForceRead = false)
         {
-            //TODO 访问数据库
-            return new List<String>();
+            OraConnection conn = new OraConnection(databaseItem);
+            Table table = databaseItem.DataTable;
+            return GetCachePreviewOracleTable(conn, table, mNumOfLine, isForceRead);
         }
-
         private string GetCachePreviewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = String.Empty;
@@ -91,10 +91,107 @@ namespace C2.Core
             // 防止文件读取时发生错误, 重新判断下是否存在
             if (HitCache(fullFilePath))
             {
-                IsUpdateCache(type,fullFilePath);
+                IsUpdateCache(type, fullFilePath);
                 ret = dataPreviewDict[fullFilePath].PreviewFileContent;
-            }              
+            }
             return ret;
+        }
+        private string GetCachePreviewOracleTable(OraConnection conn, Table table, int mNumOfLine, bool isForceRead)
+        {
+            string connectionKey = GenConnectionKey(conn, table);
+            if (!HitCache(connectionKey) || isForceRead)
+            {
+                PreLoadOracleDbData(conn, table, mNumOfLine);
+            }
+            return dataPreviewDict[connectionKey].PreviewFileContent;
+        }
+        private bool PreLoadExcelFileNew(string fullFilePath)
+        {
+            // 查看是否命中本地大文件缓存
+            if (HasCache(fullFilePath, ProgramEnvironment.DataBufferFilename))
+            {
+                return true;
+            }
+
+            ReadRst rrst = FileUtil.ReadExcel(fullFilePath, maxRow);
+            if (rrst.ReturnCode <= 0 || rrst.ReturnCode > 0 && rrst.Result.Count == 0)
+            {
+                HelpUtil.ShowMessageBox(rrst.Msg);
+                return false;
+            }
+            List<List<string>> rowContentList = rrst.Result;
+            StringBuilder sb = new StringBuilder(1024 * 16);
+            string firstLine = String.Join("\t", rowContentList[0]);
+            for (int i = 0; i < rowContentList.Count; i++)
+                sb.AppendLine(String.Join("\t", rowContentList[i]));
+            dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
+            dataPreviewDict[fullFilePath].CrcValue = FileUtil.GetFileCRC32Value(fullFilePath);
+
+            // 大文件内容写入本地缓存
+            FileInfo fi = new FileInfo(fullFilePath);
+            long fileSize = fi.Length / 1024 / 1024;
+            if (fileSize > 10)
+            {
+                WriteBuffer(fullFilePath, sb, firstLine);
+            }
+            return true;
+        }
+        private bool PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
+        {
+            if (!File.Exists(fullFilePath))
+            {
+                HelpUtil.ShowMessageBox(fullFilePath + "该文件不存在");
+                return false;
+            }
+
+            StreamReader sr = null;
+            bool returnVar = true;
+            try
+            {
+                if (encoding == OpUtil.Encoding.UTF8)
+                    sr = File.OpenText(fullFilePath);
+                else
+                {
+                    FileStream fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
+                    sr = new StreamReader(fs, Encoding.Default);
+                }
+                string firstLine = sr.ReadLine();
+                StringBuilder sb = new StringBuilder(1024 * 16);
+                sb.AppendLine(firstLine);
+
+                for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
+                    sb.AppendLine(sr.ReadLine());                                   // 分隔符
+                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
+            }
+            catch (Exception e)
+            {
+                log.Error("BCPBuffer 预加载BCP文件出错: " + e.ToString());
+                returnVar = false;
+            }
+            finally
+            {
+                if (sr != null)
+                    sr.Close();
+            }
+            return returnVar;
+        }
+        private bool PreLoadOracleDbData(OraConnection conn, Table table, int mNumOfLine)
+        {
+            string tbContent = DbUtil.GetOracleTbContentString(conn, table, mNumOfLine);
+            string firstLine = GetFirstLine(tbContent);
+            string connectionKey = GenConnectionKey(conn, table);
+            dataPreviewDict[connectionKey] = new FileCache(tbContent, firstLine); ;
+            return true;
+        }
+        #endregion
+        private string GetFirstLine(string tbContent)
+        {
+            int lineSepIndex = tbContent.IndexOf(OpUtil.DefaultLineSeparator);
+            return tbContent.Substring(0, lineSepIndex);
+        }
+        private string GenConnectionKey(OraConnection conn, Table table)
+        {
+            return conn.ConnectionString + table.ToString();
         }
         public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
@@ -193,38 +290,6 @@ namespace C2.Core
         {
             dataPreviewDict.Remove(bcpFullPath);
         }
-
-        private bool PreLoadExcelFileNew(string fullFilePath)
-        {
-            // 查看是否命中本地大文件缓存
-            if (HasCache(fullFilePath, ProgramEnvironment.DataBufferFilename))
-            {
-                return true;
-            }
-
-            ReadRst rrst = FileUtil.ReadExcel(fullFilePath, maxRow);
-            if (rrst.ReturnCode <= 0 || rrst.ReturnCode > 0 && rrst.Result.Count == 0)
-            {
-                HelpUtil.ShowMessageBox(rrst.Msg);
-                return false;
-            }
-            List<List<string>> rowContentList = rrst.Result;
-            StringBuilder sb = new StringBuilder(1024 * 16);
-            string firstLine = String.Join("\t", rowContentList[0]);
-            for (int i = 0; i < rowContentList.Count; i++)
-                sb.AppendLine(String.Join("\t", rowContentList[i]));
-            dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
-            dataPreviewDict[fullFilePath].CrcValue= FileUtil.GetFileCRC32Value(fullFilePath);
-
-            // 大文件内容写入本地缓存
-            FileInfo fi = new FileInfo(fullFilePath);
-            long fileSize = fi.Length /1024/1024;
-            if (fileSize > 10)
-            {
-                WriteBuffer(fullFilePath, sb, firstLine);
-            }
-            return true;
-        }
         // 数据缓存信息写入xml
         private void WriteBuffer(string fullFilePath, StringBuilder sb, string firstLine)
         {
@@ -307,45 +372,7 @@ namespace C2.Core
         /*
          * 按行读取文件，不分割
          */
-        private bool PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
-        {
-            if (!File.Exists(fullFilePath))
-            {
-                HelpUtil.ShowMessageBox(fullFilePath + "该文件不存在");
-                return false;
-            }
 
-            StreamReader sr = null;
-            bool returnVar = true;
-            try
-            {
-                if (encoding == OpUtil.Encoding.UTF8)
-                    sr = File.OpenText(fullFilePath);
-                else
-                {
-                    FileStream fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
-                    sr = new StreamReader(fs, Encoding.Default);
-                }
-                string firstLine = sr.ReadLine();
-                StringBuilder sb = new StringBuilder(1024 * 16);
-                sb.AppendLine(firstLine);
-
-                for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
-                    sb.AppendLine(sr.ReadLine());                                   // 分隔符
-                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
-            }
-            catch (Exception e)
-            {
-                log.Error("BCPBuffer 预加载BCP文件出错: " + e.ToString());
-                returnVar = false;
-            }
-            finally
-            {
-                if (sr != null)
-                    sr.Close();
-            }
-            return returnVar;
-        }
 
 
         // 数据字典, 全局单例
@@ -384,7 +411,7 @@ namespace C2.Core
                 using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
                 {
                     string columns = String.Join("\t", columnsName);
-                    sw.WriteLine(columns.Trim(OpUtil.DefaultSeparator));
+                    sw.WriteLine(columns.Trim(OpUtil.DefaultFieldSeparator));
                     sw.Flush();
                 }
             }

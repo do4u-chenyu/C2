@@ -43,14 +43,6 @@ namespace C2.Utils
             return null;
         }       
 
-        public static void DisableOrder(DataGridView dgv)
-        {
-            for (int i = 0; i < dgv.Columns.Count; i++)
-            {
-                dgv.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-        }
-
         public static Dictionary<int, Point> SaveElesWorldCord(List<ModelElement> mes)
         {
             Dictionary<int, Point> eleWorldCordDict = new Dictionary<int, Point>();

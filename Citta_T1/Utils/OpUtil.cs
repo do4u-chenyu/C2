@@ -13,7 +13,8 @@ namespace C2.Utils
 {
     public class OpUtil
     {
-        public static readonly char DefaultSeparator = '\t';
+        public static readonly char DefaultFieldSeparator = '\t';
+        public static readonly char DefaultLineSeparator = '\n';
         public static float IOU(Rectangle rect1, Rectangle rect2)
         {
             // [top, left, bottom, right]

@@ -285,9 +285,9 @@ namespace C2.Controls.Left
         private void ConnectDatabase(DatabaseItem databaseInfo)
         {
             /* 
-             * TODO Dk 优化代码
+             * TODO DK 优化代码
              * 1. 优化函数名称，首先这个名字取得不怎么好
-             * 2. 优化代码逻辑，一旦出现连接不上的问题依然会查两次数据库，等待时间很长，每次连接的时候最好测试一下连接
+             * [x]. 优化代码逻辑，一旦出现连接不上的问题依然会查两次数据库，等待时间很长，每次连接的时候最好测试一下连接
              */
             //连接数据库
             OraConnection conn = new OraConnection(databaseInfo);
