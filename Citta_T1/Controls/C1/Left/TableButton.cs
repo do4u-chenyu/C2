@@ -15,8 +15,7 @@ namespace C2.Controls.Left
         private int count = 0;
         private string oldTextString;
         
-        public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
-        public string DataSourceName { get; set; }
+        public string ConnectionInfo { get => TableItem.PrettyDatabaeInfo; }
         public int Count { get => this.count; set => this.count = value; }
         //private static string TableButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
@@ -38,15 +37,14 @@ namespace C2.Controls.Left
         private void TableButton_Load(object sender, EventArgs e)
         {
             // 数据源全路径浮动提示信息
-            //String helpInfo = FullFilePath;
-            //this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+            String helpInfo = "连接信息：" + ConnectionInfo;
+            this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
 
-            //// 数据源名称浮动提示信息
-            //helpInfo = DataSourceName;
-            //this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
+            // 数据源名称浮动提示信息
+            helpInfo = LinkSourceName;
+            this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
-            //helpInfo = String.Format(TableButtonFlowTemplate,
-            //                        0);
+            //helpInfo = String.Format(TableButtonFlowTemplate, 0);
             //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
@@ -66,12 +64,6 @@ namespace C2.Controls.Left
         }
 
         #endregion
-
-
-        private void CopyFullFilePathToClipboard(object sender, EventArgs e)
-        {
-            FileUtil.TryClipboardSetText(FullFilePath);
-        }
 
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
         {
