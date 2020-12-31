@@ -313,6 +313,7 @@ namespace C2.Controls.Left
             {
                 DatabaseItem tmpDatabaseItem = databaseInfo;
                 tmpDatabaseItem.DataTable = tmpTable;
+                tmpDatabaseItem.Group = this.frameCombo.Text;
                 TableButton tableButton = new TableButton(tmpDatabaseItem);
                 GenTableButton(tableButton);//生成数据表按钮
             }

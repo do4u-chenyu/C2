@@ -49,8 +49,6 @@ namespace C2.Controls.MapViews
                 }
                 else
                 {
-                    //TODO
-                    //是否对undo redo有影响
                     rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.SingleOp);
                     rsw.DataItems.Add(resultItem);                   
                 }

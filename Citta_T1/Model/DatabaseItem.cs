@@ -29,10 +29,9 @@ namespace C2.Model
         {
             get
             { 
-                return string.Join(",", Type.ToString(), Server, SID, Service, Port, User, Password); 
+                return string.Join(",", Type.ToString(), Server, SID, Service, Port, User, Password, Group, DataTable == null?string.Empty:DataTable.Name); 
             }
         }
-        //
         public string PrettyDatabaeInfo
         {
             get

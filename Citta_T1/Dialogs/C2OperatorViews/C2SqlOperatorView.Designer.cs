@@ -134,6 +134,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.comboBoxDataBase.Name = "comboBoxDataBase";
             this.comboBoxDataBase.Size = new System.Drawing.Size(133, 21);
             this.comboBoxDataBase.TabIndex = 11;
+            this.comboBoxDataBase.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDataBase_SelectedIndexChanged);
             // 
             // label2
             // 
