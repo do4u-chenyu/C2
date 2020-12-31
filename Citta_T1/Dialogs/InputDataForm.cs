@@ -193,9 +193,7 @@ namespace C2.Dialogs
             List<List<string>> rows = new List<List<string>>();
             rows.Add(headersAndRows.Item1);
             rows.AddRange(headersAndRows.Item2);
-            rows = FileUtil.FormatDatas(rows, this.maxNumOfRow);
-            rows.RemoveAt(0);
-            FileUtil.FillTable(this.dataGridView1, headersAndRows.Item1, rows, this.maxNumOfRow - 1);
+            FileUtil.FillTable(this.dataGridView1, rows, this.maxNumOfRow);
         }
 
         private void PreviewExcelFileNew()

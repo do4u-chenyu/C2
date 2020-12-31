@@ -295,11 +295,10 @@ namespace C2.Utils
         public static bool FillDGVWithTbContent(DataGridView gridOutput, OraConnection conn, Table table, int maxNum)
         {
             List<List<string>> ret = DbUtil.GetTbContent(conn, table, maxNum);
+            ret = FileUtil.FormatDatas(ret, maxNum);
             if (ret.Count <= 0)
                 return false;
-            List<string> headers = ret[0];
-            ret.RemoveAt(0);
-            FileUtil.FillTable(gridOutput, headers, ret, maxNum);
+            FileUtil.FillTable(gridOutput, ret, maxNum);
             return true;
         }
     }

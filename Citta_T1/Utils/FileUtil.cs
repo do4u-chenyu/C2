@@ -467,6 +467,15 @@ namespace C2.Utils
             }
             return result;
         }
+        public static void FillTable(DataGridView dgv, List<List<string>> datas, int maxNumOfRow = 100)
+        {
+            datas = FileUtil.FormatDatas(datas, maxNumOfRow);
+            List<string> headers = datas[0];
+            datas.RemoveAt(0);
+
+            DgvUtil.CleanDgv(dgv);
+            FileUtil.FillTable(dgv, headers, datas, maxNumOfRow - 1);
+        }
         public static void FillTable(DataGridView dgv, List<string> headers, List<List<string>> rows, int maxNumOfRow=100)
         {
             DgvUtil.CleanDgv(dgv);

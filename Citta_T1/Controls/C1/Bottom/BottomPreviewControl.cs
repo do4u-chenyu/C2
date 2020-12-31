@@ -116,12 +116,7 @@ namespace C2.Controls.Bottom
 
             for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
                 datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(separator)));                                                 // TODO 没考虑到分隔符
-            datas = FileUtil.FormatDatas(datas, maxNumOfFile);
-            List<string> headers = datas[0];
-            datas.RemoveAt(0);
-
-            DgvUtil.CleanDgv(this.dataGridView);
-            FileUtil.FillTable(this.dataGridView, headers, datas, maxNumOfFile - 1);
+            FileUtil.FillTable(this.dataGridView, datas, maxNumOfFile);
         }
 
         public void PreViewDataByDatabase(DataItem item)
@@ -143,12 +138,7 @@ namespace C2.Controls.Bottom
 
             for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
                 datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(OpUtil.DefaultFieldSeparator)));                                                 // TODO 没考虑到分隔符
-            datas = FileUtil.FormatDatas(datas, maxNumOfFile);
-            List<string> headers = datas[0];
-            datas.RemoveAt(0);
-
-            DgvUtil.CleanDgv(this.dataGridView);
-            FileUtil.FillTable(this.dataGridView, headers, datas, maxNumOfFile - 1);
+            FileUtil.FillTable(this.dataGridView, datas, maxNumOfFile);
         }
         private void dataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
