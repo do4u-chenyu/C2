@@ -63,13 +63,13 @@ namespace C2.Core
         {
             return GetCachePreviewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, isForceRead);
         }
-        public string GetCachePreviewOracleTable(DatabaseItem databaseItem, int mNumOfLine, bool isForceRead = false)
+        public string GetCachePreviewOracleTable(DatabaseItem databaseItem, int mNumOfLine = 100, bool isForceRead = false)
         {
-            OraConnection conn = new OraConnection(databaseItem);
-            Table table = databaseItem.DataTable;
             string key = databaseItem.AllDatabaseInfo;
             if (!HitCache(key) || isForceRead)
             {
+                OraConnection conn = new OraConnection(databaseItem);
+                Table table = databaseItem.DataTable;
                 string tbContent = DbUtil.GetOracleTbContentString(conn, table, mNumOfLine);
                 string firstLine = GetFirstLine(tbContent);
                 dataPreviewDict[key] = new FileCache(tbContent, firstLine);
@@ -328,7 +328,7 @@ namespace C2.Core
             xDoc.Save(bufferPath);
             
         }
-        private bool HasCache(string fullFilePath,string bufferPath)
+        private bool HasCache(string fullFilePath, string bufferPath)
         {
             XmlDocument xDoc = new XmlDocument();
             XmlNodeList nodeList;

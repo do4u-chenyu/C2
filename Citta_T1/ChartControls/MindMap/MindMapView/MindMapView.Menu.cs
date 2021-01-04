@@ -366,11 +366,18 @@ namespace C2.Controls.MapViews
         void MenuCreateDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            // 外部数据源且数据库无法连接
-            if (hitItem.IsDatabase() && !DbUtil.TestConn(hitItem))
+            
+            if (hitItem.IsDatabase())
             {
-                HelpUtil.ShowMessageBox("该数据库无法连接");
-                return;
+                if (DbUtil.TestConn(hitItem))  // 预加载
+                {
+                    BCPBuffer.GetInstance().GetCachePreviewOracleTable(hitItem.DBItem);
+                }
+                else // 外部数据源且数据库无法连接
+                {
+                    HelpUtil.ShowMessageBox("该数据库无法连接");
+                    return;
+                }
             }
 
             // 内部数据源且文件不存在
