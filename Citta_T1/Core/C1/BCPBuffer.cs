@@ -67,7 +67,14 @@ namespace C2.Core
         {
             OraConnection conn = new OraConnection(databaseItem);
             Table table = databaseItem.DataTable;
-            return GetCachePreviewOracleTable(conn, table, mNumOfLine, isForceRead);
+            string key = databaseItem.AllDatabaseInfo;
+            if (!HitCache(key) || isForceRead)
+            {
+                string tbContent = DbUtil.GetOracleTbContentString(conn, table, mNumOfLine);
+                string firstLine = GetFirstLine(tbContent);
+                dataPreviewDict[key] = new FileCache(tbContent, firstLine);
+            }
+            return dataPreviewDict[key].PreviewFileContent;
         }
         private string GetCachePreviewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
         {
@@ -95,15 +102,6 @@ namespace C2.Core
                 ret = dataPreviewDict[fullFilePath].PreviewFileContent;
             }
             return ret;
-        }
-        private string GetCachePreviewOracleTable(OraConnection conn, Table table, int mNumOfLine, bool isForceRead)
-        {
-            string connectionKey = GenConnectionKey(conn, table);
-            if (!HitCache(connectionKey) || isForceRead)
-            {
-                PreLoadOracleDbData(conn, table, mNumOfLine);
-            }
-            return dataPreviewDict[connectionKey].PreviewFileContent;
         }
         private bool PreLoadExcelFileNew(string fullFilePath)
         {
@@ -174,14 +172,6 @@ namespace C2.Core
                     sr.Close();
             }
             return returnVar;
-        }
-        private bool PreLoadOracleDbData(OraConnection conn, Table table, int mNumOfLine)
-        {
-            string tbContent = DbUtil.GetOracleTbContentString(conn, table, mNumOfLine);
-            string firstLine = GetFirstLine(tbContent);
-            string connectionKey = GenConnectionKey(conn, table);
-            dataPreviewDict[connectionKey] = new FileCache(tbContent, firstLine); ;
-            return true;
         }
         #endregion
         private string GetFirstLine(string tbContent)
