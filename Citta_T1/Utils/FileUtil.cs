@@ -476,7 +476,7 @@ namespace C2.Utils
             DgvUtil.CleanDgv(dgv);
             FileUtil.FillTable(dgv, headers, datas, maxNumOfRow - 1);
         }
-        public static void FillTable(DataGridView dgv, List<string> headers, List<List<string>> rows, int maxNumOfRow=100)
+        private static void FillTable(DataGridView dgv, List<string> headers, List<List<string>> rows, int maxNumOfRow=100)
         {
             DgvUtil.CleanDgv(dgv);
             try
@@ -507,10 +507,10 @@ namespace C2.Utils
                 }
                 // 表头
                 table.Columns.AddRange(cols);
-                // TODO DK 有隐患
+                // DONE 有隐患。目前这个方法不允许外部调用，改为private
                 for (int rowIndex = 0; rowIndex < Math.Max(maxNumOfRow, rows.Count); rowIndex++)
                 {
-                    List<string> row = rows[rowIndex]; // ????
+                    List<string> row = rows[rowIndex]; // IndexOutOfRange隐患
                     newRow = table.NewRow();
                     for (int colIndex = 0; colIndex < row.Count; colIndex++)
                         newRow[colIndex] = row[colIndex];
