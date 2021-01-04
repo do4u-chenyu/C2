@@ -58,6 +58,7 @@ namespace C2.Model
         {
             DataType = dataType;
             DBItem = database;
+            FileSep = OpUtil.DefaultFieldSeparator;
             FilePath = database.AllDatabaseInfo;
             FileName = database.DataTable.Name;
             FileType = OpUtil.ExtType.Database;

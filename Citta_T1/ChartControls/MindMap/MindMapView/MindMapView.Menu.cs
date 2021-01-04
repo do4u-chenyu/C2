@@ -367,7 +367,7 @@ namespace C2.Controls.MapViews
         {
             // TODO 外部数据源生成图表
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            if (!File.Exists(hitItem.FilePath))
+            if (!hitItem.IsDatabase() && !File.Exists(hitItem.FilePath))
             {
                 MessageBox.Show(hitItem.FilePath + "文件不存在", "文件不存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
