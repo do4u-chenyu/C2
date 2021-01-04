@@ -73,10 +73,10 @@ namespace C2.Dialogs
             DatabaseItem tmpDatabaseInfo = GenDatabaseInfoFormDialog();
 
             //如果新旧一致，直接返回了
-            if (DatabaseInfo != null && DatabaseInfo.AllDatabaeInfo.Equals(tmpDatabaseInfo.AllDatabaeInfo))
+            if (DatabaseInfo != null && DatabaseInfo.AllDatabaseInfo.Equals(tmpDatabaseInfo.AllDatabaseInfo))
                 return base.OnOKButtonClick();
 
-            if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(tmpDatabaseInfo.AllDatabaeInfo))
+            if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(tmpDatabaseInfo.AllDatabaseInfo))
             {
                 HelpUtil.ShowMessageBox("该连接已存在","已存在",MessageBoxIcon.Warning);
                 return false;

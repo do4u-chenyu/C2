@@ -365,6 +365,7 @@ namespace C2.Controls.MapViews
 
         void MenuCreateDataChart_Click(object sender, EventArgs e)
         {
+            // TODO 外部数据源生成图表
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             if (!File.Exists(hitItem.FilePath))
             {

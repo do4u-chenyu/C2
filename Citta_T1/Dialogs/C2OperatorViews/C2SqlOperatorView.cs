@@ -38,7 +38,7 @@ namespace C2.Dialogs.C2OperatorViews
             databaseItems = Global.GetDataSourceControl().GetAllExternalData();
             if(databaseItems != null && databaseItems.Count > 0)
             {
-                databaseItems.ForEach(d => names.Add(d.PrettyDatabaeInfo));
+                databaseItems.ForEach(d => names.Add(d.PrettyDatabaseInfo));
                 this.comboBoxConnection.Items.AddRange(names.ToArray());
             }
         }

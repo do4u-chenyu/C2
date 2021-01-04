@@ -145,9 +145,9 @@ namespace C2.Controls.Left
             if (SelectLinkButton == null)
                 return;
             //改变持久化dict的key值
-            if (this.LinkSourceDictI2B.ContainsKey(e.databaseItem.AllDatabaeInfo))
+            if (this.LinkSourceDictI2B.ContainsKey(e.databaseItem.AllDatabaseInfo))
             {
-                this.LinkSourceDictI2B.Remove(e.databaseItem.AllDatabaeInfo);
+                this.LinkSourceDictI2B.Remove(e.databaseItem.AllDatabaseInfo);
             }
             ConnectDatabase(SelectLinkButton.DatabaseItem);//连接一次数据库，刷新架构及数据表
         }

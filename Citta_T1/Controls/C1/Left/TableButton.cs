@@ -15,7 +15,7 @@ namespace C2.Controls.Left
         private int count = 0;
         private string oldTextString;
         
-        public string ConnectionInfo { get => TableItem.PrettyDatabaeInfo; }
+        public string ConnectionInfo { get => TableItem.PrettyDatabaseInfo; }
         public int Count { get => this.count; set => this.count = value; }
         //private static string TableButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
