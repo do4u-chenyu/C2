@@ -365,11 +365,18 @@ namespace C2.Controls.MapViews
 
         void MenuCreateDataChart_Click(object sender, EventArgs e)
         {
-            // TODO 外部数据源生成图表
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            // 外部数据源且数据库无法连接
+            if (hitItem.IsDatabase() && !DbUtil.TestConn(hitItem))
+            {
+                HelpUtil.ShowMessageBox("该数据库无法连接");
+                return;
+            }
+
+            // 内部数据源且文件不存在
             if (!hitItem.IsDatabase() && !File.Exists(hitItem.FilePath))
             {
-                MessageBox.Show(hitItem.FilePath + "文件不存在", "文件不存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                HelpUtil.ShowMessageBox(hitItem.FilePath + "文件不存在", "文件不存在");
                 return;
             }
 

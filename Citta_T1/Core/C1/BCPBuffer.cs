@@ -114,7 +114,8 @@ namespace C2.Core
             ReadRst rrst = FileUtil.ReadExcel(fullFilePath, maxRow);
             if (rrst.ReturnCode <= 0 || rrst.ReturnCode > 0 && rrst.Result.Count == 0)
             {
-                HelpUtil.ShowMessageBox(rrst.Msg);
+                // 不能把显示messagebox的逻辑放到底层，这种方式很容易出问题
+                // HelpUtil.ShowMessageBox(rrst.Msg);
                 return false;
             }
             List<List<string>> rowContentList = rrst.Result;
@@ -138,7 +139,8 @@ namespace C2.Core
         {
             if (!File.Exists(fullFilePath))
             {
-                HelpUtil.ShowMessageBox(fullFilePath + "该文件不存在");
+                // 不能把显示messagebox的逻辑放到底层，这种方式很容易出问题
+                //HelpUtil.ShowMessageBox(fullFilePath + "该文件不存在");
                 return false;
             }
 
@@ -179,10 +181,6 @@ namespace C2.Core
             int lineSepIndex = tbContent.IndexOf(OpUtil.DefaultLineSeparator);
             return tbContent.Substring(0, lineSepIndex);
         }
-        private string GenConnectionKey(OraConnection conn, Table table)
-        {
-            return conn.ConnectionString + table.Name;
-        }
         public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = String.Empty;
@@ -220,7 +218,8 @@ namespace C2.Core
                 long fileSize = fi.Length / 1024 / 1024;
                 if (fileSize > 100)
                 {
-                    MessageBox.Show("Excel文件过大，超过100M，无法处理.", "文件过大", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    // 不能把显示messagebox的逻辑放到底层，这种方式很容易出问题
+                    // MessageBox.Show("Excel文件过大，超过100M，无法处理.", "文件过大", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return true;
                 }
             }
