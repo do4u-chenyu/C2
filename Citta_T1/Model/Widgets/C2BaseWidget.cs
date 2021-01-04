@@ -32,10 +32,37 @@ namespace C2.Model.Widgets
             XmlElement dataItemsNode = node.OwnerDocument.CreateElement(nodeName);
             foreach (var dataItem in dataItems)
             {
-                WriteAttribute(dataItemsNode, dataItem, nodeName.TrimEnd('s'));
+                if (dataItem.DataType == DatabaseType.Null)
+                    WriteAttribute(dataItemsNode, dataItem, nodeName.TrimEnd('s'));
+                else
+                    WriteExternalDataSource(dataItemsNode, dataItem);
             }
             node.AppendChild(dataItemsNode);
 
+        }
+        protected void WriteExternalDataSource(XmlElement parentNode, DataItem dataItem)
+        {
+            ModelXmlWriter mexw0 = new ModelXmlWriter("data_item", parentNode);
+            mexw0.WriteAttribute("path", dataItem.FilePath)
+                 .WriteAttribute("name", dataItem.FileName)
+                 .WriteAttribute("separator", Convert.ToInt32(dataItem.FileSep).ToString())
+                 .WriteAttribute("data_type", dataItem.DataType)
+                 .WriteAttribute("file_type", dataItem.FileType);
+            ModelXmlWriter mexw1 = new ModelXmlWriter("DB_item", mexw0.Element);
+            mexw1.WriteAttribute("allInfo", dataItem.DBItem.AllDatabaseInfo)
+                 .WriteAttribute("group", dataItem.DBItem.Group)
+                 .WriteAttribute("password", dataItem.DBItem.Password)
+                 .WriteAttribute("port", dataItem.DBItem.Port)
+                 .WriteAttribute("pretty_info", dataItem.DBItem.PrettyDatabaseInfo)
+                 .WriteAttribute("SID", dataItem.DBItem.SID)
+                 .WriteAttribute("server", dataItem.DBItem.Server)
+                 .WriteAttribute("service", dataItem.DBItem.Service)
+                 .WriteAttribute("type", dataItem.DBItem.Type)
+                 .WriteAttribute("user", dataItem.DBItem.User);
+            ModelXmlWriter mexw2 = new ModelXmlWriter("table", mexw1.Element);
+            mexw2.WriteAttribute("name", dataItem.DBItem.DataTable.Name)
+                 .WriteAttribute("user_name", dataItem.DBItem.DataTable.UserName)
+                 .WriteAttribute("view", dataItem.DBItem.DataTable.View.ToString());
         }
         protected void WriteAttribute(XmlElement parentNode, DataItem dataItem, string nodeName)
         {
