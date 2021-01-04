@@ -56,6 +56,10 @@
             this.comboBox0.Size = new System.Drawing.Size(137, 21);
             this.comboBox0.TabIndex = 1;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.Size = new System.Drawing.Size(86, 21);
+            // 
             // topPanel
             // 
             this.topPanel.Size = new System.Drawing.Size(299, 10);
