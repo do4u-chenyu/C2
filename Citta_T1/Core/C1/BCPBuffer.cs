@@ -191,7 +191,7 @@ namespace C2.Core
         }
         private string GenConnectionKey(OraConnection conn, Table table)
         {
-            return conn.ConnectionString + table.ToString();
+            return conn.ConnectionString + table.Name;
         }
         public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {

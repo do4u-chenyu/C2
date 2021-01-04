@@ -7,6 +7,7 @@ using C2.Utils;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace C2.Dialogs.C2OperatorViews
 {
@@ -101,7 +102,7 @@ namespace C2.Dialogs.C2OperatorViews
         {
             try
             {
-                using (new CursorHelper(this)) // Display the hourglass
+                using (new CursorUtil.UsingCursor(Cursors.WaitCursor)) // Display the hourglass
                 {
                     using (OracleConnection conn = new OracleConnection(new OraConnection(SelectDatabaseItem).ConnectionString))
                     {
