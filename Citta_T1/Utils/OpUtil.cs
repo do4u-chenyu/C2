@@ -176,10 +176,12 @@ namespace C2.Utils
         }
         public enum ExtType
         {
-            Unknow,  // 默认值放在第一位
-            Excel,
-            Text,
-            Database
+            Unknow = 01,  // 默认值放在第一位
+            Excel  = 02,
+            Text   = 04,  
+            Hive   = 08,
+            Oracle = 16,
+            Database = Hive | Oracle,
         }
 
         public static Encoding EncodingEnum(string encoding,Encoding defaultEncoding = Encoding.GBK)

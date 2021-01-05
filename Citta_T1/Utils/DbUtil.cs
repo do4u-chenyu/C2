@@ -65,7 +65,6 @@ namespace C2.Utils
                     try
                     {
                         con.Open();
-                        con.Close();
                         return true;
                     }
                     catch (Exception ex)
@@ -104,17 +103,14 @@ namespace C2.Utils
                     {
                         con.Open();
                         string sql = String.Format(@"select distinct owner from all_tables");
-                        using (OracleCommand comm = new OracleCommand(sql, con))
+                        OracleCommand comm = new OracleCommand(sql, con);
+                        using (OracleDataReader rdr = comm.ExecuteReader())
                         {
-                            using (OracleDataReader rdr = comm.ExecuteReader())
+                            while (rdr.Read())
                             {
-                                while (rdr.Read())
-                                {
-                                    users.Add(rdr.GetString(0));
-                                }
+                                users.Add(rdr.GetString(0));
                             }
                         }
-                        con.Close();
                     }
                 }
                 catch (Exception ex)
@@ -141,19 +137,16 @@ namespace C2.Utils
                             where owner='{0}'
                             order by table_name",
                               DbHelper.Sanitise(userName.ToUpper()));
-                        using (OracleCommand comm = new OracleCommand(sql, con))
+                        OracleCommand comm = new OracleCommand(sql, con);
+                        using (OracleDataReader rdr = comm.ExecuteReader())
                         {
-                            using (OracleDataReader rdr = comm.ExecuteReader())
+                            while (rdr.Read())
                             {
-                                while (rdr.Read())
-                                {
-                                    Table table = new Table(userName);
-                                    table.Name = rdr.GetString(0);
-                                    tables.Add(table);
-                                }
+                                Table table = new Table(userName);
+                                table.Name = rdr.GetString(0);
+                                tables.Add(table);
                             }
                         }
-                        con.Close();
                     }
                 }
                 catch (Exception ex)
@@ -215,36 +208,26 @@ namespace C2.Utils
                     using (OracleConnection con = new OracleConnection(conn.ConnectionString))
                     {
                         con.Open();
-                        string sql = String.Format(@"select * from {0}.{1}", table.UserName.ToUpper(), table.Name);
-                        using (OracleCommand comm = new OracleCommand(sql, con))
-                        {
-                            using (OracleDataReader rdr = comm.ExecuteReader())
+                        string sql = String.Format(@"select * from {0}.{1} where rownum <= {2}", table.UserName.ToUpper(), table.Name, maxNum);
+                        OracleCommand comm = new OracleCommand(sql, con);
+                        using (OracleDataReader rdr = comm.ExecuteReader())  // rdr.Close()
+                        {  
+                            for (int i = 0; i < rdr.FieldCount - 1; i++)
+                                sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
+                            sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+
+                            while (rdr.Read())
                             {
-                                // headers
-                                List<string> headers = new List<string>();
-                                for (int i = 0; i < rdr.FieldCount; i++)
-                                {
-                                    headers.Add(rdr.GetName(i));
-                                }
-                                sb.Append(String.Join(OpUtil.DefaultFieldSeparator.ToString(), headers) + OpUtil.DefaultLineSeparator.ToString());
-                                
-                                // rows
-                                int rows = 0;
-                                while (rdr.Read() && rows < maxNum)
-                                {
-                                    string[] objs = new string[rdr.FieldCount];
-                                    for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
-                                    sb.Append(String.Join(OpUtil.DefaultFieldSeparator.ToString(), objs) + OpUtil.DefaultLineSeparator.ToString());
-                                    rows++;
-                                }
+                                for (int i = 0; i < rdr.FieldCount - 1; i++)
+                                    sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
+                                sb.Append(rdr[rdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
                             }
                         }
-                        con.Close();
                     }
                 }
                 catch (Exception ex) // Better catch in case they have bad sql
                 {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
                 }
                 return sb.ToString();
             }
