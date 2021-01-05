@@ -1,6 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Controls.Common;
 using C2.Core;
+using C2.Model;
 using C2.Model.Widgets;
 using System;
 using System.Collections.Generic;
@@ -208,6 +209,12 @@ namespace C2.Utils
         public static ElementStatus EStatus(string status, ElementStatus defaultStatus = ElementStatus.Null)
         {
             if (!Enum.TryParse(status, true, out ElementStatus outStatus))
+                return defaultStatus;
+            return outStatus;
+        }
+        public static DatabaseType DBTypeEnum(string type, DatabaseType defaultStatus = DatabaseType.Null)
+        {
+            if (!Enum.TryParse(type, true, out DatabaseType outStatus))
                 return defaultStatus;
             return outStatus;
         }
