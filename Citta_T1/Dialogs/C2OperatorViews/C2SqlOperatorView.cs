@@ -32,7 +32,7 @@ namespace C2.Dialogs.C2OperatorViews
             InitializeComponent();
             InitializeConnection();
             InitializaExecuteSql();
-            InitializePreviewTableContextMenu();
+            InitializePreviewTableContextMenu(); // 如果放在Design.cs里，VS2019设计器会报错打不开，故放在这里初始化
         }
 
         private void InitializePreviewTableContextMenu()
