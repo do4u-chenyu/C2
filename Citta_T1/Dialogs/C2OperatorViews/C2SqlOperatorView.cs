@@ -45,7 +45,7 @@ namespace C2.Dialogs.C2OperatorViews
 
         private void CopyTableNameMenuItem_Click(object sender, EventArgs e)
         {
-            System.Console.WriteLine(tableListBox.SelectedItem.ToString());
+            FileUtil.TryClipboardSetText(tableListBox.SelectedItem.ToString());
         }
 
         private void InitializaExecuteSql()
