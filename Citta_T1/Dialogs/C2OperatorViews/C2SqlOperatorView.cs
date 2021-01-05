@@ -39,7 +39,13 @@ namespace C2.Dialogs.C2OperatorViews
         {
             contextMenuStrip = new ContextMenuStrip(this.components);
             ToolStripMenuItem copyTableNameMenuItem = new ToolStripMenuItem("复制表名");
+            copyTableNameMenuItem.Click += CopyTableNameMenuItem_Click;
             contextMenuStrip.Items.Add(copyTableNameMenuItem);
+        }
+
+        private void CopyTableNameMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Console.WriteLine(tableListBox.SelectedItem.ToString());
         }
 
         private void InitializaExecuteSql()
