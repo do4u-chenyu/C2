@@ -55,7 +55,7 @@ namespace C2.Core
         private static readonly Regex regexXls = new Regex(@"\.xl(s?[xmb]?|t[xm]|am)$");
         private static readonly int maxRow = 100;
         #region 获取缓存的方法
-        public string GetCachePreViewBcpContent(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
+        public string GetCachePreviewBcpContent(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             return GetCachePreviewFileContent(fullFilePath, OpUtil.ExtType.Text, encoding, isForceRead);
         }
@@ -126,10 +126,8 @@ namespace C2.Core
             dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
             dataPreviewDict[fullFilePath].CrcValue = FileUtil.GetFileCRC32Value(fullFilePath);
 
-            // 大文件内容写入本地缓存
-            FileInfo fi = new FileInfo(fullFilePath);
-            long fileSize = fi.Length / 1024 / 1024;
-            if (fileSize > 10)
+            // 大文件(10M以上)内容写入本地缓存
+            if (FileUtil.TryGetFileSize(fullFilePath) > 10 * 1024 * 1024)
             {
                 WriteBuffer(fullFilePath, sb, firstLine);
             }
@@ -248,7 +246,7 @@ namespace C2.Core
             // 命中缓存,直接返回,不再加载文件
             if (HitCache(fullFilePath))
             {
-                IsUpdateCache(extType,fullFilePath);
+                IsUpdateCache(extType, fullFilePath);
                 return returnVar;
             }             
             switch (extType)

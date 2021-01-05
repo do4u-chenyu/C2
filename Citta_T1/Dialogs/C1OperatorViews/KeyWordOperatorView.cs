@@ -192,7 +192,7 @@ namespace C2.OperatorViews
             }
             else if (extType == OpUtil.ExtType.Text)
             {
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath,
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewBcpContent(fullFilePath,
                                                                                           encoding).Split('\n'));
             }
             // 第一行是表头，跳过表头,i从1开始
