@@ -7,6 +7,7 @@ using C2.Utils;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace C2.Dialogs.C2OperatorViews
 {
@@ -61,7 +62,7 @@ namespace C2.Dialogs.C2OperatorViews
             databaseItems = Global.GetDataSourceControl().GetAllExternalData();
             if(databaseItems != null && databaseItems.Count > 0)
             {
-                databaseItems.ForEach(d => names.Add(d.PrettyDatabaeInfo));
+                databaseItems.ForEach(d => names.Add(d.PrettyDatabaseInfo));
                 this.comboBoxConnection.Items.AddRange(names.ToArray());
             }
         }
@@ -125,7 +126,7 @@ namespace C2.Dialogs.C2OperatorViews
         {
             try
             {
-                using (new CursorHelper(this)) // Display the hourglass
+                using (new CursorUtil.UsingCursor(Cursors.WaitCursor)) // Display the hourglass
                 {
                     using (OracleConnection conn = new OracleConnection(new OraConnection(SelectDatabaseItem).ConnectionString))
                     {

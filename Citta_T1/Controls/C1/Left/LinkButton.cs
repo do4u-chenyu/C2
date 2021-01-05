@@ -13,7 +13,7 @@ namespace C2.Controls.Left
     {
         private int count = 0;
         private string oldTextString;
-        public string FullFilePath { get => DatabaseItem.AllDatabaeInfo; }
+        public string FullFilePath { get => DatabaseItem.AllDatabaseInfo; }
         public string LinkSourceName { get; set; }
 
 
@@ -72,11 +72,11 @@ namespace C2.Controls.Left
             var dialog = new AddDatabaseDialog(DatabaseItem, DatabaseDialogMode.Edit, this);
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-                if (DatabaseItem.AllDatabaeInfo.Equals(dialog.DatabaseInfo.AllDatabaeInfo))
+                if (DatabaseItem.AllDatabaseInfo.Equals(dialog.DatabaseInfo.AllDatabaseInfo))
                     return;
-                else if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(DatabaseItem.AllDatabaeInfo))
-                    Global.GetDataSourceControl().LinkSourceDictI2B.Remove(DatabaseItem.AllDatabaeInfo);
-                Global.GetDataSourceControl().LinkSourceDictI2B.Add(dialog.DatabaseInfo.AllDatabaeInfo, this);
+                else if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(DatabaseItem.AllDatabaseInfo))
+                    Global.GetDataSourceControl().LinkSourceDictI2B.Remove(DatabaseItem.AllDatabaseInfo);
+                Global.GetDataSourceControl().LinkSourceDictI2B.Add(dialog.DatabaseInfo.AllDatabaseInfo, this);
 
                 DatabaseItem = dialog.DatabaseInfo;
             }

@@ -2427,6 +2427,16 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 复制路径 {
+            get {
+                object obj = ResourceManager.GetObject("复制路径", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;document type=&quot;C2&quot; editor_version=&quot;1.0.0.0&quot; document_version=&quot;3.0.0.0&quot;&gt;
         ///  &lt;!--Create by C2, you can download it free from http://www.C2.org--&gt;

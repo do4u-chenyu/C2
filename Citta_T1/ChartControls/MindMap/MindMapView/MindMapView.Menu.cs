@@ -311,6 +311,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuCreateChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
+                ToolStripMenuItem MenuCopyPathToClipboard = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 MenuOpenDataSource.Image = Properties.Resources.数据;
 
@@ -318,23 +319,29 @@ namespace C2.Controls.MapViews
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewData,
                 MenuCreateChart,
-                MenuDelete});
+                MenuDelete,
+                new ToolStripSeparator(),
+                MenuCopyPathToClipboard});
 
                 MenuViewData.Image = Properties.Resources.viewdata;
                 MenuViewData.Tag = dataItem;
-                MenuViewData.Text = Lang._("ViewData");
+                MenuViewData.Text = Lang._("ViewData");        // 预览数据
                 MenuViewData.Click += MenuPreViewData_Click;
 
                 MenuCreateChart.Image = Properties.Resources.getchart;              
-                MenuCreateChart.Text = Lang._("CreateChart");
+                MenuCreateChart.Text = Lang._("CreateChart");  // 生成图表 
                 MenuCreateChart.Tag = dataItem;
                 MenuCreateChart.Click += MenuCreateDataChart_Click;
 
                 MenuDelete.Image = Properties.Resources.deletewidget;
-                MenuDelete.Text = Lang._("Delete");
+                MenuDelete.Text = Lang._("Delete");           //  删除
                 MenuDelete.Tag = dataItem;
                 MenuDelete.Click += MenuDelete_Click;
 
+                MenuCopyPathToClipboard.Image = Properties.Resources.复制路径;
+                MenuCopyPathToClipboard.Text = "复制路径到剪切板";
+                MenuDelete.Tag = dataItem;
+ 
                 WidgetMenuStrip.Items.Add(MenuOpenDataSource);           
             }
         }
@@ -366,9 +373,24 @@ namespace C2.Controls.MapViews
         void MenuCreateDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            if (!File.Exists(hitItem.FilePath))
+            
+            if (hitItem.IsDatabase())
             {
-                MessageBox.Show(hitItem.FilePath + "文件不存在", "文件不存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (DbUtil.TestConn(hitItem))  // 预加载
+                {
+                    BCPBuffer.GetInstance().GetCachePreviewOracleTable(hitItem.DBItem);
+                }
+                else // 外部数据源且数据库无法连接
+                {
+                    HelpUtil.ShowMessageBox("该数据库无法连接");
+                    return;
+                }
+            }
+
+            // 内部数据源且文件不存在
+            if (!hitItem.IsDatabase() && !File.Exists(hitItem.FilePath))
+            {
+                HelpUtil.ShowMessageBox(hitItem.FilePath + "文件不存在", "文件不存在");
                 return;
             }
 

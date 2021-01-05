@@ -25,14 +25,14 @@ namespace C2.Model
         public string Group { set; get; }//架构
         public Table DataTable { set; get; }//表名
         //所有信息合并字符串，便于比较是否一致
-        public string AllDatabaeInfo 
+        public string AllDatabaseInfo 
         {
             get
             { 
-                return string.Join(",", Type.ToString(), Server, SID, Service, Port, User, Password, Group, DataTable == null?string.Empty:DataTable.Name); 
+                return string.Join(",", Type.ToString(), Server, SID, Service, Port, User, Password, Group, DataTable == null ? string.Empty:DataTable.Name); 
             }
         }
-        public string PrettyDatabaeInfo
+        public string PrettyDatabaseInfo
         {
             get
             {

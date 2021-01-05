@@ -227,6 +227,7 @@ namespace C2.Utils
                                     headers.Add(rdr.GetName(i));
                                 }
                                 sb.Append(String.Join(OpUtil.DefaultFieldSeparator.ToString(), headers) + OpUtil.DefaultLineSeparator.ToString());
+                                
                                 // rows
                                 int rows = 0;
                                 while (rdr.Read() && rows < maxNum)
