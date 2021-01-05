@@ -338,6 +338,7 @@ namespace C2.Controls.MapViews
                 MenuDelete.Tag = dataItem;
                 MenuDelete.Click += MenuDelete_Click;
 
+                MenuCopyPathToClipboard.Image = Properties.Resources.复制路径;
                 MenuCopyPathToClipboard.Text = "复制路径到剪切板";
                 MenuDelete.Tag = dataItem;
  
