@@ -342,15 +342,16 @@ namespace C2.Controls.MapViews
 
                 MenuExploreDirectory.Image = Properties.Resources.datadirectory;
                 MenuExploreDirectory.Text = Lang._("ExploreDirectory");
-                MenuExploreDirectory.Tag = dataItem;
-                //MenuExploreDirectory.Click += MenuExploreDirectory_Click;
+                MenuExploreDirectory.Tag = dataItem.FilePath;
+                MenuExploreDirectory.Click += MenuExploreDirectory_Click;
+                if (dataItem.IsDatabase())  // 外部数据源不存在浏览文件夹的逻辑
+                    MenuExploreDirectory.Enabled = false;
 
                 MenuCopyFilePathToClipboard.Image = Properties.Resources.copyfilepath;
                 MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
-                MenuDelete.Tag = dataItem;
+                MenuCopyFilePathToClipboard.Tag = dataItem.FilePath;
+                MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;
 
-
- 
                 WidgetMenuStrip.Items.Add(MenuOpenDataSource);           
             }
         }
@@ -611,10 +612,7 @@ namespace C2.Controls.MapViews
         void MenuCopyFilePathToClipboard_Click(object sender, EventArgs e) 
         {
             string ffp = (sender as ToolStripMenuItem).Tag as string;
-            if(File.Exists(ffp))
-                FileUtil.TryClipboardSetText(ffp);
-            else
-                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
+            FileUtil.TryClipboardSetText(ffp);
         }
 
 
