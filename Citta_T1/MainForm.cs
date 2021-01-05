@@ -7,12 +7,10 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using C2.Controls;
 using C2.Model.Documents;
 using C2.Model.MindMaps;
-using C2.Model.Styles;
 using C2.Globalization;
 #region Blumind
 using System.IO;
@@ -21,7 +19,6 @@ using C2.Dialogs;
 using C2.Forms;
 using C2.Model;
 using C2.Model.Widgets;
-using C2.Business.Schedule;
 using C2.ChartPageView;
 #endregion
 
