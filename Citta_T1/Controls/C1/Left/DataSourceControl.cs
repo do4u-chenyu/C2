@@ -238,6 +238,15 @@ namespace C2.Controls.Left
             ReLayoutExternalFrame();
             // 保存
             SaveExternalData();
+            //清空下方内容
+            ClearTablesContent();
+        }
+
+        private void ClearTablesContent()
+        {
+            this.frameCombo.Items.Clear();
+            this.frameCombo.Text = string.Empty;
+            this.dataTabelPanel.Controls.Clear();
         }
         public void SaveDataSourceInfo()
         {

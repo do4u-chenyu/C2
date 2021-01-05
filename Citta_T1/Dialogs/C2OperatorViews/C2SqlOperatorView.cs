@@ -30,6 +30,30 @@ namespace C2.Dialogs.C2OperatorViews
         {
             InitializeComponent();
             InitializeConnection();
+            InitializaExecuteSql();
+        }
+
+        private void InitializaExecuteSql()
+        {
+            this.textEditorControl1.Text = OpTypeTransSql();
+
+        }
+        
+        private string OpTypeTransSql()
+        {
+            switch (this.operatorWidget.OpType)
+            {
+                case OpType.MaxOperator: return "--select MAX(tmp.id) from tmp";
+                case OpType.MinOperator: return "--select MIN(tmp.id) from tmp";
+                case OpType.AvgOperator: return "--select AVG(tmp.id) from tmp";
+                case OpType.DataFormatOperator: return "--select id,name,age from tmp";
+                case OpType.RandomOperator: return "--select * from (select * from tmp order by dbms_random.value) where rownum< 3;";
+                case OpType.FreqOperator: return "--select id,COUNT(id) from tmp group by id";
+                case OpType.SortOperator: return "--select id from tmp order by id desc";
+                case OpType.FilterOperator: return "--select id from tmp where id=9";
+                case OpType.GroupOperator: return "--select name,age from tmp group by age,name order by age;";
+                default: return string.Empty;
+            }
         }
 
         private void InitializeConnection()
