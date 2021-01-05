@@ -10,6 +10,7 @@ namespace C2.Utils
 {
     public static class DbUtil
     {
+        private static readonly LogUtil log = LogUtil.GetInstance("DbUtil");
         //private void executeSQL(Connection connection, string sqlText)
         //{
         //    // Execute the given query for the first 1000 records it spits out
@@ -47,7 +48,7 @@ namespace C2.Utils
         //    }
         //    catch (Exception ex) // Better catch in case they have bad sql
         //    {
-        //        HelpUtil.ShowMessageBox(ex.Message);
+        //        log.Error(ex.Message);
         //    }
         //}
         //private void connect()
@@ -56,7 +57,7 @@ namespace C2.Utils
         //    OracleDataAdapter oda = new OracleDataAdapter(oconn);
         //    oda.Fill()
         //}
-        public static bool TestConn(OraConnection conn, bool showDetail=false)
+        public static bool TestConn(OraConnection conn)
         {
             using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
             {
@@ -69,15 +70,14 @@ namespace C2.Utils
                     }
                     catch (Exception ex)
                     {
-                        if (showDetail)
-                            HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                        log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                         return false;
                     }
                 }
             }
         }
 
-        public static bool TestConn(DataItem item, bool showDetail = false)
+        public static bool TestConn(DataItem item)
         {
             bool ret = false;
             switch (item.DataType)
@@ -115,7 +115,7 @@ namespace C2.Utils
                 }
                 catch (Exception ex)
                 {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                 }
             }
             return users;
@@ -151,7 +151,7 @@ namespace C2.Utils
                 }
                 catch (Exception ex)
                 {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                 }
             }
             return tables;
@@ -167,10 +167,13 @@ namespace C2.Utils
         private static List<List<string>> StringTo2DString(string contentString)
         {
             List<List<string>> ret = new List<List<string>>();
-            string[] lines = contentString.Split(OpUtil.DefaultLineSeparator);
-            for (int i = 0; i < lines.Length; i++)
+            if (!String.IsNullOrEmpty(contentString))
             {
-                ret.Add(new List<string>(lines[i].Split(OpUtil.DefaultFieldSeparator)));
+                string[] lines = contentString.Split(OpUtil.DefaultLineSeparator);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    ret.Add(new List<string>(lines[i].Split(OpUtil.DefaultFieldSeparator)));
+                }
             }
             return ret;
         }
@@ -225,9 +228,9 @@ namespace C2.Utils
                         }
                     }
                 }
-                catch (Exception ex) // Better catch in case they have bad sql
+                catch (Exception ex)
                 {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
                 }
                 return sb.ToString();
             }
@@ -270,7 +273,7 @@ namespace C2.Utils
                 }
                 catch (Exception ex) // Better catch in case they have bad sql
                 {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                     return false;
                 }
             }
@@ -279,9 +282,9 @@ namespace C2.Utils
         public static bool FillDGVWithTbContent(DataGridView gridOutput, OraConnection conn, Table table, int maxNum)
         {
             List<List<string>> ret = DbUtil.GetTbContent(conn, table, maxNum);
-            ret = FileUtil.FormatDatas(ret, maxNum);
             if (ret.Count <= 0)
                 return false;
+            ret = FileUtil.FormatDatas(ret, maxNum);
             FileUtil.FillTable(gridOutput, ret, maxNum);
             return true;
         }

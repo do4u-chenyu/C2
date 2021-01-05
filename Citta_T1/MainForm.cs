@@ -690,7 +690,7 @@ namespace C2
                     this.ShowBottomPreview();
                 }
                 else 
-                    HelpUtil.ShowMessageBox("该数据库无法连接");
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
 

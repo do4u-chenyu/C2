@@ -11,10 +11,10 @@ namespace C2.Controls.Left
 {
     public partial class TableButton : UserControl
     {
-        
+
         private int count = 0;
         private string oldTextString;
-        
+
         public string ConnectionInfo { get => TableItem.PrettyDatabaseInfo; }
         public int Count { get => this.count; set => this.count = value; }
         //private static string TableButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
@@ -54,8 +54,13 @@ namespace C2.Controls.Left
         {
             PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm();
             previewDbDataForm.MaxNumChanged += new MaxNumChangedEventHandler(OnDataGridViewMaxNumChanged);
-            if (DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable, previewDbDataForm.MaxNum))
-                previewDbDataForm.Show();
+            if (!DbUtil.TestConn(new OraConnection(TableItem)))
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                return;
+            }
+            DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable, previewDbDataForm.MaxNum);
+            previewDbDataForm.Show();
         }
         private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
         {
@@ -74,7 +79,7 @@ namespace C2.Controls.Left
 
         private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             Global.GetMainForm().ShowBottomPanel();
         }
 
@@ -91,7 +96,7 @@ namespace C2.Controls.Left
                 dragDropData.SetData("DataType", DatabaseType.Oracle);   //本地数据还是外部数据
                 dragDropData.SetData("TableInfo", TableItem);            // 数据表信息
                 dragDropData.SetData("Text", TableItem.DataTable.Name);  // 数据表名
-         
+
                 this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
             //else if (e.Clicks == 2)
@@ -99,7 +104,7 @@ namespace C2.Controls.Left
             //    RenameToolStripMenuItem_Click(sender, e);
             //}
         }
-        
+
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //this.ReviewToolStripMenuItem.Enabled = Global.GetBottomViewPanel().Visible;

@@ -386,7 +386,7 @@ namespace C2.Controls.MapViews
                 }
                 else // 外部数据源且数据库无法连接
                 {
-                    HelpUtil.ShowMessageBox("该数据库无法连接");
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return;
                 }
             }

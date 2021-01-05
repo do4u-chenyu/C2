@@ -74,8 +74,11 @@ namespace C2.Dialogs.C2OperatorViews
 
             //连接数据库
             OraConnection conn = new OraConnection(SelectDatabaseItem);
-            if (!DbUtil.TestConn(conn, true))
+            if (!DbUtil.TestConn(conn))
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
+            }
 
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
@@ -97,7 +100,7 @@ namespace C2.Dialogs.C2OperatorViews
 
             //连接数据库
             OraConnection conn = new OraConnection(SelectDatabaseItem);
-            if (!DbUtil.TestConn(conn, true))
+            if (!DbUtil.TestConn(conn))
                 return;
 
             //刷新数据表
