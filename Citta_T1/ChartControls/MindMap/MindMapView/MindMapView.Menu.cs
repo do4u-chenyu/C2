@@ -432,7 +432,7 @@ namespace C2.Controls.MapViews
             List<string> rows = new List<string>(fileContent.Split('\n'));
             // 最多绘制前100行数据
             int upperLimit = Math.Min(rows.Count, 100);
-            List<List<string>> columnValues = Utils.FileUtil.GetColumns(hitItem.SelectedIndexs, hitItem, rows, upperLimit);
+            List<List<string>> columnValues = FileUtil.GetColumns(hitItem.SelectedIndexs, hitItem, rows, upperLimit);
             if (columnValues.Count == 0)
                 return;
             Utils.ControlUtil.PaintChart(columnValues, hitItem.SelectedItems, hitItem.ChartType);
@@ -603,10 +603,7 @@ namespace C2.Controls.MapViews
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
             string ffp = (sender as ToolStripMenuItem).Tag as string;
-            if (File.Exists(ffp))
-                FileUtil.ExploreDirectory(ffp);
-            else
-                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
+            FileUtil.ExploreDirectory(ffp);
         }
 
         void MenuCopyFilePathToClipboard_Click(object sender, EventArgs e) 

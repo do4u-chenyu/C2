@@ -82,7 +82,7 @@ namespace C2.Utils
         }
         public static void ExploreDirectory(string fullFilePath)
         {//判断文件的存在
-            if (System.IO.File.Exists(fullFilePath))
+            if (File.Exists(fullFilePath))
             {
                 //存在文件
                 try
