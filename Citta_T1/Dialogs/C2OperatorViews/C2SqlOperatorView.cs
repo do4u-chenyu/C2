@@ -14,6 +14,7 @@ namespace C2.Dialogs.C2OperatorViews
     public partial class C2SqlOperatorView : C2BaseOperatorView
     {
         private List<DatabaseItem> databaseItems;
+        private ContextMenuStrip contextMenuStrip; 
         private DatabaseItem SelectDatabaseItem
         {
             get
@@ -31,6 +32,14 @@ namespace C2.Dialogs.C2OperatorViews
             InitializeComponent();
             InitializeConnection();
             InitializaExecuteSql();
+            InitializePreviewTableContextMenu();
+        }
+
+        private void InitializePreviewTableContextMenu()
+        {
+            contextMenuStrip = new ContextMenuStrip(this.components);
+            ToolStripMenuItem copyTableNameMenuItem = new ToolStripMenuItem("复制表名");
+            contextMenuStrip.Items.Add(copyTableNameMenuItem);
         }
 
         private void InitializaExecuteSql()
@@ -168,6 +177,22 @@ namespace C2.Dialogs.C2OperatorViews
             {
                 HelpUtil.ShowMessageBox(ex.Message);
             }
+        }
+
+
+        //右键打开菜单
+        private void TableListBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Clicks != 1 || e.Button != MouseButtons.Right)
+                return;
+            int posindex = tableListBox.IndexFromPoint(e.X, e.Y);
+            if (posindex >= 0 && posindex < tableListBox.Items.Count)
+            {
+                tableListBox.SelectedIndex = posindex;
+                contextMenuStrip.Show(tableListBox, e.X, e.Y);
+                tableListBox.Refresh();
+            }
+            
         }
     }
 }
