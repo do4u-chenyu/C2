@@ -143,7 +143,10 @@ namespace C2.Dialogs.C2OperatorViews
         private void bnExecute_Click(object sender, System.EventArgs e)
         {
             if (SelectDatabaseItem == null)
+            {
                 HelpUtil.ShowMessageBox(HelpUtil.DatabaseItemIsNull);
+                return;
+            }
             try
             {
                 using (new CursorUtil.UsingCursor(Cursors.WaitCursor)) // Display the hourglass
@@ -198,7 +201,6 @@ namespace C2.Dialogs.C2OperatorViews
                 contextMenuStrip.Show(tableListBox, e.X, e.Y);
                 tableListBox.Refresh();
             }
-            
         }
     }
 }
