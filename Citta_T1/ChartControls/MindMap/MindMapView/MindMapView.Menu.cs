@@ -311,7 +311,8 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuCreateChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
-                ToolStripMenuItem MenuCopyPathToClipboard = new ToolStripMenuItem();
+                ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
+                ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 MenuOpenDataSource.Image = Properties.Resources.数据;
 
@@ -321,7 +322,8 @@ namespace C2.Controls.MapViews
                 MenuCreateChart,
                 MenuDelete,
                 new ToolStripSeparator(),
-                MenuCopyPathToClipboard});
+                MenuExploreDirectory,
+                MenuCopyFilePathToClipboard});
 
                 MenuViewData.Image = Properties.Resources.viewdata;
                 MenuViewData.Tag = dataItem;
@@ -338,9 +340,16 @@ namespace C2.Controls.MapViews
                 MenuDelete.Tag = dataItem;
                 MenuDelete.Click += MenuDelete_Click;
 
-                MenuCopyPathToClipboard.Image = Properties.Resources.复制路径;
-                MenuCopyPathToClipboard.Text = "复制路径到剪切板";
+                MenuExploreDirectory.Image = Properties.Resources.datadirectory;
+                MenuExploreDirectory.Text = Lang._("ExploreDirectory");
+                MenuExploreDirectory.Tag = dataItem;
+                //MenuExploreDirectory.Click += MenuExploreDirectory_Click;
+
+                MenuCopyFilePathToClipboard.Image = Properties.Resources.copyfilepath;
+                MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
                 MenuDelete.Tag = dataItem;
+
+
  
                 WidgetMenuStrip.Items.Add(MenuOpenDataSource);           
             }
