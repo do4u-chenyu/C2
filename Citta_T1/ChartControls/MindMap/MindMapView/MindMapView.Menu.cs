@@ -344,7 +344,7 @@ namespace C2.Controls.MapViews
                 MenuDelete.Tag = dataItem;
                 MenuDelete.Click += MenuDelete_Click;
 
-                MenuExploreDirectory.Image = Properties.Resources.datadirectory;
+                MenuExploreDirectory.Image = Properties.Resources.dataDirectory;
                 MenuExploreDirectory.Text = Lang._("ExploreDirectory");
                 MenuExploreDirectory.Tag = dataItem.FilePath;
                 MenuExploreDirectory.Click += MenuExploreDirectory_Click;
@@ -485,8 +485,13 @@ namespace C2.Controls.MapViews
                 MenuDelete.Tag = dataItem;
                 MenuDelete.Click += MenuDeleteRes_Click;
 
-                MenuFileSavaAs.Image = Properties.Resources.deleteWidget;
-                MenuExploreDirectory.Text = Lang._("Save As");
+                MenuFileSavaAs.Image = Properties.Resources.resultDone;
+                MenuFileSavaAs.Text = Lang._("Save As");
+                MenuFileSavaAs.Tag = dataItem.FilePath;
+                MenuFileSavaAs.Click += MenuSaveAs_Click;
+
+                MenuExploreDirectory.Image = Properties.Resources.dataDirectory;
+                MenuExploreDirectory.Text = Lang._("ExploreDirectory");
                 MenuExploreDirectory.Tag = dataItem.FilePath;
                 MenuExploreDirectory.Click += MenuExploreDirectory_Click;
 
@@ -583,7 +588,7 @@ namespace C2.Controls.MapViews
                 MenuOpenAttachment.Text = Lang._("OpenAttachment");
                 MenuOpenAttachment.Click += MenuOpenAttachment_Click;
 
-                MenuExploreDirectory.Image = Properties.Resources.datadirectory;
+                MenuExploreDirectory.Image = Properties.Resources.dataDirectory;
                 MenuExploreDirectory.Text = Lang._("ExploreDirectory");
                 MenuExploreDirectory.Tag = path;
                 MenuExploreDirectory.Click += MenuExploreDirectory_Click;
@@ -611,6 +616,11 @@ namespace C2.Controls.MapViews
         {
             string ffp = (sender as ToolStripMenuItem).Tag as string;
             FileUtil.ExploreDirectory(ffp);
+        }
+
+        void MenuSaveAs_Click(object sender, EventArgs e)
+        {
+
         }
 
         void MenuCopyFilePathToClipboard_Click(object sender, EventArgs e) 
