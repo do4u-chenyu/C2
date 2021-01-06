@@ -32,6 +32,8 @@
             this.externalDataLabel = new System.Windows.Forms.Label();
             this.localDataLabel = new System.Windows.Forms.Label();
             this.localFrame = new System.Windows.Forms.Panel();
+            this.addLocalConnectLabel = new System.Windows.Forms.Label();
+            this.addConnectLabel = new System.Windows.Forms.Label();
             this.externalFrame = new System.Windows.Forms.Panel();
             this.dataTableTextBox = new System.Windows.Forms.TextBox();
             this.dataTabelPanel = new System.Windows.Forms.Panel();
@@ -40,8 +42,8 @@
             this.dataTableLabel = new System.Windows.Forms.Label();
             this.frameLabel = new System.Windows.Forms.Label();
             this.linkLabel = new System.Windows.Forms.Label();
-            this.addConnectLabel = new System.Windows.Forms.Label();
             this.dataSourceFrame.SuspendLayout();
+            this.localFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,11 +93,36 @@
             this.localFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.localFrame.BackColor = System.Drawing.Color.White;
             this.localFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.localFrame.Controls.Add(this.addLocalConnectLabel);
             this.localFrame.Location = new System.Drawing.Point(3, 35);
             this.localFrame.Name = "localFrame";
             this.localFrame.Size = new System.Drawing.Size(179, 622);
             this.localFrame.TabIndex = 1;
             this.localFrame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataSourceControl_MouseDown);
+            // 
+            // addLocalConnectLabel
+            // 
+            this.addLocalConnectLabel.AutoSize = true;
+            this.addLocalConnectLabel.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.addLocalConnectLabel.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.addLocalConnectLabel.Location = new System.Drawing.Point(4, 0);
+            this.addLocalConnectLabel.Name = "addLocalConnectLabel";
+            this.addLocalConnectLabel.Size = new System.Drawing.Size(77, 14);
+            this.addLocalConnectLabel.TabIndex = 8;
+            this.addLocalConnectLabel.Text = "+ 添加连接";
+            this.addLocalConnectLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.addLocalConnectLabel_MouseClick);
+            // 
+            // addConnectLabel
+            // 
+            this.addConnectLabel.AutoSize = true;
+            this.addConnectLabel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.addConnectLabel.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.addConnectLabel.Location = new System.Drawing.Point(4, 4);
+            this.addConnectLabel.Name = "addConnectLabel";
+            this.addConnectLabel.Size = new System.Drawing.Size(77, 14);
+            this.addConnectLabel.TabIndex = 0;
+            this.addConnectLabel.Text = "+ 添加连接";
+            this.addConnectLabel.Click += new System.EventHandler(this.AddConnectLabel_Click);
             // 
             // externalFrame
             // 
@@ -181,18 +208,6 @@
             this.linkLabel.TabIndex = 1;
             this.linkLabel.Text = "连接";
             // 
-            // addConnectLabel
-            // 
-            this.addConnectLabel.AutoSize = true;
-            this.addConnectLabel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.addConnectLabel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.addConnectLabel.Location = new System.Drawing.Point(4, 4);
-            this.addConnectLabel.Name = "addConnectLabel";
-            this.addConnectLabel.Size = new System.Drawing.Size(77, 14);
-            this.addConnectLabel.TabIndex = 0;
-            this.addConnectLabel.Text = "+ 添加连接";
-            this.addConnectLabel.Click += new System.EventHandler(this.AddConnectLabel_Click);
-            // 
             // DataSourceControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -204,6 +219,8 @@
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DataSourceControl_Paint);
             this.dataSourceFrame.ResumeLayout(false);
+            this.localFrame.ResumeLayout(false);
+            this.localFrame.PerformLayout();
             this.externalFrame.ResumeLayout(false);
             this.externalFrame.PerformLayout();
             this.ResumeLayout(false);
@@ -225,5 +242,6 @@
         private System.Windows.Forms.ComboBox frameCombo;
         private System.Windows.Forms.Panel dataTabelPanel;
         private System.Windows.Forms.TextBox dataTableTextBox;
+        private System.Windows.Forms.Label addLocalConnectLabel;
     }
 }

@@ -17,8 +17,10 @@ namespace C2.Controls.Left
 {
     public partial class DataSourceControl : UserControl
     {
+        private C2.Dialogs.InputDataForm inputDataForm;
         public DataSourceControl()
         {
+            InitializeInputDataForm();
             dataSourceDictI2B = new Dictionary<string, DataButton>();
             linkSourceDictI2B = new Dictionary<string, LinkButton>();
             InitializeComponent();
@@ -47,6 +49,7 @@ namespace C2.Controls.Left
         public Dictionary<string, LinkButton> LinkSourceDictI2B { get => linkSourceDictI2B; }
 
         private LinkButton _SelectLinkButton;
+
         //数据库相关属性
         public LinkButton SelectLinkButton 
         {
@@ -60,7 +63,17 @@ namespace C2.Controls.Left
                 return _SelectLinkButton;
             }
         }
+        void InitializeInputDataForm()
+        {
+            this.inputDataForm = new Dialogs.InputDataForm();
+            this.inputDataForm.InputDataEvent += InputDataFormEvent;
+        }
+        private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        {
+            Global.GetDataSourceControl().GenDataButton(name, fullFilePath, separator, extType, encoding);
+            Global.GetDataSourceControl().Visible = true;
 
+        }
         public void OnSelectLinkButton(LinkButton linkButton)
         {
             //改变选中的button,刷新架构，默认显示用户名登陆的表结构
@@ -359,6 +372,13 @@ namespace C2.Controls.Left
             }
 
             return allExternalData;
+        }
+
+        private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
+            this.inputDataForm.ShowDialog();
+            this.inputDataForm.ReSetParams();
         }
     }
 }
