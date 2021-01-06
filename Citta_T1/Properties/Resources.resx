@@ -157,7 +157,7 @@
   <data name="keyword_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\关键词过滤.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Modelmarket" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="modelMarket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Modelmarket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="list_numbered" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -295,7 +295,7 @@
   <data name="image_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\image.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="deleteattachment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="deleteAttachment" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\deleteattachment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -337,7 +337,7 @@
   <data name="nav_small_last_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\nav_small_last_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="viewdata" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="viewData" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\viewdata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="blueshadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -406,7 +406,7 @@
   <data name="taskbar_close_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\taskbar_close_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="deletewidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="deleteWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\deletewidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="indent" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -430,7 +430,7 @@
   <data name="max_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\最大值.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="controlhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="controlHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\menu\controlhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="theme" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -1713,7 +1713,7 @@
   <data name="hand_cur" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hand_cur.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="getchart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="getChart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\getchart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="备注" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -1737,7 +1737,7 @@
   <data name="思维导图" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Templates\思维导图.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="datadirectory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="dataDirectory" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\datadirectory.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="font" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -1782,7 +1782,7 @@
   <data name="add_topic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\add_topic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="importmodel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="importModel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\toolbox\importmodel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="next" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -1917,7 +1917,7 @@
   <data name="head" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\menu\head.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="copyfilepath" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="copyFilePath" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\copyfilepath.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="modelUpdate" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -1950,7 +1950,7 @@
   <data name="tree" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tree.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ORACLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="oracle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\ORACLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Table" type="System.Resources.ResXFileRef, System.Windows.Forms">

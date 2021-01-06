@@ -119,8 +119,8 @@ namespace C2.Core
                 return false;
             }
             List<List<string>> rowContentList = rrst.Result;
-            StringBuilder sb = new StringBuilder(1024 * 16);
             string firstLine = String.Join("\t", rowContentList[0]);
+            StringBuilder sb = new StringBuilder(1024 * 16);
             for (int i = 0; i < rowContentList.Count; i++)
                 sb.AppendLine(String.Join("\t", rowContentList[i]));
             dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
