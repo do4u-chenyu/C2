@@ -203,7 +203,7 @@ namespace C2.Controls.MapViews
         }
         void MenuDesignOp_Click(object sender, EventArgs e)
         {
-            if(opw.DataSourceItem != null && !string.IsNullOrEmpty(opw.DataSourceItem.FilePath))
+            if(opw.DataSourceItem != null && opw.DataSourceItem.DataType == DatabaseType.Null && !string.IsNullOrEmpty(opw.DataSourceItem.FilePath))
             {
                 string message = FileUtil.FileExistOrUse(opw.DataSourceItem.FilePath);
                 if (!string.IsNullOrEmpty(message))

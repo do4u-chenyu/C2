@@ -33,6 +33,7 @@ namespace C2.Dialogs.C2OperatorViews
             InitializeConnection();
             InitializaExecuteSql();
             InitializePreviewTableContextMenu(); // 如果放在Design.cs里，VS2019设计器会报错打不开，故放在这里初始化
+            LoadOption();
         }
 
         private void InitializePreviewTableContextMenu()
@@ -201,6 +202,53 @@ namespace C2.Dialogs.C2OperatorViews
                 contextMenuStrip.Show(tableListBox, e.X, e.Y);
                 tableListBox.Refresh();
             }
+        }
+
+        protected override void SaveOption()
+        {
+            if (SelectDatabaseItem == null)
+                return;
+            this.operatorWidget.Option.Clear();
+            this.operatorWidget.Option.SetOption("sqlText", textEditorControl1.Text);
+            this.operatorWidget.Option.SetOption("connection", SelectDatabaseItem.AllDatabaseInfo);
+        }
+
+        private void LoadOption()
+        {
+            if (!String.IsNullOrEmpty(this.operatorWidget.Option.GetOption("sqlText")))
+            {
+                textEditorControl1.Text = this.operatorWidget.Option.GetOption("sqlText");
+            }
+            if (!String.IsNullOrEmpty(this.operatorWidget.Option.GetOption("connection")))
+            {
+                string allDatabaseInfo = this.operatorWidget.Option.GetOption("connection");
+                DatabaseItem oldDatabaseItem = new DatabaseItem(allDatabaseInfo);
+                for(int i = 0;i<this.comboBoxConnection.Items.Count;i++)
+                {
+                    if (oldDatabaseItem.PrettyDatabaseInfo.Equals(this.comboBoxConnection.Items[i].ToString()))
+                    {
+                        this.comboBoxConnection.SelectedIndex = i;
+                        this.comboBoxConnection.Text = oldDatabaseItem.PrettyDatabaseInfo;
+                        break;
+                    }
+                }
+            }
+        }
+
+        protected override bool IsOptionNotReady()
+        {
+            bool notReady = true;
+            if (this.comboBoxConnection.Text == String.Empty)
+            {
+                HelpUtil.ShowMessageBox("请选择数据库");
+                return notReady;
+            }
+            if (this.textEditorControl1.Text == String.Empty)
+            {
+                HelpUtil.ShowMessageBox("请输入sql命令");
+                return notReady;
+            }
+            return !notReady;
         }
     }
 }
