@@ -49,22 +49,8 @@ namespace C2.Model.Widgets
 
             mexw0.WriteAttribute("separator", Convert.ToInt32(dataItem.FileSep).ToString())
                  .WriteAttribute("data_type", dataItem.DataType)
-                 .WriteAttribute("file_type", dataItem.FileType);
-            ModelXmlWriter mexw1 = new ModelXmlWriter("DB_item", mexw0.Element);
-            mexw1.WriteAttribute("allInfo", dataItem.DBItem.AllDatabaseInfo)
-                 .WriteAttribute("group", dataItem.DBItem.Group)
-                 .WriteAttribute("password", dataItem.DBItem.Password)
-                 .WriteAttribute("port", dataItem.DBItem.Port)
-                 .WriteAttribute("pretty_info", dataItem.DBItem.PrettyDatabaseInfo)
-                 .WriteAttribute("SID", dataItem.DBItem.SID)
-                 .WriteAttribute("server", dataItem.DBItem.Server)
-                 .WriteAttribute("service", dataItem.DBItem.Service)
-                 .WriteAttribute("type", dataItem.DBItem.Type)
-                 .WriteAttribute("user", dataItem.DBItem.User);
-            ModelXmlWriter mexw2 = new ModelXmlWriter("table", mexw1.Element);
-            mexw2.WriteAttribute("name", dataItem.DBItem.DataTable.Name)
-                 .WriteAttribute("user_name", dataItem.DBItem.DataTable.UserName)
-                 .WriteAttribute("view", dataItem.DBItem.DataTable.View.ToString());
+                 .WriteAttribute("file_type", dataItem.FileType)
+                 .WriteAttribute("allInfo", dataItem.DBItem.AllDatabaseInfo);
         }
         protected void WriteAttribute(XmlElement parentNode, DataItem dataItem, string nodeName)
         {
@@ -121,37 +107,11 @@ namespace C2.Model.Widgets
         private void ReadExternalDataSource(XmlElement dataItem, List<DataItem> DataItems)
         {
             // 数据库数据源挂件读取
-            XmlElement DB_item;
-            XmlElement tableNode;
             char separator = ConvertUtil.TryParseAscii(dataItem.GetAttribute("separator"));
             DatabaseType dataType = OpUtil.DBTypeEnum(dataItem.GetAttribute("data_type"));
             string file_type = dataItem.GetAttribute("file_type");
-
-            try 
-            {
-                DB_item = (dataItem.SelectSingleNode("DB_item") as XmlElement);
-                tableNode = (DB_item.SelectSingleNode("table") as XmlElement);
-            }
-            catch (XPathException e)
-            {
-                log.Error("读取xml文件出错这里， error: " + e.Message);
-                return;
-            }
-            // 组装database
-            DatabaseItem database = new DatabaseItem(
-                OpUtil.DBTypeEnum(DB_item.GetAttribute("type")),
-                DB_item.GetAttribute("server"),
-                DB_item.GetAttribute("SID"),
-                DB_item.GetAttribute("service"),
-                DB_item.GetAttribute("port"),
-                DB_item.GetAttribute("user"),
-                DB_item.GetAttribute("password"),
-                DB_item.GetAttribute("group"));
-            // 组装database的Table  
-            Table table = new Table(tableNode.GetAttribute("user_name"));
-            table.Name = tableNode.GetAttribute("name");
-            table.View = ConvertUtil.TryParseBool(tableNode.GetAttribute("view"));
-            database.DataTable = table;
+            string allDatabaseInfo = dataItem.GetAttribute("allInfo");
+            DatabaseItem database = new DatabaseItem(allDatabaseInfo);
 
             DataItem DBitem = new DataItem(dataType, database)
             {
