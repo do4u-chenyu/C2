@@ -38,28 +38,26 @@ namespace C2.Model.Widgets
                 if (dataItem.DataType == DatabaseType.Null)
                     WriteAttribute(dataItemsNode, dataItem, nodeName.TrimEnd('s'));
                 else
-                    WriteExternalDataSource(dataItemsNode, dataItem);
+                    WriteExternalDataSource(dataItemsNode, dataItem, nodeName.TrimEnd('s'));
             }
             node.AppendChild(dataItemsNode);
 
         }
-        protected void WriteExternalDataSource(XmlElement parentNode, DataItem dataItem)
+        protected void WriteExternalDataSource(XmlElement parentNode, DataItem dataItem, string nodeName)
         {
-            ModelXmlWriter mexw0 = new ModelXmlWriter("data_item", parentNode);
+            ModelXmlWriter mexw0 = new ModelXmlWriter(nodeName, parentNode);
 
             mexw0.WriteAttribute("separator", Convert.ToInt32(dataItem.FileSep).ToString())
                  .WriteAttribute("data_type", dataItem.DataType)
                  .WriteAttribute("file_type", dataItem.FileType)
                  .WriteAttribute("allInfo", dataItem.DBItem.AllDatabaseInfo);
+
+            // 图标挂件、结果挂件属性写入
+            WriteSpecialAttribute(mexw0,dataItem);
+
         }
-        protected void WriteAttribute(XmlElement parentNode, DataItem dataItem, string nodeName)
+        private void WriteSpecialAttribute(ModelXmlWriter mexw, DataItem dataItem)
         {
-            ModelXmlWriter mexw = new ModelXmlWriter(nodeName, parentNode);
-            mexw.WriteAttribute("path", dataItem.FilePath)
-                .WriteAttribute("name", dataItem.FileName)
-                .WriteAttribute("separator", Convert.ToInt32(dataItem.FileSep).ToString())
-                .WriteAttribute("encoding", dataItem.FileEncoding)
-                .WriteAttribute("file_type", dataItem.FileType);
             // 结果算子写入类型
             if (dataItem.ResultDataType != DataItem.ResultType.Null)
             {
@@ -72,6 +70,17 @@ namespace C2.Model.Widgets
                     .WriteAttribute("selected_indexs", string.Join(",", dataItem.SelectedIndexs))
                     .WriteAttribute("selected_items", string.Join(",", dataItem.SelectedItems));
             }
+        }
+        protected void WriteAttribute(XmlElement parentNode, DataItem dataItem, string nodeName)
+        {
+            ModelXmlWriter mexw = new ModelXmlWriter(nodeName, parentNode);
+            mexw.WriteAttribute("path", dataItem.FilePath)
+                .WriteAttribute("name", dataItem.FileName)
+                .WriteAttribute("separator", Convert.ToInt32(dataItem.FileSep).ToString())
+                .WriteAttribute("encoding", dataItem.FileEncoding)
+                .WriteAttribute("file_type", dataItem.FileType);
+            // 结果算子、图标挂件写入类型
+            WriteSpecialAttribute(mexw, dataItem);
         }
         protected void ReadAttribute(XmlNodeList data_items,List<DataItem> DataItems)
         {
@@ -88,19 +97,8 @@ namespace C2.Model.Widgets
                    ConvertUtil.TryParseAscii(dataItem.GetAttribute("separator")),
                    OpUtil.EncodingEnum(dataItem.GetAttribute("encoding")),
                    OpUtil.ExtTypeEnum(dataItem.GetAttribute("file_type")));
-                // 结果挂件类型读取
-                string resultType = dataItem.GetAttribute("result_type");
-                if (!string.IsNullOrEmpty(resultType))
-                {
-                    item.ResultDataType = OpUtil.ResultTypeEnum(resultType);
-                }
-                // 图表挂件属性读取
-                item.ChartType = dataItem.GetAttribute("chart_type");
-                if (!string.IsNullOrEmpty(item.ChartType))
-                {
-                    item.SelectedIndexs = Utils.ConvertUtil.TryParseIntList(dataItem.GetAttribute("selected_indexs"));
-                    item.SelectedItems = new List<string>(dataItem.GetAttribute("selected_items").Split(','));
-                }                               
+                // 图表挂件、结果挂件属性读取
+                ReadSpecialAttribute(item, dataItem);
                 DataItems.Add(item);
             }
         }
@@ -120,7 +118,25 @@ namespace C2.Model.Widgets
                 FilePath = database.AllDatabaseInfo,
                 FileName = database.DataTable.Name
             };
+            // 图表挂件、结果挂件属性读取
+            ReadSpecialAttribute(DBitem, dataItem);
             DataItems.Add(DBitem);
+        }
+        private void ReadSpecialAttribute(DataItem item, XmlElement dataItem)
+        {
+            // 结果挂件类型读取
+            string resultType = dataItem.GetAttribute("result_type");
+            if (!string.IsNullOrEmpty(resultType))
+            {
+                item.ResultDataType = OpUtil.ResultTypeEnum(resultType);
+            }
+            // 图表挂件属性读取
+            item.ChartType = dataItem.GetAttribute("chart_type");
+            if (!string.IsNullOrEmpty(item.ChartType))
+            {
+                item.SelectedIndexs = Utils.ConvertUtil.TryParseIntList(dataItem.GetAttribute("selected_indexs"));
+                item.SelectedItems = new List<string>(dataItem.GetAttribute("selected_items").Split(','));
+            }
         }
         #endregion
         public static void DoPreViewDataSource(DataItem hitItem)
