@@ -353,9 +353,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap controlhelp {
+        internal static System.Drawing.Bitmap controlHelp {
             get {
-                object obj = ResourceManager.GetObject("controlhelp", resourceCulture);
+                object obj = ResourceManager.GetObject("controlHelp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -373,9 +373,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap copyfilepath {
+        internal static System.Drawing.Bitmap copyFilePath {
             get {
-                object obj = ResourceManager.GetObject("copyfilepath", resourceCulture);
+                object obj = ResourceManager.GetObject("copyFilePath", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -533,9 +533,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap deleteattachment {
+        internal static System.Drawing.Bitmap deleteAttachment {
             get {
-                object obj = ResourceManager.GetObject("deleteattachment", resourceCulture);
+                object obj = ResourceManager.GetObject("deleteAttachment", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -543,9 +543,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap deletewidget {
+        internal static System.Drawing.Bitmap deleteWidget {
             get {
-                object obj = ResourceManager.GetObject("deletewidget", resourceCulture);
+                object obj = ResourceManager.GetObject("deleteWidget", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -888,9 +888,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap getchart {
+        internal static System.Drawing.Bitmap getChart {
             get {
-                object obj = ResourceManager.GetObject("getchart", resourceCulture);
+                object obj = ResourceManager.GetObject("getChart", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1064,9 +1064,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap importmodel {
+        internal static System.Drawing.Bitmap importModel {
             get {
-                object obj = ResourceManager.GetObject("importmodel", resourceCulture);
+                object obj = ResourceManager.GetObject("importModel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1324,9 +1324,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap Modelmarket {
+        internal static System.Drawing.Bitmap modelMarket {
             get {
-                object obj = ResourceManager.GetObject("Modelmarket", resourceCulture);
+                object obj = ResourceManager.GetObject("modelMarket", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1554,9 +1554,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap ORACLE {
+        internal static System.Drawing.Bitmap oracle {
             get {
-                object obj = ResourceManager.GetObject("ORACLE", resourceCulture);
+                object obj = ResourceManager.GetObject("oracle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2261,9 +2261,9 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap viewdata {
+        internal static System.Drawing.Bitmap viewData {
             get {
-                object obj = ResourceManager.GetObject("viewdata", resourceCulture);
+                object obj = ResourceManager.GetObject("viewData", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

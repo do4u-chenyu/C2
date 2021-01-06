@@ -88,12 +88,12 @@ namespace C2.Controls.MapViews
                 MenuViewDataChart,
                 MenuDeleteDataChart});
 
-                MenuViewDataChart.Image = Properties.Resources.getchart;
+                MenuViewDataChart.Image = Properties.Resources.getChart;
                 MenuViewDataChart.Text = Lang._("ViewChart");
                 MenuViewDataChart.Tag = dataItem;
                 MenuViewDataChart.Click += MenuViewDataChart_Click;
 
-                MenuDeleteDataChart.Image = Properties.Resources.deletewidget;
+                MenuDeleteDataChart.Image = Properties.Resources.deleteWidget;
                 MenuDeleteDataChart.Text = Lang._("Delete");
                 MenuDeleteDataChart.Tag = dataItem;
                 MenuDeleteDataChart.Click += MenuDeleteDataChart_Click;
@@ -116,7 +116,7 @@ namespace C2.Controls.MapViews
             MenuOpenOperator.Click += MenuOpenOperatorDesigner_Click;
 
             MenuDeleteOperator.Text = Lang._("Delete");
-            MenuDeleteOperator.Image = Properties.Resources.deletewidget;
+            MenuDeleteOperator.Image = Properties.Resources.deleteWidget;
             MenuDeleteOperator.Click += MenuDeleteSingleOp_Click;
 
             WidgetMenuStrip.Items.Add(MenuOpenOperator);
@@ -178,7 +178,7 @@ namespace C2.Controls.MapViews
             MenuOpPublic.Enabled = type == "single" ? false : true;
             MenuOpPublic.Click += MenuOpPublic_Click;
 
-            MenuOpDelete.Image = Properties.Resources.deletewidget;
+            MenuOpDelete.Image = Properties.Resources.deleteWidget;
             MenuOpDelete.Text = Lang._("Delete");
             if(type == "single")
                 MenuOpDelete.Click += MenuDeleteSingleOp_Click;
@@ -329,17 +329,17 @@ namespace C2.Controls.MapViews
                 MenuExploreDirectory,
                 MenuCopyFilePathToClipboard});
 
-                MenuViewData.Image = Properties.Resources.viewdata;
+                MenuViewData.Image = Properties.Resources.viewData;
                 MenuViewData.Tag = dataItem;
                 MenuViewData.Text = Lang._("ViewData");        // 预览数据
                 MenuViewData.Click += MenuPreViewData_Click;
 
-                MenuCreateChart.Image = Properties.Resources.getchart;              
+                MenuCreateChart.Image = Properties.Resources.getChart;              
                 MenuCreateChart.Text = Lang._("CreateChart");  // 生成图表 
                 MenuCreateChart.Tag = dataItem;
                 MenuCreateChart.Click += MenuCreateDataChart_Click;
 
-                MenuDelete.Image = Properties.Resources.deletewidget;
+                MenuDelete.Image = Properties.Resources.deleteWidget;
                 MenuDelete.Text = Lang._("Delete");           //  删除
                 MenuDelete.Tag = dataItem;
                 MenuDelete.Click += MenuDelete_Click;
@@ -351,7 +351,7 @@ namespace C2.Controls.MapViews
                 if (dataItem.IsDatabase())  // 外部数据源不存在浏览文件夹的逻辑
                     MenuExploreDirectory.Enabled = false;
 
-                MenuCopyFilePathToClipboard.Image = Properties.Resources.copyfilepath;
+                MenuCopyFilePathToClipboard.Image = Properties.Resources.copyFilePath;
                 MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
                 MenuCopyFilePathToClipboard.Tag = dataItem.FilePath;
                 MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;
@@ -449,7 +449,9 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
                 ToolStripMenuItem MenuProcessData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuJoinPool = new ToolStripMenuItem();
-
+                ToolStripMenuItem MenuFileSavaAs = new ToolStripMenuItem();
+                ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
+                ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
                 MenuOpenResult.Image = Properties.Resources.结果;
 
@@ -458,9 +460,13 @@ namespace C2.Controls.MapViews
                 MenuPreViewData,
                 MenuProcessData,
                 MenuDelete,
-                MenuJoinPool});
+                MenuJoinPool,
+                new ToolStripSeparator(),
+                MenuFileSavaAs,
+                MenuExploreDirectory,
+                MenuCopyFilePathToClipboard});
 
-                MenuPreViewData.Image = Properties.Resources.viewdata;
+                MenuPreViewData.Image = Properties.Resources.viewData;
                 MenuPreViewData.Tag = dataItem;
                 MenuPreViewData.Text = Lang._("ViewData");
                 MenuPreViewData.Click += MenuPreViewData_Click;
@@ -474,10 +480,20 @@ namespace C2.Controls.MapViews
                 MenuJoinPool.Tag = dataItem;
                 MenuJoinPool.Click += MenuJoinPool_Click;
 
-                MenuDelete.Image = Properties.Resources.deletewidget;
+                MenuDelete.Image = Properties.Resources.deleteWidget;
                 MenuDelete.Text = Lang._("Delete");
                 MenuDelete.Tag = dataItem;
                 MenuDelete.Click += MenuDeleteRes_Click;
+
+                MenuFileSavaAs.Image = Properties.Resources.deleteWidget;
+                MenuExploreDirectory.Text = Lang._("Save As");
+                MenuExploreDirectory.Tag = dataItem.FilePath;
+                MenuExploreDirectory.Click += MenuExploreDirectory_Click;
+
+                MenuCopyFilePathToClipboard.Image = Properties.Resources.copyFilePath;
+                MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
+                MenuCopyFilePathToClipboard.Tag = dataItem.FilePath;
+                MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;
 
                 WidgetMenuStrip.Items.Add(MenuOpenResult);
             }
@@ -572,12 +588,12 @@ namespace C2.Controls.MapViews
                 MenuExploreDirectory.Tag = path;
                 MenuExploreDirectory.Click += MenuExploreDirectory_Click;
 
-                MenuCopyFilePathToClipboard.Image = Properties.Resources.copyfilepath;
+                MenuCopyFilePathToClipboard.Image = Properties.Resources.copyFilePath;
                 MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
                 MenuCopyFilePathToClipboard.Tag = path;
                 MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;
 
-                MenuDeleteAttachment.Image = Properties.Resources.deleteattachment;
+                MenuDeleteAttachment.Image = Properties.Resources.deleteAttachment;
                 MenuDeleteAttachment.Text = Lang._("DeleteAttachment");
                 MenuDeleteAttachment.Tag = path;
                 MenuDeleteAttachment.Click += MenuDeleteAttachment_Click;
