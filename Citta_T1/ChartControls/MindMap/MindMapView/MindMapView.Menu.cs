@@ -620,7 +620,15 @@ namespace C2.Controls.MapViews
 
         void MenuSaveAs_Click(object sender, EventArgs e)
         {
-
+            string ffp = (sender as ToolStripMenuItem).Tag as string;
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                FileName = Path.GetFileName(ffp)
+            };
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                FileUtil.FileCopy(ffp, sfd.FileName);
+            }
         }
 
         void MenuCopyFilePathToClipboard_Click(object sender, EventArgs e) 
