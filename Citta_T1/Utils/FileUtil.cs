@@ -82,7 +82,7 @@ namespace C2.Utils
         }
         public static void ExploreDirectory(string fullFilePath)
         {//判断文件的存在
-            if (System.IO.File.Exists(fullFilePath))
+            if (File.Exists(fullFilePath))
             {
                 //存在文件
                 try
@@ -108,8 +108,18 @@ namespace C2.Utils
             }
             
         }
-
-
+        public static long TryGetFileSize(string fullFilePath, int failCode = -1)
+        {
+            try
+            {
+                return new FileInfo(fullFilePath).Length;
+            }
+            catch
+            {
+                return failCode;
+            }
+            
+        }
         private static void AnotherOpenFilePathMethod(string fullFilePath)
         {
             try
@@ -370,7 +380,7 @@ namespace C2.Utils
                 {
                     int numOfCurRow = datas[i].Count;
                     for (int j = 0; j < maxNumOfCol - numOfCurRow; j++)
-                        datas[i].Add("");
+                        datas[i].Add(String.Empty);
                 }
             }
             return datas;

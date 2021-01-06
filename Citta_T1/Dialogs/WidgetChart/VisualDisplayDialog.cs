@@ -48,7 +48,7 @@ namespace C2.Dialogs
             if (hitItem.FileType == OpUtil.ExtType.Excel)
                 fileContent = BCPBuffer.GetInstance().GetCachePreviewExcelContent(FilePath);
             else
-                fileContent = BCPBuffer.GetInstance().GetCachePreViewBcpContent(FilePath, FileEncoding);
+                fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(FilePath, FileEncoding);
             List<string> rows = new List<string>(fileContent.Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
 

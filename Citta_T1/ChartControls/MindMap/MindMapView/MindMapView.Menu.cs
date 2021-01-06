@@ -158,6 +158,10 @@ namespace C2.Controls.MapViews
                 MenuOpRunning.Image = Properties.Resources.opRunning;
                 MenuOpRunning.Text = Lang._("Running");
                 MenuOpRunning.Enabled = type == "single" ? opw.Status != OpStatus.Null : !opw.HasModelOperator;
+                if (opw.DataSourceItem.DataType == DatabaseType.Null)
+                {
+
+                }
                 MenuOpRunning.Click += MenuRunningOp_Click;
             }
             else
@@ -311,7 +315,8 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuCreateChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
-                ToolStripMenuItem MenuCopyPathToClipboard = new ToolStripMenuItem();
+                ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
+                ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 MenuOpenDataSource.Image = Properties.Resources.数据;
 
@@ -321,7 +326,8 @@ namespace C2.Controls.MapViews
                 MenuCreateChart,
                 MenuDelete,
                 new ToolStripSeparator(),
-                MenuCopyPathToClipboard});
+                MenuExploreDirectory,
+                MenuCopyFilePathToClipboard});
 
                 MenuViewData.Image = Properties.Resources.viewdata;
                 MenuViewData.Tag = dataItem;
@@ -338,10 +344,18 @@ namespace C2.Controls.MapViews
                 MenuDelete.Tag = dataItem;
                 MenuDelete.Click += MenuDelete_Click;
 
-                MenuCopyPathToClipboard.Image = Properties.Resources.复制路径;
-                MenuCopyPathToClipboard.Text = "复制路径到剪切板";
-                MenuDelete.Tag = dataItem;
- 
+                MenuExploreDirectory.Image = Properties.Resources.datadirectory;
+                MenuExploreDirectory.Text = Lang._("ExploreDirectory");
+                MenuExploreDirectory.Tag = dataItem.FilePath;
+                MenuExploreDirectory.Click += MenuExploreDirectory_Click;
+                if (dataItem.IsDatabase())  // 外部数据源不存在浏览文件夹的逻辑
+                    MenuExploreDirectory.Enabled = false;
+
+                MenuCopyFilePathToClipboard.Image = Properties.Resources.copyfilepath;
+                MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
+                MenuCopyFilePathToClipboard.Tag = dataItem.FilePath;
+                MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;
+
                 WidgetMenuStrip.Items.Add(MenuOpenDataSource);           
             }
         }
@@ -382,7 +396,7 @@ namespace C2.Controls.MapViews
                 }
                 else // 外部数据源且数据库无法连接
                 {
-                    HelpUtil.ShowMessageBox("该数据库无法连接");
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return;
                 }
             }
@@ -411,22 +425,9 @@ namespace C2.Controls.MapViews
         void MenuViewDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            string path = hitItem.FilePath;
-            Utils.OpUtil.Encoding encoding = hitItem.FileEncoding;
-            // 获取选中输入、输出各列数据
-            string fileContent;
-            if (hitItem.FileType == OpUtil.ExtType.Excel)
-                fileContent = BCPBuffer.GetInstance().GetCachePreviewExcelContent(path);
-            else
-                fileContent = BCPBuffer.GetInstance().GetCachePreViewBcpContent(path, encoding);
-            List<string> rows = new List<string>(fileContent.Split('\n'));
-            // 最多绘制前100行数据
-            int upperLimit = Math.Min(rows.Count, 100);
-            List<List<string>> columnValues = Utils.FileUtil.GetColumns(hitItem.SelectedIndexs, hitItem, rows, upperLimit);
-            if (columnValues.Count == 0)
-                return;
-            Utils.ControlUtil.PaintChart(columnValues, hitItem.SelectedItems, hitItem.ChartType);
+            ChartWidget.DoViewDataChart(hitItem);
         }
+
         void UpdateChartWidgetMenu(ChartWidget widget, DataItem hitItem)
         {
             DataItem item = widget.DataItems.Find((DataItem d) => d.FileName == hitItem.FileName && d.ChartType == hitItem.ChartType);
@@ -593,19 +594,13 @@ namespace C2.Controls.MapViews
         void MenuExploreDirectory_Click(object sender, EventArgs e)
         {
             string ffp = (sender as ToolStripMenuItem).Tag as string;
-            if (File.Exists(ffp))
-                FileUtil.ExploreDirectory(ffp);
-            else
-                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
+            FileUtil.ExploreDirectory(ffp);
         }
 
         void MenuCopyFilePathToClipboard_Click(object sender, EventArgs e) 
         {
             string ffp = (sender as ToolStripMenuItem).Tag as string;
-            if(File.Exists(ffp))
-                FileUtil.TryClipboardSetText(ffp);
-            else
-                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
+            FileUtil.TryClipboardSetText(ffp);
         }
 
 

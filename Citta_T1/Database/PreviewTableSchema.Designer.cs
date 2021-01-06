@@ -56,6 +56,7 @@
             this.Name = "PreviewTableSchema";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "表结构预览";
+            this.Icon = Properties.Resources.logo;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

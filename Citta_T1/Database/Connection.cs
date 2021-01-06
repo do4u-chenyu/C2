@@ -37,14 +37,16 @@ namespace C2.Database
         }
         public OraConnection Clone()
         {
-            OraConnection tmp = new OraConnection();
-            tmp.Name = this.Name;
-            tmp.User = this.User;
-            tmp.Pass = this.Pass;
-            tmp.Host = this.Host;
-            tmp.Sid = this.Sid;
-            tmp.Service = this.Service;
-            tmp.Port = this.Port;
+            OraConnection tmp = new OraConnection
+            {
+                Name = this.Name,
+                User = this.User,
+                Pass = this.Pass,
+                Host = this.Host,
+                Sid = this.Sid,
+                Service = this.Service,
+                Port = this.Port
+            };
             return tmp;
         }
         /// <summary>

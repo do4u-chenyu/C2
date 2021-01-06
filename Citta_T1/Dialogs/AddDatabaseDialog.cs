@@ -83,9 +83,11 @@ namespace C2.Dialogs
             } 
 
             OraConnection conn = new OraConnection(tmpDatabaseInfo);
-            if (!DbUtil.TestConn(conn, true))
+            if (!DbUtil.TestConn(conn))
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return false;
-
+            }
             DatabaseInfo = tmpDatabaseInfo;
             return base.OnOKButtonClick();
         }

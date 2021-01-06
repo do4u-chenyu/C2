@@ -47,6 +47,7 @@ namespace C2.Utils
         public static string CastStringToIntFailedInfo = "仅支持整数输入，请检查后重新输入";
         public static string DbConnectSucceeded = "连接成功";
         public static string DbConnectFailed = "连接失败";
+        public static string DatabaseItemIsNull = "当前并未选择连接，请选择连接后重试";
 
 
         /// <summary>
