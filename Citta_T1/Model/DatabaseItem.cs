@@ -53,6 +53,23 @@ namespace C2.Model
             Group = group;
             DataTable = table;
         }
+
+        public DatabaseItem(string allDatabaseInfo)
+        {
+            string[] tmpInfo = allDatabaseInfo.Split(',');
+            if (tmpInfo.Count() < 9)
+                return;
+            Type = (DatabaseType)Enum.Parse(typeof(DatabaseType), tmpInfo[0]);
+            Server = tmpInfo[1];
+            SID = tmpInfo[2];
+            Service = tmpInfo[3];
+            Port = tmpInfo[4];
+            User = tmpInfo[5];
+            Password = tmpInfo[6];
+            Group = tmpInfo[7];
+            DataTable = new Table(tmpInfo[8]);
+        }
+
         public DatabaseItem Clone()
         {
             DatabaseItem tmpDatabaseItem = new DatabaseItem();

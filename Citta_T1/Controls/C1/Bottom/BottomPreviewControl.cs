@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace C2.Controls.Bottom
@@ -110,12 +109,12 @@ namespace C2.Controls.Bottom
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewExcelContent(fullFilePath, isForceRead).Split('\n'));
             }
             else if (extType == OpUtil.ExtType.Text)
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath, encoding, isForceRead).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewBcpContent(fullFilePath, encoding, isForceRead).Split('\n'));
             else
                 rows = new List<string>();
 
             for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
-                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(separator)));                                                 // TODO 没考虑到分隔符
+                datas.Add(new List<string>(rows[i].TrimEnd(OpUtil.DefaultFieldSeparator).Split(separator)));                                                 // TODO 没考虑到分隔符
             FileUtil.FillTable(this.dataGridView, datas, maxNumOfFile);
         }
 
@@ -140,7 +139,7 @@ namespace C2.Controls.Bottom
                 datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(OpUtil.DefaultFieldSeparator)));                                                 // TODO 没考虑到分隔符
             FileUtil.FillTable(this.dataGridView, datas, maxNumOfFile);
         }
-        private void dataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
                 this.dataGridView.RowHeadersWidth - 4, e.RowBounds.Height);

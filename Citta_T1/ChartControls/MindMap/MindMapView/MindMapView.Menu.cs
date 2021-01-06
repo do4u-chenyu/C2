@@ -436,22 +436,9 @@ namespace C2.Controls.MapViews
         void MenuViewDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            string path = hitItem.FilePath;
-            Utils.OpUtil.Encoding encoding = hitItem.FileEncoding;
-            // 获取选中输入、输出各列数据
-            string fileContent;
-            if (hitItem.FileType == OpUtil.ExtType.Excel)
-                fileContent = BCPBuffer.GetInstance().GetCachePreviewExcelContent(path);
-            else
-                fileContent = BCPBuffer.GetInstance().GetCachePreViewBcpContent(path, encoding);
-            List<string> rows = new List<string>(fileContent.Split('\n'));
-            // 最多绘制前100行数据
-            int upperLimit = Math.Min(rows.Count, 100);
-            List<List<string>> columnValues = FileUtil.GetColumns(hitItem.SelectedIndexs, hitItem, rows, upperLimit);
-            if (columnValues.Count == 0)
-                return;
-            Utils.ControlUtil.PaintChart(columnValues, hitItem.SelectedItems, hitItem.ChartType);
+            ChartWidget.DoViewDataChart(hitItem);
         }
+
         void UpdateChartWidgetMenu(ChartWidget widget, DataItem hitItem)
         {
             DataItem item = widget.DataItems.Find((DataItem d) => d.FileName == hitItem.FileName && d.ChartType == hitItem.ChartType);

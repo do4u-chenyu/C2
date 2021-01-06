@@ -54,7 +54,6 @@ namespace C2.Controls.Left
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 10;
             this.leftPictureBox.TabStop = false;
-            this.leftPictureBox.MouseEnter += new System.EventHandler(this.LeftPictureBox_MouseEnter);
             // 
             // contextMenuStrip1
             // 
@@ -70,23 +69,24 @@ namespace C2.Controls.Left
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.EditToolStripMenuItem.Text = "编辑连接";
-            this.EditToolStripMenuItem.ToolTipText = "数据源配置\r\n";
+            this.EditToolStripMenuItem.ToolTipText = "配置数据源连接";
             this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // ConnectToolStripMenuItem
             // 
             this.ConnectToolStripMenuItem.Name = "ConnectToolStripMenuItem";
             this.ConnectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ConnectToolStripMenuItem.Text = "连接";
+            this.ConnectToolStripMenuItem.Text = "连接数据源";
+            this.ConnectToolStripMenuItem.ToolTipText = "连接数据源";
             this.ConnectToolStripMenuItem.Click += new System.EventHandler(this.ConnectToolStripMenuItem_Click);
             // 
             // RefreshToolStripMenuItem
             // 
             this.RefreshToolStripMenuItem.Enabled = false;
             this.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem";
-            this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.RefreshToolStripMenuItem.Text = "重命名";
             this.RefreshToolStripMenuItem.ToolTipText = "修改数据源名称";
             // 
@@ -95,7 +95,7 @@ namespace C2.Controls.Left
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
             this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.RemoveToolStripMenuItem.Text = "删除";
-            this.RemoveToolStripMenuItem.ToolTipText = "连接数据源删除";
+            this.RemoveToolStripMenuItem.ToolTipText = "删除数据源";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // textBox
@@ -141,7 +141,6 @@ namespace C2.Controls.Left
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LinkButton";
             this.Size = new System.Drawing.Size(140, 27);
-            this.Load += new System.EventHandler(this.LinkButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);

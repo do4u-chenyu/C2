@@ -42,23 +42,9 @@ namespace C2.Controls.Left
             InitializeComponent();
             DatabaseItem = item;
             txtButton.Name = DatabaseItem.Server;
-            txtButton.Text = Utils.FileUtil.ReName(DatabaseItem.Server);
+            txtButton.Text = FileUtil.ReName(DatabaseItem.Server);
             this.oldTextString = DatabaseItem.Server;
             LinkSourceName = DatabaseItem.Server;
-        }
-
-        private void LinkButton_Load(object sender, EventArgs e)
-        {
-            //// 数据源全路径浮动提示信息
-            //String helpInfo = FullFilePath;
-            //// 数据源名称浮动提示信息
-            //helpInfo = LinkSourceName;
-            //this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
-
-            //helpInfo = String.Format(DataButtonFlowTemplate,
-            //                        0
-            //                       );
-            //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
         #region 右键菜单
@@ -117,15 +103,6 @@ namespace C2.Controls.Left
         }
         #endregion
 
-
-        private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            //string helpInfo = String.Format(DataButtonFlowTemplate,
-            //                            0
-            //                           );
-            //this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
-        }
-
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)
@@ -133,10 +110,7 @@ namespace C2.Controls.Left
 
             if (e.Clicks == 2) // 双击连接
             {
-                if (LinkButtonSelected != null)
-                {
-                    LinkButtonSelected(this, new SelectLinkButtonEventArgs() { linkButton = this });
-                }
+                LinkButtonSelected?.Invoke(this, new SelectLinkButtonEventArgs() { linkButton = this });
             }
         }
 
@@ -182,10 +156,7 @@ namespace C2.Controls.Left
 
         private void OnDatabaseItemChange(DatabaseItem databaseItem)
         {
-            if (DatabaseItemChanged != null)
-            {
-                DatabaseItemChanged(this, new ChangeDatabaseItemEventArgs() { databaseItem = databaseItem });
-            }
+            DatabaseItemChanged?.Invoke(this, new ChangeDatabaseItemEventArgs() { databaseItem = databaseItem });
         }
 
         private void ConnectToolStripMenuItem_Click(object sender, EventArgs e)

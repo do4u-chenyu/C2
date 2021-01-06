@@ -214,6 +214,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.tableListBox.Name = "tableListBox";
             this.tableListBox.Size = new System.Drawing.Size(203, 280);
             this.tableListBox.TabIndex = 19;
+            this.tableListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TableListBox_MouseDown);
             // 
             // C2SqlOperatorView
             // 

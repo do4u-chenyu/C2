@@ -14,6 +14,7 @@ namespace C2.Dialogs.C2OperatorViews
     public partial class C2SqlOperatorView : C2BaseOperatorView
     {
         private List<DatabaseItem> databaseItems;
+        private ContextMenuStrip contextMenuStrip; 
         private DatabaseItem SelectDatabaseItem
         {
             get
@@ -31,6 +32,20 @@ namespace C2.Dialogs.C2OperatorViews
             InitializeComponent();
             InitializeConnection();
             InitializaExecuteSql();
+            InitializePreviewTableContextMenu(); // 如果放在Design.cs里，VS2019设计器会报错打不开，故放在这里初始化
+        }
+
+        private void InitializePreviewTableContextMenu()
+        {
+            contextMenuStrip = new ContextMenuStrip(this.components);
+            ToolStripMenuItem copyTableNameMenuItem = new ToolStripMenuItem("复制表名");
+            copyTableNameMenuItem.Click += CopyTableNameMenuItem_Click;
+            contextMenuStrip.Items.Add(copyTableNameMenuItem);
+        }
+
+        private void CopyTableNameMenuItem_Click(object sender, EventArgs e)
+        {
+            FileUtil.TryClipboardSetText(tableListBox.SelectedItem.ToString());
         }
 
         private void InitializaExecuteSql()
@@ -128,7 +143,10 @@ namespace C2.Dialogs.C2OperatorViews
         private void bnExecute_Click(object sender, System.EventArgs e)
         {
             if (SelectDatabaseItem == null)
+            {
                 HelpUtil.ShowMessageBox(HelpUtil.DatabaseItemIsNull);
+                return;
+            }
             try
             {
                 using (new CursorUtil.UsingCursor(Cursors.WaitCursor)) // Display the hourglass
@@ -169,6 +187,20 @@ namespace C2.Dialogs.C2OperatorViews
             this.operatorWidget.Option.Clear();
             this.operatorWidget.Option.SetOption("sqlText", textEditorControl1.Text);
             this.operatorWidget.Option.SetOption("connection", SelectDatabaseItem.AllDatabaseInfo);
+
+
+        //右键打开菜单
+        private void TableListBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Clicks != 1 || e.Button != MouseButtons.Right)
+                return;
+            int posindex = tableListBox.IndexFromPoint(e.X, e.Y);
+            if (posindex >= 0 && posindex < tableListBox.Items.Count)
+            {
+                tableListBox.SelectedIndex = posindex;
+                contextMenuStrip.Show(tableListBox, e.X, e.Y);
+                tableListBox.Refresh();
+            }
         }
     }
 }

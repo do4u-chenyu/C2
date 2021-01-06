@@ -7,11 +7,14 @@ using C2.Business.Model;
 using C2.Utils;
 using C2.Core;
 using System;
+using C2.Database;
+using System.Xml.XPath;
 
 namespace C2.Model.Widgets
 {
     public abstract class C2BaseWidget : Widget
     {
+        private static readonly LogUtil log = LogUtil.GetInstance("C2BaseWidget");
         [Browsable(false)]
         public virtual string Description { get;}
 
@@ -43,9 +46,8 @@ namespace C2.Model.Widgets
         protected void WriteExternalDataSource(XmlElement parentNode, DataItem dataItem)
         {
             ModelXmlWriter mexw0 = new ModelXmlWriter("data_item", parentNode);
-            mexw0.WriteAttribute("path", dataItem.FilePath)
-                 .WriteAttribute("name", dataItem.FileName)
-                 .WriteAttribute("separator", Convert.ToInt32(dataItem.FileSep).ToString())
+
+            mexw0.WriteAttribute("separator", Convert.ToInt32(dataItem.FileSep).ToString())
                  .WriteAttribute("data_type", dataItem.DataType)
                  .WriteAttribute("file_type", dataItem.FileType);
             ModelXmlWriter mexw1 = new ModelXmlWriter("DB_item", mexw0.Element);
@@ -89,6 +91,11 @@ namespace C2.Model.Widgets
         {
             foreach (XmlElement dataItem in data_items)
             {
+                if (!string.IsNullOrEmpty(dataItem.GetAttribute("data_type")))
+                {
+                    ReadExternalDataSource(dataItem, DataItems);
+                    continue;
+                }
                 DataItem item = new DataItem(
                    dataItem.GetAttribute("path"),
                    dataItem.GetAttribute("name"),
@@ -110,6 +117,50 @@ namespace C2.Model.Widgets
                 }                               
                 DataItems.Add(item);
             }
+        }
+        private void ReadExternalDataSource(XmlElement dataItem, List<DataItem> DataItems)
+        {
+            // 数据库数据源挂件读取
+            XmlElement DB_item;
+            XmlElement tableNode;
+            char separator = ConvertUtil.TryParseAscii(dataItem.GetAttribute("separator"));
+            DatabaseType dataType = OpUtil.DBTypeEnum(dataItem.GetAttribute("data_type"));
+            string file_type = dataItem.GetAttribute("file_type");
+
+            try 
+            {
+                DB_item = (dataItem.SelectSingleNode("DB_item") as XmlElement);
+                tableNode = (DB_item.SelectSingleNode("table") as XmlElement);
+            }
+            catch (XPathException e)
+            {
+                log.Error("读取xml文件出错这里， error: " + e.Message);
+                return;
+            }
+            // 组装database
+            DatabaseItem database = new DatabaseItem(
+                OpUtil.DBTypeEnum(DB_item.GetAttribute("type")),
+                DB_item.GetAttribute("server"),
+                DB_item.GetAttribute("SID"),
+                DB_item.GetAttribute("service"),
+                DB_item.GetAttribute("port"),
+                DB_item.GetAttribute("user"),
+                DB_item.GetAttribute("password"),
+                DB_item.GetAttribute("group"));
+            // 组装database的Table  
+            Table table = new Table(tableNode.GetAttribute("user_name"));
+            table.Name = tableNode.GetAttribute("name");
+            table.View = ConvertUtil.TryParseBool(tableNode.GetAttribute("view"));
+            database.DataTable = table;
+
+            DataItem DBitem = new DataItem(dataType, database)
+            {
+                FileSep = separator,
+                FileType = OpUtil.ExtTypeEnum(file_type),
+                FilePath = database.AllDatabaseInfo,
+                FileName = database.DataTable.Name
+            };
+            DataItems.Add(DBitem);
         }
         #endregion
         public static void DoPreViewDataSource(DataItem hitItem)
