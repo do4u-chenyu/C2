@@ -134,6 +134,19 @@ namespace C2.Utils
             catch { }; // 非核心功能, Double异常就不用管了
         }
 
+
+        public static bool FileCopy(String src, String dst)
+        {
+            try
+            {
+                new FileInfo(src).CopyTo(dst, true);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
         public static void DeleteDirectory(string directoryPath)
         {
             try

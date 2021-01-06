@@ -17,8 +17,6 @@ namespace C2.Controls.Move.Rs
 {
     public partial class MoveRsControl : MoveBaseControl, IMoveControl
     {
-        private static LogUtil log = LogUtil.GetInstance("MoveRsControl");
-
         private ECommandType cmd = ECommandType.Null;
 
         List<int> endLineIndexs = new List<int>() { };
@@ -431,21 +429,9 @@ namespace C2.Controls.Move.Rs
         {
 
             this.saveFileDialog.FileName = Description + ".bcp";
-            DialogResult dr = this.saveFileDialog.ShowDialog();
-            if (dr == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string srcFilePath = this.FullFilePath;
-                string dstFilePath = this.saveFileDialog.FileName;
-                try
-                {
-                    FileInfo file = new FileInfo(srcFilePath);
-                    file.CopyTo(dstFilePath, true);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("导出文件出错:" + ex.Message);
-                }
-
+                FileUtil.FileCopy(FullFilePath, saveFileDialog.FileName);
             }
         }
         public void ControlSelect()
