@@ -11,46 +11,40 @@ namespace C2.Utils
     public static class DbUtil
     {
         private static readonly LogUtil log = LogUtil.GetInstance("DbUtil");
-        //private void executeSQL(Connection connection, string sqlText)
-        //{
-        //    // Execute the given query for the first 1000 records it spits out
-        //    try
-        //    {
-        //        using (OracleConnection conn = new OracleConnection(connection.ConnectionString))
-        //        {
-        //            conn.Open();
-        //            string sql = sqlText;
-        //            using (OracleCommand comm = new OracleCommand(sql, conn))
-        //            {
-        //                using (OracleDataReader rdr = comm.ExecuteReader())
-        //                {
-        //                    // Grab all the column names
-        //                    gridOutput.Rows.Clear();
-        //                    gridOutput.Columns.Clear();
-        //                    for (int i = 0; i < rdr.FieldCount; i++)
-        //                    {
-        //                        gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
-        //                    }
+        public static String ExecuteOracleSQL(OraConnection conn, string sqlText)
+        {
+            // Execute the given query for the first 1000 records it spits out
+            StringBuilder sb = new StringBuilder(1024 * 16);
+            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                    {
+                        con.Open();
+                        OracleCommand comm = new OracleCommand(sqlText, con);
+                        using (OracleDataReader rdr = comm.ExecuteReader())  // rdr.Close()
+                        {
+                            for (int i = 0; i < rdr.FieldCount - 1; i++)
+                                sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
+                            sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
 
-        //                    // Read up to 1000 rows
-        //                    int rows = 0;
-        //                    while (rdr.Read() && rows < 1000)
-        //                    {
-        //                        string[] objs = new string[rdr.FieldCount];
-        //                        for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
-        //                        gridOutput.Rows.Add(objs);
-        //                        rows++;
-        //                    }
-        //                }
-        //            }
-        //            conn.Close();
-        //        }
-        //    }
-        //    catch (Exception ex) // Better catch in case they have bad sql
-        //    {
-        //        log.Error(ex.Message);
-        //    }
-        //}
+                            while (rdr.Read())
+                            {
+                                for (int i = 0; i < rdr.FieldCount - 1; i++)
+                                    sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
+                                sb.Append(rdr[rdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                }
+                return sb.ToString();
+            }
+        }
         //private void connect()
         //{
         //    OracleConnection oconn = new OracleConnection(cs);

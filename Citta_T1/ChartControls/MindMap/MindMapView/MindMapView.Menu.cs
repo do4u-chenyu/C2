@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using C2.Business.Model;
 using C2.Business.Option;
 using C2.Core;
+using C2.Database;
 using C2.Dialogs;
 using C2.Dialogs.Base;
 using C2.Forms;
@@ -159,10 +160,11 @@ namespace C2.Controls.MapViews
                 MenuOpRunning.Text = Lang._("Running");
                 MenuOpRunning.Enabled = type == "single" ? opw.Status != OpStatus.Null : !opw.HasModelOperator;
                 if (opw.DataSourceItem.DataType == DatabaseType.Null)
-                {
+                    MenuOpRunning.Click += MenuRunningOp_Click;
+                else
+                    MenuOpRunning.Click += MenuRunningSQLOp_Click;
 
-                }
-                MenuOpRunning.Click += MenuRunningOp_Click;
+
             }
             else
             {
@@ -232,6 +234,15 @@ namespace C2.Controls.MapViews
         {
             Global.GetDocumentForm().Save();
             GenRunCmds();
+        }
+        void MenuRunningSQLOp_Click(object sender, EventArgs e)
+        {
+            Global.GetDocumentForm().Save();
+            string connString;
+            string sqlText;
+            opw.Option.OptionDict.TryGetValue("sqlText",out sqlText);
+            opw.Option.OptionDict.TryGetValue("connection", out connString);
+            //string result = DbUtil.ExecuteOracleSQL(conn, sqlText);
         }
         void MenuOpPublic_Click(object sender, EventArgs e)
         {

@@ -137,30 +137,25 @@ namespace C2.Dialogs.C2OperatorViews
                     {
                         conn.Open();
                         string sql = textEditorControl1.Text;
-                        using (OracleCommand comm = new OracleCommand(sql, conn))
+                        OracleCommand comm = new OracleCommand(sql, conn);
+                        using (OracleDataReader rdr = comm.ExecuteReader())
                         {
-                            using (OracleDataReader rdr = comm.ExecuteReader())
-                            {
-                                // Grab all the column names
-                                gridOutput.Rows.Clear();
-                                gridOutput.Columns.Clear();
-                                for (int i = 0; i < rdr.FieldCount; i++)
-                                {
-                                    gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
-                                }
+                            // Grab all the column names
+                            gridOutput.Rows.Clear();
+                            gridOutput.Columns.Clear();
+                            for (int i = 0; i < rdr.FieldCount; i++)
+                                gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
 
-                                // Read up to 1000 rows
-                                int rows = 0;
-                                while (rdr.Read() && rows < 1000)
-                                {
-                                    string[] objs = new string[rdr.FieldCount];
-                                    for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
-                                    gridOutput.Rows.Add(objs);
-                                    rows++;
-                                }
+                            // Read up to 1000 rows
+                            int rows = 0;
+                            while (rdr.Read() && rows < 1000)
+                            {
+                                string[] objs = new string[rdr.FieldCount];
+                                for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
+                                gridOutput.Rows.Add(objs);
+                                rows++;
                             }
                         }
-                        conn.Close();
                     }
                 }
             }
@@ -168,6 +163,12 @@ namespace C2.Dialogs.C2OperatorViews
             {
                 HelpUtil.ShowMessageBox(ex.Message);
             }
+        }
+        protected override void SaveOption()
+        {
+            this.operatorWidget.Option.Clear();
+            this.operatorWidget.Option.SetOption("sqlText", textEditorControl1.Text);
+            this.operatorWidget.Option.SetOption("connection", SelectDatabaseItem.AllDatabaseInfo);
         }
     }
 }
