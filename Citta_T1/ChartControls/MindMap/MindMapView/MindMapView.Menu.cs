@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-using C2.Business.Model;
+﻿using C2.Business.Model;
 using C2.Business.Option;
 using C2.Core;
 using C2.Dialogs;
@@ -14,6 +9,10 @@ using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
 using C2.Utils;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
 
 namespace C2.Controls.MapViews
 {
@@ -33,6 +32,8 @@ namespace C2.Controls.MapViews
             WidgetMenuStrip.SuspendLayout();
             WidgetMenuStrip.Items.Clear();
 
+            currentTopic = HoverObject.Topic;
+
             switch (HoverObject.Widget.GetTypeID())
             {
                 case OperatorWidget.TypeID:
@@ -45,7 +46,6 @@ namespace C2.Controls.MapViews
                     break;
                 case DataSourceWidget.TypeID:
                     dtw = HoverObject.Widget as DataSourceWidget;
-                    currentTopic = HoverObject.Topic;
                     CreateDataSourceMenu(dtw);
                     break;
                 case ResultWidget.TypeID:
@@ -65,6 +65,7 @@ namespace C2.Controls.MapViews
                     break;
             }
             WidgetMenuStrip.ResumeLayout();
+
             if (UITheme.Default != null)
             {
                 WidgetMenuStrip.Renderer = UITheme.Default.ToolStripRenderer;
@@ -449,6 +450,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
                 ToolStripMenuItem MenuProcessData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuJoinPool = new ToolStripMenuItem();
+                ToolStripMenuItem MenuCreateChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuFileSavaAs = new ToolStripMenuItem();
                 ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
                 ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
@@ -461,6 +463,7 @@ namespace C2.Controls.MapViews
                 MenuProcessData,
                 MenuDelete,
                 MenuJoinPool,
+                MenuCreateChart,
                 new ToolStripSeparator(),
                 MenuFileSavaAs,
                 MenuExploreDirectory,
@@ -479,6 +482,11 @@ namespace C2.Controls.MapViews
                 MenuJoinPool.Text = Lang._("JoinPool");
                 MenuJoinPool.Tag = dataItem;
                 MenuJoinPool.Click += MenuJoinPool_Click;
+
+                MenuCreateChart.Image = Properties.Resources.getChart;
+                MenuCreateChart.Text = Lang._("CreateChart");  // 生成图表 
+                MenuCreateChart.Tag = dataItem;
+                MenuCreateChart.Click += MenuCreateDataChart_Click;
 
                 MenuDelete.Image = Properties.Resources.deleteWidget;
                 MenuDelete.Text = Lang._("Delete");
