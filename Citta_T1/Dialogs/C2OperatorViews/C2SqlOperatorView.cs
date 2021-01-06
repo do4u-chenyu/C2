@@ -187,7 +187,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.operatorWidget.Option.Clear();
             this.operatorWidget.Option.SetOption("sqlText", textEditorControl1.Text);
             this.operatorWidget.Option.SetOption("connection", SelectDatabaseItem.AllDatabaseInfo);
-
+        }
 
         //右键打开菜单
         private void TableListBox_MouseDown(object sender, MouseEventArgs e)
