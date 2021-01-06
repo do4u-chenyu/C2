@@ -72,8 +72,24 @@ namespace C2.Controls.Left
         {
             Global.GetDataSourceControl().GenDataButton(name, fullFilePath, separator, extType, encoding);
             Global.GetDataSourceControl().Visible = true;
-
         }
+        private List<TableButton> _RelateTableButtons;
+        public List<TableButton> RelateTableButtons
+        { 
+            set
+            {
+                if (_RelateTableButtons != value)
+                {
+                    this.dataTableTextBox.Text = string.Empty;
+                }
+                _RelateTableButtons = value;
+            }
+            get 
+            {
+                return _RelateTableButtons;
+            }
+        }
+
         public void OnSelectLinkButton(LinkButton linkButton)
         {
             //改变选中的button,刷新架构，默认显示用户名登陆的表结构
@@ -109,7 +125,6 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(LinkButton lb)
         {
-            linkPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.linkPanel.Controls.Count > 0)
                 linkPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
             linkPoint.Y += ButtonGapHeight;
@@ -225,6 +240,23 @@ namespace C2.Controls.Left
             this.linkPanel.ResumeLayout(false);
             this.linkPanel.PerformLayout();
         }
+
+        private void ReLayoutTableFrame(List<TableButton> tableButtons)
+        {
+            // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
+            this.dataTabelPanel.SuspendLayout();
+
+            this.dataTabelPanel.Controls.Clear();
+            // 重新排序
+            foreach (TableButton tb in tableButtons)
+            {
+                LayoutModelButtonLocation(tb);
+                this.dataTabelPanel.Controls.Add(tb);
+            }
+
+            this.dataTabelPanel.ResumeLayout(false);
+            this.dataTabelPanel.PerformLayout();
+        }
         public void RemoveDataButton(DataButton dataButton)
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
@@ -243,7 +275,7 @@ namespace C2.Controls.Left
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
             if (this.linkPanel.Controls.Count > 0)
-                this.startPoint.Y = this.linkPanel.Controls[0].Location.Y - ButtonGapHeight;
+                this.linkPoint.Y = this.linkPanel.Controls[0].Location.Y - ButtonGapHeight;
 
             this.LinkSourceDictI2B.Remove(linkButton.FullFilePath);
             this.linkPanel.Controls.Remove(linkButton);
@@ -259,6 +291,8 @@ namespace C2.Controls.Left
         {
             this.frameCombo.Items.Clear();
             this.frameCombo.Text = string.Empty;
+            RelateTableButtons = null;
+            //this.dataTableTextBox.Text = string.Empty;
             this.dataTabelPanel.Controls.Clear();
         }
         public void SaveDataSourceInfo()
@@ -330,8 +364,9 @@ namespace C2.Controls.Left
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo)
         {
             //先清空上一次的数据表内容
+            RelateTableButtons = null;
             this.dataTabelPanel.Controls.Clear();
-
+            
             if (tables == null)
                 return;
             foreach (Table tmpTable in tables)
@@ -342,11 +377,19 @@ namespace C2.Controls.Left
                 TableButton tableButton = new TableButton(tmpDatabaseItem);
                 GenTableButton(tableButton);//生成数据表按钮
             }
+
+            List<TableButton> tmp = new List<TableButton>();
+            foreach (TableButton tb in this.dataTabelPanel.Controls)
+                tmp.Add(tb);
+            RelateTableButtons = tmp;
         }
 
         private void UpdateFrameCombo(List<string> users,string loginUser)
         {
             this.frameCombo.Items.Clear();
+            //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空
+            RelateTableButtons = null;
+
             if (users == null)
                 return;
 
@@ -373,12 +416,15 @@ namespace C2.Controls.Left
 
             return allExternalData;
         }
-
         private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
         {
             this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
             this.inputDataForm.ShowDialog();
             this.inputDataForm.ReSetParams();
+        }
+        private void DataTableTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(dataTableTextBox.Text.ToUpper())));
         }
     }
 }

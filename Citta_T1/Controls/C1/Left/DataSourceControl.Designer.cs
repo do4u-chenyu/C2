@@ -152,6 +152,7 @@
             this.dataTableTextBox.Name = "dataTableTextBox";
             this.dataTableTextBox.Size = new System.Drawing.Size(159, 21);
             this.dataTableTextBox.TabIndex = 7;
+            this.dataTableTextBox.TextChanged += new System.EventHandler(this.DataTableTextBox_TextChanged);
             // 
             // dataTabelPanel
             // 
