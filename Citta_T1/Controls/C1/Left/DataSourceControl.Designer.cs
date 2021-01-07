@@ -42,8 +42,10 @@
             this.dataTableLabel = new System.Windows.Forms.Label();
             this.frameLabel = new System.Windows.Forms.Label();
             this.linkLabel = new System.Windows.Forms.Label();
+            this.dataAddLabelPanel = new System.Windows.Forms.Panel();
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
+            this.dataAddLabelPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataSourceFrame
@@ -91,10 +93,9 @@
             this.localFrame.AutoScroll = true;
             this.localFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.localFrame.BackColor = System.Drawing.Color.White;
-            this.localFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.localFrame.Location = new System.Drawing.Point(3, 33);
+            this.localFrame.Location = new System.Drawing.Point(-1, 25);
             this.localFrame.Name = "localFrame";
-            this.localFrame.Size = new System.Drawing.Size(179, 623);
+            this.localFrame.Size = new System.Drawing.Size(177, 599);
             this.localFrame.TabIndex = 1;
             this.localFrame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataSourceControl_MouseDown);
             // 
@@ -103,11 +104,11 @@
             this.addLocalConnectLabel.AutoSize = true;
             this.addLocalConnectLabel.Font = new System.Drawing.Font("宋体", 10.5F);
             this.addLocalConnectLabel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.addLocalConnectLabel.Location = new System.Drawing.Point(8, 38);
+            this.addLocalConnectLabel.Location = new System.Drawing.Point(5, 4);
             this.addLocalConnectLabel.Name = "addLocalConnectLabel";
             this.addLocalConnectLabel.Size = new System.Drawing.Size(77, 14);
             this.addLocalConnectLabel.TabIndex = 8;
-            this.addLocalConnectLabel.Text = "+ 添加连接";
+            this.addLocalConnectLabel.Text = "+ 添加数据";
             this.addLocalConnectLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.addLocalConnectLabel_MouseClick);
             // 
             // addConnectLabel
@@ -138,9 +139,9 @@
             this.externalFrame.Controls.Add(this.frameLabel);
             this.externalFrame.Controls.Add(this.linkLabel);
             this.externalFrame.Controls.Add(this.addConnectLabel);
-            this.externalFrame.Location = new System.Drawing.Point(3, 33);
+            this.externalFrame.Location = new System.Drawing.Point(2, 34);
             this.externalFrame.Name = "externalFrame";
-            this.externalFrame.Size = new System.Drawing.Size(179, 623);
+            this.externalFrame.Size = new System.Drawing.Size(179, 622);
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
             // 
@@ -163,7 +164,7 @@
             this.dataTabelPanel.AutoScroll = true;
             this.dataTabelPanel.Location = new System.Drawing.Point(0, 324);
             this.dataTabelPanel.Name = "dataTabelPanel";
-            this.dataTabelPanel.Size = new System.Drawing.Size(177, 297);
+            this.dataTabelPanel.Size = new System.Drawing.Size(177, 296);
             this.dataTabelPanel.TabIndex = 5;
             // 
             // frameCombo
@@ -216,14 +217,26 @@
             this.linkLabel.TabIndex = 1;
             this.linkLabel.Text = "连接";
             // 
+            // dataAddLabelPanel
+            // 
+            this.dataAddLabelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataAddLabelPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dataAddLabelPanel.Controls.Add(this.addLocalConnectLabel);
+            this.dataAddLabelPanel.Controls.Add(this.localFrame);
+            this.dataAddLabelPanel.Location = new System.Drawing.Point(2, 34);
+            this.dataAddLabelPanel.Name = "dataAddLabelPanel";
+            this.dataAddLabelPanel.Size = new System.Drawing.Size(179, 622);
+            this.dataAddLabelPanel.TabIndex = 9;
+            // 
             // DataSourceControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Controls.Add(this.addLocalConnectLabel);
             this.Controls.Add(this.externalFrame);
-            this.Controls.Add(this.localFrame);
             this.Controls.Add(this.dataSourceFrame);
+            this.Controls.Add(this.dataAddLabelPanel);
             this.Name = "DataSourceControl";
             this.Size = new System.Drawing.Size(185, 660);
             this.Load += new System.EventHandler(this.DataSourceControl_Load);
@@ -231,8 +244,9 @@
             this.dataSourceFrame.ResumeLayout(false);
             this.externalFrame.ResumeLayout(false);
             this.externalFrame.PerformLayout();
+            this.dataAddLabelPanel.ResumeLayout(false);
+            this.dataAddLabelPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -252,5 +266,6 @@
         private System.Windows.Forms.Panel dataTabelPanel;
         private System.Windows.Forms.TextBox dataTableTextBox;
         private System.Windows.Forms.Label addLocalConnectLabel;
+        private System.Windows.Forms.Panel dataAddLabelPanel;
     }
 }
