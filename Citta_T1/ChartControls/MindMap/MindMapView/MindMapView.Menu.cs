@@ -72,7 +72,10 @@ namespace C2.Controls.MapViews
                 WidgetMenuStrip.Renderer = UITheme.Default.ToolStripRenderer;
             }
         }
-
+        public bool IsSQLOp()
+        {
+            return opw.OpType == OpType.SqlOperator;
+        }
         #region 图表挂件
         private void CreateChartWidgetMenu(ChartWidget cw)
         {
@@ -160,12 +163,10 @@ namespace C2.Controls.MapViews
                 MenuOpRunning.Image = Properties.Resources.opRunning;
                 MenuOpRunning.Text = Lang._("Running");
                 MenuOpRunning.Enabled = type == "single" ? opw.Status != OpStatus.Null : !opw.HasModelOperator;
-                if (opw.DataSourceItem.DataType == DatabaseType.Null)
+                if (opw.DataSourceItem.DataType == DatabaseType.Null && !IsSQLOp())
                     MenuOpRunning.Click += MenuRunningOp_Click;
                 else
                     MenuOpRunning.Click += MenuRunningSQLOp_Click;
-
-
             }
             else
             {
