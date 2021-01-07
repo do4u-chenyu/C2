@@ -206,15 +206,6 @@ namespace C2.Dialogs.C2OperatorViews
             }
         }
 
-        protected override void SaveOption()
-        {
-            if (SelectDatabaseItem == null)
-                return;
-            this.operatorWidget.Option.Clear();
-            this.operatorWidget.Option.SetOption("sqlText", textEditorControl1.Text);
-            this.operatorWidget.Option.SetOption("connection", SelectDatabaseItem.AllDatabaseInfo);
-        }
-
         private void LoadOption()
         {
             if (!String.IsNullOrEmpty(this.operatorWidget.Option.GetOption("sqlText")))

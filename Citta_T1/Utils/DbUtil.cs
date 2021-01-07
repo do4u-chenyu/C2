@@ -12,12 +12,7 @@ namespace C2.Utils
     public static class DbUtil
     {
         private static readonly LogUtil log = LogUtil.GetInstance("DbUtil");
-        public static void ExecuteOracleSQL(OraConnection conn, string sqlText)
-        {
-            string outPutPath = @"D:\test.csv";
-            DbUtil.ExecuteOracleSQL(conn, sqlText, outPutPath);
-        }
-        private static void ExecuteOracleSQL(OraConnection conn, string sqlText, string outPutPath, int pageSize=10000)
+        public static void ExecuteOracleSQL(OraConnection conn, string sqlText, string outPutPath, int pageSize=10000)
         {
             int pageIndex = 0;
             bool returnHeader = true;

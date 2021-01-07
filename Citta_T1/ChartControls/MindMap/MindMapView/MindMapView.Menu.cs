@@ -239,13 +239,9 @@ namespace C2.Controls.MapViews
         void MenuRunningSQLOp_Click(object sender, EventArgs e)
         {
             Global.GetDocumentForm().Save();
-            string connString;
-            string sqlText;
-            if (!opw.Option.OptionDict.TryGetValue("sqlText", out sqlText) || !opw.Option.OptionDict.TryGetValue("connection", out connString))
-                return;
-            OraConnection conn = new OraConnection(new DatabaseItem(connString));
-            DbUtil.ExecuteOracleSQL(conn, sqlText);
+            RunSQL();
         }
+
         void MenuOpPublic_Click(object sender, EventArgs e)
         {
             if (!opw.HasModelOperator || opw.ModelDataItem == null)
