@@ -104,7 +104,7 @@
             this.addLocalConnectLabel.AutoSize = true;
             this.addLocalConnectLabel.Font = new System.Drawing.Font("宋体", 10.5F);
             this.addLocalConnectLabel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.addLocalConnectLabel.Location = new System.Drawing.Point(5, 4);
+            this.addLocalConnectLabel.Location = new System.Drawing.Point(4, 4);
             this.addLocalConnectLabel.Name = "addLocalConnectLabel";
             this.addLocalConnectLabel.Size = new System.Drawing.Size(77, 14);
             this.addLocalConnectLabel.TabIndex = 8;
