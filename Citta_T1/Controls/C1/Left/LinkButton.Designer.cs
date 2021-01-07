@@ -46,7 +46,7 @@ namespace C2.Controls.Left
             // 
             // leftPictureBox
             // 
-            this.leftPictureBox.Image = global::C2.Properties.Resources.ORACLE;
+            this.leftPictureBox.Image = global::C2.Properties.Resources.oracle;
             this.leftPictureBox.Location = new System.Drawing.Point(1, 1);
             this.leftPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.leftPictureBox.Name = "leftPictureBox";

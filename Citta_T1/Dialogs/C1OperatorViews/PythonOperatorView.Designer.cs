@@ -415,7 +415,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = global::C2.Properties.Resources.controlhelp;
+            this.pictureBox1.BackgroundImage = global::C2.Properties.Resources.controlHelp;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(442, 15);
             this.pictureBox1.Name = "pictureBox1";

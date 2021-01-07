@@ -17,8 +17,10 @@ namespace C2.Controls.Left
 {
     public partial class DataSourceControl : UserControl
     {
+        private C2.Dialogs.InputDataForm inputDataForm;
         public DataSourceControl()
         {
+            InitializeInputDataForm();
             dataSourceDictI2B = new Dictionary<string, DataButton>();
             linkSourceDictI2B = new Dictionary<string, LinkButton>();
             InitializeComponent();
@@ -47,6 +49,7 @@ namespace C2.Controls.Left
         public Dictionary<string, LinkButton> LinkSourceDictI2B { get => linkSourceDictI2B; }
 
         private LinkButton _SelectLinkButton;
+
         //数据库相关属性
         public LinkButton SelectLinkButton 
         {
@@ -60,7 +63,16 @@ namespace C2.Controls.Left
                 return _SelectLinkButton;
             }
         }
-
+        void InitializeInputDataForm()
+        {
+            this.inputDataForm = new Dialogs.InputDataForm();
+            this.inputDataForm.InputDataEvent += InputDataFormEvent;
+        }
+        private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        {
+            Global.GetDataSourceControl().GenDataButton(name, fullFilePath, separator, extType, encoding);
+            Global.GetDataSourceControl().Visible = true;
+        }
         private List<TableButton> _RelateTableButtons;
         public List<TableButton> RelateTableButtons
         { 
@@ -105,6 +117,11 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(DataButton ct)
         {
+            if (!this.localFrame.Controls.Contains(this.addLocalConnectLabel))
+            {
+                this.localFrame.Controls.Add(this.addLocalConnectLabel);
+            }
+           
             if (this.localFrame.Controls.Count > 0)
                 startPoint = this.localFrame.Controls[this.localFrame.Controls.Count - 1].Location;
 
@@ -195,8 +212,12 @@ namespace C2.Controls.Left
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
             this.localFrame.SuspendLayout();
             List<Control> tmp = new List<Control>();
-            foreach (DataButton ct in this.localFrame.Controls)
-                tmp.Add(ct);
+            foreach (Control ct in this.localFrame.Controls)
+            {
+                if (ct is DataButton)
+                    tmp.Add(ct);
+            }
+               
 
             this.localFrame.Controls.Clear();
             // 重新排序
@@ -404,7 +425,12 @@ namespace C2.Controls.Left
 
             return allExternalData;
         }
-
+        private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
+            this.inputDataForm.ShowDialog();
+            this.inputDataForm.ReSetParams();
+        }
         private void DataTableTextBox_TextChanged(object sender, EventArgs e)
         {
             ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(dataTableTextBox.Text.ToUpper())));

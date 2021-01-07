@@ -307,7 +307,7 @@ namespace C2
             // 
             this.ModelButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.ModelButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ModelButtonPictureBox.Image = global::C2.Properties.Resources.Modelmarket;
+            this.ModelButtonPictureBox.Image = global::C2.Properties.Resources.modelMarket;
             this.ModelButtonPictureBox.Location = new System.Drawing.Point(18, 13);
             this.ModelButtonPictureBox.Name = "ModelButtonPictureBox";
             this.ModelButtonPictureBox.Size = new System.Drawing.Size(20, 20);
