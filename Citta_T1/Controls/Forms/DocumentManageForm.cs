@@ -253,13 +253,22 @@ namespace C2.Controls
                     TabItem[] relateItem = TaskBar.Items.Where(ti=> ti.Tag is CanvasForm).Where(ti => ti.ToolTipText != null && ti.ToolTipText.StartsWith(e.Item.ToolTipText+"-")).ToArray();
                     foreach(TabItem ti in relateItem)
                     {
-                        MdiClient.CloseMdiForm((Form)ti.Tag);
+                        if ((ti.Tag as CanvasForm).CanClose())
+                            MdiClient.CloseMdiForm((Form)ti.Tag);
                     }
                     if(TaskBar.Items.Where(ti => ti.Tag is CanvasForm).Where(ti => ti.ToolTipText!=null && ti.ToolTipText.StartsWith(e.Item.ToolTipText+"-")).ToArray().Count() == 0)
                         MdiClient.CloseMdiForm((Form)e.Item.Tag);
                 }
+                else if(e.Item.Tag is CanvasForm)
+                {
+                    //模型视图关闭前，需要判断是否还在运行
+                    if((e.Item.Tag as CanvasForm).CanClose())
+                        MdiClient.CloseMdiForm((Form)e.Item.Tag);
+                }
                 else
-                    MdiClient.CloseMdiForm((Form)e.Item.Tag);                    
+                    MdiClient.CloseMdiForm((Form)e.Item.Tag);
+
+
             }
         }
 
