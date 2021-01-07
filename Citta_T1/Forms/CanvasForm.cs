@@ -420,7 +420,7 @@ namespace C2.Forms
         //更新op算子错误信息
         private void UpdateOpErrorMessage(TaskManager manager, int id, string error)
         {
-            this.Invoke(new AsynUpdateOpErrorMessage(delegate ()
+            InvokeUtil.Invoke(this,new AsynUpdateOpErrorMessage(delegate ()
             {
                 MoveOpControl op = Document.SearchElementByID(id).InnerControl as MoveOpControl;
                 op.SetStatusBoxErrorContent(error);
@@ -431,48 +431,67 @@ namespace C2.Forms
         private void UpdateProgressBar(TaskManager manager)
         {
             if (manager.ModelStatus == ModelStatus.Running)
-                this.Invoke(new AsynUpdateProgressBar(delegate ()
+                InvokeUtil.Invoke(this,new AsynUpdateProgressBar(delegate ()
                 {
                     this.progressBar.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
                     this.progressBarLabel.Text = this.progressBar.Value.ToString() + "%";
                 }));
         }
-
+        public bool CanClose()
+        {
+            if (Document.TaskManager.ModelStatus == ModelStatus.Running || Document.TaskManager.ModelStatus == ModelStatus.Pause)
+            {
+                DialogResult isDocClose = MessageBox.Show(string.Format("正在运行中，是否强制关闭？"), "关闭", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                // 取消关闭，直接return
+                // 强制关闭
+                if (isDocClose == DialogResult.Yes)
+                {
+                    Document.TaskManager.Stop();
+                    UpdateRunbuttonImageInfo();
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        }
 
         //更新log
         private void UpdateLogStatus(string logContent)
         {
-            this.Invoke(new AsynUpdateLog(delegate (string tlog)
+            if(Global.GetCanvasForm() == null)
+                return;
+
+            InvokeUtil.Invoke(this,new AsynUpdateLog(delegate (string tlog)
             {
                 log.Info(tlog);
             }), logContent);
+
         }
 
 
         private void UpdateRunningGif(TaskManager manager)
         {
             if (manager.ModelStatus == ModelStatus.GifDone)
-                this.Invoke(new AsynUpdateGif(delegate ()
+                InvokeUtil.Invoke(this,new AsynUpdateGif(delegate ()
                 {
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Show();
                 }));
             else if (manager.ModelStatus == ModelStatus.Done)
-                this.Invoke(new AsynUpdateGif(delegate ()
+                InvokeUtil.Invoke(this,new AsynUpdateGif(delegate ()
                 {
                     this.progressBar.Hide();
                     this.progressBarLabel.Hide();
                     this.currentModelFinLab.Hide();
                 }));
-
         }
 
         //完成任务时需要调用
         private void Accomplish(TaskManager manager)
         {
             Save();
-            this.Invoke(new TaskCallBack(delegate ()
+            InvokeUtil.Invoke(this,new TaskCallBack(delegate ()
             {
                 UpdateRunbuttonImageInfo();
                 UpdateTopicResults(RelateTopic);
@@ -532,6 +551,10 @@ namespace C2.Forms
         //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档
         public void UpdateRunbuttonImageInfo()
         {
+            //当前窗口可能为首页或业务视图，当前模型视图为null，无需更新runbutton
+            if (Global.GetCurrentModelDocument() == null)
+                return;
+
             TaskManager manager = Global.GetCurrentModelDocument().TaskManager;
             switch (manager.ModelStatus)
             {
@@ -601,7 +624,7 @@ namespace C2.Forms
         }
         private void EnableRunningControl(TaskManager manager)
         {
-            this.Invoke(new AsynUpdateMask(delegate ()
+            InvokeUtil.Invoke(this,new AsynUpdateMask(delegate ()
             {
                 Document.Enable();
                 EnableCommonControl(true);
