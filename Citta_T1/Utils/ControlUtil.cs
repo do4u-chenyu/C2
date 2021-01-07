@@ -3,6 +3,7 @@ using C2.Business.Model.World;
 using C2.Controls.Move;
 using C2.Core;
 using C2.Dialogs.WidgetChart;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -90,6 +91,62 @@ namespace C2.Utils
                     break;
             }
             chartDialog.ShowDialog();
+        }
+
+        public static string Invoke(Control ctl, Delegate method)
+        {
+            string message = string.Empty;
+            if (!ctl.IsHandleCreated)
+                return message;
+
+            if (ctl.IsDisposed)
+                return message;
+
+            if (ctl.InvokeRequired)
+            {
+                try
+                {
+                    ctl.Invoke(method);
+                }
+                catch (InvalidOperationException)
+                {
+                    return message;
+                }
+                catch (Exception e)
+                {
+                   return e.Message;
+                }
+            }
+
+            return message;
+        }
+
+        public static string Invoke(Control ctl, Delegate method, string arg)
+        {
+            string message = string.Empty;
+            if (!ctl.IsHandleCreated)
+                return message;
+
+            if (ctl.IsDisposed)
+                return message;
+
+            if (ctl.InvokeRequired)
+            {
+                try
+                {
+                    ctl.Invoke(method, arg);
+                }
+                catch (InvalidOperationException)
+                {
+                    return message;
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
+            }
+
+            return message;
         }
     }
 }

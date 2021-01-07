@@ -237,6 +237,14 @@ namespace C2.Controls
                         MdiClient.ActiveMdiForm(form);
                     else
                         form.Activate();
+                    if (form is CanvasForm)
+                    {
+                        (form as CanvasForm).UpdateRunbuttonImageInfo();
+                    }
+                    else
+                    {
+                        Global.GetLeftToolBoxPanel().Enabled = true;
+                    }
                 }
             }
         }
