@@ -60,7 +60,7 @@ namespace C2.Model
             DBItem = database;
             FileSep = OpUtil.DefaultFieldSeparator;
             FilePath = database.AllDatabaseInfo;
-            FileName = database.DataTable.Name;
+            FileName = database.DataTable.Name; 
             FileType = OpUtil.ExtType.Database;
         }
 

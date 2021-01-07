@@ -10,26 +10,22 @@ namespace C2.Controls.Left
     public partial class MindMapModelButton : UserControl
     {
         private string oldTextString;
-        private string fullFilePath;
 
         public MindMapModelButton(string modelTitle)
         {
             InitializeComponent();
             this.textButton.Text = modelTitle;
             this.oldTextString = modelTitle;
-            fullFilePath = Path.Combine(Global.BusinessViewPath, this.textButton.Text, this.textButton.Text + ".bmd");
+            FullFilePath = Path.Combine(Global.BusinessViewPath, this.textButton.Text, this.textButton.Text + ".bmd");
         }
 
         public string ModelTitle => this.textButton.Text;
 
-        public void EnableOpenDocumentMenu() { this.OpenToolStripMenuItem.Enabled = true; }
-        public void EnableRenameDocumentMenu() { this.RenameToolStripMenuItem.Enabled = true; }
-        public void EnableDeleteDocumentMenu() { this.DeleteToolStripMenuItem.Enabled = true; }
-        public string FullFilePath { get => fullFilePath; set => fullFilePath = value; }
+        public string FullFilePath { get; set; }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().OpenDocument(fullFilePath);
+            Global.GetMainForm().OpenDocument(FullFilePath);
         }
 
         private void MindMapModelButton_Load(object sender, EventArgs e)
@@ -74,7 +70,7 @@ namespace C2.Controls.Left
             if (Global.GetTaskBar().ContainModel(this.ModelTitle))
                 return;
             // 删除前用对话框确认
-            DialogResult rs = MessageBox.Show(String.Format("删除模型: {0}, 继续删除请点击 \"确定\"", ModelTitle),
+            DialogResult rs = MessageBox.Show(String.Format("删除业务视图: {0}, 继续删除请点击 \"确定\"", ModelTitle),
                     "删除 " + this.ModelTitle,
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Information);
@@ -82,7 +78,7 @@ namespace C2.Controls.Left
             if (rs != DialogResult.OK)
                 return;
 
-            string modelDic = System.IO.Path.Combine(Global.UserWorkspacePath, "业务视图", ModelTitle);
+            string modelDic = Path.Combine(Global.UserWorkspacePath, "业务视图", ModelTitle);
             FileUtil.DeleteDirectory(modelDic);
             Global.GetMindMapModelControl().RemoveModelButton(this);
         }
@@ -101,13 +97,18 @@ namespace C2.Controls.Left
             FinishTextChange();
         }
 
-        //private void TextButton_MouseDown(object sender, MouseEventArgs e)
-        //{
-        //    // 鼠标左键双击触发
-        //    if (e.Button != MouseButtons.Left || e.Clicks != 2)
-        //        return;
-        //    RenameToolStripMenuItem_Click(sender, e);
-        //}
+        private void TextButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            // 鼠标左键双击触发
+            if (e.Button != MouseButtons.Left || e.Clicks != 2)
+                return;
+            // 双击打开对应模型
+            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            {
+                Global.GetMainForm().OpenDocument(FullFilePath);
+            }
+           
+        }
 
 
         private void FinishTextChange()
@@ -155,7 +156,7 @@ namespace C2.Controls.Left
             //blu模型导出
         }
 
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (Global.GetMainForm().OpendDocuments().Contains(ModelTitle))
             {
@@ -166,11 +167,9 @@ namespace C2.Controls.Left
             else
             {
                 this.OpenToolStripMenuItem.Enabled = true;
-                //this.RenameToolStripMenuItem.Enabled = true;
                 this.DeleteToolStripMenuItem.Enabled = true;
             }
 
         }
-
     }
 }
