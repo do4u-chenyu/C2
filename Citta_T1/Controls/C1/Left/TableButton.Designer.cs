@@ -38,7 +38,6 @@ namespace C2.Controls.Left
             this.ReviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReviewStruToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox = new System.Windows.Forms.TextBox();
             this.txtButton = new C2.Controls.Common.NoFocusButton();
             this.CopyTableNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
@@ -102,18 +101,6 @@ namespace C2.Controls.Left
             this.RefreshToolStripMenuItem.ToolTipText = "刷新程序缓存,重新加载数据源";
             this.RefreshToolStripMenuItem.Click += new System.EventHandler(this.RefreshToolStripMenuItem_Click);
             // 
-            // textBox
-            // 
-            this.textBox.BackColor = System.Drawing.Color.White;
-            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox.Location = new System.Drawing.Point(25, 3);
-            this.textBox.Name = "textBox";
-            this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(94, 16);
-            this.textBox.TabIndex = 12;
-            this.textBox.Visible = false;
-            // 
             // txtButton
             // 
             this.txtButton.BackColor = System.Drawing.Color.White;
@@ -144,7 +131,6 @@ namespace C2.Controls.Left
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.White;
             this.ContextMenuStrip = this.contextMenuStrip1;
-            this.Controls.Add(this.textBox);
             this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.leftPictureBox);
             this.Controls.Add(this.txtButton);
@@ -169,7 +155,6 @@ namespace C2.Controls.Left
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ReviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ReviewStruToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ToolStripMenuItem RefreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyTableNameToolStripMenuItem;
     }
