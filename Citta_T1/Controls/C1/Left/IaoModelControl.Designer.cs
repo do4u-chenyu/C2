@@ -1,6 +1,6 @@
 ﻿namespace C2.Controls.Left
 {
-    partial class IaoModelControl
+    partial class IAOModelControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -82,7 +82,7 @@
             this.Controls.Add(this.IaoModelPanel);
             this.Name = "IaoModelControl";
             this.Size = new System.Drawing.Size(185, 660);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.IaoModelControl_Paint);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.IAOModelControl_Paint);
             this.IaoModelPanel.ResumeLayout(false);
             this.IaoModelPanel.PerformLayout();
             this.ResumeLayout(false);

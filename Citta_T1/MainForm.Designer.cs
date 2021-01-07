@@ -50,7 +50,7 @@ namespace C2
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
             this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
-            this.iaoModelControl = new C2.Controls.Left.IaoModelControl();
+            this.iaoModelControl = new C2.Controls.Left.IAOModelControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
@@ -785,7 +785,7 @@ namespace C2
         private System.Windows.Forms.Button connectOpButton;
         private Controls.Left.MindMapModelControl mindMapModelControl;
         private Controls.Left.DataSourceControl dataSourceControl;
-        private Controls.Left.IaoModelControl iaoModelControl;
+        private Controls.Left.IAOModelControl iaoModelControl;
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
