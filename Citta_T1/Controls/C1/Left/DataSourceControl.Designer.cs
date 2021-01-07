@@ -43,7 +43,6 @@
             this.frameLabel = new System.Windows.Forms.Label();
             this.linkLabel = new System.Windows.Forms.Label();
             this.dataSourceFrame.SuspendLayout();
-            this.localFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,10 +92,9 @@
             this.localFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.localFrame.BackColor = System.Drawing.Color.White;
             this.localFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.localFrame.Controls.Add(this.addLocalConnectLabel);
-            this.localFrame.Location = new System.Drawing.Point(3, 35);
+            this.localFrame.Location = new System.Drawing.Point(3, 33);
             this.localFrame.Name = "localFrame";
-            this.localFrame.Size = new System.Drawing.Size(179, 622);
+            this.localFrame.Size = new System.Drawing.Size(179, 623);
             this.localFrame.TabIndex = 1;
             this.localFrame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataSourceControl_MouseDown);
             // 
@@ -105,7 +103,7 @@
             this.addLocalConnectLabel.AutoSize = true;
             this.addLocalConnectLabel.Font = new System.Drawing.Font("宋体", 10.5F);
             this.addLocalConnectLabel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.addLocalConnectLabel.Location = new System.Drawing.Point(4, 0);
+            this.addLocalConnectLabel.Location = new System.Drawing.Point(8, 38);
             this.addLocalConnectLabel.Name = "addLocalConnectLabel";
             this.addLocalConnectLabel.Size = new System.Drawing.Size(77, 14);
             this.addLocalConnectLabel.TabIndex = 8;
@@ -140,7 +138,7 @@
             this.externalFrame.Controls.Add(this.frameLabel);
             this.externalFrame.Controls.Add(this.linkLabel);
             this.externalFrame.Controls.Add(this.addConnectLabel);
-            this.externalFrame.Location = new System.Drawing.Point(3, 35);
+            this.externalFrame.Location = new System.Drawing.Point(3, 33);
             this.externalFrame.Name = "externalFrame";
             this.externalFrame.Size = new System.Drawing.Size(179, 621);
             this.externalFrame.TabIndex = 2;
@@ -213,6 +211,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Controls.Add(this.addLocalConnectLabel);
             this.Controls.Add(this.externalFrame);
             this.Controls.Add(this.localFrame);
             this.Controls.Add(this.dataSourceFrame);
@@ -220,11 +219,10 @@
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DataSourceControl_Paint);
             this.dataSourceFrame.ResumeLayout(false);
-            this.localFrame.ResumeLayout(false);
-            this.localFrame.PerformLayout();
             this.externalFrame.ResumeLayout(false);
             this.externalFrame.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
