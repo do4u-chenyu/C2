@@ -140,12 +140,15 @@
             this.externalFrame.Controls.Add(this.addConnectLabel);
             this.externalFrame.Location = new System.Drawing.Point(3, 33);
             this.externalFrame.Name = "externalFrame";
-            this.externalFrame.Size = new System.Drawing.Size(179, 621);
+            this.externalFrame.Size = new System.Drawing.Size(179, 623);
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
             // 
             // dataTableTextBox
             // 
+            this.dataTableTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataTableTextBox.Location = new System.Drawing.Point(10, 285);
             this.dataTableTextBox.Name = "dataTableTextBox";
             this.dataTableTextBox.Size = new System.Drawing.Size(159, 21);
@@ -154,14 +157,20 @@
             // 
             // dataTabelPanel
             // 
+            this.dataTabelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataTabelPanel.AutoScroll = true;
-            this.dataTabelPanel.Location = new System.Drawing.Point(-1, 320);
+            this.dataTabelPanel.Location = new System.Drawing.Point(0, 324);
             this.dataTabelPanel.Name = "dataTabelPanel";
-            this.dataTabelPanel.Size = new System.Drawing.Size(179, 279);
+            this.dataTabelPanel.Size = new System.Drawing.Size(177, 297);
             this.dataTabelPanel.TabIndex = 5;
             // 
             // frameCombo
             // 
+            this.frameCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.frameCombo.FormattingEnabled = true;
             this.frameCombo.Location = new System.Drawing.Point(10, 219);
             this.frameCombo.Name = "frameCombo";
@@ -217,6 +226,7 @@
             this.Controls.Add(this.dataSourceFrame);
             this.Name = "DataSourceControl";
             this.Size = new System.Drawing.Size(185, 660);
+            this.Load += new System.EventHandler(this.DataSourceControl_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DataSourceControl_Paint);
             this.dataSourceFrame.ResumeLayout(false);
             this.externalFrame.ResumeLayout(false);

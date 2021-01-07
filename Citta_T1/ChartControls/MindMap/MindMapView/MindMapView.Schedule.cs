@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using C2.Business.Schedule.Cmd;
 using C2.Core;
+using C2.Database;
 using C2.Dialogs.Base;
 using C2.Dialogs.C2OperatorViews;
 using C2.Model;
@@ -51,6 +52,40 @@ namespace C2.Controls.MapViews
                 {
                     rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.SingleOp);
                     rsw.DataItems.Add(resultItem);                   
+                }
+                TopicUpdate(topic, null);
+            }
+        }
+        private void RunSQL()
+        {
+            //除了未配置状态，其余情况下全部重新运行
+            if (opw.Status != OpStatus.Null)
+            {
+                string connString;
+                string sqlText;
+                if (!opw.Option.OptionDict.TryGetValue("sqlText", out sqlText) || !opw.Option.OptionDict.TryGetValue("connection", out connString))
+                    return;
+                OraConnection conn = new OraConnection(new DatabaseItem(connString));
+                DbUtil.ExecuteOracleSQL(conn, sqlText, opw.ResultItem.FilePath);
+                opw.Status = OpStatus.Done;
+                HelpUtil.ShowMessageBox("算子运算完毕", "运行"); // 这个对话框还是挺丑的.后面要优化
+                this.Cursor = Cursors.Default;
+
+                //没能成功运行，直接返回
+                if (opw.Status != OpStatus.Done)
+                    return;
+
+                DataItem resultItem = opw.ResultItem;
+                Topic topic = opw.Container as Topic;
+                ResultWidget rsw = topic.FindWidget<ResultWidget>();
+                if (rsw == null)
+                {
+                    topic.Widgets.Add(new ResultWidget { DataItems = new List<DataItem> { resultItem } });
+                }
+                else
+                {
+                    rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.SingleOp);
+                    rsw.DataItems.Add(resultItem);
                 }
                 TopicUpdate(topic, null);
             }

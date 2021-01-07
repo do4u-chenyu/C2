@@ -1,6 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Business.Option;
 using C2.Core;
+using C2.Database;
 using C2.Dialogs;
 using C2.Dialogs.Base;
 using C2.Forms;
@@ -71,7 +72,10 @@ namespace C2.Controls.MapViews
                 WidgetMenuStrip.Renderer = UITheme.Default.ToolStripRenderer;
             }
         }
-
+        public bool IsSQLOp()
+        {
+            return opw.OpType == OpType.SqlOperator;
+        }
         #region 图表挂件
         private void CreateChartWidgetMenu(ChartWidget cw)
         {
@@ -159,11 +163,10 @@ namespace C2.Controls.MapViews
                 MenuOpRunning.Image = Properties.Resources.opRunning;
                 MenuOpRunning.Text = Lang._("Running");
                 MenuOpRunning.Enabled = type == "single" ? opw.Status != OpStatus.Null : !opw.HasModelOperator;
-                if (opw.DataSourceItem.DataType == DatabaseType.Null)
-                {
-
-                }
-                MenuOpRunning.Click += MenuRunningOp_Click;
+                if (opw.DataSourceItem.DataType == DatabaseType.Null && !IsSQLOp())
+                    MenuOpRunning.Click += MenuRunningOp_Click;
+                else
+                    MenuOpRunning.Click += MenuRunningSQLOp_Click;
             }
             else
             {
@@ -234,6 +237,12 @@ namespace C2.Controls.MapViews
             Global.GetDocumentForm().Save();
             GenRunCmds();
         }
+        void MenuRunningSQLOp_Click(object sender, EventArgs e)
+        {
+            Global.GetDocumentForm().Save();
+            RunSQL();
+        }
+
         void MenuOpPublic_Click(object sender, EventArgs e)
         {
             if (!opw.HasModelOperator || opw.ModelDataItem == null)
