@@ -3,6 +3,7 @@ using C2.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,9 +12,35 @@ namespace C2.Utils
     public static class DbUtil
     {
         private static readonly LogUtil log = LogUtil.GetInstance("DbUtil");
-        public static String ExecuteOracleSQL(OraConnection conn, string sqlText)
+        public static void ExecuteOracleSQL(OraConnection conn, string sqlText)
         {
-            // Execute the given query for the first 1000 records it spits out
+            string outPutPath = @"D:\test.csv";
+            DbUtil.ExecuteOracleSQL(conn, sqlText, outPutPath);
+        }
+        private static void ExecuteOracleSQL(OraConnection conn, string sqlText, string outPutPath, int pageSize=10000)
+        {
+            int pageIndex = 0;
+            bool returnHeader = true;
+            using (StreamWriter sw = new StreamWriter(outPutPath, false))
+            {
+                while (true)
+                {
+                    string result = ExecuteOracleQL_Page(conn, sqlText, pageSize, pageIndex, returnHeader);
+                    if (returnHeader)
+                        returnHeader = false;
+                    if (String.IsNullOrEmpty(result))
+                        break;
+                    sw.Write(result);
+                    pageIndex += 1;
+                }
+                sw.Flush();
+            }
+        }
+        private static string ExecuteOracleQL_Page(OraConnection conn, string sqlText, int pageSize, int pageIndex, bool returnHeader)
+        {
+            /*
+             * pageIndex start from 0.
+             */
             StringBuilder sb = new StringBuilder(1024 * 16);
             using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
             {
@@ -22,12 +49,21 @@ namespace C2.Utils
                     using (OracleConnection con = new OracleConnection(conn.ConnectionString))
                     {
                         con.Open();
-                        OracleCommand comm = new OracleCommand(sqlText, con);
+                        string sqlPage = String.Format(@"select * from 
+	                                                        (select rownum as rowno,tmp.* from ({0}) tmp where rownum<={1}) 
+                                                        t where t.rowno>{2}",
+                                            sqlText,
+                                            pageSize * (pageIndex + 1), 
+                                            pageSize * (pageIndex));
+                        OracleCommand comm = new OracleCommand(sqlPage, con);
                         using (OracleDataReader rdr = comm.ExecuteReader())  // rdr.Close()
                         {
-                            for (int i = 0; i < rdr.FieldCount - 1; i++)
-                                sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
-                            sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+                            if (returnHeader)
+                            {
+                                for (int i = 0; i < rdr.FieldCount - 1; i++)
+                                    sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
+                                sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+                            }
 
                             while (rdr.Read())
                             {
@@ -40,17 +76,11 @@ namespace C2.Utils
                 }
                 catch (Exception ex)
                 {
-                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
                 }
-                return sb.ToString();
             }
+            return sb.ToString();
         }
-        //private void connect()
-        //{
-        //    OracleConnection oconn = new OracleConnection(cs);
-        //    OracleDataAdapter oda = new OracleDataAdapter(oconn);
-        //    oda.Fill()
-        //}
         public static bool TestConn(OraConnection conn)
         {
             using (new CursorUtil.UsingCursor(Cursors.WaitCursor))

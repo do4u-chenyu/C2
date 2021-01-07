@@ -240,9 +240,10 @@ namespace C2.Controls.MapViews
             Global.GetDocumentForm().Save();
             string connString;
             string sqlText;
-            opw.Option.OptionDict.TryGetValue("sqlText",out sqlText);
-            opw.Option.OptionDict.TryGetValue("connection", out connString);
-            //string result = DbUtil.ExecuteOracleSQL(conn, sqlText);
+            if (!opw.Option.OptionDict.TryGetValue("sqlText", out sqlText) || !opw.Option.OptionDict.TryGetValue("connection", out connString))
+                return;
+            OraConnection conn = new OraConnection(new DatabaseItem(connString));
+            DbUtil.ExecuteOracleSQL(conn, sqlText);
         }
         void MenuOpPublic_Click(object sender, EventArgs e)
         {
