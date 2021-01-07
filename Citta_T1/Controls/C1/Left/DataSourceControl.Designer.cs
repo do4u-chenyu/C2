@@ -140,7 +140,7 @@
             this.externalFrame.Controls.Add(this.addConnectLabel);
             this.externalFrame.Location = new System.Drawing.Point(3, 33);
             this.externalFrame.Name = "externalFrame";
-            this.externalFrame.Size = new System.Drawing.Size(179, 621);
+            this.externalFrame.Size = new System.Drawing.Size(179, 623);
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
             // 
@@ -217,6 +217,7 @@
             this.Controls.Add(this.dataSourceFrame);
             this.Name = "DataSourceControl";
             this.Size = new System.Drawing.Size(185, 660);
+            this.Load += new System.EventHandler(this.DataSourceControl_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DataSourceControl_Paint);
             this.dataSourceFrame.ResumeLayout(false);
             this.externalFrame.ResumeLayout(false);

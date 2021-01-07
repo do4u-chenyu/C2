@@ -116,12 +116,7 @@ namespace C2.Controls.Left
             dataSource.WriteDataSourceInfo(dataButton);
         }
         private void LayoutModelButtonLocation(DataButton ct)
-        {
-            if (!this.localFrame.Controls.Contains(this.addLocalConnectLabel))
-            {
-                this.localFrame.Controls.Add(this.addLocalConnectLabel);
-            }
-           
+        {          
             if (this.localFrame.Controls.Count > 0)
                 startPoint = this.localFrame.Controls[this.localFrame.Controls.Count - 1].Location;
 
@@ -197,6 +192,8 @@ namespace C2.Controls.Left
             this.localDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Regular);
             this.externalFrame.Visible = true;
             this.localFrame.Visible = false;
+            this.addLocalConnectLabel.Visible = false;
+
         }
 
         private void LocalData_Click(object sender, EventArgs e)
@@ -204,7 +201,8 @@ namespace C2.Controls.Left
             this.localDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Bold);
             this.externalDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Regular);
             this.localFrame.Visible = true;
-            this.externalFrame.Visible = false; ;
+            this.externalFrame.Visible = false;
+            this.addLocalConnectLabel.Visible = true;
         }
 
         private void ReLayoutLocalFrame()
@@ -434,6 +432,11 @@ namespace C2.Controls.Left
         private void DataTableTextBox_TextChanged(object sender, EventArgs e)
         {
             ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(dataTableTextBox.Text.ToUpper())));
+        }
+
+        private void DataSourceControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
