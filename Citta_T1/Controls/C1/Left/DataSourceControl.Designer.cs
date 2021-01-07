@@ -146,6 +146,9 @@
             // 
             // dataTableTextBox
             // 
+            this.dataTableTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataTableTextBox.Location = new System.Drawing.Point(10, 285);
             this.dataTableTextBox.Name = "dataTableTextBox";
             this.dataTableTextBox.Size = new System.Drawing.Size(159, 21);
@@ -154,14 +157,20 @@
             // 
             // dataTabelPanel
             // 
+            this.dataTabelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataTabelPanel.AutoScroll = true;
-            this.dataTabelPanel.Location = new System.Drawing.Point(-1, 320);
+            this.dataTabelPanel.Location = new System.Drawing.Point(0, 324);
             this.dataTabelPanel.Name = "dataTabelPanel";
-            this.dataTabelPanel.Size = new System.Drawing.Size(179, 279);
+            this.dataTabelPanel.Size = new System.Drawing.Size(177, 297);
             this.dataTabelPanel.TabIndex = 5;
             // 
             // frameCombo
             // 
+            this.frameCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.frameCombo.FormattingEnabled = true;
             this.frameCombo.Location = new System.Drawing.Point(10, 219);
             this.frameCombo.Name = "frameCombo";
