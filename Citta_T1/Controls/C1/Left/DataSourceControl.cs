@@ -24,7 +24,7 @@ namespace C2.Controls.Left
             dataSourceDictI2B = new Dictionary<string, DataButton>();
             linkSourceDictI2B = new Dictionary<string, LinkButton>();
             InitializeComponent();
-            startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            startPoint = new Point(ButtonLeftX, -ButtonGapHeight+30);
             linkPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
         }
@@ -117,6 +117,11 @@ namespace C2.Controls.Left
         }
         private void LayoutModelButtonLocation(DataButton ct)
         {
+            if (!this.localFrame.Controls.Contains(this.addLocalConnectLabel))
+            {
+                this.localFrame.Controls.Add(this.addLocalConnectLabel);
+            }
+           
             if (this.localFrame.Controls.Count > 0)
                 startPoint = this.localFrame.Controls[this.localFrame.Controls.Count - 1].Location;
 
@@ -207,8 +212,12 @@ namespace C2.Controls.Left
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
             this.localFrame.SuspendLayout();
             List<Control> tmp = new List<Control>();
-            foreach (DataButton ct in this.localFrame.Controls)
-                tmp.Add(ct);
+            foreach (Control ct in this.localFrame.Controls)
+            {
+                if (ct is DataButton)
+                    tmp.Add(ct);
+            }
+               
 
             this.localFrame.Controls.Clear();
             // 重新排序
