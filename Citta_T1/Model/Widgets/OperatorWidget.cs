@@ -130,7 +130,12 @@ namespace C2.Model.Widgets
             *  单算子的数据源持久化
             */
             if (DataSourceItem != null)
-                WriteAttribute(mxw.Element, DataSourceItem, "data_item");
+            {
+                if (DataSourceItem.DataType == DatabaseType.Null)
+                    WriteAttribute(mxw.Element, DataSourceItem, "data_item");
+                else
+                    WriteExternalDataSource(mxw.Element, DataSourceItem, "data_item");
+            }
             /*
             *  单算子的结果持久化
             */
