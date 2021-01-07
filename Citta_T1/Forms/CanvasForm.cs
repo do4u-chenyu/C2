@@ -420,22 +420,27 @@ namespace C2.Forms
         //更新op算子错误信息
         private void UpdateOpErrorMessage(TaskManager manager, int id, string error)
         {
-            InvokeUtil.Invoke(this,new AsynUpdateOpErrorMessage(delegate ()
+            string message = ControlUtil.Invoke(this,new AsynUpdateOpErrorMessage(delegate ()
             {
                 MoveOpControl op = Document.SearchElementByID(id).InnerControl as MoveOpControl;
                 op.SetStatusBoxErrorContent(error);
             }));
+            if (!string.IsNullOrEmpty(message))
+                HelpUtil.ShowMessageBox(message);
         }
 
         //更新进度条
         private void UpdateProgressBar(TaskManager manager)
         {
+            string error = string.Empty;
             if (manager.ModelStatus == ModelStatus.Running)
-                InvokeUtil.Invoke(this,new AsynUpdateProgressBar(delegate ()
+                error = ControlUtil.Invoke(this,new AsynUpdateProgressBar(delegate ()
                 {
                     this.progressBar.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
                     this.progressBarLabel.Text = this.progressBar.Value.ToString() + "%";
                 }));
+            if (!string.IsNullOrEmpty(error))
+                HelpUtil.ShowMessageBox(error);
         }
         public bool CanClose()
         {
@@ -461,41 +466,47 @@ namespace C2.Forms
             if(Global.GetCanvasForm() == null)
                 return;
 
-            InvokeUtil.Invoke(this,new AsynUpdateLog(delegate (string tlog)
+            string error = ControlUtil.Invoke(this,new AsynUpdateLog(delegate (string tlog)
             {
                 log.Info(tlog);
             }), logContent);
-
+            if (!string.IsNullOrEmpty(error))
+                HelpUtil.ShowMessageBox(error);
         }
 
 
         private void UpdateRunningGif(TaskManager manager)
         {
+            string error = string.Empty;
             if (manager.ModelStatus == ModelStatus.GifDone)
-                InvokeUtil.Invoke(this,new AsynUpdateGif(delegate ()
+                error = ControlUtil.Invoke(this,new AsynUpdateGif(delegate ()
                 {
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Show();
                 }));
             else if (manager.ModelStatus == ModelStatus.Done)
-                InvokeUtil.Invoke(this,new AsynUpdateGif(delegate ()
+                error = ControlUtil.Invoke(this,new AsynUpdateGif(delegate ()
                 {
                     this.progressBar.Hide();
                     this.progressBarLabel.Hide();
                     this.currentModelFinLab.Hide();
                 }));
+            if (!string.IsNullOrEmpty(error))
+                HelpUtil.ShowMessageBox(error);
         }
 
         //完成任务时需要调用
         private void Accomplish(TaskManager manager)
         {
             Save();
-            InvokeUtil.Invoke(this,new TaskCallBack(delegate ()
+            string error = ControlUtil.Invoke(this,new TaskCallBack(delegate ()
             {
                 UpdateRunbuttonImageInfo();
                 UpdateTopicResults(RelateTopic);
             }));
+            if (!string.IsNullOrEmpty(error))
+                HelpUtil.ShowMessageBox(error);
         }
 
         public void UpdateTopicResults(Topic topic)
@@ -624,11 +635,13 @@ namespace C2.Forms
         }
         private void EnableRunningControl(TaskManager manager)
         {
-            InvokeUtil.Invoke(this,new AsynUpdateMask(delegate ()
+            string error = ControlUtil.Invoke(this,new AsynUpdateMask(delegate ()
             {
                 Document.Enable();
                 EnableCommonControl(true);
             }));
+            if (!string.IsNullOrEmpty(error))
+                HelpUtil.ShowMessageBox(error);
         }
 
         private void EnableCommonControl(bool status)
