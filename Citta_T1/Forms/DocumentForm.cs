@@ -1191,9 +1191,9 @@ namespace C2.Forms
             string filePath = string.Join("", modelPath, Document.Name, ".bmd");
             Directory.CreateDirectory(modelPath);
 
-            Document.FileName = filePath;
-            if (string.IsNullOrEmpty(Document.FileName))
-            {
+            Filename = Document.FileName = filePath;     // bug-Fixed:这里文件名存在2个变量里，外层检查Form是否打开用的是Filename
+            if (string.IsNullOrEmpty(Document.FileName)) // 内层逻辑用Document.FileName， 两边最初没有同步赋值，
+            {                                            // 同一个东西存不同份，本身就容易出现同步问题
                 //永远不进入此分支， 去掉另存为功能
                 SaveAs();
             }
