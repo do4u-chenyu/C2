@@ -49,7 +49,7 @@ namespace C2.Utils
         public static string DbConnectFailed = "连接失败";
         public static string DatabaseItemIsNull = "当前并未选择连接，请选择连接后重试";
         public static string SQLOpExecuteSucceeded = "SQL算子运算完毕";
-        public static string SQLOpExecuteFailed = "算子运算失败，请打开SQL算子检查语句后重试";
+        public static string SQLOpExecuteFailed = "SQL算子运算失败，请打开SQL算子检查语句后重试";
 
 
         /// <summary>
