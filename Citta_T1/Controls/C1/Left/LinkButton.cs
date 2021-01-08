@@ -41,10 +41,10 @@ namespace C2.Controls.Left
         {
             InitializeComponent();
             DatabaseItem = item;
-            txtButton.Name = DatabaseItem.Server;
-            txtButton.Text = FileUtil.ReName(DatabaseItem.Server);
-            this.oldTextString = DatabaseItem.Server;
-            LinkSourceName = DatabaseItem.Server;
+            LinkSourceName = string.Format("{0}@{1}", DatabaseItem.User, DatabaseItem.Server);
+            txtButton.Name = LinkSourceName;
+            txtButton.Text = FileUtil.ReName(LinkSourceName,16);
+            this.oldTextString = LinkSourceName;
         }
 
         #region 右键菜单

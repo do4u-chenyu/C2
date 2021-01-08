@@ -304,7 +304,6 @@ namespace C2.Controls.Left
         #region 外部表布局
         private void LayoutModelButtonLocation(TableButton tb)
         {
-            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             if (this.dataTabelPanel.Controls.Count > 0)
                 tablePoint = this.dataTabelPanel.Controls[this.dataTabelPanel.Controls.Count - 1].Location;
             tablePoint.Y += ButtonGapHeight;
@@ -313,6 +312,10 @@ namespace C2.Controls.Left
 
         private void ReLayoutTableFrame(List<TableButton> tableButtons)
         {
+            // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
+            if (this.dataTabelPanel.Controls.Count > 0)
+                this.tablePoint.Y = this.dataTabelPanel.Controls[0].Location.Y - ButtonGapHeight;
+
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
             this.dataTabelPanel.SuspendLayout();
 
@@ -432,6 +435,8 @@ namespace C2.Controls.Left
 
             if (tables == null)
                 return;
+
+            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             foreach (Table tmpTable in tables)
             {
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
