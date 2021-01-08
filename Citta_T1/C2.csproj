@@ -209,7 +209,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Database\Connection.cs" />
-    <Compile Include="Database\CursorHelper.cs" />
     <Compile Include="Database\DbHelper.cs" />
     <Compile Include="Database\PreviewDbDataForm.cs">
       <SubType>Form</SubType>
