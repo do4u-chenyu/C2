@@ -12,7 +12,7 @@ namespace C2.Utils
     public static class DbUtil
     {
         private static readonly LogUtil log = LogUtil.GetInstance("DbUtil");
-        public static void ExecuteOracleSQL(OraConnection conn, string sqlText, string outPutPath, int pageSize=100000)
+        public static bool ExecuteOracleSQL(OraConnection conn, string sqlText, string outPutPath, int pageSize=100000)
         {
             int pageIndex = 0;
             bool returnHeader = true;
@@ -22,7 +22,11 @@ namespace C2.Utils
                 {
                     string result = ExecuteOracleQL_Page(conn, sqlText, pageSize, pageIndex, returnHeader);
                     if (returnHeader)
+                    {
+                        if (String.IsNullOrEmpty(result))
+                            return false;
                         returnHeader = false;
+                    }
                     if (String.IsNullOrEmpty(result))
                         break;
                     sw.Write(result);
@@ -30,6 +34,7 @@ namespace C2.Utils
                 }
                 sw.Flush();
             }
+            return true;
         }
         private static string ExecuteOracleQL_Page(OraConnection conn, string sqlText, int pageSize, int pageIndex, bool returnHeader)
         {
