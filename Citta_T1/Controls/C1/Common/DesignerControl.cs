@@ -80,9 +80,9 @@ namespace C2.Controls.Common
                 OpWidget = SelectedTopic.FindWidget<OperatorWidget>();
                 SetSelectedTopic();//设置选中主题
                 SetComboDataSource();//设置数据源下拉选项
-                SetComboOperator();//设置算子下拉选项
-                SetSelectedOperator();//设置选中算子
                 SetSelectedDataSource();//设置选中数据源
+                SetComboOperator();//设置算子下拉选项
+                SetSelectedOperator();//设置选中算子   
             }
 
         }
@@ -118,7 +118,23 @@ namespace C2.Controls.Common
         private void SetComboOperator()
         {
             this.operatorCombo.Items.Clear();
-            ComboOperator.ForEach(o => this.operatorCombo.Items.Add(Lang._(o.ToString())));
+            if (SelectedDataSource == null)
+                return;
+            if (SelectedDataSource.DataType != DatabaseType.Null)
+                this.operatorCombo.Items.Add(Lang._("SqlOperator"));
+            else
+                ComboOperator.ForEach(o => this.operatorCombo.Items.Add(Lang._(o.ToString())));
+        }
+
+        private void UpdateComboOperator()
+        {
+            this.operatorCombo.Items.Clear();
+            if (SelectedDataSource == null)
+                return;
+            if (SelectedDataSource.DataType != DatabaseType.Null)
+                this.operatorCombo.Items.Add(Lang._("SqlOperator"));
+            else
+                ComboOperator.ForEach(o => this.operatorCombo.Items.Add(Lang._(o.ToString())));
         }
 
         private void SetComboDataSource()
@@ -194,8 +210,10 @@ namespace C2.Controls.Common
             OpType tmpOpType = OpWidget.OpType;
             DataItem tmpDataItem = OpWidget.DataSourceItem;
 
-            OpWidget.OpType =ComboOperator[this.operatorCombo.SelectedIndex];
+            
             OpWidget.DataSourceItem = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+            //TODO 后续加入hive判断会变
+            OpWidget.OpType = OpWidget.DataSourceItem.DataType==DatabaseType.Null ? ComboOperator[this.operatorCombo.SelectedIndex] : OpType.SqlOperator; 
             Cursor tempCursor = this.Cursor;
             this.Cursor = Cursors.WaitCursor;
             C2BaseOperatorView dialog = GenerateOperatorView();
@@ -243,6 +261,7 @@ namespace C2.Controls.Common
             if (ComboDataSource == null || this.dataSourceCombo.SelectedIndex < 0 || ComboDataSource.Count <= this.dataSourceCombo.SelectedIndex )
                 return;
             SelectedDataSource = ComboDataSource[this.dataSourceCombo.SelectedIndex];
+            UpdateComboOperator();
         }
 
         private void OperatorCombo_SelectedIndexChanged(object sender, System.EventArgs e)
