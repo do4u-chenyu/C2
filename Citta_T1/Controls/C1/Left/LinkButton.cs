@@ -1,12 +1,9 @@
-﻿
-using C2.Business.Model;
-using C2.Core;
+﻿using C2.Core;
+using C2.Dialogs;
+using C2.Model;
 using C2.Utils;
 using System;
 using System.Windows.Forms;
-using C2.Model;
-using C2.Controls;
-using C2.Dialogs;
 namespace C2.Controls.Left
 {
     public partial class LinkButton : UserControl
@@ -43,8 +40,9 @@ namespace C2.Controls.Left
             DatabaseItem = item;
             LinkSourceName = string.Format("{0}@{1}", DatabaseItem.User, DatabaseItem.Server);
             txtButton.Name = LinkSourceName;
-            txtButton.Text = FileUtil.ReName(LinkSourceName,16);
+            txtButton.Text = FileUtil.ReName(LinkSourceName, 16);
             this.oldTextString = LinkSourceName;
+            this.helpToolTip.SetToolTip(txtButton, LinkSourceName);
         }
 
         #region 右键菜单
