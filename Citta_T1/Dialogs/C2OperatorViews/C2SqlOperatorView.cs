@@ -81,6 +81,10 @@ namespace C2.Dialogs.C2OperatorViews
                 databaseItems.ForEach(d => names.Add(d.PrettyDatabaseInfo));
                 this.comboBoxConnection.Items.AddRange(names.ToArray());
             }
+            if (this.comboBoxConnection.Items.Count == 1)
+            {
+                this.comboBoxConnection.SelectedIndex = 0; // 如果只有一个选项，默认就是它，此时不需要用户再去选了。
+            }
         }
 
         private void BnConnect_Click(object sender, System.EventArgs e)
