@@ -66,9 +66,10 @@ namespace C2.Controls.MapViews
                 if (!opw.Option.OptionDict.TryGetValue("sqlText", out sqlText) || !opw.Option.OptionDict.TryGetValue("connection", out connString))
                     return;
                 OraConnection conn = new OraConnection(new DatabaseItem(connString));
-                DbUtil.ExecuteOracleSQL(conn, sqlText, opw.ResultItem.FilePath);
-                opw.Status = OpStatus.Done;
-                HelpUtil.ShowMessageBox("算子运算完毕", "运行"); // 这个对话框还是挺丑的.后面要优化
+                bool isSuccess = DbUtil.ExecuteOracleSQL(conn, sqlText, opw.ResultItem.FilePath);
+                string runMessage = isSuccess ? HelpUtil.SQLOpExecuteSucceeded : HelpUtil.SQLOpExecuteFailed;
+                opw.Status = isSuccess ? OpStatus.Done : OpStatus.Warn;
+                HelpUtil.ShowMessageBox(runMessage, "运行"); // 这个对话框还是挺丑的.后面要优化
                 this.Cursor = Cursors.Default;
 
                 //没能成功运行，直接返回
