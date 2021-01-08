@@ -239,7 +239,6 @@
             this.Controls.Add(this.dataAddLabelPanel);
             this.Name = "DataSourceControl";
             this.Size = new System.Drawing.Size(185, 660);
-            this.Load += new System.EventHandler(this.DataSourceControl_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DataSourceControl_Paint);
             this.dataSourceFrame.ResumeLayout(false);
             this.externalFrame.ResumeLayout(false);
