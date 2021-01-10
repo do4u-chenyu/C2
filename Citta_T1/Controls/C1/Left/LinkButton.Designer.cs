@@ -32,7 +32,6 @@ namespace C2.Controls.Left
         {
             this.components = new System.ComponentModel.Container();
             this.leftPictureBox = new System.Windows.Forms.PictureBox();
-            this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +53,7 @@ namespace C2.Controls.Left
             this.leftPictureBox.TabIndex = 10;
             this.leftPictureBox.TabStop = false;
             // 
-            // contextMenuStrip1
+            // contextMenuStrip
             // 
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(22, 22);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -99,15 +98,16 @@ namespace C2.Controls.Left
             // 
             // txtButton
             // 
+            this.txtButton.AutoEllipsis = true;
             this.txtButton.BackColor = System.Drawing.Color.White;
             this.txtButton.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtButton.Location = new System.Drawing.Point(25, 1);
-            this.txtButton.Margin = new System.Windows.Forms.Padding(2);
+            this.txtButton.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(138, 25);
+            this.txtButton.Size = new System.Drawing.Size(143, 25);
             this.txtButton.TabIndex = 9;
             this.txtButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtButton.UseVisualStyleBackColor = false;
@@ -124,11 +124,10 @@ namespace C2.Controls.Left
             this.Controls.Add(this.txtButton);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LinkButton";
-            this.Size = new System.Drawing.Size(165, 27);
+            this.Size = new System.Drawing.Size(170, 27);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -136,7 +135,6 @@ namespace C2.Controls.Left
 
         private C2.Controls.Common.NoFocusButton txtButton;
         private System.Windows.Forms.PictureBox leftPictureBox;
-        private System.Windows.Forms.ToolTip helpToolTip;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RemoveToolStripMenuItem;

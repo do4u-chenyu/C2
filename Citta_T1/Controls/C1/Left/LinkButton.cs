@@ -40,7 +40,6 @@ namespace C2.Controls.Left
             LinkSourceName = string.Format("{0}@{1}", DatabaseItem.User, DatabaseItem.Server);
             txtButton.Name = LinkSourceName;
             txtButton.Text = FileUtil.ReName(LinkSourceName, 16);
-            this.helpToolTip.SetToolTip(txtButton, LinkSourceName);
         }
 
         #region 右键菜单
