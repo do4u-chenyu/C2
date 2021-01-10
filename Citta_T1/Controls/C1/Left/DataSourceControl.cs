@@ -71,7 +71,7 @@ namespace C2.Controls.Left
             DataSourceDictI2B = new Dictionary<string, DataButton>();
             LinkSourceDictI2B = new Dictionary<string, LinkButton>();
             startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            linkPoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            linkPoint = new Point(ButtonLeftX - 11, -ButtonGapHeight);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
         }
 

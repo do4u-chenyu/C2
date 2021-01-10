@@ -64,12 +64,12 @@ namespace C2.Controls.Left
             this.RefreshToolStripMenuItem,
             this.RemoveToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 92);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.EditToolStripMenuItem.Text = "编辑连接";
             this.EditToolStripMenuItem.ToolTipText = "配置数据源连接";
             this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
@@ -77,7 +77,7 @@ namespace C2.Controls.Left
             // ConnectToolStripMenuItem
             // 
             this.ConnectToolStripMenuItem.Name = "ConnectToolStripMenuItem";
-            this.ConnectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ConnectToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.ConnectToolStripMenuItem.Text = "连接数据源";
             this.ConnectToolStripMenuItem.ToolTipText = "连接数据源";
             this.ConnectToolStripMenuItem.Click += new System.EventHandler(this.ConnectToolStripMenuItem_Click);
@@ -86,14 +86,14 @@ namespace C2.Controls.Left
             // 
             this.RefreshToolStripMenuItem.Enabled = false;
             this.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem";
-            this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.RefreshToolStripMenuItem.Text = "重命名";
             this.RefreshToolStripMenuItem.ToolTipText = "修改数据源名称";
             // 
             // RemoveToolStripMenuItem
             // 
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
-            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.RemoveToolStripMenuItem.Text = "删除";
             this.RemoveToolStripMenuItem.ToolTipText = "删除数据源";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
@@ -106,7 +106,7 @@ namespace C2.Controls.Left
             this.textBox.Location = new System.Drawing.Point(25, 3);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(112, 16);
+            this.textBox.Size = new System.Drawing.Size(138, 16);
             this.textBox.TabIndex = 12;
             this.textBox.Visible = false;
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
@@ -122,7 +122,7 @@ namespace C2.Controls.Left
             this.txtButton.Location = new System.Drawing.Point(25, 1);
             this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(113, 25);
+            this.txtButton.Size = new System.Drawing.Size(138, 25);
             this.txtButton.TabIndex = 9;
             this.txtButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtButton.UseVisualStyleBackColor = false;
@@ -140,7 +140,7 @@ namespace C2.Controls.Left
             this.Controls.Add(this.txtButton);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LinkButton";
-            this.Size = new System.Drawing.Size(140, 27);
+            this.Size = new System.Drawing.Size(165, 27);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
