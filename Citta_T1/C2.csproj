@@ -780,6 +780,11 @@
     <Compile Include="Forms\CanvasForm.Designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IAOLab\ApkTool\ApkTool.cs" />
+    <Compile Include="IAOLab\BankTool\BankTool.cs" />
+    <Compile Include="IAOLab\BaseStation\BaseStation.cs" />
+    <Compile Include="IAOLab\Transform\Transform.cs" />
+    <Compile Include="IAOLab\WifiMac\WifiMac.cs" />
     <Compile Include="Model\DatabaseItem.cs" />
     <Compile Include="Model\Widgets\AttachmentWidget.cs" />
     <Compile Include="Model\Widgets\C2BaseWidget.cs" />
