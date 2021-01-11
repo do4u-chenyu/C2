@@ -37,9 +37,8 @@ namespace C2.Controls.Left
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ReviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReviewStruToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtButton = new C2.Controls.Common.NoFocusButton();
             this.CopyTableNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtButton = new C2.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -71,10 +70,9 @@ namespace C2.Controls.Left
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ReviewToolStripMenuItem,
             this.ReviewStruToolStripMenuItem,
-            this.RefreshToolStripMenuItem,
             this.CopyTableNameToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
             // 
             // ReviewToolStripMenuItem
@@ -93,13 +91,13 @@ namespace C2.Controls.Left
             this.ReviewStruToolStripMenuItem.ToolTipText = "表结构预览";
             this.ReviewStruToolStripMenuItem.Click += new System.EventHandler(this.ReviewStruToolStripMenuItem_Click);
             // 
-            // RefreshToolStripMenuItem
+            // CopyTableNameToolStripMenuItem
             // 
-            this.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem";
-            this.RefreshToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.RefreshToolStripMenuItem.Text = "刷新";
-            this.RefreshToolStripMenuItem.ToolTipText = "刷新程序缓存,重新加载数据源";
-            this.RefreshToolStripMenuItem.Click += new System.EventHandler(this.RefreshToolStripMenuItem_Click);
+            this.CopyTableNameToolStripMenuItem.Name = "CopyTableNameToolStripMenuItem";
+            this.CopyTableNameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CopyTableNameToolStripMenuItem.Text = "复制表名";
+            this.CopyTableNameToolStripMenuItem.ToolTipText = "复制表名到剪切板";
+            this.CopyTableNameToolStripMenuItem.Click += new System.EventHandler(this.CopyTableNameToolStripMenuItem_Click);
             // 
             // txtButton
             // 
@@ -115,14 +113,6 @@ namespace C2.Controls.Left
             this.txtButton.TabIndex = 9;
             this.txtButton.UseVisualStyleBackColor = false;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
-            // 
-            // CopyTableNameToolStripMenuItem
-            // 
-            this.CopyTableNameToolStripMenuItem.Name = "CopyTableNameToolStripMenuItem";
-            this.CopyTableNameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.CopyTableNameToolStripMenuItem.Text = "复制表名";
-            this.CopyTableNameToolStripMenuItem.ToolTipText = "复制表名到剪切板";
-            this.CopyTableNameToolStripMenuItem.Click += new System.EventHandler(this.CopyTableNameToolStripMenuItem_Click);
             // 
             // TableButton
             // 
@@ -142,7 +132,6 @@ namespace C2.Controls.Left
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -155,7 +144,6 @@ namespace C2.Controls.Left
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ReviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ReviewStruToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RefreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyTableNameToolStripMenuItem;
     }
 }

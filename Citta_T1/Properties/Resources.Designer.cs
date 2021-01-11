@@ -153,6 +153,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap arrow_query {
+            get {
+                object obj = ResourceManager.GetObject("arrow_query", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Artificialintelligence {
             get {
                 object obj = ResourceManager.GetObject("Artificialintelligence", resourceCulture);

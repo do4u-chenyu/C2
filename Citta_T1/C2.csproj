@@ -136,7 +136,7 @@
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\Model\ExportModel.cs" />
     <Compile Include="Business\Model\ImportModel.cs" />
-    <Compile Include="Business\Model\ModelsInfo.cs" />
+    <Compile Include="Business\Model\ModelInfo.cs" />
     <Compile Include="Business\Model\World\WorldMap.cs" />
     <Compile Include="Business\Option\BcpInfo.cs" />
     <Compile Include="Business\Option\ColumnInfo.cs" />
@@ -1723,6 +1723,7 @@
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
+    <None Include="Resources\arrow_query.bmp" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <None Include="Resources\document.bmp" />
@@ -1759,6 +1760,7 @@
     <None Include="Resources\Images\association.png" />
     <None Include="Resources\Images\back_color.png" />
     <None Include="Resources\Images\balloon_small.png" />
+    <None Include="Resources\Images\arrow_query.png" />
     <Content Include="Resources\Images\bar.png" />
     <None Include="Resources\Images\bold.png" />
     <None Include="Resources\Images\calculator.png" />
