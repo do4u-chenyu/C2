@@ -10,7 +10,21 @@ namespace C2.Controls.Left
     {
         private int count = 0;
         public string FullFilePath { get => DatabaseItem.AllDatabaseInfo; }
-        public string LinkSourceName { get; set; }
+
+        private string _LinkSourceName;
+        public string LinkSourceName 
+        {
+            set 
+            {
+                _LinkSourceName = value;
+                txtButton.Name = _LinkSourceName;
+                txtButton.Text = FileUtil.ReName(_LinkSourceName, 16);
+            }
+            get
+            {
+                return _LinkSourceName;
+            }
+        }
 
 
         public event EventHandler<ChangeDatabaseItemEventArgs> DatabaseItemChanged;
@@ -100,9 +114,6 @@ namespace C2.Controls.Left
         private void OnDatabaseItemChange(DatabaseItem databaseItem)
         {
             LinkSourceName = string.Format("{0}@{1}", DatabaseItem.User, DatabaseItem.Server);
-            txtButton.Name = LinkSourceName;
-            txtButton.Text = FileUtil.ReName(LinkSourceName, 16);
-
             DatabaseItemChanged?.Invoke(this, new ChangeDatabaseItemEventArgs() { databaseItem = databaseItem });
         }
 

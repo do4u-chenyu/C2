@@ -73,6 +73,7 @@ namespace C2.Controls.Left
             startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             linkPoint = new Point(ButtonLeftX - 11, -ButtonGapHeight);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            _RelateTableButtons = new List<TableButton>();
         }
 
         #region 内外部数据面板切换
@@ -253,7 +254,7 @@ namespace C2.Controls.Left
         {
             this.frameCombo.Items.Clear();
             this.frameCombo.Text = string.Empty;
-            RelateTableButtons = null;
+            RelateTableButtons.Clear();
             //this.dataTableTextBox.Text = string.Empty;
             this.dataTabelPanel.Controls.Clear();
         }
@@ -419,7 +420,7 @@ namespace C2.Controls.Left
         {
             this.frameCombo.Items.Clear();
             //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空
-            RelateTableButtons = null;
+            RelateTableButtons.Clear();
 
             if (users == null)
                 return;
@@ -430,14 +431,14 @@ namespace C2.Controls.Left
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo)
         {
             //先清空上一次的数据表内容
-            RelateTableButtons = null;
+            RelateTableButtons.Clear();
             this.dataTabelPanel.Controls.Clear();
 
             if (tables == null)
                 return;
 
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            foreach (Table tmpTable in tables)
+            foreach (Table tmpTable in tables.Take(Math.Min(300,tables.Count)))
             {
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
                 tmpDatabaseItem.DataTable = tmpTable;
@@ -446,10 +447,8 @@ namespace C2.Controls.Left
                 GenTableButton(tableButton);//生成数据表按钮
             }
 
-            List<TableButton> tmp = new List<TableButton>();
             foreach (TableButton tb in this.dataTabelPanel.Controls)
-                tmp.Add(tb);
-            RelateTableButtons = tmp;
+                RelateTableButtons.Add(tb);
         }
         public List<DatabaseItem> GetAllExternalData()
         {
