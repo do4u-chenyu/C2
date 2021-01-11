@@ -53,7 +53,7 @@ namespace C2.Controls.Left
             {
                 if (_RelateTableButtons != value)
                 {
-                    this.dataTableTextBox.Text = string.Empty;
+                    this.tableFilterTextBox.Text = string.Empty;
                 }
                 _RelateTableButtons = value;
             }
@@ -260,8 +260,8 @@ namespace C2.Controls.Left
         }
         private void ClearTablesContent()
         {
-            this.frameCombo.Items.Clear();
-            this.frameCombo.Text = string.Empty;
+            this.schemaComboBox.Items.Clear();
+            this.schemaComboBox.Text = string.Empty;
             RelateTableButtons.Clear();
             //this.dataTableTextBox.Text = string.Empty;
             this.tabelPanel.Controls.Clear();
@@ -374,11 +374,11 @@ namespace C2.Controls.Left
             g.DrawLine(p, 0, 30, 200, 30);//x1,y1,x2,y2
         }
 
-        private void FrameCombo_SelectedIndexChanged(object sender, EventArgs e)
+        private void SchemaComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //根据架构改变数据表
             OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
-            List<Table> tables = DbUtil.GetTablesByUser(conn, this.frameCombo.Text);
+            List<Table> tables = DbUtil.GetTablesByUser(conn, this.schemaComboBox.Text);
             UpdateTables(tables, SelectLinkButton.DatabaseItem);
         }
 
@@ -388,9 +388,10 @@ namespace C2.Controls.Left
             this.inputDataForm.ShowDialog();
             this.inputDataForm.ReSetParams();
         }
-        private void DataTableTextBox_TextChanged(object sender, EventArgs e)
+        private void TableFilterTextBox_TextChanged(object sender, EventArgs e)
         {
-            ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(dataTableTextBox.Text.ToUpper())));
+            this.tableFilterTextBox.ForeColor = SystemColors.WindowText;
+            ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(tableFilterTextBox.Text.ToUpper())));
         }
         #endregion
 
@@ -426,15 +427,15 @@ namespace C2.Controls.Left
 
         private void UpdateFrameCombo(List<string> users,string loginUser)
         {
-            this.frameCombo.Items.Clear();
+            this.schemaComboBox.Items.Clear();
             //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空
             RelateTableButtons.Clear();
 
             if (users == null)
                 return;
 
-            this.frameCombo.Text = users.Find( x => x.Equals(loginUser.ToUpper())) == null ? "选择架构" : loginUser.ToUpper();
-            users.ForEach(x => frameCombo.Items.Add(x.ToString()));
+            this.schemaComboBox.Text = users.Find( x => x.Equals(loginUser.ToUpper())) == null ? "选择架构" : loginUser.ToUpper();
+            users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo)
         {
@@ -447,7 +448,7 @@ namespace C2.Controls.Left
             {
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
                 tmpDatabaseItem.DataTable = table;
-                tmpDatabaseItem.Group = this.frameCombo.Text;
+                tmpDatabaseItem.Group = this.schemaComboBox.Text;
                 TableButton tableButton = new TableButton(tmpDatabaseItem);
                 GenTableButton(tableButton);//生成数据表按钮
             }

@@ -51,6 +51,8 @@ namespace C2.Utils
         public static string SQLOpExecuteSucceeded = "SQL算子运算完毕";
         public static string SQLOpExecuteFailed = "SQL算子运算失败，请打开SQL算子检查语句后重试";
 
+        public static string TableFilterHelpInfo = "快速筛选:支持表名,列名,业务常用字段";
+
 
         /// <summary>
         /// 默认为Information,除非有非常严重的错误,否则一般尽量用温和的提示信息.

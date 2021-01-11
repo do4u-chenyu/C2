@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataSourceFrame = new System.Windows.Forms.Panel();
             this.externalDataLabel = new System.Windows.Forms.Label();
             this.localDataLabel = new System.Windows.Forms.Label();
@@ -35,14 +36,15 @@
             this.addLocalConnectLabel = new System.Windows.Forms.Label();
             this.addConnectLabel = new System.Windows.Forms.Label();
             this.externalFrame = new System.Windows.Forms.Panel();
-            this.dataTableTextBox = new System.Windows.Forms.TextBox();
+            this.tableFilterTextBox = new System.Windows.Forms.TextBox();
             this.tabelPanel = new System.Windows.Forms.Panel();
-            this.frameCombo = new System.Windows.Forms.ComboBox();
+            this.schemaComboBox = new System.Windows.Forms.ComboBox();
             this.linkPanel = new System.Windows.Forms.Panel();
             this.dataTableLabel = new System.Windows.Forms.Label();
-            this.frameLabel = new System.Windows.Forms.Label();
+            this.schemaLabel = new System.Windows.Forms.Label();
             this.linkLabel = new System.Windows.Forms.Label();
             this.dataAddLabelPanel = new System.Windows.Forms.Panel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
             this.dataAddLabelPanel.SuspendLayout();
@@ -131,12 +133,12 @@
             this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.externalFrame.BackColor = System.Drawing.Color.White;
             this.externalFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.externalFrame.Controls.Add(this.dataTableTextBox);
+            this.externalFrame.Controls.Add(this.tableFilterTextBox);
             this.externalFrame.Controls.Add(this.tabelPanel);
-            this.externalFrame.Controls.Add(this.frameCombo);
+            this.externalFrame.Controls.Add(this.schemaComboBox);
             this.externalFrame.Controls.Add(this.linkPanel);
             this.externalFrame.Controls.Add(this.dataTableLabel);
-            this.externalFrame.Controls.Add(this.frameLabel);
+            this.externalFrame.Controls.Add(this.schemaLabel);
             this.externalFrame.Controls.Add(this.linkLabel);
             this.externalFrame.Controls.Add(this.addConnectLabel);
             this.externalFrame.Location = new System.Drawing.Point(3, 35);
@@ -145,39 +147,41 @@
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
             // 
-            // dataTableTextBox
+            // tableFilterTextBox
             // 
-            this.dataTableTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tableFilterTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataTableTextBox.Location = new System.Drawing.Point(10, 285);
-            this.dataTableTextBox.Name = "dataTableTextBox";
-            this.dataTableTextBox.Size = new System.Drawing.Size(159, 21);
-            this.dataTableTextBox.TabIndex = 7;
-            this.dataTableTextBox.TextChanged += new System.EventHandler(this.DataTableTextBox_TextChanged);
+            this.tableFilterTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tableFilterTextBox.Location = new System.Drawing.Point(10, 285);
+            this.tableFilterTextBox.Name = "tableFilterTextBox";
+            this.tableFilterTextBox.Size = new System.Drawing.Size(159, 23);
+            this.tableFilterTextBox.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.tableFilterTextBox, Utils.HelpUtil.TableFilterHelpInfo);
+            this.tableFilterTextBox.TextChanged += new System.EventHandler(this.TableFilterTextBox_TextChanged);
             // 
-            // dataTabelPanel
+            // tabelPanel
             // 
             this.tabelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabelPanel.AutoScroll = true;
             this.tabelPanel.Location = new System.Drawing.Point(0, 324);
-            this.tabelPanel.Name = "dataTabelPanel";
+            this.tabelPanel.Name = "tabelPanel";
             this.tabelPanel.Size = new System.Drawing.Size(177, 296);
             this.tabelPanel.TabIndex = 5;
             // 
-            // frameCombo
+            // schemaComboBox
             // 
-            this.frameCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.schemaComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.frameCombo.FormattingEnabled = true;
-            this.frameCombo.Location = new System.Drawing.Point(10, 219);
-            this.frameCombo.Name = "frameCombo";
-            this.frameCombo.Size = new System.Drawing.Size(159, 20);
-            this.frameCombo.TabIndex = 5;
-            this.frameCombo.SelectedIndexChanged += new System.EventHandler(this.FrameCombo_SelectedIndexChanged);
+            this.schemaComboBox.FormattingEnabled = true;
+            this.schemaComboBox.Location = new System.Drawing.Point(10, 219);
+            this.schemaComboBox.Name = "schemaComboBox";
+            this.schemaComboBox.Size = new System.Drawing.Size(159, 20);
+            this.schemaComboBox.TabIndex = 5;
+            this.schemaComboBox.SelectedIndexChanged += new System.EventHandler(this.SchemaComboBox_SelectedIndexChanged);
             // 
             // linkPanel
             // 
@@ -197,15 +201,15 @@
             this.dataTableLabel.TabIndex = 3;
             this.dataTableLabel.Text = "数据表";
             // 
-            // frameLabel
+            // schemaLabel
             // 
-            this.frameLabel.AutoSize = true;
-            this.frameLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.frameLabel.Location = new System.Drawing.Point(3, 193);
-            this.frameLabel.Name = "frameLabel";
-            this.frameLabel.Size = new System.Drawing.Size(35, 19);
-            this.frameLabel.TabIndex = 2;
-            this.frameLabel.Text = "架构";
+            this.schemaLabel.AutoSize = true;
+            this.schemaLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.schemaLabel.Location = new System.Drawing.Point(3, 193);
+            this.schemaLabel.Name = "schemaLabel";
+            this.schemaLabel.Size = new System.Drawing.Size(35, 19);
+            this.schemaLabel.TabIndex = 2;
+            this.schemaLabel.Text = "架构";
             // 
             // linkLabel
             // 
@@ -258,13 +262,14 @@
         private System.Windows.Forms.Label localDataLabel;
         private System.Windows.Forms.Label addConnectLabel;
         private System.Windows.Forms.Label dataTableLabel;
-        private System.Windows.Forms.Label frameLabel;
+        private System.Windows.Forms.Label schemaLabel;
         private System.Windows.Forms.Label linkLabel;
         private System.Windows.Forms.Panel linkPanel;
-        private System.Windows.Forms.ComboBox frameCombo;
+        private System.Windows.Forms.ComboBox schemaComboBox;
         private System.Windows.Forms.Panel tabelPanel;
-        private System.Windows.Forms.TextBox dataTableTextBox;
+        private System.Windows.Forms.TextBox tableFilterTextBox;
         private System.Windows.Forms.Label addLocalConnectLabel;
         private System.Windows.Forms.Panel dataAddLabelPanel;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
