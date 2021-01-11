@@ -39,9 +39,16 @@ namespace C2.Dialogs.C2OperatorViews
         private void InitializePreviewTableContextMenu()
         {
             contextMenuStrip = new ContextMenuStrip(this.components);
+
+            ToolStripMenuItem previewTableMenuItem = new ToolStripMenuItem("预览表");
+            contextMenuStrip.Items.Add(previewTableMenuItem);
+
             ToolStripMenuItem copyTableNameMenuItem = new ToolStripMenuItem("复制表名");
             copyTableNameMenuItem.Click += CopyTableNameMenuItem_Click;
             contextMenuStrip.Items.Add(copyTableNameMenuItem);
+
+            ToolStripMenuItem codeSnippetMenuItem = new ToolStripMenuItem("一键查询");
+            contextMenuStrip.Items.Add(codeSnippetMenuItem);
         }
 
         private void CopyTableNameMenuItem_Click(object sender, EventArgs e)
