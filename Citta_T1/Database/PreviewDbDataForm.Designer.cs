@@ -62,9 +62,12 @@
             // 
             // queryBox
             // 
+            this.queryBox.BackColor = System.Drawing.Color.Transparent;
+            this.queryBox.Image = global::C2.Properties.Resources.arrow_query;
             this.queryBox.Location = new System.Drawing.Point(83, 3);
             this.queryBox.Name = "queryBox";
             this.queryBox.Size = new System.Drawing.Size(17, 17);
+            this.queryBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.queryBox.TabIndex = 2;
             this.queryBox.TabStop = false;
             this.queryBox.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -77,10 +80,10 @@
             this.Controls.Add(this.queryBox);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView);
+            this.Icon = global::C2.Properties.Resources.logo;
             this.Name = "PreviewDbDataForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "查看数据";
-            this.Icon = Properties.Resources.logo;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.queryBox)).EndInit();
             this.ResumeLayout(false);
