@@ -434,7 +434,7 @@ namespace C2.Controls.Left
             this.tabelPanel.Controls.Clear();
 
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            this.tabelPanel.AutoScrollMinSize = new Size(ButtonGapHeight * tables.Count + 30, ButtonLeftX + 10);
+            //this.tabelPanel.AutoScrollMinSize = new Size(ButtonGapHeight * tables.Count + 30, ButtonLeftX + 10);
             foreach (Table table in tables)
             {
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
