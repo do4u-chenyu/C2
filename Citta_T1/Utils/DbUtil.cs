@@ -42,7 +42,7 @@ namespace C2.Utils
              * pageIndex start from 0.
              */
             StringBuilder sb = new StringBuilder(1024 * 16);
-            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 try
                 {
@@ -83,7 +83,7 @@ namespace C2.Utils
         }
         public static bool TestConn(OraConnection conn)
         {
-            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 using (OracleConnection con = new OracleConnection(conn.ConnectionString))
                 {
@@ -119,7 +119,7 @@ namespace C2.Utils
         public static List<string> GetUsers(OraConnection conn)
         {
             List<string> users = new List<string>();
-            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 try
                 {
@@ -148,7 +148,7 @@ namespace C2.Utils
         public static List<Table> GetTablesByUser(OraConnection conn, string userName)
         {
             List<Table> tables = new List<Table>();
-            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 try
                 {
@@ -228,7 +228,7 @@ namespace C2.Utils
         public static string GetOracleTbContentString(OraConnection conn, Table table, int maxNum)
         {
             StringBuilder sb = new StringBuilder(1024 * 16);
-            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 try
                 {
@@ -261,7 +261,7 @@ namespace C2.Utils
         }
         public static bool FillDGVWithTbSchema(DataGridView gridOutput, OraConnection conn, string tableName)
         {
-            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 try
                 {

@@ -154,7 +154,7 @@ namespace C2.Dialogs.C2OperatorViews
             }
             try
             {
-                using (new CursorUtil.UsingCursor(Cursors.WaitCursor)) // Display the hourglass
+                using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor)) // Display the hourglass
                 {
                     using (OracleConnection conn = new OracleConnection(new OraConnection(SelectDatabaseItem).ConnectionString))
                     {
