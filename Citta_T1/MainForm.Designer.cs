@@ -48,7 +48,7 @@ namespace C2
             this.ModelMarketButton = new C2.Controls.Common.NoFocusButton();
             this.ModelButtonPictureBox = new System.Windows.Forms.PictureBox();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
-            this.mindMapModelControl = new C2.Controls.Left.MindMapModelControl();
+            this.mindMapModelControl = new C2.Controls.Left.MyMindMapControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoModelControl = new C2.Controls.Left.IAOModelControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
@@ -783,7 +783,7 @@ namespace C2
         private System.Windows.Forms.Button diffButton;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
-        private Controls.Left.MindMapModelControl mindMapModelControl;
+        private Controls.Left.MyMindMapControl mindMapModelControl;
         private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.IAOModelControl iaoModelControl;
         private Controls.Left.MyModelControl myModelControl;
