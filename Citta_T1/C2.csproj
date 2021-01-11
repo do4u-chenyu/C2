@@ -136,7 +136,7 @@
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\Model\ExportModel.cs" />
     <Compile Include="Business\Model\ImportModel.cs" />
-    <Compile Include="Business\Model\ModelsInfo.cs" />
+    <Compile Include="Business\Model\ModelInfo.cs" />
     <Compile Include="Business\Model\World\WorldMap.cs" />
     <Compile Include="Business\Option\BcpInfo.cs" />
     <Compile Include="Business\Option\ColumnInfo.cs" />
