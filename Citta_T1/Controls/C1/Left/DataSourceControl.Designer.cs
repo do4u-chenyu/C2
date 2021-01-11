@@ -157,7 +157,7 @@
             this.tableFilterTextBox.Name = "tableFilterTextBox";
             this.tableFilterTextBox.Size = new System.Drawing.Size(159, 23);
             this.tableFilterTextBox.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.tableFilterTextBox, Utils.HelpUtil.TableFilterHelpInfo);
+            this.toolTip1.SetToolTip(this.tableFilterTextBox, "快速筛选:支持表名,列名,业务常用字段");
             this.tableFilterTextBox.TextChanged += new System.EventHandler(this.TableFilterTextBox_TextChanged);
             // 
             // tabelPanel

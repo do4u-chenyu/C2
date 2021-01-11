@@ -207,7 +207,7 @@ namespace C2
             this.IAOLabButton.TabIndex = 3;
             this.IAOLabButton.TabStop = false;
             this.IAOLabButton.Text = "      IAO实验室";
-            this.toolTip1.SetToolTip(this.IAOLabButton, "数据分析建模需要的复杂模型探索");
+            this.toolTip1.SetToolTip(this.IAOLabButton, "分析师的实验台");
             this.IAOLabButton.UseVisualStyleBackColor = true;
             this.IAOLabButton.Click += new System.EventHandler(this.FlowChartButton_Click);
             this.IAOLabButton.Leave += new System.EventHandler(this.flowChartButton_Leave);
