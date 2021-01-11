@@ -1,6 +1,5 @@
 ﻿using C2.Business.Model;
 using C2.Core;
-using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -110,15 +109,15 @@ namespace C2.Controls.Left
             g.DrawLine(p, 0, 30, 200, 30);//x1,y1,x2,y2
         }
 
-        private void MyModelCreateButton_Click(object sender, EventArgs e)
+        private void AddModelButton_Click(object sender, EventArgs e)
         {
             ImportModel.GetInstance().ImportIaoFile(Global.GetMainForm().UserName);
         }
 
-        private void MyModelCreateButton_MouseHover(object sender, EventArgs e)
+        private void AddModelButton_MouseHover(object sender, EventArgs e)
         {
             ToolTip toolTip1 = new ToolTip();
-            toolTip1.SetToolTip(this.MyModelCreateButton, "导入模型");
+            toolTip1.SetToolTip(this.AddModelButton, "导入模型");
         }
     }
 }

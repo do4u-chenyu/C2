@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.ItemPanel = new System.Windows.Forms.Panel();
-            this.MyModelCreateButton = new System.Windows.Forms.Button();
+            this.AddModelButton = new System.Windows.Forms.Button();
             this.ItemLabel = new System.Windows.Forms.Label();
             this.MyModelPaintPanel = new System.Windows.Forms.Panel();
             this.ItemPanel.SuspendLayout();
@@ -37,7 +37,7 @@
             // 
             // ItemPanel
             // 
-            this.ItemPanel.Controls.Add(this.MyModelCreateButton);
+            this.ItemPanel.Controls.Add(this.AddModelButton);
             this.ItemPanel.Controls.Add(this.ItemLabel);
             this.ItemPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ItemPanel.Location = new System.Drawing.Point(0, 0);
@@ -47,19 +47,19 @@
             // 
             // MyModelCreateButton
             // 
-            this.MyModelCreateButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.MyModelCreateButton.BackColor = System.Drawing.Color.Transparent;
-            this.MyModelCreateButton.BackgroundImage = global::C2.Properties.Resources.add;
-            this.MyModelCreateButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.MyModelCreateButton.FlatAppearance.BorderSize = 0;
-            this.MyModelCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MyModelCreateButton.Location = new System.Drawing.Point(124, 2);
-            this.MyModelCreateButton.Name = "MyModelCreateButton";
-            this.MyModelCreateButton.Size = new System.Drawing.Size(25, 25);
-            this.MyModelCreateButton.TabIndex = 1;
-            this.MyModelCreateButton.UseVisualStyleBackColor = false;
-            this.MyModelCreateButton.Click += new System.EventHandler(this.MyModelCreateButton_Click);
-            this.MyModelCreateButton.MouseHover += new System.EventHandler(this.MyModelCreateButton_MouseHover);
+            this.AddModelButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.AddModelButton.BackColor = System.Drawing.Color.Transparent;
+            this.AddModelButton.BackgroundImage = global::C2.Properties.Resources.add;
+            this.AddModelButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.AddModelButton.FlatAppearance.BorderSize = 0;
+            this.AddModelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddModelButton.Location = new System.Drawing.Point(124, 2);
+            this.AddModelButton.Name = "AddModelButton";
+            this.AddModelButton.Size = new System.Drawing.Size(25, 25);
+            this.AddModelButton.TabIndex = 1;
+            this.AddModelButton.UseVisualStyleBackColor = false;
+            this.AddModelButton.Click += new System.EventHandler(this.AddModelButton_Click);
+            this.AddModelButton.MouseHover += new System.EventHandler(this.AddModelButton_MouseHover);
             // 
             // ItemLabel
             // 
@@ -106,6 +106,6 @@
         private System.Windows.Forms.Panel ItemPanel;
         private System.Windows.Forms.Label ItemLabel;
         private System.Windows.Forms.Panel MyModelPaintPanel;
-        private System.Windows.Forms.Button MyModelCreateButton;
+        private System.Windows.Forms.Button AddModelButton;
     }
 }
