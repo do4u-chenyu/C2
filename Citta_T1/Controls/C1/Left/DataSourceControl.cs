@@ -128,17 +128,23 @@ namespace C2.Controls.Left
         private void ReLayoutLocalFrame()
         {
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
-            this.localFrame.SuspendLayout();
             List<Control> tmp = new List<Control>();
             foreach (Control ct in this.localFrame.Controls)
             {
                 if (ct is DataButton)
                     tmp.Add(ct);
             }
-
+            if (tmp.Count <= 0)
+                return;
 
             this.localFrame.Controls.Clear();
             // 重新排序
+            this.AutoScroll = false;
+            LayoutModelButtonLocation(tmp[0] as DataButton);
+            this.localFrame.Controls.Add(tmp[0]);
+
+            tmp.Remove(tmp[0]);
+            this.localFrame.SuspendLayout();
             foreach (Control ct in tmp)
             {
                 LayoutModelButtonLocation(ct as DataButton);
@@ -147,6 +153,7 @@ namespace C2.Controls.Left
 
             this.localFrame.ResumeLayout(false);
             this.localFrame.PerformLayout();
+            this.AutoScroll = true;
         }
 
         public void SaveDataSourceInfo()
@@ -192,7 +199,8 @@ namespace C2.Controls.Left
         {
             if (this.localFrame.Controls.Count > 0)
                 startPoint = this.localFrame.Controls[this.localFrame.Controls.Count - 1].Location;
-
+            else
+                startPoint = new Point(ButtonLeftX, -20);
             startPoint.Y += ButtonGapHeight;
             ct.Location = startPoint;
         }
