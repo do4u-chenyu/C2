@@ -139,7 +139,7 @@
             this.externalFrame.Controls.Add(this.frameLabel);
             this.externalFrame.Controls.Add(this.linkLabel);
             this.externalFrame.Controls.Add(this.addConnectLabel);
-            this.externalFrame.Location = new System.Drawing.Point(2, 34);
+            this.externalFrame.Location = new System.Drawing.Point(3, 35);
             this.externalFrame.Name = "externalFrame";
             this.externalFrame.Size = new System.Drawing.Size(179, 622);
             this.externalFrame.TabIndex = 2;
@@ -225,7 +225,7 @@
             this.dataAddLabelPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dataAddLabelPanel.Controls.Add(this.addLocalConnectLabel);
             this.dataAddLabelPanel.Controls.Add(this.localFrame);
-            this.dataAddLabelPanel.Location = new System.Drawing.Point(2, 34);
+            this.dataAddLabelPanel.Location = new System.Drawing.Point(3, 35);
             this.dataAddLabelPanel.Name = "dataAddLabelPanel";
             this.dataAddLabelPanel.Size = new System.Drawing.Size(179, 622);
             this.dataAddLabelPanel.TabIndex = 9;
