@@ -158,11 +158,20 @@ namespace C2.Controls
                 AddNewOperator(sizeLevel, text, text, location);
             if (type == ElementType.DataSource)
             {
-                string path = e.Data.GetData("Path").ToString();
-                char separator = (char)e.Data.GetData("Separator");
-                OpUtil.Encoding encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
-                OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
-                AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
+                DatabaseType databaseType = (DatabaseType)e.Data.GetData("DataType");
+                if(databaseType == DatabaseType.Null)
+                {
+                    string path = e.Data.GetData("Path").ToString();
+                    char separator = (char)e.Data.GetData("Separator");
+                    OpUtil.Encoding encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
+                    OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
+                    AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
+                }
+                else if(databaseType == DatabaseType.Oracle)
+                {
+                    //TODO 模型视图外部数据源control的添加
+                }
+
             }
         }
 

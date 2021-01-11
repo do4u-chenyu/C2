@@ -1,16 +1,13 @@
 ﻿using C2.Controls.MapViews;
-using C2.Core;
 using C2.Dialogs.Base;
 using C2.Dialogs.C2OperatorViews;
 using C2.Globalization;
 using C2.Model;
-using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 
 namespace C2.Controls.Common
@@ -117,13 +114,7 @@ namespace C2.Controls.Common
 
         private void SetComboOperator()
         {
-            this.operatorCombo.Items.Clear();
-            if (SelectedDataSource == null)
-                return;
-            if (SelectedDataSource.DataType != DatabaseType.Null)
-                this.operatorCombo.Items.Add(Lang._("SqlOperator"));
-            else
-                ComboOperator.ForEach(o => this.operatorCombo.Items.Add(Lang._(o.ToString())));
+            UpdateComboOperator();
         }
 
         private void UpdateComboOperator()
@@ -262,6 +253,8 @@ namespace C2.Controls.Common
                 return;
             SelectedDataSource = ComboDataSource[this.dataSourceCombo.SelectedIndex];
             UpdateComboOperator();
+            if (this.operatorCombo.Items.Count == 1)
+                this.operatorCombo.SelectedIndex = 0;
         }
 
         private void OperatorCombo_SelectedIndexChanged(object sender, System.EventArgs e)

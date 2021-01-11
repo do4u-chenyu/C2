@@ -31,7 +31,7 @@ namespace C2.Dialogs.C2OperatorViews
         {
             InitializeComponent();
             InitializeConnection();
-            InitializaExecuteSql();
+            InitializeExecuteSql();
             InitializePreviewTableContextMenu(); // 如果放在Design.cs里，VS2019设计器会报错打不开，故放在这里初始化
             LoadOption();
         }
@@ -49,7 +49,7 @@ namespace C2.Dialogs.C2OperatorViews
             FileUtil.TryClipboardSetText(tableListBox.SelectedItem.ToString());
         }
 
-        private void InitializaExecuteSql()
+        private void InitializeExecuteSql()
         {
             this.textEditorControl1.Text = OpTypeTransSql();
 
@@ -80,6 +80,10 @@ namespace C2.Dialogs.C2OperatorViews
             {
                 databaseItems.ForEach(d => names.Add(d.PrettyDatabaseInfo));
                 this.comboBoxConnection.Items.AddRange(names.ToArray());
+            }
+            if (this.comboBoxConnection.Items.Count == 1)
+            {
+                this.comboBoxConnection.SelectedIndex = 0; // 如果只有一个选项，默认就是它，此时不需要用户再去选了。
             }
         }
 

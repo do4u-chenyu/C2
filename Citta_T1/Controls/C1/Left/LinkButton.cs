@@ -1,18 +1,14 @@
-﻿
-using C2.Business.Model;
-using C2.Core;
+﻿using C2.Core;
+using C2.Dialogs;
+using C2.Model;
 using C2.Utils;
 using System;
 using System.Windows.Forms;
-using C2.Model;
-using C2.Controls;
-using C2.Dialogs;
 namespace C2.Controls.Left
 {
     public partial class LinkButton : UserControl
     {
         private int count = 0;
-        private string oldTextString;
         public string FullFilePath { get => DatabaseItem.AllDatabaseInfo; }
         public string LinkSourceName { get; set; }
 
@@ -41,10 +37,9 @@ namespace C2.Controls.Left
         {
             InitializeComponent();
             DatabaseItem = item;
-            txtButton.Name = DatabaseItem.Server;
-            txtButton.Text = FileUtil.ReName(DatabaseItem.Server);
-            this.oldTextString = DatabaseItem.Server;
-            LinkSourceName = DatabaseItem.Server;
+            LinkSourceName = string.Format("{0}@{1}", DatabaseItem.User, DatabaseItem.Server);
+            txtButton.Name = LinkSourceName;
+            txtButton.Text = FileUtil.ReName(LinkSourceName, 16);
         }
 
         #region 右键菜单
@@ -67,18 +62,6 @@ namespace C2.Controls.Left
                 DatabaseItem = dialog.DatabaseInfo;
             }
         }
-
-        private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.textBox.ReadOnly = false;
-            this.oldTextString = LinkSourceName;
-            this.textBox.Text = LinkSourceName;
-            this.txtButton.Visible = false;
-            this.textBox.Visible = true;
-            this.textBox.Focus();//获取焦点
-            this.textBox.Select(this.textBox.TextLength, 0);
-        }
-
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult rs = DialogResult.OK;
@@ -112,46 +95,6 @@ namespace C2.Controls.Left
             {
                 LinkButtonSelected?.Invoke(this, new SelectLinkButtonEventArgs() { linkButton = this });
             }
-        }
-
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // 按下回车键
-            if (e.KeyChar == 13)
-            {
-                FinishTextChange();
-            }
-        }
-
-        private void TextBox_Leave(object sender, EventArgs e)
-        {
-            FinishTextChange();
-        }
-
-        private void FinishTextChange()
-        {
-            if (this.textBox.Text.Trim().Length == 0)
-                this.textBox.Text = this.oldTextString;
-
-            if (this.textBox.Text.Length > 125)
-            {
-                this.textBox.Text = this.oldTextString;
-                MessageBox.Show("重命名内容过长,超过125个字节.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            this.textBox.ReadOnly = true;
-            this.textBox.Visible = false;
-            this.txtButton.Visible = true;
-            if (this.oldTextString == this.textBox.Text)
-                return;
-            LinkSourceName = this.textBox.Text;
-            this.txtButton.Text = Utils.FileUtil.ReName(this.textBox.Text);
-            if (this.oldTextString != this.textBox.Text)
-            {
-                this.oldTextString = this.textBox.Text;
-            }
-            // 保存
-            Global.GetDataSourceControl().SaveExternalData();
-            this.helpToolTip.SetToolTip(this.txtButton, LinkSourceName);
         }
 
         private void OnDatabaseItemChange(DatabaseItem databaseItem)

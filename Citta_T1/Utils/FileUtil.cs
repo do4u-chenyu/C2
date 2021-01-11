@@ -413,10 +413,10 @@ namespace C2.Utils
             }
             return false;
         }
-        public static string ReName(string name)
+        public static string ReName(string name,int maxLen=10)
         {
             string newName;
-            int maxLength = 16;
+            int maxLength = maxLen;
 
             if (name.Length <= maxLength)
             {
@@ -428,7 +428,7 @@ namespace C2.Utils
                 newName = name.Substring(0, maxLength);
             else
             {
-                newName = name.Substring(0, Math.Min(12, name.Length));
+                newName = name.Substring(0, Math.Min(20, name.Length));
             }
             return newName;
         }
