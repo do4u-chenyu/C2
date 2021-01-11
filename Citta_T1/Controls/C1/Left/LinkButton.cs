@@ -62,6 +62,7 @@ namespace C2.Controls.Left
                 Global.GetDataSourceControl().LinkSourceDictI2B.Add(dialog.DatabaseInfo.AllDatabaseInfo, this);
 
                 DatabaseItem = dialog.DatabaseInfo;
+                Global.GetDataSourceControl().SaveExternalData();
             }
         }
 
