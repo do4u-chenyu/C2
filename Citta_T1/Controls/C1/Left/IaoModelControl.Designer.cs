@@ -28,25 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PointLabel = new System.Windows.Forms.Label();
             this.IaoModelPanel = new System.Windows.Forms.Panel();
             this.ItemLabel = new System.Windows.Forms.Label();
-            this.IaoModelPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // PointLabel
-            // 
-            this.PointLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PointLabel.AutoSize = true;
-            this.PointLabel.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.PointLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.PointLabel.Location = new System.Drawing.Point(9, 265);
-            this.PointLabel.Name = "PointLabel";
-            this.PointLabel.Size = new System.Drawing.Size(161, 19);
-            this.PointLabel.TabIndex = 0;
-            this.PointLabel.Text = "更多精彩，敬请期待……";
             // 
             // IaoModelPanel
             // 
@@ -57,7 +41,6 @@
             this.IaoModelPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.IaoModelPanel.BackColor = System.Drawing.Color.White;
             this.IaoModelPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.IaoModelPanel.Controls.Add(this.PointLabel);
             this.IaoModelPanel.Location = new System.Drawing.Point(3, 35);
             this.IaoModelPanel.Name = "IaoModelPanel";
             this.IaoModelPanel.Size = new System.Drawing.Size(179, 621);
@@ -75,21 +58,18 @@
             this.ItemLabel.Text = "IAO实验室";
             this.ItemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // IaoModelControl
+            // IAOModelControl
             // 
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ItemLabel);
             this.Controls.Add(this.IaoModelPanel);
-            this.Name = "IaoModelControl";
+            this.Name = "IAOModelControl";
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.IAOModelControl_Paint);
-            this.IaoModelPanel.ResumeLayout(false);
-            this.IaoModelPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
         #endregion
-        private System.Windows.Forms.Label PointLabel;
         private System.Windows.Forms.Panel IaoModelPanel;
         private System.Windows.Forms.Label ItemLabel;
     }
