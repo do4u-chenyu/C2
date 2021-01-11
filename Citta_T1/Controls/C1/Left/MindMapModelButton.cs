@@ -103,7 +103,7 @@ namespace C2.Controls.Left
             if (e.Button != MouseButtons.Left || e.Clicks != 2)
                 return;
             // 双击打开对应模型
-            using (new CursorUtil.UsingCursor(Cursors.WaitCursor))
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 Global.GetMainForm().OpenDocument(FullFilePath);
             }

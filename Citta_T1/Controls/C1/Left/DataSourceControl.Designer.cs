@@ -36,7 +36,7 @@
             this.addConnectLabel = new System.Windows.Forms.Label();
             this.externalFrame = new System.Windows.Forms.Panel();
             this.dataTableTextBox = new System.Windows.Forms.TextBox();
-            this.dataTabelPanel = new System.Windows.Forms.Panel();
+            this.tabelPanel = new System.Windows.Forms.Panel();
             this.frameCombo = new System.Windows.Forms.ComboBox();
             this.linkPanel = new System.Windows.Forms.Panel();
             this.dataTableLabel = new System.Windows.Forms.Label();
@@ -132,7 +132,7 @@
             this.externalFrame.BackColor = System.Drawing.Color.White;
             this.externalFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.externalFrame.Controls.Add(this.dataTableTextBox);
-            this.externalFrame.Controls.Add(this.dataTabelPanel);
+            this.externalFrame.Controls.Add(this.tabelPanel);
             this.externalFrame.Controls.Add(this.frameCombo);
             this.externalFrame.Controls.Add(this.linkPanel);
             this.externalFrame.Controls.Add(this.dataTableLabel);
@@ -158,14 +158,14 @@
             // 
             // dataTabelPanel
             // 
-            this.dataTabelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataTabelPanel.AutoScroll = true;
-            this.dataTabelPanel.Location = new System.Drawing.Point(0, 324);
-            this.dataTabelPanel.Name = "dataTabelPanel";
-            this.dataTabelPanel.Size = new System.Drawing.Size(177, 296);
-            this.dataTabelPanel.TabIndex = 5;
+            this.tabelPanel.AutoScroll = true;
+            this.tabelPanel.Location = new System.Drawing.Point(0, 324);
+            this.tabelPanel.Name = "dataTabelPanel";
+            this.tabelPanel.Size = new System.Drawing.Size(177, 296);
+            this.tabelPanel.TabIndex = 5;
             // 
             // frameCombo
             // 
@@ -262,7 +262,7 @@
         private System.Windows.Forms.Label linkLabel;
         private System.Windows.Forms.Panel linkPanel;
         private System.Windows.Forms.ComboBox frameCombo;
-        private System.Windows.Forms.Panel dataTabelPanel;
+        private System.Windows.Forms.Panel tabelPanel;
         private System.Windows.Forms.TextBox dataTableTextBox;
         private System.Windows.Forms.Label addLocalConnectLabel;
         private System.Windows.Forms.Panel dataAddLabelPanel;

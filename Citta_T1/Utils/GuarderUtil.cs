@@ -3,13 +3,13 @@ using System.Windows.Forms;
 
 namespace C2.Utils
 {
-    class CursorUtil
+    class GuarderUtil
     {
-        public class UsingCursor : IDisposable
+        public class CursorGuarder : IDisposable
         {
             private Cursor cursor;
 
-            public UsingCursor(Cursor cursor)
+            public CursorGuarder(Cursor cursor)
             {
                 this.cursor = Cursor.Current;
                 Cursor.Current = cursor;
@@ -18,6 +18,13 @@ namespace C2.Utils
             public void Dispose()
             {
                 Cursor.Current = this.cursor;
+            }
+        }
+
+        public class LayoutGuarder : IDisposable
+        {
+            public void Dispose()
+            {
             }
         }
     }

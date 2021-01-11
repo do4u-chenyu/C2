@@ -255,7 +255,7 @@ namespace C2.Controls.Left
             this.frameCombo.Text = string.Empty;
             RelateTableButtons = null;
             //this.dataTableTextBox.Text = string.Empty;
-            this.dataTabelPanel.Controls.Clear();
+            this.tabelPanel.Controls.Clear();
         }
 
         #endregion
@@ -297,15 +297,15 @@ namespace C2.Controls.Left
         private void GenTableButton(TableButton tableButton)
         {
             LayoutModelButtonLocation(tableButton); // 递增
-            this.dataTabelPanel.Controls.Add(tableButton);
+            this.tabelPanel.Controls.Add(tableButton);
         }
         #endregion
 
         #region 外部表布局
         private void LayoutModelButtonLocation(TableButton tb)
         {
-            if (this.dataTabelPanel.Controls.Count > 0)
-                tablePoint = this.dataTabelPanel.Controls[this.dataTabelPanel.Controls.Count - 1].Location;
+            if (this.tabelPanel.Controls.Count > 0)
+                tablePoint = this.tabelPanel.Controls[this.tabelPanel.Controls.Count - 1].Location;
             tablePoint.Y += ButtonGapHeight;
             tb.Location = tablePoint;
         }
@@ -313,22 +313,22 @@ namespace C2.Controls.Left
         private void ReLayoutTableFrame(List<TableButton> tableButtons)
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
-            if (this.dataTabelPanel.Controls.Count > 0)
-                this.tablePoint.Y = this.dataTabelPanel.Controls[0].Location.Y - ButtonGapHeight;
+            if (this.tabelPanel.Controls.Count > 0)
+                this.tablePoint.Y = this.tabelPanel.Controls[0].Location.Y - ButtonGapHeight;
 
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
-            this.dataTabelPanel.SuspendLayout();
+            this.tabelPanel.SuspendLayout();
 
-            this.dataTabelPanel.Controls.Clear();
+            this.tabelPanel.Controls.Clear();
             // 重新排序
             foreach (TableButton tb in tableButtons)
             {
                 LayoutModelButtonLocation(tb);
-                this.dataTabelPanel.Controls.Add(tb);
+                this.tabelPanel.Controls.Add(tb);
             }
 
-            this.dataTabelPanel.ResumeLayout(false);
-            this.dataTabelPanel.PerformLayout();
+            this.tabelPanel.ResumeLayout(false);
+            this.tabelPanel.PerformLayout();
         }
         #endregion
 
@@ -431,25 +431,22 @@ namespace C2.Controls.Left
         {
             //先清空上一次的数据表内容
             RelateTableButtons = null;
-            this.dataTabelPanel.Controls.Clear();
-
-            if (tables == null)
-                return;
+            this.tabelPanel.Controls.Clear();
 
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            foreach (Table tmpTable in tables)
+            this.tabelPanel.AutoScrollMinSize = new Size(ButtonGapHeight * tables.Count + 30, ButtonLeftX + 10);
+            foreach (Table table in tables)
             {
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
-                tmpDatabaseItem.DataTable = tmpTable;
+                tmpDatabaseItem.DataTable = table;
                 tmpDatabaseItem.Group = this.frameCombo.Text;
                 TableButton tableButton = new TableButton(tmpDatabaseItem);
                 GenTableButton(tableButton);//生成数据表按钮
             }
 
-            List<TableButton> tmp = new List<TableButton>();
-            foreach (TableButton tb in this.dataTabelPanel.Controls)
-                tmp.Add(tb);
-            RelateTableButtons = tmp;
+            RelateTableButtons = new List<TableButton>();
+            foreach (TableButton tb in this.tabelPanel.Controls)
+                RelateTableButtons.Add(tb);
         }
         public List<DatabaseItem> GetAllExternalData()
         {
