@@ -80,6 +80,9 @@ namespace C2.Controls.Common
                 SetSelectedDataSource();//设置选中数据源
                 SetComboOperator();//设置算子下拉选项
                 SetSelectedOperator();//设置选中算子   
+
+                if (this.dataSourceCombo.Items.Count == 1)  // 下拉列表只有一个选项时,就直接选中该选项
+                    this.dataSourceCombo.SelectedIndex = 0;
             }
 
         }
@@ -253,7 +256,7 @@ namespace C2.Controls.Common
                 return;
             SelectedDataSource = ComboDataSource[this.dataSourceCombo.SelectedIndex];
             UpdateComboOperator();
-            if (this.operatorCombo.Items.Count == 1)
+            if (this.operatorCombo.Items.Count == 1) // 下拉列表只有一个选项时,就直接选中该选项
                 this.operatorCombo.SelectedIndex = 0;
         }
 
