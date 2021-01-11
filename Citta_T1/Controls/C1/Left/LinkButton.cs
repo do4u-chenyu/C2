@@ -37,9 +37,6 @@ namespace C2.Controls.Left
         {
             InitializeComponent();
             DatabaseItem = item;
-            LinkSourceName = string.Format("{0}@{1}", DatabaseItem.User, DatabaseItem.Server);
-            txtButton.Name = LinkSourceName;
-            txtButton.Text = FileUtil.ReName(LinkSourceName, 16);
         }
 
         #region 右键菜单
@@ -101,6 +98,10 @@ namespace C2.Controls.Left
 
         private void OnDatabaseItemChange(DatabaseItem databaseItem)
         {
+            LinkSourceName = string.Format("{0}@{1}", DatabaseItem.User, DatabaseItem.Server);
+            txtButton.Name = LinkSourceName;
+            txtButton.Text = FileUtil.ReName(LinkSourceName, 16);
+
             DatabaseItemChanged?.Invoke(this, new ChangeDatabaseItemEventArgs() { databaseItem = databaseItem });
         }
 
