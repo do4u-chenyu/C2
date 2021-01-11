@@ -45,8 +45,13 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // 编辑连接
+            DoEditDatabaseInfo();
+        }
+
+        private void DoEditDatabaseInfo()
+        {
             /*
-             * 编辑连接
              * 1、如果编辑后的dialog.data与link本身的data一致，不做操作
              * 2、如果不一致，先要判断dialog.data是否在dict里，在里面先移除原来的key再添加
              */
@@ -62,6 +67,7 @@ namespace C2.Controls.Left
                 DatabaseItem = dialog.DatabaseInfo;
             }
         }
+
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult rs = DialogResult.OK;
@@ -88,13 +94,9 @@ namespace C2.Controls.Left
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left)
-                return;
-
-            if (e.Clicks == 2) // 双击连接
-            {
-                LinkButtonSelected?.Invoke(this, new SelectLinkButtonEventArgs() { linkButton = this });
-            }
+            // 双击编辑
+            if (e.Button == MouseButtons.Left && e.Clicks == 2)
+                DoEditDatabaseInfo();
         }
 
         private void OnDatabaseItemChange(DatabaseItem databaseItem)
