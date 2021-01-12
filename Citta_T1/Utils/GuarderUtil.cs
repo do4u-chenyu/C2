@@ -23,8 +23,15 @@ namespace C2.Utils
 
         public class LayoutGuarder : IDisposable
         {
+            private Control control;
+            public LayoutGuarder(Control ct)
+            {
+                control = ct;
+                control.SuspendLayout();
+            }
             public void Dispose()
             {
+                control.ResumeLayout(true);
             }
         }
     }
