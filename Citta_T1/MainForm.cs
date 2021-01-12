@@ -312,7 +312,6 @@ namespace C2
                 if (res[a]==a.ToString())
                     this.iaoModelControl.GenIAOButton(Global.IAOLab[a]);
             } 
-;
         }
 
         private void ShowLeftFold()
