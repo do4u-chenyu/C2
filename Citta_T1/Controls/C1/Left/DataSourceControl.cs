@@ -273,6 +273,7 @@ namespace C2.Controls.Left
         public void GenLinkButton(DatabaseItem dbinfo, bool updateFrameAndTables = false)
         {
             LinkButton linkButton = new LinkButton(dbinfo);
+            SelectLinkButton = linkButton;
             GenLinkButton(linkButton);
             if (updateFrameAndTables)
                 ConnectDatabase(dbinfo);//连接一次数据库，刷新架构及数据表
