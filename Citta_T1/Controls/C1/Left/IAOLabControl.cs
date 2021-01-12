@@ -19,12 +19,12 @@ namespace C2.Controls.Left
         public void GenIAOButton(string modelName)
         {
             IAOButton ib = new IAOButton(modelName);
-            LayoutButtonLocation(ib); // 递增       
+            LayoutModelButtonLocation(ib); // 递增       
 
             this.IAOLabPanel.Controls.Add(ib);
         }
 
-        private void LayoutButtonLocation(Control ct)
+        private void LayoutModelButtonLocation(Control ct)
         {
             if (this.IAOLabPanel.Controls.Count > 0)
             {

@@ -304,20 +304,12 @@ namespace C2
         private void LoadIAOSource()
         {
             Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultVersionType);
-            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("BaseStation", ConfigUtil.DefaultVersionType);
-
-            if (Global.VersionType.Equals(Global.APKState))
-                this.iaoModelControl.GenIAOButton(Global.APKState);
-            if (Global.VersionType.Equals(Global.BaseStationState))
-                this.iaoModelControl.GenIAOButton(Global.BaseStationState);
-            if (Global.VersionType.Equals(Global.WifiState))
-                this.iaoModelControl.GenIAOButton(Global.WifiState);
-            if (Global.VersionType.Equals(Global.CardState))
-                this.iaoModelControl.GenIAOButton(Global.CardState);
-            if (Global.VersionType.Equals(Global.TudeState))
-                this.iaoModelControl.GenIAOButton(Global.TudeState);
-            if (Global.VersionType.Equals(Global.IpState))
-                this.iaoModelControl.GenIAOButton(Global.IpState);
+            for (int a = 0; a < 6; a = a + 1)
+            {
+                if (Global.VersionType.Contains(a.ToString()))
+                    this.iaoModelControl.GenIAOButton(Global.IAOLab[a]);
+            } 
+;
         }
 
         private void ShowLeftFold()

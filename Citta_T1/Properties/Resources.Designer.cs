@@ -153,6 +153,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Apk {
+            get {
+                object obj = ResourceManager.GetObject("Apk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap arrow_query {
             get {
                 object obj = ResourceManager.GetObject("arrow_query", resourceCulture);
@@ -206,6 +216,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap bank {
             get {
                 object obj = ResourceManager.GetObject("bank", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BaseStation {
+            get {
+                object obj = ResourceManager.GetObject("BaseStation", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -276,6 +296,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap calculator {
             get {
                 object obj = ResourceManager.GetObject("calculator", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Card {
+            get {
+                object obj = ResourceManager.GetObject("Card", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1097,6 +1127,16 @@ namespace C2.Properties {
         internal static System.Drawing.Bitmap internet {
             get {
                 object obj = ResourceManager.GetObject("internet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Ip {
+            get {
+                object obj = ResourceManager.GetObject("Ip", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2211,6 +2251,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Tude {
+            get {
+                object obj = ResourceManager.GetObject("Tude", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap txtData {
             get {
                 object obj = ResourceManager.GetObject("txtData", resourceCulture);
@@ -2289,9 +2339,19 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Wifi {
+            get {
+                object obj = ResourceManager.GetObject("Wifi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;themes name=&quot;Windows Color Schemes&quot;&gt;
-        ///	&lt;theme name=&quot;Brick&quot;&gt;
+        ///	&lt;theme name=&quot;砖块&quot;&gt;
         ///		&lt;back_color&gt;#FFFFFF&lt;/back_color&gt;
         ///		&lt;fore_color&gt;#000000&lt;/fore_color&gt;
         ///		&lt;line_color&gt;#000000&lt;/line_color&gt;
@@ -2302,7 +2362,7 @@ namespace C2.Properties {
         ///		&lt;hover_color&gt;#800000&lt;/hover_color&gt;
         ///		&lt;root_back_color&gt;#800000&lt;/root_back_color&gt;
         ///		&lt;root_fore_color&gt;#E1E0D2&lt;/root_fore_color&gt;
-        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string windows_themes {
             get {

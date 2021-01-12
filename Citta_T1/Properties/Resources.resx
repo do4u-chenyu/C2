@@ -1974,4 +1974,22 @@
   <data name="arrow_query" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\arrow_query.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Apk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\apk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BaseStation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\BaseStation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Card" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\Card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\ip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tude" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\Tude.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Wifi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\WIFI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

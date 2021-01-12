@@ -1907,6 +1907,12 @@
     <None Include="Resources\Images\TabBarImage\ORACLE.png" />
     <None Include="Resources\Images\TabBarImage\Excel.png" />
     <None Include="Resources\Images\TabBarImage\Table.png" />
+    <None Include="Resources\Images\TabBarImage\apk.png" />
+    <None Include="Resources\Images\TabBarImage\BaseStation.png" />
+    <None Include="Resources\Images\TabBarImage\Card.png" />
+    <None Include="Resources\Images\TabBarImage\ip.png" />
+    <None Include="Resources\Images\TabBarImage\Tude.png" />
+    <None Include="Resources\Images\TabBarImage\WIFI.png" />
     <Content Include="Resources\Images\TabBarImage\业务视图.png" />
     <None Include="Resources\Images\TabBarImage\业务视图2.png" />
     <None Include="Resources\Images\TabBarImage\业务视图3.png" />
