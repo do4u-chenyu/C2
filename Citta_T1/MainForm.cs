@@ -38,6 +38,7 @@ namespace C2
         public Panel LeftToolBoxPanel { get { return this.leftToolBoxPanel; } }
 
         public bool operateButtonSelect { get; private set; }
+        public object IAOModelControl { get; private set; }
         #region
         SpecialTabItem TabNew;
         FindDialog MyFindDialog;
@@ -259,6 +260,8 @@ namespace C2
             LoadHotModel();
             LoadDocuments();
             LoadDataSource();
+            LoadIAOSource();
+
         }
 
         private void LoadHotModel()
@@ -296,6 +299,13 @@ namespace C2
             List<LinkButton> linkButtons = dataSource1.LoadExternalData();
             foreach (LinkButton linkButton in linkButtons)
                 this.dataSourceControl.GenLinkButton(linkButton);
+        }
+        private void LoadIAOSource()
+        {
+
+            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("APK", ConfigUtil.DefaultVersionType);
+            if (Global.VersionType.Equals(Global.APKState))
+                this.iaoModelControl.GenIAOButton(Global.APKState);
         }
 
         private void ShowLeftFold()

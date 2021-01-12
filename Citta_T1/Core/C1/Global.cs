@@ -42,7 +42,6 @@ namespace C2.Core
         public static Control GetBottomViewPanel() { return bottomViewPanle; }
         public static Control GetWorkSpacePanel() { return workSpacePanel; }
         public static MyMindMapControl GetMindMapModelControl() { return mindMapModelControl; }
-
         public static CanvasForm GetCanvasForm()
         {
             CanvasForm cf = null;
@@ -145,6 +144,12 @@ namespace C2.Core
         public const string GreenLevel = "Green";
         public const string Nolanding = "NoLogin";
         public const string GreenPath = "source";
+        public const string APKState = "Used";
+        public const string BaseStationState = "Used";
+        public const string WifiState = "Used";
+        public const string CardState = "Used";
+        public const string TudeState = "Used";
+        public const string IpState = "Used";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
         public const int ChartNum = 3;
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };

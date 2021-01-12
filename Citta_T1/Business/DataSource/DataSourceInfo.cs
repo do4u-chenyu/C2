@@ -112,6 +112,25 @@ namespace C2.Business.DataSource
             }
             return dataSourceList;
         }
+        public List<IAOButton> LoadIAOSourceInfo()
+        {
+            XmlDocument xDoc = new XmlDocument();
+            List<IAOButton> dataSourceList = new List<IAOButton>();
+            if (!File.Exists(dataSourcePath))
+                return dataSourceList;
+            XmlNodeList nodeList;
+            XmlNode rootNode = xDoc.SelectSingleNode("DataSourceDocument");
+            nodeList = rootNode.SelectNodes("DataSource");
+
+            foreach (XmlNode xn in nodeList)
+            {
+                string dataName = xn.SelectSingleNode("name").InnerText;
+                IAOButton iaoButton = new IAOButton(dataName);
+
+                dataSourceList.Add(iaoButton);
+            }
+            return dataSourceList;
+        }
         #endregion
         #region 外部数据保存加载
 

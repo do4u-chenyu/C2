@@ -105,7 +105,6 @@ namespace C2
             Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("RunLevel", ConfigUtil.DefaultVersionType);
             if (Global.VersionType.Equals(Global.GreenLevel))
                 Global.WorkspaceDirectory = Path.Combine(System.Environment.CurrentDirectory, Global.GreenPath);
-            
 
         }
 

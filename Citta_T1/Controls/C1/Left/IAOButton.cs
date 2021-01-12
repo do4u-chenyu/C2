@@ -10,17 +10,13 @@ namespace C2.Controls.Left
 {
     public partial class IAOButton : UserControl
     {
-        //public string DataSourceName { get; set; }
  
         public IAOButton(string ffp)
         {
             InitializeComponent();
             txtButton.Name = ffp;
-            //DataSourceName = dataSourceName;
-        }
-        public string ModelTitle => this.txtButton.Text;
-        private void IAOButton_Load(object sender, EventArgs e)
-        {
+            txtButton.Text = ffp;
+
         }
 
     }

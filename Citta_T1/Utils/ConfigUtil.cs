@@ -9,6 +9,13 @@ namespace C2.Utils
     {
         public static string DefaultWorkspaceDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/FiberHomeIAOModelDocument";
         public static string DefaultVersionType = "NonGreen";
+        public static string APKState = "Used";
+        public static string BaseStationState = "Used";
+        public static string WifiState = "Used";
+        public static string CardState = "Used";
+        public static string TudeState = "Used";
+        public static string IpState = "Used";
+
         public static string TryGetAppSettingsByKey(string key, string defaultValue = "")
         {
             string value;
