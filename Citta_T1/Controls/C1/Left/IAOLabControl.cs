@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace C2.Controls.Left
 {
-    public partial class IAOModelControl : UserControl
+    public partial class IAOLabControl : UserControl
     {
-        public IAOModelControl()
+        public IAOLabControl()
         {
             InitializeComponent();
             startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
@@ -23,14 +23,14 @@ namespace C2.Controls.Left
             // 获得当前要添加的model button的初始位置
             LayoutModelButtonLocation(mb);
             //this.Controls.Add(mb);
-            this.IaoModelPanel.Controls.Add(mb);
+            this.IAOLabPanel.Controls.Add(mb);
         }
 
         private void LayoutModelButtonLocation(Control ct)
         {
-            if (this.IaoModelPanel.Controls.Count > 0)
+            if (this.IAOLabPanel.Controls.Count > 0)
             {
-                this.startPoint = this.IaoModelPanel.Controls[this.IaoModelPanel.Controls.Count - 1].Location;
+                this.startPoint = this.IAOLabPanel.Controls[this.IAOLabPanel.Controls.Count - 1].Location;
             }
             this.startPoint.Y += ct.Height + ButtonBottomOffsetY;
             ct.Location = this.startPoint;
@@ -38,7 +38,7 @@ namespace C2.Controls.Left
 
         public bool ContainModel(string modelTitle)
         {
-            foreach (Control ct in this.IaoModelPanel.Controls)
+            foreach (Control ct in this.IAOLabPanel.Controls)
             {
                 if ((ct is MindMapModelButton) && (ct as MindMapModelButton).ModelTitle == modelTitle)
                     return true;
@@ -61,10 +61,10 @@ namespace C2.Controls.Left
         public void RemoveModelButton(MindMapModelButton modelButton)
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
-            if (this.IaoModelPanel.Controls.Count > 0)
-                this.startPoint.Y = this.IaoModelPanel.Controls[0].Location.Y - this.IaoModelPanel.Controls[0].Height - ButtonBottomOffsetY;
+            if (this.IAOLabPanel.Controls.Count > 0)
+                this.startPoint.Y = this.IAOLabPanel.Controls[0].Location.Y - this.IAOLabPanel.Controls[0].Height - ButtonBottomOffsetY;
 
-            this.IaoModelPanel.Controls.Remove(modelButton);
+            this.IAOLabPanel.Controls.Remove(modelButton);
             // 重新布局
             ReLayoutLocalFrame();
         }
@@ -72,13 +72,13 @@ namespace C2.Controls.Left
         private void ReLayoutLocalFrame()
         {
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
-            this.IaoModelPanel.SuspendLayout();
+            this.IAOLabPanel.SuspendLayout();
             // 清空位置
             List<Control> tmp = new List<Control>();
-            foreach (Control ct in this.IaoModelPanel.Controls)
+            foreach (Control ct in this.IAOLabPanel.Controls)
                 tmp.Add(ct);
 
-            this.IaoModelPanel.Controls.Clear();
+            this.IAOLabPanel.Controls.Clear();
             // 重新排序
             foreach (Control ct in tmp)
             {
@@ -87,8 +87,8 @@ namespace C2.Controls.Left
             }
 
 
-            this.IaoModelPanel.ResumeLayout(false);
-            this.IaoModelPanel.PerformLayout();
+            this.IAOLabPanel.ResumeLayout(false);
+            this.IAOLabPanel.PerformLayout();
         }
 
         private void IAOModelControl_MouseDown(object sender, MouseEventArgs e)
@@ -97,7 +97,7 @@ namespace C2.Controls.Left
             Global.GetMainForm().BlankButtonFocus();
         }
 
-        private void IAOModelControl_Paint(object sender, PaintEventArgs e)
+        private void IAOLabControl_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             Pen p = new Pen(Color.FromArgb(195, 195, 195), 1)
