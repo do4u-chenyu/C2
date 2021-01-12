@@ -163,11 +163,11 @@
     <Compile Include="ChartControls\MindMap\MindMapView\MindMapView.Schedule.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\C1\Left\IAOGroup.cs">
+    <Compile Include="Controls\C1\Left\IAOButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\C1\Left\IAOGroup.Designer.cs">
-      <DependentUpon>IAOGroup.cs</DependentUpon>
+    <Compile Include="Controls\C1\Left\IAOButton.Designer.cs">
+      <DependentUpon>IAOButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Left\TableButton.cs">
       <SubType>UserControl</SubType>
@@ -1378,8 +1378,8 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
-    <EmbeddedResource Include="Controls\C1\Left\IAOGroup.resx">
-      <DependentUpon>IAOGroup.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\C1\Left\IAOButton.resx">
+      <DependentUpon>IAOButton.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\TableButton.resx">

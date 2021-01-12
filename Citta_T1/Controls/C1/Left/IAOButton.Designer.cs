@@ -2,7 +2,7 @@
 
 namespace C2.Controls.Left
 {
-    partial class IAOGroup
+    partial class IAOButton
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -99,7 +99,6 @@ namespace C2.Controls.Left
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "IAOGroup";
             this.Size = new System.Drawing.Size(140, 27);
-            this.Load += new System.EventHandler(this.DataButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             this.ResumeLayout(false);
