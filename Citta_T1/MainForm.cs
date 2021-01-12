@@ -306,7 +306,10 @@ namespace C2
             Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultVersionType);
             for (int a = 0; a < 6; a = a + 1)
             {
-                if (Global.VersionType.Contains(a.ToString()))
+                string str = Global.VersionType;
+                char[] chs = { ' ' };
+                string[] res = str.Split(chs, options: StringSplitOptions.RemoveEmptyEntries);
+                if (res[a]==a.ToString())
                     this.iaoModelControl.GenIAOButton(Global.IAOLab[a]);
             } 
 ;
