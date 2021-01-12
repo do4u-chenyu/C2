@@ -300,12 +300,24 @@ namespace C2
             foreach (LinkButton linkButton in linkButtons)
                 this.dataSourceControl.GenLinkButton(linkButton);
         }
+
         private void LoadIAOSource()
         {
+            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultVersionType);
+            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("BaseStation", ConfigUtil.DefaultVersionType);
 
-            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("APK", ConfigUtil.DefaultVersionType);
             if (Global.VersionType.Equals(Global.APKState))
                 this.iaoModelControl.GenIAOButton(Global.APKState);
+            if (Global.VersionType.Equals(Global.BaseStationState))
+                this.iaoModelControl.GenIAOButton(Global.BaseStationState);
+            if (Global.VersionType.Equals(Global.WifiState))
+                this.iaoModelControl.GenIAOButton(Global.WifiState);
+            if (Global.VersionType.Equals(Global.CardState))
+                this.iaoModelControl.GenIAOButton(Global.CardState);
+            if (Global.VersionType.Equals(Global.TudeState))
+                this.iaoModelControl.GenIAOButton(Global.TudeState);
+            if (Global.VersionType.Equals(Global.IpState))
+                this.iaoModelControl.GenIAOButton(Global.IpState);
         }
 
         private void ShowLeftFold()

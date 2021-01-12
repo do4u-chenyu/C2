@@ -187,11 +187,11 @@
     <Compile Include="Controls\C1\Left\LeftFoldButton.Designer.cs">
       <DependentUpon>LeftFoldButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\C1\Left\IAOModelControl.cs">
+    <Compile Include="Controls\C1\Left\IAOLabControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\C1\Left\IAOModelControl.Designer.cs">
-      <DependentUpon>IAOModelControl.cs</DependentUpon>
+    <Compile Include="Controls\C1\Left\IAOLabControl.Designer.cs">
+      <DependentUpon>IAOLabControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataCharts\BarChart.cs">
       <SubType>UserControl</SubType>
@@ -767,6 +767,12 @@
     </Compile>
     <Compile Include="Dialogs\C2OperatorViews\C2SqlOperatorView.Designer.cs">
       <DependentUpon>C2SqlOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\WifiLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\WifiLocation.Designer.cs">
+      <DependentUpon>WifiLocation.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\WidgetChart\VisualDisplayDialog.cs">
       <SubType>Form</SubType>
@@ -1399,8 +1405,8 @@
     <EmbeddedResource Include="Controls\C1\Left\MyMindMapControl.resx">
       <DependentUpon>MyMindMapControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Left\IAOModelControl.resx">
-      <DependentUpon>IAOModelControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\C1\Left\IAOLabControl.resx">
+      <DependentUpon>IAOLabControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\BaseChart.resx">
       <DependentUpon>BaseChart.cs</DependentUpon>
