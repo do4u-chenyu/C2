@@ -8,22 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C2.Controls;
+using C2.IAOLab.WifiMac;
 
 namespace C2.Dialogs.IAOLab
 {
     public partial class WifiLocation : BaseDialog
     {
+        private string formType;
         public WifiLocation()
         {
             InitializeComponent();
         }
         public string Tip { set { this.tipLable.Text = value; } }
         public string InputLable { set { this.inputLabel.Text = value; } }
-        private void button2_Click(object sender, EventArgs e)
-        {
 
-        }
-
+        public string FormType { get { return this.formType; } set { this.formType = value; } }
         private void WifiLocation_Load(object sender, EventArgs e)
         {
 
@@ -48,9 +47,38 @@ namespace C2.Dialogs.IAOLab
             toolTip1.ReshowDelay = 500;//指针从一个控件移向另一个控件时，经过多久才会显示下一个提示框
             toolTip1.ShowAlways = true;//是否显示提示框
             //  设置伴随的对象.
-            toolTip1.SetToolTip(richTextBox1, "可同时输入多个mac地址，mac地址之前使用\n分割，输入类型：04a1518006c2 或04-a1-51-80-06-c2");//设置提示按钮和提示内容
+            toolTip1.SetToolTip(inputAndResult, "可同时输入多个mac地址，mac地址之前使用\n分割，输入类型：04a1518006c2 或04-a1-51-80-06-c2");//设置提示按钮和提示内容
         }
 
-      
+        private void Confirm_Click(object sender, EventArgs e)
+        {
+            switch (FormType)
+            {
+                case "APK":
+                  
+                    break;
+                case "BaseStation":
+                   
+                   
+                    break;
+                case "Wifi":
+                    this.inputAndResult.Text= WifiMac.GetInstance().MacLocate("");
+                    break;
+                case "Card":
+                    
+                    break;
+                case "Tude":
+                    
+                    break;
+                case "Ip":
+                   
+                    break;
+            }
+        }
+
+        private void Cancle_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

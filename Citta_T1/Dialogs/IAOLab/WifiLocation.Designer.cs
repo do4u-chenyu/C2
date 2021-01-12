@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.inputAndResult = new System.Windows.Forms.RichTextBox();
             this.inputLabel = new System.Windows.Forms.Label();
             this.confirm = new System.Windows.Forms.Button();
             this.cancle = new System.Windows.Forms.Button();
@@ -40,18 +40,18 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // inputAndResult
             // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.richTextBox1.Location = new System.Drawing.Point(9, 78);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.richTextBox1.Size = new System.Drawing.Size(583, 207);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-            this.richTextBox1.MouseHover += new System.EventHandler(this.help_MouseHover);
+            this.inputAndResult.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.inputAndResult.Location = new System.Drawing.Point(9, 78);
+            this.inputAndResult.Margin = new System.Windows.Forms.Padding(2);
+            this.inputAndResult.Name = "inputAndResult";
+            this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.inputAndResult.Size = new System.Drawing.Size(583, 207);
+            this.inputAndResult.TabIndex = 0;
+            this.inputAndResult.Text = "";
+            this.inputAndResult.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.inputAndResult.MouseHover += new System.EventHandler(this.help_MouseHover);
             // 
             // inputLabel
             // 
@@ -73,6 +73,7 @@
             this.confirm.TabIndex = 3;
             this.confirm.Text = "查询";
             this.confirm.UseVisualStyleBackColor = true;
+            this.confirm.Click += new System.EventHandler(this.Confirm_Click);
             // 
             // cancle
             // 
@@ -83,7 +84,7 @@
             this.cancle.TabIndex = 4;
             this.cancle.Text = "取消";
             this.cancle.UseVisualStyleBackColor = true;
-            this.cancle.Click += new System.EventHandler(this.button2_Click);
+            this.cancle.Click += new System.EventHandler(this.Cancle_Click);
             // 
             // panel1
             // 
@@ -131,7 +132,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.inputLabel);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.inputAndResult);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WifiLocation";
             this.Text = "Wifi查询";
@@ -144,7 +145,7 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox inputAndResult;
         private System.Windows.Forms.Label inputLabel;
         private System.Windows.Forms.Button confirm;
         private System.Windows.Forms.Button cancle;

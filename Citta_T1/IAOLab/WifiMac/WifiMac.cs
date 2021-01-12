@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace C2.IAOLab.WifiMac
 {
-    class WifiMac
+    public class WifiMac
     {
-
-        public void macLocate()
+        private static WifiMac instance;
+        public static WifiMac GetInstance()
         {
-
+            if (instance == null)
+                instance = new WifiMac();
+            return instance;
+        }
+        public String MacLocate(String input)
+        {
+            return String.Empty;
         }
 
     }
