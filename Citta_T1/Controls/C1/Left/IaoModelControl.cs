@@ -13,15 +13,13 @@ namespace C2.Controls.Left
             startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
             startPoint.Y -= 12;
         }
-
-  
-
+      
         private static readonly int ButtonLeftX = 18;
         private static readonly int ButtonBottomOffsetY = 23;
         private Point startPoint;
-        public void AddMindMapModel(string modelName)
+        public void AddIAOModel(string modelName)
         {
-            MindMapModelButton mb = new MindMapModelButton(modelName);
+            IAOButton mb = new IAOButton(modelName);
             // 获得当前要添加的model button的初始位置
             LayoutModelButtonLocation(mb);
             //this.Controls.Add(mb);
