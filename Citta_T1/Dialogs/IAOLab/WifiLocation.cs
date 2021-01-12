@@ -49,5 +49,7 @@ namespace C2.Dialogs.IAOLab
             //  设置伴随的对象.
             toolTip1.SetToolTip(richTextBox1, "可同时输入多个mac地址，mac地址之前使用\n分割，输入类型：04a1518006c2 或04-a1-51-80-06-c2");//设置提示按钮和提示内容
         }
+
+      
     }
 }
