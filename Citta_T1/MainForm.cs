@@ -277,8 +277,8 @@ namespace C2
         private void LoadDocuments()
         {
             // 将用户本地保存的模型文档加载到左侧myModelControl	
-            string[] bsTitles = ModelsInfo.LoadAllModelTitle(Global.BusinessViewPath);
-            string[] mtTitles = ModelsInfo.LoadAllModelTitle(Global.MarketViewPath);
+            string[] bsTitles = ModelInfo.LoadAllModelTitle(Global.BusinessViewPath);
+            string[] mtTitles = ModelInfo.LoadAllModelTitle(Global.MarketViewPath);
             foreach (string title in bsTitles)
                 this.mindMapModelControl.AddMindMapModel(title);
             foreach (string title in mtTitles)

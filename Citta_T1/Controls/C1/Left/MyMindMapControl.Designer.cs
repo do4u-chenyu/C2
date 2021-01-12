@@ -1,6 +1,6 @@
 ﻿namespace C2.Controls.Left
 {
-    partial class MindMapModelControl
+    partial class MyMindMapControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ItemLabel = new System.Windows.Forms.Label();
             this.Itempanel = new System.Windows.Forms.Panel();
+            this.AddMindMapButton = new System.Windows.Forms.Button();
             this.MindMapPaintPanel = new System.Windows.Forms.Panel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.Itempanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,12 +51,28 @@
             // 
             // Itempanel
             // 
+            this.Itempanel.Controls.Add(this.AddMindMapButton);
             this.Itempanel.Controls.Add(this.ItemLabel);
             this.Itempanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.Itempanel.Location = new System.Drawing.Point(0, 0);
             this.Itempanel.Name = "Itempanel";
             this.Itempanel.Size = new System.Drawing.Size(185, 30);
             this.Itempanel.TabIndex = 1;
+            // 
+            // AddMindMapButton
+            // 
+            this.AddMindMapButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.AddMindMapButton.BackColor = System.Drawing.Color.Transparent;
+            this.AddMindMapButton.BackgroundImage = global::C2.Properties.Resources.add;
+            this.AddMindMapButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.AddMindMapButton.FlatAppearance.BorderSize = 0;
+            this.AddMindMapButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddMindMapButton.Location = new System.Drawing.Point(144, 3);
+            this.AddMindMapButton.Name = "AddMindMapButton";
+            this.AddMindMapButton.Size = new System.Drawing.Size(25, 25);
+            this.AddMindMapButton.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.AddMindMapButton, "导入业务视图");
+            this.AddMindMapButton.UseVisualStyleBackColor = false;
             // 
             // MindMapPaintPanel
             // 
@@ -69,14 +88,14 @@
             this.MindMapPaintPanel.Size = new System.Drawing.Size(179, 621);
             this.MindMapPaintPanel.TabIndex = 2;
             // 
-            // MindMapModelControl
+            // MyMindMapControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.Itempanel);
             this.Controls.Add(this.MindMapPaintPanel);
-            this.Name = "MindMapModelControl";
+            this.Name = "MyMindMapControl";
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MindMapModelControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MindMapModelControl_MouseDown);
@@ -89,5 +108,7 @@
         private System.Windows.Forms.Label ItemLabel;
         private System.Windows.Forms.Panel Itempanel;
         private System.Windows.Forms.Panel MindMapPaintPanel;
+        private System.Windows.Forms.Button AddMindMapButton;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
