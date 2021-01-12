@@ -88,7 +88,7 @@ namespace C2.Controls.Left
             this.ReviewToolStripMenuItem.Name = "ReviewToolStripMenuItem";
             this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.ReviewToolStripMenuItem.Text = "预览";
-            this.ReviewToolStripMenuItem.ToolTipText = "预览数据源部分信息";
+            this.ReviewToolStripMenuItem.ToolTipText = "预览数据源前一千条数据";
             this.ReviewToolStripMenuItem.Click += new System.EventHandler(this.ReviewToolStripMenuItem_Click);
             // 
             // RemoveToolStripMenuItem
