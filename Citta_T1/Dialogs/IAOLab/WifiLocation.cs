@@ -17,7 +17,8 @@ namespace C2.Dialogs.IAOLab
         {
             InitializeComponent();
         }
-
+        public string Tip { set { this.tipLable.Text = value; } }
+        public string InputLable { set { this.inputLabel.Text = value; } }
         private void button2_Click(object sender, EventArgs e)
         {
 
