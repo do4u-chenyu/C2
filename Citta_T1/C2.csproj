@@ -801,7 +801,8 @@
     <Compile Include="IAOLab\ApkTool\ApkTool.cs" />
     <Compile Include="IAOLab\BankTool\BankTool.cs" />
     <Compile Include="IAOLab\BaseStation\BaseStation.cs" />
-    <Compile Include="IAOLab\Transform\Transform.cs" />
+    <Compile Include="IAOLab\Transform\TimeAndIPTransform.cs" />
+    <Compile Include="IAOLab\Transform\GPSTransform.cs" />
     <Compile Include="IAOLab\WifiMac\WifiMac.cs" />
     <Compile Include="Model\DatabaseItem.cs" />
     <Compile Include="Model\Widgets\AttachmentWidget.cs" />
