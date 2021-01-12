@@ -1,4 +1,5 @@
-﻿
+﻿using C2.Core;
+
 namespace C2.Dialogs.C2OperatorViews
 {
     partial class C2SqlOperatorView
@@ -71,6 +72,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnExecute.Size = new System.Drawing.Size(80, 22);
             this.bnExecute.TabIndex = 4;
             this.bnExecute.Text = "执行SQL";
+            this.toolTip1.SetToolTip(this.bnExecute, "执行SQL的结果仅可预览前一千行数据");
             this.bnExecute.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnExecute.UseVisualStyleBackColor = true;
             this.bnExecute.Click += new System.EventHandler(this.bnExecute_Click);
