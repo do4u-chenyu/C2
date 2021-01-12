@@ -8,5 +8,11 @@ namespace C2.IAOLab.WifiMac
 {
     class WifiMac
     {
+
+        public void macLocate()
+        {
+
+        }
+
     }
 }

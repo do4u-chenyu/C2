@@ -11,34 +11,15 @@ using C2.Controls;
 
 namespace C2.Dialogs.IAOLab
 {
-    partial class ApkTool : BaseDialog
+    public partial class ApkTool : BaseDialog
     {
         public ApkTool()
         {
             InitializeComponent();
+
         }
 
         private void ApkTool_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
         {
 
         }

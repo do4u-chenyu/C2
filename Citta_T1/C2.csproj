@@ -768,6 +768,12 @@
     <Compile Include="Dialogs\C2OperatorViews\C2SqlOperatorView.Designer.cs">
       <DependentUpon>C2SqlOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\IAOLab\ApkTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\ApkTool.Designer.cs">
+      <DependentUpon>ApkTool.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\IAOLab\WifiLocation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1553,6 +1559,9 @@
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2AvgOperatorView.resx">
       <DependentUpon>C2AvgOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2DataFormatOperatorView.resx">
+      <DependentUpon>C2DataFormatOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2FilterOperatorView.resx">
       <DependentUpon>C2FilterOperatorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1578,6 +1587,9 @@
     <EmbeddedResource Include="Dialogs\FindDialog.resx">
       <DependentUpon>FindDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IAOLab\ApkTool.resx">
+      <DependentUpon>ApkTool.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IAOLab\WIFILocation.resx">
       <DependentUpon>WifiLocation.cs</DependentUpon>
