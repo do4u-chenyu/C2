@@ -768,6 +768,12 @@
     <Compile Include="Dialogs\C2OperatorViews\C2SqlOperatorView.Designer.cs">
       <DependentUpon>C2SqlOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\IAOLab\WifiLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\WifiLocation.Designer.cs">
+      <DependentUpon>WifiLocation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\WidgetChart\VisualDisplayDialog.cs">
       <SubType>Form</SubType>
     </Compile>
