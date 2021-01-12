@@ -18,6 +18,7 @@ namespace C2.Controls.Left
             txtButton.Name = ffp;
             txtButton.Text = ffp;
             this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
+            this.ContextMenuStrip = contextMenuStrip1;
             switch (ffp)
             {
                 case "APK":
@@ -47,5 +48,9 @@ namespace C2.Controls.Left
             }
         }
 
+        private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -36,8 +36,11 @@ namespace C2.Controls.Left
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.textBox = new System.Windows.Forms.TextBox();
             this.txtButton = new C2.Controls.Common.NoFocusButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // leftPictureBox
@@ -85,7 +88,21 @@ namespace C2.Controls.Left
             this.txtButton.TabIndex = 9;
             this.txtButton.UseVisualStyleBackColor = false;
             // 
-            // IAOGroup
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.打开ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            // 
+            // 打开ToolStripMenuItem
+            // 
+            this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.打开ToolStripMenuItem.Text = "打开";
+            this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
+            // 
+            // IAOButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -96,10 +113,11 @@ namespace C2.Controls.Left
             this.Controls.Add(this.leftPictureBox);
             this.Controls.Add(this.txtButton);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "IAOGroup";
+            this.Name = "IAOButton";
             this.Size = new System.Drawing.Size(140, 27);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,5 +130,7 @@ namespace C2.Controls.Left
         private System.Windows.Forms.PictureBox rightPictureBox;
         private System.Windows.Forms.ToolTip helpToolTip;
         private System.Windows.Forms.TextBox textBox;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 打开ToolStripMenuItem;
     }
 }
