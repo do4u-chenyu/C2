@@ -18,8 +18,11 @@ namespace C2.Utils
         /// <summary>
         /// 解压文件
         /// </summary>
-        public static void UnZipFile(string zipFilePath)
+        public static void UnZipFile(string zipFilePath, string type)
         {
+            string xmlEnd = type == "iao" ? ".xml" : ".bmd";
+            string directory = type == "iao" ? "模型市场" : "业务视图";
+
             if (!File.Exists(zipFilePath))
             {
                 HelpUtil.ShowMessageBox("未能找到: " + zipFilePath); ;
@@ -34,14 +37,14 @@ namespace C2.Utils
                 while ((theEntry = s.GetNextEntry()) != null)
                 {
                     string fileName = Path.GetFileName(theEntry.Name);
-                    if (!string.IsNullOrEmpty(fileName) && fileName.EndsWith(".xml"))
+                    if (!string.IsNullOrEmpty(fileName) && fileName.EndsWith(xmlEnd))
                     {
                         modelTitle = Path.GetFileNameWithoutExtension(fileName);
                         break;
                     }
                 }
             }
-            string workPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName,"模型市场");
+            string workPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, directory);
             string targetPath = Path.Combine(workPath, modelTitle);
             Directory.CreateDirectory(workPath);
 
@@ -50,7 +53,5 @@ namespace C2.Utils
             crc32.Update(new byte[] { 0x00, 0x01, 0x11 });
 
         }
-
-
     }
 }

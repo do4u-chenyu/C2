@@ -105,7 +105,7 @@
             this.portTextBox.Size = new System.Drawing.Size(84, 21);
             this.portTextBox.TabIndex = 10012;
             this.portTextBox.Text = "1521";
-            this.portTextBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.portTextBox_MouseUp);
+            this.portTextBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PortTextBox_MouseUp);
             // 
             // userTextBox
             // 
@@ -133,7 +133,7 @@
             this.databaseTypeComboBox.Name = "databaseTypeComboBox";
             this.databaseTypeComboBox.Size = new System.Drawing.Size(265, 20);
             this.databaseTypeComboBox.TabIndex = 10015;
-            this.databaseTypeComboBox.TextChanged += new System.EventHandler(this.databaseTypeComboBox_TextChanged);
+            this.databaseTypeComboBox.TextChanged += new System.EventHandler(this.DatabaseTypeComboBox_TextChanged);
             // 
             // serviceRadiobutton
             // 
