@@ -23,6 +23,7 @@ namespace C2.Dialogs.IAOLab
         }
         public string Tip { set { this.tipLable.Text = value; } }
         public string InputLable { set { this.inputLabel.Text = value; } }
+        public Point InputLableLaction { set { this.inputLabel.Location = value; } }
 
         public string FormType { get { return this.formType; } set { this.formType = value; } }
         private void WifiLocation_Load(object sender, EventArgs e)
