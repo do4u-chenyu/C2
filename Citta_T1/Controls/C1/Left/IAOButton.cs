@@ -79,7 +79,7 @@ namespace C2.Controls.Left
             baseForm0.Text = "经纬度转换";
             baseForm0.InputLable = "请在下方输入经纬度";
             baseForm0.Tip = @"单次输入格式：04a1518006c2
-                             批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+                             批量查询格式：多个经纬度间用\n换行，最多支持1000条同时查询";
         }
         private void TimeAndIPTransformForm()
         {
