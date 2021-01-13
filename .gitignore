@@ -71,3 +71,5 @@ x64/
 x86/
 C2自动化测试样例/obj
 C2自动化测试样例/bin
+/packages/MSTest.TestAdapter.2.1.1
+/packages/MSTest.TestFramework.2.1.1

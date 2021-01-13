@@ -26,6 +26,16 @@ namespace C2.Dialogs.C2OperatorViews
                     return null;
             }
         }
+        private Table SelectTable
+        {
+            get
+            {
+                if (tableListBox.SelectedItem != null)
+                    return new Table(SelectDatabaseItem.User, tableListBox.SelectedItem.ToString());
+                else
+                    return null;
+            }
+        }
 
         public C2SqlOperatorView(OperatorWidget operatorWidget) : base(operatorWidget)
         {
@@ -41,6 +51,7 @@ namespace C2.Dialogs.C2OperatorViews
             contextMenuStrip = new ContextMenuStrip(this.components);
 
             ToolStripMenuItem previewTableMenuItem = new ToolStripMenuItem("预览表");
+            previewTableMenuItem.Click += PreviewTableMenuItem_Click;
             contextMenuStrip.Items.Add(previewTableMenuItem);
             previewTableMenuItem.ToolTipText = "仅预览数据表前一千行数据";
 
@@ -50,6 +61,19 @@ namespace C2.Dialogs.C2OperatorViews
 
             ToolStripMenuItem codeSnippetMenuItem = new ToolStripMenuItem("一键查询");
             contextMenuStrip.Items.Add(codeSnippetMenuItem);
+        }
+
+        private void PreviewTableMenuItem_Click(object sender, EventArgs e)
+        {
+            PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm(SelectDatabaseItem);
+
+            if (!DbUtil.TestConn(SelectDatabaseItem))
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                return;
+            }
+            if (SelectTable != null && previewDbDataForm.Flush(SelectTable))
+                previewDbDataForm.Show();
         }
 
         private void CopyTableNameMenuItem_Click(object sender, EventArgs e)

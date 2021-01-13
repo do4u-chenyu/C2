@@ -67,8 +67,7 @@ namespace C2.Model
             User = tmpInfo[5];
             Password = tmpInfo[6];
             Group = tmpInfo[7];
-            DataTable = new Table(tmpInfo[7]);
-            DataTable.Name = tmpInfo[8];
+            DataTable = new Table(tmpInfo[7], tmpInfo[8]);
         }
 
         public DatabaseItem Clone()
