@@ -20,7 +20,7 @@ namespace C2.IAOLab.WifiMac
         public String MacLocate(String input)
         {
             string mac = input;
-            string location = GetInfo("http://218.94.117.234:8484/Test01/search.do",mac);
+            string location = GetInfo("http://218.94.117.234:8484/Test01/search.do",mac,"mac");
             location = string.Join("",location.Split('{', '}','"'));
             StringBuilder macLocation = new StringBuilder();
             string m_macLocation = mac + "\t" + location + "\n";
@@ -29,7 +29,7 @@ namespace C2.IAOLab.WifiMac
             return s_macLocation;
 
         }
-        public string GetInfo(string URL,string mac)
+        public string GetInfo(string URL,string mac,string type)
         {
 
             string strURL = URL;
@@ -42,7 +42,7 @@ namespace C2.IAOLab.WifiMac
 
             //设置参数，并进行URL编码 
 
-            string paraUrlCoded = "mac="+ mac;//System.Web.HttpUtility.UrlEncode(jsonParas);   
+            string paraUrlCoded = type+"="+ mac;//System.Web.HttpUtility.UrlEncode(jsonParas);   
 
             byte[] payload;
             //将Json字符串转化为字节  

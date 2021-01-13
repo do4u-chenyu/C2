@@ -67,7 +67,7 @@ namespace C2.Controls.Left
             baseForm0 = new WifiLocation();
             baseForm0.Text = "基站查询";
             baseForm0.InputLable = "请在下方输入基站号码";
-            baseForm0.Tip = @"单次输入格式：04a1518006c2
+            baseForm0.Tip = @"单次输入格式：4600051162c01
 批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
         }
         private void BankToolForm()

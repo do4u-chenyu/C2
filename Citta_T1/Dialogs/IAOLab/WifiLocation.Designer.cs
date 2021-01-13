@@ -45,7 +45,7 @@
             this.inputAndResult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputAndResult.Name = "inputAndResult";
             this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult.Size = new System.Drawing.Size(776, 258);
+            this.inputAndResult.Size = new System.Drawing.Size(759, 258);
             this.inputAndResult.TabIndex = 0;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
@@ -89,7 +89,7 @@
             this.panel1.Controls.Add(this.confirm);
             this.panel1.Controls.Add(this.cancle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 370);
+            this.panel1.Location = new System.Drawing.Point(0, 367);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 55);
@@ -120,13 +120,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 425);
+            this.ClientSize = new System.Drawing.Size(800, 422);
             this.Controls.Add(this.tipLable);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.inputLabel);
             this.Controls.Add(this.inputAndResult);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(818, 469);
+            this.MinimumSize = new System.Drawing.Size(818, 469);
             this.Name = "WifiLocation";
             this.Text = "Wifi查询";
             this.Load += new System.EventHandler(this.WifiLocation_Load);

@@ -47,7 +47,17 @@ namespace C2.Dialogs.IAOLab
                   
                     break;
                 case "BaseStation":
-                    this.inputAndResult.Text = WifiMac.GetInstance().MacLocate(inputAndResult.Text);
+                    string[] baseStationArry = this.inputAndResult.Text.Split('\n');
+                    this.inputAndResult.Text = null;
+                    StringBuilder baseStationLocation = new StringBuilder();
+                    foreach (string baseStation in baseStationArry)
+                    {
+                        string result = BaseStation.GetInstance().BaseStationLocate(baseStation);
+
+                        string m_baseStationLocation = result;
+                        baseStationLocation.Append(m_baseStationLocation);
+                        inputAndResult.Text = baseStationLocation.ToString();
+                    }
                     break;
                 case "Wifi":
                     string[] macArry = this.inputAndResult.Text.Split('\n');
