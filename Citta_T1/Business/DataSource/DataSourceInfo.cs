@@ -191,6 +191,9 @@ namespace C2.Business.DataSource
                     
                     DatabaseItem item = new DatabaseItem(type, server, SID, service, port, user, password);
                     LinkButton dataButton = new LinkButton(item);
+                    // 修改复用控件的图标
+                    if (type == DatabaseType.Hive)
+                        dataButton.LeftControlImage = global::C2.Properties.Resources.delete;
                     dataSourceList.Add(dataButton);
                 }
                 catch (XmlException e) { log.Error("LoadDataSourceInfo 发生错误，错误 :" + e.Message); }

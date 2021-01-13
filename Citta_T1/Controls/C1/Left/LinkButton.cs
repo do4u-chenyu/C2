@@ -3,6 +3,7 @@ using C2.Dialogs;
 using C2.Model;
 using C2.Utils;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 namespace C2.Controls.Left
 {
@@ -26,7 +27,7 @@ namespace C2.Controls.Left
             }
         }
 
-
+        public Image LeftControlImage { set { this.leftPictureBox.Image = value; }  } 
         public event EventHandler<ChangeDatabaseItemEventArgs> DatabaseItemChanged;
         public event EventHandler<SelectLinkButtonEventArgs> LinkButtonSelected;
         private DatabaseItem _DatabaseItem;

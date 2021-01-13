@@ -162,5 +162,75 @@ namespace C2.Database
                 }
             }
         }
+        public List<string> GetHiveDatabases()
+        {
+            List<string> databases = new List<string>();
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (Connection con = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                                                       this.User, this.Pass))
+                    {
+                        var cursor = conn.GetCursor();
+                        string sql = String.Format(@"select databases");
+                        cursor.Execute(sql);
+                        var list = cursor.FetchMany(int.MaxValue);
+                        foreach (var item in list)
+                        {
+                           var dict= item as IDictionary<string, object>;
+                            foreach ( var key in dict.Keys)
+                            {
+                                databases.Add(dict[key].ToString());
+                            }
+                           
+                           
+                        }
+                        
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", ÏêÇé£º" + ex.ToString());
+                }
+            }
+            return databases;
+        }
+
+        public static List<Table> GetTablesByDB(OraConnection conn, string DBName)
+        {
+            List<Table> tables = new List<Table>();
+            //using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            //{
+            //    try
+            //    {
+            //        using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+            //        {
+            //            con.Open();
+            //            string sql = String.Format(@"
+            //                select table_name
+            //                from all_tables
+            //                where owner='{0}'
+            //                order by table_name",
+            //                  DbHelper.Sanitise(DBName.ToUpper()));
+            //            OracleCommand comm = new OracleCommand(sql, con);
+            //            using (OracleDataReader rdr = comm.ExecuteReader())
+            //            {
+            //                while (rdr.Read())
+            //                {
+            //                    Table table = new Table(DBName, rdr.GetString(0));
+            //                    tables.Add(table);
+            //                }
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        log.Error(HelpUtil.DbCannotBeConnectedInfo + ", ÏêÇé£º" + ex.ToString());
+            //    }
+            //}
+            return tables;
+        }
+
     }
 }

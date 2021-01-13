@@ -272,8 +272,8 @@ namespace C2.Controls.Left
 
         #region 外部数据库布局
         public void GenLinkButton(DatabaseItem dbinfo, bool updateFrameAndTables = false)
-        {
-            LinkButton linkButton = new LinkButton(dbinfo);
+        {               
+            LinkButton linkButton = dbinfo.Type==DatabaseType.Hive ? CreateHiveButton(dbinfo): new LinkButton(dbinfo);
             SelectLinkButton = linkButton;
             GenLinkButton(linkButton);
             if (updateFrameAndTables)
@@ -417,6 +417,12 @@ namespace C2.Controls.Left
              * 1. 优化函数名称，首先这个名字取得不怎么好
              * [x]. 优化代码逻辑，一旦出现连接不上的问题依然会查两次数据库，等待时间很长，每次连接的时候最好测试一下连接
              */
+
+            //Hive 连接数据库
+            if (databaseInfo.Type == DatabaseType.Hive)
+            {
+                return;
+            }
             //连接数据库
             OraConnection conn = new OraConnection(databaseInfo);
             if (!DbUtil.TestConn(conn))
@@ -484,5 +490,13 @@ namespace C2.Controls.Left
 
             return allExternalData;
         }
+        #region Hive相关控件
+        private LinkButton CreateHiveButton(DatabaseItem dbinfo)
+        {
+            LinkButton linkButton = new LinkButton(dbinfo);
+            linkButton.LeftControlImage = global::C2.Properties.Resources.delete;
+            return linkButton;
+        }
+        #endregion
     }
 }
