@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using C2.Controls;
 using C2.IAOLab.BaseStation;
 using C2.IAOLab.WifiMac;
+using log4net.Util;
 
 namespace C2.Dialogs.IAOLab
 {
@@ -49,8 +50,17 @@ namespace C2.Dialogs.IAOLab
                     this.inputAndResult.Text = WifiMac.GetInstance().MacLocate(inputAndResult.Text);
                     break;
                 case "Wifi":
-                    this.inputAndResult.Text= BaseStation.GetInstance().BaseStationLocate(inputAndResult.Text);
-                    this.inputAndResult.Text = BaseStation.GetInstance().BaseStationLocate(inputAndResult.Text);
+                    string[] macArry = this.inputAndResult.Text.Split('\n');
+                    this.inputAndResult.Text = null;
+                    StringBuilder macLocation = new StringBuilder();
+                    foreach (string mac in macArry)
+                    {
+                        string result = WifiMac.GetInstance().MacLocate(mac);
+                        
+                        string m_macLocation = result;
+                        macLocation.Append(m_macLocation);
+                        inputAndResult.Text = macLocation.ToString();
+                    }
                     break;
                 case "Card":
                     
