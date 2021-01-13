@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using C2.Controls;
 using C2.IAOLab.BaseStation;
 using C2.IAOLab.WifiMac;
+using log4net.Util;
 
 namespace C2.Dialogs.IAOLab
 {
@@ -22,6 +23,7 @@ namespace C2.Dialogs.IAOLab
         }
         public string Tip { set { this.tipLable.Text = value; } }
         public string InputLable { set { this.inputLabel.Text = value; } }
+        public Point InputLableLaction { set { this.inputLabel.Location = value; }get { return this.inputLabel.Location;  } }
 
         public string FormType { get { return this.formType; } set { this.formType = value; } }
         private void WifiLocation_Load(object sender, EventArgs e)
@@ -46,11 +48,30 @@ namespace C2.Dialogs.IAOLab
                   
                     break;
                 case "BaseStation":
-                    this.inputAndResult.Text = WifiMac.GetInstance().MacLocate(inputAndResult.Text);
+                    string[] baseStationArry = this.inputAndResult.Text.Split('\n');
+                    this.inputAndResult.Text = null;
+                    StringBuilder baseStationLocation = new StringBuilder();
+                    foreach (string baseStation in baseStationArry)
+                    {
+                        string result = BaseStation.GetInstance().BaseStationLocate(baseStation);
+
+                        string m_baseStationLocation = result;
+                        baseStationLocation.Append(m_baseStationLocation);
+                        inputAndResult.Text = baseStationLocation.ToString();
+                    }
                     break;
                 case "Wifi":
-                    this.inputAndResult.Text= BaseStation.GetInstance().BaseStationLocate(inputAndResult.Text);
-                    this.inputAndResult.Text = BaseStation.GetInstance().BaseStationLocate(inputAndResult.Text);
+                    string[] macArry = this.inputAndResult.Text.Split('\n');
+                    this.inputAndResult.Text = null;
+                    StringBuilder macLocation = new StringBuilder();
+                    foreach (string mac in macArry)
+                    {
+                        string result = WifiMac.GetInstance().MacLocate(mac);
+                        
+                        string m_macLocation = result;
+                        macLocation.Append(m_macLocation);
+                        inputAndResult.Text = macLocation.ToString();
+                    }
                     break;
                 case "Card":
                     

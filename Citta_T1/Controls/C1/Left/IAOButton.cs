@@ -7,6 +7,7 @@ using C2.Model;
 using C2.Utils;
 using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace C2.Controls.Left
 {
@@ -67,7 +68,7 @@ namespace C2.Controls.Left
             baseForm0 = new WifiLocation();
             baseForm0.Text = "基站查询";
             baseForm0.InputLable = "请在下方输入基站号码";
-            baseForm0.Tip = @"单次输入格式：04a1518006c2
+            baseForm0.Tip = @"单次输入格式：4600051162c01
 批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
         }
         private void BankToolForm()
@@ -81,15 +82,25 @@ namespace C2.Controls.Left
         private void GPSTransformForm()
         {
             baseForm0 = new WifiLocation();
+            baseForm0.InputLableLaction = new Point(30, 14);           
+            RadioButton xy = new RadioButton() { Location = new Point(17, 14) };
+            RadioButton distance = new RadioButton() { Location = new Point(210, 14) ,Size=new Size(15,15)};
+            Label distanceLabel = new Label { Location = new Point(240, 14) };
+            distanceLabel.Text = "计算两个坐标间距离";
+
+            baseForm0.Controls.Add(xy);
+            baseForm0.Controls.Add(distance);
+            baseForm0.Controls.Add(distanceLabel);
             baseForm0.Text = "经纬度转换";
             baseForm0.InputLable = "请在下方输入经纬度";
             baseForm0.Tip = @"单次输入格式：04a1518006c2
 批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+
         }
         private void TimeAndIPTransformForm()
         {
             baseForm0 = new WifiLocation();
-            baseForm0.Text = "基站查询";
+            baseForm0.Text = "时间";
             baseForm0.InputLable = "请在下方输入基站号码";
             baseForm0.Tip = @"单次输入格式：04a1518006c2
 批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
