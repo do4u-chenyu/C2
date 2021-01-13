@@ -13,6 +13,7 @@ namespace C2.Controls.Left
     public partial class IAOButton : UserControl
     {
         private WifiLocation baseForm0;
+        private ApkTool baseForm1;
         public IAOButton(string ffp)
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace C2.Controls.Left
                 case "APK":
                     this.txtButton.Text = Lang._("APK");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
+                    ApkToolForm();
                     break;
                 case "BaseStation":
                     this.txtButton.Text = Lang._("BaseStation");
@@ -56,14 +58,17 @@ namespace C2.Controls.Left
                 baseForm0.FormType = ffp;
         }
         #region 定义6种弹窗
-
+        private void ApkToolForm()
+        {
+            baseForm1 = new ApkTool();
+        }
         private void BaseStationForm()
         {
             baseForm0 = new WifiLocation();
             baseForm0.Text = "基站查询";
             baseForm0.InputLable = "请在下方输入基站号码";
             baseForm0.Tip = @"单次输入格式：04a1518006c2
-                             批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
         }
         private void BankToolForm()
         {
@@ -71,7 +76,7 @@ namespace C2.Controls.Left
             baseForm0.Text = "银行卡归属地查询";
             baseForm0.InputLable = "请在下方输入银行卡";
             baseForm0.Tip = @"单次输入格式：621085718896476
-                             批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
         }
         private void GPSTransformForm()
         {
@@ -79,7 +84,7 @@ namespace C2.Controls.Left
             baseForm0.Text = "经纬度转换";
             baseForm0.InputLable = "请在下方输入经纬度";
             baseForm0.Tip = @"单次输入格式：04a1518006c2
-                             批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
         }
         private void TimeAndIPTransformForm()
         {
@@ -87,13 +92,20 @@ namespace C2.Controls.Left
             baseForm0.Text = "基站查询";
             baseForm0.InputLable = "请在下方输入基站号码";
             baseForm0.Tip = @"单次输入格式：04a1518006c2
-                             批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
         }
         #endregion
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        
-            baseForm0.ShowDialog();
+
+            try
+            {
+                baseForm0.ShowDialog();
+            }
+            catch
+            {
+                baseForm1.ShowDialog();
+            }
         }
     }
 }

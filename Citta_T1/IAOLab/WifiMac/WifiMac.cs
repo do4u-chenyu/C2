@@ -25,7 +25,7 @@ namespace C2.IAOLab.WifiMac
                 for (int i = 0; i < j; i++)
                 {
                     string mac = macArr[i];
-                    string location = getInfo(mac);
+                    string location = GetInfo("http://218.94.117.234:8484/Test01/search.do",mac);
                     location = string.Join("",location.Split('{', '}','"'));
                     StringBuilder macLocation = new StringBuilder();
                     string m_macLocation = mac + "\t" + location + "\n";
@@ -36,10 +36,10 @@ namespace C2.IAOLab.WifiMac
                 return null;
            
         }
-        public string getInfo(string mac)
+        public string GetInfo(string URL,string mac)
         {
 
-            string strURL = "http://218.94.117.234:8484/Test01/search.do";
+            string strURL = URL;
             //创建一个HTTP请求  
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strURL);
             //Post请求方式  
