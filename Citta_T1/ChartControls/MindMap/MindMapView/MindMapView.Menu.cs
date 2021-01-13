@@ -342,6 +342,7 @@ namespace C2.Controls.MapViews
                 MenuViewData.Image = Properties.Resources.viewData;
                 MenuViewData.Tag = dataItem;
                 MenuViewData.Text = Lang._("ViewData");        // 预览数据
+                MenuViewData.ToolTipText = "预览数据源前一百条数据";
                 MenuViewData.Click += MenuPreViewData_Click;
 
                 MenuCreateChart.Image = Properties.Resources.getChart;              
@@ -480,7 +481,8 @@ namespace C2.Controls.MapViews
 
                 MenuPreViewData.Image = Properties.Resources.viewData;
                 MenuPreViewData.Tag = dataItem;
-                MenuPreViewData.Text = Lang._("ViewData");
+                MenuPreViewData.Text = Lang._("ViewData");  //数据预览
+                MenuPreViewData.ToolTipText = "预览数据源前一百条数据";
                 MenuPreViewData.Click += MenuPreViewData_Click;
 
                 MenuProcessData.Image = Properties.Resources.dealData;
