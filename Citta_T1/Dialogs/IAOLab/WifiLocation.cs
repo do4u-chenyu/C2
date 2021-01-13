@@ -48,7 +48,7 @@ namespace C2.Dialogs.IAOLab
                    
                     break;
                 case "Wifi":
-                    this.inputAndResult.Text= WifiMac.GetInstance().MacLocate("inputAndResult.Text");
+                    this.inputAndResult.Text= WifiMac.GetInstance().MacLocate(inputAndResult.Text);
                     break;
                 case "Card":
                     

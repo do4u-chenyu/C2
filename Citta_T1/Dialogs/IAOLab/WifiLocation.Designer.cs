@@ -44,10 +44,11 @@
             this.inputAndResult.Location = new System.Drawing.Point(12, 98);
             this.inputAndResult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputAndResult.Name = "inputAndResult";
-            this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.inputAndResult.Size = new System.Drawing.Size(776, 258);
             this.inputAndResult.TabIndex = 0;
             this.inputAndResult.Text = "";
+            this.inputAndResult.WordWrap = false;
             this.inputAndResult.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // inputLabel

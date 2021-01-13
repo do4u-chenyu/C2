@@ -26,6 +26,7 @@ namespace C2.IAOLab.WifiMac
                 {
                     string mac = macArr[i];
                     string location = getInfo(mac);
+                    location = string.Join("",location.Split('{', '}','"'));
                     StringBuilder macLocation = new StringBuilder();
                     string m_macLocation = mac + "\t" + location + "\n";
                     macLocation.Append(m_macLocation);
@@ -38,19 +39,56 @@ namespace C2.IAOLab.WifiMac
         public string getInfo(string mac)
         {
 
-            string url = "http://218.94.117.234%3A8484%2FTest01%2Fsearch.do&hts=http%3A%2F%2F&type=Post&charset=UTF-8&cookies=&params_box=true&header_box=true&cookie_box=false&parms_tab=tab_kv&kvParms=%5B%7B%22key%22%3A%22mac%22%2C%22value%22%3A%22" + mac + "%22%7D%5D&kvHeads=%5B%7B%22key%22%3A%22Content-Type%22%2C%22value%22%3A%22application%2Fx-www-form-urlencoded%3Bcharset%3DUTF-8%22%7D%5D";
-            Encoding encoding = Encoding.UTF8;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "GET";
-            request.Accept = "text/html, application/xhtml+xml, */*";
-            request.ContentType = "application/json";
+            string strURL = "http://218.94.117.234:8484/Test01/search.do";
+            //创建一个HTTP请求  
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strURL);
+            //Post请求方式  
+            request.Method = "POST";
+            //内容类型
+            request.ContentType = "application/x-www-form-urlencoded";
 
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+            //设置参数，并进行URL编码 
+
+            string paraUrlCoded = "mac="+ mac;//System.Web.HttpUtility.UrlEncode(jsonParas);   
+
+            byte[] payload;
+            //将Json字符串转化为字节  
+            payload = System.Text.Encoding.UTF8.GetBytes(paraUrlCoded);
+            //设置请求的ContentLength   
+            request.ContentLength = payload.Length;
+            //发送请求，获得请求流 
+
+            Stream writer;
+            try
             {
-                return reader.ReadToEnd();
+                writer = request.GetRequestStream();//获取用于写入请求数据的Stream对象
             }
-
+            catch (Exception)
+            {
+                writer = null;
+                Console.Write("连接服务器失败!");
+            }
+            //将请求参数写入流
+            writer.Write(payload, 0, payload.Length);
+            writer.Close();//关闭请求流
+                           // String strValue = "";//strValue为http响应所返回的字符流
+            HttpWebResponse response;
+            try
+            {
+                //获得响应流
+                response = (HttpWebResponse)request.GetResponse();
+            }
+            catch (WebException ex)
+            {
+                response = ex.Response as HttpWebResponse;
+            }
+            Stream s = response.GetResponseStream();
+            //  Stream postData = Request.InputStream;
+            StreamReader sRead = new StreamReader(s);
+            string postContent = sRead.ReadToEnd();
+            sRead.Close();
+            Console.WriteLine(postContent);//返回Json数据
+            return (postContent);
         }
 
     }
