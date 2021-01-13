@@ -115,6 +115,23 @@ namespace C2.Dialogs
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||
                 string.IsNullOrEmpty(this.userTextBox.Text) || string.IsNullOrEmpty(this.passwordTextBox.Text);
         }
+
+        private void databaseTypeComboBox_TextChanged(object sender, EventArgs e)
+        {
+            if (databaseTypeComboBox.SelectedItem.ToString()=="Hive")
+            {
+                this.portTextBox.Text = "1000";
+                this.portTextBox.ForeColor = Color.Gray;
+                this.serviceTextBox.Enabled = false;
+                this.sidTextBox.Enabled = false;
+            }
+        }
+
+
+        private void portTextBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.portTextBox.ForeColor = Color.Black;
+        }
     }
     public enum DatabaseDialogMode
     {
