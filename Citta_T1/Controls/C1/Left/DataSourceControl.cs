@@ -22,6 +22,7 @@ namespace C2.Controls.Left
         private Point startPoint;
         private Point linkPoint;
         private Point tablePoint;
+        private Dictionary<string, List<string>> relateTableCol;
 
         // 这个控件属性不需要在属性面板显示和序列化,不加这个标签,在引用这个控件的Designer中,会序列化它
         // 然后就是各种奇葩问题
@@ -392,7 +393,14 @@ namespace C2.Controls.Left
         private void TableFilterTextBox_TextChanged(object sender, EventArgs e)
         {
             this.tableFilterTextBox.ForeColor = SystemColors.WindowText;
-            ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(tableFilterTextBox.Text.ToUpper())));
+            if (this.optComboBox.Text.ToString() == "表名")
+            {
+                ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(tableFilterTextBox.Text.ToUpper())));
+            }
+            else
+            {
+                ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Contains(tableFilterTextBox.Text.ToUpper())));
+            }
         }
         #endregion
 
@@ -443,16 +451,23 @@ namespace C2.Controls.Left
             //先清空上一次的数据表内容
             RelateTableButtons.Clear();
             this.tabelPanel.Controls.Clear();
-
+            OraConnection conn = new OraConnection(databaseInfo);
+            relateTableCol = DbUtil.GetTableCol( conn ,tables);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            List<string> temp = new List<string>();
             foreach (Table table in tables.Take(Math.Min(300,tables.Count)))
             {
+                foreach ( List<string> kvp in relateTableCol.Values)
+                {
+                    temp.AddRange(kvp);
+                }
+                table.Columns = temp;
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
                 tmpDatabaseItem.DataTable = table;
                 tmpDatabaseItem.Group = this.schemaComboBox.Text;
                 TableButton tableButton = new TableButton(tmpDatabaseItem);
                 GenTableButton(tableButton);//生成数据表按钮
-            }
+            }         
 
             RelateTableButtons.Clear();
             foreach (TableButton tb in this.tabelPanel.Controls)

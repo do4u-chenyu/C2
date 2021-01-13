@@ -10,13 +10,13 @@ namespace C2.Database
         public string Name { get; }
         public bool View = false;
         public string UserName { get; }
-        public List<string> columns;
+        public List<string> Columns { get; set; }
 
         public Table(string userName, string name, List<string> cols=null)
         {
             UserName = userName;
             Name = name;
-            columns = cols;
+            Columns = cols;
         }
     }
 }
