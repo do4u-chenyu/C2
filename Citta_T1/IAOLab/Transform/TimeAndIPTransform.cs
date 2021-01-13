@@ -25,7 +25,7 @@ namespace C2.IAOLab.Transform
         {
             DateTime ShuRu = Convert.ToDateTime(Date);
             DateTime Ini = DateTime.Parse("1970-1-1 00:00:00");
-            //TimeSpan.FromSeconds = ShuRu - Ini;
+            //uint Sec = TimeSpan.FromSeconds(ShuRu - Ini);
             return 0;
         }
 

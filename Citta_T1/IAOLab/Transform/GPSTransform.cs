@@ -89,7 +89,7 @@ namespace C2.IAOLab.Transform
             List<double> result = new List<double>() { latLon[0], latLon[1] };
             return result;
         }
-        private List<double> wgs_gcj(double wgsLat, double wgsLon)
+        private List<double> WGSGCJ(double wgsLat, double wgsLon)
         {
             if (OutOfChina(wgsLat, wgsLon))
             {
@@ -133,8 +133,8 @@ namespace C2.IAOLab.Transform
             {
                 wgsLat = (mLat + pLat) / 2;
                 wgsLon = (mLon + pLon) / 2;
-                double tmp_lat = wgs_gcj(wgsLat, wgsLon)[0];
-                double tmp_lon = wgs_gcj(wgsLat, wgsLon)[1];
+                double tmp_lat = WGSGCJ(wgsLat, wgsLon)[0];
+                double tmp_lon = WGSGCJ(wgsLat, wgsLon)[1];
                 dLat = tmp_lat - gcjLat;
                 dLon = tmp_lon - gcjLon;
                 if (Math.Abs(dLat) < threshold && Math.Abs(dLon) < threshold)
@@ -168,7 +168,7 @@ namespace C2.IAOLab.Transform
         }
         private List<double> WGSBD(double wgsLat, double wgsLon)
         {
-            List<double> gcj = wgs_gcj(wgsLat, wgsLon);
+            List<double> gcj = WGSGCJ(wgsLat, wgsLon);
             return GCJWGS(gcj[0], gcj[1]);
         }
     }
