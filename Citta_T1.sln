@@ -11,7 +11,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IAO解决方案", "IAO解�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2自动化测试样例", "C2自动化测试样例\C2自动化测试样例.csproj", "{DAC1F3E3-691C-4B51-817A-C8D31818F080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2Tests", "C2Tests\C2Tests.csproj", "{0711F393-AA2F-47A9-93DF-8B10EF068596}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2UnitTests", "C2Tests\C2UnitTests.csproj", "{0711F393-AA2F-47A9-93DF-8B10EF068596}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
