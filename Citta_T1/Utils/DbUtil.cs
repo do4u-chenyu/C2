@@ -166,8 +166,7 @@ namespace C2.Utils
                         {
                             while (rdr.Read())
                             {
-                                Table table = new Table(userName);
-                                table.Name = rdr.GetString(0);
+                                Table table = new Table(userName, rdr.GetString(0));
                                 tables.Add(table);
                             }
                         }
@@ -258,6 +257,46 @@ namespace C2.Utils
                 }
                 return sb.ToString();
             }
+        }
+
+        public static Dictionary<String, List<String>> GetTableCol(OraConnection conn, List<Table> tables)
+        {
+            Dictionary<String, List<String>> cols = new Dictionary<String, List<String>>();
+            String[] tableNames = new string[tables.Count];
+            for (int i = 0; i < tableNames.Length; i++)
+                tableNames[i] = tables[i].Name;
+            string sql = String.Format(@"select a.table_name, a.column_name from all_tab_columns a where table_name in ('{0}')",
+                String.Join("','", tableNames));
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                    {
+                        con.Open();
+                        using (OracleCommand comm = new OracleCommand(sql, con))
+                        {
+                            using (OracleDataReader rdr = comm.ExecuteReader())
+                            {
+                                while (rdr.Read())
+                                {
+                                    string table_name = rdr[0].ToString().Trim(), column_name = rdr[1].ToString().Trim();
+                                    if (!cols.ContainsKey(table_name))
+                                        cols.Add(table_name, new List<string>() { column_name });
+                                    else
+                                        cols[table_name].Add(column_name);
+                                }
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+                catch (Exception ex) // Better catch in case they have bad sql
+                {
+                    log.Error(ex.ToString());
+                }
+            }
+            return cols;
         }
         public static bool FillDGVWithTbSchema(DataGridView gridOutput, OraConnection conn, string tableName)
         {

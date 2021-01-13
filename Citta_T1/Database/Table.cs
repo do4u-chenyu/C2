@@ -7,13 +7,16 @@ namespace C2.Database
 {
     public class Table
     {
-        public string Name;
+        public string Name { get; }
         public bool View = false;
-        public string UserName;
+        public string UserName { get; }
+        public List<string> columns;
 
-        public Table(string userName)
+        public Table(string userName, string name, List<string> cols=null)
         {
             UserName = userName;
+            Name = name;
+            columns = cols;
         }
     }
 }
