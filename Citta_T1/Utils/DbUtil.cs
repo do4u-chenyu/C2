@@ -100,6 +100,10 @@ namespace C2.Utils
                 }
             }
         }
+        public static bool TestConn(DatabaseItem dbi)
+        {
+            return TestConn(new OraConnection(dbi));
+        }
 
         public static bool TestConn(DataItem item)
         {
