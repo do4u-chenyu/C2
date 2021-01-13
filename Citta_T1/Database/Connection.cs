@@ -4,6 +4,8 @@ using System.Text;
 using System.Windows.Forms;
 using C2.Model;
 using Oracle.ManagedDataAccess.Client;
+using Hive2;
+using C2.Utils;
 
 namespace C2.Database
 {
@@ -118,6 +120,44 @@ namespace C2.Database
                         Schema schema = new Schema(this);
                         schema.Name = rdr.GetString(0);
                         _Schemas.Add(schema);
+                    }
+                }
+            }
+        }
+    }
+
+
+    public class HiveConnection
+    {
+        private static readonly LogUtil log = LogUtil.GetInstance("HiveConnection");
+        public string Server, User, Pass, Host, Port;
+        public Connection conn;
+
+        public HiveConnection(DatabaseItem dbi)
+        {
+            this.Server = dbi.Server;
+            this.User = dbi.User;
+            this.Pass = dbi.Password;
+            this.Host = dbi.Server;
+            this.Port = dbi.Port;
+        }
+
+        public bool Connect()
+        {
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                using (var con = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                                                       this.User,this.Pass))
+                {
+                    try
+                    {
+                        con.Open();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error(HelpUtil.DbCannotBeConnectedInfo + ", ฯ๊ว้ฃบ" + ex.ToString());
+                        return false;
                     }
                 }
             }

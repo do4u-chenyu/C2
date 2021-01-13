@@ -98,8 +98,21 @@ namespace C2.Dialogs
                 HelpUtil.ShowMessageBox(HelpUtil.DbInfoIsEmptyInfo);
                 return;
             }
-
             DatabaseItem tmpDatabaseInfo = GenDatabaseInfoFormDialog();
+
+            #region Hive
+            if (String.Equals("Hive", this.databaseTypeComboBox.Text))
+            {
+                HiveConnection hiveConn = new HiveConnection(tmpDatabaseInfo);
+                if (hiveConn.Connect())
+                    HelpUtil.ShowMessageBox(HelpUtil.DbConnectSucceeded, "连接成功", MessageBoxIcon.Information);
+                else
+                    HelpUtil.ShowMessageBox(HelpUtil.DbConnectFailed, "连接失败", MessageBoxIcon.Information);
+                return;
+            }         
+            #endregion
+
+           
             //如果新旧一致，直接返回了
 
             OraConnection conn = new OraConnection(tmpDatabaseInfo);
@@ -111,16 +124,20 @@ namespace C2.Dialogs
 
         private bool InputHasEmpty()
         {
+            if (String.Equals("Hive",this.databaseTypeComboBox.Text))
+                return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
+                        string.IsNullOrEmpty(this.userTextBox.Text) || string.IsNullOrEmpty(this.passwordTextBox.Text));
+
             return (databaseTypeComboBox.SelectedIndex == -1) || string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||
                 string.IsNullOrEmpty(this.userTextBox.Text) || string.IsNullOrEmpty(this.passwordTextBox.Text);
         }
 
-        private void databaseTypeComboBox_TextChanged(object sender, EventArgs e)
+        private void DatabaseTypeComboBox_TextChanged(object sender, EventArgs e)
         {
             if (databaseTypeComboBox.SelectedItem.ToString()=="Hive")
             {
-                this.portTextBox.Text = "1000";
+                this.portTextBox.Text = "10000";
                 this.portTextBox.ForeColor = Color.Gray;
                 this.serviceTextBox.Enabled = false;
                 this.sidTextBox.Enabled = false;
@@ -128,7 +145,7 @@ namespace C2.Dialogs
         }
 
 
-        private void portTextBox_MouseUp(object sender, MouseEventArgs e)
+        private void PortTextBox_MouseUp(object sender, MouseEventArgs e)
         {
             this.portTextBox.ForeColor = Color.Black;
         }

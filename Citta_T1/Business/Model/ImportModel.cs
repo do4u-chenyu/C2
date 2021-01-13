@@ -25,6 +25,173 @@ namespace C2.Business.Model
             }
             return ImportModelInstance;
         }
+
+        #region C2业务视图导入
+        public void UnZipC2File(string fullFilePath, string userName)
+        {
+            if (!File.Exists(fullFilePath))
+                return;
+            if (HasUnZipC2File(fullFilePath, userName))
+            {
+                // 脚本、数据源存储路径
+                string dirs = Path.Combine(this.modelDir, "_datas");
+                // 修改XML文件中数据源路径
+                RenameBmd(dirs, this.modelFilePath);
+
+                // 将导入模型添加到左侧模型面板
+                MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
+                HelpUtil.ShowMessageBox("模型导入成功");
+            }
+        }
+        public void MindMapControlAddItem(string modelTitle)
+        {
+            if (Global.GetMindMapModelControl().ContainModel(modelTitle))
+                return;
+
+            Global.GetMindMapModelControl().AddMindMapModel(modelTitle);
+        }
+
+        public void RenameBmd(string dirs, string newModelFilePath)
+        {
+            Dictionary<string, string> dataSourcePath = new Dictionary<string, string>();
+            if (Directory.Exists(dirs))
+            {
+                DirectoryInfo dir0 = new DirectoryInfo(dirs);
+                FileInfo[] fsinfos0 = dir0.GetFiles();
+                foreach (FileInfo fsinfo in fsinfos0)
+                {
+                    // 建立数据源、脚本名称与路径对应字典
+                    dataSourcePath[fsinfo.Name] = fsinfo.FullName;
+                }
+            }
+
+            DirectoryInfo dir1 = new DirectoryInfo(Path.GetDirectoryName(newModelFilePath));
+            FileInfo[] fsinfos1 = dir1.GetFiles();
+            foreach (FileInfo fsinfo in fsinfos1)
+            {
+                // 建立结果文件名称与路径对应字典
+                if (!fsinfo.Name.EndsWith(".bmd"))
+                    dataSourcePath[fsinfo.Name] = fsinfo.FullName;
+            }
+            if (dataSourcePath.Count == 0)
+                return;
+
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(newModelFilePath);
+
+            XmlNode chart = xDoc.DocumentElement.SelectSingleNode("//chart");
+            XmlNode widgets = chart.SelectSingleNode("//widgets");
+            foreach (XmlNode widget in widgets.ChildNodes)
+            {
+                if (!(widget is XmlElement))
+                    continue;
+                XmlElement widget_e = (XmlElement)widget;
+                if (widget_e.Name != "widget")
+                    continue;
+
+                switch (widget_e.GetAttribute("type"))
+                {
+                    //数据源挂件
+                    case "DATASOURCE":
+                        XmlNodeList datasources = widget_e.SelectNodes("//data_item");
+                        ReWriteC2NodePath(datasources, dataSourcePath);
+                        break;
+                    default: break;
+                }
+            }
+
+            xDoc.Save(newModelFilePath);
+        }
+
+        private void ReWriteC2NodePath(XmlNodeList nodes, Dictionary<string, string> dataSourcePath)
+        {
+            foreach (XmlElement xmlNode in nodes)
+            {
+                if (xmlNode.GetAttribute("path") == null)
+                    continue;
+                string name = Path.GetFileName(xmlNode.GetAttribute("path"));
+                if (dataSourcePath.ContainsKey(name))
+                    xmlNode.SetAttribute("path", dataSourcePath[name]);
+            }
+        }
+
+        public bool HasUnZipC2File(string zipFilePath, string userName)
+        {
+            /*
+             * 是否存在同名模型文档
+             * 存在，选择覆盖或取消导入
+             */
+            bool hasUnZip = true;
+            string fileName = string.Empty;
+            string modelName = string.Empty;
+            string modelPath = string.Empty;
+            DialogResult result;
+            ZipInputStream s = null;
+            try
+            {
+                using (s = new ZipInputStream(File.OpenRead(zipFilePath)))
+                {
+                    ZipEntry theEntry;
+                    while ((theEntry = s.GetNextEntry()) != null)
+                    {
+                        if (!Path.GetFileName(theEntry.Name).EndsWith(".bmd"))
+                            continue;
+                        fileName = Path.GetFileName(theEntry.Name);
+                        modelName = Path.GetFileNameWithoutExtension(theEntry.Name);
+                        modelPath = Path.Combine(Global.WorkspaceDirectory, userName, "业务视图", modelName);
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("文件内容可能破损:" + zipFilePath);
+                return !hasUnZip;
+            }
+            finally
+            {
+                if (s != null)
+                    s.Close();
+            }
+
+
+            // 未找到bmd文件
+            if (string.IsNullOrEmpty(fileName))
+                return !hasUnZip;
+            this.modelDir = Path.Combine(Global.WorkspaceDirectory, userName, "业务视图", modelName);
+            this.modelFilePath = Path.Combine(this.modelDir, fileName);
+
+            // 是否包含同名模型文档
+            if (!IsSameMindMapTitle(modelName))
+            {
+                //解压文件   
+                Utils.ZipUtil.UnZipFile(zipFilePath,"c2");
+                return hasUnZip;
+            }
+
+            result = MessageBox.Show("模型文件:" + modelName + "已存在，是否覆盖该模型文档", "导入模型", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.Cancel)
+                return !hasUnZip;
+
+            if (Global.GetTaskBar().ContainModel(modelName))
+            {
+                MessageBox.Show("模型文件:" + modelName + "已打开，请关闭该文档并重新进行导入", "关闭模型文档");
+                return !hasUnZip;
+            }
+            // 删除原始模型文件、解压新文件                    
+            if (Directory.Exists(modelPath))
+                Directory.Delete(modelPath, true);
+            Utils.ZipUtil.UnZipFile(zipFilePath, "c2");
+            return hasUnZip;
+
+        }
+
+        public bool IsSameMindMapTitle(string modelTitle)
+        {
+            return (Global.GetMindMapModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));
+        }
+        #endregion
+
         public void ImportIaoFile(string userName)
         {
 
@@ -112,7 +279,7 @@ namespace C2.Business.Model
             if (!IsSameModelTitle(modelName))
             {
                 //解压文件   
-                Utils.ZipUtil.UnZipFile(zipFilePath);
+                Utils.ZipUtil.UnZipFile(zipFilePath,"iao");
                 return hasUnZip;
             }
 
@@ -128,7 +295,7 @@ namespace C2.Business.Model
             // 删除原始模型文件、解压新文件                    
             if (Directory.Exists(modelPath))
                 Directory.Delete(modelPath, true);
-            Utils.ZipUtil.UnZipFile(zipFilePath);
+            Utils.ZipUtil.UnZipFile(zipFilePath,"iao");
             return hasUnZip;
 
         }

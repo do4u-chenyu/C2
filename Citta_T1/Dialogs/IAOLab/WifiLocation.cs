@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C2.Controls;
+using C2.IAOLab.BaseStation;
 using C2.IAOLab.WifiMac;
 
 namespace C2.Dialogs.IAOLab
@@ -45,10 +46,11 @@ namespace C2.Dialogs.IAOLab
                   
                     break;
                 case "BaseStation":
-                   
+                    this.inputAndResult.Text = WifiMac.GetInstance().MacLocate(inputAndResult.Text);
                     break;
                 case "Wifi":
-                    this.inputAndResult.Text= WifiMac.GetInstance().MacLocate("inputAndResult.Text");
+                    this.inputAndResult.Text= BaseStation.GetInstance().BaseStationLocate(inputAndResult.Text);
+                    this.inputAndResult.Text = BaseStation.GetInstance().BaseStationLocate(inputAndResult.Text);
                     break;
                 case "Card":
                     
