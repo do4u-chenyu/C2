@@ -1,4 +1,5 @@
-﻿using C2.Core;
+﻿using C2.Business.Model;
+using C2.Core;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -44,18 +45,6 @@ namespace C2.Controls.Left
                     return true;
             }
             return false;
-        }
-        // 文档关闭后, 菜单栏可以打开,删除,重命名
-        public void EnableClosedDocumentMenu(string modelTitle)
-        {
-            foreach (ModelButton mb in this.Controls)
-                if (mb.ModelTitle == modelTitle)
-                {
-                    mb.EnableOpenDocumentMenu();
-                    mb.EnableDeleteDocumentMenu();
-                    mb.EnableRenameDocumentMenu();
-                }
-
         }
 
         public void RemoveModelButton(MindMapModelButton modelButton)
@@ -107,6 +96,19 @@ namespace C2.Controls.Left
 
         }
 
-       
+        private void AddMindMapButton_Click(object sender, System.EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog
+            {
+                Filter = "业务视图文件(*.c2)|*.c2",
+                Title = "导入模型",
+                AddExtension = true
+            };
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                string fullFilePath = fd.FileName;
+                ImportModel.GetInstance().UnZipC2File(fullFilePath,Global.GetMainForm().UserName);
+            }
+        }
     }
 }

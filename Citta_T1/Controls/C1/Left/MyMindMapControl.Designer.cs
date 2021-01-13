@@ -73,6 +73,7 @@
             this.AddMindMapButton.TabIndex = 2;
             this.toolTip1.SetToolTip(this.AddMindMapButton, "导入业务视图");
             this.AddMindMapButton.UseVisualStyleBackColor = false;
+            this.AddMindMapButton.Click += new System.EventHandler(this.AddMindMapButton_Click);
             // 
             // MindMapPaintPanel
             // 
