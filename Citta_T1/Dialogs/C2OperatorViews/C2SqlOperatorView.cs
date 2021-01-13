@@ -42,6 +42,7 @@ namespace C2.Dialogs.C2OperatorViews
 
             ToolStripMenuItem previewTableMenuItem = new ToolStripMenuItem("预览表");
             contextMenuStrip.Items.Add(previewTableMenuItem);
+            previewTableMenuItem.ToolTipText = "仅预览数据表前一千行数据";
 
             ToolStripMenuItem copyTableNameMenuItem = new ToolStripMenuItem("复制表名");
             copyTableNameMenuItem.Click += CopyTableNameMenuItem_Click;

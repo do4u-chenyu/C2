@@ -207,6 +207,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnView.TabIndex = 18;
             this.bnView.Text = "预览表";
             this.bnView.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.bnView, "仅预览当前用户下的所有数据表");
             this.bnView.UseVisualStyleBackColor = true;
             this.bnView.Click += new System.EventHandler(this.BnView_Click);
             // 
