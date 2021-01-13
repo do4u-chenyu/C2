@@ -26,8 +26,7 @@ namespace C2.Utils.Tests
             }
             Console.WriteLine("成功连接数据库");
             Dictionary<String, List<String>> cols = DbUtil.GetTableCol(conn, tables);
-            Console.WriteLine(cols.Count);
-            Assert.IsTrue(cols.Count > 0);
+            Assert.IsTrue(cols.Keys.Count == 2);
         }
     }
 }
