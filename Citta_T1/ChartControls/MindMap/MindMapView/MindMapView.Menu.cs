@@ -348,6 +348,7 @@ namespace C2.Controls.MapViews
                 MenuCreateChart.Image = Properties.Resources.getChart;              
                 MenuCreateChart.Text = Lang._("CreateChart");  // 生成图表 
                 MenuCreateChart.Tag = dataItem;
+                MenuCreateChart.ToolTipText = "仅支持数据源前一百行数据生成图表";
                 MenuCreateChart.Click += MenuCreateDataChart_Click;
 
                 MenuDelete.Image = Properties.Resources.deleteWidget;
@@ -497,6 +498,7 @@ namespace C2.Controls.MapViews
                 MenuCreateChart.Image = Properties.Resources.getChart;
                 MenuCreateChart.Text = Lang._("CreateChart");  // 生成图表 
                 MenuCreateChart.Tag = dataItem;
+                MenuCreateChart.ToolTipText = "仅支持数据源前一百行数据生成图表";
                 MenuCreateChart.Click += MenuCreateDataChart_Click;
 
                 MenuDelete.Image = Properties.Resources.deleteWidget;
