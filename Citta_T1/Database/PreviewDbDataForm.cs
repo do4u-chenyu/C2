@@ -1,4 +1,5 @@
 ﻿using C2.Core;
+using C2.Model;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,35 @@ namespace C2.Database
         public int MaxNum { get { return GetIntFromTextBox(); } }
 
         public MaxNumChangedEventHandler MaxNumChanged;
+        private DatabaseItem databaseItem;
+        private OraConnection conn;
 
-        public PreviewDbDataForm()
+        public PreviewDbDataForm(DatabaseItem dbi)
         {
             InitializeComponent();
+            this.databaseItem = dbi;
+            this.conn = new OraConnection(databaseItem);
             this.dataGridView.DoubleBuffered(true);
+            this.MaxNumChanged += new MaxNumChangedEventHandler(OnDataGridViewMaxNumChanged);
+        }
+        public bool Flush(Table table)
+        {
+            if (!DbUtil.TestConn(new OraConnection(databaseItem)))
+                return false;
+            try
+            {
+                DbUtil.FillDGVWithTbContent(dataGridView, conn, table, MaxNum);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+        private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
+        {
+            PreviewDbDataForm pddf = (sender as PreviewDbDataForm);
+            DbUtil.FillDGVWithTbContent(dataGridView, new OraConnection(databaseItem), databaseItem.DataTable, MaxNum);
         }
         private int GetIntFromTextBox()
         {

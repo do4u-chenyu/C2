@@ -41,20 +41,14 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm();
-            previewDbDataForm.MaxNumChanged += new MaxNumChangedEventHandler(OnDataGridViewMaxNumChanged);
-            if (!DbUtil.TestConn(new OraConnection(TableItem)))
+            PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm(TableItem);
+            if (!DbUtil.TestConn(TableItem))
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
-            DbUtil.FillDGVWithTbContent(previewDbDataForm.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable, previewDbDataForm.MaxNum);
-            previewDbDataForm.Show();
-        }
-        private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
-        {
-            PreviewDbDataForm pddf = (sender as PreviewDbDataForm);
-            DbUtil.FillDGVWithTbContent(pddf.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable, pddf.MaxNum);
+            if (TableItem != null && previewDbDataForm.Flush(this.TableItem.DataTable))
+                previewDbDataForm.Show();
         }
 
         #endregion

@@ -424,6 +424,7 @@ namespace C2.Controls.Left
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
+
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
             UpdateFrameCombo(users, databaseInfo.User);
@@ -431,7 +432,6 @@ namespace C2.Controls.Left
             //刷新数据表
             List<Table> tables = DbUtil.GetTablesByUser(conn, databaseInfo.User);
             UpdateTables(tables, databaseInfo);
-
         }
 
         private void UpdateFrameCombo(List<string> users,string loginUser)

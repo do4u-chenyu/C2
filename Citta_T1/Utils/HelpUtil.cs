@@ -53,7 +53,16 @@ namespace C2.Utils
 
         public static string TableFilterHelpInfo = "快速筛选:支持表名,列名,业务常用字段";
 
-
+        //------------------------------------------IAOLab提示信息-------------------------------------------------//
+        public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01
+批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+        public static string BankToolHelpInfo = @"单次输入格式：621085718896476
+批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+        public static string GPSTransformHelpInfo = @"单次输入格式：04a1518006c2
+批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+        public static string TimeAndIPTransformHelpInfo = @"单次输入格式：04a1518006c2
+批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+        
         /// <summary>
         /// 默认为Information,除非有非常严重的错误,否则一般尽量用温和的提示信息.
         /// MessageBoxIcon.Hand 
