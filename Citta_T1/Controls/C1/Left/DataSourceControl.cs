@@ -421,6 +421,15 @@ namespace C2.Controls.Left
             //Hive 连接数据库
             if (databaseInfo.Type == DatabaseType.Hive)
             {
+                HiveConnection hiveConn = new HiveConnection(databaseInfo);
+                //刷新架构
+                List<string> baseNames = hiveConn.GetHiveDatabases();
+                if (baseNames.Count == 0)
+                    return;
+                UpdateFrameCombo(baseNames, baseNames[0]);
+                //刷新数据表
+                List<Table> hiveTables = hiveConn.GetTablesByDB(baseNames[0]);
+                UpdateTables(hiveTables, databaseInfo);
                 return;
             }
             //连接数据库

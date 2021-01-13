@@ -146,12 +146,12 @@ namespace C2.Database
         {
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                using (var con = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                using (var conn = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
                                                        this.User,this.Pass))
                 {
                     try
                     {
-                        con.Open();
+                        conn.Open();
                         return true;
                     }
                     catch (Exception ex)
@@ -169,7 +169,7 @@ namespace C2.Database
             {
                 try
                 {
-                    using (Connection con = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                    using (Connection conn = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
                                                        this.User, this.Pass))
                     {
                         var cursor = conn.GetCursor();
@@ -197,38 +197,38 @@ namespace C2.Database
             return databases;
         }
 
-        public static List<Table> GetTablesByDB(OraConnection conn, string DBName)
+        public List<Table> GetTablesByDB(string DBName)
         {
             List<Table> tables = new List<Table>();
-            //using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-            //{
-            //    try
-            //    {
-            //        using (OracleConnection con = new OracleConnection(conn.ConnectionString))
-            //        {
-            //            con.Open();
-            //            string sql = String.Format(@"
-            //                select table_name
-            //                from all_tables
-            //                where owner='{0}'
-            //                order by table_name",
-            //                  DbHelper.Sanitise(DBName.ToUpper()));
-            //            OracleCommand comm = new OracleCommand(sql, con);
-            //            using (OracleDataReader rdr = comm.ExecuteReader())
-            //            {
-            //                while (rdr.Read())
-            //                {
-            //                    Table table = new Table(DBName, rdr.GetString(0));
-            //                    tables.Add(table);
-            //                }
-            //            }
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        log.Error(HelpUtil.DbCannotBeConnectedInfo + ", ÏêÇé£º" + ex.ToString());
-            //    }
-            //}
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (Connection con = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                                                       this.User, this.Pass))
+                    {
+                        var cursor = conn.GetCursor();
+                        string sql = String.Format(@"select databases");
+                        cursor.Execute("use "+ DBName);
+                        cursor.Execute("show tables ");
+                        var list = cursor.FetchMany(int.MaxValue);
+                       
+                      /*  using (OracleDataReader rdr = comm.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                Table table = new Table(DBName, rdr.GetString(0));
+                                tables.Add(table);
+                            }
+                        }
+                      */
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", ÏêÇé£º" + ex.ToString());
+                }
+            }
             return tables;
         }
 
