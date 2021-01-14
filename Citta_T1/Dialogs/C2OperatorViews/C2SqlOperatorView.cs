@@ -14,7 +14,7 @@ namespace C2.Dialogs.C2OperatorViews
     public partial class C2SqlOperatorView : C2BaseOperatorView
     {
         private List<DatabaseItem> databaseItems;
-        private ContextMenuStrip contextMenuStrip; 
+        private ContextMenuStrip contextMenuStrip;
         private DatabaseItem SelectDatabaseItem
         {
             get
@@ -22,6 +22,16 @@ namespace C2.Dialogs.C2OperatorViews
                 int idx = this.comboBoxConnection.SelectedIndex;
                 if (idx >= 0 && idx < databaseItems.Count)
                     return databaseItems[idx];
+                else
+                    return null;
+            }
+        }
+        private Table SelectTable
+        {
+            get
+            {
+                if (tableListBox.SelectedItem != null)
+                    return new Table(SelectDatabaseItem.User, tableListBox.SelectedItem.ToString());
                 else
                     return null;
             }
@@ -41,6 +51,7 @@ namespace C2.Dialogs.C2OperatorViews
             contextMenuStrip = new ContextMenuStrip(this.components);
 
             ToolStripMenuItem previewTableMenuItem = new ToolStripMenuItem("预览表");
+            previewTableMenuItem.Click += PreviewTableMenuItem_Click;
             contextMenuStrip.Items.Add(previewTableMenuItem);
             previewTableMenuItem.ToolTipText = "仅预览数据表前一千行数据";
 
@@ -50,6 +61,19 @@ namespace C2.Dialogs.C2OperatorViews
 
             ToolStripMenuItem codeSnippetMenuItem = new ToolStripMenuItem("一键查询");
             contextMenuStrip.Items.Add(codeSnippetMenuItem);
+        }
+
+        private void PreviewTableMenuItem_Click(object sender, EventArgs e)
+        {
+            PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm(SelectDatabaseItem);
+
+            if (!DbUtil.TestConn(SelectDatabaseItem))
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                return;
+            }
+            if (SelectTable != null && previewDbDataForm.Flush(SelectTable))
+                previewDbDataForm.Show();
         }
 
         private void CopyTableNameMenuItem_Click(object sender, EventArgs e)
@@ -202,6 +226,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.operatorWidget.Option.Clear();
             this.operatorWidget.Option.SetOption("sqlText", textEditorControl1.Text);
             this.operatorWidget.Option.SetOption("connection", SelectDatabaseItem.AllDatabaseInfo);
+            this.operatorWidget.Option.SetOption("maxNum", maxNumTextBox.Visible ? maxNumTextBox.Text : "inf");
         }
 
         //右键打开菜单
@@ -254,6 +279,27 @@ namespace C2.Dialogs.C2OperatorViews
                 return notReady;
             }
             return !notReady;
+        }
+
+        private void partialRadioButton_Click(object sender, EventArgs e)
+        {
+            this.maxNumTextBox.Visible = true;
+        }
+
+        private void allRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            this.maxNumTextBox.Visible = false;
+            
+        }
+        protected override void ConfirmButton_Click(object sender, EventArgs e)
+        {
+            int maxNum;
+            if (maxNumTextBox.Visible && (String.IsNullOrEmpty(maxNumTextBox.Text) || !int.TryParse(maxNumTextBox.Text, out maxNum) || maxNum <= 0))
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidMaxNum);
+                return;
+            }
+            base.ConfirmButton_Click(sender, e);
         }
     }
 }

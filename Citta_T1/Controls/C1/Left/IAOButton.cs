@@ -7,7 +7,7 @@ using C2.Model;
 using C2.Utils;
 using System;
 using System.Windows.Forms;
-
+using System.Drawing;
 namespace C2.Controls.Left
 {
     public partial class IAOButton : UserControl
@@ -67,45 +67,39 @@ namespace C2.Controls.Left
             baseForm0 = new WifiLocation();
             baseForm0.Text = "基站查询";
             baseForm0.InputLable = "请在下方输入基站号码";
-            baseForm0.Tip = @"单次输入格式：04a1518006c2
-批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+            baseForm0.Tip = HelpUtil.BaseStationHelpInfo;
         }
         private void BankToolForm()
         {
             baseForm0 = new WifiLocation();
             baseForm0.Text = "银行卡归属地查询";
             baseForm0.InputLable = "请在下方输入银行卡";
-            baseForm0.Tip = @"单次输入格式：621085718896476
-批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+            baseForm0.Tip = HelpUtil.BankToolHelpInfo;
         }
         private void GPSTransformForm()
         {
             baseForm0 = new WifiLocation();
+            baseForm0.ReLayoutForm();
             baseForm0.Text = "经纬度转换";
             baseForm0.InputLable = "请在下方输入经纬度";
-            baseForm0.Tip = @"单次输入格式：04a1518006c2
-批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+            baseForm0.Tip = HelpUtil.GPSTransformHelpInfo;
+
         }
         private void TimeAndIPTransformForm()
         {
             baseForm0 = new WifiLocation();
-            baseForm0.Text = "基站查询";
+            baseForm0.Text = "时间";
             baseForm0.InputLable = "请在下方输入基站号码";
-            baseForm0.Tip = @"单次输入格式：04a1518006c2
-批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+            baseForm0.Tip = HelpUtil.TimeAndIPTransformHelpInfo;
         }
         #endregion
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            try
-            {
+            if (baseForm1 == null)
                 baseForm0.ShowDialog();
-            }
-            catch
-            {
+            else
                 baseForm1.ShowDialog();
-            }
         }
     }
 }

@@ -19,24 +19,16 @@ namespace C2.IAOLab.WifiMac
         }
         public String MacLocate(String input)
         {
-                string macList = input;
-                string[] macArr = macList.Split('\n');
-                int j = macArr.Length+1;
-                for (int i = 0; i < j; i++)
-                {
-                    string mac = macArr[i];
-                    string location = GetInfo("http://218.94.117.234:8484/Test01/search.do",mac);
-                    location = string.Join("",location.Split('{', '}','"'));
-                    StringBuilder macLocation = new StringBuilder();
-                    string m_macLocation = mac + "\t" + location + "\n";
-                    macLocation.Append(m_macLocation);
-                    string s_macLocation = macLocation.ToString();
-                    return s_macLocation;
-                }
-                return null;
-           
+            string mac = input;
+            string location = GetInfo("http://218.94.117.234:8484/Test01/search.do",mac,"mac");
+            location = string.Join("", location.Split('"'));
+            StringBuilder macLocationStringBuilder = new StringBuilder();
+            string macLocation = mac + "\t" + location + "\n";
+            macLocationStringBuilder.Append(macLocation);
+            string macLocationString = macLocationStringBuilder.ToString();
+            return macLocationString;
         }
-        public string GetInfo(string URL,string mac)
+        public string GetInfo(string URL,string mac,string type)
         {
 
             string strURL = URL;
@@ -49,7 +41,7 @@ namespace C2.IAOLab.WifiMac
 
             //设置参数，并进行URL编码 
 
-            string paraUrlCoded = "mac="+ mac;//System.Web.HttpUtility.UrlEncode(jsonParas);   
+            string paraUrlCoded = type+"="+ mac;//System.Web.HttpUtility.UrlEncode(jsonParas);   
 
             byte[] payload;
             //将Json字符串转化为字节  
@@ -87,8 +79,20 @@ namespace C2.IAOLab.WifiMac
             StreamReader sRead = new StreamReader(s);
             string postContent = sRead.ReadToEnd();
             sRead.Close();
-            Console.WriteLine(postContent);//返回Json数据
-            return (postContent);
+            //Console.WriteLine(postContent);//返回Json数据
+            
+            postContent = postContent.Replace("address", "地址").Replace("latitude", "纬度").Replace("longitude", "经度").Replace("state", "查询结果").Replace("ok", "成功").Replace("error", "失败");
+            string[] postContentArry = postContent.Split('{', '}', ',');
+            if (postContentArry.Length >3) 
+            {
+                string CHpostContent = postContentArry[2] + "," + postContentArry[6] + "\t" + postContentArry[1] + "\t" + postContentArry[5] + "\t" + postContentArry[4];
+                return CHpostContent;
+            }
+            else
+            {
+                string CHpostContent = postContentArry[1];
+                return CHpostContent;
+            }
         }
 
     }

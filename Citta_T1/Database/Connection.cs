@@ -146,12 +146,12 @@ namespace C2.Database
         {
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                using (var con = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                using (var conn = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
                                                        this.User,this.Pass))
                 {
                     try
                     {
-                        con.Open();
+                        conn.Open();
                         return true;
                     }
                     catch (Exception ex)
@@ -162,5 +162,70 @@ namespace C2.Database
                 }
             }
         }
+        public List<string> GetHiveDatabases()
+        {
+            List<string> databases = new List<string>();
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (Connection conn = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                                                       this.User, this.Pass))
+                    {
+                        var cursor = conn.GetCursor();
+                        string sql = String.Format("show databases");
+                        cursor.Execute(sql);
+                        var list = cursor.FetchMany(int.MaxValue);
+                        foreach (var item in list)
+                        {
+                           var dict= item as IDictionary<string, object>;
+                            foreach ( var key in dict.Keys)
+                            {
+                                databases.Add(dict[key].ToString());
+                            }
+                        }                    
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", ÏêÇé£º" + ex.ToString());
+                }
+            }
+            return databases;
+        }
+
+        public List<Table> GetTablesByDB(string DBName)
+        {
+            List<Table> tables = new List<Table>();
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (Connection conn = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                                                       this.User, this.Pass))
+                    {
+                        var cursor = conn.GetCursor();
+                        cursor.Execute("use "+ DBName);
+                        cursor.Execute("show tables");
+                        var list = cursor.FetchMany(int.MaxValue);
+                        foreach (var item in list)
+                        {
+                            var dict = item as IDictionary<string, object>;
+                            foreach (var key in dict.Keys)
+                            {
+                                Table table = new Table(DBName, dict[key].ToString());
+                                tables.Add(table);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", ÏêÇé£º" + ex.ToString());
+                }
+            }
+            return tables;
+        }
+
     }
 }

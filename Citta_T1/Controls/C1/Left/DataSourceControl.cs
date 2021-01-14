@@ -22,6 +22,7 @@ namespace C2.Controls.Left
         private Point startPoint;
         private Point linkPoint;
         private Point tablePoint;
+        private Dictionary<string, List<string>> relateTableCol;
 
         // 这个控件属性不需要在属性面板显示和序列化,不加这个标签,在引用这个控件的Designer中,会序列化它
         // 然后就是各种奇葩问题
@@ -271,8 +272,8 @@ namespace C2.Controls.Left
 
         #region 外部数据库布局
         public void GenLinkButton(DatabaseItem dbinfo, bool updateFrameAndTables = false)
-        {
-            LinkButton linkButton = new LinkButton(dbinfo);
+        {               
+            LinkButton linkButton = dbinfo.Type==DatabaseType.Hive ? CreateHiveButton(dbinfo): new LinkButton(dbinfo);
             SelectLinkButton = linkButton;
             GenLinkButton(linkButton);
             if (updateFrameAndTables)
@@ -378,9 +379,21 @@ namespace C2.Controls.Left
         private void SchemaComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //根据架构改变数据表
-            OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
-            List<Table> tables = DbUtil.GetTablesByUser(conn, this.schemaComboBox.Text);
+            List<Table> tables;
+            if (SelectLinkButton.DatabaseItem.Type == DatabaseType.Hive)
+            {
+                HiveConnection hiveConn = new HiveConnection(SelectLinkButton.DatabaseItem);
+                //刷新数据表
+                tables = hiveConn.GetTablesByDB(this.schemaComboBox.Text);
+            }
+            else
+            {
+                OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
+                tables = DbUtil.GetTablesByUser(conn, this.schemaComboBox.Text);
+            }
+        
             UpdateTables(tables, SelectLinkButton.DatabaseItem);
+            this.optComboBox.Text = "表名";
         }
 
         private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
@@ -392,7 +405,19 @@ namespace C2.Controls.Left
         private void TableFilterTextBox_TextChanged(object sender, EventArgs e)
         {
             this.tableFilterTextBox.ForeColor = SystemColors.WindowText;
-            ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(tableFilterTextBox.Text.ToUpper())));
+            if (this.optComboBox.Text.ToString() == String.Empty)
+            {
+                ReLayoutTableFrame(RelateTableButtons);
+                return;
+            }
+            switch (this.optComboBox.Text.ToString())
+            {
+                case "表名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(tableFilterTextBox.Text.ToUpper())));
+                    break;
+                case "字段名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Contains(tableFilterTextBox.Text.ToUpper())));
+                    break;
+            }
+
         }
         #endregion
 
@@ -409,6 +434,21 @@ namespace C2.Controls.Left
              * 1. 优化函数名称，首先这个名字取得不怎么好
              * [x]. 优化代码逻辑，一旦出现连接不上的问题依然会查两次数据库，等待时间很长，每次连接的时候最好测试一下连接
              */
+
+            //Hive 连接数据库
+            if (databaseInfo.Type == DatabaseType.Hive)
+            {
+                HiveConnection hiveConn = new HiveConnection(databaseInfo);
+                //刷新架构
+                List<string> baseNames = hiveConn.GetHiveDatabases();
+                if (baseNames.Count == 0)
+                    return;
+                UpdateFrameCombo(baseNames, baseNames[0]);
+                //刷新数据表
+                List<Table> hiveTables = hiveConn.GetTablesByDB(baseNames[0]);
+                UpdateTables(hiveTables, databaseInfo);
+                return;
+            }
             //连接数据库
             OraConnection conn = new OraConnection(databaseInfo);
             if (!DbUtil.TestConn(conn))
@@ -416,6 +456,7 @@ namespace C2.Controls.Left
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
+
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
             UpdateFrameCombo(users, databaseInfo.User);
@@ -423,7 +464,6 @@ namespace C2.Controls.Left
             //刷新数据表
             List<Table> tables = DbUtil.GetTablesByUser(conn, databaseInfo.User);
             UpdateTables(tables, databaseInfo);
-
         }
 
         private void UpdateFrameCombo(List<string> users,string loginUser)
@@ -431,11 +471,14 @@ namespace C2.Controls.Left
             this.schemaComboBox.Items.Clear();
             //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空
             RelateTableButtons.Clear();
-
             if (users == null)
                 return;
 
             this.schemaComboBox.Text = users.Find( x => x.Equals(loginUser.ToUpper())) == null ? "选择架构" : loginUser.ToUpper();
+            // hive加载框架
+            if (string.Equals("选择架构", this.schemaComboBox.Text))
+                this.schemaComboBox.Text = users.Contains(loginUser)? loginUser:"选择架构";
+
             users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo)
@@ -443,10 +486,17 @@ namespace C2.Controls.Left
             //先清空上一次的数据表内容
             RelateTableButtons.Clear();
             this.tabelPanel.Controls.Clear();
-
+            OraConnection conn = new OraConnection(databaseInfo);
+            relateTableCol = DbUtil.GetTableCol( conn ,tables);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            List<string> tmp = new List<string>();
             foreach (Table table in tables.Take(Math.Min(300,tables.Count)))
             {
+                foreach ( List<string> kvp in relateTableCol.Values)
+                {
+                    tmp.AddRange(kvp);
+                }
+                table.Columns = tmp;
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
                 tmpDatabaseItem.DataTable = table;
                 tmpDatabaseItem.Group = this.schemaComboBox.Text;
@@ -454,9 +504,12 @@ namespace C2.Controls.Left
                 GenTableButton(tableButton);//生成数据表按钮
             }
 
-            RelateTableButtons.Clear();
             foreach (TableButton tb in this.tabelPanel.Controls)
+            {
                 RelateTableButtons.Add(tb);
+            }
+
+                
         }
         public List<DatabaseItem> GetAllExternalData()
         {
@@ -469,5 +522,13 @@ namespace C2.Controls.Left
 
             return allExternalData;
         }
+        #region Hive相关控件
+        private LinkButton CreateHiveButton(DatabaseItem dbinfo)
+        {
+            LinkButton linkButton = new LinkButton(dbinfo);
+            linkButton.LeftControlImage = global::C2.Properties.Resources.delete;
+            return linkButton;
+        }
+        #endregion
     }
 }

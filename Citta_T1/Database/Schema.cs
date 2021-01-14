@@ -47,8 +47,8 @@ namespace C2.Database
                                 while (rdr.Read())
                                 {
                                     //Table table = new Table(this);
-                                    Table table = new Table(this.Name);
-                                    table.Name = rdr.GetString(0);
+                                    string table_name = rdr.GetString(0);
+                                    Table table = new Table(this.Name, table_name);
                                     table.View = rdr.GetString(1) == "VIEW";
                                     _Tables.Add(table);
                                 }

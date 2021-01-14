@@ -6,21 +6,31 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using Hive2;
 
 namespace C2.Utils
 {
     public static class DbUtil
     {
         private static readonly LogUtil log = LogUtil.GetInstance("DbUtil");
-        public static bool ExecuteOracleSQL(OraConnection conn, string sqlText, string outPutPath, int pageSize=100000)
+        public static bool ExecuteOracleSQL(OraConnection conn, string sqlText, string outPutPath, int maxReturnNum=-1, int pageSize=100000)
         {
             int pageIndex = 0;
             bool returnHeader = true;
+            int totalRetuenNum = 0, subMaxNum = 0;
             using (StreamWriter sw = new StreamWriter(outPutPath, false))
             {
-                while (true)
+                while (maxReturnNum == -1 ? true : totalRetuenNum < maxReturnNum)
                 {
-                    string result = ExecuteOracleQL_Page(conn, sqlText, pageSize, pageIndex, returnHeader);
+                    if (pageSize * pageIndex < maxReturnNum && pageSize * (pageIndex + 1) > maxReturnNum)
+                        subMaxNum = maxReturnNum - pageIndex * pageSize;
+                    else
+                        subMaxNum = pageSize;
+                    QueryResult contentAndNum = ExecuteOracleQL_Page(conn, sqlText, pageSize, pageIndex, subMaxNum, returnHeader);
+
+                    string result = contentAndNum.content;
+                    totalRetuenNum  += contentAndNum.returnNum;
+
                     if (returnHeader)
                     {
                         if (String.IsNullOrEmpty(result))
@@ -36,12 +46,14 @@ namespace C2.Utils
             }
             return true;
         }
-        private static string ExecuteOracleQL_Page(OraConnection conn, string sqlText, int pageSize, int pageIndex, bool returnHeader)
+        private static QueryResult ExecuteOracleQL_Page(OraConnection conn, string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
         {
             /*
              * pageIndex start from 0.
              */
+            QueryResult result;
             StringBuilder sb = new StringBuilder(1024 * 16);
+            int returnNum = 0;
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 try
@@ -65,11 +77,12 @@ namespace C2.Utils
                                 sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
                             }
 
-                            while (rdr.Read())
+                            while (rdr.Read() && returnNum < maxNum)
                             {
                                 for (int i = 0; i < rdr.FieldCount - 1; i++)
                                     sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
                                 sb.Append(rdr[rdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
+                                returnNum += 1;
                             }
                         }
                     }
@@ -78,8 +91,13 @@ namespace C2.Utils
                 {
                     log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
                 }
+                finally
+                {
+                    result.content = sb.ToString();
+                    result.returnNum = returnNum;
+                }
             }
-            return sb.ToString();
+            return result;
         }
         public static bool TestConn(OraConnection conn)
         {
@@ -99,6 +117,10 @@ namespace C2.Utils
                     }
                 }
             }
+        }
+        public static bool TestConn(DatabaseItem dbi)
+        {
+            return TestConn(new OraConnection(dbi));
         }
 
         public static bool TestConn(DataItem item)
@@ -166,8 +188,7 @@ namespace C2.Utils
                         {
                             while (rdr.Read())
                             {
-                                Table table = new Table(userName);
-                                table.Name = rdr.GetString(0);
+                                Table table = new Table(userName, rdr.GetString(0));
                                 tables.Add(table);
                             }
                         }
@@ -259,6 +280,46 @@ namespace C2.Utils
                 return sb.ToString();
             }
         }
+
+        public static Dictionary<String, List<String>> GetTableCol(OraConnection conn, List<Table> tables)
+        {
+            Dictionary<String, List<String>> cols = new Dictionary<String, List<String>>();
+            String[] tableNames = new string[tables.Count];
+            for (int i = 0; i < tableNames.Length; i++)
+                tableNames[i] = tables[i].Name;
+            string sql = String.Format(@"select a.table_name, a.column_name from all_tab_columns a where table_name in ('{0}')",
+                String.Join("','", tableNames));
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (OracleConnection con = new OracleConnection(conn.ConnectionString))
+                    {
+                        con.Open();
+                        using (OracleCommand comm = new OracleCommand(sql, con))
+                        {
+                            using (OracleDataReader rdr = comm.ExecuteReader())
+                            {
+                                while (rdr.Read())
+                                {
+                                    string table_name = rdr[0].ToString().Trim(), column_name = rdr[1].ToString().Trim();
+                                    if (!cols.ContainsKey(table_name))
+                                        cols.Add(table_name, new List<string>() { column_name });
+                                    else
+                                        cols[table_name].Add(column_name);
+                                }
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+                catch (Exception ex) // Better catch in case they have bad sql
+                {
+                    log.Error(ex.ToString());
+                }
+            }
+            return cols;
+        }
         public static bool FillDGVWithTbSchema(DataGridView gridOutput, OraConnection conn, string tableName)
         {
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
@@ -311,6 +372,12 @@ namespace C2.Utils
             ret = FileUtil.FormatDatas(ret, maxNum);
             FileUtil.FillTable(gridOutput, ret, maxNum);
             return true;
+        }
+
+        struct QueryResult
+        {
+            public string content;
+            public int returnNum;
         }
     }
 }

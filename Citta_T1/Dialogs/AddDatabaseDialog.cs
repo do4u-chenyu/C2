@@ -80,7 +80,21 @@ namespace C2.Dialogs
             {
                 HelpUtil.ShowMessageBox("该连接已存在","已存在",MessageBoxIcon.Warning);
                 return false;
-            } 
+            }
+
+            #region Hive
+            if (String.Equals("Hive", this.databaseTypeComboBox.Text))
+            {
+                HiveConnection hiveConn = new HiveConnection(tmpDatabaseInfo);
+                if (!hiveConn.Connect())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return false;
+                }
+                DatabaseInfo = tmpDatabaseInfo;
+                return base.OnOKButtonClick();
+            }
+            #endregion
 
             OraConnection conn = new OraConnection(tmpDatabaseInfo);
             if (!DbUtil.TestConn(conn))
@@ -135,13 +149,14 @@ namespace C2.Dialogs
 
         private void DatabaseTypeComboBox_TextChanged(object sender, EventArgs e)
         {
-            if (databaseTypeComboBox.SelectedItem.ToString()=="Hive")
-            {
-                this.portTextBox.Text = "10000";
-                this.portTextBox.ForeColor = Color.Gray;
-                this.serviceTextBox.Enabled = false;
-                this.sidTextBox.Enabled = false;
-            }
+            if (databaseTypeComboBox.SelectedItem == null)
+                return;
+            bool notHive = databaseTypeComboBox.SelectedItem.ToString() != "Hive";
+            this.portTextBox.Text = notHive ? "1521" : "10000";
+            this.portTextBox.ForeColor = notHive ? Color.Black : Color.Gray;
+            this.serviceTextBox.Enabled = notHive;
+            this.sidTextBox.Enabled = notHive;
+
         }
 
 
