@@ -20,7 +20,15 @@ namespace C2.IAOLab.Transform
             return instance;
         }
 
-       
+        public void CoordinateConversion(string lcoation,string type)
+        {
+            //switch(type)
+            //{ 
+            //}
+        }
+
+        #region 6种坐标转换方法
+
         private List<double> GCJConvertToBD(double GCJLAT, double GCJLON)
         {
             double z = Math.Sqrt(Math.Pow(GCJLON, 2) + Math.Pow(GCJLAT, 2)) + 0.00002 * Math.Sin(GCJLAT * xPi);
@@ -199,5 +207,6 @@ namespace C2.IAOLab.Transform
             List<double> gcj = WGSConvertToGCJ(wgsLat, wgsLon);
             return GCJConvertToWGS(gcj[0], gcj[1]);
         }
+        #endregion
     }
 }
