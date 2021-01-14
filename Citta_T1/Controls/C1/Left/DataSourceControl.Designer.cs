@@ -36,6 +36,7 @@
             this.addLocalConnectLabel = new System.Windows.Forms.Label();
             this.addConnectLabel = new System.Windows.Forms.Label();
             this.externalFrame = new System.Windows.Forms.Panel();
+            this.optComboBox = new System.Windows.Forms.ComboBox();
             this.tableFilterTextBox = new System.Windows.Forms.TextBox();
             this.tabelPanel = new System.Windows.Forms.Panel();
             this.schemaComboBox = new System.Windows.Forms.ComboBox();
@@ -45,7 +46,6 @@
             this.linkLabel = new System.Windows.Forms.Label();
             this.dataAddLabelPanel = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.optComboBox = new System.Windows.Forms.ComboBox();
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
             this.dataAddLabelPanel.SuspendLayout();
@@ -149,6 +149,18 @@
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
             // 
+            // optComboBox
+            // 
+            this.optComboBox.FormattingEnabled = true;
+            this.optComboBox.Items.AddRange(new object[] {
+            "表名",
+            "字段名"});
+            this.optComboBox.Location = new System.Drawing.Point(10, 285);
+            this.optComboBox.Name = "optComboBox";
+            this.optComboBox.Size = new System.Drawing.Size(63, 20);
+            this.optComboBox.TabIndex = 8;
+            this.optComboBox.Text = "表名";
+            // 
             // tableFilterTextBox
             // 
             this.tableFilterTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -235,17 +247,6 @@
             this.dataAddLabelPanel.Name = "dataAddLabelPanel";
             this.dataAddLabelPanel.Size = new System.Drawing.Size(179, 622);
             this.dataAddLabelPanel.TabIndex = 9;
-            // 
-            // optComboBox
-            // 
-            this.optComboBox.FormattingEnabled = true;
-            this.optComboBox.Items.AddRange(new object[] {
-            "表名",
-            "字段名"});
-            this.optComboBox.Location = new System.Drawing.Point(10, 285);
-            this.optComboBox.Name = "optComboBox";
-            this.optComboBox.Size = new System.Drawing.Size(63, 20);
-            this.optComboBox.TabIndex = 8;
             // 
             // DataSourceControl
             // 
