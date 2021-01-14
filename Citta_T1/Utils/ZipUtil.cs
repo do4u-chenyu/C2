@@ -1,6 +1,7 @@
 ﻿using C2.Core;
 using ICSharpCode.SharpZipLib.Checksum;
 using ICSharpCode.SharpZipLib.Zip;
+using System;
 using System.IO;
 
 namespace C2.Utils
@@ -10,15 +11,19 @@ namespace C2.Utils
         /// <summary>
         /// 压缩文件
         /// </summary>
-        public static void CreateZip(string srcFilePath, string dstZipFilePath)
+        public static void CreateZip(string srcFilePath, string dstZipFilePath, string password="")
         {
-            (new FastZip()).CreateZip(dstZipFilePath, srcFilePath, true, ".*\\.(?!md).*$");
+            FastZip fz = new FastZip
+            {
+                Password = password
+            };
+            fz.CreateZip(dstZipFilePath, srcFilePath, true, ".*\\.(?!md).*$");
         }
 
         /// <summary>
         /// 解压文件
         /// </summary>
-        public static void UnZipFile(string zipFilePath, string type)
+        public static bool UnZipFile(string zipFilePath, string type, string password="")
         {
             string xmlEnd = type == "iao" ? ".xml" : ".bmd";
             string directory = type == "iao" ? "模型市场" : "业务视图";
@@ -26,13 +31,12 @@ namespace C2.Utils
             if (!File.Exists(zipFilePath))
             {
                 HelpUtil.ShowMessageBox("未能找到: " + zipFilePath); ;
-                return;
+                return false;
             }
             // 获取模型文件名称
             string modelTitle = string.Empty;
             using (ZipInputStream s = new ZipInputStream(File.OpenRead(zipFilePath)))
             {
-
                 ZipEntry theEntry;
                 while ((theEntry = s.GetNextEntry()) != null)
                 {
@@ -48,10 +52,23 @@ namespace C2.Utils
             string targetPath = Path.Combine(workPath, modelTitle);
             Directory.CreateDirectory(workPath);
 
-            (new FastZip()).ExtractZip(zipFilePath, targetPath, "");
+            FastZip fz = new FastZip()
+            {
+                Password = password
+            };
+            try
+            {
+                fz.ExtractZip(zipFilePath, targetPath, "");
+            }
+            catch(Exception e)
+            {
+                HelpUtil.ShowMessageBox(e.Message);
+                return false;
+            }
             Crc32 crc32 = new Crc32();
             crc32.Update(new byte[] { 0x00, 0x01, 0x11 });
 
+            return true;
         }
     }
 }

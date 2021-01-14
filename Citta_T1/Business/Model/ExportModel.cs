@@ -36,7 +36,7 @@ namespace C2.Business.Model
         }
 
         #region 导出业务视图
-        public bool ExportC2Model(string oldFullPath, string exportFullPath)
+        public bool ExportC2Model(string oldFullPath, string exportFullPath, string password="")
         {
             this.XmlFullPath = oldFullPath;
             this.NewModelName = Path.GetFileNameWithoutExtension(exportFullPath);
@@ -48,7 +48,7 @@ namespace C2.Business.Model
             //生成压缩包
             try
             {
-                ZipUtil.CreateZip(TmpModelPath, exportFullPath);
+                ZipUtil.CreateZip(TmpModelPath, exportFullPath, password);
             }
             catch(Exception e)
             {

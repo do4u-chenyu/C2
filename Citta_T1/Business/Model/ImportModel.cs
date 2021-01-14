@@ -27,20 +27,19 @@ namespace C2.Business.Model
         }
 
         #region C2业务视图导入
-        public bool UnZipC2File(string fullFilePath, string userName)
+        public bool UnZipC2File(string fullFilePath, string userName, string password="")
         {
             if (!File.Exists(fullFilePath))
                 return false;
-            if (HasUnZipC2File(fullFilePath, userName))
-            {
-                // 脚本、数据源存储路径
-                string dirs = Path.Combine(this.modelDir, "_datas");
-                // 修改XML文件中数据源路径
-                RenameBmd(dirs, this.modelFilePath);
+            if (!HasUnZipC2File(fullFilePath, userName, password))
+                return false;
+            // 脚本、数据源存储路径
+            string dirs = Path.Combine(this.modelDir, "_datas");
+            // 修改XML文件中数据源路径
+            RenameBmd(dirs, this.modelFilePath);
 
-                // 将导入模型添加到左侧模型面板
-                MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
-            }
+            // 将导入模型添加到左侧模型面板
+            MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
             return true;
         }
         public void MindMapControlAddItem(string modelTitle)
@@ -140,7 +139,7 @@ namespace C2.Business.Model
             }
         }
 
-        public bool HasUnZipC2File(string zipFilePath, string userName)
+        public bool HasUnZipC2File(string zipFilePath, string userName, string password)
         {
             /*
              * 是否存在同名模型文档
@@ -190,8 +189,8 @@ namespace C2.Business.Model
             if (!IsSameMindMapTitle(modelName))
             {
                 //解压文件   
-                Utils.ZipUtil.UnZipFile(zipFilePath,"c2");
-                return hasUnZip;
+                if(!Utils.ZipUtil.UnZipFile(zipFilePath, "c2", password))
+                    return !hasUnZip;
             }
 
             result = MessageBox.Show("模型文件:" + modelName + "已存在，是否覆盖该模型文档", "导入模型", MessageBoxButtons.OKCancel);
@@ -206,9 +205,10 @@ namespace C2.Business.Model
             // 删除原始模型文件、解压新文件                    
             if (Directory.Exists(modelPath))
                 Directory.Delete(modelPath, true);
-            Utils.ZipUtil.UnZipFile(zipFilePath, "c2");
-            return hasUnZip;
+            if(!Utils.ZipUtil.UnZipFile(zipFilePath, "c2", password))
+                return !hasUnZip;
 
+            return hasUnZip;
         }
 
         public bool IsSameMindMapTitle(string modelTitle)
