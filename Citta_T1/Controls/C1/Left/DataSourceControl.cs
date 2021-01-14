@@ -382,6 +382,7 @@ namespace C2.Controls.Left
             OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
             List<Table> tables = DbUtil.GetTablesByUser(conn, this.schemaComboBox.Text);
             UpdateTables(tables, SelectLinkButton.DatabaseItem);
+            this.optComboBox.Text = "表名";
         }
 
         private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
@@ -453,7 +454,6 @@ namespace C2.Controls.Left
             this.schemaComboBox.Items.Clear();
             //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空
             RelateTableButtons.Clear();
-
             if (users == null)
                 return;
 
@@ -468,24 +468,27 @@ namespace C2.Controls.Left
             OraConnection conn = new OraConnection(databaseInfo);
             relateTableCol = DbUtil.GetTableCol( conn ,tables);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            List<string> temp = new List<string>();
+            List<string> tmp = new List<string>();
             foreach (Table table in tables.Take(Math.Min(300,tables.Count)))
             {
                 foreach ( List<string> kvp in relateTableCol.Values)
                 {
-                    temp.AddRange(kvp);
+                    tmp.AddRange(kvp);
                 }
-                table.Columns = temp;
+                table.Columns = tmp;
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
                 tmpDatabaseItem.DataTable = table;
                 tmpDatabaseItem.Group = this.schemaComboBox.Text;
                 TableButton tableButton = new TableButton(tmpDatabaseItem);
                 GenTableButton(tableButton);//生成数据表按钮
-            }         
+            }
 
-            RelateTableButtons.Clear();
             foreach (TableButton tb in this.tabelPanel.Controls)
+            {
                 RelateTableButtons.Add(tb);
+            }
+
+                
         }
         public List<DatabaseItem> GetAllExternalData()
         {
