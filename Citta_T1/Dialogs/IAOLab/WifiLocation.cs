@@ -38,9 +38,6 @@ namespace C2.Dialogs.IAOLab
         public Point InputLableLaction { set { this.inputLabel.Location = value; }get { return this.inputLabel.Location;  } }
 
         public string FormType { get { return this.formType; } set { this.formType = value; } }
-        private void WifiLocation_Load(object sender, EventArgs e)
-        {
-        }
 
         private void toolTip1_Popup(object sender, PopupEventArgs e)
         {

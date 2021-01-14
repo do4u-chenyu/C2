@@ -394,6 +394,7 @@ namespace C2.Controls.Left
         
             UpdateTables(tables, SelectLinkButton.DatabaseItem);
             this.optComboBox.Text = "表名";
+            this.tableFilterTextBox.Text = "";
         }
 
         private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
@@ -530,5 +531,11 @@ namespace C2.Controls.Left
             return linkButton;
         }
         #endregion
+
+        private void optComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.tableFilterTextBox.Text = "";
+            ReLayoutTableFrame(RelateTableButtons);
+        }
     }
 }

@@ -66,7 +66,7 @@ namespace C2.Controls.Left
             // 使用`DataObject`对象来传参数，更加自由
             DataObject dragDropData = new DataObject();
             dragDropData.SetData("Type", ElementType.DataSource);
-            dragDropData.SetData("DataType", DatabaseType.Oracle);   //本地数据还是外部数据
+            dragDropData.SetData("DataType", TableItem.Type);   //本地数据还是外部数据
             dragDropData.SetData("TableInfo", TableItem);            // 数据表信息
             dragDropData.SetData("Text", TableItem.DataTable.Name);  // 数据表名
 

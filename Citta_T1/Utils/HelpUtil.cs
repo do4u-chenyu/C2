@@ -56,13 +56,13 @@ namespace C2.Utils
 
         #region IAO基站批量查询
         public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01
-批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
-        public static string BankToolHelpInfo = @"单次输入格式：621085718896476
-批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
+        public static string BankToolHelpInfo = @"单次输入格式：6210857100018896476
+批量查询格式：多个银行卡号间用换行分隔，最大支持1000条";
         public static string GPSTransformHelpInfo = @"单次输入格式：04a1518006c2
-批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
         public static string TimeAndIPTransformHelpInfo = @"单次输入格式：04a1518006c2
-批量查询格式：多个基站号码间用\n换行，最多支持1000条同时查询";
+批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
         #endregion
         /// <summary>
         /// 默认为Information,除非有非常严重的错误,否则一般尽量用温和的提示信息.

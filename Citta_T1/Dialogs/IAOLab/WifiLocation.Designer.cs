@@ -57,7 +57,7 @@
             this.inputAndResult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputAndResult.Name = "inputAndResult";
             this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult.Size = new System.Drawing.Size(776, 251);
+            this.inputAndResult.Size = new System.Drawing.Size(776, 252);
             this.inputAndResult.TabIndex = 0;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
@@ -101,7 +101,7 @@
             this.panel1.Controls.Add(this.confirm);
             this.panel1.Controls.Add(this.cancle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 365);
+            this.panel1.Location = new System.Drawing.Point(0, 363);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 55);
@@ -122,9 +122,10 @@
             this.tipLable.Location = new System.Drawing.Point(25, 59);
             this.tipLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.tipLable.Name = "tipLable";
-            this.tipLable.Size = new System.Drawing.Size(409, 30);
+            this.tipLable.Size = new System.Drawing.Size(534, 30);
             this.tipLable.TabIndex = 7;
-            this.tipLable.Text = "单次输入格式：04a1518006c2\r\n批量查询格式：多个mac间用\\n换行，最多支1000条同时查询";
+            this.tipLable.Text = "单次输入格式：04a1518006c2 或04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最大" +
+    "支持1000条";
             this.tipLable.Click += new System.EventHandler(this.tipLable_Click);
             // 
             // sixTransform
@@ -207,7 +208,7 @@
             // bd_wgs
             // 
             this.bd_wgs.AutoSize = true;
-            this.bd_wgs.Location = new System.Drawing.Point(4, 9);
+            this.bd_wgs.Location = new System.Drawing.Point(5, 8);
             this.bd_wgs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bd_wgs.Name = "bd_wgs";
             this.bd_wgs.Size = new System.Drawing.Size(196, 19);
@@ -259,7 +260,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 420);
+            this.ClientSize = new System.Drawing.Size(800, 418);
             this.Controls.Add(this.methodPanel);
             this.Controls.Add(this.sixTransform);
             this.Controls.Add(this.tipLable);
@@ -267,12 +268,12 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.inputLabel);
             this.Controls.Add(this.inputAndResult);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(818, 467);
-            this.MinimumSize = new System.Drawing.Size(818, 467);
+            this.MaximumSize = new System.Drawing.Size(818, 465);
+            this.MinimumSize = new System.Drawing.Size(818, 465);
             this.Name = "WifiLocation";
             this.Text = "Wifi查询";
-            this.Load += new System.EventHandler(this.WifiLocation_Load);
             this.panel1.ResumeLayout(false);
             this.sixTransform.ResumeLayout(false);
             this.sixTransform.PerformLayout();

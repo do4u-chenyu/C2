@@ -90,7 +90,7 @@ namespace C2.IAOLab.WifiMac
             }
             else
             {
-                string CHpostContent = postContentArry[1];
+                string CHpostContent = "查询失败";
                 return CHpostContent;
             }
         }

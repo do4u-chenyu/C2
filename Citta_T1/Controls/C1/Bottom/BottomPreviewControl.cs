@@ -122,19 +122,24 @@ namespace C2.Controls.Bottom
         { 
             switch (item.DataType)
             {
-                case DatabaseType.Oracle:
-                    PreViewDataByOracle(item.DBItem);
-                    break;
+                case DatabaseType.Oracle:                 
                 case DatabaseType.Hive:
+                    PreViewDataByDatabase(item.DBItem);
+                    break;
                 default:
                     break;
             }
         }
-        private void PreViewDataByOracle(DatabaseItem dbItem, int maxNumOfFile = 100)
+        private void PreViewDataByDatabase(DatabaseItem dbItem, int maxNumOfFile = 100)
         {
             List<List<string>> datas = new List<List<string>> { };
-            List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewOracleTable(dbItem, maxNumOfFile).Split(OpUtil.DefaultLineSeparator));
-
+            List<string> rows;
+            if (dbItem.Type == DatabaseType.Oracle)
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewOracleTable(dbItem, maxNumOfFile).Split(OpUtil.DefaultLineSeparator));
+            else if (dbItem.Type == DatabaseType.Hive)
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewHiveTable(dbItem, maxNumOfFile).Split(OpUtil.DefaultLineSeparator));
+            else
+                rows = new List<string>();
             for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
                 datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(OpUtil.DefaultFieldSeparator)));                                                 // TODO 没考虑到分隔符
             FileUtil.FillTable(this.dataGridView, datas, maxNumOfFile);
