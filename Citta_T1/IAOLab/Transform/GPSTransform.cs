@@ -45,7 +45,7 @@ namespace C2.IAOLab.Transform
             double z = Math.Pow((ALON - BLON), 2) * 12321 + Math.Pow((ALAT - BLAT), 2) * 8574;
             return Math.Sqrt(z);
         }
-        public List<double> ZuobiaoTransform(double x, double y)
+        public List<double> XYTransform(double x, double y)
         {
 
             double absX = Math.Sqrt(Math.Abs(x));
@@ -79,7 +79,7 @@ namespace C2.IAOLab.Transform
             double a = 6378245.0;
             double ee = 0.00669342162296594323;
             // 下面公式对么？log log
-            List<double> latLon = ZuobiaoTransform(log - 105.0, lat - 35.0);
+            List<double> latLon = XYTransform(log - 105.0, lat - 35.0);
 
             double radLat = lat / 180.0 * pi;
             double magic = 1 - ee * (Math.Sin(radLat) * 2);
@@ -102,7 +102,7 @@ namespace C2.IAOLab.Transform
                 return result;
             }
         }
-        private List<double> Easy_GCJ_WGS(double gcjLat, double gcjLon)
+        private List<double> EasyGCJWGS(double gcjLat, double gcjLon)
         {
             if (OutOfChina(gcjLat, gcjLon))
             {
