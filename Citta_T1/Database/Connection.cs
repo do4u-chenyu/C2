@@ -141,7 +141,9 @@ namespace C2.Database
             this.Host = dbi.Server;
             this.Port = dbi.Port;
         }
-
+        public HiveConnection(DataItem item) : this(item.DBItem)
+        {
+        }
         public bool Connect()
         {
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
@@ -226,6 +228,43 @@ namespace C2.Database
             }
             return tables;
         }
+
+        public  string GetHiveTbContentString(Table table, int maxNum) 
+        {
+            StringBuilder sb = new StringBuilder(1024 * 16);
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (Connection conn = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                                                       this.User, this.Pass))
+                    {
+
+                        var cursor = conn.GetCursor();
+                        cursor.Execute("use " + table.UserName);
+                        string sql = string.Format(@"select * from {0} limit {1}", table.Name, maxNum);
+                        cursor.Execute(sql);
+                        var list = cursor.FetchMany(int.MaxValue);
+                        foreach (var item in list)
+                        {
+                            var dict = item as IDictionary<string, object>;
+                            foreach (var key in dict.Keys)
+                            {
+                                
+                            }
+                        }
+                    
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
+                }
+                return sb.ToString();
+            }
+        }
+
+
 
     }
 }

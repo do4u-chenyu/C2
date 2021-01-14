@@ -76,6 +76,21 @@ namespace C2.Core
             }
             return dataPreviewDict[key].PreviewFileContent;
         }
+
+        public string GetCachePreviewHiveTable(DatabaseItem databaseItem, int mNumOfLine = 100, bool isForceRead = false)
+        {
+            string key = databaseItem.AllDatabaseInfo;
+            if (!HitCache(key) || isForceRead)
+            {
+                HiveConnection conn = new HiveConnection(databaseItem);
+                Table table = databaseItem.DataTable;
+                string tbContent = conn.GetHiveTbContentString(table, mNumOfLine);
+                string firstLine = GetFirstLine(tbContent);
+                dataPreviewDict[key] = new FileCache(tbContent, firstLine);
+            }
+            return dataPreviewDict[key].PreviewFileContent;
+        }
+
         private string GetCachePreviewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = String.Empty;
