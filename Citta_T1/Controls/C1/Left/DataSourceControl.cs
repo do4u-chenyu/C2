@@ -379,9 +379,22 @@ namespace C2.Controls.Left
         private void SchemaComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //根据架构改变数据表
-            OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
-            List<Table> tables = DbUtil.GetTablesByUser(conn, this.schemaComboBox.Text);
+            List<Table> tables;
+            if (SelectLinkButton.DatabaseItem.Type == DatabaseType.Hive)
+            {
+                HiveConnection hiveConn = new HiveConnection(SelectLinkButton.DatabaseItem);
+                //刷新数据表
+                tables = hiveConn.GetTablesByDB(this.schemaComboBox.Text);
+            }
+            else
+            {
+                OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
+                tables = DbUtil.GetTablesByUser(conn, this.schemaComboBox.Text);
+            }
+        
             UpdateTables(tables, SelectLinkButton.DatabaseItem);
+            this.optComboBox.Text = "表名";
+            this.tableFilterTextBox.Text = "";
         }
 
         private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
@@ -393,14 +406,19 @@ namespace C2.Controls.Left
         private void TableFilterTextBox_TextChanged(object sender, EventArgs e)
         {
             this.tableFilterTextBox.ForeColor = SystemColors.WindowText;
-            if (this.optComboBox.Text.ToString() == "表名")
+            if (this.optComboBox.Text.ToString() == String.Empty)
             {
-                ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(tableFilterTextBox.Text.ToUpper())));
+                ReLayoutTableFrame(RelateTableButtons);
+                return;
             }
-            else
+            switch (this.optComboBox.Text.ToString())
             {
-                ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Contains(tableFilterTextBox.Text.ToUpper())));
+                case "表名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(tableFilterTextBox.Text.ToUpper())));
+                    break;
+                case "字段名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Contains(tableFilterTextBox.Text.ToUpper())));
+                    break;
             }
+
         }
         #endregion
 
@@ -454,11 +472,14 @@ namespace C2.Controls.Left
             this.schemaComboBox.Items.Clear();
             //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空
             RelateTableButtons.Clear();
-
             if (users == null)
                 return;
 
             this.schemaComboBox.Text = users.Find( x => x.Equals(loginUser.ToUpper())) == null ? "选择架构" : loginUser.ToUpper();
+            // hive加载框架
+            if (string.Equals("选择架构", this.schemaComboBox.Text))
+                this.schemaComboBox.Text = users.Contains(loginUser)? loginUser:"选择架构";
+
             users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo)
@@ -469,24 +490,27 @@ namespace C2.Controls.Left
             OraConnection conn = new OraConnection(databaseInfo);
             relateTableCol = DbUtil.GetTableCol( conn ,tables);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            List<string> temp = new List<string>();
+            List<string> tmp = new List<string>();
             foreach (Table table in tables.Take(Math.Min(300,tables.Count)))
             {
                 foreach ( List<string> kvp in relateTableCol.Values)
                 {
-                    temp.AddRange(kvp);
+                    tmp.AddRange(kvp);
                 }
-                table.Columns = temp;
+                table.Columns = tmp;
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
                 tmpDatabaseItem.DataTable = table;
                 tmpDatabaseItem.Group = this.schemaComboBox.Text;
                 TableButton tableButton = new TableButton(tmpDatabaseItem);
                 GenTableButton(tableButton);//生成数据表按钮
-            }         
+            }
 
-            RelateTableButtons.Clear();
             foreach (TableButton tb in this.tabelPanel.Controls)
+            {
                 RelateTableButtons.Add(tb);
+            }
+
+                
         }
         public List<DatabaseItem> GetAllExternalData()
         {
@@ -507,5 +531,11 @@ namespace C2.Controls.Left
             return linkButton;
         }
         #endregion
+
+        private void optComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.tableFilterTextBox.Text = "";
+            ReLayoutTableFrame(RelateTableButtons);
+        }
     }
 }

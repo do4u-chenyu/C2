@@ -22,12 +22,11 @@ namespace C2.IAOLab.WifiMac
             string mac = input;
             string location = GetInfo("http://218.94.117.234:8484/Test01/search.do",mac,"mac");
             location = string.Join("", location.Split('"'));
-            StringBuilder macLocation = new StringBuilder();
-            string m_macLocation = mac + "\t" + location + "\n";
-            macLocation.Append(m_macLocation);
-            string s_macLocation = macLocation.ToString();
-            return s_macLocation;
-
+            StringBuilder macLocationStringBuilder = new StringBuilder();
+            string macLocation = mac + "\t" + location + "\n";
+            macLocationStringBuilder.Append(macLocation);
+            string macLocationString = macLocationStringBuilder.ToString();
+            return macLocationString;
         }
         public string GetInfo(string URL,string mac,string type)
         {
@@ -80,7 +79,7 @@ namespace C2.IAOLab.WifiMac
             StreamReader sRead = new StreamReader(s);
             string postContent = sRead.ReadToEnd();
             sRead.Close();
-            Console.WriteLine(postContent);//返回Json数据
+            //Console.WriteLine(postContent);//返回Json数据
             
             postContent = postContent.Replace("address", "地址").Replace("latitude", "纬度").Replace("longitude", "经度").Replace("state", "查询结果").Replace("ok", "成功").Replace("error", "失败");
             string[] postContentArry = postContent.Split('{', '}', ',');
@@ -91,7 +90,7 @@ namespace C2.IAOLab.WifiMac
             }
             else
             {
-                string CHpostContent = postContentArry[1];
+                string CHpostContent = "查询失败";
                 return CHpostContent;
             }
         }

@@ -798,6 +798,12 @@
     <Compile Include="Dialogs\WidgetChart\WidgetChartDialog.Designer.cs">
       <DependentUpon>WidgetChartDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ZipDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ZipDialog.Designer.cs">
+      <DependentUpon>ZipDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CanvasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1598,9 +1604,6 @@
     <EmbeddedResource Include="Dialogs\IAOLab\ApkTool.resx">
       <DependentUpon>ApkTool.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\IAOLab\WIFILocation.resx">
-      <DependentUpon>WifiLocation.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InputDialog.resx">
       <DependentUpon>InputDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1647,6 +1650,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WidgetChart\WidgetChartDialog.resx">
       <DependentUpon>WidgetChartDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ZipDialog.resx">
+      <DependentUpon>ZipDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CanvasForm.resx">
       <DependentUpon>CanvasForm.cs</DependentUpon>

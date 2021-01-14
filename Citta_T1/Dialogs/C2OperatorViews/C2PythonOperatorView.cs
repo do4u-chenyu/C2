@@ -126,7 +126,10 @@ namespace C2.Dialogs.C2OperatorViews
                 separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? OpUtil.DefaultFieldSeparator : this.otherSeparatorText.Text[0];
             OpUtil.Encoding encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
             if (!File.Exists(path))
-                File.Create(path);
+            {
+                FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+                fs.Close();
+            }
 
             operatorWidget.ResultItem = new DataItem(path, name, separator, encoding, JudgeFileExtType(path));
             operatorWidget.ResultItem.ResultDataType = DataItem.ResultType.SingleOp;

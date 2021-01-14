@@ -61,12 +61,15 @@ namespace C2.Controls.MapViews
             //除了未配置状态，其余情况下全部重新运行
             if (opw.Status != OpStatus.Null)
             {
-                string connString;
-                string sqlText;
+                string connString, sqlText, maxNumString;
+                int inputMaxNum;
+                int maxNum = -1;
                 if (!opw.Option.OptionDict.TryGetValue("sqlText", out sqlText) || !opw.Option.OptionDict.TryGetValue("connection", out connString))
                     return;
+                if (opw.Option.OptionDict.TryGetValue("maxNum", out maxNumString) && int.TryParse(maxNumString, out inputMaxNum) && inputMaxNum > 0)
+                    maxNum = inputMaxNum;
                 OraConnection conn = new OraConnection(new DatabaseItem(connString));
-                bool isSuccess = DbUtil.ExecuteOracleSQL(conn, sqlText, opw.ResultItem.FilePath);
+                bool isSuccess = DbUtil.ExecuteOracleSQL(conn, sqlText, opw.ResultItem.FilePath, maxNum);
                 string runMessage = isSuccess ? HelpUtil.SQLOpExecuteSucceeded : HelpUtil.SQLOpExecuteFailed;
                 opw.Status = isSuccess ? OpStatus.Done : OpStatus.Warn;
                 HelpUtil.ShowMessageBox(runMessage, "运行"); // 这个对话框还是挺丑的.后面要优化

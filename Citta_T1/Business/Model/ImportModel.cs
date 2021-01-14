@@ -27,21 +27,20 @@ namespace C2.Business.Model
         }
 
         #region C2业务视图导入
-        public void UnZipC2File(string fullFilePath, string userName)
+        public bool UnZipC2File(string fullFilePath, string userName, string password="")
         {
             if (!File.Exists(fullFilePath))
-                return;
-            if (HasUnZipC2File(fullFilePath, userName))
-            {
-                // 脚本、数据源存储路径
-                string dirs = Path.Combine(this.modelDir, "_datas");
-                // 修改XML文件中数据源路径
-                RenameBmd(dirs, this.modelFilePath);
+                return false;
+            if (!HasUnZipC2File(fullFilePath, userName, password))
+                return false;
+            // 脚本、数据源存储路径
+            string dirs = Path.Combine(this.modelDir, "_datas");
+            // 修改XML文件中数据源路径
+            RenameBmd(dirs, this.modelFilePath);
 
-                // 将导入模型添加到左侧模型面板
-                MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
-                HelpUtil.ShowMessageBox("模型导入成功");
-            }
+            // 将导入模型添加到左侧模型面板
+            MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
+            return true;
         }
         public void MindMapControlAddItem(string modelTitle)
         {
@@ -79,26 +78,51 @@ namespace C2.Business.Model
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(newModelFilePath);
 
-            XmlNode chart = xDoc.DocumentElement.SelectSingleNode("//chart");
-            XmlNode widgets = chart.SelectSingleNode("//widgets");
-            foreach (XmlNode widget in widgets.ChildNodes)
+            XmlNode chart = xDoc.DocumentElement.SelectSingleNode("//chart");//仅拷贝业务拓展视图相关数据
+            XmlNodeList widgets = chart.SelectNodes("//widget");  //每个节点都有一个widgets
+
+            foreach (XmlNode widget in widgets)
             {
-                if (!(widget is XmlElement))
-                    continue;
                 XmlElement widget_e = (XmlElement)widget;
                 if (widget_e.Name != "widget")
                     continue;
 
-                switch (widget_e.GetAttribute("type"))
+                XmlNodeList datas = widget_e.SelectNodes("//data_item|//chart_item|//attach_item|//result_item");
+                ReWriteC2NodePath(datas, dataSourcePath);
+
+                XmlNodeList opItems = widget_e.SelectNodes("op_items/op_item");
+                foreach (XmlElement opItem in opItems)
                 {
-                    //数据源挂件
-                    case "DATASOURCE":
-                        XmlNodeList datasources = widget_e.SelectNodes("//data_item");
-                        ReWriteC2NodePath(datasources, dataSourcePath);
-                        break;
-                    default: break;
+                    switch (opItem.SelectSingleNode("subtype").InnerText)
+                    {
+                        case "CustomOperator":
+                            XmlNodeList optionNode = opItem.SelectNodes("option");
+                            if (optionNode == null)
+                                continue;
+                            ReWriteNodePath(optionNode, dataSourcePath);
+                            break;
+                        case "PythonOperator":
+                            XmlNode optionNode2 = opItem.SelectSingleNode("option");
+                            if (optionNode2 == null)
+                                continue;
+                            XmlNode oppNode = optionNode2.SelectSingleNode("outputParamPath");
+                            ReWriteNodePath(oppNode, dataSourcePath);
+                            XmlNode bcNode = optionNode2.SelectSingleNode("browseChosen");
+                            ReWriteNodePath(bcNode, dataSourcePath);
+                            XmlNode ppNode = optionNode2.SelectSingleNode("pyFullPath");
+                            ReWriteNodePath(ppNode, dataSourcePath);
+                            XmlNode cmdNode = optionNode2.SelectSingleNode("cmd");
+                            ReWriteCmdNode(cmdNode, dataSourcePath);
+                            XmlNode pyParamNode = optionNode2.SelectSingleNode("pyParam");
+                            ReWriteCmdNode(pyParamNode, dataSourcePath);
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
             }
+
 
             xDoc.Save(newModelFilePath);
         }
@@ -115,7 +139,7 @@ namespace C2.Business.Model
             }
         }
 
-        public bool HasUnZipC2File(string zipFilePath, string userName)
+        public bool HasUnZipC2File(string zipFilePath, string userName, string password)
         {
             /*
              * 是否存在同名模型文档
@@ -165,8 +189,8 @@ namespace C2.Business.Model
             if (!IsSameMindMapTitle(modelName))
             {
                 //解压文件   
-                Utils.ZipUtil.UnZipFile(zipFilePath,"c2");
-                return hasUnZip;
+                if(!Utils.ZipUtil.UnZipFile(zipFilePath, "c2", password))
+                    return !hasUnZip;
             }
 
             result = MessageBox.Show("模型文件:" + modelName + "已存在，是否覆盖该模型文档", "导入模型", MessageBoxButtons.OKCancel);
@@ -181,9 +205,10 @@ namespace C2.Business.Model
             // 删除原始模型文件、解压新文件                    
             if (Directory.Exists(modelPath))
                 Directory.Delete(modelPath, true);
-            Utils.ZipUtil.UnZipFile(zipFilePath, "c2");
-            return hasUnZip;
+            if(!Utils.ZipUtil.UnZipFile(zipFilePath, "c2", password))
+                return !hasUnZip;
 
+            return hasUnZip;
         }
 
         public bool IsSameMindMapTitle(string modelTitle)

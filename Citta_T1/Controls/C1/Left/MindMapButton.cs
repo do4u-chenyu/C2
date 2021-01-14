@@ -1,5 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Core;
+using C2.Dialogs;
 using C2.Utils;
 using System;
 using System.IO;
@@ -158,15 +159,13 @@ namespace C2.Controls.Left
                 return;
             }
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.AddExtension = true;
-            saveFileDialog1.Filter = "业务视图文件(*.c2)|*.c2";
-            saveFileDialog1.Title = "导出业务视图";
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            ZipDialog zipDialog = new ZipDialog(true);
+            if (zipDialog.ShowDialog() == DialogResult.OK)
             {
-                string exportFullPath = saveFileDialog1.FileName;
-                HelpUtil.ShowMessageBox("模型导出成功,存储路径：" + exportFullPath);
-                C2.Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath);
+                string exportFullPath = zipDialog.ModelPath;
+                string password = zipDialog.Password;
+                if(C2.Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath, password))
+                    HelpUtil.ShowMessageBox("模型导出成功,存储路径：" + exportFullPath);
             }
         }
 

@@ -19,7 +19,7 @@ namespace C2.Controls.Left
             InitializeComponent();
             txtButton.Name = ffp;
             txtButton.Text = ffp;
-            this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
+            //this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
             this.ContextMenuStrip = contextMenuStrip1;
             switch (ffp)
             {
@@ -54,7 +54,7 @@ namespace C2.Controls.Left
                     TimeAndIPTransformForm();
                     break;
             }
-            if (baseForm0!= null)
+            if (baseForm0 != null)
                 baseForm0.FormType = ffp;
         }
         #region 定义6种弹窗
@@ -96,14 +96,20 @@ namespace C2.Controls.Left
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            try
-            {
+            OpenForm();
+        }
+
+        private void txtButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && e.Clicks == 2)
+                OpenForm();
+        }
+        private void OpenForm()
+        {
+            if (baseForm1 == null)
                 baseForm0.ShowDialog();
-            }
-            catch
-            {
+            else
                 baseForm1.ShowDialog();
-            }
         }
     }
 }

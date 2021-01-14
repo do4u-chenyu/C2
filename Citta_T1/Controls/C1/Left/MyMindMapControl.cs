@@ -1,5 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Core;
+using C2.Dialogs;
+using C2.Utils;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -98,16 +100,13 @@ namespace C2.Controls.Left
 
         private void AddMindMapButton_Click(object sender, System.EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog
+            ZipDialog zipDialog = new ZipDialog(false);
+            if (zipDialog.ShowDialog() == DialogResult.OK)
             {
-                Filter = "业务视图文件(*.c2)|*.c2",
-                Title = "导入模型",
-                AddExtension = true
-            };
-            if (fd.ShowDialog() == DialogResult.OK)
-            {
-                string fullFilePath = fd.FileName;
-                ImportModel.GetInstance().UnZipC2File(fullFilePath,Global.GetMainForm().UserName);
+                string fullFilePath = zipDialog.ModelPath;
+                string password = zipDialog.Password;
+                if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
+                    HelpUtil.ShowMessageBox("模型导入成功");
             }
         }
     }
