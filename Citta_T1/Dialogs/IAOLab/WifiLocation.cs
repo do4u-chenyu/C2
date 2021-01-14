@@ -127,5 +127,17 @@ namespace C2.Dialogs.IAOLab
         {
 
         }
+
+        private void ComputeDistance_MouseClick(object sender, MouseEventArgs e)
+        {
+            EnableChange(false);
+        }
+
+        private void XYTtransform_MouseClick(object sender, MouseEventArgs e)
+        {
+            EnableChange(true);
+        }
+        private void EnableChange(bool enable)
+        { }
     }
 }
