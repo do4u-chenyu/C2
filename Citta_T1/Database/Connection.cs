@@ -232,6 +232,8 @@ namespace C2.Database
         public  string GetHiveTbContentString(Table table, int maxNum) 
         {
             StringBuilder sb = new StringBuilder(1024 * 16);
+       
+            
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 try
@@ -245,15 +247,26 @@ namespace C2.Database
                         string sql = string.Format(@"select * from {0} limit {1}", table.Name, maxNum);
                         cursor.Execute(sql);
                         var list = cursor.FetchMany(int.MaxValue);
+                        string headers;
+                        if (list.Count > 0)
+                        {
+                            // Ìí¼Ó±íÍ·
+                            headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
+                            sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
+                        }
+
                         foreach (var item in list)
                         {
                             var dict = item as IDictionary<string, object>;
+                            string tmp = string.Empty;
+
                             foreach (var key in dict.Keys)
                             {
-                                
+                                tmp += dict[key].ToString() + OpUtil.DefaultFieldSeparator;
                             }
+                            sb.Append(tmp.TrimEnd(OpUtil.DefaultFieldSeparator)).Append(OpUtil.DefaultLineSeparator);
                         }
-                    
+
                     }
                 }
                 catch (Exception ex)
