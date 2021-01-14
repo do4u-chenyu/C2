@@ -50,7 +50,7 @@ namespace C2.Dialogs.IAOLab
         {
 
         }
-        private void Confirm_Click(object sender, EventArgs e)
+        private void Search_Click(object sender, EventArgs e)
         {
             switch (FormType)
             {

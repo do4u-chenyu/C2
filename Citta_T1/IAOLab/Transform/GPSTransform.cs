@@ -7,11 +7,20 @@ using System.Threading.Tasks;
 
 namespace C2.IAOLab.Transform
 {
-    public class Transform
+    public class GPSTransform
     {
         private double pi = 3.14159265358979324;
         private double xPi = 3.14159265358979324 * 3000.0 / 180.0;
         private double earthR = 6371000;
+        private static GPSTransform instance;
+        public static GPSTransform GetInstance()
+        {
+            if (instance == null)
+                instance = new GPSTransform();
+            return instance;
+        }
+
+       
         private List<double> GCJConvertToBD(double GCJLAT, double GCJLON)
         {
             double z = Math.Sqrt(Math.Pow(GCJLON, 2) + Math.Pow(GCJLAT, 2)) + 0.00002 * Math.Sin(GCJLAT * xPi);

@@ -83,7 +83,7 @@
             this.confirm.TabIndex = 3;
             this.confirm.Text = "查询";
             this.confirm.UseVisualStyleBackColor = true;
-            this.confirm.Click += new System.EventHandler(this.Confirm_Click);
+            this.confirm.Click += new System.EventHandler(this.Search_Click);
             // 
             // cancle
             // 
