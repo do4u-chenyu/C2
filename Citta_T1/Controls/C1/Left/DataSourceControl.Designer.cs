@@ -160,6 +160,7 @@
             this.optComboBox.Size = new System.Drawing.Size(63, 20);
             this.optComboBox.TabIndex = 8;
             this.optComboBox.Text = "表名";
+            this.optComboBox.SelectedIndexChanged += new System.EventHandler(this.optComboBox_SelectedIndexChanged);
             // 
             // tableFilterTextBox
             // 
