@@ -151,13 +151,12 @@ namespace C2.Dialogs
         {
             if (databaseTypeComboBox.SelectedItem == null)
                 return;
-            if (databaseTypeComboBox.SelectedItem.ToString()=="Hive")
-            {
-                this.portTextBox.Text = "10000";
-                this.portTextBox.ForeColor = Color.Gray;
-                this.serviceTextBox.Enabled = false;
-                this.sidTextBox.Enabled = false;
-            }
+            bool notHive = databaseTypeComboBox.SelectedItem.ToString() != "Hive";
+            this.portTextBox.Text = notHive ? "1521" : "10000";
+            this.portTextBox.ForeColor = notHive ? Color.Black : Color.Gray;
+            this.serviceTextBox.Enabled = notHive;
+            this.sidTextBox.Enabled = notHive;
+
         }
 
 

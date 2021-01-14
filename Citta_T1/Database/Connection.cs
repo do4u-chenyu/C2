@@ -173,7 +173,7 @@ namespace C2.Database
                                                        this.User, this.Pass))
                     {
                         var cursor = conn.GetCursor();
-                        string sql = String.Format(@"select databases");
+                        string sql = String.Format("show databases");
                         cursor.Execute(sql);
                         var list = cursor.FetchMany(int.MaxValue);
                         foreach (var item in list)
@@ -183,10 +183,7 @@ namespace C2.Database
                             {
                                 databases.Add(dict[key].ToString());
                             }
-                           
-                           
-                        }
-                        
+                        }                    
                     }
                 }
                 catch (Exception ex)
@@ -204,24 +201,22 @@ namespace C2.Database
             {
                 try
                 {
-                    using (Connection con = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                    using (Connection conn = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
                                                        this.User, this.Pass))
                     {
                         var cursor = conn.GetCursor();
-                        string sql = String.Format(@"select databases");
                         cursor.Execute("use "+ DBName);
-                        cursor.Execute("show tables ");
+                        cursor.Execute("show tables");
                         var list = cursor.FetchMany(int.MaxValue);
-                       
-                      /*  using (OracleDataReader rdr = comm.ExecuteReader())
+                        foreach (var item in list)
                         {
-                            while (rdr.Read())
+                            var dict = item as IDictionary<string, object>;
+                            foreach (var key in dict.Keys)
                             {
-                                Table table = new Table(DBName, rdr.GetString(0));
+                                Table table = new Table(DBName, dict[key].ToString());
                                 tables.Add(table);
                             }
                         }
-                      */
                     }
                 }
                 catch (Exception ex)

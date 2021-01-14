@@ -379,8 +379,19 @@ namespace C2.Controls.Left
         private void SchemaComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //根据架构改变数据表
-            OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
-            List<Table> tables = DbUtil.GetTablesByUser(conn, this.schemaComboBox.Text);
+            List<Table> tables;
+            if (SelectLinkButton.DatabaseItem.Type == DatabaseType.Hive)
+            {
+                HiveConnection hiveConn = new HiveConnection(SelectLinkButton.DatabaseItem);
+                //刷新数据表
+                tables = hiveConn.GetTablesByDB(this.schemaComboBox.Text);
+            }
+            else
+            {
+                OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
+                tables = DbUtil.GetTablesByUser(conn, this.schemaComboBox.Text);
+            }
+        
             UpdateTables(tables, SelectLinkButton.DatabaseItem);
             this.optComboBox.Text = "表名";
         }
@@ -464,6 +475,10 @@ namespace C2.Controls.Left
                 return;
 
             this.schemaComboBox.Text = users.Find( x => x.Equals(loginUser.ToUpper())) == null ? "选择架构" : loginUser.ToUpper();
+            // hive加载框架
+            if (string.Equals("选择架构", this.schemaComboBox.Text))
+                this.schemaComboBox.Text = users.Contains(loginUser)? loginUser:"选择架构";
+
             users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo)
