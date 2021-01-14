@@ -28,8 +28,9 @@ namespace C2.Dialogs.IAOLab
             this.inputLabel.Visible = false;
             this.sixTransform.Visible = true;
             //tipLable.Location = new Point(30, 58);
-            //inputAndResult.Location = new Point(30, 104);
-            //inputAndResult.Height += 46;
+            inputAndResult.Location = new Point(10, 104);
+            inputAndResult.Height -= 20;
+            inputAndResult.Width -= 10;
             //bd_wgs.Checked = false;
         }
         public string Tip { set { this.tipLable.Text = value; } }

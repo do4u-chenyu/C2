@@ -23,5 +23,10 @@ namespace C2.Dialogs.IAOLab
         {
 
         }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }
