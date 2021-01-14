@@ -20,11 +20,12 @@ namespace C2.IAOLab.Transform
             return instance;
         }
 
-        public void CoordinateConversion(string lcoation,string type)
+        public string CoordinateConversion(string lcoation,string type)
         {
             //switch(type)
             //{ 
             //}
+            return string.Empty;
         }
 
         #region 6种坐标转换方法
