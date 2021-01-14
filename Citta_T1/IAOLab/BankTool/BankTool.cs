@@ -19,14 +19,17 @@ namespace C2.IAOLab.BankTool
         }
         public string BankToolSearch(string input)
         {
+            
             string bankCard = input;
             string location = GetBankTool(bankCard);
             //location = string.Join("", location.Split('{', '}', '"'));
-            StringBuilder bankCardLocation = new StringBuilder();
-            string m_bankCardLocation = bankCard + "\t" + location + "\n";
-            bankCardLocation.Append(m_bankCardLocation);
-            string s_bankCardLocation = bankCardLocation.ToString();
-            return s_bankCardLocation;
+            StringBuilder bankCardLocationStringBuilder = new StringBuilder();
+            string bankCardLocation = bankCard + "\t" + location + "\n";
+            bankCardLocationStringBuilder.Append(bankCardLocation);
+            string bankCardLocationString = bankCardLocationStringBuilder.ToString();
+            return bankCardLocationString;
+           
+            
         }
 
         public string GetBankTool(string bankCard)
@@ -70,7 +73,7 @@ namespace C2.IAOLab.BankTool
             sRead.Close();
             postContent = postContent.Replace("<br />", "\t");
             String[] postContentArry = postContent.Split('\t','?');
-            if (postContentArry.Length > 3)
+            if (postContentArry.Length == 9)
             {
                 string fullpostContent = postContentArry[1] + "\t" + postContentArry[3] + "\t" + postContentArry[4] + "\t" + postContentArry[5];
                 return fullpostContent;

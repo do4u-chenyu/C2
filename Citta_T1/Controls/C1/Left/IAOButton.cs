@@ -96,14 +96,10 @@ namespace C2.Controls.Left
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            try
-            {
+            if (baseForm1 == null)
                 baseForm0.ShowDialog();
-            }
-            catch
-            {
+            else
                 baseForm1.ShowDialog();
-            }
         }
     }
 }
