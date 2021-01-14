@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using C2.IAOLab;
 namespace C2.IAOLab.BaseStation
 {
     public class BaseStation
@@ -18,14 +17,10 @@ namespace C2.IAOLab.BaseStation
 
         public String BaseStationLocate(String input)
         {
-            string baseStation = input;
-            string location = new WifiMac.WifiMac().GetInfo("http://218.94.117.234:8484/Test01/station.do", baseStation,"station");
+
+            string location = WifiMac.WifiMac.GetInstance().GetInfo("http://218.94.117.234:8484/Test01/station.do", input,"station");
             location = string.Join("", location.Split('"'));
-            StringBuilder baseStationLocationStringBuilder = new StringBuilder();
-            string baseStationLocation = baseStation + "\t" + location + "\n";
-            baseStationLocationStringBuilder.Append(baseStationLocation);
-            string baseStationLocationString = baseStationLocationStringBuilder.ToString();
-            return baseStationLocationString;
+            return string.Format("{0}{1}{2}{3}", input, "\t" , location, "\n");
         }
     }
 }

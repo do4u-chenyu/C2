@@ -19,21 +19,15 @@ namespace C2.IAOLab.WifiMac
         }
         public String MacLocate(String input)
         {
-            string mac = input;
-            string location = GetInfo("http://218.94.117.234:8484/Test01/search.do",mac,"mac");
-            location = string.Join("", location.Split('"'));
-            StringBuilder macLocationStringBuilder = new StringBuilder();
-            string macLocation = mac + "\t" + location + "\n";
-            macLocationStringBuilder.Append(macLocation);
-            string macLocationString = macLocationStringBuilder.ToString();
-            return macLocationString;
+            string location = GetInfo("http://218.94.117.234:8484/Test01/search.do",input,"mac");
+            location = string.Join("", location.Split('"'));            
+            return string.Format("{0}{1}{2}{3}", input, "\t", location, "\n");
         }
         public string GetInfo(string URL,string mac,string type)
         {
 
-            string strURL = URL;
             //创建一个HTTP请求  
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strURL);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
             //Post请求方式  
             request.Method = "POST";
             //内容类型
@@ -41,11 +35,10 @@ namespace C2.IAOLab.WifiMac
 
             //设置参数，并进行URL编码 
 
-            string paraUrlCoded = type+"="+ mac;//System.Web.HttpUtility.UrlEncode(jsonParas);   
+            string paraUrlCoded = type + "=" + mac;
 
-            byte[] payload;
             //将Json字符串转化为字节  
-            payload = System.Text.Encoding.UTF8.GetBytes(paraUrlCoded);
+            byte[] payload = System.Text.Encoding.UTF8.GetBytes(paraUrlCoded);
             //设置请求的ContentLength   
             request.ContentLength = payload.Length;
             //发送请求，获得请求流 

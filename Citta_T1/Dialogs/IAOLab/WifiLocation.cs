@@ -50,55 +50,44 @@ namespace C2.Dialogs.IAOLab
         }
         private void Search_Click(object sender, EventArgs e)
         {
+            string[] inputArray = this.inputAndResult.Text.Split('\n');
+            StringBuilder tmpResult = new StringBuilder();
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             switch (FormType)
             {
                 case "APK":
                   
                     break;
                 case "BaseStation":
-                    string[] baseStationArry = this.inputAndResult.Text.Split('\n');
-                    this.inputAndResult.Text = null;
-                    StringBuilder baseStationLocation = new StringBuilder();
-                    foreach (string baseStation in baseStationArry)
+
+                    foreach (string baseStation in inputArray)
                     {
-                        if (baseStation != "")
+                        if (!string.IsNullOrEmpty(baseStation))
                         {
-                            string result = BaseStation.GetInstance().BaseStationLocate(baseStation);
-                            string baseStationLocationSring = result;
-                            baseStationLocation.Append(baseStationLocationSring);
-                            inputAndResult.Text = baseStationLocation.ToString();
+                            tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(baseStation));
+                            inputAndResult.Text = tmpResult.ToString();
                         }
                     }
                     break;
                 case "Wifi":
-                    string[] macArry = this.inputAndResult.Text.Split('\n');
-                    this.inputAndResult.Text = null;
-                    StringBuilder macLocation = new StringBuilder();
-                    foreach (string mac in macArry)
+                    foreach (string mac in inputArray)
                     {
-                        if (mac != "")
+                        if (!string.IsNullOrEmpty(mac))
                         {
-                            string result = WifiMac.GetInstance().MacLocate(mac);
-                            string macLocationString = result;
-                            macLocation.Append(macLocationString);
-                            inputAndResult.Text = macLocation.ToString();
+                            tmpResult.Append(WifiMac.GetInstance().MacLocate(mac));
+                            inputAndResult.Text = tmpResult.ToString();
                         }
                     }
                     break;
                 case "Card":
-                    string[] bankCardArry = this.inputAndResult.Text.Split('\n');
-                    this.inputAndResult.Text = null;
-                    StringBuilder bankTool = new StringBuilder();
-                    foreach (string bankCard in bankCardArry)
+                    foreach (string bankCard in inputArray)
                     {
-                        if(bankCard != "") 
-                        {
-                        string result = BankTool.GetInstance().BankToolSearch(bankCard);
-                        string bankToolString = result;
-                        bankTool.Append(bankToolString);
-                        inputAndResult.Text = bankTool.ToString();
+                        if (!string.IsNullOrEmpty(bankCard))
+                        {                        
+                            tmpResult.Append(BankTool.GetInstance().BankToolSearch(bankCard));
+                            inputAndResult.Text = tmpResult.ToString();
                         }
-                        
+
                     }
                     break;
                 case "Tude":
@@ -107,7 +96,10 @@ namespace C2.Dialogs.IAOLab
                 case "Ip":
                    
                     break;
+                default:
+                    break;
             }
+            this.Cursor = System.Windows.Forms.Cursors.Arrow;
         }
 
         private void Cancle_Click(object sender, EventArgs e)
