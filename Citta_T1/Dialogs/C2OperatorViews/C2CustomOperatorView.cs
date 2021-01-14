@@ -124,6 +124,11 @@ namespace C2.Dialogs.C2OperatorViews
             operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + Lang._(operatorWidget.OpType.ToString());
             string path = this.rsFullFilePathTextBox.Text;
             string name = Path.GetFileNameWithoutExtension(path);
+            if (!File.Exists(path))
+            {
+                FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+                fs.Close();
+            }
             operatorWidget.ResultItem = new DataItem(path, name, separator, encoding, JudgeFileExtType(path));
             operatorWidget.ResultItem.ResultDataType = DataItem.ResultType.SingleOp;
         }

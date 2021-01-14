@@ -1,5 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Core;
+using C2.Utils;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -107,7 +108,8 @@ namespace C2.Controls.Left
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 string fullFilePath = fd.FileName;
-                ImportModel.GetInstance().UnZipC2File(fullFilePath,Global.GetMainForm().UserName);
+                if(ImportModel.GetInstance().UnZipC2File(fullFilePath,Global.GetMainForm().UserName))
+                    HelpUtil.ShowMessageBox("模型导入成功");
             }
         }
     }

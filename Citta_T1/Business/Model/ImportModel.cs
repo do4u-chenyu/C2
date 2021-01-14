@@ -27,10 +27,10 @@ namespace C2.Business.Model
         }
 
         #region C2业务视图导入
-        public void UnZipC2File(string fullFilePath, string userName)
+        public bool UnZipC2File(string fullFilePath, string userName)
         {
             if (!File.Exists(fullFilePath))
-                return;
+                return false;
             if (HasUnZipC2File(fullFilePath, userName))
             {
                 // 脚本、数据源存储路径
@@ -40,8 +40,8 @@ namespace C2.Business.Model
 
                 // 将导入模型添加到左侧模型面板
                 MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
-                HelpUtil.ShowMessageBox("模型导入成功");
             }
+            return true;
         }
         public void MindMapControlAddItem(string modelTitle)
         {
@@ -79,26 +79,51 @@ namespace C2.Business.Model
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(newModelFilePath);
 
-            XmlNode chart = xDoc.DocumentElement.SelectSingleNode("//chart");
-            XmlNode widgets = chart.SelectSingleNode("//widgets");
-            foreach (XmlNode widget in widgets.ChildNodes)
+            XmlNode chart = xDoc.DocumentElement.SelectSingleNode("//chart");//仅拷贝业务拓展视图相关数据
+            XmlNodeList widgets = chart.SelectNodes("//widget");  //每个节点都有一个widgets
+
+            foreach (XmlNode widget in widgets)
             {
-                if (!(widget is XmlElement))
-                    continue;
                 XmlElement widget_e = (XmlElement)widget;
                 if (widget_e.Name != "widget")
                     continue;
 
-                switch (widget_e.GetAttribute("type"))
+                XmlNodeList datas = widget_e.SelectNodes("//data_item|//chart_item|//attach_item|//result_item");
+                ReWriteC2NodePath(datas, dataSourcePath);
+
+                XmlNodeList opItems = widget_e.SelectNodes("op_items/op_item");
+                foreach (XmlElement opItem in opItems)
                 {
-                    //数据源挂件
-                    case "DATASOURCE":
-                        XmlNodeList datasources = widget_e.SelectNodes("//data_item");
-                        ReWriteC2NodePath(datasources, dataSourcePath);
-                        break;
-                    default: break;
+                    switch (opItem.SelectSingleNode("subtype").InnerText)
+                    {
+                        case "CustomOperator":
+                            XmlNodeList optionNode = opItem.SelectNodes("option");
+                            if (optionNode == null)
+                                continue;
+                            ReWriteNodePath(optionNode, dataSourcePath);
+                            break;
+                        case "PythonOperator":
+                            XmlNode optionNode2 = opItem.SelectSingleNode("option");
+                            if (optionNode2 == null)
+                                continue;
+                            XmlNode oppNode = optionNode2.SelectSingleNode("outputParamPath");
+                            ReWriteNodePath(oppNode, dataSourcePath);
+                            XmlNode bcNode = optionNode2.SelectSingleNode("browseChosen");
+                            ReWriteNodePath(bcNode, dataSourcePath);
+                            XmlNode ppNode = optionNode2.SelectSingleNode("pyFullPath");
+                            ReWriteNodePath(ppNode, dataSourcePath);
+                            XmlNode cmdNode = optionNode2.SelectSingleNode("cmd");
+                            ReWriteCmdNode(cmdNode, dataSourcePath);
+                            XmlNode pyParamNode = optionNode2.SelectSingleNode("pyParam");
+                            ReWriteCmdNode(pyParamNode, dataSourcePath);
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
             }
+
 
             xDoc.Save(newModelFilePath);
         }

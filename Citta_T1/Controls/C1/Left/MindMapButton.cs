@@ -158,15 +158,17 @@ namespace C2.Controls.Left
                 return;
             }
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.AddExtension = true;
-            saveFileDialog1.Filter = "业务视图文件(*.c2)|*.c2";
-            saveFileDialog1.Title = "导出业务视图";
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            {
+                AddExtension = true,
+                Filter = "业务视图文件(*.c2)|*.c2",
+                Title = "导出业务视图"
+            };
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string exportFullPath = saveFileDialog1.FileName;
-                HelpUtil.ShowMessageBox("模型导出成功,存储路径：" + exportFullPath);
-                C2.Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath);
+                if(C2.Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath))
+                    HelpUtil.ShowMessageBox("模型导出成功,存储路径：" + exportFullPath);
             }
         }
 

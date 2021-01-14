@@ -1,4 +1,5 @@
 ﻿using C2.Controls.MapViews;
+using C2.Core;
 using C2.Dialogs.Base;
 using C2.Dialogs.C2OperatorViews;
 using C2.Globalization;
@@ -194,6 +195,8 @@ namespace C2.Controls.Common
                     return;
                 }
             }
+
+            Global.GetDocumentForm().Save();
 
             if (OpWidget == null)
             {
