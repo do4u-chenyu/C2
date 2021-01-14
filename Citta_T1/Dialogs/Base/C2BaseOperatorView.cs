@@ -117,6 +117,11 @@ namespace C2.Dialogs.Base
 
             operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + Lang._(operatorWidget.OpType.ToString());
             string path = Path.Combine(Global.UserWorkspacePath,"业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+            if (!File.Exists(path))
+            {
+                FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+                fs.Close();
+            }
             string name = Path.GetFileNameWithoutExtension(path);
             char separator = OpUtil.DefaultFieldSeparator;
             operatorWidget.ResultItem = new DataItem(path, name, separator, OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
