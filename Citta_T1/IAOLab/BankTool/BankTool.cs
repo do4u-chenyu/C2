@@ -71,6 +71,7 @@ namespace C2.IAOLab.BankTool
             StreamReader sRead = new StreamReader(s);
             string postContent = sRead.ReadToEnd();
             sRead.Close();
+            postContent = string.Join("", postContent.Split('\r','\n','\t'));
             postContent = postContent.Replace("<br />", "\t");
             String[] postContentArry = postContent.Split('\t','?');
             if (postContentArry.Length == 9)
@@ -80,7 +81,7 @@ namespace C2.IAOLab.BankTool
             }
             else
             {
-                string fullpostContent = postContentArry[1];
+                string fullpostContent = "银行卡格式不正确";
                 return fullpostContent;
             }
         }
