@@ -45,7 +45,23 @@ namespace C2.IAOLab.Transform
             double z = Math.Pow((ALON - BLON), 2) * 12321 + Math.Pow((ALAT - BLAT), 2) * 8574;
             return Math.Sqrt(z);
         }
-        public List<double> CoordinateTransform(double x, double y)
+
+        private List<double> XYTransform(double x, double y)
+        {
+
+            double absX = Math.Sqrt(Math.Abs(x));
+            double d = (20.0 * Math.Sin(6.0 * x * pi) + 20.0 * Math.Sin(2.0 * x * pi)) * 2.0 / 3.0;
+            double lat = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * absX + d;
+            double lon = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * absX + d;
+            lat += (20.0 * Math.Sin(y * pi) + 40.0 * Math.Sin(y / 3.0 * pi)) * 2.0 / 3.0;
+            lon += (20.0 * Math.Sin(x * pi) + 40.0 * Math.Sin(x / 3.0 * pi)) * 2.0 / 3.0;
+            lat += (160.0 * Math.Sin(y / 12.0 * pi) + 320 * Math.Sin(y / 30.0 * pi)) * 2.0 / 3.0;
+            lon += (150.0 * Math.Sin(x / 12.0 * pi) + 300.0 * Math.Sin(x / 30.0 * pi)) * 2.0 / 3.0;
+            List<double> result = new List<double>() { lat, lon };
+            return result;
+        }
+
+        private List<double> CoordinateTransform(double x, double y)
         {
 
             double absX = Math.Sqrt(Math.Abs(x));
@@ -79,7 +95,10 @@ namespace C2.IAOLab.Transform
             double a = 6378245.0;
             double ee = 0.00669342162296594323;
             // 下面公式对么？log log
-            List<double> latLon = CoordinateTransform(log - 105.0, lat - 35.0);
+
+            List<double> latLon = XYTransform(log - 105.0, lat - 35.0);
+
+            //List<double> latLon = CoordinateTransform(log - 105.0, lat - 35.0);
 
             double radLat = lat / 180.0 * pi;
             double magic = 1 - ee * (Math.Sin(radLat) * 2);
@@ -102,7 +121,7 @@ namespace C2.IAOLab.Transform
                 return result;
             }
         }
-        private List<double> Easy_GCJ_WGS(double gcjLat, double gcjLon)
+        private List<double> EasyGCJWGS(double gcjLat, double gcjLon)
         {
             if (OutOfChina(gcjLat, gcjLon))
             {

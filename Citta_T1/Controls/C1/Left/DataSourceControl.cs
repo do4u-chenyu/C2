@@ -393,13 +393,12 @@ namespace C2.Controls.Left
         private void TableFilterTextBox_TextChanged(object sender, EventArgs e)
         {
             this.tableFilterTextBox.ForeColor = SystemColors.WindowText;
-            if (this.optComboBox.Text.ToString() == "表名")
+            switch (this.optComboBox.Text.ToString())
             {
-                ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(tableFilterTextBox.Text.ToUpper())));
-            }
-            else
-            {
-                ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Contains(tableFilterTextBox.Text.ToUpper())));
+                case "表名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(tableFilterTextBox.Text.ToUpper())));
+                    break;
+                case "字段名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Contains(tableFilterTextBox.Text.ToUpper())));
+                    break;
             }
         }
         #endregion
