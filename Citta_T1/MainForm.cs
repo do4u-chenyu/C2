@@ -303,15 +303,12 @@ namespace C2
 
         private void LoadIAOSource()
         {
-            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultVersionType);
-            for (int a = 0; a < 6; a = a + 1)
+            string IAOLabType = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultIAOLab);
+            string[] strArr = IAOLabType.Split(',');
+            for (int i = 0; i < strArr.Length; i++)
             {
-                string str = Global.VersionType;
-                char[] chs = { ' ' };
-                string[] res = str.Split(chs, options: StringSplitOptions.RemoveEmptyEntries);
-                if (res[a]==a.ToString())
-                    this.iaoModelControl.GenIAOButton(Global.IAOLab[a]);
-            } 
+                this.iaoModelControl.GenIAOButton(strArr[i].Trim());
+            }
         }
 
         private void ShowLeftFold()

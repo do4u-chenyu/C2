@@ -19,7 +19,7 @@ namespace C2.Controls.Left
             InitializeComponent();
             txtButton.Name = ffp;
             txtButton.Text = ffp;
-            this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
+            //this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
             this.ContextMenuStrip = contextMenuStrip1;
             switch (ffp)
             {
