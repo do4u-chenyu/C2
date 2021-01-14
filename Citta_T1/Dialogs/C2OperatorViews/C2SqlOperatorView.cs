@@ -14,7 +14,7 @@ namespace C2.Dialogs.C2OperatorViews
     public partial class C2SqlOperatorView : C2BaseOperatorView
     {
         private List<DatabaseItem> databaseItems;
-        private ContextMenuStrip contextMenuStrip; 
+        private ContextMenuStrip contextMenuStrip;
         private DatabaseItem SelectDatabaseItem
         {
             get
@@ -226,6 +226,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.operatorWidget.Option.Clear();
             this.operatorWidget.Option.SetOption("sqlText", textEditorControl1.Text);
             this.operatorWidget.Option.SetOption("connection", SelectDatabaseItem.AllDatabaseInfo);
+            this.operatorWidget.Option.SetOption("maxNum", maxNumTextBox.Visible ? maxNumTextBox.Text : "inf");
         }
 
         //右键打开菜单
@@ -278,6 +279,27 @@ namespace C2.Dialogs.C2OperatorViews
                 return notReady;
             }
             return !notReady;
+        }
+
+        private void partialRadioButton_Click(object sender, EventArgs e)
+        {
+            this.maxNumTextBox.Visible = true;
+        }
+
+        private void allRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            this.maxNumTextBox.Visible = false;
+            
+        }
+        protected override void ConfirmButton_Click(object sender, EventArgs e)
+        {
+            int maxNum;
+            if (maxNumTextBox.Visible && (String.IsNullOrEmpty(maxNumTextBox.Text) || !int.TryParse(maxNumTextBox.Text, out maxNum) || maxNum <= 0))
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidMaxNum);
+                return;
+            }
+            base.ConfirmButton_Click(sender, e);
         }
     }
 }
