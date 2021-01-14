@@ -11,6 +11,7 @@ using C2.Controls;
 using C2.IAOLab.BaseStation;
 using C2.IAOLab.WifiMac;
 using log4net.Util;
+using C2.IAOLab.BankTool;
 
 namespace C2.Dialogs.IAOLab
 {
@@ -104,8 +105,8 @@ namespace C2.Dialogs.IAOLab
                     {
                         string result = BaseStation.GetInstance().BaseStationLocate(baseStation);
 
-                        string m_baseStationLocation = result;
-                        baseStationLocation.Append(m_baseStationLocation);
+                        string baseStationLocationSring = result;
+                        baseStationLocation.Append(baseStationLocationSring);
                         inputAndResult.Text = baseStationLocation.ToString();
                     }
                     break;
@@ -117,13 +118,23 @@ namespace C2.Dialogs.IAOLab
                     {
                         string result = WifiMac.GetInstance().MacLocate(mac);
                         
-                        string m_macLocation = result;
-                        macLocation.Append(m_macLocation);
+                        string macLocationString = result;
+                        macLocation.Append(macLocationString);
                         inputAndResult.Text = macLocation.ToString();
                     }
                     break;
                 case "Card":
-                    
+                    string[] bankCardArry = this.inputAndResult.Text.Split('\n');
+                    this.inputAndResult.Text = null;
+                    StringBuilder bankTool = new StringBuilder();
+                    foreach (string bankCard in bankCardArry)
+                    {
+                        string result = BankTool.GetInstance().BankToolSearch(bankCard);
+
+                        string bankToolString = result;
+                        bankTool.Append(bankToolString);
+                        inputAndResult.Text = bankTool.ToString();
+                    }
                     break;
                 case "Tude":
                     
@@ -136,6 +147,7 @@ namespace C2.Dialogs.IAOLab
 
         private void Cancle_Click(object sender, EventArgs e)
         {
+            this.inputAndResult.Text = null;
             Close();
         }
 

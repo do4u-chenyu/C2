@@ -21,11 +21,11 @@ namespace C2.IAOLab.BaseStation
             string baseStation = input;
             string location = new WifiMac.WifiMac().GetInfo("http://218.94.117.234:8484/Test01/station.do", baseStation,"station");
             location = string.Join("", location.Split('"'));
-            StringBuilder baseStationLocation = new StringBuilder();
-            string m_baseStationLocation = baseStation + "\t" + location + "\n";
-            baseStationLocation.Append(m_baseStationLocation);
-            string s_baseStationLocation = baseStationLocation.ToString();
-            return s_baseStationLocation;
+            StringBuilder baseStationLocationStringBuilder = new StringBuilder();
+            string baseStationLocation = baseStation + "\t" + location + "\n";
+            baseStationLocationStringBuilder.Append(baseStationLocation);
+            string baseStationLocationString = baseStationLocationStringBuilder.ToString();
+            return baseStationLocationString;
         }
     }
 }
