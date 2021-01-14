@@ -10,6 +10,7 @@ namespace C2.IAOLab.Transform
     class TimeAndIPTransform
     {
 
+        #region 时间转换
         private string SData(uint Second)
         {
             uint Day = Second/86400;
@@ -54,5 +55,12 @@ namespace C2.IAOLab.Transform
             string c = year + "-" + month + "-" + day;
             return c;
         }
+        #endregion
+        #region IP转换
+
+
+
+
+        #endregion
     }
 }

@@ -5,6 +5,7 @@ using C2.Database;
 using C2.Model;
 using C2.Utils;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace C2.Controls.Left
@@ -14,7 +15,7 @@ namespace C2.Controls.Left
         public string ConnectionInfo { get => TableItem.PrettyDatabaseInfo; }
         public DatabaseItem TableItem { get; set; }
         public string LinkSourceName { get; set; }
-
+        public List<string> ColumnName { get; set; }
         public TableButton(DatabaseItem tableItem)
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace C2.Controls.Left
             txtButton.Name = tableItem.DataTable.Name;
             txtButton.Text = FileUtil.ReName(tableItem.DataTable.Name);
             LinkSourceName = tableItem.DataTable.Name;
+            ColumnName = tableItem.DataTable.Columns;
         }
 
         private void TableButton_Load(object sender, EventArgs e)

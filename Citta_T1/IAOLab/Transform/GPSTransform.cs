@@ -12,7 +12,7 @@ namespace C2.IAOLab.Transform
         private double pi = 3.14159265358979324;
         private double xPi = 3.14159265358979324 * 3000.0 / 180.0;
         private double earthR = 6371000;
-        private List<double> GCJBD(double GCJLAT, double GCJLON)
+        private List<double> GCJConvertToBD(double GCJLAT, double GCJLON)
         {
             double z = Math.Sqrt(Math.Pow(GCJLON, 2) + Math.Pow(GCJLAT, 2)) + 0.00002 * Math.Sin(GCJLAT * xPi);
             double theta = Math.Atan2(GCJLAT, GCJLON) + 0.000003 * Math.Cos(GCJLON * xPi);
@@ -21,7 +21,7 @@ namespace C2.IAOLab.Transform
                 z * Math.Sin(theta) + 0.006 };
             return result;
         }
-        private List<double> BDGCJ(double BDLON, double BDLAT)
+        private List<double> BDConvertToGCJ(double BDLON, double BDLAT)
         {
             // 这个还传参数干嘛？？？
             BDLON -= -0.0065;
@@ -45,7 +45,23 @@ namespace C2.IAOLab.Transform
             double z = Math.Pow((ALON - BLON), 2) * 12321 + Math.Pow((ALAT - BLAT), 2) * 8574;
             return Math.Sqrt(z);
         }
-        public List<double> XYTransform(double x, double y)
+
+        private List<double> XYTransform(double x, double y)
+        {
+
+            double absX = Math.Sqrt(Math.Abs(x));
+            double d = (20.0 * Math.Sin(6.0 * x * pi) + 20.0 * Math.Sin(2.0 * x * pi)) * 2.0 / 3.0;
+            double lat = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * absX + d;
+            double lon = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * absX + d;
+            lat += (20.0 * Math.Sin(y * pi) + 40.0 * Math.Sin(y / 3.0 * pi)) * 2.0 / 3.0;
+            lon += (20.0 * Math.Sin(x * pi) + 40.0 * Math.Sin(x / 3.0 * pi)) * 2.0 / 3.0;
+            lat += (160.0 * Math.Sin(y / 12.0 * pi) + 320 * Math.Sin(y / 30.0 * pi)) * 2.0 / 3.0;
+            lon += (150.0 * Math.Sin(x / 12.0 * pi) + 300.0 * Math.Sin(x / 30.0 * pi)) * 2.0 / 3.0;
+            List<double> result = new List<double>() { lat, lon };
+            return result;
+        }
+
+        private List<double> CoordinateTransform(double x, double y)
         {
 
             double absX = Math.Sqrt(Math.Abs(x));
@@ -79,7 +95,10 @@ namespace C2.IAOLab.Transform
             double a = 6378245.0;
             double ee = 0.00669342162296594323;
             // 下面公式对么？log log
+
             List<double> latLon = XYTransform(log - 105.0, lat - 35.0);
+
+            //List<double> latLon = CoordinateTransform(log - 105.0, lat - 35.0);
 
             double radLat = lat / 180.0 * pi;
             double magic = 1 - ee * (Math.Sin(radLat) * 2);
@@ -89,7 +108,7 @@ namespace C2.IAOLab.Transform
             List<double> result = new List<double>() { latLon[0], latLon[1] };
             return result;
         }
-        private List<double> WGSGCJ(double wgsLat, double wgsLon)
+        private List<double> WGSConvertToGCJ(double wgsLat, double wgsLon)
         {
             if (OutOfChina(wgsLat, wgsLon))
             {
@@ -116,7 +135,7 @@ namespace C2.IAOLab.Transform
                 return result;
             }
         }
-        private List<double> GCJWGS(double gcjLat, double gcjLon)
+        private List<double> GCJConvertToWGS(double gcjLat, double gcjLon)
         {
 
             double threshold = 0.000001;
@@ -133,8 +152,8 @@ namespace C2.IAOLab.Transform
             {
                 wgsLat = (mLat + pLat) / 2;
                 wgsLon = (mLon + pLon) / 2;
-                double tmp_lat = WGSGCJ(wgsLat, wgsLon)[0];
-                double tmp_lon = WGSGCJ(wgsLat, wgsLon)[1];
+                double tmp_lat = WGSConvertToGCJ(wgsLat, wgsLon)[0];
+                double tmp_lon = WGSConvertToGCJ(wgsLat, wgsLon)[1];
                 dLat = tmp_lat - gcjLat;
                 dLon = tmp_lon - gcjLon;
                 if (Math.Abs(dLat) < threshold && Math.Abs(dLon) < threshold)
@@ -161,15 +180,15 @@ namespace C2.IAOLab.Transform
             List<double> result = new List<double>() { wgsLat, wgsLon };
             return result;
         }
-        private List<double> BDWGS(double bdLat, double bdLon)
+        private List<double> BDConvertToWGS(double bdLat, double bdLon)
         {
-            List<double> gcj = BDGCJ(bdLat, bdLon);
-            return GCJWGS(gcj[0], gcj[1]);
+            List<double> gcj = BDConvertToGCJ(bdLat, bdLon);
+            return GCJConvertToWGS(gcj[0], gcj[1]);
         }
-        private List<double> WGSBD(double wgsLat, double wgsLon)
+        private List<double> WGConvertToSBD(double wgsLat, double wgsLon)
         {
-            List<double> gcj = WGSGCJ(wgsLat, wgsLon);
-            return GCJWGS(gcj[0], gcj[1]);
+            List<double> gcj = WGSConvertToGCJ(wgsLat, wgsLon);
+            return GCJConvertToWGS(gcj[0], gcj[1]);
         }
     }
 }

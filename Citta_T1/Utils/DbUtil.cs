@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using Hive2;
 
 namespace C2.Utils
 {
@@ -355,5 +356,6 @@ namespace C2.Utils
             FileUtil.FillTable(gridOutput, ret, maxNum);
             return true;
         }
+       
     }
 }
