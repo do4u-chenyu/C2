@@ -72,7 +72,17 @@ namespace C2.Dialogs.C2OperatorViews
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
-            DbUtil.FillDGVWithTbContent(gridOutput, new OraConnection(SelectDatabaseItem), SelectTable, OpUtil.PreviewMaxNum);
+            if (SelectDatabaseItem.Type == DatabaseType.Oracle)
+                DbUtil.FillDGVWithTbContent(gridOutput, new OraConnection(SelectDatabaseItem), SelectTable, OpUtil.PreviewMaxNum);
+            else if (SelectDatabaseItem.Type == DatabaseType.Hive)
+            {
+                string sql = string.Format("select * from {0} limit{1}", SelectTable.Name, OpUtil.PreviewMaxNum);
+                LoadHiveData(this.comboBoxDataBase.Text, sql); 
+            }  
+            else
+                return;
+
+
         }
 
         private void CopyTableNameMenuItem_Click(object sender, EventArgs e)
@@ -216,25 +226,7 @@ namespace C2.Dialogs.C2OperatorViews
             }
             if (SelectDatabaseItem.Type == DatabaseType.Hive)
             {
-                HiveConnection hiveConnection = new HiveConnection(SelectDatabaseItem);
-                string tbContent= hiveConnection.GetSQLResult(this.comboBoxDataBase.Text, textEditorControl1.Text);
-                List<string[]> results = new List<string[]>();
-                foreach (string row in tbContent.Split(OpUtil.DefaultLineSeparator))
-                    results.Add(row.Split(OpUtil.DefaultFieldSeparator));
-
-                // Grab all the column names
-                gridOutput.Rows.Clear();
-                gridOutput.Columns.Clear();
-                foreach (string[] row in results)
-                {
-                    if (gridOutput.Columns.Count == 0)
-                    {
-                        for (int i = 0; i < row.Length; i++)
-                            gridOutput.Columns.Add(i.ToString(), row[i]);
-                        continue;
-                    }
-                    gridOutput.Rows.Add(row);
-                }
+                LoadHiveData(this.comboBoxDataBase.Text, textEditorControl1.Text);
                 return;
 
             }
@@ -271,6 +263,28 @@ namespace C2.Dialogs.C2OperatorViews
             catch (Exception ex) // Better catch in case they have bad sql
             {
                 HelpUtil.ShowMessageBox(ex.Message);
+            }
+        }
+        private void LoadHiveData(string database,string sql)
+        {
+            HiveConnection hiveConnection = new HiveConnection(SelectDatabaseItem);
+            string tbContent = hiveConnection.GetSQLResult(database,sql);
+            List<string[]> results = new List<string[]>();
+            foreach (string row in tbContent.Split(OpUtil.DefaultLineSeparator))
+                results.Add(row.Split(OpUtil.DefaultFieldSeparator));
+
+            // Grab all the column names
+            gridOutput.Rows.Clear();
+            gridOutput.Columns.Clear();
+            foreach (string[] row in results)
+            {
+                if (gridOutput.Columns.Count == 0)
+                {
+                    for (int i = 0; i < row.Length; i++)
+                        gridOutput.Columns.Add(i.ToString(), row[i]);
+                    continue;
+                }
+                gridOutput.Rows.Add(row);
             }
         }
         protected override void SaveOption()

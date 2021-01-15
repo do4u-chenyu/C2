@@ -120,24 +120,25 @@ namespace C2.Utils
         }
         public static bool TestConn(DatabaseItem dbi)
         {
-            return TestConn(new OraConnection(dbi));
-        }
-
-        public static bool TestConn(DataItem item)
-        {
             bool ret = false;
-            switch (item.DataType)
+            switch (dbi.Type)
             {
                 case DatabaseType.Oracle:
-                    ret = TestConn(new OraConnection(item));
+                    ret = TestConn(new OraConnection(dbi));
                     break;
                 case DatabaseType.Hive:
-                    ret = new HiveConnection(item).Connect();
+                    ret = new HiveConnection(dbi).Connect();
                     break;
                 default:
                     break;
             }
             return ret;
+
+        }
+
+        public static bool TestConn(DataItem item)
+        {
+            return TestConn(item.DBItem);
         }
         public static List<string> GetUsers(OraConnection conn)
         {
