@@ -65,15 +65,14 @@ namespace C2.Dialogs.C2OperatorViews
 
         private void PreviewTableMenuItem_Click(object sender, EventArgs e)
         {
-            PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm(SelectDatabaseItem);
-
+            if (SelectDatabaseItem == null || SelectTable == null)
+                return;
             if (!DbUtil.TestConn(SelectDatabaseItem))
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
-            if (SelectTable != null && previewDbDataForm.Flush(SelectTable))
-                previewDbDataForm.Show();
+            DbUtil.FillDGVWithTbContent(gridOutput, new OraConnection(SelectDatabaseItem), SelectTable, OpUtil.PreviewMaxNum);
         }
 
         private void CopyTableNameMenuItem_Click(object sender, EventArgs e)
