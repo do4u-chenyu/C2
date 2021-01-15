@@ -122,23 +122,42 @@ namespace C2.Dialogs.C2OperatorViews
         {
             if (SelectDatabaseItem == null)
                 return;
-
-            //连接数据库
-            OraConnection conn = new OraConnection(SelectDatabaseItem);
-            if (!DbUtil.TestConn(conn))
+            List<string> users;
+            if (SelectDatabaseItem.Type == DatabaseType.Hive)
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                HiveConnection hiveConn = new HiveConnection(SelectDatabaseItem);
+                if (!hiveConn.Connect())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                //刷新架构
+                users = hiveConn.GetHiveDatabases();
             }
-
-            //刷新架构
-            List<string> users = DbUtil.GetUsers(conn);
+            else if (SelectDatabaseItem.Type == DatabaseType.Oracle)
+            {   
+                //连接数据库
+                OraConnection conn = new OraConnection(SelectDatabaseItem);
+                if (!DbUtil.TestConn(conn))
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                //刷新架构
+                users = DbUtil.GetUsers(conn);
+            }
+            else
+                users = new List<string>();
+          
             this.comboBoxDataBase.Items.Clear();
             if (users == null || users.Count <= 0)
                 return;
             if (databaseItems != null && databaseItems.Count > 0)
             {
                 this.comboBoxDataBase.Text = users.Find(x => x.Equals(SelectDatabaseItem.User.ToUpper())) == null ? "选择架构" : SelectDatabaseItem.User.ToUpper();
+                // hive加载框架
+                if (string.Equals("选择架构", this.comboBoxDataBase.Text))
+                    this.comboBoxDataBase.Text = users.Contains(SelectDatabaseItem.User) ? SelectDatabaseItem.User : "选择架构";
                 this.comboBoxDataBase.Items.AddRange(users.ToArray());
             }
 
