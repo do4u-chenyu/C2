@@ -157,7 +157,7 @@ namespace C2.Dialogs.C2OperatorViews
                 this.comboBoxDataBase.Text = users.Find(x => x.Equals(SelectDatabaseItem.User.ToUpper())) == null ? "选择架构" : SelectDatabaseItem.User.ToUpper();
                 // hive加载框架
                 if (string.Equals("选择架构", this.comboBoxDataBase.Text))
-                    this.comboBoxDataBase.Text = users.Contains(SelectDatabaseItem.User) ? SelectDatabaseItem.User : "选择架构";
+                    this.comboBoxDataBase.Text = users[0];
                 this.comboBoxDataBase.Items.AddRange(users.ToArray());
             }
 
