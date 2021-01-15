@@ -76,7 +76,7 @@ namespace C2.IAOLab.WifiMac
             
             postContent = postContent.Replace("address", "地址").Replace("latitude", "纬度").Replace("longitude", "经度").Replace("state", "查询结果").Replace("ok", "成功").Replace("error", "失败");
             string[] postContentArry = postContent.Split('{', '}', ',');
-            if (postContentArry.Length >3) 
+            if (postContentArry.Length >5) 
             {
                 string CHpostContent = postContentArry[2] + "," + postContentArry[6] + "\t" + postContentArry[1] + "\t" + postContentArry[5] + "\t" + postContentArry[4];
                 return CHpostContent;

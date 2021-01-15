@@ -19,17 +19,15 @@ namespace C2.IAOLab.BankTool
         }
         public string BankToolSearch(string input)
         {
-            
-            string bankCard = input;
-            string location = GetBankTool(bankCard);
+            string location = GetBankTool(input);
             //location = string.Join("", location.Split('{', '}', '"'));
-            StringBuilder bankCardLocationStringBuilder = new StringBuilder();
-            string bankCardLocation = bankCard + "\t" + location + "\n";
-            bankCardLocationStringBuilder.Append(bankCardLocation);
-            string bankCardLocationString = bankCardLocationStringBuilder.ToString();
-            return bankCardLocationString;
-           
-            
+            //StringBuilder bankCardLocationStringBuilder = new StringBuilder();
+            //string bankCardLocation = input + "\t" + location + "\n";
+            //bankCardLocationStringBuilder.Append(bankCardLocation);
+            //string bankCardLocationString = bankCardLocationStringBuilder.ToString();
+            //return bankCardLocationString;
+            //location = string.Join("", location.Split('"'));
+            return string.Format("{0}{1}{2}{3}", input, "\t", location, "\n");
         }
 
         public string GetBankTool(string bankCard)

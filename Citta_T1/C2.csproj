@@ -1605,6 +1605,9 @@
     <EmbeddedResource Include="Dialogs\IAOLab\ApkTool.resx">
       <DependentUpon>ApkTool.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IAOLab\WifiLocation.resx">
+      <DependentUpon>WifiLocation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InputDialog.resx">
       <DependentUpon>InputDialog.cs</DependentUpon>
       <SubType>Designer</SubType>

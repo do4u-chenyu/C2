@@ -129,5 +129,10 @@ namespace C2.Dialogs.IAOLab
         }
         private void EnableChange(bool enable)
         { }
+
+        private void WifiLocation_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
