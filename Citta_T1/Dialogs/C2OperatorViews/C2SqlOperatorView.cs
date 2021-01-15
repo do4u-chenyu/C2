@@ -167,14 +167,26 @@ namespace C2.Dialogs.C2OperatorViews
         {
             if (SelectDatabaseItem == null || string.IsNullOrEmpty(this.comboBoxDataBase.Text) )
                 return;
-
-            //连接数据库
-            OraConnection conn = new OraConnection(SelectDatabaseItem);
-            if (!DbUtil.TestConn(conn))
-                return;
-
-            //刷新数据表
-            List<Table> tables = DbUtil.GetTablesByUser(conn, this.comboBoxDataBase.Text);
+            List<Table> tables;
+            //Hive 连接数据库
+            if (SelectDatabaseItem.Type == DatabaseType.Hive)
+            {
+                HiveConnection hiveConn = new HiveConnection(SelectDatabaseItem);
+                if (!hiveConn.Connect())
+                    return;
+                tables = hiveConn.GetTablesByDB(this.comboBoxDataBase.Text);
+            }
+            else if (SelectDatabaseItem.Type == DatabaseType.Oracle)
+            {
+                OraConnection conn = new OraConnection(SelectDatabaseItem);
+                if (!DbUtil.TestConn(conn))
+                    return;
+                //刷新数据表
+                tables = DbUtil.GetTablesByUser(conn, this.comboBoxDataBase.Text);
+            }
+            else
+                tables = new List<Table>();
+          
             this.tableListBox.Items.Clear();
             if (tables == null || tables.Count <= 0)
                 return;
