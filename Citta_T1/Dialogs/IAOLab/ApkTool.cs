@@ -33,18 +33,31 @@ namespace C2.Dialogs.IAOLab
               Directory.CreateDirectory(tmpPath);
             }
             RunLinuxCommandApkTool(GetCmdCommand(apkpath, jdkpath));
-            GetApkInfo();
+            //GetApkInfo();
+            DirectoryInfo dir = new DirectoryInfo(apkpath);
+            //检索表示当前目录的文件和子目录
+            FileSystemInfo[] fsinfos = dir.GetFileSystemInfos();
+            //遍历检索的文件和子目录
+            foreach (FileSystemInfo fsinfo in fsinfos)
+            {
+                GetApkInfo(fsinfo.FullName,fsinfo.Name);
+                //先不用生成result,读取需要的数据加载到内存，并控件预览框展示
 
-
-            //先不用生成result,读取需要的数据加载到内存，并控件预览框展示
-
-
+            }
             // 删除临时结果文件
             return null;
         }
-        private string GetApkInfo(string apkName)
+        private string GetApkInfo(string apkPath,string apkname)
         {
             Path.GetTempPath();
+            
+
+
+
+
+
+
+            long size = GetApkSize(apkPath);
             return null;
         }
         private long GetApkSize(string filepath)
@@ -75,12 +88,17 @@ namespace C2.Dialogs.IAOLab
             {
                 
                 string cmdApk = "java - jar apktool_2.4.1.jar d - f" + fsinfo.FullName+ "-o"+ Path.GetTempPath(); 
-                //Console.WriteLine(fsinfo.FullName);
-                //将得到的文件全路径放入到集合中
+                
+                
                 cmdList.Add(cmdApk);
                 
             }
             return cmdList;
+        }
+        public string ReadXmlFile(string filepath,string name)
+        {
+
+            return null;
         }
         public string RunLinuxCommandApkTool(List<string> cmds)
         {
