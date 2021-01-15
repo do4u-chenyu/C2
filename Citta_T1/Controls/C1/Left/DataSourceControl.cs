@@ -528,7 +528,7 @@ namespace C2.Controls.Left
         private LinkButton CreateHiveButton(DatabaseItem dbinfo)
         {
             LinkButton linkButton = new LinkButton(dbinfo);
-            linkButton.LeftControlImage = global::C2.Properties.Resources.delete;
+            linkButton.LeftControlImage = global::C2.Properties.Resources.Hive;
             return linkButton;
         }
         #endregion

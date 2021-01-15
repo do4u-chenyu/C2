@@ -1683,7 +1683,7 @@
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -1946,6 +1946,7 @@
     <None Include="Resources\Images\TabBarImage\ip.png" />
     <None Include="Resources\Images\TabBarImage\Tude.png" />
     <None Include="Resources\Images\TabBarImage\WIFI.png" />
+    <None Include="Resources\Images\TabBarImage\Hive.png" />
     <Content Include="Resources\Images\TabBarImage\业务视图.png" />
     <None Include="Resources\Images\TabBarImage\业务视图2.png" />
     <None Include="Resources\Images\TabBarImage\业务视图3.png" />
