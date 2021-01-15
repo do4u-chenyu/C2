@@ -214,6 +214,12 @@ namespace C2.Dialogs.C2OperatorViews
                 HelpUtil.ShowMessageBox(HelpUtil.DatabaseItemIsNull);
                 return;
             }
+            if (SelectDatabaseItem.Type == DatabaseType.Hive)
+            {
+                HiveConnection hiveConnection = new HiveConnection(SelectDatabaseItem);
+                
+
+            }
             try
             {
                 using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor)) // Display the hourglass
