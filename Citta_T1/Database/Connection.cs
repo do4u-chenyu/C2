@@ -231,9 +231,27 @@ namespace C2.Database
 
         public  string GetHiveTbContentString(Table table, int maxNum) 
         {
+            string sql = string.Format(@"select * from {0} limit {1}", table.Name, maxNum);
+            return GetSQLResult(table.UserName, sql);          
+        }
+
+        private string GetHeaders(IDictionary<string, object> headersDict)
+        {
+            List<string> tmpResult = new List<string>();
+            foreach (var key in headersDict.Keys)
+            {
+                int start = key.IndexOf('.');
+                if (start + 1 > 0 && start + 1 < key.Length - 1)
+                    tmpResult.Add(key.Substring(start + 1));
+            }
+            return string.Join(OpUtil.DefaultFieldSeparator.ToString(), tmpResult);
+        }
+
+
+        public string GetSQLResult(string database,string sql)
+        {
+
             StringBuilder sb = new StringBuilder(1024 * 16);
-       
-            
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 try
@@ -243,8 +261,7 @@ namespace C2.Database
                     {
 
                         var cursor = conn.GetCursor();
-                        cursor.Execute("use " + table.UserName);
-                        string sql = string.Format(@"select * from {0} limit {1}", table.Name, maxNum);
+                        cursor.Execute("use " + database);
                         cursor.Execute(sql);
                         var list = cursor.FetchMany(int.MaxValue);
                         if (list.Count > 0)
@@ -273,18 +290,7 @@ namespace C2.Database
                 }
                 return sb.ToString();
             }
-        }
 
-        private string GetHeaders(IDictionary<string, object> headersDict)
-        {
-            List<string> tmpResult = new List<string>();
-            foreach (var key in headersDict.Keys)
-            {
-                int start = key.IndexOf('.');
-                if (start + 1 > 0 && start + 1 < key.Length - 1)
-                    tmpResult.Add(key.Substring(start + 1));
-            }
-            return string.Join(OpUtil.DefaultFieldSeparator.ToString(), tmpResult);
         }
 
     }
