@@ -406,7 +406,7 @@ namespace C2.Controls.Left
         private void TableFilterTextBox_TextChanged(object sender, EventArgs e)
         {
             this.tableFilterTextBox.ForeColor = SystemColors.WindowText;
-            if (this.optComboBox.Text.ToString() == String.Empty)
+            if (this.tableFilterTextBox.Text.ToString() == String.Empty)
             {
                 ReLayoutTableFrame(RelateTableButtons);
                 return;
