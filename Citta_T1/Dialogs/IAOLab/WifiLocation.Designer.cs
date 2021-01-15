@@ -274,6 +274,7 @@
             this.MinimumSize = new System.Drawing.Size(818, 465);
             this.Name = "WifiLocation";
             this.Text = "Wifi查询";
+            this.Load += new System.EventHandler(this.WifiLocation_Load);
             this.panel1.ResumeLayout(false);
             this.sixTransform.ResumeLayout(false);
             this.sixTransform.PerformLayout();
