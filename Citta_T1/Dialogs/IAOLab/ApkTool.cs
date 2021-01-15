@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using C2.Controls;
 
 namespace C2.Dialogs.IAOLab
@@ -95,9 +96,21 @@ namespace C2.Dialogs.IAOLab
             }
             return cmdList;
         }
-        public string ReadXmlFile(string filepath,string name)
+        public string GetPackage(string filepath)
         {
-
+            XDocument document = XDocument.Load(filepath);
+            //获取到XML的根元素进行操作
+            XElement root = document.Root;
+            return null;
+        }
+        public string getActivity(string filepath)
+        {
+            XDocument document = XDocument.Load(filepath);
+            //获取到XML的根元素进行操作
+            XElement root = document.Root;
+            
+            
+        
             return null;
         }
         public string RunLinuxCommandApkTool(List<string> cmds)
