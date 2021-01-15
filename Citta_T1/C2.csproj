@@ -220,9 +220,13 @@
     <Compile Include="Controls\DataCharts\RingChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Database\DAOImpl.cs" />
+    <Compile Include="Database\HiveDAOImpl.cs" />
+    <Compile Include="Database\OracleDAOImpl.cs" />
     <Compile Include="Database\Connection.cs" />
     <Compile Include="Database\DbHelper.cs" />
     <Compile Include="Database\GenericSingleton.cs" />
+    <Compile Include="Database\BaseDAO.cs" />
     <Compile Include="Database\PreviewDbDataForm.cs">
       <SubType>Form</SubType>
     </Compile>

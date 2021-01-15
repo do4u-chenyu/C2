@@ -144,7 +144,7 @@ namespace C2.Database
         public HiveConnection(DataItem item) : this(item.DBItem)
         {
         }
-        public bool Connect()
+        public bool TestConn()
         {
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {

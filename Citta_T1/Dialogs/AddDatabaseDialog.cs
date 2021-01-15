@@ -86,7 +86,7 @@ namespace C2.Dialogs
             if (String.Equals("Hive", this.databaseTypeComboBox.Text))
             {
                 HiveConnection hiveConn = new HiveConnection(tmpDatabaseInfo);
-                if (!hiveConn.Connect())
+                if (!hiveConn.TestConn())
                 {
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return false;
@@ -118,7 +118,7 @@ namespace C2.Dialogs
             if (String.Equals("Hive", this.databaseTypeComboBox.Text))
             {
                 HiveConnection hiveConn = new HiveConnection(tmpDatabaseInfo);
-                if (hiveConn.Connect())
+                if (hiveConn.TestConn())
                     HelpUtil.ShowMessageBox(HelpUtil.DbConnectSucceeded, "连接成功", MessageBoxIcon.Information);
                 else
                     HelpUtil.ShowMessageBox(HelpUtil.DbConnectFailed, "连接失败", MessageBoxIcon.Information);
