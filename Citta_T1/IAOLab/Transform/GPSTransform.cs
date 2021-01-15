@@ -60,7 +60,7 @@ namespace C2.IAOLab.Transform
                     if (result != null)
                     {
                         deviation = Distance(lat, lon, result[0], result[1]);
-                        return ("结果坐标为" + String.Join(" ", result) + "，偏差为" + deviation.ToString() + "\r\n");
+                        return (location + ":结果坐标为" + String.Join(" ", result) + "，偏差为" + deviation.ToString() + "米\r\n");
                     }
                     else
                     {
@@ -85,7 +85,7 @@ namespace C2.IAOLab.Transform
                     {
                         case "distance":
                             distance = Distance(lat, lon, blat, blon);
-                            return ("距离为" + distance.ToString() + "\r\n");
+                            return (location + ":距离为" + distance.ToString() + "米\r\n");
                         default:
                             return wrong;
                     }
@@ -108,17 +108,18 @@ namespace C2.IAOLab.Transform
             double z = Math.Sqrt(Math.Pow(GCJLON, 2) + Math.Pow(GCJLAT, 2)) + 0.00002 * Math.Sin(GCJLAT * xPi);
             double theta = Math.Atan2(GCJLAT, GCJLON) + 0.000003 * Math.Cos(GCJLON * xPi);
             //double[] result = { z * Math.Cos(theta) + 0.0065, z * Math.Sin(theta) + 0.006 };
-            double[] result = { z * Math.Sin(theta) + 0.006, z * Math.Cos(theta) + 0.0065, };
+            double[] result = { z * Math.Sin(theta) + 0.006, z * Math.Cos(theta) + 0.0065 };
             return result;
         }
-        private double[] BDConvertToGCJ(double BDLON, double BDLAT)
+        private double[] BDConvertToGCJ(double BDLAT, double BDLON)
         {
             // 这个还传参数干嘛？？？
-            BDLON -= -0.0065;
-            BDLAT -= -0.006;
+            BDLON -= 0.0065;
+            BDLAT -= 0.006;
             double z = Math.Sqrt(BDLON * BDLON + BDLAT * BDLAT) - 0.00002 * Math.Sin(BDLAT * xPi);
             double theta = Math.Atan2(BDLAT, BDLON) - 0.000003 * Math.Cos(BDLON * xPi);
-            double[] result = { z * Math.Cos(theta), z * Math.Sin(theta) };
+            //double[] result = { z * Math.Cos(theta), z * Math.Sin(theta) };
+            double[] result = { z * Math.Sin(theta), z * Math.Cos(theta) };
             return result;
         }
         public double Distance(double ALAT, double ALON, double BLAT, double BLON)
@@ -144,7 +145,7 @@ namespace C2.IAOLab.Transform
             double lon = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * absX + d;
             lat += (20.0 * Math.Sin(y * pi) + 40.0 * Math.Sin(y / 3.0 * pi)) * 2.0 / 3.0;
             lon += (20.0 * Math.Sin(x * pi) + 40.0 * Math.Sin(x / 3.0 * pi)) * 2.0 / 3.0;
-            lat += (160.0 * Math.Sin(y / 12.0 * pi) + 320 * Math.Sin(y / 30.0 * pi)) * 2.0 / 3.0;
+            lat += (160.0 * Math.Sin(y / 12.0 * pi) + 320.0 * Math.Sin(y / 30.0 * pi)) * 2.0 / 3.0;
             lon += (150.0 * Math.Sin(x / 12.0 * pi) + 300.0 * Math.Sin(x / 30.0 * pi)) * 2.0 / 3.0;
             double[] result = { lat, lon };
             return result;
@@ -190,7 +191,7 @@ namespace C2.IAOLab.Transform
             //List<double> latLon = CoordinateTransform(log - 105.0, lat - 35.0);
 
             double radLat = lat / 180.0 * pi;
-            double magic = 1 - ee * (Math.Sin(radLat) * 2);
+            double magic = 1 - ee * (Math.Pow(Math.Sin(radLat),2));
             double sqrtMagic = Math.Sqrt(magic);
             latLon[0] = (latLon[0] * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * pi);
             latLon[1] = (latLon[1] * 180.0) / (a / sqrtMagic * Math.Cos(radLat) * pi);
@@ -278,7 +279,7 @@ namespace C2.IAOLab.Transform
         private double[] WGConvertToBD(double wgsLat, double wgsLon)
         {
             double[] gcj = WGSConvertToGCJ(wgsLat, wgsLon);
-            return GCJConvertToWGS(gcj[0], gcj[1]);
+            return GCJConvertToBD(gcj[0], gcj[1]);
         }
         #endregion
     }
