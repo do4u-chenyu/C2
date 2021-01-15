@@ -81,16 +81,14 @@ namespace C2.Business.Model
             XmlNode chart = xDoc.DocumentElement.SelectSingleNode("//chart");//仅拷贝业务拓展视图相关数据
             XmlNodeList widgets = chart.SelectNodes("//widget");  //每个节点都有一个widgets
 
+            List<string> xmlPaths = new List<string>();//存放c1模型xml的路径,也要修改xml里的内容
+
             foreach (XmlNode widget in widgets)
             {
-                XmlElement widget_e = (XmlElement)widget;
-                if (widget_e.Name != "widget")
-                    continue;
-
-                XmlNodeList datas = widget_e.SelectNodes("//data_item|//chart_item|//attach_item|//result_item");
+                XmlNodeList datas = widget.SelectNodes("//data_item|//chart_item|//attach_item|//result_item");
                 ReWriteC2NodePath(datas, dataSourcePath);
 
-                XmlNodeList opItems = widget_e.SelectNodes("op_items/op_item");
+                XmlNodeList opItems = widget.SelectNodes("op_items/op_item");
                 foreach (XmlElement opItem in opItems)
                 {
                     switch (opItem.SelectSingleNode("subtype").InnerText)
@@ -116,6 +114,11 @@ namespace C2.Business.Model
                             XmlNode pyParamNode = optionNode2.SelectSingleNode("pyParam");
                             ReWriteCmdNode(pyParamNode, dataSourcePath);
                             break;
+                        case "model":
+                            string oldXmlPath = opItem.SelectSingleNode("path").InnerText;
+                            opItem.SelectSingleNode("path").InnerText = Path.Combine(Path.GetDirectoryName(newModelFilePath), Path.GetFileNameWithoutExtension(oldXmlPath), Path.GetFileName(oldXmlPath));
+                            xmlPaths.Add(opItem.SelectSingleNode("path").InnerText);
+                            break;
                         default:
                             break;
                     }
@@ -123,6 +126,8 @@ namespace C2.Business.Model
 
             }
 
+            foreach (string xmlPath in xmlPaths)
+                RenameFilePerXml(xmlPath, dataSourcePath);
 
             xDoc.Save(newModelFilePath);
         }
@@ -189,8 +194,7 @@ namespace C2.Business.Model
             if (!IsSameMindMapTitle(modelName))
             {
                 //解压文件   
-                if(!Utils.ZipUtil.UnZipFile(zipFilePath, "c2", password))
-                    return !hasUnZip;
+                return Utils.ZipUtil.UnZipFile(zipFilePath, "c2", password);
             }
 
             result = MessageBox.Show("模型文件:" + modelName + "已存在，是否覆盖该模型文档", "导入模型", MessageBoxButtons.OKCancel);
@@ -325,30 +329,8 @@ namespace C2.Business.Model
 
         }
 
-        public void RenameFile(string dirs, string newModelFilePath)
+        private void RenameFilePerXml(string newModelFilePath, Dictionary<string, string> dataSourcePath)
         {
-            Dictionary<string, string> dataSourcePath = new Dictionary<string, string>();
-            if (Directory.Exists(dirs))
-            {
-                DirectoryInfo dir0 = new DirectoryInfo(dirs);
-                FileInfo[] fsinfos0 = dir0.GetFiles();
-                foreach (FileInfo fsinfo in fsinfos0)
-                {
-                    // 建立数据源、脚本名称与路径对应字典
-                    dataSourcePath[fsinfo.Name] = fsinfo.FullName;
-                }
-            }
-
-            DirectoryInfo dir1 = new DirectoryInfo(Path.GetDirectoryName(newModelFilePath));
-            FileInfo[] fsinfos1 = dir1.GetFiles();
-            foreach (FileInfo fsinfo in fsinfos1)
-            {
-                // 建立结果文件名称与路径对应字典
-                if (!fsinfo.Name.EndsWith(".xml"))
-                    dataSourcePath[fsinfo.Name] = fsinfo.FullName;
-            }
-            if (dataSourcePath.Count == 0)
-                return;
 
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(newModelFilePath);
@@ -398,6 +380,35 @@ namespace C2.Business.Model
                 ReWriteCmdNode(pyParamNode, dataSourcePath);
             }
             xDoc.Save(newModelFilePath);
+        }
+
+        public void RenameFile(string dirs, string newModelFilePath)
+        {
+            Dictionary<string, string> dataSourcePath = new Dictionary<string, string>();
+            if (Directory.Exists(dirs))
+            {
+                DirectoryInfo dir0 = new DirectoryInfo(dirs);
+                FileInfo[] fsinfos0 = dir0.GetFiles();
+                foreach (FileInfo fsinfo in fsinfos0)
+                {
+                    // 建立数据源、脚本名称与路径对应字典
+                    dataSourcePath[fsinfo.Name] = fsinfo.FullName;
+                }
+            }
+
+            DirectoryInfo dir1 = new DirectoryInfo(Path.GetDirectoryName(newModelFilePath));
+            FileInfo[] fsinfos1 = dir1.GetFiles();
+            foreach (FileInfo fsinfo in fsinfos1)
+            {
+                // 建立结果文件名称与路径对应字典
+                if (!fsinfo.Name.EndsWith(".xml"))
+                    dataSourcePath[fsinfo.Name] = fsinfo.FullName;
+            }
+            if (dataSourcePath.Count == 0)
+                return;
+
+            RenameFilePerXml(newModelFilePath, dataSourcePath);
+
         }
         private void ReWriteCmdNode(XmlNode cmdNode, Dictionary<string, string> dataSourcePath)
         {
