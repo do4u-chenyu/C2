@@ -153,7 +153,6 @@
             this.wgs_gcj.Name = "wgs_gcj";
             this.wgs_gcj.Size = new System.Drawing.Size(204, 19);
             this.wgs_gcj.TabIndex = 5;
-            this.wgs_gcj.TabStop = true;
             this.wgs_gcj.Text = "wgsgcj:国际坐标系转国标";
             this.wgs_gcj.UseVisualStyleBackColor = true;
             // 
@@ -165,7 +164,6 @@
             this.bd_gcj.Name = "bd_gcj";
             this.bd_gcj.Size = new System.Drawing.Size(196, 19);
             this.bd_gcj.TabIndex = 4;
-            this.bd_gcj.TabStop = true;
             this.bd_gcj.Text = "bdgcj:百度坐标系转国标";
             this.bd_gcj.UseVisualStyleBackColor = true;
             // 
@@ -177,7 +175,6 @@
             this.wgs_bd.Name = "wgs_bd";
             this.wgs_bd.Size = new System.Drawing.Size(196, 19);
             this.wgs_bd.TabIndex = 3;
-            this.wgs_bd.TabStop = true;
             this.wgs_bd.Text = "wgsbd:国际坐标系转百度";
             this.wgs_bd.UseVisualStyleBackColor = true;
             // 
@@ -189,7 +186,6 @@
             this.gcj_wgs.Name = "gcj_wgs";
             this.gcj_wgs.Size = new System.Drawing.Size(204, 19);
             this.gcj_wgs.TabIndex = 2;
-            this.gcj_wgs.TabStop = true;
             this.gcj_wgs.Text = "gcjwgs:国标转国际坐标系";
             this.gcj_wgs.UseVisualStyleBackColor = true;
             // 
@@ -201,7 +197,6 @@
             this.gcj_bd.Name = "gcj_bd";
             this.gcj_bd.Size = new System.Drawing.Size(196, 19);
             this.gcj_bd.TabIndex = 1;
-            this.gcj_bd.TabStop = true;
             this.gcj_bd.Text = "gcjbd:国标坐标系转百度";
             this.gcj_bd.UseVisualStyleBackColor = true;
             // 
@@ -213,7 +208,6 @@
             this.bd_wgs.Name = "bd_wgs";
             this.bd_wgs.Size = new System.Drawing.Size(196, 19);
             this.bd_wgs.TabIndex = 0;
-            this.bd_wgs.TabStop = true;
             this.bd_wgs.Text = "bdwgs:百度坐标系转国际";
             this.bd_wgs.UseVisualStyleBackColor = true;
             // 
@@ -237,7 +231,6 @@
             this.computeDistance.Name = "computeDistance";
             this.computeDistance.Size = new System.Drawing.Size(133, 19);
             this.computeDistance.TabIndex = 2;
-            this.computeDistance.TabStop = true;
             this.computeDistance.Text = "两坐标间距查询";
             this.computeDistance.UseVisualStyleBackColor = true;
             this.computeDistance.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ComputeDistance_MouseClick);
@@ -245,6 +238,7 @@
             // xyTtransform
             // 
             this.xyTtransform.AutoSize = true;
+            this.xyTtransform.Checked = true;
             this.xyTtransform.Location = new System.Drawing.Point(3, 2);
             this.xyTtransform.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xyTtransform.Name = "xyTtransform";

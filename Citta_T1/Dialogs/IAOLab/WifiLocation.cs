@@ -91,7 +91,41 @@ namespace C2.Dialogs.IAOLab
                     }
                     break;
                 case "Tude":
-                    
+                    if (this.xyTtransform.Checked == true)
+                    {
+                        foreach (RadioButton choices in sixTransform.Controls)
+                        {
+                            if (choices.Checked == true)
+                            {
+                                string[] locationArry = this.inputAndResult.Text.Split('\n');
+                                this.inputAndResult.Text = null;
+                                StringBuilder transform = new StringBuilder();
+                                string type = choices.Name;
+                                foreach (string location in locationArry)
+                                {
+                                    string result = C2.IAOLab.Transform.GPSTransform.GetInstance().CoordinateConversion(location, type);
+                                    string transformString = result;
+                                    transform.Append(transformString);
+                                    inputAndResult.Text = transform.ToString();
+                                }
+                            }
+                        }
+                    }
+                    if (this.computeDistance.Checked == true)
+                    {
+                        string[] locationArry = this.inputAndResult.Text.Split('\n');
+                        this.inputAndResult.Text = null;
+                        StringBuilder transform = new StringBuilder();
+                        string type = "distance";
+                        foreach (string location in locationArry)
+                        {
+                            string result = C2.IAOLab.Transform.GPSTransform.GetInstance().CoordinateConversion(location, type);
+                            string transformString = result;
+                            transform.Append(transformString);
+                            inputAndResult.Text = transform.ToString();
+
+                        }
+                    }
                     break;
                 case "Ip":
                    
@@ -128,7 +162,15 @@ namespace C2.Dialogs.IAOLab
             EnableChange(true);
         }
         private void EnableChange(bool enable)
-        { }
+        {
+            foreach (Control choices in sixTransform.Controls)
+            {
+                if (choices is RadioButton)
+                {
+                    choices.Enabled = enable;
+                }
+            }
+        }
 
         private void WifiLocation_Load(object sender, EventArgs e)
         {
