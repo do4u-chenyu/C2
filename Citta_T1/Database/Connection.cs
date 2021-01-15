@@ -247,12 +247,10 @@ namespace C2.Database
                         string sql = string.Format(@"select * from {0} limit {1}", table.Name, maxNum);
                         cursor.Execute(sql);
                         var list = cursor.FetchMany(int.MaxValue);
-                        string headers;
                         if (list.Count > 0)
                         {
                             // Ìí¼Ó±íÍ·
-                            headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
-                            sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
+                            sb.Append(GetHeaders(list[0])).Append(OpUtil.DefaultLineSeparator);
                         }
 
                         foreach (var item in list)
@@ -277,7 +275,17 @@ namespace C2.Database
             }
         }
 
-
+        private string GetHeaders(IDictionary<string, object> headersDict)
+        {
+            List<string> tmpResult = new List<string>();
+            foreach (var key in headersDict.Keys)
+            {
+                int start = key.IndexOf('.');
+                if (start + 1 > 0 && start + 1 < key.Length - 1)
+                    tmpResult.Add(key.Substring(start + 1));
+            }
+            return string.Join(OpUtil.DefaultFieldSeparator.ToString(), tmpResult);
+        }
 
     }
 }

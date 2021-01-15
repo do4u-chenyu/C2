@@ -41,16 +41,28 @@ namespace C2.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PreviewDbDataForm previewDbDataForm = new PreviewDbDataForm(TableItem);
+            PreviewDbDataForm previewDbDataForm = GenericSingleton<PreviewDbDataForm>.CreateInstance();
             if (!DbUtil.TestConn(TableItem))
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
-            if (TableItem != null && previewDbDataForm.Flush(this.TableItem.DataTable))
+            if (TableItem != null && previewDbDataForm.Flush(this.TableItem))
+            {
+                previewDbDataForm.Focus();
                 previewDbDataForm.Show();
+            }
         }
-
+        private void ReviewStruToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PreviewTableSchema previewTableSchema = GenericSingleton<PreviewTableSchema>.CreateInstance();
+            DbUtil.FillDGVWithTbSchema(previewTableSchema.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable.Name);
+            if (TableItem != null)
+            {
+                previewTableSchema.Focus();
+                previewTableSchema.Show();
+            }
+        }
         #endregion
 
         private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,13 +88,6 @@ namespace C2.Controls.Left
         private void ContextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.ReviewToolStripMenuItem.ToolTipText = this.ReviewToolStripMenuItem.Enabled ? "预览数据源前一千条数据" : HelpUtil.ReviewToolStripMenuItemInfo;
-        }
-
-        private void ReviewStruToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PreviewTableSchema previewTableSchema = new PreviewTableSchema();
-            DbUtil.FillDGVWithTbSchema(previewTableSchema.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable.Name);
-            previewTableSchema.Show();
         }
 
         private void CopyTableNameToolStripMenuItem_Click(object sender, EventArgs e)
