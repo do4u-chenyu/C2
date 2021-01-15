@@ -217,7 +217,6 @@ namespace C2.Dialogs.C2OperatorViews
             if (SelectDatabaseItem.Type == DatabaseType.Hive)
             {
                 HiveConnection hiveConnection = new HiveConnection(SelectDatabaseItem);
-
                 string tbContent= hiveConnection.GetSQLResult(this.comboBoxDataBase.Text, textEditorControl1.Text);
                 List<string[]> results = new List<string[]>();
                 foreach (string row in tbContent.Split(OpUtil.DefaultLineSeparator))
@@ -228,7 +227,7 @@ namespace C2.Dialogs.C2OperatorViews
                 gridOutput.Columns.Clear();
                 foreach (string[] row in results)
                 {
-                    if (gridOutput.Rows.Count == 0)
+                    if (gridOutput.Columns.Count == 0)
                     {
                         for (int i = 0; i < row.Length; i++)
                             gridOutput.Columns.Add(i.ToString(), row[i]);
@@ -236,6 +235,7 @@ namespace C2.Dialogs.C2OperatorViews
                     }
                     gridOutput.Rows.Add(row);
                 }
+                return;
 
             }
             try
