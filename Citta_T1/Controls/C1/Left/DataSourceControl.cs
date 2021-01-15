@@ -34,6 +34,7 @@ namespace C2.Controls.Left
         public Dictionary<string, LinkButton> LinkSourceDictI2B { get; }
 
         private LinkButton _SelectLinkButton;
+
         public LinkButton SelectLinkButton
         {
             set

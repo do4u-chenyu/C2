@@ -23,16 +23,21 @@ namespace C2.Database
         private DatabaseItem databaseItem;
         private OraConnection conn;
 
-        public PreviewDbDataForm(DatabaseItem dbi)
+        public PreviewDbDataForm()
         {
             InitializeComponent();
-            this.databaseItem = dbi;
-            this.conn = new OraConnection(databaseItem);
             this.dataGridView.DoubleBuffered(true);
             this.MaxNumChanged += new MaxNumChangedEventHandler(OnDataGridViewMaxNumChanged);
         }
-        public bool Flush(Table table)
+        private void Init(DatabaseItem dbi)
         {
+            this.databaseItem = dbi;
+            this.conn = new OraConnection(databaseItem);
+        }
+        public bool Flush(DatabaseItem dbi)
+        {
+            this.Init(dbi);
+            Table table = dbi.DataTable;
             if (!DbUtil.TestConn(new OraConnection(databaseItem)))
                 return false;
             try
