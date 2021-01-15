@@ -12,6 +12,7 @@ using C2.IAOLab.BaseStation;
 using C2.IAOLab.WifiMac;
 using log4net.Util;
 using C2.IAOLab.BankTool;
+using C2.IAOLab.Transform;
 
 namespace C2.Dialogs.IAOLab
 {
@@ -90,41 +91,11 @@ namespace C2.Dialogs.IAOLab
                     }
                     break;
                 case "Tude":
-                    if (this.xyTtransform.Checked == true)
-                    {
-                        foreach (RadioButton choices in sixTransform.Controls)
-                        {
-                            if (choices.Checked == true)
-                            {
-                                string[] locationArry = this.inputAndResult.Text.Split('\n');
-                                this.inputAndResult.Text = null;
-                                StringBuilder transform = new StringBuilder();
-                                string type = choices.Name;
-                                foreach (string location in locationArry)
-                                {
-                                    string result = C2.IAOLab.Transform.GPSTransform.GetInstance().CoordinateConversion(location, type);
-                                    string transformString = result;
-                                    transform.Append(transformString);
-                                    inputAndResult.Text = transform.ToString();
-                                }
-                            }
-                        }
-                    }
-                    if (this.computeDistance.Checked == true)
-                    {
-                        string[] locationArry = this.inputAndResult.Text.Split('\n');
-                        this.inputAndResult.Text = null;
-                        StringBuilder transform = new StringBuilder();
-                        string type = "distance";
-                        foreach (string location in locationArry)
-                        {
-                            string result = C2.IAOLab.Transform.GPSTransform.GetInstance().CoordinateConversion(location, type);
-                            string transformString = result;
-                            transform.Append(transformString);
-                            inputAndResult.Text = transform.ToString();
+                    if (this.xyTtransform.Checked)
+                        ComputeXYTransform(inputArray, tmpResult);
+                   else
+                        ComputeDistance(inputArray, tmpResult);
 
-                        }
-                    }
                     break;
                 case "Ip":
                    
@@ -163,17 +134,37 @@ namespace C2.Dialogs.IAOLab
         private void EnableChange(bool enable)
         {
             foreach (Control choices in sixTransform.Controls)
-            {
-                if (choices is RadioButton)
-                {
-                    choices.Enabled = enable;
-                }
-            }
+                choices.Enabled = enable;
         }
 
         private void WifiLocation_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void ComputeXYTransform(string[] inputArray, StringBuilder tmpResult)
+        {
+            foreach (RadioButton button in sixTransform.Controls)
+            {
+                if (button.Checked)
+                {
+                    foreach (string location in inputArray)
+                    {
+                        tmpResult.Append(GPSTransform.GetInstance().CoordinateConversion(location, button.Name));
+                        inputAndResult.Text = tmpResult.ToString();
+                    }
+                    return;
+                }
+            }
+        }
+        private void ComputeDistance(string[] inputArray, StringBuilder tmpResult)
+        {
+            foreach (string input in inputArray)
+            {
+                tmpResult.Append(GPSTransform.GetInstance().ComputeDistance(input));
+                inputAndResult.Text = tmpResult.ToString();
+
+            }
         }
     }
 }

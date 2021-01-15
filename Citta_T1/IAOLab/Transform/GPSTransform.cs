@@ -13,6 +13,7 @@ namespace C2.IAOLab.Transform
         private double xPi = 3.14159265358979324 * 3000.0 / 180.0;
         private double earthR = 6371000;
         private static GPSTransform instance;
+        private string  wrong = "输入格式有误\n";
         public static GPSTransform GetInstance()
         {
             if (instance == null)
@@ -23,10 +24,8 @@ namespace C2.IAOLab.Transform
         public string CoordinateConversion(string location, string type)
         {
             string[] locationArray = location.Split(' ');
-            string wrong = "输入格式有误\n";
             double[] result;
             double deviation;
-            double distance;
             if (locationArray.Length == 2)
             {
                 try
@@ -73,34 +72,25 @@ namespace C2.IAOLab.Transform
                 }
 
             }
+            else
+                return wrong;
+
+
+        }
+        public string ComputeDistance(string input)
+        {
+            string[] locationArray = input.Split(' ');
             if (locationArray.Length == 4)
             {
-                try
-                {
-                    double lat = double.Parse(locationArray[0]);
-                    double lon = double.Parse(locationArray[1]);
-                    double blat = double.Parse(locationArray[2]);
-                    double blon = double.Parse(locationArray[3]);
-                    switch (type)
-                    {
-                        case "distance":
-                            distance = Distance(lat, lon, blat, blon);
-                            return (location + ":距离为" + distance.ToString() + "米\r\n");
-                        default:
-                            return wrong;
-                    }
-                }
-                catch
-                {
-                    return wrong;
-                }
+                double lat = double.Parse(locationArray[0]);
+                double lon = double.Parse(locationArray[1]);
+                double blat = double.Parse(locationArray[2]);
+                double blon = double.Parse(locationArray[3]);
+                return (input + ":距离为" + Distance(lat, lon, blat, blon).ToString() + "米\r\n");
             }
-            else
-            {
-                return wrong;
-            }
-        }
+             return wrong;
 
+        }
         #region 6种坐标转换方法
 
         private double[] GCJConvertToBD(double GCJLAT, double GCJLON)
