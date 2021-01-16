@@ -25,13 +25,7 @@ namespace C2.Dialogs.IAOLab
         }
         public void ReLayoutForm()
         {
-            this.methodPanel.Visible = true;
-            this.inputLabel.Visible = false;
-            this.sixTransform.Visible = true;
-            this.Height += 30;
-            this.tipLable.Location=new Point(25,95);
-            inputAndResult.Location=new Point(10,130);
-            inputAndResult.Height -= 20;
+
         }
         public string Tip { set { this.tipLable.Text = value; } }
         public string InputLable { set { this.inputLabel.Text = value; } }
@@ -89,17 +83,7 @@ namespace C2.Dialogs.IAOLab
                         }
 
                     }
-                    break;
-                case "Tude":
-                    if (this.xyTtransform.Checked)
-                        ComputeXYTransform(inputArray, tmpResult);
-                   else
-                        ComputeDistance(inputArray, tmpResult);
-
-                    break;
-                case "Ip":
-                   
-                    break;
+                    break;             
                 default:
                     break;
             }
@@ -117,54 +101,10 @@ namespace C2.Dialogs.IAOLab
 
         }
 
-        private void methodPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void ComputeDistance_MouseClick(object sender, MouseEventArgs e)
-        {
-            EnableChange(false);
-        }
-
-        private void XYTtransform_MouseClick(object sender, MouseEventArgs e)
-        {
-            EnableChange(true);
-        }
-        private void EnableChange(bool enable)
-        {
-            foreach (Control choices in sixTransform.Controls)
-                choices.Enabled = enable;
-        }
-
         private void WifiLocation_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void ComputeXYTransform(string[] inputArray, StringBuilder tmpResult)
-        {
-            foreach (RadioButton button in sixTransform.Controls)
-            {
-                if (button.Checked)
-                {
-                    foreach (string location in inputArray)
-                    {
-                        tmpResult.Append(GPSTransform.GetInstance(location).CoordinateConversion(button.Name));
-                        inputAndResult.Text = tmpResult.ToString();
-                    }
-                    return;
-                }
-            }
-        }
-        private void ComputeDistance(string[] inputArray, StringBuilder tmpResult)
-        {
-            foreach (string input in inputArray)
-            {
-                tmpResult.Append(GPSTransform.GetInstance(input).ComputeDistance());
-                inputAndResult.Text = tmpResult.ToString();
-
-            }
-        }
     }
 }

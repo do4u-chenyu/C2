@@ -782,6 +782,12 @@
     <Compile Include="Dialogs\IAOLab\ApkTool.Designer.cs">
       <DependentUpon>ApkTool.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\IAOLab\Coordinate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\Coordinate.Designer.cs">
+      <DependentUpon>Coordinate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\IAOLab\WifiLocation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1605,6 +1611,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IAOLab\ApkTool.resx">
       <DependentUpon>ApkTool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IAOLab\Coordinate.resx">
+      <DependentUpon>Coordinate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IAOLab\WifiLocation.resx">
       <DependentUpon>WifiLocation.cs</DependentUpon>
