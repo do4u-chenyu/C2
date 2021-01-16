@@ -35,36 +35,32 @@ namespace C2.Dialogs.IAOLab
               Directory.CreateDirectory(tmpPath);
             }
             RunLinuxCommandApkTool(GetCmdCommand(apkpath, jdkpath));
-            //GetApkInfo();
+            
             DirectoryInfo dir = new DirectoryInfo(apkpath);
             //检索表示当前目录的文件和子目录
             FileSystemInfo[] fsinfos = dir.GetFileSystemInfos();
             //遍历检索的文件和子目录
             foreach (FileSystemInfo fsinfo in fsinfos)
             {
-                GetApkInfo(fsinfo.FullName,fsinfo.Name);
+                string apkInfo = GetApkInfo(fsinfo.FullName,fsinfo.Name);
                 //先不用生成result,读取需要的数据加载到内存，并控件预览框展示
-
+                return apkInfo;
             }
             // 删除临时结果文件
-            return null;
+            return "";
         }
         private string GetApkInfo(string apkPath,string apkname)
         {
-            Path.GetTempPath();
-            
-
-
-
-
-
-
+            apkname = apkname.Replace(".apk","\t").Split('\t')[0];
+            string apkToolPath = Path.GetTempPath()+ @"\ApkTool"+ apkname+"\apk_out";
+            string packageName = GetPackage(apkToolPath);
+            string mainActivity = GetActivity(apkToolPath);
+            string apkTrueName = GetApkName(apkToolPath);
             long size = GetApkSize(apkPath);
-            return null;
+            return string.Format("{0}{1}{2}{3} {4}{5}", apkname, "\t", apkTrueName, "\t", packageName, "\t", mainActivity, "\t", size.ToString());
         }
         private long GetApkSize(string filepath)
         {
-            
             using (FileStream fileStream = new FileStream(filepath, FileMode.Open, FileAccess.Read))
             {
                 long size = fileStream.Length;
@@ -77,6 +73,7 @@ namespace C2.Dialogs.IAOLab
             // 右键导出，生成结果文件到excel
             // python的save方法调用
         }
+
         public List<string> GetCmdCommand(string apkpath,string jdkpath)
         {
             string setJdkPath = "set path = " + jdkpath + "bin;% path %";
@@ -89,31 +86,78 @@ namespace C2.Dialogs.IAOLab
             foreach (FileSystemInfo fsinfo in fsinfos)
             {
                 
-                string cmdApk = "java - jar apktool_2.4.1.jar d - f" + fsinfo.FullName+ "-o"+ Path.GetTempPath(); 
-                
+                string cmdApk = "java - jar apktool_2.4.1.jar d - f" + fsinfo.FullName+ "-o"+ Path.GetTempPath()+ "ApkTool"; 
                 
                 cmdList.Add(cmdApk);
                 
             }
             return cmdList;
         }
-        public string GetPackage(string filepath)
+        public string GetIcon(string filepath)
         {
-            XDocument document = XDocument.Load(filepath);
-            //获取到XML的根元素进行操作
-            XElement root = document.Root;
+            filepath += @"\AndroidManifest.xml";
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(filepath);
+            XmlNode rootNode = xDoc.SelectSingleNode("manifest");
+            XmlNode a = rootNode.SelectSingleNode("//application");
             return null;
         }
-        public string getActivity(string filepath)
+        public string GetPackage(string filepath)
         {
+            filepath += @"\AndroidManifest.xml";
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(filepath);
             XmlNode rootNode = xDoc.SelectSingleNode("manifest");
             string strValue = rootNode.Attributes["package"].Value;
-
-
-
-            return null;
+            return strValue;
+        }
+        public string GetApkName(string filepath)
+        {
+            string filepath1 = filepath+ @"\AndroidManifest.xml";
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(filepath1);
+            XmlNode rootNode0 = xDoc.SelectSingleNode("manifest");
+            XmlNode a = rootNode0.SelectSingleNode("//application");
+            string strValue = a.Attributes["label"].Value;
+            if (strValue.Contains("@"))
+            {
+                strValue = strValue.Split('/')[1];
+                filepath += @"\apk_out\res\values\strings.xml";
+                XmlDocument xDoc1 = new XmlDocument();
+                xDoc.Load(filepath);
+                XmlNode rootNode1 = xDoc1.SelectSingleNode("resources");
+                XmlNodeList namenodes = rootNode1.SelectNodes("//string");
+                foreach (XmlNode namenode in namenodes)
+                {
+                    if((namenode as XmlElement).GetAttribute("name") == strValue)
+                    {
+                        return (namenode as XmlElement).InnerText;
+                    }
+                    return null;
+                }
+                return null;
+            }
+            else
+            {
+                return strValue;
+            }
+        }
+        public string GetActivity(string filepath)
+        {
+            filepath += @"\AndroidManifest.xml";
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(filepath);
+            XmlNode rootNode = xDoc.SelectSingleNode("manifest");
+            XmlNodeList a = rootNode.SelectNodes("//activity");
+            foreach (XmlNode node in a)
+            {
+                if (node.Attributes["package"].Value.Contains(".MainActivity"))
+                {
+                    return node.Attributes["android:name"].Value;
+                }
+                return "未找到主函数";
+            }
+            return "未找到主函数";
         }
         public string RunLinuxCommandApkTool(List<string> cmds)
         {
@@ -121,7 +165,6 @@ namespace C2.Dialogs.IAOLab
             if (cmds == null || !cmds.Any())
                 return "";
             string errorMessage = String.Empty;
-
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             //p.StartInfo.Arguments = "/c " + string.Join(";",cmds);
