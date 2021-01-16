@@ -129,7 +129,7 @@ namespace C2.Business.Model
                 Directory.CreateDirectory(desPath);
                 File.Copy(xmlPath, Path.Combine(desPath, Path.GetFileName(xmlPath)), true);
 
-                CopyDataSourceFilesPerXml(xmlPath, allPaths, dataSourceNames);
+                CopyDataSourceFilesPerXml(xmlPath, allPaths, dataSourceNames, true);
             }
 
             xDoc.Save(this.XmlFullPath);
@@ -263,7 +263,7 @@ namespace C2.Business.Model
                 return C2CopyDataSourceFiles();
         }
 
-        private bool CopyDataSourceFilesPerXml(string xmlPath, Dictionary<string, string> allPaths, List<string> dataSourceNames)
+        private bool CopyDataSourceFilesPerXml(string xmlPath, Dictionary<string, string> allPaths, List<string> dataSourceNames, bool isC2Model=false)
         {
             bool copySuccess = true;
 
@@ -276,6 +276,13 @@ namespace C2.Business.Model
             if (!CopyDataSourceOperatorFile(nodes, allPaths, dataSourceNames))
                 return !copySuccess;
 
+            //结果也要存一份
+            if (isC2Model)
+            {
+                XmlNodeList results = rootNode.SelectNodes("//ModelElement[type='Result']");
+                if (!CopyDataSourceOperatorFile(results, allPaths, dataSourceNames))
+                    return !copySuccess;
+            }
             // AI、多源算子
             XmlNodeList customNodes = rootNode.SelectNodes("//ModelElement[subtype='CustomOperator1']|//ModelElement[subtype='CustomOperator2']");
             if (!CopyCustomOperatorFile(customNodes, allPaths, dataSourceNames))
