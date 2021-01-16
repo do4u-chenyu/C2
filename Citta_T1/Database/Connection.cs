@@ -262,7 +262,7 @@ namespace C2.Database
 
                         var cursor = conn.GetCursor();
                         cursor.Execute("use " + database);
-                        cursor.Execute(sql);
+                        cursor.Execute(sql.TrimEnd(';'));
                         var list = cursor.FetchMany(int.MaxValue);
                         if (list.Count > 0)
                         {
