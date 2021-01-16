@@ -3,158 +3,131 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using C2.Utils;
 
 namespace C2.IAOLab.Transform
 {
     public class GPSTransform
     {
-        private double pi = 3.14159265358979324;
-        private double xPi = 3.14159265358979324 * 3000.0 / 180.0;
+
+        private double xPi = Math.PI * 3000.0 / 180.0;
         private double earthR = 6371000;
         private static GPSTransform instance;
-        private string  wrong = "输入格式有误\n";
-        public static GPSTransform GetInstance()
+        private string input;
+        private string wrongInfo;
+        private string[] inputArray;
+        public GPSTransform(string input)
+        {
+            this.input = input;
+            this.wrongInfo = string.Format("{0}:输入格式有误\n", input);
+            this.inputArray = input.Split(' ');
+        }
+
+       
+        public static GPSTransform GetInstance(string input)
         {
             if (instance == null)
-                instance = new GPSTransform();
+                instance = new GPSTransform(input);
             return instance;
         }
 
-        public string CoordinateConversion(string location, string type)
+        public string CoordinateConversion(string type)
         {
-            string[] locationArray = location.Split(' ');
             double[] result;
-            double deviation;
-            if (locationArray.Length == 2)
-            {
-                try
-                {
-                    double lat = double.Parse(locationArray[0]);
-                    double lon = double.Parse(locationArray[1]);
-                    switch (type)
-                    {
-                        case "bd_wgs":
-                            result = BDConvertToWGS(lat, lon);
-                            break;
-                        case "wgs_bd":
-                            result = WGConvertToBD(lat, lon);
-                            break;
-                        case "wgs_gcj":
-                            result = WGSConvertToGCJ(lat, lon);
-                            break;
-                        case "gcj_wgs":
-                            result = GCJConvertToWGS(lat, lon);
-                            break;
-                        case "bd_gcj":
-                            result = BDConvertToGCJ(lat, lon);
-                            break;
-                        case "gcj_bd":
-                            result = GCJConvertToBD(lat, lon);
-                            break;
-                        default:
-                            result = null;
-                            break;
-                    }
-                    if (result != null)
-                    {
-                        deviation = Distance(lat, lon, result[0], result[1]);
-                        return (location + ":结果坐标为" + String.Join(" ", result) + "，偏差为" + deviation.ToString() + "米\r\n");
-                    }
-                    else
-                    {
-                        return wrong;
-                    }
-                }
-                catch
-                {
-                    return wrong;
-                }
+            if (inputArray.Length != 2)
+                return wrongInfo;
+            double lat = ConvertUtil.TryParseDouble(inputArray[0]);
+            double lon = ConvertUtil.TryParseDouble(inputArray[1]);
+            if (lat == double.NaN || lon == double.NaN)
+                return wrongInfo;
 
-            }
-            else
-                return wrong;
+            switch (type)
+            {
+                case "bd_wgs":
+                    result = BDConvertToWGS(lat, lon);
+                        break;
+                    case "wgs_bd":
+                        result = WGConvertToBD(lat, lon);
+                        break;
+                    case "wgs_gcj":
+                        result = WGSConvertToGCJ(lat, lon);
+                        break;
+                    case "gcj_wgs":
+                        result = GCJConvertToWGS(lat, lon);
+                        break;
+                    case "bd_gcj":
+                        result = BDConvertToGCJ(lat, lon);
+                        break;
+                    case "gcj_bd":
+                        result = GCJConvertToBD(lat, lon);
+                        break;
+                    default:
+                        result = new double[] { };
+                        break;
+                }
+                if (result.Count() < 2)
+                    return string.Format("{0}:{1}", input, wrongInfo);
+                double deviation = Distance(lat, lon, result[0], result[1]);
+                return string.Format("{0}:转换后坐标为{1} {2}，偏差为:{3}米\r\n", input, result[0], result[1], deviation);
 
 
         }
-        public string ComputeDistance(string input)
+        public string ComputeDistance()
         {
-            string[] locationArray = input.Split(' ');
-            if (locationArray.Length == 4)
-            {
-                double lat = double.Parse(locationArray[0]);
-                double lon = double.Parse(locationArray[1]);
-                double blat = double.Parse(locationArray[2]);
-                double blon = double.Parse(locationArray[3]);
-                return (input + ":距离为" + Distance(lat, lon, blat, blon).ToString() + "米\r\n");
-            }
-             return wrong;
-
+            if (inputArray.Length != 4)
+                return wrongInfo;
+            double lat = ConvertUtil.TryParseDouble(inputArray[0]);
+            double lon = ConvertUtil.TryParseDouble(inputArray[1]);
+            double blat = ConvertUtil.TryParseDouble(inputArray[2]);
+            double blon = ConvertUtil.TryParseDouble(inputArray[3]);
+            bool illegalNum = double.IsNaN(lat) || double.IsNaN(lon) || double.IsNaN(blat) || double.IsNaN(blon);
+            if (illegalNum)
+                return wrongInfo;
+            return string.Format("{0}:距离为{1}米\r\n", input, Distance(lat, lon, blat, blon));
         }
         #region 6种坐标转换方法
 
-        private double[] GCJConvertToBD(double GCJLAT, double GCJLON)
+        private double[] GCJConvertToBD(double GCJLat, double GCJLon)
         {
-            double z = Math.Sqrt(Math.Pow(GCJLON, 2) + Math.Pow(GCJLAT, 2)) + 0.00002 * Math.Sin(GCJLAT * xPi);
-            double theta = Math.Atan2(GCJLAT, GCJLON) + 0.000003 * Math.Cos(GCJLON * xPi);
-            //double[] result = { z * Math.Cos(theta) + 0.0065, z * Math.Sin(theta) + 0.006 };
+            double z = Math.Sqrt(Math.Pow(GCJLon, 2) + Math.Pow(GCJLat, 2)) + 0.00002 * Math.Sin(GCJLat * xPi);
+            double theta = Math.Atan2(GCJLat, GCJLon) + 0.000003 * Math.Cos(GCJLon * xPi);
             double[] result = { z * Math.Sin(theta) + 0.006, z * Math.Cos(theta) + 0.0065 };
             return result;
         }
         private double[] BDConvertToGCJ(double BDLAT, double BDLON)
-        {
-            // 这个还传参数干嘛？？？
+        {          
             BDLON -= 0.0065;
             BDLAT -= 0.006;
             double z = Math.Sqrt(BDLON * BDLON + BDLAT * BDLAT) - 0.00002 * Math.Sin(BDLAT * xPi);
             double theta = Math.Atan2(BDLAT, BDLON) - 0.000003 * Math.Cos(BDLON * xPi);
-            //double[] result = { z * Math.Cos(theta), z * Math.Sin(theta) };
             double[] result = { z * Math.Sin(theta), z * Math.Cos(theta) };
             return result;
         }
         public double Distance(double ALAT, double ALON, double BLAT, double BLON)
         {
-            double x = Math.Cos(ALAT * pi / 180) * Math.Cos(BLAT * pi / 180) * Math.Cos((ALON - BLON) * pi / 180);
-            double y = Math.Sin(ALAT * pi / 180) * Math.Sin(BLAT * pi / 180);
+            double x = Math.Cos(ALAT * Math.PI / 180) * Math.Cos(BLAT * Math.PI / 180) * Math.Cos((ALON - BLON) * Math.PI / 180);
+            double y = Math.Sin(ALAT * Math.PI / 180) * Math.Sin(BLAT * Math.PI / 180);
             double s = x + y;
             double alpha = Math.Acos(Math.Max(-1.0, Math.Min(1.0, s)));
             return alpha * earthR;
         }
-        private double EasyDistance(double ALAT, double ALON, double BLAT, double BLON)
-        {
-            double z = Math.Pow((ALON - BLON), 2) * 12321 + Math.Pow((ALAT - BLAT), 2) * 8574;
-            return Math.Sqrt(z);
-        }
+
 
         private double[] XYTransform(double x, double y)
         {
 
             double absX = Math.Sqrt(Math.Abs(x));
-            double d = (20.0 * Math.Sin(6.0 * x * pi) + 20.0 * Math.Sin(2.0 * x * pi)) * 2.0 / 3.0;
+            double d = (20.0 * Math.Sin(6.0 * x * Math.PI) + 20.0 * Math.Sin(2.0 * x * Math.PI)) * 2.0 / 3.0;
             double lat = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * absX + d;
             double lon = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * absX + d;
-            lat += (20.0 * Math.Sin(y * pi) + 40.0 * Math.Sin(y / 3.0 * pi)) * 2.0 / 3.0;
-            lon += (20.0 * Math.Sin(x * pi) + 40.0 * Math.Sin(x / 3.0 * pi)) * 2.0 / 3.0;
-            lat += (160.0 * Math.Sin(y / 12.0 * pi) + 320.0 * Math.Sin(y / 30.0 * pi)) * 2.0 / 3.0;
-            lon += (150.0 * Math.Sin(x / 12.0 * pi) + 300.0 * Math.Sin(x / 30.0 * pi)) * 2.0 / 3.0;
+            lat += (20.0 * Math.Sin(y * Math.PI) + 40.0 * Math.Sin(y / 3.0 * Math.PI)) * 2.0 / 3.0;
+            lon += (20.0 * Math.Sin(x * Math.PI) + 40.0 * Math.Sin(x / 3.0 * Math.PI)) * 2.0 / 3.0;
+            lat += (160.0 * Math.Sin(y / 12.0 * Math.PI) + 320.0 * Math.Sin(y / 30.0 * Math.PI)) * 2.0 / 3.0;
+            lon += (150.0 * Math.Sin(x / 12.0 * Math.PI) + 300.0 * Math.Sin(x / 30.0 * Math.PI)) * 2.0 / 3.0;
             double[] result = { lat, lon };
             return result;
         }
 
-        private double[] CoordinateTransform(double x, double y)
-        {
-
-            double absX = Math.Sqrt(Math.Abs(x));
-            double d = (20.0 * Math.Sin(6.0 * x * pi) + 20.0 * Math.Sin(2.0 * x * pi)) * 2.0 / 3.0;
-            double lat = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * absX + d;
-            double lon = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * absX + d;
-            lat += (20.0 * Math.Sin(y * pi) + 40.0 * Math.Sin(y / 3.0 * pi)) * 2.0 / 3.0;
-            lon += (20.0 * Math.Sin(x * pi) + 40.0 * Math.Sin(x / 3.0 * pi)) * 2.0 / 3.0;
-            lat += (160.0 * Math.Sin(y / 12.0 * pi) + 320 * Math.Sin(y / 30.0 * pi)) * 2.0 / 3.0;
-            lon += (150.0 * Math.Sin(x / 12.0 * pi) + 300.0 * Math.Sin(x / 30.0 * pi)) * 2.0 / 3.0;
-            double[] result = { lat, lon };
-            return result;
-        }
         private bool OutOfChina(double lat, double lon)
         {
             if (lon < 72.004 || lon > 137.8347)
@@ -174,17 +147,16 @@ namespace C2.IAOLab.Transform
         {
             double a = 6378245.0;
             double ee = 0.00669342162296594323;
-            // 下面公式对么？log log
 
             double[] latLon = XYTransform(log - 105.0, lat - 35.0);
 
             //List<double> latLon = CoordinateTransform(log - 105.0, lat - 35.0);
 
-            double radLat = lat / 180.0 * pi;
+            double radLat = lat / 180.0 * Math.PI;
             double magic = 1 - ee * (Math.Pow(Math.Sin(radLat),2));
             double sqrtMagic = Math.Sqrt(magic);
-            latLon[0] = (latLon[0] * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * pi);
-            latLon[1] = (latLon[1] * 180.0) / (a / sqrtMagic * Math.Cos(radLat) * pi);
+            latLon[0] = (latLon[0] * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * Math.PI);
+            latLon[1] = (latLon[1] * 180.0) / (a / sqrtMagic * Math.Cos(radLat) * Math.PI);
             double[] result = { latLon[0], latLon[1] };
             return result;
         }
@@ -202,20 +174,7 @@ namespace C2.IAOLab.Transform
                 return result;
             }
         }
-        private double[] EasyGCJWGS(double gcjLat, double gcjLon)
-        {
-            if (OutOfChina(gcjLat, gcjLon))
-            {
-                double[] result = { gcjLat, gcjLon };
-                return result;
-            }
-            else
-            {
-                double[] WGS = Delta(gcjLat, gcjLon);
-                double[] result = { gcjLat - WGS[0], gcjLon - WGS[1] };
-                return result;
-            }
-        }
+
         private double[] GCJConvertToWGS(double gcjLat, double gcjLon)
         {
 

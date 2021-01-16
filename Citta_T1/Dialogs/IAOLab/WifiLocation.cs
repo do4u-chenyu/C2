@@ -150,7 +150,7 @@ namespace C2.Dialogs.IAOLab
                 {
                     foreach (string location in inputArray)
                     {
-                        tmpResult.Append(GPSTransform.GetInstance().CoordinateConversion(location, button.Name));
+                        tmpResult.Append(GPSTransform.GetInstance(location).CoordinateConversion(button.Name));
                         inputAndResult.Text = tmpResult.ToString();
                     }
                     return;
@@ -161,7 +161,7 @@ namespace C2.Dialogs.IAOLab
         {
             foreach (string input in inputArray)
             {
-                tmpResult.Append(GPSTransform.GetInstance().ComputeDistance(input));
+                tmpResult.Append(GPSTransform.GetInstance(input).ComputeDistance());
                 inputAndResult.Text = tmpResult.ToString();
 
             }

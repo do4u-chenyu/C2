@@ -34,7 +34,18 @@ namespace C2.Utils
                 return defaultValue;
             }
         }
-
+        public static double TryParseDouble(string value)
+        {
+            if (string.IsNullOrEmpty(value)) return double.NaN;
+            try
+            {
+                return double.Parse(value);
+            }
+            catch
+            {
+                return double.NaN;
+            }
+        }
         public static bool IsInt(string value)
         {
             try
