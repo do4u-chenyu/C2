@@ -12,13 +12,14 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 using C2.Controls;
+using Microsoft.VisualBasic.Devices;
 
 namespace C2.Dialogs.IAOLab
 {
     public partial class ApkTool : BaseDialog
     {
         private readonly object _objLock = new object();
-        
+        Computer MyComputer = new Computer();
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
         public UpdateLog UpdateLogDelegate;
         public ApkTool()
@@ -49,15 +50,16 @@ namespace C2.Dialogs.IAOLab
             // 删除临时结果文件
             return "";
         }
-        private string GetApkInfo(string apkPath,string apkname)
+        private string GetApkInfo(string apkPath,string apkName)
         {
-            apkname = apkname.Replace(".apk","\t").Split('\t')[0];
-            string apkToolPath = Path.GetTempPath()+ @"\ApkTool"+ apkname+"\apk_out";
+            apkName = apkName.Replace(".apk","\t").Split('\t')[0];
+            string apkToolPath = Path.GetTempPath()+ @"\ApkTool\"+ apkName;
             string packageName = GetPackage(apkToolPath);
             string mainActivity = GetActivity(apkToolPath);
             string apkTrueName = GetApkName(apkToolPath);
+            string apkIconFullName = GetIcon(apkToolPath);
             long size = GetApkSize(apkPath);
-            return string.Format("{0}{1}{2}{3} {4}{5}", apkname, "\t", apkTrueName, "\t", packageName, "\t", mainActivity, "\t", size.ToString());
+            return string.Format("{0}{1}{2}{3} {4}{5}", apkIconFullName, "\t", apkName, "\t", apkTrueName, "\t", packageName, "\t", mainActivity, "\t", size.ToString());
         }
         private long GetApkSize(string filepath)
         {
@@ -93,14 +95,34 @@ namespace C2.Dialogs.IAOLab
             }
             return cmdList;
         }
-        public string GetIcon(string filepath)
+        public string GetIcon(string filePath)
         {
-            filepath += @"\AndroidManifest.xml";
+            string iconPath = filePath + @"\res";
+            filePath += @"\AndroidManifest.xml";
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(filepath);
+            xDoc.Load(filePath);
             XmlNode rootNode = xDoc.SelectSingleNode("manifest");
             XmlNode a = rootNode.SelectSingleNode("//application");
-            return null;
+            string strValue = a.Attributes["android:icon"].Value.Split('/')[1];
+            DirectoryInfo dir = new DirectoryInfo(iconPath);
+            //检索表示当前目录的文件和子目录
+            FileSystemInfo[] fsinfos = dir.GetFileSystemInfos();
+            //遍历检索的文件和子目录
+            //int i = 0;
+            string relICon="";
+            foreach (FileSystemInfo fsinfo in fsinfos)
+            {
+                using (FileStream fileStream = new FileStream(fsinfo.FullName, FileMode.Open, FileAccess.Read))
+                {
+                    long size = 0;
+                    if (fsinfo.Name.Contains(strValue)&& fileStream.Length > size)
+                    {
+                        size = fileStream.Length;
+                        relICon = fsinfo.FullName;
+                    }
+                }
+            }
+            return relICon;
         }
         public string GetPackage(string filepath)
         {
@@ -118,7 +140,7 @@ namespace C2.Dialogs.IAOLab
             xDoc.Load(filepath1);
             XmlNode rootNode0 = xDoc.SelectSingleNode("manifest");
             XmlNode a = rootNode0.SelectSingleNode("//application");
-            string strValue = a.Attributes["label"].Value;
+            string strValue = a.Attributes["android:label"].Value;
             if (strValue.Contains("@"))
             {
                 strValue = strValue.Split('/')[1];
@@ -151,7 +173,7 @@ namespace C2.Dialogs.IAOLab
             XmlNodeList a = rootNode.SelectNodes("//activity");
             foreach (XmlNode node in a)
             {
-                if (node.Attributes["package"].Value.Contains(".MainActivity"))
+                if (node.Attributes["android:name"].Value.Contains(".MainActivity"))
                 {
                     return node.Attributes["android:name"].Value;
                 }
