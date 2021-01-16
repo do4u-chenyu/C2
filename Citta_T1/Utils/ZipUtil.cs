@@ -23,35 +23,8 @@ namespace C2.Utils
         /// <summary>
         /// 解压文件
         /// </summary>
-        public static bool UnZipFile(string zipFilePath, string type, string password="")
+        public static string UnZipFile(string zipFilePath, string targetPath, string password="")
         {
-            string xmlEnd = type == "iao" ? ".xml" : ".bmd";
-            string directory = type == "iao" ? "模型市场" : "业务视图";
-
-            if (!File.Exists(zipFilePath))
-            {
-                HelpUtil.ShowMessageBox("未能找到: " + zipFilePath); ;
-                return false;
-            }
-            // 获取模型文件名称
-            string modelTitle = string.Empty;
-            using (ZipInputStream s = new ZipInputStream(File.OpenRead(zipFilePath)))
-            {
-                ZipEntry theEntry;
-                while ((theEntry = s.GetNextEntry()) != null)
-                {
-                    string fileName = Path.GetFileName(theEntry.Name);
-                    if (!string.IsNullOrEmpty(fileName) && fileName.EndsWith(xmlEnd))
-                    {
-                        modelTitle = Path.GetFileNameWithoutExtension(fileName);
-                        break;
-                    }
-                }
-            }
-            string workPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, directory);
-            string targetPath = Path.Combine(workPath, modelTitle);
-            Directory.CreateDirectory(workPath);
-
             FastZip fz = new FastZip()
             {
                 Password = password
@@ -60,15 +33,23 @@ namespace C2.Utils
             {
                 fz.ExtractZip(zipFilePath, targetPath, "");
             }
-            catch(Exception e)
+            catch (ZipException e)
             {
-                HelpUtil.ShowMessageBox(e.Message);
-                return false;
+                if (e.Message.Equals("No password available for encrypted stream") || e.Message.Equals("Invalid password"))
+                {
+                    return "密码错误";
+                }
+                else
+                    return e.Message;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
             }
             Crc32 crc32 = new Crc32();
             crc32.Update(new byte[] { 0x00, 0x01, 0x11 });
 
-            return true;
+            return string.Empty;
         }
     }
 }

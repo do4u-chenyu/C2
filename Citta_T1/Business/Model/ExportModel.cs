@@ -43,7 +43,11 @@ namespace C2.Business.Model
 
             //模型关联文件复制
             if (!CopyModelAndDataFiles(Path.GetDirectoryName(this.XmlFullPath), true))
+            {
+                if (Directory.Exists(TmpModelPath))
+                    Directory.Delete(TmpModelPath, true);
                 return false;
+            }
 
             //生成压缩包
             try
@@ -53,12 +57,14 @@ namespace C2.Business.Model
             catch(Exception e)
             {
                 HelpUtil.ShowMessageBox(e.Message);
+                if (Directory.Exists(TmpModelPath))
+                    Directory.Delete(TmpModelPath, true);
                 return false;
             }
 
             //删除临时文件夹
-            //if (Directory.Exists(TmpModelPath))
-            //    Directory.Delete(TmpModelPath, true);
+            if (Directory.Exists(TmpModelPath))
+                Directory.Delete(TmpModelPath, true);
 
             return true;
         }
@@ -183,19 +189,26 @@ namespace C2.Business.Model
 
         #endregion
 
-        public void Export(string fullXmlFilePath, string modelNewName, string exportFilePath)
+        public bool Export(string fullXmlFilePath, string modelNewName, string exportFilePath)
         {
             // 模型文档不存在返回
             if (!File.Exists(fullXmlFilePath))
             {
                 HelpUtil.ShowMessageBox("模型文档不存在，可能已被删除");
-                return;
+                return false;
             }
             this.XmlFullPath = fullXmlFilePath;
             this.NewModelName = modelNewName;
             // 准备要导出的模型文档
             if (!CopyModelAndDataFiles(exportFilePath))
-                return;
+            {
+                if (Directory.Exists(TmpModelPath))
+                    Directory.Delete(TmpModelPath, true);
+                return false;
+            }
+                
+
+            return true;
         }
 
         public void GenExportIAO()
@@ -223,7 +236,7 @@ namespace C2.Business.Model
             //string modelName = Path.GetFileNameWithoutExtension(this.XmlFullPath);
 
             string modelPath = Path.GetDirectoryName(this.XmlFullPath);
-            TmpModelPath = Path.Combine(exportFilePath, string.Format("{0}_{1}", NewModelName, DateTime.Now.ToString("hhmmss")));//业务视图临时文件夹可能与模型算子文件夹同名，加时间戳做区分
+            TmpModelPath = Path.Combine(exportFilePath, isC2Model ? string.Format("{0}_{1}", NewModelName, DateTime.Now.ToString("hhmmss")) : NewModelName);//业务视图临时文件夹可能与模型算子文件夹同名，加时间戳做区分
             Directory.CreateDirectory(TmpModelPath);
             string[] filePaths = Directory.GetFiles(modelPath, "*.*");
             foreach (string file in filePaths)

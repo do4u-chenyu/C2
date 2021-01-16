@@ -30,9 +30,17 @@ namespace C2.Business.Model
         public bool UnZipC2File(string fullFilePath, string userName, string password="")
         {
             if (!File.Exists(fullFilePath))
+            {
+                HelpUtil.ShowMessageBox("未能找到: " + fullFilePath);
                 return false;
+            }
             if (!HasUnZipC2File(fullFilePath, userName, password))
+            {
+                if (Directory.Exists(this.modelDir))
+                    Directory.Delete(this.modelDir, true);
                 return false;
+            }
+                
             // 脚本、数据源存储路径
             string dirs = Path.Combine(this.modelDir, "_datas");
             // 修改XML文件中数据源路径
@@ -154,6 +162,7 @@ namespace C2.Business.Model
             string fileName = string.Empty;
             string modelName = string.Empty;
             string modelPath = string.Empty;
+            string errMsg = string.Empty;
             DialogResult result;
             ZipInputStream s = null;
             try
@@ -190,11 +199,20 @@ namespace C2.Business.Model
             this.modelDir = Path.Combine(Global.WorkspaceDirectory, userName, "业务视图", modelName);
             this.modelFilePath = Path.Combine(this.modelDir, fileName);
 
+            Directory.CreateDirectory(modelDir);
+
+
             // 是否包含同名模型文档
             if (!IsSameMindMapTitle(modelName))
             {
                 //解压文件   
-                return Utils.ZipUtil.UnZipFile(zipFilePath, "c2", password);
+                errMsg = ZipUtil.UnZipFile(zipFilePath, this.modelDir, password);
+                if (!string.IsNullOrEmpty(errMsg))
+                {
+                    HelpUtil.ShowMessageBox(errMsg);
+                    return !hasUnZip;
+                }
+                return hasUnZip;
             }
 
             result = MessageBox.Show("模型文件:" + modelName + "已存在，是否覆盖该模型文档", "导入模型", MessageBoxButtons.OKCancel);
@@ -209,8 +227,12 @@ namespace C2.Business.Model
             // 删除原始模型文件、解压新文件                    
             if (Directory.Exists(modelPath))
                 Directory.Delete(modelPath, true);
-            if(!Utils.ZipUtil.UnZipFile(zipFilePath, "c2", password))
+            errMsg = ZipUtil.UnZipFile(zipFilePath, this.modelDir, password);
+            if (!string.IsNullOrEmpty(errMsg))
+            {
+                HelpUtil.ShowMessageBox(errMsg);
                 return !hasUnZip;
+            }
 
             return hasUnZip;
         }
@@ -269,6 +291,7 @@ namespace C2.Business.Model
             string fileName = string.Empty;
             string modelName = string.Empty;
             string modelPath = string.Empty;
+            string errMsg = string.Empty;
             DialogResult result;
             ZipInputStream s = null;
             try
@@ -304,11 +327,18 @@ namespace C2.Business.Model
                 return !hasUnZip;
             this.modelDir = Path.Combine(Global.WorkspaceDirectory, userName, "模型市场", modelName);
             this.modelFilePath = Path.Combine(this.modelDir, fileName);
+
+            Directory.CreateDirectory(this.modelDir);
             // 是否包含同名模型文档
             if (!IsSameModelTitle(modelName))
             {
                 //解压文件   
-                Utils.ZipUtil.UnZipFile(zipFilePath,"iao");
+                errMsg = ZipUtil.UnZipFile(zipFilePath, this.modelDir);
+                if (!string.IsNullOrEmpty(errMsg))
+                {
+                    HelpUtil.ShowMessageBox(errMsg);
+                    return !hasUnZip;
+                }
                 return hasUnZip;
             }
 
@@ -322,9 +352,14 @@ namespace C2.Business.Model
                 return !hasUnZip;
             }
             // 删除原始模型文件、解压新文件                    
-            if (Directory.Exists(modelPath))
-                Directory.Delete(modelPath, true);
-            Utils.ZipUtil.UnZipFile(zipFilePath,"iao");
+            if (Directory.Exists(this.modelDir))
+                Directory.Delete(this.modelDir, true);
+            errMsg = ZipUtil.UnZipFile(zipFilePath, this.modelDir);
+            if (!string.IsNullOrEmpty(errMsg))
+            {
+                HelpUtil.ShowMessageBox(errMsg);
+                return !hasUnZip;
+            }
             return hasUnZip;
 
         }
