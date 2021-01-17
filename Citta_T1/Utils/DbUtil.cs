@@ -211,7 +211,7 @@ namespace C2.Utils
             return ret;
         }
 
-        private static List<List<string>> StringTo2DString(string contentString)
+        public static List<List<string>> StringTo2DString(string contentString)
         {
             List<List<string>> ret = new List<List<string>>();
             if (!String.IsNullOrEmpty(contentString))
@@ -380,6 +380,23 @@ namespace C2.Utils
         {
             public string content;
             public int returnNum;
+        }
+        public static Dictionary<string, List<string>> StringToDict(string v)
+        {
+            Dictionary<string, List<string>> result = new Dictionary<string, List<string>>();
+            foreach (string line in v.Split(OpUtil.DefaultLineSeparator))
+            {
+                var kv = line.Split(OpUtil.DefaultFieldSeparator);
+                if (kv.Length != 2)
+                    continue;
+                string key = kv[0];
+                string val = kv[1];
+                if (result.ContainsKey(key))
+                    result[key].Add(val);
+                else
+                    result.Add(key, new List<string>() { val });
+            }
+            return result;
         }
     }
 }

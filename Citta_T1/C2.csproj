@@ -222,9 +222,14 @@
     <Compile Include="Controls\DataCharts\RingChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Database\BaseDAOImpl.cs" />
+    <Compile Include="Database\DAOFactory.cs" />
+    <Compile Include="Database\HiveDAOImpl.cs" />
+    <Compile Include="Database\OracleDAOImpl.cs" />
     <Compile Include="Database\Connection.cs" />
     <Compile Include="Database\DbHelper.cs" />
     <Compile Include="Database\GenericSingleton.cs" />
+    <Compile Include="Database\IDAO.cs" />
     <Compile Include="Database\PreviewDbDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
