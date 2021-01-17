@@ -13,6 +13,11 @@ namespace C2.Database
     {
         #region 构造函数
         protected string Name, User, Pass, Host, Sid, Service, Port;
+        protected struct QueryResult
+        {
+            public string content;
+            public int returnNum;
+        }
         protected BaseDAOImpl()
         {
 
@@ -59,19 +64,22 @@ namespace C2.Database
         }
         public virtual bool TestConn()
         {
-            throw new NotImplementedException();
+            return false;
         }
         #endregion
         #region 业务逻辑
         public virtual List<string> GetUsers()
         {
-            return new List<string>(this.Query(this.GetUserSQL()).Split(OpUtil.DefaultLineSeparator));
+            string result = this.Query(this.GetUserSQL());
+            return String.IsNullOrEmpty(result) ? new List<String>() : new List<string>(result.Split(OpUtil.DefaultLineSeparator));
         }
         public virtual List<Table> GetTablesByUserOrDb(string usersOrDbs)
         {
             List<Table> tables = new List<Table>();
-            foreach (var line in this.Query(String.Format(this.GetTablesByUserSQL(), usersOrDbs)).Split(OpUtil.DefaultLineSeparator))
-                tables.Add(new Table(usersOrDbs, line));
+            string result = this.Query(String.Format(this.GetTablesByUserSQL(), usersOrDbs));
+            if (!String.IsNullOrEmpty(result))
+                foreach (var line in result.Split(OpUtil.DefaultLineSeparator))
+                    tables.Add(new Table(usersOrDbs, line));
             return tables;
         }
         public virtual string GetTableContentString(Table table, int maxNum)
@@ -80,16 +88,21 @@ namespace C2.Database
         }
         public virtual List<List<string>> GetTableContent(Table table, int maxNum)
         {
-            return DbUtil.StringTo2DString(this.GetTableContentString(table, maxNum));
+            string result = this.GetTableContentString(table, maxNum);
+            return String.IsNullOrEmpty(result) ? new List<List<string>>() : DbUtil.StringTo2DString(result);
         }
         public virtual Dictionary<string, List<string>> GetSchemaByTables(List<Table> tables)
         {
-            string sql = this.GetSchemaByTablesSQL(tables);
-            return DbUtil.StringToDict(this.Query(sql));
+            string result = this.Query(this.GetSchemaByTablesSQL(tables));
+            return String.IsNullOrEmpty(result) ? new Dictionary<string, List<string>>() : DbUtil.StringToDict(result);
+        }
+        public virtual string GetSchemaByTable(Table table)
+        {
+            return this.Query(this.GetSchemaByTableSQL(table));
         }
         public virtual bool FillDGVWithTbSchema(DataGridView dataGridView, Table table)
         {
-            string schemaString = this.Query(this.GetSchemaByTablesSQL(new List<Table>() { table }));
+            string schemaString = this.GetSchemaByTable(table);
             if (String.IsNullOrEmpty(schemaString))
                 return false;
             List<List<string>> schema = DbUtil.StringTo2DString(schemaString);
@@ -98,12 +111,16 @@ namespace C2.Database
         }
         public virtual bool FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum)
         {
-            string schemaString = this.Query(this.GetTableContentSQL(table, maxNum));
-            if (String.IsNullOrEmpty(schemaString))
+            string contentString = this.GetTableContentString(table, maxNum);
+            if (String.IsNullOrEmpty(contentString))
                 return false;
-            List<List<string>> schema = DbUtil.StringTo2DString(schemaString);
+            List<List<string>> schema = DbUtil.StringTo2DString(contentString);
             FileUtil.FillTable(dataGridView, schema);
             return true;
+        }
+        public virtual bool ExecuteOracleSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
+        {
+            return false;
         }
         #endregion
         #region SQL
@@ -120,6 +137,10 @@ namespace C2.Database
             throw new NotImplementedException();
         }
         public virtual string GetSchemaByTablesSQL(List<Table> tables)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual string GetSchemaByTableSQL(Table table)
         {
             throw new NotImplementedException();
         }

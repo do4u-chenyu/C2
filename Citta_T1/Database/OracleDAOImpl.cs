@@ -3,6 +3,7 @@ using C2.Utils;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -115,5 +116,92 @@ namespace C2.Database
         {
             return this.getUserSQL;
         }
+        public override bool ExecuteOracleSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
+        {
+            int pageIndex = 0;
+            bool returnHeader = true;
+            int totalRetuenNum = 0, subMaxNum = 0;
+            using (StreamWriter sw = new StreamWriter(outPutPath, false))
+            {
+                while (maxReturnNum == -1 ? true : totalRetuenNum < maxReturnNum)
+                {
+                    if (pageSize * pageIndex < maxReturnNum && pageSize * (pageIndex + 1) > maxReturnNum)
+                        subMaxNum = maxReturnNum - pageIndex * pageSize;
+                    else
+                        subMaxNum = pageSize;
+                    QueryResult contentAndNum = ExecuteOracleQL_Page(sqlText, pageSize, pageIndex, subMaxNum, returnHeader);
+
+                    string result = contentAndNum.content;
+                    totalRetuenNum += contentAndNum.returnNum;
+
+                    if (returnHeader)
+                    {
+                        if (String.IsNullOrEmpty(result))
+                            return false;
+                        returnHeader = false;
+                    }
+                    if (String.IsNullOrEmpty(result))
+                        break;
+                    sw.Write(result);
+                    pageIndex += 1;
+                }
+                sw.Flush();
+            }
+            return true;
+        }
+        private QueryResult ExecuteOracleQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
+        {
+            /*
+             * pageIndex start from 0.
+             */
+            QueryResult result;
+            StringBuilder sb = new StringBuilder(1024 * 16);
+            int returnNum = 0;
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                try
+                {
+                    using (OracleConnection con = new OracleConnection(this.ConnectionString))
+                    {
+                        con.Open();
+                        string sqlPage = String.Format(@"select * from 
+	                                                        (select rownum as rowno,tmp.* from ({0}) tmp where rownum<={1}) 
+                                                        t where t.rowno>{2}",
+                                            sqlText,
+                                            pageSize * (pageIndex + 1),
+                                            pageSize * (pageIndex));
+                        OracleCommand comm = new OracleCommand(sqlPage, con);
+                        using (OracleDataReader rdr = comm.ExecuteReader())  // rdr.Close()
+                        {
+                            if (returnHeader)
+                            {
+                                for (int i = 0; i < rdr.FieldCount - 1; i++)
+                                    sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
+                                sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+                            }
+
+                            while (rdr.Read() && returnNum < maxNum)
+                            {
+                                for (int i = 0; i < rdr.FieldCount - 1; i++)
+                                    sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
+                                sb.Append(rdr[rdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
+                                returnNum += 1;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
+                }
+                finally
+                {
+                    result.content = sb.ToString();
+                    result.returnNum = returnNum;
+                }
+            }
+            return result;
+        }
+
     }
 }
