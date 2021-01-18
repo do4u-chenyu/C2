@@ -3,10 +3,7 @@ using C2.Utils;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-=======
 using System.IO;
->>>>>>> f942c83be0ed3e2f3bfd86aaacfd653988779009
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
