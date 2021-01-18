@@ -79,7 +79,7 @@ namespace C2.Dialogs.IAOLab
             foreach (string input in inputArray)
             {
                 tmpResult.Append(GPSTransform.GetInstance(input).ComputeDistance());
-                inputAndResult.Text = tmpResult.ToString();
+                inputAndResult1.Text = tmpResult.ToString();
 
             }
         }
