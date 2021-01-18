@@ -131,7 +131,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.comboBoxConnection.FormattingEnabled = true;
             this.comboBoxConnection.Location = new System.Drawing.Point(6, 38);
             this.comboBoxConnection.Name = "comboBoxConnection";
-            this.comboBoxConnection.Size = new System.Drawing.Size(133, 20);
+            this.comboBoxConnection.Size = new System.Drawing.Size(133, 23);
             this.comboBoxConnection.TabIndex = 10;
             this.comboBoxConnection.SelectedIndexChanged += new System.EventHandler(this.ComboBoxConnection_SelectedIndexChanged);
             // 
@@ -141,7 +141,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.comboBoxDataBase.FormattingEnabled = true;
             this.comboBoxDataBase.Location = new System.Drawing.Point(6, 94);
             this.comboBoxDataBase.Name = "comboBoxDataBase";
-            this.comboBoxDataBase.Size = new System.Drawing.Size(133, 21);
+            this.comboBoxDataBase.Size = new System.Drawing.Size(133, 25);
             this.comboBoxDataBase.TabIndex = 11;
             this.comboBoxDataBase.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDataBase_SelectedIndexChanged);
             // 
@@ -151,7 +151,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.label2.Font = new System.Drawing.Font("宋体", 10F);
             this.label2.Location = new System.Drawing.Point(6, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 14);
+            this.label2.Size = new System.Drawing.Size(85, 17);
             this.label2.TabIndex = 12;
             this.label2.Text = "已配连接:";
             // 
@@ -161,7 +161,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.label3.Font = new System.Drawing.Font("宋体", 10F);
             this.label3.Location = new System.Drawing.Point(6, 71);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 14);
+            this.label3.Size = new System.Drawing.Size(51, 17);
             this.label3.TabIndex = 13;
             this.label3.Text = "架构:";
             // 
@@ -171,7 +171,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.label4.Font = new System.Drawing.Font("宋体", 10F);
             this.label4.Location = new System.Drawing.Point(6, 132);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 14);
+            this.label4.Size = new System.Drawing.Size(68, 17);
             this.label4.TabIndex = 16;
             this.label4.Text = "表预览:";
             // 
@@ -217,10 +217,10 @@ namespace C2.Dialogs.C2OperatorViews
             // tableListBox
             // 
             this.tableListBox.FormattingEnabled = true;
-            this.tableListBox.ItemHeight = 12;
+            this.tableListBox.ItemHeight = 15;
             this.tableListBox.Location = new System.Drawing.Point(6, 156);
             this.tableListBox.Name = "tableListBox";
-            this.tableListBox.Size = new System.Drawing.Size(203, 268);
+            this.tableListBox.Size = new System.Drawing.Size(203, 259);
             this.tableListBox.TabIndex = 19;
             this.tableListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TableListBox_MouseDown);
             // 
@@ -229,7 +229,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(300, 14);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(197, 12);
+            this.label5.Size = new System.Drawing.Size(247, 15);
             this.label5.TabIndex = 20;
             this.label5.Text = "（尽量使用能减少结果条数的命令）";
             // 
@@ -238,7 +238,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(554, 14);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.Size = new System.Drawing.Size(67, 15);
             this.label6.TabIndex = 21;
             this.label6.Text = "数据提取";
             // 
@@ -248,7 +248,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.allRadioButton.Checked = true;
             this.allRadioButton.Location = new System.Drawing.Point(613, 12);
             this.allRadioButton.Name = "allRadioButton";
-            this.allRadioButton.Size = new System.Drawing.Size(47, 16);
+            this.allRadioButton.Size = new System.Drawing.Size(58, 19);
             this.allRadioButton.TabIndex = 22;
             this.allRadioButton.TabStop = true;
             this.allRadioButton.Text = "所有";
@@ -260,7 +260,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.partialRadioButton.AutoSize = true;
             this.partialRadioButton.Location = new System.Drawing.Point(666, 12);
             this.partialRadioButton.Name = "partialRadioButton";
-            this.partialRadioButton.Size = new System.Drawing.Size(47, 16);
+            this.partialRadioButton.Size = new System.Drawing.Size(58, 19);
             this.partialRadioButton.TabIndex = 23;
             this.partialRadioButton.Text = "部分";
             this.partialRadioButton.UseVisualStyleBackColor = true;
@@ -270,7 +270,7 @@ namespace C2.Dialogs.C2OperatorViews
             // 
             this.maxNumTextBox.Location = new System.Drawing.Point(718, 10);
             this.maxNumTextBox.Name = "maxNumTextBox";
-            this.maxNumTextBox.Size = new System.Drawing.Size(76, 21);
+            this.maxNumTextBox.Size = new System.Drawing.Size(76, 25);
             this.maxNumTextBox.TabIndex = 24;
             this.maxNumTextBox.Visible = false;
             // 
