@@ -395,8 +395,8 @@ namespace C2.Utils
                 {
                     if (sql.StartsWith("desc"))
                     {
-                        gridOutput.Columns.Add("0", "column_name");
-                        gridOutput.Columns.Add("1", "column_type");
+                        gridOutput.Columns.Add("0", "col_name");
+                        gridOutput.Columns.Add("1", "data_type");
                         continue;
                     }
                     for (int i = 0; i < row.Length; i++)
