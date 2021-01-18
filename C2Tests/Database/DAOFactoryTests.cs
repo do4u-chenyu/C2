@@ -16,7 +16,7 @@ namespace C2.Database.Tests
         private DatabaseItem oralcDBI = new DatabaseItem(DatabaseType.Oracle, "114.55.248.85", "orcl", String.Empty, "1521", "test", "test", table: new Table("test", "TEST_100W"));
         private DatabaseItem hiveDBI = new DatabaseItem(DatabaseType.Hive, "10.1.126.4", String.Empty, String.Empty, "10000", "root", "123456", table: new Table("root", "hive1"));
         List<DatabaseItem> dbis;
-        List<BaseDAOImpl> daos;
+        List<IDAO> daos;
         private string[] userOrDb;
         public void InitDao()
         {
@@ -29,7 +29,7 @@ namespace C2.Database.Tests
                 oralcDBI.User,
                 "default"
             };
-            daos = new List<BaseDAOImpl>();
+            daos = new List<IDAO>();
             foreach (var dbi in dbis)
                 daos.Add(DAOFactory.CreatDAO(dbi));
 
@@ -52,8 +52,8 @@ namespace C2.Database.Tests
         [TestMethod()]
         public void CreatDAOTest()
         {
-            BaseDAOImpl oracleDAO = DAOFactory.CreatDAO(oralcDBI);
-            BaseDAOImpl hiveDAO = DAOFactory.CreatDAO(hiveDBI);
+            IDAO oracleDAO = DAOFactory.CreatDAO(oralcDBI);
+            IDAO hiveDAO = DAOFactory.CreatDAO(hiveDBI);
             Assert.IsNotNull(oracleDAO);
             Assert.IsNotNull(hiveDAO);
         }
@@ -85,7 +85,7 @@ namespace C2.Database.Tests
             InitDao();
             for (int i = 0; i < daos.Count; i++)
             {
-                List<Table> tables = daos[i].GetTablesByUserOrDb(userOrDb[i]);
+                List<Table> tables = daos[i].GetTables(userOrDb[i]);
                 Assert.IsTrue(tables.Count > 0);
                 Console.WriteLine(tables[0].Name);
             }
@@ -120,7 +120,7 @@ namespace C2.Database.Tests
             InitDao();
             foreach (var dao in daos)
             {
-                Dictionary<string, List<string>> result = dao.GetSchemaByTables(new List<Table>() { oralcDBI.DataTable });
+                Dictionary<string, List<string>> result = dao.GetColNameByTables(new List<Table>() { oralcDBI.DataTable });
                 Assert.IsTrue(result.Keys.Count > 0);
             }
         }

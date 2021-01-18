@@ -460,7 +460,7 @@ namespace C2.Controls.Left
 
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
-            UpdateFrameCombo(users, databaseInfo.User, databaseInfo.Type);
+            UpdateFrameCombo(users, databaseInfo.User);
 
             //刷新数据表
             List<Table> tables = DbUtil.GetTablesByUser(conn, databaseInfo.User);

@@ -9,25 +9,17 @@ namespace C2.Database
 {
     public class DAOFactory
     {
-        public static BaseDAOImpl dao
-        {
-            get;
-            private set;
-        }
-        public static BaseDAOImpl CreatDAO(DatabaseItem dbi)
+        public static IDAO CreatDAO(DatabaseItem dbi)
         {
             switch (dbi.Type)
             {
                 case DatabaseType.Oracle:
-                    dao = new OracleDAOImpl(dbi);
-                    break;
+                    return new OracleDAOImpl(dbi);
                 case DatabaseType.Hive:
-                    dao = new HiveDAOImpl(dbi);
-                    break;
+                    return new HiveDAOImpl(dbi);
                 default:
-                    break;
+                    return null;
             }
-            return dao;
         }
     }
 }

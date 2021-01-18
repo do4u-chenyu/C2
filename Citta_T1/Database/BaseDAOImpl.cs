@@ -68,48 +68,48 @@ namespace C2.Database
         }
         #endregion
         #region 业务逻辑
-        public virtual List<string> GetUsers()
+        public List<string> GetUsers()
         {
             string result = this.Query(this.GetUserSQL());
             return String.IsNullOrEmpty(result) ? new List<String>() : new List<string>(result.Split(OpUtil.DefaultLineSeparator));
         }
-        public virtual List<Table> GetTablesByUserOrDb(string usersOrDbs)
+        public List<Table> GetTables(string schema)
         {
             List<Table> tables = new List<Table>();
-            string result = this.Query(this.GetTablesByUserOrDbSQL(usersOrDbs));
+            string result = this.Query(this.GetTablesSQL(schema));
             if (!String.IsNullOrEmpty(result))
                 foreach (var line in result.Split(OpUtil.DefaultLineSeparator))
-                    tables.Add(new Table(usersOrDbs, line));
+                    tables.Add(new Table(schema, line));
             return tables;
         }
-        public virtual string GetTableContentString(string UserOrDb, Table table, int maxNum)
+        public string GetTableContentString(string UserOrDb, Table table, int maxNum)
         {
             return this.Query(this.GetTableContentSQL(UserOrDb, table, maxNum));
         }
-        public virtual List<List<string>> GetTableContent(string UserOrDb, Table table, int maxNum)
+        public List<List<string>> GetTableContent(string UserOrDb, Table table, int maxNum)
         {
             string result = this.GetTableContentString(UserOrDb, table, maxNum);
             return String.IsNullOrEmpty(result) ? new List<List<string>>() : DbUtil.StringTo2DString(result);
         }
-        public virtual Dictionary<string, List<string>> GetSchemaByTables(List<Table> tables)
+        public Dictionary<string, List<string>> GetColNameByTables(List<Table> tables)
         {
-            string result = this.Query(this.GetSchemaByTablesSQL(tables));
+            string result = this.Query(this.GetColNameByTablesSQL(tables));
             return String.IsNullOrEmpty(result) ? new Dictionary<string, List<string>>() : DbUtil.StringToDict(result);
         }
-        public virtual string GetSchemaByTable(Table table)
+        public string GetTableColumnNames(Table table)
         {
-            return this.Query(this.GetSchemaByTableSQL(table));
+            return this.Query(this.GetColNameByTableSQL(table));
         }
-        public virtual bool FillDGVWithTbSchema(DataGridView dataGridView, Table table)
+        public bool FillDGVWithTbSchema(DataGridView dataGridView, Table table)
         {
-            string schemaString = this.GetSchemaByTable(table);
+            string schemaString = this.GetTableColumnNames(table);
             if (String.IsNullOrEmpty(schemaString))
                 return false;
             List<List<string>> schema = DbUtil.StringTo2DString(schemaString);
             FileUtil.FillTable(dataGridView, schema);
             return true;
         }
-        public virtual bool FillDGVWithTbContent(DataGridView dataGridView, string UserOrDb, Table table, int maxNum)
+        public bool FillDGVWithTbContent(DataGridView dataGridView, string UserOrDb, Table table, int maxNum)
         {
             string contentString = this.GetTableContentString(UserOrDb, table, maxNum);
             if (String.IsNullOrEmpty(contentString))
@@ -132,15 +132,15 @@ namespace C2.Database
         {
             throw new NotImplementedException();
         }
-        public virtual string GetTablesByUserOrDbSQL(string userOrDb)
+        public virtual string GetTablesSQL(string userOrDb)
         {
             throw new NotImplementedException();
         }
-        public virtual string GetSchemaByTablesSQL(List<Table> tables)
+        public virtual string GetColNameByTablesSQL(List<Table> tables)
         {
             throw new NotImplementedException();
         }
-        public virtual string GetSchemaByTableSQL(Table table)
+        public virtual string GetColNameByTableSQL(Table table)
         {
             throw new NotImplementedException();
         }
