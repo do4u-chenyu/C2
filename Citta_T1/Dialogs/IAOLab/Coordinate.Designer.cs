@@ -179,9 +179,9 @@
             this.bd_wgs.Location = new System.Drawing.Point(13, 6);
             this.bd_wgs.Margin = new System.Windows.Forms.Padding(2);
             this.bd_wgs.Name = "bd_wgs";
-            this.bd_wgs.Size = new System.Drawing.Size(179, 18);
+            this.bd_wgs.Size = new System.Drawing.Size(186, 18);
             this.bd_wgs.TabIndex = 0;
-            this.bd_wgs.Text = "bdwgs:百度坐标系转国际";
+            this.bd_wgs.Text = "bd_wgs:百度坐标系转国际";
             this.bd_wgs.UseVisualStyleBackColor = true;
             // 
             // tabPage2
