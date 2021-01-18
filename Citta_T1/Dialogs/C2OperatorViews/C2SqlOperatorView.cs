@@ -60,7 +60,7 @@ namespace C2.Dialogs.C2OperatorViews
             contextMenuStrip.Items.Add(copyTableNameMenuItem);
 
             ToolStripMenuItem codeSnippetMenuItem = new ToolStripMenuItem("一键查询");
-            codeSnippetMenuItem.Click += codeSnippetMenuItem_Click;
+            codeSnippetMenuItem.Click += CodeSnippetMenuItem_Click;
             contextMenuStrip.Items.Add(codeSnippetMenuItem);
         }
 
@@ -92,7 +92,7 @@ namespace C2.Dialogs.C2OperatorViews
         {
             FileUtil.TryClipboardSetText(tableListBox.SelectedItem.ToString());
         }
-        private void codeSnippetMenuItem_Click(object sender, EventArgs e)
+        private void CodeSnippetMenuItem_Click(object sender, EventArgs e)
         {
             textEditorControl1.Text = "select * from " + tableListBox.SelectedItem.ToString();
         }
