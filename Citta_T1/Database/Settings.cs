@@ -30,7 +30,7 @@ namespace C2.Database
             }
         }
 
-        public XmlDocument xmldoc;
-        public XmlElement root;
+        //public XmlDocument xmldoc;
+        //public XmlElement root;
     }
 }

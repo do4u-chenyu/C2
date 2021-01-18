@@ -33,7 +33,11 @@ namespace C2.Dialogs
         {
             FileDialog fd;
             if (isExport)
+            {
                 fd = new SaveFileDialog();
+                fd.FileName = "业务视图.c2"; // 保存时给一个默认的名字
+            }
+                
 
             else
                 fd = new OpenFileDialog();
