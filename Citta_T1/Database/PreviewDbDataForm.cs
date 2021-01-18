@@ -21,7 +21,6 @@ namespace C2.Database
 
         public MaxNumChangedEventHandler MaxNumChanged;
         private DatabaseItem databaseItem;
-        private OraConnection conn;
 
         public PreviewDbDataForm()
         {
@@ -32,27 +31,18 @@ namespace C2.Database
         private void Init(DatabaseItem dbi)
         {
             this.databaseItem = dbi;
-            this.conn = new OraConnection(databaseItem);
         }
         public bool Flush(DatabaseItem dbi)
         {
             this.Init(dbi);
             Table table = dbi.DataTable;
-            if (!DbUtil.TestConn(dbi))
-            {
+            IDAO dao = DAOFactory.CreateDAO(dbi);
+            if (!dao.TestConn())
                 return false;
-            }
 
             try
             {
-                if (dbi.Type == DatabaseType.Oracle)
-                    DbUtil.FillDGVWithTbContent(dataGridView, conn, table, MaxNum);
-                else
-                {
-                    string sql = string.Format("select * from {0} limit{1}", table.Name, MaxNum);
-                    DbUtil.FillDGVWithTbContent(dataGridView, dbi, table.UserName, sql);
-                }
-                   
+                dao.FillDGVWithTbContent(dataGridView, table, MaxNum);
             }
             catch
             {
@@ -62,8 +52,8 @@ namespace C2.Database
         }
         private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
         {
-            PreviewDbDataForm pddf = (sender as PreviewDbDataForm);
-            DbUtil.FillDGVWithTbContent(dataGridView, new OraConnection(databaseItem), databaseItem.DataTable, MaxNum);
+            IDAO dao = DAOFactory.CreateDAO(databaseItem);
+            dao.FillDGVWithTbContent(this.dataGridView, databaseItem.DataTable, MaxNum);
         }
         private int GetIntFromTextBox()
         {

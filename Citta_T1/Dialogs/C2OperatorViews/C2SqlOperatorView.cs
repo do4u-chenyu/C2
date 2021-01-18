@@ -68,24 +68,13 @@ namespace C2.Dialogs.C2OperatorViews
         {
             if (SelectDatabaseItem == null || SelectTable == null)
                 return;
-            if (!DbUtil.TestConn(SelectDatabaseItem))
+            IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
+            if (!dao.TestConn())
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
-            if (SelectDatabaseItem.Type == DatabaseType.Oracle)
-                DbUtil.FillDGVWithTbContent(gridOutput, new OraConnection(SelectDatabaseItem), SelectTable, OpUtil.PreviewMaxNum);
-            else if (SelectDatabaseItem.Type == DatabaseType.Hive)
-            {
-                string sql = string.Format("select * from {0} limit{1}", SelectTable.Name, OpUtil.PreviewMaxNum);
-                LoadHiveData(this.comboBoxDataBase.Text, sql);
-
-                DbUtil.FillDGVWithTbContent(gridOutput, SelectDatabaseItem, this.comboBoxDataBase.Text, sql);
-            }  
-            else
-                return;
-
-
+            dao.FillDGVWithTbContent(gridOutput, SelectTable, OpUtil.PreviewMaxNum);
         }
 
         private void CopyTableNameMenuItem_Click(object sender, EventArgs e)
@@ -140,28 +129,17 @@ namespace C2.Dialogs.C2OperatorViews
             if (SelectDatabaseItem == null)
                 return;
             List<string> users;
-            if (SelectDatabaseItem.Type == DatabaseType.Hive)
-            {
-                HiveConnection hiveConn = new HiveConnection(SelectDatabaseItem);
-                if (!hiveConn.Connect())
-                {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                    return;
-                }
-                //刷新架构
-                users = hiveConn.GetHiveDatabases();
-            }
-            else if (SelectDatabaseItem.Type == DatabaseType.Oracle)
+            IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
+            if (dao != null)
             {   
                 //连接数据库
-                OraConnection conn = new OraConnection(SelectDatabaseItem);
-                if (!DbUtil.TestConn(conn))
+                if (!dao.TestConn())
                 {
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return;
                 }
                 //刷新架构
-                users = DbUtil.GetUsers(conn);
+                users = dao.GetUsers();
             }
             else
                 users = new List<string>();
@@ -185,21 +163,16 @@ namespace C2.Dialogs.C2OperatorViews
             if (SelectDatabaseItem == null || string.IsNullOrEmpty(this.comboBoxDataBase.Text) )
                 return;
             List<Table> tables;
-            //Hive 连接数据库
-            if (SelectDatabaseItem.Type == DatabaseType.Hive)
+            IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
+            if (dao != null)
             {
-                HiveConnection hiveConn = new HiveConnection(SelectDatabaseItem);
-                if (!hiveConn.Connect())
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return;
-                tables = hiveConn.GetTablesByDB(this.comboBoxDataBase.Text);
-            }
-            else if (SelectDatabaseItem.Type == DatabaseType.Oracle)
-            {
-                OraConnection conn = new OraConnection(SelectDatabaseItem);
-                if (!DbUtil.TestConn(conn))
-                    return;
+                }
                 //刷新数据表
-                tables = DbUtil.GetTablesByUser(conn, this.comboBoxDataBase.Text);
+                tables = dao.GetTables(this.comboBoxDataBase.Text);
             }
             else
                 tables = new List<Table>();
@@ -231,68 +204,8 @@ namespace C2.Dialogs.C2OperatorViews
                 HelpUtil.ShowMessageBox(HelpUtil.DatabaseItemIsNull);
                 return;
             }
-            if (SelectDatabaseItem.Type == DatabaseType.Hive)
-            {
-                LoadHiveData(this.comboBoxDataBase.Text, textEditorControl1.Text);
-                return;
-
-            }
-            try
-            {
-                using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor)) // Display the hourglass
-                {
-                    using (OracleConnection conn = new OracleConnection(new OraConnection(SelectDatabaseItem).ConnectionString))
-                    {
-                        conn.Open();
-                        string sql = textEditorControl1.Text;
-                        OracleCommand comm = new OracleCommand(sql, conn);
-                        using (OracleDataReader rdr = comm.ExecuteReader())
-                        {
-                            // Grab all the column names
-                            gridOutput.Rows.Clear();
-                            gridOutput.Columns.Clear();
-                            for (int i = 0; i < rdr.FieldCount; i++)
-                                gridOutput.Columns.Add(i.ToString(), rdr.GetName(i));
-
-                            // Read up to 1000 rows
-                            int rows = 0;
-                            while (rdr.Read() && rows < 1000)
-                            {
-                                string[] objs = new string[rdr.FieldCount];
-                                for (int f = 0; f < rdr.FieldCount; f++) objs[f] = rdr[f].ToString();
-                                gridOutput.Rows.Add(objs);
-                                rows++;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex) // Better catch in case they have bad sql
-            {
-                HelpUtil.ShowMessageBox(ex.Message);
-            }
-        }
-        private void LoadHiveData(string database,string sql)
-        {
-            HiveConnection hiveConnection = new HiveConnection(SelectDatabaseItem);
-            string tbContent = hiveConnection.GetSQLResult(database,sql);
-            List<string[]> results = new List<string[]>();
-            foreach (string row in tbContent.Split(OpUtil.DefaultLineSeparator))
-                results.Add(row.Split(OpUtil.DefaultFieldSeparator));
-
-            // Grab all the column names
-            gridOutput.Rows.Clear();
-            gridOutput.Columns.Clear();
-            foreach (string[] row in results)
-            {
-                if (gridOutput.Columns.Count == 0)
-                {
-                    for (int i = 0; i < row.Length; i++)
-                        gridOutput.Columns.Add(i.ToString(), row[i]);
-                    continue;
-                }
-                gridOutput.Rows.Add(row);
-            }
+            IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
+            dao.FillDGVWithSQL(this.gridOutput, this.textEditorControl1.Text);
         }
         protected override void SaveOption()
         {

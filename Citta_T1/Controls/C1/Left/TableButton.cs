@@ -42,7 +42,8 @@ namespace C2.Controls.Left
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PreviewDbDataForm previewDbDataForm = GenericSingleton<PreviewDbDataForm>.CreateInstance();
-            if (!DbUtil.TestConn(TableItem))
+            IDAO dao = DAOFactory.CreateDAO(TableItem);
+            if (!dao.TestConn())
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
@@ -56,14 +57,8 @@ namespace C2.Controls.Left
         private void ReviewStruToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PreviewTableSchema previewTableSchema = GenericSingleton<PreviewTableSchema>.CreateInstance();
-            string tableName = this.TableItem.DataTable.Name;
-            if (TableItem.Type == DatabaseType.Oracle)
-                DbUtil.FillDGVWithTbSchema(previewTableSchema.DataGridView, new OraConnection(TableItem), tableName);
-            else
-            {
-                string sql = string.Format("desc {0}", tableName);
-                DbUtil.FillDGVWithTbContent(previewTableSchema.DataGridView, TableItem, this.TableItem.DataTable.UserName, sql);
-            }
+            IDAO dao = DAOFactory.CreateDAO(TableItem);
+            dao.FillDGVWithTbSchema(previewTableSchema.DataGridView, this.TableItem.DataTable);
             if (TableItem != null)
             {
                 previewTableSchema.Focus();

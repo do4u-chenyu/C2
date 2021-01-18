@@ -82,22 +82,7 @@ namespace C2.Dialogs
                 return false;
             }
 
-            #region Hive
-            if (String.Equals("Hive", this.databaseTypeComboBox.Text))
-            {
-                HiveConnection hiveConn = new HiveConnection(tmpDatabaseInfo);
-                if (!hiveConn.Connect())
-                {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                    return false;
-                }
-                DatabaseInfo = tmpDatabaseInfo;
-                return base.OnOKButtonClick();
-            }
-            #endregion
-
-            OraConnection conn = new OraConnection(tmpDatabaseInfo);
-            if (!DbUtil.TestConn(conn))
+            if (!DAOFactory.CreateDAO(tmpDatabaseInfo).TestConn())
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return false;
@@ -114,23 +99,8 @@ namespace C2.Dialogs
             }
             DatabaseItem tmpDatabaseInfo = GenDatabaseInfoFormDialog();
 
-            #region Hive
-            if (String.Equals("Hive", this.databaseTypeComboBox.Text))
-            {
-                HiveConnection hiveConn = new HiveConnection(tmpDatabaseInfo);
-                if (hiveConn.Connect())
-                    HelpUtil.ShowMessageBox(HelpUtil.DbConnectSucceeded, "连接成功", MessageBoxIcon.Information);
-                else
-                    HelpUtil.ShowMessageBox(HelpUtil.DbConnectFailed, "连接失败", MessageBoxIcon.Information);
-                return;
-            }         
-            #endregion
-
-           
             //如果新旧一致，直接返回了
-
-            OraConnection conn = new OraConnection(tmpDatabaseInfo);
-            if (DbUtil.TestConn(conn))
+            if (DAOFactory.CreateDAO(tmpDatabaseInfo).TestConn())
                 HelpUtil.ShowMessageBox(HelpUtil.DbConnectSucceeded, "连接成功", MessageBoxIcon.Information);
             else
                 HelpUtil.ShowMessageBox(HelpUtil.DbConnectFailed, "连接失败", MessageBoxIcon.Information);

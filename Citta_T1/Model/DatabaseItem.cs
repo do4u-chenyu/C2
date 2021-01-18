@@ -1,4 +1,5 @@
 ﻿using C2.Database;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,14 @@ namespace C2.Model
         public string Port { set; get; }//端口
         public string User { set; get; }//用户
         public string Password { set; get; }//密码
-        public string Group { set; get; }//架构
+        public string Schema { set; get; }//架构
         public Table DataTable { set; get; }//表名
         //所有信息合并字符串，便于比较是否一致
         public string AllDatabaseInfo 
         {
             get
             { 
-                return string.Join(",", Type.ToString(), Server, SID, Service, Port, User, Password, Group, DataTable == null ? string.Empty:DataTable.Name); 
+                return string.Join(",", Type.ToString(), Server, SID, Service, Port, User, Password, Schema, DataTable == null ? string.Empty:DataTable.Name); 
             }
         }
         public string PrettyDatabaseInfo
@@ -40,8 +41,9 @@ namespace C2.Model
                 return string.Format("{0}@//{1}:{2}/{3}", User, Server,Port,serviceName);
             }
         }
+
         public DatabaseItem() { }
-        public DatabaseItem(DatabaseType type, string server, string sid, string service, string port, string user, string password, string group = "", Table table =null)
+        public DatabaseItem(DatabaseType type, string server, string sid, string service, string port, string user, string password, string schema = "", Table table =null)
         {
             Type = type;
             Server = server;
@@ -50,7 +52,7 @@ namespace C2.Model
             Port = port;
             User = user;
             Password = password;
-            Group = group;
+            Schema = String.IsNullOrEmpty(schema) ? DbUtil.DefaultSchema(type, this.User): schema;
             DataTable = table;
         }
 
@@ -66,7 +68,7 @@ namespace C2.Model
             Port = tmpInfo[4];
             User = tmpInfo[5];
             Password = tmpInfo[6];
-            Group = tmpInfo[7];
+            Schema = tmpInfo[7];
             DataTable = new Table(tmpInfo[7], tmpInfo[8]);
         }
 
@@ -80,7 +82,7 @@ namespace C2.Model
             tmpDatabaseItem.Port = this.Port;
             tmpDatabaseItem.User = this.User;
             tmpDatabaseItem.Password = this.Password;
-            tmpDatabaseItem.Group = this.Group;
+            tmpDatabaseItem.Schema = this.Schema;
             tmpDatabaseItem.DataTable = this.DataTable;
             return tmpDatabaseItem;
         }

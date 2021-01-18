@@ -1,4 +1,5 @@
 ﻿using C2.Core;
+using C2.Database;
 using C2.Model;
 using C2.Utils;
 using System;
@@ -119,25 +120,18 @@ namespace C2.Controls.Bottom
         }
 
         public void PreViewDataByDatabase(DataItem item)
-        { 
-            switch (item.DataType)
-            {
-                case DatabaseType.Oracle:                 
-                case DatabaseType.Hive:
-                    PreViewDataByDatabase(item.DBItem);
-                    break;
-                default:
-                    break;
-            }
+        {
+            this.PreViewDataByDatabase(item.DBItem);
         }
         private void PreViewDataByDatabase(DatabaseItem dbItem, int maxNumOfFile = 100)
         {
             List<List<string>> datas = new List<List<string>> { };
+            IDAO dao = DAOFactory.CreateDAO(dbItem);
             List<string> rows;
-            if (dbItem.Type == DatabaseType.Oracle)
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewOracleTable(dbItem, maxNumOfFile).Split(OpUtil.DefaultLineSeparator));
-            else if (dbItem.Type == DatabaseType.Hive)
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewHiveTable(dbItem, maxNumOfFile).Split(OpUtil.DefaultLineSeparator));
+            if (dao != null && dao.TestConn())
+            {
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewTable(dbItem, maxNumOfFile).Split(OpUtil.DefaultLineSeparator));
+            }
             else
                 rows = new List<string>();
             for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)

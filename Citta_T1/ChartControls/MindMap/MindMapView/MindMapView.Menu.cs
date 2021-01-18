@@ -401,12 +401,12 @@ namespace C2.Controls.MapViews
         void MenuCreateDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            
+            IDAO dao = DAOFactory.CreateDAO(hitItem.DBItem);
             if (hitItem.IsDatabase())
             {
-                if (DbUtil.TestConn(hitItem))  // 预加载
+                if (dao.TestConn())  // 预加载
                 {
-                    BCPBuffer.GetInstance().GetCachePreviewOracleTable(hitItem.DBItem);
+                    BCPBuffer.GetInstance().GetCachePreviewTable(hitItem.DBItem); // TODO DK 预加载也要写好方法
                 }
                 else // 外部数据源且数据库无法连接
                 {

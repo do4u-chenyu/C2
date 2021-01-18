@@ -63,28 +63,14 @@ namespace C2.Core
         {
             return GetCachePreviewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, isForceRead);
         }
-        public string GetCachePreviewOracleTable(DatabaseItem databaseItem, int mNumOfLine = 100, bool isForceRead = false)
+        public string GetCachePreviewTable(DatabaseItem databaseItem, int mNumOfLine = 100, bool isForceRead = false)
         {
             string key = databaseItem.AllDatabaseInfo;
             if (!HitCache(key) || isForceRead)
             {
-                OraConnection conn = new OraConnection(databaseItem);
+                IDAO dao = DAOFactory.CreateDAO(databaseItem);
                 Table table = databaseItem.DataTable;
-                string tbContent = DbUtil.GetOracleTbContentString(conn, table, mNumOfLine);
-                string firstLine = GetFirstLine(tbContent);
-                dataPreviewDict[key] = new FileCache(tbContent, firstLine);
-            }
-            return dataPreviewDict[key].PreviewFileContent;
-        }
-
-        public string GetCachePreviewHiveTable(DatabaseItem databaseItem, int mNumOfLine = 100, bool isForceRead = false)
-        {
-            string key = databaseItem.AllDatabaseInfo;
-            if (!HitCache(key) || isForceRead)
-            {
-                HiveConnection conn = new HiveConnection(databaseItem);
-                Table table = databaseItem.DataTable;
-                string tbContent = conn.GetHiveTbContentString(table, mNumOfLine);
+                string tbContent = dao.GetTableContentString(table, mNumOfLine);
                 string firstLine = GetFirstLine(tbContent);
                 dataPreviewDict[key] = new FileCache(tbContent, firstLine);
             }

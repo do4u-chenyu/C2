@@ -68,8 +68,8 @@ namespace C2.Controls.MapViews
                     return;
                 if (opw.Option.OptionDict.TryGetValue("maxNum", out maxNumString) && int.TryParse(maxNumString, out inputMaxNum) && inputMaxNum > 0)
                     maxNum = inputMaxNum;
-                OraConnection conn = new OraConnection(new DatabaseItem(connString));
-                bool isSuccess = DbUtil.ExecuteOracleSQL(conn, sqlText, opw.ResultItem.FilePath, maxNum);
+                IDAO dao = DAOFactory.CreateDAO(new DatabaseItem(connString));
+                bool isSuccess = dao.ExecuteSQL(sqlText, opw.ResultItem.FilePath, maxNum);
                 string runMessage = isSuccess ? HelpUtil.SQLOpExecuteSucceeded : HelpUtil.SQLOpExecuteFailed;
                 opw.Status = isSuccess ? OpStatus.Done : OpStatus.Warn;
                 HelpUtil.ShowMessageBox(runMessage, "运行"); // 这个对话框还是挺丑的.后面要优化
