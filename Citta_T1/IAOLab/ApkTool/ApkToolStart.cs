@@ -110,7 +110,7 @@ namespace C2.IAOLab.ApkToolStart
             FileSystemInfo[] fsinfos = dir.GetFileSystemInfos();
             //遍历检索的文件和子目录
             //int i = 0;
-            string relICon = "";
+            string relICon = " ";
             foreach (FileSystemInfo fsinfo in fsinfos)
             {
                 using (FileStream fileStream = new FileStream(fsinfo.FullName, FileMode.Open, FileAccess.Read))
@@ -156,9 +156,9 @@ namespace C2.IAOLab.ApkToolStart
                     {
                         return (namenode as XmlElement).InnerText;
                     }
-                    return null;
+                    return " ";
                 }
-                return null;
+                return " ";
             }
             else
             {

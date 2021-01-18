@@ -41,11 +41,11 @@
             // inputAndResult
             // 
             this.inputAndResult.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.inputAndResult.Location = new System.Drawing.Point(9, 84);
+            this.inputAndResult.Location = new System.Drawing.Point(0, 84);
             this.inputAndResult.Margin = new System.Windows.Forms.Padding(2);
             this.inputAndResult.Name = "inputAndResult";
             this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult.Size = new System.Drawing.Size(583, 202);
+            this.inputAndResult.Size = new System.Drawing.Size(602, 219);
             this.inputAndResult.TabIndex = 0;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
@@ -58,7 +58,7 @@
             this.inputLabel.Location = new System.Drawing.Point(19, 16);
             this.inputLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.inputLabel.Name = "inputLabel";
-            this.inputLabel.Size = new System.Drawing.Size(151, 15);
+            this.inputLabel.Size = new System.Drawing.Size(191, 19);
             this.inputLabel.TabIndex = 1;
             this.inputLabel.Text = "请在下方输入MAC地址";
             // 
@@ -102,7 +102,7 @@
             this.label2.Location = new System.Drawing.Point(20, 30);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 12);
+            this.label2.Size = new System.Drawing.Size(0, 15);
             this.label2.TabIndex = 6;
             // 
             // tipLable
@@ -111,7 +111,7 @@
             this.tipLable.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tipLable.Location = new System.Drawing.Point(19, 47);
             this.tipLable.Name = "tipLable";
-            this.tipLable.Size = new System.Drawing.Size(407, 24);
+            this.tipLable.Size = new System.Drawing.Size(534, 30);
             this.tipLable.TabIndex = 7;
             this.tipLable.Text = "单次输入格式：04a1518006c2 或04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最大" +
     "支持1000条";

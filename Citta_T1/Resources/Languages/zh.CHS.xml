@@ -431,7 +431,7 @@
 	<item name="Rotate Right">向右旋转</item>
 	<item name="ExploreDirectory">打开所在文件夹</item>
     <item name="CopyFilePathToClipboard">复制文件路径到剪切板</item>
-    <item name="APK">APK Tool</item>
+    <item name="APK">非法APK分析</item>
 	<item name="BaseStation">基站查询</item>
 	<item name="Wifi">Wifi查询</item>
 	<item name="Card">银行卡查询</item>
