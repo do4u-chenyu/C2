@@ -30,7 +30,28 @@ namespace C2.Dialogs.IAOLab
         public void ReLayoutForm()
         {
             // ip time转换窗体
+            this.tabPage1.Text = "IP转换";
+            this.tabPage2.Text = "时间转换";
+            this.tabPage1.Controls.Remove(this.sixTransform);
+            RadioButton realToAbs = new RadioButton()
+            {
+                Location = new Point(7, 60),
+                Text = "真实时间转绝对秒",
 
+            };
+            RadioButton absToReal = new RadioButton()
+            {
+                Location = new Point(7 + realToAbs.Width, 60),
+                Text = "真实时间转绝对秒",
+            };
+            this.tabPage1.Controls.Add(realToAbs);
+            this.tabPage1.Controls.Add(absToReal);
+
+            this.inputAndResult.Location=new Point(
+                 this.inputAndResult.Location.X,
+                 this.inputAndResult.Location.Y-30
+                ) ;
+            this.inputAndResult.Height += 30;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
