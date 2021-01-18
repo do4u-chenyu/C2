@@ -38,11 +38,12 @@ namespace C2.Database
         {
             this.Init(dbi);
             Table table = dbi.DataTable;
-            if (!DbUtil.TestConn(new OraConnection(databaseItem)))
+            IDAO dao = DAOFactory.CreateDAO(dbi);
+            if (!dao.TestConn())
                 return false;
             try
             {
-                DbUtil.FillDGVWithTbContent(dataGridView, conn, table, MaxNum);
+                dao.FillDGVWithTbContent(dataGridView, table, MaxNum);
             }
             catch
             {
@@ -52,8 +53,8 @@ namespace C2.Database
         }
         private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
         {
-            PreviewDbDataForm pddf = (sender as PreviewDbDataForm);
-            DbUtil.FillDGVWithTbContent(dataGridView, new OraConnection(databaseItem), databaseItem.DataTable, MaxNum);
+            IDAO dao = DAOFactory.CreateDAO(databaseItem);
+            dao.FillDGVWithTbContent(this.dataGridView, databaseItem.DataTable, MaxNum);
         }
         private int GetIntFromTextBox()
         {

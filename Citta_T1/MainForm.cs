@@ -20,6 +20,7 @@ using C2.Forms;
 using C2.Model;
 using C2.Model.Widgets;
 using C2.ChartPageView;
+using C2.Database;
 #endregion
 
 namespace C2
@@ -693,7 +694,8 @@ namespace C2
         {
             if (item.IsDatabase())
             {
-                if (DbUtil.TestConn(item))
+                IDAO dao = DAOFactory.CreateDAO(item.DBItem);
+                if (dao.TestConn())
                 {
                     this.ShowBottomPanel();
                     this.bottomPreview.PreViewDataByDatabase(item);

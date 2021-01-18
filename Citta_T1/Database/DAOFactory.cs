@@ -9,7 +9,7 @@ namespace C2.Database
 {
     public class DAOFactory
     {
-        public static IDAO CreatDAO(DatabaseItem dbi)
+        public static IDAO CreateDAO(DatabaseItem dbi)
         {
             switch (dbi.Type)
             {

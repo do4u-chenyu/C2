@@ -22,7 +22,6 @@ namespace C2.Controls.Left
         private Point startPoint;
         private Point linkPoint;
         private Point tablePoint;
-        private Dictionary<string, List<string>> relateTableCol;
 
         // 这个控件属性不需要在属性面板显示和序列化,不加这个标签,在引用这个控件的Designer中,会序列化它
         // 然后就是各种奇葩问题
@@ -380,19 +379,16 @@ namespace C2.Controls.Left
         {
             //根据架构改变数据表
             List<Table> tables;
-            if (SelectLinkButton.DatabaseItem.Type == DatabaseType.Hive)
+            Dictionary<string, List<string>> tableColDict;
+            IDAO dao = DAOFactory.CreateDAO(SelectLinkButton.DatabaseItem);
+            if (dao != null)
             {
-                HiveConnection hiveConn = new HiveConnection(SelectLinkButton.DatabaseItem);
-                //刷新数据表
-                tables = hiveConn.GetTablesByDB(this.schemaComboBox.Text);
+                tables = dao.GetTables(this.schemaComboBox.Text);
+                tableColDict = dao.GetColNameByTables(tables);
+                UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
             }
             else
-            {
-                OraConnection conn = new OraConnection(SelectLinkButton.DatabaseItem);
-                tables = DbUtil.GetTablesByUser(conn, this.schemaComboBox.Text);
-            }
-        
-            UpdateTables(tables, SelectLinkButton.DatabaseItem);
+                HelpUtil.ShowMessageBox(HelpUtil.UnsupportedDatabase);
             this.optComboBox.Text = "表名";
             this.tableFilterTextBox.Text = "";
         }
@@ -428,7 +424,7 @@ namespace C2.Controls.Left
             ConnectDatabase(linkButton.DatabaseItem);//连接一次数据库，刷新架构及数据表
         }
 
-        private void ConnectDatabase(DatabaseItem databaseInfo)
+        private void ConnectDatabase(DatabaseItem dbi)
         {
             /* 
              * TODO DK 优化代码
@@ -436,38 +432,24 @@ namespace C2.Controls.Left
              * [x]. 优化代码逻辑，一旦出现连接不上的问题依然会查两次数据库，等待时间很长，每次连接的时候最好测试一下连接
              */
 
-            //Hive 连接数据库
-            if (databaseInfo.Type == DatabaseType.Hive)
-            {
-                HiveConnection hiveConn = new HiveConnection(databaseInfo);
-                //刷新架构
-                List<string> baseNames = hiveConn.GetHiveDatabases();
-                if (baseNames.Count == 0)
-                    return;
-                UpdateFrameCombo(baseNames, baseNames[0]);
-                //刷新数据表
-                List<Table> hiveTables = hiveConn.GetTablesByDB(baseNames[0]);
-                UpdateTables(hiveTables, databaseInfo); // TODO 没有Hive实现
-                return;
-            }
-            //连接数据库
-            OraConnection conn = new OraConnection(databaseInfo);
-            if (!DbUtil.TestConn(conn))
+            IDAO dao = DAOFactory.CreateDAO(dbi);
+            if (!dao.TestConn())
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
 
             //刷新架构
-            List<string> users = DbUtil.GetUsers(conn);
-            UpdateFrameCombo(users, databaseInfo.User);
+            List<string> users = dao.GetUsers();
+            UpdateFrameCombo(users, dbi.User, dao.DefaultSchema());
 
             //刷新数据表
-            List<Table> tables = DbUtil.GetTablesByUser(conn, databaseInfo.User);
-            UpdateTables(tables, databaseInfo);
+            List<Table> tables = dao.GetTables(dbi.User);
+            Dictionary<string, List<string>> tableColDict = dao.GetColNameByTables(tables);
+            UpdateTables(tables, dbi, tableColDict);
         }
 
-        private void UpdateFrameCombo(List<string> users,string loginUser)
+        private void UpdateFrameCombo(List<string> users,string loginUser, string defaultSchema)
         {
             this.schemaComboBox.Items.Clear();
             //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空
@@ -475,30 +457,28 @@ namespace C2.Controls.Left
             if (users == null)
                 return;
 
-            this.schemaComboBox.Text = this.schemaComboBox.Text = users.Contains(loginUser.ToLower()) ? "选择架构" : loginUser.ToUpper(); ;
+            this.schemaComboBox.Text = this.schemaComboBox.Text = users.Contains(loginUser.ToLower()) ? "选择架构" : defaultSchema; // TODO
 
             users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }
 
-        private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo)
+        private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo, Dictionary<string, List<string>> tableColDict)
         {
             //先清空上一次的数据表内容
             RelateTableButtons.Clear();
             this.tabelPanel.Controls.Clear();
-            OraConnection conn = new OraConnection(databaseInfo);
-            relateTableCol = DbUtil.GetTableCol( conn ,tables);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             List<string> tmp = new List<string>();
             foreach (Table table in tables.Take(Math.Min(300,tables.Count)))
             {
-                foreach ( List<string> kvp in relateTableCol.Values)
+                foreach ( List<string> kvp in tableColDict.Values)
                 {
                     tmp.AddRange(kvp);
                 }
                 table.Columns = tmp;
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
                 tmpDatabaseItem.DataTable = table;
-                tmpDatabaseItem.Group = this.schemaComboBox.Text;
+                tmpDatabaseItem.Schema = this.schemaComboBox.Text;
                 TableButton tableButton = new TableButton(tmpDatabaseItem);
                 GenTableButton(tableButton);//生成数据表按钮
             }

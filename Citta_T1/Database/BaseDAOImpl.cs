@@ -12,7 +12,7 @@ namespace C2.Database
     public class BaseDAOImpl : IDAO
     {
         #region 构造函数
-        protected string Name, User, Pass, Host, Sid, Service, Port;
+        protected string Name, User, Pass, Host, Sid, Service, Port, Schema;
         protected struct QueryResult
         {
             public string content;
@@ -31,6 +31,7 @@ namespace C2.Database
             this.Sid = dbi.SID;
             this.Service = dbi.Service;
             this.Port = dbi.Port;
+            this.Schema = dbi.Schema;
         }
         public BaseDAOImpl(DataItem item): this(item.DBItem) { }
         public BaseDAOImpl(string name, string user, string pass, string host, string sid, string service, string port)
@@ -58,7 +59,7 @@ namespace C2.Database
         }
         #endregion
         #region 接口实现
-        public virtual string Query(string sql)
+        public virtual string Query(string sql, bool header=true)
         {
             throw new NotImplementedException();
         }
@@ -70,25 +71,28 @@ namespace C2.Database
         #region 业务逻辑
         public List<string> GetUsers()
         {
-            string result = this.Query(this.GetUserSQL());
+            string result = this.Query(this.GetUserSQL(), false);
             return String.IsNullOrEmpty(result) ? new List<String>() : new List<string>(result.Split(OpUtil.DefaultLineSeparator));
         }
         public List<Table> GetTables(string schema)
         {
             List<Table> tables = new List<Table>();
-            string result = this.Query(this.GetTablesSQL(schema));
+            string result = this.Query(this.GetTablesSQL(), false);
             if (!String.IsNullOrEmpty(result))
                 foreach (var line in result.Split(OpUtil.DefaultLineSeparator))
-                    tables.Add(new Table(schema, line));
+                {
+                    if (!String.IsNullOrEmpty(line))
+                        tables.Add(new Table(schema, line));
+                }
             return tables;
         }
-        public string GetTableContentString(string UserOrDb, Table table, int maxNum)
+        public string GetTableContentString(Table table, int maxNum)
         {
-            return this.Query(this.GetTableContentSQL(UserOrDb, table, maxNum));
+            return this.Query(this.GetTableContentSQL(table, maxNum));
         }
-        public List<List<string>> GetTableContent(string UserOrDb, Table table, int maxNum)
+        public List<List<string>> GetTableContent(Table table, int maxNum)
         {
-            string result = this.GetTableContentString(UserOrDb, table, maxNum);
+            string result = this.GetTableContentString(table, maxNum);
             return String.IsNullOrEmpty(result) ? new List<List<string>>() : DbUtil.StringTo2DString(result);
         }
         public Dictionary<string, List<string>> GetColNameByTables(List<Table> tables)
@@ -108,31 +112,48 @@ namespace C2.Database
             List<List<string>> schema = DbUtil.StringTo2DString(schemaString);
             FileUtil.FillTable(dataGridView, schema);
             return true;
-        }
-        public bool FillDGVWithTbContent(DataGridView dataGridView, string UserOrDb, Table table, int maxNum)
+        } 
+        public bool FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum)
         {
-            string contentString = this.GetTableContentString(UserOrDb, table, maxNum);
+            string contentString = this.GetTableContentString(table, maxNum);
             if (String.IsNullOrEmpty(contentString))
                 return false;
-            List<List<string>> schema = DbUtil.StringTo2DString(contentString);
-            FileUtil.FillTable(dataGridView, schema);
+            List<List<string>> tableCols = DbUtil.StringTo2DString(contentString);
+            FileUtil.FillTable(dataGridView, tableCols);
             return true;
         }
-        public virtual bool ExecuteOracleSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
+        public bool FillDGVWithSQL(DataGridView dataGridView, string sql)
+        {
+            string contentString = this.Query(String.Format(this.LimitSQL(sql)));
+            if (String.IsNullOrEmpty(contentString))
+                return false;
+            List<List<string>> tableCols = DbUtil.StringTo2DString(contentString);
+            FileUtil.FillTable(dataGridView, tableCols);
+            return true;
+        }
+        public virtual bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
         {
             return false;
         }
+        public virtual string DefaultSchema()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
         #region SQL
+        public virtual string LimitSQL(string sql)
+        {
+            throw new NotImplementedException();
+        }
         public virtual string GetUserSQL()
         {
             throw new NotImplementedException();
         }
-        public virtual string GetTableContentSQL(string userOrDb, Table table, int maxNum)
+        public virtual string GetTableContentSQL(Table table, int maxNum)
         {
             throw new NotImplementedException();
         }
-        public virtual string GetTablesSQL(string userOrDb)
+        public virtual string GetTablesSQL()
         {
             throw new NotImplementedException();
         }

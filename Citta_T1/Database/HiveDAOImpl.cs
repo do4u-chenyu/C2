@@ -17,6 +17,8 @@ namespace C2.Database
         private string getTablesSQL = @"use {0};show tables;";
         private string getTableContentSQL = @"use {0};select * from {1} limit {2}";
         private string getColNameByTablesSQL;
+        private string getColNameByTableSQL = "desc {0}";
+
         public HiveDAOImpl(DatabaseItem dbi) : base(dbi) { }
         public HiveDAOImpl(DataItem di) : base(di) { }
         public HiveDAOImpl(string name, string user, string pass, string host, string sid, string service, string port) : base(name, user, pass, host, sid, service, port) { }
@@ -37,7 +39,11 @@ namespace C2.Database
                 }
             }
         }
-        public override string Query(string sql)
+        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
+        {
+            throw new NotImplementedException(); // TODO
+        }
+        public override string Query(string sql, bool header=true)
         {
             StringBuilder sb = new StringBuilder(1024 * 16);
             try
@@ -53,14 +59,16 @@ namespace C2.Database
                             cursor.Execute(s);
                     }
                     var list = cursor.FetchMany(int.MaxValue);
-                    string headers;
-                    if (list.Count > 0)
+                    if (header)
                     {
-                        // 添加表头
-                        headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
-                        sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
+                        string headers;
+                        if (list.Count > 0)
+                        {
+                            // 添加表头
+                            headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
+                            sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
+                        }
                     }
-
                     foreach (var item in list)
                     {
                         var dict = item as IDictionary<string, object>;
@@ -81,23 +89,33 @@ namespace C2.Database
             }
             return sb.ToString();
         }
-        public override string GetTablesSQL(string dbName)
+        public override string LimitSQL(string sql)
         {
-            return String.Format(this.getTablesSQL, dbName);
+            return String.Format("{0} limit {1}", sql, OpUtil.PreviewMaxNum);
+        }
+        public override string GetTablesSQL()
+        {
+            return String.Format(this.getTablesSQL, this.Schema);
         }
         public override string GetColNameByTablesSQL(List<Table> tables)
         {
-            if (tables.Count > 0)
-                return String.Format(this.getColNameByTablesSQL, tables[0]);
             return String.Empty;
         }
-        public override string GetTableContentSQL(string DbName, Table table, int maxNum)
+        public override string GetTableContentSQL(Table table, int maxNum)
         {
-            return String.Format(getTableContentSQL, DbName, table.Name, maxNum);
+            return String.Format(getTableContentSQL, this.Schema, table.Name, maxNum);
         }
         public override string GetUserSQL()
         {
             return this.getUserSQL;
+        }
+        public override string DefaultSchema()
+        {
+            return String.IsNullOrEmpty(this.Schema) ? "default" : this.Schema;
+        }
+        public override string GetColNameByTableSQL(Table table)
+        {
+            return String.Format(this.getColNameByTableSQL, table.Name);
         }
     }
 }

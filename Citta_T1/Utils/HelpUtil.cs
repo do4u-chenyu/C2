@@ -50,9 +50,10 @@ namespace C2.Utils
         public static string DatabaseItemIsNull = "当前并未选择连接，请选择连接后重试";
         public static string SQLOpExecuteSucceeded = "SQL算子运算完毕";
         public static string SQLOpExecuteFailed = "SQL算子运算失败，请打开SQL算子检查语句后重试";
-
+        public static string UnsupportedDatabase = "不支持的数据库类型";
         public static string TableFilterHelpInfo = "快速筛选:支持表名,列名,业务常用字段";
         public static string InvalidMaxNum = "提取条数输入有误，请输入整数类型，不支持浮点数、非数字符号等";
+       
 
         #region IAO基站批量查询
         public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01

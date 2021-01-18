@@ -15,7 +15,7 @@ namespace C2.Database
     {
         private static readonly LogUtil log = LogUtil.GetInstance("OracleImpl");
         private string getUserSQL = @"select distinct owner from all_tables";
-        private string getTablesSQL = @"select table_name from all_tables where owner='{0}'order by table_name";
+        private string getTablesSQL = @"select table_name from all_tables where owner='{0}' order by table_name";
         private string getTableContentSQL = @"select * from {0}.{1} where rownum <= {2}";
         private string getColNameByTablesSQL = @"select a.table_name, a.column_name from all_tab_columns a where table_name in ('{0}')";
 
@@ -61,7 +61,7 @@ namespace C2.Database
                 return false;
             }
         }
-        public override string Query(string sql)
+        public override string Query(string sql, bool header=true)
         {
             StringBuilder sb = new StringBuilder(1024 * 16);
             try
@@ -72,10 +72,12 @@ namespace C2.Database
                     OracleCommand comm = new OracleCommand(sql, con);
                     using (OracleDataReader rdr = comm.ExecuteReader())  // rdr.Close()
                     {
-                        for (int i = 0; i < rdr.FieldCount - 1; i++)
-                            sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
-                        sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
-
+                        if (header)
+                        {
+                            for (int i = 0; i < rdr.FieldCount - 1; i++)
+                                sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
+                            sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+                        }
                         while (rdr.Read())
                         {
                             for (int i = 0; i < rdr.FieldCount - 1; i++)
@@ -91,9 +93,13 @@ namespace C2.Database
             }
             return sb.ToString();
         }
-        public override string GetTablesSQL(string userName)
+        public override string LimitSQL(string sql)
         {
-            return String.Format(this.getTablesSQL, userName);
+            return String.Format("{0} where rownum <= {1}", sql, OpUtil.PreviewMaxNum);
+        }
+        public override string GetTablesSQL()
+        {
+            return String.Format(this.getTablesSQL, this.Schema.ToUpper());
         }
         public override string GetColNameByTablesSQL(List<Table> tables)
         {
@@ -102,15 +108,19 @@ namespace C2.Database
                 tableNames[i] = tables[i].Name;
             return String.Format(this.getColNameByTablesSQL, tableNames);
         }
-        public override string GetTableContentSQL(string User, Table table, int maxNum)
+        public override string GetTableContentSQL(Table table, int maxNum)
         {
-            return String.Format(this.getTableContentSQL, User, table.Name, maxNum);
+            return String.Format(this.getTableContentSQL, this.Schema, table.Name, maxNum);
         }
         public override string GetUserSQL()
         {
             return this.getUserSQL;
         }
-        public override bool ExecuteOracleSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
+        public override string GetColNameByTableSQL(Table table)
+        {
+            return this.GetColNameByTablesSQL(new List<Table>() { table });
+        }
+        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
         {
             int pageIndex = 0;
             bool returnHeader = true;
@@ -192,6 +202,10 @@ namespace C2.Database
                 result.returnNum = returnNum;
             }
             return result;
+        }
+        public override string DefaultSchema()
+        {
+            return String.IsNullOrEmpty(this.Schema) ? this.User.ToUpper() : this.Schema;
         }
     }
 }

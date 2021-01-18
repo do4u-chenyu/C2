@@ -31,7 +31,7 @@ namespace C2.Database.Tests
             };
             daos = new List<IDAO>();
             foreach (var dbi in dbis)
-                daos.Add(DAOFactory.CreatDAO(dbi));
+                daos.Add(DAOFactory.CreateDAO(dbi));
 
         }
         public int getFileLines(string filePath)
@@ -52,8 +52,8 @@ namespace C2.Database.Tests
         [TestMethod()]
         public void CreatDAOTest()
         {
-            IDAO oracleDAO = DAOFactory.CreatDAO(oralcDBI);
-            IDAO hiveDAO = DAOFactory.CreatDAO(hiveDBI);
+            IDAO oracleDAO = DAOFactory.CreateDAO(oralcDBI);
+            IDAO hiveDAO = DAOFactory.CreateDAO(hiveDBI);
             Assert.IsNotNull(oracleDAO);
             Assert.IsNotNull(hiveDAO);
         }
@@ -97,7 +97,7 @@ namespace C2.Database.Tests
             InitDao();
             for(int i = 0; i < daos.Count; i++)
             {
-                string result = daos[i].GetTableContentString(userOrDb[i], dbis[i].DataTable, 1000);
+                string result = daos[i].GetTableContentString(dbis[i].DataTable, 1000);
                 Assert.IsTrue(!String.IsNullOrEmpty(result));
             }
         }
@@ -108,7 +108,7 @@ namespace C2.Database.Tests
             InitDao();
             for (int i = 0; i < daos.Count; i++)
             {
-                List<List<string>> result = daos[i].GetTableContent(userOrDb[i], dbis[i].DataTable, 1000);
+                List<List<string>> result = daos[i].GetTableContent(dbis[i].DataTable, 1000);
                 Assert.IsTrue(result.Count > 0 && result[0].Count > 0);
                 Console.WriteLine(result[0][0]);
             }
@@ -133,7 +133,7 @@ namespace C2.Database.Tests
                 string sql = @"select * from TEST_100W";
                 string filePath = @"D:/tmp.txt";
                 int maxReturnNum = 10000;
-                bool result = dao.ExecuteOracleSQL(sql, filePath, maxReturnNum);
+                bool result = dao.ExecuteSQL(sql, filePath, maxReturnNum);
 
                 Assert.IsTrue(File.Exists(filePath));
                 Assert.IsTrue(getFileLines(filePath) == maxReturnNum + 1);

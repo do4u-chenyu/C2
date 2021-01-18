@@ -49,7 +49,7 @@ namespace C2.Model.Widgets
             if (dataItem.FileType == OpUtil.ExtType.Excel)
                 fileContent = BCPBuffer.GetInstance().GetCachePreviewExcelContent(path);
             else if (dataItem.FileType == OpUtil.ExtType.Database)
-                fileContent = BCPBuffer.GetInstance().GetCachePreviewOracleTable(dataItem.DBItem);
+                fileContent = BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem);
             else
                 fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(path, encoding);
             List<string> rows = new List<string>(fileContent.Split(OpUtil.DefaultLineSeparator));
