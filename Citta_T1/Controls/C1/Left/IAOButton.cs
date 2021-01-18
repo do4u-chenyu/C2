@@ -83,16 +83,17 @@ namespace C2.Controls.Left
         {
             baseForm2 = new coordinateConversion();
             // 施工中
-            baseForm2.Tab0Tip = HelpUtil.TimeAndIPTransformHelpInfo;
-            baseForm2.Tib1Tip = HelpUtil.TimeAndIPTransformHelpInfo;
+            baseForm2.Tab0Tip = HelpUtil.GPSTransformHelpInfo;
+            baseForm2.Tib1Tip = HelpUtil.GPSDistanceHelpInfo;
         }
         private void TimeAndIPTransformForm()
         {
             baseForm2 = new coordinateConversion();
             // 施工中
             baseForm2.ReLayoutForm();
-            baseForm2.Tab0Tip = HelpUtil.TimeAndIPTransformHelpInfo;
-            baseForm2.Tib1Tip = HelpUtil.TimeAndIPTransformHelpInfo;
+
+            baseForm2.Tab0Tip = HelpUtil.IPTransformHelpInfo;
+            baseForm2.Tib1Tip = HelpUtil.TimeTransformHelpInfo;
         }
         #endregion
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)

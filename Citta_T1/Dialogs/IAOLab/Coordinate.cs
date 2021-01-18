@@ -1,5 +1,6 @@
 ﻿using C2.Controls;
 using C2.IAOLab.Transform;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,11 +23,14 @@ namespace C2.Dialogs.IAOLab
         {
             InitializeComponent();
             this.BackColor = Color.White;
+          
         }
 
 
         public void ReLayoutForm()
         {
+            // ip time转换窗体
+
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

@@ -59,9 +59,13 @@ namespace C2.Utils
 批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
         public static string BankToolHelpInfo = @"单次输入格式：6210857100018896476
 批量查询格式：多个银行卡号间用换行分隔，最大支持1000条";
-        public static string GPSTransformHelpInfo = @"单次输入格式：04a1518006c2
+        public static string GPSTransformHelpInfo = @"单次输入格式：XXX
 批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
-        public static string TimeAndIPTransformHelpInfo = @"单次输入格式：04a1518006c2
+        public static string GPSDistanceHelpInfo = @"单次输入格式：XXX 
+批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
+        public static string IPTransformHelpInfo = @"单次输入格式：XXX
+批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
+        public static string TimeTransformHelpInfo = @"单次输入格式：XXX
 批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
         #endregion
         /// <summary>
