@@ -59,5 +59,18 @@ namespace C2.Dialogs
 
             return base.OnOKButtonClick();
         }
+
+        private void PasswordCheckBox_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (this.passwordCheckBox.Checked)
+            {
+                this.passwordTextBox.Enabled = true;
+            }
+            else
+            {
+                this.passwordTextBox.Enabled = false;
+                this.passwordTextBox.Text = string.Empty;
+            }
+        }
     }
 }

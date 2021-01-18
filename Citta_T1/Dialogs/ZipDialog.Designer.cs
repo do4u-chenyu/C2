@@ -33,7 +33,7 @@
             this.modelPathTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.browseButton = new System.Windows.Forms.Button();
-            this.tip1 = new System.Windows.Forms.Label();
+            this.passwordCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // modelPathLabel
@@ -67,43 +67,48 @@
             // 
             // passwordTextBox
             // 
+            this.passwordTextBox.Enabled = false;
             this.passwordTextBox.Location = new System.Drawing.Point(106, 94);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(187, 21);
             this.passwordTextBox.TabIndex = 10006;
+            this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // browseButton
             // 
             this.browseButton.Location = new System.Drawing.Point(299, 39);
             this.browseButton.Margin = new System.Windows.Forms.Padding(0);
             this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(49, 24);
+            this.browseButton.Size = new System.Drawing.Size(48, 24);
             this.browseButton.TabIndex = 10007;
             this.browseButton.Text = "浏览";
             this.browseButton.UseVisualStyleBackColor = true;
             this.browseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
-            // tip1
+            // passwordCheckBox
             // 
-            this.tip1.AutoSize = true;
-            this.tip1.Location = new System.Drawing.Point(301, 99);
-            this.tip1.Name = "tip1";
-            this.tip1.Size = new System.Drawing.Size(59, 12);
-            this.tip1.TabIndex = 10008;
-            this.tip1.Text = "(非必填）";
+            this.passwordCheckBox.AutoSize = true;
+            this.passwordCheckBox.Location = new System.Drawing.Point(302, 97);
+            this.passwordCheckBox.Name = "passwordCheckBox";
+            this.passwordCheckBox.Size = new System.Drawing.Size(48, 16);
+            this.passwordCheckBox.TabIndex = 10009;
+            this.passwordCheckBox.Text = "密码";
+            this.passwordCheckBox.UseVisualStyleBackColor = true;
+            this.passwordCheckBox.CheckedChanged += new System.EventHandler(this.PasswordCheckBox_CheckedChanged);
             // 
             // ZipDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(382, 201);
-            this.Controls.Add(this.tip1);
+            this.ClientSize = new System.Drawing.Size(370, 201);
+            this.Controls.Add(this.passwordCheckBox);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.modelPathTextBox);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.modelPathLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ZipDialog";
             this.Text = "业务视图";
             this.Controls.SetChildIndex(this.modelPathLabel, 0);
@@ -111,7 +116,7 @@
             this.Controls.SetChildIndex(this.modelPathTextBox, 0);
             this.Controls.SetChildIndex(this.passwordTextBox, 0);
             this.Controls.SetChildIndex(this.browseButton, 0);
-            this.Controls.SetChildIndex(this.tip1, 0);
+            this.Controls.SetChildIndex(this.passwordCheckBox, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,6 +129,6 @@
         private System.Windows.Forms.TextBox modelPathTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Button browseButton;
-        private System.Windows.Forms.Label tip1;
+        private System.Windows.Forms.CheckBox passwordCheckBox;
     }
 }
