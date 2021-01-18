@@ -12,6 +12,7 @@ using C2.IAOLab.BaseStation;
 using C2.IAOLab.WifiMac;
 using log4net.Util;
 using C2.IAOLab.BankTool;
+using C2.IAOLab.Transform;
 
 namespace C2.Dialogs.IAOLab
 {
@@ -24,14 +25,7 @@ namespace C2.Dialogs.IAOLab
         }
         public void ReLayoutForm()
         {
-            this.methodPanel.Visible = true;
-            this.inputLabel.Visible = false;
-            this.sixTransform.Visible = true;
-            //tipLable.Location = new Point(30, 58);
-            inputAndResult.Location = new Point(10, 104);
-            inputAndResult.Height -= 20;
-            inputAndResult.Width -= 10;
-            //bd_wgs.Checked = false;
+
         }
         public string Tip { set { this.tipLable.Text = value; } }
         public string InputLable { set { this.inputLabel.Text = value; } }
@@ -89,13 +83,7 @@ namespace C2.Dialogs.IAOLab
                         }
 
                     }
-                    break;
-                case "Tude":
-                    
-                    break;
-                case "Ip":
-                   
-                    break;
+                    break;             
                 default:
                     break;
             }
@@ -113,26 +101,10 @@ namespace C2.Dialogs.IAOLab
 
         }
 
-        private void methodPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void ComputeDistance_MouseClick(object sender, MouseEventArgs e)
-        {
-            EnableChange(false);
-        }
-
-        private void XYTtransform_MouseClick(object sender, MouseEventArgs e)
-        {
-            EnableChange(true);
-        }
-        private void EnableChange(bool enable)
-        { }
-
         private void WifiLocation_Load(object sender, EventArgs e)
         {
 
         }
+
     }
 }

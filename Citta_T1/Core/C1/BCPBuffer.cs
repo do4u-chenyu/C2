@@ -189,7 +189,7 @@ namespace C2.Core
             return returnVar;
         }
         #endregion
-        private string GetFirstLine(string tbContent)
+        public  string GetFirstLine(string tbContent)
         {
             int lineSepIndex = tbContent.IndexOf(OpUtil.DefaultLineSeparator);
             return tbContent.Substring(0, lineSepIndex);

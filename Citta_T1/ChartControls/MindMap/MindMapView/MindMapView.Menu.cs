@@ -265,7 +265,9 @@ namespace C2.Controls.MapViews
 
             string modelNewName = createNewModelForm.ModelTitle;
             string modelPath = opw.ModelDataItem.FilePath;
-            ExportModel.GetInstance().Export(modelPath, modelNewName, Path.Combine(Global.UserWorkspacePath, "模型市场"));
+
+            if (!ExportModel.GetInstance().Export(modelPath, modelNewName, Path.Combine(Global.UserWorkspacePath, "模型市场")))
+                return;
 
             //复制之后修改XML文件中数据源路径
             string modelDir = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场", modelNewName);

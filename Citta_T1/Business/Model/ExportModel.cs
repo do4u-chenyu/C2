@@ -43,7 +43,11 @@ namespace C2.Business.Model
 
             //模型关联文件复制
             if (!CopyModelAndDataFiles(Path.GetDirectoryName(this.XmlFullPath), true))
+            {
+                if (Directory.Exists(TmpModelPath))
+                    Directory.Delete(TmpModelPath, true);
                 return false;
+            }
 
             //生成压缩包
             try
@@ -53,6 +57,8 @@ namespace C2.Business.Model
             catch(Exception e)
             {
                 HelpUtil.ShowMessageBox(e.Message);
+                if (Directory.Exists(TmpModelPath))
+                    Directory.Delete(TmpModelPath, true);
                 return false;
             }
 
@@ -75,10 +81,20 @@ namespace C2.Business.Model
             XmlNode chart = xDoc.DocumentElement.SelectSingleNode("//chart");//仅拷贝业务拓展视图相关数据
             XmlNodeList widgets = chart.SelectNodes("//widget");  //每个节点都有一个widgets
 
+            List<string> xmlPaths = new List<string>();//存放c1模型xml的路径
+
             foreach (XmlNode widget in widgets)
             {
                 XmlNodeList datas = widget.SelectNodes("//data_item|//chart_item|//attach_item");
                 CopyDataSource(datas, allPaths, dataSourceNames);
+
+                //模型的结果同步到业务视图的结果算子，也需要修改路径
+                XmlNodeList results = widget.SelectNodes("//result_item");
+                foreach(XmlNode result in results)
+                {
+                    if ((result as XmlElement).GetAttribute("result_type") == "ModelOp")
+                        CopyDataSource(result.SelectNodes("."), allPaths, dataSourceNames);
+                }
 
                 XmlNodeList opItems = widget.SelectNodes("op_items/op_item");
                 foreach (XmlNode opItem in opItems)
@@ -93,10 +109,27 @@ namespace C2.Business.Model
                             if (!CopyPythonOperatorFiles(opItem.SelectNodes("."), allPaths, dataSourceNames))
                                 return !copySuccess;
                             break;
+                        case "model":
+                            xmlPaths.Add(opItem.SelectSingleNode("path").InnerText);
+                            break;
                         default:
                             break;
                     }
                 }
+            }
+
+            //需要根据this.XmlFullPath找到当前xml,且存放路径也要改变
+            foreach(string xmlPath in xmlPaths)
+            {
+                string desPath = Path.Combine(TmpModelPath, Path.GetFileNameWithoutExtension(xmlPath));
+                
+                //先拷贝一份文件夹到临时文件夹，模型算子的文件夹里存放xml及结果文件，其中结果文件路径在bmd也存储了一份，由上面bmd直接复制
+                if (Directory.Exists(desPath))
+                    continue;
+                Directory.CreateDirectory(desPath);
+                File.Copy(xmlPath, Path.Combine(desPath, Path.GetFileName(xmlPath)), true);
+
+                CopyDataSourceFilesPerXml(xmlPath, allPaths, dataSourceNames, true);
             }
 
             xDoc.Save(this.XmlFullPath);
@@ -156,19 +189,26 @@ namespace C2.Business.Model
 
         #endregion
 
-        public void Export(string fullXmlFilePath, string modelNewName, string exportFilePath)
+        public bool Export(string fullXmlFilePath, string modelNewName, string exportFilePath)
         {
             // 模型文档不存在返回
             if (!File.Exists(fullXmlFilePath))
             {
                 HelpUtil.ShowMessageBox("模型文档不存在，可能已被删除");
-                return;
+                return false;
             }
             this.XmlFullPath = fullXmlFilePath;
             this.NewModelName = modelNewName;
             // 准备要导出的模型文档
             if (!CopyModelAndDataFiles(exportFilePath))
-                return;
+            {
+                if (Directory.Exists(TmpModelPath))
+                    Directory.Delete(TmpModelPath, true);
+                return false;
+            }
+                
+
+            return true;
         }
 
         public void GenExportIAO()
@@ -196,7 +236,7 @@ namespace C2.Business.Model
             //string modelName = Path.GetFileNameWithoutExtension(this.XmlFullPath);
 
             string modelPath = Path.GetDirectoryName(this.XmlFullPath);
-            TmpModelPath = Path.Combine(exportFilePath, NewModelName);
+            TmpModelPath = Path.Combine(exportFilePath, isC2Model ? string.Format("{0}_{1}", NewModelName, DateTime.Now.ToString("hhmmss")) : NewModelName);//业务视图临时文件夹可能与模型算子文件夹同名，加时间戳做区分
             Directory.CreateDirectory(TmpModelPath);
             string[] filePaths = Directory.GetFiles(modelPath, "*.*");
             foreach (string file in filePaths)
@@ -213,7 +253,7 @@ namespace C2.Business.Model
                 
                 File.Copy(file, Path.Combine(TmpModelPath, destFileName), true);
             }
-                
+
             // 创建存储数据的_data文件夹
             this.DataPath = Path.Combine(TmpModelPath, "_datas");
             Directory.CreateDirectory(DataPath);
@@ -222,14 +262,13 @@ namespace C2.Business.Model
             else
                 return C2CopyDataSourceFiles();
         }
-        private bool CopyDataSourceFiles()
+
+        private bool CopyDataSourceFilesPerXml(string xmlPath, Dictionary<string, string> allPaths, List<string> dataSourceNames, bool isC2Model=false)
         {
             bool copySuccess = true;
-            List<string> dataSourceNames = new List<string>();
-            Dictionary<string, string> allPaths = new Dictionary<string, string>();
 
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(this.XmlFullPath);
+            xDoc.Load(xmlPath);
             XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
             // 数据源
             XmlNodeList nodes = rootNode.SelectNodes("//ModelElement[type='DataSource']");
@@ -237,6 +276,13 @@ namespace C2.Business.Model
             if (!CopyDataSourceOperatorFile(nodes, allPaths, dataSourceNames))
                 return !copySuccess;
 
+            //结果也要存一份
+            if (isC2Model)
+            {
+                XmlNodeList results = rootNode.SelectNodes("//ModelElement[type='Result']");
+                if (!CopyDataSourceOperatorFile(results, allPaths, dataSourceNames))
+                    return !copySuccess;
+            }
             // AI、多源算子
             XmlNodeList customNodes = rootNode.SelectNodes("//ModelElement[subtype='CustomOperator1']|//ModelElement[subtype='CustomOperator2']");
             if (!CopyCustomOperatorFile(customNodes, allPaths, dataSourceNames))
@@ -263,8 +309,16 @@ namespace C2.Business.Model
                 if (allPaths.ContainsKey(path))
                     node.SelectSingleNode("path").InnerText = allPaths[path];
             }
-            xDoc.Save(this.XmlFullPath);
+            xDoc.Save(xmlPath);
             return copySuccess;
+        }
+
+        private bool CopyDataSourceFiles()
+        {
+            List<string> dataSourceNames = new List<string>();
+            Dictionary<string, string> allPaths = new Dictionary<string, string>();
+
+            return CopyDataSourceFilesPerXml(this.XmlFullPath, allPaths, dataSourceNames);
         }
         private bool CopyCustomOperatorFile(XmlNodeList nodes, Dictionary<string, string> allPaths, List<string> dataSourceNames)
         {

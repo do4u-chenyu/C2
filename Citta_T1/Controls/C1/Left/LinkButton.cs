@@ -52,6 +52,9 @@ namespace C2.Controls.Left
         {
             InitializeComponent();
             DatabaseItem = item;
+            if (item.Type == DatabaseType.Hive)
+                this.leftPictureBox.Image = global::C2.Properties.Resources.Hive;
+
         }
 
         #region 右键菜单

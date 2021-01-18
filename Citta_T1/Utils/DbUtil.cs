@@ -140,16 +140,11 @@ namespace C2.Utils
         }
         public static bool TestConn(DatabaseItem dbi)
         {
-            return TestConn(new OraConnection(dbi));
-        }
-
-        public static bool TestConn(DataItem item)
-        {
             bool ret = false;
-            switch (item.DataType)
+            switch (dbi.Type)
             {
                 case DatabaseType.Oracle:
-                    ret = TestConn(new OraConnection(item));
+                    ret = TestConn(new OraConnection(dbi));
                     break;
                 case DatabaseType.Hive:
                     ret = new HiveConnection(item).TestConn();
@@ -158,6 +153,12 @@ namespace C2.Utils
                     break;
             }
             return ret;
+
+        }
+
+        public static bool TestConn(DataItem item)
+        {
+            return TestConn(item.DBItem);
         }
         public static List<string> GetUsers(OraConnection conn)
         {
@@ -399,6 +400,23 @@ namespace C2.Utils
         {
             public string content;
             public int returnNum;
+        }
+        public static Dictionary<string, List<string>> StringToDict(string v)
+        {
+            Dictionary<string, List<string>> result = new Dictionary<string, List<string>>();
+            foreach (string line in v.Split(OpUtil.DefaultLineSeparator))
+            {
+                var kv = line.Split(OpUtil.DefaultFieldSeparator);
+                if (kv.Length != 2)
+                    continue;
+                string key = kv[0];
+                string val = kv[1];
+                if (result.ContainsKey(key))
+                    result[key].Add(val);
+                else
+                    result.Add(key, new List<string>() { val });
+            }
+            return result;
         }
     }
 }

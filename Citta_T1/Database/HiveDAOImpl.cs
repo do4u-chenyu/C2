@@ -10,31 +10,21 @@ using System.Windows.Forms;
 
 namespace C2.Database
 {
-    public class HiveDAOImpl: BaseDAO
+    public class HiveDAOImpl: BaseDAOImpl
     {
         private static readonly LogUtil log = LogUtil.GetInstance("HiveDAOImpl");
-        public string Server, User, Pass, Host, Port;
-        public new string getUserSQL = @"show databases";
-        public new string getTablesByUserSQL = @"use {};show tables;";
-        public new string getTableContentSQL = @"use {};select * from {} limit {}";
-        public new string getSchemaByTablesSQL;
-
-        public HiveDAOImpl(DatabaseItem dbi)
-        {
-            this.Server = dbi.Server;
-            this.User = dbi.User;
-            this.Pass = dbi.Password;
-            this.Host = dbi.Server;
-            this.Port = dbi.Port;
-        }
-        public HiveDAOImpl(DataItem item) : this(item.DBItem)
-        {
-        }
+        private string getUserSQL = @"show databases";
+        private string getTablesByUserSQL = @"use {0};show tables;";
+        private string getTableContentSQL = @"use {0};select * from {1} limit {2}";
+        private string getSchemaByTablesSQL;
+        public HiveDAOImpl(DatabaseItem dbi) : base(dbi) { }
+        public HiveDAOImpl(DataItem di) : base(di) { }
+        public HiveDAOImpl(string name, string user, string pass, string host, string sid, string service, string port) : base(name, user, pass, host, sid, service, port) { }
         public override bool TestConn()
         {
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                using (var conn = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                using (var conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                        this.User, this.Pass))
                 {
                     try
@@ -57,12 +47,12 @@ namespace C2.Database
             {
                 try
                 {
-                    using (Connection conn = new Connection(this.Server, ConvertUtil.TryParseInt(this.Port),
+                    using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                        this.User, this.Pass))
                     {
 
                         var cursor = conn.GetCursor();
-                        foreach(var s in sql.Split(';'))
+                        foreach (var s in sql.Split(';'))
                             cursor.Execute(sql);
                         var list = cursor.FetchMany(int.MaxValue);
                         string headers;
@@ -94,15 +84,21 @@ namespace C2.Database
                 return sb.ToString();
             }
         }
-
-        public override string GenGetSchemaByTablesSQL(string getSchemaByTablesSQL, List<Table> tables)
+        public override string GetTablesByUserSQL()
+        {
+            return String.Format(this.getTablesByUserSQL, this.User);
+        }
+        public override string GetSchemaByTablesSQL(List<Table> tables)
         {
             throw new NotImplementedException();
         }
-
-        public override string GenGetTableContentSQL(Table table, int maxNum)
+        public override string GetTableContentSQL(Table table, int maxNum)
         {
-            return String.Format(this.getTableContentSQL, this.User, table, maxNum);
+            return String.Format(getTableContentSQL, this.User, table.Name, maxNum);
+        }
+        public override string GetUserSQL()
+        {
+            return this.getUserSQL;
         }
     }
 }

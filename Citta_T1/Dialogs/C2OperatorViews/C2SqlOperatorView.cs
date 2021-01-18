@@ -72,7 +72,17 @@ namespace C2.Dialogs.C2OperatorViews
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
-            DbUtil.FillDGVWithTbContent(gridOutput, new OraConnection(SelectDatabaseItem), SelectTable, OpUtil.PreviewMaxNum);
+            if (SelectDatabaseItem.Type == DatabaseType.Oracle)
+                DbUtil.FillDGVWithTbContent(gridOutput, new OraConnection(SelectDatabaseItem), SelectTable, OpUtil.PreviewMaxNum);
+            else if (SelectDatabaseItem.Type == DatabaseType.Hive)
+            {
+                string sql = string.Format("select * from {0} limit{1}", SelectTable.Name, OpUtil.PreviewMaxNum);
+                LoadHiveData(this.comboBoxDataBase.Text, sql); 
+            }  
+            else
+                return;
+
+
         }
 
         private void CopyTableNameMenuItem_Click(object sender, EventArgs e)
@@ -122,23 +132,42 @@ namespace C2.Dialogs.C2OperatorViews
         {
             if (SelectDatabaseItem == null)
                 return;
-
-            //连接数据库
-            OraConnection conn = new OraConnection(SelectDatabaseItem);
-            if (!DbUtil.TestConn(conn))
+            List<string> users;
+            if (SelectDatabaseItem.Type == DatabaseType.Hive)
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                HiveConnection hiveConn = new HiveConnection(SelectDatabaseItem);
+                if (!hiveConn.Connect())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                //刷新架构
+                users = hiveConn.GetHiveDatabases();
             }
-
-            //刷新架构
-            List<string> users = DbUtil.GetUsers(conn);
+            else if (SelectDatabaseItem.Type == DatabaseType.Oracle)
+            {   
+                //连接数据库
+                OraConnection conn = new OraConnection(SelectDatabaseItem);
+                if (!DbUtil.TestConn(conn))
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                //刷新架构
+                users = DbUtil.GetUsers(conn);
+            }
+            else
+                users = new List<string>();
+          
             this.comboBoxDataBase.Items.Clear();
             if (users == null || users.Count <= 0)
                 return;
             if (databaseItems != null && databaseItems.Count > 0)
             {
                 this.comboBoxDataBase.Text = users.Find(x => x.Equals(SelectDatabaseItem.User.ToUpper())) == null ? "选择架构" : SelectDatabaseItem.User.ToUpper();
+                // hive加载框架
+                if (string.Equals("选择架构", this.comboBoxDataBase.Text))
+                    this.comboBoxDataBase.Text = users[0];
                 this.comboBoxDataBase.Items.AddRange(users.ToArray());
             }
 
@@ -148,14 +177,26 @@ namespace C2.Dialogs.C2OperatorViews
         {
             if (SelectDatabaseItem == null || string.IsNullOrEmpty(this.comboBoxDataBase.Text) )
                 return;
-
-            //连接数据库
-            OraConnection conn = new OraConnection(SelectDatabaseItem);
-            if (!DbUtil.TestConn(conn))
-                return;
-
-            //刷新数据表
-            List<Table> tables = DbUtil.GetTablesByUser(conn, this.comboBoxDataBase.Text);
+            List<Table> tables;
+            //Hive 连接数据库
+            if (SelectDatabaseItem.Type == DatabaseType.Hive)
+            {
+                HiveConnection hiveConn = new HiveConnection(SelectDatabaseItem);
+                if (!hiveConn.Connect())
+                    return;
+                tables = hiveConn.GetTablesByDB(this.comboBoxDataBase.Text);
+            }
+            else if (SelectDatabaseItem.Type == DatabaseType.Oracle)
+            {
+                OraConnection conn = new OraConnection(SelectDatabaseItem);
+                if (!DbUtil.TestConn(conn))
+                    return;
+                //刷新数据表
+                tables = DbUtil.GetTablesByUser(conn, this.comboBoxDataBase.Text);
+            }
+            else
+                tables = new List<Table>();
+          
             this.tableListBox.Items.Clear();
             if (tables == null || tables.Count <= 0)
                 return;
@@ -182,6 +223,12 @@ namespace C2.Dialogs.C2OperatorViews
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DatabaseItemIsNull);
                 return;
+            }
+            if (SelectDatabaseItem.Type == DatabaseType.Hive)
+            {
+                LoadHiveData(this.comboBoxDataBase.Text, textEditorControl1.Text);
+                return;
+
             }
             try
             {
@@ -216,6 +263,28 @@ namespace C2.Dialogs.C2OperatorViews
             catch (Exception ex) // Better catch in case they have bad sql
             {
                 HelpUtil.ShowMessageBox(ex.Message);
+            }
+        }
+        private void LoadHiveData(string database,string sql)
+        {
+            HiveConnection hiveConnection = new HiveConnection(SelectDatabaseItem);
+            string tbContent = hiveConnection.GetSQLResult(database,sql);
+            List<string[]> results = new List<string[]>();
+            foreach (string row in tbContent.Split(OpUtil.DefaultLineSeparator))
+                results.Add(row.Split(OpUtil.DefaultFieldSeparator));
+
+            // Grab all the column names
+            gridOutput.Rows.Clear();
+            gridOutput.Columns.Clear();
+            foreach (string[] row in results)
+            {
+                if (gridOutput.Columns.Count == 0)
+                {
+                    for (int i = 0; i < row.Length; i++)
+                        gridOutput.Columns.Add(i.ToString(), row[i]);
+                    continue;
+                }
+                gridOutput.Rows.Add(row);
             }
         }
         protected override void SaveOption()

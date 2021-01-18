@@ -156,6 +156,7 @@ namespace C2.Dialogs
             this.portTextBox.ForeColor = notHive ? Color.Black : Color.Gray;
             this.serviceTextBox.Enabled = notHive;
             this.sidTextBox.Enabled = notHive;
+            this.sidTextBox.Text = "";
 
         }
 

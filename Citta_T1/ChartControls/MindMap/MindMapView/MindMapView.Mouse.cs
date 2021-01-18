@@ -170,17 +170,26 @@ namespace C2.Controls.MapViews
             string modelDocumentName = createNewModelForm.ModelTitle;
             string modelUserPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "业务视图", Global.GetCurrentDocument().Name);
             string modelSavePath = Path.Combine(modelUserPath, modelDocumentName, modelDocumentName + ".xml");
-            DataItem modelDataItem = new DataItem(modelSavePath, modelDocumentName, '\t', OpUtil.Encoding.NoNeed, OpUtil.ExtType.Unknow);
 
-            if (opw == null)
-            {
-                htr.Topic.Add(new OperatorWidget { HasModelOperator = true, ModelDataItem = modelDataItem });
+            //新建模型前保存一次，防止出现用户一直未保存导致模型视图路径逻辑出错
+            Global.GetDocumentForm().Save();
 
-            }
-            else if (opw.HasModelOperator)
+            if(opw != null && opw.HasModelOperator)
             {
                 HelpUtil.ShowMessageBox("该节点已存在高级模型，请右键算子挂件，选择对应模型进行修改或删除。", "已存在", MessageBoxIcon.Information);
                 return;
+            }
+            //需要拷贝模型市场文件夹到当前模型路径,复制之后修改XML文件中数据源路径
+            if (!ExportModel.GetInstance().Export(modelFullFilePath, modelDocumentName, modelUserPath))
+                return;
+
+            string dirs = Path.Combine(modelUserPath, modelDocumentName, "_datas");
+            ImportModel.GetInstance().RenameFile(dirs, modelSavePath);
+
+            DataItem modelDataItem = new DataItem(modelSavePath, modelDocumentName, '\t', OpUtil.Encoding.NoNeed, OpUtil.ExtType.Unknow);
+            if (opw == null)
+            {
+                htr.Topic.Add(new OperatorWidget { HasModelOperator = true, ModelDataItem = modelDataItem });
             }
             else
             {
@@ -188,17 +197,8 @@ namespace C2.Controls.MapViews
                 opw.ModelDataItem = modelDataItem;
                 Global.GetCurrentDocument().Modified = true;
             }
-            //新建模型前保存一次，防止出现用户一直未保存导致模型视图路径逻辑出错
-            Global.GetDocumentForm().Save();
 
-            //需要拷贝模型市场文件夹到当前模型路径
-            //复制之后修改XML文件中数据源路径
-            ExportModel.GetInstance().Export(modelFullFilePath, modelDocumentName, modelUserPath);
-            
-            string dirs = Path.Combine(modelUserPath, modelDocumentName, "_datas");
-            ImportModel.GetInstance().RenameFile(dirs, modelSavePath);
-
-            //Global.GetMainForm().NewCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, htr.Topic);
+            Global.OnModifiedChange();
         }
 
         private void AddDataButtonToTopic(DragEventArgs e)

@@ -141,9 +141,11 @@ namespace C2.Controls
             {
                 return;
             }
-            // TODO C2不允许数据拖到Canvas
-            //if (type == ElementType.DataSource)
-            //    return;
+
+            //C2不允许数据拖到Canvas
+            if (type == ElementType.DataSource)
+                return;
+
             float screenFactor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
             int locX = Convert.ToInt32(e.X / screenFactor);
             int locY = Convert.ToInt32(e.Y / screenFactor);

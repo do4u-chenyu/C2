@@ -14,6 +14,7 @@ namespace C2.Controls.Left
     {
         private WifiLocation baseForm0;
         private ApkTool baseForm1;
+        private coordinateConversion baseForm2;
         public IAOButton(string ffp)
         {
             InitializeComponent();
@@ -56,6 +57,8 @@ namespace C2.Controls.Left
             }
             if (baseForm0 != null)
                 baseForm0.FormType = ffp;
+            if (baseForm2 != null)
+                baseForm2.FormType = ffp;
         }
         #region 定义6种弹窗
         private void ApkToolForm()
@@ -78,19 +81,18 @@ namespace C2.Controls.Left
         }
         private void GPSTransformForm()
         {
-            baseForm0 = new WifiLocation();
-            baseForm0.ReLayoutForm();
-            baseForm0.Text = "经纬度转换";
-            baseForm0.InputLable = "请在下方输入经纬度";
-            baseForm0.Tip = HelpUtil.GPSTransformHelpInfo;
-
+            baseForm2 = new coordinateConversion();
+            // 施工中
+            baseForm2.Tab0Tip = HelpUtil.TimeAndIPTransformHelpInfo;
+            baseForm2.Tib1Tip = HelpUtil.TimeAndIPTransformHelpInfo;
         }
         private void TimeAndIPTransformForm()
         {
-            baseForm0 = new WifiLocation();
-            baseForm0.Text = "时间";
-            baseForm0.InputLable = "请在下方输入基站号码";
-            baseForm0.Tip = HelpUtil.TimeAndIPTransformHelpInfo;
+            baseForm2 = new coordinateConversion();
+            // 施工中
+            baseForm2.ReLayoutForm();
+            baseForm2.Tab0Tip = HelpUtil.TimeAndIPTransformHelpInfo;
+            baseForm2.Tib1Tip = HelpUtil.TimeAndIPTransformHelpInfo;
         }
         #endregion
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -106,10 +108,18 @@ namespace C2.Controls.Left
         }
         private void OpenForm()
         {
-            if (baseForm1 == null)
+            if (baseForm0 != null)
+            {
                 baseForm0.ShowDialog();
-            else
+                return;
+            }
+            if (baseForm1 != null)
+            {
                 baseForm1.ShowDialog();
+                return;
+            }
+            if (baseForm2 != null)
+                baseForm2.ShowDialog();
         }
     }
 }

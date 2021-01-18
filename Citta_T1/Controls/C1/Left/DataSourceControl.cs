@@ -274,9 +274,8 @@ namespace C2.Controls.Left
         #region 外部数据库布局
         public void GenLinkButton(DatabaseItem dbinfo, bool updateFrameAndTables = false)
         {               
-            LinkButton linkButton = dbinfo.Type==DatabaseType.Hive ? CreateHiveButton(dbinfo): new LinkButton(dbinfo);
-            SelectLinkButton = linkButton;
-            GenLinkButton(linkButton);
+            SelectLinkButton = new LinkButton(dbinfo);
+            GenLinkButton(SelectLinkButton);
             if (updateFrameAndTables)
                 ConnectDatabase(dbinfo);//连接一次数据库，刷新架构及数据表
             SaveExternalData();
@@ -524,14 +523,7 @@ namespace C2.Controls.Left
 
             return allExternalData;
         }
-        #region Hive相关控件
-        private LinkButton CreateHiveButton(DatabaseItem dbinfo)
-        {
-            LinkButton linkButton = new LinkButton(dbinfo);
-            linkButton.LeftControlImage = global::C2.Properties.Resources.delete;
-            return linkButton;
-        }
-        #endregion
+
 
         private void optComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
