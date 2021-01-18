@@ -12,7 +12,6 @@ namespace C2.IAOLab.Transform
 
         private double xPi = Math.PI * 3000.0 / 180.0;
         private double earthR = 6371000;
-        private static GPSTransform instance;
         private string input;
         private string wrongInfo;
         private string[] inputArray;
@@ -25,10 +24,8 @@ namespace C2.IAOLab.Transform
 
        
         public static GPSTransform GetInstance(string input)
-        {
-            if (instance == null)
-                instance = new GPSTransform(input);
-            return instance;
+        {  
+            return new GPSTransform(input);
         }
 
         public string CoordinateConversion(string type)
