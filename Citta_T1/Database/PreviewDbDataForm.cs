@@ -21,7 +21,6 @@ namespace C2.Database
 
         public MaxNumChangedEventHandler MaxNumChanged;
         private DatabaseItem databaseItem;
-        private OraConnection conn;
 
         public PreviewDbDataForm()
         {
@@ -32,7 +31,6 @@ namespace C2.Database
         private void Init(DatabaseItem dbi)
         {
             this.databaseItem = dbi;
-            this.conn = new OraConnection(databaseItem);
         }
         public bool Flush(DatabaseItem dbi)
         {
