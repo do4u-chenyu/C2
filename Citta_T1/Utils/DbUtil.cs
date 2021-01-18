@@ -376,6 +376,31 @@ namespace C2.Utils
             return true;
         }
 
+        public static bool FillDGVWithTbContent(DataGridView gridOutput, DatabaseItem SelectDatabaseItem, string database, string sql)
+        {
+            HiveConnection hiveConnection = new HiveConnection(SelectDatabaseItem);
+            string tbContent = hiveConnection.GetSQLResult(database, sql);
+            List<string[]> results = new List<string[]>();
+            foreach (string row in tbContent.Split(OpUtil.DefaultLineSeparator))
+                results.Add(row.Split(OpUtil.DefaultFieldSeparator));
+            if (results.Count <= 0)
+                return false;
+            // Grab all the column names
+            gridOutput.Rows.Clear();
+            gridOutput.Columns.Clear();
+            foreach (string[] row in results)
+            {
+                if (gridOutput.Columns.Count == 0)
+                {
+                    for (int i = 0; i < row.Length; i++)
+                        gridOutput.Columns.Add(i.ToString(), row[i]);
+                    continue;
+                }
+                gridOutput.Rows.Add(row);
+            }
+            return true;
+        }
+
         struct QueryResult
         {
             public string content;

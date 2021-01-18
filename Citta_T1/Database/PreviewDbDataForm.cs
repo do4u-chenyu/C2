@@ -38,11 +38,21 @@ namespace C2.Database
         {
             this.Init(dbi);
             Table table = dbi.DataTable;
-            if (!DbUtil.TestConn(new OraConnection(databaseItem)))
+            if (!DbUtil.TestConn(dbi))
+            {
                 return false;
+            }
+
             try
             {
-                DbUtil.FillDGVWithTbContent(dataGridView, conn, table, MaxNum);
+                if (dbi.Type == DatabaseType.Oracle)
+                    DbUtil.FillDGVWithTbContent(dataGridView, conn, table, MaxNum);
+                else
+                {
+                    string sql = string.Format("select * from {0} limit{1}", table.Name, MaxNum);
+                    DbUtil.FillDGVWithTbContent(dataGridView, dbi, table.UserName, sql);
+                }
+                   
             }
             catch
             {

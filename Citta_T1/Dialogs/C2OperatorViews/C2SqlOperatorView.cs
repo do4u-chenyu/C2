@@ -78,7 +78,9 @@ namespace C2.Dialogs.C2OperatorViews
             else if (SelectDatabaseItem.Type == DatabaseType.Hive)
             {
                 string sql = string.Format("select * from {0} limit{1}", SelectTable.Name, OpUtil.PreviewMaxNum);
-                LoadHiveData(this.comboBoxDataBase.Text, sql); 
+                LoadHiveData(this.comboBoxDataBase.Text, sql);
+
+                DbUtil.FillDGVWithTbContent(gridOutput, SelectDatabaseItem, this.comboBoxDataBase.Text, sql);
             }  
             else
                 return;
