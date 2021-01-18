@@ -413,9 +413,9 @@ namespace C2.Controls.Left
             }
             switch (this.optComboBox.Text.ToString())
             {
-                case "表名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.Contains(tableFilterTextBox.Text.ToUpper())));
+                case "表名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ));
                     break;
-                case "字段名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Contains(tableFilterTextBox.Text.ToUpper())));
+                case "字段名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Exists( c => c.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 )));
                     break;
             }
 
