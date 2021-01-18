@@ -43,8 +43,8 @@
             this.tip1 = new System.Windows.Forms.Label();
             this.inputAndResult1 = new System.Windows.Forms.RichTextBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.search = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.search = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.sixTransform.SuspendLayout();
@@ -230,6 +230,17 @@
             this.panel3.Size = new System.Drawing.Size(625, 44);
             this.panel3.TabIndex = 1;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(515, 10);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(56, 24);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "取消";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Cancle_Click);
+            // 
             // search
             // 
             this.search.Location = new System.Drawing.Point(431, 10);
@@ -240,16 +251,6 @@
             this.search.Text = "查询";
             this.search.UseVisualStyleBackColor = true;
             this.search.Click += new System.EventHandler(this.Search_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(515, 10);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(56, 24);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "取消";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // coordinateConversion
             // 

@@ -81,5 +81,10 @@ namespace C2.Dialogs.IAOLab
             }
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
         }
+
+        private void Cancle_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
