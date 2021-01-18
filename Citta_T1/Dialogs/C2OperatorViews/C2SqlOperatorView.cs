@@ -136,7 +136,7 @@ namespace C2.Dialogs.C2OperatorViews
             if (SelectDatabaseItem.Type == DatabaseType.Hive)
             {
                 HiveConnection hiveConn = new HiveConnection(SelectDatabaseItem);
-                if (!hiveConn.Connect())
+                if (!hiveConn.TestConn())
                 {
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return;
@@ -182,7 +182,7 @@ namespace C2.Dialogs.C2OperatorViews
             if (SelectDatabaseItem.Type == DatabaseType.Hive)
             {
                 HiveConnection hiveConn = new HiveConnection(SelectDatabaseItem);
-                if (!hiveConn.Connect())
+                if (!hiveConn.TestConn())
                     return;
                 tables = hiveConn.GetTablesByDB(this.comboBoxDataBase.Text);
             }
