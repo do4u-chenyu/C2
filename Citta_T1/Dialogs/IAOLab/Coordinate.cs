@@ -33,25 +33,40 @@ namespace C2.Dialogs.IAOLab
             this.tabPage1.Text = "IP转换";
             this.tabPage2.Text = "时间转换";
             this.tabPage1.Controls.Remove(this.sixTransform);
+
+            AddRadioButton("IP转整形", "整形转IP", tabPage1);
+            AddRadioButton("真实时间转绝对秒", "真实时间转绝对秒", tabPage2);
+
+            this.inputAndResult.Location = new Point(
+                 this.inputAndResult.Location.X,
+                 this.inputAndResult.Location.Y - 30
+                );
+            this.inputAndResult1.Location = new Point(
+               this.inputAndResult.Location.X,
+               this.inputAndResult.Location.Y + 20
+              );
+            this.inputAndResult.Height += 30;
+
+        }
+
+
+        private void AddRadioButton(string radio0Name, string radio1Name,TabPage page)
+        {
             RadioButton realToAbs = new RadioButton()
             {
                 Location = new Point(7, 60),
-                Text = "真实时间转绝对秒",
+                Text = radio0Name,
+                Width = 170
 
             };
             RadioButton absToReal = new RadioButton()
             {
                 Location = new Point(7 + realToAbs.Width, 60),
-                Text = "真实时间转绝对秒",
+                Text = radio1Name,
+                Width = 170
             };
-            this.tabPage1.Controls.Add(realToAbs);
-            this.tabPage1.Controls.Add(absToReal);
-
-            this.inputAndResult.Location=new Point(
-                 this.inputAndResult.Location.X,
-                 this.inputAndResult.Location.Y-30
-                ) ;
-            this.inputAndResult.Height += 30;
+            page.Controls.Add(realToAbs);
+            page.Controls.Add(absToReal);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
