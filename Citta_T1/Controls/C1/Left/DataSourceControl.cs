@@ -447,7 +447,7 @@ namespace C2.Controls.Left
                 UpdateFrameCombo(baseNames, baseNames[0]);
                 //刷新数据表
                 List<Table> hiveTables = hiveConn.GetTablesByDB(baseNames[0]);
-                UpdateTables(hiveTables, databaseInfo);
+                UpdateTables(hiveTables, databaseInfo); // TODO 没有Hive实现
                 return;
             }
             //连接数据库
@@ -460,7 +460,7 @@ namespace C2.Controls.Left
 
             //刷新架构
             List<string> users = DbUtil.GetUsers(conn);
-            UpdateFrameCombo(users, databaseInfo.User);
+            UpdateFrameCombo(users, databaseInfo.User, databaseInfo.Type);
 
             //刷新数据表
             List<Table> tables = DbUtil.GetTablesByUser(conn, databaseInfo.User);
@@ -475,13 +475,11 @@ namespace C2.Controls.Left
             if (users == null)
                 return;
 
-            this.schemaComboBox.Text = users.Find( x => x.Equals(loginUser.ToUpper())) == null ? "选择架构" : loginUser.ToUpper();
-            // hive加载框架
-            if (string.Equals("选择架构", this.schemaComboBox.Text))
-                this.schemaComboBox.Text = users.Contains(loginUser)? loginUser:"选择架构";
+            this.schemaComboBox.Text = this.schemaComboBox.Text = users.Contains(loginUser.ToLower()) ? "选择架构" : loginUser.ToUpper(); ;
 
             users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }
+
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo)
         {
             //先清空上一次的数据表内容

@@ -97,9 +97,9 @@ namespace C2.Database
                 return sb.ToString();
             }
         }
-        public override string GetTablesByUserSQL()
+        public override string GetTablesByUserOrDbSQL(string userName)
         {
-            return String.Format(this.getTablesByUserSQL, this.User);
+            return String.Format(this.getTablesByUserSQL, userName);
         }
         public override string GetSchemaByTablesSQL(List<Table> tables)
         {
@@ -108,9 +108,9 @@ namespace C2.Database
                 tableNames[i] = tables[i].Name;
             return String.Format(this.getSchemaByTablesSQL, tableNames);
         }
-        public override string GetTableContentSQL(Table table, int maxNum)
+        public override string GetTableContentSQL(string User, Table table, int maxNum)
         {
-            return String.Format(this.getTableContentSQL, this.User, table.Name, maxNum);
+            return String.Format(this.getTableContentSQL, User, table.Name, maxNum);
         }
         public override string GetUserSQL()
         {

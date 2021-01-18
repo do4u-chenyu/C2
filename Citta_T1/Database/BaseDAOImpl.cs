@@ -76,19 +76,19 @@ namespace C2.Database
         public virtual List<Table> GetTablesByUserOrDb(string usersOrDbs)
         {
             List<Table> tables = new List<Table>();
-            string result = this.Query(String.Format(this.GetTablesByUserSQL(), usersOrDbs));
+            string result = this.Query(this.GetTablesByUserOrDbSQL(usersOrDbs));
             if (!String.IsNullOrEmpty(result))
                 foreach (var line in result.Split(OpUtil.DefaultLineSeparator))
                     tables.Add(new Table(usersOrDbs, line));
             return tables;
         }
-        public virtual string GetTableContentString(Table table, int maxNum)
+        public virtual string GetTableContentString(string UserOrDb, Table table, int maxNum)
         {
-            return this.Query(this.GetTableContentSQL(table, maxNum));
+            return this.Query(this.GetTableContentSQL(UserOrDb, table, maxNum));
         }
-        public virtual List<List<string>> GetTableContent(Table table, int maxNum)
+        public virtual List<List<string>> GetTableContent(string UserOrDb, Table table, int maxNum)
         {
-            string result = this.GetTableContentString(table, maxNum);
+            string result = this.GetTableContentString(UserOrDb, table, maxNum);
             return String.IsNullOrEmpty(result) ? new List<List<string>>() : DbUtil.StringTo2DString(result);
         }
         public virtual Dictionary<string, List<string>> GetSchemaByTables(List<Table> tables)
@@ -109,9 +109,9 @@ namespace C2.Database
             FileUtil.FillTable(dataGridView, schema);
             return true;
         }
-        public virtual bool FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum)
+        public virtual bool FillDGVWithTbContent(DataGridView dataGridView, string UserOrDb, Table table, int maxNum)
         {
-            string contentString = this.GetTableContentString(table, maxNum);
+            string contentString = this.GetTableContentString(UserOrDb, table, maxNum);
             if (String.IsNullOrEmpty(contentString))
                 return false;
             List<List<string>> schema = DbUtil.StringTo2DString(contentString);
@@ -128,11 +128,11 @@ namespace C2.Database
         {
             throw new NotImplementedException();
         }
-        public virtual string GetTableContentSQL(Table table, int maxNum)
+        public virtual string GetTableContentSQL(string userOrDb, Table table, int maxNum)
         {
             throw new NotImplementedException();
         }
-        public virtual string GetTablesByUserSQL()
+        public virtual string GetTablesByUserOrDbSQL(string userOrDb)
         {
             throw new NotImplementedException();
         }

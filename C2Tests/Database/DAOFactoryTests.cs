@@ -14,15 +14,25 @@ namespace C2.Database.Tests
     public class DAOFactoryTests
     {
         private DatabaseItem oralcDBI = new DatabaseItem(DatabaseType.Oracle, "114.55.248.85", "orcl", String.Empty, "1521", "test", "test", table: new Table("test", "TEST_100W"));
-        private DatabaseItem hiveDBI = new DatabaseItem(DatabaseType.Hive, "10.1.126.4", String.Empty, String.Empty, "10000", "root", "123456");
+        private DatabaseItem hiveDBI = new DatabaseItem(DatabaseType.Hive, "10.1.126.4", String.Empty, String.Empty, "10000", "root", "123456", table: new Table("root", "hive1"));
         List<DatabaseItem> dbis;
         List<BaseDAOImpl> daos;
+        private string[] userOrDb;
         public void InitDao()
         {
-            dbis = new List<DatabaseItem>() { oralcDBI };
+            dbis = new List<DatabaseItem>() {
+                oralcDBI,
+                hiveDBI 
+            };
+            userOrDb = new string[]
+            {
+                oralcDBI.User,
+                "default"
+            };
             daos = new List<BaseDAOImpl>();
             foreach (var dbi in dbis)
                 daos.Add(DAOFactory.CreatDAO(dbi));
+
         }
         public int getFileLines(string filePath)
         {
@@ -62,9 +72,10 @@ namespace C2.Database.Tests
             InitDao();
             foreach (var dao in daos)
             {
+                Console.WriteLine("Start");
                 List<string> users = dao.GetUsers();
                 Assert.IsTrue(users.Count > 0);
-                Console.WriteLine(users[0]);
+                Console.WriteLine(users.Count);
             }
         }
 
@@ -72,9 +83,9 @@ namespace C2.Database.Tests
         public void GetTablesByUserOrDbTest()
         {
             InitDao();
-            foreach (var dao in daos)
+            for (int i = 0; i < daos.Count; i++)
             {
-                List<Table> tables = dao.GetTablesByUserOrDb(oralcDBI.User);
+                List<Table> tables = daos[i].GetTablesByUserOrDb(userOrDb[i]);
                 Assert.IsTrue(tables.Count > 0);
                 Console.WriteLine(tables[0].Name);
             }
@@ -84,11 +95,10 @@ namespace C2.Database.Tests
         public void GetTableContentStringTest()
         {
             InitDao();
-            foreach (var dao in daos)
+            for(int i = 0; i < daos.Count; i++)
             {
-                string result = dao.GetTableContentString(oralcDBI.DataTable, 1000);
+                string result = daos[i].GetTableContentString(userOrDb[i], dbis[i].DataTable, 1000);
                 Assert.IsTrue(!String.IsNullOrEmpty(result));
-                Console.WriteLine(result.Substring(0, 100));
             }
         }
 
@@ -96,9 +106,9 @@ namespace C2.Database.Tests
         public void GetTableContentTest()
         {
             InitDao();
-            foreach (var dao in daos)
+            for (int i = 0; i < daos.Count; i++)
             {
-                List<List<string>> result = dao.GetTableContent(oralcDBI.DataTable, 1000);
+                List<List<string>> result = daos[i].GetTableContent(userOrDb[i], dbis[i].DataTable, 1000);
                 Assert.IsTrue(result.Count > 0 && result[0].Count > 0);
                 Console.WriteLine(result[0][0]);
             }

@@ -53,7 +53,10 @@ namespace C2.Database
 
                         var cursor = conn.GetCursor();
                         foreach (var s in sql.Split(';'))
-                            cursor.Execute(sql);
+                        {
+                            if (!String.IsNullOrEmpty(s))
+                                cursor.Execute(s);
+                        }
                         var list = cursor.FetchMany(int.MaxValue);
                         string headers;
                         if (list.Count > 0)
@@ -84,17 +87,17 @@ namespace C2.Database
                 return sb.ToString();
             }
         }
-        public override string GetTablesByUserSQL()
+        public override string GetTablesByUserOrDbSQL(string dbName)
         {
-            return String.Format(this.getTablesByUserSQL, this.User);
+            return String.Format(this.getTablesByUserSQL, dbName);
         }
         public override string GetSchemaByTablesSQL(List<Table> tables)
         {
             throw new NotImplementedException();
         }
-        public override string GetTableContentSQL(Table table, int maxNum)
+        public override string GetTableContentSQL(string DbName, Table table, int maxNum)
         {
-            return String.Format(getTableContentSQL, this.User, table.Name, maxNum);
+            return String.Format(getTableContentSQL, DbName, table.Name, maxNum);
         }
         public override string GetUserSQL()
         {
