@@ -390,8 +390,15 @@ namespace C2.Utils
             gridOutput.Columns.Clear();
             foreach (string[] row in results)
             {
+              
                 if (gridOutput.Columns.Count == 0)
                 {
+                    if (sql.StartsWith("desc"))
+                    {
+                        gridOutput.Columns.Add("0", "column_name");
+                        gridOutput.Columns.Add("1", "column_type");
+                        continue;
+                    }
                     for (int i = 0; i < row.Length; i++)
                         gridOutput.Columns.Add(i.ToString(), row[i]);
                     continue;

@@ -56,7 +56,14 @@ namespace C2.Controls.Left
         private void ReviewStruToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PreviewTableSchema previewTableSchema = GenericSingleton<PreviewTableSchema>.CreateInstance();
-            DbUtil.FillDGVWithTbSchema(previewTableSchema.DataGridView, new OraConnection(TableItem), this.TableItem.DataTable.Name);
+            string tableName = this.TableItem.DataTable.Name;
+            if (TableItem.Type == DatabaseType.Oracle)
+                DbUtil.FillDGVWithTbSchema(previewTableSchema.DataGridView, new OraConnection(TableItem), tableName);
+            else
+            {
+                string sql = string.Format("desc {0}", tableName);
+                DbUtil.FillDGVWithTbContent(previewTableSchema.DataGridView, TableItem, this.TableItem.DataTable.UserName, sql);
+            }
             if (TableItem != null)
             {
                 previewTableSchema.Focus();
