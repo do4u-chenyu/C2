@@ -55,17 +55,16 @@ namespace C2.Dialogs.IAOLab
             if (!IsReady())
                 return;
 
-            List<string> apkInfoList = ApkToolStart.GetInstance().ExtractApk(inputPath.Text, jdkPath.Text);
-            foreach (string apkInfo in apkInfoList)
+            List<List<string>> apkInfoList = ApkToolStart.GetInstance().ExtractApk(inputPath.Text, jdkPath.Text);
+            foreach (List<string> apkInfo in apkInfoList)
             {
-                string[] fullApkInfo = apkInfo.Split('\t');
-                if (fullApkInfo.Length < 5) continue;
+                if (apkInfo.Count < 5) continue;
 
                 // 将结果展示在窗体
                 int index = this.dataGridView1.Rows.Add();
-                this.dataGridView1.Rows[index].Cells[0].Value = GetImage(fullApkInfo[0]);
+                this.dataGridView1.Rows[index].Cells[0].Value = GetImage(apkInfo[0]);
                 for (int i = 1; i < this.dataGridView1.Rows.Count; i++)
-                    this.dataGridView1.Rows[index].Cells[i].Value = GetImage(fullApkInfo[i]);
+                    this.dataGridView1.Rows[index].Cells[i].Value = GetImage(apkInfo[i]);
 
             }
 

@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Linq;
-using C2.Controls;
+
 
 namespace C2.IAOLab.ApkToolStart
 {
@@ -19,7 +12,7 @@ namespace C2.IAOLab.ApkToolStart
     {
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
 
-        private List<string> result = new List<string>();
+        private List<List<string>> result;
         private static ApkToolStart instance;
         public static ApkToolStart GetInstance()
         {
@@ -27,20 +20,20 @@ namespace C2.IAOLab.ApkToolStart
                 instance = new ApkToolStart();
             return instance;
         }
-        public List<string> ExtractApk(string apkpath, string jdkpath)
+        public ApkToolStart()
         {
-            // 运行JAR包
-            string tmpPath = Path.GetTempPath() + "ApkTool";
-            if (!Directory.Exists(tmpPath))
+            result = new List<List<string>>();
+        }
+        public List<List<string>> ExtractApk(string apkpath, string jdkpath)
+        {
+            string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
+            if (Directory.Exists(tmpPath))
             {
-                Directory.CreateDirectory(tmpPath);
+                // 有坑
+                Directory.Delete(tmpPath, true);
             }
-            else 
-            {
-                DirectoryInfo di0 = new DirectoryInfo(tmpPath);
-                di0.Delete(true);
-                Directory.CreateDirectory(tmpPath);
-            }
+            Directory.CreateDirectory(tmpPath);
+
             RunLinuxCommandApkTool(GetCmdCommand(apkpath, jdkpath));
 
             DirectoryInfo dir = new DirectoryInfo(apkpath);
@@ -49,8 +42,7 @@ namespace C2.IAOLab.ApkToolStart
             //遍历检索的文件和子目录
             foreach (FileSystemInfo fsinfo in fsinfos)
             {
-                string apkInfo = GetApkInfo(fsinfo.FullName, fsinfo.Name);
-                result.Add(apkInfo);
+                result.Add(GetApkInfo(fsinfo.FullName, fsinfo.Name));
                 //先不用生成result,读取需要的数据加载到内存，并控件预览框展示
             }
             // 删除临时结果文件
@@ -58,24 +50,25 @@ namespace C2.IAOLab.ApkToolStart
             di1.Delete(true);
             return result;
         }
-        private string GetApkInfo(string apkPath, string apkName)
+        private List<string> GetApkInfo(string apkPath, string apkName)
         {
+            
             apkName = apkName.Replace(".apk", "\t").Split('\t')[0];
+            
             string apkToolPath = Path.GetTempPath() + @"\ApkTool\" + apkName;
-            string packageName = GetPackage(apkToolPath);
-            string mainActivity = GetActivity(apkToolPath);
-            string apkTrueName = GetApkName(apkToolPath);
-            string apkIconFullName = GetIcon(apkToolPath);
-            long size = GetApkSize(apkPath);
-            return string.Format("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}M", apkIconFullName, "\t", apkName, "\t", apkTrueName, "\t", packageName, "\t", mainActivity, "\t", size.ToString());
+            return  new List<string>() {GetIcon(apkToolPath),
+                                                      apkName,
+                                                      GetApkName(apkToolPath),
+                                                      GetPackage(apkToolPath),
+                                                      GetActivity(apkToolPath),
+                                                      GetApkSize(apkPath)+"M" };
+
         }
         private long GetApkSize(string filepath)
         {
             using (FileStream fileStream = new FileStream(filepath, FileMode.Open, FileAccess.Read))
             {
-                long size = fileStream.Length;
-                size /= (1024 * 1024);
-                return size;
+                return fileStream.Length/(1024 * 1024);
             }
         }
         public void ExportResult()
