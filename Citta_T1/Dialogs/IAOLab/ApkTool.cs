@@ -19,8 +19,6 @@ namespace C2.Dialogs.IAOLab
 {
     public partial class ApkTool : BaseDialog
     {
-
-
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
         public UpdateLog UpdateLogDelegate;
         public ApkTool()
@@ -29,10 +27,36 @@ namespace C2.Dialogs.IAOLab
 
         }
 
-
-        private void button1_Click(object sender, EventArgs e)
+        private bool IsReady()
         {
-            List<string> apkInfoList = ApkToolStart.GetInstance().ExtractApk(textBox1.Text, textBox2.Text);
+            // 是否配置完毕
+            bool isEmpty = string.IsNullOrEmpty(this.inputPath.Text) ||
+                           string.IsNullOrEmpty(this.jdkPath.Text);
+            if (isEmpty)
+            {
+                MessageBox.Show("请完善apk存放路径、jdk存放路径。");
+                return false;
+            }
+            if (!Directory.Exists(this.inputPath.Text)
+                &&!File.Exists(this.inputPath.Text))
+            {
+                MessageBox.Show("不合法的apk存放路径");
+                return false;
+            }
+            if (!Directory.Exists(this.jdkPath.Text))
+            {
+                MessageBox.Show("不合法的jdk存放路径");
+                return false;
+            }
+            return true;
+        }
+        private void Analyse_Click(object sender, EventArgs e)
+        {
+
+            if (!IsReady())
+                return;
+
+            List<string> apkInfoList = ApkToolStart.GetInstance().ExtractApk(inputPath.Text, jdkPath.Text);
             foreach (string apkInfo in apkInfoList)
             {
                 DataGridViewImageColumn ic = new DataGridViewImageColumn();
@@ -70,7 +94,7 @@ namespace C2.Dialogs.IAOLab
             if (fd1.ShowDialog() == DialogResult.OK)
             {
                 string fullFilePath = fd1.SelectedPath;
-                textBox1.Text = fullFilePath;
+                inputPath.Text = fullFilePath;
             }
             
         }
@@ -81,7 +105,7 @@ namespace C2.Dialogs.IAOLab
             if (fd2.ShowDialog() == DialogResult.OK)
             {
                 string fullFilePath = fd2.SelectedPath;
-                textBox2.Text = fullFilePath;
+                jdkPath.Text = fullFilePath;
             }
         }
     }

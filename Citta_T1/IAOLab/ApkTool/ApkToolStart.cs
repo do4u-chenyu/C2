@@ -18,8 +18,8 @@ namespace C2.IAOLab.ApkToolStart
     public class ApkToolStart
     {
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
-       
-        List<string> Result = new List<string>();
+
+        private List<string> result = new List<string>();
         private static ApkToolStart instance;
         public static ApkToolStart GetInstance()
         {
@@ -50,13 +50,13 @@ namespace C2.IAOLab.ApkToolStart
             foreach (FileSystemInfo fsinfo in fsinfos)
             {
                 string apkInfo = GetApkInfo(fsinfo.FullName, fsinfo.Name);
-                Result.Add(apkInfo);
+                result.Add(apkInfo);
                 //先不用生成result,读取需要的数据加载到内存，并控件预览框展示
             }
             // 删除临时结果文件
             DirectoryInfo di1 = new DirectoryInfo(tmpPath);
             di1.Delete(true);
-            return Result;
+            return result;
         }
         private string GetApkInfo(string apkPath, string apkName)
         {
