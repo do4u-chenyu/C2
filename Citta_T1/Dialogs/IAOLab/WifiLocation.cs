@@ -13,6 +13,7 @@ using C2.IAOLab.WifiMac;
 using log4net.Util;
 using C2.IAOLab.BankTool;
 using C2.IAOLab.Transform;
+using System.Threading;
 
 namespace C2.Dialogs.IAOLab
 {
@@ -46,7 +47,7 @@ namespace C2.Dialogs.IAOLab
         {
             string[] inputArray = this.inputAndResult.Text.Split('\n');
             StringBuilder tmpResult = new StringBuilder();
-            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.Cursor = Cursors.WaitCursor;
             switch (FormType)
             {
                 case "APK":
@@ -60,6 +61,7 @@ namespace C2.Dialogs.IAOLab
                         {
                             tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(baseStation));
                             inputAndResult.Text = tmpResult.ToString();
+
                         }
                     }
                     break;
@@ -74,20 +76,26 @@ namespace C2.Dialogs.IAOLab
                     }
                     break;
                 case "Card":
+                    int i = 0;
                     foreach (string bankCard in inputArray)
                     {
                         if (!string.IsNullOrEmpty(bankCard))
-                        {                        
+                        {
+                            i++;                    
                             tmpResult.Append(BankTool.GetInstance().BankToolSearch(bankCard));
                             inputAndResult.Text = tmpResult.ToString();
                         }
-
+                        if (i == 50)
+                        {
+                            Thread.Sleep(500);
+                            i = 0;
+                        }
                     }
                     break;             
                 default:
                     break;
             }
-            this.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.Cursor = Cursors.Arrow;
         }
 
         private void Cancle_Click(object sender, EventArgs e)
