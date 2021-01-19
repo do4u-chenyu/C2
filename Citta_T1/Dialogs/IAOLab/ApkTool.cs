@@ -88,23 +88,18 @@ namespace C2.Dialogs.IAOLab
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fd1 = new FolderBrowserDialog();
-            if (fd1.ShowDialog() == DialogResult.OK)
-            {
-                string fullFilePath = fd1.SelectedPath;
-                inputPath.Text = fullFilePath;
-            }
-            
+            OpenFileFolder(inputPath);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
+            OpenFileFolder(jdkPath);
+        }
+        private void OpenFileFolder(TextBox control)
+        {
             FolderBrowserDialog fd2 = new FolderBrowserDialog();
             if (fd2.ShowDialog() == DialogResult.OK)
-            {
-                string fullFilePath = fd2.SelectedPath;
-                jdkPath.Text = fullFilePath;
-            }
+                control.Text = fd2.SelectedPath;
         }
     }
 }
