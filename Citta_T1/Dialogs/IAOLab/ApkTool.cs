@@ -62,9 +62,27 @@ namespace C2.Dialogs.IAOLab
             return Image.FromFile(path);
         }
 
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
+       
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fd1 = new FolderBrowserDialog();
+            if (fd1.ShowDialog() == DialogResult.OK)
+            {
+                string fullFilePath = fd1.SelectedPath;
+                textBox1.Text = fullFilePath;
+            }
+            
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fd2 = new FolderBrowserDialog();
+            if (fd2.ShowDialog() == DialogResult.OK)
+            {
+                string fullFilePath = fd2.SelectedPath;
+                textBox2.Text = fullFilePath;
+            }
         }
     }
 }

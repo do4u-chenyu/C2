@@ -35,6 +35,12 @@ namespace C2.IAOLab.ApkToolStart
             {
                 Directory.CreateDirectory(tmpPath);
             }
+            else 
+            {
+                DirectoryInfo di0 = new DirectoryInfo(tmpPath);
+                di0.Delete(true);
+                Directory.CreateDirectory(tmpPath);
+            }
             RunLinuxCommandApkTool(GetCmdCommand(apkpath, jdkpath));
 
             DirectoryInfo dir = new DirectoryInfo(apkpath);
@@ -48,6 +54,8 @@ namespace C2.IAOLab.ApkToolStart
                 //先不用生成result,读取需要的数据加载到内存，并控件预览框展示
             }
             // 删除临时结果文件
+            DirectoryInfo di1 = new DirectoryInfo(tmpPath);
+            di1.Delete(true);
             return Result;
         }
         private string GetApkInfo(string apkPath, string apkName)
@@ -79,18 +87,17 @@ namespace C2.IAOLab.ApkToolStart
 
         public List<string> GetCmdCommand(string apkpath, string jdkpath)
         {
-            //string setJdkPath = "set path = " + jdkpath + "bin;% path %";
+            string setJdkPath = "set path = " + jdkpath + "bin;% path %";
             List<string> cmdList = new List<string>();
-            //cmdList.Add(setJdkPath);
+            cmdList.Add(setJdkPath);
             DirectoryInfo dir = new DirectoryInfo(apkpath);
             //检索表示当前目录的文件和子目录
             FileSystemInfo[] fsinfos = dir.GetFileSystemInfos();
             //遍历检索的文件和子目录
             foreach (FileSystemInfo fsinfo in fsinfos)
             {
-
-                string cmdApk = @"java -jar E:\work\apk相关工作\apktool\apktool\apktool_2.4.1.jar d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
-
+                string apkToolPath = Application.StartupPath + @"\apktool_2.3.0.jar"; 
+                string cmdApk = @"java -jar"+ apkToolPath+ " d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
                 cmdList.Add(cmdApk);
 
             }

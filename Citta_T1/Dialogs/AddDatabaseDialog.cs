@@ -88,7 +88,8 @@ namespace C2.Dialogs
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return false;
             }
-            DatabaseInfo = tmpDatabaseInfo;
+            DatabaseInfo = tmpDatabaseInfo;   
+            
             return base.OnOKButtonClick();
         }
         private void TestButton_Click(object sender, EventArgs e)
