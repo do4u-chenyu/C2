@@ -71,10 +71,10 @@
             this.tabPage1.Controls.Add(this.inputAndResult);
             this.tabPage1.Controls.Add(this.tip0);
             this.tabPage1.Controls.Add(this.sixTransform);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(617, 322);
+            this.tabPage1.Size = new System.Drawing.Size(617, 319);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "通用坐标系经纬度转换";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -97,10 +97,9 @@
             this.tip0.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tip0.Location = new System.Drawing.Point(17, 16);
             this.tip0.Name = "tip0";
-            this.tip0.Size = new System.Drawing.Size(476, 28);
+            this.tip0.Size = new System.Drawing.Size(458, 36);
             this.tip0.TabIndex = 10;
-            this.tip0.Text = "单次输入格式：04a1518006c2 或04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最大" +
-    "支持1000条";
+            this.tip0.Text = "单次输入格式：40.1 120.2\r\n批量查询格式：多个坐标间用换行分割，最大支持1000条";
             // 
             // sixTransform
             // 
@@ -124,9 +123,9 @@
             this.wgs_gcj.Location = new System.Drawing.Point(371, 28);
             this.wgs_gcj.Margin = new System.Windows.Forms.Padding(2);
             this.wgs_gcj.Name = "wgs_gcj";
-            this.wgs_gcj.Size = new System.Drawing.Size(186, 18);
+            this.wgs_gcj.Size = new System.Drawing.Size(191, 22);
             this.wgs_gcj.TabIndex = 5;
-            this.wgs_gcj.Text = "wgsgcj:国际坐标系转国标";
+            this.wgs_gcj.Text = "wgs_gcj:国际转火星";
             this.wgs_gcj.UseVisualStyleBackColor = true;
             // 
             // bd_gcj
@@ -135,9 +134,9 @@
             this.bd_gcj.Location = new System.Drawing.Point(192, 28);
             this.bd_gcj.Margin = new System.Windows.Forms.Padding(2);
             this.bd_gcj.Name = "bd_gcj";
-            this.bd_gcj.Size = new System.Drawing.Size(179, 18);
+            this.bd_gcj.Size = new System.Drawing.Size(182, 22);
             this.bd_gcj.TabIndex = 4;
-            this.bd_gcj.Text = "bdgcj:百度坐标系转国标";
+            this.bd_gcj.Text = "bd_gcj:百度转火星";
             this.bd_gcj.UseVisualStyleBackColor = true;
             // 
             // wgs_bd
@@ -146,9 +145,9 @@
             this.wgs_bd.Location = new System.Drawing.Point(13, 28);
             this.wgs_bd.Margin = new System.Windows.Forms.Padding(2);
             this.wgs_bd.Name = "wgs_bd";
-            this.wgs_bd.Size = new System.Drawing.Size(179, 18);
+            this.wgs_bd.Size = new System.Drawing.Size(182, 22);
             this.wgs_bd.TabIndex = 3;
-            this.wgs_bd.Text = "wgsbd:国际坐标系转百度";
+            this.wgs_bd.Text = "wgs_bd:国际转百度";
             this.wgs_bd.UseVisualStyleBackColor = true;
             // 
             // gcj_wgs
@@ -157,9 +156,9 @@
             this.gcj_wgs.Location = new System.Drawing.Point(371, 6);
             this.gcj_wgs.Margin = new System.Windows.Forms.Padding(2);
             this.gcj_wgs.Name = "gcj_wgs";
-            this.gcj_wgs.Size = new System.Drawing.Size(186, 18);
+            this.gcj_wgs.Size = new System.Drawing.Size(191, 22);
             this.gcj_wgs.TabIndex = 2;
-            this.gcj_wgs.Text = "gcjwgs:国标转国际坐标系";
+            this.gcj_wgs.Text = "gcj_wgs:火星转国际";
             this.gcj_wgs.UseVisualStyleBackColor = true;
             // 
             // gcj_bd
@@ -168,30 +167,32 @@
             this.gcj_bd.Location = new System.Drawing.Point(192, 6);
             this.gcj_bd.Margin = new System.Windows.Forms.Padding(2);
             this.gcj_bd.Name = "gcj_bd";
-            this.gcj_bd.Size = new System.Drawing.Size(179, 18);
+            this.gcj_bd.Size = new System.Drawing.Size(182, 22);
             this.gcj_bd.TabIndex = 1;
-            this.gcj_bd.Text = "gcjbd:国标坐标系转百度";
+            this.gcj_bd.Text = "gcj_bd:火星转百度";
             this.gcj_bd.UseVisualStyleBackColor = true;
             // 
             // bd_wgs
             // 
             this.bd_wgs.AutoSize = true;
+            this.bd_wgs.Checked = true;
             this.bd_wgs.Location = new System.Drawing.Point(13, 6);
             this.bd_wgs.Margin = new System.Windows.Forms.Padding(2);
             this.bd_wgs.Name = "bd_wgs";
-            this.bd_wgs.Size = new System.Drawing.Size(186, 18);
+            this.bd_wgs.Size = new System.Drawing.Size(182, 22);
             this.bd_wgs.TabIndex = 0;
-            this.bd_wgs.Text = "bd_wgs:百度坐标系转国际";
+            this.bd_wgs.TabStop = true;
+            this.bd_wgs.Text = "bd_wgs:百度转国际";
             this.bd_wgs.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tip1);
             this.tabPage2.Controls.Add(this.inputAndResult1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
-            this.tabPage2.Size = new System.Drawing.Size(617, 322);
+            this.tabPage2.Size = new System.Drawing.Size(617, 319);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "经纬度距离计算";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -202,7 +203,7 @@
             this.tip1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tip1.Location = new System.Drawing.Point(8, 23);
             this.tip1.Name = "tip1";
-            this.tip1.Size = new System.Drawing.Size(476, 28);
+            this.tip1.Size = new System.Drawing.Size(611, 36);
             this.tip1.TabIndex = 11;
             this.tip1.Text = "单次输入格式：04a1518006c2 或04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最大" +
     "支持1000条";

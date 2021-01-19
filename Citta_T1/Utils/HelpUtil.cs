@@ -60,14 +60,16 @@ namespace C2.Utils
 批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
         public static string BankToolHelpInfo = @"单次输入格式：6210857100018896476
 批量查询格式：多个银行卡号间用换行分隔，最大支持1000条";
-        public static string GPSTransformHelpInfo = @"单次输入格式：XXX
-批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
-        public static string GPSDistanceHelpInfo = @"单次输入格式：XXX 
-批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
-        public static string IPTransformHelpInfo = @"单次输入格式：XXX
-批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
-        public static string TimeTransformHelpInfo = @"单次输入格式：XXX
-批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
+        public static string GPSTransformHelpInfo = @"单次输入格式：40.1 120.2
+批量查询格式：多个坐标间用换行分隔，最大支持1000条";
+        public static string GPSDistanceHelpInfo = @"单次输入格式：40.1 120.2 40 119.9 
+批量查询格式：多个坐标组间用换行分隔，最大支持1000条";
+        public static string IPTransformHelpInfo = @"IP单次输入格式：23.125.23.8
+整型单次输入格式：394073864
+批量查询格式：多个IP或整型间用换行分隔，最大支持1000条";
+        public static string TimeTransformHelpInfo = @"日期单次输入格式：2021/3/13 23:34:53
+绝对秒输入格式：1615649693
+批量查询格式：多个日期或绝对秒间用换行分隔，最大支持1000条";
         #endregion
         /// <summary>
         /// 默认为Information,除非有非常严重的错误,否则一般尽量用温和的提示信息.
