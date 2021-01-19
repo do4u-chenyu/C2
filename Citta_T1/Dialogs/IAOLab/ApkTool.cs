@@ -36,13 +36,19 @@ namespace C2.Dialogs.IAOLab
             foreach (string apkInfo in apkInfoList)
             {
                 string[] fullApkInfo = apkInfo.Split('\t');
+                dataGridView1.Columns.Add("0", "ICON");
+                dataGridView1.Columns.Add("1", "文件名");
+                dataGridView1.Columns.Add("2", "Apk名");
+                dataGridView1.Columns.Add("3", "包名");
+                dataGridView1.Columns.Add("4", "主函数");
+                dataGridView1.Columns.Add("5", "大小");
                 int index = this.dataGridView1.Rows.Add();
                 this.dataGridView1.Rows[index].Cells[0].Value = GetImage(fullApkInfo[0]);
                 this.dataGridView1.Rows[index].Cells[1].Value = fullApkInfo[1];
                 this.dataGridView1.Rows[index].Cells[2].Value = fullApkInfo[2];
                 this.dataGridView1.Rows[index].Cells[3].Value = fullApkInfo[3];
                 this.dataGridView1.Rows[index].Cells[4].Value = fullApkInfo[4];
-                this.dataGridView1.Rows[index].Cells[5].Value = fullApkInfo[5];
+                this.dataGridView1.Rows[index].Cells[5].Value = fullApkInfo[5]+"m";
             }
 
         }
