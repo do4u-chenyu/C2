@@ -33,7 +33,7 @@ namespace C2.Database
             this.Port = dbi.Port;
             this.Schema = dbi.Schema;
         }
-        public BaseDAOImpl(DataItem item): this(item.DBItem) { }
+        public BaseDAOImpl(DataItem item) : this(item.DBItem) { }
         public BaseDAOImpl(string name, string user, string pass, string host, string sid, string service, string port)
         {
             this.Name = name;
@@ -59,7 +59,7 @@ namespace C2.Database
         }
         #endregion
         #region 接口实现
-        public virtual string Query(string sql, bool header=true)
+        public virtual string Query(string sql, bool header = true)
         {
             throw new NotImplementedException();
         }
@@ -109,7 +109,7 @@ namespace C2.Database
             string schemaString = this.GetTableColumnNames(table);
             List<List<string>> schema = DbUtil.StringTo2DString(schemaString);
             FileUtil.FillTable(dataGridView, schema);
-        } 
+        }
         public void FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum)
         {
             string contentString = this.GetTableContentString(table, maxNum);
@@ -157,5 +157,13 @@ namespace C2.Database
             throw new NotImplementedException();
         }
         #endregion
+    }
+
+    class EmptyDAOImpl : BaseDAOImpl
+    {
+        public override bool TestConn()
+        {
+            return false;
+        }
     }
 }

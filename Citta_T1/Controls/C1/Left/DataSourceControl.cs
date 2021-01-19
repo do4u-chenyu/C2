@@ -381,14 +381,14 @@ namespace C2.Controls.Left
             List<Table> tables;
             Dictionary<string, List<string>> tableColDict;
             IDAO dao = DAOFactory.CreateDAO(SelectLinkButton.DatabaseItem);
-            if (dao != null)
+            if (!dao.TestConn())
             {
-                tables = dao.GetTables(this.schemaComboBox.Text);
-                tableColDict = dao.GetColNameByTables(tables);
-                UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                return;
             }
-            else
-                HelpUtil.ShowMessageBox(HelpUtil.UnsupportedDatabase);
+            tables = dao.GetTables(this.schemaComboBox.Text);
+            tableColDict = dao.GetColNameByTables(tables);
+            UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
             this.optComboBox.Text = "表名";
             this.tableFilterTextBox.Text = "";
         }

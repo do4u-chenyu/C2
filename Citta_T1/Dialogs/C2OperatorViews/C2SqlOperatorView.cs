@@ -135,20 +135,15 @@ namespace C2.Dialogs.C2OperatorViews
             if (SelectDatabaseItem == null)
                 return;
             List<string> users;
-            IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
-            if (dao != null)
-            {   
-                //连接数据库
-                if (!dao.TestConn())
-                {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                    return;
-                }
-                //刷新架构
-                users = dao.GetUsers();
+            IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem); 
+            //连接数据库
+            if (!dao.TestConn())
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                return;
             }
-            else
-                users = new List<string>();
+            //刷新架构
+            users = dao.GetUsers();
           
             this.comboBoxDataBase.Items.Clear();
             if (users == null || users.Count == 0)
@@ -171,21 +166,16 @@ namespace C2.Dialogs.C2OperatorViews
                 return;
             List<Table> tables;
             IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
-            if (dao != null)
+            if (!dao.TestConn())  // 出现了SB错误, 提示信息文不对题
             {
-                if (!dao.TestConn())
-                {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                    return;
-                }
-                //刷新数据表
-                tables = dao.GetTables(this.comboBoxDataBase.Text);
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                return;
             }
-            else
-                tables = new List<Table>();
+            //刷新数据表
+            tables = dao.GetTables(this.comboBoxDataBase.Text);
           
             this.tableListBox.Items.Clear();
-            if (tables == null || tables.Count <= 0)
+            if (tables == null || tables.Count <= 0)  // if (tables.)
                 return;
             foreach (Table table in tables)
                 tableListBox.Items.Add(table.Name);
@@ -212,6 +202,11 @@ namespace C2.Dialogs.C2OperatorViews
                 return;
             }
             IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
+            if (!dao.TestConn())  // 出现了SB错误, 提示信息文不对题
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                return;
+            }
             dao.FillDGVWithSQL(this.gridOutput, this.textEditorControl1.Text);
         }
         protected override void SaveOption()

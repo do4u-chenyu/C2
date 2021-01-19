@@ -69,6 +69,11 @@ namespace C2.Controls.MapViews
                 if (opw.Option.OptionDict.TryGetValue("maxNum", out maxNumString) && int.TryParse(maxNumString, out inputMaxNum) && inputMaxNum > 0)
                     maxNum = inputMaxNum;
                 IDAO dao = DAOFactory.CreateDAO(new DatabaseItem(connString));
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
                 bool isSuccess = dao.ExecuteSQL(sqlText, opw.ResultItem.FilePath, maxNum);
                 string runMessage = isSuccess ? HelpUtil.SQLOpExecuteSucceeded : HelpUtil.SQLOpExecuteFailed;
                 opw.Status = isSuccess ? OpStatus.Done : OpStatus.Warn;

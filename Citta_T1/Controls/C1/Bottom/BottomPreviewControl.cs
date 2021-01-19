@@ -127,6 +127,11 @@ namespace C2.Controls.Bottom
         {
             List<List<string>> datas = new List<List<string>> { };
             IDAO dao = DAOFactory.CreateDAO(dbItem);
+            if (!dao.TestConn())
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                return;
+            }
             List<string> rows;
             if (dao != null && dao.TestConn())
             {

@@ -404,15 +404,12 @@ namespace C2.Controls.MapViews
             if (hitItem.IsDatabase())
             {
                 IDAO dao = DAOFactory.CreateDAO(hitItem.DBItem);
-                if (dao.TestConn())  // 预加载
-                {
-                    BCPBuffer.GetInstance().GetCachePreviewTable(hitItem.DBItem); // TODO DK 预加载也要写好方法
-                }
-                else // 外部数据源且数据库无法连接
+                if (!dao.TestConn())
                 {
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return;
                 }
+                BCPBuffer.GetInstance().GetCachePreviewTable(hitItem.DBItem); // TODO DK 预加载也要写好方法
             }
 
             // 内部数据源且文件不存在

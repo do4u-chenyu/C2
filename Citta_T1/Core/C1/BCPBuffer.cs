@@ -69,6 +69,11 @@ namespace C2.Core
             if (!HitCache(key) || isForceRead)
             {
                 IDAO dao = DAOFactory.CreateDAO(databaseItem);
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return String.Empty;
+                }
                 Table table = databaseItem.DataTable;
                 string tbContent = dao.GetTableContentString(table, mNumOfLine);
                 string firstLine = GetFirstLine(tbContent);

@@ -1,9 +1,4 @@
 ﻿using C2.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C2.Database
 {
@@ -18,7 +13,7 @@ namespace C2.Database
                 case DatabaseType.Hive:
                     return new HiveDAOImpl(dbi);
                 default:
-                    return null;
+                    return new EmptyDAOImpl();
             }
         }
     }

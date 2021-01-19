@@ -38,8 +38,10 @@ namespace C2.Database
             Table table = dbi.DataTable;
             IDAO dao = DAOFactory.CreateDAO(dbi);
             if (!dao.TestConn())
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return false;
-
+            }
             try
             {
                 dao.FillDGVWithTbContent(dataGridView, table, MaxNum);
@@ -53,6 +55,11 @@ namespace C2.Database
         private void OnDataGridViewMaxNumChanged(object sender, int maxNum)
         {
             IDAO dao = DAOFactory.CreateDAO(databaseItem);
+            if (!dao.TestConn())
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                return;
+            }
             dao.FillDGVWithTbContent(this.dataGridView, databaseItem.DataTable, MaxNum);
         }
         private int GetIntFromTextBox()

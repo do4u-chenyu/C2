@@ -58,6 +58,11 @@ namespace C2.Controls.Left
         {
             PreviewTableSchema previewTableSchema = GenericSingleton<PreviewTableSchema>.CreateInstance();
             IDAO dao = DAOFactory.CreateDAO(TableItem);
+            if (!dao.TestConn())
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                return;
+            }
             dao.FillDGVWithTbSchema(previewTableSchema.DataGridView, this.TableItem.DataTable);
             if (TableItem != null)
             {
