@@ -101,11 +101,33 @@ namespace C2.Dialogs.IAOLab
         }
         private void IPTransform(string[] inputArray, StringBuilder tmpResult)
         {
-
+            foreach(Control button in tabPage1.Controls)
+            { 
+                if(button is RadioButton &&  (button as RadioButton).Checked)
+                {
+                    foreach (string input in inputArray)
+                    {
+                        tmpResult.Append(TimeAndIPTransform.GetInstance(input).timeIPTransform(button.Text));
+                        inputAndResult.Text = tmpResult.ToString();
+                    }
+                    return;
+                }
+            }
         }
         private void timeTransform(string[] inputArray, StringBuilder tmpResult)
         {
-
+            foreach (Control button in tabPage2.Controls)
+            {
+                if (button is RadioButton && (button as RadioButton).Checked)
+                {
+                    foreach (string input in inputArray)
+                    {
+                        tmpResult.Append(TimeAndIPTransform.GetInstance(input).timeIPTransform(button.Text));
+                        inputAndResult1.Text = tmpResult.ToString();
+                    }
+                    return;
+                }
+            }
         }
 
 
@@ -127,7 +149,7 @@ namespace C2.Dialogs.IAOLab
                     if (this.tabControl.SelectedIndex == 0)
                         IPTransform(this.inputAndResult.Text.Split('\n'), tmpResult);
                     else
-                        timeTransform(this.inputAndResult.Text.Split('\n'), tmpResult);
+                        timeTransform(this.inputAndResult1.Text.Split('\n'), tmpResult);
                     break;
                 default:
                     break;
@@ -135,7 +157,7 @@ namespace C2.Dialogs.IAOLab
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
         }
 
-        private void Cancle_Click(object sender, EventArgs e)
+        private void Cancel_Click(object sender, EventArgs e)
         {
             Close();
         }

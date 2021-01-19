@@ -9,22 +9,33 @@ namespace C2.IAOLab.Transform
 {
     class TimeAndIPTransform
     {
-        public string timeIPTransform(string input, string type)
+        string wrong = "输入格式有误\r\n";
+
+        private string input;
+        public static TimeAndIPTransform GetInstance(string input)
+        {
+            return new TimeAndIPTransform(input);
+        }
+        private TimeAndIPTransform(string input)
+        {
+            this.input = input;
+        }
+        public string timeIPTransform(string type)
         {
             string wrong = "输入格式有误";
             string result;
             switch (type)
             {
-                case "sDate":
+                case "绝对秒转真实时间":
                     result = sDate(input);
                     break;
-                case "dateS":
+                case "真实时间转绝对秒":
                     result = dateS(input);
                     break;
-                case "dotNum":
+                case "IP转整形":
                     result = dotNum(input);
                     break;
-                case "numDot":
+                case "整形转IP":
                     result = numDot(input);
                     break;
                 default:
@@ -35,42 +46,76 @@ namespace C2.IAOLab.Transform
         }
 
         #region 时间转换
+
         private string sDate(string Second)
         {
-            uint sec = uint.Parse(Second);
-            uint Day = sec / 86400;
-            String Date = ReTime("1970-1-1", Day);
-            uint Time = sec % 86400;
-            //byte Hour = (byte)(Time / 3600);
-            //byte Min = (byte)((Time % 3600)/60);
-            //byte Sec = (byte)(Time % 60);
-            uint Hour = Time / 3600;
-            uint Min = (Time % 3600) / 60;
-            uint Sec = Time % 60;
-            Date = ReTime(Date, Day);
-            string result = Date + " " + Hour + ":" + Min + ":" + Sec;
-            return result;
+            try
+            {
+                uint sec = uint.Parse(Second);
+                return unix2datetime(sec).ToString();
+            }
+            catch
+            {
+                return wrong;
+            }
         }
         private string dateS(string Date)
         {
-            DateTime input = Convert.ToDateTime(Date);
-            DateTime Ini = DateTime.Parse("1970-1-1 00:00:00");
-            uint Sec = (uint)((input - Ini).Seconds);
-            return Sec.ToString();
+            try
+            {
+                string[] strArr = Date.Split(new char[] { '/','-', ' ', ':'});
+                DateTime dt = new DateTime(int.Parse(strArr[0]),int.Parse(strArr[1]),int.Parse(strArr[2]),int.Parse(strArr[3]),int.Parse(strArr[4]),int.Parse(strArr[5]));
+                uint Sec = datetime2unix(dt);
+                return (Date + "的绝对秒为"+Sec.ToString() + "\r\n");
+            }
+            catch
+            {
+                return wrong;
+            }
         }
         private string dotNum(string Dot)
         {
-            string[] DotArray = Dot.Split('.');
-            return (1677216 * uint.Parse(DotArray[0]) + 65536 * uint.Parse(DotArray[1]) + 256 * uint.Parse(DotArray[2]) + uint.Parse(DotArray[3])).ToString();
+            try
+            {
+                string[] DotArray = Dot.Split('.');
+                long a = uint.Parse(DotArray[0]);
+                long b = uint.Parse(DotArray[1]);
+                long c = uint.Parse(DotArray[2]);
+                long d = uint.Parse(DotArray[3]);
+                if (a>255||b>255||c>255||d>255)
+                {
+                    return wrong;
+                }
+                else
+                {
+                    string[] items = Dot.Split('.');
+
+                    long result =  a << 24| b << 16| c << 8| d;
+                    return (Dot+"的整型为" + result.ToString() + "\r\n");
+                }                
+            }
+            catch
+            {
+                return wrong;
+            }
         }
         private string numDot(string Num)
         {
-            uint n = uint.Parse(Num);
-            uint a = n / 1677216;
-            uint b = (n % 1677216) / 65536;
-            uint c = (n % 65536) / 256;
-            uint d = n % 256;
-            return (a + "." + b + "." + c + "." + d);
+            try
+            {
+                long n = uint.Parse(Num);
+                StringBuilder dot = new StringBuilder();
+                dot.Append((n >> 24) & 0xFF).Append(".");
+                dot.Append((n >> 16) & 0xFF).Append(".");
+                dot.Append((n >> 8) & 0xFF).Append(".");
+                dot.Append(n & 0xFF);
+                string result = dot.ToString();
+                return (Num + "的IP为" + result + "\r\n");
+            }
+            catch
+            {
+                return wrong;
+            }
 
         }
 
@@ -98,6 +143,16 @@ namespace C2.IAOLab.Transform
             }
             string c = year + "-" + month + "-" + day;
             return c;
+        }
+        public static DateTime unix2datetime(uint time1970)
+        {
+            DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            return startTime.AddSeconds(time1970);
+        }
+        public static uint datetime2unix(DateTime time)
+        {
+            DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+            return (uint)(time - startTime).TotalSeconds;
         }
         #endregion
         #region IP转换
