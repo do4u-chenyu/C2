@@ -74,16 +74,16 @@ namespace C2.Model
 
         public DatabaseItem Clone()
         {
-            DatabaseItem tmpDatabaseItem = new DatabaseItem();
-            tmpDatabaseItem.Type = this.Type;
-            tmpDatabaseItem.Server = this.Server;
-            tmpDatabaseItem.SID = this.SID;
-            tmpDatabaseItem.Service = this.Service;
-            tmpDatabaseItem.Port = this.Port;
-            tmpDatabaseItem.User = this.User;
-            tmpDatabaseItem.Password = this.Password;
-            tmpDatabaseItem.Schema = this.Schema;
-            tmpDatabaseItem.DataTable = this.DataTable;
+            DatabaseItem tmpDatabaseItem = new DatabaseItem(
+                this.Type,
+                this.Server,
+                this.SID,
+                this.Service,
+                this.Port,
+                this.User,
+                this.Password,
+                this.Schema,
+                this.DataTable);
             return tmpDatabaseItem;
         }
     }

@@ -50,14 +50,15 @@ namespace C2.Dialogs
         }
         private DatabaseItem GenDatabaseInfoFormDialog()
         {
-            DatabaseItem tmpDatabaseInfo = new DatabaseItem();
-            tmpDatabaseInfo.Type = (DatabaseType)(databaseTypeComboBox.SelectedIndex + 1);
-            tmpDatabaseInfo.Server = this.serverTextBox.Text;
-            tmpDatabaseInfo.SID = this.sidRadiobutton.Checked ? this.sidTextBox.Text : "";
-            tmpDatabaseInfo.Service = this.serviceRadiobutton.Checked ? this.serviceTextBox.Text : "";
-            tmpDatabaseInfo.Port = this.portTextBox.Text;
-            tmpDatabaseInfo.User = this.userTextBox.Text;
-            tmpDatabaseInfo.Password = this.passwordTextBox.Text;
+            DatabaseItem tmpDatabaseInfo = new DatabaseItem(
+                (DatabaseType)(databaseTypeComboBox.SelectedIndex + 1),
+                this.serverTextBox.Text,
+                this.sidRadiobutton.Checked ? this.sidTextBox.Text : String.Empty,
+                this.serviceRadiobutton.Checked ? this.serviceTextBox.Text : String.Empty,
+                this.portTextBox.Text,
+                this.userTextBox.Text,
+                this.passwordTextBox.Text
+                );
             return tmpDatabaseInfo;
         }
 
