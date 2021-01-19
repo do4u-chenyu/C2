@@ -24,7 +24,6 @@ namespace C2.Dialogs.IAOLab
         public ApkTool()
         {
             InitializeComponent();
-
         }
 
         private bool IsReady()
@@ -59,31 +58,30 @@ namespace C2.Dialogs.IAOLab
             List<string> apkInfoList = ApkToolStart.GetInstance().ExtractApk(inputPath.Text, jdkPath.Text);
             foreach (string apkInfo in apkInfoList)
             {
-                DataGridViewImageColumn ic = new DataGridViewImageColumn();
-                this.dataGridView1.Columns.Add(ic);//增加列，用于显示图片
-                ic.ImageLayout = DataGridViewImageCellLayout.Zoom;
                 string[] fullApkInfo = apkInfo.Split('\t');
-                dataGridView1.Columns[0].HeaderCell.Value = "ICON";
-                dataGridView1.Columns.Add("1", "文件名");
-                dataGridView1.Columns.Add("2", "Apk名");
-                dataGridView1.Columns.Add("3", "包名");
-                dataGridView1.Columns.Add("4", "主函数");
-                dataGridView1.Columns.Add("5", "大小");
+                if (fullApkInfo.Length < 5) continue;
+
+                // 将结果展示在窗体
                 int index = this.dataGridView1.Rows.Add();
                 this.dataGridView1.Rows[index].Cells[0].Value = GetImage(fullApkInfo[0]);
-                this.dataGridView1.Rows[index].Cells[1].Value = fullApkInfo[1];
-                this.dataGridView1.Rows[index].Cells[2].Value = fullApkInfo[2];
-                this.dataGridView1.Rows[index].Cells[3].Value = fullApkInfo[3];
-                this.dataGridView1.Rows[index].Cells[4].Value = fullApkInfo[4];
-                this.dataGridView1.Rows[index].Cells[5].Value = fullApkInfo[5]+"m";
-                this.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);//自动调整列宽
-                this.dataGridView1.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders);//自动调整行宽
+                for (int i = 1; i < this.dataGridView1.Rows.Count; i++)
+                    this.dataGridView1.Rows[index].Cells[i].Value = GetImage(fullApkInfo[i]);
+
             }
 
         }
         public Image GetImage(string path)
         {
-            return Image.FromFile(path);
+            try 
+            {
+                Image image = Image.FromFile(path);
+                return image;
+            }
+            catch
+            {
+                return null;
+            }
+            
         }
 
        
