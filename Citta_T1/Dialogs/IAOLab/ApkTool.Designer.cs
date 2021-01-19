@@ -39,6 +39,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tipLable = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -142,6 +143,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(0, 112);
             this.dataGridView1.Name = "dataGridView1";
@@ -150,6 +152,16 @@
             this.dataGridView1.Size = new System.Drawing.Size(895, 291);
             this.dataGridView1.TabIndex = 11;
             // 
+            // tipLable
+            // 
+            this.tipLable.AutoSize = true;
+            this.tipLable.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.tipLable.Location = new System.Drawing.Point(28, 94);
+            this.tipLable.Name = "tipLable";
+            this.tipLable.Size = new System.Drawing.Size(394, 15);
+            this.tipLable.TabIndex = 12;
+            this.tipLable.Text = "jdk路径格式：C:\\Program Files\\Java\\jdk-13.0.1\\bin";
+            // 
             // ApkTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -157,6 +169,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(895, 450);
+            this.Controls.Add(this.tipLable);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -191,5 +204,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label tipLable;
     }
 }
