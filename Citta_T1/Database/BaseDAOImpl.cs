@@ -77,7 +77,7 @@ namespace C2.Database
         public List<Table> GetTables(string schema)
         {
             List<Table> tables = new List<Table>();
-            string result = this.Query(this.GetTablesSQL(), false);
+            string result = this.Query(this.GetTablesSQL(schema), false);
             if (!String.IsNullOrEmpty(result))
                 foreach (var line in result.Split(OpUtil.DefaultLineSeparator))
                 {
@@ -104,32 +104,23 @@ namespace C2.Database
         {
             return this.Query(this.GetColNameByTableSQL(table));
         }
-        public bool FillDGVWithTbSchema(DataGridView dataGridView, Table table)
+        public void FillDGVWithTbSchema(DataGridView dataGridView, Table table)
         {
             string schemaString = this.GetTableColumnNames(table);
-            if (String.IsNullOrEmpty(schemaString))
-                return false;
             List<List<string>> schema = DbUtil.StringTo2DString(schemaString);
             FileUtil.FillTable(dataGridView, schema);
-            return true;
         } 
-        public bool FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum)
+        public void FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum)
         {
             string contentString = this.GetTableContentString(table, maxNum);
-            if (String.IsNullOrEmpty(contentString))
-                return false;
             List<List<string>> tableCols = DbUtil.StringTo2DString(contentString);
             FileUtil.FillTable(dataGridView, tableCols);
-            return true;
         }
-        public bool FillDGVWithSQL(DataGridView dataGridView, string sql)
+        public void FillDGVWithSQL(DataGridView dataGridView, string sql)
         {
             string contentString = this.Query(String.Format(this.LimitSQL(sql)));
-            if (String.IsNullOrEmpty(contentString))
-                return false;
             List<List<string>> tableCols = DbUtil.StringTo2DString(contentString);
             FileUtil.FillTable(dataGridView, tableCols);
-            return true;
         }
         public virtual bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
         {
@@ -153,7 +144,7 @@ namespace C2.Database
         {
             throw new NotImplementedException();
         }
-        public virtual string GetTablesSQL()
+        public virtual string GetTablesSQL(string schema)
         {
             throw new NotImplementedException();
         }

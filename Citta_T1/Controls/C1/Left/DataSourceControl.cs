@@ -439,17 +439,17 @@ namespace C2.Controls.Left
                 return;
             }
 
-            //刷新架构
+            //刷新架构 dao会会变化
             List<string> users = dao.GetUsers();
             UpdateFrameCombo(users, dbi.User, dao.DefaultSchema());
 
             //刷新数据表
-            List<Table> tables = dao.GetTables(dbi.User);
+            List<Table> tables = dao.GetTables(this.schemaComboBox.Text);
             Dictionary<string, List<string>> tableColDict = dao.GetColNameByTables(tables);
             UpdateTables(tables, dbi, tableColDict);
         }
 
-        private void UpdateFrameCombo(List<string> users,string loginUser, string defaultSchema)
+        private void UpdateFrameCombo(List<string> users, string loginUser, string defaultSchema)
         {
             this.schemaComboBox.Items.Clear();
             //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空

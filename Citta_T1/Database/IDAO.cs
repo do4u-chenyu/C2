@@ -13,9 +13,9 @@ namespace C2.Database
         List<List<string>> GetTableContent(Table table, int maxNum);
         Dictionary<string, List<string>> GetColNameByTables(List<Table> tables);
         string GetTableColumnNames(Table table);
-        bool FillDGVWithTbSchema(DataGridView dataGridView, Table table);
-        bool FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum);
-        bool FillDGVWithSQL(DataGridView dataGridView, string SQL);
+        void FillDGVWithTbSchema(DataGridView dataGridView, Table table);
+        void FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum);
+        void FillDGVWithSQL(DataGridView dataGridView, string SQL);
         bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000);
         string DefaultSchema();
     }
