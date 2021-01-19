@@ -16,7 +16,7 @@ namespace C2.Database
         private string getUserSQL = @"show databases";
         private string getTablesSQL = @"use {0};show tables;";
         private string getTableContentSQL = @"use {0};select * from {1} limit {2}";
-        private string getColNameByTablesSQL;
+        //private string getColNameByTablesSQL;
         private string getColNameByTableSQL = "desc {0}";
 
         public HiveDAOImpl(DatabaseItem dbi) : base(dbi) { }
