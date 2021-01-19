@@ -36,7 +36,6 @@
             this.addLocalConnectLabel = new System.Windows.Forms.Label();
             this.addConnectLabel = new System.Windows.Forms.Label();
             this.externalFrame = new System.Windows.Forms.Panel();
-            this.optComboBox = new System.Windows.Forms.ComboBox();
             this.tableFilterTextBox = new System.Windows.Forms.TextBox();
             this.tabelPanel = new System.Windows.Forms.Panel();
             this.schemaComboBox = new System.Windows.Forms.ComboBox();
@@ -134,7 +133,6 @@
             this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.externalFrame.BackColor = System.Drawing.Color.White;
             this.externalFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.externalFrame.Controls.Add(this.optComboBox);
             this.externalFrame.Controls.Add(this.tableFilterTextBox);
             this.externalFrame.Controls.Add(this.tabelPanel);
             this.externalFrame.Controls.Add(this.schemaComboBox);
@@ -149,28 +147,15 @@
             this.externalFrame.TabIndex = 2;
             this.externalFrame.Visible = false;
             // 
-            // optComboBox
-            // 
-            this.optComboBox.FormattingEnabled = true;
-            this.optComboBox.Items.AddRange(new object[] {
-            "表名",
-            "字段名"});
-            this.optComboBox.Location = new System.Drawing.Point(10, 285);
-            this.optComboBox.Name = "optComboBox";
-            this.optComboBox.Size = new System.Drawing.Size(63, 20);
-            this.optComboBox.TabIndex = 8;
-            this.optComboBox.Text = "表名";
-            this.optComboBox.SelectedIndexChanged += new System.EventHandler(this.optComboBox_SelectedIndexChanged);
-            // 
             // tableFilterTextBox
             // 
             this.tableFilterTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableFilterTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tableFilterTextBox.Location = new System.Drawing.Point(79, 285);
+            this.tableFilterTextBox.Location = new System.Drawing.Point(10, 285);
             this.tableFilterTextBox.Name = "tableFilterTextBox";
-            this.tableFilterTextBox.Size = new System.Drawing.Size(90, 23);
+            this.tableFilterTextBox.Size = new System.Drawing.Size(159, 23);
             this.tableFilterTextBox.TabIndex = 7;
             this.toolTip1.SetToolTip(this.tableFilterTextBox, "快速筛选:支持表名,列名,业务常用字段");
             this.tableFilterTextBox.TextChanged += new System.EventHandler(this.TableFilterTextBox_TextChanged);
@@ -286,6 +271,5 @@
         private System.Windows.Forms.Label addLocalConnectLabel;
         private System.Windows.Forms.Panel dataAddLabelPanel;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ComboBox optComboBox;
     }
 }
