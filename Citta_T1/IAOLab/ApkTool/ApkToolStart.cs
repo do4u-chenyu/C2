@@ -18,8 +18,8 @@ namespace C2.IAOLab.ApkToolStart
     public class ApkToolStart
     {
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
-        public UpdateLog UpdateLogDelegate;
-        List<string> Result = null;
+       
+        List<string> Result = new List<string>();
         private static ApkToolStart instance;
         public static ApkToolStart GetInstance()
         {
@@ -79,9 +79,9 @@ namespace C2.IAOLab.ApkToolStart
 
         public List<string> GetCmdCommand(string apkpath, string jdkpath)
         {
-            string setJdkPath = "set path = " + jdkpath + "bin;% path %";
-            List<string> cmdList = null;
-            cmdList.Add(setJdkPath);
+            //string setJdkPath = "set path = " + jdkpath + "bin;% path %";
+            List<string> cmdList = new List<string>();
+            //cmdList.Add(setJdkPath);
             DirectoryInfo dir = new DirectoryInfo(apkpath);
             //检索表示当前目录的文件和子目录
             FileSystemInfo[] fsinfos = dir.GetFileSystemInfos();
@@ -89,7 +89,7 @@ namespace C2.IAOLab.ApkToolStart
             foreach (FileSystemInfo fsinfo in fsinfos)
             {
 
-                string cmdApk = "java - jar apktool_2.4.1.jar d - f" + fsinfo.FullName + "-o" + Path.GetTempPath() + "ApkTool";
+                string cmdApk = @"java -jar E:\work\apk相关工作\apktool\apktool\apktool_2.4.1.jar d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
 
                 cmdList.Add(cmdApk);
 
@@ -107,19 +107,24 @@ namespace C2.IAOLab.ApkToolStart
             string strValue = a.Attributes["android:icon"].Value.Split('/')[1];
             DirectoryInfo dir = new DirectoryInfo(iconPath);
             //检索表示当前目录的文件和子目录
-            FileSystemInfo[] fsinfos = dir.GetFileSystemInfos();
+            FileSystemInfo[] fsPathInfos = dir.GetFileSystemInfos();
             //遍历检索的文件和子目录
-            //int i = 0;
+           
             string relICon = " ";
-            foreach (FileSystemInfo fsinfo in fsinfos)
+            foreach (FileSystemInfo fsPath in fsPathInfos)
             {
-                using (FileStream fileStream = new FileStream(fsinfo.FullName, FileMode.Open, FileAccess.Read))
+                long size = 0;
+                DirectoryInfo dir1 = new DirectoryInfo(fsPath.FullName.ToString());
+                //检索表示当前目录的文件和子目录
+                FileSystemInfo[] fsInfos = dir1.GetFileSystemInfos();
+                foreach (FileSystemInfo fsIinfo in fsInfos) 
                 {
-                    long size = 0;
-                    if (fsinfo.Name.Contains(strValue) && fileStream.Length > size)
+                    
+                    FileInfo f = new FileInfo(fsIinfo.FullName);
+                    if (fsIinfo.Name.Contains(strValue) && f.Length > size)
                     {
-                        size = fileStream.Length;
-                        relICon = fsinfo.FullName;
+                        size = f.Length;
+                        relICon = fsIinfo.FullName;
                     }
                 }
             }
@@ -145,11 +150,11 @@ namespace C2.IAOLab.ApkToolStart
             if (strValue.Contains("@"))
             {
                 strValue = strValue.Split('/')[1];
-                filepath += @"\apk_out\res\values\strings.xml";
+                filepath += @"\res\values\strings.xml";
                 XmlDocument xDoc1 = new XmlDocument();
-                xDoc.Load(filepath);
+                xDoc1.Load(filepath);
                 XmlNode rootNode1 = xDoc1.SelectSingleNode("resources");
-                XmlNodeList namenodes = rootNode1.SelectNodes("//string");
+                XmlNodeList namenodes = rootNode1.SelectNodes("string");
                 foreach (XmlNode namenode in namenodes)
                 {
                     if ((namenode as XmlElement).GetAttribute("name") == strValue)
@@ -174,11 +179,11 @@ namespace C2.IAOLab.ApkToolStart
             XmlNodeList a = rootNode.SelectNodes("//activity");
             foreach (XmlNode node in a)
             {
-                if (node.Attributes["android:name"].Value.Contains(".MainActivity"))
+                if (node.Attributes["android:name"].Value.Contains("Activity"))
                 {
                     return node.Attributes["android:name"].Value;
                 }
-                return "未找到主函数";
+                
             }
             return "未找到主函数";
         }
@@ -204,7 +209,7 @@ namespace C2.IAOLab.ApkToolStart
                 {
                     foreach (string cmd in cmds)
                     {
-                        UpdateLogDelegate("执行命令: " + cmd);
+                        
                         p.StandardInput.WriteLine(cmd);
                     }
 
@@ -217,11 +222,11 @@ namespace C2.IAOLab.ApkToolStart
                     p.StandardInput.WriteLine("exit");
                     p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒
 
-                    UpdateLogDelegate("退出码" + p.ExitCode.ToString());
+                    
                     if (p.ExitCode != 0)
                     {
                         errorMessage = "执行程序非正常退出，请检查程序后再运行。";
-                        UpdateLogDelegate("执行程序非正常退出，请检查程序后再运行。");
+                        
                     }
 
                 }
@@ -235,7 +240,7 @@ namespace C2.IAOLab.ApkToolStart
             {
                 //异常停止的处理方法
                 errorMessage = ex.Message;
-                UpdateLogDelegate("RunLinuxCommand进程异常: " + ex.Message);
+                
             }
             finally
             {
