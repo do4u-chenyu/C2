@@ -6,45 +6,27 @@ namespace C2.Dialogs
 {
     partial class ZipDialog : StandardDialog
     {
-        private string _ModelPath;
-        private bool isExport;
+        protected FileDialog fd;
         public string Password { set; get; }
         public string ModelPath 
         {
             set
             {
-                _ModelPath = value;
                 this.modelPathTextBox.Text = value;
             }
             get
             {
-                return _ModelPath;
+                return this.modelPathTextBox.Text;
             }
         }
-        
-        public ZipDialog(bool isExport)
+       
+        public ZipDialog() 
         {
             InitializeComponent();
-            this.isExport = isExport;
-            this.Text = isExport ? "导出业务视图" : "导入业务视图";
         }
 
         private void BrowseButton_Click(object sender, System.EventArgs e)
         {
-            FileDialog fd;
-            if (isExport)
-            {
-                fd = new SaveFileDialog();
-                fd.FileName = "业务视图.c2"; // 保存时给一个默认的名字
-            }
-                
-
-            else
-                fd = new OpenFileDialog();
-
-            fd.AddExtension = true;
-            fd.Filter = isExport ? "业务视图文件(*.c2)|*.c2" : "业务视图文件(*.c2)|*.c2|zip压缩包(*.zip)|*.zip";
-            fd.Title = isExport ? "导出业务视图" : "导入业务视图";
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 ModelPath = fd.FileName;
@@ -77,4 +59,34 @@ namespace C2.Dialogs
             }
         }
     }
+
+    class ExportZipDialog : ZipDialog
+    {
+        public ExportZipDialog() : base()
+        {
+            fd = new SaveFileDialog
+            {
+                FileName = "业务视图.c2",             // 保存时给一个默认的名字
+                Filter = "业务视图文件(*.c2)|*.c2",
+                Title = "导出业务视图",
+                AddExtension = true
+        };    
+            this.Text = "导出业务视图";
+        }
+    }
+
+    class ImportZipDialog : ZipDialog
+    {
+        public ImportZipDialog()
+        {
+            fd = new OpenFileDialog
+            {
+                Filter = "业务视图文件(*.c2)|*.c2|zip压缩包(*.zip)|*.zip",
+                Title = "导入业务视图",
+                AddExtension = true
+            };
+            this.Text = "导出业务视图";
+        }
+    }
+
 }
