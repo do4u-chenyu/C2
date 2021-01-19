@@ -107,8 +107,26 @@ namespace C2.Business.Schedule
         }
 
         private void TopologicalSort()
-        { 
-            // 
+        {
+            for (int i = 0; i < CurrentModelTripleList.Count; i++)
+                while (TopologicalOrder(i)); // 对每一个元素调整拓扑顺序,直到不存在拓扑冲突为止
+        }
+
+        private bool TopologicalOrder(int i)
+        {
+            foreach (var de in CurrentModelTripleList[i].DataElements)
+            {
+                int j = CurrentModelTripleList.FindIndex(me => me.ResultElement.ID == de.ID);
+                if (j > i) // 存在拓扑冲突:后续元素的输出是当前的输入元素,调换位置
+                {
+                    // Switch i 和 j 2个元素位置
+                    Triple tmp = CurrentModelTripleList[i];
+                    CurrentModelTripleList[i] = CurrentModelTripleList[j];
+                    CurrentModelTripleList[j] = tmp;
+                    return true;
+                }     
+            }
+            return false;
         }
 
         private List<int> FindBeforeNodeIds(int id)
