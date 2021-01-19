@@ -46,7 +46,7 @@ namespace C2.Dialogs.IAOLab
             this.tip1.Location = this.tip0.Location;
             this.inputAndResult.Height += 35;
             this.inputAndResult1.Height = this.inputAndResult.Height;
-            this.inputAndResult.Width = this.inputAndResult.Width;
+            this.inputAndResult1.Width = this.inputAndResult.Width;
 
         }
 
