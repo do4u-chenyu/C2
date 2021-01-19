@@ -57,12 +57,12 @@ namespace C2.Dialogs.IAOLab
             {
                 Location = new Point(7, 60),
                 Text = radio0Name,
-                Width = 170
-
+                Width = 170,
             };
+            realToAbs.Checked = true;
             RadioButton absToReal = new RadioButton()
             {
-                Location = new Point(7 + realToAbs.Width, 60),
+                Location = new Point(17 + realToAbs.Width, 60),
                 Text = radio1Name,
                 Width = 170
             };
@@ -99,6 +99,15 @@ namespace C2.Dialogs.IAOLab
 
             }
         }
+        private void IPTransform(string[] inputArray, StringBuilder tmpResult)
+        {
+
+        }
+        private void timeTransform(string[] inputArray, StringBuilder tmpResult)
+        {
+
+        }
+
 
         private void Search_Click(object sender, EventArgs e)
         {
@@ -115,7 +124,10 @@ namespace C2.Dialogs.IAOLab
 
                     break;
                 case "Ip":
-
+                    if (this.tabControl.SelectedIndex == 0)
+                        IPTransform(this.inputAndResult.Text.Split('\n'), tmpResult);
+                    else
+                        timeTransform(this.inputAndResult.Text.Split('\n'), tmpResult);
                     break;
                 default:
                     break;
