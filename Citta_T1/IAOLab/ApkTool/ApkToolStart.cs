@@ -27,7 +27,7 @@ namespace C2.IAOLab.ApkToolStart
                 instance = new ApkToolStart();
             return instance;
         }
-        public List<string> ExactApk(string apkpath, string jdkpath)
+        public List<string> ExtractApk(string apkpath, string jdkpath)
         {
             // 运行JAR包
             string tmpPath = Path.GetTempPath() + "ApkTool";
@@ -59,7 +59,7 @@ namespace C2.IAOLab.ApkToolStart
             string apkTrueName = GetApkName(apkToolPath);
             string apkIconFullName = GetIcon(apkToolPath);
             long size = GetApkSize(apkPath);
-            return string.Format("{0}{1}{2}{3} {4}{5}", apkIconFullName, "\t", apkName, "\t", apkTrueName, "\t", packageName, "\t", mainActivity, "\t", size.ToString());
+            return string.Format("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}", apkIconFullName, "\t", apkName, "\t", apkTrueName, "\t", packageName, "\t", mainActivity, "\t", size.ToString());
         }
         private long GetApkSize(string filepath)
         {
@@ -70,7 +70,7 @@ namespace C2.IAOLab.ApkToolStart
                 return size;
             }
         }
-        public void ExporResult()
+        public void ExportResult()
         {
 
             // 右键导出，生成结果文件到excel
