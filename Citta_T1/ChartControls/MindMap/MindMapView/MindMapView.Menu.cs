@@ -401,9 +401,9 @@ namespace C2.Controls.MapViews
         void MenuCreateDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
-            IDAO dao = DAOFactory.CreateDAO(hitItem.DBItem);
             if (hitItem.IsDatabase())
             {
+                IDAO dao = DAOFactory.CreateDAO(hitItem.DBItem);
                 if (dao.TestConn())  // 预加载
                 {
                     BCPBuffer.GetInstance().GetCachePreviewTable(hitItem.DBItem); // TODO DK 预加载也要写好方法

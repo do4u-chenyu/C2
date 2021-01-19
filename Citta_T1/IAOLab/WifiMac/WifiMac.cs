@@ -51,7 +51,10 @@ namespace C2.IAOLab.WifiMac
             catch (Exception)
             {
                 writer = null;
-                Console.Write("连接服务器失败!");
+            }
+            if(writer == null)
+            {
+                return "网络连接失败";
             }
             //将请求参数写入流
             writer.Write(payload, 0, payload.Length);
@@ -74,11 +77,11 @@ namespace C2.IAOLab.WifiMac
             sRead.Close();
             //Console.WriteLine(postContent);//返回Json数据
             
-            postContent = postContent.Replace("address", "地址").Replace("latitude", "纬度").Replace("longitude", "经度").Replace("state", "查询结果").Replace("ok", "成功").Replace("error", "失败");
+            postContent = postContent.Replace("address", "地址").Replace("latitude", "纬度").Replace("longitude", "经度").Replace("state", "查询结果").Replace("ok", "成功").Replace("error", "失败").Replace("accuracy", "范围");
             string[] postContentArry = postContent.Split('{', '}', ',');
             if (postContentArry.Length >5) 
             {
-                string CHpostContent = postContentArry[2] + "," + postContentArry[6] + "\t" + postContentArry[1] + "\t" + postContentArry[5] + "\t" + postContentArry[4];
+                string CHpostContent = postContentArry[2] + "," + postContentArry[6] + "\t" + postContentArry[3] + "米" + "\t" + postContentArry[5] + "\t" + postContentArry[1];
                 return CHpostContent;
             }
             else

@@ -40,7 +40,7 @@
             // 
             // inputAndResult
             // 
-            this.inputAndResult.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.inputAndResult.BackColor = System.Drawing.Color.White;
             this.inputAndResult.Location = new System.Drawing.Point(0, 84);
             this.inputAndResult.Margin = new System.Windows.Forms.Padding(2);
             this.inputAndResult.Name = "inputAndResult";

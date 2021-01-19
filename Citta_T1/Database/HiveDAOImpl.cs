@@ -87,15 +87,15 @@ namespace C2.Database
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
             }
-            return sb.ToString();
+            return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
         }
         public override string LimitSQL(string sql)
         {
             return String.Format("{0} limit {1}", sql, OpUtil.PreviewMaxNum);
         }
-        public override string GetTablesSQL()
+        public override string GetTablesSQL(string schema)
         {
-            return String.Format(this.getTablesSQL, this.Schema);
+            return String.Format(this.getTablesSQL, schema);
         }
         public override string GetColNameByTablesSQL(List<Table> tables)
         {

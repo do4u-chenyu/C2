@@ -91,22 +91,26 @@ namespace C2.Database
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
             }
-            return sb.ToString();
+            return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
         }
         public override string LimitSQL(string sql)
         {
             return String.Format("{0} where rownum <= {1}", sql, OpUtil.PreviewMaxNum);
         }
-        public override string GetTablesSQL()
+        public override string GetTablesSQL(string schema)
         {
-            return String.Format(this.getTablesSQL, this.Schema.ToUpper());
+            return String.Format(this.getTablesSQL, schema.ToUpper());
         }
         public override string GetColNameByTablesSQL(List<Table> tables)
-        {
+        { 
             String[] tableNames = new string[tables.Count];
-            for (int i = 0; i < tableNames.Length; i++)
-                tableNames[i] = tables[i].Name;
-            return String.Format(this.getColNameByTablesSQL, tableNames);
+            if (tableNames.Length != 0)
+            {
+                for (int i = 0; i < tableNames.Length; i++)
+                    tableNames[i] = tables[i].Name;
+                return String.Format(this.getColNameByTablesSQL, tableNames);
+            }
+            return String.Empty;
         }
         public override string GetTableContentSQL(Table table, int maxNum)
         {

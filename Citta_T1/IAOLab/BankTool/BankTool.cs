@@ -48,7 +48,10 @@ namespace C2.IAOLab.BankTool
             catch (Exception)
             {
                 writer = null;
-                Console.Write("连接服务器失败!");
+            }
+            if (writer == null)
+            {
+                return "网络连接失败";
             }
             //将请求参数写入流
             //writer.Write(payload, 0, payload.Length);
@@ -74,7 +77,7 @@ namespace C2.IAOLab.BankTool
             String[] postContentArry = postContent.Split('\t','?');
             if (postContentArry.Length == 9)
             {
-                string fullpostContent = postContentArry[1] + "\t" + postContentArry[3] + "\t" + postContentArry[4] + "\t" + postContentArry[5];
+                string fullpostContent = postContentArry[1] + "\t" + postContentArry[3] + "\t" + postContentArry[5];
                 return fullpostContent;
             }
             else
