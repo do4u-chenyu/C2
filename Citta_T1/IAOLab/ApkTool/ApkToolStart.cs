@@ -96,7 +96,8 @@ namespace C2.IAOLab.ApkToolStart
             //遍历检索的文件和子目录
             foreach (FileSystemInfo fsinfo in fsinfos)
             {
-                string apkToolPath = Application.StartupPath + @"\apktool_2.3.0.jar"; 
+                //实际目录//string apkToolPath = Application.StartupPath + @"\apktool_2.3.0.jar"; 
+                string apkToolPath = @"D:\work\C2\C2\ThirdPartyLibrary\ApkTool.2.3.0\apktool_2.3.0.jar";
                 string cmdApk = @"java -jar"+ apkToolPath+ " d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
                 cmdList.Add(cmdApk);
 
