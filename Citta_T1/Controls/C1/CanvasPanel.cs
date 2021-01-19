@@ -770,6 +770,10 @@ namespace C2.Controls
 
             foreach (DataItem di in dataItems)
             {
+                //TODO 数据库表暂不加入模型视图
+                if (di.DataType != DatabaseType.Null)
+                    continue;
+
                 string text = di.FileName;
                 string path = di.FilePath;
 
