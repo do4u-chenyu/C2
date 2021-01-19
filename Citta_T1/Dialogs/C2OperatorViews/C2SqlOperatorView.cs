@@ -21,7 +21,13 @@ namespace C2.Dialogs.C2OperatorViews
             {
                 int idx = this.comboBoxConnection.SelectedIndex;
                 if (idx >= 0 && idx < databaseItems.Count)
-                    return databaseItems[idx];
+                {
+                    if (String.IsNullOrEmpty(this.comboBoxDataBase.Text))
+                        return databaseItems[idx];
+                    DatabaseItem dbi = databaseItems[idx].Clone();
+                    dbi.Schema = this.comboBoxDataBase.Text;
+                    return dbi;
+                }
                 else
                     return null;
             }
@@ -31,7 +37,7 @@ namespace C2.Dialogs.C2OperatorViews
             get
             {
                 if (tableListBox.SelectedItem != null)
-                    return new Table(SelectDatabaseItem.User, tableListBox.SelectedItem.ToString());
+                    return new Table(this.comboBoxDataBase.Text, tableListBox.SelectedItem.ToString());
                 else
                     return null;
             }
@@ -145,19 +151,20 @@ namespace C2.Dialogs.C2OperatorViews
                 users = new List<string>();
           
             this.comboBoxDataBase.Items.Clear();
-            if (users == null || users.Count <= 0)
+            if (users == null || users.Count == 0)
                 return;
             if (databaseItems != null && databaseItems.Count > 0)
-            {
-                this.comboBoxDataBase.Text = users.Find(x => x.Equals(SelectDatabaseItem.User.ToUpper())) == null ? "选择架构" : SelectDatabaseItem.User.ToUpper();
-                // hive加载框架
-                if (string.Equals("选择架构", this.comboBoxDataBase.Text))
-                    this.comboBoxDataBase.Text = users[0];
-                this.comboBoxDataBase.Items.AddRange(users.ToArray());
-            }
-
+                UpdateFrameCombo(users, SelectDatabaseItem.User, dao.DefaultSchema());
         }
+        private void UpdateFrameCombo(List<string> users, string loginUser, string defaultSchema)
+        {
+            if (users == null)
+                return;
 
+            this.comboBoxDataBase.Text = users.Contains(loginUser.ToLower()) ? "选择架构" : defaultSchema; // TODO
+
+            users.ForEach(x => this.comboBoxDataBase.Items.Add(x.ToString()));
+        }
         private void BnView_Click(object sender, System.EventArgs e)
         {
             if (SelectDatabaseItem == null || string.IsNullOrEmpty(this.comboBoxDataBase.Text) )

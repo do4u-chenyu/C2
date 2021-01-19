@@ -14,7 +14,7 @@ namespace C2.Database.Tests
     public class DAOFactoryTests
     {
         private DatabaseItem oralcDBI = new DatabaseItem(DatabaseType.Oracle, "114.55.248.85", "orcl", String.Empty, "1521", "test", "test", table: new Table("test", "TEST_100W"));
-        private DatabaseItem hiveDBI = new DatabaseItem(DatabaseType.Hive, "10.1.126.4", String.Empty, String.Empty, "10000", "root", "123456", table: new Table("root", "hive1"));
+        private DatabaseItem hiveDBI = new DatabaseItem(DatabaseType.Hive, "10.1.126.4", String.Empty, String.Empty, "10000", "root", "123456", table: new Table("default", "hive1"));
         List<DatabaseItem> dbis;
         List<IDAO> daos;
         private string[] userOrDb;
