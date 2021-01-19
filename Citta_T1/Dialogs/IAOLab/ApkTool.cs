@@ -32,11 +32,14 @@ namespace C2.Dialogs.IAOLab
 
         private void button1_Click(object sender, EventArgs e)
         {
-            List<string> apkInfoList = ApkToolStart.GetInstance().ExactApk(textBox1.Text, textBox2.Text);
+            List<string> apkInfoList = ApkToolStart.GetInstance().ExtractApk(textBox1.Text, textBox2.Text);
             foreach (string apkInfo in apkInfoList)
             {
+                DataGridViewImageColumn ic = new DataGridViewImageColumn();
+                this.dataGridView1.Columns.Add(ic);//增加列，用于显示图片
+                ic.ImageLayout = DataGridViewImageCellLayout.Zoom;
                 string[] fullApkInfo = apkInfo.Split('\t');
-                dataGridView1.Columns.Add("0", "ICON");
+                dataGridView1.Columns[0].HeaderCell.Value = "ICON";
                 dataGridView1.Columns.Add("1", "文件名");
                 dataGridView1.Columns.Add("2", "Apk名");
                 dataGridView1.Columns.Add("3", "包名");
@@ -49,15 +52,14 @@ namespace C2.Dialogs.IAOLab
                 this.dataGridView1.Rows[index].Cells[3].Value = fullApkInfo[3];
                 this.dataGridView1.Rows[index].Cells[4].Value = fullApkInfo[4];
                 this.dataGridView1.Rows[index].Cells[5].Value = fullApkInfo[5]+"m";
+                this.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);//自动调整列宽
+                this.dataGridView1.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders);//自动调整行宽
             }
 
         }
-        private Image GetImage(string path)
+        public Image GetImage(string path)
         {
-            FileStream fs = new FileStream(path, FileMode.Open);
-            Image result = Image.FromStream(fs);
-            fs.Close();
-            return result;
+            return Image.FromFile(path);
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
