@@ -2652,6 +2652,9 @@
     <None Include="Resources\WidgetIcon\ORACLE.png" />
     <None Include="Resources\WidgetIcon\Excel.png" />
     <Content Include="Resources\提示1.png" />
+    <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
