@@ -41,7 +41,7 @@ namespace C2.IAOLab.Transform
                     return wrongInfo;
                 double lat = ConvertUtil.TryParseDouble(inputArray[0]);
                 double lon = ConvertUtil.TryParseDouble(inputArray[1]);
-                if (lat == double.NaN || lon == double.NaN)
+                if (double.IsNaN(lat) || double.IsNaN(lon))
                     return wrongInfo;
 
                 switch (type)

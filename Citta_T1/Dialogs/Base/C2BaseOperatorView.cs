@@ -82,7 +82,7 @@ namespace C2.Dialogs.Base
                 //string initiation = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
                 //textBox.Text = initiation.Replace("?", "");
                 textBox.Text = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(dataName), 0, maxLength) + "...";
-                //textBox.Text = get
+                //textBox.Text = 
             }
         }
 
