@@ -177,30 +177,30 @@ namespace C2.Dialogs.IAOLab
             }
          }
 
-        public void InsertPicture(string RangeName, Microsoft.Office.Interop.Excel._Worksheet sheet, string PicturePath)
-        {
-            Microsoft.Office.Interop.Excel.Range rng = sheet.get_Range(RangeName, Type.Missing);
-            rng.Select();
-            float PicLeft, PicTop, PicWidth, PicHeight;    //距离左边距离，顶部距离，图片宽度、高度
-            PicTop = Convert.ToSingle(rng.Top);
-            PicHeight = Convert.ToSingle(rng.Height);
-            PicWidth = Convert.ToSingle(rng.Width);
-            PicLeft = Convert.ToSingle(rng.Left);//+ (Convert.ToSingle(rng.MergeArea.Width) - PicWidth) / 2;
-            try
-            {
-                Microsoft.Office.Interop.Excel.Pictures pics = (Microsoft.Office.Interop.Excel.Pictures)sheet.Pictures(Type.Missing);
-                pics.Insert(PicturePath, Type.Missing);
-                pics.Left = (double)rng.Left;
-                pics.Top = (double)rng.Top;
-                pics.Width = (double)rng.Width;
-                pics.Height = (double)rng.Height;
-            }
-            catch
-            {
-            }
-            sheet.Shapes.AddPicture(PicturePath, Microsoft.Office.Core.MsoTriState.msoFalse,
-            Microsoft.Office.Core.MsoTriState.msoTrue, PicLeft, PicTop, PicWidth, PicHeight);
-        }
+        //public void InsertPicture(string RangeName, Microsoft.Office.Interop.Excel._Worksheet sheet, string PicturePath)
+        //{
+        //    Microsoft.Office.Interop.Excel.Range rng = sheet.get_Range(RangeName, Type.Missing);
+        //    rng.Select();
+        //    float PicLeft, PicTop, PicWidth, PicHeight;    //距离左边距离，顶部距离，图片宽度、高度
+        //    PicTop = Convert.ToSingle(rng.Top);
+        //    PicHeight = Convert.ToSingle(rng.Height);
+        //    PicWidth = Convert.ToSingle(rng.Width);
+        //    PicLeft = Convert.ToSingle(rng.Left);//+ (Convert.ToSingle(rng.MergeArea.Width) - PicWidth) / 2;
+        //    try
+        //    {
+        //        Microsoft.Office.Interop.Excel.Pictures pics = (Microsoft.Office.Interop.Excel.Pictures)sheet.Pictures(Type.Missing);
+        //        pics.Insert(PicturePath, Type.Missing);
+        //        pics.Left = (double)rng.Left;
+        //        pics.Top = (double)rng.Top;
+        //        pics.Width = (double)rng.Width;
+        //        pics.Height = (double)rng.Height;
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    sheet.Shapes.AddPicture(PicturePath, Microsoft.Office.Core.MsoTriState.msoFalse,
+        //    Microsoft.Office.Core.MsoTriState.msoTrue, PicLeft, PicTop, PicWidth, PicHeight);
+        //}
 
         private void DataGridView1_MouseDown(object sender, MouseEventArgs e)
         {
