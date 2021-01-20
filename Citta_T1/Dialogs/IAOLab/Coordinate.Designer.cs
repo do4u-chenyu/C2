@@ -81,12 +81,12 @@
             // 
             // inputAndResult
             // 
-            this.inputAndResult.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.inputAndResult.Location = new System.Drawing.Point(-12, 127);
+            this.inputAndResult.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.inputAndResult.Location = new System.Drawing.Point(-4, 127);
             this.inputAndResult.Margin = new System.Windows.Forms.Padding(2);
             this.inputAndResult.Name = "inputAndResult";
             this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult.Size = new System.Drawing.Size(640, 202);
+            this.inputAndResult.Size = new System.Drawing.Size(625, 196);
             this.inputAndResult.TabIndex = 11;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
@@ -210,12 +210,12 @@
             // 
             // inputAndResult1
             // 
-            this.inputAndResult1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.inputAndResult1.Location = new System.Drawing.Point(-12, 67);
+            this.inputAndResult1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.inputAndResult1.Location = new System.Drawing.Point(-4, 67);
             this.inputAndResult1.Margin = new System.Windows.Forms.Padding(2);
             this.inputAndResult1.Name = "inputAndResult1";
             this.inputAndResult1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult1.Size = new System.Drawing.Size(641, 262);
+            this.inputAndResult1.Size = new System.Drawing.Size(625, 256);
             this.inputAndResult1.TabIndex = 1;
             this.inputAndResult1.Text = "";
             this.inputAndResult1.WordWrap = false;

@@ -50,7 +50,7 @@ namespace C2.IAOLab.Transform
                 }
 
             }
-            return input+":"+result;
+            return input+" "+result;
         }
 
         #region 时间转换
@@ -73,7 +73,7 @@ namespace C2.IAOLab.Transform
             {
                 string[] strArr = Date.Split(new char[] { '/','-', ' ', ':'});
                 DateTime dt = new DateTime(int.Parse(strArr[0]),int.Parse(strArr[1]),int.Parse(strArr[2]),int.Parse(strArr[3]),int.Parse(strArr[4]),int.Parse(strArr[5]));
-                if(int.Parse(strArr[0]) > 2021)
+                if(int.Parse(strArr[0]) > 2105)
                 {
                     return wrong;
                 }
