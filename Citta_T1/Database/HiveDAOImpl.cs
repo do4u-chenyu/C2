@@ -84,25 +84,22 @@ namespace C2.Database
              * pageIndex start from 0.
              */
             QueryResult result;
-            StringBuilder sb = new StringBuilder(1024 * 16);
-            int returnNum = 0;;
+            int returnNum = 0;
 
-            string sqlPage = String.Format(@"select * from (select row_number() as rowno,tmp.* from ({0}) tmp) t where t.rowno  betwneen {1} and {2}",
+            string sqlPage = String.Format(@"select * from (select row_number() over () as rowno,tmp0.* from ({0}) tmp0) t where t.rowno  between {1} and {2}",
                                     sqlText,
                                     pageSize * (pageIndex),
                                     pageSize * (pageIndex)+maxNum);          
             try
             {
-                result.content = Query(sqlPage);
+                // 去掉第一列，分页查询引入的
+                result.content = Query(sqlPage).Substring(Query(sqlPage).IndexOf('\t')+1);
                 result.returnNum = maxNum;
             }
             catch (Exception ex)
             {
-                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString()); 
-            }
-            finally
-            {
-                result.content = sb.ToString();
+                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                result.content = string.Empty;
                 result.returnNum = returnNum;
             }
             return result;
