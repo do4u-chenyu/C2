@@ -60,7 +60,7 @@ namespace C2.IAOLab.Transform
             try
             {
                 uint sec = uint.Parse(Second);
-                return "日期时间为"+unix2datetime(sec).ToString();
+                return "日期时间为"+unix2datetime(sec).ToString()+"\r\n";
             }
             catch
             {
