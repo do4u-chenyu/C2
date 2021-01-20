@@ -9,7 +9,7 @@ namespace C2.IAOLab.Transform
 {
     class TimeAndIPTransform
     {
-        string wrong = "输入格式有误\r\n";
+        string wrong = "输入有误\r\n";
 
         private string input;
         public static TimeAndIPTransform GetInstance(string input)
@@ -22,27 +22,35 @@ namespace C2.IAOLab.Transform
         }
         public string timeIPTransform(string type)
         {
-            string wrong = "输入格式有误";
+            //string wrong = "输入格式有误";
             string result;
-            switch (type)
+            if(input.Trim() == string.Empty)
             {
-                case "绝对秒转真实时间":
-                    result = sDate(input);
-                    break;
-                case "真实时间转绝对秒":
-                    result = dateS(input);
-                    break;
-                case "IP转整形":
-                    result = dotNum(input);
-                    break;
-                case "整形转IP":
-                    result = numDot(input);
-                    break;
-                default:
-                    result = wrong;
-                    break;
+                return "";
             }
-            return result;
+            else
+            {
+                switch (type)
+                {
+                    case "绝对秒转真实时间":
+                        result = sDate(input);
+                        break;
+                    case "真实时间转绝对秒":
+                        result = dateS(input);
+                        break;
+                    case "IP转整形":
+                        result = dotNum(input);
+                        break;
+                    case "整形转IP":
+                        result = numDot(input);
+                        break;
+                    default:
+                        result = wrong;
+                        break;
+                }
+
+            }
+            return input+":"+result;
         }
 
         #region 时间转换
@@ -52,7 +60,7 @@ namespace C2.IAOLab.Transform
             try
             {
                 uint sec = uint.Parse(Second);
-                return unix2datetime(sec).ToString();
+                return "日期时间为"+unix2datetime(sec).ToString();
             }
             catch
             {
@@ -65,8 +73,15 @@ namespace C2.IAOLab.Transform
             {
                 string[] strArr = Date.Split(new char[] { '/','-', ' ', ':'});
                 DateTime dt = new DateTime(int.Parse(strArr[0]),int.Parse(strArr[1]),int.Parse(strArr[2]),int.Parse(strArr[3]),int.Parse(strArr[4]),int.Parse(strArr[5]));
-                uint Sec = datetime2unix(dt);
-                return (Date + "的绝对秒为"+Sec.ToString() + "\r\n");
+                if(int.Parse(strArr[0]) > 2021)
+                {
+                    return wrong;
+                }
+                else
+                {
+                    uint Sec = datetime2unix(dt);
+                    return ("绝对秒为" + Sec.ToString() + "\r\n");
+                }
             }
             catch
             {
@@ -82,23 +97,30 @@ namespace C2.IAOLab.Transform
                 long b = uint.Parse(DotArray[1]);
                 long c = uint.Parse(DotArray[2]);
                 long d = uint.Parse(DotArray[3]);
-                if (a>255||b>255||c>255||d>255)
+                if (DotArray.Length != 4)
                 {
                     return wrong;
                 }
                 else
                 {
-                    string[] items = Dot.Split('.');
+                    if (a > 255 || b > 255 || c > 255 || d > 255)
+                    {
+                        return wrong;
+                    }
+                    else
+                    {
+                        string[] items = Dot.Split('.');
 
-                    long result =  a << 24| b << 16| c << 8| d;
-                    return (Dot+"的整型为" + result.ToString() + "\r\n");
-                }                
+                        long result = a << 24 | b << 16 | c << 8 | d;
+                        return ("整型为" + result.ToString() + "\r\n");
+                    }
+                }
             }
             catch
             {
                 return wrong;
             }
-        }
+        }       
         private string numDot(string Num)
         {
             try
@@ -110,39 +132,13 @@ namespace C2.IAOLab.Transform
                 dot.Append((n >> 8) & 0xFF).Append(".");
                 dot.Append(n & 0xFF);
                 string result = dot.ToString();
-                return (Num + "的IP为" + result + "\r\n");
+                return ("IP为" + result + "\r\n");
             }
             catch
             {
                 return wrong;
             }
 
-        }
-
-        private static string ReTime(string data, uint str)
-        {
-            DateTime dt = DateTime.Parse(data);
-            int year = dt.Year;
-            int month = dt.Month;
-            int day = dt.Day;
-            int n = DateTime.DaysInMonth(year, month);
-            int k = (int)(day + str);
-            if (k > n)
-            {
-                day = (int)(str - (n - day));
-                month = month + 1;
-                if (month > 12)
-                {
-                    month = 1;
-                    year = year + 1;
-                }
-            }
-            else
-            {
-                day = (int)(day + str);
-            }
-            string c = year + "-" + month + "-" + day;
-            return c;
         }
         public static DateTime unix2datetime(uint time1970)
         {

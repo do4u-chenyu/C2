@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -79,6 +80,7 @@ namespace C2.Dialogs.Base
             if (sumcount + sumcountDigit > maxLength)
             {
                 textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
+                //textBox.Text = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
 

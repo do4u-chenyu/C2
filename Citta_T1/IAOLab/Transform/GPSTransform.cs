@@ -31,17 +31,23 @@ namespace C2.IAOLab.Transform
         public string CoordinateConversion(string type)
         {
             double[] result;
-            if (inputArray.Length != 2)
-                return wrongInfo;
-            double lat = ConvertUtil.TryParseDouble(inputArray[0]);
-            double lon = ConvertUtil.TryParseDouble(inputArray[1]);
-            if (lat == double.NaN || lon == double.NaN)
-                return wrongInfo;
-
-            switch (type)
+            if(input.Trim() == string.Empty)
             {
-                case "bd_wgs":
-                    result = BDConvertToWGS(lat, lon);
+                return "";
+            }
+            else
+            {
+                if (inputArray.Length != 2)
+                    return wrongInfo;
+                double lat = ConvertUtil.TryParseDouble(inputArray[0]);
+                double lon = ConvertUtil.TryParseDouble(inputArray[1]);
+                if (lat == double.NaN || lon == double.NaN)
+                    return wrongInfo;
+
+                switch (type)
+                {
+                    case "bd_wgs":
+                        result = BDConvertToWGS(lat, lon);
                         break;
                     case "wgs_bd":
                         result = WGConvertToBD(lat, lon);
@@ -66,8 +72,7 @@ namespace C2.IAOLab.Transform
                     return string.Format("{0}:{1}", input, wrongInfo);
                 double deviation = Distance(lat, lon, result[0], result[1]);
                 return string.Format("{0}:转换后坐标为{1} {2}，偏差为:{3}米\r\n", input, result[0], result[1], deviation);
-
-
+            }
         }
         public string ComputeDistance()
         {
