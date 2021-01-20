@@ -100,7 +100,7 @@ namespace C2.Controls.Left
 
         private void AddMindMapButton_Click(object sender, System.EventArgs e)
         {
-            ZipDialog zipDialog = new ZipDialog(false);
+            ZipDialog zipDialog = new ImportZipDialog();
             if (zipDialog.ShowDialog() == DialogResult.OK)
             {
                 string fullFilePath = zipDialog.ModelPath;

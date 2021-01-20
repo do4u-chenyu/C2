@@ -78,7 +78,13 @@ namespace C2.Controls.Left
                 else if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(DatabaseItem.AllDatabaseInfo))
                     Global.GetDataSourceControl().LinkSourceDictI2B.Remove(DatabaseItem.AllDatabaseInfo);
                 Global.GetDataSourceControl().LinkSourceDictI2B.Add(dialog.DatabaseInfo.AllDatabaseInfo, this);
-
+                //修改图标
+                if (dialog.DatabaseInfo.Type == DatabaseType.Hive)
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.Hive;
+                else if (dialog.DatabaseInfo.Type == DatabaseType.Oracle)
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.oracle;
+                else
+                { };
                 DatabaseItem = dialog.DatabaseInfo;
                 Global.GetDataSourceControl().SaveExternalData();
             }

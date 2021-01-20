@@ -389,7 +389,6 @@ namespace C2.Controls.Left
             tables = dao.GetTables(this.schemaComboBox.Text);
             tableColDict = dao.GetColNameByTables(tables);
             UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
-            this.optComboBox.Text = "表名";
             this.tableFilterTextBox.Text = "";
         }
 
@@ -407,13 +406,7 @@ namespace C2.Controls.Left
                 ReLayoutTableFrame(RelateTableButtons);
                 return;
             }
-            switch (this.optComboBox.Text.ToString())
-            {
-                case "表名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.LinkSourceName.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ));
-                    break;
-                case "字段名": ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Exists( c => c.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 )));
-                    break;
-            }
+            ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Exists(c => c.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) || t.LinkSourceName.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0));
 
         }
         #endregion

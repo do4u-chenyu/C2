@@ -31,6 +31,7 @@ namespace C2.Business.Schedule
         {
             SearchNewTriple(FindModelLeafNodeIds());//寻找当前模型的所有叶子节点的id,从叶子节点开始生成三元组列表
             TopDataOnlyTriple(); //将数据项type均为datasource的置顶
+            TopologicalSort(); //生成拓扑序列,每个三元组能够保证所有DE都已Done，从而使整个调度顺序进行
         }
 
         private List<int> FindModelLeafNodeIds()
@@ -103,6 +104,29 @@ namespace C2.Business.Schedule
             }
             tmpContainResultTriple.Reverse();//生成triple时从叶子往根，运行时从根往叶子
             this.currentModelTripleList = tmpDataTriple.Concat(tmpContainResultTriple).ToList();
+        }
+
+        private void TopologicalSort()
+        {
+            for (int i = 0; i < CurrentModelTripleList.Count; i++)
+                while (TopologicalOrder(i)); // 对每一个元素调整拓扑顺序,直到不存在拓扑冲突为止
+        }
+
+        private bool TopologicalOrder(int i)
+        {
+            foreach (var de in CurrentModelTripleList[i].DataElements)
+            {
+                int j = CurrentModelTripleList.FindIndex(me => me.ResultElement.ID == de.ID);
+                if (j > i) // 存在拓扑冲突:后续元素的输出是当前的输入元素,调换位置
+                {
+                    // Switch i 和 j 2个元素位置
+                    Triple tmp = CurrentModelTripleList[i];
+                    CurrentModelTripleList[i] = CurrentModelTripleList[j];
+                    CurrentModelTripleList[j] = tmp;
+                    return true;
+                }     
+            }
+            return false;
         }
 
         private List<int> FindBeforeNodeIds(int id)
