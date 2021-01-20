@@ -14,7 +14,7 @@ namespace C2.IAOLab.ApkToolStart
 
         private List<List<string>> result;
         private static ApkToolStart instance;
-        public static ApkToolStart GetInstance()
+        public static ApkToolStart GetInstance()  // 单例模式
         {
             if (instance == null)
                 instance = new ApkToolStart();
@@ -24,51 +24,49 @@ namespace C2.IAOLab.ApkToolStart
         {
             result = new List<List<string>>();
         }
-        public List<List<string>> ExtractApk(string apkpath, string jdkpath)
+        public List<List<string>> ExtractApk(string apkPath, string jdkPath)
         {
             string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
             if (Directory.Exists(tmpPath))
             {
                 // 有坑
-                Directory.Delete(tmpPath, true);
+                Utils.FileUtil.DeleteDirectory(tmpPath);
+                
             }
-            Directory.CreateDirectory(tmpPath);
+            Utils.FileUtil.CreateDirectory(tmpPath);
 
-            RunLinuxCommandApkTool(GetCmdCommand(apkpath, jdkpath));
+            RunLinuxCommandApkTool(GetCommand(apkPath, jdkPath));
 
-            DirectoryInfo dir = new DirectoryInfo(apkpath);
+            DirectoryInfo dir = new DirectoryInfo(apkPath);
             //检索表示当前目录的文件和子目录
-            FileSystemInfo[] fsinfos = dir.GetFileSystemInfos();
+            FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
             //遍历检索的文件和子目录
-            foreach (FileSystemInfo fsinfo in fsinfos)
+            foreach (FileSystemInfo fsInfo in fsInfos)
             {
-                result.Add(GetApkInfo(fsinfo.FullName, fsinfo.Name));
+                result.Add(GetApkInfo(fsInfo.FullName, fsInfo.Name));
                 //先不用生成result,读取需要的数据加载到内存，并控件预览框展示
             }
-            // 删除临时结果文件
-            DirectoryInfo di1 = new DirectoryInfo(tmpPath);
-            di1.Delete(true);
             return result;
+            
         }
         private List<string> GetApkInfo(string apkPath, string apkName)
         {
-            
-            apkName = apkName.Replace(".apk", "\t").Split('\t')[0];
+            apkName = apkName.Replace(".apk", String.Empty);
             
             string apkToolPath = Path.GetTempPath() + @"\ApkTool\" + apkName;
-            return  new List<string>() {GetIcon(apkToolPath),
-                                                      apkName,
-                                                      GetApkName(apkToolPath),
-                                                      GetPackage(apkToolPath),
-                                                      GetActivity(apkToolPath),
-                                                      GetApkSize(apkPath)+"M" };
+            return  new List<string>() { GetIcon(apkToolPath),
+                                         apkName,
+                                         GetApkName(apkToolPath),
+                                         GetPackageName(apkToolPath),
+                                         GetActivity(apkToolPath),
+                                         GetApkSize(apkPath) };
 
         }
-        private long GetApkSize(string filepath)
+        private String GetApkSize(string filepath)
         {
             using (FileStream fileStream = new FileStream(filepath, FileMode.Open, FileAccess.Read))
             {
-                return fileStream.Length/(1024 * 1024);
+                return fileStream.Length / (1024 * 1024) + "M";
             }
         }
         public void ExportResult()
@@ -78,22 +76,29 @@ namespace C2.IAOLab.ApkToolStart
             // python的save方法调用
         }
 
-        public List<string> GetCmdCommand(string apkpath, string jdkpath)
+        public List<string> GetCommand(string apkPath, string jdkPath)
         {
-            string setJdkPath = "set path = " + jdkpath + "bin;% path %";
             List<string> cmdList = new List<string>();
-            cmdList.Add(setJdkPath);
-            DirectoryInfo dir = new DirectoryInfo(apkpath);
+            //if (jdkpath != null) 
+            //{ 
+            //    string setJdkPath = "set path = " + jdkpath + "bin;% path %";
+            //    cmdList.Add(setJdkPath);
+            //}
+            DirectoryInfo dir = new DirectoryInfo(apkPath);
             //检索表示当前目录的文件和子目录
-            FileSystemInfo[] fsinfos = dir.GetFileSystemInfos();
+            FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
             //遍历检索的文件和子目录
-            foreach (FileSystemInfo fsinfo in fsinfos)
+            foreach (FileSystemInfo fsInfo in fsInfos)
             {
                 //实际目录//string apkToolPath = Application.StartupPath + @"\apktool_2.3.0.jar"; 
                 string apkToolPath = @"D:\work\C2\C2\ThirdPartyLibrary\ApkTool.2.3.0\apktool_2.3.0.jar";
-                string cmdApk = @"java -jar"+ apkToolPath+ " d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
+                //string cmdApk = @"java -jar "+ apkToolPath+ " d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
+                string cmdApk = String.Format(@"java -jar {0} d -f {1} -o {2}\ApkTool\{3}",
+                                                                                            apkToolPath, 
+                                                                                            fsInfo.FullName, 
+                                                                                            Path.GetTempPath(), 
+                                                                                            fsInfo.Name.Replace(".apk", String.Empty));
                 cmdList.Add(cmdApk);
-
             }
             return cmdList;
         }
@@ -105,70 +110,76 @@ namespace C2.IAOLab.ApkToolStart
             xDoc.Load(filePath);
             XmlNode rootNode = xDoc.SelectSingleNode("manifest");
             XmlNode a = rootNode.SelectSingleNode("//application");
-            string strValue = a.Attributes["android:icon"].Value.Split('/')[1];
+            string strValue;
+            if (a.Attributes["android:icon"].Value.Split('/') != null) 
+            { 
+                 strValue = a.Attributes["android:icon"].Value.Split('/')[1]; 
+            }
+            else
+            {
+                return "未找到图标";
+            }
             DirectoryInfo dir = new DirectoryInfo(iconPath);
             //检索表示当前目录的文件和子目录
             FileSystemInfo[] fsPathInfos = dir.GetFileSystemInfos();
             //遍历检索的文件和子目录
            
-            string relICon = " ";
+            string relIcon = "未找到图标";
             foreach (FileSystemInfo fsPath in fsPathInfos)
             {
                 long size = 0;
-                DirectoryInfo dir1 = new DirectoryInfo(fsPath.FullName.ToString());
+                DirectoryInfo curDir = new DirectoryInfo(fsPath.FullName);
                 //检索表示当前目录的文件和子目录
-                FileSystemInfo[] fsInfos = dir1.GetFileSystemInfos();
-                foreach (FileSystemInfo fsIinfo in fsInfos) 
+                FileSystemInfo[] fsInfos = curDir.GetFileSystemInfos();
+                foreach (FileSystemInfo fsInfo in fsInfos) 
                 {
-                    
-                    FileInfo f = new FileInfo(fsIinfo.FullName);
-                    if (fsIinfo.Name.Contains(strValue) && f.Length > size)
+                    FileInfo f = new FileInfo(fsInfo.FullName);
+                    if (fsInfo.Name.Contains(strValue) && f.Length > size)
                     {
                         size = f.Length;
-                        relICon = fsIinfo.FullName;
+                        relIcon = fsInfo.FullName;
                     }
                 }
             }
-            return relICon;
+            return relIcon;
         }
-        public string GetPackage(string filepath)
+        public string GetPackageName(string filePath)
         {
-            filepath += @"\AndroidManifest.xml";
+            filePath += @"\AndroidManifest.xml";
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(filepath);
+            xDoc.Load(filePath);
             XmlNode rootNode = xDoc.SelectSingleNode("manifest");
-            string strValue = rootNode.Attributes["package"].Value;
-            return strValue;
+            return rootNode.Attributes["package"].Value;
         }
-        public string GetApkName(string filepath)
+        public string GetApkName(string filePath)
         {
-            string filepath1 = filepath + @"\AndroidManifest.xml";
+            string mainfestFilePath = filePath + @"\AndroidManifest.xml";
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(filepath1);
+            xDoc.Load(mainfestFilePath);
             XmlNode rootNode0 = xDoc.SelectSingleNode("manifest");
             XmlNode a = rootNode0.SelectSingleNode("//application");
-            string strValue = a.Attributes["android:label"].Value;
-            if (strValue.Contains("@"))
+            string labelName = a.Attributes["android:label"].Value;
+            if (labelName.Contains("@"))
             {
-                strValue = strValue.Split('/')[1];
-                filepath += @"\res\values\strings.xml";
+                if (labelName.Split('/')[1] != null)
+                labelName = labelName.Split('/')[1];
+                filePath += @"\res\values\strings.xml";
                 XmlDocument xDoc1 = new XmlDocument();
-                xDoc1.Load(filepath);
+                xDoc1.Load(filePath);
                 XmlNode rootNode1 = xDoc1.SelectSingleNode("resources");
-                XmlNodeList namenodes = rootNode1.SelectNodes("string");
-                foreach (XmlNode namenode in namenodes)
+                XmlNodeList nameNodes = rootNode1.SelectNodes("string");
+                foreach (XmlNode nameNode in nameNodes)
                 {
-                    if ((namenode as XmlElement).GetAttribute("name") == strValue)
+                    if ((nameNode as XmlElement).GetAttribute("name") == labelName)
                     {
-                        return (namenode as XmlElement).InnerText;
+                        return (nameNode as XmlElement).InnerText;
                     }
-                    return " ";
                 }
-                return " ";
+                return "未找到软件名";
             }
             else
             {
-                return strValue;
+                return labelName;
             }
         }
         public string GetActivity(string filepath)

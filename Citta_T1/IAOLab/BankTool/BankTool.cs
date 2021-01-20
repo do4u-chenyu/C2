@@ -20,13 +20,6 @@ namespace C2.IAOLab.BankTool
         public string BankToolSearch(string input)
         {
             string location = GetBankTool(input);
-            //location = string.Join("", location.Split('{', '}', '"'));
-            //StringBuilder bankCardLocationStringBuilder = new StringBuilder();
-            //string bankCardLocation = input + "\t" + location + "\n";
-            //bankCardLocationStringBuilder.Append(bankCardLocation);
-            //string bankCardLocationString = bankCardLocationStringBuilder.ToString();
-            //return bankCardLocationString;
-            //location = string.Join("", location.Split('"'));
             return string.Format("{0}{1}{2}{3}", input, "\t", location, "\n");
         }
 
@@ -40,23 +33,18 @@ namespace C2.IAOLab.BankTool
             //内容类型
             request.ContentType = "application/x-www-form-urlencoded";
 
-            Stream writer;
+            Stream writer = null;
             try
             {
                 writer = request.GetRequestStream();//获取用于写入请求数据的Stream对象
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                writer = null;
+                if (writer == null)
+                    writer.Close(); 
+                return "网络连接失败: " + ex.Message;
             }
-            if (writer == null)
-            {
-                return "网络连接失败";
-            }
-            //将请求参数写入流
-            //writer.Write(payload, 0, payload.Length);
-            writer.Close();//关闭请求流
-                           // String strValue = "";//strValue为http响应所返回的字符流
+
             HttpWebResponse response;
             try
             {
@@ -75,16 +63,14 @@ namespace C2.IAOLab.BankTool
             postContent = string.Join("", postContent.Split('\r','\n','\t'));
             postContent = postContent.Replace("<br />", "\t");
             String[] postContentArry = postContent.Split('\t','?');
-            if (postContentArry.Length == 9)
-            {
-                string fullpostContent = postContentArry[1] + "\t" + postContentArry[3] + "\t" + postContentArry[5];
-                return fullpostContent;
-            }
-            else
-            {
-                string fullpostContent = "银行卡格式不正确";
-                return fullpostContent;
-            }
+
+            if (postContentArry.Length >= 9)
+                return String.Format("{0}\t{1}\t{2}", 
+                    postContentArry[1],  //  卡号
+                    postContentArry[3],  //  地址
+                    postContentArry[5]); //  blabla
+
+            return "银行卡格式不正确";
         }
     }
    

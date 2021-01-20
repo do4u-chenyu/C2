@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using log4net.Util;
 
 namespace C2.IAOLab.WifiMac
 {
@@ -19,15 +16,16 @@ namespace C2.IAOLab.WifiMac
         }
         public String MacLocate(String input)
         {
-            string location = GetInfo("http://218.94.117.234:8484/Test01/search.do",input,"mac");
-            location = string.Join("", location.Split('"'));            
-            return string.Format("{0}{1}{2}{3}", input, "\t", location, "\n");
+            string url = "http://218.94.117.234:8484/Test01/search.do";
+            string location = GetInfo(url, input,"mac");
+            location = location.Replace("\"", String.Empty);            
+            return string.Format("{0}\t{1}\n", input,location);
         }
-        public string GetInfo(string URL,string mac,string type)
+        public string GetInfo(string url,string mac,string type)
         {
 
             //创建一个HTTP请求  
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             //Post请求方式  
             request.Method = "POST";
             //内容类型
@@ -43,18 +41,16 @@ namespace C2.IAOLab.WifiMac
             request.ContentLength = payload.Length;
             //发送请求，获得请求流 
 
-            Stream writer;
+            Stream writer = null;
             try
             {
                 writer = request.GetRequestStream();//获取用于写入请求数据的Stream对象
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                writer = null;
-            }
-            if(writer == null)
-            {
-                return "网络连接失败";
+                if (writer == null)
+                    writer.Close();
+                return "网络连接失败: " + ex.Message;
             }
             //将请求参数写入流
             writer.Write(payload, 0, payload.Length);
@@ -79,16 +75,14 @@ namespace C2.IAOLab.WifiMac
             
             postContent = postContent.Replace("address", "地址").Replace("latitude", "纬度").Replace("longitude", "经度").Replace("state", "查询结果").Replace("ok", "成功").Replace("error", "失败").Replace("accuracy", "范围");
             string[] postContentArry = postContent.Split('{', '}', ',');
-            if (postContentArry.Length >5) 
-            {
-                string CHpostContent = postContentArry[2] + "," + postContentArry[6] + "\t" + postContentArry[3] + "米" + "\t" + postContentArry[5] + "\t" + postContentArry[1];
-                return CHpostContent;
-            }
-            else
-            {
-                string CHpostContent = "查询失败";
-                return CHpostContent;
-            }
+            if (postContentArry.Length > 5) 
+                return string.Format("{0},{1}\t{2}米\t{3}\t{4}", 
+                                        postContentArry[2], 
+                                        postContentArry[6], 
+                                        postContentArry[3], 
+                                        postContentArry[5], 
+                                        postContentArry[1]);
+            return "查询失败";
         }
 
     }
