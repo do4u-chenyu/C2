@@ -103,17 +103,20 @@ namespace C2.Dialogs
             DatabaseItem tmpDatabaseInfo = GenDatabaseInfoFormDialog();
 
             //如果新旧一致，直接返回了
-            if (DAOFactory.CreateDAO(tmpDatabaseInfo).TestConn())
-                HelpUtil.ShowMessageBox(HelpUtil.DbConnectSucceeded, "连接成功", MessageBoxIcon.Information);
-            else
-                HelpUtil.ShowMessageBox(HelpUtil.DbConnectFailed, "连接失败", MessageBoxIcon.Information);
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                if (DAOFactory.CreateDAO(tmpDatabaseInfo).TestConn())
+                    HelpUtil.ShowMessageBox(HelpUtil.DbConnectSucceeded, "连接成功", MessageBoxIcon.Information);
+                else
+                    HelpUtil.ShowMessageBox(HelpUtil.DbConnectFailed, "连接失败", MessageBoxIcon.Information);
+            }
+              
         }
 
         private bool InputHasEmpty()
         {
             if (String.Equals("Hive",this.databaseTypeComboBox.Text))
-                return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
-                        string.IsNullOrEmpty(this.userTextBox.Text) || string.IsNullOrEmpty(this.passwordTextBox.Text));
+                return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
 
             return (databaseTypeComboBox.SelectedIndex == -1) || string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||
