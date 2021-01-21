@@ -79,19 +79,16 @@ namespace C2.IAOLab.ApkToolStart
         public List<string> GetCommand(string apkPath, string jdkPath)
         {
             List<string> cmdList = new List<string>();
-            //if (jdkpath != null) 
-            //{ 
-            //    string setJdkPath = "set path = " + jdkpath + "bin;% path %";
-            //    cmdList.Add(setJdkPath);
-            //}
+            string setJdkPath = "set path = " + jdkPath + ";% path %";
+            cmdList.Add(setJdkPath);
             DirectoryInfo dir = new DirectoryInfo(apkPath);
             //检索表示当前目录的文件和子目录
             FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
             //遍历检索的文件和子目录
             foreach (FileSystemInfo fsInfo in fsInfos)
             {
-                string apkToolPath = Application.StartupPath + @"sbin\apktool_2.3.0.jar"; 
-                //string apkToolPath = @"D:\work\C2\C2\ThirdPartyLibrary\ApkTool.2.3.0\apktool_2.3.0.jar";
+                string apkToolPath = Application.StartupPath + @"\sbin\apktool_2.3.0.jar"; 
+                
                 //string cmdApk = @"java -jar "+ apkToolPath+ " d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
                 string cmdApk = String.Format(@"java -jar {0} d -f {1} -o {2}\ApkTool\{3}",
                                                                                             apkToolPath, 
