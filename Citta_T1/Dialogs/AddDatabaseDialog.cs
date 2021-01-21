@@ -24,6 +24,7 @@ namespace C2.Dialogs
         public AddDatabaseDialog(DatabaseItem databaseInfo=null, DatabaseDialogMode mode=DatabaseDialogMode.New, LinkButton linkButton=null)
         {
             InitializeComponent();
+            this.databaseTypeComboBox.SelectedIndex = 0;
             if (databaseInfo != null)
             {
                 DatabaseInfo = databaseInfo;
