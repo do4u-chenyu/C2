@@ -72,15 +72,19 @@ namespace C2.Dialogs.C2OperatorViews
 
         private void PreviewTableMenuItem_Click(object sender, EventArgs e)
         {
-            if (SelectDatabaseItem == null || SelectTable == null)
-                return;
-            IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
-            if (!dao.TestConn())
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                if (SelectDatabaseItem == null || SelectTable == null)
+                    return;
+                IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                dao.FillDGVWithTbContent(gridOutput, SelectTable, OpUtil.PreviewMaxNum);
             }
-            dao.FillDGVWithTbContent(gridOutput, SelectTable, OpUtil.PreviewMaxNum);
+                
         }
 
         private void CopyTableNameMenuItem_Click(object sender, EventArgs e)
