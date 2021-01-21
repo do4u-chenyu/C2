@@ -170,19 +170,23 @@ namespace C2.Dialogs.C2OperatorViews
                 return;
             List<Table> tables;
             IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
-            if (!dao.TestConn())  // 出现了SB错误, 提示信息文不对题
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                if (!dao.TestConn())  // 出现了SB错误, 提示信息文不对题
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                //刷新数据表
+                tables = dao.GetTables(this.comboBoxDataBase.Text);
+
+                this.tableListBox.Items.Clear();
+                if (tables == null || tables.Count <= 0)  // if (tables.)
+                    return;
+                foreach (Table table in tables)
+                    tableListBox.Items.Add(table.Name);
             }
-            //刷新数据表
-            tables = dao.GetTables(this.comboBoxDataBase.Text);
-          
-            this.tableListBox.Items.Clear();
-            if (tables == null || tables.Count <= 0)  // if (tables.)
-                return;
-            foreach (Table table in tables)
-                tableListBox.Items.Add(table.Name);
+               
         }
 
         private void ComboBoxConnection_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -205,13 +209,17 @@ namespace C2.Dialogs.C2OperatorViews
                 HelpUtil.ShowMessageBox(HelpUtil.DatabaseItemIsNull);
                 return;
             }
-            IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
-            if (!dao.TestConn())  // 出现了SB错误, 提示信息文不对题
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
+                if (!dao.TestConn())  // 出现了SB错误, 提示信息文不对题
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                dao.FillDGVWithSQL(this.gridOutput, this.textEditorControl1.Text);
             }
-            dao.FillDGVWithSQL(this.gridOutput, this.textEditorControl1.Text);
+               
         }
         protected override void SaveOption()
         {
