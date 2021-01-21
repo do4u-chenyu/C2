@@ -91,9 +91,8 @@ namespace C2.Dialogs
                     return false;
                 }
                 DatabaseInfo = tmpDatabaseInfo;
+                return base.OnOKButtonClick();
             }
-
-            return base.OnOKButtonClick();
         }
         private void TestButton_Click(object sender, EventArgs e)
         {
