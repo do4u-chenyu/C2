@@ -33,6 +33,7 @@ namespace C2.Database
             {
                 try
                 {
+                    
                     conn.Open();
                     return true;
                 }
@@ -80,11 +81,10 @@ namespace C2.Database
 
         private QueryResult ExecuteHiveQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
         {
-            /*
-             * pageIndex start from 0.
-             */
+            StringBuilder sb = new StringBuilder(1024 * 16);
             QueryResult result;
-            int returnNum = 0;
+            result.content = string.Empty;
+            result.returnNum = 0;
 
             string sqlPage = String.Format(@"select * from (select row_number() over () as rowno,tmp0.* from ({0}) tmp0) t where t.rowno  between {1} and {2}",
                                     sqlText,
@@ -92,22 +92,64 @@ namespace C2.Database
                                     pageSize * (pageIndex)+maxNum);          
             try
             {
-                // 去掉第一列，分页查询引入的
-                result.content = Query(sqlPage).Substring(Query(sqlPage).IndexOf('\t')+1);
+                using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
+                                                   this.User, this.Pass))
+                {
+                    var cursor = conn.GetCursor();
+                    cursor.Execute("use " + dataBaseName);
+                    foreach (var s in sqlPage.Split(';'))
+                    {
+                        if (!String.IsNullOrEmpty(s))
+                            cursor.Execute(s.TrimEnd(';'));
+                    }
+                    var list = cursor.FetchMany(int.MaxValue);
+                    // 分页查询去掉第一列索引
+
+                    if (list.Count > 0 && (list[0] as IDictionary<string, object>).Keys.Count > 0)
+                    {
+                        // 添加表头
+                        string headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
+                        if (headers.IndexOf(OpUtil.DefaultFieldSeparator) != -1
+                            && headers.IndexOf(OpUtil.DefaultFieldSeparator) + 1 < headers.Length)
+                        {
+                            headers = headers.Substring(headers.IndexOf(OpUtil.DefaultFieldSeparator) + 1);
+                            sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
+                        }
+
+                    }
+
+                    foreach (var item in list)
+                    {
+                        var dict = item as IDictionary<string, object>;
+                        string tmp = string.Empty;
+                        int i = 0;
+                        foreach (var key in dict.Keys)
+                        {
+                            if (i == 0)
+                            {
+                                i += 1;
+                                continue;
+                            }
+                            tmp += dict[key].ToString() + OpUtil.DefaultFieldSeparator;
+                        }
+                        sb.Append(tmp.TrimEnd(OpUtil.DefaultFieldSeparator)).Append(OpUtil.DefaultLineSeparator);
+                    }
+
+                }
+                result.content =sb.ToString();
                 result.returnNum = maxNum;
             }
             catch (Exception ex)
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                result.content = string.Empty;
-                result.returnNum = returnNum;
+
             }
             return result;
         }
 
 
 
-        public override string Query(string sql, bool header=true)
+        public override string Query(string sql, bool header = true)
         {
             StringBuilder sb = new StringBuilder(1024 * 16);
             try

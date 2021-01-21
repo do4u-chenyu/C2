@@ -106,6 +106,12 @@ namespace C2
             if (Global.VersionType.Equals(Global.GreenLevel))
                 Global.WorkspaceDirectory = Path.Combine(System.Environment.CurrentDirectory, Global.GreenPath);
 
+            //设置临时文件夹路径，默认操作系统临时文件夹路径。如果默认路径有访问权限，用程序的工作目录临时文件夹。
+            string tempDir = FileUtil.TryGetSysTempDir();
+            if (!string.IsNullOrEmpty(tempDir))
+                Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
+            else
+                Global.TempDirectory = Path.Combine(Global.WorkspaceDirectory, "FiberHomeIAOTemp");
         }
 
         private static void RunByVersion()

@@ -33,6 +33,7 @@ namespace C2.Dialogs.IAOLab
             this.tabPage1.Text = "IP转换";
             this.tabPage2.Text = "时间转换";
             this.tabPage1.Controls.Remove(this.sixTransform);
+            this.tip1.Location = this.tip0.Location;
 
             AddRadioButton("IP转整形", "整形转IP", tabPage1);
             AddRadioButton("真实时间转绝对秒", "绝对秒转真实时间", tabPage2);
@@ -42,11 +43,10 @@ namespace C2.Dialogs.IAOLab
                  this.inputAndResult.Location.X,
                  this.inputAndResult.Location.Y - 30
                 );
-            this.inputAndResult1.Location = this.inputAndResult.Location;
-            this.tip1.Location = this.tip0.Location;
             this.inputAndResult.Height += 35;
-            this.inputAndResult1.Height = this.inputAndResult.Height;
-            this.inputAndResult1.Width = this.inputAndResult.Width;
+            this.inputAndResult1.Location = this.inputAndResult.Location;
+            this.inputAndResult1.Size = this.inputAndResult.Size;
+
 
         }
 

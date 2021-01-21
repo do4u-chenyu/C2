@@ -206,6 +206,20 @@ namespace C2.Utils
             return root;
         }
 
+        public static string TryGetSysTempDir()
+        {
+            string tempDir;
+            try
+            {
+                tempDir = Path.GetTempPath();
+            }
+            catch (System.Security.SecurityException)
+            {
+                tempDir = string.Empty;
+            }
+            return tempDir;
+        }
+
         public static string[] TryListDirectory(string path)
         {
             try

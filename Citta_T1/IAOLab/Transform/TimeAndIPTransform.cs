@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Runtime;
-using System.Threading.Tasks;
+
 
 namespace C2.IAOLab.Transform
 {
@@ -151,11 +148,6 @@ namespace C2.IAOLab.Transform
             return (uint)(time - startTime).TotalSeconds;
         }
         #endregion
-        #region IP转换
-
-
-
-
-        #endregion
+       
     }
 }
