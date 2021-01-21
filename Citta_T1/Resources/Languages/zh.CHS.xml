@@ -432,9 +432,9 @@
 	<item name="ExploreDirectory">打开所在文件夹</item>
     <item name="CopyFilePathToClipboard">复制文件路径到剪切板</item>
     <item name="APK">非法APK分析</item>
-	<item name="BaseStation">基站查询</item>
-	<item name="Wifi">Wifi查询</item>
-	<item name="Card">银行卡查询</item>
+	<item name="BaseStation">(网)基站查询</item>
+	<item name="Wifi">(网)Wifi查询</item>
+	<item name="Card">(网)银行卡查询</item>
 	<item name="Tude">经纬度坐标系转换</item>
 	<item name="Ip">时间、IP转换</item>
 
