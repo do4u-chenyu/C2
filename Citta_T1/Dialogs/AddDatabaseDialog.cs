@@ -77,20 +77,22 @@ namespace C2.Dialogs
             //如果新旧一致，直接返回了
             if (DatabaseInfo != null && DatabaseInfo.AllDatabaseInfo.Equals(tmpDatabaseInfo.AllDatabaseInfo))
                 return base.OnOKButtonClick();
-
-            if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(tmpDatabaseInfo.AllDatabaseInfo))
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox("该连接已存在","已存在",MessageBoxIcon.Warning);
-                return false;
+                if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(tmpDatabaseInfo.AllDatabaseInfo))
+                {
+                    HelpUtil.ShowMessageBox("该连接已存在", "已存在", MessageBoxIcon.Warning);
+                    return false;
+                }
+
+                if (!DAOFactory.CreateDAO(tmpDatabaseInfo).TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return false;
+                }
+                DatabaseInfo = tmpDatabaseInfo;
             }
 
-            if (!DAOFactory.CreateDAO(tmpDatabaseInfo).TestConn())
-            {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return false;
-            }
-            DatabaseInfo = tmpDatabaseInfo;   
-            
             return base.OnOKButtonClick();
         }
         private void TestButton_Click(object sender, EventArgs e)
