@@ -380,16 +380,20 @@ namespace C2.Controls.Left
             //根据架构改变数据表
             List<Table> tables;
             Dictionary<string, List<string>> tableColDict;
-            IDAO dao = DAOFactory.CreateDAO(SelectLinkButton.DatabaseItem);
-            if (!dao.TestConn())
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                IDAO dao = DAOFactory.CreateDAO(SelectLinkButton.DatabaseItem);
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                tables = dao.GetTables(this.schemaComboBox.Text);
+                tableColDict = dao.GetColNameByTables(tables);
+                UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
+                this.tableFilterTextBox.Text = "";
             }
-            tables = dao.GetTables(this.schemaComboBox.Text);
-            tableColDict = dao.GetColNameByTables(tables);
-            UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
-            this.tableFilterTextBox.Text = "";
+               
         }
 
         private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)

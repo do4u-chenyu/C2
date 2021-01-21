@@ -129,7 +129,11 @@ namespace C2.Controls.Left
 
         private void ConnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LinkButtonSelected(this, new SelectLinkButtonEventArgs() { linkButton = this });
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                LinkButtonSelected(this, new SelectLinkButtonEventArgs() { linkButton = this });
+            }
+               
         }
     }
     public class SelectLinkButtonEventArgs : EventArgs

@@ -33,6 +33,7 @@ namespace C2.Database
             {
                 try
                 {
+                    
                     conn.Open();
                     return true;
                 }

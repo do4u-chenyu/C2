@@ -239,8 +239,12 @@ namespace C2.Controls.MapViews
         }
         void MenuRunningSQLOp_Click(object sender, EventArgs e)
         {
-            Global.GetDocumentForm().Save();
-            RunSQL();
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                Global.GetDocumentForm().Save();
+                RunSQL();
+            }
+               
         }
 
         void MenuOpPublic_Click(object sender, EventArgs e)
