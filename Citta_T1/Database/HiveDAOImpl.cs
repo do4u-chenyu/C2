@@ -93,7 +93,8 @@ namespace C2.Database
             try
             {
                 // 去掉第一列，分页查询引入的
-                result.content = Query(sqlPage).Substring(Query(sqlPage).IndexOf('\t')+1);
+                string tmpResult = Query(sqlPage);
+                result.content = tmpResult.Substring(tmpResult.IndexOf('\t') + 1);
                 result.returnNum = maxNum;
             }
             catch (Exception ex)
