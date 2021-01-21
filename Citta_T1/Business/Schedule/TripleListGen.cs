@@ -30,8 +30,7 @@ namespace C2.Business.Schedule
         public void GenerateList()
         {
             SearchNewTriple(FindModelLeafNodeIds());//寻找当前模型的所有叶子节点的id,从叶子节点开始生成三元组列表
-            TopDataOnlyTriple(); //将数据项type均为datasource的置顶
-            TopologicalSort(); //生成拓扑序列,每个三元组能够保证所有DE都已Done，从而使整个调度顺序进行
+            TopologicalSort(); //生成拓扑序列, 从而使整个调度顺序进行
         }
 
         private List<int> FindModelLeafNodeIds()
@@ -91,21 +90,6 @@ namespace C2.Business.Schedule
             SearchNewTriple(nextNeedSearchNodeIds);
         }
 
-        private void TopDataOnlyTriple()
-        {
-            List<Triple> tmpDataTriple = new List<Triple>();
-            List<Triple> tmpContainResultTriple = new List<Triple>();
-            foreach (Triple tmpTri in this.currentModelTripleList)
-            {
-                if (tmpTri.DataElements.Exists(me => me.Type == ElementType.Result))
-                    tmpContainResultTriple.Add(tmpTri);
-                else
-                    tmpDataTriple.Add(tmpTri);
-            }
-            tmpContainResultTriple.Reverse();//生成triple时从叶子往根，运行时从根往叶子
-            this.currentModelTripleList = tmpDataTriple.Concat(tmpContainResultTriple).ToList();
-        }
-
         private void TopologicalSort()
         {
             for (int i = 0; i < CurrentModelTripleList.Count; i++)
@@ -115,9 +99,9 @@ namespace C2.Business.Schedule
         private bool TopologicalOrder(int i)
         {
             foreach (var de in CurrentModelTripleList[i].DataElements)
-            {
-                int j = CurrentModelTripleList.FindIndex(me => me.ResultElement.ID == de.ID);
-                if (j > i) // 存在拓扑冲突:后续元素的输出是当前的输入元素,调换位置
+            {   // 从第i+1个元素开始寻找, 既i和它的后续元素是否存在拓扑冲突
+                int j = CurrentModelTripleList.FindIndex(i + 1, me => me.ResultElement.ID == de.ID);
+                if (j > i) // 存在拓扑冲突:后续元素的输出是i的输入元素,调换位置
                 {
                     // Switch i 和 j 2个元素位置
                     Triple tmp = CurrentModelTripleList[i];

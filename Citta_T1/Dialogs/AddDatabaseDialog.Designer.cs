@@ -125,6 +125,7 @@
             // 
             // databaseTypeComboBox
             // 
+            this.databaseTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.databaseTypeComboBox.FormattingEnabled = true;
             this.databaseTypeComboBox.Items.AddRange(new object[] {
             "Oracle",

@@ -3,6 +3,7 @@ using C2.Utils;
 using Hive2;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,11 @@ namespace C2.Database
         private string getTableContentSQL = @"use {0};select * from {1} limit {2}";
         //private string getColNameByTablesSQL;
         private string getColNameByTableSQL = "desc {0}";
-
-        public HiveDAOImpl(DatabaseItem dbi) : base(dbi) { }
+        private string dataBaseName;
+        public HiveDAOImpl(DatabaseItem dbi) : base(dbi)
+        {
+            this.dataBaseName = dbi.Schema;
+        }
         public HiveDAOImpl(DataItem di) : base(di) { }
         public HiveDAOImpl(string name, string user, string pass, string host, string sid, string service, string port) : base(name, user, pass, host, sid, service, port) { }
         public override bool TestConn()
@@ -29,6 +33,7 @@ namespace C2.Database
             {
                 try
                 {
+                    
                     conn.Open();
                     return true;
                 }
@@ -41,9 +46,110 @@ namespace C2.Database
         }
         public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
         {
-            throw new NotImplementedException(); // TODO
+            int pageIndex = 0;
+            bool returnHeader = true;
+            int totalRetuenNum = 0, subMaxNum;
+            using (StreamWriter sw = new StreamWriter(outPutPath, false))
+            {
+                while (maxReturnNum == -1 ? true : totalRetuenNum < maxReturnNum)
+                {
+                    if (pageSize * pageIndex < maxReturnNum && pageSize * (pageIndex + 1) > maxReturnNum)
+                        subMaxNum = maxReturnNum - pageIndex * pageSize;
+                    else
+                        subMaxNum = pageSize;
+                    QueryResult contentAndNum = ExecuteHiveQL_Page(sqlText, pageSize, pageIndex, subMaxNum, returnHeader);
+
+                    string result = contentAndNum.content;
+                    totalRetuenNum += contentAndNum.returnNum;
+
+                    if (returnHeader)
+                    {
+                        if (String.IsNullOrEmpty(result))
+                            return false;
+                        returnHeader = false;
+                    }
+                    if (String.IsNullOrEmpty(result))
+                        break;
+                    sw.Write(result);
+                    pageIndex += 1;
+                }
+                sw.Flush();
+            }
+            return true;
         }
-        public override string Query(string sql, bool header=true)
+
+
+        private QueryResult ExecuteHiveQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
+        {
+            StringBuilder sb = new StringBuilder(1024 * 16);
+            QueryResult result;
+            result.content = string.Empty;
+            result.returnNum = 0;
+
+            string sqlPage = String.Format(@"select * from (select row_number() over () as rowno,tmp0.* from ({0}) tmp0) t where t.rowno  between {1} and {2}",
+                                    sqlText,
+                                    pageSize * (pageIndex),
+                                    pageSize * (pageIndex)+maxNum);          
+            try
+            {
+                using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
+                                                   this.User, this.Pass))
+                {
+                    var cursor = conn.GetCursor();
+                    cursor.Execute("use " + dataBaseName);
+                    foreach (var s in sqlPage.Split(';'))
+                    {
+                        if (!String.IsNullOrEmpty(s))
+                            cursor.Execute(s.TrimEnd(';'));
+                    }
+                    var list = cursor.FetchMany(int.MaxValue);
+                    // 分页查询去掉第一列索引
+
+                    if (list.Count > 0 && (list[0] as IDictionary<string, object>).Keys.Count > 0)
+                    {
+                        // 添加表头
+                        string headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
+                        if (headers.IndexOf(OpUtil.DefaultFieldSeparator) != -1
+                            && headers.IndexOf(OpUtil.DefaultFieldSeparator) + 1 < headers.Length)
+                        {
+                            headers = headers.Substring(headers.IndexOf(OpUtil.DefaultFieldSeparator) + 1);
+                            sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
+                        }
+
+                    }
+
+                    foreach (var item in list)
+                    {
+                        var dict = item as IDictionary<string, object>;
+                        string tmp = string.Empty;
+                        int i = 0;
+                        foreach (var key in dict.Keys)
+                        {
+                            if (i == 0)
+                            {
+                                i += 1;
+                                continue;
+                            }
+                            tmp += dict[key].ToString() + OpUtil.DefaultFieldSeparator;
+                        }
+                        sb.Append(tmp.TrimEnd(OpUtil.DefaultFieldSeparator)).Append(OpUtil.DefaultLineSeparator);
+                    }
+
+                }
+                result.content =sb.ToString();
+                result.returnNum = maxNum;
+            }
+            catch (Exception ex)
+            {
+                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+
+            }
+            return result;
+        }
+
+
+
+        public override string Query(string sql, bool header = true)
         {
             StringBuilder sb = new StringBuilder(1024 * 16);
             try
@@ -53,10 +159,11 @@ namespace C2.Database
                 {
 
                     var cursor = conn.GetCursor();
+                    cursor.Execute("use " + dataBaseName);
                     foreach (var s in sql.Split(';'))
                     {
                         if (!String.IsNullOrEmpty(s))
-                            cursor.Execute(s);
+                            cursor.Execute(s.TrimEnd(';'));
                     }
                     var list = cursor.FetchMany(int.MaxValue);
                     if (header)
@@ -91,7 +198,7 @@ namespace C2.Database
         }
         public override string LimitSQL(string sql)
         {
-            return String.Format("{0} limit {1}", sql, OpUtil.PreviewMaxNum);
+            return String.Format("select * from ({0})tmp limit {1}", sql, OpUtil.PreviewMaxNum);
         }
         public override string GetTablesSQL(string schema)
         {

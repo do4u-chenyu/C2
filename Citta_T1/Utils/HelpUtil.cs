@@ -67,7 +67,7 @@ namespace C2.Utils
         public static string IPTransformHelpInfo = @"IP单次输入格式：23.125.23.8
 整型单次输入格式：394073864
 批量查询格式：多个IP或整型间用换行分隔，最大支持1000条";
-        public static string TimeTransformHelpInfo = @"日期单次输入格式：2021-3-13 23:34:53或2021/3/13 23:34:53，年份不要超过2101
+        public static string TimeTransformHelpInfo = @"日期单次输入格式：2021-3-13 23:34:53或2021/3/13 23:34:53，年份不要超过2105
 绝对秒输入格式：1615649693，秒数不要超过4,294,967,295
 批量查询格式：多个日期或绝对秒间用换行分隔，最大支持1000条";
         #endregion

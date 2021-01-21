@@ -61,7 +61,6 @@ namespace C2.Dialogs.IAOLab
                         {
                             tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(baseStation));
                             inputAndResult.Text = tmpResult.ToString();
-
                         }
                     }
                     break;

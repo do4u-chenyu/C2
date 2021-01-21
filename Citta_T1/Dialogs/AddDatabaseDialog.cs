@@ -24,6 +24,7 @@ namespace C2.Dialogs
         public AddDatabaseDialog(DatabaseItem databaseInfo=null, DatabaseDialogMode mode=DatabaseDialogMode.New, LinkButton linkButton=null)
         {
             InitializeComponent();
+            this.databaseTypeComboBox.SelectedIndex = 0;
             if (databaseInfo != null)
             {
                 DatabaseInfo = databaseInfo;
@@ -76,21 +77,22 @@ namespace C2.Dialogs
             //如果新旧一致，直接返回了
             if (DatabaseInfo != null && DatabaseInfo.AllDatabaseInfo.Equals(tmpDatabaseInfo.AllDatabaseInfo))
                 return base.OnOKButtonClick();
-
-            if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(tmpDatabaseInfo.AllDatabaseInfo))
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox("该连接已存在","已存在",MessageBoxIcon.Warning);
-                return false;
-            }
+                if (Global.GetDataSourceControl().LinkSourceDictI2B.ContainsKey(tmpDatabaseInfo.AllDatabaseInfo))
+                {
+                    HelpUtil.ShowMessageBox("该连接已存在", "已存在", MessageBoxIcon.Warning);
+                    return false;
+                }
 
-            if (!DAOFactory.CreateDAO(tmpDatabaseInfo).TestConn())
-            {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return false;
+                if (!DAOFactory.CreateDAO(tmpDatabaseInfo).TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return false;
+                }
+                DatabaseInfo = tmpDatabaseInfo;
+                return base.OnOKButtonClick();
             }
-            DatabaseInfo = tmpDatabaseInfo;   
-            
-            return base.OnOKButtonClick();
         }
         private void TestButton_Click(object sender, EventArgs e)
         {
@@ -102,17 +104,20 @@ namespace C2.Dialogs
             DatabaseItem tmpDatabaseInfo = GenDatabaseInfoFormDialog();
 
             //如果新旧一致，直接返回了
-            if (DAOFactory.CreateDAO(tmpDatabaseInfo).TestConn())
-                HelpUtil.ShowMessageBox(HelpUtil.DbConnectSucceeded, "连接成功", MessageBoxIcon.Information);
-            else
-                HelpUtil.ShowMessageBox(HelpUtil.DbConnectFailed, "连接失败", MessageBoxIcon.Information);
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                if (DAOFactory.CreateDAO(tmpDatabaseInfo).TestConn())
+                    HelpUtil.ShowMessageBox(HelpUtil.DbConnectSucceeded, "连接成功", MessageBoxIcon.Information);
+                else
+                    HelpUtil.ShowMessageBox(HelpUtil.DbConnectFailed, "连接失败", MessageBoxIcon.Information);
+            }
+              
         }
 
         private bool InputHasEmpty()
         {
             if (String.Equals("Hive",this.databaseTypeComboBox.Text))
-                return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
-                        string.IsNullOrEmpty(this.userTextBox.Text) || string.IsNullOrEmpty(this.passwordTextBox.Text));
+                return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
 
             return (databaseTypeComboBox.SelectedIndex == -1) || string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||

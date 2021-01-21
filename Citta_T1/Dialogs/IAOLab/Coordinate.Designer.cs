@@ -81,12 +81,12 @@
             // 
             // inputAndResult
             // 
-            this.inputAndResult.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.inputAndResult.Location = new System.Drawing.Point(7, 127);
+            this.inputAndResult.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.inputAndResult.Location = new System.Drawing.Point(-4, 127);
             this.inputAndResult.Margin = new System.Windows.Forms.Padding(2);
             this.inputAndResult.Name = "inputAndResult";
             this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult.Size = new System.Drawing.Size(594, 188);
+            this.inputAndResult.Size = new System.Drawing.Size(625, 196);
             this.inputAndResult.TabIndex = 11;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
@@ -210,12 +210,12 @@
             // 
             // inputAndResult1
             // 
-            this.inputAndResult1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.inputAndResult1.Location = new System.Drawing.Point(5, 67);
+            this.inputAndResult1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.inputAndResult1.Location = new System.Drawing.Point(-4, 67);
             this.inputAndResult1.Margin = new System.Windows.Forms.Padding(2);
             this.inputAndResult1.Name = "inputAndResult1";
             this.inputAndResult1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult1.Size = new System.Drawing.Size(605, 238);
+            this.inputAndResult1.Size = new System.Drawing.Size(625, 256);
             this.inputAndResult1.TabIndex = 1;
             this.inputAndResult1.Text = "";
             this.inputAndResult1.WordWrap = false;
@@ -287,11 +287,11 @@
         private System.Windows.Forms.RadioButton gcj_bd;
         private System.Windows.Forms.RadioButton bd_wgs;
         private System.Windows.Forms.Label tip0;
-        private System.Windows.Forms.RichTextBox inputAndResult;
         private System.Windows.Forms.Label tip1;
         private System.Windows.Forms.RichTextBox inputAndResult1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button search;
+        private System.Windows.Forms.RichTextBox inputAndResult;
     }
 }
