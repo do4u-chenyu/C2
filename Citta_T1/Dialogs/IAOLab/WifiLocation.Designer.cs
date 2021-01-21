@@ -35,6 +35,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.tipLable = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,17 +112,26 @@
             this.tipLable.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tipLable.Location = new System.Drawing.Point(19, 47);
             this.tipLable.Name = "tipLable";
-            this.tipLable.Size = new System.Drawing.Size(534, 30);
+            this.tipLable.Size = new System.Drawing.Size(542, 30);
             this.tipLable.TabIndex = 7;
-            this.tipLable.Text = "单次输入格式：04a1518006c2 或04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最大" +
-    "支持1000条";
+            this.tipLable.Text = "单次输入格式：04a1518006c2 或 04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最" +
+    "大支持1000条";
             this.tipLable.Click += new System.EventHandler(this.tipLable_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(411, 63);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(155, 25);
+            this.textBox1.TabIndex = 8;
             // 
             // WifiLocation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(602, 341);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.tipLable);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
@@ -147,5 +157,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label tipLable;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

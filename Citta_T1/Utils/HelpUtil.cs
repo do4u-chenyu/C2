@@ -56,7 +56,7 @@ namespace C2.Utils
        
 
         #region IAO基站批量查询
-        public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01
+        public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01 或 46001590a8089407 或 37b900018bd0
 批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
         public static string BankToolHelpInfo = @"单次输入格式：6210857100018896476
 批量查询格式：多个银行卡号间用换行分隔，最大支持1000条";

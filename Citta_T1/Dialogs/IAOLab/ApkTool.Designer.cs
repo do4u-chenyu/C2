@@ -46,11 +46,12 @@
             this.mainFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipLable = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.导出到ExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -109,7 +110,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "关闭";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // jdkPathTextBox
             // 
@@ -234,19 +235,9 @@
             this.tipLable.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tipLable.Location = new System.Drawing.Point(28, 94);
             this.tipLable.Name = "tipLable";
-            this.tipLable.Size = new System.Drawing.Size(394, 15);
+            this.tipLable.Size = new System.Drawing.Size(466, 15);
             this.tipLable.TabIndex = 12;
-            this.tipLable.Text = "jdk路径格式：C:\\Program Files\\Java\\jdk-13.0.1\\bin";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label3.Location = new System.Drawing.Point(428, 94);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(211, 15);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "APK分析用时较长，请耐心等待";
+            this.tipLable.Text = "jdk路径格式：C:\\Program Files\\Java\\jdk-13.0.1\\bin\\java.exe";
             // 
             // contextMenuStrip1
             // 
@@ -263,6 +254,17 @@
             this.导出到ExcelToolStripMenuItem.Text = "导出到Excel";
             this.导出到ExcelToolStripMenuItem.Click += new System.EventHandler(this.ExportToExcelToolStripMenuItem_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(655, 88);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(210, 25);
+            this.textBox1.TabIndex = 14;
+            // 
             // ApkTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -270,7 +272,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(895, 450);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.tipLable);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox2);
@@ -307,7 +309,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label tipLable;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 导出到ExcelToolStripMenuItem;
@@ -318,5 +319,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn packageName;
         private System.Windows.Forms.DataGridViewTextBoxColumn mainFunction;
         private System.Windows.Forms.DataGridViewTextBoxColumn size;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
