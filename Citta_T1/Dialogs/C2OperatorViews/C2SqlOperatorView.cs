@@ -134,22 +134,26 @@ namespace C2.Dialogs.C2OperatorViews
         {
             if (SelectDatabaseItem == null)
                 return;
-            List<string> users;
-            IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem); 
-            //连接数据库
-            if (!dao.TestConn())
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                List<string> users;
+                IDAO dao = DAOFactory.CreateDAO(SelectDatabaseItem);
+                //连接数据库
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                //刷新架构
+                users = dao.GetUsers();
+
+                this.comboBoxDataBase.Items.Clear();
+                if (users == null || users.Count == 0)
+                    return;
+                if (databaseItems != null && databaseItems.Count > 0)
+                    UpdateFrameCombo(users, SelectDatabaseItem.User, dao.DefaultSchema());
             }
-            //刷新架构
-            users = dao.GetUsers();
-          
-            this.comboBoxDataBase.Items.Clear();
-            if (users == null || users.Count == 0)
-                return;
-            if (databaseItems != null && databaseItems.Count > 0)
-                UpdateFrameCombo(users, SelectDatabaseItem.User, dao.DefaultSchema());
+
         }
         private void UpdateFrameCombo(List<string> users, string loginUser, string defaultSchema)
         {
