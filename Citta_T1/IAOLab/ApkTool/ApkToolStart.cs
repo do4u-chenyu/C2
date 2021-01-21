@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Windows.Forms;
+using C2.Utils;
 
 namespace C2.IAOLab.ApkToolStart
 {
@@ -30,7 +31,7 @@ namespace C2.IAOLab.ApkToolStart
             if (Directory.Exists(tmpPath))
             {
                 // 有坑
-                Utils.FileUtil.DeleteDirectory(tmpPath);
+                FileUtil.DeleteDirectory(tmpPath);
                 
             }
             Utils.FileUtil.CreateDirectory(tmpPath);
@@ -49,17 +50,25 @@ namespace C2.IAOLab.ApkToolStart
             return result;
             
         }
-        private List<string> GetApkInfo(string apkPath, string apkName)
+        private List<string> GetApkInfo(string apkPath, string fileName)
         {
-            apkName = apkName.Replace(".apk", String.Empty);
-            
+            string apkName = fileName.Replace(".apk", String.Empty);
             string apkToolPath = Path.GetTempPath() + @"\ApkTool\" + apkName;
-            return  new List<string>() { GetIcon(apkToolPath),
-                                         apkName,
+            if (ExploreDirectory(apkToolPath) == true)
+            {
+                return new List<string>() { GetIcon(apkToolPath),
+                                         fileName,
                                          GetApkName(apkToolPath),
                                          GetPackageName(apkToolPath),
                                          GetActivity(apkToolPath),
                                          GetApkSize(apkPath) };
+            }
+            else
+            {
+                MessageBox.Show(apkName+"解析失败");
+                return null;
+            }
+            
 
         }
         private String GetApkSize(string filepath)
@@ -69,11 +78,19 @@ namespace C2.IAOLab.ApkToolStart
                 return fileStream.Length / (1024 * 1024) + "M";
             }
         }
-        public void ExportResult()
-        {
+        private static bool ExploreDirectory(string fullFilePath)
+        {//判断文件的存在
+            if (File.Exists(fullFilePath))
+            {
+                return true;
+            }
+            else
+            {
+                //不存在文件
+                return false;
 
-            // 右键导出，生成结果文件到excel
-            // python的save方法调用
+            }
+
         }
 
         public List<string> GetCommand(string apkPath, string jdkPath)
@@ -88,7 +105,6 @@ namespace C2.IAOLab.ApkToolStart
             foreach (FileSystemInfo fsInfo in fsInfos)
             {
                 string apkToolPath = Application.StartupPath + @"\sbin\apktool_2.3.0.jar"; 
-                
                 //string cmdApk = @"java -jar "+ apkToolPath+ " d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
                 string cmdApk = String.Format(@"java -jar {0} d -f {1} -o {2}\ApkTool\{3}",
                                                                                             apkToolPath, 
@@ -104,97 +120,125 @@ namespace C2.IAOLab.ApkToolStart
             string iconPath = filePath + @"\res";
             filePath += @"\AndroidManifest.xml";
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(filePath);
-            XmlNode rootNode = xDoc.SelectSingleNode("manifest");
-            XmlNode a = rootNode.SelectSingleNode("//application");
-            string strValue;
-            if (a.Attributes["android:icon"].Value.Split('/') != null) 
-            { 
-                 strValue = a.Attributes["android:icon"].Value.Split('/')[1]; 
+            try
+            {
+                xDoc.Load(filePath);
+                XmlNode rootNode = xDoc.SelectSingleNode("manifest");
+                XmlNode a = rootNode.SelectSingleNode("//application");
+                string strValue;
+                if (a.Attributes["android:icon"].Value.Split('/') != null)
+                {
+                    strValue = a.Attributes["android:icon"].Value.Split('/')[1];
+                }
+                else
+                {
+                    return "未找到图标";
+                }
+                DirectoryInfo dir = new DirectoryInfo(iconPath);
+                //检索表示当前目录的文件和子目录
+                FileSystemInfo[] fsPathInfos = dir.GetFileSystemInfos();
+                //遍历检索的文件和子目录
+
+                string relIcon = "未找到图标";
+                foreach (FileSystemInfo fsPath in fsPathInfos)
+                {
+                    long size = 0;
+                    DirectoryInfo curDir = new DirectoryInfo(fsPath.FullName);
+                    //检索表示当前目录的文件和子目录
+                    FileSystemInfo[] fsInfos = curDir.GetFileSystemInfos();
+                    foreach (FileSystemInfo fsInfo in fsInfos)
+                    {
+                        FileInfo f = new FileInfo(fsInfo.FullName);
+                        if (fsInfo.Name.Contains(strValue) && f.Length > size)
+                        {
+                            size = f.Length;
+                            relIcon = fsInfo.FullName;
+                        }
+                    }
+                }
+                return relIcon;
             }
-            else
+            catch
             {
                 return "未找到图标";
             }
-            DirectoryInfo dir = new DirectoryInfo(iconPath);
-            //检索表示当前目录的文件和子目录
-            FileSystemInfo[] fsPathInfos = dir.GetFileSystemInfos();
-            //遍历检索的文件和子目录
-           
-            string relIcon = "未找到图标";
-            foreach (FileSystemInfo fsPath in fsPathInfos)
-            {
-                long size = 0;
-                DirectoryInfo curDir = new DirectoryInfo(fsPath.FullName);
-                //检索表示当前目录的文件和子目录
-                FileSystemInfo[] fsInfos = curDir.GetFileSystemInfos();
-                foreach (FileSystemInfo fsInfo in fsInfos) 
-                {
-                    FileInfo f = new FileInfo(fsInfo.FullName);
-                    if (fsInfo.Name.Contains(strValue) && f.Length > size)
-                    {
-                        size = f.Length;
-                        relIcon = fsInfo.FullName;
-                    }
-                }
-            }
-            return relIcon;
         }
         public string GetPackageName(string filePath)
         {
             filePath += @"\AndroidManifest.xml";
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(filePath);
-            XmlNode rootNode = xDoc.SelectSingleNode("manifest");
-            return rootNode.Attributes["package"].Value;
+            try
+            {
+                xDoc.Load(filePath);
+                XmlNode rootNode = xDoc.SelectSingleNode("manifest");
+                return rootNode.Attributes["package"].Value;
+            }
+            catch
+            {
+                return "未找到包名";
+            }
         }
         public string GetApkName(string filePath)
         {
             string mainfestFilePath = filePath + @"\AndroidManifest.xml";
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(mainfestFilePath);
-            XmlNode rootNode0 = xDoc.SelectSingleNode("manifest");
-            XmlNode a = rootNode0.SelectSingleNode("//application");
-            string labelName = a.Attributes["android:label"].Value;
-            if (labelName.Contains("@"))
+            try
             {
-                if (labelName.Split('/')[1] != null)
-                labelName = labelName.Split('/')[1];
-                filePath += @"\res\values\strings.xml";
-                XmlDocument xDoc1 = new XmlDocument();
-                xDoc1.Load(filePath);
-                XmlNode rootNode1 = xDoc1.SelectSingleNode("resources");
-                XmlNodeList nameNodes = rootNode1.SelectNodes("string");
-                foreach (XmlNode nameNode in nameNodes)
+                xDoc.Load(mainfestFilePath);
+                XmlNode rootNode0 = xDoc.SelectSingleNode("manifest");
+                XmlNode a = rootNode0.SelectSingleNode("//application");
+                string labelName = a.Attributes["android:label"].Value;
+                if (labelName.Contains("@"))
                 {
-                    if ((nameNode as XmlElement).GetAttribute("name") == labelName)
+                    if (labelName.Split('/')[1] != null)
+                        labelName = labelName.Split('/')[1];
+                    filePath += @"\res\values\strings.xml";
+                    XmlDocument xDoc1 = new XmlDocument();
+                    xDoc1.Load(filePath);
+                    XmlNode rootNode1 = xDoc1.SelectSingleNode("resources");
+                    XmlNodeList nameNodes = rootNode1.SelectNodes("string");
+                    foreach (XmlNode nameNode in nameNodes)
                     {
-                        return (nameNode as XmlElement).InnerText;
+                        if ((nameNode as XmlElement).GetAttribute("name") == labelName)
+                        {
+                            return (nameNode as XmlElement).InnerText;
+                        }
                     }
+                    return "未找到软件名";
                 }
-                return "未找到软件名";
+                else
+                {
+                    return labelName;
+                }
             }
-            else
+            catch
             {
-                return labelName;
+                return "未找到软件名";
             }
         }
         public string GetActivity(string filepath)
         {
             filepath += @"\AndroidManifest.xml";
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(filepath);
-            XmlNode rootNode = xDoc.SelectSingleNode("manifest");
-            XmlNodeList a = rootNode.SelectNodes("//activity");
-            foreach (XmlNode node in a)
+            try
             {
-                if (node.Attributes["android:name"].Value.Contains("Activity"))
+                xDoc.Load(filepath);
+                XmlNode rootNode = xDoc.SelectSingleNode("manifest");
+                XmlNodeList a = rootNode.SelectNodes("//activity");
+                foreach (XmlNode node in a)
                 {
-                    return node.Attributes["android:name"].Value;
+                    if (node.Attributes["android:name"].Value.Contains("Activity"))
+                    {
+                        return node.Attributes["android:name"].Value;
+                    }
+
                 }
-                
+                return "未找到主函数";
             }
-            return "未找到主函数";
+            catch
+            {
+                return "未找到主函数";
+            }
         }
         public string RunLinuxCommandApkTool(List<string> cmds)
         {

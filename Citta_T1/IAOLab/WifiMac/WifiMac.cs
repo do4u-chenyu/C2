@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using log4net.Util;
 
 namespace C2.IAOLab.WifiMac
 {
