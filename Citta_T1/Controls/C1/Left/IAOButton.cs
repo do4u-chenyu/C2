@@ -33,19 +33,19 @@ namespace C2.Controls.Left
                 case "BaseStation":
                     this.txtButton.Text = Lang._("BaseStation");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BaseStation;
-                    toolTip1.SetToolTip(this.rightPictureBox, "根据基站号进行定位，获取基站的经纬度，范围，和详细地址");
+                    toolTip1.SetToolTip(this.rightPictureBox, "根据基站号进行定位，获取基站的经纬度，范围，和详细地址,需要网络");
                     BaseStationForm();
                     break;
                 case "Wifi":
                     this.txtButton.Text = Lang._("Wifi");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
-                    toolTip1.SetToolTip(this.rightPictureBox, "根据网络的MAC地址进行定位，获取该MAC地址的经纬度，范围，和详细地址");
+                    toolTip1.SetToolTip(this.rightPictureBox, "根据网络的MAC地址进行定位，获取该MAC地址的经纬度，范围，和详细地址,需要网络");
                     baseForm0 = new WifiLocation();
                     break;
                 case "Card":
                     this.txtButton.Text = Lang._("Card");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
-                    toolTip1.SetToolTip(this.rightPictureBox, "获取银行卡号的卡种，开户行和其他信息");
+                    toolTip1.SetToolTip(this.rightPictureBox, "获取银行卡号的卡种，开户行和其他信息,需要网络");
                     BankToolForm();
                     break;
                 case "Tude":
