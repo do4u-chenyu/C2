@@ -46,6 +46,7 @@ namespace C2.Controls.Left
                 case "Tude":
                     this.txtButton.Text = Lang._("Tude");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Tude;
+                    toolTip1.SetToolTip(this.rightPictureBox, "经纬度坐标系转换;计算两经纬度坐标之间的距离");
                     GPSTransformForm();
                     break;
                 case "Ip":
