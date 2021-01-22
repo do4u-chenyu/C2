@@ -279,8 +279,6 @@ namespace C2.Controls.Left
         {               
             SelectLinkButton = new LinkButton(dbinfo);
             GenLinkButton(SelectLinkButton);
-            if (updateFrameAndTables)
-                ConnectDatabase(dbinfo);//连接一次数据库，刷新架构及数据表
             SaveExternalData();
         }
         public void GenLinkButton(LinkButton linkButton)
@@ -449,7 +447,9 @@ namespace C2.Controls.Left
             //刷新数据表
             List<Table> tables = dao.GetTables(this.schemaComboBox.Text);
             Dictionary<string, List<string>> tableColDict = dao.GetColNameByTables(tables);
+            this.schemaComboBox.SelectedIndexChanged -= SchemaComboBox_SelectedIndexChanged;
             UpdateTables(tables, dbi, tableColDict);
+            this.schemaComboBox.SelectedIndexChanged += SchemaComboBox_SelectedIndexChanged;
         }
 
         private void UpdateFrameCombo(List<string> users, string loginUser, string defaultSchema)
