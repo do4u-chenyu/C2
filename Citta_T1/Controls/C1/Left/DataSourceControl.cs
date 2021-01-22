@@ -72,7 +72,7 @@ namespace C2.Controls.Left
             DataSourceDictI2B = new Dictionary<string, DataButton>();
             LinkSourceDictI2B = new Dictionary<string, LinkButton>();
             startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            linkPoint = new Point(ButtonLeftX - 11, -ButtonGapHeight);
+            linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             _RelateTableButtons = new List<TableButton>();
         }
@@ -302,7 +302,9 @@ namespace C2.Controls.Left
         {
             if (this.linkPanel.Controls.Count > 0)
                 linkPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
-            linkPoint.Y += ButtonGapHeight;
+            else
+                linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
+            linkPoint.Y += ButtonGapHeight;           
             lb.Location = linkPoint;
         }
         #endregion

@@ -153,7 +153,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableFilterTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tableFilterTextBox.Location = new System.Drawing.Point(10, 285);
+            this.tableFilterTextBox.Location = new System.Drawing.Point(10, 289);
             this.tableFilterTextBox.Name = "tableFilterTextBox";
             this.tableFilterTextBox.Size = new System.Drawing.Size(159, 23);
             this.tableFilterTextBox.TabIndex = 7;
@@ -177,7 +177,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.schemaComboBox.FormattingEnabled = true;
-            this.schemaComboBox.Location = new System.Drawing.Point(10, 219);
+            this.schemaComboBox.Location = new System.Drawing.Point(10, 240);
             this.schemaComboBox.Name = "schemaComboBox";
             this.schemaComboBox.Size = new System.Drawing.Size(159, 20);
             this.schemaComboBox.TabIndex = 5;
@@ -188,14 +188,14 @@
             this.linkPanel.AutoScroll = true;
             this.linkPanel.Location = new System.Drawing.Point(0, 59);
             this.linkPanel.Name = "linkPanel";
-            this.linkPanel.Size = new System.Drawing.Size(178, 131);
+            this.linkPanel.Size = new System.Drawing.Size(178, 149);
             this.linkPanel.TabIndex = 4;
             // 
             // dataTableLabel
             // 
             this.dataTableLabel.AutoSize = true;
             this.dataTableLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataTableLabel.Location = new System.Drawing.Point(3, 254);
+            this.dataTableLabel.Location = new System.Drawing.Point(3, 267);
             this.dataTableLabel.Name = "dataTableLabel";
             this.dataTableLabel.Size = new System.Drawing.Size(48, 19);
             this.dataTableLabel.TabIndex = 3;
@@ -205,7 +205,7 @@
             // 
             this.schemaLabel.AutoSize = true;
             this.schemaLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.schemaLabel.Location = new System.Drawing.Point(3, 193);
+            this.schemaLabel.Location = new System.Drawing.Point(3, 218);
             this.schemaLabel.Name = "schemaLabel";
             this.schemaLabel.Size = new System.Drawing.Size(35, 19);
             this.schemaLabel.TabIndex = 2;
