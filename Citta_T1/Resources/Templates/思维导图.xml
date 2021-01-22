@@ -31,7 +31,7 @@
         <picture_thumb_size>100, 100</picture_thumb_size>
       </style>
       <nodes>
-        <node id="1" text="XXX案件分析" x="454" y="364" width="216" height="66" text_b="12, 12, 192, 42">
+        <node id="2" text="XXX案件分析" x="454" y="364" width="216" height="66" text_b="12, 12, 192, 42">
           <style>
             <back_color>Teal</back_color>
             <fore_color>White</fore_color>
@@ -41,7 +41,7 @@
             <font font_family="微软雅黑" size="21.75" style="Bold" />
           </style>
           <nodes>
-            <node id="2" text="时间" x="288" y="302" width="86" height="39" text_b="26, 2, 58, 35">
+            <node id="3" text="时间" x="288" y="302" width="86" height="39" text_b="26, 2, 58, 35">
               <style>
                 <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
@@ -52,7 +52,7 @@
                 </widget>
               </widgets>
             </node>
-            <node id="3" text="地点" x="288" y="378" width="86" height="39" text_b="26, 2, 58, 35">
+            <node id="4" text="地点" x="288" y="378" width="86" height="39" text_b="26, 2, 58, 35">
               <style>
                 <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
@@ -63,7 +63,7 @@
                 </widget>
               </widgets>
             </node>
-            <node id="4" text="人物" x="288" y="454" width="86" height="39" text_b="26, 2, 58, 35">
+            <node id="5" text="人物" x="288" y="454" width="86" height="39" text_b="26, 2, 58, 35">
               <style>
                 <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
@@ -74,7 +74,7 @@
                 </widget>
               </widgets>
             </node>
-            <node id="5" text="事件" x="750" y="337" width="86" height="39" text_b="26, 2, 58, 35">
+            <node id="6" text="事件" x="750" y="337" width="86" height="39" text_b="26, 2, 58, 35">
               <style>
                 <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
@@ -85,7 +85,7 @@
                 </widget>
               </widgets>
             </node>
-            <node id="6" text="原由" x="750" y="418" width="86" height="39" text_b="26, 2, 58, 35">
+            <node id="7" text="原由" x="750" y="418" width="86" height="39" text_b="26, 2, 58, 35">
               <style>
                 <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
@@ -98,11 +98,11 @@
             </node>
           </nodes>
           <lines>
-            <line target="2" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="288, 302, 86, 39" />
-            <line target="3" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="288, 378, 86, 39" />
-            <line target="4" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="288, 454, 86, 39" />
-            <line target="5" begin_side="Right" end_side="Left" begin_rect="454, 364, 216, 66" end_rect="750, 337, 86, 39" />
-            <line target="6" begin_side="Right" end_side="Left" begin_rect="454, 364, 216, 66" end_rect="750, 418, 86, 39" />
+            <line target="3" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="288, 302, 86, 39" />
+            <line target="4" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="288, 378, 86, 39" />
+            <line target="5" begin_side="Left" end_side="Right" begin_rect="454, 364, 216, 66" end_rect="288, 454, 86, 39" />
+            <line target="6" begin_side="Right" end_side="Left" begin_rect="454, 364, 216, 66" end_rect="750, 337, 86, 39" />
+            <line target="7" begin_side="Right" end_side="Left" begin_rect="454, 364, 216, 66" end_rect="750, 418, 86, 39" />
           </lines>
         </node>
       </nodes>
