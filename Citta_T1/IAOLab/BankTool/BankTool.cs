@@ -21,7 +21,7 @@ namespace C2.IAOLab.BankTool
 
         public string GetBankTool(string bankCard)
         {
-            string strURL = "http://www.teldata2018.com/cha/kapost.php?ka="+ bankCard;
+            string strURL = "http://www.teldata2018.com/cha/kapost.php?ka="+ bankCard.Replace(" ", string.Empty);
             //创建一个HTTP请求  
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strURL);
             //Post请求方式  

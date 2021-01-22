@@ -35,18 +35,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.tipLable = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // inputAndResult
             // 
             this.inputAndResult.BackColor = System.Drawing.Color.White;
-            this.inputAndResult.Location = new System.Drawing.Point(0, 84);
+            this.inputAndResult.Location = new System.Drawing.Point(0, 96);
             this.inputAndResult.Margin = new System.Windows.Forms.Padding(2);
             this.inputAndResult.Name = "inputAndResult";
             this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult.Size = new System.Drawing.Size(602, 219);
+            this.inputAndResult.Size = new System.Drawing.Size(602, 207);
             this.inputAndResult.TabIndex = 0;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
@@ -110,7 +111,7 @@
             // 
             this.tipLable.AutoSize = true;
             this.tipLable.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.tipLable.Location = new System.Drawing.Point(19, 47);
+            this.tipLable.Location = new System.Drawing.Point(20, 64);
             this.tipLable.Name = "tipLable";
             this.tipLable.Size = new System.Drawing.Size(542, 30);
             this.tipLable.TabIndex = 7;
@@ -118,22 +119,35 @@
     "大支持1000条";
             this.tipLable.Click += new System.EventHandler(this.tipLable_Click);
             // 
-            // textBox1
+            // progressBar1
             // 
-            this.textBox1.Location = new System.Drawing.Point(411, 63);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(155, 25);
-            this.textBox1.TabIndex = 8;
+            this.progressBar1.Location = new System.Drawing.Point(98, 38);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(464, 23);
+            this.progressBar1.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.label1.ForeColor = System.Drawing.Color.SkyBlue;
+            this.label1.Location = new System.Drawing.Point(19, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 23);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "查询进度";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // WifiLocation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(602, 341);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tipLable);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.inputLabel);
             this.Controls.Add(this.inputAndResult);
@@ -157,6 +171,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label tipLable;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -32,7 +32,7 @@ namespace C2.IAOLab.WifiMac
 
             //设置参数，并进行URL编码 
 
-            string paraUrlCoded = type + "=" + mac;
+            string paraUrlCoded = type + "=" + mac.Replace(" ",string.Empty);
 
             //将Json字符串转化为字节  
             byte[] payload = System.Text.Encoding.UTF8.GetBytes(paraUrlCoded);

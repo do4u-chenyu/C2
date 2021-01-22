@@ -56,28 +56,38 @@ namespace C2.Dialogs.IAOLab
             DirectoryInfo dir = new DirectoryInfo(inputPathTextBox.Text);
             //检索表示当前目录的文件和子目录
             FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
-            //遍历检索的文件和子目录
-            foreach (FileSystemInfo fsInfo in fsInfos)
+            
+            if(fsInfos.Length == 0)
             {
-                j++;
-                textBox1.Text = string.Format("正在解析第{0}个文件", j);
-                List<string> apkInfoList = ApkToolStart.GetInstance().ExtractApk(fsInfo.FullName,fsInfo.Name,jdkPathTextBox.Text);
-                apkInfoListForEXL.Add(apkInfoList);
-                if (apkInfoList.Count > 2) // (2, this.dataGridView1.Columns.Count]
+                //遍历检索的文件和子目录
+                foreach (FileSystemInfo fsInfo in fsInfos)
                 {
-                    // 将结果展示在窗体
-                    int index = this.dataGridView1.Rows.Add();
-                    this.dataGridView1.Rows[index].Cells[0].Value = GetImage(apkInfoList[0]);
-                    for (int i = 1; i < this.dataGridView1.Columns.Count; i++)
+                    if (fsInfo.Name.EndsWith(".apk"))
                     {
-                        this.dataGridView1.Rows[index].Cells[i].Value = apkInfoList[i];
+                        j++;
+                        textBox1.Text = string.Format("正在解析第{0}个apk文件", j);
+                        List<string> apkInfoList = ApkToolStart.GetInstance().ExtractApk(fsInfo.FullName, fsInfo.Name, jdkPathTextBox.Text);
+                        apkInfoListForEXL.Add(apkInfoList);
+                        if (apkInfoList.Count > 2) // (2, this.dataGridView1.Columns.Count]
+                        {
+                            // 将结果展示在窗体
+                            int index = this.dataGridView1.Rows.Add();
+                            this.dataGridView1.Rows[index].Cells[0].Value = GetImage(apkInfoList[0]);
+                            for (int i = 1; i < this.dataGridView1.Columns.Count; i++)
+                            {
+                                this.dataGridView1.Rows[index].Cells[i].Value = apkInfoList[i];
+                            }
+                        }
                     }
                 }
+                if(j == 0)
+                    MessageBox.Show("该目录下不存在.apk文件");
+                textBox1.Text = string.Format("解析完成");
             }
-            textBox1.Text = string.Format("解析完成");
-            //string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
-            //DirectoryInfo di1 = new DirectoryInfo(tmpPath);
-            //di1.Delete(true);
+            else
+            {
+                MessageBox.Show("apk目录为空");
+            }
         }
         public Image GetImage(string path)
         {

@@ -55,46 +55,50 @@ namespace C2.Dialogs.IAOLab
                   
                     break;
                 case "BaseStation":
-                    i = 0;
+                    progressBar1.Value = 0;
+                    progressBar1.Maximum = inputArray.Length;
+                    progressBar1.Minimum = 0;
                     foreach (string baseStation in inputArray)
                     {
-                        
-                        i++;
-                        textBox1.Text = string.Format("正在处理第{0}条数据", i);
-                        if (!string.IsNullOrEmpty(baseStation) && i < 1000)
+                        progressBar1.Value += 1 ;
+                        if (!string.IsNullOrEmpty(baseStation) && progressBar1.Value < 1000)
                         {
                             tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(baseStation.Split('\t')[0]));
                             inputAndResult.Text = tmpResult.ToString();
                         }
                     }
-                    textBox1.Text = string.Format("处理完成，共查询{0}条", i);
+                    
                     break;
                 case "Wifi":
-                    i = 0;
+                    progressBar1.Value = 0;
+                    progressBar1.Maximum = inputArray.Length;
+                    progressBar1.Minimum = 0;
                     foreach (string mac in inputArray)
                     {
-                        i++;
-                        textBox1.Text = string.Format("正在处理第{0}条数据", i);
-                        if (!string.IsNullOrEmpty(mac) && i<1000)
+                        progressBar1.Value += 1;
+                        if (!string.IsNullOrEmpty(mac) && progressBar1.Value < 1000)
                         {
                             tmpResult.Append(WifiMac.GetInstance().MacLocate(mac.Split('\t')[0]));
                             inputAndResult.Text = tmpResult.ToString();
                         }
                         
                     }
-                    textBox1.Text = string.Format("处理完成，共查询{0}条",i);
+                    
                     break;
                 case "Card":
-                     i = 0;
+                    progressBar1.Value = 0;
+                    progressBar1.Maximum = inputArray.Length;
+                    progressBar1.Minimum = 0;
+                    label1.Parent = progressBar1;
                     foreach (string bankCard in inputArray)
                     {
-                        if (!string.IsNullOrEmpty(bankCard) && i < 1000)
+                        progressBar1.Value += 1;
+                        if (!string.IsNullOrEmpty(bankCard) && progressBar1.Value < 1000)
                         {
-                            i++;
-                            textBox1.Text = string.Format("正在处理第{0}条数据", i);
-                            if (i % 50 == 0 )
+                           
+                            if (progressBar1.Value % 25 == 0 )
                             {
-                                Thread.Sleep(500);
+                                Thread.Sleep(800);
                                 
                             }
                             tmpResult.Append(BankTool.GetInstance().BankToolSearch(bankCard.Split('\t')[0]));
@@ -102,7 +106,7 @@ namespace C2.Dialogs.IAOLab
                         }
                        
                     }
-                    textBox1.Text = string.Format("处理完成，共查询{0}条", i);
+                    
                     break;             
                 default:
                     break;
@@ -126,5 +130,9 @@ namespace C2.Dialogs.IAOLab
 
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
