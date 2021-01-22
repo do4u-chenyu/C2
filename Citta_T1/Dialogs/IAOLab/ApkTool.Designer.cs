@@ -52,6 +52,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -65,9 +66,9 @@
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.label1.Location = new System.Drawing.Point(27, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 23);
+            this.label1.Size = new System.Drawing.Size(162, 23);
             this.label1.TabIndex = 0;
-            this.label1.Text = "请输入apk存放目录";
+            this.label1.Text = "请输入APK存放目录";
             // 
             // inputPathTextBox
             // 
@@ -126,9 +127,9 @@
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.label2.Location = new System.Drawing.Point(27, 58);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(154, 23);
+            this.label2.Size = new System.Drawing.Size(160, 23);
             this.label2.TabIndex = 8;
-            this.label2.Text = "请输入jdk所在路径";
+            this.label2.Text = "请输入JDK所在路径";
             // 
             // pictureBox1
             // 
@@ -168,13 +169,13 @@
             this.mainFunction,
             this.size});
             this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 112);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 131);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(895, 291);
+            this.dataGridView1.Size = new System.Drawing.Size(895, 272);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataGridView1_MouseDown);
             // 
@@ -260,10 +261,20 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(655, 88);
+            this.textBox1.Location = new System.Drawing.Point(673, 104);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(210, 25);
             this.textBox1.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label3.Location = new System.Drawing.Point(28, 114);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(363, 15);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "APK分析需要占用较大C盘空间，多个APK建议分批分析";
             // 
             // ApkTool
             // 
@@ -272,6 +283,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(895, 450);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.tipLable);
             this.Controls.Add(this.dataGridView1);
@@ -321,5 +333,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn size;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label3;
     }
 }

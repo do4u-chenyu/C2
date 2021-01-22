@@ -29,18 +29,18 @@ namespace C2.Dialogs.IAOLab
                            string.IsNullOrEmpty(this.jdkPathTextBox.Text);
             if (isEmpty)
             {
-                MessageBox.Show("apk存放路径或jdk存放路径不能为空");
+                MessageBox.Show("APK存放路径或JDK存放路径不能为空");
                 return false;
             }
             if (!Directory.Exists(this.inputPathTextBox.Text)
                 &&!File.Exists(this.inputPathTextBox.Text))
             {
-                MessageBox.Show("apk存放路径不存在"); // 不存在
+                MessageBox.Show("APK存放路径不存在"); // 不存在
                 return false;
             }
             if (!File.Exists(this.jdkPathTextBox.Text))
             {
-                MessageBox.Show("jdk存放路径不存在");
+                MessageBox.Show("JDK存放路径不存在");
                 return false;
             }
             return true;
@@ -72,7 +72,14 @@ namespace C2.Dialogs.IAOLab
                         {
                             // 将结果展示在窗体
                             int index = this.dataGridView1.Rows.Add();
-                            this.dataGridView1.Rows[index].Cells[0].Value = GetImage(apkInfoList[0]);
+                            try
+                            {
+                                this.dataGridView1.Rows[index].Cells[0].Value = GetImage(apkInfoList[0]);
+                            }
+                            catch 
+                            {
+                                this.dataGridView1.Rows[index].Cells[0].Value = "图片不存在";
+                            }
                             for (int i = 1; i < this.dataGridView1.Columns.Count; i++)
                             {
                                 this.dataGridView1.Rows[index].Cells[i].Value = apkInfoList[i];
@@ -90,19 +97,9 @@ namespace C2.Dialogs.IAOLab
             }
         }
         public Image GetImage(string path)
-        {
-            try 
-            {
-                Image image = Image.FromFile(path);
-                return image;
-            }
-            catch
-            {
-                string imagePath = Path.Combine(Application.StartupPath, "Resources","Images","stop.png");
-                Image image = Image.FromFile(imagePath);
-                return image; 
-            }
-            
+        {  
+            Image image = Image.FromFile(path);
+            return image;
         }
 
         private void InputPathPictureBox_Click(object sender, EventArgs e)
