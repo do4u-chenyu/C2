@@ -208,7 +208,7 @@ namespace C2.Model.Documents
         }
 
         #region Object ID
-        int ObjectSeed = 1;
+        int ObjectSeed = 2;
         Dictionary<string, object> RegistedObjects = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 
         public string GetNextObjectID()
