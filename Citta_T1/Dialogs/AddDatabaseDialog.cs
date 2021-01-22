@@ -116,8 +116,16 @@ namespace C2.Dialogs
 
         private bool InputHasEmpty()
         {
-            if (String.Equals("Hive",this.databaseTypeComboBox.Text))
+            // hive用户名密码有空连接会失败
+
+
+            if (String.Equals("Hive", this.databaseTypeComboBox.Text))
+            {
+                this.userTextBox.Text = "None";
+                this.passwordTextBox.Text = "None";
                 return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
+            }
+               
 
             return (databaseTypeComboBox.SelectedIndex == -1) || string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||
@@ -134,6 +142,13 @@ namespace C2.Dialogs
             this.serviceTextBox.Enabled = notHive;
             this.sidTextBox.Enabled = notHive;
             this.sidTextBox.Text = "";
+
+            if (!notHive)
+            {
+                this.serverTextBox.Text = "10.1.126.4";
+                this.userTextBox.Text = "None";
+                this.passwordTextBox.Text = "None";
+            }
 
         }
 
