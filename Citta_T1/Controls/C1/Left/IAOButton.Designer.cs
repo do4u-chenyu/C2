@@ -38,6 +38,7 @@ namespace C2.Controls.Left
             this.txtButton = new C2.Controls.Common.NoFocusButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -57,11 +58,12 @@ namespace C2.Controls.Left
             // 
             this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
             this.rightPictureBox.Location = new System.Drawing.Point(163, 8);
-            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(21, 20);
             this.rightPictureBox.TabIndex = 11;
             this.rightPictureBox.TabStop = false;
+            this.rightPictureBox.MouseHover += new System.EventHandler(this.RightPictureBox_MouseHover);
             // 
             // textBox
             // 
@@ -69,7 +71,7 @@ namespace C2.Controls.Left
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.textBox.Location = new System.Drawing.Point(33, 4);
-            this.textBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox.Margin = new System.Windows.Forms.Padding(4);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
             this.textBox.Size = new System.Drawing.Size(125, 20);
@@ -136,5 +138,6 @@ namespace C2.Controls.Left
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 打开ToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

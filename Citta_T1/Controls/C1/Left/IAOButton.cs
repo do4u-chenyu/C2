@@ -27,31 +27,37 @@ namespace C2.Controls.Left
                 case "APK":
                     this.txtButton.Text = Lang._("APK");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
+                    toolTip1.SetToolTip(this.rightPictureBox, "用于对异常Apk进行解析并获取Apk的图标，安装名称，包名，主函数，大小");
                     ApkToolForm();
                     break;
                 case "BaseStation":
                     this.txtButton.Text = Lang._("BaseStation");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BaseStation;
+                    toolTip1.SetToolTip(this.rightPictureBox, "根据基站号进行定位，获取基站的经纬度，范围，和详细地址");
                     BaseStationForm();
                     break;
                 case "Wifi":
                     this.txtButton.Text = Lang._("Wifi");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
+                    toolTip1.SetToolTip(this.rightPictureBox, "根据网络的MAC地址进行定位，获取该MAC地址的经纬度，范围，和详细地址");
                     baseForm0 = new WifiLocation();
                     break;
                 case "Card":
                     this.txtButton.Text = Lang._("Card");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
+                    toolTip1.SetToolTip(this.rightPictureBox, "获取银行卡号的卡种，开户行和其他信息");
                     BankToolForm();
                     break;
                 case "Tude":
                     this.txtButton.Text = Lang._("Tude");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Tude;
+                    toolTip1.SetToolTip(this.rightPictureBox, "计算两个经纬度之间的距离，对不同标准的经纬度之间进行转换");
                     GPSTransformForm();
                     break;
                 case "Ip":
                     this.txtButton.Text = Lang._("Ip");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Ip;
+                    toolTip1.SetToolTip(this.rightPictureBox, "IP和整形IP之间的转换，绝对时间和真实时间之间的转换");
                     TimeAndIPTransformForm();
                     break;
             }
@@ -121,6 +127,15 @@ namespace C2.Controls.Left
             }
             if (baseForm2 != null)
                 baseForm2.ShowDialog();
+        }
+
+        private void RightPictureBox_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.InitialDelay = 100;
+            toolTip1.ReshowDelay = 500;//指针从一个控件移向另一个控件时，经过多久才会显示下一个提示框
+            toolTip1.ShowAlways = true;//是否显示提示框
+            //  设置伴随的对象.
+            
         }
     }
 }

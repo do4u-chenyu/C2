@@ -67,7 +67,7 @@ namespace C2.Dialogs.IAOLab
                         j++;
                         textBox1.Text = string.Format("正在解析第{0}个apk文件", j);
                         List<string> apkInfoList = ApkToolStart.GetInstance().ExtractApk(fsInfo.FullName, fsInfo.Name, jdkPathTextBox.Text);
-                        apkInfoListForEXL.Add(apkInfoList);
+                        apkInfoListForEXL.Add(apkInfoList);//apk数据汇总，为写入excel做准备
                         if (apkInfoList.Count > 2) // (2, this.dataGridView1.Columns.Count]
                         {
                             // 将结果展示在窗体
@@ -123,9 +123,9 @@ namespace C2.Dialogs.IAOLab
                 FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
                 foreach (FileSystemInfo fsInfo in fsInfos)
                 {
-                    if (fsInfo.Name.Contains("jdk") )
+                    if (fsInfo.Name.Contains("jdk") && Directory.Exists(Path.Combine(fsInfo.FullName, "bin")))
                     {  
-                        OpenFileDialog1.InitialDirectory = Path.Combine(fsInfo.FullName, "bin", "java.exe");
+                        OpenFileDialog1.InitialDirectory = Path.Combine(fsInfo.FullName, "bin");
                         break;
                     }
                 }
@@ -134,17 +134,8 @@ namespace C2.Dialogs.IAOLab
             {
                 OpenFileDialog1.InitialDirectory = @"C:\Program Files";
             }
-            try
-            {
-                if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
-                    jdkPathTextBox.Text = OpenFileDialog1.FileName;
-            }
-            catch
-            {
-                OpenFileDialog1.InitialDirectory = @"C:\Program Files";
-                if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
-                    jdkPathTextBox.Text = OpenFileDialog1.FileName;
-            }
+            if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
+                jdkPathTextBox.Text = OpenFileDialog1.FileName;
         }
         
 
@@ -156,12 +147,12 @@ namespace C2.Dialogs.IAOLab
             }
             else
             {
-                ExportDataToExcel(apkInfoListForEXL);
+                ExportDataToExcel();
             }
         }
 
-
-        public void ExportDataToExcel(List<List<string>> apkInfoListForEXL)
+        //从保存的apkInfoListForEXL中直接读取数据写入Excel
+        public void ExportDataToExcel()
         {
 
             SaveFileDialog saveDialog = new SaveFileDialog();
@@ -170,15 +161,15 @@ namespace C2.Dialogs.IAOLab
             saveDialog.ShowDialog();
             string path = saveDialog.FileName;
             if (path.IndexOf(":") < 0) return;
-            IWorkbook workbook = null;  //保存的数据
+            IWorkbook workBook = null;  //保存的数据
             IRow row = null;
             ISheet sheet = null;  //生成表格
             ICell cell = null;
             try
             {
                 string[] columnName = { "ICON", "文件名", "Apk名", "包名", "主函数名", "大小" };
-                workbook = new HSSFWorkbook();
-                sheet = workbook.CreateSheet("Sheet0");//创建一个名称为Sheet0的表  
+                workBook = new HSSFWorkbook();
+                sheet = workBook.CreateSheet("Sheet0");//创建一个名称为Sheet0的表  
                 int rowCount = this.apkInfoListForEXL.Count;//行数  
                 int columnCount = columnName.Length;//列数  
                 sheet.SetColumnWidth(0, 20 * 256);
@@ -204,7 +195,7 @@ namespace C2.Dialogs.IAOLab
 
                     cell = row.CreateCell(0);
                     byte[] bytes = File.ReadAllBytes(this.apkInfoListForEXL[i][0]);
-                    int pictureIdx = workbook.AddPicture(bytes, PictureType.JPEG);
+                    int pictureIdx = workBook.AddPicture(bytes, PictureType.JPEG);
                     HSSFPatriarch patriarch = (HSSFPatriarch)sheet.CreateDrawingPatriarch();//前四个参数(dx1,dy1,dx2,dy2)为图片在单元格的边距                            //col1,col2表示图片插在col1和col2之间的单元格，索引从0开始                            //row1,row2表示图片插在第row1和row2之间的单元格，索引从1开始　　　　　　　　　　　　　　　　// 参数的解析: HSSFClientAnchor（int dx1,int dy1,int dx2,int dy2,int col1,int row1,int col2,int row2)            　　　　　　　　　//dx1:图片左边相对excel格的位置(x偏移) 范围值为:0~1023;即输100 偏移的位置大概是相对于整个单元格的宽度的100除以1023大概是10分之一            　　　　　　　　  //dy1:图片上方相对excel格的位置(y偏移) 范围值为:0~256 原理同上。            　　　　　　　　  //dx2:图片右边相对excel格的位置(x偏移) 范围值为:0~1023; 原理同上。            　　　　　　　　  //dy2:图片下方相对excel格的位置(y偏移) 范围值为:0~256 原理同上。            　　　　　　　　  //col1和row1 :图片左上角的位置，以excel单元格为参考,比喻这两个值为(1,1)，那么图片左上角的位置就是excel表(1,1)单元格的右下角的点(A,1)右下角的点。            　　　　　　　　  //col2和row2:图片右下角的位置，以excel单元格为参考,比喻这两个值为(2,2)，那么图片右下角的位置就是excel表(2,2)单元格的右下角的点(B,2)右下角的点。
                     HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, 0, i + 1, 1, i + 2);
                     //把图片插到相应的位置
@@ -218,11 +209,11 @@ namespace C2.Dialogs.IAOLab
                 }
                 using (FileStream fs = File.OpenWrite(path))
                 {
-                    workbook.Write(fs);//向打开的这个xls文件中写入数据  
+                    workBook.Write(fs);//向打开的这个xls文件中写入数据  
                 }
-                workbook.Close();
+                workBook.Close();
                 sheet = null;
-                workbook = null;
+                workBook = null;
                 row = null;
             }
              catch (Exception ex)
