@@ -31,17 +31,7 @@ namespace C2.Database
             using (var conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
             {
-                try
-                {
-                    
-                    conn.Open();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                    return false;
-                }
+               return TryOpen(conn,10000,DatabaseType.Hive);
             }
         }
         public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)

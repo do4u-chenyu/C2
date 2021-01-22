@@ -47,19 +47,10 @@ namespace C2.Database
         }
         public override bool TestConn()
         {
-            try
-            {
-                using (OracleConnection con = new OracleConnection(this.ConnectionString))
-                {
-                    con.Open();
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                return false;
-            }
+            OracleConnection con = new OracleConnection(this.ConnectionString);
+
+            return TryOpen(con, 20000, DatabaseType.Oracle);
+
         }
         public override string Query(string sql, bool header=true)
         {
