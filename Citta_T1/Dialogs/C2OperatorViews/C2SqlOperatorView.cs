@@ -93,6 +93,7 @@ namespace C2.Dialogs.C2OperatorViews
         }
         private void CodeSnippetMenuItem_Click(object sender, EventArgs e)
         {
+            textEditorControl1.Text = string.Empty;
             textEditorControl1.Text = "select * from " + tableListBox.SelectedItem.ToString();
         }
 
