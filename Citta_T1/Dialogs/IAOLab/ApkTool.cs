@@ -57,7 +57,7 @@ namespace C2.Dialogs.IAOLab
             //检索表示当前目录的文件和子目录
             FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
             
-            if(fsInfos.Length == 0)
+            if(fsInfos.Length != 0)
             {
                 //遍历检索的文件和子目录
                 foreach (FileSystemInfo fsInfo in fsInfos)
