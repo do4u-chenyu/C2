@@ -1,13 +1,8 @@
-﻿
-using C2.Business.Model;
-using C2.Core;
-using C2.Dialogs.IAOLab;
+﻿using C2.Dialogs.IAOLab;
 using C2.Globalization;
-using C2.Model;
 using C2.Utils;
 using System;
 using System.Windows.Forms;
-using System.Drawing;
 namespace C2.Controls.Left
 {
     public partial class IAOButton : UserControl
@@ -27,31 +22,30 @@ namespace C2.Controls.Left
                 case "APK":
                     this.txtButton.Text = Lang._("APK");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
-                    toolTip1.SetToolTip(this.rightPictureBox, "用于对异常Apk进行解析并获取Apk的图标，安装名称，包名，主函数，大小");
+                    toolTip1.SetToolTip(this.rightPictureBox, "对Apk进行解析并获取Apk的图标，安装名称，包名，入口函数名和大小");
                     ApkToolForm();
                     break;
                 case "BaseStation":
                     this.txtButton.Text = Lang._("BaseStation");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BaseStation;
-                    toolTip1.SetToolTip(this.rightPictureBox, "根据基站号进行定位，获取基站的经纬度，范围，和详细地址,需要网络");
+                    toolTip1.SetToolTip(this.rightPictureBox, "根据基站号进行定位，获取基站的经纬度，覆盖范围和详细地址,需要网络");
                     BaseStationForm();
                     break;
                 case "Wifi":
                     this.txtButton.Text = Lang._("Wifi");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
-                    toolTip1.SetToolTip(this.rightPictureBox, "根据网络的MAC地址进行定位，获取该MAC地址的经纬度，范围，和详细地址,需要网络");
+                    toolTip1.SetToolTip(this.rightPictureBox, "根据WIFI热点的MAC进行定位，获取WIFI的经纬度，覆盖范围和详细地址,需要网络");
                     baseForm0 = new WifiLocation();
                     break;
                 case "Card":
                     this.txtButton.Text = Lang._("Card");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
-                    toolTip1.SetToolTip(this.rightPictureBox, "获取银行卡号的卡种，开户行和其他信息,需要网络");
+                    toolTip1.SetToolTip(this.rightPictureBox, "根据银行卡号获取银行卡的卡种，开户行和其他信息,需要网络");
                     BankToolForm();
                     break;
                 case "Tude":
                     this.txtButton.Text = Lang._("Tude");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Tude;
-                    toolTip1.SetToolTip(this.rightPictureBox, "计算两个经纬度之间的距离，对不同标准的经纬度之间进行转换");
                     GPSTransformForm();
                     break;
                 case "Ip":
