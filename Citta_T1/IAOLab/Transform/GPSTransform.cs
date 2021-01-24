@@ -18,7 +18,7 @@ namespace C2.IAOLab.Transform
         public GPSTransform(string input)
         {
             this.input = input;
-            this.wrongInfo = string.Format("{0}:输入格式有误\n", input);
+            this.wrongInfo = string.Format("{0} 输入格式有误\n", input);
             this.inputArray = input.Split(' ');
         }
 
@@ -71,7 +71,7 @@ namespace C2.IAOLab.Transform
                 if (result.Count() < 2)
                     return string.Format("{0}:{1}", input, wrongInfo);
                 double deviation = Distance(lat, lon, result[0], result[1]);
-                return string.Format("{0}:转换后坐标为{1} {2}，偏差为:{3}米\n", input, result[0], result[1], deviation);
+                return string.Format("{0} 输出坐标:{1} {2}，偏差:{3}米\n", input, result[0], result[1], deviation);
             }
         }
         public string ComputeDistance()
@@ -85,7 +85,7 @@ namespace C2.IAOLab.Transform
             bool illegalNum = double.IsNaN(lat) || double.IsNaN(lon) || double.IsNaN(blat) || double.IsNaN(blon);
             if (illegalNum)
                 return wrongInfo;
-            return string.Format("{0}:距离为{1}米\n", input, Distance(lat, lon, blat, blon));
+            return string.Format("{0} 距离:{1}米\n", input, Distance(lat, lon, blat, blon));
         }
         #region 6种坐标转换方法
 
