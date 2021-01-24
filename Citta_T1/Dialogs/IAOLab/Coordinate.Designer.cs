@@ -63,7 +63,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(625, 350);
-            this.tabControl.TabIndex = 0;
+            this.tabControl.TabIndex = 10;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
@@ -87,7 +87,7 @@
             this.inputAndResult.Name = "inputAndResult";
             this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.inputAndResult.Size = new System.Drawing.Size(618, 207);
-            this.inputAndResult.TabIndex = 0;
+            this.inputAndResult.TabIndex = 10;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
             // 

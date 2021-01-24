@@ -24,28 +24,17 @@ namespace C2.Dialogs.IAOLab
         {
             InitializeComponent();
         }
-        public void ReLayoutForm()
-        {
 
-        }
         public string Tip { set { this.tipLable.Text = value; } }
         public string InputLable { set { this.inputLabel.Text = value; } }
-        public Point InputLableLaction { set { this.inputLabel.Location = value; }get { return this.inputLabel.Location;  } }
+      
 
         public string FormType { get { return this.formType; } set { this.formType = value; } }
 
-        private void toolTip1_Popup(object sender, PopupEventArgs e)
-        {
-            
-        }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
 
-        }
         private void Search_Click(object sender, EventArgs e)
         {
-            int i = 0;
             string[] inputArray = this.inputAndResult.Text.Split('\n');
             StringBuilder tmpResult = new StringBuilder();
             this.Cursor = Cursors.WaitCursor;
@@ -120,19 +109,10 @@ namespace C2.Dialogs.IAOLab
             Close();
         }
 
-        private void tipLable_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void WifiLocation_Load(object sender, EventArgs e)
-        {
+ 
 
-        }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

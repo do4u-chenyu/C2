@@ -51,7 +51,7 @@
             this.inputAndResult.TabIndex = 0;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
-            this.inputAndResult.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+          
             // 
             // inputLabel
             // 
@@ -117,7 +117,7 @@
             this.tipLable.TabIndex = 7;
             this.tipLable.Text = "单次输入格式：04a1518006c2 或 04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最" +
     "大支持1000条";
-            this.tipLable.Click += new System.EventHandler(this.tipLable_Click);
+ 
             // 
             // progressBar1
             // 
@@ -137,7 +137,7 @@
             this.label1.Size = new System.Drawing.Size(78, 23);
             this.label1.TabIndex = 9;
             this.label1.Text = "查询进度";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+         
             // 
             // WifiLocation
             // 
@@ -155,7 +155,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WifiLocation";
             this.Text = "Wifi查询";
-            this.Load += new System.EventHandler(this.WifiLocation_Load);
+
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
