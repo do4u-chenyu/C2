@@ -104,15 +104,13 @@ namespace C2.Dialogs.IAOLab
         }
 
         private void Cancle_Click(object sender, EventArgs e)
-        {
-            this.inputAndResult.Text = null;
+        {         
             Close();
         }
 
-
-
- 
-
-
+        private void WifiLocation_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.inputAndResult.Clear();
+        }
     }
 }

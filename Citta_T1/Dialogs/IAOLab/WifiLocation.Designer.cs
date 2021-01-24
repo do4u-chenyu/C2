@@ -51,7 +51,6 @@
             this.inputAndResult.TabIndex = 0;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
-          
             // 
             // inputLabel
             // 
@@ -60,7 +59,7 @@
             this.inputLabel.Location = new System.Drawing.Point(19, 16);
             this.inputLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.inputLabel.Name = "inputLabel";
-            this.inputLabel.Size = new System.Drawing.Size(191, 19);
+            this.inputLabel.Size = new System.Drawing.Size(151, 15);
             this.inputLabel.TabIndex = 1;
             this.inputLabel.Text = "请在下方输入MAC地址";
             // 
@@ -104,7 +103,7 @@
             this.label2.Location = new System.Drawing.Point(20, 30);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 15);
+            this.label2.Size = new System.Drawing.Size(0, 12);
             this.label2.TabIndex = 6;
             // 
             // tipLable
@@ -113,11 +112,10 @@
             this.tipLable.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tipLable.Location = new System.Drawing.Point(20, 64);
             this.tipLable.Name = "tipLable";
-            this.tipLable.Size = new System.Drawing.Size(542, 30);
+            this.tipLable.Size = new System.Drawing.Size(413, 24);
             this.tipLable.TabIndex = 7;
             this.tipLable.Text = "单次输入格式：04a1518006c2 或 04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最" +
     "大支持1000条";
- 
             // 
             // progressBar1
             // 
@@ -134,10 +132,9 @@
             this.label1.ForeColor = System.Drawing.Color.SkyBlue;
             this.label1.Location = new System.Drawing.Point(19, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 23);
+            this.label1.Size = new System.Drawing.Size(65, 20);
             this.label1.TabIndex = 9;
             this.label1.Text = "查询进度";
-         
             // 
             // WifiLocation
             // 
@@ -155,7 +152,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WifiLocation";
             this.Text = "Wifi查询";
-
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WifiLocation_FormClosed);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

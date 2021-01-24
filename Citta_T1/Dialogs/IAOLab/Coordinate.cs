@@ -72,7 +72,10 @@ namespace C2.Dialogs.IAOLab
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-  
+            if (this.tabControl.SelectedIndex == 0)
+                this.inputAndResult.Focus();
+            else
+                this.inputAndResult1.Focus();
         }
       
         private void ComputeXYTransform(string[] inputArray, StringBuilder tmpResult)
@@ -158,8 +161,21 @@ namespace C2.Dialogs.IAOLab
         }
 
         private void Cancel_Click(object sender, EventArgs e)
-        {
+        {         
             Close();
+        }
+
+
+
+        private void Form_Shown(object sender, EventArgs e)
+        {
+            this.inputAndResult.Focus();
+        }
+
+        private void CoordinateFormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.inputAndResult.Clear();
+            this.inputAndResult1.Clear();
         }
     }
 }

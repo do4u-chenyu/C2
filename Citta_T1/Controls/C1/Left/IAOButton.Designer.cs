@@ -91,7 +91,7 @@ namespace C2.Controls.Left
             this.txtButton.Size = new System.Drawing.Size(127, 31);
             this.txtButton.TabIndex = 9;
             this.txtButton.UseVisualStyleBackColor = false;
-            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtButton_MouseDown);
+            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             // 
             // contextMenuStrip1
             // 
@@ -106,7 +106,7 @@ namespace C2.Controls.Left
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
             this.打开ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
             this.打开ToolStripMenuItem.Text = "打开";
-            this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
+            this.打开ToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // IAOButton
             // 

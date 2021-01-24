@@ -68,47 +68,55 @@ namespace C2.Controls.Left
         }
         private void BaseStationForm()
         {
-            baseForm0 = new WifiLocation();
-            baseForm0.Text = "基站查询";
-            baseForm0.InputLable = "请在下方输入基站号码";
-            baseForm0.Tip = HelpUtil.BaseStationHelpInfo;
+            baseForm0 = new WifiLocation()
+            {
+                Text = "基站查询",
+                InputLable = "请在下方输入基站号码",
+                Tip = HelpUtil.BaseStationHelpInfo
+            };
+
         }
         private void BankToolForm()
         {
-            baseForm0 = new WifiLocation();
-            baseForm0.Text = "银行卡归属地查询";
-            baseForm0.InputLable = "请在下方输入银行卡";
-            baseForm0.Tip = HelpUtil.BankToolHelpInfo;
+            baseForm0 = new WifiLocation()
+            {
+                Text = "银行卡归属地查询",
+                InputLable = "请在下方输入银行卡",
+                Tip = HelpUtil.BankToolHelpInfo
+            };
+
         }
         private void GPSTransformForm()
         {
-            baseForm2 = new coordinateConversion();
-            // 施工中
-            baseForm2.Tab0Tip = HelpUtil.GPSTransformHelpInfo;
-            baseForm2.Tib1Tip = HelpUtil.GPSDistanceHelpInfo;
+            baseForm2 = new coordinateConversion()
+            {
+                Tab0Tip = HelpUtil.GPSTransformHelpInfo,
+                Tib1Tip = HelpUtil.GPSDistanceHelpInfo
+            };
+    
         }
         private void TimeAndIPTransformForm()
         {
-            baseForm2 = new coordinateConversion();
-            // 施工中
+            baseForm2 = new coordinateConversion()
+            {
+                Tab0Tip = HelpUtil.IPTransformHelpInfo,
+                Tib1Tip = HelpUtil.TimeTransformHelpInfo
+            };
             baseForm2.ReLayoutForm();
-
-            baseForm2.Tab0Tip = HelpUtil.IPTransformHelpInfo;
-            baseForm2.Tib1Tip = HelpUtil.TimeTransformHelpInfo;
+  
         }
         #endregion
-        private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            OpenForm();
+            OpenToolForm();
         }
 
-        private void txtButton_MouseDown(object sender, MouseEventArgs e)
+        private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && e.Clicks == 2)
-                OpenForm();
+                OpenToolForm();
         }
-        private void OpenForm()
+        private void OpenToolForm()
         {
             if (baseForm0 != null)
             {

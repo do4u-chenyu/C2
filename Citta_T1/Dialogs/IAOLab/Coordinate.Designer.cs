@@ -262,6 +262,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "coordinateConversion";
             this.Text = "经纬度转换与距离计算";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CoordinateFormClosed);
+            this.Shown += new System.EventHandler(this.Form_Shown);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
