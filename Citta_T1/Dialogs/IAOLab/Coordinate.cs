@@ -38,7 +38,6 @@ namespace C2.Dialogs.IAOLab
             AddRadioButton("IP转整形", "整形转IP", tabPage1);
             AddRadioButton("真实时间转绝对秒", "绝对秒转真实时间", tabPage2);
             
-
             this.inputAndResult.Location = new Point(
                  this.inputAndResult.Location.X,
                  this.inputAndResult.Location.Y - 30
@@ -70,66 +69,75 @@ namespace C2.Dialogs.IAOLab
             page.Controls.Add(absToReal);
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.tabControl.SelectedIndex == 0)
                 this.inputAndResult.Focus();
             else
                 this.inputAndResult1.Focus();
         }
-      
+
         private void ComputeXYTransform(string[] inputArray, StringBuilder tmpResult)
         {
             foreach (RadioButton button in sixTransform.Controls)
             {
-                if (button.Checked)
+                if (!button.Checked)
+                    continue;
+                foreach (string location in inputArray)
                 {
-                    foreach (string location in inputArray)
-                    {
-                        tmpResult.Append(GPSTransform.GetInstance(location).CoordinateConversion(button.Name));
-                        inputAndResult.Text = tmpResult.ToString();
-                    }
-                    return;
+                    if (string.IsNullOrEmpty(location))
+                        continue;
+                    tmpResult.Append(GPSTransform.GetInstance(location).CoordinateConversion(button.Name));
+                    inputAndResult.Text = tmpResult.ToString();
                 }
+                return;
             }
         }
         private void ComputeDistance(string[] inputArray, StringBuilder tmpResult)
         {
             foreach (string input in inputArray)
             {
-                tmpResult.Append(GPSTransform.GetInstance(input).ComputeDistance());
-                inputAndResult1.Text = tmpResult.ToString();
+                if (!String.IsNullOrEmpty(input))
+                {
+                    tmpResult.Append(GPSTransform.GetInstance(input).ComputeDistance());
+                    inputAndResult1.Text = tmpResult.ToString();
+                }
+               
 
             }
         }
         private void IPTransform(string[] inputArray, StringBuilder tmpResult)
         {
             foreach(Control button in tabPage1.Controls)
-            { 
-                if(button is RadioButton &&  (button as RadioButton).Checked)
+            {
+                if (!(button is RadioButton && (button as RadioButton).Checked))
+                    continue;
+                foreach (string input in inputArray)
                 {
-                    foreach (string input in inputArray)
-                    {
-                        tmpResult.Append(TimeAndIPTransform.GetInstance(input).timeIPTransform(button.Text));
-                        inputAndResult.Text = tmpResult.ToString();
-                    }
-                    return;
+                    if (string.IsNullOrEmpty(input))
+                        continue;
+                    tmpResult.Append(TimeAndIPTransform.GetInstance(input).TimeIPTransform(button.Text));
+                    inputAndResult.Text = tmpResult.ToString();
                 }
+                return;
+
             }
         }
-        private void timeTransform(string[] inputArray, StringBuilder tmpResult)
+        private void TimeTransform(string[] inputArray, StringBuilder tmpResult)
         {
+
             foreach (Control button in tabPage2.Controls)
             {
-                if (button is RadioButton && (button as RadioButton).Checked)
+                if (!(button is RadioButton && (button as RadioButton).Checked))
+                    continue;
+                foreach (string input in inputArray)
                 {
-                    foreach (string input in inputArray)
-                    {
-                        tmpResult.Append(TimeAndIPTransform.GetInstance(input).timeIPTransform(button.Text));
-                        inputAndResult1.Text = tmpResult.ToString();
-                    }
-                    return;
+                    if (string.IsNullOrEmpty(input))
+                        continue;
+                    tmpResult.Append(TimeAndIPTransform.GetInstance(input).TimeIPTransform(button.Text));
+                    inputAndResult1.Text = tmpResult.ToString();
                 }
+                return;
             }
         }
 
@@ -152,7 +160,7 @@ namespace C2.Dialogs.IAOLab
                     if (this.tabControl.SelectedIndex == 0)
                         IPTransform(this.inputAndResult.Text.Split('\n'), tmpResult);
                     else
-                        timeTransform(this.inputAndResult1.Text.Split('\n'), tmpResult);
+                        TimeTransform(this.inputAndResult1.Text.Split('\n'), tmpResult);
                     break;
                 default:
                     break;

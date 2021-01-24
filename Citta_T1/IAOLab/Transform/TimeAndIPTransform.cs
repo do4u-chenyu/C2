@@ -6,7 +6,7 @@ namespace C2.IAOLab.Transform
 {
     class TimeAndIPTransform
     {
-        string wrong = "输入有误\r\n";
+        string wrong = "输入有误\n";
 
         private string input;
         public static TimeAndIPTransform GetInstance(string input)
@@ -17,7 +17,7 @@ namespace C2.IAOLab.Transform
         {
             this.input = input;
         }
-        public string timeIPTransform(string type)
+        public string TimeIPTransform(string type)
         {
             //string wrong = "输入格式有误";
             string result;
@@ -57,7 +57,7 @@ namespace C2.IAOLab.Transform
             try
             {
                 uint sec = uint.Parse(Second);
-                return "日期时间为"+unix2datetime(sec).ToString()+"\r\n";
+                return "日期时间为"+unix2datetime(sec).ToString()+"\n";
             }
             catch
             {
@@ -77,7 +77,7 @@ namespace C2.IAOLab.Transform
                 else
                 {
                     uint Sec = datetime2unix(dt);
-                    return ("绝对秒为" + Sec.ToString() + "\r\n");
+                    return ("绝对秒为" + Sec.ToString() + "\n");
                 }
             }
             catch
@@ -109,7 +109,7 @@ namespace C2.IAOLab.Transform
                         string[] items = Dot.Split('.');
 
                         long result = a << 24 | b << 16 | c << 8 | d;
-                        return ("整型为" + result.ToString() + "\r\n");
+                        return ("整型为" + result.ToString() + "\n");
                     }
                 }
             }
@@ -129,7 +129,7 @@ namespace C2.IAOLab.Transform
                 dot.Append((n >> 8) & 0xFF).Append(".");
                 dot.Append(n & 0xFF);
                 string result = dot.ToString();
-                return ("IP为" + result + "\r\n");
+                return ("IP为" + result + "\n");
             }
             catch
             {
