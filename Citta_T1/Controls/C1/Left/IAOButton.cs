@@ -15,6 +15,7 @@ namespace C2.Controls.Left
             InitializeComponent();
             txtButton.Name = ffp;
             txtButton.Text = ffp;
+          
             //this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
             this.ContextMenuStrip = contextMenuStrip1;
             switch (ffp)
@@ -28,7 +29,7 @@ namespace C2.Controls.Left
                 case "BaseStation":
                     this.txtButton.Text = Lang._("BaseStation");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BaseStation;
-                    toolTip1.SetToolTip(this.rightPictureBox, "根据基站号进行定位，获取基站的经纬度，覆盖范围和详细地址,需要网络");
+                    toolTip1.SetToolTip(this.rightPictureBox, "根据基站号进行定位，获取基站的经纬度，覆盖范围和详细地址,需要网络");                 
                     BaseStationForm();
                     break;
                 case "Wifi":
@@ -56,6 +57,7 @@ namespace C2.Controls.Left
                     TimeAndIPTransformForm();
                     break;
             }
+            toolTip1.SetToolTip(this.txtButton, this.txtButton.Text);
             if (baseForm0 != null)
                 baseForm0.FormType = ffp;
             if (baseForm2 != null)
