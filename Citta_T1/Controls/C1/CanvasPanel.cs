@@ -143,8 +143,8 @@ namespace C2.Controls
             }
 
             //C2不允许数据拖到Canvas
-            if (type == ElementType.DataSource)
-                return;
+            //if (type == ElementType.DataSource)
+            //    return;
 
             float screenFactor = Global.GetCurrentModelDocument().WorldMap.ScreenFactor;
             int locX = Convert.ToInt32(e.X / screenFactor);

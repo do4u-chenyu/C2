@@ -56,7 +56,7 @@ namespace C2.Utils
        
 
         #region IAO基站批量查询
-        public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01 或 46001590a8089407 或 37b900018bd0
+        public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01(2G/3G) 或 46001590a8089407(4G) 或 37b900018bd0(电信2G)
 批量查询格式：多个基站号码间用换行分隔，最大支持1000条";
         public static string BankToolHelpInfo = @"单次输入格式：6210857100018896476
 批量查询格式：多个银行卡号间用换行分隔，最大支持1000条";
@@ -67,7 +67,7 @@ namespace C2.Utils
         public static string IPTransformHelpInfo = @"IP单次输入格式：23.125.23.8
 整型单次输入格式：394073864
 批量查询格式：多个IP或整型间用换行分隔，最大支持1000条";
-        public static string TimeTransformHelpInfo = @"日期单次输入格式：2021-3-13 23:34:53或2021/3/13 23:34:53，年份不要超过2105
+        public static string TimeTransformHelpInfo = @"日期单次输入格式：2021-3-13 23:34:53 或 2021/3/13 23:34:53，年份不要超过2105
 绝对秒输入格式：1615649693，秒数不要超过4,294,967,295
 批量查询格式：多个日期或绝对秒间用换行分隔，最大支持1000条";
         #endregion

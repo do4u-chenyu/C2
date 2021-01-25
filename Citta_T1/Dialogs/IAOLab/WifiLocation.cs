@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using C2.Controls;
+﻿using C2.Controls;
+using C2.IAOLab.BankTool;
 using C2.IAOLab.BaseStation;
 using C2.IAOLab.WifiMac;
-using log4net.Util;
-using C2.IAOLab.BankTool;
-using C2.IAOLab.Transform;
+using System;
+using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace C2.Dialogs.IAOLab
 {
