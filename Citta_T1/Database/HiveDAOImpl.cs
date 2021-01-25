@@ -34,42 +34,8 @@ namespace C2.Database
                return TryOpen(conn,10000,DatabaseType.Hive);
             }
         }
-        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
-        {
-            int pageIndex = 0;
-            bool returnHeader = true;
-            int totalRetuenNum = 0, subMaxNum;
-            using (StreamWriter sw = new StreamWriter(outPutPath, false))
-            {
-                while (maxReturnNum == -1 ? true : totalRetuenNum < maxReturnNum)
-                {
-                    if (pageSize * pageIndex < maxReturnNum && pageSize * (pageIndex + 1) > maxReturnNum)
-                        subMaxNum = maxReturnNum - pageIndex * pageSize;
-                    else
-                        subMaxNum = pageSize;
-                    QueryResult contentAndNum = ExecuteHiveQL_Page(sqlText, pageSize, pageIndex, subMaxNum, returnHeader);
 
-                    string result = contentAndNum.content;
-                    totalRetuenNum += contentAndNum.returnNum;
-
-                    if (returnHeader)
-                    {
-                        if (String.IsNullOrEmpty(result))
-                            return false;
-                        returnHeader = false;
-                    }
-                    if (String.IsNullOrEmpty(result))
-                        break;
-                    sw.Write(result);
-                    pageIndex += 1;
-                }
-                sw.Flush();
-            }
-            return true;
-        }
-
-
-        private QueryResult ExecuteHiveQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
+        protected override QueryResult ExecuteSQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
         {
             StringBuilder sb = new StringBuilder(1024 * 16);
             QueryResult result;

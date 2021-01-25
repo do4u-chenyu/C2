@@ -6,6 +6,7 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -133,9 +134,44 @@ namespace C2.Database
             List<List<string>> tableCols = DbUtil.StringTo2DString(contentString);
             FileUtil.FillTable(dataGridView, tableCols);
         }
+
+
         public virtual bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
         {
-            return false;
+            int pageIndex = 0;
+            bool returnHeader = true;
+            int totalRetuenNum = 0, subMaxNum;
+            using (StreamWriter sw = new StreamWriter(outPutPath, false))
+            {
+                while (maxReturnNum == -1 ? true : totalRetuenNum < maxReturnNum)
+                {
+                    if (pageSize * pageIndex < maxReturnNum && pageSize * (pageIndex + 1) > maxReturnNum)
+                        subMaxNum = maxReturnNum - pageIndex * pageSize;
+                    else
+                        subMaxNum = pageSize;
+                    QueryResult contentAndNum = ExecuteSQL_Page(sqlText, pageSize, pageIndex, subMaxNum, returnHeader);
+
+                    string result = contentAndNum.content;
+                    totalRetuenNum += contentAndNum.returnNum;
+
+                    if (returnHeader) 
+                    {
+                        if (String.IsNullOrEmpty(result))
+                            return false;
+                        returnHeader = false;
+                    }
+                    if (String.IsNullOrEmpty(result))
+                        break;
+                    sw.Write(result);
+                    sw.Flush();
+                    pageIndex += 1;     
+                }
+            }
+            return true;
+        }
+        protected virtual QueryResult ExecuteSQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
+        {
+            return new QueryResult(); 
         }
         public virtual string DefaultSchema()
         {
