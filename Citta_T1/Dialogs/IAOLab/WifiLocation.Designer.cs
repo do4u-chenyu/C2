@@ -35,21 +35,22 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.tipLable = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // inputAndResult
             // 
             this.inputAndResult.BackColor = System.Drawing.Color.White;
-            this.inputAndResult.Location = new System.Drawing.Point(0, 84);
+            this.inputAndResult.Location = new System.Drawing.Point(0, 96);
             this.inputAndResult.Margin = new System.Windows.Forms.Padding(2);
             this.inputAndResult.Name = "inputAndResult";
             this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult.Size = new System.Drawing.Size(602, 219);
+            this.inputAndResult.Size = new System.Drawing.Size(602, 207);
             this.inputAndResult.TabIndex = 0;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
-            this.inputAndResult.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // inputLabel
             // 
@@ -58,7 +59,7 @@
             this.inputLabel.Location = new System.Drawing.Point(19, 16);
             this.inputLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.inputLabel.Name = "inputLabel";
-            this.inputLabel.Size = new System.Drawing.Size(191, 19);
+            this.inputLabel.Size = new System.Drawing.Size(151, 15);
             this.inputLabel.TabIndex = 1;
             this.inputLabel.Text = "请在下方输入MAC地址";
             // 
@@ -102,28 +103,48 @@
             this.label2.Location = new System.Drawing.Point(20, 30);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 15);
+            this.label2.Size = new System.Drawing.Size(0, 12);
             this.label2.TabIndex = 6;
             // 
             // tipLable
             // 
             this.tipLable.AutoSize = true;
             this.tipLable.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.tipLable.Location = new System.Drawing.Point(19, 47);
+            this.tipLable.Location = new System.Drawing.Point(20, 64);
             this.tipLable.Name = "tipLable";
-            this.tipLable.Size = new System.Drawing.Size(534, 30);
+            this.tipLable.Size = new System.Drawing.Size(413, 24);
             this.tipLable.TabIndex = 7;
-            this.tipLable.Text = "单次输入格式：04a1518006c2 或04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最大" +
-    "支持1000条";
-            this.tipLable.Click += new System.EventHandler(this.tipLable_Click);
+            this.tipLable.Text = "单次输入格式：04a1518006c2 或 04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最" +
+    "大支持1000条";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(98, 38);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(464, 23);
+            this.progressBar1.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.label1.ForeColor = System.Drawing.Color.SkyBlue;
+            this.label1.Location = new System.Drawing.Point(19, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 20);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "查询进度";
             // 
             // WifiLocation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(602, 341);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tipLable);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.inputLabel);
             this.Controls.Add(this.inputAndResult);
@@ -131,7 +152,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WifiLocation";
             this.Text = "Wifi查询";
-            this.Load += new System.EventHandler(this.WifiLocation_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WifiLocation_FormClosed);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -147,5 +168,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label tipLable;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label1;
     }
 }

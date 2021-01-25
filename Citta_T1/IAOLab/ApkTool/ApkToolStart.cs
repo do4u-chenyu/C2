@@ -13,7 +13,7 @@ namespace C2.IAOLab.ApkToolStart
     {
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
 
-        private List<List<string>> result;
+        
         private static ApkToolStart instance;
         public static ApkToolStart GetInstance()  // 单例模式
         {
@@ -21,52 +21,30 @@ namespace C2.IAOLab.ApkToolStart
                 instance = new ApkToolStart();
             return instance;
         }
-        public ApkToolStart()
+ 
+        public List<string> ExtractApk(string apkPath, string fileName, string jdkPath)
         {
-            result = new List<List<string>>();
-        }
-        public List<List<string>> ExtractApk(string apkPath, string jdkPath)
-        {
-            string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
-            if (Directory.Exists(tmpPath))
-            {
-                // 有坑
-                FileUtil.DeleteDirectory(tmpPath);
-                
-            }
-            Utils.FileUtil.CreateDirectory(tmpPath);
 
-            RunLinuxCommandApkTool(GetCommand(apkPath, jdkPath));
-
-            DirectoryInfo dir = new DirectoryInfo(apkPath);
-            //检索表示当前目录的文件和子目录
-            FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
-            //遍历检索的文件和子目录
-            foreach (FileSystemInfo fsInfo in fsInfos)
-            {
-                result.Add(GetApkInfo(fsInfo.FullName, fsInfo.Name));
-                //先不用生成result,读取需要的数据加载到内存，并控件预览框展示
-            }
-            return result;
-            
+            RunLinuxCommandApkTool(GetCommand(apkPath, fileName, jdkPath));
+            return GetApkInfo(apkPath, fileName);
         }
         private List<string> GetApkInfo(string apkPath, string fileName)
         {
             string apkName = fileName.Replace(".apk", String.Empty);
-            string apkToolPath = Path.GetTempPath() + @"\ApkTool\" + apkName;
-            if (ExploreDirectory(apkToolPath) == true)
+            string apkToolPath = Path.Combine(Path.GetTempPath(), "ApkTool", apkName);
+            if (Directory.Exists(apkToolPath))
             {
                 return new List<string>() { GetIcon(apkToolPath),
-                                         fileName,
-                                         GetApkName(apkToolPath),
-                                         GetPackageName(apkToolPath),
-                                         GetActivity(apkToolPath),
-                                         GetApkSize(apkPath) };
+                                            fileName,
+                                            GetApkName(apkToolPath),
+                                            GetPackageName(apkToolPath),
+                                            GetActivity(apkToolPath),
+                                            GetApkSize(apkPath) };
             }
             else
             {
-                MessageBox.Show(apkName+"解析失败");
-                return null;
+                MessageBox.Show(apkName + "解析失败");
+                return new List<string>();
             }
             
 
@@ -78,41 +56,18 @@ namespace C2.IAOLab.ApkToolStart
                 return fileStream.Length / (1024 * 1024) + "M";
             }
         }
-        private static bool ExploreDirectory(string fullFilePath)
-        {//判断文件的存在
-            if (File.Exists(fullFilePath))
-            {
-                return true;
-            }
-            else
-            {
-                //不存在文件
-                return false;
-
-            }
-
-        }
-
-        public List<string> GetCommand(string apkPath, string jdkPath)
+       
+        public List<string> GetCommand(string apkPath,string fileName, string jdkPath)
         {
             List<string> cmdList = new List<string>();
-            string setJdkPath = "set path = " + jdkPath + ";% path %";
-            cmdList.Add(setJdkPath);
-            DirectoryInfo dir = new DirectoryInfo(apkPath);
-            //检索表示当前目录的文件和子目录
-            FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
-            //遍历检索的文件和子目录
-            foreach (FileSystemInfo fsInfo in fsInfos)
-            {
-                string apkToolPath = Application.StartupPath + @"\sbin\apktool_2.3.0.jar"; 
-                //string cmdApk = @"java -jar "+ apkToolPath+ " d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
-                string cmdApk = String.Format(@"java -jar {0} d -f {1} -o {2}\ApkTool\{3}",
-                                                                                            apkToolPath, 
-                                                                                            fsInfo.FullName, 
-                                                                                            Path.GetTempPath(), 
-                                                                                            fsInfo.Name.Replace(".apk", String.Empty));
-                cmdList.Add(cmdApk);
-            }
+            string apkToolPath = Path.Combine(Application.StartupPath ,@"sbin\apktool_2.3.0.jar"); 
+            //string cmdApk = @"java -jar "+ apkToolPath+ " d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
+            string cmdApk = String.Format(@"{0} -jar {1} d -f {2} -o {3}",
+                                            "\""+jdkPath+ "\"",
+                                            "\"" + apkToolPath + "\"",
+                                            "\"" + apkPath + "\"",
+                                            "\"" + Path.Combine(Path.GetTempPath(),"ApkTool", fileName.Replace(".apk", String.Empty)) + "\"");
+            cmdList.Add(cmdApk);
             return cmdList;
         }
         public string GetIcon(string filePath)
@@ -262,7 +217,6 @@ namespace C2.IAOLab.ApkToolStart
                 {
                     foreach (string cmd in cmds)
                     {
-                        
                         p.StandardInput.WriteLine(cmd);
                     }
 
@@ -298,9 +252,10 @@ namespace C2.IAOLab.ApkToolStart
             finally
             {
                 if (p != null)
+                {
                     p.Dispose();//释放资源
-                p.Close();
-
+                    p.Close();
+                }
             }
             return errorMessage;
         }

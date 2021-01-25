@@ -72,7 +72,7 @@ namespace C2.Controls.Left
             DataSourceDictI2B = new Dictionary<string, DataButton>();
             LinkSourceDictI2B = new Dictionary<string, LinkButton>();
             startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            linkPoint = new Point(ButtonLeftX - 11, -ButtonGapHeight);
+            linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             _RelateTableButtons = new List<TableButton>();
         }
@@ -211,11 +211,15 @@ namespace C2.Controls.Left
         #region 外部数据添加连接
         private void AddConnectLabel_Click(object sender, EventArgs e)
         {
-            var dialog = new AddDatabaseDialog();
-            if (dialog.ShowDialog(this) == DialogResult.OK)
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                GenLinkButton(dialog.DatabaseInfo, true);
+                var dialog = new AddDatabaseDialog();
+                if (dialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    GenLinkButton(dialog.DatabaseInfo, true);
+                }
             }
+               
         }
         #endregion
 
@@ -275,8 +279,6 @@ namespace C2.Controls.Left
         {               
             SelectLinkButton = new LinkButton(dbinfo);
             GenLinkButton(SelectLinkButton);
-            if (updateFrameAndTables)
-                ConnectDatabase(dbinfo);//连接一次数据库，刷新架构及数据表
             SaveExternalData();
         }
         public void GenLinkButton(LinkButton linkButton)
@@ -298,7 +300,9 @@ namespace C2.Controls.Left
         {
             if (this.linkPanel.Controls.Count > 0)
                 linkPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
-            linkPoint.Y += ButtonGapHeight;
+            else
+                linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
+            linkPoint.Y += ButtonGapHeight;           
             lb.Location = linkPoint;
         }
         #endregion
@@ -380,16 +384,20 @@ namespace C2.Controls.Left
             //根据架构改变数据表
             List<Table> tables;
             Dictionary<string, List<string>> tableColDict;
-            IDAO dao = DAOFactory.CreateDAO(SelectLinkButton.DatabaseItem);
-            if (!dao.TestConn())
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                IDAO dao = DAOFactory.CreateDAO(SelectLinkButton.DatabaseItem);
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                tables = dao.GetTables(this.schemaComboBox.Text);
+                tableColDict = dao.GetColNameByTables(tables);
+                UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
+                this.tableFilterTextBox.Text = "";
             }
-            tables = dao.GetTables(this.schemaComboBox.Text);
-            tableColDict = dao.GetColNameByTables(tables);
-            UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
-            this.tableFilterTextBox.Text = "";
+               
         }
 
         private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
@@ -439,7 +447,9 @@ namespace C2.Controls.Left
             //刷新数据表
             List<Table> tables = dao.GetTables(this.schemaComboBox.Text);
             Dictionary<string, List<string>> tableColDict = dao.GetColNameByTables(tables);
+            this.schemaComboBox.SelectedIndexChanged -= SchemaComboBox_SelectedIndexChanged;
             UpdateTables(tables, dbi, tableColDict);
+            this.schemaComboBox.SelectedIndexChanged += SchemaComboBox_SelectedIndexChanged;
         }
 
         private void UpdateFrameCombo(List<string> users, string loginUser, string defaultSchema)

@@ -24,25 +24,15 @@ namespace C2.Dialogs.IAOLab
         {
             InitializeComponent();
         }
-        public void ReLayoutForm()
-        {
 
-        }
         public string Tip { set { this.tipLable.Text = value; } }
         public string InputLable { set { this.inputLabel.Text = value; } }
-        public Point InputLableLaction { set { this.inputLabel.Location = value; }get { return this.inputLabel.Location;  } }
+      
 
         public string FormType { get { return this.formType; } set { this.formType = value; } }
 
-        private void toolTip1_Popup(object sender, PopupEventArgs e)
-        {
-            
-        }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
 
-        }
         private void Search_Click(object sender, EventArgs e)
         {
             string[] inputArray = this.inputAndResult.Text.Split('\n');
@@ -54,42 +44,58 @@ namespace C2.Dialogs.IAOLab
                   
                     break;
                 case "BaseStation":
-
+                    progressBar1.Value = 0;
+                    progressBar1.Maximum = inputArray.Length;
+                    progressBar1.Minimum = 0;
                     foreach (string baseStation in inputArray)
                     {
-                        if (!string.IsNullOrEmpty(baseStation))
+                        progressBar1.Value += 1 ;
+                        if (!string.IsNullOrEmpty(baseStation) && progressBar1.Value < 1000)
                         {
-                            tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(baseStation));
+                            tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(baseStation.Split('\t')[0]));
                             inputAndResult.Text = tmpResult.ToString();
                         }
                     }
+                    
                     break;
                 case "Wifi":
+                    progressBar1.Value = 0;
+                    progressBar1.Maximum = inputArray.Length;
+                    progressBar1.Minimum = 0;
                     foreach (string mac in inputArray)
                     {
-                        if (!string.IsNullOrEmpty(mac))
+                        progressBar1.Value += 1;
+                        if (!string.IsNullOrEmpty(mac) && progressBar1.Value < 1000)
                         {
-                            tmpResult.Append(WifiMac.GetInstance().MacLocate(mac));
+                            tmpResult.Append(WifiMac.GetInstance().MacLocate(mac.Split('\t')[0]));
                             inputAndResult.Text = tmpResult.ToString();
                         }
+                        
                     }
+                    
                     break;
                 case "Card":
-                    int i = 0;
+                    progressBar1.Value = 0;
+                    progressBar1.Maximum = inputArray.Length;
+                    progressBar1.Minimum = 0;
+                    label1.Parent = progressBar1;
                     foreach (string bankCard in inputArray)
                     {
-                        if (!string.IsNullOrEmpty(bankCard))
+                        progressBar1.Value += 1;
+                        if (!string.IsNullOrEmpty(bankCard) && progressBar1.Value < 1000)
                         {
-                            i++;                    
-                            tmpResult.Append(BankTool.GetInstance().BankToolSearch(bankCard));
+                           
+                            if (progressBar1.Value % 25 == 0 )
+                            {
+                                Thread.Sleep(800);
+                                
+                            }
+                            tmpResult.Append(BankTool.GetInstance().BankToolSearch(bankCard.Split('\t')[0]));
                             inputAndResult.Text = tmpResult.ToString();
                         }
-                        if (i == 50)
-                        {
-                            Thread.Sleep(500);
-                            i = 0;
-                        }
+                       
                     }
+                    
                     break;             
                 default:
                     break;
@@ -98,20 +104,13 @@ namespace C2.Dialogs.IAOLab
         }
 
         private void Cancle_Click(object sender, EventArgs e)
-        {
-            this.inputAndResult.Text = null;
+        {         
             Close();
         }
 
-        private void tipLable_Click(object sender, EventArgs e)
+        private void WifiLocation_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            this.inputAndResult.Clear();
         }
-
-        private void WifiLocation_Load(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

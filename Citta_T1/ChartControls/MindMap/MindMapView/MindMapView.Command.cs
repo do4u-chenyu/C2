@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace C2.Controls.MapViews
 {
-    public partial class MindMapView 
+    public partial class MindMapView
     {
         #region Common Commands
 
@@ -42,7 +42,7 @@ namespace C2.Controls.MapViews
                 if (ReadOnly)
                     return false;
 
-                if (!SelectedTopics.IsNullOrEmpty() && !SelectedTopics.Exists(t=>t.IsRoot))
+                if (!SelectedTopics.IsNullOrEmpty() && !SelectedTopics.Exists(t => t.IsRoot))
                     return true;
 
                 if (SelectedObject is Widget && !(SelectedObject is C2BaseWidget))
@@ -97,7 +97,7 @@ namespace C2.Controls.MapViews
         {
             if (Selection.Count > 0)
             {
-                Delete(Selection.FindAll(c => ! (c is C2BaseWidget)).ToArray());
+                Delete(Selection.FindAll(c => !(c is C2BaseWidget)).ToArray());
             }
 
         }
@@ -143,17 +143,42 @@ namespace C2.Controls.MapViews
                 ExecuteCommand(command);
             }
         }
-        private void DelAllItems(Topic topic,List<DataItem> dataItems)
+        private void DelAllItems(Topic topic, List<DataItem> dataItems)
         {
-            foreach(DataItem dataItem in dataItems)
+            foreach (DataItem dataItem in dataItems)
             {
                 TopicUpdate(topic, dataItem);
             }
         }
         private void CloseRelateOpTab(OperatorWidget tmpOpw)
         {
-            if (tmpOpw != null && tmpOpw.HasModelOperator && tmpOpw.ModelRelateTab !=null && Global.GetMainForm().TaskBar.Items.Contains(tmpOpw.ModelRelateTab))
+            if (tmpOpw != null && tmpOpw.HasModelOperator && tmpOpw.ModelRelateTab != null && Global.GetMainForm().TaskBar.Items.Contains(tmpOpw.ModelRelateTab))
                 Global.GetMainForm().MdiClient.CloseMdiForm((Form)tmpOpw.ModelRelateTab.Tag);
+        }
+
+        private bool CompareTopic(Topic topic, Topic[] topics)   
+        {
+            List<Topic> truelist = new List<Topic>();
+            List<Topic> parents = topic.GetAllParent();
+            foreach(var t_item in topics)
+            {
+                foreach(var p_item in parents)
+                {
+                    if (t_item == p_item)
+                    {
+                        truelist.Add(t_item);
+                    }
+
+                }
+            }
+            if (truelist.Count>0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void Copy()
@@ -161,13 +186,24 @@ namespace C2.Controls.MapViews
             if (SelectedTopics != null && SelectedTopics.Length > 0)
             {
                 var topics = SelectedTopics.OrderBy(t => t.Level).ToArray();
-                Copy(topics, true);
+                //List<Topic> parents = topics[3].GetAllParent();
+                List<Topic> addTopics = new List<Topic>();
+                foreach (Topic tt in topics)
+                {
+                    if (!CompareTopic(tt, topics))
+                    {
+                        addTopics.Add(tt);
+                    }
+                }
+
+                Copy(addTopics.ToArray(), true);
             }
             else if (SelectedObject is Widget)// && ((Widget)SelectedObject).CanCopy)
             {
                 var widgets = SelectedObjects.Where(w=> !(w is C2BaseWidget)).ToArray();
                 if (widgets.Count() == 0)
                     return;
+
                 Copy(widgets, false);
             }
         }

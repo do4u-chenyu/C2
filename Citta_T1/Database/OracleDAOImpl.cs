@@ -47,19 +47,10 @@ namespace C2.Database
         }
         public override bool TestConn()
         {
-            try
-            {
-                using (OracleConnection con = new OracleConnection(this.ConnectionString))
-                {
-                    con.Open();
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                return false;
-            }
+            OracleConnection con = new OracleConnection(this.ConnectionString);
+
+            return TryOpen(con, 15000, DatabaseType.Oracle);
+
         }
         public override string Query(string sql, bool header=true)
         {
@@ -124,40 +115,8 @@ namespace C2.Database
         {
             return this.GetColNameByTablesSQL(new List<Table>() { table });
         }
-        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
-        {
-            int pageIndex = 0;
-            bool returnHeader = true;
-            int totalRetuenNum = 0, subMaxNum = 0;
-            using (StreamWriter sw = new StreamWriter(outPutPath, false))
-            {
-                while (maxReturnNum == -1 ? true : totalRetuenNum < maxReturnNum)
-                {
-                    if (pageSize * pageIndex < maxReturnNum && pageSize * (pageIndex + 1) > maxReturnNum)
-                        subMaxNum = maxReturnNum - pageIndex * pageSize;
-                    else
-                        subMaxNum = pageSize;
-                    QueryResult contentAndNum = ExecuteOracleQL_Page(sqlText, pageSize, pageIndex, subMaxNum, returnHeader);
-
-                    string result = contentAndNum.content;
-                    totalRetuenNum += contentAndNum.returnNum;
-
-                    if (returnHeader)
-                    {
-                        if (String.IsNullOrEmpty(result))
-                            return false;
-                        returnHeader = false;
-                    }
-                    if (String.IsNullOrEmpty(result))
-                        break;
-                    sw.Write(result);
-                    pageIndex += 1;
-                }
-                sw.Flush();
-            }
-            return true;
-        }
-        private QueryResult ExecuteOracleQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
+       
+        protected override QueryResult ExecuteSQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
         {
             /*
              * pageIndex start from 0.
@@ -184,6 +143,7 @@ namespace C2.Database
                             for (int i = 0; i < rdr.FieldCount - 1; i++)
                                 sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
                             sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+
                         }
 
                         while (rdr.Read() && returnNum < maxNum)

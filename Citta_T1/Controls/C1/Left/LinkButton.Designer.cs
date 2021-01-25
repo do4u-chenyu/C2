@@ -107,7 +107,7 @@ namespace C2.Controls.Left
             this.txtButton.Location = new System.Drawing.Point(25, 1);
             this.txtButton.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(143, 25);
+            this.txtButton.Size = new System.Drawing.Size(129, 25);
             this.txtButton.TabIndex = 9;
             this.txtButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtButton.UseVisualStyleBackColor = false;
@@ -124,7 +124,7 @@ namespace C2.Controls.Left
             this.Controls.Add(this.txtButton);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LinkButton";
-            this.Size = new System.Drawing.Size(170, 27);
+            this.Size = new System.Drawing.Size(158, 27);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);

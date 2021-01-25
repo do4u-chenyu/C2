@@ -855,12 +855,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_96A5A6D76DEF4C4CB9A6BEC9D34DB53E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_97F204C7B2724D149C3DBB5D52ED2519"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1204,6 +1198,12 @@
         "Entry"
         {
         "MsmKey" = "8:_C54DAB19A52F4633A6E0C5EE1247AC3A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C6C801DB384A42A1B0DDFC5B50332394"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4645,26 +4645,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_96A5A6D76DEF4C4CB9A6BEC9D34DB53E"
-            {
-            "SourcePath" = "8:..\\ThirdPartyLibrary\\AppTool.2.3.0\\apktool_2.3.0.jar"
-            "TargetName" = "8:apktool_2.3.0.jar"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_97F204C7B2724D149C3DBB5D52ED2519"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\377_人物.png"
@@ -5666,6 +5646,26 @@
             "TargetName" = "8:地下钱庄线索发现.iao"
             "Tag" = "8:"
             "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C6C801DB384A42A1B0DDFC5B50332394"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\sbin\\apktool_2.3.0.jar"
+            "TargetName" = "8:apktool_2.3.0.jar"
+            "Tag" = "8:"
+            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"

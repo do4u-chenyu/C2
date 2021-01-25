@@ -131,31 +131,23 @@ namespace C2.Model.MindMaps
             allChildren.AddRange(topic.Children);
         }
 
-        public List<DataItem> GetParentDatas()
+        public List<Topic> GetAllParent()
         {
-            List<DataItem> dataItems = new List<DataItem>();
-            GetParentDatas(this, dataItems);
-            return dataItems;
-        }
-        private void GetParentDatas(Topic topic, List<DataItem> dataItems)
-        {
-            if (!topic.IsRoot)
-            {
-                Topic parentTopic = topic.ParentTopic;
-                GetParentDatas(parentTopic,dataItems);
-            }
-            GetCurrentTopicDatas(topic, dataItems);
+            List<Topic> allParent = new List<Topic>();
+            GetParent(this, allParent);
+            return allParent;
         }
 
-        private void GetCurrentTopicDatas(Topic topic, List<DataItem> dataItems)
+        private void GetParent(Topic topic, List<Topic> allParent)
         {
-            DataSourceWidget dtw = topic.FindWidget<DataSourceWidget>();
-            ResultWidget rsw = topic.FindWidget<ResultWidget>();
-            if (dtw != null)
-                dataItems.AddRange(dtw.DataItems);
-            if (rsw != null)
-                dataItems.AddRange(rsw.DataItems);
+            if (!topic.IsRoot)
+             {
+                Topic parentTopic = topic.ParentTopic;
+                GetParent(parentTopic, allParent);
+                allParent.Add(topic.ParentTopic);
+            } 
         }
+
 
         public override ChartObject Parent
         {
@@ -171,6 +163,8 @@ namespace C2.Model.MindMaps
                 }
             }
         }
+
+
 
         [DefaultValue(-1), Browsable(false)]
         public int Index

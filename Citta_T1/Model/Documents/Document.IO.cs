@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using C2.Core;
@@ -180,10 +181,25 @@ namespace C2.Model.Documents
                     ChartPage cdoc = LoadChartDocument(documentVersion, chart_e);
                     if (cdoc != null)
                         doc.Charts.Add(cdoc);
+
+
                 }
 
                 doc.ActiveChartIndex = ST.GetIntDefault(charts.GetAttribute("active_chart"));
             }
+
+            XmlNode chart_id = dom.DocumentElement.SelectSingleNode("//chart");
+            XmlNodeList nodes = chart_id.SelectSingleNode("nodes").SelectNodes("//node");
+
+            List<int> id = new List<int>();
+
+            foreach (XmlNode node in nodes)
+            {
+                id.Add(int.Parse(node.Attributes["id"].Value));
+            }
+            var maxid = id.Max();
+            doc.ObjectSeed = maxid + 1;
+
 
             doc.Modified = false;
             return doc;

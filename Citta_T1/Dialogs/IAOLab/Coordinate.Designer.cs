@@ -63,18 +63,18 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(625, 350);
-            this.tabControl.TabIndex = 0;
-            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tabControl.TabIndex = 10;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.inputAndResult);
             this.tabPage1.Controls.Add(this.tip0);
             this.tabPage1.Controls.Add(this.sixTransform);
-            this.tabPage1.Location = new System.Drawing.Point(4, 27);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(617, 319);
+            this.tabPage1.Size = new System.Drawing.Size(617, 322);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "通用坐标系经纬度转换";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -82,12 +82,12 @@
             // inputAndResult
             // 
             this.inputAndResult.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.inputAndResult.Location = new System.Drawing.Point(-4, 127);
+            this.inputAndResult.Location = new System.Drawing.Point(-1, 116);
             this.inputAndResult.Margin = new System.Windows.Forms.Padding(2);
             this.inputAndResult.Name = "inputAndResult";
             this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult.Size = new System.Drawing.Size(625, 196);
-            this.inputAndResult.TabIndex = 11;
+            this.inputAndResult.Size = new System.Drawing.Size(618, 207);
+            this.inputAndResult.TabIndex = 10;
             this.inputAndResult.Text = "";
             this.inputAndResult.WordWrap = false;
             // 
@@ -97,7 +97,7 @@
             this.tip0.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tip0.Location = new System.Drawing.Point(17, 16);
             this.tip0.Name = "tip0";
-            this.tip0.Size = new System.Drawing.Size(458, 36);
+            this.tip0.Size = new System.Drawing.Size(357, 28);
             this.tip0.TabIndex = 10;
             this.tip0.Text = "单次输入格式：40.1 120.2\r\n批量查询格式：多个坐标间用换行分割，最大支持1000条";
             // 
@@ -111,7 +111,7 @@
             this.sixTransform.Controls.Add(this.gcj_wgs);
             this.sixTransform.Controls.Add(this.gcj_bd);
             this.sixTransform.Controls.Add(this.bd_wgs);
-            this.sixTransform.Location = new System.Drawing.Point(7, 69);
+            this.sixTransform.Location = new System.Drawing.Point(7, 52);
             this.sixTransform.Margin = new System.Windows.Forms.Padding(2);
             this.sixTransform.Name = "sixTransform";
             this.sixTransform.Size = new System.Drawing.Size(580, 54);
@@ -123,7 +123,7 @@
             this.wgs_gcj.Location = new System.Drawing.Point(371, 28);
             this.wgs_gcj.Margin = new System.Windows.Forms.Padding(2);
             this.wgs_gcj.Name = "wgs_gcj";
-            this.wgs_gcj.Size = new System.Drawing.Size(191, 22);
+            this.wgs_gcj.Size = new System.Drawing.Size(151, 18);
             this.wgs_gcj.TabIndex = 5;
             this.wgs_gcj.Text = "wgs_gcj:国际转火星";
             this.wgs_gcj.UseVisualStyleBackColor = true;
@@ -134,7 +134,7 @@
             this.bd_gcj.Location = new System.Drawing.Point(192, 28);
             this.bd_gcj.Margin = new System.Windows.Forms.Padding(2);
             this.bd_gcj.Name = "bd_gcj";
-            this.bd_gcj.Size = new System.Drawing.Size(182, 22);
+            this.bd_gcj.Size = new System.Drawing.Size(144, 18);
             this.bd_gcj.TabIndex = 4;
             this.bd_gcj.Text = "bd_gcj:百度转火星";
             this.bd_gcj.UseVisualStyleBackColor = true;
@@ -145,7 +145,7 @@
             this.wgs_bd.Location = new System.Drawing.Point(13, 28);
             this.wgs_bd.Margin = new System.Windows.Forms.Padding(2);
             this.wgs_bd.Name = "wgs_bd";
-            this.wgs_bd.Size = new System.Drawing.Size(182, 22);
+            this.wgs_bd.Size = new System.Drawing.Size(144, 18);
             this.wgs_bd.TabIndex = 3;
             this.wgs_bd.Text = "wgs_bd:国际转百度";
             this.wgs_bd.UseVisualStyleBackColor = true;
@@ -156,7 +156,7 @@
             this.gcj_wgs.Location = new System.Drawing.Point(371, 6);
             this.gcj_wgs.Margin = new System.Windows.Forms.Padding(2);
             this.gcj_wgs.Name = "gcj_wgs";
-            this.gcj_wgs.Size = new System.Drawing.Size(191, 22);
+            this.gcj_wgs.Size = new System.Drawing.Size(151, 18);
             this.gcj_wgs.TabIndex = 2;
             this.gcj_wgs.Text = "gcj_wgs:火星转国际";
             this.gcj_wgs.UseVisualStyleBackColor = true;
@@ -167,7 +167,7 @@
             this.gcj_bd.Location = new System.Drawing.Point(192, 6);
             this.gcj_bd.Margin = new System.Windows.Forms.Padding(2);
             this.gcj_bd.Name = "gcj_bd";
-            this.gcj_bd.Size = new System.Drawing.Size(182, 22);
+            this.gcj_bd.Size = new System.Drawing.Size(144, 18);
             this.gcj_bd.TabIndex = 1;
             this.gcj_bd.Text = "gcj_bd:火星转百度";
             this.gcj_bd.UseVisualStyleBackColor = true;
@@ -179,7 +179,7 @@
             this.bd_wgs.Location = new System.Drawing.Point(13, 6);
             this.bd_wgs.Margin = new System.Windows.Forms.Padding(2);
             this.bd_wgs.Name = "bd_wgs";
-            this.bd_wgs.Size = new System.Drawing.Size(182, 22);
+            this.bd_wgs.Size = new System.Drawing.Size(144, 18);
             this.bd_wgs.TabIndex = 0;
             this.bd_wgs.TabStop = true;
             this.bd_wgs.Text = "bd_wgs:百度转国际";
@@ -189,10 +189,10 @@
             // 
             this.tabPage2.Controls.Add(this.tip1);
             this.tabPage2.Controls.Add(this.inputAndResult1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
-            this.tabPage2.Size = new System.Drawing.Size(617, 319);
+            this.tabPage2.Size = new System.Drawing.Size(617, 322);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "经纬度距离计算";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -203,7 +203,7 @@
             this.tip1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tip1.Location = new System.Drawing.Point(8, 23);
             this.tip1.Name = "tip1";
-            this.tip1.Size = new System.Drawing.Size(611, 36);
+            this.tip1.Size = new System.Drawing.Size(476, 28);
             this.tip1.TabIndex = 11;
             this.tip1.Text = "单次输入格式：04a1518006c2 或04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最大" +
     "支持1000条";
@@ -211,11 +211,11 @@
             // inputAndResult1
             // 
             this.inputAndResult1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.inputAndResult1.Location = new System.Drawing.Point(-4, 67);
+            this.inputAndResult1.Location = new System.Drawing.Point(-1, 67);
             this.inputAndResult1.Margin = new System.Windows.Forms.Padding(2);
             this.inputAndResult1.Name = "inputAndResult1";
             this.inputAndResult1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.inputAndResult1.Size = new System.Drawing.Size(625, 256);
+            this.inputAndResult1.Size = new System.Drawing.Size(618, 256);
             this.inputAndResult1.TabIndex = 1;
             this.inputAndResult1.Text = "";
             this.inputAndResult1.WordWrap = false;
@@ -262,6 +262,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "coordinateConversion";
             this.Text = "经纬度转换与距离计算";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CoordinateFormClosed);
+            this.Shown += new System.EventHandler(this.Form_Shown);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

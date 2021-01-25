@@ -49,7 +49,13 @@ namespace C2.Utils
                 Global.GetLogView().LogUpdate(content);
             return this;
         }
-
+        public LogUtil ErrorFromDataBase(string content) 
+        {
+            log.ErrorFormat("{0}:{1}", this.ModuleName, content);
+            if (Global.GetLogView() != null)
+                Global.GetLogView().ActiveUpdateLog(content);
+            return this;
+        }
         public LogUtil Fatal(string content)
         {
             log.FatalFormat("{0}:{1}", this.ModuleName, content);
