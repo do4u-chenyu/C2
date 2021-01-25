@@ -6,6 +6,7 @@
 #define MyAppPublisher "fenghuo"
 #define MyAppURL "http://smallwhite555.gitee.io/citta/index.html"
 #define MyAppPkgDir "C:\Program Files\FiberHome\IAO解决方案"
+
 #define MyAppExeName "C2.exe"
 ; 生成 目录setup.exe 所在文件夹
 #define MySetupOutDir ".\output"
@@ -33,7 +34,6 @@
 AppId=123456789
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
@@ -43,9 +43,7 @@ VersionInfoDescription={#MyAppName}安装程序
 VersionInfoCompany={#MyAppPublisher}
 VersionInfoVersion={#MyAppVersion}
 VersionInfoProductVersion={#MyAppVersion}
-;VersionInfoCopyright={#MyCopyright}
 
-;DefaultDirName={pf}\{#MyAppName}
 DefaultDirName={code:GetInstallPath}
 DefaultGroupName={#MyAppName}
 LicenseFile={#MyResDir}\License.txt
@@ -118,30 +116,36 @@ var
   CurrentDPI:integer;
   
   // page welcome 
-  btnOneKey,btnCustomInstall:HWND;
-  chkLicense:HWND;
+  btnOneKey,btnCustomInstall:HWND;     //一键安装按钮，自定义按钮
+  chkLicense:HWND;          //选中欢迎访问链接
   lblLicense,lblWelcome,lblAgree:TLabel;
   imgBigIcon1, imgLogo1, imgOneKeySh:Longint;
 
   // page select dir 
-  btnSelectDir1,btnNext1,btnBack1:HWND;
+  btnSelectDir1,btnNext1,btnBack1:HWND;//浏览按钮、上一步按钮、下一步按钮
   edtSelectDir1:TEdit;
   chkQuickLaunch:HWND;  // 快速启动栏 (check box )
   lblQuickLaunch:TLabel;// 快速启动栏 (上面的label)
-  lblNeedSpace, lblDiskSpace,lblTipWDir :TLabel;
-
+  lblNeedSpace, lblDiskSpace,lblTipWDir,lblTipWDir2,lblTipWDir3 :TLabel;
+  //是否选中快速启动栏
   isSelectedQuickLaunch:boolean;
+  
+  //新添加：   page select work dir
+  btnSelectDir2,btnNext2,btnBack2:HWND;    //浏览按钮、上一步、下一步
+  edtSelectDir2:TEdit;                     //目录栏中的文件目录地址
+  WorkSpacePath:string;
   
   // page install 
   imgProgressBar, imgProgressBarBg:Longint; //进度条
   lblTipProgress :TLabel;
  
   // page finish;
-  btnFinish:HWND;
+  btnFinish:HWND;       //结束按钮
 
 var 
   PageStateLbl1,PageStateLbl2,PageStateLbl3, PageStateLblK1,PageStateLblK2: TLabel; 
 
+//以管理员身份运行程序
 procedure ShoutcutRunAsAdmin(Filename:string);
 var 
   Buffer:String;
@@ -162,11 +166,13 @@ begin
   end;
 end;
 
+//范围等级
 function DpiScale(v:integer):integer;
 begin
   Result:=v*DpiScalePctg/1000;
 end;
 
+//获取命令行参数
 function GetCmdlineParam(PName:String):String;
 var
   CmdLine : String;
@@ -215,22 +221,23 @@ begin
         end
         else 
         begin
-           Result := Chr(destDisk) + ':\IAO解决方案' ;
+           Result :='C:\Program Files\FiberHome\IAO解决方案';
         end
       end
     else 
       begin
       Result := GetCmdlineParam('-installPath');
       end;
- //MsgBox(Result, mbInformation, MB_OK);
 end;
 
+//窗口初始化
 procedure Notify_Init();
 begin
-     g_notifyWnd := FindWindowByWindowName(GetCmdlineParam('-notify_wnd'));
+     g_notifyWnd := FindWindowByWindowName(GetCmdlineParam('-notify_wnd'));   //按照窗口名查找窗口
      g_notifyFinished := false;
 end;
 
+//通知安装进度情况
 procedure Notify_DoNotifyProgress( pos, total: Longint);
 begin 
    if g_notifyWnd <> 0 then
@@ -239,6 +246,7 @@ begin
    end;
 end;
 
+//通知安装结束
 procedure Notify_DoNotifyFinish();
 begin
    g_notifyFinished := true;
@@ -248,6 +256,7 @@ begin
    end;
 end;
 
+//页面状态标签
 function PageState_CreateLabel(text:string; x, y:integer):TLabel;
 var lbl:TLabel;
 begin
@@ -265,7 +274,8 @@ begin
   end;
   result := lbl;
 end;
-  
+
+//页面状态初始化 
 procedure PageState_Init();
 begin
   PageStateLbl1  := PageState_CreateLabel('欢迎'    , DpiScale(501), DpiScale(69));
@@ -275,6 +285,7 @@ begin
   PageStateLbl3  := PageState_CreateLabel('完成'    , DpiScale(610), DpiScale(69));
 end;
 
+//设置标签内容为粗体
 procedure SetTLabelBold(lbl:TLabel; isBold:boolean);
 begin
  if isBold then begin 
@@ -284,6 +295,7 @@ begin
  end;
 end;
 
+//页面合集
 procedure PageState_Set(idx:integer);
 begin
   SetTLabelBold(PageStateLbl1, idx = 1);
@@ -291,6 +303,7 @@ begin
   SetTLabelBold(PageStateLbl3, idx = 3);
 end;
 
+//设置空间是否可见
 procedure TconSetVisible(lbl:TControl; bVis:boolean);
 begin
   if bVis then
@@ -303,27 +316,50 @@ begin
 	end;
 end;
 
+procedure ReWriteAppConfig();
+begin
+  SaveStringToFile( WizardForm.DirEdit.Text + '\C2.exe.config', 
+        '<?xml version="1.0" encoding="utf-8"?>' + #13#10 +
+        '<configuration>' + #13#10 +
+        '    <startup>' + #13#10 +
+        '        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5"/>' + #13#10 +
+        '    </startup>' + #13#10 +
+        '    <appSettings>' + #13#10 +
+        '      <add key="workspace" value="' + edtSelectDir2.Text + '"/>' + #13#10 +
+        '      <add key="RunLevel" value="NoLogin"/>' + #13#10 +
+        '      <add key="EPPlus:ExcelPackage.LicenseContext" value="NonCommercial" />' + #13#10 +
+        '      <add key="ClientSettingsProvider.ServiceUri" value="" />' + #13#10 +
+        '      <add key="IAOLab" value="APK, BaseStation, Wifi, Card, Tude, Ip "/>' + #13#10 +
+        '    </appSettings>' + #13#10 +
+        '</configuration>', false);
+end;
+
+//点击关闭按钮事件
 procedure BtnClose_OnClick(hBtn:HWND);
 begin
   if ExitSetupMsgBox then
   begin
     WizardForm.Release;
     WizardForm.Close;
-    // stop and rollback actions you did from your after install
-    // process and kill the setup process itself
+    // stop and rollback actions you did from your after install   在安装后停止并回滚从中执行的操作
+    // process and kill the setup process itself   进行与终止安装进程本身
     ExitProcess(0);
   end;  
 end;
+
+//点击自定义安装事件
 procedure btnCustomInstallOnClick(hBtn:HWND);
 begin
   WizardForm.NextButton.OnClick(WizardForm);
 end;
 
+//单击最小化按钮事件
 procedure btnMin_OnClick(hBtn:HWND);
 begin
   SendMessage(WizardForm.Handle,WM_SYSCOMMAND,61472,0);
 end;
 
+//点击门户链接
 procedure lblLicenseClick(sender :TObject);
 var
   ErrorCode: Integer;
@@ -331,6 +367,7 @@ begin
   ShellExec('open', '{#MyAppLkLicenseURL}', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);  
 end; 
 
+//点击是否选中门户按钮
 procedure chkLicenseOnClick(bBtn :HWND);
 var 
    isCheck:boolean;
@@ -348,12 +385,15 @@ begin
    end;
 end;
 
+//点击一键安装按钮
 procedure btnOneKey_OnClick(hBtn:HWND);
 begin
   WizardForm.NextButton.OnClick(WizardForm);
   WizardForm.NextButton.OnClick(WizardForm);
+  WizardForm.NextButton.OnClick(WizardForm);
 end;
 
+//悬停控制更改
 procedure OnHoverControlChanged(Control: TControl);
 begin
 	if lblLicense <> nil then
@@ -369,7 +409,7 @@ begin
 	end ;
 end;
 
-
+//欢迎访问门户是否选中
 procedure InitGui_PageWelcome();
 var
   BtnOneKeyFont:TFont;
@@ -389,15 +429,14 @@ begin
     Color:=$986800;
   end;
 
+//自定义选中按钮
   btnCustomInstall:=BtnCreate(WizardForm.Handle,DpiScale(540),DpiScale(417),DpiScale(89), DpiScale(30), ExpandConstant('{tmp}\btn.png'), 1, False)
   BtnSetEvent(btnCustomInstall,BtnClickEventID,WrapBtnCallback(@btnCustomInstallOnClick,1));
   BtnSetText(btnCustomInstall, '自定义');
   BtnSetFont(btnCustomInstall, tmpFont.Handle);
   BtnSetFontColor(btnCustomInstall,$986800,$986800,$986800,$AFAFAF);
 
-
-
-
+//设置一键安装按钮的背景色
   btnOneKey:=BtnCreate(WizardForm.Handle,DpiScale(240),DpiScale(260),DpiScale(177), DpiScale(43), ExpandConstant('{tmp}\btnOneKeyInstall.png'),1,False)
   
   BtnSetText(btnOneKey, '一键安装');
@@ -409,8 +448,7 @@ begin
   end;
   BtnSetFont(btnOneKey, BtnOneKeyFont.Handle);
   BtnSetFontColor(btnOneKey,$FAFAFA,$FFFFFF,$FFFFFF,$FFFFFF);
-  BtnSetEvent(btnOneKey,BtnClickEventID,WrapBtnCallback(@btnOneKey_OnClick,1));
- 
+  BtnSetEvent(btnOneKey,BtnClickEventID,WrapBtnCallback(@btnOneKey_OnClick,1)); 
   lblWelcome := TLabel.Create(WizardForm);
   with lblWelcome do
   begin
@@ -436,7 +474,8 @@ begin
     Left := DpiScale(50);
     Top := DpiScale(408);
   end;
-  
+
+//设置C2门户链接的字体和颜色  
   lblLicense := TLabel.Create(WizardForm);
   with lblLicense do
   begin
@@ -454,6 +493,7 @@ begin
   HoverEvent_Init(@OnHoverControlChanged);
 end;
 
+//获取所需磁盘空间文本
 function GetNeedSpaceText():string;
 var 
   iv:string;
@@ -462,6 +502,7 @@ begin
   result:=format('所需要磁盘空间：%s',[iv]);
 end;
 
+//获取可用磁盘空间
 function GetCurDirFreeSpace():Cardinal;
 var
  curPath:string;
@@ -472,6 +513,7 @@ begin
   result := FreeSpace;
 end;
 
+//获取可用磁盘空间文本
 function GetDiskSpaceText(FreeSpace:Cardinal):string;
 var 
   iv:string;
@@ -486,6 +528,7 @@ begin
   result:=format('可用磁盘空间：%s        （建议安装在C盘）',[iv]);
 end;
 
+//安装时请检查磁盘空间
 procedure WhenInstallDirChangeCheckDiskSpace();
 var 
   FreeSpace:Cardinal; 
@@ -496,18 +539,28 @@ begin
   TconSetVisible(lblTipWDir, (WizardForm.CurPageID = wpSelectDir) and (FreeSpace <= 0) );
 end;
 
+//安装目录更改
 procedure EdtSelectDir1_EditChanged(Sender: TObject);
 begin
   WizardForm.DirEdit.Text:=edtSelectDir1.Text;
   WhenInstallDirChangeCheckDiskSpace();
 end;
 
+//工作路径目录更改
+procedure EdtSelectDir2_EditChanged(Sender: TObject);
+begin
+  WorkSpacePath:=edtSelectDir2.Text;
+end;
+
+//点击浏览按钮
 procedure BtnSelectDir1_OnClick(hBtn:HWND);
 begin
   WizardForm.DirBrowseButton.OnClick(WizardForm);
   edtSelectDir1.Text:=WizardForm.DirEdit.Text;
   WhenInstallDirChangeCheckDiskSpace();
 end;
+
+//点击下一步按钮
 procedure BtnNext1_OnClick(hBtn:HWND);
 var 
   FreeSpace:Cardinal; 
@@ -527,20 +580,60 @@ begin
   end;
   WizardForm.NextButton.OnClick(WizardForm);
 end;
+
+procedure BtnNext2_OnClick(hBtn:HWND);
+var 
+  FreeSpace:Cardinal; 
+begin
+  //检查一下有否有空间
+  FreeSpace := GetCurDirFreeSpace();
+  if FreeSpace <= 0 then 
+  begin 
+    msgbox('该目录为无效路径，请重新选择其他路径', mbInformation,MB_OK);
+    exit;
+  end;
+  Log(Format('FreeSpace %d, Need:%d', [FreeSpace,  dNeedSpaceByte] ));
+  if FreeSpace  < dNeedSpaceByte then 
+  begin
+    msgbox('该目录所在磁盘空间不足，请重新选择其他路径', mbInformation,MB_OK);
+    exit;
+  end;
+  WizardForm.NextButton.OnClick(WizardForm);
+end;
+  
+
+
+//点击上一步按钮
 procedure BtnBack1_OnClick(hBtn:HWND);
 begin
   WizardForm.BackButton.OnClick(WizardForm);
 end;
 
+//点击快速启动栏
 procedure chkQuickLaunch_OnClick(bBtn :HWND);
 begin
    isSelectedQuickLaunch := BtnGetChecked(chkQuickLaunch);
 end;
 
+
+//安装目录选择页面初始化
 procedure InitGui_PageSelectDir();
 var
   tmpFont:TFont;
 begin
+
+  lblTipWDir3 := TLabel.Create(WizardForm);
+  with lblTipWDir3 do
+  begin
+    Parent := WizardForm;
+    Caption := '安装程序将把 IAO解决方案 安装到下面的文件夹中';
+    Transparent := true;
+    Font.Size:= 10
+    Font.Name:='微软雅黑'
+    Font.Color:=$ffffff
+    Left := DpiScale(130);
+    Top := DpiScale(179);
+  end;
 
   edtSelectDir1 := TEdit.Create(WizardForm);
   with edtSelectDir1 do
@@ -550,7 +643,7 @@ begin
     Font.Size:= 10
     Font.Color:=$555555
     Left:= DpiScale(132);
-    Top := DpiScale(189);
+    Top := DpiScale(228);
     Width:= DpiScale(311);
     Height:= DpiScale(24);
     BorderStyle:=bsNone;
@@ -558,7 +651,7 @@ begin
     OnChange:=@EdtSelectDir1_EditChanged;
   end;
  
-  btnSelectDir1:=BtnCreate(WizardForm.Handle,DpiScale(452),DpiScale(185),DpiScale(89), DpiScale(30), ExpandConstant('{tmp}\btn.png'), 1, False)
+  btnSelectDir1:=BtnCreate(WizardForm.Handle,DpiScale(452),DpiScale(225),DpiScale(89), DpiScale(30), ExpandConstant('{tmp}\btn.png'), 1, False)
   BtnSetEvent(btnSelectDir1,BtnClickEventID,WrapBtnCallback(@BtnSelectDir1_OnClick,1));
   BtnSetText(btnSelectDir1, '浏览');
   tmpFont := TFont.Create;
@@ -581,9 +674,9 @@ begin
   BtnSetText(btnBack1, '上一步');
   BtnSetFont(btnBack1, tmpFont.Handle);
   BtnSetFontColor(btnBack1,$986800,$986800,$986800,$AFAFAF);
-
+  //默认选中快速启动栏
   isSelectedQuickLaunch := True
-  chkQuickLaunch :=BtnCreate(WizardForm.Handle,DpiScale(133),DpiScale(261),DpiScale(15),DpiScale(15), ExpandConstant('{tmp}\check.png'),1, True);
+  chkQuickLaunch :=BtnCreate(WizardForm.Handle,DpiScale(133),DpiScale(300),DpiScale(15),DpiScale(15), ExpandConstant('{tmp}\check.png'),1, True);
   BtnSetChecked(chkQuickLaunch, isSelectedQuickLaunch); 
   BtnSetEvent(chkQuickLaunch,BtnClickEventID,WrapBtnCallback(@chkQuickLaunch_OnClick,1));
 
@@ -597,9 +690,9 @@ begin
     Font.Name:='微软雅黑'
     Font.Color:=$ffffff
     Left := DpiScale(150);
-    Top := DpiScale(259);
+    Top := DpiScale(298);
   end;
-
+  //所需空间
   lblNeedSpace := TLabel.Create(WizardForm);
   with lblNeedSpace do
   begin
@@ -610,9 +703,9 @@ begin
     Font.Name:='微软雅黑'
     Font.Color:=$ffffff
     Left := DpiScale(130);
-    Top := DpiScale(228);
+    Top := DpiScale(267);
   end;
-
+  //磁盘空间
   lblDiskSpace := TLabel.Create(WizardForm);
   with lblDiskSpace do
   begin
@@ -623,9 +716,9 @@ begin
     Font.Name:='微软雅黑'
     Font.Color:=$ffffff
     Left := DpiScale(320);
-    Top := DpiScale(228);
+    Top := DpiScale(267);
   end;
-  
+  //提示信息
   lblTipWDir := TLabel.Create(WizardForm);
   with lblTipWDir do
   begin
@@ -641,15 +734,73 @@ begin
   WhenInstallDirChangeCheckDiskSpace();
 end;
 
+procedure InitGui_PageSelectWorkSpace();
+var
+  tmpFont:TFont;
+begin
+  WorkSpacePath := 'C:\FiberHomeIAOModelDocument';
+  
+  lblTipWDir2 := TLabel.Create(WizardForm);
+  with lblTipWDir2 do
+  begin
+    Parent := WizardForm;
+    Caption := '设置你的工作空间：';
+    Transparent := true;
+    Font.Size:= 10
+    Font.Name:='微软雅黑'
+    Font.Color:=$ffffff
+    Left := DpiScale(130);
+    Top := DpiScale(179);
+  end;
+
+  edtSelectDir2 := TEdit.Create(WizardForm);
+  with edtSelectDir2 do
+    begin
+    Parent:= WizardForm;
+    Text := WorkSpacePath;
+    Font.Size:= 10
+    Font.Color:=$555555
+    Left:= DpiScale(132);
+    Top := DpiScale(228);
+    Width:= DpiScale(311);
+    Height:= DpiScale(24);
+    BorderStyle:=bsNone;
+    TabStop := false;
+    OnChange:=@EdtSelectDir2_EditChanged;
+  end;
+
+  tmpFont := TFont.Create;
+  with tmpFont do begin 
+    Size := 12;
+    Name :='黑体';
+    Color:=$986800;
+  end;
+
+  btnNext2:=BtnCreate(WizardForm.Handle,DpiScale(550),DpiScale(417),DpiScale(89), DpiScale(30), ExpandConstant('{tmp}\btn.png'), 1, False)
+  BtnSetEvent(btnNext2,BtnClickEventID,WrapBtnCallback(@BtnNext2_OnClick,1));
+  BtnSetText(btnNext2, '下一步');
+  BtnSetFont(btnNext2, tmpFont.Handle);
+  BtnSetFontColor(btnNext2,$986800,$986800,$986800,$AFAFAF);
+  
+  btnBack2:=BtnCreate(WizardForm.Handle,DpiScale(460),DpiScale(417),DpiScale(89), DpiScale(30), ExpandConstant('{tmp}\btn.png'), 1, False)
+  BtnSetEvent(btnBack2,BtnClickEventID,WrapBtnCallback(@BtnBack1_OnClick,1));
+  BtnSetText(btnBack2, '上一步');
+  BtnSetFont(btnBack2, tmpFont.Handle);
+  BtnSetFontColor(btnBack2,$986800,$986800,$986800,$AFAFAF);
+end;
 
 Const 
+  //保持时间
   InsBgAni_HoldTime = 5000;
+  //切换时间
   InsBgAni_SwitchTime = 500;
+  //图片数目
   InsBgAni_ImgCount = {#InsBgAniPicCount};
 var 
   InsBgAni_ImgArr : array[0 .. InsBgAni_ImgCount ] of Longint;
   InsBgAni_Time : Longint;
 
+//页面安装计时器程序
 procedure PageInstall_TimerProc(H: LongWord; Msg: LongWord; IdEvent: LongWord; Time: LongWord);
 var
   allAniTime, i, idx, nIdx, t0, t1, alpha:Longint;
@@ -658,10 +809,9 @@ begin
   if InsBgAni_Time >= 0 then
   begin
     allAniTime := (InsBgAni_HoldTime + InsBgAni_SwitchTime) * InsBgAni_ImgCount;
-	
-	
+    //取余数
     InsBgAni_Time := (InsBgAni_Time + 50) mod allAniTime; 
-	
+	//取整数商
 	idx := InsBgAni_Time div (InsBgAni_HoldTime + InsBgAni_SwitchTime);
   t0 := InsBgAni_Time mod (InsBgAni_HoldTime + InsBgAni_SwitchTime);
 	if t0 < InsBgAni_HoldTime then 
@@ -702,6 +852,7 @@ begin
   end;
 end;
 
+//页面安装进度条情况
 procedure PageInstall_SetProgress(pr:Extended);
 var 
   w:longint;
@@ -713,11 +864,11 @@ begin
   lblTipProgress.Caption := Format('正在为您安装 %d%%',[Round(pr)]);
 end;
 
+//正在安装中，进度条缓慢变化
 procedure InitGui_PageInstall();
 var
   tmpFont:TFont;
 begin
-  
   imgProgressBarBg:=ImgLoad(WizardForm.Handle,ExpandConstant('{tmp}\progressBg.png'), 0,0,0,0,True,True);
   ImgSetPosition(imgProgressBarBg, DpiScale(38), DpiScale(429), DpiScale(577),DpiScale(19));
   imgProgressBar:=ImgLoad(WizardForm.Handle,ExpandConstant('{tmp}\progress.png'),0,0,0,0,True,True);
@@ -739,11 +890,13 @@ begin
   SetTimer(0, 0, 50, WrapTimerProc(@PageInstall_TimerProc, 4));
 end;
 
+//点击“完成安装”按钮
 procedure btnFinish_OnClick(hBtn:HWND);
 begin
   WizardForm.NextButton.OnClick(WizardForm);
 end;
 
+//初始化安装结束界面
 procedure InitGui_PageFinish();
 var
    tmpFont:TFont;
@@ -761,6 +914,7 @@ begin
   BtnSetEvent(btnFinish,BtnClickEventID,WrapBtnCallback(@btnFinish_OnClick,1));
 end;
 
+//按描述设置任务值
 procedure SetTaskValueByDesc(desc:string; value:boolean);
 var tmpInx:integer;
 begin 
@@ -772,20 +926,21 @@ begin
     end;
 end;
 
-//页面发生变化
+//所有页面统筹发生变化的变化情况
 procedure CurPageChanged(CurPageID: Integer);
 var 
-  isWpWelcome,isWpSelectDir,isWpInstalling,isWpFinished : boolean;
+  isWpWelcome,isWpSelectDir,isWpSelectWorkSpace,isWpInstalling,isWpFinished : boolean;
   nErrCode:integer; 
   i:integer;
 begin
   Log(format( 'CurPageID id = %d',[ CurPageID ]));
-  isWpWelcome    := CurPageID = wpWelcome;
-  isWpSelectDir  := CurPageID = wpSelectDir;
-  isWpInstalling := CurPageID = wpInstalling;
-  isWpFinished   := CurPageID = wpFinished;
+  isWpWelcome          := CurPageID = wpWelcome;
+  isWpSelectDir        := CurPageID = wpSelectDir;
+  isWpSelectWorkSpace  := CurPageID = wpSelectTasks;
+  isWpInstalling       := CurPageID = wpInstalling;
+  isWpFinished         := CurPageID = wpFinished;
   
-  BtnSetEnabled(btnClose, isWpWelcome or isWpSelectDir);
+  BtnSetEnabled(btnClose, isWpWelcome or isWpSelectDir or isWpSelectWorkSpace);
 
   BtnSetVisibility(btnOneKey,       isWpWelcome);
   BtnSetVisibility(btnCustomInstall, isWpWelcome);
@@ -796,9 +951,10 @@ begin
   TconSetVisible(lblWelcome,        isWpWelcome);
   TconSetVisible(lblLicense,        isWpWelcome);
   
-  ImgSetVisibility(imgBg1,   isWpWelcome or isWpSelectDir);
-  ImgSetVisibility(imgLogo1, isWpWelcome or isWpSelectDir);
+  ImgSetVisibility(imgBg1,   isWpWelcome or isWpSelectDir or isWpSelectWorkSpace);
+  ImgSetVisibility(imgLogo1, isWpWelcome or isWpSelectDir or isWpSelectWorkSpace);
   
+  TconSetVisible(lblTipWDir3,     isWpSelectDir);
   TconSetVisible(edtSelectDir1,   isWpSelectDir);
   TconSetVisible(lblQuickLaunch,  isWpSelectDir);
   TconSetVisible(lblNeedSpace,    isWpSelectDir);
@@ -808,7 +964,12 @@ begin
   BtnSetVisibility(btnNext1,      isWpSelectDir);
   BtnSetVisibility(btnBack1,      isWpSelectDir);
   BtnSetVisibility(chkQuickLaunch,isWpSelectDir);
-  
+
+  TconSetVisible(lblTipWDir2,     isWpSelectWorkSpace);
+  TconSetVisible(edtSelectDir2,   isWpSelectWorkSpace);
+  BtnSetVisibility(btnNext2,      isWpSelectWorkSpace);
+  BtnSetVisibility(btnBack2,      isWpSelectWorkSpace);
+
   for i := 1 to InsBgAni_ImgCount do
      ImgSetVisibility(InsBgAni_ImgArr[i-1], isWpInstalling);
   ImgSetVisibility(imgProgressBar,   isWpInstalling);
@@ -826,12 +987,14 @@ begin
   
   if CurPageID = wpSelectDir then
   begin
-    //Log('CurPageID = wpSelectDir');
-    //Log(WizardForm.DiskSpaceLabel.Caption);
 	  edtSelectDir1.Text:=WizardForm.DirEdit.Text;
-    //Misc_SetTEdit_TextVCenter(edtSelectDir1);
     WhenInstallDirChangeCheckDiskSpace();
-    //WizardForm.DiskSpaceLabel.Visible:=True;
+    PageState_Set(1);
+  end;
+
+  if isWpSelectWorkSpace then
+  begin
+	  edtSelectDir2.Text:=WorkSpacePath;
     PageState_Set(1);
   end;
 
@@ -852,7 +1015,7 @@ begin
   begin
     //Log('CurPageID = wpFinished');
     PageState_Set(3);
-
+    ReWriteAppConfig();
     ShellExec('taskbarpin', '{app}\{#MyAppExeName}', '', '', SW_SHOWNORMAL, ewNoWait, nErrCode);
     Notify_DoNotifyFinish();
   end;
@@ -860,6 +1023,7 @@ begin
   ImgApplyChanges(WizardForm.Handle);
 end;
 
+//调用窗口进程
 function PBProc(h:hWnd;Msg,wParam,lParam:Longint):Longint;
 var
   pr, pos,total: Longint;
@@ -876,6 +1040,7 @@ begin
   end;
 end;
 
+//初始化向导窗体
 procedure InitializeWizard();
 var
   winW:integer;
@@ -925,10 +1090,10 @@ begin
 
   for i := 1 to InsBgAni_ImgCount do
     ExtractTemporaryFile(Format('pic%d.png',[i]) );
-
-
-
+	
+  //加载安装背景图
   imgBg1 := ImgLoad(WizardForm.Handle,ExpandConstant('{tmp}\bg.png'),(0),(0),winW,winH,True,True);
+  //加载完成背景图
   imgBg2 := ImgLoad(WizardForm.Handle,ExpandConstant('{tmp}\bg2.png'),(0),(0),winW,winH,True,True);
   ImgSetVisibility(imgBg2,false);
 
@@ -937,27 +1102,31 @@ begin
     InsBgAni_ImgArr[i-1] := ImgLoad( WizardForm.Handle, ExpandConstant(Format('{tmp}\pic%d.png',[i])),(0),(0), winW, winH,True,True);
     ImgSetVisibility(InsBgAni_ImgArr[i-1],false);
   end;
-
+  
+  //初始化关闭按钮并绑定相关事件
   btnClose:= BtnCreate(WizardForm.Handle, DpiScale(617), DpiScale(2), DpiScale(39),DpiScale(19), ExpandConstant('{tmp}\btclose.png'),1,False)
   BtnSetEvent(btnClose,BtnClickEventID,WrapBtnCallback(@BtnClose_OnClick,1));
 
+  //初始化缩小按钮并绑定相关事件
   btnMin:=BtnCreate(WizardForm.Handle,DpiScale(585),DpiScale(2),DpiScale(39),DpiScale(19),ExpandConstant('{tmp}\btmin.png'),1,False)
   BtnSetEvent(btnMin,BtnClickEventID,WrapBtnCallback(@btnMin_OnClick,1));
 
   InitGui_PageWelcome();
   InitGui_PageSelectDir();
+  InitGui_PageSelectWorkSpace();
   InitGui_PageInstall();
   InitGui_PageFinish();
   
   PageState_Init();
   
   PBOldProc:=SetWindowLong(WizardForm.ProgressGauge.Handle,-4,PBCallBack(@PBProc,4));
-  
+  //应用图片更改
   ImgApplyChanges(WizardForm.Handle);
-  
+  //当前页面更改
   CurPageChanged(WizardForm.CurPageID);
 end;
 
+//是否应该跳过页面
 function ShouldSkipPage(PageID: Integer): Boolean;
 begin
  // wpWelcome, wpLicense, wpPassword, wpInfoBefore, wpUserInfo, wpSelectDir, wpSelectComponents, wpSelectProgramGroup, wpSelectTasks, wpReady, wpPreparing, wpInstalling, wpInfoAfter, wpFinished
@@ -970,7 +1139,7 @@ begin
    wpSelectDir:           result:=false; 
    wpSelectComponents:    result:=true;  
    wpSelectProgramGroup:  result:=true;  
-   wpSelectTasks:         result:=true;  
+   wpSelectTasks:         result:=false;  
    wpReady:               result:=true;  
    wpPreparing:           result:=true;  
    wpInstalling:          result:=false; 
@@ -980,6 +1149,7 @@ begin
   end;
 end;
 
+//取消初始化设置
 procedure DeinitializeSetup();
 begin
 gdipShutdown;
