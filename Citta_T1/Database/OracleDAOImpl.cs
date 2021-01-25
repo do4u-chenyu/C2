@@ -49,7 +49,7 @@ namespace C2.Database
         {
             OracleConnection con = new OracleConnection(this.ConnectionString);
 
-            return TryOpen(con, 20000, DatabaseType.Oracle);
+            return TryOpen(con, 15000, DatabaseType.Oracle);
 
         }
         public override string Query(string sql, bool header=true)

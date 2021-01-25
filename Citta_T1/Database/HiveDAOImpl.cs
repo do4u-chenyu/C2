@@ -31,7 +31,7 @@ namespace C2.Database
             using (var conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
             {
-               return TryOpen(conn,10000,DatabaseType.Hive);
+               return TryOpen(conn,15000,DatabaseType.Hive);
             }
         }
 
