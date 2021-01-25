@@ -31,7 +31,20 @@ namespace C2.Database
             using (var conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
             {
-               return TryOpen(conn,15000,DatabaseType.Hive);
+                try
+                {
+                  
+                    conn.SetSocketTimeout = 10000;
+                    conn.SetTcpReceiveTimeout = 10000;
+                    conn.SetTcpSendTimeout = 10000;
+                    conn.Open();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                    return false;
+                }
             }
         }
 
