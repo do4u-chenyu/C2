@@ -167,7 +167,7 @@ namespace C2.Database
         }
         public override string LimitSQL(string sql)
         {
-            return String.Format("select * from ({0})tmp limit {1}", sql, OpUtil.PreviewMaxNum);
+            return String.Format("{0} limit {1}", sql, OpUtil.PreviewMaxNum);
         }
         public override string GetTablesSQL(string schema)
         {
