@@ -34,9 +34,9 @@ namespace C2.Database
                 try
                 {
                   
-                    conn.SetSocketTimeout = 10000;
-                    conn.SetTcpReceiveTimeout = 10000;
-                    conn.SetTcpSendTimeout = 10000;
+                    conn.SetSocketTimeout = 8000;
+                    conn.SetTcpReceiveTimeout = 8000;
+                    conn.SetTcpSendTimeout = 8000;
                     conn.Open();
                     return true;
                 }
