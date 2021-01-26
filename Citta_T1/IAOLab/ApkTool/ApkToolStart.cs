@@ -125,6 +125,7 @@ namespace C2.IAOLab.ApkToolStart
             try
             {
                 xDoc.Load(filePath);
+                
                 XmlNode rootNode = xDoc.SelectSingleNode("manifest");
                 return rootNode.Attributes["package"].Value;
             }

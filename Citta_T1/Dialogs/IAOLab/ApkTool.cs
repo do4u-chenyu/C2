@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using C2.Controls;
 using C2.Core;
@@ -17,6 +18,7 @@ namespace C2.Dialogs.IAOLab
         private  List<List<string>> apkInfoListForEXL = new List<List<string>>();
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
         public UpdateLog UpdateLogDelegate;
+        public Image image;
         public ApkTool()
         {
             InitializeComponent();
@@ -48,16 +50,26 @@ namespace C2.Dialogs.IAOLab
         private void Analyse_Click(object sender, EventArgs e)
         {
             this.dataGridView1.Rows.Clear();
-            int j = 0;
-            if (!IsReady())
-                return;
+            apkInfoListForEXL = new List<List<string>>();
+            try
+            {
+                image.Dispose();
+            }
+            catch
+            {
+
+            }
             string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
             FileUtil.DeleteDirectory(tmpPath);
             FileUtil.CreateDirectory(tmpPath);
+            Thread.Sleep(300);
+            int j = 0;
+            if (!IsReady())
+                return;
+            
             DirectoryInfo dir = new DirectoryInfo(inputPathTextBox.Text);
             //检索表示当前目录的文件和子目录
             FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
-            
             if(fsInfos.Length != 0)
             {
                 //遍历检索的文件和子目录
@@ -76,10 +88,12 @@ namespace C2.Dialogs.IAOLab
                             try
                             {
                                 this.dataGridView1.Rows[index].Cells[0].Value = GetImage(apkInfoList[0]);
+                                
                             }
                             catch 
                             {
                                 this.dataGridView1.Rows[index].Cells[0].Value = GetImage(Path.Combine(Application.StartupPath, @"Citta_T1\Resources\Images", "close.png"));
+                                
                             }
                             for (int i = 1; i < this.dataGridView1.Columns.Count; i++)
                             {
@@ -101,7 +115,7 @@ namespace C2.Dialogs.IAOLab
         {
             try
             {
-                Image image = Image.FromFile(path);
+                image = Image.FromFile(path);
                 return image;
             }
             catch
