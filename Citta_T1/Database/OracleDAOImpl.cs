@@ -178,7 +178,7 @@ namespace C2.Database
         }
         public override string DefaultSchema()
         {
-            return String.IsNullOrEmpty(this.Schema) ? this.User.ToUpper() : this.Schema;
+            return String.IsNullOrEmpty(this.Schema) ? this.User.ToUpper() : this.Schema.ToUpper();
         }
     }
 }
