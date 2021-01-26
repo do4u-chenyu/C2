@@ -74,7 +74,7 @@ namespace C2.Database
                     var list = cursor.FetchMany(int.MaxValue);
                     // 分页查询去掉第一列索引
 
-                    if (list.Count > 0 && (list[0] as IDictionary<string, object>).Keys.Count > 0)
+                    if (returnHeader && list.Count > 0 && (list[0] as IDictionary<string, object>).Keys.Count > 0)
                     {
                         // 添加表头
                         string headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
