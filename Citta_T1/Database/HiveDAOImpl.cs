@@ -58,7 +58,7 @@ namespace C2.Database
             string sqlPage = String.Format(@"select * from (select row_number() over () as rowno,tmp0.* from ({0}) tmp0) t where t.rowno  between {1} and {2}",
                                     sqlText,
                                     pageSize * (pageIndex),
-                                    pageSize * (pageIndex)+maxNum);          
+                                    pageSize * (pageIndex) + maxNum);          
             try
             {
                 using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
@@ -74,38 +74,29 @@ namespace C2.Database
                     var list = cursor.FetchMany(int.MaxValue);
                     // 分页查询去掉第一列索引
 
-                    if (list.Count > 0 && (list[0] as IDictionary<string, object>).Keys.Count > 0)
+                    if (returnHeader && list.Count > 0 && (list[0] as IDictionary<string, object>).Keys.Count > 0)
                     {
                         // 添加表头
                         string headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
-                        if (headers.IndexOf(OpUtil.DefaultFieldSeparator) != -1
-                            && headers.IndexOf(OpUtil.DefaultFieldSeparator) + 1 < headers.Length)
+                        int index = headers.IndexOf(OpUtil.DefaultFieldSeparator);
+                        if (index != -1 && index + 1 < headers.Length)
                         {
-                            headers = headers.Substring(headers.IndexOf(OpUtil.DefaultFieldSeparator) + 1);
-                            sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
+                            sb.Append(headers.Substring(index + 1)).Append(OpUtil.DefaultLineSeparator);
                         }
-
                     }
 
-                    foreach (var item in list)
+                    foreach (IDictionary<string, object> item in list)
                     {
-                        var dict = item as IDictionary<string, object>;
-                        string tmp = string.Empty;
-                        int i = 0;
-                        foreach (var key in dict.Keys)
+                        for (int i = 1; i < item.Count; i++)   // 第一列不要
                         {
-                            if (i == 0)
-                            {
-                                i += 1;
-                                continue;
-                            }
-                            tmp += dict[key].ToString() + OpUtil.DefaultFieldSeparator;
+                            String key = item.Keys.ElementAt(i);
+                            sb.Append(item[key]).Append(OpUtil.DefaultFieldSeparator);
                         }
-                        sb.Append(tmp.TrimEnd(OpUtil.DefaultFieldSeparator)).Append(OpUtil.DefaultLineSeparator);
+                        if (item.Count > 1)
+                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator); // 最后一列多加了个\t，去掉
                     }
-
                 }
-                result.content =sb.ToString();
+                result.content = sb.ToString();
                 result.returnNum = maxNum;
             }
             catch (Exception ex)

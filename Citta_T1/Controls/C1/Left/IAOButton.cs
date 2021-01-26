@@ -113,23 +113,13 @@ namespace C2.Controls.Left
         #endregion
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (baseForm1 != null)
-            {
-                string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
-                FileUtil.DeleteDirectory(tmpPath);
-                FileUtil.CreateDirectory(tmpPath);
-            }
+            
             OpenToolForm();
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
-            if(baseForm1 != null)
-            {
-                string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
-                FileUtil.DeleteDirectory(tmpPath);
-                FileUtil.CreateDirectory(tmpPath);
-            }
+            
             if (e.Button == MouseButtons.Left && e.Clicks == 2)
                 OpenToolForm();
         }
