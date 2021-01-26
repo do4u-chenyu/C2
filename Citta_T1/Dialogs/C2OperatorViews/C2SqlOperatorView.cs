@@ -64,10 +64,12 @@ namespace C2.Dialogs.C2OperatorViews
             ToolStripMenuItem copyTableNameMenuItem = new ToolStripMenuItem("复制表名");
             copyTableNameMenuItem.Click += CopyTableNameMenuItem_Click;
             contextMenuStrip.Items.Add(copyTableNameMenuItem);
+            copyTableNameMenuItem.ToolTipText = "复制表名到剪切板";
 
             ToolStripMenuItem codeSnippetMenuItem = new ToolStripMenuItem("一键查询");
             codeSnippetMenuItem.Click += CodeSnippetMenuItem_Click;
             contextMenuStrip.Items.Add(codeSnippetMenuItem);
+            codeSnippetMenuItem.ToolTipText = "生成一键查询相关的SQL语句";
         }
 
         private void PreviewTableMenuItem_Click(object sender, EventArgs e)
