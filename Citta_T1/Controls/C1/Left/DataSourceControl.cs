@@ -473,12 +473,9 @@ namespace C2.Controls.Left
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             List<string> tmp = new List<string>();
             foreach (Table table in tables.Take(Math.Min(300,tables.Count)))
-            {
-                foreach ( List<string> kvp in tableColDict.Values)
-                {
-                    tmp.AddRange(kvp);
-                }
-                table.Columns = tmp;
+            {   
+                if(tableColDict.TryGetValue(table.Name, out tmp))
+                    table.Columns = tmp;
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
                 tmpDatabaseItem.DataTable = table;
                 tmpDatabaseItem.Schema = this.schemaComboBox.Text;
