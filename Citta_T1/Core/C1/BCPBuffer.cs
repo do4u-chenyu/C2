@@ -182,6 +182,10 @@ namespace C2.Core
         #endregion
         public  string GetFirstLine(string tbContent)
         {
+            if (string.IsNullOrEmpty(tbContent))
+                return string.Empty;
+            if (!tbContent.Contains(OpUtil.DefaultLineSeparator.ToString()))
+                return tbContent;
             int lineSepIndex = tbContent.IndexOf(OpUtil.DefaultLineSeparator);
             return tbContent.Substring(0, lineSepIndex);
         }
