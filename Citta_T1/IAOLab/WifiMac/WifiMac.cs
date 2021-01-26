@@ -48,7 +48,7 @@ namespace C2.IAOLab.WifiMac
             catch (Exception ex)
             {
                 if (writer == null)
-                    writer.Close();
+                    //writer.Close();
                 return "网络连接失败: " + ex.Message;
             }
             //将请求参数写入流
