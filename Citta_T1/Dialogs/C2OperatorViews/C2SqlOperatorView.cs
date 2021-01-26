@@ -255,6 +255,13 @@ namespace C2.Dialogs.C2OperatorViews
 
         private void LoadOption()
         {
+            if (!string.IsNullOrEmpty(this.operatorWidget.Option.GetOption("maxNum"))
+                && !this.operatorWidget.Option.GetOption("maxNum").Equals("inf"))
+            {
+                this.partialRadioButton.Checked = true;
+                this.maxNumTextBox.Visible = true;
+                maxNumTextBox.Text = this.operatorWidget.Option.GetOption("maxNum");
+            }
             if (!String.IsNullOrEmpty(this.operatorWidget.Option.GetOption("sqlText")))
             {
                 textEditorControl1.Text = this.operatorWidget.Option.GetOption("sqlText");
