@@ -47,6 +47,7 @@ namespace C2.Dialogs.IAOLab
         }
         private void Analyse_Click(object sender, EventArgs e)
         {
+            this.dataGridView1.Rows.Clear();
             int j = 0;
             if (!IsReady())
                 return;
@@ -78,7 +79,7 @@ namespace C2.Dialogs.IAOLab
                             }
                             catch 
                             {
-                                this.dataGridView1.Rows[index].Cells[0].Value = "图片不存在";
+                                this.dataGridView1.Rows[index].Cells[0].Value = GetImage(Path.Combine(Application.StartupPath, @"Citta_T1\Resources\Images", "close.png"));
                             }
                             for (int i = 1; i < this.dataGridView1.Columns.Count; i++)
                             {
@@ -97,9 +98,16 @@ namespace C2.Dialogs.IAOLab
             }
         }
         public Image GetImage(string path)
-        {  
-            Image image = Image.FromFile(path);
-            return image;
+        {
+            try
+            {
+                Image image = Image.FromFile(path);
+                return image;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private void InputPathPictureBox_Click(object sender, EventArgs e)
@@ -232,6 +240,14 @@ namespace C2.Dialogs.IAOLab
         private void CancelButton_Click(object sender, EventArgs e)
         {
             
+            this.dataGridView1.Rows.Clear();
+            this.textBox1.Clear();
+        }
+        private void ApkTool_FormClosed(object sender, EventArgs e)
+        {
+
+            this.dataGridView1.Rows.Clear();
+            this.textBox1.Clear();
         }
     }
 }

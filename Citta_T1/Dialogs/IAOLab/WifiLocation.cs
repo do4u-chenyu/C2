@@ -99,7 +99,7 @@ namespace C2.Dialogs.IAOLab
 
         private void Cancle_Click(object sender, EventArgs e)
         {
-            
+            progressBar1.Value = 0;
             Close();
         }
 
