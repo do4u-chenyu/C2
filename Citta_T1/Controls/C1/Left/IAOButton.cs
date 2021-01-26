@@ -2,6 +2,7 @@
 using C2.Globalization;
 using C2.Utils;
 using System;
+using System.IO;
 using System.Windows.Forms;
 namespace C2.Controls.Left
 {
@@ -24,6 +25,7 @@ namespace C2.Controls.Left
                     this.txtButton.Text = Lang._("APK");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
                     toolTip1.SetToolTip(this.rightPictureBox, "对Apk进行解析并获取Apk的图标，安装名称，包名，入口函数名和大小");
+                    
                     ApkToolForm();
                     break;
                 case "BaseStation":
@@ -111,11 +113,23 @@ namespace C2.Controls.Left
         #endregion
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (baseForm1 != null)
+            {
+                string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
+                FileUtil.DeleteDirectory(tmpPath);
+                FileUtil.CreateDirectory(tmpPath);
+            }
             OpenToolForm();
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
+            if(baseForm1 != null)
+            {
+                string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
+                FileUtil.DeleteDirectory(tmpPath);
+                FileUtil.CreateDirectory(tmpPath);
+            }
             if (e.Button == MouseButtons.Left && e.Clicks == 2)
                 OpenToolForm();
         }

@@ -121,8 +121,8 @@ namespace C2.Dialogs
 
             if (String.Equals("Hive", this.databaseTypeComboBox.Text))
             {
-                this.userTextBox.Text = "None";
-                this.passwordTextBox.Text = "None";
+                this.userTextBox.Text = string.IsNullOrEmpty(this.userTextBox.Text) ? "None":this.userTextBox.Text;
+                this.passwordTextBox.Text = string.IsNullOrEmpty(this.passwordTextBox.Text) ? "None":this.passwordTextBox.Text;
                 return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
             }
                
