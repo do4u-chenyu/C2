@@ -36,6 +36,7 @@ namespace C2.Dialogs.IAOLab
                   
                     break;
                 case "BaseStation":
+                    
                     progressBar1.Value = 0;
                     progressBar1.Maximum = inputArray.Length;
                     progressBar1.Minimum = 0;
@@ -51,6 +52,7 @@ namespace C2.Dialogs.IAOLab
                     
                     break;
                 case "Wifi":
+                    
                     progressBar1.Value = 0;
                     progressBar1.Maximum = inputArray.Length;
                     progressBar1.Minimum = 0;
@@ -67,10 +69,10 @@ namespace C2.Dialogs.IAOLab
                     
                     break;
                 case "Card":
+                    
                     progressBar1.Value = 0;
                     progressBar1.Maximum = inputArray.Length;
                     progressBar1.Minimum = 0;
-                    label1.Parent = progressBar1;
                     foreach (string bankCard in inputArray)
                     {
                         progressBar1.Value += 1;
@@ -96,12 +98,14 @@ namespace C2.Dialogs.IAOLab
         }
 
         private void Cancle_Click(object sender, EventArgs e)
-        {         
+        {
+            progressBar1.Value = 0;
             Close();
         }
 
         private void WifiLocation_FormClosed(object sender, FormClosedEventArgs e)
         {
+            
             this.inputAndResult.Clear();
         }
     }

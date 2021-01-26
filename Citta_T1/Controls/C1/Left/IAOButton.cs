@@ -74,7 +74,8 @@ namespace C2.Controls.Left
             {
                 Text = "基站查询",
                 InputLable = "请在下方输入基站号码",
-                Tip = HelpUtil.BaseStationHelpInfo
+                Tip = HelpUtil.BaseStationHelpInfo,
+                
             };
 
         }

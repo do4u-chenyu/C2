@@ -72,10 +72,10 @@
             // 
             // inputPathTextBox
             // 
-            this.inputPathTextBox.Location = new System.Drawing.Point(201, 25);
+            this.inputPathTextBox.Location = new System.Drawing.Point(209, 25);
             this.inputPathTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputPathTextBox.Name = "inputPathTextBox";
-            this.inputPathTextBox.Size = new System.Drawing.Size(509, 25);
+            this.inputPathTextBox.Size = new System.Drawing.Size(501, 25);
             this.inputPathTextBox.TabIndex = 1;
             // 
             // panel1
@@ -115,10 +115,10 @@
             // 
             // jdkPathTextBox
             // 
-            this.jdkPathTextBox.Location = new System.Drawing.Point(201, 59);
+            this.jdkPathTextBox.Location = new System.Drawing.Point(209, 59);
             this.jdkPathTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.jdkPathTextBox.Name = "jdkPathTextBox";
-            this.jdkPathTextBox.Size = new System.Drawing.Size(509, 25);
+            this.jdkPathTextBox.Size = new System.Drawing.Size(501, 25);
             this.jdkPathTextBox.TabIndex = 7;
             // 
             // label2
@@ -263,6 +263,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(673, 104);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(210, 25);
             this.textBox1.TabIndex = 14;
             // 
