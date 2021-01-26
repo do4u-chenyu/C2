@@ -36,8 +36,6 @@ namespace C2.IAOLab.BankTool
             }
             catch (Exception ex)
             {
-                if (writer == null)
-                    //writer.Close(); 
                 return "网络连接失败: " + ex.Message;
             }
 
@@ -51,7 +49,15 @@ namespace C2.IAOLab.BankTool
             {
                 response = ex.Response as HttpWebResponse;
             }
-            Stream s = response.GetResponseStream();
+            Stream s;
+            try
+            {
+                s = response.GetResponseStream();
+            }
+            catch
+            {
+                return "网络连接中断";
+            }
             //  Stream postData = Request.InputStream;
             StreamReader sRead = new StreamReader(s);
             string postContent = sRead.ReadToEnd();
