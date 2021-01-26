@@ -1,7 +1,9 @@
 ﻿using C2.Business.DataSource;
+using C2.Configuration;
 using C2.Core;
 using C2.Database;
 using C2.Dialogs;
+using C2.Globalization;
 using C2.Model;
 using C2.Utils;
 using System;
@@ -68,6 +70,7 @@ namespace C2.Controls.Left
         {
             InitializeInputDataForm();
             InitializeComponent();
+            InitializeListBox();
 
             DataSourceDictI2B = new Dictionary<string, DataButton>();
             LinkSourceDictI2B = new Dictionary<string, LinkButton>();
@@ -75,6 +78,62 @@ namespace C2.Controls.Left
             linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             _RelateTableButtons = new List<TableButton>();
+        }
+
+        private void InitializeListBox()
+        {
+            listBoxControl1.Items.Clear();
+
+            var types = (from g in GetExportDocumentTypes()
+                         from dt in g.Types
+                         orderby dt.Name
+                         select dt).ToArray();
+            if (!types.IsNullOrEmpty())
+            {
+                listBoxControl1.SuspendLayout();
+                foreach (var dt in types)
+                {
+                    var miExport = new ToolStripMenuItem();
+                    miExport.Text = dt.Name;
+                    if (!string.IsNullOrEmpty(dt.Description))
+                        miExport.ToolTipText = Lang._(dt.Description);
+                    miExport.Image = dt.Icon;// IconExtractor.ExtractLargeIconByExtension(dt.DefaultExtension);
+                    miExport.Tag = dt;
+                    listBoxControl1.Items.Add(miExport);
+                }
+
+                // select default
+                string selName = null;
+                if (Options.Current.Contains(OptionNames.Miscellaneous.ExportDocumentType))
+                    selName = Options.Current.GetString(OptionNames.Miscellaneous.ExportDocumentType);
+                DocumentType selDt = null;
+                if (!string.IsNullOrEmpty(selName))
+                    selDt = types.Find(t => StringComparer.OrdinalIgnoreCase.Equals(t.Name, selName));
+                if (selDt == null)
+                    selDt = types.First();
+                listBoxControl1.SelectedItem = listBoxControl1.Items.Find(it => it.Tag == selDt);
+
+                listBoxControl1.ResumeLayout(false);
+            }
+        }
+        public DocumentTypeGroup[] GetExportDocumentTypes()
+        {
+            return new DocumentTypeGroup[] {
+                new DocumentTypeGroup("PDF", new DocumentType[]{
+                    DocumentType.Pdf}),
+                new DocumentTypeGroup("Image", new DocumentType[]{
+                    DocumentType.Png,
+                    DocumentType.Jpeg,
+                    DocumentType.Bmp,
+                    DocumentType.Gif,
+                    DocumentType.Tiff,}),
+                new DocumentTypeGroup("XML", new DocumentType[]{
+                    DocumentType.Svg,
+                    DocumentType.FreeMind}),
+                new DocumentTypeGroup("Text", new DocumentType[]{
+                    DocumentType.Txt,
+                    DocumentType.Csv}),
+                };
         }
 
         #region 内外部数据面板切换

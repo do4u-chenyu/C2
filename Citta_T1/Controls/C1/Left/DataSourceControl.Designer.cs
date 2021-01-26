@@ -1,4 +1,6 @@
-﻿namespace C2.Controls.Left
+﻿using System.Windows.Forms;
+
+namespace C2.Controls.Left
 {
     partial class DataSourceControl
     {
@@ -45,8 +47,10 @@
             this.linkLabel = new System.Windows.Forms.Label();
             this.dataAddLabelPanel = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.listBoxControl1 = new C2.Controls.ListBoxControl<ToolStripMenuItem>();
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
+            this.tabelPanel.SuspendLayout();
             this.dataAddLabelPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,6 +170,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabelPanel.AutoScroll = true;
+            this.tabelPanel.Controls.Add(this.listBoxControl1);
             this.tabelPanel.Location = new System.Drawing.Point(0, 324);
             this.tabelPanel.Name = "tabelPanel";
             this.tabelPanel.Size = new System.Drawing.Size(177, 296);
@@ -234,6 +239,16 @@
             this.dataAddLabelPanel.Size = new System.Drawing.Size(179, 622);
             this.dataAddLabelPanel.TabIndex = 9;
             // 
+            // listBoxControl1
+            // 
+            this.listBoxControl1.AutoScrollMargin = new System.Drawing.Size(10, 10);
+            this.listBoxControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxControl1.Location = new System.Drawing.Point(0, 0);
+            this.listBoxControl1.Name = "listBoxControl1";
+            this.listBoxControl1.Size = new System.Drawing.Size(177, 296);
+            this.listBoxControl1.TabIndex = 0;
+            this.listBoxControl1.Text = "listBoxControl1";
+            // 
             // DataSourceControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -247,6 +262,7 @@
             this.dataSourceFrame.ResumeLayout(false);
             this.externalFrame.ResumeLayout(false);
             this.externalFrame.PerformLayout();
+            this.tabelPanel.ResumeLayout(false);
             this.dataAddLabelPanel.ResumeLayout(false);
             this.dataAddLabelPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -271,5 +287,6 @@
         private System.Windows.Forms.Label addLocalConnectLabel;
         private System.Windows.Forms.Panel dataAddLabelPanel;
         private System.Windows.Forms.ToolTip toolTip1;
+        private ListBoxControl<ToolStripMenuItem> listBoxControl1;
     }
 }
