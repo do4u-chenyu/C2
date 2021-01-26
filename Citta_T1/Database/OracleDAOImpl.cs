@@ -108,7 +108,7 @@ namespace C2.Database
             {
                 for (int i = 0; i < tableNames.Length; i++)
                     tableNames[i] = tables[i].Name;
-                return String.Format(this.getColNameByTablesSQL, tableNames);
+                return String.Format(this.getColNameByTablesSQL, String.Join("','", tableNames));
             }
             return String.Empty;
         }
