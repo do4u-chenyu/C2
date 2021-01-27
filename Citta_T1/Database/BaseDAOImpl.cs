@@ -109,7 +109,7 @@ namespace C2.Database
         }
         public Dictionary<string, List<string>> GetColNameByTables(List<Table> tables)
         {
-            string result = this.Query(this.GetColNameByTablesSQL(tables));
+            string result = this.Query(this.GetColNameByTablesSQL(tables), false);
             return String.IsNullOrEmpty(result) ? new Dictionary<string, List<string>>() : DbUtil.StringToDict(result);
         }
         public string GetTableColumnNames(Table table)

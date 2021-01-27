@@ -356,8 +356,10 @@ namespace C2.Business.Model
                 XmlNode bcNode = optionNode.SelectSingleNode("browseChosen");
                 if (bcNode != null)
                 {
-                    if (!CopyFileTo_dataFolder(optionNode, bcNode.InnerText, dataSourceNames, "browseChosen"))
-                        return !copySuccess;
+                    if (allPaths.ContainsKey(bcNode.InnerText))
+                        bcNode.InnerText = allPaths[bcNode.InnerText];
+                    else if(!CopyFileTo_dataFolder(optionNode, bcNode.InnerText, dataSourceNames, "browseChosen"))
+                         return !copySuccess;
                 }
                 XmlNode cmdNode = optionNode.SelectSingleNode("cmd");
                 if (cmdNode == null || string.IsNullOrEmpty(cmdNode.InnerText))

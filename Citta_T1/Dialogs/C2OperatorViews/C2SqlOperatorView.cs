@@ -64,10 +64,12 @@ namespace C2.Dialogs.C2OperatorViews
             ToolStripMenuItem copyTableNameMenuItem = new ToolStripMenuItem("复制表名");
             copyTableNameMenuItem.Click += CopyTableNameMenuItem_Click;
             contextMenuStrip.Items.Add(copyTableNameMenuItem);
+            copyTableNameMenuItem.ToolTipText = "复制表名到剪切板";
 
             ToolStripMenuItem codeSnippetMenuItem = new ToolStripMenuItem("一键查询");
             codeSnippetMenuItem.Click += CodeSnippetMenuItem_Click;
             contextMenuStrip.Items.Add(codeSnippetMenuItem);
+            codeSnippetMenuItem.ToolTipText = "生成一键查询相关的SQL语句";
         }
 
         private void PreviewTableMenuItem_Click(object sender, EventArgs e)
@@ -95,7 +97,7 @@ namespace C2.Dialogs.C2OperatorViews
         {
             // textEditorControl1 用的是第三方sharpdevelop的文本编辑框, 因为有语法着色，代码折叠，行号，undo,redo等高级功能
             // 所以不能像普通的textbox那样简单的.Text赋值，需要调用它自己的文本处理函数,不然容易不刷新
-            textEditorControl1.SetTextAndRefresh("select * from " + tableListBox.SelectedItem.ToString());
+            textEditorControl1.SetTextAndRefresh(string.Format("select * from {0}.{1} ", this.comboBoxDataBase.Text, tableListBox.SelectedItem));
         }
 
         private void InitializeExecuteSql()
@@ -253,6 +255,13 @@ namespace C2.Dialogs.C2OperatorViews
 
         private void LoadOption()
         {
+            if (!string.IsNullOrEmpty(this.operatorWidget.Option.GetOption("maxNum"))
+                && !this.operatorWidget.Option.GetOption("maxNum").Equals("inf"))
+            {
+                this.partialRadioButton.Checked = true;
+                this.maxNumTextBox.Visible = true;
+                maxNumTextBox.Text = this.operatorWidget.Option.GetOption("maxNum");
+            }
             if (!String.IsNullOrEmpty(this.operatorWidget.Option.GetOption("sqlText")))
             {
                 textEditorControl1.Text = this.operatorWidget.Option.GetOption("sqlText");

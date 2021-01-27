@@ -43,7 +43,7 @@ namespace C2.Dialogs.IAOLab
                     foreach (string baseStation in inputArray)
                     {
                         progressBar1.Value += 1 ;
-                        if (!string.IsNullOrEmpty(baseStation) && progressBar1.Value < 1000)
+                        if (!string.IsNullOrEmpty(baseStation) && progressBar1.Value < 1001)
                         {
                             tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(baseStation.Split('\t')[0]));
                             inputAndResult.Text = tmpResult.ToString();
@@ -59,7 +59,7 @@ namespace C2.Dialogs.IAOLab
                     foreach (string mac in inputArray)
                     {
                         progressBar1.Value += 1;
-                        if (!string.IsNullOrEmpty(mac) && progressBar1.Value < 1000)
+                        if (!string.IsNullOrEmpty(mac) && progressBar1.Value < 1001)
                         {
                             tmpResult.Append(WifiMac.GetInstance().MacLocate(mac.Split('\t')[0]));
                             inputAndResult.Text = tmpResult.ToString();
@@ -76,7 +76,7 @@ namespace C2.Dialogs.IAOLab
                     foreach (string bankCard in inputArray)
                     {
                         progressBar1.Value += 1;
-                        if (!string.IsNullOrEmpty(bankCard) && progressBar1.Value < 1000)
+                        if (!string.IsNullOrEmpty(bankCard) && progressBar1.Value < 1001)
                         {
                            
                             if (progressBar1.Value % 25 == 0 )
@@ -105,7 +105,7 @@ namespace C2.Dialogs.IAOLab
 
         private void WifiLocation_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
+            progressBar1.Value = 0;
             this.inputAndResult.Clear();
         }
     }

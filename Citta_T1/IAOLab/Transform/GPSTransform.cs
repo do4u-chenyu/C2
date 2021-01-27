@@ -30,6 +30,7 @@ namespace C2.IAOLab.Transform
 
         public string CoordinateConversion(string type)
         {
+            inputArray = inputArray.Where(s => !string.IsNullOrEmpty(s)).ToArray();
             double[] result;
             if(input.Trim() == string.Empty)
             {
@@ -76,6 +77,7 @@ namespace C2.IAOLab.Transform
         }
         public string ComputeDistance()
         {
+            inputArray = inputArray.Where(s => !string.IsNullOrEmpty(s)).ToArray();
             if (inputArray.Length != 4)
                 return wrongInfo;
             double lat = ConvertUtil.TryParseDouble(inputArray[0]);

@@ -29,7 +29,7 @@ namespace C2.Database
             {
                 if (Service.Length > 0) // Is it a service name connection?
                     return String.Format(
-                      "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SERVICE_NAME={2})));User Id={3};Password={4};",
+                      "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SERVICE_NAME={2})));User Id={3};Password={4};Connection Lifetime=60;Connection Timeout=10",
                       Host,
                       Port,
                       Service,
@@ -37,7 +37,7 @@ namespace C2.Database
                       Pass);
                 else // Is it a SID connection?
                     return String.Format(
-                      "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})));User Id={3};Password={4};",
+                      "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})));User Id={3};Password={4};Connection Lifetime=60;Connection Timeout=10",
                       Host,
                       Port,
                       Sid,
@@ -48,8 +48,17 @@ namespace C2.Database
         public override bool TestConn()
         {
             OracleConnection con = new OracleConnection(this.ConnectionString);
+            try
+            {
+                con.Open();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                return false;
+            }
 
-            return TryOpen(con, 15000, DatabaseType.Oracle);
 
         }
         public override string Query(string sql, bool header=true)
@@ -99,7 +108,7 @@ namespace C2.Database
             {
                 for (int i = 0; i < tableNames.Length; i++)
                     tableNames[i] = tables[i].Name;
-                return String.Format(this.getColNameByTablesSQL, tableNames);
+                return String.Format(this.getColNameByTablesSQL, String.Join("','", tableNames));
             }
             return String.Empty;
         }
@@ -169,7 +178,7 @@ namespace C2.Database
         }
         public override string DefaultSchema()
         {
-            return String.IsNullOrEmpty(this.Schema) ? this.User.ToUpper() : this.Schema;
+            return String.IsNullOrEmpty(this.Schema) ? this.User.ToUpper() : this.Schema.ToUpper();
         }
     }
 }

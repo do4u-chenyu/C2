@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace C2.IAOLab.Transform
@@ -63,6 +65,7 @@ namespace C2.IAOLab.Transform
             try
             {
                 string[] strArr = Date.Split(new char[] { '/','-', ' ', ':'});
+                strArr = strArr.Where(s => !string.IsNullOrEmpty(s)).ToArray();
                 DateTime dt = new DateTime(int.Parse(strArr[0]),int.Parse(strArr[1]),int.Parse(strArr[2]),int.Parse(strArr[3]),int.Parse(strArr[4]),int.Parse(strArr[5]));
                 if(int.Parse(strArr[0]) > 2105)
                 {
