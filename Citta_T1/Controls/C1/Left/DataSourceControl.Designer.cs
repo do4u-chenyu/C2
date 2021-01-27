@@ -241,7 +241,10 @@ namespace C2.Controls.Left
             // 
             // listBoxControl1
             // 
-            this.listBoxControl1.AutoScrollMargin = new System.Drawing.Size(10, 10);
+            this.listBoxControl1.ItemIconGetter = (item => item.Image);
+            this.listBoxControl1.ItemToolTipTextGetter = (item => item.ToolTipText);
+            this.listBoxControl1.ItemHeight = 40;
+            //this.listBoxControl1.AutoScrollMargin = new System.Drawing.Size(10, 10);
             this.listBoxControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxControl1.Location = new System.Drawing.Point(0, 0);
             this.listBoxControl1.Name = "listBoxControl1";

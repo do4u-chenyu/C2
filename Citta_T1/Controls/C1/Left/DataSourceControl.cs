@@ -18,6 +18,10 @@ namespace C2.Controls.Left
     public partial class DataSourceControl : UserControl
     {
         private InputDataForm inputDataForm;
+        private List<DatabaseItem> dbis;
+        private List<Table> _Tables;
+        private Dictionary<string, List<string>> _TableColDict;
+        private DatabaseItem _DatabaseInfo;
         private static readonly int ButtonGapHeight = 50;//上下间隔
         private static readonly int ButtonLeftX = 18;
 
@@ -65,12 +69,23 @@ namespace C2.Controls.Left
                 return _RelateTableButtons;
             }
         }
+        public List<Table> Tables
+        {
+            get { return _Tables; }
+            set
+            {
+                if (_Tables != value)
+                {
+                    _Tables = value;
+                    OnTablesChanged();
+                }
+            }
+        }
 
         public DataSourceControl()
         {
             InitializeInputDataForm();
             InitializeComponent();
-            InitializeListBox();
 
             DataSourceDictI2B = new Dictionary<string, DataButton>();
             LinkSourceDictI2B = new Dictionary<string, LinkButton>();
@@ -78,62 +93,64 @@ namespace C2.Controls.Left
             linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             _RelateTableButtons = new List<TableButton>();
+            dbis = new List<DatabaseItem>();
+            _Tables = new List<Table>();
         }
 
-        private void InitializeListBox()
+        public void OnTablesChanged()
         {
+            dbis.Clear();
+            RelateTableButtons.Clear();
+            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            List<string> tmp = new List<string>();
+            //foreach (Table table in tables.Take(Math.Min(300, tables.Count)))
+            foreach (Table table in _Tables)
+            {
+                foreach (List<string> kvp in _TableColDict.Values)
+                {
+                    tmp.AddRange(kvp);
+                }
+                table.Columns = tmp;
+                DatabaseItem tmpDatabaseItem = _DatabaseInfo.Clone();
+                tmpDatabaseItem.DataTable = table;
+                tmpDatabaseItem.Schema = this.schemaComboBox.Text;
+                //TableButton tableButton = new TableButton(tmpDatabaseItem);
+                //GenTableButton(tableButton);//生成数据表按钮
+                dbis.Add(tmpDatabaseItem.Clone());
+            }
+
+            //foreach (TableButton tb in this.tabelPanel.Controls)
+            //{
+            //    RelateTableButtons.Add(tb);
+            //}
             listBoxControl1.Items.Clear();
 
-            var types = (from g in GetExportDocumentTypes()
-                         from dt in g.Types
-                         orderby dt.Name
-                         select dt).ToArray();
-            if (!types.IsNullOrEmpty())
+            var tables = (from g in dbis.ToArray()
+                         orderby g.DataTable.Name
+                         select g).ToArray();
+            if (!tables.IsNullOrEmpty())
             {
                 listBoxControl1.SuspendLayout();
-                foreach (var dt in types)
+                foreach (var dt in tables)
                 {
                     var miExport = new ToolStripMenuItem();
-                    miExport.Text = dt.Name;
-                    if (!string.IsNullOrEmpty(dt.Description))
-                        miExport.ToolTipText = Lang._(dt.Description);
-                    miExport.Image = dt.Icon;// IconExtractor.ExtractLargeIconByExtension(dt.DefaultExtension);
+                    miExport.Text = FileUtil.RenameAndCenterPadding(dt.DataTable.Name, 23, 15);
+                    miExport.Padding = new Padding(0, 0, 0, 0);
+                    //miExport.Text = FileUtil.ReName(dt.DataTable.Name);
+                    miExport.ToolTipText = dt.DataTable.Name;
+                    miExport.Image = Properties.Resources.Table;
                     miExport.Tag = dt;
                     listBoxControl1.Items.Add(miExport);
                 }
 
                 // select default
-                string selName = null;
-                if (Options.Current.Contains(OptionNames.Miscellaneous.ExportDocumentType))
-                    selName = Options.Current.GetString(OptionNames.Miscellaneous.ExportDocumentType);
-                DocumentType selDt = null;
-                if (!string.IsNullOrEmpty(selName))
-                    selDt = types.Find(t => StringComparer.OrdinalIgnoreCase.Equals(t.Name, selName));
-                if (selDt == null)
-                    selDt = types.First();
-                listBoxControl1.SelectedItem = listBoxControl1.Items.Find(it => it.Tag == selDt);
+                if (listBoxControl1.Items.Count > 0)
+                    listBoxControl1.SelectedItem = listBoxControl1.Items.First();
 
-                listBoxControl1.ResumeLayout(false);
+                listBoxControl1.VerticalScroll.Value = 0;
+                listBoxControl1.ResumeLayout();
+                listBoxControl1.PerformLayout();
             }
-        }
-        public DocumentTypeGroup[] GetExportDocumentTypes()
-        {
-            return new DocumentTypeGroup[] {
-                new DocumentTypeGroup("PDF", new DocumentType[]{
-                    DocumentType.Pdf}),
-                new DocumentTypeGroup("Image", new DocumentType[]{
-                    DocumentType.Png,
-                    DocumentType.Jpeg,
-                    DocumentType.Bmp,
-                    DocumentType.Gif,
-                    DocumentType.Tiff,}),
-                new DocumentTypeGroup("XML", new DocumentType[]{
-                    DocumentType.Svg,
-                    DocumentType.FreeMind}),
-                new DocumentTypeGroup("Text", new DocumentType[]{
-                    DocumentType.Txt,
-                    DocumentType.Csv}),
-                };
         }
 
         #region 内外部数据面板切换
@@ -278,7 +295,7 @@ namespace C2.Controls.Left
                     GenLinkButton(dialog.DatabaseInfo, true);
                 }
             }
-               
+
         }
         #endregion
 
@@ -335,7 +352,7 @@ namespace C2.Controls.Left
 
         #region 外部数据库布局
         public void GenLinkButton(DatabaseItem dbinfo, bool updateFrameAndTables = false)
-        {               
+        {
             SelectLinkButton = new LinkButton(dbinfo);
             GenLinkButton(SelectLinkButton);
             SaveExternalData();
@@ -361,17 +378,17 @@ namespace C2.Controls.Left
                 linkPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
             else
                 linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
-            linkPoint.Y += ButtonGapHeight;           
+            linkPoint.Y += ButtonGapHeight;
             lb.Location = linkPoint;
         }
         #endregion
 
         #region 外部表添加
-        private void GenTableButton(TableButton tableButton)
-        {
-            LayoutModelButtonLocation(tableButton); // 递增
-            this.tabelPanel.Controls.Add(tableButton);
-        }
+        //private void GenTableButton(TableButton tableButton)
+        //{
+        //    LayoutModelButtonLocation(tableButton); // 递增
+        //    this.tabelPanel.Controls.Add(tableButton);
+        //}
         #endregion
 
         #region 外部表布局
@@ -456,7 +473,7 @@ namespace C2.Controls.Left
                 UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
                 this.tableFilterTextBox.Text = "";
             }
-               
+
         }
 
         private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
@@ -527,30 +544,10 @@ namespace C2.Controls.Left
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo, Dictionary<string, List<string>> tableColDict)
         {
             //先清空上一次的数据表内容
-            RelateTableButtons.Clear();
-            this.tabelPanel.Controls.Clear();
-            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            List<string> tmp = new List<string>();
-            foreach (Table table in tables.Take(Math.Min(300,tables.Count)))
-            {
-                foreach ( List<string> kvp in tableColDict.Values)
-                {
-                    tmp.AddRange(kvp);
-                }
-                table.Columns = tmp;
-                DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
-                tmpDatabaseItem.DataTable = table;
-                tmpDatabaseItem.Schema = this.schemaComboBox.Text;
-                TableButton tableButton = new TableButton(tmpDatabaseItem);
-                GenTableButton(tableButton);//生成数据表按钮
-            }
+            _DatabaseInfo = databaseInfo;
+            _TableColDict = tableColDict;
+            Tables = tables;
 
-            foreach (TableButton tb in this.tabelPanel.Controls)
-            {
-                RelateTableButtons.Add(tb);
-            }
-
-                
         }
         public List<DatabaseItem> GetAllExternalData()
         {
