@@ -460,7 +460,7 @@ namespace C2.Controls.Left
             if (users == null)
                 return;
 
-             this.schemaComboBox.Text = !users.Contains(loginUser.ToLower()) ? "选择架构" : defaultSchema; 
+            this.schemaComboBox.Text = users.Contains(loginUser.ToLower()) ? defaultSchema:"选择架构"; 
 
             users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }
