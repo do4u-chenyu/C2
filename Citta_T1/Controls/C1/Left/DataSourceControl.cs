@@ -101,18 +101,20 @@ namespace C2.Controls.Left
         {
             dbis.Clear();
             RelateTableButtons.Clear();
-            this.tabelPanel.Controls.Clear();
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             List<string> tmp = new List<string>();
-            foreach (Table table in tables.Take(Math.Min(300,tables.Count)))
-            {   
-                if(tableColDict.TryGetValue(table.Name, out tmp))
+            //foreach (Table table in tables.Take(Math.Min(300, tables.Count)))
+            foreach (Table table in _Tables)
+            {
+                if (_TableColDict.TryGetValue(table.Name, out tmp))
                     table.Columns = tmp;
-                DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
+                table.Columns = tmp;
+                DatabaseItem tmpDatabaseItem = _DatabaseInfo.Clone();
                 tmpDatabaseItem.DataTable = table;
                 tmpDatabaseItem.Schema = this.schemaComboBox.Text;
-                TableButton tableButton = new TableButton(tmpDatabaseItem);
-                GenTableButton(tableButton);//生成数据表按钮
+                //TableButton tableButton = new TableButton(tmpDatabaseItem);
+                //GenTableButton(tableButton);//生成数据表按钮
+                dbis.Add(tmpDatabaseItem.Clone());
             }
 
 
