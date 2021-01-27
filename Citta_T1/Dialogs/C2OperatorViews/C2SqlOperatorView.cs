@@ -168,7 +168,7 @@ namespace C2.Dialogs.C2OperatorViews
             if (users == null)
                 return;
 
-            this.comboBoxDataBase.Text = users.Contains(loginUser.ToLower()) ? "选择架构" : defaultSchema; // TODO
+            this.comboBoxDataBase.Text = users.Contains(loginUser.ToLower()) ? defaultSchema:"选择架构"; // TODO
 
             users.ForEach(x => this.comboBoxDataBase.Items.Add(x.ToString()));
         }
