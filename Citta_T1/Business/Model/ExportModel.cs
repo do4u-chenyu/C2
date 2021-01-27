@@ -85,11 +85,11 @@ namespace C2.Business.Model
 
             foreach (XmlNode widget in widgets)
             {
-                XmlNodeList datas = widget.SelectNodes("//data_item|//chart_item|//attach_item");
+                XmlNodeList datas = widget.SelectNodes("data_items/data_item|op_items/op_item/data_item|chart_items/chart_item|attach_items/attach_item");
                 CopyDataSource(datas, allPaths, dataSourceNames);
 
                 //模型的结果同步到业务视图的结果算子，也需要修改路径
-                XmlNodeList results = widget.SelectNodes("//result_item");
+                XmlNodeList results = widget.SelectNodes("op_items/op_item/result_item|result_items/result_item");
                 foreach(XmlNode result in results)
                 {
                     if ((result as XmlElement).GetAttribute("result_type") == "ModelOp")

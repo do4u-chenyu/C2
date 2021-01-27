@@ -93,7 +93,7 @@ namespace C2.Business.Model
 
             foreach (XmlNode widget in widgets)
             {
-                XmlNodeList datas = widget.SelectNodes("//data_item|//chart_item|//attach_item|//result_item");
+                XmlNodeList datas = widget.SelectNodes("data_items/data_item|op_items/op_item/data_item|chart_items/chart_item|attach_items/attach_item|op_items/op_item/result_item|result_items/result_item");
                 ReWriteC2NodePath(datas, dataSourcePath);
 
                 XmlNodeList opItems = widget.SelectNodes("op_items/op_item");
