@@ -66,6 +66,8 @@ namespace C2.IAOLab.Transform
             {
                 string[] strArr = Date.Split(new char[] { '/','-', ' ', ':'});
                 strArr = strArr.Where(s => !string.IsNullOrEmpty(s)).ToArray();
+                if (strArr.Length != 6)
+                    return wrong;
                 DateTime dt = new DateTime(int.Parse(strArr[0]),int.Parse(strArr[1]),int.Parse(strArr[2]),int.Parse(strArr[3]),int.Parse(strArr[4]),int.Parse(strArr[5]));
                 if(int.Parse(strArr[0]) > 2105)
                 {
@@ -119,7 +121,7 @@ namespace C2.IAOLab.Transform
         {
             try
             {
-                long n = uint.Parse(Num);
+                uint n = uint.Parse(Num);
                 StringBuilder dot = new StringBuilder();
                 dot.Append((n >> 24) & 0xFF)
                    .Append(".")
@@ -131,9 +133,11 @@ namespace C2.IAOLab.Transform
                 return string.Format("IP:{0}\n", dot);
              
             }
-            catch (Exception ex)
+            //catch (Exception ex)
+            catch
             {
-                return ex.ToString();
+                //return ex.ToString();
+                return wrong;
             }
 
         }

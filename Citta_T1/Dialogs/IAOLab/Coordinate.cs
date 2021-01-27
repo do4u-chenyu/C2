@@ -83,8 +83,9 @@ namespace C2.Dialogs.IAOLab
             {
                 if (!button.Checked)
                     continue;
-                foreach (string location in inputArray)
+                foreach (string locationorigin in inputArray)
                 {
+                    string location = locationorigin.Replace(" 输入格式有误", "");
                     if (string.IsNullOrEmpty(location))
                         continue;
                     tmpResult.Append(GPSTransform.GetInstance(location).CoordinateConversion(button.Name));
@@ -95,8 +96,9 @@ namespace C2.Dialogs.IAOLab
         }
         private void ComputeDistance(string[] inputArray, StringBuilder tmpResult)
         {
-            foreach (string input in inputArray)
+            foreach (string inputorigin in inputArray)
             {
+                string input = inputorigin.Replace(" 输入格式有误", "");
                 if (!String.IsNullOrEmpty(input))
                 {
                     tmpResult.Append(GPSTransform.GetInstance(input).ComputeDistance());
@@ -112,8 +114,9 @@ namespace C2.Dialogs.IAOLab
             {
                 if (!(button is RadioButton && (button as RadioButton).Checked))
                     continue;
-                foreach (string input in inputArray)
+                foreach (string inputorigin in inputArray)
                 {
+                    string input = inputorigin.Replace(" 输入有误","");
                     if (string.IsNullOrEmpty(input))
                         continue;
                     tmpResult.Append(TimeAndIPTransform.GetInstance(input).TimeIPTransform(button.Text));
@@ -130,8 +133,9 @@ namespace C2.Dialogs.IAOLab
             {
                 if (!(button is RadioButton && (button as RadioButton).Checked))
                     continue;
-                foreach (string input in inputArray)
+                foreach (string inputorigin in inputArray)
                 {
+                    string input = inputorigin.Replace(" 输入有误", "");
                     if (string.IsNullOrEmpty(input))
                         continue;
                     tmpResult.Append(TimeAndIPTransform.GetInstance(input).TimeIPTransform(button.Text));
