@@ -3,33 +3,28 @@ using C2.Utils;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace C2.Database
 {
     public class OracleDAOImpl : BaseDAOImpl
     {
         private static readonly LogUtil log = LogUtil.GetInstance("OracleImpl");
-        private string getUserSQL = @"select distinct owner from all_tables";
-        private string getTablesSQL = @"select table_name from all_tables where owner='{0}' order by table_name";
-        private string getTableContentSQL = @"select * from {0}.{1} where rownum <= {2}";
-        private string getColNameByTablesSQL = @"select a.table_name, a.column_name from all_tab_columns a where table_name in ('{0}')";
+        private readonly string getUserSQL = @"select distinct owner from all_tables";
+        private readonly string getTablesSQL = @"select table_name from all_tables where owner='{0}' order by table_name";
+        private readonly string getTableContentSQL = @"select * from {0}.{1} where rownum <= {2}";
+        private readonly string getColNameByTablesSQL = @"select a.table_name, a.column_name from all_tab_columns a where table_name in ('{0}')";
 
         public OracleDAOImpl(DatabaseItem dbi) : base(dbi) { }
-        public OracleDAOImpl(DataItem di) : base(di) { }
-        public OracleDAOImpl(string name, string user, string pass, string host, string sid, string service, string port): base(name, user, pass, host, sid, service, port) { }
 
         public string ConnectionString
         {
             get
             {
-                if (Service.Length > 0) // Is it a service name connection?
+                // TODO DK 换位置
+                if (!String.IsNullOrEmpty(Service)) // Is it a service name connection?
                     return String.Format(
-                      "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SERVICE_NAME={2})));User Id={3};Password={4};Connection Lifetime=60;Connection Timeout=10",
+                      "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SERVICE_NAME={2})));User Id={3};Password={4};Connection Lifetime=60;Connection Timeout=8",
                       Host,
                       Port,
                       Service,
@@ -37,7 +32,7 @@ namespace C2.Database
                       Pass);
                 else // Is it a SID connection?
                     return String.Format(
-                      "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})));User Id={3};Password={4};Connection Lifetime=60;Connection Timeout=10",
+                      "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})));User Id={3};Password={4};Connection Lifetime=60;Connection Timeout=8",
                       Host,
                       Port,
                       Sid,
@@ -58,12 +53,10 @@ namespace C2.Database
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                 return false;
             }
-
-
         }
-        public override string Query(string sql, bool header=true)
+        public override string Query(string sql, bool header=true) // TODO Dk
         {
-            StringBuilder sb = new StringBuilder(1024 * 16);
+            StringBuilder sb = new StringBuilder(1024 * 16); // TODO
             try
             {
                 using (OracleConnection con = new OracleConnection(this.ConnectionString))
@@ -95,6 +88,7 @@ namespace C2.Database
         }
         public override string LimitSQL(string sql)
         {
+            // TODO DK 两个where
             return String.Format("{0} where rownum <= {1}", sql, OpUtil.PreviewMaxNum);
         }
         public override string GetTablesSQL(string schema)
@@ -103,7 +97,8 @@ namespace C2.Database
         }
         public override string GetColNameByTablesSQL(List<Table> tables)
         { 
-            String[] tableNames = new string[tables.Count];
+            // TODO DK
+            String[] tableNames = new String[tables.Count];
             if (tableNames.Length != 0)
             {
                 for (int i = 0; i < tableNames.Length; i++)
@@ -153,13 +148,13 @@ namespace C2.Database
                                 sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
                             sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
 
-                        }
+                         }
 
                         while (rdr.Read() && returnNum < maxNum)
                         {
+                            // TODO 去掉第一列
                             for (int i = 0; i < rdr.FieldCount - 1; i++)
                                 sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
-                            sb.Append(rdr[rdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
                             returnNum += 1;
                         }
                     }

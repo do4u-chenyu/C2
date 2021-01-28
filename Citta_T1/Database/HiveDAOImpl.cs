@@ -3,29 +3,24 @@ using C2.Utils;
 using Hive2;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace C2.Database
 {
     public class HiveDAOImpl: BaseDAOImpl
     {
         private static readonly LogUtil log = LogUtil.GetInstance("HiveDAOImpl");
-        private string getUserSQL = @"show databases";
-        private string getTablesSQL = @"use {0};show tables;";
-        private string getTableContentSQL = @"use {0};select * from {1} limit {2}";
+        private readonly string getUserSQL = @"show databases";
+        private readonly string getTablesSQL = @"use {0};show tables;";
+        private readonly string getTableContentSQL = @"use {0};select * from {1} limit {2}";
         //private string getColNameByTablesSQL;
-        private string getColNameByTableSQL = "desc {0}";
-        private string dataBaseName;
+        private readonly string getColNameByTableSQL = "desc {0}";
+        private readonly string dataBaseName;
         public HiveDAOImpl(DatabaseItem dbi) : base(dbi)
         {
             this.dataBaseName = dbi.Schema;
         }
-        public HiveDAOImpl(DataItem di) : base(di) { }
-        public HiveDAOImpl(string name, string user, string pass, string host, string sid, string service, string port) : base(name, user, pass, host, sid, service, port) { }
         public override bool TestConn()
         {
             using (var conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
@@ -50,7 +45,8 @@ namespace C2.Database
 
         protected override QueryResult ExecuteSQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
         {
-            StringBuilder sb = new StringBuilder(1024 * 16);
+            // TODO DK 
+            StringBuilder sb = new StringBuilder(1024 * 16); // TODO DK 单页够就行，太小了会copy数组浪费性能，需要选择合适的值
             QueryResult result;
             result.content = string.Empty;
             result.returnNum = 0;
@@ -69,14 +65,15 @@ namespace C2.Database
                     foreach (var s in sqlPage.Split(';'))
                     {
                         if (!String.IsNullOrEmpty(s))
-                            cursor.Execute(s.TrimEnd(';'));
+                            cursor.Execute(s.TrimEnd(';'));  // TODO LXF
                     }
                     var list = cursor.FetchMany(int.MaxValue);
                     // 分页查询去掉第一列索引
 
-                    if (returnHeader && list.Count > 0 && (list[0] as IDictionary<string, object>).Keys.Count > 0)
+                    if (returnHeader && !list.IsEmpty() && !(list[0] as IDictionary<string, object>).Keys.IsEmpty())
                     {
-                        // 添加表头
+                        // TODO LXF
+                        // 添加表头  需要测试只有一列的表或者只有一行的表
                         string headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
                         int index = headers.IndexOf(OpUtil.DefaultFieldSeparator);
                         if (index != -1 && index + 1 < headers.Length)
@@ -138,6 +135,8 @@ namespace C2.Database
                     }
                     foreach (var item in list)
                     {
+                        // TODO LXF
+                        // 使用sb而不是string操作，会降低行能
                         var dict = item as IDictionary<string, object>;
                         string tmp = string.Empty;
 
@@ -147,7 +146,6 @@ namespace C2.Database
                         }
                         sb.Append(tmp.TrimEnd(OpUtil.DefaultFieldSeparator)).Append(OpUtil.DefaultLineSeparator);
                     }
-
                 }
             }
             catch (Exception ex)
@@ -158,6 +156,7 @@ namespace C2.Database
         }
         public override string LimitSQL(string sql)
         {
+            // TODO LXF  双limit会出错
             return String.Format("{0} limit {1}", sql, OpUtil.PreviewMaxNum);
         }
         public override string GetTablesSQL(string schema)
