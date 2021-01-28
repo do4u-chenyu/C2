@@ -211,15 +211,13 @@ namespace C2.Controls.Left
         #region 外部数据添加连接
         private void AddConnectLabel_Click(object sender, EventArgs e)
         {
+            var dialog = new AddDatabaseDialog();
+            if (dialog.ShowDialog(this) != DialogResult.OK)
+                return;
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                var dialog = new AddDatabaseDialog();
-                if (dialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    GenLinkButton(dialog.DatabaseInfo, true);
-                }
+                GenLinkButton(dialog.DatabaseInfo, true);
             }
-               
         }
         #endregion
 
