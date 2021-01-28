@@ -301,14 +301,18 @@ namespace C2
             foreach (LinkButton linkButton in linkButtons)
                 this.dataSourceControl.GenLinkButton(linkButton);
         }
-
         private void LoadIAOSource()
         {
+            string[] IAOLab = { "APK", "BaseStation", "Wifi", "Card", "Tude", " Ip" };
             string IAOLabType = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultIAOLab);
             string[] strArr = IAOLabType.Split(',');
-            for (int i = 0; i < strArr.Length; i++)
+            if (!IAOLabType.IsNullOrEmpty())
             {
-                this.iaoModelControl.GenIAOButton(strArr[i].Trim());
+                for (int i = 0; i < strArr.Length; i++)
+                {
+                    if (!strArr[i].Trim().IsNullOrEmpty() && Array.Exists(IAOLab, element => element == strArr[i].Trim()))
+                        this.iaoModelControl.GenIAOButton(strArr[i].Trim());
+                }
             }
         }
 
