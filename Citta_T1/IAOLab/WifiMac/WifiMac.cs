@@ -45,9 +45,9 @@ namespace C2.IAOLab.WifiMac
             {
                 writer = request.GetRequestStream();//获取用于写入请求数据的Stream对象
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return "网络连接失败: " + ex.Message;
+                return "网络连接失败 " ;
             }
             //将请求参数写入流
             writer.Write(payload, 0, payload.Length);

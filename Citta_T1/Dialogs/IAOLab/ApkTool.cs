@@ -49,14 +49,13 @@ namespace C2.Dialogs.IAOLab
         }
         private void Analyse_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             textBox1.Text = "正在清除历史数据";
             this.dataGridView1.Rows.Clear();
             apkInfoListForEXL = new List<List<string>>();
             if(image != null)
                 image.Dispose();
-            string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
-            FileUtil.DeleteDirectory(tmpPath);
-            FileUtil.CreateDirectory(tmpPath);
+  
             int j = 0;
             if (!IsReady())
                 return;
@@ -82,7 +81,6 @@ namespace C2.Dialogs.IAOLab
                             try
                             {
                                 this.dataGridView1.Rows[index].Cells[0].Value = GetImage(apkInfoList[0]);
-                                
                             }
                             catch 
                             {
@@ -104,6 +102,7 @@ namespace C2.Dialogs.IAOLab
             {
                 MessageBox.Show("apk目录为空");
             }
+            this.Cursor = Cursors.Arrow;
         }
         public Image GetImage(string path)
         {
@@ -156,7 +155,7 @@ namespace C2.Dialogs.IAOLab
         {
             if (dataGridView1.Rows.IsEmpty())
             {
-                MessageBox.Show("当前无数据可导出!");
+                MessageBox.Show("当前无数据可导出!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -180,7 +179,7 @@ namespace C2.Dialogs.IAOLab
             ICell cell = null;
             try
             {
-                string[] columnName = { "ICON", "文件名", "Apk名", "包名", "主函数名", "大小" };
+                string[] columnName = { "图标", "文件名", "Apk名", "包名", "主函数名", "大小" };
                 workBook = new HSSFWorkbook();
                 sheet = workBook.CreateSheet("Sheet0");//创建一个名称为Sheet0的表  
                 int rowCount = this.apkInfoListForEXL.Count;//行数  
@@ -234,11 +233,11 @@ namespace C2.Dialogs.IAOLab
                 sheet = null;
                 workBook = null;
                 row = null;
-                MessageBox.Show("导出成功");
+                MessageBox.Show("导出成功", "提示",MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
              catch (Exception ex)
             {
-                    MessageBox.Show("导出失败:" + ex.Message);
+                    MessageBox.Show("导出失败:" + ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
            
         }
@@ -254,14 +253,20 @@ namespace C2.Dialogs.IAOLab
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            
-            this.dataGridView1.Rows.Clear();
-            this.textBox1.Clear();
+            Clear();
         }
         private void ApkTool_FormClosed(object sender, EventArgs e)
         {
-
+            Clear();
+        }
+        private void Clear()
+        {
             this.dataGridView1.Rows.Clear();
+            if (image != null)
+                image.Dispose();
+            string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
+            FileUtil.DeleteDirectory(tmpPath);
+            FileUtil.CreateDirectory(tmpPath);
             this.textBox1.Clear();
         }
     }

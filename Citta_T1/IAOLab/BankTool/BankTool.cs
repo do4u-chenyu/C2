@@ -34,9 +34,9 @@ namespace C2.IAOLab.BankTool
             {
                 writer = request.GetRequestStream();//获取用于写入请求数据的Stream对象
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return "网络连接失败: " + ex.Message;
+                return "网络连接失败 ";
             }
 
             HttpWebResponse response;
