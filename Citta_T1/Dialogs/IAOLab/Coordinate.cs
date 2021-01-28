@@ -30,6 +30,7 @@ namespace C2.Dialogs.IAOLab
         public void ReLayoutForm()
         {
             // ip time转换窗体
+            this.Text = "IP和时间转换";
             this.tabPage1.Text = "IP转换";
             this.tabPage2.Text = "时间转换";
             this.tabPage1.Controls.Remove(this.sixTransform);
