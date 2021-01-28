@@ -114,37 +114,30 @@ namespace C2.Database
                 using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
                 {
-
                     var cursor = conn.GetCursor();
                     cursor.Execute("use " + dataBaseName);
                     foreach (var s in sql.Split(';'))
                     {
                         if (!String.IsNullOrEmpty(s))
-                            cursor.Execute(s.TrimEnd(';'));
+                            cursor.Execute(s);
                     }
                     var list = cursor.FetchMany(int.MaxValue);
-                    if (header)
+                    if (header && !list.IsEmpty())
                     {
-                        string headers;
-                        if (list.Count > 0)
-                        {
-                            // 添加表头
-                            headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
-                            sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
-                        }
-                    }
-                    foreach (var item in list)
-                    {
-                        // TODO LXF
-                        // 使用sb而不是string操作，会降低行能
-                        var dict = item as IDictionary<string, object>;
-                        string tmp = string.Empty;
 
+                        // 添加表头
+                        string headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
+                        sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
+
+                    }
+                    foreach (IDictionary<string, object> dict in list)
+                    {
                         foreach (var key in dict.Keys)
                         {
-                            tmp += dict[key].ToString() + OpUtil.DefaultFieldSeparator;
+                            sb.Append(dict[key].ToString()).Append(OpUtil.DefaultFieldSeparator);
                         }
-                        sb.Append(tmp.TrimEnd(OpUtil.DefaultFieldSeparator)).Append(OpUtil.DefaultLineSeparator);
+                        if (!dict.Keys.IsEmpty())
+                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator);
                     }
                 }
             }
