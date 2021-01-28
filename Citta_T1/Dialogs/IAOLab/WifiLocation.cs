@@ -32,9 +32,7 @@ namespace C2.Dialogs.IAOLab
             this.Cursor = Cursors.WaitCursor;
             switch (FormType)
             {
-                case "APK":
-                  
-                    break;
+               
                 case "BaseStation":
                     
                     progressBar1.Value = 0;
@@ -43,7 +41,7 @@ namespace C2.Dialogs.IAOLab
                     foreach (string baseStation in inputArray)
                     {
                         progressBar1.Value += 1 ;
-                        if (!string.IsNullOrEmpty(baseStation) && progressBar1.Value < 1001)
+                        if (!string.IsNullOrEmpty(baseStation) && progressBar1.Value < 1001 && string.IsNullOrEmpty(baseStation.Remove('\t').Remove(' ')))
                         {
                             tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(baseStation.Split('\t')[0]));
                             inputAndResult.Text = tmpResult.ToString();
@@ -59,7 +57,7 @@ namespace C2.Dialogs.IAOLab
                     foreach (string mac in inputArray)
                     {
                         progressBar1.Value += 1;
-                        if (!string.IsNullOrEmpty(mac) && progressBar1.Value < 1001)
+                        if (!string.IsNullOrEmpty(mac) && progressBar1.Value < 1001 && string.IsNullOrEmpty(mac.Remove('\t').Remove(' ')))
                         {
                             tmpResult.Append(WifiMac.GetInstance().MacLocate(mac.Split('\t')[0]));
                             inputAndResult.Text = tmpResult.ToString();
@@ -76,7 +74,7 @@ namespace C2.Dialogs.IAOLab
                     foreach (string bankCard in inputArray)
                     {
                         progressBar1.Value += 1;
-                        if (!string.IsNullOrEmpty(bankCard) && progressBar1.Value < 1001)
+                        if (!string.IsNullOrEmpty(bankCard) && progressBar1.Value < 1001 && string.IsNullOrEmpty(bankCard.Remove('\t').Remove(' ')))
                         {
                            
                             if (progressBar1.Value % 25 == 0 )

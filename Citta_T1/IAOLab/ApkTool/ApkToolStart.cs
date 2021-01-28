@@ -108,6 +108,10 @@ namespace C2.IAOLab.ApkToolStart
                         {
                             size = f.Length;
                             relIcon = fsInfo.FullName;
+                            if(size < 193 * 192 && size >143 * 144)
+                            {
+                                return relIcon;
+                            }
                         }
                     }
                 }

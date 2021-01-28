@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -11,6 +12,8 @@ using C2.Utils;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
+using NPOI.XWPF.UserModel;
+
 namespace C2.Dialogs.IAOLab
 {
     public partial class ApkTool : BaseDialog
@@ -128,24 +131,39 @@ namespace C2.Dialogs.IAOLab
         {
             OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
             OpenFileDialog1.Filter = "java.exe | *.exe";
-            string path = @"C:\Program Files\Java";
-            if (Directory.Exists(path))
+            string path = null;
+            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
             {
-                DirectoryInfo dir = new DirectoryInfo(path);
-                FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
-                foreach (FileSystemInfo fsInfo in fsInfos)
+                if (DEntry.Key.ToString() == "JAVA_HOME") 
                 {
-                    if (fsInfo.Name.Contains("jdk") && Directory.Exists(Path.Combine(fsInfo.FullName, "bin")))
-                    {  
-                        OpenFileDialog1.InitialDirectory = Path.Combine(fsInfo.FullName, "bin");
-                        break;
-                    }
+                    path = Path.Combine(DEntry.Value.ToString(), "bin");
+                    break;
                 }
             }
-            else
+            if (path == string.Empty)
             {
-                OpenFileDialog1.InitialDirectory = @"C:\Program Files";
+                string firstPath = @"C:\Program Files\Java";
+                if (Directory.Exists(firstPath))
+                {
+                    DirectoryInfo dir = new DirectoryInfo(firstPath);
+                    FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
+                    foreach (FileSystemInfo fsInfo in fsInfos)
+                    {
+                        if (fsInfo.Name.Contains("jdk") && Directory.Exists(Path.Combine(fsInfo.FullName, "bin")))
+                        {
+                            path = Path.Combine(fsInfo.FullName, "bin");
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    path = @"C:\Program Files";
+                }
+
             }
+            
+            OpenFileDialog1.InitialDirectory = path;
             if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
                 jdkPathTextBox.Text = OpenFileDialog1.FileName;
         }
@@ -176,7 +194,7 @@ namespace C2.Dialogs.IAOLab
             IWorkbook workBook = null;  //保存的数据
             IRow row = null;
             ISheet sheet = null;  //生成表格
-            ICell cell = null;
+            NPOI.SS.UserModel.ICell cell = null;
             try
             {
                 string[] columnName = { "图标", "文件名", "Apk名", "包名", "主函数名", "大小" };
@@ -184,12 +202,13 @@ namespace C2.Dialogs.IAOLab
                 sheet = workBook.CreateSheet("Sheet0");//创建一个名称为Sheet0的表  
                 int rowCount = this.apkInfoListForEXL.Count;//行数  
                 int columnCount = columnName.Length;//列数  
-                sheet.SetColumnWidth(0, 20 * 256);
+                sheet.SetColumnWidth(0, 16 * 256);
                 sheet.SetColumnWidth(1, 10 * 256);
                 sheet.SetColumnWidth(2, 10 * 256);
                 sheet.SetColumnWidth(3, 30 * 256);
                 sheet.SetColumnWidth(4, 40 * 256);
                 sheet.SetColumnWidth(5, 5 * 256);
+                
                 row = sheet.CreateRow(0);//excel第一行设为列头，在第一行中写入数据（所有列的第一行）
     
                     
@@ -203,12 +222,12 @@ namespace C2.Dialogs.IAOLab
                 for (int i = 0; i < rowCount; i++)  //写完所有的行和列
                 {
                     row = sheet.CreateRow(i+1); //这里是新开启一行，从第二行开始写，第一行上面已经写完
-                    row.Height = 40 * 40;
+                    row.Height = 80 * 20;
                     try
                     {
                         cell = row.CreateCell(0);
                         byte[] bytes = File.ReadAllBytes(this.apkInfoListForEXL[i][0]);
-                        int pictureIdx = workBook.AddPicture(bytes, PictureType.JPEG);
+                        int pictureIdx = workBook.AddPicture(bytes, NPOI.SS.UserModel.PictureType.JPEG);
                         HSSFPatriarch patriarch = (HSSFPatriarch)sheet.CreateDrawingPatriarch();//前四个参数(dx1,dy1,dx2,dy2)为图片在单元格的边距                            //col1,col2表示图片插在col1和col2之间的单元格，索引从0开始                            //row1,row2表示图片插在第row1和row2之间的单元格，索引从1开始　　　　　　　　　　　　　　　　// 参数的解析: HSSFClientAnchor（int dx1,int dy1,int dx2,int dy2,int col1,int row1,int col2,int row2)            　　　　　　　　　//dx1:图片左边相对excel格的位置(x偏移) 范围值为:0~1023;即输100 偏移的位置大概是相对于整个单元格的宽度的100除以1023大概是10分之一            　　　　　　　　  //dy1:图片上方相对excel格的位置(y偏移) 范围值为:0~256 原理同上。            　　　　　　　　  //dx2:图片右边相对excel格的位置(x偏移) 范围值为:0~1023; 原理同上。            　　　　　　　　  //dy2:图片下方相对excel格的位置(y偏移) 范围值为:0~256 原理同上。            　　　　　　　　  //col1和row1 :图片左上角的位置，以excel单元格为参考,比喻这两个值为(1,1)，那么图片左上角的位置就是excel表(1,1)单元格的右下角的点(A,1)右下角的点。            　　　　　　　　  //col2和row2:图片右下角的位置，以excel单元格为参考,比喻这两个值为(2,2)，那么图片右下角的位置就是excel表(2,2)单元格的右下角的点(B,2)右下角的点。
                         HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, 0, i + 1, 1, i + 2);
                         //把图片插到相应的位置
