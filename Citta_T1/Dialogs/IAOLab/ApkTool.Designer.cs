@@ -39,12 +39,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ICON = new System.Windows.Forms.DataGridViewImageColumn();
-            this.fileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ApkName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.packageName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mainFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipLable = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -53,6 +47,12 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.ICON = new System.Windows.Forms.DataGridViewImageColumn();
+            this.fileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApkName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.packageName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mainFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -180,57 +180,6 @@
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataGridView1_MouseDown);
             // 
-            // ICON
-            // 
-            this.ICON.FillWeight = 17F;
-            this.ICON.HeaderText = "ICON";
-            this.ICON.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.ICON.MinimumWidth = 6;
-            this.ICON.Name = "ICON";
-            this.ICON.ReadOnly = true;
-            // 
-            // fileName
-            // 
-            this.fileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.fileName.HeaderText = "文件名";
-            this.fileName.MinimumWidth = 6;
-            this.fileName.Name = "fileName";
-            this.fileName.ReadOnly = true;
-            this.fileName.Width = 81;
-            // 
-            // ApkName
-            // 
-            this.ApkName.FillWeight = 15F;
-            this.ApkName.HeaderText = "Apk名";
-            this.ApkName.MinimumWidth = 6;
-            this.ApkName.Name = "ApkName";
-            this.ApkName.ReadOnly = true;
-            // 
-            // packageName
-            // 
-            this.packageName.FillWeight = 30F;
-            this.packageName.HeaderText = "包名";
-            this.packageName.MinimumWidth = 6;
-            this.packageName.Name = "packageName";
-            this.packageName.ReadOnly = true;
-            // 
-            // mainFunction
-            // 
-            this.mainFunction.FillWeight = 45F;
-            this.mainFunction.HeaderText = "主函数";
-            this.mainFunction.MinimumWidth = 6;
-            this.mainFunction.Name = "mainFunction";
-            this.mainFunction.ReadOnly = true;
-            // 
-            // size
-            // 
-            this.size.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.size.HeaderText = "大小";
-            this.size.MinimumWidth = 6;
-            this.size.Name = "size";
-            this.size.ReadOnly = true;
-            this.size.Width = 66;
-            // 
             // tipLable
             // 
             this.tipLable.AutoSize = true;
@@ -277,6 +226,57 @@
             this.label3.Size = new System.Drawing.Size(363, 15);
             this.label3.TabIndex = 15;
             this.label3.Text = "APK分析需要占用较大C盘空间，多个APK建议分批分析";
+            // 
+            // ICON
+            // 
+            this.ICON.FillWeight = 17F;
+            this.ICON.HeaderText = "图标";
+            this.ICON.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.ICON.MinimumWidth = 6;
+            this.ICON.Name = "ICON";
+            this.ICON.ReadOnly = true;
+            // 
+            // fileName
+            // 
+            this.fileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.fileName.HeaderText = "文件名";
+            this.fileName.MinimumWidth = 6;
+            this.fileName.Name = "fileName";
+            this.fileName.ReadOnly = true;
+            this.fileName.Width = 81;
+            // 
+            // ApkName
+            // 
+            this.ApkName.FillWeight = 15F;
+            this.ApkName.HeaderText = "Apk名";
+            this.ApkName.MinimumWidth = 6;
+            this.ApkName.Name = "ApkName";
+            this.ApkName.ReadOnly = true;
+            // 
+            // packageName
+            // 
+            this.packageName.FillWeight = 30F;
+            this.packageName.HeaderText = "包名";
+            this.packageName.MinimumWidth = 6;
+            this.packageName.Name = "packageName";
+            this.packageName.ReadOnly = true;
+            // 
+            // mainFunction
+            // 
+            this.mainFunction.FillWeight = 45F;
+            this.mainFunction.HeaderText = "主函数";
+            this.mainFunction.MinimumWidth = 6;
+            this.mainFunction.Name = "mainFunction";
+            this.mainFunction.ReadOnly = true;
+            // 
+            // size
+            // 
+            this.size.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.size.HeaderText = "大小";
+            this.size.MinimumWidth = 6;
+            this.size.Name = "size";
+            this.size.ReadOnly = true;
+            this.size.Width = 66;
             // 
             // ApkTool
             // 
@@ -328,14 +328,14 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 导出到ExcelToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewImageColumn ICON;
         private System.Windows.Forms.DataGridViewTextBoxColumn fileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ApkName;
         private System.Windows.Forms.DataGridViewTextBoxColumn packageName;
         private System.Windows.Forms.DataGridViewTextBoxColumn mainFunction;
         private System.Windows.Forms.DataGridViewTextBoxColumn size;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label3;
     }
 }

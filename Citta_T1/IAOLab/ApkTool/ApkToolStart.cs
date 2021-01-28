@@ -62,7 +62,7 @@ namespace C2.IAOLab.ApkToolStart
             List<string> cmdList = new List<string>();
             string apkToolPath = Path.Combine(Application.StartupPath ,@"sbin\apktool_2.3.0.jar"); 
             //string cmdApk = @"java -jar "+ apkToolPath+ " d - f " + fsinfo.FullName + " -o " + Path.GetTempPath() + @"ApkTool\"+fsinfo.Name.Replace(".apk","");
-            string cmdApk = String.Format(@"{0} -jar {1} d -f {2} -o {3}",
+            string cmdApk = String.Format(@"{0} -jar {1} d -f {2} -s -o {3}",
                                             "\""+jdkPath+ "\"",
                                             "\"" + apkToolPath + "\"",
                                             "\"" + apkPath + "\"",

@@ -85,7 +85,7 @@ namespace C2.Controls.Left
         {
             baseForm0 = new WifiLocation()
             {
-                Text = "银行卡归属地查询",
+                Text = "银行卡信息查询",
                 InputLable = "请在下方输入银行卡",
                 Tip = HelpUtil.BankToolHelpInfo
             };
