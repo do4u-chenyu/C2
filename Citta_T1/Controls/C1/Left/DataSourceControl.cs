@@ -442,7 +442,7 @@ namespace C2.Controls.Left
 
             //刷新架构 dao会会变化
             List<string> users = dao.GetUsers();
-            UpdateFrameCombo(users, dbi.User, dao.DefaultSchema());
+            UpdateFrameCombo(users, dbi, dao.DefaultSchema());
 
             //刷新数据表
             List<Table> tables = dao.GetTables(this.schemaComboBox.Text);
@@ -452,15 +452,25 @@ namespace C2.Controls.Left
             this.schemaComboBox.SelectedIndexChanged += SchemaComboBox_SelectedIndexChanged;
         }
 
-        private void UpdateFrameCombo(List<string> users, string loginUser, string defaultSchema)
+        private void UpdateFrameCombo(List<string> users, DatabaseItem dbi, string defaultSchema)
         {
+            string loginUser = dbi.User;
             this.schemaComboBox.Items.Clear();
             //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空
             RelateTableButtons.Clear();
             if (users == null)
                 return;
 
-            this.schemaComboBox.Text = users.Contains(loginUser.ToLower()) ? defaultSchema:"选择架构"; 
+
+            if (dbi.Type == DatabaseType.Hive)
+            {
+                this.schemaComboBox.Text = defaultSchema;
+            }
+            else
+            {
+                this.schemaComboBox.Text = users.Contains(loginUser.ToUpper()) ? defaultSchema : "选择架构";
+            }
+
 
             users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }
