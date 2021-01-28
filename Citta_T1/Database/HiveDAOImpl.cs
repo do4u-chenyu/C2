@@ -8,7 +8,7 @@ using System.Text;
 
 namespace C2.Database
 {
-    public class HiveDAOImpl: BaseDAOImpl
+    public class HiveDAOImpl : BaseDAOImpl
     {
         private static readonly LogUtil log = LogUtil.GetInstance("HiveDAOImpl");
         private readonly string getUserSQL = @"show databases";
@@ -28,7 +28,7 @@ namespace C2.Database
             {
                 try
                 {
-                  
+
                     conn.SetSocketTimeout = 8000;
                     conn.SetTcpReceiveTimeout = 8000;
                     conn.SetTcpSendTimeout = 8000;
@@ -54,7 +54,7 @@ namespace C2.Database
             string sqlPage = String.Format(@"select * from (select row_number() over () as rowno,tmp0.* from ({0}) tmp0) t where t.rowno  between {1} and {2}",
                                     sqlText,
                                     pageSize * (pageIndex),
-                                    pageSize * (pageIndex) + maxNum);          
+                                    pageSize * (pageIndex) + maxNum);
             try
             {
                 using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
@@ -65,21 +65,22 @@ namespace C2.Database
                     foreach (var s in sqlPage.Split(';'))
                     {
                         if (!String.IsNullOrEmpty(s))
-                            cursor.Execute(s.TrimEnd(';'));  // TODO LXF
+                            cursor.Execute(s);
                     }
                     var list = cursor.FetchMany(int.MaxValue);
-                    // 分页查询去掉第一列索引
 
-                    if (returnHeader && !list.IsEmpty() && !(list[0] as IDictionary<string, object>).Keys.IsEmpty())
+                    // 分页查询去掉第一列索引
+                    if (returnHeader && !list.IsEmpty() && !(list[0] as IDictionary<string, object>).IsEmpty())
                     {
-                        // TODO LXF
-                        // 添加表头  需要测试只有一列的表或者只有一行的表
-                        string headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
-                        int index = headers.IndexOf(OpUtil.DefaultFieldSeparator);
-                        if (index != -1 && index + 1 < headers.Length)
+                        for (int i = 1; i < (list[0] as IDictionary<string, object>).Count; i++)
                         {
-                            sb.Append(headers.Substring(index + 1)).Append(OpUtil.DefaultLineSeparator);
+                            string key = (list[0] as IDictionary<string, object>).Keys.ElementAt(i);
+                            sb.Append((list[0] as IDictionary<string, object>)[key]).Append(OpUtil.DefaultFieldSeparator);
                         }
+
+                        if ((list[0] as IDictionary<string, object>).Count > 1)
+                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator);
+
                     }
 
                     foreach (IDictionary<string, object> item in list)
