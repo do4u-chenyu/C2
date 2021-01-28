@@ -176,6 +176,7 @@
     <Compile Include="Controls\C1\Left\IAOButton.Designer.cs">
       <DependentUpon>IAOButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\C1\Left\TableListControl.cs" />
     <Compile Include="Controls\C1\Left\TableButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -200,6 +201,7 @@
     <Compile Include="Controls\C1\Left\IAOLabControl.Designer.cs">
       <DependentUpon>IAOLabControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\C1\Left\TableListControlItem.cs" />
     <Compile Include="Controls\DataCharts\BarChart.cs">
       <SubType>UserControl</SubType>
     </Compile>

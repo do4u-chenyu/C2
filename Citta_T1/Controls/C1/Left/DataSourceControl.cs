@@ -125,13 +125,16 @@ namespace C2.Controls.Left
             listBoxControl1.Items.Clear();
 
             var tables = (from g in dbis.ToArray()
-                         orderby g.DataTable.Name
-                         select g).ToArray();
+                          orderby g.DataTable.Name
+                          select g).ToArray();
             if (!tables.IsNullOrEmpty())
             {
                 listBoxControl1.SuspendLayout();
                 foreach (var dt in tables)
                 {
+                    //var contextMeunStrip = new ContextMenuStrip();
+                    //var ReviewToolStripMenuItem = new ToolStripMenuItem();
+
                     var miExport = new ToolStripMenuItem();
                     miExport.Text = FileUtil.RenameAndCenterPadding(dt.DataTable.Name, 23, 15);
                     miExport.Padding = new Padding(0, 0, 0, 0);
@@ -526,7 +529,6 @@ namespace C2.Controls.Left
             UpdateTables(tables, dbi, tableColDict);
             this.schemaComboBox.SelectedIndexChanged += SchemaComboBox_SelectedIndexChanged;
         }
-
         private void UpdateFrameCombo(List<string> users, string loginUser, string defaultSchema)
         {
             this.schemaComboBox.Items.Clear();
@@ -539,7 +541,6 @@ namespace C2.Controls.Left
 
             users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }
-
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo, Dictionary<string, List<string>> tableColDict)
         {
             //先清空上一次的数据表内容
@@ -558,8 +559,6 @@ namespace C2.Controls.Left
 
             return allExternalData;
         }
-
-
         private void optComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.tableFilterTextBox.Text = "";

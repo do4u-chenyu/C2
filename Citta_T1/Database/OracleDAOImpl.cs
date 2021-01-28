@@ -95,7 +95,7 @@ namespace C2.Database
         }
         public override string LimitSQL(string sql)
         {
-            return String.Format("{0} where rownum <= {1}", sql, OpUtil.PreviewMaxNum);
+            return String.Format("select * from ({0}) where rownum <= {1}", sql, OpUtil.PreviewMaxNum);
         }
         public override string GetTablesSQL(string schema)
         {
@@ -156,7 +156,7 @@ namespace C2.Database
                         }
 
                         while (rdr.Read() && returnNum < maxNum)
-                        {
+                        {   
                             for (int i = 0; i < rdr.FieldCount - 1; i++)
                                 sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
                             sb.Append(rdr[rdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
