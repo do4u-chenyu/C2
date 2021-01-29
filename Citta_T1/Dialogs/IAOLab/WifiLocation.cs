@@ -72,11 +72,9 @@ namespace C2.Dialogs.IAOLab
         private void ShowResult(string input, string type, StringBuilder tmpResult)
         {
 
-            if (!string.IsNullOrEmpty(input) && progressBar1.Value < 1001)
+            if (!string.IsNullOrEmpty(input) && progressBar1.Value < 1001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(" ", "")))
             {
 
-                if (!string.IsNullOrEmpty(input.Split('\t')[0].Replace(" ", "")))
-                {
                     if (progressBar1.Value % 50 == 0)
                     {
                         Thread.Sleep(500);
@@ -97,8 +95,6 @@ namespace C2.Dialogs.IAOLab
 
                     inputAndResult.Text = tmpResult.ToString();
                     progressBar1.Value += 1;
-                }
-
 
             }
         }
