@@ -164,8 +164,9 @@ namespace C2.Controls.Left
             {
                 string exportFullPath = zipDialog.ModelPath;
                 string password = zipDialog.Password;
-                if(C2.Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath, password))
+                if (C2.Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath, password))
                     HelpUtil.ShowMessageBox("模型导出成功,存储路径：" + exportFullPath);
+                FileUtil.DeleteDirectory(Path.Combine(Global.TempDirectory));
             }
         }
 
