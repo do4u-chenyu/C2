@@ -39,7 +39,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigForm));
-            this.tabControl = new System.Windows.Forms.TabControl();
+            this.mainTabControl = new System.Windows.Forms.TabControl();
             this.userModelConfigPage = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -71,23 +71,23 @@
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pluginsPage = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.pluginsTabControl = new System.Windows.Forms.TabControl();
             this.installedSubPage = new System.Windows.Forms.TabPage();
             this.availableSubPage = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.pluginsCancelButton = new System.Windows.Forms.Button();
+            this.pluginsOKButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.HostSubPage = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.installedDGV = new System.Windows.Forms.DataGridView();
+            this.availableDGV = new System.Windows.Forms.DataGridView();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.installButton = new System.Windows.Forms.Button();
+            this.pluginsHostTB = new System.Windows.Forms.TextBox();
+            this.pluginsPortTB = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.pluginsTimeoutTB = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -97,35 +97,35 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.tabControl.SuspendLayout();
+            this.mainTabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.aboutPage.SuspendLayout();
             this.pluginsPage.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.pluginsTabControl.SuspendLayout();
             this.installedSubPage.SuspendLayout();
             this.availableSubPage.SuspendLayout();
             this.HostSubPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.installedDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.availableDGV)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl
+            // mainTabControl
             // 
-            this.tabControl.Controls.Add(this.userModelConfigPage);
-            this.tabControl.Controls.Add(this.pythonConfigPage);
-            this.tabControl.Controls.Add(this.pluginsPage);
-            this.tabControl.Controls.Add(this.aboutPage);
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabControl.Location = new System.Drawing.Point(0, 0);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(642, 410);
-            this.tabControl.TabIndex = 0;
-            this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl_Selected);
+            this.mainTabControl.Controls.Add(this.userModelConfigPage);
+            this.mainTabControl.Controls.Add(this.pythonConfigPage);
+            this.mainTabControl.Controls.Add(this.pluginsPage);
+            this.mainTabControl.Controls.Add(this.aboutPage);
+            this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainTabControl.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.mainTabControl.Location = new System.Drawing.Point(0, 0);
+            this.mainTabControl.Name = "mainTabControl";
+            this.mainTabControl.SelectedIndex = 0;
+            this.mainTabControl.Size = new System.Drawing.Size(642, 410);
+            this.mainTabControl.TabIndex = 0;
+            this.mainTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl_Selected);
             // 
             // userModelConfigPage
             // 
@@ -463,9 +463,9 @@
             // 
             // pluginsPage
             // 
-            this.pluginsPage.Controls.Add(this.button1);
-            this.pluginsPage.Controls.Add(this.button2);
-            this.pluginsPage.Controls.Add(this.tabControl1);
+            this.pluginsPage.Controls.Add(this.pluginsCancelButton);
+            this.pluginsPage.Controls.Add(this.pluginsOKButton);
+            this.pluginsPage.Controls.Add(this.pluginsTabControl);
             this.pluginsPage.Location = new System.Drawing.Point(4, 26);
             this.pluginsPage.Name = "pluginsPage";
             this.pluginsPage.Size = new System.Drawing.Size(634, 380);
@@ -473,22 +473,22 @@
             this.pluginsPage.Text = "插件管理";
             this.pluginsPage.UseVisualStyleBackColor = true;
             // 
-            // tabControl1
+            // pluginsTabControl
             // 
-            this.tabControl1.Controls.Add(this.installedSubPage);
-            this.tabControl1.Controls.Add(this.availableSubPage);
-            this.tabControl1.Controls.Add(this.HostSubPage);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabControl1.ItemSize = new System.Drawing.Size(60, 22);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(634, 343);
-            this.tabControl1.TabIndex = 0;
+            this.pluginsTabControl.Controls.Add(this.installedSubPage);
+            this.pluginsTabControl.Controls.Add(this.availableSubPage);
+            this.pluginsTabControl.Controls.Add(this.HostSubPage);
+            this.pluginsTabControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pluginsTabControl.ItemSize = new System.Drawing.Size(60, 22);
+            this.pluginsTabControl.Location = new System.Drawing.Point(0, 0);
+            this.pluginsTabControl.Name = "pluginsTabControl";
+            this.pluginsTabControl.SelectedIndex = 0;
+            this.pluginsTabControl.Size = new System.Drawing.Size(634, 343);
+            this.pluginsTabControl.TabIndex = 0;
             // 
             // installedSubPage
             // 
-            this.installedSubPage.Controls.Add(this.dataGridView1);
+            this.installedSubPage.Controls.Add(this.installedDGV);
             this.installedSubPage.Controls.Add(this.textBox1);
             this.installedSubPage.Location = new System.Drawing.Point(4, 26);
             this.installedSubPage.Name = "installedSubPage";
@@ -500,8 +500,8 @@
             // 
             // availableSubPage
             // 
-            this.availableSubPage.Controls.Add(this.button3);
-            this.availableSubPage.Controls.Add(this.dataGridView2);
+            this.availableSubPage.Controls.Add(this.installButton);
+            this.availableSubPage.Controls.Add(this.availableDGV);
             this.availableSubPage.Controls.Add(this.textBox2);
             this.availableSubPage.Location = new System.Drawing.Point(4, 26);
             this.availableSubPage.Name = "availableSubPage";
@@ -511,23 +511,23 @@
             this.availableSubPage.Text = "可下载";
             this.availableSubPage.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // pluginsCancelButton
             // 
-            this.button1.Location = new System.Drawing.Point(551, 349);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "取消";
-            this.button1.UseVisualStyleBackColor = true;
+            this.pluginsCancelButton.Location = new System.Drawing.Point(551, 349);
+            this.pluginsCancelButton.Name = "pluginsCancelButton";
+            this.pluginsCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.pluginsCancelButton.TabIndex = 5;
+            this.pluginsCancelButton.Text = "取消";
+            this.pluginsCancelButton.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // pluginsOKButton
             // 
-            this.button2.Location = new System.Drawing.Point(458, 349);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "确认";
-            this.button2.UseVisualStyleBackColor = true;
+            this.pluginsOKButton.Location = new System.Drawing.Point(458, 349);
+            this.pluginsOKButton.Name = "pluginsOKButton";
+            this.pluginsOKButton.Size = new System.Drawing.Size(75, 23);
+            this.pluginsOKButton.TabIndex = 4;
+            this.pluginsOKButton.Text = "确认";
+            this.pluginsOKButton.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -541,28 +541,29 @@
             // 
             this.HostSubPage.Controls.Add(this.label13);
             this.HostSubPage.Controls.Add(this.groupBox1);
-            this.HostSubPage.Controls.Add(this.textBox7);
+            this.HostSubPage.Controls.Add(this.pluginsTimeoutTB);
             this.HostSubPage.Controls.Add(this.label11);
             this.HostSubPage.Controls.Add(this.label10);
             this.HostSubPage.Controls.Add(this.label9);
-            this.HostSubPage.Controls.Add(this.textBox6);
-            this.HostSubPage.Controls.Add(this.textBox5);
+            this.HostSubPage.Controls.Add(this.pluginsPortTB);
+            this.HostSubPage.Controls.Add(this.pluginsHostTB);
             this.HostSubPage.Location = new System.Drawing.Point(4, 26);
             this.HostSubPage.Name = "HostSubPage";
             this.HostSubPage.Size = new System.Drawing.Size(626, 313);
             this.HostSubPage.TabIndex = 2;
             this.HostSubPage.Text = "服务器配置";
+            this.HostSubPage.ToolTipText = "配置插件服务器地址";
             this.HostSubPage.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // installedDGV
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.installedDGV.AllowUserToAddRows = false;
+            this.installedDGV.AllowUserToResizeColumns = false;
+            this.installedDGV.AllowUserToResizeRows = false;
+            this.installedDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.installedDGV.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.installedDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.installedDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewCheckBoxColumn1});
@@ -573,27 +574,27 @@
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 6);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(620, 164);
-            this.dataGridView1.TabIndex = 4;
+            this.installedDGV.DefaultCellStyle = dataGridViewCellStyle6;
+            this.installedDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
+            this.installedDGV.Location = new System.Drawing.Point(3, 6);
+            this.installedDGV.MultiSelect = false;
+            this.installedDGV.Name = "installedDGV";
+            this.installedDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.installedDGV.RowTemplate.Height = 23;
+            this.installedDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.installedDGV.ShowEditingIcon = false;
+            this.installedDGV.Size = new System.Drawing.Size(620, 164);
+            this.installedDGV.TabIndex = 4;
             // 
-            // dataGridView2
+            // availableDGV
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToResizeColumns = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.availableDGV.AllowUserToAddRows = false;
+            this.availableDGV.AllowUserToResizeColumns = false;
+            this.availableDGV.AllowUserToResizeRows = false;
+            this.availableDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.availableDGV.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.availableDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.availableDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewCheckBoxColumn2});
@@ -604,17 +605,17 @@
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 6);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView2.ShowEditingIcon = false;
-            this.dataGridView2.Size = new System.Drawing.Size(620, 164);
-            this.dataGridView2.TabIndex = 6;
+            this.availableDGV.DefaultCellStyle = dataGridViewCellStyle9;
+            this.availableDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
+            this.availableDGV.Location = new System.Drawing.Point(3, 6);
+            this.availableDGV.MultiSelect = false;
+            this.availableDGV.Name = "availableDGV";
+            this.availableDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.availableDGV.RowTemplate.Height = 23;
+            this.availableDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.availableDGV.ShowEditingIcon = false;
+            this.availableDGV.Size = new System.Drawing.Size(620, 164);
+            this.availableDGV.TabIndex = 6;
             // 
             // textBox2
             // 
@@ -624,28 +625,28 @@
             this.textBox2.Size = new System.Drawing.Size(620, 102);
             this.textBox2.TabIndex = 5;
             // 
-            // button3
+            // installButton
             // 
-            this.button3.Location = new System.Drawing.Point(531, 284);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "安装";
-            this.button3.UseVisualStyleBackColor = true;
+            this.installButton.Location = new System.Drawing.Point(531, 284);
+            this.installButton.Name = "installButton";
+            this.installButton.Size = new System.Drawing.Size(75, 23);
+            this.installButton.TabIndex = 7;
+            this.installButton.Text = "安装";
+            this.installButton.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // pluginsHostTB
             // 
-            this.textBox5.Location = new System.Drawing.Point(70, 25);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(371, 23);
-            this.textBox5.TabIndex = 0;
+            this.pluginsHostTB.Location = new System.Drawing.Point(70, 25);
+            this.pluginsHostTB.Name = "pluginsHostTB";
+            this.pluginsHostTB.Size = new System.Drawing.Size(371, 23);
+            this.pluginsHostTB.TabIndex = 0;
             // 
-            // textBox6
+            // pluginsPortTB
             // 
-            this.textBox6.Location = new System.Drawing.Point(70, 69);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(83, 23);
-            this.textBox6.TabIndex = 1;
+            this.pluginsPortTB.Location = new System.Drawing.Point(70, 69);
+            this.pluginsPortTB.Name = "pluginsPortTB";
+            this.pluginsPortTB.Size = new System.Drawing.Size(83, 23);
+            this.pluginsPortTB.TabIndex = 1;
             // 
             // label9
             // 
@@ -674,12 +675,12 @@
             this.label11.TabIndex = 4;
             this.label11.Text = "超时 :";
             // 
-            // textBox7
+            // pluginsTimeoutTB
             // 
-            this.textBox7.Location = new System.Drawing.Point(70, 107);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(45, 23);
-            this.textBox7.TabIndex = 5;
+            this.pluginsTimeoutTB.Location = new System.Drawing.Point(70, 107);
+            this.pluginsTimeoutTB.Name = "pluginsTimeoutTB";
+            this.pluginsTimeoutTB.Size = new System.Drawing.Size(45, 23);
+            this.pluginsTimeoutTB.TabIndex = 5;
             // 
             // groupBox1
             // 
@@ -773,7 +774,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(642, 410);
-            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.mainTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -782,7 +783,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "首选项";
             this.Load += new System.EventHandler(this.ConfigForm_Load);
-            this.tabControl.ResumeLayout(false);
+            this.mainTabControl.ResumeLayout(false);
             this.userModelConfigPage.ResumeLayout(false);
             this.userModelConfigPage.PerformLayout();
             this.pythonConfigPage.ResumeLayout(false);
@@ -791,15 +792,15 @@
             this.aboutPage.ResumeLayout(false);
             this.aboutPage.PerformLayout();
             this.pluginsPage.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.pluginsTabControl.ResumeLayout(false);
             this.installedSubPage.ResumeLayout(false);
             this.installedSubPage.PerformLayout();
             this.availableSubPage.ResumeLayout(false);
             this.availableSubPage.PerformLayout();
             this.HostSubPage.ResumeLayout(false);
             this.HostSubPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.installedDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.availableDGV)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -808,7 +809,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabControl mainTabControl;
         private System.Windows.Forms.TabPage userModelConfigPage;
         private System.Windows.Forms.TabPage pythonConfigPage;
         private System.Windows.Forms.TabPage aboutPage;
@@ -840,18 +841,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn aliasColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chosenColumn;
         private System.Windows.Forms.TabPage pluginsPage;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.Button pluginsCancelButton;
+        private System.Windows.Forms.Button pluginsOKButton;
+        private System.Windows.Forms.TabControl pluginsTabControl;
         private System.Windows.Forms.TabPage installedSubPage;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView installedDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TabPage availableSubPage;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button installButton;
+        private System.Windows.Forms.DataGridView availableDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
@@ -860,11 +861,11 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox pluginsTimeoutTB;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox pluginsPortTB;
+        private System.Windows.Forms.TextBox pluginsHostTB;
     }
 }
