@@ -17,6 +17,7 @@ namespace C2.Database
         private string getUserSQL = @"select distinct owner from all_tables";
         private string getTablesSQL = @"select table_name from all_tables where owner='{0}' order by table_name";
         private string getTableContentSQL = @"select * from {0}.{1} where rownum <= {2}";
+        private string getColNameBySchemaSQL = @"select a.table_name, a.column_name from all_tab_columns a where table_name in {0}";
         private string getColNameByTablesSQL = @"select a.table_name, a.column_name from all_tab_columns a where table_name in ('{0}')";
 
         public OracleDAOImpl(DatabaseItem dbi) : base(dbi) { }
@@ -100,6 +101,12 @@ namespace C2.Database
         public override string GetTablesSQL(string schema)
         {
             return String.Format(this.getTablesSQL, schema.ToUpper());
+        }
+        public override string GetColNameBySchemaSQL(string schema)
+        {
+            return String.Format(this.getColNameBySchemaSQL, 
+                        String.Format(@"(select table_name from all_tables where owner='{0}') order by a.table_name", schema)
+                   );
         }
         public override string GetColNameByTablesSQL(List<Table> tables)
         { 

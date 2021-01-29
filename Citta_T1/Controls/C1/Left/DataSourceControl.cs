@@ -18,10 +18,6 @@ namespace C2.Controls.Left
     public partial class DataSourceControl : UserControl
     {
         private InputDataForm inputDataForm;
-        private List<DatabaseItem> dbis;
-        private List<Table> _Tables;
-        private Dictionary<string, List<string>> _TableColDict;
-        private DatabaseItem _DatabaseInfo;
         private static readonly int ButtonGapHeight = 50;//上下间隔
         private static readonly int ButtonLeftX = 18;
 
@@ -69,23 +65,14 @@ namespace C2.Controls.Left
                 return _RelateTableButtons;
             }
         }
-        public List<Table> Tables
-        {
-            get { return _Tables; }
-            set
-            {
-                if (_Tables != value)
-                {
-                    _Tables = value;
-                    OnTablesChanged();
-                }
-            }
-        }
 
         public DataSourceControl()
         {
             InitializeInputDataForm();
             InitializeComponent();
+
+            this.tableListControl1.ItemIconGetter = (item => item.Image);
+            this.tableListControl1.ItemToolTipTextGetter = (item => item.ToolTipText);
 
             DataSourceDictI2B = new Dictionary<string, DataButton>();
             LinkSourceDictI2B = new Dictionary<string, LinkButton>();
@@ -93,66 +80,6 @@ namespace C2.Controls.Left
             linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             _RelateTableButtons = new List<TableButton>();
-            dbis = new List<DatabaseItem>();
-            _Tables = new List<Table>();
-        }
-
-        public void OnTablesChanged()
-        {
-            dbis.Clear();
-            RelateTableButtons.Clear();
-            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            List<string> tmp = new List<string>();
-            //foreach (Table table in tables.Take(Math.Min(300, tables.Count)))
-            foreach (Table table in _Tables)
-            {
-                if (_TableColDict.TryGetValue(table.Name, out tmp))
-                    table.Columns = tmp;
-                table.Columns = tmp;
-                DatabaseItem tmpDatabaseItem = _DatabaseInfo.Clone();
-                tmpDatabaseItem.DataTable = table;
-                tmpDatabaseItem.Schema = this.schemaComboBox.Text;
-                //TableButton tableButton = new TableButton(tmpDatabaseItem);
-                //GenTableButton(tableButton);//生成数据表按钮
-                dbis.Add(tmpDatabaseItem.Clone());
-            }
-
-
-            //foreach (TableButton tb in this.tabelPanel.Controls)
-            //{
-            //    RelateTableButtons.Add(tb);
-            //}
-            listBoxControl1.Items.Clear();
-
-            var tables = (from g in dbis.ToArray()
-                          orderby g.DataTable.Name
-                          select g).ToArray();
-            if (!tables.IsNullOrEmpty())
-            {
-                listBoxControl1.SuspendLayout();
-                foreach (var dt in tables)
-                {
-                    //var contextMeunStrip = new ContextMenuStrip();
-                    //var ReviewToolStripMenuItem = new ToolStripMenuItem();
-
-                    var miExport = new ToolStripMenuItem();
-                    miExport.Text = FileUtil.RenameAndCenterPadding(dt.DataTable.Name, 23, 15);
-                    miExport.Padding = new Padding(0, 0, 0, 0);
-                    //miExport.Text = FileUtil.ReName(dt.DataTable.Name);
-                    miExport.ToolTipText = dt.DataTable.Name;
-                    miExport.Image = Properties.Resources.Table;
-                    miExport.Tag = dt;
-                    listBoxControl1.Items.Add(miExport);
-                }
-
-                // select default
-                if (listBoxControl1.Items.Count > 0)
-                    listBoxControl1.SelectedItem = listBoxControl1.Items.First();
-
-                listBoxControl1.VerticalScroll.Value = 0;
-                listBoxControl1.ResumeLayout();
-                listBoxControl1.PerformLayout();
-            }
         }
 
         #region 内外部数据面板切换
@@ -459,7 +386,7 @@ namespace C2.Controls.Left
 
         private void SchemaComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //根据架构改变数据表
+            // 根据架构改变数据表
             List<Table> tables;
             Dictionary<string, List<string>> tableColDict;
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
@@ -471,7 +398,7 @@ namespace C2.Controls.Left
                     return;
                 }
                 tables = dao.GetTables(this.schemaComboBox.Text);
-                tableColDict = dao.GetColNameByTables(tables);
+                tableColDict = dao.GetColNameBySchema(this.schemaComboBox.Text);
                 UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
                 this.tableFilterTextBox.Text = "";
             }
@@ -543,10 +470,30 @@ namespace C2.Controls.Left
         }
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo, Dictionary<string, List<string>> tableColDict)
         {
-            //先清空上一次的数据表内容
-            _DatabaseInfo = databaseInfo;
-            _TableColDict = tableColDict;
-            Tables = tables;
+            List<DatabaseItem> dbis = new List<DatabaseItem>();
+            RelateTableButtons.Clear();
+            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            List<string> tmp = new List<string>();
+            //foreach (Table table in tables.Take(Math.Min(300, tables.Count)))
+            foreach (Table table in tables)
+            {
+                if (tableColDict.TryGetValue(table.Name, out tmp))
+                    table.Columns = tmp;
+                table.Columns = tmp;
+                DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
+                tmpDatabaseItem.DataTable = table;
+                tmpDatabaseItem.Schema = this.schemaComboBox.Text;
+                //TableButton tableButton = new TableButton(tmpDatabaseItem);
+                //GenTableButton(tableButton);//生成数据表按钮
+                dbis.Add(tmpDatabaseItem.Clone());
+            }
+
+            this.tableListControl1.DatabaseItems = dbis;
+            // TODO DK
+            //foreach (TableButton tb in this.tabelPanel.Controls)
+            //{
+            //    RelateTableButtons.Add(tb);
+            //}
         }
         public List<DatabaseItem> GetAllExternalData()
         {

@@ -5,11 +5,11 @@ namespace C2.Controls.C1.Left
 {
     class TableListItem: ListBoxControlItem<DatabaseItem>
     {
-        public DatabaseItem _DatabaseItem;
+        public DatabaseItem DatabaseItem;
         public Image Image;
         public TableListItem(DatabaseItem dbi):base()
         {
-            this._DatabaseItem = dbi;
+            this.DatabaseItem = dbi;
         }
     }
 }

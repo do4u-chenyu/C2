@@ -1,4 +1,5 @@
-﻿using C2.Controls.C1.Left;
+﻿using C2.Business.Model;
+using C2.Controls.C1.Left;
 using C2.Core;
 using C2.Database;
 using C2.Model;
@@ -11,15 +12,14 @@ using System.Windows.Forms;
 
 namespace C2.Controls
 {
-    class TableListControl : Control
+    class TableListControl : ListBoxControl<TableListItem>
     {
         private List<DatabaseItem> _DatabaseItems;
         private DatabaseItem _SelectedTableItem;
-        private ListBoxControl<TableListItem> listBoxControl;
         private ContextMenuStrip tableContextMenuStrip;
+        public event System.EventHandler SelectedTableItemChanged;
         public TableListControl()
         {
-            listBoxControl = new ListBoxControl<TableListItem>();
             InitializationTableContextMenuStrip();
         }
         public List<DatabaseItem> DatabaseItems
@@ -27,7 +27,7 @@ namespace C2.Controls
             get { return _DatabaseItems; }
             set
             {
-                if (_DatabaseItems != value)
+                if (value != null)
                 {
                     _DatabaseItems = value;
                     OnDatabaseItemsChanged();
@@ -42,18 +42,18 @@ namespace C2.Controls
                 if (_SelectedTableItem != value)
                 {
                     _SelectedTableItem = value;
-                    OnSelectedTableItem();
+                    OnSelectedTableItemChanged();
                 }
             }
         }
 
-        private void OnSelectedTableItem()
+        private void OnSelectedTableItemChanged()
         {
-            throw new NotImplementedException();
+            SelectedTableItemChanged?.Invoke(this, EventArgs.Empty);
         }
         private void OnDatabaseItemsChanged()
         {
-            listBoxControl.Items.Clear();
+            this.Items.Clear();
 
             var dbis = (from g in DatabaseItems.ToArray()
                           orderby g.DataTable.Name
@@ -68,16 +68,16 @@ namespace C2.Controls
                     tli.ToolTipText = dbi.DataTable.Name;
                     tli.Image = Properties.Resources.Table;
                     tli.Tag = dbi;
-                    listBoxControl.Items.Add(tli);
+                    this.Items.Add(tli);
                 }
 
                 // select default
-                if (listBoxControl.Items.Count > 0)
-                    listBoxControl.SelectedItem = listBoxControl.Items.First();
+                if (this.Items.Count > 0)
+                    this.SelectedItem = this.Items.First();
 
-                listBoxControl.VerticalScroll.Value = 0;
-                listBoxControl.ResumeLayout();
-                listBoxControl.PerformLayout();
+                this.VerticalScroll.Value = 0;
+                this.ResumeLayout();
+                this.PerformLayout();
             }
         }
 
@@ -85,10 +85,25 @@ namespace C2.Controls
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            if (e.Button == MouseButtons.Right && tableContextMenuStrip != null)
+            var listItem = GetItemAt(e.X, e.Y);
+            if (listItem != null)
             {
-                tableContextMenuStrip.Show(this, new Point(e.X, e.Y));
+                SelectedIndices = new int[] { listItem.Index };
+                SelectedTableItem = listItem.DatabaseItem;
             }
+            if (e.Button == MouseButtons.Left && e.Clicks == 1 && SelectedTableItem != null)
+            {
+                // 使用`DataObject`对象来传参数，更加自由
+                DataObject dragDropData = new DataObject();
+                dragDropData.SetData("Type", ElementType.DataSource);
+                dragDropData.SetData("DataType", SelectedTableItem.Type);   //本地数据还是外部数据
+                dragDropData.SetData("TableInfo", SelectedTableItem);            // 数据表信息
+                dragDropData.SetData("Text", SelectedTableItem.DataTable.Name);  // 数据表名
+                this.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+            }
+
+            if (e.Button == MouseButtons.Right && tableContextMenuStrip != null)
+                tableContextMenuStrip.Show(this, new Point(e.X, e.Y));
         }
         #region MenuStrip
         ToolStripMenuItem PreviewTableToolStripMenuItem;
@@ -109,24 +124,24 @@ namespace C2.Controls
                 CopyTableNameToolStripMenuItem
             });
             tableContextMenuStrip.SuspendLayout();
-            // MenuAddIcon
+            // PreviewTableToolStripMenuItem
             PreviewTableToolStripMenuItem.Image = Properties.Resources.image;
             PreviewTableToolStripMenuItem.Name = "PreviewTable";
             PreviewTableToolStripMenuItem.Text = "预览表";
             PreviewTableToolStripMenuItem.Click += new System.EventHandler(PreviewTableToolStripMenuItem_Click);
 
-            // MenuAddRemark
+            // PreviewTableSchemaToolStripMenuItem
             PreviewTableSchemaToolStripMenuItem.Image = Properties.Resources.备注;
             PreviewTableSchemaToolStripMenuItem.Name = "PreviewTableSchema";
             PreviewTableSchemaToolStripMenuItem.Text = "预览表结构";
             PreviewTableSchemaToolStripMenuItem.Click += new System.EventHandler(PreviewTableSchemaToolStripMenuItem_Click);
 
-            // 
+            // CopyTableNameToolStripMenuItem
             CopyTableNameToolStripMenuItem.Image = Properties.Resources.progress_bar;
             CopyTableNameToolStripMenuItem.Name = "CopyTableName";
             CopyTableNameToolStripMenuItem.Text = "复制表明";
             CopyTableNameToolStripMenuItem.Click += new System.EventHandler(CopyTableNameToolStripMenuItem_Click);
-            //
+
             tableContextMenuStrip.ResumeLayout();
         }
 

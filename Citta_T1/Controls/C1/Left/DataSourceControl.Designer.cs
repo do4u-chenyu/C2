@@ -47,7 +47,7 @@ namespace C2.Controls.Left
             this.linkLabel = new System.Windows.Forms.Label();
             this.dataAddLabelPanel = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.listBoxControl1 = new C2.Controls.ListBoxControl<ToolStripMenuItem>();
+            this.tableListControl1 = new C2.Controls.TableListControl();
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
             this.tabelPanel.SuspendLayout();
@@ -170,7 +170,7 @@ namespace C2.Controls.Left
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabelPanel.AutoScroll = true;
-            this.tabelPanel.Controls.Add(this.listBoxControl1);
+            this.tabelPanel.Controls.Add(this.tableListControl1);
             this.tabelPanel.Location = new System.Drawing.Point(0, 324);
             this.tabelPanel.Name = "tabelPanel";
             this.tabelPanel.Size = new System.Drawing.Size(177, 296);
@@ -239,18 +239,16 @@ namespace C2.Controls.Left
             this.dataAddLabelPanel.Size = new System.Drawing.Size(179, 622);
             this.dataAddLabelPanel.TabIndex = 9;
             // 
-            // listBoxControl1
+            // tableListControl1
             // 
-            this.listBoxControl1.ItemIconGetter = (item => item.Image);
-            this.listBoxControl1.ItemToolTipTextGetter = (item => item.ToolTipText);
-            this.listBoxControl1.ItemHeight = 40;
-            //this.listBoxControl1.AutoScrollMargin = new System.Drawing.Size(10, 10);
-            this.listBoxControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxControl1.Location = new System.Drawing.Point(0, 0);
-            this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(177, 296);
-            this.listBoxControl1.TabIndex = 0;
-            this.listBoxControl1.Text = "listBoxControl1";
+            this.tableListControl1.DatabaseItems = null;
+            this.tableListControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableListControl1.Location = new System.Drawing.Point(0, 0);
+            this.tableListControl1.Name = "tableListControl1";
+            this.tableListControl1.SelectedTableItem = null;
+            this.tableListControl1.Size = new System.Drawing.Size(177, 296);
+            this.tableListControl1.TabIndex = 0;
+            this.tableListControl1.Text = "tableListControl1";
             // 
             // DataSourceControl
             // 
@@ -290,6 +288,6 @@ namespace C2.Controls.Left
         private System.Windows.Forms.Label addLocalConnectLabel;
         private System.Windows.Forms.Panel dataAddLabelPanel;
         private System.Windows.Forms.ToolTip toolTip1;
-        private ListBoxControl<ToolStripMenuItem> listBoxControl1;
+        private TableListControl tableListControl1;
     }
 }

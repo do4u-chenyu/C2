@@ -107,6 +107,11 @@ namespace C2.Database
             string result = this.GetTableContentString(table, maxNum);
             return String.IsNullOrEmpty(result) ? new List<List<string>>() : DbUtil.StringTo2DString(result);
         }
+        public Dictionary<string, List<string>> GetColNameBySchema(string schema)
+        {
+            string result = this.Query(this.GetColNameBySchemaSQL(schema), false);
+            return String.IsNullOrEmpty(result) ? new Dictionary<string, List<string>>() : DbUtil.StringToDict(result);
+        }
         public Dictionary<string, List<string>> GetColNameByTables(List<Table> tables)
         {
             string result = this.Query(this.GetColNameByTablesSQL(tables), false);
@@ -236,6 +241,10 @@ namespace C2.Database
             throw new NotImplementedException();
         }
         public virtual string GetTablesSQL(string schema)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual string GetColNameBySchemaSQL(string schema)
         {
             throw new NotImplementedException();
         }
