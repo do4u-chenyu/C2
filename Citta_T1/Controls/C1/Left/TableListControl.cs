@@ -73,10 +73,6 @@ namespace C2.Controls
                     this.Items.Add(tli);
                 }
 
-                // select default
-                if (this.Items.Count > 0)
-                    this.SelectedItem = this.Items.First();
-
                 this.VerticalScroll.Value = 0;
                 this.ResumeLayout();
                 this.PerformLayout();
@@ -196,12 +192,11 @@ namespace C2.Controls
                 HelpUtil.ReviewToolStripMenuItemInfo;
         }
         #endregion
-        #region
+        #region Clear
         public void Clear()
         {
             this.Items.Clear();
             this.DatabaseItems.Clear();
-            this.SelectedItem = null;
             this.SelectedIndices = null;
             this.SelectedTableItem = null;
             this.PerformLayout();
