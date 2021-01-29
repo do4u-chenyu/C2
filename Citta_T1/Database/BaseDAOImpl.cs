@@ -202,6 +202,15 @@ namespace C2.Database
             throw new NotImplementedException();
         }
         #endregion
+        #region 自定义异常
+
+
+        protected void QueryFailureException()
+        { 
+            throw new Exception("数据库查询失败");
+        }
+
+        #endregion
     }
 
     class EmptyDAOImpl : BaseDAOImpl
