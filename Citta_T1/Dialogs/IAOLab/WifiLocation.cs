@@ -27,8 +27,8 @@ namespace C2.Dialogs.IAOLab
 
         private void Search_Click(object sender, EventArgs e)
         {
-            string[] inputArray = this.inputAndResult.Text.Split('\n');
             StringBuilder tmpResult = new StringBuilder();
+            string[] inputArray = this.inputAndResult.Text.Split('\n');
             this.Cursor = Cursors.WaitCursor;
             switch (FormType)
             {
@@ -36,56 +36,31 @@ namespace C2.Dialogs.IAOLab
                 case "BaseStation":
                     
                     progressBar1.Value = 0;
-                    progressBar1.Maximum = inputArray.Length;
+                    progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                     progressBar1.Minimum = 0;
                     foreach (string baseStation in inputArray)
                     {
-                        progressBar1.Value += 1 ;
-                        if (!string.IsNullOrEmpty(baseStation) && progressBar1.Value < 1001 && string.IsNullOrEmpty(baseStation.Remove('\t').Remove(' ')))
-                        {
-                            tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(baseStation.Split('\t')[0]));
-                            inputAndResult.Text = tmpResult.ToString();
-                        }
+                        ShowResult(baseStation, "baseStation",tmpResult);
                     }
-                    
                     break;
                 case "Wifi":
                     
                     progressBar1.Value = 0;
-                    progressBar1.Maximum = inputArray.Length;
+                    progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                     progressBar1.Minimum = 0;
                     foreach (string mac in inputArray)
                     {
-                        progressBar1.Value += 1;
-                        if (!string.IsNullOrEmpty(mac) && progressBar1.Value < 1001 && string.IsNullOrEmpty(mac.Remove('\t').Remove(' ')))
-                        {
-                            tmpResult.Append(WifiMac.GetInstance().MacLocate(mac.Split('\t')[0]));
-                            inputAndResult.Text = tmpResult.ToString();
-                        }
-                        
+                        ShowResult(mac,"mac",tmpResult);
                     }
-                    
                     break;
                 case "Card":
                     
                     progressBar1.Value = 0;
-                    progressBar1.Maximum = inputArray.Length;
+                    progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                     progressBar1.Minimum = 0;
                     foreach (string bankCard in inputArray)
                     {
-                        progressBar1.Value += 1;
-                        if (!string.IsNullOrEmpty(bankCard) && progressBar1.Value < 1001 && string.IsNullOrEmpty(bankCard.Remove('\t').Remove(' ')))
-                        {
-                           
-                            if (progressBar1.Value % 25 == 0 )
-                            {
-                                Thread.Sleep(800);
-                                
-                            }
-                            tmpResult.Append(BankTool.GetInstance().BankToolSearch(bankCard.Split('\t')[0]));
-                            inputAndResult.Text = tmpResult.ToString();
-                        }
-                       
+                        ShowResult(bankCard,"bankCard",tmpResult);
                     }
                     
                     break;             
@@ -94,7 +69,92 @@ namespace C2.Dialogs.IAOLab
             }
             this.Cursor = Cursors.Arrow;
         }
+        private void ShowResult(string input,string type, StringBuilder tmpResult)
+        {
+            
+            if (!string.IsNullOrEmpty(input) && progressBar1.Value < 1001)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(input.Split('\t')[0].Remove(' ')))
+                    {
+                        if (progressBar1.Value % 50 == 0)
+                        {
+                            Thread.Sleep(500);
 
+                        }
+                        switch (type)
+                        {
+                            case "baseStation":
+                                tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
+                                break;
+                            case "mac":
+                                tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
+                                break;
+                            case "bankCard":
+                                tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
+                                break;
+                        }
+                        
+                        inputAndResult.Text = tmpResult.ToString();
+                        progressBar1.Value += 1;
+                    }
+                }
+                catch
+                {
+                    if (!string.IsNullOrEmpty(input.Split('\t')[0]))
+                    {
+                        try
+                        {
+                            if (string.IsNullOrEmpty(input.Split('\t')[0].Remove(' ')));
+                            
+                        }
+                        catch
+                        {
+                            if (progressBar1.Value % 50 == 0)
+                            {
+                                Thread.Sleep(500);
+
+                            }
+                            switch (type)
+                            {
+                                case "baseStation":
+                                    tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
+                                    break;
+                                case "mac":
+                                    tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
+                                    break;
+                                case "bankCard":
+                                    tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
+                                    break;
+                            }
+                            inputAndResult.Text = tmpResult.ToString();
+                            progressBar1.Value += 1;
+                        }
+                       
+                    }
+
+                }
+            }
+        }
+        private int GetRelLengthOfArry(string[] arry)
+        {
+            int relLength = 0;
+            foreach(string i in arry)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(i.Split('\t')[0].Remove(' ')))
+                        relLength++;
+                }
+                catch
+                {
+                    if (!string.IsNullOrEmpty(i.Split('\t')[0]))
+                        relLength++;
+                }
+            }
+            return relLength;
+        }
         private void Cancle_Click(object sender, EventArgs e)
         {
             progressBar1.Value = 0;
