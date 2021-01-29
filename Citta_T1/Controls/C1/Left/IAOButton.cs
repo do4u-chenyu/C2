@@ -24,38 +24,38 @@ namespace C2.Controls.Left
                 case "APK":
                     this.txtButton.Text = Lang._("APK");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
-                    toolTip1.SetToolTip(this.rightPictureBox, "对Apk进行解析并获取Apk的图标，安装名称，包名，入口函数名和大小");
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.ApkToolFormHelpInfo);
                     
                     ApkToolForm();
                     break;
                 case "BaseStation":
                     this.txtButton.Text = Lang._("BaseStation");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BaseStation;
-                    toolTip1.SetToolTip(this.rightPictureBox, "根据基站号进行定位，获取基站的经纬度，覆盖范围和详细地址,需要网络");                 
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BaseStationFormHelpInfo);                 
                     BaseStationForm();
                     break;
                 case "Wifi":
                     this.txtButton.Text = Lang._("Wifi");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
-                    toolTip1.SetToolTip(this.rightPictureBox, "根据WIFI热点的MAC进行定位，获取WIFI的经纬度，覆盖范围和详细地址,需要网络");
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
                     baseForm0 = new WifiLocation();
                     break;
                 case "Card":
                     this.txtButton.Text = Lang._("Card");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
-                    toolTip1.SetToolTip(this.rightPictureBox, "根据银行卡号获取银行卡的卡种，开户行和其他信息,需要网络");
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BankToolFormHelpInfo);
                     BankToolForm();
                     break;
                 case "Tude":
                     this.txtButton.Text = Lang._("Tude");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Tude;
-                    toolTip1.SetToolTip(this.rightPictureBox, "经纬度坐标系转换;计算两经纬度坐标之间的距离");
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GPSTransformFormHelpInfo);
                     GPSTransformForm();
                     break;
                 case "Ip":
                     this.txtButton.Text = Lang._("Ip");
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Ip;
-                    toolTip1.SetToolTip(this.rightPictureBox, "IP和整形IP之间的转换，绝对时间和真实时间之间的转换");
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TimeAndIPTransformFormHelpInfo);
                     TimeAndIPTransformForm();
                     break;
             }

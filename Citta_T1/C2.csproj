@@ -822,13 +822,7 @@
     <Compile Include="IAOLab\ApkTool\ApkToolStart.cs" />
     <Compile Include="IAOLab\BankTool\BankTool.cs" />
     <Compile Include="IAOLab\BaseStation\BaseStation.cs" />
-    <Compile Include="IAOLab\Plugins\IPlugins.cs" />
-    <Compile Include="IAOLab\Plugins\Local\ApkToolPlugin.cs" />
-    <Compile Include="IAOLab\Plugins\Local\BankPlugin.cs" />
-    <Compile Include="IAOLab\Plugins\Local\BaseStationPlugin.cs" />
-    <Compile Include="IAOLab\Plugins\Local\GPSTransformPlugin.cs" />
-    <Compile Include="IAOLab\Plugins\Local\TimeAndIPTransformPlugin.cs" />
-    <Compile Include="IAOLab\Plugins\Local\WifiMacPlugin.cs" />
+    <Compile Include="IAOLab\Plugins\IPlugin.cs" />
     <Compile Include="IAOLab\Plugins\PluginsDownloader.cs" />
     <Compile Include="IAOLab\Plugins\PluginsManger.cs" />
     <Compile Include="IAOLab\Transform\TimeAndIPTransform.cs" />

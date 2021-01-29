@@ -53,7 +53,14 @@ namespace C2.Utils
         public static string UnsupportedDatabase = "不支持的数据库类型";
         public static string TableFilterHelpInfo = "快速筛选:支持表名,列名,业务常用字段";
         public static string InvalidMaxNum = "提取条数输入有误，请输入整数类型，不支持浮点数、非数字符号等";
-       
+
+        public static string ApkToolFormHelpInfo = "对Apk进行解析并获取Apk的图标，安装名称，包名，入口函数名和大小";
+        public static string BaseStationFormHelpInfo = "根据基站号进行定位，获取基站的经纬度，覆盖范围和详细地址,需要网络";
+        public static string WifiLocationFormHelpInfo = "根据WIFI热点的MAC进行定位，获取WIFI的经纬度，覆盖范围和详细地址,需要网络";
+        public static string BankToolFormHelpInfo = "根据银行卡号获取银行卡的卡种，开户行和其他信息,需要网络";
+        public static string GPSTransformFormHelpInfo = "经纬度坐标系转换;计算两经纬度坐标之间的距离";
+        public static string TimeAndIPTransformFormHelpInfo = "IP和整形IP之间的转换，绝对时间和真实时间之间的转换";
+
 
         #region IAO基站批量查询
         public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01(2G/3G) 或 46001590a8089407(4G) 或 37b900018bd0(电信2G)
