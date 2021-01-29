@@ -69,89 +69,50 @@ namespace C2.Dialogs.IAOLab
             }
             this.Cursor = Cursors.Arrow;
         }
-        private void ShowResult(string input,string type, StringBuilder tmpResult)
+        private void ShowResult(string input, string type, StringBuilder tmpResult)
         {
-            
+
             if (!string.IsNullOrEmpty(input) && progressBar1.Value < 1001)
             {
-                try
-                {
-                    if (!string.IsNullOrEmpty(input.Split('\t')[0].Remove(' ')))
-                    {
-                        if (progressBar1.Value % 50 == 0)
-                        {
-                            Thread.Sleep(500);
 
-                        }
-                        switch (type)
-                        {
-                            case "baseStation":
-                                tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
-                                break;
-                            case "mac":
-                                tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
-                                break;
-                            case "bankCard":
-                                tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
-                                break;
-                        }
-                        
-                        inputAndResult.Text = tmpResult.ToString();
-                        progressBar1.Value += 1;
+                if (!string.IsNullOrEmpty(input.Split('\t')[0].Replace(" ", "")))
+                {
+                    if (progressBar1.Value % 50 == 0)
+                    {
+                        Thread.Sleep(500);
+
                     }
-                }
-                catch
-                {
-                    if (!string.IsNullOrEmpty(input.Split('\t')[0]))
+                    switch (type)
                     {
-                        try
-                        {
-                            //if (string.IsNullOrEmpty(input.Split('\t')[0].Remove(' ')));
-                            
-                        }
-                        catch
-                        {
-                            if (progressBar1.Value % 50 == 0)
-                            {
-                                Thread.Sleep(500);
-
-                            }
-                            switch (type)
-                            {
-                                case "baseStation":
-                                    tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
-                                    break;
-                                case "mac":
-                                    tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
-                                    break;
-                                case "bankCard":
-                                    tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
-                                    break;
-                            }
-                            inputAndResult.Text = tmpResult.ToString();
-                            progressBar1.Value += 1;
-                        }
-                       
+                        case "baseStation":
+                            tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
+                            break;
+                        case "mac":
+                            tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
+                            break;
+                        case "bankCard":
+                            tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
+                            break;
                     }
 
+                    inputAndResult.Text = tmpResult.ToString();
+                    progressBar1.Value += 1;
                 }
+
+
             }
         }
+            
+        
         private int GetRelLengthOfArry(string[] arry)
         {
             int relLength = 0;
             foreach(string i in arry)
             {
-                try
-                {
-                    if (!string.IsNullOrEmpty(i.Split('\t')[0].Remove(' ')))
-                        relLength++;
-                }
-                catch
-                {
-                    if (!string.IsNullOrEmpty(i.Split('\t')[0]))
-                        relLength++;
-                }
+                
+                if (!string.IsNullOrEmpty(i.Split('\t')[0].Replace(" ","")))
+                    relLength++;
+               
             }
             return relLength;
         }
