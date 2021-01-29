@@ -287,6 +287,7 @@ namespace C2.Dialogs.IAOLab
             FileUtil.DeleteDirectory(tmpPath);
             FileUtil.CreateDirectory(tmpPath);
             this.textBox1.Clear();
+            this.inputPathTextBox.Clear();
         }
     }
 }

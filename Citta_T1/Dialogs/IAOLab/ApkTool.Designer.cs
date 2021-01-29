@@ -237,9 +237,9 @@
             this.tipLable.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tipLable.Location = new System.Drawing.Point(28, 94);
             this.tipLable.Name = "tipLable";
-            this.tipLable.Size = new System.Drawing.Size(466, 15);
+            this.tipLable.Size = new System.Drawing.Size(506, 15);
             this.tipLable.TabIndex = 12;
-            this.tipLable.Text = "jdk路径格式：C:\\Program Files\\Java\\jdk-13.0.1\\bin\\java.exe";
+            this.tipLable.Text = "java.exe路径示例：C:\\Program Files\\Java\\jdk-13.0.1\\bin\\java.exe";
             // 
             // contextMenuStrip1
             // 
