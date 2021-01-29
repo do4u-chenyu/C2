@@ -149,8 +149,9 @@ namespace C2.Database
             }
             catch (Exception ex)
             {
-                HelpUtil.ShowMessageBox(ex.ToString(),"提示信息",System.Windows.Forms.MessageBoxIcon.Warning);
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
+              //  QueryFailureException();
+                
             }
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
         }
