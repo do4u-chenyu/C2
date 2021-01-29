@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace C2.IAOLab.Plugins
 {
@@ -11,6 +7,9 @@ namespace C2.IAOLab.Plugins
         private static PluginsManger pluginsManger;
 
         private List<IPlugin> plugins;
+
+        internal List<IPlugin> Plugins { get => plugins; }
+
         public PluginsManger Instance()
         {
             if (pluginsManger == null)
