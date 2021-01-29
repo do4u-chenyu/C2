@@ -68,7 +68,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(162, 23);
             this.label1.TabIndex = 0;
-            this.label1.Text = "请输入APK存放目录";
+            this.label1.Text = "请选择APK存放目录";
             // 
             // inputPathTextBox
             // 
@@ -129,7 +129,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(160, 23);
             this.label2.TabIndex = 8;
-            this.label2.Text = "请输入JDK所在路径";
+            this.label2.Text = "请选择JDK所在路径";
             // 
             // pictureBox1
             // 
@@ -183,7 +183,7 @@
             // ICON
             // 
             this.ICON.FillWeight = 17F;
-            this.ICON.HeaderText = "ICON";
+            this.ICON.HeaderText = "图标";
             this.ICON.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.ICON.MinimumWidth = 6;
             this.ICON.Name = "ICON";
@@ -237,9 +237,9 @@
             this.tipLable.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tipLable.Location = new System.Drawing.Point(28, 94);
             this.tipLable.Name = "tipLable";
-            this.tipLable.Size = new System.Drawing.Size(466, 15);
+            this.tipLable.Size = new System.Drawing.Size(506, 15);
             this.tipLable.TabIndex = 12;
-            this.tipLable.Text = "jdk路径格式：C:\\Program Files\\Java\\jdk-13.0.1\\bin\\java.exe";
+            this.tipLable.Text = "java.exe路径示例：C:\\Program Files\\Java\\jdk-13.0.1\\bin\\java.exe";
             // 
             // contextMenuStrip1
             // 
@@ -328,14 +328,14 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 导出到ExcelToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewImageColumn ICON;
         private System.Windows.Forms.DataGridViewTextBoxColumn fileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ApkName;
         private System.Windows.Forms.DataGridViewTextBoxColumn packageName;
         private System.Windows.Forms.DataGridViewTextBoxColumn mainFunction;
         private System.Windows.Forms.DataGridViewTextBoxColumn size;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label3;
     }
 }

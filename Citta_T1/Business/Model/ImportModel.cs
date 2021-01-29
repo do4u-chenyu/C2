@@ -27,7 +27,7 @@ namespace C2.Business.Model
         }
 
         #region C2业务视图导入
-        public bool UnZipC2File(string fullFilePath, string userName, string password="")
+        public bool UnZipC2File(string fullFilePath, string userName, string password = "")
         {
             if (!File.Exists(fullFilePath))
             {
@@ -36,11 +36,10 @@ namespace C2.Business.Model
             }
             if (!HasUnZipC2File(fullFilePath, userName, password))
             {
-                if (Directory.Exists(this.modelDir))
-                    Directory.Delete(this.modelDir, true);
+                FileUtil.DeleteDirectory(this.modelDir);
                 return false;
             }
-                
+
             // 脚本、数据源存储路径
             string dirs = Path.Combine(this.modelDir, "_datas");
             // 修改XML文件中数据源路径
@@ -93,7 +92,7 @@ namespace C2.Business.Model
 
             foreach (XmlNode widget in widgets)
             {
-                XmlNodeList datas = widget.SelectNodes("//data_item|//chart_item|//attach_item|//result_item");
+                XmlNodeList datas = widget.SelectNodes("data_items/data_item|op_items/op_item/data_item|chart_items/chart_item|attach_items/attach_item|op_items/op_item/result_item|result_items/result_item");
                 ReWriteC2NodePath(datas, dataSourcePath);
 
                 XmlNodeList opItems = widget.SelectNodes("op_items/op_item");
@@ -225,8 +224,7 @@ namespace C2.Business.Model
                 return !hasUnZip;
             }
             // 删除原始模型文件、解压新文件                    
-            if (Directory.Exists(modelPath))
-                Directory.Delete(modelPath, true);
+            FileUtil.DeleteDirectory(modelPath);
             errMsg = ZipUtil.UnZipFile(zipFilePath, this.modelDir, password);
             if (!string.IsNullOrEmpty(errMsg))
             {
@@ -256,11 +254,11 @@ namespace C2.Business.Model
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 string fullFilePath = fd.FileName;
-                UnZipIaoFile(fullFilePath, userName,true);
+                UnZipIaoFile(fullFilePath, userName, true);
             }
 
         }
-        public void UnZipIaoFile(string fullFilePath, string userName,bool judge)
+        public void UnZipIaoFile(string fullFilePath, string userName, bool judge)
         {
             if (!File.Exists(fullFilePath))
                 return;
@@ -276,7 +274,7 @@ namespace C2.Business.Model
                     MyModelControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
                     HelpUtil.ShowMessageBox("模型导入成功");
                 }
-                    
+
             }
         }
         public string modelFilePath;
@@ -315,12 +313,12 @@ namespace C2.Business.Model
                 MessageBox.Show("文件内容可能破损:" + zipFilePath);
                 return !hasUnZip;
             }
-            finally 
+            finally
             {
                 if (s != null)
                     s.Close();
             }
-           
+
 
             // 未找到xml文件
             if (string.IsNullOrEmpty(fileName))
@@ -352,8 +350,7 @@ namespace C2.Business.Model
                 return !hasUnZip;
             }
             // 删除原始模型文件、解压新文件                    
-            if (Directory.Exists(this.modelDir))
-                Directory.Delete(this.modelDir, true);
+            FileUtil.DeleteDirectory(this.modelDir);
             errMsg = ZipUtil.UnZipFile(zipFilePath, this.modelDir);
             if (!string.IsNullOrEmpty(errMsg))
             {

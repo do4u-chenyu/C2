@@ -281,6 +281,7 @@ namespace C2.Controls.MapViews
 
             if (!Global.GetMyModelControl().ContainModel(modelNewName))
                 Global.GetMyModelControl().AddModel(modelNewName);
+            HelpUtil.ShowMessageBox("模型成功发布到模型市场");
         }
         void MenuModelUpdate_Click(object sender, EventArgs e)
         {

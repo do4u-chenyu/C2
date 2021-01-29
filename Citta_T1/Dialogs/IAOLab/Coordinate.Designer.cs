@@ -76,7 +76,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(617, 322);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "通用坐标系经纬度转换";
+            this.tabPage1.Text = "坐标系经纬度转换";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // inputAndResult

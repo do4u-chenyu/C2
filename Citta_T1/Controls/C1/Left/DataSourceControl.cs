@@ -216,15 +216,13 @@ namespace C2.Controls.Left
         #region 外部数据添加连接
         private void AddConnectLabel_Click(object sender, EventArgs e)
         {
+            var dialog = new AddDatabaseDialog();
+            if (dialog.ShowDialog(this) != DialogResult.OK)
+                return;
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                var dialog = new AddDatabaseDialog();
-                if (dialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    GenLinkButton(dialog.DatabaseInfo, true);
-                }
+                GenLinkButton(dialog.DatabaseInfo, true);
             }
-
         }
         #endregion
 
@@ -420,7 +418,7 @@ namespace C2.Controls.Left
 
             //刷新架构 dao会会变化
             List<string> users = dao.GetUsers();
-            UpdateFrameCombo(users, dbi.User, dao.DefaultSchema());
+            UpdateFrameCombo(users, dbi, dao.DefaultSchema());
 
             //刷新数据表
             List<Table> tables = dao.GetTables(this.schemaComboBox.Text);
@@ -429,14 +427,25 @@ namespace C2.Controls.Left
             UpdateTables(tables, dbi, tableColDict);
             this.schemaComboBox.SelectedIndexChanged += SchemaComboBox_SelectedIndexChanged;
         }
-        private void UpdateFrameCombo(List<string> users, string loginUser, string defaultSchema)
+
+        private void UpdateFrameCombo(List<string> users, DatabaseItem dbi, string defaultSchema)
         {
+            string loginUser = dbi.User;
             this.schemaComboBox.Items.Clear();
             _RelateDBIs.Clear();
             if (users == null)
                 return;
 
-            this.schemaComboBox.Text = this.schemaComboBox.Text = users.Contains(loginUser.ToLower()) ? "选择架构" : defaultSchema; // TODO
+
+            if (dbi.Type == DatabaseType.Hive)
+            {
+                this.schemaComboBox.Text = defaultSchema;
+            }
+            else
+            {
+                this.schemaComboBox.Text = users.Contains(loginUser.ToUpper()) ? defaultSchema : "选择架构";
+            }
+
 
             users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }

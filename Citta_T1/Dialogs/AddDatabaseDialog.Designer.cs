@@ -129,7 +129,7 @@
             this.databaseTypeComboBox.FormattingEnabled = true;
             this.databaseTypeComboBox.Items.AddRange(new object[] {
             "Oracle",
-            "Hive"});
+            "Hiveserver2"});
             this.databaseTypeComboBox.Location = new System.Drawing.Point(100, 20);
             this.databaseTypeComboBox.Name = "databaseTypeComboBox";
             this.databaseTypeComboBox.Size = new System.Drawing.Size(265, 20);

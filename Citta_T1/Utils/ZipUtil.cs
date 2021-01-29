@@ -11,13 +11,22 @@ namespace C2.Utils
         /// <summary>
         /// 压缩文件
         /// </summary>
-        public static void CreateZip(string srcFilePath, string dstZipFilePath, string password="")
+        public static string CreateZip(string srcFilePath, string dstZipFilePath, string password="")
         {
             FastZip fz = new FastZip
             {
                 Password = password
             };
-            fz.CreateZip(dstZipFilePath, srcFilePath, true, ".*\\.(?!md).*$");
+            try
+            {
+                fz.CreateZip(dstZipFilePath, srcFilePath, true, ".*\\.(?!md).*$");
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+            return string.Empty;
+
         }
 
         /// <summary>
