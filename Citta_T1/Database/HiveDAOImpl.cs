@@ -29,9 +29,7 @@ namespace C2.Database
                 try
                 {
 
-                    conn.SetSocketTimeout = 8000;
-                    conn.SetTcpReceiveTimeout = 8000;
-                    conn.SetTcpSendTimeout = 8000;
+                    LimitTimeout(conn);
                     conn.Open();
                     return true;
                 }
@@ -42,7 +40,12 @@ namespace C2.Database
                 }
             }
         }
-
+        private void LimitTimeout(Connection conn)
+        {
+            conn.SetSocketTimeout = 8000;
+            conn.SetTcpReceiveTimeout = 8000;
+            conn.SetTcpSendTimeout = 8000;
+        }
         protected override QueryResult ExecuteSQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
         {
             // TODO DK 
@@ -60,6 +63,7 @@ namespace C2.Database
                 using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
                 {
+                    LimitTimeout(conn);
                     var cursor = conn.GetCursor();
                     cursor.Execute("use " + dataBaseName);
                     foreach (var s in sqlPage.Split(';'))
@@ -115,6 +119,7 @@ namespace C2.Database
                 using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
                 {
+                    LimitTimeout(conn);
                     var cursor = conn.GetCursor();
                     cursor.Execute("use " + dataBaseName);
                     foreach (var s in sql.Split(';'))
