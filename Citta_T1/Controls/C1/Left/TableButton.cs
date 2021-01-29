@@ -43,32 +43,40 @@ namespace C2.Controls.Left
         {
             PreviewDbDataForm previewDbDataForm = GenericSingleton<PreviewDbDataForm>.CreateInstance();
             IDAO dao = DAOFactory.CreateDAO(TableItem);
-            if (!dao.TestConn())
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                if (TableItem != null && previewDbDataForm.Flush(this.TableItem))
+                {
+                    previewDbDataForm.Focus();
+                    previewDbDataForm.Show();
+                }
             }
-            if (TableItem != null && previewDbDataForm.Flush(this.TableItem))
-            {
-                previewDbDataForm.Focus();
-                previewDbDataForm.Show();
-            }
+
         }
         private void ReviewStruToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PreviewTableSchema previewTableSchema = GenericSingleton<PreviewTableSchema>.CreateInstance();
             IDAO dao = DAOFactory.CreateDAO(TableItem);
-            if (!dao.TestConn())
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                dao.FillDGVWithTbSchema(previewTableSchema.DataGridView, this.TableItem.DataTable);
+                if (TableItem != null)
+                {
+                    previewTableSchema.Focus();
+                    previewTableSchema.Show();
+                }
             }
-            dao.FillDGVWithTbSchema(previewTableSchema.DataGridView, this.TableItem.DataTable);
-            if (TableItem != null)
-            {
-                previewTableSchema.Focus();
-                previewTableSchema.Show();
-            }
+
         }
         #endregion
 
