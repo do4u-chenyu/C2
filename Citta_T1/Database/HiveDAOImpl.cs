@@ -3,29 +3,24 @@ using C2.Utils;
 using Hive2;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace C2.Database
 {
-    public class HiveDAOImpl: BaseDAOImpl
+    public class HiveDAOImpl : BaseDAOImpl
     {
         private static readonly LogUtil log = LogUtil.GetInstance("HiveDAOImpl");
-        private string getUserSQL = @"show databases";
-        private string getTablesSQL = @"use {0};show tables;";
-        private string getTableContentSQL = @"use {0};select * from {1} limit {2}";
+        private readonly string getUserSQL = @"show databases";
+        private readonly string getTablesSQL = @"use {0};show tables;";
+        private readonly string getTableContentSQL = @"use {0};select * from {1} limit {2}";
         //private string getColNameByTablesSQL;
-        private string getColNameByTableSQL = "desc {0}";
-        private string dataBaseName;
+        private readonly string getColNameByTableSQL = "desc {0}";
+        private readonly string dataBaseName;
         public HiveDAOImpl(DatabaseItem dbi) : base(dbi)
         {
             this.dataBaseName = dbi.Schema;
         }
-        public HiveDAOImpl(DataItem di) : base(di) { }
-        public HiveDAOImpl(string name, string user, string pass, string host, string sid, string service, string port) : base(name, user, pass, host, sid, service, port) { }
         public override bool TestConn()
         {
             using (var conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
@@ -33,10 +28,8 @@ namespace C2.Database
             {
                 try
                 {
-                  
-                    conn.SetSocketTimeout = 8000;
-                    conn.SetTcpReceiveTimeout = 8000;
-                    conn.SetTcpSendTimeout = 8000;
+
+                    LimitTimeout(conn);
                     conn.Open();
                     return true;
                 }
@@ -47,10 +40,16 @@ namespace C2.Database
                 }
             }
         }
-
+        private void LimitTimeout(Connection conn)
+        {
+            conn.SetSocketTimeout = 8000;
+            conn.SetTcpReceiveTimeout = 8000;
+            conn.SetTcpSendTimeout = 8000;
+        }
         protected override QueryResult ExecuteSQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
         {
-            StringBuilder sb = new StringBuilder(1024 * 16);
+            // TODO DK 
+            StringBuilder sb = new StringBuilder(1024 * 16); // TODO DK 单页够就行，太小了会copy数组浪费性能，需要选择合适的值
             QueryResult result;
             result.content = string.Empty;
             result.returnNum = 0;
@@ -58,31 +57,34 @@ namespace C2.Database
             string sqlPage = String.Format(@"select * from (select row_number() over () as rowno,tmp0.* from ({0}) tmp0) t where t.rowno  between {1} and {2}",
                                     sqlText,
                                     pageSize * (pageIndex),
-                                    pageSize * (pageIndex) + maxNum);          
+                                    pageSize * (pageIndex) + maxNum);
             try
             {
                 using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
                 {
+                    LimitTimeout(conn);
                     var cursor = conn.GetCursor();
                     cursor.Execute("use " + dataBaseName);
                     foreach (var s in sqlPage.Split(';'))
                     {
                         if (!String.IsNullOrEmpty(s))
-                            cursor.Execute(s.TrimEnd(';'));
+                            cursor.Execute(s);
                     }
                     var list = cursor.FetchMany(int.MaxValue);
-                    // 分页查询去掉第一列索引
 
-                    if (returnHeader && list.Count > 0 && (list[0] as IDictionary<string, object>).Keys.Count > 0)
+                    // 分页查询去掉第一列索引
+                    if (returnHeader && !list.IsEmpty() && !(list[0] as IDictionary<string, object>).IsEmpty())
                     {
-                        // 添加表头
-                        string headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
-                        int index = headers.IndexOf(OpUtil.DefaultFieldSeparator);
-                        if (index != -1 && index + 1 < headers.Length)
+                        for (int i = 1; i < (list[0] as IDictionary<string, object>).Count; i++)
                         {
-                            sb.Append(headers.Substring(index + 1)).Append(OpUtil.DefaultLineSeparator);
+                            string key = (list[0] as IDictionary<string, object>).Keys.ElementAt(i);
+                            sb.Append((list[0] as IDictionary<string, object>)[key]).Append(OpUtil.DefaultFieldSeparator);
                         }
+
+                        if ((list[0] as IDictionary<string, object>).Count > 1)
+                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator);
+
                     }
 
                     foreach (IDictionary<string, object> item in list)
@@ -117,47 +119,45 @@ namespace C2.Database
                 using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
                 {
-
+                    LimitTimeout(conn);
                     var cursor = conn.GetCursor();
                     cursor.Execute("use " + dataBaseName);
                     foreach (var s in sql.Split(';'))
                     {
                         if (!String.IsNullOrEmpty(s))
-                            cursor.Execute(s.TrimEnd(';'));
+                            cursor.Execute(s);
                     }
                     var list = cursor.FetchMany(int.MaxValue);
-                    if (header)
+                    if (header && !list.IsEmpty())
                     {
-                        string headers;
-                        if (list.Count > 0)
-                        {
-                            // 添加表头
-                            headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
-                            sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
-                        }
-                    }
-                    foreach (var item in list)
-                    {
-                        var dict = item as IDictionary<string, object>;
-                        string tmp = string.Empty;
 
+                        // 添加表头
+                        string headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
+                        sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
+
+                    }
+                    foreach (IDictionary<string, object> dict in list)
+                    {
                         foreach (var key in dict.Keys)
                         {
-                            tmp += dict[key].ToString() + OpUtil.DefaultFieldSeparator;
+                            sb.Append(dict[key].ToString()).Append(OpUtil.DefaultFieldSeparator);
                         }
-                        sb.Append(tmp.TrimEnd(OpUtil.DefaultFieldSeparator)).Append(OpUtil.DefaultLineSeparator);
+                        if (!dict.Keys.IsEmpty())
+                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator);
                     }
-
                 }
             }
             catch (Exception ex)
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
+              //  QueryFailureException();
+                
             }
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
         }
         public override string LimitSQL(string sql)
         {
+            // TODO LXF  双limit会出错
             return String.Format("{0} limit {1}", sql, OpUtil.PreviewMaxNum);
         }
         public override string GetTablesSQL(string schema)

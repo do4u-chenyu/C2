@@ -597,7 +597,7 @@ namespace C2.Controls
             MouseDownPos = new Point(e.X, e.Y);
         }
 
-        ListBoxControlItem<T> HitTest(int x, int y)
+        protected ListBoxControlItem<T> HitTest(int x, int y)
         {
             if (this.VerticalScroll.Enabled)
                 y += this.VerticalScroll.Value;

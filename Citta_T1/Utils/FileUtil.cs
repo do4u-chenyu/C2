@@ -168,7 +168,7 @@ namespace C2.Utils
         {
             try
             {
-                System.IO.Directory.Delete(directoryPath, true);
+               Directory.Delete(directoryPath, true);
             }
             catch
             {

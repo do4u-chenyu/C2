@@ -2,6 +2,7 @@
 using C2.Globalization;
 using C2.Model.Documents;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -96,7 +97,7 @@ namespace C2.Controls
                 }
             }
         }
-
+        
         void OnSelectedChartsChanged()
         {
             if (SelectedChartsChanged != null)

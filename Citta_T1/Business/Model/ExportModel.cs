@@ -1,28 +1,28 @@
-﻿using C2.Core;
-using C2.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml;
+using C2.Core;
+using C2.Utils;
 
 namespace C2.Business.Model
 {
     public class ExportModel
     {
-        private string DataPath;         //创建存储数据的_data文件夹 this.DataPath = Path.Combine(TmpModelPath, "_datas");
-        private string FinallyName;
-        private string TmpModelPath;     //临时模型的路径（文件夹）TmpModelPath = Path.Combine(Path.GetDirectoryName(this.XmlFullPath), NewModelName);
-        private string XmlFullPath;  //模型文件（.bmd .xml）原始路径
-        private string NewModelName;     //重命名后的模型名称
+        private string dataPath;                 //创建存储数据的_data文件夹
+        private string finallyName;
+        private string tmpModelPath;        //临时模型的路径（文件夹）
+        private string xmlFullPath;             //模型文件（.bmd .xml）原始路径
+        private string newModelName;     //重命名后的模型名称
+
         public ExportModel()
         {
-            this.DataPath = string.Empty;
-            this.FinallyName = string.Empty;
-            this.TmpModelPath = string.Empty;
-            this.XmlFullPath = string.Empty;
-            this.NewModelName = string.Empty;
+            dataPath = string.Empty;
+            finallyName = string.Empty;
+            tmpModelPath = string.Empty;
+            xmlFullPath = string.Empty;
+            newModelName = string.Empty;
         }
 
         private static ExportModel ExportModelInstance;
@@ -36,65 +36,43 @@ namespace C2.Business.Model
         }
 
         #region 导出业务视图
-        public bool ExportC2Model(string oldFullPath, string exportFullPath, string password="")
+        public bool ExportC2Model(string oldFullPath, string exportFullPath, string password = "")
         {
-            this.XmlFullPath = oldFullPath;
-            this.NewModelName = Path.GetFileNameWithoutExtension(exportFullPath);
+            xmlFullPath = oldFullPath;
+            newModelName = Path.GetFileNameWithoutExtension(exportFullPath);
 
             //模型关联文件复制
-            if (!CopyModelAndDataFiles(Path.GetDirectoryName(this.XmlFullPath), true))
-            {
-                if (Directory.Exists(TmpModelPath))
-                    Directory.Delete(TmpModelPath, true);
+            if (!CopyModelAndDataFiles(Global.TempDirectory, true))
                 return false;
-            }
 
             //生成压缩包
-            try
+            string error = ZipUtil.CreateZip(tmpModelPath, exportFullPath, password);
+            if (!string.IsNullOrEmpty(error))
             {
-                ZipUtil.CreateZip(TmpModelPath, exportFullPath, password);
-            }
-            catch(Exception e)
-            {
-                HelpUtil.ShowMessageBox(e.Message);
-                if (Directory.Exists(TmpModelPath))
-                    Directory.Delete(TmpModelPath, true);
+                HelpUtil.ShowMessageBox(error);
                 return false;
             }
-
-            //删除临时文件夹
-            if (Directory.Exists(TmpModelPath))
-                Directory.Delete(TmpModelPath, true);
 
             return true;
         }
 
-        private bool C2CopyDataSourceFiles()
+        private bool C2CopylAllDatas(string tmpXmlFullPath)
         {
             bool copySuccess = true;
             List<string> dataSourceNames = new List<string>();
             Dictionary<string, string> allPaths = new Dictionary<string, string>();
+            List<string> xmlPaths = new List<string>();//存放c1模型xml的路径
 
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(this.XmlFullPath);
-
+            xDoc.Load(tmpXmlFullPath);
             XmlNode chart = xDoc.DocumentElement.SelectSingleNode("//chart");//仅拷贝业务拓展视图相关数据
             XmlNodeList widgets = chart.SelectNodes("//widget");  //每个节点都有一个widgets
 
-            List<string> xmlPaths = new List<string>();//存放c1模型xml的路径
-
             foreach (XmlNode widget in widgets)
             {
-                XmlNodeList datas = widget.SelectNodes("//data_item|//chart_item|//attach_item");
-                CopyDataSource(datas, allPaths, dataSourceNames);
-
-                //模型的结果同步到业务视图的结果算子，也需要修改路径
-                XmlNodeList results = widget.SelectNodes("//result_item");
-                foreach(XmlNode result in results)
-                {
-                    if ((result as XmlElement).GetAttribute("result_type") == "ModelOp")
-                        CopyDataSource(result.SelectNodes("."), allPaths, dataSourceNames);
-                }
+                XmlNodeList datas = widget.SelectNodes("data_items/data_item|op_items/op_item/data_item|chart_items/chart_item|attach_items/attach_item|op_items/op_item/result_item|result_items/result_item");
+                if (!CopyDataSource(datas, allPaths, dataSourceNames))
+                    return !copySuccess;
 
                 XmlNodeList opItems = widget.SelectNodes("op_items/op_item");
                 foreach (XmlNode opItem in opItems)
@@ -118,21 +96,18 @@ namespace C2.Business.Model
                 }
             }
 
-            //需要根据this.XmlFullPath找到当前xml,且存放路径也要改变
-            foreach(string xmlPath in xmlPaths)
+            foreach (string xmlPath in xmlPaths)
             {
-                string desPath = Path.Combine(TmpModelPath, Path.GetFileNameWithoutExtension(xmlPath));
-                
-                //先拷贝一份文件夹到临时文件夹，模型算子的文件夹里存放xml及结果文件，其中结果文件路径在bmd也存储了一份，由上面bmd直接复制
-                if (Directory.Exists(desPath))
-                    continue;
-                Directory.CreateDirectory(desPath);
-                File.Copy(xmlPath, Path.Combine(desPath, Path.GetFileName(xmlPath)), true);
+                string desPath = Path.Combine(tmpModelPath, Path.GetFileNameWithoutExtension(xmlPath));
+                string tmpXmlPath = Path.Combine(desPath, Path.GetFileName(xmlPath));
+                FileUtil.CreateDirectory(desPath);
+                File.Copy(xmlPath, tmpXmlPath, true);
 
-                CopyDataSourceFilesPerXml(xmlPath, allPaths, dataSourceNames, true);
+                if (!CopyXmlDataSource(tmpXmlPath, allPaths, dataSourceNames))
+                    return !copySuccess;
             }
 
-            xDoc.Save(this.XmlFullPath);
+            xDoc.Save(tmpXmlFullPath);
             return copySuccess;
         }
 
@@ -141,11 +116,10 @@ namespace C2.Business.Model
             bool copySuccess = true;
             foreach (XmlElement xmlNode in nodes)
             {
-                if (xmlNode.GetAttribute("path") == null)
-                    continue;
-
                 string path = xmlNode.GetAttribute("path");
-                // 相同数据源，直接使用已经命名好的数据源
+                if (string.IsNullOrEmpty(path))
+                    continue;
+                // 相同数据源，直接使用已经命名好的数据源，防止已修改的同名文件
                 if (allPaths.ContainsKey(path))
                 {
                     xmlNode.SetAttribute("path", allPaths[path]);
@@ -166,7 +140,7 @@ namespace C2.Business.Model
             string pathName = Path.GetFileName(path);
 
             // 导出模型文档再次导出
-            if (string.IsNullOrEmpty(path) || string.Equals(path, Path.Combine(this.DataPath, pathName)))
+            if (string.Equals(path, Path.Combine(this.dataPath, pathName)))
                 return copySuccess;
             if (!File.Exists(path))
             {
@@ -181,9 +155,9 @@ namespace C2.Business.Model
                 string newPath = Path.Combine(Path.GetDirectoryName(path), pathName);
                 (xmlNode as XmlElement).SetAttribute(nodeName, (xmlNode as XmlElement).GetAttribute(nodeName).Replace(path, newPath));
             }
-            File.Copy(path, Path.Combine(this.DataPath, pathName), true);
+            File.Copy(path, Path.Combine(this.dataPath, pathName), true);
             dataSourceNames.Add(pathName);
-            FinallyName = pathName;
+            finallyName = pathName;
             return copySuccess;
         }
 
@@ -197,92 +171,63 @@ namespace C2.Business.Model
                 HelpUtil.ShowMessageBox("模型文档不存在，可能已被删除");
                 return false;
             }
-            this.XmlFullPath = fullXmlFilePath;
-            this.NewModelName = modelNewName;
+            xmlFullPath = fullXmlFilePath;
+            newModelName = modelNewName;
+
             // 准备要导出的模型文档
-            if (!CopyModelAndDataFiles(exportFilePath))
+            if (!CopyModelAndDataFiles(exportFilePath, false))
             {
-                if (Directory.Exists(TmpModelPath))
-                    Directory.Delete(TmpModelPath, true);
+                FileUtil.DeleteDirectory(tmpModelPath);
                 return false;
             }
-                
 
             return true;
         }
 
-        public void GenExportIAO()
+        private bool CopyModelAndDataFiles(string exportFilePath, bool isC2Model)
         {
-            //TODO C1模型导出功能先隐去，后续应该可以删除
-            // 导出Iao模型
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.AddExtension = true;
-            saveFileDialog1.Filter = "模型文件(*.iao)|*.iao"; //文件类型
-            saveFileDialog1.Title = "导出模型";//标题
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = saveFileDialog1.FileName;
-                ZipUtil.CreateZip(TmpModelPath, fileName);
-                HelpUtil.ShowMessageBox("模型导出成功,存储路径：" + fileName);
-            }
+            FileUtil.DeleteDirectory(Global.TempDirectory);
 
-            // 清场
-            if (Directory.Exists(TmpModelPath))
-                Directory.Delete(TmpModelPath, true);
-        }
+            this.tmpModelPath = Path.Combine(exportFilePath, newModelName); //待压缩的文件先放入公共临时文件夹
+            this.dataPath = Path.Combine(tmpModelPath, "_datas");// 创建存储数据的_data文件夹
+            FileUtil.CreateDirectory(this.tmpModelPath);
+            FileUtil.CreateDirectory(this.dataPath);
 
-        private bool CopyModelAndDataFiles(string exportFilePath, bool isC2Model = false)
-        {
-            //string modelName = Path.GetFileNameWithoutExtension(this.XmlFullPath);
-
-            string modelPath = Path.GetDirectoryName(this.XmlFullPath);
-            TmpModelPath = Path.Combine(exportFilePath, isC2Model ? string.Format("{0}_{1}", NewModelName, DateTime.Now.ToString("hhmmss")) : NewModelName);//业务视图临时文件夹可能与模型算子文件夹同名，加时间戳做区分
-            Directory.CreateDirectory(TmpModelPath);
-            string[] filePaths = Directory.GetFiles(modelPath, "*.*");
+            string destFileName;
+            string tmpXmlFullPath = string.Empty;
+            string[] filePaths = Directory.GetFiles(Path.GetDirectoryName(xmlFullPath), "*.*");
             foreach (string file in filePaths)
             {
-                //xml文件重命名
-                string sourceFileName = Path.GetFileName(file);
-                string destFileName;
-                if (!isC2Model && sourceFileName == Path.GetFileNameWithoutExtension(this.XmlFullPath) + ".xml")
-                    destFileName = NewModelName + ".xml";
-                else if (isC2Model && sourceFileName == Path.GetFileNameWithoutExtension(this.XmlFullPath) + ".bmd")
-                    destFileName = NewModelName + ".bmd";
-                else
-                    destFileName = sourceFileName;
-                
-                File.Copy(file, Path.Combine(TmpModelPath, destFileName), true);
+                if (!file.Equals(xmlFullPath))
+                    continue;
+
+                destFileName = isC2Model ? newModelName + ".bmd" : newModelName + ".xml";
+                tmpXmlFullPath = Path.Combine(tmpModelPath, destFileName);
+                File.Copy(file, Path.Combine(tmpModelPath, destFileName), true);
             }
 
-            // 创建存储数据的_data文件夹
-            this.DataPath = Path.Combine(TmpModelPath, "_datas");
-            Directory.CreateDirectory(DataPath);
-            if (!isC2Model)
-                return CopyDataSourceFiles();
+            if (string.IsNullOrEmpty(tmpXmlFullPath))//不存在xml文件
+                return false;
+
+            if (isC2Model)
+                return C2CopylAllDatas(tmpXmlFullPath);
             else
-                return C2CopyDataSourceFiles();
+                return C1CopyAllDatas(tmpXmlFullPath);
         }
 
-        private bool CopyDataSourceFilesPerXml(string xmlPath, Dictionary<string, string> allPaths, List<string> dataSourceNames, bool isC2Model=false)
+        private bool CopyXmlDataSource(string xmlPath, Dictionary<string, string> allPaths, List<string> dataSourceNames)
         {
             bool copySuccess = true;
 
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(xmlPath);
             XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
-            // 数据源
-            XmlNodeList nodes = rootNode.SelectNodes("//ModelElement[type='DataSource']");
+            // 数据源、结果
+            XmlNodeList nodes = rootNode.SelectNodes("//ModelElement[type='DataSource']|//ModelElement[type='Result']");
             // dataSourceNames存放拷贝到_data目录中的文件名称
             if (!CopyDataSourceOperatorFile(nodes, allPaths, dataSourceNames))
                 return !copySuccess;
 
-            //结果也要存一份
-            if (isC2Model)
-            {
-                XmlNodeList results = rootNode.SelectNodes("//ModelElement[type='Result']");
-                if (!CopyDataSourceOperatorFile(results, allPaths, dataSourceNames))
-                    return !copySuccess;
-            }
             // AI、多源算子
             XmlNodeList customNodes = rootNode.SelectNodes("//ModelElement[subtype='CustomOperator1']|//ModelElement[subtype='CustomOperator2']");
             if (!CopyCustomOperatorFile(customNodes, allPaths, dataSourceNames))
@@ -299,26 +244,26 @@ namespace C2.Business.Model
             if (!CopyPythonOperatorFiles(pythonNodes, allPaths, dataSourceNames))
                 return !copySuccess;
 
-            // Python、AI、多源算子连接的结果算子路径赋值
-            XmlNodeList resultNodes = rootNode.SelectNodes("//ModelElement[type='Result']");
-            foreach (XmlNode node in resultNodes)
-            {
-                if (node.SelectSingleNode("path") == null)
-                    throw new ArgumentNullException("message: The path of the result operator is empty"); ;
-                string path = node.SelectSingleNode("path").InnerText;
-                if (allPaths.ContainsKey(path))
-                    node.SelectSingleNode("path").InnerText = allPaths[path];
-            }
+            //// Python、AI、多源算子连接的结果算子路径赋值
+            //XmlNodeList resultNodes = rootNode.SelectNodes("//ModelElement[type='Result']");
+            //foreach (XmlNode node in resultNodes)
+            //{
+            //    if (node.SelectSingleNode("path") == null)
+            //        throw new ArgumentNullException("message: The path of the result operator is empty"); ;
+            //    string path = node.SelectSingleNode("path").InnerText;
+            //    if (allPaths.ContainsKey(path))
+            //        node.SelectSingleNode("path").InnerText = allPaths[path];
+            //}
             xDoc.Save(xmlPath);
             return copySuccess;
         }
 
-        private bool CopyDataSourceFiles()
+        private bool C1CopyAllDatas(string tmpXmlFullPath)
         {
             List<string> dataSourceNames = new List<string>();
             Dictionary<string, string> allPaths = new Dictionary<string, string>();
 
-            return CopyDataSourceFilesPerXml(this.XmlFullPath, allPaths, dataSourceNames);
+            return CopyXmlDataSource(tmpXmlFullPath, allPaths, dataSourceNames);
         }
         private bool CopyCustomOperatorFile(XmlNodeList nodes, Dictionary<string, string> allPaths, List<string> dataSourceNames)
         {
@@ -358,8 +303,8 @@ namespace C2.Business.Model
                 {
                     if (allPaths.ContainsKey(bcNode.InnerText))
                         bcNode.InnerText = allPaths[bcNode.InnerText];
-                    else if(!CopyFileTo_dataFolder(optionNode, bcNode.InnerText, dataSourceNames, "browseChosen"))
-                         return !copySuccess;
+                    else if (!CopyFileTo_dataFolder(optionNode, bcNode.InnerText, dataSourceNames, "browseChosen"))
+                        return !copySuccess;
                 }
                 XmlNode cmdNode = optionNode.SelectSingleNode("cmd");
                 if (cmdNode == null || string.IsNullOrEmpty(cmdNode.InnerText))
@@ -390,7 +335,7 @@ namespace C2.Business.Model
                     if (!CopyFileTo_dataFolder(optionNode, path, dataSourceNames, "cmd"))
                         return !copySuccess;
                     // 修改cmd中路径的文件名
-                    string newPath = Path.Combine(Path.GetDirectoryName(path), this.FinallyName);
+                    string newPath = Path.Combine(Path.GetDirectoryName(path), this.finallyName);
                     // 修改其他节点中对应路径的文件名
                     ModifySubNodePath(optionNode, path, newPath);
                     allPaths[path] = newPath;
@@ -441,7 +386,7 @@ namespace C2.Business.Model
             string pathName = Path.GetFileName(path);
 
             // 导出模型文档再次导出
-            if (string.IsNullOrEmpty(path) || string.Equals(path, Path.Combine(this.DataPath, pathName)))
+            if (string.IsNullOrEmpty(path) || string.Equals(path, Path.Combine(this.dataPath, pathName)))
                 return copySuccess;
 
             if (!File.Exists(path))
@@ -457,9 +402,9 @@ namespace C2.Business.Model
                 string newPath = Path.Combine(Path.GetDirectoryName(path), pathName);
                 xmlNode.SelectSingleNode(nodeName).InnerText = xmlNode.SelectSingleNode(nodeName).InnerText.Replace(path, newPath);
             }
-            File.Copy(path, Path.Combine(this.DataPath, pathName), true);
+            File.Copy(path, Path.Combine(this.dataPath, pathName), true);
             dataSourceNames.Add(pathName);
-            FinallyName = pathName;
+            finallyName = pathName;
             return copySuccess;
         }
 

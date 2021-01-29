@@ -6,11 +6,12 @@ namespace C2.Database
     public interface IDAO
     {
         bool TestConn();
-        string Query(string sql, bool header=true);
+        string Query(string sql, bool header = true);
         List<string> GetUsers();
         List<Table> GetTables(string schema);
         string GetTableContentString(Table table, int maxNum);
         List<List<string>> GetTableContent(Table table, int maxNum);
+        Dictionary<string, List<string>> GetColNameBySchema(string schema);
         Dictionary<string, List<string>> GetColNameByTables(List<Table> tables);
         string GetTableColumnNames(Table table);
         void FillDGVWithTbSchema(DataGridView dataGridView, Table table);
