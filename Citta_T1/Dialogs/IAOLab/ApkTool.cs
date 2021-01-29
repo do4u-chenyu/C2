@@ -52,16 +52,16 @@ namespace C2.Dialogs.IAOLab
         }
         private void Analyse_Click(object sender, EventArgs e)
         {
+            if (!IsReady())
+                return;
             this.Cursor = Cursors.WaitCursor;
             textBox1.Text = "正在清除历史数据";
             this.dataGridView1.Rows.Clear();
             apkInfoListForEXL = new List<List<string>>();
             if(image != null)
                 image.Dispose();
-  
+
             int j = 0;
-            if (!IsReady())
-                return;
             
             DirectoryInfo dir = new DirectoryInfo(inputPathTextBox.Text);
             //检索表示当前目录的文件和子目录
@@ -287,6 +287,7 @@ namespace C2.Dialogs.IAOLab
             FileUtil.DeleteDirectory(tmpPath);
             FileUtil.CreateDirectory(tmpPath);
             this.textBox1.Clear();
+            this.inputPathTextBox.Clear();
         }
     }
 }
