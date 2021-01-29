@@ -35,6 +35,7 @@ namespace C2.Controls.Left
         public Dictionary<string, LinkButton> LinkSourceDictI2B { get; }
 
         private LinkButton _SelectLinkButton;
+        private List<DatabaseItem> _RelateDBIs;
 
         public LinkButton SelectLinkButton
         {
@@ -48,21 +49,19 @@ namespace C2.Controls.Left
                 return _SelectLinkButton;
             }
         }
-
-        private List<TableButton> _RelateTableButtons;
-        public List<TableButton> RelateTableButtons
+        public List<DatabaseItem> RelateDBIs
         {
+            get
+            {
+                return _RelateDBIs;
+            }
             set
             {
-                if (_RelateTableButtons != value)
+                if (_RelateDBIs != value)
                 {
                     this.tableFilterTextBox.Text = string.Empty;
                 }
-                _RelateTableButtons = value;
-            }
-            get
-            {
-                return _RelateTableButtons;
+                _RelateDBIs = value;
             }
         }
 
@@ -73,13 +72,14 @@ namespace C2.Controls.Left
 
             this.tableListControl1.ItemIconGetter = (item => item.Image);
             this.tableListControl1.ItemToolTipTextGetter = (item => item.ToolTipText);
+            RelateDBIs = new List<DatabaseItem>();
 
             DataSourceDictI2B = new Dictionary<string, DataButton>();
             LinkSourceDictI2B = new Dictionary<string, LinkButton>();
             startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            _RelateTableButtons = new List<TableButton>();
+            
         }
 
         #region 内外部数据面板切换
@@ -272,7 +272,7 @@ namespace C2.Controls.Left
         {
             this.schemaComboBox.Items.Clear();
             this.schemaComboBox.Text = string.Empty;
-            RelateTableButtons.Clear();
+            _RelateDBIs.Clear();
             //this.dataTableTextBox.Text = string.Empty;
             this.tabelPanel.Controls.Clear();
         }
@@ -329,25 +329,13 @@ namespace C2.Controls.Left
             tb.Location = tablePoint;
         }
 
-        private void ReLayoutTableFrame(List<TableButton> tableButtons)
+        private void ReLayoutTableFrame(List<DatabaseItem> dbis)
         {
-            // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
-            if (this.tabelPanel.Controls.Count > 0)
-                this.tablePoint.Y = this.tabelPanel.Controls[0].Location.Y - ButtonGapHeight;
-
-            // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
-            this.tabelPanel.SuspendLayout();
-
-            this.tabelPanel.Controls.Clear();
-            // 重新排序
-            foreach (TableButton tb in tableButtons)
-            {
-                LayoutModelButtonLocation(tb);
-                this.tabelPanel.Controls.Add(tb);
-            }
-
-            this.tabelPanel.ResumeLayout(false);
-            this.tabelPanel.PerformLayout();
+            this.tableListControl1.SuspendLayout();
+            this.tableListControl1.Controls.Clear();
+            this.tableListControl1.DatabaseItems = dbis;
+            this.tableListControl1.ResumeLayout(false);
+            this.tableListControl1.PerformLayout();
         }
         #endregion
 
@@ -414,13 +402,16 @@ namespace C2.Controls.Left
         private void TableFilterTextBox_TextChanged(object sender, EventArgs e)
         {
             this.tableFilterTextBox.ForeColor = SystemColors.WindowText;
-            if (this.tableFilterTextBox.Text.ToString() == String.Empty)
+            if (String.IsNullOrEmpty(this.tableFilterTextBox.Text.ToString()))
             {
-                ReLayoutTableFrame(RelateTableButtons);
+                ReLayoutTableFrame(RelateDBIs);
                 return;
             }
-            ReLayoutTableFrame(RelateTableButtons.FindAll(t => t.ColumnName.Exists(c => c.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) || t.LinkSourceName.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0));
-
+            ReLayoutTableFrame(RelateDBIs.FindAll(
+                t => 
+                    t.DataTable.Columns.Exists(c => c.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) || 
+                    t.DataTable.Name.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                );
         }
         #endregion
 
@@ -460,7 +451,7 @@ namespace C2.Controls.Left
         {
             this.schemaComboBox.Items.Clear();
             //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空
-            RelateTableButtons.Clear();
+            _RelateDBIs.Clear();
             if (users == null)
                 return;
 
@@ -471,29 +462,23 @@ namespace C2.Controls.Left
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo, Dictionary<string, List<string>> tableColDict)
         {
             List<DatabaseItem> dbis = new List<DatabaseItem>();
-            RelateTableButtons.Clear();
+            _RelateDBIs.Clear();
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
             List<string> tmp = new List<string>();
-            //foreach (Table table in tables.Take(Math.Min(300, tables.Count)))
             foreach (Table table in tables)
             {
                 if (tableColDict.TryGetValue(table.Name, out tmp))
                     table.Columns = tmp;
-                table.Columns = tmp;
                 DatabaseItem tmpDatabaseItem = databaseInfo.Clone();
                 tmpDatabaseItem.DataTable = table;
                 tmpDatabaseItem.Schema = this.schemaComboBox.Text;
-                //TableButton tableButton = new TableButton(tmpDatabaseItem);
-                //GenTableButton(tableButton);//生成数据表按钮
                 dbis.Add(tmpDatabaseItem.Clone());
             }
-
             this.tableListControl1.DatabaseItems = dbis;
-            // TODO DK
-            //foreach (TableButton tb in this.tabelPanel.Controls)
-            //{
-            //    RelateTableButtons.Add(tb);
-            //}
+            foreach (var dbi in dbis)
+            {
+                RelateDBIs.Add(dbi);
+            }
         }
         public List<DatabaseItem> GetAllExternalData()
         {
@@ -509,7 +494,7 @@ namespace C2.Controls.Left
         private void optComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.tableFilterTextBox.Text = "";
-            ReLayoutTableFrame(RelateTableButtons);
+            ReLayoutTableFrame(_RelateDBIs);
         }
     }
 }
