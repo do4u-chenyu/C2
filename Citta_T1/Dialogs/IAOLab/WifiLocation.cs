@@ -106,7 +106,7 @@ namespace C2.Dialogs.IAOLab
                     {
                         try
                         {
-                            if (string.IsNullOrEmpty(input.Split('\t')[0].Remove(' ')));
+                            //if (string.IsNullOrEmpty(input.Split('\t')[0].Remove(' ')));
                             
                         }
                         catch
