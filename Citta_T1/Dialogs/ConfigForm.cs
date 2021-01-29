@@ -202,6 +202,12 @@ namespace C2.Dialogs
         {
             UserModelTabPage_Load();
             PythonConfigTabPage_Load();
+            PluginsConfigTabPage_Load();
+        }
+
+        private void PluginsConfigTabPage_Load()
+        {
+
         }
 
         private void UserModelTabPage_Load()
@@ -301,6 +307,11 @@ namespace C2.Dialogs
                 }
             }
             this.chosenPythonLable.Text = String.Empty;
+        }
+
+        private void PluginsCancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

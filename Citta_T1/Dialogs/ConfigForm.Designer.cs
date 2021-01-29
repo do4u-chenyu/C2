@@ -33,9 +33,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigForm));
@@ -59,6 +59,33 @@
             this.browseButton = new System.Windows.Forms.Button();
             this.pythonFFPTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.pluginsPage = new System.Windows.Forms.TabPage();
+            this.pluginsCancelButton = new System.Windows.Forms.Button();
+            this.pluginsOKButton = new System.Windows.Forms.Button();
+            this.pluginsTabControl = new System.Windows.Forms.TabControl();
+            this.installedSubPage = new System.Windows.Forms.TabPage();
+            this.installedDGV = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.availableSubPage = new System.Windows.Forms.TabPage();
+            this.installButton = new System.Windows.Forms.Button();
+            this.availableDGV = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.HostSubPage = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.pluginsTimeoutTB = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.pluginsPortTB = new System.Windows.Forms.TextBox();
+            this.pluginsHostTB = new System.Windows.Forms.TextBox();
             this.aboutPage = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -70,46 +97,19 @@
             this.label5 = new System.Windows.Forms.Label();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.pluginsPage = new System.Windows.Forms.TabPage();
-            this.pluginsTabControl = new System.Windows.Forms.TabControl();
-            this.installedSubPage = new System.Windows.Forms.TabPage();
-            this.availableSubPage = new System.Windows.Forms.TabPage();
-            this.pluginsCancelButton = new System.Windows.Forms.Button();
-            this.pluginsOKButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.HostSubPage = new System.Windows.Forms.TabPage();
-            this.installedDGV = new System.Windows.Forms.DataGridView();
-            this.availableDGV = new System.Windows.Forms.DataGridView();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.installButton = new System.Windows.Forms.Button();
-            this.pluginsHostTB = new System.Windows.Forms.TextBox();
-            this.pluginsPortTB = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.pluginsTimeoutTB = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.mainTabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.aboutPage.SuspendLayout();
             this.pluginsPage.SuspendLayout();
             this.pluginsTabControl.SuspendLayout();
             this.installedSubPage.SuspendLayout();
-            this.availableSubPage.SuspendLayout();
-            this.HostSubPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.installedDGV)).BeginInit();
+            this.availableSubPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.availableDGV)).BeginInit();
+            this.HostSubPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.aboutPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainTabControl
@@ -355,6 +355,319 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Pyhton虚拟机路径(Python Interpreter)";
             // 
+            // pluginsPage
+            // 
+            this.pluginsPage.Controls.Add(this.pluginsCancelButton);
+            this.pluginsPage.Controls.Add(this.pluginsOKButton);
+            this.pluginsPage.Controls.Add(this.pluginsTabControl);
+            this.pluginsPage.Location = new System.Drawing.Point(4, 26);
+            this.pluginsPage.Name = "pluginsPage";
+            this.pluginsPage.Size = new System.Drawing.Size(634, 380);
+            this.pluginsPage.TabIndex = 4;
+            this.pluginsPage.Text = "插件管理";
+            this.pluginsPage.UseVisualStyleBackColor = true;
+            // 
+            // pluginsCancelButton
+            // 
+            this.pluginsCancelButton.Location = new System.Drawing.Point(551, 349);
+            this.pluginsCancelButton.Name = "pluginsCancelButton";
+            this.pluginsCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.pluginsCancelButton.TabIndex = 5;
+            this.pluginsCancelButton.Text = "取消";
+            this.pluginsCancelButton.UseVisualStyleBackColor = true;
+            this.pluginsCancelButton.Click += new System.EventHandler(this.PluginsCancelButton_Click);
+            // 
+            // pluginsOKButton
+            // 
+            this.pluginsOKButton.Location = new System.Drawing.Point(458, 349);
+            this.pluginsOKButton.Name = "pluginsOKButton";
+            this.pluginsOKButton.Size = new System.Drawing.Size(75, 23);
+            this.pluginsOKButton.TabIndex = 4;
+            this.pluginsOKButton.Text = "确认";
+            this.pluginsOKButton.UseVisualStyleBackColor = true;
+            // 
+            // pluginsTabControl
+            // 
+            this.pluginsTabControl.Controls.Add(this.installedSubPage);
+            this.pluginsTabControl.Controls.Add(this.availableSubPage);
+            this.pluginsTabControl.Controls.Add(this.HostSubPage);
+            this.pluginsTabControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pluginsTabControl.ItemSize = new System.Drawing.Size(60, 22);
+            this.pluginsTabControl.Location = new System.Drawing.Point(0, 0);
+            this.pluginsTabControl.Name = "pluginsTabControl";
+            this.pluginsTabControl.SelectedIndex = 0;
+            this.pluginsTabControl.Size = new System.Drawing.Size(634, 343);
+            this.pluginsTabControl.TabIndex = 0;
+            // 
+            // installedSubPage
+            // 
+            this.installedSubPage.Controls.Add(this.installedDGV);
+            this.installedSubPage.Controls.Add(this.textBox1);
+            this.installedSubPage.Location = new System.Drawing.Point(4, 26);
+            this.installedSubPage.Name = "installedSubPage";
+            this.installedSubPage.Padding = new System.Windows.Forms.Padding(3);
+            this.installedSubPage.Size = new System.Drawing.Size(626, 313);
+            this.installedSubPage.TabIndex = 0;
+            this.installedSubPage.Text = "已安装";
+            this.installedSubPage.UseVisualStyleBackColor = true;
+            // 
+            // installedDGV
+            // 
+            this.installedDGV.AllowUserToAddRows = false;
+            this.installedDGV.AllowUserToResizeColumns = false;
+            this.installedDGV.AllowUserToResizeRows = false;
+            this.installedDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.installedDGV.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.installedDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.installedDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewCheckBoxColumn1});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.installedDGV.DefaultCellStyle = dataGridViewCellStyle6;
+            this.installedDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
+            this.installedDGV.Location = new System.Drawing.Point(3, 6);
+            this.installedDGV.MultiSelect = false;
+            this.installedDGV.Name = "installedDGV";
+            this.installedDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.installedDGV.RowTemplate.Height = 23;
+            this.installedDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.installedDGV.ShowEditingIcon = false;
+            this.installedDGV.Size = new System.Drawing.Size(620, 164);
+            this.installedDGV.TabIndex = 4;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewTextBoxColumn1.FillWeight = 320F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "插件";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 422;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewTextBoxColumn2.FillWeight = 75F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "版本";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.FillWeight = 30F;
+            this.dataGridViewCheckBoxColumn1.HeaderText = "启用";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(3, 176);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(620, 102);
+            this.textBox1.TabIndex = 0;
+            // 
+            // availableSubPage
+            // 
+            this.availableSubPage.Controls.Add(this.installButton);
+            this.availableSubPage.Controls.Add(this.availableDGV);
+            this.availableSubPage.Controls.Add(this.textBox2);
+            this.availableSubPage.Location = new System.Drawing.Point(4, 26);
+            this.availableSubPage.Name = "availableSubPage";
+            this.availableSubPage.Padding = new System.Windows.Forms.Padding(3);
+            this.availableSubPage.Size = new System.Drawing.Size(626, 313);
+            this.availableSubPage.TabIndex = 1;
+            this.availableSubPage.Text = "可下载";
+            this.availableSubPage.UseVisualStyleBackColor = true;
+            // 
+            // installButton
+            // 
+            this.installButton.Location = new System.Drawing.Point(531, 284);
+            this.installButton.Name = "installButton";
+            this.installButton.Size = new System.Drawing.Size(75, 23);
+            this.installButton.TabIndex = 7;
+            this.installButton.Text = "安装";
+            this.installButton.UseVisualStyleBackColor = true;
+            // 
+            // availableDGV
+            // 
+            this.availableDGV.AllowUserToAddRows = false;
+            this.availableDGV.AllowUserToResizeColumns = false;
+            this.availableDGV.AllowUserToResizeRows = false;
+            this.availableDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.availableDGV.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.availableDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.availableDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewCheckBoxColumn2});
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.availableDGV.DefaultCellStyle = dataGridViewCellStyle9;
+            this.availableDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
+            this.availableDGV.Location = new System.Drawing.Point(3, 6);
+            this.availableDGV.MultiSelect = false;
+            this.availableDGV.Name = "availableDGV";
+            this.availableDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.availableDGV.RowTemplate.Height = 23;
+            this.availableDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.availableDGV.ShowEditingIcon = false;
+            this.availableDGV.Size = new System.Drawing.Size(620, 164);
+            this.availableDGV.TabIndex = 6;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridViewTextBoxColumn3.FillWeight = 320F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "插件";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn3.Width = 422;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewTextBoxColumn4.FillWeight = 75F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "版本";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewCheckBoxColumn2
+            // 
+            this.dataGridViewCheckBoxColumn2.FillWeight = 30F;
+            this.dataGridViewCheckBoxColumn2.HeaderText = "选中";
+            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+            this.dataGridViewCheckBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(3, 176);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(620, 102);
+            this.textBox2.TabIndex = 5;
+            // 
+            // HostSubPage
+            // 
+            this.HostSubPage.Controls.Add(this.label13);
+            this.HostSubPage.Controls.Add(this.groupBox1);
+            this.HostSubPage.Controls.Add(this.pluginsTimeoutTB);
+            this.HostSubPage.Controls.Add(this.label11);
+            this.HostSubPage.Controls.Add(this.label10);
+            this.HostSubPage.Controls.Add(this.label9);
+            this.HostSubPage.Controls.Add(this.pluginsPortTB);
+            this.HostSubPage.Controls.Add(this.pluginsHostTB);
+            this.HostSubPage.Location = new System.Drawing.Point(4, 26);
+            this.HostSubPage.Name = "HostSubPage";
+            this.HostSubPage.Size = new System.Drawing.Size(626, 313);
+            this.HostSubPage.TabIndex = 2;
+            this.HostSubPage.Text = "服务器配置";
+            this.HostSubPage.ToolTipText = "配置插件服务器地址";
+            this.HostSubPage.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(121, 109);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(20, 17);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "秒";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Location = new System.Drawing.Point(4, 166);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(609, 144);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "说明";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(25, 19);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(112, 17);
+            this.label12.TabIndex = 10;
+            this.label12.Text = "Blablablablabla...";
+            // 
+            // pluginsTimeoutTB
+            // 
+            this.pluginsTimeoutTB.Location = new System.Drawing.Point(70, 107);
+            this.pluginsTimeoutTB.Name = "pluginsTimeoutTB";
+            this.pluginsTimeoutTB.Size = new System.Drawing.Size(33, 23);
+            this.pluginsTimeoutTB.TabIndex = 5;
+            this.pluginsTimeoutTB.Text = "15";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(29, 109);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(39, 17);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "超时 :";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(29, 68);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 17);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "端口 :";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(29, 27);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 17);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "地址 :";
+            // 
+            // pluginsPortTB
+            // 
+            this.pluginsPortTB.Location = new System.Drawing.Point(70, 66);
+            this.pluginsPortTB.Name = "pluginsPortTB";
+            this.pluginsPortTB.Size = new System.Drawing.Size(71, 23);
+            this.pluginsPortTB.TabIndex = 1;
+            this.pluginsPortTB.Text = "7777";
+            // 
+            // pluginsHostTB
+            // 
+            this.pluginsHostTB.Location = new System.Drawing.Point(70, 25);
+            this.pluginsHostTB.Name = "pluginsHostTB";
+            this.pluginsHostTB.Size = new System.Drawing.Size(371, 23);
+            this.pluginsHostTB.TabIndex = 0;
+            this.pluginsHostTB.Text = "218.94.117.234";
+            // 
             // aboutPage
             // 
             this.aboutPage.Controls.Add(this.label8);
@@ -461,315 +774,6 @@
             this.pythonOpenFileDialog.RestoreDirectory = true;
             this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
             // 
-            // pluginsPage
-            // 
-            this.pluginsPage.Controls.Add(this.pluginsCancelButton);
-            this.pluginsPage.Controls.Add(this.pluginsOKButton);
-            this.pluginsPage.Controls.Add(this.pluginsTabControl);
-            this.pluginsPage.Location = new System.Drawing.Point(4, 26);
-            this.pluginsPage.Name = "pluginsPage";
-            this.pluginsPage.Size = new System.Drawing.Size(634, 380);
-            this.pluginsPage.TabIndex = 4;
-            this.pluginsPage.Text = "插件管理";
-            this.pluginsPage.UseVisualStyleBackColor = true;
-            // 
-            // pluginsTabControl
-            // 
-            this.pluginsTabControl.Controls.Add(this.installedSubPage);
-            this.pluginsTabControl.Controls.Add(this.availableSubPage);
-            this.pluginsTabControl.Controls.Add(this.HostSubPage);
-            this.pluginsTabControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pluginsTabControl.ItemSize = new System.Drawing.Size(60, 22);
-            this.pluginsTabControl.Location = new System.Drawing.Point(0, 0);
-            this.pluginsTabControl.Name = "pluginsTabControl";
-            this.pluginsTabControl.SelectedIndex = 0;
-            this.pluginsTabControl.Size = new System.Drawing.Size(634, 343);
-            this.pluginsTabControl.TabIndex = 0;
-            // 
-            // installedSubPage
-            // 
-            this.installedSubPage.Controls.Add(this.installedDGV);
-            this.installedSubPage.Controls.Add(this.textBox1);
-            this.installedSubPage.Location = new System.Drawing.Point(4, 26);
-            this.installedSubPage.Name = "installedSubPage";
-            this.installedSubPage.Padding = new System.Windows.Forms.Padding(3);
-            this.installedSubPage.Size = new System.Drawing.Size(626, 313);
-            this.installedSubPage.TabIndex = 0;
-            this.installedSubPage.Text = "已安装";
-            this.installedSubPage.UseVisualStyleBackColor = true;
-            // 
-            // availableSubPage
-            // 
-            this.availableSubPage.Controls.Add(this.installButton);
-            this.availableSubPage.Controls.Add(this.availableDGV);
-            this.availableSubPage.Controls.Add(this.textBox2);
-            this.availableSubPage.Location = new System.Drawing.Point(4, 26);
-            this.availableSubPage.Name = "availableSubPage";
-            this.availableSubPage.Padding = new System.Windows.Forms.Padding(3);
-            this.availableSubPage.Size = new System.Drawing.Size(626, 313);
-            this.availableSubPage.TabIndex = 1;
-            this.availableSubPage.Text = "可下载";
-            this.availableSubPage.UseVisualStyleBackColor = true;
-            // 
-            // pluginsCancelButton
-            // 
-            this.pluginsCancelButton.Location = new System.Drawing.Point(551, 349);
-            this.pluginsCancelButton.Name = "pluginsCancelButton";
-            this.pluginsCancelButton.Size = new System.Drawing.Size(75, 23);
-            this.pluginsCancelButton.TabIndex = 5;
-            this.pluginsCancelButton.Text = "取消";
-            this.pluginsCancelButton.UseVisualStyleBackColor = true;
-            // 
-            // pluginsOKButton
-            // 
-            this.pluginsOKButton.Location = new System.Drawing.Point(458, 349);
-            this.pluginsOKButton.Name = "pluginsOKButton";
-            this.pluginsOKButton.Size = new System.Drawing.Size(75, 23);
-            this.pluginsOKButton.TabIndex = 4;
-            this.pluginsOKButton.Text = "确认";
-            this.pluginsOKButton.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(3, 176);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(620, 102);
-            this.textBox1.TabIndex = 0;
-            // 
-            // HostSubPage
-            // 
-            this.HostSubPage.Controls.Add(this.label13);
-            this.HostSubPage.Controls.Add(this.groupBox1);
-            this.HostSubPage.Controls.Add(this.pluginsTimeoutTB);
-            this.HostSubPage.Controls.Add(this.label11);
-            this.HostSubPage.Controls.Add(this.label10);
-            this.HostSubPage.Controls.Add(this.label9);
-            this.HostSubPage.Controls.Add(this.pluginsPortTB);
-            this.HostSubPage.Controls.Add(this.pluginsHostTB);
-            this.HostSubPage.Location = new System.Drawing.Point(4, 26);
-            this.HostSubPage.Name = "HostSubPage";
-            this.HostSubPage.Size = new System.Drawing.Size(626, 313);
-            this.HostSubPage.TabIndex = 2;
-            this.HostSubPage.Text = "服务器配置";
-            this.HostSubPage.ToolTipText = "配置插件服务器地址";
-            this.HostSubPage.UseVisualStyleBackColor = true;
-            // 
-            // installedDGV
-            // 
-            this.installedDGV.AllowUserToAddRows = false;
-            this.installedDGV.AllowUserToResizeColumns = false;
-            this.installedDGV.AllowUserToResizeRows = false;
-            this.installedDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.installedDGV.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.installedDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.installedDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewCheckBoxColumn1});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.installedDGV.DefaultCellStyle = dataGridViewCellStyle6;
-            this.installedDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.installedDGV.Location = new System.Drawing.Point(3, 6);
-            this.installedDGV.MultiSelect = false;
-            this.installedDGV.Name = "installedDGV";
-            this.installedDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.installedDGV.RowTemplate.Height = 23;
-            this.installedDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.installedDGV.ShowEditingIcon = false;
-            this.installedDGV.Size = new System.Drawing.Size(620, 164);
-            this.installedDGV.TabIndex = 4;
-            // 
-            // availableDGV
-            // 
-            this.availableDGV.AllowUserToAddRows = false;
-            this.availableDGV.AllowUserToResizeColumns = false;
-            this.availableDGV.AllowUserToResizeRows = false;
-            this.availableDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.availableDGV.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.availableDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.availableDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewCheckBoxColumn2});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.availableDGV.DefaultCellStyle = dataGridViewCellStyle9;
-            this.availableDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.availableDGV.Location = new System.Drawing.Point(3, 6);
-            this.availableDGV.MultiSelect = false;
-            this.availableDGV.Name = "availableDGV";
-            this.availableDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.availableDGV.RowTemplate.Height = 23;
-            this.availableDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.availableDGV.ShowEditingIcon = false;
-            this.availableDGV.Size = new System.Drawing.Size(620, 164);
-            this.availableDGV.TabIndex = 6;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(3, 176);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(620, 102);
-            this.textBox2.TabIndex = 5;
-            // 
-            // installButton
-            // 
-            this.installButton.Location = new System.Drawing.Point(531, 284);
-            this.installButton.Name = "installButton";
-            this.installButton.Size = new System.Drawing.Size(75, 23);
-            this.installButton.TabIndex = 7;
-            this.installButton.Text = "安装";
-            this.installButton.UseVisualStyleBackColor = true;
-            // 
-            // pluginsHostTB
-            // 
-            this.pluginsHostTB.Location = new System.Drawing.Point(70, 25);
-            this.pluginsHostTB.Name = "pluginsHostTB";
-            this.pluginsHostTB.Size = new System.Drawing.Size(371, 23);
-            this.pluginsHostTB.TabIndex = 0;
-            // 
-            // pluginsPortTB
-            // 
-            this.pluginsPortTB.Location = new System.Drawing.Point(70, 69);
-            this.pluginsPortTB.Name = "pluginsPortTB";
-            this.pluginsPortTB.Size = new System.Drawing.Size(83, 23);
-            this.pluginsPortTB.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(29, 27);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 17);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "地址 :";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(29, 72);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(39, 17);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "端口 :";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(29, 110);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(39, 17);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "超时 :";
-            // 
-            // pluginsTimeoutTB
-            // 
-            this.pluginsTimeoutTB.Location = new System.Drawing.Point(70, 107);
-            this.pluginsTimeoutTB.Name = "pluginsTimeoutTB";
-            this.pluginsTimeoutTB.Size = new System.Drawing.Size(45, 23);
-            this.pluginsTimeoutTB.TabIndex = 5;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Location = new System.Drawing.Point(4, 166);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(609, 144);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "说明";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(25, 19);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(112, 17);
-            this.label12.TabIndex = 10;
-            this.label12.Text = "Blablablablabla...";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(121, 110);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(20, 17);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "秒";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewTextBoxColumn1.FillWeight = 320F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "插件";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn1.Width = 422;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewTextBoxColumn2.FillWeight = 75F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "版本";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.FillWeight = 30F;
-            this.dataGridViewCheckBoxColumn1.HeaderText = "启用";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dataGridViewTextBoxColumn3.FillWeight = 320F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "插件";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn3.Width = 422;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewTextBoxColumn4.FillWeight = 75F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "版本";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewCheckBoxColumn2
-            // 
-            this.dataGridViewCheckBoxColumn2.FillWeight = 30F;
-            this.dataGridViewCheckBoxColumn2.HeaderText = "选中";
-            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
-            this.dataGridViewCheckBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
             // ConfigForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -789,20 +793,20 @@
             this.pythonConfigPage.ResumeLayout(false);
             this.pythonConfigPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.aboutPage.ResumeLayout(false);
-            this.aboutPage.PerformLayout();
             this.pluginsPage.ResumeLayout(false);
             this.pluginsTabControl.ResumeLayout(false);
             this.installedSubPage.ResumeLayout(false);
             this.installedSubPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.installedDGV)).EndInit();
             this.availableSubPage.ResumeLayout(false);
             this.availableSubPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.availableDGV)).EndInit();
             this.HostSubPage.ResumeLayout(false);
             this.HostSubPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.installedDGV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.availableDGV)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.aboutPage.ResumeLayout(false);
+            this.aboutPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
