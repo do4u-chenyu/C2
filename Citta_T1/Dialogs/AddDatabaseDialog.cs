@@ -118,14 +118,13 @@ namespace C2.Dialogs
         {
             // hive用户名密码有空连接会失败
 
-
-            if (String.Equals("Hive", this.databaseTypeComboBox.Text))
+            if (this.databaseTypeComboBox.Text.Contains("Hive"))
             {
-                this.userTextBox.Text = string.IsNullOrEmpty(this.userTextBox.Text) ? "None":this.userTextBox.Text;
-                this.passwordTextBox.Text = string.IsNullOrEmpty(this.passwordTextBox.Text) ? "None":this.passwordTextBox.Text;
+                this.userTextBox.Text = string.IsNullOrEmpty(this.userTextBox.Text) ? "None" : this.userTextBox.Text;
+                this.passwordTextBox.Text = string.IsNullOrEmpty(this.passwordTextBox.Text) ? "None" : this.passwordTextBox.Text;
                 return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
             }
-               
+
 
             return (databaseTypeComboBox.SelectedIndex == -1) || string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||
@@ -136,7 +135,7 @@ namespace C2.Dialogs
         {
             if (databaseTypeComboBox.SelectedItem == null)
                 return;
-            bool notHive = databaseTypeComboBox.SelectedItem.ToString() != "Hive";
+            bool notHive =! databaseTypeComboBox.SelectedItem.ToString().Contains( "Hive");
             this.portTextBox.Text = notHive ? "1521" : "10000";
             this.portTextBox.ForeColor = notHive ? Color.Black : Color.Gray;
             this.serviceTextBox.Enabled = notHive;
