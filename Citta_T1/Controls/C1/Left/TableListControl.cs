@@ -63,12 +63,12 @@ namespace C2.Controls
                 this.SuspendLayout();
                 foreach (var dbi in dbis)
                 {
-                    var miExport = new TableListItem(dbi);
-                    miExport.Text = FileUtil.RenameAndCenterPadding(dbi.DataTable.Name, 23, 15);
-                    miExport.ToolTipText = dbi.DataTable.Name;
-                    miExport.Image = Properties.Resources.Table;
-                    miExport.Tag = dbi;
-                    listBoxControl.Items.Add(miExport);
+                    var tli = new TableListItem(dbi);
+                    tli.Text = FileUtil.RenameAndCenterPadding(dbi.DataTable.Name, 23, 15);
+                    tli.ToolTipText = dbi.DataTable.Name;
+                    tli.Image = Properties.Resources.Table;
+                    tli.Tag = dbi;
+                    listBoxControl.Items.Add(tli);
                 }
 
                 // select default
