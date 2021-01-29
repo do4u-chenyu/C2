@@ -140,7 +140,7 @@ namespace C2.Controls
             // CopyTableNameToolStripMenuItem
             CopyTableNameToolStripMenuItem.Image = Properties.Resources.progress_bar;
             CopyTableNameToolStripMenuItem.Name = "CopyTableName";
-            CopyTableNameToolStripMenuItem.Text = "复制表明";
+            CopyTableNameToolStripMenuItem.Text = "复制表名";
             CopyTableNameToolStripMenuItem.Click += new System.EventHandler(CopyTableNameToolStripMenuItem_Click);
 
             tableContextMenuStrip.ResumeLayout();
