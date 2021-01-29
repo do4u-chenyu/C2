@@ -7,6 +7,7 @@ namespace C2.Controls.C1.Left
     {
         public DatabaseItem DatabaseItem;
         public Image Image;
+
         public TableListItem(DatabaseItem dbi):base()
         {
             this.DatabaseItem = dbi;

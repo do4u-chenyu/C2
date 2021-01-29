@@ -14,6 +14,7 @@ namespace C2.Controls
 {
     class TableListControl : ListBoxControl<TableListItem>
     {
+        const int TableItemHeight = 40;
         private List<DatabaseItem> _DatabaseItems;
         private DatabaseItem _SelectedTableItem;
         private ContextMenuStrip tableContextMenuStrip;
@@ -21,6 +22,7 @@ namespace C2.Controls
         public TableListControl()
         {
             InitializationTableContextMenuStrip();
+            this.ItemHeight = TableItemHeight;
         }
         public List<DatabaseItem> DatabaseItems
         {
@@ -56,8 +58,8 @@ namespace C2.Controls
             this.Items.Clear();
 
             var dbis = (from g in DatabaseItems.ToArray()
-                          orderby g.DataTable.Name
-                          select g).ToArray();
+                        orderby g.DataTable.Name
+                        select g).ToArray();
             if (!dbis.IsNullOrEmpty())
             {
                 this.SuspendLayout();
@@ -126,19 +128,16 @@ namespace C2.Controls
             });
             tableContextMenuStrip.SuspendLayout();
             // PreviewTableToolStripMenuItem
-            PreviewTableToolStripMenuItem.Image = Properties.Resources.image;
             PreviewTableToolStripMenuItem.Name = "PreviewTable";
             PreviewTableToolStripMenuItem.Text = "预览表";
             PreviewTableToolStripMenuItem.Click += new System.EventHandler(PreviewTableToolStripMenuItem_Click);
 
             // PreviewTableSchemaToolStripMenuItem
-            PreviewTableSchemaToolStripMenuItem.Image = Properties.Resources.备注;
             PreviewTableSchemaToolStripMenuItem.Name = "PreviewTableSchema";
             PreviewTableSchemaToolStripMenuItem.Text = "预览表结构";
             PreviewTableSchemaToolStripMenuItem.Click += new System.EventHandler(PreviewTableSchemaToolStripMenuItem_Click);
 
             // CopyTableNameToolStripMenuItem
-            CopyTableNameToolStripMenuItem.Image = Properties.Resources.progress_bar;
             CopyTableNameToolStripMenuItem.Name = "CopyTableName";
             CopyTableNameToolStripMenuItem.Text = "复制表名";
             CopyTableNameToolStripMenuItem.Click += new System.EventHandler(CopyTableNameToolStripMenuItem_Click);
@@ -148,11 +147,15 @@ namespace C2.Controls
 
         private void CopyTableNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (SelectedTableItem == null)
+                return;
             FileUtil.TryClipboardSetText(SelectedTableItem.DataTable.Name);
         }
 
         private void PreviewTableSchemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (SelectedTableItem == null)
+                return;
             PreviewTableSchema previewTableSchema = GenericSingleton<PreviewTableSchema>.CreateInstance();
             IDAO dao = DAOFactory.CreateDAO(SelectedTableItem);
             if (!dao.TestConn())
@@ -161,15 +164,15 @@ namespace C2.Controls
                 return;
             }
             dao.FillDGVWithTbSchema(previewTableSchema.DataGridView, this.SelectedTableItem.DataTable);
-            if (SelectedTableItem != null)
-            {
-                previewTableSchema.Focus();
-                previewTableSchema.Show();
-            }
+
+            previewTableSchema.Focus();
+            previewTableSchema.Show();
         }
 
         private void PreviewTableToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (SelectedTableItem == null)
+                return;
             PreviewDbDataForm previewDbDataForm = GenericSingleton<PreviewDbDataForm>.CreateInstance();
             IDAO dao = DAOFactory.CreateDAO(SelectedTableItem);
             if (!dao.TestConn())
@@ -177,7 +180,7 @@ namespace C2.Controls
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
-            if (SelectedTableItem != null && previewDbDataForm.Flush(this.SelectedTableItem))
+            if (previewDbDataForm.Flush(this.SelectedTableItem))
             {
                 previewDbDataForm.Focus();
                 previewDbDataForm.Show();
@@ -199,6 +202,8 @@ namespace C2.Controls
             this.Items.Clear();
             this.DatabaseItems.Clear();
             this.SelectedItem = null;
+            this.SelectedIndices = null;
+            this.SelectedTableItem = null;
             this.PerformLayout();
         }
         #endregion
