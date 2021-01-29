@@ -303,7 +303,7 @@ namespace C2
         }
         private void LoadIAOSource()
         {
-            string[] IAOLab = { "APK", "BaseStation", "Wifi", "Card", "Tude", " Ip" };
+            string[] IAOLab = { "APK", "BaseStation", "Wifi", "Card", "Tude", "Ip" };
             string IAOLabType = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultIAOLab);
             string[] strArr = IAOLabType.Split(',');
             if (!IAOLabType.IsNullOrEmpty())
