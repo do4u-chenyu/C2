@@ -179,12 +179,6 @@
     <Compile Include="Controls\C1\Left\TableListControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\C1\Left\TableButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Left\TableButton.Designer.cs">
-      <DependentUpon>TableButton.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\C1\Left\LinkButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1420,10 +1414,6 @@
     <Compile Include="Utils\ZipUtil.cs" />
     <EmbeddedResource Include="Controls\C1\Left\IAOButton.resx">
       <DependentUpon>IAOButton.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Left\TableButton.resx">
-      <DependentUpon>TableButton.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\LinkButton.resx">

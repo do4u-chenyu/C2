@@ -59,9 +59,9 @@ namespace C2.Controls.Left
             {
                 if (_RelateDBIs != value)
                 {
+                    _RelateDBIs = value;
                     this.tableFilterTextBox.Text = string.Empty;
                 }
-                _RelateDBIs = value;
             }
         }
 
@@ -272,11 +272,9 @@ namespace C2.Controls.Left
         {
             this.schemaComboBox.Items.Clear();
             this.schemaComboBox.Text = string.Empty;
-            _RelateDBIs.Clear();
-            //this.dataTableTextBox.Text = string.Empty;
-            this.tabelPanel.Controls.Clear();
+            this.RelateDBIs.Clear();
+            this.tableListControl1.Clear();
         }
-
         #endregion
 
         #region 外部数据库布局
@@ -312,27 +310,11 @@ namespace C2.Controls.Left
         }
         #endregion
 
-        #region 外部表添加
-        //private void GenTableButton(TableButton tableButton)
-        //{
-        //    LayoutModelButtonLocation(tableButton); // 递增
-        //    this.tabelPanel.Controls.Add(tableButton);
-        //}
-        #endregion
 
         #region 外部表布局
-        private void LayoutModelButtonLocation(TableButton tb)
-        {
-            if (this.tabelPanel.Controls.Count > 0)
-                tablePoint = this.tabelPanel.Controls[this.tabelPanel.Controls.Count - 1].Location;
-            tablePoint.Y += ButtonGapHeight;
-            tb.Location = tablePoint;
-        }
-
         private void ReLayoutTableFrame(List<DatabaseItem> dbis)
         {
             this.tableListControl1.SuspendLayout();
-            this.tableListControl1.Controls.Clear();
             this.tableListControl1.DatabaseItems = dbis;
             this.tableListControl1.ResumeLayout(false);
             this.tableListControl1.PerformLayout();
@@ -450,7 +432,6 @@ namespace C2.Controls.Left
         private void UpdateFrameCombo(List<string> users, string loginUser, string defaultSchema)
         {
             this.schemaComboBox.Items.Clear();
-            //this.dataTableTextBox.Text = string.Empty;//刷新架构，数据表搜索框清空
             _RelateDBIs.Clear();
             if (users == null)
                 return;
@@ -475,10 +456,7 @@ namespace C2.Controls.Left
                 dbis.Add(tmpDatabaseItem.Clone());
             }
             this.tableListControl1.DatabaseItems = dbis;
-            foreach (var dbi in dbis)
-            {
-                RelateDBIs.Add(dbi);
-            }
+            RelateDBIs = dbis;
         }
         public List<DatabaseItem> GetAllExternalData()
         {
@@ -490,11 +468,6 @@ namespace C2.Controls.Left
             }
 
             return allExternalData;
-        }
-        private void optComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.tableFilterTextBox.Text = "";
-            ReLayoutTableFrame(_RelateDBIs);
         }
     }
 }

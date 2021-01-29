@@ -81,7 +81,7 @@ namespace C2.Controls
             }
         }
 
-
+        #region mouse event
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -105,6 +105,7 @@ namespace C2.Controls
             if (e.Button == MouseButtons.Right && tableContextMenuStrip != null)
                 tableContextMenuStrip.Show(this, new Point(e.X, e.Y));
         }
+        #endregion
         #region MenuStrip
         ToolStripMenuItem PreviewTableToolStripMenuItem;
         ToolStripMenuItem PreviewTableSchemaToolStripMenuItem;
@@ -190,6 +191,15 @@ namespace C2.Controls
                 "预览数据源前一千条数据"
                 :
                 HelpUtil.ReviewToolStripMenuItemInfo;
+        }
+        #endregion
+        #region
+        public void Clear()
+        {
+            this.Items.Clear();
+            this.DatabaseItems.Clear();
+            this.SelectedItem = null;
+            this.PerformLayout();
         }
         #endregion
     }
