@@ -76,13 +76,14 @@ namespace C2.Database
                     // 分页查询去掉第一列索引
                     if (returnHeader && !list.IsEmpty() && !(list[0] as IDictionary<string, object>).IsEmpty())
                     {
-                        for (int i = 1; i < (list[0] as IDictionary<string, object>).Count; i++)
+                        IDictionary<string, object> iDict = list[0];
+                        for (int i = 1; i < iDict.Count; i++)
                         {
-                            string key = (list[0] as IDictionary<string, object>).Keys.ElementAt(i);
-                            sb.Append((list[0] as IDictionary<string, object>)[key]).Append(OpUtil.DefaultFieldSeparator);
+                            string key = GetColumnName(iDict.Keys.ElementAt(i));
+                            sb.Append(key).Append(OpUtil.DefaultFieldSeparator);
                         }
 
-                        if ((list[0] as IDictionary<string, object>).Count > 1)
+                        if (iDict.Count > 1)
                             sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator);
 
                     }
@@ -109,7 +110,13 @@ namespace C2.Database
             return result;
         }
 
-
+        private string GetColumnName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return string.Empty;
+            string[] names = name.Split('.');
+            return names.Length == 2 ? names[1] : name;
+        }
 
         public override string Query(string sql, bool header = true)
         {
@@ -130,10 +137,15 @@ namespace C2.Database
                     var list = cursor.FetchMany(int.MaxValue);
                     if (header && !list.IsEmpty())
                     {
-
                         // 添加表头
-                        string headers = string.Join(OpUtil.DefaultFieldSeparator.ToString(), (list[0] as IDictionary<string, object>).Keys);
-                        sb.Append(headers).Append(OpUtil.DefaultLineSeparator);
+                        IDictionary<string, object> iDict = list[0];
+                        for (int i = 0; i < iDict.Count; i++)
+                        {
+                            string key = GetColumnName(iDict.Keys.ElementAt(i));
+                            sb.Append(key).Append(OpUtil.DefaultFieldSeparator);
+                        }
+                        if (iDict.Count > 0)
+                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator); // 最后一列多加了个\t，去掉       
 
                     }
                     foreach (IDictionary<string, object> dict in list)
@@ -151,7 +163,7 @@ namespace C2.Database
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
                 QueryFailureException(ex.Message);
-                
+
             }
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
         }
