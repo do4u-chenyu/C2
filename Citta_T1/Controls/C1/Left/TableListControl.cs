@@ -154,15 +154,19 @@ namespace C2.Controls
                 return;
             PreviewTableSchema previewTableSchema = GenericSingleton<PreviewTableSchema>.CreateInstance();
             IDAO dao = DAOFactory.CreateDAO(SelectedTableItem);
-            if (!dao.TestConn())
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
-            }
-            dao.FillDGVWithTbSchema(previewTableSchema.DataGridView, this.SelectedTableItem.DataTable);
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                dao.FillDGVWithTbSchema(previewTableSchema.DataGridView, this.SelectedTableItem.DataTable);
 
-            previewTableSchema.Focus();
-            previewTableSchema.Show();
+                previewTableSchema.Focus();
+                previewTableSchema.Show();
+            }
+                
         }
 
         private void PreviewTableToolStripMenuItem_Click(object sender, EventArgs e)
@@ -171,16 +175,20 @@ namespace C2.Controls
                 return;
             PreviewDbDataForm previewDbDataForm = GenericSingleton<PreviewDbDataForm>.CreateInstance();
             IDAO dao = DAOFactory.CreateDAO(SelectedTableItem);
-            if (!dao.TestConn())
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                return;
+                if (!dao.TestConn())
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
+                    return;
+                }
+                if (previewDbDataForm.Flush(this.SelectedTableItem))
+                {
+                    previewDbDataForm.Focus();
+                    previewDbDataForm.Show();
+                }
             }
-            if (previewDbDataForm.Flush(this.SelectedTableItem))
-            {
-                previewDbDataForm.Focus();
-                previewDbDataForm.Show();
-            }
+               
         }
 
         private void TableContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
