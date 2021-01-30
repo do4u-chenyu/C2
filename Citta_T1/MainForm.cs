@@ -40,8 +40,13 @@ namespace C2
 
         public bool operateButtonSelect { get; private set; }
         public object IAOModelControl { get; private set; }
-        #region
-        SpecialTabItem TabNew;
+        private List<string> installedPlugIn;
+        public List<string> GetInstalledPlusIn
+        {
+            get => this.installedPlugIn; set => this.installedPlugIn = value;
+        }
+            #region
+            SpecialTabItem TabNew;
         FindDialog MyFindDialog;
         ShortcutKeysTable ShortcutKeys;
         #endregion
@@ -61,7 +66,7 @@ namespace C2
         public MainForm(string userName)
         {
             this.UserName = userName;
-
+            this.installedPlugIn = new List<string>();
             InitializeComponent();
             this.usernamelabel.Text = this.UserName;
 
@@ -311,7 +316,11 @@ namespace C2
                 for (int i = 0; i < strArr.Length; i++)
                 {
                     if (!strArr[i].Trim().IsNullOrEmpty() && Array.Exists(IAOLab, element => element == strArr[i].Trim()))
+                    {
+                        this.installedPlugIn.Add(Lang._(strArr[i].Trim()));
                         this.iaoModelControl.GenIAOButton(strArr[i].Trim());
+                    }
+                      
                 }
             }
         }

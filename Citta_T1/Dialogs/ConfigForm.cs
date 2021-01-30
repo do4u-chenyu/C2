@@ -19,6 +19,7 @@ namespace C2.Dialogs
         public ConfigForm()
         {
             InitializeComponent();
+            InitDefaultPlugIn();
         }
 
         private void TabControl_Selected(object sender, TabControlEventArgs e)
@@ -309,9 +310,22 @@ namespace C2.Dialogs
             this.chosenPythonLable.Text = String.Empty;
         }
 
+
         private void PluginsCancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+        #region 插件
+        private void InitDefaultPlugIn()
+        {
+            if (Global.GetMainForm() == null) return;
+            foreach (string iaoButtonName in Global.GetMainForm().GetInstalledPlusIn)
+                this.installedDGV.Rows.Add(new Object[] { iaoButtonName, "V1.0", true });
+            this.installedDGV.ReadOnly = true;
+
+        }
+        #endregion
+
     }
 }
