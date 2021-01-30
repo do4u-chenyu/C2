@@ -86,7 +86,7 @@ namespace C2.Database
             catch (Exception ex)
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-               // QueryFailureException();
+                QueryFailureException(ex.Message);
             }
 
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);

@@ -68,6 +68,11 @@ namespace C2.Database
         }
         #endregion
         #region 接口实现
+
+        ///<summary>
+        ///异常:
+        ///<para>QueryFailureException</para>
+        ///</summary>
         public virtual string Query(string sql, bool header = true)
         {
             throw new NotImplementedException();
@@ -80,13 +85,14 @@ namespace C2.Database
         #region 业务逻辑
         public List<string> GetUsers()
         {
-            string result = this.Query(this.GetUserSQL(), false);
+            string result = this.TryQuery(this.GetUserSQL(), false);
             return String.IsNullOrEmpty(result) ? new List<String>() : new List<string>(result.Split(OpUtil.DefaultLineSeparator));
         }
+
         public List<Table> GetTables(string schema)
         {
             List<Table> tables = new List<Table>();
-            string result = this.Query(this.GetTablesSQL(schema), false);
+            string result = this.TryQuery(this.GetTablesSQL(schema), false);
             if (!String.IsNullOrEmpty(result))
                 foreach (var line in result.Split(OpUtil.DefaultLineSeparator))
                 {
@@ -97,7 +103,18 @@ namespace C2.Database
         }
         public string GetTableContentString(Table table, int maxNum)
         {
-            return this.Query(this.GetTableContentSQL(table, maxNum));
+            return this.TryQuery(this.GetTableContentSQL(table, maxNum));
+        }
+
+        private string TryQuery(string sql,bool header=true)
+        {
+            string result = string.Empty;
+            try
+            {
+                result = this.Query(sql, header);
+            }
+            catch { }
+            return result;
         }
         public List<List<string>> GetTableContent(Table table, int maxNum)
         {
@@ -106,17 +123,18 @@ namespace C2.Database
         }
         public Dictionary<string, List<string>> GetColNameBySchema(string schema)
         {
-            string result = this.Query(this.GetColNameBySchemaSQL(schema), false);
+            string result = this.TryQuery(this.GetColNameBySchemaSQL(schema), false);
             return String.IsNullOrEmpty(result) ? new Dictionary<string, List<string>>() : DbUtil.StringToDict(result);
         }
+ 
         public Dictionary<string, List<string>> GetColNameByTables(List<Table> tables)
         {
-            string result = this.Query(this.GetColNameByTablesSQL(tables), false);
+            string result = this.TryQuery(this.GetColNameByTablesSQL(tables), false);
             return String.IsNullOrEmpty(result) ? new Dictionary<string, List<string>>() : DbUtil.StringToDict(result);
         }
         public string GetTableColumnNames(Table table)
         {
-            return this.Query(this.GetColNameByTableSQL(table));
+            return this.TryQuery(this.GetColNameByTableSQL(table));
         }
         public void FillDGVWithTbSchema(DataGridView dataGridView, Table table)
         {
@@ -130,6 +148,7 @@ namespace C2.Database
             List<List<string>> tableCols = DbUtil.StringTo2DString(contentString);
             FileUtil.FillTable(dataGridView, tableCols);
         }
+
         public void FillDGVWithSQL(DataGridView dataGridView, string sql)
         {
             string contentString = this.Query(String.Format(this.LimitSQL(sql)));
@@ -214,9 +233,9 @@ namespace C2.Database
         #region 自定义异常
 
 
-        protected void QueryFailureException()
+        protected void QueryFailureException(string message)
         { 
-            throw new Exception("数据库查询失败");
+            throw new Exception(message);
         }
 
         #endregion

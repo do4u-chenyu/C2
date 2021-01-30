@@ -218,7 +218,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.tableListBox.Items.Clear();
         }
 
-        private void bnExecute_Click(object sender, System.EventArgs e)
+        private void ExecuteSql_Click(object sender, System.EventArgs e)
         {
             if (SelectDatabaseItem == null)
             {
@@ -233,7 +233,15 @@ namespace C2.Dialogs.C2OperatorViews
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return;
                 }
-                dao.FillDGVWithSQL(this.gridOutput, this.textEditorControl1.Text);
+                try
+                { 
+                    dao.FillDGVWithSQL(this.gridOutput, this.textEditorControl1.Text); 
+                }
+                catch (Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(ex.Message, "提示信息", System.Windows.Forms.MessageBoxIcon.Warning);
+                }
+               
             }
                
         }

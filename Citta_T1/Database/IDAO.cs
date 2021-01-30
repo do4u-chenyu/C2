@@ -16,6 +16,10 @@ namespace C2.Database
         string GetTableColumnNames(Table table);
         void FillDGVWithTbSchema(DataGridView dataGridView, Table table);
         void FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum);
+        ///<summary>
+        ///异常:
+        ///<para>QueryFailureException</para>
+        ///</summary>
         void FillDGVWithSQL(DataGridView dataGridView, string SQL);
         bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000);
         string DefaultSchema();

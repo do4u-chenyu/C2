@@ -80,7 +80,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.bnExecute.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.bnExecute, "执行SQL的结果仅可预览前一千行数据");
             this.bnExecute.UseVisualStyleBackColor = true;
-            this.bnExecute.Click += new System.EventHandler(this.bnExecute_Click);
+            this.bnExecute.Click += new System.EventHandler(this.ExecuteSql_Click);
             // 
             // splitContainer1
             // 
