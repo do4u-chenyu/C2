@@ -6,9 +6,7 @@ namespace C2.IAOLab.Plugins
     {
         private static PluginsManger pluginsManger;
 
-        private List<IPlugin> plugins;
-
-        public List<IPlugin> Plugins { get => plugins; }
+        public List<IPlugin> Plugins { get; }
 
         public static PluginsManger Instance
         {
@@ -23,7 +21,7 @@ namespace C2.IAOLab.Plugins
 
         private PluginsManger()
         {
-            plugins = new List<IPlugin>
+            Plugins = new List<IPlugin>
             {
                 new ApkToolPlugin(),
                 new BaseStationPlugin(),
