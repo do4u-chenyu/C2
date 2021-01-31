@@ -16,6 +16,7 @@ namespace C2.Utils
     {
         public static readonly char DefaultFieldSeparator = '\t';
         public static readonly char DefaultLineSeparator = '\n';
+        public static readonly char Blank = ' ';
         public static readonly int PreviewMaxNum = 1000;
         public static float IOU(Rectangle rect1, Rectangle rect2)
         {

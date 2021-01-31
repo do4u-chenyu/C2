@@ -11,7 +11,7 @@ namespace C2.Utils
         /// <summary>
         /// 压缩文件
         /// </summary>
-        public static string CreateZip(string srcFilePath, string dstZipFilePath, string password="")
+        public static string CreateZip(string srcFilePath, string dstZipFilePath, string password = "")
         {
             FastZip fz = new FastZip
             {
@@ -32,7 +32,7 @@ namespace C2.Utils
         /// <summary>
         /// 解压文件
         /// </summary>
-        public static string UnZipFile(string zipFilePath, string targetPath, string password="")
+        public static string UnZipFile(string zipFilePath, string targetPath, string password = "")
         {
             FastZip fz = new FastZip()
             {
@@ -40,7 +40,7 @@ namespace C2.Utils
             };
             try
             {
-                fz.ExtractZip(zipFilePath, targetPath, "");
+                fz.ExtractZip(zipFilePath, targetPath, String.Empty);
             }
             catch (ZipException e)
             {

@@ -28,7 +28,7 @@ namespace C2.Utils
         {
             result = null;
             returnCode = 0;
-            msg = "";
+            msg = String.Empty;
         }
         public ReadRst(List<List<string>> rst , int rtc, string m)
         {
@@ -156,11 +156,11 @@ namespace C2.Utils
 
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < spaceNum; i++)
-                sb.Append(' ');
+                sb.Append(OpUtil.Blank);
             for (int i = 0; i < newName.Length; i++)
                 sb.Append(newName[i]);
             for (int i = spaceNum + newName.Length; i < rowLength; i++)
-                sb.Append(' ');
+                sb.Append(OpUtil.Blank);
             return sb.ToString();
         }
 
@@ -241,7 +241,19 @@ namespace C2.Utils
         {
             try
             {
-                return System.IO.Directory.GetDirectories(path);
+                return Directory.GetDirectories(path);
+            }
+            catch
+            {
+                return new string[0];
+            }
+        }
+
+        public static string[] TryListFiles(string path, string searchPattern = "*")
+        {
+            try
+            {
+                return Directory.GetFiles(path, searchPattern);
             }
             catch
             {
@@ -267,7 +279,7 @@ namespace C2.Utils
                 if (fs != null)
                     fs.Close();
             }
-            return "";
+            return String.Empty;
         }
 
         public static ReadRst ReadExcel(string fullFilePath, int maxRow, string sheetName = "")
@@ -275,7 +287,7 @@ namespace C2.Utils
             FileStream fs = null;
             List<List<string>> rst = new List<List<string>>();
             int returnCode = 1;
-            string errMsg = "";
+            string errMsg = String.Empty;
             if (!File.Exists(fullFilePath))
             {
                 returnCode = 0;
@@ -339,7 +351,7 @@ namespace C2.Utils
                     if (sheet == null)
                     {
                         fs.Close();
-                        return new ReadRst(rst, 0, ""); ;
+                        return new ReadRst(rst, 0, String.Empty); ;
                     }
                     IRow firstRow = sheet.GetRow(0);
                     if (firstRow == null)

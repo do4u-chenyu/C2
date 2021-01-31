@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace C2.Database
+namespace C2.Utils
 {
     // TODO DK 干掉
     public class GenericSingleton<T> where T : Form, new()

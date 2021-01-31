@@ -302,19 +302,12 @@ namespace C2
         }
         private void LoadIAOSource()
         {
-            string[] IAOLab = { "APK", "BaseStation", "Wifi", "Card", "Tude", "Ip" };
-            string IAOLabType = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultIAOLab);
-            string[] strArr = IAOLabType.Split(',');
-            if (!IAOLabType.IsNullOrEmpty())
+            string[] IAOLabArr = { "APK", "BaseStation", "Wifi", "Card", "Tude", "Ip" };
+            string IAOLabPlugins = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultIAOLab);
+            foreach(string name in IAOLabPlugins.Split(','))
             {
-                for (int i = 0; i < strArr.Length; i++)
-                {
-                    if (!strArr[i].Trim().IsNullOrEmpty() && Array.Exists(IAOLab, element => element == strArr[i].Trim()))
-                    {
-                        this.iaoModelControl.GenIAOButton(strArr[i].Trim());
-                    }
-                      
-                }
+                if (IAOLabArr.Exists(me => me == name.Trim()))
+                    this.iaoModelControl.GenIAOButton(name.Trim());
             }
         }
 

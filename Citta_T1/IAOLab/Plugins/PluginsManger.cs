@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using C2.Utils;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
 
 namespace C2.IAOLab.Plugins
 {
@@ -37,6 +40,20 @@ namespace C2.IAOLab.Plugins
         {
             int index = Plugins.FindIndex(e => e.GetPluginName() == name);
             return index < 0 ? new EmptyPlugin() : Plugins[index];
+        }
+
+        public void Refresh()
+        {
+            string pluginsDir = System.IO.Path.Combine(Application.StartupPath, "plugins");
+            foreach (string dll in FileUtil.TryListFiles(pluginsDir, "*.dll"))
+                TryLoad(dll);
+        }
+
+        private void TryLoad(string dll)
+        {
+            if (!File.Exists(dll))
+                return;
+
         }
     }
 }
