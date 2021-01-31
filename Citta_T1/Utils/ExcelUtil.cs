@@ -231,7 +231,7 @@ namespace C2.Utils
 		 */
 		public static String GetCellValue(CellValue formulaValue)
 		{
-			String cellValue = "";
+			String cellValue = String.Empty;
 			if (formulaValue == null)
 			{
 				return cellValue;
@@ -249,13 +249,13 @@ namespace C2.Utils
 					cellValue = formulaValue.BooleanValue.ToString();
 					break;
 				case CellType.Blank:
-					cellValue = "";
+					cellValue = String.Empty;
 					break;
 				case CellType.Error:
 					cellValue = formulaValue.ErrorValue.ToString();
 					break;
 				case CellType.Unknown:
-					cellValue = "";
+					cellValue = String.Empty;
 					break;
 				default:
 					cellValue = "未知类型";
@@ -272,7 +272,7 @@ namespace C2.Utils
 		 */
 		public static String GetCellValue(IWorkbook workbook, ICell cell)
 		{
-			String cellValue = "";
+			String cellValue = String.Empty;
 			try
 			{
 				if (cell == null)
@@ -317,13 +317,13 @@ namespace C2.Utils
 						cellValue = cell.BooleanCellValue.ToString();
 						break;
 					case CellType.Blank:
-						cellValue = "";
+						cellValue = String.Empty;
 						break;
 					case CellType.Error:
 						cellValue = cell.ErrorCellValue.ToString();
 						break;
 					case CellType.Unknown:
-						cellValue = "";
+						cellValue = String.Empty;
 						break;
 					default:
 						cellValue = "未知类型";
@@ -377,7 +377,9 @@ namespace C2.Utils
             {
 				log.Error("读取单元格失败, error: " + e.ToString());
 			}
-			return cellValue.Replace('\n', ' ').Replace('\t', ' ').Replace('\r', ' ');
+			return cellValue.Replace('\n', OpUtil.Blank)
+							.Replace('\t', OpUtil.Blank)
+							.Replace('\r', OpUtil.Blank);
 		}
 		public static bool IsDateFormat(short formatID, string formatString)
         {
