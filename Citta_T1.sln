@@ -13,7 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2自动化测试样例", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2UnitTests", "C2Tests\C2UnitTests.csproj", "{0711F393-AA2F-47A9-93DF-8B10EF068596}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2Plugins", "C2Plugins\C2Plugins.csproj", "{051AF835-9782-48C8-9281-6B7E6376F330}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C2Plugins", "C2Plugins", "{347ABCF9-220C-4D65-9170-5689273E2F50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPlugin", "C2Plugins\TestPlugin\TestPlugin.csproj", "{FABFB497-81E5-42DC-82DF-B30D71E030D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game2048Plugin", "C2Plugins\Game2048Plugin\Game2048Plugin.csproj", "{020BE791-6CC1-408B-AE2E-EF87ACD14D86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,15 +54,25 @@ Global
 		{0711F393-AA2F-47A9-93DF-8B10EF068596}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0711F393-AA2F-47A9-93DF-8B10EF068596}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
 		{0711F393-AA2F-47A9-93DF-8B10EF068596}.开发调试|Any CPU.Build.0 = Release|Any CPU
-		{051AF835-9782-48C8-9281-6B7E6376F330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{051AF835-9782-48C8-9281-6B7E6376F330}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{051AF835-9782-48C8-9281-6B7E6376F330}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{051AF835-9782-48C8-9281-6B7E6376F330}.Release|Any CPU.Build.0 = Release|Any CPU
-		{051AF835-9782-48C8-9281-6B7E6376F330}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
-		{051AF835-9782-48C8-9281-6B7E6376F330}.开发调试|Any CPU.Build.0 = Release|Any CPU
+		{FABFB497-81E5-42DC-82DF-B30D71E030D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FABFB497-81E5-42DC-82DF-B30D71E030D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FABFB497-81E5-42DC-82DF-B30D71E030D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FABFB497-81E5-42DC-82DF-B30D71E030D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FABFB497-81E5-42DC-82DF-B30D71E030D0}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
+		{FABFB497-81E5-42DC-82DF-B30D71E030D0}.开发调试|Any CPU.Build.0 = Release|Any CPU
+		{020BE791-6CC1-408B-AE2E-EF87ACD14D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{020BE791-6CC1-408B-AE2E-EF87ACD14D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{020BE791-6CC1-408B-AE2E-EF87ACD14D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{020BE791-6CC1-408B-AE2E-EF87ACD14D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{020BE791-6CC1-408B-AE2E-EF87ACD14D86}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
+		{020BE791-6CC1-408B-AE2E-EF87ACD14D86}.开发调试|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FABFB497-81E5-42DC-82DF-B30D71E030D0} = {347ABCF9-220C-4D65-9170-5689273E2F50}
+		{020BE791-6CC1-408B-AE2E-EF87ACD14D86} = {347ABCF9-220C-4D65-9170-5689273E2F50}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {009696A9-FA4B-463E-AF26-413B108EFC6A}

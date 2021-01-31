@@ -73,5 +73,7 @@ C2自动化测试样例/obj
 C2自动化测试样例/bin
 /packages/MSTest.TestAdapter.2.1.1
 /packages/MSTest.TestFramework.2.1.1
-C2Plugins/bin
-C2Plugins/obj
+C2Plugins/TestPlugin/bin
+C2Plugins/TestPlugin/obj
+C2Plugins/Game2048Plugin/bin
+C2Plugins/Game2048Plugin/obj
