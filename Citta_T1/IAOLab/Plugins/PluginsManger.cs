@@ -44,16 +44,16 @@ namespace C2.IAOLab.Plugins
 
         public void Refresh()
         {
-            string pluginsDir = System.IO.Path.Combine(Application.StartupPath, "plugins");
+            string pluginsDir = Path.Combine(Application.StartupPath, "plugins");
             foreach (string dll in FileUtil.TryListFiles(pluginsDir, "*.dll"))
-                TryLoad(dll);
+                TryLoadOne(dll);
         }
 
-        private void TryLoad(string dll)
+        private void TryLoadOne(string dll)
         {
             if (!File.Exists(dll))
                 return;
-
+            // TODO 继续施工中
         }
     }
 }

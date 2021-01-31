@@ -237,7 +237,6 @@
     <Compile Include="Database\PreviewTableSchema.Designer.cs">
       <DependentUpon>PreviewTableSchema.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database\Settings.cs" />
     <Compile Include="Database\Table.cs" />
     <Compile Include="Design\SizeTypeConvert.cs" />
     <Compile Include="Dialogs\AddDatabaseDialog.cs">

@@ -1,13 +1,8 @@
-﻿using C2.Core;
-using C2.Model;
+﻿using C2.Model;
 using C2.Utils;
-using Hive2;
-using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace C2.Database
@@ -18,9 +13,6 @@ namespace C2.Database
 
         protected string Name, User, Pass, Host, Sid, Service, Port, Schema;
         public delegate void UpdateLog(string log);
-
-        private static LogUtil log = LogUtil.GetInstance("BaseDAOImpl");
-
         protected struct QueryResult
         {
             public string content;
