@@ -4,19 +4,12 @@ using System.Windows.Forms;
 
 namespace C2.IAOLab.Plugins
 {
-    enum PluginType
-    {
-        None,
-        Fixed,      // 自带捆绑插件
-        Pluggable   // 可插拔
-    }
     interface IPlugin
     {
         String GetPluginName();
         String GetPluginDescription();
         String GetPluginVersion();
         DialogResult ShowDialog();
-        PluginType GetPluginType();
     }
 
     #region 本地插件
@@ -30,11 +23,6 @@ namespace C2.IAOLab.Plugins
         public string GetPluginName()
         {
             return "EmptyPlugin";
-        }
-
-        public PluginType GetPluginType()
-        {
-            return PluginType.None;
         }
 
         public string GetPluginVersion()
@@ -60,11 +48,6 @@ namespace C2.IAOLab.Plugins
             return "非法APK分析";
         }
 
-        public PluginType GetPluginType()
-        {
-            return PluginType.Fixed;
-        }
-
         public string GetPluginVersion()
         {
             return "2.3.0";
@@ -86,11 +69,6 @@ namespace C2.IAOLab.Plugins
         public string GetPluginName()
         {
             return "银行卡信息查询";
-        }
-
-        public PluginType GetPluginType()
-        {
-            return PluginType.Fixed;
         }
 
         public string GetPluginVersion()
@@ -116,11 +94,6 @@ namespace C2.IAOLab.Plugins
             return "基站查询";
         }
 
-        public PluginType GetPluginType()
-        {
-            return PluginType.Fixed;
-        }
-
         public string GetPluginVersion()
         {
             return "2.4.11";
@@ -143,12 +116,6 @@ namespace C2.IAOLab.Plugins
         {
             return "经纬度坐标系转换";
         }
-
-        public PluginType GetPluginType()
-        {
-            return PluginType.Fixed;
-        }
-
         public string GetPluginVersion()
         {
             return "1.1.3";
@@ -171,12 +138,6 @@ namespace C2.IAOLab.Plugins
         {
             return "时间和IP转换";
         }
-
-        public PluginType GetPluginType()
-        {
-            return PluginType.Fixed;
-        }
-
         public string GetPluginVersion()
         {
             return "0.0.1";
@@ -198,11 +159,6 @@ namespace C2.IAOLab.Plugins
         public string GetPluginName()
         {
             return "Wifi查询";
-        }
-
-        public PluginType GetPluginType()
-        {
-            return PluginType.Fixed;
         }
 
         public string GetPluginVersion()
