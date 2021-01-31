@@ -67,7 +67,7 @@ namespace C2.IAOLab.Plugins
 
         public string GetPluginVersion()
         {
-            return "0.1";
+            return "2.3.0";
         }
 
         public DialogResult ShowDialog()
@@ -95,7 +95,7 @@ namespace C2.IAOLab.Plugins
 
         public string GetPluginVersion()
         {
-            return "0.1";
+            return "1.0.9";
         }
 
         public DialogResult ShowDialog()
@@ -123,7 +123,7 @@ namespace C2.IAOLab.Plugins
 
         public string GetPluginVersion()
         {
-            return "0.1";
+            return "2.4.11";
         }
 
         public DialogResult ShowDialog()
@@ -151,7 +151,7 @@ namespace C2.IAOLab.Plugins
 
         public string GetPluginVersion()
         {
-            return "0.1";
+            return "1.1.3";
         }
 
         public DialogResult ShowDialog()
@@ -179,7 +179,7 @@ namespace C2.IAOLab.Plugins
 
         public string GetPluginVersion()
         {
-            return "0.1";
+            return "0.0.1";
         }
 
         public DialogResult ShowDialog()
@@ -207,7 +207,7 @@ namespace C2.IAOLab.Plugins
 
         public string GetPluginVersion()
         {
-            return "0.1";
+            return "0.3.2";
         }
 
         public DialogResult ShowDialog()

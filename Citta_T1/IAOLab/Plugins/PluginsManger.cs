@@ -8,14 +8,18 @@ namespace C2.IAOLab.Plugins
 
         private List<IPlugin> plugins;
 
-        internal List<IPlugin> Plugins { get => plugins; }
+        public List<IPlugin> Plugins { get => plugins; }
 
-        public PluginsManger Instance()
+        public static PluginsManger Instance
         {
-            if (pluginsManger == null)
-                pluginsManger = new PluginsManger();
-            return pluginsManger;
+            get {
+                if (pluginsManger == null)
+                    pluginsManger = new PluginsManger();
+                return pluginsManger;
+            }
         }
+
+
 
         private PluginsManger()
         {
@@ -28,7 +32,12 @@ namespace C2.IAOLab.Plugins
                 new GPSTransformPlugin(),
                 new TimeAndIPTransformPlugin()
             };
+        }
 
+        public IPlugin FindPlugin(string name)
+        {
+            int index = Plugins.FindIndex(e => e.GetPluginName() == name);
+            return index < 0 ? new EmptyPlugin() : Plugins[index];
         }
     }
 }

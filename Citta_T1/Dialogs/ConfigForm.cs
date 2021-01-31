@@ -1,4 +1,5 @@
 ﻿using C2.Core;
+using C2.IAOLab.Plugins;
 using C2.Utils;
 using System;
 using System.Diagnostics;
@@ -19,12 +20,6 @@ namespace C2.Dialogs
         public ConfigForm()
         {
             InitializeComponent();
-            InitDefaultPlugIn();
-        }
-
-        private void TabControl_Selected(object sender, TabControlEventArgs e)
-        {
-            //log.Info(e.TabPageIndex.ToString());
         }
 
         private void UserModelOkButton_Click(object sender, EventArgs e)
@@ -43,6 +38,11 @@ namespace C2.Dialogs
         }
 
         private void AboutCancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void PluginsOKButton_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -208,7 +208,7 @@ namespace C2.Dialogs
 
         private void PluginsConfigTabPage_Load()
         {
-
+            InitDefaultPlugins();
         }
 
         private void UserModelTabPage_Load()
@@ -317,15 +317,20 @@ namespace C2.Dialogs
         }
 
         #region 插件
-        private void InitDefaultPlugIn()
+        private void InitDefaultPlugins()
         {
-            if (Global.GetMainForm() == null) return;
-            foreach (string iaoButtonName in Global.GetMainForm().GetInstalledPlusIn)
-                this.installedDGV.Rows.Add(new Object[] { iaoButtonName, "V1.0", true });
-            this.installedDGV.ReadOnly = true;
-
+            foreach (IPlugin plugin in PluginsManger.Instance.Plugins)
+            {
+                this.installedDGV.Rows.Add(new Object[] { plugin.GetPluginName(), plugin.GetPluginVersion(), true });
+                this.installedDGV.Rows[this.installedDGV.Rows.Count - 1].ReadOnly = true;
+            }
         }
         #endregion
-
+        private void InstalledDGV_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            String pluginName = this.installedDGV.Rows[e.RowIndex].Cells[0].Value as String;
+            IPlugin pg = PluginsManger.Instance.FindPlugin(pluginName);
+            this.installedTB.Text = pg.GetPluginDescription();
+        }
     }
 }

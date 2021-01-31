@@ -68,14 +68,14 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.installedTB = new System.Windows.Forms.TextBox();
             this.availableSubPage = new System.Windows.Forms.TabPage();
             this.installButton = new System.Windows.Forms.Button();
             this.availableDGV = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.availableTB = new System.Windows.Forms.TextBox();
             this.HostSubPage = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -125,7 +125,6 @@
             this.mainTabControl.SelectedIndex = 0;
             this.mainTabControl.Size = new System.Drawing.Size(642, 410);
             this.mainTabControl.TabIndex = 0;
-            this.mainTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl_Selected);
             // 
             // userModelConfigPage
             // 
@@ -385,6 +384,7 @@
             this.pluginsOKButton.TabIndex = 4;
             this.pluginsOKButton.Text = "确认";
             this.pluginsOKButton.UseVisualStyleBackColor = true;
+            this.pluginsOKButton.Click += new System.EventHandler(this.PluginsOKButton_Click);
             // 
             // pluginsTabControl
             // 
@@ -402,7 +402,7 @@
             // installedSubPage
             // 
             this.installedSubPage.Controls.Add(this.installedDGV);
-            this.installedSubPage.Controls.Add(this.textBox1);
+            this.installedSubPage.Controls.Add(this.installedTB);
             this.installedSubPage.Location = new System.Drawing.Point(4, 26);
             this.installedSubPage.Name = "installedSubPage";
             this.installedSubPage.Padding = new System.Windows.Forms.Padding(3);
@@ -441,6 +441,7 @@
             this.installedDGV.ShowEditingIcon = false;
             this.installedDGV.Size = new System.Drawing.Size(620, 164);
             this.installedDGV.TabIndex = 4;
+            this.installedDGV.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.InstalledDGV_RowEnter);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -453,7 +454,7 @@
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn1.Width = 422;
+            this.dataGridViewTextBoxColumn1.Width = 322;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -472,19 +473,19 @@
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // textBox1
+            // installedTB
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 176);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(620, 102);
-            this.textBox1.TabIndex = 0;
+            this.installedTB.Location = new System.Drawing.Point(3, 176);
+            this.installedTB.Multiline = true;
+            this.installedTB.Name = "installedTB";
+            this.installedTB.Size = new System.Drawing.Size(620, 102);
+            this.installedTB.TabIndex = 0;
             // 
             // availableSubPage
             // 
             this.availableSubPage.Controls.Add(this.installButton);
             this.availableSubPage.Controls.Add(this.availableDGV);
-            this.availableSubPage.Controls.Add(this.textBox2);
+            this.availableSubPage.Controls.Add(this.availableTB);
             this.availableSubPage.Location = new System.Drawing.Point(4, 26);
             this.availableSubPage.Name = "availableSubPage";
             this.availableSubPage.Padding = new System.Windows.Forms.Padding(3);
@@ -563,13 +564,13 @@
             this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
             this.dataGridViewCheckBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // textBox2
+            // availableTB
             // 
-            this.textBox2.Location = new System.Drawing.Point(3, 176);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(620, 102);
-            this.textBox2.TabIndex = 5;
+            this.availableTB.Location = new System.Drawing.Point(3, 176);
+            this.availableTB.Multiline = true;
+            this.availableTB.Name = "availableTB";
+            this.availableTB.Size = new System.Drawing.Size(620, 102);
+            this.availableTB.TabIndex = 5;
             // 
             // HostSubPage
             // 
@@ -850,17 +851,14 @@
         private System.Windows.Forms.TabControl pluginsTabControl;
         private System.Windows.Forms.TabPage installedSubPage;
         private System.Windows.Forms.DataGridView installedDGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox installedTB;
         private System.Windows.Forms.TabPage availableSubPage;
         private System.Windows.Forms.Button installButton;
         private System.Windows.Forms.DataGridView availableDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox availableTB;
         private System.Windows.Forms.TabPage HostSubPage;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -871,5 +869,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox pluginsPortTB;
         private System.Windows.Forms.TextBox pluginsHostTB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
     }
 }
