@@ -64,7 +64,7 @@ namespace C2.IAOLab.Transform
         {
             try
             {
-                string[] strArr = Date.Split(new char[] { '/','-', ' ', ':'});
+                string[] strArr = Date.Split(new char[] { '/', '-', ' ', ':'});
                 strArr = strArr.Where(s => !string.IsNullOrEmpty(s)).ToArray();
                 if (strArr.Length != 6)
                     return wrong;

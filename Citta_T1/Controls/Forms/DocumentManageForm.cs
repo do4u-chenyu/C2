@@ -90,7 +90,7 @@ namespace C2.Controls
         }
         public List<string> OpendDocuments()
         {
-            char[] Chars = new char[] { ' ','*' };
+            char[] Chars = new char[] { Utils.OpUtil.Blank, '*' };
             var tabs = from f in GetForms<BaseDocumentForm>()
                        let fn = f.Text
                        select fn.TrimEnd(Chars);

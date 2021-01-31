@@ -334,7 +334,9 @@ namespace C2.Utils
 			{
 				log.Error("读取单元格失败, error: " + e.ToString());
 			}
-			return cellValue.Replace('\n', ' ').Replace('\t', ' ').Replace('\r', ' ');
+			return cellValue.Replace('\n', OpUtil.Blank)
+				            .Replace('\t', OpUtil.Blank)
+							.Replace('\r', OpUtil.Blank);
 		}
 
 		public static String GetCellValue(ExcelRange cell)

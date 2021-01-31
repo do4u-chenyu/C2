@@ -447,7 +447,7 @@ namespace C2.Business.Model
             if (cmdNode == null || string.IsNullOrEmpty(cmdNode.InnerText))
                 return;
             Regex reg0 = new Regex(Global.regPath);
-            string[] cmd = cmdNode.InnerText.Split(' ');
+            string[] cmd = cmdNode.InnerText.Split(OpUtil.Blank);
             Dictionary<string, string> paths = new Dictionary<string, string>();
             foreach (string item in cmd)
             {

@@ -313,7 +313,7 @@ namespace C2.Business.Model
                 if (optionNode.SelectSingleNode("outputParamPath") != null)
                     outputParamPath = optionNode.SelectSingleNode("outputParamPath").InnerText;
 
-                string[] cmd = optionNode.SelectSingleNode("cmd").InnerText.Split(' ');
+                string[] cmd = optionNode.SelectSingleNode("cmd").InnerText.Split(OpUtil.Blank);
                 List<string> paths = new List<string>();
                 foreach (string item in cmd)
                 {

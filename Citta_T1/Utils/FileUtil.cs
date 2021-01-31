@@ -337,7 +337,7 @@ namespace C2.Utils
                             for (int col = 1; col <= colCount; col++)
                             {
                                 ExcelRange cell = worksheet.Cells[row, col];
-                                string unit = ExcelUtil.GetCellValue(cell).Replace('\n',' ');
+                                string unit = ExcelUtil.GetCellValue(cell).Replace(OpUtil.DefaultLineSeparator, OpUtil.Blank);
                                 tmpRowValueList.Add(unit);
                             }
                             rst.Add(tmpRowValueList);
@@ -376,7 +376,7 @@ namespace C2.Utils
                             else
                             {
                                 ICell cell = sheet.GetRow(i).GetCell(j);
-                                string unit = ExcelUtil.GetCellValue(workbook, cell).Replace('\n',' ');
+                                string unit = ExcelUtil.GetCellValue(workbook, cell).Replace(OpUtil.DefaultLineSeparator, OpUtil.Blank);
                                 tmpRowValueList.Add(unit);
                             }
                         }

@@ -19,7 +19,7 @@ namespace C2.IAOLab.Transform
         {
             this.input = input;
             this.wrongInfo = string.Format("{0} 输入格式有误\n", input);
-            this.inputArray = input.Split(' ');
+            this.inputArray = input.Split(OpUtil.Blank);
         }
 
        
