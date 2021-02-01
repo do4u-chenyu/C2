@@ -272,7 +272,7 @@ namespace C2
             
             foreach (string file in ModelFiles)
             {
-                ImportModel.GetInstance().UnZipIaoFile(file, userName, false);
+                ImportModel.GetInstance().UnZipIaoFile(file, userName);
             }
             
         }

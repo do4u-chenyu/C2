@@ -187,6 +187,40 @@ namespace C2.Utils
             return ret;
         }
 
+        public static bool CopyDirectory(string sourcePath, string destinationPath, bool overwriteexisting)
+        {
+            bool ret = false;
+            try
+            {
+                sourcePath = sourcePath.EndsWith(@"\") ? sourcePath : sourcePath + @"\";
+                destinationPath = destinationPath.EndsWith(@"\") ? destinationPath : destinationPath + @"\";
+
+                if (Directory.Exists(sourcePath))
+                {
+                    if (Directory.Exists(destinationPath) == false)
+                        Directory.CreateDirectory(destinationPath);
+
+                    foreach (string fls in Directory.GetFiles(sourcePath))
+                    {
+                        FileInfo flinfo = new FileInfo(fls);
+                        flinfo.CopyTo(destinationPath + flinfo.Name, overwriteexisting);
+                    }
+                    foreach (string drs in Directory.GetDirectories(sourcePath))
+                    {
+                        DirectoryInfo drinfo = new DirectoryInfo(drs);
+                        if (CopyDirectory(drs, destinationPath + drinfo.Name, overwriteexisting) == false)
+                            ret = false;
+                    }
+                }
+                ret = true;
+            }
+            catch (Exception ex)
+            {
+                ret = false;
+            }
+            return ret;
+        }
+
         public static bool FileMove(string oldFFP, string newFFP)
         {
             bool ret = true;

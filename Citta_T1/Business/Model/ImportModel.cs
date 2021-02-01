@@ -11,10 +11,13 @@ namespace C2.Business.Model
 {
     public class ImportModel
     {
+        public string modelFilePath;
+        public string modelDir;
+
         public ImportModel()
         {
             modelFilePath = string.Empty;
-
+            modelDir = string.Empty;
         }
         private static ImportModel ImportModelInstance;
         public static ImportModel GetInstance()
@@ -34,17 +37,13 @@ namespace C2.Business.Model
                 HelpUtil.ShowMessageBox("未能找到: " + fullFilePath);
                 return false;
             }
-            if (!HasUnZipC2File(fullFilePath, userName, password))
-            {
-                FileUtil.DeleteDirectory(this.modelDir);
+            if (!HasUnZipFile(fullFilePath, userName, password, true))
                 return false;
-            }
 
             // 脚本、数据源存储路径
             string dirs = Path.Combine(this.modelDir, "_datas");
             // 修改XML文件中数据源路径
             RenameBmd(dirs, this.modelFilePath);
-
             // 将导入模型添加到左侧模型面板
             MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
             return true;
@@ -151,7 +150,7 @@ namespace C2.Business.Model
             }
         }
 
-        public bool HasUnZipC2File(string zipFilePath, string userName, string password)
+        public bool HasUnZipFile(string zipFilePath, string userName, string password, bool isC2Model)
         {
             /*
              * 是否存在同名模型文档
@@ -160,8 +159,10 @@ namespace C2.Business.Model
             bool hasUnZip = true;
             string fileName = string.Empty;
             string modelName = string.Empty;
-            string modelPath = string.Empty;
             string errMsg = string.Empty;
+            string tmpDir = string.Empty;
+            string fileExtension = isC2Model ? ".bmd" : ".xml";
+            string fileParentDir = isC2Model ? "业务视图" : "模型市场";
             DialogResult result;
             ZipInputStream s = null;
             try
@@ -171,18 +172,19 @@ namespace C2.Business.Model
                     ZipEntry theEntry;
                     while ((theEntry = s.GetNextEntry()) != null)
                     {
-                        if (!Path.GetFileName(theEntry.Name).EndsWith(".bmd"))
+                        if (!Path.GetFileName(theEntry.Name).EndsWith(fileExtension))
                             continue;
                         fileName = Path.GetFileName(theEntry.Name);
                         modelName = Path.GetFileNameWithoutExtension(theEntry.Name);
-                        modelPath = Path.Combine(Global.WorkspaceDirectory, userName, "业务视图", modelName);
+                        modelDir = Path.Combine(Global.WorkspaceDirectory, userName, fileParentDir, modelName);
+                        modelFilePath = Path.Combine(this.modelDir, fileName);
                         break;
                     }
                 }
             }
             catch
             {
-                MessageBox.Show("文件内容可能破损:" + zipFilePath);
+                HelpUtil.ShowMessageBox("文件内容可能破损:" + zipFilePath);
                 return !hasUnZip;
             }
             finally
@@ -191,53 +193,54 @@ namespace C2.Business.Model
                     s.Close();
             }
 
-
             // 未找到bmd文件
             if (string.IsNullOrEmpty(fileName))
                 return !hasUnZip;
-            this.modelDir = Path.Combine(Global.WorkspaceDirectory, userName, "业务视图", modelName);
-            this.modelFilePath = Path.Combine(this.modelDir, fileName);
-
-            Directory.CreateDirectory(modelDir);
-
 
             // 是否包含同名模型文档
-            if (!IsSameMindMapTitle(modelName))
+            if (IsSameModelTitle(modelName, isC2Model))
             {
-                //解压文件   
-                errMsg = ZipUtil.UnZipFile(zipFilePath, this.modelDir, password);
-                if (!string.IsNullOrEmpty(errMsg))
-                {
-                    HelpUtil.ShowMessageBox(errMsg);
+                result = MessageBox.Show("模型文件:" + modelName + "已存在，是否覆盖该模型文档", "导入模型", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.Cancel)
                     return !hasUnZip;
-                }
-                return hasUnZip;
             }
-
-            result = MessageBox.Show("模型文件:" + modelName + "已存在，是否覆盖该模型文档", "导入模型", MessageBoxButtons.OKCancel);
-            if (result == DialogResult.Cancel)
-                return !hasUnZip;
 
             if (Global.GetTaskBar().ContainModel(modelName))
             {
-                MessageBox.Show("模型文件:" + modelName + "已打开，请关闭该文档并重新进行导入", "关闭模型文档");
+                HelpUtil.ShowMessageBox("模型文件:" + modelName + "已打开，请关闭该文档并重新进行导入", "关闭模型文档");
                 return !hasUnZip;
             }
-            // 删除原始模型文件、解压新文件                    
-            FileUtil.DeleteDirectory(modelPath);
-            errMsg = ZipUtil.UnZipFile(zipFilePath, this.modelDir, password);
+
+            //先将压缩包解压到临时文件夹，防止解压失败时原模型文件被覆盖
+            tmpDir = Path.Combine(Global.TempDirectory, modelName);
+            FileUtil.DeleteDirectory(Global.TempDirectory);
+            FileUtil.CreateDirectory(tmpDir);
+            errMsg = ZipUtil.UnZipFile(zipFilePath, tmpDir, password);
             if (!string.IsNullOrEmpty(errMsg))
             {
                 HelpUtil.ShowMessageBox(errMsg);
                 return !hasUnZip;
             }
 
+            // 删除原始模型文件、拷贝新文件                    
+            FileUtil.DeleteDirectory(this.modelDir);
+            if(!FileUtil.CopyDirectory(tmpDir, this.modelDir, true))
+            {
+                HelpUtil.ShowMessageBox("模型导入失败");
+                FileUtil.DeleteDirectory(this.modelDir);
+                return !hasUnZip;
+            }
+            FileUtil.DeleteDirectory(tmpDir);
+
             return hasUnZip;
         }
 
-        public bool IsSameMindMapTitle(string modelTitle)
+        public bool IsSameModelTitle(string modelTitle, bool isC2Model)
         {
-            return (Global.GetMindMapModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));
+            if (isC2Model)
+                return (Global.GetMindMapModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));
+            else
+                return (Global.GetMyModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));
         }
         #endregion
 
@@ -254,31 +257,31 @@ namespace C2.Business.Model
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 string fullFilePath = fd.FileName;
-                UnZipIaoFile(fullFilePath, userName, true);
+                if (!UnZipIaoFile(fullFilePath, userName))
+                    return;
+
+                HelpUtil.ShowMessageBox("模型导入成功");
+                // 将导入模型添加到左侧模型面板
+                MyModelControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
+
             }
 
         }
-        public void UnZipIaoFile(string fullFilePath, string userName, bool judge)
+        public bool UnZipIaoFile(string fullFilePath, string userName)
         {
             if (!File.Exists(fullFilePath))
-                return;
-            if (HasUnZipIaoFile(fullFilePath, userName))
-            {
-                // 脚本、数据源存储路径
-                string dirs = Path.Combine(this.modelDir, "_datas");
-                // 修改XML文件中数据源路径
-                RenameFile(dirs, this.modelFilePath);
-                if (judge == true)
-                {
-                    // 将导入模型添加到左侧模型面板
-                    MyModelControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
-                    HelpUtil.ShowMessageBox("模型导入成功");
-                }
+                return false;
+            if (!HasUnZipFile(fullFilePath, userName, "", false))
+                return false;
 
-            }
+            // 脚本、数据源存储路径
+            string dirs = Path.Combine(this.modelDir, "_datas");
+            // 修改XML文件中数据源路径
+            RenameFile(dirs, this.modelFilePath);
+            
+            return true;
         }
-        public string modelFilePath;
-        public string modelDir;
+
         public bool HasUnZipIaoFile(string zipFilePath, string userName)
         {
             /*
@@ -328,7 +331,7 @@ namespace C2.Business.Model
 
             Directory.CreateDirectory(this.modelDir);
             // 是否包含同名模型文档
-            if (!IsSameModelTitle(modelName))
+            if (!IsSameModelTitle(modelName, false))
             {
                 //解压文件   
                 errMsg = ZipUtil.UnZipFile(zipFilePath, this.modelDir);
@@ -489,10 +492,5 @@ namespace C2.Business.Model
             // 菜单项可以打开
             Global.GetMyModelControl().EnableClosedDocumentMenu(modelTitle);
         }
-        public bool IsSameModelTitle(string modelTitle)
-        {
-            return (Global.GetMyModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));
-        }
-
     }
 }
