@@ -55,7 +55,7 @@ namespace C2.Controls
         public int ItemHeight
         {
             get { return _ItemHeight; }
-            set 
+            set
             {
                 if (_ItemHeight != value)
                 {
@@ -588,7 +588,7 @@ namespace C2.Controls
                     }
                     //}
                 }
-                else if(MultiSelect)
+                else if (MultiSelect)
                 {
                     MouseDownForSelect = true;
                 }
@@ -641,7 +641,7 @@ namespace C2.Controls
 
             //
             bool globalHaveIcon = ListItems.Exists(li => li.Icon != null);
-            foreach(var item in ListItems)
+            foreach (var item in ListItems)
             {
                 var rectItem = item.Bounds;
                 if (rectItem.Bottom < viewPort.Y)
@@ -652,8 +652,15 @@ namespace C2.Controls
                 bool selected = SelectedIndices != null && SelectedIndices._Contains(item.Index);
                 bool hover = HoverItem != null && HoverItem == item;
 
-                DrawItem(e, item, rectItem, selected, hover, globalHaveIcon);
-                rectItem.Y += ItemHeight;
+                try
+                {
+                    DrawItem(e, item, rectItem, selected, hover, globalHaveIcon);
+                    rectItem.Y += ItemHeight;
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
 
             //
