@@ -1,5 +1,6 @@
 ﻿using C2.Utils;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace C2.IAOLab.Plugins
@@ -9,6 +10,7 @@ namespace C2.IAOLab.Plugins
         String GetPluginName();
         String GetPluginDescription();
         String GetPluginVersion();
+        Image GetPluginImage(); 
         // DialogResult ShowDialog();
         Form GetForm();
     }
@@ -30,7 +32,10 @@ namespace C2.IAOLab.Plugins
         {
             return "0.0.0.1";
         }
-
+        public Image GetPluginImage()
+        {
+            return null;
+        }
         /* public DialogResult ShowDialog()
         {
             throw new NotImplementedException();
@@ -57,7 +62,10 @@ namespace C2.IAOLab.Plugins
         {
             return "2.3.0";
         }
-
+        public Image GetPluginImage()
+        {
+            return null;
+        }
         /* public DialogResult ShowDialog()
           {
               throw new NotImplementedException();
@@ -84,7 +92,10 @@ namespace C2.IAOLab.Plugins
         {
             return "1.0.9";
         }
-
+        public Image GetPluginImage()
+        {
+            return null;
+        }
         /* public DialogResult ShowDialog()
         {
             throw new NotImplementedException();
@@ -111,11 +122,14 @@ namespace C2.IAOLab.Plugins
         {
             return "2.4.11";
         }
-
-       /* public DialogResult ShowDialog()
+        public Image GetPluginImage()
         {
-            throw new NotImplementedException();
-        }*/
+            return null;
+        }
+        /* public DialogResult ShowDialog()
+         {
+             throw new NotImplementedException();
+         }*/
         public Form GetForm()
         { 
             throw new NotImplementedException();
@@ -137,7 +151,10 @@ namespace C2.IAOLab.Plugins
         {
             return "1.1.3";
         }
-
+        public Image GetPluginImage()
+        {
+            return null;
+        }
         /* public DialogResult ShowDialog()
         {
             throw new NotImplementedException();
@@ -163,7 +180,10 @@ namespace C2.IAOLab.Plugins
         {
             return "0.0.1";
         }
-
+        public Image GetPluginImage()
+        {
+            return null;
+        }
         /* public DialogResult ShowDialog()
          {
              throw new NotImplementedException();
@@ -190,7 +210,10 @@ namespace C2.IAOLab.Plugins
         {
             return "0.3.2";
         }
-
+        public Image GetPluginImage()
+        {
+            return null;
+        }
         /* public DialogResult ShowDialog()
          {
              throw new NotImplementedException();
