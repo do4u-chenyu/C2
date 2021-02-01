@@ -822,7 +822,7 @@
     <Compile Include="IAOLab\BaseStation\BaseStation.cs" />
     <Compile Include="IAOLab\Plugins\IPlugin.cs" />
     <Compile Include="IAOLab\Plugins\PluginsDownloader.cs" />
-    <Compile Include="IAOLab\Plugins\PluginsManger.cs" />
+    <Compile Include="IAOLab\Plugins\PluginsManager.cs" />
     <Compile Include="IAOLab\Transform\TimeAndIPTransform.cs" />
     <Compile Include="IAOLab\Transform\GPSTransform.cs" />
     <Compile Include="IAOLab\WifiMac\WifiMac.cs" />
