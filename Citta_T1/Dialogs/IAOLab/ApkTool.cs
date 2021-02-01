@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using C2.Controls;
 using C2.Core;
@@ -61,7 +62,6 @@ namespace C2.Dialogs.IAOLab
             FileUtil.DeleteDirectory(tmpPath);
             FileUtil.CreateDirectory(tmpPath);
             int j = 0;
-            
             DirectoryInfo dir = new DirectoryInfo(inputPathTextBox.Text);
             //检索表示当前目录的文件和子目录
             FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
@@ -83,6 +83,8 @@ namespace C2.Dialogs.IAOLab
                             try
                             {
                                 this.dataGridView1.Rows[index].Cells[0].Value = GetImage(apkInfoList[0]);
+                                if (image != null)
+                                    image.Dispose();
                             }
                             catch 
                             {
