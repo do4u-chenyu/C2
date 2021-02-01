@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Windows.Forms;
-using C2.Utils;
 
 namespace C2.IAOLab.ApkToolStart
 {
@@ -24,14 +23,26 @@ namespace C2.IAOLab.ApkToolStart
  
         public List<string> ExtractApk(string apkPath, string fileName, string jdkPath)
         {
-
-            RunLinuxCommandApkTool(GetCommand(apkPath, fileName, jdkPath));
-            return GetApkInfo(apkPath, fileName);
+            int times = 1;
+            string fileNameWithOutApk = fileName.Replace(".apk", String.Empty);
+            string relPath = GetFilePath(fileNameWithOutApk, times);
+            RunLinuxCommandApkTool(GetCommand(apkPath, relPath, jdkPath));
+            return GetApkInfo(apkPath, fileName, relPath);
         }
-        private List<string> GetApkInfo(string apkPath, string fileName)
+        private string GetFilePath(string fileNameWithOutApk, int times )
+        {
+            if (Directory.Exists(Path.Combine(Path.GetTempPath(), "ApkTool", fileNameWithOutApk)) && times < 50)
+            {
+                fileNameWithOutApk = fileNameWithOutApk + "(" + times + ")";
+                times ++;
+                fileNameWithOutApk = GetFilePath(fileNameWithOutApk, times);
+            }
+            return fileNameWithOutApk;
+        }
+        private List<string> GetApkInfo(string apkPath, string fileName, string relPath)
         {
             string apkName = fileName.Replace(".apk", String.Empty);
-            string apkToolPath = Path.Combine(Path.GetTempPath(), "ApkTool", apkName);
+            string apkToolPath = Path.Combine(Path.GetTempPath(), "ApkTool", relPath);
             if (Directory.Exists(apkToolPath))
             {
                 return new List<string>() { GetIcon(apkToolPath),
@@ -66,7 +77,7 @@ namespace C2.IAOLab.ApkToolStart
                                             "\""+jdkPath+ "\"",
                                             "\"" + apkToolPath + "\"",
                                             "\"" + apkPath + "\"",
-                                            "\"" + Path.Combine(Path.GetTempPath(),"ApkTool", fileName.Replace(".apk", String.Empty)) + "\"");
+                                            "\"" + Path.Combine(Path.GetTempPath(),"ApkTool", fileName) + "\"");
             cmdList.Add(cmdApk);
             return cmdList;
         }
@@ -129,7 +140,6 @@ namespace C2.IAOLab.ApkToolStart
             try
             {
                 xDoc.Load(filePath);
-                
                 XmlNode rootNode = xDoc.SelectSingleNode("manifest");
                 return rootNode.Attributes["package"].Value;
             }

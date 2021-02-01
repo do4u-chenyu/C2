@@ -5,24 +5,23 @@ using System.Windows.Forms;
 
 namespace C2.IAOLab.Plugins
 {
-    class PluginsManger
+    class PluginsManager
     {
-        private static PluginsManger pluginsManger;
+        private static PluginsManager pluginsManager;
 
         public List<IPlugin> Plugins { get; }
 
-        public static PluginsManger Instance
+        public static PluginsManager Instance
         {
             get {
-                if (pluginsManger == null)
-                    pluginsManger = new PluginsManger();
-                return pluginsManger;
+                if (pluginsManager == null)
+                    pluginsManager = new PluginsManager();
+                return pluginsManager;
             }
         }
 
 
-
-        private PluginsManger()
+        private PluginsManager()
         {
             Plugins = new List<IPlugin>
             {

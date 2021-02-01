@@ -84,7 +84,15 @@ namespace C2.Dialogs.C2OperatorViews
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return;
                 }
-                dao.FillDGVWithTbContent(gridOutput, SelectTable, OpUtil.PreviewMaxNum);
+                try
+                {
+                    dao.FillDGVWithTbContent(gridOutput, SelectTable, OpUtil.PreviewMaxNum);
+                }
+                catch(Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(ex.Message);
+                }
+               
             }
                 
         }
