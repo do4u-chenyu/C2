@@ -306,7 +306,7 @@ namespace C2
             string IAOLabPlugins = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultIAOLab);
             foreach(string name in IAOLabPlugins.Split(','))
             {
-                if (IAOLabArr.Exists(me => me == name.Trim()))
+                if (IAOLabArr._Contains(name.Trim()))
                     this.iaoModelControl.GenIAOButton(name.Trim());
             }
         }
