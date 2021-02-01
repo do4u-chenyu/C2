@@ -147,6 +147,7 @@ namespace C2.Core
         public const string IAOLab = "APK, BaseStation, Wifi, Card, Tude, Ip ";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
         public const int ChartNum = 3;
+        public static string DLLPluginPath = Path.Combine(Application.StartupPath, "plugins");
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
         public static Dictionary<string, MindMapLayoutType> ChartOptions = new Dictionary<string, MindMapLayoutType>
         {

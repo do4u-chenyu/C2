@@ -21,6 +21,7 @@ using C2.Model;
 using C2.Model.Widgets;
 using C2.ChartPageView;
 using C2.Database;
+using C2.IAOLab.Plugins;
 #endregion
 
 namespace C2
@@ -308,8 +309,14 @@ namespace C2
             foreach(string name in IAOLabPlugins.Split(','))
             {
                 if (IAOLabArr._Contains(name.Trim()))
+                {
                     this.iaoModelControl.GenIAOButton(name.Trim());
+                    PluginsManager.Instance.AddPlugin(name.Trim());
+                }
+                   
             }
+            // 动态插件加载
+            PluginsManager.Instance.Refresh();
         }
 
         private void ShowLeftFold()

@@ -15,8 +15,9 @@ namespace C2.Controls.Left
         private coordinateConversion baseForm2;
         private DialogResult dllDialogResult;
         private Form dllForm;
+        private string description;
         public string ControlName { set => this.txtButton.Text = value; }
-        public string Description { set; get; }
+        public string Description { set=> this.description = value; }
         public Image LeftPicture { set => this.leftPictureBox.Image = value; }
         public Form DLLForm { set => this.dllForm = value; }
 
@@ -24,7 +25,8 @@ namespace C2.Controls.Left
   
         {
             InitializeComponent();
-            toolTip1.SetToolTip(this.rightPictureBox, Description);
+            this.ContextMenuStrip = contextMenuStrip1;
+            toolTip1.SetToolTip(this.rightPictureBox, this.description);
         }
         public IAOButton(string ffp)
         {

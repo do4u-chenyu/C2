@@ -26,19 +26,32 @@ namespace C2.IAOLab.Plugins
 
         private PluginsManager()
         {
-            Plugins = new List<IPlugin>
-            {
+            Plugins = new List<IPlugin>();
+            /*{
                 new ApkToolPlugin(),
                 new BaseStationPlugin(),
                 new WifiLocationPlugin(),
                 new BankPlugin(),
                 new GPSTransformPlugin(),
                 new TimeAndIPTransformPlugin()
-            };
+            };*/
             PluginsDownloader.Instance.DownloadEvent += Refresh;
 
         }
-
+        public Dictionary<string, IPlugin> defaultPlugin = new Dictionary<string, IPlugin>()
+        { 
+            {"APK", new ApkToolPlugin() },
+            {"BaseStation", new BaseStationPlugin()},
+            {"Wifi",new WifiLocationPlugin()},
+            {"Card", new BankPlugin()},
+            {"Tude",new GPSTransformPlugin()},
+            {"Ip",  new TimeAndIPTransformPlugin()}
+        };
+        public void AddPlugin(string type)
+        {
+            if (defaultPlugin.Keys._Contains(type))
+                this.Plugins.Add(defaultPlugin[type]);
+        }
         public IPlugin FindPlugin(string name)
         {
             int index = Plugins.FindIndex(e => e.GetPluginName() == name);
@@ -47,8 +60,7 @@ namespace C2.IAOLab.Plugins
 
         public void Refresh()
         {
-            string pluginsDir = Path.Combine(Application.StartupPath, "plugins");
-            foreach (string dll in FileUtil.TryListFiles(pluginsDir, "*.dll"))
+            foreach (string dll in FileUtil.TryListFiles(Global.DLLPluginPath, "*.dll"))
                 TryLoadOne(dll);
         }
 
@@ -60,10 +72,20 @@ namespace C2.IAOLab.Plugins
             dllPlugin = GetPlugin(dll);
             if (dllPlugin == DLLPlugin.Empty)
                 return;
-            if (!Plugins.FindAll(x => x.GetPluginName() == dllPlugin.GetPluginName()).IsEmpty())
-                return;
-            this.Plugins.Add(dllPlugin);
-            Global.GetIAOLabControl().GenIAOButton(dllPlugin);
+            try
+            {
+                if (!Plugins.FindAll(x => x.GetPluginName() == dllPlugin.GetPluginName()).IsEmpty())
+                    return;
+                Global.GetIAOLabControl().GenIAOButton(dllPlugin);
+                this.Plugins.Add(dllPlugin);
+            }
+            catch(Exception ex)
+            {
+                HelpUtil.ShowMessageBox(ex.Message);
+            }
+           
+           
+           
         }
         private DLLPlugin GetPlugin(string dll)
         {
