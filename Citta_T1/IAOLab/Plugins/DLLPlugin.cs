@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace C2.IAOLab.Plugins
 {
-    class DLLPlugin : IPlugin
+    public class DLLPlugin : IPlugin
     {
         public string GetPluginDescription()
         {
@@ -20,6 +21,10 @@ namespace C2.IAOLab.Plugins
         }
 
         public string GetPluginVersion()
+        {
+            throw new NotImplementedException();
+        }
+        public Image GetPluginImage()
         {
             throw new NotImplementedException();
         }

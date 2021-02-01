@@ -55,5 +55,15 @@ namespace C2.IAOLab.Plugins
                 return;
             // TODO 继续施工中
         }
+        #region 持久化
+        private void Load()
+        { 
+        }
+        private void Save()
+        { 
+
+        }
+        #endregion
+
     }
 }

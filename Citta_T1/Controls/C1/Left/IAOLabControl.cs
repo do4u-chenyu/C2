@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using C2.IAOLab.Plugins;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace C2.Controls.Left
@@ -19,6 +20,13 @@ namespace C2.Controls.Left
         public void GenIAOButton(string modelName)
         {
             IAOButton ib = new IAOButton(modelName);
+            LayoutModelButtonLocation(ib); // 递增       
+
+            this.IAOLabPanel.Controls.Add(ib);
+        }
+        public void GenIAOButton(DLLPlugin dll)
+        {
+            IAOButton ib = new IAOButton(dll);
             LayoutModelButtonLocation(ib); // 递增       
 
             this.IAOLabPanel.Controls.Add(ib);
