@@ -167,6 +167,7 @@ namespace C2
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetWorkSpacePanel(this.workSpacePanel);
             Global.SetMindMapModelControl(this.mindMapModelControl);
+            Global.SetIAOLabControl (this.iaoModelControl);
         }
         void InitializeMdiClient()
         {

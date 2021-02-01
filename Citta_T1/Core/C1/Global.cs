@@ -26,7 +26,7 @@ namespace C2.Core
         private static Panel leftToolBoxPanel;
         private static TaskBar taskBar;
         private static MyMindMapControl mindMapModelControl;
-
+        private static IAOLabControl iaoLabControl;
 
 
 
@@ -36,6 +36,7 @@ namespace C2.Core
         public static Panel GetLeftToolBoxPanel() { return leftToolBoxPanel; }
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
+        public static IAOLabControl GetIAOLabControl() { return iaoLabControl; }
         public static BottomLogControl GetLogView() { return logView; }
         public static Control GetBottomViewPanel() { return bottomViewPanle; }
         public static Control GetWorkSpacePanel() { return workSpacePanel; }
@@ -126,6 +127,7 @@ namespace C2.Core
         public static void SetLeftToolBoxPanel(Panel ltbp) { leftToolBoxPanel = ltbp; }
         public static void SetDataSourceControl(DataSourceControl dsc) { dataSourceControl = dsc; }
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
+        public static void SetIAOLabControl(IAOLabControl ilc) { iaoLabControl = ilc; }
         public static void SetLogView(BottomLogControl lv) { logView = lv; }
         public static void SetBottomViewPanel(Panel bv) { bottomViewPanle = bv; }
         public static void SetWorkSpacePanel(Panel ws) { workSpacePanel = ws; }

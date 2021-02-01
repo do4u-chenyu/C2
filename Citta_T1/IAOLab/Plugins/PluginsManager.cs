@@ -1,6 +1,9 @@
-﻿using C2.Utils;
+﻿using C2.Core;
+using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace C2.IAOLab.Plugins
@@ -51,19 +54,32 @@ namespace C2.IAOLab.Plugins
 
         private void TryLoadOne(string dll)
         {
+            DLLPlugin dllPlugin;
             if (!File.Exists(dll))
                 return;
-            // TODO 继续施工中
+            dllPlugin = GetPlugin(dll);
+            if (dllPlugin == DLLPlugin.Empty)
+                return;
+            if (!Plugins.FindAll(x => x.GetPluginName() == dllPlugin.GetPluginName()).IsEmpty())
+                return;
+            this.Plugins.Add(dllPlugin);
+            Global.GetIAOLabControl().GenIAOButton(dllPlugin);
         }
-        #region 持久化
-        private void Load()
-        { 
+        private DLLPlugin GetPlugin(string dll)
+        {
+            var assembly = Assembly.LoadFrom(dll);
+            Type[] clazzs = assembly.GetTypes();
+            foreach (Type type in clazzs)
+            {
+                // dll需只有一个类接口IPlugin
+                if (type.GetInterface("IPlugin") == null)
+                   continue;
+                var instance = assembly.CreateInstance(type.FullName);
+                return new DLLPlugin(type, instance);
+            }
+            return DLLPlugin.Empty;
         }
-        private void Save()
-        { 
 
-        }
-        #endregion
 
     }
 }

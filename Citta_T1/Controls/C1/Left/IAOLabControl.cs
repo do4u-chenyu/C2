@@ -26,7 +26,13 @@ namespace C2.Controls.Left
         }
         public void GenIAOButton(DLLPlugin dll)
         {
-            IAOButton ib = new IAOButton(dll);
+            IAOButton ib = new IAOButton()
+            {
+                ControlName = dll.GetPluginName(),
+                Description = dll.GetPluginDescription(),
+                LeftPicture = dll.GetPluginImage(),
+                DLLForm = dll.GetForm()
+            };
             LayoutModelButtonLocation(ib); // 递增       
 
             this.IAOLabPanel.Controls.Add(ib);

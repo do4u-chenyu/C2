@@ -3,6 +3,7 @@ using C2.Globalization;
 using C2.IAOLab.Plugins;
 using C2.Utils;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 namespace C2.Controls.Left
@@ -13,16 +14,17 @@ namespace C2.Controls.Left
         private ApkTool baseForm1;
         private coordinateConversion baseForm2;
         private DialogResult dllDialogResult;
-        private DLLPlugin dll;
+        private Form dllForm;
+        public string ControlName { set => this.txtButton.Text = value; }
+        public string Description { set; get; }
+        public Image LeftPicture { set => this.leftPictureBox.Image = value; }
+        public Form DLLForm { set => this.dllForm = value; }
 
-        public IAOButton(DLLPlugin dll)
+        public IAOButton()
   
         {
             InitializeComponent();
-            this.dll = dll;
-            this.txtButton.Text = dll.GetPluginName();
-            this.leftPictureBox.Image = dll.GetPluginImage(); ;
-            toolTip1.SetToolTip(this.rightPictureBox, dll.GetPluginDescription());
+            toolTip1.SetToolTip(this.rightPictureBox, Description);
         }
         public IAOButton(string ffp)
         {
@@ -137,9 +139,9 @@ namespace C2.Controls.Left
         }
         private void OpenToolForm()
         {
-            if (dll != null)
+            if (dllForm != null)
             {
-                dll.ShowDialog();
+                dllForm.ShowDialog();
                 return;
             }
             if (baseForm0 != null)

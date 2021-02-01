@@ -9,7 +9,8 @@ namespace C2.IAOLab.Plugins
         String GetPluginName();
         String GetPluginDescription();
         String GetPluginVersion();
-        DialogResult ShowDialog();
+        // DialogResult ShowDialog();
+        Form GetForm();
     }
 
     #region 本地插件
@@ -30,9 +31,13 @@ namespace C2.IAOLab.Plugins
             return "0.0.0.1";
         }
 
-        public DialogResult ShowDialog()
+        /* public DialogResult ShowDialog()
         {
-            return DialogResult.OK;
+            throw new NotImplementedException();
+        }*/
+        public Form GetForm()
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -53,7 +58,11 @@ namespace C2.IAOLab.Plugins
             return "2.3.0";
         }
 
-        public DialogResult ShowDialog()
+        /* public DialogResult ShowDialog()
+          {
+              throw new NotImplementedException();
+          }*/
+        public Form GetForm()
         {
             throw new NotImplementedException();
         }
@@ -76,7 +85,11 @@ namespace C2.IAOLab.Plugins
             return "1.0.9";
         }
 
-        public DialogResult ShowDialog()
+        /* public DialogResult ShowDialog()
+        {
+            throw new NotImplementedException();
+        }*/
+        public Form GetForm()
         {
             throw new NotImplementedException();
         }
@@ -99,10 +112,14 @@ namespace C2.IAOLab.Plugins
             return "2.4.11";
         }
 
-        public DialogResult ShowDialog()
+       /* public DialogResult ShowDialog()
         {
             throw new NotImplementedException();
-        }
+        }*/
+        public Form GetForm()
+        { 
+            throw new NotImplementedException();
+        } 
     }
 
     class GPSTransformPlugin : IPlugin
@@ -121,7 +138,11 @@ namespace C2.IAOLab.Plugins
             return "1.1.3";
         }
 
-        public DialogResult ShowDialog()
+        /* public DialogResult ShowDialog()
+        {
+            throw new NotImplementedException();
+        }*/
+        public Form GetForm()
         {
             throw new NotImplementedException();
         }
@@ -143,7 +164,11 @@ namespace C2.IAOLab.Plugins
             return "0.0.1";
         }
 
-        public DialogResult ShowDialog()
+        /* public DialogResult ShowDialog()
+         {
+             throw new NotImplementedException();
+         }*/
+        public Form GetForm()
         {
             throw new NotImplementedException();
         }
@@ -166,7 +191,11 @@ namespace C2.IAOLab.Plugins
             return "0.3.2";
         }
 
-        public DialogResult ShowDialog()
+        /* public DialogResult ShowDialog()
+         {
+             throw new NotImplementedException();
+         }*/
+        public Form GetForm()
         {
             throw new NotImplementedException();
         }
