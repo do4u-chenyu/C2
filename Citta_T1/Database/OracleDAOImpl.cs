@@ -22,21 +22,21 @@ namespace C2.Database
         {
             get
             {
-                // TODO DK 换位置
-                if (!String.IsNullOrEmpty(Service)) // Is it a service name connection?
-                    return String.Format(
-                      "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SERVICE_NAME={2})));User Id={3};Password={4};Connection Lifetime=60;Connection Timeout=8",
-                      Host,
-                      Port,
-                      Service,
-                      User,
-                      Pass);
-                else // Is it a SID connection?
+                if (String.IsNullOrEmpty(Service)) // Is it a service name connection?
                     return String.Format(
                       "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})));User Id={3};Password={4};Connection Lifetime=60;Connection Timeout=8",
                       Host,
                       Port,
                       Sid,
+                      User,
+                      Pass);
+
+                else // Is it a SID connection?
+                    return String.Format(
+                      "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SERVICE_NAME={2})));User Id={3};Password={4};Connection Lifetime=60;Connection Timeout=8",
+                      Host,
+                      Port,
+                      Service,
                       User,
                       Pass);
             }
@@ -55,7 +55,7 @@ namespace C2.Database
                 return false;
             }
         }
-        public override string Query(string sql, bool header=true) // TODO Dk
+        public override string Query(string sql, bool header = true)
         {
             StringBuilder sb = new StringBuilder(1024 * 16); // TODO
             try
@@ -102,12 +102,12 @@ namespace C2.Database
         }
         public override string GetColNameBySchemaSQL(string schema)
         {
-            return String.Format(this.getColNameBySchemaSQL, 
+            return String.Format(this.getColNameBySchemaSQL,
                         String.Format(@"(select table_name from all_tables where owner='{0}') order by a.table_name", schema)
                    );
         }
         public override string GetColNameByTablesSQL(List<Table> tables)
-        { 
+        {
             // TODO DK
             String[] tableNames = new String[tables.Count];
             if (tableNames.Length != 0)
@@ -130,7 +130,7 @@ namespace C2.Database
         {
             return this.GetColNameByTablesSQL(new List<Table>() { table });
         }
-       
+
         protected override QueryResult ExecuteSQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
         {
             /*
@@ -159,7 +159,7 @@ namespace C2.Database
                                 sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
                             sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
 
-                         }
+                        }
 
                         while (rdr.Read() && returnNum < maxNum)
                         {
