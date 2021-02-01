@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Windows.Forms;
-using C2.Utils;
 
 namespace C2.IAOLab.ApkToolStart
 {
@@ -129,7 +128,6 @@ namespace C2.IAOLab.ApkToolStart
             try
             {
                 xDoc.Load(filePath);
-                
                 XmlNode rootNode = xDoc.SelectSingleNode("manifest");
                 return rootNode.Attributes["package"].Value;
             }
