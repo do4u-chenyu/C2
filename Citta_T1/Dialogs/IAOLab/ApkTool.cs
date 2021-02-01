@@ -56,7 +56,7 @@ namespace C2.Dialogs.IAOLab
             textBox1.Text = "正在清除历史数据";
             this.dataGridView1.Rows.Clear();
             apkInfoListForEXL = new List<List<string>>();
-            if(image != null)
+            if(!string.IsNullOrEmpty(image.ToString()))
                 image.Dispose();
             string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
             FileUtil.DeleteDirectory(tmpPath);
@@ -282,7 +282,7 @@ namespace C2.Dialogs.IAOLab
         {
             textBox1.Text = "正在清除临时文件";
             this.dataGridView1.Rows.Clear();
-            if (image != null)
+            if (!string.IsNullOrEmpty(image.ToString()))
                 image.Dispose();
             string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
             FileUtil.DeleteDirectory(tmpPath);
