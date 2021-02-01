@@ -83,13 +83,12 @@ namespace C2.Dialogs.IAOLab
                             try
                             {
                                 this.dataGridView1.Rows[index].Cells[0].Value = GetImage(apkInfoList[0]);
-                                if (image != null)
-                                    image.Dispose();
+                                
                             }
                             catch 
                             {
                                 this.dataGridView1.Rows[index].Cells[0].Value = GetImage(Path.Combine(Application.StartupPath, @"Citta_T1\Resources\Images", "close.png"));
-                                
+                               
                             }
                             for (int i = 1; i < this.dataGridView1.Columns.Count; i++)
                             {
@@ -281,6 +280,7 @@ namespace C2.Dialogs.IAOLab
         }
         private void Clear()
         {
+            textBox1.Text = "正在清除临时文件";
             this.dataGridView1.Rows.Clear();
             if (image != null)
                 image.Dispose();
