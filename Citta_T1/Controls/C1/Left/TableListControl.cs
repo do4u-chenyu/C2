@@ -161,10 +161,17 @@ namespace C2.Controls
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return;
                 }
-                dao.FillDGVWithTbSchema(previewTableSchema.DataGridView, this.SelectedTableItem.DataTable);
-
-                previewTableSchema.Focus();
-                previewTableSchema.Show();
+                try
+                {
+                    dao.FillDGVWithTbSchema(previewTableSchema.DataGridView, this.SelectedTableItem.DataTable);
+                    previewTableSchema.Focus();
+                    previewTableSchema.Show();
+                }
+                catch (Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(ex.Message);
+                }
+               
             }
                 
         }

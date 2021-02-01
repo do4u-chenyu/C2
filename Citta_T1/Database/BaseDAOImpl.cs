@@ -130,7 +130,7 @@ namespace C2.Database
         }
         public void FillDGVWithTbSchema(DataGridView dataGridView, Table table)
         {
-            string schemaString = this.GetTableColumnNames(table);
+            string schemaString = this.Query(this.GetColNameByTableSQL(table));
             List<List<string>> schema = DbUtil.StringTo2DString(schemaString);
             FileUtil.FillTable(dataGridView, schema);
         }
