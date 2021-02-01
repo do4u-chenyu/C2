@@ -312,10 +312,7 @@ namespace C2.Controls.Left
         #region 外部表布局
         private void ReLayoutTableFrame(List<DatabaseItem> dbis)
         {
-            this.tableListControl1.SuspendLayout();
             this.tableListControl1.DatabaseItems = dbis;
-            this.tableListControl1.ResumeLayout(false);
-            this.tableListControl1.PerformLayout();
         }
         #endregion
 
@@ -387,11 +384,11 @@ namespace C2.Controls.Left
                 ReLayoutTableFrame(RelateDBIs);
                 return;
             }
-            ReLayoutTableFrame(RelateDBIs.FindAll(
-                t => 
-                    t.DataTable.Columns.Exists(c => c.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) || 
-                    t.DataTable.Name.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
-                );
+            var filteredItem = RelateDBIs.FindAll(
+                t =>
+                    t.DataTable.Columns.Exists(c => c.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    t.DataTable.Name.IndexOf(tableFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            ReLayoutTableFrame(filteredItem);
         }
         #endregion
 
@@ -404,7 +401,6 @@ namespace C2.Controls.Left
         private void ConnectDatabase(DatabaseItem dbi)
         {
             /* 
-             * TODO DK 优化代码
              * 1. 优化函数名称，首先这个名字取得不怎么好
              * [x]. 优化代码逻辑，一旦出现连接不上的问题依然会查两次数据库，等待时间很长，每次连接的时候最好测试一下连接
              */

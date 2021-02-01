@@ -9,6 +9,7 @@ namespace C2.Database
 {
     public class BaseDAOImpl : IDAO
     {
+        protected const int maxPreviewNum = 1000;
         #region 构造函数
 
         protected string Name, User, Pass, Host, Sid, Service, Port, Schema;
@@ -65,7 +66,7 @@ namespace C2.Database
         ///异常:
         ///<para>QueryFailureException</para>
         ///</summary>
-        public virtual string Query(string sql, bool header = true)
+        public virtual string Query(string sql, bool header = true, int returnNum = OpUtil.PreviewMaxNum)
         {
             throw new NotImplementedException();
         }
@@ -143,7 +144,7 @@ namespace C2.Database
 
         public void FillDGVWithSQL(DataGridView dataGridView, string sql)
         {
-            string contentString = this.Query(String.Format(this.LimitSQL(sql)));
+            string contentString = this.Query(sql);
             List<List<string>> tableCols = DbUtil.StringTo2DString(contentString);
             FileUtil.FillTable(dataGridView, tableCols);
         }

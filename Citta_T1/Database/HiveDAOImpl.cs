@@ -48,7 +48,6 @@ namespace C2.Database
         }
         protected override QueryResult ExecuteSQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
         {
-            // TODO DK 
             StringBuilder sb = new StringBuilder(1024 * 16); // TODO DK 单页够就行，太小了会copy数组浪费性能，需要选择合适的值
             QueryResult result;
             result.content = string.Empty;
@@ -118,7 +117,7 @@ namespace C2.Database
             return names.Length == 2 ? names[1] : name;
         }
 
-        public override string Query(string sql, bool header = true)
+        public override string Query(string sql, bool header = true, int returnNum = OpUtil.PreviewMaxNum)
         {
             StringBuilder sb = new StringBuilder(1024 * 16);
             try

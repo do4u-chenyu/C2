@@ -3,6 +3,7 @@ using C2.Utils;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace C2.Database
@@ -55,8 +56,9 @@ namespace C2.Database
                 return false;
             }
         }
-        public override string Query(string sql, bool header = true)
+        public override string Query(string sql, bool header = true, int returnNum = OpUtil.PreviewMaxNum)
         {
+            int totalReturnNum = 0;
             StringBuilder sb = new StringBuilder(1024 * 16); // TODO
             try
             {
@@ -66,22 +68,23 @@ namespace C2.Database
                     OracleCommand comm = new OracleCommand(sql, con);
                     using (OracleDataReader rdr = comm.ExecuteReader())  // rdr.Close()
                     {
+                        if (rdr.FieldCount == 0)
+                            return String.Empty;
                         if (header)
                         {
                             for (int i = 0; i < rdr.FieldCount - 1; i++)
                                 sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
                             sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
                         }
-                        while (rdr.Read())
+                        while (rdr.Read() && totalReturnNum < returnNum)
                         {
                             for (int i = 0; i < rdr.FieldCount - 1; i++)
                                 sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
                             sb.Append(rdr[rdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
+                            totalReturnNum += 1;
                         }
                     }
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -90,11 +93,6 @@ namespace C2.Database
             }
 
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
-        }
-        public override string LimitSQL(string sql)
-        {
-            // TODO DK 两个where
-            return String.Format("{0} where rownum <= {1}", sql, OpUtil.PreviewMaxNum);
         }
         public override string GetTablesSQL(string schema)
         {
@@ -108,15 +106,10 @@ namespace C2.Database
         }
         public override string GetColNameByTablesSQL(List<Table> tables)
         {
-            // TODO DK
-            String[] tableNames = new String[tables.Count];
-            if (tableNames.Length != 0)
-            {
-                for (int i = 0; i < tableNames.Length; i++)
-                    tableNames[i] = tables[i].Name;
-                return String.Format(this.getColNameByTablesSQL, String.Join("','", tableNames));
-            }
-            return String.Empty;
+            List<String> tableNames = new List<String>();
+            foreach (Table table in tables)
+                tableNames.Add(table.Name);
+            return String.Format(this.getColNameByTablesSQL, String.Join("','", tableNames));
         }
         public override string GetTableContentSQL(Table table, int maxNum)
         {
@@ -131,60 +124,52 @@ namespace C2.Database
             return this.GetColNameByTablesSQL(new List<Table>() { table });
         }
 
-        protected override QueryResult ExecuteSQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
+        public override string DefaultSchema()
         {
-            /*
-             * pageIndex start from 0.
-             */
-            QueryResult result;
-            StringBuilder sb = new StringBuilder(1024 * 16);
-            int returnNum = 0;
+            return String.IsNullOrEmpty(this.Schema) ? this.User.ToUpper() : this.Schema.ToUpper();
+        }
+
+        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
+        {
+            bool returnCode = true;
+            int totalReturnNum = 0;
+            StreamWriter sw = new StreamWriter(outPutPath, false);
             try
             {
                 using (OracleConnection con = new OracleConnection(this.ConnectionString))
                 {
                     con.Open();
-                    string sqlPage = String.Format(@"select * from 
-	                                                        (select rownum as rowno,tmp.* from ({0}) tmp where rownum<={1}) 
-                                                        t where t.rowno>{2}",
-                                        sqlText,
-                                        pageSize * (pageIndex + 1),
-                                        pageSize * (pageIndex));
-                    OracleCommand comm = new OracleCommand(sqlPage, con);
-                    using (OracleDataReader rdr = comm.ExecuteReader())  // rdr.Close()
+                    OracleCommand comm = new OracleCommand(sqlText, con);
+                    using (OracleDataReader rdr = comm.ExecuteReader())
                     {
-                        if (returnHeader)
+                        if (rdr.FieldCount == 0)
+                            return true;
+                        StringBuilder sb = new StringBuilder(1024);
+                        for (int i = 0; i < rdr.FieldCount; i++)
+                            sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
+                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));    // 去掉最后一列的列分隔符
+                        while (rdr.Read() && (maxReturnNum == -1 ? true : totalReturnNum < maxReturnNum))
                         {
-                            for (int i = 0; i < rdr.FieldCount - 1; i++)
-                                sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
-                            sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
-
-                        }
-
-                        while (rdr.Read() && returnNum < maxNum)
-                        {
-                            // TODO 去掉第一列
-                            for (int i = 0; i < rdr.FieldCount - 1; i++)
+                            sb = new StringBuilder(1024);
+                            for (int i = 0; i < rdr.FieldCount; i++)
                                 sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
-                            returnNum += 1;
+                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));
+                            totalReturnNum += 1;
                         }
+                        sw.Flush();
                     }
                 }
             }
             catch (Exception ex)
             {
-                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
+                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                returnCode = false;
             }
             finally
             {
-                result.content = sb.ToString();
-                result.returnNum = returnNum;
+                sw.Close();
             }
-            return result;
-        }
-        public override string DefaultSchema()
-        {
-            return String.IsNullOrEmpty(this.Schema) ? this.User.ToUpper() : this.Schema.ToUpper();
+            return returnCode;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace C2.Database
     public interface IDAO
     {
         bool TestConn();
-        string Query(string sql, bool header = true);
+        string Query(string sql, bool header, int returnNum);
         List<string> GetUsers();
         List<Table> GetTables(string schema);
         string GetTableContentString(Table table, int maxNum);

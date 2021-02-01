@@ -29,11 +29,12 @@ namespace C2.Controls
             get { return _DatabaseItems; }
             set
             {
-                if (value != null)
-                {
+                if (_DatabaseItems != value)
+                { 
                     _DatabaseItems = value;
                     OnDatabaseItemsChanged();
                 }
+
             }
         }
         public DatabaseItem SelectedTableItem
@@ -55,28 +56,33 @@ namespace C2.Controls
         }
         private void OnDatabaseItemsChanged()
         {
+            this.SuspendLayout();
             this.Items.Clear();
-
-            var dbis = (from g in DatabaseItems.ToArray()
-                        orderby g.DataTable.Name
-                        select g).ToArray();
-            if (!dbis.IsNullOrEmpty())
+            if (DatabaseItems != null && DatabaseItems.Count > 0)
             {
-                this.SuspendLayout();
-                foreach (var dbi in dbis)
-                {
-                    var tli = new TableListItem(dbi);
-                    tli.Text = FileUtil.RenameAndCenterPadding(dbi.DataTable.Name, 23, 15);
-                    tli.ToolTipText = dbi.DataTable.Name;
-                    tli.Image = Properties.Resources.Table;
-                    tli.Tag = dbi;
-                    this.Items.Add(tli);
-                }
+                var dbis = (from g in DatabaseItems.ToArray()
+                            orderby g.DataTable.Name
+                            select g).ToArray();
 
-                this.VerticalScroll.Value = 0;
-                this.ResumeLayout();
-                this.PerformLayout();
+                if (!dbis.IsNullOrEmpty())
+                {
+
+                    foreach (var dbi in dbis)
+                    {
+                        var tli = new TableListItem(dbi);
+                        tli.Text = FileUtil.RenameAndCenterPadding(dbi.DataTable.Name, 23, 15);
+                        tli.ToolTipText = dbi.DataTable.Name;
+                        tli.Image = Properties.Resources.Table;
+                        tli.Tag = dbi;
+                        this.Items.Add(tli);
+                    }
+                }
             }
+
+            this.VerticalScroll.Value = 0;
+            this.ResumeLayout();
+            this.PerformLayout();
+            this.Invalidate();
         }
 
         #region mouse event
@@ -84,14 +90,12 @@ namespace C2.Controls
         {
             base.OnMouseDown(e);
             var listItem = GetItemAt(e.X, e.Y);
-            if (listItem != null)
-            {
-                SelectedIndices = new int[] { listItem.Index };
-                SelectedTableItem = listItem.DatabaseItem;
-            }
+            if (listItem == null)
+                return;
+            SelectedIndices = new int[] { listItem.Index };
+            SelectedTableItem = listItem.DatabaseItem;
             if (e.Button == MouseButtons.Left && e.Clicks == 1 && SelectedTableItem != null)
             {
-                // 使用`DataObject`对象来传参数，更加自由
                 DataObject dragDropData = new DataObject();
                 dragDropData.SetData("Type", ElementType.DataSource);
                 dragDropData.SetData("DataType", SelectedTableItem.Type);   //本地数据还是外部数据
