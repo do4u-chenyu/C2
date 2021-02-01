@@ -57,7 +57,9 @@ namespace C2.Dialogs.IAOLab
             apkInfoListForEXL = new List<List<string>>();
             if(image != null)
                 image.Dispose();
-
+            string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
+            FileUtil.DeleteDirectory(tmpPath);
+            FileUtil.CreateDirectory(tmpPath);
             int j = 0;
             
             DirectoryInfo dir = new DirectoryInfo(inputPathTextBox.Text);
