@@ -21,7 +21,6 @@ namespace C2.IAOLab.Plugins
         }
 
 
-
         private PluginsManager()
         {
             Plugins = new List<IPlugin>
