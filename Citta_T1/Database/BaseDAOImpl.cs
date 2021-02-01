@@ -68,7 +68,7 @@ namespace C2.Database
         ///</summary>
         public virtual string Query(string sql, bool header = true, int returnNum = OpUtil.PreviewMaxNum)
         {
-            throw new NotImplementedException();
+           return String.Empty;
         }
         public virtual bool TestConn()
         {
@@ -131,13 +131,13 @@ namespace C2.Database
         }
         public void FillDGVWithTbSchema(DataGridView dataGridView, Table table)
         {
-            string schemaString = this.GetTableColumnNames(table);
+            string schemaString = this.Query(this.GetColNameByTableSQL(table));
             List<List<string>> schema = DbUtil.StringTo2DString(schemaString);
             FileUtil.FillTable(dataGridView, schema);
         }
         public void FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum)
         {
-            string contentString = this.GetTableContentString(table, maxNum);
+            string contentString = this.Query(this.GetTableContentSQL(table, maxNum));
             List<List<string>> tableCols = DbUtil.StringTo2DString(contentString);
             FileUtil.FillTable(dataGridView, tableCols);
         }
@@ -189,38 +189,38 @@ namespace C2.Database
         }
         public virtual string DefaultSchema()
         {
-            throw new NotImplementedException();
+           return String.Empty;
         }
 
         #endregion
         #region SQL
         public virtual string LimitSQL(string sql)
         {
-            throw new NotImplementedException();
+           return String.Empty;
         }
         public virtual string GetUserSQL()
         {
-            throw new NotImplementedException();
+           return String.Empty;
         }
         public virtual string GetTableContentSQL(Table table, int maxNum)
         {
-            throw new NotImplementedException();
+           return String.Empty;
         }
         public virtual string GetTablesSQL(string schema)
         {
-            throw new NotImplementedException();
+           return String.Empty;
         }
         public virtual string GetColNameBySchemaSQL(string schema)
         {
-            throw new NotImplementedException();
+           return String.Empty;
         }
         public virtual string GetColNameByTablesSQL(List<Table> tables)
         {
-            throw new NotImplementedException();
+           return String.Empty;
         }
         public virtual string GetColNameByTableSQL(Table table)
         {
-            throw new NotImplementedException();
+           return String.Empty;
         }
         #endregion
         #region 自定义异常

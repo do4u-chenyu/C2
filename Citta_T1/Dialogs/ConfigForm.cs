@@ -319,7 +319,7 @@ namespace C2.Dialogs
         #region 插件
         private void InitDefaultPlugins()
         {
-            foreach (IPlugin plugin in PluginsManger.Instance.Plugins)
+            foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
             {
                 this.installedDGV.Rows.Add(new Object[] { plugin.GetPluginName(), plugin.GetPluginVersion(), true });
                 this.installedDGV.Rows[this.installedDGV.Rows.Count - 1].ReadOnly = true;
@@ -329,7 +329,7 @@ namespace C2.Dialogs
         private void InstalledDGV_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             String pluginName = this.installedDGV.Rows[e.RowIndex].Cells[0].Value as String;
-            IPlugin pg = PluginsManger.Instance.FindPlugin(pluginName);
+            IPlugin pg = PluginsManager.Instance.FindPlugin(pluginName);
             this.installedTB.Text = pg.GetPluginDescription();
         }
     }

@@ -2,6 +2,7 @@
 using C2.IAOLab.BankTool;
 using C2.IAOLab.BaseStation;
 using C2.IAOLab.WifiMac;
+using C2.Utils;
 using System;
 using System.Text;
 using System.Threading;
@@ -72,7 +73,7 @@ namespace C2.Dialogs.IAOLab
         private void ShowResult(string input, string type, StringBuilder tmpResult)
         {
 
-            if (!string.IsNullOrEmpty(input) && progressBar1.Value < 1001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(" ", "")))
+            if (!string.IsNullOrEmpty(input) && progressBar1.Value < 1001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
             {
 
                     if (progressBar1.Value % 50 == 0)
@@ -106,7 +107,7 @@ namespace C2.Dialogs.IAOLab
             foreach(string i in arry)
             {
                 
-                if (!string.IsNullOrEmpty(i.Split('\t')[0].Replace(" ","")))
+                if (!string.IsNullOrEmpty(i.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
                     relLength++;
                
             }

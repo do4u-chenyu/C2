@@ -170,6 +170,12 @@
     <Compile Include="ChartControls\MindMap\MindMapView\MindMapView.Schedule.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\C1\Common\NoWheelComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Common\NoWheelComboBox.Designer.cs">
+      <DependentUpon>NoWheelComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\C1\Left\IAOButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -223,6 +229,7 @@
     <Compile Include="Database\DAOFactory.cs" />
     <Compile Include="Database\HiveDAOImpl.cs" />
     <Compile Include="Database\OracleDAOImpl.cs" />
+    <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
     <Compile Include="Utils\GenericSingleton.cs" />
     <Compile Include="Database\IDAO.cs" />
     <Compile Include="Database\PreviewDbDataForm.cs">
@@ -822,7 +829,7 @@
     <Compile Include="IAOLab\BaseStation\BaseStation.cs" />
     <Compile Include="IAOLab\Plugins\IPlugin.cs" />
     <Compile Include="IAOLab\Plugins\PluginsDownloader.cs" />
-    <Compile Include="IAOLab\Plugins\PluginsManger.cs" />
+    <Compile Include="IAOLab\Plugins\PluginsManager.cs" />
     <Compile Include="IAOLab\Transform\TimeAndIPTransform.cs" />
     <Compile Include="IAOLab\Transform\GPSTransform.cs" />
     <Compile Include="IAOLab\WifiMac\WifiMac.cs" />
