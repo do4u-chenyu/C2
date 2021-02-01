@@ -15,6 +15,10 @@ namespace C2.Database
         Dictionary<string, List<string>> GetColNameByTables(List<Table> tables);
         string GetTableColumnNames(Table table);
         void FillDGVWithTbSchema(DataGridView dataGridView, Table table);
+        ///<summary>
+        ///异常:
+        ///<para>QueryFailureException</para>
+        ///</summary>
         void FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum);
         ///<summary>
         ///异常:

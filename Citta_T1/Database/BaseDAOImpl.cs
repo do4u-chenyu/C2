@@ -136,7 +136,7 @@ namespace C2.Database
         }
         public void FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum)
         {
-            string contentString = this.GetTableContentString(table, maxNum);
+            string contentString = this.Query(this.GetTableContentSQL(table, maxNum));
             List<List<string>> tableCols = DbUtil.StringTo2DString(contentString);
             FileUtil.FillTable(dataGridView, tableCols);
         }

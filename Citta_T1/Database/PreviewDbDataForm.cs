@@ -46,8 +46,9 @@ namespace C2.Database
             {
                 dao.FillDGVWithTbContent(dataGridView, table, MaxNum);
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtil.ShowMessageBox(ex.Message);
                 return false;
             }
             return true;
@@ -60,7 +61,15 @@ namespace C2.Database
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
-            dao.FillDGVWithTbContent(this.dataGridView, databaseItem.DataTable, MaxNum);
+            try
+            {
+                dao.FillDGVWithTbContent(this.dataGridView, databaseItem.DataTable, MaxNum);
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox(ex.Message);
+            }
+          
         }
         private int GetIntFromTextBox()
         {
