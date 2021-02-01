@@ -32,6 +32,7 @@ namespace C2.IAOLab.Plugins
                 new GPSTransformPlugin(),
                 new TimeAndIPTransformPlugin()
             };
+            PluginsDownloader.Instance.DownloadEvent += Refresh;
 
         }
 
