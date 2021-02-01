@@ -7,16 +7,16 @@ namespace C2.IAOLab.Plugins
 {
     class PluginsManager
     {
-        private static PluginsManager pluginsManger;
+        private static PluginsManager pluginsManager;
 
         public List<IPlugin> Plugins { get; }
 
         public static PluginsManager Instance
         {
             get {
-                if (pluginsManger == null)
-                    pluginsManger = new PluginsManager();
-                return pluginsManger;
+                if (pluginsManager == null)
+                    pluginsManager = new PluginsManager();
+                return pluginsManager;
             }
         }
 
