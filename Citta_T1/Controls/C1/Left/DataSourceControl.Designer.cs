@@ -40,7 +40,7 @@ namespace C2.Controls.Left
             this.externalFrame = new System.Windows.Forms.Panel();
             this.tableFilterTextBox = new System.Windows.Forms.TextBox();
             this.tabelPanel = new System.Windows.Forms.Panel();
-            this.schemaComboBox = new System.Windows.Forms.ComboBox();
+            this.schemaComboBox = new C1.Common.NoWheelComboBox();
             this.linkPanel = new System.Windows.Forms.Panel();
             this.dataTableLabel = new System.Windows.Forms.Label();
             this.schemaLabel = new System.Windows.Forms.Label();
@@ -282,7 +282,7 @@ namespace C2.Controls.Left
         private System.Windows.Forms.Label schemaLabel;
         private System.Windows.Forms.Label linkLabel;
         private System.Windows.Forms.Panel linkPanel;
-        private System.Windows.Forms.ComboBox schemaComboBox;
+        private C1.Common.NoWheelComboBox schemaComboBox;
         private System.Windows.Forms.Panel tabelPanel;
         private System.Windows.Forms.TextBox tableFilterTextBox;
         private System.Windows.Forms.Label addLocalConnectLabel;

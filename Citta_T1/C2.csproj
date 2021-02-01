@@ -170,6 +170,12 @@
     <Compile Include="ChartControls\MindMap\MindMapView\MindMapView.Schedule.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\C1\Common\NoWheelComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Common\NoWheelComboBox.Designer.cs">
+      <DependentUpon>NoWheelComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\C1\Left\IAOButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
