@@ -13,13 +13,13 @@ using System.Windows.Forms;
 
 namespace C2.Dialogs.IAOLab
 {
-    public partial class coordinateConversion : BaseDialog
+    public partial class CoordinateConversion : BaseDialog
     {
         private string formType;
         public string FormType { get { return this.formType; } set { this.formType = value; } }
         public string Tab0Tip {  set { this.tip0.Text = value; } }
         public string Tib1Tip { set { this.tip1.Text = value; } }
-        public coordinateConversion()
+        public CoordinateConversion()
         {
             InitializeComponent();
             this.BackColor = Color.White;

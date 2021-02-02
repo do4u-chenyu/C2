@@ -142,7 +142,7 @@ namespace C2.Database
 
         public virtual bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1)
         {
-            return true;
+            return false;
         }
         public virtual string DefaultSchema()
         {
