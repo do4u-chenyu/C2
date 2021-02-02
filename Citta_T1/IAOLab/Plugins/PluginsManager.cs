@@ -11,7 +11,7 @@ namespace C2.IAOLab.Plugins
     class PluginsManager
     {
         private static PluginsManager pluginsManager;
-
+        private readonly static LogUtil log = LogUtil.GetInstance("PluginsManager");
         public Dictionary<string, IPlugin> plugins;
 
         public ICollection<IPlugin> Plugins 
@@ -43,9 +43,23 @@ namespace C2.IAOLab.Plugins
         public void Refresh()
         {
             foreach (string dll in FileUtil.TryListFiles(Global.DLLPluginPath, "*.dll"))
-                TryLoadOne(dll);
-        }
+            {
+                try
+                {
+                    TryLoadOne(dll);
+                }
+                catch (Exception ex)
+                {
+                    log.Error(dll + "插件加载失败:" + ex.Message);
+                }
 
+            }
+
+        }
+        /// <summary>
+        /// 异常:
+        /// <para>LoadPluginFailureException</para>
+        /// </summary>
         private void TryLoadOne(string ffp)
         {    
             DLLPlugin dll = LoadPlugin(ffp);
@@ -60,20 +74,34 @@ namespace C2.IAOLab.Plugins
 
             return;
         }
+        /// <summary>
+        /// 异常:
+        /// <para>LoadPluginFailureException</para>
+        /// </summary>
+
         private DLLPlugin LoadPlugin(string ffp)
         {
             if (!File.Exists(ffp))
                 return DLLPlugin.Empty;
 
-            var assembly = Assembly.LoadFrom(ffp);
-            Type[] types = assembly.GetTypes();
+            try 
+            {
+                var assembly = Assembly.LoadFrom(ffp);
+                Type[] types = assembly.GetTypes();
 
-            Type type = types.Find(t => t.GetInterface("IPlugin") != null);
-            if (type == null)
+                Type type = types.Find(t => t.GetInterface("IPlugin") != null);
+                if (type == null)
+                    return DLLPlugin.Empty;
+
+                object obj = assembly.CreateInstance(type.FullName);
+                return Check(type, obj) ? new DLLPlugin(type, obj) : DLLPlugin.Empty;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
                 return DLLPlugin.Empty;
-
-            object obj = assembly.CreateInstance(type.FullName);
-            return Check(type, obj) ? new DLLPlugin(type, obj) : DLLPlugin.Empty;
+            }
+          
         }
 
         private bool Check(Type type, object dll)
