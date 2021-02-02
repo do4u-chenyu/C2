@@ -221,7 +221,6 @@ namespace C2.Controls
             if (toolTip1 == null)
             {
                 toolTip1 = new ToolTip();
-                toolTip1.InitialDelay = 300;
             }
 
             toolTip1.SetToolTip(this, text);
