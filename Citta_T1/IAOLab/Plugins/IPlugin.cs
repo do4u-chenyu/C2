@@ -11,7 +11,8 @@ namespace C2.IAOLab.Plugins
         String GetPluginDescription();
         String GetPluginVersion();
         Image GetPluginImage(); 
-        // DialogResult ShowDialog();
+        
+        DialogResult ShowFormDialog();
         Form GetForm();
     }
 
@@ -41,6 +42,11 @@ namespace C2.IAOLab.Plugins
             throw new NotImplementedException();
         }*/
         public Form GetForm()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DialogResult ShowFormDialog()
         {
             throw new NotImplementedException();
         }
@@ -74,6 +80,11 @@ namespace C2.IAOLab.Plugins
         {
             throw new NotImplementedException();
         }
+
+        public DialogResult ShowFormDialog()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     class BankPlugin : IPlugin
@@ -101,6 +112,11 @@ namespace C2.IAOLab.Plugins
             throw new NotImplementedException();
         }*/
         public Form GetForm()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DialogResult ShowFormDialog()
         {
             throw new NotImplementedException();
         }
@@ -133,7 +149,12 @@ namespace C2.IAOLab.Plugins
         public Form GetForm()
         { 
             throw new NotImplementedException();
-        } 
+        }
+
+        public DialogResult ShowFormDialog()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     class GPSTransformPlugin : IPlugin
@@ -160,6 +181,11 @@ namespace C2.IAOLab.Plugins
             throw new NotImplementedException();
         }*/
         public Form GetForm()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DialogResult ShowFormDialog()
         {
             throw new NotImplementedException();
         }
@@ -192,6 +218,11 @@ namespace C2.IAOLab.Plugins
         {
             throw new NotImplementedException();
         }
+
+        public DialogResult ShowFormDialog()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     class WifiLocationPlugin : IPlugin
@@ -219,6 +250,11 @@ namespace C2.IAOLab.Plugins
              throw new NotImplementedException();
          }*/
         public Form GetForm()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DialogResult ShowFormDialog()
         {
             throw new NotImplementedException();
         }

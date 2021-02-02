@@ -8,26 +8,26 @@ using System.IO;
 using System.Windows.Forms;
 namespace C2.Controls.Left
 {
+    public delegate void OpenToolFormDelegate();
     public partial class IAOButton : UserControl
     {
         private WifiLocation baseForm0;
         private ApkTool baseForm1;
-        private coordinateConversion baseForm2;
-        private DialogResult dllDialogResult;
-        private Form dllForm;
-        private string description;
-        public string ControlName { set => this.txtButton.Text = value; }
-        public string Description { set=> this.description = value; }
-        public Image LeftPicture { set => this.leftPictureBox.Image = value; }
-        public Form DLLForm { set => this.dllForm = value; }
+        private CoordinateConversion baseForm2;
+        private OpenToolFormDelegate openToolForm;
 
-        public IAOButton()
-  
+        public OpenToolFormDelegate ShowDialogDelegate { get => openToolForm; set => openToolForm = value; }
+
+        public void SetToolTip(string desc)
         {
-            InitializeComponent();
-            this.ContextMenuStrip = contextMenuStrip1;
-            toolTip1.SetToolTip(this.rightPictureBox, this.description);
+            toolTip1.SetToolTip(this.rightPictureBox, desc);
         }
+
+        public void SetIcon(Image icon)
+        {
+            this.leftPictureBox.Image = icon;
+        }
+
         public IAOButton(string ffp)
         {
             InitializeComponent();
@@ -109,7 +109,7 @@ namespace C2.Controls.Left
         }
         private void GPSTransformForm()
         {
-            baseForm2 = new coordinateConversion()
+            baseForm2 = new CoordinateConversion()
             {
                 Tab0Tip = HelpUtil.GPSTransformHelpInfo,
                 Tib1Tip = HelpUtil.GPSDistanceHelpInfo
@@ -118,7 +118,7 @@ namespace C2.Controls.Left
         }
         private void TimeAndIPTransformForm()
         {
-            baseForm2 = new coordinateConversion()
+            baseForm2 = new CoordinateConversion()
             {
                 Tab0Tip = HelpUtil.IPTransformHelpInfo,
                 Tib1Tip = HelpUtil.TimeTransformHelpInfo
@@ -141,9 +141,9 @@ namespace C2.Controls.Left
         }
         private void OpenToolForm()
         {
-            if (dllForm != null)
+            if (openToolForm != null)
             {
-                dllForm.ShowDialog();
+                openToolForm();
                 return;
             }
             if (baseForm0 != null)

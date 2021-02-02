@@ -17,25 +17,13 @@ namespace C2.Controls.Left
         private static readonly int ButtonBottomOffsetY = 23;
         private Point startPoint;
 
-        public void GenIAOButton(string modelName)
+        public IAOButton GenIAOButton(string modelName)
         {
             IAOButton ib = new IAOButton(modelName);
             LayoutModelButtonLocation(ib); // 递增       
 
             this.IAOLabPanel.Controls.Add(ib);
-        }
-        public void GenIAOButton(DLLPlugin dll)
-        {
-            IAOButton ib = new IAOButton()
-            {
-                ControlName = dll.GetPluginName(),
-                Description = dll.GetPluginDescription(),
-                LeftPicture = dll.GetPluginImage(),
-                DLLForm = dll.GetForm()
-            };
-            LayoutModelButtonLocation(ib); // 递增       
-
-            this.IAOLabPanel.Controls.Add(ib);
+            return ib;
         }
 
         private void LayoutModelButtonLocation(Control ct)

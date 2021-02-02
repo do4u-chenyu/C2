@@ -27,8 +27,8 @@ namespace C2.IAOLab.Plugins
         /// </summary>
         public string GetPluginDescription()
         {
-            MethodInfo showDialog = type.GetMethod("GetPluginDescription");
-            return showDialog.Invoke(obj, null).ToString();
+            MethodInfo method = type.GetMethod("GetPluginDescription");
+            return method.Invoke(obj, null).ToString();
         }
         /// <summary>
         /// 异常:
@@ -36,8 +36,8 @@ namespace C2.IAOLab.Plugins
         /// </summary>
         public string GetPluginName()
         {
-            MethodInfo showDialog = type.GetMethod("GetPluginName");
-            return showDialog.Invoke(obj, null).ToString();
+            MethodInfo method = type.GetMethod("GetPluginName");
+            return method.Invoke(obj, null).ToString();
         }
         /// <summary>
         /// 异常:
@@ -45,8 +45,8 @@ namespace C2.IAOLab.Plugins
         /// </summary>
         public string GetPluginVersion()
         {
-            MethodInfo showDialog = type.GetMethod("GetPluginVersion");
-            return showDialog.Invoke(obj, null).ToString();
+            MethodInfo method = type.GetMethod("GetPluginVersion");
+            return method.Invoke(obj, null).ToString();
         }
         /// <summary>
         /// 异常:
@@ -54,14 +54,16 @@ namespace C2.IAOLab.Plugins
         /// </summary>
         public Image GetPluginImage()
         {
-            MethodInfo showDialog = type.GetMethod("GetPluginImage");
-            return   showDialog.Invoke(obj, null) as Image;
+            MethodInfo method = type.GetMethod("GetPluginImage");
+            return method.Invoke(obj, null) as Image;
         }
 
-        /*public DialogResult ShowDialog()
+        public DialogResult ShowFormDialog()
         {
-            throw new NotImplementedException();
-        }*/
+            MethodInfo me = type.GetMethod("ShowFormDialog");
+            return (DialogResult)me.Invoke(obj, null);
+            
+        }
 
         /// <summary>
         /// 异常:
@@ -72,5 +74,6 @@ namespace C2.IAOLab.Plugins
             MethodInfo showDialog = type.GetMethod("GetForm");
             return showDialog.Invoke(obj, null) as Form;
         }
+
     }
 }

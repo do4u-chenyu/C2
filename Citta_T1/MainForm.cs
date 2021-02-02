@@ -311,12 +311,24 @@ namespace C2
                 if (IAOLabArr._Contains(name.Trim()))
                 {
                     this.iaoModelControl.GenIAOButton(name.Trim());
-                    PluginsManager.Instance.AddPlugin(name.Trim());
                 }
                    
             }
             // 动态插件加载
             PluginsManager.Instance.Refresh();
+            
+            foreach(IPlugin plugin in PluginsManager.Instance.Plugins)
+            {
+                string name = plugin.GetPluginName();
+                string desc = plugin.GetPluginDescription();
+                Image icon = plugin.GetPluginImage();
+                
+                IAOButton ib = this.iaoModelControl.GenIAOButton(name);
+                ib.SetToolTip(desc);
+                ib.SetIcon(icon);
+                ib.ShowDialogDelegate += delegate () { plugin.ShowFormDialog(); };
+                // TODO 生成Button
+            }
         }
 
         private void ShowLeftFold()

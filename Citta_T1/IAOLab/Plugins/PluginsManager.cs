@@ -12,7 +12,12 @@ namespace C2.IAOLab.Plugins
     {
         private static PluginsManager pluginsManager;
 
-        public List<IPlugin> Plugins { get; }
+        public Dictionary<string, IPlugin> plugins;
+
+        public ICollection<IPlugin> Plugins 
+        { 
+            get { return plugins.Values; } 
+        }
 
         public static PluginsManager Instance
         {
@@ -26,36 +31,13 @@ namespace C2.IAOLab.Plugins
 
         private PluginsManager()
         {
-            Plugins = new List<IPlugin>();
-            /*{
-                new ApkToolPlugin(),
-                new BaseStationPlugin(),
-                new WifiLocationPlugin(),
-                new BankPlugin(),
-                new GPSTransformPlugin(),
-                new TimeAndIPTransformPlugin()
-            };*/
-            PluginsDownloader.Instance.DownloadEvent += Refresh;
+            plugins = new Dictionary<string, IPlugin>() { };
+            //PluginsDownloader.Instance.DownloadEvent += Refresh;
+        }
 
-        }
-        public Dictionary<string, IPlugin> defaultPlugin = new Dictionary<string, IPlugin>()
-        { 
-            {"APK", new ApkToolPlugin() },
-            {"BaseStation", new BaseStationPlugin()},
-            {"Wifi",new WifiLocationPlugin()},
-            {"Card", new BankPlugin()},
-            {"Tude",new GPSTransformPlugin()},
-            {"Ip",  new TimeAndIPTransformPlugin()}
-        };
-        public void AddPlugin(string type)
+        public IPlugin FindPlugin(string pluginName)
         {
-            if (defaultPlugin.Keys._Contains(type))
-                this.Plugins.Add(defaultPlugin[type]);
-        }
-        public IPlugin FindPlugin(string name)
-        {
-            int index = Plugins.FindIndex(e => e.GetPluginName() == name);
-            return index < 0 ? new EmptyPlugin() : Plugins[index];
+            return plugins.ContainsKey(pluginName) ? plugins[pluginName] : new EmptyPlugin();
         }
 
         public void Refresh()
@@ -64,42 +46,58 @@ namespace C2.IAOLab.Plugins
                 TryLoadOne(dll);
         }
 
-        private void TryLoadOne(string dll)
-        {
-            DLLPlugin dllPlugin;
-            if (!File.Exists(dll))
+        private void TryLoadOne(string ffp)
+        {    
+            DLLPlugin dll = LoadPlugin(ffp);
+
+            if (dll == DLLPlugin.Empty)
                 return;
-            dllPlugin = GetPlugin(dll);
-            if (dllPlugin == DLLPlugin.Empty)
-                return;
-            try
-            {
-                if (!Plugins.FindAll(x => x.GetPluginName() == dllPlugin.GetPluginName()).IsEmpty())
-                    return;
-                Global.GetIAOLabControl().GenIAOButton(dllPlugin);
-                this.Plugins.Add(dllPlugin);
-            }
-            catch(Exception ex)
-            {
-                HelpUtil.ShowMessageBox(ex.Message);
-            }
-           
-           
-           
+
+            string dll_name = dll.GetPluginName();
+
+            if (!plugins.ContainsKey(dll_name))
+                plugins.Add(dll_name, dll);
+
+            return;
         }
-        private DLLPlugin GetPlugin(string dll)
+        private DLLPlugin LoadPlugin(string ffp)
         {
-            var assembly = Assembly.LoadFrom(dll);
-            Type[] clazzs = assembly.GetTypes();
-            foreach (Type type in clazzs)
+            if (!File.Exists(ffp))
+                return DLLPlugin.Empty;
+
+            var assembly = Assembly.LoadFrom(ffp);
+            Type[] types = assembly.GetTypes();
+
+            Type type = types.Find(t => t.GetInterface("IPlugin") != null);
+            if (type == null)
+                return DLLPlugin.Empty;
+
+            object obj = assembly.CreateInstance(type.FullName);
+            return Check(type, obj) ? new DLLPlugin(type, obj) : DLLPlugin.Empty;
+        }
+
+        private bool Check(Type type, object dll)
+        {
+            try 
             {
-                // dll需只有一个类接口IPlugin
-                if (type.GetInterface("IPlugin") == null)
-                   continue;
-                var instance = assembly.CreateInstance(type.FullName);
-                return new DLLPlugin(type, instance);
+                if (type.GetMethod("GetPluginDescription") == null)
+                    return false;
+
+                if (type.GetMethod("GetPluginName") == null)
+                    return false;
+
+                if (type.GetMethod("GetPluginVersion") == null)
+                    return false;
+
+                if (type.GetMethod("GetPluginImage") == null)
+                    return false;
+
+                return true;
             }
-            return DLLPlugin.Empty;
+            catch 
+            {
+                return false;
+            }
         }
 
 

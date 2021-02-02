@@ -1,6 +1,6 @@
 ﻿namespace C2.Dialogs.IAOLab
 {
-    partial class coordinateConversion
+    partial class CoordinateConversion
     {
         /// <summary>
         /// Required designer variable.
