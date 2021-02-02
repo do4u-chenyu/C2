@@ -103,7 +103,10 @@ namespace C2.Database
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                 return false;
             }
-
+            finally
+            {
+                sw.Close();
+            }
             return true;
         }
       
