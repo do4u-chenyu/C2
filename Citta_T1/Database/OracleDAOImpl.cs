@@ -44,45 +44,48 @@ namespace C2.Database
         }
         public override bool TestConn()
         {
+            bool isSuccss = true;
             OracleConnection con = new OracleConnection(this.ConnectionString);
             try
             {
                 con.Open();
-                return true;
             }
             catch (Exception ex)
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                return false;
+                isSuccss = false;
             }
+            finally
+            {
+                con.Close();
+            }
+            return isSuccss;
         }
         public override string Query(string sql, bool header = true, int returnNum = OpUtil.PreviewMaxNum)
         {
             int totalReturnNum = 0;
             StringBuilder sb = new StringBuilder(1024 * 16); // TODO
+            OracleConnection con = new OracleConnection(this.ConnectionString);
             try
             {
-                using (OracleConnection con = new OracleConnection(this.ConnectionString))
+                con.Open();
+                OracleCommand comm = new OracleCommand(sql, con);
+                using (OracleDataReader rdr = comm.ExecuteReader())  // rdr.Close()
                 {
-                    con.Open();
-                    OracleCommand comm = new OracleCommand(sql, con);
-                    using (OracleDataReader rdr = comm.ExecuteReader())  // rdr.Close()
+                    if (rdr.FieldCount == 0)
+                        return String.Empty;
+                    if (header)
                     {
-                        if (rdr.FieldCount == 0)
-                            return String.Empty;
-                        if (header)
-                        {
-                            for (int i = 0; i < rdr.FieldCount - 1; i++)
-                                sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
-                            sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
-                        }
-                        while (rdr.Read() && totalReturnNum < returnNum)
-                        {
-                            for (int i = 0; i < rdr.FieldCount - 1; i++)
-                                sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
-                            sb.Append(rdr[rdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
-                            totalReturnNum += 1;
-                        }
+                        for (int i = 0; i < rdr.FieldCount - 1; i++)
+                            sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
+                        sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+                    }
+                    while (rdr.Read() && totalReturnNum < returnNum)
+                    {
+                        for (int i = 0; i < rdr.FieldCount - 1; i++)
+                            sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
+                        sb.Append(rdr[rdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
+                        totalReturnNum += 1;
                     }
                 }
             }
@@ -91,7 +94,10 @@ namespace C2.Database
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                 throw new DAOException(ex.Message);
             }
-
+            finally
+            {
+                con.Close();
+            }
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
         }
         public override string GetTablesSQL(string schema)
@@ -134,28 +140,26 @@ namespace C2.Database
             bool returnCode = true;
             int totalReturnNum = 0;
             StreamWriter sw = new StreamWriter(outPutPath, false);
+            OracleConnection con = new OracleConnection(this.ConnectionString);
             try
             {
-                using (OracleConnection con = new OracleConnection(this.ConnectionString))
+                con.Open();
+                OracleCommand comm = new OracleCommand(sqlText, con);
+                using (OracleDataReader rdr = comm.ExecuteReader())
                 {
-                    con.Open();
-                    OracleCommand comm = new OracleCommand(sqlText, con);
-                    using (OracleDataReader rdr = comm.ExecuteReader())
+                    if (rdr.FieldCount == 0)
+                        return true;
+                    StringBuilder sb = new StringBuilder(1024);
+                    for (int i = 0; i < rdr.FieldCount; i++)
+                        sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
+                    sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));    // 去掉最后一列的列分隔符
+                    while (rdr.Read() && (maxReturnNum == -1 ? true : totalReturnNum < maxReturnNum))
                     {
-                        if (rdr.FieldCount == 0)
-                            return true;
-                        StringBuilder sb = new StringBuilder(1024);
+                        sb = new StringBuilder(1024);
                         for (int i = 0; i < rdr.FieldCount; i++)
-                            sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
-                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));    // 去掉最后一列的列分隔符
-                        while (rdr.Read() && (maxReturnNum == -1 ? true : totalReturnNum < maxReturnNum))
-                        {
-                            sb = new StringBuilder(1024);
-                            for (int i = 0; i < rdr.FieldCount; i++)
-                                sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
-                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));
-                            totalReturnNum += 1;
-                        }
+                            sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
+                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));
+                        totalReturnNum += 1;
                     }
                 }
             }
@@ -167,6 +171,7 @@ namespace C2.Database
             finally
             {
                 sw.Close();
+                con.Close();
             }
             return returnCode;
         }
