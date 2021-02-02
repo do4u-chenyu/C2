@@ -35,7 +35,12 @@ namespace C2.Controls.Left
             {
                 this.startPoint = this.MindMapPaintPanel.Controls[this.MindMapPaintPanel.Controls.Count - 1].Location;
             }
-            this.startPoint.Y += ct.Height + ButtonBottomOffsetY;
+            else
+            {
+                this.MindMapPaintPanel.VerticalScroll.Value = 0;
+                startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+            }
+            this.startPoint.Y += 50;
             ct.Location = this.startPoint;
         }
 
