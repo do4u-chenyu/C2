@@ -3,6 +3,7 @@ using C2.Utils;
 using Hive2;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -46,68 +47,67 @@ namespace C2.Database
             conn.SetTcpReceiveTimeout = 8000;
             conn.SetTcpSendTimeout = 8000;
         }
-        protected override QueryResult ExecuteSQL_Page(string sqlText, int pageSize, int pageIndex, int maxNum, bool returnHeader)
-        {
-            StringBuilder sb = new StringBuilder(1024 * 16); // TODO DK 单页够就行，太小了会copy数组浪费性能，需要选择合适的值
-            QueryResult result;
-            result.content = string.Empty;
-            result.returnNum = 0;
 
-            string sqlPage = String.Format(@"select * from (select row_number() over () as rowno,tmp0.* from ({0}) tmp0) t where t.rowno  between {1} and {2}",
-                                    sqlText,
-                                    pageSize * (pageIndex),
-                                    pageSize * (pageIndex) + maxNum);
+
+        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1)
+        {
+            int totalReturnNum = 0;
+            StreamWriter sw = new StreamWriter(outPutPath, false);
+            StringBuilder sb = new StringBuilder(1024); 
             try
             {
-                using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
+                using (Connection con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
                 {
-                    LimitTimeout(conn);
-                    var cursor = conn.GetCursor();
-                    cursor.Execute("use " + dataBaseName);
-                    foreach (var s in sqlPage.Split(';'))
+                    LimitTimeout(con);
+                    var cursor = con.GetCursor();
+                    cursor.Execute("use " + dataBaseName);          
+                    cursor.Execute(sqlText);
+                    var oneRow = cursor.FetchOne();
+                    if (!oneRow.IsEmpty())
                     {
-                        if (!String.IsNullOrEmpty(s))
-                            cursor.Execute(s);
-                    }
-                    var list = cursor.FetchMany(int.MaxValue);
-
-                    // 分页查询去掉第一列索引
-                    if (returnHeader && !list.IsEmpty() && !(list[0] as IDictionary<string, object>).IsEmpty())
-                    {
-                        IDictionary<string, object> iDict = list[0];
-                        for (int i = 1; i < iDict.Count; i++)
+                        // 添加表头
+                        IDictionary<string, object> iDict = oneRow;
+                        for (int i = 0; i < iDict.Count; i++)
                         {
                             string key = GetColumnName(iDict.Keys.ElementAt(i));
                             sb.Append(key).Append(OpUtil.DefaultFieldSeparator);
                         }
-
-                        if (iDict.Count > 1)
-                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator);
-
-                    }
-
-                    foreach (IDictionary<string, object> item in list)
-                    {
-                        for (int i = 1; i < item.Count; i++)   // 第一列不要
+                        if (iDict.Count > 0)
                         {
-                            String key = item.Keys.ElementAt(i);
-                            sb.Append(item[key]).Append(OpUtil.DefaultFieldSeparator);
+                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));
                         }
-                        if (item.Count > 1)
-                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator); // 最后一列多加了个\t，去掉
+                        
                     }
+   
+                    while (oneRow != null && (maxReturnNum == -1 ? true : totalReturnNum < maxReturnNum))
+                    {
+                        sb = new StringBuilder(1024);
+                        IDictionary<string, object> dict = oneRow;
+                        foreach (var key in dict.Keys)
+                        {
+                            sb.Append(dict[key].ToString()).Append(OpUtil.DefaultFieldSeparator);
+                        }
+                        if (!dict.Keys.IsEmpty())
+                        {
+                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));
+                        }
+                        totalReturnNum += 1;
+                        oneRow = cursor.FetchOne();
+                    }
+                    sw.Flush();
                 }
-                result.content = sb.ToString();
-                result.returnNum = maxNum;
             }
             catch (Exception ex)
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-
+                return false;
             }
-            return result;
+
+            return true;
         }
+      
+       
 
         private string GetColumnName(string name)
         {

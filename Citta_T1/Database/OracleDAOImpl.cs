@@ -129,7 +129,7 @@ namespace C2.Database
             return String.IsNullOrEmpty(this.Schema) ? this.User.ToUpper() : this.Schema.ToUpper();
         }
 
-        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000)
+        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1)
         {
             bool returnCode = true;
             int totalReturnNum = 0;

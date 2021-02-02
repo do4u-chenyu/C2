@@ -29,7 +29,7 @@ namespace C2.Database
         ///<para>QueryFailureException</para>
         ///</summary>
         void FillDGVWithSQL(DataGridView dataGridView, string SQL);
-        bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1, int pageSize = 100000);
+        bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1);
         string DefaultSchema();
     }
 }
