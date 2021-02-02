@@ -221,6 +221,7 @@ namespace C2.Controls
             if (toolTip1 == null)
             {
                 toolTip1 = new ToolTip();
+                toolTip1.InitialDelay = 300;
             }
 
             toolTip1.SetToolTip(this, text);
@@ -437,6 +438,7 @@ namespace C2.Controls
         bool MouseDownForSelect;
         Rectangle? _SelectRectangle;
         ListBoxControlItem<T> _HoverItem;
+        private int drawItemPadding = 10;
 
         Rectangle? SelectRectangle
         {
@@ -718,7 +720,7 @@ namespace C2.Controls
                 if (item.Icon != null)
                 {
                     e.Graphics.DrawImage(item.Icon,
-                        new Rectangle(rect.X, rect.Y + (rect.Height - IconSize.Height) / 2, IconSize.Width, IconSize.Height),
+                        new Rectangle(rect.X + this.drawItemPadding, rect.Y + (rect.Height - IconSize.Height) / 2, IconSize.Width, IconSize.Height),
                         0, 0, item.Icon.Width, item.Icon.Height,
                         GraphicsUnit.Pixel);
                 }
@@ -731,7 +733,8 @@ namespace C2.Controls
 
                 if (!string.IsNullOrEmpty(item.Text))
                 {
-                    e.Graphics.DrawString(item.Text, Font, new SolidBrush(foreColor), rect, PaintHelper.SFLeft);
+                    rect.Offset(this.drawItemPadding, 0);
+                    e.Graphics.DrawString(item.Text, Font, new SolidBrush(foreColor), rect, PaintHelper.SFCenter);
                 }
             }
         }

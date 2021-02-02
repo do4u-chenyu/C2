@@ -149,21 +149,6 @@ namespace C2.Utils
             return true;
         }
 
-        public static string RenameAndCenterPadding(string name, int rowLength, int textLength)
-        {
-            string newName = FileUtil.ReName(name, textLength);
-            int spaceNum = (rowLength - newName.Length) / 2;
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < spaceNum; i++)
-                sb.Append(OpUtil.Blank);
-            for (int i = 0; i < newName.Length; i++)
-                sb.Append(newName[i]);
-            for (int i = spaceNum + newName.Length; i < rowLength; i++)
-                sb.Append(OpUtil.Blank);
-            return sb.ToString();
-        }
-
         public static void DeleteDirectory(string directoryPath)
         {
             try

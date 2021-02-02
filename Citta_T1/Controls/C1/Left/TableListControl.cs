@@ -72,7 +72,7 @@ namespace C2.Controls
                     foreach (var dbi in dbis)
                     {
                         var tli = new TableListItem(dbi);
-                        tli.Text = FileUtil.RenameAndCenterPadding(dbi.DataTable.Name, 23, 15);
+                        tli.Text = FileUtil.ReName(dbi.DataTable.Name);
                         tli.ToolTipText = dbi.DataTable.Name;
                         tli.Image = Properties.Resources.Table;
                         tli.Tag = dbi;
