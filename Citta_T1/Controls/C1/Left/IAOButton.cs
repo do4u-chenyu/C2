@@ -162,10 +162,7 @@ namespace C2.Controls.Left
 
         private void RightPictureBox_MouseHover(object sender, EventArgs e)
         {
-            toolTip1.InitialDelay = 100;
-            toolTip1.ReshowDelay = 500;//指针从一个控件移向另一个控件时，经过多久才会显示下一个提示框
-            toolTip1.ShowAlways = true;//是否显示提示框
-            //  设置伴随的对象.
+ 
             
         }
     }

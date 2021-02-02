@@ -47,9 +47,9 @@ namespace C2.Controls.Left
             // leftPictureBox
             // 
             this.leftPictureBox.Location = new System.Drawing.Point(1, 1);
-            this.leftPictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.leftPictureBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.leftPictureBox.Name = "leftPictureBox";
-            this.leftPictureBox.Size = new System.Drawing.Size(32, 30);
+            this.leftPictureBox.Size = new System.Drawing.Size(24, 24);
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 10;
             this.leftPictureBox.TabStop = false;
@@ -57,24 +57,21 @@ namespace C2.Controls.Left
             // rightPictureBox
             // 
             this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
-            this.rightPictureBox.Location = new System.Drawing.Point(163, 8);
-            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4);
+            this.rightPictureBox.Location = new System.Drawing.Point(122, 6);
             this.rightPictureBox.Name = "rightPictureBox";
-            this.rightPictureBox.Size = new System.Drawing.Size(21, 20);
+            this.rightPictureBox.Size = new System.Drawing.Size(16, 16);
             this.rightPictureBox.TabIndex = 11;
             this.rightPictureBox.TabStop = false;
-            this.rightPictureBox.MouseHover += new System.EventHandler(this.RightPictureBox_MouseHover);
             // 
             // textBox
             // 
             this.textBox.BackColor = System.Drawing.Color.White;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox.Location = new System.Drawing.Point(33, 4);
-            this.textBox.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox.Location = new System.Drawing.Point(25, 3);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(125, 20);
+            this.textBox.Size = new System.Drawing.Size(94, 16);
             this.textBox.TabIndex = 12;
             this.textBox.Visible = false;
             // 
@@ -85,10 +82,10 @@ namespace C2.Controls.Left
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtButton.Location = new System.Drawing.Point(33, 1);
-            this.txtButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtButton.Location = new System.Drawing.Point(25, 1);
+            this.txtButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(127, 31);
+            this.txtButton.Size = new System.Drawing.Size(95, 25);
             this.txtButton.TabIndex = 9;
             this.txtButton.UseVisualStyleBackColor = false;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
@@ -99,18 +96,25 @@ namespace C2.Controls.Left
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.打开ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(109, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
             // 
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.打开ToolStripMenuItem.Text = "打开";
             this.打开ToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 5000;
+            this.toolTip1.InitialDelay = 100;
+            this.toolTip1.ReshowDelay = 500;
+            this.toolTip1.ShowAlways = true;
+            // 
             // IAOButton
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.White;
@@ -118,9 +122,9 @@ namespace C2.Controls.Left
             this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.leftPictureBox);
             this.Controls.Add(this.txtButton);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "IAOButton";
-            this.Size = new System.Drawing.Size(187, 34);
+            this.Size = new System.Drawing.Size(140, 27);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
