@@ -241,7 +241,6 @@ namespace C2.Controls.Left
             // 
             // tableListControl1
             // 
-            this.tableListControl1.DatabaseItems = null;
             this.tableListControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableListControl1.Location = new System.Drawing.Point(0, 0);
             this.tableListControl1.Name = "tableListControl1";

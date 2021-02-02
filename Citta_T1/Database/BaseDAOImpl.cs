@@ -78,14 +78,14 @@ namespace C2.Database
         #region 业务逻辑
         public List<string> GetUsers()
         {
-            string result = this.TryQuery(this.GetUserSQL(), false);
+            string result = this.Query(this.GetUserSQL(), false);
             return String.IsNullOrEmpty(result) ? new List<String>() : new List<string>(result.Split(OpUtil.DefaultLineSeparator));
         }
 
         public List<Table> GetTables(string schema)
         {
             List<Table> tables = new List<Table>();
-            string result = this.TryQuery(this.GetTablesSQL(schema), false);
+            string result = this.Query(this.GetTablesSQL(schema), false);
             if (!String.IsNullOrEmpty(result))
                 foreach (var line in result.Split(OpUtil.DefaultLineSeparator))
                 {
@@ -96,19 +96,9 @@ namespace C2.Database
         }
         public string GetTableContentString(Table table, int maxNum)
         {
-            return this.TryQuery(this.GetTableContentSQL(table), true, maxNum);
+            return this.Query(this.GetTableContentSQL(table), true, maxNum);
         }
 
-        private string TryQuery(string sql,bool header=true, int maxReturnNum=OpUtil.PreviewMaxNum)
-        {
-            string result = string.Empty;
-            try
-            {
-                result = this.Query(sql, header, maxReturnNum);
-            }
-            catch { }
-            return result;
-        }
         public List<List<string>> GetTableContent(Table table, int maxNum)
         {
             string result = this.GetTableContentString(table, maxNum);
@@ -116,18 +106,18 @@ namespace C2.Database
         }
         public Dictionary<string, List<string>> GetColNameBySchema(string schema)
         {
-            string result = this.TryQuery(this.GetColNameBySchemaSQL(schema), false);
+            string result = this.Query(this.GetColNameBySchemaSQL(schema), false);
             return String.IsNullOrEmpty(result) ? new Dictionary<string, List<string>>() : DbUtil.StringToDict(result);
         }
  
         public Dictionary<string, List<string>> GetColNameByTables(List<Table> tables)
         {
-            string result = this.TryQuery(this.GetColNameByTablesSQL(tables), false);
+            string result = this.Query(this.GetColNameByTablesSQL(tables), false);
             return String.IsNullOrEmpty(result) ? new Dictionary<string, List<string>>() : DbUtil.StringToDict(result);
         }
         public string GetTableColumnNames(Table table)
         {
-            return this.TryQuery(this.GetColNameByTableSQL(table));
+            return this.Query(this.GetColNameByTableSQL(table));
         }
         public void FillDGVWithTbSchema(DataGridView dataGridView, Table table)
         {
@@ -222,15 +212,6 @@ namespace C2.Database
         {
            return String.Empty;
         }
-        #endregion
-        #region 自定义异常
-
-
-        protected void QueryFailureException(string message)
-        { 
-            throw new Exception(message);
-        }
-
         #endregion
     }
 

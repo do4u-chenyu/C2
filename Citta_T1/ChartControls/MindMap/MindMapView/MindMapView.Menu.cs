@@ -408,12 +408,6 @@ namespace C2.Controls.MapViews
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
             if (hitItem.IsDatabase())
             {
-                IDAO dao = DAOFactory.CreateDAO(hitItem.DBItem);
-                if (!dao.TestConn())
-                {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                    return;
-                }
                 BCPBuffer.GetInstance().GetCachePreviewTable(hitItem.DBItem); // TODO DK 预加载也要写好方法
             }
 

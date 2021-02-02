@@ -46,9 +46,9 @@ namespace C2.Database
             {
                 dao.FillDGVWithTbContent(dataGridView, table, MaxNum);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                HelpUtil.ShowMessageBox(ex.Message);
+                HelpUtil.ShowMessageBox(ex.Message, "提示信息", System.Windows.Forms.MessageBoxIcon.Warning);
                 return false;
             }
             return true;
@@ -67,9 +67,9 @@ namespace C2.Database
             }
             catch (Exception ex)
             {
-                HelpUtil.ShowMessageBox(ex.Message);
+                HelpUtil.ShowMessageBox(ex.Message, "提示信息", System.Windows.Forms.MessageBoxIcon.Warning);
             }
-          
+
         }
         private int GetIntFromTextBox()
         {

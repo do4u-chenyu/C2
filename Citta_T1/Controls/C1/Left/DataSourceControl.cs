@@ -79,7 +79,7 @@ namespace C2.Controls.Left
             startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
             linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
             tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            
+
         }
 
         #region 内外部数据面板切换
@@ -362,12 +362,18 @@ namespace C2.Controls.Left
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return;
                 }
-                tables = dao.GetTables(this.schemaComboBox.Text);
-                tableColDict = dao.GetColNameBySchema(this.schemaComboBox.Text);
-                UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
+                try
+                {
+                    tables = dao.GetTables(this.schemaComboBox.Text);
+                    tableColDict = dao.GetColNameBySchema(this.schemaComboBox.Text);
+                    UpdateTables(tables, SelectLinkButton.DatabaseItem, tableColDict);
+                }
+                catch (Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.DbQueryFailInfo, ex.Message);
+                }
                 this.tableFilterTextBox.Text = "";
             }
-
         }
 
         private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
@@ -404,21 +410,28 @@ namespace C2.Controls.Left
              * 1. 优化函数名称，首先这个名字取得不怎么好
              * [x]. 优化代码逻辑，一旦出现连接不上的问题依然会查两次数据库，等待时间很长，每次连接的时候最好测试一下连接
              */
-
+            List<Table> tables = new List<Table>();
+            Dictionary<string, List<string>> tableColDict = new Dictionary<string, List<string>>();
             IDAO dao = DAOFactory.CreateDAO(dbi);
             if (!dao.TestConn())
             {
                 HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
+            try
+            {
+                List<string> users = dao.GetUsers();
+                UpdateFrameCombo(users, dbi, dao.DefaultSchema());
 
+                //刷新数据表
+                tables = dao.GetTables(this.schemaComboBox.Text);
+                tableColDict = dao.GetColNameByTables(tables);
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox(ex.Message, "提示信息", System.Windows.Forms.MessageBoxIcon.Warning);
+            }
             //刷新架构 dao会会变化
-            List<string> users = dao.GetUsers();
-            UpdateFrameCombo(users, dbi, dao.DefaultSchema());
-
-            //刷新数据表
-            List<Table> tables = dao.GetTables(this.schemaComboBox.Text);
-            Dictionary<string, List<string>> tableColDict = dao.GetColNameByTables(tables);
             this.schemaComboBox.SelectedIndexChanged -= SchemaComboBox_SelectedIndexChanged;
             UpdateTables(tables, dbi, tableColDict);
             this.schemaComboBox.SelectedIndexChanged += SchemaComboBox_SelectedIndexChanged;

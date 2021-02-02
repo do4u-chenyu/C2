@@ -161,7 +161,7 @@ namespace C2.Database
             catch (Exception ex)
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
-                QueryFailureException(ex.Message);
+                throw new DAOException(ex.Message);
 
             }
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);

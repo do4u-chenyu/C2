@@ -226,6 +226,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Database\BaseDAOImpl.cs" />
+    <Compile Include="Database\DAOException.cs" />
     <Compile Include="Database\DAOFactory.cs" />
     <Compile Include="Database\HiveDAOImpl.cs" />
     <Compile Include="Database\OracleDAOImpl.cs" />

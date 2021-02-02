@@ -37,6 +37,7 @@ namespace C2.Controls
             Items.ItemAdded += Items_ItemAdded;
             Items.ItemRemoved += Items_ItemRemoved;
 
+
             SetStyle(ControlStyles.UserPaint
                 | ControlStyles.AllPaintingInWmPaint
                 | ControlStyles.OptimizedDoubleBuffer

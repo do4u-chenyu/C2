@@ -74,10 +74,18 @@ namespace C2.Core
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return String.Empty;
                 }
-                Table table = databaseItem.DataTable;
-                string tbContent = dao.GetTableContentString(table, mNumOfLine);
-                string firstLine = GetFirstLine(tbContent);
-                dataPreviewDict[key] = new FileCache(tbContent, firstLine);
+                try
+                {
+                    Table table = databaseItem.DataTable;
+                    string tbContent = dao.GetTableContentString(table, mNumOfLine);
+                    string firstLine = GetFirstLine(tbContent);
+                    dataPreviewDict[key] = new FileCache(tbContent, firstLine);
+                }
+                catch (Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(ex.Message, "提示信息", System.Windows.Forms.MessageBoxIcon.Warning);
+                    return String.Empty;
+                }
             }
             return dataPreviewDict[key].PreviewFileContent;
         }

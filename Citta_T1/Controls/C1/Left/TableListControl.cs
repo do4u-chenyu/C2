@@ -22,6 +22,8 @@ namespace C2.Controls
         public TableListControl()
         {
             InitializationTableContextMenuStrip();
+            this._DatabaseItems = new List<DatabaseItem>();
+            this._SelectedTableItem = null;
             this.ItemHeight = TableItemHeight;
         }
         public List<DatabaseItem> DatabaseItems
@@ -173,11 +175,9 @@ namespace C2.Controls
                 }
                 catch (Exception ex)
                 {
-                    HelpUtil.ShowMessageBox(ex.Message);
+                    HelpUtil.ShowMessageBox(ex.Message, "提示信息", System.Windows.Forms.MessageBoxIcon.Warning);
                 }
-               
             }
-                
         }
 
         private void PreviewTableToolStripMenuItem_Click(object sender, EventArgs e)
@@ -185,14 +185,8 @@ namespace C2.Controls
             if (SelectedTableItem == null)
                 return;
             PreviewDbDataForm previewDbDataForm = GenericSingleton<PreviewDbDataForm>.CreateInstance();
-            IDAO dao = DAOFactory.CreateDAO(SelectedTableItem);
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                if (!dao.TestConn())
-                {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
-                    return;
-                }
                 if (previewDbDataForm.Flush(this.SelectedTableItem))
                 {
                     previewDbDataForm.Focus();
@@ -219,6 +213,7 @@ namespace C2.Controls
             this.SelectedIndices = null;
             this.SelectedTableItem = null;
             this.PerformLayout();
+            this.Invalidate();
         }
         #endregion
     }
