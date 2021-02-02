@@ -1,7 +1,9 @@
 ﻿using C2.Dialogs.IAOLab;
 using C2.Globalization;
+using C2.IAOLab.Plugins;
 using C2.Utils;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 namespace C2.Controls.Left
@@ -11,12 +13,26 @@ namespace C2.Controls.Left
         private WifiLocation baseForm0;
         private ApkTool baseForm1;
         private coordinateConversion baseForm2;
+        private DialogResult dllDialogResult;
+        private Form dllForm;
+        private string description;
+        public string ControlName { set => this.txtButton.Text = value; }
+        public string Description { set=> this.description = value; }
+        public Image LeftPicture { set => this.leftPictureBox.Image = value; }
+        public Form DLLForm { set => this.dllForm = value; }
+
+        public IAOButton()
+  
+        {
+            InitializeComponent();
+            this.ContextMenuStrip = contextMenuStrip1;
+            toolTip1.SetToolTip(this.rightPictureBox, this.description);
+        }
         public IAOButton(string ffp)
         {
             InitializeComponent();
             txtButton.Name = ffp;
-            txtButton.Text = ffp;
-          
+            txtButton.Text = ffp;          
             //this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
             this.ContextMenuStrip = contextMenuStrip1;
             switch (ffp)
@@ -125,6 +141,11 @@ namespace C2.Controls.Left
         }
         private void OpenToolForm()
         {
+            if (dllForm != null)
+            {
+                dllForm.ShowDialog();
+                return;
+            }
             if (baseForm0 != null)
             {
                 baseForm0.ShowDialog();
