@@ -13,7 +13,7 @@ namespace C2.Database
         private static readonly LogUtil log = LogUtil.GetInstance("HiveDAOImpl");
         private readonly string getUserSQL = @"show databases";
         private readonly string getTablesSQL = @"use {0};show tables;";
-        private readonly string getTableContentSQL = @"use {0};select * from {1} limit {2}";
+        private readonly string getTableContentSQL = @"use {0};select * from {1}";
         //private string getColNameByTablesSQL;
         private readonly string getColNameByTableSQL = "desc {0}";
         private readonly string dataBaseName;
@@ -133,7 +133,7 @@ namespace C2.Database
                         if (!String.IsNullOrEmpty(s))
                             cursor.Execute(s);
                     }
-                    var list = cursor.FetchMany(int.MaxValue);
+                    var list = cursor.FetchMany(returnNum);
                     if (header && !list.IsEmpty())
                     {
                         // 添加表头
@@ -166,11 +166,7 @@ namespace C2.Database
             }
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
         }
-        public override string LimitSQL(string sql)
-        {
-            // TODO LXF  双limit会出错
-            return String.Format("select * from ({0}) tmp limit {1}", sql, OpUtil.PreviewMaxNum);
-        }
+
         public override string GetTablesSQL(string schema)
         {
             return String.Format(this.getTablesSQL, schema);
@@ -179,9 +175,9 @@ namespace C2.Database
         {
             return String.Empty;
         }
-        public override string GetTableContentSQL(Table table, int maxNum)
+        public override string GetTableContentSQL(Table table)
         {
-            return String.Format(getTableContentSQL, this.Schema, table.Name, maxNum);
+            return String.Format(getTableContentSQL, this.Schema, table.Name);
         }
         public override string GetUserSQL()
         {
