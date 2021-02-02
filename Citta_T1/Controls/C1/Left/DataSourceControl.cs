@@ -145,11 +145,6 @@ namespace C2.Controls.Left
 
             this.localFrame.Controls.Clear();
             // 重新排序
-            this.AutoScroll = false;
-            LayoutModelButtonLocation(tmp[0] as DataButton);
-            this.localFrame.Controls.Add(tmp[0]);
-
-            tmp.Remove(tmp[0]);
             this.localFrame.SuspendLayout();
             foreach (Control ct in tmp)
             {
@@ -159,7 +154,6 @@ namespace C2.Controls.Left
 
             this.localFrame.ResumeLayout(false);
             this.localFrame.PerformLayout();
-            this.AutoScroll = true;
         }
 
         public void SaveDataSourceInfo()
@@ -206,7 +200,10 @@ namespace C2.Controls.Left
             if (this.localFrame.Controls.Count > 0)
                 startPoint = this.localFrame.Controls[this.localFrame.Controls.Count - 1].Location;
             else
+            {
+                this.localFrame.VerticalScroll.Value = 0;
                 startPoint = new Point(ButtonLeftX, -20);
+            }    
             startPoint.Y += ButtonGapHeight;
             ct.Location = startPoint;
         }
@@ -302,7 +299,10 @@ namespace C2.Controls.Left
             if (this.linkPanel.Controls.Count > 0)
                 linkPoint = this.linkPanel.Controls[this.linkPanel.Controls.Count - 1].Location;
             else
-                linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
+            {
+                this.linkPanel.VerticalScroll.Value = 0;
+                linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight); 
+            }  
             linkPoint.Y += ButtonGapHeight;
             lb.Location = linkPoint;
         }

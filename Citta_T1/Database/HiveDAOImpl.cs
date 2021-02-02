@@ -133,7 +133,7 @@ namespace C2.Database
                         if (!String.IsNullOrEmpty(s))
                             cursor.Execute(s);
                     }
-                    var list = cursor.FetchMany(int.MaxValue);
+                    var list = cursor.FetchMany(returnNum);
                     if (header && !list.IsEmpty())
                     {
                         // 添加表头
@@ -166,11 +166,7 @@ namespace C2.Database
             }
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
         }
-        public override string LimitSQL(string sql)
-        {
-            // TODO LXF  双limit会出错
-            return String.Format("select * from ({0}) tmp limit {1}", sql, OpUtil.PreviewMaxNum);
-        }
+
         public override string GetTablesSQL(string schema)
         {
             return String.Format(this.getTablesSQL, schema);

@@ -184,10 +184,7 @@ namespace C2.Database
 
         #endregion
         #region SQL
-        public virtual string LimitSQL(string sql)
-        {
-           return String.Empty;
-        }
+
         public virtual string GetUserSQL()
         {
            return String.Empty;

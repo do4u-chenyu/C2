@@ -33,7 +33,11 @@ namespace C2.Controls.Left
            
             if (this.MyModelPaintPanel.Controls.Count > 0)
                 this.startPoint = this.MyModelPaintPanel.Controls[this.MyModelPaintPanel.Controls.Count - 1].Location;
-
+            else
+            {
+                this.MyModelPaintPanel.VerticalScroll.Value = 0;
+                startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+            }
             this.startPoint.Y += ct.Height + ButtonBottomOffsetY;
             ct.Location = this.startPoint;
         }
