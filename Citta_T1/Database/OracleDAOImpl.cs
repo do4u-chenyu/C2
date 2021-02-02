@@ -13,7 +13,7 @@ namespace C2.Database
         private static readonly LogUtil log = LogUtil.GetInstance("OracleImpl");
         private readonly string getUserSQL = @"select distinct owner from all_tables";
         private readonly string getTablesSQL = @"select table_name from all_tables where owner='{0}' order by table_name";
-        private readonly string getTableContentSQL = @"select * from {0}.{1} where rownum <= {2}";
+        private readonly string getTableContentSQL = @"select * from {0}.{1}";
         private readonly string getColNameBySchemaSQL = @"select a.table_name, a.column_name from all_tab_columns a where table_name in {0}";
         private readonly string getColNameByTablesSQL = @"select a.table_name, a.column_name from all_tab_columns a where table_name in ('{0}')";
 
@@ -111,9 +111,9 @@ namespace C2.Database
                 tableNames.Add(table.Name);
             return String.Format(this.getColNameByTablesSQL, String.Join("','", tableNames));
         }
-        public override string GetTableContentSQL(Table table, int maxNum)
+        public override string GetTableContentSQL(Table table)
         {
-            return String.Format(this.getTableContentSQL, this.Schema, table.Name, maxNum);
+            return String.Format(this.getTableContentSQL, this.Schema, table.Name);
         }
         public override string GetUserSQL()
         {

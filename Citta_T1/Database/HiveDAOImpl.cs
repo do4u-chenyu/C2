@@ -13,7 +13,7 @@ namespace C2.Database
         private static readonly LogUtil log = LogUtil.GetInstance("HiveDAOImpl");
         private readonly string getUserSQL = @"show databases";
         private readonly string getTablesSQL = @"use {0};show tables;";
-        private readonly string getTableContentSQL = @"use {0};select * from {1} limit {2}";
+        private readonly string getTableContentSQL = @"use {0};select * from {1}";
         //private string getColNameByTablesSQL;
         private readonly string getColNameByTableSQL = "desc {0}";
         private readonly string dataBaseName;
@@ -179,9 +179,9 @@ namespace C2.Database
         {
             return String.Empty;
         }
-        public override string GetTableContentSQL(Table table, int maxNum)
+        public override string GetTableContentSQL(Table table)
         {
-            return String.Format(getTableContentSQL, this.Schema, table.Name, maxNum);
+            return String.Format(getTableContentSQL, this.Schema, table.Name);
         }
         public override string GetUserSQL()
         {

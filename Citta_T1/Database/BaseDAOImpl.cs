@@ -96,15 +96,15 @@ namespace C2.Database
         }
         public string GetTableContentString(Table table, int maxNum)
         {
-            return this.TryQuery(this.GetTableContentSQL(table, maxNum));
+            return this.TryQuery(this.GetTableContentSQL(table), true, maxNum);
         }
 
-        private string TryQuery(string sql,bool header=true)
+        private string TryQuery(string sql,bool header=true, int maxReturnNum=OpUtil.PreviewMaxNum)
         {
             string result = string.Empty;
             try
             {
-                result = this.Query(sql, header);
+                result = this.Query(sql, header, maxReturnNum);
             }
             catch { }
             return result;
@@ -137,7 +137,7 @@ namespace C2.Database
         }
         public void FillDGVWithTbContent(DataGridView dataGridView, Table table, int maxNum)
         {
-            string contentString = this.Query(this.GetTableContentSQL(table, maxNum));
+            string contentString = this.Query(this.GetTableContentSQL(table), true, maxNum);
             List<List<string>> tableCols = DbUtil.StringTo2DString(contentString);
             FileUtil.FillTable(dataGridView, tableCols);
         }
@@ -202,7 +202,7 @@ namespace C2.Database
         {
            return String.Empty;
         }
-        public virtual string GetTableContentSQL(Table table, int maxNum)
+        public virtual string GetTableContentSQL(Table table)
         {
            return String.Empty;
         }
