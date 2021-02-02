@@ -8,6 +8,7 @@ using System.Linq;
 using C2.Core;
 using C2.Model;
 using C2.Globalization;
+using C2.Forms;
 
 namespace C2.Controls
 {
@@ -2339,7 +2340,20 @@ namespace C2.Controls
         }
         public bool ContainModel(string modelName)
         {
-            return GetItemByTag(modelName) != null;
+            return GetItemByTitle(modelName) != null;
         }
+
+        public TabItem GetItemByTitle(string title)
+        {
+            foreach (TabItem ti in Items)
+            {
+                if (ti.Tag is StartForm)//首页不算在搜索范围内
+                    continue;
+                if ((ti.Tag as BaseDocumentForm).Text == title)
+                    return ti;
+            }
+            return null;
+        }
+
     }
 }
