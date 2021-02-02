@@ -24,20 +24,25 @@ namespace C2.Database
         }
         public override bool TestConn()
         {
-            using (var conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
+            using (var con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
             {
                 try
                 {
 
-                    LimitTimeout(conn);
-                    conn.Open();
+                    LimitTimeout(con);
+                    con.Open();
+
                     return true;
                 }
                 catch (Exception ex)
                 {
                     log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                     return false;
+                }
+                finally
+                {
+                    con.Close();
                 }
             }
         }
@@ -57,7 +62,7 @@ namespace C2.Database
                 using (Connection con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
                 {
-                    LimitTimeout(con);
+                    //LimitTimeout(con);
                     var cursor = con.GetCursor();
                     cursor.Execute("use " + dataBaseName);          
                     cursor.Execute(sqlText);
@@ -104,6 +109,7 @@ namespace C2.Database
             finally
             {
                 sw.Close();
+                
             }
             return true;
         }
@@ -122,11 +128,11 @@ namespace C2.Database
             StringBuilder sb = new StringBuilder(1024 * 16);
             try
             {
-                using (Connection conn = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
+                using (Connection con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
                 {
-                    LimitTimeout(conn);
-                    var cursor = conn.GetCursor();
+                   // LimitTimeout(conn);
+                    var cursor = con.GetCursor();
                     cursor.Execute("use " + dataBaseName);
                     foreach (var s in sql.Split(';'))
                     {
@@ -160,6 +166,7 @@ namespace C2.Database
             }
             catch (Exception ex)
             {
+                
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
                 throw new DAOException(ex.Message);
 
