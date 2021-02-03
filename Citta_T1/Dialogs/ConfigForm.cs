@@ -249,6 +249,12 @@ namespace C2.Dialogs
             }
             return webPlugins;
         }
+        private void DownloadOnePlugin()
+        {
+            WebClient Client = new WebClient();
+
+            Client.DownloadFile("http://i.stackoverflow.com/Content/Img/stackoverflow-logo-250.png", @"C:\folder\stackoverflowlogo.png");
+        }
         /// <summary>
         /// 异常：
         /// <para>WebRequestFailureException</para>
@@ -418,6 +424,11 @@ namespace C2.Dialogs
             if (this.pluginsTabControl.SelectedIndex != 1)
                 return;
             UnInstalledPlugins_Load();
+        }
+
+        private void InstallButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

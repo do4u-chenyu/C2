@@ -503,6 +503,7 @@
             this.installButton.TabIndex = 7;
             this.installButton.Text = "安装";
             this.installButton.UseVisualStyleBackColor = true;
+            this.installButton.Click += new System.EventHandler(this.InstallButton_Click);
             // 
             // availableDGV
             // 
