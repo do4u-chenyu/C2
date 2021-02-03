@@ -56,7 +56,7 @@ namespace C2.Dialogs.IAOLab
             textBox1.Text = "正在清除历史数据";
             this.dataGridView1.Rows.Clear();
             apkInfoListForEXL = new List<List<string>>();
-            if(!string.IsNullOrEmpty(image.ToString()))
+            if(image != null)
                 image.Dispose();
             string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
             FileUtil.DeleteDirectory(tmpPath);
@@ -202,7 +202,7 @@ namespace C2.Dialogs.IAOLab
                 sheet = workBook.CreateSheet("Sheet0");//创建一个名称为Sheet0的表  
                 int rowCount = this.apkInfoListForEXL.Count;//行数  
                 int columnCount = columnName.Length;//列数  
-                sheet.SetColumnWidth(0, 16 * 256);
+                sheet.SetColumnWidth(0, 15 * 256);
                 sheet.SetColumnWidth(1, 10 * 256);
                 sheet.SetColumnWidth(2, 10 * 256);
                 sheet.SetColumnWidth(3, 30 * 256);
