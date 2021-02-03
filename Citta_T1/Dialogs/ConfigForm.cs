@@ -21,6 +21,7 @@ namespace C2.Dialogs
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
         private static readonly string pluginUrl = @"http://218.94.117.234:8484/C2Plugins/";
+        private static readonly string dllUrl = @"http://218.94.117.234:8484/C2Plugins/packages/";
         public ConfigForm()
         {
             InitializeComponent();
@@ -208,7 +209,7 @@ namespace C2.Dialogs
             UserModelTabPage_Load();
             PythonConfigTabPage_Load();
             PluginsConfigTabPage_Load();
-          
+
         }
 
         private void PluginsConfigTabPage_Load()
@@ -225,8 +226,8 @@ namespace C2.Dialogs
         {
             try
             {
-                string webContent = GetHtmlContent();
-                List<string> webPlugins = WebPluginList(webContent);
+                string webContent = PluginsDownloader.GetHtmlContent(pluginUrl);
+                List<string> webPlugins = PluginsDownloader.WebPluginList(webContent);
                 List<string> unInstalledList = UninstalledPluginList(webPlugins);
                 foreach (string pluginName in unInstalledList)
                 {
@@ -249,47 +250,9 @@ namespace C2.Dialogs
             }
             return webPlugins;
         }
-        private void DownloadOnePlugin()
-        {
-            WebClient Client = new WebClient();
 
-            Client.DownloadFile("http://i.stackoverflow.com/Content/Img/stackoverflow-logo-250.png", @"C:\folder\stackoverflowlogo.png");
-        }
-        /// <summary>
-        /// 异常：
-        /// <para>WebRequestFailureException</para>
-        /// </summary>
-        private string GetHtmlContent()
-        {
-            string htmlContent = string.Empty;
-            Stream resStream = WebRequest.Create(pluginUrl)
-                                        .GetResponse()
-                                        .GetResponseStream();
 
-            StreamReader sr = new StreamReader(resStream, System.Text.Encoding.UTF8);
-            htmlContent = sr.ReadToEnd();
-            resStream.Close();
-            sr.Close();
-            return htmlContent;
-        }
-        private List<string> WebPluginList(string webcontent)
-        {
-            List<string> result = new List<string>();
-            if (string.IsNullOrEmpty(webcontent)) return result;
-            string dllForm = string.Format(@"\>.*dll\<");
-            try
-            {
-                MatchCollection matchItems = Regex.Matches(webcontent, dllForm, RegexOptions.IgnoreCase);
-                foreach (Match match in matchItems)
-                {
-                    string pluginName = match.Value.Trim(new char[] { '>', '<' });
-                    result.Add(pluginName);
-                }
-            }
-            catch { }
-            return result;
 
-        }
         private string GetDllVersion(string name)
         {
             try
@@ -428,6 +391,27 @@ namespace C2.Dialogs
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewRow row in this.availableDGV.Rows)
+            {
+
+                if (row.Cells[2].Value == null || !(bool)row.Cells[2].Value)
+                    continue;
+                try
+                {
+                    string selectedDll = dllUrl + row.Cells[0].Value.ToString();
+                    string savePath = Path.Combine(Global.DLLPluginPath, row.Cells[0].Value.ToString());
+                    PluginsDownloader.PluginsDownload(selectedDll, savePath);
+                    this.availableDGV.Rows.Remove(row);
+                    this.installedDGV.Rows.Add(row);
+                    MessageBox.Show("插件下载成功，请重启软件加载新插件功能");
+
+                }
+                catch (Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(ex.Message);
+                }
+                return;
+            }
 
         }
     }
