@@ -47,7 +47,7 @@ namespace C2.Controls.Left
                 case "Wifi":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
-                    baseForm = new WifiLocation();
+                    baseForm = new WifiLocation() { FormType = ffp };
                     break;
                 case "Card":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;

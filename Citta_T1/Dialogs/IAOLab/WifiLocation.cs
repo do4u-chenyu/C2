@@ -41,7 +41,7 @@ namespace C2.Dialogs.IAOLab
                     progressBar1.Minimum = 0;
                     foreach (string baseStation in inputArray)
                     {
-                        ShowResult(baseStation, "baseStation",tmpResult);
+                        ShowResult(baseStation, "baseStation", tmpResult);
                     }
                     break;
                 case "Wifi":
@@ -51,7 +51,7 @@ namespace C2.Dialogs.IAOLab
                     progressBar1.Minimum = 0;
                     foreach (string mac in inputArray)
                     {
-                        ShowResult(mac,"mac",tmpResult);
+                        ShowResult(mac, "mac", tmpResult);
                     }
                     break;
                 case "Card":
@@ -61,7 +61,7 @@ namespace C2.Dialogs.IAOLab
                     progressBar1.Minimum = 0;
                     foreach (string bankCard in inputArray)
                     {
-                        ShowResult(bankCard,"bankCard",tmpResult);
+                        ShowResult(bankCard, "bankCard", tmpResult);
                     }
                     
                     break;             
