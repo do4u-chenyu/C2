@@ -2,7 +2,10 @@
 using C2.IAOLab.Plugins;
 using C2.Utils;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -17,6 +20,7 @@ namespace C2.Dialogs
         private static readonly int CheckBoxColumnIndex = 2;
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
+        private static readonly string pluginUrl = @"http://218.94.117.234:8484/C2Plugins/";
         public ConfigForm()
         {
             InitializeComponent();
@@ -204,6 +208,7 @@ namespace C2.Dialogs
             UserModelTabPage_Load();
             PythonConfigTabPage_Load();
             PluginsConfigTabPage_Load();
+            UnInstalledPlugins_Load();
         }
 
         private void PluginsConfigTabPage_Load()
@@ -216,6 +221,70 @@ namespace C2.Dialogs
             this.userModelTextBox.Text = Global.WorkspaceDirectory;
         }
 
+        private void UnInstalledPlugins_Load()
+        {
+            try
+            {
+                string webContent = GetHtmlContent();
+                List<string> plugins = WebPluginList(webContent);
+                foreach (string pluginName in plugins)
+                {
+                    string version = GetDllVersion(pluginName); 
+                    this.availableDGV.Rows.Add(new Object[] { pluginName, version, false });
+                }
+            }
+            catch (Exception ex)
+            {
+                this.availableTB.Text = "插件加载失败: " + ex.Message;
+            }
+
+        }
+        /// <summary>
+        /// 异常：
+        /// <para>WebRequestFailureException</para>
+        /// </summary>
+        private string GetHtmlContent()
+        {
+            string htmlContent = string.Empty;
+            Stream resStream = WebRequest.Create(pluginUrl)
+                                        .GetResponse()
+                                        .GetResponseStream();
+
+            StreamReader sr = new StreamReader(resStream, System.Text.Encoding.UTF8);
+            htmlContent = sr.ReadToEnd();
+            resStream.Close();
+            sr.Close();
+            return htmlContent;
+        }
+        private List<string> WebPluginList(string webcontent)
+        {
+            List<string> result = new List<string>();
+            if (string.IsNullOrEmpty(webcontent)) return result;
+            string dllForm = string.Format(@"\>.*dll\<");
+            try 
+            {
+                MatchCollection matchItems = Regex.Matches(webcontent, dllForm, RegexOptions.IgnoreCase);
+                foreach (Match match in matchItems)
+                {
+                    string pluginName = match.Value.Trim(new char[] { '>', '<' });
+                    result.Add(pluginName);
+                }
+            }
+            catch { }          
+            return result;
+
+        }
+        private string GetDllVersion(string name)
+        {
+            try
+            {
+                return name.Replace(".dll", "").Split('-')[1];
+            }
+            catch
+            { 
+                return string.Empty;
+            }
+        }
         private void PythonConfigTabPage_Load()
         {
             // 配置文件样例
@@ -332,5 +401,7 @@ namespace C2.Dialogs
             IPlugin pg = PluginsManager.Instance.FindPlugin(pluginName);
             this.installedTB.Text = pg.GetPluginDescription();
         }
+
+
     }
 }
