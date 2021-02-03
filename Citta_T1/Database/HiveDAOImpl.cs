@@ -40,10 +40,6 @@ namespace C2.Database
                     log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                     return false;
                 }
-                finally
-                {
-                    con.Close();
-                }
             }
         }
         private void LimitTimeout(Connection conn)
