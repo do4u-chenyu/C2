@@ -226,10 +226,11 @@ namespace C2.Dialogs
             try
             {
                 string webContent = GetHtmlContent();
-                List<string> plugins = WebPluginList(webContent);
-                foreach (string pluginName in plugins)
+                List<string> webPlugins = WebPluginList(webContent);
+                List<string> unInstalledList = UninstalledPluginList(webPlugins);
+                foreach (string pluginName in unInstalledList)
                 {
-                    string version = GetDllVersion(pluginName); 
+                    string version = GetDllVersion(pluginName);
                     this.availableDGV.Rows.Add(new Object[] { pluginName, version, false });
                 }
             }
@@ -238,6 +239,15 @@ namespace C2.Dialogs
                 this.availableTB.Text = "插件加载失败: " + ex.Message;
             }
 
+        }
+        private List<string> UninstalledPluginList(List<string> webPlugins)
+        {
+            foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
+            {
+                if (webPlugins.Contains(plugin.GetPluginName()))
+                    webPlugins.Remove(plugin.GetPluginName());
+            }
+            return webPlugins;
         }
         /// <summary>
         /// 异常：
@@ -261,7 +271,7 @@ namespace C2.Dialogs
             List<string> result = new List<string>();
             if (string.IsNullOrEmpty(webcontent)) return result;
             string dllForm = string.Format(@"\>.*dll\<");
-            try 
+            try
             {
                 MatchCollection matchItems = Regex.Matches(webcontent, dllForm, RegexOptions.IgnoreCase);
                 foreach (Match match in matchItems)
@@ -270,7 +280,7 @@ namespace C2.Dialogs
                     result.Add(pluginName);
                 }
             }
-            catch { }          
+            catch { }
             return result;
 
         }
@@ -281,7 +291,7 @@ namespace C2.Dialogs
                 return name.Replace(".dll", "").Split('-')[1];
             }
             catch
-            { 
+            {
                 return string.Empty;
             }
         }
