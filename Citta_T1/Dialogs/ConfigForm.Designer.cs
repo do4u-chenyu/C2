@@ -398,6 +398,7 @@
             this.pluginsTabControl.SelectedIndex = 0;
             this.pluginsTabControl.Size = new System.Drawing.Size(634, 343);
             this.pluginsTabControl.TabIndex = 0;
+            this.pluginsTabControl.SelectedIndexChanged += new System.EventHandler(this.pluginsTabControl_SelectedIndexChanged);
             // 
             // installedSubPage
             // 

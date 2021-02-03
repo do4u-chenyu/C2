@@ -208,7 +208,7 @@ namespace C2.Dialogs
             UserModelTabPage_Load();
             PythonConfigTabPage_Load();
             PluginsConfigTabPage_Load();
-            UnInstalledPlugins_Load();
+          
         }
 
         private void PluginsConfigTabPage_Load()
@@ -412,6 +412,12 @@ namespace C2.Dialogs
             this.installedTB.Text = pg.GetPluginDescription();
         }
 
-
+        private void pluginsTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.availableDGV.Rows.Clear();
+            if (this.pluginsTabControl.SelectedIndex != 1)
+                return;
+            UnInstalledPlugins_Load();
+        }
     }
 }
