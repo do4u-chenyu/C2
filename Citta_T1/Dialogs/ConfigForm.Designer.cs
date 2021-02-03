@@ -614,9 +614,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(25, 19);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(112, 17);
+            this.label12.Size = new System.Drawing.Size(323, 17);
             this.label12.TabIndex = 10;
-            this.label12.Text = "Blablablablabla...";
+            this.label12.Text = "插件下载主页：http://218.94.117.234:8484/C2Plugins/";
             // 
             // pluginsTimeoutTB
             // 
@@ -659,7 +659,7 @@
             this.pluginsPortTB.Name = "pluginsPortTB";
             this.pluginsPortTB.Size = new System.Drawing.Size(71, 23);
             this.pluginsPortTB.TabIndex = 1;
-            this.pluginsPortTB.Text = "7777";
+            this.pluginsPortTB.Text = "8484";
             // 
             // pluginsHostTB
             // 
