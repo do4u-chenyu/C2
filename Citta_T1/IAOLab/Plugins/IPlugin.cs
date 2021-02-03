@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace C2.IAOLab.Plugins
 {
-    interface IPlugin
+    public interface IPlugin
     {
         String GetPluginName();
         String GetPluginDescription();
@@ -13,38 +13,30 @@ namespace C2.IAOLab.Plugins
         Image GetPluginImage(); 
         
         DialogResult ShowFormDialog();
-        Form GetForm();
     }
 
     #region 本地插件
-    class EmptyPlugin : IPlugin
+    public class EmptyPlugin : IPlugin
     {
         public string GetPluginDescription()
         {
-            return "EmptyPlugin";
+            return String.Empty;
         }
 
         public string GetPluginName()
         {
-            return "EmptyPlugin";
+            return String.Empty;
         }
 
         public string GetPluginVersion()
         {
-            return "0.0.0.1";
+            return String.Empty;
         }
         public Image GetPluginImage()
         {
             return null;
         }
-        /* public DialogResult ShowDialog()
-        {
-            throw new NotImplementedException();
-        }*/
-        public Form GetForm()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public DialogResult ShowFormDialog()
         {
@@ -72,14 +64,7 @@ namespace C2.IAOLab.Plugins
         {
             return null;
         }
-        /* public DialogResult ShowDialog()
-          {
-              throw new NotImplementedException();
-          }*/
-        public Form GetForm()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public DialogResult ShowFormDialog()
         {
@@ -106,14 +91,6 @@ namespace C2.IAOLab.Plugins
         public Image GetPluginImage()
         {
             return null;
-        }
-        /* public DialogResult ShowDialog()
-        {
-            throw new NotImplementedException();
-        }*/
-        public Form GetForm()
-        {
-            throw new NotImplementedException();
         }
 
         public DialogResult ShowFormDialog()
@@ -142,14 +119,7 @@ namespace C2.IAOLab.Plugins
         {
             return null;
         }
-        /* public DialogResult ShowDialog()
-         {
-             throw new NotImplementedException();
-         }*/
-        public Form GetForm()
-        { 
-            throw new NotImplementedException();
-        }
+
 
         public DialogResult ShowFormDialog()
         {
@@ -176,14 +146,7 @@ namespace C2.IAOLab.Plugins
         {
             return null;
         }
-        /* public DialogResult ShowDialog()
-        {
-            throw new NotImplementedException();
-        }*/
-        public Form GetForm()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public DialogResult ShowFormDialog()
         {
@@ -209,14 +172,6 @@ namespace C2.IAOLab.Plugins
         public Image GetPluginImage()
         {
             return null;
-        }
-        /* public DialogResult ShowDialog()
-         {
-             throw new NotImplementedException();
-         }*/
-        public Form GetForm()
-        {
-            throw new NotImplementedException();
         }
 
         public DialogResult ShowFormDialog()
@@ -245,14 +200,7 @@ namespace C2.IAOLab.Plugins
         {
             return null;
         }
-        /* public DialogResult ShowDialog()
-         {
-             throw new NotImplementedException();
-         }*/
-        public Form GetForm()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public DialogResult ShowFormDialog()
         {

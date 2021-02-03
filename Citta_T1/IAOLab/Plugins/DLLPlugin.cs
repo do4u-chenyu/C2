@@ -13,7 +13,7 @@ namespace C2.IAOLab.Plugins
     {
         private Type type;
         private object obj;
-        public static DLLPlugin Empty = new DLLPlugin(); 
+        public static readonly IPlugin Empty = new EmptyPlugin(); 
         DLLPlugin()
         { }
         public DLLPlugin(Type type ,object obj)
@@ -63,16 +63,6 @@ namespace C2.IAOLab.Plugins
             MethodInfo me = type.GetMethod("ShowFormDialog");
             return (DialogResult)me.Invoke(obj, null);
             
-        }
-
-        /// <summary>
-        /// 异常:
-        /// <para>DLLParsingFailureException</para>
-        /// </summary>
-        public Form GetForm()
-        {
-            MethodInfo showDialog = type.GetMethod("GetForm");
-            return showDialog.Invoke(obj, null) as Form;
         }
 
     }

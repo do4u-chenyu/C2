@@ -10,9 +10,11 @@ namespace C2.IAOLab.Plugins
 {
     class PluginsManager
     {
-        private static PluginsManager pluginsManager;
         private readonly static LogUtil log = LogUtil.GetInstance("PluginsManager");
-        public Dictionary<string, IPlugin> plugins;
+
+        private static PluginsManager pluginsManager;
+        
+        private Dictionary<string, IPlugin> plugins;
 
         public ICollection<IPlugin> Plugins 
         { 
@@ -32,102 +34,74 @@ namespace C2.IAOLab.Plugins
         private PluginsManager()
         {
             plugins = new Dictionary<string, IPlugin>() { };
-            //PluginsDownloader.Instance.DownloadEvent += Refresh;
         }
 
         public IPlugin FindPlugin(string pluginName)
         {
-            return plugins.ContainsKey(pluginName) ? plugins[pluginName] : new EmptyPlugin();
+            return plugins.ContainsKey(pluginName) ? plugins[pluginName] : DLLPlugin.Empty;
         }
 
         public void Refresh()
         {
             foreach (string dll in FileUtil.TryListFiles(Global.DLLPluginPath, "*.dll"))
-            {
-                try
-                {
-                    TryLoadOne(dll);
-                }
-                catch (Exception ex)
-                {
-                    log.Error(dll + "插件加载失败:" + ex.Message);
-                }
-
-            }
-
+                TryLoadOne(dll);
         }
-        /// <summary>
-        /// 异常:
-        /// <para>LoadPluginFailureException</para>
-        /// </summary>
+
         private void TryLoadOne(string ffp)
         {    
-            DLLPlugin dll = LoadPlugin(ffp);
+            IPlugin dll = LoadDll(ffp);
 
-            if (dll == DLLPlugin.Empty)
-                return;
+            string name = dll.GetPluginName();
 
-            string dll_name = dll.GetPluginName();
-
-            if (!plugins.ContainsKey(dll_name))
-                plugins.Add(dll_name, dll);
+            if (!String.IsNullOrEmpty(name)) 
+                plugins[name] = dll;             // 存在相同名称插件时，覆盖或者取先，逻辑意义上都一样，前者代码简单，用之
 
             return;
         }
-        /// <summary>
-        /// 异常:
-        /// <para>LoadPluginFailureException</para>
-        /// </summary>
 
-        private DLLPlugin LoadPlugin(string ffp)
+        private IPlugin LoadDll(string ffp)
         {
             if (!File.Exists(ffp))
                 return DLLPlugin.Empty;
 
             try 
             {
-                var assembly = Assembly.LoadFrom(ffp);
+                Assembly assembly = Assembly.LoadFrom(ffp);
                 Type[] types = assembly.GetTypes();
 
                 Type type = types.Find(t => t.GetInterface("IPlugin") != null);
+
                 if (type == null)
                     return DLLPlugin.Empty;
 
                 object obj = assembly.CreateInstance(type.FullName);
-                return Check(type, obj) ? new DLLPlugin(type, obj) : DLLPlugin.Empty;
+                return Check(type) ? new DLLPlugin(type, obj) : DLLPlugin.Empty;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                log.Error(ffp + "插件加载失败:" + ex.Message);
                 return DLLPlugin.Empty;
             }
           
         }
 
-        private bool Check(Type type, object dll)
+        private bool Check(Type type)
         {
+            string[] methods = new string[] { "GetPluginDescription", 
+                                              "GetPluginName", 
+                                              "GetPluginVersion", 
+                                              "GetPluginImage", 
+                                              "ShowFormDialog" };
+            bool ret = true;
+
             try 
             {
-                if (type.GetMethod("GetPluginDescription") == null)
-                    return false;
-
-                if (type.GetMethod("GetPluginName") == null)
-                    return false;
-
-                if (type.GetMethod("GetPluginVersion") == null)
-                    return false;
-
-                if (type.GetMethod("GetPluginImage") == null)
-                    return false;
-
-                return true;
+                foreach(string m in methods)
+                    ret = ret && type.GetMethod(m) != null;  // 一个都不能少
             }
-            catch 
-            {
-                return false;
-            }
+            catch { ret = false; }
+
+            return ret;
         }
-
-
     }
 }

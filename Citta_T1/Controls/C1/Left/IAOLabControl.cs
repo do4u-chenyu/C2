@@ -17,12 +17,15 @@ namespace C2.Controls.Left
         private static readonly int ButtonBottomOffsetY = 23;
         private Point startPoint;
 
-        public IAOButton GenIAOButton(string modelName)
+        public IAOButton GenIAOButton(string modelName, string tips = "", Image icon = null)
         {
             IAOButton ib = new IAOButton(modelName);
             LayoutModelButtonLocation(ib); // 递增       
-
             this.IAOLabPanel.Controls.Add(ib);
+            
+            if (!string.IsNullOrEmpty(tips)) ib.SetToolTip(tips);
+            if (icon != null) ib.SetIcon(icon);
+
             return ib;
         }
 

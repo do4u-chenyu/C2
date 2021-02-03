@@ -262,7 +262,7 @@ namespace C2
             LoadHotModel();
             LoadDocuments();
             LoadDataSource();
-            LoadIAOSource();
+            LoadIAOLaboratory();
 
         }
 
@@ -302,32 +302,39 @@ namespace C2
             foreach (LinkButton linkButton in linkButtons)
                 this.dataSourceControl.GenLinkButton(linkButton);
         }
-        private void LoadIAOSource()
+        private void LoadIAOLaboratory()
+        {
+            // 加载固定的6个小工具
+            LoadInnerPlugins();
+            // 加载DLL动态插件
+            LoadDllPlugins();
+        }
+
+        private void LoadInnerPlugins()
         {
             string[] IAOLabArr = { "APK", "BaseStation", "Wifi", "Card", "Tude", "Ip" };
             string IAOLabPlugins = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultIAOLab);
-            foreach(string name in IAOLabPlugins.Split(','))
+            foreach (string name in IAOLabPlugins.Split(','))
             {
                 if (IAOLabArr._Contains(name.Trim()))
                 {
                     this.iaoModelControl.GenIAOButton(name.Trim());
                 }
-                   
+
             }
-            // 动态插件加载
+        }
+
+        private void LoadDllPlugins()
+        {
             PluginsManager.Instance.Refresh();
-            
-            foreach(IPlugin plugin in PluginsManager.Instance.Plugins)
+
+            foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
             {
                 string name = plugin.GetPluginName();
                 string desc = plugin.GetPluginDescription();
                 Image icon = plugin.GetPluginImage();
-                
-                IAOButton ib = this.iaoModelControl.GenIAOButton(name);
-                ib.SetToolTip(desc);
-                ib.SetIcon(icon);
-                ib.ShowDialogDelegate += delegate () { plugin.ShowFormDialog(); };
-                // TODO 生成Button
+
+                this.iaoModelControl.GenIAOButton(name, desc, icon).ShowDialogDelegate += delegate () { plugin.ShowFormDialog(); };
             }
         }
 
