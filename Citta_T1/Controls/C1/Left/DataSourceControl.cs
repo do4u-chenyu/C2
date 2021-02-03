@@ -372,7 +372,7 @@ namespace C2.Controls.Left
                 {
                     HelpUtil.ShowMessageBox(HelpUtil.DbQueryFailInfo, ex.Message);
                 }
-                this.tableFilterTextBox.Text = "";
+                this.tableFilterTextBox.Text = String.Empty;
             }
         }
 

@@ -18,7 +18,7 @@ namespace C2.Business.Schedule.Cmd
             string inputFilePath = inputFilePaths.First();//输入文件
 
             //是否去重(是对整个文件去重)、升降序
-            string repetition = option.GetOption("noRepetition").ToLower() == "true" ? string.Format("sbin\\sort.exe {0} -u |", this.sortConfig) : "";
+            string repetition = option.GetOption("noRepetition").ToLower() == "true" ? string.Format("sbin\\sort.exe {0} -u |", this.sortConfig) : string.Empty;
             string order = option.GetOption("ascendingOrder").ToLower() == "true" ? string.Format("sbin\\sort.exe {0} ", this.sortConfig) : string.Format("sbin\\sort.exe {0} -r ", this.sortConfig);
 
             //待统计频率字段合并
