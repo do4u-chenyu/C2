@@ -8,6 +8,7 @@ using C2.Core;
 using C2.Dialogs;
 using C2.Forms;
 using C2.Globalization;
+using C2.IAOLab.WebEngine;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
@@ -222,7 +223,18 @@ namespace C2.Controls.MapViews
             MapWidget atw = hitTopic.FindWidget<MapWidget>();
             if (atw == null)
                 hitTopic.Widgets.Add(new MapWidget());
+            
             //TODO phx  打开web窗口
+            new WebBrowserDialog().Show();
+            
+            return;
+        }
+        public void AddBoss()
+        {
+            Topic hitTopic = SelectedTopics[0];
+            //TODO phx  打开web窗口
+            new WebBrowserDialog().Show();
+
             return;
         }
         #endregion

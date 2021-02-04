@@ -426,6 +426,7 @@
 	<item name="ATTACHMENT">附件挂件</item>
 	<item name="AddAttachment">附件</item>
 	<item name="AddMap">图上作战</item>
+	<item name="AddBoss">数据大屏</item>
 	<item name="OpenAttachment">打开</item>
 	<item name="DeleteAttachment">删除</item>
 	<item name="Rotate Left">向左旋转</item>
