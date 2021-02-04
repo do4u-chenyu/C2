@@ -215,6 +215,16 @@ namespace C2.Controls.MapViews
                 }
             }
         }
+
+        public void AddMap()
+        {
+            Topic hitTopic = SelectedTopics[0];
+            MapWidget atw = hitTopic.FindWidget<MapWidget>();
+            if (atw == null)
+                hitTopic.Widgets.Add(new MapWidget());
+            //TODO phx  打开web窗口
+            return;
+        }
         #endregion
 
         void AddWidget(string typeID, Widget template, bool showDialog)
