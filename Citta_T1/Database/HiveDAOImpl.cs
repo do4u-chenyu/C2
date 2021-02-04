@@ -61,7 +61,7 @@ namespace C2.Database
                     //LimitTimeout(con);
                     var cursor = con.GetCursor();
                     cursor.Execute("use " + dataBaseName);          
-                    cursor.Execute(sqlText.Trim().TrimEnd(';'));
+                    cursor.Execute(DbUtil.PurifyOnelineSQL(sqlText));
                     var oneRow = cursor.FetchOne();
                     if (!oneRow.IsEmpty())
                     {

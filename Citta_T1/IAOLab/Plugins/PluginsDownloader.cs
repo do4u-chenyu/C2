@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,15 +12,12 @@ namespace C2.IAOLab.Plugins
 {
     public class PluginsDownloader
     {
-        private static string webPath; 
-        /// <summary>
-        /// 异常：
-        /// <para>WebRequestFailureException</para>
-        /// </summary>
-        public static string GetHtmlContent(string pluginUrl)
+        private static string webPath;
+        private readonly static LogUtil log = LogUtil.GetInstance("PluginsDownloader");
+        public string GetHtmlContent(string pluginUrl)
         {
             string htmlContent = string.Empty;
-            try 
+            try
             {
                 Stream resStream = WebRequest.Create(pluginUrl)
                                              .GetResponse()
@@ -30,22 +28,22 @@ namespace C2.IAOLab.Plugins
                 resStream.Close();
                 sr.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                log.Error("获取网页插件列表失败:" + ex.Message);
             }
-            
+
             return htmlContent;
         }
 
-        public static List<string> WebPluginList(string webcontent)
+        public List<string> WebPluginList(string webcontent)
         {
             List<string> result = new List<string>();
             if (string.IsNullOrEmpty(webcontent)) return result;
-            string dllForm = string.Format(@"\>.*dll\<");
+            string dllPattern = string.Format(@"\>.*dll\<");
             try
             {
-                MatchCollection matchItems = Regex.Matches(webcontent, dllForm, RegexOptions.IgnoreCase);
+                MatchCollection matchItems = Regex.Matches(webcontent, dllPattern, RegexOptions.IgnoreCase);
                 foreach (Match match in matchItems)
                 {
                     string pluginName = match.Value.Trim(new char[] { '>', '<' });
@@ -60,7 +58,7 @@ namespace C2.IAOLab.Plugins
         /// 异常：
         /// <para>DownloadFailureException</para>
         /// </summary>
-        public static void PluginsDownload(string url, string savePath)
+        public void PluginsDownload(string url, string savePath)
         {
             try
             {
@@ -72,7 +70,7 @@ namespace C2.IAOLab.Plugins
                 throw new Exception(ex.Message);
             }
 
-        }  
+        }
 
 
     }

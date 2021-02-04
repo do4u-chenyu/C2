@@ -32,19 +32,48 @@ namespace C2.IAOLab.Plugins
             }
         }
 
-        public String BrowserPluginsList()
-        {//访问下载列表
-            return String.Empty;
+        public List<String> BrowserPluginsList()
+        {
+            //访问下载列表
+            string webContent = downloader.GetHtmlContent(Global.DLLListUrl);
+            return downloader.WebPluginList(webContent);
+        }
+        public List<string> UpdatablePluginList()
+        {
+            List<string> webPlugins = BrowserPluginsList();
+            if (webPlugins.IsEmpty()) return webPlugins;
+            foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
+            {
+                if (webPlugins.Contains(plugin.GetPluginName()))
+                    webPlugins.Remove(plugin.GetPluginName());
+            }
+            return webPlugins;
         }
 
-        public bool DownloadPlugin(string pluginName)
+        /// <summary>
+        /// 异常：
+        /// <para>DownloadFailureException</para>
+        /// </summary>
+        public void DownloadPlugin(string pluginName)
         {
-            return false;
+            string selectedDll = Global.DLLPackageUrl + pluginName;
+            string savePath = Path.Combine(Global.LocalPluginPath, pluginName);
+            try
+            {
+                downloader.PluginsDownload(selectedDll, savePath);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+           
+
         }
 
         private PluginsManager()
         {
             plugins = new Dictionary<string, IPlugin>() { };
+            downloader = new PluginsDownloader();
         }
 
         public IPlugin FindPlugin(string pluginName)
@@ -54,7 +83,7 @@ namespace C2.IAOLab.Plugins
 
         public void Refresh()
         {
-            foreach (string dll in FileUtil.TryListFiles(Global.DLLPluginPath, "*.dll"))
+            foreach (string dll in FileUtil.TryListFiles(Global.LocalPluginPath, "*.dll"))
                 TryLoadOne(dll);
         }
 

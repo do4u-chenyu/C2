@@ -65,13 +65,12 @@ namespace C2.Database
         {
             string result = String.Empty;
             OracleConnection con = new OracleConnection(this.ConnectionString);
-            List<string> sqlCommands = GetSubSQLCommand(sql);
+            sql = DbUtil.PurifyOnelineSQL(sql);
             try
             {
                 con.Open();
-                for (int i = 0; i < sqlCommands.Count - 1; i++)
-                    this.ExecuteNonQuery(sqlCommands[i], con);
-                result = this.ExecuteQuery(sqlCommands[sqlCommands.Count - 1], con, header, returnNum);
+                // 20210204 由于没有SQL语法解析，所以无法处理分隔符带来歧义等各种语法问题，因此目前支持一行SQL
+                result = this.ExecuteQuery(sql, con, header, returnNum);
             }
             catch(Exception ex)
             {
