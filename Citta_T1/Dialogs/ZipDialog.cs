@@ -85,7 +85,7 @@ namespace C2.Dialogs
                 Title = "导入业务视图",
                 AddExtension = true
             };
-            this.Text = "导出业务视图";
+            this.Text = "导入业务视图";
         }
     }
 

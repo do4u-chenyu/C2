@@ -2749,6 +2749,7 @@
     <None Include="Resources\WidgetIcon\ORACLE.png" />
     <None Include="Resources\WidgetIcon\Excel.png" />
     <None Include="Resources\WidgetIcon\地图.png" />
+    <None Include="Resources\WidgetIcon\大屏.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

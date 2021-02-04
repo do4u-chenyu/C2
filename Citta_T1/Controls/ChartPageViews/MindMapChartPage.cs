@@ -213,6 +213,7 @@ namespace C2.ChartPageView
             MenuAddOperator.Text = Lang._("Operator");
             MenuAddAttachment.Text = Lang._("AddAttachment");
             MenuAddMap.Text = Lang._("AddMap");
+            MenuAddBoss.Text = Lang._("AddBoss");
             MenuAddMaxOp.Text = Lang._("Max");
             MenuAddAIOp.Text = Lang._("AI");
             MenuAddModelOp.Text = Lang._("Model");
@@ -253,6 +254,7 @@ namespace C2.ChartPageView
         ToolStripMenuItem MenuAddOperator;
         ToolStripMenuItem MenuAddAttachment;
         ToolStripMenuItem MenuAddMap;
+        ToolStripMenuItem MenuAddBoss;
         ToolStripMenuItem MenuAddMaxOp;
         ToolStripMenuItem MenuAddAIOp;
         ToolStripMenuItem MenuAddModelOp;
@@ -303,6 +305,7 @@ namespace C2.ChartPageView
             MenuAddOperator = new ToolStripMenuItem();
             MenuAddAttachment = new ToolStripMenuItem();
             MenuAddMap = new ToolStripMenuItem();
+            MenuAddBoss = new ToolStripMenuItem();
             MenuAddMaxOp = new ToolStripMenuItem();
             MenuAddAIOp = new ToolStripMenuItem();
             MenuAddModelOp = new ToolStripMenuItem();
@@ -379,7 +382,8 @@ namespace C2.ChartPageView
                 MenuAddOperator,
                 MenuAddModelOp,
                 MenuAddAttachment,
-                MenuAddMap});
+                MenuAddMap,
+                MenuAddBoss});
             MenuAdd.Name = "MenuAdd";
             MenuAdd.Text = "Add";
 
@@ -424,6 +428,12 @@ namespace C2.ChartPageView
             MenuAddMap.Name = "MenuAddMap";
             MenuAddMap.Text = "Map";
             MenuAddMap.Click += new System.EventHandler(MenuAddMap_Click);
+
+            //MenuAddBoss
+            MenuAddBoss.Image = C2.Properties.Resources.大屏;
+            MenuAddBoss.Name = "MenuAddBoss";
+            MenuAddBoss.Text = "Boss";
+            MenuAddBoss.Click += new System.EventHandler(MenuAddBoss_Click);
 
             // toolStripSeparator5
             toolStripSeparator5.Name = "toolStripSeparator5";
@@ -579,6 +589,7 @@ namespace C2.ChartPageView
                 MenuAddOperator.Enabled = topicCount > 0 && count == 1 && string.Equals("业务拓展视图",chartName);
                 MenuAddAttachment.Enabled = topicCount > 0 && count == 1;
                 MenuAddMap.Enabled = topicCount > 0 && count == 1;
+                MenuAddBoss.Enabled = topicCount > 0 && count == 1;
                 MenuAddProgressBar.Enabled = topicCount > 0;
                 MenuAddModelOp.Enabled = topicCount > 0 && count == 1 && string.Equals("业务拓展视图", chartName);
                 MenuNewChartFromHere.Available = topicCount == 1;
@@ -721,7 +732,11 @@ namespace C2.ChartPageView
         {
             mindMapView1.AddMap();
         }
-
+        void MenuAddBoss_Click(object sender, EventArgs e)
+        {
+            mindMapView1.AddBoss();
+        }
+        
         void MenuStraightening_Click(object sender, EventArgs e)
         {
             foreach (ChartObject mo in SelectedObjects)
