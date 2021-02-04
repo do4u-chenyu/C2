@@ -61,7 +61,7 @@ namespace C2.Database
                     //LimitTimeout(con);
                     var cursor = con.GetCursor();
                     cursor.Execute("use " + dataBaseName);          
-                    cursor.Execute(sqlText);
+                    cursor.Execute(sqlText.Trim().TrimEnd(';'));
                     var oneRow = cursor.FetchOne();
                     if (!oneRow.IsEmpty())
                     {
@@ -130,7 +130,7 @@ namespace C2.Database
                    // LimitTimeout(conn);
                     var cursor = con.GetCursor();
                     cursor.Execute("use " + dataBaseName);
-                    foreach (var s in sql.Split(';'))
+                    foreach (var s in sql.Trim().Split(';'))
                     {
                         if (!String.IsNullOrEmpty(s))
                             cursor.Execute(s);
