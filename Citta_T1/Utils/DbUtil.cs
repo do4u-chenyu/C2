@@ -60,5 +60,9 @@ namespace C2.Utils
                     return String.Empty;
             }
         }
+        public static string PurifyOnelineSQL(string sql)
+        {
+            return sql.Trim().TrimEnd(';');
+        }
     }
 }
