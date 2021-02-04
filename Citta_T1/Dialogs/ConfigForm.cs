@@ -20,8 +20,7 @@ namespace C2.Dialogs
         private static readonly int CheckBoxColumnIndex = 2;
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
-        private static readonly string pluginUrl = @"http://218.94.117.234:8484/C2Plugins/";
-        private static readonly string dllUrl = @"http://218.94.117.234:8484/C2Plugins/packages/";
+
         public ConfigForm()
         {
             InitializeComponent();
@@ -223,32 +222,14 @@ namespace C2.Dialogs
 
         private void UnInstalledPlugins_Load()
         {
-            try
+            List<string> updatableList = PluginsManager.Instance.UpdatablePluginList();
+            foreach (string pluginName in updatableList)
             {
-                string webContent = PluginsDownloader.GetHtmlContent(pluginUrl);
-                List<string> webPlugins = PluginsDownloader.WebPluginList(webContent);
-                List<string> unInstalledList = UninstalledPluginList(webPlugins);
-                foreach (string pluginName in unInstalledList)
-                {
-                    string version = GetDllVersion(pluginName);
-                    this.availableDGV.Rows.Add(new Object[] { pluginName, version, false });
-                }
+                string version = GetDllVersion(pluginName);
+                this.availableDGV.Rows.Add(new Object[] { pluginName, version, false });
             }
-            catch (Exception ex)
-            {
-                this.availableTB.Text = "插件加载失败: " + ex.Message;
-            }
+        }
 
-        }
-        private List<string> UninstalledPluginList(List<string> webPlugins)
-        {
-            foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
-            {
-                if (webPlugins.Contains(plugin.GetPluginName()))
-                    webPlugins.Remove(plugin.GetPluginName());
-            }
-            return webPlugins;
-        }
 
 
 
@@ -397,11 +378,8 @@ namespace C2.Dialogs
                     continue;
                 try
                 {
-                    string selectedDll = dllUrl + row.Cells[0].Value.ToString();
-                    string savePath = Path.Combine(Global.DLLPluginPath, row.Cells[0].Value.ToString());
-                    PluginsDownloader.PluginsDownload(selectedDll, savePath);
-                    this.availableDGV.Rows.Remove(row);
-                    this.installedDGV.Rows.Add(row);
+
+                    PluginsManager.Instance.DownloadPlugin(row.Cells[0].Value.ToString());
                     MessageBox.Show("插件下载成功，请重启软件加载新插件功能");
 
                 }

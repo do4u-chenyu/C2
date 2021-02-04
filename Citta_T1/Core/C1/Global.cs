@@ -147,8 +147,11 @@ namespace C2.Core
         public const string IAOLab = "APK, BaseStation, Wifi, Card, Tude, Ip ";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
         public const int ChartNum = 3;
-        public static string DLLPluginPath = Path.Combine(Application.StartupPath, "plugins");
+        public static string LocalPluginPath = Path.Combine(Application.StartupPath, "plugins");
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
+        public const string DLLListUrl = @"http://218.94.117.234:8484/C2Plugins/";
+        public const string DLLPackageUrl = DLLListUrl + @"packages/";
+
         public static Dictionary<string, MindMapLayoutType> ChartOptions = new Dictionary<string, MindMapLayoutType>
         {
             { "业务拓展视图", MindMapLayoutType.MindMap}, {"组织架构视图", MindMapLayoutType.OrganizationDown}, { "运作模式视图", MindMapLayoutType.MindMap}
