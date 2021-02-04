@@ -16,6 +16,8 @@ namespace C2.IAOLab.Plugins
         
         private Dictionary<string, IPlugin> plugins;
 
+        private PluginsDownloader downloader;
+
         public ICollection<IPlugin> Plugins 
         { 
             get { return plugins.Values; } 
@@ -30,6 +32,15 @@ namespace C2.IAOLab.Plugins
             }
         }
 
+        public String BrowserPluginsList()
+        {//访问下载列表
+            return String.Empty;
+        }
+
+        public bool DownloadPlugin(string pluginName)
+        {
+            return false;
+        }
 
         private PluginsManager()
         {

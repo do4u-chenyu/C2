@@ -209,7 +209,6 @@ namespace C2.Dialogs
             UserModelTabPage_Load();
             PythonConfigTabPage_Load();
             PluginsConfigTabPage_Load();
-
         }
 
         private void PluginsConfigTabPage_Load()
