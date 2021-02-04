@@ -59,7 +59,28 @@
             this.browseButton = new System.Windows.Forms.Button();
             this.pythonFFPTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pluginsPage = new System.Windows.Forms.TabPage();
+            this.gisMapConfigPage = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.baiduGISTB = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.fhGISTB = new System.Windows.Forms.TextBox();
+            this.pluginsConfigPage = new System.Windows.Forms.TabPage();
             this.pluginsCancelButton = new System.Windows.Forms.Button();
             this.pluginsOKButton = new System.Windows.Forms.Button();
             this.pluginsTabControl = new System.Windows.Forms.TabControl();
@@ -86,7 +107,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.pluginsPortTB = new System.Windows.Forms.TextBox();
             this.pluginsHostTB = new System.Windows.Forms.TextBox();
-            this.aboutPage = new System.Windows.Forms.TabPage();
+            this.aboutConfigPage = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
@@ -97,11 +118,20 @@
             this.label5 = new System.Windows.Forms.Label();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.mainTabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.pluginsPage.SuspendLayout();
+            this.gisMapConfigPage.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.pluginsConfigPage.SuspendLayout();
             this.pluginsTabControl.SuspendLayout();
             this.installedSubPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.installedDGV)).BeginInit();
@@ -109,15 +139,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.availableDGV)).BeginInit();
             this.HostSubPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.aboutPage.SuspendLayout();
+            this.aboutConfigPage.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // mainTabControl
             // 
             this.mainTabControl.Controls.Add(this.userModelConfigPage);
             this.mainTabControl.Controls.Add(this.pythonConfigPage);
-            this.mainTabControl.Controls.Add(this.pluginsPage);
-            this.mainTabControl.Controls.Add(this.aboutPage);
+            this.mainTabControl.Controls.Add(this.gisMapConfigPage);
+            this.mainTabControl.Controls.Add(this.pluginsConfigPage);
+            this.mainTabControl.Controls.Add(this.aboutConfigPage);
             this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainTabControl.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.mainTabControl.Location = new System.Drawing.Point(0, 0);
@@ -354,17 +387,225 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Pyhton虚拟机路径(Python Interpreter)";
             // 
-            // pluginsPage
+            // gisMapConfigPage
             // 
-            this.pluginsPage.Controls.Add(this.pluginsCancelButton);
-            this.pluginsPage.Controls.Add(this.pluginsOKButton);
-            this.pluginsPage.Controls.Add(this.pluginsTabControl);
-            this.pluginsPage.Location = new System.Drawing.Point(4, 26);
-            this.pluginsPage.Name = "pluginsPage";
-            this.pluginsPage.Size = new System.Drawing.Size(634, 380);
-            this.pluginsPage.TabIndex = 4;
-            this.pluginsPage.Text = "插件管理";
-            this.pluginsPage.UseVisualStyleBackColor = true;
+            this.gisMapConfigPage.Controls.Add(this.button1);
+            this.gisMapConfigPage.Controls.Add(this.button2);
+            this.gisMapConfigPage.Controls.Add(this.tabControl1);
+            this.gisMapConfigPage.Location = new System.Drawing.Point(4, 26);
+            this.gisMapConfigPage.Name = "gisMapConfigPage";
+            this.gisMapConfigPage.Size = new System.Drawing.Size(634, 380);
+            this.gisMapConfigPage.TabIndex = 5;
+            this.gisMapConfigPage.Text = "图上作战";
+            this.gisMapConfigPage.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(551, 349);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "取消";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(458, 349);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "确认";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(634, 343);
+            this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.label15);
+            this.tabPage1.Controls.Add(this.label16);
+            this.tabPage1.Controls.Add(this.label17);
+            this.tabPage1.Controls.Add(this.textBox2);
+            this.tabPage1.Controls.Add(this.textBox5);
+            this.tabPage1.Controls.Add(this.baiduGISTB);
+            this.tabPage1.Location = new System.Drawing.Point(4, 26);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(626, 313);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "百度地图(外网)";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(50, 101);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(245, 23);
+            this.textBox1.TabIndex = 13;
+            this.textBox1.Text = "15";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(9, 103);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(33, 17);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Key:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(9, 62);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(39, 17);
+            this.label16.TabIndex = 11;
+            this.label16.Text = "端口 :";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 21);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(39, 17);
+            this.label17.TabIndex = 10;
+            this.label17.Text = "地址 :";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(50, 60);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(71, 23);
+            this.textBox2.TabIndex = 9;
+            this.textBox2.Text = "8484";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(50, 19);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(371, 23);
+            this.textBox5.TabIndex = 8;
+            this.textBox5.Text = "218.94.117.234";
+            // 
+            // baiduGISTB
+            // 
+            this.baiduGISTB.Location = new System.Drawing.Point(3, 176);
+            this.baiduGISTB.Multiline = true;
+            this.baiduGISTB.Name = "baiduGISTB";
+            this.baiduGISTB.ReadOnly = true;
+            this.baiduGISTB.Size = new System.Drawing.Size(620, 102);
+            this.baiduGISTB.TabIndex = 7;
+            this.baiduGISTB.Text = "基于百度地图的图上作战功能，需要百度地图服务器地址和百度开发者key，支持图上打点，轨迹图，区域图，热力图，自定义脚本...";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label18);
+            this.tabPage2.Controls.Add(this.textBox6);
+            this.tabPage2.Controls.Add(this.label19);
+            this.tabPage2.Controls.Add(this.label20);
+            this.tabPage2.Controls.Add(this.label21);
+            this.tabPage2.Controls.Add(this.textBox7);
+            this.tabPage2.Controls.Add(this.textBox8);
+            this.tabPage2.Controls.Add(this.fhGISTB);
+            this.tabPage2.Location = new System.Drawing.Point(4, 26);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(626, 313);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "FHGIS(内网)";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(101, 103);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(20, 17);
+            this.label18.TabIndex = 14;
+            this.label18.Text = "秒";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(50, 101);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(33, 23);
+            this.textBox6.TabIndex = 13;
+            this.textBox6.Text = "15";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(9, 103);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(39, 17);
+            this.label19.TabIndex = 12;
+            this.label19.Text = "超时 :";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(9, 62);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(39, 17);
+            this.label20.TabIndex = 11;
+            this.label20.Text = "端口 :";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(9, 21);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(39, 17);
+            this.label21.TabIndex = 10;
+            this.label21.Text = "地址 :";
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(50, 60);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(71, 23);
+            this.textBox7.TabIndex = 9;
+            this.textBox7.Text = "9150";
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(50, 19);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(371, 23);
+            this.textBox8.TabIndex = 8;
+            this.textBox8.Text = "218.94.117.234";
+            // 
+            // fhGISTB
+            // 
+            this.fhGISTB.Location = new System.Drawing.Point(3, 176);
+            this.fhGISTB.Multiline = true;
+            this.fhGISTB.Name = "fhGISTB";
+            this.fhGISTB.ReadOnly = true;
+            this.fhGISTB.Size = new System.Drawing.Size(620, 102);
+            this.fhGISTB.TabIndex = 6;
+            this.fhGISTB.Text = "基于FHGIS的图上作战功能，需要配置内网FHGIS服务器地址，支持图上打点，轨迹图，区域图，热力图，自定义脚本...";
+            // 
+            // pluginsConfigPage
+            // 
+            this.pluginsConfigPage.Controls.Add(this.pluginsCancelButton);
+            this.pluginsConfigPage.Controls.Add(this.pluginsOKButton);
+            this.pluginsConfigPage.Controls.Add(this.pluginsTabControl);
+            this.pluginsConfigPage.Location = new System.Drawing.Point(4, 26);
+            this.pluginsConfigPage.Name = "pluginsConfigPage";
+            this.pluginsConfigPage.Size = new System.Drawing.Size(634, 380);
+            this.pluginsConfigPage.TabIndex = 4;
+            this.pluginsConfigPage.Text = "插件管理";
+            this.pluginsConfigPage.UseVisualStyleBackColor = true;
             // 
             // pluginsCancelButton
             // 
@@ -671,23 +912,23 @@
             this.pluginsHostTB.TabIndex = 0;
             this.pluginsHostTB.Text = "218.94.117.234";
             // 
-            // aboutPage
+            // aboutConfigPage
             // 
-            this.aboutPage.Controls.Add(this.label8);
-            this.aboutPage.Controls.Add(this.textBox4);
-            this.aboutPage.Controls.Add(this.button7);
-            this.aboutPage.Controls.Add(this.textBox3);
-            this.aboutPage.Controls.Add(this.aboutCancelButton);
-            this.aboutPage.Controls.Add(this.aboutOkButton);
-            this.aboutPage.Controls.Add(this.label6);
-            this.aboutPage.Controls.Add(this.label5);
-            this.aboutPage.Location = new System.Drawing.Point(4, 26);
-            this.aboutPage.Name = "aboutPage";
-            this.aboutPage.Padding = new System.Windows.Forms.Padding(3);
-            this.aboutPage.Size = new System.Drawing.Size(634, 380);
-            this.aboutPage.TabIndex = 3;
-            this.aboutPage.Text = "关于和注册";
-            this.aboutPage.UseVisualStyleBackColor = true;
+            this.aboutConfigPage.Controls.Add(this.label8);
+            this.aboutConfigPage.Controls.Add(this.textBox4);
+            this.aboutConfigPage.Controls.Add(this.button7);
+            this.aboutConfigPage.Controls.Add(this.textBox3);
+            this.aboutConfigPage.Controls.Add(this.aboutCancelButton);
+            this.aboutConfigPage.Controls.Add(this.aboutOkButton);
+            this.aboutConfigPage.Controls.Add(this.label6);
+            this.aboutConfigPage.Controls.Add(this.label5);
+            this.aboutConfigPage.Location = new System.Drawing.Point(4, 26);
+            this.aboutConfigPage.Name = "aboutConfigPage";
+            this.aboutConfigPage.Padding = new System.Windows.Forms.Padding(3);
+            this.aboutConfigPage.Size = new System.Drawing.Size(634, 380);
+            this.aboutConfigPage.TabIndex = 3;
+            this.aboutConfigPage.Text = "关于和注册";
+            this.aboutConfigPage.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -777,6 +1018,55 @@
             this.pythonOpenFileDialog.RestoreDirectory = true;
             this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.button5);
+            this.tabPage3.Controls.Add(this.button4);
+            this.tabPage3.Controls.Add(this.textBox9);
+            this.tabPage3.Controls.Add(this.pictureBox1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(626, 313);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "WebKit内核下载";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(185, 58);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(236, 196);
+            this.pictureBox1.TabIndex = 21;
+            this.pictureBox1.TabStop = false;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(49, 19);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(523, 23);
+            this.textBox9.TabIndex = 22;
+            this.textBox9.Text = "218.94.117.234";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(210, 268);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "自动安装";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(331, 268);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 24;
+            this.button5.Text = "手工安装";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
             // ConfigForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -796,7 +1086,13 @@
             this.pythonConfigPage.ResumeLayout(false);
             this.pythonConfigPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.pluginsPage.ResumeLayout(false);
+            this.gisMapConfigPage.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.pluginsConfigPage.ResumeLayout(false);
             this.pluginsTabControl.ResumeLayout(false);
             this.installedSubPage.ResumeLayout(false);
             this.installedSubPage.PerformLayout();
@@ -808,8 +1104,11 @@
             this.HostSubPage.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.aboutPage.ResumeLayout(false);
-            this.aboutPage.PerformLayout();
+            this.aboutConfigPage.ResumeLayout(false);
+            this.aboutConfigPage.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -819,7 +1118,7 @@
         private System.Windows.Forms.TabControl mainTabControl;
         private System.Windows.Forms.TabPage userModelConfigPage;
         private System.Windows.Forms.TabPage pythonConfigPage;
-        private System.Windows.Forms.TabPage aboutPage;
+        private System.Windows.Forms.TabPage aboutConfigPage;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.TextBox pythonFFPTextBox;
@@ -847,7 +1146,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn interpreterFFPColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn aliasColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chosenColumn;
-        private System.Windows.Forms.TabPage pluginsPage;
+        private System.Windows.Forms.TabPage pluginsConfigPage;
         private System.Windows.Forms.Button pluginsCancelButton;
         private System.Windows.Forms.Button pluginsOKButton;
         private System.Windows.Forms.TabControl pluginsTabControl;
@@ -874,5 +1173,31 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.TabPage gisMapConfigPage;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox baiduGISTB;
+        private System.Windows.Forms.TextBox fhGISTB;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox textBox9;
     }
 }

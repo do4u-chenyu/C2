@@ -97,8 +97,10 @@ namespace C2.Database.Tests
             InitDao();
             for(int i = 0; i < daos.Count; i++)
             {
-                string result = daos[i].GetTableContentString(dbis[i].DataTable, 1000);
+                string result = daos[i].GetTableContentString(dbis[i].DataTable, 10);
                 Assert.IsTrue(!String.IsNullOrEmpty(result));
+                Console.WriteLine(dbis[i].DataTable.Name);
+                Console.WriteLine(result);
             }
         }
 
@@ -110,7 +112,7 @@ namespace C2.Database.Tests
             {
                 List<List<string>> result = daos[i].GetTableContent(dbis[i].DataTable, 1000);
                 Assert.IsTrue(result.Count > 0 && result[0].Count > 0);
-                Console.WriteLine(result[0][0]);
+                Console.WriteLine(String.Join("\t", result[0]));
             }
         }
 
@@ -118,10 +120,16 @@ namespace C2.Database.Tests
         public void GetSchemaByTablesTest()
         {
             InitDao();
-            foreach (var dao in daos)
+            for (int i = 0; i < daos.Count; i++)
             {
+                if (i == 1)
+                    continue;
+                var dao = daos[i];
                 Dictionary<string, List<string>> result = dao.GetColNameByTables(new List<Table>() { oralcDBI.DataTable });
                 Assert.IsTrue(result.Keys.Count > 0);
+                foreach (var key in result.Keys)
+                    foreach (var value in result[key])
+                        Console.WriteLine(String.Format("{0}: {1}", key, value));
             }
         }
         [TestMethod]
@@ -132,7 +140,7 @@ namespace C2.Database.Tests
             {
                 string sql = @"select * from TEST_100W";
                 string filePath = @"D:/tmp.txt";
-                int maxReturnNum = 10000;
+                int maxReturnNum = new Random().Next(9000, 10000);
                 bool result = dao.ExecuteSQL(sql, filePath, maxReturnNum);
 
                 Assert.IsTrue(File.Exists(filePath));
