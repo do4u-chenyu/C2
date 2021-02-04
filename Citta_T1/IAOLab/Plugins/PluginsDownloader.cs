@@ -22,8 +22,8 @@ namespace C2.IAOLab.Plugins
             try 
             {
                 Stream resStream = WebRequest.Create(pluginUrl)
-                                          .GetResponse()
-                                          .GetResponseStream();
+                                             .GetResponse()
+                                             .GetResponseStream();
 
                 StreamReader sr = new StreamReader(resStream, System.Text.Encoding.UTF8);
                 htmlContent = sr.ReadToEnd();
