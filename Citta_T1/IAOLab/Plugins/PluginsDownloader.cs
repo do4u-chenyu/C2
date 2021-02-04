@@ -40,10 +40,10 @@ namespace C2.IAOLab.Plugins
         {
             List<string> result = new List<string>();
             if (string.IsNullOrEmpty(webcontent)) return result;
-            string dllForm = string.Format(@"\>.*dll\<");
+            string dllPattern = string.Format(@"\>.*dll\<");
             try
             {
-                MatchCollection matchItems = Regex.Matches(webcontent, dllForm, RegexOptions.IgnoreCase);
+                MatchCollection matchItems = Regex.Matches(webcontent, dllPattern, RegexOptions.IgnoreCase);
                 foreach (Match match in matchItems)
                 {
                     string pluginName = match.Value.Trim(new char[] { '>', '<' });
