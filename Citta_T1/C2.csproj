@@ -2773,6 +2773,10 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IAOLab\WebEngine\BOSS\" />
+    <Folder Include="IAOLab\WebEngine\GisMap\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist plugins md plugins</PostBuildEvent>
