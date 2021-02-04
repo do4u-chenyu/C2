@@ -26,6 +26,7 @@ namespace C2.Controls.MapViews
         private AttachmentWidget atw;
         private ResultWidget rsw;
         private ChartWidget cw;
+        private MapWidget mw;
         private Topic currentTopic;
 
         public void CreateWidgetMenu()
@@ -61,7 +62,10 @@ namespace C2.Controls.MapViews
                     atw = HoverObject.Widget as AttachmentWidget;
                     CreateAttachmentWidgetMenu(atw);
                     break;
-
+                case MapWidget.TypeID:
+                    mw = HoverObject.Widget as MapWidget;
+                    CreateMapWidgetMenu(mw);
+                    break;
                 default:
                     break;
             }
@@ -664,6 +668,38 @@ namespace C2.Controls.MapViews
             if (atw.AttachmentPaths.IsEmpty())
                 (atw.Container as Topic).Widgets.Remove(atw);
                 //Delete(new ChartObject[] { atw });
+        }
+        #endregion
+
+        #region 地图挂件
+        private void CreateMapWidgetMenu(MapWidget mw)
+        {
+            ToolStripMenuItem MenuMap = new ToolStripMenuItem();
+            ToolStripMenuItem MenuOpenMap = new ToolStripMenuItem();
+            ToolStripMenuItem MenuDeleteMap = new ToolStripMenuItem();
+
+            MenuMap.Text = String.Format("地图");//TODO phx 名字
+            MenuMap.DropDownItems.AddRange(new ToolStripItem[] {
+                MenuOpenMap,
+                MenuDeleteMap});
+
+            MenuOpenMap.Image = Properties.Resources.opendata;
+            MenuOpenMap.Text = Lang._("Open");
+            MenuOpenMap.Click += MenuOpenMap_Click;
+
+            MenuDeleteMap.Image = Properties.Resources.deleteAttachment;
+            MenuDeleteMap.Text = Lang._("Delete");
+            MenuDeleteMap.Click += MenuDeleteMap_Click;
+
+            WidgetMenuStrip.Items.Add(MenuMap);
+        }
+        void MenuOpenMap_Click(object sender, EventArgs e)
+        {
+            //TODO phx 打开web窗口
+        }
+        void MenuDeleteMap_Click(object sender, EventArgs e)
+        {
+            (mw.Container as Topic).Widgets.Remove(mw);
         }
         #endregion
     }

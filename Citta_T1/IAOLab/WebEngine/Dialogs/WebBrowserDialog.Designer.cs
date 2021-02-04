@@ -1,6 +1,6 @@
-﻿namespace C2.Dialogs
+﻿namespace C2.IAOLab.WebEngine
 {
-    partial class ConnectUrlDialog
+    partial class WebBrowserDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -38,17 +38,18 @@
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(800, 450);
-            this.webBrowser1.TabIndex = 0;
+            this.webBrowser1.TabIndex = 10003;
             // 
-            // ConnectUrlDialog
+            // WebBrowserDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.webBrowser1);
-            this.Name = "ConnectUrlDialog";
-            this.Text = "ConnectUrlDialog";
-            this.Load += new System.EventHandler(this.ConnectUrlDialog_Load);
+            this.Name = "WebBrowserDialog";
+            this.Text = "WebBrowserDialog";
+            this.Load += new System.EventHandler(this.WebBrowserDialog_Load);
+            this.Controls.SetChildIndex(this.webBrowser1, 0);
             this.ResumeLayout(false);
 
         }
