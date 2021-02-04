@@ -31,6 +31,7 @@ namespace C2.Controls.Left
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSourceControl));
             this.dataSourceFrame = new System.Windows.Forms.Panel();
             this.externalDataLabel = new System.Windows.Forms.Label();
             this.localDataLabel = new System.Windows.Forms.Label();
@@ -40,14 +41,14 @@ namespace C2.Controls.Left
             this.externalFrame = new System.Windows.Forms.Panel();
             this.tableFilterTextBox = new System.Windows.Forms.TextBox();
             this.tabelPanel = new System.Windows.Forms.Panel();
-            this.schemaComboBox = new C1.Common.NoWheelComboBox();
+            this.tableListControl1 = new C2.Controls.TableListControl();
+            this.schemaComboBox = new C2.Controls.C1.Common.NoWheelComboBox();
             this.linkPanel = new System.Windows.Forms.Panel();
             this.dataTableLabel = new System.Windows.Forms.Label();
             this.schemaLabel = new System.Windows.Forms.Label();
             this.linkLabel = new System.Windows.Forms.Label();
             this.dataAddLabelPanel = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tableListControl1 = new C2.Controls.TableListControl();
             this.dataSourceFrame.SuspendLayout();
             this.externalFrame.SuspendLayout();
             this.tabelPanel.SuspendLayout();
@@ -176,6 +177,19 @@ namespace C2.Controls.Left
             this.tabelPanel.Size = new System.Drawing.Size(177, 296);
             this.tabelPanel.TabIndex = 5;
             // 
+            // tableListControl1
+            // 
+            this.tableListControl1.AutoScrollMargin = new System.Drawing.Size(10, 10);
+            this.tableListControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableListControl1.ItemHeight = 40;
+            this.tableListControl1.Location = new System.Drawing.Point(0, 0);
+            this.tableListControl1.Name = "tableListControl1";
+            this.tableListControl1.SelectedItems = new C2.Controls.C1.Left.TableListItem[0];
+            this.tableListControl1.SelectedTableItem = null;
+            this.tableListControl1.Size = new System.Drawing.Size(177, 296);
+            this.tableListControl1.TabIndex = 0;
+            this.tableListControl1.Text = "tableListControl1";
+            // 
             // schemaComboBox
             // 
             this.schemaComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -238,16 +252,6 @@ namespace C2.Controls.Left
             this.dataAddLabelPanel.Name = "dataAddLabelPanel";
             this.dataAddLabelPanel.Size = new System.Drawing.Size(179, 622);
             this.dataAddLabelPanel.TabIndex = 9;
-            // 
-            // tableListControl1
-            // 
-            this.tableListControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableListControl1.Location = new System.Drawing.Point(0, 0);
-            this.tableListControl1.Name = "tableListControl1";
-            this.tableListControl1.SelectedTableItem = null;
-            this.tableListControl1.Size = new System.Drawing.Size(177, 296);
-            this.tableListControl1.TabIndex = 0;
-            this.tableListControl1.Text = "tableListControl1";
             // 
             // DataSourceControl
             // 

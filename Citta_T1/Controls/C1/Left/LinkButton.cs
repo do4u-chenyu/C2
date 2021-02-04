@@ -19,7 +19,8 @@ namespace C2.Controls.Left
             {
                 _LinkSourceName = value;
                 txtButton.Name = _LinkSourceName;
-                txtButton.Text = FileUtil.ReName(_LinkSourceName, 16);
+                txtButton.Text = _LinkSourceName;
+
             }
             get
             {
