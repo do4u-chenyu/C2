@@ -63,33 +63,17 @@ namespace C2.Database
         }
         public override string Query(string sql, bool header = true, int returnNum = OpUtil.PreviewMaxNum)
         {
-            int totalReturnNum = 0;
-            StringBuilder sb = new StringBuilder(1024 * 16); // TODO
+            string result = String.Empty;
             OracleConnection con = new OracleConnection(this.ConnectionString);
+            List<string> sqlCommands = GetSubSQLCommand(sql);
             try
             {
                 con.Open();
-                OracleCommand comm = new OracleCommand(sql, con);
-                using (OracleDataReader rdr = comm.ExecuteReader())  // rdr.Close()
-                {
-                    if (rdr.FieldCount == 0)
-                        return String.Empty;
-                    if (header)
-                    {
-                        for (int i = 0; i < rdr.FieldCount - 1; i++)
-                            sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
-                        sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
-                    }
-                    while (rdr.Read() && totalReturnNum < returnNum)
-                    {
-                        for (int i = 0; i < rdr.FieldCount - 1; i++)
-                            sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
-                        sb.Append(rdr[rdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
-                        totalReturnNum += 1;
-                    }
-                }
+                for (int i = 0; i < sqlCommands.Count - 1; i++)
+                    this.ExecuteNonQuery(sqlCommands[i], con);
+                result = this.ExecuteQuery(sqlCommands[sqlCommands.Count - 1], con, header, returnNum);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
                 throw new DAOException(ex.Message);
@@ -98,7 +82,63 @@ namespace C2.Database
             {
                 con.Close();
             }
+            return result;
+        }
+
+        private List<string> GetSubSQLCommand(string sql)
+        {
+            List<string> result = new List<string>();
+            foreach (var item in sql.Split(';'))
+            {
+                string comm = item.Trim();
+                if (!String.IsNullOrWhiteSpace(comm))
+                    result.Add(comm);
+            }
+            return result;
+        }
+
+        private string ExecuteQuery(string sql, OracleConnection conn, bool header, int returnNum)
+        {
+            StringBuilder sb = new StringBuilder(1024 * 16);
+            int totalReturnNum = 0;
+            OracleCommand comm = new OracleCommand(sql, conn);
+            using (OracleDataReader rdr = comm.ExecuteReader())
+            {
+                if (rdr.FieldCount == 0)
+                    return String.Empty;
+                if (header)
+                {
+                    for (int i = 0; i < rdr.FieldCount - 1; i++)
+                        sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
+                    sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+                }
+                while (rdr.Read() && totalReturnNum < returnNum)
+                {
+                    for (int i = 0; i < rdr.FieldCount - 1; i++)
+                        sb.Append(GetRdrResult(rdr, i)).Append(OpUtil.DefaultFieldSeparator);
+                    sb.Append(GetRdrResult(rdr, rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+                    totalReturnNum += 1;
+                }
+            }
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
+        }
+
+        private void ExecuteNonQuery(string sql, OracleConnection conn)
+        {
+            OracleCommand comm = new OracleCommand(sql, conn);
+            comm.ExecuteNonQuery();
+        }
+        private object GetRdrResult(OracleDataReader rdr, int index)
+        {
+            // 只能解决浮点数的异常，其他异常正常抛出
+            try
+            {
+                return rdr[index];
+            }
+            catch(System.InvalidCastException)
+            {
+                return rdr.GetDouble(index);
+            }
         }
         public override string GetTablesSQL(string schema)
         {
