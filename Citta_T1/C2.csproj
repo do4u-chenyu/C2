@@ -230,6 +230,12 @@
     <Compile Include="Database\DAOFactory.cs" />
     <Compile Include="Database\HiveDAOImpl.cs" />
     <Compile Include="Database\OracleDAOImpl.cs" />
+    <Compile Include="Dialogs\ConnectUrlDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ConnectUrlDialog.Designer.cs">
+      <DependentUpon>ConnectUrlDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
     <Compile Include="Utils\GenericSingleton.cs" />
@@ -1609,6 +1615,9 @@
     <EmbeddedResource Include="Dialogs\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConnectUrlDialog.resx">
+      <DependentUpon>ConnectUrlDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CreateNewModelForm.resx">
       <DependentUpon>CreateNewModelForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -2774,6 +2783,10 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IAOLab\WebEngine\BOSS\" />
+    <Folder Include="IAOLab\WebEngine\GisMap\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
