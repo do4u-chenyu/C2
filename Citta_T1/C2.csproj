@@ -231,6 +231,13 @@
     <Compile Include="Database\HiveDAOImpl.cs" />
     <Compile Include="Database\OracleDAOImpl.cs" />
     <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
+    <Compile Include="IAOLab\WebEngine\Dialogs\WebBrowserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\WebEngine\Dialogs\WebBrowserDialog.Designer.cs">
+      <DependentUpon>WebBrowserDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Widgets\MapWidget.cs" />
     <Compile Include="Utils\GenericSingleton.cs" />
     <Compile Include="Database\IDAO.cs" />
     <Compile Include="Database\PreviewDbDataForm.cs">
@@ -1680,6 +1687,9 @@
     <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\WebBrowserDialog.resx">
+      <DependentUpon>WebBrowserDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1788,6 +1798,7 @@
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <None Include="Resources\arrow_query.bmp" />
+    <Content Include="IAOLab\WebEngine\GisMap\StartMap.html" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <None Include="Resources\document.bmp" />
@@ -2653,6 +2664,7 @@
     <None Include="Resources\WidgetIcon\结果.png" />
     <None Include="Resources\WidgetIcon\ORACLE.png" />
     <None Include="Resources\WidgetIcon\Excel.png" />
+    <None Include="Resources\WidgetIcon\地图.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -2772,6 +2784,9 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IAOLab\WebEngine\BOSS\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

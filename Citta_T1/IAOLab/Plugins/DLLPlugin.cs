@@ -14,8 +14,7 @@ namespace C2.IAOLab.Plugins
         private Type type;
         private object obj;
         public static readonly IPlugin Empty = new EmptyPlugin(); 
-        DLLPlugin()
-        { }
+
         public DLLPlugin(Type type ,object obj)
         {
             this.type = type;
@@ -60,8 +59,8 @@ namespace C2.IAOLab.Plugins
 
         public DialogResult ShowFormDialog()
         {
-            MethodInfo me = type.GetMethod("ShowFormDialog");
-            return (DialogResult)me.Invoke(obj, null);
+            MethodInfo method = type.GetMethod("ShowFormDialog");
+            return (DialogResult)method.Invoke(obj, null);
             
         }
 

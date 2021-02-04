@@ -2,7 +2,10 @@
 using C2.IAOLab.Plugins;
 using C2.Utils;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -17,6 +20,8 @@ namespace C2.Dialogs
         private static readonly int CheckBoxColumnIndex = 2;
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
+        private static readonly string pluginUrl = @"http://218.94.117.234:8484/C2Plugins/";
+        private static readonly string dllUrl = @"http://218.94.117.234:8484/C2Plugins/packages/";
         public ConfigForm()
         {
             InitializeComponent();
@@ -204,6 +209,7 @@ namespace C2.Dialogs
             UserModelTabPage_Load();
             PythonConfigTabPage_Load();
             PluginsConfigTabPage_Load();
+
         }
 
         private void PluginsConfigTabPage_Load()
@@ -216,6 +222,48 @@ namespace C2.Dialogs
             this.userModelTextBox.Text = Global.WorkspaceDirectory;
         }
 
+        private void UnInstalledPlugins_Load()
+        {
+            try
+            {
+                string webContent = PluginsDownloader.GetHtmlContent(pluginUrl);
+                List<string> webPlugins = PluginsDownloader.WebPluginList(webContent);
+                List<string> unInstalledList = UninstalledPluginList(webPlugins);
+                foreach (string pluginName in unInstalledList)
+                {
+                    string version = GetDllVersion(pluginName);
+                    this.availableDGV.Rows.Add(new Object[] { pluginName, version, false });
+                }
+            }
+            catch (Exception ex)
+            {
+                this.availableTB.Text = "插件加载失败: " + ex.Message;
+            }
+
+        }
+        private List<string> UninstalledPluginList(List<string> webPlugins)
+        {
+            foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
+            {
+                if (webPlugins.Contains(plugin.GetPluginName()))
+                    webPlugins.Remove(plugin.GetPluginName());
+            }
+            return webPlugins;
+        }
+
+
+
+        private string GetDllVersion(string name)
+        {
+            try
+            {
+                return name.Replace(".dll", "").Split('-')[1];
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
         private void PythonConfigTabPage_Load()
         {
             // 配置文件样例
@@ -331,6 +379,40 @@ namespace C2.Dialogs
             String pluginName = this.installedDGV.Rows[e.RowIndex].Cells[0].Value as String;
             IPlugin pg = PluginsManager.Instance.FindPlugin(pluginName);
             this.installedTB.Text = pg.GetPluginDescription();
+        }
+
+        private void pluginsTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.availableDGV.Rows.Clear();
+            if (this.pluginsTabControl.SelectedIndex != 1)
+                return;
+            UnInstalledPlugins_Load();
+        }
+
+        private void InstallButton_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in this.availableDGV.Rows)
+            {
+
+                if (row.Cells[2].Value == null || !(bool)row.Cells[2].Value)
+                    continue;
+                try
+                {
+                    string selectedDll = dllUrl + row.Cells[0].Value.ToString();
+                    string savePath = Path.Combine(Global.DLLPluginPath, row.Cells[0].Value.ToString());
+                    PluginsDownloader.PluginsDownload(selectedDll, savePath);
+                    this.availableDGV.Rows.Remove(row);
+                    this.installedDGV.Rows.Add(row);
+                    MessageBox.Show("插件下载成功，请重启软件加载新插件功能");
+
+                }
+                catch (Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(ex.Message);
+                }
+                return;
+            }
+
         }
     }
 }

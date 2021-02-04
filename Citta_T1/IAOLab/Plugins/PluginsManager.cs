@@ -79,7 +79,7 @@ namespace C2.IAOLab.Plugins
             }
             catch (Exception ex)
             {
-                log.Error(ffp + "插件加载失败:" + ex.Message);
+                log.Warn(ffp + "插件加载失败:" + ex.Message);
                 return DLLPlugin.Empty;
             }
           

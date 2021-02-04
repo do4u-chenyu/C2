@@ -398,6 +398,7 @@
             this.pluginsTabControl.SelectedIndex = 0;
             this.pluginsTabControl.Size = new System.Drawing.Size(634, 343);
             this.pluginsTabControl.TabIndex = 0;
+            this.pluginsTabControl.SelectedIndexChanged += new System.EventHandler(this.pluginsTabControl_SelectedIndexChanged);
             // 
             // installedSubPage
             // 
@@ -502,6 +503,7 @@
             this.installButton.TabIndex = 7;
             this.installButton.Text = "安装";
             this.installButton.UseVisualStyleBackColor = true;
+            this.installButton.Click += new System.EventHandler(this.InstallButton_Click);
             // 
             // availableDGV
             // 
