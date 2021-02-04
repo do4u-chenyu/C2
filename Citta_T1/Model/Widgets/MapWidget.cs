@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,9 @@ namespace C2.Model.Widgets
     class MapWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "MAP";
+
+        [Browsable(false)]
+        public string WebUrl { set; get; }
         public MapWidget()
         {
             DisplayIndex = 9;

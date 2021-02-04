@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.LoadData = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.SaveHtml = new System.Windows.Forms.ToolStripButton();
             this.SavePic = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.Clear = new System.Windows.Forms.ToolStripButton();
             this.EditCode = new System.Windows.Forms.ToolStripButton();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,18 +57,6 @@
             this.toolStrip1.TabIndex = 10003;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser1.Location = new System.Drawing.Point(0, 28);
-            this.webBrowser1.Margin = new System.Windows.Forms.Padding(0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(589, 279);
-            this.webBrowser1.TabIndex = 10004;
-            // 
             // LoadData
             // 
             this.LoadData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -77,11 +65,6 @@
             this.LoadData.Name = "LoadData";
             this.LoadData.Size = new System.Drawing.Size(23, 22);
             this.LoadData.Text = "导入数据";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // SaveHtml
             // 
@@ -101,6 +84,11 @@
             this.SavePic.Size = new System.Drawing.Size(23, 22);
             this.SavePic.Text = "保存成图片";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // Clear
             // 
             this.Clear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -119,6 +107,18 @@
             this.EditCode.Size = new System.Drawing.Size(23, 22);
             this.EditCode.Text = "自定义源码";
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.webBrowser1.Location = new System.Drawing.Point(0, 28);
+            this.webBrowser1.Margin = new System.Windows.Forms.Padding(0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(589, 279);
+            this.webBrowser1.TabIndex = 10004;
+            // 
             // WebBrowserDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -128,6 +128,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "WebBrowserDialog";
             this.Text = "WebBrowserDialog";
+            this.Load += new System.EventHandler(this.WebBrowserDialog_Load);
             this.Controls.SetChildIndex(this.toolStrip1, 0);
             this.Controls.SetChildIndex(this.webBrowser1, 0);
             this.toolStrip1.ResumeLayout(false);
