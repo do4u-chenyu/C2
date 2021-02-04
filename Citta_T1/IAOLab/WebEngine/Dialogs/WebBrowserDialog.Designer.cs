@@ -33,18 +33,19 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Top;
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(800, 450);
+            this.webBrowser1.Size = new System.Drawing.Size(800, 378);
             this.webBrowser1.TabIndex = 10003;
             // 
             // WebBrowserDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(800, 475);
             this.Controls.Add(this.webBrowser1);
             this.Name = "WebBrowserDialog";
             this.Text = "WebBrowserDialog";

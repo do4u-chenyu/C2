@@ -6,6 +6,7 @@ using C2.Dialogs;
 using C2.Dialogs.Base;
 using C2.Forms;
 using C2.Globalization;
+using C2.IAOLab.WebEngine;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
@@ -696,6 +697,7 @@ namespace C2.Controls.MapViews
         void MenuOpenMap_Click(object sender, EventArgs e)
         {
             //TODO phx 打开web窗口
+            new WebBrowserDialog().Show();
         }
         void MenuDeleteMap_Click(object sender, EventArgs e)
         {

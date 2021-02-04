@@ -231,6 +231,84 @@
     <Compile Include="Database\HiveDAOImpl.cs" />
     <Compile Include="Database\OracleDAOImpl.cs" />
     <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\SimpleBar.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\StackBar.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\BaseCharts.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\BasicAreachart.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\BasicLineChart.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\SmoothedLineChart.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\Pie\BasicPie.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\Radar\BasicRadar.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\Scatter\BasicScatter.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Common.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Echarts.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\EchartsInitialize.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Node.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\JSBeautify.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseEOption.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\AxisPointer.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\fontFamily.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\fontStyle.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\fontWeight.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\LegendAlign.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\LegendType.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\Orient.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\Position.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\target.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\TextAlign.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\TextVerticalAlign.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\BorderType.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\Feature.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\IconStyle.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\ToolboxEmphasis.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\ToolboxOrient.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\TriggerOn.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\xAxisType.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\CompleteOption.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\DataSetSource.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\Grid.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\Legend.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\Polar.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\Series.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\BarBaseOption\BarData.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\ISeries.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\AreaStyle.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\AreaStyleOrigin.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\CoordinateSystem.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineData.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineSampling.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineStyle.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineStyleType.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkArea.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkAreaData.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkLine.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkLineData.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkPoint.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkPointData.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\PieBaseOption\LabelLine.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\PieBaseOption\PieData.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\RadarBaseOption\RadarData.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\ScatterBaseOption\ScatterData.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBar.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Emphasis.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\ItemStyle.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Label.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Position.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesLine.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPie.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesRadar.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesScatter.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SubtextStyle.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\TextStyle.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\Title.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\ToolBox.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\Tooltip.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\XAxis.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\YAxis.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\RemarkAttribute.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Table.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Theme.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\WebBrowserConfig.cs" />
     <Compile Include="IAOLab\WebEngine\Dialogs\WebBrowserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1798,7 +1876,10 @@
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <None Include="Resources\arrow_query.bmp" />
-    <Content Include="IAOLab\WebEngine\GisMap\StartMap.html" />
+    <Content Include="IAOLab\WebEngine\Html\EchartIndex.html" />
+    <Content Include="IAOLab\WebEngine\Html\StartMap.html" />
+    <Content Include="IAOLab\WebEngine\JS\china.js" />
+    <Content Include="IAOLab\WebEngine\JS\echarts.min.js" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <None Include="Resources\document.bmp" />
@@ -2786,7 +2867,7 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="IAOLab\WebEngine\BOSS\" />
+    <Folder Include="IAOLab\WebEngine\GisMap\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

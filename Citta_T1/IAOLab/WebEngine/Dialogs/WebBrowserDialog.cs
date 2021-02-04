@@ -24,9 +24,9 @@ namespace C2.IAOLab.WebEngine
         private void WebBrowserDialog_Load(object sender, EventArgs e)
         {
             string str_url = Application.StartupPath + "\\StartMap.html";
-            Uri url = new Uri(str_url);
-            webBrowser1.Url = url;
-            webBrowser1.ObjectForScripting = this;
+            //Uri url = new Uri(str_url);
+            //webBrowser1.Url = url;
+            //webBrowser1.ObjectForScripting = this;
         }
     }
 }
