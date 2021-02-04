@@ -6,7 +6,7 @@ using C2.Dialogs;
 using C2.Dialogs.Base;
 using C2.Forms;
 using C2.Globalization;
-using C2.IAOLab.WebEngine;
+using C2.IAOLab.WebEngine.Dialogs;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
