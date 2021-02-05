@@ -391,5 +391,14 @@ namespace C2.Dialogs
             }
 
         }
+
+        private void AvailableDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != CheckBoxColumnIndex || e.RowIndex == -1) return;
+            // 所有第三列的checkbox只允许互斥单选
+            for (int i = 0; i < dataGridView.Rows.Count; i++)
+                if (i != e.RowIndex)
+                    (availableDGV.Rows[i].Cells[CheckBoxColumnIndex] as DataGridViewCheckBoxCell).Value = false;
+        }
     }
 }
