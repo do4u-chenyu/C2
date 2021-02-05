@@ -160,6 +160,7 @@
             this.mainTabControl.SelectedIndex = 0;
             this.mainTabControl.Size = new System.Drawing.Size(642, 410);
             this.mainTabControl.TabIndex = 0;
+            this.mainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
             // userModelConfigPage
             // 
@@ -712,7 +713,7 @@
             this.pluginsTabControl.SelectedIndex = 0;
             this.pluginsTabControl.Size = new System.Drawing.Size(634, 343);
             this.pluginsTabControl.TabIndex = 0;
-            this.pluginsTabControl.SelectedIndexChanged += new System.EventHandler(this.pluginsTabControl_SelectedIndexChanged);
+        
             // 
             // installedSubPage
             // 
@@ -850,6 +851,7 @@
             this.availableDGV.Size = new System.Drawing.Size(620, 164);
             this.availableDGV.TabIndex = 6;
             this.availableDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AvailableDGV_CellContentClick);
+            this.availableDGV.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.AvailableDGV_RowEnter);
             // 
             // dataGridViewTextBoxColumn3
             // 
