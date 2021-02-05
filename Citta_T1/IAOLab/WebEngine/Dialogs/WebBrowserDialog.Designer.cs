@@ -46,7 +46,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(589, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(932, 25);
             this.toolStrip1.TabIndex = 10003;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -68,6 +68,7 @@
             this.LoadBossData.Name = "LoadBossData";
             this.LoadBossData.Size = new System.Drawing.Size(23, 22);
             this.LoadBossData.Text = "导入数据";
+            this.LoadBossData.Click += LoadBossData_Click;
             // 
             // SaveHtml
             // 
@@ -119,14 +120,14 @@
             this.webBrowser1.Margin = new System.Windows.Forms.Padding(0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(589, 279);
+            this.webBrowser1.Size = new System.Drawing.Size(932, 419);
             this.webBrowser1.TabIndex = 10004;
             // 
             // WebBrowserDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 352);
+            this.ClientSize = new System.Drawing.Size(932, 492);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "WebBrowserDialog";

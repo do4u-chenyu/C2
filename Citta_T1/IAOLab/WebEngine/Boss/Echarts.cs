@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace C2.IAOLab.WebEngine.Boss
 {
@@ -18,15 +19,15 @@ namespace C2.IAOLab.WebEngine.Boss
 
         System.Windows.Forms.WebBrowser webBrowser;
         
-        public Echarts(System.Windows.Forms.WebBrowser webBrowser)
+        public Echarts()
         {
             #region 设置webbrowser
-            this.webBrowser = webBrowser;
-            WebBrowserConfig.SetWebBrowserFeatures(11);
-            this.webBrowser.ScriptErrorsSuppressed = true;//脚本
-            this.webBrowser.IsWebBrowserContextMenuEnabled = false;//禁用右键菜单
-            this.webBrowser.WebBrowserShortcutsEnabled = false;//禁用快捷键
-            this.webBrowser.AllowWebBrowserDrop = false;//禁用Drop
+            //this.webBrowser = webBrowser;
+            //WebBrowserConfig.SetWebBrowserFeatures(11);
+            //this.webBrowser.ScriptErrorsSuppressed = true;//脚本
+            //this.webBrowser.IsWebBrowserContextMenuEnabled = false;//禁用右键菜单
+            //this.webBrowser.WebBrowserShortcutsEnabled = false;//禁用快捷键
+            //this.webBrowser.AllowWebBrowserDrop = false;//禁用Drop
             //this.webBrowser.AllowNavigation = false;//禁用超链接 
             /*Type type = webBrowser.GetType();
             switch (type.FullName)
@@ -97,9 +98,9 @@ namespace C2.IAOLab.WebEngine.Boss
         /// <summary>
         /// 显示已经添加的所有图
         /// </summary>
-        public void Show()
+        public string Show()
         {
-            if (table == null) return;
+            if (table == null) return string.Empty;
 
             //添加布局和初始化脚本
             var bodyNode = new Node("body").AddChild(table.GetTableNode());
@@ -115,7 +116,7 @@ namespace C2.IAOLab.WebEngine.Boss
             var headNode = new Node("head") { Content = "<meta http-equiv = \"X-UA-Compatible\" content = \"IE=edge,chrome=1\" charset=\"utf-8\" />"};
             headNode.AddChild(titleNode);
             //支持echarts
-            headNode.AddChild(new Node("script") { Parameters = new { src = "./echarts.min.js", }, });
+            headNode.AddChild(new Node("script") { Parameters = new { src = "../JS/echarts.min.js", }, });
             //支持GL
             if (EchartsInitialize.SupportEchartsGL)
                 headNode.AddChild(new Node("script")
@@ -179,10 +180,10 @@ namespace C2.IAOLab.WebEngine.Boss
             var htmlNode = new Node("html");
             htmlNode.AddChild(headNode).AddChild(bodyNode);
 
-            string tempName = "Echarts/" + DateTime.Now.Ticks + ".html";
+            string tempName = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "EchartIndex.html");
             string htmlContent = @"<!DOCTYPE html>" + Environment.NewLine + htmlNode.GetHtmlStr();
             File.WriteAllText(tempName, htmlContent);
-            webBrowser.Navigate(new Uri(Environment.CurrentDirectory + "/" + tempName));            
+            return tempName;            
         }
 
         public void SaveAsHtml(string fileName)

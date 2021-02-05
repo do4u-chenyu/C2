@@ -309,7 +309,7 @@
     <Compile Include="IAOLab\WebEngine\Boss\RemarkAttribute.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Table.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Theme.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\WebBrowserConfig.cs" />
+    <Compile Include="IAOLab\WebEngine\WebBrowserConfig.cs" />
     <Compile Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1888,10 +1888,40 @@
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <None Include="Resources\arrow_query.bmp" />
+    <Content Include="IAOLab\WebEngine\css\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\Html\BossIndex01.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="IAOLab\WebEngine\Html\EchartIndex.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\Html\StartMap.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\aleftboxtbott.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\amiddboxtbott1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\amiddboxtbott2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\amiddboxttop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\arightboxbott.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\arightboxtop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\bg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\JS\bossLayout.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\JS\china.js">
@@ -1901,6 +1931,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\JS\mapfuction.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\JS\phx.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\C1\datasource\dataButton.png" />

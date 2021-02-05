@@ -25,15 +25,16 @@ namespace C2.IAOLab.WebEngine.Boss
             var chart = echarts.init(containerDom);
             // 使用 SVG 渲染器
             var chart = echarts.init(containerDom, null, {renderer: 'svg'});*/
-            DirectoryInfo di = new DirectoryInfo("./ECharts");
-            FileInfo[] fi = di.GetFiles();
-            foreach (FileInfo f in fi)
-            {
-                if (f.Extension == ".html")
-                {
-                    try { File.Delete(f.FullName); } catch { }
-                }
-            }
+
+            //DirectoryInfo di = new DirectoryInfo("./ECharts");
+            //FileInfo[] fi = di.GetFiles();
+            //foreach (FileInfo f in fi)
+            //{
+            //    if (f.Extension == ".html")
+            //    {
+            //        try { File.Delete(f.FullName); } catch { }
+            //    }
+            //}
         }
     }
 }

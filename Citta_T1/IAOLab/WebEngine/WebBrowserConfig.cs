@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace C2.IAOLab.WebEngine.Boss
+namespace C2.IAOLab.WebEngine
 {
     public class WebBrowserConfig
     {
