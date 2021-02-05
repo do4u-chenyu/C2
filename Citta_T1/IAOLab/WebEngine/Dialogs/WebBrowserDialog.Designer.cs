@@ -29,27 +29,20 @@
         private void InitializeComponent()
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.LoadData = new System.Windows.Forms.ToolStripButton();
+            this.LoadMapData = new System.Windows.Forms.ToolStripButton();
+            this.LoadBossData = new System.Windows.Forms.ToolStripButton();
             this.SaveHtml = new System.Windows.Forms.ToolStripButton();
             this.SavePic = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.Clear = new System.Windows.Forms.ToolStripButton();
             this.EditCode = new System.Windows.Forms.ToolStripButton();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LoadData,
-            this.SaveHtml,
-            this.SavePic,
-            this.toolStripSeparator1,
-            this.Clear,
-            this.EditCode});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
@@ -57,14 +50,24 @@
             this.toolStrip1.TabIndex = 10003;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // LoadData
+            // LoadMapData
             // 
-            this.LoadData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.LoadData.Image = global::C2.Properties.Resources.importDataSource;
-            this.LoadData.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.LoadData.Name = "LoadData";
-            this.LoadData.Size = new System.Drawing.Size(23, 22);
-            this.LoadData.Text = "导入数据";
+            this.LoadMapData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.LoadMapData.Image = global::C2.Properties.Resources.importDataSource;
+            this.LoadMapData.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.LoadMapData.Name = "LoadMapData";
+            this.LoadMapData.Size = new System.Drawing.Size(23, 22);
+            this.LoadMapData.Text = "导入数据";
+            this.LoadMapData.Click += LoadMapData_Click;
+            // 
+            // LoadBossData
+            // 
+            this.LoadBossData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.LoadBossData.Image = global::C2.Properties.Resources.importDataSource;
+            this.LoadBossData.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.LoadBossData.Name = "LoadBossData";
+            this.LoadBossData.Size = new System.Drawing.Size(23, 22);
+            this.LoadBossData.Text = "导入数据";
             // 
             // SaveHtml
             // 
@@ -131,8 +134,6 @@
             this.Load += new System.EventHandler(this.WebBrowserDialog_Load);
             this.Controls.SetChildIndex(this.toolStrip1, 0);
             this.Controls.SetChildIndex(this.webBrowser1, 0);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,7 +143,8 @@
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.ToolStripButton LoadData;
+        private System.Windows.Forms.ToolStripButton LoadMapData;
+        private System.Windows.Forms.ToolStripButton LoadBossData;
         private System.Windows.Forms.ToolStripButton SaveHtml;
         private System.Windows.Forms.ToolStripButton SavePic;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

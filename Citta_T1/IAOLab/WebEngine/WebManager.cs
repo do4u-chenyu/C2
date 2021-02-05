@@ -40,6 +40,7 @@ namespace C2.IAOLab.WebEngine
                         Title = "数据大屏",
                         WebUrl = string.IsNullOrEmpty(WebUrl) ? defaultBossUrl : WebUrl
                     };
+                    wbDialog.InitializeBossToolStrip();
                     break;
                 case WebType.Map:
                     wbDialog = new WebBrowserDialog()
@@ -47,6 +48,7 @@ namespace C2.IAOLab.WebEngine
                         Title = "图上作战",
                         WebUrl = string.IsNullOrEmpty(WebUrl) ? defaultMapUrl : WebUrl
                     };
+                    wbDialog.InitializeMapToolStrip();
                     break;
                 default:
                     return;

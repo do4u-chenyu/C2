@@ -243,6 +243,7 @@
     <Compile Include="IAOLab\WebEngine\Boss\Common.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Echarts.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\EchartsInitialize.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\GenBossHtml.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Node.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\JSBeautify.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\BaseEOption.cs" />
@@ -309,12 +310,19 @@
     <Compile Include="IAOLab\WebEngine\Boss\Table.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Theme.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\WebBrowserConfig.cs" />
+    <Compile Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.Designer.cs">
+      <DependentUpon>SelectMapDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="IAOLab\WebEngine\Dialogs\WebBrowserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IAOLab\WebEngine\Dialogs\WebBrowserDialog.Designer.cs">
       <DependentUpon>WebBrowserDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
     <Compile Include="IAOLab\WebEngine\WebManager.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
     <Compile Include="Utils\GenericSingleton.cs" />
@@ -1766,6 +1774,9 @@
     <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.resx">
+      <DependentUpon>SelectMapDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\WebBrowserDialog.resx">
       <DependentUpon>WebBrowserDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -2879,9 +2890,7 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="IAOLab\WebEngine\GisMap\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist plugins md plugins</PostBuildEvent>
