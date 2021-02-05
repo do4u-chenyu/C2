@@ -232,25 +232,13 @@ namespace C2.Dialogs
                     continue;
                 string pluginName = info_split[0];     // 代码及注释
                 string pluginVersion = info_split[1];
+                string pluginDesc = info_split[2];
                 this.availableDGV.Rows.Add(new Object[] { pluginName, pluginVersion, false });
-                webPluginInfo[info.Split('\t')[0]] = info.Split('\t')[2];
+                webPluginInfo[pluginName] = pluginDesc;
             }
         }
 
 
-
-
-        private string GetDllVersion(string name)
-        {
-            try
-            {
-                return name.Replace(".dll", "").Split('-')[1];
-            }
-            catch
-            {
-                return string.Empty;
-            }
-        }
         private void PythonConfigTabPage_Load()
         {
             // 配置文件样例
@@ -426,9 +414,10 @@ namespace C2.Dialogs
 
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.availableDGV.Rows.Clear();
+            
             if (this.mainTabControl.SelectedIndex != 3)
                 return;
+            this.availableDGV.Rows.Clear();
             UpdatablePlugins_Load();
         }
     }
