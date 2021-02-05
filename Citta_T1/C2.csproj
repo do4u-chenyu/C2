@@ -1877,12 +1877,20 @@
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <None Include="Resources\arrow_query.bmp" />
-    <Content Include="IAOLab\WebEngine\Html\EchartIndex.html" />
-    <Content Include="IAOLab\WebEngine\Html\StartMap.html" />
-    <Content Include="IAOLab\WebEngine\JS\china.js" />
-    <Content Include="IAOLab\WebEngine\JS\echarts.min.js" />
+    <Content Include="IAOLab\WebEngine\Html\EchartIndex.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\Html\StartMap.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\JS\china.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\JS\echarts.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="IAOLab\WebEngine\JS\mapfuction.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />

@@ -1,9 +1,11 @@
 ﻿using C2.IAOLab.WebEngine.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace C2.IAOLab.WebEngine
 {
@@ -19,7 +21,7 @@ namespace C2.IAOLab.WebEngine
         public WebType Type;
         public string WebUrl;
         private WebBrowserDialog wbDialog;
-        private string defaultMapUrl = "https://www.baidu.com";
+        private string defaultMapUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "StartMap.html");
         private string defaultBossUrl = "https://www.google.com";
 
         public WebManager()
