@@ -20,10 +20,12 @@ namespace C2.Dialogs
         private static readonly int CheckBoxColumnIndex = 2;
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
+        private Dictionary<string, string> webPluginInfo;
 
         public ConfigForm()
         {
             InitializeComponent();
+            webPluginInfo = new Dictionary<string, string>();
         }
 
         private void UserModelOkButton_Click(object sender, EventArgs e)
@@ -220,13 +222,15 @@ namespace C2.Dialogs
             this.userModelTextBox.Text = Global.WorkspaceDirectory;
         }
 
-        private void UnInstalledPlugins_Load()
+        private void UpdatablePlugins_Load()
         {
-            List<string> updatableList = PluginsManager.Instance.UpdatablePluginList();
-            foreach (string pluginName in updatableList)
+            List<string> updatableInfo = PluginsManager.Instance.UpdatablePluginList();
+            foreach (string info in updatableInfo)
             {
-                string version = GetDllVersion(pluginName);
-                this.availableDGV.Rows.Add(new Object[] { pluginName, version, false });
+                if (info.Split('\t').Length < 2)
+                    continue;
+                this.availableDGV.Rows.Add(new Object[] { info.Split('\t')[0], info.Split('\t')[1], false });
+                webPluginInfo[info.Split('\t')[0]] = info.Split('\t')[2];
             }
         }
 
@@ -363,10 +367,7 @@ namespace C2.Dialogs
 
         private void pluginsTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.availableDGV.Rows.Clear();
-            if (this.pluginsTabControl.SelectedIndex != 1)
-                return;
-            UnInstalledPlugins_Load();
+
         }
 
         private void InstallButton_Click(object sender, EventArgs e)
@@ -379,7 +380,7 @@ namespace C2.Dialogs
                 try
                 {
 
-                    PluginsManager.Instance.DownloadPlugin(row.Cells[0].Value.ToString());
+                    PluginsManager.Instance.DownloadPlugin(GetPluginFullName(row));
                     MessageBox.Show("插件下载成功，请重启软件加载新插件功能");
 
                 }
@@ -390,6 +391,41 @@ namespace C2.Dialogs
                 return;
             }
 
+        }
+        private string GetPluginFullName(DataGridViewRow row)
+        {
+            try
+            {
+                return row.Cells[0].Value.ToString() + "-" + row.Cells[1].Value.ToString() + ".dll";
+            }
+            catch
+            {
+                return string.Empty;
+            }
+            
+        }
+        private void AvailableDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != CheckBoxColumnIndex || e.RowIndex == -1) return;
+            // 所有第三列的checkbox只允许互斥单选
+            for (int i = 0; i < availableDGV.Rows.Count; i++)
+                if (i != e.RowIndex)
+                    (availableDGV.Rows[i].Cells[CheckBoxColumnIndex] as DataGridViewCheckBoxCell).Value = false;
+        }
+
+        private void AvailableDGV_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            String pluginName = this.availableDGV.Rows[e.RowIndex].Cells[0].Value as String;
+            this.availableTB.Text = webPluginInfo[pluginName];
+        }
+
+        private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.availableDGV.Rows.Clear();
+            if (this.mainTabControl.SelectedIndex != 3)
+                return;
+            UpdatablePlugins_Load();
         }
     }
 }

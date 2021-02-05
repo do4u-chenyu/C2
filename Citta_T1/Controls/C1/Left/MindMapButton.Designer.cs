@@ -150,6 +150,7 @@
             // 
             // textButton
             // 
+            this.textButton.AutoEllipsis = true;
             this.textButton.BackColor = System.Drawing.Color.White;
             this.textButton.FlatAppearance.BorderSize = 0;
             this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

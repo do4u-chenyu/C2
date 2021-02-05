@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace C2.IAOLab.Plugins
@@ -32,20 +33,42 @@ namespace C2.IAOLab.Plugins
             }
         }
 
-        public List<String> BrowserPluginsList()
+        public List<string> BrowserPluginsInfo()
         {
             //访问下载列表
             string webContent = downloader.GetHtmlContent(Global.DLLListUrl);
-            return downloader.WebPluginList(webContent);
+            List<string> pluginInfo = WebPluginList(webContent);
+
+            return downloader.WebPluginInfo(pluginInfo,Global.DLLPackageUrl);
+        }
+        public List<string> WebPluginList(string webcontent)
+        {
+            List<string> result = new List<string>();
+            if (string.IsNullOrEmpty(webcontent)) return result;
+            string dllPattern = string.Format(@"\>.*info\<");
+            try
+            {
+                MatchCollection matchItems = Regex.Matches(webcontent, dllPattern, RegexOptions.IgnoreCase);
+                foreach (Match match in matchItems)
+                {
+                    string pluginName = match.Value.Trim(new char[] { '>', '<' });
+                    result.Add(pluginName);
+                }
+            }
+            catch
+            { }
+            return result;
         }
         public List<string> UpdatablePluginList()
         {
-            List<string> webPlugins = BrowserPluginsList();
+            List<string> webPlugins = BrowserPluginsInfo();
             if (webPlugins.IsEmpty()) return webPlugins;
+
             foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
             {
-                if (webPlugins.Contains(plugin.GetPluginName()))
-                    webPlugins.Remove(plugin.GetPluginName());
+                string installedInfo = webPlugins.Find(x => x.Contains(plugin.GetPluginName()));
+                if (!string.IsNullOrEmpty(installedInfo))
+                    webPlugins.Remove(installedInfo);
             }
             return webPlugins;
         }

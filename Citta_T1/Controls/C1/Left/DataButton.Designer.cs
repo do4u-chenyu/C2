@@ -142,6 +142,7 @@ namespace C2.Controls.Left
             // 
             // txtButton
             // 
+            this.txtButton.AutoEllipsis = true;
             this.txtButton.BackColor = System.Drawing.Color.White;
             this.txtButton.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtButton.FlatAppearance.BorderSize = 0;
