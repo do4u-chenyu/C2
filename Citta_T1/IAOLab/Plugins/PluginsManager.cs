@@ -36,22 +36,21 @@ namespace C2.IAOLab.Plugins
         public List<string> BrowserPluginsInfo()
         {
             //访问下载列表
-            string webContent = downloader.GetHtmlContent(Global.DLLListUrl);
-            List<string> pluginInfo = WebPluginList(webContent);
+            string htmlContent = downloader.GetHtmlContent(Global.DLLHostUrl);
+            List<string> pluginInfo = WebPluginList(htmlContent);
 
-            return downloader.WebPluginInfo(pluginInfo,Global.DLLPackageUrl);
+            return downloader.WebPluginInfo(pluginInfo, Global.DLLPackageUrl);
         }
-        public List<string> WebPluginList(string webcontent)
+        private List<string> WebPluginList(string webContent)
         {
             List<string> result = new List<string>();
-            if (string.IsNullOrEmpty(webcontent)) return result;
-            string dllPattern = string.Format(@"\>.*info\<");
+            string dllPattern = string.Format(@"\>(.*?info)\<");
             try
             {
-                MatchCollection matchItems = Regex.Matches(webcontent, dllPattern, RegexOptions.IgnoreCase);
+                MatchCollection matchItems = Regex.Matches(webContent, dllPattern, RegexOptions.IgnoreCase);
                 foreach (Match match in matchItems)
                 {
-                    string pluginName = match.Value.Trim(new char[] { '>', '<' });
+                    string pluginName = match.Groups[1].Value;
                     result.Add(pluginName);
                 }
             }
@@ -62,13 +61,10 @@ namespace C2.IAOLab.Plugins
         public List<string> UpdatablePluginList()
         {
             List<string> webPlugins = BrowserPluginsInfo();
-            if (webPlugins.IsEmpty()) return webPlugins;
-
+            // 例如: 2048111\tV3.1.4\t描述信息2049
             foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
             {
-                string installedInfo = webPlugins.Find(x => x.Contains(plugin.GetPluginName()));
-                if (!string.IsNullOrEmpty(installedInfo))
-                    webPlugins.Remove(installedInfo);
+                webPlugins.RemoveAll(x => x.StartsWith(plugin.GetPluginName() + OpUtil.TabSeparator));
             }
             return webPlugins;
         }

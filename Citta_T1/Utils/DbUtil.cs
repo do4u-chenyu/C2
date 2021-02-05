@@ -22,7 +22,7 @@ namespace C2.Utils
             Dictionary<string, List<string>> result = new Dictionary<string, List<string>>();
             foreach(string line in v.Split(OpUtil.DefaultLineSeparator))
             {
-                var kv = line.Split(OpUtil.DefaultFieldSeparator);
+                var kv = line.Split(OpUtil.TabSeparator);
                 if (kv.Length != 2)
                     continue;
                 string key = kv[0];
@@ -42,7 +42,7 @@ namespace C2.Utils
                 string[] lines = contentString.Split(OpUtil.DefaultLineSeparator);
                 for (int i = 0; i < lines.Length; i++)
                 {
-                    ret.Add(new List<string>(lines[i].Split(OpUtil.DefaultFieldSeparator)));
+                    ret.Add(new List<string>(lines[i].Split(OpUtil.TabSeparator)));
                 }
             }
             return ret;

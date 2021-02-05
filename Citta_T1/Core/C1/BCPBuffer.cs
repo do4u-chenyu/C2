@@ -416,7 +416,7 @@ namespace C2.Core
                 using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
                 {
                     string columns = String.Join("\t", columnsName);
-                    sw.WriteLine(columns.Trim(OpUtil.DefaultFieldSeparator));
+                    sw.WriteLine(columns.Trim(OpUtil.TabSeparator));
                     sw.Flush();
                 }
             }

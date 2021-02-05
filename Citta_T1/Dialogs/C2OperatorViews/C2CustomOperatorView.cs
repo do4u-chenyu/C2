@@ -67,7 +67,7 @@ namespace C2.Dialogs.C2OperatorViews
 
             // 获取编码、分隔符类型，以获得结果文件表头
             encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
-            separator = OpUtil.DefaultFieldSeparator;
+            separator = OpUtil.TabSeparator;
             string radioName = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
             if (radioName == "commaradio")
             {
@@ -75,7 +75,7 @@ namespace C2.Dialogs.C2OperatorViews
             }
             else if (radioName == "otherseparatorradio")
             {
-                separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? OpUtil.DefaultFieldSeparator : this.otherSeparatorText.Text[0];
+                separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? OpUtil.TabSeparator : this.otherSeparatorText.Text[0];
             }
             // 路径相同，改变分编码格式、分隔符内容将会变化，需要强制刷新缓存
             string oldResultLine = BCPBuffer.GetInstance().GetCacheColumnLine(this.rsFullFilePathTextBox.Text, encoding, true);

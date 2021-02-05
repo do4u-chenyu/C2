@@ -106,7 +106,7 @@ namespace C2.Controls.Bottom
             // 将来有可能新增文件类型,这里不能只用二元逻辑
             if (extType == OpUtil.ExtType.Excel)
             {
-                separator = OpUtil.DefaultFieldSeparator;  // 当文件类型是Excel是,内部分隔符自动为'\t',此时用其他分隔符没有意义
+                separator = OpUtil.TabSeparator;  // 当文件类型是Excel是,内部分隔符自动为'\t',此时用其他分隔符没有意义
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewExcelContent(fullFilePath, isForceRead).Split('\n'));
             }
             else if (extType == OpUtil.ExtType.Text)
@@ -115,7 +115,7 @@ namespace C2.Controls.Bottom
                 rows = new List<string>();
 
             for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
-                datas.Add(new List<string>(rows[i].TrimEnd(OpUtil.DefaultFieldSeparator).Split(separator)));                                                 // TODO 没考虑到分隔符
+                datas.Add(new List<string>(rows[i].TrimEnd(OpUtil.TabSeparator).Split(separator)));                                                 // TODO 没考虑到分隔符
             FileUtil.FillTable(this.dataGridView, datas, maxNumOfFile);
         }
 
@@ -129,7 +129,7 @@ namespace C2.Controls.Bottom
             List<string>  rows = new List<string>();
             rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewTable(dbItem, maxNumOfFile).Split(OpUtil.DefaultLineSeparator));
             for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
-                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(OpUtil.DefaultFieldSeparator)));                                                 // TODO 没考虑到分隔符
+                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(OpUtil.TabSeparator)));                                                 // TODO 没考虑到分隔符
             FileUtil.FillTable(this.dataGridView, datas, maxNumOfFile);
         }
         private void DataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

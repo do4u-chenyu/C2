@@ -44,7 +44,7 @@ namespace C2.Dialogs
             this.utf8Lable.Font = font;
 
             this.radioButton1.Checked = true;
-            this.separator = OpUtil.DefaultFieldSeparator;
+            this.separator = OpUtil.TabSeparator;
 
             this.extType = OpUtil.ExtType.Text;
 
