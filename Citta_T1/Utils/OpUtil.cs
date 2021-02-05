@@ -14,7 +14,7 @@ namespace C2.Utils
 {
     public class OpUtil
     {
-        public static readonly char DefaultFieldSeparator = '\t';
+        public static readonly char TabSeparator = '\t';
         public static readonly char DefaultLineSeparator = '\n';
         public static readonly char Blank = ' ';
         public const int PreviewMaxNum = 1000;

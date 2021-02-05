@@ -150,7 +150,7 @@ namespace C2.Dialogs
 
 
             hasResultNew.InnerControl.Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
-            hasResultNew.InnerControl.Separator = OpUtil.DefaultFieldSeparator;
+            hasResultNew.InnerControl.Separator = OpUtil.TabSeparator;
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
 
 
@@ -161,7 +161,7 @@ namespace C2.Dialogs
             }
             else if (separator == "otherseparatorradio")
             {
-                hasResultNew.Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? OpUtil.DefaultFieldSeparator : this.otherSeparatorText.Text[0];
+                hasResultNew.Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? OpUtil.TabSeparator : this.otherSeparatorText.Text[0];
             }
             BCPBuffer.GetInstance().SetDirty(this.fullOutputFilePath);
 

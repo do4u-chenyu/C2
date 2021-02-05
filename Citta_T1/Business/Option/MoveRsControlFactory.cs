@@ -29,7 +29,7 @@ namespace C2.Business.Option
         {
             //创建MoveRsControl控件
             string path;
-            char separator = OpUtil.DefaultFieldSeparator;
+            char separator = OpUtil.TabSeparator;
             OpUtil.Encoding encoding = OpUtil.Encoding.UTF8;
             Point location = Global.GetCurrentModelDocument().WorldMap.WorldBoundRSControl(moc);
             int id = Global.GetCurrentModelDocument().ElementCount;

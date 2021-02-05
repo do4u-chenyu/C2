@@ -108,13 +108,13 @@ namespace C2.Database
                 if (header)
                 {
                     for (int i = 0; i < rdr.FieldCount - 1; i++)
-                        sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
+                        sb.Append(rdr.GetName(i)).Append(OpUtil.TabSeparator);
                     sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
                 }
                 while (rdr.Read() && totalReturnNum < returnNum)
                 {
                     for (int i = 0; i < rdr.FieldCount - 1; i++)
-                        sb.Append(GetRdrResult(rdr, i)).Append(OpUtil.DefaultFieldSeparator);
+                        sb.Append(GetRdrResult(rdr, i)).Append(OpUtil.TabSeparator);
                     sb.Append(GetRdrResult(rdr, rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
                     totalReturnNum += 1;
                 }
@@ -190,14 +190,14 @@ namespace C2.Database
                         return true;
                     StringBuilder sb = new StringBuilder(1024);
                     for (int i = 0; i < rdr.FieldCount; i++)
-                        sb.Append(rdr.GetName(i)).Append(OpUtil.DefaultFieldSeparator);
-                    sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));    // 去掉最后一列的列分隔符
+                        sb.Append(rdr.GetName(i)).Append(OpUtil.TabSeparator);
+                    sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));    // 去掉最后一列的列分隔符
                     while (rdr.Read() && (maxReturnNum == -1 ? true : totalReturnNum < maxReturnNum))
                     {
                         sb = new StringBuilder(1024);
                         for (int i = 0; i < rdr.FieldCount; i++)
-                            sb.Append(rdr[i]).Append(OpUtil.DefaultFieldSeparator);
-                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));
+                            sb.Append(rdr[i]).Append(OpUtil.TabSeparator);
+                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
                         totalReturnNum += 1;
                     }
                 }

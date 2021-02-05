@@ -50,7 +50,7 @@ namespace C2.Controls.Left
                                     encoding.ToString(),
                                     this.ExtType,
                                     0,
-                                    this.Separator == OpUtil.DefaultFieldSeparator ? "TAB" : this.Separator.ToString());
+                                    this.Separator == OpUtil.TabSeparator ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
@@ -120,7 +120,7 @@ namespace C2.Controls.Left
                                         encoding.ToString(),
                                         this.ExtType,
                                         0,
-                                        this.Separator == OpUtil.DefaultFieldSeparator ? "TAB" : this.Separator.ToString());
+                                        this.Separator == OpUtil.TabSeparator ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 

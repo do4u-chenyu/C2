@@ -227,9 +227,12 @@ namespace C2.Dialogs
             List<string> updatableInfo = PluginsManager.Instance.UpdatablePluginList();
             foreach (string info in updatableInfo)
             {
-                if (info.Split('\t').Length < 2)
+                string[] info_split = info.Split(OpUtil.TabSeparator);
+                if (info_split.Length < 3)
                     continue;
-                this.availableDGV.Rows.Add(new Object[] { info.Split('\t')[0], info.Split('\t')[1], false });
+                string pluginName = info_split[0];     // 代码及注释
+                string pluginVersion = info_split[1];
+                this.availableDGV.Rows.Add(new Object[] { pluginName, pluginVersion, false });
                 webPluginInfo[info.Split('\t')[0]] = info.Split('\t')[2];
             }
         }

@@ -70,11 +70,11 @@ namespace C2.Database
                         for (int i = 0; i < iDict.Count; i++)
                         {
                             string key = GetColumnName(iDict.Keys.ElementAt(i));
-                            sb.Append(key).Append(OpUtil.DefaultFieldSeparator);
+                            sb.Append(key).Append(OpUtil.TabSeparator);
                         }
                         if (iDict.Count > 0)
                         {
-                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));
+                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
                         }
                         
                     }
@@ -85,11 +85,11 @@ namespace C2.Database
                         IDictionary<string, object> dict = oneRow;
                         foreach (var key in dict.Keys)
                         {
-                            sb.Append(dict[key].ToString()).Append(OpUtil.DefaultFieldSeparator);
+                            sb.Append(dict[key].ToString()).Append(OpUtil.TabSeparator);
                         }
                         if (!dict.Keys.IsEmpty())
                         {
-                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.DefaultFieldSeparator));
+                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
                         }
                         totalReturnNum += 1;
                         oneRow = cursor.FetchOne();
@@ -143,7 +143,7 @@ namespace C2.Database
                         for (int i = 0; i < iDict.Count; i++)
                         {
                             string key = GetColumnName(iDict.Keys.ElementAt(i));
-                            sb.Append(key).Append(OpUtil.DefaultFieldSeparator);
+                            sb.Append(key).Append(OpUtil.TabSeparator);
                         }
                         if (iDict.Count > 0)
                             sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator); // 最后一列多加了个\t，去掉       
@@ -153,7 +153,7 @@ namespace C2.Database
                     {
                         foreach (var key in dict.Keys)
                         {
-                            sb.Append(dict[key].ToString()).Append(OpUtil.DefaultFieldSeparator);
+                            sb.Append(dict[key].ToString()).Append(OpUtil.TabSeparator);
                         }
                         if (!dict.Keys.IsEmpty())
                             sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator);
