@@ -368,31 +368,32 @@ namespace C2.Dialogs
             this.installedTB.Text = pg.GetPluginDescription();
         }
 
-        private void pluginsTabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in this.availableDGV.Rows)
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-
-                if (row.Cells[2].Value == null || !(bool)row.Cells[2].Value)
-                    continue;
-                try
+                foreach (DataGridViewRow row in this.availableDGV.Rows)
                 {
 
-                    PluginsManager.Instance.DownloadPlugin(GetPluginFullName(row));
-                    MessageBox.Show("插件下载成功，请重启软件加载新插件功能");
+                    if (row.Cells[2].Value == null || !(bool)row.Cells[2].Value)
+                        continue;
+                    try
+                    {
 
+                        PluginsManager.Instance.DownloadPlugin(GetPluginFullName(row));
+                        MessageBox.Show("插件下载成功，请重启软件加载新插件功能");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        HelpUtil.ShowMessageBox(ex.Message);
+                    }
+                    return;
                 }
-                catch (Exception ex)
-                {
-                    HelpUtil.ShowMessageBox(ex.Message);
-                }
-                return;
             }
+
 
         }
         private string GetPluginFullName(DataGridViewRow row)
@@ -405,7 +406,7 @@ namespace C2.Dialogs
             {
                 return string.Empty;
             }
-            
+
         }
         private void AvailableDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

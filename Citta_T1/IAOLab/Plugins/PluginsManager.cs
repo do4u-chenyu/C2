@@ -112,10 +112,22 @@ namespace C2.IAOLab.Plugins
 
             string name = dll.GetPluginName();
 
-            if (!String.IsNullOrEmpty(name)) 
-                plugins[name] = dll;             // 存在相同名称插件时，覆盖或者取先，逻辑意义上都一样，前者代码简单，用之
+            if (String.IsNullOrEmpty(name))
+                return;
 
-            return;
+            if (!plugins.ContainsKey(name))
+                plugins[name] = dll;
+            else
+            {
+                // 存在相同名称插件时，加载最新版本
+                string saveVersion =plugins[name].GetPluginVersion();
+                string loadVersion = dll.GetPluginVersion();
+                if (saveVersion.CompareTo(loadVersion) < 0)
+                    plugins[name] = dll;
+            }
+               
+
+
         }
 
         private IPlugin LoadDll(string ffp)

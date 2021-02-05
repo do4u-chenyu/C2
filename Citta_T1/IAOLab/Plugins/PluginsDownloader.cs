@@ -17,42 +17,51 @@ namespace C2.IAOLab.Plugins
         public string GetHtmlContent(string pluginURL)
         {
             string htmlContent = string.Empty;
+            Stream resStream = null;
             try
             {
-                Stream resStream = WebRequest.Create(pluginURL)
+                resStream = WebRequest.Create(pluginURL)
                                              .GetResponse()
                                              .GetResponseStream();
 
-                htmlContent = new StreamReader(resStream, System.Text.Encoding.UTF8).ReadToEnd();             
-                resStream.Close();
+                htmlContent = new StreamReader(resStream, System.Text.Encoding.UTF8).ReadToEnd();
+
             }
             catch (Exception ex)
             {
                 log.Error("获取网页插件列表失败:" + ex.Message);
             }
-
+            finally
+            {
+                if (resStream != null)
+                    resStream.Close();
+            }
             return htmlContent;
         }
 
-        
+
         public List<string> WebPluginInfo(List<string> webPlugins, string packageURL)
         {
             List<string> result = new List<string>();
-            if (webPlugins.Count == 0) return result;
+            Stream resStream = null;
             try
             {
                 foreach (string pluginName in webPlugins)
                 {
-                    Stream resStream = WebRequest.Create(packageURL + pluginName)
+                    resStream = WebRequest.Create(packageURL + pluginName)
                                                  .GetResponse()
                                                  .GetResponseStream();
                     string info = new StreamReader(resStream, System.Text.Encoding.UTF8).ReadToEnd();
                     result.Add(info);
-                    resStream.Close();
                 }
             }
             catch
             { }
+            finally
+            {
+                if (resStream != null)
+                    resStream.Close();
+            }
             return result;
         }
         /// <summary>
@@ -64,6 +73,8 @@ namespace C2.IAOLab.Plugins
             try
             {
                 WebClient Client = new WebClient();
+                if (File.Exists(savePath))
+                    return;
                 Client.DownloadFile(url, savePath);
             }
             catch (Exception ex)
