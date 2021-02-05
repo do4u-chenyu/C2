@@ -220,13 +220,14 @@ namespace C2.Dialogs
             this.userModelTextBox.Text = Global.WorkspaceDirectory;
         }
 
-        private void UnInstalledPlugins_Load()
+        private void UpdatablePlugins_Load()
         {
             List<string> updatableList = PluginsManager.Instance.UpdatablePluginList();
             foreach (string pluginName in updatableList)
             {
                 string version = GetDllVersion(pluginName);
                 this.availableDGV.Rows.Add(new Object[] { pluginName, version, false });
+                
             }
         }
 
@@ -366,7 +367,7 @@ namespace C2.Dialogs
             this.availableDGV.Rows.Clear();
             if (this.pluginsTabControl.SelectedIndex != 1)
                 return;
-            UnInstalledPlugins_Load();
+            UpdatablePlugins_Load();
         }
 
         private void InstallButton_Click(object sender, EventArgs e)
