@@ -14,19 +14,17 @@ namespace C2.IAOLab.Plugins
     {
         private static string webPath;
         private readonly static LogUtil log = LogUtil.GetInstance("PluginsDownloader");
-        public string GetHtmlContent(string pluginUrl)
+        public string GetHtmlContent(string pluginURL)
         {
             string htmlContent = string.Empty;
             try
             {
-                Stream resStream = WebRequest.Create(pluginUrl)
+                Stream resStream = WebRequest.Create(pluginURL)
                                              .GetResponse()
                                              .GetResponseStream();
 
-                StreamReader sr = new StreamReader(resStream, System.Text.Encoding.UTF8);
-                htmlContent = sr.ReadToEnd();
+                htmlContent = new StreamReader(resStream, System.Text.Encoding.UTF8).ReadToEnd();             
                 resStream.Close();
-                sr.Close();
             }
             catch (Exception ex)
             {
@@ -36,18 +34,21 @@ namespace C2.IAOLab.Plugins
             return htmlContent;
         }
 
-        public List<string> WebPluginList(string webcontent)
+        
+        public List<string> WebPluginInfo(List<string> webPlugins, string packageURL)
         {
             List<string> result = new List<string>();
-            if (string.IsNullOrEmpty(webcontent)) return result;
-            string dllPattern = string.Format(@"\>.*dll\<");
+            if (webPlugins.Count == 0) return result;
             try
             {
-                MatchCollection matchItems = Regex.Matches(webcontent, dllPattern, RegexOptions.IgnoreCase);
-                foreach (Match match in matchItems)
+                foreach (string pluginName in webPlugins)
                 {
-                    string pluginName = match.Value.Trim(new char[] { '>', '<' });
-                    result.Add(pluginName);
+                    Stream resStream = WebRequest.Create(packageURL + pluginName)
+                                                 .GetResponse()
+                                                 .GetResponseStream();
+                    string info = new StreamReader(resStream, System.Text.Encoding.UTF8).ReadToEnd();
+                    result.Add(info);
+                    resStream.Close();
                 }
             }
             catch
