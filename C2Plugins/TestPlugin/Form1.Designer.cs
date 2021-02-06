@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("首页");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("节点10");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("节点7", new System.Windows.Forms.TreeNode[] {
-            treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("节点11");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("节点8", new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("首页");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("节点10");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("节点7", new System.Windows.Forms.TreeNode[] {
+            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("节点11");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("节点8", new System.Windows.Forms.TreeNode[] {
+            treeNode9});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -48,6 +48,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textEditorControlEx1 = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -82,6 +83,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.textEditorControlEx1);
             this.panel2.Controls.Add(this.toolStrip1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(152, 3);
@@ -161,20 +163,20 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.treeView1.Location = new System.Drawing.Point(0, 20);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "节点6";
-            treeNode1.Text = "首页";
-            treeNode2.Name = "节点10";
-            treeNode2.Text = "节点10";
-            treeNode3.Name = "节点7";
-            treeNode3.Text = "节点7";
-            treeNode4.Name = "节点11";
-            treeNode4.Text = "节点11";
-            treeNode5.Name = "节点8";
-            treeNode5.Text = "节点8";
+            treeNode6.Name = "节点6";
+            treeNode6.Text = "首页";
+            treeNode7.Name = "节点10";
+            treeNode7.Text = "节点10";
+            treeNode8.Name = "节点7";
+            treeNode8.Text = "节点7";
+            treeNode9.Name = "节点11";
+            treeNode9.Text = "节点11";
+            treeNode10.Name = "节点8";
+            treeNode10.Text = "节点8";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode3,
-            treeNode5});
+            treeNode6,
+            treeNode8,
+            treeNode10});
             this.treeView1.Size = new System.Drawing.Size(149, 398);
             this.treeView1.TabIndex = 0;
             // 
@@ -188,6 +190,18 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "大师Python";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textEditorControlEx1
+            // 
+            this.textEditorControlEx1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textEditorControlEx1.FoldingStrategy = "XML";
+            this.textEditorControlEx1.Font = new System.Drawing.Font("Courier New", 10F);
+            this.textEditorControlEx1.Location = new System.Drawing.Point(0, 25);
+            this.textEditorControlEx1.Name = "textEditorControlEx1";
+            this.textEditorControlEx1.Size = new System.Drawing.Size(637, 393);
+            this.textEditorControlEx1.SyntaxHighlighting = "XML";
+            this.textEditorControlEx1.TabIndex = 2;
+            this.textEditorControlEx1.Text = "textEditorControlEx1";
             // 
             // Form1
             // 
@@ -227,5 +241,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox1;
+        private ICSharpCode.TextEditor.TextEditorControlEx textEditorControlEx1;
     }
 }
