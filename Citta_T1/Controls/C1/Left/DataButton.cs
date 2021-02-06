@@ -40,12 +40,8 @@ namespace C2.Controls.Left
         {
             // 数据源全路径浮动提示信息
             String helpInfo = FullFilePath;
-            this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
-
             // 数据源名称浮动提示信息
             helpInfo = DataSourceName;
-            this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
-
             helpInfo = String.Format(DataButtonFlowTemplate,
                                     encoding.ToString(),
                                     this.ExtType,

@@ -175,7 +175,6 @@
             this.Controls.Add(this.textBox);
             this.Name = "ModelButton";
             this.Size = new System.Drawing.Size(140, 27);
-            this.Load += new System.EventHandler(this.ModelButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lelfPictureBox)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);

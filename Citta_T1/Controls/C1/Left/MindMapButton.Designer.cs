@@ -177,7 +177,6 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MindMapModelButton";
             this.Size = new System.Drawing.Size(140, 27);
-            this.Load += new System.EventHandler(this.MindMapModelButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lelfPictureBox)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
