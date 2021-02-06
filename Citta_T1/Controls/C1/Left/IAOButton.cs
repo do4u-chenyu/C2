@@ -65,7 +65,7 @@ namespace C2.Controls.Left
                     TimeAndIPTransformForm(ffp);
                     break;
             }
-            toolTip1.SetToolTip(this.txtButton, this.txtButton.Text);
+            //toolTip1.SetToolTip(this.txtButton, this.txtButton.Text);
         }
         #region 定义6种弹窗
         private void ApkToolForm()
