@@ -29,13 +29,31 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("首页");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("节点10");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("节点7", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("首页");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("命令行参数");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("输入重定向");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("输出重定向");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("xargs");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("命令组合", new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("节点11");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("正则表达式", new System.Windows.Forms.TreeNode[] {
             treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("节点11");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("节点8", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("节点6");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("常用命令", new System.Windows.Forms.TreeNode[] {
             treeNode9});
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("首页");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("节点10");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("文件处理", new System.Windows.Forms.TreeNode[] {
+            treeNode12});
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("节点11");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("爬虫相关", new System.Windows.Forms.TreeNode[] {
+            treeNode14});
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("NLP");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("节点1");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -49,11 +67,25 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textEditorControlEx1 = new ICSharpCode.TextEditor.TextEditorControlEx();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.textEditorControlEx2 = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -163,17 +195,28 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.treeView1.Location = new System.Drawing.Point(0, 20);
             this.treeView1.Name = "treeView1";
-            treeNode6.Name = "节点6";
-            treeNode6.Text = "首页";
-            treeNode7.Name = "节点10";
-            treeNode7.Text = "节点10";
-            treeNode8.Name = "节点7";
-            treeNode8.Text = "节点7";
-            treeNode9.Name = "节点11";
-            treeNode9.Text = "节点11";
-            treeNode10.Name = "节点8";
-            treeNode10.Text = "节点8";
+            treeNode1.Name = "节点6";
+            treeNode1.Text = "首页";
+            treeNode2.Name = "节点4";
+            treeNode2.Text = "命令行参数";
+            treeNode3.Name = "节点1";
+            treeNode3.Text = "输入重定向";
+            treeNode4.Name = "节点2";
+            treeNode4.Text = "输出重定向";
+            treeNode5.Name = "节点3";
+            treeNode5.Text = "xargs";
+            treeNode6.Name = "节点7";
+            treeNode6.Text = "命令组合";
+            treeNode7.Name = "节点11";
+            treeNode7.Text = "节点11";
+            treeNode8.Name = "节点8";
+            treeNode8.Text = "正则表达式";
+            treeNode9.Name = "节点6";
+            treeNode9.Text = "节点6";
+            treeNode10.Name = "节点5";
+            treeNode10.Text = "常用命令";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1,
             treeNode6,
             treeNode8,
             treeNode10});
@@ -182,6 +225,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.panel4);
+            this.tabPage2.Controls.Add(this.panel3);
             this.tabPage2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -203,6 +248,123 @@
             this.textEditorControlEx1.TabIndex = 2;
             this.textEditorControlEx1.Text = "textEditorControlEx1";
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.treeView2);
+            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(149, 418);
+            this.panel3.TabIndex = 0;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.textEditorControlEx2);
+            this.panel4.Controls.Add(this.toolStrip2);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(152, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(637, 418);
+            this.panel4.TabIndex = 1;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox2.Location = new System.Drawing.Point(0, 0);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(149, 21);
+            this.textBox2.TabIndex = 4;
+            // 
+            // treeView2
+            // 
+            this.treeView2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.treeView2.Location = new System.Drawing.Point(0, 20);
+            this.treeView2.Name = "treeView2";
+            treeNode11.Name = "节点6";
+            treeNode11.Text = "首页";
+            treeNode12.Name = "节点10";
+            treeNode12.Text = "节点10";
+            treeNode13.Name = "节点7";
+            treeNode13.Text = "文件处理";
+            treeNode14.Name = "节点11";
+            treeNode14.Text = "节点11";
+            treeNode15.Name = "节点8";
+            treeNode15.Text = "爬虫相关";
+            treeNode16.Name = "节点0";
+            treeNode16.Text = "NLP";
+            treeNode17.Name = "节点1";
+            treeNode17.Text = "节点1";
+            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode11,
+            treeNode13,
+            treeNode15,
+            treeNode16,
+            treeNode17});
+            this.treeView2.Size = new System.Drawing.Size(149, 398);
+            this.treeView2.TabIndex = 5;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton5,
+            this.toolStripButton6,
+            this.toolStripButton7,
+            this.toolStripButton8});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(637, 25);
+            this.toolStrip2.TabIndex = 2;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton5.Text = "toolStripButton1";
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton6.Text = "toolStripButton2";
+            // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton7.Text = "toolStripButton3";
+            // 
+            // toolStripButton8
+            // 
+            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
+            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton8.Text = "toolStripButton4";
+            // 
+            // textEditorControlEx2
+            // 
+            this.textEditorControlEx2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textEditorControlEx2.FoldingStrategy = "XML";
+            this.textEditorControlEx2.Font = new System.Drawing.Font("Courier New", 10F);
+            this.textEditorControlEx2.Location = new System.Drawing.Point(0, 25);
+            this.textEditorControlEx2.Name = "textEditorControlEx2";
+            this.textEditorControlEx2.Size = new System.Drawing.Size(637, 393);
+            this.textEditorControlEx2.SyntaxHighlighting = "XML";
+            this.textEditorControlEx2.TabIndex = 3;
+            this.textEditorControlEx2.Text = "textEditorControlEx2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -223,6 +385,13 @@
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -242,5 +411,15 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox1;
         private ICSharpCode.TextEditor.TextEditorControlEx textEditorControlEx1;
+        private System.Windows.Forms.Panel panel4;
+        private ICSharpCode.TextEditor.TextEditorControlEx textEditorControlEx2;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TreeView treeView2;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
