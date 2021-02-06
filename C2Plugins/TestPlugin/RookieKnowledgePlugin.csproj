@@ -30,9 +30,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.TextEditorEx">
+      <HintPath>..\..\ThirdPartyLibrary\ICSharpCode.TextEditorEx.1.0.0.6\lib\net40\ICSharpCode.TextEditorEx.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,9 +50,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="IPlugin.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if not exist plugins md $(SolutionDir)\Citta_T1\bin\Release\plugins  
+copy  /Y $(TargetPath) $(SolutionDir)\Citta_T1\bin\Release\plugins  
+
+if not exist plugins md $(SolutionDir)\Citta_T1\bin\Debug\plugins  
+copy  /Y $(TargetPath) $(SolutionDir)\Citta_T1\bin\Debug\plugins  
+
+if not exist plugins md $(SolutionDir)\Citta_T1\bin\开发调试\plugins    
+copy  /Y $(TargetPath) $(SolutionDir)\Citta_T1\bin\开发调试\plugins</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -203,8 +203,6 @@ namespace C2
         {
             UITheme.Default.Colors = UIColorThemeManage.GetNamedTheme(CommonOptions.Appearances.UIThemeName);
             LanguageManage.ChangeLanguage(CommonOptions.Localization.LanguageID);
-
-            //D.Message(string.Format("Test: Options => {0}", Lang._("Options")));
         }
     }
 }
