@@ -20,27 +20,72 @@ namespace QQSpiderPlugin
 
         public string GetPluginDescription()
         {
-            throw new NotImplementedException();
+            return "QQ爬虫:可以爬取QQ头像,昵称,备注,QQ群描述等信息,支持导出成xls文件,支持批量查询。";
         }
 
         public Image GetPluginImage()
         {
-            throw new NotImplementedException();
+            return this.Icon.ToBitmap();
         }
 
         public string GetPluginName()
         {
-            throw new NotImplementedException();
+            return "QQ爬虫";
         }
 
         public string GetPluginVersion()
         {
-            throw new NotImplementedException();
+            return "0.0.2";
         }
 
         public DialogResult ShowFormDialog()
         {
-            throw new NotImplementedException();
+            return this.ShowDialog();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
