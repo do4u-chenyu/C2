@@ -73,8 +73,10 @@ C2自动化测试样例/obj
 C2自动化测试样例/bin
 /packages/MSTest.TestAdapter.2.1.1
 /packages/MSTest.TestFramework.2.1.1
-C2Plugins/TestPlugin/bin
-C2Plugins/TestPlugin/obj
+C2Plugins/RookieKnowledgePlugin/bin
+C2Plugins/RookieKnowledgePlugin/obj
+C2Plugins/QQSpiderPlugin/bin
+C2Plugins/QQSpiderPlugin/obj
 C2Plugins/Game2048Plugin/bin
 C2Plugins/Game2048Plugin/obj
 /Citta_T1/datas/jiangsu111111111111111111111.txt
