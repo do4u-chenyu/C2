@@ -137,8 +137,10 @@ namespace C2.IAOLab.Plugins
 
             try 
             {
-                Assembly assembly = Assembly.LoadFrom(ffp);
-                Type[] types = assembly.GetTypes();
+                
+                Assembly assembly = Assembly.LoadFile(ffp);
+               
+                 Type[] types = assembly.GetTypes();
 
                 Type type = types.Find(t => t.GetInterface("IPlugin") != null);
 
