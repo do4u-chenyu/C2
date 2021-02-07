@@ -64,7 +64,7 @@ namespace C2.IAOLab.Plugins
             // 例如: 2048111\tV3.1.4\t描述信息2049
             foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
             {
-                webPlugins.RemoveAll(x => x.StartsWith(plugin.GetPluginName() + OpUtil.TabSeparator));
+                webPlugins.RemoveAll(x => x.StartsWith(plugin.GetPluginName() + OpUtil.TabSeparator + plugin.GetPluginVersion()));
             }
             return webPlugins;
         }
