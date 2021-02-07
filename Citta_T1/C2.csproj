@@ -95,7 +95,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.TextEditorEx">
+    <Reference Include="ICSharpCode.TextEditorEx, Version=1.0.0.6, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\ICSharpCode.TextEditorEx.1.0.0.6\lib\net40\ICSharpCode.TextEditorEx.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
