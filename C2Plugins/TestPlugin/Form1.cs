@@ -3,7 +3,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TestPlugin
+namespace RookieKnowledgePlugin
 {
     public partial class Form1 : Form, IPlugin
     {

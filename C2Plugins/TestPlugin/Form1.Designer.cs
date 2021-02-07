@@ -1,4 +1,4 @@
-﻿namespace TestPlugin
+﻿namespace RookieKnowledgePlugin
 {
     partial class Form1
     {
@@ -57,6 +57,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textEditorControlEx1 = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -66,25 +67,24 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textEditorControlEx1 = new ICSharpCode.TextEditor.TextEditorControlEx();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textEditorControlEx2 = new ICSharpCode.TextEditor.TextEditorControlEx();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.treeView2 = new System.Windows.Forms.TreeView();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            this.textEditorControlEx2 = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,6 +122,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(637, 418);
             this.panel2.TabIndex = 3;
+            // 
+            // textEditorControlEx1
+            // 
+            this.textEditorControlEx1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textEditorControlEx1.FoldingStrategy = "XML";
+            this.textEditorControlEx1.Font = new System.Drawing.Font("Courier New", 10F);
+            this.textEditorControlEx1.Location = new System.Drawing.Point(0, 25);
+            this.textEditorControlEx1.Name = "textEditorControlEx1";
+            this.textEditorControlEx1.Size = new System.Drawing.Size(637, 393);
+            this.textEditorControlEx1.SyntaxHighlighting = "Python";
+            this.textEditorControlEx1.TabIndex = 2;
+            this.textEditorControlEx1.Text = "textEditorControlEx1";
             // 
             // toolStrip1
             // 
@@ -236,17 +248,27 @@
             this.tabPage2.Text = "大师Python";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // textEditorControlEx1
+            // panel4
             // 
-            this.textEditorControlEx1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEditorControlEx1.FoldingStrategy = "XML";
-            this.textEditorControlEx1.Font = new System.Drawing.Font("Courier New", 10F);
-            this.textEditorControlEx1.Location = new System.Drawing.Point(0, 25);
-            this.textEditorControlEx1.Name = "textEditorControlEx1";
-            this.textEditorControlEx1.Size = new System.Drawing.Size(637, 393);
-            this.textEditorControlEx1.SyntaxHighlighting = "XML";
-            this.textEditorControlEx1.TabIndex = 2;
-            this.textEditorControlEx1.Text = "textEditorControlEx1";
+            this.panel4.Controls.Add(this.toolStrip2);
+            this.panel4.Controls.Add(this.textEditorControlEx2);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(152, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(637, 418);
+            this.panel4.TabIndex = 1;
+            // 
+            // textEditorControlEx2
+            // 
+            this.textEditorControlEx2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textEditorControlEx2.FoldingStrategy = "XML";
+            this.textEditorControlEx2.Font = new System.Drawing.Font("Courier New", 10F);
+            this.textEditorControlEx2.Location = new System.Drawing.Point(0, 25);
+            this.textEditorControlEx2.Name = "textEditorControlEx2";
+            this.textEditorControlEx2.Size = new System.Drawing.Size(637, 393);
+            this.textEditorControlEx2.SyntaxHighlighting = "Python";
+            this.textEditorControlEx2.TabIndex = 3;
+            this.textEditorControlEx2.Text = "textEditorControlEx2";
             // 
             // panel3
             // 
@@ -257,24 +279,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(149, 418);
             this.panel3.TabIndex = 0;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.textEditorControlEx2);
-            this.panel4.Controls.Add(this.toolStrip2);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(152, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(637, 418);
-            this.panel4.TabIndex = 1;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox2.Location = new System.Drawing.Point(0, 0);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(149, 21);
-            this.textBox2.TabIndex = 4;
             // 
             // treeView2
             // 
@@ -304,6 +308,14 @@
             this.treeView2.Size = new System.Drawing.Size(149, 398);
             this.treeView2.TabIndex = 5;
             // 
+            // textBox2
+            // 
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox2.Location = new System.Drawing.Point(0, 0);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(149, 21);
+            this.textBox2.TabIndex = 4;
+            // 
             // toolStrip2
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -314,7 +326,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(637, 25);
-            this.toolStrip2.TabIndex = 2;
+            this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripButton5
@@ -353,18 +365,6 @@
             this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton8.Text = "toolStripButton4";
             // 
-            // textEditorControlEx2
-            // 
-            this.textEditorControlEx2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEditorControlEx2.FoldingStrategy = "XML";
-            this.textEditorControlEx2.Font = new System.Drawing.Font("Courier New", 10F);
-            this.textEditorControlEx2.Location = new System.Drawing.Point(0, 25);
-            this.textEditorControlEx2.Name = "textEditorControlEx2";
-            this.textEditorControlEx2.Size = new System.Drawing.Size(637, 393);
-            this.textEditorControlEx2.SyntaxHighlighting = "XML";
-            this.textEditorControlEx2.TabIndex = 3;
-            this.textEditorControlEx2.Text = "textEditorControlEx2";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -386,10 +386,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -413,13 +413,13 @@
         private ICSharpCode.TextEditor.TextEditorControlEx textEditorControlEx1;
         private System.Windows.Forms.Panel panel4;
         private ICSharpCode.TextEditor.TextEditorControlEx textEditorControlEx2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TreeView treeView2;
+        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TreeView treeView2;
-        private System.Windows.Forms.TextBox textBox2;
     }
 }
