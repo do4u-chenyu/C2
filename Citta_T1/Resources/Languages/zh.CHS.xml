@@ -31,6 +31,7 @@
 		<item name="Export Image">导出图片</item>
 		<item name="Export Type">导出类型</item>
 		<item name="Export Document">导出文档</item>
+    <item name="Export Success">导出成功</item>
 		<item name="All Charts">所有视图</item>
 		<item name="Current Chart">当前视图</item>
 		<item name="Select Below">选中视图</item>
