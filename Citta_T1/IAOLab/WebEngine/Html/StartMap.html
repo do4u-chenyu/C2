@@ -219,11 +219,15 @@ drawingManager.setDrawingMode(BMAP_DRAWING_RECTANGLE);}
      function drawCircle(){  
 drawingManager.setDrawingMode(BMAP_DRAWING_CIRCLE);}  
     //------------------清除所有已画图形，让WINFORM调用--------------------  
-    function clearAll() {  
-        for(var i = 0; i < overlays.length; i++){  
-            map.removeOverlay(overlays[i]);  
-        }  
-        overlays.length = 0;
+    function getPoints(strArr) {  
+        //JSON.parse(strArr);
+        //var eValue = eval('strArr.' + strArr.lat);
+        //alert(eValue); 
+        var obj = JSON.parse(strArr);
+        alert(obj[0].lng);
+        alert(obj[0].lat)
+        alert(obj[1].count)
+        
     };
 //在地图上画圆形或者方形 end 
 </script>

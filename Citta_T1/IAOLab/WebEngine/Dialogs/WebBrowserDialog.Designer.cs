@@ -58,7 +58,6 @@
             this.LoadMapData.Name = "LoadMapData";
             this.LoadMapData.Size = new System.Drawing.Size(23, 22);
             this.LoadMapData.Text = "导入数据";
-            this.LoadMapData.Click += LoadMapData_Click;
             // 
             // LoadBossData
             // 
@@ -68,7 +67,6 @@
             this.LoadBossData.Name = "LoadBossData";
             this.LoadBossData.Size = new System.Drawing.Size(23, 22);
             this.LoadBossData.Text = "导入数据";
-            this.LoadBossData.Click += LoadBossData_Click;
             // 
             // SaveHtml
             // 
@@ -101,6 +99,7 @@
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(23, 22);
             this.Clear.Text = "清空";
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // EditCode
             // 

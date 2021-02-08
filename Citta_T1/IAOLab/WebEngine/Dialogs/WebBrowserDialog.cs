@@ -63,5 +63,16 @@ namespace C2.IAOLab.WebEngine.Dialogs
             webBrowser1.Navigate(Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "BossIndex01.html"));
         }
 
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            string[] strArr = new string[4];
+            strArr[0] = "[{ \"lng\": \"114.363979\", \"lat\": \"36.03773\", \"count\": \"52\" }, { \"lng\": \"115.363979\", \"lat\": \"37.03773\", \"count\": \"53\" }]";
+
+            string JSON_OBJ_Format = "{ \"lng\": \"{0}\", \"lat\": \"{1}\", \"count\": \"{2}\" }";
+           // String.Format(JSON_OBJ_Format, 114.376, 36.01, 53);
+
+
+            webBrowser1.Document.InvokeScript("getPoints", strArr);
+        }
     }
 }
