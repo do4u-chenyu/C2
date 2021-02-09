@@ -219,15 +219,27 @@ drawingManager.setDrawingMode(BMAP_DRAWING_RECTANGLE);}
      function drawCircle(){  
 drawingManager.setDrawingMode(BMAP_DRAWING_CIRCLE);}  
     //------------------清除所有已画图形，让WINFORM调用--------------------  
-    function getPoints(strArr) {  
-        //JSON.parse(strArr);
-        //var eValue = eval('strArr.' + strArr.lat);
-        //alert(eValue); 
-        var obj = JSON.parse(strArr);
-        alert(obj[0].lng);
-        alert(obj[0].lat)
-        alert(obj[1].count)
-        
+    function getPoints(w) {  
+        ////JSON.parse(strArr);
+        ////var eValue = eval('strArr.' + strArr.lat);
+        ////alert(eValue); 
+        //var obj = JSON.parse(w);
+        //alert(obj[5].lng);
+        //alert(obj[5].lat)
+        ////alert(obj[1].count)
+        var obj = JSON.parse(w);
+        //alert(obj[0].lng);
+        //alert(obj[0].lat)
+        //alert(obj[1].count)
+        //var marker = new BMap.Marker(obj);  // 创建标注
+        //map.addOverlay(marker); 
+
+        for (j = 0, len = obj.length; j < len; j++) {
+            var myIcon = new BMap.Icon("../img/png-0003.png", new BMap.Size(24, 24));
+            var marker = new BMap.Marker(obj[j], { icon: myIcon });  // 创建标注
+            map.addOverlay(marker);
+        }
+       
     };
 //在地图上画圆形或者方形 end 
 </script>

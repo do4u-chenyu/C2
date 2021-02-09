@@ -65,14 +65,27 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void Clear_Click(object sender, EventArgs e)
         {
-            string[] strArr = new string[4];
-            strArr[0] = "[{ \"lng\": \"114.363979\", \"lat\": \"36.03773\", \"count\": \"52\" }, { \"lng\": \"115.363979\", \"lat\": \"37.03773\", \"count\": \"53\" }]";
+            //string[] strArr = new string[4];
+            //strArr[0] = "[{ \"lng\": \"114.363979\", \"lat\": \"36.03773\", \"count\": \"52\" }, { \"lng\": \"115.363979\", \"lat\": \"37.03773\", \"count\": \"53\" }]";
 
-            string JSON_OBJ_Format = "{ \"lng\": \"{0}\", \"lat\": \"{1}\", \"count\": \"{2}\" }";
-           // String.Format(JSON_OBJ_Format, 114.376, 36.01, 53);
+            string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
+            String.Format("\"lng\": \" {0} \", \"lat\": \" {1} \"", "114.376", "36.01");
+            List<string> tmpList = new List<string>();
+            var pointData = File.ReadAllLines(@"C:\Users\Administrator\Desktop\points.txt");
 
+            var res = pointData.Select(x => x.Split('\t', ',')).ToArray();
 
-            webBrowser1.Document.InvokeScript("getPoints", strArr);
+            for (int i = 0; i < res.Length; i++)
+            {
+
+                tmpList.Add('{' + String.Format(JSON_OBJ_Format, res[1][0], res[i][1]) + '}');
+
+            }
+            //tmpList.Sort();
+
+            string[] w = new string[1];
+            w[0] = '[' + String.Join(",", tmpList.ToArray()) + ']';
+            webBrowser1.Document.InvokeScript("getPoints", w);
         }
     }
 }
