@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Threading;
-using System.Windows.Forms;
-using C2.Controls;
+﻿using C2.Controls;
 using C2.Core;
 using C2.IAOLab.ApkToolStart;
 using C2.Utils;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace C2.Dialogs.IAOLab
 {
@@ -285,8 +284,8 @@ namespace C2.Dialogs.IAOLab
             if (image != null)
                 image.Dispose();
             string tmpPath = Path.Combine(Path.GetTempPath(), "ApkTool");
-            FileUtil.DeleteDirectory(tmpPath);
-            FileUtil.CreateDirectory(tmpPath);
+            //FileUtil.DeleteDirectory(tmpPath);
+            //FileUtil.CreateDirectory(tmpPath);
             this.textBox1.Clear();
             this.inputPathTextBox.Clear();
         }
