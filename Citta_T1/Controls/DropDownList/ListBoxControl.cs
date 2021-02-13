@@ -659,7 +659,7 @@ namespace C2.Controls
                     DrawItem(e, item, rectItem, selected, hover, globalHaveIcon);
                     rectItem.Y += ItemHeight;
                 }
-                catch (Exception ex)
+                catch
                 {
 
                 }

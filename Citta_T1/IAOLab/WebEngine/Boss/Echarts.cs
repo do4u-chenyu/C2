@@ -10,14 +10,14 @@ namespace C2.IAOLab.WebEngine.Boss
     public class Echarts
     {    
         Table table;//添加布局支持
-        string BackGroundColor;//背景色
+        //string BackGroundColor;//背景色
         Dictionary<string, Theme> themes;//支持主题 
         Dictionary<string, string> optionScript;//所有增加的图表
         List<string> CssScriptSrcList;//自定义增加css文件
         List<string> JsScriptSrcList;//自定义增加js文件
         List<Node> NodeList; //添加自定义节点
 
-        System.Windows.Forms.WebBrowser webBrowser;
+        //System.Windows.Forms.WebBrowser webBrowser;
         
         public Echarts()
         {
@@ -188,7 +188,7 @@ namespace C2.IAOLab.WebEngine.Boss
 
         public void SaveAsHtml(string fileName)
         {
-            File.WriteAllText(fileName,webBrowser.DocumentText);
+           // File.WriteAllText(fileName, webBrowser.DocumentText);
         }
 
         //--------------------------------增加主题 CSS JS 自定义节点

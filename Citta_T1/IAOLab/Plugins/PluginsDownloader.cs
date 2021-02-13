@@ -12,7 +12,6 @@ namespace C2.IAOLab.Plugins
 {
     public class PluginsDownloader
     {
-        private static string webPath;
         private readonly static LogUtil log = LogUtil.GetInstance("PluginsDownloader");
         public string GetHtmlContent(string pluginURL)
         {

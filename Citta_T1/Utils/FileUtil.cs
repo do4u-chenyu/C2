@@ -199,7 +199,7 @@ namespace C2.Utils
                 }
                 ret = true;
             }
-            catch (Exception ex)
+            catch
             {
                 ret = false;
             }
