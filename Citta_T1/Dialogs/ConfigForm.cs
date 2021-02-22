@@ -20,12 +20,10 @@ namespace C2.Dialogs
         private static readonly int CheckBoxColumnIndex = 2;
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
-        private Dictionary<string, string> webPluginInfo;
 
         public ConfigForm()
         {
             InitializeComponent();
-            webPluginInfo = new Dictionary<string, string>();
         }
 
         private void UserModelOkButton_Click(object sender, EventArgs e)
@@ -224,17 +222,17 @@ namespace C2.Dialogs
 
         private void UpdatablePlugins_Load()
         {
+            this.availableDGV.Rows.Clear();
             List<string> updatableInfo = PluginsManager.Instance.UpdatablePluginList();
             foreach (string info in updatableInfo)
             {
                 string[] info_split = info.Split(OpUtil.TabSeparator);
                 if (info_split.Length < 3)
                     continue;
-                string pluginName = info_split[0];     // 代码及注释
+                string pluginName = info_split[0];     
                 string pluginVersion = info_split[1];
                 string pluginDesc = info_split[2];
-                this.availableDGV.Rows.Add(new Object[] { pluginName, pluginVersion, false });
-                webPluginInfo[pluginName] = pluginDesc;
+                this.availableDGV.Rows.Add(new Object[] { pluginName, pluginVersion, false, pluginDesc }); // 第4列隐藏
             }
         }
 
@@ -409,16 +407,15 @@ namespace C2.Dialogs
         {
 
             String pluginName = this.availableDGV.Rows[e.RowIndex].Cells[0].Value as String;
-            this.availableTB.Text = webPluginInfo[pluginName];
+            String pluginDesc = this.availableDGV.Rows[e.RowIndex].Cells[3].Value as String;
+            this.availableTB.Text = pluginDesc;
         }
 
-        private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void PluginsTabControl_Selected(object sender, TabControlEventArgs e)
         {
-            
-            if (this.mainTabControl.SelectedIndex != 3)
+            if (this.pluginsTabControl.SelectedTab != this.availableSubPage) 
                 return;
-            this.availableDGV.Rows.Clear();
-            UpdatablePlugins_Load();
+            UpdatablePlugins_Load(); // 一个叫available,一个叫updatable,也劝不动
         }
     }
 }

@@ -37,9 +37,9 @@ namespace C2.IAOLab.Plugins
         {
             //访问下载列表
             string htmlContent = downloader.GetHtmlContent(Global.DLLHostUrl);
-            List<string> pluginInfo = WebPluginList(htmlContent);
+            List<string> pluginsName = WebPluginList(htmlContent);
 
-            return downloader.WebPluginInfo(pluginInfo, Global.DLLPackageUrl);
+            return downloader.GetPluginsInfoList(pluginsName, Global.DLLPackageUrl);
         }
         private List<string> WebPluginList(string webContent)
         {
