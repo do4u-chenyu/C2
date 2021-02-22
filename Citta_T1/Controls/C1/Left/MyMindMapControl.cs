@@ -2,7 +2,6 @@
 using C2.Core;
 using C2.Dialogs;
 using C2.Utils;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -19,6 +18,7 @@ namespace C2.Controls.Left
 
         private static readonly int ButtonLeftX = 18;
         private static readonly int ButtonBottomOffsetY = 23;
+        private static readonly int ButtonGapY = 50;
         private Point startPoint;
         public void AddMindMapModel(string modelName)
         {
@@ -40,7 +40,7 @@ namespace C2.Controls.Left
                 this.MindMapPaintPanel.VerticalScroll.Value = 0;
                 startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
             }
-            this.startPoint.Y += 50;
+            this.startPoint.Y += ButtonGapY;
             ct.Location = this.startPoint;
         }
 
@@ -54,37 +54,28 @@ namespace C2.Controls.Left
             return false;
         }
 
-        public void RemoveModelButton(MindMapModelButton modelButton)
+        public void RemoveMindMapButton(MindMapModelButton modelButton)
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
             if (this.MindMapPaintPanel.Controls.Count > 0)
                 this.startPoint.Y = this.MindMapPaintPanel.Controls[0].Location.Y - this.MindMapPaintPanel.Controls[0].Height - ButtonBottomOffsetY;
 
-            this.MindMapPaintPanel.Controls.Remove(modelButton);
-            // 重新布局
-            ReLayoutLocalFrame();
+            // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
+            using (new GuarderUtil.LayoutGuarder(MindMapPaintPanel))
+            {
+                int idx = this.MindMapPaintPanel.Controls.IndexOf(modelButton);
+                ReLayoutMindMapButtons(idx); // 重新布局
+                this.MindMapPaintPanel.Controls.Remove(modelButton); // 删除控件
+            }
         }
 
-        private void ReLayoutLocalFrame()
+        private void ReLayoutMindMapButtons(int index)
         {
-            // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
-            this.MindMapPaintPanel.SuspendLayout();
-            // 清空位置
-            List<Control> tmp = new List<Control>();
-            foreach (Control ct in this.MindMapPaintPanel.Controls)
-                tmp.Add(ct);
-
-             this.MindMapPaintPanel.Controls.Clear();
-            // 重新排序
-            foreach (Control ct in tmp)
+            for (int i = index + 1; i < this.MindMapPaintPanel.Controls.Count; i++)
             {
-                LayoutModelButtonLocation(ct);
-                this.MindMapPaintPanel.Controls.Add(ct);
+                Control ct = this.MindMapPaintPanel.Controls[i];
+                ct.Location = new Point(ct.Location.X, ct.Location.Y - ButtonGapY);
             }
-
-
-            this.MindMapPaintPanel.ResumeLayout(false);
-            this.MindMapPaintPanel.PerformLayout();
         }
 
         private void MindMapModelControl_MouseDown(object sender, MouseEventArgs e)
