@@ -2,11 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace C2.IAOLab.Plugins
 {
@@ -23,7 +20,7 @@ namespace C2.IAOLab.Plugins
                                              .GetResponse()
                                              .GetResponseStream();
                 resStream.ReadTimeout = 1000 * 10; // 浏览页面设置超时,后续下载不用,相隔很短,最开始做个验证即可
-                htmlContent = new StreamReader(resStream, System.Text.Encoding.UTF8).ReadToEnd();
+                htmlContent = new StreamReader(resStream, Encoding.UTF8).ReadToEnd();
 
             }
             catch (Exception ex)
@@ -50,7 +47,7 @@ namespace C2.IAOLab.Plugins
                     resStream = WebRequest.Create(packageURL + pluginName)
                                                  .GetResponse()
                                                  .GetResponseStream();
-                    string info = new StreamReader(resStream, System.Text.Encoding.UTF8).ReadToEnd();
+                    string info = new StreamReader(resStream, Encoding.UTF8).ReadToEnd();
                     result.Add(info);
                 }
             }
@@ -63,26 +60,14 @@ namespace C2.IAOLab.Plugins
             }
             return result;
         }
-        /// <summary>
-        /// 异常：
-        /// <para>DownloadFailureException</para>
-        /// </summary>
+
+
         public void PluginsDownload(string url, string savePath)
         {
-            try
-            {
-                WebClient Client = new WebClient();
-                if (File.Exists(savePath))
-                    return;
-                Client.DownloadFile(url, savePath);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            if (File.Exists(savePath))
+                return;
 
+            new WebClient().DownloadFile(url, savePath);
         }
-
-
     }
 }

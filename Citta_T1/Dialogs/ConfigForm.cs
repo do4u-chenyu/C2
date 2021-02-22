@@ -367,7 +367,6 @@ namespace C2.Dialogs
                         continue;
                     try
                     {
-
                         PluginsManager.Instance.DownloadPlugin(GetPluginFullName(row));
                         MessageBox.Show("插件下载成功，请重启软件加载新插件功能");
 
@@ -405,8 +404,6 @@ namespace C2.Dialogs
 
         private void AvailableDGV_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-
-            String pluginName = this.availableDGV.Rows[e.RowIndex].Cells[0].Value as String;
             String pluginDesc = this.availableDGV.Rows[e.RowIndex].Cells[3].Value as String;
             this.availableTB.Text = pluginDesc;
         }
@@ -415,7 +412,11 @@ namespace C2.Dialogs
         {
             if (this.pluginsTabControl.SelectedTab != this.availableSubPage) 
                 return;
-            UpdatablePlugins_Load(); // 一个叫available,一个叫updatable,也劝不动
+
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                UpdatablePlugins_Load(); // 一个叫available,一个叫updatable,也劝不动
+            }
         }
     }
 }

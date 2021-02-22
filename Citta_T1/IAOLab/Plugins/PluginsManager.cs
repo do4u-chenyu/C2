@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace C2.IAOLab.Plugins
 {
@@ -37,17 +36,17 @@ namespace C2.IAOLab.Plugins
         {
             //访问下载列表
             string htmlContent = downloader.GetHtmlContent(Global.DLLHostUrl);
-            List<string> pluginsName = WebPluginList(htmlContent);
+            List<string> pluginsName = GetPluginsNameList(htmlContent);
 
             return downloader.GetPluginsInfoList(pluginsName, Global.DLLPackageUrl);
         }
-        private List<string> WebPluginList(string webContent)
+        private List<string> GetPluginsNameList(string htmlContent)
         {
             List<string> result = new List<string>();
             string dllPattern = string.Format(@"\>(.*?info)\<");
             try
             {
-                MatchCollection matchItems = Regex.Matches(webContent, dllPattern, RegexOptions.IgnoreCase);
+                MatchCollection matchItems = Regex.Matches(htmlContent, dllPattern, RegexOptions.IgnoreCase);
                 foreach (Match match in matchItems)
                 {
                     string pluginName = match.Groups[1].Value;
@@ -69,24 +68,11 @@ namespace C2.IAOLab.Plugins
             return webPlugins;
         }
 
-        /// <summary>
-        /// 异常：
-        /// <para>DownloadFailureException</para>
-        /// </summary>
         public void DownloadPlugin(string pluginName)
         {
             string selectedDll = Global.DLLPackageUrl + pluginName;
             string savePath = Path.Combine(Global.LocalPluginPath, pluginName);
-            try
-            {
-                downloader.PluginsDownload(selectedDll, savePath);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-           
-
+            downloader.PluginsDownload(selectedDll, savePath);
         }
 
         private PluginsManager()
@@ -116,18 +102,16 @@ namespace C2.IAOLab.Plugins
                 return;
 
             if (!plugins.ContainsKey(name))
-                plugins[name] = dll;
-            else
             {
-                // 存在相同名称插件时，加载最新版本
-                string saveVersion =plugins[name].GetPluginVersion();
-                string loadVersion = dll.GetPluginVersion();
-                if (saveVersion.CompareTo(loadVersion) < 0)
-                    plugins[name] = dll;
+                plugins[name] = dll;
+                return;
             }
-               
-
-
+                
+            // 存在相同名称插件时，加载最新版本
+            string newVersion = plugins[name].GetPluginVersion();
+            string oldVersion = dll.GetPluginVersion();
+            if (newVersion.CompareTo(oldVersion) < 0)
+                plugins[name] = dll;
         }
 
         private IPlugin LoadDll(string ffp)
@@ -140,7 +124,7 @@ namespace C2.IAOLab.Plugins
                 
                 Assembly assembly = Assembly.LoadFile(ffp);
                
-                 Type[] types = assembly.GetTypes();
+                Type[] types = assembly.GetTypes();
 
                 Type type = types.Find(t => t.GetInterface("IPlugin") != null);
 

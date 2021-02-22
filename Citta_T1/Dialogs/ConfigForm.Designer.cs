@@ -952,7 +952,7 @@
             this.pluginsTimeoutTB.Name = "pluginsTimeoutTB";
             this.pluginsTimeoutTB.Size = new System.Drawing.Size(33, 23);
             this.pluginsTimeoutTB.TabIndex = 5;
-            this.pluginsTimeoutTB.Text = "15";
+            this.pluginsTimeoutTB.Text = "10";
             // 
             // label11
             // 
