@@ -699,8 +699,8 @@ namespace C2.Controls.MapViews
             //TODO phx 打开web窗口
             new WebManager()
             {
-                Type = WebManager.WebType.Map
-                //Type = WebManager.WebType.Map,
+                Type = WebManager.WebType.Map,
+                DataItems = currentTopic.GetDataItems()
                 //WebUrl = mw.WebUrl
             }.OpenWebBrowser();
         }

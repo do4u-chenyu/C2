@@ -1176,6 +1176,15 @@ namespace C2.Model.MindMaps
 
         #region Widgets
 
+        public List<DataItem> GetDataItems()
+        {
+            List<DataItem> dataItems = new List<DataItem>();
+            DataSourceWidget dtw = FindWidget<DataSourceWidget>();
+            if (dtw != null)
+                dataItems = dtw.DataItems;
+            return dataItems;
+        }
+
         internal T FindWidget<T>()
             where T : Widget
         {

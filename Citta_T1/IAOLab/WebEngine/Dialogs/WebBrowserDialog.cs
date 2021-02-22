@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,10 +25,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public string Title { set => this.Text = value; }
         public string WebUrl;
+        public List<DataItem> DataItems;
 
         public WebBrowserDialog()
         {
             InitializeComponent();
+            Title = string.Empty;
+            WebUrl = string.Empty;
+            DataItems = new List<DataItem>();
         }
 
         private void WebBrowserDialog_Load(object sender, EventArgs e)
@@ -120,7 +125,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         void LoadBossData_Click(object sender, EventArgs e)
         {
-            var dialog = new SelectBossDialog();
+            var dialog = new SelectBossDialog(DataItems);
             if (dialog.ShowDialog() == DialogResult.OK)
                 webBrowser1.Navigate(dialog.WebUrl);
         }
@@ -135,8 +140,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if (fd.ShowDialog() != DialogResult.OK)
                 return;
 
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(webBrowser1.Width, webBrowser1.Height);
-            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
+            Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
+            Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
             webBrowser1.DrawToBitmap(bitmap, rectangle);
             bitmap.Save(fd.FileName);
         }
