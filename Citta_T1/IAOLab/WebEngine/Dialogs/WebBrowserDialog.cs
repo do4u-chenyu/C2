@@ -102,6 +102,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             SavePic.Image = global::C2.Properties.Resources.image;
             SavePic.Text = "保存成图片";
+            SavePic.Click += new System.EventHandler(this.SavePic_Click);
 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 LoadBossData,
@@ -122,6 +123,22 @@ namespace C2.IAOLab.WebEngine.Dialogs
             var dialog = new SelectBossDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
                 webBrowser1.Navigate(dialog.WebUrl);
+        }
+
+        void SavePic_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fd = new SaveFileDialog
+            {
+                Filter = "图片文件(*.png)|*.png",
+                AddExtension = true
+            };
+            if (fd.ShowDialog() != DialogResult.OK)
+                return;
+
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(webBrowser1.Width, webBrowser1.Height);
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
+            webBrowser1.DrawToBitmap(bitmap, rectangle);
+            bitmap.Save(fd.FileName);
         }
 
         private void Clear_Click(object sender, EventArgs e)
