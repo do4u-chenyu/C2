@@ -103,6 +103,7 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.availableTB = new System.Windows.Forms.TextBox();
             this.HostSubPage = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
@@ -123,9 +124,9 @@
             this.aboutOkButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.checkNewVersion = new System.Windows.Forms.TabPage();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.checkNewVersion = new System.Windows.Forms.TabPage();
             this.mainTabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
@@ -162,7 +163,6 @@
             this.mainTabControl.SelectedIndex = 0;
             this.mainTabControl.Size = new System.Drawing.Size(642, 410);
             this.mainTabControl.TabIndex = 0;
-            this.mainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
             // userModelConfigPage
             // 
@@ -715,6 +715,7 @@
             this.pluginsTabControl.SelectedIndex = 0;
             this.pluginsTabControl.Size = new System.Drawing.Size(634, 343);
             this.pluginsTabControl.TabIndex = 0;
+            this.pluginsTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.PluginsTabControl_Selected);
             // 
             // installedSubPage
             // 
@@ -832,7 +833,8 @@
             this.availableDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
-            this.dataGridViewCheckBoxColumn2});
+            this.dataGridViewCheckBoxColumn2,
+            this.Column1});
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -883,6 +885,12 @@
             this.dataGridViewCheckBoxColumn2.HeaderText = "选中";
             this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
             this.dataGridViewCheckBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "说明";
+            this.Column1.Name = "Column1";
+            this.Column1.Visible = false;
             // 
             // availableTB
             // 
@@ -1088,13 +1096,6 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "关于";
             // 
-            // pythonOpenFileDialog
-            // 
-            this.pythonOpenFileDialog.DefaultExt = "exe";
-            this.pythonOpenFileDialog.Filter = "Python解释器 |python.exe|可执行文件|*.exe";
-            this.pythonOpenFileDialog.RestoreDirectory = true;
-            this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
-            // 
             // checkNewVersion
             // 
             this.checkNewVersion.Location = new System.Drawing.Point(4, 26);
@@ -1103,6 +1104,13 @@
             this.checkNewVersion.TabIndex = 6;
             this.checkNewVersion.Text = "检查更新";
             this.checkNewVersion.UseVisualStyleBackColor = true;
+            // 
+            // pythonOpenFileDialog
+            // 
+            this.pythonOpenFileDialog.DefaultExt = "exe";
+            this.pythonOpenFileDialog.Filter = "Python解释器 |python.exe|可执行文件|*.exe";
+            this.pythonOpenFileDialog.RestoreDirectory = true;
+            this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
             // 
             // ConfigForm
             // 
@@ -1193,9 +1201,6 @@
         private System.Windows.Forms.TabPage availableSubPage;
         private System.Windows.Forms.Button installButton;
         private System.Windows.Forms.DataGridView availableDGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
         private System.Windows.Forms.TextBox availableTB;
         private System.Windows.Forms.TabPage HostSubPage;
         private System.Windows.Forms.Label label13;
@@ -1239,5 +1244,9 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TabPage checkNewVersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }
