@@ -174,5 +174,12 @@ namespace C2.Controls.Left
             }
 
         }
+
+        private void MindMapModelButton_Load(object sender, EventArgs e)
+        {
+            // 模型全路径浮动提示信息
+            String helpInfo = FullFilePath;
+            this.toolTip1.SetToolTip(this.rightPictureBox, helpInfo);
+        }
     }
 }

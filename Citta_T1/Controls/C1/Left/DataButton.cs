@@ -40,6 +40,7 @@ namespace C2.Controls.Left
         {
             // 数据源全路径浮动提示信息
             String helpInfo = FullFilePath;
+            this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
             // 数据源名称浮动提示信息
             helpInfo = DataSourceName;
             helpInfo = String.Format(DataButtonFlowTemplate,
@@ -47,7 +48,10 @@ namespace C2.Controls.Left
                                     this.ExtType,
                                     0,
                                     this.Separator == OpUtil.TabSeparator ? "TAB" : this.Separator.ToString());
-            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+           this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+          
+            
+
         }
 
 
