@@ -16,10 +16,20 @@ namespace C2.Model.MindMaps
 {
     class XmindFile
     {
-        static String GenUUID()
+       public class Counter
         {
-            return System.Guid.NewGuid().ToString();
+            int counter = 0;
+            public int CountUp()
+            {
+                counter += 1;
+                return counter;
+            }
+            public int GetCount()
+            {
+                return counter;
+            }
         }
+        public static Counter sheetCounter = new Counter();
         public static void SaveFile(IEnumerable<ChartPage> charts, string filename)
         {
             XmlDocument dom = new XmlDocument();
@@ -57,23 +67,14 @@ namespace C2.Model.MindMaps
         private static void SaveSheet(MindMap mindMap, XmlElement parent)
         {
             // 单sheet / chart
-            XmlDocument dom = parent.OwnerDocument;
-            XmlElement sheet = dom.CreateElement("sheet");
-            sheet.SetAttribute("id", GenUUID());
-            parent.AppendChild(sheet);
-
-            dom.AppendChild(parent);
+            XmlElement sheet = parent.OwnerDocument.CreateElement("sheet");
+            sheet.SetAttribute("id", sheetCounter.CountUp().ToString());
+            
             // topics
-            SaveMindMap(parent, mindMap.Root, mindMap);
-            // Links / relations
-            /* TODO
-             * 有点麻烦 Xmind里topic和relations是分来的
-             * SaveRelations();
-             */
-        }
-        private static void SaveRelations()
-        {
-            throw new NotImplementedException();
+            SaveMindMap(sheet, mindMap.Root, mindMap);
+            SaveLink(sheet, mindMap.GetLinks(false), mindMap);
+
+            parent.AppendChild(sheet);
         }
 
         static void SaveMindMap(XmlElement parent, Topic topic, MindMap mindMap)
@@ -83,7 +84,7 @@ namespace C2.Model.MindMaps
             XmlDocument dom = parent.OwnerDocument;
             XmlElement topicNode = dom.CreateElement("topic");
             // Attributes
-            topicNode.SetAttribute("id", GenUUID());
+            topicNode.SetAttribute("id", topic.ID);
             if (topic.Folded)
                 topicNode.SetAttribute("branch", "folded");
             // Elements
@@ -103,7 +104,7 @@ namespace C2.Model.MindMaps
             // notes / remark
             if (String.IsNullOrEmpty(topic.Remark))
             {
-                SerializeRemark(topicNode, topic.Remark);
+                SaveRemark(topicNode, topic.Remark);
             }
 
             // children
@@ -115,6 +116,7 @@ namespace C2.Model.MindMaps
 
                 children.AppendChild(topics);
                 topicNode.AppendChild(children);
+
                 foreach (Topic subTopic in topic.Children)
                 {
                     SaveMindMap(topicNode, subTopic, mindMap);
@@ -122,26 +124,36 @@ namespace C2.Model.MindMaps
             }
         }
 
-        static void SerializeRemark(XmlElement node, string remark)
+        static void SaveRemark(XmlElement parent, string remark)
         {
-            if (node == null || string.IsNullOrEmpty(remark))
+            if (parent == null || string.IsNullOrEmpty(remark))
                 return;
 
-            XmlElement notes = node.OwnerDocument.CreateElement("notes");
+            XmlElement notes = parent.OwnerDocument.CreateElement("notes");
             notes.Value = remark;
-            node.AppendChild(notes);
-        }
 
+            parent.AppendChild(notes);
+        }
+        static void SaveLink(XmlElement parent, Link[] links, MindMap mindMap)
+        {
+            if (parent == null || links == null)
+                return;
+            XmlElement node = parent.OwnerDocument.CreateElement("relationships");
+            foreach (Link link in links)
+                SaveLink(node, link, mindMap);
+
+            parent.AppendChild(node);
+        }
         static void SaveLink(XmlElement parent, Link link, MindMap mindMap)
         {
             if (parent == null || link == null || string.IsNullOrEmpty(link.TargetID))
                 return;
+            XmlElement node = parent.OwnerDocument.CreateElement("relationship");
+            node.SetAttribute("end1", link.From.ID.ToString());
+            node.SetAttribute("end2", link.Target.ID.ToString());
+            node.SetAttribute("id", link.ID.ToString());
 
-            XmlElement relationship = parent.OwnerDocument.CreateElement("relationship");
-            // TODO 需要在dom里面找到起点终点的id
-            relationship.SetAttribute("end1", "");
-            relationship.SetAttribute("end2", "");
-            relationship.SetAttribute("id", GenUUID());
+            parent.AppendChild(node);
         }
     }
 }
