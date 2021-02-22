@@ -150,7 +150,7 @@
         "map": {
             "itemStyle": {
                 "normal": {
-                    "areaColor": "#eee",
+                    "areaColor": "#ccc",
                     "borderColor": "#444",
                     "borderWidth": 0.5
                 },
@@ -163,7 +163,7 @@
             "label": {
                 "normal": {
                     "textStyle": {
-                        "color": "#000"
+                        "color": "#ccc"
                     }
                 },
                 "emphasis": {
@@ -422,7 +422,8 @@
                 "#bf444c",
                 "#d88273",
                 "#f6efa6"
-            ]
+            ],
+			"textStyle":{"color": "#ccc" },
         },
         "dataZoom": {
             "handleSize": "undefined%",

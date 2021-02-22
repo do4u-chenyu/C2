@@ -310,6 +310,12 @@
     <Compile Include="IAOLab\WebEngine\Boss\RemarkAttribute.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Table.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Theme.cs" />
+    <Compile Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.Designer.cs">
+      <DependentUpon>SelectBossDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="IAOLab\WebEngine\WebBrowserConfig.cs" />
     <Compile Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.cs">
       <SubType>Form</SubType>
@@ -1775,6 +1781,9 @@
     <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.resx">
+      <DependentUpon>SelectBossDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.resx">
       <DependentUpon>SelectMapDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1925,6 +1934,7 @@
     <Content Include="IAOLab\WebEngine\img\bg.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="IAOLab\WebEngine\img\BossStyle01.png" />
     <Content Include="IAOLab\WebEngine\img\png-0003.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

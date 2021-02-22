@@ -1,5 +1,4 @@
 ﻿using C2.Controls;
-using C2.IAOLab.WebEngine.Boss;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +14,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
 {
     partial class WebBrowserDialog : StandardDialog
     {
+        private ToolStripButton LoadMapData;
+        private ToolStripButton LoadBossData;
+        private ToolStripButton SaveHtml;
+        private ToolStripButton SavePic;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton Clear;
+        private ToolStripButton EditCode;
+
         public string Title { set => this.Text = value; }
         public string WebUrl;
 
@@ -31,20 +38,75 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public void InitializeMapToolStrip()
         {
+            LoadMapData = new ToolStripButton();
+            SaveHtml = new ToolStripButton();
+            SavePic = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            Clear = new ToolStripButton();
+            EditCode = new ToolStripButton();
+
+            // LoadMapData
+            LoadMapData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            LoadMapData.Image = global::C2.Properties.Resources.importDataSource;
+            LoadMapData.Text = "导入数据";
+            LoadMapData.Click += new System.EventHandler(this.LoadMapData_Click);
+
+            // SaveHtml
+            SaveHtml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            SaveHtml.Image = global::C2.Properties.Resources.save;
+            SaveHtml.Text = "保存成html";
+
+            // SavePic
+            SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            SavePic.Image = global::C2.Properties.Resources.image;
+            SavePic.Text = "保存成图片";
+
+            // Clear
+            Clear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            Clear.Image = global::C2.Properties.Resources.delete;
+            Clear.Text = "清空";
+            Clear.Click += new System.EventHandler(this.Clear_Click);
+
+            // EditCode
+            EditCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            EditCode.Image = global::C2.Properties.Resources.edit_code;
+            EditCode.Text = "自定义源码";
+
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LoadMapData,
-            this.SaveHtml,
-            this.SavePic,
-            this.toolStripSeparator1,
-            this.Clear,
-            this.EditCode});
+                LoadMapData,
+                SaveHtml,
+                SavePic,
+                toolStripSeparator1,
+                Clear,
+                EditCode});
         }
+
         public void InitializeBossToolStrip()
         {
+            LoadBossData = new ToolStripButton();
+            SaveHtml = new ToolStripButton();
+            SavePic = new ToolStripButton();
+
+            // LoadBossData
+            LoadBossData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            LoadBossData.Image = global::C2.Properties.Resources.importDataSource;
+            LoadBossData.Text = "导入数据";
+            LoadBossData.Click += new System.EventHandler(this.LoadBossData_Click);
+
+            // SaveHtml
+            SaveHtml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            SaveHtml.Image = global::C2.Properties.Resources.save;
+            SaveHtml.Text = "保存成html";
+
+            // SavePic
+            SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            SavePic.Image = global::C2.Properties.Resources.image;
+            SavePic.Text = "保存成图片";
+
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LoadBossData,
-            this.SaveHtml,
-            this.SavePic
+                LoadBossData,
+                SaveHtml,
+                SavePic
             });
         }
 
@@ -54,13 +116,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if (dialog.ShowDialog() == DialogResult.OK)
                 webBrowser1.Navigate(dialog.WebUrl);
         }
+
         void LoadBossData_Click(object sender, EventArgs e)
         {
-            //var dialog = new SelectMapDialog();
-            //if (dialog.ShowDialog() == DialogResult.OK)
-            //    webBrowser1.Navigate(dialog.WebUrl);
-            //GenBossHtml.GetInstance().TransDataToHtml()
-            webBrowser1.Navigate(Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "BossIndex01.html"));
+            var dialog = new SelectBossDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+                webBrowser1.Navigate(dialog.WebUrl);
         }
 
         private void Clear_Click(object sender, EventArgs e)
