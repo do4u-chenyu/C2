@@ -214,11 +214,23 @@
   
     //------------------画矩形，让WINFORM调用---------------  
     function drawRec(){  
-drawingManager.setDrawingMode(BMAP_DRAWING_RECTANGLE);}  
+        drawingManager.setDrawingMode(BMAP_DRAWING_RECTANGLE);
+    }  
+
     //------------------画圆，让WINFORM调用----------------  
      function drawCircle(){  
-drawingManager.setDrawingMode(BMAP_DRAWING_CIRCLE);}  
+        drawingManager.setDrawingMode(BMAP_DRAWING_CIRCLE);
+    } 
+    
     //------------------清除所有已画图形，让WINFORM调用--------------------  
+    function clearAll() {
+        //for (var i = 0; i < overlays.length; i++) {
+        //    map.removeOverlay(overlays[i]);
+        //}
+        //overlays.length = 0
+        map.clearOverlays();
+    }  
+
     function getPoints(w) {  
         ////JSON.parse(strArr);
         ////var eValue = eval('strArr.' + strArr.lat);
@@ -238,6 +250,7 @@ drawingManager.setDrawingMode(BMAP_DRAWING_CIRCLE);}
             var myIcon = new BMap.Icon("../img/png-0003.png", new BMap.Size(24, 24));
             var marker = new BMap.Marker(obj[j], { icon: myIcon });  // 创建标注
             map.addOverlay(marker);
+
         }
        
     };
