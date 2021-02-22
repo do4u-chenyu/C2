@@ -1,5 +1,6 @@
 ﻿using C2.Controls;
 using C2.IAOLab.WebEngine.Boss;
+using C2.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,10 +17,16 @@ namespace C2.IAOLab.WebEngine.Dialogs
     partial class SelectBossDialog : StandardDialog
     {
         public string WebUrl;
-        public SelectBossDialog()
+        public List<DataItem> DataItems;
+        public SelectBossDialog(List<DataItem> dataItems)
         {
-            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "BossIndex01.html");
             InitializeComponent();
+            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "BossIndex01.html");
+            DataItems = dataItems;
+            foreach (DataItem dataItem in DataItems)
+            {
+                this.comboBox1.Items.Add(dataItem.FileName);
+            }
         }
 
 

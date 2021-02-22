@@ -223,11 +223,13 @@ namespace C2.Controls.MapViews
             MapWidget atw = hitTopic.FindWidget<MapWidget>();
             if (atw == null)
                 hitTopic.Widgets.Add(new MapWidget());
-            
+
             //TODO phx  打开web窗口
+            //当前节点的数据源作为参数传给webbrowser
             new WebManager()
             {
-                Type = WebManager.WebType.Map
+                Type = WebManager.WebType.Map,
+                DataItems = hitTopic.GetDataItems()
             }.OpenWebBrowser();
             
             return;
@@ -238,7 +240,8 @@ namespace C2.Controls.MapViews
             //TODO phx  打开web窗口
             new WebManager()
             {
-                Type = WebManager.WebType.Boss
+                Type = WebManager.WebType.Boss,
+                DataItems = hitTopic.GetDataItems()
             }.OpenWebBrowser();
 
             return;
