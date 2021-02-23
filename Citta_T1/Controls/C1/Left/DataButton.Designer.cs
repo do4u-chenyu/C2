@@ -58,7 +58,6 @@ namespace C2.Controls.Left
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 10;
             this.leftPictureBox.TabStop = false;
-            this.leftPictureBox.MouseEnter += new System.EventHandler(this.LeftPictureBox_MouseEnter);
             // 
             // rightPictureBox
             // 
@@ -143,8 +142,6 @@ namespace C2.Controls.Left
             this.textBox.Size = new System.Drawing.Size(94, 16);
             this.textBox.TabIndex = 12;
             this.textBox.Visible = false;
-            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
-            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // txtButton
             // 
