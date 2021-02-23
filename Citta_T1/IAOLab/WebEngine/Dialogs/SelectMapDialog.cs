@@ -79,16 +79,18 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         protected override bool OnOKButtonClick()
         {
-            //生成html
-            WebUrl = GenGisMapHtml.GetInstance().TransDataToHtml();
+            ////生成html
+            //WebUrl = GenGisMapHtml.GetInstance().TransDataToHtml();
 
             //if (OptionNotReady())
-            //    return;
+            //    return false;
             int upperLimit = 100;
 
             // 获得x,y轴数据的列索引
-            int xIndex = latComboBox.Tag == null ? latComboBox.SelectedIndex : ConvertUtil.TryParseInt(latComboBox.Tag.ToString());
-            List<int> indexs = new List<int>() { xIndex };
+            int latIndex = latComboBox.Tag == null ? latComboBox.SelectedIndex : ConvertUtil.TryParseInt(latComboBox.Tag.ToString());
+            List<int> indexlat = new List<int>() { latIndex };
+            int lonIndex = lonComboBox.Tag == null ? lonComboBox.SelectedIndex : ConvertUtil.TryParseInt(lonComboBox.Tag.ToString());
+            List<int> indexlon = new List<int>() { lonIndex };
             //indexs.AddRange(outListCCBL0.GetItemCheckIndex());
 
             // 获取选中输入、输出各列数据
@@ -100,25 +102,63 @@ namespace C2.IAOLab.WebEngine.Dialogs
             List<string> rows = new List<string>(fileContent.Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
 
-            List<List<string>> columnValues = Utils.FileUtil.GetColumns(indexs, hitItem, rows, upperLimit);
-            if (columnValues.Count == 0)
+            List<List<string>> latValues = Utils.FileUtil.GetColumns(indexlat, hitItem, rows, upperLimit);
+            List<List<string>> lonValues = Utils.FileUtil.GetColumns(indexlon, hitItem, rows, upperLimit);
+            if (latValues.Count == 0)
             {
                 HelpUtil.ShowMessageBox("文件内容为空");
                 Close();
-                //return;
+                return false;
             }
-            // xy轴标题名
-            string xName = latComboBox.SelectedItem.ToString();
-           // List<string> yNames = outListCCBL0.GetItemCheckText();
-            //yNames.Insert(0, this.FileName);
-            //yNames.Insert(1, xName);
+            // 经纬度标题名
+            string latName = latComboBox.SelectedItem.ToString();
+            string lonName = lonComboBox.SelectedItem.ToString();
+            string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
+            String.Format("\"lng\": \" {0} \", \"lat\": \" {1} \"", "114.376", "36.01");
+            List<string> tmpList = new List<string>();
+            if (latValues[0].Count==lonValues[0].Count) 
+            {
+                for (int i = 0; i < latValues[0].Count; i++)
+                {
+                    tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[0][i], lonValues[0][1]) + '}');
+                }
+            }
+            else
+                HelpUtil.ShowMessageBox("经纬度维度不一致");
 
+            //准备数据
+            //string[] strArr = new string[4];
+            //strArr[0] = "[{ \"lng\": \"114.363979\", \"lat\": \"36.03773\", \"count\": \"52\" }, { \"lng\": \"115.363979\", \"lat\": \"37.03773\", \"count\": \"53\" }]";
+
+            //string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
+            //String.Format("\"lng\": \" {0} \", \"lat\": \" {1} \"", "114.376", "36.01");
+            //List<string> tmpList = new List<string>();
+            //var pointData = File.ReadAllLines(@"C:\Users\Administrator\Desktop\points.txt");
+
+            //var res = pointData.Select(x => x.Split('\t', ',')).ToArray();
+
+            //for (int i = 0; i < res.Length; i++)
+            //{
+
+            //    tmpList.Add('{' + String.Format(JSON_OBJ_Format, res[1][0], res[i][1]) + '}');
+
+            //}
+            ////tmpList.Sort();
+
+            string[] w = new string[1];
+            w[0] = '[' + String.Join(",", tmpList.ToArray()) + ']';
+            webBrowser1.Document.InvokeScript("getPoints", w);
+
+            //画图
+            hitItem.ChartType = this.mapTypeComboBox.Text;
             //Utils.ControlUtil.PaintChart(columnValues, yNames, this.chartTypesList.Text);
+
+
             //// 存储图表挂件需要的数据
-            //hitItem.ChartType = this.chartTypesList.Text;
+          
             //hitItem.SelectedIndexs = indexs;
-            //hitItem.SelectedItems = yNames;
-            //this.DialogResult = DialogResult.OK;
+            ////hitItem.SelectedItems = yNames;
+            this.DialogResult = DialogResult.OK;
             Close();
 
             return base.OnOKButtonClick();
