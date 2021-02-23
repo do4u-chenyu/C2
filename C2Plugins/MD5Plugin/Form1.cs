@@ -20,27 +20,27 @@ namespace MD5Plugin
 
         public string GetPluginDescription()
         {
-            throw new NotImplementedException();
+            return "将字符串进行常用的加密、解密、编码和解码操作；如MD5加密，Base64编码和解码等。";
         }
 
         public Image GetPluginImage()
         {
-            throw new NotImplementedException();
+            return this.Icon.ToBitmap();
         }
 
         public string GetPluginName()
         {
-            throw new NotImplementedException();
+            return "MD5加密";
         }
 
         public string GetPluginVersion()
         {
-            throw new NotImplementedException();
+            return "0.0.1";
         }
 
         public DialogResult ShowFormDialog()
         {
-            throw new NotImplementedException();
+            return this.ShowDialog();
         }
     }
 }
