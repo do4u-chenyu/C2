@@ -60,10 +60,10 @@ namespace C2.Controls.Left
             if (this.MindMapPaintPanel.Controls.Count > 0)
                 this.startPoint.Y = this.MindMapPaintPanel.Controls[0].Location.Y - this.MindMapPaintPanel.Controls[0].Height - ButtonBottomOffsetY;
 
+            int idx = this.MindMapPaintPanel.Controls.IndexOf(modelButton);
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
             using (new GuarderUtil.LayoutGuarder(MindMapPaintPanel))
             {
-                int idx = this.MindMapPaintPanel.Controls.IndexOf(modelButton);
                 ReLayoutMindMapButtons(idx); // 重新布局
                 this.MindMapPaintPanel.Controls.Remove(modelButton); // 删除控件
             }
