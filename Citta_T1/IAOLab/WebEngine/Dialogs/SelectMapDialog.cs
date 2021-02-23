@@ -14,12 +14,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using C2.Dialogs;
 
 namespace C2.IAOLab.WebEngine.Dialogs
 {
     partial class SelectMapDialog : StandardDialog
     {
         public string WebUrl;
+        public string map;
+        public string[] methodstr;
         private BcpInfo bcpInfo;
         private DataItem hitItem;
         private string FilePath { get => hitItem.FilePath; }
@@ -43,7 +46,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             {
                 this.datasourceComboBox.Items.Add(dataItem.FileName);
             }
-          
+             map = "标注图";
         }
 
         private void datasourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -59,11 +62,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         private void InitializeDropDown()
         {
-            
+            string map = this.mapTypeComboBox.Text;
             this.bcpInfo = new BcpInfo(FilePath, FileEncoding, new char[] { FileSep });
             this.latComboBox.Items.AddRange(bcpInfo.ColumnArray);
             this.lonComboBox.Items.AddRange(bcpInfo.ColumnArray);
             this.countComboBox.Items.AddRange(bcpInfo.ColumnArray);
+           
 
         }
         private void clearComBox() 
@@ -79,11 +83,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         protected override bool OnOKButtonClick()
         {
+            map = this.mapTypeComboBox.SelectedText;
             ////生成html
             //WebUrl = GenGisMapHtml.GetInstance().TransDataToHtml();
-
-            //if (OptionNotReady())
-            //    return false;
+            if (OptionNotReady())
+                return false;
             int upperLimit = 100;
 
             // 获得x,y轴数据的列索引
@@ -110,9 +114,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 Close();
                 return false;
             }
-            // 经纬度标题名
-            string latName = latComboBox.SelectedItem.ToString();
-            string lonName = lonComboBox.SelectedItem.ToString();
+
+            //准备数据
             string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
             String.Format("\"lng\": \" {0} \", \"lat\": \" {1} \"", "114.376", "36.01");
             List<string> tmpList = new List<string>();
@@ -125,38 +128,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             else
                 HelpUtil.ShowMessageBox("经纬度维度不一致");
-
-            //准备数据
-            //string[] strArr = new string[4];
-            //strArr[0] = "[{ \"lng\": \"114.363979\", \"lat\": \"36.03773\", \"count\": \"52\" }, { \"lng\": \"115.363979\", \"lat\": \"37.03773\", \"count\": \"53\" }]";
-
-            //string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
-            //String.Format("\"lng\": \" {0} \", \"lat\": \" {1} \"", "114.376", "36.01");
-            //List<string> tmpList = new List<string>();
-            //var pointData = File.ReadAllLines(@"C:\Users\Administrator\Desktop\points.txt");
-
-            //var res = pointData.Select(x => x.Split('\t', ',')).ToArray();
-
-            //for (int i = 0; i < res.Length; i++)
-            //{
-
-            //    tmpList.Add('{' + String.Format(JSON_OBJ_Format, res[1][0], res[i][1]) + '}');
-
-            //}
-            ////tmpList.Sort();
-
-            string[] w = new string[1];
-            w[0] = '[' + String.Join(",", tmpList.ToArray()) + ']';
-            webBrowser1.Document.InvokeScript("getPoints", w);
-
-            //画图
-            hitItem.ChartType = this.mapTypeComboBox.Text;
-            //Utils.ControlUtil.PaintChart(columnValues, yNames, this.chartTypesList.Text);
-
+            string[] methodstr = new string[1];
+            methodstr[0] = '[' + String.Join(",", tmpList.ToArray()) + ']';
 
             //// 存储图表挂件需要的数据
-          
-            //hitItem.SelectedIndexs = indexs;
+
+            //hitItem.SelectedIndexs = indexs;  
             ////hitItem.SelectedItems = yNames;
             this.DialogResult = DialogResult.OK;
             Close();
@@ -167,33 +144,38 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private bool OptionNotReady()
         {
             bool notReady = true;
-            //int status0 = String.IsNullOrEmpty(this.chartTypesList.Text) ? 1 : 0;
-            //int status1 = String.IsNullOrEmpty(this.comboBox0.Text) ? 2 : 0;
-            //int status2 = this.outListCCBL0.GetItemCheckIndex().Count == 0 ? 4 : 0;
-            //switch (status0 | status1 | status2)
-            //{
-            //    case 0:
-            //        notReady = false;
-            //        break;
-            //    case 7:
-            //    case 5:
-            //    case 3:
-            //    case 1:
-            //        HelpUtil.ShowMessageBox("请设置图表类型");
-            //        break;
-            //    case 6:
-            //    case 2:
-            //        HelpUtil.ShowMessageBox("请设置输入维度");
-            //        break;
-            //    case 4:
-            //        HelpUtil.ShowMessageBox("请设置输出维度");
-            //        break;
-            //    default:
-            //        break;
-            //}
+            int status0 = String.IsNullOrEmpty(this.mapTypeComboBox.Text) ? 1 : 0;
+            int status1 = String.IsNullOrEmpty(this.latComboBox.Text) ? 2 : 0;
+            int status2 = String.IsNullOrEmpty(this.lonComboBox.Text) ? 4 : 0;
+            switch (status0 | status1 | status2)
+            {
+                case 0:
+                    notReady = false;
+                    break;
+                case 7:
+                case 5:
+                case 3:
+                case 1:
+                    HelpUtil.ShowMessageBox("请设置图表类型");
+                    break;
+                case 6:
+                case 2:
+                    HelpUtil.ShowMessageBox("请设置经度");
+                    break;
+                case 4:
+                    HelpUtil.ShowMessageBox("请设置纬度");
+                    break;
+                default:
+                    break;
+            }
             return notReady;
         }
 
-       
+        private void mapTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+             map = this.mapTypeComboBox.SelectedText;
+
+        }
+
     }
 }
