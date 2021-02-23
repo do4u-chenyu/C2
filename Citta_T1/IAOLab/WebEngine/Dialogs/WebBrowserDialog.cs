@@ -118,7 +118,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         void LoadMapData_Click(object sender, EventArgs e)
         {
-            var dialog = new SelectMapDialog();
+            var dialog = new SelectMapDialog(DataItems);
             if (dialog.ShowDialog() == DialogResult.OK)
                 webBrowser1.Navigate(dialog.WebUrl);
         }
