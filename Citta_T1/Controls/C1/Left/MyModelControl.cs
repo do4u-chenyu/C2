@@ -1,5 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -71,31 +72,22 @@ namespace C2.Controls.Left
             if (this.MyModelPaintPanel.Controls.Count > 0)
                 this.startPoint.Y = MyModelPaintPanel.Controls[0].Location.Y - MyModelPaintPanel.Controls[0].Height - ButtonBottomOffsetY;
 
-            this.MyModelPaintPanel.Controls.Remove(modelButton);
-            // 重新布局
-            ReLayoutLocalFrame();           
+            int idx = this.MyModelPaintPanel.Controls.IndexOf(modelButton);
+            using (new GuarderUtil.LayoutGuarder(this.MyModelPaintPanel))
+            {
+                ReLayoutLocalFrame(idx); // 重新布局
+                this.MyModelPaintPanel.Controls.Remove(modelButton); // 布局完成后删除控件
+            }
         }
 
-        private void ReLayoutLocalFrame()
+        private void ReLayoutLocalFrame(int index)
         {
-            // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
-            this.SuspendLayout();
-            // 清空位置
-            List<Control> tmp = new List<Control>();
-            foreach (Control ct in MyModelPaintPanel.Controls)
-                tmp.Add(ct);
-
-            MyModelPaintPanel.Controls.Clear();
-            // 重新排序
-            foreach (Control ct in tmp)
+ 
+            for (int i = index + 1; i < MyModelPaintPanel.Controls.Count; i++)
             {
-                LayoutModelButtonLocation(ct);
-                MyModelPaintPanel.Controls.Add(ct);
+                Control ct = MyModelPaintPanel.Controls[i];
+                ct.Location = new Point(ct.Location.X, ct.Location.Y - ct.Height - ButtonBottomOffsetY);
             }
-
-
-            this.MyModelPaintPanel.ResumeLayout(false);
-            this.MyModelPaintPanel.PerformLayout();
         }
 
         private void MyModelControl_MouseDown(object sender, MouseEventArgs e)
