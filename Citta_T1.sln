@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game2048Plugin", "C2Plugins
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QQSpiderPlugin", "C2Plugins\QQSpiderPlugin\QQSpiderPlugin.csproj", "{389687F6-5DCC-4198-8110-C1D42B23465E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD5Plugin", "MD5Plugin\MD5Plugin.csproj", "{9F165641-517E-47A2-A3E1-4CD783A8C6FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD5Plugin", "C2Plugins\MD5Plugin\MD5Plugin.csproj", "{9F165641-517E-47A2-A3E1-4CD783A8C6FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
