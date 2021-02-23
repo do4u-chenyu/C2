@@ -69,6 +69,12 @@ namespace C2.Controls.Left
             this.rightPictureBox.TabIndex = 11;
             this.rightPictureBox.TabStop = false;
             // 
+            // helpToolTip
+            // 
+            this.helpToolTip.AutoPopDelay = 5000;
+            this.helpToolTip.InitialDelay = 1000;
+            this.helpToolTip.ReshowDelay = 500;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(22, 22);
@@ -80,7 +86,7 @@ namespace C2.Controls.Left
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 120);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // ReviewToolStripMenuItem
