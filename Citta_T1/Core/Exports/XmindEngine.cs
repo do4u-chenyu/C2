@@ -12,7 +12,7 @@ namespace C2.Core.Exports
     {
         public override string TypeMime
         {
-            get { return DocumentType.FreeMind.TypeMime; }
+            get { return DocumentType.Xmind.TypeMime; }
         }
 
         protected override bool ExportChartToFile(Document document, ChartPage chart, string filename)

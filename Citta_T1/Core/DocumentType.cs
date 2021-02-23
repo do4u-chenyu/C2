@@ -32,23 +32,23 @@ namespace C2.Core
         static DocumentType()
         {
             Png = new DocumentType("PNG",
-                "image/png", 
+                "image/png",
                 new string[] { ".png" },
                 "Portable Network Graphics");
-            Tiff = new DocumentType("TIFF", 
-                "image/tiff", 
+            Tiff = new DocumentType("TIFF",
+                "image/tiff",
                 new string[] { ".tiff" },
                 "Tagged Image File Format");
             Jpeg = new DocumentType("JPEG",
-                "image/jpeg", 
+                "image/jpeg",
                 new string[] { ".jpg", ".jpeg" },
                 "Joint Photographic Experts Group");
-            Gif = new DocumentType("GIF", 
+            Gif = new DocumentType("GIF",
                 "image/gif",
                 new string[] { ".gif" },
                 "Graphics Interchange Format");
-            Bmp = new DocumentType("BMP", 
-                "image/bmp", 
+            Bmp = new DocumentType("BMP",
+                "image/bmp",
                 new string[] { ".bmp" });
             Svg = new DocumentType("SVG",
                 "image/svg+xml",
@@ -124,7 +124,7 @@ namespace C2.Core
 
             return sb.ToString();
         }
-        
+
         public string DefaultExtension
         {
             get
@@ -150,7 +150,7 @@ namespace C2.Core
                     sb.Append("*" + ext);
                 }
 
-                return string.Format("{0} ({1})|{1}", LanguageManage.GetText(Name), sb.ToString()); 
+                return string.Format("{0} ({1})|{1}", LanguageManage.GetText(Name), sb.ToString());
             }
         }
 
@@ -164,6 +164,7 @@ namespace C2.Core
                  Bmp,
                  Svg,
                  FreeMind,
+                 Xmind,
                  Txt,
                  Csv,
                  C2,
@@ -200,7 +201,7 @@ namespace C2.Core
                 if (dt.Extensions.IsNullOrEmpty())
                     continue;
 
-                if(sb.Length > 0)
+                if (sb.Length > 0)
                     sb.Append("|");
 
                 sb.AppendFormat("{0}  ({1})|{2}",

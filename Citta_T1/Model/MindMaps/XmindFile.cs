@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using C2.Canvas;
@@ -11,25 +12,27 @@ using C2.Core;
 using C2.Model;
 using C2.Model.Documents;
 using C2.Model.Widgets;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace C2.Model.MindMaps
 {
     class XmindFile
     {
-       public class Counter
+        class StringDataSource : IStaticDataSource
         {
-            int counter = 0;
-            public int CountUp()
+            public string Str { get; set; }
+
+            public StringDataSource(string str)
             {
-                counter += 1;
-                return counter;
+                this.Str = str;
             }
-            public int GetCount()
+
+            public Stream GetSource()
             {
-                return counter;
+                Stream s = new MemoryStream(Encoding.UTF8.GetBytes(Str));
+                return s;
             }
         }
-        public static Counter sheetCounter = new Counter();
         public static void SaveFile(IEnumerable<ChartPage> charts, string filename)
         {
             XmlDocument dom = new XmlDocument();
@@ -42,13 +45,17 @@ namespace C2.Model.MindMaps
             root.SetAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
             root.SetAttribute("version", "2.0");
 
+            int sheetID = 1;
             foreach (ChartPage chartPage in charts)
             {
                 if (chartPage is MindMap)
-                    SaveSheet(chartPage as MindMap, root); // TODO 考虑一下sheet的顺序问题
+                    SaveSheet(chartPage as MindMap, root, sheetID); // TODO 考虑一下sheet的顺序问题
+                sheetID += 1;
             }
-            dom.Save(filename);
+            dom.AppendChild(root);
+            SaveFile(dom, filename);
         }
+
         public static void SaveFile(MindMap mindMap, string filename)
         {
             XmlDocument dom = new XmlDocument();
@@ -61,15 +68,27 @@ namespace C2.Model.MindMaps
             root.SetAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
             root.SetAttribute("version", "2.0");
 
-            SaveSheet(mindMap, root);
-            dom.Save(filename);
+            SaveSheet(mindMap, root, 1);
+            dom.AppendChild(root);
+            SaveFile(dom, filename);
         }
-        private static void SaveSheet(MindMap mindMap, XmlElement parent)
+        private static void SaveFile(XmlDocument dom, string filename)
+        {
+            using (ZipFile zip = ZipFile.Create(filename))
+            {
+                zip.BeginUpdate();
+                StringDataSource content = new StringDataSource(dom.OuterXml);
+                //添加文件
+                zip.Add(content, "content.xml");
+                zip.CommitUpdate();
+            }
+        }
+        private static void SaveSheet(MindMap mindMap, XmlElement parent, int sheetID)
         {
             // 单sheet / chart
             XmlElement sheet = parent.OwnerDocument.CreateElement("sheet");
-            sheet.SetAttribute("id", sheetCounter.CountUp().ToString());
-            
+            sheet.SetAttribute("id", sheetID.ToString());
+
             // topics
             SaveMindMap(sheet, mindMap.Root, mindMap);
             SaveLink(sheet, mindMap.GetLinks(false), mindMap);
@@ -90,7 +109,7 @@ namespace C2.Model.MindMaps
             // Elements
             // title / text
             XmlElement title = dom.CreateElement("title");
-            title.Value = topic.Text;
+            title.InnerText = topic.Text;
             topicNode.AppendChild(title);
             // image / picture
             /* TODO 暂时不做
@@ -114,14 +133,16 @@ namespace C2.Model.MindMaps
                 XmlElement topics = dom.CreateElement("topics");
                 topics.SetAttribute("type", "attached");
 
-                children.AppendChild(topics);
-                topicNode.AppendChild(children);
 
                 foreach (Topic subTopic in topic.Children)
                 {
-                    SaveMindMap(topicNode, subTopic, mindMap);
+                    SaveMindMap(topics, subTopic, mindMap);
                 }
+
+                children.AppendChild(topics);
+                topicNode.AppendChild(children);
             }
+            parent.AppendChild(topicNode);
         }
 
         static void SaveRemark(XmlElement parent, string remark)
