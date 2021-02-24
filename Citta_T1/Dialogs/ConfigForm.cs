@@ -418,5 +418,10 @@ namespace C2.Dialogs
                 UpdatablePlugins_Load(); // 一个叫available,一个叫updatable,也劝不动
             }
         }
+
+        private void label24_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
