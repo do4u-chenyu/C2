@@ -82,11 +82,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             map = this.mapTypeComboBox.Text;
             //生成html
-            //WebUrl = GenGisMapHtml.GetInstance().TransDataToHtml();
+            WebUrl = GenGisMapHtml.GetInstance().TransDataToHtml();
             if (OptionNotReady())
                 return false;
             int upperLimit = 100;
-
             // 获得x,y轴数据的列索引
             int latIndex = latComboBox.Tag == null ? latComboBox.SelectedIndex : ConvertUtil.TryParseInt(latComboBox.Tag.ToString());
             List<int> indexlat = new List<int>() { latIndex };
@@ -126,7 +125,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             else
                 HelpUtil.ShowMessageBox("经纬度维度不一致");
 
-            tude= '[' + String.Join(",", tmpList.ToArray()) + ']';
+            tude = '[' + String.Join(",", tmpList.ToArray()) + ']';
 
             this.DialogResult = DialogResult.OK;
             Close();
@@ -163,8 +162,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             return notReady;
         }
-
-       
 
     }
 }
