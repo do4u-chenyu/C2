@@ -135,6 +135,7 @@ namespace C2.Controls.Left
             // 
             this.textBox.BackColor = System.Drawing.Color.White;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.textBox.Location = new System.Drawing.Point(25, 3);
             this.textBox.Name = "textBox";
@@ -147,7 +148,7 @@ namespace C2.Controls.Left
             // 
             this.txtButton.AutoEllipsis = true;
             this.txtButton.BackColor = System.Drawing.Color.White;
-            this.txtButton.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtButton.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

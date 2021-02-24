@@ -101,7 +101,7 @@ namespace C2.Controls.Left
             // 
             this.txtButton.AutoEllipsis = true;
             this.txtButton.BackColor = System.Drawing.Color.White;
-            this.txtButton.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtButton.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
