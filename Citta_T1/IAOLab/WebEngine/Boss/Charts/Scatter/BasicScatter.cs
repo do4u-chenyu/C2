@@ -11,15 +11,20 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Scatter
 {
     public class BasicScatter : BaseCharts
     {
-        public BasicScatter(DataTable dataTable, CompleteOption option, int categoryCol = 1)
+        public BasicScatter(DataTable dataTable, CompleteOption option, string[] chartOptions)
         {
-            option.xAxis = new XAxis();
-            option.yAxis = new YAxis();
-            option.dataset = new DataSetSource()
+            option.xAxis = new XAxis()
             {
-                source = Common.GetDataSetSource(dataTable, categoryCol - 1),
+                type = xAxisType.category
             };
-            option.series = new Series(Enumerable.Repeat(new SeriesScatter(), dataTable.Columns.Count - 1).ToArray());
+            option.yAxis = new YAxis();
+            option.dataset = "{ source: datas }";
+
+            List<ISeries> series = new List<ISeries>();
+            for (int i = 1; i < chartOptions.Length; i++)
+                series.Add(new SeriesScatter(chartOptions[0], chartOptions[i]));
+
+            option.series = new Series(series.ToArray());
             _initScript = option.ToString();
         }
     }

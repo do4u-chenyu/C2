@@ -22,7 +22,13 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         {
             Common.InitOptionFlag(this, FlagDic, TypeDic);
             type = "'bar'";
-
+        }
+        public SeriesBar(string x, string y)
+        {
+            Common.InitOptionFlag(this, FlagDic, TypeDic);
+            type = "'bar'";
+            name = "'" + y +"'";
+            encode = "{ x: '" + x + "' , y:'" + y + "'}"; 
         }
         public string type { get { return _type; } set { FlagDic["type"] = true; _type = value; } }
         public string id { get { return _id; } set { FlagDic["id"] = true; _id = value; } }

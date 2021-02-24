@@ -127,6 +127,20 @@
             this.checkNewVersion = new System.Windows.Forms.TabPage();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.checking = new System.Windows.Forms.Panel();
+            this.currentModelRunLab = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.newVersion = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.title = new System.Windows.Forms.Label();
+            this.version = new System.Windows.Forms.Label();
+            this.size = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.description = new System.Windows.Forms.TextBox();
             this.mainTabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
@@ -146,6 +160,9 @@
             this.HostSubPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.aboutConfigPage.SuspendLayout();
+            this.checkNewVersion.SuspendLayout();
+            this.checking.SuspendLayout();
+            this.newVersion.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainTabControl
@@ -796,6 +813,7 @@
             this.installedTB.Location = new System.Drawing.Point(3, 176);
             this.installedTB.Multiline = true;
             this.installedTB.Name = "installedTB";
+            this.installedTB.ReadOnly = true;
             this.installedTB.Size = new System.Drawing.Size(620, 102);
             this.installedTB.TabIndex = 0;
             // 
@@ -897,6 +915,7 @@
             this.availableTB.Location = new System.Drawing.Point(3, 176);
             this.availableTB.Multiline = true;
             this.availableTB.Name = "availableTB";
+            this.availableTB.ReadOnly = true;
             this.availableTB.Size = new System.Drawing.Size(620, 102);
             this.availableTB.TabIndex = 5;
             // 
@@ -1098,6 +1117,7 @@
             // 
             // checkNewVersion
             // 
+            this.checkNewVersion.Controls.Add(this.checking);
             this.checkNewVersion.Location = new System.Drawing.Point(4, 26);
             this.checkNewVersion.Name = "checkNewVersion";
             this.checkNewVersion.Size = new System.Drawing.Size(634, 380);
@@ -1111,6 +1131,149 @@
             this.pythonOpenFileDialog.Filter = "Python解释器 |python.exe|可执行文件|*.exe";
             this.pythonOpenFileDialog.RestoreDirectory = true;
             this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
+            // 
+            // checking
+            // 
+            this.checking.BackColor = System.Drawing.Color.White;
+            this.checking.Controls.Add(this.newVersion);
+            this.checking.Controls.Add(this.currentModelRunLab);
+            this.checking.Controls.Add(this.label23);
+            this.checking.Controls.Add(this.button1);
+            this.checking.Controls.Add(this.textBox1);
+            this.checking.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checking.Location = new System.Drawing.Point(0, 0);
+            this.checking.Name = "checking";
+            this.checking.Size = new System.Drawing.Size(634, 380);
+            this.checking.TabIndex = 6;
+            // 
+            // currentModelRunLab
+            // 
+            this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.currentModelRunLab.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.currentModelRunLab.Image = global::C2.Properties.Resources.checkUpdate;
+            this.currentModelRunLab.Location = new System.Drawing.Point(224, 171);
+            this.currentModelRunLab.Name = "currentModelRunLab";
+            this.currentModelRunLab.Size = new System.Drawing.Size(189, 45);
+            this.currentModelRunLab.TabIndex = 29;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Image = global::C2.Properties.Resources.checkUpdate;
+            this.label23.Location = new System.Drawing.Point(98, 199);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(0, 17);
+            this.label23.TabIndex = 7;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(550, 348);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "取消";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("华文宋体", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Location = new System.Drawing.Point(270, 148);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(143, 20);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "正在检查更新";
+            // 
+            // newVersion
+            // 
+            this.newVersion.Controls.Add(this.description);
+            this.newVersion.Controls.Add(this.label28);
+            this.newVersion.Controls.Add(this.label27);
+            this.newVersion.Controls.Add(this.size);
+            this.newVersion.Controls.Add(this.version);
+            this.newVersion.Controls.Add(this.title);
+            this.newVersion.Controls.Add(this.button2);
+            this.newVersion.Controls.Add(this.button3);
+            this.newVersion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.newVersion.Location = new System.Drawing.Point(0, 0);
+            this.newVersion.Name = "newVersion";
+            this.newVersion.Size = new System.Drawing.Size(634, 380);
+            this.newVersion.TabIndex = 7;
+            this.newVersion.Visible = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(550, 348);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "关闭";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(457, 348);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "更新";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // title
+            // 
+            this.title.AutoSize = true;
+            this.title.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.title.Location = new System.Drawing.Point(12, 16);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(74, 22);
+            this.title.TabIndex = 8;
+            this.title.Text = "更新可用";
+            this.title.Click += new System.EventHandler(this.label24_Click);
+            // 
+            // version
+            // 
+            this.version.AutoSize = true;
+            this.version.Location = new System.Drawing.Point(39, 53);
+            this.version.Name = "version";
+            this.version.Size = new System.Drawing.Size(59, 17);
+            this.version.TabIndex = 9;
+            this.version.Text = "更新版本:";
+            // 
+            // size
+            // 
+            this.size.AutoSize = true;
+            this.size.Location = new System.Drawing.Point(39, 83);
+            this.size.Name = "size";
+            this.size.Size = new System.Drawing.Size(59, 17);
+            this.size.TabIndex = 10;
+            this.size.Text = "下载大小:";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(115, 53);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(35, 17);
+            this.label27.TabIndex = 11;
+            this.label27.Text = "2.1.2";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(115, 83);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(38, 17);
+            this.label28.TabIndex = 12;
+            this.label28.Text = "17KB";
+            // 
+            // description
+            // 
+            this.description.Location = new System.Drawing.Point(8, 119);
+            this.description.Multiline = true;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            this.description.Size = new System.Drawing.Size(618, 216);
+            this.description.TabIndex = 13;
             // 
             // ConfigForm
             // 
@@ -1154,6 +1317,11 @@
             this.groupBox1.PerformLayout();
             this.aboutConfigPage.ResumeLayout(false);
             this.aboutConfigPage.PerformLayout();
+            this.checkNewVersion.ResumeLayout(false);
+            this.checking.ResumeLayout(false);
+            this.checking.PerformLayout();
+            this.newVersion.ResumeLayout(false);
+            this.newVersion.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1248,5 +1416,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.Panel checking;
+        private System.Windows.Forms.Panel newVersion;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label size;
+        private System.Windows.Forms.Label version;
+        private System.Windows.Forms.Label title;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label currentModelRunLab;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox description;
     }
 }

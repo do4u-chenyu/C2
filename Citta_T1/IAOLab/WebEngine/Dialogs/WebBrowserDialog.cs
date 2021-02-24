@@ -7,12 +7,14 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.IAOLab.WebEngine.Dialogs
 {
+    [ComVisible(true)]
     partial class WebBrowserDialog : StandardDialog
     {
         private ToolStripButton LoadMapData;
@@ -76,6 +78,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             EditCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             EditCode.Image = global::C2.Properties.Resources.edit_code;
             EditCode.Text = "自定义源码";
+            EditCode.Click += new System.EventHandler(this.EditCode_Click);
 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 LoadMapData,
@@ -118,25 +121,26 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         void LoadMapData_Click(object sender, EventArgs e)
         {
+     
             var dialog = new SelectMapDialog(DataItems);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-
+                string[] methodstr = new string[1];
+                methodstr[0] = dialog.tude;
                 webBrowser1.Navigate(dialog.WebUrl);
-       
                 switch (dialog.map)
                 {
                     case "标注图":
-                        webBrowser1.Document.InvokeScript("markerPoints", dialog.methodstr);
+                        webBrowser1.Document.InvokeScript("markerPoints", methodstr);
                         break;
                     case "轨迹图":
-                        webBrowser1.Document.InvokeScript("getPoints", dialog.methodstr);
+                        webBrowser1.Document.InvokeScript("getPoints", methodstr);
                         break;
                     case "区域图":
-                        webBrowser1.Document.InvokeScript("getPoints", dialog.methodstr);
+                        webBrowser1.Document.InvokeScript("getPoints", methodstr);
                         break;
                     case "热力图":
-                        webBrowser1.Document.InvokeScript("getPoints", dialog.methodstr);
+                        webBrowser1.Document.InvokeScript("getPoints", methodstr);
                         break;
                 }
             }
@@ -171,7 +175,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void Clear_Click(object sender, EventArgs e)
         {
            
-            webBrowser1.Document.InvokeScript("clearAll");
+            webBrowser1.Document.InvokeScript("clearAll"); 
+        }
+    
+        private void EditCode_Click(object sender, EventArgs e)
+        {
+
+            this.htmlEditorControlEx1.Visible = true;
+            this.htmlEditorControlEx1.Enabled = true;
+            this.webBrowser1.Width = 460;
+           
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Right;
         }
     }
 }

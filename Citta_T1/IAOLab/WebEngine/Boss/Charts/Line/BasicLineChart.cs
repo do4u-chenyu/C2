@@ -14,7 +14,7 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Line
     /// </summary>
     public class BasicLineChart : BaseCharts
     {
-        public BasicLineChart(DataTable dataTable, CompleteOption option, int categoryCol = 1)
+        public BasicLineChart(DataTable dataTable, CompleteOption option, string[] chartOptions)
         {
             option.xAxis = new XAxis()
             {
@@ -24,12 +24,13 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Line
             {
                 type = Option.BaseOption.xAxisType.value,
             };
-            option.dataset = new DataSetSource()
-            {
-                source = Common.GetDataSetSource(dataTable, categoryCol - 1),
+            option.dataset = "{ source: datas }";
 
-            };
-            option.series = new Series(Enumerable.Repeat(new SeriesLine(), dataTable.Columns.Count - 1).ToArray());
+            List<ISeries> series = new List<ISeries>();
+            for (int i = 1; i < chartOptions.Length; i++)
+                series.Add(new SeriesLine(chartOptions[0], chartOptions[i]));
+
+            option.series = new Series(series.ToArray());
             _initScript = option.ToString();
         }
     }

@@ -68,13 +68,14 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\开发调试\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <WarningLevel>0</WarningLevel>
+    <WarningLevel>4</WarningLevel>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ConsoleControl">
@@ -245,7 +246,6 @@
     <Compile Include="IAOLab\WebEngine\Boss\Echarts.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\EchartsInitialize.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\GenBossHtml.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Node.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\JSBeautify.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\BaseEOption.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\AxisPointer.cs" />
@@ -308,7 +308,6 @@
     <Compile Include="IAOLab\WebEngine\Boss\Option\XAxis.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\YAxis.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\RemarkAttribute.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Table.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Theme.cs" />
     <Compile Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.cs">
       <SubType>Form</SubType>
@@ -1938,9 +1937,6 @@
     <Content Include="IAOLab\WebEngine\img\png-0003.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\bossLayout.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="IAOLab\WebEngine\JS\china.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2099,6 +2095,7 @@
     <None Include="Resources\Images\preview.png" />
     <None Include="Resources\Images\previous.png" />
     <None Include="Resources\Images\preferences_16.png" />
+    <None Include="Resources\Images\Preference\checkUpdate.gif" />
     <Content Include="Resources\Images\print.png" />
     <None Include="Resources\Images\print_pages.png" />
     <None Include="Resources\Images\print_single_page.png" />

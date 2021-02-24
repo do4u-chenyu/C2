@@ -25,39 +25,19 @@ namespace C2.IAOLab.WebEngine.Boss
         }
 
 
-        public string TransDataToHtml(object[] args = null)//参数待设计
+        public string TransDataToHtml(DataTable dataTable ,Dictionary<string, string[]> chartOptions)//参数待设计
         {
-            DataTable dataTable = new DataTable("temp");
-            dataTable.Columns.Add("产品", typeof(string));
-            dataTable.Columns.Add("2015", typeof(float));
-            dataTable.Columns.Add("2016", typeof(float));
-            dataTable.Columns.Add("2017", typeof(float));
-            dataTable.Rows.Add("中国", 43.3, 85.8, 93.7);
-            dataTable.Rows.Add("美国", 83.1, 73.4, 55.1);
-            dataTable.Rows.Add("日本", 86.4, 65.2, 82.5);
-            dataTable.Rows.Add("英国", 72.4, 53.9, 39.1);
-
-            //03.创建布局，增加图，Show()显示图 
+            //创建布局，增加图，Show()显示图 
             Echarts echarts = new Echarts();
+            echarts.dataTable = dataTable;
+            echarts.AddTheme(Theme.phx);
 
-            return ShowECharts(dataTable, echarts);
-        }
-
-        private string ShowECharts(DataTable dataTable, Echarts echarts)
-        {
-            int row = 2;
-            int col = 3;
-
-            echarts.AddTheme(Theme.roma);
-            echarts.CreateTableLayout(row, col, 1000 / col, 600 / row);
-
-            echarts[1, 1] = new SimpleBar(dataTable, new CompleteOption() { title = new Title() { text = "'基础柱状图'", } }, 1);
-            echarts[1, 2] = new BasicLineChart(dataTable, new CompleteOption() { title = new Title() { text = "'基础折线图'", } }, 1);
-            echarts[1, 3] = new BasicScatter(dataTable, new CompleteOption() { title = new Title() { text = "'基础散点图'", } }, 1);
-            //echarts[1, 3] = new BasicAreachart(dataTable,new CompleteOption() { title = new Title() { text = "'基础面积图'", } }, 1);
-            echarts[2, 1] = new SmoothedLineChart(dataTable, new CompleteOption() { title = new Title() { text = "'基础曲线图'", } }, 1);
-            echarts[2, 2] = new StackBar(dataTable, new CompleteOption() { title = new Title() { text = "'堆叠柱状图'", } }, 1);
-            echarts[2, 3] = new BasicPie(dataTable, new CompleteOption(), 1);
+            echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);      //柱状图
+            echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions["SimpleBar"]); //折线图
+            echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);   //散点图
+            echarts[4] = new SmoothedLineChart(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);  //曲线图
+            echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);  //堆叠柱状图
+            echarts[6] = new BasicPie(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);  //饼状图
             return echarts.Show();
         }
 
