@@ -81,7 +81,7 @@ namespace C2.Controls
             HtmlEditBox webBrowser;
             LinkLabel labLink;
             string _LinkUrl;
-            string _Html;
+            string _Html;  //
 
             public ChartTipControl()
             {
