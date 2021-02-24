@@ -239,6 +239,7 @@
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\BasicAreachart.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\BasicLineChart.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\SmoothedLineChart.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\Map\BasicMap.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Pie\BasicPie.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Radar\BasicRadar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Scatter\BasicScatter.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="IAOLab\WebEngine\Boss\Option\DataSetSource.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\Grid.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\Legend.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\MapLabel.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\Polar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\Series.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\BarBaseOption\BarData.cs" />
@@ -297,6 +299,7 @@
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Label.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Position.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesLine.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesMap.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPie.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesRadar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesScatter.cs" />
@@ -305,6 +308,7 @@
     <Compile Include="IAOLab\WebEngine\Boss\Option\Title.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\ToolBox.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\Tooltip.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\VisualMap.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\XAxis.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\YAxis.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\RemarkAttribute.cs" />
