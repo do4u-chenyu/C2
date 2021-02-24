@@ -132,7 +132,6 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         string _graphic;
         string _calendar;
         string _dataset2;
-        DataSetSource _dataset;
         string _aria;
         Series _series;
         string _color;
