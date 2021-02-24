@@ -245,7 +245,6 @@
     <Compile Include="IAOLab\WebEngine\Boss\Echarts.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\EchartsInitialize.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\GenBossHtml.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Node.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\JSBeautify.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\BaseEOption.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\AxisPointer.cs" />
@@ -308,7 +307,6 @@
     <Compile Include="IAOLab\WebEngine\Boss\Option\XAxis.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\YAxis.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\RemarkAttribute.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Table.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Theme.cs" />
     <Compile Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.cs">
       <SubType>Form</SubType>

@@ -22,6 +22,14 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
             Common.InitOptionFlag(this, FlagDic, TypeDic);
             type = "'line'";
         }
+        public SeriesLine(string x, string y)
+        {
+            Common.InitOptionFlag(this, FlagDic, TypeDic);
+            type = "'line'";
+            name = "'" + y + "'";
+            encode = "{ x: '" + x + "' , y:'" + y + "'}";
+        }
+
         public string type { get { return _type; } set { FlagDic["type"] = true; _type = value; } }
         public string id { get { return _id; } set { FlagDic["id"] = true; _id = value; } }
         public string name { get { return _name; } set { FlagDic["name"] = true; _name = value; } }

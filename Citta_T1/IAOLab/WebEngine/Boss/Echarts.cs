@@ -14,7 +14,7 @@ namespace C2.IAOLab.WebEngine.Boss
         Dictionary<string, string> optionScript;//所有增加的图表
         List<string> CssScriptSrcList;//自定义增加css文件
         List<string> JsScriptSrcList;//自定义增加js文件
-        List<Node> NodeList; //添加自定义节点
+
 
         public DataTable dataTable;
 
@@ -61,7 +61,7 @@ namespace C2.IAOLab.WebEngine.Boss
             optionScript = new Dictionary<string, string>();
             CssScriptSrcList = new List<string>();
             JsScriptSrcList = new List<string>();
-            NodeList = new  List<Node>();
+
 
             //TODO phx 初始化配置
             //if (!EchartsInitialize.InitFlag)
@@ -183,7 +183,7 @@ namespace C2.IAOLab.WebEngine.Boss
             //htmlNode.AddChild(headNode).AddChild(bodyNode);
             string htmlContent = string.Empty;
 
-            htmlContent += $"var data111 =" + Common.GetDataSetSource(dataTable) + ";" + Environment.NewLine;
+            htmlContent += $"var datas =" + Common.GetDataSetSource(dataTable) + ";" + Environment.NewLine;
 
 
             foreach (var option in optionScript)
@@ -224,10 +224,7 @@ namespace C2.IAOLab.WebEngine.Boss
         {
             JsScriptSrcList.Add(jssSrc);
         }
-        public void AddCustomNode(Node node)
-        {
-            NodeList.Add(node);
-        }
+
         //-------------------------------------------------------------------//
         string GetScriptNode(string containerId, string script)
         {
