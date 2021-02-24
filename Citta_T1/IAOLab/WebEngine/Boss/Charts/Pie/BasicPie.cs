@@ -16,9 +16,9 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Pie
                 option.legend.orient = Option.BaseOption.Orient.horizontal;
                 option.legend.left = "'center'";
             }
-            option.dataset = new DataSetSource() {
-                source = Common.GetDataSetSource(dataTable, categoryCol - 1),
-            };
+            //option.dataset = new DataSetSource() {
+            //    source = Common.GetDataSetSource(dataTable, categoryCol - 1),
+            //};
             option.series = new Series(
                 new ISeries[] {
                 new SeriesPie() {

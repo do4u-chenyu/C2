@@ -1,6 +1,7 @@
 ﻿using C2.IAOLab.WebEngine.Boss.Charts;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,16 +10,16 @@ namespace C2.IAOLab.WebEngine.Boss
 {
     public class Echarts
     {    
-        Table table;//添加布局支持
-        //string BackGroundColor;//背景色
         Dictionary<string, Theme> themes;//支持主题 
         Dictionary<string, string> optionScript;//所有增加的图表
         List<string> CssScriptSrcList;//自定义增加css文件
         List<string> JsScriptSrcList;//自定义增加js文件
         List<Node> NodeList; //添加自定义节点
 
+        public DataTable dataTable;
+
         //System.Windows.Forms.WebBrowser webBrowser;
-        
+
         public Echarts()
         {
             #region 设置webbrowser
@@ -62,15 +63,16 @@ namespace C2.IAOLab.WebEngine.Boss
             JsScriptSrcList = new List<string>();
             NodeList = new  List<Node>();
 
-            if (!EchartsInitialize.InitFlag)
-            {
-                EchartsInitialize.Initialize();//初始化基本配置
-            }
+            //TODO phx 初始化配置
+            //if (!EchartsInitialize.InitFlag)
+            //{
+            //    EchartsInitialize.Initialize();//初始化基本配置
+            //}
         }
 
-        public BaseCharts this[int row, int col] {//添加图的索引器
+        public BaseCharts this[int index] {//添加图的索引器
             set {
-                AddChart(row, col, value);
+                AddChart(index, value);
             }
         }
         /// <summary>
@@ -80,19 +82,19 @@ namespace C2.IAOLab.WebEngine.Boss
         /// <param name="colNum">列数</param>
         /// <param name="width">每行宽度</param>
         /// <param name="height">每行高度</param>
-        public void CreateTableLayout(int rowNum = 1, int colNum = 1, int width = 800, int height = 600, string borderColor = "#add9c0")
-        {
-            table = new Table(rowNum, colNum, width, height, borderColor);
-        }
+        //public void CreateTableLayout(int rowNum = 1, int colNum = 1, int width = 800, int height = 600, string borderColor = "#add9c0")
+        //{
+        //    table = new Table(rowNum, colNum, width, height, borderColor);
+        //}
         /// <summary>
         /// 增加表到相应的行列
         /// </summary>
-        public void AddChart(int row, int col, BaseCharts baseCharts)
+        public void AddChart(int index, BaseCharts baseCharts)
         {
-            if (optionScript.ContainsKey("container" + row + "_" + col))
-                optionScript["container" + row + "_" + col] = baseCharts._initScript;
+            if (optionScript.ContainsKey("container_" + index))
+                optionScript["container_" + index] = baseCharts._initScript;
             else
-                optionScript.Add("container" + row + "_" + col, baseCharts._initScript);
+                optionScript.Add("container_" + index, baseCharts._initScript);
         }
 
         /// <summary>
@@ -100,88 +102,99 @@ namespace C2.IAOLab.WebEngine.Boss
         /// </summary>
         public string Show()
         {
-            if (table == null) return string.Empty;
+            //if (table == null) return string.Empty;
 
-            //添加布局和初始化脚本
-            var bodyNode = new Node("body").AddChild(table.GetTableNode());
+            ////添加布局和初始化脚本
+            //var bodyNode = new Node("body").AddChild(table.GetTableNode());
+            //foreach (var option in optionScript)
+            //{
+            //    if (option.Value != null)
+            //    {
+            //        bodyNode.AddChild(GetScriptNode(option.Key, option.Value));
+            //    }
+            //}
+            //<meta http-equiv = \"X-UA-Compatible\" content = \"IE=edge,chrome=1\" charset=\"utf-8\" />
+            //var titleNode = new Node("title") { Content = "ECharts" };
+            //var headNode = new Node("head") { Content = "<meta http-equiv = \"X-UA-Compatible\" content = \"IE=edge,chrome=1\" charset=\"utf-8\" />"};
+            //headNode.AddChild(titleNode);
+            ////支持echarts
+            //headNode.AddChild(new Node("script") { Parameters = new { src = "../JS/echarts.min.js", }, });
+            ////支持GL
+            //if (EchartsInitialize.SupportEchartsGL)
+            //    headNode.AddChild(new Node("script")
+            //    {
+            //        Parameters = new { src = "./echarts.min.js", }
+            //    });
+            //bool haveJq=false;
+            ////支持bootstrap
+            //if (EchartsInitialize.SupportBootstrap)
+            //{
+            //    headNode.AddChild(new Node("link")
+            //    {
+            //        Parameters = new
+            //        {
+            //            rel = "stylesheet",
+            //            href = "./bootstrap/css/bootstrap.min.css"
+            //        }
+            //    });
+            //    headNode.AddChild(new Node("script")
+            //    {
+            //        Parameters = new
+            //        {
+            //            src = "./jquery.min.js",
+            //        }
+            //    });
+            //    headNode.AddChild(new Node("script")
+            //    {
+            //        Parameters = new
+            //        {
+            //            src = "./popper.min.js",
+            //        }
+            //    });
+            //    headNode.AddChild(new Node("script")
+            //    {
+            //        Parameters = new
+            //        {
+            //            src = "./bootstrap/js/bootstrap.min.js",
+            //        }
+            //    });
+            //    haveJq = true;
+            //};
+            ////支持Jquery
+            //if (EchartsInitialize.SupportJQuery && !haveJq) {
+            //    headNode.AddChild(new Node("script")
+            //    {
+            //        Parameters = new
+            //        {
+            //            src = "./jquery.min.js",
+            //        }
+            //    });
+            //}            
+            ////支持theme
+            //if (themes!=null && themes.Count>0)
+            //{
+            //    foreach (var di in themes)
+            //    {
+            //        headNode.AddChild(new Node("script") {
+            //            Parameters = new { src = di.Value.ScriptPath },});
+            //    }
+            //}
+            //var htmlNode = new Node("html");
+            //htmlNode.AddChild(headNode).AddChild(bodyNode);
+            string htmlContent = string.Empty;
+
+            htmlContent += $"var data111 =" + Common.GetDataSetSource(dataTable) + ";" + Environment.NewLine;
+
+
             foreach (var option in optionScript)
             {
                 if (option.Value != null)
                 {
-                    bodyNode.AddChild(GetScriptNode(option.Key, option.Value));
+                    htmlContent += GetScriptNode(option.Key, option.Value);
                 }
             }
-            //<meta http-equiv = \"X-UA-Compatible\" content = \"IE=edge,chrome=1\" charset=\"utf-8\" />
-            var titleNode = new Node("title") { Content = "ECharts" };
-            var headNode = new Node("head") { Content = "<meta http-equiv = \"X-UA-Compatible\" content = \"IE=edge,chrome=1\" charset=\"utf-8\" />"};
-            headNode.AddChild(titleNode);
-            //支持echarts
-            headNode.AddChild(new Node("script") { Parameters = new { src = "../JS/echarts.min.js", }, });
-            //支持GL
-            if (EchartsInitialize.SupportEchartsGL)
-                headNode.AddChild(new Node("script")
-                {
-                    Parameters = new { src = "./echarts.min.js", }
-                });
-            bool haveJq=false;
-            //支持bootstrap
-            if (EchartsInitialize.SupportBootstrap)
-            {
-                headNode.AddChild(new Node("link")
-                {
-                    Parameters = new
-                    {
-                        rel = "stylesheet",
-                        href = "./bootstrap/css/bootstrap.min.css"
-                    }
-                });
-                headNode.AddChild(new Node("script")
-                {
-                    Parameters = new
-                    {
-                        src = "./jquery.min.js",
-                    }
-                });
-                headNode.AddChild(new Node("script")
-                {
-                    Parameters = new
-                    {
-                        src = "./popper.min.js",
-                    }
-                });
-                headNode.AddChild(new Node("script")
-                {
-                    Parameters = new
-                    {
-                        src = "./bootstrap/js/bootstrap.min.js",
-                    }
-                });
-                haveJq = true;
-            };
-            //支持Jquery
-            if (EchartsInitialize.SupportJQuery && !haveJq) {
-                headNode.AddChild(new Node("script")
-                {
-                    Parameters = new
-                    {
-                        src = "./jquery.min.js",
-                    }
-                });
-            }            
-            //支持theme
-            if (themes!=null && themes.Count>0)
-            {
-                foreach (var di in themes)
-                {
-                    headNode.AddChild(new Node("script") {
-                        Parameters = new { src = di.Value.ScriptPath },});
-                }
-            }
-            var htmlNode = new Node("html");
-            htmlNode.AddChild(headNode).AddChild(bodyNode);
 
-            string tempName = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "EchartIndex.html");
-            string htmlContent = @"<!DOCTYPE html>" + Environment.NewLine + htmlNode.GetHtmlStr();
+            string tempName = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\JS", "Test01.js");
             File.WriteAllText(tempName, htmlContent);
             return tempName;            
         }
@@ -216,18 +229,16 @@ namespace C2.IAOLab.WebEngine.Boss
             NodeList.Add(node);
         }
         //-------------------------------------------------------------------//
-        Node GetScriptNode(string containerId, string script)
+        string GetScriptNode(string containerId, string script)
         {
-            return new Node("script")
-            {
-                Parameters = new { type = "text/javascript" },
-                Content = new JSBeautify(
-                    InitID(containerId) + Environment.NewLine +
-                        $"var {containerId}option = " + script + ";" +
-                        SetOption(containerId),
-                    new JSBeautifyOptions()).GetResult(),
-            };
+            return new JSBeautify(
+                        InitID(containerId) + Environment.NewLine +
+                            $"var {containerId}option = " + script + ";" +
+                            SetOption(containerId),
+                        new JSBeautifyOptions()).GetResult();
+
         }
+
         string InitID(string ContanerID)
         {
             return $@"var my{ContanerID}Chart = echarts.init("+

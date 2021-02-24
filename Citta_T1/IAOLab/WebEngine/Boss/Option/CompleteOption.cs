@@ -71,7 +71,8 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         /// 数据集（dataset）组件用于单独的数据集声明
         /// 教程：https://echarts.baidu.com/tutorial.html#%E4%BD%BF%E7%94%A8%20dataset%20%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE
         /// </summary>
-        public DataSetSource dataset { get { return _dataset; } set { FlagDic["dataset"] = true; _dataset = value; } }
+        public string dataset { get { return _dataset2; } set { FlagDic["dataset"] = true; _dataset2 = value; } }
+        //public DataSetSource dataset { get { return _dataset; } set { FlagDic["dataset"] = true; _dataset = value; } }
         /// <summary>
         /// [不支持]无障碍富互联网应用规范集
         /// </summary>
@@ -130,6 +131,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         string _timeline;
         string _graphic;
         string _calendar;
+        string _dataset2;
         DataSetSource _dataset;
         string _aria;
         Series _series;

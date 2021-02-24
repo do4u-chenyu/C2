@@ -14,19 +14,27 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Bar
     /// </summary>
     public class SimpleBar: BaseCharts
     {
-        public SimpleBar(DataTable dataTable, CompleteOption option,int categoryCol=1)
+        public SimpleBar(DataTable dataTable, CompleteOption option, string[] simpleBarOptions)
         {
             option.xAxis = new XAxis()
             {
                 type = xAxisType.category
             };
             option.yAxis = new YAxis();
-            option.dataset = new DataSetSource()
-            {
-                source = Common.GetDataSetSource(dataTable, categoryCol - 1),
+            option.dataset = "{ source: data111 }";
 
-            };
-            option.series = new Series(Enumerable.Repeat(new SeriesBar(), dataTable.Columns.Count - 1).ToArray());
+            //dataset共用一份了
+            //option.dataset = new DataSetSource()
+            //{
+            //    source = Common.GetDataSetSource(dataTable, categoryCol - 1),
+
+            //};
+            //option.series = new Series(Enumerable.Repeat(new SeriesBar(), dataTable.Columns.Count - 1).ToArray());
+
+            List<ISeries> series = new List<ISeries>();
+            series.Add(new SeriesBar(simpleBarOptions[0], simpleBarOptions[1]));
+            series.Add(new SeriesBar(simpleBarOptions[0], simpleBarOptions[2]));
+            option.series = new Series(series.ToArray());
             _initScript = option.ToString();
         }
     }
