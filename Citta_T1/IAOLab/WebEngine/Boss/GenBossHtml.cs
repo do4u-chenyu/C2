@@ -1,5 +1,6 @@
 ﻿using C2.IAOLab.WebEngine.Boss.Charts.Bar;
 using C2.IAOLab.WebEngine.Boss.Charts.Line;
+using C2.IAOLab.WebEngine.Boss.Charts.Map;
 using C2.IAOLab.WebEngine.Boss.Charts.Pie;
 using C2.IAOLab.WebEngine.Boss.Charts.Scatter;
 using C2.IAOLab.WebEngine.Boss.Option;
@@ -38,6 +39,7 @@ namespace C2.IAOLab.WebEngine.Boss
             echarts[4] = new SmoothedLineChart(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);  //曲线图
             echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);  //堆叠柱状图
             echarts[6] = new BasicPie(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);  //饼状图
+            echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions["SimpleBar"]);  //地市分布图
             return echarts.Show();
         }
 

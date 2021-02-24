@@ -58,16 +58,14 @@
             this.comboBox12 = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.comboBox13 = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.comboBox14 = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.comboBox15 = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.comboBox16 = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.comboBox17 = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -326,7 +324,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(41, 12);
             this.label12.TabIndex = 10031;
-            this.label12.Text = "纵轴：";
+            this.label12.Text = "数据：";
             // 
             // pictureBox1
             // 
@@ -341,22 +339,14 @@
             this.pictureBox1.TabIndex = 10033;
             this.pictureBox1.TabStop = false;
             // 
-            // comboBox13
-            // 
-            this.comboBox13.FormattingEnabled = true;
-            this.comboBox13.Location = new System.Drawing.Point(937, 333);
-            this.comboBox13.Name = "comboBox13";
-            this.comboBox13.Size = new System.Drawing.Size(121, 20);
-            this.comboBox13.TabIndex = 10043;
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(892, 336);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 12);
+            this.label13.Size = new System.Drawing.Size(77, 12);
             this.label13.TabIndex = 10042;
-            this.label13.Text = "多轴：";
+            this.label13.Text = "分段最大值：";
             // 
             // comboBox14
             // 
@@ -392,23 +382,6 @@
             this.label15.TabIndex = 10038;
             this.label15.Text = "多轴：";
             // 
-            // comboBox16
-            // 
-            this.comboBox16.FormattingEnabled = true;
-            this.comboBox16.Location = new System.Drawing.Point(937, 113);
-            this.comboBox16.Name = "comboBox16";
-            this.comboBox16.Size = new System.Drawing.Size(121, 20);
-            this.comboBox16.TabIndex = 10037;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(892, 116);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(41, 12);
-            this.label16.TabIndex = 10036;
-            this.label16.Text = "多轴：";
-            // 
             // comboBox17
             // 
             this.comboBox17.FormattingEnabled = true;
@@ -426,19 +399,24 @@
             this.label17.TabIndex = 10034;
             this.label17.Text = "多轴：";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(975, 333);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(83, 21);
+            this.textBox1.TabIndex = 10043;
+            // 
             // SelectBossDialog
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1070, 491);
-            this.Controls.Add(this.comboBox13);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.comboBox14);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.comboBox15);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.comboBox16);
-            this.Controls.Add(this.label16);
             this.Controls.Add(this.comboBox17);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.pictureBox1);
@@ -507,14 +485,12 @@
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.label17, 0);
             this.Controls.SetChildIndex(this.comboBox17, 0);
-            this.Controls.SetChildIndex(this.label16, 0);
-            this.Controls.SetChildIndex(this.comboBox16, 0);
             this.Controls.SetChildIndex(this.label15, 0);
             this.Controls.SetChildIndex(this.comboBox15, 0);
             this.Controls.SetChildIndex(this.label14, 0);
             this.Controls.SetChildIndex(this.comboBox14, 0);
             this.Controls.SetChildIndex(this.label13, 0);
-            this.Controls.SetChildIndex(this.comboBox13, 0);
+            this.Controls.SetChildIndex(this.textBox1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -553,15 +529,13 @@
         private System.Windows.Forms.ComboBox comboBox12;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ComboBox comboBox13;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboBox14;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox comboBox15;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox comboBox16;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox comboBox17;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
