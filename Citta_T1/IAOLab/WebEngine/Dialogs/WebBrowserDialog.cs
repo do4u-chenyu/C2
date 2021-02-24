@@ -183,9 +183,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             this.htmlEditorControlEx1.Visible = true;
             this.htmlEditorControlEx1.Enabled = true;
+            this.webBrowser1.Location = new System.Drawing.Point(900, 16);
             this.webBrowser1.Width = 460;
-           
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Right;
+            // this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Right;
         }
     }
 }

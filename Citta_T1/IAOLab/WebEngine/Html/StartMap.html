@@ -5,16 +5,26 @@
     <title>Hello Map</title>
     <script type="text/javascript" src="http://api.map.baidu.com/api?key=59db371659c04947a1ff044e80565718&v=1.4&services=true"></script>
     <!--加载鼠标测距工具-->
-    <type="text/javascript" script src="../JS/DistanceTool_min.js" ></script>
+    <type ="text/javascript" script src="../JS/DistanceTool_min.js">
+    </script>
     <!--加载鼠标绘制工具-->
     <script type="text/javascript" src="../JS/DrawingManager_min.js"></script>
     <link rel="stylesheet" href="../css/DrawingManager_min.css" />
-
+    <style type="text/css">
+        body, html, #container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
 </head>
 <body>
     <div id="mouselng" style="visibility:hidden"></div>
     <div id="mouselat" style="visibility:hidden"></div>
-    <div style="width:1345px;height:570px;float:right;border:1px solid gray" id="container">
+    <!--<div style="width:1345px;height:570px;float:right;border:1px solid gray" id="container">-->
+    <div id="container">
     </div>
 </body>
 </html>
