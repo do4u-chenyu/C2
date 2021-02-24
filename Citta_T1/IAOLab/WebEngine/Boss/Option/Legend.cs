@@ -21,8 +21,12 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         {
             Common.InitOptionFlag(this, FlagDic, TypeDic);
         }
+        //public Legend(string[] datas)
+        //{
+        //    Common.InitOptionFlag(this, FlagDic, TypeDic);
+        //    this.data = "['" + string.Join("','",datas) + "']";
+        //}
 
-       
         public LegendType type { get { return _type; } set { FlagDic["type"] = true; _type = value; } }
         public string id { get { return _id; } set { FlagDic["id"] = true; _id = value; } }
         public bool show { get { return _show; } set { FlagDic["show"] = true; _show = value; } }
