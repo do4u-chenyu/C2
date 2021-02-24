@@ -18,7 +18,7 @@ namespace C2.Controls.Left
     public partial class DataSourceControl : UserControl
     {
         private InputDataForm inputDataForm;
-        private static readonly int ButtonGapHeight = 50;//上下间隔
+        private static readonly int ButtonGapY = 50;//上下间隔
         private static readonly int ButtonLeftX = 18;
 
         private Point startPoint;
@@ -76,9 +76,9 @@ namespace C2.Controls.Left
 
             DataSourceDictI2B = new Dictionary<string, DataButton>();
             LinkSourceDictI2B = new Dictionary<string, LinkButton>();
-            startPoint = new Point(ButtonLeftX, -ButtonGapHeight);
-            linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight);
-            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            startPoint = new Point(ButtonLeftX, -ButtonGapY);
+            linkPoint = new Point(ButtonLeftX - 15, -ButtonGapY);
+            tablePoint = new Point(ButtonLeftX, -ButtonGapY);
 
         }
 
@@ -121,39 +121,26 @@ namespace C2.Controls.Left
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
             if (this.localFrame.Controls.Count > 0)
-                this.startPoint.Y = this.localFrame.Controls[0].Location.Y - ButtonGapHeight;
+                this.startPoint.Y = this.localFrame.Controls[0].Location.Y - ButtonGapY;
 
+
+            int idx = this.localFrame.Controls.IndexOf(dataButton);
+            using (new GuarderUtil.LayoutGuarder(this.localFrame))
+            {     
+                ReLayoutLocalFrame(idx); // 重新布局
+                this.localFrame.Controls.Remove(dataButton); // 布局完成后删除控件
+            }
             this.DataSourceDictI2B.Remove(dataButton.FullFilePath);
-            this.localFrame.Controls.Remove(dataButton);
-            // 重新布局
-            ReLayoutLocalFrame();
-            // 保存
-            SaveDataSourceInfo();
+            SaveDataSourceInfo();        // 保存
         }
 
-        private void ReLayoutLocalFrame()
+        private void ReLayoutLocalFrame(int index)
         {
-            // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
-            List<Control> tmp = new List<Control>();
-            foreach (Control ct in this.localFrame.Controls)
+            for (int i = index + 1; i < this.localFrame.Controls.Count; i++)
             {
-                if (ct is DataButton)
-                    tmp.Add(ct);
+                Control ct = this.localFrame.Controls[i];
+                ct.Location = new Point(ct.Location.X, ct.Location.Y - ButtonGapY);
             }
-            if (tmp.Count <= 0)
-                return;
-
-            this.localFrame.Controls.Clear();
-            // 重新排序
-            this.localFrame.SuspendLayout();
-            foreach (Control ct in tmp)
-            {
-                LayoutModelButtonLocation(ct as DataButton);
-                this.localFrame.Controls.Add(ct);
-            }
-
-            this.localFrame.ResumeLayout(false);
-            this.localFrame.PerformLayout();
         }
 
         public void SaveDataSourceInfo()
@@ -204,7 +191,7 @@ namespace C2.Controls.Left
                 this.localFrame.VerticalScroll.Value = 0;
                 startPoint = new Point(ButtonLeftX, -20);
             }    
-            startPoint.Y += ButtonGapHeight;
+            startPoint.Y += ButtonGapY;
             ct.Location = startPoint;
         }
 
@@ -228,7 +215,7 @@ namespace C2.Controls.Left
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
             if (this.linkPanel.Controls.Count > 0)
-                this.linkPoint.Y = this.linkPanel.Controls[0].Location.Y - ButtonGapHeight;
+                this.linkPoint.Y = this.linkPanel.Controls[0].Location.Y - ButtonGapY;
 
             this.LinkSourceDictI2B.Remove(linkButton.FullFilePath);
             this.linkPanel.Controls.Remove(linkButton);
@@ -301,9 +288,9 @@ namespace C2.Controls.Left
             else
             {
                 this.linkPanel.VerticalScroll.Value = 0;
-                linkPoint = new Point(ButtonLeftX - 15, -ButtonGapHeight); 
+                linkPoint = new Point(ButtonLeftX - 15, -ButtonGapY); 
             }  
-            linkPoint.Y += ButtonGapHeight;
+            linkPoint.Y += ButtonGapY;
             lb.Location = linkPoint;
         }
         #endregion
@@ -462,7 +449,7 @@ namespace C2.Controls.Left
         {
             List<DatabaseItem> dbis = new List<DatabaseItem>();
             _RelateDBIs.Clear();
-            tablePoint = new Point(ButtonLeftX, -ButtonGapHeight);
+            tablePoint = new Point(ButtonLeftX, -ButtonGapY);
             List<string> tmp = new List<string>();
             foreach (Table table in tables)
             {

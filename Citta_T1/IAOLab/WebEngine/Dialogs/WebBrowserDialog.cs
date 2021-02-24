@@ -118,9 +118,31 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         void LoadMapData_Click(object sender, EventArgs e)
         {
-            var dialog = new SelectMapDialog();
+            var dialog = new SelectMapDialog(DataItems);
             if (dialog.ShowDialog() == DialogResult.OK)
+            {
+
                 webBrowser1.Navigate(dialog.WebUrl);
+       
+                switch (dialog.map)
+                {
+                    case "标注图":
+                        webBrowser1.Document.InvokeScript("markerPoints", dialog.methodstr);
+                        break;
+                    case "轨迹图":
+                        webBrowser1.Document.InvokeScript("getPoints", dialog.methodstr);
+                        break;
+                    case "区域图":
+                        webBrowser1.Document.InvokeScript("getPoints", dialog.methodstr);
+                        break;
+                    case "热力图":
+                        webBrowser1.Document.InvokeScript("getPoints", dialog.methodstr);
+                        break;
+                }
+            }
+            else
+                return;
+           
         }
 
         void LoadBossData_Click(object sender, EventArgs e)
