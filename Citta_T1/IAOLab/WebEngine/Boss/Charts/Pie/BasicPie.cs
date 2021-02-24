@@ -10,18 +10,17 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Pie
 {
     public class BasicPie : BaseCharts
     {
-        public BasicPie(DataTable dataTable, CompleteOption option, int categoryCol = 1) {
+        public BasicPie(DataTable dataTable, CompleteOption option, string[] chartOptions) {
             
             if (!option.legend.FlagDic["orient"]) {
                 option.legend.orient = Option.BaseOption.Orient.horizontal;
                 option.legend.left = "'center'";
             }
-            //option.dataset = new DataSetSource() {
-            //    source = Common.GetDataSetSource(dataTable, categoryCol - 1),
-            //};
+
+            option.dataset = "{ source: datas }";
             option.series = new Series(
                 new ISeries[] {
-                new SeriesPie() {
+                new SeriesPie(chartOptions[0], chartOptions[1]) {
                     emphasis = new Option.SeriesType.SeriesBaseOption.Emphasis()
                     {
                         itemStyle = new Option.SeriesType.SeriesBaseOption.ItemStyle()
@@ -31,6 +30,7 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Pie
                             shadowColor = "'rgba(0, 0, 0, 0.5)'",
                         }
                     }
+
 
             }});
             _initScript = option.ToString();

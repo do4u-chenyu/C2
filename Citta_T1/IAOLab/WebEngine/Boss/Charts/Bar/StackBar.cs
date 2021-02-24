@@ -14,24 +14,19 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Bar
     /// </summary>
     public class StackBar : BaseCharts
     {
-        public StackBar(DataTable dataTable, CompleteOption option, int categoryCol = 1, string stack="'汇总'")
+        public StackBar(DataTable dataTable, CompleteOption option, string[] chartOptions, string stack="'汇总'")
         {
             option.xAxis = new XAxis()
             {
                 type = xAxisType.category
             };
             option.yAxis = new YAxis();
-            //option.dataset = new DataSetSource()
-            //{
-            //    source = Common.GetDataSetSource(dataTable, categoryCol - 1),
+            option.dataset = "{ source: datas }";
 
-            //};
             List<ISeries> series = new List<ISeries>();
-            //series.Add(new SeriesBar());
-            foreach (var ser in Enumerable.Repeat(new SeriesBar() { stack = stack }, dataTable.Columns.Count - 1).ToArray())
-            {
-                series.Add(ser);
-            }
+            for (int i = 1; i < chartOptions.Length; i++)
+                series.Add(new SeriesBar(chartOptions[0], chartOptions[i]){ stack = stack });
+
             option.series = new Series(series.ToArray());
             _initScript = option.ToString();
         }

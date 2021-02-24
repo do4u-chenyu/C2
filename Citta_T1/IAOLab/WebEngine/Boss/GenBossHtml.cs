@@ -32,13 +32,12 @@ namespace C2.IAOLab.WebEngine.Boss
             echarts.dataTable = dataTable;
             echarts.AddTheme(Theme.phx);
 
-            echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);
-            //echarts[2] = new BasicLineChart(dataTable, new CompleteOption() { title = new Title() { text = "'基础折线图'", } }, 1);
-            //echarts[1, 3] = new BasicScatter(dataTable, new CompleteOption() { title = new Title() { text = "'基础散点图'", } }, 1);
-            ////echarts[1, 3] = new BasicAreachart(dataTable,new CompleteOption() { title = new Title() { text = "'基础面积图'", } }, 1);
-            //echarts[2, 1] = new SmoothedLineChart(dataTable, new CompleteOption() { title = new Title() { text = "'基础曲线图'", } }, 1);
-            //echarts[2, 2] = new StackBar(dataTable, new CompleteOption() { title = new Title() { text = "'堆叠柱状图'", } }, 1);
-            //echarts[2, 3] = new BasicPie(dataTable, new CompleteOption(), 1);
+            echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);      //柱状图
+            echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions["SimpleBar"]); //折线图
+            echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);   //散点图
+            echarts[4] = new SmoothedLineChart(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);  //曲线图
+            echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);  //堆叠柱状图
+            echarts[6] = new BasicPie(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);  //饼状图
             return echarts.Show();
         }
 
