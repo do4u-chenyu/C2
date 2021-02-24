@@ -97,7 +97,6 @@
             this.mapTypeComboBox.Name = "mapTypeComboBox";
             this.mapTypeComboBox.Size = new System.Drawing.Size(189, 20);
             this.mapTypeComboBox.TabIndex = 10008;
-            this.mapTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.mapTypeComboBox_SelectedIndexChanged);
             // 
             // latComboBox
             // 

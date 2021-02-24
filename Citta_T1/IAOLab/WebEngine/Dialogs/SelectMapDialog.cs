@@ -23,6 +23,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public string WebUrl;
         public string map;
         public string[] methodstr;
+        public string tude;
         private BcpInfo bcpInfo;
         private DataItem hitItem;
         private string FilePath { get => hitItem.FilePath; }
@@ -36,7 +37,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         public List<DataItem> DataItems;
 
-
         public SelectMapDialog(List<DataItem> dataItems)
         {
             InitializeComponent();
@@ -46,7 +46,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             {
                 this.datasourceComboBox.Items.Add(dataItem.FileName);
             }
-             map = "标注图";
         }
 
         private void datasourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,12 +61,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         private void InitializeDropDown()
         {
-            string map = this.mapTypeComboBox.Text;
             this.bcpInfo = new BcpInfo(FilePath, FileEncoding, new char[] { FileSep });
             this.latComboBox.Items.AddRange(bcpInfo.ColumnArray);
             this.lonComboBox.Items.AddRange(bcpInfo.ColumnArray);
             this.countComboBox.Items.AddRange(bcpInfo.ColumnArray);
-           
 
         }
         private void clearComBox() 
@@ -83,8 +80,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         protected override bool OnOKButtonClick()
         {
-            map = this.mapTypeComboBox.SelectedText;
-            ////生成html
+            map = this.mapTypeComboBox.Text;
+            //生成html
             //WebUrl = GenGisMapHtml.GetInstance().TransDataToHtml();
             if (OptionNotReady())
                 return false;
@@ -128,13 +125,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             else
                 HelpUtil.ShowMessageBox("经纬度维度不一致");
-            string[] methodstr = new string[1];
-            methodstr[0] = '[' + String.Join(",", tmpList.ToArray()) + ']';
 
-            //// 存储图表挂件需要的数据
+            tude= '[' + String.Join(",", tmpList.ToArray()) + ']';
 
-            //hitItem.SelectedIndexs = indexs;  
-            ////hitItem.SelectedItems = yNames;
             this.DialogResult = DialogResult.OK;
             Close();
 
@@ -171,11 +164,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             return notReady;
         }
 
-        private void mapTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-             map = this.mapTypeComboBox.SelectedText;
-
-        }
+       
 
     }
 }
