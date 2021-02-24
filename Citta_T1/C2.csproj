@@ -2094,6 +2094,7 @@
     <None Include="Resources\Images\preview.png" />
     <None Include="Resources\Images\previous.png" />
     <None Include="Resources\Images\preferences_16.png" />
+    <None Include="Resources\Images\Preference\checkUpdate.gif" />
     <Content Include="Resources\Images\print.png" />
     <None Include="Resources\Images\print_pages.png" />
     <None Include="Resources\Images\print_single_page.png" />
