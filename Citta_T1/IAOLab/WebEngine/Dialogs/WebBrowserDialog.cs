@@ -180,8 +180,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
     
         private void EditCode_Click(object sender, EventArgs e)
         {
-           
 
+            this.htmlEditorControlEx1.Visible = true;
+            this.htmlEditorControlEx1.Enabled = true;
+            this.webBrowser1.Width = 460;
+           
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Right;
         }
     }
 }

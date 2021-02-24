@@ -22,7 +22,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
     {
         public string WebUrl;
         public string map;
-        public string[] methodstr;
         public string tude;
         private BcpInfo bcpInfo;
         private DataItem hitItem;
@@ -51,7 +50,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void datasourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             foreach (DataItem dataItem in DataItems)
-                if (this.datasourceComboBox.SelectedItem == dataItem.FileName)
+                if ((this.datasourceComboBox.SelectedItem).ToString() == dataItem.FileName)
                 {
                     clearComBox();
                     this.hitItem = dataItem;
