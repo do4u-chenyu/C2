@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace C2.IAOLab.WebEngine.Dialogs
 {
-    [ComVisible(true)]
+   
     partial class WebBrowserDialog : StandardDialog
     {
         private ToolStripButton LoadMapData;
@@ -28,6 +28,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public string Title { set => this.Text = value; }
         public string WebUrl;
         public List<DataItem> DataItems;
+        bool isActive = true;
 
         public WebBrowserDialog()
         {
@@ -179,13 +180,23 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
     
         private void EditCode_Click(object sender, EventArgs e)
-        {
-
-            this.htmlEditorControlEx1.Visible = true;
-            this.htmlEditorControlEx1.Enabled = true;
-            this.webBrowser1.Location = new System.Drawing.Point(900, 16);
-            this.webBrowser1.Width = 460;
-            // this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Right;
+        { 
+            if (isActive)
+            {
+                this.panel1.Visible = true;
+                this.panel1.Enabled = true;
+                this.webBrowser1.Location = new System.Drawing.Point(600, 28);
+                this.webBrowser1.Width = 750;
+                isActive = false;
+            }
+            else
+            {
+                this.panel1.Visible = false;
+                this.panel1.Enabled = false;
+                this.webBrowser1.Location = new System.Drawing.Point(12, 23);
+                this.webBrowser1.Width = 1340;
+                isActive = true;
+            }
         }
     }
 }

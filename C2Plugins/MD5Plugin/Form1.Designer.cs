@@ -108,7 +108,7 @@
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(77, 16);
             this.radioButton3.TabIndex = 6;
-            this.radioButton3.Text = "UrlDecode";
+            this.radioButton3.Text = "Url编解码";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // radioButton4
