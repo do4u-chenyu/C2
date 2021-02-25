@@ -42,5 +42,129 @@ namespace MD5Plugin
         {
             return this.ShowDialog();
         }
+
+        //md5(128位)
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            //button1.Visible;
+            button1.Text = "加密 =>";
+            button2.Visible = false;
+        }
+
+        //md5(64位)
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            button1.Text = "加密 =>";
+            button2.Visible = false;
+        }
+
+        //Base64
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            button1.Text = "编码 =>";
+            button2.Text = "<= 解码";
+            button2.Visible = true;
+        }
+
+        //url编解码
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            button1.Text = "编码 =>";
+            button2.Text = "<= 解码";
+            button2.Visible = true;
+        }
+
+        //utf8
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            button1.Text = "转码 =>";
+            button2.Visible = false;
+        }
+
+        //gbk
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            button1.Text = "转码 =>";
+            button2.Visible = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int num = 3;
+            if (radioButton1.Checked)
+            {
+                num = 1;
+            }
+            if (radioButton4.Checked)
+            {
+                num = 2;
+            }
+            if (radioButton2.Checked)
+            {
+                num = 3;
+            }
+            if(radioButton3.Checked)
+            {
+                num = 4;
+            }
+            if(radioButton5.Checked)
+            {
+                num = 5;
+            }
+            if (radioButton6.Checked)
+            {
+                num = 6;
+            }
+
+            switch (num)
+            {
+                case 1:
+                    Console.WriteLine("md5(128)");
+                    break;
+                case 2:
+                    Console.WriteLine("md5(64)");
+                    break;
+                case 3:
+                    Console.WriteLine("base64编码");
+                    break;
+                case 4:
+                    Console.WriteLine("UrlDecode编码");
+                    break;
+                case 5:
+                    Console.WriteLine("utf8");
+                    break;
+                case 6:
+                    Console.WriteLine("gbk");
+                    break;
+                default:
+                    Console.WriteLine("base64");
+                    break;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int num = 3;
+            if (radioButton2.Checked)
+            {
+                num = 3;
+            }
+            if (radioButton3.Checked)
+            {
+                num = 4;
+            }
+            switch (num)
+            {
+                case 3:
+                    Console.WriteLine("base64解码");
+                    break;
+                case 4:
+                    Console.WriteLine("UrlDecode解码");
+                    break;
+                default:
+                    Console.WriteLine("base64解码");
+                    break;
+            }
+        }
     }
 }
