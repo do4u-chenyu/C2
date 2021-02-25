@@ -24,7 +24,7 @@ namespace C2.IAOLab.WebEngine
         public List<DataItem> DataItems;
         private WebBrowserDialog wbDialog;
         private string defaultMapUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "StartMap.html");
-        private string defaultBossUrl = "https://www.google.com";
+        private string defaultBossUrl = "";
 
         public WebManager()
         {
