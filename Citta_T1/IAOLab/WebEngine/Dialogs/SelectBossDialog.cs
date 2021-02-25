@@ -64,25 +64,65 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
 
             //2、图表字段配置项生成chartOptions
-            Dictionary<string, string[]> chartOptions = new Dictionary<string, string[]>();
-            chartOptions.Add("SimpleBar",new string[] { bcpInfo.ColumnArray[this.comboBox3.SelectedIndex], bcpInfo.ColumnArray[this.comboBox4.SelectedIndex], bcpInfo.ColumnArray[this.comboBox17.SelectedIndex] });
+            Dictionary<string, string[]> chartOptions = new Dictionary<string, string[]>();  
+            chartOptions.Add("SimpleBar", GetChartOption(simpleBarX.SelectedIndex, simpleBarY.GetItemCheckIndex()));
+            chartOptions.Add("BasicLineChart", GetChartOption(basicLineChartX.SelectedIndex, basicLineChartY.GetItemCheckIndex()));
+            chartOptions.Add("BasicScatter", GetChartOption(basicScatterX.SelectedIndex, basicScatterY.GetItemCheckIndex()));
+            chartOptions.Add("SmoothedLineChart", GetChartOption(smoothedLineChartX.SelectedIndex, smoothedLineChartY.GetItemCheckIndex()));
+            chartOptions.Add("StackBar", GetChartOption(stackBarX.SelectedIndex, stackBarY.GetItemCheckIndex()));
+            chartOptions.Add("BasicPie", GetChartOption(basicPieX.SelectedIndex, new List<int>() { basicPieY.SelectedIndex }));
+            chartOptions.Add("BasicMap", GetChartOption(basicMapX.SelectedIndex, new List<int>() { basicMapY.SelectedIndex }));
 
             //3、调用生成js
             GenBossHtml.GetInstance().TransDataToHtml(dataTable, chartOptions);
             return base.OnOKButtonClick();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private string[] GetChartOption(int idxX, List<int> idxY)
+        {
+            List<string> tmpList = new List<string>();
+            if (idxX != -1 && idxY.Count > 0)
+            {
+                tmpList.Add(bcpInfo.ColumnArray[idxX]);
+                idxY.ForEach(t => tmpList.Add(bcpInfo.ColumnArray[t]));
+            }
+            return tmpList.ToArray();
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectData = DataItems[this.comboBox1.SelectedIndex];
             
             this.bcpInfo = new BcpInfo(selectData.FilePath, selectData.FileEncoding, new char[] { selectData.FileSep });
-            this.comboBox3.Items.Clear();
-            this.comboBox3.Items.AddRange(bcpInfo.ColumnArray);
-            this.comboBox4.Items.Clear();
-            this.comboBox4.Items.AddRange(bcpInfo.ColumnArray);
-            this.comboBox17.Items.Clear();
-            this.comboBox17.Items.AddRange(bcpInfo.ColumnArray);
+            this.simpleBarX.Items.Clear();
+            this.simpleBarY.Items.Clear();
+            this.basicLineChartX.Items.Clear();
+            this.basicLineChartY.Items.Clear();
+            this.basicScatterX.Items.Clear();
+            this.basicScatterY.Items.Clear();
+            this.smoothedLineChartX.Items.Clear();
+            this.smoothedLineChartY.Items.Clear();
+            this.stackBarX.Items.Clear();
+            this.stackBarY.Items.Clear();
+            this.basicPieX.Items.Clear();
+            this.basicPieY.Items.Clear();
+            this.basicMapX.Items.Clear();
+            this.basicMapY.Items.Clear();
+
+            this.simpleBarX.Items.AddRange(bcpInfo.ColumnArray);
+            this.simpleBarY.Items.AddRange(bcpInfo.ColumnArray);
+            this.basicLineChartX.Items.AddRange(bcpInfo.ColumnArray);
+            this.basicLineChartY.Items.AddRange(bcpInfo.ColumnArray);
+            this.basicScatterX.Items.AddRange(bcpInfo.ColumnArray);
+            this.basicScatterY.Items.AddRange(bcpInfo.ColumnArray);
+            this.smoothedLineChartX.Items.AddRange(bcpInfo.ColumnArray);
+            this.smoothedLineChartY.Items.AddRange(bcpInfo.ColumnArray);
+            this.stackBarX.Items.AddRange(bcpInfo.ColumnArray);
+            this.stackBarY.Items.AddRange(bcpInfo.ColumnArray);
+            this.basicPieX.Items.AddRange(bcpInfo.ColumnArray);
+            this.basicPieY.Items.AddRange(bcpInfo.ColumnArray);
+            this.basicMapX.Items.AddRange(bcpInfo.ColumnArray);
+            this.basicMapY.Items.AddRange(bcpInfo.ColumnArray);
         }
     }
 }
