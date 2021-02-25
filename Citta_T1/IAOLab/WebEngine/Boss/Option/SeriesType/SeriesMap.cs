@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public SeriesMap()
         {
             Common.InitOptionFlag(this, FlagDic, TypeDic);
-            type = "'map'";
+            type = Common.FormatString("map");
         }
 
         public string type { get { return _type; } set { FlagDic["type"] = true; _type = value; } }
@@ -27,13 +28,13 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public string mapType { get { return _mapType; } set { FlagDic["mapType"] = true; _mapType = value; } }
         public string roam { get { return _roam; } set { FlagDic["roam"] = true; _roam = value; } }
         public MapLabel label { get { return _label; } set { FlagDic["label"] = true; _label = value; } }
-        public string encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
+        public Encode encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
 
         string _type;
         string _name;
         string _mapType;
         string _roam;
         MapLabel _label;
-        string _encode;
+        Encode _encode;
     }
 }

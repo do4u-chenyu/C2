@@ -1,47 +1,35 @@
 ﻿using C2.IAOLab.WebEngine.Boss.Option;
-using C2.IAOLab.WebEngine.Boss.Option.BaseOption;
 using C2.IAOLab.WebEngine.Boss.Option.SeriesType;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption;
 
 namespace C2.IAOLab.WebEngine.Boss.Charts.Map
 {
     class BasicMap : BaseCharts
     {
-        public BasicMap(DataTable dataTable, CompleteOption option, string[] chartOptions)
+        public BasicMap(CompleteOption option, string[] chartOptions)
         {
-            option.tooltip = new Tooltip()
-            {
-                trigger = "'item'"
+            option.tooltip = new Tooltip() {
+                trigger = Common.FormatString("item")
             };
 
-            option.visualMap = new VisualMap()
-            {
-                show = "true",
-                x = "'left'",
-                y = "'center'",
-                min = 0,
-                max = 400,
-                splitNumber = 5
+            option.visualMap = new VisualMap() {
+                max = 400, //TODO phx 暂时写死，chartOptions[2]
             };
-            option.dataset = "{ source: datas }";
+            option.dataset = Common.FormatDatas;
 
-            option.series = new Series(
-                new ISeries[] {
+            option.series = new Series(new ISeries[] {
                 new SeriesMap() {
-                    name = "'数据'",
-                    mapType = "'china'",
-                    roam = "'true'",
-                    label = new MapLabel()
-                    {
+                    name = Common.FormatString("数据"),
+                    mapType = Common.FormatString("china"),
+                    roam = Common.FormatString("true"),
+                    label = new MapLabel(){
                         normal = "{show : true}",
                         emphasis = "{show : true}"
                     },
-                    encode = "{ itemName: '" + chartOptions[0] + "' , value:'" + chartOptions[1] + "'}"
+                    encode = new Encode() { 
+                        itemName = Common.FormatString(chartOptions[0]),
+                        value = Common.FormatString(chartOptions[1])
+                    }
             }});
             _initScript = option.ToString();
         }

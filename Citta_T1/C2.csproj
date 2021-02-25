@@ -295,6 +295,7 @@
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\ScatterBaseOption\ScatterData.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Emphasis.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Encode.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\ItemStyle.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Label.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Position.cs" />
@@ -1908,9 +1909,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\Html\BossIndex01.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="IAOLab\WebEngine\Html\EchartIndex.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\Html\StartMap.html">

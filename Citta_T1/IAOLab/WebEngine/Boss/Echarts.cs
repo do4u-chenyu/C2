@@ -194,7 +194,7 @@ namespace C2.IAOLab.WebEngine.Boss
                 }
             }
 
-            string tempName = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\JS", "Test01.js");
+            string tempName = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\JS", "BossOptions.js");
             File.WriteAllText(tempName, htmlContent);
             return tempName;            
         }
@@ -232,7 +232,7 @@ namespace C2.IAOLab.WebEngine.Boss
                         InitID(containerId) + Environment.NewLine +
                             $"var {containerId}option = " + script + ";" +
                             SetOption(containerId),
-                        new JSBeautifyOptions()).GetResult();
+                        new JSBeautifyOptions()).GetResult() + Environment.NewLine;
 
         }
 

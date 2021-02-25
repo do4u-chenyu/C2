@@ -1,30 +1,35 @@
 ﻿using C2.IAOLab.WebEngine.Boss.Option;
+using C2.IAOLab.WebEngine.Boss.Option.BaseOption;
 using C2.IAOLab.WebEngine.Boss.Option.SeriesType;
-using System;
+using C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace C2.IAOLab.WebEngine.Boss.Charts.Line
 {
     public class SmoothedLineChart : BaseCharts
     {
-        public SmoothedLineChart(DataTable dataTable, CompleteOption option, string[] chartOptions)
+        public SmoothedLineChart(CompleteOption option, string[] chartOptions)
         {
-            option.xAxis = new XAxis()
-            {
-                type = Option.BaseOption.xAxisType.category,
+            option.xAxis = new XAxis(){
+                type = xAxisType.category,
             };
-            option.yAxis = new YAxis()
-            {
-                type = Option.BaseOption.xAxisType.value,
+            option.yAxis = new YAxis(){
+                type = xAxisType.value,
             };
-            option.dataset = "{ source: datas }";
+            option.dataset = Common.FormatDatas;
 
             List<ISeries> series = new List<ISeries>();
             for (int i = 1; i < chartOptions.Length; i++)
-                series.Add(new SeriesLine(chartOptions[0], chartOptions[i]) { smooth = "'true'"});
+            {
+                series.Add(new SeriesLine() {
+                    name = Common.FormatString(chartOptions[i]),
+                    encode = new Encode() {
+                        x = Common.FormatString(chartOptions[0]),
+                        y = Common.FormatString(chartOptions[i])
+                    },
+                    smooth = Common.FormatString("true")
+                });
+            }
 
             option.series = new Series(series.ToArray());
             _initScript = option.ToString();
