@@ -128,7 +128,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             {
                 string[] methodstr = new string[1];
                 methodstr[0] = dialog.tude;
-                webBrowser1.Navigate(dialog.WebUrl);
                 switch (dialog.map)
                 {
                     case "标注图":
@@ -141,7 +140,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         webBrowser1.Document.InvokeScript("getPoints", methodstr);
                         break;
                     case "热力图":
-                        webBrowser1.Document.InvokeScript("getPoints", methodstr);
+                        webBrowser1.Document.InvokeScript("relitu", methodstr);
                         break;
                 }
             }
