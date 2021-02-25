@@ -2699,6 +2699,7 @@
     <None Include="Resources\Templates\树状图.xml" />
     <None Include="Resources\Templates\思维导图.xml" />
     <None Include="Resources\Templates\空模板.xml" />
+    <None Include="Resources\styles.xml" />
     <Content Include="Resources\Templates\组织架构图.xml" />
     <None Include="Resources\Templates\逻辑图.xml" />
     <Content Include="Resources\thanks.xml">
@@ -2805,6 +2806,7 @@
     <None Include="Resources\WidgetIcon\Excel.png" />
     <None Include="Resources\WidgetIcon\地图.png" />
     <None Include="Resources\WidgetIcon\大屏.png" />
+    <None Include="Resources\XmindEngine\styles.xml" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

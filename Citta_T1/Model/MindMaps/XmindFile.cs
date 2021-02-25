@@ -30,54 +30,44 @@ namespace C2.Model.MindMaps
     class XmindFileSaver
     {
         const int defaultIconSize = 32;
-        XmlDocument dom;
+        const int defaultTopicStyleIndex = 1;
+        XmlDocument contentDom;
+        XmlDocument styleDom;
         List<Attachment> attachments;
         string filename;
+        XmlElement contentRoot;
+        MindMapLayoutType layout;
+        // 样式
         public XmindFileSaver(IEnumerable<ChartPage> charts, string fn)
         {
-            dom = new XmlDocument();
-            attachments = new List<Attachment>();
-            filename = fn;
-
-            XmlElement root = dom.CreateElement("xmap-content");
-            root.SetAttribute("xmlns", "urn:xmind:xmap:xmlns:content:2.0");
-            root.SetAttribute("xmlns:fo", "http://www.w3.org/1999/XSL/Format");
-            root.SetAttribute("xmlns:svg", "http://www.w3.org/2000/svg");
-            root.SetAttribute("xmlns:xhtml", "http://www.w3.org/1999/xhtml");
-            root.SetAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
-            root.SetAttribute("version", "2.0");
+            Initialize(fn);
 
             int sheetID = 1;
             foreach (ChartPage chartPage in charts)
             {
                 if (chartPage is MindMap)
-                    SaveSheet(chartPage as MindMap, root, sheetID);
+                    SaveSheet(chartPage as MindMap, contentRoot, sheetID);
                 sheetID += 1;
             }
-            dom.AppendChild(root);
+            contentDom.AppendChild(contentRoot);
         }
         public XmindFileSaver(MindMap mindMap, string fn)
         {
-            dom = new XmlDocument();
+            Initialize(fn);
+
+            SaveSheet(mindMap, contentRoot, 1);
+            contentDom.AppendChild(contentRoot);
+        }
+        private void Initialize(string fn)
+        {
+            contentDom = new XmlDocument();
+            styleDom = CreateStyleDOM();
             attachments = new List<Attachment>();
             filename = fn;
-            //dom.CreateComment("xml version=\"1.0\" encoding=\"UTF - 8\" standalone=\"no\"");
-            XmlElement root = dom.CreateElement("xmap-content");
-            root.SetAttribute("xmlns", "urn:xmind:xmap:xmlns:content:2.0");
-            root.SetAttribute("xmlns:fo", "http://www.w3.org/1999/XSL/Format");
-            root.SetAttribute("xmlns:svg", "http://www.w3.org/2000/svg");
-            root.SetAttribute("xmlns:xhtml", "http://www.w3.org/1999/xhtml");
-            root.SetAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
-            root.SetAttribute("version", "2.0");
 
-            SaveSheet(mindMap, root, 1);
-            dom.AppendChild(root);
+            contentRoot = CreateRootFromCTDOM(contentDom);
         }
         public void SaveFile()
-        {
-            SaveFileAsZip(dom, attachments, filename);
-        }
-        private void SaveFileAsZip(XmlDocument dom, List<Attachment> attachments, string filename)
         {
             /*
              * 添加Zip的几种方式
@@ -92,8 +82,8 @@ namespace C2.Model.MindMaps
                 zip.AddDirectory("META-INF");
 
                 // 添加文件
-                StaticDataSource content = new StaticDataSource(dom);
-                zip.Add(content, "content.xml");
+                zip.Add(new StaticDataSource(contentDom), "content.xml");
+                zip.Add(new StaticDataSource(styleDom), "styles.xml");
                 // 添加所有附件
                 foreach (Attachment attachment in attachments)
                     zip.Add(attachment.staticDataSource, "attachments/" + attachment.filename);
@@ -103,6 +93,27 @@ namespace C2.Model.MindMaps
 
                 zip.CommitUpdate();
             }
+        }
+        /// <summary>
+        /// 存一份默认的Style，Topic可选风格只有一种，目的只是让所有的Topic看起来一样
+        /// </summary>
+        /// <returns></returns>
+        private XmlDocument CreateStyleDOM()
+        {
+            XmlDocument dom = new XmlDocument();
+            dom.LoadXml(Properties.Resources.styles);
+            return dom;
+        }
+        private XmlElement CreateRootFromCTDOM(XmlDocument dom)
+        {
+            XmlElement root = dom.CreateElement("xmap-content");
+            root.SetAttribute("xmlns", "urn:xmind:xmap:xmlns:content:2.0");
+            root.SetAttribute("xmlns:fo", "http://www.w3.org/1999/XSL/Format");
+            root.SetAttribute("xmlns:svg", "http://www.w3.org/2000/svg");
+            root.SetAttribute("xmlns:xhtml", "http://www.w3.org/1999/xhtml");
+            root.SetAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+            root.SetAttribute("version", "2.0");
+            return root;
         }
         /// <summary>
         /// 保存文件 META-INF/manifest.xml 不保存图片显示不出来
@@ -132,6 +143,7 @@ namespace C2.Model.MindMaps
             root.AppendChild(NewFileEntryNode(metaDom, "META-INF/manifest.xml", "text/xml"));
             // Thumbnails
             // Revisions
+
             metaDom.AppendChild(root);
             return new StaticDataSource(metaDom);
         }
@@ -147,12 +159,17 @@ namespace C2.Model.MindMaps
         private void SaveSheet(MindMap mindMap, XmlElement parent, int sheetID)
         {
             // 单sheet / chart
-            XmlElement sheet = dom.CreateElement("sheet");
+            XmlElement sheet = contentDom.CreateElement("sheet");
+            this.layout = mindMap.LayoutType;
             sheet.SetAttribute("id", sheetID.ToString());
 
             // topics
-            SaveMindMap(sheet, mindMap.Root, mindMap);
+            SaveMindMap(sheet, mindMap.Root);
             SaveLink(sheet, mindMap.GetLinks(false), mindMap);
+
+            XmlElement title = contentDom.CreateElement("title");
+            title.InnerText = mindMap.Name;
+            sheet.AppendChild(title);
 
             parent.AppendChild(sheet);
         }
@@ -161,26 +178,31 @@ namespace C2.Model.MindMaps
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="topic"></param>
-        /// <param name="mindMap"></param>
-        private void SaveMindMap(XmlElement parent, Topic topic, MindMap mindMap)
+        private void SaveMindMap(XmlElement parent, Topic topic, bool isRoot = true)
         {
             if (parent == null || topic == null)
                 return;
-            XmlElement topicNode = dom.CreateElement("topic");
+            XmlElement topicNode = contentDom.CreateElement("topic");
             // Attributes
             topicNode.SetAttribute("id", topic.ID);
+            topicNode.SetAttribute("style-id", defaultTopicStyleIndex.ToString());
             if (topic.Folded)
                 topicNode.SetAttribute("branch", "folded");
+            if (isRoot)
+            {
+                topicNode.SetAttribute("structure-class", GetXmindLayout(this.layout));
+                isRoot = false;
+            }
             // Elements
             // title / text
-            XmlElement title = dom.CreateElement("title");
+            XmlElement title = contentDom.CreateElement("title");
             title.InnerText = topic.Text;
             topicNode.AppendChild(title);
             /* 
              * 图片挂件
              * 优先存C2内部图表，有图表存图表，其他全为附件，没有图表放一张图，其他全为附件
              * 
-            */
+             */
             if (topic.FindWidgets<PictureWidget>().Length > 0)
             {
                 // 至少存在一个图表
@@ -231,23 +253,62 @@ namespace C2.Model.MindMaps
                 {
                     XmlElement tn = (topicNode.SelectSingleNode("topics") as XmlElement);
                     foreach (Topic subTopic in topic.Children)
-                        SaveMindMap(tn, subTopic, mindMap);
+                        SaveMindMap(tn, subTopic, isRoot);
                 }
                 else
                 {
-                    XmlElement tn = dom.CreateElement("topics");
-                    XmlElement cn = dom.CreateElement("children");
+                    XmlElement tn = contentDom.CreateElement("topics");
+                    XmlElement cn = contentDom.CreateElement("children");
                     tn.SetAttribute("type", "attached");
 
 
                     foreach (Topic subTopic in topic.Children)
-                        SaveMindMap(tn, subTopic, mindMap);
+                        SaveMindMap(tn, subTopic, isRoot);
 
                     cn.AppendChild(tn);
                     topicNode.AppendChild(cn);
                 }
             }
             parent.AppendChild(topicNode);
+        }
+
+        private string GetXmindLayout(MindMapLayoutType mmlt)
+        {
+            switch (mmlt)
+            {
+                case MindMapLayoutType.MindMap:
+                    return "org.xmind.ui.map.unbalanced";
+                case MindMapLayoutType.OrganizationDown:
+                    return "org.xmind.ui.org-chart.down";
+                case MindMapLayoutType.OrganizationUp:
+                    return "org.xmind.ui.org-chart.up";
+                case MindMapLayoutType.TreeLeft:
+                    return "org.xmind.ui.tree.left";
+                case MindMapLayoutType.TreeRight:
+                    return "org.xmind.ui.tree.right";
+                case MindMapLayoutType.LogicLeft:
+                    return "org.xmind.ui.logic.left";
+                case MindMapLayoutType.LogicRight:
+                    return "org.xmind.ui.logic.right";
+                default:
+                    return "org.xmind.ui.map.unbalanced";
+            }
+        }
+        private string GetXmindAlignment(WidgetAlignment alignment)
+        {
+            switch (alignment)
+            {
+                case WidgetAlignment.Left:
+                    return "left";
+                case WidgetAlignment.Right:
+                    return "right";
+                case WidgetAlignment.Top:
+                    return "top";
+                case WidgetAlignment.Bottom:
+                    return "bottom";
+                default:
+                    return "left";
+            }
         }
         /// <summary>
         /// 将图片保存为Xmind附件，图片无需设置大小
@@ -264,17 +325,17 @@ namespace C2.Model.MindMaps
             // Xmind中 附件以节点形式存在
             if (topicNode.SelectSingleNode("topics") != null)
             {
-                XmlElement xe = dom.CreateElement("topic");
+                XmlElement xe = contentDom.CreateElement("topic");
                 xe.SetAttribute("xlink:href", "xap:attachments/" + attachment.filename);
                 topicNode.SelectSingleNode("topics").AppendChild(xe);
             }
             else
             {
-                XmlElement tn = dom.CreateElement("topics");
-                XmlElement cn = dom.CreateElement("children");
+                XmlElement tn = contentDom.CreateElement("topics");
+                XmlElement cn = contentDom.CreateElement("children");
                 tn.SetAttribute("type", "attached");
 
-                XmlElement xe = dom.CreateElement("topic");
+                XmlElement xe = contentDom.CreateElement("topic");
                 xe.SetAttribute("id", String.Format("{0}-{1}", topicNode.GetAttribute("id"), attachment.id));
                 xe.SetAttribute("xlink:href", "xap:attachments/" + attachment.filename);
 
@@ -284,7 +345,7 @@ namespace C2.Model.MindMaps
             }
         }
         /// <summary>
-        /// 将C2图标变为Xmind Topic 图片，图片需要设置大小
+        /// 将C2图标变为Xmind Topic 图片，图片需要设置大小和布局
         /// </summary>
         /// <param name="widget"></param>
         /// <param name="topicNode"></param>
@@ -297,9 +358,9 @@ namespace C2.Model.MindMaps
             attachments.Add(attachment);
             XmlElement xe = topicNode.OwnerDocument.CreateElement("xhtml:img");
             xe.SetAttribute("xhtml:src", "xap:attachments/" + attachment.filename);
-            Size imgSize = new Size(defaultIconSize, defaultIconSize);
-            xe.SetAttribute("svg:height", imgSize.Height.ToString());
-            xe.SetAttribute("svg:width", imgSize.Width.ToString());
+            xe.SetAttribute("svg:height", defaultIconSize.ToString());
+            xe.SetAttribute("svg:width", defaultIconSize.ToString());
+            xe.SetAttribute("align", GetXmindAlignment(widget.Alignment));
 
             topicNode.AppendChild(xe);
         }
@@ -309,7 +370,7 @@ namespace C2.Model.MindMaps
             if (parent == null || string.IsNullOrEmpty(remark))
                 return;
 
-            XmlElement notes = dom.CreateElement("notes");
+            XmlElement notes = contentDom.CreateElement("notes");
             notes.Value = remark;
 
             parent.AppendChild(notes);
@@ -318,7 +379,7 @@ namespace C2.Model.MindMaps
         {
             if (parent == null || links == null)
                 return;
-            XmlElement node = dom.CreateElement("relationships");
+            XmlElement node = contentDom.CreateElement("relationships");
             foreach (Link link in links)
                 SaveLink(node, link, mindMap);
 
@@ -328,21 +389,21 @@ namespace C2.Model.MindMaps
         {
             if (parent == null || link == null || string.IsNullOrEmpty(link.TargetID))
                 return;
-            XmlElement node = dom.CreateElement("relationship");
+            XmlElement node = contentDom.CreateElement("relationship");
             node.SetAttribute("end1", link.From.ID.ToString());
             node.SetAttribute("end2", link.Target.ID.ToString());
             node.SetAttribute("id", link.ID.ToString());
 
             parent.AppendChild(node);
         }
-        private bool isInternalImage(PictureWidget picWidget)
+        private bool IsInternalImage(PictureWidget picWidget)
         {
             return String.IsNullOrEmpty(Path.GetDirectoryName(picWidget.ImageUrl));
         }
         private int FindInternalPicWidgetIndex(PictureWidget[] widgets)
         {
             for (int i = 0; i < widgets.Length; i++)
-                if (isInternalImage(widgets[i]))
+                if (IsInternalImage(widgets[i]))
                     return i;
             return -1;
         }
@@ -367,8 +428,6 @@ namespace C2.Model.MindMaps
         class StaticDataSource : IStaticDataSource
         {
             byte[] bytes;
-            private PictureWidget.PictureDesign image;
-            private Image data;
 
             public StaticDataSource(string str, Encoding encoding)
             {
