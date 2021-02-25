@@ -49,16 +49,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void datasourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (DataItem dataItem in DataItems)
-                if ((this.datasourceComboBox.SelectedItem).ToString() == dataItem.FileName)
-                {
-                    clearComBox();
-                    this.hitItem = dataItem;
-                }
-                    
-            InitializeDropDown();
+            clearComBox();
+            this.hitItem = DataItems[datasourceComboBox.SelectedIndex];
+            SetDropDown();
         }
-        private void InitializeDropDown()
+        private void SetDropDown()
         {
             this.bcpInfo = new BcpInfo(FilePath, FileEncoding, new char[] { FileSep });
             this.latComboBox.Items.AddRange(bcpInfo.ColumnArray);
@@ -90,7 +85,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             List<int> indexlat = new List<int>() { latIndex };
             int lonIndex = lonComboBox.Tag == null ? lonComboBox.SelectedIndex : ConvertUtil.TryParseInt(lonComboBox.Tag.ToString());
             List<int> indexlon = new List<int>() { lonIndex };
-            //indexs.AddRange(outListCCBL0.GetItemCheckIndex());
+            int countIndex = countComboBox.Tag == null ? countComboBox.SelectedIndex : ConvertUtil.TryParseInt(countComboBox.Tag.ToString());
+            List<int> indexcount = new List<int>() { countIndex };
 
             // 获取选中输入、输出各列数据
             string fileContent;
@@ -100,32 +96,41 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(FilePath, FileEncoding);
             List<string> rows = new List<string>(fileContent.Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
-
             List<List<string>> latValues = Utils.FileUtil.GetColumns(indexlat, hitItem, rows, upperLimit);
             List<List<string>> lonValues = Utils.FileUtil.GetColumns(indexlon, hitItem, rows, upperLimit);
+            List<List<string>> countValues = Utils.FileUtil.GetColumns(indexcount, hitItem, rows, upperLimit);
             if (latValues.Count == 0)
             {
                 HelpUtil.ShowMessageBox("文件内容为空");
                 Close();
                 return false;
             }
-
-            //准备数据
-            string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
-            String.Format("\"lng\": \" {0} \", \"lat\": \" {1} \"", "114.376", "36.01");
-            List<string> tmpList = new List<string>();
-            if (latValues[0].Count==lonValues[0].Count) 
+            if (latValues[0].Count != lonValues[0].Count || latValues[0].Count != lonValues[0].Count)
             {
+                HelpUtil.ShowMessageBox("输入维度不一致");
+                return false;
+            }
+            List<string> tmpList = new List<string>();
+            //准备数据
+            if (this.mapTypeComboBox.Text == "热力图")
+            {
+                string JSON_OBJ_Format_heat = "\"lng\": \" {0} \", \"lat\": \" {1} \", \"count\": \" {2} \"";
                 for (int i = 0; i < latValues[0].Count; i++)
                 {
-                    tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[0][i], lonValues[0][1]) + '}');
+                    tmpList.Add('{' + String.Format(JSON_OBJ_Format_heat, latValues[0][i], lonValues[0][i], countValues[0][i]) + '}'); 
                 }
+
             }
             else
-                HelpUtil.ShowMessageBox("经纬度维度不一致");
+            {
+                string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
+                for (int i = 0; i < latValues[0].Count; i++)
+                {
+                    tmpList.Add('{' + String.Format(JSON_OBJ_Format , latValues[0][i], lonValues[0][i]) + '}');
+                }
+            }
 
             tude = '[' + String.Join(",", tmpList.ToArray()) + ']';
-
             this.DialogResult = DialogResult.OK;
             Close();
 
@@ -162,5 +167,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
             return notReady;
         }
 
+        private void mapTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.mapTypeComboBox.Text == "热力图")
+                countComboBox.Enabled = true;
+            else
+                countComboBox.Enabled = false;
+        }
     }
 }
