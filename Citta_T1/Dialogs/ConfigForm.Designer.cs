@@ -1214,7 +1214,7 @@
             this.title.Size = new System.Drawing.Size(74, 22);
             this.title.TabIndex = 8;
             this.title.Text = "更新可用";
-            this.title.Click += new System.EventHandler(this.label24_Click);
+
             // 
             // button2
             // 

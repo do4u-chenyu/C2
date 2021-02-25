@@ -419,10 +419,7 @@ namespace C2.Dialogs
             }
         }
 
-        private void label24_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void baiduGISUrlTB_KeyPress(object sender, KeyPressEventArgs e)
         {
