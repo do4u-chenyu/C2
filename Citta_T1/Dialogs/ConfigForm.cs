@@ -501,5 +501,41 @@ namespace C2.Dialogs
                 e.Handled = false;
             }
         }
+
+
+
+        #region 检查更新Tab
+        private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (mainTabControl.SelectedIndex != 5)
+                return;
+ 
+            string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version"); 
+            string browserVersion = BrowserVersion();
+            if (currentVersion.Equals(browserVersion))
+            {
+
+            }
+            else 
+            { 
+
+            }
+        }
+        private string BrowserVersion()
+        {
+            return string.Empty;
+        }
+        private void CancleUpdate_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void UpdateSoftware_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+
     }
 }
