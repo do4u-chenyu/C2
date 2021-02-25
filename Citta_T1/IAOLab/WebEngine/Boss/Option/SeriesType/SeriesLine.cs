@@ -20,14 +20,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public SeriesLine()
         {
             Common.InitOptionFlag(this, FlagDic, TypeDic);
-            type = "'line'";
-        }
-        public SeriesLine(string x, string y)
-        {
-            Common.InitOptionFlag(this, FlagDic, TypeDic);
-            type = "'line'";
-            name = "'" + y + "'";
-            encode = "{ x: '" + x + "' , y:'" + y + "'}";
+            type = Common.FormatString("line");
         }
 
         public string type { get { return _type; } set { FlagDic["type"] = true; _type = value; } }
@@ -59,7 +52,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public string smooth { get { return _smooth; } set { FlagDic["smooth"] = true; _smooth = value; } }
         public LineSampling sampling { get { return _sampling; } set { FlagDic["sampling"] = true; _sampling = value; } }
         public string dimensions { get { return _dimensions; } set { FlagDic["dimensions"] = true; _dimensions = value; } }
-        public string encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
+        public Encode encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
         public string seriesLayoutBy { get { return _seriesLayoutBy; } set { FlagDic["seriesLayoutBy"] = true; _seriesLayoutBy = value; } }
         public int datasetIndex { get { return _datasetIndex; } set { FlagDic["datasetIndex"] = true; _datasetIndex = value; } }
         public LineData data { get { return _data; } set { FlagDic["data"] = true; _data = value; } }
@@ -108,7 +101,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         string _smooth;
         LineSampling _sampling;
         string _dimensions;
-        string _encode;
+        Encode _encode;
         string _seriesLayoutBy;
         int _datasetIndex;
         LineData _data;

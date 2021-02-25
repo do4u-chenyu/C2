@@ -15,6 +15,11 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         public VisualMap()
         {
             Common.InitOptionFlag(this, FlagDic, TypeDic);
+            min = 0;
+            splitNumber = 5;
+            show = "true";
+            x = Common.FormatString("left");
+            y = Common.FormatString("center");
         }
 
         public string show { get { return _show; } set { FlagDic["show"] = true; _show = value; } }

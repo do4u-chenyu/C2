@@ -1,4 +1,5 @@
 ﻿using C2.IAOLab.WebEngine.Boss.Option.SeriesType.LineBaseOption;
+using C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,15 +20,9 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public SeriesScatter()
         {
             Common.InitOptionFlag(this, FlagDic, TypeDic);
-            type = "'scatter'";
+            type = Common.FormatString("scatter");
         }
-        public SeriesScatter(string x, string y)
-        {
-            Common.InitOptionFlag(this, FlagDic, TypeDic);
-            type = "'scatter'";
-            name = "'" + y + "'";
-            encode = "{ x: '" + x + "' , y:'" + y + "'}";
-        }
+
         public string type { get { return _type; } set { FlagDic["type"] = true; _type = value; } }
         public string id { get { return _id; } set { FlagDic["id"] = true; _id = value; } }
         public string name { get { return _name; } set { FlagDic["name"] = true; _name = value; } }
@@ -50,7 +45,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public int progressive { get { return _progressive; } set { FlagDic["progressive"] = true; _progressive = value; } }
         public int progressiveThreshold { get { return _progressiveThreshold; } set { FlagDic["progressiveThreshold"] = true; _progressiveThreshold = value; } }
         public string dimensions { get { return _dimensions; } set { FlagDic["dimensions"] = true; _dimensions = value; } }
-        public string encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
+        public Encode encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
         public string seriesLayoutBy { get { return _seriesLayoutBy; } set { FlagDic["seriesLayoutBy"] = true; _seriesLayoutBy = value; } }
         public int datasetIndex { get { return _datasetIndex; } set { FlagDic["datasetIndex"] = true; _datasetIndex = value; } }
         public ScatterBaseOption.ScatterData data { get { return _data; } set { FlagDic["data"] = true; _data = value; } }
@@ -92,7 +87,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         int _progressive;
         int _progressiveThreshold;
         string _dimensions;
-        string _encode;
+        Encode _encode;
         string _seriesLayoutBy;
         int _datasetIndex;
         ScatterBaseOption.ScatterData _data;

@@ -8,7 +8,11 @@ namespace C2.IAOLab.WebEngine.Boss
 {
     public class Common
     {
-        
+        public const string FormatDatas = "{ source: datas }";
+        public static string FormatString(string str)
+        {
+            return string.Format("'{0}'",str);
+        }
         
         public static string GetPro(string str, string repalce = null)
         {
