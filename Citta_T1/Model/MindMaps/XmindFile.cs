@@ -29,6 +29,7 @@ namespace C2.Model.MindMaps
     }
     class XmindFileSaver
     {
+        const int defaultIconSize = 32;
         XmlDocument dom;
         List<Attachment> attachments;
         string filename;
@@ -76,7 +77,7 @@ namespace C2.Model.MindMaps
         {
             SaveFileAsZip(dom, attachments, filename);
         }
-        private static void SaveFileAsZip(XmlDocument dom, List<Attachment> attachments, string filename)
+        private void SaveFileAsZip(XmlDocument dom, List<Attachment> attachments, string filename)
         {
             /*
              * 添加Zip的几种方式
@@ -86,16 +87,63 @@ namespace C2.Model.MindMaps
             using (ZipFile zip = ZipFile.Create(filename))
             {
                 zip.BeginUpdate();
-                StaticDataSource content = new StaticDataSource(dom.OuterXml, Encoding.UTF8);
-                //添加文件
-                zip.Add(content, "content.xml");
+
                 zip.AddDirectory("attachments");
+                zip.AddDirectory("META-INF");
+
+                // 添加文件
+                StaticDataSource content = new StaticDataSource(dom);
+                zip.Add(content, "content.xml");
                 // 添加所有附件
-                foreach(Attachment attachment in attachments)
+                foreach (Attachment attachment in attachments)
                     zip.Add(attachment.staticDataSource, "attachments/" + attachment.filename);
+                // META-INF/manifest.xml
+                StaticDataSource meta_inf = CreateMetaInf();
+                zip.Add(meta_inf, "META-INF/manifest.xml");
+
                 zip.CommitUpdate();
             }
         }
+        /// <summary>
+        /// 保存文件 META-INF/manifest.xml 不保存图片显示不出来
+        /// </summary>
+        /// <returns></returns>
+        private StaticDataSource CreateMetaInf()
+        {
+            XmlDocument metaDom = new XmlDocument();
+            XmlElement root = metaDom.CreateElement("manifest");
+            root.SetAttribute("xmlns", "urn:xmind:xmap:xmlns:manifest:1.0");
+
+            // content.xml
+            root.AppendChild(NewFileEntryNode(metaDom, "content.xml", "text/xml"));
+            // styles.xml
+            //root.AppendChild(NewFullEntryNode("styles.xml", "text/xml"))
+            // attachments
+            foreach (Attachment attachment in attachments)
+                root.AppendChild(
+                    NewFileEntryNode(
+                        metaDom,
+                        "attachments/" + attachment.filename,
+                        attachment.filename.EndsWith("png") ? "image / png" : ""
+                    )
+                );
+            // META-INF
+            root.AppendChild(NewFileEntryNode(metaDom, "META-INF/", ""));
+            root.AppendChild(NewFileEntryNode(metaDom, "META-INF/manifest.xml", "text/xml"));
+            // Thumbnails
+            // Revisions
+            metaDom.AppendChild(root);
+            return new StaticDataSource(metaDom);
+        }
+
+        private XmlElement NewFileEntryNode(XmlDocument xd, string fullPath, string mediaType)
+        {
+            XmlElement node = xd.CreateElement("file-entry");
+            node.SetAttribute("full-path", fullPath);
+            node.SetAttribute("media-type", mediaType);
+            return node;
+        }
+
         private void SaveSheet(MindMap mindMap, XmlElement parent, int sheetID)
         {
             // 单sheet / chart
@@ -108,7 +156,12 @@ namespace C2.Model.MindMaps
 
             parent.AppendChild(sheet);
         }
-
+        /// <summary>
+        /// 递归C2 Chart 形成content.xml 和 attachments
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="topic"></param>
+        /// <param name="mindMap"></param>
         private void SaveMindMap(XmlElement parent, Topic topic, MindMap mindMap)
         {
             if (parent == null || topic == null)
@@ -196,7 +249,11 @@ namespace C2.Model.MindMaps
             }
             parent.AppendChild(topicNode);
         }
-
+        /// <summary>
+        /// 将图片保存为Xmind附件，图片无需设置大小
+        /// </summary>
+        /// <param name="widget"></param>
+        /// <param name="topicNode"></param>
         private void SavePWAsAttachment(PictureWidget widget, XmlElement topicNode)
         {
             Attachment attachment = new Attachment(
@@ -226,7 +283,11 @@ namespace C2.Model.MindMaps
                 topicNode.AppendChild(cn);
             }
         }
-
+        /// <summary>
+        /// 将C2图标变为Xmind Topic 图片，图片需要设置大小
+        /// </summary>
+        /// <param name="widget"></param>
+        /// <param name="topicNode"></param>
         private void SavePWAsImg(PictureWidget widget, XmlElement topicNode)
         {
             Attachment attachment = new Attachment(
@@ -234,10 +295,13 @@ namespace C2.Model.MindMaps
                 new StaticDataSource(widget.Data)
                 );
             attachments.Add(attachment);
-            XmlElement node = topicNode.OwnerDocument.CreateElement("xhtml:img");
-            node.SetAttribute("xhtml:src", "xap:attachments/" + attachment.filename);
+            XmlElement xe = topicNode.OwnerDocument.CreateElement("xhtml:img");
+            xe.SetAttribute("xhtml:src", "xap:attachments/" + attachment.filename);
+            Size imgSize = new Size(defaultIconSize, defaultIconSize);
+            xe.SetAttribute("svg:height", imgSize.Height.ToString());
+            xe.SetAttribute("svg:width", imgSize.Width.ToString());
 
-            topicNode.AppendChild(node);
+            topicNode.AppendChild(xe);
         }
 
         private void SaveRemark(XmlElement parent, string remark)
@@ -314,7 +378,12 @@ namespace C2.Model.MindMaps
             {
                 this.bytes = bytes;
             }
-
+            public StaticDataSource(XmlDocument dom)
+            {
+                MemoryStream ms = new MemoryStream();
+                dom.Save(ms);
+                this.bytes = ms.ToArray();
+            }
             public StaticDataSource(Image data)
             {
                 MemoryStream ms = new MemoryStream();
