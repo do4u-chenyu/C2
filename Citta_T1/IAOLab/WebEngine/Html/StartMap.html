@@ -32,8 +32,8 @@
 </body>
 </html>
 <script type="text/javascript">
-    var map = new BMap.Map("container");
-    map.centerAndZoom(new BMap.Point(108.876433, 36.269395), 5);
+    var map = new BMap.Map("container");  
+    //map.centerAndZoom(new BMap.Point(108.876433, 36.269395), 5);
     map.addControl(new BMap.ScaleControl()); //添加比例尺控件(左下角显示的比例尺控件)
     map.addControl(new BMap.OverviewMapControl());// 缩略图控件
     var ctrl_nav = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE }); 
@@ -44,6 +44,12 @@
     map.enableKeyboard(); //启用键盘上下左右键移动地图 
     map.enableContinuousZoom();   // 开启连续缩放效果  
     map.enableInertialDragging(); // 开启惯性拖拽效果  
+
+    //------------------初始化地图--------------------  
+    function initialMap(method) {
+        strs = method.split(','); //字符分割
+        map.centerAndZoom(new BMap.Point(strs[0], strs[1]), strs[2]);
+    }
 
   //------------------实现热力图所有调用函数--------------------  
 
@@ -131,7 +137,6 @@
         var myIcon = new BMap.Icon("png-0003.png", new BMap.Size(24, 24));
         var marker = new BMap.Marker(p1, { icon: myIcon });  // 创建标注
         map.addOverlay(marker);              // 将标注添加到地图中 
-
       marker_num++;//标注索引，这个是个全局变量  
       var whichCar=window.external.setWhichCar();  
       var label=new BMap.Label(whichCar+"号车-坐标"+marker_num+":"+  
@@ -281,7 +286,7 @@
     }  
 
     //------------------画圆，让WINFORM调用----------------  
-     function drawCircle(){  
+    function drawCircle(){  
         drawingManager.setDrawingMode(BMAP_DRAWING_CIRCLE);
     } 
     
@@ -317,7 +322,7 @@
 
         }
        
-    };
+    }
 
 
 </script>

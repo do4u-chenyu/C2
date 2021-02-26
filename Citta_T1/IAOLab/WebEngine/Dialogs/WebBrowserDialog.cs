@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Dialogs;
 using C2.Model;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             WebBrowserConfig.SetWebBrowserFeatures(11);//TODO 暂定11，后面需要检测
             webBrowser1.Navigate(WebUrl);
+            //var configMap = new ConfigForm();
+            //string[] configstr = new string[1];
+            //configstr[0] = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
+            //webBrowser1.Document.InvokeScript("initialMap", configstr);
         }
 
         public void InitializeMapToolStrip()
@@ -88,6 +93,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 toolStripSeparator1,
                 Clear,
                 EditCode});
+
         }
 
         public void InitializeBossToolStrip()
@@ -131,7 +137,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 switch (dialog.map)
                 {
                     case "标注图":
-                        webBrowser1.Document.InvokeScript("markerPoints", methodstr);
+                        webBrowser1.Document.InvokeScript("markerPoints", methodstr);    
                         break;
                     case "轨迹图":
                         webBrowser1.Document.InvokeScript("getPoints", methodstr);
@@ -196,6 +202,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.webBrowser1.Width = 1340;
                 isActive = true;
             }
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            var configMap = new ConfigForm();
+            string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
+            webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
+
         }
     }
 }
