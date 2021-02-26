@@ -40,7 +40,7 @@ namespace C2.IAOLab.Plugins
 
             return downloader.GetPluginsInfoList(pluginsName, Global.DLLPackageUrl);
         }
-        private List<string> GetPluginsNameList(string htmlContent)
+        public List<string> GetPluginsNameList(string htmlContent)
         {
             List<string> result = new List<string>();
             string dllPattern = string.Format(@"\>(.*?info)\<");

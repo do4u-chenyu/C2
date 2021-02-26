@@ -419,9 +419,123 @@ namespace C2.Dialogs
             }
         }
 
-        private void label24_Click(object sender, EventArgs e)
+
+
+        private void baiduGISUrlTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar) && e.KeyChar != 0x2E)
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == '.')   //允许输入回退键
+            {
+                TextBox tb = sender as TextBox;
+
+                if (tb.Text == "")
+                {
+                    tb.Text = "0.";
+                    tb.Select(tb.Text.Length, 0);
+                    e.Handled = true;
+                }
+                else if (tb.Text.Contains("."))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar) && e.KeyChar != 0x2E)
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == '.')   //允许输入回退键
+            {
+                TextBox tb = sender as TextBox;
+
+                if (tb.Text == "")
+                {
+                    tb.Text = "0.";
+                    tb.Select(tb.Text.Length, 0);
+                    e.Handled = true;
+                }
+                else if (tb.Text.Contains("."))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+        }
+
+        private void baiduGISKeyTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //if (e.KeyChar != '\b' && !Char.IsDigit(e.KeyChar))
+            //{
+            //    e.Handled = true;
+            //}
+            //else if (e.KeyChar == '-' && ((TextBox)sender).Text.Length > 1)
+            //{
+            //    e.Handled = true;
+            //}
+            //else if (int.Parse(((TextBox)sender).Text) <10 || int.Parse(((TextBox)sender).Text) >= 5 && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
+            //{
+            //    e.Handled = true;
+            //}
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.KeyChar.ToString(), "^([5-9])$") && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
+            {
+
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+
+
+        #region 检查更新Tab
+        private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (mainTabControl.SelectedIndex != 5)
+                return;
+ 
+            string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version"); 
+            string browserVersion = BrowserVersion();
+            if (currentVersion.Equals(browserVersion))
+            {
+
+            }
+            else 
+            { 
+
+            }
+        }
+        private string BrowserVersion()
+        {
+            return string.Empty;
+        }
+        private void CancleUpdate_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void UpdateSoftware_Click(object sender, EventArgs e)
         {
 
         }
+
+        #endregion
+
+
     }
 }
