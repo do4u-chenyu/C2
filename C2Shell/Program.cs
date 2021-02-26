@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using C2.Utils;
 
 namespace C2Shell
 {
@@ -27,15 +28,17 @@ namespace C2Shell
             string[] files = System.IO.Directory.GetFiles(packagePath);
             if (files.Length != 1 || !files[0].EndsWith(".zip"))
                 return;
-            if (!ExecuteUpdate())
+            if (!ExecuteUpdate(files[0]))
             {
                 Rollback();
             }
 
         }
-        private static bool ExecuteUpdate()
+        private static bool ExecuteUpdate(string zipPath)
         {
             // 解压update目录
+
+            ZipUtil.UnZipFile(zipPath, Path.GetDirectoryName(zipPath));
             // 更新进度窗体
             // 执行 setup.bat脚本
             return true;
