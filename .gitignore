@@ -1,4 +1,12 @@
 ﻿.vs
+C2Shell/bin/Debug
+C2Shell/bin/开发调试
+C2Shell/bin/Release
+C2Shell/bin
+C2Shell/obj/Debug
+C2Shell/obj/开发调试
+C2Shell/obj/Release
+C2Shell/obj
 Citta_T1/obj/Debug
 Citta_T1/bin/Debug
 Citta_T1/bin/Release
