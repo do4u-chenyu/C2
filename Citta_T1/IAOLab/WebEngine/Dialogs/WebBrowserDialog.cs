@@ -73,6 +73,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             SavePic.Image = global::C2.Properties.Resources.image;
             SavePic.Text = "保存成图片";
+            SavePic.Click += new System.EventHandler(this.SavePic_Click);
 
             // Clear
             Clear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
