@@ -32,8 +32,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.datasource = new System.Windows.Forms.ComboBox();
+            this.bossType = new System.Windows.Forms.ComboBox();
             this.simpleBarX = new System.Windows.Forms.ComboBox();
             this.captionBar1 = new C2.Controls.CaptionBar();
             this.captionBar2 = new C2.Controls.CaptionBar();
@@ -108,29 +108,29 @@
             this.label5.TabIndex = 10007;
             this.label5.Text = "纵轴：";
             // 
-            // comboBox1
+            // datasource
             // 
-            this.comboBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(98, 30);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(330, 20);
-            this.comboBox1.TabIndex = 10008;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            this.datasource.BackColor = System.Drawing.SystemColors.Window;
+            this.datasource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.datasource.FormattingEnabled = true;
+            this.datasource.Location = new System.Drawing.Point(98, 30);
+            this.datasource.Name = "datasource";
+            this.datasource.Size = new System.Drawing.Size(330, 20);
+            this.datasource.TabIndex = 10008;
+            this.datasource.SelectedIndexChanged += new System.EventHandler(this.Datasource_SelectedIndexChanged);
             // 
-            // comboBox2
+            // bossType
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.bossType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bossType.FormattingEnabled = true;
+            this.bossType.Items.AddRange(new object[] {
             "样式1",
             "样式2",
             "样式3"});
-            this.comboBox2.Location = new System.Drawing.Point(98, 74);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(330, 20);
-            this.comboBox2.TabIndex = 10009;
+            this.bossType.Location = new System.Drawing.Point(98, 74);
+            this.bossType.Name = "bossType";
+            this.bossType.Size = new System.Drawing.Size(330, 20);
+            this.bossType.TabIndex = 10009;
             // 
             // simpleBarX
             // 
@@ -167,11 +167,11 @@
             this.label3.TabIndex = 10014;
             this.label3.Text = "横轴：";
             // 
-            // comboBox5
+            // stackBarX
             // 
             this.stackBarX.FormattingEnabled = true;
             this.stackBarX.Location = new System.Drawing.Point(550, 99);
-            this.stackBarX.Name = "comboBox5";
+            this.stackBarX.Name = "stackBarX";
             this.stackBarX.Size = new System.Drawing.Size(136, 20);
             this.stackBarX.TabIndex = 10015;
             // 
@@ -184,11 +184,11 @@
             this.label6.TabIndex = 10016;
             this.label6.Text = "纵轴：";
             // 
-            // comboBox6
+            // basicPieY
             // 
             this.basicPieY.FormattingEnabled = true;
             this.basicPieY.Location = new System.Drawing.Point(769, 347);
-            this.basicPieY.Name = "comboBox6";
+            this.basicPieY.Name = "basicPieY";
             this.basicPieY.Size = new System.Drawing.Size(136, 20);
             this.basicPieY.TabIndex = 10017;
             // 
@@ -219,11 +219,11 @@
             this.captionBar5.TabIndex = 10024;
             this.captionBar5.Text = "地市分布图";
             // 
-            // comboBox10
+            // basicMapX
             // 
             this.basicMapX.FormattingEnabled = true;
             this.basicMapX.Location = new System.Drawing.Point(550, 410);
-            this.basicMapX.Name = "comboBox10";
+            this.basicMapX.Name = "basicMapX";
             this.basicMapX.Size = new System.Drawing.Size(136, 20);
             this.basicMapX.TabIndex = 10028;
             // 
@@ -236,11 +236,11 @@
             this.label10.TabIndex = 10027;
             this.label10.Text = "地市：";
             // 
-            // comboBox12
+            // basicMapY
             // 
             this.basicMapY.FormattingEnabled = true;
             this.basicMapY.Location = new System.Drawing.Point(769, 410);
-            this.basicMapY.Name = "comboBox12";
+            this.basicMapY.Name = "basicMapY";
             this.basicMapY.Size = new System.Drawing.Size(136, 20);
             this.basicMapY.TabIndex = 10032;
             // 
@@ -302,20 +302,20 @@
             this.simpleBarY.Size = new System.Drawing.Size(136, 23);
             this.simpleBarY.TabIndex = 10057;
             // 
-            // comCheckBoxList1
+            // basicLineChartY
             // 
             this.basicLineChartY.DataSource = null;
             this.basicLineChartY.Location = new System.Drawing.Point(769, 159);
             this.basicLineChartY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.basicLineChartY.Name = "comCheckBoxList1";
+            this.basicLineChartY.Name = "basicLineChartY";
             this.basicLineChartY.Size = new System.Drawing.Size(136, 23);
             this.basicLineChartY.TabIndex = 10061;
             // 
-            // comboBox3
+            // basicLineChartX
             // 
             this.basicLineChartX.FormattingEnabled = true;
             this.basicLineChartX.Location = new System.Drawing.Point(550, 159);
-            this.basicLineChartX.Name = "comboBox3";
+            this.basicLineChartX.Name = "basicLineChartX";
             this.basicLineChartX.Size = new System.Drawing.Size(136, 20);
             this.basicLineChartX.TabIndex = 10060;
             // 
@@ -337,20 +337,20 @@
             this.label8.TabIndex = 10058;
             this.label8.Text = "横轴：";
             // 
-            // comCheckBoxList2
+            // smoothedLineChartY
             // 
             this.smoothedLineChartY.DataSource = null;
             this.smoothedLineChartY.Location = new System.Drawing.Point(769, 219);
             this.smoothedLineChartY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.smoothedLineChartY.Name = "comCheckBoxList2";
+            this.smoothedLineChartY.Name = "smoothedLineChartY";
             this.smoothedLineChartY.Size = new System.Drawing.Size(136, 23);
             this.smoothedLineChartY.TabIndex = 10065;
             // 
-            // comboBox4
+            // smoothedLineChartX
             // 
             this.smoothedLineChartX.FormattingEnabled = true;
             this.smoothedLineChartX.Location = new System.Drawing.Point(550, 219);
-            this.smoothedLineChartX.Name = "comboBox4";
+            this.smoothedLineChartX.Name = "smoothedLineChartX";
             this.smoothedLineChartX.Size = new System.Drawing.Size(136, 20);
             this.smoothedLineChartX.TabIndex = 10064;
             // 
@@ -372,20 +372,20 @@
             this.label11.TabIndex = 10062;
             this.label11.Text = "横轴：";
             // 
-            // comCheckBoxList3
+            // basicScatterY
             // 
             this.basicScatterY.DataSource = null;
             this.basicScatterY.Location = new System.Drawing.Point(769, 283);
             this.basicScatterY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.basicScatterY.Name = "comCheckBoxList3";
+            this.basicScatterY.Name = "basicScatterY";
             this.basicScatterY.Size = new System.Drawing.Size(136, 23);
             this.basicScatterY.TabIndex = 10069;
             // 
-            // comboBox7
+            // basicScatterX
             // 
             this.basicScatterX.FormattingEnabled = true;
             this.basicScatterX.Location = new System.Drawing.Point(550, 283);
-            this.basicScatterX.Name = "comboBox7";
+            this.basicScatterX.Name = "basicScatterX";
             this.basicScatterX.Size = new System.Drawing.Size(136, 20);
             this.basicScatterX.TabIndex = 10068;
             // 
@@ -407,20 +407,20 @@
             this.label14.TabIndex = 10066;
             this.label14.Text = "横轴：";
             // 
-            // comCheckBoxList4
+            // stackBarY
             // 
             this.stackBarY.DataSource = null;
             this.stackBarY.Location = new System.Drawing.Point(769, 99);
             this.stackBarY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.stackBarY.Name = "comCheckBoxList4";
+            this.stackBarY.Name = "stackBarY";
             this.stackBarY.Size = new System.Drawing.Size(136, 23);
             this.stackBarY.TabIndex = 10073;
             // 
-            // comboBox8
+            // basicPieX
             // 
             this.basicPieX.FormattingEnabled = true;
             this.basicPieX.Location = new System.Drawing.Point(550, 347);
-            this.basicPieX.Name = "comboBox8";
+            this.basicPieX.Name = "basicPieX";
             this.basicPieX.Size = new System.Drawing.Size(136, 20);
             this.basicPieX.TabIndex = 10072;
             // 
@@ -482,8 +482,8 @@
             this.Controls.Add(this.captionBar2);
             this.Controls.Add(this.captionBar1);
             this.Controls.Add(this.simpleBarX);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.bossType);
+            this.Controls.Add(this.datasource);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
@@ -496,8 +496,8 @@
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.comboBox1, 0);
-            this.Controls.SetChildIndex(this.comboBox2, 0);
+            this.Controls.SetChildIndex(this.datasource, 0);
+            this.Controls.SetChildIndex(this.bossType, 0);
             this.Controls.SetChildIndex(this.simpleBarX, 0);
             this.Controls.SetChildIndex(this.captionBar1, 0);
             this.Controls.SetChildIndex(this.captionBar2, 0);
@@ -545,8 +545,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox datasource;
+        private System.Windows.Forms.ComboBox bossType;
         private System.Windows.Forms.ComboBox simpleBarX;
         private Controls.CaptionBar captionBar1;
         private Controls.CaptionBar captionBar2;

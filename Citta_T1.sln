@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QQSpiderPlugin", "C2Plugins
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD5Plugin", "C2Plugins\MD5Plugin\MD5Plugin.csproj", "{9F165641-517E-47A2-A3E1-4CD783A8C6FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2Shell", "C2Shell\C2Shell.csproj", "{BFE970DC-96FE-47B4-AC1D-D140B6F27E51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2Shell", "C2Shell\C2Shell.csproj", "{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,12 +84,12 @@ Global
 		{9F165641-517E-47A2-A3E1-4CD783A8C6FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F165641-517E-47A2-A3E1-4CD783A8C6FD}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
 		{9F165641-517E-47A2-A3E1-4CD783A8C6FD}.开发调试|Any CPU.Build.0 = Release|Any CPU
-		{BFE970DC-96FE-47B4-AC1D-D140B6F27E51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFE970DC-96FE-47B4-AC1D-D140B6F27E51}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFE970DC-96FE-47B4-AC1D-D140B6F27E51}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFE970DC-96FE-47B4-AC1D-D140B6F27E51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFE970DC-96FE-47B4-AC1D-D140B6F27E51}.开发调试|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFE970DC-96FE-47B4-AC1D-D140B6F27E51}.开发调试|Any CPU.Build.0 = Debug|Any CPU
+		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
+		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.开发调试|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
