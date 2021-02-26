@@ -13,7 +13,7 @@ namespace C2Shell
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("==============ok========");
+            
             IsNeedUpdate();
 
             StartCoreProcess();
@@ -21,10 +21,11 @@ namespace C2Shell
         }
         private static void IsNeedUpdate()
         {
-            // update路径是否为空
-            //  string packagePath = Path.Combine(Application.StartupPath, "update");
-            string packagePath = string.Empty;
-            if (Directory.Exists(packagePath))
+            // update目录是否为空
+           
+            string packagePath = Path.Combine(Application.StartupPath, "update");
+            string[] files = System.IO.Directory.GetFiles(packagePath);
+            if (files.Length != 1 || !files[0].EndsWith(".zip"))
                 return;
             if (!ExecuteUpdate())
             {
@@ -45,11 +46,10 @@ namespace C2Shell
         }
         private static void StartCoreProcess()
         {
-            //string strPathExe = Environment.CurrentDirectory + "\\FaceRecognition" + "\\IDFaceDemo.exe";
-            //Process process = new System.Diagnostics.Process();
-            //process.StartInfo.FileName = strPathExe;
-
-            //process.Start();
+            string strPathExe = Application.StartupPath  + "\\C2.exe";
+            Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = strPathExe;
+            process.Start();
 
         }
     }

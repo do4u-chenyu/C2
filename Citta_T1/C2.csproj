@@ -227,6 +227,7 @@
     <Compile Include="Controls\DataCharts\RingChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Core\Exports\XmindEngine.cs" />
     <Compile Include="Database\BaseDAOImpl.cs" />
     <Compile Include="Database\DAOException.cs" />
     <Compile Include="Database\DAOFactory.cs" />
@@ -335,6 +336,7 @@
     </Compile>
     <Compile Include="IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
     <Compile Include="IAOLab\WebEngine\WebManager.cs" />
+    <Compile Include="Model\MindMaps\XmindFile.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
     <Compile Include="Utils\GenericSingleton.cs" />
     <Compile Include="Database\IDAO.cs" />
@@ -2713,6 +2715,7 @@
     <None Include="Resources\Templates\树状图.xml" />
     <None Include="Resources\Templates\思维导图.xml" />
     <None Include="Resources\Templates\空模板.xml" />
+    <None Include="Resources\styles.xml" />
     <Content Include="Resources\Templates\组织架构图.xml" />
     <None Include="Resources\Templates\逻辑图.xml" />
     <Content Include="Resources\thanks.xml">
@@ -2819,6 +2822,7 @@
     <None Include="Resources\WidgetIcon\Excel.png" />
     <None Include="Resources\WidgetIcon\地图.png" />
     <None Include="Resources\WidgetIcon\大屏.png" />
+    <None Include="Resources\XmindEngine\styles.xml" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
