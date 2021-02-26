@@ -534,8 +534,6 @@ namespace C2.Dialogs
         {
 
         }
-
-
         #endregion
 
         private void gisMapOKButton_Click(object sender, EventArgs e)
