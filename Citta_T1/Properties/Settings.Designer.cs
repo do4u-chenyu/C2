@@ -22,5 +22,41 @@ namespace C2.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("36.269395")]
+        public string lontude {
+            get {
+                return ((string)(this["lontude"]));
+            }
+            set {
+                this["lontude"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("108.876433")]
+        public string latude {
+            get {
+                return ((string)(this["latude"]));
+            }
+            set {
+                this["latude"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public string scale {
+            get {
+                return ((string)(this["scale"]));
+            }
+            set {
+                this["scale"] = value;
+            }
+        }
     }
 }

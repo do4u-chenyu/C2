@@ -1,5 +1,6 @@
 ﻿using C2.Core;
 using C2.IAOLab.Plugins;
+using C2.Properties;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,15 @@ namespace C2.Dialogs
         private static readonly int CheckBoxColumnIndex = 2;
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
-
+        public string latude;
+        public string lontude ;
+        public string scale ;
         public ConfigForm()
         {
             InitializeComponent();
+            latude = this.baiduLatTB.Text = Settings.Default.latude;
+            lontude =this.baiduLonTB.Text = Settings.Default.lontude;
+            scale = this.baiduScaleTB.Text = Settings.Default.scale;
         }
 
         private void UserModelOkButton_Click(object sender, EventArgs e)
@@ -447,6 +453,8 @@ namespace C2.Dialogs
                     e.Handled = false;
                 }
             }
+            if (e.Handled == true)
+                latude = this.baiduLatTB.Text; 
         }
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
@@ -475,22 +483,12 @@ namespace C2.Dialogs
                     e.Handled = false;
                 }
             }
+            if (e.Handled == true)
+                lontude = this.baiduLonTB.Text;
         }
 
         private void baiduGISKeyTB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //if (e.KeyChar != '\b' && !Char.IsDigit(e.KeyChar))
-            //{
-            //    e.Handled = true;
-            //}
-            //else if (e.KeyChar == '-' && ((TextBox)sender).Text.Length > 1)
-            //{
-            //    e.Handled = true;
-            //}
-            //else if (int.Parse(((TextBox)sender).Text) <10 || int.Parse(((TextBox)sender).Text) >= 5 && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
-            //{
-            //    e.Handled = true;
-            //}
             if (!System.Text.RegularExpressions.Regex.IsMatch(e.KeyChar.ToString(), "^([5-9])$") && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
             {
 
@@ -500,6 +498,9 @@ namespace C2.Dialogs
             {
                 e.Handled = false;
             }
+            if (e.Handled == true)
+                scale = this.baiduScaleTB.Text;
+
         }
 
 
@@ -534,8 +535,16 @@ namespace C2.Dialogs
 
         }
 
+
         #endregion
 
-
+        private void gisMapOKButton_Click(object sender, EventArgs e)
+        {
+            Settings.Default.latude = this.baiduLatTB.Text;
+            Settings.Default.lontude = this.baiduLonTB.Text;
+            Settings.Default.scale = this.baiduScaleTB.Text;
+            Settings.Default.Save();
+            this.Close();
+        }
     }
 }

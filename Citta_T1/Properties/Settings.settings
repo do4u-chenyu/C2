@@ -1,7 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="C2.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="lontude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">36.269395</Value>
+    </Setting>
+    <Setting Name="latude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">108.876433</Value>
+    </Setting>
+    <Setting Name="scale" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
