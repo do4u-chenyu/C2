@@ -34,14 +34,36 @@ namespace C2.IAOLab.WebEngine.Boss
                 dataTable = dataTable
             };
             echarts.AddTheme(Theme.phx);
+            foreach(string eType in chartOptions.Keys)
+            {
+                switch (eType)
+                {
+                    case "SimpleBar":
+                        echarts[1] = new SimpleBar(new CompleteOption(), chartOptions["SimpleBar"]);
+                        break;
+                    case "BasicLineChart":
+                        echarts[2] = new BasicLineChart(new CompleteOption(), chartOptions["BasicLineChart"]);
+                        break;
+                    case "BasicScatter":
+                        echarts[3] = new BasicScatter(new CompleteOption(), chartOptions["BasicScatter"]);
+                        break;
+                    case "SmoothedLineChart":
+                        echarts[4] = new SmoothedLineChart(new CompleteOption(), chartOptions["SmoothedLineChart"]);
+                        break;
+                    case "StackBar":
+                        echarts[5] = new StackBar(new CompleteOption(), chartOptions["StackBar"]);
+                        break;
+                    case "BasicPie":
+                        echarts[6] = new BasicPie(new CompleteOption(), chartOptions["BasicPie"]);
+                        break;
+                    case "BasicMap":
+                        echarts[7] = new BasicMap(new CompleteOption("map"), chartOptions["BasicMap"]);
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-            echarts[1] = new SimpleBar(new CompleteOption(), chartOptions["SimpleBar"]);      //柱状图
-            echarts[2] = new BasicLineChart(new CompleteOption(), chartOptions["SimpleBar"]); //折线图
-            echarts[3] = new BasicScatter(new CompleteOption(), chartOptions["SimpleBar"]);   //散点图
-            echarts[4] = new SmoothedLineChart(new CompleteOption(), chartOptions["SimpleBar"]);  //曲线图
-            echarts[5] = new StackBar(new CompleteOption(), chartOptions["SimpleBar"]);  //堆叠柱状图
-            echarts[6] = new BasicPie(new CompleteOption(), chartOptions["SimpleBar"]);  //饼状图
-            echarts[7] = new BasicMap(new CompleteOption("map"), chartOptions["SimpleBar"]);  //地市分布图
             return echarts.Show();
         }
 
