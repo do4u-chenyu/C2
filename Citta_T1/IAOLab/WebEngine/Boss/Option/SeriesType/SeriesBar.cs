@@ -21,8 +21,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public SeriesBar()
         {
             Common.InitOptionFlag(this, FlagDic, TypeDic);
-            type = "'bar'";
-
+            type = Common.FormatString("bar");
         }
         public string type { get { return _type; } set { FlagDic["type"] = true; _type = value; } }
         public string id { get { return _id; } set { FlagDic["id"] = true; _id = value; } }
@@ -48,7 +47,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
 
         //..
         public string dimensions { get { return _dimensions; } set { FlagDic["dimensions"] = true; _dimensions = value; } }
-        public string encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
+        public Encode encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
         public string seriesLayoutBy { get { return _seriesLayoutBy; } set { FlagDic["seriesLayoutBy"] = true; _seriesLayoutBy = value; } }
         public int datasetIndex { get { return _datasetIndex; } set { FlagDic["datasetIndex"] = true; _datasetIndex = value; } }
         public BarData data { get { return _data; } set { FlagDic["data"] = true; _data = value; } }
@@ -96,7 +95,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         string _progressiveChunkMode;
 
         string _dimensions;
-        string _encode;
+        Encode _encode;
         string _seriesLayoutBy;
         int _datasetIndex;
         BarData _data;

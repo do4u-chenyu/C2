@@ -64,12 +64,12 @@
             this.gisMapOKButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.baiduGISKeyTB = new System.Windows.Forms.TextBox();
+            this.baiduScaleTB = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.baiduGISUrlTB = new System.Windows.Forms.TextBox();
+            this.baiduLonTB = new System.Windows.Forms.TextBox();
+            this.baiduLatTB = new System.Windows.Forms.TextBox();
             this.baiduGISTB = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label18 = new System.Windows.Forms.Label();
@@ -103,6 +103,7 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.availableTB = new System.Windows.Forms.TextBox();
             this.HostSubPage = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
@@ -123,6 +124,21 @@
             this.aboutOkButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.checkNewVersion = new System.Windows.Forms.TabPage();
+            this.checking = new System.Windows.Forms.Panel();
+            this.currentModelRunLab = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.newVersion = new System.Windows.Forms.Panel();
+            this.description = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.size = new System.Windows.Forms.Label();
+            this.version = new System.Windows.Forms.Label();
+            this.title = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.mainTabControl.SuspendLayout();
@@ -144,6 +160,9 @@
             this.HostSubPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.aboutConfigPage.SuspendLayout();
+            this.checkNewVersion.SuspendLayout();
+            this.checking.SuspendLayout();
+            this.newVersion.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainTabControl
@@ -153,6 +172,7 @@
             this.mainTabControl.Controls.Add(this.gisMapConfigPage);
             this.mainTabControl.Controls.Add(this.pluginsConfigPage);
             this.mainTabControl.Controls.Add(this.aboutConfigPage);
+            this.mainTabControl.Controls.Add(this.checkNewVersion);
             this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainTabControl.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.mainTabControl.Location = new System.Drawing.Point(0, 0);
@@ -419,6 +439,7 @@
             this.gisMapOKButton.TabIndex = 6;
             this.gisMapOKButton.Text = "确认";
             this.gisMapOKButton.UseVisualStyleBackColor = true;
+            this.gisMapOKButton.Click += new System.EventHandler(this.gisMapOKButton_Click);
             // 
             // tabControl1
             // 
@@ -434,12 +455,12 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.baiduGISKeyTB);
+            this.tabPage1.Controls.Add(this.baiduScaleTB);
             this.tabPage1.Controls.Add(this.label15);
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.label17);
-            this.tabPage1.Controls.Add(this.textBox2);
-            this.tabPage1.Controls.Add(this.baiduGISUrlTB);
+            this.tabPage1.Controls.Add(this.baiduLonTB);
+            this.tabPage1.Controls.Add(this.baiduLatTB);
             this.tabPage1.Controls.Add(this.baiduGISTB);
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
@@ -449,56 +470,57 @@
             this.tabPage1.Text = "百度地图(外网)";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // baiduGISKeyTB
+            // baiduScaleTB
             // 
-            this.baiduGISKeyTB.Location = new System.Drawing.Point(50, 101);
-            this.baiduGISKeyTB.Name = "baiduGISKeyTB";
-            this.baiduGISKeyTB.Size = new System.Drawing.Size(245, 23);
-            this.baiduGISKeyTB.TabIndex = 13;
-            this.baiduGISKeyTB.Text = "15";
+            this.baiduScaleTB.Location = new System.Drawing.Point(91, 100);
+            this.baiduScaleTB.Name = "baiduScaleTB";
+            this.baiduScaleTB.Size = new System.Drawing.Size(309, 23);
+            this.baiduScaleTB.TabIndex = 13;
+            this.toolTip1.SetToolTip(this.baiduScaleTB, "初始缩放比值请设置5-9区间");
+            this.baiduScaleTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.baiduGISKeyTB_KeyPress);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 103);
+            this.label15.Location = new System.Drawing.Point(38, 103);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(33, 17);
+            this.label15.Size = new System.Drawing.Size(47, 17);
             this.label15.TabIndex = 12;
-            this.label15.Text = "Key:";
+            this.label15.Text = "缩放比:";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(9, 62);
+            this.label16.Location = new System.Drawing.Point(22, 62);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(39, 17);
+            this.label16.Size = new System.Drawing.Size(63, 17);
             this.label16.TabIndex = 11;
-            this.label16.Text = "端口 :";
+            this.label16.Text = "初始纬度 :";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(9, 21);
+            this.label17.Location = new System.Drawing.Point(22, 21);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(39, 17);
+            this.label17.Size = new System.Drawing.Size(63, 17);
             this.label17.TabIndex = 10;
-            this.label17.Text = "地址 :";
+            this.label17.Text = "初始经度 :";
             // 
-            // textBox2
+            // baiduLonTB
             // 
-            this.textBox2.Location = new System.Drawing.Point(50, 60);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(71, 23);
-            this.textBox2.TabIndex = 9;
-            this.textBox2.Text = "8484";
+            this.baiduLonTB.Location = new System.Drawing.Point(91, 59);
+            this.baiduLonTB.Name = "baiduLonTB";
+            this.baiduLonTB.Size = new System.Drawing.Size(309, 23);
+            this.baiduLonTB.TabIndex = 9;
+            this.baiduLonTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
-            // baiduGISUrlTB
+            // baiduLatTB
             // 
-            this.baiduGISUrlTB.Location = new System.Drawing.Point(50, 19);
-            this.baiduGISUrlTB.Name = "baiduGISUrlTB";
-            this.baiduGISUrlTB.Size = new System.Drawing.Size(371, 23);
-            this.baiduGISUrlTB.TabIndex = 8;
-            this.baiduGISUrlTB.Text = "218.94.117.234";
+            this.baiduLatTB.Location = new System.Drawing.Point(91, 18);
+            this.baiduLatTB.Name = "baiduLatTB";
+            this.baiduLatTB.Size = new System.Drawing.Size(309, 23);
+            this.baiduLatTB.TabIndex = 8;
+            this.baiduLatTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.baiduGISUrlTB_KeyPress);
             // 
             // baiduGISTB
             // 
@@ -508,7 +530,7 @@
             this.baiduGISTB.ReadOnly = true;
             this.baiduGISTB.Size = new System.Drawing.Size(620, 102);
             this.baiduGISTB.TabIndex = 7;
-            this.baiduGISTB.Text = "基于百度地图的图上作战功能，需要百度地图服务器地址和百度开发者key，支持图上打点，轨迹图，区域图，热力图，自定义脚本...";
+            this.baiduGISTB.Text = "基于百度地图的图上作战功能，需要百度地图服务器地址和百度开发者key，支持图上打点，轨迹图，区域图，热力图，自定义脚本...\r\n";
             // 
             // tabPage2
             // 
@@ -520,10 +542,10 @@
             this.tabPage2.Controls.Add(this.FHGISPortTB);
             this.tabPage2.Controls.Add(this.FHGISHostTB);
             this.tabPage2.Controls.Add(this.fhGISTB);
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(626, 313);
+            this.tabPage2.Size = new System.Drawing.Size(626, 317);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "FHGIS(内网)";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -606,10 +628,10 @@
             this.tabPage3.Controls.Add(this.button4);
             this.tabPage3.Controls.Add(this.textBox9);
             this.tabPage3.Controls.Add(this.pictureBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(626, 313);
+            this.tabPage3.Size = new System.Drawing.Size(626, 317);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "WebKit内核下载";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -713,7 +735,7 @@
             this.pluginsTabControl.SelectedIndex = 0;
             this.pluginsTabControl.Size = new System.Drawing.Size(634, 343);
             this.pluginsTabControl.TabIndex = 0;
-        
+            this.pluginsTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.PluginsTabControl_Selected);
             // 
             // installedSubPage
             // 
@@ -794,6 +816,7 @@
             this.installedTB.Location = new System.Drawing.Point(3, 176);
             this.installedTB.Multiline = true;
             this.installedTB.Name = "installedTB";
+            this.installedTB.ReadOnly = true;
             this.installedTB.Size = new System.Drawing.Size(620, 102);
             this.installedTB.TabIndex = 0;
             // 
@@ -831,7 +854,8 @@
             this.availableDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
-            this.dataGridViewCheckBoxColumn2});
+            this.dataGridViewCheckBoxColumn2,
+            this.Column1});
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle18.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -883,11 +907,18 @@
             this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
             this.dataGridViewCheckBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "说明";
+            this.Column1.Name = "Column1";
+            this.Column1.Visible = false;
+            // 
             // availableTB
             // 
             this.availableTB.Location = new System.Drawing.Point(3, 176);
             this.availableTB.Multiline = true;
             this.availableTB.Name = "availableTB";
+            this.availableTB.ReadOnly = true;
             this.availableTB.Size = new System.Drawing.Size(620, 102);
             this.availableTB.TabIndex = 5;
             // 
@@ -943,7 +974,7 @@
             this.pluginsTimeoutTB.Name = "pluginsTimeoutTB";
             this.pluginsTimeoutTB.Size = new System.Drawing.Size(33, 23);
             this.pluginsTimeoutTB.TabIndex = 5;
-            this.pluginsTimeoutTB.Text = "15";
+            this.pluginsTimeoutTB.Text = "10";
             // 
             // label11
             // 
@@ -1087,6 +1118,161 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "关于";
             // 
+            // checkNewVersion
+            // 
+            this.checkNewVersion.Controls.Add(this.checking);
+            this.checkNewVersion.Location = new System.Drawing.Point(4, 26);
+            this.checkNewVersion.Name = "checkNewVersion";
+            this.checkNewVersion.Size = new System.Drawing.Size(634, 380);
+            this.checkNewVersion.TabIndex = 6;
+            this.checkNewVersion.Text = "检查更新";
+            this.checkNewVersion.UseVisualStyleBackColor = true;
+            // 
+            // checking
+            // 
+            this.checking.BackColor = System.Drawing.Color.White;
+            this.checking.Controls.Add(this.currentModelRunLab);
+            this.checking.Controls.Add(this.label23);
+            this.checking.Controls.Add(this.textBox1);
+            this.checking.Controls.Add(this.button1);
+            this.checking.Controls.Add(this.newVersion);
+            this.checking.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checking.Location = new System.Drawing.Point(0, 0);
+            this.checking.Name = "checking";
+            this.checking.Size = new System.Drawing.Size(634, 380);
+            this.checking.TabIndex = 6;
+            // 
+            // currentModelRunLab
+            // 
+            this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.currentModelRunLab.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.currentModelRunLab.Image = global::C2.Properties.Resources.checkUpdate;
+            this.currentModelRunLab.Location = new System.Drawing.Point(224, 171);
+            this.currentModelRunLab.Name = "currentModelRunLab";
+            this.currentModelRunLab.Size = new System.Drawing.Size(189, 45);
+            this.currentModelRunLab.TabIndex = 29;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Image = global::C2.Properties.Resources.checkUpdate;
+            this.label23.Location = new System.Drawing.Point(98, 199);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(0, 17);
+            this.label23.TabIndex = 7;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("华文宋体", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Location = new System.Drawing.Point(270, 148);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(143, 20);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "正在检查更新";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(550, 348);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "取消";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.CancleUpdate_Click);
+            // 
+            // newVersion
+            // 
+            this.newVersion.Controls.Add(this.description);
+            this.newVersion.Controls.Add(this.label28);
+            this.newVersion.Controls.Add(this.label27);
+            this.newVersion.Controls.Add(this.size);
+            this.newVersion.Controls.Add(this.version);
+            this.newVersion.Controls.Add(this.title);
+            this.newVersion.Controls.Add(this.button3);
+            this.newVersion.Controls.Add(this.button2);
+            this.newVersion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.newVersion.Location = new System.Drawing.Point(0, 0);
+            this.newVersion.Name = "newVersion";
+            this.newVersion.Size = new System.Drawing.Size(634, 380);
+            this.newVersion.TabIndex = 7;
+            this.newVersion.Visible = false;
+            // 
+            // description
+            // 
+            this.description.Location = new System.Drawing.Point(8, 119);
+            this.description.Multiline = true;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            this.description.Size = new System.Drawing.Size(618, 216);
+            this.description.TabIndex = 13;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(115, 83);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(38, 17);
+            this.label28.TabIndex = 12;
+            this.label28.Text = "17KB";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(115, 53);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(35, 17);
+            this.label27.TabIndex = 11;
+            this.label27.Text = "2.1.2";
+            // 
+            // size
+            // 
+            this.size.AutoSize = true;
+            this.size.Location = new System.Drawing.Point(39, 83);
+            this.size.Name = "size";
+            this.size.Size = new System.Drawing.Size(59, 17);
+            this.size.TabIndex = 10;
+            this.size.Text = "下载大小:";
+            // 
+            // version
+            // 
+            this.version.AutoSize = true;
+            this.version.Location = new System.Drawing.Point(39, 53);
+            this.version.Name = "version";
+            this.version.Size = new System.Drawing.Size(59, 17);
+            this.version.TabIndex = 9;
+            this.version.Text = "更新版本:";
+            // 
+            // title
+            // 
+            this.title.AutoSize = true;
+            this.title.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.title.Location = new System.Drawing.Point(12, 16);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(74, 22);
+            this.title.TabIndex = 8;
+            this.title.Text = "更新可用";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(457, 348);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "更新";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.UpdateSoftware_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(550, 348);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "关闭";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.CancleUpdate_Click);
+            // 
             // pythonOpenFileDialog
             // 
             this.pythonOpenFileDialog.DefaultExt = "exe";
@@ -1136,6 +1322,11 @@
             this.groupBox1.PerformLayout();
             this.aboutConfigPage.ResumeLayout(false);
             this.aboutConfigPage.PerformLayout();
+            this.checkNewVersion.ResumeLayout(false);
+            this.checking.ResumeLayout(false);
+            this.checking.PerformLayout();
+            this.newVersion.ResumeLayout(false);
+            this.newVersion.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1183,9 +1374,6 @@
         private System.Windows.Forms.TabPage availableSubPage;
         private System.Windows.Forms.Button installButton;
         private System.Windows.Forms.DataGridView availableDGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
         private System.Windows.Forms.TextBox availableTB;
         private System.Windows.Forms.TabPage HostSubPage;
         private System.Windows.Forms.Label label13;
@@ -1208,12 +1396,12 @@
         private System.Windows.Forms.Button gisMapOKButton;
         private System.Windows.Forms.TextBox baiduGISTB;
         private System.Windows.Forms.TextBox fhGISTB;
-        private System.Windows.Forms.TextBox baiduGISKeyTB;
+        private System.Windows.Forms.TextBox baiduScaleTB;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox baiduGISUrlTB;
+        private System.Windows.Forms.TextBox baiduLonTB;
+        private System.Windows.Forms.TextBox baiduLatTB;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label19;
@@ -1228,5 +1416,24 @@
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TabPage checkNewVersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.Panel checking;
+        private System.Windows.Forms.Panel newVersion;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label size;
+        private System.Windows.Forms.Label version;
+        private System.Windows.Forms.Label title;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label currentModelRunLab;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox description;
     }
 }

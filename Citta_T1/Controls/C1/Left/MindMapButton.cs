@@ -70,7 +70,7 @@ namespace C2.Controls.Left
 
             string modelDic = Path.Combine(Global.UserWorkspacePath, "业务视图", ModelTitle);
             FileUtil.DeleteDirectory(modelDic);
-            Global.GetMindMapModelControl().RemoveModelButton(this);
+            Global.GetMindMapModelControl().RemoveMindMapButton(this);
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -173,6 +173,13 @@ namespace C2.Controls.Left
                 this.DeleteToolStripMenuItem.Enabled = true;
             }
 
+        }
+
+        private void MindMapModelButton_Load(object sender, EventArgs e)
+        {
+            // 模型全路径浮动提示信息
+            String helpInfo = FullFilePath;
+            this.toolTip1.SetToolTip(this.rightPictureBox, helpInfo);
         }
     }
 }

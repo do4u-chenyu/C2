@@ -42,7 +42,7 @@
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(75, 25);
             this.BtnClose.TabIndex = 0;
-            this.BtnClose.Text = "Close";
+            this.BtnClose.Text = "关闭";
             this.BtnClose.UseVisualStyleBackColor = true;
             this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
@@ -74,7 +74,7 @@
             this.BtnOpen.Name = "BtnOpen";
             this.BtnOpen.Size = new System.Drawing.Size(100, 23);
             this.BtnOpen.TabIndex = 5;
-            this.BtnOpen.Text = "Open File";
+            this.BtnOpen.Text = "打开文件";
             this.BtnOpen.UseVisualStyleBackColor = true;
             this.BtnOpen.Click += new System.EventHandler(this.BtnOpen_Click);
             // 
@@ -85,7 +85,7 @@
             this.BtnOpenFolder.Name = "BtnOpenFolder";
             this.BtnOpenFolder.Size = new System.Drawing.Size(180, 23);
             this.BtnOpenFolder.TabIndex = 6;
-            this.BtnOpenFolder.Text = "Open Containing Folder";
+            this.BtnOpenFolder.Text = "打开所在文件夹";
             this.BtnOpenFolder.UseVisualStyleBackColor = true;
             this.BtnOpenFolder.Click += new System.EventHandler(this.BtnOpenFolder_Click);
             // 

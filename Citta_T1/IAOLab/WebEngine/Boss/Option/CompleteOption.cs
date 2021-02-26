@@ -19,6 +19,13 @@ namespace C2.IAOLab.WebEngine.Boss.Option
             legend = new Legend();
             tooltip = new Tooltip();
         }
+        public CompleteOption(string flag)
+        {
+            //TODO phx 地市分布图不需要legend，暂时这么写
+            Common.InitOptionFlag(this, FlagDic, TypeDic);
+            if (flag == "map")
+                tooltip = new Tooltip();
+        }
         /// <summary>
         /// [已完成]标题组件，包含主标题和副标题
         /// </summary>
@@ -49,7 +56,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         public string angleAxis { get { return _angleAxis; } set { FlagDic["angleAxis"] = true; _angleAxis = value; } }
         public string radar { get { return _radar; } set { FlagDic["radar"] = true; _radar = value; } }
         public string dataZoom { get { return _dataZoom; } set { FlagDic["dataZoom"] = true; _dataZoom = value; } }
-        public string visualMap { get { return _visualMap; } set { FlagDic["visualMap"] = true; _visualMap = value; } }
+        public VisualMap visualMap { get { return _visualMap; } set { FlagDic["visualMap"] = true; _visualMap = value; } }
         /// <summary>
         /// [已完成] 提示框组件。
         /// </summary>
@@ -71,7 +78,8 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         /// 数据集（dataset）组件用于单独的数据集声明
         /// 教程：https://echarts.baidu.com/tutorial.html#%E4%BD%BF%E7%94%A8%20dataset%20%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE
         /// </summary>
-        public DataSetSource dataset { get { return _dataset; } set { FlagDic["dataset"] = true; _dataset = value; } }
+        public string dataset { get { return _dataset2; } set { FlagDic["dataset"] = true; _dataset2 = value; } }
+        //public DataSetSource dataset { get { return _dataset; } set { FlagDic["dataset"] = true; _dataset = value; } }
         /// <summary>
         /// [不支持]无障碍富互联网应用规范集
         /// </summary>
@@ -118,7 +126,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         string _angleAxis;
         string _radar;
         string _dataZoom;
-        string _visualMap;
+        VisualMap _visualMap;
         Tooltip _tooltip;
         string _axisPointer;
         ToolBox _toolbox;
@@ -130,7 +138,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         string _timeline;
         string _graphic;
         string _calendar;
-        DataSetSource _dataset;
+        string _dataset2;   
         string _aria;
         Series _series;
         string _color;

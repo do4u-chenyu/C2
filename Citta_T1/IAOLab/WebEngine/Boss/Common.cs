@@ -8,7 +8,11 @@ namespace C2.IAOLab.WebEngine.Boss
 {
     public class Common
     {
-        
+        public const string FormatDatas = "{ source: datas }";
+        public static string FormatString(string str)
+        {
+            return string.Format("'{0}'",str);
+        }
         
         public static string GetPro(string str, string repalce = null)
         {
@@ -117,6 +121,29 @@ namespace C2.IAOLab.WebEngine.Boss
                         cou++;
                     }
                 }
+                data[rowCou] = Common.Join(rowData);
+                rowCou++;
+            }
+
+            return Common.Join(data, "", ',', "[]", true);
+        }
+
+        public static string GetDataSetSource(DataTable dataTable)
+        {
+            string[] data = new string[dataTable.Rows.Count + 1];
+
+            string[] header = new string[dataTable.Columns.Count];
+            for (int i = 0; i < dataTable.Columns.Count; i++)
+                header[i] = dataTable.Columns[i].ColumnName;
+            data[0] = Common.Join(header);
+
+            int rowCou = 1;
+            foreach (DataRow row in dataTable.Rows)
+            {
+                string[] rowData = new string[dataTable.Columns.Count];
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                    rowData[i] = row[i].ToString();
+
                 data[rowCou] = Common.Join(rowData);
                 rowCou++;
             }

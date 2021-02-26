@@ -263,6 +263,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap BossStyle01 {
+            get {
+                object obj = ResourceManager.GetObject("BossStyle01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap businessoutline {
             get {
                 object obj = ResourceManager.GetObject("businessoutline", resourceCulture);
@@ -317,6 +327,16 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("check_update1", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap checkUpdate {
+            get {
+                object obj = ResourceManager.GetObject("checkUpdate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

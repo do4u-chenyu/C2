@@ -1,4 +1,12 @@
 ﻿.vs
+C2Shell/bin/Debug
+C2Shell/bin/开发调试
+C2Shell/bin/Release
+C2Shell/bin
+C2Shell/obj/Debug
+C2Shell/obj/开发调试
+C2Shell/obj/Release
+C2Shell/obj
 Citta_T1/obj/Debug
 Citta_T1/bin/Debug
 Citta_T1/bin/Release
@@ -73,8 +81,12 @@ C2自动化测试样例/obj
 C2自动化测试样例/bin
 /packages/MSTest.TestAdapter.2.1.1
 /packages/MSTest.TestFramework.2.1.1
-C2Plugins/TestPlugin/bin
-C2Plugins/TestPlugin/obj
+C2Plugins/RookieKnowledgePlugin/bin
+C2Plugins/RookieKnowledgePlugin/obj
+C2Plugins/QQSpiderPlugin/bin
+C2Plugins/QQSpiderPlugin/obj
 C2Plugins/Game2048Plugin/bin
 C2Plugins/Game2048Plugin/obj
+C2Plugins/MD5Plugin/bin
+C2Plugins/MD5Plugin/obj
 /Citta_T1/datas/jiangsu111111111111111111111.txt

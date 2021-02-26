@@ -75,6 +75,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ConsoleControl">
@@ -95,7 +96,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.TextEditorEx">
+    <Reference Include="ICSharpCode.TextEditorEx, Version=1.0.0.6, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\ICSharpCode.TextEditorEx.1.0.0.6\lib\net40\ICSharpCode.TextEditorEx.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
@@ -238,6 +240,7 @@
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\BasicAreachart.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\BasicLineChart.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\SmoothedLineChart.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Charts\Map\BasicMap.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Pie\BasicPie.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Radar\BasicRadar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Scatter\BasicScatter.cs" />
@@ -245,7 +248,6 @@
     <Compile Include="IAOLab\WebEngine\Boss\Echarts.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\EchartsInitialize.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\GenBossHtml.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Node.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\JSBeautify.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\BaseEOption.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\AxisPointer.cs" />
@@ -270,6 +272,7 @@
     <Compile Include="IAOLab\WebEngine\Boss\Option\DataSetSource.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\Grid.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\Legend.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\MapLabel.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\Polar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\Series.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\BarBaseOption\BarData.cs" />
@@ -293,10 +296,12 @@
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\ScatterBaseOption\ScatterData.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Emphasis.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Encode.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\ItemStyle.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Label.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Position.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesLine.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesMap.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPie.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesRadar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesScatter.cs" />
@@ -305,11 +310,17 @@
     <Compile Include="IAOLab\WebEngine\Boss\Option\Title.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\ToolBox.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\Tooltip.cs" />
+    <Compile Include="IAOLab\WebEngine\Boss\Option\VisualMap.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\XAxis.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Option\YAxis.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\RemarkAttribute.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Table.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Theme.cs" />
+    <Compile Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.Designer.cs">
+      <DependentUpon>SelectBossDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="IAOLab\WebEngine\WebBrowserConfig.cs" />
     <Compile Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.cs">
       <SubType>Form</SubType>
@@ -1776,6 +1787,9 @@
     <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.resx">
+      <DependentUpon>SelectBossDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.resx">
       <DependentUpon>SelectMapDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1890,13 +1904,13 @@
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <None Include="Resources\arrow_query.bmp" />
+    <Content Include="IAOLab\WebEngine\css\DrawingManager_min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="IAOLab\WebEngine\css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\Html\BossIndex01.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="IAOLab\WebEngine\Html\EchartIndex.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\Html\StartMap.html">
@@ -1923,16 +1937,17 @@
     <Content Include="IAOLab\WebEngine\img\bg.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\bossLayout.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="IAOLab\WebEngine\img\BossStyle01.png" />
     <Content Include="IAOLab\WebEngine\JS\china.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\echarts.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="IAOLab\WebEngine\JS\DistanceTool_min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\mapfuction.js">
+    <Content Include="IAOLab\WebEngine\JS\DrawingManager_min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\JS\echarts.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\JS\phx.js">
@@ -2078,6 +2093,7 @@
     <None Include="Resources\Images\preview.png" />
     <None Include="Resources\Images\previous.png" />
     <None Include="Resources\Images\preferences_16.png" />
+    <None Include="Resources\Images\Preference\checkUpdate.gif" />
     <Content Include="Resources\Images\print.png" />
     <None Include="Resources\Images\print_pages.png" />
     <None Include="Resources\Images\print_single_page.png" />

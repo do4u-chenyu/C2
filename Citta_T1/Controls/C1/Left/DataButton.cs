@@ -1,5 +1,4 @@
-﻿
-using C2.Business.Model;
+﻿using C2.Business.Model;
 using C2.Core;
 using C2.Model;
 using C2.Utils;
@@ -28,7 +27,7 @@ namespace C2.Controls.Left
         {
             InitializeComponent();
             txtButton.Name = ffp;
-            txtButton.Text = Utils.FileUtil.ReName(dataSourceName);
+            txtButton.Text = dataSourceName;
             this.separator = separator;
             this.extType = extType;
             this.encoding = encoding;
@@ -40,16 +39,15 @@ namespace C2.Controls.Left
         {
             // 数据源全路径浮动提示信息
             String helpInfo = FullFilePath;
+            this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
             // 数据源名称浮动提示信息
-            helpInfo = DataSourceName;
             helpInfo = String.Format(DataButtonFlowTemplate,
                                     encoding.ToString(),
                                     this.ExtType,
                                     0,
                                     this.Separator == OpUtil.TabSeparator ? "TAB" : this.Separator.ToString());
-            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+           this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
-
 
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,16 +56,6 @@ namespace C2.Controls.Left
             Global.GetMainForm().ShowBottomPanel();
         }
 
-        //private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    this.textBox.ReadOnly = false;
-        //    this.oldTextString = DataSourceName;
-        //    this.textBox.Text = DataSourceName;
-        //    this.txtButton.Visible = false;
-        //    this.textBox.Visible = true;
-        //    this.textBox.Focus();//获取焦点
-        //    this.textBox.Select(this.textBox.TextLength, 0);
-        //}
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -110,15 +98,6 @@ namespace C2.Controls.Left
             FileUtil.TryClipboardSetText(FullFilePath);
         }
 
-        private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            string helpInfo = String.Format(DataButtonFlowTemplate,
-                                        encoding.ToString(),
-                                        this.ExtType,
-                                        0,
-                                        this.Separator == OpUtil.TabSeparator ? "TAB" : this.Separator.ToString());
-            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
-        }
 
         private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -128,68 +107,23 @@ namespace C2.Controls.Left
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left)
+            // 左键单击拖拽
+            if (e.Button != MouseButtons.Left || e.Clicks != 1)
                 return;
 
-            if (e.Clicks == 1) // 单击拖拽
-            {
-                // 使用`DataObject`对象来传参数，更加自由
-                DataObject dragDropData = new DataObject();
-                dragDropData.SetData("Type", ElementType.DataSource);
-                dragDropData.SetData("DataType", DatabaseType.Null);  //本地数据还是外部数据
-                dragDropData.SetData("Path", FullFilePath);           // 数据源文件全路径
-                dragDropData.SetData("Text", DataSourceName);         // 数据源名称
-                dragDropData.SetData("Separator", Separator);         // 分隔符
-                dragDropData.SetData("ExtType", ExtType);             // 扩展名,文件类型
-                // 需要记录他的编码格式
-                dragDropData.SetData("Encoding", Encoding);
-                this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
-            }
-            //else if (e.Clicks == 2)
-            //{   // 双击改名 
-            //    RenameToolStripMenuItem_Click(sender, e);
-            //}
+            // 使用`DataObject`对象来传参数，更加自由
+            DataObject dragDropData = new DataObject();
+            dragDropData.SetData("Type", ElementType.DataSource);
+            dragDropData.SetData("DataType", DatabaseType.Null);  //本地数据还是外部数据
+            dragDropData.SetData("Path", FullFilePath);           // 数据源文件全路径
+            dragDropData.SetData("Text", DataSourceName);         // 数据源名称
+            dragDropData.SetData("Separator", Separator);         // 分隔符
+            dragDropData.SetData("ExtType", ExtType);             // 扩展名,文件类型
+            // 需要记录他的编码格式
+            dragDropData.SetData("Encoding", Encoding);
+            this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
         }
 
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // 按下回车键
-            if (e.KeyChar == 13)
-            {
-                FinishTextChange();
-            }
-        }
-
-        private void TextBox_Leave(object sender, EventArgs e)
-        {
-            FinishTextChange();
-        }
-
-        private void FinishTextChange()
-        {
-            if (this.textBox.Text.Trim().Length == 0)
-                this.textBox.Text = this.oldTextString;
-
-            if (this.textBox.Text.Length > 125)
-            {
-                this.textBox.Text = this.oldTextString;
-                MessageBox.Show("重命名内容过长,超过125个字节.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            this.textBox.ReadOnly = true;
-            this.textBox.Visible = false;
-            this.txtButton.Visible = true;
-            if (this.oldTextString == this.textBox.Text)
-                return;
-            DataSourceName = this.textBox.Text;
-            this.txtButton.Text = Utils.FileUtil.ReName(this.textBox.Text);
-            if (this.oldTextString != this.textBox.Text)
-            {
-                this.oldTextString = this.textBox.Text;
-            }
-            // 保存
-            Global.GetDataSourceControl().SaveDataSourceInfo();
-            this.helpToolTip.SetToolTip(this.txtButton, DataSourceName);
-        }
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.ReviewToolStripMenuItem.Enabled = Global.GetBottomViewPanel().Visible;

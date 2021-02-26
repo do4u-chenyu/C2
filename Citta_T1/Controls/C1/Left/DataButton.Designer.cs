@@ -58,7 +58,6 @@ namespace C2.Controls.Left
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 10;
             this.leftPictureBox.TabStop = false;
-            this.leftPictureBox.MouseEnter += new System.EventHandler(this.LeftPictureBox_MouseEnter);
             // 
             // rightPictureBox
             // 
@@ -68,6 +67,12 @@ namespace C2.Controls.Left
             this.rightPictureBox.Size = new System.Drawing.Size(16, 16);
             this.rightPictureBox.TabIndex = 11;
             this.rightPictureBox.TabStop = false;
+            // 
+            // helpToolTip
+            // 
+            this.helpToolTip.AutoPopDelay = 5000;
+            this.helpToolTip.InitialDelay = 1000;
+            this.helpToolTip.ReshowDelay = 500;
             // 
             // contextMenuStrip1
             // 
@@ -80,7 +85,7 @@ namespace C2.Controls.Left
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 120);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // ReviewToolStripMenuItem
@@ -130,6 +135,7 @@ namespace C2.Controls.Left
             // 
             this.textBox.BackColor = System.Drawing.Color.White;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.textBox.Location = new System.Drawing.Point(25, 3);
             this.textBox.Name = "textBox";
@@ -137,14 +143,12 @@ namespace C2.Controls.Left
             this.textBox.Size = new System.Drawing.Size(94, 16);
             this.textBox.TabIndex = 12;
             this.textBox.Visible = false;
-            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
-            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // txtButton
             // 
             this.txtButton.AutoEllipsis = true;
             this.txtButton.BackColor = System.Drawing.Color.White;
-            this.txtButton.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtButton.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

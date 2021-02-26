@@ -21,11 +21,13 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public SeriesPie()
         {
             Common.InitOptionFlag(this, FlagDic, TypeDic);
-            type = "'pie'";
+            type = Common.FormatString("pie");
         }
+
         public string type { get { return _type; } set { FlagDic["type"] = true; _type = value; } }
         public string id { get { return _id; } set { FlagDic["id"] = true; _id = value; } }
         public string name { get { return _name; } set { FlagDic["name"] = true; _name = value; } }
+        public Encode encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
         public bool legendHoverLink { get { return _legendHoverLink; } set { FlagDic["legendHoverLink"] = true; _legendHoverLink = value; } }
         public bool hoverAnimation { get { return _hoverAnimation; } set { FlagDic["hoverAnimation"] = true; _hoverAnimation = value; } }
         public int hoverOffset { get { return _hoverOffset; } set { FlagDic["hoverOffset"] = true; _hoverOffset = value; } }
@@ -69,6 +71,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         string _type;
         string _id;
         string _name;
+        Encode _encode;
         bool _legendHoverLink;
         bool _hoverAnimation;
         int _hoverOffset;

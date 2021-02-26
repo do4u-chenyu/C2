@@ -1,5 +1,6 @@
 ﻿using C2.Core;
 using C2.IAOLab.Plugins;
+using C2.Properties;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,15 @@ namespace C2.Dialogs
         private static readonly int CheckBoxColumnIndex = 2;
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
-        private Dictionary<string, string> webPluginInfo;
-
+        public string latude;
+        public string lontude ;
+        public string scale ;
         public ConfigForm()
         {
             InitializeComponent();
-            webPluginInfo = new Dictionary<string, string>();
+            latude = this.baiduLatTB.Text = Settings.Default.latude;
+            lontude =this.baiduLonTB.Text = Settings.Default.lontude;
+            scale = this.baiduScaleTB.Text = Settings.Default.scale;
         }
 
         private void UserModelOkButton_Click(object sender, EventArgs e)
@@ -224,17 +228,17 @@ namespace C2.Dialogs
 
         private void UpdatablePlugins_Load()
         {
+            this.availableDGV.Rows.Clear();
             List<string> updatableInfo = PluginsManager.Instance.UpdatablePluginList();
             foreach (string info in updatableInfo)
             {
                 string[] info_split = info.Split(OpUtil.TabSeparator);
                 if (info_split.Length < 3)
                     continue;
-                string pluginName = info_split[0];     // 代码及注释
+                string pluginName = info_split[0];     
                 string pluginVersion = info_split[1];
                 string pluginDesc = info_split[2];
-                this.availableDGV.Rows.Add(new Object[] { pluginName, pluginVersion, false });
-                webPluginInfo[pluginName] = pluginDesc;
+                this.availableDGV.Rows.Add(new Object[] { pluginName, pluginVersion, false, pluginDesc }); // 第4列隐藏
             }
         }
 
@@ -369,7 +373,6 @@ namespace C2.Dialogs
                         continue;
                     try
                     {
-
                         PluginsManager.Instance.DownloadPlugin(GetPluginFullName(row));
                         MessageBox.Show("插件下载成功，请重启软件加载新插件功能");
 
@@ -407,18 +410,139 @@ namespace C2.Dialogs
 
         private void AvailableDGV_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-
-            String pluginName = this.availableDGV.Rows[e.RowIndex].Cells[0].Value as String;
-            this.availableTB.Text = webPluginInfo[pluginName];
+            String pluginDesc = this.availableDGV.Rows[e.RowIndex].Cells[3].Value as String;
+            this.availableTB.Text = pluginDesc;
         }
 
+        private void PluginsTabControl_Selected(object sender, TabControlEventArgs e)
+        {
+            if (this.pluginsTabControl.SelectedTab != this.availableSubPage) 
+                return;
+
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                UpdatablePlugins_Load(); // 一个叫available,一个叫updatable,也劝不动
+            }
+        }
+
+
+
+        private void baiduGISUrlTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar) && e.KeyChar != 0x2E)
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == '.')   //允许输入回退键
+            {
+                TextBox tb = sender as TextBox;
+
+                if (tb.Text == "")
+                {
+                    tb.Text = "0.";
+                    tb.Select(tb.Text.Length, 0);
+                    e.Handled = true;
+                }
+                else if (tb.Text.Contains("."))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+            if (e.Handled == true)
+                latude = this.baiduLatTB.Text; 
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar) && e.KeyChar != 0x2E)
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == '.')   //允许输入回退键
+            {
+                TextBox tb = sender as TextBox;
+
+                if (tb.Text == "")
+                {
+                    tb.Text = "0.";
+                    tb.Select(tb.Text.Length, 0);
+                    e.Handled = true;
+                }
+                else if (tb.Text.Contains("."))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+            if (e.Handled == true)
+                lontude = this.baiduLonTB.Text;
+        }
+
+        private void baiduGISKeyTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.KeyChar.ToString(), "^([5-9])$") && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
+            {
+
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+            if (e.Handled == true)
+                scale = this.baiduScaleTB.Text;
+
+        }
+
+
+
+        #region 检查更新Tab
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            if (this.mainTabControl.SelectedIndex != 3)
+            if (mainTabControl.SelectedIndex != 5)
                 return;
-            this.availableDGV.Rows.Clear();
-            UpdatablePlugins_Load();
+ 
+            string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version"); 
+            string browserVersion = BrowserVersion();
+            if (currentVersion.Equals(browserVersion))
+            {
+
+            }
+            else 
+            { 
+
+            }
+        }
+        private string BrowserVersion()
+        {
+            return string.Empty;
+        }
+        private void CancleUpdate_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void UpdateSoftware_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        private void gisMapOKButton_Click(object sender, EventArgs e)
+        {
+            Settings.Default.latude = this.baiduLatTB.Text;
+            Settings.Default.lontude = this.baiduLonTB.Text;
+            Settings.Default.scale = this.baiduScaleTB.Text;
+            Settings.Default.Save();
+            this.Close();
         }
     }
 }

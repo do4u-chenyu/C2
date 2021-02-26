@@ -179,7 +179,7 @@ namespace C2
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(419, 52);
             this.label1.TabIndex = 0;
-            this.label1.Text = "IAO解决方案建模平台";
+            this.label1.Text = "IAO单兵作战平台";
             // 
             // leftMainMenuPanel
             // 

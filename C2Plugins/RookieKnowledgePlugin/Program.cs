@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace TestPlugin
+namespace RookieKnowledgePlugin
 {
     static class Program
     {

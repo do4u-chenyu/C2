@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.ItemLabel = new System.Windows.Forms.Label();
-            this.Itempanel = new System.Windows.Forms.Panel();
+            this.ItemPanel = new System.Windows.Forms.Panel();
             this.AddMindMapButton = new System.Windows.Forms.Button();
             this.MindMapPaintPanel = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.Itempanel.SuspendLayout();
+            this.ItemPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ItemLabel
@@ -49,15 +49,15 @@
             this.ItemLabel.Text = "我的业务视图";
             this.ItemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Itempanel
+            // ItemPanel
             // 
-            this.Itempanel.Controls.Add(this.AddMindMapButton);
-            this.Itempanel.Controls.Add(this.ItemLabel);
-            this.Itempanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Itempanel.Location = new System.Drawing.Point(0, 0);
-            this.Itempanel.Name = "Itempanel";
-            this.Itempanel.Size = new System.Drawing.Size(185, 30);
-            this.Itempanel.TabIndex = 1;
+            this.ItemPanel.Controls.Add(this.AddMindMapButton);
+            this.ItemPanel.Controls.Add(this.ItemLabel);
+            this.ItemPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ItemPanel.Location = new System.Drawing.Point(0, 0);
+            this.ItemPanel.Name = "ItemPanel";
+            this.ItemPanel.Size = new System.Drawing.Size(185, 30);
+            this.ItemPanel.TabIndex = 1;
             // 
             // AddMindMapButton
             // 
@@ -94,20 +94,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.Itempanel);
+            this.Controls.Add(this.ItemPanel);
             this.Controls.Add(this.MindMapPaintPanel);
             this.Name = "MyMindMapControl";
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MindMapModelControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MindMapModelControl_MouseDown);
-            this.Itempanel.ResumeLayout(false);
+            this.ItemPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Label ItemLabel;
-        private System.Windows.Forms.Panel Itempanel;
+        private System.Windows.Forms.Panel ItemPanel;
         private System.Windows.Forms.Panel MindMapPaintPanel;
         private System.Windows.Forms.Button AddMindMapButton;
         private System.Windows.Forms.ToolTip toolTip1;

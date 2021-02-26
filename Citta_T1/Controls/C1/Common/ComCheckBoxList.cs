@@ -309,6 +309,11 @@ namespace C2.Controls.Common
 
 
         }
+        public void ClearText()
+        {
+            tbSelectedValue.Text = string.Empty;
+        }
+
         /// <summary>
         /// 单价下拉框
         /// </summary>
