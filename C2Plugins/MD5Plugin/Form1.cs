@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 
 namespace MD5Plugin
@@ -130,16 +131,19 @@ namespace MD5Plugin
                     EncodeBase64(textBox1.Text);
                     break;
                 case 4:
-                    Console.WriteLine("UrlDecode编码");
+                    //Console.WriteLine("UrlDecode编码");
+                    UrlEncode(textBox1.Text);
                     break;
                 case 5:
-                    Console.WriteLine("utf8");
+                    //Console.WriteLine("utf8");
+                    GetUtf8(textBox1.Text);
                     break;
                 case 6:
                     Console.WriteLine("gbk");
                     break;
                 default:
-                    Console.WriteLine("base64");
+                    //Console.WriteLine("base64");
+                    EncodeBase64(textBox1.Text);
                     break;
             }
         }
@@ -161,10 +165,12 @@ namespace MD5Plugin
                     DecodeBase64(textBox2.Text);
                     break;
                 case 4:
-                    Console.WriteLine("UrlDecode解码");
+                    //Console.WriteLine("UrlDecode解码");
+                    UrlDecode(textBox2.Text);
                     break;
                 default:
-                    Console.WriteLine("base64解码");
+                    //Console.WriteLine("base64解码");
+                    DecodeBase64(textBox2.Text);
                     break;
             }
         }
@@ -207,8 +213,27 @@ namespace MD5Plugin
             textBox1.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
         }
 
+        public void UrlEncode(string url)
+        {
+            textBox2.Text = HttpUtility.UrlEncode(url);
+        }
 
+        public void UrlDecode(string url)
+        {
+            textBox1.Text = HttpUtility.UrlDecode(url);
+        }
 
+        public void GetUtf8(string str)
+        {
+            //UTF8Encoding utf8 = new UTF8Encoding();
+            //Byte[] encodedBytes = utf8.GetBytes(str);
+            //textBox2.Text = utf8.GetString(encodedBytes);
+            //textBox2.Text = HttpUtility.UrlEncode(str, Encoding.GetEncoding("utf-8"));
+        }
 
+        public void GetGbk(string str)
+        {
+
+        }
     }
 }
