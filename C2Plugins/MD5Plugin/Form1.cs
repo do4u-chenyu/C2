@@ -126,7 +126,8 @@ namespace MD5Plugin
                     Md5Code_64(textBox1.Text);
                     break;
                 case 3:
-                    Console.WriteLine("base64编码");
+                    //Console.WriteLine("base64编码");
+                    EncodeBase64(textBox1.Text);
                     break;
                 case 4:
                     Console.WriteLine("UrlDecode编码");
@@ -157,7 +158,7 @@ namespace MD5Plugin
             switch (num)
             {
                 case 3:
-                    Console.WriteLine("base64解码");
+                    DecodeBase64(textBox2.Text);
                     break;
                 case 4:
                     Console.WriteLine("UrlDecode解码");
@@ -192,6 +193,18 @@ namespace MD5Plugin
             t2 = t2.Replace("-","");
             t2 = t2.ToLower();
             textBox2.Text = t2;
+        }
+
+        public void EncodeBase64(string str)
+        {
+            byte[] bytes = Encoding.GetEncoding("utf-8").GetBytes(str);
+            textBox2.Text = Convert.ToBase64String(bytes);
+        }
+
+        public void DecodeBase64(string str)
+        {
+            byte[] bytes = Convert.FromBase64String(str);
+            textBox1.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
         }
 
 
