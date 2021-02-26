@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -32,7 +33,9 @@ namespace C2.Model.MindMaps
         const string attachmentTag = "[附件]";
         const string internalDataTag = "[本地数据]";
         const string externalDataTag = "[外部数据]";
+        const string resultDataTag = "[结果文件]";
         const string notSavedextErnalDataTag = "[外部数据(未缓存)]";
+        const string defaultExt = ".txt";
         const int defaultIconSize = 32;
         const int defaultTopicStyleIndex = 1;
         XmlDocument contentDom;
@@ -58,7 +61,7 @@ namespace C2.Model.MindMaps
                     SaveSheet(chartPage as MindMap, contentRoot, sheetID);
                     sheetID += 1;
                 }
-                
+
             }
             contentDom.AppendChild(contentRoot);
         }
@@ -225,7 +228,7 @@ namespace C2.Model.MindMaps
             {
                 AttachmentWidget[] widgets = topic.FindWidgets<AttachmentWidget>();
                 for (int i = 0; i < widgets.Length; i++)
-                    SaveAwAsAttachment(widgets[i], topicNode);
+                    SaveAwAsAttachment(topicNode, widgets[i]);
             }
             /*
              * 图表挂件，目前没有持久化，不保存了
@@ -242,7 +245,19 @@ namespace C2.Model.MindMaps
                 // 本地数据和外部数据
                 DataSourceWidget[] widgets = topic.FindWidgets<DataSourceWidget>();
                 for (int i = 0; i < widgets.Length; i++)
-                    SaveDataSource(widgets[i], topicNode);
+                    SaveDataSource(topicNode, widgets[i]);
+            }
+            /*
+             * 结果挂件
+             * 1. 业务视图
+             * 2. 高级模型
+             */
+            if (topic.FindWidgets<ResultWidget>().Length > 0)
+            {
+                // 本地数据和外部数据
+                ResultWidget[] widgets = topic.FindWidgets<ResultWidget>();
+                for (int i = 0; i < widgets.Length; i++)
+                    SaveResult(topicNode, widgets[i]);
             }
             /*
              * 
@@ -333,60 +348,86 @@ namespace C2.Model.MindMaps
                 );
 
             attachments.Add(attachment);
-            SaveAttachment(attachment, parent);
+            SaveAttachment(parent, attachment);
         }
-        private void SaveAwAsAttachment(AttachmentWidget attachmentWidget, XmlElement topicNode)
+        private void SaveAwAsAttachment(XmlElement parent, AttachmentWidget attachmentWidget)
         {
-            foreach(string filePath in attachmentWidget.AttachmentPaths)
+            foreach (string filePath in attachmentWidget.AttachmentPaths)
             {
+                string filename = Path.GetFileName(filePath);
                 Attachment attachment = new Attachment(
                                     attachments.Count.ToString(),
-                                    attachmentTag + attachments.Count.ToString(),
+                                    attachmentTag + filename,
                                     Path.GetFileName(filePath),
                                     new StaticDataSource(filePath)
                     );
                 attachments.Add(attachment);
-                SaveAttachment(attachment, topicNode);
+                SaveAttachment(parent, attachment);
             }
         }
-        private void SaveDataSource(DataSourceWidget dataSourceWidget, XmlElement topicNode)
+        /// <summary>
+        /// 数据源包含多种情况
+        /// 1. 外部数据
+        /// 2. 本地数据
+        /// 3. 结果文件
+        /// 其中外部数据如果拉取到本地则保存方式和本地数据、结果文件一致，保存为附件
+        /// 如外部数据没有拉取到本地则保存为标签
+        /// </summary>
+        /// <param name="dataSourceWidget"></param>
+        /// <param name="parent"></param>
+        private void SaveDataSource(XmlElement parent, DataSourceWidget dataSourceWidget)
         {
             foreach (DataItem dataItem in dataSourceWidget.DataItems)
             {
-                if (dataItem.IsDatabase() && !String.IsNullOrEmpty(dataItem.FilePath))
+                if (dataItem.IsDatabase() && String.IsNullOrEmpty(dataItem.FilePath))
                 {
-                    SaveLabel(topicNode, notSavedextErnalDataTag + dataItem.DataType.ToString() + "-" + dataItem.FileName);
+                    SaveLabel(parent, notSavedextErnalDataTag + dataItem.DataType.ToString() + "-" + dataItem.FileName);
                     return;
                 }
 
                 Attachment attachment;
                 if (dataItem.IsDatabase())
                 {
+                    // 外部数据都没有后缀名
                     attachment = new Attachment(
                                         attachments.Count.ToString(),
-                                        externalDataTag + dataItem.FileName,
-                                        dataItem.FileName,
-                                        new StaticDataSource(dataItem.FilePath, Encoding.UTF8)
+                                        externalDataTag + dataItem.FileName + defaultExt,
+                                        dataItem.FileName + defaultExt,
+                                        new StaticDataSource(BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem), Encoding.UTF8)
                                     );
                 }
                 else
                 {
+                    string filename = Path.GetFileName(dataItem.FilePath);
                     attachment = new Attachment(
                                         attachments.Count.ToString(),
-                                        internalDataTag + dataItem.FileName,
-                                        dataItem.FileName,
+                                        internalDataTag + filename,
+                                        filename,
                                         new StaticDataSource(dataItem.FilePath)
                                 );
                 }
                 if (attachment != null)
                 {
                     attachments.Add(attachment);
-                    SaveAttachment(attachment, topicNode);
+                    SaveAttachment(parent, attachment);
                 }
             }
         }
-
-        private void SaveAttachment(Attachment attachment, XmlElement topicNode)
+        private void SaveResult(XmlElement parent, ResultWidget resultWidget)
+        {
+            foreach (DataItem dataItem in resultWidget.DataItems)
+            {
+                Attachment attachment = new Attachment(
+                                            attachments.Count.ToString(),
+                                            resultDataTag + dataItem.FileName + defaultExt,
+                                            dataItem.FileName + defaultExt,
+                                            new StaticDataSource(dataItem.FilePath)
+                                        );
+                attachments.Add(attachment);
+                SaveAttachment(parent, attachment);
+            }
+        }
+        private void SaveAttachment(XmlElement topicNode, Attachment attachment)
         {
             // Xmind中 附件以节点形式存在
             if (topicNode.SelectSingleNode("children/topics") != null)
@@ -420,13 +461,13 @@ namespace C2.Model.MindMaps
             return CreateTopicNode(topicID, attachment.name, attachment.filename);
         }
 
-        private XmlElement CreateTopicNode(string nodeID, string titleText, string attachmentName="")
+        private XmlElement CreateTopicNode(string nodeID, string titleText, string attachmentName = "")
         {
             XmlElement topic = contentDom.CreateElement("topic");
             XmlElement title = contentDom.CreateElement("title");
             title.InnerText = titleText;
             topic.SetAttribute("id", nodeID);
-            if (!String.IsNullOrEmpty(attachmentName)) 
+            if (!String.IsNullOrEmpty(attachmentName))
                 topic.SetAttribute("xlink:href", "xap:attachments/" + attachmentName);
             topic.AppendChild(title);
             return topic;
@@ -436,7 +477,7 @@ namespace C2.Model.MindMaps
             XmlElement plain = contentDom.CreateElement("plain");
             plain.InnerText = text;
             return plain;
-        }        
+        }
         private XmlElement CreateTitleNode(string text)
         {
             XmlElement title = contentDom.CreateElement("title");
@@ -449,18 +490,33 @@ namespace C2.Model.MindMaps
             label.InnerText = text;
             return label;
         }
-        private XmlElement CreatControlPoint(int x, int y, int index)
+        private XmlElement CreatControlPoint(Link link, int index)
         {
+            /* 
+             * TODO 不同图的控制点原点不同
+             * 逻辑图(右边) 的控制点原点是Topic的
+             */
             XmlElement cp = contentDom.CreateElement("control-point");
             XmlElement pst = contentDom.CreateElement("position");
 
             cp.SetAttribute("index", index.ToString());
-            pst.SetAttribute("svg:x", x.ToString());
-            pst.SetAttribute("svg:y", y.ToString());
+            if (index == 0)
+            {
+                Point relativePoint = new Point(link.From.Location.X + link.From.Width, link.From.Location.Y + link.From.Height / 2);
+                pst.SetAttribute("svg:x", (link.LayoutData.ControlPoint1.X - relativePoint.X).ToString());
+                pst.SetAttribute("svg:y", (link.LayoutData.ControlPoint1.Y - relativePoint.Y).ToString());
+            }
+            else
+            {
+                Point relativePoint = new Point(link.Target.Location.X + link.Target.Width, link.Target.Location.Y + link.Target.Height / 2);
+                pst.SetAttribute("svg:x", (link.LayoutData.ControlPoint2.X - relativePoint.X).ToString());
+                pst.SetAttribute("svg:y", (link.LayoutData.ControlPoint2.Y - relativePoint.Y).ToString());
+            }
 
             cp.AppendChild(pst);
             return cp;
         }
+
         private void SaveLabel(XmlElement parent, string text)
         {
             if (parent == null || string.IsNullOrEmpty(text))
@@ -548,8 +604,8 @@ namespace C2.Model.MindMaps
             node.SetAttribute("id", link.ID.ToString());
             // control-points
             XmlElement controlPoints = contentDom.CreateElement("control-points");
-            controlPoints.AppendChild(CreatControlPoint(link.LayoutData.ControlPoint1.X, link.LayoutData.ControlPoint1.Y, 0));
-            controlPoints.AppendChild(CreatControlPoint(link.LayoutData.ControlPoint2.X, link.LayoutData.ControlPoint2.Y, 1));
+            controlPoints.AppendChild(CreatControlPoint(link, 0));
+            controlPoints.AppendChild(CreatControlPoint(link, 1));
             // title
             node.AppendChild(CreateTitleNode(link.Text));
             node.AppendChild(controlPoints);
@@ -573,18 +629,11 @@ namespace C2.Model.MindMaps
             public string name;
             public string filename;
             public IStaticDataSource staticDataSource;
-            public Attachment(string id, string filename, IStaticDataSource staticDataSource)
-            {
-                this.id = id;
-                this.name = filename;
-                this.filename = Base64Encode(filename);
-                this.staticDataSource = staticDataSource;
-            }
             public Attachment(string id, string name, string filename, IStaticDataSource staticDataSource)
             {
                 this.id = id;
                 this.name = name;
-                this.filename = Base64Encode(filename);
+                this.filename = GenerateMD5(Path.GetFileNameWithoutExtension(filename)) + Path.GetExtension(filename);
                 this.staticDataSource = staticDataSource;
             }
         }
@@ -598,7 +647,7 @@ namespace C2.Model.MindMaps
                 {
                     this.bytes = encoding.GetBytes(str);
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     this.bytes = new byte[0];
                 }
@@ -660,12 +709,20 @@ namespace C2.Model.MindMaps
                 return s;
             }
         }
-        static string Base64Encode(string text)
+        static string GenerateMD5(string text)
         {
-            if (string.IsNullOrEmpty(text))
-                return String.Empty;
-            byte[] buff = Encoding.UTF8.GetBytes(text);
-            return Convert.ToBase64String(buff);
+            using (MD5 mi = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] buffer = Encoding.Default.GetBytes(text);
+                //开始加密
+                byte[] newBuffer = mi.ComputeHash(buffer);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < newBuffer.Length; i++)
+                {
+                    sb.Append(newBuffer[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
         }
     }
 }

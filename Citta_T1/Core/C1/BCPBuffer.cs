@@ -71,7 +71,6 @@ namespace C2.Core
                 IDAO dao = DAOFactory.CreateDAO(databaseItem);
                 if (!dao.TestConn())
                 {
-                    HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                     return String.Empty;
                 }
                 try
@@ -81,9 +80,8 @@ namespace C2.Core
                     string firstLine = GetFirstLine(tbContent);
                     dataPreviewDict[key] = new FileCache(tbContent, firstLine);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    HelpUtil.ShowMessageBox(ex.Message, "提示信息", System.Windows.Forms.MessageBoxIcon.Warning);
                     return String.Empty;
                 }
             }
