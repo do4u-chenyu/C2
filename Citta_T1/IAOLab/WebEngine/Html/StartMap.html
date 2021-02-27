@@ -102,6 +102,7 @@
     function closeHeatmap() {
         heatmapOverlay.hide();
     }
+
   //实时显示地图坐标 strat
     map.addEventListener("mousemove",GetlngAndlat);     
     function GetlngAndlat(e) {
@@ -114,9 +115,8 @@
    //实时显示地图坐标 end
    //测量距离 strat
     function openGetDistance() {  
-
-     var myDis=new BMapLib.DistanceTool(map);//map为上面已经初始化好的地图实例  
-     myDis.open();  
+        var myDis=new BMapLib.DistanceTool(map);//map为上面已经初始化好的地图实例  
+        myDis.open();  
     }
     //测量距离 end
 
@@ -127,8 +127,8 @@
         map.addEventListener("rightclick", putAndsend);
         //左键标记
         //map.addEventListener("click", putAndsend);
-  }
-  var marker_num = 0;
+    }
+    var marker_num = 0;
     function putAndsend(e)  
     {  
       //放标注  
@@ -142,29 +142,28 @@
     "("+e.point.lng+","+e.point.lat+")",{offset:new BMap.Size(20,-10)});  
       marker.setLabel(label);  
       //给WINFORM传值  
-      window.external.PutIntotextBox(marker_num,whichCar,e.point.lng,e.point.lat);  
-    
+      window.external.PutIntotextBox(marker_num,whichCar,e.point.lng,e.point.lat);     
     } 
     //左右击鼠标给地图上放marker end
 
      //在地图上画轨迹 strat
     function DrawOrit1()  
     {  
-     var Array=[];  
-    var total_num= window.external.getRowsNumber();  
+        var Array=[];  
+        var total_num= window.external.getRowsNumber();  
     for(var i=0;i<=2*total_num-1;i++)  
     {  
-     Array.push(window.external.Getpoints(i));  
+        Array.push(window.external.Getpoints(i));  
     }  
   
     var PointArr=[];  
     for(var i=0;i<=Array.length-1;i+=2)  
     {//偶数索引存经度，奇数存维度  
-      PointArr.push(new BMap.Point(Array[i],Array[i+1]));  
+        PointArr.push(new BMap.Point(Array[i],Array[i+1]));  
     }  
-    var polyline = new BMap.Polyline(PointArr, {strokeColor:"blue", strokeWeight:6,   strokeOpacity:0.5});  //定义折线  
-      map.addOverlay(polyline);  
-    window.external.ClearRows_num();//重置窗体计数器  
+        var polyline = new BMap.Polyline(PointArr, {strokeColor:"blue", strokeWeight:6,   strokeOpacity:0.5});  //定义折线  
+        map.addOverlay(polyline);  
+        window.external.ClearRows_num();//重置窗体计数器  
     }
     //在地图上画轨迹 end
 
@@ -235,9 +234,7 @@
             scale: 0.8, //工具栏缩放比例  
             drawingTypes : [           
             BMAP_DRAWING_CIRCLE,    
-            BMAP_DRAWING_RECTANGLE   
-         ]  
-  
+            BMAP_DRAWING_RECTANGLE ]  
         },  
         circleOptions: styleOptions, //圆的样式   
         rectangleOptions: styleOptions //矩形的样式  
@@ -249,11 +246,8 @@
     var overlaycomplete = function (e) {
         overlays.push(e.overlay);
         var result = "";
-
         result += e.drawingMode + ":";
-
         if (e.drawingMode == BMAP_DRAWING_CIRCLE) {
-
             var circle_radius = e.overlay.getRadius();
             var circle_point = new BMap.Point(e.overlay.getCenter().lng, e.overlay.getCenter().lat);
             alert(map.getDistance(circle_point, tests[1]));
@@ -305,6 +299,33 @@
             var marker = new BMap.Marker(obj[j]);  // 创建标注
             map.addOverlay(marker);
         }     
+    }
+	DrawOrit2();
+	//在地图上画轨迹 strat
+    function DrawOrit2()  
+    {  
+      
+
+        var pointStr = "104.038748,30.641821,104.047789,30.648128,104.063959,30.655336,104.067264,30.660307,104.067264,30.664438,104.064008,30.665316".split(",");
+        var pointArr = [];
+
+        for (var k = 0; k < pointStr.length; k += 2) {
+            pointArr.push({
+                lng: pointStr[k],
+                lat: pointStr[k + 1]
+            });
+        }
+
+        // 生成坐标点
+        var trackPoint = [];
+        for (var i = 0, j = pointArr.length; i < j; i++) {
+            trackPoint.push(new BMap.Point(pointArr[i].lng, pointArr[i].lat));
+        }
+
+
+        var polyline = new BMap.Polyline(trackPoint, {strokeColor:"blue", strokeWeight:6,   strokeOpacity:0.5});  //定义折线  
+		map.addOverlay(polyline);  
+		
     }
 
 </script>

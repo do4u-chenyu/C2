@@ -199,7 +199,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.webBrowser1.Width = 1340;
                 isActive = true;
             }
-            WriteHtml();
+            LoadHtml();
+            SaveEditorHtml();
         }
 
         private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -212,10 +213,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void runButton_Click(object sender, EventArgs e)
         {
-           
+            SaveEditorHtml();        
+            //WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "StartMap.html");
+            //webBrowser1.Navigate(WebUrl);
+
         }
 
-        public void WriteHtml()
+        public void LoadHtml()
         {
             Stream myStream = new FileStream(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html", FileMode.Open);
             Encoding encode = System.Text.Encoding.GetEncoding("gb2312");//若是格式为utf-8的需要将gb2312替换
@@ -224,9 +228,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
             myStream.Close();
             this.htmlEditorControlEx1.Text = strhtml;
         }
+        public void SaveEditorHtml()
+        {
+            //这个函数需要确定一个存放临时文件的位置，如果没有临时文件，是不是换种调用语法就可以实现直接调用？？？？
+        }
         private void resetButton_Click(object sender, EventArgs e)
         {
-            WriteHtml();
+            LoadHtml();
         }
     }
 }
