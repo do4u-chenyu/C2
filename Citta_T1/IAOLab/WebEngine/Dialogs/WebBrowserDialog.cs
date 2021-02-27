@@ -43,10 +43,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             WebBrowserConfig.SetWebBrowserFeatures(11);//TODO 暂定11，后面需要检测
             webBrowser1.Navigate(WebUrl);
-            //var configMap = new ConfigForm();
-            //string[] configstr = new string[1];
-            //configstr[0] = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
-            //webBrowser1.Document.InvokeScript("initialMap", configstr);
         }
 
         public void InitializeMapToolStrip()
@@ -203,14 +199,34 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.webBrowser1.Width = 1340;
                 isActive = true;
             }
+            WriteHtml();
         }
 
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             var configMap = new ConfigForm();
             string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
             webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
 
+        }
+
+        private void runButton_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        public void WriteHtml()
+        {
+            Stream myStream = new FileStream(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html", FileMode.Open);
+            Encoding encode = System.Text.Encoding.GetEncoding("gb2312");//若是格式为utf-8的需要将gb2312替换
+            StreamReader myStreamReader = new StreamReader(myStream, encode);
+            string strhtml = myStreamReader.ReadToEnd();
+            myStream.Close();
+            this.htmlEditorControlEx1.Text = strhtml;
+        }
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            WriteHtml();
         }
     }
 }

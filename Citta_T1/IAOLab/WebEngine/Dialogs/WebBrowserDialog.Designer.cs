@@ -32,6 +32,8 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.htmlEditorControlEx1 = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.runButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +59,7 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(920, 411);
             this.webBrowser1.TabIndex = 10004;
-            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser1_DocumentCompleted);
             // 
             // htmlEditorControlEx1
             // 
@@ -66,9 +68,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.htmlEditorControlEx1.FoldingStrategy = "XML";
             this.htmlEditorControlEx1.Font = new System.Drawing.Font("Courier New", 10F);
-            this.htmlEditorControlEx1.Location = new System.Drawing.Point(24, 18);
+            this.htmlEditorControlEx1.Location = new System.Drawing.Point(24, 40);
             this.htmlEditorControlEx1.Name = "htmlEditorControlEx1";
-            this.htmlEditorControlEx1.Size = new System.Drawing.Size(104, 397);
+            this.htmlEditorControlEx1.Size = new System.Drawing.Size(104, 375);
             this.htmlEditorControlEx1.SyntaxHighlighting = "HTML";
             this.htmlEditorControlEx1.TabIndex = 10005;
             // 
@@ -78,6 +80,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.resetButton);
+            this.panel1.Controls.Add(this.runButton);
             this.panel1.Controls.Add(this.htmlEditorControlEx1);
             this.panel1.Enabled = false;
             this.panel1.Location = new System.Drawing.Point(12, 28);
@@ -85,6 +89,32 @@
             this.panel1.Size = new System.Drawing.Size(147, 415);
             this.panel1.TabIndex = 10006;
             this.panel1.Visible = false;
+            // 
+            // runButton
+            // 
+            this.runButton.BackColor = System.Drawing.Color.Transparent;
+            this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.runButton.ForeColor = System.Drawing.Color.Black;
+            this.runButton.Location = new System.Drawing.Point(13, 11);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(59, 23);
+            this.runButton.TabIndex = 10006;
+            this.runButton.Text = "运行";
+            this.runButton.UseVisualStyleBackColor = false;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            // 
+            // resetButton
+            // 
+            this.resetButton.BackColor = System.Drawing.Color.Transparent;
+            this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetButton.ForeColor = System.Drawing.Color.Black;
+            this.resetButton.Location = new System.Drawing.Point(78, 11);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(66, 23);
+            this.resetButton.TabIndex = 10007;
+            this.resetButton.Text = "重置";
+            this.resetButton.UseVisualStyleBackColor = false;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // WebBrowserDialog
             // 
@@ -116,5 +146,7 @@
         private System.Windows.Forms.WebBrowser webBrowser1;
         private ICSharpCode.TextEditor.TextEditorControlEx htmlEditorControlEx1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button runButton;
+        private System.Windows.Forms.Button resetButton;
     }
 }
