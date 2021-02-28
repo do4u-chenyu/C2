@@ -137,7 +137,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         webBrowser1.Document.InvokeScript("markerPoints", methodstr);    
                         break;
                     case "轨迹图":
-                        webBrowser1.Document.InvokeScript("getPoints", methodstr);
+                        webBrowser1.Document.InvokeScript("DrawOrit2", methodstr);
                         break;
                     case "区域图":
                         webBrowser1.Document.InvokeScript("getPoints", methodstr);
