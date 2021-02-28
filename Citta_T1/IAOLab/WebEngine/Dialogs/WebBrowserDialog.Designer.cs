@@ -32,8 +32,8 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.htmlEditorControlEx1 = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.runButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
+            this.runButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,19 +90,6 @@
             this.panel1.TabIndex = 10006;
             this.panel1.Visible = false;
             // 
-            // runButton
-            // 
-            this.runButton.BackColor = System.Drawing.Color.Transparent;
-            this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.runButton.ForeColor = System.Drawing.Color.Black;
-            this.runButton.Location = new System.Drawing.Point(13, 11);
-            this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(59, 23);
-            this.runButton.TabIndex = 10006;
-            this.runButton.Text = "运行";
-            this.runButton.UseVisualStyleBackColor = false;
-            this.runButton.Click += new System.EventHandler(this.runButton_Click);
-            // 
             // resetButton
             // 
             this.resetButton.BackColor = System.Drawing.Color.Transparent;
@@ -115,6 +102,19 @@
             this.resetButton.Text = "重置";
             this.resetButton.UseVisualStyleBackColor = false;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
+            // runButton
+            // 
+            this.runButton.BackColor = System.Drawing.Color.Transparent;
+            this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.runButton.ForeColor = System.Drawing.Color.Black;
+            this.runButton.Location = new System.Drawing.Point(13, 11);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(59, 23);
+            this.runButton.TabIndex = 10006;
+            this.runButton.Text = "运行";
+            this.runButton.UseVisualStyleBackColor = false;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
             // 
             // WebBrowserDialog
             // 
@@ -130,6 +130,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebBrowserDialog";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Activated += new System.EventHandler(this.WebBrowserDialog_Activated);
             this.Load += new System.EventHandler(this.WebBrowserDialog_Load);
             this.Controls.SetChildIndex(this.toolStrip1, 0);
             this.Controls.SetChildIndex(this.webBrowser1, 0);

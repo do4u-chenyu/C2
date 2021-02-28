@@ -236,5 +236,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             LoadHtml();
         }
+
+        private void WebBrowserDialog_Activated(object sender, EventArgs e)
+        {
+            webBrowser1.Focus();
+        }
     }
 }

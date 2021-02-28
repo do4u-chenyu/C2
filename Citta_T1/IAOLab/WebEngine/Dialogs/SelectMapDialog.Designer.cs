@@ -150,7 +150,7 @@
             this.Controls.Add(this.mapType);
             this.Controls.Add(this.datasource);
             this.Name = "SelectMapDialog";
-            this.Text = "SelectMapDialog";
+            this.Text = "配置数据源";
             this.Controls.SetChildIndex(this.datasource, 0);
             this.Controls.SetChildIndex(this.mapType, 0);
             this.Controls.SetChildIndex(this.lat, 0);

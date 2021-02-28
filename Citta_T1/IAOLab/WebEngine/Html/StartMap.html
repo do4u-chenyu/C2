@@ -301,6 +301,16 @@
         }     
     }
 
+
+    map.addEventListener("leftclick", function (e) {//地图左键单击事件，左键为click
+        map.clearOverlays();//添加标注前清空以前的所有标注
+        document.getElementById("txtjingweidu").value = e.point.lng + ", " + e.point.lat;
+
+        var marker = new BMap.Marker(new BMap.Point(e.point.lng, e.point.lat));        // 创建标注     
+        map.addOverlay(marker);
+    });
+
+
 	//在地图上画轨迹 strat
     function drawOrit(w)
     {

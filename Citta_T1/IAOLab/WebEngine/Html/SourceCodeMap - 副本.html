@@ -1,0 +1,9 @@
+﻿    var a; //全局变量
+	function test(){
+
+		var b=20; //局部变量
+		return b; //返回局部变量的值
+	};
+	a=test(); //将函数返回值赋给全局变量a
+	alert("全局变量a的值是: "+a);
+	alert(a);
