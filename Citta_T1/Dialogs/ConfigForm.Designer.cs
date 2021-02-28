@@ -125,20 +125,20 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.checkNewVersion = new System.Windows.Forms.TabPage();
+            this.newVersion = new System.Windows.Forms.Panel();
             this.checking = new System.Windows.Forms.Panel();
             this.currentModelRunLab = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.newVersion = new System.Windows.Forms.Panel();
-            this.description = new System.Windows.Forms.TextBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.size = new System.Windows.Forms.Label();
-            this.version = new System.Windows.Forms.Label();
-            this.title = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.checkStatus = new System.Windows.Forms.TextBox();
+            this.sizeValue = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.description = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.version = new System.Windows.Forms.Label();
+            this.sizeLable = new System.Windows.Forms.Label();
+            this.versionLable = new System.Windows.Forms.Label();
+            this.title = new System.Windows.Forms.Label();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.mainTabControl.SuspendLayout();
@@ -161,8 +161,8 @@
             this.groupBox1.SuspendLayout();
             this.aboutConfigPage.SuspendLayout();
             this.checkNewVersion.SuspendLayout();
-            this.checking.SuspendLayout();
             this.newVersion.SuspendLayout();
+            this.checking.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainTabControl
@@ -181,6 +181,7 @@
             this.mainTabControl.Size = new System.Drawing.Size(642, 410);
             this.mainTabControl.TabIndex = 0;
             this.mainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
+            this.mainTabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.MainTabControl_Selecting);
             // 
             // userModelConfigPage
             // 
@@ -1120,7 +1121,7 @@
             // 
             // checkNewVersion
             // 
-            this.checkNewVersion.Controls.Add(this.checking);
+            this.checkNewVersion.Controls.Add(this.newVersion);
             this.checkNewVersion.Location = new System.Drawing.Point(4, 26);
             this.checkNewVersion.Name = "checkNewVersion";
             this.checkNewVersion.Size = new System.Drawing.Size(634, 380);
@@ -1128,29 +1129,105 @@
             this.checkNewVersion.Text = "检查更新";
             this.checkNewVersion.UseVisualStyleBackColor = true;
             // 
+            // newVersion
+            // 
+            this.newVersion.BackColor = System.Drawing.Color.White;
+            this.newVersion.Controls.Add(this.checking);
+            this.newVersion.Controls.Add(this.sizeValue);
+            this.newVersion.Controls.Add(this.button3);
+            this.newVersion.Controls.Add(this.description);
+            this.newVersion.Controls.Add(this.button1);
+            this.newVersion.Controls.Add(this.label23);
+            this.newVersion.Controls.Add(this.version);
+            this.newVersion.Controls.Add(this.sizeLable);
+            this.newVersion.Controls.Add(this.versionLable);
+            this.newVersion.Controls.Add(this.title);
+            this.newVersion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.newVersion.Location = new System.Drawing.Point(0, 0);
+            this.newVersion.Name = "newVersion";
+            this.newVersion.Size = new System.Drawing.Size(634, 380);
+            this.newVersion.TabIndex = 6;
+            this.newVersion.Paint += new System.Windows.Forms.PaintEventHandler(this.checking_Paint);
+            // 
             // checking
             // 
             this.checking.BackColor = System.Drawing.Color.White;
             this.checking.Controls.Add(this.currentModelRunLab);
-            this.checking.Controls.Add(this.label23);
-            this.checking.Controls.Add(this.textBox1);
-            this.checking.Controls.Add(this.button1);
-            this.checking.Controls.Add(this.newVersion);
+            this.checking.Controls.Add(this.button2);
+            this.checking.Controls.Add(this.checkStatus);
             this.checking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checking.Location = new System.Drawing.Point(0, 0);
             this.checking.Name = "checking";
             this.checking.Size = new System.Drawing.Size(634, 380);
-            this.checking.TabIndex = 6;
+            this.checking.TabIndex = 7;
             // 
             // currentModelRunLab
             // 
             this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.currentModelRunLab.Cursor = System.Windows.Forms.Cursors.Hand;
             this.currentModelRunLab.Image = global::C2.Properties.Resources.checkUpdate;
-            this.currentModelRunLab.Location = new System.Drawing.Point(224, 171);
+            this.currentModelRunLab.Location = new System.Drawing.Point(215, 171);
             this.currentModelRunLab.Name = "currentModelRunLab";
             this.currentModelRunLab.Size = new System.Drawing.Size(189, 45);
             this.currentModelRunLab.TabIndex = 29;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(551, 349);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "关闭";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.CancleUpdate_Click);
+            // 
+            // checkStatus
+            // 
+            this.checkStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkStatus.Font = new System.Drawing.Font("华文宋体", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkStatus.Location = new System.Drawing.Point(261, 148);
+            this.checkStatus.Name = "checkStatus";
+            this.checkStatus.Size = new System.Drawing.Size(143, 20);
+            this.checkStatus.TabIndex = 0;
+            this.checkStatus.Text = "正在检查更新";
+            // 
+            // sizeValue
+            // 
+            this.sizeValue.AutoSize = true;
+            this.sizeValue.Location = new System.Drawing.Point(98, 89);
+            this.sizeValue.Name = "sizeValue";
+            this.sizeValue.Size = new System.Drawing.Size(12, 17);
+            this.sizeValue.TabIndex = 12;
+            this.sizeValue.Text = " ";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(458, 349);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "更新";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.UpdateSoftware_Click);
+            // 
+            // description
+            // 
+            this.description.Location = new System.Drawing.Point(8, 122);
+            this.description.Multiline = true;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            this.description.Size = new System.Drawing.Size(618, 221);
+            this.description.TabIndex = 13;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(551, 349);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "取消";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.AboutCancelButton_Click);
             // 
             // label23
             // 
@@ -1161,117 +1238,42 @@
             this.label23.Size = new System.Drawing.Size(0, 17);
             this.label23.TabIndex = 7;
             // 
-            // textBox1
-            // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("华文宋体", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(270, 148);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(143, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "正在检查更新";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(550, 348);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "取消";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.CancleUpdate_Click);
-            // 
-            // newVersion
-            // 
-            this.newVersion.Controls.Add(this.description);
-            this.newVersion.Controls.Add(this.label28);
-            this.newVersion.Controls.Add(this.label27);
-            this.newVersion.Controls.Add(this.size);
-            this.newVersion.Controls.Add(this.version);
-            this.newVersion.Controls.Add(this.title);
-            this.newVersion.Controls.Add(this.button3);
-            this.newVersion.Controls.Add(this.button2);
-            this.newVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.newVersion.Location = new System.Drawing.Point(0, 0);
-            this.newVersion.Name = "newVersion";
-            this.newVersion.Size = new System.Drawing.Size(634, 380);
-            this.newVersion.TabIndex = 7;
-            this.newVersion.Visible = false;
-            // 
-            // description
-            // 
-            this.description.Location = new System.Drawing.Point(8, 119);
-            this.description.Multiline = true;
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            this.description.Size = new System.Drawing.Size(618, 216);
-            this.description.TabIndex = 13;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(115, 83);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(38, 17);
-            this.label28.TabIndex = 12;
-            this.label28.Text = "17KB";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(115, 53);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(35, 17);
-            this.label27.TabIndex = 11;
-            this.label27.Text = "2.1.2";
-            // 
-            // size
-            // 
-            this.size.AutoSize = true;
-            this.size.Location = new System.Drawing.Point(39, 83);
-            this.size.Name = "size";
-            this.size.Size = new System.Drawing.Size(59, 17);
-            this.size.TabIndex = 10;
-            this.size.Text = "下载大小:";
-            // 
             // version
             // 
             this.version.AutoSize = true;
-            this.version.Location = new System.Drawing.Point(39, 53);
+            this.version.Location = new System.Drawing.Point(98, 66);
             this.version.Name = "version";
-            this.version.Size = new System.Drawing.Size(59, 17);
-            this.version.TabIndex = 9;
-            this.version.Text = "更新版本:";
+            this.version.Size = new System.Drawing.Size(12, 17);
+            this.version.TabIndex = 11;
+            this.version.Text = " ";
+            // 
+            // sizeLable
+            // 
+            this.sizeLable.AutoSize = true;
+            this.sizeLable.Location = new System.Drawing.Point(25, 89);
+            this.sizeLable.Name = "sizeLable";
+            this.sizeLable.Size = new System.Drawing.Size(59, 17);
+            this.sizeLable.TabIndex = 10;
+            this.sizeLable.Text = "下载大小:";
+            // 
+            // versionLable
+            // 
+            this.versionLable.AutoSize = true;
+            this.versionLable.Location = new System.Drawing.Point(25, 66);
+            this.versionLable.Name = "versionLable";
+            this.versionLable.Size = new System.Drawing.Size(59, 17);
+            this.versionLable.TabIndex = 9;
+            this.versionLable.Text = "更新版本:";
             // 
             // title
             // 
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.title.Location = new System.Drawing.Point(12, 16);
+            this.title.Location = new System.Drawing.Point(24, 23);
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(74, 22);
             this.title.TabIndex = 8;
             this.title.Text = "更新可用";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(457, 348);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "更新";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.UpdateSoftware_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(550, 348);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "关闭";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.CancleUpdate_Click);
             // 
             // pythonOpenFileDialog
             // 
@@ -1292,6 +1294,7 @@
             this.Name = "ConfigForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "首选项";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigForm_FormClosing);
             this.Load += new System.EventHandler(this.ConfigForm_Load);
             this.mainTabControl.ResumeLayout(false);
             this.userModelConfigPage.ResumeLayout(false);
@@ -1323,10 +1326,10 @@
             this.aboutConfigPage.ResumeLayout(false);
             this.aboutConfigPage.PerformLayout();
             this.checkNewVersion.ResumeLayout(false);
-            this.checking.ResumeLayout(false);
-            this.checking.PerformLayout();
             this.newVersion.ResumeLayout(false);
             this.newVersion.PerformLayout();
+            this.checking.ResumeLayout(false);
+            this.checking.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1421,19 +1424,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.Panel checking;
         private System.Windows.Forms.Panel newVersion;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label size;
+        private System.Windows.Forms.Panel checking;
+        private System.Windows.Forms.Label sizeValue;
         private System.Windows.Forms.Label version;
+        private System.Windows.Forms.Label sizeLable;
+        private System.Windows.Forms.Label versionLable;
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label currentModelRunLab;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox checkStatus;
         private System.Windows.Forms.TextBox description;
     }
 }
