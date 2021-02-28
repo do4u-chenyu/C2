@@ -421,11 +421,9 @@ var BMAP_DRAWING_MARKER = "marker",
             overlay = null,
             isBinded = false;
             var l = function (o) {
-            
             var fso;
             j.push(o.point);
             polylineOrPolygon.push(o.point.lng, o.point.lat);
-            alert(polylineOrPolygon);
             //alert(o.point.lat);
             if (k._drawingType == BMAP_DRAWING_POLYLINE) {
                 try {

@@ -109,6 +109,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SaveHtml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             SaveHtml.Image = global::C2.Properties.Resources.save;
             SaveHtml.Text = "保存成html";
+            SaveHtml.Click += new System.EventHandler(this.SaveHtml_Click);
 
             // SavePic
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -174,6 +175,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
             webBrowser1.DrawToBitmap(bitmap, rectangle);
             bitmap.Save(fd.FileName);
         }
+        void SaveHtml_Click(object sender, EventArgs e)
+        {
+           //这里有待探讨
+        }
 
         private void Clear_Click(object sender, EventArgs e)
         {
@@ -189,6 +194,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.panel1.Enabled = true;
                 this.webBrowser1.Location = new System.Drawing.Point(600, 28);
                 this.webBrowser1.Width = 750;
+                this.SaveHtml.Enabled = false;
+                this.SavePic.Enabled = false;
+                this.SaveHtml.Enabled = false;
+                this.LoadMapData.Enabled = false;
+                this.Clear.Enabled = false;
                 isActive = false;
             }
             else
@@ -197,6 +207,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.panel1.Enabled = false;
                 this.webBrowser1.Location = new System.Drawing.Point(12, 23);
                 this.webBrowser1.Width = 1340;
+                this.SaveHtml.Enabled = true;
+                this.SavePic.Enabled = true;
+                this.SaveHtml.Enabled = true;
+                this.LoadMapData.Enabled = true;
+                this.Clear.Enabled = true;
                 isActive = true;
             }
             LoadHtml();
