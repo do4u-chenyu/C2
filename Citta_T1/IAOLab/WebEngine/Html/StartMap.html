@@ -300,23 +300,11 @@
             map.addOverlay(marker);
         }     
     }
-	//DrawOrit2();
+
 	//在地图上画轨迹 strat
-    function DrawOrit2(w)
+    function drawOrit(w)
     {
         var obj = JSON.parse(w);
-        //alert(obj[0].lng);
-        //alert(obj[0].lat)
-   
-  //    var pointStr = "104.038748,30.641821,104.047789,30.648128,104.063959,30.655336,104.067264,30.660307,104.067264,30.664438,104.064008,30.665316".split(",");
-        //var pointArr = [];
-        //for (var k = 0; k < pointStr.length; k += 2) {
-        //    pointArr.push({
-        //        lng: obj[k],
-        //        lat: obj[k + 1]
-        //    });
-        //}
-        // 生成坐标点
         var trackPoint = [];
         for (var i = 0, j = obj.length; i < j; i++) {
             trackPoint.push(new BMap.Point(obj[i].lng, obj[i].lat));
@@ -325,4 +313,14 @@
 		map.addOverlay(polyline);  	
     }
 
+	//在地图上画多边形 strat
+    function drawPolygon(w) {
+        var obj = JSON.parse(w);
+        var trackPoint = []; 
+        for (var i = 0, j = obj.length; i < j; i++) {
+            trackPoint.push(new BMap.Point(obj[i].lng, obj[i].lat));
+        }
+        var polyline = new BMap.Polygon(trackPoint, { strokeColor: "blue", strokeWeight: 6, strokeOpacity: 0.5 });  //定义折线  
+        map.addOverlay(polyline);  	
+    };
 </script>

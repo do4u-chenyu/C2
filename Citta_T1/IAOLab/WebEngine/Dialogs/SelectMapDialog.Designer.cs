@@ -91,7 +91,7 @@
             this.mapTypeComboBox.Items.AddRange(new object[] {
             "标注图",
             "轨迹图",
-            "区域图",
+            "多边形图",
             "热力图"});
             this.mapTypeComboBox.Location = new System.Drawing.Point(151, 62);
             this.mapTypeComboBox.Name = "mapTypeComboBox";
