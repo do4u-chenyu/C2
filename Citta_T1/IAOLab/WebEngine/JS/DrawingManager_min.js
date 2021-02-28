@@ -1,4 +1,3 @@
-var remberPoints = [];
 var BMapLib = window.BMapLib = BMapLib || {};
 var BMAP_DRAWING_MARKER = "marker",
     BMAP_DRAWING_POLYLINE = "polyline",
@@ -358,12 +357,12 @@ var BMAP_DRAWING_MARKER = "marker",
                 var k = new BMap.Marker(l.point, i.markerOptions);
                 j.addOverlay(k);
                 i._dispatchOverlayComplete(k);
-                remberPoints.push(l.point.lng, l.point.lat);
+                remberPoint.push(l.point.lng, l.point.lat);
                 var fso;
                 try {
                     fso = new ActiveXObject("Scripting.FileSystemObject");
-                    var f1 = fso.createtextfile("D:\\1.txt", true);
-                    f1.writeLine(remberPoints);
+                    var f1 = fso.createtextfile("D:\\标注图点.txt", true);
+                    f1.writeLine(remberPoint);
                     f1.close();
 
                 } catch (e) {
@@ -373,7 +372,6 @@ var BMAP_DRAWING_MARKER = "marker",
             };
       
             h.addEventListener("click", g)
-    
             
         };
         
@@ -412,36 +410,69 @@ var BMAP_DRAWING_MARKER = "marker",
             };
             o.addEventListener("mousedown", g)
         };
+        var polylineOrPolygon = [];
         d.prototype._bindPolylineOrPolygon = function () {
+            
             var k = this,
-                m = this._map,
-                h = this._mask,
-                j = [],
-                n = null;
+            m = this._map,
+            h = this._mask,
+            j = [],
+            n = null;
             overlay = null,
-                isBinded = false;
+            isBinded = false;
             var l = function (o) {
-                j.push(o.point);
-                n = j.concat(j[j.length - 1]);
-                if (j.length == 1) {
-                    if (k._drawingType == BMAP_DRAWING_POLYLINE) {
-                        overlay = new BMap.Polyline(n, k.polylineOptions)
-                    } else {
-                        if (k._drawingType == BMAP_DRAWING_POLYGON) {
-                            overlay = new BMap.Polygon(n, k.polygonOptions)
-                        }
-                    }
-                    m.addOverlay(overlay)
+            
+            var fso;
+            j.push(o.point);
+            polylineOrPolygon.push(o.point.lng, o.point.lat);
+            alert(polylineOrPolygon);
+            //alert(o.point.lat);
+            if (k._drawingType == BMAP_DRAWING_POLYLINE) {
+                try {
+                    fso = new ActiveXObject("Scripting.FileSystemObject");
+                    var f2 = fso.createtextfile("D:\\折线图点.txt", true);
+                    f2.writeLine(polylineOrPolygon);
+                    f2.close();
+
+                } catch (e) {
+                    alert("当前浏览器不支持");
+                    return;
+                }
+            }
+            else if (k._drawingType == BMAP_DRAWING_POLYGON) {
+                try {
+                    fso = new ActiveXObject("Scripting.FileSystemObject");
+                    var f3 = fso.createtextfile("D:\\多边形图点.txt", true);
+                    f3.writeLine(polylineOrPolygon);
+                    f3.close();
+
+                } catch (e) {
+                    alert("当前浏览器不支持");
+                    return;
+                }
+            }
+            n = j.concat(j[j.length - 1]); 
+            if (j.length == 1) {
+                if (k._drawingType == BMAP_DRAWING_POLYLINE) {
+                    overlay = new BMap.Polyline(n, k.polylineOptions)
+                    
                 } else {
-                    overlay.setPath(n)
+                if (k._drawingType == BMAP_DRAWING_POLYGON) {
+                        
+                    overlay = new BMap.Polygon(n, k.polygonOptions)
                 }
-                if (!isBinded) {
-                    isBinded = true;
-                    h.enableEdgeMove();
-                    h.addEventListener("mousemove", i);
-                    h.addEventListener("dblclick", g)
-                }
-            };
+            }
+                m.addOverlay(overlay)
+            } else {
+                overlay.setPath(n)
+            }
+            if (!isBinded) {
+                isBinded = true;
+                h.enableEdgeMove();
+                h.addEventListener("mousemove", i);
+                h.addEventListener("dblclick", g)
+            }
+        };
             var i = function (o) {
                 overlay.setPositionAt(n.length - 1, o.point)
             };
