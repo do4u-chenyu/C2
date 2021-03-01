@@ -87,7 +87,10 @@ namespace C2.Core
             }
             return dataPreviewDict[key].PreviewFileContent;
         }
-
+        public bool IsDBDataCached(DatabaseItem databaseItem)
+        {
+            return HitCache(databaseItem.AllDatabaseInfo);
+        }
         private string GetCachePreviewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = String.Empty;

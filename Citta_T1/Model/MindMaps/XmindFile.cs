@@ -38,6 +38,7 @@ namespace C2.Model.MindMaps
         XmlNamespaceManager nsmgr;
         List<Attachment> attachments;
         string filename;
+        int currSheetID;
         XmlElement contentRoot;
         MindMapLayoutType layout;
         /// <summary>
@@ -173,6 +174,7 @@ namespace C2.Model.MindMaps
             // 单sheet / chart
             XmlElement sheet = contentDoc.CreateElement("sheet");
             this.layout = mindMap.LayoutType;
+            this.currSheetID = sheetID;
             sheet.SetAttribute("id", sheetID.ToString());
 
             // topics
@@ -196,8 +198,7 @@ namespace C2.Model.MindMaps
                 return;
             XmlElement topicNode = contentDoc.CreateElement("topic");
             // Attributes
-            //topicNode.SetAttribute("id", topic.ID);
-            topicNode.SetAttribute("id", GenerateMD5(topic.ID.ToString()));
+            topicNode.SetAttribute("id", this.currSheetID.ToString() + "-" + topic.ID.ToString());
             topicNode.SetAttribute("style-id", defaultTopicStyleIndex.ToString());
             if (topic.Folded)
                 topicNode.SetAttribute("branch", "folded");
@@ -308,7 +309,7 @@ namespace C2.Model.MindMaps
             switch (mmlt)
             {
                 case MindMapLayoutType.MindMap:
-                    return "org.xmind.ui.map.unbalanced";
+                    return "org.xmind.ui.map.anticlockwise";
                 case MindMapLayoutType.OrganizationDown:
                     return "org.xmind.ui.org-chart.down";
                 case MindMapLayoutType.OrganizationUp:
@@ -322,7 +323,7 @@ namespace C2.Model.MindMaps
                 case MindMapLayoutType.LogicRight:
                     return "org.xmind.ui.logic.right";
                 default:
-                    return "org.xmind.ui.map.unbalanced";
+                    return "org.xmind.ui.map.anticlockwise";
             }
         }
         private string GetXmindAlignment(WidgetAlignment alignment)
@@ -387,7 +388,7 @@ namespace C2.Model.MindMaps
         {
             foreach (DataItem dataItem in dataSourceWidget.DataItems)
             {
-                if (dataItem.IsDatabase() && String.IsNullOrEmpty(dataItem.FilePath))
+                if (dataItem.IsDatabase() && !BCPBuffer.GetInstance().IsDBDataCached(dataItem.DBItem))
                 {
                     SaveLabel(parent, notSavedextErnalDataTag + dataItem.DataType.ToString() + "-" + dataItem.FileName);
                     return;
@@ -617,9 +618,9 @@ namespace C2.Model.MindMaps
         {
             XmlElement node = contentDoc.CreateElement("relationship");
             // Attributes
-            node.SetAttribute("end1", link.From.ID.ToString());
-            node.SetAttribute("end2", link.Target.ID.ToString());
-            node.SetAttribute("id", link.ID.ToString());
+            node.SetAttribute("end1", this.currSheetID.ToString() + "-" + link.From.ID.ToString());
+            node.SetAttribute("end2", this.currSheetID.ToString() + "-" + link.Target.ID.ToString());
+            node.SetAttribute("id", this.currSheetID.ToString() + "-" + link.ID.ToString());
             // control-points
             XmlElement controlPoints = contentDoc.CreateElement("control-points");
             controlPoints.AppendChild(CreatControlPoint(link, 0));
