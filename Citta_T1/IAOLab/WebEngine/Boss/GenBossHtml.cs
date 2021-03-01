@@ -26,7 +26,7 @@ namespace C2.IAOLab.WebEngine.Boss
         }
 
 
-        public string TransDataToHtml(DataTable dataTable ,Dictionary<string, string[]> chartOptions)//参数待设计
+        public string TransDataToHtml(DataTable dataTable ,Dictionary<string, int[]> chartOptions)//参数待设计
         {
             //创建布局，增加图，Show()显示图 
             Echarts echarts = new Echarts
@@ -39,25 +39,25 @@ namespace C2.IAOLab.WebEngine.Boss
                 switch (eType)
                 {
                     case "SimpleBar":
-                        echarts[1] = new SimpleBar(new CompleteOption(), chartOptions["SimpleBar"]);
+                        echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions["SimpleBar"]);
                         break;
                     case "BasicLineChart":
-                        echarts[2] = new BasicLineChart(new CompleteOption(), chartOptions["BasicLineChart"]);
+                        echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions["BasicLineChart"]);
                         break;
                     case "BasicScatter":
-                        echarts[3] = new BasicScatter(new CompleteOption(), chartOptions["BasicScatter"]);
+                        echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions["BasicScatter"]);
                         break;
                     case "SmoothedLineChart":
-                        echarts[4] = new SmoothedLineChart(new CompleteOption(), chartOptions["SmoothedLineChart"]);
+                        echarts[4] = new SmoothedLineChart(dataTable, new CompleteOption(), chartOptions["SmoothedLineChart"]);
                         break;
                     case "StackBar":
-                        echarts[5] = new StackBar(new CompleteOption(), chartOptions["StackBar"]);
+                        echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions["StackBar"]);
                         break;
                     case "BasicPie":
-                        echarts[6] = new BasicPie(new CompleteOption(), chartOptions["BasicPie"]);
+                        echarts[6] = new BasicPie(dataTable, new CompleteOption(), chartOptions["BasicPie"]);
                         break;
                     case "BasicMap":
-                        echarts[7] = new BasicMap(new CompleteOption("map"), chartOptions["BasicMap"]);
+                        echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions["BasicMap"]);
                         break;
                     default:
                         break;

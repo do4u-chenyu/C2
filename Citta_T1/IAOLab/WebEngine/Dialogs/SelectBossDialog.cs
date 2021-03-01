@@ -7,13 +7,9 @@ using C2.Model;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.IAOLab.WebEngine.Dialogs
@@ -25,73 +21,111 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public List<DataItem> DataItems;
         private BcpInfo bcpInfo;
         private DataItem selectData;
-        private Dictionary<string, string[]> chartOptions;
+        public Dictionary<string, int[]> ChartOptions;
 
-        public SelectBossDialog(List<DataItem> dataItems)
+        public SelectBossDialog(List<DataItem> dataItems, Dictionary<string, int[]> options)
         {
             InitializeComponent();
-            chartOptions = new Dictionary<string, string[]>();
-            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "BossIndex01.html");
+
             DataItems = dataItems;
+            ChartOptions = options;
+            LoadOption();
+        }
+
+        private void SavaOption()
+        {
+            SavaDataOption("Datasource", datasource.SelectedIndex);
+            SavaDataOption("BossType", bossType.SelectedIndex);
+            SaveChartOption("SimpleBar", simpleBarX.SelectedIndex, simpleBarY.GetItemCheckIndex());
+            SaveChartOption("BasicLineChart", basicLineChartX.SelectedIndex, basicLineChartY.GetItemCheckIndex());
+            SaveChartOption("BasicScatter", basicScatterX.SelectedIndex, basicScatterY.GetItemCheckIndex());
+            SaveChartOption("SmoothedLineChart", smoothedLineChartX.SelectedIndex, smoothedLineChartY.GetItemCheckIndex());
+            SaveChartOption("StackBar", stackBarX.SelectedIndex, stackBarY.GetItemCheckIndex());
+            SaveChartOption("BasicPie", basicPieX.SelectedIndex, new List<int>() { basicPieY.SelectedIndex });
+            SaveChartOption("BasicMap", basicMapX.SelectedIndex, new List<int>() { basicMapY.SelectedIndex });
+        }
+
+        private void LoadOption()
+        {
+            LoadData();
+
+            //加载数据源、类型加载图表配置
+            LoadChartOption("SimpleBar", simpleBarX, simpleBarY);
+            LoadChartOption("BasicLineChart", basicLineChartX, basicLineChartY);
+            LoadChartOption("BasicScatter", basicScatterX, basicScatterY);
+            LoadChartOption("SmoothedLineChart", smoothedLineChartX, smoothedLineChartY);
+            LoadChartOption("StackBar", stackBarX, stackBarY);
+            LoadChartOption("BasicPie", basicPieX, basicPieY);
+            LoadChartOption("BasicMap", basicMapX, basicMapY);
+        }
+
+        protected override bool OnOKButtonClick()
+        {
+            //前100行所有列的数据生成datatable、图表配置项生成chartOptions、生成js
+            DataTable dataTable = GenDataTable(); 
+            SavaOption();
+            GenBossHtml.GetInstance().TransDataToHtml(dataTable, ChartOptions);
+
+            return base.OnOKButtonClick();
+        }
+        private void SavaDataOption(string dataType, int idx)
+        {
+            ChartOptions[dataType] = new int[] { idx };
+        }
+
+        private void SaveChartOption(string chartType, int idxX, List<int> idxY)
+        {
+            List<int> tmpList = new List<int>();
+            if (idxX < 0 || idxY.Count == 0 || (idxY.Count == 1 && idxY[0] == -1))
+                return;
+
+            tmpList.Add(idxX);
+            idxY.ForEach(t => tmpList.Add(t));
+            if (ChartOptions.ContainsKey(chartType))
+                ChartOptions[chartType] = tmpList.ToArray();
+            else
+                ChartOptions.Add(chartType, tmpList.ToArray());
+        }
+        private void LoadData()
+        {
+            //初始化大屏类型
+            if (!ChartOptions.ContainsKey("BossType") || ChartOptions["BossType"].Length == 0)
+                bossType.SelectedIndex = 0;
+            else
+                bossType.SelectedIndex = ChartOptions["BossType"][0];
+            //TODO phx 预览图也要跟着调整
+            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "BossIndex01.html");
+
+            //初始化数据源
             foreach (DataItem dataItem in DataItems)
             {
                 this.datasource.Items.Add(dataItem.FileName);
             }
-        }
-
-
-        protected override bool OnOKButtonClick()
-        {
-            string fileContent;
-            DataTable dataTable = new DataTable("temp");
-
-            //1、选中的数据源前100行生成dataTable
-            foreach (string col in bcpInfo.ColumnArray)
-                dataTable.Columns.Add(col);
-
-            if (selectData.FileType == OpUtil.ExtType.Excel)
-                fileContent = BCPBuffer.GetInstance().GetCachePreviewExcelContent(selectData.FilePath);
-            else
-                fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(selectData.FilePath, selectData.FileEncoding);
-            List<string> rows = new List<string>(fileContent.TrimEnd('\r').TrimEnd('\n').Split('\n'));
-            int maxLine = Math.Min(rows.Count, MaxLine);
-            
-            //文件仅有表头无法画图表
-            if (maxLine <= 1)
-                return false;
-
-            for (int i = 1; i < maxLine; i++)
-            {
-                string row = rows[i].TrimEnd('\r');
-                dataTable.Rows.Add(row.Split(selectData.FileSep));
-            }
-
-            //2、图表字段配置项生成chartOptions
-            SetChartOption("SimpleBar", simpleBarX.SelectedIndex, simpleBarY.GetItemCheckIndex());
-            SetChartOption("BasicLineChart", basicLineChartX.SelectedIndex, basicLineChartY.GetItemCheckIndex());
-            SetChartOption("BasicScatter", basicScatterX.SelectedIndex, basicScatterY.GetItemCheckIndex());
-            SetChartOption("SmoothedLineChart", smoothedLineChartX.SelectedIndex, smoothedLineChartY.GetItemCheckIndex());
-            SetChartOption("StackBar", stackBarX.SelectedIndex, stackBarY.GetItemCheckIndex());
-            SetChartOption("BasicPie", basicPieX.SelectedIndex, new List<int>() { basicPieY.SelectedIndex });
-            SetChartOption("BasicMap", basicMapX.SelectedIndex, new List<int>() { basicMapY.SelectedIndex });
-
-            //3、调用生成js
-            GenBossHtml.GetInstance().TransDataToHtml(dataTable, chartOptions);
-            return base.OnOKButtonClick();
-        }
-
-        private void SetChartOption(string chartType, int idxX, List<int> idxY)
-        {
-            List<string> tmpList = new List<string>();
-            if (idxX < 0 || idxY.Count == 0 || (idxY.Count == 1 && idxY[0] == -1))
+            if (!ChartOptions.ContainsKey("Datasource") || ChartOptions["Datasource"].Length == 0)
                 return;
+            datasource.SelectedIndex = ChartOptions["Datasource"][0];
+            selectData = DataItems[ChartOptions["Datasource"][0]];
+            this.bcpInfo = new BcpInfo(selectData.FilePath, selectData.FileEncoding, new char[] { selectData.FileSep });
+        }
 
-            tmpList.Add(bcpInfo.ColumnArray[idxX]);
-            idxY.ForEach(t => tmpList.Add(bcpInfo.ColumnArray[t]));
-            if (chartOptions.ContainsKey(chartType))
-                chartOptions[chartType] = tmpList.ToArray();
-            else
-                chartOptions.Add(chartType, tmpList.ToArray());
+        private void LoadChartOption(string chartType, Control controlX, Control controlY)
+        {
+            if (!ChartOptions.ContainsKey(chartType))
+                return;
+            //x控件一定是ComboBox,y控件可能是ComboBox或者是ComCheckBoxList
+            int[] tmpIdx = ChartOptions[chartType];
+            (controlX as ComboBox).SelectedIndex = tmpIdx[0];
+            (controlX as ComboBox).Text = bcpInfo.ColumnArray[tmpIdx[0]];
+
+            if (controlY is ComboBox)
+            {
+                (controlY as ComboBox).SelectedIndex = tmpIdx[1];
+                (controlY as ComboBox).Text = bcpInfo.ColumnArray[tmpIdx[1]];
+            }
+            else if (controlY is ComCheckBoxList)
+            {
+                (controlY as ComCheckBoxList).LoadItemCheckIndex(tmpIdx.Skip(1).ToArray());
+            }
         }
 
         private void Datasource_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,10 +133,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
             selectData = DataItems[this.datasource.SelectedIndex];
             
             this.bcpInfo = new BcpInfo(selectData.FilePath, selectData.FileEncoding, new char[] { selectData.FileSep });
-            GetOptionControls();
+            ChangeControlContent();
         }
 
-        private void GetOptionControls()
+        private void ChangeControlContent()
         {
             foreach(Control ct in this.Controls)
             {
@@ -119,6 +153,33 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 }
             }
 
+        }
+        private DataTable GenDataTable()
+        {
+            string fileContent;
+            DataTable dataTable = new DataTable("temp");
+
+            foreach (string col in bcpInfo.ColumnArray)
+                dataTable.Columns.Add(col);
+
+            if (selectData.FileType == OpUtil.ExtType.Excel)
+                fileContent = BCPBuffer.GetInstance().GetCachePreviewExcelContent(selectData.FilePath);
+            else
+                fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(selectData.FilePath, selectData.FileEncoding);
+            List<string> rows = new List<string>(fileContent.TrimEnd('\r').TrimEnd('\n').Split('\n'));
+            int maxLine = Math.Min(rows.Count, MaxLine);
+
+            //文件仅有表头无法画图表
+            //if (maxLine <= 1)
+            //    return false;
+
+            for (int i = 1; i < maxLine; i++)
+            {
+                string row = rows[i].TrimEnd('\r');
+                dataTable.Rows.Add(row.Split(selectData.FileSep));
+            }
+
+            return dataTable;
         }
     }
 }
