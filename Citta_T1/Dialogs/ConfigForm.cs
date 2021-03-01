@@ -23,8 +23,8 @@ namespace C2.Dialogs
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
         public string latude;
-        public string lontude ;
-        public string scale ;
+        public string lontude;
+        public string scale;
         public string baiduVerAPI;
         public string baiduHeatAPI;
         private Thread checkVersion;
@@ -32,7 +32,7 @@ namespace C2.Dialogs
         {
             InitializeComponent();
             latude = this.baiduLatTB.Text = Settings.Default.latude;
-            lontude =this.baiduLonTB.Text = Settings.Default.lontude;
+            lontude = this.baiduLonTB.Text = Settings.Default.lontude;
             scale = this.baiduScaleTB.Text = Settings.Default.scale;
             baiduVerAPI = this.baiduVerAPITB.Text = Settings.Default.baiduVerAPI;
             baiduHeatAPI = this.baiduHeatTB.Text = Settings.Default.baiduHeatAPI;
@@ -241,7 +241,7 @@ namespace C2.Dialogs
                 string[] info_split = info.Split(OpUtil.TabSeparator);
                 if (info_split.Length < 3)
                     continue;
-                string pluginName = info_split[0];     
+                string pluginName = info_split[0];
                 string pluginVersion = info_split[1];
                 string pluginDesc = info_split[2];
                 this.availableDGV.Rows.Add(new Object[] { pluginName, pluginVersion, false, pluginDesc }); // 第4列隐藏
@@ -422,7 +422,7 @@ namespace C2.Dialogs
 
         private void PluginsTabControl_Selected(object sender, TabControlEventArgs e)
         {
-            if (this.pluginsTabControl.SelectedTab != this.availableSubPage) 
+            if (this.pluginsTabControl.SelectedTab != this.availableSubPage)
                 return;
 
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
@@ -460,7 +460,7 @@ namespace C2.Dialogs
                 }
             }
             if (e.Handled == true)
-                latude = this.baiduLatTB.Text; 
+                latude = this.baiduLatTB.Text;
         }
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
@@ -512,7 +512,7 @@ namespace C2.Dialogs
 
 
         #region 检查更新Tab
-  
+
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
@@ -547,7 +547,7 @@ namespace C2.Dialogs
                     this.sizeValue.Visible = false;
                     this.checking.Visible = false;
                 }));
-                
+
                 this.ResumeLayout(false);
             }
             else
@@ -560,9 +560,9 @@ namespace C2.Dialogs
                     this.Invoke((EventHandler)(delegate
                     {
                         this.currentModelRunLab.Visible = false;
-                        this.checkStatus.Text="联网检查更新失败";
+                        this.checkStatus.Text = "联网检查更新失败";
                     }));
-                    
+
                     return;
                 }
 
@@ -610,11 +610,51 @@ namespace C2.Dialogs
             Settings.Default.baiduVerAPI = this.baiduVerAPITB.Text;
             Settings.Default.baiduHeatAPI = this.baiduHeatTB.Text;
             Settings.Default.Save();
-
-
-
-
+            WriteFile();
             this.Close();
+        }
+        public void WriteFile()
+        {
+            //---------------------读html模板页面到stringbuilder对象里----
+            StringBuilder htmltext = new StringBuilder();
+            try
+            {
+                using (StreamReader sr = new StreamReader(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html")) //模板页路径
+                {
+                    String line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        htmltext.Append(line);
+                        htmltext.Append('\n');
+                    }
+                    sr.Close();
+                }
+            }
+            catch
+            {
+
+                HelpUtil.ShowMessageBox("文件读取错误！");
+
+            }
+            //----------替换html内容
+
+            htmltext.Replace("http://api.map.baidu.com/api?v=1.4&services=true", this.baiduVerAPITB.Text);
+            htmltext.Replace("http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js", this.baiduHeatTB.Text);
+
+            //----------生成htm文件------------------――
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html", false, System.Text.Encoding.GetEncoding("GB2312"))) //保存地址
+                {
+                    sw.WriteLine(htmltext);
+                    sw.Flush();
+                    sw.Close();
+                }
+            }
+            catch
+            {
+                HelpUtil.ShowMessageBox("更改API失败！");
+            }
         }
 
         private void checking_Paint(object sender, PaintEventArgs e)
@@ -624,7 +664,7 @@ namespace C2.Dialogs
 
         private void ConfigForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            checkVersion.Abort();
+            //checkVersion.Abort();
         }
     }
 }
