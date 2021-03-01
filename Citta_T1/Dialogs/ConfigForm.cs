@@ -9,6 +9,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace C2.Dialogs
@@ -24,6 +25,7 @@ namespace C2.Dialogs
         public string latude;
         public string lontude ;
         public string scale ;
+        private Thread checkVersion;
         public ConfigForm()
         {
             InitializeComponent();
@@ -506,28 +508,88 @@ namespace C2.Dialogs
 
 
         #region 检查更新Tab
+  
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (mainTabControl.SelectedIndex != 5)
+            if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
                 return;
- 
-            string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version"); 
+
+            checkVersion = new Thread(CheckUpdate);
+            checkVersion.Start();
+        }
+        private void MainTabControl_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (checkVersion != null)
+            {
+                mainTabControl.SelectTab(5);
+                return;
+            }
+        }
+        private void CheckUpdate()
+        {
+
+            string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
             string browserVersion = BrowserVersion();
-            if (currentVersion.Equals(browserVersion))
+            if (browserVersion.StartsWith(currentVersion) || browserVersion.IsNullOrEmpty())
             {
 
+                this.SuspendLayout();
+                this.Invoke((EventHandler)(delegate
+                {
+                    this.title.Text = "当前已为最新版本";
+                    this.versionLable.Text = @"当前版本:";
+                    this.version.Text = currentVersion;
+                    this.sizeLable.Visible = false;
+                    this.sizeValue.Visible = false;
+                    this.checking.Visible = false;
+                }));
+                
+                this.ResumeLayout(false);
             }
-            else 
-            { 
+            else
+            {
+                string softwareInfo = BrowserVersionInfo(browserVersion);
+                string[] info_split = softwareInfo.Split(OpUtil.TabSeparator);
+                if (info_split.Length < 3)
+                {
+
+                    this.Invoke((EventHandler)(delegate
+                    {
+                        this.currentModelRunLab.Visible = false;
+                        this.checkStatus.Text="联网检查更新失败";
+                    }));
+                    
+                    return;
+                }
+
+                this.SuspendLayout();
+                this.version.Text = info_split[0];
+                this.sizeValue.Text = info_split[1];
+                this.description.Text = info_split[2];
+                this.checking.Visible = false;
+                this.ResumeLayout(false);
+
 
             }
         }
+
         private string BrowserVersion()
         {
-            return string.Empty;
+
+            PluginsDownloader downloader = new PluginsDownloader();
+            string htmlContent = downloader.GetHtmlContent(Global.SoftwareUrl);
+            List<string> packageName = PluginsManager.Instance.GetPluginsNameList(htmlContent);
+            return packageName.IsNullOrEmpty() ? string.Empty : packageName[0];
+        }
+        private string BrowserVersionInfo(string name)
+        {
+            PluginsDownloader downloader = new PluginsDownloader();
+            string packageDir = Path.Combine(Global.SoftwareUrl, @"software/");
+            return downloader.GetPluginsInfo(name, packageDir);
         }
         private void CancleUpdate_Click(object sender, EventArgs e)
         {
+            checkVersion.Abort();
             this.Close();
         }
         private void UpdateSoftware_Click(object sender, EventArgs e)
@@ -543,6 +605,16 @@ namespace C2.Dialogs
             Settings.Default.scale = this.baiduScaleTB.Text;
             Settings.Default.Save();
             this.Close();
+        }
+
+        private void checking_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ConfigForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            checkVersion.Abort();
         }
     }
 }
