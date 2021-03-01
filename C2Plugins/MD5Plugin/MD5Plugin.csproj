@@ -81,4 +81,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if not exist plugins md $(SolutionDir)\Citta_T1\bin\Release\plugins  
+copy  /Y $(TargetPath) $(SolutionDir)\Citta_T1\bin\Release\plugins  
+
+if not exist plugins md $(SolutionDir)\Citta_T1\bin\Debug\plugins  
+copy  /Y $(TargetPath) $(SolutionDir)\Citta_T1\bin\Debug\plugins  
+
+if not exist plugins md $(SolutionDir)\Citta_T1\bin\开发调试\plugins    
+copy  /Y $(TargetPath) $(SolutionDir)\Citta_T1\bin\开发调试\plugins</PostBuildEvent>
+  </PropertyGroup>
 </Project>

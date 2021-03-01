@@ -105,11 +105,11 @@ namespace MD5Plugin
             {
                 num = 3;
             }
-            if(radioButton3.Checked)
+            if (radioButton3.Checked)
             {
                 num = 4;
             }
-            if(radioButton5.Checked)
+            if (radioButton5.Checked)
             {
                 num = 5;
             }
@@ -139,7 +139,8 @@ namespace MD5Plugin
                     GetUtf8(textBox1.Text);
                     break;
                 case 6:
-                    Console.WriteLine("gbk");
+                    //Console.WriteLine("gbk");
+                    GetGbk(textBox1.Text);
                     break;
                 default:
                     //Console.WriteLine("base64");
@@ -182,7 +183,7 @@ namespace MD5Plugin
             //byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(str));
             byte[] data = md5Hasher.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(str));
             StringBuilder sBuilder = new StringBuilder();
-            for (int i = 0;i < data.Length; i++)
+            for (int i = 0; i < data.Length; i++)
             {
                 sBuilder.Append(data[i].ToString("x2"));
 
@@ -196,7 +197,7 @@ namespace MD5Plugin
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
             string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(str)), 4, 8);
-            t2 = t2.Replace("-","");
+            t2 = t2.Replace("-", "");
             t2 = t2.ToLower();
             textBox2.Text = t2;
         }
@@ -225,14 +226,46 @@ namespace MD5Plugin
 
         public void GetUtf8(string str)
         {
-            //UTF8Encoding utf8 = new UTF8Encoding();
-            //Byte[] encodedBytes = utf8.GetBytes(str);
-            //textBox2.Text = utf8.GetString(encodedBytes);
-            //textBox2.Text = HttpUtility.UrlEncode(str, Encoding.GetEncoding("utf-8"));
+            //byte[] utf8 = Encoding.UTF8.GetBytes(str);
+            //string s3 = "";
+            //string s3d = "";
+            //foreach (byte b in utf8)
+            //{
+            //    s3 += string.Format("{0:X2}", b) + " ";
+            //    s3d += b + " ";
+            //}
+            //textBox2.Text = s3;
+            string ss = "";
+            if (!string.IsNullOrEmpty(str))
+            {
+                for (int i = 0; i < str.Length; i++)
+                {
+                     ss += "&#x" + ((int)str[i]).ToString("X") + ";";
+                }
+
+                textBox2.Text = ss;
+            }
+            else
+            {
+                textBox2.Text = "";
+            }
         }
 
         public void GetGbk(string str)
         {
+            string ss = "";
+            if (!string.IsNullOrEmpty(str))
+            {
+                for (int i = 0; i < str.Length; i++)
+                {
+                    ss += "\\u" + ((int)str[i]).ToString("x");
+                }
+                textBox2.Text = ss;
+            }
+            else
+            {
+                textBox2.Text = "";
+            }
 
         }
     }
