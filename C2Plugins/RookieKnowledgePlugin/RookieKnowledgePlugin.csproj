@@ -66,12 +66,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\UserInstallSet\UserInstallSet.csproj">
-      <Project>{8587D0E2-E1F2-442D-B729-897391FB2881}</Project>
-      <Name>UserInstallSet</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="cookbook\大师Linux\" />
     <Folder Include="cookbook\大师Python\" />
   </ItemGroup>
