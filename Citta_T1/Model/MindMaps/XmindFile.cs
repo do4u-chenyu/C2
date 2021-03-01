@@ -144,7 +144,7 @@ namespace C2.Model.MindMaps
             // content.xml
             root.AppendChild(CreateFileEntryNode(metaDom, "content.xml", "text/xml"));
             // styles.xml
-            //root.AppendChild(NewFullEntryNode("styles.xml", "text/xml"))
+            root.AppendChild(CreateFileEntryNode(metaDom, "styles.xml", "text/xml"));
             // attachments
             foreach (Attachment attachment in attachments)
                 root.AppendChild(
