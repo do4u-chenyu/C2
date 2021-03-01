@@ -71,17 +71,20 @@ namespace C2.Model.MindMaps
         private void Initialize(string fn)
         {
             contentDoc = new XmlDocument();
-            styleDoc = CreateStyleDOM();
-            attachments = new List<Attachment>();
-            filename = fn;
-
-            contentRoot = CreateRootFromCTDOM(contentDoc);
 
             nsmgr = new XmlNamespaceManager(contentDoc.NameTable);
             nsmgr.AddNamespace("fo", "http://www.w3.org/1999/XSL/Format");
             nsmgr.AddNamespace("svg", "http://www.w3.org/2000/svg");
             nsmgr.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+
+            styleDoc = CreateStyleDOM();
+            attachments = new List<Attachment>();
+            filename = fn;
+
+            contentRoot = CreateRootFromCTDOM(contentDoc);
+
+
         }
         public void SaveFile()
         {
@@ -122,11 +125,12 @@ namespace C2.Model.MindMaps
         private XmlElement CreateRootFromCTDOM(XmlDocument doc)
         {
             XmlElement root = doc.CreateElement("xmap-content");
-            //root.SetAttribute("xmlns", "urn:xmind:xmap:xmlns:content:2.0");
-            //root.SetAttribute("xmlns", "fo", "http://www.w3.org/1999/XSL/Format");
-            //root.SetAttribute("xmlns", "svg", "http://www.w3.org/2000/svg");
-            //root.SetAttribute("xmlns", "xhtml", "http://www.w3.org/1999/xhtml");
-            //root.SetAttribute("xmlns", "xlink", "http://www.w3.org/1999/xlink");
+
+            root.SetAttribute("xmlns", "urn:xmind:xmap:xmlns:content:2.0");
+            root.Attributes.Append(CreateAttributeWithNs("xmlns", "fo", "http://www.w3.org/1999/XSL/Format"));
+            root.Attributes.Append(CreateAttributeWithNs("xmlns", "svg", "http://www.w3.org/2000/svg"));
+            root.Attributes.Append(CreateAttributeWithNs("xmlns", "xhtml", "http://www.w3.org/1999/xhtml"));
+            root.Attributes.Append(CreateAttributeWithNs("xmlns", "xlink", "http://www.w3.org/1999/xlink"));
             root.SetAttribute("version", "2.0");
 
             return root;
