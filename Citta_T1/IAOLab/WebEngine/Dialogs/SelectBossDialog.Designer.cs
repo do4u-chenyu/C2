@@ -95,18 +95,18 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(505, 45);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 10006;
-            this.label4.Text = "横轴：";
+            this.label4.Text = "X轴：";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(724, 45);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.Size = new System.Drawing.Size(35, 12);
             this.label5.TabIndex = 10007;
-            this.label5.Text = "纵轴：";
+            this.label5.Text = "Y轴：";
             // 
             // datasource
             // 
@@ -163,9 +163,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(505, 102);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 10014;
-            this.label3.Text = "横轴：";
+            this.label3.Text = "X轴：";
             // 
             // stackBarX
             // 
@@ -180,9 +180,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(724, 102);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 12);
+            this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 10016;
-            this.label6.Text = "纵轴：";
+            this.label6.Text = "Y轴：";
             // 
             // basicPieY
             // 
@@ -251,7 +251,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(41, 12);
             this.label12.TabIndex = 10031;
-            this.label12.Text = "数据：";
+            this.label12.Text = "数值：";
             // 
             // pictureBox1
             // 
@@ -324,18 +324,18 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(724, 162);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 12);
+            this.label7.Size = new System.Drawing.Size(35, 12);
             this.label7.TabIndex = 10059;
-            this.label7.Text = "纵轴：";
+            this.label7.Text = "Y轴：";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(505, 162);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 12);
+            this.label8.Size = new System.Drawing.Size(35, 12);
             this.label8.TabIndex = 10058;
-            this.label8.Text = "横轴：";
+            this.label8.Text = "X轴：";
             // 
             // smoothedLineChartY
             // 
@@ -359,18 +359,18 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(724, 222);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(41, 12);
+            this.label9.Size = new System.Drawing.Size(35, 12);
             this.label9.TabIndex = 10063;
-            this.label9.Text = "纵轴：";
+            this.label9.Text = "Y轴：";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(505, 222);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 12);
+            this.label11.Size = new System.Drawing.Size(35, 12);
             this.label11.TabIndex = 10062;
-            this.label11.Text = "横轴：";
+            this.label11.Text = "X轴：";
             // 
             // basicScatterY
             // 
@@ -394,18 +394,18 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(724, 286);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 12);
+            this.label13.Size = new System.Drawing.Size(35, 12);
             this.label13.TabIndex = 10067;
-            this.label13.Text = "纵轴：";
+            this.label13.Text = "Y轴：";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(505, 286);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 12);
+            this.label14.Size = new System.Drawing.Size(35, 12);
             this.label14.TabIndex = 10066;
-            this.label14.Text = "横轴：";
+            this.label14.Text = "X轴：";
             // 
             // stackBarY
             // 
@@ -431,7 +431,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(41, 12);
             this.label15.TabIndex = 10071;
-            this.label15.Text = "纵轴：";
+            this.label15.Text = "数值：";
             // 
             // label17
             // 
@@ -440,7 +440,7 @@
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(41, 12);
             this.label17.TabIndex = 10070;
-            this.label17.Text = "横轴：";
+            this.label17.Text = "扇区：";
             // 
             // SelectBossDialog
             // 
@@ -491,7 +491,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SelectBossDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "导入数据";
+            this.Text = "参数配置";
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label4, 0);

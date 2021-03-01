@@ -41,7 +41,7 @@
             this.label1.Font = new System.Drawing.Font("宋体", 14F);
             this.label1.Location = new System.Drawing.Point(70, 47);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 19);
+            this.label1.Size = new System.Drawing.Size(106, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "新建模型";
             // 
@@ -61,7 +61,7 @@
             this.textBox.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.textBox.Location = new System.Drawing.Point(196, 43);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(173, 29);
+            this.textBox.Size = new System.Drawing.Size(173, 34);
             this.textBox.TabIndex = 4;
             this.textBox.Text = "我的新模型";
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
@@ -69,6 +69,7 @@
             // 
             // AddButton
             // 
+            this.AddButton.AutoSize = true;
             this.AddButton.BackColor = System.Drawing.SystemColors.Highlight;
             this.AddButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.AddButton.FlatAppearance.BorderSize = 0;
@@ -76,7 +77,7 @@
             this.AddButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.AddButton.Location = new System.Drawing.Point(230, 106);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(55, 28);
+            this.AddButton.Size = new System.Drawing.Size(60, 35);
             this.AddButton.TabIndex = 18;
             this.AddButton.Text = "添加";
             this.AddButton.UseVisualStyleBackColor = false;
@@ -84,11 +85,12 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.AutoSize = true;
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.cancelButton.Location = new System.Drawing.Point(314, 106);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(55, 28);
+            this.cancelButton.Size = new System.Drawing.Size(68, 35);
             this.cancelButton.TabIndex = 19;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;

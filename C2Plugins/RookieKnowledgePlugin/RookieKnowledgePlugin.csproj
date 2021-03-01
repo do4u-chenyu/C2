@@ -71,6 +71,10 @@
       <Name>UserInstallSet</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="cookbook\大师Linux\" />
+    <Folder Include="cookbook\大师Python\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist plugins md $(SolutionDir)\Citta_T1\bin\Release\plugins  

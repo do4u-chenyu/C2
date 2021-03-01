@@ -1,12 +1,13 @@
 ﻿using C2.IAOLab.WebEngine.Boss.Option;
 using C2.IAOLab.WebEngine.Boss.Option.SeriesType;
 using C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption;
+using System.Data;
 
 namespace C2.IAOLab.WebEngine.Boss.Charts.Map
 {
     class BasicMap : BaseCharts
     {
-        public BasicMap(CompleteOption option, string[] chartOptions)
+        public BasicMap(DataTable dataTable, CompleteOption option, int[] chartOptions)
         {
             option.tooltip = new Tooltip() {
                 trigger = Common.FormatString("item")
@@ -27,8 +28,8 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Map
                         emphasis = "{show : true}"
                     },
                     encode = new Encode() { 
-                        itemName = Common.FormatString(chartOptions[0]),
-                        value = Common.FormatString(chartOptions[1])
+                        itemName = chartOptions[0],
+                        value = chartOptions[1]
                     }
             }});
             _initScript = option.ToString();

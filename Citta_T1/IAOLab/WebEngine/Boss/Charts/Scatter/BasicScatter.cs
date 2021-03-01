@@ -3,12 +3,13 @@ using C2.IAOLab.WebEngine.Boss.Option.BaseOption;
 using C2.IAOLab.WebEngine.Boss.Option.SeriesType;
 using C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption;
 using System.Collections.Generic;
+using System.Data;
 
 namespace C2.IAOLab.WebEngine.Boss.Charts.Scatter
 {
     public class BasicScatter : BaseCharts
     {
-        public BasicScatter(CompleteOption option, string[] chartOptions)
+        public BasicScatter(DataTable dataTable, CompleteOption option, int[] chartOptions)
         {
             option.xAxis = new XAxis() {
                 type = xAxisType.category
@@ -20,10 +21,10 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Scatter
             for (int i = 1; i < chartOptions.Length; i++)
             {
                 series.Add(new SeriesScatter() {
-                    name = Common.FormatString(chartOptions[i]),
+                    name = Common.FormatString(dataTable.Columns[chartOptions[i]].ToString()),
                     encode = new Encode() {
-                        x = Common.FormatString(chartOptions[0]),
-                        y = Common.FormatString(chartOptions[i])
+                        x = chartOptions[0],
+                        y = chartOptions[i]
                     }
                 });
             }
