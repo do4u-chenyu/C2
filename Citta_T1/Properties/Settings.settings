@@ -11,5 +11,11 @@
     <Setting Name="scale" Type="System.String" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
+    <Setting Name="baiduVerAPI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://api.map.baidu.com/api?v=1.4&amp;services=true</Value>
+    </Setting>
+    <Setting Name="baiduHeatAPI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
