@@ -134,6 +134,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             
             this.bcpInfo = new BcpInfo(selectData.FilePath, selectData.FileEncoding, new char[] { selectData.FileSep });
             ChangeControlContent();
+            ChartOptions = new Dictionary<string, int[]>();
         }
 
         private void ChangeControlContent()

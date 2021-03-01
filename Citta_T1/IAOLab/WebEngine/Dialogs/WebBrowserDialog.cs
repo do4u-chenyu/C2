@@ -1,6 +1,9 @@
 ﻿using C2.Controls;
+using C2.Core;
 using C2.Dialogs;
 using C2.Model;
+using C2.Model.MindMaps;
+using C2.Model.Widgets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +15,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static C2.IAOLab.WebEngine.WebManager;
 
 namespace C2.IAOLab.WebEngine.Dialogs
 {
@@ -26,27 +30,42 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
 
+        public WebType WebType;
         public string Title { set => this.Text = value; get => this.Text; }
         public string WebUrl;
+        public Topic HitTopic;
         public List<DataItem> DataItems;
         bool isActive = true;
 
         public Dictionary<string, int[]> ChartOptions;
+
+        PictureWidget.PictureDesign _CurrentObject;
+        public PictureWidget.PictureDesign CurrentObject
+        {
+            get { return _CurrentObject; }
+            set { _CurrentObject = value; }
+        }
 
         public WebBrowserDialog()
         {
             InitializeComponent();
             Title = string.Empty;
             WebUrl = string.Empty;
-            DataItems = new List<DataItem>();
             ChartOptions = new Dictionary<string, int[]>();
+            WebType = WebType.Null;
         }
 
+        public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
+        {
+            HitTopic = hitTopic;
+            DataItems = hitTopic.GetDataItems();
+            WebType = webType;
+        }
         private void WebBrowserDialog_Load(object sender, EventArgs e)
         {
             WebBrowserConfig.SetWebBrowserFeatures(11);//TODO 暂定11，后面需要检测
             webBrowser1.Navigate(WebUrl);
-            if (this.Title == "数据大屏")//数据大屏初次打开是自动弹出配置窗口
+            if (WebType == WebType.Boss)//数据大屏初次打开是自动弹出配置窗口
                 OpenSelectBossDialog();
         }
 
@@ -175,6 +194,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         void SavePic_Click(object sender, EventArgs e)
         {
+            Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
+            Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
+            webBrowser1.DrawToBitmap(bitmap, rectangle);
+            bitmap.Save(Path.Combine(Global.TempDirectory,"1.png"));
+
             SaveFileDialog fd = new SaveFileDialog
             {
                 Filter = "图片文件(*.png)|*.png",
@@ -182,12 +206,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
             };
             if (fd.ShowDialog() != DialogResult.OK)
                 return;
-
-            Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
-            Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
-            webBrowser1.DrawToBitmap(bitmap, rectangle);
-            bitmap.Save(fd.FileName);
+            File.Copy(Path.Combine(Global.TempDirectory, "1.png"), fd.FileName, true);
         }
+
         void SaveHtml_Click(object sender, EventArgs e)
         {
            //这里有待探讨
@@ -268,6 +289,34 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void WebBrowserDialog_Activated(object sender, EventArgs e)
         {
             webBrowser1.Focus();
+        }
+
+        protected override bool OnOKButtonClick()
+        {
+            if(WebType == WebType.Boss)
+            {
+                string picPath = Path.Combine(Global.TempDirectory, "1.png");
+                //Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
+                //Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
+                //webBrowser1.DrawToBitmap(bitmap, rectangle);
+                //bitmap.Save(picPath);
+
+                //当前webbrowser截图，作为图片挂件加入当前节点
+                var template = new PictureWidget();
+
+                CurrentObject = new PictureWidget.PictureDesign();
+                CurrentObject.SourceType = PictureSource.File;
+                CurrentObject.Url = picPath;
+                CurrentObject.AddToLibrary = false;
+                CurrentObject.LimitImageSize = true;
+                CurrentObject.Name = Path.GetFileNameWithoutExtension(picPath);
+                CurrentObject.EmbedIn = false;
+                template.Image = CurrentObject;
+
+                HitTopic.Add(template);
+            }
+
+            return base.OnOKButtonClick();
         }
     }
 }

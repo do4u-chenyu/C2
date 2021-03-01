@@ -229,7 +229,7 @@ namespace C2.Controls.MapViews
             new WebManager()
             {
                 Type = WebManager.WebType.Map,
-                DataItems = hitTopic.GetDataItems()
+                HitTopic = hitTopic
             }.OpenWebBrowser();
             
             return;
@@ -241,7 +241,7 @@ namespace C2.Controls.MapViews
             new WebManager()
             {
                 Type = WebManager.WebType.Boss,
-                DataItems = hitTopic.GetDataItems()
+                HitTopic = hitTopic
             }.OpenWebBrowser();
 
             return;
