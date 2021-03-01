@@ -26,15 +26,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public SelectBossDialog(List<DataItem> dataItems, Dictionary<string, int[]> options)
         {
             InitializeComponent();
-            ChartOptions = options;
-            DataItems = dataItems;
-            LoadOption();
 
-            foreach (DataItem dataItem in DataItems)
-            {
-                this.datasource.Items.Add(dataItem.FileName);
-            }
-            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "BossIndex01.html");
+            DataItems = dataItems;
+            ChartOptions = options;
+            LoadOption();
         }
 
         private void SavaOption()
@@ -56,6 +51,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             //加载数据源、类型加载图表配置
             LoadChartOption("SimpleBar", simpleBarX, simpleBarY);
+            LoadChartOption("BasicLineChart", basicLineChartX, basicLineChartY);
+            LoadChartOption("BasicScatter", basicScatterX, basicScatterY);
+            LoadChartOption("SmoothedLineChart", smoothedLineChartX, smoothedLineChartY);
+            LoadChartOption("StackBar", stackBarX, stackBarY);
+            LoadChartOption("BasicPie", basicPieX, basicPieY);
+            LoadChartOption("BasicMap", basicMapX, basicMapY);
         }
 
         protected override bool OnOKButtonClick()
@@ -87,8 +88,24 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         private void LoadData()
         {
-            if (!ChartOptions.ContainsKey("Datasource"))
+            //初始化大屏类型
+            if (!ChartOptions.ContainsKey("BossType") || ChartOptions["BossType"].Length == 0)
+                bossType.SelectedIndex = 0;
+            else
+                bossType.SelectedIndex = ChartOptions["BossType"][0];
+            //TODO phx 预览图也要跟着调整
+            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "BossIndex01.html");
+
+            //初始化数据源
+            foreach (DataItem dataItem in DataItems)
+            {
+                this.datasource.Items.Add(dataItem.FileName);
+            }
+            if (!ChartOptions.ContainsKey("Datasource") || ChartOptions["Datasource"].Length == 0)
                 return;
+            datasource.SelectedIndex = ChartOptions["Datasource"][0];
+            selectData = DataItems[ChartOptions["Datasource"][0]];
+            this.bcpInfo = new BcpInfo(selectData.FilePath, selectData.FileEncoding, new char[] { selectData.FileSep });
         }
 
         private void LoadChartOption(string chartType, Control controlX, Control controlY)

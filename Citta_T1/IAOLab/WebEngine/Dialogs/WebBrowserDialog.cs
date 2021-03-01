@@ -26,7 +26,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
 
-        public string Title { set => this.Text = value; }
+        public string Title { set => this.Text = value; get => this.Text; }
         public string WebUrl;
         public List<DataItem> DataItems;
         bool isActive = true;
@@ -46,6 +46,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             WebBrowserConfig.SetWebBrowserFeatures(11);//TODO 暂定11，后面需要检测
             webBrowser1.Navigate(WebUrl);
+            if (this.Title == "数据大屏")//数据大屏初次打开是自动弹出配置窗口
+                OpenSelectBossDialog();
         }
 
         public void InitializeMapToolStrip()
@@ -59,8 +61,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             // LoadMapData
             LoadMapData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            LoadMapData.Image = global::C2.Properties.Resources.importDataSource;
-            LoadMapData.Text = "导入数据";
+            LoadMapData.Image = global::C2.Properties.Resources.designer;
+            LoadMapData.Text = "参数配置";
             LoadMapData.Click += new System.EventHandler(this.LoadMapData_Click);
 
             // SaveHtml
@@ -104,8 +106,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             // LoadBossData
             LoadBossData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            LoadBossData.Image = global::C2.Properties.Resources.importDataSource;
-            LoadBossData.Text = "导入数据";
+            LoadBossData.Image = global::C2.Properties.Resources.designer;
+            LoadBossData.Text = "参数配置";
             LoadBossData.Click += new System.EventHandler(this.LoadBossData_Click);
 
             // SaveHtml
@@ -158,12 +160,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         void LoadBossData_Click(object sender, EventArgs e)
         {
+            OpenSelectBossDialog();
+        }
+
+        public void OpenSelectBossDialog()
+        {
             var dialog = new SelectBossDialog(DataItems, ChartOptions);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 webBrowser1.Navigate(dialog.WebUrl);
                 ChartOptions = dialog.ChartOptions;
-            }  
+            }
         }
 
         void SavePic_Click(object sender, EventArgs e)
