@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows.Forms;
 using System.Xml;
-using C2.Canvas;
-using C2.Controls.Paint;
 using C2.Core;
-using C2.Model;
 using C2.Model.Documents;
 using C2.Model.Widgets;
 using ICSharpCode.SharpZipLib.Zip;
@@ -38,10 +33,12 @@ namespace C2.Model.MindMaps
         const string defaultExt = ".txt";
         const int defaultIconSize = 32;
         const int defaultTopicStyleIndex = 1;
-        XmlDocument contentDom;
-        XmlDocument styleDom;
+        XmlDocument contentDoc;
+        XmlDocument styleDoc;
+        XmlNamespaceManager nsmgr;
         List<Attachment> attachments;
         string filename;
+        int currSheetID;
         XmlElement contentRoot;
         MindMapLayoutType layout;
         /// <summary>
@@ -63,23 +60,32 @@ namespace C2.Model.MindMaps
                 }
 
             }
-            contentDom.AppendChild(contentRoot);
+            contentDoc.AppendChild(contentRoot);
         }
         public XmindFileSaver(MindMap mindMap, string fn)
         {
             Initialize(fn);
 
             SaveSheet(mindMap, contentRoot, 1);
-            contentDom.AppendChild(contentRoot);
+            contentDoc.AppendChild(contentRoot);
         }
         private void Initialize(string fn)
         {
-            contentDom = new XmlDocument();
-            styleDom = CreateStyleDOM();
+            contentDoc = new XmlDocument();
+
+            nsmgr = new XmlNamespaceManager(contentDoc.NameTable);
+            nsmgr.AddNamespace("fo", "http://www.w3.org/1999/XSL/Format");
+            nsmgr.AddNamespace("svg", "http://www.w3.org/2000/svg");
+            nsmgr.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+
+            styleDoc = CreateStyleDOM();
             attachments = new List<Attachment>();
             filename = fn;
 
-            contentRoot = CreateRootFromCTDOM(contentDom);
+            contentRoot = CreateRootFromCTDOM(contentDoc);
+
+
         }
         public void SaveFile()
         {
@@ -96,8 +102,8 @@ namespace C2.Model.MindMaps
                 zip.AddDirectory("META-INF");
 
                 // 添加文件
-                zip.Add(new StaticDataSource(contentDom), "content.xml");
-                zip.Add(new StaticDataSource(styleDom), "styles.xml");
+                zip.Add(new StaticDataSource(contentDoc), "content.xml");
+                zip.Add(new StaticDataSource(styleDoc), "styles.xml");
                 // 添加所有附件
                 foreach (Attachment attachment in attachments)
                     zip.Add(attachment.staticDataSource, "attachments/" + attachment.filename);
@@ -117,15 +123,17 @@ namespace C2.Model.MindMaps
             dom.LoadXml(Properties.Resources.styles);
             return dom;
         }
-        private XmlElement CreateRootFromCTDOM(XmlDocument dom)
+        private XmlElement CreateRootFromCTDOM(XmlDocument doc)
         {
-            XmlElement root = dom.CreateElement("xmap-content");
+            XmlElement root = doc.CreateElement("xmap-content");
+
             root.SetAttribute("xmlns", "urn:xmind:xmap:xmlns:content:2.0");
-            root.SetAttribute("xmlns:fo", "http://www.w3.org/1999/XSL/Format");
-            root.SetAttribute("xmlns:svg", "http://www.w3.org/2000/svg");
-            root.SetAttribute("xmlns:xhtml", "http://www.w3.org/1999/xhtml");
-            root.SetAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+            root.Attributes.Append(CreateAttributeWithNs("xmlns", "fo", "http://www.w3.org/1999/XSL/Format"));
+            root.Attributes.Append(CreateAttributeWithNs("xmlns", "svg", "http://www.w3.org/2000/svg"));
+            root.Attributes.Append(CreateAttributeWithNs("xmlns", "xhtml", "http://www.w3.org/1999/xhtml"));
+            root.Attributes.Append(CreateAttributeWithNs("xmlns", "xlink", "http://www.w3.org/1999/xlink"));
             root.SetAttribute("version", "2.0");
+
             return root;
         }
         /// <summary>
@@ -141,7 +149,7 @@ namespace C2.Model.MindMaps
             // content.xml
             root.AppendChild(CreateFileEntryNode(metaDom, "content.xml", "text/xml"));
             // styles.xml
-            //root.AppendChild(NewFullEntryNode("styles.xml", "text/xml"))
+            root.AppendChild(CreateFileEntryNode(metaDom, "styles.xml", "text/xml"));
             // attachments
             foreach (Attachment attachment in attachments)
                 root.AppendChild(
@@ -164,15 +172,16 @@ namespace C2.Model.MindMaps
         private void SaveSheet(MindMap mindMap, XmlElement parent, int sheetID)
         {
             // 单sheet / chart
-            XmlElement sheet = contentDom.CreateElement("sheet");
+            XmlElement sheet = contentDoc.CreateElement("sheet");
             this.layout = mindMap.LayoutType;
+            this.currSheetID = sheetID;
             sheet.SetAttribute("id", sheetID.ToString());
 
             // topics
             SaveMindMap(sheet, mindMap.Root);
             SaveLink(sheet, mindMap.GetLinks(false), mindMap);
 
-            XmlElement title = contentDom.CreateElement("title");
+            XmlElement title = contentDoc.CreateElement("title");
             title.InnerText = mindMap.Name;
             sheet.AppendChild(title);
 
@@ -187,9 +196,9 @@ namespace C2.Model.MindMaps
         {
             if (parent == null || topic == null)
                 return;
-            XmlElement topicNode = contentDom.CreateElement("topic");
+            XmlElement topicNode = contentDoc.CreateElement("topic");
             // Attributes
-            topicNode.SetAttribute("id", topic.ID);
+            topicNode.SetAttribute("id", this.currSheetID.ToString() + "-" + topic.ID.ToString());
             topicNode.SetAttribute("style-id", defaultTopicStyleIndex.ToString());
             if (topic.Folded)
                 topicNode.SetAttribute("branch", "folded");
@@ -200,7 +209,7 @@ namespace C2.Model.MindMaps
             }
             // Elements
             // title / text
-            XmlElement title = contentDom.CreateElement("title");
+            XmlElement title = contentDoc.CreateElement("title");
             title.InnerText = topic.Text;
             topicNode.AppendChild(title);
             /* 
@@ -281,8 +290,8 @@ namespace C2.Model.MindMaps
                 }
                 else
                 {
-                    XmlElement tsn = contentDom.CreateElement("topics");
-                    XmlElement cn = contentDom.CreateElement("children");
+                    XmlElement tsn = contentDoc.CreateElement("topics");
+                    XmlElement cn = contentDoc.CreateElement("children");
                     tsn.SetAttribute("type", "attached");
 
                     foreach (Topic subTopic in topic.Children)
@@ -300,7 +309,7 @@ namespace C2.Model.MindMaps
             switch (mmlt)
             {
                 case MindMapLayoutType.MindMap:
-                    return "org.xmind.ui.map.unbalanced";
+                    return "org.xmind.ui.map.anticlockwise";
                 case MindMapLayoutType.OrganizationDown:
                     return "org.xmind.ui.org-chart.down";
                 case MindMapLayoutType.OrganizationUp:
@@ -314,7 +323,7 @@ namespace C2.Model.MindMaps
                 case MindMapLayoutType.LogicRight:
                     return "org.xmind.ui.logic.right";
                 default:
-                    return "org.xmind.ui.map.unbalanced";
+                    return "org.xmind.ui.map.anticlockwise";
             }
         }
         private string GetXmindAlignment(WidgetAlignment alignment)
@@ -379,7 +388,7 @@ namespace C2.Model.MindMaps
         {
             foreach (DataItem dataItem in dataSourceWidget.DataItems)
             {
-                if (dataItem.IsDatabase() && String.IsNullOrEmpty(dataItem.FilePath))
+                if (dataItem.IsDatabase() && !BCPBuffer.GetInstance().IsDBDataCached(dataItem.DBItem))
                 {
                     SaveLabel(parent, notSavedextErnalDataTag + dataItem.DataType.ToString() + "-" + dataItem.FileName);
                     return;
@@ -438,8 +447,8 @@ namespace C2.Model.MindMaps
             }
             else
             {
-                XmlElement cn = contentDom.CreateElement("children");
-                XmlElement tn = contentDom.CreateElement("topics");
+                XmlElement cn = contentDoc.CreateElement("children");
+                XmlElement tn = contentDoc.CreateElement("topics");
                 tn.SetAttribute("type", "attached");
 
                 XmlElement topic = CreateAtcmtTopicNode(String.Format("{0}-{1}", topicNode.GetAttribute("id"), attachment.id), attachment);
@@ -448,6 +457,16 @@ namespace C2.Model.MindMaps
                 cn.AppendChild(tn);
                 topicNode.AppendChild(cn);
             }
+        }
+        private XmlAttribute CreateAttributeWithNs(string prefix, string localName, string value)
+        {
+            XmlAttribute xa = contentDoc.CreateAttribute(prefix, localName, nsmgr.LookupNamespace(prefix));
+            xa.Value = value;
+            return xa;
+        }
+        private XmlElement CreateElementWithNs(string prefix, string localName)
+        {
+            return contentDoc.CreateElement(prefix, localName, nsmgr.LookupNamespace(prefix));
         }
         private XmlElement CreateFileEntryNode(XmlDocument xd, string fullPath, string mediaType)
         {
@@ -463,30 +482,30 @@ namespace C2.Model.MindMaps
 
         private XmlElement CreateTopicNode(string nodeID, string titleText, string attachmentName = "")
         {
-            XmlElement topic = contentDom.CreateElement("topic");
-            XmlElement title = contentDom.CreateElement("title");
+            XmlElement topic = contentDoc.CreateElement("topic");
+            XmlElement title = contentDoc.CreateElement("title");
             title.InnerText = titleText;
             topic.SetAttribute("id", nodeID);
             if (!String.IsNullOrEmpty(attachmentName))
-                topic.SetAttribute("xlink:href", "xap:attachments/" + attachmentName);
+                topic.Attributes.Append(CreateAttributeWithNs("xlink", "href", "xap:attachments/" + attachmentName));
             topic.AppendChild(title);
             return topic;
         }
         private XmlElement CreatePlainNode(string text)
         {
-            XmlElement plain = contentDom.CreateElement("plain");
+            XmlElement plain = contentDoc.CreateElement("plain");
             plain.InnerText = text;
             return plain;
         }
         private XmlElement CreateTitleNode(string text)
         {
-            XmlElement title = contentDom.CreateElement("title");
+            XmlElement title = contentDoc.CreateElement("title");
             title.InnerText = text;
             return title;
         }
         private XmlElement CreateLablNode(string text)
         {
-            XmlElement label = contentDom.CreateElement("label");
+            XmlElement label = contentDoc.CreateElement("label");
             label.InnerText = text;
             return label;
         }
@@ -496,21 +515,21 @@ namespace C2.Model.MindMaps
              * TODO 不同图的控制点原点不同
              * 逻辑图(右边) 的控制点原点是Topic的
              */
-            XmlElement cp = contentDom.CreateElement("control-point");
-            XmlElement pst = contentDom.CreateElement("position");
+            XmlElement cp = contentDoc.CreateElement("control-point");
+            XmlElement pst = contentDoc.CreateElement("position");
 
             cp.SetAttribute("index", index.ToString());
             if (index == 0)
             {
                 Point relativePoint = new Point(link.From.Location.X + link.From.Width, link.From.Location.Y + link.From.Height / 2);
-                pst.SetAttribute("svg:x", (link.LayoutData.ControlPoint1.X - relativePoint.X).ToString());
-                pst.SetAttribute("svg:y", (link.LayoutData.ControlPoint1.Y - relativePoint.Y).ToString());
+                pst.Attributes.Append(CreateAttributeWithNs("svg", "x", (link.LayoutData.ControlPoint1.X - relativePoint.X).ToString()));
+                pst.Attributes.Append(CreateAttributeWithNs("svg", "y", (link.LayoutData.ControlPoint1.Y - relativePoint.Y).ToString()));
             }
             else
             {
                 Point relativePoint = new Point(link.Target.Location.X + link.Target.Width, link.Target.Location.Y + link.Target.Height / 2);
-                pst.SetAttribute("svg:x", (link.LayoutData.ControlPoint2.X - relativePoint.X).ToString());
-                pst.SetAttribute("svg:y", (link.LayoutData.ControlPoint2.Y - relativePoint.Y).ToString());
+                pst.Attributes.Append(CreateAttributeWithNs("svg", "x", (link.LayoutData.ControlPoint2.X - relativePoint.X).ToString()));
+                pst.Attributes.Append(CreateAttributeWithNs("svg", "y", (link.LayoutData.ControlPoint2.Y - relativePoint.Y).ToString()));
             }
 
             cp.AppendChild(pst);
@@ -529,7 +548,7 @@ namespace C2.Model.MindMaps
             }
             else
             {
-                XmlElement labels = contentDom.CreateElement("labels");
+                XmlElement labels = contentDoc.CreateElement("labels");
 
                 XmlElement label = CreateLablNode(text);
                 labels.AppendChild(label);
@@ -554,10 +573,10 @@ namespace C2.Model.MindMaps
                 new StaticDataSource(widget.Data)
                 );
             attachments.Add(attachment);
-            XmlElement xe = parent.OwnerDocument.CreateElement("xhtml:img");
-            xe.SetAttribute("xhtml:src", "xap:attachments/" + attachment.filename);
-            xe.SetAttribute("svg:height", defaultIconSize.ToString());
-            xe.SetAttribute("svg:width", defaultIconSize.ToString());
+            XmlElement xe = CreateElementWithNs("xhtml", "img");
+            xe.Attributes.Append(CreateAttributeWithNs("xhtml", "src", "xap:attachments/" + attachment.filename));
+            xe.Attributes.Append(CreateAttributeWithNs("svg", "height", defaultIconSize.ToString()));
+            xe.Attributes.Append(CreateAttributeWithNs("svg", "width", defaultIconSize.ToString()));
             xe.SetAttribute("align", GetXmindAlignment(widget.Alignment));
 
             parent.AppendChild(xe);
@@ -575,7 +594,7 @@ namespace C2.Model.MindMaps
             }
             else
             {
-                XmlElement notes = contentDom.CreateElement("notes");
+                XmlElement notes = contentDoc.CreateElement("notes");
 
                 XmlElement plain = CreatePlainNode(text);
                 notes.AppendChild(plain);
@@ -589,7 +608,7 @@ namespace C2.Model.MindMaps
             if (parent == null || links == null)
                 return;
 
-            XmlElement node = contentDom.CreateElement("relationships");
+            XmlElement node = contentDoc.CreateElement("relationships");
             foreach (Link link in links)
                 SaveLink(node, link, mindMap);
 
@@ -597,13 +616,13 @@ namespace C2.Model.MindMaps
         }
         private void SaveLink(XmlElement parent, Link link, MindMap mindMap)
         {
-            XmlElement node = contentDom.CreateElement("relationship");
+            XmlElement node = contentDoc.CreateElement("relationship");
             // Attributes
-            node.SetAttribute("end1", link.From.ID.ToString());
-            node.SetAttribute("end2", link.Target.ID.ToString());
-            node.SetAttribute("id", link.ID.ToString());
+            node.SetAttribute("end1", this.currSheetID.ToString() + "-" + link.From.ID.ToString());
+            node.SetAttribute("end2", this.currSheetID.ToString() + "-" + link.Target.ID.ToString());
+            node.SetAttribute("id", this.currSheetID.ToString() + "-" + link.ID.ToString());
             // control-points
-            XmlElement controlPoints = contentDom.CreateElement("control-points");
+            XmlElement controlPoints = contentDoc.CreateElement("control-points");
             controlPoints.AppendChild(CreatControlPoint(link, 0));
             controlPoints.AppendChild(CreatControlPoint(link, 1));
             // title

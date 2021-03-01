@@ -45,23 +45,24 @@ namespace C2.IAOLab.Plugins
         {
             List<string> result = new List<string>();
             Stream resStream = null;
-            try
-            {   //TODO 在foreach外层try, 最后一个finally语句回收资源只针对最后一个resStream,中间的都被忽略，不确定是否为期望如次
-                foreach (string pluginName in pluginsName)
+            
+            foreach (string pluginName in pluginsName)
+            {
+                try
                 {
                     resStream = WebRequest.Create(packageURL + pluginName)
-                                                 .GetResponse()
-                                                 .GetResponseStream();
+                                               .GetResponse()
+                                               .GetResponseStream();
                     string info = new StreamReader(resStream, Encoding.UTF8).ReadToEnd();
                     result.Add(info);
                 }
-            }
-            catch
-            { }
-            finally
-            {
-                if (resStream != null)
-                    resStream.Close();
+                catch { }
+                finally
+                {
+                    if (resStream != null)
+                        resStream.Close();
+                }
+
             }
             return result;
         }

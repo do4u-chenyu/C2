@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FABFB497-81E5-42DC-82DF-B30D71E030D0}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RookieKnowledgePlugin</RootNamespace>
     <AssemblyName>RookieKnowledgePlugin</AssemblyName>
@@ -64,12 +64,6 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\UserInstallSet\UserInstallSet.csproj">
-      <Project>{8587D0E2-E1F2-442D-B729-897391FB2881}</Project>
-      <Name>UserInstallSet</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="cookbook\大师Linux\" />

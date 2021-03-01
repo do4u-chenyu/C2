@@ -8,6 +8,8 @@ namespace RookieKnowledgePlugin
         [STAThread]
         static void Main(params string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
     }

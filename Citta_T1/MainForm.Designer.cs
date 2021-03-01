@@ -175,7 +175,7 @@ namespace C2
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(10, 4);
+            this.label1.Location = new System.Drawing.Point(8, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(419, 52);
             this.label1.TabIndex = 0;
@@ -191,8 +191,9 @@ namespace C2
             this.leftMainMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftMainMenuPanel.Location = new System.Drawing.Point(0, 46);
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
-            this.leftMainMenuPanel.Size = new System.Drawing.Size(136, 560);
+            this.leftMainMenuPanel.Size = new System.Drawing.Size(145, 560);
             this.leftMainMenuPanel.TabIndex = 1;
+            //this.leftMainMenuPanel.AutoSize = true;
             // 
             // IAOLabButton
             // 
@@ -203,10 +204,10 @@ namespace C2
             this.IAOLabButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.IAOLabButton.Location = new System.Drawing.Point(0, 182);
             this.IAOLabButton.Name = "IAOLabButton";
-            this.IAOLabButton.Size = new System.Drawing.Size(137, 42);
+            this.IAOLabButton.Size = new System.Drawing.Size(151, 42);
             this.IAOLabButton.TabIndex = 3;
             this.IAOLabButton.TabStop = false;
-            this.IAOLabButton.Text = "      IAO实验室";
+            this.IAOLabButton.Text = "   IAO实验室";
             this.toolTip1.SetToolTip(this.IAOLabButton, "分析师的实验台");
             this.IAOLabButton.UseVisualStyleBackColor = true;
             this.IAOLabButton.Click += new System.EventHandler(this.FlowChartButton_Click);
@@ -218,7 +219,7 @@ namespace C2
             this.IAOLabButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.IAOLabButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.IAOLabButtonPictureBox.Image = global::C2.Properties.Resources.Artificialintelligence;
-            this.IAOLabButtonPictureBox.Location = new System.Drawing.Point(18, 13);
+            this.IAOLabButtonPictureBox.Location = new System.Drawing.Point(12, 13);
             this.IAOLabButtonPictureBox.Name = "IAOLabButtonPictureBox";
             this.IAOLabButtonPictureBox.Size = new System.Drawing.Size(20, 20);
             this.IAOLabButtonPictureBox.TabIndex = 16;
@@ -233,10 +234,10 @@ namespace C2
             this.DataSourceButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.DataSourceButton.Location = new System.Drawing.Point(0, 122);
             this.DataSourceButton.Name = "DataSourceButton";
-            this.DataSourceButton.Size = new System.Drawing.Size(137, 42);
+            this.DataSourceButton.Size = new System.Drawing.Size(151, 42);
             this.DataSourceButton.TabIndex = 2;
             this.DataSourceButton.TabStop = false;
-            this.DataSourceButton.Text = "     数据管理";
+            this.DataSourceButton.Text = "   数据管理";
             this.toolTip1.SetToolTip(this.DataSourceButton, "当前用户已导入的所有数据");
             this.DataSourceButton.UseVisualStyleBackColor = true;
             this.DataSourceButton.Click += new System.EventHandler(this.DataButton_Click);
@@ -248,7 +249,7 @@ namespace C2
             this.DataButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.DataButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.DataButtonPictureBox.Image = global::C2.Properties.Resources.Datamanagement;
-            this.DataButtonPictureBox.Location = new System.Drawing.Point(18, 13);
+            this.DataButtonPictureBox.Location = new System.Drawing.Point(12, 13);
             this.DataButtonPictureBox.Name = "DataButtonPictureBox";
             this.DataButtonPictureBox.Size = new System.Drawing.Size(20, 20);
             this.DataButtonPictureBox.TabIndex = 14;
@@ -263,10 +264,10 @@ namespace C2
             this.MindMapButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.MindMapButton.Location = new System.Drawing.Point(0, 2);
             this.MindMapButton.Name = "MindMapButton";
-            this.MindMapButton.Size = new System.Drawing.Size(137, 42);
+            this.MindMapButton.Size = new System.Drawing.Size(151, 42);
             this.MindMapButton.TabIndex = 1;
             this.MindMapButton.TabStop = false;
-            this.MindMapButton.Text = "     业务视图";
+            this.MindMapButton.Text = "   业务视图";
             this.toolTip1.SetToolTip(this.MindMapButton, "当前用户的所有业务视图");
             this.MindMapButton.UseVisualStyleBackColor = true;
             this.MindMapButton.Click += new System.EventHandler(this.OperateButton_Click);
@@ -278,7 +279,7 @@ namespace C2
             this.MindMapButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.MindMapButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.MindMapButtonPictureBox.Image = global::C2.Properties.Resources.Businessvw;
-            this.MindMapButtonPictureBox.Location = new System.Drawing.Point(19, 13);
+            this.MindMapButtonPictureBox.Location = new System.Drawing.Point(12, 13);
             this.MindMapButtonPictureBox.Name = "MindMapButtonPictureBox";
             this.MindMapButtonPictureBox.Size = new System.Drawing.Size(20, 20);
             this.MindMapButtonPictureBox.TabIndex = 13;
@@ -293,10 +294,10 @@ namespace C2
             this.ModelMarketButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.ModelMarketButton.Location = new System.Drawing.Point(0, 62);
             this.ModelMarketButton.Name = "ModelMarketButton";
-            this.ModelMarketButton.Size = new System.Drawing.Size(137, 42);
+            this.ModelMarketButton.Size = new System.Drawing.Size(151, 42);
             this.ModelMarketButton.TabIndex = 0;
             this.ModelMarketButton.TabStop = false;
-            this.ModelMarketButton.Text = "     模型市场";
+            this.ModelMarketButton.Text = "   模型市场";
             this.toolTip1.SetToolTip(this.ModelMarketButton, "当前用户发布的所有模型");
             this.ModelMarketButton.UseVisualStyleBackColor = true;
             this.ModelMarketButton.Click += new System.EventHandler(this.MyModelButton_Click);
@@ -308,7 +309,7 @@ namespace C2
             this.ModelButtonPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.ModelButtonPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ModelButtonPictureBox.Image = global::C2.Properties.Resources.modelMarket;
-            this.ModelButtonPictureBox.Location = new System.Drawing.Point(18, 13);
+            this.ModelButtonPictureBox.Location = new System.Drawing.Point(12, 13);
             this.ModelButtonPictureBox.Name = "ModelButtonPictureBox";
             this.ModelButtonPictureBox.Size = new System.Drawing.Size(20, 20);
             this.ModelButtonPictureBox.TabIndex = 15;
