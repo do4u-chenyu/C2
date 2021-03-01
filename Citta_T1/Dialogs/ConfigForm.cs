@@ -25,6 +25,8 @@ namespace C2.Dialogs
         public string latude;
         public string lontude ;
         public string scale ;
+        public string baiduVerAPI;
+        public string baiduHeatAPI;
         private Thread checkVersion;
         public ConfigForm()
         {
@@ -32,6 +34,8 @@ namespace C2.Dialogs
             latude = this.baiduLatTB.Text = Settings.Default.latude;
             lontude =this.baiduLonTB.Text = Settings.Default.lontude;
             scale = this.baiduScaleTB.Text = Settings.Default.scale;
+            baiduVerAPI = this.baiduVerAPITB.Text = Settings.Default.baiduVerAPI;
+            baiduHeatAPI = this.baiduHeatTB.Text = Settings.Default.baiduHeatAPI;
         }
 
         private void UserModelOkButton_Click(object sender, EventArgs e)
@@ -603,7 +607,13 @@ namespace C2.Dialogs
             Settings.Default.latude = this.baiduLatTB.Text;
             Settings.Default.lontude = this.baiduLonTB.Text;
             Settings.Default.scale = this.baiduScaleTB.Text;
+            Settings.Default.baiduVerAPI = this.baiduVerAPITB.Text;
+            Settings.Default.baiduHeatAPI = this.baiduHeatTB.Text;
             Settings.Default.Save();
+
+
+
+
             this.Close();
         }
 

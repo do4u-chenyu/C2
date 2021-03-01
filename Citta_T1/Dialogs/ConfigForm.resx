@@ -133,7 +133,7 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAMgAAADuCAYAAAB8rUi1AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wAAADsABataJCQAAQWtJREFUeF7tnQm4flP1x0v1b54nFZIGpIhMERlKkyGEiEjIEFLmCBUhylDmeSiz
+        vgAADr4B6kKxwAAAQWtJREFUeF7tnQm4flP1x0v1b54nFZIGpIhMERlKkyGEiEjIEFLmCBUhylDmeSiz
         TKGiAZWpSVEpQ0WUUEJU7v/5nN9Z96y7zve8d5973ve99/7u/j7Peu5991l7OPvstfdea++99pNGMjIy
         GpEFJCOjB7KAZGT0QBaQjIweyAKSkdEDUkCe9KQnTSnqguWXX76W3u67714+7Y3rrruuFhdKhYqr6Oij
         jy5jVDjggANqfEsttVT5tH+Yc845a/ko2mGHHcoYFU477TTJq0hB8U0mKSQLyItf/OJa2NOe9rRa2Ite
@@ -438,9 +438,6 @@
   </metadata>
   <metadata name="pythonOpenFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>202, 17</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
