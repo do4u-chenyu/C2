@@ -1,5 +1,6 @@
 ﻿using C2.Core;
 using C2.IAOLab.Plugins;
+using C2.Properties;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace C2.Dialogs
@@ -20,10 +22,16 @@ namespace C2.Dialogs
         private static readonly int CheckBoxColumnIndex = 2;
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
-
+        public string latude;
+        public string lontude ;
+        public string scale ;
+        private Thread checkVersion;
         public ConfigForm()
         {
             InitializeComponent();
+            latude = this.baiduLatTB.Text = Settings.Default.latude;
+            lontude =this.baiduLonTB.Text = Settings.Default.lontude;
+            scale = this.baiduScaleTB.Text = Settings.Default.scale;
         }
 
         private void UserModelOkButton_Click(object sender, EventArgs e)
@@ -447,6 +455,8 @@ namespace C2.Dialogs
                     e.Handled = false;
                 }
             }
+            if (e.Handled == true)
+                latude = this.baiduLatTB.Text; 
         }
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
@@ -475,22 +485,12 @@ namespace C2.Dialogs
                     e.Handled = false;
                 }
             }
+            if (e.Handled == true)
+                lontude = this.baiduLonTB.Text;
         }
 
         private void baiduGISKeyTB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //if (e.KeyChar != '\b' && !Char.IsDigit(e.KeyChar))
-            //{
-            //    e.Handled = true;
-            //}
-            //else if (e.KeyChar == '-' && ((TextBox)sender).Text.Length > 1)
-            //{
-            //    e.Handled = true;
-            //}
-            //else if (int.Parse(((TextBox)sender).Text) <10 || int.Parse(((TextBox)sender).Text) >= 5 && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
-            //{
-            //    e.Handled = true;
-            //}
             if (!System.Text.RegularExpressions.Regex.IsMatch(e.KeyChar.ToString(), "^([5-9])$") && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
             {
 
@@ -500,42 +500,121 @@ namespace C2.Dialogs
             {
                 e.Handled = false;
             }
+            if (e.Handled == true)
+                scale = this.baiduScaleTB.Text;
+
         }
 
 
 
         #region 检查更新Tab
+  
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (mainTabControl.SelectedIndex != 5)
+            if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
                 return;
- 
-            string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version"); 
+
+            checkVersion = new Thread(CheckUpdate);
+            checkVersion.Start();
+        }
+        private void MainTabControl_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (checkVersion != null)
+            {
+                mainTabControl.SelectTab(5);
+                return;
+            }
+        }
+        private void CheckUpdate()
+        {
+
+            string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
             string browserVersion = BrowserVersion();
-            if (currentVersion.Equals(browserVersion))
+            if (browserVersion.StartsWith(currentVersion) || browserVersion.IsNullOrEmpty())
             {
 
+                this.SuspendLayout();
+                this.Invoke((EventHandler)(delegate
+                {
+                    this.title.Text = "当前已为最新版本";
+                    this.versionLable.Text = @"当前版本:";
+                    this.version.Text = currentVersion;
+                    this.sizeLable.Visible = false;
+                    this.sizeValue.Visible = false;
+                    this.checking.Visible = false;
+                }));
+                
+                this.ResumeLayout(false);
             }
-            else 
-            { 
+            else
+            {
+                string softwareInfo = BrowserVersionInfo(browserVersion);
+                string[] info_split = softwareInfo.Split(OpUtil.TabSeparator);
+                if (info_split.Length < 3)
+                {
+
+                    this.Invoke((EventHandler)(delegate
+                    {
+                        this.currentModelRunLab.Visible = false;
+                        this.checkStatus.Text="联网检查更新失败";
+                    }));
+                    
+                    return;
+                }
+
+                this.SuspendLayout();
+                this.version.Text = info_split[0];
+                this.sizeValue.Text = info_split[1];
+                this.description.Text = info_split[2];
+                this.checking.Visible = false;
+                this.ResumeLayout(false);
+
 
             }
         }
+
         private string BrowserVersion()
         {
-            return string.Empty;
+
+            PluginsDownloader downloader = new PluginsDownloader();
+            string htmlContent = downloader.GetHtmlContent(Global.SoftwareUrl);
+            List<string> packageName = PluginsManager.Instance.GetPluginsNameList(htmlContent);
+            return packageName.IsNullOrEmpty() ? string.Empty : packageName[0];
+        }
+        private string BrowserVersionInfo(string name)
+        {
+            PluginsDownloader downloader = new PluginsDownloader();
+            string packageDir = Path.Combine(Global.SoftwareUrl, @"software/");
+            return downloader.GetPluginsInfo(name, packageDir);
         }
         private void CancleUpdate_Click(object sender, EventArgs e)
         {
+            checkVersion.Abort();
             this.Close();
         }
         private void UpdateSoftware_Click(object sender, EventArgs e)
         {
 
         }
-
         #endregion
 
+        private void gisMapOKButton_Click(object sender, EventArgs e)
+        {
+            Settings.Default.latude = this.baiduLatTB.Text;
+            Settings.Default.lontude = this.baiduLonTB.Text;
+            Settings.Default.scale = this.baiduScaleTB.Text;
+            Settings.Default.Save();
+            this.Close();
+        }
 
+        private void checking_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ConfigForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            checkVersion.Abort();
+        }
     }
 }

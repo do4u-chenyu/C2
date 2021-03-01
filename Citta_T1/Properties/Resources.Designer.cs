@@ -2112,6 +2112,22 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///
+        ///&lt;xmap-styles xmlns=&quot;urn:xmind:xmap:xmlns:style:2.0&quot; xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot; xmlns:svg=&quot;http://www.w3.org/2000/svg&quot; version=&quot;2.0&quot;&gt;
+        ///  &lt;automatic-styles&gt;
+        ///    &lt;style id=&quot;4le4de3fb56eob9dv2k5uds322&quot; name=&quot;&quot; type=&quot;topic&quot;&gt;
+        ///      &lt;topic-properties border-line-color=&quot;#558ED5&quot; border-line-width=&quot;3pt&quot; fo:font-family=&quot;Microsoft YaHei&quot; line-class=&quot;org.xmind.branchConnection.curve&quot; line-color=&quot;#558ED5&quot; line-width=&quot;1pt&quot;/&gt;
+        ///    &lt;/style&gt;
+        ///    &lt;style id=&quot;2prve [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string styles {
+            get {
+                return ResourceManager.GetString("styles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Bitmap subtra_op {

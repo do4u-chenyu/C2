@@ -19,6 +19,7 @@ namespace RookieKnowledgePlugin
         }
         public void WriteNodes() 
         {
+            //string folderPath = Path.Combine(Application.StartupPath,"RookieKnowledgePlugin","cookbook");
             string folderPath = @"D:\work\C2\test";
             TreeNode treeNodeRoot1 = new TreeNode();
             treeNodeRoot1.Text = "首页";
@@ -67,10 +68,9 @@ namespace RookieKnowledgePlugin
                         TreeNode treeNode = new TreeNode
                         {
                             Name = fsInfo.FullName,
-                            Text = fsInfo.Name
+                            Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
                         };
                         treeView.Nodes[i].Nodes[j].Nodes.Add(treeNode);
-                       
                     }
 
                 }
@@ -93,7 +93,7 @@ namespace RookieKnowledgePlugin
                             TreeNode treeNode = new TreeNode
                             {
                                 Name = fsInfo.FullName,
-                                Text = fsInfo.Name
+                                Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
                             };
                             treeView.Nodes[i].Nodes.Add(treeNode);
                             WriteLastBNodes(treeView1, fsInfo.FullName, i,j);
@@ -103,7 +103,7 @@ namespace RookieKnowledgePlugin
                             TreeNode treeNode = new TreeNode
                             {
                                 Name = fsInfo.FullName,
-                                Text = fsInfo.Name
+                                Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
                             };
                             treeView.Nodes[i].Nodes.Add(treeNode);
                         }
@@ -130,7 +130,7 @@ namespace RookieKnowledgePlugin
                             TreeNode treeNode = new TreeNode
                             {
                                 Name = fsInfo.FullName,
-                                Text = fsInfo.Name
+                                Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
                             };
                             treeView.Nodes.Add(treeNode);
                             WriteChildNodes(treeView1, fsInfo.FullName,i);
@@ -140,7 +140,7 @@ namespace RookieKnowledgePlugin
                             TreeNode treeNode = new TreeNode
                             {
                                 Name = fsInfo.FullName,
-                                Text = fsInfo.Name
+                                Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
                             };
                             treeView.Nodes.Add(treeNode);
                         }

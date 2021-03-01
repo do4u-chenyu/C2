@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Dialogs;
 using C2.Model;
 using System;
 using System.Collections.Generic;
@@ -71,6 +72,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             SavePic.Image = global::C2.Properties.Resources.image;
             SavePic.Text = "保存成图片";
+            SavePic.Click += new System.EventHandler(this.SavePic_Click);
 
             // Clear
             Clear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -91,6 +93,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 toolStripSeparator1,
                 Clear,
                 EditCode});
+
         }
 
         public void InitializeBossToolStrip()
@@ -109,6 +112,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SaveHtml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             SaveHtml.Image = global::C2.Properties.Resources.save;
             SaveHtml.Text = "保存成html";
+            SaveHtml.Click += new System.EventHandler(this.SaveHtml_Click);
 
             // SavePic
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -134,13 +138,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 switch (dialog.map)
                 {
                     case "标注图":
-                        webBrowser1.Document.InvokeScript("markerPoints", methodstr);
+                        webBrowser1.Document.InvokeScript("markerPoints", methodstr);    
                         break;
                     case "轨迹图":
-                        webBrowser1.Document.InvokeScript("getPoints", methodstr);
+                        webBrowser1.Document.InvokeScript("drawOrit", methodstr);
                         break;
-                    case "区域图":
-                        webBrowser1.Document.InvokeScript("getPoints", methodstr);
+                    case "多边形图":
+                        webBrowser1.Document.InvokeScript("drawPolygon", methodstr);
                         break;
                     case "热力图":
                         webBrowser1.Document.InvokeScript("relitu", methodstr);
@@ -177,6 +181,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
             webBrowser1.DrawToBitmap(bitmap, rectangle);
             bitmap.Save(fd.FileName);
         }
+        void SaveHtml_Click(object sender, EventArgs e)
+        {
+           //这里有待探讨
+        }
 
         private void Clear_Click(object sender, EventArgs e)
         {
@@ -192,6 +200,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.panel1.Enabled = true;
                 this.webBrowser1.Location = new System.Drawing.Point(600, 28);
                 this.webBrowser1.Width = 750;
+                this.SaveHtml.Enabled = false;
+                this.SavePic.Enabled = false;
+                this.SaveHtml.Enabled = false;
+                this.LoadMapData.Enabled = false;
+                this.Clear.Enabled = false;
                 isActive = false;
             }
             else
@@ -200,8 +213,54 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.panel1.Enabled = false;
                 this.webBrowser1.Location = new System.Drawing.Point(12, 23);
                 this.webBrowser1.Width = 1340;
+                this.SaveHtml.Enabled = true;
+                this.SavePic.Enabled = true;
+                this.SaveHtml.Enabled = true;
+                this.LoadMapData.Enabled = true;
+                this.Clear.Enabled = true;
                 isActive = true;
             }
+            LoadHtml();
+            SaveEditorHtml();
+        }
+
+        private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            var configMap = new ConfigForm();
+            string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
+            webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
+
+        }
+
+        private void runButton_Click(object sender, EventArgs e)
+        {
+            SaveEditorHtml();        
+            //WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "StartMap.html");
+            //webBrowser1.Navigate(WebUrl);
+
+        }
+
+        public void LoadHtml()
+        {
+            Stream myStream = new FileStream(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html", FileMode.Open);
+            Encoding encode = System.Text.Encoding.GetEncoding("gb2312");//若是格式为utf-8的需要将gb2312替换
+            StreamReader myStreamReader = new StreamReader(myStream, encode);
+            string strhtml = myStreamReader.ReadToEnd();
+            myStream.Close();
+            this.htmlEditorControlEx1.Text = strhtml;
+        }
+        public void SaveEditorHtml()
+        {
+            //这个函数需要确定一个存放临时文件的位置，如果没有临时文件，是不是换种调用语法就可以实现直接调用？？？？
+        }
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            LoadHtml();
+        }
+
+        private void WebBrowserDialog_Activated(object sender, EventArgs e)
+        {
+            webBrowser1.Focus();
         }
     }
 }

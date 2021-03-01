@@ -32,18 +32,23 @@
 </body>
 </html>
 <script type="text/javascript">
-    var map = new BMap.Map("container");
-    map.centerAndZoom(new BMap.Point(108.876433, 36.269395), 5);
-    map.addControl(new BMap.ScaleControl()); //添加比例尺控件(左下角显示的比例尺控件)
-    map.addControl(new BMap.OverviewMapControl());// 缩略图控件
-    var ctrl_nav = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE }); 
-    map.addControl(ctrl_nav);//添加标准地图控件(左上角的放大缩小左右拖拽控件)
-    map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
-    map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
-    map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
-    map.enableKeyboard(); //启用键盘上下左右键移动地图 
-    map.enableContinuousZoom();   // 开启连续缩放效果  
-    map.enableInertialDragging(); // 开启惯性拖拽效果  
+    var map = new BMap.Map("container");  
+
+    //------------------初始化地图--------------------  
+    function initialMap(method) {
+        strs = method.split(','); //字符分割
+        map.centerAndZoom(new BMap.Point(strs[0], strs[1]), strs[2]);
+        map.addControl(new BMap.ScaleControl()); //添加比例尺控件(左下角显示的比例尺控件)
+        map.addControl(new BMap.OverviewMapControl());// 缩略图控件
+        var ctrl_nav = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE });
+        map.addControl(ctrl_nav);//添加标准地图控件(左上角的放大缩小左右拖拽控件)
+        map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
+        map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard(); //启用键盘上下左右键移动地图 
+        map.enableContinuousZoom();   // 开启连续缩放效果  
+        map.enableInertialDragging(); // 开启惯性拖拽效果  
+    }
 
   //------------------实现热力图所有调用函数--------------------  
 
@@ -97,6 +102,7 @@
     function closeHeatmap() {
         heatmapOverlay.hide();
     }
+
   //实时显示地图坐标 strat
     map.addEventListener("mousemove",GetlngAndlat);     
     function GetlngAndlat(e) {
@@ -109,9 +115,8 @@
    //实时显示地图坐标 end
    //测量距离 strat
     function openGetDistance() {  
-
-     var myDis=new BMapLib.DistanceTool(map);//map为上面已经初始化好的地图实例  
-     myDis.open();  
+        var myDis=new BMapLib.DistanceTool(map);//map为上面已经初始化好的地图实例  
+        myDis.open();  
     }
     //测量距离 end
 
@@ -122,8 +127,8 @@
         map.addEventListener("rightclick", putAndsend);
         //左键标记
         //map.addEventListener("click", putAndsend);
-  }
-  var marker_num = 0;
+    }
+    var marker_num = 0;
     function putAndsend(e)  
     {  
       //放标注  
@@ -131,36 +136,34 @@
         var myIcon = new BMap.Icon("png-0003.png", new BMap.Size(24, 24));
         var marker = new BMap.Marker(p1, { icon: myIcon });  // 创建标注
         map.addOverlay(marker);              // 将标注添加到地图中 
-
       marker_num++;//标注索引，这个是个全局变量  
       var whichCar=window.external.setWhichCar();  
       var label=new BMap.Label(whichCar+"号车-坐标"+marker_num+":"+  
     "("+e.point.lng+","+e.point.lat+")",{offset:new BMap.Size(20,-10)});  
       marker.setLabel(label);  
       //给WINFORM传值  
-      window.external.PutIntotextBox(marker_num,whichCar,e.point.lng,e.point.lat);  
-    
+      window.external.PutIntotextBox(marker_num,whichCar,e.point.lng,e.point.lat);     
     } 
     //左右击鼠标给地图上放marker end
 
      //在地图上画轨迹 strat
     function DrawOrit1()  
     {  
-     var Array=[];  
-    var total_num= window.external.getRowsNumber();  
+        var Array=[];  
+        var total_num= window.external.getRowsNumber();  
     for(var i=0;i<=2*total_num-1;i++)  
     {  
-     Array.push(window.external.Getpoints(i));  
+        Array.push(window.external.Getpoints(i));  
     }  
   
     var PointArr=[];  
     for(var i=0;i<=Array.length-1;i+=2)  
     {//偶数索引存经度，奇数存维度  
-      PointArr.push(new BMap.Point(Array[i],Array[i+1]));  
+        PointArr.push(new BMap.Point(Array[i],Array[i+1]));  
     }  
-    var polyline = new BMap.Polyline(PointArr, {strokeColor:"blue", strokeWeight:6,   strokeOpacity:0.5});  //定义折线  
-      map.addOverlay(polyline);  
-    window.external.ClearRows_num();//重置窗体计数器  
+        var polyline = new BMap.Polyline(PointArr, {strokeColor:"blue", strokeWeight:6,   strokeOpacity:0.5});  //定义折线  
+        map.addOverlay(polyline);  
+        window.external.ClearRows_num();//重置窗体计数器  
     }
     //在地图上画轨迹 end
 
@@ -231,9 +234,7 @@
             scale: 0.8, //工具栏缩放比例  
             drawingTypes : [           
             BMAP_DRAWING_CIRCLE,    
-            BMAP_DRAWING_RECTANGLE   
-         ]  
-  
+            BMAP_DRAWING_RECTANGLE ]  
         },  
         circleOptions: styleOptions, //圆的样式   
         rectangleOptions: styleOptions //矩形的样式  
@@ -245,11 +246,8 @@
     var overlaycomplete = function (e) {
         overlays.push(e.overlay);
         var result = "";
-
         result += e.drawingMode + ":";
-
         if (e.drawingMode == BMAP_DRAWING_CIRCLE) {
-
             var circle_radius = e.overlay.getRadius();
             var circle_point = new BMap.Point(e.overlay.getCenter().lng, e.overlay.getCenter().lat);
             alert(map.getDistance(circle_point, tests[1]));
@@ -281,7 +279,7 @@
     }  
 
     //------------------画圆，让WINFORM调用----------------  
-     function drawCircle(){  
+    function drawCircle(){  
         drawingManager.setDrawingMode(BMAP_DRAWING_CIRCLE);
     } 
     
@@ -296,28 +294,43 @@
 
   //------------------本地数据画标注，让WINFORM调用--------------------  
     function markerPoints(w) {  
-        ////JSON.parse(strArr);
-        ////var eValue = eval('strArr.' + strArr.lat);
-        ////alert(eValue); 
-        //var obj = JSON.parse(w);
-        //alert(obj[5].lng);
-        //alert(obj[5].lat)
-        ////alert(obj[1].count)
         var obj = JSON.parse(w);
-        //alert(obj[0].lng);
-        //alert(obj[0].lat)
-        //alert(obj[1].count)
-        //var marker = new BMap.Marker(obj);  // 创建标注
-        //map.addOverlay(marker); 
-
         for (j = 0, len = obj.length; j < len; j++) {
-            var myIcon = new BMap.Icon("../img/png-0003.png", new BMap.Size(24, 24));
-            var marker = new BMap.Marker(obj[j], { icon: myIcon });  // 创建标注
+            var marker = new BMap.Marker(obj[j]);  // 创建标注
             map.addOverlay(marker);
+        }     
+    }
 
+
+    map.addEventListener("leftclick", function (e) {//地图左键单击事件，左键为click
+        map.clearOverlays();//添加标注前清空以前的所有标注
+        document.getElementById("txtjingweidu").value = e.point.lng + ", " + e.point.lat;
+
+        var marker = new BMap.Marker(new BMap.Point(e.point.lng, e.point.lat));        // 创建标注     
+        map.addOverlay(marker);
+    });
+
+
+	//在地图上画轨迹 strat
+    function drawOrit(w)
+    {
+        var obj = JSON.parse(w);
+        var trackPoint = [];
+        for (var i = 0, j = obj.length; i < j; i++) {
+            trackPoint.push(new BMap.Point(obj[i].lng, obj[i].lat));
         }
-       
+        var polyline = new BMap.Polyline(trackPoint, {strokeColor:"blue", strokeWeight:6,   strokeOpacity:0.5});  //定义折线  
+		map.addOverlay(polyline);  	
+    }
+
+	//在地图上画多边形 strat
+    function drawPolygon(w) {
+        var obj = JSON.parse(w);
+        var trackPoint = []; 
+        for (var i = 0, j = obj.length; i < j; i++) {
+            trackPoint.push(new BMap.Point(obj[i].lng, obj[i].lat));
+        }
+        var polyline = new BMap.Polygon(trackPoint, { strokeColor: "blue", strokeWeight: 6, strokeOpacity: 0.5 });  //定义折线  
+        map.addOverlay(polyline);  	
     };
-
-
 </script>
