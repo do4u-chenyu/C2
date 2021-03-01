@@ -1,5 +1,6 @@
 ﻿using C2.IAOLab.WebEngine.Dialogs;
 using C2.Model;
+using C2.Model.MindMaps;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,7 @@ namespace C2.IAOLab.WebEngine
 
         public WebType Type;
         public string WebUrl;
-        public List<DataItem> DataItems;
+        public Topic HitTopic;
         private WebBrowserDialog wbDialog;
         private string defaultMapUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "StartMap.html");
         private string defaultBossUrl = "";
@@ -30,7 +31,6 @@ namespace C2.IAOLab.WebEngine
         {
             Type = WebType.Null;
             WebUrl = string.Empty;
-            DataItems = new List<DataItem>();
         }
 
         public void OpenWebBrowser()
@@ -38,20 +38,18 @@ namespace C2.IAOLab.WebEngine
             switch (Type)
             {
                 case WebType.Boss:
-                    wbDialog = new WebBrowserDialog()
+                    wbDialog = new WebBrowserDialog(HitTopic, Type)
                     {
                         Title = "数据大屏",
                         WebUrl = string.IsNullOrEmpty(WebUrl) ? defaultBossUrl : WebUrl,
-                        DataItems = DataItems
                     };
                     wbDialog.InitializeBossToolStrip();
                     break;
                 case WebType.Map:
-                    wbDialog = new WebBrowserDialog()
+                    wbDialog = new WebBrowserDialog(HitTopic, Type)
                     {
                         Title = "图上作战",
                         WebUrl = string.IsNullOrEmpty(WebUrl) ? defaultMapUrl : WebUrl,
-                        DataItems = DataItems
                     };
                     wbDialog.InitializeMapToolStrip();
                     break;

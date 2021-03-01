@@ -700,7 +700,7 @@ namespace C2.Controls.MapViews
             new WebManager()
             {
                 Type = WebManager.WebType.Map,
-                DataItems = currentTopic.GetDataItems()
+                HitTopic = currentTopic
                 //WebUrl = mw.WebUrl
             }.OpenWebBrowser();
         }
