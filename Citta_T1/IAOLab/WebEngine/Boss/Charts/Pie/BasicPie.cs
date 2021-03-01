@@ -1,12 +1,13 @@
 ﻿using C2.IAOLab.WebEngine.Boss.Option;
 using C2.IAOLab.WebEngine.Boss.Option.SeriesType;
 using C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption;
+using System.Data;
 
 namespace C2.IAOLab.WebEngine.Boss.Charts.Pie
 {
     public class BasicPie : BaseCharts
     {
-        public BasicPie(CompleteOption option, string[] chartOptions) {
+        public BasicPie(DataTable dataTable, CompleteOption option, int[] chartOptions) {
             
             if (!option.legend.FlagDic["orient"]) {
                 option.legend.orient = Option.BaseOption.Orient.horizontal;
@@ -17,8 +18,8 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Pie
             option.series = new Series( new ISeries[] {
                 new SeriesPie() {
                     encode = new Encode() {
-                        itemName = Common.FormatString(chartOptions[0]),
-                        value = Common.FormatString(chartOptions[1])
+                        itemName = chartOptions[0],
+                        value = chartOptions[1]
                     },
                     emphasis = new Emphasis() {
                         itemStyle = new ItemStyle() {

@@ -30,12 +30,15 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public List<DataItem> DataItems;
         bool isActive = true;
 
+        public Dictionary<string, int[]> ChartOptions;
+
         public WebBrowserDialog()
         {
             InitializeComponent();
             Title = string.Empty;
             WebUrl = string.Empty;
             DataItems = new List<DataItem>();
+            ChartOptions = new Dictionary<string, int[]>();
         }
 
         private void WebBrowserDialog_Load(object sender, EventArgs e)
@@ -151,9 +154,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         void LoadBossData_Click(object sender, EventArgs e)
         {
-            var dialog = new SelectBossDialog(DataItems);
+            var dialog = new SelectBossDialog(DataItems, ChartOptions);
             if (dialog.ShowDialog() == DialogResult.OK)
+            {
                 webBrowser1.Navigate(dialog.WebUrl);
+                ChartOptions = dialog.ChartOptions;
+            }  
         }
 
         void SavePic_Click(object sender, EventArgs e)
