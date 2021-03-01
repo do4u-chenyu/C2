@@ -52,7 +52,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.myInstaller1 = new UserInstallSet.MyInstaller();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -372,6 +371,5 @@
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
-        private UserInstallSet.MyInstaller myInstaller1;
     }
 }

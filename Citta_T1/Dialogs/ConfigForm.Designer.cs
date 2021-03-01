@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.userModelConfigPage = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
@@ -64,6 +64,10 @@
             this.gisMapOKButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.baiduHeatTB = new System.Windows.Forms.TextBox();
+            this.baiduVerAPITB = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.baiduScaleTB = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -326,14 +330,14 @@
             this.interpreterFFPColumn,
             this.aliasColumn,
             this.chosenColumn});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dataGridView.Location = new System.Drawing.Point(6, 93);
             this.dataGridView.MultiSelect = false;
@@ -352,8 +356,8 @@
             // interpreterFFPColumn
             // 
             this.interpreterFFPColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.interpreterFFPColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.interpreterFFPColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.interpreterFFPColumn.FillWeight = 320F;
             this.interpreterFFPColumn.HeaderText = "虚拟机路径";
             this.interpreterFFPColumn.Name = "interpreterFFPColumn";
@@ -364,8 +368,8 @@
             // 
             // aliasColumn
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.aliasColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.aliasColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.aliasColumn.FillWeight = 75F;
             this.aliasColumn.HeaderText = "别名";
             this.aliasColumn.Name = "aliasColumn";
@@ -456,6 +460,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.baiduHeatTB);
+            this.tabPage1.Controls.Add(this.baiduVerAPITB);
+            this.tabPage1.Controls.Add(this.label25);
+            this.tabPage1.Controls.Add(this.label24);
             this.tabPage1.Controls.Add(this.baiduScaleTB);
             this.tabPage1.Controls.Add(this.label15);
             this.tabPage1.Controls.Add(this.label16);
@@ -471,11 +479,43 @@
             this.tabPage1.Text = "百度地图(外网)";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // baiduHeatTB
+            // 
+            this.baiduHeatTB.Location = new System.Drawing.Point(104, 46);
+            this.baiduHeatTB.Name = "baiduHeatTB";
+            this.baiduHeatTB.Size = new System.Drawing.Size(460, 23);
+            this.baiduHeatTB.TabIndex = 17;
+            // 
+            // baiduVerAPITB
+            // 
+            this.baiduVerAPITB.Location = new System.Drawing.Point(104, 14);
+            this.baiduVerAPITB.Name = "baiduVerAPITB";
+            this.baiduVerAPITB.Size = new System.Drawing.Size(460, 23);
+            this.baiduVerAPITB.TabIndex = 16;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(26, 50);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(72, 17);
+            this.label25.TabIndex = 15;
+            this.label25.Text = "热力图API :";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(38, 18);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(60, 17);
+            this.label24.TabIndex = 14;
+            this.label24.Text = "百度API :";
+            // 
             // baiduScaleTB
             // 
-            this.baiduScaleTB.Location = new System.Drawing.Point(91, 100);
+            this.baiduScaleTB.Location = new System.Drawing.Point(104, 136);
             this.baiduScaleTB.Name = "baiduScaleTB";
-            this.baiduScaleTB.Size = new System.Drawing.Size(309, 23);
+            this.baiduScaleTB.Size = new System.Drawing.Size(460, 23);
             this.baiduScaleTB.TabIndex = 13;
             this.toolTip1.SetToolTip(this.baiduScaleTB, "初始缩放比值请设置5-9区间");
             this.baiduScaleTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.baiduGISKeyTB_KeyPress);
@@ -483,16 +523,16 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(38, 103);
+            this.label15.Location = new System.Drawing.Point(46, 140);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(47, 17);
+            this.label15.Size = new System.Drawing.Size(56, 17);
             this.label15.TabIndex = 12;
-            this.label15.Text = "缩放比:";
+            this.label15.Text = "缩放比：";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(22, 62);
+            this.label16.Location = new System.Drawing.Point(35, 110);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(63, 17);
             this.label16.TabIndex = 11;
@@ -501,7 +541,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(22, 21);
+            this.label17.Location = new System.Drawing.Point(35, 80);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(63, 17);
             this.label17.TabIndex = 10;
@@ -509,17 +549,17 @@
             // 
             // baiduLonTB
             // 
-            this.baiduLonTB.Location = new System.Drawing.Point(91, 59);
+            this.baiduLonTB.Location = new System.Drawing.Point(104, 105);
             this.baiduLonTB.Name = "baiduLonTB";
-            this.baiduLonTB.Size = new System.Drawing.Size(309, 23);
+            this.baiduLonTB.Size = new System.Drawing.Size(460, 23);
             this.baiduLonTB.TabIndex = 9;
             this.baiduLonTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // baiduLatTB
             // 
-            this.baiduLatTB.Location = new System.Drawing.Point(91, 18);
+            this.baiduLatTB.Location = new System.Drawing.Point(104, 76);
             this.baiduLatTB.Name = "baiduLatTB";
-            this.baiduLatTB.Size = new System.Drawing.Size(309, 23);
+            this.baiduLatTB.Size = new System.Drawing.Size(460, 23);
             this.baiduLatTB.TabIndex = 8;
             this.baiduLatTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.baiduGISUrlTB_KeyPress);
             // 
@@ -762,14 +802,14 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewCheckBoxColumn1});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.installedDGV.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.installedDGV.DefaultCellStyle = dataGridViewCellStyle6;
             this.installedDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.installedDGV.Location = new System.Drawing.Point(3, 6);
             this.installedDGV.MultiSelect = false;
@@ -785,8 +825,8 @@
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn1.FillWeight = 320F;
             this.dataGridViewTextBoxColumn1.HeaderText = "插件";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -797,8 +837,8 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn2.FillWeight = 75F;
             this.dataGridViewTextBoxColumn2.HeaderText = "版本";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -857,14 +897,14 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewCheckBoxColumn2,
             this.Column1});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.availableDGV.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.availableDGV.DefaultCellStyle = dataGridViewCellStyle9;
             this.availableDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.availableDGV.Location = new System.Drawing.Point(3, 6);
             this.availableDGV.MultiSelect = false;
@@ -881,8 +921,8 @@
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewTextBoxColumn3.FillWeight = 320F;
             this.dataGridViewTextBoxColumn3.HeaderText = "插件";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
@@ -893,8 +933,8 @@
             // 
             // dataGridViewTextBoxColumn4
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewTextBoxColumn4.FillWeight = 75F;
             this.dataGridViewTextBoxColumn4.HeaderText = "版本";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
@@ -1438,5 +1478,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox checkStatus;
         private System.Windows.Forms.TextBox description;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox baiduHeatTB;
+        private System.Windows.Forms.TextBox baiduVerAPITB;
     }
 }

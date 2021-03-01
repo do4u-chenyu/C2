@@ -59,7 +59,7 @@
             // 
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.textBox.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.textBox.Location = new System.Drawing.Point(196, 43);
+            this.textBox.Location = new System.Drawing.Point(220, 43);
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(173, 34);
             this.textBox.TabIndex = 4;
