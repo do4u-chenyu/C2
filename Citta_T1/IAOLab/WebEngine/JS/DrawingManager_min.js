@@ -867,7 +867,24 @@ var BMAP_DRAWING_MARKER = "marker",
         }
 })();
 
-
 function savePoints() {
-    alert(remberPolyline);
+    //var fso;
+    //fso = new ActiveXObject("Scripting.FileSystemObject");
+    //if (remberPointMaker.length != 0) {
+    //    var f1 = fso.createtextfile(Markerpath, true);
+    //    f1.writeLine(remberPointMaker);
+    //    f1.close();
+    //}
+    //if (remberPolygon.length != 0) {
+    //    var f2 = fso.createtextfile(Polygonpath, true);
+    //    f2.writeLine(remberPoint);
+    //    f2.close();
+    //}
+    //if (remberPolyline.length != 0) {
+    //    var f3 = fso.createtextfile(Polylinepath, true);
+    //    f3.writeLine(remberPolyline);
+    //    f3.close();
+    //}
+
+
 }

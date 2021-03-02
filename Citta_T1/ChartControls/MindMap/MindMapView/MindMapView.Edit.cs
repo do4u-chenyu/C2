@@ -223,6 +223,7 @@ namespace C2.Controls.MapViews
             MapWidget atw = hitTopic.FindWidget<MapWidget>();
             if (atw == null)
                 hitTopic.Widgets.Add(new MapWidget());
+            
 
             //当前节点的数据源作为参数传给webbrowser
             new WebManager()

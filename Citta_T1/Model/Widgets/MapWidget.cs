@@ -10,9 +10,14 @@ namespace C2.Model.Widgets
     class MapWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "MAP";
+        public string MarkerData { get; set; }
+        public string PolygonData { get; set; }
+        public string PolylineData { get; set; }
+ 
 
         [Browsable(false)]
         public string WebUrl { set; get; }
+
         public MapWidget()
         {
             DisplayIndex = 9;
