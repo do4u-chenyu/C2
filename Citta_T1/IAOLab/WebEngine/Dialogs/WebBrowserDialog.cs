@@ -244,9 +244,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.SavePic.Enabled = true;
                 isActive = true;
             }
-            LoadHtml();
-            SourceWebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
-            webBrowser1.Navigate(SourceWebUrl);
+            LoadHtml();    
 
         }
 
@@ -261,50 +259,24 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void runButton_Click(object sender, EventArgs e)
         {
             SaveEditorHtml();
-            Global.TempDirectory = Path.Combine(Global.WorkspaceDirectory, "FiberHomeIAOTemp");
-            ////---------------------读html模板页面到stringbuilder对象里----
-            //StringBuilder htmltext = new StringBuilder();
-            //try
-            //{
-            //    using (StreamReader sr = new StreamReader(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html")) //模板页路径
-            //    {
-            //        String line;
-            //        while ((line = sr.ReadLine()) != null)
-            //        {
-            //            htmltext.Append(line);
-            //            htmltext.Append('\n');
-            //        }
-            //        sr.Close();
-            //    }
-            //}
-            //catch
-            //{
 
-            //    HelpUtil.ShowMessageBox("文件读取错误！");
-
-            //}
-            ////----------替换html内容
-
-            //htmltext.Replace("http://api.map.baidu.com/api?v=1.4&services=true", this.baiduVerAPITB.Text);
-            //htmltext.Replace("http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js", this.baiduHeatTB.Text);
-
-            ////----------生成htm文件------------------――
-            //try
-            //{
-            //    using (StreamWriter sw = new StreamWriter(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html", false, System.Text.Encoding.GetEncoding("GB2312"))) //保存地址
-            //    {
-            //        sw.WriteLine(htmltext);
-            //        sw.Flush();
-            //        sw.Close();
-            //    }
-            //}
-            //catch
-            //{
-            //    HelpUtil.ShowMessageBox("更改API失败！");
-            //}
-        
-
-    }
+            string tempDir = FileUtil.TryGetSysTempDir();
+            Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
+            if (!File.Exists(Path.Combine(Global.TempDirectory, "editorMap.html")))
+            {
+                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
+                strmsave.Write(this.htmlEditorControlEx1.Text);
+                strmsave.Close();
+            }
+            else
+            {
+                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
+                strmsave.Write(this.htmlEditorControlEx1.Text);
+                strmsave.Close();
+            }
+            SourceWebUrl = Path.Combine(Global.TempDirectory, "editorMap.html");
+            webBrowser1.Navigate(SourceWebUrl);
+        }
 
         public void LoadHtml()
         {
