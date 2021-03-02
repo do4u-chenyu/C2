@@ -244,8 +244,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.SavePic.Enabled = true;
                 isActive = true;
             }
-            LoadHtml();    
-
+            LoadHtml();
+            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
+            webBrowser1.Navigate(WebUrl);
         }
 
         private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
