@@ -258,8 +258,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            SaveEditorHtml();
-
             string tempDir = FileUtil.TryGetSysTempDir();
             Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
             if (!File.Exists(Path.Combine(Global.TempDirectory, "editorMap.html")))
