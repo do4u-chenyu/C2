@@ -4,6 +4,7 @@ using C2.Dialogs;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +34,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public WebType WebType;
         public string Title { set => this.Text = value; get => this.Text; }
         public string WebUrl;
+        public string SourceWebUrl;
         public Topic HitTopic;
         public List<DataItem> DataItems;
         bool isActive = true;
@@ -55,6 +57,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             ChartOptions = new Dictionary<string, int[]>();
             WebType = WebType.Null;
             picPath = Path.Combine(Global.TempDirectory, "boss.png");
+            SourceWebUrl = string.Empty;
         }
 
         public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
@@ -226,32 +229,24 @@ namespace C2.IAOLab.WebEngine.Dialogs
         { 
             if (isActive)
             {
-                this.panel1.Visible = true;
-                this.panel1.Enabled = true;
+                this.editorPanel.Visible = true;
+                this.editorPanel.Enabled = true;
                 this.webBrowser1.Location = new System.Drawing.Point(600, 28);
-                this.webBrowser1.Width = 750;
-                this.SaveHtml.Enabled = false;
-                this.SavePic.Enabled = false;
-                this.SaveHtml.Enabled = false;
                 this.LoadMapData.Enabled = false;
-                this.Clear.Enabled = false;
+                this.SavePic.Enabled = false;  
                 isActive = false;
             }
             else
             {
-                this.panel1.Visible = false;
-                this.panel1.Enabled = false;
+                this.editorPanel.Visible = false;
+                this.editorPanel.Enabled = false;
                 this.webBrowser1.Location = new System.Drawing.Point(12, 23);
-                this.webBrowser1.Width = 1340;
-                this.SaveHtml.Enabled = true;
-                this.SavePic.Enabled = true;
-                this.SaveHtml.Enabled = true;
                 this.LoadMapData.Enabled = true;
-                this.Clear.Enabled = true;
+                this.SavePic.Enabled = true;
                 isActive = true;
             }
-            LoadHtml();
-            SaveEditorHtml();
+            LoadHtml();    
+
         }
 
         private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -266,15 +261,27 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            SaveEditorHtml();        
-            //WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "StartMap.html");
-            //webBrowser1.Navigate(WebUrl);
-
+            string tempDir = FileUtil.TryGetSysTempDir();
+            Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
+            if (!File.Exists(Path.Combine(Global.TempDirectory, "editorMap.html")))
+            {
+                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
+                strmsave.Write(this.htmlEditorControlEx1.Text);
+                strmsave.Close();
+            }
+            else
+            {
+                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
+                strmsave.Write(this.htmlEditorControlEx1.Text);
+                strmsave.Close();
+            }
+            SourceWebUrl = Path.Combine(Global.TempDirectory, "editorMap.html");
+            webBrowser1.Navigate(SourceWebUrl);
         }
 
         public void LoadHtml()
         {
-            Stream myStream = new FileStream(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html", FileMode.Open);
+            Stream myStream = new FileStream(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\SourceCodeMap.html", FileMode.Open);
             Encoding encode = System.Text.Encoding.GetEncoding("gb2312");//若是格式为utf-8的需要将gb2312替换
             StreamReader myStreamReader = new StreamReader(myStream, encode);
             string strhtml = myStreamReader.ReadToEnd();
@@ -283,7 +290,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         public void SaveEditorHtml()
         {
-            //这个函数需要确定一个存放临时文件的位置，如果没有临时文件，是不是换种调用语法就可以实现直接调用？？？？
+            //这个功能可能不需要
         }
         private void resetButton_Click(object sender, EventArgs e)
         {

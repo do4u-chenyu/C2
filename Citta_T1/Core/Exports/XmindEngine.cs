@@ -2,6 +2,7 @@
 using C2.Globalization;
 using C2.Model.Documents;
 using C2.Model.MindMaps;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,8 @@ namespace C2.Core.Exports
         {
             if (chart is MindMap)
             {
-                XmindFile.SaveFile((MindMap)chart, filename);
+                using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+                    XmindFile.SaveFile((MindMap)chart, filename);
                 return true;
             }
 
@@ -30,7 +32,8 @@ namespace C2.Core.Exports
         }
         protected override bool ExportChartsToFile(Document document, IEnumerable<ChartPage> charts, string filename)
         {
-            XmindFile.SaveFile(charts, filename);
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+                XmindFile.SaveFile(charts, filename);
             return true;
         }
         public override void Export(Document document, IEnumerable<ChartPage> charts)

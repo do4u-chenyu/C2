@@ -37,6 +37,7 @@ namespace C2.Model.MindMaps
         XmlDocument styleDoc;
         XmlNamespaceManager nsmgr;
         List<Attachment> attachments;
+        int linkCounter;
         string filename;
         int currSheetID;
         XmlElement contentRoot;
@@ -81,6 +82,7 @@ namespace C2.Model.MindMaps
 
             styleDoc = CreateStyleDOM();
             attachments = new List<Attachment>();
+            linkCounter = 0;
             filename = fn;
 
             contentRoot = CreateRootFromCTDOM(contentDoc);
@@ -198,7 +200,7 @@ namespace C2.Model.MindMaps
                 return;
             XmlElement topicNode = contentDoc.CreateElement("topic");
             // Attributes
-            topicNode.SetAttribute("id", this.currSheetID.ToString() + "-" + topic.ID.ToString());
+            topicNode.SetAttribute("id", GetTopicID(topic));
             topicNode.SetAttribute("style-id", defaultTopicStyleIndex.ToString());
             if (topic.Folded)
                 topicNode.SetAttribute("branch", "folded");
@@ -221,7 +223,7 @@ namespace C2.Model.MindMaps
             {
                 // 至少存在一个图表
                 PictureWidget[] widgets = topic.FindWidgets<PictureWidget>();
-                int firstInternalPWIndex = FindInternalPicWidgetIndex(widgets); // 找不到返回-1
+                int firstInternalPWIndex = Math.Max(0, FindInternalPicWidgetIndex(widgets));
                 for (int i = 0; i < widgets.Length; i++)
                 {
                     if (i == firstInternalPWIndex)
@@ -276,7 +278,7 @@ namespace C2.Model.MindMaps
             {
                 NoteWidget[] widgets = topic.FindWidgets<NoteWidget>();
                 for (int i = 0; i < widgets.Length; i++)
-                    SaveRemark(topicNode, widgets[i].Remark);
+                    SaveRemark(topicNode, widgets[i].Text);
             }
 
             // children
@@ -391,7 +393,7 @@ namespace C2.Model.MindMaps
                 if (dataItem.IsDatabase() && !BCPBuffer.GetInstance().IsDBDataCached(dataItem.DBItem))
                 {
                     SaveLabel(parent, notSavedextErnalDataTag + dataItem.DataType.ToString() + "-" + dataItem.FileName);
-                    return;
+                    continue;
                 }
 
                 Attachment attachment;
@@ -441,7 +443,7 @@ namespace C2.Model.MindMaps
             // Xmind中 附件以节点形式存在
             if (topicNode.SelectSingleNode("children/topics") != null)
             {
-                XmlElement topic = CreateAtcmtTopicNode(String.Format("{0}-{1}", topicNode.GetAttribute("id"), attachment.id), attachment);
+                XmlElement topic = CreateAtcmtTopicNode(GetAttachmentID(topicNode, attachment), attachment);
 
                 topicNode.SelectSingleNode("children/topics").AppendChild(topic);
             }
@@ -451,12 +453,26 @@ namespace C2.Model.MindMaps
                 XmlElement tn = contentDoc.CreateElement("topics");
                 tn.SetAttribute("type", "attached");
 
-                XmlElement topic = CreateAtcmtTopicNode(String.Format("{0}-{1}", topicNode.GetAttribute("id"), attachment.id), attachment);
+                XmlElement topic = CreateAtcmtTopicNode(GetAttachmentID(topicNode, attachment), attachment);
 
                 tn.AppendChild(topic);
                 cn.AppendChild(tn);
                 topicNode.AppendChild(cn);
             }
+        }
+
+        private string GetAttachmentID(XmlElement topicNode, Attachment attachment)
+        {
+            return String.Format("attachment-{0}-{1}", topicNode.GetAttribute("id"), attachment.id);
+        }
+        private string GetLinkID()
+        {
+            this.linkCounter += 1;
+            return linkCounter.ToString();
+        }
+        private string GetTopicID(Topic topic)
+        {
+            return this.currSheetID.ToString() + "-" + topic.ID.ToString();
         }
         private XmlAttribute CreateAttributeWithNs(string prefix, string localName, string value)
         {
@@ -620,7 +636,7 @@ namespace C2.Model.MindMaps
             // Attributes
             node.SetAttribute("end1", this.currSheetID.ToString() + "-" + link.From.ID.ToString());
             node.SetAttribute("end2", this.currSheetID.ToString() + "-" + link.Target.ID.ToString());
-            node.SetAttribute("id", this.currSheetID.ToString() + "-" + link.ID.ToString());
+            node.SetAttribute("id", GetLinkID());
             // control-points
             XmlElement controlPoints = contentDoc.CreateElement("control-points");
             controlPoints.AppendChild(CreatControlPoint(link, 0));
