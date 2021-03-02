@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Controls.Left;
 using C2.Core;
 using C2.Dialogs;
 using C2.Model;
@@ -222,7 +223,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void Clear_Click(object sender, EventArgs e)
         {
            
-            webBrowser1.Document.InvokeScript("clearAll"); 
+            webBrowser1.Document.InvokeScript("clearAll");
+            
         }
     
         private void EditCode_Click(object sender, EventArgs e)
@@ -291,7 +293,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         public void SaveEditorHtml()
         {
-            //这个功能可能不需要
+            //StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
+            
+
         }
         private void resetButton_Click(object sender, EventArgs e)
         {
@@ -324,6 +328,18 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 template.Image = CurrentObject;
                 HitTopic.Add(template);
             }
+
+            string Markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, HitTopic.Text, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+            string Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, HitTopic.Text, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+            string Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, HitTopic.Text, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+            //if (!File.Exists(Markerpath))
+            //{
+            //    FileStream fs = new FileStream(Markerpath, FileMode.Create, FileAccess.Write);
+            //    fs.Close();
+            //}
+            string path = Markerpath + ',' + Polygonpath + ',' + Polylinepath;
+            webBrowser1.Document.InvokeScript("getPath", new object[] { path });
+            
 
             return base.OnOKButtonClick();
         }

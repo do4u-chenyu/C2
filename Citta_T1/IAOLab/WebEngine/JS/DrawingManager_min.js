@@ -1,3 +1,14 @@
+var Markerpath, Polygonpath, Polylinepath;
+var remberPointMaker = [];
+var remberPolyline = [];
+var remberPolygon = [];
+function getPath(w) {
+    var strs = w.split(','); //字符分割
+    Markerpath = strs[0];
+    Polygonpath = strs[1];
+    Polylinepath = strs[2];
+    alert(Markerpath);
+}
 var BMapLib = window.BMapLib = BMapLib || {};
 var BMAP_DRAWING_MARKER = "marker",
     BMAP_DRAWING_POLYLINE = "polyline",
@@ -349,7 +360,7 @@ var BMAP_DRAWING_MARKER = "marker",
             }
         };
         d.prototype._bindMarker = function () {
-            var remberPoint = [];
+            remberPointMaker = [];
             var i = this,
                 j = this._map,
                 h = this._mask;
@@ -357,18 +368,18 @@ var BMAP_DRAWING_MARKER = "marker",
                 var k = new BMap.Marker(l.point, i.markerOptions);
                 j.addOverlay(k);
                 i._dispatchOverlayComplete(k);
-                remberPoint.push(l.point.lng, l.point.lat);
-                var fso;
-                try {
-                    fso = new ActiveXObject("Scripting.FileSystemObject");
-                    var f1 = fso.createtextfile("D:\\标注图点.txt", true);
-                    f1.writeLine(remberPoint);
-                    f1.close();
+                remberPointMaker.push(l.point.lng, l.point.lat);
+                //var fso;
+                //try {
+                //    fso = new ActiveXObject("Scripting.FileSystemObject");
+                //    var f1 = fso.createtextfile(Markerpath, true);
+                //    f1.writeLine(remberPoint);
+                //    f1.close();
 
-                } catch (e) {
-                    alert("当前浏览器不支持");
-                    return;
-                }
+                //} catch (e) {
+                //    alert("没成功");
+                //    return;
+                //}
             };
       
             h.addEventListener("click", g)
@@ -423,31 +434,34 @@ var BMAP_DRAWING_MARKER = "marker",
             var l = function (o) {
             var fso;
             j.push(o.point);
-            polylineOrPolygon.push(o.point.lng, o.point.lat);
+                polylineOrPolygon.push(o.point.lng, o.point.lat);
             //alert(o.point.lat);
             if (k._drawingType == BMAP_DRAWING_POLYLINE) {
-                try {
-                    fso = new ActiveXObject("Scripting.FileSystemObject");
-                    var f2 = fso.createtextfile("D:\\折线图点.txt", true);
-                    f2.writeLine(polylineOrPolygon);
-                    f2.close();
+                remberPolyline = polylineOrPolygon;
+                //try {
+                //    fso = new ActiveXObject("Scripting.FileSystemObject");
+                //    var f2 = fso.createtextfile("D:\\折线图点.txt", true);
+                //    f2.writeLine(polylineOrPolygon);
+                //    f2.close();
 
-                } catch (e) {
-                    alert("当前浏览器不支持");
-                    return;
-                }
+                //} catch (e) {
+                //    alert("当前浏览器不支持");
+                //    return;
+                //}
+
             }
             else if (k._drawingType == BMAP_DRAWING_POLYGON) {
-                try {
-                    fso = new ActiveXObject("Scripting.FileSystemObject");
-                    var f3 = fso.createtextfile("D:\\多边形图点.txt", true);
-                    f3.writeLine(polylineOrPolygon);
-                    f3.close();
+                remberPolygon = polylineOrPolygon;
+                //try {
+                //    fso = new ActiveXObject("Scripting.FileSystemObject");
+                //    var f3 = fso.createtextfile("D:\\多边形图点.txt", true);
+                //    f3.writeLine(polylineOrPolygon);
+                //    f3.close();
 
-                } catch (e) {
-                    alert("当前浏览器不支持");
-                    return;
-                }
+                //} catch (e) {
+                //    alert("当前浏览器不支持");
+                //    return;
+                //}
             }
             n = j.concat(j[j.length - 1]); 
             if (j.length == 1) {
@@ -853,3 +867,7 @@ var BMAP_DRAWING_MARKER = "marker",
         }
 })();
 
+
+function savePoints() {
+    alert(remberPolyline);
+}
