@@ -130,6 +130,8 @@ namespace C2.Business.Model
                     }
                 }
 
+                if ((widget as XmlElement).GetAttribute("type") == "PICTURE")
+                    ReWritePicPath(widget.SelectNodes("."), dataSourcePath);
             }
 
             foreach (string xmlPath in xmlPaths)
@@ -147,6 +149,18 @@ namespace C2.Business.Model
                 string name = Path.GetFileName(xmlNode.GetAttribute("path"));
                 if (dataSourcePath.ContainsKey(name))
                     xmlNode.SetAttribute("path", dataSourcePath[name]);
+            }
+        }
+        private void ReWritePicPath(XmlNodeList nodes, Dictionary<string, string> dataSourcePath)
+        {
+            foreach (XmlElement xmlNode in nodes)
+            {
+                string path = xmlNode.GetAttribute("image_url");
+                if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(Path.GetDirectoryName(path)))
+                    continue;
+                string name = Path.GetFileName(xmlNode.GetAttribute("image_url"));
+                if (dataSourcePath.ContainsKey(name))
+                    xmlNode.SetAttribute("image_url", dataSourcePath[name]);
             }
         }
 

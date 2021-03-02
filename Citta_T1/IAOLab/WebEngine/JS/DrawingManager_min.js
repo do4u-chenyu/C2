@@ -1,6 +1,4 @@
-var Markerpath;
-var Polygonpath;
-var Polylinepath;
+var Markerpath, Polygonpath, Polylinepath;
 var remberPointMaker = [];
 var remberPolyline = [];
 var remberPolygon = [];
@@ -371,7 +369,6 @@ var BMAP_DRAWING_MARKER = "marker",
                 j.addOverlay(k);
                 i._dispatchOverlayComplete(k);
                 remberPointMaker.push(l.point.lng, l.point.lat);
-                ceshi();
                 //var fso;
                 //try {
                 //    fso = new ActiveXObject("Scripting.FileSystemObject");
@@ -438,7 +435,6 @@ var BMAP_DRAWING_MARKER = "marker",
             var fso;
             j.push(o.point);
                 polylineOrPolygon.push(o.point.lng, o.point.lat);
-                savePoints();
             //alert(o.point.lat);
             if (k._drawingType == BMAP_DRAWING_POLYLINE) {
                 remberPolyline = polylineOrPolygon;

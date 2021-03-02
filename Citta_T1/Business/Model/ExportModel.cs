@@ -94,6 +94,9 @@ namespace C2.Business.Model
                             break;
                     }
                 }
+
+                if ((widget as XmlElement).GetAttribute("type") == "PICTURE")
+                    CopyPic(widget.SelectNodes("."), allPaths, dataSourceNames);
             }
 
             foreach (string xmlPath in xmlPaths)
@@ -130,6 +133,29 @@ namespace C2.Business.Model
                     return !copySuccess;
 
                 allPaths[path] = xmlNode.GetAttribute("path");
+            }
+            return copySuccess;
+        }
+
+        private bool CopyPic(XmlNodeList nodes, Dictionary<string, string> allPaths, List<string> dataSourceNames)
+        {
+            bool copySuccess = true;
+            foreach (XmlElement xmlNode in nodes)
+            {
+                string path = xmlNode.GetAttribute("image_url");
+                if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(Path.GetDirectoryName(path))) //内置图片不用copy
+                    continue;
+                // 相同数据源，直接使用已经命名好的数据源，防止已修改的同名文件
+                if (allPaths.ContainsKey(path))
+                {
+                    xmlNode.SetAttribute("image_url", allPaths[path]);
+                    continue;
+                }
+
+                if (!CopyFileRewriteXml(xmlNode, path, dataSourceNames, "image_url"))
+                    return !copySuccess;
+
+                allPaths[path] = xmlNode.GetAttribute("image_url");
             }
             return copySuccess;
         }
@@ -343,6 +369,7 @@ namespace C2.Business.Model
             }
             return copySuccess;
         }
+
         private bool CopyDataSourceOperatorFile(XmlNodeList nodes, Dictionary<string, string> allPaths, List<string> dataSourceNames)
         {
             bool copySuccess = true;

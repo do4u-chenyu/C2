@@ -19,8 +19,8 @@ namespace RookieKnowledgePlugin
         }
         public void WriteNodes() 
         {
-            //string folderPath = Path.Combine(Application.StartupPath,"RookieKnowledgePlugin","cookbook");
-            string folderPath = @"C:\Users\Administrator\Desktop\work\C2\test";
+            string folderPath = Path.Combine(Application.StartupPath,"RookieKnowledgePlugin","cookbook");
+            //string folderPath = @"C:\Users\Administrator\Desktop\work\C2\test";
             TreeNode treeNodeRoot1 = new TreeNode();
             treeNodeRoot1.Text = "首页";
             treeView1.Nodes.Add(treeNodeRoot1);
