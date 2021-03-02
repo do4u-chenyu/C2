@@ -696,7 +696,6 @@ namespace C2.Controls.MapViews
         }
         void MenuOpenMap_Click(object sender, EventArgs e)
         {
-            //TODO phx 打开web窗口
             new WebManager()
             {
                 Type = WebManager.WebType.Map,
