@@ -1187,7 +1187,7 @@
             this.newVersion.Name = "newVersion";
             this.newVersion.Size = new System.Drawing.Size(634, 380);
             this.newVersion.TabIndex = 6;
-            this.newVersion.Paint += new System.Windows.Forms.PaintEventHandler(this.checking_Paint);
+          
             // 
             // checking
             // 
@@ -1334,7 +1334,7 @@
             this.Name = "ConfigForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "首选项";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigForm_FormClosing);
+           
             this.Load += new System.EventHandler(this.ConfigForm_Load);
             this.mainTabControl.ResumeLayout(false);
             this.userModelConfigPage.ResumeLayout(false);

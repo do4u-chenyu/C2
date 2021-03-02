@@ -657,14 +657,7 @@ namespace C2.Dialogs
             }
         }
 
-        private void checking_Paint(object sender, PaintEventArgs e)
-        {
+ 
 
-        }
-
-        private void ConfigForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //checkVersion.Abort();
-        }
     }
 }
