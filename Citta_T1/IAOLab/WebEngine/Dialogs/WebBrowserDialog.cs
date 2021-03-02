@@ -39,6 +39,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public Dictionary<string, int[]> ChartOptions;
 
+        private string picPath;
         PictureWidget.PictureDesign _CurrentObject;
         public PictureWidget.PictureDesign CurrentObject
         {
@@ -53,6 +54,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             WebUrl = string.Empty;
             ChartOptions = new Dictionary<string, int[]>();
             WebType = WebType.Null;
+            picPath = Path.Combine(Global.TempDirectory, "boss.png");
         }
 
         public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
@@ -197,7 +199,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
             Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
             webBrowser1.DrawToBitmap(bitmap, rectangle);
-            bitmap.Save(Path.Combine(Global.TempDirectory,"1.png"));
+            bitmap.Save(picPath);
 
             SaveFileDialog fd = new SaveFileDialog
             {
@@ -206,7 +208,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             };
             if (fd.ShowDialog() != DialogResult.OK)
                 return;
-            File.Copy(Path.Combine(Global.TempDirectory, "1.png"), fd.FileName, true);
+            File.Copy(picPath, fd.FileName, true);
         }
 
         void SaveHtml_Click(object sender, EventArgs e)
@@ -254,10 +256,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            var configMap = new ConfigForm();
-            string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
-            webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
-
+            if(WebType == WebType.Map)
+            {
+                var configMap = new ConfigForm();
+                string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
+                webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
+            }
         }
 
         private void runButton_Click(object sender, EventArgs e)
@@ -293,17 +297,15 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         protected override bool OnOKButtonClick()
         {
-            if(WebType == WebType.Boss)
+            if(WebType == WebType.Boss && ChartOptions.ContainsKey("Datasource"))
             {
-                string picPath = Path.Combine(Global.TempDirectory, "1.png");
-                //Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
-                //Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
-                //webBrowser1.DrawToBitmap(bitmap, rectangle);
-                //bitmap.Save(picPath);
+                Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
+                Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
+                webBrowser1.DrawToBitmap(bitmap, rectangle);
+                bitmap.Save(picPath);//TODO phx 考虑是否放入对应业务视图，并且考虑名字
 
                 //当前webbrowser截图，作为图片挂件加入当前节点
                 var template = new PictureWidget();
-
                 CurrentObject = new PictureWidget.PictureDesign();
                 CurrentObject.SourceType = PictureSource.File;
                 CurrentObject.Url = picPath;
@@ -312,7 +314,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 CurrentObject.Name = Path.GetFileNameWithoutExtension(picPath);
                 CurrentObject.EmbedIn = false;
                 template.Image = CurrentObject;
-
                 HitTopic.Add(template);
             }
 

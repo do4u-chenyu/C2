@@ -21,12 +21,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public List<DataItem> DataItems;
         private BcpInfo bcpInfo;
         private DataItem selectData;
+        private int oldDataIdx;
         public Dictionary<string, int[]> ChartOptions;
 
         public SelectBossDialog(List<DataItem> dataItems, Dictionary<string, int[]> options)
         {
             InitializeComponent();
-
+            oldDataIdx = -1;
             DataItems = dataItems;
             ChartOptions = options;
             LoadOption();
@@ -103,7 +104,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             if (!ChartOptions.ContainsKey("Datasource") || ChartOptions["Datasource"].Length == 0)
                 return;
-            datasource.SelectedIndex = ChartOptions["Datasource"][0];
+            datasource.Text = DataItems[ChartOptions["Datasource"][0]].FileName;
             selectData = DataItems[ChartOptions["Datasource"][0]];
             this.bcpInfo = new BcpInfo(selectData.FilePath, selectData.FileEncoding, new char[] { selectData.FileSep });
         }
@@ -131,10 +132,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void Datasource_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectData = DataItems[this.datasource.SelectedIndex];
-            
             this.bcpInfo = new BcpInfo(selectData.FilePath, selectData.FileEncoding, new char[] { selectData.FileSep });
             ChangeControlContent();
-            ChartOptions = new Dictionary<string, int[]>();
+            if(oldDataIdx != -1)
+                ChartOptions = new Dictionary<string, int[]>();
+            oldDataIdx = datasource.SelectedIndex;
         }
 
         private void ChangeControlContent()
@@ -170,16 +172,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
             List<string> rows = new List<string>(fileContent.TrimEnd('\r').TrimEnd('\n').Split('\n'));
             int maxLine = Math.Min(rows.Count, MaxLine);
 
-            //文件仅有表头无法画图表
-            //if (maxLine <= 1)
-            //    return false;
-
             for (int i = 1; i < maxLine; i++)
             {
-                string row = rows[i].TrimEnd('\r');
-                dataTable.Rows.Add(row.Split(selectData.FileSep));
+                string[] rowList = rows[i].TrimEnd('\r').Split(selectData.FileSep);
+                List<string> tmpRowList = new List<string>();
+                for (int j = 0; j< bcpInfo.ColumnArray.Length; j++)
+                {
+                    string cellValue = j < rowList.Length ? rowList[j] : "0";
+                    tmpRowList.Add(cellValue);
+                }
+                dataTable.Rows.Add(tmpRowList.ToArray());
             }
-
             return dataTable;
         }
     }
