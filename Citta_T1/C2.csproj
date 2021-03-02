@@ -103,6 +103,15 @@
     <Reference Include="log4net">
       <HintPath>..\ThirdPartyLibrary\log4net\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>..\ThirdPartyLibrary\Npgsql\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>..\ThirdPartyLibrary\Npgsql\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql.VSIX">
+      <HintPath>..\ThirdPartyLibrary\Npgsql\Npgsql.VSIX.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI, Version=2.5.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.dll</HintPath>
@@ -1911,9 +1920,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\Html\BossIndex01.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="IAOLab\WebEngine\Html\SourceCodeMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\Html\StartMap.html">
