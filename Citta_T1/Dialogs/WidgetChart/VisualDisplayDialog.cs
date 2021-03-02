@@ -55,7 +55,7 @@ namespace C2.Dialogs
             List<List<string>> columnValues= Utils.FileUtil.GetColumns(indexs, hitItem, rows, upperLimit);
             if (columnValues.Count == 0)
             {
-                HelpUtil.ShowMessageBox("文件内容为空");
+                HelpUtil.ShowMessageBox("文件内容为空或格式有问题");
                 Close(); 
                 return;
             }

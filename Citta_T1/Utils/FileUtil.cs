@@ -644,11 +644,9 @@ namespace C2.Utils
                 if (String.IsNullOrEmpty(row))
                     continue;
                 string[] rowElement = row.Split(dataItem.FileSep);
-                if (rowElement.Length <= indexs.Max() || indexs.Min() < 0)
-                {
-                    MessageBox.Show(String.Format("{0}:第{1}行数据可能不完整", dataItem.FilePath, i));
+                if (rowElement.Length <= indexs.Max() || indexs.Min() < 0)                 
                     return new List<List<string>>();
-                }
+
                 for (int j = 0; j < indexs.Count; j++)
                 {
                     if (columnValues.Count < j + 1)
