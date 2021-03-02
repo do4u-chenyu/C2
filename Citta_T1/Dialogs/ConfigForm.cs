@@ -10,6 +10,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Dialogs
@@ -513,13 +514,13 @@ namespace C2.Dialogs
 
         #region 检查更新Tab
 
-        private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private async void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
                 return;
 
-            checkVersion = new Thread(CheckUpdate);
-            checkVersion.Start();
+            await CheckUpdate() ;
+
         }
         private void MainTabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
@@ -529,25 +530,21 @@ namespace C2.Dialogs
                 return;
             }
         }
-        private void CheckUpdate()
+        private Task<string> CheckUpdate()
         {
 
             string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
             string browserVersion = BrowserVersion();
             if (browserVersion.StartsWith(currentVersion) || browserVersion.IsNullOrEmpty())
             {
-
+                Console.WriteLine("===浏览器版本==="+ browserVersion);
                 this.SuspendLayout();
-                this.Invoke((EventHandler)(delegate
-                {
-                    this.title.Text = "当前已为最新版本";
-                    this.versionLable.Text = @"当前版本:";
-                    this.version.Text = currentVersion;
-                    this.sizeLable.Visible = false;
-                    this.sizeValue.Visible = false;
-                    this.checking.Visible = false;
-                }));
-
+                this.title.Text = "当前已为最新版本";
+                this.versionLable.Text = @"当前版本:";
+                this.version.Text = currentVersion;
+                this.sizeLable.Visible = false;
+                this.sizeValue.Visible = false;
+                this.checking.Visible = false;
                 this.ResumeLayout(false);
             }
             else
@@ -557,13 +554,10 @@ namespace C2.Dialogs
                 if (info_split.Length < 3)
                 {
 
-                    this.Invoke((EventHandler)(delegate
-                    {
-                        this.currentModelRunLab.Visible = false;
-                        this.checkStatus.Text = "联网检查更新失败";
-                    }));
 
-                    return;
+                    this.currentModelRunLab.Visible = false;
+                    this.checkStatus.Text = "联网检查更新失败";
+                    return Task.FromResult("Finish");
                 }
 
                 this.SuspendLayout();
@@ -572,9 +566,8 @@ namespace C2.Dialogs
                 this.description.Text = info_split[2];
                 this.checking.Visible = false;
                 this.ResumeLayout(false);
-
-
             }
+            return Task.FromResult("Finish");
         }
 
         private string BrowserVersion()
