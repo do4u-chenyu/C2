@@ -31,7 +31,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
-
         public WebType WebType;
         public string Title { set => this.Text = value; get => this.Text; }
         public string WebUrl;
@@ -73,16 +72,16 @@ namespace C2.IAOLab.WebEngine.Dialogs
             webBrowser1.Navigate(WebUrl);
             if (WebType == WebType.Boss)//数据大屏初次打开是自动弹出配置窗口
                 OpenSelectBossDialog();
-            var dialog = new SelectMapDialog(DataItems);
-            string[] methodstr = new string[1];
-            methodstr[0] = dialog.tude;
-            var temp = new MapWidget();
-            if (Directory.Exists(temp.MarkerData))
-                webBrowser1.Document.InvokeScript("markerPoints", methodstr);
-            if (Directory.Exists(temp.PolygonData))
-                webBrowser1.Document.InvokeScript("drawPolygon", methodstr);
-            if (Directory.Exists(temp.PolylineData))
-                webBrowser1.Document.InvokeScript("drawOrit", methodstr);
+            //var dialog = new SelectMapDialog(DataItems);
+            //string[] methodstr = new string[1];
+            //methodstr[0] = dialog.tude;
+            //var temp = new MapWidget();
+            //if (Directory.Exists(temp.MarkerData))
+            //    webBrowser1.Document.InvokeScript("markerPoints", methodstr);
+            //if (Directory.Exists(temp.PolygonData))
+            //    webBrowser1.Document.InvokeScript("drawPolygon", methodstr);
+            //if (Directory.Exists(temp.PolylineData))
+            //    webBrowser1.Document.InvokeScript("drawOrit", methodstr);
 
         }
 
