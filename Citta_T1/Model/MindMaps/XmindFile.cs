@@ -4,12 +4,10 @@ using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows.Forms;
 using System.Xml;
 using C2.Core;
 using C2.Model.Documents;
 using C2.Model.Widgets;
-using C2.Utils;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace C2.Model.MindMaps
@@ -18,13 +16,11 @@ namespace C2.Model.MindMaps
     {
         public static void SaveFile(IEnumerable<ChartPage> charts, string filename)
         {
-            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-                new XmindFileSaver(charts, filename).SaveFile();
+            new XmindFileSaver(charts, filename).SaveFile();
         }
         public static void SaveFile(MindMap mindMap, string filename)
         {
-            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-                new XmindFileSaver(mindMap, filename).SaveFile();
+            new XmindFileSaver(mindMap, filename).SaveFile();
         }
     }
     class XmindFileSaver
