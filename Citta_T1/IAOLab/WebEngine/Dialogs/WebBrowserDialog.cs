@@ -4,6 +4,7 @@ using C2.Dialogs;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +34,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public WebType WebType;
         public string Title { set => this.Text = value; get => this.Text; }
         public string WebUrl;
+        public string SourceWebUrl;
         public Topic HitTopic;
         public List<DataItem> DataItems;
         bool isActive = true;
@@ -53,6 +55,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             WebUrl = string.Empty;
             ChartOptions = new Dictionary<string, int[]>();
             WebType = WebType.Null;
+            SourceWebUrl = string.Empty;
+
         }
 
         public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
@@ -224,32 +228,26 @@ namespace C2.IAOLab.WebEngine.Dialogs
         { 
             if (isActive)
             {
-                this.panel1.Visible = true;
-                this.panel1.Enabled = true;
+                this.editorPanel.Visible = true;
+                this.editorPanel.Enabled = true;
                 this.webBrowser1.Location = new System.Drawing.Point(600, 28);
-                this.webBrowser1.Width = 750;
-                this.SaveHtml.Enabled = false;
-                this.SavePic.Enabled = false;
-                this.SaveHtml.Enabled = false;
                 this.LoadMapData.Enabled = false;
-                this.Clear.Enabled = false;
+                this.SavePic.Enabled = false;  
                 isActive = false;
             }
             else
             {
-                this.panel1.Visible = false;
-                this.panel1.Enabled = false;
+                this.editorPanel.Visible = false;
+                this.editorPanel.Enabled = false;
                 this.webBrowser1.Location = new System.Drawing.Point(12, 23);
-                this.webBrowser1.Width = 1340;
-                this.SaveHtml.Enabled = true;
-                this.SavePic.Enabled = true;
-                this.SaveHtml.Enabled = true;
                 this.LoadMapData.Enabled = true;
-                this.Clear.Enabled = true;
+                this.SavePic.Enabled = true;
                 isActive = true;
             }
             LoadHtml();
-            SaveEditorHtml();
+            SourceWebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
+            webBrowser1.Navigate(SourceWebUrl);
+
         }
 
         private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -262,15 +260,55 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            SaveEditorHtml();        
-            //WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "StartMap.html");
-            //webBrowser1.Navigate(WebUrl);
+            SaveEditorHtml();
+            Global.TempDirectory = Path.Combine(Global.WorkspaceDirectory, "FiberHomeIAOTemp");
+            ////---------------------读html模板页面到stringbuilder对象里----
+            //StringBuilder htmltext = new StringBuilder();
+            //try
+            //{
+            //    using (StreamReader sr = new StreamReader(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html")) //模板页路径
+            //    {
+            //        String line;
+            //        while ((line = sr.ReadLine()) != null)
+            //        {
+            //            htmltext.Append(line);
+            //            htmltext.Append('\n');
+            //        }
+            //        sr.Close();
+            //    }
+            //}
+            //catch
+            //{
 
-        }
+            //    HelpUtil.ShowMessageBox("文件读取错误！");
+
+            //}
+            ////----------替换html内容
+
+            //htmltext.Replace("http://api.map.baidu.com/api?v=1.4&services=true", this.baiduVerAPITB.Text);
+            //htmltext.Replace("http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js", this.baiduHeatTB.Text);
+
+            ////----------生成htm文件------------------――
+            //try
+            //{
+            //    using (StreamWriter sw = new StreamWriter(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html", false, System.Text.Encoding.GetEncoding("GB2312"))) //保存地址
+            //    {
+            //        sw.WriteLine(htmltext);
+            //        sw.Flush();
+            //        sw.Close();
+            //    }
+            //}
+            //catch
+            //{
+            //    HelpUtil.ShowMessageBox("更改API失败！");
+            //}
+        
+
+    }
 
         public void LoadHtml()
         {
-            Stream myStream = new FileStream(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html", FileMode.Open);
+            Stream myStream = new FileStream(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\SourceCodeMap.html", FileMode.Open);
             Encoding encode = System.Text.Encoding.GetEncoding("gb2312");//若是格式为utf-8的需要将gb2312替换
             StreamReader myStreamReader = new StreamReader(myStream, encode);
             string strhtml = myStreamReader.ReadToEnd();
@@ -279,7 +317,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         public void SaveEditorHtml()
         {
-            //这个函数需要确定一个存放临时文件的位置，如果没有临时文件，是不是换种调用语法就可以实现直接调用？？？？
+            //这个功能可能不需要
         }
         private void resetButton_Click(object sender, EventArgs e)
         {
