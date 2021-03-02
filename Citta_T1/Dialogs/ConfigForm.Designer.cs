@@ -186,6 +186,7 @@
             this.mainTabControl.TabIndex = 0;
             this.mainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             this.mainTabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.MainTabControl_Selecting);
+            this.mainTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.mainTabControl_Selected);
             // 
             // userModelConfigPage
             // 
@@ -1187,7 +1188,6 @@
             this.newVersion.Name = "newVersion";
             this.newVersion.Size = new System.Drawing.Size(634, 380);
             this.newVersion.TabIndex = 6;
-          
             // 
             // checking
             // 
@@ -1334,7 +1334,6 @@
             this.Name = "ConfigForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "首选项";
-           
             this.Load += new System.EventHandler(this.ConfigForm_Load);
             this.mainTabControl.ResumeLayout(false);
             this.userModelConfigPage.ResumeLayout(false);

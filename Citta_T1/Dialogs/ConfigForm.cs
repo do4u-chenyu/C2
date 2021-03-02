@@ -28,7 +28,6 @@ namespace C2.Dialogs
         public string scale;
         public string baiduVerAPI;
         public string baiduHeatAPI;
-        private Thread checkVersion;
         public ConfigForm()
         {
             InitializeComponent();
@@ -514,21 +513,14 @@ namespace C2.Dialogs
 
         #region 检查更新Tab
 
-        private async void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private  void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
-                return;
-
-            await CheckUpdate() ;
+           
 
         }
         private void MainTabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            if (checkVersion != null)
-            {
-                mainTabControl.SelectTab(5);
-                return;
-            }
+
         }
         private Task<string> CheckUpdate()
         {
@@ -586,7 +578,7 @@ namespace C2.Dialogs
         }
         private void CancleUpdate_Click(object sender, EventArgs e)
         {
-            checkVersion.Abort();
+
             this.Close();
         }
         private void UpdateSoftware_Click(object sender, EventArgs e)
@@ -650,7 +642,12 @@ namespace C2.Dialogs
             }
         }
 
- 
+        private async void mainTabControl_Selected(object sender, TabControlEventArgs e)
+        {
+            if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
+                return;
 
+            await CheckUpdate();
+        }
     }
 }
