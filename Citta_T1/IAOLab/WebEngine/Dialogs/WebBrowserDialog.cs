@@ -31,7 +31,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
-
         public WebType WebType;
         public string Title { set => this.Text = value; get => this.Text; }
         public string WebUrl;
@@ -73,6 +72,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
             webBrowser1.Navigate(WebUrl);
             if (WebType == WebType.Boss)//数据大屏初次打开是自动弹出配置窗口
                 OpenSelectBossDialog();
+            //var dialog = new SelectMapDialog(DataItems);
+            //string[] methodstr = new string[1];
+            //methodstr[0] = dialog.tude;
+            //var temp = new MapWidget();
+            //if (Directory.Exists(temp.MarkerData))
+            //    webBrowser1.Document.InvokeScript("markerPoints", methodstr);
+            //if (Directory.Exists(temp.PolygonData))
+            //    webBrowser1.Document.InvokeScript("drawPolygon", methodstr);
+            //if (Directory.Exists(temp.PolylineData))
+            //    webBrowser1.Document.InvokeScript("drawOrit", methodstr);
+
         }
 
         public void InitializeMapToolStrip()
@@ -329,18 +339,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 HitTopic.Add(template);
             }
 
-            string Markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, HitTopic.Text, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-            string Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, HitTopic.Text, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-            string Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, HitTopic.Text, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-            //if (!File.Exists(Markerpath))
-            //{
-            //    FileStream fs = new FileStream(Markerpath, FileMode.Create, FileAccess.Write);
-            //    fs.Close();
-            //}
-            string path = Markerpath + ',' + Polygonpath + ',' + Polylinepath;
-            webBrowser1.Document.InvokeScript("getPath", new object[] { path });
-            
-
+            string Markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+            string Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+            string Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+            webBrowser1.Document.InvokeScript("savePoints");
+            var tempstr = new MapWidget();
+            tempstr.MarkerData = Markerpath;
+            tempstr.PolygonData = Polygonpath;
+            tempstr.PolylineData = Polylinepath;
             return base.OnOKButtonClick();
         }
     }

@@ -60,6 +60,7 @@
             this.webBrowser1.Size = new System.Drawing.Size(920, 411);
             this.webBrowser1.TabIndex = 10004;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser1_DocumentCompleted);
+
             // 
             // htmlEditorControlEx1
             // 
@@ -138,7 +139,7 @@
             this.editorPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            this.webBrowser1.ScriptErrorsSuppressed = true;
         }
 
         #endregion
