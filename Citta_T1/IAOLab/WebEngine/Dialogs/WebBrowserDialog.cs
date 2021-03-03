@@ -73,24 +73,45 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 return;
             foreach(DataItem di in dataItems)
             {
-                if (di.FileName.Contains("多边形"))
+                if (di.FileName.Contains("标注图"))
+                    webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
+                if (di.FileName.Contains("多边形图"))
                     webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
+                if (di.FileName.Contains("折线图"))
+                    webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
             }
-            //string[] methodstr = new string[1];
-            //methodstr[0] = dialog.tude;
-            //var temp = new MapWidget();
-            //if (Directory.Exists(temp.MarkerData))
-            //    webBrowser1.Document.InvokeScript("markerPoints", methodstr);
-            //if (Directory.Exists(temp.PolygonData))
-            //    webBrowser1.Document.InvokeScript("drawPolygon", methodstr);
-            //if (Directory.Exists(temp.PolylineData))
-            //    webBrowser1.Document.InvokeScript("drawOrit", methodstr);
 
         }
 
         private object[] OpenMapFile(string path)
         {
+            List<string> latValues = new List<string>();
+            List<string> lonValues = new List<string>();
             string res = "";
+            if (File.Exists(path))
+            {
+                StreamReader sr = new StreamReader(path, Encoding.Default);
+                String line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] tempstr = line.Split(',');
+
+                    for (int i = 0; i < tempstr.Length; i++)
+                    {   if (i% 2 == 1)
+                            latValues.Add(tempstr[i]);
+                        else
+                            lonValues.Add(tempstr[i]);
+                    }
+                }
+
+                string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
+                List<string> tmpList = new List<string>();
+                for (int i = 0; i < latValues.Count; i++)
+                {
+                    tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[i], lonValues[i]) + '}');
+                }
+                res = '[' + String.Join(",", tmpList.ToArray()) + ']';
+            }
             return new object[] { res };
         }
         private void WebBrowserDialog_Activated(object sender, EventArgs e)
@@ -346,6 +367,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 string Markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
                 string Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
                 string Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                string temp = Markerpath + ',' + Polygonpath + ',' + Polylinepath;
+                webBrowser1.Document.InvokeScript("getPath", new object[] { temp });
                 webBrowser1.Document.InvokeScript("savePoints");
                 DataItem marker = new DataItem(Markerpath, Path.GetFileNameWithoutExtension(Markerpath),',',OpUtil.Encoding.UTF8,OpUtil.ExtType.Text);
                 DataItem polygon = new DataItem(Polygonpath, Path.GetFileNameWithoutExtension(Polygonpath),',',OpUtil.Encoding.UTF8,OpUtil.ExtType.Text);
