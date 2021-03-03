@@ -1,7 +1,10 @@
-var Markerpath, Polygonpath, Polylinepath;
+var Markerpath, Polygonpath, Polylinepath,txtpath;
 var remberPointMaker = [];
 var remberPolyline = [];
 var remberPolygon = [];
+var Makerflag = false;
+var Polygonflag = false;
+var Polylineflag = false;
 function getPath(w) {
     var strs = w.split(','); //字符分割
     Markerpath = strs[0];
@@ -873,17 +876,35 @@ function savePoints() {
         var f1 = fso.createtextfile(Markerpath, true);
         f1.writeLine(remberPointMaker);
         f1.close();
+        
     }
-    if (remberPolygon.length != 0) {
+    if (remberPolygon.length != 0 ) {
         var f2 = fso.createtextfile(Polygonpath, true);
         f2.writeLine(remberPoint);
         f2.close();
     }
-    if (remberPolyline.length != 0) {
+    if (remberPolyline.length != 0 && Polylineflag == false) {
         var f3 = fso.createtextfile(Polylinepath, true);
         f3.writeLine(remberPolyline);
         f3.close();
     }
-
-
 }
+//function getxtPath(w) {
+//    txtpath = w;
+//}
+
+//function ShowFolderFileList(folderspec) {
+//    var fso, f, f1, fc, s;
+//    fso = new ActiveXObject("Scripting.FileSystemObject");
+//    f = fso.GetFolder(folderspec);
+//    fc = new Enumerator(f.files);
+//    s = "";
+//    for (; !fc.atEnd(); fc.moveNext()) {
+//        s += fc.item();
+//        s += "<br>";
+//    }
+//    return(s);
+//}
+
+
+

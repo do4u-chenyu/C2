@@ -34,7 +34,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public string SourceWebUrl;
         bool isActive = true;
-
+        public string Markerpath="", Polygonpath="", Polylinepath="";
         private string picPath;
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
@@ -364,10 +364,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             else if (WebType == WebType.Map)
             {
-                string Markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-                string Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-                string Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                if (Markerpath.Length == 0)
+                    Markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                if (Polygonpath.Length == 0)
+                    Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                if (Polylinepath.Length == 0)
+                    Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+
+              
                 string temp = Markerpath + ',' + Polygonpath + ',' + Polylinepath;
+                
+                //webBrowser1.Document.InvokeScript("getxtPath", new object[] { Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name) });
                 webBrowser1.Document.InvokeScript("getPath", new object[] { temp });
                 webBrowser1.Document.InvokeScript("savePoints");
                 DataItem marker = new DataItem(Markerpath, Path.GetFileNameWithoutExtension(Markerpath),',',OpUtil.Encoding.UTF8,OpUtil.ExtType.Text);
