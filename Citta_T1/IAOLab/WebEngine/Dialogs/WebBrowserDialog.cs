@@ -63,7 +63,19 @@ namespace C2.IAOLab.WebEngine.Dialogs
             webBrowser1.Navigate(WebUrl);
             if (WebType == WebType.Boss)//数据大屏初次打开是自动弹出配置窗口
                 OpenSelectBossDialog();
-            //var dialog = new SelectMapDialog(DataItems);
+
+            List<DataItem> dataItems = new List<DataItem>();
+            MapWidget maw = HitTopic.FindWidget<MapWidget>();
+            if(maw != null)
+                dataItems = maw.DataItems;
+
+            if (dataItems.Count == 0)
+                return;
+            foreach(DataItem di in dataItems)
+            {
+                if (di.FileName.Contains("多边形"))
+                    webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
+            }
             //string[] methodstr = new string[1];
             //methodstr[0] = dialog.tude;
             //var temp = new MapWidget();
@@ -74,6 +86,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
             //if (Directory.Exists(temp.PolylineData))
             //    webBrowser1.Document.InvokeScript("drawOrit", methodstr);
 
+        }
+
+        private object[] OpenMapFile(string path)
+        {
+            string res = "";
+            return new object[] { res };
         }
         private void WebBrowserDialog_Activated(object sender, EventArgs e)
         {
@@ -323,15 +341,31 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 template.SizeType = PictureSizeType.Thumb;
                 HitTopic.Add(template);
             }
-
-            string Markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-            string Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-            string Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-            webBrowser1.Document.InvokeScript("savePoints");
-            var tempstr = new MapWidget();
-            tempstr.MarkerData = Markerpath;
-            tempstr.PolygonData = Polygonpath;
-            tempstr.PolylineData = Polylinepath;
+            else if (WebType == WebType.Map)
+            {
+                string Markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                string Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                string Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                webBrowser1.Document.InvokeScript("savePoints");
+                DataItem marker = new DataItem(Markerpath, Path.GetFileNameWithoutExtension(Markerpath),',',OpUtil.Encoding.UTF8,OpUtil.ExtType.Text);
+                DataItem polygon = new DataItem(Polygonpath, Path.GetFileNameWithoutExtension(Polygonpath),',',OpUtil.Encoding.UTF8,OpUtil.ExtType.Text);
+                DataItem polyline = new DataItem(Polylinepath, Path.GetFileNameWithoutExtension(Polylinepath),',',OpUtil.Encoding.UTF8,OpUtil.ExtType.Text);
+                MapWidget maw = HitTopic.FindWidget<MapWidget>();
+                if(maw != null)
+                {
+                    maw.DataItems = new List<DataItem>
+                    {
+                        marker,
+                        polygon,
+                        polyline
+                    };
+                }
+                //var tempstr = new MapWidget();
+                //tempstr.MarkerData = Markerpath;
+                //tempstr.PolygonData = Polygonpath;
+                //tempstr.PolylineData = Polylinepath;
+                
+            }
             return base.OnOKButtonClick();
         }
     }
