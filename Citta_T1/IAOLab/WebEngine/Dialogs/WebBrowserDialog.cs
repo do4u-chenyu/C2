@@ -95,11 +95,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[i], lonValues[i]) + '}');
             }
             res = '[' + String.Join(",", tmpList.ToArray()) + ']';
- 
-            
-
-           
-
             return new object[] { res };
         }
         private void WebBrowserDialog_Activated(object sender, EventArgs e)
@@ -287,8 +282,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 isActive = true;
             }
             LoadHtml();
-            SourceWebUrl = Path.Combine(Global.TempDirectory, "SourceCodeMap.html");
+            SourceWebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
             webBrowser1.Navigate(SourceWebUrl);
+
         }
 
         private void runButton_Click(object sender, EventArgs e)

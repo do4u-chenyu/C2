@@ -1919,6 +1919,9 @@
     <Content Include="IAOLab\WebEngine\Html\BossIndex01.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="IAOLab\WebEngine\Html\SourceCodeMap.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="IAOLab\WebEngine\Html\StartMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
