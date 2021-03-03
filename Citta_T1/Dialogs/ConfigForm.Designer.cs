@@ -184,9 +184,7 @@
             this.mainTabControl.SelectedIndex = 0;
             this.mainTabControl.Size = new System.Drawing.Size(642, 410);
             this.mainTabControl.TabIndex = 0;
-            this.mainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
-            this.mainTabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.MainTabControl_Selecting);
-            this.mainTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.mainTabControl_Selected);
+            this.mainTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.MainTabControl_Selected);
             // 
             // userModelConfigPage
             // 
@@ -1252,7 +1250,6 @@
             this.button3.TabIndex = 6;
             this.button3.Text = "更新";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.UpdateSoftware_Click);
             // 
             // description
             // 
