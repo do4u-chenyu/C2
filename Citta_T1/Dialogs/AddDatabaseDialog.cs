@@ -19,7 +19,7 @@ namespace C2.Dialogs
     partial class AddDatabaseDialog : StandardDialog
     {
         public DatabaseItem DatabaseInfo { get; set; }
-        private DatabaseDialogMode Mode;
+        private  DatabaseDialogMode Mode;
         private LinkButton LinkButton;
         public AddDatabaseDialog(DatabaseItem databaseInfo=null, DatabaseDialogMode mode=DatabaseDialogMode.New, LinkButton linkButton=null)
         {
@@ -41,9 +41,9 @@ namespace C2.Dialogs
         {
             databaseTypeComboBox.SelectedIndex = (int)DatabaseInfo.Type-1;
             this.serverTextBox.Text = DatabaseInfo.Server ;
-            this.sidRadiobutton.Checked = DatabaseInfo.SID == "" ? false : true;
+            this.sidRadiobutton.Checked = !DatabaseInfo.SID.IsNullOrEmpty();
             this.sidTextBox.Text = DatabaseInfo.SID;
-            this.serviceRadiobutton.Checked = DatabaseInfo.Service == "" ? false : true;
+            this.serviceRadiobutton.Checked = !DatabaseInfo.Service.IsNullOrEmpty() ;
             this.serviceTextBox.Text = DatabaseInfo.Service;
             this.portTextBox.Text = DatabaseInfo.Port;
             this.userTextBox.Text = DatabaseInfo.User;

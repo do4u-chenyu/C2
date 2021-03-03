@@ -14,9 +14,9 @@ namespace C2.IAOLab.Plugins
 
         private static PluginsManager pluginsManager;
         
-        private Dictionary<string, IPlugin> plugins;
+        private readonly Dictionary<string, IPlugin> plugins;
 
-        private PluginsDownloader downloader;
+        private readonly PluginsDownloader downloader;
 
         public ICollection<IPlugin> Plugins 
         { 

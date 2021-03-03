@@ -173,8 +173,8 @@ namespace C2.Business.Model
             bool hasUnZip = true;
             string fileName = string.Empty;
             string modelName = string.Empty;
-            string errMsg = string.Empty;
-            string tmpDir = string.Empty;
+            string errMsg; 
+            string tmpDir;
             string fileExtension = isC2Model ? ".bmd" : ".xml";
             string fileParentDir = isC2Model ? "业务视图" : "模型市场";
             DialogResult result;

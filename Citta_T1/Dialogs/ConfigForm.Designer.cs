@@ -443,7 +443,7 @@
             this.gisMapOKButton.TabIndex = 6;
             this.gisMapOKButton.Text = "确认";
             this.gisMapOKButton.UseVisualStyleBackColor = true;
-            this.gisMapOKButton.Click += new System.EventHandler(this.gisMapOKButton_Click);
+            this.gisMapOKButton.Click += new System.EventHandler(this.GisMapOKButton_Click);
             // 
             // tabControl1
             // 
@@ -519,7 +519,7 @@
             this.baiduScaleTB.Size = new System.Drawing.Size(460, 23);
             this.baiduScaleTB.TabIndex = 13;
             this.toolTip1.SetToolTip(this.baiduScaleTB, "初始缩放比值请设置5-9区间");
-            this.baiduScaleTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.baiduGISKeyTB_KeyPress);
+            this.baiduScaleTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BaiduGISKeyTB_KeyPress);
             // 
             // label15
             // 
@@ -555,7 +555,7 @@
             this.baiduLonTB.Size = new System.Drawing.Size(460, 23);
             this.baiduLonTB.TabIndex = 9;
             this.toolTip1.SetToolTip(this.baiduLonTB, "请输入正确纬度！");
-            this.baiduLonTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
+            this.baiduLonTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox2_KeyPress);
             // 
             // baiduLatTB
             // 
@@ -564,7 +564,7 @@
             this.baiduLatTB.Size = new System.Drawing.Size(460, 23);
             this.baiduLatTB.TabIndex = 8;
             this.toolTip1.SetToolTip(this.baiduLatTB, "请输入正确经度！");
-            this.baiduLatTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.baiduGISUrlTB_KeyPress);
+            this.baiduLatTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BaiduGISUrlTB_KeyPress);
             // 
             // baiduGISTB
             // 

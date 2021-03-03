@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using C2.Utils;
 
@@ -9,47 +12,108 @@ namespace C2Shell
 {
     public class SoftwareUpdate
     {
-
-        private SoftwareUpdate()
-        { 
+        private readonly string updatePath = Path.Combine(Application.StartupPath, "update");
+        private readonly string rollbackPath = Path.Combine(Application.StartupPath, "rollback");
+        public SoftwareUpdate()
+        {
 
         }
 
-        private  void IsNeedUpdate()
+
+        public bool IsNeedUpdate()
         {
             // update目录是否为空
 
-            string packagePath = Path.Combine(Application.StartupPath, "update");
-            string[] files = System.IO.Directory.GetFiles(packagePath);
-           
-            if (files.Length != 1 || !files[0].EndsWith(".zip"))
-                return;
-            if (!ExecuteUpdate(files[0]))
-            {
-                Rollback();
-            }
+            string[] files = System.IO.Directory.GetFiles(updatePath);
+            bool needUpdate = (files.Length == 1 && files[0].EndsWith(".zip"));
+            return needUpdate;
 
         }
-        private static bool ExecuteUpdate(string zipPath)
+        public  bool ExecuteUpdate(string zipPath)
         {
-            // 解压update目录
+            bool success = true;
+            // 创建文件备份路径
+            try 
+            {
+                Directory.CreateDirectory(rollbackPath);
+            }
+            catch
+            {
+                return !success;
+            }
+            
+            // 解压update目录            
+            string scriptPath = Path.Combine(Path.GetDirectoryName(zipPath), "setup.bat");
+            string errMsg=ZipUtil.UnZipFile(zipPath, Path.GetDirectoryName(zipPath));
+            if (!string.IsNullOrEmpty(errMsg))               
+                return !success;
 
-            ZipUtil.UnZipFile(zipPath, Path.GetDirectoryName(zipPath));
-            // 更新进度窗体
-            // 执行 setup.bat脚本
-            return true;
+            // 执行 setup.bat脚本 ，进行文件备份和替换       
+            return ExecuteCmdScript(scriptPath);
+
         }
-        private static void Rollback()
+        public  void Rollback(string zipPath)
         {
             // 执行 rollback.bat脚本
+            string scriptPath = Path.Combine(Path.GetDirectoryName(zipPath), "rollback.bat");
+            ExecuteCmdScript(scriptPath);
         }
-        private static void StartCoreProcess()
+        public void Clean()
         {
-            string strPathExe = Application.StartupPath + "\\C2.exe";
+            try 
+            {
+                Directory.Delete(updatePath, true);
+                Directory.Delete(rollbackPath, true);
+            }
+            catch
+            {
+            }
+        }
+        public  void StartCoreProcess()
+        {
+            string strPathExe = Path.Combine(Application.StartupPath + "C2.exe");
             Process process = new System.Diagnostics.Process();
             process.StartInfo.FileName = strPathExe;
             process.Start();
 
+        }
+        private bool ExecuteCmdScript(string scriptPath)
+        {
+            bool success = true;
+            if (!File.Exists(scriptPath))
+                return !success;
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
+            p.StartInfo.RedirectStandardInput = true;//接受来自调用程序的输入信息
+            p.StartInfo.RedirectStandardOutput = true;//由调用程序获取输出信息
+            p.StartInfo.RedirectStandardError = true;//重定向标准错误输出
+            p.StartInfo.CreateNoWindow = true;//不显示程序窗口
+            p.StandardInput.AutoFlush = true;
+            p.Start();//启动程序
+           
+            try
+            {
+
+                using (StreamReader sr = new StreamReader(scriptPath))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        p.StandardInput.WriteLine(line);
+                        Console.WriteLine(line);
+                    }
+                    p.StandardInput.WriteLine("exit");
+                }
+            }
+            catch 
+            {
+                return !success;
+            }
+            
+            p.WaitForExit(15000);
+            p.Close();
+            return success;
         }
     }
 }

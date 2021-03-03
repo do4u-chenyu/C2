@@ -419,7 +419,7 @@ namespace C2.Dialogs
 
 
 
-        private void baiduGISUrlTB_KeyPress(object sender, KeyPressEventArgs e)
+        private void BaiduGISUrlTB_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar) && e.KeyChar != 0x2E)
             {
@@ -449,7 +449,7 @@ namespace C2.Dialogs
                 latude = this.baiduLatTB.Text;
         }
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar) && e.KeyChar != 0x2E)
             {
@@ -479,7 +479,7 @@ namespace C2.Dialogs
                 lontude = this.baiduLonTB.Text;
         }
 
-        private void baiduGISKeyTB_KeyPress(object sender, KeyPressEventArgs e)
+        private void BaiduGISKeyTB_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!System.Text.RegularExpressions.Regex.IsMatch(e.KeyChar.ToString(), "^([5-9])$") && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
             {
@@ -594,7 +594,7 @@ namespace C2.Dialogs
         }
         #endregion
 
-        private void gisMapOKButton_Click(object sender, EventArgs e)
+        private void GisMapOKButton_Click(object sender, EventArgs e)
         {
             Settings.Default.latude = this.baiduLatTB.Text;
             Settings.Default.lontude = this.baiduLonTB.Text;
