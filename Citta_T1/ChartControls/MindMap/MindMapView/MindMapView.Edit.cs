@@ -219,6 +219,8 @@ namespace C2.Controls.MapViews
 
         public void AddMap()
         {
+            Global.GetDocumentForm().Save();
+
             Topic hitTopic = SelectedTopics[0];
             MapWidget atw = hitTopic.FindWidget<MapWidget>();
             if (atw == null)
@@ -236,6 +238,8 @@ namespace C2.Controls.MapViews
         }
         public void AddBoss()
         {
+            Global.GetDocumentForm().Save();
+
             Topic hitTopic = SelectedTopics[0];
             new WebManager()
             {

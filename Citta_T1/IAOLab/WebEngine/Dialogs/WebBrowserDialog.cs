@@ -1,5 +1,4 @@
 ﻿using C2.Controls;
-using C2.Controls.Left;
 using C2.Core;
 using C2.Dialogs;
 using C2.Model;
@@ -8,20 +7,15 @@ using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static C2.IAOLab.WebEngine.WebManager;
 
 namespace C2.IAOLab.WebEngine.Dialogs
 {
-   
+
     partial class WebBrowserDialog : StandardDialog
     {
         private ToolStripButton LoadMapData;
@@ -31,23 +25,19 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
+
         public WebType WebType;
-        public string Title { set => this.Text = value; get => this.Text; }
-        public string WebUrl;
-        public string SourceWebUrl;
         public Topic HitTopic;
         public List<DataItem> DataItems;
+        public string Title { set => this.Text = value; get => this.Text; }
+        public string WebUrl;
+
+        public string SourceWebUrl;
         bool isActive = true;
 
-        public Dictionary<string, int[]> ChartOptions;
-
         private string picPath;
-        PictureWidget.PictureDesign _CurrentObject;
-        public PictureWidget.PictureDesign CurrentObject
-        {
-            get { return _CurrentObject; }
-            set { _CurrentObject = value; }
-        }
+        public Dictionary<string, int[]> ChartOptions;
+        public PictureWidget.PictureDesign CurrentObject;
 
         public WebBrowserDialog()
         {
@@ -55,7 +45,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             Title = string.Empty;
             WebUrl = string.Empty;
             ChartOptions = new Dictionary<string, int[]>();
-            WebType = WebType.Null;
             picPath = Path.Combine(Global.TempDirectory, "boss.png");
             SourceWebUrl = string.Empty;
         }
@@ -66,6 +55,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             DataItems = hitTopic.GetDataItems();
             WebType = webType;
         }
+
+        #region 窗体事件
         private void WebBrowserDialog_Load(object sender, EventArgs e)
         {
             WebBrowserConfig.SetWebBrowserFeatures(11);//TODO 暂定11，后面需要检测
@@ -84,6 +75,21 @@ namespace C2.IAOLab.WebEngine.Dialogs
             //    webBrowser1.Document.InvokeScript("drawOrit", methodstr);
 
         }
+        private void WebBrowserDialog_Activated(object sender, EventArgs e)
+        {
+            webBrowser1.Focus();
+        }
+        private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            if (WebType == WebType.Map)
+            {
+                var configMap = new ConfigForm();
+                string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
+                webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
+            }
+        }
+        #endregion
+
 
         public void InitializeMapToolStrip()
         {
@@ -130,7 +136,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 toolStripSeparator1,
                 Clear,
                 EditCode});
-
         }
 
         public void InitializeBossToolStrip()
@@ -149,7 +154,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SaveHtml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             SaveHtml.Image = global::C2.Properties.Resources.save;
             SaveHtml.Text = "保存成html";
-            SaveHtml.Click += new System.EventHandler(this.SaveHtml_Click);
 
             // SavePic
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -164,9 +168,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
             });
         }
 
+        #region 地图菜单事件
         void LoadMapData_Click(object sender, EventArgs e)
         {
-     
             var dialog = new SelectMapDialog(DataItems);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -175,7 +179,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 switch (dialog.map)
                 {
                     case "标注图":
-                        webBrowser1.Document.InvokeScript("markerPoints", methodstr);    
+                        webBrowser1.Document.InvokeScript("markerPoints", methodstr);
                         break;
                     case "轨迹图":
                         webBrowser1.Document.InvokeScript("drawOrit", methodstr);
@@ -195,6 +199,71 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 return;
         }
 
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Document.InvokeScript("clearAll");
+        }
+
+        private void EditCode_Click(object sender, EventArgs e)
+        {
+            if (isActive)
+            {
+                this.editorPanel.Visible = true;
+                this.editorPanel.Enabled = true;
+                this.webBrowser1.Location = new System.Drawing.Point(600, 28);
+                this.LoadMapData.Enabled = false;
+                this.SavePic.Enabled = false;
+                isActive = false;
+            }
+            else
+            {
+                this.editorPanel.Visible = false;
+                this.editorPanel.Enabled = false;
+                this.webBrowser1.Location = new System.Drawing.Point(12, 23);
+                this.LoadMapData.Enabled = true;
+                this.SavePic.Enabled = true;
+                isActive = true;
+            }
+            LoadHtml();
+            SourceWebUrl = Path.Combine(Global.TempDirectory, "SourceCodeMap.html");
+            webBrowser1.Navigate(SourceWebUrl);
+        }
+
+        private void runButton_Click(object sender, EventArgs e)
+        {
+            string tempDir = FileUtil.TryGetSysTempDir();
+            Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
+            if (!File.Exists(Path.Combine(Global.TempDirectory, "editorMap.html")))
+            {
+                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
+                strmsave.Write(this.htmlEditorControlEx1.Text);
+                strmsave.Close();
+            }
+            else
+            {
+                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
+                strmsave.Write(this.htmlEditorControlEx1.Text);
+                strmsave.Close();
+            }
+            SourceWebUrl = Path.Combine(Global.TempDirectory, "editorMap.html");
+            webBrowser1.Navigate(SourceWebUrl);
+        }
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            LoadHtml();
+        }
+        public void LoadHtml()
+        {
+            Stream myStream = new FileStream(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\SourceCodeMap.html", FileMode.Open);
+            Encoding encode = System.Text.Encoding.GetEncoding("gb2312");//若是格式为utf-8的需要将gb2312替换
+            StreamReader myStreamReader = new StreamReader(myStream, encode);
+            string strhtml = myStreamReader.ReadToEnd();
+            myStream.Close();
+            this.htmlEditorControlEx1.Text = strhtml;
+        }
+        #endregion
+
+        #region 数据大屏菜单事件
         void LoadBossData_Click(object sender, EventArgs e)
         {
             OpenSelectBossDialog();
@@ -226,119 +295,32 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 return;
             File.Copy(picPath, fd.FileName, true);
         }
+        #endregion
 
-        void SaveHtml_Click(object sender, EventArgs e)
-        {
-           //这里有待探讨
-        }
-
-        private void Clear_Click(object sender, EventArgs e)
-        {
-           
-            webBrowser1.Document.InvokeScript("clearAll");
-            
-        }
-    
-        private void EditCode_Click(object sender, EventArgs e)
-        { 
-            if (isActive)
-            {
-                this.editorPanel.Visible = true;
-                this.editorPanel.Enabled = true;
-                this.webBrowser1.Location = new System.Drawing.Point(600, 28);
-                this.LoadMapData.Enabled = false;
-                this.SavePic.Enabled = false;  
-                isActive = false;
-            }
-            else
-            {
-                this.editorPanel.Visible = false;
-                this.editorPanel.Enabled = false;
-                this.webBrowser1.Location = new System.Drawing.Point(12, 23);
-                this.LoadMapData.Enabled = true;
-                this.SavePic.Enabled = true;
-                isActive = true;
-            }
-            LoadHtml();
-            SourceWebUrl = Path.Combine(Global.TempDirectory, "SourceCodeMap.html");
-            webBrowser1.Navigate(SourceWebUrl);
-        }
-
-        private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            if(WebType == WebType.Map)
-            {
-                var configMap = new ConfigForm();
-                string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
-                webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
-            }
-            
-        }
-
-        private void runButton_Click(object sender, EventArgs e)
-        {
-            string tempDir = FileUtil.TryGetSysTempDir();
-            Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
-            if (!File.Exists(Path.Combine(Global.TempDirectory, "editorMap.html")))
-            {
-                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
-                strmsave.Write(this.htmlEditorControlEx1.Text);
-                strmsave.Close();
-            }
-            else
-            {
-                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
-                strmsave.Write(this.htmlEditorControlEx1.Text);
-                strmsave.Close();
-            }
-            SourceWebUrl = Path.Combine(Global.TempDirectory, "editorMap.html");
-            webBrowser1.Navigate(SourceWebUrl);
-        }
-
-        public void LoadHtml()
-        {
-            Stream myStream = new FileStream(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\SourceCodeMap.html", FileMode.Open);
-            Encoding encode = System.Text.Encoding.GetEncoding("gb2312");//若是格式为utf-8的需要将gb2312替换
-            StreamReader myStreamReader = new StreamReader(myStream, encode);
-            string strhtml = myStreamReader.ReadToEnd();
-            myStream.Close();
-            this.htmlEditorControlEx1.Text = strhtml;
-        }
-        public void SaveEditorHtml()
-        {
-            //StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
-            
-
-        }
-        private void resetButton_Click(object sender, EventArgs e)
-        {
-            LoadHtml();
-        }
-
-        private void WebBrowserDialog_Activated(object sender, EventArgs e)
-        {
-            webBrowser1.Focus();
-        }
 
         protected override bool OnOKButtonClick()
         {
             if(WebType == WebType.Boss && ChartOptions.ContainsKey("Datasource"))
             {
+                string path = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("数据大屏{0}.png", HitTopic.ID));
                 Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
                 Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
                 webBrowser1.DrawToBitmap(bitmap, rectangle);
-                bitmap.Save(picPath);//TODO phx 考虑是否放入对应业务视图，并且考虑名字
+                bitmap.Save(path);
 
                 //当前webbrowser截图，作为图片挂件加入当前节点
-                var template = new PictureWidget();
-                CurrentObject = new PictureWidget.PictureDesign();
-                CurrentObject.SourceType = PictureSource.File;
-                CurrentObject.Url = picPath;
-                CurrentObject.AddToLibrary = false;
-                CurrentObject.LimitImageSize = true;
-                CurrentObject.Name = Path.GetFileNameWithoutExtension(picPath);
-                CurrentObject.EmbedIn = false;
+                PictureWidget template = new PictureWidget();
+                CurrentObject = new PictureWidget.PictureDesign
+                {
+                    SourceType = PictureSource.File,
+                    Url = path,
+                    AddToLibrary = false,
+                    LimitImageSize = true,
+                    Name = Path.GetFileNameWithoutExtension(path),
+                    EmbedIn = false
+                };
                 template.Image = CurrentObject;
+                template.SizeType = PictureSizeType.Thumb;
                 HitTopic.Add(template);
             }
 
