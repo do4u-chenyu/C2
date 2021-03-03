@@ -34,7 +34,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public string SourceWebUrl;
         bool isActive = true;
-        public string Markerpath="", Polygonpath="", Polylinepath="";
+        
         private string picPath;
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
@@ -97,7 +97,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     string[] tempstr = line.Split(',');
 
                     for (int i = 0; i < tempstr.Length; i++)
-                    {   if (i% 2 == 1)
+                    {   if (i% 2 == 0)
                             latValues.Add(tempstr[i]);
                         else
                             lonValues.Add(tempstr[i]);
@@ -364,37 +364,54 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             else if (WebType == WebType.Map)
             {
-                if (Markerpath.Length == 0)
-                    Markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-                if (Polygonpath.Length == 0)
-                    Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-                if (Polylinepath.Length == 0)
-                    Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                var tempstr = new MapWidget();
+                string markerpath = string.Empty;
+                string polygonpath = string.Empty;
+                string polylinepath = string.Empty;
 
-              
-                string temp = Markerpath + ',' + Polygonpath + ',' + Polylinepath;
+                List<DataItem> dataItems = new List<DataItem>();
+                MapWidget maw = HitTopic.FindWidget<MapWidget>();
+                if (maw != null)
+                    dataItems = maw.DataItems;
+
+                foreach (DataItem di in dataItems)
+                {
+                    if (di.FileName.Contains("标注图"))
+                        markerpath = di.FilePath;
+                    if (di.FileName.Contains("多边形图"))
+                        polygonpath = di.FilePath;
+                    if (di.FileName.Contains("折线图"))
+                        polylinepath = di.FilePath;
+                }
+
+
+                if (string.IsNullOrEmpty(markerpath))
+                {
+                    markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                    DataItem marker = new DataItem(markerpath, Path.GetFileNameWithoutExtension(markerpath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
+                    maw.DataItems.Add(marker);
+                }
+                    
+                //if (tempstr.MarkerData.Length == 0)
+                //    Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                //if (tempstr.PolylineData.Length == 0)
+                //    Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+
+                
+                //DataItem polygon = new DataItem(Polygonpath, Path.GetFileNameWithoutExtension(Polygonpath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
+                //DataItem polyline = new DataItem(Polylinepath, Path.GetFileNameWithoutExtension(Polylinepath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
+
+
+
+                string temp = markerpath + ',' + polygonpath + ',' + polylinepath;
                 
                 //webBrowser1.Document.InvokeScript("getxtPath", new object[] { Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name) });
                 webBrowser1.Document.InvokeScript("getPath", new object[] { temp });
                 webBrowser1.Document.InvokeScript("savePoints");
-                DataItem marker = new DataItem(Markerpath, Path.GetFileNameWithoutExtension(Markerpath),',',OpUtil.Encoding.UTF8,OpUtil.ExtType.Text);
-                DataItem polygon = new DataItem(Polygonpath, Path.GetFileNameWithoutExtension(Polygonpath),',',OpUtil.Encoding.UTF8,OpUtil.ExtType.Text);
-                DataItem polyline = new DataItem(Polylinepath, Path.GetFileNameWithoutExtension(Polylinepath),',',OpUtil.Encoding.UTF8,OpUtil.ExtType.Text);
-                MapWidget maw = HitTopic.FindWidget<MapWidget>();
-                if(maw != null)
-                {
-                    maw.DataItems = new List<DataItem>
-                    {
-                        marker,
-                        polygon,
-                        polyline
-                    };
-                }
-                //var tempstr = new MapWidget();
-                //tempstr.MarkerData = Markerpath;
-                //tempstr.PolygonData = Polygonpath;
-                //tempstr.PolylineData = Polylinepath;
-                
+
+
+
+
             }
             return base.OnOKButtonClick();
         }
