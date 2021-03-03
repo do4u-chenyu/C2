@@ -76,20 +76,6 @@ namespace MD5Plugin
             button2.Visible = true;
         }
 
-        //utf8
-        private void radioButton5_CheckedChanged(object sender, EventArgs e)
-        {
-            button1.Text = "转码 =>";
-            button2.Visible = false;
-        }
-
-        //gbk
-        private void radioButton6_CheckedChanged(object sender, EventArgs e)
-        {
-            button1.Text = "转码 =>";
-            button2.Visible = false;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             int num = 3;
@@ -109,14 +95,6 @@ namespace MD5Plugin
             {
                 num = 4;
             }
-            if (radioButton5.Checked)
-            {
-                num = 5;
-            }
-            if (radioButton6.Checked)
-            {
-                num = 6;
-            }
 
             switch (num)
             {
@@ -133,14 +111,6 @@ namespace MD5Plugin
                 case 4:
                     //Console.WriteLine("UrlDecode编码");
                     UrlEncode(textBox1.Text);
-                    break;
-                case 5:
-                    //Console.WriteLine("utf8");
-                    GetUtf8(textBox1.Text);
-                    break;
-                case 6:
-                    //Console.WriteLine("gbk");
-                    GetGbk(textBox1.Text);
                     break;
                 default:
                     //Console.WriteLine("base64");
@@ -224,49 +194,39 @@ namespace MD5Plugin
             textBox1.Text = HttpUtility.UrlDecode(url);
         }
 
-        public void GetUtf8(string str)
-        {
-            //byte[] utf8 = Encoding.UTF8.GetBytes(str);
-            //string s3 = "";
-            //string s3d = "";
-            //foreach (byte b in utf8)
-            //{
-            //    s3 += string.Format("{0:X2}", b) + " ";
-            //    s3d += b + " ";
-            //}
-            //textBox2.Text = s3;
-            string ss = "";
-            if (!string.IsNullOrEmpty(str))
-            {
-                for (int i = 0; i < str.Length; i++)
-                {
-                     ss += "&#x" + ((int)str[i]).ToString("X") + ";";
-                }
+        //public void GetUtf8(string str)
+        //{
+        //    string ss = "";
+        //    if (!string.IsNullOrEmpty(str))
+        //    {
+        //        for (int i = 0; i < str.Length; i++)
+        //        {
+        //             ss += "&#x" + ((int)str[i]).ToString("X") + ";";
+        //        }
 
-                textBox2.Text = ss;
-            }
-            else
-            {
-                textBox2.Text = "";
-            }
-        }
+        //        textBox2.Text = ss;
+        //    }
+        //    else
+        //    {
+        //        textBox2.Text = "";
+        //    }
+        //}
 
-        public void GetGbk(string str)
-        {
-            string ss = "";
-            if (!string.IsNullOrEmpty(str))
-            {
-                for (int i = 0; i < str.Length; i++)
-                {
-                    ss += "\\u" + ((int)str[i]).ToString("x");
-                }
-                textBox2.Text = ss;
-            }
-            else
-            {
-                textBox2.Text = "";
-            }
-
-        }
+        //public void GetGbk(string str)
+        //{
+        //    string ss = "";
+        //    if (!string.IsNullOrEmpty(str))
+        //    {
+        //        for (int i = 0; i < str.Length; i++)
+        //        {
+        //            ss += "\\u" + ((int)str[i]).ToString("x");
+        //        }
+        //        textBox2.Text = ss;
+        //    }
+        //    else
+        //    {
+        //        textBox2.Text = "";
+        //    }
+        //}
     }
 }
