@@ -17,7 +17,7 @@ namespace C2.Dialogs
 {
     public partial class ConfigForm : Form
     {
-        private static LogUtil log = LogUtil.GetInstance("ConfigForm");
+
         private static readonly int PythonFFPColumnIndex = 0;
         private static readonly int AliasColumnIndex = 1;
         private static readonly int CheckBoxColumnIndex = 2;
@@ -38,30 +38,13 @@ namespace C2.Dialogs
             baiduHeatAPI = this.baiduHeatTB.Text = Settings.Default.baiduHeatAPI;
         }
 
-        private void UserModelOkButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void UserModelCancelButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void AboutOkButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
 
         private void AboutCancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void PluginsOKButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+
 
         private void PythonBrowseButton_Click(object sender, EventArgs e)
         {
@@ -513,31 +496,34 @@ namespace C2.Dialogs
 
         #region 检查更新Tab
 
-        private  void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void MainTabControl_Selected(object sender, TabControlEventArgs e)
         {
-           
-
+            if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
+                return;
+            Task.Run(() => CheckUpdate());
         }
-        private void MainTabControl_Selecting(object sender, TabControlCancelEventArgs e)
-        {
-
-        }
-        private Task<string> CheckUpdate()
+        private void CheckUpdate()
         {
 
             string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
             string browserVersion = BrowserVersion();
-            if (browserVersion.StartsWith(currentVersion) || browserVersion.IsNullOrEmpty())
+            if (browserVersion.StartsWith(currentVersion))
             {
-                Console.WriteLine("===浏览器版本==="+ browserVersion);
-                this.SuspendLayout();
-                this.title.Text = "当前已为最新版本";
-                this.versionLable.Text = @"当前版本:";
-                this.version.Text = currentVersion;
-                this.sizeLable.Visible = false;
-                this.sizeValue.Visible = false;
-                this.checking.Visible = false;
-                this.ResumeLayout(false);
+                this.Invoke((EventHandler)(delegate
+                 {
+                     this.SuspendLayout();
+                     this.title.Text = "当前已为最新版本";
+                     this.versionLable.Text = @"当前版本:";
+                     this.version.Text = currentVersion;
+                     this.sizeLable.Visible = false;
+                     this.sizeValue.Visible = false;
+                     this.checking.Visible = false;
+                     this.ResumeLayout(false);
+                 }));
+            }
+            else if (browserVersion.IsNullOrEmpty())
+            {
+                GetNewVersionFail();
             }
             else
             {
@@ -546,25 +532,30 @@ namespace C2.Dialogs
                 if (info_split.Length < 3)
                 {
 
-
-                    this.currentModelRunLab.Visible = false;
-                    this.checkStatus.Text = "联网检查更新失败";
-                    return Task.FromResult("Finish");
+                    GetNewVersionFail();
+                    return;
                 }
-
-                this.SuspendLayout();
-                this.version.Text = info_split[0];
-                this.sizeValue.Text = info_split[1];
-                this.description.Text = info_split[2];
-                this.checking.Visible = false;
-                this.ResumeLayout(false);
+                this.Invoke((EventHandler)(delegate
+                {
+                    this.SuspendLayout();
+                    this.version.Text = info_split[0];
+                    this.sizeValue.Text = info_split[1];
+                    this.description.Text = info_split[2];
+                    this.checking.Visible = false;
+                    this.ResumeLayout(false);
+                }));
             }
-            return Task.FromResult("Finish");
         }
-
+        private void GetNewVersionFail()
+        {
+            this.Invoke((EventHandler)(delegate
+            {
+                this.currentModelRunLab.Visible = false;
+                this.checkStatus.Text = "联网检查更新失败";
+            }));
+        }
         private string BrowserVersion()
         {
-
             PluginsDownloader downloader = new PluginsDownloader();
             string htmlContent = downloader.GetHtmlContent(Global.SoftwareUrl);
             List<string> packageName = PluginsManager.Instance.GetPluginsNameList(htmlContent);
@@ -578,13 +569,9 @@ namespace C2.Dialogs
         }
         private void CancleUpdate_Click(object sender, EventArgs e)
         {
-
             this.Close();
         }
-        private void UpdateSoftware_Click(object sender, EventArgs e)
-        {
 
-        }
         #endregion
 
         private void gisMapOKButton_Click(object sender, EventArgs e)
@@ -642,12 +629,9 @@ namespace C2.Dialogs
             }
         }
 
-        private async void mainTabControl_Selected(object sender, TabControlEventArgs e)
+        private void UpdateButton_Click(object sender, EventArgs e)
         {
-            if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
-                return;
 
-            await CheckUpdate();
         }
     }
 }

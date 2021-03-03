@@ -184,9 +184,7 @@
             this.mainTabControl.SelectedIndex = 0;
             this.mainTabControl.Size = new System.Drawing.Size(642, 410);
             this.mainTabControl.TabIndex = 0;
-            this.mainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
-            this.mainTabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.MainTabControl_Selecting);
-            this.mainTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.mainTabControl_Selected);
+            this.mainTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.MainTabControl_Selected);
             // 
             // userModelConfigPage
             // 
@@ -230,7 +228,7 @@
             this.userModelCancelButton.TabIndex = 3;
             this.userModelCancelButton.Text = "取消";
             this.userModelCancelButton.UseVisualStyleBackColor = true;
-            this.userModelCancelButton.Click += new System.EventHandler(this.UserModelCancelButton_Click);
+            this.userModelCancelButton.Click += new System.EventHandler(this.AboutCancelButton_Click);
             // 
             // userModelOkButton
             // 
@@ -240,7 +238,7 @@
             this.userModelOkButton.TabIndex = 2;
             this.userModelOkButton.Text = "确认";
             this.userModelOkButton.UseVisualStyleBackColor = true;
-            this.userModelOkButton.Click += new System.EventHandler(this.UserModelOkButton_Click);
+            this.userModelOkButton.Click += new System.EventHandler(this.AboutCancelButton_Click);
             // 
             // userModelTextBox
             // 
@@ -767,7 +765,7 @@
             this.pluginsOKButton.TabIndex = 4;
             this.pluginsOKButton.Text = "确认";
             this.pluginsOKButton.UseVisualStyleBackColor = true;
-            this.pluginsOKButton.Click += new System.EventHandler(this.PluginsOKButton_Click);
+            this.pluginsOKButton.Click += new System.EventHandler(this.AboutCancelButton_Click);
             // 
             // pluginsTabControl
             // 
@@ -1143,7 +1141,7 @@
             this.aboutOkButton.TabIndex = 4;
             this.aboutOkButton.Text = "确认";
             this.aboutOkButton.UseVisualStyleBackColor = true;
-            this.aboutOkButton.Click += new System.EventHandler(this.AboutOkButton_Click);
+            this.aboutOkButton.Click += new System.EventHandler(this.AboutCancelButton_Click);
             // 
             // label6
             // 
@@ -1199,10 +1197,9 @@
             this.checking.Controls.Add(this.currentModelRunLab);
             this.checking.Controls.Add(this.button2);
             this.checking.Controls.Add(this.checkStatus);
-            this.checking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checking.Location = new System.Drawing.Point(0, 0);
             this.checking.Name = "checking";
-            this.checking.Size = new System.Drawing.Size(634, 380);
+            this.checking.Size = new System.Drawing.Size(533, 286);
             this.checking.TabIndex = 7;
             // 
             // currentModelRunLab
@@ -1252,7 +1249,7 @@
             this.button3.TabIndex = 6;
             this.button3.Text = "更新";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.UpdateSoftware_Click);
+            this.button3.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // description
             // 

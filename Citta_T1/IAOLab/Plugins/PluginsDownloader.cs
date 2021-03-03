@@ -23,10 +23,7 @@ namespace C2.IAOLab.Plugins
                 htmlContent = new StreamReader(resStream, Encoding.UTF8).ReadToEnd();
 
             }
-            catch (Exception ex)
-            {
-                log.Error("获取网页插件列表失败:" + ex.Message);
-            }
+            catch { }
             finally
             {
                 if (resStream != null)
