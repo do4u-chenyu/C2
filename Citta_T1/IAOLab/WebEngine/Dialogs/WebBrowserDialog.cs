@@ -187,10 +187,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         webBrowser1.Document.InvokeScript("relitu", methodstr);
                         break;
                 }
+                var configMap = new ConfigForm();
+                string configstr = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
+                webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
             }
             else
                 return;
-           
         }
 
         void LoadBossData_Click(object sender, EventArgs e)
@@ -270,6 +272,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
                 webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
             }
+            
         }
 
         private void runButton_Click(object sender, EventArgs e)
