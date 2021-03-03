@@ -1197,9 +1197,10 @@
             this.checking.Controls.Add(this.currentModelRunLab);
             this.checking.Controls.Add(this.button2);
             this.checking.Controls.Add(this.checkStatus);
+            this.checking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checking.Location = new System.Drawing.Point(0, 0);
             this.checking.Name = "checking";
-            this.checking.Size = new System.Drawing.Size(533, 286);
+            this.checking.Size = new System.Drawing.Size(634, 380);
             this.checking.TabIndex = 7;
             // 
             // currentModelRunLab
@@ -1220,7 +1221,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "关闭";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.CancleUpdate_Click);
+            this.button2.Click += new System.EventHandler(this.AboutCancelButton_Click);
             // 
             // checkStatus
             // 
