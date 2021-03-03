@@ -191,6 +191,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         webBrowser1.Document.InvokeScript("relitu", methodstr);
                         break;
                 }
+                var configMap = new ConfigForm();
+                string configstr = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
+                webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
             }
             else
                 return;

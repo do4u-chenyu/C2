@@ -36,6 +36,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         public List<DataItem> DataItems;
 
+        public string drawlatude;
+
+        public string drawlontude;
+
         public SelectMapDialog(List<DataItem> dataItems)
         {
             InitializeComponent();
@@ -75,6 +79,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         protected override bool OnOKButtonClick()
         {
             map = this.mapTypeComboBox.Text;
+
             //生成html
             WebUrl = GenGisMapHtml.GetInstance().TransDataToHtml();
             if (OptionNotReady())
@@ -99,6 +104,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
             List<List<string>> latValues = Utils.FileUtil.GetColumns(indexlat, hitItem, rows, upperLimit);
             List<List<string>> lonValues = Utils.FileUtil.GetColumns(indexlon, hitItem, rows, upperLimit);
             List<List<string>> countValues = Utils.FileUtil.GetColumns(indexcount, hitItem, rows, upperLimit);
+
+            Random rm = new Random();
+            drawlatude = latValues[0][rm.Next(latValues.Count)];
+            drawlontude = lonValues[0][rm.Next(lonValues.Count)];
             if (latValues.Count == 0)
             {
                 HelpUtil.ShowMessageBox("文件内容为空");
