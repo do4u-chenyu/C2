@@ -7,6 +7,8 @@ using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -72,30 +74,32 @@ namespace C2.IAOLab.WebEngine.Dialogs
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
             string res = "";
-            if (File.Exists(path))
+            StreamReader sr = new StreamReader(path, Encoding.Default);
+            String line;
+            while ((line = sr.ReadLine()) != null)
             {
-                StreamReader sr = new StreamReader(path, Encoding.Default);
-                String line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] tempstr = line.Split(',');
+                string[] tempstr = line.Split(',');
 
-                    for (int i = 0; i < tempstr.Length; i++)
-                    {   if (i% 2 == 0)
-                            latValues.Add(tempstr[i]);
-                        else
-                            lonValues.Add(tempstr[i]);
-                    }
-                }
-
-                string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
-                List<string> tmpList = new List<string>();
-                for (int i = 0; i < latValues.Count; i++)
+                for (int i = 0; i < tempstr.Length; i++)
                 {
-                    tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[i], lonValues[i]) + '}');
+                    if (i % 2 == 0)
+                        latValues.Add(tempstr[i]);
+                    else
+                        lonValues.Add(tempstr[i]);
                 }
-                res = '[' + String.Join(",", tmpList.ToArray()) + ']';
             }
+            string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
+            List<string> tmpList = new List<string>();
+            for (int i = 0; i < latValues.Count; i++)
+            {
+                tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[i], lonValues[i]) + '}');
+            }
+            res = '[' + String.Join(",", tmpList.ToArray()) + ']';
+ 
+            
+
+           
+
             return new object[] { res };
         }
         private void WebBrowserDialog_Activated(object sender, EventArgs e)
@@ -118,11 +122,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     return;
                 foreach (DataItem di in dataItems)
                 {
-                    if (di.FileName.Contains("标注图"))
+                    if (di.FileName.Contains("标注图") && File.Exists(di.FilePath))
                         webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
-                    if (di.FileName.Contains("多边形图"))
+                    if (di.FileName.Contains("多边形图") && File.Exists(di.FilePath))
                         webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
-                    if (di.FileName.Contains("折线图"))
+                    if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
                         webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
                 }
             }
@@ -241,7 +245,26 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void Clear_Click(object sender, EventArgs e)
         {
             webBrowser1.Document.InvokeScript("clearAll");
+            List<DataItem> dataItems = new List<DataItem>();
+            MapWidget maw = HitTopic.FindWidget<MapWidget>();
+            if (maw != null)
+                dataItems = maw.DataItems;
+            foreach (DataItem di in dataItems)
+            {
+                //if (di.FileName.Contains("标注图") || di.FileName.Contains("多边形图") || di.FileName.Contains("折线图"))
+                //{
+                //    FileStream fs = new FileStream(di.FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                //    StreamReader sr = new StreamReader(fs, System.Text.Encoding.Default);
+                //    StringBuilder sb = new StringBuilder();
+                //    while (!sr.EndOfStream)
+                //    {
+                //        sb.Clear();
+                //    }
+                //}
+        
+            }
         }
+
 
         private void EditCode_Click(object sender, EventArgs e)
         {
@@ -378,9 +401,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         markerpath = di.FilePath;
                     if (di.FileName.Contains("多边形图"))
                         polygonpath = di.FilePath;
-                    if (di.FileName.Contains("折线图"))
+                    if(di.FileName.Contains("轨迹图"))
                         polylinepath = di.FilePath;
                 }
+
                 if (string.IsNullOrEmpty(markerpath))
                 {
                     markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
@@ -395,30 +419,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 }
                 if (string.IsNullOrEmpty(polylinepath))
                 {
-                    polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                    polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_轨迹图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
                     DataItem polyline = new DataItem(polylinepath, Path.GetFileNameWithoutExtension(polylinepath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
                     maw.DataItems.Add(polyline);
                 }
-
-                //if (tempstr.MarkerData.Length == 0)
-                //    Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-                //if (tempstr.PolylineData.Length == 0)
-                //    Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-
-
-                //DataItem polygon = new DataItem(Polygonpath, Path.GetFileNameWithoutExtension(Polygonpath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
-                //DataItem polyline = new DataItem(Polylinepath, Path.GetFileNameWithoutExtension(Polylinepath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
-
-
-
-                string temp = markerpath + ',' + polygonpath + ',' + polylinepath;
-                
+                string temp = markerpath + ',' + polygonpath + ',' + polylinepath;  
                 webBrowser1.Document.InvokeScript("getPath", new object[] { temp });
                 webBrowser1.Document.InvokeScript("savePoints");
-
-
-
-
             }
             return base.OnOKButtonClick();
         }
