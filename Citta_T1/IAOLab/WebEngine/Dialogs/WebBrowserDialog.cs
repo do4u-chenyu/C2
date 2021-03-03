@@ -260,8 +260,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 isActive = true;
             }
             LoadHtml();
-            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
-            webBrowser1.Navigate(WebUrl);
+            SourceWebUrl = Path.Combine(Global.TempDirectory, "SourceCodeMap.html");
+            webBrowser1.Navigate(SourceWebUrl);
         }
 
         private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)

@@ -486,6 +486,7 @@
             this.baiduHeatTB.Name = "baiduHeatTB";
             this.baiduHeatTB.Size = new System.Drawing.Size(460, 23);
             this.baiduHeatTB.TabIndex = 17;
+            this.toolTip1.SetToolTip(this.baiduHeatTB, "请勿随意更改！");
             // 
             // baiduVerAPITB
             // 
@@ -493,6 +494,7 @@
             this.baiduVerAPITB.Name = "baiduVerAPITB";
             this.baiduVerAPITB.Size = new System.Drawing.Size(460, 23);
             this.baiduVerAPITB.TabIndex = 16;
+            this.toolTip1.SetToolTip(this.baiduVerAPITB, "请勿随意更改！");
             // 
             // label25
             // 
@@ -554,6 +556,7 @@
             this.baiduLonTB.Name = "baiduLonTB";
             this.baiduLonTB.Size = new System.Drawing.Size(460, 23);
             this.baiduLonTB.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.baiduLonTB, "请输入正确纬度！");
             this.baiduLonTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // baiduLatTB
@@ -562,6 +565,7 @@
             this.baiduLatTB.Name = "baiduLatTB";
             this.baiduLatTB.Size = new System.Drawing.Size(460, 23);
             this.baiduLatTB.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.baiduLatTB, "请输入正确经度！");
             this.baiduLatTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.baiduGISUrlTB_KeyPress);
             // 
             // baiduGISTB
