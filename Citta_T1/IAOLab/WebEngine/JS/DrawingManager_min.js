@@ -880,7 +880,7 @@ function savePoints() {
     }
     if (remberPolygon.length != 0 ) {
         var f2 = fso.createtextfile(Polygonpath, true);
-        f2.writeLine(remberPoint);
+        f2.writeLine(remberPolygon);
         f2.close();
     }
     if (remberPolyline.length != 0 && Polylineflag == false) {
@@ -889,22 +889,5 @@ function savePoints() {
         f3.close();
     }
 }
-//function getxtPath(w) {
-//    txtpath = w;
-//}
-
-//function ShowFolderFileList(folderspec) {
-//    var fso, f, f1, fc, s;
-//    fso = new ActiveXObject("Scripting.FileSystemObject");
-//    f = fso.GetFolder(folderspec);
-//    fc = new Enumerator(f.files);
-//    s = "";
-//    for (; !fc.atEnd(); fc.moveNext()) {
-//        s += fc.item();
-//        s += "<br>";
-//    }
-//    return(s);
-//}
-
 
 

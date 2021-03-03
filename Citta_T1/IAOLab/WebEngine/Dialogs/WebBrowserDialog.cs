@@ -64,23 +64,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if (WebType == WebType.Boss)//数据大屏初次打开是自动弹出配置窗口
                 OpenSelectBossDialog();
 
-            List<DataItem> dataItems = new List<DataItem>();
-            MapWidget maw = HitTopic.FindWidget<MapWidget>();
-            if(maw != null)
-                dataItems = maw.DataItems;
-
-            if (dataItems.Count == 0)
-                return;
-            foreach(DataItem di in dataItems)
-            {
-                if (di.FileName.Contains("标注图"))
-                    webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
-                if (di.FileName.Contains("多边形图"))
-                    webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
-                if (di.FileName.Contains("折线图"))
-                    webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
-            }
-
+          
         }
 
         private object[] OpenMapFile(string path)
@@ -125,6 +109,22 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 var configMap = new ConfigForm();
                 string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
                 webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
+                List<DataItem> dataItems = new List<DataItem>();
+                MapWidget maw = HitTopic.FindWidget<MapWidget>();
+                if (maw != null)
+                    dataItems = maw.DataItems;
+
+                if (dataItems.Count == 0)
+                    return;
+                foreach (DataItem di in dataItems)
+                {
+                    if (di.FileName.Contains("标注图"))
+                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
+                    if (di.FileName.Contains("多边形图"))
+                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
+                    if (di.FileName.Contains("折线图"))
+                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
+                }
             }
         }
         #endregion
@@ -368,12 +368,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 string markerpath = string.Empty;
                 string polygonpath = string.Empty;
                 string polylinepath = string.Empty;
-
                 List<DataItem> dataItems = new List<DataItem>();
                 MapWidget maw = HitTopic.FindWidget<MapWidget>();
                 if (maw != null)
                     dataItems = maw.DataItems;
-
                 foreach (DataItem di in dataItems)
                 {
                     if (di.FileName.Contains("标注图"))
@@ -383,21 +381,31 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     if (di.FileName.Contains("折线图"))
                         polylinepath = di.FilePath;
                 }
-
-
                 if (string.IsNullOrEmpty(markerpath))
                 {
                     markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
                     DataItem marker = new DataItem(markerpath, Path.GetFileNameWithoutExtension(markerpath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
                     maw.DataItems.Add(marker);
                 }
-                    
+                if (string.IsNullOrEmpty(polygonpath))
+                {
+                    polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                    DataItem polygon = new DataItem(polygonpath, Path.GetFileNameWithoutExtension(polygonpath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
+                    maw.DataItems.Add(polygon);
+                }
+                if (string.IsNullOrEmpty(polylinepath))
+                {
+                    polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                    DataItem polyline = new DataItem(polylinepath, Path.GetFileNameWithoutExtension(polylinepath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
+                    maw.DataItems.Add(polyline);
+                }
+
                 //if (tempstr.MarkerData.Length == 0)
                 //    Polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_折线图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
                 //if (tempstr.PolylineData.Length == 0)
                 //    Polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
 
-                
+
                 //DataItem polygon = new DataItem(Polygonpath, Path.GetFileNameWithoutExtension(Polygonpath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
                 //DataItem polyline = new DataItem(Polylinepath, Path.GetFileNameWithoutExtension(Polylinepath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
 
@@ -405,7 +413,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
                 string temp = markerpath + ',' + polygonpath + ',' + polylinepath;
                 
-                //webBrowser1.Document.InvokeScript("getxtPath", new object[] { Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name) });
                 webBrowser1.Document.InvokeScript("getPath", new object[] { temp });
                 webBrowser1.Document.InvokeScript("savePoints");
 

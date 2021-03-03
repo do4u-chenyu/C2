@@ -151,7 +151,7 @@
     }
 
     //------------------本地数据画标注，让WINFORM调用--------------------
-    function markerPoints(w) {
+    function markerPoints(w){
         var obj = JSON.parse(w);
         for (j = 0, len = obj.length; j < len; j++) {
             var marker = new BMap.Marker(obj[j]);  // 创建标注
@@ -168,6 +168,10 @@
         }
         var polyline = new BMap.Polyline(trackPoint, { strokeColor: "blue", strokeWeight: 6, strokeOpacity: 0.5 });  //定义折线
         map.addOverlay(polyline);
+    }
+
+    function temp() {
+        alert("shayebushi");
     }
 
     //在地图上画多边形 strat
