@@ -8,8 +8,7 @@ using System.Text;
 namespace C2.IAOLab.Plugins
 {
     public class PluginsDownloader
-    {
-        private readonly static LogUtil log = LogUtil.GetInstance("PluginsDownloader");
+    {    
         public string GetHtmlContent(string pluginURL)
         {
             string htmlContent = string.Empty;
@@ -63,13 +62,15 @@ namespace C2.IAOLab.Plugins
             }
             return result;
         }
-
-
+        ///<summary>
+        ///异常:
+        ///<para>WedDownloadException</para>
+        ///</summary>
         public void PluginsDownload(string url, string savePath)
         {
             if (File.Exists(savePath))
                 return;
-
+            Directory.CreateDirectory(Path.GetDirectoryName(savePath));
             new WebClient().DownloadFile(url, savePath);
         }
     }

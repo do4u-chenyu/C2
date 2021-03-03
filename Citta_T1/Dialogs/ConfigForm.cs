@@ -28,9 +28,12 @@ namespace C2.Dialogs
         public string scale;
         public string baiduVerAPI;
         public string baiduHeatAPI;
+        private readonly PluginsDownloader downloader;
+        private string newSoftwareVersion;
         public ConfigForm()
         {
             InitializeComponent();
+            downloader = new PluginsDownloader();
             latude = this.baiduLatTB.Text = Settings.Default.latude;
             lontude = this.baiduLonTB.Text = Settings.Default.lontude;
             scale = this.baiduScaleTB.Text = Settings.Default.scale;
@@ -506,8 +509,8 @@ namespace C2.Dialogs
         {
 
             string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
-            string browserVersion = BrowserVersion();
-            if (browserVersion.StartsWith(currentVersion))
+            this.newSoftwareVersion = NewSoftewareVersion();
+            if (newSoftwareVersion.StartsWith(currentVersion))
             {
                 this.Invoke((EventHandler)(delegate
                  {
@@ -521,17 +524,16 @@ namespace C2.Dialogs
                      this.ResumeLayout(false);
                  }));
             }
-            else if (browserVersion.IsNullOrEmpty())
+            else if (newSoftwareVersion.IsNullOrEmpty())
             {
                 GetNewVersionFail();
             }
             else
             {
-                string softwareInfo = BrowserVersionInfo(browserVersion);
+                string softwareInfo = NewSoftwareInfo(newSoftwareVersion);
                 string[] info_split = softwareInfo.Split(OpUtil.TabSeparator);
                 if (info_split.Length < 3)
                 {
-
                     GetNewVersionFail();
                     return;
                 }
@@ -554,24 +556,32 @@ namespace C2.Dialogs
                 this.checkStatus.Text = "联网检查更新失败";
             }));
         }
-        private string BrowserVersion()
-        {
-            PluginsDownloader downloader = new PluginsDownloader();
-            string htmlContent = downloader.GetHtmlContent(Global.SoftwareUrl);
+        private string NewSoftewareVersion()
+        {      
+            string htmlContent = this.downloader.GetHtmlContent(Global.SoftwareUrl);
             List<string> packageName = PluginsManager.Instance.GetPluginsNameList(htmlContent);
             return packageName.IsNullOrEmpty() ? string.Empty : packageName[0];
         }
-        private string BrowserVersionInfo(string name)
-        {
-            PluginsDownloader downloader = new PluginsDownloader();
+        private string NewSoftwareInfo(string name)
+        { 
             string packageDir = Path.Combine(Global.SoftwareUrl, @"software/");
-            return downloader.GetPluginsInfo(name, packageDir);
+            return this.downloader.GetPluginsInfo(name, packageDir);
         }
-        private void CancleUpdate_Click(object sender, EventArgs e)
+        private void UpdateButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                string softwareName = newSoftwareVersion.Replace(".info", "");
+                string packageDir = Path.Combine(Global.SoftwareUrl, @"software/", softwareName);
+                string savePath = Path.Combine(Global.SoftwareSavePath, softwareName);
+                this.downloader.PluginsDownload(packageDir, savePath);
+                HelpUtil.ShowMessageBox("安装包准备就绪,请重启更新软件");
+            }
+            catch 
+            {
+                HelpUtil.ShowMessageBox("更新失败，请检查网络连接稍后重试");
+            }
         }
-
         #endregion
 
         private void gisMapOKButton_Click(object sender, EventArgs e)
@@ -629,9 +639,6 @@ namespace C2.Dialogs
             }
         }
 
-        private void UpdateButton_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
