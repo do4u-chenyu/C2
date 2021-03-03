@@ -38,30 +38,13 @@ namespace C2.Dialogs
             baiduHeatAPI = this.baiduHeatTB.Text = Settings.Default.baiduHeatAPI;
         }
 
-        private void UserModelOkButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void UserModelCancelButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void AboutOkButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
 
         private void AboutCancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void PluginsOKButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+
 
         private void PythonBrowseButton_Click(object sender, EventArgs e)
         {
@@ -513,7 +496,12 @@ namespace C2.Dialogs
 
         #region 检查更新Tab
 
-
+        private void MainTabControl_Selected(object sender, TabControlEventArgs e)
+        {
+            if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
+                return;
+            Task.Run(() => CheckUpdate());
+        }
         private void CheckUpdate()
         {
 
@@ -641,12 +629,9 @@ namespace C2.Dialogs
             }
         }
 
-        private  void MainTabControl_Selected(object sender, TabControlEventArgs e)
+        private void UpdateButton_Click(object sender, EventArgs e)
         {
-            if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
-                return;
 
-            Task.Run(() => CheckUpdate());
         }
     }
 }
