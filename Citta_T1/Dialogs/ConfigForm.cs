@@ -512,6 +512,8 @@ namespace C2.Dialogs
             this.newSoftwareVersion = NewSoftewareVersion();
             if (newSoftwareVersion.StartsWith(currentVersion))
             {
+                if (IsFormNotExist())
+                    return;
                 this.Invoke((EventHandler)(delegate
                  {
                      this.SuspendLayout();
@@ -537,6 +539,8 @@ namespace C2.Dialogs
                     GetNewVersionFail();
                     return;
                 }
+                if (IsFormNotExist())
+                    return;
                 this.Invoke((EventHandler)(delegate
                 {
                     this.SuspendLayout();
@@ -550,20 +554,26 @@ namespace C2.Dialogs
         }
         private void GetNewVersionFail()
         {
+            if (IsFormNotExist())
+                return;
             this.Invoke((EventHandler)(delegate
             {
                 this.currentModelRunLab.Visible = false;
                 this.checkStatus.Text = "联网检查更新失败";
             }));
         }
+        private bool IsFormNotExist()
+        {
+            return (!this.IsHandleCreated || this.IsDisposed);
+        }
         private string NewSoftewareVersion()
-        {      
+        {
             string htmlContent = this.downloader.GetHtmlContent(Global.SoftwareUrl);
             List<string> packageName = PluginsManager.Instance.GetPluginsNameList(htmlContent);
             return packageName.IsNullOrEmpty() ? string.Empty : packageName[0];
         }
         private string NewSoftwareInfo(string name)
-        { 
+        {
             string packageDir = Path.Combine(Global.SoftwareUrl, @"software/");
             return this.downloader.GetPluginsInfo(name, packageDir);
         }
@@ -577,7 +587,7 @@ namespace C2.Dialogs
                 this.downloader.PluginsDownload(packageDir, savePath);
                 HelpUtil.ShowMessageBox("安装包准备就绪,请重启更新软件");
             }
-            catch 
+            catch
             {
                 HelpUtil.ShowMessageBox("更新失败，请检查网络连接稍后重试");
             }
@@ -639,6 +649,6 @@ namespace C2.Dialogs
             }
         }
 
-       
+
     }
 }
