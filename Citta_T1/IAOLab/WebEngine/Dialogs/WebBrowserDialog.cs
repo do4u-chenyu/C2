@@ -36,7 +36,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public string SourceWebUrl;
         bool isActive = true;
-        
+        bool clearClick = false;
         private string picPath;
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
@@ -66,7 +66,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if (WebType == WebType.Boss)//数据大屏初次打开是自动弹出配置窗口
                 OpenSelectBossDialog();
 
-          
+
         }
 
         private object[] OpenMapFile(string path)
@@ -95,6 +95,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[i], lonValues[i]) + '}');
             }
             res = '[' + String.Join(",", tmpList.ToArray()) + ']';
+            sr.Close();
             return new object[] { res };
         }
         private void WebBrowserDialog_Activated(object sender, EventArgs e)
@@ -240,24 +241,19 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void Clear_Click(object sender, EventArgs e)
         {
             webBrowser1.Document.InvokeScript("clearAll");
-            List<DataItem> dataItems = new List<DataItem>();
-            MapWidget maw = HitTopic.FindWidget<MapWidget>();
-            if (maw != null)
-                dataItems = maw.DataItems;
-            foreach (DataItem di in dataItems)
-            {
-                //if (di.FileName.Contains("标注图") || di.FileName.Contains("多边形图") || di.FileName.Contains("折线图"))
-                //{
-                //    FileStream fs = new FileStream(di.FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                //    StreamReader sr = new StreamReader(fs, System.Text.Encoding.Default);
-                //    StringBuilder sb = new StringBuilder();
-                //    while (!sr.EndOfStream)
-                //    {
-                //        sb.Clear();
-                //    }
-                //}
-        
-            }
+            clearClick = true;
+            //List<DataItem> dataItems = new List<DataItem>();
+            //MapWidget maw = HitTopic.FindWidget<MapWidget>();
+            //if (maw != null)
+            //    dataItems = maw.DataItems;
+            //foreach (DataItem di in dataItems)
+            //{
+            //    if (di.FileName.Contains("标注图") || di.FileName.Contains("多边形图") || di.FileName.Contains("折线图"))
+            //    {
+            //        webBrowser1.Document.InvokeScript("clearPoints");
+            //    }
+
+            //}
         }
 
 
@@ -271,6 +267,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.LoadMapData.Enabled = false;
                 this.SavePic.Enabled = false;
                 isActive = false;
+
+
+
+
+                WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
+                webBrowser1.Navigate(WebUrl);
             }
             else
             {
@@ -280,10 +282,31 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.LoadMapData.Enabled = true;
                 this.SavePic.Enabled = true;
                 isActive = true;
+                WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "StartMap.html");
+                webBrowser1.Navigate(WebUrl);
+                var configMap = new ConfigForm();
+                var dialog = new SelectMapDialog(DataItems);
+                string configstr = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
+                webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
+                List<DataItem> dataItems = new List<DataItem>();
+                MapWidget maw = HitTopic.FindWidget<MapWidget>();
+                if (maw != null)
+                    dataItems = maw.DataItems;
+
+                if (dataItems.Count == 0)
+                    return;
+                foreach (DataItem di in dataItems)
+                {
+                    if (di.FileName.Contains("标注图") && File.Exists(di.FilePath))
+                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
+                    if (di.FileName.Contains("多边形图") && File.Exists(di.FilePath))
+                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
+                    if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
+                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
+                }
+
             }
             LoadHtml();
-            SourceWebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
-            webBrowser1.Navigate(SourceWebUrl);
 
         }
 
@@ -312,7 +335,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         public void LoadHtml()
         {
-            Stream myStream = new FileStream(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\SourceCodeMap.html", FileMode.Open);
+            Stream myStream = new FileStream(Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html"), FileMode.Open);
             Encoding encode = System.Text.Encoding.GetEncoding("gb2312");//若是格式为utf-8的需要将gb2312替换
             StreamReader myStreamReader = new StreamReader(myStream, encode);
             string strhtml = myStreamReader.ReadToEnd();
@@ -355,10 +378,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         #endregion
 
-
         protected override bool OnOKButtonClick()
         {
-            if(WebType == WebType.Boss && ChartOptions.ContainsKey("Datasource"))
+            if (WebType == WebType.Boss && ChartOptions.ContainsKey("Datasource"))
             {
                 string path = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("数据大屏{0}.png", HitTopic.ID));
                 Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
@@ -397,7 +419,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         markerpath = di.FilePath;
                     if (di.FileName.Contains("多边形图"))
                         polygonpath = di.FilePath;
-                    if(di.FileName.Contains("轨迹图"))
+                    if (di.FileName.Contains("轨迹图"))
                         polylinepath = di.FilePath;
                 }
 
@@ -419,9 +441,18 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     DataItem polyline = new DataItem(polylinepath, Path.GetFileNameWithoutExtension(polylinepath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
                     maw.DataItems.Add(polyline);
                 }
-                string temp = markerpath + ',' + polygonpath + ',' + polylinepath;  
-                webBrowser1.Document.InvokeScript("getPath", new object[] { temp });
-                webBrowser1.Document.InvokeScript("savePoints");
+
+                if (clearClick)
+                {
+                    File.Delete(markerpath);
+                }
+                else
+                {
+                    string temp = markerpath + ',' + polygonpath + ',' + polylinepath;
+                    webBrowser1.Document.InvokeScript("getPath", new object[] { temp });
+                    webBrowser1.Document.InvokeScript("savePoints");
+                }
+
             }
             return base.OnOKButtonClick();
         }
