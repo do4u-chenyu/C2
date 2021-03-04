@@ -180,8 +180,28 @@ namespace MD5Plugin
 
         public void DecodeBase64(string str)
         {
-            byte[] bytes = Convert.FromBase64String(str);
-            textBox1.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
+            if(IsBase64Formatted(str))
+            {
+                byte[] bytes = Convert.FromBase64String(str);
+                textBox1.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
+            }
+            else
+            {
+                MessageBox.Show("需要解码的字符串非Base64编码，请重新输入");
+            }
+        }
+
+        public static bool IsBase64Formatted(string input)
+        {
+            try
+            {
+                Convert.FromBase64String(input);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void UrlEncode(string url)
@@ -191,7 +211,10 @@ namespace MD5Plugin
 
         public void UrlDecode(string url)
         {
+    
             textBox1.Text = HttpUtility.UrlDecode(url);
+    
+            
         }
 
         //public void GetUtf8(string str)
