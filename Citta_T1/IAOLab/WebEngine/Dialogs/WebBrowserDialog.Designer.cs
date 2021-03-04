@@ -59,6 +59,7 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(920, 411);
             this.webBrowser1.TabIndex = 10004;
+            this.webBrowser1.IsWebBrowserContextMenuEnabled = true;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser1_DocumentCompleted);
             // 
             // htmlEditorControlEx1

@@ -219,12 +219,14 @@ namespace C2.Controls.MapViews
 
         public void AddMap()
         {
+            Global.GetDocumentForm().Save();
+
             Topic hitTopic = SelectedTopics[0];
             MapWidget atw = hitTopic.FindWidget<MapWidget>();
             if (atw == null)
                 hitTopic.Widgets.Add(new MapWidget());
+            
 
-            //TODO phx  打开web窗口
             //当前节点的数据源作为参数传给webbrowser
             new WebManager()
             {
@@ -236,8 +238,9 @@ namespace C2.Controls.MapViews
         }
         public void AddBoss()
         {
+            Global.GetDocumentForm().Save();
+
             Topic hitTopic = SelectedTopics[0];
-            //TODO phx  打开web窗口
             new WebManager()
             {
                 Type = WebManager.WebType.Boss,

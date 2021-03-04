@@ -137,7 +137,7 @@
     if (!isSupportCanvas()) {
         alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
     }
-    heatmapOverlay = new BMapLib.HeatmapOverlay({ "radius": 100, "visible": true });
+    heatmapOverlay = new BMapLib.HeatmapOverlay({ "radius": 20, "visible": true });
     map.addOverlay(heatmapOverlay);
     heatmapOverlay.setDataSet({ data: heatPoints, max: 100 });
     function isSupportCanvas() {
