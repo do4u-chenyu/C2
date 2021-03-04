@@ -79,8 +79,6 @@ x64/
 x86/
 C2自动化测试样例/obj
 C2自动化测试样例/bin
-/packages/MSTest.TestAdapter.2.1.1
-/packages/MSTest.TestFramework.2.1.1
 C2Plugins/RookieKnowledgePlugin/bin
 C2Plugins/RookieKnowledgePlugin/obj
 C2Plugins/QQSpiderPlugin/bin
@@ -89,3 +87,4 @@ C2Plugins/Game2048Plugin/bin
 C2Plugins/Game2048Plugin/obj
 C2Plugins/MD5Plugin/bin
 C2Plugins/MD5Plugin/obj
+/packages
