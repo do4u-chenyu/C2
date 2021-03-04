@@ -579,18 +579,22 @@ namespace C2.Dialogs
         }
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            try
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                string softwareName = newSoftwareVersion.Replace(".info", "");
-                string packageDir = Path.Combine(Global.SoftwareUrl, @"software/", softwareName);
-                string savePath = Path.Combine(Global.SoftwareSavePath, softwareName);
-                this.downloader.PluginsDownload(packageDir, savePath);
-                HelpUtil.ShowMessageBox("安装包准备就绪,请重启更新软件");
+                try
+                {
+                    string softwareName = newSoftwareVersion.Replace(".info", "");
+                    string packageDir = Path.Combine(Global.SoftwareUrl, @"software/", softwareName);
+                    string savePath = Path.Combine(Global.SoftwareSavePath, softwareName);
+                    this.downloader.PluginsDownload(packageDir, savePath);
+                    HelpUtil.ShowMessageBox("安装包准备就绪,请重启更新软件");
+                }
+                catch
+                {
+                    HelpUtil.ShowMessageBox("更新失败，请检查网络连接稍后重试");
+                }
             }
-            catch
-            {
-                HelpUtil.ShowMessageBox("更新失败，请检查网络连接稍后重试");
-            }
+           
         }
         #endregion
 

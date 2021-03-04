@@ -14,6 +14,14 @@ namespace C2Shell
     {
         private readonly string updatePath = Path.Combine(Application.StartupPath, "update");
         private readonly string rollbackPath = Path.Combine(Application.StartupPath, "rollback");
+        private readonly string strPathExe = Path.Combine(Application.StartupPath, "C2.exe");
+
+        //private static string tmp = @"D:\work\C2\Citta_T1\bin\Debug";
+        //private readonly string updatePath = Path.Combine(tmp, "update");
+        //private readonly string rollbackPath = Path.Combine(tmp, "rollback");
+        //private readonly string strPathExe = Path.Combine(tmp, "C2.exe");
+
+        public string ZipName  {get;set; }
         public SoftwareUpdate()
         {
 
@@ -26,12 +34,17 @@ namespace C2Shell
 
             string[] files = System.IO.Directory.GetFiles(updatePath);
             bool needUpdate = (files.Length == 1 && files[0].EndsWith(".zip"));
+            if(needUpdate)
+            {
+                ZipName = files[0];
+            }
             return needUpdate;
 
         }
-        public  bool ExecuteUpdate(string zipPath)
+        public  bool ExecuteUpdate(string zipName)
         {
             bool success = true;
+            string scriptPath = Path.Combine(updatePath, "setup.bat");
             // 创建文件备份路径
             try 
             {
@@ -41,21 +54,27 @@ namespace C2Shell
             {
                 return !success;
             }
-            
+
             // 解压update目录            
-            string scriptPath = Path.Combine(Path.GetDirectoryName(zipPath), "setup.bat");
-            string errMsg=ZipUtil.UnZipFile(zipPath, Path.GetDirectoryName(zipPath));
-            if (!string.IsNullOrEmpty(errMsg))               
+            string zipPath = Path.Combine(updatePath, zipName);
+            string errMsg = ZipUtil.UnZipFile(zipPath, updatePath);
+            if (!string.IsNullOrEmpty(errMsg))
                 return !success;
 
             // 执行 setup.bat脚本 ，进行文件备份和替换       
             return ExecuteCmdScript(scriptPath);
 
         }
-        public  void Rollback(string zipPath)
+        public void Rollback()
         {
             // 执行 rollback.bat脚本
-            string scriptPath = Path.Combine(Path.GetDirectoryName(zipPath), "rollback.bat");
+            if (!Directory.Exists(rollbackPath)
+                || (Directory.GetDirectories(rollbackPath).Length > 0
+                && Directory.GetFiles(rollbackPath).Length > 0))
+            {
+                return;
+            }
+            string scriptPath = Path.Combine(updatePath, "rollback.bat");
             ExecuteCmdScript(scriptPath);
         }
         public void Clean()
@@ -71,26 +90,28 @@ namespace C2Shell
         }
         public  void StartCoreProcess()
         {
-            string strPathExe = Path.Combine(Application.StartupPath + "C2.exe");
+            
             Process process = new System.Diagnostics.Process();
             process.StartInfo.FileName = strPathExe;
             process.Start();
-
+            process.WaitForExit();
+            if (process != null)
+                process.Dispose();//释放资源
+            process.Close();
         }
         private bool ExecuteCmdScript(string scriptPath)
         {
             bool success = true;
             if (!File.Exists(scriptPath))
                 return !success;
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
-            p.StartInfo.RedirectStandardInput = true;//接受来自调用程序的输入信息
-            p.StartInfo.RedirectStandardOutput = true;//由调用程序获取输出信息
-            p.StartInfo.RedirectStandardError = true;//重定向标准错误输出
-            p.StartInfo.CreateNoWindow = true;//不显示程序窗口
-            p.StandardInput.AutoFlush = true;
-            p.Start();//启动程序
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
+            process.StartInfo.RedirectStandardInput = true;//接受来自调用程序的输入信息
+            process.StartInfo.RedirectStandardOutput = true;//由调用程序获取输出信息
+            process.StartInfo.RedirectStandardError = true;//重定向标准错误输出
+            process.StartInfo.CreateNoWindow = true;//不显示程序窗口
+            process.Start();//启动程序
            
             try
             {
@@ -100,19 +121,24 @@ namespace C2Shell
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        p.StandardInput.WriteLine(line);
+                        process.StandardInput.WriteLine(line);
                         Console.WriteLine(line);
                     }
-                    p.StandardInput.WriteLine("exit");
+                    process.StandardInput.WriteLine("exit");
                 }
             }
             catch 
             {
                 return !success;
             }
-            
-            p.WaitForExit(15000);
-            p.Close();
+            process.WaitForExit(60000); //等待进程结束，等待时间为指定的毫秒
+            if (process.ExitCode != 0)
+            {
+                return !success;
+            }
+            if (process != null)
+                process.Dispose();//释放资源
+            process.Close();
             return success;
         }
     }

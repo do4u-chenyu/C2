@@ -18,8 +18,8 @@ namespace C2Shell
             SoftwareUpdate updateInstance = new SoftwareUpdate();
             if (updateInstance.IsNeedUpdate())
             {
-                if (!updateInstance.ExecuteUpdate(string.Empty))
-                    updateInstance.Rollback(string.Empty);
+                if (!updateInstance.ExecuteUpdate(updateInstance.ZipName))
+                    updateInstance.Rollback();
                 updateInstance.Clean();
             }
             updateInstance.StartCoreProcess();
