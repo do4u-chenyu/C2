@@ -32,24 +32,24 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.idListView = new System.Windows.Forms.ListView();
+            this.resultLRichTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.InputActButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ActStartButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.groupListView = new System.Windows.Forms.ListView();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
+            this.InputGroupButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
+            this.GroupStartButton = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -90,40 +90,41 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.listView1);
-            this.panel3.Controls.Add(this.richTextBox1);
+            this.panel3.Controls.Add(this.idListView);
+            this.panel3.Controls.Add(this.resultLRichTextBox1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 33);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(644, 368);
             this.panel3.TabIndex = 5;
             // 
-            // listView1
+            // idListView
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Margin = new System.Windows.Forms.Padding(0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(121, 368);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.idListView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.idListView.HideSelection = false;
+            this.idListView.Location = new System.Drawing.Point(0, 0);
+            this.idListView.Margin = new System.Windows.Forms.Padding(0);
+            this.idListView.Name = "idListView";
+            this.idListView.Size = new System.Drawing.Size(121, 368);
+            this.idListView.TabIndex = 1;
+            this.idListView.UseCompatibleStateImageBehavior = false;
+            this.idListView.View = System.Windows.Forms.View.SmallIcon;
+            this.idListView.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // richTextBox1
+            // resultLRichTextBox1
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox1.Location = new System.Drawing.Point(122, 0);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(522, 368);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.resultLRichTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.resultLRichTextBox1.Location = new System.Drawing.Point(122, 0);
+            this.resultLRichTextBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.resultLRichTextBox1.Name = "resultLRichTextBox1";
+            this.resultLRichTextBox1.Size = new System.Drawing.Size(522, 368);
+            this.resultLRichTextBox1.TabIndex = 0;
+            this.resultLRichTextBox1.Text = "";
+            this.resultLRichTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.InputActButton);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(3, 3);
@@ -132,15 +133,15 @@
             this.panel2.TabIndex = 4;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
-            // button3
+            // InputActButton
             // 
-            this.button3.Location = new System.Drawing.Point(429, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "导入";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.InputActButton.Location = new System.Drawing.Point(429, 3);
+            this.InputActButton.Name = "InputActButton";
+            this.InputActButton.Size = new System.Drawing.Size(75, 23);
+            this.InputActButton.TabIndex = 3;
+            this.InputActButton.Text = "导入";
+            this.InputActButton.UseVisualStyleBackColor = true;
+            this.InputActButton.Click += new System.EventHandler(this.InputIDDataButton_Click);
             // 
             // label1
             // 
@@ -154,7 +155,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.ActStartButton);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(3, 401);
@@ -163,15 +164,15 @@
             this.panel1.TabIndex = 3;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // button1
+            // ActStartButton
             // 
-            this.button1.Location = new System.Drawing.Point(441, 17);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "开始";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ActStartButton.Location = new System.Drawing.Point(441, 17);
+            this.ActStartButton.Name = "ActStartButton";
+            this.ActStartButton.Size = new System.Drawing.Size(75, 23);
+            this.ActStartButton.TabIndex = 1;
+            this.ActStartButton.Text = "开始";
+            this.ActStartButton.UseVisualStyleBackColor = true;
+            this.ActStartButton.Click += new System.EventHandler(this.ActStartButton_Click);
             // 
             // button2
             // 
@@ -198,7 +199,7 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.listView2);
+            this.panel6.Controls.Add(this.groupListView);
             this.panel6.Controls.Add(this.richTextBox2);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 33);
@@ -206,16 +207,17 @@
             this.panel6.Size = new System.Drawing.Size(644, 368);
             this.panel6.TabIndex = 2;
             // 
-            // listView2
+            // groupListView
             // 
-            this.listView2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(0, 0);
-            this.listView2.Margin = new System.Windows.Forms.Padding(0);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(121, 368);
-            this.listView2.TabIndex = 3;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.groupListView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupListView.HideSelection = false;
+            this.groupListView.Location = new System.Drawing.Point(0, 0);
+            this.groupListView.Margin = new System.Windows.Forms.Padding(0);
+            this.groupListView.Name = "groupListView";
+            this.groupListView.Size = new System.Drawing.Size(121, 368);
+            this.groupListView.TabIndex = 3;
+            this.groupListView.UseCompatibleStateImageBehavior = false;
+            this.groupListView.View = System.Windows.Forms.View.SmallIcon;
             // 
             // richTextBox2
             // 
@@ -238,7 +240,7 @@
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.button6);
+            this.panel7.Controls.Add(this.InputGroupButton);
             this.panel7.Controls.Add(this.label2);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
@@ -246,14 +248,15 @@
             this.panel7.Size = new System.Drawing.Size(644, 30);
             this.panel7.TabIndex = 5;
             // 
-            // button6
+            // InputGroupButton
             // 
-            this.button6.Location = new System.Drawing.Point(429, 3);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 3;
-            this.button6.Text = "导入";
-            this.button6.UseVisualStyleBackColor = true;
+            this.InputGroupButton.Location = new System.Drawing.Point(429, 3);
+            this.InputGroupButton.Name = "InputGroupButton";
+            this.InputGroupButton.Size = new System.Drawing.Size(75, 23);
+            this.InputGroupButton.TabIndex = 3;
+            this.InputGroupButton.Text = "导入";
+            this.InputGroupButton.UseVisualStyleBackColor = true;
+            this.InputGroupButton.Click += new System.EventHandler(this.InputGroupButton_Click);
             // 
             // label2
             // 
@@ -266,7 +269,7 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.button4);
+            this.panel4.Controls.Add(this.GroupStartButton);
             this.panel4.Controls.Add(this.button5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(3, 401);
@@ -274,14 +277,15 @@
             this.panel4.Size = new System.Drawing.Size(644, 55);
             this.panel4.TabIndex = 0;
             // 
-            // button4
+            // GroupStartButton
             // 
-            this.button4.Location = new System.Drawing.Point(441, 17);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "开始";
-            this.button4.UseVisualStyleBackColor = true;
+            this.GroupStartButton.Location = new System.Drawing.Point(441, 17);
+            this.GroupStartButton.Name = "GroupStartButton";
+            this.GroupStartButton.Size = new System.Drawing.Size(75, 23);
+            this.GroupStartButton.TabIndex = 3;
+            this.GroupStartButton.Text = "开始";
+            this.GroupStartButton.UseVisualStyleBackColor = true;
+            this.GroupStartButton.Click += new System.EventHandler(this.GroupStartButton_Click);
             // 
             // button5
             // 
@@ -328,23 +332,23 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ListView idListView;
+        private System.Windows.Forms.RichTextBox resultLRichTextBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ActStartButton;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button InputActButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView groupListView;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button InputGroupButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button GroupStartButton;
         private System.Windows.Forms.Button button5;
     }
 }
