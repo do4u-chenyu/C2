@@ -59,7 +59,6 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(920, 411);
             this.webBrowser1.TabIndex = 10004;
-            this.webBrowser1.IsWebBrowserContextMenuEnabled = true;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser1_DocumentCompleted);
             // 
             // htmlEditorControlEx1
@@ -72,7 +71,7 @@
             this.htmlEditorControlEx1.Location = new System.Drawing.Point(24, 40);
             this.htmlEditorControlEx1.Name = "htmlEditorControlEx1";
             this.htmlEditorControlEx1.Size = new System.Drawing.Size(104, 375);
-            this.htmlEditorControlEx1.SyntaxHighlighting = "HTML";
+            this.htmlEditorControlEx1.SyntaxHighlighting = "JavaScript";
             this.htmlEditorControlEx1.TabIndex = 10005;
             // 
             // editorPanel
