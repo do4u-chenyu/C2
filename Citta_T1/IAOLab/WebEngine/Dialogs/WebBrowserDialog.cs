@@ -255,9 +255,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.LoadMapData.Enabled = false;
                 this.SavePic.Enabled = false;
                 isActive = false;
-                SaveHistoryPoints();
+                
                 WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
                 webBrowser1.Navigate(WebUrl);
+                SaveHistoryPoints();
             }
             else
             {
