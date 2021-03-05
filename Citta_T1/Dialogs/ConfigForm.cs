@@ -507,7 +507,6 @@ namespace C2.Dialogs
         }
         private void CheckUpdate()
         {
-
             string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
             this.newSoftwareVersion = NewSoftewareVersion();
             if (newSoftwareVersion.StartsWith(currentVersion))
