@@ -95,7 +95,7 @@
             this.radioButton1.Size = new System.Drawing.Size(129, 23);
             this.radioButton1.TabIndex = 4;
             this.radioButton1.Text = "MD5(128位)";
-            this.toolTip1.SetToolTip(this.radioButton1, "使用MD5(128位)加密字符串");
+            this.toolTip1.SetToolTip(this.radioButton1, "使用MD5(128位)编码加密字符串");
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
@@ -139,7 +139,7 @@
             this.radioButton4.Size = new System.Drawing.Size(119, 23);
             this.radioButton4.TabIndex = 7;
             this.radioButton4.Text = "MD5(64位)";
-            this.toolTip1.SetToolTip(this.radioButton4, "使用MD5(64位)加密字符串");
+            this.toolTip1.SetToolTip(this.radioButton4, "使用MD5(64位)编码加密字符串");
             this.radioButton4.UseVisualStyleBackColor = true;
             this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
