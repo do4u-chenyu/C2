@@ -31,10 +31,9 @@ namespace C2.IAOLab.Plugins
             return htmlContent;
         }
 
-        public string GetPluginsInfo(string pluginsName, string packageURL)
+        public string GetPluginsInfo(string pluginName, string packageURL)
         {
-            List<string> tmp = new List<string>() { pluginsName };
-            tmp = GetPluginsInfoList(tmp, packageURL);
+            List<string> tmp = GetPluginsInfoList(new List<string> { pluginName }, packageURL);
             return tmp.Count == 0 ? string.Empty : tmp[0];
         }
         public List<string> GetPluginsInfoList(List<string> pluginsName, string packageURL)
