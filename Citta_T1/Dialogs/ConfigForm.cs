@@ -653,6 +653,9 @@ namespace C2.Dialogs
             }
         }
 
-
+        private void GisMapCancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

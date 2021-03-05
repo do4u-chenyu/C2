@@ -434,6 +434,7 @@
             this.gisMapCancelButton.TabIndex = 7;
             this.gisMapCancelButton.Text = "取消";
             this.gisMapCancelButton.UseVisualStyleBackColor = true;
+            this.gisMapCancelButton.Click += new System.EventHandler(this.GisMapCancelButton_Click);
             // 
             // gisMapOKButton
             // 

@@ -1,4 +1,5 @@
-﻿using C2.IAOLab.WebEngine.Dialogs;
+﻿using C2.Core;
+using C2.IAOLab.WebEngine.Dialogs;
 using C2.Model;
 using C2.Model.MindMaps;
 using System;
@@ -56,7 +57,8 @@ namespace C2.IAOLab.WebEngine
                 default:
                     return;
             }
-            wbDialog.Show();
+            if (wbDialog.ShowDialog() == DialogResult.OK)
+                Global.OnModifiedChange(); //数据大屏生成图片挂件，地图生成打标文档，需要置dirty
         }
     }
 }

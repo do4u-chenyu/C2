@@ -78,6 +78,7 @@
             // 
             // datasourceComboBox
             // 
+            this.datasourceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.datasourceComboBox.FormattingEnabled = true;
             this.datasourceComboBox.Location = new System.Drawing.Point(151, 17);
             this.datasourceComboBox.Name = "datasourceComboBox";
@@ -87,6 +88,7 @@
             // 
             // mapTypeComboBox
             // 
+            this.mapTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapTypeComboBox.FormattingEnabled = true;
             this.mapTypeComboBox.Items.AddRange(new object[] {
             "标注图",
@@ -101,6 +103,7 @@
             // 
             // latComboBox
             // 
+            this.latComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.latComboBox.FormattingEnabled = true;
             this.latComboBox.Location = new System.Drawing.Point(151, 102);
             this.latComboBox.Name = "latComboBox";
@@ -109,6 +112,7 @@
             // 
             // lonComboBox
             // 
+            this.lonComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lonComboBox.FormattingEnabled = true;
             this.lonComboBox.Location = new System.Drawing.Point(151, 147);
             this.lonComboBox.Name = "lonComboBox";
@@ -126,6 +130,7 @@
             // 
             // countComboBox
             // 
+            this.countComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.countComboBox.Enabled = false;
             this.countComboBox.FormattingEnabled = true;
             this.countComboBox.Location = new System.Drawing.Point(151, 192);
