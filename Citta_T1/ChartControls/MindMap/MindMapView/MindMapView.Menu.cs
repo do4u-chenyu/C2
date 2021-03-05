@@ -683,6 +683,7 @@ namespace C2.Controls.MapViews
             MenuMap.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuOpenMap,
                 MenuDeleteMap});
+            MenuMap.Image = Properties.Resources.地图;
 
             MenuOpenMap.Image = Properties.Resources.opendata;
             MenuOpenMap.Text = Lang._("Open");
