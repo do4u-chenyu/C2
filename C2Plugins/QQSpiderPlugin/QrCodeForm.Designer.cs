@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QrCodeForm));
             this.qrPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.qrPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // qrPictureBox
             // 
-            this.qrPictureBox.Location = new System.Drawing.Point(114, 98);
+            this.qrPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.qrPictureBox.Location = new System.Drawing.Point(0, 0);
             this.qrPictureBox.Name = "qrPictureBox";
-            this.qrPictureBox.Size = new System.Drawing.Size(150, 150);
+            this.qrPictureBox.Size = new System.Drawing.Size(304, 282);
+            this.qrPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.qrPictureBox.TabIndex = 0;
             this.qrPictureBox.TabStop = false;
             // 
@@ -44,9 +47,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 362);
+            this.ClientSize = new System.Drawing.Size(304, 282);
             this.Controls.Add(this.qrPictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "QrCodeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "请打开QQ客户端扫描二维码！";

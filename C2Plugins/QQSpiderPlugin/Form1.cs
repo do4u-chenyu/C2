@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,8 +20,9 @@ namespace QQSpiderPlugin
         Session session;
         private List<string> idDataSource;
         private List<string> grpDataSource;
-        private string idQueryResult;
-        private string grpQueryResult;
+        private List<string> groupHeaders = new List<string>() { "群号", "群名称", "群人数", "群上限", "群主", "地域", "分类", "标签", "群简介" };
+        private List<string> actHeaders = new List<string>() { "账号", "昵称", "国家", "省市", "城市", "性别", "年龄", "头像地址" };
+
 
         public Form1()
         {
@@ -28,8 +30,6 @@ namespace QQSpiderPlugin
             session = new Session();
             idDataSource = new List<string>();
             grpDataSource = new List<string>();
-            idQueryResult = String.Empty;
-            grpQueryResult = String.Empty;
         }
 
         public string GetPluginDescription()
@@ -88,13 +88,6 @@ namespace QQSpiderPlugin
 
             lv.EndUpdate();
         }
-        private void UpdateRichTextView(int tabIndex)
-        {
-            if (tabIndex == 0)
-                this.IDResultRichTextBox.Text = idQueryResult;
-            else
-                this.GroupRichTextBox.Text = grpQueryResult;
-        }
 
         private void ImportData(int tabIndex)
         {
@@ -140,21 +133,18 @@ namespace QQSpiderPlugin
 
         private void ActStartButton_Click(object sender, EventArgs e)
         {
-            Start(0);
-        }
+            List<string> dataSource = this.idDataSource;
+            ResetProgressBar(0, dataSource.Count);
+            if (dataSource.Count == 0)
+            {
+                ShowMessageBox("请先导入信息");
+                return;
+            }
 
-
-        private void GroupStartButton_Click(object sender, EventArgs e)
-        {
-            Start(1);
-        }
-        private void Start(int tabIndex)
-        {
-#if DEBUG
             if (session.IsEmpty() && File.Exists(this.tmpPath))
                 session.Deserialize(this.tmpPath);
-#endif
-            if (session.IsEmpty() && !QQCrawler.IsValidQQSession(session))
+
+            if (session.IsEmpty() || !QQCrawler.IsValidQQSession(session))
             {
                 Console.WriteLine("无已缓存的可用session，需要重新登录");
                 QrLogin login = new QrLogin();
@@ -162,9 +152,6 @@ namespace QQSpiderPlugin
                 session = login.Session;
                 session.Serialize(this.tmpPath);
             }
-
-
-            List<string> dataSource = tabIndex == 0 ? this.idDataSource : this.grpDataSource;
 
             if (String.IsNullOrEmpty(session.Ldw))
             {
@@ -175,17 +162,90 @@ namespace QQSpiderPlugin
 
             QQCrawler crawler = new QQCrawler(session);
 
+
+            StringBuilder tmpResult = new StringBuilder();
+            tmpResult.AppendLine(String.Join("\t", actHeaders));
+            this.Cursor = Cursors.WaitCursor;
+            foreach (string id in dataSource)
+                ShowResult(crawler.QueryAct(id), 0, tmpResult);
+            this.IDResultRichTextBox.Text = tmpResult.ToString();
+            this.Cursor = Cursors.Arrow;
+        }
+
+
+        private void GroupStartButton_Click(object sender, EventArgs e)
+        {
+            List<string> dataSource = this.grpDataSource;
+            ResetProgressBar(1, dataSource.Count);
             if (dataSource.Count == 0)
             {
                 ShowMessageBox("请先导入信息");
                 return;
             }
-            if (tabIndex == 0)
-                idQueryResult = crawler.QueryAct(dataSource);
-            else if (tabIndex == 1)
-                grpQueryResult = crawler.QueryGroup(dataSource);
-            UpdateRichTextView(tabIndex);
+
+            if (session.IsEmpty() && File.Exists(this.tmpPath))
+                session.Deserialize(this.tmpPath);
+
+            if (session.IsEmpty() || !QQCrawler.IsValidQQSession(session))
+            {
+                Console.WriteLine("无已缓存的可用session，需要重新登录");
+                QrLogin login = new QrLogin();
+                login.Login();
+                session = login.Session;
+                session.Serialize(this.tmpPath);
+            }
+
+            if (String.IsNullOrEmpty(session.Ldw))
+            {
+                ShowMessageBox("登录失败，请重新扫描登录");
+                session = new Session();
+                return;
+            }
+
+
+            QQCrawler crawler = new QQCrawler(session);
+
+
+            StringBuilder tmpResult = new StringBuilder();
+            tmpResult.AppendLine(String.Join("\t", groupHeaders));
+            this.Cursor = Cursors.WaitCursor;
+            foreach (string id in dataSource)
+                ShowResult(crawler.QueryGroup(id), 1, tmpResult);
+            this.GroupRichTextBox.Text = tmpResult.ToString();
         }
+
+        private void ResetProgressBar(int tabIndex, int count)
+        {
+            ProgressBar bar = tabIndex == 0 ? this.progressBar1 : this.progressBar2;
+            bar.Maximum = count;
+            bar.Minimum = 0;
+            bar.Value = 0;
+        }
+        private void ShowResult(string result, int tabIndex, StringBuilder tmpResult)
+        {
+            if (!String.IsNullOrEmpty(result) && (tabIndex == 0 || tabIndex == 1) && tmpResult != null)
+            {
+                if (progressBar1.Value % 50 == 0)
+                {
+                    Thread.Sleep(500);
+
+                }
+                tmpResult.Append(result);
+                switch (tabIndex)
+                {
+                    case 0:
+                        this.IDResultRichTextBox.Text = tmpResult.ToString();
+                        this.progressBar1.Value += 1;
+                        break;
+                    case 1:
+                        this.GroupRichTextBox.Text = tmpResult.ToString();
+                        this.progressBar2.Value += 1;
+                        break;
+                }
+            }
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -205,5 +265,20 @@ namespace QQSpiderPlugin
             return MessageBox.Show(message, caption, MessageBoxButtons.OK, type);
         }
 
+        private void ResetCookieButton1_Click(object sender, EventArgs e)
+        {
+            ResetCookie();
+        }
+
+        private void ResetCookieButton2_Click(object sender, EventArgs e)
+        {
+            ResetCookie();
+        }
+        private void ResetCookie()
+        {
+            this.session = new Session();
+            if (File.Exists(this.tmpPath))
+                File.Delete(this.tmpPath);
+        }
     }
 }

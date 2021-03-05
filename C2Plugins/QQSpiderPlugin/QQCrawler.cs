@@ -15,8 +15,6 @@ namespace QQSpiderPlugin
     {
         public const string filedSeperator = "\t";
         private Session session;
-        private List<string> groupHeaders = new List<string>() { "群号", "群名称", "群人数", "群上限", "群主", "地域", "分类", "标签", "群简介" };
-        private List<string> actHeaders = new List<string>() { "账号", "昵称", "国家", "省市", "城市", "性别", "年龄", "头像地址" };
 
         public QQCrawler(Session session)
         {
@@ -27,96 +25,88 @@ namespace QQSpiderPlugin
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string QueryAct(List<string> ids)
+        public string QueryAct(string id)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(String.Join("\t", actHeaders));
             string url = "https://find.qq.com/proxy/domain/cgi.find.qq.com/qqfind/buddy/search_v3";
-            foreach (string id in ids)
+            Dictionary<string, string> pairs = new Dictionary<string, string>
             {
-                Dictionary<string, string> pairs = new Dictionary<string, string>
+                { "num", "20"},
+                {"page", "0" },
+                { "sessionid", "0"},
+                { "keyword", id},
+                { "agerg", "0"},
+                { "sex", "0"},
+                { "firston", "1"},
+                { "video", "0"},
+                { "country", "0"},
+                { "province", "0"},
+                { "city", "0"},
+                { "district", "0"},
+                { "hcountry", "0"},
+                { "hprovince", "0"},
+                { "hcity", "0"},
+                { "hdistrict", "0"},
+                {"online", "1" },
+                {"ldw", session.Ldw }
+            };
+            int count = 0, retries = 2;
+            while (count < retries)
+            {
+                try
                 {
-                    { "num", "20"},
-                    {"page", "0" },
-                    { "sessionid", "0"},
-                    { "keyword", id},
-                    { "agerg", "0"},
-                    { "sex", "0"},
-                    { "firston", "1"},
-                    { "video", "0"},
-                    { "country", "0"},
-                    { "province", "0"},
-                    { "city", "0"},
-                    { "district", "0"},
-                    { "hcountry", "0"},
-                    { "hprovince", "0"},
-                    { "hcity", "0"},
-                    { "hdistrict", "0"},
-                    {"online", "1" },
-                    {"ldw", session.Ldw }
-                };
-                int count = 0, retries = 2;
-                while (count < retries)
+                    Response resp = this.session.Post(url, pairs);
+                    QueryResult qResult = this.ParseAct(resp.Text);
+                    if (qResult.code > 0)
+                        sb.Append(qResult.result);
+                    Thread.Sleep(1000);
+                    break;
+                }
+                catch
                 {
-                    try
-                    {
-                        Response resp = this.session.Post(url, pairs);
-                        QueryResult qResult = this.ParseAct(resp.Text);
-                        if (qResult.code > 0)
-                            sb.Append(qResult.result);
-                        Thread.Sleep(1000);
-                        break;
-                    }
-                    catch
-                    {
-                        count += 1;
-                    }
+                    count += 1;
                 }
             }
             return sb.ToString();
         }
-        public string QueryGroup(List<string> gids)
+        public string QueryGroup(string id)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(String.Join("\t", groupHeaders));
             string url = "https://qun.qq.com/cgi-bin/group_search/pc_group_search";
 
-            foreach (string id in gids)
+            Dictionary<string, string> pairs = new Dictionary<string, string>
             {
-                Dictionary<string, string> pairs = new Dictionary<string, string>
+                {"k", "交友"},
+                {"n", "8"},
+                {"st", "1"},
+                {"iso", "1"},
+                {"src", "1"},
+                {"v", "4903"},
+                {"bkn", session.Ldw},
+                {"isRecommend", "false"},
+                {"city_id", "0"},
+                {"from", "1"},
+                {"keyword", id},
+                {"sort", "0"}, // sort type: 0 deafult, 1 menber, 2 active
+                {"wantnum", "24"},
+                {"page", "0"},
+                {"ldw", session.Ldw}
+            };
+            int count = 0, retries = 2;
+            while (count < retries)
+            {
+                try
                 {
-                    {"k", "交友"},
-                    {"n", "8"},
-                    {"st", "1"},
-                    {"iso", "1"},
-                    {"src", "1"},
-                    {"v", "4903"},
-                    {"bkn", session.Ldw},
-                    {"isRecommend", "false"},
-                    {"city_id", "0"},
-                    {"from", "1"},
-                    {"keyword", id},
-                    {"sort", "0"}, // sort type: 0 deafult, 1 menber, 2 active
-                    {"wantnum", "24"},
-                    {"page", "0"},
-                    {"ldw", session.Ldw}
-                };
-                int count = 0, retries = 2;
-                while (count < retries)
+                    Response resp = this.session.Post(url, pairs);
+                    QueryResult qResult = this.ParseGroup(resp.Text);
+                    if (qResult.code > 0)
+                        sb.Append(qResult.result);
+                    Thread.Sleep(1000);
+                    break;
+                }
+                catch // 这里是捕获不到异常的
                 {
-                    try
-                    {
-                        Response resp = this.session.Post(url, pairs);
-                        QueryResult qResult = this.ParseGroup(resp.Text);
-                        if (qResult.code > 0)
-                            sb.Append(qResult.result);
-                        Thread.Sleep(1000);
-                        break;
-                    }
-                    catch // 这里是捕获不到异常的
-                    {
-                        count += 1;
-                    }
+                    count += 1;
                 }
             }
             return sb.ToString();
@@ -198,7 +188,7 @@ namespace QQSpiderPlugin
         public static bool IsValidQQSession(Session session)
         {
             QQCrawler crawler = new QQCrawler(session);
-            return String.IsNullOrEmpty(crawler.QueryGroup(new List<string>() { "826028580" }));
+            return !String.IsNullOrEmpty(crawler.QueryGroup("826028580"));
         }
     }
     public class ActInfo
