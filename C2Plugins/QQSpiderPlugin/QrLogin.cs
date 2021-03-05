@@ -77,7 +77,7 @@ namespace QQSpiderPlugin
             }
             return resp;
         }
-        private Dictionary<string, object> LoginOnce()
+        public Dictionary<string, object> Login()
         {
             string loginSig = this.session.Cookies.GetCookieValue("pt_login_sig");
             string qrSig = this.session.Cookies.GetCookieValue("qrsig");
@@ -134,44 +134,6 @@ namespace QQSpiderPlugin
             loginResult.Add("time", Util.GetTimeStamp());
             loginResult.Add("errorMsg", errorMsg);
             return loginResult;
-        }
-        public void Login()
-        {
-            byte[] imgBytes = this.GetQRCode().Content;
-            if (imgBytes.Length == 0)
-                return;
-            Image img = Image.FromStream(new MemoryStream(imgBytes));
-            Thread _thread = new Thread(() =>
-            {
-                Application.Run(new QrCodeForm(img));
-            });
-            _thread.SetApartmentState(ApartmentState.STA);
-            _thread.Start();
-
-            int count = 0;
-            int maxTimes = 15;
-            while (count < maxTimes)
-            {
-                Dictionary<string, object> result = this.LoginOnce();
-                object status = -1;
-                if (result.TryGetValue("status", out status))
-                    if ((int)status == 2)
-                        break;
-                Console.WriteLine(result.ToString(), "请使用QQ手机客户端扫码登录！");
-                System.Threading.Thread.Sleep(1000);
-                count += 1;
-            }
-
-            if (count == maxTimes)
-            {
-                Console.WriteLine("扫码超时！");
-                return;
-            }
-            string skey = this.session.Cookies.GetCookieValue("skey");
-            if (String.IsNullOrEmpty(skey))
-                return;
-            this.session.Ldw = Util.GenBkn(skey);
-            return;
         }
     }
 }

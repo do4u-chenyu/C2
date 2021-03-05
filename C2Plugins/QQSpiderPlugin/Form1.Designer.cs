@@ -35,6 +35,9 @@
             this.idListView = new System.Windows.Forms.ListView();
             this.IDResultRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ResetCookieButton1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.InputActButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -45,17 +48,14 @@
             this.groupListView = new System.Windows.Forms.ListView();
             this.GroupRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.GroupStartButton = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.InputGroupButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ResetCookieButton1 = new System.Windows.Forms.Button();
             this.ResetCookieButton2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.InputGroupButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.GroupStartButton = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -139,6 +139,33 @@
             this.panel2.Size = new System.Drawing.Size(644, 66);
             this.panel2.TabIndex = 4;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // ResetCookieButton1
+            // 
+            this.ResetCookieButton1.Location = new System.Drawing.Point(522, 3);
+            this.ResetCookieButton1.Name = "ResetCookieButton1";
+            this.ResetCookieButton1.Size = new System.Drawing.Size(98, 23);
+            this.ResetCookieButton1.TabIndex = 6;
+            this.ResetCookieButton1.Text = "清除Cookie";
+            this.ResetCookieButton1.UseVisualStyleBackColor = true;
+            this.ResetCookieButton1.Click += new System.EventHandler(this.ResetCookieButton1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(15, 37);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 16);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "查询进度";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(104, 34);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(516, 23);
+            this.progressBar1.TabIndex = 4;
             // 
             // InputActButton
             // 
@@ -249,6 +276,52 @@
             this.panel5.Size = new System.Drawing.Size(644, 66);
             this.panel5.TabIndex = 1;
             // 
+            // ResetCookieButton2
+            // 
+            this.ResetCookieButton2.Location = new System.Drawing.Point(522, 3);
+            this.ResetCookieButton2.Name = "ResetCookieButton2";
+            this.ResetCookieButton2.Size = new System.Drawing.Size(98, 23);
+            this.ResetCookieButton2.TabIndex = 9;
+            this.ResetCookieButton2.Text = "清除Cookie";
+            this.ResetCookieButton2.UseVisualStyleBackColor = true;
+            this.ResetCookieButton2.Click += new System.EventHandler(this.ResetCookieButton2_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(15, 37);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 16);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "查询进度";
+            // 
+            // progressBar2
+            // 
+            this.progressBar2.Location = new System.Drawing.Point(104, 34);
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(516, 23);
+            this.progressBar2.TabIndex = 7;
+            // 
+            // InputGroupButton
+            // 
+            this.InputGroupButton.Location = new System.Drawing.Point(441, 3);
+            this.InputGroupButton.Name = "InputGroupButton";
+            this.InputGroupButton.Size = new System.Drawing.Size(75, 23);
+            this.InputGroupButton.TabIndex = 5;
+            this.InputGroupButton.Text = "导入";
+            this.InputGroupButton.UseVisualStyleBackColor = true;
+            this.InputGroupButton.Click += new System.EventHandler(this.InputGroupButton_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(410, 12);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "选中导入QQ群号列表文件，或者粘贴到左侧任务列表中，一行一个QQ群";
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.GroupStartButton);
@@ -277,78 +350,6 @@
             this.button5.TabIndex = 4;
             this.button5.Text = "取消";
             this.button5.UseVisualStyleBackColor = true;
-            // 
-            // InputGroupButton
-            // 
-            this.InputGroupButton.Location = new System.Drawing.Point(441, 3);
-            this.InputGroupButton.Name = "InputGroupButton";
-            this.InputGroupButton.Size = new System.Drawing.Size(75, 23);
-            this.InputGroupButton.TabIndex = 5;
-            this.InputGroupButton.Text = "导入";
-            this.InputGroupButton.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(410, 12);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "选中导入QQ群号列表文件，或者粘贴到左侧任务列表中，一行一个QQ群";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(104, 34);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(516, 23);
-            this.progressBar1.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(15, 37);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 16);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "查询进度";
-            // 
-            // ResetCookieButton1
-            // 
-            this.ResetCookieButton1.Location = new System.Drawing.Point(522, 3);
-            this.ResetCookieButton1.Name = "ResetCookieButton1";
-            this.ResetCookieButton1.Size = new System.Drawing.Size(98, 23);
-            this.ResetCookieButton1.TabIndex = 6;
-            this.ResetCookieButton1.Text = "清除Cookie";
-            this.ResetCookieButton1.UseVisualStyleBackColor = true;
-            this.ResetCookieButton1.Click += new System.EventHandler(this.ResetCookieButton1_Click);
-            // 
-            // ResetCookieButton2
-            // 
-            this.ResetCookieButton2.Location = new System.Drawing.Point(522, 3);
-            this.ResetCookieButton2.Name = "ResetCookieButton2";
-            this.ResetCookieButton2.Size = new System.Drawing.Size(98, 23);
-            this.ResetCookieButton2.TabIndex = 9;
-            this.ResetCookieButton2.Text = "清除Cookie";
-            this.ResetCookieButton2.UseVisualStyleBackColor = true;
-            this.ResetCookieButton2.Click += new System.EventHandler(this.ResetCookieButton2_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(15, 37);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 16);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "查询进度";
-            // 
-            // progressBar2
-            // 
-            this.progressBar2.Location = new System.Drawing.Point(104, 34);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(516, 23);
-            this.progressBar2.TabIndex = 7;
             // 
             // Form1
             // 

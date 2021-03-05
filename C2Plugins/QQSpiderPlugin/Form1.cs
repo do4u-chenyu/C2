@@ -16,6 +16,7 @@ namespace QQSpiderPlugin
 {
     public partial class Form1 : Form, IPlugin
     {
+        delegate void CloseQrForm();
         string tmpPath = @"session.txt";
         Session session;
         private List<string> idDataSource;
@@ -147,9 +148,7 @@ namespace QQSpiderPlugin
             if (session.IsEmpty() || !QQCrawler.IsValidQQSession(session))
             {
                 Console.WriteLine("无已缓存的可用session，需要重新登录");
-                QrLogin login = new QrLogin();
-                login.Login();
-                session = login.Session;
+                Login();
                 session.Serialize(this.tmpPath);
             }
 
@@ -189,9 +188,7 @@ namespace QQSpiderPlugin
             if (session.IsEmpty() || !QQCrawler.IsValidQQSession(session))
             {
                 Console.WriteLine("无已缓存的可用session，需要重新登录");
-                QrLogin login = new QrLogin();
-                login.Login();
-                session = login.Session;
+                Login();
                 session.Serialize(this.tmpPath);
             }
 
@@ -279,6 +276,53 @@ namespace QQSpiderPlugin
             this.session = new Session();
             if (File.Exists(this.tmpPath))
                 File.Delete(this.tmpPath);
+        }
+        public void Login()
+        {
+            QrLogin login = new QrLogin();
+            byte[] imgBytes = login.GetQRCode().Content;
+            if (imgBytes.Length == 0)
+                return;
+            Image img = Image.FromStream(new MemoryStream(imgBytes));
+            QrCodeForm qrCodeForm = new QrCodeForm(img);
+            Thread _thread = new Thread(() =>
+            {
+                Application.Run(qrCodeForm);
+            });
+            _thread.SetApartmentState(ApartmentState.STA);
+            _thread.Start();
+
+            int count = 0;
+            int maxTimes = 15;
+            while (count < maxTimes)
+            {
+                Dictionary<string, object> result = login.Login();
+                object status = -1;
+                if (result.TryGetValue("status", out status) && (int)status == 2)
+                {
+                    this.Invoke(new CloseQrForm(new CloseQrForm(delegate ()
+                    {
+                        qrCodeForm.Close();
+                        _thread.Abort();
+                    })));
+                    break;
+                }
+                Console.WriteLine(result.ToString(), "请使用QQ手机客户端扫码登录！");
+                System.Threading.Thread.Sleep(1000);
+                count += 1;
+            }
+
+            if (count == maxTimes)
+            {
+                Console.WriteLine("扫码超时！");
+                return;
+            }
+            this.session = login.Session;
+            string skey = this.session.Cookies.GetCookieValue("skey");
+            if (String.IsNullOrEmpty(skey))
+                return;
+            this.session.Ldw = Util.GenBkn(skey);
+            return;
         }
     }
 }
