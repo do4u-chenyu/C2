@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -11,26 +13,26 @@ namespace QQSpiderPlugin
 {
     class QQCrawler
     {
+        public const string filedSeperator = "\t";
         private Session session;
-        private string ldw;
-        private List<string> groupHeaders = new List<string>() { "群名称", "群号", "群人数", "群上限", "群主", "地域", "分类", "标签", "群简介" };
-        private List<string> actHeaders = new List<string>() { "uin", "nick", "country", "province", "city", "age", "lnick", "url" };
+        private List<string> groupHeaders = new List<string>() { "群号", "群名称", "群人数", "群上限", "群主", "地域", "分类", "标签", "群简介" };
+        private List<string> actHeaders = new List<string>() { "账号", "昵称", "国家", "省市", "城市", "性别", "年龄", "头像地址" };
 
-        public QQCrawler(Session session, string ldw)
+        public QQCrawler(Session session)
         {
             this.session = session;
-            this.ldw = ldw;
         }
         /// <summary>
         /// 根据给定的账号爬取信息
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<string> QueryAct(List<string> ids)
+        public string QueryAct(List<string> ids)
         {
-            List<string> results = new List<string>();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(String.Join("\t", actHeaders));
             string url = "https://find.qq.com/proxy/domain/cgi.find.qq.com/qqfind/buddy/search_v3";
-            foreach(string id in ids)
+            foreach (string id in ids)
             {
                 Dictionary<string, string> pairs = new Dictionary<string, string>
                 {
@@ -51,7 +53,7 @@ namespace QQSpiderPlugin
                     { "hcity", "0"},
                     { "hdistrict", "0"},
                     {"online", "1" },
-                    {"ldw", this.ldw }
+                    {"ldw", session.Ldw }
                 };
                 int count = 0, retries = 2;
                 while (count < retries)
@@ -61,10 +63,9 @@ namespace QQSpiderPlugin
                         Response resp = this.session.Post(url, pairs);
                         QueryResult qResult = this.ParseAct(resp.Text);
                         if (qResult.code > 0)
-                        {
-                            results.Add(qResult.result);
-                            Thread.Sleep(1000);
-                        }
+                            sb.Append(qResult.result);
+                        Thread.Sleep(1000);
+                        break;
                     }
                     catch
                     {
@@ -72,57 +73,53 @@ namespace QQSpiderPlugin
                     }
                 }
             }
-            return results;
+            return sb.ToString();
         }
-        public List<string> QueryGroup(List<string> gids)
+        public string QueryGroup(List<string> gids)
         {
-            List<string> results = new List<string>();
-            string url = "http://qun.qq.com/cgi-bin/group_search/pc_group_search";
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(String.Join("\t", groupHeaders));
+            string url = "https://qun.qq.com/cgi-bin/group_search/pc_group_search";
+
             foreach (string id in gids)
             {
-                int page = 0, pageNum = 20;
-                while (page < pageNum)
+                Dictionary<string, string> pairs = new Dictionary<string, string>
                 {
-                    Dictionary<string, string> pairs = new Dictionary<string, string>
+                    {"k", "交友"},
+                    {"n", "8"},
+                    {"st", "1"},
+                    {"iso", "1"},
+                    {"src", "1"},
+                    {"v", "4903"},
+                    {"bkn", session.Ldw},
+                    {"isRecommend", "false"},
+                    {"city_id", "0"},
+                    {"from", "1"},
+                    {"keyword", id},
+                    {"sort", "0"}, // sort type: 0 deafult, 1 menber, 2 active
+                    {"wantnum", "24"},
+                    {"page", "0"},
+                    {"ldw", session.Ldw}
+                };
+                int count = 0, retries = 2;
+                while (count < retries)
+                {
+                    try
                     {
-                        {"k", "交友"},
-                        {"n", "8"},
-                        {"st", "1"},
-                        {"iso", "1"},
-                        {"src", "1"},
-                        {"v", "4903"},
-                        {"bkn", this.ldw},
-                        {"isRecommend", "false"},
-                        {"city_id", "0"},
-                        {"from", "1"},
-                        {"keyword", id},
-                        {"sort", "0"}, // sort type: 0 deafult, 1 menber, 2 active
-                        {"wantnum", "24"},
-                        {"page", page.ToString()},
-                        {"ldw", this.ldw}
-                    };
-                    int count = 0, retries = 2;
-                    while (count < retries)
-                    {
-                        try
-                        {
-                            Response resp = this.session.Post(url, pairs);
-                            QueryResult qResult = this.ParseGroup(resp.Text);
-                            if (qResult.code > 0)
-                            {
-                                results.Add(qResult.result);
-                                Thread.Sleep(1000);
-                            }
-                        }
-                        catch
-                        {
-                            count += 1;
-                        }
+                        Response resp = this.session.Post(url, pairs);
+                        QueryResult qResult = this.ParseGroup(resp.Text);
+                        if (qResult.code > 0)
+                            sb.Append(qResult.result);
+                        Thread.Sleep(1000);
+                        break;
                     }
-                    page += 1;
+                    catch // 这里是捕获不到异常的
+                    {
+                        count += 1;
+                    }
                 }
             }
-            return results;
+            return sb.ToString();
         }
 
         private QueryResult ParseGroup(string text)
@@ -130,48 +127,200 @@ namespace QQSpiderPlugin
             QueryResult qResult = new QueryResult();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(String.Join("\t", this.groupHeaders));
 
             try
             {
-                Dictionary<string, string> result = JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
-                var gList = result["group_list"];
-                foreach(var g in gList)
+                JObject json = JObject.Parse(text);
+                var gList = json["group_list"];
+
+                foreach (var g in gList)
                 {
-                    //string name = this.WTS
+                    GroupInfo groupInfo = new GroupInfo();
+                    try
+                    {
+                        groupInfo = new GroupInfo(g);
+                    }
+                    catch
+                    {
+                        groupInfo = new GroupInfo();
+                    }
+                    sb.AppendLine(groupInfo.ToString());
                 }
-
             }
-            catch
+            catch (Exception)
             {
+                Console.WriteLine(new StackTrace().ToString());
+                Console.WriteLine(text);
+                qResult.code = -1;
             }
-
+            qResult.code = 1;
+            qResult.result = sb.ToString();
             return qResult;
         }
 
         private QueryResult ParseAct(string text)
         {
-            throw new NotImplementedException();
-        }
+            QueryResult qResult = new QueryResult();
+            StringBuilder sb = new StringBuilder();
 
-        /// <summary>
-        /// 根据给定的账号爬取信息
-        /// </summary>
-        /// <param name="ids"></param>
-        /// <returns></returns>
-        public List<string> GroupCrawle(List<string> ids)
-        {
-            List<string> results = new List<string>();
-            foreach (string id in ids)
+            try
             {
-                results.Add(this.Query(id));
-            }
-            return results;
-        }
+                int retcode = -1;
+                ActInfo actInfo;
 
-        protected virtual string Query(string id)
+                JObject json = JObject.Parse(text);
+
+                retcode = (int)json["retcode"];
+                qResult.code = retcode;
+                if (retcode != 0)
+                    return qResult;
+                foreach(var a in ((JObject)((JObject)json["result"])["buddy"])["info_list"])
+                {
+                    try
+                    {
+                        actInfo = new ActInfo(a);
+                    }
+                    catch
+                    {
+                        actInfo = new ActInfo();
+                    }
+                    sb.AppendLine(actInfo.ToString());
+                }
+            }
+            catch 
+            {
+                qResult.code = -1;
+            }
+            qResult.code = 1;
+            qResult.result = sb.ToString();
+            return qResult;
+        }
+        public static bool IsValidQQSession(Session session)
         {
-            throw new NotImplementedException();
+            QQCrawler crawler = new QQCrawler(session);
+            return String.IsNullOrEmpty(crawler.QueryGroup(new List<string>() { "826028580" }));
+        }
+    }
+    public class ActInfo
+    {
+        string uin;
+        string nick;
+        string country;
+        string province;
+        string city;
+        int gender;
+        int age;
+        string url;
+        public ActInfo()
+        {
+            this.uin = String.Empty;
+            this.nick = String.Empty;
+            this.country = String.Empty;
+            this.province = String.Empty;
+            this.city = String.Empty;
+            this.gender = 0;
+            this.age = 0;
+            this.url = String.Empty;
+        }
+        public ActInfo(JToken obj)
+        {
+            this.uin = (string)obj["uin"];
+            this.nick = (string)obj["nick"];
+            this.country = (string)obj["country"];
+            this.province = (string)obj["province"];
+            this.city = (string)obj["city"];
+            this.gender = (int)obj["gender"]; // 1 男 2 女
+            this.age = (int)obj["age"];
+            this.url = (string)obj["url"];
+        }
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(this.uin).Append(QQCrawler.filedSeperator)
+                .Append(this.nick).Append(QQCrawler.filedSeperator)
+                .Append(this.country).Append(QQCrawler.filedSeperator)
+                .Append(this.province).Append(QQCrawler.filedSeperator)
+                .Append(this.city).Append(QQCrawler.filedSeperator)
+                .Append(this.gender).Append(QQCrawler.filedSeperator)
+                .Append(this.age).Append(QQCrawler.filedSeperator)
+                .Append(this.url);
+
+            return sb.ToString();
+        }
+    }
+    public class GroupInfo
+    {
+        string code;
+        string name;
+        string member_num;
+        string max_member_num;
+        string owner_uin;
+        string qaddr;
+        string gcate;
+        string labels;
+        string memo;
+        public GroupInfo()
+        {
+            code = String.Empty;
+            name = String.Empty;
+            member_num = String.Empty;
+            max_member_num = String.Empty;
+            owner_uin = String.Empty;
+            qaddr = String.Empty;
+            gcate = String.Empty;
+            labels = String.Empty;
+            memo = String.Empty;
+        }
+        public GroupInfo(JToken g)
+        {
+            code = (string)g["code"];
+            name = Util.GenRwWTS((string)g["name"]);
+            member_num = (string)g["member_num"];
+            max_member_num = (string)g["max_member_num"];
+            owner_uin = (string)g["owner_uin"];
+
+            StringBuilder qaddrSb = new StringBuilder();
+            foreach (var q in g["qaddr"])
+                qaddrSb.Append(q.ToString());
+            qaddr = qaddrSb.ToString();
+
+            try
+            {
+                StringBuilder gcateSb = new StringBuilder();
+                foreach (var l in g["gcate"])
+                    gcateSb.Append(l.ToString()).Append("|");
+                gcate = Util.GenRwWTS(gcateSb.ToString().Trim('|'));
+            }
+            catch
+            {
+                Console.WriteLine("解析gcat失败");
+            }
+            try
+            {
+                StringBuilder labelSb = new StringBuilder();
+                foreach (var l in g["group_label"])
+                    labelSb.Append(l["item"].ToString()).Append("|");
+                labels = Util.GenRwWTS(labelSb.ToString().Trim('|'));
+            }
+            catch
+            {
+                Console.WriteLine("解析labels失败");
+            }
+            memo = Util.GenRwWTS((string)g["memo"]);
+        }
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(code).Append(QQCrawler.filedSeperator)
+                    .Append(name).Append(QQCrawler.filedSeperator)
+                    .Append(member_num).Append(QQCrawler.filedSeperator)
+                    .Append(max_member_num).Append(QQCrawler.filedSeperator)
+                    .Append(owner_uin).Append(QQCrawler.filedSeperator)
+                    .Append(qaddr).Append(QQCrawler.filedSeperator)
+                    .Append(gcate).Append(QQCrawler.filedSeperator)
+                    .Append(labels).Append(QQCrawler.filedSeperator)
+                    .Append(memo);
+            return sb.ToString();
         }
     }
 }

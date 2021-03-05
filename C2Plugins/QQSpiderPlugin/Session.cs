@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace QQSpiderPlugin
 {
+    [Serializable]
     class Session
     {
         CookieContainer cookies;
         Dictionary<string, string> headers;
-        bool allowDirecte;
+        string ldw;
         public CookieContainer Cookies
         {
             get { return cookies; }
@@ -23,11 +24,16 @@ namespace QQSpiderPlugin
         {
             get { return headers; }
         }
+        public string Ldw
+        {
+            get { return this.ldw; }
+            set { ldw = value; }
+        }
         public Session()
         {
             this.headers = new Dictionary<string, string>();
             this.cookies = new CookieContainer();
-            this.allowDirecte = false;
+            this.ldw = String.Empty;
         }
         public Session(Dictionary<string, string> headers)
         {
@@ -39,10 +45,9 @@ namespace QQSpiderPlugin
             this.headers = headers;
             this.cookies = cookies;
         }
-        public bool AllowDirecte
+        public bool IsEmpty()
         {
-            get { return this.allowDirecte; }
-            set { this.allowDirecte = value; }
+            return this.headers.Keys.Count == 0 || this.cookies.Count == 0 || String.IsNullOrEmpty(this.ldw);
         }
         public void UpdateHeaders(string key, string value)
         {
@@ -99,7 +104,7 @@ namespace QQSpiderPlugin
             //req.AllowAutoRedirect = allowDirecte;
             req.Timeout = timeout;
             string content = FormUrlEncodedContent(postData);
-            byte[] data = Encoding.ASCII.GetBytes(content);
+            byte[] data = Encoding.UTF8.GetBytes(content);
 
             req.Method = "POST";
             req.ContentType = "application/x-www-form-urlencoded";
@@ -117,6 +122,23 @@ namespace QQSpiderPlugin
             foreach(string key in postData.Keys)
                 sb.Append(key).Append("=").Append(postData[key]).Append("&");
             return sb.ToString().Trim('&');
+        }
+        public void Serialize(string filePath)
+        {
+            Util.WriteToDisk<Session>(filePath, this);
+        }
+        public void Deserialize(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                Session newSession = Util.ReadFromDisk<Session>(filePath);
+                if (newSession != null)
+                {
+                    this.cookies = newSession.Cookies;
+                    this.headers = newSession.Headers;
+                    this.ldw = newSession.ldw;
+                }
+            }       
         }
     }
     class Response

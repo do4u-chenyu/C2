@@ -33,7 +33,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
             this.idListView = new System.Windows.Forms.ListView();
-            this.resultLRichTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.IDResultRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.InputActButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,7 +43,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.groupListView = new System.Windows.Forms.ListView();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.GroupRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.InputGroupButton = new System.Windows.Forms.Button();
@@ -91,7 +91,7 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.idListView);
-            this.panel3.Controls.Add(this.resultLRichTextBox1);
+            this.panel3.Controls.Add(this.IDResultRichTextBox);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 33);
             this.panel3.Name = "panel3";
@@ -111,16 +111,16 @@
             this.idListView.View = System.Windows.Forms.View.SmallIcon;
             this.idListView.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // resultLRichTextBox1
+            // IDResultRichTextBox1
             // 
-            this.resultLRichTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.resultLRichTextBox1.Location = new System.Drawing.Point(122, 0);
-            this.resultLRichTextBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.resultLRichTextBox1.Name = "resultLRichTextBox1";
-            this.resultLRichTextBox1.Size = new System.Drawing.Size(522, 368);
-            this.resultLRichTextBox1.TabIndex = 0;
-            this.resultLRichTextBox1.Text = "";
-            this.resultLRichTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.IDResultRichTextBox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.IDResultRichTextBox.Location = new System.Drawing.Point(122, 0);
+            this.IDResultRichTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.IDResultRichTextBox.Name = "IDResultRichTextBox1";
+            this.IDResultRichTextBox.Size = new System.Drawing.Size(522, 368);
+            this.IDResultRichTextBox.TabIndex = 0;
+            this.IDResultRichTextBox.Text = "";
+            this.IDResultRichTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // panel2
             // 
@@ -200,7 +200,7 @@
             // panel6
             // 
             this.panel6.Controls.Add(this.groupListView);
-            this.panel6.Controls.Add(this.richTextBox2);
+            this.panel6.Controls.Add(this.GroupRichTextBox);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 33);
             this.panel6.Name = "panel6";
@@ -219,15 +219,15 @@
             this.groupListView.UseCompatibleStateImageBehavior = false;
             this.groupListView.View = System.Windows.Forms.View.SmallIcon;
             // 
-            // richTextBox2
+            // GroupRichTextBox
             // 
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox2.Location = new System.Drawing.Point(122, 0);
-            this.richTextBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(522, 368);
-            this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "";
+            this.GroupRichTextBox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.GroupRichTextBox.Location = new System.Drawing.Point(122, 0);
+            this.GroupRichTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.GroupRichTextBox.Name = "GroupRichTextBox";
+            this.GroupRichTextBox.Size = new System.Drawing.Size(522, 368);
+            this.GroupRichTextBox.TabIndex = 2;
+            this.GroupRichTextBox.Text = "";
             // 
             // panel5
             // 
@@ -333,7 +333,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ListView idListView;
-        private System.Windows.Forms.RichTextBox resultLRichTextBox1;
+        private System.Windows.Forms.RichTextBox IDResultRichTextBox;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button ActStartButton;
@@ -342,7 +342,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ListView groupListView;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox GroupRichTextBox;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Button InputGroupButton;

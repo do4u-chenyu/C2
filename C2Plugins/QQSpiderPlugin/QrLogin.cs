@@ -15,10 +15,6 @@ namespace QQSpiderPlugin
         private string jsVersion = "10226";
         private string sourceURL = "http://find.qq.com/index.html?version=1&im_version=5533&width=910&height=610&search_target=0";
         Session session;
-        public CookieContainer Cookies
-        {
-            get { return this.session.Cookies; }
-        }
         public Session Session
         {
             get { return this.session; }
@@ -81,7 +77,7 @@ namespace QQSpiderPlugin
             }
             return resp;
         }
-        public Dictionary<string, object> Login()
+        private Dictionary<string, object> LoginOnce()
         {
             string loginSig = this.session.Cookies.GetCookieValue("pt_login_sig");
             string qrSig = this.session.Cookies.GetCookieValue("qrsig");
@@ -139,11 +135,11 @@ namespace QQSpiderPlugin
             loginResult.Add("errorMsg", errorMsg);
             return loginResult;
         }
-        public string GetLDW()
+        public void Login()
         {
             byte[] imgBytes = this.GetQRCode().Content;
             if (imgBytes.Length == 0)
-                return String.Empty;
+                return;
             Image img = Image.FromStream(new MemoryStream(imgBytes));
             Thread _thread = new Thread(() =>
             {
@@ -156,7 +152,7 @@ namespace QQSpiderPlugin
             int maxTimes = 15;
             while (count < maxTimes)
             {
-                Dictionary<string, object> result = this.Login();
+                Dictionary<string, object> result = this.LoginOnce();
                 object status = -1;
                 if (result.TryGetValue("status", out status))
                     if ((int)status == 2)
@@ -169,12 +165,13 @@ namespace QQSpiderPlugin
             if (count == maxTimes)
             {
                 Console.WriteLine("扫码超时！");
-                return String.Empty;
+                return;
             }
             string skey = this.session.Cookies.GetCookieValue("skey");
             if (String.IsNullOrEmpty(skey))
-                return String.Empty;
-            return Util.GenBkn(skey);
+                return;
+            this.session.Ldw = Util.GenBkn(skey);
+            return;
         }
     }
 }

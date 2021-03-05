@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,19 +15,21 @@ namespace QQSpiderPlugin
 {
     public partial class Form1 : Form, IPlugin
     {
-        QrLogin qrLogin;
+        string tmpPath = @"session.txt";
+        Session session;
         private List<string> idDataSource;
         private List<string> grpDataSource;
-        private List<string> idQueryResult;
-        private List<string> grpQueryResult;
+        private string idQueryResult;
+        private string grpQueryResult;
+
         public Form1()
         {
             InitializeComponent();
+            session = new Session();
             idDataSource = new List<string>();
             grpDataSource = new List<string>();
-            idQueryResult = new List<string>();
-            grpQueryResult = new List<string>();
-            qrLogin = new QrLogin();
+            idQueryResult = String.Empty;
+            grpQueryResult = String.Empty;
         }
 
         public string GetPluginDescription()
@@ -87,19 +90,10 @@ namespace QQSpiderPlugin
         }
         private void UpdateRichTextView(int tabIndex)
         {
-            StringBuilder sb = new StringBuilder();
             if (tabIndex == 0)
-            {
-                foreach (string line in this.idQueryResult)
-                    sb.AppendLine(line);
-            }
+                this.IDResultRichTextBox.Text = idQueryResult;
             else
-            {
-                foreach (string line in this.grpQueryResult)
-                    sb.AppendLine(line);
-            }
-
-            this.resultLRichTextBox1.Text = sb.ToString();
+                this.GroupRichTextBox.Text = grpQueryResult;
         }
 
         private void ImportData(int tabIndex)
@@ -156,17 +150,30 @@ namespace QQSpiderPlugin
         }
         private void Start(int tabIndex)
         {
-            QrLogin login = new QrLogin();
-            string ldw = login.GetLDW();
+#if DEBUG
+            if (session.IsEmpty() && File.Exists(this.tmpPath))
+                session.Deserialize(this.tmpPath);
+#endif
+            if (session.IsEmpty() && !QQCrawler.IsValidQQSession(session))
+            {
+                Console.WriteLine("无已缓存的可用session，需要重新登录");
+                QrLogin login = new QrLogin();
+                login.Login();
+                session = login.Session;
+                session.Serialize(this.tmpPath);
+            }
+
 
             List<string> dataSource = tabIndex == 0 ? this.idDataSource : this.grpDataSource;
 
-            if (String.IsNullOrEmpty(ldw))
+            if (String.IsNullOrEmpty(session.Ldw))
             {
                 ShowMessageBox("登录失败，请重新扫描登录");
+                session = new Session();
                 return;
             }
-            QQCrawler crawler = new QQCrawler(login.Session, ldw);
+
+            QQCrawler crawler = new QQCrawler(session);
 
             if (dataSource.Count == 0)
             {
@@ -176,7 +183,7 @@ namespace QQSpiderPlugin
             if (tabIndex == 0)
                 idQueryResult = crawler.QueryAct(dataSource);
             else if (tabIndex == 1)
-                idQueryResult = crawler.QueryGroup(dataSource);
+                grpQueryResult = crawler.QueryGroup(dataSource);
             UpdateRichTextView(tabIndex);
         }
         private void button2_Click(object sender, EventArgs e)
