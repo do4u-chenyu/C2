@@ -125,7 +125,6 @@
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = true;
-            this.MinimizeBox = true;
             this.Name = "WebBrowserDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebBrowserDialog";
