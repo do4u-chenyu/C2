@@ -88,12 +88,14 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
             this.radioButton1.Font = new System.Drawing.Font("宋体", 10F);
             this.radioButton1.Location = new System.Drawing.Point(12, 18);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(129, 23);
             this.radioButton1.TabIndex = 4;
+            this.radioButton1.TabStop = true;
             this.radioButton1.Text = "MD5(128位)";
             this.toolTip1.SetToolTip(this.radioButton1, "使用MD5(128位)编码加密字符串");
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -102,14 +104,12 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
             this.radioButton2.Font = new System.Drawing.Font("宋体", 10F);
             this.radioButton2.Location = new System.Drawing.Point(265, 18);
             this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(90, 23);
             this.radioButton2.TabIndex = 5;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Base64";
             this.toolTip1.SetToolTip(this.radioButton2, "使用Base64编码对字符串进行编码解码");
             this.radioButton2.UseVisualStyleBackColor = true;

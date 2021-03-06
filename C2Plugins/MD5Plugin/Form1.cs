@@ -45,12 +45,17 @@ namespace MD5Plugin
             return this.ShowDialog();
         }
 
+
+
         //md5(128位)
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             //button1.Visible;
             button1.Text = "加密 =>";
             button2.Visible = false;
+            textBox1.Text = "";
+            textBox2.Text = "";
+
         }
 
         //md5(64位)
@@ -58,6 +63,8 @@ namespace MD5Plugin
         {
             button1.Text = "加密 =>";
             button2.Visible = false;
+            textBox1.Text = "";
+            textBox2.Text = "";
         }
 
         //Base64
@@ -66,6 +73,8 @@ namespace MD5Plugin
             button1.Text = "编码 =>";
             button2.Text = "<= 解码";
             button2.Visible = true;
+            textBox1.Text = "";
+            textBox2.Text = "";
         }
 
         //url编解码
@@ -74,7 +83,11 @@ namespace MD5Plugin
             button1.Text = "编码 =>";
             button2.Text = "<= 解码";
             button2.Visible = true;
+            textBox1.Text = "";
+            textBox2.Text = "";
         }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -216,6 +229,10 @@ namespace MD5Plugin
     
             
         }
+
+
+
+
 
         //public void GetUtf8(string str)
         //{
