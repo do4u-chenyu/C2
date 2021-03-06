@@ -44,22 +44,28 @@
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.textBox1.Location = new System.Drawing.Point(8, 69);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(613, 599);
             this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "请把你需要加密的内容粘贴在这里";
+            this.textBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseDown);
             // 
             // textBox2
             // 
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox2.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.textBox2.Location = new System.Drawing.Point(748, 69);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(613, 599);
             this.textBox2.TabIndex = 1;
+            this.textBox2.Text = "加密后的结果";
+            this.textBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.textBox2_MouseDown);
             // 
             // button1
             // 
