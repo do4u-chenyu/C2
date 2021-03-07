@@ -10,11 +10,11 @@ namespace C2.Database
     class PostgreDAOImpl : BaseDAOImpl
     {
         private static readonly LogUtil log = LogUtil.GetInstance("PostgreDAOImpl");
-        private readonly string getUserSQL = @"";
-        private readonly string getTablesSQL = @"";
-        private readonly string getTableContentSQL = @"";
-        private readonly string getColNameByTableSQL = "";
-        private readonly string dataBaseName;
+        //private readonly string getUserSQL = @"";
+        //private readonly string getTablesSQL = @"";
+        //private readonly string getTableContentSQL = @"";
+        //private readonly string getColNameByTableSQL = "";
+        //private readonly string dataBaseName;
 
         public override bool TestConn()
         {

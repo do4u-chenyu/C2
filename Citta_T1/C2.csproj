@@ -239,6 +239,7 @@
     <Compile Include="Database\DAOFactory.cs" />
     <Compile Include="Database\HiveDAOImpl.cs" />
     <Compile Include="Database\OracleDAOImpl.cs" />
+    <Compile Include="Database\PostgreDAOImpl.cs" />
     <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\SimpleBar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\StackBar.cs" />
