@@ -145,6 +145,7 @@
             this.title = new System.Windows.Forms.Label();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.currentVersion = new System.Windows.Forms.Label();
             this.mainTabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
@@ -1186,6 +1187,7 @@
             this.newVersion.Controls.Add(this.sizeLable);
             this.newVersion.Controls.Add(this.versionLable);
             this.newVersion.Controls.Add(this.title);
+            this.newVersion.Controls.Add(this.currentVersion);
             this.newVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.newVersion.Location = new System.Drawing.Point(0, 0);
             this.newVersion.Name = "newVersion";
@@ -1324,6 +1326,17 @@
             this.pythonOpenFileDialog.Filter = "Python解释器 |python.exe|可执行文件|*.exe";
             this.pythonOpenFileDialog.RestoreDirectory = true;
             this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
+            // 
+            // currentVersion
+            // 
+            this.currentVersion.AutoSize = true;
+            this.currentVersion.Font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.currentVersion.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.currentVersion.Location = new System.Drawing.Point(564, 12);
+            this.currentVersion.Name = "currentVersion";
+            this.currentVersion.Size = new System.Drawing.Size(61, 22);
+            this.currentVersion.TabIndex = 14;
+            this.currentVersion.Text = "V1.1.3";
             // 
             // ConfigForm
             // 
@@ -1484,5 +1497,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox baiduHeatTB;
         private System.Windows.Forms.TextBox baiduVerAPITB;
+        private System.Windows.Forms.Label currentVersion;
     }
 }
