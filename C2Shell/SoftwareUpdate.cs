@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2Shell.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -16,13 +17,14 @@ namespace C2Shell
         private readonly string updatePath = Path.Combine(Application.StartupPath, "update");
         private readonly string rollbackPath = Path.Combine(Application.StartupPath, "backup");
         private readonly string strPathExe = Path.Combine(Application.StartupPath, "C2.exe");
-        private readonly string configFilePath = Path.Combine(Application.StartupPath, "C2.exe.config"); 
-
+        private readonly string configFilePath = Path.Combine(Application.StartupPath, "C2.exe.config");
+        private readonly string errorInfo = "更新失败,正在回滚更改";
+        private UpdateProgressBar progress;
 
         public string ZipName  {get;set; }
         public SoftwareUpdate()
         {
-
+            this.progress = new UpdateProgressBar();
         }
 
 
@@ -54,6 +56,8 @@ namespace C2Shell
             if (!zipName.EndsWith(".zip"))
                 return !success;
             string scriptPath = Path.Combine(updatePath, "setup.bat");
+          
+            progress.Show();
             // 创建文件备份路径
             try
             {
@@ -63,26 +67,31 @@ namespace C2Shell
             }
             catch
             {
+                progress.Status = errorInfo;
                 return !success;
             }
 
-            // 解压update目录  
+            // 解压update目录 
+            progress.SpeedValue = 10; // 进度
             string zipPath = Path.Combine(updatePath, zipName);
             string errMsg = Utils.ZipUtil.UnZipFile(zipPath, updatePath);
             if (!string.IsNullOrEmpty(errMsg))
             {
+                progress.Status = errorInfo;
                 return !success;
-            }             
-
+            }
+            progress.SpeedValue = 20; // 进度
             // 执行 setup.bat脚本 ，进行文件备份和替换     
-            if (ExecuteCmdScript(scriptPath))
+            if (ExecuteCmdScript(scriptPath, true))
             {
                 // 修改配置文件版本号
-                string newVersion = Path.GetFileNameWithoutExtension(zipName);    
+                string newVersion = Path.GetFileNameWithoutExtension(zipName);
                 Utils.XmlUtil.UpdateVersion(configFilePath, newVersion);
+                progress.Status = "更新成功";
                 return success;
              
             }
+            progress.Status = errorInfo;
             return !success;
 
         }
@@ -98,7 +107,7 @@ namespace C2Shell
                     return;
                 }
                 string scriptPath = Path.Combine(updatePath, "rollback.bat");
-                ExecuteCmdScript(scriptPath);
+                ExecuteCmdScript(scriptPath,false);
             }
             catch
             { }
@@ -133,10 +142,10 @@ namespace C2Shell
                     process.Dispose();//释放资源
                 process.Close();
             }
-          
-          
+
+
         }
-        public bool ExecuteCmdScript(string scriptPath)
+        public bool ExecuteCmdScript(string scriptPath, bool isUpdate)
         {
             bool success = true;
             if (!File.Exists(scriptPath))
@@ -158,12 +167,21 @@ namespace C2Shell
                 using (StreamReader sr = new StreamReader(scriptPath))
                 {
                     string line;
+                   
                     while (!string.IsNullOrEmpty(line = sr.ReadLine()))
                     {
                         process.StandardInput.WriteLine(line);
+                       
+                        if (isUpdate && this.progress.SpeedValue != 98)
+                            this.progress.SpeedValue += 1; // 脚本超过68条命令，剩下2%就一直等待剩下所有命令完成
+                        if(!isUpdate && this.progress.SpeedValue != 2)
+                            this.progress.SpeedValue -= 1; 
                     }
                     process.StandardInput.WriteLine("exit");
-                   
+                    if (isUpdate)
+                        this.progress.SpeedValue = 100;//所有命令成功执行，进度则100%
+                    else
+                        this.progress.SpeedValue = 0;//回滚完成，进度则0%
                 }
                 process.WaitForExit(); 
                 if (process.ExitCode != 0)
@@ -183,5 +201,6 @@ namespace C2Shell
             }        
             return success;
         }
-    }
+       
+ }
 }
