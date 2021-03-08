@@ -77,10 +77,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="cookbook\大师Linux\" />
-    <Folder Include="cookbook\大师Python\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\cookbook.zip" />
   </ItemGroup>
