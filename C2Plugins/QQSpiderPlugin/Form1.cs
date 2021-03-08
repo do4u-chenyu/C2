@@ -145,6 +145,7 @@ namespace QQSpiderPlugin
 
         private void ActStartButton_Click(object sender, EventArgs e)
         {
+            this.IDResultRichTextBox.Text = String.Empty;
             List<string> dataSource = this.idDataSource;
             ResetProgressBar(0, dataSource.Count);
             if (dataSource.Count == 0)
@@ -164,7 +165,7 @@ namespace QQSpiderPlugin
             {
                 Console.WriteLine("无已缓存的可用session，需要重新登录");
                 Login();
-                session.Serialize(this.TmpPath);
+                //session.Serialize(this.TmpPath);
             }
 
             if (String.IsNullOrEmpty(session.Ldw))
@@ -175,8 +176,6 @@ namespace QQSpiderPlugin
             }
 
             QQCrawler crawler = new QQCrawler(session);
-            this.IDResultRichTextBox.Text = String.Empty;
-
 
             StringBuilder tmpResult = new StringBuilder();
             tmpResult.AppendLine(String.Join("\t", actHeaders));
@@ -191,6 +190,7 @@ namespace QQSpiderPlugin
 
         private void GroupStartButton_Click(object sender, EventArgs e)
         {
+            this.GroupRichTextBox.Text = String.Empty;
             List<string> dataSource = this.grpDataSource;
             ResetProgressBar(1, dataSource.Count);
             if (dataSource.Count == 0)
@@ -199,14 +199,14 @@ namespace QQSpiderPlugin
                 return;
             }
 
-            if (session.IsEmpty() && File.Exists(this.TmpPath))
-                session.Deserialize(this.TmpPath);
+            //if (session.IsEmpty() && File.Exists(this.TmpPath))
+            //    session.Deserialize(this.TmpPath);
 
             if (session.IsEmpty() || !QQCrawler.IsValidQQSession(session))
             {
                 Console.WriteLine("无已缓存的可用session，需要重新登录");
                 Login();
-                session.Serialize(this.TmpPath);
+                //session.Serialize(this.TmpPath);
             }
 
             if (String.IsNullOrEmpty(session.Ldw))
@@ -218,8 +218,6 @@ namespace QQSpiderPlugin
 
 
             QQCrawler crawler = new QQCrawler(session);
-            this.GroupRichTextBox.Text = String.Empty;
-
 
             StringBuilder tmpResult = new StringBuilder();
             tmpResult.AppendLine(String.Join("\t", groupHeaders));
@@ -246,37 +244,25 @@ namespace QQSpiderPlugin
                 switch (tabIndex)
                 {
                     case 0:
-                        //this.IDResultRichTextBox.Text = tmpResult.ToString();
-                        UpdateActStatus(result);
+                        UpdateStatus(this.IDResultRichTextBox, result);
                         this.progressBar1.Value += 1;
                         break;
                     case 1:
-                        //this.GroupRichTextBox.Text = tmpResult.ToString();
-                        UpdateGroupStatus(result);
+                        UpdateStatus(this.GroupRichTextBox, result);
                         this.progressBar2.Value += 1;
                         break;
                 }
             }
-
         }
-        void UpdateGroupStatus(string textMessage)
+        void UpdateStatus(RichTextBox richTextBox, string textMessage)
         {
-            if (this.GroupRichTextBox.InvokeRequired)
+            if (richTextBox.InvokeRequired)
             {
-                this.GroupRichTextBox.Invoke(new MethodInvoker(() => UpdateGroupStatus(textMessage)));
+                richTextBox.Invoke(new MethodInvoker(() => UpdateStatus(richTextBox, textMessage)));
                 return;
             }
-            this.GroupRichTextBox.AppendText(textMessage);
-        }
-        void UpdateActStatus(string textMessage)
-        {
-            if (this.IDResultRichTextBox.InvokeRequired)
-            {
-                this.IDResultRichTextBox.Invoke(new MethodInvoker(() => UpdateActStatus(textMessage)));
-                return;
-            }
-            this.IDResultRichTextBox.AppendText(textMessage);
-            this.IDResultRichTextBox.Refresh();
+            richTextBox.AppendText(textMessage);
+            richTextBox.Refresh();
         }
         private void button2_Click(object sender, EventArgs e)
         {
