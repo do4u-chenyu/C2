@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -58,7 +59,7 @@ namespace QQSpiderPlugin
                 }
             }
         }
-        public static T ReadFromDisk<T>(string file)
+        public static Session ReadFromDisk(string file)
         {
             try
             {
@@ -67,14 +68,53 @@ namespace QQSpiderPlugin
                     Console.Out.Write("Reading object from disk... ");
                     BinaryFormatter formatter = new BinaryFormatter();
                     Console.Out.WriteLine("Done.");
-                    return (T)formatter.Deserialize(stream);
+                    return (Session)formatter.Deserialize(stream);
                 }
             }
             catch (Exception e)
             {
                 Console.Out.WriteLine("Problem reading cookies from disk: " + e.GetType());
-                return default(T);
+                return new Session();
             }
+        }
+        public static string TryGetSysTempDir()
+        {
+            string tempDir;
+            try
+            {
+                tempDir = Path.GetTempPath();
+            }
+            catch (System.Security.SecurityException)
+            {
+                tempDir = string.Empty;
+            }
+            return tempDir;
+        }
+        public static string TryGetStringFromJToken(JToken token, string value)
+        {
+            string result = String.Empty;
+            try
+            {
+                result = (string)token[value];
+            }
+            catch
+            {
+                
+            }
+            return result;
+        }
+        public static int TryGetIntFromJToken(JToken token, string value)
+        {
+            int result = 0;
+            try
+            {
+                result = (int)token[value];
+            }
+            catch
+            {
+
+            }
+            return result;
         }
     }
 }

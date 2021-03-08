@@ -23,12 +23,23 @@ namespace QQSpiderPlugin
         private List<string> grpDataSource;
         private List<string> groupHeaders = new List<string>() { "群号", "群名称", "群人数", "群上限", "群主", "地域", "分类", "标签", "群简介" };
         private List<string> actHeaders = new List<string>() { "账号", "昵称", "国家", "省市", "城市", "性别", "年龄", "头像地址" };
-
+        public string TmpPath
+        {
+            get { return Path.Combine(Util.TryGetSysTempDir(), tmpPath); }
+        }
 
         public Form1()
         {
             InitializeComponent();
+            InitializeForm();
+        }
+        private void InitializeForm()
+        {
             session = new Session();
+            this.idListView.Text = String.Empty;
+            this.groupListView.Text = String.Empty;
+            this.IDResultRichTextBox.Text = String.Empty;
+            this.GroupRichTextBox.Text = String.Empty;
             idDataSource = new List<string>();
             grpDataSource = new List<string>();
         }
@@ -142,14 +153,18 @@ namespace QQSpiderPlugin
                 return;
             }
 
-            if (session.IsEmpty() && File.Exists(this.tmpPath))
-                session.Deserialize(this.tmpPath);
+            //if (session.IsEmpty() && File.Exists(this.TmpPath))
+            //{
+            //    Console.WriteLine(String.Format("尝试从{0}中读取缓存Cookie", this.TmpPath));
+            //    session.Deserialize(this.TmpPath);
+            //}
+
 
             if (session.IsEmpty() || !QQCrawler.IsValidQQSession(session))
             {
                 Console.WriteLine("无已缓存的可用session，需要重新登录");
                 Login();
-                session.Serialize(this.tmpPath);
+                session.Serialize(this.TmpPath);
             }
 
             if (String.IsNullOrEmpty(session.Ldw))
@@ -160,10 +175,12 @@ namespace QQSpiderPlugin
             }
 
             QQCrawler crawler = new QQCrawler(session);
+            this.IDResultRichTextBox.Text = String.Empty;
 
 
             StringBuilder tmpResult = new StringBuilder();
             tmpResult.AppendLine(String.Join("\t", actHeaders));
+            this.IDResultRichTextBox.Text = tmpResult.ToString();
             this.Cursor = Cursors.WaitCursor;
             foreach (string id in dataSource)
                 ShowResult(crawler.QueryAct(id), 0, tmpResult);
@@ -182,14 +199,14 @@ namespace QQSpiderPlugin
                 return;
             }
 
-            if (session.IsEmpty() && File.Exists(this.tmpPath))
-                session.Deserialize(this.tmpPath);
+            if (session.IsEmpty() && File.Exists(this.TmpPath))
+                session.Deserialize(this.TmpPath);
 
             if (session.IsEmpty() || !QQCrawler.IsValidQQSession(session))
             {
                 Console.WriteLine("无已缓存的可用session，需要重新登录");
                 Login();
-                session.Serialize(this.tmpPath);
+                session.Serialize(this.TmpPath);
             }
 
             if (String.IsNullOrEmpty(session.Ldw))
@@ -201,14 +218,17 @@ namespace QQSpiderPlugin
 
 
             QQCrawler crawler = new QQCrawler(session);
+            this.GroupRichTextBox.Text = String.Empty;
 
 
             StringBuilder tmpResult = new StringBuilder();
             tmpResult.AppendLine(String.Join("\t", groupHeaders));
+            this.IDResultRichTextBox.Text = tmpResult.ToString();
             this.Cursor = Cursors.WaitCursor;
             foreach (string id in dataSource)
                 ShowResult(crawler.QueryGroup(id), 1, tmpResult);
             this.GroupRichTextBox.Text = tmpResult.ToString();
+            this.Cursor = Cursors.Arrow;
         }
 
         private void ResetProgressBar(int tabIndex, int count)
@@ -220,29 +240,44 @@ namespace QQSpiderPlugin
         }
         private void ShowResult(string result, int tabIndex, StringBuilder tmpResult)
         {
-            if (!String.IsNullOrEmpty(result) && (tabIndex == 0 || tabIndex == 1) && tmpResult != null)
+            if ((tabIndex == 0 || tabIndex == 1) && tmpResult != null)
             {
-                if (progressBar1.Value % 50 == 0)
-                {
-                    Thread.Sleep(500);
-
-                }
                 tmpResult.Append(result);
                 switch (tabIndex)
                 {
                     case 0:
-                        this.IDResultRichTextBox.Text = tmpResult.ToString();
+                        //this.IDResultRichTextBox.Text = tmpResult.ToString();
+                        UpdateActStatus(result);
                         this.progressBar1.Value += 1;
                         break;
                     case 1:
-                        this.GroupRichTextBox.Text = tmpResult.ToString();
+                        //this.GroupRichTextBox.Text = tmpResult.ToString();
+                        UpdateGroupStatus(result);
                         this.progressBar2.Value += 1;
                         break;
                 }
             }
 
         }
-
+        void UpdateGroupStatus(string textMessage)
+        {
+            if (this.GroupRichTextBox.InvokeRequired)
+            {
+                this.GroupRichTextBox.Invoke(new MethodInvoker(() => UpdateGroupStatus(textMessage)));
+                return;
+            }
+            this.GroupRichTextBox.AppendText(textMessage);
+        }
+        void UpdateActStatus(string textMessage)
+        {
+            if (this.IDResultRichTextBox.InvokeRequired)
+            {
+                this.IDResultRichTextBox.Invoke(new MethodInvoker(() => UpdateActStatus(textMessage)));
+                return;
+            }
+            this.IDResultRichTextBox.AppendText(textMessage);
+            this.IDResultRichTextBox.Refresh();
+        }
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -274,8 +309,8 @@ namespace QQSpiderPlugin
         private void ResetCookie()
         {
             this.session = new Session();
-            if (File.Exists(this.tmpPath))
-                File.Delete(this.tmpPath);
+            if (File.Exists(this.TmpPath))
+                File.Delete(this.TmpPath);
         }
         public void Login()
         {
@@ -293,7 +328,7 @@ namespace QQSpiderPlugin
             _thread.Start();
 
             int count = 0;
-            int maxTimes = 15;
+            int maxTimes = 30;
             while (count < maxTimes)
             {
                 Dictionary<string, object> result = login.Login();

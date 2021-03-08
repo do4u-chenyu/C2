@@ -131,7 +131,7 @@ namespace QQSpiderPlugin
         {
             if (File.Exists(filePath))
             {
-                Session newSession = Util.ReadFromDisk<Session>(filePath);
+                Session newSession = Util.ReadFromDisk(filePath);
                 if (newSession != null)
                 {
                     this.cookies = newSession.Cookies;

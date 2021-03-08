@@ -56,7 +56,7 @@ namespace QQSpiderPlugin
                 try
                 {
                     Response resp = this.session.Post(url, pairs);
-                    QueryResult qResult = this.ParseAct(resp.Text);
+                    QueryResult qResult = this.ParseAct(id, resp.Text);
                     if (qResult.code > 0)
                         sb.Append(qResult.result);
                     Thread.Sleep(1000);
@@ -98,7 +98,7 @@ namespace QQSpiderPlugin
                 try
                 {
                     Response resp = this.session.Post(url, pairs);
-                    QueryResult qResult = this.ParseGroup(resp.Text);
+                    QueryResult qResult = this.ParseGroup(id, resp.Text);
                     if (qResult.code > 0)
                         sb.Append(qResult.result);
                     Thread.Sleep(1000);
@@ -112,7 +112,7 @@ namespace QQSpiderPlugin
             return sb.ToString();
         }
 
-        private QueryResult ParseGroup(string text)
+        private QueryResult ParseGroup(string id, string text)
         {
             QueryResult qResult = new QueryResult();
 
@@ -132,23 +132,23 @@ namespace QQSpiderPlugin
                     }
                     catch
                     {
-                        groupInfo = new GroupInfo();
+                        groupInfo = new GroupInfo(id);
                     }
                     sb.AppendLine(groupInfo.ToString());
                 }
             }
             catch (Exception)
             {
-                Console.WriteLine(new StackTrace().ToString());
-                Console.WriteLine(text);
                 qResult.code = -1;
+                if (sb.Length == 0)
+                    sb.AppendLine(new GroupInfo(id).ToString());
             }
             qResult.code = 1;
             qResult.result = sb.ToString();
             return qResult;
         }
 
-        private QueryResult ParseAct(string text)
+        private QueryResult ParseAct(string id, string text)
         {
             QueryResult qResult = new QueryResult();
             StringBuilder sb = new StringBuilder();
@@ -172,7 +172,7 @@ namespace QQSpiderPlugin
                     }
                     catch
                     {
-                        actInfo = new ActInfo();
+                        actInfo = new ActInfo(id);
                     }
                     sb.AppendLine(actInfo.ToString());
                 }
@@ -180,6 +180,8 @@ namespace QQSpiderPlugin
             catch 
             {
                 qResult.code = -1;
+                if (sb.Length == 0)
+                    sb.AppendLine(new ActInfo(id).ToString());
             }
             qResult.code = 1;
             qResult.result = sb.ToString();
@@ -212,8 +214,27 @@ namespace QQSpiderPlugin
             this.age = 0;
             this.url = String.Empty;
         }
+        public ActInfo(string uin)
+        {
+            this.uin = uin;
+            this.nick = String.Empty;
+            this.country = String.Empty;
+            this.province = String.Empty;
+            this.city = String.Empty;
+            this.gender = 0;
+            this.age = 0;
+            this.url = String.Empty;
+        }
         public ActInfo(JToken obj)
         {
+            //this.uin = Util.TryGetStringFromJToken(obj, "uin");
+            //this.nick = Util.TryGetStringFromJToken(obj, "nick");
+            //this.country = Util.TryGetStringFromJToken(obj, "country");
+            //this.province = Util.TryGetStringFromJToken(obj, "province");
+            //this.city = Util.TryGetStringFromJToken(obj, "city");
+            //this.gender = Util.TryGetIntFromJToken(obj, "gender"); // 1 男 2 女
+            //this.age = Util.TryGetIntFromJToken(obj, "age");
+            //this.url = Util.TryGetStringFromJToken(obj, "url");
             this.uin = (string)obj["uin"];
             this.nick = (string)obj["nick"];
             this.country = (string)obj["country"];
@@ -260,6 +281,18 @@ namespace QQSpiderPlugin
             gcate = String.Empty;
             labels = String.Empty;
             memo = String.Empty;
+        }
+        public GroupInfo(string code)
+        {
+            this.code = code;
+            this.name = String.Empty;
+            this.member_num = String.Empty;
+            this.max_member_num = String.Empty;
+            this.owner_uin = String.Empty;
+            this.qaddr = String.Empty;
+            this.gcate = String.Empty;
+            this.labels = String.Empty;
+            this.memo = String.Empty;
         }
         public GroupInfo(JToken g)
         {
