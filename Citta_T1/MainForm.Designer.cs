@@ -112,6 +112,7 @@ namespace C2
             this.tabPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+
             // 
             // headPanel
             // 

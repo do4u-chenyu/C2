@@ -242,6 +242,7 @@
     <Compile Include="Database\DAOFactory.cs" />
     <Compile Include="Database\HiveDAOImpl.cs" />
     <Compile Include="Database\OracleDAOImpl.cs" />
+    <Compile Include="Database\PostgreDAOImpl.cs" />
     <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\SimpleBar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\StackBar.cs" />
@@ -2946,12 +2947,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

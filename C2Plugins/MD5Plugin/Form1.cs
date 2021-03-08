@@ -45,12 +45,18 @@ namespace MD5Plugin
             return this.ShowDialog();
         }
 
+
+
         //md5(128位)
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             //button1.Visible;
             button1.Text = "加密 =>";
             button2.Visible = false;
+            textBox1.Text = "请把你需要加密的内容粘贴在这里";
+            textBox2.Text = "加密后的结果";
+            textBox1.ForeColor = Color.DarkGray;
+            textBox2.ForeColor = Color.DarkGray;
         }
 
         //md5(64位)
@@ -58,6 +64,10 @@ namespace MD5Plugin
         {
             button1.Text = "加密 =>";
             button2.Visible = false;
+            textBox1.Text = "请把你需要加密的内容粘贴在这里";
+            textBox2.Text = "加密后的结果";
+            textBox1.ForeColor = Color.DarkGray;
+            textBox2.ForeColor = Color.DarkGray;
         }
 
         //Base64
@@ -66,6 +76,10 @@ namespace MD5Plugin
             button1.Text = "编码 =>";
             button2.Text = "<= 解码";
             button2.Visible = true;
+            textBox1.Text = "请输入你要用Base64加密的内容";
+            textBox2.Text = "请输入你要用Base64解密的内容";
+            textBox1.ForeColor = Color.DarkGray;
+            textBox2.ForeColor = Color.DarkGray;
         }
 
         //url编解码
@@ -74,6 +88,39 @@ namespace MD5Plugin
             button1.Text = "编码 =>";
             button2.Text = "<= 解码";
             button2.Visible = true;
+            textBox1.Text = "请输入你要编码的Url";
+            textBox2.Text = "请输入你要解码的Url";
+            textBox1.ForeColor = Color.DarkGray;
+            textBox2.ForeColor = Color.DarkGray;
+
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            if(textBox1.Text == "请把你需要加密的内容粘贴在这里" || textBox1.Text== "请输入你要用Base64加密的内容" || textBox1.Text == "请输入你要编码的Url")
+            {
+                textBox1.Text = "";
+            }
+            textBox1.ForeColor = Color.Black;
+
+        }
+
+        private void textBox1_MouseDown(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "请把你需要加密的内容粘贴在这里" || textBox1.Text == "请输入你要用Base64加密的内容" || textBox1.Text == "请输入你要编码的Url")
+            {
+                textBox1.Text = "";
+            }
+            textBox1.ForeColor = Color.Black;
+        }
+
+        private void textBox2_MouseDown(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "加密后的结果" || textBox2.Text == "请输入你要用Base64解密的内容" || textBox2.Text == "请输入你要解码的Url")
+            {
+                textBox2.Text = "";
+            }
+            textBox2.ForeColor = Color.Black;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -99,20 +146,25 @@ namespace MD5Plugin
             switch (num)
             {
                 case 1:
+                    textBox2.ForeColor = Color.Black;
                     Md5Code_128(textBox1.Text);
                     break;
                 case 2:
+                    textBox2.ForeColor = Color.Black;
                     Md5Code_64(textBox1.Text);
                     break;
                 case 3:
+                    textBox2.ForeColor = Color.Black;
                     //Console.WriteLine("base64编码");
                     EncodeBase64(textBox1.Text);
                     break;
                 case 4:
+                    textBox2.ForeColor = Color.Black;
                     //Console.WriteLine("UrlDecode编码");
                     UrlEncode(textBox1.Text);
                     break;
                 default:
+                    textBox2.ForeColor = Color.Black;
                     //Console.WriteLine("base64");
                     EncodeBase64(textBox1.Text);
                     break;
@@ -133,13 +185,16 @@ namespace MD5Plugin
             switch (num)
             {
                 case 3:
+                    textBox1.ForeColor = Color.Black;
                     DecodeBase64(textBox2.Text);
                     break;
                 case 4:
+                    textBox1.ForeColor = Color.Black;
                     //Console.WriteLine("UrlDecode解码");
                     UrlDecode(textBox2.Text);
                     break;
                 default:
+                    textBox1.ForeColor = Color.Black;
                     //Console.WriteLine("base64解码");
                     DecodeBase64(textBox2.Text);
                     break;
@@ -213,9 +268,13 @@ namespace MD5Plugin
         {
     
             textBox1.Text = HttpUtility.UrlDecode(url);
-    
             
         }
+
+
+
+
+
 
         //public void GetUtf8(string str)
         //{

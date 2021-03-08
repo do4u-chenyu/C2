@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.IO.Compression;
-using System.Text;
 using System.Windows.Forms;
 
 namespace RookieKnowledgePlugin
@@ -15,34 +13,41 @@ namespace RookieKnowledgePlugin
         static List<string> kidFolder = new List<string>();
         int i = 0;
         int j = 0;
+
+        private TreeNode linuxRoot;
+        private TreeNode pythonRoot;
+
         public Form1()
         {
             InitializeComponent();
-            WriteNodes();
+            InitializeTrees();
         }
-        public void WriteNodes()
+        private void InitializeTrees()
         {
 
+            InitializePythonTree();
+            InitializeLinuxTree();
 
             // GetZipInfo(Properties.Resources.cookbook);
             // GetZipInfo 从项目的资源文件读取zip内容
             // WriteNodes（*，*）可以去掉，在GetZipInfo里获得目录名，创建节点就好
 
            // string folderPath = @"C:\Users\iao\Desktop\work\C2\test";
-            TreeNode treeNodeRoot1 = new TreeNode();
-            treeNodeRoot1.Text = "首页";
-            treeView1.Nodes.Add(treeNodeRoot1);
+        }
+        
+        
+        private void InitializeLinuxTree()
+        {
+            linuxRoot = new TreeNode();
+            linuxRoot.Text = "首页";
+            linuxTreeView.Nodes.Add(linuxRoot);
+        }
 
-            //WriteNodes(treeView1, folderPath);
-            TreeNode treeNodeRoot2 = new TreeNode();
-            treeNodeRoot2.Text = "首页";
-            treeView2.Nodes.Add(treeNodeRoot2);
-            //WriteNodes(treeView2, folderPath);
-
-
-  
-
-
+        private void InitializePythonTree()
+        {
+            pythonRoot = new TreeNode();
+            pythonRoot.Text = "首页";
+            pythonTreeView.Nodes.Add(pythonRoot);
         }
         private void GetZipInfo(byte[] zipFile)
         {
@@ -137,7 +142,7 @@ namespace RookieKnowledgePlugin
                             Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
                         };
                         treeView.Nodes[i].Nodes.Add(treeNode);
-                        WriteLastBNodes(treeView1, fsInfo.FullName, i, j);
+                        WriteLastBNodes(linuxTreeView, fsInfo.FullName, i, j);
                     }
                     else
                     {
@@ -174,7 +179,7 @@ namespace RookieKnowledgePlugin
                             Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
                         };
                         treeView.Nodes.Add(treeNode);
-                        WriteChildNodes(treeView1, fsInfo.FullName, i);
+                        WriteChildNodes(linuxTreeView, fsInfo.FullName, i);
                     }
                     else
                     {
@@ -189,7 +194,7 @@ namespace RookieKnowledgePlugin
             }
 
         }
-        public bool FileOrFolder(string path)
+        private bool FileOrFolder(string path)
         {
             if (Directory.Exists(path))
                 return true;
@@ -200,26 +205,17 @@ namespace RookieKnowledgePlugin
 
 
 
-        private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void LinuxTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            String path = linuxTreeView.SelectedNode.Name;
             try
             {
-                string path = treeView1.SelectedNode.Name;
-                StringBuilder text = new StringBuilder();
                 using (StreamReader sr = new StreamReader(path))
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        line += @"\n\r";
-                        text.Append(line);
-                        textEditorControlEx1.Text = text.ToString();
-                    }
+                    textEditorControlEx1.Text = sr.ReadToEnd();
                 }
             }
-            catch
-            {
-            }
+            catch { textEditorControlEx1.Text = String.Empty; }
         }
     }
 }

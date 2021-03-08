@@ -19,6 +19,7 @@ namespace UserInstallSet
         "      <add key=\"EPPlus:ExcelPackage.LicenseContext\" value=\"NonCommercial\" />\r\n" +
         "      <add key=\"ClientSettingsProvider.ServiceUri\" value=\"\" />\r\n" +
         "      <add key=\"IAOLab\" value=\"APK, BaseStation, Wifi, Card, Tude, Ip \"/>\r\n" +
+        "      <add key=\"version\" value=\"1.1.3\"/>\r\n" +
         "    </appSettings>\r\n" +
         "</configuration>";
         //APK:非法APK； BaseStation：基站查询； Wifi：WiFi查询； Card：银行卡查询； Tude：经纬度坐标转换； Ip：时间Ip转换；

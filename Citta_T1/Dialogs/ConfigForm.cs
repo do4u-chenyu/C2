@@ -507,8 +507,8 @@ namespace C2.Dialogs
         }
         private void CheckUpdate()
         {
-
             string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
+            this.currentVersion.Text = "V" + currentVersion;
             this.newSoftwareVersion = NewSoftewareVersion();
             if (newSoftwareVersion.StartsWith(currentVersion))
             {
@@ -519,7 +519,7 @@ namespace C2.Dialogs
                      this.SuspendLayout();
                      this.title.Text = "当前已为最新版本";
                      this.versionLable.Text = @"当前版本:";
-                     this.version.Text = currentVersion;
+                     this.version.Text = currentVersion;                    
                      this.sizeLable.Visible = false;
                      this.sizeValue.Visible = false;
                      this.checking.Visible = false;

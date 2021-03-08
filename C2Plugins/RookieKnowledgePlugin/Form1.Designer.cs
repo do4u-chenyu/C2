@@ -37,9 +37,10 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.linuxTreeView = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -49,9 +50,8 @@
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.textEditorControlEx2 = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.pythonTreeView = new System.Windows.Forms.TreeView();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -153,10 +153,19 @@
             this.toolStripButton4.Size = new System.Drawing.Size(24, 24);
             this.toolStripButton4.Text = "toolStripButton4";
             // 
+            // toolStripButton9
+            // 
+            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
+            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton9.Name = "toolStripButton9";
+            this.toolStripButton9.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton9.Text = "toolStripButton9";
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.treeView1);
+            this.panel1.Controls.Add(this.linuxTreeView);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
@@ -171,14 +180,14 @@
             this.textBox1.Size = new System.Drawing.Size(149, 21);
             this.textBox1.TabIndex = 3;
             // 
-            // treeView1
+            // linuxTreeView
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.treeView1.Location = new System.Drawing.Point(0, 20);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(149, 398);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1_AfterSelect);
+            this.linuxTreeView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.linuxTreeView.Location = new System.Drawing.Point(0, 20);
+            this.linuxTreeView.Name = "linuxTreeView";
+            this.linuxTreeView.Size = new System.Drawing.Size(149, 398);
+            this.linuxTreeView.TabIndex = 0;
+            this.linuxTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.LinuxTreeView_AfterSelect);
             // 
             // tabPage2
             // 
@@ -267,7 +276,7 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.treeView2);
+            this.panel3.Controls.Add(this.pythonTreeView);
             this.panel3.Controls.Add(this.textBox2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(3, 3);
@@ -275,13 +284,13 @@
             this.panel3.Size = new System.Drawing.Size(149, 418);
             this.panel3.TabIndex = 0;
             // 
-            // treeView2
+            // pythonTreeView
             // 
-            this.treeView2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.treeView2.Location = new System.Drawing.Point(0, 20);
-            this.treeView2.Name = "treeView2";
-            this.treeView2.Size = new System.Drawing.Size(149, 398);
-            this.treeView2.TabIndex = 5;
+            this.pythonTreeView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pythonTreeView.Location = new System.Drawing.Point(0, 20);
+            this.pythonTreeView.Name = "pythonTreeView";
+            this.pythonTreeView.Size = new System.Drawing.Size(149, 398);
+            this.pythonTreeView.TabIndex = 5;
             // 
             // textBox2
             // 
@@ -290,15 +299,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(149, 21);
             this.textBox2.TabIndex = 4;
-            // 
-            // toolStripButton9
-            // 
-            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton9.Text = "toolStripButton9";
             // 
             // Form1
             // 
@@ -341,7 +341,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView linuxTreeView;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox1;
@@ -349,7 +349,7 @@
         private System.Windows.Forms.Panel panel4;
         private ICSharpCode.TextEditor.TextEditorControlEx textEditorControlEx2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TreeView treeView2;
+        private System.Windows.Forms.TreeView pythonTreeView;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
