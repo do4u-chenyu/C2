@@ -437,6 +437,10 @@ namespace C2.Controls.Left
             {
                 this.schemaComboBox.Text = defaultSchema;
             }
+            if (dbi.Type == DatabaseType.Postgre)
+            {
+                this.schemaComboBox.Text = defaultSchema;
+            }
             else
             {
                 this.schemaComboBox.Text = users.Contains(loginUser.ToUpper()) ? defaultSchema : "选择架构";
