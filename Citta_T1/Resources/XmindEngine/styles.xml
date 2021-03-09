@@ -50,8 +50,17 @@
     </style>
   </master-styles>
   <styles>
-    <style id="1" name="" type="topic">
-      <topic-properties border-line-color="#558ED5" border-line-width="2pt" fo:color="#17375E" fo:font-family="Microsoft YaHei" fo:font-weight="normal" line-class="org.xmind.branchConnection.curve" line-color="#558ED5" line-width="1pt" shape-class="org.xmind.topicShape.roundedRect" svg:fill="#DCE6F2"/>
-    </style>
+    <style id="default" name="" type="topic">
+    <topic-properties border-line-color="#558ED5" border-line-width="2pt" fo:color="#17375E" fo:font-family="Microsoft YaHei" fo:font-weight="normal" line-class="org.xmind.branchConnection.curve" line-color="#558ED5" line-width="1pt" shape-class="org.xmind.topicShape.roundedRect" svg:fill="#DCE6F2" />
+  </style>
+  <style id="roundedRect" name="" type="topic">
+    <topic-properties border-line-color="#558ED5" border-line-width="2pt" fo:color="#17375E" fo:font-family="Microsoft YaHei" fo:font-weight="normal" line-class="org.xmind.branchConnection.curve" line-color="#558ED5" line-width="1pt" shape-class="org.xmind.topicShape.roundedRect" svg:fill="#DCE6F2" />
+  </style>
+  <style id="underline" name="" type="topic">
+    <topic-properties border-line-color="#558ED5" border-line-width="2pt" fo:color="#17375E" fo:font-family="Microsoft YaHei" fo:font-weight="normal" line-class="org.xmind.branchConnection.curve" line-color="#558ED5" line-width="1pt" shape-class="org.xmind.topicShape.underline" svg:fill="#DCE6F2" />
+  </style>
+  <style id="circle" name="" type="topic">
+    <topic-properties border-line-color="#558ED5" border-line-width="2pt" fo:color="#17375E" fo:font-family="Microsoft YaHei" fo:font-weight="normal" line-class="org.xmind.branchConnection.curve" line-color="#558ED5" line-width="1pt" shape-class="org.xmind.topicShape.circle" svg:fill="#DCE6F2" />
+  </style>
   </styles>
 </xmap-styles>

@@ -7,6 +7,7 @@ using System.Text;
 using System.Xml;
 using C2.Core;
 using C2.Model.Documents;
+using C2.Model.Styles;
 using C2.Model.Widgets;
 using ICSharpCode.SharpZipLib.Zip;
 
@@ -201,7 +202,7 @@ namespace C2.Model.MindMaps
             XmlElement topicNode = contentDoc.CreateElement("topic");
             // Attributes
             topicNode.SetAttribute("id", GetTopicID(topic));
-            topicNode.SetAttribute("style-id", defaultTopicStyleIndex.ToString());
+            topicNode.SetAttribute("style-id", GetStyle(topic.Shape));
             if (topic.Folded)
                 topicNode.SetAttribute("branch", "folded");
             if (isRoot)
@@ -304,6 +305,21 @@ namespace C2.Model.MindMaps
                 }
             }
             parent.AppendChild(topicNode);
+        }
+
+        private string GetStyle(TopicShape shape)
+        {
+            switch (shape)
+            {
+                case TopicShape.Ellipse:
+                    return "circle";
+                case TopicShape.BaseLine:
+                    return "underline";
+                case TopicShape.Rectangle:
+                    return "roundedRect";
+                default:
+                    return "default";
+            }
         }
 
         private string GetXmindLayout(MindMapLayoutType mmlt)
