@@ -19,7 +19,7 @@ namespace C2.Dialogs
     partial class AddDatabaseDialog : StandardDialog
     {
         public DatabaseItem DatabaseInfo { get; set; }
-        private  DatabaseDialogMode Mode;
+        private readonly DatabaseDialogMode Mode;
         private LinkButton LinkButton;
         public AddDatabaseDialog(DatabaseItem databaseInfo=null, DatabaseDialogMode mode=DatabaseDialogMode.New, LinkButton linkButton=null)
         {
