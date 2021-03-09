@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using C2.Controls.Left;
 using C2.Model;
 using C2.Utils;
 using Npgsql;
+using NPOI.OpenXmlFormats.Dml;
+
 namespace C2.Database
 {
     class PostgreDAOImpl : BaseDAOImpl
@@ -14,36 +17,26 @@ namespace C2.Database
         private readonly string getUserSQL = @"select pg_database.datname from pg_database";
         private readonly string getTablesSQL = @"select table_name from information_schema.tables where table_schema = 'public'";
         private readonly string getTableContentSQL = @"select * from {0}";
-        private readonly string getColNameByTableSQL = @"SELECT a.attnum,a.attname AS field FROM pg_class c,pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,pg_type t WHERE c.relname = '{0}' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid ORDER BY a.attnum;";
-        //private readonly string dataBaseName;
+        private readonly string getColNameByTableSQL = @"SELECT a.attnum,a.attname AS field FROM pg_class c,pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,pg_type t WHERE c.relname = '{0}' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid ORDER BY a.attnum";
+        //private readonly string getColNameByTableSQL = @"select * from {0}";
+        private  string dataBaseName;
         public PostgreDAOImpl(DatabaseItem dbi) : base(dbi) { }
 
-        public string ConnectionString(int time) 
+        public string ConnectionString(int time = 1024) 
         {
-            if (time > 0)
-            {
                 return String.Format(
-                    @"PORT={0};HOST={1};PASSWORD={2};USER ID={3};CommandTimeout={4};",
+                    @"PORT={0};HOST={1};PASSWORD={2};USER ID={3};Timeout={4};DATABASE={5};",
                     Port,
                     Host,
                     Pass,
                     User,
-                    time);
-            }
-            else 
-            {
-                return String.Format(
-                    @"PORT={0};HOST={1};PASSWORD={2};USER ID={3};",
-                    Port,
-                    Host,
-                    Pass,
-                    User);
-            }
+                    time,
+                    dataBaseName) ;
         }
         public override bool TestConn()
         {
             bool connect = true;
-            NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString(8000));
+            NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString(8));
             try
             {
                 SqlConn.Open();
@@ -63,7 +56,7 @@ namespace C2.Database
         public override string Query(string sql, bool header = true, int returnNum = OpUtil.PreviewMaxNum)
         {
             string result = String.Empty;
-            NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString(0));
+            NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
             sql = DbUtil.PurifyOnelineSQL(sql);
             try
             {
@@ -112,18 +105,16 @@ namespace C2.Database
         {
             return true;
         }
-        private string GetColumnName(string name)
-        {
-            return null;
-        }
 
         public override string GetTablesSQL(string schema)
         {
+            if(schema != "选择架构")
+                dataBaseName = schema;
             return String.Format(this.getTablesSQL, schema);   
         }
         public override string GetColNameBySchemaSQL(string schema)
         {
-            return null;
+            return String.Empty;
         }
         public override string GetTableContentSQL(Table table)
         {
@@ -137,6 +128,10 @@ namespace C2.Database
         public override string GetColNameByTableSQL(Table table)
         {
             return String.Format(this.getColNameByTableSQL, table);
+        }
+        public override string DefaultSchema()
+        {
+            return String.IsNullOrEmpty(this.Schema) ? "postgres" : this.Schema;
         }
     }
 }
