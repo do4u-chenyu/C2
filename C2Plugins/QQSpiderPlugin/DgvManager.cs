@@ -34,7 +34,10 @@ namespace QQSpiderPlugin
             this.dataGridView.Rows[index].Cells[0].Value = GetImage(fileds[fileds.Length - 1]);
 
             for (int i = 1; i < this.dataGridView.Columns.Count; i++)
+            {
                 this.dataGridView.Rows[index].Cells[i].Value = fileds[i - 1];
+                this.dataGridView.Update();
+            }
         }
 
         private Image GetImage(string url)

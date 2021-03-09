@@ -37,8 +37,8 @@ namespace QQSpiderPlugin
         private void InitializeForm()
         {
             session = new Session();
-            this.idListView.Text = String.Empty;
-            this.groupListView.Text = String.Empty;
+            this.richTextBox2.Text = String.Empty;
+            this.richTextBox1.Text = String.Empty;
             DgvUtil.CleanDgv(this.dataGridView1);
             DgvUtil.CleanDgv(this.dataGridView2);
             idDataSource = new List<string>();
@@ -88,18 +88,13 @@ namespace QQSpiderPlugin
 
         private void UpdateListView(int tabIndex)
         {
-            ListView lv = tabIndex == 0 ? this.idListView : this.groupListView;
+            RichTextBox lv = tabIndex == 0 ? this.richTextBox1 : this.richTextBox2;
             List<string> dataSource = tabIndex == 0 ? this.idDataSource : this.grpDataSource;
-            lv.BeginUpdate();
+            lv.SuspendLayout();
+            lv.Text = String.Empty;
+            lv.Text = String.Join(Environment.NewLine, dataSource);
 
-            lv.Columns.Clear();
-            lv.Items.Clear();
-            lv.Columns.Add("ID", -1);
-
-            for (int i = 0; i < dataSource.Count; i++)
-                lv.Items.Add(dataSource[i]);
-
-            lv.EndUpdate();
+            lv.ResumeLayout();
         }
 
         private void ImportData(int tabIndex)
@@ -356,6 +351,11 @@ namespace QQSpiderPlugin
             if (count == maxTimes)
             {
                 Console.WriteLine("扫码超时！");
+                this.Invoke(new CloseQrForm(new CloseQrForm(delegate ()
+                {
+                    qrCodeForm.Close();
+                    _thread.Abort();
+                })));
                 return;
             }
             this.session = login.Session;
@@ -364,6 +364,40 @@ namespace QQSpiderPlugin
                 return;
             this.session.Ldw = Util.GenBkn(skey);
             return;
+        }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+            List<string> input = new List<string>();
+            try
+            {
+                input = new List<string>(this.richTextBox2.Text
+                    .Trim(Environment.NewLine.ToCharArray())
+                    .Split(Environment.NewLine.ToCharArray())
+                    );
+            }
+            catch
+            {
+                ShowMessageBox("输出有误"); 
+            }
+            this.grpDataSource = input;
+        }
+
+        private void richTextBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            List<string> input = new List<string>();
+            try
+            {
+                input = new List<string>(this.richTextBox1.Text
+                    .Trim(Environment.NewLine.ToCharArray())
+                    .Split(Environment.NewLine.ToCharArray())
+                    );
+            }
+            catch
+            {
+                ShowMessageBox("输出有误");
+            }
+            this.idDataSource = input;
         }
     }
 }

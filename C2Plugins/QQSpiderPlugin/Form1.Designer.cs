@@ -41,7 +41,6 @@
             this.city = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.age = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idListView = new System.Windows.Forms.ListView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.outputButton1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,7 +62,6 @@
             this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupListView = new System.Windows.Forms.ListView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.outputButton2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,6 +71,8 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.GroupStartButton = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -113,8 +113,8 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.richTextBox1);
             this.panel3.Controls.Add(this.dataGridView1);
-            this.panel3.Controls.Add(this.idListView);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 69);
             this.panel3.Name = "panel3";
@@ -124,6 +124,7 @@
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -135,9 +136,10 @@
             this.city,
             this.gender,
             this.age});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Right;
             this.dataGridView1.Location = new System.Drawing.Point(121, 0);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(523, 332);
             this.dataGridView1.TabIndex = 2;
@@ -146,16 +148,19 @@
             // 
             this.image.HeaderText = "头像";
             this.image.Name = "image";
+            this.image.ReadOnly = true;
             // 
             // uin
             // 
             this.uin.HeaderText = "账号";
             this.uin.Name = "uin";
+            this.uin.ReadOnly = true;
             // 
             // nick
             // 
             this.nick.HeaderText = "昵称";
             this.nick.Name = "nick";
+            this.nick.ReadOnly = true;
             this.nick.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.nick.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
@@ -163,39 +168,31 @@
             // 
             this.country.HeaderText = "国家";
             this.country.Name = "country";
+            this.country.ReadOnly = true;
             // 
             // province
             // 
             this.province.HeaderText = "省市";
             this.province.Name = "province";
+            this.province.ReadOnly = true;
             // 
             // city
             // 
             this.city.HeaderText = "城市";
             this.city.Name = "city";
+            this.city.ReadOnly = true;
             // 
             // gender
             // 
             this.gender.HeaderText = "性别";
             this.gender.Name = "gender";
+            this.gender.ReadOnly = true;
             // 
             // age
             // 
             this.age.HeaderText = "年龄";
             this.age.Name = "age";
-            // 
-            // idListView
-            // 
-            this.idListView.Dock = System.Windows.Forms.DockStyle.Left;
-            this.idListView.HideSelection = false;
-            this.idListView.Location = new System.Drawing.Point(0, 0);
-            this.idListView.Margin = new System.Windows.Forms.Padding(0);
-            this.idListView.Name = "idListView";
-            this.idListView.Size = new System.Drawing.Size(121, 332);
-            this.idListView.TabIndex = 1;
-            this.idListView.UseCompatibleStateImageBehavior = false;
-            this.idListView.View = System.Windows.Forms.View.SmallIcon;
-            this.idListView.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.age.ReadOnly = true;
             // 
             // panel2
             // 
@@ -304,8 +301,8 @@
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.richTextBox2);
             this.panel6.Controls.Add(this.dataGridView2);
-            this.panel6.Controls.Add(this.groupListView);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 69);
             this.panel6.Name = "panel6";
@@ -315,6 +312,7 @@
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -327,9 +325,10 @@
             this.category,
             this.label,
             this.memo});
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Right;
             this.dataGridView2.Location = new System.Drawing.Point(121, 0);
             this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.Size = new System.Drawing.Size(523, 332);
             this.dataGridView2.TabIndex = 4;
@@ -338,58 +337,55 @@
             // 
             this.image2.HeaderText = "群头像";
             this.image2.Name = "image2";
+            this.image2.ReadOnly = true;
             // 
             // code
             // 
             this.code.HeaderText = "群ID";
             this.code.Name = "code";
+            this.code.ReadOnly = true;
             // 
             // name
             // 
             this.name.HeaderText = "群名称";
             this.name.Name = "name";
+            this.name.ReadOnly = true;
             // 
             // num
             // 
             this.num.HeaderText = "群人数";
             this.num.Name = "num";
+            this.num.ReadOnly = true;
             // 
             // max
             // 
             this.max.HeaderText = "群上限";
             this.max.Name = "max";
+            this.max.ReadOnly = true;
             // 
             // area
             // 
             this.area.HeaderText = "地域";
             this.area.Name = "area";
+            this.area.ReadOnly = true;
             // 
             // category
             // 
             this.category.HeaderText = "分类";
             this.category.Name = "category";
+            this.category.ReadOnly = true;
             // 
             // label
             // 
             this.label.HeaderText = "标签";
             this.label.Name = "label";
+            this.label.ReadOnly = true;
             // 
             // memo
             // 
             this.memo.HeaderText = "群简介";
             this.memo.Name = "memo";
-            // 
-            // groupListView
-            // 
-            this.groupListView.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupListView.HideSelection = false;
-            this.groupListView.Location = new System.Drawing.Point(0, 0);
-            this.groupListView.Margin = new System.Windows.Forms.Padding(0);
-            this.groupListView.Name = "groupListView";
-            this.groupListView.Size = new System.Drawing.Size(121, 332);
-            this.groupListView.TabIndex = 3;
-            this.groupListView.UseCompatibleStateImageBehavior = false;
-            this.groupListView.View = System.Windows.Forms.View.SmallIcon;
+            this.memo.ReadOnly = true;
             // 
             // panel5
             // 
@@ -479,6 +475,26 @@
             this.button5.Text = "取消";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(121, 332);
+            this.richTextBox2.TabIndex = 5;
+            this.richTextBox2.Text = "";
+            this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(121, 332);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -516,7 +532,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ListView idListView;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button ActStartButton;
@@ -524,7 +539,6 @@
         private System.Windows.Forms.Button InputActButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.ListView groupListView;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button GroupStartButton;
@@ -556,6 +570,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn category;
         private System.Windows.Forms.DataGridViewTextBoxColumn label;
         private System.Windows.Forms.DataGridViewTextBoxColumn memo;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
