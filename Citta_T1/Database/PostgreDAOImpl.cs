@@ -11,26 +11,39 @@ namespace C2.Database
     class PostgreDAOImpl : BaseDAOImpl
     {
         private static readonly LogUtil log = LogUtil.GetInstance("PostgreDAOImpl");
-        //private readonly string getUserSQL = @"select pg_database.datname from pg_database";
-        //private readonly string getTablesSQL = @"select table_name from information_schema.tables where table_schema = 'public'";
-        //private readonly string getTableContentSQL = @"select * from {0}";
-        //private readonly string getColNameByTableSQL = @"SELECT a.attnum,a.attname AS field FROM pg_class c,pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,pg_type t WHERE c.relname = '{0}' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid ORDER BY a.attnum;";
+        private readonly string getUserSQL = @"select pg_database.datname from pg_database";
+        private readonly string getTablesSQL = @"select table_name from information_schema.tables where table_schema = 'public'";
+        private readonly string getTableContentSQL = @"select * from {0}";
+        private readonly string getColNameByTableSQL = @"SELECT a.attnum,a.attname AS field FROM pg_class c,pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,pg_type t WHERE c.relname = '{0}' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid ORDER BY a.attnum;";
         //private readonly string dataBaseName;
         public PostgreDAOImpl(DatabaseItem dbi) : base(dbi) { }
 
-        public string ConnectionString() 
+        public string ConnectionString(int time) 
         {
-            return String.Format(
-                @"PORT={0};HOST={1};PASSWORD={2};USER ID={3};CommandTimeout=8000;",
-                Port,
-                Host,
-                Pass,
-                User);
+            if (time > 0)
+            {
+                return String.Format(
+                    @"PORT={0};HOST={1};PASSWORD={2};USER ID={3};CommandTimeout={4};",
+                    Port,
+                    Host,
+                    Pass,
+                    User,
+                    time);
+            }
+            else 
+            {
+                return String.Format(
+                    @"PORT={0};HOST={1};PASSWORD={2};USER ID={3};",
+                    Port,
+                    Host,
+                    Pass,
+                    User);
+            }
         }
         public override bool TestConn()
         {
             bool connect = true;
-            NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
+            NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString(8000));
             try
             {
                 SqlConn.Open();
@@ -50,7 +63,7 @@ namespace C2.Database
         public override string Query(string sql, bool header = true, int returnNum = OpUtil.PreviewMaxNum)
         {
             string result = String.Empty;
-            NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
+            NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString(0));
             sql = DbUtil.PurifyOnelineSQL(sql);
             try
             {
@@ -106,28 +119,24 @@ namespace C2.Database
 
         public override string GetTablesSQL(string schema)
         {
-            return null;
+            return String.Format(this.getTablesSQL, schema);   
         }
         public override string GetColNameBySchemaSQL(string schema)
         {
             return null;
         }
-        public override string GetColNameByTablesSQL(List<Table> tables)
-        {
-            return null;
-        }
         public override string GetTableContentSQL(Table table)
         {
-            return null;
+            return String.Format(this.getTableContentSQL, table);
         }
         public override string GetUserSQL()
         {
-            return null;
+            return String.Format(this.getUserSQL);
         }
 
         public override string GetColNameByTableSQL(Table table)
         {
-            return null;
+            return String.Format(this.getColNameByTableSQL, table);
         }
     }
 }
