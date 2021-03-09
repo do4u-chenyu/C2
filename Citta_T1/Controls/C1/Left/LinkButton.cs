@@ -55,6 +55,8 @@ namespace C2.Controls.Left
             DatabaseItem = item;
             if (item.Type == DatabaseType.Hive)
                 this.leftPictureBox.Image = global::C2.Properties.Resources.Hive;
+            if (item.Type == DatabaseType.Postgre)
+                this.leftPictureBox.Image = global::C2.Properties.Resources.PostgreSQL;
 
         }
 
@@ -84,6 +86,8 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Hive;
                 else if (dialog.DatabaseInfo.Type == DatabaseType.Oracle)
                     this.leftPictureBox.Image = global::C2.Properties.Resources.oracle;
+                else if (dialog.DatabaseInfo.Type == DatabaseType.Postgre)
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.PostgreSQL;
                 else
                 { };
                 DatabaseItem = dialog.DatabaseInfo;

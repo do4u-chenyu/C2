@@ -12,6 +12,8 @@ namespace C2.Database
                     return new OracleDAOImpl(dbi);
                 case DatabaseType.Hive:
                     return new HiveDAOImpl(dbi);
+                case DatabaseType.Postgre:
+                    return new PostgreDAOImpl(dbi);
                 default:
                     return new EmptyDAOImpl();
             }
