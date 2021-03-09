@@ -1,4 +1,5 @@
 ﻿using C2.IAOLab.Plugins;
+using NPOI.HSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,8 +22,8 @@ namespace QQSpiderPlugin
         Session session;
         private List<string> idDataSource;
         private List<string> grpDataSource;
-        private List<string> groupHeaders = new List<string>() { "群号", "群名称", "群人数", "群上限", "群主", "地域", "分类", "标签", "群简介" };
-        private List<string> actHeaders = new List<string>() { "账号", "昵称", "国家", "省市", "城市", "性别", "年龄", "头像地址" };
+        //{ "头像", "群号", "群名称", "群人数", "群上限", "群主", "地域", "分类", "标签", "群简介"};
+        //{ "头像", "账号", "昵称", "国家", "省市", "城市", "性别", "年龄" };
         public string TmpPath
         {
             get { return Path.Combine(Util.TryGetSysTempDir(), tmpPath); }
@@ -38,8 +39,8 @@ namespace QQSpiderPlugin
             session = new Session();
             this.idListView.Text = String.Empty;
             this.groupListView.Text = String.Empty;
-            this.IDResultRichTextBox.Text = String.Empty;
-            this.GroupRichTextBox.Text = String.Empty;
+            DgvUtil.CleanDgv(this.dataGridView1);
+            DgvUtil.CleanDgv(this.dataGridView2);
             idDataSource = new List<string>();
             grpDataSource = new List<string>();
         }
@@ -119,11 +120,22 @@ namespace QQSpiderPlugin
         private List<string> LoadFile(string fileName)
         {
             List<string> lines = new List<string>();
-            string line;
-            using (StreamReader file = new System.IO.StreamReader(fileName))
+            try
             {
-                while ((line = file.ReadLine()) != null)
-                    lines.Add(line);
+                string line;
+                using (StreamReader file = new System.IO.StreamReader(fileName))
+                {
+                    while ((line = file.ReadLine()) != null)
+                        lines.Add(line);
+                }
+            }
+            catch (IOException)
+            {
+                ShowMessageBox("该文件已被占用，请关闭文件后再次导入文件");
+            }
+            catch (Exception)
+            {
+
             }
             return lines;
         }
@@ -145,7 +157,7 @@ namespace QQSpiderPlugin
 
         private void ActStartButton_Click(object sender, EventArgs e)
         {
-            this.IDResultRichTextBox.Text = String.Empty;
+            DgvManager dgvMgr = new DgvManager(this.dataGridView1);
             List<string> dataSource = this.idDataSource;
             ResetProgressBar(0, dataSource.Count);
             if (dataSource.Count == 0)
@@ -177,20 +189,19 @@ namespace QQSpiderPlugin
 
             QQCrawler crawler = new QQCrawler(session);
 
-            StringBuilder tmpResult = new StringBuilder();
-            tmpResult.AppendLine(String.Join("\t", actHeaders));
-            this.IDResultRichTextBox.Text = tmpResult.ToString();
             this.Cursor = Cursors.WaitCursor;
             foreach (string id in dataSource)
-                ShowResult(crawler.QueryAct(id), 0, tmpResult);
-            this.IDResultRichTextBox.Text = tmpResult.ToString();
+            {
+                dgvMgr.AppendLine(crawler.QueryAct(id));
+                this.progressBar1.Value += 1;
+            }
             this.Cursor = Cursors.Arrow;
         }
 
 
         private void GroupStartButton_Click(object sender, EventArgs e)
         {
-            this.GroupRichTextBox.Text = String.Empty;
+            DgvManager dgvMgr = new DgvManager(this.dataGridView2);
             List<string> dataSource = this.grpDataSource;
             ResetProgressBar(1, dataSource.Count);
             if (dataSource.Count == 0)
@@ -219,13 +230,12 @@ namespace QQSpiderPlugin
 
             QQCrawler crawler = new QQCrawler(session);
 
-            StringBuilder tmpResult = new StringBuilder();
-            tmpResult.AppendLine(String.Join("\t", groupHeaders));
-            this.IDResultRichTextBox.Text = tmpResult.ToString();
             this.Cursor = Cursors.WaitCursor;
             foreach (string id in dataSource)
-                ShowResult(crawler.QueryGroup(id), 1, tmpResult);
-            this.GroupRichTextBox.Text = tmpResult.ToString();
+            {
+                dgvMgr.AppendLine(crawler.QueryGroup(id));
+                this.progressBar2.Value += 1;
+            }
             this.Cursor = Cursors.Arrow;
         }
 
@@ -236,24 +246,24 @@ namespace QQSpiderPlugin
             bar.Minimum = 0;
             bar.Value = 0;
         }
-        private void ShowResult(string result, int tabIndex, StringBuilder tmpResult)
-        {
-            if ((tabIndex == 0 || tabIndex == 1) && tmpResult != null)
-            {
-                tmpResult.Append(result);
-                switch (tabIndex)
-                {
-                    case 0:
-                        UpdateStatus(this.IDResultRichTextBox, result);
-                        this.progressBar1.Value += 1;
-                        break;
-                    case 1:
-                        UpdateStatus(this.GroupRichTextBox, result);
-                        this.progressBar2.Value += 1;
-                        break;
-                }
-            }
-        }
+        //private void ShowResult(string result, int tabIndex, StringBuilder tmpResult)
+        //{
+        //    if ((tabIndex == 0 || tabIndex == 1) && tmpResult != null)
+        //    {
+        //        tmpResult.Append(result);
+        //        switch (tabIndex)
+        //        {
+        //            case 0:
+        //                UpdateStatus(this.IDResultRichTextBox, result);
+        //                this.progressBar1.Value += 1;
+        //                break;
+        //            case 1:
+        //                UpdateStatus(this.GroupRichTextBox, result);
+        //                this.progressBar2.Value += 1;
+        //                break;
+        //        }
+        //    }
+        //}
         void UpdateStatus(RichTextBox richTextBox, string textMessage)
         {
             if (richTextBox.InvokeRequired)
@@ -283,20 +293,30 @@ namespace QQSpiderPlugin
             return MessageBox.Show(message, caption, MessageBoxButtons.OK, type);
         }
 
-        private void ResetCookieButton1_Click(object sender, EventArgs e)
+        private void OutputButton1_Click(object sender, EventArgs e)
         {
-            ResetCookie();
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "Excel Documents (*.xls)|*.xls",
+            };
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Util.SaveToExcel(sfd.FileName, this.dataGridView1);
+                ShowMessageBox("导出成功");
+            }
         }
 
-        private void ResetCookieButton2_Click(object sender, EventArgs e)
+        private void OutputButton2_Click(object sender, EventArgs e)
         {
-            ResetCookie();
-        }
-        private void ResetCookie()
-        {
-            this.session = new Session();
-            if (File.Exists(this.TmpPath))
-                File.Delete(this.TmpPath);
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "Excel Documents (*.xls)|*.xls",
+            };
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Util.SaveToExcel(sfd.FileName, this.dataGridView2);
+                ShowMessageBox("导出成功");
+            }
         }
         public void Login()
         {

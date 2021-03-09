@@ -7,7 +7,7 @@
 
         public QueryResult()
         {
-            code = -1;
+            code = 0;
             result = string.Empty;
         }
     }

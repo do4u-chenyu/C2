@@ -27,7 +27,8 @@ namespace QQSpiderPlugin
         /// <returns></returns>
         public string QueryAct(string id)
         {
-            StringBuilder sb = new StringBuilder();
+            QueryResult defaultResult = new QueryResult();
+            defaultResult.result = new ActInfo(id).ToString();
             string url = "https://find.qq.com/proxy/domain/cgi.find.qq.com/qqfind/buddy/search_v3";
             Dictionary<string, string> pairs = new Dictionary<string, string>
             {
@@ -58,20 +59,22 @@ namespace QQSpiderPlugin
                     Response resp = this.session.Post(url, pairs);
                     QueryResult qResult = this.ParseAct(id, resp.Text);
                     if (qResult.code > 0)
-                        sb.Append(qResult.result);
+                        defaultResult = qResult;
                     Thread.Sleep(1000);
                     break;
                 }
-                catch
+                catch(Exception e)
                 {
+                    Console.WriteLine(e.ToString());
                     count += 1;
                 }
             }
-            return sb.ToString();
+            return defaultResult.result.ToString();
         }
         public string QueryGroup(string id)
         {
-            StringBuilder sb = new StringBuilder();
+            QueryResult defaultResult = new QueryResult();
+            defaultResult.result = new GroupInfo(id).ToString();
             string url = "https://qun.qq.com/cgi-bin/group_search/pc_group_search";
 
             Dictionary<string, string> pairs = new Dictionary<string, string>
@@ -100,7 +103,7 @@ namespace QQSpiderPlugin
                     Response resp = this.session.Post(url, pairs);
                     QueryResult qResult = this.ParseGroup(id, resp.Text);
                     if (qResult.code > 0)
-                        sb.Append(qResult.result);
+                        defaultResult = qResult;
                     Thread.Sleep(1000);
                     break;
                 }
@@ -109,13 +112,12 @@ namespace QQSpiderPlugin
                     count += 1;
                 }
             }
-            return sb.ToString();
+            return defaultResult.result.ToString();
         }
 
         private QueryResult ParseGroup(string id, string text)
         {
             QueryResult qResult = new QueryResult();
-
             StringBuilder sb = new StringBuilder();
 
             try
@@ -136,18 +138,23 @@ namespace QQSpiderPlugin
                     }
                     sb.AppendLine(groupInfo.ToString());
                 }
+                qResult.code = 1;
+                qResult.result = sb.ToString();
             }
             catch (Exception)
             {
                 qResult.code = -1;
-                if (sb.Length == 0)
-                    sb.AppendLine(new GroupInfo(id).ToString());
             }
-            qResult.code = 1;
-            qResult.result = sb.ToString();
             return qResult;
         }
-
+        /// <summary>
+        /// code = 0: 解析成功，但是没数据
+        /// code > 0: 解析成功，且有数据
+        /// code < 0: 解析异常
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
         private QueryResult ParseAct(string id, string text)
         {
             QueryResult qResult = new QueryResult();
@@ -162,8 +169,14 @@ namespace QQSpiderPlugin
 
                 retcode = (int)json["retcode"];
                 qResult.code = retcode;
+
                 if (retcode != 0)
+                {
+                    // 查询异常
+                    qResult.code = -1;
                     return qResult;
+                }
+
                 foreach(var a in ((JObject)((JObject)json["result"])["buddy"])["info_list"])
                 {
                     try
@@ -176,15 +189,14 @@ namespace QQSpiderPlugin
                     }
                     sb.AppendLine(actInfo.ToString());
                 }
+                qResult.code = 1;
+                qResult.result = sb.ToString();
             }
             catch 
             {
+                // 查询异常
                 qResult.code = -1;
-                if (sb.Length == 0)
-                    sb.AppendLine(new ActInfo(id).ToString());
             }
-            qResult.code = 1;
-            qResult.result = sb.ToString();
             return qResult;
         }
         public static bool IsValidQQSession(Session session)
@@ -227,14 +239,6 @@ namespace QQSpiderPlugin
         }
         public ActInfo(JToken obj)
         {
-            //this.uin = Util.TryGetStringFromJToken(obj, "uin");
-            //this.nick = Util.TryGetStringFromJToken(obj, "nick");
-            //this.country = Util.TryGetStringFromJToken(obj, "country");
-            //this.province = Util.TryGetStringFromJToken(obj, "province");
-            //this.city = Util.TryGetStringFromJToken(obj, "city");
-            //this.gender = Util.TryGetIntFromJToken(obj, "gender"); // 1 男 2 女
-            //this.age = Util.TryGetIntFromJToken(obj, "age");
-            //this.url = Util.TryGetStringFromJToken(obj, "url");
             this.uin = (string)obj["uin"];
             this.nick = (string)obj["nick"];
             this.country = (string)obj["country"];
@@ -270,6 +274,7 @@ namespace QQSpiderPlugin
         string gcate;
         string labels;
         string memo;
+        string url;
         public GroupInfo()
         {
             code = String.Empty;
@@ -281,6 +286,7 @@ namespace QQSpiderPlugin
             gcate = String.Empty;
             labels = String.Empty;
             memo = String.Empty;
+            url = String.Empty;
         }
         public GroupInfo(string code)
         {
@@ -293,6 +299,7 @@ namespace QQSpiderPlugin
             this.gcate = String.Empty;
             this.labels = String.Empty;
             this.memo = String.Empty;
+            this.url = String.Empty;
         }
         public GroupInfo(JToken g)
         {
@@ -301,6 +308,7 @@ namespace QQSpiderPlugin
             member_num = (string)g["member_num"];
             max_member_num = (string)g["max_member_num"];
             owner_uin = (string)g["owner_uin"];
+            url = (string)g["url"];
 
             StringBuilder qaddrSb = new StringBuilder();
             foreach (var q in g["qaddr"])
@@ -342,7 +350,8 @@ namespace QQSpiderPlugin
                     .Append(qaddr).Append(QQCrawler.filedSeperator)
                     .Append(gcate).Append(QQCrawler.filedSeperator)
                     .Append(labels).Append(QQCrawler.filedSeperator)
-                    .Append(memo);
+                    .Append(memo).Append(QQCrawler.filedSeperator)
+                    .Append(url);
             return sb.ToString();
         }
     }

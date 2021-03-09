@@ -32,10 +32,18 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.image = new System.Windows.Forms.DataGridViewImageColumn();
+            this.uin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nick = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.country = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.province = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.city = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.age = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idListView = new System.Windows.Forms.ListView();
-            this.IDResultRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.ResetCookieButton1 = new System.Windows.Forms.Button();
+            this.outputButton1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.InputActButton = new System.Windows.Forms.Button();
@@ -45,10 +53,19 @@
             this.button2 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.image2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.max = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.area = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupListView = new System.Windows.Forms.ListView();
-            this.GroupRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.ResetCookieButton2 = new System.Windows.Forms.Button();
+            this.outputButton2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.InputGroupButton = new System.Windows.Forms.Button();
@@ -59,10 +76,12 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
@@ -94,13 +113,76 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.dataGridView1);
             this.panel3.Controls.Add(this.idListView);
-            this.panel3.Controls.Add(this.IDResultRichTextBox);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 69);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(644, 332);
             this.panel3.TabIndex = 5;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.image,
+            this.uin,
+            this.nick,
+            this.country,
+            this.province,
+            this.city,
+            this.gender,
+            this.age});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(121, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(523, 332);
+            this.dataGridView1.TabIndex = 2;
+            // 
+            // image
+            // 
+            this.image.HeaderText = "头像";
+            this.image.Name = "image";
+            // 
+            // uin
+            // 
+            this.uin.HeaderText = "账号";
+            this.uin.Name = "uin";
+            // 
+            // nick
+            // 
+            this.nick.HeaderText = "昵称";
+            this.nick.Name = "nick";
+            this.nick.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.nick.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // country
+            // 
+            this.country.HeaderText = "国家";
+            this.country.Name = "country";
+            // 
+            // province
+            // 
+            this.province.HeaderText = "省市";
+            this.province.Name = "province";
+            // 
+            // city
+            // 
+            this.city.HeaderText = "城市";
+            this.city.Name = "city";
+            // 
+            // gender
+            // 
+            this.gender.HeaderText = "性别";
+            this.gender.Name = "gender";
+            // 
+            // age
+            // 
+            this.age.HeaderText = "年龄";
+            this.age.Name = "age";
             // 
             // idListView
             // 
@@ -115,20 +197,9 @@
             this.idListView.View = System.Windows.Forms.View.SmallIcon;
             this.idListView.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // IDResultRichTextBox
-            // 
-            this.IDResultRichTextBox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.IDResultRichTextBox.Location = new System.Drawing.Point(122, 0);
-            this.IDResultRichTextBox.Margin = new System.Windows.Forms.Padding(0);
-            this.IDResultRichTextBox.Name = "IDResultRichTextBox";
-            this.IDResultRichTextBox.Size = new System.Drawing.Size(522, 332);
-            this.IDResultRichTextBox.TabIndex = 0;
-            this.IDResultRichTextBox.Text = "";
-            this.IDResultRichTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-            // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.ResetCookieButton1);
+            this.panel2.Controls.Add(this.outputButton1);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.progressBar1);
             this.panel2.Controls.Add(this.InputActButton);
@@ -140,15 +211,15 @@
             this.panel2.TabIndex = 4;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
-            // ResetCookieButton1
+            // outputButton1
             // 
-            this.ResetCookieButton1.Location = new System.Drawing.Point(522, 3);
-            this.ResetCookieButton1.Name = "ResetCookieButton1";
-            this.ResetCookieButton1.Size = new System.Drawing.Size(98, 23);
-            this.ResetCookieButton1.TabIndex = 6;
-            this.ResetCookieButton1.Text = "清除Cookie";
-            this.ResetCookieButton1.UseVisualStyleBackColor = true;
-            this.ResetCookieButton1.Click += new System.EventHandler(this.ResetCookieButton1_Click);
+            this.outputButton1.Location = new System.Drawing.Point(545, 3);
+            this.outputButton1.Name = "outputButton1";
+            this.outputButton1.Size = new System.Drawing.Size(75, 23);
+            this.outputButton1.TabIndex = 6;
+            this.outputButton1.Text = "导出";
+            this.outputButton1.UseVisualStyleBackColor = true;
+            this.outputButton1.Click += new System.EventHandler(this.OutputButton1_Click);
             // 
             // label3
             // 
@@ -233,13 +304,80 @@
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.dataGridView2);
             this.panel6.Controls.Add(this.groupListView);
-            this.panel6.Controls.Add(this.GroupRichTextBox);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 69);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(644, 332);
             this.panel6.TabIndex = 2;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.image2,
+            this.code,
+            this.name,
+            this.num,
+            this.max,
+            this.area,
+            this.category,
+            this.label,
+            this.memo});
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView2.Location = new System.Drawing.Point(121, 0);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 23;
+            this.dataGridView2.Size = new System.Drawing.Size(523, 332);
+            this.dataGridView2.TabIndex = 4;
+            // 
+            // image2
+            // 
+            this.image2.HeaderText = "群头像";
+            this.image2.Name = "image2";
+            // 
+            // code
+            // 
+            this.code.HeaderText = "群ID";
+            this.code.Name = "code";
+            // 
+            // name
+            // 
+            this.name.HeaderText = "群名称";
+            this.name.Name = "name";
+            // 
+            // num
+            // 
+            this.num.HeaderText = "群人数";
+            this.num.Name = "num";
+            // 
+            // max
+            // 
+            this.max.HeaderText = "群上限";
+            this.max.Name = "max";
+            // 
+            // area
+            // 
+            this.area.HeaderText = "地域";
+            this.area.Name = "area";
+            // 
+            // category
+            // 
+            this.category.HeaderText = "分类";
+            this.category.Name = "category";
+            // 
+            // label
+            // 
+            this.label.HeaderText = "标签";
+            this.label.Name = "label";
+            // 
+            // memo
+            // 
+            this.memo.HeaderText = "群简介";
+            this.memo.Name = "memo";
             // 
             // groupListView
             // 
@@ -253,19 +391,9 @@
             this.groupListView.UseCompatibleStateImageBehavior = false;
             this.groupListView.View = System.Windows.Forms.View.SmallIcon;
             // 
-            // GroupRichTextBox
-            // 
-            this.GroupRichTextBox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.GroupRichTextBox.Location = new System.Drawing.Point(122, 0);
-            this.GroupRichTextBox.Margin = new System.Windows.Forms.Padding(0);
-            this.GroupRichTextBox.Name = "GroupRichTextBox";
-            this.GroupRichTextBox.Size = new System.Drawing.Size(522, 332);
-            this.GroupRichTextBox.TabIndex = 2;
-            this.GroupRichTextBox.Text = "";
-            // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.ResetCookieButton2);
+            this.panel5.Controls.Add(this.outputButton2);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.progressBar2);
             this.panel5.Controls.Add(this.InputGroupButton);
@@ -276,15 +404,15 @@
             this.panel5.Size = new System.Drawing.Size(644, 66);
             this.panel5.TabIndex = 1;
             // 
-            // ResetCookieButton2
+            // outputButton2
             // 
-            this.ResetCookieButton2.Location = new System.Drawing.Point(522, 3);
-            this.ResetCookieButton2.Name = "ResetCookieButton2";
-            this.ResetCookieButton2.Size = new System.Drawing.Size(98, 23);
-            this.ResetCookieButton2.TabIndex = 9;
-            this.ResetCookieButton2.Text = "清除Cookie";
-            this.ResetCookieButton2.UseVisualStyleBackColor = true;
-            this.ResetCookieButton2.Click += new System.EventHandler(this.ResetCookieButton2_Click);
+            this.outputButton2.Location = new System.Drawing.Point(545, 3);
+            this.outputButton2.Name = "outputButton2";
+            this.outputButton2.Size = new System.Drawing.Size(75, 23);
+            this.outputButton2.TabIndex = 9;
+            this.outputButton2.Text = "导出";
+            this.outputButton2.UseVisualStyleBackColor = true;
+            this.outputButton2.Click += new System.EventHandler(this.OutputButton2_Click);
             // 
             // label4
             // 
@@ -368,11 +496,13 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -387,7 +517,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ListView idListView;
-        private System.Windows.Forms.RichTextBox IDResultRichTextBox;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button ActStartButton;
@@ -396,7 +525,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ListView groupListView;
-        private System.Windows.Forms.RichTextBox GroupRichTextBox;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button GroupStartButton;
@@ -405,10 +533,29 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button ResetCookieButton1;
-        private System.Windows.Forms.Button ResetCookieButton2;
+        private System.Windows.Forms.Button outputButton1;
+        private System.Windows.Forms.Button outputButton2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewImageColumn image;
+        private System.Windows.Forms.DataGridViewTextBoxColumn uin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nick;
+        private System.Windows.Forms.DataGridViewTextBoxColumn country;
+        private System.Windows.Forms.DataGridViewTextBoxColumn province;
+        private System.Windows.Forms.DataGridViewTextBoxColumn city;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gender;
+        private System.Windows.Forms.DataGridViewTextBoxColumn age;
+        private System.Windows.Forms.DataGridViewImageColumn image2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn max;
+        private System.Windows.Forms.DataGridViewTextBoxColumn area;
+        private System.Windows.Forms.DataGridViewTextBoxColumn category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn label;
+        private System.Windows.Forms.DataGridViewTextBoxColumn memo;
     }
 }
 
