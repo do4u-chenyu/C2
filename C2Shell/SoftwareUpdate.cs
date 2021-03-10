@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,11 +13,13 @@ using System.Windows.Forms;
 namespace C2Shell
 {
     public class SoftwareUpdate
-    {
-        private readonly string updatePath = Path.Combine(Application.StartupPath, "update");
-        private readonly string rollbackPath = Path.Combine(Application.StartupPath, "backup");
+    {       
+        private readonly string installPath = Path.Combine(Application.StartupPath, "update", "install");
+        private readonly string updatePath = Path.Combine(Application.StartupPath, "update", "setup");
+        private readonly string rollbackPath = Path.Combine(Application.StartupPath, "update","backup");
         private readonly string strPathExe = Path.Combine(Application.StartupPath, "C2.exe");
         private readonly string configFilePath = Path.Combine(Application.StartupPath, "C2.exe.config");
+         
 
 
 
@@ -33,8 +36,10 @@ namespace C2Shell
             bool needUpdate = true; 
             try
             {
-                string[] files = System.IO.Directory.GetFiles(updatePath);
-                needUpdate = (files.Length == 1 && files[0].EndsWith(".zip"));
+                string[] files = System.IO.Directory.GetFiles(installPath);
+                string pattern = @"software-(\d+\.){2}\d+-\d{8}.zip";
+                Regex rgx = new Regex(pattern);
+                needUpdate = (files.Length == 1 && rgx .IsMatch(files[0]));
                 if (needUpdate)
                 {
                     ZipName = files[0];
@@ -67,7 +72,7 @@ namespace C2Shell
             }
 
             // 解压update目录 
-            string zipPath = Path.Combine(updatePath, zipName);
+            string zipPath = Path.Combine(installPath, zipName);
             string errMsg = Utils.ZipUtil.UnZipFile(zipPath, updatePath);
             if (!string.IsNullOrEmpty(errMsg))
             {
@@ -80,7 +85,9 @@ namespace C2Shell
             {
                 MessageBox.Show("执行文件替换成功");
                 // 修改配置文件版本号
-                string newVersion = Path.GetFileNameWithoutExtension(zipName);
+                string pattern = @"(\d+\.){2}\d+";
+                Regex rgx = new Regex(pattern);
+                string newVersion = rgx.Match(zipName).ToString();
                 Utils.XmlUtil.UpdateVersion(configFilePath, newVersion);
                 return success;
              
