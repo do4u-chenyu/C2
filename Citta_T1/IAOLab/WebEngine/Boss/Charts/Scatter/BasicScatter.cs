@@ -9,8 +9,12 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Scatter
 {
     public class BasicScatter : BaseCharts
     {
-        public BasicScatter(DataTable dataTable, CompleteOption option, int[] chartOptions)
+        public BasicScatter(DataTable dataTable, CompleteOption option, Dictionary<string, int[]> chartOptionDict)
         {
+            if (!chartOptionDict.ContainsKey("BasicScatter") || chartOptionDict["BasicScatter"].Length == 0)
+                return;
+
+            int[] chartOptions = chartOptionDict["BasicScatter"];
             option.xAxis = new XAxis() {
                 type = xAxisType.category
             };

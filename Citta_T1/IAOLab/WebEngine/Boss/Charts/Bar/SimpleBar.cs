@@ -12,8 +12,12 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Bar
     /// </summary>
     public class SimpleBar: BaseCharts
     {
-        public SimpleBar(DataTable dataTable, CompleteOption option, int[] chartOptions)
+        public SimpleBar(DataTable dataTable, CompleteOption option, Dictionary<string, int[]> chartOptionDict)
         {
+            if (!chartOptionDict.ContainsKey("SimpleBar") || chartOptionDict["SimpleBar"].Length == 0)
+                return;
+
+            int[] chartOptions = chartOptionDict["SimpleBar"];
             option.xAxis = new XAxis() {
                 type = xAxisType.category
             };

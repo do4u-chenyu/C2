@@ -12,8 +12,12 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Bar
     /// </summary>
     public class StackBar : BaseCharts
     {
-        public StackBar(DataTable dataTable, CompleteOption option, int[] chartOptions, string stack="汇总")
+        public StackBar(DataTable dataTable, CompleteOption option, Dictionary<string, int[]> chartOptionDict, string stack="汇总")
         {
+            if (!chartOptionDict.ContainsKey("StackBar") || chartOptionDict["StackBar"].Length == 0)
+                return;
+
+            int[] chartOptions = chartOptionDict["StackBar"];
             option.xAxis = new XAxis() {
                 type = xAxisType.category
             };

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace RookieKnowledgePlugin
 {
@@ -30,18 +31,19 @@ namespace RookieKnowledgePlugin
             // GetZipInfo 从项目的资源文件读取zip内容
             // WriteNodes（*，*）可以去掉，在GetZipInfo里获得目录名，创建节点就好
 
-           // string folderPath = @"C:\Users\iao\Desktop\work\C2\test";
+            // string folderPath = @"C:\Users\iao\Desktop\work\C2\test";
         }
-        
+
         private void InitializeTempPath()
         {
             tempPath = Path.Combine(Path.GetTempPath(), "C2", "plugins", "RookieKnowledgePlugin");
             try
             {
                 Directory.CreateDirectory(tempPath);
-            } catch { }
+            }
+            catch { }
         }
-        
+
         private void InitializeLinuxTree()
         {
             UnZip(Properties.Resources.Linux, tempPath);
@@ -52,6 +54,7 @@ namespace RookieKnowledgePlugin
             };
             linuxTreeView.Nodes.Add(linuxRoot);
             WriteNodes(linuxRoot, Path.Combine(tempPath, "Linux"));
+            linuxRoot.ExpandAll();
         }
 
         private void InitializePythonTree()
@@ -64,17 +67,18 @@ namespace RookieKnowledgePlugin
             };
             pythonTreeView.Nodes.Add(pythonRoot);
             WriteNodes(pythonRoot, Path.Combine(tempPath, "Python"));
+            pythonRoot.ExpandAll();
         }
         private void UnZip(byte[] zipBuffer, String path)
         {
             FastZip fastZip = new FastZip();
-            fastZip.ExtractZip(new MemoryStream(zipBuffer), 
-                path, 
-                FastZip.Overwrite.Always, 
-                null, 
-                String.Empty, 
-                String.Empty, 
-                false, 
+            fastZip.ExtractZip(new MemoryStream(zipBuffer),
+                path,
+                FastZip.Overwrite.Always,
+                null,
+                String.Empty,
+                String.Empty,
+                false,
                 false);
         }
         public string GetPluginDescription()
@@ -116,7 +120,7 @@ namespace RookieKnowledgePlugin
                 TreeNode node = new TreeNode
                 {
                     Name = fsi.FullName,
-                    Text = Regex.Replace(fsi.Name, @"^\d+_", ""),
+                    Text = Regex.Replace(fsi.Name, @"^\d+_\s*", ""),
                 };
                 root.Nodes.Add(node);
                 if (Directory.Exists(node.Name))
@@ -132,38 +136,85 @@ namespace RookieKnowledgePlugin
         {
             if (e.Node.Name == "首页")
             {
-                textEditorControlEx1.Text = String.Empty;
+                linuxTextBox.SetTextAndRefresh("Linux 首页");
             }
             else
-                TreeView_AfterSelect(textEditorControlEx1, e.Node.Name);
+                TreeView_AfterSelect(linuxTextBox, e.Node.Name);
+
         }
 
         private void PythonTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Name == "首页")
             {
-                textEditorControlEx2.Text = String.Empty;
+                pythonTextBox.SetTextAndRefresh("Python 首页");
             }
             else
-                TreeView_AfterSelect(textEditorControlEx2, e.Node.Name);
+                TreeView_AfterSelect(pythonTextBox, e.Node.Name);
         }
 
 
-        private void TreeView_AfterSelect(Control ct, String name)
+        private void TreeView_AfterSelect(ICSharpCode.TextEditor.TextEditorControlEx tc, String name)
         {
             try
             {
                 using (StreamReader sr = new StreamReader(name))
                 {
-                    ct.Text = sr.ReadToEnd();
+                    tc.SetTextAndRefresh(sr.ReadToEnd());
                 }
             }
-            catch { ct.Text = String.Empty; }
+            catch { tc.SetTextAndRefresh(String.Empty); }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             InitializeTrees();
+        }
+
+        private void LinuxFilterTB_TextChanged(object sender, EventArgs e)
+        {
+            VisibleTreeNode(linuxRoot, this.linuxFilterTB.Text);
+        }
+
+        private void PythonFilterTB_TextChanged(object sender, EventArgs e)
+        {
+            VisibleTreeNode(pythonRoot, this.pythonFilterTB.Text);
+        }
+
+        private void VisibleTreeNode(TreeNode root, String filter)
+        {
+            root.TreeView.SuspendLayout();
+            if (String.IsNullOrEmpty(filter))
+            {
+                root.ExpandAll();
+                return;
+            }
+
+            root.Collapse();
+            FindNodes(root, filter);
+            root.TreeView.ResumeLayout(false);
+        }
+
+        private void FindNodes(TreeNode root, String filter)
+        {
+            if (root.Text.Contains(filter) && root.GetNodeCount(true) == 0)
+            {
+                Expand(root); 
+            }
+               
+            foreach (TreeNode node in root.Nodes)
+            {
+                FindNodes(node, filter);
+            }
+        }
+
+        private void Expand(TreeNode node)
+        {
+            while (node != null && !node.IsExpanded)
+            {
+                node.Expand();
+                node = node.Parent;
+            }
         }
     }
 }
