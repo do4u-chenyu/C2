@@ -4,12 +4,12 @@ using C2.Properties;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -30,10 +30,16 @@ namespace C2.Dialogs
         public string baiduHeatAPI;
         private readonly PluginsDownloader downloader;
         private string newSoftwareVersion;
+
+
         public ConfigForm()
         {
             InitializeComponent();
-            downloader = new PluginsDownloader();
+            downloader = new PluginsDownloader
+            {
+                Client_DownloadFileCompleted = this.Client_DownloadFileCompleted,
+                Client_DownloadProgressChanged = this.Client_DownloadProgressChanged
+            };
             latude = this.baiduLatTB.Text = Settings.Default.latude;
             lontude = this.baiduLonTB.Text = Settings.Default.lontude;
             scale = this.baiduScaleTB.Text = Settings.Default.scale;
@@ -575,7 +581,7 @@ namespace C2.Dialogs
         private string NewSoftwareInfo(string name)
         {
             string packageDir = Path.Combine(Global.SoftwareUrl, @"software/");
-            return this.downloader.GetPluginsInfo(name, packageDir);
+            return this.downloader.GetPluginInfo(name, packageDir);
         }
         private void UpdateButton_Click(object sender, EventArgs e)
         {
@@ -589,7 +595,11 @@ namespace C2.Dialogs
                     if (File.Exists(savePath))
                         HelpUtil.ShowMessageBox("下载成功，请重启更新软件");
                     else
-                        this.downloader.SoftwareDownload(packageDir, savePath);                                
+                    {
+                        this.downloader.SoftwareDownload(packageDir, savePath);
+                        this.progressBar.Show();
+                    }
+                                                     
                 }
                 catch
                 {
@@ -611,6 +621,28 @@ namespace C2.Dialogs
             WriteFile();
             this.Close();
         }
+
+        //下载进度变化触发事件
+        private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+
+            this.progressBar.MinimumValue = 0;//进度条最小值
+            this.progressBar.MaximumValue = (int)e.TotalBytesToReceive;//下载文件的总大小
+            this.progressBar.CurrentValue = (int)e.BytesReceived;//已经下载的大小
+            this.progressBar.ProgressPercentage = e.ProgressPercentage + "%";//更新界面展示
+
+        }
+
+        //下载完文件触发此事件
+        private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+
+            if (e.UserState == null)
+            {
+                this.progressBar.Status = "下载完成,请重启软件实现更新";
+            }
+        }
+
         public void WriteFile()
         {
             //---------------------读html模板页面到stringbuilder对象里----

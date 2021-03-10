@@ -72,7 +72,7 @@ namespace C2.IAOLab.Plugins
         {
             string selectedDll = Global.DLLPackageUrl + pluginName;
             string savePath = Path.Combine(Global.LocalPluginPath, pluginName);
-            downloader.PluginsDownload(selectedDll, savePath);
+            downloader.PluginDownload(selectedDll, savePath);
         }
 
         private PluginsManager()

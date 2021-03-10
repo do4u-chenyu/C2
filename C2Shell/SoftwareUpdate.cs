@@ -43,10 +43,9 @@ namespace C2Shell
             catch 
             {
                 return !needUpdate;
-            }
-
-                    
+            }        
         }
+
         public  bool ExecuteUpdate(string zipName)
         {
             bool success = true;
@@ -102,8 +101,6 @@ namespace C2Shell
             }
             catch
             { }
-            
-          
         }
         public void Clean()
         {

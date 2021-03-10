@@ -16,17 +16,19 @@ namespace RookieKnowledgePlugin
 
         private TreeNode linuxRoot;
         private TreeNode pythonRoot;
+        private String tempPath;
 
         public Form1()
         {
             InitializeComponent();
-            InitializeTrees();
+            InitializeTempPath();
         }
         private void InitializeTrees()
         {
-
-            InitializePythonTree();
-            InitializeLinuxTree();
+            if (pythonRoot == null)
+                InitializePythonTree();
+            if (linuxRoot == null)
+                InitializeLinuxTree();
 
             // GetZipInfo(Properties.Resources.cookbook);
             // GetZipInfo 从项目的资源文件读取zip内容
@@ -35,45 +37,35 @@ namespace RookieKnowledgePlugin
            // string folderPath = @"C:\Users\iao\Desktop\work\C2\test";
         }
         
+        private void InitializeTempPath()
+        {
+            tempPath = Path.Combine(Path.GetTempPath(), "C2", "plugins", "RookieKnowledgePlugin");
+            try
+            {
+                Directory.CreateDirectory(tempPath);
+            } catch { }
+        }
         
         private void InitializeLinuxTree()
         {
+            UnZip(Properties.Resources.Linux, Path.Combine(tempPath, "linux"));
             linuxRoot = new TreeNode();
             linuxRoot.Text = "首页";
             linuxTreeView.Nodes.Add(linuxRoot);
+            // unzip linux.zip
         }
 
         private void InitializePythonTree()
         {
+            UnZip(Properties.Resources.Python, Path.Combine(tempPath, "python"));
             pythonRoot = new TreeNode();
             pythonRoot.Text = "首页";
             pythonTreeView.Nodes.Add(pythonRoot);
+            // unzip Python.zip
         }
-        private void GetZipInfo(byte[] zipFile)
+        private void UnZip(byte[] zipFile, String path)
         {
-            Stream stream = new MemoryStream(zipFile);
-            ZipInputStream s = null;
-            try
-            {
-                using (s = new ZipInputStream(stream))
-                {
-                    ZipEntry theEntry;
-                    while ((theEntry = s.GetNextEntry()) != null)
-                    {
-                        string name = theEntry.Name;
 
-                    }
-                }
-            }
-            catch
-            {
-
-            }
-            finally
-            {
-                if (s != null)
-                    s.Close();
-            }
         }
         public string GetPluginDescription()
         {
@@ -216,6 +208,11 @@ namespace RookieKnowledgePlugin
                 }
             }
             catch { textEditorControlEx1.Text = String.Empty; }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            InitializeTrees();
         }
     }
 }

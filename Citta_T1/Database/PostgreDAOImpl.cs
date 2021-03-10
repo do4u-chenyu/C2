@@ -18,8 +18,6 @@ namespace C2.Database
         private readonly string getTablesSQL = @"select table_name from information_schema.tables where table_schema = 'public'";
         private readonly string getTableContentSQL = @"select * from {0}";
         private readonly string getColNameByTableSQL = @"SELECT a.attnum,a.attname AS field FROM pg_class c,pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,pg_type t WHERE c.relname = '{0}' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid ORDER BY a.attnum";
-        
-        //private  string dataBaseName;
         public PostgreDAOImpl(DatabaseItem dbi) : base(dbi) { }
 
         public string ConnectionString(int time = 1024) 
@@ -31,7 +29,7 @@ namespace C2.Database
                     Pass,
                     User,
                     time,
-                    DefaultSchema());
+                    Schema);
         }
         public override bool TestConn()
         {
