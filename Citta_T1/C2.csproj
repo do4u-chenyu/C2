@@ -1923,13 +1923,28 @@
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <None Include="Resources\arrow_query.bmp" />
+    <Content Include="IAOLab\WebEngine\css\base.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="IAOLab\WebEngine\css\DrawingManager_min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\css\index.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\css\index2.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\Html\BossIndex01.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\Html\BossIndex02.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\Html\BossIndex03.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\Html\SourceCodeMap.html">
@@ -1960,6 +1975,30 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="IAOLab\WebEngine\img\BossStyle01.png" />
+    <Content Include="IAOLab\WebEngine\img\bg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\line.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\line1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\mintitle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\mintitle_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\title.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\true.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\img\t_bg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="IAOLab\WebEngine\JS\china.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1972,7 +2011,13 @@
     <Content Include="IAOLab\WebEngine\JS\echarts.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="IAOLab\WebEngine\JS\jquery-2.2.1.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="IAOLab\WebEngine\JS\phx.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\JS\rem.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\C1\datasource\dataButton.png" />
