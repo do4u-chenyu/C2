@@ -143,9 +143,10 @@
             this.sizeLable = new System.Windows.Forms.Label();
             this.versionLable = new System.Windows.Forms.Label();
             this.title = new System.Windows.Forms.Label();
+            this.currentVersion = new System.Windows.Forms.Label();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.currentVersion = new System.Windows.Forms.Label();
+            this.progressBar = new UpdateProgressBar();
             this.mainTabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
@@ -1320,13 +1321,6 @@
             this.title.TabIndex = 8;
             this.title.Text = "更新可用";
             // 
-            // pythonOpenFileDialog
-            // 
-            this.pythonOpenFileDialog.DefaultExt = "exe";
-            this.pythonOpenFileDialog.Filter = "Python解释器 |python.exe|可执行文件|*.exe";
-            this.pythonOpenFileDialog.RestoreDirectory = true;
-            this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
-            // 
             // currentVersion
             // 
             this.currentVersion.AutoSize = true;
@@ -1337,6 +1331,13 @@
             this.currentVersion.Size = new System.Drawing.Size(61, 22);
             this.currentVersion.TabIndex = 14;
             this.currentVersion.Text = "V1.1.3";
+            // 
+            // pythonOpenFileDialog
+            // 
+            this.pythonOpenFileDialog.DefaultExt = "exe";
+            this.pythonOpenFileDialog.Filter = "Python解释器 |python.exe|可执行文件|*.exe";
+            this.pythonOpenFileDialog.RestoreDirectory = true;
+            this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
             // 
             // ConfigForm
             // 
@@ -1498,5 +1499,6 @@
         private System.Windows.Forms.TextBox baiduHeatTB;
         private System.Windows.Forms.TextBox baiduVerAPITB;
         private System.Windows.Forms.Label currentVersion;
+        private UpdateProgressBar progressBar;
     }
 }

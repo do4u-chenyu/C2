@@ -162,6 +162,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             string fileContent;
             DataTable dataTable = new DataTable("temp");
 
+            if (bcpInfo == null || bcpInfo.ColumnArray.IsEmpty())
+                return dataTable;
             foreach (string col in bcpInfo.ColumnArray)
                 dataTable.Columns.Add(col);
 
@@ -184,6 +186,23 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 dataTable.Rows.Add(tmpRowList.ToArray());
             }
             return dataTable;
+        }
+
+        void Enlarge()
+        {
+            var image = this.pictureBox1.Image;
+            if (image == null)
+                return;
+
+            var dialog = new C2.Dialogs.PictureViewDialog(image);
+            dialog.ImageName = this.bossType.Text;
+            dialog.ShowDialog();
+
+        }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+            Enlarge();
         }
     }
 }

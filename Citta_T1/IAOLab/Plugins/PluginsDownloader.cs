@@ -1,26 +1,18 @@
-﻿using C2.Dialogs;
-using C2.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace C2.IAOLab.Plugins
 {
     public class PluginsDownloader
     {
-        private UpdateProgressBar progressBar;
-        public PluginsDownloader()
-        {
-            progressBar = new UpdateProgressBar()
-            {
-                StartPosition = FormStartPosition.CenterScreen
-            };
-        }
+        public PluginsDownloader() { }
+
+        public AsyncCompletedEventHandler Client_DownloadFileCompleted;
+        public DownloadProgressChangedEventHandler Client_DownloadProgressChanged;
         public string GetHtmlContent(string pluginURL)
         {
             string htmlContent = string.Empty;
@@ -43,7 +35,7 @@ namespace C2.IAOLab.Plugins
             return htmlContent;
         }
 
-        public string GetPluginsInfo(string pluginName, string packageURL)
+        public string GetPluginInfo(string pluginName, string packageURL)
         {
             List<string> tmp = GetPluginsInfoList(new List<string> { pluginName }, packageURL);
             return tmp.Count == 0 ? string.Empty : tmp[0];
@@ -73,54 +65,27 @@ namespace C2.IAOLab.Plugins
             }
             return result;
         }
-        ///<summary>
-        ///异常:
-        ///<para>WedDownloadException</para>
-        ///</summary>
-        public void PluginsDownload(string url, string savePath)
+
+        public void PluginDownload(string pluginUrl, string savePath)
         {
             if (File.Exists(savePath))
                 return;
             Directory.CreateDirectory(Path.GetDirectoryName(savePath));
-            new WebClient().DownloadFile(url, savePath);
+            new WebClient().DownloadFile(pluginUrl, savePath);
         }
+
         #region 更新包下载
-        ///<summary>
-        ///异常:
-        ///<para>WedDownloadException</para>
-        ///</summary>
+
         public void SoftwareDownload(string url, string savePath)
         {
                  
             Directory.CreateDirectory(Path.GetDirectoryName(savePath));
-            this.progressBar.Show();
             WebClient client = new WebClient();//实例化webclient
             client.DownloadFileCompleted += Client_DownloadFileCompleted;//下载完文件触发此事件
             client.DownloadProgressChanged += Client_DownloadProgressChanged;//下载进度变化触发事件
             client.DownloadFileAsync(new Uri(url), savePath);
 
         }
-
-        //下载进度变化触发事件
-        private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-
-            this.progressBar.MinimumValue = 0;//进度条最小值
-            this.progressBar.MaximumValue = (int)e.TotalBytesToReceive;//下载文件的总大小
-            this.progressBar.CurrentValue = (int)e.BytesReceived;//已经下载的大小
-            this.progressBar.ProgressPercentage = e.ProgressPercentage + "%";//更新界面展示
-
-        }
-        //下载完文件触发此事件
-        private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-        
-            if (e.UserState == null)
-            {
-                this.progressBar.Status = "下载完成,请重启软件实现更新";
-            }
-        }
-
         #endregion
     }
 }
