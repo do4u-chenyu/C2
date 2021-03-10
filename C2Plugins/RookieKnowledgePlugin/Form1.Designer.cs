@@ -151,12 +151,12 @@
             // 
             // pythonTextBox
             // 
-            this.pythonTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pythonTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pythonTextBox.FoldingStrategy = "XML";
             this.pythonTextBox.Font = new System.Drawing.Font("Courier New", 10F);
-            this.pythonTextBox.Location = new System.Drawing.Point(0, 25);
+            this.pythonTextBox.Location = new System.Drawing.Point(0, 0);
             this.pythonTextBox.Name = "pythonTextBox";
-            this.pythonTextBox.Size = new System.Drawing.Size(637, 393);
+            this.pythonTextBox.Size = new System.Drawing.Size(637, 418);
             this.pythonTextBox.SyntaxHighlighting = "Python";
             this.pythonTextBox.TabIndex = 3;
             // 
