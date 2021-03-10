@@ -48,6 +48,7 @@ namespace C2.Dialogs
             this.portTextBox.Text = DatabaseInfo.Port;
             this.userTextBox.Text = DatabaseInfo.User;
             this.passwordTextBox.Text = DatabaseInfo.Password;
+            this.schemaTextBox.Text = DatabaseInfo.Schema;
         }
         private DatabaseItem GenDatabaseInfoFormDialog()
         {
@@ -58,7 +59,8 @@ namespace C2.Dialogs
                 this.serviceRadiobutton.Checked ? this.serviceTextBox.Text : String.Empty,
                 this.portTextBox.Text,
                 this.userTextBox.Text,
-                this.passwordTextBox.Text
+                this.passwordTextBox.Text,
+                this.schemaTextBox.Text
                 );
             return tmpDatabaseInfo;
         }
@@ -124,7 +126,11 @@ namespace C2.Dialogs
                 this.passwordTextBox.Text = string.IsNullOrEmpty(this.passwordTextBox.Text) ? "None" : this.passwordTextBox.Text;
                 return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
             }
-
+            if (this.databaseTypeComboBox.Text.Contains("PG"))
+            {
+                this.schemaTextBox.Text = string.IsNullOrEmpty(this.schemaTextBox.Text) ? "postgres" : this.schemaTextBox.Text;
+                return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
+            }
 
             return (databaseTypeComboBox.SelectedIndex == -1) || string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||
@@ -135,18 +141,37 @@ namespace C2.Dialogs
         {
             if (databaseTypeComboBox.SelectedItem == null)
                 return;
-            bool notHive =! databaseTypeComboBox.SelectedItem.ToString().Contains( "Hive");
-            this.portTextBox.Text = notHive ? "1521" : "10000";
-            this.portTextBox.ForeColor = notHive ? Color.Black : Color.Gray;
-            this.serviceTextBox.Enabled = notHive;
-            this.sidTextBox.Enabled = notHive;
-            this.sidTextBox.Text = notHive ? "orcl":"";
+            if(databaseTypeComboBox.SelectedItem.ToString().Contains( "Oracle"))
+            {
+                this.portTextBox.Text = "1521";
+                this.portTextBox.ForeColor = Color.Black ;
+                this.serviceTextBox.Enabled = true;
+                this.sidTextBox.Enabled = true;
+                this.schemaTextBox.Enabled = false;
+                this.sidTextBox.Text = "orcl";
+                this.schemaTextBox.Text = "";
+            }
 
-            if (!notHive)
+            if (databaseTypeComboBox.SelectedItem.ToString().Contains("PG"))
+            {
+                this.portTextBox.Text = "5432" ;
+                this.userTextBox.Text =  "postgres";
+                this.passwordTextBox.Text =  "";
+                //this.schemaTextBox.Text = "postgres";
+                this.serviceTextBox.Enabled = false;
+                this.sidTextBox.Enabled = false;
+                this.schemaTextBox.Enabled = true;
+            }
+            
+            if (databaseTypeComboBox.SelectedItem.ToString().Contains("Hive"))
             {
                 this.serverTextBox.Text = "10.1.126.4";
                 this.userTextBox.Text = "None";
                 this.passwordTextBox.Text = "None";
+                this.schemaTextBox.Text = "";
+                this.serviceTextBox.Enabled = false;
+                this.sidTextBox.Enabled = false;
+                this.schemaTextBox.Enabled = false;
             }
 
         }

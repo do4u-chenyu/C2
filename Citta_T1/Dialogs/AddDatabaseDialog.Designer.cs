@@ -43,6 +43,8 @@
             this.serviceTextBox = new System.Windows.Forms.TextBox();
             this.sidTextBox = new System.Windows.Forms.TextBox();
             this.TestButton = new System.Windows.Forms.Button();
+            this.schemaTextBox = new System.Windows.Forms.TextBox();
+            this.schemaLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // databaseTypeLabel
@@ -50,7 +52,7 @@
             this.databaseTypeLabel.AutoSize = true;
             this.databaseTypeLabel.Location = new System.Drawing.Point(19, 23);
             this.databaseTypeLabel.Name = "databaseTypeLabel";
-            this.databaseTypeLabel.Size = new System.Drawing.Size(65, 12);
+            this.databaseTypeLabel.Size = new System.Drawing.Size(82, 15);
             this.databaseTypeLabel.TabIndex = 10003;
             this.databaseTypeLabel.Text = "数据库类型";
             // 
@@ -59,7 +61,7 @@
             this.serverLabel.AutoSize = true;
             this.serverLabel.Location = new System.Drawing.Point(19, 59);
             this.serverLabel.Name = "serverLabel";
-            this.serverLabel.Size = new System.Drawing.Size(71, 12);
+            this.serverLabel.Size = new System.Drawing.Size(90, 15);
             this.serverLabel.TabIndex = 10004;
             this.serverLabel.Text = "服务器（V）";
             // 
@@ -68,7 +70,7 @@
             this.userLabel.AutoSize = true;
             this.userLabel.Location = new System.Drawing.Point(19, 96);
             this.userLabel.Name = "userLabel";
-            this.userLabel.Size = new System.Drawing.Size(71, 12);
+            this.userLabel.Size = new System.Drawing.Size(90, 15);
             this.userLabel.TabIndex = 10006;
             this.userLabel.Text = "用户名（U）";
             // 
@@ -77,7 +79,7 @@
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Location = new System.Drawing.Point(19, 134);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(59, 12);
+            this.passwordLabel.Size = new System.Drawing.Size(75, 15);
             this.passwordLabel.TabIndex = 10007;
             this.passwordLabel.Text = "密码（P）";
             // 
@@ -85,7 +87,7 @@
             // 
             this.serverTextBox.Location = new System.Drawing.Point(100, 56);
             this.serverTextBox.Name = "serverTextBox";
-            this.serverTextBox.Size = new System.Drawing.Size(95, 21);
+            this.serverTextBox.Size = new System.Drawing.Size(95, 25);
             this.serverTextBox.TabIndex = 10009;
             this.serverTextBox.Text = "114.55.248.85";
             // 
@@ -94,7 +96,7 @@
             this.portLabel.AutoSize = true;
             this.portLabel.Location = new System.Drawing.Point(216, 61);
             this.portLabel.Name = "portLabel";
-            this.portLabel.Size = new System.Drawing.Size(59, 12);
+            this.portLabel.Size = new System.Drawing.Size(75, 15);
             this.portLabel.TabIndex = 10010;
             this.portLabel.Text = "端口（R）";
             // 
@@ -102,7 +104,7 @@
             // 
             this.portTextBox.Location = new System.Drawing.Point(281, 56);
             this.portTextBox.Name = "portTextBox";
-            this.portTextBox.Size = new System.Drawing.Size(84, 21);
+            this.portTextBox.Size = new System.Drawing.Size(84, 25);
             this.portTextBox.TabIndex = 10012;
             this.portTextBox.Text = "1521";
             this.portTextBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PortTextBox_MouseUp);
@@ -111,7 +113,7 @@
             // 
             this.userTextBox.Location = new System.Drawing.Point(100, 93);
             this.userTextBox.Name = "userTextBox";
-            this.userTextBox.Size = new System.Drawing.Size(265, 21);
+            this.userTextBox.Size = new System.Drawing.Size(265, 25);
             this.userTextBox.TabIndex = 10013;
             this.userTextBox.Text = "test";
             // 
@@ -119,7 +121,7 @@
             // 
             this.passwordTextBox.Location = new System.Drawing.Point(100, 131);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(265, 21);
+            this.passwordTextBox.Size = new System.Drawing.Size(265, 25);
             this.passwordTextBox.TabIndex = 10014;
             this.passwordTextBox.Text = "test";
             // 
@@ -129,19 +131,20 @@
             this.databaseTypeComboBox.FormattingEnabled = true;
             this.databaseTypeComboBox.Items.AddRange(new object[] {
             "Oracle",
-            "Hiveserver2"});
+            "Hiveserver2",
+            "PG"});
             this.databaseTypeComboBox.Location = new System.Drawing.Point(100, 20);
             this.databaseTypeComboBox.Name = "databaseTypeComboBox";
-            this.databaseTypeComboBox.Size = new System.Drawing.Size(265, 20);
+            this.databaseTypeComboBox.Size = new System.Drawing.Size(265, 23);
             this.databaseTypeComboBox.TabIndex = 10015;
             this.databaseTypeComboBox.TextChanged += new System.EventHandler(this.DatabaseTypeComboBox_TextChanged);
             // 
             // serviceRadiobutton
             // 
             this.serviceRadiobutton.AutoSize = true;
-            this.serviceRadiobutton.Location = new System.Drawing.Point(21, 168);
+            this.serviceRadiobutton.Location = new System.Drawing.Point(21, 204);
             this.serviceRadiobutton.Name = "serviceRadiobutton";
-            this.serviceRadiobutton.Size = new System.Drawing.Size(59, 16);
+            this.serviceRadiobutton.Size = new System.Drawing.Size(73, 19);
             this.serviceRadiobutton.TabIndex = 10017;
             this.serviceRadiobutton.Text = "服务名";
             this.serviceRadiobutton.UseVisualStyleBackColor = true;
@@ -150,9 +153,9 @@
             // 
             this.sidRadiobutton.AutoSize = true;
             this.sidRadiobutton.Checked = true;
-            this.sidRadiobutton.Location = new System.Drawing.Point(21, 200);
+            this.sidRadiobutton.Location = new System.Drawing.Point(22, 239);
             this.sidRadiobutton.Name = "sidRadiobutton";
-            this.sidRadiobutton.Size = new System.Drawing.Size(41, 16);
+            this.sidRadiobutton.Size = new System.Drawing.Size(52, 19);
             this.sidRadiobutton.TabIndex = 10018;
             this.sidRadiobutton.TabStop = true;
             this.sidRadiobutton.Text = "SID";
@@ -160,22 +163,22 @@
             // 
             // serviceTextBox
             // 
-            this.serviceTextBox.Location = new System.Drawing.Point(100, 167);
+            this.serviceTextBox.Location = new System.Drawing.Point(101, 203);
             this.serviceTextBox.Name = "serviceTextBox";
-            this.serviceTextBox.Size = new System.Drawing.Size(265, 21);
+            this.serviceTextBox.Size = new System.Drawing.Size(265, 25);
             this.serviceTextBox.TabIndex = 10019;
             // 
             // sidTextBox
             // 
-            this.sidTextBox.Location = new System.Drawing.Point(100, 199);
+            this.sidTextBox.Location = new System.Drawing.Point(100, 238);
             this.sidTextBox.Name = "sidTextBox";
-            this.sidTextBox.Size = new System.Drawing.Size(265, 21);
+            this.sidTextBox.Size = new System.Drawing.Size(265, 25);
             this.sidTextBox.TabIndex = 10020;
             this.sidTextBox.Text = "orcl";
             // 
             // TestButton
             // 
-            this.TestButton.Location = new System.Drawing.Point(150, 231);
+            this.TestButton.Location = new System.Drawing.Point(152, 284);
             this.TestButton.Name = "TestButton";
             this.TestButton.Size = new System.Drawing.Size(75, 27);
             this.TestButton.TabIndex = 10022;
@@ -183,11 +186,29 @@
             this.TestButton.UseVisualStyleBackColor = true;
             this.TestButton.Click += new System.EventHandler(this.TestButton_Click);
             // 
+            // schemaTextBox
+            // 
+            this.schemaTextBox.Location = new System.Drawing.Point(100, 167);
+            this.schemaTextBox.Name = "schemaTextBox";
+            this.schemaTextBox.Size = new System.Drawing.Size(265, 25);
+            this.schemaTextBox.TabIndex = 10023;
+            // 
+            // schemaLabel
+            // 
+            this.schemaLabel.AutoSize = true;
+            this.schemaLabel.Location = new System.Drawing.Point(18, 170);
+            this.schemaLabel.Name = "schemaLabel";
+            this.schemaLabel.Size = new System.Drawing.Size(75, 15);
+            this.schemaLabel.TabIndex = 10024;
+            this.schemaLabel.Text = "架构（D）";
+            // 
             // AddDatabaseDialog
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(403, 270);
+            this.ClientSize = new System.Drawing.Size(403, 323);
+            this.Controls.Add(this.schemaLabel);
+            this.Controls.Add(this.schemaTextBox);
             this.Controls.Add(this.TestButton);
             this.Controls.Add(this.sidTextBox);
             this.Controls.Add(this.serviceTextBox);
@@ -222,6 +243,8 @@
             this.Controls.SetChildIndex(this.serviceTextBox, 0);
             this.Controls.SetChildIndex(this.sidTextBox, 0);
             this.Controls.SetChildIndex(this.TestButton, 0);
+            this.Controls.SetChildIndex(this.schemaTextBox, 0);
+            this.Controls.SetChildIndex(this.schemaLabel, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,5 +267,7 @@
         private System.Windows.Forms.TextBox serviceTextBox;
         private System.Windows.Forms.TextBox sidTextBox;
         private System.Windows.Forms.Button TestButton;
+        private System.Windows.Forms.TextBox schemaTextBox;
+        private System.Windows.Forms.Label schemaLabel;
     }
 }

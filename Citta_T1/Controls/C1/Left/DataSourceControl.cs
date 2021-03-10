@@ -440,6 +440,7 @@ namespace C2.Controls.Left
             if (dbi.Type == DatabaseType.Postgre)
             {
                 this.schemaComboBox.Text = defaultSchema;
+                this.schemaComboBox.Enabled = false;
             }
             else
             {
