@@ -132,38 +132,49 @@ namespace RookieKnowledgePlugin
         {
             if (e.Node.Name == "首页")
             {
-                textEditorControlEx1.Text = String.Empty;
+                linuxTextBox.SetTextAndRefresh("Linux 首页");
             }
             else
-                TreeView_AfterSelect(textEditorControlEx1, e.Node.Name);
+                TreeView_AfterSelect(linuxTextBox, e.Node.Name);
+           
         }
 
         private void PythonTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Name == "首页")
             {
-                textEditorControlEx2.Text = String.Empty;
+                pythonTextBox.SetTextAndRefresh("Python 首页");
             }
             else
-                TreeView_AfterSelect(textEditorControlEx2, e.Node.Name);
+                TreeView_AfterSelect(pythonTextBox, e.Node.Name);
         }
 
 
-        private void TreeView_AfterSelect(Control ct, String name)
+        private void TreeView_AfterSelect(ICSharpCode.TextEditor.TextEditorControlEx tc, String name)
         {
             try
             {
                 using (StreamReader sr = new StreamReader(name))
                 {
-                    ct.Text = sr.ReadToEnd();
+                    tc.SetTextAndRefresh(sr.ReadToEnd());
                 }
             }
-            catch { ct.Text = String.Empty; }
+            catch { tc.SetTextAndRefresh(String.Empty); }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             InitializeTrees();
+        }
+
+        private void LinuxFilterTB_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PythonFilterTB_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

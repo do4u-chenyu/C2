@@ -32,28 +32,22 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textEditorControlEx1 = new ICSharpCode.TextEditor.TextEditorControlEx();
+            this.linuxTextBox = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.linuxFilterTB = new System.Windows.Forms.TextBox();
             this.linuxTreeView = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            this.textEditorControlEx2 = new ICSharpCode.TextEditor.TextEditorControlEx();
+            this.pythonTextBox = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pythonTreeView = new System.Windows.Forms.TreeView();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.pythonFilterTB = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,30 +78,30 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.textEditorControlEx1);
+            this.panel2.Controls.Add(this.linuxTextBox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(152, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(637, 418);
             this.panel2.TabIndex = 3;
             // 
-            // textEditorControlEx1
+            // linuxTextBox
             // 
-            this.textEditorControlEx1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEditorControlEx1.FoldingStrategy = "XML";
-            this.textEditorControlEx1.Font = new System.Drawing.Font("Courier New", 10F);
-            this.textEditorControlEx1.IsReadOnly = true;
-            this.textEditorControlEx1.Location = new System.Drawing.Point(0, 0);
-            this.textEditorControlEx1.Name = "textEditorControlEx1";
-            this.textEditorControlEx1.ShowSpaces = true;
-            this.textEditorControlEx1.ShowTabs = true;
-            this.textEditorControlEx1.Size = new System.Drawing.Size(637, 418);
-            this.textEditorControlEx1.SyntaxHighlighting = "Python";
-            this.textEditorControlEx1.TabIndex = 2;
+            this.linuxTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.linuxTextBox.FoldingStrategy = "XML";
+            this.linuxTextBox.Font = new System.Drawing.Font("Courier New", 10F);
+            this.linuxTextBox.IsReadOnly = true;
+            this.linuxTextBox.Location = new System.Drawing.Point(0, 0);
+            this.linuxTextBox.Name = "linuxTextBox";
+            this.linuxTextBox.ShowSpaces = true;
+            this.linuxTextBox.ShowTabs = true;
+            this.linuxTextBox.Size = new System.Drawing.Size(637, 418);
+            this.linuxTextBox.SyntaxHighlighting = "Python";
+            this.linuxTextBox.TabIndex = 2;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.linuxFilterTB);
             this.panel1.Controls.Add(this.linuxTreeView);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(3, 3);
@@ -115,13 +109,14 @@
             this.panel1.Size = new System.Drawing.Size(149, 418);
             this.panel1.TabIndex = 2;
             // 
-            // textBox1
+            // linuxFilterTB
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(149, 21);
-            this.textBox1.TabIndex = 3;
+            this.linuxFilterTB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.linuxFilterTB.Location = new System.Drawing.Point(0, 0);
+            this.linuxFilterTB.Name = "linuxFilterTB";
+            this.linuxFilterTB.Size = new System.Drawing.Size(149, 21);
+            this.linuxFilterTB.TabIndex = 3;
+            this.linuxFilterTB.TextChanged += new System.EventHandler(this.LinuxFilterTB_TextChanged);
             // 
             // linuxTreeView
             // 
@@ -147,80 +142,28 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.toolStrip2);
-            this.panel4.Controls.Add(this.textEditorControlEx2);
+            this.panel4.Controls.Add(this.pythonTextBox);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(152, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(637, 418);
             this.panel4.TabIndex = 1;
             // 
-            // toolStrip2
+            // pythonTextBox
             // 
-            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton5,
-            this.toolStripButton6,
-            this.toolStripButton7,
-            this.toolStripButton8});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(637, 27);
-            this.toolStrip2.TabIndex = 4;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton5.Text = "toolStripButton1";
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton6.Text = "toolStripButton2";
-            // 
-            // toolStripButton7
-            // 
-            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton7.Text = "toolStripButton3";
-            // 
-            // toolStripButton8
-            // 
-            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton8.Text = "toolStripButton4";
-            // 
-            // textEditorControlEx2
-            // 
-            this.textEditorControlEx2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textEditorControlEx2.FoldingStrategy = "XML";
-            this.textEditorControlEx2.Font = new System.Drawing.Font("Courier New", 10F);
-            this.textEditorControlEx2.Location = new System.Drawing.Point(0, 25);
-            this.textEditorControlEx2.Name = "textEditorControlEx2";
-            this.textEditorControlEx2.Size = new System.Drawing.Size(637, 393);
-            this.textEditorControlEx2.SyntaxHighlighting = "Python";
-            this.textEditorControlEx2.TabIndex = 3;
-            this.textEditorControlEx2.Text = "textEditorControlEx2";
+            this.pythonTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pythonTextBox.FoldingStrategy = "XML";
+            this.pythonTextBox.Font = new System.Drawing.Font("Courier New", 10F);
+            this.pythonTextBox.Location = new System.Drawing.Point(0, 25);
+            this.pythonTextBox.Name = "pythonTextBox";
+            this.pythonTextBox.Size = new System.Drawing.Size(637, 393);
+            this.pythonTextBox.SyntaxHighlighting = "Python";
+            this.pythonTextBox.TabIndex = 3;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.pythonTreeView);
-            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.pythonFilterTB);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
@@ -236,13 +179,14 @@
             this.pythonTreeView.TabIndex = 5;
             this.pythonTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.PythonTreeView_AfterSelect);
             // 
-            // textBox2
+            // pythonFilterTB
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox2.Location = new System.Drawing.Point(0, 0);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(149, 21);
-            this.textBox2.TabIndex = 4;
+            this.pythonFilterTB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pythonFilterTB.Location = new System.Drawing.Point(0, 0);
+            this.pythonFilterTB.Name = "pythonFilterTB";
+            this.pythonFilterTB.Size = new System.Drawing.Size(149, 21);
+            this.pythonFilterTB.TabIndex = 4;
+            this.pythonFilterTB.TextChanged += new System.EventHandler(this.PythonFilterTB_TextChanged);
             // 
             // Form1
             // 
@@ -265,9 +209,6 @@
             this.panel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -282,17 +223,12 @@
         private System.Windows.Forms.TreeView linuxTreeView;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox1;
-        private ICSharpCode.TextEditor.TextEditorControlEx textEditorControlEx1;
+        private System.Windows.Forms.TextBox linuxFilterTB;
+        private ICSharpCode.TextEditor.TextEditorControlEx linuxTextBox;
         private System.Windows.Forms.Panel panel4;
-        private ICSharpCode.TextEditor.TextEditorControlEx textEditorControlEx2;
+        private ICSharpCode.TextEditor.TextEditorControlEx pythonTextBox;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TreeView pythonTreeView;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
-        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.TextBox pythonFilterTB;
     }
 }
