@@ -19,6 +19,7 @@ namespace C2Shell
         private readonly string configFilePath = Path.Combine(Application.StartupPath, "C2.exe.config");
 
 
+
         public string ZipName  {get;set; }
         public SoftwareUpdate()
         {
@@ -70,12 +71,14 @@ namespace C2Shell
             string errMsg = Utils.ZipUtil.UnZipFile(zipPath, updatePath);
             if (!string.IsNullOrEmpty(errMsg))
             {
+                MessageBox.Show("解压失败");
                 return !success;
             }
-
+            MessageBox.Show("解压成功");
             // 执行 setup.bat脚本 ，进行文件备份和替换     
             if (ExecuteCmdScript(scriptPath, true))
             {
+                MessageBox.Show("执行文件替换成功");
                 // 修改配置文件版本号
                 string newVersion = Path.GetFileNameWithoutExtension(zipName);
                 Utils.XmlUtil.UpdateVersion(configFilePath, newVersion);
@@ -97,6 +100,7 @@ namespace C2Shell
                     return;
                 }
                 string scriptPath = Path.Combine(updatePath, "rollback.bat");
+                MessageBox.Show("执行回滚");
                 ExecuteCmdScript(scriptPath,false);
             }
             catch
@@ -112,25 +116,18 @@ namespace C2Shell
             catch
             { }
         }
-        public  void StartCoreProcess()
+        public void StartCoreProcess()
         {
-            
+
             Process process = new System.Diagnostics.Process();
             try
             {
                 process.StartInfo.FileName = strPathExe;
                 process.Start();
-                process.WaitForExit();           
+
             }
             catch
             { }
-            finally
-            {
-                if (process != null)
-                    process.Dispose();//释放资源
-                process.Close();
-            }
-
 
         }
         public bool ExecuteCmdScript(string scriptPath, bool isUpdate)
@@ -148,7 +145,7 @@ namespace C2Shell
             process.StartInfo.Verb = "runas";
             process.StartInfo.CreateNoWindow = true;//不显示程序窗口
 
-
+            
             try
             {
                 process.Start();//启动程序
@@ -158,25 +155,31 @@ namespace C2Shell
                    
                     while (!string.IsNullOrEmpty(line = sr.ReadLine()))
                     {
-                        process.StandardInput.WriteLine(line);
-                       
+                        MessageBox.Show("执行命令：" + line);
+                        process.StandardInput.WriteLine(line);                     
                     }
                     process.StandardInput.WriteLine("exit");
                 }
-                process.WaitForExit(); 
+                MessageBox.Show("cmd进程号: " + process.Id + "cmd进程名称: " + process.ProcessName);
+                process.WaitForExit();
+              
                 if (process.ExitCode != 0)
                 {
+                    MessageBox.Show("进入process.ExitCode, 更新脚本执行失败");
                     return !success;
                 }
             }
             catch
             {
+                MessageBox.Show("进入catch, 更新脚本执行失败");
                 return !success;
             }
             finally
             {
                 if (process != null)
+                { 
                     process.Dispose();//释放资源
+                }                    
                 process.Close();
             }        
             return success;
