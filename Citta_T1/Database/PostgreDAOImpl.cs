@@ -88,15 +88,15 @@ namespace C2.Database
                         sb.Append(sdr.GetName(i)).Append(OpUtil.TabSeparator);
                     sb.Append(sdr.GetName(sdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
                 }
-                while (sdr.Read() && totalReturnNum < returnNum)
+                while (sdr.Read() && totalReturnNum++ < returnNum)
                 {
                     for (int i = 0; i < sdr.FieldCount - 1; i++)
                         sb.Append(sdr[i]).Append(OpUtil.TabSeparator);
                     sb.Append(sdr[sdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
-                    totalReturnNum += 1;
                 }
             }
-            return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
+            sb.Remove(sb.Length -2 , 2);
+            return sb.ToString();
         }
 
         public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1)
