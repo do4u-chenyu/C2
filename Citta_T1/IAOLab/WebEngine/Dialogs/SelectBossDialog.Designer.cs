@@ -35,23 +35,23 @@
             this.datasource = new System.Windows.Forms.ComboBox();
             this.bossType = new System.Windows.Forms.ComboBox();
             this.simpleBarX = new System.Windows.Forms.ComboBox();
-            this.captionBar1 = new C2.Controls.CaptionBar();
-            this.captionBar2 = new C2.Controls.CaptionBar();
+            this.simpleBarCaption = new C2.Controls.CaptionBar();
+            this.stackBarCaption = new C2.Controls.CaptionBar();
             this.label3 = new System.Windows.Forms.Label();
             this.stackBarX = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.basicPieY = new System.Windows.Forms.ComboBox();
-            this.captionBar3 = new C2.Controls.CaptionBar();
-            this.captionBar4 = new C2.Controls.CaptionBar();
-            this.captionBar5 = new C2.Controls.CaptionBar();
+            this.smoothedLineChartCaption = new C2.Controls.CaptionBar();
+            this.basicScatterCaption = new C2.Controls.CaptionBar();
+            this.basicMapCaption = new C2.Controls.CaptionBar();
             this.basicMapX = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.basicMapY = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.captionBar6 = new C2.Controls.CaptionBar();
-            this.captionBar7 = new C2.Controls.CaptionBar();
+            this.basicPieCaption = new C2.Controls.CaptionBar();
+            this.basicLineChartCaption = new C2.Controls.CaptionBar();
             this.simpleBarY = new C2.Controls.Common.ComCheckBoxList();
             this.basicLineChartY = new C2.Controls.Common.ComCheckBoxList();
             this.basicLineChartX = new System.Windows.Forms.ComboBox();
@@ -131,13 +131,14 @@
             this.bossType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.bossType.FormattingEnabled = true;
             this.bossType.Items.AddRange(new object[] {
-            "样式1",
-            "样式2",
-            "样式3"});
+            "样式1（丰富，内含7种图表）",
+            "样式2（简约，内含4种图表）",
+            "样式3（科技，内含5种图表）"});
             this.bossType.Location = new System.Drawing.Point(98, 74);
             this.bossType.Name = "bossType";
             this.bossType.Size = new System.Drawing.Size(368, 20);
             this.bossType.TabIndex = 10009;
+            this.bossType.SelectedIndexChanged += new System.EventHandler(this.BossType_SelectedIndexChanged);
             // 
             // simpleBarX
             // 
@@ -148,25 +149,25 @@
             this.simpleBarX.Size = new System.Drawing.Size(136, 20);
             this.simpleBarX.TabIndex = 10010;
             // 
-            // captionBar1
+            // simpleBarCaption
             // 
-            this.captionBar1.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
-            this.captionBar1.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.captionBar1.Location = new System.Drawing.Point(3, 18);
-            this.captionBar1.Name = "captionBar1";
-            this.captionBar1.Size = new System.Drawing.Size(440, 22);
-            this.captionBar1.TabIndex = 10012;
-            this.captionBar1.Text = "柱状图";
+            this.simpleBarCaption.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
+            this.simpleBarCaption.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleBarCaption.Location = new System.Drawing.Point(3, 18);
+            this.simpleBarCaption.Name = "simpleBarCaption";
+            this.simpleBarCaption.Size = new System.Drawing.Size(440, 22);
+            this.simpleBarCaption.TabIndex = 10012;
+            this.simpleBarCaption.Text = "柱状图";
             // 
             // captionBar2
             // 
-            this.captionBar2.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
-            this.captionBar2.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.captionBar2.Location = new System.Drawing.Point(3, 198);
-            this.captionBar2.Name = "captionBar2";
-            this.captionBar2.Size = new System.Drawing.Size(440, 22);
-            this.captionBar2.TabIndex = 10013;
-            this.captionBar2.Text = "堆叠柱状图";
+            this.stackBarCaption.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
+            this.stackBarCaption.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.stackBarCaption.Location = new System.Drawing.Point(3, 198);
+            this.stackBarCaption.Name = "captionBar2";
+            this.stackBarCaption.Size = new System.Drawing.Size(440, 22);
+            this.stackBarCaption.TabIndex = 10013;
+            this.stackBarCaption.Text = "堆叠柱状图";
             // 
             // label3
             // 
@@ -205,35 +206,35 @@
             this.basicPieY.Size = new System.Drawing.Size(136, 20);
             this.basicPieY.TabIndex = 10017;
             // 
-            // captionBar3
+            // smoothedLineChartCaption
             // 
-            this.captionBar3.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
-            this.captionBar3.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.captionBar3.Location = new System.Drawing.Point(3, 288);
-            this.captionBar3.Name = "captionBar3";
-            this.captionBar3.Size = new System.Drawing.Size(440, 22);
-            this.captionBar3.TabIndex = 10018;
-            this.captionBar3.Text = "曲线图";
+            this.smoothedLineChartCaption.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
+            this.smoothedLineChartCaption.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.smoothedLineChartCaption.Location = new System.Drawing.Point(3, 288);
+            this.smoothedLineChartCaption.Name = "smoothedLineChartCaption";
+            this.smoothedLineChartCaption.Size = new System.Drawing.Size(440, 22);
+            this.smoothedLineChartCaption.TabIndex = 10018;
+            this.smoothedLineChartCaption.Text = "曲线图";
             // 
-            // captionBar4
+            // basicScatterCaption
             // 
-            this.captionBar4.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
-            this.captionBar4.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.captionBar4.Location = new System.Drawing.Point(3, 378);
-            this.captionBar4.Name = "captionBar4";
-            this.captionBar4.Size = new System.Drawing.Size(440, 22);
-            this.captionBar4.TabIndex = 10023;
-            this.captionBar4.Text = "散点图";
+            this.basicScatterCaption.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
+            this.basicScatterCaption.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.basicScatterCaption.Location = new System.Drawing.Point(3, 378);
+            this.basicScatterCaption.Name = "basicScatterCaption";
+            this.basicScatterCaption.Size = new System.Drawing.Size(440, 22);
+            this.basicScatterCaption.TabIndex = 10023;
+            this.basicScatterCaption.Text = "散点图";
             // 
             // captionBar5
             // 
-            this.captionBar5.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
-            this.captionBar5.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.captionBar5.Location = new System.Drawing.Point(3, 558);
-            this.captionBar5.Name = "captionBar5";
-            this.captionBar5.Size = new System.Drawing.Size(440, 22);
-            this.captionBar5.TabIndex = 10024;
-            this.captionBar5.Text = "地市分布图";
+            this.basicMapCaption.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
+            this.basicMapCaption.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.basicMapCaption.Location = new System.Drawing.Point(3, 558);
+            this.basicMapCaption.Name = "captionBar5";
+            this.basicMapCaption.Size = new System.Drawing.Size(440, 22);
+            this.basicMapCaption.TabIndex = 10024;
+            this.basicMapCaption.Text = "地市分布图";
             // 
             // basicMapX
             // 
@@ -297,25 +298,25 @@
             this.label16.TabIndex = 10044;
             this.label16.Text = "预览图：";
             // 
-            // captionBar6
+            // basicPieCaption
             // 
-            this.captionBar6.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
-            this.captionBar6.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.captionBar6.Location = new System.Drawing.Point(3, 468);
-            this.captionBar6.Name = "captionBar6";
-            this.captionBar6.Size = new System.Drawing.Size(440, 22);
-            this.captionBar6.TabIndex = 10045;
-            this.captionBar6.Text = "饼状图";
+            this.basicPieCaption.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
+            this.basicPieCaption.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.basicPieCaption.Location = new System.Drawing.Point(3, 468);
+            this.basicPieCaption.Name = "basicPieCaption";
+            this.basicPieCaption.Size = new System.Drawing.Size(440, 22);
+            this.basicPieCaption.TabIndex = 10045;
+            this.basicPieCaption.Text = "饼状图";
             // 
             // captionBar7
             // 
-            this.captionBar7.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
-            this.captionBar7.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.captionBar7.Location = new System.Drawing.Point(3, 108);
-            this.captionBar7.Name = "captionBar7";
-            this.captionBar7.Size = new System.Drawing.Size(440, 22);
-            this.captionBar7.TabIndex = 10052;
-            this.captionBar7.Text = "折线图";
+            this.basicLineChartCaption.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
+            this.basicLineChartCaption.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.basicLineChartCaption.Location = new System.Drawing.Point(3, 108);
+            this.basicLineChartCaption.Name = "captionBar7";
+            this.basicLineChartCaption.Size = new System.Drawing.Size(440, 22);
+            this.basicLineChartCaption.TabIndex = 10052;
+            this.basicLineChartCaption.Text = "折线图";
             // 
             // simpleBarY
             // 
@@ -481,22 +482,22 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.captionBar4);
+            this.panel1.Controls.Add(this.basicScatterCaption);
             this.panel1.Controls.Add(this.stackBarY);
             this.panel1.Controls.Add(this.basicPieY);
             this.panel1.Controls.Add(this.simpleBarY);
             this.panel1.Controls.Add(this.basicPieX);
-            this.panel1.Controls.Add(this.captionBar3);
+            this.panel1.Controls.Add(this.smoothedLineChartCaption);
             this.panel1.Controls.Add(this.label15);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.captionBar5);
+            this.panel1.Controls.Add(this.basicMapCaption);
             this.panel1.Controls.Add(this.stackBarX);
             this.panel1.Controls.Add(this.label17);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.captionBar2);
+            this.panel1.Controls.Add(this.stackBarCaption);
             this.panel1.Controls.Add(this.basicScatterY);
-            this.panel1.Controls.Add(this.captionBar1);
+            this.panel1.Controls.Add(this.simpleBarCaption);
             this.panel1.Controls.Add(this.simpleBarX);
             this.panel1.Controls.Add(this.basicMapX);
             this.panel1.Controls.Add(this.basicScatterX);
@@ -506,9 +507,9 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.basicMapY);
             this.panel1.Controls.Add(this.label14);
-            this.panel1.Controls.Add(this.captionBar6);
+            this.panel1.Controls.Add(this.basicPieCaption);
             this.panel1.Controls.Add(this.smoothedLineChartY);
-            this.panel1.Controls.Add(this.captionBar7);
+            this.panel1.Controls.Add(this.basicLineChartCaption);
             this.panel1.Controls.Add(this.smoothedLineChartX);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label9);
@@ -573,23 +574,23 @@
         private System.Windows.Forms.ComboBox datasource;
         private System.Windows.Forms.ComboBox bossType;
         private System.Windows.Forms.ComboBox simpleBarX;
-        private Controls.CaptionBar captionBar1;
-        private Controls.CaptionBar captionBar2;
+        private Controls.CaptionBar simpleBarCaption;
+        private Controls.CaptionBar stackBarCaption;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox stackBarX;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox basicPieY;
-        private Controls.CaptionBar captionBar3;
-        private Controls.CaptionBar captionBar4;
-        private Controls.CaptionBar captionBar5;
+        private Controls.CaptionBar smoothedLineChartCaption;
+        private Controls.CaptionBar basicScatterCaption;
+        private Controls.CaptionBar basicMapCaption;
         private System.Windows.Forms.ComboBox basicMapX;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox basicMapY;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label16;
-        private Controls.CaptionBar captionBar6;
-        private Controls.CaptionBar captionBar7;
+        private Controls.CaptionBar basicPieCaption;
+        private Controls.CaptionBar basicLineChartCaption;
         private Controls.Common.ComCheckBoxList simpleBarY;
         private Controls.Common.ComCheckBoxList basicLineChartY;
         private System.Windows.Forms.ComboBox basicLineChartX;

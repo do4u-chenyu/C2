@@ -12,8 +12,12 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Line
     /// </summary>
     public class BasicLineChart : BaseCharts
     {
-        public BasicLineChart(DataTable dataTable, CompleteOption option, int[] chartOptions)
+        public BasicLineChart(DataTable dataTable, CompleteOption option, Dictionary<string, int[]> chartOptionDict)
         {
+            if (!chartOptionDict.ContainsKey("BasicLineChart") || chartOptionDict["BasicLineChart"].Length == 0)
+                return;
+
+            int[] chartOptions = chartOptionDict["BasicLineChart"];
             option.xAxis = new XAxis() {
                 type = xAxisType.category
             };

@@ -1,14 +1,19 @@
 ﻿using C2.IAOLab.WebEngine.Boss.Option;
 using C2.IAOLab.WebEngine.Boss.Option.SeriesType;
 using C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption;
+using System.Collections.Generic;
 using System.Data;
 
 namespace C2.IAOLab.WebEngine.Boss.Charts.Pie
 {
     public class BasicPie : BaseCharts
     {
-        public BasicPie(DataTable dataTable, CompleteOption option, int[] chartOptions) {
-            
+        public BasicPie(DataTable dataTable, CompleteOption option, Dictionary<string, int[]> chartOptionDict) 
+        {
+            if (!chartOptionDict.ContainsKey("BasicPie") || chartOptionDict["BasicPie"].Length <= 1)
+                return;
+
+            int[] chartOptions = chartOptionDict["BasicPie"];
             if (!option.legend.FlagDic["orient"]) {
                 option.legend.orient = Option.BaseOption.Orient.horizontal;
                 option.legend.left = Common.FormatString("center");

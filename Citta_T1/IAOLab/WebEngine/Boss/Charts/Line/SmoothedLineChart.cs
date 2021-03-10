@@ -9,8 +9,12 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Line
 {
     public class SmoothedLineChart : BaseCharts
     {
-        public SmoothedLineChart(DataTable dataTable, CompleteOption option, int[] chartOptions)
+        public SmoothedLineChart(DataTable dataTable, CompleteOption option, Dictionary<string, int[]> chartOptionDict)
         {
+            if (!chartOptionDict.ContainsKey("SmoothedLineChart") || chartOptionDict["SmoothedLineChart"].Length == 0)
+                return;
+
+            int[] chartOptions = chartOptionDict["SmoothedLineChart"];
             option.xAxis = new XAxis(){
                 type = xAxisType.category,
             };

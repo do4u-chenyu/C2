@@ -8,6 +8,7 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -24,12 +25,15 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private int oldDataIdx;
         public Dictionary<string, int[]> ChartOptions;
 
+        private List<Image> bossTypeDict;
+
         public SelectBossDialog(List<DataItem> dataItems, Dictionary<string, int[]> options)
         {
             InitializeComponent();
             oldDataIdx = -1;
             DataItems = dataItems;
             ChartOptions = options;
+            bossTypeDict = new List<Image>() { Properties.Resources.BossStyle01 , Properties.Resources.BossStyle01 , Properties.Resources.BossStyle03 };
             LoadOption();
         }
 
@@ -94,8 +98,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 bossType.SelectedIndex = 0;
             else
                 bossType.SelectedIndex = ChartOptions["BossType"][0];
-            //TODO phx 预览图也要跟着调整
-            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "BossIndex01.html");
 
             //初始化数据源
             foreach (DataItem dataItem in DataItems)
@@ -213,6 +215,42 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void PictureBox1_Click(object sender, EventArgs e)
         {
             Enlarge();
+        }
+
+        private void BossType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.pictureBox1.Image = bossTypeDict[bossType.SelectedIndex];
+            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", string.Format("BossIndex0{0}.html",(bossType.SelectedIndex+1).ToString()));
+            //切换样式，每个图表的配置标题要发生变化
+            ChangeCaptionText();
+        }
+
+        private void ChangeCaptionText()
+        {
+            if (bossType.SelectedIndex == 0)
+            {
+                simpleBarCaption.Text = "柱状图（左上方）";
+                basicLineChartCaption.Text = "折线图（左下方）";
+                basicScatterCaption.Text = "点状图（中间下方）";
+                smoothedLineChartCaption.Text = "曲线图（中间下方）";
+                stackBarCaption.Text = "堆叠柱状图（右上方）";
+                basicPieCaption.Text = "饼状图（右下方）";
+                basicMapCaption.Text = "地市分布图（中间上方）";
+            }
+            else if (bossType.SelectedIndex == 1)
+            {
+                //TODO
+            }
+            else if (bossType.SelectedIndex == 2)
+            {
+                simpleBarCaption.Text = "柱状图（左上方）";
+                basicLineChartCaption.Text = "折线图（左下方）";
+                basicScatterCaption.Text = "点状图（正中间）";
+                smoothedLineChartCaption.Text = "曲线图（右上方）";
+                stackBarCaption.Text = "堆叠柱状图（右下方）";
+                basicPieCaption.Text = "饼状图（不展示）";
+                basicMapCaption.Text = "地市分布图（不展示）";
+            }
         }
     }
 }
