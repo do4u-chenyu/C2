@@ -102,19 +102,29 @@ namespace C2.IAOLab.WebEngine.Dialogs
             {
                 this.datasource.Items.Add(dataItem.FileName);
             }
-            if (!ChartOptions.ContainsKey("Datasource") || ChartOptions["Datasource"].Length == 0)
+            if (DataItems.Count == 0)//如果节点没数据，直接返回
                 return;
-            datasource.Text = DataItems[ChartOptions["Datasource"][0]].FileName;
-            selectData = DataItems[ChartOptions["Datasource"][0]];
+            else if(!ChartOptions.ContainsKey("Datasource") || ChartOptions["Datasource"].Length == 0)//ChartOptions未配置，默认展示第一个文件的第1列
+                selectData = DataItems[0];
+            else
+                selectData = DataItems[ChartOptions["Datasource"][0]];
+
+            datasource.Text = selectData.FileName;
             this.bcpInfo = new BcpInfo(selectData.FilePath, selectData.FileEncoding, new char[] { selectData.FileSep });
         }
 
         private void LoadChartOption(string chartType, Control controlX, Control controlY)
         {
-            if (!ChartOptions.ContainsKey(chartType))
+            int defaultIdx = 0;
+            int[] tmpIdx;
+            if (bcpInfo == null || bcpInfo.ColumnArray.Length == 0)
                 return;
-            //x控件一定是ComboBox,y控件可能是ComboBox或者是ComCheckBoxList
-            int[] tmpIdx = ChartOptions[chartType];
+
+            if (!ChartOptions.ContainsKey(chartType) || ChartOptions["Datasource"].Length == 0)
+                tmpIdx = new int[] { defaultIdx, defaultIdx};
+            else
+                tmpIdx = ChartOptions[chartType];
+
             (controlX as ComboBox).SelectedIndex = tmpIdx[0];
             (controlX as ComboBox).Text = bcpInfo.ColumnArray[tmpIdx[0]];
 
@@ -141,7 +151,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void ChangeControlContent()
         {
-            foreach(Control ct in this.Controls)
+            foreach(Control ct in this.panel1.Controls)
             {
                 if(ct is ComboBox && (ct.Name.EndsWith("X") || ct.Name.EndsWith("Y")))
                 {
