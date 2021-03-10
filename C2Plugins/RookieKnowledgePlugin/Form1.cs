@@ -45,8 +45,11 @@ namespace RookieKnowledgePlugin
         private void InitializeLinuxTree()
         {
             UnZip(Properties.Resources.Linux, tempPath);
-            linuxRoot = new TreeNode();
-            linuxRoot.Text = "首页";
+            linuxRoot = new TreeNode
+            {
+                Text = "首页",
+                Name = "首页"
+            };
             linuxTreeView.Nodes.Add(linuxRoot);
             WriteNodes(linuxRoot, Path.Combine(tempPath, "Linux"));
         }
@@ -54,15 +57,25 @@ namespace RookieKnowledgePlugin
         private void InitializePythonTree()
         {
             UnZip(Properties.Resources.Python, tempPath);
-            pythonRoot = new TreeNode();
-            pythonRoot.Text = "首页";
+            pythonRoot = new TreeNode
+            {
+                Text = "首页",
+                Name = "首页"
+            };
             pythonTreeView.Nodes.Add(pythonRoot);
             WriteNodes(pythonRoot, Path.Combine(tempPath, "Python"));
         }
         private void UnZip(byte[] zipBuffer, String path)
         {
             FastZip fastZip = new FastZip();
-            fastZip.ExtractZip(new MemoryStream(zipBuffer), path, FastZip.Overwrite.Always, null, "", "", false, false);
+            fastZip.ExtractZip(new MemoryStream(zipBuffer), 
+                path, 
+                FastZip.Overwrite.Always, 
+                null, 
+                String.Empty, 
+                String.Empty, 
+                false, 
+                false);
         }
         public string GetPluginDescription()
         {
@@ -117,12 +130,22 @@ namespace RookieKnowledgePlugin
 
         private void LinuxTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeView_AfterSelect(textEditorControlEx1, e.Node.Name);
+            if (e.Node.Name == "首页")
+            {
+                textEditorControlEx1.Text = String.Empty;
+            }
+            else
+                TreeView_AfterSelect(textEditorControlEx1, e.Node.Name);
         }
 
         private void PythonTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeView_AfterSelect(textEditorControlEx2, e.Node.Name);
+            if (e.Node.Name == "首页")
+            {
+                textEditorControlEx2.Text = String.Empty;
+            }
+            else
+                TreeView_AfterSelect(textEditorControlEx2, e.Node.Name);
         }
 
 
