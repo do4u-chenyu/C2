@@ -63,9 +63,19 @@ namespace RookieKnowledgePlugin.Properties {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
-        public static byte[] cookbook {
+        public static byte[] Linux {
             get {
-                object obj = ResourceManager.GetObject("cookbook", resourceCulture);
+                object obj = ResourceManager.GetObject("Linux", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] Python {
+            get {
+                object obj = ResourceManager.GetObject("Python", resourceCulture);
                 return ((byte[])(obj));
             }
         }
