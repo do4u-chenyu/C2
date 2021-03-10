@@ -1,19 +1,16 @@
 ﻿using C2.IAOLab.Plugins;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace RookieKnowledgePlugin
 {
     public partial class Form1 : Form, IPlugin
     {
-        static List<string> kidFolder = new List<string>();
-        int i = 0;
-        int j = 0;
-
         private TreeNode linuxRoot;
         private TreeNode pythonRoot;
         private String tempPath;
@@ -34,38 +31,55 @@ namespace RookieKnowledgePlugin
             // GetZipInfo 从项目的资源文件读取zip内容
             // WriteNodes（*，*）可以去掉，在GetZipInfo里获得目录名，创建节点就好
 
-           // string folderPath = @"C:\Users\iao\Desktop\work\C2\test";
+            // string folderPath = @"C:\Users\iao\Desktop\work\C2\test";
         }
-        
+
         private void InitializeTempPath()
         {
             tempPath = Path.Combine(Path.GetTempPath(), "C2", "plugins", "RookieKnowledgePlugin");
             try
             {
                 Directory.CreateDirectory(tempPath);
-            } catch { }
+            }
+            catch { }
         }
-        
+
         private void InitializeLinuxTree()
         {
-            UnZip(Properties.Resources.Linux, Path.Combine(tempPath, "linux"));
-            linuxRoot = new TreeNode();
-            linuxRoot.Text = "首页";
+            UnZip(Properties.Resources.Linux, tempPath);
+            linuxRoot = new TreeNode
+            {
+                Text = "首页",
+                Name = "首页"
+            };
             linuxTreeView.Nodes.Add(linuxRoot);
-            // unzip linux.zip
+            WriteNodes(linuxRoot, Path.Combine(tempPath, "Linux"));
+            linuxRoot.ExpandAll();
         }
 
         private void InitializePythonTree()
         {
-            UnZip(Properties.Resources.Python, Path.Combine(tempPath, "python"));
-            pythonRoot = new TreeNode();
-            pythonRoot.Text = "首页";
+            UnZip(Properties.Resources.Python, tempPath);
+            pythonRoot = new TreeNode
+            {
+                Text = "首页",
+                Name = "首页"
+            };
             pythonTreeView.Nodes.Add(pythonRoot);
-            // unzip Python.zip
+            WriteNodes(pythonRoot, Path.Combine(tempPath, "Python"));
+            pythonRoot.ExpandAll();
         }
-        private void UnZip(byte[] zipFile, String path)
+        private void UnZip(byte[] zipBuffer, String path)
         {
-
+            FastZip fastZip = new FastZip();
+            fastZip.ExtractZip(new MemoryStream(zipBuffer),
+                path,
+                FastZip.Overwrite.Always,
+                null,
+                String.Empty,
+                String.Empty,
+                false,
+                false);
         }
         public string GetPluginDescription()
         {
@@ -91,128 +105,116 @@ namespace RookieKnowledgePlugin
         {
             return this.ShowDialog();
         }
-        public void WriteLastBNodes(TreeView treeView, string folderPath, int i, int j)
-        {
-            if (Directory.Exists(folderPath))
-            {
-                DirectoryInfo dir = new DirectoryInfo(folderPath);
-                //检索表示当前目录的文件和子目录
-                FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
-                if (fsInfos.Length != 0)
-                {
-                    foreach (FileSystemInfo fsInfo in fsInfos)
-                    {
 
-                        TreeNode treeNode = new TreeNode
-                        {
-                            Name = fsInfo.FullName,
-                            Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
-                        };
-                        treeView.Nodes[i].Nodes[j].Nodes.Add(treeNode);
-                    }
-
-                }
-            }
-        }
-        public void WriteChildNodes(TreeView treeView, string folderPath, int i)
+        private void WriteNodes(TreeNode root, String path)
         {
-            if (!Directory.Exists(folderPath))
+            if (!Directory.Exists(path))
                 return;
-            DirectoryInfo dir = new DirectoryInfo(folderPath);
-            //检索表示当前目录的文件和子目录
-            FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
-            if (fsInfos.Length != 0)
+
+            DirectoryInfo pathInfo = new DirectoryInfo(path);
+            foreach (FileSystemInfo fsi in pathInfo.GetFileSystemInfos())
             {
-                foreach (FileSystemInfo fsInfo in fsInfos)
+                if (!fsi.Exists)
+                    continue;
+
+                TreeNode node = new TreeNode
                 {
-                    j++;
-                    if (FileOrFolder(fsInfo.FullName.ToString()))
-                    {
-                        TreeNode treeNode = new TreeNode
-                        {
-                            Name = fsInfo.FullName,
-                            Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
-                        };
-                        treeView.Nodes[i].Nodes.Add(treeNode);
-                        WriteLastBNodes(linuxTreeView, fsInfo.FullName, i, j);
-                    }
-                    else
-                    {
-                        TreeNode treeNode = new TreeNode
-                        {
-                            Name = fsInfo.FullName,
-                            Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
-                        };
-                        treeView.Nodes[i].Nodes.Add(treeNode);
-                    }
-                }
-
+                    Name = fsi.FullName,
+                    Text = Regex.Replace(fsi.Name, @"^\d+_\s*", ""),
+                };
+                root.Nodes.Add(node);
+                if (Directory.Exists(node.Name))
+                    WriteNodes(node, node.Name);
             }
+        }
 
-        }
-        public void WriteNodes(TreeView treeView, string folderPath)
-        {
-            if (!Directory.Exists(folderPath))
-                return;
-            DirectoryInfo dir = new DirectoryInfo(folderPath);
-            //检索表示当前目录的文件和子目录
-            FileSystemInfo[] fsInfos = dir.GetFileSystemInfos();
-            if (fsInfos.Length != 0)
-            {
-                foreach (FileSystemInfo fsInfo in fsInfos)
-                {
-                    i++;
-                    if (FileOrFolder(fsInfo.FullName.ToString()))
-                    {
-                        kidFolder.Add(fsInfo.FullName);
-                        TreeNode treeNode = new TreeNode
-                        {
-                            Name = fsInfo.FullName,
-                            Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
-                        };
-                        treeView.Nodes.Add(treeNode);
-                        WriteChildNodes(linuxTreeView, fsInfo.FullName, i);
-                    }
-                    else
-                    {
-                        TreeNode treeNode = new TreeNode
-                        {
-                            Name = fsInfo.FullName,
-                            Text = fsInfo.Name.Substring(2, fsInfo.Name.Length - 2)
-                        };
-                        treeView.Nodes.Add(treeNode);
-                    }
-                }
-            }
 
-        }
-        private bool FileOrFolder(string path)
-        {
-            if (Directory.Exists(path))
-                return true;
-            if (File.Exists(path))
-                return false;
-            return true;
-        }
 
 
 
         private void LinuxTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            String path = linuxTreeView.SelectedNode.Name;
+            if (e.Node.Name == "首页")
+            {
+                linuxTextBox.SetTextAndRefresh("Linux 首页");
+            }
+            else
+                TreeView_AfterSelect(linuxTextBox, e.Node.Name);
+
+        }
+
+        private void PythonTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Name == "首页")
+            {
+                pythonTextBox.SetTextAndRefresh("Python 首页");
+            }
+            else
+                TreeView_AfterSelect(pythonTextBox, e.Node.Name);
+        }
+
+
+        private void TreeView_AfterSelect(ICSharpCode.TextEditor.TextEditorControlEx tc, String name)
+        {
             try
             {
-                using (StreamReader sr = new StreamReader(path))
+                using (StreamReader sr = new StreamReader(name))
                 {
-                    textEditorControlEx1.Text = sr.ReadToEnd();
+                    tc.SetTextAndRefresh(sr.ReadToEnd());
                 }
             }
-            catch { textEditorControlEx1.Text = String.Empty; }
+            catch { tc.SetTextAndRefresh(String.Empty); }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             InitializeTrees();
+        }
+
+        private void LinuxFilterTB_TextChanged(object sender, EventArgs e)
+        {
+            VisibleTreeNode(linuxRoot, this.linuxFilterTB.Text);
+        }
+
+        private void PythonFilterTB_TextChanged(object sender, EventArgs e)
+        {
+            VisibleTreeNode(pythonRoot, this.pythonFilterTB.Text);
+        }
+
+        private void VisibleTreeNode(TreeNode root, String filter)
+        {
+            root.TreeView.SuspendLayout();
+            if (String.IsNullOrEmpty(filter))
+            {
+                root.ExpandAll();
+                return;
+            }
+
+            root.Collapse();
+            FindNodes(root, filter);
+            root.TreeView.ResumeLayout(false);
+        }
+
+        private void FindNodes(TreeNode root, String filter)
+        {
+            if (root.Text.Contains(filter) && root.GetNodeCount(true) == 0)
+            {
+                Expand(root); 
+            }
+               
+            foreach (TreeNode node in root.Nodes)
+            {
+                FindNodes(node, filter);
+            }
+        }
+
+        private void Expand(TreeNode node)
+        {
+            while (node != null && !node.IsExpanded)
+            {
+                node.Expand();
+                node = node.Parent;
+            }
         }
     }
 }
