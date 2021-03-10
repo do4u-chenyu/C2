@@ -18,6 +18,8 @@ namespace MD5Plugin
         public Form1()
         {
             InitializeComponent();
+            textBox1.Select(textBox1.TextLength , 0);
+            textBox1.Select(0, 0);
         }
 
         public string GetPluginDescription()
@@ -95,15 +97,6 @@ namespace MD5Plugin
 
         }
 
-        private void textBox1_Enter(object sender, EventArgs e)
-        {
-            if(textBox1.Text == "请把你需要加密的内容粘贴在这里" || textBox1.Text== "请输入你要用Base64加密的内容" || textBox1.Text == "请输入你要编码的Url")
-            {
-                textBox1.Text = "";
-            }
-            textBox1.ForeColor = Color.Black;
-
-        }
 
         private void textBox1_MouseDown(object sender, EventArgs e)
         {
