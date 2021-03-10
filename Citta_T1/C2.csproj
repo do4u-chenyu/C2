@@ -243,6 +243,12 @@
     <Compile Include="Database\HiveDAOImpl.cs" />
     <Compile Include="Database\OracleDAOImpl.cs" />
     <Compile Include="Database\PostgreDAOImpl.cs" />
+    <Compile Include="Dialogs\UpdateProgressBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UpdateProgressBar.Designer.cs">
+      <DependentUpon>UpdateProgressBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\SimpleBar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\StackBar.cs" />
@@ -1782,6 +1788,9 @@
     <EmbeddedResource Include="Dialogs\TimerDialog.resx">
       <DependentUpon>TimerDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UpdateProgressBar.resx">
+      <DependentUpon>UpdateProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WidgetChart\VisualDisplayDialog.resx">
       <DependentUpon>VisualDisplayDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -2141,7 +2150,7 @@
     <None Include="Resources\Images\TabBarImage\Tude.png" />
     <None Include="Resources\Images\TabBarImage\WIFI.png" />
     <None Include="Resources\Images\TabBarImage\Hive.png" />
-    <Content Include="Resources\Images\TabBarImage\PostgreSQL .png" />
+    <Content Include="Resources\Images\TabBarImage\PostgreSQL.png" />
     <Content Include="Resources\Images\TabBarImage\业务视图.png" />
     <None Include="Resources\Images\TabBarImage\业务视图2.png" />
     <None Include="Resources\Images\TabBarImage\业务视图3.png" />

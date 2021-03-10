@@ -1,5 +1,5 @@
 ﻿
-namespace C2Shell.Dialogs
+namespace C2.Dialogs
 {
     partial class UpdateProgressBar
     {
@@ -58,9 +58,9 @@ namespace C2Shell.Dialogs
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(59, 12);
             this.status.TabIndex = 3;
-            this.status.Text = "更新中...";
+            this.status.Text = "下载中...";
             // 
-            // ProgressBar
+            // UpdateProgressBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -69,9 +69,11 @@ namespace C2Shell.Dialogs
             this.Controls.Add(this.speedValue);
             this.Controls.Add(this.proBarDownLoad);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ProgressBar";
-            this.Text = "更新任务";
+            this.Name = "UpdateProgressBar";
+            this.Text = "下载任务";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UpdateProgressBar_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

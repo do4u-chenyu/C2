@@ -709,7 +709,7 @@ namespace C2.Forms
         #region 快捷键
         private bool IsCurrentModelNotRun()
         {
-            return Document.TaskManager.ModelStatus == ModelStatus.Running ? false : true;
+            return Document.TaskManager.ModelStatus != ModelStatus.Running;
         }
         protected override void OnKeyDown(KeyEventArgs e)
         {

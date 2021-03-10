@@ -1,5 +1,4 @@
-﻿using C2Shell.Dialogs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;

@@ -582,12 +582,14 @@ namespace C2.Dialogs
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 try
-                {
+                {                 
                     string softwareName = newSoftwareVersion.Replace(".info", "");
                     string packageDir = Path.Combine(Global.SoftwareUrl, @"software/", softwareName);
                     string savePath = Path.Combine(Global.SoftwareSavePath, softwareName);
-                    this.downloader.PluginsDownload(packageDir, savePath);
-                    HelpUtil.ShowMessageBox("安装包准备就绪,请重启更新软件");
+                    if (File.Exists(savePath))
+                        HelpUtil.ShowMessageBox("下载成功，请重启更新软件");
+                    else
+                        this.downloader.SoftwareDownload(packageDir, savePath);                                
                 }
                 catch
                 {
