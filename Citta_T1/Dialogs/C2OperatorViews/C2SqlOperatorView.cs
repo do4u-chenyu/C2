@@ -11,8 +11,10 @@ using System.Windows.Forms;
 
 namespace C2.Dialogs.C2OperatorViews
 {
+
     public partial class C2SqlOperatorView : C2BaseOperatorView
     {
+        //public DatabaseItem DatabaseInfo;
         private List<DatabaseItem> databaseItems;
         private ContextMenuStrip contextMenuStrip;
         private DatabaseItem SelectDatabaseItem
@@ -103,9 +105,16 @@ namespace C2.Dialogs.C2OperatorViews
         }
         private void CodeSnippetMenuItem_Click(object sender, EventArgs e)
         {
+            if (SelectDatabaseItem.Type == DatabaseType.Postgre)
+            {
+                textEditorControl1.SetTextAndRefresh(string.Format("select * from {0} ", tableListBox.SelectedItem));
+            }
             // textEditorControl1 用的是第三方sharpdevelop的文本编辑框, 因为有语法着色，代码折叠，行号，undo,redo等高级功能
             // 所以不能像普通的textbox那样简单的.Text赋值，需要调用它自己的文本处理函数,不然容易不刷新
-            textEditorControl1.SetTextAndRefresh(string.Format("select * from {0}.{1} ", this.comboBoxDataBase.Text, tableListBox.SelectedItem));
+            else
+            { 
+                textEditorControl1.SetTextAndRefresh(string.Format("select * from {0}.{1} ", this.comboBoxDataBase.Text, tableListBox.SelectedItem)); 
+            }
         }
 
         private void InitializeExecuteSql()
@@ -168,7 +177,7 @@ namespace C2.Dialogs.C2OperatorViews
                     this.comboBoxDataBase.Items.Clear();
                     if (users.Count == 0)
                         return;
-                    if (databaseItems != null && databaseItems.Count > 0)
+                    if (databaseItems != null && databaseItems.Count > 0 )
                         UpdateFrameCombo(users, SelectDatabaseItem.User, dao.DefaultSchema());
                 }
                 catch (Exception ex)
@@ -185,6 +194,11 @@ namespace C2.Dialogs.C2OperatorViews
             if (SelectDatabaseItem.Type == DatabaseType.Hive)
             {
                 this.comboBoxDataBase.Text = defaultSchema;
+            }
+            if (SelectDatabaseItem.Type == DatabaseType.Postgre)
+            {
+                this.comboBoxDataBase.Text = defaultSchema;
+                this.comboBoxDataBase.Enabled = false;
             }
             else
             {
