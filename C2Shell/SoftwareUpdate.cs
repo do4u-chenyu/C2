@@ -13,17 +13,17 @@ using System.Windows.Forms;
 namespace C2Shell
 {
     public class SoftwareUpdate
-    {       
+    {
         private readonly string installPath = Path.Combine(Application.StartupPath, "update", "install");
         private readonly string updatePath = Path.Combine(Application.StartupPath, "update", "setup");
-        private readonly string rollbackPath = Path.Combine(Application.StartupPath, "update","backup");
+        private readonly string rollbackPath = Path.Combine(Application.StartupPath, "update", "backup");
         private readonly string strPathExe = Path.Combine(Application.StartupPath, "C2.exe");
         private readonly string configFilePath = Path.Combine(Application.StartupPath, "C2.exe.config");
-         
 
 
 
-        public string ZipName  {get;set; }
+
+        public string ZipName { get; set; }
         public SoftwareUpdate()
         {
         }
@@ -31,9 +31,9 @@ namespace C2Shell
 
         public bool IsNeedUpdate()
         {
-           
+
             // update目录是否为空
-            bool needUpdate = true; 
+            bool needUpdate = true;
             try
             {
                 string[] files = System.IO.Directory.GetFiles(installPath);
@@ -46,13 +46,13 @@ namespace C2Shell
                 }
                 return needUpdate;
             }
-            catch 
+            catch
             {
                 return !needUpdate;
-            }        
+            }
         }
 
-        public  bool ExecuteUpdate(string zipName)
+        public bool ExecuteUpdate(string zipName)
         {
             bool success = true;
             if (!zipName.EndsWith(".zip"))
@@ -78,7 +78,7 @@ namespace C2Shell
                 string newVersion = rgx.Match(zipName).ToString();
                 Utils.XmlUtil.UpdateVersion(configFilePath, newVersion);
                 return success;
-             
+
             }
             return !success;
 
@@ -86,7 +86,7 @@ namespace C2Shell
         public void Rollback()
         {
             // 执行 rollback.bat脚本
-            try 
+            try
             {
                 if (!Directory.Exists(rollbackPath)
                     || (Directory.GetDirectories(rollbackPath).Length > 0
@@ -96,14 +96,14 @@ namespace C2Shell
                 }
                 string scriptPath = Path.Combine(updatePath, "rollback.bat");
                 MessageBox.Show("执行回滚");
-                ExecuteCmdScript(scriptPath,false);
+                ExecuteCmdScript(scriptPath, false);
             }
             catch
             { }
         }
         public void Clean()
         {
-            try 
+            try
             {
                 Directory.Delete(updatePath, true);
                 Directory.Delete(rollbackPath, true);
@@ -140,25 +140,25 @@ namespace C2Shell
             process.StartInfo.Verb = "runas";
             process.StartInfo.CreateNoWindow = true;//不显示程序窗口
 
-            
+
             try
             {
                 process.Start();//启动程序
                 using (StreamReader sr = new StreamReader(scriptPath))
                 {
                     string line;
-                   
+
                     while (!string.IsNullOrEmpty(line = sr.ReadLine()))
                     {
                         MessageBox.Show("执行命令：" + line);
-                        process.StandardInput.WriteLine(line);                     
+                        process.StandardInput.WriteLine(line);
                     }
                     process.StandardInput.WriteLine("exit");
                 }
                 process.StandardInput.Close();
                 MessageBox.Show("标准输出" + process.StandardOutput.ReadToEnd());
                 process.WaitForExit();
-               
+
                 if (process.ExitCode != 0)
                 {
                     MessageBox.Show("进入process.ExitCode, 更新脚本执行失败");
@@ -173,13 +173,13 @@ namespace C2Shell
             finally
             {
                 if (process != null)
-                { 
+                {
                     process.Dispose();//释放资源
-                }                    
+                }
                 process.Close();
-            }        
+            }
             return success;
         }
-       
- }
+
+    }
 }

@@ -92,8 +92,9 @@ namespace C2.Core
                 ret = Global.GetDocumentForm().Document;
             return ret;
         }
-       
-        public static OperatorControl GetOperatorControl() {
+
+        public static OperatorControl GetOperatorControl()
+        {
             OperatorControl ret = null;
             if (Global.GetCanvasForm() != null)
                 ret = Global.GetCanvasForm().OperatorControl;
@@ -106,7 +107,8 @@ namespace C2.Core
                 ret = Global.GetCanvasForm().RemarkControl;
             return ret;
         }
-        public static OptionDao GetOptionDao() {
+        public static OptionDao GetOptionDao()
+        {
             OptionDao ret = null;
             if (Global.GetCanvasForm() != null)
                 ret = Global.GetCanvasForm().OptionDao;
@@ -134,7 +136,7 @@ namespace C2.Core
         public static void SetMindMapModelControl(MyMindMapControl mmmc) { mindMapModelControl = mmmc; }
         private static string workspaceDirectory;           // 用户模型工作目录
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
-        public static string UserWorkspacePath { get => Path.Combine( workspaceDirectory,mainForm.UserName); }
+        public static string UserWorkspacePath { get => Path.Combine(workspaceDirectory, mainForm.UserName); }
         public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "模型市场"); }
         public static string TempDirectory { get; set; }
@@ -148,10 +150,10 @@ namespace C2.Core
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
         public const int ChartNum = 3;
         public static string LocalPluginPath = Path.Combine(Application.StartupPath, "plugins");
-        public static string SoftwareSavePath = Path.Combine(Application.StartupPath, "update","install");
+        public static string SoftwareSavePath = Path.Combine(Application.StartupPath, "update", "install");
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
         public const string DLLHostUrl = @"http://218.94.117.234:8484/C2Plugins/";
-        public const string SoftwareUrl = @"http://218.94.117.234:8484/C2Software/"; 
+        public const string SoftwareUrl = @"http://218.94.117.234:8484/C2Software/";
         public const string DLLPackageUrl = DLLHostUrl + @"packages/";
 
         public static Dictionary<string, MindMapLayoutType> ChartOptions = new Dictionary<string, MindMapLayoutType>
