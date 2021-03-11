@@ -1922,7 +1922,6 @@
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
-    <None Include="Resources\arrow_query.bmp" />
     <Content Include="IAOLab\WebEngine\css\base.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2019,6 +2018,20 @@
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <None Include="Resources\document.bmp" />
+    <Content Include="Resources\C1\flow\remark.png" />
+    <Content Include="Resources\C1\flow\select.png" />
+    <Content Include="Resources\C1\flow\zoomdown.png" />
+    <Content Include="Resources\C1\flow\zoomup.png" />
+    <Content Include="Resources\C1\leftpanelmenu\model.png" />
+    <Content Include="Resources\C1\leftpanelmenu\star.png" />
+    <Content Include="Resources\C1\menu\blackline.png" />
+    <Content Include="Resources\C1\menu\提示.png" />
+    <Content Include="Resources\C1\toolbox\collide.png" />
+    <Content Include="Resources\C1\toolbox\download.png" />
+    <Content Include="Resources\C1\toolbox\flow.png" />
+    <Content Include="Resources\C1\toolbox\relate.png" />
+    <Content Include="Resources\C1\toolbox\stop.png" />
+    <Content Include="Resources\flow_back.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
     <None Include="Resources\Help\C2帮助文档.chm">
@@ -2779,7 +2792,6 @@
     <None Include="Resources\Templates\树状图.xml" />
     <None Include="Resources\Templates\思维导图.xml" />
     <None Include="Resources\Templates\空模板.xml" />
-    <None Include="Resources\styles.xml" />
     <Content Include="Resources\Templates\组织架构图.xml" />
     <None Include="Resources\Templates\逻辑图.xml" />
     <Content Include="Resources\thanks.xml">
@@ -2882,8 +2894,6 @@
     <None Include="Resources\WidgetIcon\备注.png" />
     <None Include="Resources\WidgetIcon\附件.png" />
     <None Include="Resources\WidgetIcon\结果.png" />
-    <None Include="Resources\WidgetIcon\ORACLE.png" />
-    <None Include="Resources\WidgetIcon\Excel.png" />
     <None Include="Resources\WidgetIcon\地图.png" />
     <None Include="Resources\WidgetIcon\大屏.png" />
     <None Include="Resources\XmindEngine\styles.xml" />
