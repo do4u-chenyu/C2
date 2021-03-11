@@ -95,8 +95,9 @@ namespace C2.Database
                     sb.Append(sdr[sdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
                 }
             }
-            sb.Remove(sb.Length -2 , 2);
-            return sb.ToString();
+            if(sb.Length > 1)
+                sb.Remove(sb.Length - 1, 1);
+            return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
         }
 
         public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1)
