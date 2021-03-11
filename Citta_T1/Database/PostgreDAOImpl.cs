@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,12 +98,51 @@ namespace C2.Database
             }
             if(sb.Length > 1)
                 sb.Remove(sb.Length - 1, 1);
-            return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
+            return sb.ToString();
         }
 
         public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1)
         {
-            return true;
+            bool returnCode = true;
+            int totalReturnNum = 0;
+            StreamWriter sw = new StreamWriter(outPutPath, false);
+            NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
+            try
+            {
+                SqlConn.Open();
+                NpgsqlCommand SqlCommand = new NpgsqlCommand(sqlText, SqlConn);
+                using (NpgsqlDataReader sdr = SqlCommand.ExecuteReader())
+                {
+                    if (sdr.FieldCount == 0)
+                        return true;
+                    StringBuilder sb = new StringBuilder(1024);
+                    for (int i = 0; i < sdr.FieldCount; i++)
+                        sb.Append(sdr.GetName(i)).Append(OpUtil.TabSeparator);
+                    if (sb.Length > 1)
+                        sb.Remove(sb.Length - 1, 1);
+                    sw.WriteLine(sb.ToString());    // 去掉最后一列的列分隔符
+                    while (sdr.Read() && (maxReturnNum == -1 ? true : totalReturnNum++ < maxReturnNum))
+                    {
+                        sb = new StringBuilder(1024);
+                        for (int i = 0; i < sdr.FieldCount; i++)
+                            sb.Append(sdr[i]).Append(OpUtil.TabSeparator);
+                        if (sb.Length > 1)
+                            sb.Remove(sb.Length - 1, 1);
+                        sw.WriteLine(sb.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                returnCode = false;
+            }
+            finally
+            {
+                sw.Close();
+                SqlConn.Close();
+            }
+            return returnCode;
         }
 
         public override string GetTablesSQL(string schema)
