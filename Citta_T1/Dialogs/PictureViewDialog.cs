@@ -242,6 +242,11 @@ namespace C2.Dialogs
             }
         }
 
+        public void SetZoomType(ZoomType type)
+        {
+            this.imageBox1.ZoomType = type;
+        }
+
         void imageBox1_ZoomChanged(object sender, EventArgs e)
         {
             switch (imageBox1.ZoomType)

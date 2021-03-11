@@ -33,7 +33,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             oldDataIdx = -1;
             DataItems = dataItems;
             ChartOptions = options;
-            bossTypeDict = new List<Image>() { Properties.Resources.BossStyle01 , Properties.Resources.BossStyle01 , Properties.Resources.BossStyle03 };
+            bossTypeDict = new List<Image>() { Properties.Resources.BossStyle01 , Properties.Resources.BossStyle02 , Properties.Resources.BossStyle03 };
             LoadOption();
         }
 
@@ -208,6 +208,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             var dialog = new C2.Dialogs.PictureViewDialog(image);
             dialog.ImageName = this.bossType.Text;
+            dialog.SetZoomType(ZoomType.FitPage);
             dialog.ShowDialog();
 
         }

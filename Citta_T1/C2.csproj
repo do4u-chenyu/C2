@@ -1978,6 +1978,7 @@
     <Content Include="IAOLab\WebEngine\img\bg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="IAOLab\WebEngine\img\BossStyle02.png" />
     <Content Include="IAOLab\WebEngine\img\line.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
