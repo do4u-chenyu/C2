@@ -39,17 +39,60 @@ a{
 .t_main{
     text-align: center;
 }
-.t_box{
-    width: 8rem;
-    height: 4rem;
+.t_box1{
+    width: 5rem;
+    height: 3rem;
     background: url('../img/t_bg.png') no-repeat;
     background-size: 100% 100%;
     display: inline-block;
     float: left;
-    position: relative;
+    position: absolute;
     margin-left: 1.06rem;
     margin-top: 0.31rem;
+    top:1px;
+    left:45px;
 }
+.t_box2{
+    width: 5rem;
+    height: 3rem;
+    background: url('../img/t_bg.png') no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    float: left;
+    position: absolute;
+    margin-left: 1.06rem;
+    margin-top: 0.31rem;
+    top:1px;
+    left:650px;
+}
+.t_box3{
+    width: 5rem;
+    height: 3rem;
+    background: url('../img/t_bg.png') no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    float: left;
+    position: absolute;
+    margin-left: 1.06rem;
+    margin-top: 0.31rem;
+    top:330px;
+    left:45px;
+}
+.t_box4{
+    width: 5rem;
+    height: 3rem;
+    background: url('../img/t_bg.png') no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    float: left;
+    position: absolute;
+    margin-left: 1.06rem;
+    margin-top: 0.31rem;
+    top:330px;
+    left:650px;
+}
+
+
 .t_title{
     text-align: center;
     font-size: 0.16rem;
