@@ -39,7 +39,7 @@ namespace C2Shell
                 string[] files = System.IO.Directory.GetFiles(installPath);
                 string pattern = @"software-(\d+\.){2}\d+-\d{8}.zip";
                 Regex rgx = new Regex(pattern);
-                needUpdate = (files.Length == 1 && rgx .IsMatch(files[0]));
+                needUpdate = (files.Length == 1 && rgx.IsMatch(files[0]));
                 if (needUpdate)
                 {
                     ZipName = files[0];
@@ -58,18 +58,6 @@ namespace C2Shell
             if (!zipName.EndsWith(".zip"))
                 return !success;
             string scriptPath = Path.Combine(updatePath, "setup.bat");
-          
-            // 创建文件备份路径
-            try
-            {
-               
-                Directory.CreateDirectory(rollbackPath);
-                Utils.FileUtil.AddPathPower(rollbackPath);
-            }
-            catch
-            {
-                return !success;
-            }
 
             // 解压update目录 
             string zipPath = Path.Combine(installPath, zipName);
@@ -167,9 +155,10 @@ namespace C2Shell
                     }
                     process.StandardInput.WriteLine("exit");
                 }
-                MessageBox.Show("cmd进程号: " + process.Id + "cmd进程名称: " + process.ProcessName);
+                process.StandardInput.Close();
+                MessageBox.Show("标准输出" + process.StandardOutput.ReadToEnd());
                 process.WaitForExit();
-              
+               
                 if (process.ExitCode != 0)
                 {
                     MessageBox.Show("进入process.ExitCode, 更新脚本执行失败");
