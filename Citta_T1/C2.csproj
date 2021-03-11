@@ -1922,19 +1922,16 @@
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
-    <Content Include="IAOLab\WebEngine\css\base.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="IAOLab\WebEngine\css\DrawingManager_min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\css\index.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="IAOLab\WebEngine\css\index2.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="IAOLab\WebEngine\css\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\css\style_2.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\css\style_3.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\Html\BossIndex01.html">
@@ -1974,29 +1971,23 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="IAOLab\WebEngine\img\BossStyle01.png" />
-    <Content Include="IAOLab\WebEngine\img\bg.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="IAOLab\WebEngine\img\BossStyle02.png" />
-    <Content Include="IAOLab\WebEngine\img\line.png">
+    <Content Include="IAOLab\WebEngine\img\bg_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\line1.png">
+    <Content Include="IAOLab\WebEngine\img\BossStyle03.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\mintitle.png">
+    <Content Include="IAOLab\WebEngine\img\line1_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\mintitle_1.png">
+    <Content Include="IAOLab\WebEngine\img\title_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\title.png">
+    <Content Include="IAOLab\WebEngine\img\true_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\true.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="IAOLab\WebEngine\img\t_bg.png">
+    <Content Include="IAOLab\WebEngine\img\t_bg_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\JS\china.js">
