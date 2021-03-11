@@ -146,7 +146,6 @@
             this.currentVersion = new System.Windows.Forms.Label();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.progressBar = new UpdateProgressBar();
             this.mainTabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
@@ -1499,6 +1498,5 @@
         private System.Windows.Forms.TextBox baiduHeatTB;
         private System.Windows.Forms.TextBox baiduVerAPITB;
         private System.Windows.Forms.Label currentVersion;
-        private UpdateProgressBar progressBar;
     }
 }

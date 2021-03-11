@@ -28,6 +28,7 @@ namespace C2.Dialogs
         public string scale;
         public string baiduVerAPI;
         public string baiduHeatAPI;
+        private UpdateProgressBar progressBar;
         private readonly PluginsDownloader downloader;
         private string newSoftwareVersion;
 
@@ -35,6 +36,7 @@ namespace C2.Dialogs
         public ConfigForm()
         {
             InitializeComponent();
+            progressBar = new UpdateProgressBar();
             downloader = new PluginsDownloader
             {
                 Client_DownloadFileCompleted = this.Client_DownloadFileCompleted,
