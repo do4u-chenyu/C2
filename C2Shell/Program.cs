@@ -14,7 +14,6 @@ namespace C2Shell
     {
         static void Main()
         {
-
             SoftwareUpdate updateInstance = new SoftwareUpdate();
             if (updateInstance.IsNeedUpdate())
             {
@@ -23,6 +22,8 @@ namespace C2Shell
                 updateInstance.Clean();
             }
             updateInstance.StartCoreProcess();
+
+            
         }
        
     }

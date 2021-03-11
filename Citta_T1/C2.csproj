@@ -2011,13 +2011,7 @@
     <Content Include="IAOLab\WebEngine\JS\echarts.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\jquery-2.2.1.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="IAOLab\WebEngine\JS\phx.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="IAOLab\WebEngine\JS\rem.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\BossStyle03.png" />

@@ -516,7 +516,7 @@ namespace C2.Dialogs
             string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
             this.currentVersion.Text = "V" + currentVersion;
             this.newSoftwareVersion = NewSoftewareVersion();
-            if (newSoftwareVersion.StartsWith(currentVersion))
+            if (newSoftwareVersion.Contains(currentVersion))
             {
                 if (IsFormNotExist())
                     return;
