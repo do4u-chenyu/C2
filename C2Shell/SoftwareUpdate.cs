@@ -141,10 +141,7 @@ namespace C2Shell
             finally
             {
                 if (process != null)
-                {
                     process.Dispose();//释放资源
-                    process.Close();
-                } 
             }
             return success;
         }
