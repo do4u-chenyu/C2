@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -17,11 +12,9 @@ namespace C2Shell
         private readonly string installPath = Path.Combine(Application.StartupPath, "update", "install");
         private readonly string updatePath = Path.Combine(Application.StartupPath, "update", "setup");
         private readonly string rollbackPath = Path.Combine(Application.StartupPath, "update", "backup");
-        private readonly string strPathExe = Path.Combine(Application.StartupPath, "C2.exe");
+        private readonly string C2Path = Path.Combine(Application.StartupPath, "C2.exe");
         private readonly string configFilePath = Path.Combine(Application.StartupPath, "C2.exe.config");
-
-
-
+        private readonly string zipPattern = @"software-(\d+\.){2}\d+-\d{8}.zip";
 
         public string ZipName { get; set; }
         public SoftwareUpdate()
@@ -31,57 +24,42 @@ namespace C2Shell
 
         public bool IsNeedUpdate()
         {
-
-            // update目录是否为空
-            bool needUpdate = true;
             try
             {
-                string[] files = System.IO.Directory.GetFiles(installPath);
-                string pattern = @"software-(\d+\.){2}\d+-\d{8}.zip";
-                Regex rgx = new Regex(pattern);
-                needUpdate = (files.Length == 1 && rgx.IsMatch(files[0]));
-                if (needUpdate)
+                string[] files = Directory.GetFiles(installPath);
+                if (files.Length == 1 && Regex.IsMatch(files[0], zipPattern))
                 {
                     ZipName = files[0];
+                    return true;
                 }
-                return needUpdate;
             }
-            catch
-            {
-                return !needUpdate;
-            }
+            catch { }
+            return false;
         }
 
         public bool ExecuteUpdate(string zipName)
         {
-            bool success = true;
-            if (!zipName.EndsWith(".zip"))
-                return !success;
+            string zipPath = Path.Combine(installPath, zipName);
             string scriptPath = Path.Combine(updatePath, "setup.bat");
 
             // 解压update目录 
-            string zipPath = Path.Combine(installPath, zipName);
             string errMsg = Utils.ZipUtil.UnZipFile(zipPath, updatePath);
             if (!string.IsNullOrEmpty(errMsg))
             {
-                MessageBox.Show("解压失败");
-                return !success;
+                MessageBox.Show("安装包解压失败");
+                return false;
             }
-            MessageBox.Show("解压成功");
+
             // 执行 setup.bat脚本 ，进行文件备份和替换     
-            if (ExecuteCmdScript(scriptPath, true))
+            if (File.Exists(scriptPath) && ExecuteCmdScript(scriptPath))
             {
-                MessageBox.Show("执行文件替换成功");
                 // 修改配置文件版本号
-                string pattern = @"(\d+\.){2}\d+";
-                Regex rgx = new Regex(pattern);
-                string newVersion = rgx.Match(zipName).ToString();
+                string newVersion = Regex.Match(zipName, @"^(\d+\.){2}\d+").ToString();
                 Utils.XmlUtil.UpdateVersion(configFilePath, newVersion);
-                return success;
-
+                MessageBox.Show("C2升级成功，当前版本:" + newVersion);
+                return true;
             }
-            return !success;
-
+            return false;
         }
         public void Rollback()
         {
@@ -95,13 +73,13 @@ namespace C2Shell
                     return;
                 }
                 string scriptPath = Path.Combine(updatePath, "rollback.bat");
-                MessageBox.Show("执行回滚");
-                ExecuteCmdScript(scriptPath, false);
+                if (File.Exists(scriptPath) && ExecuteCmdScript(scriptPath))
+                    MessageBox.Show("回滚成功");
             }
             catch
             { }
         }
-        public void Clean()
+        public void Clear()
         {
             try
             {
@@ -113,24 +91,21 @@ namespace C2Shell
         }
         public void StartCoreProcess()
         {
-
-            Process process = new System.Diagnostics.Process();
             try
             {
-                process.StartInfo.FileName = strPathExe;
+                Process process = new Process();
+                process.StartInfo.FileName = C2Path;
                 process.Start();
-
             }
             catch
             { }
 
         }
-        public bool ExecuteCmdScript(string scriptPath, bool isUpdate)
+        private bool ExecuteCmdScript(string scriptPath)
         {
             bool success = true;
-            if (!File.Exists(scriptPath))
-                return !success;
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
+
+            Process process = new Process();
             process.StartInfo.FileName = "cmd.exe";
             process.StartInfo.Arguments = @"C:\Windows\cmd.exe";
             process.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
@@ -140,34 +115,27 @@ namespace C2Shell
             process.StartInfo.Verb = "runas";
             process.StartInfo.CreateNoWindow = true;//不显示程序窗口
 
-
             try
             {
                 process.Start();//启动程序
                 using (StreamReader sr = new StreamReader(scriptPath))
                 {
-                    string line;
-
-                    while (!string.IsNullOrEmpty(line = sr.ReadLine()))
-                    {
-                        MessageBox.Show("执行命令：" + line);
-                        process.StandardInput.WriteLine(line);
-                    }
+                    process.StandardInput.WriteLine(sr.ReadToEnd());
                     process.StandardInput.WriteLine("exit");
+                    process.StandardInput.Flush();
                 }
-                process.StandardInput.Close();
-                MessageBox.Show("标准输出" + process.StandardOutput.ReadToEnd());
+
                 process.WaitForExit();
 
                 if (process.ExitCode != 0)
                 {
-                    MessageBox.Show("进入process.ExitCode, 更新脚本执行失败");
+                    MessageBox.Show("更新脚本执行失败,错误码:" + process.ExitCode);
                     return !success;
                 }
             }
-            catch
+            catch (Exception e)
             {
-                MessageBox.Show("进入catch, 更新脚本执行失败");
+                MessageBox.Show("更新脚本执行失败:" + e.Message);
                 return !success;
             }
             finally
@@ -175,8 +143,8 @@ namespace C2Shell
                 if (process != null)
                 {
                     process.Dispose();//释放资源
-                }
-                process.Close();
+                    process.Close();
+                } 
             }
             return success;
         }
