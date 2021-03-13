@@ -152,18 +152,26 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private bool TudeLimit()
         {
-            if (double.Parse(drawlatude)>180|| double.Parse(drawlatude)<-180)
+            try
             {
-                HelpUtil.ShowMessageBox("请重新输入正确的经度！");
+                if (double.Parse(drawlatude) > 180 || double.Parse(drawlatude) < -180)
+                {
+                    HelpUtil.ShowMessageBox("请重新输入正确范围的经度！");
+                    return false;
+                }
+                else if (double.Parse(drawlontude) > 90 || double.Parse(drawlontude) < -90)
+                {
+                    HelpUtil.ShowMessageBox("请重新输入正确范围的纬度！");
+                    return false;
+                }
+                else
+                    return true;
+            }
+            catch {
+                HelpUtil.ShowMessageBox("请输入正确经纬度！");
                 return false;
             }
-            else if (double.Parse(drawlontude) > 90 || double.Parse(drawlontude) < -90)
-            {
-                HelpUtil.ShowMessageBox("请重新输入正确的纬度！");
-                return false;
-            }
-            else
-                return true;
+            
         }
 
         private bool OptionNotReady()
