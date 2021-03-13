@@ -101,13 +101,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(FilePath, FileEncoding);
             List<string> rows = new List<string>(fileContent.Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
-            List<List<string>> latValues = Utils.FileUtil.GetColumns(indexlat, hitItem, rows, upperLimit);
             List<List<string>> lonValues = Utils.FileUtil.GetColumns(indexlon, hitItem, rows, upperLimit);
+            List<List<string>> latValues = Utils.FileUtil.GetColumns(indexlat, hitItem, rows, upperLimit);
             List<List<string>> countValues = Utils.FileUtil.GetColumns(indexcount, hitItem, rows, upperLimit);
 
             Random rm = new Random();
-            drawlatude = latValues[0][rm.Next(latValues.Count)];
             drawlontude = lonValues[0][rm.Next(lonValues.Count)];
+            drawlatude = latValues[0][rm.Next(latValues.Count)];
+            if (!TudeLimit())
+            {
+                return false;
+            }
             if (latValues.Count == 0)
             {
                 HelpUtil.ShowMessageBox("文件内容为空");
@@ -144,6 +148,22 @@ namespace C2.IAOLab.WebEngine.Dialogs
             Close();
 
             return base.OnOKButtonClick();
+        }
+
+        private bool TudeLimit()
+        {
+            if (double.Parse(drawlatude)>180|| double.Parse(drawlatude)<-180)
+            {
+                HelpUtil.ShowMessageBox("请重新输入正确的经度！");
+                return false;
+            }
+            else if (double.Parse(drawlontude) > 90 || double.Parse(drawlontude) < -90)
+            {
+                HelpUtil.ShowMessageBox("请重新输入正确的纬度！");
+                return false;
+            }
+            else
+                return true;
         }
 
         private bool OptionNotReady()
