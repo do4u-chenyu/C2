@@ -15,6 +15,9 @@ html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; ba
 .mrbox_top_right{ float: right; width: 29.4%; padding-right: 1.4%; height: 100%}
 
 .tith2{ text-align: center; width: 100%; font-size: 12px; padding-top: 1.9%;  font-weight: normal;letter-spacing:2px; font-weight:  normal; overflow: hidden;}
+
+.tith3{ text-align: center; width: 100%; font-size: 12px; padding-top: 1.0%;  font-weight: normal;letter-spacing:2px; font-weight:  normal; overflow: hidden;}
+
 .tlbox{overflow: hidden; height: 81%; width: 91%; margin: 1% 4%;background: rgba(1,202,217,.2); font-size: 12px;}
 .fl{ float: left;}
 
