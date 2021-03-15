@@ -55,6 +55,8 @@ namespace C2Shell
             {
                 // 修改配置文件版本号
                 string newVersion = Regex.Match(zipName, @"^(\d+\.){2}\d+").ToString();
+                if (string.IsNullOrEmpty(newVersion))
+                    return false;
                 Utils.XmlUtil.UpdateVersion(configFilePath, newVersion);
                 MessageBox.Show("C2升级成功，当前版本:" + newVersion);
                 return true;
