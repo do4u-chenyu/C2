@@ -66,12 +66,6 @@ namespace C2Shell
             // 执行 rollback.bat脚本
             try
             {
-                if (!Directory.Exists(rollbackPath)
-                    || (Directory.GetDirectories(rollbackPath).Length > 0
-                    && Directory.GetFiles(rollbackPath).Length > 0))
-                {
-                    return;
-                }
                 string scriptPath = Path.Combine(updatePath, "rollback.bat");
                 if (File.Exists(scriptPath) && ExecuteCmdScript(scriptPath))
                     MessageBox.Show("回滚成功");
@@ -107,7 +101,6 @@ namespace C2Shell
 
             Process process = new Process();
             process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = @"C:\Windows\cmd.exe";
             process.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
             process.StartInfo.RedirectStandardInput = true;//接受来自调用程序的输入信息
             process.StartInfo.RedirectStandardOutput = true;//由调用程序获取输出信息
