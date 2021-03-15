@@ -11,6 +11,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.IAOLab.WebEngine.Dialogs
@@ -24,10 +25,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private DataItem selectData;
         private int oldDataIdx;
         public Dictionary<string, int[]> ChartOptions;
+        private WebBrowser webBrowser;
 
         private List<Image> bossTypeDict;
 
-        public SelectBossDialog(List<DataItem> dataItems, Dictionary<string, int[]> options)
+        public SelectBossDialog(List<DataItem> dataItems, Dictionary<string, int[]> options, WebBrowser browser)
         {
             InitializeComponent();
             oldDataIdx = -1;
@@ -35,6 +37,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             ChartOptions = options;
             bossTypeDict = new List<Image>() { Properties.Resources.BossStyle01 , Properties.Resources.BossStyle02 , Properties.Resources.BossStyle03 };
             LoadOption();
+            webBrowser = browser;
         }
 
         private void SavaOption()
@@ -240,7 +243,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             else if (bossType.SelectedIndex == 1)
             {
-                //TODO
+                simpleBarCaption.Text = "柱状图（左上方）";
+                basicLineChartCaption.Text = "折线图（右上方）";
+                basicScatterCaption.Text = "点状图（左下方）";
+                smoothedLineChartCaption.Text = "曲线图（右下方）";
+                stackBarCaption.Text = "堆叠柱状图（不展示）";
+                basicPieCaption.Text = "饼状图（不展示）";
+                basicMapCaption.Text = "地市分布图（不展示）";
             }
             else if (bossType.SelectedIndex == 2)
             {
@@ -252,6 +261,51 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 basicPieCaption.Text = "饼状图（不展示）";
                 basicMapCaption.Text = "地市分布图（不展示）";
             }
+        }
+
+        private async void PreviewBtn_ClickAsync(object sender, EventArgs e)
+        {
+            DataTable dataTable = GenDataTable();
+            SavaOption();
+            GenBossHtml.GetInstance().TransDataToHtml(dataTable, ChartOptions);
+            webBrowser.Navigate(WebUrl);
+
+            this.Cursor = Cursors.WaitCursor;
+            await PageLoad(10);
+            this.Cursor = Cursors.Default;
+
+            Bitmap bitmap = new Bitmap(webBrowser.Width, webBrowser.Height);
+            Rectangle rectangle = new Rectangle(0, 0, webBrowser.Width, webBrowser.Height);  // 绘图区域
+            webBrowser.DrawToBitmap(bitmap, rectangle);
+            this.pictureBox1.Image = bitmap;
+        }
+
+        private async Task PageLoad(int TimeOut)
+        {
+            TaskCompletionSource<bool> PageLoaded = null;
+            PageLoaded = new TaskCompletionSource<bool>();
+            int TimeElapsed = 0;
+            webBrowser.DocumentCompleted += (s, e) =>
+            {
+                if (webBrowser.ReadyState != WebBrowserReadyState.Complete) 
+                    return;
+                if (PageLoaded.Task.IsCompleted) 
+                    return; 
+                PageLoaded.SetResult(true);
+            };
+            //
+            while (PageLoaded.Task.Status != TaskStatus.RanToCompletion)
+            {
+                await Task.Delay(2000);//interval of 10 ms worked good for me
+                TimeElapsed++;
+                if (TimeElapsed >= TimeOut * 100) 
+                    PageLoaded.TrySetResult(true);
+            }
+        }
+
+        private void ZoomInBtn_Click(object sender, EventArgs e)
+        {
+            Enlarge();
         }
     }
 }

@@ -126,6 +126,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = true;
             this.Name = "WebBrowserDialog";
+            this.ShowInTaskbar = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebBrowserDialog";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
