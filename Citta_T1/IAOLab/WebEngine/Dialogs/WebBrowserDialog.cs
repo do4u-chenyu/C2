@@ -338,7 +338,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public void OpenSelectBossDialog()
         {
-            var dialog = new SelectBossDialog(DataItems, ChartOptions);
+            var dialog = new SelectBossDialog(DataItems, ChartOptions, webBrowser1);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 webBrowser1.Navigate(dialog.WebUrl);

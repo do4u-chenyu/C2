@@ -12,26 +12,35 @@ namespace C2Shell.Utils
     {
         public static void UpdateVersion(string path,string newVersion)
         {
+            XmlDocument xDoc = new XmlDocument();
+            try
+            {               
+                xDoc.Load(path);
+                XmlNode node = xDoc.SelectSingleNode("configuration")
+                                   .SelectSingleNode("//appSettings//add[@key='version']");
+                
+                node.Attributes["value"].InnerText = newVersion;
+                xDoc.Save(path);              
+            }
+            catch
+            { }         
+        }
+
+
+        public static string CurrentVersion(string path)
+        { 
+            XmlDocument xDoc = new XmlDocument();
             try
             {
-                XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(path);
-                var rootNode = xDoc.SelectSingleNode("configuration");
-                var nodes = rootNode.SelectSingleNode("//add[@key='version']");
-                foreach (XmlAttribute node in nodes.Attributes)
-                {
-                    if (node.Name.Equals("value"))
-                    {
-                        node.InnerText = newVersion;
-                    }
-                       
-                }
-                xDoc.Save(path);
-               
+                XmlNode node = xDoc.SelectSingleNode("configuration")
+                                   .SelectSingleNode("//appSettings//add[@key='version']");
+
+               return node.Attributes["value"].InnerText;
             }
             catch
             { }
-           
+            return string.Empty;
         }
     }
 }

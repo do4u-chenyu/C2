@@ -1,4 +1,6 @@
-﻿namespace C2.IAOLab.WebEngine.Dialogs
+﻿using C2.Globalization;
+
+namespace C2.IAOLab.WebEngine.Dialogs
 {
     partial class SelectBossDialog
     {
@@ -71,6 +73,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
+            this.previewBtn = new System.Windows.Forms.Button();
+            this.zoomInBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -159,12 +163,12 @@
             this.simpleBarCaption.TabIndex = 10012;
             this.simpleBarCaption.Text = "柱状图";
             // 
-            // captionBar2
+            // stackBarCaption
             // 
             this.stackBarCaption.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
             this.stackBarCaption.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.stackBarCaption.Location = new System.Drawing.Point(3, 198);
-            this.stackBarCaption.Name = "captionBar2";
+            this.stackBarCaption.Name = "stackBarCaption";
             this.stackBarCaption.Size = new System.Drawing.Size(440, 22);
             this.stackBarCaption.TabIndex = 10013;
             this.stackBarCaption.Text = "堆叠柱状图";
@@ -226,12 +230,12 @@
             this.basicScatterCaption.TabIndex = 10023;
             this.basicScatterCaption.Text = "散点图";
             // 
-            // captionBar5
+            // basicMapCaption
             // 
             this.basicMapCaption.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
             this.basicMapCaption.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.basicMapCaption.Location = new System.Drawing.Point(3, 558);
-            this.basicMapCaption.Name = "captionBar5";
+            this.basicMapCaption.Name = "basicMapCaption";
             this.basicMapCaption.Size = new System.Drawing.Size(440, 22);
             this.basicMapCaption.TabIndex = 10024;
             this.basicMapCaption.Text = "地市分布图";
@@ -308,12 +312,12 @@
             this.basicPieCaption.TabIndex = 10045;
             this.basicPieCaption.Text = "饼状图";
             // 
-            // captionBar7
+            // basicLineChartCaption
             // 
             this.basicLineChartCaption.BackgroundStyle = C2.Controls.CaptionStyle.BaseLine;
             this.basicLineChartCaption.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.basicLineChartCaption.Location = new System.Drawing.Point(3, 108);
-            this.basicLineChartCaption.Name = "captionBar7";
+            this.basicLineChartCaption.Name = "basicLineChartCaption";
             this.basicLineChartCaption.Size = new System.Drawing.Size(440, 22);
             this.basicLineChartCaption.TabIndex = 10052;
             this.basicLineChartCaption.Text = "折线图";
@@ -532,11 +536,36 @@
             this.label18.TabIndex = 10075;
             this.label18.Text = "图表参数配置：";
             // 
+            // previewBtn
+            // 
+            this.previewBtn.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.previewBtn.Location = new System.Drawing.Point(739, 452);
+            this.previewBtn.Name = "previewBtn";
+            this.previewBtn.Size = new System.Drawing.Size(75, 27);
+            this.previewBtn.TabIndex = 10076;
+            this.previewBtn.Text = "配置预览";
+            this.previewBtn.UseVisualStyleBackColor = true;
+            this.previewBtn.Click += new System.EventHandler(this.PreviewBtn_ClickAsync);
+            // 
+            // button1
+            // 
+            this.zoomInBtn.BackColor = System.Drawing.Color.Transparent;
+            this.zoomInBtn.BackgroundImage = global::C2.Properties.Resources.zoom_in;
+            this.zoomInBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.zoomInBtn.Location = new System.Drawing.Point(98, 119);
+            this.zoomInBtn.Name = "button1";
+            this.zoomInBtn.Size = new System.Drawing.Size(25, 23);
+            this.zoomInBtn.TabIndex = 10077;
+            this.zoomInBtn.UseVisualStyleBackColor = false;
+            this.zoomInBtn.Click += new System.EventHandler(this.ZoomInBtn_Click);
+            // 
             // SelectBossDialog
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(994, 491);
+            this.Controls.Add(this.zoomInBtn);
+            this.Controls.Add(this.previewBtn);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label16);
@@ -557,6 +586,8 @@
             this.Controls.SetChildIndex(this.label16, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.label18, 0);
+            this.Controls.SetChildIndex(this.previewBtn, 0);
+            this.Controls.SetChildIndex(this.zoomInBtn, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -610,5 +641,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button previewBtn;
+        private System.Windows.Forms.Button zoomInBtn;
     }
 }
