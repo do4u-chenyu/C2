@@ -23,9 +23,24 @@ namespace C2Shell.Utils
                 xDoc.Save(path);              
             }
             catch
-            { }
+            { }         
+        }
 
-           
+
+        public static string CurrentVersion(string path)
+        { 
+            XmlDocument xDoc = new XmlDocument();
+            try
+            {
+                xDoc.Load(path);
+                XmlNode node = xDoc.SelectSingleNode("configuration")
+                                   .SelectSingleNode("//appSettings//add[@key='version']");
+
+               return node.Attributes["value"].InnerText;
+            }
+            catch
+            { }
+            return string.Empty;
         }
     }
 }

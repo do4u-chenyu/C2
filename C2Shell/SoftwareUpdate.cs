@@ -9,16 +9,19 @@ namespace C2Shell
 {
     public class SoftwareUpdate
     {
+
         private readonly string installPath = Path.Combine(Application.StartupPath, "update", "install");
         private readonly string updatePath = Path.Combine(Application.StartupPath, "update", "setup");
         private readonly string rollbackPath = Path.Combine(Application.StartupPath, "update", "backup");
         private readonly string C2Path = Path.Combine(Application.StartupPath, "C2.exe");
         private readonly string configFilePath = Path.Combine(Application.StartupPath, "C2.exe.config");
         private readonly string zipPattern = @"software-(\d+\.){2}\d+-\d{8}.zip";
+        private string newVersion;
 
         public string ZipName { get; set; }
         public SoftwareUpdate()
         {
+            newVersion = string.Empty;
         }
 
 
@@ -30,13 +33,35 @@ namespace C2Shell
                 if (files.Length == 1 && Regex.IsMatch(files[0], zipPattern))
                 {
                     ZipName = files[0];
-                    return true;
+                    // 获取新版本号
+                    newVersion = Regex.Match(ZipName, @"(\d+\.){2}\d+").ToString();
+                    //获取当前版本号
+                    string currentVersion = Utils.XmlUtil.CurrentVersion(configFilePath);
+                    return IsNewerVersion(newVersion, currentVersion);
                 }
             }
             catch { }
             return false;
         }
+        private bool IsNewerVersion(string newVersion, string currentVersion)
+        {
 
+            try
+            {
+                string[] array0 = newVersion.Split('.');
+                string[] array1 = currentVersion.Split('.');
+
+                bool isNewer = (int.Parse(array0[0]) > int.Parse(array1[0])
+                             || int.Parse(array0[1]) > int.Parse(array1[1])
+                             || int.Parse(array0[2]) > int.Parse(array1[2]));
+                return isNewer;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
         public bool ExecuteUpdate(string zipName)
         {
             string zipPath = Path.Combine(installPath, zipName);
@@ -54,9 +79,7 @@ namespace C2Shell
             if (File.Exists(scriptPath) && ExecuteCmdScript(scriptPath))
             {
                 // 修改配置文件版本号
-                string newVersion = Regex.Match(zipName, @"^(\d+\.){2}\d+").ToString();
-                if (string.IsNullOrEmpty(newVersion))
-                    return false;
+               
                 Utils.XmlUtil.UpdateVersion(configFilePath, newVersion);
                 MessageBox.Show("C2升级成功，当前版本:" + newVersion);
                 return true;
