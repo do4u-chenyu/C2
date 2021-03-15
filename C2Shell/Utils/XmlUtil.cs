@@ -16,18 +16,11 @@ namespace C2Shell.Utils
             try
             {               
                 xDoc.Load(path);
-                var rootNode = xDoc.SelectSingleNode("configuration");
-                XmlNode node = rootNode.SelectSingleNode("//appSettings//add[@key='version']");
-                if (node == null)
-                    return;
-                foreach (XmlAttribute attribute in node.Attributes)
-                {
-                    if (attribute.Name.Equals("value"))
-                        attribute.InnerText = newVersion;
-                }
-                xDoc.Save(path);
-               
-
+                XmlNode node = xDoc.SelectSingleNode("configuration")
+                                   .SelectSingleNode("//appSettings//add[@key='version']");
+                
+                node.Attributes["value"].InnerText = newVersion;
+                xDoc.Save(path);              
             }
             catch
             { }
