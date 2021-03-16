@@ -4,6 +4,7 @@
     {
         static void Main()
         {
+
             SoftwareUpdate updateInstance = new SoftwareUpdate();
             if (updateInstance.IsNeedUpdate())
             {
