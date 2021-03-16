@@ -948,9 +948,11 @@ namespace C2.Model.MindMaps
             style.SetAttribute("type", "relationship");
 
             XmlElement linkStyle = this.styleDoc.CreateElement("relationship-properties");
+            linkStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", argbToRgb(mindMap.ForeColor)));
             linkStyle.SetAttribute("arrow-end-class", GetArrorEndClass(link.EndCap));
             linkStyle.SetAttribute("line-color",
                 link.Color.IsEmpty ? argbToRgb(mindMap.LinkLineColor) : argbToRgb(link.Color));
+
             linkStyle.SetAttribute("line-pattern", GetLinePattern(link.LineStyle));
             linkStyle.SetAttribute("line-width", String.Format("{0}pt", link.LineWidth));
 
