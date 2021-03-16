@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using C2.Canvas;
 using C2.Core;
 using C2.Model.Documents;
 using C2.Model.Styles;
@@ -394,7 +396,7 @@ namespace C2.Model.MindMaps
         private string SaveThemeStyle(XmlElement parent, string styleName, MindMap mindMap)
         {
             XmlElement style = this.styleDoc.CreateElement("style");
-            style.SetAttribute("id", String.Format("{0}", styleCounter++));
+            style.SetAttribute("id", GetStyleID());
             switch (styleName)
             {
                 case "subTopic":
@@ -405,7 +407,7 @@ namespace C2.Model.MindMaps
                         subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
                     }
                     if (mindMap.NodeForeColor != null)
-                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", argbToRgb(mindMap.NodeForeColor)));
+                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", argbToRgb(mindMap.NodeForeColor)));
                     if (mindMap.BorderColor != null)
                         subTopic.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
                     if (mindMap.LineColor != null)
@@ -481,9 +483,13 @@ namespace C2.Model.MindMaps
             }
             return style.GetAttribute("id");
         }
+        private string GetStyleID()
+        {
+            return String.Format("{0}", styleCounter++);
+        }
         private string SaveTopicStyle(Topic topic, MindMap mindMap)
         {
-            string id = String.Format("{0}", styleCounter++);
+            string id = GetStyleID();
 
             XmlElement styles = this.styleRoot.SelectSingleNode("styles") as XmlElement;
             XmlElement style = this.styleDoc.CreateElement("style");
@@ -528,6 +534,45 @@ namespace C2.Model.MindMaps
             style.AppendChild(topicStyle);
             styles.AppendChild(style);
             return id;
+        }
+        private string GetLinePattern(DashStyle lineStyle)
+        {
+            switch (lineStyle)
+            {
+                case DashStyle.Dot:
+                    return "dot"; // TODO
+                case DashStyle.Dash:
+                    return "dash";
+                case DashStyle.DashDot:
+                    return "dash-dot";
+                case DashStyle.DashDotDot:
+                    return "dash-dot-dot";
+                case DashStyle.Custom:
+                    return "dash";
+                case DashStyle.Solid:
+                    return "solid";
+                default:
+                    return "dot";
+            }
+        }
+        private string GetArrorEndClass(LineAnchor endCap)
+        {
+            string prefix = "org.xmind.arrowShape.";
+            switch (endCap)
+            {
+                case LineAnchor.Arrow:
+                    return prefix + "spearhead";
+                case LineAnchor.Diamond:
+                    return prefix + "diamond";
+                case LineAnchor.None:
+                    return prefix + "none";
+                case LineAnchor.Round: // TODO
+                    return prefix + "normal";
+                case LineAnchor.Square:
+                    return prefix + "square";
+                default:
+                    return prefix + "none";
+            }
         }
         private string GetAlignment(HorizontalAlignment alignment)
         {
@@ -884,6 +929,7 @@ namespace C2.Model.MindMaps
             node.SetAttribute("end1", this.currSheetID.ToString() + "-" + link.From.ID.ToString());
             node.SetAttribute("end2", this.currSheetID.ToString() + "-" + link.Target.ID.ToString());
             node.SetAttribute("id", GetLinkID());
+            node.SetAttribute("style-id", SaveLinkStyle(link, mindMap));
             // control-points
             XmlElement controlPoints = contentDoc.CreateElement("control-points");
             controlPoints.AppendChild(CreatControlPoint(link, 0));
@@ -892,6 +938,25 @@ namespace C2.Model.MindMaps
             node.AppendChild(CreateTitleNode(link.Text));
             node.AppendChild(controlPoints);
             parent.AppendChild(node);
+        }
+        private string SaveLinkStyle(Link link, MindMap mindMap)
+        {
+            string id = GetStyleID();
+            XmlElement styles = this.styleRoot.SelectSingleNode("styles") as XmlElement;
+            XmlElement style = this.styleDoc.CreateElement("style");
+            style.SetAttribute("id", id);
+            style.SetAttribute("type", "relationship");
+
+            XmlElement linkStyle = this.styleDoc.CreateElement("relationship-properties");
+            linkStyle.SetAttribute("arrow-end-class", GetArrorEndClass(link.EndCap));
+            linkStyle.SetAttribute("line-color",
+                link.Color.IsEmpty ? argbToRgb(mindMap.LinkLineColor) : argbToRgb(link.Color));
+            linkStyle.SetAttribute("line-pattern", GetLinePattern(link.LineStyle));
+            linkStyle.SetAttribute("line-width", String.Format("{0}pt", link.LineWidth));
+
+            style.AppendChild(linkStyle);
+            styles.AppendChild(style);
+            return id;
         }
         private bool IsInternalImage(PictureWidget picWidget)
         {
