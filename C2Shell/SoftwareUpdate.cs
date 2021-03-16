@@ -37,13 +37,13 @@ namespace C2Shell
                     newVersion = Regex.Match(ZipName, @"(\d+\.){2}\d+").ToString();
                     //获取当前版本号
                     string currentVersion = Utils.XmlUtil.CurrentVersion(configFilePath);
-                    return IsNewerVersion(newVersion, currentVersion);
+                    return IsNewVersion(newVersion, currentVersion);
                 }
             }
             catch { }
             return false;
         }
-        private bool IsNewerVersion(string newVersion, string currentVersion)
+        private bool IsNewVersion(string newVersion, string currentVersion)
         {
 
             try
