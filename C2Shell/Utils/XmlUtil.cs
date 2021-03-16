@@ -16,8 +16,7 @@ namespace C2Shell.Utils
             try
             {               
                 xDoc.Load(path);
-                XmlNode node = xDoc.SelectSingleNode("configuration")
-                                   .SelectSingleNode("//appSettings//add[@key='version']");
+                XmlNode node = xDoc.SelectSingleNode("//configuration//appSettings//add[@key='version']");
                 
                 node.Attributes["value"].InnerText = newVersion;
                 xDoc.Save(path);              
