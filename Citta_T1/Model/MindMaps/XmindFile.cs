@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 using C2.Core;
 using C2.Model.Documents;
@@ -77,28 +78,6 @@ namespace C2.Model.MindMaps
             contentDoc.AppendChild(contentRoot);
             styleDoc.AppendChild(styleRoot);
         }
-        private void Initialize(string fn)
-        {
-            contentDoc = new XmlDocument();
-            styleDoc = new XmlDocument();
-
-            contentNsMgr = new XmlNamespaceManager(contentDoc.NameTable);
-            contentNsMgr.AddNamespace("fo", "http://www.w3.org/1999/XSL/Format");
-            contentNsMgr.AddNamespace("svg", "http://www.w3.org/2000/svg");
-            contentNsMgr.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            contentNsMgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
-
-            styleNsMgr = new XmlNamespaceManager(styleDoc.NameTable);
-            styleNsMgr.AddNamespace("fo", "http://www.w3.org/1999/XSL/Format");
-
-            //styleDoc = CreateStyleDOM();
-            attachments = new List<Attachment>();
-            linkCounter = 0;
-            filename = fn;
-
-            contentRoot = CreateRootFromCTDOM(contentDoc);
-            styleRoot = CreateRootFromSTDOM(styleDoc);
-        }
         public void SaveFile()
         {
             /*
@@ -125,15 +104,27 @@ namespace C2.Model.MindMaps
                 zip.CommitUpdate();
             }
         }
-        /// <summary>
-        /// 存一份默认的Style，Topic可选风格只有一种，目的只是让所有的Topic看起来一样
-        /// </summary>
-        /// <returns></returns>
-        private XmlDocument CreateStyleDOM()
+        private void Initialize(string fn)
         {
-            XmlDocument dom = new XmlDocument();
-            dom.LoadXml(Properties.Resources.styles);
-            return dom;
+            contentDoc = new XmlDocument();
+            styleDoc = new XmlDocument();
+
+            contentNsMgr = new XmlNamespaceManager(contentDoc.NameTable);
+            contentNsMgr.AddNamespace("fo", "http://www.w3.org/1999/XSL/Format");
+            contentNsMgr.AddNamespace("svg", "http://www.w3.org/2000/svg");
+            contentNsMgr.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            contentNsMgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+
+            styleNsMgr = new XmlNamespaceManager(styleDoc.NameTable);
+            styleNsMgr.AddNamespace("fo", "http://www.w3.org/1999/XSL/Format");
+
+            //styleDoc = CreateStyleDOM();
+            attachments = new List<Attachment>();
+            linkCounter = 0;
+            filename = fn;
+
+            contentRoot = CreateRootFromCTDOM(contentDoc);
+            styleRoot = CreateRootFromSTDOM(styleDoc);
         }
         private XmlElement CreateRootFromCTDOM(XmlDocument doc)
         {
@@ -198,7 +189,6 @@ namespace C2.Model.MindMaps
             metaDom.AppendChild(root);
             return new StaticDataSource(metaDom);
         }
-
         private void SaveSheet(MindMap mindMap, XmlElement parent, int sheetID)
         {
             // 单sheet / chart
@@ -220,167 +210,13 @@ namespace C2.Model.MindMaps
 
             parent.AppendChild(sheet);
         }
-        private string SaveSheetStyle(MindMap mindMap, int sheetID)
-        {
-            string id = String.Format("Sheet-{0}", sheetID);
-
-            XmlElement styles = this.styleRoot.SelectSingleNode("styles") as XmlElement;
-            XmlElement style = this.styleDoc.CreateElement("style");
-
-            style.SetAttribute("id", id);
-            style.SetAttribute("name", String.Empty);
-            style.SetAttribute("type", "map");
-
-            XmlElement map = this.styleDoc.CreateElement("map-properties");
-            if (mindMap.BackColor != null)
-                map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.BackColor)));
-            if (mindMap.ForeColor != null)
-                map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", argbToRgb(mindMap.ForeColor)));            
-            if (mindMap.Font != null)
-                map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.Name));
-            if (mindMap.BorderColor != null)
-                map.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
-            if (mindMap.LineColor != null)
-                map.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
-            map.SetAttribute("line-width", mindMap.LineWidth.ToString());
-
-            style.AppendChild(map);
-            styles.AppendChild(style);
-
-            return id;
-        }
-        /// <summary>
-        /// 仅保存sheet的style
-        /// 1. centralTopic
-        /// 2. mainTopic
-        /// 3. relationship
-        /// 4. map
-        /// </summary>
-        /// <param name="parent"></param>
-        /// <param name=""></param>
-        private string SaveSheetTheme(MindMap mindMap, int sheetID)
-        {
-            string id = String.Format("Sheet-theme-{0}", sheetID);
-
-            XmlElement autoStyles = this.styleRoot.SelectSingleNode("automatic-styles") as XmlElement;
-            XmlElement masterStyles = this.styleRoot.SelectSingleNode("master-styles") as XmlElement;
-
-            // style
-            XmlElement style = this.styleDoc.CreateElement("style");
-            style.SetAttribute("id", id);
-            style.SetAttribute("type", "theme");
-            // theme-properties
-            // default style
-            XmlElement theme = this.styleDoc.CreateElement("theme-properties");
-            foreach(string styleName in this.defaultStyle)
-            {
-                XmlElement dStyle = this.styleDoc.CreateElement("default-style");
-                dStyle.SetAttribute("style-family", styleName);
-                dStyle.SetAttribute("style-id", CreateThemeStyle(autoStyles, styleName, mindMap));
-                theme.AppendChild(dStyle);
-            }
-            style.AppendChild(theme);
-            masterStyles.AppendChild(style);
-            return id;
-        }
-
-        private string CreateThemeStyle(XmlElement parent, string styleName, MindMap mindMap)
-        {
-            XmlElement style = this.styleDoc.CreateElement("style");
-            style.SetAttribute("id", String.Format("{0}", styleCounter++));
-            switch (styleName)
-            {
-                case "subTopic":
-                    XmlElement subTopic = this.styleDoc.CreateElement("topic-properties");
-                    if (mindMap.Font != null)
-                    {
-                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.ToString()));
-                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
-                    }
-                    if (mindMap.NodeForeColor != null)
-                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", argbToRgb(mindMap.NodeForeColor)));
-                    if (mindMap.BorderColor != null)
-                        subTopic.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
-                    if (mindMap.LineColor != null)
-                        subTopic.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
-                    if (mindMap.BackColor != null)
-                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.NodeBackColor)));
-                    subTopic.SetAttribute("shape-class", GetShapeStyle(TopicShape.Default));
-                    style.AppendChild(subTopic);
-                    parent.AppendChild(style);
-                    break;
-                case "centralTopic":
-                    XmlElement centralTopic = this.styleDoc.CreateElement("topic-properties");
-                    if (mindMap.Font != null)
-                    {
-                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.ToString()));
-                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
-                    }
-                    if (mindMap.NodeForeColor != null)
-                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", argbToRgb(mindMap.NodeForeColor)));
-                    if (mindMap.BorderColor != null)
-                        centralTopic.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
-                    if (mindMap.LineColor != null)
-                        centralTopic.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
-                    if (mindMap.BackColor != null)
-                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.NodeBackColor)));
-                    centralTopic.SetAttribute("shape-class", GetShapeStyle(TopicShape.Default));
-                    style.AppendChild(centralTopic);
-                    parent.AppendChild(style);
-                    break;
-                case "mainTopic":
-                    XmlElement mainTopic = this.styleDoc.CreateElement("topic-properties");
-                    if (mindMap.Font != null)
-                    {
-                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.ToString()));
-                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
-                    }
-                    if (mindMap.NodeForeColor != null)
-                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", argbToRgb(mindMap.NodeForeColor)));
-                    if (mindMap.BorderColor != null)
-                        mainTopic.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
-                    if (mindMap.LineColor != null)
-                        mainTopic.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
-                    if (mindMap.BackColor != null)
-                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.NodeBackColor)));
-                    mainTopic.SetAttribute("shape-class", GetShapeStyle(TopicShape.Default));
-                    style.AppendChild(mainTopic);
-                    parent.AppendChild(style);
-                    break;
-                case "relationship":
-                    XmlElement relationship = this.styleDoc.CreateElement("relationship-properties");
-                    if (mindMap.ForeColor != null)
-                        relationship.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", argbToRgb(mindMap.ForeColor)));
-                    if (mindMap.Font != null)
-                    {
-                        relationship.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.ToString()));
-                        relationship.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
-                    }
-                    style.AppendChild(relationship);
-                    parent.AppendChild(style);
-                    break;
-                case "map":
-                    XmlElement map = this.styleDoc.CreateElement("map-properties");
-                    map.SetAttribute("color-gradient", "none");
-                    map.SetAttribute("line-tapered", "none");
-                    map.SetAttribute("multi-line-colors", "none");
-                    if (mindMap.BackColor != null)
-                        map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.BackColor)));
-                    style.AppendChild(map);
-                    parent.AppendChild(style);
-                    break;
-                default:
-                    break;
-            }
-            return style.GetAttribute("id");
-        }
-
-
         /// <summary>
         /// 递归C2 Chart 形成content.xml 和 attachments
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="topic"></param>
+        /// <param name="mindMap"></param>
+        /// <param name="isRoot"></param>
         private void SaveMindMap(XmlElement parent, Topic topic, MindMap mindMap, bool isRoot = true)
         {
             if (parent == null || topic == null)
@@ -492,7 +328,159 @@ namespace C2.Model.MindMaps
             }
             parent.AppendChild(topicNode);
         }
+        private string SaveSheetStyle(MindMap mindMap, int sheetID)
+        {
+            string id = String.Format("Sheet-{0}", sheetID);
 
+            XmlElement styles = this.styleRoot.SelectSingleNode("styles") as XmlElement;
+            XmlElement style = this.styleDoc.CreateElement("style");
+
+            style.SetAttribute("id", id);
+            style.SetAttribute("name", String.Empty);
+            style.SetAttribute("type", "map");
+
+            XmlElement map = this.styleDoc.CreateElement("map-properties");
+            if (mindMap.BackColor != null)
+                map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.BackColor)));
+            if (mindMap.ForeColor != null)
+                map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", argbToRgb(mindMap.ForeColor)));            
+            if (mindMap.Font != null)
+                map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.Name));
+            if (mindMap.BorderColor != null)
+                map.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
+            if (mindMap.LineColor != null)
+                map.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
+            map.SetAttribute("line-width", mindMap.LineWidth.ToString());
+
+            style.AppendChild(map);
+            styles.AppendChild(style);
+
+            return id;
+        }
+        /// <summary>
+        /// 仅保存sheet的style
+        /// 1. centralTopic
+        /// 2. mainTopic
+        /// 3. relationship
+        /// 4. map
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name=""></param>
+        private string SaveSheetTheme(MindMap mindMap, int sheetID)
+        {
+            string id = String.Format("Sheet-theme-{0}", sheetID);
+
+            XmlElement autoStyles = this.styleRoot.SelectSingleNode("automatic-styles") as XmlElement;
+            XmlElement masterStyles = this.styleRoot.SelectSingleNode("master-styles") as XmlElement;
+
+            // style
+            XmlElement style = this.styleDoc.CreateElement("style");
+            style.SetAttribute("id", id);
+            style.SetAttribute("type", "theme");
+            // theme-properties
+            // default style
+            XmlElement theme = this.styleDoc.CreateElement("theme-properties");
+            foreach(string styleName in this.defaultStyle)
+            {
+                XmlElement dStyle = this.styleDoc.CreateElement("default-style");
+                dStyle.SetAttribute("style-family", styleName);
+                dStyle.SetAttribute("style-id", SaveThemeStyle(autoStyles, styleName, mindMap));
+                theme.AppendChild(dStyle);
+            }
+            style.AppendChild(theme);
+            masterStyles.AppendChild(style);
+            return id;
+        }
+        private string SaveThemeStyle(XmlElement parent, string styleName, MindMap mindMap)
+        {
+            XmlElement style = this.styleDoc.CreateElement("style");
+            style.SetAttribute("id", String.Format("{0}", styleCounter++));
+            switch (styleName)
+            {
+                case "subTopic":
+                    XmlElement subTopic = this.styleDoc.CreateElement("topic-properties");
+                    if (mindMap.Font != null)
+                    {
+                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.ToString()));
+                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
+                    }
+                    if (mindMap.NodeForeColor != null)
+                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", argbToRgb(mindMap.NodeForeColor)));
+                    if (mindMap.BorderColor != null)
+                        subTopic.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
+                    if (mindMap.LineColor != null)
+                        subTopic.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
+                    if (mindMap.BackColor != null)
+                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.NodeBackColor)));
+                    subTopic.SetAttribute("shape-class", GetShapeStyle(TopicShape.Default));
+                    style.AppendChild(subTopic);
+                    parent.AppendChild(style);
+                    break;
+                case "centralTopic":
+                    XmlElement centralTopic = this.styleDoc.CreateElement("topic-properties");
+                    if (mindMap.Font != null)
+                    {
+                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.ToString()));
+                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
+                    }
+                    if (mindMap.NodeForeColor != null)
+                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", argbToRgb(mindMap.NodeForeColor)));
+                    if (mindMap.BorderColor != null)
+                        centralTopic.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
+                    if (mindMap.LineColor != null)
+                        centralTopic.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
+                    if (mindMap.BackColor != null)
+                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.NodeBackColor)));
+                    centralTopic.SetAttribute("shape-class", GetShapeStyle(TopicShape.Default));
+                    style.AppendChild(centralTopic);
+                    parent.AppendChild(style);
+                    break;
+                case "mainTopic":
+                    XmlElement mainTopic = this.styleDoc.CreateElement("topic-properties");
+                    if (mindMap.Font != null)
+                    {
+                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.ToString()));
+                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
+                    }
+                    if (mindMap.NodeForeColor != null)
+                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", argbToRgb(mindMap.NodeForeColor)));
+                    if (mindMap.BorderColor != null)
+                        mainTopic.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
+                    if (mindMap.LineColor != null)
+                        mainTopic.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
+                    if (mindMap.BackColor != null)
+                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.NodeBackColor)));
+                    mainTopic.SetAttribute("shape-class", GetShapeStyle(TopicShape.Default));
+                    style.AppendChild(mainTopic);
+                    parent.AppendChild(style);
+                    break;
+                case "relationship":
+                    XmlElement relationship = this.styleDoc.CreateElement("relationship-properties");
+                    if (mindMap.ForeColor != null)
+                        relationship.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", argbToRgb(mindMap.ForeColor)));
+                    if (mindMap.Font != null)
+                    {
+                        relationship.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.ToString()));
+                        relationship.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
+                    }
+                    style.AppendChild(relationship);
+                    parent.AppendChild(style);
+                    break;
+                case "map":
+                    XmlElement map = this.styleDoc.CreateElement("map-properties");
+                    map.SetAttribute("color-gradient", "none");
+                    map.SetAttribute("line-tapered", "none");
+                    map.SetAttribute("multi-line-colors", "none");
+                    if (mindMap.BackColor != null)
+                        map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.BackColor)));
+                    style.AppendChild(map);
+                    parent.AppendChild(style);
+                    break;
+                default:
+                    break;
+            }
+            return style.GetAttribute("id");
+        }
         private string SaveTopicStyle(Topic topic, MindMap mindMap)
         {
             string id = String.Format("{0}", styleCounter++);
@@ -505,26 +493,56 @@ namespace C2.Model.MindMaps
             style.SetAttribute("name", String.Empty);
             style.SetAttribute("type", "topic");
 
+            topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "text-align", GetAlignment(topic.TextAlignment)));
             if (topic.Font != null)
             {
-                topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", topic.Font.FontFamily.ToString()));
-                topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", topic.Font.Size.ToString()));
+                // 字体排版
+                if ((topic.Font.Style & FontStyle.Bold) == FontStyle.Bold)
+                    topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-weight", "bold"));
+                if ((topic.Font.Style & FontStyle.Strikeout) == FontStyle.Strikeout)
+                    topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "text-decoration", "line-through"));
+                if ((topic.Font.Style & FontStyle.Italic) == FontStyle.Italic)
+                    topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-style", "italic"));
+                //字体族
+                topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", topic.Font.FontFamily.Name));
+                topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", String.Format("{0}pt", Convert.ToInt32(topic.Font.Size))));
             }
+            // 基础样式
             if (topic.Style != null)
             {
-                topicStyle.SetAttribute("border-line-color", argbToRgb(topic.Style.BorderColor));
-                topicStyle.SetAttribute("line-color", argbToRgb(topic.Style.LineColor));
                 topicStyle.SetAttribute("shape-class", GetShapeStyle(topic.Style.Shape));
+                    // 以下四种为空时，会继承mindMap/sheet的属性
+                topicStyle.SetAttribute("border-line-color",
+                    topic.Style.BorderColor.IsEmpty ? argbToRgb(mindMap.BorderColor) : argbToRgb(topic.Style.BorderColor));
+                topicStyle.SetAttribute("line-color",
+                    topic.Style.LineColor.IsEmpty ? argbToRgb(mindMap.LineColor) : argbToRgb(topic.Style.LineColor));
                 topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color",
                     topic.Style.ForeColor.IsEmpty ? argbToRgb(mindMap.NodeForeColor) : argbToRgb(topic.Style.ForeColor)));
                 topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill",
-                    topic.Style.BackColor.IsEmpty ? argbToRgb(mindMap.NodeBackColor) : argbToRgb(topic.Style.BackColor)));
+                    topic.Style.BackColor.IsEmpty 
+                    ?
+                    topic.Style.Shape == TopicShape.BaseLine ? argbToRgb(mindMap.BackColor) : argbToRgb(mindMap.NodeBackColor) 
+                    : 
+                    argbToRgb(topic.Style.BackColor)));
             }
             style.AppendChild(topicStyle);
             styles.AppendChild(style);
             return id;
         }
-
+        private string GetAlignment(HorizontalAlignment alignment)
+        {
+            switch (alignment)
+            {
+                case HorizontalAlignment.Left:
+                    return "left";
+                case HorizontalAlignment.Right:
+                    return "right";
+                case HorizontalAlignment.Center:
+                    return "center";
+                default:
+                    return "left";
+            }
+        }
         private string GetShapeStyle(TopicShape shape)
         {
             string prefix = "org.xmind.topicShape.";
@@ -694,7 +712,6 @@ namespace C2.Model.MindMaps
                 topicNode.AppendChild(cn);
             }
         }
-
         private string GetAttachmentID(XmlElement topicNode, Attachment attachment)
         {
             return String.Format("attachment-{0}-{1}", topicNode.GetAttribute("id"), attachment.id);
@@ -729,7 +746,6 @@ namespace C2.Model.MindMaps
         {
             return CreateTopicNode(topicID, attachment.name, attachment.filename);
         }
-
         private XmlElement CreateTopicNode(string nodeID, string titleText, string attachmentName = "")
         {
             XmlElement topic = contentDoc.CreateElement("topic");
@@ -785,7 +801,6 @@ namespace C2.Model.MindMaps
             cp.AppendChild(pst);
             return cp;
         }
-
         private void SaveLabel(XmlElement parent, string text)
         {
             if (parent == null || string.IsNullOrEmpty(text))
@@ -831,7 +846,6 @@ namespace C2.Model.MindMaps
 
             parent.AppendChild(xe);
         }
-
         private void SaveRemark(XmlElement parent, string text)
         {
             if (parent == null || string.IsNullOrEmpty(text))
@@ -852,7 +866,6 @@ namespace C2.Model.MindMaps
                 parent.AppendChild(notes);
             }
         }
-
         private void SaveLink(XmlElement parent, Link[] links, MindMap mindMap)
         {
             if (parent == null || links == null)
@@ -880,7 +893,6 @@ namespace C2.Model.MindMaps
             node.AppendChild(controlPoints);
             parent.AppendChild(node);
         }
-
         private bool IsInternalImage(PictureWidget picWidget)
         {
             return String.IsNullOrEmpty(Path.GetDirectoryName(picWidget.ImageUrl));
@@ -891,10 +903,6 @@ namespace C2.Model.MindMaps
                 if (IsInternalImage(widgets[i]))
                     return i;
             return -1;
-        }
-        private bool IsDefaultColor(Color color)
-        {
-            return color.R == 0 && color.G == 0 && color.B == 0;
         }
         private string argbToRgb(Color color)
         {
