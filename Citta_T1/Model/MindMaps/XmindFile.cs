@@ -42,7 +42,7 @@ namespace C2.Model.MindMaps
         XmlDocument styleDoc;
         XmlNamespaceManager contentNsMgr;
         XmlNamespaceManager styleNsMgr;
-        List<Attachment> attachments;
+        List<AttachmentInfo> attachments;
         int linkCounter;
         string filename;
         int currSheetID;
@@ -72,14 +72,8 @@ namespace C2.Model.MindMaps
             contentDoc.AppendChild(contentRoot);
             styleDoc.AppendChild(styleRoot);
         }
-        public XmindFileSaver(MindMap mindMap, string fn)
-        {
-            Initialize(fn);
+        public XmindFileSaver(MindMap mindMap, string fn) : this (new ChartPage[] { mindMap}, fn) { }
 
-            SaveSheet(mindMap, contentRoot, 1);
-            contentDoc.AppendChild(contentRoot);
-            styleDoc.AppendChild(styleRoot);
-        }
         public void SaveFile()
         {
             /*
@@ -97,8 +91,9 @@ namespace C2.Model.MindMaps
                 // 添加文件
                 zip.Add(new StaticDataSource(contentDoc), "content.xml");
                 zip.Add(new StaticDataSource(styleDoc), "styles.xml");
-                // 添加所有附件
-                foreach (Attachment attachment in attachments)
+                // 添加所有附件 
+                // TODO 磁盘上的不要读进内存自己加
+                foreach (AttachmentInfo attachment in attachments)
                     zip.Add(attachment.staticDataSource, "attachments/" + attachment.filename);
                 // META-INF/manifest.xml
                 zip.Add(CreateMetaInf(), "META-INF/manifest.xml");
@@ -121,7 +116,7 @@ namespace C2.Model.MindMaps
             styleNsMgr.AddNamespace("fo", "http://www.w3.org/1999/XSL/Format");
 
             //styleDoc = CreateStyleDOM();
-            attachments = new List<Attachment>();
+            attachments = new List<AttachmentInfo>();
             linkCounter = 0;
             filename = fn;
 
@@ -174,7 +169,7 @@ namespace C2.Model.MindMaps
             // styles.xml
             root.AppendChild(CreateFileEntryNode(metaDom, "styles.xml", "text/xml"));
             // attachments
-            foreach (Attachment attachment in attachments)
+            foreach (AttachmentInfo attachment in attachments)
                 root.AppendChild(
                     CreateFileEntryNode(
                         metaDom,
@@ -204,7 +199,7 @@ namespace C2.Model.MindMaps
 
             // topics
             SaveMindMap(sheet, mindMap.Root, mindMap);
-            SaveLink(sheet, mindMap.GetLinks(false), mindMap);
+            SaveLinks(sheet, mindMap.GetLinks(false), mindMap);
 
             XmlElement title = contentDoc.CreateElement("title");
             title.InnerText = mindMap.Name;
@@ -225,7 +220,7 @@ namespace C2.Model.MindMaps
                 return;
             XmlElement topicNode = contentDoc.CreateElement("topic");
             // Attributes
-            topicNode.SetAttribute("id", GetTopicID(topic));
+            topicNode.SetAttribute("id", GenTopicID(topic));
             topicNode.SetAttribute("style-id", SaveTopicStyle(topic, mindMap));
             if (topic.Folded)
                 topicNode.SetAttribute("branch", "folded");
@@ -252,7 +247,7 @@ namespace C2.Model.MindMaps
                 for (int i = 0; i < widgets.Length; i++)
                 {
                     if (i == firstInternalPWIndex)
-                        SavePWAsImg(topicNode, widgets[i]);
+                        SavePwAsImg(topicNode, widgets[i]);
                     else
                         SavePwAsAttachment(topicNode, widgets[i]);
                 }
@@ -260,12 +255,14 @@ namespace C2.Model.MindMaps
             /*
              * 附件挂件
              */
-            if (topic.FindWidgets<AttachmentWidget>().Length > 0)
-            {
-                AttachmentWidget[] widgets = topic.FindWidgets<AttachmentWidget>();
-                for (int i = 0; i < widgets.Length; i++)
-                    SaveAwAsAttachment(topicNode, widgets[i]);
-            }
+            //if (topic.FindWidgets<AttachmentWidget>().Length > 0)
+            //{
+            //    AttachmentWidget[] widgets = topic.FindWidgets<AttachmentWidget>();
+            //    for (int i = 0; i < widgets.Length; i++)
+            //        SaveAwAsAttachment(topicNode, widgets[i]);
+            //}
+            foreach(var widget in topic.FindWidgets<AttachmentWidget>())
+                SaveAwAsAttachment(topicNode, widget);
             /*
              * 图表挂件，目前没有持久化，不保存了
              */
@@ -343,15 +340,15 @@ namespace C2.Model.MindMaps
 
             XmlElement map = this.styleDoc.CreateElement("map-properties");
             if (mindMap.BackColor != null)
-                map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.BackColor)));
+                map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", ArgbToRgb(mindMap.BackColor)));
             if (mindMap.ForeColor != null)
-                map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", argbToRgb(mindMap.ForeColor)));            
+                map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", ArgbToRgb(mindMap.ForeColor)));            
             if (mindMap.Font != null)
                 map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.Name));
             if (mindMap.BorderColor != null)
-                map.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
+                map.SetAttribute("border-line-color", ArgbToRgb(mindMap.BorderColor));
             if (mindMap.LineColor != null)
-                map.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
+                map.SetAttribute("line-color", ArgbToRgb(mindMap.LineColor));
             map.SetAttribute("line-width", mindMap.LineWidth.ToString());
 
             style.AppendChild(map);
@@ -396,7 +393,7 @@ namespace C2.Model.MindMaps
         private string SaveThemeStyle(XmlElement parent, string styleName, MindMap mindMap)
         {
             XmlElement style = this.styleDoc.CreateElement("style");
-            style.SetAttribute("id", GetStyleID());
+            style.SetAttribute("id", GenStyleID());
             switch (styleName)
             {
                 case "subTopic":
@@ -407,13 +404,13 @@ namespace C2.Model.MindMaps
                         subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
                     }
                     if (mindMap.NodeForeColor != null)
-                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", argbToRgb(mindMap.NodeForeColor)));
+                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", ArgbToRgb(mindMap.NodeForeColor)));
                     if (mindMap.BorderColor != null)
-                        subTopic.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
+                        subTopic.SetAttribute("border-line-color", ArgbToRgb(mindMap.BorderColor));
                     if (mindMap.LineColor != null)
-                        subTopic.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
+                        subTopic.SetAttribute("line-color", ArgbToRgb(mindMap.LineColor));
                     if (mindMap.BackColor != null)
-                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.NodeBackColor)));
+                        subTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", ArgbToRgb(mindMap.NodeBackColor)));
                     subTopic.SetAttribute("shape-class", GetShapeStyle(TopicShape.Default));
                     style.AppendChild(subTopic);
                     parent.AppendChild(style);
@@ -426,13 +423,13 @@ namespace C2.Model.MindMaps
                         centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
                     }
                     if (mindMap.NodeForeColor != null)
-                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", argbToRgb(mindMap.NodeForeColor)));
+                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", ArgbToRgb(mindMap.NodeForeColor)));
                     if (mindMap.BorderColor != null)
-                        centralTopic.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
+                        centralTopic.SetAttribute("border-line-color", ArgbToRgb(mindMap.BorderColor));
                     if (mindMap.LineColor != null)
-                        centralTopic.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
+                        centralTopic.SetAttribute("line-color", ArgbToRgb(mindMap.LineColor));
                     if (mindMap.BackColor != null)
-                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.NodeBackColor)));
+                        centralTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", ArgbToRgb(mindMap.NodeBackColor)));
                     centralTopic.SetAttribute("shape-class", GetShapeStyle(TopicShape.Default));
                     style.AppendChild(centralTopic);
                     parent.AppendChild(style);
@@ -445,13 +442,13 @@ namespace C2.Model.MindMaps
                         mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", mindMap.Font.Size.ToString()));
                     }
                     if (mindMap.NodeForeColor != null)
-                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", argbToRgb(mindMap.NodeForeColor)));
+                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-size", ArgbToRgb(mindMap.NodeForeColor)));
                     if (mindMap.BorderColor != null)
-                        mainTopic.SetAttribute("border-line-color", argbToRgb(mindMap.BorderColor));
+                        mainTopic.SetAttribute("border-line-color", ArgbToRgb(mindMap.BorderColor));
                     if (mindMap.LineColor != null)
-                        mainTopic.SetAttribute("line-color", argbToRgb(mindMap.LineColor));
+                        mainTopic.SetAttribute("line-color", ArgbToRgb(mindMap.LineColor));
                     if (mindMap.BackColor != null)
-                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.NodeBackColor)));
+                        mainTopic.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", ArgbToRgb(mindMap.NodeBackColor)));
                     mainTopic.SetAttribute("shape-class", GetShapeStyle(TopicShape.Default));
                     style.AppendChild(mainTopic);
                     parent.AppendChild(style);
@@ -459,7 +456,7 @@ namespace C2.Model.MindMaps
                 case "relationship":
                     XmlElement relationship = this.styleDoc.CreateElement("relationship-properties");
                     if (mindMap.ForeColor != null)
-                        relationship.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", argbToRgb(mindMap.ForeColor)));
+                        relationship.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", ArgbToRgb(mindMap.ForeColor)));
                     if (mindMap.Font != null)
                     {
                         relationship.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "font-family", mindMap.Font.FontFamily.ToString()));
@@ -474,7 +471,7 @@ namespace C2.Model.MindMaps
                     map.SetAttribute("line-tapered", "none");
                     map.SetAttribute("multi-line-colors", "none");
                     if (mindMap.BackColor != null)
-                        map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", argbToRgb(mindMap.BackColor)));
+                        map.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill", ArgbToRgb(mindMap.BackColor)));
                     style.AppendChild(map);
                     parent.AppendChild(style);
                     break;
@@ -483,13 +480,13 @@ namespace C2.Model.MindMaps
             }
             return style.GetAttribute("id");
         }
-        private string GetStyleID()
+        private string GenStyleID()
         {
             return String.Format("{0}", styleCounter++);
         }
         private string SaveTopicStyle(Topic topic, MindMap mindMap)
         {
-            string id = GetStyleID();
+            string id = GenStyleID();
 
             XmlElement styles = this.styleRoot.SelectSingleNode("styles") as XmlElement;
             XmlElement style = this.styleDoc.CreateElement("style");
@@ -519,17 +516,17 @@ namespace C2.Model.MindMaps
                 topicStyle.SetAttribute("shape-class", GetShapeStyle(topic.Style.Shape));
                     // 以下四种为空时，会继承mindMap/sheet的属性
                 topicStyle.SetAttribute("border-line-color",
-                    topic.Style.BorderColor.IsEmpty ? argbToRgb(mindMap.BorderColor) : argbToRgb(topic.Style.BorderColor));
+                    topic.Style.BorderColor.IsEmpty ? ArgbToRgb(mindMap.BorderColor) : ArgbToRgb(topic.Style.BorderColor));
                 topicStyle.SetAttribute("line-color",
-                    topic.Style.LineColor.IsEmpty ? argbToRgb(mindMap.LineColor) : argbToRgb(topic.Style.LineColor));
+                    topic.Style.LineColor.IsEmpty ? ArgbToRgb(mindMap.LineColor) : ArgbToRgb(topic.Style.LineColor));
                 topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color",
-                    topic.Style.ForeColor.IsEmpty ? argbToRgb(mindMap.NodeForeColor) : argbToRgb(topic.Style.ForeColor)));
+                    topic.Style.ForeColor.IsEmpty ? ArgbToRgb(mindMap.NodeForeColor) : ArgbToRgb(topic.Style.ForeColor)));
                 topicStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "svg", "fill",
                     topic.Style.BackColor.IsEmpty 
                     ?
-                    topic.Style.Shape == TopicShape.BaseLine ? argbToRgb(mindMap.BackColor) : argbToRgb(mindMap.NodeBackColor) 
+                    topic.Style.Shape == TopicShape.BaseLine ? ArgbToRgb(mindMap.BackColor) : ArgbToRgb(mindMap.NodeBackColor) 
                     : 
-                    argbToRgb(topic.Style.BackColor)));
+                    ArgbToRgb(topic.Style.BackColor)));
             }
             style.AppendChild(topicStyle);
             styles.AppendChild(style);
@@ -648,7 +645,7 @@ namespace C2.Model.MindMaps
         /// <param name="parent"></param>
         private void SavePwAsAttachment(XmlElement parent, PictureWidget widget)
         {
-            Attachment attachment = new Attachment(
+            AttachmentInfo attachment = new AttachmentInfo(
                 attachments.Count.ToString(),
                 attachmentTag + attachments.Count.ToString() + ".png",
                 attachments.Count.ToString() + ".png",
@@ -663,7 +660,7 @@ namespace C2.Model.MindMaps
             foreach (string filePath in attachmentWidget.AttachmentPaths)
             {
                 string filename = Path.GetFileName(filePath);
-                Attachment attachment = new Attachment(
+                AttachmentInfo attachment = new AttachmentInfo(
                                     attachments.Count.ToString(),
                                     attachmentTag + filename,
                                     Path.GetFileName(filePath),
@@ -693,11 +690,11 @@ namespace C2.Model.MindMaps
                     continue;
                 }
 
-                Attachment attachment;
+                AttachmentInfo attachment;
                 if (dataItem.IsDatabase())
                 {
                     // 外部数据都没有后缀名
-                    attachment = new Attachment(
+                    attachment = new AttachmentInfo(
                                         attachments.Count.ToString(),
                                         externalDataTag + dataItem.FileName + defaultExt,
                                         dataItem.FileName + defaultExt,
@@ -707,25 +704,22 @@ namespace C2.Model.MindMaps
                 else
                 {
                     string filename = Path.GetFileName(dataItem.FilePath);
-                    attachment = new Attachment(
+                    attachment = new AttachmentInfo(
                                         attachments.Count.ToString(),
                                         internalDataTag + filename,
                                         filename,
                                         new StaticDataSource(dataItem.FilePath)
                                 );
                 }
-                if (attachment != null)
-                {
-                    attachments.Add(attachment);
-                    SaveAttachment(parent, attachment);
-                }
+                attachments.Add(attachment);
+                SaveAttachment(parent, attachment);
             }
         }
         private void SaveResult(XmlElement parent, ResultWidget resultWidget)
         {
             foreach (DataItem dataItem in resultWidget.DataItems)
             {
-                Attachment attachment = new Attachment(
+                AttachmentInfo attachment = new AttachmentInfo(
                                             attachments.Count.ToString(),
                                             resultDataTag + dataItem.FileName + defaultExt,
                                             dataItem.FileName + defaultExt,
@@ -735,12 +729,12 @@ namespace C2.Model.MindMaps
                 SaveAttachment(parent, attachment);
             }
         }
-        private void SaveAttachment(XmlElement topicNode, Attachment attachment)
+        private void SaveAttachment(XmlElement topicNode, AttachmentInfo attachment)
         {
             // Xmind中 附件以节点形式存在
             if (topicNode.SelectSingleNode("children/topics") != null)
             {
-                XmlElement topic = CreateAtcmtTopicNode(GetAttachmentID(topicNode, attachment), attachment);
+                XmlElement topic = CreateAtcmtTopicNode(GenAttachmentID(topicNode, attachment), attachment);
 
                 topicNode.SelectSingleNode("children/topics").AppendChild(topic);
             }
@@ -750,23 +744,21 @@ namespace C2.Model.MindMaps
                 XmlElement tn = contentDoc.CreateElement("topics");
                 tn.SetAttribute("type", "attached");
 
-                XmlElement topic = CreateAtcmtTopicNode(GetAttachmentID(topicNode, attachment), attachment);
+                XmlElement topic = CreateAtcmtTopicNode(GenAttachmentID(topicNode, attachment), attachment);
 
-                tn.AppendChild(topic);
-                cn.AppendChild(tn);
-                topicNode.AppendChild(cn);
+                topicNode.AppendChild(cn).AppendChild(tn).AppendChild(topic);
             }
         }
-        private string GetAttachmentID(XmlElement topicNode, Attachment attachment)
+        private string GenAttachmentID(XmlElement topicNode, AttachmentInfo attachment)
         {
             return String.Format("attachment-{0}-{1}", topicNode.GetAttribute("id"), attachment.id);
         }
-        private string GetLinkID()
+        private string GenLinkID()
         {
             this.linkCounter += 1;
             return linkCounter.ToString();
         }
-        private string GetTopicID(Topic topic)
+        private string GenTopicID(Topic topic)
         {
             return this.currSheetID.ToString() + "-" + topic.ID.ToString();
         }
@@ -787,7 +779,7 @@ namespace C2.Model.MindMaps
             node.SetAttribute("media-type", mediaType);
             return node;
         }
-        private XmlElement CreateAtcmtTopicNode(string topicID, Attachment attachment)
+        private XmlElement CreateAtcmtTopicNode(string topicID, AttachmentInfo attachment)
         {
             return CreateTopicNode(topicID, attachment.name, attachment.filename);
         }
@@ -814,7 +806,7 @@ namespace C2.Model.MindMaps
             title.InnerText = text;
             return title;
         }
-        private XmlElement CreateLablNode(string text)
+        private XmlElement CreateLabelNode(string text)
         {
             XmlElement label = contentDoc.CreateElement("label");
             label.InnerText = text;
@@ -850,33 +842,39 @@ namespace C2.Model.MindMaps
         {
             if (parent == null || string.IsNullOrEmpty(text))
                 return;
-
+            // TODO 简化逻辑 不用SelectSingle两次
             if (parent.SelectSingleNode("labels") != null)
             {
-                XmlElement label = CreateLablNode(text);
+                XmlElement label = CreateLabelNode(text);
                 parent.SelectSingleNode("labels").AppendChild(label);
             }
             else
             {
                 XmlElement labels = contentDoc.CreateElement("labels");
 
-                XmlElement label = CreateLablNode(text);
+                XmlElement label = CreateLabelNode(text);
                 labels.AppendChild(label);
 
                 parent.AppendChild(labels);
             }
+
+            XmlNode node = parent.SelectSingleNode("labels");
+            if (node == null)
+                node = contentDoc.CreateElement("labels");
+
+            node.AppendChild(CreateLabelNode(text));
         }
         /// <summary>
         /// 将C2图标变为Xmind Topic 图片，图片需要设置大小和布局
         /// </summary>
         /// <param name="widget"></param>
         /// <param name="parent"></param>
-        private void SavePWAsImg(XmlElement parent, PictureWidget widget)
+        private void SavePwAsImg(XmlElement parent, PictureWidget widget)
         {
             if (parent == null || widget.Data == null)
                 return;
 
-            Attachment attachment = new Attachment(
+            AttachmentInfo attachment = new AttachmentInfo(
                 attachments.Count.ToString(),
                 attachmentTag + attachments.Count.ToString(),
                 attachments.Count.ToString() + ".png",
@@ -911,7 +909,7 @@ namespace C2.Model.MindMaps
                 parent.AppendChild(notes);
             }
         }
-        private void SaveLink(XmlElement parent, Link[] links, MindMap mindMap)
+        private void SaveLinks(XmlElement parent, Link[] links, MindMap mindMap)
         {
             if (parent == null || links == null)
                 return;
@@ -928,7 +926,7 @@ namespace C2.Model.MindMaps
             // Attributes
             node.SetAttribute("end1", this.currSheetID.ToString() + "-" + link.From.ID.ToString());
             node.SetAttribute("end2", this.currSheetID.ToString() + "-" + link.Target.ID.ToString());
-            node.SetAttribute("id", GetLinkID());
+            node.SetAttribute("id", GenLinkID());
             node.SetAttribute("style-id", SaveLinkStyle(link, mindMap));
             // control-points
             XmlElement controlPoints = contentDoc.CreateElement("control-points");
@@ -941,17 +939,17 @@ namespace C2.Model.MindMaps
         }
         private string SaveLinkStyle(Link link, MindMap mindMap)
         {
-            string id = GetStyleID();
+            string id = GenStyleID();
             XmlElement styles = this.styleRoot.SelectSingleNode("styles") as XmlElement;
             XmlElement style = this.styleDoc.CreateElement("style");
             style.SetAttribute("id", id);
             style.SetAttribute("type", "relationship");
 
             XmlElement linkStyle = this.styleDoc.CreateElement("relationship-properties");
-            linkStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", argbToRgb(mindMap.ForeColor)));
+            linkStyle.Attributes.Append(CreateAttributeWithNs(this.styleDoc, "fo", "color", ArgbToRgb(mindMap.ForeColor)));
             linkStyle.SetAttribute("arrow-end-class", GetArrorEndClass(link.EndCap));
             linkStyle.SetAttribute("line-color",
-                link.Color.IsEmpty ? argbToRgb(mindMap.LinkLineColor) : argbToRgb(link.Color));
+                link.Color.IsEmpty ? ArgbToRgb(mindMap.LinkLineColor) : ArgbToRgb(link.Color));
 
             linkStyle.SetAttribute("line-pattern", GetLinePattern(link.LineStyle));
             linkStyle.SetAttribute("line-width", String.Format("{0}pt", link.LineWidth));
@@ -964,6 +962,11 @@ namespace C2.Model.MindMaps
         {
             return String.IsNullOrEmpty(Path.GetDirectoryName(picWidget.ImageUrl));
         }
+        /// <summary>
+        /// 找图标的索引
+        /// </summary>
+        /// <param name="widgets"></param>
+        /// <returns></returns>
         private int FindInternalPicWidgetIndex(PictureWidget[] widgets)
         {
             for (int i = 0; i < widgets.Length; i++)
@@ -971,17 +974,17 @@ namespace C2.Model.MindMaps
                     return i;
             return -1;
         }
-        private string argbToRgb(Color color)
+        private string ArgbToRgb(Color color)
         {
             return String.Format("#{0}", BitConverter.ToString(new byte[] { color.R, color.G, color.B })).Replace("-", "");
         }
-        class Attachment
+        class AttachmentInfo
         {
             public string id;
             public string name;
             public string filename;
             public IStaticDataSource staticDataSource;
-            public Attachment(string id, string name, string filename, IStaticDataSource staticDataSource)
+            public AttachmentInfo(string id, string name, string filename, IStaticDataSource staticDataSource)
             {
                 this.id = id;
                 this.name = name;
@@ -1057,22 +1060,19 @@ namespace C2.Model.MindMaps
 
             public Stream GetSource()
             {
-                Stream s = new MemoryStream(bytes);
-                return s;
+                return new MemoryStream(bytes);
             }
         }
         static string GenerateMD5(string text)
         {
-            using (MD5 mi = System.Security.Cryptography.MD5.Create())
+            using (MD5 mi = MD5.Create())
             {
                 byte[] buffer = Encoding.Default.GetBytes(text);
                 //开始加密
                 byte[] newBuffer = mi.ComputeHash(buffer);
-                StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder(newBuffer.Length * 2); // 固定长度
                 for (int i = 0; i < newBuffer.Length; i++)
-                {
-                    sb.Append(newBuffer[i].ToString("x2"));
-                }
+                    sb.Append(newBuffer[i].ToString("x2")); // TODO 直接sb.Append(newBuffer);
                 return sb.ToString();
             }
         }
