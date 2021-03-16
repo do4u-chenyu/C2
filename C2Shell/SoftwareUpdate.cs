@@ -48,13 +48,12 @@ namespace C2Shell
 
             try
             {
-                string[] array0 = newVersion.Split('.');
-                string[] array1 = currentVersion.Split('.');
-
-                bool isNewer = (int.Parse(array0[0]) > int.Parse(array1[0])
-                             || int.Parse(array0[1]) > int.Parse(array1[1])
-                             || int.Parse(array0[2]) > int.Parse(array1[2]));
-                return isNewer;
+                if (newVersion.Split('.').Length != 3
+                 || currentVersion.Split('.').Length != 3)
+                    return false;
+                Version v0 = new Version(newVersion);
+                Version v1 = new Version(currentVersion);
+                return v0 > v1;
             }
             catch
             {
