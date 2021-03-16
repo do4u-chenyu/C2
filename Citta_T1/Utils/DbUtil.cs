@@ -16,7 +16,11 @@ namespace C2.Utils
         private static readonly LogUtil log = LogUtil.GetInstance("DbUtil");
 
         public static string HiveDeaultSchema = "default";
-
+        public static string PostgreDeaultSchema = "postgres";
+        public static StringBuilder TrimEndN(this StringBuilder sb)
+        {
+            return sb.Replace(@"\n", @"\0", sb.Length - 1, 1);
+        }
         public static Dictionary<string, List<string>> StringToDict(string v)
         {
             Dictionary<string, List<string>> result = new Dictionary<string, List<string>>();
@@ -56,6 +60,8 @@ namespace C2.Utils
                     return user;
                 case DatabaseType.Hive:
                     return HiveDeaultSchema;
+                case DatabaseType.Postgre:
+                    return PostgreDeaultSchema;
                 default:
                     return String.Empty;
             }

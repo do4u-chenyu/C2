@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using C2.Model;
 using C2.Utils;
@@ -68,7 +69,7 @@ namespace C2.Database
             }
             return result;
         }
-
+       
         private string ExecuteQuery(string sql, NpgsqlConnection conn, bool header, int returnNum)
         {
             StringBuilder sb = new StringBuilder(1024 * 16);
@@ -99,7 +100,7 @@ namespace C2.Database
                 catch { }
                 
             }
-            return (sb.Length > 1 ? sb.Remove(sb.Length - 1, 1).ToString() : sb.ToString());
+            return DbUtil.TrimEndN(sb).ToString();
         }
 
         public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1)
@@ -120,13 +121,13 @@ namespace C2.Database
                     StringBuilder sb = new StringBuilder(1024);
                     for (int i = 0; i < sdr.FieldCount; i++)
                         sb.Append(sdr.GetName(i)).Append(OpUtil.TabSeparator);
-                    sw.WriteLine(sb.Length > 1 ? sb.Remove(sb.Length - 1, 1).ToString() : sb.ToString());    // 去掉最后一列的列分隔符
+                    sw.WriteLine(DbUtil.TrimEndN(sb).ToString());    // 去掉最后一列的列分隔符
                     while (sdr.Read() && (maxReturnNum == -1 ? true : totalReturnNum++ < maxReturnNum))
                     {
                         sb = new StringBuilder(1024);
                         for (int i = 0; i < sdr.FieldCount; i++)
                             sb.Append(sdr[i]).Append(OpUtil.TabSeparator);
-                        sw.WriteLine(sb.Length > 1 ? sb.Remove(sb.Length - 1, 1).ToString() : sb.ToString());
+                        sw.WriteLine(DbUtil.TrimEndN(sb).ToString());
                     }
                     try
                     {
