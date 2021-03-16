@@ -21,6 +21,10 @@ namespace C2.Utils
         {
             return sb.Replace(@"\n", @"\0", sb.Length - 1, 1);
         }
+        public static StringBuilder TrimEndT(this StringBuilder sb)
+        {
+            return sb.Replace(@"\t", @"\0", sb.Length - 1, 1);
+        }
         public static Dictionary<string, List<string>> StringToDict(string v)
         {
             Dictionary<string, List<string>> result = new Dictionary<string, List<string>>();

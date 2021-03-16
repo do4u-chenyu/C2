@@ -121,13 +121,13 @@ namespace C2.Database
                     StringBuilder sb = new StringBuilder(1024);
                     for (int i = 0; i < sdr.FieldCount; i++)
                         sb.Append(sdr.GetName(i)).Append(OpUtil.TabSeparator);
-                    sw.WriteLine(DbUtil.TrimEndN(sb).ToString());    // 去掉最后一列的列分隔符
+                    sw.WriteLine(DbUtil.TrimEndT(sb).ToString());    // 去掉最后一列的列分隔符
                     while (sdr.Read() && (maxReturnNum == -1 ? true : totalReturnNum++ < maxReturnNum))
                     {
                         sb = new StringBuilder(1024);
                         for (int i = 0; i < sdr.FieldCount; i++)
                             sb.Append(sdr[i]).Append(OpUtil.TabSeparator);
-                        sw.WriteLine(DbUtil.TrimEndN(sb).ToString());
+                        sw.WriteLine(DbUtil.TrimEndT(sb).ToString());
                     }
                     try
                     {
