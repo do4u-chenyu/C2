@@ -48,12 +48,7 @@ namespace C2Shell
 
             try
             {
-                if (newVersion.Split('.').Length != 3
-                 || currentVersion.Split('.').Length != 3)
-                    return false;
-                Version v0 = new Version(newVersion);
-                Version v1 = new Version(currentVersion);
-                return v0 > v1;
+                return new Version(newVersion) > new Version(currentVersion);
             }
             catch
             {
