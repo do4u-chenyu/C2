@@ -238,18 +238,15 @@ namespace C2.Model.MindMaps
              * 优先存C2内部图表，有图表存图表，其他全为附件，没有图表放一张图，其他全为附件
              * 
              */
-            if (topic.FindWidgets<PictureWidget>().Length > 0)
+            // 至少存在一个图表
+            PictureWidget[] pictureWidgets = topic.FindWidgets<PictureWidget>();
+            int firstInternalPWIndex = Math.Max(0, FindInternalPicWidgetIndex(pictureWidgets));
+            for (int i = 0; i < pictureWidgets.Length; i++)
             {
-                // 至少存在一个图表
-                PictureWidget[] widgets = topic.FindWidgets<PictureWidget>();
-                int firstInternalPWIndex = Math.Max(0, FindInternalPicWidgetIndex(widgets));
-                for (int i = 0; i < widgets.Length; i++)
-                {
-                    if (i == firstInternalPWIndex)
-                        SavePwAsImg(topicNode, widgets[i]);
-                    else
-                        SavePwAsAttachment(topicNode, widgets[i]);
-                }
+                if (i == firstInternalPWIndex)
+                    SavePwAsImg(topicNode, pictureWidgets[i]);
+                else
+                    SavePwAsAttachment(topicNode, pictureWidgets[i]);
             }
             /*
              * 附件挂件
@@ -272,35 +269,22 @@ namespace C2.Model.MindMaps
             /*
              * 数据挂件
              */
-            if (topic.FindWidgets<DataSourceWidget>().Length > 0)
-            {
-                // 本地数据和外部数据
-                DataSourceWidget[] widgets = topic.FindWidgets<DataSourceWidget>();
-                for (int i = 0; i < widgets.Length; i++)
-                    SaveDataSource(topicNode, widgets[i]);
-            }
+            // 本地数据和外部数据
+            foreach(var widget in topic.FindWidgets<DataSourceWidget>())
+                SaveDataSource(topicNode, widget);
             /*
              * 结果挂件
              * 1. 业务视图
              * 2. 高级模型
              */
-            if (topic.FindWidgets<ResultWidget>().Length > 0)
-            {
-                // 本地数据和外部数据
-                ResultWidget[] widgets = topic.FindWidgets<ResultWidget>();
-                for (int i = 0; i < widgets.Length; i++)
-                    SaveResult(topicNode, widgets[i]);
-            }
+            foreach(var widget in topic.FindWidgets<ResultWidget>())
+                SaveResult(topicNode, widget);
             /*
              * 
              */
             // notes / remark
-            if (topic.FindWidgets<NoteWidget>().Length > 0)
-            {
-                NoteWidget[] widgets = topic.FindWidgets<NoteWidget>();
-                for (int i = 0; i < widgets.Length; i++)
-                    SaveRemark(topicNode, widgets[i].Text);
-            }
+            foreach (var widget in topic.FindWidgets<NoteWidget>())
+                SaveRemark(topicNode, widget.Text);
 
             // children
             if (topic.Children.Count > 0)
