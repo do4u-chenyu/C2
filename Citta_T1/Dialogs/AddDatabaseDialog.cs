@@ -161,6 +161,7 @@ namespace C2.Dialogs
                 this.serviceTextBox.Enabled = false;
                 this.sidTextBox.Enabled = false;
                 this.schemaTextBox.Enabled = true;
+                this.sidTextBox.Text = "";
             }
             
             if (databaseTypeComboBox.SelectedItem.ToString().Contains("Hive"))
