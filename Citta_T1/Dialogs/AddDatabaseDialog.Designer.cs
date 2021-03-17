@@ -50,7 +50,7 @@
             // databaseTypeLabel
             // 
             this.databaseTypeLabel.AutoSize = true;
-            this.databaseTypeLabel.Location = new System.Drawing.Point(19, 23);
+            this.databaseTypeLabel.Location = new System.Drawing.Point(20, 23);
             this.databaseTypeLabel.Name = "databaseTypeLabel";
             this.databaseTypeLabel.Size = new System.Drawing.Size(82, 15);
             this.databaseTypeLabel.TabIndex = 10003;
@@ -59,7 +59,7 @@
             // serverLabel
             // 
             this.serverLabel.AutoSize = true;
-            this.serverLabel.Location = new System.Drawing.Point(19, 59);
+            this.serverLabel.Location = new System.Drawing.Point(20, 59);
             this.serverLabel.Name = "serverLabel";
             this.serverLabel.Size = new System.Drawing.Size(90, 15);
             this.serverLabel.TabIndex = 10004;
@@ -68,7 +68,7 @@
             // userLabel
             // 
             this.userLabel.AutoSize = true;
-            this.userLabel.Location = new System.Drawing.Point(19, 96);
+            this.userLabel.Location = new System.Drawing.Point(20, 96);
             this.userLabel.Name = "userLabel";
             this.userLabel.Size = new System.Drawing.Size(90, 15);
             this.userLabel.TabIndex = 10006;
@@ -77,7 +77,7 @@
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(19, 134);
+            this.passwordLabel.Location = new System.Drawing.Point(20, 134);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(75, 15);
             this.passwordLabel.TabIndex = 10007;
@@ -142,7 +142,7 @@
             // serviceRadiobutton
             // 
             this.serviceRadiobutton.AutoSize = true;
-            this.serviceRadiobutton.Location = new System.Drawing.Point(21, 204);
+            this.serviceRadiobutton.Location = new System.Drawing.Point(20, 204);
             this.serviceRadiobutton.Name = "serviceRadiobutton";
             this.serviceRadiobutton.Size = new System.Drawing.Size(73, 19);
             this.serviceRadiobutton.TabIndex = 10017;
@@ -153,7 +153,7 @@
             // 
             this.sidRadiobutton.AutoSize = true;
             this.sidRadiobutton.Checked = true;
-            this.sidRadiobutton.Location = new System.Drawing.Point(22, 239);
+            this.sidRadiobutton.Location = new System.Drawing.Point(20, 239);
             this.sidRadiobutton.Name = "sidRadiobutton";
             this.sidRadiobutton.Size = new System.Drawing.Size(52, 19);
             this.sidRadiobutton.TabIndex = 10018;
@@ -196,7 +196,7 @@
             // schemaLabel
             // 
             this.schemaLabel.AutoSize = true;
-            this.schemaLabel.Location = new System.Drawing.Point(18, 170);
+            this.schemaLabel.Location = new System.Drawing.Point(20, 170);
             this.schemaLabel.Name = "schemaLabel";
             this.schemaLabel.Size = new System.Drawing.Size(75, 15);
             this.schemaLabel.TabIndex = 10024;
