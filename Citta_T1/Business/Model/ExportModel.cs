@@ -95,8 +95,8 @@ namespace C2.Business.Model
                     }
                 }
 
-                if ((widget as XmlElement).GetAttribute("type") == "PICTURE")
-                    CopyPic(widget.SelectNodes("."), allPaths, dataSourceNames);
+                if ((widget as XmlElement).GetAttribute("type") == "PICTURE" && !CopyPic(widget.SelectNodes("."), allPaths, dataSourceNames))
+                    return !copySuccess;
             }
 
             foreach (string xmlPath in xmlPaths)
