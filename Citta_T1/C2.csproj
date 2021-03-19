@@ -250,6 +250,12 @@
       <DependentUpon>UpdateProgressBar.cs</DependentUpon>
     </Compile>
     <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
+    <Compile Include="IAOLab\SearchToolkit\SearchToolkitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\SearchToolkit\SearchToolkitForm.Designer.cs">
+      <DependentUpon>SearchToolkitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\SimpleBar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\StackBar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\BaseCharts.cs" />
