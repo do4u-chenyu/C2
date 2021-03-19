@@ -13,14 +13,14 @@ namespace C2.Controls.Left
         private OpUtil.ExtType extType;
         private char separator;
         private int count = 0;
-        private string oldTextString;
+
         public OpUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public OpUtil.ExtType ExtType { get => extType; set => extType = value; }
         public char Separator { get => separator; set => separator = value; }
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataSourceName { get; set; }
         public int Count { get => this.count; set => this.count = value; }
-        private static string DataButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
+        private static readonly string DataButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
         public DataButton(string ffp, string dataSourceName, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
@@ -31,7 +31,6 @@ namespace C2.Controls.Left
             this.separator = separator;
             this.extType = extType;
             this.encoding = encoding;
-            this.oldTextString = dataSourceName;
             DataSourceName = dataSourceName;
         }
 
@@ -124,7 +123,7 @@ namespace C2.Controls.Left
             this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
         }
 
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ContextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.ReviewToolStripMenuItem.Enabled = Global.GetBottomViewPanel().Visible;
             this.ReviewToolStripMenuItem.ToolTipText = this.ReviewToolStripMenuItem.Enabled ? "预览数据源前一千条数据" : HelpUtil.ReviewToolStripMenuItemInfo;

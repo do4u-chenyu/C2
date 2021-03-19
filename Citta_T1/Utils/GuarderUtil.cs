@@ -15,6 +15,12 @@ namespace C2.Utils
                 Cursor.Current = cursor;
             }
 
+            public CursorGuarder()
+            {
+                this.cursor = Cursor.Current;
+                Cursor.Current = Cursors.WaitCursor;
+            }
+
             public void Dispose()
             {
                 Cursor.Current = this.cursor;

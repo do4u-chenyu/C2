@@ -12,6 +12,7 @@ namespace C2.Controls.Left
     {
         private string oldTextString;
         private string fullFilePath;
+        private DataObject dragDropData;
 
         public ModelButton(string modelTitle)
         {
@@ -32,9 +33,15 @@ namespace C2.Controls.Left
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+             OpenModelDocument();
+        }
+
+        private void OpenModelDocument()
+        {
             // 文件打开后,不能重复打开,不能删除,不能重命名
             //现在需要手动new一个canvasform
-            Global.GetMainForm().LoadCanvasFormByXml( Path.Combine(Global.UserWorkspacePath, "模型市场"), this.textButton.Text);
+            using (new GuarderUtil.CursorGuarder())
+                Global.GetMainForm().LoadCanvasFormByXml(Path.Combine(Global.UserWorkspacePath, "模型市场"), this.textButton.Text);
 
             this.OpenToolStripMenuItem.Enabled = false;
             this.RenameToolStripMenuItem.Enabled = false;
@@ -111,11 +118,14 @@ namespace C2.Controls.Left
 
             if (e.Clicks == 1) // 单击拖拽
             {
-                DataObject dragDropData = new DataObject();
+                dragDropData = new DataObject();
                 dragDropData.SetData("Path", FullFilePath);    // 模型全路径
                 dragDropData.SetData("Type", ElementType.Empty);    // 模型为了统一逻辑，暂定为empty
                 dragDropData.SetData("Text", ModelTitle); 
-                this.textButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+            }
+            else if (e.Clicks == 2 && this.OpenToolStripMenuItem.Enabled) // 双击打开
+            {
+                OpenModelDocument();
             }
         }
 
@@ -174,7 +184,6 @@ namespace C2.Controls.Left
             else
             {
                 this.OpenToolStripMenuItem.Enabled = true;
-                //this.RenameToolStripMenuItem.Enabled = true;
                 this.DeleteToolStripMenuItem.Enabled = true;
             }
         }
@@ -184,6 +193,22 @@ namespace C2.Controls.Left
             // 模型全路径浮动提示信息
             String helpInfo = FullFilePath;
             this.toolTip1.SetToolTip(this.rightPictureBox, helpInfo);
+        }
+
+        private void TextButton_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragDropData != null)
+                this.textButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+        }
+
+        private void TextButton_MouseLeave(object sender, EventArgs e)
+        {
+            dragDropData = null;
+        }
+
+        private void TextButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragDropData = null;
         }
     }
 
