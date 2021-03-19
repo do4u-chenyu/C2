@@ -272,6 +272,7 @@ namespace C2.Controls.Move.Dt
         #region 右键菜单
         private void OpenMenuItem_Click(object sender, EventArgs e)
         {
+            BCPBuffer.GetInstance().SetDirty(FullFilePath); // 外部打开文件, 设置脏,下次预览时自动更新
             ProcessUtil.ProcessOpen(FullFilePath);
         }
         #endregion
