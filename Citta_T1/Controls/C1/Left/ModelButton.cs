@@ -119,11 +119,11 @@ namespace C2.Controls.Left
             if (e.Clicks == 1) // 单击拖拽
             {
                 dragDropData = new DataObject();
-                dragDropData.SetData("Path", FullFilePath);    // 模型全路径
-                dragDropData.SetData("Type", ElementType.Empty);    // 模型为了统一逻辑，暂定为empty
+                dragDropData.SetData("Path", FullFilePath);      // 模型全路径
+                dragDropData.SetData("Type", ElementType.Empty); // 模型为了统一逻辑，暂定为empty
                 dragDropData.SetData("Text", ModelTitle); 
             }
-            else if (e.Clicks == 2 && this.OpenToolStripMenuItem.Enabled) // 双击打开
+            else if (e.Clicks == 2 && !IsCanvasFormOpened()) // 双击打开
             {
                 OpenModelDocument();
             }
@@ -174,8 +174,7 @@ namespace C2.Controls.Left
 
         private void ContextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            CanvasForm cf = Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.UserWorkspacePath, "模型市场", ModelTitle));
-            if (cf != null)
+            if (IsCanvasFormOpened())
             {
                 this.OpenToolStripMenuItem.Enabled = false;
                 this.RenameToolStripMenuItem.Enabled = false;
@@ -186,6 +185,11 @@ namespace C2.Controls.Left
                 this.OpenToolStripMenuItem.Enabled = true;
                 this.DeleteToolStripMenuItem.Enabled = true;
             }
+        }
+
+        private bool IsCanvasFormOpened()
+        {
+            return Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.UserWorkspacePath, "模型市场", ModelTitle)) != null;
         }
 
         private void ModelButton_Load(object sender, EventArgs e)
