@@ -64,17 +64,9 @@ namespace C2.Model.Widgets
         public static void DoOpenAttachment(string ffp)
         {
             if(File.Exists(ffp))
-            {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = "explorer.exe";  //资源管理器
-                processStartInfo.Arguments = ffp;
-                Process.Start(processStartInfo);
-            }
+                ProcessUtil.ProcessOpen(ffp);
             else
-            {
                 HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
-            }
         }
-
     }
 }

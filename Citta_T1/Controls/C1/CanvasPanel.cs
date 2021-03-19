@@ -799,7 +799,7 @@ namespace C2.Controls
 
             }
         }
-            public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,
