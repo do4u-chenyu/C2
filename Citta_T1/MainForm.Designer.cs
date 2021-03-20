@@ -361,7 +361,6 @@ namespace C2
             this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
             this.dataSourceControl.Margin = new System.Windows.Forms.Padding(4);
             this.dataSourceControl.Name = "dataSourceControl";
-            this.dataSourceControl.SelectLinkButton = null;
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
             this.dataSourceControl.Visible = false;
