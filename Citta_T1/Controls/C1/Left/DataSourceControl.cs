@@ -1,9 +1,7 @@
 ﻿using C2.Business.DataSource;
-using C2.Configuration;
 using C2.Core;
 using C2.Database;
 using C2.Dialogs;
-using C2.Globalization;
 using C2.Model;
 using C2.Utils;
 using System;
@@ -23,7 +21,6 @@ namespace C2.Controls.Left
 
         private Point startPoint;
         private Point linkPoint;
-        private Point tablePoint;
 
         // 这个控件属性不需要在属性面板显示和序列化,不加这个标签,在引用这个控件的Designer中,会序列化它
         // 然后就是各种奇葩问题
@@ -49,6 +46,9 @@ namespace C2.Controls.Left
                 return _SelectLinkButton;
             }
         }
+
+        [Bindable(false), Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<DatabaseItem> RelateDBIs
         {
             get
@@ -78,8 +78,6 @@ namespace C2.Controls.Left
             LinkSourceDictI2B = new Dictionary<string, LinkButton>();
             startPoint = new Point(ButtonLeftX, -ButtonGapY);
             linkPoint = new Point(ButtonLeftX - 15, -ButtonGapY);
-            tablePoint = new Point(ButtonLeftX, -ButtonGapY);
-
         }
 
         #region 内外部数据面板切换
@@ -454,7 +452,6 @@ namespace C2.Controls.Left
         {
             List<DatabaseItem> dbis = new List<DatabaseItem>();
             _RelateDBIs.Clear();
-            tablePoint = new Point(ButtonLeftX, -ButtonGapY);
             List<string> tmp = new List<string>();
             foreach (Table table in tables)
             {

@@ -81,13 +81,17 @@ namespace C2
             this.bottomLogControl = new C2.Controls.Bottom.BottomLogControl();
             this.bottomPyConsole = new C2.Controls.Bottom.BottomConsoleControl();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
             this.tabPanel = new System.Windows.Forms.Panel();
             this.taskBar = new C2.Controls.TaskBar();
             this.blankButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.noFocusButton1 = new C2.Controls.Common.NoFocusButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.noFocusButton2 = new C2.Controls.Common.NoFocusButton();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -107,12 +111,15 @@ namespace C2
             this.workSpacePanel.SuspendLayout();
             this.bottomViewPanel.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.tabPanel.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.tabPanel.SuspendLayout();
+            this.noFocusButton1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.noFocusButton2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
-
             // 
             // headPanel
             // 
@@ -166,7 +173,7 @@ namespace C2
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(60, 31);
+            this.usernamelabel.Size = new System.Drawing.Size(40, 22);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "IAO";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
@@ -178,13 +185,15 @@ namespace C2
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(8, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(419, 52);
+            this.label1.Size = new System.Drawing.Size(228, 36);
             this.label1.TabIndex = 0;
             this.label1.Text = "IAO单兵作战平台";
             // 
             // leftMainMenuPanel
             // 
             this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(60)))), ((int)(((byte)(85)))));
+            this.leftMainMenuPanel.Controls.Add(this.noFocusButton2);
+            this.leftMainMenuPanel.Controls.Add(this.noFocusButton1);
             this.leftMainMenuPanel.Controls.Add(this.IAOLabButton);
             this.leftMainMenuPanel.Controls.Add(this.DataSourceButton);
             this.leftMainMenuPanel.Controls.Add(this.MindMapButton);
@@ -194,7 +203,6 @@ namespace C2
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
             this.leftMainMenuPanel.Size = new System.Drawing.Size(145, 560);
             this.leftMainMenuPanel.TabIndex = 1;
-            //this.leftMainMenuPanel.AutoSize = true;
             // 
             // IAOLabButton
             // 
@@ -324,7 +332,7 @@ namespace C2
             this.leftToolBoxPanel.Controls.Add(this.iaoModelControl);
             this.leftToolBoxPanel.Controls.Add(this.myModelControl);
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.leftToolBoxPanel.Location = new System.Drawing.Point(136, 46);
+            this.leftToolBoxPanel.Location = new System.Drawing.Point(145, 46);
             this.leftToolBoxPanel.Name = "leftToolBoxPanel";
             this.leftToolBoxPanel.Size = new System.Drawing.Size(187, 560);
             this.leftToolBoxPanel.TabIndex = 2;
@@ -353,6 +361,7 @@ namespace C2
             this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
             this.dataSourceControl.Margin = new System.Windows.Forms.Padding(4);
             this.dataSourceControl.Name = "dataSourceControl";
+            this.dataSourceControl.SelectLinkButton = null;
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
             this.dataSourceControl.Visible = false;
@@ -530,7 +539,7 @@ namespace C2
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.logLabel.Location = new System.Drawing.Point(122, 5);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(110, 31);
+            this.logLabel.Size = new System.Drawing.Size(74, 22);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
@@ -543,7 +552,7 @@ namespace C2
             this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pyControlLabel.Location = new System.Drawing.Point(237, 5);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(86, 31);
+            this.pyControlLabel.Size = new System.Drawing.Size(58, 22);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
@@ -556,7 +565,7 @@ namespace C2
             this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.previewLabel.Location = new System.Drawing.Point(14, 5);
             this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(110, 31);
+            this.previewLabel.Size = new System.Drawing.Size(74, 22);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
@@ -570,7 +579,7 @@ namespace C2
             this.dragLineControl.Location = new System.Drawing.Point(0, 34);
             this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
             this.dragLineControl.Name = "dragLineControl";
-            this.dragLineControl.Size = new System.Drawing.Size(908, 3);
+            this.dragLineControl.Size = new System.Drawing.Size(899, 3);
             this.dragLineControl.TabIndex = 3;
             this.toolTip1.SetToolTip(this.dragLineControl, "按住鼠标左键可以上下拖动改变预览面板的大小.");
             // 
@@ -579,9 +588,9 @@ namespace C2
             this.MainPanel.Controls.Add(this.workSpacePanel);
             this.MainPanel.Controls.Add(this.tabPanel);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(323, 46);
+            this.MainPanel.Location = new System.Drawing.Point(332, 46);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(910, 560);
+            this.MainPanel.Size = new System.Drawing.Size(901, 560);
             this.MainPanel.TabIndex = 7;
             // 
             // workSpacePanel
@@ -592,7 +601,7 @@ namespace C2
             this.workSpacePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.workSpacePanel.Location = new System.Drawing.Point(0, 32);
             this.workSpacePanel.Name = "workSpacePanel";
-            this.workSpacePanel.Size = new System.Drawing.Size(910, 528);
+            this.workSpacePanel.Size = new System.Drawing.Size(901, 528);
             this.workSpacePanel.TabIndex = 10;
             // 
             // mdiWorkSpace
@@ -600,7 +609,7 @@ namespace C2
             this.mdiWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mdiWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.mdiWorkSpace.Name = "mdiWorkSpace";
-            this.mdiWorkSpace.Size = new System.Drawing.Size(910, 328);
+            this.mdiWorkSpace.Size = new System.Drawing.Size(901, 328);
             this.mdiWorkSpace.TabIndex = 8;
             // 
             // bottomViewPanel
@@ -612,7 +621,7 @@ namespace C2
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomViewPanel.Location = new System.Drawing.Point(0, 328);
             this.bottomViewPanel.Name = "bottomViewPanel";
-            this.bottomViewPanel.Size = new System.Drawing.Size(910, 200);
+            this.bottomViewPanel.Size = new System.Drawing.Size(901, 200);
             this.bottomViewPanel.TabIndex = 11;
             // 
             // bottomPreview
@@ -620,7 +629,7 @@ namespace C2
             this.bottomPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomPreview.Location = new System.Drawing.Point(0, 39);
             this.bottomPreview.Name = "bottomPreview";
-            this.bottomPreview.Size = new System.Drawing.Size(910, 161);
+            this.bottomPreview.Size = new System.Drawing.Size(901, 161);
             this.bottomPreview.TabIndex = 3;
             // 
             // bottomLogControl
@@ -628,7 +637,7 @@ namespace C2
             this.bottomLogControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomLogControl.Location = new System.Drawing.Point(0, 39);
             this.bottomLogControl.Name = "bottomLogControl";
-            this.bottomLogControl.Size = new System.Drawing.Size(910, 161);
+            this.bottomLogControl.Size = new System.Drawing.Size(901, 161);
             this.bottomLogControl.TabIndex = 2;
             // 
             // bottomPyConsole
@@ -636,7 +645,7 @@ namespace C2
             this.bottomPyConsole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomPyConsole.Location = new System.Drawing.Point(0, 39);
             this.bottomPyConsole.Name = "bottomPyConsole";
-            this.bottomPyConsole.Size = new System.Drawing.Size(910, 161);
+            this.bottomPyConsole.Size = new System.Drawing.Size(901, 161);
             this.bottomPyConsole.TabIndex = 1;
             // 
             // panel4
@@ -648,17 +657,18 @@ namespace C2
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(910, 39);
+            this.panel4.Size = new System.Drawing.Size(901, 39);
             this.panel4.TabIndex = 0;
             // 
-            // panel9
+            // panel1
             // 
-            this.panel9.Controls.Add(this.minMaxPictureBox);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(881, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(27, 34);
-            this.panel9.TabIndex = 2;
+            this.panel1.Controls.Add(this.panel8);
+            this.panel1.Controls.Add(this.panel9);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(899, 34);
+            this.panel1.TabIndex = 4;
             // 
             // panel8
             // 
@@ -671,13 +681,22 @@ namespace C2
             this.panel8.Size = new System.Drawing.Size(393, 34);
             this.panel8.TabIndex = 0;
             // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.minMaxPictureBox);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel9.Location = new System.Drawing.Point(872, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(27, 34);
+            this.panel9.TabIndex = 2;
+            // 
             // tabPanel
             // 
             this.tabPanel.Controls.Add(this.taskBar);
             this.tabPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabPanel.Location = new System.Drawing.Point(0, 0);
             this.tabPanel.Name = "tabPanel";
-            this.tabPanel.Size = new System.Drawing.Size(910, 32);
+            this.tabPanel.Size = new System.Drawing.Size(901, 32);
             this.tabPanel.TabIndex = 9;
             // 
             // taskBar
@@ -688,7 +707,7 @@ namespace C2
             this.taskBar.Location = new System.Drawing.Point(0, 0);
             this.taskBar.Name = "taskBar";
             this.taskBar.ShowPreferencesButton = true;
-            this.taskBar.Size = new System.Drawing.Size(910, 32);
+            this.taskBar.Size = new System.Drawing.Size(901, 32);
             this.taskBar.TabIndex = 0;
             this.taskBar.Text = "taskBar1";
             // 
@@ -706,15 +725,59 @@ namespace C2
             // 
             this.openFileDialog1.FileName = "openFileDialog2";
             // 
-            // panel1
+            // noFocusButton1
             // 
-            this.panel1.Controls.Add(this.panel8);
-            this.panel1.Controls.Add(this.panel9);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(908, 34);
-            this.panel1.TabIndex = 4;
+            this.noFocusButton1.Controls.Add(this.pictureBox1);
+            this.noFocusButton1.FlatAppearance.BorderSize = 0;
+            this.noFocusButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusButton1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.noFocusButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.noFocusButton1.Location = new System.Drawing.Point(0, 242);
+            this.noFocusButton1.Name = "noFocusButton1";
+            this.noFocusButton1.Size = new System.Drawing.Size(151, 42);
+            this.noFocusButton1.TabIndex = 4;
+            this.noFocusButton1.TabStop = false;
+            this.noFocusButton1.Text = "   侦察兵";
+            this.toolTip1.SetToolTip(this.noFocusButton1, "分析师的实验台");
+            this.noFocusButton1.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = global::C2.Properties.Resources.Artificialintelligence;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
+            // noFocusButton2
+            // 
+            this.noFocusButton2.Controls.Add(this.pictureBox2);
+            this.noFocusButton2.FlatAppearance.BorderSize = 0;
+            this.noFocusButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusButton2.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.noFocusButton2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.noFocusButton2.Location = new System.Drawing.Point(0, 302);
+            this.noFocusButton2.Name = "noFocusButton2";
+            this.noFocusButton2.Size = new System.Drawing.Size(151, 42);
+            this.noFocusButton2.TabIndex = 5;
+            this.noFocusButton2.TabStop = false;
+            this.noFocusButton2.Text = "   全文工具";
+            this.toolTip1.SetToolTip(this.noFocusButton2, "分析师的实验台");
+            this.noFocusButton2.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox2.Image = global::C2.Properties.Resources.Artificialintelligence;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 13);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox2.TabIndex = 16;
+            this.pictureBox2.TabStop = false;
             // 
             // MainForm
             // 
@@ -754,11 +817,15 @@ namespace C2
             this.workSpacePanel.ResumeLayout(false);
             this.bottomViewPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            this.panel9.ResumeLayout(false);
             this.tabPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.noFocusButton1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.noFocusButton2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -821,5 +888,9 @@ namespace C2
         private PictureBox DataButtonPictureBox;
         private OpenFileDialog openFileDialog1;
         private Panel panel1;
+        private Controls.Common.NoFocusButton noFocusButton1;
+        private PictureBox pictureBox1;
+        private Controls.Common.NoFocusButton noFocusButton2;
+        private PictureBox pictureBox2;
     }
 }
