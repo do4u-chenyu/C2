@@ -1813,6 +1813,9 @@
     <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\SearchToolkit\SearchToolkitForm.resx">
+      <DependentUpon>SearchToolkitForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.resx">
       <DependentUpon>SelectBossDialog.cs</DependentUpon>
     </EmbeddedResource>
