@@ -29,11 +29,14 @@ namespace C2.Controls.Left
         // MergableProperty(false) 不知道是干嘛的, 看网上帖子就加进去了
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), MergableProperty(false)]
         public Dictionary<string, DataButton> DataSourceDictI2B { get; }
+        
+        [Browsable(false)]
         public Dictionary<string, LinkButton> LinkSourceDictI2B { get; }
 
         private LinkButton _SelectLinkButton;
         private List<DatabaseItem> _RelateDBIs;
 
+        [Browsable(false)]
         public LinkButton SelectLinkButton
         {
             set
