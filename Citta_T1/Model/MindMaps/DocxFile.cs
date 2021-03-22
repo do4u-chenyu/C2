@@ -8,24 +8,24 @@ using NPOI.XWPF.UserModel;
 
 namespace C2.Model.MindMaps
 {
-    class WordFile
+    class DocxFile
     {
     }
 
-    class WordFileSaver 
+    class DocxFileSaver 
     {
         XWPFDocument MyDoc = new XWPFDocument();
 
-        private void WriteToWord() 
+        private void WriteToDocx() 
         { 
 
         }
 
-        private void WriteImgToWord() 
+        private void WriteImgToDocx() 
         { 
         }
 
-        private void WriteTableToWord() 
+        private void WriteTableToDocx() 
         { 
         }
 
@@ -36,7 +36,7 @@ namespace C2.Model.MindMaps
             return null;
         }
 
-        private void SaveAsWord(MindMap mindMap, string filename) 
+        private void SaveAsDocx(MindMap mindMap, string filename) 
         {
             Topic topic = mindMap.Root;
 
