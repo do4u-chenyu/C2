@@ -187,6 +187,18 @@
     <Compile Include="Controls\C1\Common\NoWheelComboBox.Designer.cs">
       <DependentUpon>NoWheelComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\C1\Left\BaseLeftInnerButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\BaseLeftInnerButton.Designer.cs">
+      <DependentUpon>BaseLeftInnerButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\C1\Left\BaseLeftInnerPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\BaseLeftInnerPanel.Designer.cs">
+      <DependentUpon>BaseLeftInnerPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\C1\Left\IAOButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -215,6 +227,12 @@
       <DependentUpon>IAOLabControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Left\TableListItem.cs" />
+    <Compile Include="Controls\C1\Left\WebDetectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\WebDetectionControl.Designer.cs">
+      <DependentUpon>WebDetectionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DataCharts\BarChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -250,6 +268,12 @@
       <DependentUpon>UpdateProgressBar.cs</DependentUpon>
     </Compile>
     <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
+    <Compile Include="IAOLab\SearchToolkit\SearchToolkitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\SearchToolkit\SearchToolkitForm.Designer.cs">
+      <DependentUpon>SearchToolkitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\SimpleBar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\StackBar.cs" />
     <Compile Include="IAOLab\WebEngine\Boss\Charts\BaseCharts.cs" />
@@ -352,6 +376,7 @@
     </Compile>
     <Compile Include="IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
     <Compile Include="IAOLab\WebEngine\WebManager.cs" />
+    <Compile Include="Model\MindMaps\DocxFile.cs" />
     <Compile Include="Model\MindMaps\XmindFile.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
     <Compile Include="Utils\GenericSingleton.cs" />
@@ -1545,6 +1570,12 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
+    <EmbeddedResource Include="Controls\C1\Left\BaseLeftInnerButton.resx">
+      <DependentUpon>BaseLeftInnerButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\BaseLeftInnerPanel.resx">
+      <DependentUpon>BaseLeftInnerPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\IAOButton.resx">
       <DependentUpon>IAOButton.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1807,6 +1838,9 @@
     <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\SearchToolkit\SearchToolkitForm.resx">
+      <DependentUpon>SearchToolkitForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.resx">
       <DependentUpon>SelectBossDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1921,6 +1955,7 @@
     <None Include="Resources\cross_large.png" />
     <EmbeddedResource Include="Resources\cur_scroll.cur" />
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
+    <None Include="Resources\DocxFileExp\DocxExample.dotx" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <Content Include="IAOLab\WebEngine\css\DrawingManager_min.css">
@@ -2058,6 +2093,10 @@
     <None Include="Resources\Images\back_color.png" />
     <None Include="Resources\Images\balloon_small.png" />
     <None Include="Resources\Images\arrow_query.png" />
+    <None Include="Resources\Icons\webDetectionIcon.jpg" />
+    <None Include="Resources\Icons\webDetectionIcon.png" />
+    <None Include="Resources\Icons\webDetectionIcon1.jpg" />
+    <None Include="Resources\Icons\webDetectionIcon1.png" />
     <Content Include="Resources\Images\bar.png" />
     <None Include="Resources\Images\bold.png" />
     <None Include="Resources\Images\calculator.png" />

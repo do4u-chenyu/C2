@@ -212,6 +212,7 @@ namespace C2
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
             this.iaoModelControl.Visible = false;
+            this.webDetectionControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
             this.ShowLeftFold();
         }
@@ -222,6 +223,7 @@ namespace C2
             this.dataSourceControl.Visible = false;
             this.myModelControl.Visible = false;
             this.iaoModelControl.Visible = false;
+            this.webDetectionControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
             this.ShowLeftFold();
         }
@@ -232,6 +234,7 @@ namespace C2
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
             this.iaoModelControl.Visible = false;
+            this.webDetectionControl.Visible = false;
             this.ShowLeftFold();
 
         }
@@ -242,7 +245,19 @@ namespace C2
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
             this.iaoModelControl.Visible = true;
+            this.webDetectionControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.ShowLeftFold();
+        }
+
+        private void DetectionButton_Click(object sender, EventArgs e)
+        {
+            this.dataSourceControl.Visible = false;
+            this.mindMapModelControl.Visible = false;
+            this.myModelControl.Visible = false;
+            this.iaoModelControl.Visible = false;
+            this.webDetectionControl.Visible = true;
+            this.DetectionButton.BackColor = Color.FromArgb(41, 60, 85);
             this.ShowLeftFold();
         }
 
@@ -962,6 +977,6 @@ namespace C2
             }
         }
 
-    
+
     }
 }

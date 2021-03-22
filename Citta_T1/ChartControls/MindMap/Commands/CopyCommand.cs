@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
-using C2.Core;
-using C2.Core.Documents;
+﻿using C2.Core.Documents;
 using C2.Model;
 using C2.Model.MindMaps;
+using System;
+using System.Windows.Forms;
 
 namespace C2.Controls.MapViews
 {
