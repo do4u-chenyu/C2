@@ -358,6 +358,7 @@
     </Compile>
     <Compile Include="IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
     <Compile Include="IAOLab\WebEngine\WebManager.cs" />
+    <Compile Include="Model\MindMaps\WordFile.cs" />
     <Compile Include="Model\MindMaps\XmindFile.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
     <Compile Include="Utils\GenericSingleton.cs" />
@@ -2897,6 +2898,7 @@
     <None Include="Resources\WidgetIcon\结果.png" />
     <None Include="Resources\WidgetIcon\地图.png" />
     <None Include="Resources\WidgetIcon\大屏.png" />
+    <None Include="Resources\WordFileExp\WordExample.dotx" />
     <None Include="Resources\XmindEngine\styles.xml" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">

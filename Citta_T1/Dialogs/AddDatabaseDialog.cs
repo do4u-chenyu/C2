@@ -126,7 +126,7 @@ namespace C2.Dialogs
                 this.passwordTextBox.Text = string.IsNullOrEmpty(this.passwordTextBox.Text) ? "None" : this.passwordTextBox.Text;
                 return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
             }
-            if (this.databaseTypeComboBox.Text.Contains("PG"))
+            if (this.databaseTypeComboBox.Text.Contains("PostgreSQL"))
             {
                 this.schemaTextBox.Text = string.IsNullOrEmpty(this.schemaTextBox.Text) ? "postgres" : this.schemaTextBox.Text;
                 return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
@@ -152,7 +152,7 @@ namespace C2.Dialogs
                 this.schemaTextBox.Text = "";
             }
 
-            if (databaseTypeComboBox.SelectedItem.ToString().Contains("PG"))
+            if (databaseTypeComboBox.SelectedItem.ToString().Contains("PostgreSQL"))
             {
                 this.portTextBox.Text = "5432" ;
                 this.userTextBox.Text =  "postgres";
@@ -162,6 +162,8 @@ namespace C2.Dialogs
                 this.sidTextBox.Enabled = false;
                 this.schemaTextBox.Enabled = true;
                 this.sidTextBox.Text = "";
+                this.serviceRadiobutton.Enabled = false;
+                this.sidRadiobutton.Enabled = false;
             }
             
             if (databaseTypeComboBox.SelectedItem.ToString().Contains("Hive"))
