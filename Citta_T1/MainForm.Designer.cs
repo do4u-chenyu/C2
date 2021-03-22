@@ -600,7 +600,7 @@ namespace C2
             this.minMaxPictureBox.TabIndex = 1;
             this.minMaxPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
-            this.minMaxPictureBox.Click += new System.EventHandler(this.minMaxPictureBox_Click);
+            this.minMaxPictureBox.Click += new System.EventHandler(this.MinMaxPictureBox_Click);
             // 
             // logLabel
             // 

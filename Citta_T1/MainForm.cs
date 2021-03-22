@@ -1,28 +1,26 @@
 ﻿using C2.Business.DataSource;
 using C2.Business.Model;
+using C2.ChartPageView;
+using C2.Configuration;
+using C2.Controls;
 using C2.Controls.Left;
 using C2.Controls.Move.Dt;
 using C2.Core;
+using C2.Database;
+using C2.Dialogs;
+using C2.Forms;
+using C2.Globalization;
+using C2.IAOLab.Plugins;
+using C2.Model;
+using C2.Model.Documents;
+using C2.Model.MindMaps;
+using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
-using C2.Controls;
-using C2.Model.Documents;
-using C2.Model.MindMaps;
-using C2.Globalization;
-#region Blumind
 using System.IO;
-using C2.Configuration;
-using C2.Dialogs;
-using C2.Forms;
-using C2.Model;
-using C2.Model.Widgets;
-using C2.ChartPageView;
-using C2.Database;
-using C2.IAOLab.Plugins;
-#endregion
+using System.Windows.Forms;
 
 namespace C2
 {
@@ -35,19 +33,12 @@ namespace C2
     }
     public partial class MainForm : DocumentManageForm
     {
-        public string UserName { get => this.userName; set => this.userName = value; }
-        public Control BottomViewPanel { get { return this.bottomViewPanel; } }
-        public Panel LeftToolBoxPanel { get { return this.leftToolBoxPanel; } }
+        public string UserName { get; set; }
 
-        public bool operateButtonSelect { get; private set; }
-        public object IAOModelControl { get; private set; }
-            #region
         SpecialTabItem TabNew;
         FindDialog MyFindDialog;
         ShortcutKeysTable ShortcutKeys;
-        #endregion
 
-        private string userName;
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
         private InputDataForm inputDataForm;
@@ -64,10 +55,9 @@ namespace C2
 
         public MainForm(string userName)
         {
-            
+
             InitializeComponent();
-            this.UserName = userName;
-            this.usernamelabel.Text = this.UserName;
+            InitializeUserName(userName);
 
             InitializeInputDataForm();
             InitializeBottomPrviewPanel();
@@ -82,10 +72,16 @@ namespace C2
             if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
                 OpenSavedTabs();
         }
+
+        private void InitializeUserName(string userName)
+        {
+            this.UserName = userName;
+            this.usernamelabel.Text = this.UserName;
+        }
         #region 初始化
         void InitializeInputDataForm()
         {
-            this.inputDataForm = new Dialogs.InputDataForm();
+            this.inputDataForm = new InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
         }
         void InitializeBottomPrviewPanel()
@@ -195,7 +191,6 @@ namespace C2
         protected override void AfterInitialize()
         {
             base.AfterInitialize();
-
             InitializeWindowStates();
         }
 
@@ -360,7 +355,6 @@ namespace C2
             LoadDocuments();
             LoadDataSource();
             LoadIAOLaboratory();
-
         }
 
         private void LoadHotModel()
@@ -371,7 +365,7 @@ namespace C2
             
             foreach (string file in ModelFiles)
             {
-                ImportModel.GetInstance().UnZipIaoFile(file, userName);
+                ImportModel.GetInstance().UnZipIaoFile(file, UserName);
             }
             
         }
@@ -388,13 +382,13 @@ namespace C2
         }
         private void LoadDataSource()
         {
-            DataSourceInfo dataSource0 = new DataSourceInfo(this.userName);
+            DataSourceInfo dataSource0 = new DataSourceInfo(this.UserName);
             List<DataButton> dataButtons = dataSource0.LoadDataSourceInfo();
            
             foreach (DataButton dataButton in dataButtons)
                 this.dataSourceControl.GenDataButton(dataButton);
             // 外部数据源加载
-            DataSourceInfo dataSource1 = new DataSourceInfo(this.userName,"ExternalDataInformation.xml");
+            DataSourceInfo dataSource1 = new DataSourceInfo(this.UserName,"ExternalDataInformation.xml");
             List<LinkButton> linkButtons = dataSource1.LoadExternalData();
             foreach (LinkButton linkButton in linkButtons)
                 this.dataSourceControl.GenLinkButton(linkButton);
@@ -477,7 +471,7 @@ namespace C2
 
         private void UsernameLabel_MouseEnter(object sender, EventArgs e)
         {
-            this.toolTip1.SetToolTip(this.usernamelabel, this.userName + "已登录");
+            this.toolTip1.SetToolTip(this.usernamelabel, this.UserName + "已登录");
         }
     
         private void MainForm_Deactivate(object sender, EventArgs e)
@@ -694,30 +688,6 @@ namespace C2
             return null;
         }
 
-        void OpenDocuments(string[] filenames)
-        {
-            if (filenames != null)
-            {
-                for (int i = 0; i < filenames.Length; i++)
-                {
-                    if (string.IsNullOrEmpty(filenames[i]))
-                        continue;
-                    OpenDocument(filenames[i]);
-                }
-            }
-        }
-        public void OpenDocument()
-        {
-            if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-            {
-                OpenDocument(openFileDialog1.FileName, openFileDialog1.ReadOnlyChecked);
-            }
-        }
-        public void ShowOptionsDialog()
-        {
-            var dialog = new C2.Configuration.Dialog.SettingDialog();
-            dialog.ShowDialog(this);
-        }
         BaseDocumentForm FindDocumentForm(string filename)
         {
             foreach (Form form in Forms)
@@ -772,10 +742,6 @@ namespace C2
             if (dialogResult == DialogResult.OK)
                 this.NewDocumentForm(templateName,createNewModelForm.ModelTitle);
         }
-        void NewCanvasForm_Click(object sender, System.EventArgs e)
-        {
-            this.NewCanvasForm();
-        }
         void TaskBar_Items_ItemRemoved(object sender, XListEventArgs<TabItem> e)
         {
             RefreshFunctionTaskBarItems();
@@ -791,7 +757,6 @@ namespace C2
             TabNew.Visible = hasForms;
         }
         #endregion
-
 
         private void ImportDataSource_Click(object sender, EventArgs e)
         {
@@ -892,7 +857,7 @@ namespace C2
             this.ShowLogView();
         }
         #endregion
-        private void minMaxPictureBox_Click(object sender, EventArgs e)
+        private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
             if (this.isBottomViewPanelMinimum == true)
             {
