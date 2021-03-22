@@ -132,7 +132,7 @@
             this.databaseTypeComboBox.Items.AddRange(new object[] {
             "Oracle",
             "Hiveserver2",
-            "PG"});
+            "PostgreSQL"});
             this.databaseTypeComboBox.Location = new System.Drawing.Point(100, 20);
             this.databaseTypeComboBox.Name = "databaseTypeComboBox";
             this.databaseTypeComboBox.Size = new System.Drawing.Size(265, 23);
@@ -163,7 +163,7 @@
             // 
             // serviceTextBox
             // 
-            this.serviceTextBox.Location = new System.Drawing.Point(101, 203);
+            this.serviceTextBox.Location = new System.Drawing.Point(100, 203);
             this.serviceTextBox.Name = "serviceTextBox";
             this.serviceTextBox.Size = new System.Drawing.Size(265, 25);
             this.serviceTextBox.TabIndex = 10019;
@@ -198,9 +198,9 @@
             this.schemaLabel.AutoSize = true;
             this.schemaLabel.Location = new System.Drawing.Point(20, 170);
             this.schemaLabel.Name = "schemaLabel";
-            this.schemaLabel.Size = new System.Drawing.Size(75, 15);
+            this.schemaLabel.Size = new System.Drawing.Size(90, 15);
             this.schemaLabel.TabIndex = 10024;
-            this.schemaLabel.Text = "架构（D）";
+            this.schemaLabel.Text = "数据库（D）";
             // 
             // AddDatabaseDialog
             // 

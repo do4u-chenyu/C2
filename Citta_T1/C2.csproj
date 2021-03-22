@@ -376,6 +376,7 @@
     </Compile>
     <Compile Include="IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
     <Compile Include="IAOLab\WebEngine\WebManager.cs" />
+    <Compile Include="Model\MindMaps\DocxFile.cs" />
     <Compile Include="Model\MindMaps\XmindFile.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
     <Compile Include="Utils\GenericSingleton.cs" />
@@ -1954,6 +1955,7 @@
     <None Include="Resources\cross_large.png" />
     <EmbeddedResource Include="Resources\cur_scroll.cur" />
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
+    <None Include="Resources\DocxFileExp\DocxExample.dotx" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <Content Include="IAOLab\WebEngine\css\DrawingManager_min.css">
