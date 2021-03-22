@@ -59,6 +59,9 @@ namespace C2
         delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
 
+        private static readonly Color LeftForeColor = Color.FromArgb(41, 60, 85);
+        private static readonly Color LeftBackColor = Color.FromArgb(228, 60, 89);
+
         public MainForm(string userName)
         {
             
@@ -94,7 +97,7 @@ namespace C2
         {
             this.isLeftViewPanelMinimum = true;
             this.leftToolBoxPanel.Width = 10;
-            this.MindMapButton.BackColor = Color.FromArgb(228, 60, 89);
+            this.MindMapButton.BackColor = LeftBackColor;
         }
         void InitializeTaskBar()
         {
@@ -102,7 +105,6 @@ namespace C2
             TaskBar.Font = SystemFonts.MenuFont;
             TaskBar.Height = Math.Max(32, TaskBar.Height);
             TaskBar.MaxItemSize = 300;
-            //TaskBar.Padding = new Padding(2, 0, 2, 0);
 
             TaskBar.Items.ItemAdded += TaskBar_Items_ItemAdded;
             TaskBar.Items.ItemRemoved += TaskBar_Items_ItemRemoved;
@@ -112,13 +114,13 @@ namespace C2
             TaskBar.RightSpecialTabs.Add(TabNew);
 
             var navBtnFirst = new TabBarNavButton(Lang._("First"), Properties.Resources.nav_small_first_white);
-            navBtnFirst.Click += navBtnFirst_Click;
+            navBtnFirst.Click += NavBtnFirst_Click;
             var navBtnPrev = new TabBarNavButton(Lang._("Previous"), Properties.Resources.nav_small_prev_white);
-            navBtnPrev.Click += navBtnPrev_Click;
+            navBtnPrev.Click += NavBtnPrev_Click;
             var navBtnNext = new TabBarNavButton(Lang._("Next"), Properties.Resources.nav_small_next_white);
-            navBtnNext.Click += navBtnNext_Click;
+            navBtnNext.Click += NavBtnNext_Click;
             var navBtnLast = new TabBarNavButton(Lang._("Last"), Properties.Resources.nav_small_last_white);
-            navBtnLast.Click += navBtnLast_Click;
+            navBtnLast.Click += NavBtnLast_Click;
             TaskBar.LeftButtons.Add(navBtnFirst);
             TaskBar.LeftButtons.Add(navBtnPrev);
             TaskBar.RightButtons.Insert(0, navBtnNext);
@@ -215,7 +217,7 @@ namespace C2
             this.mindMapModelControl.Visible = false;
             this.iaoModelControl.Visible = false;
             this.webDetectionControl.Visible = false;
-            this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.DataSourceButton.BackColor = LeftForeColor;
 
             this.ShowLeftFold();
         }
@@ -229,7 +231,7 @@ namespace C2
             this.iaoModelControl.Visible = false;
             this.webDetectionControl.Visible = false;
 
-            this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.DataSourceButton.BackColor = LeftForeColor;
             this.ShowLeftFold();
         }
         
@@ -254,7 +256,7 @@ namespace C2
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
             this.webDetectionControl.Visible = false;
-            this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.DataSourceButton.BackColor = LeftForeColor;
 
             this.ShowLeftFold();
         }
@@ -266,7 +268,7 @@ namespace C2
             this.myModelControl.Visible = false;
             this.iaoModelControl.Visible = false;
             this.webDetectionControl.Visible = true;
-            this.DetectionButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.DetectionButton.BackColor = LeftForeColor;
             this.ShowLeftFold();
         }
 
@@ -277,19 +279,19 @@ namespace C2
             {
                 case MouseButtons.Left:
                     // Left click
-                    this.MindMapButton.BackColor = Color.FromArgb(228, 60, 89);
+                    this.MindMapButton.BackColor = LeftBackColor;
                     break;
             }
         }
 
         private void MindMapButton_Leave(object sender, EventArgs e)
         {
-            this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.MindMapButton.BackColor = LeftForeColor;
         }
 
         private void ModelMarketButton_Leave(object sender, EventArgs e)
         {
-            this.ModelMarketButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.ModelMarketButton.BackColor = LeftForeColor;
         }
 
         private void ModelMarketButton_MouseDown(object sender, MouseEventArgs e)
@@ -299,15 +301,15 @@ namespace C2
             {
                 case MouseButtons.Left:
                     // Left click
-                    this.ModelMarketButton.BackColor = Color.FromArgb(228, 60, 89);
-                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
+                    this.ModelMarketButton.BackColor = LeftBackColor;
+                    this.MindMapButton.BackColor = LeftForeColor;
                     break;
             }
         }
 
         private void DataSourceButton_Leave(object sender, EventArgs e)
         {
-            this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.DataSourceButton.BackColor = LeftForeColor;
         }
 
         private void DataSourceButton_MouseDown(object sender, MouseEventArgs e)
@@ -317,15 +319,15 @@ namespace C2
             {
                 case MouseButtons.Left:
                     // Left click
-                    this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
-                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
+                    this.DataSourceButton.BackColor = LeftBackColor;
+                    this.MindMapButton.BackColor = LeftForeColor;
                     break;
             }
         }
 
         private void IAOLabButton_Leave(object sender, EventArgs e)
         {
-            this.IAOLabButton.BackColor = Color.FromArgb(41, 60, 85);
+            this.IAOLabButton.BackColor = LeftForeColor;
         }
 
         private void IAOLabButton_MouseDown(object sender, MouseEventArgs e)
@@ -335,8 +337,8 @@ namespace C2
             {
                 case MouseButtons.Left:
                     // Left click
-                    this.IAOLabButton.BackColor = Color.FromArgb(228, 60, 89);
-                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
+                    this.IAOLabButton.BackColor = LeftBackColor;
+                    this.MindMapButton.BackColor = LeftForeColor;
                     break;
             }
         }
@@ -729,22 +731,22 @@ namespace C2
             return null;
         }
 
-        void navBtnLast_Click(object sender, EventArgs e)
+        void NavBtnLast_Click(object sender, EventArgs e)
         {
             TaskBar.ScrollToLast();
         }
 
-        void navBtnPrev_Click(object sender, EventArgs e)
+        void NavBtnPrev_Click(object sender, EventArgs e)
         {
             TaskBar.ScrollToPrev();
         }
 
-        void navBtnNext_Click(object sender, EventArgs e)
+        void NavBtnNext_Click(object sender, EventArgs e)
         {
             TaskBar.ScrollToNext();
         }
 
-        void navBtnFirst_Click(object sender, EventArgs e)
+        void NavBtnFirst_Click(object sender, EventArgs e)
         {
             TaskBar.ScrollToFirst();
         }
@@ -928,7 +930,7 @@ namespace C2
                 e.Cancel = true;
             }
         }
-        bool TrySaveTabs()
+        private bool TrySaveTabs()
         {
             var saveTabs = Options.Current.GetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
             if (saveTabs == SaveTabsType.No)
@@ -972,7 +974,7 @@ namespace C2
             Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, tabs);
             return true;
         }
-        void OpenSavedTabs()
+        private void OpenSavedTabs()
         {
             var tabs = Options.Current.GetValue<string[]>(OptionNames.Miscellaneous.LastOpenTabs);
             if (!tabs.IsNullOrEmpty())
