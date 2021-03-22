@@ -15,8 +15,6 @@ namespace C2.Controls.C1.Left
         public WebDetectionControl()
         {
             InitializeComponent();
-            this.titleLabel.Text = "网站侦察兵";
-            this.addLabel.Text = "+新建任务";
         }
 
         public override void AddButton()

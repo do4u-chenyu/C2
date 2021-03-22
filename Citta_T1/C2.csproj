@@ -205,6 +205,12 @@
     <Compile Include="Controls\C1\Left\IAOButton.Designer.cs">
       <DependentUpon>IAOButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\C1\Left\SearchToolkitControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\SearchToolkitControl.Designer.cs">
+      <DependentUpon>SearchToolkitControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\C1\Left\TableListControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1595,6 +1601,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\IAOLabControl.resx">
       <DependentUpon>IAOLabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\SearchToolkitControl.resx">
+      <DependentUpon>SearchToolkitControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\WebDetectionControl.resx">
+      <DependentUpon>WebDetectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\BaseChart.resx">
       <DependentUpon>BaseChart.cs</DependentUpon>

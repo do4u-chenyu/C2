@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using C2.Utils;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using C2.Utils;
 
 namespace C2.Controls.C1.Left
 {
@@ -29,7 +23,6 @@ namespace C2.Controls.C1.Left
         {
             // 获得当前要添加的model button的初始位置
             LayoutButton(innerButton);
-            //this.Controls.Add(mb);
             this.manageButtonPanel.Controls.Add(innerButton);
         }
 

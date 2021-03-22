@@ -1,6 +1,6 @@
 ﻿namespace C2.Controls.C1.Left
 {
-    partial class WebDetectionControl
+    partial class SearchToolkitControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -34,13 +34,13 @@
             // 
             // titleLabel
             // 
-            this.titleLabel.Text = "网站侦察兵";
+            this.titleLabel.Text = "全文工具集";
             // 
-            // WebDetectionControl
+            // SearchToolkitControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "WebDetectionControl";
+            this.Name = "SearchToolkitControl";
             this.newEventPanel.ResumeLayout(false);
             this.newEventPanel.PerformLayout();
             this.backPanel.ResumeLayout(false);
