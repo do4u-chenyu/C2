@@ -31,12 +31,14 @@ namespace C2.Controls.Left
         public Dictionary<string, DataButton> DataSourceDictI2B { get; }
         
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Dictionary<string, LinkButton> LinkSourceDictI2B { get; }
 
         private LinkButton _SelectLinkButton;
         private List<DatabaseItem> _RelateDBIs;
 
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public LinkButton SelectLinkButton
         {
             set
