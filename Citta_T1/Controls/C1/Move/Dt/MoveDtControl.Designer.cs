@@ -25,7 +25,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
             this.PreviewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.OptionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,15 +94,15 @@
             // 
             // OptionMenuItem
             // 
-            this.OptionMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.OptionMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.OptionMenuItem.Enabled = false;
-            this.OptionMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.OptionMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.OptionMenuItem.Name = "OptionMenuItem";
-            this.OptionMenuItem.Size = new System.Drawing.Size(196, 24);
-            this.OptionMenuItem.Text = "设置";
-            this.OptionMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
+            this.OpenMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.OpenMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.OpenMenuItem.Enabled = true;
+            this.OpenMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.OpenMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.OpenMenuItem.Name = "OpenMenuItem";
+            this.OpenMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.OpenMenuItem.Text = "打开文件";
+            this.OpenMenuItem.Click += new System.EventHandler(this.OpenMenuItem_Click);
             // 
             // RunMenuItem
             // 
@@ -176,7 +176,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStripMenuItem OptionMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OpenMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RunMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LogMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteMenuItem;

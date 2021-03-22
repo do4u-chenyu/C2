@@ -15,7 +15,6 @@ namespace C2.Controls.Move.Dt
 {
     public partial class MoveDtControl : MoveBaseControl, IMoveControl
     {
-        private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         //绘制引脚
         private string lineStaus = "noLine";
         private Point rightPin = new Point(125, 8);
@@ -106,7 +105,7 @@ namespace C2.Controls.Move.Dt
         {
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.PreviewMenuItem,
-            this.OptionMenuItem,
+            this.OpenMenuItem,
             this.RenameMenuItem,
             this.RunMenuItem,
             this.LogMenuItem,
@@ -271,10 +270,10 @@ namespace C2.Controls.Move.Dt
         #endregion
 
         #region 右键菜单
-        private void OptionMenuItem_Click(object sender, EventArgs e)
+        private void OpenMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetTopToolBarControl().SelectDrag || Global.GetTopToolBarControl().SelectFrame)
-                return;
+            BCPBuffer.GetInstance().SetDirty(FullFilePath); // 外部打开文件, 设置脏,下次预览时自动更新
+            ProcessUtil.ProcessOpen(FullFilePath);
         }
         #endregion
 

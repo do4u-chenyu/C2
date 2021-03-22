@@ -82,6 +82,9 @@
             this.textButton.Text = "模型";
             this.textButton.UseVisualStyleBackColor = false;
             this.textButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseDown);
+            this.textButton.MouseLeave += new System.EventHandler(this.TextButton_MouseLeave);
+            this.textButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseMove);
+            this.textButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseUp);
             // 
             // contextMenuStrip1
             // 
@@ -99,7 +102,7 @@
             // 
             // OpenToolStripMenuItem
             // 
-            this.OpenToolStripMenuItem.Enabled = false;
+            this.OpenToolStripMenuItem.Enabled = true;
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
             this.OpenToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.OpenToolStripMenuItem.Text = "打开";
