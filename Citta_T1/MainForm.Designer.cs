@@ -39,6 +39,10 @@ namespace C2
             this.usernamelabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
+            this.noFocusButton2 = new C2.Controls.Common.NoFocusButton();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.DetectionButton = new C2.Controls.Common.NoFocusButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.IAOLabButton = new C2.Controls.Common.NoFocusButton();
             this.IAOLabButtonPictureBox = new System.Windows.Forms.PictureBox();
             this.DataSourceButton = new C2.Controls.Common.NoFocusButton();
@@ -89,15 +93,15 @@ namespace C2
             this.taskBar = new C2.Controls.TaskBar();
             this.blankButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.DetectionButton = new C2.Controls.Common.NoFocusButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.noFocusButton2 = new C2.Controls.Common.NoFocusButton();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
+            this.noFocusButton2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.DetectionButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.IAOLabButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IAOLabButtonPictureBox)).BeginInit();
             this.DataSourceButton.SuspendLayout();
@@ -116,10 +120,6 @@ namespace C2
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.tabPanel.SuspendLayout();
-            this.DetectionButton.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.noFocusButton2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // headPanel
@@ -204,6 +204,61 @@ namespace C2
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
             this.leftMainMenuPanel.Size = new System.Drawing.Size(145, 560);
             this.leftMainMenuPanel.TabIndex = 1;
+            // 
+            // noFocusButton2
+            // 
+            this.noFocusButton2.Controls.Add(this.pictureBox2);
+            this.noFocusButton2.FlatAppearance.BorderSize = 0;
+            this.noFocusButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusButton2.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.noFocusButton2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.noFocusButton2.Location = new System.Drawing.Point(0, 302);
+            this.noFocusButton2.Name = "noFocusButton2";
+            this.noFocusButton2.Size = new System.Drawing.Size(151, 42);
+            this.noFocusButton2.TabIndex = 5;
+            this.noFocusButton2.TabStop = false;
+            this.noFocusButton2.Text = "   全文工具";
+            this.toolTip1.SetToolTip(this.noFocusButton2, "分析师的实验台");
+            this.noFocusButton2.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox2.Image = global::C2.Properties.Resources.全文检索;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 13);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox2.TabIndex = 16;
+            this.pictureBox2.TabStop = false;
+            // 
+            // DetectionButton
+            // 
+            this.DetectionButton.Controls.Add(this.pictureBox1);
+            this.DetectionButton.FlatAppearance.BorderSize = 0;
+            this.DetectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DetectionButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.DetectionButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.DetectionButton.Location = new System.Drawing.Point(0, 242);
+            this.DetectionButton.Name = "DetectionButton";
+            this.DetectionButton.Size = new System.Drawing.Size(151, 42);
+            this.DetectionButton.TabIndex = 4;
+            this.DetectionButton.TabStop = false;
+            this.DetectionButton.Text = "   侦察兵";
+            this.toolTip1.SetToolTip(this.DetectionButton, "分析师的实验台");
+            this.DetectionButton.UseVisualStyleBackColor = true;
+            this.DetectionButton.Click += new System.EventHandler(this.DetectionButton_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = global::C2.Properties.Resources.Artificialintelligence;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
             // 
             // IAOLabButton
             // 
@@ -739,61 +794,6 @@ namespace C2
             // 
             this.openFileDialog1.FileName = "openFileDialog2";
             // 
-            // DetectionButton
-            // 
-            this.DetectionButton.Controls.Add(this.pictureBox1);
-            this.DetectionButton.FlatAppearance.BorderSize = 0;
-            this.DetectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DetectionButton.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.DetectionButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.DetectionButton.Location = new System.Drawing.Point(0, 242);
-            this.DetectionButton.Name = "DetectionButton";
-            this.DetectionButton.Size = new System.Drawing.Size(151, 42);
-            this.DetectionButton.TabIndex = 4;
-            this.DetectionButton.TabStop = false;
-            this.DetectionButton.Text = "   侦察兵";
-            this.toolTip1.SetToolTip(this.DetectionButton, "分析师的实验台");
-            this.DetectionButton.UseVisualStyleBackColor = true;
-            this.DetectionButton.Click += new System.EventHandler(this.DetectionButton_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = global::C2.Properties.Resources.Artificialintelligence;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
-            // 
-            // noFocusButton2
-            // 
-            this.noFocusButton2.Controls.Add(this.pictureBox2);
-            this.noFocusButton2.FlatAppearance.BorderSize = 0;
-            this.noFocusButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusButton2.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.noFocusButton2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.noFocusButton2.Location = new System.Drawing.Point(0, 302);
-            this.noFocusButton2.Name = "noFocusButton2";
-            this.noFocusButton2.Size = new System.Drawing.Size(151, 42);
-            this.noFocusButton2.TabIndex = 5;
-            this.noFocusButton2.TabStop = false;
-            this.noFocusButton2.Text = "   全文工具";
-            this.toolTip1.SetToolTip(this.noFocusButton2, "分析师的实验台");
-            this.noFocusButton2.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox2.Image = global::C2.Properties.Resources.Artificialintelligence;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 13);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox2.TabIndex = 16;
-            this.pictureBox2.TabStop = false;
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -818,6 +818,10 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
+            this.noFocusButton2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.DetectionButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.IAOLabButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.IAOLabButtonPictureBox)).EndInit();
             this.DataSourceButton.ResumeLayout(false);
@@ -837,10 +841,6 @@ namespace C2
             this.panel8.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.tabPanel.ResumeLayout(false);
-            this.DetectionButton.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.noFocusButton2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
