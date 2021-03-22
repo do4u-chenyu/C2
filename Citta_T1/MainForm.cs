@@ -61,8 +61,9 @@ namespace C2
 
         public MainForm(string userName)
         {
-            this.UserName = userName;
+            
             InitializeComponent();
+            this.UserName = userName;
             this.usernamelabel.Text = this.UserName;
 
             InitializeInputDataForm();
@@ -206,47 +207,55 @@ namespace C2
             this.blankButton.Focus();
         }
 
-        private void MyModelButton_Click(object sender, EventArgs e)
+        private void ModelMarketButton_Click(object sender, EventArgs e)
         {
             this.myModelControl.Visible = true;
+
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
             this.iaoModelControl.Visible = false;
             this.webDetectionControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+
             this.ShowLeftFold();
         }
 
-        private void OperateButton_Click(object sender, EventArgs e)
+        private void MindMapButton_Click(object sender, EventArgs e)
         {
             this.mindMapModelControl.Visible = true;
+
             this.dataSourceControl.Visible = false;
             this.myModelControl.Visible = false;
             this.iaoModelControl.Visible = false;
             this.webDetectionControl.Visible = false;
+
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
             this.ShowLeftFold();
         }
         
-        private void DataButton_Click(object sender, EventArgs e)
+        private void DataSourceButton_Click(object sender, EventArgs e)
         {
             this.dataSourceControl.Visible = true;
+
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
             this.iaoModelControl.Visible = false;
             this.webDetectionControl.Visible = false;
+
             this.ShowLeftFold();
 
         }
 
-        private void FlowChartButton_Click(object sender, EventArgs e)
+        private void IAOLabButton_Click(object sender, EventArgs e)
         {
+            this.iaoModelControl.Visible = true;
+
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
             this.myModelControl.Visible = false;
-            this.iaoModelControl.Visible = true;
             this.webDetectionControl.Visible = false;
             this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+
             this.ShowLeftFold();
         }
 
@@ -259,6 +268,77 @@ namespace C2
             this.webDetectionControl.Visible = true;
             this.DetectionButton.BackColor = Color.FromArgb(41, 60, 85);
             this.ShowLeftFold();
+        }
+
+        private void MindMapButton_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.MindMapButton.BackColor = Color.FromArgb(228, 60, 89);
+                    break;
+            }
+        }
+
+        private void MindMapButton_Leave(object sender, EventArgs e)
+        {
+            this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
+        }
+
+        private void ModelMarketButton_Leave(object sender, EventArgs e)
+        {
+            this.ModelMarketButton.BackColor = Color.FromArgb(41, 60, 85);
+        }
+
+        private void ModelMarketButton_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.ModelMarketButton.BackColor = Color.FromArgb(228, 60, 89);
+                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
+                    break;
+            }
+        }
+
+        private void DataSourceButton_Leave(object sender, EventArgs e)
+        {
+            this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
+        }
+
+        private void DataSourceButton_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
+                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
+                    break;
+            }
+        }
+
+        private void IAOLabButton_Leave(object sender, EventArgs e)
+        {
+            this.IAOLabButton.BackColor = Color.FromArgb(41, 60, 85);
+        }
+
+        private void IAOLabButton_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    // Left click
+                    this.IAOLabButton.BackColor = Color.FromArgb(228, 60, 89);
+                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
+                    break;
+            }
         }
 
         private void NewModelButton_Click(object sender, EventArgs e)
@@ -906,76 +986,7 @@ namespace C2
                 }
             }
         }
-        private void operateButton_MouseDown(object sender, MouseEventArgs e)
-        {
-      
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    // Left click
-                    this.MindMapButton.BackColor = Color.FromArgb(228, 60, 89);
-                    break;
-            }
-        }
-
-        private void operateButton_Leave(object sender, EventArgs e)
-        {
-            this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
-        }
-
-        private void myModelButton_Leave(object sender, EventArgs e)
-        {
-            this.ModelMarketButton.BackColor = Color.FromArgb(41, 60, 85);
-        }
-
-        private void myModelButton_MouseDown(object sender, MouseEventArgs e)
-        {
-            
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    // Left click
-                    this.ModelMarketButton.BackColor = Color.FromArgb(228, 60, 89);
-                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
-                    break;
-            }
-        }
-
-        private void dataButton_Leave(object sender, EventArgs e)
-        {
-            this.DataSourceButton.BackColor = Color.FromArgb(41, 60, 85);
-        }
-
-        private void dataButton_MouseDown(object sender, MouseEventArgs e)
-        {
-           
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    // Left click
-                    this.DataSourceButton.BackColor = Color.FromArgb(228, 60, 89);
-                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
-                    break;
-            }
-        }
-
-        private void flowChartButton_Leave(object sender, EventArgs e)
-        {
-            this.IAOLabButton.BackColor = Color.FromArgb(41, 60, 85);
-        }
-
-        private void flowChartButton_MouseDown(object sender, MouseEventArgs e)
-        {
-            
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    // Left click
-                    this.IAOLabButton.BackColor = Color.FromArgb(228, 60, 89);
-                    this.MindMapButton.BackColor = Color.FromArgb(41, 60, 85);
-                    break;
-            }
-        }
+       
 
 
     }

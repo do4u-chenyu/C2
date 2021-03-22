@@ -275,9 +275,9 @@ namespace C2
             this.IAOLabButton.Text = "   IAO实验室";
             this.toolTip1.SetToolTip(this.IAOLabButton, "分析师的实验台");
             this.IAOLabButton.UseVisualStyleBackColor = true;
-            this.IAOLabButton.Click += new System.EventHandler(this.FlowChartButton_Click);
-            this.IAOLabButton.Leave += new System.EventHandler(this.flowChartButton_Leave);
-            this.IAOLabButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.flowChartButton_MouseDown);
+            this.IAOLabButton.Click += new System.EventHandler(this.IAOLabButton_Click);
+            this.IAOLabButton.Leave += new System.EventHandler(this.IAOLabButton_Leave);
+            this.IAOLabButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IAOLabButton_MouseDown);
             // 
             // IAOLabButtonPictureBox
             // 
@@ -305,9 +305,9 @@ namespace C2
             this.DataSourceButton.Text = "   数据管理";
             this.toolTip1.SetToolTip(this.DataSourceButton, "当前用户已导入的所有数据");
             this.DataSourceButton.UseVisualStyleBackColor = true;
-            this.DataSourceButton.Click += new System.EventHandler(this.DataButton_Click);
-            this.DataSourceButton.Leave += new System.EventHandler(this.dataButton_Leave);
-            this.DataSourceButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataButton_MouseDown);
+            this.DataSourceButton.Click += new System.EventHandler(this.DataSourceButton_Click);
+            this.DataSourceButton.Leave += new System.EventHandler(this.DataSourceButton_Leave);
+            this.DataSourceButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataSourceButton_MouseDown);
             // 
             // DataButtonPictureBox
             // 
@@ -335,9 +335,9 @@ namespace C2
             this.MindMapButton.Text = "   业务视图";
             this.toolTip1.SetToolTip(this.MindMapButton, "当前用户的所有业务视图");
             this.MindMapButton.UseVisualStyleBackColor = true;
-            this.MindMapButton.Click += new System.EventHandler(this.OperateButton_Click);
-            this.MindMapButton.Leave += new System.EventHandler(this.operateButton_Leave);
-            this.MindMapButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operateButton_MouseDown);
+            this.MindMapButton.Click += new System.EventHandler(this.MindMapButton_Click);
+            this.MindMapButton.Leave += new System.EventHandler(this.MindMapButton_Leave);
+            this.MindMapButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MindMapButton_MouseDown);
             // 
             // MindMapButtonPictureBox
             // 
@@ -365,9 +365,9 @@ namespace C2
             this.ModelMarketButton.Text = "   模型市场";
             this.toolTip1.SetToolTip(this.ModelMarketButton, "当前用户发布的所有模型");
             this.ModelMarketButton.UseVisualStyleBackColor = true;
-            this.ModelMarketButton.Click += new System.EventHandler(this.MyModelButton_Click);
-            this.ModelMarketButton.Leave += new System.EventHandler(this.myModelButton_Leave);
-            this.ModelMarketButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.myModelButton_MouseDown);
+            this.ModelMarketButton.Click += new System.EventHandler(this.ModelMarketButton_Click);
+            this.ModelMarketButton.Leave += new System.EventHandler(this.ModelMarketButton_Leave);
+            this.ModelMarketButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ModelMarketButton_MouseDown);
             // 
             // ModelButtonPictureBox
             // 
