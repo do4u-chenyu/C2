@@ -52,6 +52,7 @@ namespace C2
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoModelControl = new C2.Controls.Left.IAOLabControl();
             this.myModelControl = new C2.Controls.Left.MyModelControl();
+            this.webDetectionControl = new C2.Controls.C1.Left.WebDetectionControl();
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -88,7 +89,7 @@ namespace C2
             this.taskBar = new C2.Controls.TaskBar();
             this.blankButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.noFocusButton1 = new C2.Controls.Common.NoFocusButton();
+            this.DetectionButton = new C2.Controls.Common.NoFocusButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.noFocusButton2 = new C2.Controls.Common.NoFocusButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -115,7 +116,7 @@ namespace C2
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.tabPanel.SuspendLayout();
-            this.noFocusButton1.SuspendLayout();
+            this.DetectionButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.noFocusButton2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -193,7 +194,7 @@ namespace C2
             // 
             this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(60)))), ((int)(((byte)(85)))));
             this.leftMainMenuPanel.Controls.Add(this.noFocusButton2);
-            this.leftMainMenuPanel.Controls.Add(this.noFocusButton1);
+            this.leftMainMenuPanel.Controls.Add(this.DetectionButton);
             this.leftMainMenuPanel.Controls.Add(this.IAOLabButton);
             this.leftMainMenuPanel.Controls.Add(this.DataSourceButton);
             this.leftMainMenuPanel.Controls.Add(this.MindMapButton);
@@ -331,6 +332,7 @@ namespace C2
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.iaoModelControl);
             this.leftToolBoxPanel.Controls.Add(this.myModelControl);
+            this.leftToolBoxPanel.Controls.Add(this.webDetectionControl);
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftToolBoxPanel.Location = new System.Drawing.Point(145, 46);
             this.leftToolBoxPanel.Name = "leftToolBoxPanel";
@@ -391,6 +393,19 @@ namespace C2
             this.myModelControl.Size = new System.Drawing.Size(185, 558);
             this.myModelControl.TabIndex = 0;
             this.myModelControl.Visible = false;
+            // 
+            // webDetectionControl
+            // 
+            this.webDetectionControl.AllowDrop = true;
+            this.webDetectionControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.webDetectionControl.BackColor = System.Drawing.Color.White;
+            this.webDetectionControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.webDetectionControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webDetectionControl.Location = new System.Drawing.Point(0, 0);
+            this.webDetectionControl.Name = "webDetectionControl";
+            this.webDetectionControl.Size = new System.Drawing.Size(185, 558);
+            this.webDetectionControl.TabIndex = 1;
+            this.webDetectionControl.Visible = false;
             // 
             // leftFoldButton
             // 
@@ -724,21 +739,22 @@ namespace C2
             // 
             this.openFileDialog1.FileName = "openFileDialog2";
             // 
-            // noFocusButton1
+            // DetectionButton
             // 
-            this.noFocusButton1.Controls.Add(this.pictureBox1);
-            this.noFocusButton1.FlatAppearance.BorderSize = 0;
-            this.noFocusButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusButton1.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.noFocusButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.noFocusButton1.Location = new System.Drawing.Point(0, 242);
-            this.noFocusButton1.Name = "noFocusButton1";
-            this.noFocusButton1.Size = new System.Drawing.Size(151, 42);
-            this.noFocusButton1.TabIndex = 4;
-            this.noFocusButton1.TabStop = false;
-            this.noFocusButton1.Text = "   侦察兵";
-            this.toolTip1.SetToolTip(this.noFocusButton1, "分析师的实验台");
-            this.noFocusButton1.UseVisualStyleBackColor = true;
+            this.DetectionButton.Controls.Add(this.pictureBox1);
+            this.DetectionButton.FlatAppearance.BorderSize = 0;
+            this.DetectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DetectionButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.DetectionButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.DetectionButton.Location = new System.Drawing.Point(0, 242);
+            this.DetectionButton.Name = "DetectionButton";
+            this.DetectionButton.Size = new System.Drawing.Size(151, 42);
+            this.DetectionButton.TabIndex = 4;
+            this.DetectionButton.TabStop = false;
+            this.DetectionButton.Text = "   侦察兵";
+            this.toolTip1.SetToolTip(this.DetectionButton, "分析师的实验台");
+            this.DetectionButton.UseVisualStyleBackColor = true;
+            this.DetectionButton.Click += new System.EventHandler(this.DetectionButton_Click);
             // 
             // pictureBox1
             // 
@@ -821,7 +837,7 @@ namespace C2
             this.panel8.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.tabPanel.ResumeLayout(false);
-            this.noFocusButton1.ResumeLayout(false);
+            this.DetectionButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.noFocusButton2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -887,9 +903,10 @@ namespace C2
         private PictureBox DataButtonPictureBox;
         private OpenFileDialog openFileDialog1;
         private Panel panel1;
-        private Controls.Common.NoFocusButton noFocusButton1;
+        private Controls.Common.NoFocusButton DetectionButton;
         private PictureBox pictureBox1;
         private Controls.Common.NoFocusButton noFocusButton2;
         private PictureBox pictureBox2;
+        private Controls.C1.Left.WebDetectionControl webDetectionControl;
     }
 }
