@@ -42,6 +42,8 @@ namespace C2
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
         private InputDataForm inputDataForm;
+        private Control[] leftPanelControls;
+        private Control[] leftMainButtons;
    
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
@@ -93,7 +95,26 @@ namespace C2
         {
             this.isLeftViewPanelMinimum = true;
             this.leftToolBoxPanel.Width = 10;
+
+            this.leftPanelControls = new Control[] { this.mindMapModelControl, 
+                this.modelMarketControl,
+                this.dataSourceControl,
+                this.iaoModelControl,
+                this.webDetectionControl,
+
+                
+            };
+
+            this.leftMainButtons = new Control[] { this.MindMapButton,
+                this.ModelMarketButton,
+                this.DataSourceButton,
+                this.IAOLabButton,
+                this.DetectionButton
+                
+            };
             this.MindMapButton.BackColor = LeftBackColor;
+            
+
         }
         void InitializeTaskBar()
         {
@@ -162,7 +183,7 @@ namespace C2
             Global.SetTaskBar(this.TaskBar);
             Global.SetLeftToolBoxPanel(this.leftToolBoxPanel);
             Global.SetDataSourceControl(this.dataSourceControl);
-            Global.SetMyModelControl(this.myModelControl);
+            Global.SetMyModelControl(this.modelMarketControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetWorkSpacePanel(this.workSpacePanel);
@@ -206,7 +227,7 @@ namespace C2
 
         private void ModelMarketButton_Click(object sender, EventArgs e)
         {
-            this.myModelControl.Visible = true;
+            this.modelMarketControl.Visible = true;
 
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
@@ -222,7 +243,7 @@ namespace C2
             this.mindMapModelControl.Visible = true;
 
             this.dataSourceControl.Visible = false;
-            this.myModelControl.Visible = false;
+            this.modelMarketControl.Visible = false;
             this.iaoModelControl.Visible = false;
             this.webDetectionControl.Visible = false;
 
@@ -235,7 +256,7 @@ namespace C2
             this.dataSourceControl.Visible = true;
 
             this.mindMapModelControl.Visible = false;
-            this.myModelControl.Visible = false;
+            this.modelMarketControl.Visible = false;
             this.iaoModelControl.Visible = false;
             this.webDetectionControl.Visible = false;
 
@@ -249,7 +270,7 @@ namespace C2
 
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
-            this.myModelControl.Visible = false;
+            this.modelMarketControl.Visible = false;
             this.webDetectionControl.Visible = false;
             this.DataSourceButton.BackColor = LeftForeColor;
 
@@ -260,7 +281,7 @@ namespace C2
         {
             this.dataSourceControl.Visible = false;
             this.mindMapModelControl.Visible = false;
-            this.myModelControl.Visible = false;
+            this.modelMarketControl.Visible = false;
             this.iaoModelControl.Visible = false;
             this.webDetectionControl.Visible = true;
             this.DetectionButton.BackColor = LeftForeColor;
@@ -378,7 +399,7 @@ namespace C2
             foreach (string title in bsTitles)
                 this.mindMapModelControl.AddMindMapModel(title);
             foreach (string title in mtTitles)
-                this.myModelControl.AddModel(title);
+                this.modelMarketControl.AddModel(title);
         }
         private void LoadDataSource()
         {
@@ -454,7 +475,7 @@ namespace C2
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
                 this.dataSourceControl.Visible = false;
                 this.mindMapModelControl.Visible = false;
-                this.myModelControl.Visible = false;
+                this.modelMarketControl.Visible = false;
                 this.iaoModelControl.Visible = false;
             }
         }

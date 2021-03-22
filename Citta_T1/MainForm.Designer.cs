@@ -55,7 +55,7 @@ namespace C2
             this.mindMapModelControl = new C2.Controls.Left.MyMindMapControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoModelControl = new C2.Controls.Left.IAOLabControl();
-            this.myModelControl = new C2.Controls.Left.MyModelControl();
+            this.modelMarketControl = new C2.Controls.Left.MyModelControl();
             this.webDetectionControl = new C2.Controls.C1.Left.WebDetectionControl();
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
@@ -386,7 +386,7 @@ namespace C2
             this.leftToolBoxPanel.Controls.Add(this.mindMapModelControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.iaoModelControl);
-            this.leftToolBoxPanel.Controls.Add(this.myModelControl);
+            this.leftToolBoxPanel.Controls.Add(this.modelMarketControl);
             this.leftToolBoxPanel.Controls.Add(this.webDetectionControl);
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftToolBoxPanel.Location = new System.Drawing.Point(145, 46);
@@ -438,16 +438,16 @@ namespace C2
             // 
             // myModelControl
             // 
-            this.myModelControl.AutoScroll = true;
-            this.myModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.myModelControl.BackColor = System.Drawing.Color.White;
-            this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.myModelControl.Location = new System.Drawing.Point(0, 0);
-            this.myModelControl.Margin = new System.Windows.Forms.Padding(4);
-            this.myModelControl.Name = "myModelControl";
-            this.myModelControl.Size = new System.Drawing.Size(185, 558);
-            this.myModelControl.TabIndex = 0;
-            this.myModelControl.Visible = false;
+            this.modelMarketControl.AutoScroll = true;
+            this.modelMarketControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.modelMarketControl.BackColor = System.Drawing.Color.White;
+            this.modelMarketControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modelMarketControl.Location = new System.Drawing.Point(0, 0);
+            this.modelMarketControl.Margin = new System.Windows.Forms.Padding(4);
+            this.modelMarketControl.Name = "myModelControl";
+            this.modelMarketControl.Size = new System.Drawing.Size(185, 558);
+            this.modelMarketControl.TabIndex = 0;
+            this.modelMarketControl.Visible = false;
             // 
             // webDetectionControl
             // 
@@ -870,7 +870,7 @@ namespace C2
         private Controls.Left.MyMindMapControl mindMapModelControl;
         private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.IAOLabControl iaoModelControl;
-        private Controls.Left.MyModelControl myModelControl;
+        private Controls.Left.MyModelControl modelMarketControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private System.Windows.Forms.Label label7;
