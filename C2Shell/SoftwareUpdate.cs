@@ -119,12 +119,12 @@ namespace C2Shell
             bool success = true;
 
             Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.FileName = "cmd.exe"; //cmd中运行命令
             process.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
             process.StartInfo.RedirectStandardInput = true;//接受来自调用程序的输入信息
             process.StartInfo.RedirectStandardOutput = true;//由调用程序获取输出信息
             process.StartInfo.RedirectStandardError = true;//重定向标准错误输出
-            process.StartInfo.Verb = "runas";
+            process.StartInfo.Verb = "runas";// Admin身份运行
             process.StartInfo.CreateNoWindow = true;//不显示程序窗口
 
             try

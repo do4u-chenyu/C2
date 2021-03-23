@@ -54,7 +54,19 @@ namespace C2.Dialogs
         {
             Close();
         }
-
+        private void CancelUpdateButton_Click(object sender, EventArgs e)
+        {
+            if (this.progressBar.Visible)
+            {
+                MessageBox.Show("正在下载更新，无法关闭",
+                   "下载提示",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                return;
+            }
+               
+            Close();
+        }
 
 
         private void PythonBrowseButton_Click(object sender, EventArgs e)
@@ -587,6 +599,8 @@ namespace C2.Dialogs
         }
         private void UpdateButton_Click(object sender, EventArgs e)
         {
+            if (this.progressBar.Visible)
+                return;
             try
             {                 
                 string softwareName = newSoftwareVersion.Replace(".info", "");
