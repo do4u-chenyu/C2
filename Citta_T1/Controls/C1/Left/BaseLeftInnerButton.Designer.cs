@@ -34,7 +34,7 @@
             this.textBox = new System.Windows.Forms.TextBox();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);         
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -94,10 +94,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.rightPictureBox);
+            this.ContextMenuStrip = this.contextMenuStrip;
             this.Controls.Add(this.textBox);
-            this.Controls.Add(this.noFocusButton);
+            this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.leftPictureBox);
+            this.Controls.Add(this.noFocusButton);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BaseLeftInnerButton";
             this.Size = new System.Drawing.Size(140, 27);

@@ -11,7 +11,6 @@ namespace C2.Controls.C1.Left
         private static readonly int ButtonLeftX = 18;
         private static readonly int ButtonBottomOffsetY = 23;
         private Point startPoint;
-        public BaseLeftInnerButton handleButton;
 
         public BaseLeftInnerPanel()
         {
@@ -92,7 +91,6 @@ namespace C2.Controls.C1.Left
 
         virtual public void AddButton()
         {
-            AddInnerButton(handleButton);
         }
     }
 }
