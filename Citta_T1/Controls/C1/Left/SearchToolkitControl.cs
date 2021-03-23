@@ -19,7 +19,7 @@ namespace C2.Controls.C1.Left
 
         private void AddTaskLabel_Click(object sender, EventArgs e)
         {
-            
+            AddInnerButton(new SearchToolkitButton());
         }
     }
 }
