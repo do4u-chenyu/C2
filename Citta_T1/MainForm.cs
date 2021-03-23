@@ -98,7 +98,7 @@ namespace C2
 
             // 注册左侧一级按钮
             this.leftMainButtons = new Control[] { this.mindMapButton,
-                this.ModelMarketButton,
+                this.modelMarketButton,
                 this.dataSourceButton,
                 this.iaoLabButton,
                 this.detectionButton,
@@ -107,7 +107,7 @@ namespace C2
 
             // 注册左侧二级面板
             this.leftPanelControls = new Control[] { this.mindMapControl, 
-                this.ModelMarketControl,
+                this.modelMarketControl,
                 this.dataSourceControl,
                 this.iaoLabControl,
                 this.webDetectionControl,
@@ -183,7 +183,7 @@ namespace C2
             Global.SetTaskBar(this.TaskBar);
             Global.SetLeftToolBoxPanel(this.leftToolBoxPanel);
             Global.SetDataSourceControl(this.dataSourceControl);
-            Global.SetMyModelControl(this.ModelMarketControl);
+            Global.SetMyModelControl(this.modelMarketControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetWorkSpacePanel(this.workSpacePanel);
@@ -240,7 +240,7 @@ namespace C2
 
         private void ModelMarketButton_Click(object sender, EventArgs e)
         {
-            ShowLeftPanel(ModelMarketButton, ModelMarketControl);
+            ShowLeftPanel(modelMarketButton, modelMarketControl);
         }
 
         private void MindMapButton_Click(object sender, EventArgs e)
@@ -308,7 +308,7 @@ namespace C2
             foreach (string title in bsTitles)
                 this.mindMapControl.AddMindMapModel(title);
             foreach (string title in mtTitles)
-                this.ModelMarketControl.AddModel(title);
+                this.modelMarketControl.AddModel(title);
         }
         private void LoadDataSource()
         {
@@ -384,7 +384,7 @@ namespace C2
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
                 this.dataSourceControl.Visible = false;
                 this.mindMapControl.Visible = false;
-                this.ModelMarketControl.Visible = false;
+                this.modelMarketControl.Visible = false;
                 this.iaoLabControl.Visible = false;
             }
         }
@@ -829,40 +829,33 @@ namespace C2
         {
             var saveTabs = Options.Current.GetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
             if (saveTabs == SaveTabsType.No)
-            {
                 return true;
-            }
 
             // ensure document saved
             bool cancel = false;
-            ComfirmSaveDocuments(ref cancel);
+            ConfirmSaveDocuments(ref cancel);
             if (cancel)
-            {
                 return false;
-            }
 
             // ask and save
             string[] tabs = GetOpendDocuments();
 
-            if (tabs.Length > 0 && saveTabs == SaveTabsType.Ask)
+            if (!tabs.IsEmpty() && saveTabs == SaveTabsType.Ask)
             {
-                if (tabs.Length > 0)
+                var dialog = new SaveTabsDialog();
+                var dr = dialog.ShowDialog(this);
+                if (dr == DialogResult.Cancel)
+                    return false;
+
+                if (dialog.DoNotAskAgain)
+                    Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, (dr == DialogResult.Yes) ? SaveTabsType.Yes : SaveTabsType.No);
+                else
+                    Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
+
+                if (dr == DialogResult.No)
                 {
-                    var dialog = new SaveTabsDialog();
-                    var dr = dialog.ShowDialog(this);
-                    if (dr == DialogResult.Cancel)
-                        return false;
-
-                    if (dialog.DoNotAskAgain)
-                        Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, (dr == DialogResult.Yes) ? SaveTabsType.Yes : SaveTabsType.No);
-                    else
-                        Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
-
-                    if (dr == DialogResult.No)
-                    {
-                        Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, null);
-                        return true;
-                    }
+                    Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, null);
+                    return true;
                 }
             }
 
@@ -872,16 +865,12 @@ namespace C2
         private void OpenSavedTabs()
         {
             var tabs = Options.Current.GetValue<string[]>(OptionNames.Miscellaneous.LastOpenTabs);
-            if (!tabs.IsNullOrEmpty())
-            {
-                foreach (var filename in tabs)
-                {
-                    if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
-                    {
-                        OpenDocument(filename);
-                    }
-                }
-            }
+            if (tabs.IsNullOrEmpty())
+                return;
+
+            foreach (var filename in tabs)
+                if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
+                    OpenDocument(filename);
         }
     }
 }

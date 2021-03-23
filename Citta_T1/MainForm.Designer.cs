@@ -49,13 +49,13 @@ namespace C2
             this.DataButtonPictureBox = new System.Windows.Forms.PictureBox();
             this.mindMapButton = new C2.Controls.Common.NoFocusButton();
             this.MindMapButtonPictureBox = new System.Windows.Forms.PictureBox();
-            this.ModelMarketButton = new C2.Controls.Common.NoFocusButton();
+            this.modelMarketButton = new C2.Controls.Common.NoFocusButton();
             this.ModelButtonPictureBox = new System.Windows.Forms.PictureBox();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
             this.mindMapControl = new C2.Controls.Left.MyMindMapControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoLabControl = new C2.Controls.Left.IAOLabControl();
-            this.ModelMarketControl = new C2.Controls.Left.MyModelControl();
+            this.modelMarketControl = new C2.Controls.Left.MyModelControl();
             this.webDetectionControl = new C2.Controls.C1.Left.WebDetectionControl();
             this.searchToolkitControl = new C2.Controls.C1.Left.SearchToolkitControl();
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
@@ -109,7 +109,7 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.DataButtonPictureBox)).BeginInit();
             this.mindMapButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MindMapButtonPictureBox)).BeginInit();
-            this.ModelMarketButton.SuspendLayout();
+            this.modelMarketButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ModelButtonPictureBox)).BeginInit();
             this.leftToolBoxPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
@@ -199,14 +199,14 @@ namespace C2
             this.leftMainMenuPanel.Controls.Add(this.iaoLabButton);
             this.leftMainMenuPanel.Controls.Add(this.dataSourceButton);
             this.leftMainMenuPanel.Controls.Add(this.mindMapButton);
-            this.leftMainMenuPanel.Controls.Add(this.ModelMarketButton);
+            this.leftMainMenuPanel.Controls.Add(this.modelMarketButton);
             this.leftMainMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftMainMenuPanel.Location = new System.Drawing.Point(0, 46);
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
             this.leftMainMenuPanel.Size = new System.Drawing.Size(145, 560);
             this.leftMainMenuPanel.TabIndex = 1;
             // 
-            // SearchToolkitButton
+            // searchToolkitButton
             // 
             this.searchToolkitButton.Controls.Add(this.pictureBox2);
             this.searchToolkitButton.FlatAppearance.BorderSize = 0;
@@ -214,7 +214,7 @@ namespace C2
             this.searchToolkitButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.searchToolkitButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.searchToolkitButton.Location = new System.Drawing.Point(0, 302);
-            this.searchToolkitButton.Name = "SearchToolkitButton";
+            this.searchToolkitButton.Name = "searchToolkitButton";
             this.searchToolkitButton.Size = new System.Drawing.Size(151, 42);
             this.searchToolkitButton.TabIndex = 5;
             this.searchToolkitButton.TabStop = false;
@@ -234,7 +234,7 @@ namespace C2
             this.pictureBox2.TabIndex = 16;
             this.pictureBox2.TabStop = false;
             // 
-            // DetectionButton
+            // detectionButton
             // 
             this.detectionButton.Controls.Add(this.pictureBox1);
             this.detectionButton.FlatAppearance.BorderSize = 0;
@@ -242,7 +242,7 @@ namespace C2
             this.detectionButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.detectionButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.detectionButton.Location = new System.Drawing.Point(0, 242);
-            this.detectionButton.Name = "DetectionButton";
+            this.detectionButton.Name = "detectionButton";
             this.detectionButton.Size = new System.Drawing.Size(151, 42);
             this.detectionButton.TabIndex = 4;
             this.detectionButton.TabStop = false;
@@ -255,14 +255,14 @@ namespace C2
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = global::C2.Properties.Resources.Artificialintelligence;
+            this.pictureBox1.Image = global::C2.Properties.Resources.侦察兵;
             this.pictureBox1.Location = new System.Drawing.Point(12, 13);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(20, 20);
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
-            // IAOLabButton
+            // iaoLabButton
             // 
             this.iaoLabButton.Controls.Add(this.IAOLabButtonPictureBox);
             this.iaoLabButton.FlatAppearance.BorderSize = 0;
@@ -270,7 +270,7 @@ namespace C2
             this.iaoLabButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.iaoLabButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.iaoLabButton.Location = new System.Drawing.Point(0, 182);
-            this.iaoLabButton.Name = "IAOLabButton";
+            this.iaoLabButton.Name = "iaoLabButton";
             this.iaoLabButton.Size = new System.Drawing.Size(151, 42);
             this.iaoLabButton.TabIndex = 3;
             this.iaoLabButton.TabStop = false;
@@ -290,7 +290,7 @@ namespace C2
             this.IAOLabButtonPictureBox.TabIndex = 16;
             this.IAOLabButtonPictureBox.TabStop = false;
             // 
-            // DataSourceButton
+            // dataSourceButton
             // 
             this.dataSourceButton.Controls.Add(this.DataButtonPictureBox);
             this.dataSourceButton.FlatAppearance.BorderSize = 0;
@@ -298,7 +298,7 @@ namespace C2
             this.dataSourceButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.dataSourceButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataSourceButton.Location = new System.Drawing.Point(0, 122);
-            this.dataSourceButton.Name = "DataSourceButton";
+            this.dataSourceButton.Name = "dataSourceButton";
             this.dataSourceButton.Size = new System.Drawing.Size(151, 42);
             this.dataSourceButton.TabIndex = 2;
             this.dataSourceButton.TabStop = false;
@@ -318,7 +318,7 @@ namespace C2
             this.DataButtonPictureBox.TabIndex = 14;
             this.DataButtonPictureBox.TabStop = false;
             // 
-            // MindMapButton
+            // mindMapButton
             // 
             this.mindMapButton.Controls.Add(this.MindMapButtonPictureBox);
             this.mindMapButton.FlatAppearance.BorderSize = 0;
@@ -326,7 +326,7 @@ namespace C2
             this.mindMapButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.mindMapButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.mindMapButton.Location = new System.Drawing.Point(0, 2);
-            this.mindMapButton.Name = "MindMapButton";
+            this.mindMapButton.Name = "mindMapButton";
             this.mindMapButton.Size = new System.Drawing.Size(151, 42);
             this.mindMapButton.TabIndex = 1;
             this.mindMapButton.TabStop = false;
@@ -346,22 +346,22 @@ namespace C2
             this.MindMapButtonPictureBox.TabIndex = 13;
             this.MindMapButtonPictureBox.TabStop = false;
             // 
-            // ModelMarketButton
+            // modelMarketButton
             // 
-            this.ModelMarketButton.Controls.Add(this.ModelButtonPictureBox);
-            this.ModelMarketButton.FlatAppearance.BorderSize = 0;
-            this.ModelMarketButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ModelMarketButton.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.ModelMarketButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ModelMarketButton.Location = new System.Drawing.Point(0, 62);
-            this.ModelMarketButton.Name = "ModelMarketButton";
-            this.ModelMarketButton.Size = new System.Drawing.Size(151, 42);
-            this.ModelMarketButton.TabIndex = 0;
-            this.ModelMarketButton.TabStop = false;
-            this.ModelMarketButton.Text = "   模型市场";
-            this.toolTip1.SetToolTip(this.ModelMarketButton, "当前用户发布的所有模型");
-            this.ModelMarketButton.UseVisualStyleBackColor = true;
-            this.ModelMarketButton.Click += new System.EventHandler(this.ModelMarketButton_Click);
+            this.modelMarketButton.Controls.Add(this.ModelButtonPictureBox);
+            this.modelMarketButton.FlatAppearance.BorderSize = 0;
+            this.modelMarketButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.modelMarketButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.modelMarketButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.modelMarketButton.Location = new System.Drawing.Point(0, 62);
+            this.modelMarketButton.Name = "modelMarketButton";
+            this.modelMarketButton.Size = new System.Drawing.Size(151, 42);
+            this.modelMarketButton.TabIndex = 0;
+            this.modelMarketButton.TabStop = false;
+            this.modelMarketButton.Text = "   模型市场";
+            this.toolTip1.SetToolTip(this.modelMarketButton, "当前用户发布的所有模型");
+            this.modelMarketButton.UseVisualStyleBackColor = true;
+            this.modelMarketButton.Click += new System.EventHandler(this.ModelMarketButton_Click);
             // 
             // ModelButtonPictureBox
             // 
@@ -380,7 +380,7 @@ namespace C2
             this.leftToolBoxPanel.Controls.Add(this.mindMapControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.iaoLabControl);
-            this.leftToolBoxPanel.Controls.Add(this.ModelMarketControl);
+            this.leftToolBoxPanel.Controls.Add(this.modelMarketControl);
             this.leftToolBoxPanel.Controls.Add(this.webDetectionControl);
             this.leftToolBoxPanel.Controls.Add(this.searchToolkitControl);
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -389,7 +389,7 @@ namespace C2
             this.leftToolBoxPanel.Size = new System.Drawing.Size(187, 560);
             this.leftToolBoxPanel.TabIndex = 2;
             // 
-            // MindMapControl
+            // mindMapControl
             // 
             this.mindMapControl.AllowDrop = true;
             this.mindMapControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -398,12 +398,12 @@ namespace C2
             this.mindMapControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mindMapControl.Location = new System.Drawing.Point(0, 0);
             this.mindMapControl.Margin = new System.Windows.Forms.Padding(4);
-            this.mindMapControl.Name = "MindMapControl";
+            this.mindMapControl.Name = "mindMapControl";
             this.mindMapControl.Size = new System.Drawing.Size(185, 558);
             this.mindMapControl.TabIndex = 0;
             this.mindMapControl.Visible = false;
             // 
-            // DataSourceControl
+            // dataSourceControl
             // 
             this.dataSourceControl.AllowDrop = true;
             this.dataSourceControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -412,7 +412,7 @@ namespace C2
             this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
             this.dataSourceControl.Margin = new System.Windows.Forms.Padding(4);
-            this.dataSourceControl.Name = "DataSourceControl";
+            this.dataSourceControl.Name = "dataSourceControl";
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
             this.dataSourceControl.Visible = false;
@@ -431,18 +431,18 @@ namespace C2
             this.iaoLabControl.TabIndex = 0;
             this.iaoLabControl.Visible = false;
             // 
-            // ModelMarketControl
+            // modelMarketControl
             // 
-            this.ModelMarketControl.AutoScroll = true;
-            this.ModelMarketControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ModelMarketControl.BackColor = System.Drawing.Color.White;
-            this.ModelMarketControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ModelMarketControl.Location = new System.Drawing.Point(0, 0);
-            this.ModelMarketControl.Margin = new System.Windows.Forms.Padding(4);
-            this.ModelMarketControl.Name = "ModelMarketControl";
-            this.ModelMarketControl.Size = new System.Drawing.Size(185, 558);
-            this.ModelMarketControl.TabIndex = 0;
-            this.ModelMarketControl.Visible = false;
+            this.modelMarketControl.AutoScroll = true;
+            this.modelMarketControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.modelMarketControl.BackColor = System.Drawing.Color.White;
+            this.modelMarketControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modelMarketControl.Location = new System.Drawing.Point(0, 0);
+            this.modelMarketControl.Margin = new System.Windows.Forms.Padding(4);
+            this.modelMarketControl.Name = "modelMarketControl";
+            this.modelMarketControl.Size = new System.Drawing.Size(185, 558);
+            this.modelMarketControl.TabIndex = 0;
+            this.modelMarketControl.Visible = false;
             // 
             // webDetectionControl
             // 
@@ -836,7 +836,7 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.DataButtonPictureBox)).EndInit();
             this.mindMapButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MindMapButtonPictureBox)).EndInit();
-            this.ModelMarketButton.ResumeLayout(false);
+            this.modelMarketButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ModelButtonPictureBox)).EndInit();
             this.leftToolBoxPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
@@ -860,7 +860,7 @@ namespace C2
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label usernamelabel;
         private System.Windows.Forms.Panel leftMainMenuPanel;
-        private Controls.Common.NoFocusButton ModelMarketButton;
+        private Controls.Common.NoFocusButton modelMarketButton;
         private Controls.Common.NoFocusButton dataSourceButton;
         private Controls.Common.NoFocusButton mindMapButton;
         private System.Windows.Forms.Panel leftToolBoxPanel;
@@ -878,7 +878,7 @@ namespace C2
         private Controls.Left.MyMindMapControl mindMapControl;
         private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.IAOLabControl iaoLabControl;
-        private Controls.Left.MyModelControl ModelMarketControl;
+        private Controls.Left.MyModelControl modelMarketControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private System.Windows.Forms.Label label7;

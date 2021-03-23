@@ -214,7 +214,7 @@ namespace C2.Controls
             
         }
 
-        protected void ComfirmSaveDocuments(ref bool cancel)
+        protected void ConfirmSaveDocuments(ref bool cancel)
         {
             var forms = GetForms<BaseDocumentForm>().ToArray();
             for (int i = forms.Length - 1; i >= 0; i--)

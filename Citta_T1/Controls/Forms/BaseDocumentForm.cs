@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using C2.Core;
+using C2.Model.Documents;
+using System;
 using System.ComponentModel;
 using System.Drawing.Printing;
-using System.Text;
-using C2.Core;
-using C2.Model.Documents;
 
 namespace C2.Controls
 {
@@ -12,10 +10,8 @@ namespace C2.Controls
     {
         string _Filename;
         bool _ReadOnly;
-        //bool _Modified;
 
         public event EventHandler FilenameChanged;
-        //public event EventHandler ModifiedChanged;
 
         public BaseDocumentForm()
         {
@@ -48,20 +44,6 @@ namespace C2.Controls
                 }
             }
         }
-
-        //[DefaultValue(false)]
-        //public bool Modified
-        //{
-        //    get { return _Modified; }
-        //    set
-        //    {
-        //        if (_Modified != value)
-        //        {
-        //            _Modified = value;
-        //            OnModifiedChanged();
-        //        }
-        //    }
-        //}
 
         [Browsable(false)]
         public bool CanSave
@@ -113,10 +95,7 @@ namespace C2.Controls
 
         protected virtual void OnFilenameChanged()
         {
-            if (FilenameChanged != null)
-            {
-                FilenameChanged(this, EventArgs.Empty);
-            }
+            FilenameChanged?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnReadOnlyChanged()
