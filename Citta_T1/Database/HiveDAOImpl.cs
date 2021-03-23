@@ -17,7 +17,7 @@ namespace C2.Database
         private readonly string getTableContentSQL = @"use {0};select * from {1}";
         //private string getColNameByTablesSQL;
         private readonly string getColNameByTableSQL = "desc {0}";
-        private readonly string dataBaseName;
+        private readonly string dataBaseName;//TODO 拼写错误
         public HiveDAOImpl(DatabaseItem dbi) : base(dbi)
         {
             this.dataBaseName = dbi.Schema;
@@ -26,6 +26,7 @@ namespace C2.Database
         {
             using (var con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
+                                                   //TODO 刘
             {
                 try
                 {
@@ -48,41 +49,48 @@ namespace C2.Database
             conn.SetTcpReceiveTimeout = 8000;
             conn.SetTcpSendTimeout = 8000;
         }
-        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1)
+        public override bool ExecuteSQL(string sqlText, string outputPath, int maxReturnNum = -1)
         {
+            //TODO maxReturnNum
             int totalReturnNum = 0;
-            StreamWriter sw = new StreamWriter(outPutPath, false);
+            StreamWriter sw = new StreamWriter(outputPath, false);
+            //TODO
             StringBuilder sb = new StringBuilder(1024); 
             try
             {
                 using (Connection con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
+                                                   //TODO 刘 varcon
                 {
                     //LimitTimeout(con);
                     var cursor = con.GetCursor();
                     cursor.Execute("use " + dataBaseName);          
                     cursor.Execute(DbUtil.PurifyOnelineSQL(sqlText));
                     var oneRow = cursor.FetchOne();
+                    //TODO ？null 添加return IDictionary<string, object> oneRow
                     if (!oneRow.IsEmpty())
                     {
                         // 添加表头
                         IDictionary<string, object> iDict = oneRow;
                         for (int i = 0; i < iDict.Count; i++)
                         {
+                            //TODO foreach
                             string key = GetColumnName(iDict.Keys.ElementAt(i));
                             sb.Append(key).Append(OpUtil.TabSeparator);
                         }
                         if (iDict.Count > 0)
                         {
+                            //TODO 刘 是否多余
                             sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
                         }
                         
                     }
    
-                    while (oneRow != null && (maxReturnNum == -1 ? true : totalReturnNum < maxReturnNum))
+                    while (oneRow != null && (maxReturnNum == -1 ? true : totalReturnNum < maxReturnNum))//TODO 多余
                     {
                         sb = new StringBuilder(1024);
-                        IDictionary<string, object> dict = oneRow;
+                        //TODO clear
+                        IDictionary<string, object> dict = oneRow;//TODO 多余
                         foreach (var key in dict.Keys)
                         {
                             sb.Append(dict[key].ToString()).Append(OpUtil.TabSeparator);
@@ -92,9 +100,9 @@ namespace C2.Database
                             sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
                         }
                         totalReturnNum += 1;
-                        oneRow = cursor.FetchOne();
+                        oneRow = cursor.FetchOne();//TODO 太远了
                     }
-                    sw.Flush();
+                    sw.Flush();//TODO 无效语句
                 }
             }
             catch (Exception ex)
@@ -111,11 +119,12 @@ namespace C2.Database
         }
       
        
-        private string GetColumnName(string name)
+        private string GetColumnName(string name)//TODO get换掉
         {
             if (string.IsNullOrEmpty(name))
                 return string.Empty;
             string[] names = name.Split('.');
+            //TODO 刘
             return names.Length == 2 ? names[1] : name;
         }
 
@@ -126,21 +135,22 @@ namespace C2.Database
             {
                 using (Connection con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
                                                    this.User, this.Pass))
+                                                   //TODO port using 是否可以调close
                 {
                    // LimitTimeout(conn);
                     var cursor = con.GetCursor();
-                    cursor.Execute("use " + dataBaseName);
+                    cursor.Execute("use " + dataBaseName);//TODO format 
                     foreach (var s in sql.Trim().Split(';'))
                     {
                         if (!String.IsNullOrEmpty(s))
                             cursor.Execute(s);
                     }
-                    var list = cursor.FetchMany(returnNum);
+                    var list = cursor.FetchMany(returnNum);//TODO returnNum可能会很大 stringbuilder可能不够
                     if (header && !list.IsEmpty())
                     {
                         // 添加表头
                         IDictionary<string, object> iDict = list[0];
-                        for (int i = 0; i < iDict.Count; i++)
+                        for (int i = 0; i < iDict.Count; i++)//TODO foreach
                         {
                             string key = GetColumnName(iDict.Keys.ElementAt(i));
                             sb.Append(key).Append(OpUtil.TabSeparator);
@@ -165,6 +175,7 @@ namespace C2.Database
                 
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
                 throw new DAOException(ex.Message);
+                //TODO 
 
             }
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
