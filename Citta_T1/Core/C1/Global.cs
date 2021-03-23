@@ -2,6 +2,7 @@
 using C2.Business.Option;
 using C2.Controls;
 using C2.Controls.Bottom;
+using C2.Controls.C1.Left;
 using C2.Controls.Flow;
 using C2.Controls.Left;
 using C2.Controls.Right;
@@ -19,6 +20,7 @@ namespace C2.Core
     {
         private static MainForm mainForm;
         private static MyModelControl myModelControl;
+        private static WebsiteFeatureDetectionControl websiteFeatureDetectionControl;
         private static BottomLogControl logView;
         private static DataSourceControl dataSourceControl; // 左侧数据源面板
         private static Panel bottomViewPanle;
@@ -36,6 +38,7 @@ namespace C2.Core
         public static Panel GetLeftToolBoxPanel() { return leftToolBoxPanel; }
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
+        public static WebsiteFeatureDetectionControl GetWebsiteFeatureDetectionControl() { return websiteFeatureDetectionControl; }
         public static IAOLabControl GetIAOLabControl() { return iaoLabControl; }
         public static BottomLogControl GetLogView() { return logView; }
         public static Control GetBottomViewPanel() { return bottomViewPanle; }
@@ -129,6 +132,7 @@ namespace C2.Core
         public static void SetLeftToolBoxPanel(Panel ltbp) { leftToolBoxPanel = ltbp; }
         public static void SetDataSourceControl(DataSourceControl dsc) { dataSourceControl = dsc; }
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
+        public static void SetWebsiteFeatureDetectionControl(WebsiteFeatureDetectionControl wfdc) { websiteFeatureDetectionControl = wfdc; }
         public static void SetIAOLabControl(IAOLabControl ilc) { iaoLabControl = ilc; }
         public static void SetLogView(BottomLogControl lv) { logView = lv; }
         public static void SetBottomViewPanel(Panel bv) { bottomViewPanle = bv; }

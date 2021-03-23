@@ -110,7 +110,7 @@ namespace C2
                 this.modelMarketControl,
                 this.dataSourceControl,
                 this.iaoLabControl,
-                this.webDetectionControl,
+                this.websiteFeatureDetectionControl,
                 this.searchToolkitControl,     
             };
             // 默认业务视图为初始选中状态
@@ -184,6 +184,7 @@ namespace C2
             Global.SetLeftToolBoxPanel(this.leftToolBoxPanel);
             Global.SetDataSourceControl(this.dataSourceControl);
             Global.SetMyModelControl(this.modelMarketControl);
+            Global.SetWebsiteFeatureDetectionControl(this.websiteFeatureDetectionControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetWorkSpacePanel(this.workSpacePanel);
@@ -260,7 +261,7 @@ namespace C2
 
         private void DetectionButton_Click(object sender, EventArgs e)
         {
-            ShowLeftPanel(detectionButton, webDetectionControl);
+            ShowLeftPanel(detectionButton, websiteFeatureDetectionControl);
         }
 
         private void SearchToolkitButton_Click(object sender, EventArgs e)

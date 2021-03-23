@@ -56,7 +56,7 @@ namespace C2
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoLabControl = new C2.Controls.Left.IAOLabControl();
             this.modelMarketControl = new C2.Controls.Left.MyModelControl();
-            this.webDetectionControl = new C2.Controls.C1.Left.WebsiteFeatureDetectionControl();
+            this.websiteFeatureDetectionControl = new C2.Controls.C1.Left.WebsiteFeatureDetectionControl();
             this.searchToolkitControl = new C2.Controls.C1.Left.SearchToolkitControl();
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
@@ -381,7 +381,7 @@ namespace C2
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.iaoLabControl);
             this.leftToolBoxPanel.Controls.Add(this.modelMarketControl);
-            this.leftToolBoxPanel.Controls.Add(this.webDetectionControl);
+            this.leftToolBoxPanel.Controls.Add(this.websiteFeatureDetectionControl);
             this.leftToolBoxPanel.Controls.Add(this.searchToolkitControl);
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftToolBoxPanel.Location = new System.Drawing.Point(145, 46);
@@ -444,18 +444,18 @@ namespace C2
             this.modelMarketControl.TabIndex = 0;
             this.modelMarketControl.Visible = false;
             // 
-            // webDetectionControl
+            // websiteFeatureDetectionControl
             // 
-            this.webDetectionControl.AllowDrop = true;
-            this.webDetectionControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.webDetectionControl.BackColor = System.Drawing.Color.White;
-            this.webDetectionControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.webDetectionControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webDetectionControl.Location = new System.Drawing.Point(0, 0);
-            this.webDetectionControl.Name = "webDetectionControl";
-            this.webDetectionControl.Size = new System.Drawing.Size(185, 558);
-            this.webDetectionControl.TabIndex = 0;
-            this.webDetectionControl.Visible = false;
+            this.websiteFeatureDetectionControl.AllowDrop = true;
+            this.websiteFeatureDetectionControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.websiteFeatureDetectionControl.BackColor = System.Drawing.Color.White;
+            this.websiteFeatureDetectionControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.websiteFeatureDetectionControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.websiteFeatureDetectionControl.Location = new System.Drawing.Point(0, 0);
+            this.websiteFeatureDetectionControl.Name = "websiteFeatureDetectionControl";
+            this.websiteFeatureDetectionControl.Size = new System.Drawing.Size(185, 558);
+            this.websiteFeatureDetectionControl.TabIndex = 0;
+            this.websiteFeatureDetectionControl.Visible = false;
             // 
             // searchToolkitControl
             // 
@@ -915,7 +915,7 @@ namespace C2
         private PictureBox pictureBox1;
         private Controls.Common.NoFocusButton searchToolkitButton;
         private PictureBox pictureBox2;
-        private Controls.C1.Left.WebsiteFeatureDetectionControl webDetectionControl;
+        private Controls.C1.Left.WebsiteFeatureDetectionControl websiteFeatureDetectionControl;
         private Controls.C1.Left.SearchToolkitControl searchToolkitControl;
     }
 }

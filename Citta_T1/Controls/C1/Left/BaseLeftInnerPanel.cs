@@ -50,7 +50,7 @@ namespace C2.Controls.C1.Left
             return false;
         }
 
-        public void RemoveMindMapButton(BaseLeftInnerButton innerButton)
+        public void RemoveButton(Control innerButton)
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
             if (this.manageButtonPanel.Controls.Count > 0)
@@ -65,7 +65,7 @@ namespace C2.Controls.C1.Left
             }
         }
 
-        private void ReLayoutButtons(BaseLeftInnerButton innerButton)
+        private void ReLayoutButtons(Control innerButton)
         {
             int idx = this.manageButtonPanel.Controls.IndexOf(innerButton);
             for (int i = idx + 1; i < this.manageButtonPanel.Controls.Count; i++)

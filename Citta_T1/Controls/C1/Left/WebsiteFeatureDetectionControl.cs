@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C2.Dialogs.WebsiteFeatureDetection;
+using C2.Utils;
+using System.IO;
+using C2.Core;
 
 namespace C2.Controls.C1.Left
 {
@@ -88,11 +91,20 @@ namespace C2.Controls.C1.Left
 
             private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
             {
+                DialogResult rs = MessageBox.Show(
+                    String.Format("删除任务 {0}, 继续删除请点击 \"确定\"", ButtonText),
+                    "删除",MessageBoxButtons.OKCancel,MessageBoxIcon.Information);
 
+                if (rs != DialogResult.OK)
+                    return;
+
+                //TODO 删除结果文件
+                //从左侧面板中移除
+                Global.GetWebsiteFeatureDetectionControl().RemoveButton(this);
             }
             private void OpenDatasourceToolStripMenuItem_Click(object sender, EventArgs e)
             {
-
+                ProcessUtil.ProcessOpen(this.FilePath);
             }
             private void ResultToolStripMenuItem_Click(object sender, EventArgs e)
             {
