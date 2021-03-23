@@ -28,19 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.newEventPanel = new System.Windows.Forms.Panel();
             this.addLabel = new System.Windows.Forms.Label();
             this.titleLabel = new System.Windows.Forms.Label();
             this.backPanel = new System.Windows.Forms.Panel();
             this.manageButtonPanel = new System.Windows.Forms.Panel();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.任务详情ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.删除任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newEventPanel.SuspendLayout();
             this.backPanel.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // newEventPanel
@@ -62,7 +56,6 @@
             this.addLabel.Size = new System.Drawing.Size(70, 14);
             this.addLabel.TabIndex = 0;
             this.addLabel.Text = "+新建任务";
-            this.addLabel.Click += new System.EventHandler(this.AddLabel_Click);
             // 
             // titleLabel
             // 
@@ -98,26 +91,6 @@
             this.manageButtonPanel.Size = new System.Drawing.Size(177, 587);
             this.manageButtonPanel.TabIndex = 1;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.任务详情ToolStripMenuItem,
-            this.删除任务ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
-            // 
-            // 任务详情ToolStripMenuItem
-            // 
-            this.任务详情ToolStripMenuItem.Name = "任务详情ToolStripMenuItem";
-            this.任务详情ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.任务详情ToolStripMenuItem.Text = "任务详情";
-            // 
-            // 删除任务ToolStripMenuItem
-            // 
-            this.删除任务ToolStripMenuItem.Name = "删除任务ToolStripMenuItem";
-            this.删除任务ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.删除任务ToolStripMenuItem.Text = "删除任务";
-            // 
             // BaseLeftInnerPanel
             // 
             this.BackColor = System.Drawing.Color.White;
@@ -129,7 +102,6 @@
             this.newEventPanel.ResumeLayout(false);
             this.newEventPanel.PerformLayout();
             this.backPanel.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -140,9 +112,5 @@
         protected System.Windows.Forms.Panel backPanel;
         protected System.Windows.Forms.Panel manageButtonPanel;
         protected System.Windows.Forms.Label addLabel;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ToolStripMenuItem 任务详情ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 删除任务ToolStripMenuItem;
     }
 }

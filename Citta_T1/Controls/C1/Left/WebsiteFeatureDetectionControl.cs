@@ -20,9 +20,10 @@ namespace C2.Controls.C1.Left
         public WebsiteFeatureDetectionControl()
         {
             InitializeComponent();
+            this.addLabel.Click += new EventHandler(this.AddLabel_Click);
         }
 
-        public override void AddTask()
+        private void AddLabel_Click(object sender, EventArgs e)
         {
             var dialog = new AddWFDTask();
             if (dialog.ShowDialog() == DialogResult.OK)

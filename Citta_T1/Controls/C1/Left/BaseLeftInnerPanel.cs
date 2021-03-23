@@ -84,13 +84,5 @@ namespace C2.Controls.C1.Left
             g.DrawLine(p, 0, 30, 200, 30);//x1,y1,x2,y2
         }
 
-        private void AddLabel_Click(object sender, EventArgs e)
-        {
-            AddTask();
-        }
-
-        virtual public void AddTask()
-        {
-        }
     }
 }
