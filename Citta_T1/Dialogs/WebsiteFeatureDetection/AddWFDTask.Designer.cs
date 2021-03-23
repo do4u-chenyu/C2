@@ -56,30 +56,33 @@
             this.label2.TabIndex = 10004;
             this.label2.Text = "查询文件：";
             // 
-            // textBox1
+            // taskNameTextBox
             // 
             this.taskNameTextBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.taskNameTextBox.Location = new System.Drawing.Point(133, 38);
-            this.taskNameTextBox.Name = "textBox1";
+            this.taskNameTextBox.Name = "taskNameTextBox";
             this.taskNameTextBox.Size = new System.Drawing.Size(247, 23);
             this.taskNameTextBox.TabIndex = 10005;
             // 
-            // textBox2
+            // filePathTextBox
             // 
+            this.filePathTextBox.BackColor = System.Drawing.Color.White;
             this.filePathTextBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.filePathTextBox.Location = new System.Drawing.Point(133, 87);
-            this.filePathTextBox.Name = "textBox2";
+            this.filePathTextBox.Name = "filePathTextBox";
+            this.filePathTextBox.ReadOnly = true;
             this.filePathTextBox.Size = new System.Drawing.Size(200, 23);
             this.filePathTextBox.TabIndex = 10006;
             // 
-            // button1
+            // browserButton
             // 
             this.browserButton.Location = new System.Drawing.Point(339, 87);
-            this.browserButton.Name = "button1";
+            this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(41, 23);
             this.browserButton.TabIndex = 10007;
             this.browserButton.Text = "预览";
             this.browserButton.UseVisualStyleBackColor = true;
+            this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
             // label3
             // 

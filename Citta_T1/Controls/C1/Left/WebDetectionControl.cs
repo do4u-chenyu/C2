@@ -39,12 +39,20 @@ namespace C2.Controls.C1.Left
             public WebDetectionButton()
             {
                 InitButtonMenu();
-                this.leftPictureBox.Image = global::C2.Properties.Resources.数据;
+                InitButtonType();
+
             }
             public WebDetectionButton(string name, string filePath) : this()
             {
                 this.ButtonText = name;
                 this.FilePath = filePath;
+                this.toolTip.SetToolTip(this.rightPictureBox, FilePath);
+            }
+
+            private void InitButtonType()
+            {
+                this.leftPictureBox.Image = global::C2.Properties.Resources.数据;
+                this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
             }
 
             private void InitButtonMenu()
@@ -60,14 +68,14 @@ namespace C2.Controls.C1.Left
                 OpenDatasourceToolStripMenuItem.Name = "OpenDatasourceToolStripMenuItem";
                 OpenDatasourceToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
                 OpenDatasourceToolStripMenuItem.Text = "打开源文件";
-                OpenDatasourceToolStripMenuItem.ToolTipText = "预览数据源前一千条数据";
+                OpenDatasourceToolStripMenuItem.ToolTipText = "从本地文本编辑器中打开文件";
                 OpenDatasourceToolStripMenuItem.Click += new System.EventHandler(OpenDatasourceToolStripMenuItem_Click);
 
                 ToolStripMenuItem ResultToolStripMenuItem = new ToolStripMenuItem();
                 ResultToolStripMenuItem.Name = "ResultToolStripMenuItem";
                 ResultToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
                 ResultToolStripMenuItem.Text = "查看结果";
-                ResultToolStripMenuItem.ToolTipText = "预览数据源前一千条数据";
+                ResultToolStripMenuItem.ToolTipText = "查看任务返回结果";
                 ResultToolStripMenuItem.Click += new System.EventHandler(ResultToolStripMenuItem_Click);
 
                 this.contextMenuStrip.Items.AddRange(new ToolStripItem[] {

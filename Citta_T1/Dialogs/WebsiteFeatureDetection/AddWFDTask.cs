@@ -19,5 +19,18 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             InitializeComponent();
         }
+
+        private void BrowserButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog
+            {
+                Filter = "files|*.txt;*.bcp;*.csv"
+            };
+
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                this.FilePath = fd.FileName;
+            }
+        }
     }
 }
