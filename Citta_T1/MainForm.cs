@@ -111,12 +111,10 @@ namespace C2
                 this.dataSourceControl,
                 this.iaoLabControl,
                 this.webDetectionControl,
-                this.searchToolkitControl,
-                
+                this.searchToolkitControl,     
             };
+            // 默认业务视图为初始选中状态
             this.mindMapButton.BackColor = LeftFocusColor;
-            
-
         }
         void InitializeTaskBar()
         {
