@@ -86,10 +86,10 @@ namespace C2.Controls.C1.Left
 
         private void AddLabel_Click(object sender, EventArgs e)
         {
-            AddButton();
+            AddTask();
         }
 
-        virtual public void AddButton()
+        virtual public void AddTask()
         {
         }
     }

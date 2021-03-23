@@ -19,7 +19,7 @@ namespace C2.Controls.C1.Left
             InitializeComponent();
         }
 
-        public override void AddButton()
+        public override void AddTask()
         {
             var dialog = new AddWFDTask();
             if (dialog.ShowDialog() == DialogResult.OK)
