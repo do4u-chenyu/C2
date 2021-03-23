@@ -279,6 +279,19 @@
     <Compile Include="Dialogs\WebsiteFeatureDetection\AddWFDTask.Designer.cs">
       <DependentUpon>AddWFDTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\WebsiteFeatureDetection\UserAuthentication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WebsiteFeatureDetection\UserAuthentication.Designer.cs">
+      <DependentUpon>UserAuthentication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WebsiteFeatureDetection\WFDApi.cs" />
+    <Compile Include="Dialogs\WebsiteFeatureDetection\WFDTaskResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WebsiteFeatureDetection\WFDTaskResult.Designer.cs">
+      <DependentUpon>WFDTaskResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
     <Compile Include="IAOLab\SearchToolkit\SearchToolkitForm.cs">
       <SubType>Form</SubType>
@@ -1843,6 +1856,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WebsiteFeatureDetection\AddWFDTask.resx">
       <DependentUpon>AddWFDTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WebsiteFeatureDetection\UserAuthentication.resx">
+      <DependentUpon>UserAuthentication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WebsiteFeatureDetection\WFDTaskResult.resx">
+      <DependentUpon>WFDTaskResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WidgetChart\VisualDisplayDialog.resx">
       <DependentUpon>VisualDisplayDialog.cs</DependentUpon>
