@@ -98,7 +98,7 @@ namespace C2
 
             // 注册左侧一级按钮
             this.leftMainButtons = new Control[] { this.mindMapButton,
-                this.ModelMarketButton,
+                this.modelMarketButton,
                 this.dataSourceButton,
                 this.iaoLabButton,
                 this.detectionButton,
@@ -107,7 +107,7 @@ namespace C2
 
             // 注册左侧二级面板
             this.leftPanelControls = new Control[] { this.mindMapControl, 
-                this.ModelMarketControl,
+                this.modelMarketControl,
                 this.dataSourceControl,
                 this.iaoLabControl,
                 this.webDetectionControl,
@@ -183,7 +183,7 @@ namespace C2
             Global.SetTaskBar(this.TaskBar);
             Global.SetLeftToolBoxPanel(this.leftToolBoxPanel);
             Global.SetDataSourceControl(this.dataSourceControl);
-            Global.SetMyModelControl(this.ModelMarketControl);
+            Global.SetMyModelControl(this.modelMarketControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetWorkSpacePanel(this.workSpacePanel);
@@ -240,7 +240,7 @@ namespace C2
 
         private void ModelMarketButton_Click(object sender, EventArgs e)
         {
-            ShowLeftPanel(ModelMarketButton, ModelMarketControl);
+            ShowLeftPanel(modelMarketButton, modelMarketControl);
         }
 
         private void MindMapButton_Click(object sender, EventArgs e)
@@ -308,7 +308,7 @@ namespace C2
             foreach (string title in bsTitles)
                 this.mindMapControl.AddMindMapModel(title);
             foreach (string title in mtTitles)
-                this.ModelMarketControl.AddModel(title);
+                this.modelMarketControl.AddModel(title);
         }
         private void LoadDataSource()
         {
@@ -384,7 +384,7 @@ namespace C2
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
                 this.dataSourceControl.Visible = false;
                 this.mindMapControl.Visible = false;
-                this.ModelMarketControl.Visible = false;
+                this.modelMarketControl.Visible = false;
                 this.iaoLabControl.Visible = false;
             }
         }
