@@ -1,6 +1,6 @@
 ﻿namespace C2.Controls.C1.Left
 {
-    partial class SearchToolkitControl
+    partial class SearchToolkitButton
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,28 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.newEventPanel.SuspendLayout();
-            this.backPanel.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // titleLabel
-            // 
-            this.titleLabel.Text = "全文工具集";
-            // 
-            // addLabel
-            // 
-            this.addTaskLabel.Click += new System.EventHandler(this.AddTaskLabel_Click);
-            // 
-            // SearchToolkitControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "SearchToolkitControl";
-            this.newEventPanel.ResumeLayout(false);
-            this.newEventPanel.PerformLayout();
-            this.backPanel.ResumeLayout(false);
-            this.ResumeLayout(false);
-
         }
 
         #endregion

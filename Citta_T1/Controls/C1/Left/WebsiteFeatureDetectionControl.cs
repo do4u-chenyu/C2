@@ -20,7 +20,7 @@ namespace C2.Controls.C1.Left
         public WebsiteFeatureDetectionControl()
         {
             InitializeComponent();
-            this.addLabel.Click += new EventHandler(this.AddLabel_Click);
+            this.addTaskLabel.Click += new EventHandler(this.AddLabel_Click);
         }
 
         private void AddLabel_Click(object sender, EventArgs e)
