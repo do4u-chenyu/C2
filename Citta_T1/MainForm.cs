@@ -829,40 +829,33 @@ namespace C2
         {
             var saveTabs = Options.Current.GetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
             if (saveTabs == SaveTabsType.No)
-            {
                 return true;
-            }
 
             // ensure document saved
             bool cancel = false;
-            ComfirmSaveDocuments(ref cancel);
+            ConfirmSaveDocuments(ref cancel);
             if (cancel)
-            {
                 return false;
-            }
 
             // ask and save
             string[] tabs = GetOpendDocuments();
 
-            if (tabs.Length > 0 && saveTabs == SaveTabsType.Ask)
+            if (!tabs.IsEmpty() && saveTabs == SaveTabsType.Ask)
             {
-                if (tabs.Length > 0)
+                var dialog = new SaveTabsDialog();
+                var dr = dialog.ShowDialog(this);
+                if (dr == DialogResult.Cancel)
+                    return false;
+
+                if (dialog.DoNotAskAgain)
+                    Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, (dr == DialogResult.Yes) ? SaveTabsType.Yes : SaveTabsType.No);
+                else
+                    Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
+
+                if (dr == DialogResult.No)
                 {
-                    var dialog = new SaveTabsDialog();
-                    var dr = dialog.ShowDialog(this);
-                    if (dr == DialogResult.Cancel)
-                        return false;
-
-                    if (dialog.DoNotAskAgain)
-                        Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, (dr == DialogResult.Yes) ? SaveTabsType.Yes : SaveTabsType.No);
-                    else
-                        Options.Current.SetValue(OptionNames.Miscellaneous.SaveTabs, SaveTabsType.Ask);
-
-                    if (dr == DialogResult.No)
-                    {
-                        Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, null);
-                        return true;
-                    }
+                    Options.Current.SetValue(OptionNames.Miscellaneous.LastOpenTabs, null);
+                    return true;
                 }
             }
 
@@ -872,16 +865,12 @@ namespace C2
         private void OpenSavedTabs()
         {
             var tabs = Options.Current.GetValue<string[]>(OptionNames.Miscellaneous.LastOpenTabs);
-            if (!tabs.IsNullOrEmpty())
-            {
-                foreach (var filename in tabs)
-                {
-                    if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
-                    {
-                        OpenDocument(filename);
-                    }
-                }
-            }
+            if (tabs.IsNullOrEmpty())
+                return;
+
+            foreach (var filename in tabs)
+                if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
+                    OpenDocument(filename);
         }
     }
 }
