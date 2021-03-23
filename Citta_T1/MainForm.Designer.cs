@@ -56,7 +56,7 @@ namespace C2
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoLabControl = new C2.Controls.Left.IAOLabControl();
             this.modelMarketControl = new C2.Controls.Left.MyModelControl();
-            this.webDetectionControl = new C2.Controls.C1.Left.WebDetectionControl();
+            this.webDetectionControl = new C2.Controls.C1.Left.WebsiteFeatureDetectionControl();
             this.searchToolkitControl = new C2.Controls.C1.Left.SearchToolkitControl();
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
@@ -915,7 +915,7 @@ namespace C2
         private PictureBox pictureBox1;
         private Controls.Common.NoFocusButton searchToolkitButton;
         private PictureBox pictureBox2;
-        private Controls.C1.Left.WebDetectionControl webDetectionControl;
+        private Controls.C1.Left.WebsiteFeatureDetectionControl webDetectionControl;
         private Controls.C1.Left.SearchToolkitControl searchToolkitControl;
     }
 }

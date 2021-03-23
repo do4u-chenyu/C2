@@ -18,7 +18,7 @@ namespace C2.Controls.C1.Left
             startPoint = new Point(ButtonLeftX, -ButtonGapY);
         }
 
-        public void AddInnerButton(BaseLeftInnerButton innerButton)
+        public void AddInnerButton(Control innerButton)
         {
             // 获得当前要添加的model button的初始位置
             LayoutButton(innerButton);
