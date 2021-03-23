@@ -205,6 +205,10 @@
     <Compile Include="Controls\C1\Left\IAOButton.Designer.cs">
       <DependentUpon>IAOButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\C1\Left\SearchToolkitButton.cs" />
+    <Compile Include="Controls\C1\Left\SearchToolkitButton.Designer.cs">
+      <DependentUpon>SearchToolkitButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\C1\Left\SearchToolkitControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -293,10 +297,10 @@
       <DependentUpon>WFDTaskResult.cs</DependentUpon>
     </Compile>
     <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
-    <Compile Include="IAOLab\SearchToolkit\SearchToolkitForm.cs">
+    <Compile Include="Dialogs\\SearchToolkit\SearchToolkitForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IAOLab\SearchToolkit\SearchToolkitForm.Designer.cs">
+    <Compile Include="Dialogs\\SearchToolkit\SearchToolkitForm.Designer.cs">
       <DependentUpon>SearchToolkitForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\SimpleBar.cs" />
@@ -1878,7 +1882,7 @@
     <EmbeddedResource Include="Forms\DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IAOLab\SearchToolkit\SearchToolkitForm.resx">
+    <EmbeddedResource Include="Dialogs\\SearchToolkit\SearchToolkitForm.resx">
       <DependentUpon>SearchToolkitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.resx">

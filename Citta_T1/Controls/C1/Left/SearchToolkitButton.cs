@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace C2.Controls.C1.Left
 {
-    public partial class SearchToolkitControl : BaseLeftInnerPanel
+    public partial class SearchToolkitButton : BaseLeftInnerButton
     {
-        public SearchToolkitControl()
+        public SearchToolkitButton()
         {
             InitializeComponent();
-        }
-
-        private void AddTaskLabel_Click(object sender, EventArgs e)
-        {
-            AddInnerButton(new SearchToolkitButton());
         }
     }
 }
