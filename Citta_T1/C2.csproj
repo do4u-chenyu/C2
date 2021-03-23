@@ -205,7 +205,9 @@
     <Compile Include="Controls\C1\Left\IAOButton.Designer.cs">
       <DependentUpon>IAOButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\C1\Left\SearchToolkitButton.cs" />
+    <Compile Include="Controls\C1\Left\SearchToolkitButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\C1\Left\SearchToolkitButton.Designer.cs">
       <DependentUpon>SearchToolkitButton.cs</DependentUpon>
     </Compile>
