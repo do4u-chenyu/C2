@@ -52,8 +52,8 @@ namespace C2
         delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
 
-        private static readonly Color LeftForeColor = Color.FromArgb(41, 60, 85);
-        private static readonly Color LeftBackColor = Color.FromArgb(228, 60, 89);
+        private static readonly Color LeftFocusColor = Color.FromArgb(228, 60, 89); // 红
+        private static readonly Color LeftLeaveColor = Color.FromArgb(41, 60, 85);  // 蓝
 
         public MainForm(string userName)
         {
@@ -96,23 +96,25 @@ namespace C2
             this.isLeftViewPanelMinimum = true;
             this.leftToolBoxPanel.Width = 10;
 
-            this.leftPanelControls = new Control[] { this.mindMapModelControl, 
-                this.modelMarketControl,
-                this.dataSourceControl,
-                this.iaoModelControl,
-                this.webDetectionControl,
-
-                
-            };
-
-            this.leftMainButtons = new Control[] { this.MindMapButton,
+            // 注册左侧一级按钮
+            this.leftMainButtons = new Control[] { this.mindMapButton,
                 this.ModelMarketButton,
-                this.DataSourceButton,
-                this.IAOLabButton,
-                this.DetectionButton
+                this.dataSourceButton,
+                this.iaoLabButton,
+                this.detectionButton,
+                this.searchToolkitButton
+            };
+
+            // 注册左侧二级面板
+            this.leftPanelControls = new Control[] { this.mindMapControl, 
+                this.ModelMarketControl,
+                this.dataSourceControl,
+                this.iaoLabControl,
+                this.webDetectionControl,
+                this.searchToolkitControl,
                 
             };
-            this.MindMapButton.BackColor = LeftBackColor;
+            this.mindMapButton.BackColor = LeftFocusColor;
             
 
         }
@@ -183,12 +185,12 @@ namespace C2
             Global.SetTaskBar(this.TaskBar);
             Global.SetLeftToolBoxPanel(this.leftToolBoxPanel);
             Global.SetDataSourceControl(this.dataSourceControl);
-            Global.SetMyModelControl(this.modelMarketControl);
+            Global.SetMyModelControl(this.ModelMarketControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetWorkSpacePanel(this.workSpacePanel);
-            Global.SetMindMapModelControl(this.mindMapModelControl);
-            Global.SetIAOLabControl (this.iaoModelControl);
+            Global.SetMindMapModelControl(this.mindMapControl);
+            Global.SetIAOLabControl (this.iaoLabControl);
         }
         void InitializeMdiClient()
         {
@@ -225,138 +227,47 @@ namespace C2
             this.blankButton.Focus();
         }
 
-        private void ModelMarketButton_Click(object sender, EventArgs e)
+        private void ShowLeftPanel(Control leftButton, Control leftPanel)
         {
-            this.modelMarketControl.Visible = true;
+            foreach (Control ct in this.leftPanelControls)
+                ct.Visible = false;
+            foreach (Control ct in this.leftMainButtons)
+                ct.BackColor = LeftLeaveColor;
 
-            this.dataSourceControl.Visible = false;
-            this.mindMapModelControl.Visible = false;
-            this.iaoModelControl.Visible = false;
-            this.webDetectionControl.Visible = false;
-            this.DataSourceButton.BackColor = LeftForeColor;
+            leftPanel.Visible = true;
+            leftButton.BackColor = LeftFocusColor;
 
             this.ShowLeftFold();
+        }
+
+        private void ModelMarketButton_Click(object sender, EventArgs e)
+        {
+            ShowLeftPanel(ModelMarketButton, ModelMarketControl);
         }
 
         private void MindMapButton_Click(object sender, EventArgs e)
         {
-            this.mindMapModelControl.Visible = true;
-
-            this.dataSourceControl.Visible = false;
-            this.modelMarketControl.Visible = false;
-            this.iaoModelControl.Visible = false;
-            this.webDetectionControl.Visible = false;
-
-            this.DataSourceButton.BackColor = LeftForeColor;
-            this.ShowLeftFold();
+            ShowLeftPanel(mindMapButton, mindMapControl); 
         }
         
         private void DataSourceButton_Click(object sender, EventArgs e)
         {
-            this.dataSourceControl.Visible = true;
-
-            this.mindMapModelControl.Visible = false;
-            this.modelMarketControl.Visible = false;
-            this.iaoModelControl.Visible = false;
-            this.webDetectionControl.Visible = false;
-
-            this.ShowLeftFold();
-
+            ShowLeftPanel(dataSourceButton, dataSourceControl);
         }
 
         private void IAOLabButton_Click(object sender, EventArgs e)
         {
-            this.iaoModelControl.Visible = true;
-
-            this.dataSourceControl.Visible = false;
-            this.mindMapModelControl.Visible = false;
-            this.modelMarketControl.Visible = false;
-            this.webDetectionControl.Visible = false;
-            this.DataSourceButton.BackColor = LeftForeColor;
-
-            this.ShowLeftFold();
+            ShowLeftPanel(iaoLabButton, iaoLabControl);
         }
 
         private void DetectionButton_Click(object sender, EventArgs e)
         {
-            this.dataSourceControl.Visible = false;
-            this.mindMapModelControl.Visible = false;
-            this.modelMarketControl.Visible = false;
-            this.iaoModelControl.Visible = false;
-            this.webDetectionControl.Visible = true;
-            this.DetectionButton.BackColor = LeftForeColor;
-            this.ShowLeftFold();
+            ShowLeftPanel(detectionButton, webDetectionControl);
         }
 
-        private void MindMapButton_MouseDown(object sender, MouseEventArgs e)
+        private void SearchToolkitButton_Click(object sender, EventArgs e)
         {
-
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    // Left click
-                    this.MindMapButton.BackColor = LeftBackColor;
-                    break;
-            }
-        }
-
-        private void MindMapButton_Leave(object sender, EventArgs e)
-        {
-            this.MindMapButton.BackColor = LeftForeColor;
-        }
-
-        private void ModelMarketButton_Leave(object sender, EventArgs e)
-        {
-            this.ModelMarketButton.BackColor = LeftForeColor;
-        }
-
-        private void ModelMarketButton_MouseDown(object sender, MouseEventArgs e)
-        {
-
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    // Left click
-                    this.ModelMarketButton.BackColor = LeftBackColor;
-                    this.MindMapButton.BackColor = LeftForeColor;
-                    break;
-            }
-        }
-
-        private void DataSourceButton_Leave(object sender, EventArgs e)
-        {
-            this.DataSourceButton.BackColor = LeftForeColor;
-        }
-
-        private void DataSourceButton_MouseDown(object sender, MouseEventArgs e)
-        {
-
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    // Left click
-                    this.DataSourceButton.BackColor = LeftBackColor;
-                    this.MindMapButton.BackColor = LeftForeColor;
-                    break;
-            }
-        }
-
-        private void IAOLabButton_Leave(object sender, EventArgs e)
-        {
-            this.IAOLabButton.BackColor = LeftForeColor;
-        }
-
-        private void IAOLabButton_MouseDown(object sender, MouseEventArgs e)
-        {
-
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    // Left click
-                    this.IAOLabButton.BackColor = LeftBackColor;
-                    this.MindMapButton.BackColor = LeftForeColor;
-                    break;
-            }
+            ShowLeftPanel(searchToolkitButton, searchToolkitControl);
         }
 
         private void NewModelButton_Click(object sender, EventArgs e)
@@ -397,9 +308,9 @@ namespace C2
             string[] bsTitles = ModelInfo.LoadAllModelTitle(Global.BusinessViewPath);
             string[] mtTitles = ModelInfo.LoadAllModelTitle(Global.MarketViewPath);
             foreach (string title in bsTitles)
-                this.mindMapModelControl.AddMindMapModel(title);
+                this.mindMapControl.AddMindMapModel(title);
             foreach (string title in mtTitles)
-                this.modelMarketControl.AddModel(title);
+                this.ModelMarketControl.AddModel(title);
         }
         private void LoadDataSource()
         {
@@ -430,7 +341,7 @@ namespace C2
             {
                 if (IAOLabArr._Contains(name.Trim()))
                 {
-                    this.iaoModelControl.GenIAOButton(name.Trim());
+                    this.iaoLabControl.GenIAOButton(name.Trim());
                 }
 
             }
@@ -446,7 +357,7 @@ namespace C2
                 string desc = plugin.GetPluginDescription();
                 Image icon = plugin.GetPluginImage();
 
-                this.iaoModelControl.GenIAOButton(name, desc, icon).ShowDialogDelegate += delegate () { plugin.ShowFormDialog(); };
+                this.iaoLabControl.GenIAOButton(name, desc, icon).ShowDialogDelegate += delegate () { plugin.ShowFormDialog(); };
             }
         }
 
@@ -466,7 +377,7 @@ namespace C2
                 this.isLeftViewPanelMinimum = false;
                 this.leftToolBoxPanel.Width = 187;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-                this.mindMapModelControl.Visible = true;
+                this.mindMapControl.Visible = true;
             }
             else
             {
@@ -474,9 +385,9 @@ namespace C2
                 this.leftToolBoxPanel.Width = 10;
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
                 this.dataSourceControl.Visible = false;
-                this.mindMapModelControl.Visible = false;
-                this.modelMarketControl.Visible = false;
-                this.iaoModelControl.Visible = false;
+                this.mindMapControl.Visible = false;
+                this.ModelMarketControl.Visible = false;
+                this.iaoLabControl.Visible = false;
             }
         }
 
@@ -974,8 +885,5 @@ namespace C2
                 }
             }
         }
-       
-
-
     }
 }
