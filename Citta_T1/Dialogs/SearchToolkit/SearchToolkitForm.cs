@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace C2.Dialogs.SearchToolkit
+namespace C2.SearchToolkit
 {
     public partial class SearchToolkitForm : Form
     {

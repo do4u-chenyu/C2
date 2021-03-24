@@ -1,4 +1,4 @@
-﻿namespace C2.Dialogs.SearchToolkit
+﻿namespace C2.SearchToolkit
 {
     partial class SearchToolkitForm
     {
