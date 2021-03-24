@@ -330,10 +330,15 @@ namespace QQSpiderPlugin
 
             int count = 0;
             int maxTimes = 30;
+            object status = -1;
             while (count < maxTimes)
             {
                 Dictionary<string, object> result = login.Login();
-                object status = -1;
+                if (qrCodeForm.IsDisposed)
+                {
+                    _thread.Abort();
+                    break;
+                }
                 if (result.TryGetValue("status", out status) && (int)status == 2)
                 {
                     this.Invoke(new CloseQrForm(new CloseQrForm(delegate ()
@@ -347,7 +352,6 @@ namespace QQSpiderPlugin
                 System.Threading.Thread.Sleep(1000);
                 count += 1;
             }
-
             if (count == maxTimes)
             {
                 Console.WriteLine("扫码超时！");

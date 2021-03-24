@@ -1979,6 +1979,9 @@
     <None Include="Resources\DocxFileExp\DocxExample.dotx" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
+    <Content Include="IAOLab\WebEngine\css\DrawingManager.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="IAOLab\WebEngine\css\DrawingManager_min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -2052,6 +2055,9 @@
     </Content>
     <Content Include="IAOLab\WebEngine\JS\DistanceTool_min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IAOLab\WebEngine\JS\DrawingManager.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IAOLab\WebEngine\JS\DrawingManager_min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

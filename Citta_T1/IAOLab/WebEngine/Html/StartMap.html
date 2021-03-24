@@ -3,25 +3,25 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Hello Map</title>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4&services=true"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=dWR00FEAAWI3iCEAnqlFu7cSUg9bkQ7A"></script>
+    <script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=dWR00FEAAWI3iCEAnqlFu7cSUg9bkQ7A"></script>
     <!--加载鼠标测距工具-->
-    <type ="text/javascript" script src="../JS/DistanceTool_min.js">
-        </script>
-        <!--加载鼠标绘制工具-->
-        <script type="text/javascript" src="../JS/DrawingManager_min.js"></script>
-        <link rel="stylesheet" href="../css/DrawingManager_min.css" />
-        <!--需要用到的热力图-->
-        <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
-        <!--地图布局-->
-        <style type="text/css">
-            body, html, #container {
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-                margin: 0;
-                font-family: "微软雅黑";
-            }
-        </style>
+    <script type="text/javascript" src="../JS/DistanceTool_min.js"></script>
+    <!--加载鼠标绘制工具-->
+    <script type="text/javascript" src="../JS/DrawingManager_min.js"></script>
+    <link rel="stylesheet" href="../css/DrawingManager_min.css" />
+    <!--需要用到的热力图-->
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+    <!--地图布局-->
+    <style type="text/css">
+        body, html, #container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
 </head>
 <body>
     <div id="mouselng" style="visibility:hidden"></div>
@@ -29,159 +29,160 @@
     <!--<div style="width:1345px;height:570px;float:right;border:1px solid gray" id="container">-->
     <div id="container">
     </div>
+    <script type="text/javascript">
+        var map = new BMap.Map("container");
 
+        //------------------初始化地图--------------------
+        function initialMap(method) {
+            strs = method.split(','); //字符分割
+            map.centerAndZoom(new BMap.Point(strs[0], strs[1]), strs[2]);
+            map.addControl(new BMap.ScaleControl()); //添加比例尺控件(左下角显示的比例尺控件)
+            map.addControl(new BMap.OverviewMapControl());// 缩略图控件
+            var ctrl_nav = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE });
+            map.addControl(ctrl_nav);//添加标准地图控件(左上角的放大缩小左右拖拽控件)
+            map.enableDragging(true); //启用地图拖拽事件，默认启用(可不写)
+            map.enableScrollWheelZoom(true); //启用地图滚轮放大缩小
+            map.enableDoubleClickZoom(true); //启用鼠标双击放大，默认启用(可不写)
+            map.enableKeyboard(true); //启用键盘上下左右键移动地图
+            map.enableContinuousZoom(true);   // 开启连续缩放效果
+            map.enableInertialDragging(true); // 开启惯性拖拽效果
+            map.setMapType(BMAP_EARTH_MAP);
+        }
+
+        //------------------实现热力图所有调用函数--------------------
+
+        function relitu(method) {
+            var obj = JSON.parse(method);
+            heatmapOverlay = new BMapLib.HeatmapOverlay({ "radius": 20, "visible": true });
+            map.addOverlay(heatmapOverlay);
+            heatmapOverlay.setDataSet({ data: obj, max: 100 });
+
+        };
+
+        //判断浏览区是否支持canvas
+        function isSupportCanvas() {
+            var elem = document.createElement('canvas');
+            return !!(elem.getContext && elem.getContext('2d'));
+        }
+
+        function setGradient() {
+            /*格式如下所示:
+            {
+                0:'rgb(102, 255, 0)',
+                .5:'rgb(255, 170, 0)',
+                1:'rgb(255, 0, 0)'
+            }*/
+            var gradient = {};
+            var colors = document.querySelectorAll("input[type='color']");
+            colors = [].slice.call(colors, 0);
+            colors.forEach(function (ele) {
+                gradient[ele.getAttribute("data-key")] = ele.value;
+            });
+            heatmapOverlay.setOptions({ "gradient": gradient });
+        }
+
+        function openHeatmap() {
+            heatmapOverlay.show();
+        }
+
+        function closeHeatmap() {
+            heatmapOverlay.hide();
+        }
+
+        //实时显示地图坐标 strat
+        map.addEventListener("mousemove", GetlngAndlat);
+        function GetlngAndlat(e) {
+            if (e.point.lng != null) {
+                document.getElementById("mouselng").innerHTML = e.point.lng;
+                document.getElementById("mouselat").innerHTML = e.point.lat;
+            }
+        }
+
+        //线条样式
+        var styleOptions = {
+            strokeColor: "blue",    //边线颜色。
+            fillColor: "blue",      //填充颜色。当参数为空时，圆形将没有填充效果。
+            strokeWeight: 3,       //边线的宽度，以像素为单位。
+            strokeOpacity: 1,    //边线透明度，取值范围0 - 1。
+            fillOpacity: 0.3,      //填充的透明度，取值范围0 - 1。
+            strokeStyle: 'solid' //边线的样式，solid或dashed。
+        }
+        //实例化鼠标绘制工具
+        var drawingManager = new BMapLib.DrawingManager(map, {
+            isOpen: true, //是否开启绘制模式
+            enableDrawingTool: true, //是否显示工具栏
+            drawingToolOptions: {
+                anchor: BMAP_ANCHOR_TOP_RIGHT, //位置
+                offset: new BMap.Size(5, 5), //偏离值
+                scale: 0.8, //工具栏缩放比例
+                drawingTypes: [
+                    BMAP_DRAWING_CIRCLE,
+                    BMAP_DRAWING_RECTANGLE]
+            },
+            circleOptions: styleOptions, //圆的样式
+            rectangleOptions: styleOptions //矩形的样式
+        });
+
+        //drawingManager.enableCalculate();
+        //----------------------公用方法，用元素id获取元素的值-------------------
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        //------------------画矩形，让WINFORM调用---------------
+        function drawRec() {
+            drawingManager.setDrawingMode(BMAP_DRAWING_RECTANGLE);
+        }
+
+        //------------------画圆，让WINFORM调用----------------
+        function drawCircle() {
+            drawingManager.setDrawingMode(BMAP_DRAWING_CIRCLE);
+        }
+
+        //------------------清除所有已画图形，让WINFORM调用--------------------
+        function clearAll() {
+            //for (var i = 0; i < overlays.length; i++) {
+            //    map.removeOverlay(overlays[i]);
+            //}
+            //overlays.length = 0
+            map.clearOverlays();
+        }
+
+        //------------------本地数据画标注，让WINFORM调用--------------------
+        function markerPoints(w){
+            var obj = JSON.parse(w);
+            for (j = 0, len = obj.length; j < len; j++) {
+                var marker = new BMap.Marker(obj[j]);  // 创建标注
+                map.addOverlay(marker);
+            }
+        }
+
+        //在地图上画轨迹 strat
+        function drawOrit(w) {
+            var obj = JSON.parse(w);
+            var trackPoint = [];
+            for (var i = 0, j = obj.length; i < j; i++) {
+                trackPoint.push(new BMap.Point(obj[i].lng, obj[i].lat));
+            }
+            var polyline = new BMap.Polyline(trackPoint, { strokeColor: "blue", strokeWeight: 6, strokeOpacity: 0.5 });  //定义折线
+            map.addOverlay(polyline);
+        }
+
+        function temp() {
+            alert("shayebushi");
+        }
+
+        //在地图上画多边形 strat
+        function drawPolygon(w) {
+            var obj = JSON.parse(w);
+            var trackPoint = [];
+            for (var i = 0, j = obj.length; i < j; i++) {
+                trackPoint.push(new BMap.Point(obj[i].lng, obj[i].lat));
+            }
+            var polyline = new BMap.Polygon(trackPoint, { strokeColor: "blue", strokeWeight: 6, strokeOpacity: 0.5 });  //定义折线
+            map.addOverlay(polyline);
+        };
+    </script>
 </body>
 </html>
-<script type="text/javascript">
-    var map = new BMap.Map("container");
 
-    //------------------初始化地图--------------------
-    function initialMap(method) {
-        strs = method.split(','); //字符分割
-        map.centerAndZoom(new BMap.Point(strs[0], strs[1]), strs[2]);
-        map.addControl(new BMap.ScaleControl()); //添加比例尺控件(左下角显示的比例尺控件)
-        map.addControl(new BMap.OverviewMapControl());// 缩略图控件
-        var ctrl_nav = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE });
-        map.addControl(ctrl_nav);//添加标准地图控件(左上角的放大缩小左右拖拽控件)
-        map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
-        map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
-        map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
-        map.enableKeyboard(); //启用键盘上下左右键移动地图
-        map.enableContinuousZoom();   // 开启连续缩放效果
-        map.enableInertialDragging(); // 开启惯性拖拽效果
-    }
-
-    //------------------实现热力图所有调用函数--------------------
-
-    function relitu(method) {
-        var obj = JSON.parse(method);
-        heatmapOverlay = new BMapLib.HeatmapOverlay({ "radius": 20, "visible": true });
-        map.addOverlay(heatmapOverlay);
-        heatmapOverlay.setDataSet({ data: obj, max: 100 });
-
-    };
-
-    //判断浏览区是否支持canvas
-    function isSupportCanvas() {
-        var elem = document.createElement('canvas');
-        return !!(elem.getContext && elem.getContext('2d'));
-    }
-
-    function setGradient() {
-        /*格式如下所示:
-        {
-            0:'rgb(102, 255, 0)',
-            .5:'rgb(255, 170, 0)',
-            1:'rgb(255, 0, 0)'
-        }*/
-        var gradient = {};
-        var colors = document.querySelectorAll("input[type='color']");
-        colors = [].slice.call(colors, 0);
-        colors.forEach(function (ele) {
-            gradient[ele.getAttribute("data-key")] = ele.value;
-        });
-        heatmapOverlay.setOptions({ "gradient": gradient });
-    }
-
-    function openHeatmap() {
-        heatmapOverlay.show();
-    }
-
-    function closeHeatmap() {
-        heatmapOverlay.hide();
-    }
-
-    //实时显示地图坐标 strat
-    map.addEventListener("mousemove", GetlngAndlat);
-    function GetlngAndlat(e) {
-        if (e.point.lng != null) {
-            document.getElementById("mouselng").innerHTML = e.point.lng;
-            document.getElementById("mouselat").innerHTML = e.point.lat;
-        }
-    }
-
-    //线条样式
-    var styleOptions = {
-        strokeColor: "blue",    //边线颜色。
-        fillColor: "blue",      //填充颜色。当参数为空时，圆形将没有填充效果。
-        strokeWeight: 3,       //边线的宽度，以像素为单位。
-        strokeOpacity: 1,    //边线透明度，取值范围0 - 1。
-        fillOpacity: 0.3,      //填充的透明度，取值范围0 - 1。
-        strokeStyle: 'solid' //边线的样式，solid或dashed。
-    }
-    //实例化鼠标绘制工具
-    var drawingManager = new BMapLib.DrawingManager(map, {
-        isOpen: true, //是否开启绘制模式
-        enableDrawingTool: true, //是否显示工具栏
-        drawingToolOptions: {
-            anchor: BMAP_ANCHOR_TOP_RIGHT, //位置
-            offset: new BMap.Size(5, 5), //偏离值
-            scale: 0.8, //工具栏缩放比例
-            drawingTypes: [
-                BMAP_DRAWING_CIRCLE,
-                BMAP_DRAWING_RECTANGLE]
-        },
-        circleOptions: styleOptions, //圆的样式
-        rectangleOptions: styleOptions //矩形的样式
-    });
-
-    //drawingManager.enableCalculate();
-    //----------------------公用方法，用元素id获取元素的值-------------------
-    function $(id) {
-        return document.getElementById(id);
-    }
-
-    //------------------画矩形，让WINFORM调用---------------
-    function drawRec() {
-        drawingManager.setDrawingMode(BMAP_DRAWING_RECTANGLE);
-    }
-
-    //------------------画圆，让WINFORM调用----------------
-    function drawCircle() {
-        drawingManager.setDrawingMode(BMAP_DRAWING_CIRCLE);
-    }
-
-    //------------------清除所有已画图形，让WINFORM调用--------------------
-    function clearAll() {
-        //for (var i = 0; i < overlays.length; i++) {
-        //    map.removeOverlay(overlays[i]);
-        //}
-        //overlays.length = 0
-        map.clearOverlays();
-    }
-
-    //------------------本地数据画标注，让WINFORM调用--------------------
-    function markerPoints(w){
-        var obj = JSON.parse(w);
-        for (j = 0, len = obj.length; j < len; j++) {
-            var marker = new BMap.Marker(obj[j]);  // 创建标注
-            map.addOverlay(marker);
-        }
-    }
-
-    //在地图上画轨迹 strat
-    function drawOrit(w) {
-        var obj = JSON.parse(w);
-        var trackPoint = [];
-        for (var i = 0, j = obj.length; i < j; i++) {
-            trackPoint.push(new BMap.Point(obj[i].lng, obj[i].lat));
-        }
-        var polyline = new BMap.Polyline(trackPoint, { strokeColor: "blue", strokeWeight: 6, strokeOpacity: 0.5 });  //定义折线
-        map.addOverlay(polyline);
-    }
-
-    function temp() {
-        alert("shayebushi");
-    }
-
-    //在地图上画多边形 strat
-    function drawPolygon(w) {
-        var obj = JSON.parse(w);
-        var trackPoint = [];
-        for (var i = 0, j = obj.length; i < j; i++) {
-            trackPoint.push(new BMap.Point(obj[i].lng, obj[i].lat));
-        }
-        var polyline = new BMap.Polygon(trackPoint, { strokeColor: "blue", strokeWeight: 6, strokeOpacity: 0.5 });  //定义折线
-        map.addOverlay(polyline);
-    };
-</script>

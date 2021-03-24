@@ -202,7 +202,7 @@ namespace QQSpiderPlugin
         public static bool IsValidQQSession(Session session)
         {
             QQCrawler crawler = new QQCrawler(session);
-            return !String.IsNullOrEmpty(crawler.QueryGroup("826028580"));
+            return !String.Equals(crawler.QueryGroup("826028580"), new GroupInfo("826028580").ToString());
         }
     }
     public class ActInfo
