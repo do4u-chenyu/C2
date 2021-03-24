@@ -31,6 +31,7 @@ namespace C2.Dialogs
         private UpdateProgressBar progressBar;
         private readonly PluginsDownloader downloader;
         private string newSoftwareVersion;
+        private string packageLocation;
 
 
         public ConfigForm()
@@ -523,6 +524,7 @@ namespace C2.Dialogs
         {
             if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
                 return;
+           
             Task.Run(() => CheckUpdate());
         }
         private void CheckUpdate()
@@ -543,6 +545,7 @@ namespace C2.Dialogs
                      this.sizeLable.Visible = false;
                      this.sizeValue.Visible = false;
                      this.checking.Visible = false;
+                     this.button3.Enabled = false;
                      this.ResumeLayout(false);
                  }));
             }
@@ -599,18 +602,19 @@ namespace C2.Dialogs
         }
         private void UpdateButton_Click(object sender, EventArgs e)
         {
+            // 正在下载,不能点击更新
             if (this.progressBar.Visible)
-                return;
+                return;        
             try
             {                 
                 string softwareName = newSoftwareVersion.Replace(".info", "");
                 string packageDir = Path.Combine(Global.SoftwareUrl, @"software/", softwareName);
-                string savePath = Path.Combine(Global.SoftwareSavePath, softwareName);
-                if (File.Exists(savePath))
-                    HelpUtil.ShowMessageBox("下载成功，请重启更新软件");
+                packageLocation = Path.Combine(Global.SoftwareSavePath, softwareName);
+                if (File.Exists(packageLocation))
+                    HelpUtil.ShowMessageBox("下载成功，请重启更新软件====");
                 else
                 {
-                    this.downloader.SoftwareDownload(packageDir, savePath);
+                    this.downloader.SoftwareDownload(packageDir, packageLocation);
                     this.progressBar.Show();
                 }
                                                      
@@ -644,6 +648,7 @@ namespace C2.Dialogs
             this.progressBar.MaximumValue = (int)e.TotalBytesToReceive;//下载文件的总大小
             this.progressBar.CurrentValue = (int)e.BytesReceived;//已经下载的大小
             this.progressBar.ProgressPercentage = e.ProgressPercentage + "%";//更新界面展示
+            this.progressBar.ProgressValue = e.ProgressPercentage;
 
         }
 
@@ -651,10 +656,17 @@ namespace C2.Dialogs
         private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
 
-            if (e.UserState == null)
+            if (e.UserState != null)
+                return;
+            if (this.progressBar.ProgressValue == 100)
             {
                 this.progressBar.Status = "下载完成,请重启软件实现更新";
+                return;
             }
+            // 下载失败，删除文件
+            this.progressBar.Status = "下载失败，请检查网络重新下载";
+            if (File.Exists(packageLocation))
+                File.Delete(packageLocation);
         }
 
         public void WriteFile()
@@ -685,7 +697,7 @@ namespace C2.Dialogs
             htmltext.Replace("http://api.map.baidu.com/api?v=1.4&services=true", this.baiduVerAPITB.Text);
             htmltext.Replace("http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js", this.baiduHeatTB.Text);
 
-            //----------生成htm文件------------------――
+            //----------生成htm文件------------------
             try
             {
                 using (StreamWriter sw = new StreamWriter(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html", false, System.Text.Encoding.GetEncoding("GB2312"))) //保存地址
@@ -705,5 +717,7 @@ namespace C2.Dialogs
         {
             Close();
         }
+
+
     }
 }

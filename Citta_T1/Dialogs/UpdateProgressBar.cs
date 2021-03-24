@@ -23,11 +23,12 @@ namespace C2.Dialogs
         public int MaximumValue { get => this.proBarDownLoad.Maximum; set => this.proBarDownLoad.Maximum = value; }
         public int CurrentValue { get => this.proBarDownLoad.Value; set => this.proBarDownLoad.Value = value; }
         public string ProgressPercentage { get => this.speedValue.Text; set => this.speedValue.Text = value; }
+        public int ProgressValue { get; set; }
 
         private void UpdateProgressBar_FormClosing(object sender, FormClosingEventArgs e)
         {
             // 会有没下载完出现下载完成的bug，防止用户无法关闭弹窗
-            if (Status.Equals("下载完成,请重启软件实现更新"))
+            if (Status.Contains("下载完成")|| Status.Contains("下载失败"))
                 return;
 
             if (!ProgressPercentage.Equals("100%"))
