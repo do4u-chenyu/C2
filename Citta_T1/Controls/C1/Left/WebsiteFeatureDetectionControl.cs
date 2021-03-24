@@ -72,6 +72,13 @@ namespace C2.Controls.C1.Left
             }   
         }
 
+        public List<string> GetTaskNames()
+        {
+            List<string> taskNames = new List<string>();
+            FindControls<WebsiteFeatureDetectionButton>().ForEach(bt => taskNames.Add(bt.TaskInfo.TaskName));
+            return taskNames;
+        }
+
         #region 持久化保存/加载
         public void SaveWFDTasksToXml()
         {
@@ -153,7 +160,7 @@ namespace C2.Controls.C1.Left
             {
                 InitButtonMenu();
                 InitButtonType();
-
+                TaskInfo = new WebsiteFeatureDetectionTaskInfo();
             }
             public WebsiteFeatureDetectionButton(WebsiteFeatureDetectionTaskInfo taskInfo) : this()
             {
@@ -240,6 +247,11 @@ namespace C2.Controls.C1.Left
 
             public WebsiteFeatureDetectionTaskInfo()
             {
+                TaskName = string.Empty;
+                TaskId = string.Empty;
+                DatasourceFilePath = string.Empty;
+                ResultFilePath = string.Empty;
+                Status = WFDTaskStatus.Null;
             }
 
             public WebsiteFeatureDetectionTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, WFDTaskStatus status)
