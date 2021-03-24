@@ -149,6 +149,17 @@ namespace C2.Utils
             return true;
         }
 
+        public static void DeleteFile(string filePath)
+        {
+            try
+            {
+                File.Delete(filePath);
+            }
+            catch
+            {
+            }
+        }
+
         public static void DeleteDirectory(string directoryPath)
         {
             try

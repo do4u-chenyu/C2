@@ -1,5 +1,6 @@
 ﻿using C2.Utils;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -84,5 +85,15 @@ namespace C2.Controls.C1.Left
             g.DrawLine(p, 0, 30, 200, 30);//x1,y1,x2,y2
         }
 
+        public List<T> FindControls<T>() where T : Control
+        {
+            List<T> controls = new List<T>();
+            foreach(Control ct in this.manageButtonPanel.Controls)
+            {
+                if (ct is T)
+                    controls.Add((T)ct);
+            }
+            return controls;
+        }
     }
 }

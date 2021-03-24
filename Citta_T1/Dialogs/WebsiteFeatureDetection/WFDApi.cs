@@ -22,7 +22,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             //string respStatus = "success";
             //if (respStatus == "success")
             //    token = "11111";
-            return token;
+            return "111";
         }
 
         /// <summary>
@@ -31,11 +31,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         /// <param name="urls"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public static string ClassifierUrls(string urls, string token)
+        public static string ClassifierUrls(List<string> urls, string token)
         {
             string id = string.Empty;
 
-            return id;
+            return "ce38f-ac939-efb2e";
         }
 
         /// <summary>

@@ -286,6 +286,7 @@ namespace C2
             LoadDocuments();
             LoadDataSource();
             LoadIAOLaboratory();
+            LoadWFDTasks();
         }
 
         private void LoadHotModel()
@@ -330,6 +331,11 @@ namespace C2
             LoadInnerPlugins();
             // 加载DLL动态插件
             LoadDllPlugins();
+        }
+        private void LoadWFDTasks()
+        {
+            string xmlDirectory = Path.Combine(Global.WorkspaceDirectory, this.UserName);
+            this.websiteFeatureDetectionControl.LoadXmlToWFDTasks(xmlDirectory);
         }
 
         private void LoadInnerPlugins()
