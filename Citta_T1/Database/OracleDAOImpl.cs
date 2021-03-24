@@ -93,6 +93,7 @@ namespace C2.Database
             {
                 if (rdr.FieldCount == 0)
                     return String.Empty;
+                //这里不关闭conn是因为conn在外层关闭
                 if (header)
                 {
                     for (int i = 0; i < rdr.FieldCount - 1; i++)
@@ -185,6 +186,7 @@ namespace C2.Database
             catch (Exception ex)
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
+                // 不抛异常是因为外层不关注他的异常信息，只关注是否执行成功，该方法返回一个bool值
                 returnCode = false;
             }
             finally
