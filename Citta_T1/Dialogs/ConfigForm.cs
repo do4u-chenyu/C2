@@ -607,7 +607,7 @@ namespace C2.Dialogs
                 return;        
             try
             {                 
-                string softwareName = newSoftwareVersion.Replace(".info", "");
+                string softwareName = newSoftwareVersion.Replace(".info", String.Empty);
                 string packageDir = Path.Combine(Global.SoftwareUrl, @"software/", softwareName);
                 packageLocation = Path.Combine(Global.SoftwareSavePath, softwareName);
                 if (File.Exists(packageLocation))

@@ -77,7 +77,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SoftwareUpdate.cs" />
-    <Compile Include="Utils\FileUtil.cs" />
     <Compile Include="Utils\XmlUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
   </ItemGroup>
