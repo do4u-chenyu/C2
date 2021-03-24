@@ -40,18 +40,19 @@
             this.passwordTB = new System.Windows.Forms.TextBox();
             this.usernameTB = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.taskNameTB = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.modelComboBox = new System.Windows.Forms.ComboBox();
             this.downloadButton = new System.Windows.Forms.Button();
-            this.linuxWorkspaceTB = new System.Windows.Forms.TextBox();
+            this.remoteWorkspaceTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panelCenter = new System.Windows.Forms.Panel();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.modelDescLabel = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelCenter.SuspendLayout();
@@ -159,12 +160,13 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.modelDescLabel);
+            this.groupBox1.Controls.Add(this.taskNameTB);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.modelComboBox);
             this.groupBox1.Controls.Add(this.downloadButton);
-            this.groupBox1.Controls.Add(this.linuxWorkspaceTB);
+            this.groupBox1.Controls.Add(this.remoteWorkspaceTB);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
@@ -175,14 +177,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模型配置";
             // 
-            // textBox1
+            // taskNameTB
             // 
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9.75F);
-            this.textBox1.Location = new System.Drawing.Point(99, 36);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 25);
-            this.textBox1.TabIndex = 44;
-            this.textBox1.Text = "全文涉赌模型";
+            this.taskNameTB.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.taskNameTB.Location = new System.Drawing.Point(99, 36);
+            this.taskNameTB.Name = "taskNameTB";
+            this.taskNameTB.Size = new System.Drawing.Size(180, 25);
+            this.taskNameTB.TabIndex = 44;
+            this.taskNameTB.Text = "全文涉赌模型";
             // 
             // label5
             // 
@@ -230,16 +232,16 @@
             this.downloadButton.UseVisualStyleBackColor = true;
             this.downloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
-            // linuxWorkspaceTB
+            // remoteWorkspaceTB
             // 
-            this.linuxWorkspaceTB.BackColor = System.Drawing.SystemColors.Window;
-            this.linuxWorkspaceTB.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.linuxWorkspaceTB.Location = new System.Drawing.Point(99, 128);
-            this.linuxWorkspaceTB.Name = "linuxWorkspaceTB";
-            this.linuxWorkspaceTB.Size = new System.Drawing.Size(408, 25);
-            this.linuxWorkspaceTB.TabIndex = 36;
-            this.linuxWorkspaceTB.Text = "/tmp/iao/search/gamble";
-            this.linuxWorkspaceTB.Enter += new System.EventHandler(this.LinuxWorkspaceTB_Enter);
+            this.remoteWorkspaceTB.BackColor = System.Drawing.SystemColors.Window;
+            this.remoteWorkspaceTB.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.remoteWorkspaceTB.Location = new System.Drawing.Point(99, 128);
+            this.remoteWorkspaceTB.Name = "remoteWorkspaceTB";
+            this.remoteWorkspaceTB.Size = new System.Drawing.Size(408, 25);
+            this.remoteWorkspaceTB.TabIndex = 36;
+            this.remoteWorkspaceTB.Text = "/tmp/iao/search/gamble";
+            this.remoteWorkspaceTB.Enter += new System.EventHandler(this.LinuxWorkspaceTB_Enter);
             // 
             // label4
             // 
@@ -303,6 +305,16 @@
             this.panelTop.Size = new System.Drawing.Size(609, 169);
             this.panelTop.TabIndex = 2;
             // 
+            // modelDescLabel
+            // 
+            this.modelDescLabel.AutoSize = true;
+            this.modelDescLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.modelDescLabel.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.modelDescLabel.Location = new System.Drawing.Point(292, 84);
+            this.modelDescLabel.Name = "modelDescLabel";
+            this.modelDescLabel.Size = new System.Drawing.Size(0, 19);
+            this.modelDescLabel.TabIndex = 45;
+            // 
             // SearchToolkitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -340,7 +352,7 @@
         private System.Windows.Forms.TextBox usernameTB;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button downloadButton;
-        private System.Windows.Forms.TextBox linuxWorkspaceTB;
+        private System.Windows.Forms.TextBox remoteWorkspaceTB;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panelCenter;
         private System.Windows.Forms.Panel panelBottom;
@@ -350,7 +362,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox modelComboBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox taskNameTB;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label modelDescLabel;
     }
 }
