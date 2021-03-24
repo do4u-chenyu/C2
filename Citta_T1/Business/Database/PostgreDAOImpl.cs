@@ -104,11 +104,11 @@ namespace C2.Database
             return DbUtil.TrimEndN(sb).ToString();
         }
 
-        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = int.MaxValue)
+        public override bool ExecuteSQL(string sqlText, string outputPath, int maxReturnNum = int.MaxValue)
         {
             bool returnCode = true;
             int totalReturnNum = 0;
-            StreamWriter sw = new StreamWriter(outPutPath, false);
+            StreamWriter sw = new StreamWriter(outputPath, false);
             //TODO
             NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
             try
@@ -130,6 +130,7 @@ namespace C2.Database
                         for (int i = 0; i < sdr.FieldCount; i++)
                             sb.Append(sdr[i]).Append(OpUtil.TabSeparator);
                         sw.WriteLine(sb.TrimEndT().ToString());
+                        sw.Flush();
                     }
                     try
                     {
