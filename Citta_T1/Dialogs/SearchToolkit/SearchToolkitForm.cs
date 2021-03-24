@@ -40,5 +40,10 @@ namespace C2.SearchToolkit
         {
             linuxWorkspaceTB.ForeColor = Color.Black;
         }
+
+        private void ModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

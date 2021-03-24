@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchToolkitForm));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.searchAgentIPTB = new System.Windows.Forms.TextBox();
@@ -41,27 +40,28 @@
             this.passwordTB = new System.Windows.Forms.TextBox();
             this.usernameTB = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.modelComboBox = new System.Windows.Forms.ComboBox();
             this.downloadButton = new System.Windows.Forms.Button();
             this.linuxWorkspaceTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelCenter = new System.Windows.Forms.Panel();
+            this.panelBottom = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelTop = new System.Windows.Forms.Panel();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.panelCenter.SuspendLayout();
+            this.panelBottom.SuspendLayout();
+            this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.Window;
-            this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.searchAgentIPTB);
@@ -75,38 +75,26 @@
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(609, 198);
+            this.groupBox2.Size = new System.Drawing.Size(609, 165);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "堡垒机配置";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.Window;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label3.Location = new System.Drawing.Point(252, 72);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 19);
-            this.label3.TabIndex = 44;
-            this.label3.Text = "对应的登陆密码";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label2.Location = new System.Drawing.Point(252, 27);
+            this.label2.Location = new System.Drawing.Point(428, 37);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(139, 19);
+            this.label2.Size = new System.Drawing.Size(178, 19);
             this.label2.TabIndex = 43;
-            this.label2.Text = "已申请的堡垒机用户名";
+            this.label2.Text = "已申请的堡垒机用户名和密码";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 160);
+            this.label14.Location = new System.Drawing.Point(3, 120);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(87, 19);
             this.label14.TabIndex = 7;
@@ -114,7 +102,7 @@
             // 
             // searchAgentIPTB
             // 
-            this.searchAgentIPTB.Location = new System.Drawing.Point(105, 159);
+            this.searchAgentIPTB.Location = new System.Drawing.Point(100, 116);
             this.searchAgentIPTB.Name = "searchAgentIPTB";
             this.searchAgentIPTB.Size = new System.Drawing.Size(136, 25);
             this.searchAgentIPTB.TabIndex = 6;
@@ -122,7 +110,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(29, 115);
+            this.label15.Location = new System.Drawing.Point(29, 77);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(61, 19);
             this.label15.TabIndex = 5;
@@ -131,7 +119,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(55, 70);
+            this.label16.Location = new System.Drawing.Point(244, 35);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(35, 19);
             this.label16.TabIndex = 4;
@@ -140,7 +128,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(42, 25);
+            this.label17.Location = new System.Drawing.Point(42, 35);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(48, 19);
             this.label17.TabIndex = 3;
@@ -148,14 +136,14 @@
             // 
             // bastionIPTB
             // 
-            this.bastionIPTB.Location = new System.Drawing.Point(105, 114);
+            this.bastionIPTB.Location = new System.Drawing.Point(100, 75);
             this.bastionIPTB.Name = "bastionIPTB";
             this.bastionIPTB.Size = new System.Drawing.Size(136, 25);
             this.bastionIPTB.TabIndex = 2;
             // 
             // passwordTB
             // 
-            this.passwordTB.Location = new System.Drawing.Point(105, 69);
+            this.passwordTB.Location = new System.Drawing.Point(285, 34);
             this.passwordTB.Name = "passwordTB";
             this.passwordTB.PasswordChar = '*';
             this.passwordTB.Size = new System.Drawing.Size(136, 25);
@@ -163,7 +151,7 @@
             // 
             // usernameTB
             // 
-            this.usernameTB.Location = new System.Drawing.Point(105, 24);
+            this.usernameTB.Location = new System.Drawing.Point(100, 34);
             this.usernameTB.Name = "usernameTB";
             this.usernameTB.Size = new System.Drawing.Size(136, 25);
             this.usernameTB.TabIndex = 0;
@@ -171,6 +159,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.modelComboBox);
             this.groupBox1.Controls.Add(this.downloadButton);
@@ -180,15 +170,33 @@
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(609, 136);
+            this.groupBox1.Size = new System.Drawing.Size(609, 169);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模型配置";
             // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.textBox1.Location = new System.Drawing.Point(99, 36);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(180, 25);
+            this.textBox1.TabIndex = 44;
+            this.textBox1.Text = "全文涉赌模型";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(29, 39);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(61, 19);
+            this.label5.TabIndex = 43;
+            this.label5.Text = "任务名称";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 34);
+            this.label1.Location = new System.Drawing.Point(29, 84);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 19);
             this.label1.TabIndex = 42;
@@ -199,21 +207,22 @@
             this.modelComboBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.modelComboBox.FormattingEnabled = true;
             this.modelComboBox.Items.AddRange(new object[] {
-            "涉赌模型",
-            "涉枪模型",
-            "涉黄模型",
-            "飞机场模型"});
-            this.modelComboBox.Location = new System.Drawing.Point(105, 31);
+            "全文涉赌模型",
+            "全文涉枪模型",
+            "全文涉黄模型",
+            "全文飞机场模型"});
+            this.modelComboBox.Location = new System.Drawing.Point(99, 81);
             this.modelComboBox.Name = "modelComboBox";
-            this.modelComboBox.Size = new System.Drawing.Size(136, 27);
+            this.modelComboBox.Size = new System.Drawing.Size(180, 27);
             this.modelComboBox.TabIndex = 41;
-            this.modelComboBox.Text = "涉赌模型";
+            this.modelComboBox.Text = "全文涉赌模型";
+            this.modelComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
             // downloadButton
             // 
             this.downloadButton.Enabled = false;
             this.downloadButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.downloadButton.Location = new System.Drawing.Point(533, 84);
+            this.downloadButton.Location = new System.Drawing.Point(527, 128);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(68, 27);
             this.downloadButton.TabIndex = 37;
@@ -225,7 +234,7 @@
             // 
             this.linuxWorkspaceTB.BackColor = System.Drawing.SystemColors.Window;
             this.linuxWorkspaceTB.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.linuxWorkspaceTB.Location = new System.Drawing.Point(105, 84);
+            this.linuxWorkspaceTB.Location = new System.Drawing.Point(99, 128);
             this.linuxWorkspaceTB.Name = "linuxWorkspaceTB";
             this.linuxWorkspaceTB.Size = new System.Drawing.Size(408, 25);
             this.linuxWorkspaceTB.TabIndex = 36;
@@ -235,31 +244,31 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(29, 87);
+            this.label4.Location = new System.Drawing.Point(29, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 19);
             this.label4.TabIndex = 35;
             this.label4.Text = "远程目录";
             // 
-            // panel1
+            // panelCenter
             // 
-            this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(609, 198);
-            this.panel1.TabIndex = 3;
+            this.panelCenter.Controls.Add(this.groupBox2);
+            this.panelCenter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelCenter.Location = new System.Drawing.Point(0, 169);
+            this.panelCenter.Name = "panelCenter";
+            this.panelCenter.Size = new System.Drawing.Size(609, 165);
+            this.panelCenter.TabIndex = 3;
             // 
-            // panel2
+            // panelBottom
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.panel2.Controls.Add(this.cancelButton);
-            this.panel2.Controls.Add(this.confirmButton);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 334);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(609, 50);
-            this.panel2.TabIndex = 4;
+            this.panelBottom.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.panelBottom.Controls.Add(this.cancelButton);
+            this.panelBottom.Controls.Add(this.confirmButton);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 334);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(609, 50);
+            this.panelBottom.TabIndex = 4;
             // 
             // cancelButton
             // 
@@ -285,23 +294,23 @@
             this.confirmButton.UseVisualStyleBackColor = false;
             this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
-            // panel3
+            // panelTop
             // 
-            this.panel3.Controls.Add(this.groupBox1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 198);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(609, 136);
-            this.panel3.TabIndex = 5;
+            this.panelTop.Controls.Add(this.groupBox1);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(609, 169);
+            this.panelTop.TabIndex = 2;
             // 
             // SearchToolkitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 384);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelTop);
+            this.Controls.Add(this.panelCenter);
+            this.Controls.Add(this.panelBottom);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -311,9 +320,9 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.panelCenter.ResumeLayout(false);
+            this.panelBottom.ResumeLayout(false);
+            this.panelTop.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -333,14 +342,15 @@
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.TextBox linuxWorkspaceTB;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panelCenter;
+        private System.Windows.Forms.Panel panelBottom;
+        private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox modelComboBox;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label5;
     }
 }
