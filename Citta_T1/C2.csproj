@@ -152,6 +152,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
+    <Compile Include="Business\IAOLab\ApkTool\ApkToolStart.cs" />
+    <Compile Include="Business\IAOLab\BankTool\BankTool.cs" />
+    <Compile Include="Business\IAOLab\BaseStation\BaseStation.cs" />
+    <Compile Include="Business\IAOLab\Plugins\IPlugin.cs" />
+    <Compile Include="Business\IAOLab\Plugins\PluginsDownloader.cs" />
+    <Compile Include="Business\IAOLab\Plugins\PluginsManager.cs" />
+    <Compile Include="Business\IAOLab\Transform\GPSTransform.cs" />
+    <Compile Include="Business\IAOLab\Transform\TimeAndIPTransform.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Dialogs\SelectBossDialog.Designer.cs">
+      <DependentUpon>SelectBossDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\IAOLab\WifiMac\WifiMac.cs" />
     <Compile Include="Business\Model\ExportModel.cs" />
     <Compile Include="Business\Model\ImportModel.cs" />
     <Compile Include="Business\Model\ModelInfo.cs" />
@@ -173,6 +185,7 @@
     <Compile Include="Business\Option\PythonInterpreterInfo.cs" />
     <Compile Include="Business\Option\PythonOPConfig.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
+    <Compile Include="Business\SearchToolKit\TaskInfo.cs" />
     <Compile Include="ChartControls\MindMap\Commands\AddLinkCommand.cs" />
     <Compile Include="ChartControls\MindMap\Commands\ChangeLinkCommand.cs" />
     <Compile Include="ChartControls\MindMap\DataTreeView.cs">
@@ -267,12 +280,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Core\Exports\XmindEngine.cs" />
-    <Compile Include="Database\BaseDAOImpl.cs" />
-    <Compile Include="Database\DAOException.cs" />
-    <Compile Include="Database\DAOFactory.cs" />
-    <Compile Include="Database\HiveDAOImpl.cs" />
-    <Compile Include="Database\OracleDAOImpl.cs" />
-    <Compile Include="Database\PostgreDAOImpl.cs" />
+    <Compile Include="Business\Database\BaseDAOImpl.cs" />
+    <Compile Include="Business\Database\DAOException.cs" />
+    <Compile Include="Business\Database\DAOFactory.cs" />
+    <Compile Include="Business\Database\HiveDAOImpl.cs" />
+    <Compile Include="Business\Database\OracleDAOImpl.cs" />
+    <Compile Include="Business\Database\PostgreDAOImpl.cs" />
     <Compile Include="Dialogs\UpdateProgressBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,133 +311,130 @@
     <Compile Include="Dialogs\WebsiteFeatureDetection\WFDTaskResult.Designer.cs">
       <DependentUpon>WFDTaskResult.cs</DependentUpon>
     </Compile>
-    <Compile Include="IAOLab\Plugins\DLLPlugin.cs" />
-    <Compile Include="Dialogs\\SearchToolkit\SearchToolkitForm.cs">
+    <Compile Include="Business\IAOLab\Plugins\DLLPlugin.cs" />
+    <Compile Include="Dialogs\SearchToolkit\SearchToolkitForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\\SearchToolkit\SearchToolkitForm.Designer.cs">
+    <Compile Include="Dialogs\SearchToolkit\SearchToolkitForm.Designer.cs">
       <DependentUpon>SearchToolkitForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\SimpleBar.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Charts\Bar\StackBar.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Charts\BaseCharts.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\BasicAreachart.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\BasicLineChart.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Charts\Line\SmoothedLineChart.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Charts\Map\BasicMap.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Charts\Pie\BasicPie.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Charts\Radar\BasicRadar.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Charts\Scatter\BasicScatter.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Common.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Echarts.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\EchartsInitialize.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\GenBossHtml.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\JSBeautify.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseEOption.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\AxisPointer.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\fontFamily.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\fontStyle.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\fontWeight.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\LegendAlign.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\LegendType.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\Orient.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\Position.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\target.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\TextAlign.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\TextVerticalAlign.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\BorderType.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\Feature.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\IconStyle.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\ToolboxEmphasis.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\ToolboxOrient.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\TriggerOn.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\BaseOption\xAxisType.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\CompleteOption.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\DataSetSource.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\Grid.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\Legend.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\MapLabel.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\Polar.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\Series.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\BarBaseOption\BarData.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\ISeries.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\AreaStyle.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\AreaStyleOrigin.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\CoordinateSystem.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineData.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineSampling.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineStyle.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineStyleType.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkArea.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkAreaData.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkLine.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkLineData.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkPoint.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkPointData.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\PieBaseOption\LabelLine.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\PieBaseOption\PieData.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\RadarBaseOption\RadarData.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\ScatterBaseOption\ScatterData.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBar.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Emphasis.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Encode.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\ItemStyle.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Label.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Position.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesLine.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesMap.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPie.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesRadar.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SeriesType\SeriesScatter.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\SubtextStyle.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\TextStyle.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\Title.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\ToolBox.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\Tooltip.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\VisualMap.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\XAxis.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Option\YAxis.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\RemarkAttribute.cs" />
-    <Compile Include="IAOLab\WebEngine\Boss\Theme.cs" />
-    <Compile Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.cs">
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Bar\SimpleBar.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Bar\StackBar.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\BaseCharts.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Line\BasicAreachart.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Line\BasicLineChart.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Line\SmoothedLineChart.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Map\BasicMap.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Pie\BasicPie.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Radar\BasicRadar.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Scatter\BasicScatter.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Common.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Echarts.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\EchartsInitialize.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\GenBossHtml.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\JSBeautify.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseEOption.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\AxisPointer.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\fontFamily.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\fontStyle.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\fontWeight.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\LegendAlign.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\LegendType.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\Orient.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\Position.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\target.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\TextAlign.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\TextVerticalAlign.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\BorderType.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\Feature.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\IconStyle.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\ToolboxEmphasis.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\ToolBoxBaseOption\ToolboxOrient.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\TriggerOn.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\xAxisType.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\CompleteOption.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\DataSetSource.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\Grid.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\Legend.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\MapLabel.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\Polar.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\Series.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\BarBaseOption\BarData.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\ISeries.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\AreaStyle.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\AreaStyleOrigin.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\CoordinateSystem.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineData.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineSampling.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineStyle.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\LineStyleType.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkArea.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkAreaData.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkLine.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkLineData.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkPoint.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\LineBaseOption\MarkPointData.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\PieBaseOption\LabelLine.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\PieBaseOption\PieData.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\RadarBaseOption\RadarData.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\ScatterBaseOption\ScatterData.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBar.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Emphasis.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Encode.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\ItemStyle.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Label.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Position.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesLine.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesMap.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPie.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesRadar.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesScatter.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SubtextStyle.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\TextStyle.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\Title.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\ToolBox.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\Tooltip.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\VisualMap.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\XAxis.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\YAxis.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\RemarkAttribute.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Theme.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Dialogs\SelectBossDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.Designer.cs">
-      <DependentUpon>SelectBossDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="IAOLab\WebEngine\WebBrowserConfig.cs" />
-    <Compile Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.cs">
+    <Compile Include="Business\IAOLab\WebEngine\WebBrowserConfig.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Dialogs\SelectMapDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.Designer.cs">
+    <Compile Include="Business\IAOLab\WebEngine\Dialogs\SelectMapDialog.Designer.cs">
       <DependentUpon>SelectMapDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="IAOLab\WebEngine\Dialogs\WebBrowserDialog.cs">
+    <Compile Include="Business\IAOLab\WebEngine\Dialogs\WebBrowserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IAOLab\WebEngine\Dialogs\WebBrowserDialog.Designer.cs">
+    <Compile Include="Business\IAOLab\WebEngine\Dialogs\WebBrowserDialog.Designer.cs">
       <DependentUpon>WebBrowserDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
-    <Compile Include="IAOLab\WebEngine\WebManager.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\WebManager.cs" />
     <Compile Include="Model\MindMaps\DocxFile.cs" />
     <Compile Include="Model\MindMaps\XmindFile.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
     <Compile Include="Utils\GenericSingleton.cs" />
-    <Compile Include="Database\IDAO.cs" />
-    <Compile Include="Database\PreviewDbDataForm.cs">
+    <Compile Include="Business\Database\IDAO.cs" />
+    <Compile Include="Business\Database\PreviewDbDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Database\PreviewDbDataForm.Designer.cs">
+    <Compile Include="Business\Database\PreviewDbDataForm.Designer.cs">
       <DependentUpon>PreviewDbDataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database\PreviewTableSchema.cs">
+    <Compile Include="Business\Database\PreviewTableSchema.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Database\PreviewTableSchema.Designer.cs">
+    <Compile Include="Business\Database\PreviewTableSchema.Designer.cs">
       <DependentUpon>PreviewTableSchema.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database\Table.cs" />
+    <Compile Include="Business\Database\Table.cs" />
     <Compile Include="Design\SizeTypeConvert.cs" />
     <Compile Include="Dialogs\AddDatabaseDialog.cs">
       <SubType>Form</SubType>
@@ -1004,15 +1014,6 @@
     <Compile Include="Forms\CanvasForm.Designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IAOLab\ApkTool\ApkToolStart.cs" />
-    <Compile Include="IAOLab\BankTool\BankTool.cs" />
-    <Compile Include="IAOLab\BaseStation\BaseStation.cs" />
-    <Compile Include="IAOLab\Plugins\IPlugin.cs" />
-    <Compile Include="IAOLab\Plugins\PluginsDownloader.cs" />
-    <Compile Include="IAOLab\Plugins\PluginsManager.cs" />
-    <Compile Include="IAOLab\Transform\TimeAndIPTransform.cs" />
-    <Compile Include="IAOLab\Transform\GPSTransform.cs" />
-    <Compile Include="IAOLab\WifiMac\WifiMac.cs" />
     <Compile Include="Model\DatabaseItem.cs" />
     <Compile Include="Model\Widgets\AttachmentWidget.cs" />
     <Compile Include="Model\Widgets\C2BaseWidget.cs" />
@@ -1601,6 +1602,15 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
+    <EmbeddedResource Include="Business\IAOLab\WebEngine\Dialogs\SelectBossDialog.resx">
+      <DependentUpon>SelectBossDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\IAOLab\WebEngine\Dialogs\SelectMapDialog.resx">
+      <DependentUpon>SelectMapDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\IAOLab\WebEngine\Dialogs\WebBrowserDialog.resx">
+      <DependentUpon>WebBrowserDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\BaseLeftInnerButton.resx">
       <DependentUpon>BaseLeftInnerButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -1703,10 +1713,10 @@
     <EmbeddedResource Include="Core\AccelaratorKeys\ShortcutKeysEditor.resx">
       <DependentUpon>ShortcutKeysEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Database\PreviewDbDataForm.resx">
+    <EmbeddedResource Include="Business\Database\PreviewDbDataForm.resx">
       <DependentUpon>PreviewDbDataForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Database\PreviewTableSchema.resx">
+    <EmbeddedResource Include="Business\Database\PreviewTableSchema.resx">
       <DependentUpon>PreviewTableSchema.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AddDatabaseDialog.resx">
@@ -1887,15 +1897,6 @@
     <EmbeddedResource Include="Dialogs\\SearchToolkit\SearchToolkitForm.resx">
       <DependentUpon>SearchToolkitForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\SelectBossDialog.resx">
-      <DependentUpon>SelectBossDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\SelectMapDialog.resx">
-      <DependentUpon>SelectMapDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="IAOLab\WebEngine\Dialogs\WebBrowserDialog.resx">
-      <DependentUpon>WebBrowserDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -2004,93 +2005,93 @@
     <None Include="Resources\DocxFileExp\DocxExample.dotx" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
-    <Content Include="IAOLab\WebEngine\css\DrawingManager.css">
+    <Content Include="Business\IAOLab\WebEngine\css\DrawingManager.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\css\DrawingManager_min.css">
+    <Content Include="Business\IAOLab\WebEngine\css\DrawingManager_min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\css\style.css">
+    <Content Include="Business\IAOLab\WebEngine\css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\css\style_2.css">
+    <Content Include="Business\IAOLab\WebEngine\css\style_2.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\css\style_3.css">
+    <Content Include="Business\IAOLab\WebEngine\css\style_3.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\Html\BossIndex01.html">
+    <Content Include="Business\IAOLab\WebEngine\Html\BossIndex01.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\Html\BossIndex02.html">
+    <Content Include="Business\IAOLab\WebEngine\Html\BossIndex02.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\Html\BossIndex03.html">
+    <Content Include="Business\IAOLab\WebEngine\Html\BossIndex03.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\Html\SourceCodeMap.html">
+    <Content Include="Business\IAOLab\WebEngine\Html\SourceCodeMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\Html\StartMap.html">
+    <Content Include="Business\IAOLab\WebEngine\Html\StartMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\aleftboxtbott.png">
+    <Content Include="Business\IAOLab\WebEngine\img\aleftboxtbott.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\amiddboxtbott1.png">
+    <Content Include="Business\IAOLab\WebEngine\img\amiddboxtbott1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\amiddboxtbott2.png">
+    <Content Include="Business\IAOLab\WebEngine\img\amiddboxtbott2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\amiddboxttop.png">
+    <Content Include="Business\IAOLab\WebEngine\img\amiddboxttop.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\arightboxbott.png">
+    <Content Include="Business\IAOLab\WebEngine\img\arightboxbott.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\arightboxtop.png">
+    <Content Include="Business\IAOLab\WebEngine\img\arightboxtop.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\bg.jpg">
+    <Content Include="Business\IAOLab\WebEngine\img\bg.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="IAOLab\WebEngine\img\BossStyle01.png" />
-    <None Include="IAOLab\WebEngine\img\BossStyle02.png" />
-    <Content Include="IAOLab\WebEngine\img\bg_2.png">
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle01.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle02.png" />
+    <Content Include="Business\IAOLab\WebEngine\img\bg_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\BossStyle03.png">
+    <Content Include="Business\IAOLab\WebEngine\img\BossStyle03.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\line1_3.png">
+    <Content Include="Business\IAOLab\WebEngine\img\line1_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\title_3.png">
+    <Content Include="Business\IAOLab\WebEngine\img\title_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\true_3.png">
+    <Content Include="Business\IAOLab\WebEngine\img\true_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\img\t_bg_2.png">
+    <Content Include="Business\IAOLab\WebEngine\img\t_bg_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\china.js">
+    <Content Include="Business\IAOLab\WebEngine\JS\china.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\DistanceTool_min.js">
+    <Content Include="Business\IAOLab\WebEngine\JS\DistanceTool_min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\DrawingManager.js">
+    <Content Include="Business\IAOLab\WebEngine\JS\DrawingManager.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\DrawingManager_min.js">
+    <Content Include="Business\IAOLab\WebEngine\JS\DrawingManager_min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\echarts.min.js">
+    <Content Include="Business\IAOLab\WebEngine\JS\echarts.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IAOLab\WebEngine\JS\phx.js">
+    <Content Include="Business\IAOLab\WebEngine\JS\phx.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\BossStyle03.png" />
