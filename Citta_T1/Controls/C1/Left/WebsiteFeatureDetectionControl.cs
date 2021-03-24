@@ -43,15 +43,23 @@ namespace C2.Controls.C1.Left
             if (string.IsNullOrEmpty(WFDUser))
             {
                 var UAdialog = new UserAuthentication();
-                if (UAdialog.ShowDialog() == DialogResult.OK)
-                {
-                    WFDUser = UAdialog.UserName;
-                    Token = UAdialog.Token;
-                }
-                else
+                if (UAdialog.ShowDialog() != DialogResult.OK)
                     return;
+
+                WFDUser = UAdialog.UserName;
+                Token = UAdialog.Token;
+            }
+            else
+            {
+                //TODO phx 这块逻辑得看下token存活时间
+                Token = WFDApi.UserAuthentication(WFDUser, TOTP.GetTotp(WFDUser));
             }
 
+            AddTask();
+        }
+
+        private void AddTask()
+        {
             var dialog = new AddWFDTask();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -69,7 +77,7 @@ namespace C2.Controls.C1.Left
                 WebsiteFeatureDetectionTaskInfo taskInfo = new WebsiteFeatureDetectionTaskInfo(dialog.TaskName, taskId, dialog.FilePath, destFilePath, WFDTaskStatus.Null);
                 AddInnerButton(new WebsiteFeatureDetectionButton(taskInfo));
                 SaveWFDTasksToXml();
-            }   
+            }
         }
 
         public List<string> GetTaskNames()
