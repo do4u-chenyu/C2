@@ -16,5 +16,9 @@ namespace C2.Controls.C1.Left
         {
             InitializeComponent();
         }
+
+        public SearchToolkitButton(string buttonText) : base(buttonText)
+        {
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace C2.SearchToolkit
 {
     public partial class SearchToolkitForm : Form
     {
+        private TaskInfo CurrentTaskInfo { get; set; }
+
         public SearchToolkitForm()
         {
             InitializeComponent();
@@ -32,6 +34,11 @@ namespace C2.SearchToolkit
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void LinuxWorkspaceTB_Enter(object sender, EventArgs e)
+        {
+            linuxWorkspaceTB.ForeColor = Color.Black;
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using C2.SearchToolkit;
 
 namespace C2.Controls.C1.Left
 {
@@ -19,7 +20,9 @@ namespace C2.Controls.C1.Left
 
         private void AddTaskLabel_Click(object sender, EventArgs e)
         {
-            AddInnerButton(new SearchToolkitButton());
+            DialogResult ret = new SearchToolkitForm().ShowDialog();
+            if (ret == DialogResult.OK)
+                AddInnerButton(new SearchToolkitButton("测试"));
         }
     }
 }
