@@ -281,6 +281,7 @@
     <Compile Include="Controls\DataCharts\RingChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Core\Exports\DocxEngine.cs" />
     <Compile Include="Core\Exports\XmindEngine.cs" />
     <Compile Include="Business\Database\BaseDAOImpl.cs" />
     <Compile Include="Business\Database\DAOException.cs" />

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using C2.Model.Widgets;
+using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
 
 namespace C2.Model.MindMaps
@@ -15,75 +16,161 @@ namespace C2.Model.MindMaps
     {
     }
 
-    class DocxFileSaver 
+    public class DocxFileSaver 
     {
-        XWPFDocument MyDoc = new XWPFDocument();
 
-        private void WriteToDocx() 
-        { 
-
-        }
-
-        private void WriteImgToDocx() 
-        { 
-        }
-
-        private void WriteTableToDocx() 
-        { 
-        }
-
-        private List<Widget> GetTopicInfo(Topic topic) 
+        private void WriteNoteToDocx(Widget topicNote,XWPFDocument docx) 
         {
-            List<Widget> topicInfo = new List<Widget>();
-            PictureWidget[] pictureWidgets = topic.FindWidgets<PictureWidget>();
-            NoteWidget noteWidget = topic.FindWidget<NoteWidget>();
-            //ChartWidget chartWidget =  topic.FindWidget<ChartWidget>();
-            topicInfo.Add(noteWidget);
-            //topicInfo.Add(chartWidget);
-            foreach (PictureWidget pictureWidget in pictureWidgets) 
+            if (topicNote != null)
             {
-                if(Directory.Exists(pictureWidget.ImageUrl) && (pictureWidget.ThumbImage.Width > 128 || pictureWidget.ThumbImage.Width >128)) 
+                XWPFParagraph noteText = docx.CreateParagraph();
+                noteText.Style = "正文";
+                XWPFRun xwpfRun = noteText.CreateRun();
+                xwpfRun.SetText(topicNote.Text);
+            }
+        }
+        private List<int> ChangeImgSize(int width, int height) 
+        {
+            List<int> size = new List<int>();
+            if (width > height)
+            {
+                height = height * 768 / width;
+                width = 768;
+            }
+            else 
+            {
+                width = width * 768 / height;
+                height = 768;
+            }
+            size.Add(width);
+            size.Add(height);
+            return size;
+        }
+        private void WriteImgToDocx(PictureWidget pictureWidget, XWPFDocument docx,int imgNo) 
+        {
+            string picturePath = pictureWidget.ImageUrl;
+            int width = pictureWidget.ThumbImage.Width;
+            int height = pictureWidget.ThumbImage.Height;
+            if (!File.Exists(picturePath))
+                return;
+            try
+            {
+                var fileStream = new FileStream(picturePath, FileMode.Open);
+                CT_P m_p = docx.Document.body.AddNewP();
+                m_p.AddNewPPr().AddNewJc().val = ST_Jc.center;
+                XWPFParagraph paragraphIMG = new XWPFParagraph(m_p,docx);
+                XWPFRun xwpfRun = paragraphIMG.CreateRun();
+                List<int> size = new List<int>();
+                size = ChangeImgSize(width, height);
+                if(size.Count == 2)
+                    xwpfRun.AddPicture(fileStream, (int)PictureType.JPEG, "test.png", size[0] * 846, size[1] * 846);//长宽单位为emu，在1080分辨率下换算单位为1像素等于846emu
+                xwpfRun.SetText("图" + imgNo);
+            }
+            catch 
+            { 
+
+            }
+            
+        }
+
+        private void WriteTitleToDocx(string title, XWPFDocument docx, int layer) 
+        {
+            XWPFParagraph paragraphTitle = docx.CreateParagraph();          
+            if (layer < 4)
+            {
+                switch (layer)
                 {
-                    topicInfo.Add(pictureWidget);
+                    case 0:
+                        paragraphTitle.Style = "标题1";
+                        break;
+                    case 1:
+                        paragraphTitle.Style = "标题2";
+                        break;
+                    case 2:
+                        paragraphTitle.Style = "标题3";
+                        break;
+                    case 3:
+                        paragraphTitle.Style = "标题4";
+                        break;
                 }
             }
-            return topicInfo;
+            else
+            {
+                paragraphTitle.Style = "正文";
+            }
+            XWPFRun xwpfRun = paragraphTitle.CreateRun();
+            xwpfRun.SetText(title);
         }
 
-        private void SaveAsDocx(Topic topic , string filePath, string fileName, bool isRoot = true) 
+        private Widget GetTopicNote(Topic topic) 
+        {
+            
+            PictureWidget[] pictureWidgets = topic.FindWidgets<PictureWidget>();
+            NoteWidget noteWidget = topic.FindWidget<NoteWidget>();
+            return noteWidget;
+        }
+        private List<PictureWidget> GetTopicPicture(Topic topic) 
+        {
+            List<PictureWidget> topicPictures = new List<PictureWidget>();
+            PictureWidget[] pictureWidgets = topic.FindWidgets<PictureWidget>();
+            foreach (PictureWidget pictureWidget in pictureWidgets)
+            {
+                if (Directory.Exists(pictureWidget.ImageUrl) && (pictureWidget.ThumbImage.Width > 128 || pictureWidget.ThumbImage.Width > 128))
+                {
+                    topicPictures.Add(pictureWidget);
+                }
+            }
+            return topicPictures;
+        }
+        private void WriteToDocx(Topic topic, XWPFDocument DocxExample, XWPFDocument docx, int layer) 
+        {
+            XWPFStyles newStyles = docx.CreateStyles();
+            newStyles.SetStyles(DocxExample.GetCTStyle());//复制模板格式
+
+            //写入标题
+           
+            string title = topic.XmlElementName;
+            WriteTitleToDocx(title, docx, layer);
+          
+            //在标题后写入内容
+
+            Widget topicNote = GetTopicNote(topic);
+            WriteNoteToDocx(topicNote, docx);
+
+            //在内容后插入图片
+            int imgNo = 0;
+            List<PictureWidget> topicPictures = GetTopicPicture(topic);
+            for (int i = 0; i < topicPictures.Count; i++)
+            {
+                PictureWidget pictureWidget = topicPictures[i];
+                WriteImgToDocx(pictureWidget, docx, imgNo);
+                imgNo++;
+            }
+            layer++;
+            if (topic.Children.Count > 0)
+            {
+                foreach (Topic subTopic in topic.Children)
+                {
+                    WriteToDocx(subTopic, DocxExample, docx, layer);
+                }
+            }
+
+        }
+        private void SaveAsDocx(Topic topic , string filePath, string fileName) 
         {
             using (var dotStream = new FileStream(Path.Combine(Application.StartupPath, "Resources", "DocxFileExp", "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
             {
                 XWPFDocument DocxExample = new XWPFDocument(dotStream);
                 using (var fileStream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create, FileAccess.Write))
                 {
+                    int layer = 1;
                     XWPFDocument docx = new XWPFDocument(fileStream);
-                    XWPFStyles newStyles = docx.CreateStyles();
-                    newStyles.SetStyles(DocxExample.GetCTStyle());
-                    string title = topic.XmlElementName;
-                    XWPFParagraph paragraph = docx.CreateParagraph();
-                    if (isRoot)
-                    {
-                        paragraph.Style = "标题1";
-                        XWPFRun xwpfRun = paragraph.CreateRun();
-                        xwpfRun.SetText(title);
-                        isRoot = false;
-                    }
-                    List<Widget> topicInfos = new List<Widget>();
-                    topicInfos = GetTopicInfo(topic);
-                    if(topicInfos[0] != null) 
-                    {
-                        XWPFParagraph noteText = docx.CreateParagraph();
-                        noteText.Style = "正文";
-                        XWPFRun xwpfRun = noteText.CreateRun();
-                        xwpfRun.SetText(topicInfos[0].Text);
-                    }
-                    for(int i =1;i< topicInfos.Count; i++) 
-                    {
-                        
-                    }
+                    WriteToDocx(topic, DocxExample, docx, layer);
+                    docx.Close();
+                    fileStream.Close();
                 }
                 DocxExample.Close();
+                dotStream.Close();
             }
         }
     }
