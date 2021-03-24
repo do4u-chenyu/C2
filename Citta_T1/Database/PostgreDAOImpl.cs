@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text;
 using C2.Model;
 using C2.Utils;
@@ -56,12 +55,13 @@ namespace C2.Database
             try
             {
                 SqlConn.Open();
-                result = this.ExecuteQuery(sql, SqlConn, header,returnNum);
+                result = this.ExecuteQuery(sql, SqlConn, header, returnNum);
             }
             catch (Exception ex) 
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                throw new DAOException(ex.Message);
+                //TODO mhd
+                throw ex;
             }
             finally
             {
@@ -80,6 +80,7 @@ namespace C2.Database
             {
                 if (sdr.FieldCount == 0)
                     return String.Empty;
+                //TODO 空表测试 加断点，看逻辑是否能到，测试Cancel逻辑是否需要
                 if (header) 
                 {
                     for (int i = 0; i < sdr.FieldCount - 1; i++)
@@ -103,11 +104,12 @@ namespace C2.Database
             return DbUtil.TrimEndN(sb).ToString();
         }
 
-        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = -1)
+        public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = int.MaxValue)
         {
             bool returnCode = true;
             int totalReturnNum = 0;
             StreamWriter sw = new StreamWriter(outPutPath, false);
+            //TODO
             NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
             try
             {
@@ -121,13 +123,13 @@ namespace C2.Database
                     StringBuilder sb = new StringBuilder(1024);
                     for (int i = 0; i < sdr.FieldCount; i++)
                         sb.Append(sdr.GetName(i)).Append(OpUtil.TabSeparator);
-                    sw.WriteLine(DbUtil.TrimEndT(sb).ToString());    // 去掉最后一列的列分隔符
-                    while (sdr.Read() && (maxReturnNum == -1 ? true : totalReturnNum++ < maxReturnNum))
+                    sw.WriteLine(sb.TrimEndT().ToString());    // 去掉最后一列的列分隔符
+                    while (sdr.Read() && totalReturnNum++ < maxReturnNum)
                     {
-                        sb = new StringBuilder(1024);
+                        sb.Clear();
                         for (int i = 0; i < sdr.FieldCount; i++)
                             sb.Append(sdr[i]).Append(OpUtil.TabSeparator);
-                        sw.WriteLine(DbUtil.TrimEndT(sb).ToString());
+                        sw.WriteLine(sb.TrimEndT().ToString());
                     }
                     try
                     {
@@ -144,6 +146,7 @@ namespace C2.Database
             }
             finally
             {
+                //TODO 判断是否为空
                 sw.Close();
                 SqlConn.Close();
             }

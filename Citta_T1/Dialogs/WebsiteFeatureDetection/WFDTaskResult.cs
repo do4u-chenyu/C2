@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,13 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace C2.IAOLab.SearchToolkit
+namespace C2.Dialogs.WebsiteFeatureDetection
 {
-    public partial class SearchToolkitForm : Form
+    partial class WFDTaskResult : StandardDialog
     {
-        public SearchToolkitForm()
+        public WFDTaskResult()
         {
             InitializeComponent();
+        }
+
+        private void BrowserButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -16,24 +16,36 @@ namespace C2.Controls.C1.Left
 {
     public partial class WebsiteFeatureDetectionControl : BaseLeftInnerPanel
     {
+        //Global.WFDUser持久化到文档中UserInformation.xml
+        string WFDUser;
 
         public WebsiteFeatureDetectionControl()
         {
             InitializeComponent();
+            this.addTaskLabel.Click += new EventHandler(this.AddLabel_Click);
         }
 
-        public override void AddTask()
+        private void AddLabel_Click(object sender, EventArgs e)
         {
+            //判断用户是否认证？已认证的可以直接新建任务，否则先认证再新建任务
+            if (string.IsNullOrEmpty(WFDUser))
+            {
+                var UAdialog = new UserAuthentication();
+                if (UAdialog.ShowDialog() == DialogResult.OK)
+                    WFDUser = UAdialog.UserName;
+                else
+                    return;
+            }
+
             var dialog = new AddWFDTask();
             if (dialog.ShowDialog() == DialogResult.OK)
-            {
                 AddInnerButton(new WebsiteFeatureDetectionButton(dialog.TaskName, dialog.FilePath));
-            }
         }
 
 
 
 
+        #region WFD按钮类
         private class WebsiteFeatureDetectionButton : BaseLeftInnerButton
         {
             public string FilePath;
@@ -112,7 +124,7 @@ namespace C2.Controls.C1.Left
             }
 
         }
-
+        #endregion
 
     }
 }

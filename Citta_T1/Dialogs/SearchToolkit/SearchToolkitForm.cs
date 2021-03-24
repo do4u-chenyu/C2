@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace C2.Controls.C1.Left
+namespace C2.Dialogs.SearchToolkit
 {
-    public partial class SearchToolkitControl : BaseLeftInnerPanel
+    public partial class SearchToolkitForm : Form
     {
-        public SearchToolkitControl()
+        public SearchToolkitForm()
         {
             InitializeComponent();
         }
 
-        private void AddTaskLabel_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-            AddInnerButton(new SearchToolkitButton());
+
         }
     }
 }

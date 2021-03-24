@@ -95,7 +95,7 @@ namespace C2.Database
             }
             return result;
         }
-
+        //TODO 夏天
         private string ExecuteQuery(string sql, OracleConnection conn, bool header, int returnNum)
         {
             StringBuilder sb = new StringBuilder(1024 * 16);
@@ -105,6 +105,7 @@ namespace C2.Database
             {
                 if (rdr.FieldCount == 0)
                     return String.Empty;
+                //TODO 夏天
                 if (header)
                 {
                     for (int i = 0; i < rdr.FieldCount - 1; i++)
@@ -179,6 +180,7 @@ namespace C2.Database
             bool returnCode = true;
             int totalReturnNum = 0;
             StreamWriter sw = new StreamWriter(outPutPath, false);
+            //TODO 夏天
             OracleConnection con = new OracleConnection(this.ConnectionString);
             try
             {
@@ -194,6 +196,7 @@ namespace C2.Database
                     sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));    // 去掉最后一列的列分隔符
                     while (rdr.Read() && (maxReturnNum == -1 ? true : totalReturnNum < maxReturnNum))
                     {
+                        //TODO 夏天
                         sb = new StringBuilder(1024);
                         for (int i = 0; i < rdr.FieldCount; i++)
                             sb.Append(rdr[i]).Append(OpUtil.TabSeparator);
@@ -209,6 +212,7 @@ namespace C2.Database
             }
             finally
             {
+                //TODO 夏天
                 sw.Close();
                 con.Close();
             }
