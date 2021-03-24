@@ -1,4 +1,5 @@
-﻿using C2.Controls;
+﻿using C2.Business.WebsiteFeatureDetection;
+using C2.Controls;
 using C2.Utils;
 using System;
 using System.Collections.Generic;

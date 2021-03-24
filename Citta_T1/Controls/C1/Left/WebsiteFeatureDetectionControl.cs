@@ -13,6 +13,7 @@ using System.IO;
 using C2.Core;
 using System.Xml;
 using C2.Business.Model;
+using C2.Business.WebsiteFeatureDetection;
 
 namespace C2.Controls.C1.Left
 {
