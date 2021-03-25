@@ -18,7 +18,7 @@ namespace C2.SearchToolkit
 
         public static readonly TaskInfo EmptyTaskInfo = new TaskInfo();
 
-        private static readonly String HeadColumnLine = String.Join("\t", new string[] {
+        private static readonly String HeadColumnLine = String.Join(OpUtil.TabSeparatorString, new string[] {
             "TaskID" ,
             "TaskName",
             "TaskCreateTime",
@@ -69,19 +69,45 @@ namespace C2.SearchToolkit
             });
         }
 
-        private String EncryptPassword(String password)
+        private static String EncryptPassword(String password)
         {   // 颠倒，Base64编码，颠倒
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(password.ReverseString())).ReverseString();
         }
 
-        private String DecryptPassword(String value)
+        private static String DecryptPassword(String value)
         {   // 颠倒，Base64解码，颠倒
             return Encoding.UTF8.GetString(Convert.FromBase64String(value.ReverseString())).ReverseString();
         }
 
-        public static TaskInfo GenTaskInfo(String line)
+        public static TaskInfo GenTaskInfo(String content)
         {
-            return TaskInfo.EmptyTaskInfo;
+            if (String.IsNullOrEmpty(content))
+                return TaskInfo.EmptyTaskInfo;
+
+            // 有表头的话 取第二行
+            String[] buf = content.Split(OpUtil.DefaultLineSeparator);
+            content = buf.Length == 1 ? buf[0].TrimEnd() : buf[1].TrimEnd();
+
+            // 小于10列不处理
+            buf = content.Split(OpUtil.TabSeparator);
+            if (buf.Length < 10)
+                return TaskInfo.EmptyTaskInfo;
+
+            TaskInfo taskInfo = new TaskInfo()
+            {
+                TaskID = buf[0],
+                TaskName = buf[1],
+                TaskCreateTime = buf[2],
+                TaskModel = buf[3],
+                TaskStatus = buf[4],
+                Username = buf[5],
+                Password = DecryptPassword(buf[6]),  // 堡垒机密码加密保存,反序列化时解密
+                BastionIP = buf[7],
+                SearchAgentIP = buf[8],
+                RemoteWorkspace = buf[9]
+            };
+            
+            return taskInfo;
         }
 
     }
