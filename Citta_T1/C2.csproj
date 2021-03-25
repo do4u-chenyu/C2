@@ -190,6 +190,7 @@
     <Compile Include="Business\SSH\BastionAPI.cs" />
     <Compile Include="Business\SSH\SSHClient.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\TOTP.cs" />
+    <Compile Include="Business\WebsiteFeatureDetection\WebsiteFeatureDetectionTaskInfo.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\WFDApi.cs" />
     <Compile Include="ChartControls\MindMap\Commands\AddLinkCommand.cs" />
     <Compile Include="ChartControls\MindMap\Commands\ChangeLinkCommand.cs" />
