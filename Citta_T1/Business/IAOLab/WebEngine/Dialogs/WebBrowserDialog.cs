@@ -302,13 +302,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
             Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
             if (!File.Exists(Path.Combine(Global.TempDirectory, "editorMap.html")))
             {
-                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
+                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.UTF8);
                 strmsave.Write(this.htmlEditorControlEx1.Text);
                 strmsave.Close();
             }
             else
             {
-                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.Default);
+                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.UTF8);
                 strmsave.Write(this.htmlEditorControlEx1.Text);
                 strmsave.Close();
             }
