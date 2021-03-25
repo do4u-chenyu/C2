@@ -675,7 +675,8 @@ namespace C2.Dialogs
             StringBuilder htmltext = new StringBuilder();
             try
             {
-                using (StreamReader sr = new StreamReader(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html")) //模板页路径
+                string url = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
+                using (StreamReader sr = new StreamReader(url)) //模板页路径
                 {
                     String line;
                     while ((line = sr.ReadLine()) != null)
@@ -700,7 +701,8 @@ namespace C2.Dialogs
             //----------生成htm文件------------------
             try
             {
-                using (StreamWriter sw = new StreamWriter(@"D:\work\C2\Citta_T1\IAOLab\WebEngine\Html\StartMap.html", false, System.Text.Encoding.GetEncoding("GB2312"))) //保存地址
+                string url = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
+                using (StreamWriter sw = new StreamWriter(url, false, System.Text.Encoding.GetEncoding("GB2312"))) //保存地址
                 {
                     sw.WriteLine(htmltext);
                     sw.Flush();

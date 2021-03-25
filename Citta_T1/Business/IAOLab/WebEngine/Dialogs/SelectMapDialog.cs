@@ -43,7 +43,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public SelectMapDialog(List<DataItem> dataItems)
         {
             InitializeComponent();
-            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "StartMap.html");
+            WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
             DataItems = dataItems;
             foreach (DataItem dataItem in DataItems)
             {

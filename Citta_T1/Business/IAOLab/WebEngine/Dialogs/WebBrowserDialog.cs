@@ -213,26 +213,26 @@ namespace C2.IAOLab.WebEngine.Dialogs
             var dialog = new SelectMapDialog(DataItems);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                string[] methodstr = new string[1];
-                methodstr[0] = dialog.tude;
+                string[] args = new string[1];
+                args[0] = dialog.tude;
                 switch (dialog.map)
                 {
                     case "标注图":
-                        webBrowser1.Document.InvokeScript("markerPoints", methodstr);
+                        webBrowser1.Document.InvokeScript("markerPoints", args);
                         break;
                     case "轨迹图":
-                        webBrowser1.Document.InvokeScript("drawOrit", methodstr);
+                        webBrowser1.Document.InvokeScript("drawOrit", args);
                         break;
                     case "多边形图":
-                        webBrowser1.Document.InvokeScript("drawPolygon", methodstr);
+                        webBrowser1.Document.InvokeScript("drawPolygon", args);
                         break;
                     case "热力图":
-                        webBrowser1.Document.InvokeScript("relitu", methodstr);
+                        webBrowser1.Document.InvokeScript("drawHeatmap", args);
                         break;
                 }
                 var configMap = new ConfigForm();
-                string configstr = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
-                webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
+                string newCenterAndZoom = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
+                webBrowser1.Document.InvokeScript("centerAndZoom", new object[] { newCenterAndZoom });
             }
             else
                 return;
@@ -268,7 +268,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.LoadMapData.Enabled = true;
                 this.SavePic.Enabled = true;
                 isActive = true;
-                WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "StartMap.html");
+                WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
                 webBrowser1.Navigate(WebUrl);
                 var configMap = new ConfigForm();
                 var dialog = new SelectMapDialog(DataItems);
