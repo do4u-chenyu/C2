@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using C2.Model.Widgets;
 using NPOI.OpenXmlFormats.Wordprocessing;
@@ -14,6 +9,7 @@ namespace C2.Model.MindMaps
 {
     class DocxFile
     {
+
     }
 
     public class DocxFileSaver 
@@ -163,7 +159,7 @@ namespace C2.Model.MindMaps
                 XWPFDocument DocxExample = new XWPFDocument(dotStream);
                 using (var fileStream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create, FileAccess.Write))
                 {
-                    int layer = 1;
+                    int layer = 0;
                     XWPFDocument docx = new XWPFDocument(fileStream);
                     WriteToDocx(topic, DocxExample, docx, layer);
                     docx.Close();
