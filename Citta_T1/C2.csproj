@@ -186,6 +186,8 @@
     <Compile Include="Business\Option\PythonOPConfig.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
     <Compile Include="Business\SearchToolKit\TaskInfo.cs" />
+    <Compile Include="Business\SearchToolKit\TaskManager.cs" />
+    <Compile Include="Business\SSH\SSHClient.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\TOTP.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\WFDApi.cs" />
     <Compile Include="ChartControls\MindMap\Commands\AddLinkCommand.cs" />
@@ -1638,6 +1640,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\IAOLabControl.resx">
       <DependentUpon>IAOLabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\SearchToolkitButton.resx">
+      <DependentUpon>SearchToolkitButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\SearchToolkitControl.resx">
       <DependentUpon>SearchToolkitControl.cs</DependentUpon>
@@ -3093,9 +3098,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\SSH\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
