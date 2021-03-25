@@ -619,7 +619,7 @@ namespace C2.Dialogs
                 }
                                                      
             }
-            catch
+            catch 
             {
                 HelpUtil.ShowMessageBox("更新失败，请检查网络连接稍后重试");
             }

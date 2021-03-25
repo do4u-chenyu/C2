@@ -213,5 +213,12 @@ namespace C2.Core
 
             return sb.ToString();
         }
+
+        public static string ReverseString(this String str)
+        {
+            char[] cs = str.ToCharArray();
+            Array.Reverse(cs);
+            return new string(cs);
+        }
     }
 }

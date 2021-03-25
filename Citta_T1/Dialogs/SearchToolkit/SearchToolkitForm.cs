@@ -12,7 +12,6 @@ namespace C2.SearchToolkit
         {
             InitializeComponent();
             InitializeInputControls();
-            //InitializeOther();
         }
 
         private void InitializeInputControls()
@@ -27,18 +26,13 @@ namespace C2.SearchToolkit
                 this.taskNameTB
             };
         }
-
-        private void InitializeOther()
-        {
-            this.modelDescLabel.Text = TaskInfo.GambelModelDescription;
-        }
         private void LoadTaskInfo(TaskInfo taskInfo)
         {
             this.usernameTB.Text = taskInfo.Username;
             this.passwordTB.Text = taskInfo.Password;
             this.taskNameTB.Text = taskInfo.TaskName;
             this.bastionIPTB.Text = taskInfo.BastionIP;
-            this.modelComboBox.Text = taskInfo.ChosenModel;
+            this.modelComboBox.Text = taskInfo.TaskModel;
             this.searchAgentIPTB.Text = taskInfo.SearchAgentIP;
             this.remoteWorkspaceTB.Text = taskInfo.RemoteWorkspace;
         }
@@ -86,8 +80,9 @@ namespace C2.SearchToolkit
         {
             return true;
         }
-        public TaskInfo ShowTaskInfoDialog()
+        public TaskInfo ShowTaskConfigDialog()
         {
+            taskInfoGB.Visible = false;
             DialogResult ret = this.ShowDialog();
             if (ret != DialogResult.OK || !ValidateInputControls())
                 return TaskInfo.EmptyTaskInfo;
@@ -97,6 +92,7 @@ namespace C2.SearchToolkit
 
         public DialogResult ShowTaskInfoDialog(TaskInfo taskInfo)
         {
+            taskInfoGB.Visible = true;
             LoadTaskInfo(taskInfo);
             ReadOnlyInputControl();   // 展示任务信息时, 不需要更改
             return this.ShowDialog();

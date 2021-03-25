@@ -36,9 +36,9 @@
             // 
             this.titleLabel.Text = "全文工具集";
             // 
-            // addLabel
+            // addTaskLabel
             // 
-            this.addTaskLabel.Click += new System.EventHandler(this.AddTaskLabel_Click);
+            this.addTaskLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddTaskLabel_MouseClick);
             // 
             // SearchToolkitControl
             // 

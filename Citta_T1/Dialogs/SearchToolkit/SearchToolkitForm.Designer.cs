@@ -52,12 +52,14 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
-            this.modelDescLabel = new System.Windows.Forms.Label();
+            this.taskInfoGB = new System.Windows.Forms.GroupBox();
+            this.taskStatusLabel = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelCenter.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.panelTop.SuspendLayout();
+            this.taskInfoGB.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -160,7 +162,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.groupBox1.Controls.Add(this.modelDescLabel);
+            this.groupBox1.Controls.Add(this.taskInfoGB);
             this.groupBox1.Controls.Add(this.taskNameTB);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label1);
@@ -305,15 +307,27 @@
             this.panelTop.Size = new System.Drawing.Size(609, 169);
             this.panelTop.TabIndex = 2;
             // 
-            // modelDescLabel
+            // taskInfoGB
             // 
-            this.modelDescLabel.AutoSize = true;
-            this.modelDescLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.modelDescLabel.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.modelDescLabel.Location = new System.Drawing.Point(292, 84);
-            this.modelDescLabel.Name = "modelDescLabel";
-            this.modelDescLabel.Size = new System.Drawing.Size(0, 19);
-            this.modelDescLabel.TabIndex = 45;
+            this.taskInfoGB.Controls.Add(this.taskStatusLabel);
+            this.taskInfoGB.Location = new System.Drawing.Point(294, 24);
+            this.taskInfoGB.Name = "taskInfoGB";
+            this.taskInfoGB.Size = new System.Drawing.Size(299, 84);
+            this.taskInfoGB.TabIndex = 45;
+            this.taskInfoGB.TabStop = false;
+            this.taskInfoGB.Text = "任务ID：";
+            this.taskInfoGB.Visible = false;
+            // 
+            // taskStatusLabel
+            // 
+            this.taskStatusLabel.AutoSize = true;
+            this.taskStatusLabel.Font = new System.Drawing.Font("微软雅黑", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.taskStatusLabel.ForeColor = System.Drawing.Color.DimGray;
+            this.taskStatusLabel.Location = new System.Drawing.Point(90, 28);
+            this.taskStatusLabel.Name = "taskStatusLabel";
+            this.taskStatusLabel.Size = new System.Drawing.Size(96, 36);
+            this.taskStatusLabel.TabIndex = 0;
+            this.taskStatusLabel.Text = "运行中";
             // 
             // SearchToolkitForm
             // 
@@ -335,6 +349,8 @@
             this.panelCenter.ResumeLayout(false);
             this.panelBottom.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
+            this.taskInfoGB.ResumeLayout(false);
+            this.taskInfoGB.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -364,6 +380,7 @@
         private System.Windows.Forms.ComboBox modelComboBox;
         private System.Windows.Forms.TextBox taskNameTB;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label modelDescLabel;
+        private System.Windows.Forms.GroupBox taskInfoGB;
+        private System.Windows.Forms.Label taskStatusLabel;
     }
 }
