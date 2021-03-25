@@ -17,14 +17,6 @@ using C2.Business.WebsiteFeatureDetection;
 
 namespace C2.Controls.C1.Left
 {
-    public enum WFDTaskStatus
-    {
-        Null,       //
-        Running,    //任务运行中
-        Done,       //任务成功
-        Failed      //任务失败
-    }
-
     public partial class WebsiteFeatureDetectionControl : BaseLeftInnerPanel
     {
         //Global.WFDUser持久化到文档中UserInformation.xml
@@ -236,39 +228,27 @@ namespace C2.Controls.C1.Left
             }
             private void ResultToolStripMenuItem_Click(object sender, EventArgs e)
             {
-                var dialog = new WFDTaskResult();
+                //TODO phx 查看结果前向api发起查看任务状态请求,结果在这里做处理并更新button对应信息，把button更新之后的结果展示在新窗口里
+                //如果task本身是done状态，不发起查询
+                string resp = WFDApi.GetTaskResultsById(TaskInfo.TaskId, Global.GetWebsiteFeatureDetectionControl().Token);
+                string urlResults = UpdateTaskInfoByResp(resp);
+
+                var dialog = new WFDTaskResult(TaskInfo, urlResults);
                 if (dialog.ShowDialog() == DialogResult.OK)
                     return;
             }
 
-        }
-        #endregion
-
-        #region WFD任务信息类
-        private class WebsiteFeatureDetectionTaskInfo
-        {
-            public string TaskName;
-            public string TaskId;
-            public string DatasourceFilePath;
-            public string ResultFilePath;
-            public WFDTaskStatus Status;
-
-            public WebsiteFeatureDetectionTaskInfo()
+            private string UpdateTaskInfoByResp(string resp)
             {
-                TaskName = string.Empty;
-                TaskId = string.Empty;
-                DatasourceFilePath = string.Empty;
-                ResultFilePath = string.Empty;
-                Status = WFDTaskStatus.Null;
-            }
+                TaskInfo.Status = WFDTaskStatus.Running;
+                //判断status，如果done，将result写入结果文件，其他情况不写。结果文件除了done状态，其余情况均为空
+                if(TaskInfo.Status == WFDTaskStatus.Done)
+                {
 
-            public WebsiteFeatureDetectionTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, WFDTaskStatus status)
-            {
-                TaskName = taskName;
-                TaskId = taskId;
-                DatasourceFilePath = datasourceFilePath;
-                ResultFilePath = resultFilePath;
-                Status = status;
+                    return "111";
+                }
+                else
+                    return string.Empty;
             }
         }
         #endregion

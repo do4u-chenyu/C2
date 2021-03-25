@@ -44,9 +44,10 @@ namespace C2.Business.WebsiteFeatureDetection
         /// <param name="id"></param>
         /// <param name="token"></param>
         /// <param name="flag">是否输出全部结果</param>
-        public static void GetTaskResultsById(string id, string token, string flag = "0")
+        public static string GetTaskResultsById(string id, string token, string flag = "0")
         {
-
+            string resq = string.Empty;
+            return resq;
         }
 
         /// <summary>
