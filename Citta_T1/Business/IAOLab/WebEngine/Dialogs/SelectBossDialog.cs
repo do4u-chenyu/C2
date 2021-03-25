@@ -224,7 +224,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void BossType_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.pictureBox1.Image = bossTypeDict[bossType.SelectedIndex];
-            WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", string.Format("BossIndex0{0}.html",(bossType.SelectedIndex+1).ToString()));
+            WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", string.Format("BossIndex0{0}.html",(bossType.SelectedIndex+1).ToString()));
             //切换样式，每个图表的配置标题要发生变化
             ChangeCaptionText();
         }

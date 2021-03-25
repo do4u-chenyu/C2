@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -43,6 +44,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         protected override bool OnOKButtonClick()
         {
+            if (!IsValidityUser() || !IsValidityOtp())
+                return false;
+
             //TODO 向接口传参
             Token = WFDApi.UserAuthentication(UserName, Otp);
             if (string.IsNullOrEmpty(Token))
@@ -50,9 +54,39 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 HelpUtil.ShowMessageBox("用户认证失败，请重试或联系相关负责人。");
                 return false;
             }
-                
-            
+
             return base.OnOKButtonClick();
+        }
+
+        private bool IsValidityUser()
+        {
+            if (string.IsNullOrEmpty(UserName) || UserName == defaultUserTip)
+            {
+                HelpUtil.ShowMessageBox("用户名不能为空。");
+                return false;
+            }
+
+            if (UserName.Length != 5)
+            {
+                HelpUtil.ShowMessageBox("用户名格式不正确，请重新输入。");
+                return false;
+            }
+            return true;
+        }
+        private bool IsValidityOtp()
+        {
+            if (string.IsNullOrEmpty(Otp) || Otp == defaultOtpTip)
+            {
+                HelpUtil.ShowMessageBox("动态口令不能为空。");
+                return false;
+            }
+
+            if (!Regex.IsMatch(Otp, @"^\d{6}$"))
+            {
+                HelpUtil.ShowMessageBox("动态口令格式不正确，请输入6位动态数字。");
+                return false;
+            }
+            return true;
         }
 
         private void UserNameTextBox_Enter(object sender, EventArgs e)
