@@ -7,16 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using C2.SearchToolkit;
 
 namespace C2.Controls.C1.Left
 {
     public partial class SearchToolkitButton : BaseLeftInnerButton
     {
-        public SearchToolkitButton(string buttonText) : base(buttonText)
+        private TaskInfo task;
+        public SearchToolkitButton(TaskInfo task) : base(task.TaskName)
         {
             InitializeComponent();
             InitButtonMenu();
             InitButtonType();
+            this.task = task;
         }
 
         private void InitButtonType()

@@ -43,7 +43,7 @@
             this.taskNameTB = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.modelComboBox = new System.Windows.Forms.ComboBox();
+            this.taskModelComboBox = new System.Windows.Forms.ComboBox();
             this.downloadButton = new System.Windows.Forms.Button();
             this.remoteWorkspaceTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -166,7 +166,7 @@
             this.groupBox1.Controls.Add(this.taskNameTB);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.modelComboBox);
+            this.groupBox1.Controls.Add(this.taskModelComboBox);
             this.groupBox1.Controls.Add(this.downloadButton);
             this.groupBox1.Controls.Add(this.remoteWorkspaceTB);
             this.groupBox1.Controls.Add(this.label4);
@@ -208,19 +208,19 @@
             // 
             // modelComboBox
             // 
-            this.modelComboBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.modelComboBox.FormattingEnabled = true;
-            this.modelComboBox.Items.AddRange(new object[] {
+            this.taskModelComboBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.taskModelComboBox.FormattingEnabled = true;
+            this.taskModelComboBox.Items.AddRange(new object[] {
             "全文涉赌模型",
             "全文涉枪模型",
             "全文涉黄模型",
             "全文飞机场模型"});
-            this.modelComboBox.Location = new System.Drawing.Point(99, 81);
-            this.modelComboBox.Name = "modelComboBox";
-            this.modelComboBox.Size = new System.Drawing.Size(180, 27);
-            this.modelComboBox.TabIndex = 41;
-            this.modelComboBox.Text = "全文涉赌模型";
-            this.modelComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
+            this.taskModelComboBox.Location = new System.Drawing.Point(99, 81);
+            this.taskModelComboBox.Name = "modelComboBox";
+            this.taskModelComboBox.Size = new System.Drawing.Size(180, 27);
+            this.taskModelComboBox.TabIndex = 41;
+            this.taskModelComboBox.Text = "全文涉赌模型";
+            this.taskModelComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
             // downloadButton
             // 
@@ -377,7 +377,7 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox modelComboBox;
+        private System.Windows.Forms.ComboBox taskModelComboBox;
         private System.Windows.Forms.TextBox taskNameTB;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox taskInfoGB;

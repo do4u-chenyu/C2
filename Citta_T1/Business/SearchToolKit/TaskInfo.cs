@@ -18,6 +18,8 @@ namespace C2.SearchToolkit
 
         public static readonly TaskInfo EmptyTaskInfo = new TaskInfo();
 
+        public bool IsEmpty() { return this == EmptyTaskInfo; }
+
         private static readonly String HeadColumnLine = String.Join(OpUtil.TabSeparatorString, new string[] {
             "TaskID" ,
             "TaskName",
@@ -30,6 +32,8 @@ namespace C2.SearchToolkit
             "SearchAgentIP",
             "RemoteWorkspace"
         });
+
+
 
         public String Username { get; private set; }
         public String Password { get; private set; }
@@ -79,7 +83,7 @@ namespace C2.SearchToolkit
             return Encoding.UTF8.GetString(Convert.FromBase64String(value.ReverseString())).ReverseString();
         }
 
-        public static TaskInfo GenTaskInfo(String content)
+        public static TaskInfo GenTaskInfo(String content, bool needDecryptPass = false)
         {
             if (String.IsNullOrEmpty(content))
                 return TaskInfo.EmptyTaskInfo;
@@ -101,7 +105,7 @@ namespace C2.SearchToolkit
                 TaskModel = buf[3],
                 TaskStatus = buf[4],
                 Username = buf[5],
-                Password = DecryptPassword(buf[6]),  // 堡垒机密码加密保存,反序列化时解密
+                Password = needDecryptPass ? DecryptPassword(buf[6]) : buf[6],  // 堡垒机密码加密保存,反序列化时解密
                 BastionIP = buf[7],
                 SearchAgentIP = buf[8],
                 RemoteWorkspace = buf[9]

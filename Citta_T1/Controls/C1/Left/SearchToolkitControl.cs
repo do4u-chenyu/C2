@@ -13,9 +13,11 @@ namespace C2.Controls.C1.Left
 {
     public partial class SearchToolkitControl : BaseLeftInnerPanel
     {
+        private TaskManager taskManager;
         public SearchToolkitControl()
         {
             InitializeComponent();
+            taskManager = new TaskManager();
         }
 
         private void AddTaskLabel_MouseClick(object sender, MouseEventArgs e)
@@ -23,9 +25,16 @@ namespace C2.Controls.C1.Left
             if (e.Button != MouseButtons.Left)
                 return;
 
-            DialogResult ret = new SearchToolkitForm().ShowTaskInfoDialog(TaskInfo.EmptyTaskInfo);
-            if (ret == DialogResult.OK)
-                AddInnerButton(new SearchToolkitButton("测试"));
+
+            TaskInfo taskInfo = new SearchToolkitForm().ShowTaskConfigDialog();
+
+            if (taskInfo.IsEmpty())
+                return;
+
+            // TODO run task
+
+            AddInnerButton(new SearchToolkitButton(taskInfo));
+            taskManager.AddTask(taskInfo);
         }
     }
 }
