@@ -127,6 +127,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
             //准备数据
             if (this.mapTypeComboBox.Text == "热力图")
             {
+                if (countValues.Count == 0 || latValues[0].Count != countValues[0].Count || lonValues[0].Count != countValues[0].Count)
+                {
+                    HelpUtil.ShowMessageBox("请设置权重");
+                    return false;
+                }
                 string JSON_OBJ_Format_heat = "\"lng\": \" {0} \", \"lat\": \" {1} \", \"count\": \" {2} \"";
                 for (int i = 0; i < latValues[0].Count; i++)
                 {
