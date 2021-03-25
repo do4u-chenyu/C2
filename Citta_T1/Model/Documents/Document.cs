@@ -173,6 +173,7 @@ namespace C2.Model.Documents
                     DocumentType.Xmind}),
                 new DocumentTypeGroup("Text", new DocumentType[]{
                     DocumentType.Txt,
+                    DocumentType.Docx,
                     DocumentType.Csv}),
                 };
         }
