@@ -27,16 +27,11 @@ namespace C2.Dialogs
 
         private void UpdateProgressBar_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // 会有没下载完出现下载完成的bug，防止用户无法关闭弹窗
-            if (Status.Contains("下载完成")|| Status.Contains("下载失败"))
+            if (ProgressPercentage.Equals("100%"))
                 return;
-
-            if (!ProgressPercentage.Equals("100%"))
-            {
-                e.Cancel = true;
-                HelpUtil.ShowMessageBox("下载未完成，无法结束当前更新任务");
-            }
-                
+            DialogResult result = MessageBox.Show("下载未完成，确认结束当前更新任务","下载提示",MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
+                e.Cancel = true;                     
         }
     }
 }

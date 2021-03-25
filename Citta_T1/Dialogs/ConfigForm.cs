@@ -32,13 +32,15 @@ namespace C2.Dialogs
         private readonly PluginsDownloader downloader;
         private string newSoftwareVersion;
         private string packageLocation;
+        private string tmpPackageLocation;
 
 
         public ConfigForm()
         {
             InitializeComponent();
             progressBar = new UpdateProgressBar();
-            downloader = new PluginsDownloader
+            progressBar.FormClosed += FormClosedEventHandler;
+             downloader = new PluginsDownloader
             {
                 Client_DownloadFileCompleted = this.Client_DownloadFileCompleted,
                 Client_DownloadProgressChanged = this.Client_DownloadProgressChanged
@@ -604,18 +606,21 @@ namespace C2.Dialogs
         {
             // 正在下载,不能点击更新
             if (this.progressBar.Visible)
-                return;        
+                return;
+            
             try
             {                 
                 string softwareName = newSoftwareVersion.Replace(".info", String.Empty);
                 string packageDir = Path.Combine(Global.SoftwareUrl, @"software/", softwareName);
                 packageLocation = Path.Combine(Global.SoftwareSavePath, softwareName);
+                tmpPackageLocation = packageLocation + ".download";
                 if (File.Exists(packageLocation))
-                    HelpUtil.ShowMessageBox("下载成功，请重启更新软件====");
+                    HelpUtil.ShowMessageBox("下载成功，请重启更新软件");
                 else
                 {
-                    this.downloader.SoftwareDownload(packageDir, packageLocation);
-                    this.progressBar.Show();
+                    this.downloader.SoftwareDownload(packageDir, tmpPackageLocation);
+                    this.progressBar.Status = "下载中";
+                    this.progressBar.ShowDialog();
                 }
                                                      
             }
@@ -655,19 +660,27 @@ namespace C2.Dialogs
         //下载完文件触发此事件
         private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-
-            if (e.UserState != null)
-                return;
             if (this.progressBar.ProgressValue == 100)
             {
                 this.progressBar.Status = "下载完成,请重启软件实现更新";
+                try 
+                {
+                    if (File.Exists(tmpPackageLocation))
+                        File.Move(tmpPackageLocation, packageLocation);
+                }
+                catch 
+                { }
                 return;
             }
             // 下载失败，删除文件
             this.progressBar.Status = "下载失败，请检查网络重新下载";
-            if (File.Exists(packageLocation))
-                File.Delete(packageLocation);
+
         }
+        private void FormClosedEventHandler(object sender, FormClosedEventArgs e)
+        {
+            this.downloader.StopDownloadAsync();
+        }
+
 
         public void WriteFile()
         {

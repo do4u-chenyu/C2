@@ -10,7 +10,7 @@ namespace C2.IAOLab.Plugins
     public class PluginsDownloader
     {
         public PluginsDownloader() { }
-
+        private WebClient client;
         public AsyncCompletedEventHandler Client_DownloadFileCompleted;
         public DownloadProgressChangedEventHandler Client_DownloadProgressChanged;
         public string GetHtmlContent(string pluginURL)
@@ -77,15 +77,28 @@ namespace C2.IAOLab.Plugins
         #region 更新包下载
 
         public void SoftwareDownload(string url, string savePath)
-        {
-                 
+        {         
+            try 
+            {
+                // 清除临时文件
+                if (File.Exists(savePath))
+                    File.Delete(savePath);
+            }
+            catch
+            { }
             Directory.CreateDirectory(Path.GetDirectoryName(savePath));
-            WebClient client = new WebClient();//实例化webclient
+            client = new WebClient();//实例化webclient
             client.DownloadFileCompleted += Client_DownloadFileCompleted;//下载完文件触发此事件
             client.DownloadProgressChanged += Client_DownloadProgressChanged;//下载进度变化触发事件
             client.DownloadFileAsync(new Uri(url), savePath);
 
         }
+        public void StopDownloadAsync()
+        {
+            if (client != null)
+                client.CancelAsync();
+        }
+               
         #endregion
     }
 }

@@ -62,17 +62,18 @@ namespace C2.Dialogs
             // 
             // UpdateProgressBar
             // 
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 81);
             this.Controls.Add(this.status);
             this.Controls.Add(this.speedValue);
             this.Controls.Add(this.proBarDownLoad);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UpdateProgressBar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "下载任务";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UpdateProgressBar_FormClosing);
             this.ResumeLayout(false);
