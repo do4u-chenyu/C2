@@ -40,6 +40,8 @@
             this.passwordTB = new System.Windows.Forms.TextBox();
             this.usernameTB = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.taskInfoGB = new System.Windows.Forms.GroupBox();
+            this.taskStatusLabel = new System.Windows.Forms.Label();
             this.taskNameTB = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,14 +54,12 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
-            this.taskInfoGB = new System.Windows.Forms.GroupBox();
-            this.taskStatusLabel = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.taskInfoGB.SuspendLayout();
             this.panelCenter.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.panelTop.SuspendLayout();
-            this.taskInfoGB.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -179,6 +179,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模型配置";
             // 
+            // taskInfoGB
+            // 
+            this.taskInfoGB.Controls.Add(this.taskStatusLabel);
+            this.taskInfoGB.Location = new System.Drawing.Point(294, 24);
+            this.taskInfoGB.Name = "taskInfoGB";
+            this.taskInfoGB.Size = new System.Drawing.Size(299, 84);
+            this.taskInfoGB.TabIndex = 45;
+            this.taskInfoGB.TabStop = false;
+            this.taskInfoGB.Text = "任务ID：";
+            this.taskInfoGB.Visible = false;
+            // 
+            // taskStatusLabel
+            // 
+            this.taskStatusLabel.AutoSize = true;
+            this.taskStatusLabel.Font = new System.Drawing.Font("微软雅黑", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.taskStatusLabel.ForeColor = System.Drawing.Color.DimGray;
+            this.taskStatusLabel.Location = new System.Drawing.Point(90, 28);
+            this.taskStatusLabel.Name = "taskStatusLabel";
+            this.taskStatusLabel.Size = new System.Drawing.Size(96, 36);
+            this.taskStatusLabel.TabIndex = 0;
+            this.taskStatusLabel.Text = "运行中";
+            // 
             // taskNameTB
             // 
             this.taskNameTB.Font = new System.Drawing.Font("微软雅黑", 9.75F);
@@ -206,8 +228,9 @@
             this.label1.TabIndex = 42;
             this.label1.Text = "模型选择";
             // 
-            // modelComboBox
+            // taskModelComboBox
             // 
+            this.taskModelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.taskModelComboBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.taskModelComboBox.FormattingEnabled = true;
             this.taskModelComboBox.Items.AddRange(new object[] {
@@ -216,10 +239,9 @@
             "全文涉黄模型",
             "全文飞机场模型"});
             this.taskModelComboBox.Location = new System.Drawing.Point(99, 81);
-            this.taskModelComboBox.Name = "modelComboBox";
+            this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(180, 27);
             this.taskModelComboBox.TabIndex = 41;
-            this.taskModelComboBox.Text = "全文涉赌模型";
             this.taskModelComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
             // downloadButton
@@ -307,28 +329,6 @@
             this.panelTop.Size = new System.Drawing.Size(609, 169);
             this.panelTop.TabIndex = 2;
             // 
-            // taskInfoGB
-            // 
-            this.taskInfoGB.Controls.Add(this.taskStatusLabel);
-            this.taskInfoGB.Location = new System.Drawing.Point(294, 24);
-            this.taskInfoGB.Name = "taskInfoGB";
-            this.taskInfoGB.Size = new System.Drawing.Size(299, 84);
-            this.taskInfoGB.TabIndex = 45;
-            this.taskInfoGB.TabStop = false;
-            this.taskInfoGB.Text = "任务ID：";
-            this.taskInfoGB.Visible = false;
-            // 
-            // taskStatusLabel
-            // 
-            this.taskStatusLabel.AutoSize = true;
-            this.taskStatusLabel.Font = new System.Drawing.Font("微软雅黑", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskStatusLabel.ForeColor = System.Drawing.Color.DimGray;
-            this.taskStatusLabel.Location = new System.Drawing.Point(90, 28);
-            this.taskStatusLabel.Name = "taskStatusLabel";
-            this.taskStatusLabel.Size = new System.Drawing.Size(96, 36);
-            this.taskStatusLabel.TabIndex = 0;
-            this.taskStatusLabel.Text = "运行中";
-            // 
             // SearchToolkitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -346,11 +346,11 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.taskInfoGB.ResumeLayout(false);
+            this.taskInfoGB.PerformLayout();
             this.panelCenter.ResumeLayout(false);
             this.panelBottom.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
-            this.taskInfoGB.ResumeLayout(false);
-            this.taskInfoGB.PerformLayout();
             this.ResumeLayout(false);
 
         }
