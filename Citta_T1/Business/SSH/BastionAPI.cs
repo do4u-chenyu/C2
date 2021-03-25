@@ -41,8 +41,10 @@ namespace C2.Business.SSH
 
         public String KillGambleTask() { return String.Empty; }
 
+        public String RunGambleTask() { return String.Empty; }
 
-        public String CreateGambleTaskDirectory() { return String.Empty; }
+
+        public String CreateGambleTaskDirectory(String workspace) { return String.Empty; }
 
         public String YellowTaskPID() { return String.Empty; }
 

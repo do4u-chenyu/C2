@@ -26,6 +26,7 @@ namespace C2.Core
         public static readonly DocumentType Csv;
         public static readonly DocumentType FreeMind;
         public static readonly DocumentType Xmind;
+        public static readonly DocumentType Docx;
         public static readonly DocumentType C2;
         public static readonly DocumentType Pdf;
 
@@ -67,6 +68,9 @@ namespace C2.Core
             Xmind = new DocumentType("Xmind",
                 "application/Xmind",
                 new string[] { ".xmind" });
+            Docx = new DocumentType("Docx",
+                "application/Docx",
+                new string[] { ".docx" });
             C2 = new DocumentType("C2",
                 "application/C2",
                 new string[] { Document.Extension });
@@ -165,6 +169,7 @@ namespace C2.Core
                  Svg,
                  FreeMind,
                  Xmind,
+                 Docx,
                  Txt,
                  Csv,
                  C2,

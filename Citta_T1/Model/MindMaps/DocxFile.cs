@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using C2.Model.Documents;
 using C2.Model.Widgets;
 using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
@@ -9,12 +10,12 @@ namespace C2.Model.MindMaps
 {
     class DocxFile
     {
-
+       
     }
 
     public class DocxFileSaver 
     {
-
+       
         private void WriteNoteToDocx(Widget topicNote,XWPFDocument docx) 
         {
             if (topicNote != null)
@@ -71,22 +72,23 @@ namespace C2.Model.MindMaps
 
         private void WriteTitleToDocx(string title, XWPFDocument docx, int layer) 
         {
+         
             XWPFParagraph paragraphTitle = docx.CreateParagraph();          
             if (layer < 4)
             {
                 switch (layer)
                 {
                     case 0:
-                        paragraphTitle.Style = "标题1";
+                        paragraphTitle.Style = "1";
                         break;
                     case 1:
-                        paragraphTitle.Style = "标题2";
+                        paragraphTitle.Style = "2";
                         break;
                     case 2:
-                        paragraphTitle.Style = "标题3";
+                        paragraphTitle.Style = "3";
                         break;
                     case 3:
-                        paragraphTitle.Style = "标题4";
+                        paragraphTitle.Style = "4";
                         break;
                 }
             }
@@ -125,7 +127,7 @@ namespace C2.Model.MindMaps
 
             //写入标题
            
-            string title = topic.XmlElementName;
+            string title = topic.Text;
             WriteTitleToDocx(title, docx, layer);
           
             //在标题后写入内容
@@ -152,19 +154,23 @@ namespace C2.Model.MindMaps
             }
 
         }
-        private void SaveAsDocx(Topic topic , string filePath, string fileName) 
+        public void SaveAsDocx(Topic topic , string fileName) 
         {
             using (var dotStream = new FileStream(Path.Combine(Application.StartupPath, "Resources", "DocxFileExp", "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
             {
+
                 XWPFDocument DocxExample = new XWPFDocument(dotStream);
-                using (var fileStream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create, FileAccess.Write))
+                using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
                     int layer = 0;
-                    XWPFDocument docx = new XWPFDocument(fileStream);
+                    
+                    XWPFDocument docx = new XWPFDocument();
                     WriteToDocx(topic, DocxExample, docx, layer);
+                    docx.Write(fileStream);
                     docx.Close();
                     fileStream.Close();
                 }
+
                 DocxExample.Close();
                 dotStream.Close();
             }

@@ -10,19 +10,15 @@ namespace C2.SearchToolkit
     class TaskManager
     {
         private List<TaskInfo> tasks;
-        private SSHClient ssh;
 
         public TaskManager() 
         {
-            ssh = new SSHClient();
             tasks = new List<TaskInfo>();  
         }
 
-        public TaskInfo AddTask(String value)
+        public TaskInfo AddTask(TaskInfo task)
         {
-            TaskInfo task = TaskInfo.GenTaskInfo(value);
-            if (task != TaskInfo.EmptyTaskInfo)
-                tasks.Add(task);
+            tasks.Add(task);
             return task;
         }
 

@@ -22,7 +22,7 @@ namespace C2.SearchToolkit
                 this.bastionIPTB,
                 this.searchAgentIPTB,
                 this.remoteWorkspaceTB,
-                this.modelComboBox,
+                this.taskModelComboBox,
                 this.taskNameTB
             };
         }
@@ -32,15 +32,30 @@ namespace C2.SearchToolkit
             this.passwordTB.Text = taskInfo.Password;
             this.taskNameTB.Text = taskInfo.TaskName;
             this.bastionIPTB.Text = taskInfo.BastionIP;
-            this.modelComboBox.Text = taskInfo.TaskModel;
+            this.taskModelComboBox.Text = taskInfo.TaskModel;
             this.searchAgentIPTB.Text = taskInfo.SearchAgentIP;
             this.remoteWorkspaceTB.Text = taskInfo.RemoteWorkspace;
+
+            this.taskInfoGB.Text = "任务ID:" + taskInfo.TaskID; 
+            this.taskStatusLabel.Text = taskInfo.TaskStatus;
         }
 
         private TaskInfo GenTaskInfo()
         {
-            return TaskInfo.EmptyTaskInfo;
-        
+           String value = String.Join("\t", new string[] {
+                                            this.taskNameTB.Text,  // 刚开始创建时，没有ID
+                                            this.taskNameTB.Text,
+                                            DateTime.Now.ToShortDateString(),
+                                            this.taskModelComboBox.Text,
+                                            "NULL",
+                                            this.usernameTB.Text,
+                                            this.passwordTB.Text,
+                                            this.bastionIPTB.Text,
+                                            this.searchAgentIPTB.Text,
+                                            this.remoteWorkspaceTB.Text
+            });
+
+            return TaskInfo.GenTaskInfo(value);
         }
 
         private void ReadOnlyInputControl()
