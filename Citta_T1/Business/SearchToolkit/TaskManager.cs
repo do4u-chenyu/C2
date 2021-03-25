@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using C2.Core;
 using System.IO;
+using C2.Utils;
 
 namespace C2.SearchToolkit
 {
@@ -38,19 +39,27 @@ namespace C2.SearchToolkit
             return true;
         }
 
-        private String[] ListAllTaskBcpFiles()
+        private String[] ListTaskBcpFiles()
         {
-            return new String[0]; 
+            return FileUtil.TryListFiles(home, "*.bcp");
         }
         private TaskInfo LoadTaskBcp(String taskFFP)
         {
-            return TaskInfo.EmptyTaskInfo;
+            try 
+            {
+                String content = new StreamReader(taskFFP).ReadToEnd();
+                return TaskInfo.GenTaskInfo(content, true);
+            } catch 
+            {
+                return TaskInfo.EmptyTaskInfo;
+            }
+
         }
 
         public bool Refresh() 
         {
             tasks.Clear();
-            foreach (String taskFFP in ListAllTaskBcpFiles())
+            foreach (String taskFFP in ListTaskBcpFiles())
             {
                 TaskInfo task = LoadTaskBcp(taskFFP);
                 if (task != TaskInfo.EmptyTaskInfo)

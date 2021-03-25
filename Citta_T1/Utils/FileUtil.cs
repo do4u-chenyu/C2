@@ -10,7 +10,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -18,32 +17,24 @@ namespace C2.Utils
 {
     class ReadRst
     {
-        List<List<string>> result;
-        int returnCode;
-        string msg;
-        public List<List<string>> Result { get { return this.result; } }
-        public int ReturnCode { get { return this.returnCode; } }
-        public string Msg { get { return this.msg; } }
-        public ReadRst()
-        {
-            result = null;
-            returnCode = 0;
-            msg = String.Empty;
-        }
+        public List<List<string>> Result { get; }
+        public int ReturnCode { get; }
+        public string Msg { get; }
+
         public ReadRst(List<List<string>> rst , int rtc, string m)
         {
-            result = rst;
-            returnCode = rtc;
-            msg = m;
+            Result = rst;
+            ReturnCode = rtc;
+            Msg = m;
         }
     }
     class FileUtil
     {
-        public static LogUtil log = LogUtil.GetInstance("FileUtil");
+        private static LogUtil log = LogUtil.GetInstance("FileUtil");
         private static Crc32 crc32 = new Crc32();
         public static void AddPathPower(string pathName, string power)
         {
-            string userName = System.Environment.UserName;
+            string userName = Environment.UserName;
             DirectoryInfo dirInfo = new DirectoryInfo(pathName);
 
             if ((dirInfo.Attributes & FileAttributes.ReadOnly) != 0)
