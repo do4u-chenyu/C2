@@ -138,22 +138,23 @@ namespace C2.Core
         public static void SetBottomViewPanel(Panel bv) { bottomViewPanle = bv; }
         public static void SetWorkSpacePanel(Panel ws) { workSpacePanel = ws; }
         public static void SetMindMapModelControl(MyMindMapControl mmmc) { mindMapModelControl = mmmc; }
-        private static string workspaceDirectory;           // 用户模型工作目录
-        public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
-        public static string UserWorkspacePath { get => Path.Combine(workspaceDirectory, mainForm.UserName); }
+
+        public static string WorkspaceDirectory { get; set; } // 用户空间根目录
+        public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, mainForm.UserName); }
         public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "模型市场"); }
+        public static string SearchToolkitPath { get => Path.Combine(UserWorkspacePath, "全文工具箱"); }
         public static string TempDirectory { get; set; }
         public const float Factor = 1.3F;
-        private static string versionType;
-        public static string VersionType { get => versionType; set => versionType = value; }
+
+        public static string VersionType { get; set; }
         public const string GreenLevel = "Green";
         public const string Nolanding = "NoLogin";
         public const string GreenPath = "source";
         public const string IAOLab = "APK, BaseStation, Wifi, Card, Tude, Ip ";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
         public const int ChartNum = 3;
-        public static string LocalPluginPath = Path.Combine(Application.StartupPath, "plugins");
+        public static string LocalPluginsPath = Path.Combine(Application.StartupPath, "plugins");
         public static string SoftwareSavePath = Path.Combine(Application.StartupPath, "update", "install");
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
         public const string DLLHostUrl = @"http://218.94.117.234:8484/C2Plugins/";

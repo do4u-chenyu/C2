@@ -26,15 +26,24 @@ namespace C2.Controls.C1.Left
                 return;
 
 
-            TaskInfo taskInfo = new SearchToolkitForm().ShowTaskConfigDialog();
+            TaskInfo task = new SearchToolkitForm().ShowTaskConfigDialog();
 
-            if (taskInfo.IsEmpty())
+            if (task.IsEmpty())
                 return;
 
             // TODO run task
 
-            AddInnerButton(new SearchToolkitButton(taskInfo));
-            taskManager.AddTask(taskInfo);
+            AddInnerButton(new SearchToolkitButton(task));
+            taskManager.SaveTask(task);
+        }
+
+        private void SearchToolkitControl_Load(object sender, EventArgs e)
+        {
+            taskManager.Refresh();
+
+            foreach (TaskInfo task in taskManager.Tasks)
+                AddInnerButton(new SearchToolkitButton(task));
+
         }
     }
 }

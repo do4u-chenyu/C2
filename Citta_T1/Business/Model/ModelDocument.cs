@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace C2.Business.Model
@@ -89,13 +88,11 @@ namespace C2.Business.Model
             else
                 Name = null;
 
-            if (FileNameChanged != null)
-                FileNameChanged(this, EventArgs.Empty);
+            FileNameChanged?.Invoke(this, EventArgs.Empty);
         }
         void OnNameChanged()
         {
-            if (NameChanged != null)
-                NameChanged(this, EventArgs.Empty);
+            NameChanged?.Invoke(this, EventArgs.Empty);
         }
         /*
          * 保存功能
@@ -132,11 +129,6 @@ namespace C2.Business.Model
         {
             if (this.ModelGraphDict.ContainsKey(mr.StartID))
                 this.ModelGraphDict[mr.StartID].Remove(mr.EndID);
-        }
-
-        public void DeleteModelElement(Control control)
-        {
-            this.ModelElements.Remove(this.ModelElements.Find(me => me.InnerControl == control));
         }
 
         public void DeleteModelElement(ModelElement me)

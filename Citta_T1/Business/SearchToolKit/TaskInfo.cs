@@ -20,6 +20,8 @@ namespace C2.SearchToolkit
 
         public bool IsEmpty() { return this == EmptyTaskInfo; }
 
+        public String BcpFilename { get => String.Format("{0}_{1}_{2}.bcp", TaskID, TaskName, TaskCreateTime); }
+
         private static readonly String HeadColumnLine = String.Join(OpUtil.TabSeparatorString, new string[] {
             "TaskID" ,
             "TaskName",

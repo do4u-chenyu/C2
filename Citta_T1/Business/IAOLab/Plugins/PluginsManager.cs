@@ -71,7 +71,7 @@ namespace C2.IAOLab.Plugins
         public void DownloadPlugin(string pluginName)
         {
             string selectedDll = Global.DLLPackageUrl + pluginName;
-            string savePath = Path.Combine(Global.LocalPluginPath, pluginName);
+            string savePath = Path.Combine(Global.LocalPluginsPath, pluginName);
             downloader.PluginDownload(selectedDll, savePath);
         }
 
@@ -88,9 +88,9 @@ namespace C2.IAOLab.Plugins
 
         public void Refresh()
         {
-            foreach (string dll in FileUtil.TryListFiles(Global.LocalPluginPath, "*.dll"))
+            foreach (string dll in FileUtil.TryListFiles(Global.LocalPluginsPath, "*.dll"))
                 TryLoadOne(dll);
-            foreach (string exe in FileUtil.TryListFiles(Global.LocalPluginPath, "*.exe"))
+            foreach (string exe in FileUtil.TryListFiles(Global.LocalPluginsPath, "*.exe"))
                 TryLoadOne(exe);
         }
 

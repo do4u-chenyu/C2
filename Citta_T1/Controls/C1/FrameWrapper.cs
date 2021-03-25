@@ -1,6 +1,5 @@
 ﻿using C2.Business.Model;
 using C2.Business.Model.World;
-using C2.Controls.Interface;
 using C2.Controls.Move;
 using C2.Core;
 using C2.Core.UndoRedo;
