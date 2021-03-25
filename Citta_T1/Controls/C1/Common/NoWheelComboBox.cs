@@ -20,7 +20,7 @@ namespace C2.Controls.C1.Common
 
         bool IMessageFilter.PreFilterMessage(ref Message m)
         {
-            if (m.Msg == 0x020A)  // 不处理滚轮事件
+            if (m.Msg == 0x020A && m.HWnd == this.Handle)  // 不处理滚轮事件
                 return true;
             return false;
         }

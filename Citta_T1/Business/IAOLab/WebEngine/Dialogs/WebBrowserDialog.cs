@@ -256,7 +256,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.SavePic.Enabled = false;
                 isActive = false;
                 
-                WebUrl = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
+                WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
                 webBrowser1.Navigate(WebUrl);
                 SaveHistoryPoints();
             }
@@ -321,8 +321,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         public void LoadHtml()
         {
-            Stream myStream = new FileStream(Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\Html", "SourceCodeMap.html"), FileMode.Open);
-            Encoding encode = System.Text.Encoding.GetEncoding("gb2312");//若是格式为utf-8的需要将gb2312替换
+            Stream myStream = new FileStream(Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "SourceCodeMap.html"), FileMode.Open);
+            Encoding encode = System.Text.Encoding.GetEncoding("utf-8");//若是格式为utf-8的需要将gb2312替换
             StreamReader myStreamReader = new StreamReader(myStream, encode);
             string strhtml = myStreamReader.ReadToEnd();
             myStream.Close();
