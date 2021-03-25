@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace C2.SearchToolkit
 {
     public partial class SearchToolkitForm : Form
     {
         private Control[] inputControls;
-
+        private Dictionary<String, String> taskDict;
+        
         public SearchToolkitForm()
         {
             InitializeComponent();
@@ -25,7 +27,16 @@ namespace C2.SearchToolkit
                 this.taskModelComboBox,
                 this.taskNameTB
             };
-            this.taskModelComboBox.SelectedIndex = 0;
+
+            taskDict = new Dictionary<string, string>
+            {
+                ["全文涉赌模型"] = "gamble",
+                ["全文涉枪模型"] = "gun",
+                ["全文涉黄模型"] = "yellow",
+                ["全文飞机场模型"] = "plane"
+            };
+
+            this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
         }
         private void LoadTaskInfo(TaskInfo taskInfo)
         {
@@ -89,7 +100,18 @@ namespace C2.SearchToolkit
 
         private void ModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.taskNameTB.Text = GenTaskName();
+            this.remoteWorkspaceTB.Text = GenWorkspace();
+        }
 
+        private String GenTaskName()
+        {
+             return this.taskModelComboBox.Text + "_" + DateTime.Now.ToString("yyyyMMdd");
+        }
+
+        private String GenWorkspace()
+        {
+            return @"/tmp/iao/search_toolkit/" + taskDict[this.taskModelComboBox.Text];
         }
 
         private bool ValidateInputControls()

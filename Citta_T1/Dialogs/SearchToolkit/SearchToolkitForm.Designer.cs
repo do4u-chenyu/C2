@@ -182,9 +182,9 @@
             // taskInfoGB
             // 
             this.taskInfoGB.Controls.Add(this.taskStatusLabel);
-            this.taskInfoGB.Location = new System.Drawing.Point(294, 24);
+            this.taskInfoGB.Location = new System.Drawing.Point(316, 24);
             this.taskInfoGB.Name = "taskInfoGB";
-            this.taskInfoGB.Size = new System.Drawing.Size(299, 84);
+            this.taskInfoGB.Size = new System.Drawing.Size(277, 84);
             this.taskInfoGB.TabIndex = 45;
             this.taskInfoGB.TabStop = false;
             this.taskInfoGB.Text = "任务ID：";
@@ -206,7 +206,7 @@
             this.taskNameTB.Font = new System.Drawing.Font("微软雅黑", 9.75F);
             this.taskNameTB.Location = new System.Drawing.Point(99, 36);
             this.taskNameTB.Name = "taskNameTB";
-            this.taskNameTB.Size = new System.Drawing.Size(180, 25);
+            this.taskNameTB.Size = new System.Drawing.Size(211, 25);
             this.taskNameTB.TabIndex = 44;
             this.taskNameTB.Text = "全文涉赌模型";
             // 
@@ -240,7 +240,7 @@
             "全文飞机场模型"});
             this.taskModelComboBox.Location = new System.Drawing.Point(99, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
-            this.taskModelComboBox.Size = new System.Drawing.Size(180, 27);
+            this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);
             this.taskModelComboBox.TabIndex = 41;
             this.taskModelComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
@@ -264,7 +264,7 @@
             this.remoteWorkspaceTB.Name = "remoteWorkspaceTB";
             this.remoteWorkspaceTB.Size = new System.Drawing.Size(408, 25);
             this.remoteWorkspaceTB.TabIndex = 36;
-            this.remoteWorkspaceTB.Text = "/tmp/iao/search/gamble";
+            this.remoteWorkspaceTB.Text = "/tmp/iao/search_toolkit/gamble";
             this.remoteWorkspaceTB.Enter += new System.EventHandler(this.LinuxWorkspaceTB_Enter);
             // 
             // label4
