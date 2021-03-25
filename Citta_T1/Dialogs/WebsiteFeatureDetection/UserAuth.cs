@@ -13,12 +13,12 @@ using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
 {
-    partial class UserAuthentication : StandardDialog
+    partial class UserAuth : StandardDialog
     {
         public string UserName { get => this.userName.Text; set => this.userName.Text = value; }
         public string Otp { get => this.otp.Text; set => this.otp.Text = value; }
         public string Token;
-        public UserAuthentication()
+        public UserAuth()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace C2.Dialogs.WebsiteFeatureDetection
 {
-    partial class UserAuthentication
+    partial class UserAuth
     {
         /// <summary>
         /// Required designer variable.
