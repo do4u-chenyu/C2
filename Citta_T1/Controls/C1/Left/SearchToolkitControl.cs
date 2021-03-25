@@ -18,8 +18,11 @@ namespace C2.Controls.C1.Left
             InitializeComponent();
         }
 
-        private void AddTaskLabel_Click(object sender, EventArgs e)
+        private void AddTaskLabel_MouseClick(object sender, MouseEventArgs e)
         {
+            if (e.Button != MouseButtons.Left)
+                return;
+
             DialogResult ret = new SearchToolkitForm().ShowTaskInfoDialog(TaskInfo.EmptyTaskInfo);
             if (ret == DialogResult.OK)
                 AddInnerButton(new SearchToolkitButton("测试"));

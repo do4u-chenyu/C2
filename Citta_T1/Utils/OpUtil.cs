@@ -14,6 +14,8 @@ namespace C2.Utils
 {
     public class OpUtil
     {
+        public static readonly string TabSeparatorString = "\t";
+
         public static readonly char TabSeparator = '\t';
         public static readonly char DefaultLineSeparator = '\n';
         public static readonly char Blank = ' ';
