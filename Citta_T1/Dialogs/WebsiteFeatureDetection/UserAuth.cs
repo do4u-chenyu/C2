@@ -15,12 +15,30 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 {
     partial class UserAuth : StandardDialog
     {
-        public string UserName { get => this.userName.Text; set => this.userName.Text = value; }
-        public string Otp { get => this.otp.Text; set => this.otp.Text = value; }
+        private string defaultUserTip = "工号，首字母大写（例如X1234）";
+        private string defaultOtpTip = "星空下-工作台-熵情口令6位动态数字";
+
+        public string UserName { get => this.userNameTextBox.Text; set => this.userNameTextBox.Text = value; }
+        public string Otp { get => this.otpTextBox.Text; set => this.otpTextBox.Text = value; }
         public string Token;
         public UserAuth()
         {
             InitializeComponent();
+            SetDefaultUserTip();
+            SetDefaultOtpTip();
+        }
+
+        private void SetDefaultUserTip()
+        {
+            this.userNameTextBox.Text = defaultUserTip;
+            this.userNameTextBox.ForeColor = Color.Gray;
+            this.userNameTextBox.Font = new System.Drawing.Font("宋体", 9F);
+        }
+        private void SetDefaultOtpTip()
+        {
+            this.otpTextBox.Text = defaultOtpTip;
+            this.otpTextBox.ForeColor = Color.Gray;
+            this.otpTextBox.Font = new System.Drawing.Font("宋体", 9F);
         }
 
         protected override bool OnOKButtonClick()
@@ -35,6 +53,38 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 
             
             return base.OnOKButtonClick();
+        }
+
+        private void UserNameTextBox_Enter(object sender, EventArgs e)
+        {
+            if (this.userNameTextBox.Text == defaultUserTip)
+            {
+                this.userNameTextBox.Text = "";
+                this.userNameTextBox.ForeColor = Color.Black;
+                this.userNameTextBox.Font = new System.Drawing.Font("宋体", 10.5F);
+            }
+        }
+
+        private void UserNameTextBox_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(this.userNameTextBox.Text))
+                SetDefaultUserTip();
+        }
+
+        private void OtpTextBox_Enter(object sender, EventArgs e)
+        {
+            if (this.otpTextBox.Text == defaultOtpTip)
+            {
+                this.otpTextBox.Text = "";
+                this.otpTextBox.ForeColor = Color.Black;
+                this.otpTextBox.Font = new System.Drawing.Font("宋体", 10.5F);
+            }
+        }
+
+        private void OtpTextBox_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(this.otpTextBox.Text))
+                SetDefaultOtpTip();
         }
     }
 }
