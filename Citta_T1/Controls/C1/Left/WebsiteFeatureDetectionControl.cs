@@ -42,7 +42,7 @@ namespace C2.Controls.C1.Left
             //判断用户是否认证？已认证的可以直接新建任务，否则先认证再新建任务
             if (string.IsNullOrEmpty(WFDUser))
             {
-                var UAdialog = new UserAuthentication();
+                var UAdialog = new UserAuth();
                 if (UAdialog.ShowDialog() != DialogResult.OK)
                     return;
 
@@ -52,7 +52,7 @@ namespace C2.Controls.C1.Left
             else
             {
                 //TODO phx 这块逻辑得看下token存活时间
-                Token = WFDApi.UserAuthentication(WFDUser, TOTP.GetTotp(WFDUser));
+                Token = WFDApi.UserAuthentication(WFDUser, TOTP.GetInstance().GetTotp(WFDUser));
             }
 
             AddTask();

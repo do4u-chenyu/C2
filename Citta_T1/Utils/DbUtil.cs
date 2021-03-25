@@ -19,11 +19,15 @@ namespace C2.Utils
         public static string PostgreDeaultSchema = "postgres";
         public static StringBuilder TrimEndN(this StringBuilder sb)
         {
-            return sb.Replace(@"\n", @"\0", sb.Length - 1, 1);
+            if(sb.Length > 0)
+                return sb.Replace(@"\n", @"\0", sb.Length - 1, 1);
+            return sb;
         }
         public static StringBuilder TrimEndT(this StringBuilder sb)
         {
-            return sb.Replace(@"\t", @"\0", sb.Length - 1, 1);
+            if (sb.Length > 0)
+                return sb.Replace(@"\t", @"\0", sb.Length - 1, 1);
+            return sb;
         }
         public static Dictionary<string, List<string>> StringToDict(string v)
         {

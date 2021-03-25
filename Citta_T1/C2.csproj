@@ -303,11 +303,11 @@
     <Compile Include="Dialogs\WebsiteFeatureDetection\AddWFDTask.Designer.cs">
       <DependentUpon>AddWFDTask.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\WebsiteFeatureDetection\UserAuthentication.cs">
+    <Compile Include="Dialogs\WebsiteFeatureDetection\UserAuth.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\WebsiteFeatureDetection\UserAuthentication.Designer.cs">
-      <DependentUpon>UserAuthentication.cs</DependentUpon>
+    <Compile Include="Dialogs\WebsiteFeatureDetection\UserAuth.Designer.cs">
+      <DependentUpon>UserAuth.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\WebsiteFeatureDetection\WFDTaskResult.cs">
       <SubType>Form</SubType>
@@ -1880,8 +1880,8 @@
     <EmbeddedResource Include="Dialogs\WebsiteFeatureDetection\AddWFDTask.resx">
       <DependentUpon>AddWFDTask.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WebsiteFeatureDetection\UserAuthentication.resx">
-      <DependentUpon>UserAuthentication.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\WebsiteFeatureDetection\UserAuth.resx">
+      <DependentUpon>UserAuth.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WebsiteFeatureDetection\WFDTaskResult.resx">
       <DependentUpon>WFDTaskResult.cs</DependentUpon>

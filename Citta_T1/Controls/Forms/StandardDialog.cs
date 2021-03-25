@@ -22,13 +22,13 @@ namespace C2.Controls
             AutoClose = true;
 
             BtnOK = new Button();
-            BtnOK.Text = Lang._("OK");
+            BtnOK.Text = "确定";
             BtnOK.TabIndex = 10000;
             BtnOK.UseVisualStyleBackColor = true;
             BtnOK.Click += new EventHandler(BtnOK_Click);
 
             BtnCancel = new Button();
-            BtnCancel.Text = Lang._("Cancel");
+            BtnCancel.Text = "取消";
             BtnCancel.TabIndex = 10001;
             BtnCancel.UseVisualStyleBackColor = true;
             BtnCancel.Click += new EventHandler(BtnCancel_Click);

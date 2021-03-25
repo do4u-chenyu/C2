@@ -194,7 +194,7 @@ namespace C2.IAOLab.WebEngine.Boss
                 }
             }
 
-            string tempName = Path.Combine(Application.StartupPath, "IAOLab\\WebEngine\\JS", "BossOptions.js");
+            string tempName = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\JS", "BossOptions.js");
             File.WriteAllText(tempName, htmlContent);
             return tempName;            
         }

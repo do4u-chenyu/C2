@@ -101,7 +101,7 @@ namespace C2.Database
                 catch { }
                 
             }
-            return DbUtil.TrimEndN(sb).ToString();
+            return sb.TrimEndN().ToString();
         }
 
         public override bool ExecuteSQL(string sqlText, string outputPath, int maxReturnNum = int.MaxValue)
