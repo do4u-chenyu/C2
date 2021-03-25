@@ -25,6 +25,7 @@ namespace C2.SearchToolkit
                 this.taskModelComboBox,
                 this.taskNameTB
             };
+            this.taskModelComboBox.SelectedIndex = 0;
         }
         private void LoadTaskInfo(TaskInfo taskInfo)
         {
