@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using C2.Utils;
 
 namespace C2.SearchToolkit
 {
@@ -70,7 +72,7 @@ namespace C2.SearchToolkit
             return TaskInfo.GenTaskInfo(value);
         }
 
-        private void ReadOnlyInputControl()
+        private void ReadOnlyInputControls()
         {
             foreach (Control ct in inputControls)
                 ct.Enabled = false;
@@ -78,7 +80,7 @@ namespace C2.SearchToolkit
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-
+            //TODO 
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -89,7 +91,8 @@ namespace C2.SearchToolkit
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            if (ValidateInputControls())
+                this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
@@ -114,25 +117,73 @@ namespace C2.SearchToolkit
             return @"/tmp/iao/search_toolkit/" + taskDict[this.taskModelComboBox.Text];
         }
 
+        private bool ValidateIP(String value)
+        {
+            return Regex.IsMatch(value, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$") && 
+                ConvertUtil.TryParseIntList(value, '.').TrueForAll(item => item >= 0 && item <= 255);
+        }
+
+        private bool ValidateTooLong(String value, int defaultMaxLength = 128)
+        {
+            return value.Length < defaultMaxLength;
+        }
+
+        private bool ValidateSpecialChars(String value, String specialChars = @"!@#$%^&*()+=\/'~`|[],")
+        {
+            return value.IndexOfAny(specialChars.ToCharArray()) == -1;
+        }
+
+        private bool ValidateNotEmpty(String value)
+        {
+            return !String.IsNullOrEmpty(value) && !String.IsNullOrWhiteSpace(value);
+        }
+
+        private bool ValidateTaskName()
+        {
+            String value = this.taskNameTB.Text;
+            return ValidateNotEmpty(value) && ValidateTooLong(value) && ValidateSpecialChars(value);
+        }
+
+        private bool ValidateBastionIP() 
+        {
+            return ValidateIP(this.bastionIPTB.Text);
+        }
+
+        private bool ValidateSearchAgentIP()
+        {
+            return ValidateIP(this.searchAgentIPTB.Text);
+        }
+
+        private bool ValidateUsername()
+        {
+            String value = this.usernameTB.Text;
+            return ValidateNotEmpty(value) && ValidateTooLong(value) && ValidateSpecialChars(value);
+        }
+
+        private bool ValidatePassword()
+        {
+            String value = this.passwordTB.Text;
+            return ValidateNotEmpty(value) && ValidateTooLong(value) && ValidateSpecialChars(value);
+        }
         private bool ValidateInputControls()
         {
-            return true;
+            return  ValidateTaskName() &&
+                    ValidateUsername() && 
+                    ValidatePassword() &&
+                    ValidateBastionIP() &&
+                    ValidateSearchAgentIP();
         }
         public TaskInfo ShowTaskConfigDialog()
         {
             taskInfoGB.Visible = false;
-            DialogResult ret = this.ShowDialog();
-            if (ret != DialogResult.OK || !ValidateInputControls())
-                return TaskInfo.EmptyTaskInfo;
-
-            return GenTaskInfo();
+            return this.ShowDialog() == DialogResult.OK ? GenTaskInfo() : TaskInfo.EmptyTaskInfo;
         }
 
         public DialogResult ShowTaskInfoDialog(TaskInfo taskInfo)
         {
             taskInfoGB.Visible = true;
             LoadTaskInfo(taskInfo);
-            ReadOnlyInputControl();   // 展示任务信息时, 不需要更改
+            ReadOnlyInputControls();   // 展示任务信息时, 不需要更改
             return this.ShowDialog();
         }
     }
