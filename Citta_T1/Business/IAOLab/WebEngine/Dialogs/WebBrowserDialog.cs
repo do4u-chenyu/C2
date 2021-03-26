@@ -38,7 +38,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public string SourceWebUrl;
         bool isActive = true;
         bool clearClick = false;
-        private string picPath;
+        private readonly string picPath;
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
 
@@ -66,15 +66,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
             webBrowser1.Navigate(WebUrl);
             if (WebType == WebType.Boss)//数据大屏初次打开是自动弹出配置窗口
                 OpenSelectBossDialog();
-
-
         }
 
         private object[] OpenMapFile(string path)
         {
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
-            string res = "";
             StreamReader sr = new StreamReader(path, Encoding.Default);
             String line;
             while ((line = sr.ReadLine()) != null)
@@ -89,13 +86,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         lonValues.Add(tempstr[i]);
                 }
             }
+            // TODO DK 热力图没考虑
             string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
             List<string> tmpList = new List<string>();
             for (int i = 0; i < latValues.Count; i++)
             {
                 tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[i], lonValues[i]) + '}');
             }
-            res = '[' + String.Join(",", tmpList.ToArray()) + ']';
+            string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
             sr.Close();
             return new object[] { res };
         }
@@ -105,19 +103,18 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            /*
+             * 打开地图 进行初始化
+             * 1. 检查有没有存好的DataItem
+             * 2. 加载地图
+             */
             if (WebType == WebType.Map)
             {
                 var configMap = new ConfigForm();
                 string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
                 webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
-                List<DataItem> dataItems = new List<DataItem>();
                 MapWidget maw = HitTopic.FindWidget<MapWidget>();
-                if (maw != null)
-                    dataItems = maw.DataItems;
-
-                if (dataItems.Count == 0)
-                    return;
-                foreach (DataItem di in dataItems)
+                foreach (DataItem di in maw.DataItems)
                 {
                     if (di.FileName.Contains("标注图") && File.Exists(di.FilePath))
                         webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
@@ -211,6 +208,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
         #region 地图菜单事件
         void LoadMapData_Click(object sender, EventArgs e)
         {
+            /* 将数据上图
+             * 加载地图的时候应该把MapWidget的DataItems写入
+             * 1. new DataItem
+             * 2. HitTopic.FindWidget<MapWidget>().DataItems.Add()
+             */
             var dialog = new SelectMapDialog(DataItems);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -231,6 +233,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         webBrowser1.Document.InvokeScript("drawHeatmap", args);
                         break;
                 }
+                //SavePoints(dialog.map, args[0]);
                 var configMap = new ConfigForm();
                 string newCenterAndZoom = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
                 webBrowser1.Document.InvokeScript("centerAndZoom", new object[] { newCenterAndZoom });
@@ -275,14 +278,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 var dialog = new SelectMapDialog(DataItems);
                 string configstr = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
                 webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
-                List<DataItem> dataItems = new List<DataItem>();
                 MapWidget maw = HitTopic.FindWidget<MapWidget>();
-                if (maw != null)
-                    dataItems = maw.DataItems;
-
-                if (dataItems.Count == 0)
-                    return;
-                foreach (DataItem di in dataItems)
+                // TODO 没有考虑热力图的持久化
+                foreach (DataItem di in maw.DataItems)
                 {
                     if (di.FileName.Contains("标注图") && File.Exists(di.FilePath))
                         webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
@@ -297,7 +295,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         }
 
-        private void runButton_Click(object sender, EventArgs e)
+        private void RunButton_Click(object sender, EventArgs e)
         {
             string tempDir = FileUtil.TryGetSysTempDir();
             Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
@@ -316,7 +314,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SourceWebUrl = Path.Combine(Global.TempDirectory, "editorMap.html");
             webBrowser1.Navigate(SourceWebUrl);
         }
-        private void resetButton_Click(object sender, EventArgs e)
+        private void ResetButton_Click(object sender, EventArgs e)
         {
             LoadHtml();
         }
@@ -398,7 +396,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void SaveHistoryPoints()
         {
-            var tempstr = new MapWidget();
             string markerpath = string.Empty;
             string polygonpath = string.Empty;
             string polylinepath = string.Empty;

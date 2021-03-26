@@ -84,7 +84,7 @@
             this.datasourceComboBox.Name = "datasourceComboBox";
             this.datasourceComboBox.Size = new System.Drawing.Size(189, 20);
             this.datasourceComboBox.TabIndex = 10007;
-            this.datasourceComboBox.SelectedIndexChanged += new System.EventHandler(this.datasourceComboBox_SelectedIndexChanged);
+            this.datasourceComboBox.SelectedIndexChanged += new System.EventHandler(this.DatasourceComboBox_SelectedIndexChanged);
             // 
             // mapTypeComboBox
             // 
@@ -99,7 +99,7 @@
             this.mapTypeComboBox.Name = "mapTypeComboBox";
             this.mapTypeComboBox.Size = new System.Drawing.Size(189, 20);
             this.mapTypeComboBox.TabIndex = 10008;
-            this.mapTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.mapTypeComboBox_SelectedIndexChanged);
+            this.mapTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.MapTypeComboBox_SelectedIndexChanged);
             // 
             // latComboBox
             // 
