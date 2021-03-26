@@ -51,9 +51,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
         }
 
-        private void datasourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void DatasourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            clearComBox();
+            ClearComBox();
             this.hitItem = DataItems[datasourceComboBox.SelectedIndex];
             SetDropDown();
         }
@@ -65,7 +65,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             this.countComboBox.Items.AddRange(bcpInfo.ColumnArray);
 
         }
-        private void clearComBox() 
+        private void ClearComBox() 
         {
             latComboBox.Items.Clear();
             latComboBox.Text = "";
@@ -209,7 +209,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             return notReady;
         }
 
-        private void mapTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void MapTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.mapTypeComboBox.Text == "热力图")
                 countComboBox.Enabled = true;

@@ -101,7 +101,7 @@
             this.resetButton.TabIndex = 10007;
             this.resetButton.Text = "重置";
             this.resetButton.UseVisualStyleBackColor = false;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // runButton
             // 
@@ -114,7 +114,7 @@
             this.runButton.TabIndex = 10006;
             this.runButton.Text = "运行";
             this.runButton.UseVisualStyleBackColor = false;
-            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
             // WebBrowserDialog
             // 

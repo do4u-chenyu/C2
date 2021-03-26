@@ -48,18 +48,6 @@
         map.centerAndZoom(new BMap.Point(args[0], args[1]), args[2]);
 	}
 
-    //------------------实现热力图所有调用函数--------------------
-
-    function drawHeatmap(method) {
-        if (!isSupportCanvas()) {
-            alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
-        }
-        var obj = JSON.parse(method);
-        heatmapOverlay = new BMapLib.HeatmapOverlay({ "radius": 20, "visible": true });
-        map.addOverlay(heatmapOverlay);
-        heatmapOverlay.setDataSet({ data: obj, max: 100 });
-    };
-
     //判断浏览区是否支持canvas
     function isSupportCanvas() {
         var elem = document.createElement('canvas');
@@ -133,10 +121,6 @@
 
     //------------------清除所有已画图形，让WINFORM调用--------------------
     function clearAll() {
-        //for (var i = 0; i < overlays.length; i++) {
-        //    map.removeOverlay(overlays[i]);
-        //}
-        //overlays.length = 0
         map.clearOverlays();
     }
 
@@ -144,7 +128,8 @@
     function markerPoints(w){
         var obj = JSON.parse(w);
         for (j = 0, len = obj.length; j < len; j++) {
-            var marker = new BMap.Marker(obj[j]);  // 创建标注
+            var point = new BMap.Point(obj[j].lng, obj[j].lat)
+            var marker = new BMap.Marker(point);  // 创建标注
             map.addOverlay(marker);
         }
     }
@@ -169,6 +154,17 @@
         }
         var polyline = new BMap.Polygon(trackPoint, { strokeColor: "blue", strokeWeight: 6, strokeOpacity: 0.5 });  //定义折线
         map.addOverlay(polyline);
+    };
+        //------------------实现热力图所有调用函数--------------------
+
+    function drawHeatmap(method) {
+        if (!isSupportCanvas()) {
+            alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
+        }
+        var obj = JSON.parse(method);
+        heatmapOverlay = new BMapLib.HeatmapOverlay({ "radius": 20, "visible": true });
+        map.addOverlay(heatmapOverlay);
+        heatmapOverlay.setDataSet({ data: obj, max: 100 });
     };
 </script>
 
