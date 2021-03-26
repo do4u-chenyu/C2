@@ -64,7 +64,7 @@ namespace C2.SearchToolkit
                                             this.taskNameTB.Text,
                                             DateTime.Now.ToString("yyyyMMdd"), 
                                             this.taskModelComboBox.Text,
-                                            "NULL",  // NULL, RUNNING, DONE, FAIL
+                                            "RUNNING",  // NULL, RUNNING, DONE, FAIL
                                             this.usernameTB.Text,
                                             this.passwordTB.Text,
                                             this.bastionIPTB.Text,
@@ -190,13 +190,17 @@ namespace C2.SearchToolkit
         }
         public TaskInfo ShowTaskConfigDialog()
         {
-            taskInfoGB.Visible = false;
+            taskInfoGB.Visible = !taskInfoGB.Visible;
+            confirmButton.Enabled = !confirmButton.Enabled;
+
             return this.ShowDialog() == DialogResult.OK ? GenTaskInfo() : TaskInfo.EmptyTaskInfo;
         }
 
         public DialogResult ShowTaskInfoDialog(TaskInfo taskInfo)
         {
-            taskInfoGB.Visible = true;
+            taskInfoGB.Visible = !taskInfoGB.Visible;
+            confirmButton.Enabled = !confirmButton.Enabled;
+
             LoadTaskInfo(taskInfo);
             ReadOnlyInputControls();   // 展示任务信息时, 不需要更改
             return this.ShowDialog();

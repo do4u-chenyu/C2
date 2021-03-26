@@ -1,4 +1,5 @@
-﻿using C2.SearchToolkit;
+﻿using C2.Core;
+using C2.SearchToolkit;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -27,10 +28,10 @@ namespace C2.Controls.C1.Left
         {
             ToolStripMenuItem RemoveToolStripMenuItem = new ToolStripMenuItem
             {
-                Name = "ReviewToolStripMenuItem",
+                Name = "RemoveToolStripMenuItem",
                 Size = new Size(196, 22),
                 Text = "删除任务",
-                ToolTipText = "从面板中移除任务,同时删除本地结果文件"
+                ToolTipText = "从面板中移除任务,同时删除本地文件"
             };
             RemoveToolStripMenuItem.Click += new EventHandler(RemoveToolStripMenuItem_Click);
 
@@ -40,7 +41,7 @@ namespace C2.Controls.C1.Left
                 Name = "ResultToolStripMenuItem",
                 Size = new Size(196, 22),
                 Text = "查看结果",
-                ToolTipText = "查看任务返回结果"
+                ToolTipText = "查看任务模型运行结果"
             };
             ResultToolStripMenuItem.Click += new EventHandler(ResultToolStripMenuItem_Click);
 
@@ -60,11 +61,13 @@ namespace C2.Controls.C1.Left
         }
         private void ResultToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            new SearchToolkitForm().ShowTaskInfoDialog(this.task);
         }
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // 用全局变量机械降神, 不是好的方式, 只是相对省事儿 
+            Global.GetSearchToolkitControl().DeleteButton(this, task);
         }
     }
 }

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using C2.SearchToolkit;
+﻿using C2.SearchToolkit;
 using C2.Utils;
+using System;
+using System.Windows.Forms;
 
 namespace C2.Controls.C1.Left
 {
@@ -46,6 +39,12 @@ namespace C2.Controls.C1.Left
 
             foreach (TaskInfo task in taskManager.Tasks)
                 AddInnerButton(new SearchToolkitButton(task));
+        }
+
+        public void DeleteButton(SearchToolkitButton button, TaskInfo task) 
+        { 
+            this.Controls.Remove(button);
+            taskManager.DeleteTask(task);
         }
     }
 }

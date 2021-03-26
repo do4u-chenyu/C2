@@ -140,14 +140,16 @@ namespace C2.Utils
             return true;
         }
 
-        public static void DeleteFile(string filePath)
+        public static bool DeleteFile(string filePath)
         {
             try
             {
                 File.Delete(filePath);
+                return true;
             }
             catch
             {
+                return false;
             }
         }
 

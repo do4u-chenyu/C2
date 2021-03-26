@@ -1,18 +1,14 @@
 ﻿using C2.Business.SSH;
+using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using C2.Core;
 using System.IO;
-using C2.Utils;
 
 namespace C2.SearchToolkit
 {
     class TaskManager
     {
-        
         private String home;
         private List<TaskInfo> tasks;
 
@@ -27,7 +23,8 @@ namespace C2.SearchToolkit
         // 运行Task,成功返回TaskID，失败String.Empty
         public bool RunTask(TaskInfo task) 
         {
-            task.TaskID = "123456";
+            BastionAPI api = new BastionAPI(task.Username, task.Password, task.BastionIP, task.SearchAgentIP);
+            task.TaskID = api.Login().RunGambleTask();
             return true;
         }
         public bool SaveTask(TaskInfo task)
@@ -78,6 +75,13 @@ namespace C2.SearchToolkit
             return true; 
         }
 
-        public bool DeleteTask(TaskInfo taskInfo) { return tasks.Remove(taskInfo); }
+        public bool DeleteTask(TaskInfo task) 
+        {
+            // TODO 删除远程结果文件
+            BastionAPI api = new BastionAPI(task.Username, task.Password, task.BastionIP, task.SearchAgentIP);
+            task.TaskID = api.Login().DeleteGambleTaskResult();
+            String taskFFP = Path.Combine(home, task.BcpFilename);   
+            return tasks.Remove(task) && FileUtil.DeleteFile(taskFFP); 
+        }
     }
 }
