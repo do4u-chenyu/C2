@@ -144,7 +144,6 @@
     function markerPoints(w){
         var obj = JSON.parse(w);
         for (j = 0, len = obj.length; j < len; j++) {
-            console.info(obj[j]);
             var marker = new BMap.Marker(obj[j]);  // 创建标注
             map.addOverlay(marker);
         }

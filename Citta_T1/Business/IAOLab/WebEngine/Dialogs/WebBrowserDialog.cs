@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -348,10 +349,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         void SavePic_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
-            Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
-            webBrowser1.DrawToBitmap(bitmap, rectangle);
-            bitmap.Save(picPath);
+            Bitmap bitmap = new Bitmap(webBrowser1.DrawToImage(), new Size(webBrowser1.Width, webBrowser1.Height));
+            bitmap.Save(picPath, ImageFormat.Png);
 
             SaveFileDialog fd = new SaveFileDialog
             {
