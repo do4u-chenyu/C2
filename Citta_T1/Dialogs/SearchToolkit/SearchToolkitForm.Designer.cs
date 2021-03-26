@@ -341,6 +341,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SearchToolkitForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "全文工具箱";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

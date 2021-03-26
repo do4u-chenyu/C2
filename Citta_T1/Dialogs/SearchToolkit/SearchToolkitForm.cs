@@ -93,19 +93,13 @@ namespace C2.SearchToolkit
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
 
             if (ValidateInputControls())
+            {
                 this.DialogResult = DialogResult.OK;
+                this.Close();
+            }  
             else
-                ShowValidateMessageBox();
-
-            this.Close();
-        }
-
-        private void ShowValidateMessageBox() 
-        {
-            if (!String.IsNullOrEmpty(validateMessage))
                 HelpUtil.ShowMessageBox(validateMessage);
         }
 
@@ -176,17 +170,19 @@ namespace C2.SearchToolkit
         private bool ValidatePassword()
         {
             String value = this.passwordTB.Text;
-            return ValidateNotEmpty(value) && ValidateTooLong(value) && ValidateSpecialChars(value);
+            return ValidateNotEmpty(value) && ValidateTooLong(value);
         }
         private bool ValidateInputControls()
         {
-            validateMessage = String.Empty; 
-
-            return  ValidateTaskName() &&
-                    ValidateUsername() && 
-                    ValidatePassword() &&
-                    ValidateBastionIP() &&
-                    ValidateSearchAgentIP();
+            validateMessage = String.Empty;
+            // 从后往前验证
+            validateMessage = ValidateSearchAgentIP() ? validateMessage : "全文机IP格式不对";
+            validateMessage = ValidateBastionIP() ? validateMessage : "堡垒机IP格式不对";
+            validateMessage = ValidatePassword() ? validateMessage : "堡垒机 【密码】  不能为空, 不能超过128个字符";
+            validateMessage = ValidateUsername() ? validateMessage : "堡垒机 【用户名】不能为空, 不能超过128个字符";
+            validateMessage = ValidateTaskName() ? validateMessage : "任务名称不能为空,不能超过128个字符,不能含有特殊字符";
+            
+            return String.IsNullOrEmpty(validateMessage);
         }
         public TaskInfo ShowTaskConfigDialog()
         {
