@@ -1033,6 +1033,7 @@
     <Compile Include="Utils\DbUtil.cs" />
     <Compile Include="Utils\DgvUtil.cs" />
     <Compile Include="Utils\ProcessUtil.cs" />
+    <Compile Include="Utils\ScreenshotUtil.cs" />
     <Compile Include="Utils\XmlUtil.cs" />
     <Compile Include="WorkSpace\BaseWorkSpace.cs">
       <SubType>Component</SubType>
