@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using C2.Model.Documents;
@@ -21,8 +22,9 @@ namespace C2.Model.MindMaps
             if (topicNote != null)
             {
                 XWPFParagraph noteText = docx.CreateParagraph();
-                noteText.Style = "正文";
+                noteText.Style = "a0";
                 XWPFRun xwpfRun = noteText.CreateRun();
+                xwpfRun.FontFamily = "宋体";
                 xwpfRun.SetText(topicNote.Text);
             }
         }
@@ -61,6 +63,7 @@ namespace C2.Model.MindMaps
                 size = ChangeImgSize(width, height);
                 if(size.Count == 2)
                     xwpfRun.AddPicture(fileStream, (int)PictureType.JPEG, "test.png", size[0] * 846, size[1] * 846);//长宽单位为emu，在1080分辨率下换算单位为1像素等于846emu
+                xwpfRun.FontFamily = "宋体";
                 xwpfRun.SetText("图" + imgNo);
             }
             catch 
@@ -89,21 +92,24 @@ namespace C2.Model.MindMaps
                         break;
                     case 3:
                         paragraphTitle.Style = "4";
-                        break;
+                        break;     
                 }
+                XWPFRun xwpfRun = paragraphTitle.CreateRun();
+                xwpfRun.SetText(title);
             }
             else
             {
-                paragraphTitle.Style = "正文";
+                paragraphTitle.Style = "a0";
+                XWPFRun xwpfRun = paragraphTitle.CreateRun();
+                xwpfRun.FontFamily = "宋体";
+                xwpfRun.SetText(title);
             }
-            XWPFRun xwpfRun = paragraphTitle.CreateRun();
-            xwpfRun.SetText(title);
+           
         }
 
         private Widget GetTopicNote(Topic topic) 
         {
             
-            PictureWidget[] pictureWidgets = topic.FindWidgets<PictureWidget>();
             NoteWidget noteWidget = topic.FindWidget<NoteWidget>();
             return noteWidget;
         }
@@ -156,23 +162,36 @@ namespace C2.Model.MindMaps
         }
         public void SaveAsDocx(Topic topic , string fileName) 
         {
-            using (var dotStream = new FileStream(Path.Combine(Application.StartupPath, "Resources", "DocxFileExp", "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
+            try
             {
-
-                XWPFDocument DocxExample = new XWPFDocument(dotStream);
-                using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                using (var dotStream = new FileStream(Path.Combine(Application.StartupPath, "Resources", "DocxFileExp", "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
                 {
-                    int layer = 0;
-                    
-                    XWPFDocument docx = new XWPFDocument();
-                    WriteToDocx(topic, DocxExample, docx, layer);
-                    docx.Write(fileStream);
-                    docx.Close();
-                    fileStream.Close();
-                }
 
-                DocxExample.Close();
-                dotStream.Close();
+                    XWPFDocument DocxExample = new XWPFDocument(dotStream);
+                    try
+                    {
+                        using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                        {
+                            int layer = 0;
+                            XWPFDocument docx = new XWPFDocument();
+                            WriteToDocx(topic, DocxExample, docx, layer);
+                            docx.Write(fileStream);
+                            docx.Close();
+                            fileStream.Close();
+                        }
+
+                        DocxExample.Close();
+                        dotStream.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("错误:" + ex);
+                    }
+                }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("错误:"+ ex);
             }
         }
     }
