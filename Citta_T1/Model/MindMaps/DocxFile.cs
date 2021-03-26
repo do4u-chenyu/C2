@@ -16,7 +16,7 @@ namespace C2.Model.MindMaps
 
     public class DocxFileSaver 
     {
-       
+         private int imgNo = 0;
         private void WriteNoteToDocx(Widget topicNote,XWPFDocument docx) 
         {
             if (topicNote != null)
@@ -48,8 +48,8 @@ namespace C2.Model.MindMaps
         private void WriteImgToDocx(PictureWidget pictureWidget, XWPFDocument docx,int imgNo) 
         {
             string picturePath = pictureWidget.ImageUrl;
-            int width = pictureWidget.ThumbImage.Width;
-            int height = pictureWidget.ThumbImage.Height;
+            int width = pictureWidget.Data.Width;
+            int height = pictureWidget.Data.Height;
             if (!File.Exists(picturePath))
                 return;
             try
@@ -119,7 +119,7 @@ namespace C2.Model.MindMaps
             PictureWidget[] pictureWidgets = topic.FindWidgets<PictureWidget>();
             foreach (PictureWidget pictureWidget in pictureWidgets)
             {
-                if (Directory.Exists(pictureWidget.ImageUrl) && (pictureWidget.ThumbImage.Width > 128 || pictureWidget.ThumbImage.Width > 128))
+                if (Directory.Exists(pictureWidget.ImageUrl) && (pictureWidget.Data.Width > 128 || pictureWidget.Data.Height > 128))
                 {
                     topicPictures.Add(pictureWidget);
                 }
@@ -142,7 +142,7 @@ namespace C2.Model.MindMaps
             WriteNoteToDocx(topicNote, docx);
 
             //在内容后插入图片
-            int imgNo = 0;
+           
             List<PictureWidget> topicPictures = GetTopicPicture(topic);
             for (int i = 0; i < topicPictures.Count; i++)
             {
@@ -172,6 +172,7 @@ namespace C2.Model.MindMaps
                     {
                         using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                         {
+                            imgNo = 0;
                             int layer = 0;
                             XWPFDocument docx = new XWPFDocument();
                             WriteToDocx(topic, DocxExample, docx, layer);
