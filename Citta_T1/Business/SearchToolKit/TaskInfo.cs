@@ -18,9 +18,11 @@ namespace C2.SearchToolkit
 
         public static readonly TaskInfo EmptyTaskInfo = new TaskInfo();
 
+        public String LastErrorMsg { get; set; } = String.Empty;
+
         public bool IsEmpty() { return this == EmptyTaskInfo; }
 
-        public String BcpFilename { get => String.Format("{0}_{1}_{2}.bcp", TaskID, TaskName, TaskCreateTime); }
+        public String BcpFilename { get => String.Format("{0}_{1}_{2}.bcp", TaskName, TaskID, TaskCreateTime); }
 
         private static readonly String HeadColumnLine = String.Join(OpUtil.TabSeparatorString, new string[] {
             "TaskID" ,
@@ -48,11 +50,21 @@ namespace C2.SearchToolkit
 
         public String TaskStatus { get; private set; }
 
-        public String TaskID { get; private set; }
+        public String TaskID { get; set; }
 
         public String TaskName { get; private set; }
 
         public String TaskCreateTime { get; private set; }
+
+        public String BastionInfo 
+        { 
+            get => String.Format("用户名:{0}, 堡垒机IP:{1}, 全文机IP:{2}, 结果目录:{3}", 
+                Username, 
+                BastionIP, 
+                SearchAgentIP,
+                RemoteWorkspace); 
+        }
+        
 
         public override String ToString()
         {
@@ -85,7 +97,7 @@ namespace C2.SearchToolkit
             return Encoding.UTF8.GetString(Convert.FromBase64String(value.ReverseString())).ReverseString();
         }
 
-        public static TaskInfo GenTaskInfo(String content, bool needDecryptPass = false)
+        public static TaskInfo StringToTaskInfo(String content, bool needDecryptPass = false)
         {
             if (String.IsNullOrEmpty(content))
                 return TaskInfo.EmptyTaskInfo;

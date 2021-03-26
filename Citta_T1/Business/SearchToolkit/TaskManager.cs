@@ -12,6 +12,7 @@ namespace C2.SearchToolkit
 {
     class TaskManager
     {
+        
         private String home;
         private List<TaskInfo> tasks;
 
@@ -23,15 +24,25 @@ namespace C2.SearchToolkit
 
         public IEnumerable<TaskInfo> Tasks { get => tasks; }
 
-        public bool SaveTask(TaskInfo task)
+        // 运行Task,成功返回TaskID，失败String.Empty
+        public bool RunTask(TaskInfo task) 
         {
+            task.TaskID = "123456";
+            return true;
+        }
+        public bool SaveTask(TaskInfo task)
+        {   // TODO 文件名重复问题, 需要加入随机数
             String taskFFP = Path.Combine(home, task.BcpFilename);
             try
-            {  
+            {
+                if (!Directory.Exists(home))
+                    FileUtil.CreateDirectory(home);
+
                 using (StreamWriter sw = new StreamWriter(taskFFP))
                     sw.WriteLine(task.ToString());
-            } catch 
+            } catch (Exception ex)
             {
+                task.LastErrorMsg = ex.Message;
                 return false;
             }
             
@@ -47,8 +58,7 @@ namespace C2.SearchToolkit
         {
             try 
             {
-                String content = new StreamReader(taskFFP).ReadToEnd();
-                return TaskInfo.GenTaskInfo(content, true);
+                return TaskInfo.StringToTaskInfo(new StreamReader(taskFFP).ReadToEnd(), true);
             } catch 
             {
                 return TaskInfo.EmptyTaskInfo;
