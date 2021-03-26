@@ -439,8 +439,9 @@ namespace C2.Controls.Left
             if (dbi.Type == DatabaseType.Hive)
             {
                 this.schemaComboBox.Text = defaultSchema;
+
             }
-            if (dbi.Type == DatabaseType.Postgre)
+            else if (dbi.Type == DatabaseType.Postgre)
             {
                 this.schemaComboBox.Text = defaultSchema;
                 this.schemaComboBox.Enabled = false;

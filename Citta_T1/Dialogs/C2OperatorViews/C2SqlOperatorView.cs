@@ -195,7 +195,7 @@ namespace C2.Dialogs.C2OperatorViews
             {
                 this.comboBoxDataBase.Text = defaultSchema;
             }
-            if (SelectDatabaseItem.Type == DatabaseType.Postgre)
+            else if (SelectDatabaseItem.Type == DatabaseType.Postgre)
             {
                 this.comboBoxDataBase.Text = defaultSchema;
                 this.comboBoxDataBase.Enabled = false;
