@@ -50,7 +50,7 @@ namespace C2.SearchToolkit
 
         public String TaskStatus { get; private set; }
 
-        public String TaskID { get; set; }
+        public String TaskID { get; set; } // ID要在远程实际创建后才有
 
         public String TaskName { get; private set; }
 
