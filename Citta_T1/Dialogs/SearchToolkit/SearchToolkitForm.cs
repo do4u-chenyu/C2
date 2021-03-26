@@ -1,9 +1,8 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using C2.Utils;
+using System.Windows.Forms;
 
 namespace C2.SearchToolkit
 {
@@ -53,8 +52,11 @@ namespace C2.SearchToolkit
             this.searchAgentIPTB.Text = taskInfo.SearchAgentIP;
             this.remoteWorkspaceTB.Text = taskInfo.RemoteWorkspace;
 
-            this.taskInfoGB.Text = "任务ID:" + taskInfo.TaskID; 
+            this.taskInfoGB.Text = "任务ID:" + taskInfo.TaskID;
+
+            // TODO 获取远程 任务状态
             this.taskStatusLabel.Text = taskInfo.TaskStatus;
+            this.downloadButton.Enabled = taskInfo.TaskStatus == "DONE";
         }
 
         private TaskInfo GenTaskInfo()
@@ -83,7 +85,7 @@ namespace C2.SearchToolkit
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            //TODO 
+            //TODO 下载
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
