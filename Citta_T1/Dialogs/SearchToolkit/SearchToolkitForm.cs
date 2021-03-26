@@ -85,6 +85,8 @@ namespace C2.SearchToolkit
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
+            this.saveFileDialog1.ShowDialog();
+
             //TODO 下载
         }
 

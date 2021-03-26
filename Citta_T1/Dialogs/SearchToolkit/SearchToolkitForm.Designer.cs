@@ -388,6 +388,11 @@
             this.panelTop.Size = new System.Drawing.Size(609, 169);
             this.panelTop.TabIndex = 2;
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.FileName = "全文模型结果";
+            this.saveFileDialog1.Filter = "压缩包文件 (*.zip)|*.tar.gz\"";
+            // 
             // SearchToolkitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

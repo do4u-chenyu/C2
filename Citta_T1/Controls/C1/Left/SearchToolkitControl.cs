@@ -42,8 +42,8 @@ namespace C2.Controls.C1.Left
         }
 
         public void DeleteButton(SearchToolkitButton button, TaskInfo task) 
-        { 
-            this.Controls.Remove(button);
+        {
+            RemoveButton(button);
             taskManager.DeleteTask(task);
         }
     }
