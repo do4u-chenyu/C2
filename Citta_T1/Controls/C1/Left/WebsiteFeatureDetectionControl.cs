@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using C2.Business.Model;
+using C2.Business.WebsiteFeatureDetection;
+using C2.Core;
 using C2.Dialogs.WebsiteFeatureDetection;
 using C2.Utils;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using C2.Core;
+using System.Windows.Forms;
 using System.Xml;
-using C2.Business.Model;
-using C2.Business.WebsiteFeatureDetection;
 
 namespace C2.Controls.C1.Left
 {
@@ -163,7 +157,7 @@ namespace C2.Controls.C1.Left
 
             private void InitButtonType()
             {
-                this.leftPictureBox.Image = global::C2.Properties.Resources.数据;
+                this.leftPictureBox.Image = global::C2.Properties.Resources.侦察兵左侧;
                 this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
             }
 

@@ -19,7 +19,7 @@ namespace C2.Controls.C1.Left
 
         private void InitButtonType()
         {
-            //this.leftPictureBox.Image = global::C2.Properties.Resources.数据;
+            this.leftPictureBox.Image = global::C2.Properties.Resources.全文工具左侧;
             this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
         }
 

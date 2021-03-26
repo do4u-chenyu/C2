@@ -2028,4 +2028,7 @@
   <data name="全文工具左侧" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\全文工具左侧.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="侦察兵左侧" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\侦察兵左侧.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
