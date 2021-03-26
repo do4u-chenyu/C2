@@ -15,18 +15,16 @@ namespace C2.Database
         private readonly string getUserSQL = @"show databases";
         private readonly string getTablesSQL = @"use {0};show tables;";
         private readonly string getTableContentSQL = @"use {0};select * from {1}";
-        //private string getColNameByTablesSQL;
         private readonly string getColNameByTableSQL = "desc {0}";
-        private readonly string dataBaseName;//TODO 拼写错误
+        private readonly string databaseName;
         public HiveDAOImpl(DatabaseItem dbi) : base(dbi)
         {
-            this.dataBaseName = dbi.Schema;
+            this.databaseName = dbi.Schema;
         }
         public override bool TestConn()
         {
-            using (var con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
+            using (Connection con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port, 10000),
                                                    this.User, this.Pass))
-                                                   //TODO 刘
             {
                 try
                 {
@@ -58,13 +56,12 @@ namespace C2.Database
             StringBuilder sb = new StringBuilder(1024); 
             try
             {
-                using (Connection con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
+                using (Connection con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port, 10000),
                                                    this.User, this.Pass))
-                                                   //TODO 刘 varcon
+                                                  
                 {
-                    //LimitTimeout(con);
                     var cursor = con.GetCursor();
-                    cursor.Execute("use " + dataBaseName);          
+                    cursor.Execute(string.Format("use {0}", databaseName));          
                     cursor.Execute(DbUtil.PurifyOnelineSQL(sqlText));
                     var oneRow = cursor.FetchOne();
                     //TODO ？null 添加return IDictionary<string, object> oneRow
@@ -75,7 +72,7 @@ namespace C2.Database
                         for (int i = 0; i < iDict.Count; i++)
                         {
                             //TODO foreach
-                            string key = GetColumnName(iDict.Keys.ElementAt(i));
+                            string key = CutColumnName(iDict.Keys.ElementAt(i));
                             sb.Append(key).Append(OpUtil.TabSeparator);
                         }
                         if (iDict.Count > 0)
@@ -117,15 +114,12 @@ namespace C2.Database
             }
             return true;
         }
-      
-       
-        private string GetColumnName(string name)//TODO get换掉
+
+
+        public string CutColumnName(string name)
         {
-            if (string.IsNullOrEmpty(name))
-                return string.Empty;
-            string[] names = name.Split('.');
-            //TODO 刘
-            return names.Length == 2 ? names[1] : name;
+            int sep = name.IndexOf('.');
+            return sep == -1 ? name : name.Substring(sep + 1);
         }
 
         public override string Query(string sql, bool header = true, int returnNum = OpUtil.PreviewMaxNum)
@@ -139,7 +133,7 @@ namespace C2.Database
                 {
                    // LimitTimeout(conn);
                     var cursor = con.GetCursor();
-                    cursor.Execute("use " + dataBaseName);//TODO format 
+                    cursor.Execute(string.Format("use {0}", databaseName));
                     foreach (var s in sql.Trim().Split(';'))
                     {
                         if (!String.IsNullOrEmpty(s))
@@ -152,7 +146,7 @@ namespace C2.Database
                         IDictionary<string, object> iDict = list[0];
                         for (int i = 0; i < iDict.Count; i++)//TODO foreach
                         {
-                            string key = GetColumnName(iDict.Keys.ElementAt(i));
+                            string key = CutColumnName(iDict.Keys.ElementAt(i));
                             sb.Append(key).Append(OpUtil.TabSeparator);
                         }
                         if (iDict.Count > 0)
