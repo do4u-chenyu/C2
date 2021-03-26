@@ -61,7 +61,7 @@ namespace C2.SearchToolkit
 
         private TaskInfo GenTaskInfo()
         {
-           String value = String.Join("\t", new string[] {
+           String value = String.Join(OpUtil.TabSeparatorString, new string[] {
                                             this.taskNameTB.Text,  // 刚开始创建时，没有ID
                                             this.taskNameTB.Text,
                                             DateTime.Now.ToString("yyyyMMdd"), 

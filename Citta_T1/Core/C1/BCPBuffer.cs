@@ -193,9 +193,9 @@ namespace C2.Core
         {
             if (string.IsNullOrEmpty(tbContent))
                 return string.Empty;
-            if (!tbContent.Contains(OpUtil.DefaultLineSeparator.ToString()))
+            if (!tbContent.Contains(OpUtil.LineSeparator.ToString()))
                 return tbContent;
-            int lineSepIndex = tbContent.IndexOf(OpUtil.DefaultLineSeparator);
+            int lineSepIndex = tbContent.IndexOf(OpUtil.LineSeparator);
             return tbContent.Substring(0, lineSepIndex);
         }
         public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)

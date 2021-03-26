@@ -78,7 +78,7 @@ namespace C2.Database
         public List<string> GetUsers()
         {
             string result = this.Query(this.GetUserSQL(), false);
-            return String.IsNullOrEmpty(result) ? new List<String>() : new List<string>(result.Split(OpUtil.DefaultLineSeparator));
+            return String.IsNullOrEmpty(result) ? new List<String>() : new List<string>(result.Split(OpUtil.LineSeparator));
         }
 
         public List<Table> GetTables(string schema)
@@ -86,7 +86,7 @@ namespace C2.Database
             List<Table> tables = new List<Table>();
             string result = this.Query(this.GetTablesSQL(schema), false);
             if (!String.IsNullOrEmpty(result))
-                foreach (var line in result.Split(OpUtil.DefaultLineSeparator))
+                foreach (var line in result.Split(OpUtil.LineSeparator))
                 {
                     if (!String.IsNullOrEmpty(line))
                         tables.Add(new Table(schema, line));

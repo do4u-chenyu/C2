@@ -127,7 +127,7 @@ namespace C2.Controls.Bottom
         {
             List<List<string>> datas = new List<List<string>> { };
             List<string>  rows = new List<string>();
-            rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewTable(dbItem, maxNumOfFile).Split(OpUtil.DefaultLineSeparator));
+            rows = new List<string>(BCPBuffer.GetInstance().GetCachePreviewTable(dbItem, maxNumOfFile).Split(OpUtil.LineSeparator));
             for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
                 datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(OpUtil.TabSeparator)));                                                 // TODO 没考虑到分隔符
             FileUtil.FillTable(this.dataGridView, datas, maxNumOfFile);

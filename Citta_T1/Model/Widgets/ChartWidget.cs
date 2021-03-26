@@ -52,7 +52,7 @@ namespace C2.Model.Widgets
                 fileContent = BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem);
             else
                 fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(path, encoding);
-            List<string> rows = new List<string>(fileContent.Split(OpUtil.DefaultLineSeparator));
+            List<string> rows = new List<string>(fileContent.Split(OpUtil.LineSeparator));
             // 最多绘制前100行数据
             int upperLimit = Math.Min(rows.Count, 100);
             List<List<string>> columnValues = FileUtil.GetColumns(dataItem.SelectedIndexs, dataItem, rows, upperLimit);

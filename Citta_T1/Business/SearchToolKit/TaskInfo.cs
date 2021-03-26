@@ -68,7 +68,7 @@ namespace C2.SearchToolkit
 
         public override String ToString()
         {
-            return String.Format("{0}{1}{2}", HeadColumnLine, OpUtil.DefaultLineSeparator, ContentLine());
+            return String.Format("{0}{1}{2}", HeadColumnLine, OpUtil.LineSeparator, ContentLine());
         }
 
         private String ContentLine()
@@ -103,7 +103,7 @@ namespace C2.SearchToolkit
                 return TaskInfo.EmptyTaskInfo;
 
             // 有表头的话 取第二行
-            String[] buf = content.Split(OpUtil.DefaultLineSeparator);
+            String[] buf = content.Split(OpUtil.LineSeparator);
             content = buf.Length == 1 ? buf[0].TrimEnd() : buf[1].TrimEnd();
 
             // 小于10列不处理
