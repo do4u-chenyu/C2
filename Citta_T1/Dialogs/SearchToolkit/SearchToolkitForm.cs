@@ -62,7 +62,7 @@ namespace C2.SearchToolkit
            String value = String.Join("\t", new string[] {
                                             this.taskNameTB.Text,  // 刚开始创建时，没有ID
                                             this.taskNameTB.Text,
-                                            DateTime.Now.ToShortDateString(),
+                                            DateTime.Now.ToString("yyyyMMdd"), 
                                             this.taskModelComboBox.Text,
                                             "NULL",  // NULL, RUNNING, DONE, FAIL
                                             this.usernameTB.Text,
@@ -72,7 +72,7 @@ namespace C2.SearchToolkit
                                             this.remoteWorkspaceTB.Text
             });
 
-            return TaskInfo.GenTaskInfo(value);
+            return TaskInfo.StringToTaskInfo(value);
         }
 
         private void ReadOnlyInputControls()
@@ -104,11 +104,6 @@ namespace C2.SearchToolkit
                 HelpUtil.ShowMessageBox(validateMessage);
         }
 
-        private void RemoteWorkspaceTB_Enter(object sender, EventArgs e)
-        {
-            remoteWorkspaceTB.ForeColor = Color.Black;
-        }
-
         private void ModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.taskNameTB.Text = GenTaskName();
@@ -117,7 +112,7 @@ namespace C2.SearchToolkit
 
         private String GenTaskName()
         {
-             return this.taskModelComboBox.Text + "_" + DateTime.Now.ToString("yyyyMMdd");
+             return this.taskModelComboBox.Text + DateTime.Now.ToString("yyyyMMdd");
         }
 
         private String GenWorkspace()
@@ -136,7 +131,7 @@ namespace C2.SearchToolkit
             return value.Length < defaultMaxLength;
         }
 
-        private bool ValidateSpecialChars(String value, String specialChars = @"!@#$%^&*()+=\/'~`|[],")
+        private bool ValidateSpecialChars(String value, String specialChars = "!@#$%^&*()<>?:;\"+=\\/'~`|[],")
         {
             return value.IndexOfAny(specialChars.ToCharArray()) == -1;
         }
@@ -173,8 +168,16 @@ namespace C2.SearchToolkit
             String value = this.passwordTB.Text;
             return ValidateNotEmpty(value) && ValidateTooLong(value);
         }
+
+        private void TrimInputControls()
+        {
+            foreach (Control ct in inputControls)
+                ct.Text = ct.Text.Trim();
+        }
         private bool ValidateInputControls()
         {
+            TrimInputControls(); 
+
             validateMessage = String.Empty;
             // 从后往前验证
             validateMessage = ValidateSearchAgentIP() ? validateMessage : "全文机【IP】格式不对";

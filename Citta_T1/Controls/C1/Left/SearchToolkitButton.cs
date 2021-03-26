@@ -19,7 +19,8 @@ namespace C2.Controls.C1.Left
             InitializeComponent();
             InitButtonMenu();
             InitButtonType();
-            this.task = task;
+            InitTaskInfo(task);
+            
         }
 
         private void InitButtonType()
@@ -56,6 +57,13 @@ namespace C2.Controls.C1.Left
 
         }
 
+
+        private void InitTaskInfo(TaskInfo task)
+        {
+            this.task = task;
+            this.toolTip.SetToolTip(this.rightPictureBox, task.BastionInfo);
+            this.toolTip.SetToolTip(this.leftPictureBox, task.TaskID);
+        }
         private void ResultToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }

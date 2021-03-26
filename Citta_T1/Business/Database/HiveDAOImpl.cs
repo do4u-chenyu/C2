@@ -49,56 +49,44 @@ namespace C2.Database
         }
         public override bool ExecuteSQL(string sqlText, string outputPath, int maxReturnNum = int.MaxValue)
         {
-            //TODO maxReturnNum
             int totalReturnNum = 0;
-            StreamWriter sw = new StreamWriter(outputPath, false);
-            //TODO
-            StringBuilder sb = new StringBuilder(1024); 
+            StreamWriter sw = null;
             try
             {
+                sw = new StreamWriter(outputPath, false);
+                StringBuilder sb = new StringBuilder(1024);
                 using (Connection con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port, 10000),
                                                    this.User, this.Pass))
                                                   
                 {
                     var cursor = con.GetCursor();
-                    cursor.Execute(string.Format("use {0}", databaseName));          
+                    cursor.Execute(string.Format("use {0}", databaseName));
                     cursor.Execute(DbUtil.PurifyOnelineSQL(sqlText));
-                    var oneRow = cursor.FetchOne();
-                    //TODO ？null 添加return IDictionary<string, object> oneRow
-                    if (!oneRow.IsEmpty())
+                    IDictionary<string, object> iDict = cursor.FetchOne();
+                    if (iDict != null)
                     {
-                        // 添加表头
-                        IDictionary<string, object> iDict = oneRow;
-                        for (int i = 0; i < iDict.Count; i++)
-                        {
-                            //TODO foreach
-                            string key = CutColumnName(iDict.Keys.ElementAt(i));
-                            sb.Append(key).Append(OpUtil.TabSeparator);
-                        }
-                        if (iDict.Count > 0)
-                        {
-                            //TODO 刘 是否多余
-                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
-                        }
-                        
+                        // 添加表头和第一行内容
+                        foreach (string key in iDict.Keys)
+                            sb.Append(CutColumnName(key)).Append(OpUtil.TabSeparator);
+                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
+                        sb.Clear();
+                        foreach (string key in iDict.Keys)
+                            sb.Append(iDict[key].ToString()).Append(OpUtil.TabSeparator);
+                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
+
                     }
-   
-                    while (oneRow != null &&  totalReturnNum++ < maxReturnNum)
+
+                    while ((iDict = cursor.FetchOne()) != null && totalReturnNum++ < maxReturnNum)
                     {
-                        sb = new StringBuilder(1024);
-                        //TODO clear
-                        IDictionary<string, object> dict = oneRow;//TODO 多余
-                        foreach (var key in dict.Keys)
-                        {
-                            sb.Append(dict[key].ToString()).Append(OpUtil.TabSeparator);
-                        }
-                        if (!dict.Keys.IsEmpty())
+                        sb.Clear();
+                        foreach (var key in iDict.Keys)
+                            sb.Append(iDict[key].ToString()).Append(OpUtil.TabSeparator);
+    
+                        if (!iDict.Keys.IsEmpty())
                         {
                             sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
                             sw.Flush();
                         }
-
-                        oneRow = cursor.FetchOne();//TODO 太远了
                     }
                  
                 }
@@ -110,8 +98,9 @@ namespace C2.Database
             }
             finally
             {
-                sw.Close();
-                
+                if (sw != null)
+                    sw.Close();
+
             }
             return true;
         }
@@ -125,12 +114,12 @@ namespace C2.Database
 
         public override string Query(string sql, bool header = true, int returnNum = OpUtil.PreviewMaxNum)
         {
-            StringBuilder sb = new StringBuilder(1024 * 16);
+            int capacity = Math.Max(0, Math.Min(int.MaxValue, returnNum));
+            StringBuilder sb = new StringBuilder(1024 * capacity);
             try
             {
                 using (Connection con = new Connection(this.Host, ConvertUtil.TryParseInt(this.Port),
-                                                   this.User, this.Pass))
-                                                   //TODO port using 是否可以调close
+                                                   this.User, this.Pass))                                                
                 {
                   
                     var cursor = con.GetCursor();
@@ -140,16 +129,14 @@ namespace C2.Database
                         if (!String.IsNullOrEmpty(s))
                             cursor.Execute(s);
                     }
-                    var list = cursor.FetchMany(returnNum);//TODO returnNum可能会很大 stringbuilder可能不够
+                    var list = cursor.FetchMany(returnNum);// 查询结果不会为null
                     if (header && !list.IsEmpty())
                     {
                         // 添加表头
                         IDictionary<string, object> iDict = list[0];
-                        for (int i = 0; i < iDict.Count; i++)//TODO foreach
-                        {
-                            string key = CutColumnName(iDict.Keys.ElementAt(i));
-                            sb.Append(key).Append(OpUtil.TabSeparator);
-                        }
+                        foreach (string key in iDict.Keys)         
+                            sb.Append(CutColumnName(key)).Append(OpUtil.TabSeparator);
+           
                         if (iDict.Count > 0)
                             sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator); // 最后一列多加了个\t，去掉       
 
@@ -168,7 +155,7 @@ namespace C2.Database
             catch (Exception ex)
             {
                 
-                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
+                log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());  
                 throw ex;
 
             }
