@@ -21,13 +21,10 @@ namespace C2.Controls.C1.Left
     {
         //Global.WFDUser持久化到文档中UserInformation.xml
         string WFDUser;
-        string Token;
-        WFDWebAPI webAPI;
 
         public WebsiteFeatureDetectionControl()
         {
             InitializeComponent();
-            webAPI = new WFDWebAPI();
             this.addTaskLabel.Click += new EventHandler(this.AddLabel_Click);
         }
 
@@ -41,12 +38,6 @@ namespace C2.Controls.C1.Left
                     return;
 
                 WFDUser = UAdialog.UserName;
-                Token = UAdialog.Token;
-            }
-            else
-            {
-                //TODO phx 这块逻辑得看下token存活时间
-                Token = webAPI.UserAuthentication(WFDUser, TOTP.GetInstance().GetTotp(WFDUser));
             }
 
             AddTask();
@@ -60,7 +51,7 @@ namespace C2.Controls.C1.Left
                 //TODO phx 需要问一下这个分类接口，返回状态的时间，立即返回？还是查完才返回？
 
                 List<string> urls = new List<string>() { "http://www.1.com", "http://www.1.com" };
-                string taskId = webAPI.ClassifierUrls(urls, Token);
+                string taskId = WFDWebAPI.GetInstance().ClassifierUrls(urls);
 
                 string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网络侦察兵");
                 string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.bcp", dialog.TaskName, taskId));
@@ -157,13 +148,11 @@ namespace C2.Controls.C1.Left
         private class WebsiteFeatureDetectionButton : BaseLeftInnerButton
         {
             public WFDTaskInfo TaskInfo;
-            WFDWebAPI webAPI;
             public WebsiteFeatureDetectionButton()
             {
                 InitButtonMenu();
                 InitButtonType();
                 TaskInfo = new WFDTaskInfo();
-                webAPI = new WFDWebAPI();
             }
             public WebsiteFeatureDetectionButton(WFDTaskInfo taskInfo) : this()
             {
@@ -233,7 +222,7 @@ namespace C2.Controls.C1.Left
             {
                 //TODO phx 查看结果前向api发起查看任务状态请求,结果在这里做处理并更新button对应信息，把button更新之后的结果展示在新窗口里
                 //如果task本身是done状态，不发起查询
-                string resp = webAPI.GetTaskResultsById(TaskInfo.TaskId, Global.GetWebsiteFeatureDetectionControl().Token);
+                string resp = WFDWebAPI.GetInstance().GetTaskResultsById(TaskInfo.TaskId);
                 string urlResults = UpdateTaskInfoByResp(resp);
 
                 var dialog = new WFDTaskResult(TaskInfo, urlResults);
