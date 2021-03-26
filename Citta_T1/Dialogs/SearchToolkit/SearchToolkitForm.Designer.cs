@@ -265,7 +265,7 @@
             this.remoteWorkspaceTB.Size = new System.Drawing.Size(408, 25);
             this.remoteWorkspaceTB.TabIndex = 36;
             this.remoteWorkspaceTB.Text = "/tmp/iao/search_toolkit/gamble";
-            this.remoteWorkspaceTB.Enter += new System.EventHandler(this.LinuxWorkspaceTB_Enter);
+            this.remoteWorkspaceTB.Enter += new System.EventHandler(this.RemoteWorkspaceTB_Enter);
             // 
             // label4
             // 
@@ -341,6 +341,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SearchToolkitForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "全文工具箱";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

@@ -47,7 +47,7 @@ namespace C2.Database
             conn.SetTcpReceiveTimeout = 8000;
             conn.SetTcpSendTimeout = 8000;
         }
-        public override bool ExecuteSQL(string sqlText, string outputPath, int maxReturnNum = -1)
+        public override bool ExecuteSQL(string sqlText, string outputPath, int maxReturnNum = int.MaxValue)
         {
             //TODO maxReturnNum
             int totalReturnNum = 0;
@@ -83,7 +83,7 @@ namespace C2.Database
                         
                     }
    
-                    while (oneRow != null && (maxReturnNum == -1 ? true : totalReturnNum < maxReturnNum))//TODO 多余
+                    while (oneRow != null &&  totalReturnNum++ < maxReturnNum)
                     {
                         sb = new StringBuilder(1024);
                         //TODO clear
@@ -97,7 +97,7 @@ namespace C2.Database
                             sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
                             sw.Flush();
                         }
-                        totalReturnNum += 1;
+
                         oneRow = cursor.FetchOne();//TODO 太远了
                     }
                  
@@ -132,7 +132,7 @@ namespace C2.Database
                                                    this.User, this.Pass))
                                                    //TODO port using 是否可以调close
                 {
-                   // LimitTimeout(conn);
+                  
                     var cursor = con.GetCursor();
                     cursor.Execute(string.Format("use {0}", databaseName));
                     foreach (var s in sql.Trim().Split(';'))
@@ -169,8 +169,7 @@ namespace C2.Database
             {
                 
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());   // 辅助工具类，showmessage不能放在外面
-                throw new DAOException(ex.Message);
-                //TODO 
+                throw ex;
 
             }
             return sb.ToString().Trim(OpUtil.DefaultLineSeparator);

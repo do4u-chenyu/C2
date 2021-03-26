@@ -13,7 +13,7 @@ namespace C2.Business.WebsiteFeatureDetection
         Done,       //任务成功
         Failed      //任务失败
     }
-    class WebsiteFeatureDetectionTaskInfo
+    class WFDTaskInfo
     {
         public string TaskName;
         public string TaskId;
@@ -21,7 +21,7 @@ namespace C2.Business.WebsiteFeatureDetection
         public string ResultFilePath;
         public WFDTaskStatus Status;
 
-        public WebsiteFeatureDetectionTaskInfo()
+        public WFDTaskInfo()
         {
             TaskName = string.Empty;
             TaskId = string.Empty;
@@ -30,7 +30,7 @@ namespace C2.Business.WebsiteFeatureDetection
             Status = WFDTaskStatus.Null;
         }
 
-        public WebsiteFeatureDetectionTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, WFDTaskStatus status)
+        public WFDTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, WFDTaskStatus status)
         {
             TaskName = taskName;
             TaskId = taskId;

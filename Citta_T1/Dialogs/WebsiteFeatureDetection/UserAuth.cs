@@ -18,7 +18,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
     {
         private string defaultUserTip = "工号，首字母大写（例如X1234）";
         private string defaultOtpTip = "星空下-工作台-熵情口令6位动态数字";
-
+        WFDWebAPI webAPI;
         public string UserName { get => this.userNameTextBox.Text; set => this.userNameTextBox.Text = value; }
         public string Otp { get => this.otpTextBox.Text; set => this.otpTextBox.Text = value; }
         public string Token;
@@ -27,6 +27,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             InitializeComponent();
             SetDefaultUserTip();
             SetDefaultOtpTip();
+            webAPI = new WFDWebAPI();
         }
 
         private void SetDefaultUserTip()
@@ -48,7 +49,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return false;
 
             //TODO 向接口传参
-            Token = WFDApi.UserAuthentication(UserName, Otp);
+            Token = webAPI.UserAuthentication(UserName, Otp);
             if (string.IsNullOrEmpty(Token))
             {
                 HelpUtil.ShowMessageBox("用户认证失败，请重试或联系相关负责人。");

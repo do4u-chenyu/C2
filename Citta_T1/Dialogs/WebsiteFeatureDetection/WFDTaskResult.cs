@@ -19,7 +19,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
     partial class WFDTaskResult : StandardDialog
     {
         public string UrlResults;
-        public WebsiteFeatureDetectionTaskInfo TaskInfo;
+        public WFDTaskInfo TaskInfo;
         
         public WFDTaskResult()
         {
@@ -27,7 +27,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.dataGridView.DoubleBuffered(true);
         }
 
-        public WFDTaskResult(WebsiteFeatureDetectionTaskInfo taskInfo, string results) : this()
+        public WFDTaskResult(WFDTaskInfo taskInfo, string results) : this()
         {
             TaskInfo = taskInfo;
             UrlResults = results;
@@ -54,9 +54,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             {
                 new List<string>() { "url", "查询状态", "分类情况", "网站截图"}
             };
-
-            for (int i = 0; i < 7; i++)
-                datas.Add(new List<string>() { "", "", "", ""});
 
             return datas;
         }
