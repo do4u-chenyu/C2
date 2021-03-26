@@ -34,6 +34,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
+            // leftPictureBox
+            // 
+            this.leftPictureBox.Image = global::C2.Properties.Resources.全文工具左侧;
+            // 
             // noFocusButton
             // 
             this.noFocusButton.FlatAppearance.BorderSize = 0;

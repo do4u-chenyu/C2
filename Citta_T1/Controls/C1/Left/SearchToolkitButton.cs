@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using C2.SearchToolkit;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using C2.SearchToolkit;
 
 namespace C2.Controls.C1.Left
 {
@@ -25,7 +19,7 @@ namespace C2.Controls.C1.Left
 
         private void InitButtonType()
         {
-            this.leftPictureBox.Image = global::C2.Properties.Resources.数据;
+            //this.leftPictureBox.Image = global::C2.Properties.Resources.数据;
             this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
         }
 
@@ -66,6 +60,7 @@ namespace C2.Controls.C1.Left
         }
         private void ResultToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
         }
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
