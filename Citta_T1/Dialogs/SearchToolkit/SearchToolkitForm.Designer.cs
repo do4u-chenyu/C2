@@ -265,7 +265,7 @@
             this.remoteWorkspaceTB.Size = new System.Drawing.Size(408, 25);
             this.remoteWorkspaceTB.TabIndex = 36;
             this.remoteWorkspaceTB.Text = "/tmp/iao/search_toolkit/gamble";
-            this.remoteWorkspaceTB.Enter += new System.EventHandler(this.LinuxWorkspaceTB_Enter);
+            this.remoteWorkspaceTB.Enter += new System.EventHandler(this.RemoteWorkspaceTB_Enter);
             // 
             // label4
             // 

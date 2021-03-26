@@ -11,7 +11,9 @@ namespace C2.SearchToolkit
     {
         private Control[] inputControls;
         private Dictionary<String, String> taskDict;
-        
+
+        private String validateMessage = String.Empty;
+
         public SearchToolkitForm()
         {
             InitializeComponent();
@@ -61,7 +63,7 @@ namespace C2.SearchToolkit
                                             this.taskNameTB.Text,
                                             DateTime.Now.ToShortDateString(),
                                             this.taskModelComboBox.Text,
-                                            "NULL",
+                                            "NULL",  // NULL, RUNNING, DONE, FAIL
                                             this.usernameTB.Text,
                                             this.passwordTB.Text,
                                             this.bastionIPTB.Text,
@@ -91,12 +93,23 @@ namespace C2.SearchToolkit
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
+
             if (ValidateInputControls())
                 this.DialogResult = DialogResult.OK;
+            else
+                ShowValidateMessageBox();
+
             this.Close();
         }
 
-        private void LinuxWorkspaceTB_Enter(object sender, EventArgs e)
+        private void ShowValidateMessageBox() 
+        {
+            if (!String.IsNullOrEmpty(validateMessage))
+                HelpUtil.ShowMessageBox(validateMessage);
+        }
+
+        private void RemoteWorkspaceTB_Enter(object sender, EventArgs e)
         {
             remoteWorkspaceTB.ForeColor = Color.Black;
         }
@@ -167,6 +180,8 @@ namespace C2.SearchToolkit
         }
         private bool ValidateInputControls()
         {
+            validateMessage = String.Empty; 
+
             return  ValidateTaskName() &&
                     ValidateUsername() && 
                     ValidatePassword() &&
