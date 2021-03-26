@@ -1,6 +1,7 @@
 ﻿.vs
 C2Shell/bin/Debug
 C2Tests/Business/
+C2Tests/Business/Database
 C2ShellTests/
 C2Shell/bin/开发调试
 C2Shell/bin/Release

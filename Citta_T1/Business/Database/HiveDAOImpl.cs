@@ -95,11 +95,12 @@ namespace C2.Database
                         if (!dict.Keys.IsEmpty())
                         {
                             sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
+                            sw.Flush();
                         }
                         totalReturnNum += 1;
                         oneRow = cursor.FetchOne();//TODO 太远了
                     }
-                    sw.Flush();//TODO 无效语句
+                 
                 }
             }
             catch (Exception ex)
