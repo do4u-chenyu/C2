@@ -18,6 +18,7 @@ namespace C2.Core
 {
     class Global
     {
+        private static string username;
         private static MainForm mainForm;
         private static MyModelControl myModelControl;
         private static WebsiteFeatureDetectionControl websiteFeatureDetectionControl;
@@ -32,7 +33,7 @@ namespace C2.Core
 
 
 
-
+        public static string GetUsername() { return username; }
         public static MainForm GetMainForm() { return mainForm; }
         public static TaskBar GetTaskBar() { return taskBar; }
         public static Panel GetLeftToolBoxPanel() { return leftToolBoxPanel; }
@@ -126,7 +127,7 @@ namespace C2.Core
             return ret;
         }
 
-
+        public static void SetUsername(string un) { username = un; }
         public static void SetMainForm(MainForm mf) { mainForm = mf; }
         public static void SetTaskBar(TaskBar tb) { taskBar = tb; }
         public static void SetLeftToolBoxPanel(Panel ltbp) { leftToolBoxPanel = ltbp; }
@@ -140,7 +141,7 @@ namespace C2.Core
         public static void SetMindMapModelControl(MyMindMapControl mmmc) { mindMapModelControl = mmmc; }
 
         public static string WorkspaceDirectory { get; set; } // 用户空间根目录
-        public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, mainForm.UserName); }
+        public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, username); }
         public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "模型市场"); }
         public static string SearchToolkitPath { get => Path.Combine(UserWorkspacePath, "全文工具箱"); }

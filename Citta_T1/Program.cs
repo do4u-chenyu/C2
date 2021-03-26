@@ -116,15 +116,15 @@ namespace C2
 
         private static void RunByVersion()
         {
-
+            Global.SetUsername("IAO");
             if (Global.VersionType.Equals(Global.GreenLevel) || Global.VersionType.Equals(Global.Nolanding))
             {
-                string userName = "IAO";
+                
                 Business.LoginInfo lgInfo = new Business.LoginInfo();
                 lgInfo.CreatNewXml();
-                lgInfo.WriteUserInfo(userName);
-                lgInfo.WriteLastLogin(userName);
-                Application.Run(new MainForm(userName));
+                lgInfo.WriteUserInfo(Global.GetUsername());
+                lgInfo.WriteLastLogin(Global.GetUsername());
+                Application.Run(new MainForm(Global.GetUsername()));
             }
             else
                 Application.Run(new LoginForm());

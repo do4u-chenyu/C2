@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using C2.Utils;
+using C2.Core;
 
 namespace C2.Dialogs
 {
@@ -50,7 +51,8 @@ namespace C2.Dialogs
             lgInfo.WriteLastLogin(userName);
             this.Hide();
 
-            mainForm = new MainForm(userName);
+            Global.SetUsername(userName);
+            mainForm = new MainForm(Global.GetUsername());
             mainForm.ShowDialog();
 
             this.Close();
