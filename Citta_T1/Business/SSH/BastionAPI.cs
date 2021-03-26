@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.SearchToolkit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,9 @@ namespace C2.Business.SSH
             this.ssh = new SSHClient(); 
         }
 
+        public BastionAPI(TaskInfo task) : this(task.Username, task.Password, task.BastionIP, task.SearchAgentIP)
+        { }
+
         public BastionAPI Login() 
         {
             // 这里通过抛出异常来报错
@@ -39,12 +43,12 @@ namespace C2.Business.SSH
 
         public String GambleTaskStatus() { return String.Empty; }
 
-        public String KillGambleTask() { return String.Empty; }
+        public BastionAPI KillGambleTask() { return this; }
 
         public String RunGambleTask() { return String.Empty; }
 
-
-        public String CreateGambleTaskDirectory(String workspace) { return String.Empty; }
+        public BastionAPI UploadGambleScript() { return this; }
+        public BastionAPI CreateGambleTaskDirectory() { return this; }
 
         public String YellowTaskPID() { return String.Empty; }
 

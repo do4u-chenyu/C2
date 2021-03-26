@@ -23,8 +23,13 @@ namespace C2.SearchToolkit
         // 运行Task,成功返回TaskID，失败String.Empty
         public bool RunTask(TaskInfo task) 
         {
-            BastionAPI api = new BastionAPI(task.Username, task.Password, task.BastionIP, task.SearchAgentIP);
-            task.TaskID = api.Login().RunGambleTask();
+            BastionAPI api = new BastionAPI(task);
+
+            task.TaskID = api.Login()
+                             .UploadGambleScript()
+                             .CreateGambleTaskDirectory()
+                             .RunGambleTask();
+
             return true;
         }
         public bool SaveTask(TaskInfo task)
@@ -78,8 +83,12 @@ namespace C2.SearchToolkit
         public bool DeleteTask(TaskInfo task) 
         {
             // TODO 删除远程结果文件
-            BastionAPI api = new BastionAPI(task.Username, task.Password, task.BastionIP, task.SearchAgentIP);
-            task.TaskID = api.Login().DeleteGambleTaskResult();
+            BastionAPI api = new BastionAPI(task);
+
+            task.TaskID = api.Login()
+                             .KillGambleTask()
+                             .DeleteGambleTaskResult();
+
             String taskFFP = Path.Combine(home, task.BcpFilename);   
             return tasks.Remove(task) && FileUtil.DeleteFile(taskFFP); 
         }
