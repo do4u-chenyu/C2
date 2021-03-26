@@ -36,5 +36,55 @@ namespace C2.Database.Tests
             Assert.AreEqual("你好", hiveDao.CutColumnName("春他.你好"));
 
         }
+
+        [TestMethod()]
+        public void ExecuteSQLTest()
+        {
+            // 有数据的表
+            string sqlText = "select * from default.students";
+            string outputPath = @"D:\test202103_1.txt";
+            int maxReturnNum = 100;
+            bool notfail0 = hiveDao.ExecuteSQL(sqlText, outputPath, maxReturnNum);
+            Assert.AreEqual(true, notfail0);
+            // 无效路径
+            string outputPath1 = @"h:\test20210321_2.txt";
+            bool notfail1 = hiveDao.ExecuteSQL(sqlText, outputPath1, maxReturnNum);
+            Assert.AreEqual(false, notfail1);
+            // 错误的表
+            sqlText = "select * from default.student";
+            string outputPath2 = @"h:\test2021032_3.csv";
+            bool notfail2 = hiveDao.ExecuteSQL(sqlText, outputPath2, maxReturnNum);
+            Assert.AreEqual(false, notfail2);
+            // 限制行数的查询
+            string sqlText3 = "select * from default.students limit 0";
+            string outputPath3 = @"D:\test2021032_4.txt";
+            int maxReturnNum3 = 100;
+            bool notfail3 = hiveDao.ExecuteSQL(sqlText3, outputPath3, maxReturnNum3);
+            Assert.AreEqual(true, notfail3);
+
+        }
+
+        [TestMethod()]
+        public void QueryTest()
+        {
+            string getUserSQL = @"show databases";
+            string getTablesSQL = @"use default;show tables;";
+            string getTableContentSQL = @"use default;select * from students";
+            string getColNameByTableSQL = "use default;desc students";
+
+            bool header = true;
+            // 
+            string databaseNames = hiveDao.Query(getUserSQL, header, 1000);
+            Console.WriteLine("数据库名:"+databaseNames);
+            //
+            string tableNames = hiveDao.Query(getTablesSQL, header, 1000);
+            Console.WriteLine("表名:" + tableNames);
+            //
+            string content = hiveDao.Query(getTableContentSQL, header, 1000);
+            Console.WriteLine("内容:" + content);
+            //
+            string structure = hiveDao.Query(getColNameByTableSQL, header, 1000);
+            Console.WriteLine("表结构:" + structure);
+        }
     }
 }
