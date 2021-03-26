@@ -9,10 +9,9 @@ namespace C2.SearchToolkit
 {
     public partial class SearchToolkitForm : Form
     {
+        private String validateMessage;
         private Control[] inputControls;
         private Dictionary<String, String> taskDict;
-
-        private String validateMessage = String.Empty;
 
         public SearchToolkitForm()
         {
@@ -22,6 +21,8 @@ namespace C2.SearchToolkit
 
         private void InitializeInputControls()
         {
+            validateMessage = String.Empty;
+
             inputControls = new Control[] { 
                 this.usernameTB, 
                 this.passwordTB,
@@ -39,7 +40,7 @@ namespace C2.SearchToolkit
                 ["全文涉黄模型"] = "yellow",
                 ["全文飞机场模型"] = "plane"
             };
-
+            
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
         }
         private void LoadTaskInfo(TaskInfo taskInfo)
@@ -176,11 +177,11 @@ namespace C2.SearchToolkit
         {
             validateMessage = String.Empty;
             // 从后往前验证
-            validateMessage = ValidateSearchAgentIP() ? validateMessage : "全文机IP格式不对";
-            validateMessage = ValidateBastionIP() ? validateMessage : "堡垒机IP格式不对";
+            validateMessage = ValidateSearchAgentIP() ? validateMessage : "全文机【IP】格式不对";
+            validateMessage = ValidateBastionIP() ? validateMessage : "堡垒机【IP】格式不对";
             validateMessage = ValidatePassword() ? validateMessage : "堡垒机 【密码】  不能为空, 不能超过128个字符";
             validateMessage = ValidateUsername() ? validateMessage : "堡垒机 【用户名】不能为空, 不能超过128个字符";
-            validateMessage = ValidateTaskName() ? validateMessage : "任务名称不能为空,不能超过128个字符,不能含有特殊字符";
+            validateMessage = ValidateTaskName() ? validateMessage : "任务名称 不能为空,不能超过128个字符,不能含有特殊字符";
             
             return String.IsNullOrEmpty(validateMessage);
         }
