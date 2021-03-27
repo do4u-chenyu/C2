@@ -213,7 +213,7 @@ namespace C2
             this.searchToolkitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchToolkitButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.searchToolkitButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.searchToolkitButton.Location = new System.Drawing.Point(0, 302);
+            this.searchToolkitButton.Location = new System.Drawing.Point(0, 242);
             this.searchToolkitButton.Name = "searchToolkitButton";
             this.searchToolkitButton.Size = new System.Drawing.Size(151, 42);
             this.searchToolkitButton.TabIndex = 5;
@@ -241,7 +241,7 @@ namespace C2
             this.detectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.detectionButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.detectionButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.detectionButton.Location = new System.Drawing.Point(0, 242);
+            this.detectionButton.Location = new System.Drawing.Point(0, 182);
             this.detectionButton.Name = "detectionButton";
             this.detectionButton.Size = new System.Drawing.Size(151, 42);
             this.detectionButton.TabIndex = 4;
@@ -269,7 +269,7 @@ namespace C2
             this.iaoLabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.iaoLabButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.iaoLabButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.iaoLabButton.Location = new System.Drawing.Point(0, 182);
+            this.iaoLabButton.Location = new System.Drawing.Point(0, 302);
             this.iaoLabButton.Name = "iaoLabButton";
             this.iaoLabButton.Size = new System.Drawing.Size(151, 42);
             this.iaoLabButton.TabIndex = 3;

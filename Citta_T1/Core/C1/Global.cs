@@ -18,7 +18,7 @@ namespace C2.Core
 {
     class Global
     {
-        private static string username;
+        private static string username = "IAO";
         private static MainForm mainForm;
         private static MyModelControl myModelControl;
         private static SearchToolkitControl searchToolkitControl;
@@ -143,7 +143,7 @@ namespace C2.Core
         public static void SetWorkSpacePanel(Panel ws) { workSpacePanel = ws; }
         public static void SetMindMapModelControl(MyMindMapControl mmmc) { mindMapModelControl = mmmc; }
 
-        public static string WorkspaceDirectory { get; set; } // 用户空间根目录
+        public static string WorkspaceDirectory { get; set; } = string.Empty; // 用户空间根目录
         public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, username); }
         public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "模型市场"); }
