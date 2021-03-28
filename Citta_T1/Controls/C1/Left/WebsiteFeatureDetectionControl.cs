@@ -59,13 +59,6 @@ namespace C2.Controls.C1.Left
             }
         }
 
-        public List<string> GetTaskNames()
-        {
-            List<string> taskNames = new List<string>();
-            FindControls<WebsiteFeatureDetectionButton>().ForEach(bt => taskNames.Add(bt.TaskInfo.TaskName));
-            return taskNames;
-        }
-
         #region 持久化保存/加载
         public void SaveWFDTasksToXml()
         {
@@ -88,10 +81,10 @@ namespace C2.Controls.C1.Left
             XmlNode node = xDoc.SelectSingleNode("WFDTasks");
             ModelXmlWriter mxw = new ModelXmlWriter("task", node);
             mxw.Write("taskName", taskInfo.TaskName)
-                 .Write("taskId", taskInfo.TaskID)
-                 .Write("datasourceFilePath", taskInfo.DatasourceFilePath)
-                 .Write("resultFilePath", taskInfo.ResultFilePath)
-                 .Write("status", taskInfo.Status);
+               .Write("taskId", taskInfo.TaskID)
+               .Write("datasourceFilePath", taskInfo.DatasourceFilePath)
+               .Write("resultFilePath", taskInfo.ResultFilePath)
+               .Write("status", taskInfo.Status);
         }
 
         public void LoadXmlToWFDTasks(string xmlDirectory)
@@ -119,13 +112,14 @@ namespace C2.Controls.C1.Left
 
         private void LoadSingleTask(XmlNode xn)
         {
-            WFDTaskInfo taskInfo = new WFDTaskInfo();
-
-            taskInfo.TaskName = xn.SelectSingleNode("taskName").InnerText;
-            taskInfo.TaskID = xn.SelectSingleNode("taskId").InnerText;
-            taskInfo.DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText;
-            taskInfo.ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText;
-            taskInfo.Status = WFDTaskStatusEnum(xn.SelectSingleNode("status").InnerText);
+            WFDTaskInfo taskInfo = new WFDTaskInfo
+            {
+                TaskName = xn.SelectSingleNode("taskName").InnerText,
+                TaskID = xn.SelectSingleNode("taskId").InnerText,
+                DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
+                ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
+                Status = WFDTaskStatusEnum(xn.SelectSingleNode("status").InnerText)
+            };
 
             AddInnerButton(new WebsiteFeatureDetectionButton(taskInfo));
         }

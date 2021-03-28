@@ -34,6 +34,7 @@
             this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.browserButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // label1
@@ -50,7 +51,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(19, 87);
+            this.label2.Location = new System.Drawing.Point(19, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 19);
             this.label2.TabIndex = 10004;
@@ -58,20 +59,20 @@
             // 
             // taskNameTextBox
             // 
-            this.taskNameTextBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.taskNameTextBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
             this.taskNameTextBox.Location = new System.Drawing.Point(103, 36);
             this.taskNameTextBox.Name = "taskNameTextBox";
-            this.taskNameTextBox.Size = new System.Drawing.Size(247, 23);
+            this.taskNameTextBox.Size = new System.Drawing.Size(247, 25);
             this.taskNameTextBox.TabIndex = 10005;
             // 
             // filePathTextBox
             // 
             this.filePathTextBox.BackColor = System.Drawing.Color.White;
-            this.filePathTextBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.filePathTextBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.filePathTextBox.Location = new System.Drawing.Point(103, 84);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(247, 23);
+            this.filePathTextBox.Size = new System.Drawing.Size(247, 25);
             this.filePathTextBox.TabIndex = 10006;
             // 
             // browserButton
@@ -95,6 +96,10 @@
             this.label3.Size = new System.Drawing.Size(167, 12);
             this.label3.TabIndex = 10008;
             this.label3.Text = "* 文件内容格式：一行一个url";
+            // 
+            // ofd
+            // 
+            this.ofd.Filter = "\"files|*.txt;*.bcp;*.csv\"";
             // 
             // AddWFDTask
             // 
@@ -130,5 +135,6 @@
         private System.Windows.Forms.TextBox filePathTextBox;
         private System.Windows.Forms.Button browserButton;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.OpenFileDialog ofd;
     }
 }
