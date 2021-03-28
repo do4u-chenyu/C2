@@ -164,7 +164,7 @@ namespace C2.Controls.C1.Left
             {
                 ToolStripMenuItem RemoveToolStripMenuItem = new ToolStripMenuItem
                 {
-                    Name = "ReviewToolStripMenuItem",
+                    Name = "RemoveToolStripMenuItem",
                     Size = new System.Drawing.Size(196, 22),
                     Text = "删除任务",
                     ToolTipText = "删除任务,同时删除本地文件"
