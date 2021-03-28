@@ -164,31 +164,38 @@ namespace C2.Controls.C1.Left
 
             private void InitButtonMenu()
             {
-                ToolStripMenuItem RemoveToolStripMenuItem = new ToolStripMenuItem();
-                RemoveToolStripMenuItem.Name = "ReviewToolStripMenuItem";
-                RemoveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-                RemoveToolStripMenuItem.Text = "删除任务";
-                RemoveToolStripMenuItem.ToolTipText = "从面板中移除任务,同时删除本地结果文件";
+                ToolStripMenuItem RemoveToolStripMenuItem = new ToolStripMenuItem
+                {
+                    Name = "ReviewToolStripMenuItem",
+                    Size = new System.Drawing.Size(196, 22),
+                    Text = "删除任务",
+                    ToolTipText = "删除任务,同时删除本地文件"
+                };
                 RemoveToolStripMenuItem.Click += new System.EventHandler(RemoveToolStripMenuItem_Click);
 
-                ToolStripMenuItem OpenDatasourceToolStripMenuItem = new ToolStripMenuItem();
-                OpenDatasourceToolStripMenuItem.Name = "OpenDatasourceToolStripMenuItem";
-                OpenDatasourceToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-                OpenDatasourceToolStripMenuItem.Text = "打开源文件";
-                OpenDatasourceToolStripMenuItem.ToolTipText = "从本地文本编辑器中打开文件";
+                ToolStripMenuItem OpenDatasourceToolStripMenuItem = new ToolStripMenuItem
+                {
+                    Name = "OpenDatasourceToolStripMenuItem",
+                    Size = new System.Drawing.Size(196, 22),
+                    Text = "打开源文件",
+                    ToolTipText = "预览输入的URL列表文件"
+                };
                 OpenDatasourceToolStripMenuItem.Click += new EventHandler(OpenDatasourceToolStripMenuItem_Click);
 
-                ToolStripMenuItem ResultToolStripMenuItem = new ToolStripMenuItem();
-                ResultToolStripMenuItem.Name = "ResultToolStripMenuItem";
-                ResultToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-                ResultToolStripMenuItem.Text = "查看结果";
-                ResultToolStripMenuItem.ToolTipText = "查看任务返回结果";
+                ToolStripMenuItem ResultToolStripMenuItem = new ToolStripMenuItem
+                {
+                    Name = "ResultToolStripMenuItem",
+                    Size = new System.Drawing.Size(196, 22),
+                    Text = "任务详情",
+                    ToolTipText = "查看任务的详细信息"
+                };
                 ResultToolStripMenuItem.Click += new EventHandler(ResultToolStripMenuItem_Click);
 
                 this.contextMenuStrip.Items.AddRange(new ToolStripItem[] {
-                    OpenDatasourceToolStripMenuItem,
                     ResultToolStripMenuItem,
-                    RemoveToolStripMenuItem
+                    RemoveToolStripMenuItem,
+                    new ToolStripSeparator(),
+                    OpenDatasourceToolStripMenuItem
                  });
 
             }

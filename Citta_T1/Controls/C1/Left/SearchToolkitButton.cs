@@ -31,7 +31,7 @@ namespace C2.Controls.C1.Left
                 Name = "RemoveToolStripMenuItem",
                 Size = new Size(196, 22),
                 Text = "删除任务",
-                ToolTipText = "从面板中移除任务,同时删除本地文件"
+                ToolTipText = "删除任务,同时删除本地文件"
             };
             RemoveToolStripMenuItem.Click += new EventHandler(RemoveToolStripMenuItem_Click);
 
@@ -40,8 +40,8 @@ namespace C2.Controls.C1.Left
             {
                 Name = "ResultToolStripMenuItem",
                 Size = new Size(196, 22),
-                Text = "查看结果",
-                ToolTipText = "查看任务模型运行结果"
+                Text = "任务详情",
+                ToolTipText = "查看任务的详细信息"
             };
             ResultToolStripMenuItem.Click += new EventHandler(ResultToolStripMenuItem_Click);
 
