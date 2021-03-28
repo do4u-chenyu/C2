@@ -15,16 +15,18 @@ namespace C2.Business.WebsiteFeatureDetection
     }
     class WFDTaskInfo
     {
+        public static readonly WFDTaskInfo Empty = new WFDTaskInfo();
         public string TaskName;
-        public string TaskId;
+        public string TaskID;
         public string DatasourceFilePath;
         public string ResultFilePath;
         public WFDTaskStatus Status;
+        public bool IsEmpty() { return this == Empty; }
 
         public WFDTaskInfo()
         {
             TaskName = string.Empty;
-            TaskId = string.Empty;
+            TaskID = string.Empty;
             DatasourceFilePath = string.Empty;
             ResultFilePath = string.Empty;
             Status = WFDTaskStatus.Null;
@@ -33,7 +35,7 @@ namespace C2.Business.WebsiteFeatureDetection
         public WFDTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, WFDTaskStatus status)
         {
             TaskName = taskName;
-            TaskId = taskId;
+            TaskID = taskId;
             DatasourceFilePath = datasourceFilePath;
             ResultFilePath = resultFilePath;
             Status = status;

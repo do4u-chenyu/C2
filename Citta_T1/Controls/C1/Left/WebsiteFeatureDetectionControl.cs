@@ -88,7 +88,7 @@ namespace C2.Controls.C1.Left
             XmlNode node = xDoc.SelectSingleNode("WFDTasks");
             ModelXmlWriter mxw = new ModelXmlWriter("task", node);
             mxw.Write("taskName", taskInfo.TaskName)
-                 .Write("taskId", taskInfo.TaskId)
+                 .Write("taskId", taskInfo.TaskID)
                  .Write("datasourceFilePath", taskInfo.DatasourceFilePath)
                  .Write("resultFilePath", taskInfo.ResultFilePath)
                  .Write("status", taskInfo.Status);
@@ -122,7 +122,7 @@ namespace C2.Controls.C1.Left
             WFDTaskInfo taskInfo = new WFDTaskInfo();
 
             taskInfo.TaskName = xn.SelectSingleNode("taskName").InnerText;
-            taskInfo.TaskId = xn.SelectSingleNode("taskId").InnerText;
+            taskInfo.TaskID = xn.SelectSingleNode("taskId").InnerText;
             taskInfo.DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText;
             taskInfo.ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText;
             taskInfo.Status = WFDTaskStatusEnum(xn.SelectSingleNode("status").InnerText);
@@ -141,12 +141,13 @@ namespace C2.Controls.C1.Left
         #region WFD按钮类
         private class WebsiteFeatureDetectionButton : BaseLeftInnerButton
         {
-            public WFDTaskInfo TaskInfo;
+            public WFDTaskInfo TaskInfo { get; set; } = WFDTaskInfo.Empty;
+
             public WebsiteFeatureDetectionButton()
             {
                 InitButtonMenu();
                 InitButtonType();
-                TaskInfo = new WFDTaskInfo();
+                InitButtonDoubleClick();
             }
             public WebsiteFeatureDetectionButton(WFDTaskInfo taskInfo) : this()
             {
@@ -154,6 +155,12 @@ namespace C2.Controls.C1.Left
                 this.ButtonText = taskInfo.TaskName;
                 this.toolTip.SetToolTip(this.rightPictureBox, TaskInfo.ResultFilePath);
             }
+
+            private void InitButtonDoubleClick()
+            {
+                this.noFocusButton.MouseDown += new MouseEventHandler(this.NoFocusButton_MouseDown);
+            }
+
 
             private void InitButtonType()
             {
@@ -175,14 +182,14 @@ namespace C2.Controls.C1.Left
                 OpenDatasourceToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
                 OpenDatasourceToolStripMenuItem.Text = "打开源文件";
                 OpenDatasourceToolStripMenuItem.ToolTipText = "从本地文本编辑器中打开文件";
-                OpenDatasourceToolStripMenuItem.Click += new System.EventHandler(OpenDatasourceToolStripMenuItem_Click);
+                OpenDatasourceToolStripMenuItem.Click += new EventHandler(OpenDatasourceToolStripMenuItem_Click);
 
                 ToolStripMenuItem ResultToolStripMenuItem = new ToolStripMenuItem();
                 ResultToolStripMenuItem.Name = "ResultToolStripMenuItem";
                 ResultToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
                 ResultToolStripMenuItem.Text = "查看结果";
                 ResultToolStripMenuItem.ToolTipText = "查看任务返回结果";
-                ResultToolStripMenuItem.Click += new System.EventHandler(ResultToolStripMenuItem_Click);
+                ResultToolStripMenuItem.Click += new EventHandler(ResultToolStripMenuItem_Click);
 
                 this.contextMenuStrip.Items.AddRange(new ToolStripItem[] {
                     OpenDatasourceToolStripMenuItem,
@@ -214,9 +221,20 @@ namespace C2.Controls.C1.Left
             }
             private void ResultToolStripMenuItem_Click(object sender, EventArgs e)
             {
+                ShowDialogTaskInfo();
+            }
+
+            private void NoFocusButton_MouseDown(object sender, MouseEventArgs e)
+            {   // 双击打开
+                if (e.Button == MouseButtons.Left && e.Clicks == 2)
+                    ShowDialogTaskInfo();
+            }
+
+            private void ShowDialogTaskInfo()
+            {
                 //TODO phx 查看结果前向api发起查看任务状态请求,结果在这里做处理并更新button对应信息，把button更新之后的结果展示在新窗口里
                 //如果task本身是done状态，不发起查询
-                string resp = WFDWebAPI.GetInstance().GetTaskResultsById(TaskInfo.TaskId);
+                string resp = WFDWebAPI.GetInstance().GetTaskResultsById(TaskInfo.TaskID);
                 string urlResults = UpdateTaskInfoByResp(resp);
 
                 var dialog = new WFDTaskResult(TaskInfo, urlResults);
@@ -236,6 +254,8 @@ namespace C2.Controls.C1.Left
                 else
                     return string.Empty;
             }
+
+
         }
         #endregion
     }

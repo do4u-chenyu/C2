@@ -1,18 +1,10 @@
 ﻿using C2.Business.WebsiteFeatureDetection;
 using C2.Controls;
-using C2.Controls.C1.Left;
 using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
 {
@@ -33,8 +25,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             UrlResults = results;
 
             this.taskNameLabel.Text = taskInfo.TaskName;
-            this.taskIdLabel.Text = taskInfo.TaskId;
-            this.statusLabel.Text = taskInfo.Status.ToString();
+            this.taskIDLabel.Text = taskInfo.TaskID;
+            this.taskStatusLabel.Text = taskInfo.Status.ToString();
             RefreshDGV();
         }
 
@@ -52,7 +44,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             List<List<string>> datas = new List<List<string>>
             {
-                new List<string>() { "url", "查询状态", "分类情况", "网站截图"}
+                new List<string>() { "url", "查询状态", "分类情况", "网站截图" }
             };
 
             return datas;
