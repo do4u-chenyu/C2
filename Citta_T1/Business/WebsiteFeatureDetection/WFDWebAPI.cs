@@ -76,7 +76,7 @@ namespace C2.Business.WebsiteFeatureDetection
         }
 
         // 网站分类
-        public string ClassifierUrls(List<string> urls)
+        public string StartTask(List<string> urls)
         {
             string id = string.Empty;
 
@@ -132,7 +132,7 @@ namespace C2.Business.WebsiteFeatureDetection
         private string DictionaryToJson(Dictionary<string, string> dict)
         {
             if (dict.Count == 0)
-                return "";
+                return String.Empty;
 
             return JsonConvert.SerializeObject(dict);
         }

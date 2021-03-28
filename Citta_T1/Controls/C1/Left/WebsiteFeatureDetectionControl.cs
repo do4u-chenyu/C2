@@ -45,7 +45,7 @@ namespace C2.Controls.C1.Left
                 //TODO phx 需要问一下这个分类接口，返回状态的时间，立即返回？还是查完才返回？
 
                 List<string> urls = new List<string>() { "http://www.1.com", "http://www.1.com" };
-                string taskId = WFDWebAPI.GetInstance().ClassifierUrls(urls);
+                string taskId = WFDWebAPI.GetInstance().StartTask(urls);
 
                 string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网络侦察兵");
                 string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.bcp", dialog.TaskName, taskId));
@@ -97,15 +97,13 @@ namespace C2.Controls.C1.Left
             {
                 XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(xmlPath);
-                XmlNode rootNode = xDoc.SelectSingleNode("WFDTasks");
-                XmlNodeList nodeList = rootNode.SelectNodes("task");
 
-                foreach (XmlNode xn in nodeList)
+                foreach (XmlNode xn in xDoc.SelectNodes(@"WFDTasks/task"))
                     LoadSingleTask(xn);
             }
             catch (Exception ex)
             {
-                HelpUtil.ShowMessageBox("WFDTasks 加载发生错误，错误 :" + ex.Message);
+                HelpUtil.ShowMessageBox("侦察兵任务加载时发生错误:" + ex.Message);
             }
             return;
         }
@@ -209,9 +207,9 @@ namespace C2.Controls.C1.Left
                 if (rs != DialogResult.OK)
                     return;
 
-                FileUtil.DeleteFile(this.TaskInfo.ResultFilePath);
-                Global.GetWebsiteFeatureDetectionControl().RemoveButton(this);
                 Global.GetWebsiteFeatureDetectionControl().SaveWFDTasksToXml();
+                Global.GetWebsiteFeatureDetectionControl().RemoveButton(this);
+                FileUtil.DeleteFile(this.TaskInfo.ResultFilePath);
             }
             private void OpenDatasourceToolStripMenuItem_Click(object sender, EventArgs e)
             {
