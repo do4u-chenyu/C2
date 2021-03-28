@@ -52,7 +52,6 @@ namespace C2.Controls.C1.Left
 
         }
 
-
         private void InitTaskInfo(TaskInfo task)
         {
             this.task = task;
@@ -74,6 +73,14 @@ namespace C2.Controls.C1.Left
                 return;
             // 用全局变量机械降神, 不是好的方式, 只是相对省事儿,不得已为之,尽量少用 
             Global.GetSearchToolkitControl().DeleteButton(this, task);
+        }
+
+        private void NoFocusButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left || e.Clicks != 2)
+                return;
+            // 双击打开
+            new SearchToolkitForm().ShowTaskInfoDialog(this.task);
         }
     }
 }

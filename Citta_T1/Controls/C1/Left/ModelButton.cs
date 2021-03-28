@@ -200,7 +200,7 @@ namespace C2.Controls.Left
         }
 
         private void TextButton_MouseMove(object sender, MouseEventArgs e)
-        {
+        {   //  因为和鼠标双击冲突,所以在移动时判断是否进入拖拽状态,
             if (dragDropData != null)
                 this.textButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
         }

@@ -254,11 +254,12 @@
             this.taskStatusLabel.AutoSize = true;
             this.taskStatusLabel.Font = new System.Drawing.Font("微软雅黑", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.taskStatusLabel.ForeColor = System.Drawing.Color.DimGray;
-            this.taskStatusLabel.Location = new System.Drawing.Point(90, 28);
+            this.taskStatusLabel.Location = new System.Drawing.Point(66, 28);
             this.taskStatusLabel.Name = "taskStatusLabel";
-            this.taskStatusLabel.Size = new System.Drawing.Size(96, 36);
+            this.taskStatusLabel.Size = new System.Drawing.Size(154, 36);
             this.taskStatusLabel.TabIndex = 0;
-            this.taskStatusLabel.Text = "运行中";
+            this.taskStatusLabel.Text = "RUNNING";
+            this.taskStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // taskNameTB
             // 
@@ -267,7 +268,7 @@
             this.taskNameTB.Name = "taskNameTB";
             this.taskNameTB.Size = new System.Drawing.Size(211, 25);
             this.taskNameTB.TabIndex = 0;
-            this.taskNameTB.Text = "全文涉赌模型";
+            this.taskNameTB.Text = "涉赌模型";
             // 
             // label5
             // 
@@ -293,10 +294,10 @@
             this.taskModelComboBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.taskModelComboBox.FormattingEnabled = true;
             this.taskModelComboBox.Items.AddRange(new object[] {
-            "全文涉赌模型",
-            "全文涉枪模型",
-            "全文涉黄模型",
-            "全文飞机场模型"});
+            "涉赌模型",
+            "涉枪模型",
+            "涉黄模型",
+            "飞机场模型"});
             this.taskModelComboBox.Location = new System.Drawing.Point(99, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);
@@ -307,7 +308,7 @@
             // 
             this.downloadButton.Enabled = false;
             this.downloadButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.downloadButton.Location = new System.Drawing.Point(527, 128);
+            this.downloadButton.Location = new System.Drawing.Point(527, 127);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(68, 27);
             this.downloadButton.TabIndex = 37;
@@ -391,7 +392,7 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.FileName = "全文模型结果";
-            this.saveFileDialog1.Filter = "压缩包文件 (*.zip)|*.tar.gz\"";
+            this.saveFileDialog1.Filter = "压缩包文件 (*.zip)|*.tar.gz|Bcp文件|*.bcp";
             // 
             // SearchToolkitForm
             // 

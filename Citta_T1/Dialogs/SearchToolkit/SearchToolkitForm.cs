@@ -34,29 +34,29 @@ namespace C2.SearchToolkit
 
             taskDict = new Dictionary<string, string>
             {
-                ["全文涉赌模型"] = "gamble",
-                ["全文涉枪模型"] = "gun",
-                ["全文涉黄模型"] = "yellow",
-                ["全文飞机场模型"] = "plane"
+                ["涉赌模型"] = "gamble",
+                ["涉枪模型"] = "gun",
+                ["涉黄模型"] = "yellow",
+                ["飞机场模型"] = "plane"
             };
             
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
         }
-        private void LoadTaskInfo(TaskInfo taskInfo)
+        private void LoadTaskInfo(TaskInfo task)
         {
-            this.usernameTB.Text = taskInfo.Username;
-            this.passwordTB.Text = taskInfo.Password;
-            this.taskNameTB.Text = taskInfo.TaskName;
-            this.bastionIPTB.Text = taskInfo.BastionIP;
-            this.taskModelComboBox.Text = taskInfo.TaskModel;
-            this.searchAgentIPTB.Text = taskInfo.SearchAgentIP;
-            this.remoteWorkspaceTB.Text = taskInfo.RemoteWorkspace;
+            this.usernameTB.Text = task.Username;
+            this.passwordTB.Text = task.Password;
+            this.taskNameTB.Text = task.TaskName;
+            this.bastionIPTB.Text = task.BastionIP;
+            this.taskModelComboBox.Text = task.TaskModel;
+            this.searchAgentIPTB.Text = task.SearchAgentIP;
+            this.remoteWorkspaceTB.Text = task.RemoteWorkspace;
 
-            this.taskInfoGB.Text = "任务ID:" + taskInfo.TaskID;
+            this.taskInfoGB.Text = String.IsNullOrEmpty(task.TaskID) ? "任务状态" : task.TaskID;
 
             // TODO 获取远程 任务状态
-            this.taskStatusLabel.Text = taskInfo.TaskStatus;
-            this.downloadButton.Enabled = taskInfo.TaskStatus == "DONE";
+            this.taskStatusLabel.Text = task.TaskStatus;
+            this.downloadButton.Enabled = task.TaskStatus == "DONE";
         }
 
         private TaskInfo GenTaskInfo()
