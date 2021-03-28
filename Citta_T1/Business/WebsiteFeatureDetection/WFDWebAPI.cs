@@ -84,14 +84,14 @@ namespace C2.Business.WebsiteFeatureDetection
         }
 
         // 根据任务id返回任务结果
-        public string GetTaskResultsById(string id, string flag = "0")
+        public string QueryTaskResultsById(string id, string flag = "0")
         {
             string resq = string.Empty;
             return resq;
         }
 
         // 根据任务id返回异常网站截图
-        public void GetScreenshotsById(string id)
+        public void DownloadScreenshotsById(string id)
         {
 
         }

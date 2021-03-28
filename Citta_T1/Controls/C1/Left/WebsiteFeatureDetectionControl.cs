@@ -171,7 +171,7 @@ namespace C2.Controls.C1.Left
                     Text = "删除任务",
                     ToolTipText = "删除任务,同时删除本地文件"
                 };
-                RemoveToolStripMenuItem.Click += new System.EventHandler(RemoveToolStripMenuItem_Click);
+                RemoveToolStripMenuItem.Click += new EventHandler(RemoveToolStripMenuItem_Click);
 
                 ToolStripMenuItem OpenDatasourceToolStripMenuItem = new ToolStripMenuItem
                 {
@@ -235,7 +235,7 @@ namespace C2.Controls.C1.Left
             {
                 //TODO phx 查看结果前向api发起查看任务状态请求,结果在这里做处理并更新button对应信息，把button更新之后的结果展示在新窗口里
                 //如果task本身是done状态，不发起查询
-                string resp = WFDWebAPI.GetInstance().GetTaskResultsById(TaskInfo.TaskID);
+                string resp = WFDWebAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID);
                 string urlResults = UpdateTaskInfoByResp(resp);
 
                 var dialog = new WFDTaskResult(TaskInfo, urlResults);
