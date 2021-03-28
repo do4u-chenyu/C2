@@ -25,7 +25,7 @@ namespace C2.SearchToolkit
         {
             BastionAPI api = new BastionAPI(task);
 
-            task.TaskID = api.Login()
+            task.PID = api.Login()
                              .UploadGambleScript()
                              .CreateGambleTaskDirectory()
                              .RunGambleTask();
@@ -85,9 +85,9 @@ namespace C2.SearchToolkit
             // TODO 删除远程结果文件
             BastionAPI api = new BastionAPI(task);
 
-            task.TaskID = api.Login()
-                             .KillGambleTask()
-                             .DeleteGambleTaskResult();
+            api.Login()
+               .KillGambleTask(task.PID)
+               .DeleteGambleTaskResult();
 
             String taskFFP = Path.Combine(home, task.BcpFilename);   
             return tasks.Remove(task) && FileUtil.DeleteFile(taskFFP); 

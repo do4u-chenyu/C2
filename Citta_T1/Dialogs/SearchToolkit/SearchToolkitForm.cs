@@ -52,7 +52,7 @@ namespace C2.SearchToolkit
             this.searchAgentIPTB.Text = task.SearchAgentIP;
             this.remoteWorkspaceTB.Text = task.RemoteWorkspace;
 
-            this.taskInfoGB.Text = String.IsNullOrEmpty(task.TaskID) ? "任务状态" : task.TaskID;
+            this.taskInfoGB.Text = String.IsNullOrEmpty(task.PID) ? "任务状态" : task.PID;
 
             // TODO 获取远程 任务状态
             this.taskStatusLabel.Text = task.TaskStatus;
@@ -64,7 +64,7 @@ namespace C2.SearchToolkit
            String value = String.Join(OpUtil.TabSeparatorString, new string[] {
                                             this.taskNameTB.Text,  // 刚开始创建时，没有ID
                                             this.taskNameTB.Text,
-                                            DateTime.Now.ToString("yyyyMMdd"), 
+                                            DateTime.Now.ToString("yyyyMMddHHmmss"), 
                                             this.taskModelComboBox.Text,
                                             "RUNNING",  // NULL, RUNNING, DONE, FAIL
                                             this.usernameTB.Text,
