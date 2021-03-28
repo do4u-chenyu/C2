@@ -39,27 +39,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(62, 41);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(32, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 14);
+            this.label1.Size = new System.Drawing.Size(61, 19);
             this.label1.TabIndex = 10003;
             this.label1.Text = "任务名：";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(48, 90);
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(19, 87);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 14);
+            this.label2.Size = new System.Drawing.Size(74, 19);
             this.label2.TabIndex = 10004;
             this.label2.Text = "查询文件：";
             // 
             // taskNameTextBox
             // 
             this.taskNameTextBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskNameTextBox.Location = new System.Drawing.Point(133, 38);
+            this.taskNameTextBox.Location = new System.Drawing.Point(103, 36);
             this.taskNameTextBox.Name = "taskNameTextBox";
             this.taskNameTextBox.Size = new System.Drawing.Size(247, 23);
             this.taskNameTextBox.TabIndex = 10005;
@@ -68,19 +68,20 @@
             // 
             this.filePathTextBox.BackColor = System.Drawing.Color.White;
             this.filePathTextBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.filePathTextBox.Location = new System.Drawing.Point(133, 87);
+            this.filePathTextBox.Location = new System.Drawing.Point(103, 84);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(200, 23);
+            this.filePathTextBox.Size = new System.Drawing.Size(247, 23);
             this.filePathTextBox.TabIndex = 10006;
             // 
             // browserButton
             // 
-            this.browserButton.Location = new System.Drawing.Point(339, 87);
+            this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.browserButton.Location = new System.Drawing.Point(363, 84);
             this.browserButton.Name = "browserButton";
-            this.browserButton.Size = new System.Drawing.Size(41, 23);
+            this.browserButton.Size = new System.Drawing.Size(59, 23);
             this.browserButton.TabIndex = 10007;
-            this.browserButton.Text = "预览";
+            this.browserButton.Text = "+预览";
             this.browserButton.UseVisualStyleBackColor = true;
             this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
@@ -89,11 +90,11 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(131, 115);
+            this.label3.Location = new System.Drawing.Point(101, 117);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(239, 12);
+            this.label3.Size = new System.Drawing.Size(167, 12);
             this.label3.TabIndex = 10008;
-            this.label3.Text = "* 待查询URL须放在文件第一列，不限制表头";
+            this.label3.Text = "* 文件内容格式：一行一个url";
             // 
             // AddWFDTask
             // 
@@ -109,7 +110,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AddWFDTask";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "新建任务";
+            this.Text = "侦察兵-新建任务";
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.taskNameTextBox, 0);

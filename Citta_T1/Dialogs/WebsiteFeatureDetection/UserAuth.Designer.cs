@@ -115,7 +115,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "UserAuth";
-            this.Text = "用户认证";
+            this.Text = "侦察兵-用户认证";
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.userNameTextBox, 0);
