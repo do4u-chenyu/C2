@@ -38,6 +38,17 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             else
                 tableCols = DbUtil.StringTo2DString(UrlResults);
             FileUtil.FillTable(dataGridView, tableCols);
+            ResetColumnsWidth();
+        }
+        private void ResetColumnsWidth()
+        {
+            if (dataGridView.Columns.Count != 4)
+                return;
+
+            dataGridView.Columns[0].FillWeight = 50;  // URL列宽一些，其他列短一些
+            dataGridView.Columns[1].FillWeight = 15;  
+            dataGridView.Columns[2].FillWeight = 20;
+            dataGridView.Columns[3].FillWeight = 15;
         }
 
         private List<List<string>> GenDefaultContent()
