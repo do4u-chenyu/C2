@@ -219,7 +219,7 @@ namespace C2
             this.searchToolkitButton.TabIndex = 5;
             this.searchToolkitButton.TabStop = false;
             this.searchToolkitButton.Text = "   全文工具";
-            this.toolTip1.SetToolTip(this.searchToolkitButton, "分析师的实验台");
+            this.toolTip1.SetToolTip(this.searchToolkitButton, "全文工具箱: FH内网全文上的各种经典模型");
             this.searchToolkitButton.UseVisualStyleBackColor = true;
             this.searchToolkitButton.Click += new System.EventHandler(this.SearchToolkitButton_Click);
             // 
@@ -247,7 +247,7 @@ namespace C2
             this.detectionButton.TabIndex = 4;
             this.detectionButton.TabStop = false;
             this.detectionButton.Text = "   侦察兵";
-            this.toolTip1.SetToolTip(this.detectionButton, "分析师的实验台");
+            this.toolTip1.SetToolTip(this.detectionButton, "网站侦察兵");
             this.detectionButton.UseVisualStyleBackColor = true;
             this.detectionButton.Click += new System.EventHandler(this.DetectionButton_Click);
             // 
