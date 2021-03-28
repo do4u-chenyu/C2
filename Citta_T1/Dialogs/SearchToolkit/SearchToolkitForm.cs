@@ -194,16 +194,16 @@ namespace C2.SearchToolkit
         }
         public TaskInfo ShowTaskConfigDialog()
         {
-            taskInfoGB.Visible = !taskInfoGB.Visible;
-            confirmButton.Enabled = !confirmButton.Enabled;
+            taskInfoGB.Visible = false;
+            confirmButton.Enabled = true;
 
             return this.ShowDialog() == DialogResult.OK ? GenTaskInfo() : TaskInfo.EmptyTaskInfo;
         }
 
         public DialogResult ShowTaskInfoDialog(TaskInfo taskInfo)
         {
-            taskInfoGB.Visible = !taskInfoGB.Visible;
-            confirmButton.Enabled = !confirmButton.Enabled;
+            taskInfoGB.Visible = true;
+            confirmButton.Enabled = false;
 
             LoadTaskInfo(taskInfo);
             ReadOnlyInputControls();   // 展示任务信息时, 不需要更改

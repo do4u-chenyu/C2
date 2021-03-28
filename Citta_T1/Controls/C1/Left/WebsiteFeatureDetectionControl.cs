@@ -196,7 +196,7 @@ namespace C2.Controls.C1.Left
             {
                 DialogResult rs = MessageBox.Show(
                     String.Format("删除任务 {0}及结果文件, 继续删除请点击 \"确定\"", ButtonText),
-                    "删除",MessageBoxButtons.OKCancel,MessageBoxIcon.Information);
+                    "删除", MessageBoxButtons.OKCancel,MessageBoxIcon.Information);
 
                 if (rs != DialogResult.OK)
                     return;

@@ -66,7 +66,13 @@ namespace C2.Controls.C1.Left
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // 用全局变量机械降神, 不是好的方式, 只是相对省事儿 
+            DialogResult rs = MessageBox.Show(
+                  String.Format("删除任务【{0}】及结果文件, 继续删除请点击 \"确定\"", ButtonText),
+                  "删除", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+            if (rs != DialogResult.OK)
+                return;
+            // 用全局变量机械降神, 不是好的方式, 只是相对省事儿,不得已为之,尽量少用 
             Global.GetSearchToolkitControl().DeleteButton(this, task);
         }
     }
