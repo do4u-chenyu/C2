@@ -98,7 +98,7 @@ namespace C2.Controls.C1.Left
                 XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(xmlPath);
 
-                foreach (XmlNode xn in xDoc.SelectNodes(@"WFDTasks/task"))
+                foreach (XmlNode xn in xDoc.SelectNodes(@"WFDTasks/task")) //要学着尽量利用XPath自己的能力
                     LoadSingleTask(xn);
             }
             catch (Exception ex)
