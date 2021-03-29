@@ -4,6 +4,7 @@ using C2.Utils;
 using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
 {
@@ -19,18 +20,21 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         protected override bool OnOKButtonClick()
         {
+            string respMsg = string.Empty;
             if (!IsValidityUser() || !IsValidityOtp())
                 return false;
-
-            //TODO 向接口传参
-            string respStatus = WFDWebAPI.GetInstance().UserAuthentication(UserName, Otp);
-            if (respStatus == "fail")
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                HelpUtil.ShowMessageBox("用户认证失败，请重试或联系相关负责人。");
-                return false;
+                respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, Otp);
             }
 
-            return base.OnOKButtonClick();
+            if (respMsg == "success")
+                return base.OnOKButtonClick();
+            else
+            {
+                HelpUtil.ShowMessageBox(respMsg + " 请重试或联系相关负责人。");
+                return false;
+            }
         }
 
         private bool IsValidityUser()
