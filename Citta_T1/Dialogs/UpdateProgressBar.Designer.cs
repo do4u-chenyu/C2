@@ -62,8 +62,7 @@ namespace C2.Dialogs
             // 
             // UpdateProgressBar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(434, 81);
             this.Controls.Add(this.status);
             this.Controls.Add(this.speedValue);
