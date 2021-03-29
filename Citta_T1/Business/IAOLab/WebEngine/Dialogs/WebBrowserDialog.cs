@@ -38,7 +38,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public string SourceWebUrl;
         bool isActive = true;
-        bool clearClick = false;
         private readonly string picPath;
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
@@ -297,7 +296,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void Clear_Click(object sender, EventArgs e)
         {
             webBrowser1.Document.InvokeScript("clearAll");
-            clearClick = true;
+            mapWidgetDataItems.Clear();
         }
 
 
