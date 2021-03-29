@@ -174,6 +174,7 @@
             this.ClientSize = new System.Drawing.Size(712, 394);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "WFDTaskResult";
             this.Text = "侦察兵-任务结果";
             this.Controls.SetChildIndex(this.panel1, 0);
