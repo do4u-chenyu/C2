@@ -28,6 +28,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
+        private readonly List<MapDataItem> mapWidgetDataItems;
 
         public WebType WebType;
         public Topic HitTopic;
@@ -38,7 +39,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public string SourceWebUrl;
         bool isActive = true;
         bool clearClick = false;
-        private string picPath;
+        private readonly string picPath;
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
 
@@ -50,6 +51,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             ChartOptions = new Dictionary<string, int[]>();
             picPath = Path.Combine(Global.TempDirectory, "boss.png");
             SourceWebUrl = string.Empty;
+            mapWidgetDataItems = new List<MapDataItem>();
         }
 
         public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
@@ -72,21 +74,22 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
-            StreamReader sr = new StreamReader(path, Encoding.Default);
-            String line;
-            while ((line = sr.ReadLine()) != null)
+            using (StreamReader sr = new StreamReader(path, Encoding.Default))
             {
-                string[] tempstr = line.Split(',');
-
-                for (int i = 0; i < tempstr.Length; i++)
+                String line;
+                while ((line = sr.ReadLine()) != null)
                 {
-                    if (i % 2 == 0)
-                        latValues.Add(tempstr[i]);
-                    else
-                        lonValues.Add(tempstr[i]);
+                    string[] tempstr = line.Split(',');
+
+                    for (int i = 0; i < tempstr.Length; i++)
+                    {
+                        if (i % 2 == 0)
+                            latValues.Add(tempstr[i]);
+                        else
+                            lonValues.Add(tempstr[i]);
+                    }
                 }
             }
-            // TODO DK 热力图没考虑
             string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
             List<string> tmpList = new List<string>();
             for (int i = 0; i < latValues.Count; i++)
@@ -94,7 +97,38 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[i], lonValues[i]) + '}');
             }
             string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
-            sr.Close();
+            return new object[] { res };
+        }
+        private object[] OpenHeatMapFile(string path)
+        {
+            List<string> latValues = new List<string>();
+            List<string> lonValues = new List<string>();
+            List<string> countValues = new List<string>();
+            using (StreamReader sr = new StreamReader(path, Encoding.Default))
+            {
+                String line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] tempstr = line.Split(',');
+
+                    for (int i = 0; i < tempstr.Length; i++)
+                    {
+                        if (i % 3 == 0)
+                            latValues.Add(tempstr[i]);
+                        else if (i % 3 == 1)
+                            lonValues.Add(tempstr[i]);
+                        else
+                            countValues.Add(tempstr[i]);
+                    }
+                }
+            }
+            string JSON_OBJ_Format_heat = "\"lng\": \" {0} \", \"lat\": \" {1} \", \"count\": \" {2} \"";
+            List<string> tmpList = new List<string>();
+            for (int i = 0; i < latValues.Count; i++)
+            {
+                tmpList.Add('{' + String.Format(JSON_OBJ_Format_heat, latValues[i], lonValues[i], countValues[i]) + '}');
+            }
+            string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
             return new object[] { res };
         }
         private void WebBrowserDialog_Activated(object sender, EventArgs e)
@@ -123,7 +157,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
                         webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
                     if (di.FileName.Contains("热力图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath));
                 }
             }
         }
@@ -215,28 +249,27 @@ namespace C2.IAOLab.WebEngine.Dialogs
              * 1. new DataItem
              * 2. HitTopic.FindWidget<MapWidget>().DataItems.Add()
              */
-            var dialog = new SelectMapDialog(DataItems);
+            SelectMapDialog dialog = new SelectMapDialog(DataItems);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                string[] args = new string[1];
-                args[0] = dialog.tude;
+                string[] args = new string[1] { dialog.tude };
                 switch (dialog.map)
                 {
                     case "标注图":
                         webBrowser1.Document.InvokeScript("markerPoints", args);
-                        SavePointsToDataItem("标注图", args[0]);
+                        AddDataItem(mapWidgetDataItems, "标注图", dialog.HitItem);
                         break;
                     case "轨迹图":
                         webBrowser1.Document.InvokeScript("drawOrit", args);
-                        SavePointsToDataItem("轨迹图", args[0]);
+                        AddDataItem(mapWidgetDataItems, "轨迹图", dialog.HitItem);
                         break;
                     case "多边形图":
                         webBrowser1.Document.InvokeScript("drawPolygon", args);
-                        SavePointsToDataItem("多边形图", args[0]);
+                        AddDataItem(mapWidgetDataItems, "多边形图", dialog.HitItem);
                         break;
                     case "热力图":
                         webBrowser1.Document.InvokeScript("drawHeatmap", args);
-                        SavePointsToDataItem("热力图", args[0]);
+                        AddDataItem(mapWidgetDataItems, "热力图", dialog.HitItem);
                         break;
                 }
                 var configMap = new ConfigForm();
@@ -246,11 +279,19 @@ namespace C2.IAOLab.WebEngine.Dialogs
             else
                 return;
         }
-
-        private void SavePointsToDataItem(string mapTypeName, string jsonData)
+        /// <summary>
+        /// 将数据添加到临时数组里，但是不copy文件。确定的时候再去copy文件
+        /// </summary>
+        /// <param name="mapTypeName"></param>
+        /// <param name="jsonData"></param>
+        private void AddDataItem(List<MapDataItem> mapDataItems, string mapTypeName, DataItem dataItem)
         {
-            DataItem dataItem = new DataItem();
-            //using(StreamWriter sw = new StreamWriter)
+            MapDataItem mdi = new MapDataItem
+            {
+                dataItem = dataItem,
+                mapTypeName = mapTypeName
+            };
+            mapDataItems.Add(mdi);
         }
 
         private void Clear_Click(object sender, EventArgs e)
@@ -300,7 +341,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
                         webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
                     if (di.FileName.Contains("热力图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath));
                 }
 
             }
@@ -402,71 +443,42 @@ namespace C2.IAOLab.WebEngine.Dialogs
             else if (WebType == WebType.Map)
             {
                 SavePointsToDisk();
-
             }
             return base.OnOKButtonClick();
+        }
+        protected override bool OnCancelButtonClick()
+        {
+            mapWidgetDataItems.Clear();
+            return base.OnCancelButtonClick();
         }
 
         private void SavePointsToDisk()
         {
-            string markerpath = string.Empty;
-            string polygonpath = string.Empty;
-            string polylinepath = string.Empty;
-            string heatmapPath = string.Empty;
-            List<DataItem> dataItems = new List<DataItem>();
-            MapWidget maw = HitTopic.FindWidget<MapWidget>();
-            if (maw != null)
-                dataItems = maw.DataItems;
-            foreach (DataItem di in dataItems)
+            var mapWidget = HitTopic.FindWidget<MapWidget>();
+            foreach (MapDataItem mdi in mapWidgetDataItems)
             {
-                if (di.FileName.Contains("标注图"))
-                    markerpath = di.FilePath;
-                if (di.FileName.Contains("多边形图"))
-                    polygonpath = di.FilePath;
-                if (di.FileName.Contains("轨迹图"))
-                    polylinepath = di.FilePath;
-                if (di.FileName.Contains("热力图"))
-                    heatmapPath = di.FilePath;
-            }
-
-            if (string.IsNullOrEmpty(markerpath))
-            {
-                markerpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_标注图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-                DataItem marker = new DataItem(markerpath, Path.GetFileNameWithoutExtension(markerpath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
-                maw.DataItems.Add(marker);
-            }
-            if (string.IsNullOrEmpty(polygonpath))
-            {
-                polygonpath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_多边形图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-                DataItem polygon = new DataItem(polygonpath, Path.GetFileNameWithoutExtension(polygonpath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
-                maw.DataItems.Add(polygon);
-            }
-            if (string.IsNullOrEmpty(polylinepath))
-            {
-                polylinepath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_轨迹图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-                DataItem polyline = new DataItem(polylinepath, Path.GetFileNameWithoutExtension(polylinepath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
-                maw.DataItems.Add(polyline);
-            }
-            if (string.IsNullOrEmpty(heatmapPath))
-            {
-                heatmapPath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_热力图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-                DataItem heatmap = new DataItem(polylinepath, Path.GetFileNameWithoutExtension(polylinepath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
-                maw.DataItems.Add(heatmap);
-            }
-
-            if (clearClick)
-            {
-                File.Delete(markerpath);
-                File.Delete(polygonpath);
-                File.Delete(polylinepath);
-                File.Delete(heatmapPath);
-            }
-            else
-            {
-                string temp = markerpath + ',' + polygonpath + ',' + polylinepath + ',' + heatmapPath;
-                webBrowser1.Document.InvokeScript("getPath", new object[] { temp });
-                webBrowser1.Document.InvokeScript("savePoints");
+                DataItem dataItem = mdi.dataItem;
+                string mapTypeName = mdi.mapTypeName;
+                if (File.Exists(dataItem.FilePath))
+                {
+                    string destPath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name,
+                        String.Format("{0}_{1}_{2}.txt", HitTopic.Text, mapTypeName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                    if (!Directory.Exists(Path.GetDirectoryName(destPath)))
+                        Directory.CreateDirectory(Path.GetDirectoryName(destPath));
+                    File.Copy(dataItem.FilePath, destPath);
+                    mapWidget.DataItems.Add(
+                        new DataItem(
+                            destPath, Path.GetFileNameWithoutExtension(destPath), 
+                            ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text
+                            )
+                        );
+                }
             }
         }
+    }
+    struct MapDataItem
+    {
+        public DataItem dataItem;
+        public string mapTypeName;
     }
 }
