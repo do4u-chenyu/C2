@@ -3003,8 +3003,8 @@
     <None Include="Resources\XmindEngine\styles.xml" />
     <None Include="Resources\全文检索.png" />
     <None Include="Resources\侦察兵.png" />
-    <None Include="Resources\全文工具左侧.png" />
     <None Include="Resources\侦察兵左侧.png" />
+    <None Include="Resources\全文工具左侧.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
