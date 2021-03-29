@@ -207,9 +207,9 @@ namespace C2.Controls.C1.Left
                 if (rs != DialogResult.OK)
                     return;
 
-                Global.GetWebsiteFeatureDetectionControl().SaveWFDTasksToXml();
                 Global.GetWebsiteFeatureDetectionControl().RemoveButton(this);
                 FileUtil.DeleteFile(this.TaskInfo.ResultFilePath);
+                Global.GetWebsiteFeatureDetectionControl().SaveWFDTasksToXml();//先删除后持久化
             }
             private void OpenDatasourceToolStripMenuItem_Click(object sender, EventArgs e)
             {
