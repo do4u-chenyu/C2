@@ -1,10 +1,7 @@
 ﻿using C2.Core;
 using C2.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace C2.SearchToolkit
 {
@@ -22,10 +19,10 @@ namespace C2.SearchToolkit
 
         public bool IsEmpty() { return this == EmptyTaskInfo; }
 
-        public String BcpFilename { get => String.Format("{0}_{1}_{2}.bcp", TaskName, TaskID, TaskCreateTime); }
+        public String BcpFilename { get => String.Format("{0}_{1}_{2}.bcp", TaskName, PID, TaskCreateTime); }
 
         private static readonly String HeadColumnLine = String.Join(OpUtil.TabSeparatorString, new string[] {
-            "TaskID" ,
+            "PID" ,
             "TaskName",
             "TaskCreateTime",
             "TaskModel",
@@ -50,7 +47,7 @@ namespace C2.SearchToolkit
 
         public String TaskStatus { get; private set; }
 
-        public String TaskID { get; set; }
+        public String PID { get; set; } // PID要在远程实际创建后才有
 
         public String TaskName { get; private set; }
 
@@ -68,13 +65,13 @@ namespace C2.SearchToolkit
 
         public override String ToString()
         {
-            return String.Format("{0}{1}{2}", HeadColumnLine, OpUtil.DefaultLineSeparator, ContentLine());
+            return String.Format("{0}{1}{2}", HeadColumnLine, OpUtil.LineSeparator, ContentLine());
         }
 
         private String ContentLine()
         {
             return String.Join("\t", new string[] {
-                TaskID ,
+                PID ,
                 TaskName,
                 TaskCreateTime,
                 TaskModel,
@@ -103,7 +100,7 @@ namespace C2.SearchToolkit
                 return TaskInfo.EmptyTaskInfo;
 
             // 有表头的话 取第二行
-            String[] buf = content.Split(OpUtil.DefaultLineSeparator);
+            String[] buf = content.Split(OpUtil.LineSeparator);
             content = buf.Length == 1 ? buf[0].TrimEnd() : buf[1].TrimEnd();
 
             // 小于10列不处理
@@ -113,7 +110,7 @@ namespace C2.SearchToolkit
 
             TaskInfo taskInfo = new TaskInfo()
             {
-                TaskID = buf[0],
+                PID = buf[0],
                 TaskName = buf[1],
                 TaskCreateTime = buf[2],
                 TaskModel = buf[3],

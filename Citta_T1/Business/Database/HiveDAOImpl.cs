@@ -138,7 +138,7 @@ namespace C2.Database
                             sb.Append(CutColumnName(key)).Append(OpUtil.TabSeparator);
            
                         if (iDict.Count > 0)
-                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator); // 最后一列多加了个\t，去掉       
+                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.LineSeparator); // 最后一列多加了个\t，去掉       
 
                     }
                     foreach (IDictionary<string, object> dict in list)
@@ -148,7 +148,7 @@ namespace C2.Database
                             sb.Append(dict[key].ToString()).Append(OpUtil.TabSeparator);
                         }
                         if (!dict.Keys.IsEmpty())
-                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.DefaultLineSeparator);
+                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.LineSeparator);
                     }
                 }
             }
@@ -159,7 +159,7 @@ namespace C2.Database
                 throw ex;
 
             }
-            return sb.ToString().Trim(OpUtil.DefaultLineSeparator);
+            return sb.ToString().Trim(OpUtil.LineSeparator);
         }
 
         public override string GetTablesSQL(string schema)

@@ -34,7 +34,7 @@
             // 
             // titleLabel
             // 
-            this.titleLabel.Text = "全文工具集";
+            this.titleLabel.Text = "全文工具箱";
             // 
             // addTaskLabel
             // 

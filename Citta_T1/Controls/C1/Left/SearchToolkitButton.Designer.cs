@@ -37,6 +37,7 @@
             // noFocusButton
             // 
             this.noFocusButton.FlatAppearance.BorderSize = 0;
+            this.noFocusButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NoFocusButton_MouseDown);
             // 
             // 新建任务ToolStripMenuItem
             // 

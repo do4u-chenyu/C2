@@ -40,7 +40,7 @@ namespace C2.Dialogs
             InitializeComponent();
             progressBar = new UpdateProgressBar();
             progressBar.FormClosed += FormClosedEventHandler;
-             downloader = new PluginsDownloader
+            downloader = new PluginsDownloader
             {
                 Client_DownloadFileCompleted = this.Client_DownloadFileCompleted,
                 Client_DownloadProgressChanged = this.Client_DownloadProgressChanged
@@ -233,7 +233,8 @@ namespace C2.Dialogs
 
         private void PluginsConfigTabPage_Load()
         {
-            InitDefaultPlugins();
+            RefreshInstalledPlugins();
+            RefreshUpdatablePlugins();
         }
 
         private void UserModelTabPage_Load()
@@ -241,19 +242,22 @@ namespace C2.Dialogs
             this.userModelTextBox.Text = Global.WorkspaceDirectory;
         }
 
-        private void UpdatablePlugins_Load()
+        private void RefreshUpdatablePlugins()
         {
-            this.availableDGV.Rows.Clear();
-            List<string> updatableInfo = PluginsManager.Instance.UpdatablePluginList();
-            foreach (string info in updatableInfo)
+            using (new GuarderUtil.CursorGuarder())
             {
-                string[] info_split = info.Split(OpUtil.TabSeparator);
-                if (info_split.Length < 3)
-                    continue;
-                string pluginName = info_split[0];
-                string pluginVersion = info_split[1];
-                string pluginDesc = info_split[2];
-                this.availableDGV.Rows.Add(new Object[] { pluginName, pluginVersion, false, pluginDesc }); // 第4列隐藏
+                this.availableDGV.Rows.Clear();
+                List<string> updatableInfo = PluginsManager.Instance.UpdatablePluginList();
+                foreach (string info in updatableInfo)
+                {
+                    string[] info_split = info.Split(OpUtil.TabSeparator);
+                    if (info_split.Length < 3)
+                        continue;
+                    string pluginName = info_split[0];
+                    string pluginVersion = info_split[1];
+                    string pluginDesc = info_split[2];
+                    this.availableDGV.Rows.Add(new Object[] { pluginName, pluginVersion, false, pluginDesc }); // 第4列隐藏
+                }
             }
         }
 
@@ -359,8 +363,9 @@ namespace C2.Dialogs
         }
 
         #region 插件
-        private void InitDefaultPlugins()
+        private void RefreshInstalledPlugins()
         {
+            this.installedDGV.Rows.Clear();
             foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
             {
                 this.installedDGV.Rows.Add(new Object[] { plugin.GetPluginName(), plugin.GetPluginVersion(), true });
@@ -390,7 +395,6 @@ namespace C2.Dialogs
                     {
                         PluginsManager.Instance.DownloadPlugin(GetPluginFullName(row));
                         MessageBox.Show("插件下载成功，请重启软件加载新插件功能");
-
                     }
                     catch (Exception ex)
                     {
@@ -431,13 +435,10 @@ namespace C2.Dialogs
 
         private void PluginsTabControl_Selected(object sender, TabControlEventArgs e)
         {
-            if (this.pluginsTabControl.SelectedTab != this.availableSubPage)
-                return;
-
-            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-            {
-                UpdatablePlugins_Load(); // 一个叫available,一个叫updatable,也劝不动
-            }
+            if (e.TabPage == this.availableSubPage)
+                RefreshUpdatablePlugins(); // 头一个叫available,后一个偏要叫updatable,劝也不听
+            if (e.TabPage == this.installedSubPage)
+                RefreshInstalledPlugins();
         }
 
 

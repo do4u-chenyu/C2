@@ -98,13 +98,13 @@ namespace C2.Database
                 {
                     for (int i = 0; i < rdr.FieldCount - 1; i++)
                         sb.Append(rdr.GetName(i)).Append(OpUtil.TabSeparator);
-                    sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+                    sb.Append(rdr.GetName(rdr.FieldCount - 1)).Append(OpUtil.LineSeparator);
                 }
                 while (rdr.Read() && totalReturnNum++ < returnNum)
                 {
                     for (int i = 0; i < rdr.FieldCount - 1; i++)
                         sb.Append(GetRdrResult(rdr, i)).Append(OpUtil.TabSeparator);
-                    sb.Append(GetRdrResult(rdr, rdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+                    sb.Append(GetRdrResult(rdr, rdr.FieldCount - 1)).Append(OpUtil.LineSeparator);
                 }
             }
             return sb.TrimEndN().ToString();

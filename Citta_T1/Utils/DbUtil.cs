@@ -32,7 +32,7 @@ namespace C2.Utils
         public static Dictionary<string, List<string>> StringToDict(string v)
         {
             Dictionary<string, List<string>> result = new Dictionary<string, List<string>>();
-            foreach(string line in v.Split(OpUtil.DefaultLineSeparator))
+            foreach(string line in v.Split(OpUtil.LineSeparator))
             {
                 var kv = line.Split(OpUtil.TabSeparator);
                 if (kv.Length != 2)
@@ -51,7 +51,7 @@ namespace C2.Utils
             List<List<string>> ret = new List<List<string>>();
             if (!String.IsNullOrEmpty(contentString))
             {
-                string[] lines = contentString.Split(OpUtil.DefaultLineSeparator);
+                string[] lines = contentString.Split(OpUtil.LineSeparator);
                 for (int i = 0; i < lines.Length; i++)
                 {
                     ret.Add(new List<string>(lines[i].Split(OpUtil.TabSeparator)));

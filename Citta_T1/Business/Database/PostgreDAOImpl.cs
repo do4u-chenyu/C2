@@ -85,13 +85,13 @@ namespace C2.Database
                 {
                     for (int i = 0; i < sdr.FieldCount - 1; i++)
                         sb.Append(sdr.GetName(i)).Append(OpUtil.TabSeparator);
-                    sb.Append(sdr.GetName(sdr.FieldCount - 1)).Append(OpUtil.DefaultLineSeparator);
+                    sb.Append(sdr.GetName(sdr.FieldCount - 1)).Append(OpUtil.LineSeparator);
                 }
                 while (sdr.Read() && totalReturnNum++ < returnNum)
                 {
                     for (int i = 0; i < sdr.FieldCount - 1; i++)
                         sb.Append(sdr[i]).Append(OpUtil.TabSeparator);
-                    sb.Append(sdr[sdr.FieldCount - 1]).Append(OpUtil.DefaultLineSeparator);
+                    sb.Append(sdr[sdr.FieldCount - 1]).Append(OpUtil.LineSeparator);
                 }
                 try
                 {

@@ -140,14 +140,16 @@ namespace C2.Utils
             return true;
         }
 
-        public static void DeleteFile(string filePath)
+        public static bool DeleteFile(string filePath)
         {
             try
             {
                 File.Delete(filePath);
+                return true;
             }
             catch
             {
+                return false;
             }
         }
 
@@ -358,7 +360,7 @@ namespace C2.Utils
                             for (int col = 1; col <= colCount; col++)
                             {
                                 ExcelRange cell = worksheet.Cells[row, col];
-                                string unit = ExcelUtil.GetCellValue(cell).Replace(OpUtil.DefaultLineSeparator, OpUtil.Blank);
+                                string unit = ExcelUtil.GetCellValue(cell).Replace(OpUtil.LineSeparator, OpUtil.Blank);
                                 tmpRowValueList.Add(unit);
                             }
                             rst.Add(tmpRowValueList);
@@ -397,7 +399,7 @@ namespace C2.Utils
                             else
                             {
                                 ICell cell = sheet.GetRow(i).GetCell(j);
-                                string unit = ExcelUtil.GetCellValue(workbook, cell).Replace(OpUtil.DefaultLineSeparator, OpUtil.Blank);
+                                string unit = ExcelUtil.GetCellValue(workbook, cell).Replace(OpUtil.LineSeparator, OpUtil.Blank);
                                 tmpRowValueList.Add(unit);
                             }
                         }

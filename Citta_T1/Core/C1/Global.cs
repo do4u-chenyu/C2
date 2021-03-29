@@ -18,9 +18,10 @@ namespace C2.Core
 {
     class Global
     {
-        private static string username;
+        private static string username = "IAO";
         private static MainForm mainForm;
         private static MyModelControl myModelControl;
+        private static SearchToolkitControl searchToolkitControl;
         private static WebsiteFeatureDetectionControl websiteFeatureDetectionControl;
         private static BottomLogControl logView;
         private static DataSourceControl dataSourceControl; // 左侧数据源面板
@@ -40,6 +41,7 @@ namespace C2.Core
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static WebsiteFeatureDetectionControl GetWebsiteFeatureDetectionControl() { return websiteFeatureDetectionControl; }
+        public static SearchToolkitControl GetSearchToolkitControl() { return searchToolkitControl; }
         public static IAOLabControl GetIAOLabControl() { return iaoLabControl; }
         public static BottomLogControl GetLogView() { return logView; }
         public static Control GetBottomViewPanel() { return bottomViewPanle; }
@@ -134,13 +136,14 @@ namespace C2.Core
         public static void SetDataSourceControl(DataSourceControl dsc) { dataSourceControl = dsc; }
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
         public static void SetWebsiteFeatureDetectionControl(WebsiteFeatureDetectionControl wfdc) { websiteFeatureDetectionControl = wfdc; }
+        public static void SetSearchToolkitControl(SearchToolkitControl stc) { searchToolkitControl = stc; }
         public static void SetIAOLabControl(IAOLabControl ilc) { iaoLabControl = ilc; }
         public static void SetLogView(BottomLogControl lv) { logView = lv; }
         public static void SetBottomViewPanel(Panel bv) { bottomViewPanle = bv; }
         public static void SetWorkSpacePanel(Panel ws) { workSpacePanel = ws; }
         public static void SetMindMapModelControl(MyMindMapControl mmmc) { mindMapModelControl = mmmc; }
 
-        public static string WorkspaceDirectory { get; set; } // 用户空间根目录
+        public static string WorkspaceDirectory { get; set; } = string.Empty; // 用户空间根目录
         public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, username); }
         public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "模型市场"); }
