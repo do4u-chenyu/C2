@@ -50,7 +50,35 @@ namespace C2.IAOLab.WebEngine.Dialogs
             ChartOptions = new Dictionary<string, int[]>();
             picPath = Path.Combine(Global.TempDirectory, "boss.png");
             SourceWebUrl = string.Empty;
-            mapWidgetDataItems = new List<MapDataItem>();
+        }
+
+        private List<MapDataItem> InitMapWidgetDataItems()
+        {
+            List<MapDataItem> tmp = new List<MapDataItem>();
+            if (HitTopic == null)
+                return tmp;
+            var mapWidget = HitTopic.FindWidget<MapWidget>();
+            if (mapWidget != null)
+            {
+                foreach (DataItem dataItem in mapWidget.DataItems)
+                {
+                    string mapTypeName = String.Empty;
+                    if (dataItem.FileName.Contains("标注图"))
+                        mapTypeName = "标注图";
+                    else if (dataItem.FileName.Contains("多边形图"))
+                        mapTypeName = "多边形图";
+                    else if (dataItem.FileName.Contains("轨迹图"))
+                        mapTypeName = "轨迹图";
+                    else if (dataItem.FileName.Contains("热力图"))
+                        mapTypeName = "热力图";
+                    tmp.Add(new MapDataItem
+                    {
+                        dataItem = dataItem,
+                        mapTypeName = mapTypeName
+                    }); 
+                }
+            }
+            return tmp;
         }
 
         public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
@@ -58,6 +86,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             HitTopic = hitTopic;
             DataItems = hitTopic.GetDataItems();
             WebType = webType;
+            mapWidgetDataItems = InitMapWidgetDataItems();
         }
 
         #region 窗体事件
@@ -454,6 +483,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void SavePointsToDisk()
         {
             var mapWidget = HitTopic.FindWidget<MapWidget>();
+            mapWidget.DataItems.Clear();
             foreach (MapDataItem mdi in mapWidgetDataItems)
             {
                 DataItem dataItem = mdi.dataItem;
