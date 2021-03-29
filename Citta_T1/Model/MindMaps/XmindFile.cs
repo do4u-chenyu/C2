@@ -34,6 +34,7 @@ namespace C2.Model.MindMaps
         const string externalDataTag = "[外部数据]";
         const string resultDataTag = "[结果文件]";
         const string notSavedeExternalDataTag = "[外部数据(未缓存)]";
+        const string notSavedeInternalDataTag = "[内部数据(未缓存)]";
         const string defaultExt = ".txt";
         const int defaultIconSize = 32;
         const int defaultTopicStyleIndex = 1;
@@ -622,46 +623,58 @@ namespace C2.Model.MindMaps
                 if (dataItem.IsDatabase() && !BCPBuffer.GetInstance().IsDBDataCached(dataItem.DBItem))
                 {
                     SaveLabel(parent, notSavedeExternalDataTag + dataItem.DataType.ToString() + "-" + dataItem.FileName);
-                    continue;
                 }
-
-                AttachmentInfo attachment;
-                if (dataItem.IsDatabase())
+                else if (!dataItem.IsDatabase() && !File.Exists(dataItem.FilePath))
                 {
-                    // 外部数据都没有后缀名
-                    attachment = new AttachmentInfo(
-                                        attachments.Count.ToString(),
-                                        externalDataTag + dataItem.FileName + defaultExt,
-                                        dataItem.FileName + defaultExt,
-                                        new StaticDataSource(BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem), Encoding.UTF8)
-                                    );
+                    SaveLabel(parent, notSavedeInternalDataTag + "本地数据" + "-" + dataItem.FileName);
                 }
                 else
                 {
-                    string filename = Path.GetFileName(dataItem.FilePath);
-                    attachment = new AttachmentInfo(
-                                        attachments.Count.ToString(),
-                                        internalDataTag + filename,
-                                        filename,
-                                        dataItem.FilePath
-                                );
+                    AttachmentInfo attachment;
+                    if (dataItem.IsDatabase())
+                    {
+                        // 外部数据都没有后缀名
+                        attachment = new AttachmentInfo(
+                                            attachments.Count.ToString(),
+                                            externalDataTag + dataItem.FileName + defaultExt,
+                                            dataItem.FileName + defaultExt,
+                                            new StaticDataSource(BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem), Encoding.UTF8)
+                                        );
+                    }
+                    else
+                    {
+                        string filename = Path.GetFileName(dataItem.FilePath);
+                        attachment = new AttachmentInfo(
+                                            attachments.Count.ToString(),
+                                            internalDataTag + filename,
+                                            filename,
+                                            dataItem.FilePath
+                                    );
+                    }
+                    attachments.Add(attachment);
+                    SaveAttachment(parent, attachment);
                 }
-                attachments.Add(attachment);
-                SaveAttachment(parent, attachment);
             }
         }
         private void SaveResult(XmlElement parent, ResultWidget resultWidget)
         {
             foreach (DataItem dataItem in resultWidget.DataItems)
             {
-                AttachmentInfo attachment = new AttachmentInfo(
-                                            attachments.Count.ToString(),
-                                            resultDataTag + dataItem.FileName + defaultExt,
-                                            dataItem.FileName + defaultExt,
-                                            dataItem.FilePath
-                                        );
-                attachments.Add(attachment);
-                SaveAttachment(parent, attachment);
+                if (!File.Exists(dataItem.FilePath))
+                {
+                    SaveLabel(parent, notSavedeInternalDataTag + "结果文件" + "-" + dataItem.FileName);
+                }
+                else
+                {
+                    AttachmentInfo attachment = new AttachmentInfo(
+                            attachments.Count.ToString(),
+                            resultDataTag + dataItem.FileName + defaultExt,
+                            dataItem.FileName + defaultExt,
+                            dataItem.FilePath
+                        );
+                    attachments.Add(attachment);
+                    SaveAttachment(parent, attachment);
+                }
             }
         }
         private void SaveAttachment(XmlElement topicNode, AttachmentInfo attachment)

@@ -38,7 +38,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public string SourceWebUrl;
         bool isActive = true;
         bool clearClick = false;
-        private readonly string picPath;
+        private string picPath;
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
 
@@ -122,6 +122,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
                     if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
                         webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
+                    if (di.FileName.Contains("热力图") && File.Exists(di.FilePath))
+                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenMapFile(di.FilePath));
                 }
             }
         }
@@ -222,24 +224,33 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 {
                     case "标注图":
                         webBrowser1.Document.InvokeScript("markerPoints", args);
+                        SavePointsToDataItem("标注图", args[0]);
                         break;
                     case "轨迹图":
                         webBrowser1.Document.InvokeScript("drawOrit", args);
+                        SavePointsToDataItem("轨迹图", args[0]);
                         break;
                     case "多边形图":
                         webBrowser1.Document.InvokeScript("drawPolygon", args);
+                        SavePointsToDataItem("多边形图", args[0]);
                         break;
                     case "热力图":
                         webBrowser1.Document.InvokeScript("drawHeatmap", args);
+                        SavePointsToDataItem("热力图", args[0]);
                         break;
                 }
-                //SavePoints(dialog.map, args[0]);
                 var configMap = new ConfigForm();
                 string newCenterAndZoom = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
                 webBrowser1.Document.InvokeScript("centerAndZoom", new object[] { newCenterAndZoom });
             }
             else
                 return;
+        }
+
+        private void SavePointsToDataItem(string mapTypeName, string jsonData)
+        {
+            DataItem dataItem = new DataItem();
+            //using(StreamWriter sw = new StreamWriter)
         }
 
         private void Clear_Click(object sender, EventArgs e)
@@ -262,7 +273,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 
                 WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
                 webBrowser1.Navigate(WebUrl);
-                SaveHistoryPoints();
+                SavePointsToDisk();
             }
             else
             {
@@ -288,6 +299,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
                     if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
                         webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
+                    if (di.FileName.Contains("热力图") && File.Exists(di.FilePath))
+                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenMapFile(di.FilePath));
                 }
 
             }
@@ -388,17 +401,18 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             else if (WebType == WebType.Map)
             {
-                SaveHistoryPoints();
+                SavePointsToDisk();
 
             }
             return base.OnOKButtonClick();
         }
 
-        private void SaveHistoryPoints()
+        private void SavePointsToDisk()
         {
             string markerpath = string.Empty;
             string polygonpath = string.Empty;
             string polylinepath = string.Empty;
+            string heatmapPath = string.Empty;
             List<DataItem> dataItems = new List<DataItem>();
             MapWidget maw = HitTopic.FindWidget<MapWidget>();
             if (maw != null)
@@ -411,6 +425,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     polygonpath = di.FilePath;
                 if (di.FileName.Contains("轨迹图"))
                     polylinepath = di.FilePath;
+                if (di.FileName.Contains("热力图"))
+                    heatmapPath = di.FilePath;
             }
 
             if (string.IsNullOrEmpty(markerpath))
@@ -431,16 +447,23 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 DataItem polyline = new DataItem(polylinepath, Path.GetFileNameWithoutExtension(polylinepath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
                 maw.DataItems.Add(polyline);
             }
+            if (string.IsNullOrEmpty(heatmapPath))
+            {
+                heatmapPath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_热力图{1}.txt", HitTopic.Text, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                DataItem heatmap = new DataItem(polylinepath, Path.GetFileNameWithoutExtension(polylinepath), ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text);
+                maw.DataItems.Add(heatmap);
+            }
 
             if (clearClick)
             {
                 File.Delete(markerpath);
                 File.Delete(polygonpath);
                 File.Delete(polylinepath);
+                File.Delete(heatmapPath);
             }
             else
             {
-                string temp = markerpath + ',' + polygonpath + ',' + polylinepath;
+                string temp = markerpath + ',' + polygonpath + ',' + polylinepath + ',' + heatmapPath;
                 webBrowser1.Document.InvokeScript("getPath", new object[] { temp });
                 webBrowser1.Document.InvokeScript("savePoints");
             }
