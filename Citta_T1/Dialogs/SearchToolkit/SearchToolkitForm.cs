@@ -116,7 +116,7 @@ namespace C2.SearchToolkit
 
         private String GenTaskName()
         {
-             return this.taskModelComboBox.Text + DateTime.Now.ToString("yyyyMMdd");
+             return this.taskModelComboBox.Text + DateTime.Now.ToString("MMdd");
         }
 
         private String GenWorkspace()

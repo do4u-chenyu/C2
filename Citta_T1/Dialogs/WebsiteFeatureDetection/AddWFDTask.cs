@@ -17,7 +17,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void InitTaskName()
         {
-            TaskName = String.Format("网络侦察兵{0}", DateTime.Now.ToString("yyyyMMdd"));
+            TaskName = String.Format("网络侦察兵{0}", DateTime.Now.ToString("MMdd"));
         }
 
 
