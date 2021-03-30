@@ -148,6 +148,11 @@ namespace C2.Model.MindMaps
             } 
         }
 
+        public int GetDepth(Topic topic)
+        {
+            return topic.IsRoot ? 1 : GetDepth(topic.ParentTopic) + 1;
+        }
+
 
         public override ChartObject Parent
         {
@@ -1204,6 +1209,19 @@ namespace C2.Model.MindMaps
             foreach (Widget widget in Widgets)
             {
                 if (widget is T)
+                    list.Add((T)widget);
+            }
+
+            return list.ToArray();
+        }
+
+        internal T[] FindWidgets<T>(Predicate<T> match)
+            where T : Widget
+        {
+            List<T> list = new List<T>();
+            foreach (Widget widget in Widgets)
+            {
+                if (widget is T && match((T)widget))
                     list.Add((T)widget);
             }
 

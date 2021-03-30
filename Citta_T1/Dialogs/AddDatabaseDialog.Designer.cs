@@ -142,7 +142,7 @@
             // serviceRadiobutton
             // 
             this.serviceRadiobutton.AutoSize = true;
-            this.serviceRadiobutton.Location = new System.Drawing.Point(20, 204);
+            this.serviceRadiobutton.Location = new System.Drawing.Point(20, 168);
             this.serviceRadiobutton.Name = "serviceRadiobutton";
             this.serviceRadiobutton.Size = new System.Drawing.Size(73, 19);
             this.serviceRadiobutton.TabIndex = 10017;
@@ -153,24 +153,25 @@
             // 
             this.sidRadiobutton.AutoSize = true;
             this.sidRadiobutton.Checked = true;
-            this.sidRadiobutton.Location = new System.Drawing.Point(20, 239);
+            this.sidRadiobutton.Location = new System.Drawing.Point(23, 208);
             this.sidRadiobutton.Name = "sidRadiobutton";
             this.sidRadiobutton.Size = new System.Drawing.Size(52, 19);
             this.sidRadiobutton.TabIndex = 10018;
             this.sidRadiobutton.TabStop = true;
             this.sidRadiobutton.Text = "SID";
             this.sidRadiobutton.UseVisualStyleBackColor = true;
+            this.sidRadiobutton.CheckedChanged += new System.EventHandler(this.sidRadiobutton_CheckedChanged);
             // 
             // serviceTextBox
             // 
-            this.serviceTextBox.Location = new System.Drawing.Point(100, 203);
+            this.serviceTextBox.Location = new System.Drawing.Point(100, 167);
             this.serviceTextBox.Name = "serviceTextBox";
             this.serviceTextBox.Size = new System.Drawing.Size(265, 25);
             this.serviceTextBox.TabIndex = 10019;
             // 
             // sidTextBox
             // 
-            this.sidTextBox.Location = new System.Drawing.Point(100, 238);
+            this.sidTextBox.Location = new System.Drawing.Point(100, 204);
             this.sidTextBox.Name = "sidTextBox";
             this.sidTextBox.Size = new System.Drawing.Size(265, 25);
             this.sidTextBox.TabIndex = 10020;
@@ -178,7 +179,7 @@
             // 
             // TestButton
             // 
-            this.TestButton.Location = new System.Drawing.Point(152, 284);
+            this.TestButton.Location = new System.Drawing.Point(152, 253);
             this.TestButton.Name = "TestButton";
             this.TestButton.Size = new System.Drawing.Size(75, 27);
             this.TestButton.TabIndex = 10022;
@@ -188,7 +189,7 @@
             // 
             // schemaTextBox
             // 
-            this.schemaTextBox.Location = new System.Drawing.Point(100, 167);
+            this.schemaTextBox.Location = new System.Drawing.Point(99, 167);
             this.schemaTextBox.Name = "schemaTextBox";
             this.schemaTextBox.Size = new System.Drawing.Size(265, 25);
             this.schemaTextBox.TabIndex = 10023;
@@ -206,7 +207,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(403, 323);
+            this.ClientSize = new System.Drawing.Size(403, 292);
             this.Controls.Add(this.schemaLabel);
             this.Controls.Add(this.schemaTextBox);
             this.Controls.Add(this.TestButton);
