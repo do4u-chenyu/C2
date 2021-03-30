@@ -63,7 +63,7 @@ namespace C2.Controls.MapViews
             {
                 string connString, sqlText, maxNumString;
                 int inputMaxNum;
-                int maxNum = -1;
+                int maxNum = int.MaxValue;
                 if (!opw.Option.OptionDict.TryGetValue("sqlText", out sqlText) || !opw.Option.OptionDict.TryGetValue("connection", out connString))
                     return;
                 if (opw.Option.OptionDict.TryGetValue("maxNum", out maxNumString) && int.TryParse(maxNumString, out inputMaxNum) && inputMaxNum > 0)
