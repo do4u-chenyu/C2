@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD5Plugin", "C2Plugins\MD5P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2Shell", "C2Shell\C2Shell.csproj", "{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullTextAssistantPlugin", "C2Plugins\FullTextGrammarAssistant\FullTextAssistantPlugin.csproj", "{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +92,12 @@ Global
 		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
 		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.开发调试|Any CPU.Build.0 = Release|Any CPU
+		{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
+		{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}.开发调试|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +107,7 @@ Global
 		{020BE791-6CC1-408B-AE2E-EF87ACD14D86} = {347ABCF9-220C-4D65-9170-5689273E2F50}
 		{389687F6-5DCC-4198-8110-C1D42B23465E} = {347ABCF9-220C-4D65-9170-5689273E2F50}
 		{9F165641-517E-47A2-A3E1-4CD783A8C6FD} = {347ABCF9-220C-4D65-9170-5689273E2F50}
+		{6AD16B55-CB18-4073-AB6B-D054B8CA1F14} = {347ABCF9-220C-4D65-9170-5689273E2F50}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {009696A9-FA4B-463E-AF26-413B108EFC6A}
