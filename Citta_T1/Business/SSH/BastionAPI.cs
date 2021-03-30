@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Renci.SshNet;
 
 namespace C2.Business.SSH
 {
-    class BastionAPI
+    public class BastionAPI
     {
         private String username;
         private String password;
@@ -16,7 +17,7 @@ namespace C2.Business.SSH
 
         private String linuxWorkspace;
 
-        private SSHClient ssh;
+        private SshClient ssh;
 
         // {workspace}/pid_taskcreatetime/result
         // {workspace}/pid_taskcreatetime/script/
@@ -30,7 +31,13 @@ namespace C2.Business.SSH
             this.searchAgentIP = sIP;
             this.linuxWorkspace = dir;
 
-            this.ssh = new SSHClient(); 
+            this.ssh = new SshClient(new PasswordConnectionInfo("114.55.248.85", "root", "aliyun.123")); 
+        }
+
+        public void Close()
+        {
+            if (ssh != null && ssh.IsConnected)
+                ssh.Disconnect();
         }
 
         public BastionAPI(TaskInfo task) : this(task.Username, task.Password, task.BastionIP, task.SearchAgentIP, task.RemoteWorkspace)
@@ -39,8 +46,13 @@ namespace C2.Business.SSH
         public BastionAPI Login() 
         {
             // 这里通过抛出异常来报错
-            ssh.Connect(this.username, this.password, this.bastionIP, this.searchAgentIP);
+            ssh.Connect();
             return this; 
+        }
+
+        public String RunCommand(String command)
+        {
+            return ssh.RunCommand(command).Result;
         }
 
         public String GambleTaskPID (String filter) 
