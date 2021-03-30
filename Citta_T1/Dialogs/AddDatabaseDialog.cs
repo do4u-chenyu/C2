@@ -156,6 +156,8 @@ namespace C2.Dialogs
                 this.schemaTextBox.Visible = false;
                 this.serviceRadiobutton.Visible = true;
                 this.serviceTextBox.Visible = true;
+                this.userTextBox.Text = "";
+                this.passwordTextBox.Text = "";
             }
 
             if (databaseTypeComboBox.SelectedItem.ToString().Contains("PostgreSQL"))
