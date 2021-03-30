@@ -102,13 +102,15 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
+            String line;
+            int lineCounter = 0;
             using (StreamReader sr = new StreamReader(path, Encoding.Default))
             {
-                String line;
                 while ((line = sr.ReadLine()) != null)
                 {
+                    if (lineCounter++ == 0)
+                        continue;
                     string[] tempstr = line.Split(',');
-
                     for (int i = 0; i < tempstr.Length; i++)
                     {
                         if (i % 2 == 0)
@@ -116,6 +118,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         else
                             lonValues.Add(tempstr[i]);
                     }
+                    lineCounter += 1;
                 }
             }
             string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
@@ -132,13 +135,15 @@ namespace C2.IAOLab.WebEngine.Dialogs
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
             List<string> countValues = new List<string>();
+            String line;
+            int lineCounter = 0;
             using (StreamReader sr = new StreamReader(path, Encoding.Default))
             {
-                String line;
                 while ((line = sr.ReadLine()) != null)
                 {
+                    if (lineCounter++ == 0)
+                        continue;
                     string[] tempstr = line.Split(',');
-
                     for (int i = 0; i < tempstr.Length; i++)
                     {
                         if (i % 3 == 0)
