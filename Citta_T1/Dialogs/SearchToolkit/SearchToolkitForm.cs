@@ -121,7 +121,7 @@ namespace C2.SearchToolkit
 
         private String GenWorkspace()
         {
-            return @"/tmp/iao/search_toolkit/" + taskDict[this.taskModelComboBox.Text];
+            return TaskInfo.SearchWorkspace + taskDict[this.taskModelComboBox.Text];
         }
 
         private bool ValidateIP(String value)
@@ -200,13 +200,15 @@ namespace C2.SearchToolkit
             return this.ShowDialog() == DialogResult.OK ? GenTaskInfo() : TaskInfo.EmptyTaskInfo;
         }
 
-        public DialogResult ShowTaskInfoDialog(TaskInfo taskInfo)
+        public DialogResult ShowTaskInfoDialog(TaskInfo task)
         {
             taskInfoGB.Visible = true;
             confirmButton.Enabled = false;
 
-            LoadTaskInfo(taskInfo);
+            LoadTaskInfo(task);
             ReadOnlyInputControls();   // 展示任务信息时, 不需要更改
+            this.downloadButton.Enabled = task.TaskStatus == "DONE";
+
             return this.ShowDialog();
         }
     }
