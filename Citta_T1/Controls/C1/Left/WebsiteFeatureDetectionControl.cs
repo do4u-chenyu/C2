@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -76,6 +78,7 @@ namespace C2.Controls.C1.Left
             ModelXmlWriter mxw = new ModelXmlWriter("task", node);
             mxw.Write("taskName", taskInfo.TaskName)
                .Write("taskId", taskInfo.TaskID)
+               .Write("taskCreateTime", taskInfo.TaskCreateTime)
                .Write("datasourceFilePath", taskInfo.DatasourceFilePath)
                .Write("resultFilePath", taskInfo.ResultFilePath)
                .Write("status", taskInfo.Status);
@@ -108,6 +111,7 @@ namespace C2.Controls.C1.Left
             {
                 TaskName = xn.SelectSingleNode("taskName").InnerText,
                 TaskID = xn.SelectSingleNode("taskId").InnerText,
+                TaskCreateTime = xn.SelectSingleNode("taskCreateTime").InnerText,
                 DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
                 ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
                 Status = WFDTaskStatusEnum(xn.SelectSingleNode("status").InnerText)
@@ -227,6 +231,8 @@ namespace C2.Controls.C1.Left
             {
                 //TODO phx 查看结果前向api发起查看任务状态请求,结果在这里做处理并更新button对应信息，把button更新之后的结果展示在新窗口里
                 //如果task本身是done状态，不发起查询
+                //string datas = "[{'url': 'http://admin.haishen6688.com/', 'cur_url': 'http://admin.haishen6688.com/', 'html_content_id': 'e0ecfa0a908711eb87b20242ac110005', 'title': '登陆', 'html_content': '登陆登陆 欢迎 请登录 请输入用户名密码及验证码 用户名 密码 验证码 验证码 登陆 2017 ISPEC', 'prediction': '10105', 'login': True, 'screen_shot': None}, {'url': 'http://a1.76688.me/', 'cur_url': 'http://a1.76688.me/', 'html_content_id': 'db082744907911eb9f5e0242ac110005', 'title': 'welcome', 'html_content': 'welcomewelcome 外围彩 账 号 密 码', 'prediction': '1010303', 'login': None, 'screen_shot': 'db082744907911eb9f5e0242ac110005'}]";
+
                 WFDWebAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID, out string respMsg, out string datas);
                 UpdateTaskInfoByResp(respMsg, datas);
 
@@ -240,6 +246,8 @@ namespace C2.Controls.C1.Left
                 if (respMsg == "success")// && TaskInfo.Status != WFDTaskStatus.Done 考虑是否每次都刷新
                 {
                     TaskInfo.Status = WFDTaskStatus.Done;
+                    //httpresponse结果会返回一些python的参数，无法被c#正确解析，统一转成字符串
+                    datas = datas.Replace("None", "'None'").Replace("True", "'True'").Replace("False", "'False'");
                     TaskInfo.PreviewResults = DealDatas(TaskInfo.ResultFilePath, datas);
                 }
                 else if (respMsg == "wait")
@@ -248,15 +256,28 @@ namespace C2.Controls.C1.Left
                     TaskInfo.Status = WFDTaskStatus.Failed;
             }
 
-            private string DealDatas(string resultFilePath, string datas)
+            private string DealDatas(string resultFilePath, string results)
             {
-
+                StringBuilder sb = new StringBuilder(1024 * 16);
                 //TODO 解析正确结果，同时写进本地文件，返回预览字符串
                 //List<string> dataList = JsonConvert.DeserializeObject<List<string>>(datas);
                 StreamWriter sw = new StreamWriter(resultFilePath);
-                sw.WriteLine(datas);
+
+                List<WFDResult> resultList = new JavaScriptSerializer().Deserialize<List<WFDResult>>(results);
+                foreach(WFDResult result in resultList)
+                {
+                    sb.Append(result.url).Append(OpUtil.TabSeparator)
+                      .Append(result.prediction).Append(OpUtil.TabSeparator)
+                      .Append(result.title).Append(OpUtil.TabSeparator)
+                      .Append(result.screen_shot).Append(OpUtil.TabSeparator)
+                      .Append(result.html_content).Append(OpUtil.LineSeparator);
+
+                    sw.WriteLine(result.JoinAllContent());
+                }
+                
                 sw.Close();
-                return datas;
+                sw.Dispose();
+                return sb.ToString().TrimEnd(OpUtil.LineSeparator);
             }
 
         }
