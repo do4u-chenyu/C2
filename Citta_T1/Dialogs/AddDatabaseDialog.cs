@@ -22,6 +22,7 @@ namespace C2.Dialogs
             if (linkButton != null)
             {
                 LinkButton = linkButton;
+                this.databaseTypeComboBox.Enabled = false;
             }
             if (databaseInfo != null)
             {
@@ -134,8 +135,6 @@ namespace C2.Dialogs
 
         private void DatabaseTypeComboBox_TextChanged(object sender, EventArgs e)
         {
-            if (this.LinkButton != null)
-                this.databaseTypeComboBox.Enabled = false;
             if (databaseTypeComboBox.SelectedItem == null)
                 return;
             if(databaseTypeComboBox.SelectedItem.ToString().Contains( "Oracle"))
