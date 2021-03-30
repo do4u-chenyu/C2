@@ -3,6 +3,7 @@ using C2.Business.WebsiteFeatureDetection;
 using C2.Core;
 using C2.Dialogs.WebsiteFeatureDetection;
 using C2.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,9 +14,6 @@ namespace C2.Controls.C1.Left
 {
     public partial class WebsiteFeatureDetectionControl : BaseLeftInnerPanel
     {
-        //Global.WFDUser持久化到文档中UserInformation.xml
-        string WFDUser;
-
         public WebsiteFeatureDetectionControl()
         {
             InitializeComponent();
@@ -24,39 +22,35 @@ namespace C2.Controls.C1.Left
 
         private void AddLabel_Click(object sender, EventArgs e)
         {
-            //判断用户是否认证？已认证的可以直接新建任务，否则先认证再新建任务
-            if (string.IsNullOrEmpty(WFDUser))
-            {
-                var UAdialog = new UserAuth();
-                if (UAdialog.ShowDialog() != DialogResult.OK)
-                    return;
-
-                WFDUser = UAdialog.UserName;
-            }
-
-            AddTask();
-        }
-
-        private void AddTask()
-        {
             var dialog = new AddWFDTask();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                //TODO phx 需要问一下这个分类接口，返回状态的时间，立即返回？还是查完才返回？
-
-                List<string> urls = new List<string>() { "http://www.1.com", "http://www.1.com" };
-                string taskId = WFDWebAPI.GetInstance().StartTask(urls);
-
-                string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网络侦察兵");
-                string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.bcp", dialog.TaskName, taskId));
-                FileUtil.CreateDirectory(destDirectory);
-                using (File.Create(destFilePath)) { }
-
-                //添加按钮并持久化到本地
-                WFDTaskInfo taskInfo = new WFDTaskInfo(dialog.TaskName, taskId, dialog.FilePath, destFilePath, WFDTaskStatus.Null);
-                AddInnerButton(new WebsiteFeatureDetectionButton(taskInfo));
-                SaveWFDTasksToXml();
+                AddTask(dialog.TaskName, dialog.FilePath);
             }
+        }
+
+        public void AddTask(string taskName, string filePath)
+        {
+            //TODO phx 需要问一下这个分类接口，返回状态的时间，立即返回？还是查完才返回？
+            string taskId = string.Empty;
+            string respMsg = string.Empty;
+
+            List<string> urls = new List<string>() { "http://05246767.com/", "http://a1.76688.me/", "http://admin.haishen6688.com/" };
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                WFDWebAPI.GetInstance().StartTask(urls, out respMsg, out taskId);
+            }
+
+            HelpUtil.ShowMessageBox(respMsg);
+            string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网络侦察兵");
+            string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.bcp", taskName, taskId));
+            FileUtil.CreateDirectory(destDirectory);
+            using (File.Create(destFilePath)) { }
+
+            //添加按钮并持久化到本地
+            WFDTaskInfo taskInfo = new WFDTaskInfo(taskName, taskId, filePath, destFilePath, WFDTaskStatus.Null);
+            AddInnerButton(new WebsiteFeatureDetectionButton(taskInfo));
+            SaveWFDTasksToXml();
         }
 
         #region 持久化保存/加载
@@ -233,27 +227,37 @@ namespace C2.Controls.C1.Left
             {
                 //TODO phx 查看结果前向api发起查看任务状态请求,结果在这里做处理并更新button对应信息，把button更新之后的结果展示在新窗口里
                 //如果task本身是done状态，不发起查询
-                string resp = WFDWebAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID);
-                string urlResults = UpdateTaskInfoByResp(resp);
+                WFDWebAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID, out string respMsg, out string datas);
+                UpdateTaskInfoByResp(respMsg, datas);
 
-                var dialog = new WFDTaskResult(TaskInfo, urlResults);
+                var dialog = new WFDTaskResult(TaskInfo);
                 if (dialog.ShowDialog() == DialogResult.OK)
                     return;
             }
 
-            private string UpdateTaskInfoByResp(string resp)
+            private void UpdateTaskInfoByResp(string respMsg, string datas)
             {
-                TaskInfo.Status = WFDTaskStatus.Running;
-                //判断status，如果done，将result写入结果文件，其他情况不写。结果文件除了done状态，其余情况均为空
-                if(TaskInfo.Status == WFDTaskStatus.Done)
+                if (respMsg == "success")// && TaskInfo.Status != WFDTaskStatus.Done 考虑是否每次都刷新
                 {
-
-                    return "111";
+                    TaskInfo.Status = WFDTaskStatus.Done;
+                    TaskInfo.PreviewResults = DealDatas(TaskInfo.ResultFilePath, datas);
                 }
-                else
-                    return string.Empty;
+                else if (respMsg == "wait")
+                    TaskInfo.Status = WFDTaskStatus.Running;
+                else if (respMsg == "fail")
+                    TaskInfo.Status = WFDTaskStatus.Failed;
             }
 
+            private string DealDatas(string resultFilePath, string datas)
+            {
+
+                //TODO 解析正确结果，同时写进本地文件，返回预览字符串
+                //List<string> dataList = JsonConvert.DeserializeObject<List<string>>(datas);
+                StreamWriter sw = new StreamWriter(resultFilePath);
+                sw.WriteLine(datas);
+                sw.Close();
+                return datas;
+            }
 
         }
         #endregion

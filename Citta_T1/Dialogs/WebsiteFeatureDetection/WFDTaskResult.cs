@@ -10,7 +10,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 {
     partial class WFDTaskResult : StandardDialog
     {
-        public string UrlResults;
         public WFDTaskInfo TaskInfo;
         
         public WFDTaskResult()
@@ -19,10 +18,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.dataGridView.DoubleBuffered(true);
         }
 
-        public WFDTaskResult(WFDTaskInfo taskInfo, string results) : this()
+        public WFDTaskResult(WFDTaskInfo taskInfo) : this()
         {
             TaskInfo = taskInfo;
-            UrlResults = results;
 
             this.taskNameLabel.Text = taskInfo.TaskName;
             this.taskIDLabel.Text = taskInfo.TaskID;
@@ -33,10 +31,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void RefreshDGV()
         {
             List<List<string>> tableCols;
-            if (string.IsNullOrEmpty(UrlResults))
-                tableCols = GenDefaultContent();
-            else
-                tableCols = DbUtil.StringTo2DString(UrlResults);
+            tableCols = GenDefaultContent();
+            if (!string.IsNullOrEmpty(TaskInfo.PreviewResults))
+                tableCols.AddRange(DbUtil.StringTo2DString(TaskInfo.PreviewResults));
             FileUtil.FillTable(dataGridView, tableCols);
             ResetColumnsWidth();
         }

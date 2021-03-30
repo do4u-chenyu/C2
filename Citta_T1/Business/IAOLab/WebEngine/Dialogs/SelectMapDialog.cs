@@ -34,6 +34,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             InitializeComponent();
         }
+        public DataItem HitItem { get { return this.hitItem; } }
         public List<DataItem> DataItems;
 
         public string drawlatude;

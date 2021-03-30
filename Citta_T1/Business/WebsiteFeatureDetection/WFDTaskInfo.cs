@@ -20,6 +20,7 @@ namespace C2.Business.WebsiteFeatureDetection
         public string TaskID;
         public string DatasourceFilePath;
         public string ResultFilePath;
+        public string PreviewResults;
         public WFDTaskStatus Status;
         public bool IsEmpty() { return this == Empty; }
 
@@ -30,15 +31,17 @@ namespace C2.Business.WebsiteFeatureDetection
             DatasourceFilePath = string.Empty;
             ResultFilePath = string.Empty;
             Status = WFDTaskStatus.Null;
+            PreviewResults = string.Empty;
         }
 
-        public WFDTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, WFDTaskStatus status)
+        public WFDTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, WFDTaskStatus status, string previewResults = "")
         {
             TaskName = taskName;
             TaskID = taskId;
             DatasourceFilePath = datasourceFilePath;
             ResultFilePath = resultFilePath;
             Status = status;
+            PreviewResults = previewResults;
         }
     }
 }

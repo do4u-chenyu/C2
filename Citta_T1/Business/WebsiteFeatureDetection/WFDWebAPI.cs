@@ -1,20 +1,24 @@
-﻿using Newtonsoft.Json;
+﻿using C2.Dialogs.WebsiteFeatureDetection;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace C2.Business.WebsiteFeatureDetection
 {
+
     class WFDWebAPI
     {
-        //string UserName;
+        //Global.WFDUser持久化到文档中UserInformation.xml
+        public string UserName { set; get; }
         string Token;
         string APIUrl;
         string LoginUrl;
+        string ProClassifierUrl;
+        string TaskResultUrl;
         HttpHandler httpHandler;
 
         private static WFDWebAPI WFDWebAPIInstance;
@@ -29,10 +33,13 @@ namespace C2.Business.WebsiteFeatureDetection
 
         public WFDWebAPI()
         {
-            Token = string.Empty;
-            APIUrl = "https://10.1.203.15:12449/apis/";//测试
-            //APIUrl = "https://113.31.119.85:53374/apis/";//正式
+            UserName = "";
+            Token = "";
+            //APIUrl = "https://10.1.203.15:12449/apis/";//测试
+            APIUrl = "https://113.31.119.85:53374/apis/";//正式
             LoginUrl = APIUrl + "Login";
+            ProClassifierUrl = APIUrl + "pro_classifier_api";
+            TaskResultUrl = APIUrl + "detection/task/result";
 
             httpHandler = new HttpHandler();
         }
@@ -40,54 +47,88 @@ namespace C2.Business.WebsiteFeatureDetection
         // 用户信息认证
         public string UserAuthentication(string userName, string otp)
         {
-            //string status = string.Empty;
+            Dictionary<string, string> pairs = new Dictionary<string, string>{ { "user_id", userName }, { "password", otp } };
+            try
+            {
+                Response resp = httpHandler.Post(LoginUrl, pairs);
+                if (resp.StatusCode != HttpStatusCode.OK)
+                    return string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
-            //Dictionary<string, string> pairs = new Dictionary<string, string>{
-            //    { "user_id"  , userName},
-            //    { "password" , otp}
-            //};
-            //try
-            //{
-            //    Response resp = httpHandler.Post(LoginUrl, pairs);
-            //    if (resp.StatusCode != HttpStatusCode.OK)
-            //        return "error";
-            //    Dictionary<string, string> resDict = resp.ResDict;
-            //    if (resDict.ContainsKey("operate_status"))
-            //        status = resDict["operate_status"];
-            //    if (string.IsNullOrEmpty(status) || status == "fail")
-            //        return "fail";
-            //    else
-            //    {
-            //        Token = resDict["token"];
-            //        return "success";
-            //    }
+                Dictionary<string, string> resDict = resp.ResDict;
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    return ex.Message;
-            //}
-
-            //TODO http请求，通过返回状态设置token，返回的token为空说明认证失败
-            //string respStatus = "success";
-            //if (respStatus == "success")
-            //    token = "11111";
-            return "111";
+                if (resDict.TryGetValue("operate_status", out string status) && status == "success")
+                {
+                    UserName = userName;
+                    resDict.TryGetValue("token", out Token);
+                    return "success";
+                }
+                else
+                    return "用户认证失败(用户名或动态口令错误)。";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         // 网站分类
-        public string StartTask(List<string> urls)
+        public void StartTask(List<string> urls, out string respMsg, out string taskId)
         {
-            string id = string.Empty;
+            //ReAuthBeforeQuery();
+            taskId = string.Empty;
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "user_id", UserName }, { "urls", JsonConvert.SerializeObject(urls) } };
+            try
+            {
+                Response resp = httpHandler.Post(ProClassifierUrl, pairs, Token);
+                if (resp.StatusCode == HttpStatusCode.Unauthorized)
+                    respMsg = "TokenError";
+                if (resp.StatusCode != HttpStatusCode.OK)
+                    respMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
-            return "ce38f-ac939-efb2e";
+                Dictionary<string, string> resDict = resp.ResDict;
+
+                if (resDict.TryGetValue("request_condition", out string status) && status == "success")
+                {
+                    resDict.TryGetValue("TASKID", out taskId);
+                    respMsg = status;
+                }
+                else
+                    respMsg = "任务下发失败。";
+            }
+            catch (Exception ex)
+            {
+                respMsg = ex.Message;
+            }
         }
 
         // 根据任务id返回任务结果
-        public string QueryTaskResultsById(string id, string flag = "0")
+        public void QueryTaskResultsById(string taskId, out string respMsg, out string datas, string flag = "1")
         {
-            string resq = string.Empty;
-            return resq;
+            datas = string.Empty;
+            //目前默认输出全部分类结果，flag默认为1，后期有需求再改flag参数
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "TASKID", taskId }, { "FLAG", flag } };
+            try
+            {
+                Response resp = httpHandler.Post(TaskResultUrl, pairs, Token);
+                if (resp.StatusCode == HttpStatusCode.Unauthorized)
+                    respMsg = "TokenError";
+                if (resp.StatusCode != HttpStatusCode.OK)
+                    respMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+
+                Dictionary<string, string> resDict = resp.ResDict;
+
+                if (resDict.TryGetValue("operate_status", out string status))
+                {
+                    resDict.TryGetValue("data", out datas);
+                    respMsg = status;
+                }
+                else
+                    respMsg = "任务结果查询失败。";
+            }
+            catch (Exception ex)
+            {
+                respMsg = ex.Message;
+            }
         }
 
         // 根据任务id返回异常网站截图
@@ -102,6 +143,18 @@ namespace C2.Business.WebsiteFeatureDetection
 
         }
 
+        private void ReAuthBeforeQuery()
+        {
+            //TODO 后台尝试登陆，失败后前台弹出认证窗口
+            if (string.IsNullOrEmpty(UserName) || UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName)) != "success")
+            {
+                var UAdialog = new UserAuth();
+                if (UAdialog.ShowDialog() != DialogResult.OK)
+                    return;
+                UserName = UAdialog.UserName;
+            }
+        }
+
     }
     
     class HttpHandler
@@ -110,18 +163,18 @@ namespace C2.Business.WebsiteFeatureDetection
         {
         }
 
-        public Response Post(string url, Dictionary<string, string> postData, int timeout = 20000)
+        public Response Post(string url, Dictionary<string, string> postData, string token = "", int timeout = 20000)
         {
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
 
-            //req.AllowAutoRedirect = allowDirecte;
             req.Timeout = timeout;
             string content = DictionaryToJson(postData);
             byte[] data = Encoding.UTF8.GetBytes(content);
 
             req.Method = "POST";
-            req.ContentType = "application/x-www-form-urlencoded";
+            req.ContentType = "application/json";
             req.ContentLength = data.Length;
+            req.Headers.Add("Authorization", "Bearer " + token);
 
             using (var stream = req.GetRequestStream())
                 stream.Write(data, 0, data.Length);

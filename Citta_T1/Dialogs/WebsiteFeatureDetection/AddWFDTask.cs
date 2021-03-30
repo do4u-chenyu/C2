@@ -1,4 +1,5 @@
-﻿using C2.Controls;
+﻿using C2.Business.WebsiteFeatureDetection;
+using C2.Controls;
 using C2.Utils;
 using System;
 using System.Windows.Forms;
@@ -24,7 +25,20 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         protected override bool OnOKButtonClick()
         {
             TaskName = TaskName.Trim();//去掉首尾空白符
-            return IsValidityTaskName() && IsValidityFilePath() && base.OnOKButtonClick();
+            if (!IsValidityTaskName() || !IsValidityFilePath())
+                return false;
+
+            //判断用户是否认证？已认证的可以直接新建任务，否则先认证再新建任务 //这个跟api里的方法比较一下，看看能否合并
+            if (string.IsNullOrEmpty(WFDWebAPI.GetInstance().UserName))
+            {
+                var UAdialog = new UserAuth();
+                if (UAdialog.ShowDialog() != DialogResult.OK)
+                    return false;
+
+                WFDWebAPI.GetInstance().UserName = UAdialog.UserName;
+            }
+
+            return base.OnOKButtonClick();
         }
 
         private bool IsValidityTaskName()
