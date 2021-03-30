@@ -44,6 +44,8 @@ namespace C2.Controls.C1.Left
             }
 
             HelpUtil.ShowMessageBox(respMsg);
+            if (respMsg != "success")
+                return;
             string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网络侦察兵");
             string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.bcp", taskName, taskId));
             FileUtil.CreateDirectory(destDirectory);
@@ -90,34 +92,40 @@ namespace C2.Controls.C1.Left
             if (!File.Exists(xmlPath))
                 return;
 
+            XmlDocument xDoc = new XmlDocument(); ;
             try
             {
-                XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(xmlPath);
-
-                foreach (XmlNode xn in xDoc.SelectNodes(@"WFDTasks/task")) //要学着尽量利用XPath自己的能力
-                    LoadSingleTask(xn);
             }
             catch (Exception ex)
             {
                 HelpUtil.ShowMessageBox("侦察兵任务加载时发生错误:" + ex.Message);
             }
+
+            foreach (XmlNode xn in xDoc.SelectNodes(@"WFDTasks/task")) //要学着尽量利用XPath自己的能力
+                LoadSingleTask(xn);
+            
+
             return;
         }
 
         private void LoadSingleTask(XmlNode xn)
         {
-            WFDTaskInfo taskInfo = new WFDTaskInfo
+            try
             {
-                TaskName = xn.SelectSingleNode("taskName").InnerText,
-                TaskID = xn.SelectSingleNode("taskId").InnerText,
-                TaskCreateTime = xn.SelectSingleNode("taskCreateTime").InnerText,
-                DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
-                ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
-                Status = WFDTaskStatusEnum(xn.SelectSingleNode("status").InnerText)
-            };
+                WFDTaskInfo taskInfo = new WFDTaskInfo
+                {
+                    TaskName = xn.SelectSingleNode("taskName").InnerText,
+                    TaskID = xn.SelectSingleNode("taskId").InnerText,
+                    TaskCreateTime = xn.SelectSingleNode("taskCreateTime").InnerText,
+                    DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
+                    ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
+                    Status = WFDTaskStatusEnum(xn.SelectSingleNode("status").InnerText)
+                };
 
-            AddInnerButton(new WebsiteFeatureDetectionButton(taskInfo));
+                AddInnerButton(new WebsiteFeatureDetectionButton(taskInfo));
+            }
+            catch {}
         }
 
         private WFDTaskStatus WFDTaskStatusEnum(string encoding, WFDTaskStatus defaultStatus = WFDTaskStatus.Null)
@@ -233,12 +241,15 @@ namespace C2.Controls.C1.Left
                 //如果task本身是done状态，不发起查询
                 //string datas = "[{'url': 'http://admin.haishen6688.com/', 'cur_url': 'http://admin.haishen6688.com/', 'html_content_id': 'e0ecfa0a908711eb87b20242ac110005', 'title': '登陆', 'html_content': '登陆登陆 欢迎 请登录 请输入用户名密码及验证码 用户名 密码 验证码 验证码 登陆 2017 ISPEC', 'prediction': '10105', 'login': True, 'screen_shot': None}, {'url': 'http://a1.76688.me/', 'cur_url': 'http://a1.76688.me/', 'html_content_id': 'db082744907911eb9f5e0242ac110005', 'title': 'welcome', 'html_content': 'welcomewelcome 外围彩 账 号 密 码', 'prediction': '1010303', 'login': None, 'screen_shot': 'db082744907911eb9f5e0242ac110005'}]";
 
-                WFDWebAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID, out string respMsg, out string datas);
-                UpdateTaskInfoByResp(respMsg, datas);
+                if(WFDWebAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID, out string respMsg, out string datas))
+                {
+                    UpdateTaskInfoByResp(respMsg, datas);
 
-                var dialog = new WFDTaskResult(TaskInfo);
-                if (dialog.ShowDialog() == DialogResult.OK)
-                    return;
+                    var dialog = new WFDTaskResult(TaskInfo);
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                        return;
+                }
+
             }
 
             private void UpdateTaskInfoByResp(string respMsg, string datas)

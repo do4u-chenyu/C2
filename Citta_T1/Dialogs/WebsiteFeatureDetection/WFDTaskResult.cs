@@ -4,6 +4,8 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -62,10 +64,19 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 textCell2.Value = data[2];
                 dr.Cells.Add(textCell2);
 
-                DataGridViewButtonCell button = new DataGridViewButtonCell();
-                button.Value = "下载截图";
-                button.Tag = data[3];
-                dr.Cells.Add(button);
+                if(data[3] == "None")
+                {
+                    DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
+                    textCell3.Value = "None";
+                    dr.Cells.Add(textCell3);
+                }
+                else
+                {
+                    DataGridViewButtonCell button = new DataGridViewButtonCell();
+                    button.Value = "下载截图";
+                    button.Tag = data[3];
+                    dr.Cells.Add(button);
+                }
 
                 DataGridViewTextBoxCell textCell4 = new DataGridViewTextBoxCell();
                 textCell4.Value = data[4];
@@ -101,15 +112,56 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if(dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex > -1)
             {
                 DataGridViewButtonCell cell = (DataGridViewButtonCell)dataGridView.CurrentCell;
-                if(cell.Tag != null)
-                    HelpUtil.ShowMessageBox(cell.Tag.ToString());
-            }
+                if (cell.Tag == null)
+                    return;
 
+                SaveScreenshotsToLocal(new List<string>() { cell.Tag.ToString() });
+            }
+        }
+
+        private void SaveScreenshotsToLocal(List<string> screenshotIds)
+        {
+            var dialog = new FolderBrowserDialog();
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            string destPath = dialog.SelectedPath;
+            foreach(string id in screenshotIds)
+            {
+                WFDWebAPI.GetInstance().DownloadScreenshotById(id, out string respMsg, out string datas);
+                if (respMsg == "success")
+                    Base64StringToImage(Path.Combine(destPath, id + ".png"), datas);
+            }
+            HelpUtil.ShowMessageBox("网站截图下载完毕");
+        }
+
+        private void Base64StringToImage(string txtFileName, string base64)
+        {
+            try
+            {
+                byte[] arr = Convert.FromBase64String(base64);
+                MemoryStream ms = new MemoryStream(arr);
+                Bitmap bmp = new Bitmap(ms);
+                ms.Close();
+                bmp.Save(txtFileName, ImageFormat.Png);
+            }
+            catch
+            {
+                MessageBox.Show("Base64StringToImage转换失败。");
+            }
         }
 
         private void DownloadPicsButton_Click(object sender, EventArgs e)
         {
+            List<string> screenshotIds = new List<string>();
 
+            if (File.Exists(this.TaskInfo.ResultFilePath))
+            {
+                //TODO 读本地文件，获取id和分类结果两列
+                SaveScreenshotsToLocal(screenshotIds);
+            }
+            else
+                HelpUtil.ShowMessageBox("任务结果文件不存在。", "提示");
         }
     }
 }
