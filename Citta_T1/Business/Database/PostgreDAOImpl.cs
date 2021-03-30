@@ -85,13 +85,13 @@ namespace C2.Database
                 {
                     for (int i = 0; i < sdr.FieldCount - 1; i++)
                         sb.Append(sdr.GetName(i)).Append(OpUtil.TabSeparator);
-                    sb.Append(sdr.GetName(sdr.FieldCount - 1)).Append(OpUtil.LineSeparator);
+                    sb.Append(sdr.GetName(sdr.FieldCount - 1)).TrimEndT().Append(OpUtil.LineSeparator);
                 }
                 while (sdr.Read() && totalReturnNum++ < returnNum)
                 {
                     for (int i = 0; i < sdr.FieldCount - 1; i++)
                         sb.Append(sdr[i]).Append(OpUtil.TabSeparator);
-                    sb.Append(sdr[sdr.FieldCount - 1]).Append(OpUtil.LineSeparator);
+                    sb.Append(sdr[sdr.FieldCount - 1]).TrimEndT().Append(OpUtil.LineSeparator);
                 }
                 sdr.Close();
 
@@ -105,6 +105,8 @@ namespace C2.Database
             int totalReturnNum = 0;
             StreamWriter sw = new StreamWriter(outputPath, false);
             NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
+            if(maxReturnNum < int.MaxValue)
+                sqlText = string.Format("{0} limit {1}", sqlText, maxReturnNum);
             try
             {
                 SqlConn.Open();

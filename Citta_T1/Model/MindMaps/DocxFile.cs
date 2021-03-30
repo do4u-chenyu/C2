@@ -59,14 +59,14 @@ namespace C2.Model.MindMaps
 
         }
 
-        private void WriteTitleToDocx(string title, XWPFDocument docx, int layer)
+        private void WriteTitleToDocx(string title, XWPFDocument docx, int layer, int count)
         {
             XWPFParagraph paragraphTitle = docx.CreateParagraph();
 
-            paragraphTitle.Style = layer >= 4 ? "a0" : layer.ToString();
+            paragraphTitle.Style = layer > 4 ? "a0" : layer.ToString();
 
             XWPFRun xwpfRun = paragraphTitle.CreateRun();
-            if (layer >= 4)
+            if (layer > 4)
                 xwpfRun.FontFamily = "宋体";
             xwpfRun.SetText(title);
         }
@@ -79,13 +79,13 @@ namespace C2.Model.MindMaps
         {
             return topic.FindWidgets<PictureWidget>(e => File.Exists(e.ImageUrl) && (e.Data.Width > 128 || e.Data.Height > 128));
         }
-        private void WriteToDocx(Topic topic, XWPFDocument DocxExample, XWPFDocument docx)
+        private void WriteToDocx(Topic topic, XWPFDocument DocxExample, XWPFDocument docx,int i =1 )
         {
             XWPFStyles newStyles = docx.CreateStyles();
             newStyles.SetStyles(DocxExample.GetCTStyle());//复制模板格式
 
             //写入标题
-            WriteTitleToDocx(topic.Text, docx, topic.GetDepth(topic));
+            WriteTitleToDocx(topic.Text, docx, topic.GetDepth(topic),i);
 
             //在标题后写入内容
             
@@ -98,9 +98,13 @@ namespace C2.Model.MindMaps
             }
 
 
-            foreach (Topic subTopic in topic.Children)
+            //foreach (Topic subTopic in topic.Children)
+            //{
+            //    WriteToDocx(subTopic, DocxExample, docx);
+            //}
+            for(int j =1; j < topic.Children.Count+1; j++) 
             {
-                WriteToDocx(subTopic, DocxExample, docx);
+                WriteToDocx(topic.Children[j], DocxExample, docx,j);
             }
 
 
@@ -110,7 +114,7 @@ namespace C2.Model.MindMaps
             try
             {
                 XWPFDocument DocxExample;//TODO
-                using (var dotStream = new FileStream(Path.Combine(Application.StartupPath, "Resources", "DocxFileExp", "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
+                using (var dotStream = new FileStream(Path.Combine(Application.StartupPath, "Resources", "Templates", "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
                 {
 
                     DocxExample = new XWPFDocument(dotStream);
