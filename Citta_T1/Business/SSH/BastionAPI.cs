@@ -140,6 +140,11 @@ namespace C2.Business.SSH
             return this; 
         }
 
+        public String QueryGambleTaskStatus()
+        {
+            return String.Empty;
+        }
+
         public String YellowTaskPID() { return String.Empty; }
 
         public String GunTaskPID() { return String.Empty; }
