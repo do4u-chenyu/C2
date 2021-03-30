@@ -19,16 +19,17 @@ namespace C2.Dialogs
         {
             InitializeComponent();
             this.databaseTypeComboBox.SelectedIndex = 0;
+            if (linkButton != null)
+            {
+                LinkButton = linkButton;
+            }
             if (databaseInfo != null)
             {
                 DatabaseInfo = databaseInfo;
                 InitializeContent();
             }
             Mode = mode;
-            if (linkButton != null)
-            {
-                LinkButton = linkButton;
-            }
+            
         }
 
         public void InitializeContent()
@@ -133,6 +134,8 @@ namespace C2.Dialogs
 
         private void DatabaseTypeComboBox_TextChanged(object sender, EventArgs e)
         {
+            if (this.LinkButton != null)
+                this.databaseTypeComboBox.Enabled = false;
             if (databaseTypeComboBox.SelectedItem == null)
                 return;
             if(databaseTypeComboBox.SelectedItem.ToString().Contains( "Oracle"))
