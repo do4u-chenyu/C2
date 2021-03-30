@@ -56,7 +56,7 @@ namespace C2.Database.Tests
             bool notfail2 = hiveDao.ExecuteSQL(sqlText, outputPath2, maxReturnNum);
             Assert.AreEqual(false, notfail2);
             // 限制行数的查询
-            string sqlText3 = "select * from default.students limit 0";
+            string sqlText3 = "select * from default.100w limit 20";
             string outputPath3 = @"D:\test2021032_4.txt";
             int maxReturnNum3 = 100;
             bool notfail3 = hiveDao.ExecuteSQL(sqlText3, outputPath3, maxReturnNum3);
@@ -71,7 +71,6 @@ namespace C2.Database.Tests
             string getTablesSQL = @"use default;show tables;";
             string getTableContentSQL = @"use default;select * from students";
             string getColNameByTableSQL = "use default;desc students";
-
             bool header = true;
             // 
             string databaseNames = hiveDao.Query(getUserSQL, header, 1000);

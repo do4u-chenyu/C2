@@ -62,7 +62,6 @@ namespace C2.Database
             catch (Exception ex) 
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                //TODO mhd
                 throw ex;
             }
             finally
@@ -94,13 +93,8 @@ namespace C2.Database
                         sb.Append(sdr[i]).Append(OpUtil.TabSeparator);
                     sb.Append(sdr[sdr.FieldCount - 1]).Append(OpUtil.LineSeparator);
                 }
-                try
-                {
-                    //SqlCommand.Cancel();
-                    sdr.Close();
-                }
-                catch { }
-                
+                sdr.Close();
+
             }
             return sb.TrimEndN().ToString();
         }
@@ -110,7 +104,6 @@ namespace C2.Database
             bool returnCode = true;
             int totalReturnNum = 0;
             StreamWriter sw = new StreamWriter(outputPath, false);
-            //TODO
             NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
             try
             {
@@ -133,12 +126,7 @@ namespace C2.Database
                         sw.WriteLine(sb.TrimEndT().ToString());
                         sw.Flush();
                     }
-                    try
-                    {
-                        SqlCommand.Cancel();
-                        sdr.Close();
-                    }
-                    catch { }
+                    sdr.Close();  
                 }
             }
             catch (Exception ex)
@@ -148,8 +136,8 @@ namespace C2.Database
             }
             finally
             {
-                //TODO 判断是否为空
-                sw.Close();
+                if(sw !=null)
+                    sw.Close();
                 SqlConn.Close();
             }
             return returnCode;

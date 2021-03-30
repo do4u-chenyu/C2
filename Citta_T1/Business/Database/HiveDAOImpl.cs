@@ -62,33 +62,18 @@ namespace C2.Database
                     var cursor = con.GetCursor();
                     cursor.Execute(string.Format("use {0}", databaseName));
                     cursor.Execute(DbUtil.PurifyOnelineSQL(sqlText));
-                    IDictionary<string, object> iDict = cursor.FetchOne();
-                    if (iDict != null)
-                    {
-                        // 添加表头和第一行内容
-                        foreach (string key in iDict.Keys)
-                            sb.Append(CutColumnName(key)).Append(OpUtil.TabSeparator);
-                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
-                        sb.Clear();
-                        foreach (string key in iDict.Keys)
-                            sb.Append(iDict[key].ToString()).Append(OpUtil.TabSeparator);
-                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
 
-                    }
-
+                    // 获取表头信息
+                    TTableSchema tableSchema = cursor.GetSchema();
+                    foreach(TColumnDesc column in tableSchema.Columns)
+                        sb.Append(CutColumnName(column.ColumnName)).Append(OpUtil.TabSeparator);
+                    sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
+                    // 获取一行行内容
+                    IDictionary<string, object> iDict;
                     while ((iDict = cursor.FetchOne()) != null && totalReturnNum++ < maxReturnNum)
                     {
-                        sb.Clear();
-                        foreach (var key in iDict.Keys)
-                            sb.Append(iDict[key].ToString()).Append(OpUtil.TabSeparator);
-    
-                        if (!iDict.Keys.IsEmpty())
-                        {
-                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
-                            sw.Flush();
-                        }
+                        sw.WriteLine(String.Join(OpUtil.TabSeparatorString, iDict.Values));
                     }
-                 
                 }
             }
             catch (Exception ex)
