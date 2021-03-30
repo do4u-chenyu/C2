@@ -105,6 +105,8 @@ namespace C2.Database
             int totalReturnNum = 0;
             StreamWriter sw = new StreamWriter(outputPath, false);
             NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
+            if(maxReturnNum < int.MaxValue)
+                sqlText = string.Format("{0} limit {1}", sqlText, maxReturnNum);
             try
             {
                 SqlConn.Open();
