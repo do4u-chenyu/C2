@@ -2011,9 +2011,6 @@
     <None Include="Resources\cross_large.png" />
     <EmbeddedResource Include="Resources\cur_scroll.cur" />
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
-    <None Include="Resources\DocxFileExp\DocxExample.dotx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
     <Content Include="Business\IAOLab\WebEngine\css\DrawingManager.css">
@@ -2881,6 +2878,9 @@
     <Content Include="Resources\StartPage\startPageTitle.png" />
     <Content Include="Resources\StartPage\tree.png" />
     <Content Include="Resources\StartPage\yellowGroup.png" />
+    <None Include="Resources\Templates\DocxExample.dotx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Templates\QQ视频模型.iao">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
