@@ -1,22 +1,15 @@
 ﻿using C2.SearchToolkit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Renci.SshNet;
+using System;
 using System.Text.RegularExpressions;
 
 namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private SshClient ssh;
-        private TaskInfo task;
-
-        private String GambleScript = "batchquery_db_accountPass_version20210324.py";
-       
-
+        private readonly SshClient ssh;
+        private readonly TaskInfo task;
+        private String GambleScript { get => String.Format("batchquery_db_accountPass_version{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
         private String GambleWorkspace { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.PID, task.TaskCreateTime); }
         public BastionAPI(TaskInfo task) 
@@ -38,7 +31,7 @@ namespace C2.Business.SSH
             return this; 
         }
 
-        public String RunCommand(String command)
+        private String RunCommand(String command)
         {
             if (ssh.IsConnected)
                 return ssh.RunCommand(command).Result;
@@ -47,7 +40,7 @@ namespace C2.Business.SSH
         }
 
         // 执行命令且必须成功返回
-        public bool SuccessRunCommand(String command)
+        private bool SuccessRunCommand(String command)
         {
             if (ssh.IsConnected)
                 return ssh.RunCommand(command).ExitStatus == 0;
@@ -88,9 +81,19 @@ namespace C2.Business.SSH
             return result.Contains(GambleScript);
         }
 
+        private bool IsGambleResultFileReady()
+        {
+            return true;
+        }
+
+        private bool IsTaskTimeout()
+        {
+            return true;
+        }
+
         private bool IsNotSafe(String value)
         {
-            // 在服务器上删东西 尽量严格
+            // 在服务器上删东西 尽量严格, 尤其不能有"空格/"或"空格/空格"
             return !value.StartsWith("/tmp/iao/search_toolkit/") || Regex.IsMatch(value, @"\s");
         }
 
@@ -100,24 +103,12 @@ namespace C2.Business.SSH
             return SuccessRunCommand(command);
         }
 
-        public String GambleTaskStatus(String pid) 
-        {
-            // 1) pid不存在且有结果文件时, 为运行成功
-            // 2) pid不存在但没有结果文件时, 为运行失败
-            // 3) pid存在但没有结果文件且在未超时范围内, 为正在运行
-            // 4) pid存在但有结果文件, 假定运行成功
-            // 以上pid在获取时同时要判断执行cmd是否为模型脚本
-            String command = String.Format(@"ps aux | grep -i python | grep {0} | grep {1}", GambleScript, pid);
-            return String.Empty; 
-        }
-
         public BastionAPI KillGambleTask() 
         {
             String command = String.Format("kill -9 {0}", task.PID);
             RunCommand(command);
             return this; 
         }
-
         public String RunGambleTask() 
         {
             bool succ = EnterGambleWorkspace() && ImportSearchEnv();
@@ -131,7 +122,6 @@ namespace C2.Business.SSH
                 return match.Groups[1].Value;
             return String.Empty;
         }
-
         public BastionAPI UploadGambleScript() { return this; }
         public BastionAPI CreateGambleTaskDirectory() 
         {
@@ -142,7 +132,32 @@ namespace C2.Business.SSH
 
         public String QueryGambleTaskStatus()
         {
-            return String.Empty;
+            bool isTimeout = IsTaskTimeout();
+            bool isAlive = IsAliveGambleTask();
+            bool isGRFReady = IsGambleResultFileReady();
+
+            // 1) pid不存在且有结果文件时, 为运行成功
+            if (!isAlive && isGRFReady)
+                return "DONE";
+
+            // 2) pid不存在且没有结果文件时, 为运行失败
+            if (!isAlive && !isGRFReady)
+                return "FAIL";
+
+            // 3) pid存在且没有结果文件且在未超时范围内, 为正在运行
+            if (isAlive && !isGRFReady && !isTimeout)
+                return "RUNNING";
+
+            // 4) pid存在且没有结果文件且超出运行时间(24 * 4小时), 为超时
+            if (isAlive && !isGRFReady && isTimeout)
+                return "TIMEOUT";
+
+            // 5) pid存在但有结果文件, 这种情况按道理不应该发生, 暂时假定运行成功
+            if (isAlive && isGRFReady)
+                return "DONE";
+
+            // 其他情况, 按道理不应该发生, 全部默认为失败
+            return "FAIL";
         }
 
         public String YellowTaskPID() { return String.Empty; }
