@@ -179,7 +179,7 @@ namespace C2.Database
                         sb.Clear();
                         for (int i = 0; i < rdr.FieldCount; i++)
                             sb.Append(rdr[i]).Append(OpUtil.TabSeparator);
-                        sw.WriteLine(sb.TrimEndT().ToString());
+                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
                     }
                 }
             }
