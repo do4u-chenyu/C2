@@ -19,6 +19,7 @@ namespace C2.Business.WebsiteFeatureDetection
         string LoginUrl;
         string ProClassifierUrl;
         string TaskResultUrl;
+        string ScreenshotUrl;
         HttpHandler httpHandler;
 
         private static WFDWebAPI WFDWebAPIInstance;
@@ -40,6 +41,7 @@ namespace C2.Business.WebsiteFeatureDetection
             LoginUrl = APIUrl + "Login";
             ProClassifierUrl = APIUrl + "pro_classifier_api";
             TaskResultUrl = APIUrl + "detection/task/result";
+            ScreenshotUrl = APIUrl + "Screenshot";
 
             httpHandler = new HttpHandler();
         }
@@ -102,9 +104,14 @@ namespace C2.Business.WebsiteFeatureDetection
         }
 
         // 根据任务id返回任务结果
-        public void QueryTaskResultsById(string taskId, out string respMsg, out string datas, string flag = "1")
+        public bool QueryTaskResultsById(string taskId, out string respMsg, out string datas, string flag = "1")
         {
+            
             datas = string.Empty;
+            respMsg = string.Empty;
+            if (!ReAuthBeforeQuery())
+                return false;
+
             //目前默认输出全部分类结果，flag默认为1，后期有需求再改flag参数
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "TASKID", taskId }, { "FLAG", flag } };
             try
@@ -129,12 +136,36 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 respMsg = ex.Message;
             }
+            return true;
         }
 
         // 根据任务id返回异常网站截图
-        public void DownloadScreenshotsById(string id)
+        public void DownloadScreenshotById(string screenshotId, out string respMsg, out string datas)
         {
+            datas = string.Empty;
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "screenshot_id", screenshotId } };
+            try
+            {
+                Response resp = httpHandler.Post(ScreenshotUrl, pairs, Token);
+                if (resp.StatusCode == HttpStatusCode.Unauthorized)
+                    respMsg = "TokenError";
+                if (resp.StatusCode != HttpStatusCode.OK)
+                    respMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
+                Dictionary<string, string> resDict = resp.ResDict;
+
+                if (resDict.TryGetValue("operate_status", out string status))
+                {
+                    resDict.TryGetValue("data", out datas);
+                    respMsg = status;
+                }
+                else
+                    respMsg = "获取网站截图失败。";
+            }
+            catch (Exception ex)
+            {
+                respMsg = ex.Message;
+            }
         }
 
         // 根据任务id返回出错的url列表
@@ -143,16 +174,18 @@ namespace C2.Business.WebsiteFeatureDetection
 
         }
 
-        private void ReAuthBeforeQuery()
+        private bool ReAuthBeforeQuery()
         {
             //TODO 后台尝试登陆，失败后前台弹出认证窗口
             if (string.IsNullOrEmpty(UserName) || UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName)) != "success")
             {
                 var UAdialog = new UserAuth();
                 if (UAdialog.ShowDialog() != DialogResult.OK)
-                    return;
+                    return false;
                 UserName = UAdialog.UserName;
             }
+
+            return true;
         }
 
     }
