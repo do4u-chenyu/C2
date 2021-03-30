@@ -12,7 +12,7 @@ namespace C2.Database
         private static readonly LogUtil log = LogUtil.GetInstance("PostgreDAOImpl");
         private readonly string getUserSQL = @"select pg_database.datname from pg_database";
         private readonly string getTablesSQL = @"select table_name from information_schema.tables where table_schema = 'public'";
-        private readonly string getTableContentSQL = @"select * from ""{0}""";
+        private readonly string getTableContentSQL = @"select * from ""{0}"" ";
         private readonly string getColNameByTableSQL = @"SELECT a.attnum,a.attname AS field FROM pg_class c,pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,pg_type t WHERE c.relname = '{0}' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid ORDER BY a.attnum";
         public PostgreDAOImpl(DatabaseItem dbi) : base(dbi) { }
 
@@ -52,6 +52,8 @@ namespace C2.Database
             string result = String.Empty;
             NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
             sql = DbUtil.PurifyOnelineSQL(sql);
+            if(sql.Contains("*"))
+                sql = string.Format("{0} limit {1}",sql, returnNum);
             try
             {
                 SqlConn.Open();
@@ -80,7 +82,6 @@ namespace C2.Database
             {
                 if (sdr.FieldCount == 0)
                     return String.Empty;
-                //TODO 空表测试 加断点，看逻辑是否能到，测试Cancel逻辑是否需要
                 if (header) 
                 {
                     for (int i = 0; i < sdr.FieldCount - 1; i++)
@@ -95,7 +96,7 @@ namespace C2.Database
                 }
                 try
                 {
-                    SqlCommand.Cancel();
+                    //SqlCommand.Cancel();
                     sdr.Close();
                 }
                 catch { }

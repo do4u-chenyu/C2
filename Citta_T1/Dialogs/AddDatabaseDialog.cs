@@ -150,6 +150,12 @@ namespace C2.Dialogs
                 this.schemaTextBox.Enabled = false;
                 this.sidTextBox.Text = "orcl";
                 this.schemaTextBox.Text = "";
+                this.serviceRadiobutton.Enabled = true;
+                this.sidRadiobutton.Enabled = true;
+                this.schemaLabel.Visible = false;
+                this.schemaTextBox.Visible = false;
+                this.serviceRadiobutton.Visible = true;
+                this.serviceTextBox.Visible = true;
             }
 
             if (databaseTypeComboBox.SelectedItem.ToString().Contains("PostgreSQL"))
@@ -164,10 +170,15 @@ namespace C2.Dialogs
                 this.sidTextBox.Text = "";
                 this.serviceRadiobutton.Enabled = false;
                 this.sidRadiobutton.Enabled = false;
+                this.schemaLabel.Visible = true;
+                this.schemaTextBox.Visible = true;
+                this.serviceRadiobutton.Visible = false;
+                this.serviceTextBox.Visible = false;
             }
             
             if (databaseTypeComboBox.SelectedItem.ToString().Contains("Hive"))
             {
+                this.portTextBox.Text = "10000";
                 this.serverTextBox.Text = "10.1.126.4";
                 this.userTextBox.Text = "None";
                 this.passwordTextBox.Text = "None";
@@ -175,6 +186,13 @@ namespace C2.Dialogs
                 this.serviceTextBox.Enabled = false;
                 this.sidTextBox.Enabled = false;
                 this.schemaTextBox.Enabled = false;
+                this.sidTextBox.Text = "";
+                this.serviceRadiobutton.Enabled = false;
+                this.sidRadiobutton.Enabled = false;
+                this.serviceRadiobutton.Visible = true;
+                this.serviceTextBox.Visible = true;
+                this.schemaLabel.Visible = false;
+                this.schemaTextBox.Visible = false;
             }
 
         }
@@ -183,6 +201,11 @@ namespace C2.Dialogs
         private void PortTextBox_MouseUp(object sender, MouseEventArgs e)
         {
             this.portTextBox.ForeColor = Color.Black;
+        }
+
+        private void sidRadiobutton_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
     public enum DatabaseDialogMode
