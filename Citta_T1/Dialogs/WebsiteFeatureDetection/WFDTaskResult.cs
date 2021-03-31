@@ -130,9 +130,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             string destPath = dialog.SelectedPath;
             foreach(string id in screenshotIds)
             {
-                WFDWebAPI.GetInstance().DownloadScreenshotById(id, out string respMsg, out string datas);
-                if (respMsg == "success")
-                    Base64StringToImage(Path.Combine(destPath, id + ".png"), datas);
+                WFDWebAPI.GetInstance().DownloadScreenshotById(id, out WFDAPIResult result);
+                if (result.RespMsg == "success")
+                    Base64StringToImage(Path.Combine(destPath, id + ".png"), result.Datas);
             }
             HelpUtil.ShowMessageBox("网站截图下载完毕");
         }
@@ -181,15 +181,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return;
             }
 
-            string respMsg = string.Empty;
-            string datas = string.Empty;
+            WFDAPIResult result = new WFDAPIResult();
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                if (!WFDWebAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID, out respMsg, out datas))
+                if (!WFDWebAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID, out result))
                     return;
             }
 
-            UpdateTaskInfoByResp(respMsg, datas);
+            UpdateTaskInfoByResp(result.RespMsg, result.Datas);
             Global.GetWebsiteFeatureDetectionControl().SaveWFDTasksToXml();//状态刷新，修改本地持久化文件
         }
 
