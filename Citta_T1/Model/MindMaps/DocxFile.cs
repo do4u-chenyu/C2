@@ -59,16 +59,26 @@ namespace C2.Model.MindMaps
 
         }
 
-        private void WriteTitleToDocx(string title, XWPFDocument docx, int layer, int count)
+        private void WriteTitleToDocx(string title, XWPFDocument docx, int layer, string serialNumber)
         {
             XWPFParagraph paragraphTitle = docx.CreateParagraph();
-
+            
             paragraphTitle.Style = layer > 4 ? "a0" : layer.ToString();
 
             XWPFRun xwpfRun = paragraphTitle.CreateRun();
-            if (layer > 4)
+            if (layer > 4 )
+            {
                 xwpfRun.FontFamily = "宋体";
-            xwpfRun.SetText(title);
+                xwpfRun.SetText(title);
+            }
+            if(layer == 1) 
+            {
+                xwpfRun.SetText(title);
+            }
+            else
+            {
+                xwpfRun.SetText(string.Format("{0} {1}", serialNumber, title));
+            }
         }
 
         private Widget GetTopicNote(Topic topic)
@@ -79,13 +89,13 @@ namespace C2.Model.MindMaps
         {
             return topic.FindWidgets<PictureWidget>(e => File.Exists(e.ImageUrl) && (e.Data.Width > 128 || e.Data.Height > 128));
         }
-        private void WriteToDocx(Topic topic, XWPFDocument DocxExample, XWPFDocument docx,int i =1 )
+        private void WriteToDocx(Topic topic, XWPFDocument DocxExample, XWPFDocument docx,string serialNumber = "1") 
         {
             XWPFStyles newStyles = docx.CreateStyles();
             newStyles.SetStyles(DocxExample.GetCTStyle());//复制模板格式
 
             //写入标题
-            WriteTitleToDocx(topic.Text, docx, topic.GetDepth(topic),i);
+            WriteTitleToDocx(topic.Text, docx, topic.GetDepth(topic), serialNumber);
 
             //在标题后写入内容
             
@@ -97,23 +107,23 @@ namespace C2.Model.MindMaps
                 WriteImgToDocx(pictureWidget, docx, imgNo++);
             }
 
-
-            //foreach (Topic subTopic in topic.Children)
-            //{
-            //    WriteToDocx(subTopic, DocxExample, docx);
-            //}
-            for(int j =1; j < topic.Children.Count+1; j++) 
+            string nSerialNumber;
+            for (int j =1; j < topic.Children.Count+1; j++) 
             {
-                WriteToDocx(topic.Children[j], DocxExample, docx,j);
+                if (topic.IsRoot)
+                    nSerialNumber = (j).ToString();
+                else
+                    nSerialNumber = string.Format("{0}.{1}",serialNumber, j.ToString());
+                WriteToDocx(topic.Children[j - 1], DocxExample, docx, nSerialNumber);
             }
 
 
         }
-        public void Save(Topic topic, string fileName) //TODO
+        public void Save(Topic topic, string fileName) 
         {
             try
             {
-                XWPFDocument DocxExample;//TODO
+                XWPFDocument DocxExample;
                 using (var dotStream = new FileStream(Path.Combine(Application.StartupPath, "Resources", "Templates", "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
                 {
 
