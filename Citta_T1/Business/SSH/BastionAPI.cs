@@ -1,4 +1,6 @@
-﻿using C2.SearchToolkit;
+﻿using C2.Core;
+using C2.SearchToolkit;
+using C2.Utils;
 using Renci.SshNet;
 using System;
 using System.Text.RegularExpressions;
@@ -47,12 +49,6 @@ namespace C2.Business.SSH
             return false;
         }
 
-        private bool ImportSearchEnv()
-        {
-            String command = @". /home/search/search_profile;";
-            return SuccessRunCommand(command);
-        }
-
         public String GambleTaskPID () 
         {
             String command = String.Format(@"ps aux | grep -i python | grep {0} | awk {{print $2}}", GambleScript);
@@ -60,7 +56,20 @@ namespace C2.Business.SSH
             return Regex.IsMatch(result, @"^\d+$") ? result : String.Empty;
         }
 
-        public String DownloadGambleTaskResult() { return String.Empty; }
+        public String DownloadGambleTaskResult() 
+        {
+            // 000000_queryResult_db_开始时间_结束时间.tgz
+            String ffp = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
+            return String.Empty; 
+        }
+
+        public BastionAPI UploadGambleScript() 
+        {
+            String s = Global.GambleScriptPath;
+            String d = GambleWorkspace + "/" + GambleScript;
+            // TODO s 上传 到 d 中
+            return this; 
+        }
 
         public BastionAPI DeleteGambleTask() 
         {
@@ -88,7 +97,9 @@ namespace C2.Business.SSH
 
         private bool IsTaskTimeout()
         {
-            return true;
+            DateTime born = ConvertUtil.TryParseDateTime(task.TaskCreateTime, "yyyyMMddHHmmss");
+            TimeSpan ts = DateTime.Now.Subtract(born);
+            return Math.Abs(ts.TotalHours) >= 24 * 3;
         }
 
         private bool IsNotSafe(String value)
@@ -111,8 +122,7 @@ namespace C2.Business.SSH
         }
         public String RunGambleTask() 
         {
-            bool succ = EnterGambleWorkspace() && ImportSearchEnv();
-            if (!succ)
+            if (!EnterGambleWorkspace())
                 return String.Empty;
 
             String command = String.Format("python {0} && disown;", GambleScript);
@@ -122,7 +132,7 @@ namespace C2.Business.SSH
                 return match.Groups[1].Value;
             return String.Empty;
         }
-        public BastionAPI UploadGambleScript() { return this; }
+
         public BastionAPI CreateGambleTaskDirectory() 
         {
             String command = String.Format("mkdir -p {0}", GambleWorkspace);

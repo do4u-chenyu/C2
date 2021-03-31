@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -57,6 +58,18 @@ namespace C2.Utils
             {
                 return false;
             }
+        }
+
+        public static DateTime TryParseDateTime(String s, String format)
+        {
+            try 
+            {
+                return DateTime.ParseExact(s, format, CultureInfo.CurrentCulture);
+            } 
+            catch 
+            {
+                return DateTime.MinValue;
+            }  
         }
 
         public static bool ControlTextTryParseInt(Control ct)
