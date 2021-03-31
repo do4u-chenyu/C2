@@ -145,5 +145,10 @@ namespace C2.Utils
                 addValue -= 10;
             return padding * 2 + chineseRatio * 12 + otherRatio * 7 + upperRatio * 3 + addValue;
         }
+
+        public static string TransToUniversalTime(DateTime time)
+        {
+            return ((time.ToUniversalTime().Ticks - 621355968000000000) / 10000000).ToString();
+        }
     }
 }

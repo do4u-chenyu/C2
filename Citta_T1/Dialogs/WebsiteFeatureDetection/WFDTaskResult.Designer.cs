@@ -244,6 +244,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "WFDTaskResult";
             this.Text = "侦察兵-任务结果";
+            this.Shown += new System.EventHandler(this.WFDTaskResult_Shown);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.panel2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();

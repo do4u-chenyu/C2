@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Text;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
@@ -162,6 +164,72 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             else
                 HelpUtil.ShowMessageBox("任务结果文件不存在。", "提示");
+        }
+
+        private void WFDTaskResult_Shown(object sender, EventArgs e)
+        {
+            /* 
+             * 判断task是否过期
+             *    过期直接弹框不查询，显示上次记录的信息（结果详情为空）
+             *    未过期开始查询
+             * ？如果task已经是done状态，是否还要再发起一次请求？
+             */
+            int validityPeriodTime = 86400;
+            if (ConvertUtil.TryParseInt(ConvertUtil.TransToUniversalTime(DateTime.Now)) - ConvertUtil.TryParseInt(TaskInfo.TaskCreateTime) > validityPeriodTime)
+            {
+                HelpUtil.ShowMessageBox("任务已过期，请在下发24小时内获取结果。");
+                return;
+            }
+
+            string respMsg = string.Empty;
+            string datas = string.Empty;
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                if (!WFDWebAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID, out respMsg, out datas))
+                    return;
+            }
+
+            UpdateTaskInfoByResp(respMsg, datas);
+            Global.GetWebsiteFeatureDetectionControl().SaveWFDTasksToXml();//状态刷新，修改本地持久化文件
+        }
+
+        private void UpdateTaskInfoByResp(string respMsg, string datas)
+        {
+            if (respMsg == "success")// && TaskInfo.Status != WFDTaskStatus.Done 考虑是否每次都刷新
+            {
+                TaskInfo.Status = WFDTaskStatus.Done;
+                //httpresponse结果会返回一些python的参数，无法被c#正确解析，统一转成字符串
+                datas = datas.Replace("None", "'None'").Replace("True", "'True'").Replace("False", "'False'");
+                TaskInfo.PreviewResults = DealDatas(TaskInfo.ResultFilePath, datas);
+            }
+            else if (respMsg == "wait")
+                TaskInfo.Status = WFDTaskStatus.Running;
+            else if (respMsg == "fail")
+                TaskInfo.Status = WFDTaskStatus.Failed;
+        }
+
+        private string DealDatas(string resultFilePath, string results)
+        {
+            StringBuilder sb = new StringBuilder(1024 * 16);
+            //TODO 解析正确结果，同时写进本地文件，返回预览字符串
+            //List<string> dataList = JsonConvert.DeserializeObject<List<string>>(datas);
+            StreamWriter sw = new StreamWriter(resultFilePath);
+
+            List<WFDResult> resultList = new JavaScriptSerializer().Deserialize<List<WFDResult>>(results);
+            foreach (WFDResult result in resultList)
+            {
+                sb.Append(result.url).Append(OpUtil.TabSeparator)
+                  .Append(result.prediction).Append(OpUtil.TabSeparator)
+                  .Append(result.title).Append(OpUtil.TabSeparator)
+                  .Append(result.screen_shot).Append(OpUtil.TabSeparator)
+                  .Append(result.html_content).Append(OpUtil.LineSeparator);
+
+                sw.WriteLine(result.JoinAllContent());
+            }
+
+            sw.Close();
+            sw.Dispose();
+            return sb.ToString().TrimEnd(OpUtil.LineSeparator);
         }
     }
 }
