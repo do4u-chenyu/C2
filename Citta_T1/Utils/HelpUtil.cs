@@ -61,6 +61,7 @@ namespace C2.Utils
         public static string BankToolFormHelpInfo = "根据银行卡号获取银行卡的卡种，开户行和其他信息，需要网络";
         public static string GPSTransformFormHelpInfo = "经纬度坐标系转换(百度、火星和WGS);计算两经纬度坐标之间的距离";
         public static string TimeAndIPTransformFormHelpInfo = "IP和整形IP之间的转换，绝对时间和真实时间之间的转换";
+        public static string BigAPKFormHelpInfo = "APK检测系统";
 
 
         #region IAO基站批量查询

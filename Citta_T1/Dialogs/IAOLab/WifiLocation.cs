@@ -44,6 +44,16 @@ namespace C2.Dialogs.IAOLab
                         ShowResult(baseStation, "baseStation", tmpResult);
                     }
                     break;
+                case "Webbrowser":
+
+                    progressBar1.Value = 0;
+                    progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                    progressBar1.Minimum = 0;
+                    foreach (string baseStation in inputArray)
+                    {
+                        ShowResult(baseStation, "baseStation", tmpResult);
+                    }
+                    break;
                 case "Wifi":
                     
                     progressBar1.Value = 0;
