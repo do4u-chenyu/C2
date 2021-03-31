@@ -109,7 +109,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex > -1)
+            if(dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex > -1 && dataGridView.CurrentCell is DataGridViewButtonCell)
             {
                 DataGridViewButtonCell cell = (DataGridViewButtonCell)dataGridView.CurrentCell;
                 if (cell.Tag == null)

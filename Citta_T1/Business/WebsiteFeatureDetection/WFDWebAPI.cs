@@ -36,8 +36,8 @@ namespace C2.Business.WebsiteFeatureDetection
         {
             UserName = "";
             Token = "";
-            //APIUrl = "https://10.1.203.15:12449/apis/";//测试
-            APIUrl = "https://113.31.119.85:53374/apis/";//正式
+            APIUrl = "https://10.1.203.15:12449/apis/";//测试
+            //APIUrl = "https://113.31.119.85:53374/apis/";//正式
             LoginUrl = APIUrl + "Login";
             ProClassifierUrl = APIUrl + "pro_classifier_api";
             TaskResultUrl = APIUrl + "detection/task/result";
