@@ -202,7 +202,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             LoadMapData = new ToolStripButton();
             SaveHtml = new ToolStripButton();
             SavePic = new ToolStripButton();
-            toolStripSeparator1 = new ToolStripSeparator();
             Clear = new ToolStripButton();
             EditCode = new ToolStripButton();
 
@@ -211,11 +210,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             LoadMapData.Image = global::C2.Properties.Resources.designer;
             LoadMapData.Text = "参数配置";
             LoadMapData.Click += new System.EventHandler(this.LoadMapData_Click);
-
-            // SaveHtml
-            SaveHtml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            SaveHtml.Image = global::C2.Properties.Resources.save;
-            SaveHtml.Text = "保存成html";
 
             // SavePic
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -237,11 +231,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 LoadMapData,
-                SaveHtml,
+                EditCode,
                 SavePic,
-                toolStripSeparator1,
-                Clear,
-                EditCode});
+                Clear});
         }
 
         public void InitializeBossToolStrip()
