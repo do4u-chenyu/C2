@@ -35,31 +35,20 @@ namespace C2.Business.SSH
 
         private String RunCommand(String command)
         {
-            if (ssh.IsConnected)
-                return ssh.RunCommand(command).Result;
-
-            return String.Empty;
+            return ssh.IsConnected ? ssh.RunCommand(command).Result : String.Empty;
         }
 
         // 执行命令且必须成功返回
         private bool SuccessRunCommand(String command)
         {
-            if (ssh.IsConnected)
-                return ssh.RunCommand(command).ExitStatus == 0;
-            return false;
+            return ssh.IsConnected && ssh.RunCommand(command).ExitStatus == 0;
         }
 
-        public String GambleTaskPID () 
-        {
-            String command = String.Format(@"ps aux | grep -i python | grep {0} | awk {{print $2}}", GambleScript);
-            String result = RunCommand(command);
-            return Regex.IsMatch(result, @"^\d+$") ? result : String.Empty;
-        }
-
-        public String DownloadGambleTaskResult() 
+        public String DownloadGambleTaskResult(String d) 
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
-            String ffp = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
+            String s = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
+            // TODO s 下载 到 d 中
             return String.Empty; 
         }
 
@@ -88,7 +77,9 @@ namespace C2.Business.SSH
 
         private bool IsGambleResultFileReady()
         {
-            return true;
+            String ffp = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
+            String command = String.Format("ls {0}", ffp);
+            return SuccessRunCommand(command);
         }
 
         private bool IsTaskTimeout()
@@ -167,6 +158,13 @@ namespace C2.Business.SSH
 
             // 其他情况, 按道理不应该发生, 全部默认为失败
             return "FAIL";
+        }
+
+        public String GambleTaskPID()
+        {
+            String command = String.Format(@"ps aux | grep -i python | grep {0} | awk {{print $2}}", GambleScript);
+            String result = RunCommand(command);
+            return Regex.IsMatch(result, @"^\d+$") ? result : String.Empty;
         }
 
         public String YellowTaskPID() { return String.Empty; }
