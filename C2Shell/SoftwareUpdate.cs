@@ -90,7 +90,9 @@ namespace C2Shell
                     MessageBox.Show("回滚成功");
             }
             catch
-            { }
+            {
+                MessageBox.Show("回滚失败");
+            }
         }
         public void Clear()
         {
@@ -98,6 +100,7 @@ namespace C2Shell
             {
                 Directory.Delete(updatePath, true);
                 Directory.Delete(rollbackPath, true);
+                Directory.Delete(installPath, true);
             }
             catch
             { }
@@ -141,13 +144,13 @@ namespace C2Shell
 
                 if (process.ExitCode != 0)
                 {
-                    MessageBox.Show("更新脚本执行失败,错误码:" + process.ExitCode);
+                    // MessageBox.Show("更新脚本执行失败,错误码:" + process.ExitCode);
                     return !success;
                 }
             }
-            catch (Exception e)
+            catch 
             {
-                MessageBox.Show("更新脚本执行失败:" + e.Message);
+                // MessageBox.Show("更新脚本执行失败:" + e.Message);
                 return !success;
             }
             finally
