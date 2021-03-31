@@ -3,7 +3,6 @@ using C2.Business.WebsiteFeatureDetection;
 using C2.Core;
 using C2.Dialogs.WebsiteFeatureDetection;
 using C2.Utils;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
