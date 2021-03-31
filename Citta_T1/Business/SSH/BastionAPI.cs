@@ -71,15 +71,11 @@ namespace C2.Business.SSH
             return this; 
         }
 
-        public BastionAPI DeleteGambleTask() 
+        public BastionAPI DeleteGambleTaskWorkspace() 
         {
-            if (IsNotSafe(GambleWorkspace))
-                return this;
             // 删除 临时目录
-            RunCommand(String.Format("rm -rf {0};", GambleWorkspace));  
-            // 删除 留存的进程
-            if (IsAliveGambleTask())
-                KillGambleTask();
+            if (IsSafe(GambleWorkspace))
+                RunCommand(String.Format("rm -rf {0};", GambleWorkspace));  
 
             return this; 
         }
@@ -102,10 +98,10 @@ namespace C2.Business.SSH
             return Math.Abs(ts.TotalHours) >= 24 * 3;
         }
 
-        private bool IsNotSafe(String value)
+        private bool IsSafe(String v)
         {
             // 在服务器上删东西 尽量严格, 尤其不能有"空格/"或"空格/空格"
-            return !value.StartsWith("/tmp/iao/search_toolkit/") || Regex.IsMatch(value, @"\s");
+            return v.StartsWith("/tmp/iao/search_toolkit/") && !Regex.IsMatch(v, @"\s");
         }
 
         private bool EnterGambleWorkspace()
@@ -116,8 +112,11 @@ namespace C2.Business.SSH
 
         public BastionAPI KillGambleTask() 
         {
-            String command = String.Format("kill -9 {0}", task.PID);
-            RunCommand(command);
+            if (IsAliveGambleTask()) // 确保不要误删其他复用进程
+            {
+                String command = String.Format("kill -9 {0}", task.PID);
+                RunCommand(command);
+            }
             return this; 
         }
         public String RunGambleTask() 
