@@ -188,7 +188,6 @@
     <Compile Include="Business\SearchToolkit\TaskInfo.cs" />
     <Compile Include="Business\SearchToolkit\TaskManager.cs" />
     <Compile Include="Business\SSH\BastionAPI.cs" />
-    <Compile Include="Business\SSH\SSHClient.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\TOTP.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\WFDResult.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\WFDTaskInfo.cs" />
