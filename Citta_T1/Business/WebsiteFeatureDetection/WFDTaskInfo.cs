@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace C2.Business.WebsiteFeatureDetection
         public static readonly WFDTaskInfo Empty = new WFDTaskInfo();
         public string TaskName;
         public string TaskID;
+        public string TaskCreateTime;
         public string DatasourceFilePath;
         public string ResultFilePath;
         public string PreviewResults;
@@ -28,20 +30,21 @@ namespace C2.Business.WebsiteFeatureDetection
         {
             TaskName = string.Empty;
             TaskID = string.Empty;
+            TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
             DatasourceFilePath = string.Empty;
             ResultFilePath = string.Empty;
             Status = WFDTaskStatus.Null;
             PreviewResults = string.Empty;
         }
 
-        public WFDTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, WFDTaskStatus status, string previewResults = "")
+        public WFDTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, WFDTaskStatus status)
         {
             TaskName = taskName;
             TaskID = taskId;
             DatasourceFilePath = datasourceFilePath;
             ResultFilePath = resultFilePath;
             Status = status;
-            PreviewResults = previewResults;
+            TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
         }
     }
 }

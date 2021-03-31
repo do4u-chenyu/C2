@@ -32,7 +32,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return base.OnOKButtonClick();
             else
             {
-                HelpUtil.ShowMessageBox(respMsg + " 请重试或联系相关负责人。");
+                HelpUtil.ShowMessageBox(respMsg);
                 return false;
             }
         }

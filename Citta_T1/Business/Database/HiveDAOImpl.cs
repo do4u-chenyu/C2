@@ -62,33 +62,18 @@ namespace C2.Database
                     var cursor = con.GetCursor();
                     cursor.Execute(string.Format("use {0}", databaseName));
                     cursor.Execute(DbUtil.PurifyOnelineSQL(sqlText));
-                    IDictionary<string, object> iDict = cursor.FetchOne();
-                    if (iDict != null)
-                    {
-                        // 添加表头和第一行内容
-                        foreach (string key in iDict.Keys)
-                            sb.Append(CutColumnName(key)).Append(OpUtil.TabSeparator);
-                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
-                        sb.Clear();
-                        foreach (string key in iDict.Keys)
-                            sb.Append(iDict[key].ToString()).Append(OpUtil.TabSeparator);
-                        sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
 
-                    }
-
+                    // 获取表头信息
+                    TTableSchema tableSchema = cursor.GetSchema();
+                    foreach(TColumnDesc column in tableSchema.Columns)
+                        sb.Append(CutColumnName(column.ColumnName)).Append(OpUtil.TabSeparator);
+                    sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
+                    // 获取一行行内容
+                    IDictionary<string, object> iDict;
                     while ((iDict = cursor.FetchOne()) != null && totalReturnNum++ < maxReturnNum)
                     {
-                        sb.Clear();
-                        foreach (var key in iDict.Keys)
-                            sb.Append(iDict[key].ToString()).Append(OpUtil.TabSeparator);
-    
-                        if (!iDict.Keys.IsEmpty())
-                        {
-                            sw.WriteLine(sb.ToString().TrimEnd(OpUtil.TabSeparator));
-                            sw.Flush();
-                        }
+                        sw.WriteLine(String.Join(OpUtil.TabSeparatorString, iDict.Values));
                     }
-                 
                 }
             }
             catch (Exception ex)
@@ -124,31 +109,29 @@ namespace C2.Database
                   
                     var cursor = con.GetCursor();
                     cursor.Execute(string.Format("use {0}", databaseName));
+                
                     foreach (var s in sql.Trim().Split(';'))
                     {
                         if (!String.IsNullOrEmpty(s))
                             cursor.Execute(s);
                     }
                     var list = cursor.FetchMany(returnNum);// 查询结果不会为null
-                    if (header && !list.IsEmpty())
-                    {
-                        // 添加表头
-                        IDictionary<string, object> iDict = list[0];
-                        foreach (string key in iDict.Keys)         
-                            sb.Append(CutColumnName(key)).Append(OpUtil.TabSeparator);
-           
-                        if (iDict.Count > 0)
-                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.LineSeparator); // 最后一列多加了个\t，去掉       
 
+
+                    // 获取表头信息
+                    if (header)
+                    {
+                        TTableSchema tableSchema = cursor.GetSchema();
+                        List<string> columnNames = new List<string>();
+                        foreach (TColumnDesc column in tableSchema.Columns)
+                            columnNames.Add(CutColumnName(column.ColumnName));
+                        sb.Append(String.Join(OpUtil.TabSeparatorString, columnNames)).Append(OpUtil.LineSeparator);
                     }
+                   
+                    // 获取一行行内容
                     foreach (IDictionary<string, object> dict in list)
                     {
-                        foreach (var key in dict.Keys)
-                        {
-                            sb.Append(dict[key].ToString()).Append(OpUtil.TabSeparator);
-                        }
-                        if (!dict.Keys.IsEmpty())
-                            sb.Remove(sb.Length - 1, 1).Append(OpUtil.LineSeparator);
+                        sb.Append(String.Join(OpUtil.TabSeparatorString, dict.Values)).Append(OpUtil.LineSeparator);
                     }
                 }
             }

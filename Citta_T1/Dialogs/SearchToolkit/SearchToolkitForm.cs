@@ -1,4 +1,5 @@
-﻿using C2.Utils;
+﻿using C2.Business.SSH;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -8,6 +9,7 @@ namespace C2.SearchToolkit
 {
     public partial class SearchToolkitForm : Form
     {
+        private TaskInfo task;
         private String validateMessage;
         private Control[] inputControls;
         private Dictionary<String, String> taskDict;
@@ -20,6 +22,7 @@ namespace C2.SearchToolkit
 
         private void InitializeInputControls()
         {
+            task = TaskInfo.EmptyTaskInfo;
             validateMessage = String.Empty;
 
             inputControls = new Control[] { 
@@ -42,22 +45,6 @@ namespace C2.SearchToolkit
             
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
         }
-        private void LoadTaskInfo(TaskInfo task)
-        {
-            this.usernameTB.Text = task.Username;
-            this.passwordTB.Text = task.Password;
-            this.taskNameTB.Text = task.TaskName;
-            this.bastionIPTB.Text = task.BastionIP;
-            this.taskModelComboBox.Text = task.TaskModel;
-            this.searchAgentIPTB.Text = task.SearchAgentIP;
-            this.remoteWorkspaceTB.Text = task.RemoteWorkspace;
-
-            this.taskInfoGB.Text = String.IsNullOrEmpty(task.PID) ? "任务状态" : task.PID;
-
-            // TODO 获取远程 任务状态
-            this.taskStatusLabel.Text = task.TaskStatus;
-            this.downloadButton.Enabled = task.TaskStatus == "DONE";
-        }
 
         private TaskInfo GenTaskInfo()
         {
@@ -66,7 +53,7 @@ namespace C2.SearchToolkit
                                             this.taskNameTB.Text,
                                             DateTime.Now.ToString("yyyyMMddHHmmss"), 
                                             this.taskModelComboBox.Text,
-                                            "RUNNING",  // NULL, RUNNING, DONE, FAIL
+                                            "RUNNING",  // NULL, RUNNING, DONE, FAIL, TIMEOUT, CONNECT_FAIL
                                             this.usernameTB.Text,
                                             this.passwordTB.Text,
                                             this.bastionIPTB.Text,
@@ -85,9 +72,20 @@ namespace C2.SearchToolkit
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            this.saveFileDialog1.ShowDialog();
+            if (task == TaskInfo.EmptyTaskInfo)
+                return;
 
-            //TODO 下载
+            this.saveFileDialog.FileName = this.task.TaskName;
+            DialogResult ret = this.saveFileDialog.ShowDialog();
+            if (ret == DialogResult.OK)
+            {
+                String dst = this.saveFileDialog.FileName;
+
+                // TODO ProgressBar 处理
+                using (new GuarderUtil.CursorGuarder())
+                    new BastionAPI(task).DownloadGambleTaskResult(dst);
+            }
+            
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -121,7 +119,7 @@ namespace C2.SearchToolkit
 
         private String GenWorkspace()
         {
-            return @"/tmp/iao/search_toolkit/" + taskDict[this.taskModelComboBox.Text];
+            return TaskInfo.SearchWorkspace + taskDict[this.taskModelComboBox.Text];
         }
 
         private bool ValidateIP(String value)
@@ -200,13 +198,38 @@ namespace C2.SearchToolkit
             return this.ShowDialog() == DialogResult.OK ? GenTaskInfo() : TaskInfo.EmptyTaskInfo;
         }
 
-        public DialogResult ShowTaskInfoDialog(TaskInfo taskInfo)
+        private void UpdateTaskInfo(TaskInfo task)
+        {
+            this.task = task;
+            // 更新任务状态
+            if (task.TaskStatus != "DONE")
+            {
+                task.TaskStatus = new BastionAPI(task).Login().QueryGambleTaskStatus();
+                task.Save();
+            }
+               
+            // 更新界面元素    
+            this.usernameTB.Text = task.Username;
+            this.passwordTB.Text = task.Password;
+            this.taskNameTB.Text = task.TaskName;
+            this.bastionIPTB.Text = task.BastionIP;
+            this.taskModelComboBox.Text = task.TaskModel;
+            this.searchAgentIPTB.Text = task.SearchAgentIP;
+            this.remoteWorkspaceTB.Text = task.RemoteWorkspace;
+            this.taskInfoGB.Text = String.IsNullOrEmpty(task.PID) ? "任务状态" : task.PID;
+            this.taskStatusLabel.Text = task.TaskStatus;
+            this.downloadButton.Enabled = task.TaskStatus == "DONE";
+        }
+
+        public DialogResult ShowTaskInfoDialog(TaskInfo task)
         {
             taskInfoGB.Visible = true;
             confirmButton.Enabled = false;
 
-            LoadTaskInfo(taskInfo);
-            ReadOnlyInputControls();   // 展示任务信息时, 不需要更改
+            // 更新任务状态和界面元素
+            UpdateTaskInfo(task);
+            // 展示任务信息时, 不需要更改
+            ReadOnlyInputControls();  
             return this.ShowDialog();
         }
     }

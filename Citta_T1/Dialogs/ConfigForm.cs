@@ -535,10 +535,10 @@ namespace C2.Dialogs
             string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
             this.currentVersion.Text = "V" + currentVersion;
             this.newSoftwareVersion = NewSoftewareVersion();
+            if (IsFormNotExist())
+                return;
             if (newSoftwareVersion.Contains(currentVersion))
-            {
-                if (IsFormNotExist())
-                    return;
+            {             
                 this.Invoke((EventHandler)(delegate
                  {
                      this.SuspendLayout();
@@ -565,8 +565,6 @@ namespace C2.Dialogs
                     GetNewVersionFail();
                     return;
                 }
-                if (IsFormNotExist())
-                    return;
                 this.Invoke((EventHandler)(delegate
                 {
                     this.SuspendLayout();
@@ -580,8 +578,6 @@ namespace C2.Dialogs
         }
         private void GetNewVersionFail()
         {
-            if (IsFormNotExist())
-                return;
             this.Invoke((EventHandler)(delegate
             {
                 this.currentModelRunLab.Visible = false;
@@ -671,10 +667,10 @@ namespace C2.Dialogs
                 }
                 catch 
                 { }
-                return;
+               
             }
-            // 下载失败，删除文件
-            this.progressBar.Status = "下载失败，请检查网络重新下载";
+            else
+                this.progressBar.Status = "下载失败，请检查网络重新下载";
 
         }
         private void FormClosedEventHandler(object sender, FormClosedEventArgs e)

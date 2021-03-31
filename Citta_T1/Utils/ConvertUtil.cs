@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -57,6 +58,18 @@ namespace C2.Utils
             {
                 return false;
             }
+        }
+
+        public static DateTime TryParseDateTime(String s, String format)
+        {
+            try 
+            {
+                return DateTime.ParseExact(s, format, CultureInfo.CurrentCulture);
+            } 
+            catch 
+            {
+                return DateTime.MinValue;
+            }  
         }
 
         public static bool ControlTextTryParseInt(Control ct)
@@ -131,6 +144,11 @@ namespace C2.Utils
             if (chineseRatio == 1 && otherRatio == 0)   // chineseRatio = 1 && otherRatio = 0
                 addValue -= 10;
             return padding * 2 + chineseRatio * 12 + otherRatio * 7 + upperRatio * 3 + addValue;
+        }
+
+        public static string TransToUniversalTime(DateTime time)
+        {
+            return ((time.ToUniversalTime().Ticks - 621355968000000000) / 10000000).ToString();
         }
     }
 }

@@ -9,53 +9,38 @@ namespace C2.SearchToolkit
 {
     class TaskManager
     {
-        private String home;
-        private List<TaskInfo> tasks;
+        private readonly List<TaskInfo> tasks;
 
         public TaskManager() 
         {
             tasks = new List<TaskInfo>();
-            home = Global.SearchToolkitPath;
         }
 
         public IEnumerable<TaskInfo> Tasks { get => tasks; }
 
-        // 运行Task,成功返回TaskID，失败String.Empty
         public bool RunTask(TaskInfo task) 
         {
             BastionAPI api = new BastionAPI(task);
 
             task.PID = api.Login()
-                             .UploadGambleScript()
-                             .CreateGambleTaskDirectory()
-                             .RunGambleTask();
+                          .DeleteGambleTaskWorkspace()
+                          .CreateGambleTaskDirectory()
+                          .UploadGambleScript()
+                          .RunGambleTask();
 
-            return true;
-        }
-        public bool SaveTask(TaskInfo task)
-        {   // TODO 文件名重复问题, 需要加入随机数
-            String taskFFP = Path.Combine(home, task.BcpFilename);
-            try
-            {
-                if (!Directory.Exists(home))
-                    FileUtil.CreateDirectory(home);
-
-                using (StreamWriter sw = new StreamWriter(taskFFP))
-                    sw.WriteLine(task.ToString());
-            } catch (Exception ex)
-            {
-                task.LastErrorMsg = ex.Message;
+            if (task.PID == String.Empty)
                 return false;
-            }
-            
+
             tasks.Add(task);
-            return true;
+            return task.Save();
         }
+
 
         private String[] ListTaskBcpFiles()
         {
-            return FileUtil.TryListFiles(home, "*.bcp");
+            return FileUtil.TryListFiles(Global.SearchToolkitPath, "*.bcp");
         }
+
         private TaskInfo LoadTaskBcp(String taskFFP)
         {
             try 
@@ -82,15 +67,12 @@ namespace C2.SearchToolkit
 
         public bool DeleteTask(TaskInfo task) 
         {
-            // TODO 删除远程结果文件
             BastionAPI api = new BastionAPI(task);
 
             api.Login()
-               .KillGambleTask(task.PID)
-               .DeleteGambleTaskResult();
-
-            String taskFFP = Path.Combine(home, task.BcpFilename);   
-            return tasks.Remove(task) && FileUtil.DeleteFile(taskFFP); 
+               .DeleteGambleTaskWorkspace()
+               .KillGambleTask(); 
+            return tasks.Remove(task) && FileUtil.DeleteFile(task.BcpFFP); 
         }
     }
 }

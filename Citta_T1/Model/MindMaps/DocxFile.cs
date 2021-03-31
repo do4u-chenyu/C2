@@ -8,15 +8,10 @@ using NPOI.XWPF.UserModel;
 
 namespace C2.Model.MindMaps
 {
-    class DocxFile
+    public class DocxFile
     {
-       //TODO Save
-    }
-
-    public class DocxFileSaver 
-    {
-        private int imgNo = 0;
-        private void WriteNoteToDocx(Widget topicNote, XWPFDocument docx) 
+        private int imgNo;
+        private void WriteNoteToDocx(Widget topicNote, XWPFDocument docx)
         {
             if (topicNote != null)
             {
@@ -27,11 +22,11 @@ namespace C2.Model.MindMaps
                 xwpfRun.SetText(topicNote.Text);
             }
         }
-        private Size RotateImageSize(int width, int height) 
+        private Size RotateImageSize(int width, int height)
         {
             return width > height ? new Size(768, height * 768 / width) : new Size(width * 768 / height, 768);
         }
-        private void WriteImgToDocx(PictureWidget pictureWidget, XWPFDocument docx,int imgNo) //TODO
+        private void WriteImgToDocx(PictureWidget pictureWidget, XWPFDocument docx, int imgNo) //TODO
         {
             string picturePath = pictureWidget.ImageUrl;
             if (!File.Exists(picturePath))
@@ -57,68 +52,79 @@ namespace C2.Model.MindMaps
                 xwpfRun.SetText("图" + imgNo);
                 fileStream.Close();
             }
-            catch 
-            { 
+            catch
+            {
                 // TODO
             }
-            
+
         }
 
-        private void WriteTitleToDocx(string title, XWPFDocument docx, int layer) 
-        {   
+        private void WriteTitleToDocx(string title, XWPFDocument docx, int layer, string serialNumber)
+        {
             XWPFParagraph paragraphTitle = docx.CreateParagraph();
-
-            paragraphTitle.Style = layer >= 4 ? "a0" : layer.ToString();
+            
+            paragraphTitle.Style = layer > 4 ? "a0" : layer.ToString();
 
             XWPFRun xwpfRun = paragraphTitle.CreateRun();
-            if (layer >= 4)
+            if (layer > 4 )
+            {
                 xwpfRun.FontFamily = "宋体";
-            xwpfRun.SetText(title);
+                xwpfRun.SetText(title);
+            }
+            if(layer == 1) 
+            {
+                xwpfRun.SetText(title);
+            }
+            else
+            {
+                xwpfRun.SetText(string.Format("{0} {1}", serialNumber, title));
+            }
         }
 
-        private Widget GetTopicNote(Topic topic) 
+        private Widget GetTopicNote(Topic topic)
         {
             return topic.FindWidget<NoteWidget>();
         }
-        private PictureWidget[] GetTopicPictures(Topic topic) 
+        private PictureWidget[] GetTopicPictures(Topic topic)
         {
             return topic.FindWidgets<PictureWidget>(e => File.Exists(e.ImageUrl) && (e.Data.Width > 128 || e.Data.Height > 128));
         }
-        private void WriteToDocx(Topic topic, XWPFDocument DocxExample, XWPFDocument docx) 
+        private void WriteToDocx(Topic topic, XWPFDocument DocxExample, XWPFDocument docx,string serialNumber = "1") 
         {
             XWPFStyles newStyles = docx.CreateStyles();
             newStyles.SetStyles(DocxExample.GetCTStyle());//复制模板格式
 
             //写入标题
-            WriteTitleToDocx(topic.Text, docx, topic.GetDepth(topic));
-          
+            WriteTitleToDocx(topic.Text, docx, topic.GetDepth(topic), serialNumber);
+
             //在标题后写入内容
-            Widget topicNote = GetTopicNote(topic);
-            WriteNoteToDocx(topicNote, docx);
+            
+            WriteNoteToDocx(GetTopicNote(topic), docx);
 
             //在内容后插入图片
-           
-            PictureWidget[] topicPictures = GetTopicPictures(topic);
-            foreach(var pictureWidget in topicPictures)
+            foreach (var pictureWidget in GetTopicPictures(topic))
             {
                 WriteImgToDocx(pictureWidget, docx, imgNo++);
             }
-            
-            
-            
-            foreach (Topic subTopic in topic.Children)
+
+            string nSerialNumber;
+            for (int j =1; j < topic.Children.Count+1; j++) 
             {
-                WriteToDocx(subTopic, DocxExample, docx);
+                if (topic.IsRoot)
+                    nSerialNumber = (j).ToString();
+                else
+                    nSerialNumber = string.Format("{0}.{1}",serialNumber, j.ToString());
+                WriteToDocx(topic.Children[j - 1], DocxExample, docx, nSerialNumber);
             }
-            
+
 
         }
-        public void Save(Topic topic , string fileName) //TODO
+        public void Save(Topic topic, string fileName) 
         {
             try
             {
-                XWPFDocument DocxExample;//TODO
-                using (var dotStream = new FileStream(Path.Combine(Application.StartupPath, "Resources", "DocxFileExp", "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
+                XWPFDocument DocxExample;
+                using (var dotStream = new FileStream(Path.Combine(Application.StartupPath, "Resources", "Templates", "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
                 {
 
                     DocxExample = new XWPFDocument(dotStream);
@@ -128,21 +134,32 @@ namespace C2.Model.MindMaps
                 using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
                     imgNo = 0;
-                    
+
                     XWPFDocument docx = new XWPFDocument();
                     WriteToDocx(topic, DocxExample, docx);
-                    docx.Write(fileStream);
-                    docx.Close();
-                    fileStream.Close();
+                    try
+                    {
+                        docx.Write(fileStream);
+                        docx.Close();
+                        fileStream.Close();
+                    }
+                    catch 
+                    {
+                        docx.Close();
+                        fileStream.Close();
+                    }
                 }
 
                 DocxExample.Close();
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show("错误:"+ ex.ToString());
+                MessageBox.Show("错误:" + ex.ToString());
             }
-        }
+        
     }
+}
+
+    
 }

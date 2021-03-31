@@ -5,13 +5,7 @@ using C2.Database;
 using C2.Model;
 using C2.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Dialogs
@@ -25,16 +19,18 @@ namespace C2.Dialogs
         {
             InitializeComponent();
             this.databaseTypeComboBox.SelectedIndex = 0;
+            if (linkButton != null)
+            {
+                LinkButton = linkButton;
+                this.databaseTypeComboBox.Enabled = false;
+            }
             if (databaseInfo != null)
             {
                 DatabaseInfo = databaseInfo;
                 InitializeContent();
             }
             Mode = mode;
-            if (linkButton != null)
-            {
-                LinkButton = linkButton;
-            }
+            
         }
 
         public void InitializeContent()

@@ -3,7 +3,6 @@ using C2.Business.WebsiteFeatureDetection;
 using C2.Core;
 using C2.Dialogs.WebsiteFeatureDetection;
 using C2.Utils;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,32 +24,10 @@ namespace C2.Controls.C1.Left
             var dialog = new AddWFDTask();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                AddTask(dialog.TaskName, dialog.FilePath);
+                //添加按钮并持久化到本地
+                AddInnerButton(new WebsiteFeatureDetectionButton(dialog.TaskInfo));
+                SaveWFDTasksToXml();
             }
-        }
-
-        public void AddTask(string taskName, string filePath)
-        {
-            //TODO phx 需要问一下这个分类接口，返回状态的时间，立即返回？还是查完才返回？
-            string taskId = string.Empty;
-            string respMsg = string.Empty;
-
-            List<string> urls = new List<string>() { "http://05246767.com/", "http://a1.76688.me/", "http://admin.haishen6688.com/" };
-            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-            {
-                WFDWebAPI.GetInstance().StartTask(urls, out respMsg, out taskId);
-            }
-
-            HelpUtil.ShowMessageBox(respMsg);
-            string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网络侦察兵");
-            string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.bcp", taskName, taskId));
-            FileUtil.CreateDirectory(destDirectory);
-            using (File.Create(destFilePath)) { }
-
-            //添加按钮并持久化到本地
-            WFDTaskInfo taskInfo = new WFDTaskInfo(taskName, taskId, filePath, destFilePath, WFDTaskStatus.Null);
-            AddInnerButton(new WebsiteFeatureDetectionButton(taskInfo));
-            SaveWFDTasksToXml();
         }
 
         #region 持久化保存/加载
@@ -64,18 +41,25 @@ namespace C2.Controls.C1.Left
             XmlDocument xDoc = new XmlDocument();
             XmlElement rootElement = xDoc.CreateElement("WFDTasks");
             xDoc.AppendChild(rootElement);
+
+            SaveUserInfo(rootElement);
             foreach (WebsiteFeatureDetectionButton button in buttons)
-                SaveSingleTask(button.TaskInfo, xDoc);
+                SaveSingleTask(button.TaskInfo, rootElement);
+
             // 保存时覆盖原文件
             xDoc.Save(xmlPath);
         }
-
-        private void SaveSingleTask(WFDTaskInfo taskInfo, XmlDocument xDoc)
+        private void SaveUserInfo(XmlNode node)
         {
-            XmlNode node = xDoc.SelectSingleNode("WFDTasks");
-            ModelXmlWriter mxw = new ModelXmlWriter("task", node);
-            mxw.Write("taskName", taskInfo.TaskName)
+            new ModelXmlWriter("userInfo", node).Write("userName", WFDWebAPI.GetInstance().UserName);
+        }
+
+         private void SaveSingleTask(WFDTaskInfo taskInfo, XmlNode node)
+         {
+            new ModelXmlWriter("task", node)
+               .Write("taskName", taskInfo.TaskName)
                .Write("taskId", taskInfo.TaskID)
+               .Write("taskCreateTime", taskInfo.TaskCreateTime)
                .Write("datasourceFilePath", taskInfo.DatasourceFilePath)
                .Write("resultFilePath", taskInfo.ResultFilePath)
                .Write("status", taskInfo.Status);
@@ -87,33 +71,48 @@ namespace C2.Controls.C1.Left
             if (!File.Exists(xmlPath))
                 return;
 
+            XmlDocument xDoc = new XmlDocument(); ;
             try
             {
-                XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(xmlPath);
-
-                foreach (XmlNode xn in xDoc.SelectNodes(@"WFDTasks/task")) //要学着尽量利用XPath自己的能力
-                    LoadSingleTask(xn);
             }
             catch (Exception ex)
             {
                 HelpUtil.ShowMessageBox("侦察兵任务加载时发生错误:" + ex.Message);
             }
+
+            LoadUserInfo(xDoc.SelectSingleNode(@"WFDTasks/userInfo"));
+            foreach (XmlNode xn in xDoc.SelectNodes(@"WFDTasks/task")) //要学着尽量利用XPath自己的能力
+                LoadSingleTask(xn);
+
             return;
+        }
+        private void LoadUserInfo(XmlNode xn)
+        {
+            try
+            {
+                WFDWebAPI.GetInstance().UserName = xn.SelectSingleNode("userName").InnerText;
+            }
+            catch { }
         }
 
         private void LoadSingleTask(XmlNode xn)
         {
-            WFDTaskInfo taskInfo = new WFDTaskInfo
+            try
             {
-                TaskName = xn.SelectSingleNode("taskName").InnerText,
-                TaskID = xn.SelectSingleNode("taskId").InnerText,
-                DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
-                ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
-                Status = WFDTaskStatusEnum(xn.SelectSingleNode("status").InnerText)
-            };
+                WFDTaskInfo taskInfo = new WFDTaskInfo
+                {
+                    TaskName = xn.SelectSingleNode("taskName").InnerText,
+                    TaskID = xn.SelectSingleNode("taskId").InnerText,
+                    TaskCreateTime = xn.SelectSingleNode("taskCreateTime").InnerText,
+                    DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
+                    ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
+                    Status = WFDTaskStatusEnum(xn.SelectSingleNode("status").InnerText)
+                };
 
-            AddInnerButton(new WebsiteFeatureDetectionButton(taskInfo));
+                AddInnerButton(new WebsiteFeatureDetectionButton(taskInfo));
+            }
+            catch {}
         }
 
         private WFDTaskStatus WFDTaskStatusEnum(string encoding, WFDTaskStatus defaultStatus = WFDTaskStatus.Null)
@@ -225,40 +224,10 @@ namespace C2.Controls.C1.Left
 
             private void ShowDialogTaskInfo()
             {
-                //TODO phx 查看结果前向api发起查看任务状态请求,结果在这里做处理并更新button对应信息，把button更新之后的结果展示在新窗口里
-                //如果task本身是done状态，不发起查询
-                WFDWebAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID, out string respMsg, out string datas);
-                UpdateTaskInfoByResp(respMsg, datas);
-
                 var dialog = new WFDTaskResult(TaskInfo);
                 if (dialog.ShowDialog() == DialogResult.OK)
                     return;
             }
-
-            private void UpdateTaskInfoByResp(string respMsg, string datas)
-            {
-                if (respMsg == "success")// && TaskInfo.Status != WFDTaskStatus.Done 考虑是否每次都刷新
-                {
-                    TaskInfo.Status = WFDTaskStatus.Done;
-                    TaskInfo.PreviewResults = DealDatas(TaskInfo.ResultFilePath, datas);
-                }
-                else if (respMsg == "wait")
-                    TaskInfo.Status = WFDTaskStatus.Running;
-                else if (respMsg == "fail")
-                    TaskInfo.Status = WFDTaskStatus.Failed;
-            }
-
-            private string DealDatas(string resultFilePath, string datas)
-            {
-
-                //TODO 解析正确结果，同时写进本地文件，返回预览字符串
-                //List<string> dataList = JsonConvert.DeserializeObject<List<string>>(datas);
-                StreamWriter sw = new StreamWriter(resultFilePath);
-                sw.WriteLine(datas);
-                sw.Close();
-                return datas;
-            }
-
         }
         #endregion
     }

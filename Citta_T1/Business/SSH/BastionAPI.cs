@@ -1,89 +1,170 @@
-﻿using C2.SearchToolkit;
+﻿using C2.Core;
+using C2.SearchToolkit;
+using C2.Utils;
+using Renci.SshNet;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace C2.Business.SSH
 {
-    class BastionAPI
+    public class BastionAPI
     {
-        private String username;
-        private String password;
-        private String bastionIP;
-        private String searchAgentIP;
-
-        private String linuxWorkspace;
-
-        private SSHClient ssh;
-
-        // {workspace}/pid_taskcreatetime/result
-        // {workspace}/pid_taskcreatetime/script/
-        private String gambleScript = "batchquery_db_accountPass_version20210324.py";
-        private String importSearchEnv = @". /home/search/search_profile;";
-        public BastionAPI(String username, String password, String bIP, String sIP, String dir) 
+        private readonly SshClient ssh;
+        private readonly TaskInfo task;
+        private String GambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
+        // {workspace}/pid_taskcreatetime
+        private String GambleWorkspace { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.PID, task.TaskCreateTime); }
+        public BastionAPI(TaskInfo task) 
         {
-            this.username = username;
-            this.password = password;
-            this.bastionIP = bIP;
-            this.searchAgentIP = sIP;
-            this.linuxWorkspace = dir;
-
-            this.ssh = new SSHClient(); 
+            this.task = task;
+            this.ssh = new SshClient(new PasswordConnectionInfo("114.55.248.85", "root", "aliyun.123")); 
         }
 
-        public BastionAPI(TaskInfo task) : this(task.Username, task.Password, task.BastionIP, task.SearchAgentIP, task.RemoteWorkspace)
-        { }
+        public void Close()
+        {
+            if (ssh != null && ssh.IsConnected)
+                ssh.Disconnect();
+        }
 
         public BastionAPI Login() 
         {
             // 这里通过抛出异常来报错
-            ssh.Connect(this.username, this.password, this.bastionIP, this.searchAgentIP);
+            ssh.Connect();
             return this; 
         }
 
-        public String GambleTaskPID (String filter) 
+        private String RunCommand(String command)
         {
-            String command = String.Format(@"ps aux | grep -i python | grep {0} | grep {1} | awk {{print $4}}", gambleScript, filter);
+            return ssh.IsConnected ? ssh.RunCommand(command).Result : String.Empty;
+        }
+
+        // 执行命令且必须成功返回
+        private bool SuccessRunCommand(String command)
+        {
+            return ssh.IsConnected && ssh.RunCommand(command).ExitStatus == 0;
+        }
+
+        public String DownloadGambleTaskResult(String d) 
+        {
+            // 000000_queryResult_db_开始时间_结束时间.tgz
+            String s = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
+            // TODO s 下载 到 d 中
             return String.Empty; 
         }
 
-        public String DownloadGambleTaskResult() { return String.Empty; }
-
-        public String DeleteGambleTaskResult() 
-        { 
-            return String.Empty; 
-        }
-
-        public String GambleTaskStatus(String pid) 
+        public BastionAPI UploadGambleScript() 
         {
-            // 1) pid不存在且有结果文件时, 为运行成功
-            // 2) pid不存在但没有结果文件时, 为运行失败
-            // 3) pid存在但没有结果文件且在未超时范围内, 为正在运行
-            // 4) pid存在但有结果文件, 假定运行成功
-            // 以上pid在获取时同时要判断执行cmd是否为模型脚本
-            String command = String.Format(@"ps aux | grep -i python | grep {0} | grep {1}", gambleScript, pid);
-            return String.Empty; 
-        }
-
-        public BastionAPI KillGambleTask(String pid) 
-        {
-            String command = String.Format("kill -9 {0}", pid);
+            String s = Global.GambleScriptPath;
+            String d = GambleWorkspace + "/" + GambleScript;
+            // TODO s 上传 到 d 中
             return this; 
         }
 
+        public BastionAPI DeleteGambleTaskWorkspace() 
+        {
+            // 删除 临时目录
+            if (IsSafe(GambleWorkspace))
+                RunCommand(String.Format("rm -rf {0};", GambleWorkspace));  
+
+            return this; 
+        }
+
+        private bool IsAliveGambleTask()
+        {
+            String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, GambleScript));
+            return result.Contains(GambleScript);
+        }
+
+        private bool IsGambleResultFileReady()
+        {
+            String ffp = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
+            String command = String.Format("ls {0}", ffp);
+            return SuccessRunCommand(command);
+        }
+
+        private bool IsTaskTimeout()
+        {
+            DateTime born = ConvertUtil.TryParseDateTime(task.TaskCreateTime, "yyyyMMddHHmmss");
+            TimeSpan ts = DateTime.Now.Subtract(born);
+            return Math.Abs(ts.TotalHours) >= 24 * 3;
+        }
+
+        private bool IsSafe(String v)
+        {
+            // 在服务器上删东西 尽量严格, 尤其不能有"空格/"或"空格/空格"
+            return v.StartsWith("/tmp/iao/search_toolkit/") && !Regex.IsMatch(v, @"\s");
+        }
+
+        private bool EnterGambleWorkspace()
+        {
+            String command = String.Format("cd {0}", GambleWorkspace);
+            return SuccessRunCommand(command);
+        }
+
+        public BastionAPI KillGambleTask() 
+        {
+            if (IsAliveGambleTask()) // 确保不要误删其他复用进程
+            {
+                String command = String.Format("kill -9 {0}", task.PID);
+                RunCommand(command);
+            }
+            return this; 
+        }
         public String RunGambleTask() 
         {
-            String command = String.Format(importSearchEnv + "nohup python {0} && disown;", gambleScript);
-            return String.Empty; 
+            if (!EnterGambleWorkspace())
+                return String.Empty;
+
+            String command = String.Format("python {0} && disown;", GambleScript);
+            String ret = RunCommand(command);
+            Match match = Regex.Match(ret, @"\[\d+\]\s*(\d\d*)");
+            if (match.Success && match.Groups[1].Success)
+                return match.Groups[1].Value;
+            return String.Empty;
         }
 
-        public BastionAPI UploadGambleScript() { return this; }
         public BastionAPI CreateGambleTaskDirectory() 
         {
-            String command = String.Format("mkdir -p {0}", linuxWorkspace);
+            String command = String.Format("mkdir -p {0}", GambleWorkspace);
+            RunCommand(command);
             return this; 
+        }
+
+        public String QueryGambleTaskStatus()
+        {
+            bool isTimeout = IsTaskTimeout();
+            bool isAlive = IsAliveGambleTask();
+            bool isGRFReady = IsGambleResultFileReady();
+
+            // 1) pid不存在且有结果文件时, 为运行成功
+            if (!isAlive && isGRFReady)
+                return "DONE";
+
+            // 2) pid不存在且没有结果文件时, 为运行失败
+            if (!isAlive && !isGRFReady)
+                return "FAIL";
+
+            // 3) pid存在且没有结果文件且在未超时范围内, 为正在运行
+            if (isAlive && !isGRFReady && !isTimeout)
+                return "RUNNING";
+
+            // 4) pid存在且没有结果文件且超出运行时间(24 * 4小时), 为超时
+            if (isAlive && !isGRFReady && isTimeout)
+                return "TIMEOUT";
+
+            // 5) pid存在但有结果文件, 这种情况按道理不应该发生, 暂时假定运行成功
+            if (isAlive && isGRFReady)
+                return "DONE";
+
+            // 其他情况, 按道理不应该发生, 全部默认为失败
+            return "FAIL";
+        }
+
+        public String GambleTaskPID()
+        {
+            String command = String.Format(@"ps aux | grep -i python | grep {0} | awk {{print $2}}", GambleScript);
+            String result = RunCommand(command);
+            return Regex.IsMatch(result, @"^\d+$") ? result : String.Empty;
         }
 
         public String YellowTaskPID() { return String.Empty; }
