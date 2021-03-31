@@ -2856,7 +2856,9 @@
     </Content>
     <Content Include="Resources\resource.h" />
     <None Include="Resources\tab_button.png" />
-    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_version20210324.py" />
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Script\IAO_Web_validation\global_method.py" />
     <Content Include="Resources\Script\IAO_Web_validation\step1_unzip\step1_unzip.py" />
     <Content Include="Resources\Script\IAO_Web_validation\step2_filter\keywords\neg_keywords.txt" />

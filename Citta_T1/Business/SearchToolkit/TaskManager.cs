@@ -26,8 +26,9 @@ namespace C2.SearchToolkit
             BastionAPI api = new BastionAPI(task);
 
             task.PID = api.Login()
-                          .UploadGambleScript()
+                          .DeleteGambleTaskWorkspace()
                           .CreateGambleTaskDirectory()
+                          .UploadGambleScript()
                           .RunGambleTask();
 
             return task.PID != String.Empty;
@@ -86,7 +87,8 @@ namespace C2.SearchToolkit
             BastionAPI api = new BastionAPI(task);
 
             api.Login()
-               .DeleteGambleTask();
+               .DeleteGambleTaskWorkspace()
+               .KillGambleTask();
 
             String taskFFP = Path.Combine(home, task.BcpFilename);   
             return tasks.Remove(task) && FileUtil.DeleteFile(taskFFP); 

@@ -160,6 +160,7 @@ namespace C2.Core
         public const int ChartNum = 3;
         public static string LocalPluginsPath = Path.Combine(Application.StartupPath, "plugins");
         public static string SoftwareSavePath = Path.Combine(Application.StartupPath, "update", "install");
+        public static string GambleScriptPath = Path.Combine(Application.StartupPath, "Resources", "Script", "IAO_Search_gamble", "batchquery_db_accountPass_C2_20210324.py");
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
         public const string DLLHostUrl = @"http://218.94.117.234:8484/C2Plugins/";
         public const string SoftwareUrl = @"http://218.94.117.234:8484/C2Software/";
