@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ namespace C2.Business.WebsiteFeatureDetection
         {
             TaskName = string.Empty;
             TaskID = string.Empty;
-            TaskCreateTime = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds).ToString();
+            TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
             DatasourceFilePath = string.Empty;
             ResultFilePath = string.Empty;
             Status = WFDTaskStatus.Null;
@@ -43,7 +44,7 @@ namespace C2.Business.WebsiteFeatureDetection
             DatasourceFilePath = datasourceFilePath;
             ResultFilePath = resultFilePath;
             Status = status;
-            TaskCreateTime = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds).ToString();
+            TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
         }
     }
 }
