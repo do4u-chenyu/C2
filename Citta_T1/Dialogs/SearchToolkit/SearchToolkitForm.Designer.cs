@@ -58,7 +58,7 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.taskInfoGB.SuspendLayout();
@@ -391,8 +391,9 @@
             // 
             // saveFileDialog1
             // 
-            this.saveFileDialog1.FileName = "全文模型结果";
-            this.saveFileDialog1.Filter = "压缩包文件 (*.zip)|*.tar.gz|Bcp文件|*.bcp";
+            this.saveFileDialog.FileName = "全文模型结果";
+            this.saveFileDialog.Filter = "tgz压缩包 (*.tgz)|*.tgz|tar.gz压缩包|*.tar.gz|zip压缩包|*.zip|所有文件|*.*";
+            this.saveFileDialog.Title = "全文模型结果下载";
             // 
             // SearchToolkitForm
             // 
@@ -452,6 +453,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

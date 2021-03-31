@@ -1,6 +1,7 @@
 ﻿using C2.Core;
 using C2.Utils;
 using System;
+using System.IO;
 using System.Text;
 
 namespace C2.SearchToolkit
@@ -19,7 +20,10 @@ namespace C2.SearchToolkit
 
         public bool IsEmpty() { return this == EmptyTaskInfo; }
 
-        public String BcpFilename { get => String.Format("{0}_{1}_{2}.bcp", TaskName, PID, TaskCreateTime); }
+        public String BcpFFP { 
+            get => System.IO.Path.Combine(
+                Global.SearchToolkitPath, 
+                String.Format("{0}_{1}_{2}.bcp", TaskName, PID, TaskCreateTime)); }
 
         private static readonly String HeadColumnLine = String.Join(OpUtil.TabSeparatorString, new string[] {
             "PID" ,
@@ -45,7 +49,7 @@ namespace C2.SearchToolkit
 
         public String TaskModel { get; private set; }
 
-        public String TaskStatus { get; private set; }
+        public String TaskStatus { get; set; } // 状态后期需要更新
 
         public String PID { get; set; } // PID要在远程实际创建后才有
 
@@ -123,6 +127,25 @@ namespace C2.SearchToolkit
             };
             
             return taskInfo;
+        }
+
+        public bool Save() 
+        {
+            try
+            {
+                String path = Path.GetDirectoryName(BcpFFP);
+                if (!Directory.Exists(path))
+                    FileUtil.CreateDirectory(path);
+
+                using (StreamWriter sw = new StreamWriter(BcpFFP))
+                    sw.WriteLine(ToString());
+            }
+            catch (Exception ex)
+            {
+                LastErrorMsg = ex.Message;
+                return false;
+            }
+            return true;
         }
 
     }

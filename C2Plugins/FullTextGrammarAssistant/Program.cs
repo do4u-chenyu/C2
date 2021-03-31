@@ -16,7 +16,7 @@ namespace FullTextGrammarAssistant
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new 全文语法查询助手());
+            Application.Run(new Form1());
         }
     }
 }
