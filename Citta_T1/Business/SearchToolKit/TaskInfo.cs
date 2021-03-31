@@ -11,7 +11,7 @@ namespace C2.SearchToolkit
         public static readonly String GunModelDescription = "胶水系统全文涉枪模型";
         public static readonly String YellowModelDescription = "胶水系统全文涉黄模型";
         public static readonly String PlaneModelDescription = "胶水系统飞机场模型";
-
+        public static readonly String SearchWorkspace = @"/tmp/iao/search_toolkit/";
 
         public static readonly TaskInfo EmptyTaskInfo = new TaskInfo();
 
