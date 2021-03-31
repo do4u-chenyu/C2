@@ -74,10 +74,9 @@ namespace C2.Business.WebsiteFeatureDetection
         }
 
         // 网站分类
-        public bool StartTask(List<string> urls, out string respMsg, out string taskId)
+        public bool StartTask(List<string> urls, out WFDAPIResult result)
         {
-            respMsg = string.Empty;
-            taskId = string.Empty;
+            result = new WFDAPIResult();
 
             if (!ReAuthBeforeQuery())
                 return false;
@@ -87,34 +86,34 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 Response resp = httpHandler.Post(ProClassifierUrl, pairs, Token);
                 if (resp.StatusCode == HttpStatusCode.Unauthorized)
-                    respMsg = "TokenError";
+                    result.RespMsg = "TokenError";
                 if (resp.StatusCode != HttpStatusCode.OK)
-                    respMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+                    result.RespMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
 
                 if (resDict.TryGetValue("request_condition", out string status) && status == "success")
                 {
-                    resDict.TryGetValue("TASKID", out taskId);
-                    respMsg = status;
+                    resDict.TryGetValue("TASKID", out string datas);
+                    result.Datas = datas;
+                    result.RespMsg = status;
                 }
                 else if(resDict.TryGetValue("error", out string error))
-                    respMsg = error;
+                    result.RespMsg = error;
                 else
-                    respMsg = "任务下发失败。";
+                    result.RespMsg = "任务下发失败。";
             }
             catch (Exception ex)
             {
-                respMsg = ex.Message;
+                result.RespMsg = ex.Message;
             }
             return true;
         }
 
         // 根据任务id返回任务结果
-        public bool QueryTaskResultsById(string taskId, out string respMsg, out string datas, string flag = "1")
+        public bool QueryTaskResultsById(string taskId, out WFDAPIResult result, string flag = "1")
         {
-            datas = string.Empty;
-            respMsg = string.Empty;
+            result = new WFDAPIResult();
 
             if (!ReAuthBeforeQuery())
                 return false;
@@ -125,53 +124,56 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 Response resp = httpHandler.Post(TaskResultUrl, pairs, Token);
                 if (resp.StatusCode == HttpStatusCode.Unauthorized)
-                    respMsg = "TokenError";
+                    result.RespMsg = "TokenError";
                 if (resp.StatusCode != HttpStatusCode.OK)
-                    respMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+                    result.RespMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
 
                 if (resDict.TryGetValue("operate_status", out string status))
                 {
-                    resDict.TryGetValue("data", out datas);
-                    respMsg = status;
+                    resDict.TryGetValue("data", out string datas);
+                    result.Datas = datas;
+                    result.RespMsg = status;
                 }
                 else
-                    respMsg = "任务结果查询失败。";
+                    result.RespMsg = "任务结果查询失败。";
             }
             catch (Exception ex)
             {
-                respMsg = ex.Message;
+                result.RespMsg = ex.Message;
             }
             return true;
         }
 
         // 根据任务id返回异常网站截图
-        public void DownloadScreenshotById(string screenshotId, out string respMsg, out string datas)
+        public void DownloadScreenshotById(string screenshotId, out WFDAPIResult result)
         {
-            datas = string.Empty;
+            result = new WFDAPIResult();
+
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "screenshot_id", screenshotId } };
             try
             {
                 Response resp = httpHandler.Post(ScreenshotUrl, pairs, Token);
                 if (resp.StatusCode == HttpStatusCode.Unauthorized)
-                    respMsg = "TokenError";
+                    result.RespMsg = "TokenError";
                 if (resp.StatusCode != HttpStatusCode.OK)
-                    respMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+                    result.RespMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
 
                 if (resDict.TryGetValue("operate_status", out string status))
                 {
-                    resDict.TryGetValue("data", out datas);
-                    respMsg = status;
+                    resDict.TryGetValue("data", out string datas);
+                    result.Datas = datas;
+                    result.RespMsg = status;
                 }
                 else
-                    respMsg = "获取网站截图失败。";
+                    result.RespMsg = "获取网站截图失败。";
             }
             catch (Exception ex)
             {
-                respMsg = ex.Message;
+                result.RespMsg = ex.Message;
             }
         }
 
