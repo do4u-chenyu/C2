@@ -9,7 +9,7 @@ namespace C2.Business.SSH
     {
         private readonly SshClient ssh;
         private readonly TaskInfo task;
-        private String GambleScript { get => String.Format("batchquery_db_accountPass_version20210324_{0}.py", task.TaskCreateTime); }
+        private String GambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
         private String GambleWorkspace { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.PID, task.TaskCreateTime); }
         public BastionAPI(TaskInfo task) 
