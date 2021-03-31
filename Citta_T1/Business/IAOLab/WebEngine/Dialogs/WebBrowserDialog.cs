@@ -98,7 +98,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 OpenSelectBossDialog();
         }
 
-        private object[] OpenMapFile(string path)
+        private object[] OpenMapFile(string path, char seperator)
         {
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
@@ -110,7 +110,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 {
                     if (lineCounter++ == 0)
                         continue;
-                    string[] tempstr = line.Split(',');
+                    string[] tempstr = line.Split(seperator);
                     for (int i = 0; i < tempstr.Length; i++)
                     {
                         if (i % 2 == 0)
@@ -130,7 +130,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
             return new object[] { res };
         }
-        private object[] OpenHeatMapFile(string path)
+        private object[] OpenHeatMapFile(string path, char seperator)
         {
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
@@ -143,7 +143,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 {
                     if (lineCounter++ == 0)
                         continue;
-                    string[] tempstr = line.Split(',');
+                    string[] tempstr = line.Split(seperator);
                     for (int i = 0; i < tempstr.Length; i++)
                     {
                         if (i % 3 == 0)
@@ -184,13 +184,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 foreach (DataItem di in maw.DataItems)
                 {
                     if (di.FileName.Contains("标注图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("多边形图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("热力图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath, di.FileSep));
                 }
             }
         }
@@ -368,13 +368,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 foreach (DataItem di in maw.DataItems)
                 {
                     if (di.FileName.Contains("标注图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("多边形图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("热力图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath, di.FileSep));
                 }
 
             }
@@ -503,7 +503,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     mapWidget.DataItems.Add(
                         new DataItem(
                             destPath, Path.GetFileNameWithoutExtension(destPath), 
-                            ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text
+                            dataItem.FileSep, OpUtil.Encoding.UTF8, OpUtil.ExtType.Text
                             )
                         );
                 }
