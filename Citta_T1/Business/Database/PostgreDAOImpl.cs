@@ -12,7 +12,7 @@ namespace C2.Database
         private static readonly LogUtil log = LogUtil.GetInstance("PostgreDAOImpl");
         private readonly string getUserSQL = @"select pg_database.datname from pg_database";
         private readonly string getTablesSQL = @"select table_name from information_schema.tables where table_schema = 'public'";
-        private readonly string getTableContentSQL = @"select * from ""{0}""";
+        private readonly string getTableContentSQL = @"select * from ""{0}"" ";
         private readonly string getColNameByTableSQL = @"SELECT a.attnum,a.attname AS field FROM pg_class c,pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,pg_type t WHERE c.relname = '{0}' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid ORDER BY a.attnum";
         public PostgreDAOImpl(DatabaseItem dbi) : base(dbi) { }
 
@@ -52,6 +52,8 @@ namespace C2.Database
             string result = String.Empty;
             NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
             sql = DbUtil.PurifyOnelineSQL(sql);
+            if(sql.Contains("*"))
+                sql = string.Format("{0} limit {1}",sql, returnNum);
             try
             {
                 SqlConn.Open();
@@ -60,7 +62,6 @@ namespace C2.Database
             catch (Exception ex) 
             {
                 log.Error(HelpUtil.DbCannotBeConnectedInfo + ", 详情：" + ex.ToString());
-                //TODO mhd
                 throw ex;
             }
             finally
@@ -80,26 +81,20 @@ namespace C2.Database
             {
                 if (sdr.FieldCount == 0)
                     return String.Empty;
-                //TODO 空表测试 加断点，看逻辑是否能到，测试Cancel逻辑是否需要
                 if (header) 
                 {
                     for (int i = 0; i < sdr.FieldCount - 1; i++)
                         sb.Append(sdr.GetName(i)).Append(OpUtil.TabSeparator);
-                    sb.Append(sdr.GetName(sdr.FieldCount - 1)).Append(OpUtil.LineSeparator);
+                    sb.Append(sdr.GetName(sdr.FieldCount - 1)).TrimEndT().Append(OpUtil.LineSeparator);
                 }
                 while (sdr.Read() && totalReturnNum++ < returnNum)
                 {
                     for (int i = 0; i < sdr.FieldCount - 1; i++)
                         sb.Append(sdr[i]).Append(OpUtil.TabSeparator);
-                    sb.Append(sdr[sdr.FieldCount - 1]).Append(OpUtil.LineSeparator);
+                    sb.Append(sdr[sdr.FieldCount - 1]).TrimEndT().Append(OpUtil.LineSeparator);
                 }
-                try
-                {
-                    SqlCommand.Cancel();
-                    sdr.Close();
-                }
-                catch { }
-                
+                sdr.Close();
+
             }
             return sb.TrimEndN().ToString();
         }
@@ -109,8 +104,9 @@ namespace C2.Database
             bool returnCode = true;
             int totalReturnNum = 0;
             StreamWriter sw = new StreamWriter(outputPath, false);
-            //TODO
             NpgsqlConnection SqlConn = new NpgsqlConnection(ConnectionString());
+            if(maxReturnNum < int.MaxValue)
+                sqlText = string.Format("{0} limit {1}", sqlText, maxReturnNum);
             try
             {
                 SqlConn.Open();
@@ -132,12 +128,7 @@ namespace C2.Database
                         sw.WriteLine(sb.TrimEndT().ToString());
                         sw.Flush();
                     }
-                    try
-                    {
-                        SqlCommand.Cancel();
-                        sdr.Close();
-                    }
-                    catch { }
+                    sdr.Close();  
                 }
             }
             catch (Exception ex)
@@ -147,8 +138,8 @@ namespace C2.Database
             }
             finally
             {
-                //TODO 判断是否为空
-                sw.Close();
+                if(sw !=null)
+                    sw.Close();
                 SqlConn.Close();
             }
             return returnCode;

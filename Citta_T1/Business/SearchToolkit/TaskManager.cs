@@ -9,8 +9,8 @@ namespace C2.SearchToolkit
 {
     class TaskManager
     {
-        private String home;
-        private List<TaskInfo> tasks;
+        private readonly String home;
+        private readonly List<TaskInfo> tasks;
 
         public TaskManager() 
         {
@@ -26,11 +26,11 @@ namespace C2.SearchToolkit
             BastionAPI api = new BastionAPI(task);
 
             task.PID = api.Login()
-                             .UploadGambleScript()
-                             .CreateGambleTaskDirectory()
-                             .RunGambleTask();
+                          .UploadGambleScript()
+                          .CreateGambleTaskDirectory()
+                          .RunGambleTask();
 
-            return true;
+            return task.PID != String.Empty;
         }
         public bool SaveTask(TaskInfo task)
         {   // TODO 文件名重复问题, 需要加入随机数
@@ -86,11 +86,22 @@ namespace C2.SearchToolkit
             BastionAPI api = new BastionAPI(task);
 
             api.Login()
-               .KillGambleTask(task.PID)
-               .DeleteGambleTaskResult();
+               .DeleteGambleTask();
 
             String taskFFP = Path.Combine(home, task.BcpFilename);   
             return tasks.Remove(task) && FileUtil.DeleteFile(taskFFP); 
+        }
+
+        public bool DownloadTaskResultFile(TaskInfo task)
+        {
+            return true;
+        }
+
+        public String QueryTaskStatus(TaskInfo task)
+        {
+            BastionAPI api = new BastionAPI(task);
+            return api.Login()
+                      .QueryGambleTaskStatus();
         }
     }
 }

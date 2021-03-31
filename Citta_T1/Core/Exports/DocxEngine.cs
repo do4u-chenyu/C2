@@ -12,7 +12,7 @@ namespace C2.Core.Exports
 {
     class DocxEngine : ChartsExportEngine
     {
-        private DocxFileSaver docxFileSaver = new DocxFileSaver();
+        private DocxFile docxFile = new DocxFile();
         public override string TypeMime
         {
             get { return DocumentType.Docx.TypeMime; }
@@ -25,7 +25,7 @@ namespace C2.Core.Exports
                 MindMap mindMap = (MindMap)chart;
                 Topic root = mindMap.Root;
                 using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-                    docxFileSaver.SaveAsDocx(root, filename);
+                    docxFile.Save(root, filename);
                 return true;
             }
 

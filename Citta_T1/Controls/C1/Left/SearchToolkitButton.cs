@@ -60,7 +60,7 @@ namespace C2.Controls.C1.Left
         }
         private void ResultToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new SearchToolkitForm().ShowTaskInfoDialog(this.task);
+            ShowTaskInfoDialog();
         }
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -80,6 +80,11 @@ namespace C2.Controls.C1.Left
             if (e.Button != MouseButtons.Left || e.Clicks != 2)
                 return;
             // 双击打开
+            ShowTaskInfoDialog();
+        }
+
+        private void ShowTaskInfoDialog()
+        {
             new SearchToolkitForm().ShowTaskInfoDialog(this.task);
         }
     }
