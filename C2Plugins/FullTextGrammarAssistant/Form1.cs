@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace FullTextGrammarAssistant
 {
-    public partial class 全文语法查询助手 : Form, IPlugin
+    public partial class Form1 : Form, IPlugin
     {
-        public 全文语法查询助手()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -47,5 +47,15 @@ namespace FullTextGrammarAssistant
         {
 
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            //if (Global.VersionType.Equals(Global.GreenLevel))
+                //return;
+            string helpfile = Application.StartupPath;
+            helpfile += @"\Resources\Help\C2帮助文档.chm";
+            Help.ShowHelp(this, helpfile);
+        }
+
     }
 }
