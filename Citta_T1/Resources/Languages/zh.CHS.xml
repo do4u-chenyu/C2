@@ -440,6 +440,6 @@
 	<item name="Card">(网)银行卡信息查询</item>
 	<item name="Tude">经纬度坐标系转换</item>
 	<item name="Ip">时间、IP转换</item>
-
-	</words>
+	<item name="BigAPK">APK检测</item>
+</words>
 </dictionary>

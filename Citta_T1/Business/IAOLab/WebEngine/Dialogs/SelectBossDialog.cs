@@ -224,10 +224,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void BossType_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.pictureBox1.Image = bossTypeDict[bossType.SelectedIndex];
+            //this.label19.Text = bossType.Text;
+            string str = bossType.Text;
+            int arr = str.IndexOf("）")-1 - str.IndexOf("（");
+            String str2 = str.Substring(str.IndexOf("（") + 1, arr);
+            this.label19.Text = str2;
+
             WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", string.Format("BossIndex0{0}.html",(bossType.SelectedIndex+1).ToString()));
             //切换样式，每个图表的配置标题要发生变化
             ChangeCaptionText();
         }
+
 
         private void ChangeCaptionText()
         {

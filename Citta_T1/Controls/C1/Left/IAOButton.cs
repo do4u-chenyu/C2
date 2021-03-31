@@ -64,6 +64,11 @@ namespace C2.Controls.Left
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TimeAndIPTransformFormHelpInfo);
                     TimeAndIPTransformForm(ffp);
                     break;
+                case "BigAPK":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.BigAPK;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BigAPKFormHelpInfo);
+                    BigAPKForm();
+                    break;
             }
             //toolTip1.SetToolTip(this.txtButton, this.txtButton.Text);
         }
@@ -114,6 +119,11 @@ namespace C2.Controls.Left
             };
             (baseForm as CoordinateConversion).ReLayoutForm();
 
+        }
+
+        private void BigAPKForm()
+        {
+            baseForm = new BigAPKForm();
         }
         #endregion
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)

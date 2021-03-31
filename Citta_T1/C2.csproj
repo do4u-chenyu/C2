@@ -188,7 +188,6 @@
     <Compile Include="Business\SearchToolkit\TaskInfo.cs" />
     <Compile Include="Business\SearchToolkit\TaskManager.cs" />
     <Compile Include="Business\SSH\BastionAPI.cs" />
-    <Compile Include="Business\SSH\SSHClient.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\TOTP.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\WFDResult.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\WFDTaskInfo.cs" />
@@ -294,6 +293,12 @@
     <Compile Include="Business\Database\HiveDAOImpl.cs" />
     <Compile Include="Business\Database\OracleDAOImpl.cs" />
     <Compile Include="Business\Database\PostgreDAOImpl.cs" />
+    <Compile Include="Dialogs\IAOLab\BigAPKForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\BigAPKForm.Designer.cs">
+      <DependentUpon>BigAPKForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\UpdateProgressBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1834,6 +1839,9 @@
     <EmbeddedResource Include="Dialogs\IAOLab\Coordinate.resx">
       <DependentUpon>Coordinate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IAOLab\BigAPKForm.resx">
+      <DependentUpon>BigAPKForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IAOLab\WifiLocation.resx">
       <DependentUpon>WifiLocation.cs</DependentUpon>
     </EmbeddedResource>
@@ -3009,6 +3017,7 @@
     <None Include="Resources\侦察兵.png" />
     <None Include="Resources\全文工具左侧.png" />
     <None Include="Resources\侦察兵左侧.png" />
+    <None Include="Resources\企业微信截图_16171063036541.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -3117,7 +3126,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Business\IAOLab\Webbrowser\" />
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
