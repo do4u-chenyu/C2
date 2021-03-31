@@ -25,7 +25,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripButton LoadBossData;
         private ToolStripButton SaveHtml;
         private ToolStripButton SavePic;
-        private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
         private readonly List<MapDataItem> mapWidgetDataItems;
