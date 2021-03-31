@@ -1,15 +1,21 @@
 ﻿using C2.Business.WebsiteFeatureDetection;
 using C2.Controls;
+using C2.Core;
 using C2.Utils;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
 {
     partial class AddWFDTask : StandardDialog
     {
-        public string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
-        public string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
+        public WFDTaskInfo TaskInfo { set; get; }
+        string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
+        string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
         public AddWFDTask()
         {
             InitializeComponent();
@@ -28,17 +34,67 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (!IsValidityTaskName() || !IsValidityFilePath())
                 return false;
 
-            //判断用户是否认证？已认证的可以直接新建任务，否则先认证再新建任务 //这个跟api里的方法比较一下，看看能否合并
-            if (string.IsNullOrEmpty(WFDWebAPI.GetInstance().UserName))
-            {
-                var UAdialog = new UserAuth();
-                if (UAdialog.ShowDialog() != DialogResult.OK)
-                    return false;
+            string taskId = string.Empty;
+            string respMsg = string.Empty;
 
-                WFDWebAPI.GetInstance().UserName = UAdialog.UserName;
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            {
+                if (!WFDWebAPI.GetInstance().StartTask(GetUrlsFromFile(FilePath), out respMsg, out taskId))
+                    return false;
             }
 
+            if (respMsg != "success")
+            {
+                HelpUtil.ShowMessageBox(respMsg);
+                return false;
+            }
+
+            HelpUtil.ShowMessageBox("任务下发成功");
+            string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网络侦察兵");
+            string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.bcp", TaskName, taskId));
+            FileUtil.CreateDirectory(destDirectory);
+            using (File.Create(destFilePath)) { }
+
+            TaskInfo = new WFDTaskInfo(TaskName, taskId, FilePath, destFilePath, WFDTaskStatus.Null);
+
             return base.OnOKButtonClick();
+        }
+        private List<string> GetUrlsFromFile(string filePath)
+        {
+            int maxRow = 10000;
+
+            List<string> urls = new List<string>();
+            if (!File.Exists(filePath))
+            {
+                HelpUtil.ShowMessageBox("该数据文件不存在");
+                return urls;
+            }
+
+            StreamReader sr = null;
+            try
+            {
+                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(fs, Encoding.Default);
+
+                //判断是否存在表头
+                string firstLine = sr.ReadLine().Trim(new char[] { '\r', '\n', '\t' });
+                string Pattern = @"^((http|https|ftp)\://)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&$%\$#\=~])*$";
+                if (new Regex(Pattern).Match(firstLine).Success)
+                    urls.Add(firstLine);
+
+                for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
+                    urls.Add(sr.ReadLine().Trim(new char[] { '\r', '\n', '\t' }));
+            }
+            catch
+            {
+                HelpUtil.ShowMessageBox(filePath + "文件加载出错");
+            }
+            finally
+            {
+                if (sr != null)
+                    sr.Close();
+            }
+            return urls;
         }
 
         private bool IsValidityTaskName()

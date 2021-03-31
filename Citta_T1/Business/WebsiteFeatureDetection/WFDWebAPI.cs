@@ -12,7 +12,6 @@ namespace C2.Business.WebsiteFeatureDetection
 
     class WFDWebAPI
     {
-        //Global.WFDUser持久化到文档中UserInformation.xml
         public string UserName { set; get; }
         string Token;
         string APIUrl;
@@ -34,10 +33,11 @@ namespace C2.Business.WebsiteFeatureDetection
 
         public WFDWebAPI()
         {
-            UserName = "";
-            Token = "";
-            //APIUrl = "https://10.1.203.15:12449/apis/";//测试
-            APIUrl = "https://113.31.119.85:53374/apis/";//正式
+            UserName = string.Empty;
+            Token = string.Empty;
+
+            APIUrl = "https://10.1.203.15:12449/apis/";//测试
+            //APIUrl = "https://113.31.119.85:53374/apis/";//正式
             LoginUrl = APIUrl + "Login";
             ProClassifierUrl = APIUrl + "pro_classifier_api";
             TaskResultUrl = APIUrl + "detection/task/result";
@@ -74,10 +74,14 @@ namespace C2.Business.WebsiteFeatureDetection
         }
 
         // 网站分类
-        public void StartTask(List<string> urls, out string respMsg, out string taskId)
+        public bool StartTask(List<string> urls, out string respMsg, out string taskId)
         {
-            //ReAuthBeforeQuery();
+            respMsg = string.Empty;
             taskId = string.Empty;
+
+            if (!ReAuthBeforeQuery())
+                return false;
+
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "user_id", UserName }, { "urls", JsonConvert.SerializeObject(urls) } };
             try
             {
@@ -94,6 +98,8 @@ namespace C2.Business.WebsiteFeatureDetection
                     resDict.TryGetValue("TASKID", out taskId);
                     respMsg = status;
                 }
+                else if(resDict.TryGetValue("error", out string error))
+                    respMsg = error;
                 else
                     respMsg = "任务下发失败。";
             }
@@ -101,14 +107,15 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 respMsg = ex.Message;
             }
+            return true;
         }
 
         // 根据任务id返回任务结果
         public bool QueryTaskResultsById(string taskId, out string respMsg, out string datas, string flag = "1")
         {
-            
             datas = string.Empty;
             respMsg = string.Empty;
+
             if (!ReAuthBeforeQuery())
                 return false;
 
@@ -176,7 +183,7 @@ namespace C2.Business.WebsiteFeatureDetection
 
         private bool ReAuthBeforeQuery()
         {
-            //TODO 后台尝试登陆，失败后前台弹出认证窗口
+            //后台尝试登陆，失败后前台弹出认证窗口
             if (string.IsNullOrEmpty(UserName) || UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName)) != "success")
             {
                 var UAdialog = new UserAuth();

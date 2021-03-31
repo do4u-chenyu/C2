@@ -14,7 +14,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
     partial class WFDTaskResult : StandardDialog
     {
         public WFDTaskInfo TaskInfo;
-        
+        private static readonly LogUtil log = LogUtil.GetInstance("WFDTaskResult");
         public WFDTaskResult()
         {
             InitializeComponent();
@@ -109,7 +109,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex > -1)
+            if(dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex > -1 && dataGridView.CurrentCell is DataGridViewButtonCell)
             {
                 DataGridViewButtonCell cell = (DataGridViewButtonCell)dataGridView.CurrentCell;
                 if (cell.Tag == null)
@@ -147,7 +147,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             catch
             {
-                MessageBox.Show("Base64StringToImage转换失败。");
+                log.Error(txtFileName + "生成图片失败。");
             }
         }
 
