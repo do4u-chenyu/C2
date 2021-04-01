@@ -434,12 +434,12 @@
 	<item name="Rotate Right">向右旋转</item>
 	<item name="ExploreDirectory">打开所在文件夹</item>
     <item name="CopyFilePathToClipboard">复制文件路径到剪切板</item>
-    <item name="APK">非法APK分析</item>
+	<item name="APK">APK小眼睛</item>
 	<item name="BaseStation">(网)基站查询</item>
 	<item name="Wifi">(网)Wifi查询</item>
 	<item name="Card">(网)银行卡信息查询</item>
 	<item name="Tude">经纬度坐标系转换</item>
 	<item name="Ip">时间、IP转换</item>
-	<item name="BigAPK">APK检测</item>
+	<item name="BigAPK">APK大眼睛</item>
 </words>
 </dictionary>

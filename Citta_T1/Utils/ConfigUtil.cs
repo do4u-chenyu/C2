@@ -9,7 +9,7 @@ namespace C2.Utils
     {
         public static string DefaultWorkspaceDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/FiberHomeIAOModelDocument";
         public static string DefaultVersionType = "NonGreen";
-        public static string DefaultIAOLab = "APK, BigAPK, BaseStation, Wifi, Card, Tude, Ip";
+        public static string DefaultIAOLab = "BigAPK, APK, BaseStation, Wifi, Card, Tude, Ip";
 
         public static string TryGetAppSettingsByKey(string key, string defaultValue = "")
         {
