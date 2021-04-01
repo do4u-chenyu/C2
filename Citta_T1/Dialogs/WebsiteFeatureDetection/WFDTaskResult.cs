@@ -17,10 +17,23 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         public WFDTaskInfo TaskInfo;
         private static readonly LogUtil log = LogUtil.GetInstance("WFDTaskResult");
 
+        Dictionary<string, string> predictionCodeDict;
+
         public WFDTaskResult()
         {
             InitializeComponent();
             this.dataGridView.DoubleBuffered(true);
+            InitPredictionCodeDict();
+            
+
+        }
+
+        private void InitPredictionCodeDict()
+        {
+            predictionCodeDict = new Dictionary<string, string>
+            {
+                {"101090101", "贷款-P2P"},{"101090102", "贷款-抵押"},{"101090103", "贷款-小额"},{"101090104", "贷款-资讯"},{"101090105", "贷款-综合"},{"101090106", "贷款-租赁"},{"1010301", "赌-彩票预测"},{"1010302", "赌-赌场系"},{"1010303","赌-购彩系"},{"1010304", "赌-电子游戏"},{"1010305", "赌-球"},{"1010101", "黄-视频"},{"1010102", "黄-成人用品用药"},{"10111", "签名网站"},{"1010103", "黄-小说漫画"},{"1010104", "黄-性感图"},{"1010105", "黄-直播"},{"101020301", "宗教-场所"},{"101020302", "宗教-机构"},{"101020303", "宗教-文化"},{"101020304", "宗教-用品"},{"1010401", "Vpn-非法"},{"1010402", "Vpn-商务"},{"10106", "打码"},{"10112", "VPS"},{"10107", "短链接"},{"10108", "配资"},{"10105", "镜像"},{"10113", "四方支付"},{"10114", "云发卡"},{"10115", "流量刷单"},{"10116", "微交易"},{"10117", "云呼"},{"10118","CDN"},{"10119","第三方维护助手"},{"101110","广告联盟"},{"101111","代刷"},{"1010106","黄—外围"},{"101114","接码平台"},{"101112","后台登录"},{"101115","机场"},{"101116","政府"},{"101117","学校"},{"101118","医院"},{"101119","虚拟币交易"},{"101121","证券期货交易"},{"101124","网游加速器"},{"101122","外汇交易"},{"101120","游戏交易网站"},{"101123","客服"}
+            };
         }
 
         public WFDTaskResult(WFDTaskInfo taskInfo) : this()
@@ -41,11 +54,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
              *      done ： 读本地文件所有内容到 List<List<string>> results = 内存， 前100行加载到table
              *      其他 ： 跳转3
              *  3、是否过期？
-	         *      是，提示，返回，此时窗体显示基本属性，详细信息为空；
-	         *      否，发起请求
+             *      是，提示，返回，此时窗体显示基本属性，详细信息为空；
+             *      否，发起请求
              *  4、发起请求
-	         *      成功 ： 读返回报文内容到 List<List<string>> results = 内存， 前100行加载到table ， 状态刷新 ， 写入本地文件
-	         *      其他 ： 状态刷新
+             *      成功 ： 读返回报文内容到 List<List<string>> results = 内存， 前100行加载到table ， 状态刷新 ， 写入本地文件
+             *      其他 ： 状态刷新
              */
             if (TaskInfo.Status == WFDTaskStatus.Done && File.Exists(TaskInfo.ResultFilePath) && LoadLocalResultsFillTable())
                 return;
@@ -85,18 +98,20 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             List<WFDResult> results = new List<WFDResult>();
             foreach(List<string> content in contentList)
             {
-                if (content.Count < 8)
+                if (content.Count < 10)
                     continue;
                 results.Add(new WFDResult
                 {
                     url = content[0],
                     cur_url = content[1],
-                    html_content_id = content[2],
-                    title = content[3],
-                    html_content = content[4],
-                    prediction = content[5],
-                    login = content[6],
-                    screen_shot = content[7]
+                    title = content[2],
+                    prediction = content[3],
+                    prediction_ = content[4],
+                    Fraud_label = content[5],
+                    screen_shot = content[6],
+                    login = content[7],
+                    html_content_id = content[8],
+                    html_content = content[9],
                 });
             }
 
@@ -123,12 +138,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             //解析正确结果，同时写进本地文件，返回预览字符串
             List<WFDResult> results = new List<WFDResult>();
-            List<string> titles = new List<string>() { "url", "cur_url", "html_content_id", "title", "html_content", "prediction", "login", "screen_shot" };
             StreamWriter sw = null;
             try
             {
                 sw = new StreamWriter(resultFilePath);
-                sw.WriteLine(titles.JoinString(OpUtil.TabSeparatorString));
+                sw.WriteLine(new WFDResult().JoinMember());//将字段拼成表头
                 results = new JavaScriptSerializer().Deserialize<List<WFDResult>>(apiResults);
                 foreach (WFDResult result in results)
                     sw.WriteLine(result.JoinAllContent());
@@ -205,22 +219,32 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 if (cell.Tag == null)
                     return;
 
-                SaveScreenshotsToLocal(new List<string>() { cell.Tag.ToString() });
+                SaveScreenshotsToLocal(new List<WFDResult>() { TaskInfo.PreviewResults[e.RowIndex] });
             }
         }
 
-        private void SaveScreenshotsToLocal(List<string> screenshotIds)
+        private void SaveScreenshotsToLocal(List<WFDResult> results)
         {
+            if (!WFDWebAPI.GetInstance().ReAuthBeforeQuery())
+                return;
+
             var dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
             string destPath = dialog.SelectedPath;
-            foreach(string id in screenshotIds)
+            foreach(WFDResult result in results)
             {
-                WFDWebAPI.GetInstance().DownloadScreenshotById(id, out WFDAPIResult result);
-                if (result.RespMsg == "success")
-                    Base64StringToImage(Path.Combine(destPath, id + ".png"), result.Datas);
+                WFDWebAPI.GetInstance().DownloadScreenshotById(result.screen_shot, out WFDAPIResult APIResult);
+                if (APIResult.RespMsg == "success")
+                {
+                    string picUrl = result.url.Replace("http://", "").Replace("https://", "").Split('/')[0];
+                    predictionCodeDict.TryGetValue(result.prediction, out string picPrediction);
+                    Base64StringToImage(Path.Combine(destPath, string.Format("{0}_{1}.png", picPrediction, picUrl)), APIResult.Datas);
+                }
+                else
+                    HelpUtil.ShowMessageBox(APIResult.RespMsg);
+                    
             }
             HelpUtil.ShowMessageBox("网站截图下载完毕");
         }
@@ -237,21 +261,13 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             catch
             {
-                log.Error(txtFileName + "生成图片失败。");
+                log.Error(txtFileName + "生成图片失败。" + "base64为：" + base64);
             }
         }
 
         private void DownloadPicsButton_Click(object sender, EventArgs e)
         {
-            List<string> screenshotIds = new List<string>();
-
-            if (File.Exists(this.TaskInfo.ResultFilePath))
-            {
-                //TODO 读本地文件，获取id和分类结果两列
-                SaveScreenshotsToLocal(screenshotIds);
-            }
-            else
-                HelpUtil.ShowMessageBox("任务结果文件不存在。", "提示");
+            SaveScreenshotsToLocal(TaskInfo.PreviewResults);
         }
     }
 }

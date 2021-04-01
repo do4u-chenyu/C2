@@ -185,7 +185,7 @@ namespace C2.Business.WebsiteFeatureDetection
 
         }
 
-        private bool ReAuthBeforeQuery()
+        public bool ReAuthBeforeQuery()
         {
             //后台尝试3次登陆，均认证失败后前台弹出认证窗口
             int maxRetryTime = 3;
