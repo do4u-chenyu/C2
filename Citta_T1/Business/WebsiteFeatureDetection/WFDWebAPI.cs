@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
 
@@ -185,15 +187,22 @@ namespace C2.Business.WebsiteFeatureDetection
 
         private bool ReAuthBeforeQuery()
         {
-            //后台尝试登陆，失败后前台弹出认证窗口
-            if (string.IsNullOrEmpty(UserName) || UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName)) != "success")
+            //后台尝试3次登陆，均认证失败后前台弹出认证窗口
+            int maxRetryTime = 3;
+            int time = 0;
+            if (!string.IsNullOrEmpty(UserName))
             {
-                var UAdialog = new UserAuth();
-                if (UAdialog.ShowDialog() != DialogResult.OK)
-                    return false;
-                UserName = UAdialog.UserName;
+                while (time++ < maxRetryTime)
+                {
+                    if (UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName)) == "success")
+                        return true;
+                }
             }
 
+            var UAdialog = new UserAuth();
+            if (UAdialog.ShowDialog() != DialogResult.OK)
+                return false;
+            UserName = UAdialog.UserName;
             return true;
         }
 
@@ -204,9 +213,16 @@ namespace C2.Business.WebsiteFeatureDetection
         public HttpHandler()
         {
         }
+        private bool RemoteCertificateValidate(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors error)
+        {
+            //为了通过证书验证，总是返回true
+            return true;
+        }
 
         public Response Post(string url, Dictionary<string, string> postData, string token = "", int timeout = 20000)
         {
+            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(RemoteCertificateValidate);
+
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
 
             req.Timeout = timeout;

@@ -39,7 +39,7 @@ namespace C2.Dialogs.IAOLab
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(800, 450);
-            this.webBrowser1.TabIndex = 0;           
+            this.webBrowser1.TabIndex = 0;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // BigAPKForm
@@ -49,7 +49,7 @@ namespace C2.Dialogs.IAOLab
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.webBrowser1);
             this.Name = "BigAPKForm";
-            this.Text = "网页加载器";
+            this.Text = "APK检测";
             this.Load += new System.EventHandler(this.BigAPKForm_Load);
             this.ResumeLayout(false);
 
