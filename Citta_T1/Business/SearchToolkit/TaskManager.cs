@@ -28,6 +28,8 @@ namespace C2.SearchToolkit
                           .UploadGambleScript()
                           .RunGambleTask();
 
+            api.Close();
+
             if (task.PID == String.Empty)
                 return false;
 
@@ -71,7 +73,9 @@ namespace C2.SearchToolkit
 
             api.Login()
                .DeleteGambleTaskWorkspace()
-               .KillGambleTask(); 
+               .KillGambleTask()
+               .Close();
+
             return tasks.Remove(task) && FileUtil.DeleteFile(task.BcpFFP); 
         }
     }
