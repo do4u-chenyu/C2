@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using C2.Model.Widgets;
 using NPOI.OpenXmlFormats.Dml;
 using NPOI.OpenXmlFormats.Dml.WordProcessing;
-using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
 
 namespace C2.Model.MindMaps
@@ -104,7 +103,7 @@ namespace C2.Model.MindMaps
                 paragraphIMG.Alignment = ParagraphAlignment.CENTER;
                 XWPFRun xwpfRun = paragraphIMG.CreateRun();
                 xwpfRun.FontFamily = "宋体";
-                xwpfRun.SetText("图" + imgNo +":" + fileName);
+                xwpfRun.SetText("图" + (imgNo + 1) +":" + fileName);
                 
             }
             catch
