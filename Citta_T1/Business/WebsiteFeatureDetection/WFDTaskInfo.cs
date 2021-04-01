@@ -22,7 +22,7 @@ namespace C2.Business.WebsiteFeatureDetection
         public string TaskCreateTime;
         public string DatasourceFilePath;
         public string ResultFilePath;
-        public string PreviewResults;
+        public List<WFDResult> PreviewResults;
         public WFDTaskStatus Status;
         public bool IsEmpty() { return this == Empty; }
 
@@ -34,7 +34,7 @@ namespace C2.Business.WebsiteFeatureDetection
             DatasourceFilePath = string.Empty;
             ResultFilePath = string.Empty;
             Status = WFDTaskStatus.Null;
-            PreviewResults = string.Empty;
+            PreviewResults = new List<WFDResult>();
         }
 
         public WFDTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, WFDTaskStatus status)
@@ -45,6 +45,7 @@ namespace C2.Business.WebsiteFeatureDetection
             ResultFilePath = resultFilePath;
             Status = status;
             TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
+            PreviewResults = new List<WFDResult>();
         }
     }
 }

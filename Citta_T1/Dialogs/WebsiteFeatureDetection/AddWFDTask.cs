@@ -69,9 +69,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
 
             StreamReader sr = null;
+            FileStream fs = null;
             try
             {
-                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs, Encoding.Default);
 
                 //判断是否存在表头
@@ -89,6 +90,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             finally
             {
+                if (fs != null)
+                    fs.Close();
                 if (sr != null)
                     sr.Close();
             }

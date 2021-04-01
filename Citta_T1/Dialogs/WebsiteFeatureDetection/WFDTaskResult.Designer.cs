@@ -34,17 +34,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.browserButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.screenShot = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taskNameLabel = new System.Windows.Forms.Label();
             this.taskIDLabel = new System.Windows.Forms.Label();
             this.taskStatusLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.downloadPicsButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.screenShot = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -122,47 +122,6 @@
             this.dataGridView.TabIndex = 10008;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
             // 
-            // url
-            // 
-            this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.url.HeaderText = "url";
-            this.url.Name = "url";
-            this.url.ReadOnly = true;
-            this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // prediction
-            // 
-            this.prediction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.prediction.HeaderText = "分类情况";
-            this.prediction.Name = "prediction";
-            this.prediction.ReadOnly = true;
-            this.prediction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // title
-            // 
-            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.title.HeaderText = "网站标题";
-            this.title.Name = "title";
-            this.title.ReadOnly = true;
-            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // screenShot
-            // 
-            this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.screenShot.HeaderText = "网站截图";
-            this.screenShot.Name = "screenShot";
-            this.screenShot.ReadOnly = true;
-            this.screenShot.Text = "下载截图";
-            this.screenShot.UseColumnTextForButtonValue = true;
-            // 
-            // webContent
-            // 
-            this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.webContent.HeaderText = "网页文本";
-            this.webContent.Name = "webContent";
-            this.webContent.ReadOnly = true;
-            this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // taskNameLabel
             // 
             this.taskNameLabel.AutoSize = true;
@@ -233,6 +192,52 @@
             this.panel2.Size = new System.Drawing.Size(712, 197);
             this.panel2.TabIndex = 10013;
             // 
+            // url
+            // 
+            this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.url.FillWeight = 30F;
+            this.url.HeaderText = "url";
+            this.url.Name = "url";
+            this.url.ReadOnly = true;
+            this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // prediction
+            // 
+            this.prediction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.prediction.FillWeight = 11F;
+            this.prediction.HeaderText = "分类情况";
+            this.prediction.Name = "prediction";
+            this.prediction.ReadOnly = true;
+            this.prediction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // title
+            // 
+            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.title.FillWeight = 18F;
+            this.title.HeaderText = "网站标题";
+            this.title.Name = "title";
+            this.title.ReadOnly = true;
+            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // screenShot
+            // 
+            this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.screenShot.FillWeight = 11F;
+            this.screenShot.HeaderText = "网站截图";
+            this.screenShot.Name = "screenShot";
+            this.screenShot.ReadOnly = true;
+            this.screenShot.Text = "下载截图";
+            this.screenShot.UseColumnTextForButtonValue = true;
+            // 
+            // webContent
+            // 
+            this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.webContent.FillWeight = 30F;
+            this.webContent.HeaderText = "网页文本";
+            this.webContent.Name = "webContent";
+            this.webContent.ReadOnly = true;
+            this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // WFDTaskResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -268,11 +273,11 @@
         private System.Windows.Forms.Label taskStatusLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button downloadPicsButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn url;
         private System.Windows.Forms.DataGridViewTextBoxColumn prediction;
         private System.Windows.Forms.DataGridViewTextBoxColumn title;
         private System.Windows.Forms.DataGridViewButtonColumn screenShot;
         private System.Windows.Forms.DataGridViewTextBoxColumn webContent;
-        private System.Windows.Forms.Button downloadPicsButton;
     }
 }
