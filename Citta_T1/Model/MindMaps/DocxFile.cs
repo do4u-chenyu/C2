@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 using C2.Model.Widgets;
 using NPOI.OpenXmlFormats.Dml;
 using NPOI.OpenXmlFormats.Dml.WordProcessing;
@@ -28,7 +29,7 @@ namespace C2.Model.MindMaps
         {
             return width > height ? new Size(512, height * 512 / width) : new Size(width * 512 / height, 512);
         }
-        private void CreatePicture(string filePath, XWPFDocument docx,Size size)
+        private void CreatePicture(string filePath, XWPFDocument docx, Size size)
         {
             using (FileStream fsImg = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
             {
@@ -71,9 +72,10 @@ namespace C2.Model.MindMaps
                 {
                     inline.graphic.graphicData.AddPicElement(picXml);
                 }
-                catch
+                catch(XmlException xe)
                 {
-
+                    MessageBox.Show("错误:" + xe.ToString());
+                    fsImg.Close();
                 }
 
                 NPOI.OpenXmlFormats.Dml.WordProcessing.CT_PositiveSize2D extent = inline.AddNewExtent();
@@ -97,7 +99,7 @@ namespace C2.Model.MindMaps
                 int width = pictureWidget.Data.Width;
                 int height = pictureWidget.Data.Height;
                 Size size = RotateImageSize(width, height);
-                CreatePicture(picturePath, docx,size);
+                CreatePicture(picturePath, docx, size);
 
                 XWPFParagraph paragraphIMG = docx.CreateParagraph();
                 paragraphIMG.Alignment = ParagraphAlignment.CENTER;
@@ -106,9 +108,9 @@ namespace C2.Model.MindMaps
                 xwpfRun.SetText("图" + (imgNo + 1) +":" + fileName);
                 
             }
-            catch
+            catch(Exception ex)
             {
-                // TODO
+                MessageBox.Show("错误:" + ex.ToString());
             }
 
         }
@@ -164,12 +166,12 @@ namespace C2.Model.MindMaps
             }
 
             
-            for (int j = 0; j < topic.Children.Count; j++) 
+            for (int i = 0; i < topic.Children.Count; i++) 
             {
-                string nSerialNumber = (j + 1).ToString();
+                string nSerialNumber = (i + 1).ToString();
                 if (!topic.IsRoot)
-                    nSerialNumber = string.Format("{0}.{1}", serialNumber, (j + 1).ToString());
-                WriteToDocx(topic.Children[j], DocxExample, docx, nSerialNumber);
+                    nSerialNumber = string.Format("{0}.{1}", serialNumber, (i + 1).ToString());
+                WriteToDocx(topic.Children[i], DocxExample, docx, nSerialNumber);
             }
 
 
@@ -188,7 +190,7 @@ namespace C2.Model.MindMaps
 
                 using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
-                    imgNo = 0;
+                    imgNo = 0;//word中图片编号初始化
                     XWPFDocument docx = new XWPFDocument();
                     WriteToDocx(topic, DocxExample, docx);
                     try
