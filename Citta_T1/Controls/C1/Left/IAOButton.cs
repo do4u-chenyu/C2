@@ -123,7 +123,9 @@ namespace C2.Controls.Left
 
         private void BigAPKForm()
         {
+
             baseForm = new BigAPKForm();
+            baseForm.WindowState = FormWindowState.Maximized;
         }
         #endregion
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)

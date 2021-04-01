@@ -21,5 +21,10 @@ namespace C2.Dialogs.IAOLab
         {
 
         }
+
+        private void BigAPKForm_Load(object sender, EventArgs e)
+        {
+            this.webBrowser1.Url = new System.Uri(" http://113.31.110.244:5147/APK/login/", System.UriKind.Absolute);
+        }
     }
 }
