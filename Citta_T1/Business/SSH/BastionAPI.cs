@@ -17,7 +17,8 @@ namespace C2.Business.SSH
         public BastionAPI(TaskInfo task) 
         {
             this.task = task;
-            this.ssh = new SshClient(new PasswordConnectionInfo("114.55.248.85", "root", "aliyun.123")); 
+            //this.ssh = new SshClient(new PasswordConnectionInfo("114.55.248.85", "root", "aliyun.123"));
+            this.ssh = new SshClient(new PasswordConnectionInfo("10.1.126.4", "root", "iao123456"));
         }
 
         public void Close()
@@ -28,8 +29,15 @@ namespace C2.Business.SSH
 
         public BastionAPI Login() 
         {
-            // 这里通过抛出异常来报错
-            ssh.Connect();
+            try 
+            {
+                ssh.Connect();
+            }
+            catch (Exception ex)
+            {
+                task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, ex.Message);
+            }
+            
             return this; 
         }
 
@@ -116,11 +124,12 @@ namespace C2.Business.SSH
                 return String.Empty;
 
             String command = String.Format("python {0} && disown;", GambleScript);
-            String ret = RunCommand(command);
-            Match match = Regex.Match(ret, @"\[\d+\]\s*(\d\d*)");
-            if (match.Success && match.Groups[1].Success)
-                return match.Groups[1].Value;
-            return String.Empty;
+
+            String pid = SuccessRunCommand(command) ? GetGambleTaskPID() : String.Empty;
+            // 未获取到pid，当作模型脚本执行失败
+            if (String.IsNullOrEmpty(pid))
+                task.LastErrorMsg = "全文机已连接但执行涉赌脚本失败";
+            return pid;
         }
 
         public BastionAPI CreateGambleTaskDirectory() 
@@ -160,7 +169,7 @@ namespace C2.Business.SSH
             return "FAIL";
         }
 
-        public String GambleTaskPID()
+        public String GetGambleTaskPID()
         {
             String command = String.Format(@"ps aux | grep -i python | grep {0} | awk {{print $2}}", GambleScript);
             String result = RunCommand(command);
