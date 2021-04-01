@@ -2113,6 +2113,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\BossStyle03.png" />
+    <None Include="Resources\BigAPK.bmp" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <None Include="Resources\document.bmp" />
@@ -3017,7 +3018,7 @@
     <None Include="Resources\侦察兵.png" />
     <None Include="Resources\全文工具左侧.png" />
     <None Include="Resources\侦察兵左侧.png" />
-    <None Include="Resources\企业微信截图_16171063036541.png" />
+    <None Include="Resources\BigAPK.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
