@@ -299,13 +299,8 @@ def init_logger(logname,filename,logger_level = logging.INFO):
     logger.addHandler(ch)
     return logger
 
-def zip_result(DATA_PATH,ZIP_PATH,type='no'):
-    if type == 'yes':
-        cmd = ['tar', '-zcvf -', DATA_PATH[2:], '--remove-files |openssl des3 -salt -k', PASSWORD, '|dd of={}'.format(ZIP_PATH[2:])]
-        LOGGER.info('cmd:{}'.format(' '.join(cmd)))
-        pipe = Popen(' '.join(cmd),shell=True,stdout=PIPE)
-    else:
-        pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:],  '--remove-files'], stdout=PIPE)
+def zip_result(DATA_PATH,ZIP_PATH):
+    pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:],  '--remove-files'], stdout=PIPE, stderr=PIPE)
     out, err = pipe.communicate()
     if pipe.returncode:
         LOGGER.warning("Compress dirs failed with error code: {0}".format(pipe.returncode))

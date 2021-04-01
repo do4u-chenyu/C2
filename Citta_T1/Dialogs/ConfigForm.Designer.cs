@@ -134,7 +134,7 @@
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.checkStatus = new System.Windows.Forms.TextBox();
-            this.sizeValue = new System.Windows.Forms.Label();
+            this.size = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.description = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -1184,7 +1184,7 @@
             // 
             this.newVersion.BackColor = System.Drawing.Color.White;
             this.newVersion.Controls.Add(this.checking);
-            this.newVersion.Controls.Add(this.sizeValue);
+            this.newVersion.Controls.Add(this.size);
             this.newVersion.Controls.Add(this.button3);
             this.newVersion.Controls.Add(this.description);
             this.newVersion.Controls.Add(this.button1);
@@ -1244,12 +1244,12 @@
             // 
             // sizeValue
             // 
-            this.sizeValue.AutoSize = true;
-            this.sizeValue.Location = new System.Drawing.Point(98, 89);
-            this.sizeValue.Name = "sizeValue";
-            this.sizeValue.Size = new System.Drawing.Size(12, 17);
-            this.sizeValue.TabIndex = 12;
-            this.sizeValue.Text = " ";
+            this.size.AutoSize = true;
+            this.size.Location = new System.Drawing.Point(98, 89);
+            this.size.Name = "sizeValue";
+            this.size.Size = new System.Drawing.Size(12, 17);
+            this.size.TabIndex = 12;
+            this.size.Text = " ";
             // 
             // button3
             // 
@@ -1497,7 +1497,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.Panel newVersion;
         private System.Windows.Forms.Panel checking;
-        private System.Windows.Forms.Label sizeValue;
+        private System.Windows.Forms.Label size;
         private System.Windows.Forms.Label version;
         private System.Windows.Forms.Label sizeLable;
         private System.Windows.Forms.Label versionLable;
