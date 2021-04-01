@@ -3,6 +3,8 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using C2.Model.Widgets;
+using NPOI.OpenXmlFormats.Dml;
+using NPOI.OpenXmlFormats.Dml.WordProcessing;
 using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
 
@@ -26,6 +28,64 @@ namespace C2.Model.MindMaps
         {
             return width > height ? new Size(768, height * 768 / width) : new Size(width * 768 / height, 768);
         }
+        private void CreatePicture(string filePath, XWPFDocument docx,Size size)
+        {
+            using (FileStream fsImg = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
+            {
+                var picID = docx.AddPictureData(fsImg, (int)PictureType.JPEG);
+                int EMU = 9525;
+                int width = size.Width * EMU;
+                int height = size.Height * EMU;
+                //长宽单位为emu，在1080分辨率下换算单位为1像素等于9525emu
+                string picXml = "<pic:pic xmlns:pic=\"http://schemas.openxmlformats.org/drawingml/2006/picture\">"
+                                + "<pic:nvPicPr>"
+                                     + $"<pic:cNvPr id=\"{imgNo + 1}\" name=\"图片 {imgNo + 1}\"/>"
+                                     + "<pic:cNvPicPr/>"
+                                 + "</pic:nvPicPr>"
+                                 + "<pic:blipFill>"
+                                     + $"<a:blip r:embed=\"{picID}\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\">"
+                                     + "</a:blip>"
+                                     + "<a:stretch>"
+                                         + "<a:fillRect/>"
+                                     + "</a:stretch>"
+                                 + "</pic:blipFill>"
+                                 + "<pic:spPr>"
+                                     + "<a:xfrm>"
+                                         + "<a:off x=\"0\" y=\"0\"/>"
+                                         + $"<a:ext cx=\"{width}\" cy=\"{height}\"/>"
+                                     + "</a:xfrm>"
+                                     + "<a:prstGeom prst=\"rect\">"
+                                         + "<a:avLst/>"
+                                     + "</a:prstGeom>"
+                                 + "</pic:spPr>"
+                             + "</pic:pic>";
+                XWPFParagraph newPara = docx.CreateParagraph();
+                newPara.Alignment = ParagraphAlignment.CENTER;
+                XWPFRun imageCellRunn = newPara.CreateRun();
+                CT_Inline inline = imageCellRunn.GetCTR().AddNewDrawing().AddNewInline();
+
+                inline.graphic = new CT_GraphicalObject();
+                inline.graphic.graphicData = new CT_GraphicalObjectData();
+                inline.graphic.graphicData.uri = "http://schemas.openxmlformats.org/drawingml/2006/picture";
+                try
+                {
+                    inline.graphic.graphicData.AddPicElement(picXml);
+                }
+                catch
+                {
+
+                }
+
+                NPOI.OpenXmlFormats.Dml.WordProcessing.CT_PositiveSize2D extent = inline.AddNewExtent();
+                extent.cx = width;
+                extent.cy = height;
+
+                NPOI.OpenXmlFormats.Dml.WordProcessing.CT_NonVisualDrawingProps docPr = inline.AddNewDocPr();
+                docPr.id = (uint)imgNo + 1;
+                docPr.name = "图片 " + (imgNo + 1);
+                fsImg.Close();
+            }
+        }
         private void WriteImgToDocx(PictureWidget pictureWidget, XWPFDocument docx, int imgNo) //TODO
         {
             string picturePath = pictureWidget.ImageUrl;
@@ -36,21 +96,14 @@ namespace C2.Model.MindMaps
             {
                 int width = pictureWidget.Data.Width;
                 int height = pictureWidget.Data.Height;
-                var fileStream = new FileStream(picturePath, FileMode.Open);  // TODO
-                //CT_P m_p = docx.Document.body.AddNewP();
-                //m_p.AddNewPPr().AddNewJc().val = ST_Jc.center;   // TODO 返回null就崩了
-                //XWPFParagraph paragraphIMG = new XWPFParagraph(m_p,docx); //TODO
-                XWPFParagraph paragraphIMG = docx.CreateParagraph(); ;
                 Size size = RotateImageSize(width, height);
+                CreatePicture(picturePath, docx,size);
 
-                //长宽单位为emu，在1080分辨率下换算单位为1像素等于846emu
+                XWPFParagraph paragraphIMG = docx.CreateParagraph();
                 XWPFRun xwpfRun = paragraphIMG.CreateRun();
-                xwpfRun.AddPicture(fileStream, (int)PictureType.PNG, fileName, size.Width * 846, size.Height * 846);
-                //NPOI.OpenXmlFormats.Dml.WordProcessing.CT_Inline inline = xwpfRun.GetCTR().GetDrawingList()[0].inline[0];
-                //inline.docPr.id = (uint)imgNo;
                 xwpfRun.FontFamily = "宋体";
-                xwpfRun.SetText("图" + imgNo);
-                fileStream.Close();
+                xwpfRun.SetText("图" + imgNo +":" + fileName);
+                
             }
             catch
             {
@@ -66,18 +119,19 @@ namespace C2.Model.MindMaps
             paragraphTitle.Style = layer > 4 ? "a0" : layer.ToString();
 
             XWPFRun xwpfRun = paragraphTitle.CreateRun();
-            if (layer > 4 )
-            {
-                xwpfRun.FontFamily = "宋体";
-                xwpfRun.SetText(title);
-            }
+           
             if(layer == 1) 
             {
                 xwpfRun.SetText(title);
             }
-            else
+            if(layer <= 4)
             {
                 xwpfRun.SetText(string.Format("{0} {1}", serialNumber, title));
+            }
+            if (layer > 4)
+            {
+                xwpfRun.FontFamily = "宋体";
+                xwpfRun.SetText(title);
             }
         }
 
@@ -89,7 +143,7 @@ namespace C2.Model.MindMaps
         {
             return topic.FindWidgets<PictureWidget>(e => File.Exists(e.ImageUrl) && (e.Data.Width > 128 || e.Data.Height > 128));
         }
-        private void WriteToDocx(Topic topic, XWPFDocument DocxExample, XWPFDocument docx,string serialNumber = "1") 
+        private void WriteToDocx(Topic topic, XWPFDocument DocxExample, XWPFDocument docx, string serialNumber = "1") 
         {
             XWPFStyles newStyles = docx.CreateStyles();
             newStyles.SetStyles(DocxExample.GetCTStyle());//复制模板格式
@@ -107,14 +161,13 @@ namespace C2.Model.MindMaps
                 WriteImgToDocx(pictureWidget, docx, imgNo++);
             }
 
-            string nSerialNumber;
-            for (int j =1; j < topic.Children.Count+1; j++) 
+            
+            for (int j = 0; j < topic.Children.Count; j++) 
             {
-                if (topic.IsRoot)
-                    nSerialNumber = (j).ToString();
-                else
-                    nSerialNumber = string.Format("{0}.{1}",serialNumber, j.ToString());
-                WriteToDocx(topic.Children[j - 1], DocxExample, docx, nSerialNumber);
+                string nSerialNumber = (j + 1).ToString();
+                if (!topic.IsRoot)
+                    nSerialNumber = string.Format("{0}.{1}", serialNumber, (j + 1).ToString());
+                WriteToDocx(topic.Children[j], DocxExample, docx, nSerialNumber);
             }
 
 
@@ -134,7 +187,6 @@ namespace C2.Model.MindMaps
                 using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
                     imgNo = 0;
-
                     XWPFDocument docx = new XWPFDocument();
                     WriteToDocx(topic, DocxExample, docx);
                     try
