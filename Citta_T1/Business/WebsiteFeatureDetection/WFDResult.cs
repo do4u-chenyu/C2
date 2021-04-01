@@ -15,7 +15,7 @@
 
         public string JoinAllContent()
         {
-            return string.Join("\t", new string[] { url, cur_url, html_content_id, title, html_content, prediction, prediction, login, screen_shot });
+            return string.Join("\t", new string[] { url, cur_url, html_content_id, title, html_content, prediction, login, screen_shot });
         }
     }
 

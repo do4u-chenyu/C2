@@ -116,16 +116,19 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 TaskInfo.Status = WFDTaskStatus.Running;
             else if (respMsg == "fail")
                 TaskInfo.Status = WFDTaskStatus.Failed;
+            this.taskStatusLabel.Text = TaskInfo.Status.ToString();
         }
 
         private List<WFDResult> DealData(string resultFilePath, string apiResults)
         {
             //解析正确结果，同时写进本地文件，返回预览字符串
             List<WFDResult> results = new List<WFDResult>();
+            List<string> titles = new List<string>() { "url", "cur_url", "html_content_id", "title", "html_content", "prediction", "login", "screen_shot" };
             StreamWriter sw = null;
             try
             {
                 sw = new StreamWriter(resultFilePath);
+                sw.WriteLine(titles.JoinString(OpUtil.TabSeparatorString));
                 results = new JavaScriptSerializer().Deserialize<List<WFDResult>>(apiResults);
                 foreach (WFDResult result in results)
                     sw.WriteLine(result.JoinAllContent());
