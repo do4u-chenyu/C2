@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using C2.Model.Widgets;
 using NPOI.OpenXmlFormats.Dml;
 using NPOI.OpenXmlFormats.Dml.WordProcessing;
-using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
 
 namespace C2.Model.MindMaps
@@ -19,6 +18,7 @@ namespace C2.Model.MindMaps
             {
                 XWPFParagraph noteText = docx.CreateParagraph();
                 noteText.Style = "a0";
+                noteText.IndentationFirstLine = 400;
                 XWPFRun xwpfRun = noteText.CreateRun();
                 xwpfRun.FontFamily = "宋体";
                 xwpfRun.SetText(topicNote.Text);
@@ -26,7 +26,7 @@ namespace C2.Model.MindMaps
         }
         private Size RotateImageSize(int width, int height)
         {
-            return width > height ? new Size(768, height * 768 / width) : new Size(width * 768 / height, 768);
+            return width > height ? new Size(512, height * 512 / width) : new Size(width * 512 / height, 512);
         }
         private void CreatePicture(string filePath, XWPFDocument docx,Size size)
         {
@@ -100,9 +100,10 @@ namespace C2.Model.MindMaps
                 CreatePicture(picturePath, docx,size);
 
                 XWPFParagraph paragraphIMG = docx.CreateParagraph();
+                paragraphIMG.Alignment = ParagraphAlignment.CENTER;
                 XWPFRun xwpfRun = paragraphIMG.CreateRun();
                 xwpfRun.FontFamily = "宋体";
-                xwpfRun.SetText("图" + imgNo +":" + fileName);
+                xwpfRun.SetText("图" + (imgNo + 1) +":" + fileName);
                 
             }
             catch
@@ -124,12 +125,13 @@ namespace C2.Model.MindMaps
             {
                 xwpfRun.SetText(title);
             }
-            if(layer <= 4)
+            if(layer <= 4 && layer > 1)
             {
                 xwpfRun.SetText(string.Format("{0} {1}", serialNumber, title));
             }
             if (layer > 4)
             {
+                paragraphTitle.IndentationFirstLine = 400;
                 xwpfRun.FontFamily = "宋体";
                 xwpfRun.SetText(title);
             }
