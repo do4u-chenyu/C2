@@ -546,7 +546,7 @@ namespace C2.Dialogs
                      this.versionLable.Text = @"当前版本:";
                      this.version.Text = currentVersion;                    
                      this.sizeLable.Visible = false;
-                     this.sizeValue.Visible = false;
+                     this.size.Visible = false;
                      this.checking.Visible = false;
                      this.button3.Enabled = false;
                      this.ResumeLayout(false);
@@ -554,7 +554,7 @@ namespace C2.Dialogs
             }
             else if (newSoftwareVersion.IsNullOrEmpty())
             {
-                GetNewVersionFail();
+                FetchNewVersionFail();
             }
             else
             {
@@ -562,21 +562,21 @@ namespace C2.Dialogs
                 string[] info_split = softwareInfo.Split(OpUtil.TabSeparator);
                 if (info_split.Length < 3)
                 {
-                    GetNewVersionFail();
+                    FetchNewVersionFail();
                     return;
                 }
                 this.Invoke((EventHandler)(delegate
                 {
                     this.SuspendLayout();
                     this.version.Text = info_split[0];
-                    this.sizeValue.Text = info_split[1];
+                    this.size.Text = info_split[1];
                     this.description.Text = info_split[2];
                     this.checking.Visible = false;
                     this.ResumeLayout(false);
                 }));
             }
         }
-        private void GetNewVersionFail()
+        private void FetchNewVersionFail()
         {
             this.Invoke((EventHandler)(delegate
             {

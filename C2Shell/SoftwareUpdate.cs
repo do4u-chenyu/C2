@@ -16,12 +16,13 @@ namespace C2Shell
         private readonly string C2Path = Path.Combine(Application.StartupPath, "C2.exe");
         private readonly string configFilePath = Path.Combine(Application.StartupPath, "C2.exe.config");
         private readonly string zipPattern = @"software-(\d+\.){2}\d+-\d{8}.zip";
-        private string newVersion;
+        private string webVersion;
 
-        public string ZipName { get; set; }
+        private string zipName;
         public SoftwareUpdate()
         {
-            newVersion = string.Empty;
+            webVersion = string.Empty;
+            zipName = string.Empty;
         }
 
 
@@ -32,23 +33,23 @@ namespace C2Shell
                 string[] files = Directory.GetFiles(installPath);
                 if (files.Length == 1 && Regex.IsMatch(files[0], zipPattern))
                 {
-                    ZipName = files[0];
+                    zipName = files[0];
                     // 获取新版本号
-                    newVersion = Regex.Match(ZipName, @"(\d+\.){2}\d+").ToString();
+                    webVersion = Regex.Match(zipName, @"(\d+\.){2}\d+").ToString();
                     //获取当前版本号
                     string currentVersion = Utils.XmlUtil.CurrentVersion(configFilePath);
-                    return IsNewVersion(newVersion, currentVersion);
+                    return IsNewVersion(webVersion, currentVersion);
                 }
             }
             catch { }
             return false;
         }
-        private bool IsNewVersion(string newVersion, string currentVersion)
+        private bool IsNewVersion(string webVersion, string currentVersion)
         {
 
             try
             {
-                return new Version(newVersion) > new Version(currentVersion);
+                return new Version(webVersion) > new Version(currentVersion);
             }
             catch
             {
@@ -56,7 +57,7 @@ namespace C2Shell
             }
 
         }
-        public bool ExecuteUpdate(string zipName)
+        public bool ExecuteUpdate()
         {
             string zipPath = Path.Combine(installPath, zipName);
             string scriptPath = Path.Combine(updatePath, "setup.bat");
@@ -72,10 +73,9 @@ namespace C2Shell
             // 执行 setup.bat脚本 ，进行文件备份和替换     
             if (File.Exists(scriptPath) && ExecuteCmdScript(scriptPath))
             {
-                // 修改配置文件版本号
-               
-                Utils.XmlUtil.UpdateVersion(configFilePath, newVersion);
-                MessageBox.Show("C2升级成功，当前版本:" + newVersion);
+                // 修改配置文件版本号              
+                Utils.XmlUtil.UpdateVersion(configFilePath, webVersion);
+                MessageBox.Show("C2升级成功，当前版本:" + webVersion);
                 return true;
             }
             return false;
@@ -89,6 +89,7 @@ namespace C2Shell
                 if (File.Exists(scriptPath) && ExecuteCmdScript(scriptPath))
                     MessageBox.Show("回滚成功");
             }
+
             catch
             {
                 MessageBox.Show("回滚失败");
