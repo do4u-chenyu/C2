@@ -27,7 +27,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripButton SavePic;
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
-        private readonly List<MapDataItem> mapWidgetDataItems;
+        private readonly MapConfig mapConfig;
 
         public WebType WebType;
         public Topic HitTopic;
@@ -51,31 +51,15 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SourceWebUrl = string.Empty;
         }
 
-        private List<MapDataItem> InitMapWidgetDataItems()
+        private MapConfig InitMapWidgetDataItems()
         {
-            List<MapDataItem> tmp = new List<MapDataItem>();
+            MapConfig tmp = new MapConfig();
             if (HitTopic == null)
                 return tmp;
-            var mapWidget = HitTopic.FindWidget<MapWidget>();
+            MapWidget mapWidget = HitTopic.FindWidget<MapWidget>();
             if (mapWidget != null)
             {
-                foreach (DataItem dataItem in mapWidget.DataItems)
-                {
-                    string mapTypeName = String.Empty;
-                    if (dataItem.FileName.Contains("标注图"))
-                        mapTypeName = "标注图";
-                    else if (dataItem.FileName.Contains("多边形图"))
-                        mapTypeName = "多边形图";
-                    else if (dataItem.FileName.Contains("轨迹图"))
-                        mapTypeName = "轨迹图";
-                    else if (dataItem.FileName.Contains("热力图"))
-                        mapTypeName = "热力图";
-                    tmp.Add(new MapDataItem
-                    {
-                        dataItem = dataItem,
-                        mapTypeName = mapTypeName
-                    }); 
-                }
+                tmp = mapWidget.MapConfig.Clone();
             }
             return tmp;
         }
@@ -85,7 +69,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             HitTopic = hitTopic;
             DataItems = hitTopic.GetDataItems();
             WebType = webType;
-            mapWidgetDataItems = InitMapWidgetDataItems();
+            mapConfig = InitMapWidgetDataItems();
         }
 
         #region 窗体事件
@@ -281,19 +265,19 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 {
                     case "标注图":
                         webBrowser1.Document.InvokeScript("markerPoints", args);
-                        AddDataItem(mapWidgetDataItems, "标注图", dialog.HitItem);
+                        AddDataItem("标注图", dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "轨迹图":
                         webBrowser1.Document.InvokeScript("drawOrit", args);
-                        AddDataItem(mapWidgetDataItems, "轨迹图", dialog.HitItem);
+                        AddDataItem("轨迹图", dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "多边形图":
                         webBrowser1.Document.InvokeScript("drawPolygon", args);
-                        AddDataItem(mapWidgetDataItems, "多边形图", dialog.HitItem);
+                        AddDataItem("多边形图", dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "热力图":
                         webBrowser1.Document.InvokeScript("drawHeatmap", args);
-                        AddDataItem(mapWidgetDataItems, "热力图", dialog.HitItem);
+                        AddDataItem("热力图", dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                 }
                 var configMap = new ConfigForm();
@@ -308,20 +292,16 @@ namespace C2.IAOLab.WebEngine.Dialogs
         /// </summary>
         /// <param name="mapTypeName"></param>
         /// <param name="jsonData"></param>
-        private void AddDataItem(List<MapDataItem> mapDataItems, string mapTypeName, DataItem dataItem)
+        private void AddDataItem(string mapTypeName, int latIndex, int lngIndex, int weightIndex, DataItem dataItem)
         {
-            MapDataItem mdi = new MapDataItem
-            {
-                dataItem = dataItem,
-                mapTypeName = mapTypeName
-            };
-            mapDataItems.Add(mdi);
+            MapDataConfig mdi = new MapDataConfig(latIndex, lngIndex, weightIndex, dataItem, mapTypeName);
+            mapConfig.MapDataConfigList.Add(mdi);
         }
 
         private void Clear_Click(object sender, EventArgs e)
         {
             webBrowser1.Document.InvokeScript("clearAll");
-            mapWidgetDataItems.Clear();
+            mapConfig.MapDataConfigList.Clear();
         }
 
 
@@ -472,18 +452,19 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         protected override bool OnCancelButtonClick()
         {
-            mapWidgetDataItems.Clear();
+            mapConfig.MapDataConfigList.Clear();
             return base.OnCancelButtonClick();
         }
 
         private void SavePointsToDisk()
         {
+            // TODO
             var mapWidget = HitTopic.FindWidget<MapWidget>();
             mapWidget.DataItems.Clear();
-            foreach (MapDataItem mdi in mapWidgetDataItems)
+            foreach (MapDataConfig mdi in mapConfig.MapDataConfigList)
             {
-                DataItem dataItem = mdi.dataItem;
-                string mapTypeName = mdi.mapTypeName;
+                DataItem dataItem = mdi.DataItem;
+                string mapTypeName = mdi.MapTypeName;
                 if (File.Exists(dataItem.FilePath))
                 {
                     string destPath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name,
@@ -501,9 +482,58 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
         }
     }
-    struct MapDataItem
+    /// <summary>
+    /// 每一个地图数据都要有的东西地图配置信息
+    /// </summary>
+    class MapDataConfig
     {
-        public DataItem dataItem;
-        public string mapTypeName;
+        public int LatIndex;
+        public int LngIndex;
+        public int WeightIndex;
+        public DataItem DataItem;
+        public string MapTypeName;
+        public MapDataConfig(int latIdx, int lngIdx, int weightIdx, DataItem dataItem, string mapTypeName)
+        {
+            this.LatIndex = latIdx;
+            this.LngIndex = lngIdx;
+            this.WeightIndex = weightIdx;
+            this.DataItem = dataItem;
+            this.MapTypeName = mapTypeName;
+        }
+    }
+    class MapConfig
+    {
+        const float defaultLat = (float)108.876433;
+        const float defaultLng = (float)36.269395;
+        const int defaultLevel = 5;
+        public float InitLat;
+        public float InitLng;
+        public int Level;
+        public List<MapDataConfig> MapDataConfigList;
+        public MapConfig()
+        {
+            var configForm = new ConfigForm();
+            if (!float.TryParse(configForm.latude, out this.InitLat))
+                this.InitLat = defaultLat;
+            if (!float.TryParse(configForm.lontude, out this.InitLng))
+                this.InitLng = defaultLng;
+            if (!int.TryParse(configForm.scale, out this.Level))
+                this.Level = defaultLevel;
+            this.MapDataConfigList = new List<MapDataConfig>();
+        }
+        public MapConfig(float initLat, float initLng, int level, List<MapDataConfig> mapDataConfigList)
+        {
+            this.InitLat = initLat;
+            this.InitLng = initLng;
+            this.Level = level;
+            this.MapDataConfigList = new List<MapDataConfig>();
+            foreach (MapDataConfig mapDataConfig in mapDataConfigList)
+                this.MapDataConfigList.Add(mapDataConfig);
+        }
+
+        public MapConfig Clone()
+        {
+            return new MapConfig(this.InitLat, this.InitLng, this.Level, this.MapDataConfigList);
+        }
     }
 }

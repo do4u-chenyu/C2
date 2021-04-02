@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.IAOLab.WebEngine.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace C2.Model.Widgets
     class MapWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "MAP";
+        public MapConfig MapConfig;
 
         [Browsable(false)]
         public string WebUrl { set; get; }
@@ -20,6 +22,7 @@ namespace C2.Model.Widgets
             DisplayIndex = 9;
             Alignment = WidgetAlignment.Right;//默认位置改成右侧,让图标挂件和主题文字紧挨着
             widgetIcon = Properties.Resources.地图;
+            MapConfig = new MapConfig();
         }
 
         public override string GetTypeID()

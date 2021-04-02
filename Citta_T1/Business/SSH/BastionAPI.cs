@@ -123,7 +123,7 @@ namespace C2.Business.SSH
             if (!EnterGambleWorkspace())
                 return String.Empty;
 
-            String command = String.Format("python {0} && disown;", GambleScript);
+            String command = String.Format("sleep 1000 &", GambleScript);
 
             String pid = SuccessRunCommand(command) ? GetGambleTaskPID() : String.Empty;
             // 未获取到pid，当作模型脚本执行失败
