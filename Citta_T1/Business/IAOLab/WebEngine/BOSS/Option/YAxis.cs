@@ -86,5 +86,16 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         public int zlevel { get => _zlevel; set { FlagDic["zlevel"] = true; _zlevel = value; } }
         int _z;
         public int z { get => _z; set { FlagDic["z"] = true; _z = value; } }
+
+        string _splitLine;
+        public string splitLine { get => _splitLine; set { FlagDic["splitLine"] = true; _splitLine = value; } }
+        string _axisLine;
+        public string axisLine { get => _axisLine; set { FlagDic["axisLine"] = true; _axisLine = value; } }
+        string _axisLabel;
+        public string axisLabel { get => _axisLabel; set { FlagDic["axisLabel"] = true; _axisLabel = value; } }
+
+        string _axisTick;
+        public string axisTick { get => _axisTick; set { FlagDic["axisTick"] = true; _axisTick = value; } }
+
     }
 }

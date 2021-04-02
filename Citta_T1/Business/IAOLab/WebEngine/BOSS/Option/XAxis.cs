@@ -70,6 +70,18 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         public xAxisType type { get => _type; set { FlagDic["type"] = true; _type = value; } }
         string _name;
         public string name { get => _name; set { FlagDic["name"] = true; _name = value; } }
+        string _axisLine;
+        public string  axisLine { get => _axisLine; set { FlagDic["axisLine"] = true; _axisLine = value; } }
+        string _splitLine;
+        public string splitLine { get => _splitLine; set { FlagDic["splitLine"] = true; _splitLine = value; } }
+        string _splitArea;
+        public string splitArea { get => _splitArea; set { FlagDic["splitArea"] = true; _splitArea = value; } }
+        
+        string _axisLabel;
+        public string axisLabel { get => _axisLabel; set { FlagDic["axisLabel"] = true; _axisLabel = value; } }
+
+
+
         string _nameLocation;
         public string nameLocation { get => _nameLocation; set { FlagDic["nameLocation"] = true; _nameLocation = value; } }
         SubtextStyle _nameTextStyle;
