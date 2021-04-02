@@ -40,7 +40,8 @@ namespace C2.IAOLab.WebEngine.Boss
             echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
             echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
             echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-            echarts[4] = new SmoothedLineChart(dataTable, new CompleteOption(), chartOptions); //曲线图
+            //echarts[4] = new SmoothedLineChart(dataTable, new CompleteOption(), chartOptions); //曲线图
+            echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);//渐变线性图
 
             if(bossType == 0 || bossType == 2)
                 echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);  //堆叠柱状图

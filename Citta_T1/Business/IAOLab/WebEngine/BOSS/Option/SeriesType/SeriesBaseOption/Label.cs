@@ -18,7 +18,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption
             Common.InitOptionFlag(this, FlagDic, TypeDic);
         }
 
-        public bool show { get { return _show; } set { FlagDic["show"] = true; _show = value; } }
+        public string show { get { return _show; } set { FlagDic["show"] = true; _show = value; } }
         public Position position { get { return _position; } set { FlagDic["position"] = true; _position = value; } }
         public int distance { get { return _distance; } set { FlagDic["distance"] = true; _distance = value; } }
         public int rotate { get { return _rotate; } set { FlagDic["rotate"] = true; _rotate = value; } }
@@ -50,8 +50,12 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption
         public int textShadowOffsetX { get { return _textShadowOffsetX; } set { FlagDic["textShadowOffsetX"] = true; _textShadowOffsetX = value; } }
         public int textShadowOffsetY { get { return _textShadowOffsetY; } set { FlagDic["textShadowOffsetY"] = true; _textShadowOffsetY = value; } }
         public string rich { get { return _rich; } set { FlagDic["rich"] = true; _rich = value; } }
+        public string textStyle { get { return _textStyle; } set { FlagDic["textStyle"] = true; _textStyle = value; } }
 
-        bool _show;
+
+
+        string _textStyle;
+        string _show;
         Position _position;
         int _distance;
         int _rotate;

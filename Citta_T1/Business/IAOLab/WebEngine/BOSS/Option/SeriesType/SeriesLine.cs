@@ -36,7 +36,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public bool symbolKeepAspect { get { return _symbolKeepAspect; } set { FlagDic["symbolKeepAspect"] = true; _symbolKeepAspect = value; } }
         public string symbolOffset { get { return _symbolOffset; } set { FlagDic["symbolOffset"] = true; _symbolOffset = value; } }
         public bool showSymbol { get { return _showSymbol; } set { FlagDic["showSymbol"] = true; _showSymbol = value; } }
-        public bool showAllSymbol { get { return _showAllSymbol; } set { FlagDic["showAllSymbol"] = true; _showAllSymbol = value; } }
+        public string showAllSymbol { get { return _showAllSymbol; } set { FlagDic["showAllSymbol"] = true; _showAllSymbol = value; } }
         public bool hoverAnimation { get { return _hoverAnimation; } set { FlagDic["hoverAnimation"] = true; _hoverAnimation = value; } }
         public bool legendHoverLink { get { return _legendHoverLink; } set { FlagDic["legendHoverLink"] = true; _legendHoverLink = value; } }
         public string stack { get { return _stack; } set { FlagDic["stack"] = true; _stack = value; } }
@@ -85,7 +85,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         bool _symbolKeepAspect;
         string _symbolOffset;
         bool _showSymbol;
-        bool _showAllSymbol;
+        string _showAllSymbol;
         bool _hoverAnimation;
         bool _legendHoverLink;
         string _stack;

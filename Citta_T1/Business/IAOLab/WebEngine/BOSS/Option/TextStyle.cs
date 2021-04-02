@@ -18,6 +18,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         }
 
         public string color { get { return _color; } set { FlagDic["color"] = true; _color = value; } }
+        public string align { get { return _align; } set { FlagDic["align"] = true; _align = value; } }
         public FontStyle fontStyle { get { return _fontStyle; } set { FlagDic["fontStyle"] = true; _fontStyle = value; } }
         public FontWeight fontWeight { get { return _fontWeight; } set { FlagDic["fontWeight"] = true; _fontWeight = value; } }
         public FontFamily fontFamily { get { return _fontFamily; } set { FlagDic["fontFamily"] = true; _fontFamily = value; } }
@@ -32,6 +33,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         public int textShadowOffsetX { get { return _textShadowOffsetX; } set { FlagDic["textShadowOffsetX"] = true; _textShadowOffsetX = value; } }
         public int textShadowOffsetY { get { return _textShadowOffsetY; } set { FlagDic["textShadowOffsetY"] = true; _textShadowOffsetY = value; } }
 
+        string _align;
         string _color;
         FontStyle _fontStyle;
         FontWeight _fontWeight;
