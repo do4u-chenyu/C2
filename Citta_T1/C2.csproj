@@ -2869,13 +2869,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Script\IAO_Web_validation\global_method.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step1_unzip\step1_unzip.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step2_filter\keywords\neg_keywords.txt" />
-    <Content Include="Resources\Script\IAO_Web_validation\step2_filter\keywords\pos_keywords.txt" />
-    <Content Include="Resources\Script\IAO_Web_validation\step2_filter\step2_filter.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step2_filter\util.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step4_classify\step4_ classify.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step4_classify\token_ocr.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\Noesis.Javascript.dll" />
+    <Content Include="Resources\Script\IAO_Web_validation\screenshot.js" />
+    <Content Include="Resources\Script\IAO_Web_validation\step1_unzip.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\step2_filter.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\step3_screen_capture.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\step4_ classify.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\step5_ finnaly.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
+    <Content Include="Resources\Script\IAO_Web_validation\util.py" />
     <Content Include="Resources\StartPage\bank.png" />
     <Content Include="Resources\StartPage\BusinessViewLabel.png" />
     <Content Include="Resources\StartPage\bussinessView.png" />
