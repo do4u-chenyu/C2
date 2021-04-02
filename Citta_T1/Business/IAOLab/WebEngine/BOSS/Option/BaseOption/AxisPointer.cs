@@ -15,5 +15,10 @@ namespace C2.IAOLab.WebEngine.Boss.Option.BaseOption
         {
             Common.InitOptionFlag(this, FlagDic, TypeDic);
         }
+
+        public string lineStyle { get { return _lineStyle; } set { FlagDic["lineStyle"] = true; _lineStyle = value; } }
+        
+        string _lineStyle;
+
     }
 }

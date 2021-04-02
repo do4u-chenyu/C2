@@ -12,8 +12,8 @@ namespace C2.Controls.Left
     public partial class IAOButton : UserControl
     {
 
-        private Form baseForm;
         private OpenToolFormDelegate openToolForm;
+        private string buttonType;
 
         public OpenToolFormDelegate ShowDialogDelegate { get => openToolForm; set => openToolForm = value; }
 
@@ -30,6 +30,7 @@ namespace C2.Controls.Left
         public IAOButton(string ffp)
         {
             InitializeComponent();
+            buttonType = ffp;
             this.ContextMenuStrip = contextMenuStrip1;
             this.txtButton.Text = Lang._(ffp);
             switch (ffp)
@@ -37,49 +38,38 @@ namespace C2.Controls.Left
                 case "APK":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.ApkToolFormHelpInfo);
-                    ApkToolForm();
                     break;
                 case "BaseStation":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BaseStation;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BaseStationFormHelpInfo);
-                    BaseStationForm(ffp);
                     break;
                 case "Wifi":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
-                    baseForm = new WifiLocation() { FormType = ffp };
                     break;
                 case "Card":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BankToolFormHelpInfo);
-                    BankToolForm(ffp);
                     break;
                 case "Tude":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Tude;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GPSTransformFormHelpInfo);
-                    GPSTransformForm(ffp);
                     break;
                 case "Ip":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Ip;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TimeAndIPTransformFormHelpInfo);
-                    TimeAndIPTransformForm(ffp);
                     break;
                 case "BigAPK":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BigAPK;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BigAPKFormHelpInfo);
-                    BigAPKForm();
                     break;
             }
-            //toolTip1.SetToolTip(this.txtButton, this.txtButton.Text);
+
         }
-        #region 定义6种弹窗
-        private void ApkToolForm()
+        #region 定义弹窗
+        private Form BaseStationForm(string formType)
         {
-            baseForm = new ApkTool();
-        }
-        private void BaseStationForm(string formType)
-        {
-            baseForm = new WifiLocation()
+           return new WifiLocation()
             {
                 Text = "基站查询",
                 InputLable = "请在下方输入基站号码",
@@ -88,9 +78,9 @@ namespace C2.Controls.Left
             };
 
         }
-        private void BankToolForm(string formType)
+        private Form BankToolForm(string formType)
         {
-            baseForm = new WifiLocation()
+            return new WifiLocation()
             {
                 Text = "银行卡信息查询",
                 InputLable = "请在下方输入银行卡",
@@ -99,9 +89,9 @@ namespace C2.Controls.Left
             };
 
         }
-        private void GPSTransformForm(string formType)
+        private Form GPSTransformForm(string formType)
         {
-            baseForm = new CoordinateConversion()
+            return new CoordinateConversion()
             {
                 Tab0Tip = HelpUtil.GPSTransformHelpInfo,
                 Tib1Tip = HelpUtil.GPSDistanceHelpInfo,
@@ -109,23 +99,22 @@ namespace C2.Controls.Left
             };
 
         }
-        private void TimeAndIPTransformForm(string formType)
+        private Form TimeAndIPTransformForm(string formType)
         {
-            baseForm = new CoordinateConversion()
+            CoordinateConversion form = new CoordinateConversion()
             {
                 Tab0Tip = HelpUtil.IPTransformHelpInfo,
                 Tib1Tip = HelpUtil.TimeTransformHelpInfo,
                 FormType = formType
             };
-            (baseForm as CoordinateConversion).ReLayoutForm();
+            form.ReLayoutForm();
+            return form;
 
         }
 
-        private void BigAPKForm()
+        private Form BigAPKForm()
         {
-
-            baseForm = new BigAPKForm();
-            baseForm.WindowState = FormWindowState.Maximized;
+            return new BigAPKForm() { WindowState = FormWindowState.Maximized };
         }
         #endregion
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -140,15 +129,33 @@ namespace C2.Controls.Left
         }
         private void OpenToolForm()
         {
-            if (openToolForm != null)
+            switch (buttonType)
             {
-                openToolForm();
-                return;
+                case "APK":
+                    new ApkTool().ShowDialog();
+                    break;
+                case "BaseStation":
+                    BaseStationForm(buttonType).ShowDialog();
+                    break;
+                case "Wifi":
+                    new WifiLocation() { FormType = buttonType }.ShowDialog();
+                    break;
+                case "Card":
+                    BankToolForm(buttonType).ShowDialog();
+                    break;
+                case "Tude":
+                    GPSTransformForm(buttonType).ShowDialog();
+                    break;
+                case "Ip":
+                    TimeAndIPTransformForm(buttonType).ShowDialog();
+                    break;
+                case "BigAPK":
+                    BigAPKForm().ShowDialog();
+                    break;
+                default:
+                    openToolForm?.Invoke();
+                    break;
             }
-            if (baseForm != null)
-                baseForm.ShowDialog();
-
-
         }
 
 

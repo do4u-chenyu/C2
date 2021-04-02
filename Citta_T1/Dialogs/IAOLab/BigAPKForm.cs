@@ -15,6 +15,8 @@ namespace C2.Dialogs.IAOLab
         public BigAPKForm()
         {
             InitializeComponent();
+            IntPtr Hicon = global::C2.Properties.Resources.BigAPK.GetHicon();
+            this.Icon = Icon.FromHandle(Hicon);
         }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)

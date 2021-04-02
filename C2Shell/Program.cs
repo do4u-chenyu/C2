@@ -8,7 +8,7 @@
             SoftwareUpdate updateInstance = new SoftwareUpdate();
             if (updateInstance.IsNeedUpdate())
             {
-                if (!updateInstance.ExecuteUpdate(updateInstance.ZipName))
+                if (!updateInstance.ExecuteUpdate())
                     updateInstance.Rollback();
                 updateInstance.Clear();
             }
