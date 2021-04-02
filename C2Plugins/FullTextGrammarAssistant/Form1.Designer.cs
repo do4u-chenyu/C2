@@ -42,11 +42,10 @@
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.checkBox32 = new System.Windows.Forms.CheckBox();
             this.checkBox41 = new System.Windows.Forms.CheckBox();
+            this.checkBox13 = new System.Windows.Forms.CheckBox();
             this.checkBox40 = new System.Windows.Forms.CheckBox();
             this.checkBox39 = new System.Windows.Forms.CheckBox();
             this.checkBox38 = new System.Windows.Forms.CheckBox();
@@ -78,7 +77,7 @@
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox13 = new System.Windows.Forms.CheckBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -102,18 +101,22 @@
             this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -237,16 +240,6 @@
             this.checkBox7.Text = "TELNET";
             this.checkBox7.UseVisualStyleBackColor = true;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::FullTextGrammarAssistant.Properties.Resources.加;
-            this.pictureBox2.Location = new System.Drawing.Point(944, 195);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox2.TabIndex = 14;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.checkBox32);
@@ -289,18 +282,6 @@
             this.panel1.TabIndex = 15;
             this.panel1.Visible = false;
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.LinkColor = System.Drawing.Color.DimGray;
-            this.linkLabel1.Location = new System.Drawing.Point(941, 464);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(44, 18);
-            this.linkLabel1.TabIndex = 44;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "收起";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // checkBox32
             // 
             this.checkBox32.AutoSize = true;
@@ -320,6 +301,16 @@
             this.checkBox41.TabIndex = 42;
             this.checkBox41.Text = "车辆违章查询";
             this.checkBox41.UseVisualStyleBackColor = true;
+            // 
+            // checkBox13
+            // 
+            this.checkBox13.AutoSize = true;
+            this.checkBox13.Location = new System.Drawing.Point(397, 16);
+            this.checkBox13.Name = "checkBox13";
+            this.checkBox13.Size = new System.Drawing.Size(70, 22);
+            this.checkBox13.TabIndex = 14;
+            this.checkBox13.Text = "博客";
+            this.checkBox13.UseVisualStyleBackColor = true;
             // 
             // checkBox40
             // 
@@ -633,15 +624,17 @@
             this.checkBox8.Text = "微博";
             this.checkBox8.UseVisualStyleBackColor = true;
             // 
-            // checkBox13
+            // linkLabel1
             // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.Location = new System.Drawing.Point(397, 16);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(70, 22);
-            this.checkBox13.TabIndex = 14;
-            this.checkBox13.Text = "博客";
-            this.checkBox13.UseVisualStyleBackColor = true;
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.LinkColor = System.Drawing.Color.DimGray;
+            this.linkLabel1.Location = new System.Drawing.Point(941, 464);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(44, 18);
+            this.linkLabel1.TabIndex = 44;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "收起";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label4
             // 
@@ -669,30 +662,32 @@
             "域名",
             "收件人",
             "上级网址"});
-            this.comboBox1.Location = new System.Drawing.Point(172, 530);
+            this.comboBox1.Location = new System.Drawing.Point(106, 3);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(225, 26);
+            this.comboBox1.Size = new System.Drawing.Size(224, 26);
             this.comboBox1.TabIndex = 17;
             // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
+            "精确匹配",
+            "模糊匹配",
             "大于",
             "大于等于",
             "等于",
             "小于",
             "小于等于"});
-            this.comboBox2.Location = new System.Drawing.Point(423, 530);
+            this.comboBox2.Location = new System.Drawing.Point(336, 3);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(135, 26);
             this.comboBox2.TabIndex = 18;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(589, 530);
+            this.textBox2.Location = new System.Drawing.Point(478, 3);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(347, 28);
+            this.textBox2.Size = new System.Drawing.Size(253, 28);
             this.textBox2.TabIndex = 19;
             // 
             // checkBox43
@@ -748,7 +743,7 @@
             // checkBox48
             // 
             this.checkBox48.AutoSize = true;
-            this.checkBox48.Location = new System.Drawing.Point(172, 589);
+            this.checkBox48.Location = new System.Drawing.Point(172, 720);
             this.checkBox48.Name = "checkBox48";
             this.checkBox48.Size = new System.Drawing.Size(70, 22);
             this.checkBox48.TabIndex = 21;
@@ -760,7 +755,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(61, 590);
+            this.label5.Location = new System.Drawing.Point(61, 721);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 18);
             this.label5.TabIndex = 20;
@@ -789,7 +784,7 @@
             // checkBox53
             // 
             this.checkBox53.AutoSize = true;
-            this.checkBox53.Location = new System.Drawing.Point(172, 685);
+            this.checkBox53.Location = new System.Drawing.Point(172, 816);
             this.checkBox53.Name = "checkBox53";
             this.checkBox53.Size = new System.Drawing.Size(70, 22);
             this.checkBox53.TabIndex = 28;
@@ -801,7 +796,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(65, 686);
+            this.label6.Location = new System.Drawing.Point(65, 817);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(98, 18);
             this.label6.TabIndex = 27;
@@ -830,7 +825,7 @@
             // checkBox50
             // 
             this.checkBox50.AutoSize = true;
-            this.checkBox50.Location = new System.Drawing.Point(172, 785);
+            this.checkBox50.Location = new System.Drawing.Point(172, 916);
             this.checkBox50.Name = "checkBox50";
             this.checkBox50.Size = new System.Drawing.Size(106, 22);
             this.checkBox50.TabIndex = 32;
@@ -842,7 +837,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(65, 786);
+            this.label7.Location = new System.Drawing.Point(65, 917);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(98, 18);
             this.label7.TabIndex = 31;
@@ -861,7 +856,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(65, 882);
+            this.label8.Location = new System.Drawing.Point(65, 1013);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(134, 18);
             this.label8.TabIndex = 36;
@@ -869,7 +864,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(737, 986);
+            this.button1.Location = new System.Drawing.Point(732, 1002);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 40);
             this.button1.TabIndex = 37;
@@ -878,21 +873,12 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(889, 986);
+            this.button2.Location = new System.Drawing.Point(889, 1002);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 40);
             this.button2.TabIndex = 38;
             this.button2.Text = "取消";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::FullTextGrammarAssistant.Properties.Resources.加;
-            this.pictureBox1.Location = new System.Drawing.Point(944, 529);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox1.TabIndex = 40;
-            this.pictureBox1.TabStop = false;
             // 
             // panel2
             // 
@@ -914,7 +900,7 @@
             this.panel3.Controls.Add(this.checkBox45);
             this.panel3.Controls.Add(this.checkBox44);
             this.panel3.Controls.Add(this.checkBox43);
-            this.panel3.Location = new System.Drawing.Point(157, 625);
+            this.panel3.Location = new System.Drawing.Point(157, 756);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(779, 34);
             this.panel3.TabIndex = 45;
@@ -923,7 +909,7 @@
             // 
             this.panel4.Controls.Add(this.checkBox52);
             this.panel4.Controls.Add(this.checkBox51);
-            this.panel4.Location = new System.Drawing.Point(157, 724);
+            this.panel4.Location = new System.Drawing.Point(157, 855);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(779, 34);
             this.panel4.TabIndex = 46;
@@ -933,10 +919,66 @@
             this.panel5.Controls.Add(this.checkBox49);
             this.panel5.Controls.Add(this.checkBox42);
             this.panel5.Controls.Add(this.checkBox54);
-            this.panel5.Location = new System.Drawing.Point(157, 825);
+            this.panel5.Location = new System.Drawing.Point(157, 956);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(779, 34);
             this.panel5.TabIndex = 47;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.93093F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.06907F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 259F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox2, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.textBox2, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 4, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(157, 533);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(827, 47);
+            this.tableLayoutPanel1.TabIndex = 48;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 6;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.93093F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.06907F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 259F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(157, 579);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(827, 47);
+            this.tableLayoutPanel2.TabIndex = 49;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::FullTextGrammarAssistant.Properties.Resources.加;
+            this.pictureBox1.Location = new System.Drawing.Point(737, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.TabIndex = 40;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::FullTextGrammarAssistant.Properties.Resources.加;
+            this.pictureBox2.Location = new System.Drawing.Point(944, 195);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox2.TabIndex = 14;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // Form1
             // 
@@ -944,13 +986,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1023, 1050);
+            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
@@ -961,9 +1004,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.checkBox48);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label3);
@@ -979,10 +1019,8 @@
             this.Name = "Form1";
             this.Text = "全文语法助手";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -991,6 +1029,10 @@
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1075,6 +1117,8 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
 
