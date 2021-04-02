@@ -34,28 +34,26 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (!IsValidityTaskName() || !IsValidityFilePath())
                 return false;
 
-            string taskId = string.Empty;
-            string respMsg = string.Empty;
-
+            WFDAPIResult result = new WFDAPIResult();
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                if (!WFDWebAPI.GetInstance().StartTask(GetUrlsFromFile(FilePath), out respMsg, out taskId))
+                if (!WFDWebAPI.GetInstance().StartTask(GetUrlsFromFile(FilePath), out result))
                     return false;
             }
 
-            if (respMsg != "success")
+            if (result.RespMsg != "success")
             {
-                HelpUtil.ShowMessageBox(respMsg);
+                HelpUtil.ShowMessageBox(result.RespMsg);
                 return false;
             }
 
             HelpUtil.ShowMessageBox("任务下发成功");
             string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网络侦察兵");
-            string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.bcp", TaskName, taskId));
+            string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.bcp", TaskName, result.Datas));
             FileUtil.CreateDirectory(destDirectory);
             using (File.Create(destFilePath)) { }
 
-            TaskInfo = new WFDTaskInfo(TaskName, taskId, FilePath, destFilePath, WFDTaskStatus.Null);
+            TaskInfo = new WFDTaskInfo(TaskName, result.Datas, FilePath, destFilePath, WFDTaskStatus.Null);
 
             return base.OnOKButtonClick();
         }
@@ -71,9 +69,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
 
             StreamReader sr = null;
+            FileStream fs = null;
             try
             {
-                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs, Encoding.Default);
 
                 //判断是否存在表头
@@ -91,6 +90,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             finally
             {
+                if (fs != null)
+                    fs.Close();
                 if (sr != null)
                     sr.Close();
             }

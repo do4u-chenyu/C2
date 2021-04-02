@@ -26,7 +26,7 @@ namespace C2.Controls.C1.Left
 
             // TODO run task
             bool succ = taskManager.RunTask(task);
-
+            //bool succ = true;
             if (succ)
                 AddInnerButton(new SearchToolkitButton(task));
             else

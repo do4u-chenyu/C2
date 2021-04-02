@@ -227,7 +227,8 @@ namespace C2.SearchToolkit
             confirmButton.Enabled = false;
 
             // 更新任务状态和界面元素
-            UpdateTaskInfo(task);
+            using (new GuarderUtil.CursorGuarder())
+                UpdateTaskInfo(task);
             // 展示任务信息时, 不需要更改
             ReadOnlyInputControls();  
             return this.ShowDialog();

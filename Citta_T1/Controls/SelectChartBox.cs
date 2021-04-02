@@ -21,9 +21,9 @@ namespace C2.Controls
 
         Document _Document;
         ChartPage _CurrentChart;
-        RadioButton radioButton1;
-        RadioButton radioButton2;
-        RadioButton radioButton3;
+        public RadioButton radioButton1;
+        public RadioButton radioButton2;
+        public RadioButton radioButton3;
         ListBoxControl<ChartPage> listBoxEx2;
         TableLayoutPanel tableLayoutPanel1;
         ChartPage[] _SelectedCharts;

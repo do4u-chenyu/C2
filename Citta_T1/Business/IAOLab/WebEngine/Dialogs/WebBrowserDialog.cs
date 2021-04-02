@@ -25,7 +25,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripButton LoadBossData;
         private ToolStripButton SaveHtml;
         private ToolStripButton SavePic;
-        private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
         private readonly List<MapDataItem> mapWidgetDataItems;
@@ -98,7 +97,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 OpenSelectBossDialog();
         }
 
-        private object[] OpenMapFile(string path)
+        private object[] OpenMapFile(string path, char seperator)
         {
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
@@ -110,7 +109,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 {
                     if (lineCounter++ == 0)
                         continue;
-                    string[] tempstr = line.Split(',');
+                    string[] tempstr = line.Split(seperator);
                     for (int i = 0; i < tempstr.Length; i++)
                     {
                         if (i % 2 == 0)
@@ -130,7 +129,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
             return new object[] { res };
         }
-        private object[] OpenHeatMapFile(string path)
+        private object[] OpenHeatMapFile(string path, char seperator)
         {
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
@@ -143,7 +142,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 {
                     if (lineCounter++ == 0)
                         continue;
-                    string[] tempstr = line.Split(',');
+                    string[] tempstr = line.Split(seperator);
                     for (int i = 0; i < tempstr.Length; i++)
                     {
                         if (i % 3 == 0)
@@ -184,13 +183,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 foreach (DataItem di in maw.DataItems)
                 {
                     if (di.FileName.Contains("标注图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("多边形图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("热力图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath, di.FileSep));
                 }
             }
         }
@@ -202,7 +201,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             LoadMapData = new ToolStripButton();
             SaveHtml = new ToolStripButton();
             SavePic = new ToolStripButton();
-            toolStripSeparator1 = new ToolStripSeparator();
             Clear = new ToolStripButton();
             EditCode = new ToolStripButton();
 
@@ -211,11 +209,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             LoadMapData.Image = global::C2.Properties.Resources.designer;
             LoadMapData.Text = "参数配置";
             LoadMapData.Click += new System.EventHandler(this.LoadMapData_Click);
-
-            // SaveHtml
-            SaveHtml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            SaveHtml.Image = global::C2.Properties.Resources.save;
-            SaveHtml.Text = "保存成html";
 
             // SavePic
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -237,11 +230,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 LoadMapData,
-                SaveHtml,
+                EditCode,
                 SavePic,
-                toolStripSeparator1,
-                Clear,
-                EditCode});
+                Clear});
         }
 
         public void InitializeBossToolStrip()
@@ -368,13 +359,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 foreach (DataItem di in maw.DataItems)
                 {
                     if (di.FileName.Contains("标注图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("多边形图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath, di.FileSep));
                     if (di.FileName.Contains("热力图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath));
+                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath, di.FileSep));
                 }
 
             }
@@ -503,7 +494,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     mapWidget.DataItems.Add(
                         new DataItem(
                             destPath, Path.GetFileNameWithoutExtension(destPath), 
-                            ',', OpUtil.Encoding.UTF8, OpUtil.ExtType.Text
+                            dataItem.FileSep, OpUtil.Encoding.UTF8, OpUtil.ExtType.Text
                             )
                         );
                 }

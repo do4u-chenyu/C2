@@ -294,6 +294,12 @@
     <Compile Include="Business\Database\HiveDAOImpl.cs" />
     <Compile Include="Business\Database\OracleDAOImpl.cs" />
     <Compile Include="Business\Database\PostgreDAOImpl.cs" />
+    <Compile Include="Dialogs\IAOLab\BigAPKForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\BigAPKForm.Designer.cs">
+      <DependentUpon>BigAPKForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\UpdateProgressBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1834,6 +1840,9 @@
     <EmbeddedResource Include="Dialogs\IAOLab\Coordinate.resx">
       <DependentUpon>Coordinate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IAOLab\BigAPKForm.resx">
+      <DependentUpon>BigAPKForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IAOLab\WifiLocation.resx">
       <DependentUpon>WifiLocation.cs</DependentUpon>
     </EmbeddedResource>
@@ -2105,6 +2114,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\BossStyle03.png" />
+    <None Include="Resources\BigAPK.bmp" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <None Include="Resources\document.bmp" />
@@ -2860,13 +2870,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Script\IAO_Web_validation\global_method.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step1_unzip\step1_unzip.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step2_filter\keywords\neg_keywords.txt" />
-    <Content Include="Resources\Script\IAO_Web_validation\step2_filter\keywords\pos_keywords.txt" />
-    <Content Include="Resources\Script\IAO_Web_validation\step2_filter\step2_filter.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step2_filter\util.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step4_classify\step4_ classify.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step4_classify\token_ocr.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\Noesis.Javascript.dll" />
+    <Content Include="Resources\Script\IAO_Web_validation\screenshot.js" />
+    <Content Include="Resources\Script\IAO_Web_validation\step1_unzip.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\step2_filter.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\step3_screen_capture.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\step4_ classify.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\step5_ finnaly.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
+    <Content Include="Resources\Script\IAO_Web_validation\util.py" />
     <Content Include="Resources\StartPage\bank.png" />
     <Content Include="Resources\StartPage\BusinessViewLabel.png" />
     <Content Include="Resources\StartPage\bussinessView.png" />
@@ -3009,6 +3021,7 @@
     <None Include="Resources\侦察兵.png" />
     <None Include="Resources\全文工具左侧.png" />
     <None Include="Resources\侦察兵左侧.png" />
+    <None Include="Resources\BigAPK.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -3117,7 +3130,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Business\IAOLab\Webbrowser\" />
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
