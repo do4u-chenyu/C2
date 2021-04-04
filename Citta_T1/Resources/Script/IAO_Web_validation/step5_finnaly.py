@@ -27,7 +27,7 @@ if __name__ == '__main__':
             if len(row) < 1 or row[0] == "":
                 continue
             else:
-                png_folder = path.join(path.dirname(csv_path), row[0].strip('.csv'))
+                png_folder = path.join(path.dirname(csv_path),'05最终结果', row[0].strip('.csv'))
                 os.makedirs(png_folder, exist_ok=True)
                 host = modify_host(row[1])
                 if host in image_filenames.keys():

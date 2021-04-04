@@ -32,11 +32,8 @@ def screenshot(file_path, output_path):
                 continue
             urls.add(line.strip().split('\t')[1])
     for host in urls:
-        version_value = 9
-        while version_value > 6:
-            if execute_screenshot(output_path, host, "IE" + str(version_value)):
-                break
-            version_value -= 1
+        execute_screenshot(output_path, host)
+
 
 
 def merge_hosts(host_path):
@@ -51,15 +48,15 @@ def merge_hosts(host_path):
     return total_host
 
 
-def execute_screenshot(output_path, host, ie_version):
+def execute_screenshot(output_path, host):
     try:
         # driver_path = path.join(path.abspath(path.dirname(__file__)), "phantomjs.exe")
         # js_path = path.join(path.abspath(path.dirname(__file__)), "screenshot.js")
-
+        fail_pngs = open(path.join(output_path, 'fail_png.csv'), 'w', encoding='utf8')
         driver_path = path.join(path.abspath(path.dirname(__file__)), "TrifleJS.exe")
         js_path = path.join(path.abspath(path.dirname(__file__)), "screenshot.js")
         png_file = path.join(output_path, modify_host(host) + ".png")
-        cmd = '{0} {1} {2} {3} --emulate={4}'.format(driver_path, js_path, pad_url(host), png_file, ie_version)
+        cmd = '{0} {1} {2} {3}'.format(driver_path, js_path, pad_url(host), png_file)
         print(cmd)
         start = datetime.datetime.now()
         process = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
@@ -70,10 +67,15 @@ def execute_screenshot(output_path, host, ie_version):
             if (now - start).seconds > timeout:
                 process.kill()
                 os.system('taskkill /f /im TrifleJS.exe')
+                fail_pngs.write(host + '\n')
                 return False
         return True
     except:
+        fail_pngs.write(host + '\n')
         return False
+    finally:
+        fail_pngs.close()
+
 
 
 if __name__ == '__main__':
