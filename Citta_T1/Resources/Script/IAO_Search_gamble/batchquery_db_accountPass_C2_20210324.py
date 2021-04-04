@@ -1,23 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Oct 29 09:08:44 2018
-  version 0621:
-      增加根据登陆控件和控件值生成keyword功能，实现函数：prdoucKey
-  version 0628:
-      增加查询：
-          去除登陆控件值；
-          挑选 只包含admin的url 
-  version 0708:
-      增加线程时间检测功能
-      增加文件》50M即压缩一次功能
-  version 0803:
-       修改了脚本临时文件命名
-       修改了脚本压缩加密方式
-  version 20210324:
-       增加了查询garbage的选项
-       直接压缩，不再加密
-@author: Administrator
-"""
 from Queue import Queue
 from threading import Thread
 from subprocess import Popen,PIPE
@@ -32,7 +13,7 @@ import logging
 from optparse import OptionParser
 reload(sys)
 sys.setdefaultencoding('utf-8')
-#################
+
 class Scheduler:
     def __init__(self,startTime,endTime,filename,queryWords):
         self.queryclient_keyWordQueue = Queue()
@@ -47,15 +28,15 @@ class Scheduler:
     def init_queryclient_kwQueue(self):
         LOGGER.info('queryWords: '+ str(self.queryWords))
         for line in self.queryWords:
-                self.queryclient_keyWordQueue.put(line)  #TODO
+                self.queryclient_keyWordQueue.put(line)
         LOGGER.info("keyword query group number：{}".format(len(self.queryWords)))
             
     def scheduling(self):
-        print "启动写入线程"
+        print "start flush thread"
         self.saver.daemon = True
         self.saver.start()
         
-        print "启动查询线程"
+        print "start query t`hread"
         for i in xrange(len(self.queryWords)):
             worker = Query(self.queryclient_keyWordQueue, self.queryclient_resultQueue, self.startTime, self.endTime)
             worker.daemon = True
@@ -63,7 +44,7 @@ class Scheduler:
             self.workers.append(worker)
         self.saver.workers = self.workers
         
-        self.queryclient_keyWordQueue.join()  # init before the thread start
+        self.queryclient_keyWordQueue.join()
         self.queryclient_resultQueue.join()
 
 class Query(Thread):
@@ -73,11 +54,11 @@ class Query(Thread):
         self.lineEnd      = '_USERAGENT'
         self.user_key     = ['account','uid','name','phone','username','userid']
         self.password_key = ['password','pwd','pass','key']
-        self.other_key    = {'safecode':['safepass','code']}##方便扩展新解析项
+        self.other_key    = {'safecode':['safepass','code']}
        
         self.lineEndMarkLength  =len(self.lineEnd)
         self.exitRefer          = False
-        self.queryContentFlag   = False## content mabye MultiLine 
+        self.queryContentFlag   = False
         self.value_num          = max(self.configDict.values()) + 1
         self.content            = [""] * self.value_num
         self.newAddColumneNum   = 2 + len(self.other_key.keys())
@@ -166,7 +147,7 @@ class Query(Thread):
         otherkey_list=self.other_key.keys()
         if len(key_list) < 2:
             return [""]*(2+len(otherkey_list))
-        #获取每一个key值
+        
         user_dis=[]
         pass_dis=[]
         other_dis={}
@@ -186,7 +167,7 @@ class Query(Thread):
                 for codekey in self.other_key[othkey]:
                     temp_dis.append(self.levenshtein(codekey, key))
                 other_dis[othkey].append(min(temp_dis))
-        # 获取最优解释组合
+        
         user_mindis = min(user_dis)
         user_index = user_dis.index(user_mindis)
         pass_mindis = min(pass_dis)
@@ -229,7 +210,7 @@ class Query(Thread):
             else:
                 othercode_str.append("")
         return user_str,pass_str,"\t".join(othercode_str)
-    ##计算字符串相似度
+    
     def levenshtein(self, first, second):
         if len(first) > len(second):
             first, second = second, first
@@ -240,7 +221,7 @@ class Query(Thread):
         first_length = len(first) + 1
         second_length = len(second) + 1
         distance_matrix = [range(second_length) for x in range(first_length)]
-        # print distance_matrix
+       
         for i in range(1, first_length):
             for j in range(1, second_length):
                 deletion = distance_matrix[i - 1][j] + 1
@@ -284,7 +265,7 @@ class Saver(Thread):
         fsize    = os.path.getsize(os.path.join(dataPath,filePath))
         fsize    = fsize/float(1024*1024)
         return round(fsize,2)
-##日志文件打印
+
 def init_logger(logname,filename,logger_level = logging.INFO):
     logger = logging.getLogger(logname)
     logger.setLevel(logger_level)
@@ -318,7 +299,6 @@ def init_path(path):
     if not os.path.exists(path):
         os.mkdir(path)
 
-##cquey FULLTEXT 
 def queryBatch(keyWords):
     tempFilename   = "_result_password_" + startTime + '_' + endTime 
     sch = Scheduler(startTime, endTime, tempFilename,keyWords)
@@ -350,7 +330,7 @@ def main():
     os.rename(ZIP_PATH,ZIP_SUCCEED)
 
 if __name__ == '__main__':
-    ##Program description
+   
     usage = 'python bathquery_db_password.py --start [start_time] --end [end_time] --areacode [areacode]'
     dataformat = '<time>: yyyyMMddhhmmss eg:20180901000000'
     areaformat = '<areacode> xxxxxx eg:530000'
@@ -358,12 +338,12 @@ if __name__ == '__main__':
     parser.add_option('--start',dest = 'startTime',help = dataformat)
     parser.add_option('--end',dest = 'endTime',help = dataformat)
     parser.add_option('--areacode',dest = 'areacode',help = areaformat)
-    ##get input Time  parameter
+  
     option,args = parser.parse_args()
     startTime   = option.startTime
     endTime     = option.endTime
     areacode    = option.areacode
-    ##set default Time[ one year]
+    
     NowTime = datetime.datetime.now()
     OneYear = datetime.timedelta(days = 90)
     defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
