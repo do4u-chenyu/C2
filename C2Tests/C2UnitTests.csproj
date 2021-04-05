@@ -58,7 +58,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Business\Database\HiveDAOImplTests.cs" />
-    <Compile Include="Business\SSH\BastionAPITests.cs" />
     <Compile Include="Database\BaseDAOImplTests.cs" />
     <Compile Include="Database\DAOFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +70,9 @@
       <Project>{6fe47e67-232b-4a47-b905-8385deaf2a95}</Project>
       <Name>C2</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Business\SSH\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
