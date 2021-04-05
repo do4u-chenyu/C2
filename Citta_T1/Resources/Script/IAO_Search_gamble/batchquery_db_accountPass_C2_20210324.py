@@ -77,7 +77,7 @@ class Query(Thread):
             self.queryClient(key_word)
             queryEnd = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
             LOGGER.info('query Time:{}_{}'.format(queryStart,queryEnd))
-            self.queryclient_keyWordQueue.task_done()  # 
+            self.queryclient_keyWordQueue.task_done()
 
     def queryClient(self, key_word):
         startTime = self.start_time
