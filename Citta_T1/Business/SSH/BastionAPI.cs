@@ -18,8 +18,8 @@ namespace C2.Business.SSH
         public BastionAPI(TaskInfo task)
         {
             this.task = task;
-            //this.ssh = new SshClient(new PasswordConnectionInfo("114.55.248.85", "root", "aliyun.123"));
-            this.ssh = new SshClient(new PasswordConnectionInfo("10.1.126.4", "root", "iao123456"));
+            this.ssh = new SshClient(new PasswordConnectionInfo("114.55.248.85", "root", "aliyun.123"));
+            //this.ssh = new SshClient(new PasswordConnectionInfo("10.1.126.4", "root", "iao123456"));
         }
 
         public void Close()
@@ -87,7 +87,7 @@ namespace C2.Business.SSH
 
             String s = Global.GambleScriptPath;
             String content = FileUtil.FileReadToEnd(s);
-            if (String.IsNullOrEmpty(content))
+            if (String.IsNullOrEmpty(content) || !IsShellCmdSafe(content))
                 return this;
 
 
@@ -105,12 +105,30 @@ namespace C2.Business.SSH
 
             String d = GambleWorkspace + "/" + TargetGambleScript;
             // 这里可能还有超出shell缓冲区的问题
-            String command = String.Format("cat -e {0} > {1}", content, d);
-            
-            System.Console.WriteLine(command);
-
-            //SuccessRunCommand(command);
+            String command = String.Format("echo -e \"{0}\" > {1}", content, d);
+            SuccessRunCommand(command);
             return this;
+        }
+
+        private bool IsShellCmdSafe(String content)
+        {
+            // 释义字符会报错
+            return content.IndexOfAny("`".ToCharArray()) == -1;
+        }
+
+        public String RunGambleTask()
+        {
+            if (!EnterGambleWorkspace())
+                return String.Empty;
+
+            //String command = String.Format("python {0}", TargetGambleScript);
+            String command = "sleep 300";
+
+            String pid = RunCommandBackground(command) ? GetPID(command) : String.Empty;
+            // 未获取到pid，当作模型脚本执行失败
+            if (String.IsNullOrEmpty(pid))
+                task.LastErrorMsg = "全文机已连接但执行涉赌脚本失败";
+            return pid;
         }
 
         public BastionAPI DeleteGambleTaskWorkspace()
@@ -163,19 +181,7 @@ namespace C2.Business.SSH
             }
             return this;
         }
-        public String RunGambleTask()
-        {
-            if (!EnterGambleWorkspace())
-                return String.Empty;
 
-            String command = String.Format("python {0}", TargetGambleScript);
-
-            String pid = RunCommandBackground(command) ? GetPID(command) : String.Empty;
-            // 未获取到pid，当作模型脚本执行失败
-            if (String.IsNullOrEmpty(pid))
-                task.LastErrorMsg = "全文机已连接但执行涉赌脚本失败";
-            return pid;
-        }
 
         public BastionAPI CreateGambleTaskDirectory()
         {
