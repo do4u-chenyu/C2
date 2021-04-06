@@ -17,23 +17,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         public WFDTaskInfo TaskInfo;
         private static readonly LogUtil log = LogUtil.GetInstance("WFDTaskResult");
 
-        Dictionary<string, string> predictionCodeDict;
-
         public WFDTaskResult()
         {
             InitializeComponent();
             this.dataGridView.DoubleBuffered(true);
-            InitPredictionCodeDict();
-            
-
-        }
-
-        private void InitPredictionCodeDict()
-        {
-            predictionCodeDict = new Dictionary<string, string>
-            {
-                {"101090101", "贷款-P2P"},{"101090102", "贷款-抵押"},{"101090103", "贷款-小额"},{"101090104", "贷款-资讯"},{"101090105", "贷款-综合"},{"101090106", "贷款-租赁"},{"1010301", "赌-彩票预测"},{"1010302", "赌-赌场系"},{"1010303","赌-购彩系"},{"1010304", "赌-电子游戏"},{"1010305", "赌-球"},{"1010101", "黄-视频"},{"1010102", "黄-成人用品用药"},{"10111", "签名网站"},{"1010103", "黄-小说漫画"},{"1010104", "黄-性感图"},{"1010105", "黄-直播"},{"101020301", "宗教-场所"},{"101020302", "宗教-机构"},{"101020303", "宗教-文化"},{"101020304", "宗教-用品"},{"1010401", "Vpn-非法"},{"1010402", "Vpn-商务"},{"10106", "打码"},{"10112", "VPS"},{"10107", "短链接"},{"10108", "配资"},{"10105", "镜像"},{"10113", "四方支付"},{"10114", "云发卡"},{"10115", "流量刷单"},{"10116", "微交易"},{"10117", "云呼"},{"10118","CDN"},{"10119","第三方维护助手"},{"101110","广告联盟"},{"101111","代刷"},{"1010106","黄—外围"},{"101114","接码平台"},{"101112","后台登录"},{"101115","机场"},{"101116","政府"},{"101117","学校"},{"101118","医院"},{"101119","虚拟币交易"},{"101121","证券期货交易"},{"101124","网游加速器"},{"101122","外汇交易"},{"101120","游戏交易网站"},{"101123","客服"}
-            };
         }
 
         public WFDTaskResult(WFDTaskInfo taskInfo) : this()
@@ -160,12 +147,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         public void FillDGV(int maxNumOfRow = 100)
         {
             //TODO 看看有没有其他赋值方式
-
-            //TODO 目前加载所有的，前100行未实现
-            //datas = FileUtil.FormatDatas(datas, maxNumOfRow);
+            List<WFDResult> datas = FormatWFDResults(TaskInfo.PreviewResults, maxNumOfRow);
             dataGridView.Rows.Clear();
 
-            foreach (WFDResult data in TaskInfo.PreviewResults)
+            foreach (WFDResult data in datas)
             {
                 DataGridViewRow dr = new DataGridViewRow();
 
@@ -174,17 +159,17 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 dr.Cells.Add(textCell0);
 
                 DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-                textCell1.Value = data.prediction;
+                textCell1.Value = data.prediction_;
                 dr.Cells.Add(textCell1);
 
                 DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
                 textCell2.Value = data.title;
                 dr.Cells.Add(textCell2);
 
-                if(data.screen_shot == "None")
+                if(data.screen_shot == "None" || data.screen_shot == string.Empty)
                 {
                     DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
-                    textCell3.Value = "None";
+                    textCell3.Value = data.screen_shot;
                     dr.Cells.Add(textCell3);
                 }
                 else
@@ -202,6 +187,24 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 dataGridView.Rows.Add(dr);
             }
         }
+
+        private List<WFDResult> FormatWFDResults(List<WFDResult> datas, int maxNumOfRow)
+        {
+            List<WFDResult> results = new List<WFDResult>();
+
+            WFDResult blankRow = new WFDResult();//TODO 可能有坑，空结果类不会赋值，同一引用应该不会有问题
+
+            for (int i = 0; i < maxNumOfRow; i++)
+            {
+                if (i >= datas.Count)
+                    results.Add(blankRow);
+                else
+                    results.Add(datas[i]);
+            }
+
+            return results;
+        }
+
 
         private void BrowserButton_Click(object sender, EventArgs e)
         {

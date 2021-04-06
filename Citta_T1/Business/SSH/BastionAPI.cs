@@ -22,12 +22,6 @@ namespace C2.Business.SSH
             //this.ssh = new SshClient(new PasswordConnectionInfo("10.1.126.4", "root", "iao123456"));
         }
 
-        public void Close()
-        {
-            if (ssh != null && ssh.IsConnected)
-                ssh.Disconnect();
-        }
-
         public BastionAPI Login()
         {
             try
@@ -196,6 +190,9 @@ namespace C2.Business.SSH
             bool isAlive = IsAliveGambleTask();
             bool isGRFReady = IsGambleResultFileReady();
 
+            if (!ssh.IsConnected)
+                return "连接失败";
+
             // 1) pid不存在且有结果文件时, 为运行成功
             if (!isAlive && isGRFReady)
                 return "DONE";
@@ -224,7 +221,7 @@ namespace C2.Business.SSH
         {
             String command = String.Format(@"pgrep -f '{0}' | head -n 1", cmdLine);
             String result = RunCommand(command);
-            return Regex.IsMatch(result, @"^\d+$") ? result : String.Empty;
+            return Regex.IsMatch(result, @"^\d+$") ? result.Trim() : String.Empty;
         }
     }
 }

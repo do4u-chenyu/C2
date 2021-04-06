@@ -118,7 +118,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 23;
-            this.dataGridView.Size = new System.Drawing.Size(712, 197);
+            this.dataGridView.Size = new System.Drawing.Size(932, 283);
             this.dataGridView.TabIndex = 10008;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
             // 
@@ -168,14 +168,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(712, 152);
+            this.panel1.Size = new System.Drawing.Size(932, 152);
             this.panel1.TabIndex = 10012;
             // 
             // downloadPicsButton
             // 
             this.downloadPicsButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.downloadPicsButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.downloadPicsButton.Location = new System.Drawing.Point(593, 109);
+            this.downloadPicsButton.Location = new System.Drawing.Point(813, 109);
             this.downloadPicsButton.Name = "downloadPicsButton";
             this.downloadPicsButton.Size = new System.Drawing.Size(107, 28);
             this.downloadPicsButton.TabIndex = 10012;
@@ -189,16 +189,17 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 152);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(712, 197);
+            this.panel2.Size = new System.Drawing.Size(932, 283);
             this.panel2.TabIndex = 10013;
             // 
             // url
             // 
             this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.url.FillWeight = 30F;
+            this.url.FillWeight = 27F;
             this.url.HeaderText = "url";
             this.url.Name = "url";
             this.url.ReadOnly = true;
+            this.url.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // prediction
@@ -208,34 +209,38 @@
             this.prediction.HeaderText = "分类情况";
             this.prediction.Name = "prediction";
             this.prediction.ReadOnly = true;
+            this.prediction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.prediction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // title
             // 
             this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.title.FillWeight = 18F;
+            this.title.FillWeight = 15F;
             this.title.HeaderText = "网站标题";
             this.title.Name = "title";
             this.title.ReadOnly = true;
+            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // screenShot
             // 
             this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.screenShot.FillWeight = 11F;
+            this.screenShot.FillWeight = 7F;
             this.screenShot.HeaderText = "网站截图";
             this.screenShot.Name = "screenShot";
             this.screenShot.ReadOnly = true;
+            this.screenShot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.screenShot.Text = "下载截图";
             this.screenShot.UseColumnTextForButtonValue = true;
             // 
             // webContent
             // 
             this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.webContent.FillWeight = 30F;
+            this.webContent.FillWeight = 40F;
             this.webContent.HeaderText = "网页文本";
             this.webContent.Name = "webContent";
             this.webContent.ReadOnly = true;
+            this.webContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // WFDTaskResult
@@ -243,7 +248,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(712, 394);
+            this.ClientSize = new System.Drawing.Size(932, 480);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

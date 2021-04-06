@@ -21,7 +21,7 @@ namespace C2.SearchToolkit
         public bool IsEmpty() { return this == EmptyTaskInfo; }
 
         public String BcpFFP { 
-            get => System.IO.Path.Combine(
+            get => Path.Combine(
                 Global.SearchToolkitPath, 
                 String.Format("{0}_{1}_{2}.bcp", TaskName, PID, TaskCreateTime)); }
 
