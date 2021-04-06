@@ -2913,6 +2913,9 @@
     <None Include="Resources\Templates\思维导图.xml" />
     <None Include="Resources\Templates\空模板.xml" />
     <Content Include="Resources\Templates\组织架构图.xml" />
+    <None Include="Resources\Templates\胶水涉赌自动化过滤模型.iao">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Templates\逻辑图.xml" />
     <Content Include="Resources\thanks.xml">
       <SubType>Designer</SubType>
