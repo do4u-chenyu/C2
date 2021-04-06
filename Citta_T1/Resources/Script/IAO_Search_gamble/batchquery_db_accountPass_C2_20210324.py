@@ -36,7 +36,7 @@ class Scheduler:
         self.saver.daemon = True
         self.saver.start()
         
-        print "start query t`hread"
+        print "start query thread"
         for i in xrange(len(self.queryWords)):
             worker = Query(self.queryclient_keyWordQueue, self.queryclient_resultQueue, self.startTime, self.endTime)
             worker.daemon = True

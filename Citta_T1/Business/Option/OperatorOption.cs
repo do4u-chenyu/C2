@@ -241,6 +241,10 @@ namespace C2.Business.Option
         }
         private bool WithoutInputColumns()
         {
+            // python 算子会产生空结果文件，因为不应该做这个检测
+            if (OpUtil.SEType(opControl.SubTypeName) == ElementSubType.PythonOperator)
+                return false;
+
             bool notHasInput0 = String.IsNullOrEmpty(GetOption("columnname0"));
             bool notHasInput1 = String.IsNullOrEmpty(GetOption("columnname1"));
             bool binaryInput = opControl.IsBinaryDimension();
