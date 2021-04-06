@@ -186,6 +186,18 @@ namespace C2.Dialogs
             if (listBoxEx1.SelectedItem != null)
             {
                 var tn = ((DocumentType)listBoxEx1.SelectedItem.Tag).Name;
+                if (tn == "Docx")
+                {
+                    selectChartBox1.radioButton1.Enabled = false;
+                    selectChartBox1.radioButton2.Enabled = true;
+                    selectChartBox1.radioButton3.Enabled = false;
+                }
+                else 
+                {
+                    selectChartBox1.radioButton1.Enabled = true;
+                    selectChartBox1.radioButton2.Enabled = true;
+                    selectChartBox1.radioButton3.Enabled = true;
+                }
                 Options.Current.SetValue(OptionNames.Miscellaneous.ExportDocumentType, tn);
             }
         }

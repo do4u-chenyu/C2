@@ -160,6 +160,7 @@
     <Compile Include="Business\IAOLab\Plugins\PluginsManager.cs" />
     <Compile Include="Business\IAOLab\Transform\GPSTransform.cs" />
     <Compile Include="Business\IAOLab\Transform\TimeAndIPTransform.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Line\GradientLineChart.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Dialogs\SelectBossDialog.Designer.cs">
       <DependentUpon>SelectBossDialog.cs</DependentUpon>
     </Compile>

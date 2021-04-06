@@ -11,7 +11,8 @@ namespace C2.Business.SSH
     {
         private readonly SshClient ssh;
         private readonly TaskInfo task;
-        private String GambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
+
+        private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
         private String GambleWorkspace { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.PID, task.TaskCreateTime); }
         public BastionAPI(TaskInfo task)
@@ -76,15 +77,39 @@ namespace C2.Business.SSH
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
             String s = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
-            // TODO s 下载 到 d 中
             return String.Empty;
         }
 
         public BastionAPI UploadGambleScript()
         {
+            if (!ssh.IsConnected)
+                return this;
+
             String s = Global.GambleScriptPath;
-            String d = GambleWorkspace + "/" + GambleScript;
-            // TODO s 上传 到 d 中
+            String content = FileUtil.FileReadToEnd(s);
+            if (String.IsNullOrEmpty(content))
+                return this;
+
+
+            // 1)  \\ \a \b \c \e \f \n \r \t 等转义字符的\全部替换成\\\
+            // 2)  " 替换成 \"
+            // 3)  换行回车替换成转义字符
+            // 4)  这里的逻辑需要优化,个人感觉当前的实现有隐患
+            //     转义字符的安全性，效率，形式美感上都很差
+            //     尤其是转义字符，如果目标脚本有rm动作, 转义字符在处理\, /, 空格等符号时如果出问题
+            //     运气不好会造成删库
+            content = Regex.Replace(content, @"\\([\\abcefnrtvx0])", @"\\\$1")
+                           .Replace("\"", "\\\"")
+                           .Replace("\r", @"\r")
+                           .Replace("\n", @"\n");
+
+            String d = GambleWorkspace + "/" + TargetGambleScript;
+            // 这里可能还有超出shell缓冲区的问题
+            String command = String.Format("cat -e {0} > {1}", content, d);
+            
+            System.Console.WriteLine(command);
+
+            //SuccessRunCommand(command);
             return this;
         }
 
@@ -99,8 +124,8 @@ namespace C2.Business.SSH
 
         private bool IsAliveGambleTask()
         {
-            String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, GambleScript));
-            return result.Contains(GambleScript);
+            String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetGambleScript));
+            return result.Contains(TargetGambleScript);
         }
 
         private bool IsGambleResultFileReady()
@@ -143,7 +168,7 @@ namespace C2.Business.SSH
             if (!EnterGambleWorkspace())
                 return String.Empty;
 
-            String command = String.Format("python {0}", GambleScript);
+            String command = String.Format("python {0}", TargetGambleScript);
 
             String pid = RunCommandBackground(command) ? GetPID(command) : String.Empty;
             // 未获取到pid，当作模型脚本执行失败

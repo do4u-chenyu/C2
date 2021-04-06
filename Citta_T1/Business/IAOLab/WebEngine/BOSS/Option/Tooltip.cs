@@ -17,7 +17,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
             Common.InitOptionFlag(this, FlagDic, TypeDic);
         }
 
-        public bool show { get { return _show; } set { FlagDic["show"] = true; _show = value; } }
+        public string show { get { return _show; } set { FlagDic["show"] = true; _show = value; } }
         public string trigger { get { return _trigger; } set { FlagDic["trigger"] = true; _trigger = value; } }
         public AxisPointer axisPointer { get { return _axisPointer; } set { FlagDic["axisPointer"] = true; _axisPointer = value; } }
         public bool showContent { get { return _showContent; } set { FlagDic["showContent"] = true; _showContent = value; } }
@@ -38,7 +38,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         public TextStyle textStyle { get { return _textStyle; } set { FlagDic["textStyle"] = true; _textStyle = value; } }
         public string extraCssText { get { return _extraCssText; } set { FlagDic["extraCssText"] = true; _extraCssText = value; } }
 
-        bool _show;
+        string _show;
         string _trigger;
         AxisPointer _axisPointer;
         bool _showContent;

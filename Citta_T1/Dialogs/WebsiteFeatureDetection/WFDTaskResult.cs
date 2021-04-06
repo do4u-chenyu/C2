@@ -233,15 +233,17 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return;
 
             string destPath = dialog.SelectedPath;
-            foreach(WFDResult result in results)
+            string[] files = Directory.GetFiles(destPath);
+
+            foreach (WFDResult result in results)
             {
+                string picUrl = result.url.Replace("http://", "").Replace("https://", "").Split('/')[0];
+                if (files._Contains(picUrl))//跳过已存在的文件
+                    continue;
+
                 WFDWebAPI.GetInstance().DownloadScreenshotById(result.screen_shot, out WFDAPIResult APIResult);
                 if (APIResult.RespMsg == "success")
-                {
-                    string picUrl = result.url.Replace("http://", "").Replace("https://", "").Split('/')[0];
-                    predictionCodeDict.TryGetValue(result.prediction, out string picPrediction);
-                    Base64StringToImage(Path.Combine(destPath, string.Format("{0}_{1}.png", picPrediction, picUrl)), APIResult.Datas);
-                }
+                    Base64StringToImage(Path.Combine(destPath, string.Format("{0}_{1}.png", result.prediction_, picUrl)), APIResult.Datas);
                 else
                     HelpUtil.ShowMessageBox(APIResult.RespMsg);
                     
