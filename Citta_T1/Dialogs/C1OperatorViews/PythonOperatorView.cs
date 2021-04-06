@@ -370,7 +370,7 @@ namespace C2.Dialogs
                 FileUtil.AddPathPower(Global.GetCurrentModelDocument().SavePath, "FullControl");
             }
 
-            if (!File.Exists(fullFilePath))
+            if (!String.IsNullOrEmpty(fullFilePath) && !File.Exists(fullFilePath))
             {
                 using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
                 {
