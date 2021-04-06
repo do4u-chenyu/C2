@@ -343,6 +343,7 @@ namespace C2.Business.Model
                 List<string> paths = new List<string>();
                 foreach (string item in cmd)
                 {
+
                     bool factor0 = reg0.IsMatch(item);
                     bool factor1 = !item.ToLower().Contains("python.exe");
                     bool factor2 = string.IsNullOrEmpty(outputParamPath) || !item.Contains(outputParamPath);
@@ -410,11 +411,20 @@ namespace C2.Business.Model
         private bool CopyFileTo_dataFolder(XmlNode xmlNode, String path, List<string> dataSourceNames, string nodeName = "path")
         {
             bool copySuccess = true;
+
+            // 文件夹直接返回
+            if (Directory.Exists(path))
+                return copySuccess;
+
+            
             string pathName = Path.GetFileName(path);
+
 
             // 导出模型文档再次导出
             if (string.IsNullOrEmpty(path) || string.Equals(path, Path.Combine(this.dataPath, pathName)))
                 return copySuccess;
+
+
 
             if (!File.Exists(path))
             {
