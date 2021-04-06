@@ -2139,6 +2139,9 @@
     <None Include="Resources\html_content.htm" />
     <None Include="Resources\Icons\Artificialintelligence.png" />
     <None Include="Resources\Icons\Businessvw.png" />
+    <Content Include="Resources\Help\检索系统帮助.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Icons\check_update.ico" />
     <None Include="Resources\Icons\Datamanagement.png" />
     <Content Include="Resources\Icons\document.ico" />

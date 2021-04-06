@@ -106,8 +106,8 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -662,9 +662,9 @@
             "域名",
             "收件人",
             "上级网址"});
-            this.comboBox1.Location = new System.Drawing.Point(106, 3);
+            this.comboBox1.Location = new System.Drawing.Point(105, 3);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(224, 26);
+            this.comboBox1.Size = new System.Drawing.Size(222, 26);
             this.comboBox1.TabIndex = 17;
             // 
             // comboBox2
@@ -678,14 +678,14 @@
             "等于",
             "小于",
             "小于等于"});
-            this.comboBox2.Location = new System.Drawing.Point(336, 3);
+            this.comboBox2.Location = new System.Drawing.Point(333, 3);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(135, 26);
             this.comboBox2.TabIndex = 18;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(478, 3);
+            this.textBox2.Location = new System.Drawing.Point(475, 3);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(253, 28);
             this.textBox2.TabIndex = 19;
@@ -932,7 +932,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 259F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel1.Controls.Add(this.comboBox1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.comboBox2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox2, 3, 0);
@@ -943,6 +943,20 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(827, 47);
             this.tableLayoutPanel1.TabIndex = 48;
+            this.tableLayoutPanel1.Controls.SetChildIndex(this.comboBox1, 0);
+            this.tableLayoutPanel1.Controls.SetChildIndex(this.comboBox2, 0);
+            this.tableLayoutPanel1.Controls.SetChildIndex(this.textBox2, 0);
+            this.tableLayoutPanel1.Controls.SetChildIndex(this.pictureBox1, 0);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::FullTextGrammarAssistant.Properties.Resources.加;
+            this.pictureBox1.Location = new System.Drawing.Point(734, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.TabIndex = 40;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -952,23 +966,13 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 259F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel2.Location = new System.Drawing.Point(157, 579);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(827, 47);
             this.tableLayoutPanel2.TabIndex = 49;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::FullTextGrammarAssistant.Properties.Resources.加;
-            this.pictureBox1.Location = new System.Drawing.Point(737, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox1.TabIndex = 40;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox2
             // 
@@ -1018,6 +1022,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "全文语法助手";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.Form1_HelpButtonClicked);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
