@@ -23,10 +23,10 @@ namespace C2.SearchToolkit
             BastionAPI api = new BastionAPI(task);
 
             task.PID = api.Login()
-                            .DeleteGambleTaskWorkspace()
-                            .CreateGambleTaskDirectory()
-                            .UploadGambleScript()
-                            .RunGambleTask();
+                          .DeleteGambleTaskWorkspace()
+                          .CreateGambleTaskDirectory()
+                          .UploadGambleScript()
+                          .RunGambleTask();
         
             if (task.PID == String.Empty)
                 return false;
