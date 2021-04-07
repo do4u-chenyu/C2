@@ -40,7 +40,6 @@ namespace C2
         ShortcutKeysTable ShortcutKeys;
 
         private bool isBottomViewPanelMinimum;
-        private bool isWFDControlFirstClick;
         private bool isLeftViewPanelMinimum;
         private InputDataForm inputDataForm;
         private Control[] leftPanelControls;
@@ -238,15 +237,6 @@ namespace C2
             leftPanel.Visible = true;
             leftButton.BackColor = LeftFocusColor;
 
-            //TODO 面板按钮加载发生在首次点击当前面板时，先把侦察兵面板加载放过来
-            //仅第一次点击时从本地加载，需要isWFDControlFirstClick记录状态
-            if (leftPanel is Controls.C1.Left.WebsiteFeatureDetectionControl && isWFDControlFirstClick)
-            {
-                LoadWFDTasks();
-                isWFDControlFirstClick = false;
-            }
-                
-
             this.ShowLeftFold();
         }
 
@@ -297,8 +287,6 @@ namespace C2
             LoadDocuments();
             LoadDataSource();
             LoadIAOLaboratory();
-
-            isWFDControlFirstClick = true;
         }
 
         private void LoadHotModel()
@@ -343,10 +331,6 @@ namespace C2
             LoadInnerPlugins();
             // 加载DLL动态插件
             LoadDllPlugins();
-        }
-        private void LoadWFDTasks()
-        {
-            this.websiteFeatureDetectionControl.LoadXmlToWFDTasks(Path.Combine(Global.WorkspaceDirectory, this.UserName));
         }
 
         private void LoadInnerPlugins()

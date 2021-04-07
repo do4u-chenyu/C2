@@ -111,6 +111,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (respMsg == "success")// && TaskInfo.Status != WFDTaskStatus.Done 考虑是否每次都刷新
             {
                 TaskInfo.Status = WFDTaskStatus.Done;
+                datas = datas.Replace("None", "''").Replace("True", "'True'").Replace("False", "'False'");
                 TaskInfo.PreviewResults = DealData(TaskInfo.ResultFilePath, datas);
             }
             else if (respMsg == "wait")
