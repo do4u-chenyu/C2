@@ -13,8 +13,9 @@ namespace C2.Business.SSH
         private static readonly TimeSpan DefaultTimeout = new TimeSpan(0, 0, 10);
         private static readonly String TgzHead = Encoding.ASCII.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
 
-        private readonly SshClient ssh;
         private readonly TaskInfo task;
+        private readonly SshClient ssh;
+        private readonly ShellStream shell;
 
         private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
@@ -23,6 +24,7 @@ namespace C2.Business.SSH
         {
             this.task = task;
             this.ssh = new SshClient(new PasswordConnectionInfo("114.55.248.85", "root", "aliyun.123"));
+            
             //this.ssh = new SshClient(new PasswordConnectionInfo("10.1.126.4", "root", "iao123456"));
         }
 
@@ -37,13 +39,22 @@ namespace C2.Business.SSH
             {
                 task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, ex.Message);
             }
-
+            
             return this;
         }
 
         private String RunCommand(String command)
         {
             return ssh.IsConnected ? ssh.RunCommand(command).Result : String.Empty;
+        }
+
+        private String RunCommand(String command, ShellStream shell)
+        {
+            if (!ssh.IsConnected)
+                return String.Empty;
+            shell.Read();//TODO 需要一个清缓存的函数
+            shell.WriteLine(command);
+            return String.Empty;
         }
 
         // 执行命令且必须成功返回
