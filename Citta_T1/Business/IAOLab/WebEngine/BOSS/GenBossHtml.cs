@@ -53,6 +53,7 @@ namespace C2.IAOLab.WebEngine.Boss
                 echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
             }
 
+
             return echarts.Show();
         }
 
