@@ -15,7 +15,7 @@ namespace C2.Business.SSH
 
         private readonly TaskInfo task;
         private readonly SshClient ssh;
-        private readonly ShellStream shell;
+        //private readonly ShellStream shell;
 
         private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
