@@ -205,16 +205,6 @@ namespace C2.Business.SSH
             return this;
         }
 
-<<<<<<< HEAD
-            String command = String.Format("python {0}", GambleScript);
-            String pid = RunCommandBackground(command) ? GetPID(command) : String.Empty;
-            // 未获取到pid，当作模型脚本执行失败
-            if (String.IsNullOrEmpty(pid))
-                task.LastErrorMsg = "全文机已连接但执行涉赌脚本失败";
-            return pid;
-        }
-=======
->>>>>>> 45909e4e412d93356496fcbf0df4b6e1dd5424f8
 
         public BastionAPI CreateGambleTaskDirectory()
         {
