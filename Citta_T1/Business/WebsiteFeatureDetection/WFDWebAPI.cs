@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Business.WebsiteFeatureDetection
@@ -149,14 +150,18 @@ namespace C2.Business.WebsiteFeatureDetection
         }
 
         // 根据任务id返回异常网站截图
-        public void DownloadScreenshotById(string screenshotId, out WFDAPIResult result)
+        public async Task<WFDAPIResult> DownloadScreenshotById(string screenshotId)
         {
-            result = new WFDAPIResult();
+            WFDAPIResult result = new WFDAPIResult();
 
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "screenshot_id", screenshotId } };
             try
             {
-                Response resp = httpHandler.Post(ScreenshotUrl, pairs, Token);
+                Response resp = new Response();
+                await Task.Run(() => {
+                    resp = httpHandler.Post(ScreenshotUrl, pairs, Token);
+                });
+
                 if (resp.StatusCode == HttpStatusCode.Unauthorized)
                     result.RespMsg = "TokenError";
                 if (resp.StatusCode != HttpStatusCode.OK)
@@ -177,6 +182,7 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 result.RespMsg = ex.Message;
             }
+            return result;
         }
 
         // 根据任务id返回出错的url列表

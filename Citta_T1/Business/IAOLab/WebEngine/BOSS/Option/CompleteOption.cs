@@ -104,7 +104,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         /// <summary>
         /// [已完成]是否开启动画。
         /// </summary>
-        public bool animation { get { return _animation; } set { FlagDic["animation"] = true; _animation = value; } }
+        public string animation { get { return _animation; } set { FlagDic["animation"] = true; _animation = value; } }
         public string animationThreshold { get { return _animationThreshold; } set { FlagDic["animationThreshold"] = true; _animationThreshold = value; } }
         public string animationDuration { get { return _animationDuration; } set { FlagDic["animationDuration"] = true; _animationDuration = value; } }
         public string animationEasing { get { return _animationEasing; } set { FlagDic["animationEasing"] = true; _animationEasing = value; } }
@@ -144,7 +144,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         string _color;
         string _backgroundColor;
         TextStyle _textStyle;
-        bool _animation;
+        string _animation;
         string _animationThreshold;
         string _animationDuration;
         string _animationEasing;

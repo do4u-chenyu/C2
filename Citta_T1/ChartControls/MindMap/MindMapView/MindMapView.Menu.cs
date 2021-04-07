@@ -159,13 +159,17 @@ namespace C2.Controls.MapViews
             MenuOpDesign.Image = Properties.Resources.opDesign;
             MenuOpDesign.Text = Lang._("Design");
             if (type == "single")
+            {
                 MenuOpDesign.Click += MenuDesignOp_Click;
+                
+            }
             else
+            {
                 MenuOpDesign.Click += MenuDesignModel_Click;
+            }
 
             if(type == "single")
             {
-
                 MenuOpRunning.Image = Properties.Resources.opRunning;
                 MenuOpRunning.Text = Lang._("Running");
                 MenuOpRunning.Enabled = type == "single" ? opw.Status != OpStatus.Null : !opw.HasModelOperator;
@@ -210,6 +214,10 @@ namespace C2.Controls.MapViews
                 string modelDocumentName = opw.ModelDataItem.FileName;
                 Global.GetMainForm().LoadCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
             }
+        }
+        void MenuDesignOp_DoubleClick(object sender, EventArgs e) 
+        { 
+
         }
         void MenuDesignOp_Click(object sender, EventArgs e)
         {

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
@@ -110,8 +111,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (respMsg == "success")// && TaskInfo.Status != WFDTaskStatus.Done 考虑是否每次都刷新
             {
                 TaskInfo.Status = WFDTaskStatus.Done;
-                //httpresponse结果会返回一些python的参数，无法被c#正确解析，统一转成字符串
-                datas = datas.Replace("None", "'None'").Replace("True", "'True'").Replace("False", "'False'");
                 TaskInfo.PreviewResults = DealData(TaskInfo.ResultFilePath, datas);
             }
             else if (respMsg == "wait")
@@ -166,18 +165,18 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 textCell2.Value = data.title;
                 dr.Cells.Add(textCell2);
 
-                if(data.screen_shot == "None" || data.screen_shot == string.Empty)
+                if(string.IsNullOrEmpty(data.screen_shot))
                 {
                     DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
-                    textCell3.Value = data.screen_shot;
+                    textCell3.Value = string.Empty;
                     dr.Cells.Add(textCell3);
                 }
                 else
                 {
-                    DataGridViewButtonCell button = new DataGridViewButtonCell();
-                    button.Value = "下载截图";
-                    button.Tag = data.screen_shot;
-                    dr.Cells.Add(button);
+                    DataGridViewLinkCell link = new DataGridViewLinkCell();
+                    link.Value = "下载截图";
+                    link.Tag = data.screen_shot;
+                    dr.Cells.Add(link);
                 }
 
                 DataGridViewTextBoxCell textCell4 = new DataGridViewTextBoxCell();
@@ -216,9 +215,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex > -1 && dataGridView.CurrentCell is DataGridViewButtonCell)
+            if(dataGridView.Columns[e.ColumnIndex] is DataGridViewLinkColumn && e.RowIndex > -1 && dataGridView.CurrentCell is DataGridViewLinkCell)
             {
-                DataGridViewButtonCell cell = (DataGridViewButtonCell)dataGridView.CurrentCell;
+                DataGridViewLinkCell cell = (DataGridViewLinkCell)dataGridView.CurrentCell;
                 if (cell.Tag == null)
                     return;
 
@@ -226,7 +225,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
         }
 
-        private void SaveScreenshotsToLocal(List<WFDResult> results)
+        private async void SaveScreenshotsToLocal(List<WFDResult> results)
         {
             if (!WFDWebAPI.GetInstance().ReAuthBeforeQuery())
                 return;
@@ -234,27 +233,53 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             var dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
-
             string destPath = dialog.SelectedPath;
+
+            progressNum.Text = "0%";
+            progressInfo.Text = "已完成0张，失败0张。";
+            progressBar1.Value = 0;
+            progressBar1.Step = (int)Math.Ceiling((decimal)100 / results.Count);
+
+            await SavePicAndUpdateProgress(destPath, results);
+        }
+
+        private async Task SavePicAndUpdateProgress(string destPath, List<WFDResult> results)
+        {
+            int doneNum = 0;
+            int errorNum = 0;
+            string finMsg = string.Empty;
+
             string[] files = Directory.GetFiles(destPath);
 
             foreach (WFDResult result in results)
             {
+                int proValue = progressBar1.Value + progressBar1.Step;
+                progressBar1.Value = proValue > 100 ? 100 : proValue;
+                progressNum.Text = progressBar1.Value.ToString() + "%";
+
                 string picUrl = result.url.Replace("http://", "").Replace("https://", "").Split('/')[0];
                 if (files._Contains(picUrl))//跳过已存在的文件
                     continue;
 
-                WFDWebAPI.GetInstance().DownloadScreenshotById(result.screen_shot, out WFDAPIResult APIResult);
-                if (APIResult.RespMsg == "success")
-                    Base64StringToImage(Path.Combine(destPath, string.Format("{0}_{1}.png", result.prediction_, picUrl)), APIResult.Datas);
+                WFDAPIResult APIResult = await WFDWebAPI.GetInstance().DownloadScreenshotById(result.screen_shot);
+                if (APIResult.RespMsg == "success" && Base64StringToImage(Path.Combine(destPath, string.Format("{0}_{1}.png", result.prediction_, picUrl)), APIResult.Datas))
+                    doneNum++;
                 else
-                    HelpUtil.ShowMessageBox(APIResult.RespMsg);
-                    
+                    errorNum++;
+                    //HelpUtil.ShowMessageBox(APIResult.RespMsg);
+                
+                progressInfo.Text = string.Format("已完成{0}张，失败{1}张。", doneNum, errorNum);
+                finMsg = APIResult.RespMsg;
             }
-            HelpUtil.ShowMessageBox("网站截图下载完毕");
+
+            //单个网站下载时，弹窗提示错误信息
+            if(results.Count > 1 || finMsg == "success")
+                HelpUtil.ShowMessageBox("网站截图下载完毕");
+            else
+                HelpUtil.ShowMessageBox(finMsg);
         }
 
-        private void Base64StringToImage(string txtFileName, string base64)
+        private bool Base64StringToImage(string txtFileName, string base64)
         {
             try
             {
@@ -263,16 +288,18 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 Bitmap bmp = new Bitmap(ms);
                 ms.Close();
                 bmp.Save(txtFileName, ImageFormat.Png);
+                return true;
             }
             catch
             {
                 log.Error(txtFileName + "生成图片失败。" + "base64为：" + base64);
+                return false;
             }
         }
 
         private void DownloadPicsButton_Click(object sender, EventArgs e)
         {
-            SaveScreenshotsToLocal(TaskInfo.PreviewResults);
+            SaveScreenshotsToLocal(TaskInfo.PreviewResults.FindAll(t => !string.IsNullOrEmpty(t.screen_shot)));
         }
     }
 }
