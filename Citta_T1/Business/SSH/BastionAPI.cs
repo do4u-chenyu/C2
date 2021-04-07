@@ -21,7 +21,7 @@ namespace C2.Business.SSH
 
         private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
-        private String GambleWorkspace { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.PID, task.TaskCreateTime); }
+        private String GambleTaskDirectory { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.PID, task.TaskCreateTime); }
         public BastionAPI(TaskInfo task)
         {
             this.task = task;
@@ -72,8 +72,6 @@ namespace C2.Business.SSH
 
         private String RunCommand(String command, ShellStream ssm)
         {
-            if (!ssh.IsConnected)
-                return String.Empty;
             ssm.Read();//TODO 需要一个清缓存的函数
             ssm.WriteLine(command);
             return String.Empty;
@@ -95,7 +93,7 @@ namespace C2.Business.SSH
         public bool DownloadGambleTaskResult(String d)
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
-            String s = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
+            String s = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
 
             if (!ssh.IsConnected)
                 return false;
@@ -109,14 +107,13 @@ namespace C2.Business.SSH
 
         public BastionAPI UploadGambleScript()
         {
-            if (!ssh.IsConnected)
+            if (!ssh.IsConnected || !task.LastErrorMsg.IsEmpty())
                 return this;
 
             String s = Global.GambleScriptPath;
             String content = FileUtil.FileReadToEnd(s);
-            if (String.IsNullOrEmpty(content) || !IsShellCmdSafe(content))
+            if (String.IsNullOrEmpty(content) || content.Contains("`")) // 不能有释义字符
                 return this;
-
 
             // 1)  \\ \a \b \c \e \f \n \r \t 等转义字符的\全部替换成\\\
             // 2)  " 替换成 \"
@@ -130,17 +127,11 @@ namespace C2.Business.SSH
                            .Replace("\r", @"\r")
                            .Replace("\n", @"\n");
 
-            String d = GambleWorkspace + "/" + TargetGambleScript;
+            String d = GambleTaskDirectory + "/" + TargetGambleScript;
             // 这里可能还有超出shell缓冲区的问题
             String command = String.Format("echo -e \"{0}\" > {1}", content, d);
             RunCommand(command, shell);
             return this;
-        }
-
-        private bool IsShellCmdSafe(String content)
-        {
-            // 释义字符会报错
-            return content.IndexOfAny("`".ToCharArray()) == -1;
         }
 
         public String GetPID(String cmdLine)
@@ -155,7 +146,7 @@ namespace C2.Business.SSH
             if (!ssh.IsConnected || !task.LastErrorMsg.IsEmpty())
                 return String.Empty;
 
-            EnterGambleWorkspace();
+            EnterGambleTaskDirectory();
             //String command = String.Format("python {0}", TargetGambleScript);
             String command = "sleep 300";
             shell.WriteLine(String.Format("{0} & disown -a", command));
@@ -167,14 +158,31 @@ namespace C2.Business.SSH
             return pid;
         }
 
-        public BastionAPI DeleteGambleTaskWorkspace()
+        private void EnterGambleTaskDirectory()
         {
-            // 删除 临时目录
-            if (IsSafe(GambleWorkspace))
-                RunCommand(String.Format("rm -rf {0};", GambleWorkspace), shell);
+            String command = String.Format("cd {0}", GambleTaskDirectory);
+            RunCommand(command, shell);
+        }
 
+        public BastionAPI DeleteGambleTaskDirectory()
+        {
+            if (!ssh.IsConnected || !task.LastErrorMsg.IsEmpty())
+                return this;
+            // 删除 临时目录
+            if (IsSafe(GambleTaskDirectory))
+                RunCommand(String.Format("rm -rf {0};", GambleTaskDirectory), shell);
             return this;
         }
+
+        public BastionAPI CreateGambleTaskDirectory()
+        {
+            if (!ssh.IsConnected || !task.LastErrorMsg.IsEmpty())
+                return this;
+            String command = String.Format("mkdir -p {0}", GambleTaskDirectory);
+            RunCommand(command, shell);
+            return this;
+        }
+
 
         private bool IsAliveGambleTask()
         {
@@ -184,7 +192,7 @@ namespace C2.Business.SSH
 
         private bool IsGambleResultFileReady()
         {
-            String ffp = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
+            String ffp = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
             String command = String.Format("ls {0}", ffp);
             return RunCommand(command, shell).Contains("000000_queryResult_db_");
         }
@@ -202,12 +210,6 @@ namespace C2.Business.SSH
             return v.StartsWith("/tmp/iao/search_toolkit/") && !Regex.IsMatch(v, @"\s");
         }
 
-        private void EnterGambleWorkspace()
-        {
-            String command = String.Format("cd {0}", GambleWorkspace);
-            RunCommand(command, shell);
-        }
-
         public BastionAPI KillGambleTask()
         {
             if (IsAliveGambleTask()) // 确保不要误删其他复用进程
@@ -215,14 +217,6 @@ namespace C2.Business.SSH
                 String command = String.Format("kill -9 {0}", task.PID);
                 RunCommand(command, shell);
             }
-            return this;
-        }
-
-
-        public BastionAPI CreateGambleTaskDirectory()
-        {
-            String command = String.Format("mkdir -p {0}", GambleWorkspace);
-            RunCommand(command, shell);
             return this;
         }
 

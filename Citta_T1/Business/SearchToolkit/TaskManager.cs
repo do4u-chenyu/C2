@@ -23,7 +23,7 @@ namespace C2.SearchToolkit
             BastionAPI api = new BastionAPI(task);
 
             task.PID = api.Login()
-                          .DeleteGambleTaskWorkspace()
+                          .DeleteGambleTaskDirectory()
                           .CreateGambleTaskDirectory()
                           .UploadGambleScript()
                           .RunGambleTask();
@@ -70,7 +70,7 @@ namespace C2.SearchToolkit
             BastionAPI api = new BastionAPI(task);
 
             api.Login()
-               .DeleteGambleTaskWorkspace()
+               .DeleteGambleTaskDirectory()
                .KillGambleTask();
       
             return tasks.Remove(task) && FileUtil.DeleteFile(task.BcpFFP); 
