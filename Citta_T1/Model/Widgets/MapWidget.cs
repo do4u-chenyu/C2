@@ -12,7 +12,7 @@ namespace C2.Model.Widgets
     class MapWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "MAP";
-        public MapConfig MapConfig;
+        public MapConfig startMapConfig;
 
         [Browsable(false)]
         public string WebUrl { set; get; }
@@ -22,7 +22,7 @@ namespace C2.Model.Widgets
             DisplayIndex = 9;
             Alignment = WidgetAlignment.Right;//默认位置改成右侧,让图标挂件和主题文字紧挨着
             widgetIcon = Properties.Resources.地图;
-            MapConfig = new MapConfig();
+            startMapConfig = new MapConfig();
         }
 
         public override string GetTypeID()
