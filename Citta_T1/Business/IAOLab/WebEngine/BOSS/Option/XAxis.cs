@@ -80,8 +80,6 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         string _axisLabel;
         public string axisLabel { get => _axisLabel; set { FlagDic["axisLabel"] = true; _axisLabel = value; } }
 
-
-
         string _nameLocation;
         public string nameLocation { get => _nameLocation; set { FlagDic["nameLocation"] = true; _nameLocation = value; } }
         SubtextStyle _nameTextStyle;
@@ -123,6 +121,9 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         public int zlevel { get => _zlevel; set { FlagDic["zlevel"] = true; _zlevel = value; } }
         int _z;
         public int z { get => _z; set { FlagDic["z"] = true; _z = value; } }
+
+        string _axisTick;
+        public string axisTick { get => _axisTick; set { FlagDic["axisTick"] = true; _axisTick = value; } }
 
     }
 }

@@ -48,9 +48,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SaveChartOption("SimpleBar", simpleBarX.SelectedIndex, simpleBarY.GetItemCheckIndex());
             SaveChartOption("BasicLineChart", basicLineChartX.SelectedIndex, basicLineChartY.GetItemCheckIndex());
             SaveChartOption("BasicScatter", basicScatterX.SelectedIndex, basicScatterY.GetItemCheckIndex());
+            //SaveChartOption("SmoothedLineChart", smoothedLineChartX.SelectedIndex, smoothedLineChartY.GetItemCheckIndex());
             SaveChartOption("GradientLineChart", smoothedLineChartX.SelectedIndex, smoothedLineChartY.GetItemCheckIndex());
             SaveChartOption("StackBar", stackBarX.SelectedIndex, stackBarY.GetItemCheckIndex());
-            SaveChartOption("BasicPie", basicPieX.SelectedIndex, new List<int>() { basicPieY.SelectedIndex });
+            //SaveChartOption("BasicPie", basicPieX.SelectedIndex, new List<int>() { basicPieY.SelectedIndex });
+            SaveChartOption("PictorialBar", basicPieX.SelectedIndex, new List<int>() { basicPieY.SelectedIndex });
             SaveChartOption("BasicMap", basicMapX.SelectedIndex, new List<int>() { basicMapY.SelectedIndex });
         }
 
@@ -62,9 +64,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
             LoadChartOption("SimpleBar", simpleBarX, simpleBarY);
             LoadChartOption("BasicLineChart", basicLineChartX, basicLineChartY);
             LoadChartOption("BasicScatter", basicScatterX, basicScatterY);
+            //LoadChartOption("SmoothedLineChart", smoothedLineChartX, smoothedLineChartY);
             LoadChartOption("GradientLineChart", smoothedLineChartX, smoothedLineChartY);
             LoadChartOption("StackBar", stackBarX, stackBarY);
-            LoadChartOption("BasicPie", basicPieX, basicPieY);
+            //LoadChartOption("BasicPie", basicPieX, basicPieY);
+            LoadChartOption("PictorialBar", basicPieX, basicPieY);
             LoadChartOption("BasicMap", basicMapX, basicMapY);
         }
 
