@@ -3,12 +3,16 @@ using C2.SearchToolkit;
 using C2.Utils;
 using Renci.SshNet;
 using System;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace C2.Business.SSH
 {
     public class BastionAPI
     {
+        private static readonly TimeSpan DefaultTimeout = new TimeSpan(0, 0, 10);
+        private static readonly String TgzHead = Encoding.ASCII.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
+
         private readonly SshClient ssh;
         private readonly TaskInfo task;
 
@@ -67,11 +71,36 @@ namespace C2.Business.SSH
             return true;
         }
 
-        public String DownloadGambleTaskResult(String d)
+        private String GetRemoteFilename(String s)
+        {
+           
+            String command = String.Format("ls -l {0} | awk '{{print $9}}' | tail -n 1", s);
+            return RunCommand(command).Trim();
+        }
+        private int GetRemoteFileSize(String s)
+        {
+            String command = String.Format("ls -l {0} | awk '{{print $5}}' | head -n 1", s);
+            String result = RunCommand(command).Trim();
+            return ConvertUtil.TryParseInt(result);
+        }
+
+        public bool DownloadGambleTaskResult(String d)
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
             String s = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
-            return String.Empty;
+
+            if (!ssh.IsConnected)
+                return false;
+
+            String ffp = GetRemoteFilename(s);
+            int size = GetRemoteFileSize(ffp);
+            if (size <= 0)
+                return false;  // 文件不存在或空文件
+        
+
+
+
+            return true;
         }
 
         public BastionAPI UploadGambleScript()

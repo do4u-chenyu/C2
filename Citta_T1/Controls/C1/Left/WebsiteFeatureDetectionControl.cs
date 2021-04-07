@@ -230,5 +230,11 @@ namespace C2.Controls.C1.Left
             }
         }
         #endregion
+
+        private void WebsiteFeatureDetectionControl_Load(object sender, EventArgs e)
+        {
+            //初次加载时加载本地文件内容到button
+            LoadXmlToWFDTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
+        }
     }
 }

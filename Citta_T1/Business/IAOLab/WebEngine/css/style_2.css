@@ -3,7 +3,7 @@ h2,textarea {
   margin: 0;
   padding: 0;list-style: none;font-style: normal;
 }
-html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; background:#00065b url(../img/bg_2.png);    background-size: 100% 100%;background-position:0 0; width: 100%; height: 100%; background-repeat: no-repeat;}
+html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; background:#00065b url(../img/img2/bg_2.png);    background-size: 100% 100%;background-position:0 0; width: 100%; height: 100%; background-repeat: no-repeat;}
 
 .wpbox{
   width: 100%;
@@ -14,13 +14,13 @@ html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; ba
 .left1{ float: left; width: 45%; padding-left:3.2%; height:calc(100% - 10%) ; padding-top:3%;}
 .mrbox_top_right{ float: right; width: 45%; padding-right: 2.2%; height:calc(100% - 10%); padding-top:3%;}
 
-.aleftboxttop{background:url(../img/t_bg_2.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:90%; height: 46%; margin-bottom: 3%}
+.aleftboxttop{background:url(../img/img2/t_bg_2.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:90%; height: 46%; margin-bottom: 3%}
 
-.aleftboxtbott{background:url(../img/t_bg_2.png); background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:90%;height: 46% }
+.aleftboxtbott{background:url(../img/img2/t_bg_2.png); background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:90%;height: 46% }
 
 
-.arightboxtop{background:url(../img/t_bg_2.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:90%; height: 46%;}
-.arightboxbott{background:url(../img/t_bg_2.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:90%; height: 46%; margin-top: 3%}
+.arightboxtop{background:url(../img/img2/t_bg_2.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:90%; height: 46%;}
+.arightboxbott{background:url(../img/img2/t_bg_2.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:90%; height: 46%; margin-top: 3%}
 
 
 .tith2{ text-align: center; width: 100%; font-size: 12px; padding-top: 1.9%;  font-weight: normal;letter-spacing:2px; font-weight:  normal; overflow: hidden;}

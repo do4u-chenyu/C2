@@ -4,7 +4,7 @@ h2,textarea {
   padding: 0;list-style: none;font-style: normal;
 }
 
-html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; background:#00065b url(../img/true_3.png);    background-size: 100% 100%;background-position:0 0; width: 100%; height: 100%; background-repeat: no-repeat;}
+html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; background:#00065b url(../img/img3/true_3.png);    background-size: 100% 100%;background-position:0 0; width: 100%; height: 100%; background-repeat: no-repeat;}
 
 .wpbox{
   width: 100%;
@@ -15,7 +15,7 @@ html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; ba
 .bg_header{
     width: 100%;
     height: 5%;
-    background: url(../img/title_3.png) no-repeat;
+    background: url(../img/img3/title_3.png) no-repeat;
     background-size: 100% 100%;
 }
 
@@ -27,15 +27,15 @@ html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; ba
 
 
 
-.aleftboxttop{background:url(../img/line1_3.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:99%; height: 49%; margin-bottom: 1%}
-.aleftboxtbott{background:url(../img/line1_3.png); background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:100%;height: 49% ;margin-top: 1%}
+.aleftboxttop{background:url(../img/img3/line1_3.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:99%; height: 49%; margin-bottom: 1%}
+.aleftboxtbott{background:url(../img/img3/line1_3.png); background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:100%;height: 49% ;margin-top: 1%}
 
 
-.amiddboxttop{ overflow: hidden;background:url(../img/line1_3.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:99%; height:99%;}
+.amiddboxttop{ overflow: hidden;background:url(../img/img3/line1_3.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:99%; height:99%;}
 
 
-.arightboxtop{background:url(../img/line1_3.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:100%; height: 49%;}
-.arightboxbott{background:url(../img/line1_3.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:100%; height: 49%; margin-top: 1%}
+.arightboxtop{background:url(../img/img3/line1_3.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:100%; height: 49%;}
+.arightboxbott{background:url(../img/img3/line1_3.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:100%; height: 49%; margin-top: 1%}
 
 
 

@@ -160,7 +160,9 @@
     <Compile Include="Business\IAOLab\Plugins\PluginsManager.cs" />
     <Compile Include="Business\IAOLab\Transform\GPSTransform.cs" />
     <Compile Include="Business\IAOLab\Transform\TimeAndIPTransform.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Bar\PictorialBar.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Line\GradientLineChart.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPictorialBar.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Dialogs\SelectBossDialog.Designer.cs">
       <DependentUpon>SelectBossDialog.cs</DependentUpon>
     </Compile>
@@ -2039,6 +2041,9 @@
     <Content Include="Business\IAOLab\WebEngine\css\style_3.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Business\IAOLab\WebEngine\css\style_4.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Business\IAOLab\WebEngine\Html\BossIndex01.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2048,51 +2053,63 @@
     <Content Include="Business\IAOLab\WebEngine\Html\BossIndex03.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Business\IAOLab\WebEngine\Html\BossIndex04.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Business\IAOLab\WebEngine\Html\SourceCodeMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\Html\StartMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\aleftboxtbott.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\amiddboxtbott1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\amiddboxtbott2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\amiddboxttop.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\arightboxbott.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\arightboxtop.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\bg.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Business\IAOLab\WebEngine\img\BossStyle01.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle02.png" />
-    <Content Include="Business\IAOLab\WebEngine\img\bg_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle03.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\line1_3.png">
+    <Content Include="Business\IAOLab\WebEngine\img\img1\aleftboxtbott.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\title_3.png">
+    <Content Include="Business\IAOLab\WebEngine\img\img1\amiddboxtbott1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\true_3.png">
+    <Content Include="Business\IAOLab\WebEngine\img\img1\amiddboxtbott2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\t_bg_2.png">
+    <Content Include="Business\IAOLab\WebEngine\img\img1\amiddboxttop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img1\arightboxbott.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img1\arightboxtop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img1\bg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img2\bg_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img2\t_bg_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img3\line1_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img3\title_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img3\true_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img4\back_4.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img4\border_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img4\title_4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\JS\china.js">

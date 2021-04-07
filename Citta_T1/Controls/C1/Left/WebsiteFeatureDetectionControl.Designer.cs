@@ -36,11 +36,12 @@
             // 
             this.titleLabel.Text = "网站侦察兵";
             // 
-            // WebDetectionControl
+            // WebsiteFeatureDetectionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "WebDetectionControl";
+            this.Name = "WebsiteFeatureDetectionControl";
+            this.Load += new System.EventHandler(this.WebsiteFeatureDetectionControl_Load);
             this.newEventPanel.ResumeLayout(false);
             this.newEventPanel.PerformLayout();
             this.backPanel.ResumeLayout(false);

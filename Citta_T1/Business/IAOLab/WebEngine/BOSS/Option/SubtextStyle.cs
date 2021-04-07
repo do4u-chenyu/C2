@@ -15,5 +15,8 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         {
             Common.InitOptionFlag(this, FlagDic, TypeDic);
         }
+
+        string _color;
+        public string color { get => _color; set { FlagDic["color"] = true; _color = value; } }
     }
 }
