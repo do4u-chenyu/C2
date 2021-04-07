@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -39,8 +40,8 @@ namespace C2.Business.WebsiteFeatureDetection
             UserName = string.Empty;
             Token = string.Empty;
 
-            APIUrl = "https://10.1.203.15:12449/apis/";//测试
-            //APIUrl = "https://113.31.119.85:53374/apis/";//正式
+            //APIUrl = "https://10.1.203.15:12449/apis/";//测试
+            APIUrl = "https://113.31.119.85:53374/apis/";//正式
             LoginUrl = APIUrl + "Login";
             ProClassifierUrl = APIUrl + "pro_classifier_api";
             TaskResultUrl = APIUrl + "detection/task/result";
@@ -202,6 +203,8 @@ namespace C2.Business.WebsiteFeatureDetection
                 {
                     if (UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName)) == "success")
                         return true;
+                    //存在验证时刚好口令跳60秒边界的情况，等待1秒再次申请
+                    Thread.Sleep(1000);
                 }
             }
 
