@@ -135,61 +135,6 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Line
                 });
             }
 
-
-
-
-            //series.Add(new SeriesLine()
-            //{
-            //    name = Common.FormatString(dataTable.Columns[chartOptions[2]].ToString()),
-            //    encode = new Encode()
-            //    {
-            //        x = chartOptions[0],
-            //        y = chartOptions[2]
-            //    },
-            //    type = "'line'",
-            //    showAllSymbol = "true",
-            //    symbol = "'circle'",
-            //    symbolSize = "10",
-
-            //    lineStyle = new C2.IAOLab.WebEngine.Boss.Option.SeriesType.LineBaseOption.LineStyle()
-            //    {
-            //        color = "'#00ca95'",
-            //        shadowColor = "'rgba(0, 0, 0, .3)'",
-            //        shadowBlur = 0,
-            //        shadowOffsetY = 5,
-            //        shadowOffsetX = 5,
-            //    },
-            //    label = new Label()
-            //    {
-            //        show = "false",
-            //        position = C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption.Position.top,
-            //        textStyle = "{ color: '#00ca95',}",
-            //    },
-
-            //    itemStyle = new ItemStyle()
-            //    {
-            //        color = "'#00ca95'",
-            //        borderColor = "'#fff'",
-            //        borderWidth = 3,
-            //        shadowColor = "'rgba(0, 0, 0, .3)'",
-            //        shadowBlur = 0,
-            //        shadowOffsetX = 2,
-            //        shadowOffsetY = 2,
-            //    },
-
-            //    tooltip = new Tooltip()
-            //    {
-            //        show = "false",
-            //    },
-
-            //    areaStyle = new C2.IAOLab.WebEngine.Boss.Option.SeriesType.LineBaseOption.AreaStyle()
-            //    {
-            //        color = "new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(0,202,149,0.3)'},{offset: 1,color: 'rgba(0,202,149,0)'}], false)",
-            //        shadowColor = " 'rgba(0,202,149, 0.9)'",
-            //        shadowBlur = 20,
-            //    },
-            //});
-
             option.series = new Series(series.ToArray());
             _initScript = option.ToString();
 
