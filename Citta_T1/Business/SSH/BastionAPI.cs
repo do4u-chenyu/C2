@@ -3,28 +3,27 @@ using C2.SearchToolkit;
 using C2.Utils;
 using Renci.SshNet;
 using System;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace C2.Business.SSH
 {
     public class BastionAPI
     {
+        private static readonly TimeSpan DefaultTimeout = new TimeSpan(0, 0, 10);
+        private static readonly String TgzHead = Encoding.ASCII.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
+
         private readonly SshClient ssh;
         private readonly TaskInfo task;
-        private String GambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
+
+        private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
         private String GambleWorkspace { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.PID, task.TaskCreateTime); }
         public BastionAPI(TaskInfo task)
         {
             this.task = task;
-            //this.ssh = new SshClient(new PasswordConnectionInfo("114.55.248.85", "root", "aliyun.123"));
-            this.ssh = new SshClient(new PasswordConnectionInfo("10.1.126.4", "root", "iao123456"));
-        }
-
-        public void Close()
-        {
-            if (ssh != null && ssh.IsConnected)
-                ssh.Disconnect();
+            this.ssh = new SshClient(new PasswordConnectionInfo("114.55.248.85", "root", "aliyun.123"));
+            //this.ssh = new SshClient(new PasswordConnectionInfo("10.1.126.4", "root", "iao123456"));
         }
 
         public BastionAPI Login()
@@ -72,20 +71,87 @@ namespace C2.Business.SSH
             return true;
         }
 
-        public String DownloadGambleTaskResult(String d)
+        private String GetRemoteFilename(String s)
+        {
+           
+            String command = String.Format("ls -l {0} | awk '{{print $9}}' | tail -n 1", s);
+            return RunCommand(command).Trim();
+        }
+        private int GetRemoteFileSize(String s)
+        {
+            String command = String.Format("ls -l {0} | awk '{{print $5}}' | head -n 1", s);
+            String result = RunCommand(command).Trim();
+            return ConvertUtil.TryParseInt(result);
+        }
+
+        public bool DownloadGambleTaskResult(String d)
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
             String s = GambleWorkspace + "/000000_queryResult_db_*_*.tgz";
-            // TODO s 下载 到 d 中
-            return String.Empty;
+
+            if (!ssh.IsConnected)
+                return false;
+
+            String ffp = GetRemoteFilename(s);
+            int size = GetRemoteFileSize(ffp);
+            if (size <= 0)
+                return false;  // 文件不存在或空文件
+        
+
+
+
+            return true;
         }
 
         public BastionAPI UploadGambleScript()
         {
+            if (!ssh.IsConnected)
+                return this;
+
             String s = Global.GambleScriptPath;
-            String d = GambleWorkspace + "/" + GambleScript;
-            // TODO s 上传 到 d 中
+            String content = FileUtil.FileReadToEnd(s);
+            if (String.IsNullOrEmpty(content) || !IsShellCmdSafe(content))
+                return this;
+
+
+            // 1)  \\ \a \b \c \e \f \n \r \t 等转义字符的\全部替换成\\\
+            // 2)  " 替换成 \"
+            // 3)  换行回车替换成转义字符
+            // 4)  这里的逻辑需要优化,个人感觉当前的实现有隐患
+            //     转义字符的安全性，效率，形式美感上都很差
+            //     尤其是转义字符，如果目标脚本有rm动作, 转义字符在处理\, /, 空格等符号时如果出问题
+            //     运气不好会造成删库
+            content = Regex.Replace(content, @"\\([\\abcefnrtvx0])", @"\\\$1")
+                           .Replace("\"", "\\\"")
+                           .Replace("\r", @"\r")
+                           .Replace("\n", @"\n");
+
+            String d = GambleWorkspace + "/" + TargetGambleScript;
+            // 这里可能还有超出shell缓冲区的问题
+            String command = String.Format("echo -e \"{0}\" > {1}", content, d);
+            SuccessRunCommand(command);
             return this;
+        }
+
+        private bool IsShellCmdSafe(String content)
+        {
+            // 释义字符会报错
+            return content.IndexOfAny("`".ToCharArray()) == -1;
+        }
+
+        public String RunGambleTask()
+        {
+            if (!EnterGambleWorkspace())
+                return String.Empty;
+
+            //String command = String.Format("python {0}", TargetGambleScript);
+            String command = "sleep 300";
+
+            String pid = RunCommandBackground(command) ? GetPID(command) : String.Empty;
+            // 未获取到pid，当作模型脚本执行失败
+            if (String.IsNullOrEmpty(pid))
+                task.LastErrorMsg = "全文机已连接但执行涉赌脚本失败";
+            return pid;
         }
 
         public BastionAPI DeleteGambleTaskWorkspace()
@@ -99,8 +165,8 @@ namespace C2.Business.SSH
 
         private bool IsAliveGambleTask()
         {
-            String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, GambleScript));
-            return result.Contains(GambleScript);
+            String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetGambleScript));
+            return result.Contains(TargetGambleScript);
         }
 
         private bool IsGambleResultFileReady()
@@ -138,19 +204,7 @@ namespace C2.Business.SSH
             }
             return this;
         }
-        public String RunGambleTask()
-        {
-            if (!EnterGambleWorkspace())
-                return String.Empty;
 
-            String command = String.Format("python {0}", GambleScript);
-
-            String pid = RunCommandBackground(command) ? GetPID(command) : String.Empty;
-            // 未获取到pid，当作模型脚本执行失败
-            if (String.IsNullOrEmpty(pid))
-                task.LastErrorMsg = "全文机已连接但执行涉赌脚本失败";
-            return pid;
-        }
 
         public BastionAPI CreateGambleTaskDirectory()
         {
@@ -164,6 +218,9 @@ namespace C2.Business.SSH
             bool isTimeout = IsTaskTimeout();
             bool isAlive = IsAliveGambleTask();
             bool isGRFReady = IsGambleResultFileReady();
+
+            if (!ssh.IsConnected)
+                return "连接失败";
 
             // 1) pid不存在且有结果文件时, 为运行成功
             if (!isAlive && isGRFReady)
@@ -193,7 +250,7 @@ namespace C2.Business.SSH
         {
             String command = String.Format(@"pgrep -f '{0}' | head -n 1", cmdLine);
             String result = RunCommand(command);
-            return Regex.IsMatch(result, @"^\d+$") ? result : String.Empty;
+            return Regex.IsMatch(result, @"^\d+$") ? result.Trim() : String.Empty;
         }
     }
 }

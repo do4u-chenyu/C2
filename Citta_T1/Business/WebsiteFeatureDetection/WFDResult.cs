@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using C2.Core;
+using System.Collections.Generic;
 
 namespace C2.Business.WebsiteFeatureDetection
 {
@@ -33,6 +34,9 @@ namespace C2.Business.WebsiteFeatureDetection
 
         public string JoinAllContent()
         {
+            if (Global.WFDPredictionCodeDict.TryGetValue(prediction, out string tmpPre))
+                prediction_ = tmpPre;
+
             return string.Join("\t", new string[] { url, cur_url, title, prediction, prediction_, Fraud_label, screen_shot, login, html_content_id, html_content});
         }
 

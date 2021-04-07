@@ -63,6 +63,17 @@ namespace C2.Utils
             dirInfo.SetAccessControl(dirsecurity);
         }
 
+        // 文件整个读出来, 小文件加载时用
+        public static String FileReadToEnd(String ffp)
+        {
+            try 
+            {
+                using (StreamReader ss = new StreamReader(ffp))
+                    return ss.ReadToEnd();
+            } catch { }
+            return String.Empty;
+        }
+
         // 实践中发现复制粘贴板有时会出异常
         // 非核心功能,捕捉异常忽略之
         public static bool TryClipboardSetText(string text)

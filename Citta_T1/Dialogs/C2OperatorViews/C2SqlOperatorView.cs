@@ -7,6 +7,7 @@ using C2.Utils;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.C2OperatorViews
@@ -48,7 +49,7 @@ namespace C2.Dialogs.C2OperatorViews
         public C2SqlOperatorView(OperatorWidget operatorWidget) : base(operatorWidget)
         {
             InitializeComponent();
-            InitializeConnection();
+            InitializeConnection(operatorWidget);
             InitializeExecuteSql();
             InitializePreviewTableContextMenu(); // 如果放在Design.cs里，VS2019设计器会报错打不开，故放在这里初始化
             LoadOption();
@@ -140,8 +141,9 @@ namespace C2.Dialogs.C2OperatorViews
             }
         }
 
-        private void InitializeConnection()
+        private void InitializeConnection(OperatorWidget operatorWidget)
         {
+            string connectionInfos = operatorWidget.DataSourceItem.DBItem.AllDatabaseInfo;
             List<string> names = new List<string>() ;
             databaseItems = Global.GetDataSourceControl().GetAllExternalData();
             if(databaseItems != null && databaseItems.Count > 0)
@@ -153,8 +155,26 @@ namespace C2.Dialogs.C2OperatorViews
             {
                 this.comboBoxConnection.SelectedIndex = 0; // 如果只有一个选项，默认就是它，此时不需要用户再去选了。
             }
+            foreach (DatabaseItem databaseItem in databaseItems) 
+            {
+                if (GetConnectionInfo(databaseItem.AllDatabaseInfo) == GetConnectionInfo(connectionInfos))
+                {
+                    this.comboBoxConnection.SelectedItem = databaseItem.PrettyDatabaseInfo;
+                }
+            }
         }
-
+        private string GetConnectionInfo(string connectionInfos) 
+        {
+            if (connectionInfos.Split(',').Length < 2)
+                return connectionInfos;
+            string[] infos = connectionInfos.Split(',');
+            StringBuilder sb = new StringBuilder(64);
+            for (int i = 0; i < infos.Length - 2; i++) 
+            {
+                sb.Append(infos[i]);
+            }
+            return sb.ToString();
+        }
         private void BnConnect_Click(object sender, System.EventArgs e)
         {
             if (SelectDatabaseItem == null)
@@ -194,6 +214,7 @@ namespace C2.Dialogs.C2OperatorViews
             if (SelectDatabaseItem.Type == DatabaseType.Hive)
             {
                 this.comboBoxDataBase.Text = defaultSchema;
+                this.comboBoxDataBase.Enabled = true;
             }
             else if (SelectDatabaseItem.Type == DatabaseType.Postgre)
             {
@@ -203,6 +224,7 @@ namespace C2.Dialogs.C2OperatorViews
             else
             {
                 this.comboBoxDataBase.Text = users.Contains(loginUser.ToUpper()) ? defaultSchema : "选择架构";
+                this.comboBoxDataBase.Enabled = true;
             }
 
 
@@ -210,6 +232,10 @@ namespace C2.Dialogs.C2OperatorViews
         }
         private void BnView_Click(object sender, System.EventArgs e)
         {
+            if (comboBoxDataBase.Text == string.Empty) 
+            {
+                BnConnect_Click(sender, e);
+            }
             if (SelectDatabaseItem == null || string.IsNullOrEmpty(this.comboBoxDataBase.Text) )
                 return;
             List<Table> tables = new List<Table>();
