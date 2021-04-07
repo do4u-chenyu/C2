@@ -344,6 +344,7 @@ namespace C2.Business.Model
                 foreach (string item in cmd)
                 {
 
+
                     bool factor0 = reg0.IsMatch(item);
                     bool factor1 = !item.ToLower().Contains("python.exe");
                     bool factor2 = string.IsNullOrEmpty(outputParamPath) || !item.Contains(outputParamPath);
