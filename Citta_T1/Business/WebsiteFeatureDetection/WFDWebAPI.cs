@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Business.WebsiteFeatureDetection
@@ -38,8 +40,8 @@ namespace C2.Business.WebsiteFeatureDetection
             UserName = string.Empty;
             Token = string.Empty;
 
-            APIUrl = "https://10.1.203.15:12449/apis/";//测试
-            //APIUrl = "https://113.31.119.85:53374/apis/";//正式
+            //APIUrl = "https://10.1.203.15:12449/apis/";//测试
+            APIUrl = "https://113.31.119.85:53374/apis/";//正式
             LoginUrl = APIUrl + "Login";
             ProClassifierUrl = APIUrl + "pro_classifier_api";
             TaskResultUrl = APIUrl + "detection/task/result";
@@ -149,14 +151,18 @@ namespace C2.Business.WebsiteFeatureDetection
         }
 
         // 根据任务id返回异常网站截图
-        public void DownloadScreenshotById(string screenshotId, out WFDAPIResult result)
+        public async Task<WFDAPIResult> DownloadScreenshotById(string screenshotId)
         {
-            result = new WFDAPIResult();
+            WFDAPIResult result = new WFDAPIResult();
 
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "screenshot_id", screenshotId } };
             try
             {
-                Response resp = httpHandler.Post(ScreenshotUrl, pairs, Token);
+                Response resp = new Response();
+                await Task.Run(() => {
+                    resp = httpHandler.Post(ScreenshotUrl, pairs, Token);
+                });
+
                 if (resp.StatusCode == HttpStatusCode.Unauthorized)
                     result.RespMsg = "TokenError";
                 if (resp.StatusCode != HttpStatusCode.OK)
@@ -177,6 +183,7 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 result.RespMsg = ex.Message;
             }
+            return result;
         }
 
         // 根据任务id返回出错的url列表
@@ -196,6 +203,8 @@ namespace C2.Business.WebsiteFeatureDetection
                 {
                     if (UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName)) == "success")
                         return true;
+                    //存在验证时刚好口令跳60秒边界的情况，等待1秒再次申请
+                    Thread.Sleep(1000);
                 }
             }
 
@@ -254,11 +263,11 @@ namespace C2.Business.WebsiteFeatureDetection
     class Response
     {
         Dictionary<string, string> resDict;
-        byte[] content;
+        string content;
         HttpStatusCode statusCode;
         private HttpWebResponse response;
         public readonly static Response Empty = new Response();
-        public byte[] Content
+        public string Content
         {
             get { return this.content; }
         }
@@ -278,7 +287,7 @@ namespace C2.Business.WebsiteFeatureDetection
         {
             this.response = resp;
             this.content = GetContent();
-            this.resDict = JsonToDictionary(Encoding.UTF8.GetString(this.content));
+            this.resDict = JsonToDictionary(this.content);
             this.statusCode = GetStatusCode();
 
         }
@@ -288,28 +297,34 @@ namespace C2.Business.WebsiteFeatureDetection
                 throw new Exception("没有实例化的Response");
             return response.StatusCode;
         }
-        private byte[] GetContent()
+        private string GetContent()
         {
             if (response == null)
                 throw new Exception("没有实例化的Response");
+
+            Stream resStream = null;
+            StreamReader reader = null;
+            string content = string.Empty;
             try
             {
-                using (MemoryStream ms = new MemoryStream())
+                using (resStream = response.GetResponseStream())
                 {
-                    Stream responseStream = this.response.GetResponseStream();
-                    byte[] buffer = new byte[64 * 1024];
-                    int i;
-                    while ((i = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                    using (reader = new StreamReader(resStream, Encoding.UTF8))
                     {
-                        ms.Write(buffer, 0, i);
+                        //通过ReadToEnd()把整个HTTP响应作为一个字符串取回，
+                        content = reader.ReadToEnd().ToString();
                     }
-                    return ms.ToArray();
                 }
             }
-            catch
+            catch{}
+            finally
             {
-                return new byte[0];
+                if (resStream != null)
+                    resStream.Close();
+                if (reader != null)
+                    reader.Close();
             }
+            return content;
         }
         private Dictionary<string, string> JsonToDictionary(string jsonStr)
         {

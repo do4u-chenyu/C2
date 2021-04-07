@@ -2,6 +2,7 @@
 using C2.Business.Option;
 using C2.Controls;
 using C2.Core;
+using C2.Dialogs.C2OperatorViews;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -143,7 +144,14 @@ namespace C2.Model.Widgets
                 WriteAttribute(mxw.Element, ResultItem, "result_item");
             node.AppendChild(opItemNode);
         }
-
+        public override void OnDoubleClick(HandledEventArgs e) 
+        {
+            if (Status == OpStatus.Ready && OpType == OpType.SqlOperator)
+            {
+                 new  C2SqlOperatorView(this).Show(); 
+            } 
+                
+        }
         public override void Deserialize(Version documentVersion, XmlElement node)
         {
             base.Deserialize(documentVersion, node);

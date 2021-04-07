@@ -1,4 +1,5 @@
-﻿using C2.IAOLab.WebEngine.Boss.Charts.Bar;
+﻿using C2.Business.IAOLab.WebEngine.Boss.Charts.Bar;
+using C2.IAOLab.WebEngine.Boss.Charts.Bar;
 using C2.IAOLab.WebEngine.Boss.Charts.Line;
 using C2.IAOLab.WebEngine.Boss.Charts.Map;
 using C2.IAOLab.WebEngine.Boss.Charts.Pie;
@@ -47,7 +48,8 @@ namespace C2.IAOLab.WebEngine.Boss
                 echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);  //堆叠柱状图
             if(bossType == 0)
             {
-                echarts[6] = new BasicPie(dataTable, new CompleteOption(), chartOptions); //饼图
+                //echarts[6] = new BasicPie(dataTable, new CompleteOption(), chartOptions); //饼图
+                echarts[6] = new PictorialBar(dataTable, new CompleteOption(), chartOptions);//渐变柱状图
                 echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
             }
 

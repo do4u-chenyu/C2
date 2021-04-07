@@ -232,7 +232,7 @@ namespace C2.Controls.Common
         {
             //当数据源为数据库表时，不管选择什么算子，都打开sql自定义算子
             //TODO 后期加入hive看是否复用同一个配置窗口
-            if(OpWidget.DataSourceItem.DataType == DatabaseType.Oracle)
+            if(OpWidget.DataSourceItem.DataType == DatabaseType.Oracle || OpWidget.DataSourceItem.DataType == DatabaseType.Hive || OpWidget.DataSourceItem.DataType == DatabaseType.Postgre)
                 return new C2SqlOperatorView(OpWidget);
 
             switch (OpWidget.OpType)

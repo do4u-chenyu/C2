@@ -243,31 +243,37 @@ namespace C2
         private void ModelMarketButton_Click(object sender, EventArgs e)
         {
             ShowLeftPanel(modelMarketButton, modelMarketControl);
+            ShowLeftFold();
         }
 
         private void MindMapButton_Click(object sender, EventArgs e)
         {
-            ShowLeftPanel(mindMapButton, mindMapControl); 
+            ShowLeftPanel(mindMapButton, mindMapControl);
+            ShowLeftFold();
         }
         
         private void DataSourceButton_Click(object sender, EventArgs e)
         {
             ShowLeftPanel(dataSourceButton, dataSourceControl);
+            ShowLeftFold();
         }
 
         private void IAOLabButton_Click(object sender, EventArgs e)
         {
             ShowLeftPanel(iaoLabButton, iaoLabControl);
+            ShowLeftFold();
         }
 
         private void DetectionButton_Click(object sender, EventArgs e)
         {
             ShowLeftPanel(detectionButton, websiteFeatureDetectionControl);
+            ShowLeftFold();
         }
 
         private void SearchToolkitButton_Click(object sender, EventArgs e)
         {
             ShowLeftPanel(searchToolkitButton, searchToolkitControl);
+            ShowLeftFold();
         }
 
         private void NewModelButton_Click(object sender, EventArgs e)
@@ -287,7 +293,6 @@ namespace C2
             LoadDocuments();
             LoadDataSource();
             LoadIAOLaboratory();
-            LoadWFDTasks();
         }
 
         private void LoadHotModel()
@@ -333,11 +338,6 @@ namespace C2
             // 加载DLL动态插件
             LoadDllPlugins();
         }
-        private void LoadWFDTasks()
-        {
-            string xmlDirectory = Path.Combine(Global.WorkspaceDirectory, this.UserName);
-            this.websiteFeatureDetectionControl.LoadXmlToWFDTasks(xmlDirectory);
-        }
 
         private void LoadInnerPlugins()
         {
@@ -369,32 +369,27 @@ namespace C2
 
         private void ShowLeftFold()
         {
-            if (this.isLeftViewPanelMinimum)
-            {
-                this.isLeftViewPanelMinimum = false;
-                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-                this.leftToolBoxPanel.Width = 187;
-            }
+            this.isLeftViewPanelMinimum = false;
+            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+            this.leftToolBoxPanel.Width = 187;
+        }
+
+        private void HideLeftFold()
+        {
+            this.isLeftViewPanelMinimum = true;
+            this.leftToolBoxPanel.Width = 10;
+            this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
         }
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
             if (this.isLeftViewPanelMinimum)
             {
-                this.isLeftViewPanelMinimum = false;
-                this.leftToolBoxPanel.Width = 187;
-                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-                this.mindMapControl.Visible = true;
-            }
+                int i = Array.FindIndex(leftMainButtons, v => v.BackColor == LeftFocusColor);
+                ShowLeftPanel(leftMainButtons[i], leftPanelControls[i]);
+                ShowLeftFold();
+            }    
             else
-            {
-                this.isLeftViewPanelMinimum = true;
-                this.leftToolBoxPanel.Width = 10;
-                this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
-                this.dataSourceControl.Visible = false;
-                this.mindMapControl.Visible = false;
-                this.modelMarketControl.Visible = false;
-                this.iaoLabControl.Visible = false;
-            }
+                HideLeftFold();
         }
 
         private void HelpPictureBox_Click(object sender, EventArgs e)

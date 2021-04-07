@@ -38,15 +38,22 @@
             this.taskIDLabel = new System.Windows.Forms.Label();
             this.taskStatusLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.progressNum = new System.Windows.Forms.Label();
+            this.progressInfo = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.downloadPicsButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.screenShot = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.screenShot = new System.Windows.Forms.DataGridViewLinkColumn();
             this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,7 +125,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 23;
-            this.dataGridView.Size = new System.Drawing.Size(712, 197);
+            this.dataGridView.Size = new System.Drawing.Size(932, 283);
             this.dataGridView.TabIndex = 10008;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
             // 
@@ -156,9 +163,10 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.downloadPicsButton);
+            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.browserButton);
             this.panel1.Controls.Add(this.taskStatusLabel);
+            this.panel1.Controls.Add(this.downloadPicsButton);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.taskIDLabel);
             this.panel1.Controls.Add(this.taskNameLabel);
@@ -168,14 +176,72 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(712, 152);
+            this.panel1.Size = new System.Drawing.Size(932, 152);
             this.panel1.TabIndex = 10012;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.progressNum);
+            this.groupBox1.Controls.Add(this.progressInfo);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.progressBar1);
+            this.groupBox1.Location = new System.Drawing.Point(572, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(348, 89);
+            this.groupBox1.TabIndex = 10014;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "截图下载";
+            // 
+            // progressNum
+            // 
+            this.progressNum.AutoSize = true;
+            this.progressNum.Location = new System.Drawing.Point(307, 25);
+            this.progressNum.Name = "progressNum";
+            this.progressNum.Size = new System.Drawing.Size(17, 12);
+            this.progressNum.TabIndex = 10017;
+            this.progressNum.Text = "0%";
+            // 
+            // progressInfo
+            // 
+            this.progressInfo.AutoSize = true;
+            this.progressInfo.Location = new System.Drawing.Point(80, 63);
+            this.progressInfo.Name = "progressInfo";
+            this.progressInfo.Size = new System.Drawing.Size(125, 12);
+            this.progressInfo.TabIndex = 10016;
+            this.progressInfo.Text = "已完成0张，失败0张。";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 63);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 10015;
+            this.label6.Text = "详细信息：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(32, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.TabIndex = 10014;
+            this.label5.Text = "进度：";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(82, 20);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(219, 23);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 10013;
             // 
             // downloadPicsButton
             // 
             this.downloadPicsButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.downloadPicsButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.downloadPicsButton.Location = new System.Drawing.Point(593, 109);
+            this.downloadPicsButton.Location = new System.Drawing.Point(788, 114);
             this.downloadPicsButton.Name = "downloadPicsButton";
             this.downloadPicsButton.Size = new System.Drawing.Size(107, 28);
             this.downloadPicsButton.TabIndex = 10012;
@@ -189,16 +255,17 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 152);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(712, 197);
+            this.panel2.Size = new System.Drawing.Size(932, 283);
             this.panel2.TabIndex = 10013;
             // 
             // url
             // 
             this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.url.FillWeight = 30F;
+            this.url.FillWeight = 27F;
             this.url.HeaderText = "url";
             this.url.Name = "url";
             this.url.ReadOnly = true;
+            this.url.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // prediction
@@ -208,34 +275,36 @@
             this.prediction.HeaderText = "分类情况";
             this.prediction.Name = "prediction";
             this.prediction.ReadOnly = true;
+            this.prediction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.prediction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // title
             // 
             this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.title.FillWeight = 18F;
+            this.title.FillWeight = 15F;
             this.title.HeaderText = "网站标题";
             this.title.Name = "title";
             this.title.ReadOnly = true;
+            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // screenShot
             // 
             this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.screenShot.FillWeight = 11F;
+            this.screenShot.FillWeight = 7F;
             this.screenShot.HeaderText = "网站截图";
             this.screenShot.Name = "screenShot";
             this.screenShot.ReadOnly = true;
-            this.screenShot.Text = "下载截图";
-            this.screenShot.UseColumnTextForButtonValue = true;
+            this.screenShot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // webContent
             // 
             this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.webContent.FillWeight = 30F;
+            this.webContent.FillWeight = 40F;
             this.webContent.HeaderText = "网页文本";
             this.webContent.Name = "webContent";
             this.webContent.ReadOnly = true;
+            this.webContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // WFDTaskResult
@@ -243,7 +312,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(712, 394);
+            this.ClientSize = new System.Drawing.Size(932, 480);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -255,6 +324,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -274,10 +345,16 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button downloadPicsButton;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label progressInfo;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label progressNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn url;
         private System.Windows.Forms.DataGridViewTextBoxColumn prediction;
         private System.Windows.Forms.DataGridViewTextBoxColumn title;
-        private System.Windows.Forms.DataGridViewButtonColumn screenShot;
+        private System.Windows.Forms.DataGridViewLinkColumn screenShot;
         private System.Windows.Forms.DataGridViewTextBoxColumn webContent;
     }
 }

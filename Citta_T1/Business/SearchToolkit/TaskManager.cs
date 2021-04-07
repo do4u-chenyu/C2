@@ -21,15 +21,12 @@ namespace C2.SearchToolkit
         public bool RunTask(TaskInfo task) 
         {
             BastionAPI api = new BastionAPI(task);
-
-            task.PID = api.Login()                         // 跳转登录
-                          .DeleteGambleTaskWorkspace()     // 清场
-                          .CreateGambleTaskDirectory()     // 建场
-                          .UploadGambleScript()            // 上传脚本
-                          .RunGambleTask();                // 执行脚本
-
-            api.Close();
-
+            task.PID = api.Login()
+                            .DeleteGambleTaskWorkspace()
+                            .CreateGambleTaskDirectory()
+                            .UploadGambleScript()
+                            .RunGambleTask();
+        
             if (task.PID == String.Empty)
                 return false;
 
@@ -73,9 +70,8 @@ namespace C2.SearchToolkit
 
             api.Login()
                .DeleteGambleTaskWorkspace()
-               .KillGambleTask()
-               .Close();
-
+               .KillGambleTask();
+      
             return tasks.Remove(task) && FileUtil.DeleteFile(task.BcpFFP); 
         }
     }

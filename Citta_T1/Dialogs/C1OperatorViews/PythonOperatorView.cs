@@ -370,7 +370,7 @@ namespace C2.Dialogs
                 FileUtil.AddPathPower(Global.GetCurrentModelDocument().SavePath, "FullControl");
             }
 
-            if (!File.Exists(fullFilePath))
+            if (!String.IsNullOrEmpty(fullFilePath) && !File.Exists(fullFilePath))
             {
                 using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
                 {
@@ -398,13 +398,14 @@ namespace C2.Dialogs
         protected override void CancelButton_Click(object sender, EventArgs e)
         {
             bool isReady = this.opControl.Status == ElementStatus.Done || this.opControl.Status == ElementStatus.Ready;
-            bool notHasVirtualMachine = this.pythonChosenComboBox.Text == "未配置Python虚拟机";
-            
-            if (isReady && notHasVirtualMachine)
+            if (isReady && String.Equals(pythonChosenComboBox.Text, "未配置Python虚拟机"))
+            {
                 this.opControl.Status = ElementStatus.Null;
-                opControl.Option.OptionValidating();
-                this.DialogResult = DialogResult.Cancel;
-                Close();
+            }
+            opControl.Option.OptionValidating();
+            this.DialogResult = DialogResult.Cancel;
+            Close();
+
         }
 
 

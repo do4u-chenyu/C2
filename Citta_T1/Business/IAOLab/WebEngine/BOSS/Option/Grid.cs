@@ -31,7 +31,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         public string bottom { get { return _bottom; } set { FlagDic["bottom"] = true; _bottom = value; } }
         public string width { get { return _width; } set { FlagDic["width"] = true; _width = value; } }
         public string height { get { return _height; } set { FlagDic["height"] = true; _height = value; } }
-        public bool containLabel { get { return _containLabel; } set { FlagDic["containLabel"] = true; _containLabel = value; } }
+        public string containLabel { get { return _containLabel; } set { FlagDic["containLabel"] = true; _containLabel = value; } }
         public string backgroundColor { get { return _backgroundColor; } set { FlagDic["backgroundColor"] = true; _backgroundColor = value; } }
         public string borderColor { get { return _borderColor; } set { FlagDic["borderColor"] = true; _borderColor = value; } }
         public int borderWidth { get { return _borderWidth; } set { FlagDic["borderWidth"] = true; _borderWidth = value; } }
@@ -51,7 +51,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         string _bottom;
         string _width;
         string _height;
-        bool _containLabel;
+        string _containLabel;
         string _backgroundColor;
         string _borderColor;
         int _borderWidth;
