@@ -2067,6 +2067,9 @@
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle03.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle04.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Business\IAOLab\WebEngine\img\img1\aleftboxtbott.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

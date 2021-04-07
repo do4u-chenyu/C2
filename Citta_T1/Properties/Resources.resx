@@ -124,9 +124,6 @@
   <data name="group_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\group_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="业务视图" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\TabBarImage\业务视图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\paste.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -154,11 +151,17 @@
   <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\displaypanel\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="tab_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tab_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="oracle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\ORACLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="zh_CHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Languages\zh.CHS.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="opModelPublic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opModelPublic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rand_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\rand_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,14 +169,14 @@
   <data name="cur_style_brush" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cur_style_brush.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="地图" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WidgetIcon\地图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="tip_pin_pressed_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tip_pin_pressed_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="progress_bar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\progress_bar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Businessvw" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Businessvw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit_alignment_justify" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\edit_alignment_justify.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -183,6 +186,9 @@
   </data>
   <data name="首页" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\首页.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="internet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\internet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -199,11 +205,8 @@
   <data name="preferences_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\preferences_icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="joinPool" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\WidgetImage\joinPool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="head" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\menu\head.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="opendata" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opendata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="designer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\designer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -222,6 +225,9 @@
   </data>
   <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\toolbox\add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_sys" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\folder_sys.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mindMap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mindMap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -271,14 +277,14 @@
   <data name="controlHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\menu\controlhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="copyFilePath" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\WidgetImage\copyfilepath.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="xlsData" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\xlsData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="external" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\external.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="joinPool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\joinPool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pythonHelper5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\datasource\pythonHelper5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -289,17 +295,20 @@
   <data name="附件" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WidgetIcon\附件.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="relate_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\opControl_ico\关联算子.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="layout_org_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\layout_org_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="逻辑图" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Templates\逻辑图.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="underline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\underline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="layout_logic_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\layout_logic_left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="layout_tree_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\layout_tree_left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="blueshadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\C1\displaypanel\blueshadow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="layout_logic_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\layout_logic_right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="print_pages" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\print_pages.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -316,14 +325,8 @@
   <data name="viewData" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\viewdata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="differ_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\差集.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="filter_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\筛选.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -337,14 +340,8 @@
   <data name="folding_expand" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\folding_expand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bold" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\bold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="first" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\first.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="format_painter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\format_painter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dbnet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StartPage\dbnet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -364,11 +361,17 @@
   <data name="avg_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\平均值.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="taskbar_close_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\taskbar_close_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="exclamation" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\exclamation.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BaseStation" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\BaseStation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="last" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\last.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\objects.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -397,6 +400,9 @@
   <data name="modelTopLabel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StartPage\modelTopLabel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="shadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\C1\displaypanel\shadow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Ip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\ip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -408,6 +414,9 @@
   </data>
   <data name="opDesign" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\opDesign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tip_pin_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tip_pin_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="layout_tree_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\layout_tree_right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -439,6 +448,9 @@
   <data name="max_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\最大值.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="done" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\C1\element\done.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -462,9 +474,6 @@
   </data>
   <data name="rotate_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\rotate_right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="opendata" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\WidgetImage\opendata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="hourglass" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\hourglass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -499,20 +508,20 @@
   <data name="sidebar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\sidebar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="opSetSuccess" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\WidgetImage\opSetSuccess.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="maxunfold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\C1\displaypanel\maxunfold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="数据" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WidgetIcon\数据.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="全文工具左侧" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\全文工具左侧.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="模型视图" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\TabBarImage\模型视图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="keyboard_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\keyboard.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BossStyle01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\business\iaolab\webengine\img\bossstyle01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Businessvw" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Businessvw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="地图" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\地图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pythonHelper3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\datasource\pythonHelper3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -523,14 +532,14 @@
   <data name="list_numbered" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\list_numbered.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="check_update1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\check_update.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="PostgreSQL" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\PostgreSQL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="paste_as_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\paste_as_image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Apk" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\TabBarImage\apk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="importDataSource" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\importDataSource.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -549,6 +558,9 @@
   </data>
   <data name="calculator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\calculator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\back_color.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="notes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\notes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -586,6 +598,9 @@
   <data name="div" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\toolbox\div.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BigAPK" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BigAPK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="preferences" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\preferences.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -613,11 +628,14 @@
   <data name="styles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\XmindEngine\styles.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="folding_collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\folding_collapse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Card" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\Card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="备注" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WidgetIcon\备注.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="layout_org_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\layout_org_down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tree" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tree.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -643,20 +661,20 @@
   <data name="keyword_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\关键词过滤.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="opSetSuccess" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\opSetSuccess.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sort_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\排序.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tip_pin_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tip_pin_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="format_painter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\format_painter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="image_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\image.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Artificialintelligence" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Artificialintelligence.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Card" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\TabBarImage\Card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="全文检索" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\全文检索.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -673,14 +691,14 @@
   <data name="stan_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Operators\stan_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="back_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\back_color.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="模型视图" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\模型视图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit_alignment_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\edit_alignment_right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="shadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\displaypanel\shadow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="head" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\C1\menu\head.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rotate_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\rotate_left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -696,6 +714,9 @@
   </data>
   <data name="gunLuntan" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StartPage\gunLuntan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="indent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\indent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cross_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cross_large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -721,11 +742,11 @@
   <data name="windows_themes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\windows_themes.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
-  <data name="internet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\internet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="keyboard_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\keyboard.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="first" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\first.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="xmindData" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\xmindData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -733,8 +754,14 @@
   <data name="importModel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\toolbox\importmodel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="note_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\note_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="union_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\并集.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="侦察兵左侧" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\侦察兵左侧.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -742,29 +769,17 @@
   <data name="Hive" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\Hive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="navigation_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\navigation_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="organization" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\organization.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="大屏" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WidgetIcon\大屏.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="layout_org_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\layout_org_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="font_size" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\font_size.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="last" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\last.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="control_play_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\control_play_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="add_topic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\add_topic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="modelMarket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Modelmarket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -772,29 +787,23 @@
   <data name="_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tip_pin_pressed_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tip_pin_pressed_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="control_play_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\control_play_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\document.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="tab_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tab_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="relate_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\opControl_ico\关联算子.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="树状图" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Templates\树状图.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="结果" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WidgetIcon\结果.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="数据" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\数据.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="topic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\topic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="remark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\remark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="order_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Operators\order_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Wifi" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\WIFI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1944,17 +1953,17 @@
   <data name="opWarn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\opWarn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="blueshadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\displaypanel\blueshadow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="备注" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\备注.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="full_screen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\full_screen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="layout_org_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\layout_org_down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="document" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\document.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="done" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\element\done.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="结果" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WidgetIcon\结果.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="font" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\font.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1965,14 +1974,14 @@
   <data name="txtData" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\txtData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="业务视图" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\业务视图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Languages\en.US.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="copyFilePath" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\WidgetImage\copyfilepath.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="opDone" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\opDone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1980,14 +1989,14 @@
   <data name="random_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opControl_ico\随机.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="underline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\underline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="bold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\bold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="taskbar_close_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\taskbar_close_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folding_collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\folding_collapse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="indent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\indent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="currentModelFin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\toolbox\currentModelFin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1995,23 +2004,23 @@
   <data name="hand_cur" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hand_cur.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="note_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\note_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="逻辑图" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Templates\逻辑图.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="layout_logic_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\layout_logic_right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="layout_tree_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\layout_tree_left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="check_update1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\check_update.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="order_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\order_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="maxunfold" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\C1\displaypanel\maxunfold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="navigation_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\navigation_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder_sys" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\folder_sys.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="add_topic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\add_topic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="opModelPublic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\WidgetImage\opModelPublic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Apk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\apk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="export_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\export_image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -2025,13 +2034,7 @@
   <data name="opSet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\opSet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="侦察兵左侧" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\侦察兵左侧.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="全文工具左侧" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\全文工具左侧.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BigAPK" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BigAPK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BossStyle04" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Business\IAOLab\WebEngine\img\BossStyle04.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
