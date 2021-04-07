@@ -263,11 +263,11 @@ namespace C2.Business.WebsiteFeatureDetection
     class Response
     {
         Dictionary<string, string> resDict;
-        byte[] content;
+        string content;
         HttpStatusCode statusCode;
         private HttpWebResponse response;
         public readonly static Response Empty = new Response();
-        public byte[] Content
+        public string Content
         {
             get { return this.content; }
         }
@@ -287,7 +287,7 @@ namespace C2.Business.WebsiteFeatureDetection
         {
             this.response = resp;
             this.content = GetContent();
-            this.resDict = JsonToDictionary(Encoding.UTF8.GetString(this.content));
+            this.resDict = JsonToDictionary(this.content);
             this.statusCode = GetStatusCode();
 
         }
@@ -297,28 +297,34 @@ namespace C2.Business.WebsiteFeatureDetection
                 throw new Exception("没有实例化的Response");
             return response.StatusCode;
         }
-        private byte[] GetContent()
+        private string GetContent()
         {
             if (response == null)
                 throw new Exception("没有实例化的Response");
+
+            Stream resStream = null;
+            StreamReader reader = null;
+            string content = string.Empty;
             try
             {
-                using (MemoryStream ms = new MemoryStream())
+                using (resStream = response.GetResponseStream())
                 {
-                    Stream responseStream = this.response.GetResponseStream();
-                    byte[] buffer = new byte[64 * 1024];
-                    int i;
-                    while ((i = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                    using (reader = new StreamReader(resStream, Encoding.UTF8))
                     {
-                        ms.Write(buffer, 0, i);
+                        //通过ReadToEnd()把整个HTTP响应作为一个字符串取回，
+                        content = reader.ReadToEnd().ToString();
                     }
-                    return ms.ToArray();
                 }
             }
-            catch
+            catch{}
+            finally
             {
-                return new byte[0];
+                if (resStream != null)
+                    resStream.Close();
+                if (reader != null)
+                    reader.Close();
             }
+            return content;
         }
         private Dictionary<string, string> JsonToDictionary(string jsonStr)
         {

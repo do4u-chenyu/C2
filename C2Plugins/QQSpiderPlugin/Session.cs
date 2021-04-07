@@ -182,22 +182,30 @@ namespace QQSpiderPlugin
         {
             if (response == null)
                 throw new Exception("没有实例化的Response");
+            MemoryStream ms = null;
+            Stream responseStream = null;
             try
             {
-                using (MemoryStream ms = new MemoryStream())
+                using (ms = new MemoryStream())
                 {
-                    Stream responseStream = this.response.GetResponseStream();
-                    byte[] buffer = new byte[64 * 1024];
-                    int i;
-                    while ((i = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                    using (responseStream = this.response.GetResponseStream())
                     {
-                        ms.Write(buffer, 0, i);
+                        byte[] buffer = new byte[64 * 1024];
+                        int i;
+                        while ((i = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            ms.Write(buffer, 0, i);
+                        }
+                        return ms.ToArray();
                     }
-                    return ms.ToArray();
                 }
             }
             catch
             {
+                if (ms != null)
+                    ms.Close();
+                if (responseStream != null)
+                    responseStream.Close();
                 return new byte[0];
             }
         }
