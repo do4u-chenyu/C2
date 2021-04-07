@@ -70,8 +70,8 @@ namespace C2.SearchToolkit
             BastionAPI api = new BastionAPI(task);
 
             api.Login()
-                .DeleteGambleTaskWorkspace()
-                .KillGambleTask();
+               .DeleteGambleTaskWorkspace()
+               .KillGambleTask();
       
             return tasks.Remove(task) && FileUtil.DeleteFile(task.BcpFFP); 
         }
