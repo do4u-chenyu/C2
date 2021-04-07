@@ -165,6 +165,7 @@ namespace C2.Controls.MapViews
 
             if(type == "single")
             {
+
                 MenuOpRunning.Image = Properties.Resources.opRunning;
                 MenuOpRunning.Text = Lang._("Running");
                 MenuOpRunning.Enabled = type == "single" ? opw.Status != OpStatus.Null : !opw.HasModelOperator;
