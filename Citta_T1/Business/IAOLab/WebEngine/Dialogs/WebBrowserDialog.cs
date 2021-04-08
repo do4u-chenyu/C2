@@ -229,25 +229,29 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             // LoadMapData
             LoadMapData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            LoadMapData.Image = global::C2.Properties.Resources.designer;
+            //LoadMapData.Image = global::C2.Properties.Resources.designer;
+            LoadMapData.Image = global::C2.Properties.Resources.map_setting;
             LoadMapData.Text = "参数配置";
             LoadMapData.Click += new System.EventHandler(this.LoadMapData_Click);
 
             // SavePic
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            SavePic.Image = global::C2.Properties.Resources.image;
+            //SavePic.Image = global::C2.Properties.Resources.image;
+            SavePic.Image = global::C2.Properties.Resources.map_save;
             SavePic.Text = "保存成图片";
             SavePic.Click += new System.EventHandler(this.SavePic_Click);
 
             // Clear
             Clear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            Clear.Image = global::C2.Properties.Resources.delete;
+            //Clear.Image = global::C2.Properties.Resources.delete;
+            Clear.Image = global::C2.Properties.Resources.map_clear;
             Clear.Text = "清空";
             Clear.Click += new System.EventHandler(this.Clear_Click);
 
             // EditCode
             EditCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            EditCode.Image = global::C2.Properties.Resources.edit_code;
+            //EditCode.Image = global::C2.Properties.Resources.edit_code;
+            EditCode.Image = global::C2.Properties.Resources.map_sourceCode;
             EditCode.Text = "自定义源码";
             EditCode.Click += new System.EventHandler(this.EditCode_Click);
 

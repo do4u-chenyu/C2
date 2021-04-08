@@ -3067,6 +3067,10 @@
     <None Include="Resources\全文工具左侧.png" />
     <None Include="Resources\侦察兵左侧.png" />
     <None Include="Resources\BigAPK.png" />
+    <None Include="Resources\WebBrowser\map_clear.png" />
+    <None Include="Resources\WebBrowser\map_save.png" />
+    <None Include="Resources\WebBrowser\map_setting.png" />
+    <None Include="Resources\WebBrowser\map_sourceCode.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
