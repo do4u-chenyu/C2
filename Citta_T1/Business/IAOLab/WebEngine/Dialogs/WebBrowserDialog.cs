@@ -420,6 +420,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void RunButton_Click(object sender, EventArgs e)
         {
             ClearOverlap();
+            this.MapConfig.SourceCode = this.htmlEditorControlEx1.Text;
             string tempDir = FileUtil.TryGetSysTempDir();
             Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
             string tmpHtmlFilePath = Path.Combine(Global.TempDirectory, "editorMap.html");
