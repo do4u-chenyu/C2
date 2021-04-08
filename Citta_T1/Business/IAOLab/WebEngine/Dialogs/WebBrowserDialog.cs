@@ -380,6 +380,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             this.webBrowser1.Location = WebBrowserFullLocation;
             this.LoadMapData.Enabled = true;
             this.SavePic.Enabled = true;
+            this.Clear.Enabled = true;
             this.SourceCodeMapActive = !SourceCodeMapActive;
         }
 
@@ -391,6 +392,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             this.webBrowser1.Location = WebBrowserHalfLocation;
             this.LoadMapData.Enabled = false;
             this.SavePic.Enabled = false;
+            this.Clear.Enabled = false;
             this.SourceCodeMapActive = !SourceCodeMapActive;
         }
 

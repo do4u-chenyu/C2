@@ -45,11 +45,10 @@ namespace C2.Dialogs
                 Client_DownloadFileCompleted = this.Client_DownloadFileCompleted,
                 Client_DownloadProgressChanged = this.Client_DownloadProgressChanged
             };
-            latude = this.baiduLatTB.Text = Settings.Default.latude;
             lontude = this.baiduLonTB.Text = Settings.Default.lontude;
+            latude = this.baiduLatTB.Text = Settings.Default.latude;
             scale = this.baiduScaleTB.Text = Settings.Default.scale;
             baiduVerAPI = this.baiduVerAPITB.Text = Settings.Default.baiduVerAPI;
-            baiduHeatAPI = this.baiduHeatTB.Text = Settings.Default.baiduHeatAPI;
         }
 
 
@@ -636,7 +635,6 @@ namespace C2.Dialogs
             Settings.Default.lontude = this.baiduLonTB.Text;
             Settings.Default.scale = this.baiduScaleTB.Text;
             Settings.Default.baiduVerAPI = this.baiduVerAPITB.Text;
-            Settings.Default.baiduHeatAPI = this.baiduHeatTB.Text;
             Settings.Default.Save();
             WriteFile();
             this.Close();
@@ -706,7 +704,6 @@ namespace C2.Dialogs
             //----------替换html内容
 
             htmltext.Replace("http://api.map.baidu.com/api?v=1.4&services=true", this.baiduVerAPITB.Text);
-            htmltext.Replace("http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js", this.baiduHeatTB.Text);
 
             //----------生成htm文件------------------
             try
