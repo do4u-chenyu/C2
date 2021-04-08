@@ -2,7 +2,9 @@
 using C2.SearchToolkit;
 using C2.Utils;
 using Renci.SshNet;
+using Renci.SshNet.Common;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -28,7 +30,8 @@ namespace C2.Business.SSH
         public BastionAPI(TaskInfo task)
         {
             this.task = task;
-            this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
+            //this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
+            this.ssh = new SshClient("114.55.248.85", "root", "aliyun.123");
             this.ssh.ConnectionInfo.Timeout = Timeout; // 10秒超时
         }
 
@@ -60,8 +63,8 @@ namespace C2.Business.SSH
                 return;
 
             task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, "未能跳转全文机");
-
-            shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
+            var terminalMode = new Dictionary<TerminalModes, uint>();
+            shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 0, terminalMode);
             // 等待目标机准备好
             _ = shell.ReadLine(Timeout);
 
@@ -71,7 +74,7 @@ namespace C2.Business.SSH
             // 等待跳转成功,出现root用户提示符
             if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), Timeout))
                 return;
-            task.LastErrorMsg = String.Empty;
+            task.LastErrorMsg = String.Empty; 
             _ = shell.Read(); // 清空buffer
         }
 
@@ -87,7 +90,7 @@ namespace C2.Business.SSH
                 // 打印分隔符
                 ssm.WriteLine(SeparatorCommand);
                 // 根据分隔符和timeout确定任务输出结束
-                String ret = ssm.Expect(SeparatorCommand, TimeSpan.FromSeconds(timeout));
+                String ret = ssm.Expect(new Regex(@"\n5L2Z55Sf5aaC5LiH5Y\+k6ZW/5aSc\r?\n"), TimeSpan.FromSeconds(timeout));
                 if (ret != null)
                     return ret;
             } catch { }
@@ -153,11 +156,12 @@ namespace C2.Business.SSH
             return this;
         }
 
-        public String GetPID(String cmdLine)
+        public String GetPID(String content)
         {
-            String command = String.Format(@"pgrep -f '{0}' | head -n 1", cmdLine);
-            String result = RunCommand(command, shell);
-            return Regex.IsMatch(result, @"^\d+$") ? result.Trim() : String.Empty;
+            Match mat = Regex.Match(content, @"\r?\n\[\d+\]\s*(\d+)\r?\n"); // 匹配类似 [1] 7177
+            if (mat.Success && mat.Groups[1].Success)
+                return mat.Groups[1].Value;
+            return String.Empty;
         }
 
         public String RunGambleTask()
@@ -167,10 +171,9 @@ namespace C2.Business.SSH
 
             EnterGambleTaskDirectory();
             //String command = String.Format("python {0}", TargetGambleScript);
-            String command = "sleep 300";
-            shell.WriteLine(String.Format("{0} & disown -a", command));
-
-            String pid = GetPID(command);
+            String command = "sleep 3600";
+            String ret = RunCommand(String.Format("{0} & disown -a", command), shell);
+            String pid = GetPID(ret);
             // 未获取到pid，当作模型脚本执行失败
             if (pid.IsEmpty())
                 task.LastErrorMsg = "全文机已连接但执行涉赌脚本失败";
