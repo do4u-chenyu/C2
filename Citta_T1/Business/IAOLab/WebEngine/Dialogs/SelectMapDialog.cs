@@ -30,6 +30,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private OpUtil.Encoding FileEncoding { get => hitItem.FileEncoding; }
         private char FileSep { get => hitItem.FileSep; }
         private string FileName { get => hitItem.FileName; }
+        public int LatIndex;
+        public int LngIndex;
+        public int WeightIndex;
         public SelectMapDialog()
         {
             InitializeComponent();
@@ -87,12 +90,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 return false;
             int upperLimit = 100;
             // 获得x,y轴数据的列索引
-            int latIndex = latComboBox.Tag == null ? latComboBox.SelectedIndex : ConvertUtil.TryParseInt(latComboBox.Tag.ToString());
-            List<int> indexlat = new List<int>() { latIndex };
-            int lonIndex = lonComboBox.Tag == null ? lonComboBox.SelectedIndex : ConvertUtil.TryParseInt(lonComboBox.Tag.ToString());
-            List<int> indexlon = new List<int>() { lonIndex };
-            int countIndex = countComboBox.Tag == null ? countComboBox.SelectedIndex : ConvertUtil.TryParseInt(countComboBox.Tag.ToString());
-            List<int> indexcount = new List<int>() { countIndex };
+            LatIndex = latComboBox.Tag == null ? latComboBox.SelectedIndex : ConvertUtil.TryParseInt(latComboBox.Tag.ToString());
+            List<int> indexlat = new List<int>() { LatIndex };
+            LngIndex = lonComboBox.Tag == null ? lonComboBox.SelectedIndex : ConvertUtil.TryParseInt(lonComboBox.Tag.ToString());
+            List<int> indexlon = new List<int>() { LngIndex };
+            WeightIndex = countComboBox.Tag == null ? countComboBox.SelectedIndex : ConvertUtil.TryParseInt(countComboBox.Tag.ToString());
+            List<int> indexcount = new List<int>() { WeightIndex };
 
             // 获取选中输入、输出各列数据
             string fileContent;

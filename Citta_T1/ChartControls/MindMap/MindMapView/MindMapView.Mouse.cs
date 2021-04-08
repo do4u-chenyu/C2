@@ -2,6 +2,7 @@ using C2.Business.Model;
 using C2.Configuration;
 using C2.Core;
 using C2.Dialogs;
+using C2.Dialogs.C2OperatorViews;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
@@ -393,7 +394,7 @@ namespace C2.Controls.MapViews
                 {
                     // 处理鼠标左键双击
                     HoverObject.Widget.OnDoubleClick(new HandledEventArgs());
-                    return;
+                    return ;
                 }
             }
 

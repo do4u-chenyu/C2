@@ -2160,6 +2160,9 @@
     <None Include="Resources\html_content.htm" />
     <None Include="Resources\Icons\Artificialintelligence.png" />
     <None Include="Resources\Icons\Businessvw.png" />
+    <Content Include="Resources\Help\检索系统帮助.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Icons\check_update.ico" />
     <None Include="Resources\Icons\Datamanagement.png" />
     <Content Include="Resources\Icons\document.ico" />
@@ -2899,6 +2902,7 @@
     <Content Include="Resources\Script\IAO_Web_validation\step5_ finnaly.py" />
     <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
     <Content Include="Resources\Script\IAO_Web_validation\util.py" />
+    <None Include="Resources\SourceCodeMap.html" />
     <Content Include="Resources\StartPage\bank.png" />
     <Content Include="Resources\StartPage\BusinessViewLabel.png" />
     <Content Include="Resources\StartPage\bussinessView.png" />
