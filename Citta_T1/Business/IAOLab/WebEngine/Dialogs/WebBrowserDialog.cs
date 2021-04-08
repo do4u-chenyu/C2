@@ -31,14 +31,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
 
         public WebType WebType;
-        public MapType MapType;
         public Topic HitTopic;
         public List<DataItem> DataItems;
         public string Title { set => this.Text = value; get => this.Text; }
         public string WebUrl;
 
         public string SourceWebUrl;
-        bool isActive = true;
         private readonly string picPath;
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
@@ -51,7 +49,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             ChartOptions = new Dictionary<string, int[]>();
             picPath = Path.Combine(Global.TempDirectory, "boss.png");
             SourceWebUrl = string.Empty;
-            MapType = MapType.StartMap;
         }
         public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
         {
@@ -78,7 +75,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             return tmp;
         }
-
         #region 窗体事件
         private void WebBrowserDialog_Load(object sender, EventArgs e)
         {
@@ -118,7 +114,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             List<string> tmpList = new List<string>();
             for (int i = 0; i < latValues.Count; i++)
             {
-                tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[i], lonValues[i]) + '}');
+                tmpList.Add('{' + String.Format(JSON_OBJ_Format, lonValues[i], latValues[i]) + '}');
             }
             string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
             return new object[] { res };
@@ -149,7 +145,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             List<string> tmpList = new List<string>();
             for (int i = 0; i < latValues.Count; i++)
             {
-                tmpList.Add('{' + String.Format(JSON_OBJ_Format_heat, latValues[i], lonValues[i], weightValues[i]) + '}');
+                tmpList.Add('{' + String.Format(JSON_OBJ_Format_heat, lonValues[i], latValues[i], weightValues[i]) + '}');
             }
             string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
             return new object[] { res };
@@ -167,7 +163,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
              */
             if (WebType == WebType.Map)
             {
-                if (MapType == MapType.StartMap)
+                if (MapConfig.MapType == MapType.StartMap)
                     InitStartMapByConfig();
                 else
                     InitSourceCodeMapByConfig();
@@ -176,7 +172,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void InitStartMapByConfig()
         {
-            string configstr = String.Format("{0},{1},{2}", MapConfig.InitLat, MapConfig.InitLng, MapConfig.Level);
+            string configstr = String.Format("{0},{1},{2}", MapConfig.InitLng, MapConfig.InitLat, MapConfig.Zoom);
             webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
             foreach (OverlapConfig oc in MapConfig.OverlapConfigList)
             {
@@ -313,7 +309,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         break;
                 }
                 var configMap = new ConfigForm();
-                string newCenterAndZoom = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
+                string newCenterAndZoom = dialog.drawlontude + ',' + dialog.drawlatude + ',' + configMap.scale;
                 webBrowser1.Document.InvokeScript("centerAndZoom", new object[] { newCenterAndZoom });
             }
             else
@@ -343,14 +339,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void EditCode_Click(object sender, EventArgs e)
         {
-            if (isActive)
+            if (MapConfig.MapType == MapType.StartMap)
             {
                 this.editorPanel.Visible = true;
                 this.editorPanel.Enabled = true;
                 this.webBrowser1.Location = new System.Drawing.Point(600, 28);
                 this.LoadMapData.Enabled = false;
                 this.SavePic.Enabled = false;
-                isActive = false;
+                MapConfig.MapType = MapType.SourceCodeMap;
 
                 InitSourceCodeMapByConfig();
             }
@@ -364,7 +360,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.webBrowser1.Location = new System.Drawing.Point(12, 23);
                 this.LoadMapData.Enabled = true;
                 this.SavePic.Enabled = true;
-                isActive = true;
+                MapConfig.MapType = MapType.StartMap;
 
                 WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
                 webBrowser1.Navigate(WebUrl);
@@ -377,7 +373,20 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             this.MapConfig.SourceCode = this.htmlEditorControlEx1.Text;
         }
-
+        private void SaveCenterAndZoom()
+        {
+            if (MapConfig.MapType != MapType.StartMap)
+                return;
+            dynamic data = webBrowser1.Document.InvokeScript("eval", new[] {
+                "(function() { return {lat: map.getCenter()[\"lat\"], lng: map.getCenter()[\"lng\"], zoom: map.getZoom()}; })()"
+            });
+            if (data.lat != null)
+                MapConfig.InitLat = (float)data.lat;
+            if (data.lng != null)
+                MapConfig.InitLng = (float)data.lng;
+            if (data.zoom != null)
+                MapConfig.Zoom = (int)data.zoom;
+        }
         /// <summary>
         /// 得有文件，要不然不能使用WebBrowser访问
         /// </summary>
@@ -474,11 +483,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
         /// </summary>
         private void SaveMapConfig()
         {
+            // TODO 获得当前的经纬度和zoom等级
             SaveSourceCode();
+            SaveCenterAndZoom();
             MapWidget mw = HitTopic.FindWidget<MapWidget>();
             mw.MapConfig = MapConfig;
         }
     }
+    #region 内部类
     enum OverlapType
     {
         Marker,
@@ -512,12 +524,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
     }
     class MapConfig
     {
-        const float defaultLat = (float)108.876433;
-        const float defaultLng = (float)36.269395;
-        const int defaultLevel = 5;
+        const float defaultLat = (float)36.269395;
+        const float defaultLng = (float)108.876433;
+        const int defaultZoom = 5;
+        const MapType defaultMapType = MapType.StartMap;
         public float InitLat;
         public float InitLng;
-        public int Level;
+        public int Zoom;
+        public MapType MapType;
         public List<OverlapConfig> OverlapConfigList;
         public string SourceCode;
         /// <summary>
@@ -530,16 +544,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 this.InitLat = defaultLat;
             if (!float.TryParse(configForm.lontude, out this.InitLng))
                 this.InitLng = defaultLng;
-            if (!int.TryParse(configForm.scale, out this.Level))
-                this.Level = defaultLevel;
+            if (!int.TryParse(configForm.scale, out this.Zoom))
+                this.Zoom = defaultZoom;
+            this.MapType = defaultMapType;
             this.OverlapConfigList = new List<OverlapConfig>();
             this.SourceCode = Properties.Resources.SourceCodeMap;
         }
-        public MapConfig(float initLat, float initLng, int level, List<OverlapConfig> mapDataConfigList, string sourceCode)
+        public MapConfig(float initLat, float initLng, int zoom, List<OverlapConfig> mapDataConfigList, string sourceCode)
         {
             this.InitLat = initLat;
             this.InitLng = initLng;
-            this.Level = level;
+            this.Zoom = zoom;
             this.OverlapConfigList = new List<OverlapConfig>();
             foreach (OverlapConfig mapDataConfig in mapDataConfigList)
                 this.OverlapConfigList.Add(mapDataConfig);
@@ -548,7 +563,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public MapConfig Clone()
         {
-            return new MapConfig(this.InitLat, this.InitLng, this.Level, this.OverlapConfigList, this.SourceCode);
+            return new MapConfig(this.InitLat, this.InitLng, this.Zoom, this.OverlapConfigList, this.SourceCode);
         }
     }
+    #endregion
 }
