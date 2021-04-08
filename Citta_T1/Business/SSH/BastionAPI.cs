@@ -11,7 +11,10 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(10);
+        private const int SecondsTimeout = 10;
+        private const String Separator = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
+
+        private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
         private static readonly String TgzHead = Encoding.ASCII.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
 
         private readonly TaskInfo task;
@@ -70,10 +73,23 @@ namespace C2.Business.SSH
         }
 
 
-        private String RunCommand(String command, ShellStream ssm)
+        private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout)
+             
         {
-            ssm.Read();//TODO 需要一个清缓存的函数
-            ssm.WriteLine(command);
+            try 
+            {
+                // 清理缓存
+                ssm.Read();
+                // 执行命令
+                ssm.WriteLine(command);
+                // 打印分隔符
+                ssm.WriteLine(String.Format("echo {0}", Separator));
+                // 根据分隔符和timeout确定任务输出结束
+                String ret = ssm.Expect(Separator, TimeSpan.FromSeconds(timeout));
+                if (ret != null)
+                    return ret.Replace(Separator, String.Empty).TrimEnd();
+            } catch { }
+
             return String.Empty;
         }
 
