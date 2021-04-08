@@ -390,8 +390,11 @@ namespace C2.Controls.Left
 
         public void OnSelectLinkButton(LinkButton linkButton)
         {
+            foreach (LinkButton button in this.linkPanel.Controls)
+                button.BackColor = Color.Empty;
             //改变选中的button,刷新架构，默认显示用户名登陆的表结构
             ConnectDatabase(linkButton.DatabaseItem);//连接一次数据库，刷新架构及数据表
+            linkButton.BackColor = Color.LightGray;
         }
 
         private void ConnectDatabase(DatabaseItem dbi)

@@ -63,6 +63,8 @@ namespace C2.Utils
         public static string TimeAndIPTransformFormHelpInfo = "IP和整形IP之间的转换，绝对时间和真实时间之间的转换";
         public static string BigAPKFormHelpInfo = "APK检测系统";
 
+        public static string FileNotFoundHelpInfo = "文件不存在";
+
 
         #region IAO基站批量查询
         public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01(2G/3G) 或 46001590a8089407(4G) 或 37b900018bd0(电信2G)
