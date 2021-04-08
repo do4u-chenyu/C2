@@ -13,15 +13,16 @@ using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
 {
-    partial class WFDTaskResult : StandardDialog
+    partial class WFDTaskResult : BaseDialog
     {
         public WFDTaskInfo TaskInfo;
         private static readonly LogUtil log = LogUtil.GetInstance("WFDTaskResult");
-
+        private bool isDownloading;
         public WFDTaskResult()
         {
             InitializeComponent();
             this.dataGridView.DoubleBuffered(true);
+            this.isDownloading = false;
         }
 
         public WFDTaskResult(WFDTaskInfo taskInfo) : this()
@@ -34,20 +35,21 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         }
 
+        #region 加载结果
+        /* 
+         *  1、打开结果窗口，窗口加载完成时开始2
+         *  2、任务状态是否done?
+         *      done ： 读本地文件所有内容到 List<List<string>> results = 内存， 前100行加载到table
+         *      其他 ： 跳转3
+         *  3、是否过期？
+         *      是，提示，返回，此时窗体显示基本属性，详细信息为空；
+         *      否，发起请求
+         *  4、发起请求
+         *      成功 ： 读返回报文内容到 List<List<string>> results = 内存， 前100行加载到table ， 状态刷新 ， 写入本地文件
+         *      其他 ： 状态刷新
+         */
         private void WFDTaskResult_Shown(object sender, EventArgs e)
         {
-            /* 
-             *  1、打开结果窗口，窗口加载完成时开始2
-             *  2、任务状态是否done?
-             *      done ： 读本地文件所有内容到 List<List<string>> results = 内存， 前100行加载到table
-             *      其他 ： 跳转3
-             *  3、是否过期？
-             *      是，提示，返回，此时窗体显示基本属性，详细信息为空；
-             *      否，发起请求
-             *  4、发起请求
-             *      成功 ： 读返回报文内容到 List<List<string>> results = 内存， 前100行加载到table ， 状态刷新 ， 写入本地文件
-             *      其他 ： 状态刷新
-             */
             if (TaskInfo.Status == WFDTaskStatus.Done && File.Exists(TaskInfo.ResultFilePath) && LoadLocalResultsFillTable())
                 return;
 
@@ -105,13 +107,13 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             return results;
         }
-
+        
         private void UpdateTaskInfoByResp(string respMsg, string datas)
         {
             if (respMsg == "success")// && TaskInfo.Status != WFDTaskStatus.Done 考虑是否每次都刷新
             {
                 TaskInfo.Status = WFDTaskStatus.Done;
-                datas = datas.Replace("None", "''").Replace("True", "'True'").Replace("False", "'False'");
+                datas = datas.Replace("None", "''").Replace("True", "'True'").Replace("False", "'False'").Replace("''''","''");
                 TaskInfo.PreviewResults = DealData(TaskInfo.ResultFilePath, datas);
             }
             else if (respMsg == "wait")
@@ -204,16 +206,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             return results;
         }
+        #endregion
 
-
-        private void BrowserButton_Click(object sender, EventArgs e)
-        {
-            if (File.Exists(this.TaskInfo.ResultFilePath))
-                ProcessUtil.ProcessOpen(this.TaskInfo.ResultFilePath);
-            else
-                HelpUtil.ShowMessageBox("该文件不存在。", "提示");
-        }
-
+        #region 下载截图
         private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if(dataGridView.Columns[e.ColumnIndex] is DataGridViewLinkColumn && e.RowIndex > -1 && dataGridView.CurrentCell is DataGridViewLinkCell)
@@ -221,6 +216,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 DataGridViewLinkCell cell = (DataGridViewLinkCell)dataGridView.CurrentCell;
                 if (cell.Tag == null)
                     return;
+                else if (isDownloading)
+                {
+                    HelpUtil.ShowMessageBox("当前有截图下载任务，请在下载结束后重试。");
+                    return;
+                }
 
                 SaveScreenshotsToLocal(new List<WFDResult>() { TaskInfo.PreviewResults[e.RowIndex] });
             }
@@ -239,7 +239,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             progressNum.Text = "0%";
             progressInfo.Text = "已完成0张，失败0张。";
             progressBar1.Value = 0;
-            progressBar1.Step = (int)Math.Ceiling((decimal)100 / results.Count);
+            progressBar1.Maximum = results.Count;
+            progressBar1.Step = 1;
+            //progressBar1.Step = (int)Math.Floor((decimal)100 / results.Count);
 
             await SavePicAndUpdateProgress(destPath, results);
         }
@@ -249,14 +251,15 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             int doneNum = 0;
             int errorNum = 0;
             string finMsg = string.Empty;
+            isDownloading = true;
 
             string[] files = Directory.GetFiles(destPath);
 
             foreach (WFDResult result in results)
             {
-                int proValue = progressBar1.Value + progressBar1.Step;
-                progressBar1.Value = proValue > 100 ? 100 : proValue;
-                progressNum.Text = progressBar1.Value.ToString() + "%";
+                progressBar1.Value += progressBar1.Step;
+                progressNum.Text = (progressBar1.Value * 100 / progressBar1.Maximum).ToString() + "%";
+                //progressNum.Text = progressBar1.Value.ToString() + "%";
 
                 string picUrl = result.url.Replace("http://", "").Replace("https://", "").Split('/')[0];
                 if (files._Contains(picUrl))//跳过已存在的文件
@@ -273,8 +276,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 finMsg = APIResult.RespMsg;
             }
 
+            progressBar1.Value = progressBar1.Maximum;
+            progressNum.Text = "100%";
+            isDownloading = false;
             //单个网站下载时，弹窗提示错误信息
-            if(results.Count > 1 || finMsg == "success")
+            if (results.Count > 1 || finMsg == "success")
                 HelpUtil.ShowMessageBox("网站截图下载完毕");
             else
                 HelpUtil.ShowMessageBox(finMsg);
@@ -300,7 +306,43 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void DownloadPicsButton_Click(object sender, EventArgs e)
         {
+            if (isDownloading)
+            {
+                HelpUtil.ShowMessageBox("当前有截图下载任务，请在下载结束后重试。");
+                return;
+            }
+            if (TaskInfo.Status != WFDTaskStatus.Done)
+            {
+                HelpUtil.ShowMessageBox("任务还在执行中，请任务完成后重试。");
+                return;
+            }
             SaveScreenshotsToLocal(TaskInfo.PreviewResults.FindAll(t => !string.IsNullOrEmpty(t.screen_shot)));
+        }
+        #endregion
+        
+        private void BrowserButton_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(this.TaskInfo.ResultFilePath))
+                ProcessUtil.ProcessOpen(this.TaskInfo.ResultFilePath);
+            else
+                HelpUtil.ShowMessageBox("该文件不存在。", "提示");
+        }
+
+        private bool CanFormClose()
+        {
+            if (isDownloading)
+            {
+                DialogResult result = MessageBox.Show("当前有截图下载任务，是否中止下载？", "关闭窗口", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.Cancel)
+                    return false;
+            }
+            return true;
+        }
+
+        private void WFDTaskResult_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //e.cancel为true表示取消关闭，为false表示可以关闭窗口
+            e.Cancel = !CanFormClose();
         }
     }
 }

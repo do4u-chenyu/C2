@@ -5,13 +5,16 @@ using Renci.SshNet;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 
 namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(10);
+        private const int SecondsTimeout = 7;
+        private const String SeparatorCommand = "echo 5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
+
+        private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
+        
         private static readonly String TgzHead = Encoding.ASCII.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
 
         private readonly TaskInfo task;
@@ -25,55 +28,70 @@ namespace C2.Business.SSH
         public BastionAPI(TaskInfo task)
         {
             this.task = task;
-            this.ssh = new SshClient("114.55.248.85", "root", "aliyun.123");
+            this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
             this.ssh.ConnectionInfo.Timeout = Timeout; // 10秒超时
         }
 
         public BastionAPI Login()
         {
-            try
+            try 
+            { 
+                ssh.Connect(); 
+            }   
+            catch (Exception ex) 
             {
-                ssh.Connect();
-                Jump();
+                task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, ex.Message);
+            }
+     
+            try 
+            { 
+                Jump(); 
             }
             catch (Exception ex)
             {
                 task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, ex.Message);
             }
-            
+                
             return this;
         }
         private void Jump()
         {
-            shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
-            shell.ReadTimeout = shell.WriteTimeout = (int)Timeout.TotalMilliseconds;
-            
+            if (!ssh.IsConnected || !task.LastErrorMsg.IsEmpty())
+                return;
+
             task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, "未能跳转全文机");
 
-            // 等待Shell环境准备好
-            for (int i = 0; i < 3 && !shell.CanWrite; i++)
-                Thread.Sleep(500);
-
-            // 确认进入烽火堡垒机欢迎标题
-            if (null == shell.Expect(new Regex("###[^#]+###"), Timeout))
-                return;
+            shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
+            // 等待目标机准备好
+            _ = shell.ReadLine(Timeout);
 
             // 跳转到目标机器
             shell.WriteLine(task.SearchAgentIP);
 
-            // 等待跳转成功
+            // 等待跳转成功,出现root用户提示符
             if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), Timeout))
                 return;
-
             task.LastErrorMsg = String.Empty;
-            shell.Read(); // 清空buffer
+            _ = shell.Read(); // 清空buffer
         }
 
-
-        private String RunCommand(String command, ShellStream ssm)
+        
+        private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout)   
         {
-            ssm.Read();//TODO 需要一个清缓存的函数
-            ssm.WriteLine(command);
+            try 
+            {
+                // 清理缓存
+                ssm.Read();
+                // 执行命令
+                ssm.WriteLine(command);
+                // 打印分隔符
+                ssm.WriteLine(SeparatorCommand);
+                // 根据分隔符和timeout确定任务输出结束
+                String ret = ssm.Expect(SeparatorCommand, TimeSpan.FromSeconds(timeout));
+                if (ret != null)
+                    return ret;
+            } catch { }
+
             return String.Empty;
         }
 
@@ -130,7 +148,8 @@ namespace C2.Business.SSH
             String d = GambleTaskDirectory + "/" + TargetGambleScript;
             // 这里可能还有超出shell缓冲区的问题
             String command = String.Format("echo -e \"{0}\" > {1}", content, d);
-            RunCommand(command, shell);
+            if (RunCommand(command, shell).IsEmpty())
+                task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, "上传脚本失败");
             return this;
         }
 

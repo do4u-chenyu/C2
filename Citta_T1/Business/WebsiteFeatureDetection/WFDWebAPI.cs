@@ -40,7 +40,7 @@ namespace C2.Business.WebsiteFeatureDetection
             UserName = string.Empty;
             Token = string.Empty;
 
-            //APIUrl = "https://10.1.203.15:12449/apis/";//测试
+            //APIUrl = "https://10.1.203.15:12347/apis/";//测试
             APIUrl = "https://113.31.119.85:53374/apis/";//正式
             LoginUrl = APIUrl + "Login";
             ProClassifierUrl = APIUrl + "pro_classifier_api";
@@ -228,25 +228,33 @@ namespace C2.Business.WebsiteFeatureDetection
             return true;
         }
 
-        public Response Post(string url, Dictionary<string, string> postData, string token = "", int timeout = 20000)
+        public Response Post(string url, Dictionary<string, string> postData, string token = "", int timeout = 10000)
         {
-            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(RemoteCertificateValidate);
+            Response resp = new Response();
+            try
+            {
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(RemoteCertificateValidate);
 
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
 
-            req.Timeout = timeout;
-            string content = DictionaryToJson(postData);
-            byte[] data = Encoding.UTF8.GetBytes(content);
+                req.Timeout = timeout;
+                string content = DictionaryToJson(postData);
+                byte[] data = Encoding.UTF8.GetBytes(content);
 
-            req.Method = "POST";
-            req.ContentType = "application/json";
-            req.ContentLength = data.Length;
-            req.Headers.Add("Authorization", "Bearer " + token);
+                req.Method = "POST";
+                req.ContentType = "application/json";
+                req.ContentLength = data.Length;
+                req.Headers.Add("Authorization", "Bearer " + token);
 
-            using (var stream = req.GetRequestStream())
-                stream.Write(data, 0, data.Length);
-
-            return new Response((HttpWebResponse)req.GetResponse());
+                using (var stream = req.GetRequestStream())
+                    stream.Write(data, 0, data.Length);
+                resp = new Response((HttpWebResponse)req.GetResponse());
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return resp;
         }
 
         private string DictionaryToJson(Dictionary<string, string> dict)
