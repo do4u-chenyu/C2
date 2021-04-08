@@ -34,6 +34,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.browserButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.screenShot = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taskNameLabel = new System.Windows.Forms.Label();
             this.taskIDLabel = new System.Windows.Forms.Label();
             this.taskStatusLabel = new System.Windows.Forms.Label();
@@ -46,11 +51,6 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.downloadPicsButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.screenShot = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -95,7 +95,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 19);
             this.label4.TabIndex = 10006;
-            this.label4.Text = "结果详情：";
+            this.label4.Text = "结果预览：";
             // 
             // browserButton
             // 
@@ -105,7 +105,7 @@
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(77, 28);
             this.browserButton.TabIndex = 10007;
-            this.browserButton.Text = "预览";
+            this.browserButton.Text = "详情";
             this.browserButton.UseVisualStyleBackColor = false;
             this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
@@ -125,9 +125,58 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 23;
-            this.dataGridView.Size = new System.Drawing.Size(932, 283);
+            this.dataGridView.Size = new System.Drawing.Size(932, 328);
             this.dataGridView.TabIndex = 10008;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
+            // 
+            // url
+            // 
+            this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.url.FillWeight = 27F;
+            this.url.HeaderText = "url";
+            this.url.Name = "url";
+            this.url.ReadOnly = true;
+            this.url.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // prediction
+            // 
+            this.prediction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.prediction.FillWeight = 11F;
+            this.prediction.HeaderText = "分类情况";
+            this.prediction.Name = "prediction";
+            this.prediction.ReadOnly = true;
+            this.prediction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.prediction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // title
+            // 
+            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.title.FillWeight = 15F;
+            this.title.HeaderText = "网站标题";
+            this.title.Name = "title";
+            this.title.ReadOnly = true;
+            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // screenShot
+            // 
+            this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.screenShot.FillWeight = 7F;
+            this.screenShot.HeaderText = "网站截图";
+            this.screenShot.Name = "screenShot";
+            this.screenShot.ReadOnly = true;
+            this.screenShot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // webContent
+            // 
+            this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.webContent.FillWeight = 40F;
+            this.webContent.HeaderText = "网页文本";
+            this.webContent.Name = "webContent";
+            this.webContent.ReadOnly = true;
+            this.webContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // taskNameLabel
             // 
@@ -255,57 +304,8 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 152);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(932, 283);
+            this.panel2.Size = new System.Drawing.Size(932, 328);
             this.panel2.TabIndex = 10013;
-            // 
-            // url
-            // 
-            this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.url.FillWeight = 27F;
-            this.url.HeaderText = "url";
-            this.url.Name = "url";
-            this.url.ReadOnly = true;
-            this.url.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // prediction
-            // 
-            this.prediction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.prediction.FillWeight = 11F;
-            this.prediction.HeaderText = "分类情况";
-            this.prediction.Name = "prediction";
-            this.prediction.ReadOnly = true;
-            this.prediction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.prediction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // title
-            // 
-            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.title.FillWeight = 15F;
-            this.title.HeaderText = "网站标题";
-            this.title.Name = "title";
-            this.title.ReadOnly = true;
-            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // screenShot
-            // 
-            this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.screenShot.FillWeight = 7F;
-            this.screenShot.HeaderText = "网站截图";
-            this.screenShot.Name = "screenShot";
-            this.screenShot.ReadOnly = true;
-            this.screenShot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // webContent
-            // 
-            this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.webContent.FillWeight = 40F;
-            this.webContent.HeaderText = "网页文本";
-            this.webContent.Name = "webContent";
-            this.webContent.ReadOnly = true;
-            this.webContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // WFDTaskResult
             // 
@@ -318,9 +318,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "WFDTaskResult";
             this.Text = "侦察兵-任务结果";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WFDTaskResult_FormClosing);
             this.Shown += new System.EventHandler(this.WFDTaskResult_Shown);
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.Controls.SetChildIndex(this.panel2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
