@@ -13,8 +13,9 @@ namespace C2.Business.SSH
     public class BastionAPI
     {
         private const int SecondsTimeout = 7;
-        private const String SeparatorCommand = "echo 5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
+        private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
 
+        private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
         
         private static readonly String TgzHead = Encoding.ASCII.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
@@ -27,6 +28,11 @@ namespace C2.Business.SSH
         private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
         private String GambleTaskDirectory { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.PID, task.TaskCreateTime); }
+
+        private static String Wrap(String pattern)
+        {
+            return String.Format(@"\r?\n{0}\r?\n", pattern);
+        }
         public BastionAPI(TaskInfo task)
         {
             this.task = task;
@@ -63,8 +69,7 @@ namespace C2.Business.SSH
                 return;
 
             task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, "未能跳转全文机");
-            var terminalMode = new Dictionary<TerminalModes, uint>();
-            shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 0, terminalMode);
+            shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
             // 等待目标机准备好
             _ = shell.ReadLine(Timeout);
 
@@ -88,9 +93,9 @@ namespace C2.Business.SSH
                 // 执行命令
                 ssm.WriteLine(command);
                 // 打印分隔符
-                ssm.WriteLine(SeparatorCommand);
+                ssm.WriteLine(String.Format("echo {0}", SeparatorString));
                 // 根据分隔符和timeout确定任务输出结束
-                String ret = ssm.Expect(new Regex(@"\n5L2Z55Sf5aaC5LiH5Y\+k6ZW/5aSc\r?\n"), TimeSpan.FromSeconds(timeout));
+                String ret = ssm.Expect(SeparatorRegex, TimeSpan.FromSeconds(timeout));
                 if (ret != null)
                     return ret;
             } catch { }
@@ -156,9 +161,9 @@ namespace C2.Business.SSH
             return this;
         }
 
-        public String GetPID(String content)
+        private String GetPID(String content)
         {
-            Match mat = Regex.Match(content, @"\r?\n\[\d+\]\s*(\d+)\r?\n"); // 匹配类似 [1] 7177
+            Match mat = Regex.Match(content, Wrap(@"\[\d+\]\s*(\d+)")); // 匹配类似 [1] 7177
             if (mat.Success && mat.Groups[1].Success)
                 return mat.Groups[1].Value;
             return String.Empty;
@@ -209,14 +214,13 @@ namespace C2.Business.SSH
         private bool IsAliveGambleTask()
         {
             String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetGambleScript), shell);
-            return result.Contains(TargetGambleScript);
+            return Regex.IsMatch(result, Wrap(TargetGambleScript));
         }
 
         private bool IsGambleResultFileReady()
         {
-            String ffp = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
-            String command = String.Format("ls {0}", ffp);
-            return RunCommand(command, shell).Contains("000000_queryResult_db_");
+            String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", GambleTaskDirectory), shell);
+            return Regex.IsMatch(result, @"000000_queryResult_db_\d+_\d+.tgz\r?\n");
         }
 
         private bool IsTaskTimeout()
@@ -244,12 +248,12 @@ namespace C2.Business.SSH
 
         public String QueryGambleTaskStatus()
         {
+            if (!ssh.IsConnected)
+                return "连接失败";
+
             bool isTimeout = IsTaskTimeout();
             bool isAlive = IsAliveGambleTask();
             bool isGRFReady = IsGambleResultFileReady();
-
-            if (!ssh.IsConnected)
-                return "连接失败";
 
             // 1) pid不存在且有结果文件时, 为运行成功
             if (!isAlive && isGRFReady)
