@@ -28,17 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.browserButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.screenShot = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taskNameLabel = new System.Windows.Forms.Label();
             this.taskIDLabel = new System.Windows.Forms.Label();
             this.taskStatusLabel = new System.Windows.Forms.Label();
@@ -51,6 +47,11 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.downloadPicsButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.screenShot = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -113,6 +114,16 @@
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToResizeColumns = false;
+            this.dataGridView.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.url,
@@ -128,55 +139,6 @@
             this.dataGridView.Size = new System.Drawing.Size(932, 328);
             this.dataGridView.TabIndex = 10008;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
-            // 
-            // url
-            // 
-            this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.url.FillWeight = 27F;
-            this.url.HeaderText = "url";
-            this.url.Name = "url";
-            this.url.ReadOnly = true;
-            this.url.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // prediction
-            // 
-            this.prediction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.prediction.FillWeight = 11F;
-            this.prediction.HeaderText = "分类情况";
-            this.prediction.Name = "prediction";
-            this.prediction.ReadOnly = true;
-            this.prediction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.prediction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // title
-            // 
-            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.title.FillWeight = 15F;
-            this.title.HeaderText = "网站标题";
-            this.title.Name = "title";
-            this.title.ReadOnly = true;
-            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // screenShot
-            // 
-            this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.screenShot.FillWeight = 7F;
-            this.screenShot.HeaderText = "网站截图";
-            this.screenShot.Name = "screenShot";
-            this.screenShot.ReadOnly = true;
-            this.screenShot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // webContent
-            // 
-            this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.webContent.FillWeight = 40F;
-            this.webContent.HeaderText = "网页文本";
-            this.webContent.Name = "webContent";
-            this.webContent.ReadOnly = true;
-            this.webContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // taskNameLabel
             // 
@@ -245,7 +207,7 @@
             // progressNum
             // 
             this.progressNum.AutoSize = true;
-            this.progressNum.Location = new System.Drawing.Point(307, 25);
+            this.progressNum.Location = new System.Drawing.Point(307, 28);
             this.progressNum.Name = "progressNum";
             this.progressNum.Size = new System.Drawing.Size(17, 12);
             this.progressNum.TabIndex = 10017;
@@ -254,7 +216,7 @@
             // progressInfo
             // 
             this.progressInfo.AutoSize = true;
-            this.progressInfo.Location = new System.Drawing.Point(80, 63);
+            this.progressInfo.Location = new System.Drawing.Point(80, 64);
             this.progressInfo.Name = "progressInfo";
             this.progressInfo.Size = new System.Drawing.Size(125, 12);
             this.progressInfo.TabIndex = 10016;
@@ -280,7 +242,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(82, 20);
+            this.progressBar1.Location = new System.Drawing.Point(82, 23);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(219, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -306,6 +268,55 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(932, 328);
             this.panel2.TabIndex = 10013;
+            // 
+            // url
+            // 
+            this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.url.FillWeight = 27F;
+            this.url.HeaderText = "url";
+            this.url.Name = "url";
+            this.url.ReadOnly = true;
+            this.url.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // prediction
+            // 
+            this.prediction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.prediction.FillWeight = 11F;
+            this.prediction.HeaderText = "分类情况";
+            this.prediction.Name = "prediction";
+            this.prediction.ReadOnly = true;
+            this.prediction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.prediction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // title
+            // 
+            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.title.FillWeight = 15F;
+            this.title.HeaderText = "网站标题";
+            this.title.Name = "title";
+            this.title.ReadOnly = true;
+            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // screenShot
+            // 
+            this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.screenShot.FillWeight = 8F;
+            this.screenShot.HeaderText = "网站截图";
+            this.screenShot.Name = "screenShot";
+            this.screenShot.ReadOnly = true;
+            this.screenShot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // webContent
+            // 
+            this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.webContent.FillWeight = 39F;
+            this.webContent.HeaderText = "网页文本";
+            this.webContent.Name = "webContent";
+            this.webContent.ReadOnly = true;
+            this.webContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // WFDTaskResult
             // 
