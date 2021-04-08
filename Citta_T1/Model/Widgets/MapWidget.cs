@@ -47,7 +47,8 @@ namespace C2.Model.Widgets
             sourceCodeNode.InnerText = MapConfig.SourceCode;
             mapConfigNode.SetAttribute("InitLat", MapConfig.InitLat.ToString());
             mapConfigNode.SetAttribute("InitLng", MapConfig.InitLng.ToString());
-            mapConfigNode.SetAttribute("Level", MapConfig.Level.ToString());
+            mapConfigNode.SetAttribute("Zoom", MapConfig.Zoom.ToString());
+            mapConfigNode.SetAttribute("MapType", MapConfig.MapType.ToString());
 
             foreach (OverlapConfig oc in MapConfig.OverlapConfigList)
             {
@@ -68,7 +69,8 @@ namespace C2.Model.Widgets
             XmlElement mapConfigNode = node.SelectSingleNode("MapConfig") as XmlElement;
             float.TryParse(mapConfigNode.GetAttribute("InitLat"), out this.MapConfig.InitLat);
             float.TryParse(mapConfigNode.GetAttribute("InitLng"), out this.MapConfig.InitLng);
-            int.TryParse(mapConfigNode.GetAttribute("Level"), out this.MapConfig.Level);
+            int.TryParse(mapConfigNode.GetAttribute("Zoom"), out this.MapConfig.Zoom);
+            Enum.TryParse<MapType>(mapConfigNode.GetAttribute("MapType"), out this.MapConfig.MapType);
             this.MapConfig.SourceCode = mapConfigNode.SelectSingleNode("sourceCodeNode").InnerText;
             foreach(XmlElement xe in mapConfigNode.SelectSingleNode("overlapConfigNodes").SelectNodes("overlapConfigNode"))
             {

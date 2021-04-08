@@ -30,12 +30,12 @@
         {
             this.datasource = new System.Windows.Forms.Label();
             this.mapType = new System.Windows.Forms.Label();
-            this.lat = new System.Windows.Forms.Label();
             this.lon = new System.Windows.Forms.Label();
+            this.lat = new System.Windows.Forms.Label();
             this.datasourceComboBox = new System.Windows.Forms.ComboBox();
             this.mapTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.latComboBox = new System.Windows.Forms.ComboBox();
             this.lonComboBox = new System.Windows.Forms.ComboBox();
+            this.latComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.countComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -58,23 +58,23 @@
             this.mapType.TabIndex = 10004;
             this.mapType.Text = "地图类型：";
             // 
-            // lat
-            // 
-            this.lat.AutoSize = true;
-            this.lat.Location = new System.Drawing.Point(92, 110);
-            this.lat.Name = "lat";
-            this.lat.Size = new System.Drawing.Size(41, 12);
-            this.lat.TabIndex = 10005;
-            this.lat.Text = "经度：";
-            // 
             // lon
             // 
             this.lon.AutoSize = true;
-            this.lon.Location = new System.Drawing.Point(92, 155);
+            this.lon.Location = new System.Drawing.Point(92, 110);
             this.lon.Name = "lon";
             this.lon.Size = new System.Drawing.Size(41, 12);
-            this.lon.TabIndex = 10006;
-            this.lon.Text = "纬度：";
+            this.lon.TabIndex = 10005;
+            this.lon.Text = "经度：";
+            // 
+            // lat
+            // 
+            this.lat.AutoSize = true;
+            this.lat.Location = new System.Drawing.Point(92, 155);
+            this.lat.Name = "lat";
+            this.lat.Size = new System.Drawing.Size(41, 12);
+            this.lat.TabIndex = 10006;
+            this.lat.Text = "纬度：";
             // 
             // datasourceComboBox
             // 
@@ -101,23 +101,23 @@
             this.mapTypeComboBox.TabIndex = 10008;
             this.mapTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.MapTypeComboBox_SelectedIndexChanged);
             // 
-            // latComboBox
-            // 
-            this.latComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.latComboBox.FormattingEnabled = true;
-            this.latComboBox.Location = new System.Drawing.Point(151, 102);
-            this.latComboBox.Name = "latComboBox";
-            this.latComboBox.Size = new System.Drawing.Size(189, 20);
-            this.latComboBox.TabIndex = 10009;
-            // 
             // lonComboBox
             // 
             this.lonComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lonComboBox.FormattingEnabled = true;
-            this.lonComboBox.Location = new System.Drawing.Point(151, 147);
+            this.lonComboBox.Location = new System.Drawing.Point(151, 102);
             this.lonComboBox.Name = "lonComboBox";
             this.lonComboBox.Size = new System.Drawing.Size(189, 20);
-            this.lonComboBox.TabIndex = 10010;
+            this.lonComboBox.TabIndex = 10009;
+            // 
+            // latComboBox
+            // 
+            this.latComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.latComboBox.FormattingEnabled = true;
+            this.latComboBox.Location = new System.Drawing.Point(151, 147);
+            this.latComboBox.Name = "latComboBox";
+            this.latComboBox.Size = new System.Drawing.Size(189, 20);
+            this.latComboBox.TabIndex = 10010;
             // 
             // label1
             // 
@@ -146,24 +146,24 @@
             this.ClientSize = new System.Drawing.Size(435, 270);
             this.Controls.Add(this.countComboBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lonComboBox);
             this.Controls.Add(this.latComboBox);
+            this.Controls.Add(this.lonComboBox);
             this.Controls.Add(this.mapTypeComboBox);
             this.Controls.Add(this.datasourceComboBox);
-            this.Controls.Add(this.lon);
             this.Controls.Add(this.lat);
+            this.Controls.Add(this.lon);
             this.Controls.Add(this.mapType);
             this.Controls.Add(this.datasource);
             this.Name = "SelectMapDialog";
             this.Text = "配置数据源";
             this.Controls.SetChildIndex(this.datasource, 0);
             this.Controls.SetChildIndex(this.mapType, 0);
-            this.Controls.SetChildIndex(this.lat, 0);
             this.Controls.SetChildIndex(this.lon, 0);
+            this.Controls.SetChildIndex(this.lat, 0);
             this.Controls.SetChildIndex(this.datasourceComboBox, 0);
             this.Controls.SetChildIndex(this.mapTypeComboBox, 0);
-            this.Controls.SetChildIndex(this.latComboBox, 0);
             this.Controls.SetChildIndex(this.lonComboBox, 0);
+            this.Controls.SetChildIndex(this.latComboBox, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.countComboBox, 0);
             this.ResumeLayout(false);
@@ -175,12 +175,12 @@
 
         private System.Windows.Forms.Label datasource;
         private System.Windows.Forms.Label mapType;
-        private System.Windows.Forms.Label lat;
         private System.Windows.Forms.Label lon;
+        private System.Windows.Forms.Label lat;
         private System.Windows.Forms.ComboBox datasourceComboBox;
         private System.Windows.Forms.ComboBox mapTypeComboBox;
-        private System.Windows.Forms.ComboBox latComboBox;
         private System.Windows.Forms.ComboBox lonComboBox;
+        private System.Windows.Forms.ComboBox latComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox countComboBox;
     }
