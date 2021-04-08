@@ -28,12 +28,16 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
         private readonly MapConfig MapConfig;
+        private Point WebBrowserFullLocation;
+        private Point WebBrowserHalfLocation;
 
 
         public WebType WebType;
         public Topic HitTopic;
         public List<DataItem> DataItems;
         public string Title { set => this.Text = value; get => this.Text; }
+        public bool SourceCodeMapActive;
+
         public string WebUrl;
 
         public string SourceWebUrl;
@@ -49,6 +53,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             ChartOptions = new Dictionary<string, int[]>();
             picPath = Path.Combine(Global.TempDirectory, "boss.png");
             SourceWebUrl = string.Empty;
+            WebBrowserFullLocation = this.webBrowser1.Location;
+            WebBrowserHalfLocation = new Point(this.Width / 2, this.WebBrowserFullLocation.Y);
         }
         public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
         {
@@ -56,6 +62,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             DataItems = hitTopic.GetDataItems();
             WebType = webType;
             MapConfig = InitMapConfig();
+            SourceCodeMapActive = false;
         }
         /// <summary>
         /// 初始化一个地图配置项
@@ -166,7 +173,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 if (MapConfig.MapType == MapType.StartMap)
                     InitStartMapByConfig();
                 else
+                {
+                    if (!SourceCodeMapActive)
+                        ShowSourceCodeMap();
                     InitSourceCodeMapByConfig();
+                }
             }
         }
 
@@ -246,7 +257,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 SavePic,
                 Clear});
         }
-
         public void InitializeBossToolStrip()
         {
             LoadBossData = new ToolStripButton();
@@ -339,27 +349,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void EditCode_Click(object sender, EventArgs e)
         {
-            if (MapConfig.MapType == MapType.StartMap)
+            if (!SourceCodeMapActive)
             {
-                this.editorPanel.Visible = true;
-                this.editorPanel.Enabled = true;
-                this.webBrowser1.Location = new System.Drawing.Point(600, 28);
-                this.LoadMapData.Enabled = false;
-                this.SavePic.Enabled = false;
+                SaveCenterAndZoom();
+                ShowSourceCodeMap();
                 MapConfig.MapType = MapType.SourceCodeMap;
-
                 InitSourceCodeMapByConfig();
             }
             else
             {
-                // 保存一下源代码编辑之后的东西
                 SaveSourceCode();
-
-                this.editorPanel.Visible = false;
-                this.editorPanel.Enabled = false;
-                this.webBrowser1.Location = new System.Drawing.Point(12, 23);
-                this.LoadMapData.Enabled = true;
-                this.SavePic.Enabled = true;
+                HideSourceCodeMap();
                 MapConfig.MapType = MapType.StartMap;
 
                 WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
@@ -367,6 +367,27 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
                 InitStartMapByConfig();
             }
+        }
+
+        private void HideSourceCodeMap()
+        {
+            this.editorPanel.Visible = false;
+            this.editorPanel.Enabled = false;
+            this.webBrowser1.Location = WebBrowserFullLocation;
+            this.LoadMapData.Enabled = true;
+            this.SavePic.Enabled = true;
+            this.SourceCodeMapActive = !SourceCodeMapActive;
+        }
+
+        private void ShowSourceCodeMap()
+        {
+            this.editorPanel.Visible = true;
+            this.editorPanel.Enabled = true;
+            this.editorPanel.Width = this.Width / 2;
+            this.webBrowser1.Location = WebBrowserHalfLocation;
+            this.LoadMapData.Enabled = false;
+            this.SavePic.Enabled = false;
+            this.SourceCodeMapActive = !SourceCodeMapActive;
         }
 
         private void SaveSourceCode()
@@ -550,11 +571,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
             this.OverlapConfigList = new List<OverlapConfig>();
             this.SourceCode = Properties.Resources.SourceCodeMap;
         }
-        public MapConfig(float initLat, float initLng, int zoom, List<OverlapConfig> mapDataConfigList, string sourceCode)
+        public MapConfig(float initLat, float initLng, int zoom, MapType mapType, List<OverlapConfig> mapDataConfigList, string sourceCode)
         {
             this.InitLat = initLat;
             this.InitLng = initLng;
             this.Zoom = zoom;
+            this.MapType = mapType;
             this.OverlapConfigList = new List<OverlapConfig>();
             foreach (OverlapConfig mapDataConfig in mapDataConfigList)
                 this.OverlapConfigList.Add(mapDataConfig);
@@ -563,7 +585,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public MapConfig Clone()
         {
-            return new MapConfig(this.InitLat, this.InitLng, this.Zoom, this.OverlapConfigList, this.SourceCode);
+            return new MapConfig(this.InitLat, this.InitLng, this.Zoom, this.MapType, this.OverlapConfigList, this.SourceCode);
         }
     }
     #endregion

@@ -86,7 +86,7 @@
             this.editorPanel.Controls.Add(this.runButton);
             this.editorPanel.Controls.Add(this.htmlEditorControlEx1);
             this.editorPanel.Enabled = false;
-            this.editorPanel.Location = new System.Drawing.Point(12, 28);
+            this.editorPanel.Location = new System.Drawing.Point(0, 39);
             this.editorPanel.Name = "editorPanel";
             this.editorPanel.Size = new System.Drawing.Size(147, 415);
             this.editorPanel.TabIndex = 10006;
