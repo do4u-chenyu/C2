@@ -74,7 +74,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             MapWidget mapWidget = HitTopic.FindWidget<MapWidget>();
             if (mapWidget != null)
             {
-                tmp = mapWidget.startMapConfig.Clone();
+                tmp = mapWidget.MapConfig.Clone();
             }
             return tmp;
         }
@@ -332,10 +332,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void Clear_Click(object sender, EventArgs e)
         {
+            ClearOverlap();
+        }
+
+        private void ClearOverlap()
+        {
             webBrowser1.Document.InvokeScript("clearAll");
             MapConfig.OverlapConfigList.Clear();
         }
-
 
         private void EditCode_Click(object sender, EventArgs e)
         {
@@ -353,7 +357,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             else
             {
                 // 保存一下源代码编辑之后的东西
-                this.MapConfig.SourceCode = this.htmlEditorControlEx1.Text;
+                SaveSourceCode();
 
                 this.editorPanel.Visible = false;
                 this.editorPanel.Enabled = false;
@@ -368,6 +372,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 InitStartMapByConfig();
             }
         }
+
+        private void SaveSourceCode()
+        {
+            this.MapConfig.SourceCode = this.htmlEditorControlEx1.Text;
+        }
+
         /// <summary>
         /// 得有文件，要不然不能使用WebBrowser访问
         /// </summary>
@@ -375,6 +385,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         /// <param name="e"></param>
         private void RunButton_Click(object sender, EventArgs e)
         {
+            ClearOverlap();
             string tempDir = FileUtil.TryGetSysTempDir();
             Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
             string tmpHtmlFilePath = Path.Combine(Global.TempDirectory, "editorMap.html");
@@ -385,10 +396,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             webBrowser1.Navigate(tmpHtmlFilePath);
         }
         private void ResetButton_Click(object sender, EventArgs e)
-        {
-            this.htmlEditorControlEx1.Text = Properties.Resources.SourceCodeMap;
-        }
-        public void LoadHtml()
         {
             this.htmlEditorControlEx1.Text = Properties.Resources.SourceCodeMap;
         }
@@ -467,8 +474,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
         /// </summary>
         private void SaveMapConfig()
         {
+            SaveSourceCode();
             MapWidget mw = HitTopic.FindWidget<MapWidget>();
-            mw.startMapConfig = MapConfig;
+            mw.MapConfig = MapConfig;
         }
     }
     enum OverlapType
