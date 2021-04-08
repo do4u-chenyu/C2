@@ -12,7 +12,7 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private const int SecondsTimeout = 7;
+        private const int SecondsTimeout = 5;
         private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
 
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
@@ -75,7 +75,6 @@ namespace C2.Business.SSH
 
             // 跳转到目标机器
             shell.WriteLine(task.SearchAgentIP);
-
             // 等待跳转成功,出现root用户提示符
             if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), Timeout))
                 return;
@@ -89,7 +88,7 @@ namespace C2.Business.SSH
             try 
             {
                 // 清理缓存
-                ssm.Read();
+                _ = ssm.Read();
                 // 执行命令
                 ssm.WriteLine(command);
                 // 打印分隔符
@@ -102,7 +101,6 @@ namespace C2.Business.SSH
 
             return String.Empty;
         }
-
 
         private String GetRemoteFilename(String s)
         {

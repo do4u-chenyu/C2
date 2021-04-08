@@ -402,17 +402,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         private void SaveCenterAndZoom()
         {
-            if (MapConfig.MapType != MapType.StartMap)
-                return;
-            dynamic data = webBrowser1.Document.InvokeScript("eval", new[] {
-                "(function() { return {lat: map.getCenter()[\"lat\"], lng: map.getCenter()[\"lng\"], zoom: map.getZoom()}; })()"
-            });
-            if (data.lat != null)
-                MapConfig.InitLat = (float)data.lat;
-            if (data.lng != null)
-                MapConfig.InitLng = (float)data.lng;
-            if (data.zoom != null)
-                MapConfig.Zoom = (int)data.zoom;
+            //if (MapConfig.MapType != MapType.StartMap)
+            //    return;
+            //dynamic data = webBrowser1.Document.InvokeScript("eval", new[] {
+            //    "(function() { return {lat: map.getCenter()[\"lat\"], lng: map.getCenter()[\"lng\"], zoom: map.getZoom()}; })()"
+            //});
+            //if (data.lat != null)
+            //    MapConfig.InitLat = (float)data.lat;
+            //if (data.lng != null)
+            //    MapConfig.InitLng = (float)data.lng;
+            //if (data.zoom != null)
+            //    MapConfig.Zoom = (int)data.zoom;
         }
         /// <summary>
         /// 得有文件，要不然不能使用WebBrowser访问
