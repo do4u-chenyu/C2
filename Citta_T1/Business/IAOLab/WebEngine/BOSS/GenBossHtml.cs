@@ -86,6 +86,13 @@ namespace C2.IAOLab.WebEngine.Boss
                     echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
                     echarts[4] = new StackBar(dataTable, new CompleteOption(), chartOptions);
                     break;
+                case 7:
+                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
+                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
+                    echarts[3] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
+                    echarts[4] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
+                    echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
+                    break;
                 default:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
