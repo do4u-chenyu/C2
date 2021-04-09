@@ -27,16 +27,20 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private ToolStripButton SavePic;
         private ToolStripButton Clear;
         private ToolStripButton EditCode;
-        private readonly List<MapDataItem> mapWidgetDataItems;
+        private readonly MapConfig MapConfig;
+        private Point WebBrowserFullLocation;
+        private Point WebBrowserHalfLocation;
+
 
         public WebType WebType;
         public Topic HitTopic;
         public List<DataItem> DataItems;
         public string Title { set => this.Text = value; get => this.Text; }
+        public bool SourceCodeMapActive;
+
         public string WebUrl;
 
         public string SourceWebUrl;
-        bool isActive = true;
         private readonly string picPath;
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
@@ -49,45 +53,35 @@ namespace C2.IAOLab.WebEngine.Dialogs
             ChartOptions = new Dictionary<string, int[]>();
             picPath = Path.Combine(Global.TempDirectory, "boss.png");
             SourceWebUrl = string.Empty;
+            WebBrowserFullLocation = this.webBrowser1.Location;
+            WebBrowserHalfLocation = new Point(this.Width / 2, this.WebBrowserFullLocation.Y);
         }
-
-        private List<MapDataItem> InitMapWidgetDataItems()
-        {
-            List<MapDataItem> tmp = new List<MapDataItem>();
-            if (HitTopic == null)
-                return tmp;
-            var mapWidget = HitTopic.FindWidget<MapWidget>();
-            if (mapWidget != null)
-            {
-                foreach (DataItem dataItem in mapWidget.DataItems)
-                {
-                    string mapTypeName = String.Empty;
-                    if (dataItem.FileName.Contains("标注图"))
-                        mapTypeName = "标注图";
-                    else if (dataItem.FileName.Contains("多边形图"))
-                        mapTypeName = "多边形图";
-                    else if (dataItem.FileName.Contains("轨迹图"))
-                        mapTypeName = "轨迹图";
-                    else if (dataItem.FileName.Contains("热力图"))
-                        mapTypeName = "热力图";
-                    tmp.Add(new MapDataItem
-                    {
-                        dataItem = dataItem,
-                        mapTypeName = mapTypeName
-                    }); 
-                }
-            }
-            return tmp;
-        }
-
         public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
         {
             HitTopic = hitTopic;
             DataItems = hitTopic.GetDataItems();
             WebType = webType;
-            mapWidgetDataItems = InitMapWidgetDataItems();
+            MapConfig = InitMapConfig();
+            SourceCodeMapActive = false;
         }
-
+        /// <summary>
+        /// 初始化一个地图配置项
+        /// 1. 当用户选择保存时，将配置项保存至MapWidget中
+        /// 2. 当用户选择取消时，不保存配置项
+        /// </summary>
+        /// <returns></returns>
+        private MapConfig InitMapConfig()
+        {
+            MapConfig tmp = new MapConfig();
+            if (HitTopic == null)
+                return tmp;
+            MapWidget mapWidget = HitTopic.FindWidget<MapWidget>();
+            if (mapWidget != null)
+            {
+                tmp = mapWidget.MapConfig.Clone();
+            }
+            return tmp;
+        }
         #region 窗体事件
         private void WebBrowserDialog_Load(object sender, EventArgs e)
         {
@@ -97,8 +91,13 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 OpenSelectBossDialog();
         }
 
-        private object[] OpenMapFile(string path, char seperator)
+        private object[] OpenMapFile(string path, char seperator, int latIndex, int lonIndex)
         {
+            if (!File.Exists(path))
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.FileNotFoundHelpInfo + ", 文件路径：" + path);
+                return new object[] { String.Empty };
+            }
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
             String line;
@@ -112,10 +111,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     string[] tempstr = line.Split(seperator);
                     for (int i = 0; i < tempstr.Length; i++)
                     {
-                        if (i % 2 == 0)
-                            latValues.Add(tempstr[i]);
-                        else
-                            lonValues.Add(tempstr[i]);
+                        latValues.Add(tempstr[latIndex]);
+                        lonValues.Add(tempstr[lonIndex]);
                     }
                     lineCounter += 1;
                 }
@@ -124,16 +121,16 @@ namespace C2.IAOLab.WebEngine.Dialogs
             List<string> tmpList = new List<string>();
             for (int i = 0; i < latValues.Count; i++)
             {
-                tmpList.Add('{' + String.Format(JSON_OBJ_Format, latValues[i], lonValues[i]) + '}');
+                tmpList.Add('{' + String.Format(JSON_OBJ_Format, lonValues[i], latValues[i]) + '}');
             }
             string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
             return new object[] { res };
         }
-        private object[] OpenHeatMapFile(string path, char seperator)
+        private object[] OpenHeatMapFile(string path, char seperator, int latIndex, int lonIndex, int weightIndex)
         {
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
-            List<string> countValues = new List<string>();
+            List<string> weightValues = new List<string>();
             String line;
             int lineCounter = 0;
             using (StreamReader sr = new StreamReader(path, Encoding.Default))
@@ -145,12 +142,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     string[] tempstr = line.Split(seperator);
                     for (int i = 0; i < tempstr.Length; i++)
                     {
-                        if (i % 3 == 0)
-                            latValues.Add(tempstr[i]);
-                        else if (i % 3 == 1)
-                            lonValues.Add(tempstr[i]);
-                        else
-                            countValues.Add(tempstr[i]);
+                        latValues.Add(tempstr[latIndex]);
+                        lonValues.Add(tempstr[lonIndex]);
+                        weightValues.Add(tempstr[weightIndex]);
                     }
                 }
             }
@@ -158,7 +152,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             List<string> tmpList = new List<string>();
             for (int i = 0; i < latValues.Count; i++)
             {
-                tmpList.Add('{' + String.Format(JSON_OBJ_Format_heat, latValues[i], lonValues[i], countValues[i]) + '}');
+                tmpList.Add('{' + String.Format(JSON_OBJ_Format_heat, lonValues[i], latValues[i], weightValues[i]) + '}');
             }
             string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
             return new object[] { res };
@@ -176,22 +170,51 @@ namespace C2.IAOLab.WebEngine.Dialogs
              */
             if (WebType == WebType.Map)
             {
-                var configMap = new ConfigForm();
-                string configstr = configMap.latude + ',' + configMap.lontude + ',' + configMap.scale;
-                webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
-                MapWidget maw = HitTopic.FindWidget<MapWidget>();
-                foreach (DataItem di in maw.DataItems)
+                if (MapConfig.MapType == MapType.StartMap)
+                    InitStartMapByConfig();
+                else
                 {
-                    if (di.FileName.Contains("标注图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath, di.FileSep));
-                    if (di.FileName.Contains("多边形图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath, di.FileSep));
-                    if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath, di.FileSep));
-                    if (di.FileName.Contains("热力图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath, di.FileSep));
+                    if (!SourceCodeMapActive)
+                        ShowSourceCodeMap();
+                    InitSourceCodeMapByConfig();
                 }
             }
+        }
+
+        private void InitStartMapByConfig()
+        {
+            string configstr = String.Format("{0},{1},{2}", MapConfig.InitLng, MapConfig.InitLat, MapConfig.Zoom);
+            webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
+            foreach (OverlapConfig oc in MapConfig.OverlapConfigList)
+            {
+                DataItem di = oc.DataItem;
+                object[] datas = oc.OverlapType == OverlapType.Heatmap ?
+                    OpenHeatMapFile(di.FilePath, di.FileSep, oc.LatIndex, oc.LngIndex, oc.WeightIndex) :
+                    OpenMapFile(di.FilePath, di.FileSep, oc.LatIndex, oc.LngIndex);
+                if (datas.Length == 0)
+                    continue;
+                switch (oc.OverlapType)
+                {
+                    case OverlapType.Marker:
+                        webBrowser1.Document.InvokeScript("markerPoints", datas);
+                        break;
+                    case OverlapType.Polygon:
+                        webBrowser1.Document.InvokeScript("drawPolygon", datas);
+                        break;
+                    case OverlapType.Orit:
+                        webBrowser1.Document.InvokeScript("drawOrit", datas);
+                        break;
+                    case OverlapType.Heatmap:
+                        webBrowser1.Document.InvokeScript("drawHeatmap", datas);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void InitSourceCodeMapByConfig()
+        {
+            this.htmlEditorControlEx1.Text = this.MapConfig.SourceCode;
         }
         #endregion
 
@@ -206,25 +229,29 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             // LoadMapData
             LoadMapData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            LoadMapData.Image = global::C2.Properties.Resources.designer;
+            //LoadMapData.Image = global::C2.Properties.Resources.designer;
+            LoadMapData.Image = global::C2.Properties.Resources.map_setting;
             LoadMapData.Text = "参数配置";
             LoadMapData.Click += new System.EventHandler(this.LoadMapData_Click);
 
             // SavePic
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            SavePic.Image = global::C2.Properties.Resources.image;
+            //SavePic.Image = global::C2.Properties.Resources.image;
+            SavePic.Image = global::C2.Properties.Resources.map_save;
             SavePic.Text = "保存成图片";
             SavePic.Click += new System.EventHandler(this.SavePic_Click);
 
             // Clear
             Clear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            Clear.Image = global::C2.Properties.Resources.delete;
+            //Clear.Image = global::C2.Properties.Resources.delete;
+            Clear.Image = global::C2.Properties.Resources.map_clear;
             Clear.Text = "清空";
             Clear.Click += new System.EventHandler(this.Clear_Click);
 
             // EditCode
             EditCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            EditCode.Image = global::C2.Properties.Resources.edit_code;
+            //EditCode.Image = global::C2.Properties.Resources.edit_code;
+            EditCode.Image = global::C2.Properties.Resources.map_sourceCode;
             EditCode.Text = "自定义源码";
             EditCode.Click += new System.EventHandler(this.EditCode_Click);
 
@@ -234,7 +261,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 SavePic,
                 Clear});
         }
-
         public void InitializeBossToolStrip()
         {
             LoadBossData = new ToolStripButton();
@@ -281,129 +307,134 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 {
                     case "标注图":
                         webBrowser1.Document.InvokeScript("markerPoints", args);
-                        AddDataItem(mapWidgetDataItems, "标注图", dialog.HitItem);
+                        AddDataItem(OverlapType.Marker, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "轨迹图":
                         webBrowser1.Document.InvokeScript("drawOrit", args);
-                        AddDataItem(mapWidgetDataItems, "轨迹图", dialog.HitItem);
+                        AddDataItem(OverlapType.Orit, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "多边形图":
                         webBrowser1.Document.InvokeScript("drawPolygon", args);
-                        AddDataItem(mapWidgetDataItems, "多边形图", dialog.HitItem);
+                        AddDataItem(OverlapType.Polygon, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "热力图":
                         webBrowser1.Document.InvokeScript("drawHeatmap", args);
-                        AddDataItem(mapWidgetDataItems, "热力图", dialog.HitItem);
+                        AddDataItem(OverlapType.Heatmap, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                 }
                 var configMap = new ConfigForm();
-                string newCenterAndZoom = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
+                string newCenterAndZoom = dialog.drawlontude + ',' + dialog.drawlatude + ',' + configMap.scale;
                 webBrowser1.Document.InvokeScript("centerAndZoom", new object[] { newCenterAndZoom });
             }
             else
                 return;
         }
         /// <summary>
-        /// 将数据添加到临时数组里，但是不copy文件。确定的时候再去copy文件
+        /// 将数据添加到临时数组里
         /// </summary>
-        /// <param name="mapTypeName"></param>
+        /// <param name="overlapType"></param>
         /// <param name="jsonData"></param>
-        private void AddDataItem(List<MapDataItem> mapDataItems, string mapTypeName, DataItem dataItem)
+        private void AddDataItem(OverlapType overlapType, int latIndex, int lngIndex, int weightIndex, DataItem dataItem)
         {
-            MapDataItem mdi = new MapDataItem
-            {
-                dataItem = dataItem,
-                mapTypeName = mapTypeName
-            };
-            mapDataItems.Add(mdi);
+            OverlapConfig mdi = new OverlapConfig(latIndex, lngIndex, weightIndex, dataItem, overlapType);
+            MapConfig.OverlapConfigList.Add(mdi);
         }
 
         private void Clear_Click(object sender, EventArgs e)
         {
-            webBrowser1.Document.InvokeScript("clearAll");
-            mapWidgetDataItems.Clear();
+            ClearOverlap();
         }
 
+        private void ClearOverlap()
+        {
+            webBrowser1.Document.InvokeScript("clearAll");
+            MapConfig.OverlapConfigList.Clear();
+        }
 
         private void EditCode_Click(object sender, EventArgs e)
         {
-            if (isActive)
+            if (!SourceCodeMapActive)
             {
-                this.editorPanel.Visible = true;
-                this.editorPanel.Enabled = true;
-                this.webBrowser1.Location = new System.Drawing.Point(600, 28);
-                this.LoadMapData.Enabled = false;
-                this.SavePic.Enabled = false;
-                isActive = false;
-                
-                WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "SourceCodeMap.html");
-                webBrowser1.Navigate(WebUrl);
-                SavePointsToDisk();
+                SaveCenterAndZoom();
+                ShowSourceCodeMap();
+                MapConfig.MapType = MapType.SourceCodeMap;
+                InitSourceCodeMapByConfig();
             }
             else
             {
-                this.editorPanel.Visible = false;
-                this.editorPanel.Enabled = false;
-                this.webBrowser1.Location = new System.Drawing.Point(12, 23);
-                this.LoadMapData.Enabled = true;
-                this.SavePic.Enabled = true;
-                isActive = true;
+                SaveSourceCode();
+                HideSourceCodeMap();
+                MapConfig.MapType = MapType.StartMap;
+
                 WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
                 webBrowser1.Navigate(WebUrl);
-                var configMap = new ConfigForm();
-                var dialog = new SelectMapDialog(DataItems);
-                string configstr = dialog.drawlatude + ',' + dialog.drawlontude + ',' + configMap.scale;
-                webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
-                MapWidget maw = HitTopic.FindWidget<MapWidget>();
-                // TODO 没有考虑热力图的持久化
-                foreach (DataItem di in maw.DataItems)
-                {
-                    if (di.FileName.Contains("标注图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("markerPoints", OpenMapFile(di.FilePath, di.FileSep));
-                    if (di.FileName.Contains("多边形图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawPolygon", OpenMapFile(di.FilePath, di.FileSep));
-                    if (di.FileName.Contains("轨迹图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawOrit", OpenMapFile(di.FilePath, di.FileSep));
-                    if (di.FileName.Contains("热力图") && File.Exists(di.FilePath))
-                        webBrowser1.Document.InvokeScript("drawHeatmap", OpenHeatMapFile(di.FilePath, di.FileSep));
-                }
 
+                InitStartMapByConfig();
             }
-            LoadHtml();
-
         }
 
+        private void HideSourceCodeMap()
+        {
+            this.editorPanel.Visible = false;
+            this.editorPanel.Enabled = false;
+            this.webBrowser1.Location = WebBrowserFullLocation;
+            this.LoadMapData.Enabled = true;
+            this.SavePic.Enabled = true;
+            this.Clear.Enabled = true;
+            this.SourceCodeMapActive = !SourceCodeMapActive;
+        }
+
+        private void ShowSourceCodeMap()
+        {
+            this.editorPanel.Visible = true;
+            this.editorPanel.Enabled = true;
+            this.editorPanel.Width = this.Width / 2;
+            this.webBrowser1.Location = WebBrowserHalfLocation;
+            this.LoadMapData.Enabled = false;
+            this.SavePic.Enabled = false;
+            this.Clear.Enabled = false;
+            this.SourceCodeMapActive = !SourceCodeMapActive;
+        }
+
+        private void SaveSourceCode()
+        {
+            this.MapConfig.SourceCode = this.htmlEditorControlEx1.Text;
+        }
+        private void SaveCenterAndZoom()
+        {
+            //if (MapConfig.MapType != MapType.StartMap)
+            //    return;
+            //dynamic data = webBrowser1.Document.InvokeScript("eval", new[] {
+            //    "(function() { return {lat: map.getCenter()[\"lat\"], lng: map.getCenter()[\"lng\"], zoom: map.getZoom()}; })()"
+            //});
+            //if (data.lat != null)
+            //    MapConfig.InitLat = (float)data.lat;
+            //if (data.lng != null)
+            //    MapConfig.InitLng = (float)data.lng;
+            //if (data.zoom != null)
+            //    MapConfig.Zoom = (int)data.zoom;
+        }
+        /// <summary>
+        /// 得有文件，要不然不能使用WebBrowser访问
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RunButton_Click(object sender, EventArgs e)
         {
+            ClearOverlap();
+            this.MapConfig.SourceCode = this.htmlEditorControlEx1.Text;
             string tempDir = FileUtil.TryGetSysTempDir();
             Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
-            if (!File.Exists(Path.Combine(Global.TempDirectory, "editorMap.html")))
-            {
-                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.UTF8);
-                strmsave.Write(this.htmlEditorControlEx1.Text);
-                strmsave.Close();
-            }
-            else
-            {
-                StreamWriter strmsave = new StreamWriter(Path.Combine(Global.TempDirectory, "editorMap.html"), false, System.Text.Encoding.UTF8);
-                strmsave.Write(this.htmlEditorControlEx1.Text);
-                strmsave.Close();
-            }
-            SourceWebUrl = Path.Combine(Global.TempDirectory, "editorMap.html");
-            webBrowser1.Navigate(SourceWebUrl);
+            string tmpHtmlFilePath = Path.Combine(Global.TempDirectory, "editorMap.html");
+            if (File.Exists(tmpHtmlFilePath))
+                File.Delete(tmpHtmlFilePath);
+            using (StreamWriter sw = new StreamWriter(tmpHtmlFilePath, false, System.Text.Encoding.UTF8))
+                sw.Write(this.htmlEditorControlEx1.Text);
+            webBrowser1.Navigate(tmpHtmlFilePath);
         }
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            LoadHtml();
-        }
-        public void LoadHtml()
-        {
-            Stream myStream = new FileStream(Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "SourceCodeMap.html"), FileMode.Open);
-            Encoding encode = System.Text.Encoding.GetEncoding("utf-8");//若是格式为utf-8的需要将gb2312替换
-            StreamReader myStreamReader = new StreamReader(myStream, encode);
-            string strhtml = myStreamReader.ReadToEnd();
-            myStream.Close();
-            this.htmlEditorControlEx1.Text = strhtml;
+            this.htmlEditorControlEx1.Text = Properties.Resources.SourceCodeMap;
         }
         #endregion
 
@@ -466,44 +497,103 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             else if (WebType == WebType.Map)
             {
-                SavePointsToDisk();
+                SaveMapConfig();
             }
             return base.OnOKButtonClick();
         }
         protected override bool OnCancelButtonClick()
         {
-            mapWidgetDataItems.Clear();
             return base.OnCancelButtonClick();
         }
-
-        private void SavePointsToDisk()
+        /// <summary>
+        /// 保存地图配置信息到MapWidget中
+        /// 这里不做配置项的持久化
+        /// </summary>
+        private void SaveMapConfig()
         {
-            var mapWidget = HitTopic.FindWidget<MapWidget>();
-            mapWidget.DataItems.Clear();
-            foreach (MapDataItem mdi in mapWidgetDataItems)
-            {
-                DataItem dataItem = mdi.dataItem;
-                string mapTypeName = mdi.mapTypeName;
-                if (File.Exists(dataItem.FilePath))
-                {
-                    string destPath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name,
-                        String.Format("{0}_{1}_{2}.txt", HitTopic.Text, mapTypeName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
-                    if (!Directory.Exists(Path.GetDirectoryName(destPath)))
-                        Directory.CreateDirectory(Path.GetDirectoryName(destPath));
-                    File.Copy(dataItem.FilePath, destPath);
-                    mapWidget.DataItems.Add(
-                        new DataItem(
-                            destPath, Path.GetFileNameWithoutExtension(destPath), 
-                            dataItem.FileSep, OpUtil.Encoding.UTF8, OpUtil.ExtType.Text
-                            )
-                        );
-                }
-            }
+            // TODO 获得当前的经纬度和zoom等级
+            SaveSourceCode();
+            SaveCenterAndZoom();
+            MapWidget mw = HitTopic.FindWidget<MapWidget>();
+            mw.MapConfig = MapConfig;
         }
     }
-    struct MapDataItem
+    #region 内部类
+    enum OverlapType
     {
-        public DataItem dataItem;
-        public string mapTypeName;
+        Marker,
+        Polygon,
+        Orit,
+        Heatmap
     }
+    enum MapType
+    {
+        StartMap,
+        SourceCodeMap
+    }
+    /// <summary>
+    /// 每一个地图数据都要有的东西地图配置信息
+    /// </summary>
+    class OverlapConfig
+    {
+        public int LatIndex;
+        public int LngIndex;
+        public int WeightIndex;
+        public DataItem DataItem;
+        public OverlapType OverlapType;
+        public OverlapConfig(int latIdx, int lngIdx, int weightIdx, DataItem dataItem, OverlapType overlapType)
+        {
+            this.LatIndex = latIdx;
+            this.LngIndex = lngIdx;
+            this.WeightIndex = weightIdx;
+            this.DataItem = dataItem;
+            this.OverlapType = overlapType;
+        }
+    }
+    class MapConfig
+    {
+        const float defaultLat = (float)36.269395;
+        const float defaultLng = (float)108.876433;
+        const int defaultZoom = 5;
+        const MapType defaultMapType = MapType.StartMap;
+        public float InitLat;
+        public float InitLng;
+        public int Zoom;
+        public MapType MapType;
+        public List<OverlapConfig> OverlapConfigList;
+        public string SourceCode;
+        /// <summary>
+        /// 优先解析配置窗口里的经纬度缩放比
+        /// </summary>
+        public MapConfig()
+        {
+            var configForm = new ConfigForm();
+            if (!float.TryParse(configForm.latude, out this.InitLat))
+                this.InitLat = defaultLat;
+            if (!float.TryParse(configForm.lontude, out this.InitLng))
+                this.InitLng = defaultLng;
+            if (!int.TryParse(configForm.scale, out this.Zoom))
+                this.Zoom = defaultZoom;
+            this.MapType = defaultMapType;
+            this.OverlapConfigList = new List<OverlapConfig>();
+            this.SourceCode = Properties.Resources.SourceCodeMap;
+        }
+        public MapConfig(float initLat, float initLng, int zoom, MapType mapType, List<OverlapConfig> mapDataConfigList, string sourceCode)
+        {
+            this.InitLat = initLat;
+            this.InitLng = initLng;
+            this.Zoom = zoom;
+            this.MapType = mapType;
+            this.OverlapConfigList = new List<OverlapConfig>();
+            foreach (OverlapConfig mapDataConfig in mapDataConfigList)
+                this.OverlapConfigList.Add(mapDataConfig);
+            this.SourceCode = sourceCode;
+        }
+
+        public MapConfig Clone()
+        {
+            return new MapConfig(this.InitLat, this.InitLng, this.Zoom, this.MapType, this.OverlapConfigList, this.SourceCode);
+        }
+    }
+    #endregion
 }

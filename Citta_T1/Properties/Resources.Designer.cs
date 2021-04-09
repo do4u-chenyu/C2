@@ -47,8 +47,8 @@ namespace C2.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性，对
-        ///   使用此强类型资源类的所有资源查找执行重写。
+        ///   重写当前线程的 CurrentUICulture 属性
+        ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
@@ -306,6 +306,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap BossStyle04 {
             get {
                 object obj = ResourceManager.GetObject("BossStyle04", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap BossStyle05 {
+            get {
+                object obj = ResourceManager.GetObject("BossStyle05", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1372,6 +1382,46 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap map_clear {
+            get {
+                object obj = ResourceManager.GetObject("map_clear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap map_save {
+            get {
+                object obj = ResourceManager.GetObject("map_save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap map_setting {
+            get {
+                object obj = ResourceManager.GetObject("map_setting", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap map_sourceCode {
+            get {
+                object obj = ResourceManager.GetObject("map_sourceCode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Icon max_icon {
@@ -2088,6 +2138,26 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("sort_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, user-scalable=no&quot; /&gt;
+        ///    &lt;script type=&quot;text/javascript&quot; src=&quot;http://api.map.baidu.com/api?v=2.0&amp;ak=dWR00FEAAWI3iCEAnqlFu7cSUg9bkQ7A&quot;&gt;&lt;/script&gt;
+        ///    &lt;script type=&quot;text/javascript&quot; src=&quot;http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js&quot;&gt;&lt;/script&gt;
+        ///
+        ///    &lt;title&gt;自定义源代码&lt;/title&gt;
+        ///    &lt;style type=&quot;text/css&quot;&gt;
+        ///        ul, li {
+        ///            l [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string SourceCodeMap {
+            get {
+                return ResourceManager.GetString("SourceCodeMap", resourceCulture);
             }
         }
         

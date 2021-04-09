@@ -141,7 +141,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             "样式1（态势大屏）",
             "样式2（运营大数据）",
             "样式3（智慧人口分析）",
-            "样式4（重点人分析）"});
+            "样式4（重点人分析）",
+            "样式5（全息星辰大海）"});
             this.bossType.Location = new System.Drawing.Point(98, 74);
             this.bossType.Name = "bossType";
             this.bossType.Size = new System.Drawing.Size(368, 30);
@@ -287,7 +288,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::C2.Properties.Resources.BossStyle04;
+            this.pictureBox1.Image = global::C2.Properties.Resources.BossStyle05;
             this.pictureBox1.Location = new System.Drawing.Point(12, 164);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(473, 261);

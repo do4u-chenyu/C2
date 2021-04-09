@@ -40,7 +40,7 @@ namespace C2.Business.WebsiteFeatureDetection
             UserName = string.Empty;
             Token = string.Empty;
 
-            //APIUrl = "https://10.1.203.15:12449/apis/";//测试
+            //APIUrl = "https://10.1.203.15:12347/apis/";//测试
             APIUrl = "https://113.31.119.85:53374/apis/";//正式
             LoginUrl = APIUrl + "Login";
             ProClassifierUrl = APIUrl + "pro_classifier_api";
@@ -228,25 +228,33 @@ namespace C2.Business.WebsiteFeatureDetection
             return true;
         }
 
-        public Response Post(string url, Dictionary<string, string> postData, string token = "", int timeout = 20000)
+        public Response Post(string url, Dictionary<string, string> postData, string token = "", int timeout = 10000)
         {
-            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(RemoteCertificateValidate);
+            Response resp = new Response();
+            try
+            {
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(RemoteCertificateValidate);
 
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
 
-            req.Timeout = timeout;
-            string content = DictionaryToJson(postData);
-            byte[] data = Encoding.UTF8.GetBytes(content);
+                req.Timeout = timeout;
+                string content = DictionaryToJson(postData);
+                byte[] data = Encoding.UTF8.GetBytes(content);
 
-            req.Method = "POST";
-            req.ContentType = "application/json";
-            req.ContentLength = data.Length;
-            req.Headers.Add("Authorization", "Bearer " + token);
+                req.Method = "POST";
+                req.ContentType = "application/json";
+                req.ContentLength = data.Length;
+                req.Headers.Add("Authorization", "Bearer " + token);
 
-            using (var stream = req.GetRequestStream())
-                stream.Write(data, 0, data.Length);
-
-            return new Response((HttpWebResponse)req.GetResponse());
+                using (var stream = req.GetRequestStream())
+                    stream.Write(data, 0, data.Length);
+                resp = new Response((HttpWebResponse)req.GetResponse());
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return resp;
         }
 
         private string DictionaryToJson(Dictionary<string, string> dict)
@@ -263,11 +271,11 @@ namespace C2.Business.WebsiteFeatureDetection
     class Response
     {
         Dictionary<string, string> resDict;
-        byte[] content;
+        string content;
         HttpStatusCode statusCode;
         private HttpWebResponse response;
         public readonly static Response Empty = new Response();
-        public byte[] Content
+        public string Content
         {
             get { return this.content; }
         }
@@ -287,7 +295,7 @@ namespace C2.Business.WebsiteFeatureDetection
         {
             this.response = resp;
             this.content = GetContent();
-            this.resDict = JsonToDictionary(Encoding.UTF8.GetString(this.content));
+            this.resDict = JsonToDictionary(this.content);
             this.statusCode = GetStatusCode();
 
         }
@@ -297,28 +305,34 @@ namespace C2.Business.WebsiteFeatureDetection
                 throw new Exception("没有实例化的Response");
             return response.StatusCode;
         }
-        private byte[] GetContent()
+        private string GetContent()
         {
             if (response == null)
                 throw new Exception("没有实例化的Response");
+
+            Stream resStream = null;
+            StreamReader reader = null;
+            string content = string.Empty;
             try
             {
-                using (MemoryStream ms = new MemoryStream())
+                using (resStream = response.GetResponseStream())
                 {
-                    Stream responseStream = this.response.GetResponseStream();
-                    byte[] buffer = new byte[64 * 1024];
-                    int i;
-                    while ((i = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                    using (reader = new StreamReader(resStream, Encoding.UTF8))
                     {
-                        ms.Write(buffer, 0, i);
+                        //通过ReadToEnd()把整个HTTP响应作为一个字符串取回，
+                        content = reader.ReadToEnd().ToString();
                     }
-                    return ms.ToArray();
                 }
             }
-            catch
+            catch{}
+            finally
             {
-                return new byte[0];
+                if (resStream != null)
+                    resStream.Close();
+                if (reader != null)
+                    reader.Close();
             }
+            return content;
         }
         private Dictionary<string, string> JsonToDictionary(string jsonStr)
         {

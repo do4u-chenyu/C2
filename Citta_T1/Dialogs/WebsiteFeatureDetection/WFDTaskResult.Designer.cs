@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -95,7 +96,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 19);
             this.label4.TabIndex = 10006;
-            this.label4.Text = "结果详情：";
+            this.label4.Text = "结果预览：";
             // 
             // browserButton
             // 
@@ -105,7 +106,7 @@
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(77, 28);
             this.browserButton.TabIndex = 10007;
-            this.browserButton.Text = "预览";
+            this.browserButton.Text = "详情";
             this.browserButton.UseVisualStyleBackColor = false;
             this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
@@ -113,6 +114,16 @@
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToResizeColumns = false;
+            this.dataGridView.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.url,
@@ -125,7 +136,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 23;
-            this.dataGridView.Size = new System.Drawing.Size(932, 283);
+            this.dataGridView.Size = new System.Drawing.Size(932, 328);
             this.dataGridView.TabIndex = 10008;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
             // 
@@ -196,7 +207,7 @@
             // progressNum
             // 
             this.progressNum.AutoSize = true;
-            this.progressNum.Location = new System.Drawing.Point(307, 25);
+            this.progressNum.Location = new System.Drawing.Point(307, 28);
             this.progressNum.Name = "progressNum";
             this.progressNum.Size = new System.Drawing.Size(17, 12);
             this.progressNum.TabIndex = 10017;
@@ -205,7 +216,7 @@
             // progressInfo
             // 
             this.progressInfo.AutoSize = true;
-            this.progressInfo.Location = new System.Drawing.Point(80, 63);
+            this.progressInfo.Location = new System.Drawing.Point(80, 64);
             this.progressInfo.Name = "progressInfo";
             this.progressInfo.Size = new System.Drawing.Size(125, 12);
             this.progressInfo.TabIndex = 10016;
@@ -231,7 +242,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(82, 20);
+            this.progressBar1.Location = new System.Drawing.Point(82, 23);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(219, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -255,7 +266,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 152);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(932, 283);
+            this.panel2.Size = new System.Drawing.Size(932, 328);
             this.panel2.TabIndex = 10013;
             // 
             // url
@@ -291,7 +302,7 @@
             // screenShot
             // 
             this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.screenShot.FillWeight = 7F;
+            this.screenShot.FillWeight = 8F;
             this.screenShot.HeaderText = "网站截图";
             this.screenShot.Name = "screenShot";
             this.screenShot.ReadOnly = true;
@@ -300,7 +311,7 @@
             // webContent
             // 
             this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.webContent.FillWeight = 40F;
+            this.webContent.FillWeight = 39F;
             this.webContent.HeaderText = "网页文本";
             this.webContent.Name = "webContent";
             this.webContent.ReadOnly = true;
@@ -318,9 +329,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "WFDTaskResult";
             this.Text = "侦察兵-任务结果";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WFDTaskResult_FormClosing);
             this.Shown += new System.EventHandler(this.WFDTaskResult_Shown);
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.Controls.SetChildIndex(this.panel2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

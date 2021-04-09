@@ -5,6 +5,7 @@ namespace C2.Utils
 {
     class GuarderUtil
     {
+        public static CursorGuarder WaitCursor { get => new CursorGuarder(); }
         public class CursorGuarder : IDisposable
         {
             private Cursor cursor;
@@ -20,6 +21,8 @@ namespace C2.Utils
                 this.cursor = Cursor.Current;
                 Cursor.Current = Cursors.WaitCursor;
             }
+
+     
 
             public void Dispose()
             {

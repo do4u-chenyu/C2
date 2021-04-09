@@ -30,6 +30,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private OpUtil.Encoding FileEncoding { get => hitItem.FileEncoding; }
         private char FileSep { get => hitItem.FileSep; }
         private string FileName { get => hitItem.FileName; }
+        public int LatIndex;
+        public int LngIndex;
+        public int WeightIndex;
         public SelectMapDialog()
         {
             InitializeComponent();
@@ -61,17 +64,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void SetDropDown()
         {
             this.bcpInfo = new BcpInfo(FilePath, FileEncoding, new char[] { FileSep });
-            this.latComboBox.Items.AddRange(bcpInfo.ColumnArray);
             this.lonComboBox.Items.AddRange(bcpInfo.ColumnArray);
+            this.latComboBox.Items.AddRange(bcpInfo.ColumnArray);
             this.countComboBox.Items.AddRange(bcpInfo.ColumnArray);
 
         }
         private void ClearComBox() 
         {
-            latComboBox.Items.Clear();
-            latComboBox.Text = "";
             lonComboBox.Items.Clear();
             lonComboBox.Text = "";
+            latComboBox.Items.Clear();
+            latComboBox.Text = "";
             countComboBox.Items.Clear();
             countComboBox.Text = "";
 
@@ -87,12 +90,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 return false;
             int upperLimit = 100;
             // 获得x,y轴数据的列索引
-            int latIndex = latComboBox.Tag == null ? latComboBox.SelectedIndex : ConvertUtil.TryParseInt(latComboBox.Tag.ToString());
-            List<int> indexlat = new List<int>() { latIndex };
-            int lonIndex = lonComboBox.Tag == null ? lonComboBox.SelectedIndex : ConvertUtil.TryParseInt(lonComboBox.Tag.ToString());
-            List<int> indexlon = new List<int>() { lonIndex };
-            int countIndex = countComboBox.Tag == null ? countComboBox.SelectedIndex : ConvertUtil.TryParseInt(countComboBox.Tag.ToString());
-            List<int> indexcount = new List<int>() { countIndex };
+            LngIndex = lonComboBox.Tag == null ? lonComboBox.SelectedIndex : ConvertUtil.TryParseInt(lonComboBox.Tag.ToString());
+            List<int> indexlon = new List<int>() { LngIndex }; 
+            LatIndex = latComboBox.Tag == null ? latComboBox.SelectedIndex : ConvertUtil.TryParseInt(latComboBox.Tag.ToString());
+            List<int> indexlat = new List<int>() { LatIndex };
+            WeightIndex = countComboBox.Tag == null ? countComboBox.SelectedIndex : ConvertUtil.TryParseInt(countComboBox.Tag.ToString());
+            List<int> indexcount = new List<int>() { WeightIndex };
 
             // 获取选中输入、输出各列数据
             string fileContent;
@@ -136,7 +139,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 string JSON_OBJ_Format_heat = "\"lng\": \" {0} \", \"lat\": \" {1} \", \"count\": \" {2} \"";
                 for (int i = 0; i < latValues[0].Count; i++)
                 {
-                    tmpList.Add('{' + String.Format(JSON_OBJ_Format_heat, latValues[0][i], lonValues[0][i], countValues[0][i]) + '}'); 
+                    tmpList.Add('{' + String.Format(JSON_OBJ_Format_heat, lonValues[0][i], latValues[0][i], countValues[0][i]) + '}'); 
                 }
 
             }
@@ -145,7 +148,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
                 for (int i = 0; i < latValues[0].Count; i++)
                 {
-                    tmpList.Add('{' + String.Format(JSON_OBJ_Format , latValues[0][i], lonValues[0][i]) + '}');
+                    tmpList.Add('{' + String.Format(JSON_OBJ_Format , lonValues[0][i], latValues[0][i]) + '}');
                 }
             }
 
@@ -160,12 +163,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             try
             {
-                if (double.Parse(drawlatude) > 180 || double.Parse(drawlatude) < -180)
+                if (double.Parse(drawlontude) > 180 || double.Parse(drawlontude) < -180)
                 {
                     HelpUtil.ShowMessageBox("请重新输入正确范围的经度！");
                     return false;
                 }
-                else if (double.Parse(drawlontude) > 90 || double.Parse(drawlontude) < -90)
+                else if (double.Parse(drawlatude) > 90 || double.Parse(drawlatude) < -90)
                 {
                     HelpUtil.ShowMessageBox("请重新输入正确范围的纬度！");
                     return false;
@@ -184,8 +187,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             bool notReady = true;
             int status0 = String.IsNullOrEmpty(this.mapTypeComboBox.Text) ? 1 : 0;
-            int status1 = String.IsNullOrEmpty(this.latComboBox.Text) ? 2 : 0;
-            int status2 = String.IsNullOrEmpty(this.lonComboBox.Text) ? 4 : 0;
+            int status1 = String.IsNullOrEmpty(this.lonComboBox.Text) ? 2 : 0;
+            int status2 = String.IsNullOrEmpty(this.latComboBox.Text) ? 4 : 0;
             switch (status0 | status1 | status2)
             {
                 case 0:
