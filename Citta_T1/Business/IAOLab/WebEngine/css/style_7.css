@@ -1,0 +1,46 @@
+h2,textarea {
+  margin: 0; font-weight:normal;
+  margin: 0;
+  padding: 0;list-style: none;font-style: normal;
+}
+
+html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; background:#00065b url(../img/img7/back.jpg);    background-size: 100% 100%;background-position:0 0; width: 100%; height: 100%; background-repeat: no-repeat;}
+
+.wpbox{
+  width: 100%;
+  height:  calc(100% - 10%)
+}
+
+
+.bg_header{
+    width: 100%;
+    height: 5%;
+    background: url(../img/img7/title.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.left1{ width: 23%; height: calc(100% - 4%);float: left; padding-left:2.2%; text-align: center;padding-top:1.2%}
+
+.mrbox{float: left; width: 70%; height: calc(100% - 4%) ;padding-top:1.2%;padding-left:.2%}
+
+.mrbox_topmidd{float: left; width:50%; padding-left:.2%;height: 100%}
+.mrbox_top_right{ float: left; width: 30%; padding-left:.2%; height: 100%}
+
+
+.aleftboxttop{background:url(../img/img7/border.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:99%; height: 100%; margin-bottom: 1%}
+
+.aleftboxttop1{with:99%;height:45%;}
+.aleftboxttop2{with:99%;height:45%;}
+
+.arightboxtop{background:url(../img/img7/border2.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:100%; height: 100%;}
+
+.arightboxtop1{with:100%;height:45%;}
+.arightboxtop2{with:100%;height:45%;}
+
+.tith1{ text-align: center; width: 100%; font-size: 22px;  font-weight: normal;letter-spacing:2px; font-weight:  normal; overflow: hidden; padding-bottom: 1%;}
+
+.tith2{ text-align: center; width: 100%; font-size: 12px; padding-top: 1.9%;  font-weight: normal;letter-spacing:2px; font-weight:  normal; overflow: hidden;}
+
+.tlbox{overflow: hidden; height: 81%; width: 91%; margin: 1% 4%; font-size: 12px;}
+.fl{ float: left;}
+

@@ -73,7 +73,19 @@ namespace C2.IAOLab.WebEngine.Boss
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
                     echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
                     echarts[4] = new StackBar(dataTable, new CompleteOption(), chartOptions);
-                    break;               
+                    break;
+                case 5:
+                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
+                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
+                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
+                    echarts[4] = new StackBar(dataTable, new CompleteOption(), chartOptions);
+                    break;
+                case 6:
+                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
+                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
+                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
+                    echarts[4] = new StackBar(dataTable, new CompleteOption(), chartOptions);
+                    break;
                 default:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
@@ -83,7 +95,6 @@ namespace C2.IAOLab.WebEngine.Boss
                     echarts[6] = new PictorialBar(dataTable, new CompleteOption(), chartOptions);//渐变柱状图
                     echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
                     break;
-
             }
 
             return echarts.Show();

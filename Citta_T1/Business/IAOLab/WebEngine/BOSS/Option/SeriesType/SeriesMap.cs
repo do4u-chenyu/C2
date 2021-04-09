@@ -27,6 +27,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public string name { get { return _name; } set { FlagDic["name"] = true; _name = value; } }
         public string mapType { get { return _mapType; } set { FlagDic["mapType"] = true; _mapType = value; } }
         public string roam { get { return _roam; } set { FlagDic["roam"] = true; _roam = value; } }
+        public int geoIndex { get { return _geoIndex; } set { FlagDic["geoIndex"] = true; _geoIndex = value; } }
         public MapLabel label { get { return _label; } set { FlagDic["label"] = true; _label = value; } }
         public Encode encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
 
@@ -34,6 +35,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         string _name;
         string _mapType;
         string _roam;
+        int _geoIndex;
         MapLabel _label;
         Encode _encode;
     }

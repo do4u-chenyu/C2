@@ -2051,6 +2051,12 @@
     <Content Include="Business\IAOLab\WebEngine\css\style_5.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Business\IAOLab\WebEngine\css\style_6.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\css\style_7.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Business\IAOLab\WebEngine\Html\BossIndex01.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2066,6 +2072,12 @@
     <Content Include="Business\IAOLab\WebEngine\Html\BossIndex05.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Business\IAOLab\WebEngine\Html\BossIndex06.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\Html\BossIndex07.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Business\IAOLab\WebEngine\Html\SourceCodeMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2074,13 +2086,11 @@
     </Content>
     <None Include="Business\IAOLab\WebEngine\img\BossStyle01.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle02.png" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle03.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Business\IAOLab\WebEngine\img\BossStyle04.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Content Include="Business\IAOLab\WebEngine\img\BossStyle03.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle04.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle05.png" />
+    <Content Include="Business\IAOLab\WebEngine\img\BossStyle06.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle07.png" />
     <Content Include="Business\IAOLab\WebEngine\img\img1\aleftboxtbott.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2132,6 +2142,30 @@
     <Content Include="Business\IAOLab\WebEngine\img\img5\title.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img6\back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img6\bottom.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img6\center2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img6\title.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img7\back.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img7\border.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img7\border2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img7\title.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Business\IAOLab\WebEngine\JS\china.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2156,6 +2190,9 @@
     <None Include="Resources\BossStyle03.png" />
     <None Include="Resources\BigAPK.bmp" />
     <Content Include="Business\IAOLab\WebEngine\JS\phx5.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\JS\phx6.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\C1\datasource\dataButton.png" />
