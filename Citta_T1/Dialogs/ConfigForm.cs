@@ -703,9 +703,7 @@ namespace C2.Dialogs
             }
             //----------替换html内容
             string htmlText = htmlSb.ToString();
-            htmlText = Regex.Replace(htmlText, "ak=.*\"", "ak=" + this.baiduVerAPITB.Text);
-            //htmlSb.Replace("http://api.map.baidu.com/api?v=2.0&ak=FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9",
-            //    "http://api.map.baidu.com/api?v=2.0&ak=" + this.baiduVerAPITB.Text);
+            htmlText = Regex.Replace(htmlText, "ak=.*\"", "ak=" + this.baiduVerAPITB.Text + "\"");
 
             //----------生成htm文件------------------
             try

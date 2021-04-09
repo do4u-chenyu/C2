@@ -513,7 +513,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
         /// </summary>
         private void SaveMapConfig()
         {
-            // TODO 获得当前的经纬度和zoom等级
             SaveSourceCode();
             SaveCenterAndZoom();
             MapWidget mw = HitTopic.FindWidget<MapWidget>();
