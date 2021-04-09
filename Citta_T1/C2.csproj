@@ -1817,6 +1817,9 @@
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2MinOperatorView.resx">
       <DependentUpon>C2MinOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2PythonOperatorView.resx">
+      <DependentUpon>C2PythonOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SortOperatorView.resx">
       <DependentUpon>C2SortOperatorView.cs</DependentUpon>
     </EmbeddedResource>
