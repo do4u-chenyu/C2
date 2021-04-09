@@ -167,6 +167,7 @@
     <Compile Include="Business\IAOLab\WebEngine\Dialogs\SelectBossDialog.Designer.cs">
       <DependentUpon>SelectBossDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\IAOLab\WifiMac\Place.cs" />
     <Compile Include="Business\IAOLab\WifiMac\WifiMac.cs" />
     <Compile Include="Business\Model\ExportModel.cs" />
     <Compile Include="Business\Model\ImportModel.cs" />
@@ -2976,7 +2977,6 @@
     <Content Include="Resources\Script\IAO_Web_validation\step5_ finnaly.py" />
     <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
     <Content Include="Resources\Script\IAO_Web_validation\util.py" />
-    <None Include="Resources\SourceCodeMap.html" />
     <Content Include="Resources\StartPage\bank.png" />
     <Content Include="Resources\StartPage\BusinessViewLabel.png" />
     <Content Include="Resources\StartPage\bussinessView.png" />

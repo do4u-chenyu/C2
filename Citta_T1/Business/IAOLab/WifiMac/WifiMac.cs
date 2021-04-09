@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using C2.Business.IAOLab.WifiMac;
+using Newtonsoft.Json;
 
 namespace C2.IAOLab.WifiMac
 {
@@ -76,17 +78,15 @@ namespace C2.IAOLab.WifiMac
             StreamReader sRead = new StreamReader(s);
             string postContent = sRead.ReadToEnd();
             sRead.Close();
-            //Console.WriteLine(postContent);//返回Json数据
-            
-            postContent = postContent.Replace("address", "地址").Replace("latitude", "纬度").Replace("longitude", "经度").Replace("state", "查询结果").Replace("ok", "成功").Replace("error", "失败").Replace("accuracy", "范围");
-            string[] postContentArry = postContent.Split('{', '}', ',');
-            if (postContentArry.Length > 5) 
-                return string.Format("{0},{1}\t{2}米\t{3}\t{4}", 
-                                        postContentArry[2], 
-                                        postContentArry[6], 
-                                        postContentArry[3], 
-                                        postContentArry[5], 
-                                        postContentArry[1]);
+
+            Place rt = JsonConvert.DeserializeObject<Place>(postContent);
+            if (rt.state == "ok") 
+                return string.Format("纬度:{0}, 经度:{1}\t范围:{2}米\ttgdid:{3}\t地址:{4}", 
+                                        rt.latitude, 
+                                        rt.longitude, 
+                                        rt.accuracy, 
+                                        rt.tgdid, 
+                                        rt.address);
             return "查询失败";
         }
 
