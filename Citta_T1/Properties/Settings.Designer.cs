@@ -61,25 +61,13 @@ namespace C2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://api.map.baidu.com/api?v=1.4&services=true")]
+        [global::System.Configuration.DefaultSettingValueAttribute("FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9")]
         public string baiduVerAPI {
             get {
                 return ((string)(this["baiduVerAPI"]));
             }
             set {
                 this["baiduVerAPI"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js")]
-        public string baiduHeatAPI {
-            get {
-                return ((string)(this["baiduHeatAPI"]));
-            }
-            set {
-                this["baiduHeatAPI"] = value;
             }
         }
     }

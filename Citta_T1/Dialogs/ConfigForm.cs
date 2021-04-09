@@ -680,7 +680,7 @@ namespace C2.Dialogs
         public void WriteFile()
         {
             //---------------------读html模板页面到stringbuilder对象里----
-            StringBuilder htmltext = new StringBuilder();
+            StringBuilder htmlSb = new StringBuilder();
             try
             {
                 string url = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
@@ -689,8 +689,8 @@ namespace C2.Dialogs
                     String line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        htmltext.Append(line);
-                        htmltext.Append('\n');
+                        htmlSb.Append(line);
+                        htmlSb.Append('\n');
                     }
                     sr.Close();
                 }
@@ -702,8 +702,10 @@ namespace C2.Dialogs
 
             }
             //----------替换html内容
-
-            htmltext.Replace("http://api.map.baidu.com/api?v=1.4&services=true", this.baiduVerAPITB.Text);
+            string htmlText = htmlSb.ToString();
+            htmlText = Regex.Replace(htmlText, "ak=.*\"", "ak=" + this.baiduVerAPITB.Text);
+            //htmlSb.Replace("http://api.map.baidu.com/api?v=2.0&ak=FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9",
+            //    "http://api.map.baidu.com/api?v=2.0&ak=" + this.baiduVerAPITB.Text);
 
             //----------生成htm文件------------------
             try
@@ -711,7 +713,7 @@ namespace C2.Dialogs
                 string url = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
                 using (StreamWriter sw = new StreamWriter(url, false, System.Text.Encoding.GetEncoding("GB2312"))) //保存地址
                 {
-                    sw.WriteLine(htmltext);
+                    sw.WriteLine(htmlText);
                     sw.Flush();
                     sw.Close();
                 }
