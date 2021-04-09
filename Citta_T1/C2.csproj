@@ -2147,6 +2147,9 @@
     <Content Include="Business\IAOLab\WebEngine\JS\echarts.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Business\IAOLab\WebEngine\JS\Heatmap_min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Business\IAOLab\WebEngine\JS\phx.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
