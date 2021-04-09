@@ -2962,7 +2962,6 @@
     <Content Include="Resources\Script\IAO_Web_validation\step5_ finnaly.py" />
     <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
     <Content Include="Resources\Script\IAO_Web_validation\util.py" />
-    <None Include="Resources\SourceCodeMap.html" />
     <Content Include="Resources\StartPage\bank.png" />
     <Content Include="Resources\StartPage\BusinessViewLabel.png" />
     <Content Include="Resources\StartPage\bussinessView.png" />
