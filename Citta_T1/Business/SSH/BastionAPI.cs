@@ -2,7 +2,9 @@
 using C2.SearchToolkit;
 using C2.Utils;
 using Renci.SshNet;
+using Renci.SshNet.Common;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -10,9 +12,10 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private const int SecondsTimeout = 7;
-        private const String SeparatorCommand = "echo 5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
+        private const int SecondsTimeout = 5;
+        private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
 
+        private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
         
         private static readonly String TgzHead = Encoding.ASCII.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
@@ -25,10 +28,16 @@ namespace C2.Business.SSH
         private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
         private String GambleTaskDirectory { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.PID, task.TaskCreateTime); }
+
+        private static String Wrap(String pattern)
+        {
+            return String.Format(@"\r?\n{0}\r?\n", pattern);
+        }
         public BastionAPI(TaskInfo task)
         {
             this.task = task;
-            this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
+            //this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
+            this.ssh = new SshClient("114.55.248.85", "root", "aliyun.123");
             this.ssh.ConnectionInfo.Timeout = Timeout; // 10秒超时
         }
 
@@ -60,18 +69,16 @@ namespace C2.Business.SSH
                 return;
 
             task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, "未能跳转全文机");
-
             shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
             // 等待目标机准备好
             _ = shell.ReadLine(Timeout);
 
             // 跳转到目标机器
             shell.WriteLine(task.SearchAgentIP);
-
             // 等待跳转成功,出现root用户提示符
             if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), Timeout))
                 return;
-            task.LastErrorMsg = String.Empty;
+            task.LastErrorMsg = String.Empty; 
             _ = shell.Read(); // 清空buffer
         }
 
@@ -81,20 +88,19 @@ namespace C2.Business.SSH
             try 
             {
                 // 清理缓存
-                ssm.Read();
+                _ = ssm.Read();
                 // 执行命令
                 ssm.WriteLine(command);
                 // 打印分隔符
-                ssm.WriteLine(SeparatorCommand);
+                ssm.WriteLine(String.Format("echo {0}", SeparatorString));
                 // 根据分隔符和timeout确定任务输出结束
-                String ret = ssm.Expect(SeparatorCommand, TimeSpan.FromSeconds(timeout));
+                String ret = ssm.Expect(SeparatorRegex, TimeSpan.FromSeconds(timeout));
                 if (ret != null)
                     return ret;
             } catch { }
 
             return String.Empty;
         }
-
 
         private String GetRemoteFilename(String s)
         {
@@ -153,11 +159,12 @@ namespace C2.Business.SSH
             return this;
         }
 
-        public String GetPID(String cmdLine)
+        private String GetPID(String content)
         {
-            String command = String.Format(@"pgrep -f '{0}' | head -n 1", cmdLine);
-            String result = RunCommand(command, shell);
-            return Regex.IsMatch(result, @"^\d+$") ? result.Trim() : String.Empty;
+            Match mat = Regex.Match(content, Wrap(@"\[\d+\]\s*(\d+)")); // 匹配类似 [1] 7177
+            if (mat.Success && mat.Groups[1].Success)
+                return mat.Groups[1].Value;
+            return String.Empty;
         }
 
         public String RunGambleTask()
@@ -167,10 +174,9 @@ namespace C2.Business.SSH
 
             EnterGambleTaskDirectory();
             //String command = String.Format("python {0}", TargetGambleScript);
-            String command = "sleep 300";
-            shell.WriteLine(String.Format("{0} & disown -a", command));
-
-            String pid = GetPID(command);
+            String command = "sleep 3600";
+            String ret = RunCommand(String.Format("{0} & disown -a", command), shell);
+            String pid = GetPID(ret);
             // 未获取到pid，当作模型脚本执行失败
             if (pid.IsEmpty())
                 task.LastErrorMsg = "全文机已连接但执行涉赌脚本失败";
@@ -206,14 +212,13 @@ namespace C2.Business.SSH
         private bool IsAliveGambleTask()
         {
             String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetGambleScript), shell);
-            return result.Contains(TargetGambleScript);
+            return Regex.IsMatch(result, Wrap(TargetGambleScript));
         }
 
         private bool IsGambleResultFileReady()
         {
-            String ffp = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
-            String command = String.Format("ls {0}", ffp);
-            return RunCommand(command, shell).Contains("000000_queryResult_db_");
+            String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", GambleTaskDirectory), shell);
+            return Regex.IsMatch(result, @"000000_queryResult_db_\d+_\d+.tgz\r?\n");
         }
 
         private bool IsTaskTimeout()
@@ -241,12 +246,12 @@ namespace C2.Business.SSH
 
         public String QueryGambleTaskStatus()
         {
+            if (!ssh.IsConnected)
+                return "连接失败";
+
             bool isTimeout = IsTaskTimeout();
             bool isAlive = IsAliveGambleTask();
             bool isGRFReady = IsGambleResultFileReady();
-
-            if (!ssh.IsConnected)
-                return "连接失败";
 
             // 1) pid不存在且有结果文件时, 为运行成功
             if (!isAlive && isGRFReady)

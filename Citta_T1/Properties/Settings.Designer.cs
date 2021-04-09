@@ -25,7 +25,7 @@ namespace C2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("36.269395")]
+        [global::System.Configuration.DefaultSettingValueAttribute("108.876433")]
         public string lontude {
             get {
                 return ((string)(this["lontude"]));
@@ -37,7 +37,7 @@ namespace C2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("108.876433")]
+        [global::System.Configuration.DefaultSettingValueAttribute("36.269395")]
         public string latude {
             get {
                 return ((string)(this["latude"]));

@@ -311,6 +311,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 HelpUtil.ShowMessageBox("当前有截图下载任务，请在下载结束后重试。");
                 return;
             }
+            if (TaskInfo.Status != WFDTaskStatus.Done)
+            {
+                HelpUtil.ShowMessageBox("任务还在执行中，请任务完成后重试。");
+                return;
+            }
             SaveScreenshotsToLocal(TaskInfo.PreviewResults.FindAll(t => !string.IsNullOrEmpty(t.screen_shot)));
         }
         #endregion

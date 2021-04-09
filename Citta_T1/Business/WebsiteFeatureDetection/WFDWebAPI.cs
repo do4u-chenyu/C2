@@ -228,7 +228,7 @@ namespace C2.Business.WebsiteFeatureDetection
             return true;
         }
 
-        public Response Post(string url, Dictionary<string, string> postData, string token = "", int timeout = 20000)
+        public Response Post(string url, Dictionary<string, string> postData, string token = "", int timeout = 10000)
         {
             Response resp = new Response();
             try

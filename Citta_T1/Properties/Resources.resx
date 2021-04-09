@@ -2046,4 +2046,16 @@
   <data name="BossStyle06" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Business\IAOLab\WebEngine\img\BossStyle06.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="map_clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WebBrowser\map_clear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="map_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WebBrowser\map_save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="map_setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WebBrowser\map_setting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="map_sourceCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WebBrowser\map_sourceCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

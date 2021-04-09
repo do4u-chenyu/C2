@@ -42,11 +42,11 @@
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(36, 36);
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(932, 34);
+            this.toolStrip1.Size = new System.Drawing.Size(932, 40);
             this.toolStrip1.TabIndex = 10003;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -55,7 +55,7 @@
             this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser1.Location = new System.Drawing.Point(0, 39);
+            this.webBrowser1.Location = new System.Drawing.Point(0, 40);
             this.webBrowser1.Margin = new System.Windows.Forms.Padding(0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
@@ -72,7 +72,7 @@
             this.htmlEditorControlEx1.Font = new System.Drawing.Font("Courier New", 10F);
             this.htmlEditorControlEx1.Location = new System.Drawing.Point(24, 40);
             this.htmlEditorControlEx1.Name = "htmlEditorControlEx1";
-            this.htmlEditorControlEx1.Size = new System.Drawing.Size(104, 375);
+            this.htmlEditorControlEx1.Size = new System.Drawing.Size(104, 364);
             this.htmlEditorControlEx1.SyntaxHighlighting = "JavaScript";
             this.htmlEditorControlEx1.TabIndex = 10005;
             // 
@@ -86,9 +86,9 @@
             this.editorPanel.Controls.Add(this.runButton);
             this.editorPanel.Controls.Add(this.htmlEditorControlEx1);
             this.editorPanel.Enabled = false;
-            this.editorPanel.Location = new System.Drawing.Point(12, 28);
+            this.editorPanel.Location = new System.Drawing.Point(0, 39);
             this.editorPanel.Name = "editorPanel";
-            this.editorPanel.Size = new System.Drawing.Size(147, 415);
+            this.editorPanel.Size = new System.Drawing.Size(147, 404);
             this.editorPanel.TabIndex = 10006;
             this.editorPanel.Visible = false;
             // 

@@ -36,6 +36,8 @@ namespace C2.Business.WebsiteFeatureDetection
         {
             if (Global.WFDPredictionCodeDict.TryGetValue(prediction, out string tmpPre))
                 prediction_ = tmpPre;
+            if (Global.WFDFraudCodeDict.TryGetValue(prediction, out string tmpFraud))
+                Fraud_label = tmpFraud;
 
             return string.Join("\t", new string[] { url, cur_url, title, prediction, prediction_, Fraud_label, screen_shot, login, html_content_id, html_content});
         }

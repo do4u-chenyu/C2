@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="lontude" Type="System.String" Scope="User">
-      <Value Profile="(Default)">36.269395</Value>
+      <Value Profile="(Default)">108.876433</Value>
     </Setting>
     <Setting Name="latude" Type="System.String" Scope="User">
-      <Value Profile="(Default)">108.876433</Value>
+      <Value Profile="(Default)">36.269395</Value>
     </Setting>
     <Setting Name="scale" Type="System.String" Scope="User">
       <Value Profile="(Default)">5</Value>

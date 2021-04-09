@@ -103,6 +103,7 @@
     <Reference Include="log4net">
       <HintPath>..\ThirdPartyLibrary\log4net\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\ThirdPartyLibrary\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -1816,6 +1817,9 @@
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2MinOperatorView.resx">
       <DependentUpon>C2MinOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C2OperatorViews\C2PythonOperatorView.resx">
+      <DependentUpon>C2PythonOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SortOperatorView.resx">
       <DependentUpon>C2SortOperatorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -2162,6 +2166,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\JS\echarts.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\JS\Heatmap_min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\JS\phx.js">
@@ -3089,6 +3096,10 @@
     <None Include="Resources\全文工具左侧.png" />
     <None Include="Resources\侦察兵左侧.png" />
     <None Include="Resources\BigAPK.png" />
+    <None Include="Resources\WebBrowser\map_clear.png" />
+    <None Include="Resources\WebBrowser\map_save.png" />
+    <None Include="Resources\WebBrowser\map_setting.png" />
+    <None Include="Resources\WebBrowser\map_sourceCode.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
