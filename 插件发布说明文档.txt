@@ -1,0 +1,15 @@
+1、本地插件上传到服务器方式：
+
+?	文件上传路径：服务器：10.1.126.4    /usr/local/phx/apache-tomcat-8.5.38/webapps/C2Plugins/packages
+
+?	若新增插件为"b站视频-0.7.3.dll"及其info文件:
+    修改/usr/local/phx/apache-tomcat-8.5.38/webapps/C2Plugins/index.html，只需要新增标签:
+    <a href="./packages/ b站视频-0.7.3.dll"> b站视频-0.7.3.dll</a><br/>
+    <a href="./packages/ b站视频-0.7.3.dll.info"> b站视频-0.7.3.dll.info</a><br/>
+2、上传插件命名规范：
+   dll文件命名格式： 名称-版本号.dll，例如 “技能宝典-0.0.2.dll”；
+   info文件命名格式：名称-版本号.dll.info，例如“技能宝典-0.0.2.dll.info”；
+   info文件内容格式：”名称 版本号 插件描述信息”，列字段用空格分隔。
+   后期info文件考虑提供md5或者crc校验码。
+
+3、网页效果预览地址：http://218.94.117.234:8484/C2Plugins/
