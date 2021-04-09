@@ -35,7 +35,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             oldDataIdx = -1;
             DataItems = dataItems;
             ChartOptions = options;
-            bossTypeDict = new List<Image>() { Properties.Resources.BossStyle01 , Properties.Resources.BossStyle02 , Properties.Resources.BossStyle03, Properties.Resources.BossStyle04, Properties.Resources.BossStyle05 };
+            bossTypeDict = new List<Image>() { Properties.Resources.BossStyle01 , Properties.Resources.BossStyle02 , Properties.Resources.BossStyle03, Properties.Resources.BossStyle04, Properties.Resources.BossStyle05 ,Properties.Resources.BossStyle06};
             LoadOption();
             webBrowser = browser;
         }
@@ -293,6 +293,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 basicPieCaption.Text = "饼状图（不展示）";
                 basicMapCaption.Text = "地市分布图（不展示）";
             }
+            else if (bossType.SelectedIndex == 5)
+            {
+                simpleBarCaption.Text = "柱状图（左上方）";
+                basicLineChartCaption.Text = "折线图（右上方）";
+                basicScatterCaption.Text = "点状图（左下方）";
+                smoothedLineChartCaption.Text = "曲线图（右下方）";
+                stackBarCaption.Text = "堆叠柱状图（不展示）";
+                basicPieCaption.Text = "饼状图（不展示）";
+                basicMapCaption.Text = "地市分布图（不展示）";
+            }
+
         }
 
         private async void PreviewBtn_ClickAsync(object sender, EventArgs e)
