@@ -2,9 +2,7 @@
 using C2.SearchToolkit;
 using C2.Utils;
 using Renci.SshNet;
-using Renci.SshNet.Common;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -105,13 +103,23 @@ namespace C2.Business.SSH
         private String GetRemoteFilename(String s)
         {
             String command = String.Format("ls -l {0} | awk '{{print $9}}' | tail -n 1", s);
-            return RunCommand(command, shell).Trim();
+            String content = RunCommand(command, shell);
+
+            Match mat = Regex.Match(content, Wrap(@"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)"));
+            if (mat.Success && mat.Groups[1].Success)
+                return mat.Groups[1].Value;
+            return String.Empty;
         }
+
         private int GetRemoteFileSize(String s)
         {
             String command = String.Format("ls -l {0} | awk '{{print $5}}' | head -n 1", s);
-            String result = RunCommand(command, shell).Trim();
-            return ConvertUtil.TryParseInt(result);
+            String content = RunCommand(command, shell);
+
+            Match mat = Regex.Match(content, Wrap(@"(\d+)")); 
+            if (mat.Success && mat.Groups[1].Success)
+                return ConvertUtil.TryParseInt(mat.Groups[1].Value);
+            return 0;
         }
 
         public bool DownloadGambleTaskResult(String d)
