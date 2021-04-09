@@ -15,6 +15,7 @@ namespace FullTextGrammarAssistant
 {
     public partial class Form1 : Form, IPlugin
     {
+        private readonly List<string> previewTextList = new List<string>(new string[] { "","", "", "" });
         public Form1()
         {
             InitializeComponent();
@@ -79,7 +80,13 @@ namespace FullTextGrammarAssistant
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.textBox1.Text = "hello AND world OR 你好";
+            this.textBox3.Text = DateTime.Now.AddYears(-1).ToString();
+            this.textBox4.Text = DateTime.Now.ToString();
+            this.previewTextList[1] = "--start " + DateTime.Now.AddYears(-1).ToString("yyyyMMddHHmmss");
+            this.previewTextList[2] = "--end " + DateTime.Now.ToString("yyyyMMddHHmmss");
+            this.previewTextList[3] = "--querystring \"" + this.textBox1.Text + "\"";
+            UpdatePreviewText();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -288,7 +295,30 @@ namespace FullTextGrammarAssistant
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
+            this.previewTextList[1] = "--start " + Convert.ToDateTime(this.textBox3.Text).ToString("yyyyMMddHHmmss");
+            UpdatePreviewText();
+        }
+        private void UpdatePreviewText()
+        {
+            this.previewTextList[0] = "/home/search/sbin/queryclient --server 127.0.0.1 --port 9871";
+            this.previewCmdText.Text = String.Join(" ", this.previewTextList);
+        }
 
+        private void previewCmdText_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            this.previewTextList[2] = "--end " + Convert.ToDateTime(this.textBox4.Text).ToString("yyyyMMddHHmmss");
+            UpdatePreviewText();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            this.previewTextList[3] = "--querystring \"" + this.textBox1.Text + "\"";
+            UpdatePreviewText();
         }
     }
 }

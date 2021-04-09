@@ -30,6 +30,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private readonly MapConfig MapConfig;
         private Point WebBrowserFullLocation;
         private Point WebBrowserHalfLocation;
+        private bool Initialized;
 
 
         public WebType WebType;
@@ -55,6 +56,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SourceWebUrl = string.Empty;
             WebBrowserFullLocation = this.webBrowser1.Location;
             WebBrowserHalfLocation = new Point(this.Width / 2, this.WebBrowserFullLocation.Y);
+            Initialized = false;
         }
         public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
         {
@@ -62,6 +64,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             DataItems = hitTopic.GetDataItems();
             WebType = webType;
             MapConfig = InitMapConfig();
+            this.htmlEditorControlEx1.Text = MapConfig.SourceCode;
             SourceCodeMapActive = false;
         }
         /// <summary>
@@ -171,17 +174,22 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if (WebType == WebType.Map)
             {
                 if (MapConfig.MapType == MapType.StartMap)
-                    InitStartMapByConfig();
+                    LoadStartMapByConfig();
                 else
                 {
                     if (!SourceCodeMapActive)
                         ShowSourceCodeMap();
-                    InitSourceCodeMapByConfig();
+                    if (!Initialized)
+                        this.RunButton_Click(this, EventArgs.Empty);
+                    else
+                        LoadSourceCodeMapByConfig();
                 }
+                if (!Initialized)
+                    Initialized = true;
             }
         }
 
-        private void InitStartMapByConfig()
+        private void LoadStartMapByConfig()
         {
             string configstr = String.Format("{0},{1},{2}", MapConfig.InitLng, MapConfig.InitLat, MapConfig.Zoom);
             webBrowser1.Document.InvokeScript("initialMap", new object[] { configstr });
@@ -212,7 +220,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 }
             }
         }
-        private void InitSourceCodeMapByConfig()
+        private void LoadSourceCodeMapByConfig()
         {
             this.htmlEditorControlEx1.Text = this.MapConfig.SourceCode;
         }
@@ -269,24 +277,18 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             // LoadBossData
             LoadBossData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            LoadBossData.Image = global::C2.Properties.Resources.designer;
+            LoadBossData.Image = global::C2.Properties.Resources.map_setting;
             LoadBossData.Text = "参数配置";
             LoadBossData.Click += new System.EventHandler(this.LoadBossData_Click);
 
-            // SaveHtml
-            SaveHtml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            SaveHtml.Image = global::C2.Properties.Resources.save;
-            SaveHtml.Text = "保存成html";
-
             // SavePic
             SavePic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            SavePic.Image = global::C2.Properties.Resources.image;
+            SavePic.Image = global::C2.Properties.Resources.map_save;
             SavePic.Text = "保存成图片";
             SavePic.Click += new System.EventHandler(this.SavePic_Click);
 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 LoadBossData,
-                SaveHtml,
                 SavePic
             });
         }
@@ -358,7 +360,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 SaveCenterAndZoom();
                 ShowSourceCodeMap();
                 MapConfig.MapType = MapType.SourceCodeMap;
-                InitSourceCodeMapByConfig();
+                LoadSourceCodeMapByConfig();
             }
             else
             {
@@ -369,7 +371,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
                 webBrowser1.Navigate(WebUrl);
 
-                InitStartMapByConfig();
+                LoadStartMapByConfig();
             }
         }
 
@@ -402,17 +404,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         private void SaveCenterAndZoom()
         {
-            //if (MapConfig.MapType != MapType.StartMap)
-            //    return;
-            //dynamic data = webBrowser1.Document.InvokeScript("eval", new[] {
-            //    "(function() { return {lat: map.getCenter()[\"lat\"], lng: map.getCenter()[\"lng\"], zoom: map.getZoom()}; })()"
-            //});
-            //if (data.lat != null)
-            //    MapConfig.InitLat = (float)data.lat;
-            //if (data.lng != null)
-            //    MapConfig.InitLng = (float)data.lng;
-            //if (data.zoom != null)
-            //    MapConfig.Zoom = (int)data.zoom;
+            if (MapConfig.MapType != MapType.StartMap)
+                return;
+            dynamic data = webBrowser1.Document.InvokeScript("eval", new[] {
+                "(function() { return {lat: map.getCenter()[\"lat\"], lng: map.getCenter()[\"lng\"], zoom: map.getZoom()}; })()"
+            });
+            if (data.lat != null)
+                MapConfig.InitLat = (float)data.lat;
+            if (data.lng != null)
+                MapConfig.InitLng = (float)data.lng;
+            if (data.zoom != null)
+                MapConfig.Zoom = (int)data.zoom;
         }
         /// <summary>
         /// 得有文件，要不然不能使用WebBrowser访问
