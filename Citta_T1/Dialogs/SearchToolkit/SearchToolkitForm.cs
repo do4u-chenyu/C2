@@ -83,7 +83,7 @@ namespace C2.SearchToolkit
 
                 // TODO ProgressBar 处理
                 using (new GuarderUtil.CursorGuarder())
-                    new BastionAPI(task).DownloadGambleTaskResult(dst);
+                    new BastionAPI(task).Login().DownloadGambleTaskResult(dst);
             }
             
         }
