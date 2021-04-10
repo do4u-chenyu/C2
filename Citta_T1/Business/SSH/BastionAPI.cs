@@ -107,11 +107,20 @@ namespace C2.Business.SSH
                 // 清理缓存
                 _ = ssm.Read();
                 // 执行命令
-                ssm.WriteLine(String.Format("cat {0}",ffp));
+                ssm.WriteLine(String.Format("cat {0}", ffp));
                 // 打印分隔符
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
+
+                int len = 0;
+                byte[] buffer = new byte[1024];
                 // 根据分隔符和timeout确定任务输出结束
-                return ssm.Read();
+                for (int i = 0; i < size / 1024; i++)
+                {
+                    len = ssm.Read(buffer, 0, 1024);
+                    System.Threading.Thread.Sleep(1000);
+                }
+                    
+
             }
             catch { }
 
@@ -120,7 +129,7 @@ namespace C2.Business.SSH
 
         private String GetRemoteFilename(String s)
         {
-            String command = String.Format("ls -l {0} | awk '{{print $9}}' | tail -n 1", s);
+            String command = String.Format("ls -l {0} | awk '{{print $9}}' | head -n 1", s);
             String content = RunCommand(command, shell);
 
             Match mat = Regex.Match(content, Wrap(@"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)"));
