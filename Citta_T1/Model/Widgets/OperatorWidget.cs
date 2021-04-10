@@ -146,9 +146,46 @@ namespace C2.Model.Widgets
         }
         public override void OnDoubleClick(HandledEventArgs e) 
         {
-            if (Status == OpStatus.Ready && OpType == OpType.SqlOperator)
+            if (Status == OpStatus.Ready || Status  == OpStatus.Done)
             {
-                 new  C2SqlOperatorView(this).Show(); 
+                switch (OpType) {
+                    case OpType.SqlOperator:
+                        new C2SqlOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.PythonOperator:
+                        new C2PythonOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.AvgOperator:
+                        new C2AvgOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.CustomOperator:
+                        new C2CustomOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.FilterOperator:
+                        new C2FilterOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.FreqOperator:
+                        new C2FreqOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.GroupOperator:
+                        new C2GroupOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.MaxOperator:
+                        new C2MaxOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.MinOperator:
+                        new C2MinOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.RandomOperator:
+                        new C2RandomOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.SortOperator:
+                        new C2SortOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.DataFormatOperator:
+                        new C2DataFormatOperatorView(this).ShowDialog();
+                        break;
+                }
             } 
                 
         }
