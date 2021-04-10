@@ -26,7 +26,7 @@ html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; ba
 .mrbox_topmidd{float: left; width:50%; padding-left:.2%;height: 100%}
 .mrbox_top_right{ float: left; width: 30%; padding-left:.2%; height: 100%}
 
-.amiddboxttop{ overflow: hidden;background:url(../img/img12/around.png);background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:99%; height:99%;}
+.amiddboxttop{ overflow: hidden;background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:99%; height:99%;}
 
 .aleftboxttop{background:url(../img/img12/border.png); background-size: 100% 100%; background-repeat: no-repeat;background-position: top center; width:99%; height: 100%; margin-bottom: 1%}
 
