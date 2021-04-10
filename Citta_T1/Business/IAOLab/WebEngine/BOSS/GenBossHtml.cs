@@ -1,4 +1,5 @@
 ﻿using C2.Business.IAOLab.WebEngine.Boss.Charts.Bar;
+using C2.Business.IAOLab.WebEngine.Boss.Charts.Line;
 using C2.IAOLab.WebEngine.Boss.Charts.Bar;
 using C2.IAOLab.WebEngine.Boss.Charts.Line;
 using C2.IAOLab.WebEngine.Boss.Charts.Map;
@@ -44,7 +45,7 @@ namespace C2.IAOLab.WebEngine.Boss
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
                     echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);
+                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
                     echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);
                     echarts[6] = new PictorialBar(dataTable, new CompleteOption(), chartOptions);//渐变柱状图
                     echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
@@ -53,20 +54,20 @@ namespace C2.IAOLab.WebEngine.Boss
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
                     echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);//渐变线性图
+                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//渐变线性图
                     break;
                 case 2:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
                     echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);//渐变线性图
+                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//渐变线性图
                     echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
                     break;
                 case 3:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
                     echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);//渐变线性图
+                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//渐变线性图
                     break;
                 case 4:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
@@ -97,55 +98,55 @@ namespace C2.IAOLab.WebEngine.Boss
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
                     echarts[3] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
+                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
                     echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
                     break;
                 case 9:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
                     echarts[3] = new BasicPie(dataTable, new CompleteOption(), chartOptions); //饼图
-                    echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
+                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
                     echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
                     break;
                 case 10:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
                     echarts[3] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
+                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
                     echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
                     break;
                 case 11:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
                     echarts[3] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
+                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
                     echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
                     break;
                 case 12:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
                     echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);
+                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
                     echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);
                     echarts[6] = new PictorialBar(dataTable, new CompleteOption(), chartOptions);//渐变柱状图
                     echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
                     break;
                 case 13:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);
+                    echarts[2] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
                     echarts[3] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
                     break;
                 case 14:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    echarts[3] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);
+                    echarts[3] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
                     echarts[4] = new StackBar(dataTable, new CompleteOption(), chartOptions);
                     break;
                 default:
                     echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
                     echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
                     echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new Business.IAOLab.WebEngine.Boss.Charts.Line.GradientLineChart(dataTable, new CompleteOption(), chartOptions);
+                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
                     echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);
                     echarts[6] = new PictorialBar(dataTable, new CompleteOption(), chartOptions);//渐变柱状图
                     echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图

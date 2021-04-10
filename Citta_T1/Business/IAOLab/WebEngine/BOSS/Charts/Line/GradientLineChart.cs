@@ -91,7 +91,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Line
                     showAllSymbol = "true",
                     symbol = "'circle'",
                     symbolSize = "10",
-
+                    smooth = Common.FormatString("true"),
                     lineStyle = new C2.IAOLab.WebEngine.Boss.Option.SeriesType.LineBaseOption.LineStyle()
                     {
                         color = color_str[i%5],
