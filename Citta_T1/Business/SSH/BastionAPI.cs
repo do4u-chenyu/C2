@@ -25,7 +25,7 @@ namespace C2.Business.SSH
 
         private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
-        private String GambleTaskDirectory { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.PID, task.TaskCreateTime); }
+        private String GambleTaskDirectory { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.TaskName, task.TaskCreateTime); }
 
         private static String Wrap(String pattern)
         {
@@ -63,7 +63,7 @@ namespace C2.Business.SSH
         }
         private void Jump()
         {
-            if (!ssh.IsConnected || !task.LastErrorMsg.IsEmpty())
+            if (IsError())
                 return;
 
             task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, "未能跳转全文机");
@@ -100,6 +100,24 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
+        private String Cat(String ffp, int size, ShellStream ssm)
+        {
+            try
+            {
+                // 清理缓存
+                _ = ssm.Read();
+                // 执行命令
+                ssm.WriteLine(String.Format("cat {0}",ffp));
+                // 打印分隔符
+                ssm.WriteLine(String.Format("echo {0}", SeparatorString));
+                // 根据分隔符和timeout确定任务输出结束
+                return ssm.Read();
+            }
+            catch { }
+
+            return String.Empty;
+        }
+
         private String GetRemoteFilename(String s)
         {
             String command = String.Format("ls -l {0} | awk '{{print $9}}' | tail -n 1", s);
@@ -127,19 +145,27 @@ namespace C2.Business.SSH
             // 000000_queryResult_db_开始时间_结束时间.tgz
             String s = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
 
-            if (!ssh.IsConnected)
+            if (IsError())
                 return false;
 
             String ffp = GetRemoteFilename(s);
             int size = GetRemoteFileSize(ffp);
             if (size <= 0)
-                return false;  // 文件不存在或空文件   
+                return false;  // 文件不存在或空文件  
+
+            String ret = Cat(ffp, size, shell);
+
             return true;
+        }
+
+        private bool IsError()
+        {
+            return !(ssh.IsConnected && task.LastErrorMsg.IsEmpty());
         }
 
         public BastionAPI UploadGambleScript()
         {
-            if (!ssh.IsConnected || !task.LastErrorMsg.IsEmpty())
+            if (IsError())
                 return this;
 
             String s = Global.GambleScriptPath;
@@ -177,7 +203,7 @@ namespace C2.Business.SSH
 
         public String RunGambleTask()
         {
-            if (!ssh.IsConnected || !task.LastErrorMsg.IsEmpty())
+            if (IsError())
                 return String.Empty;
 
             EnterGambleTaskDirectory();
@@ -199,7 +225,7 @@ namespace C2.Business.SSH
 
         public BastionAPI DeleteGambleTaskDirectory()
         {
-            if (!ssh.IsConnected || !task.LastErrorMsg.IsEmpty())
+            if (IsError())
                 return this;
             // 删除 临时目录
             if (IsSafe(GambleTaskDirectory))
@@ -209,8 +235,9 @@ namespace C2.Business.SSH
 
         public BastionAPI CreateGambleTaskDirectory()
         {
-            if (!ssh.IsConnected || !task.LastErrorMsg.IsEmpty())
+            if (IsError())
                 return this;
+
             String command = String.Format("mkdir -p {0}", GambleTaskDirectory);
             RunCommand(command, shell);
             return this;
