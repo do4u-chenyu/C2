@@ -35,7 +35,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             oldDataIdx = -1;
             DataItems = dataItems;
             ChartOptions = options;
-            bossTypeDict = new List<Image>() { Properties.Resources.BossStyle01 , Properties.Resources.BossStyle02 , Properties.Resources.BossStyle03, Properties.Resources.BossStyle04, Properties.Resources.BossStyle05 ,Properties.Resources.BossStyle06, Properties.Resources.BossStyle07, Properties.Resources.BossStyle08};
+            bossTypeDict = new List<Image>() { Properties.Resources.BossStyle01, Properties.Resources.BossStyle02, Properties.Resources.BossStyle03, Properties.Resources.BossStyle04, Properties.Resources.BossStyle05 ,Properties.Resources.BossStyle06, Properties.Resources.BossStyle07, Properties.Resources.BossStyle08,
+                                               Properties.Resources.BossStyle09, Properties.Resources.BossStyle10, Properties.Resources.BossStyle11, Properties.Resources.BossStyle12, Properties.Resources.BossStyle13, Properties.Resources.BossStyle14, Properties.Resources.BossStyle15};
             LoadOption();
             webBrowser = browser;
         }
@@ -51,7 +52,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             //SaveChartOption("SmoothedLineChart", smoothedLineChartX.SelectedIndex, smoothedLineChartY.GetItemCheckIndex());
             SaveChartOption("GradientLineChart", smoothedLineChartX.SelectedIndex, smoothedLineChartY.GetItemCheckIndex());
             SaveChartOption("StackBar", stackBarX.SelectedIndex, stackBarY.GetItemCheckIndex());
-            //SaveChartOption("BasicPie", basicPieX.SelectedIndex, new List<int>() { basicPieY.SelectedIndex });
+            SaveChartOption("BasicPie", basicPieX.SelectedIndex, new List<int>() { basicPieY.SelectedIndex });
             SaveChartOption("PictorialBar", basicPieX.SelectedIndex, new List<int>() { basicPieY.SelectedIndex });
             SaveChartOption("BasicMap", basicMapX.SelectedIndex, new List<int>() { basicMapY.SelectedIndex });
         }
@@ -67,7 +68,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             //LoadChartOption("SmoothedLineChart", smoothedLineChartX, smoothedLineChartY);
             LoadChartOption("GradientLineChart", smoothedLineChartX, smoothedLineChartY);
             LoadChartOption("StackBar", stackBarX, stackBarY);
-            //LoadChartOption("BasicPie", basicPieX, basicPieY);
+            LoadChartOption("BasicPie", basicPieX, basicPieY);
             LoadChartOption("PictorialBar", basicPieX, basicPieY);
             LoadChartOption("BasicMap", basicMapX, basicMapY);
         }
@@ -235,7 +236,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             String str2 = str.Substring(str.IndexOf("（") + 1, arr);
             this.label19.Text = str2;
 
-            WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", string.Format("BossIndex0{0}.html",(bossType.SelectedIndex+1).ToString()));
+            WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", string.Format("BossIndex{0}.html",(bossType.SelectedIndex+1).ToString()));
             //切换样式，每个图表的配置标题要发生变化
             ChangeCaptionText();
         }
@@ -323,8 +324,76 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 basicPieCaption.Text = "饼状图（不展示）";
                 basicMapCaption.Text = "地市分布图（中间）";
             }
-
-
+            else if (bossType.SelectedIndex == 8)
+            {
+                simpleBarCaption.Text = "柱状图（左上方）";
+                basicLineChartCaption.Text = "折线图（左下方）";
+                basicScatterCaption.Text = "点状图（不展示）";
+                smoothedLineChartCaption.Text = "曲线图（右上方）";
+                stackBarCaption.Text = "堆叠柱状图（右下方）";
+                basicPieCaption.Text = "饼状图（不展示）";
+                basicMapCaption.Text = "地市分布图（中间）";
+            }
+            else if (bossType.SelectedIndex == 9)
+            {
+                simpleBarCaption.Text = "柱状图（左侧）";
+                basicLineChartCaption.Text = "折线图（不展示）";
+                basicScatterCaption.Text = "点状图（不展示）";
+                smoothedLineChartCaption.Text = "曲线图（中右方）";
+                stackBarCaption.Text = "堆叠柱状图（右侧）";
+                basicPieCaption.Text = "饼状图（中左方）";
+                basicMapCaption.Text = "地市分布图（中上方）";
+            }
+            else if (bossType.SelectedIndex == 10)
+            {
+                simpleBarCaption.Text = "柱状图（左上方）";
+                basicLineChartCaption.Text = "折线图（左下方）";
+                basicScatterCaption.Text = "点状图（不展示）";
+                smoothedLineChartCaption.Text = "曲线图（右上方）";
+                stackBarCaption.Text = "堆叠柱状图（右下方）";
+                basicPieCaption.Text = "饼状图（不展示）";
+                basicMapCaption.Text = "地市分布图（中间）";
+            }
+            else if (bossType.SelectedIndex == 11)
+            {
+                simpleBarCaption.Text = "柱状图（左上方）";
+                basicLineChartCaption.Text = "折线图（左下方）";
+                basicScatterCaption.Text = "点状图（不展示）";
+                smoothedLineChartCaption.Text = "曲线图（右上方）";
+                stackBarCaption.Text = "堆叠柱状图（右下方）";
+                basicPieCaption.Text = "饼状图（不展示）";
+                basicMapCaption.Text = "地市分布图（中间）";
+            }
+            else if (bossType.SelectedIndex == 12)
+            {
+                simpleBarCaption.Text = "柱状图（左上方）";
+                basicLineChartCaption.Text = "折线图（左下方）";
+                basicScatterCaption.Text = "点状图（中间下方）";
+                smoothedLineChartCaption.Text = "曲线图（中间下方）";
+                stackBarCaption.Text = "堆叠柱状图（右上方）";
+                basicPieCaption.Text = "饼状图（右下方）";
+                basicMapCaption.Text = "地市分布图（中间上方）";
+            }
+            else if (bossType.SelectedIndex == 13)
+            {
+                simpleBarCaption.Text = "柱状图（左上方）";
+                basicLineChartCaption.Text = "折线图（不展示）";
+                basicScatterCaption.Text = "点状图（不展示）";
+                smoothedLineChartCaption.Text = "曲线图（左下方）";
+                stackBarCaption.Text = "堆叠柱状图（不展示）";
+                basicPieCaption.Text = "饼状图（不展示）";
+                basicMapCaption.Text = "地市分布图（右侧）";
+            }
+            else if (bossType.SelectedIndex == 14)
+            {
+                simpleBarCaption.Text = "柱状图（左侧）";
+                basicLineChartCaption.Text = "折线图（不展示）";
+                basicScatterCaption.Text = "点状图（不展示）";
+                smoothedLineChartCaption.Text = "曲线图（右上方）";
+                stackBarCaption.Text = "堆叠柱状图（右下方）";
+                basicPieCaption.Text = "饼状图（不展示）";
+                basicMapCaption.Text = "地市分布图（中间）";
+            }
         }
 
         private async void PreviewBtn_ClickAsync(object sender, EventArgs e)

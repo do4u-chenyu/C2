@@ -145,7 +145,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
             "样式5（全息星辰大海）",
             "样式6（网民全息档案）",
             "样式7（态势感知）",
-            "样式8（智慧人口分析）"});
+            "样式8（智慧人口分析）",
+            "样式9（智慧公安）",
+            "样式10（星火平台）",
+            "样式11（案件统计）",
+            "样式12（运维态势分析）",
+            "样式13（人口特征分析）",
+            "样式14（警情分析）",
+            "样式15（重点人信息态势）"});
             this.bossType.Location = new System.Drawing.Point(98, 74);
             this.bossType.Name = "bossType";
             this.bossType.Size = new System.Drawing.Size(368, 30);
