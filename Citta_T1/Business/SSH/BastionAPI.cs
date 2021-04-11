@@ -2,9 +2,7 @@
 using C2.SearchToolkit;
 using C2.Utils;
 using Renci.SshNet;
-using Renci.SshNet.Common;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -12,9 +10,10 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
+        private const string CrLf = "\r\n";
         private const int SecondsTimeout = 7;
         private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
-
+        
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
         
@@ -102,7 +101,7 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
-        private bool Cat(String ffp, String dst, int size, ShellStream ssm)
+        private bool Cat(String ffp, String dst, long len, ShellStream ssm)
         {
             try
             {
@@ -120,18 +119,21 @@ namespace C2.Business.SSH
                     return false;
                 }
 
-                long left = Math.Max(size - TgzHead.Length, 0); // 去掉文件头
-                while(left > 0)
+                long bytesLeft = Math.Max(len - TgzHead.Length, 0); // 去掉文件头
+                while(bytesLeft > 0)
                 {
-                    // TODO 处理\r\n => \n问题
+                    // TODO 处理\r\n => \n问题 还是要手工写read函数
                     String line = ssm.ReadLine(Timeout);
                     
                     if (null == line) // 超时
                         break;
 
-                    long real = Math.Min(line.Length, left);
-                    left = left - real;
+                    long bytesRead = Math.Min(line.Length + CrLf.Length, bytesLeft);
+                    bytesLeft = bytesLeft - bytesRead;
 
+                    System.Console.WriteLine(line.ToCharArray());
+                    System.Console.WriteLine(Encoding.UTF8.GetBytes(line));
+                    System.Console.WriteLine(Encoding.Unicode.GetBytes(line));
                     // TODO write
                 }
                 // TODO 校验
@@ -153,14 +155,14 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
-        private int GetRemoteFileSize(String s)
+        private long GetRemoteFileSize(String s)
         {
             String command = String.Format("ls -l {0} | awk '{{print $5}}' | head -n 1", s);
             String content = RunCommand(command, shell);
 
             Match mat = Regex.Match(content, Wrap(@"(\d+)")); 
             if (mat.Success && mat.Groups[1].Success)
-                return ConvertUtil.TryParseInt(mat.Groups[1].Value);
+                return ConvertUtil.TryParseLong(mat.Groups[1].Value);
             return 0;
         }
 
@@ -173,12 +175,12 @@ namespace C2.Business.SSH
                 return false;
 
             String ffp = GetRemoteFilename(s);
-            int size = GetRemoteFileSize(ffp);
-            if (size <= 0)
+            long len = GetRemoteFileSize(ffp);  // 文件有可能超过2G,不能用int
+            if (len <= 0)
                 return false;  // 文件不存在或空文件  
             
             // 已Cat的方式下载文件， 根据lxf的情报, 40M为中位数
-            return Cat(ffp, d, size, shell);
+            return Cat(ffp, d, len, shell);
         }
 
         private bool IsError()

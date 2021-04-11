@@ -25,7 +25,7 @@ namespace C2.Utils
 
         public static int TryParseInt(string value, int defaultValue = 0)
         {
-            if (string.IsNullOrEmpty(value)) return default;
+            if (string.IsNullOrEmpty(value)) return defaultValue;
             try
             {
                 return int.Parse(value);
@@ -35,6 +35,20 @@ namespace C2.Utils
                 return defaultValue;
             }
         }
+
+        public static long TryParseLong(string value, long defaultValue = 0)
+        {
+            if (string.IsNullOrEmpty(value)) return defaultValue;
+            try
+            {
+                return long.Parse(value);
+            }
+            catch
+            {
+                return defaultValue;
+            }
+        }
+
         public static double TryParseDouble(string value)
         {
             if (string.IsNullOrEmpty(value)) return double.NaN;
