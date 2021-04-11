@@ -102,7 +102,7 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
-        private String Cat(String ffp, int size, ShellStream ssm)
+        private bool Cat(String ffp, String dst, int size, ShellStream ssm)
         {
             try
             {
@@ -113,20 +113,33 @@ namespace C2.Business.SSH
                 // 打印分隔符
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
 
-                //int len = 0;
-                //byte[] buffer = new byte[4096];
-                //// 根据分隔符和timeout确定任务输出结束
-                //for (int i = 0; i < size / buffer.Length; i++)
-                //{
-                //    len = ssm.Read(buffer, 0, buffer.Length);
-                //    System.Threading.Thread.Sleep(1000);
-                //}
                 String begin = ssm.Expect(new Regex(TgzHead), Timeout);  
+                if (null == begin)
+                {
+                    task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
+                    return false;
+                }
+
+                long left = Math.Max(size - TgzHead.Length, 0); // 去掉文件头
+                while(left > 0)
+                {
+                    // TODO 处理\r\n => \n问题
+                    String line = ssm.ReadLine(Timeout);
+                    
+                    if (null == line) // 超时
+                        break;
+
+                    long real = Math.Min(line.Length, left);
+                    left = left - real;
+
+                    // TODO write
+                }
+                // TODO 校验
 
             }
             catch { }
 
-            return String.Empty;
+            return false;
         }
 
         private String GetRemoteFilename(String s)
@@ -163,10 +176,9 @@ namespace C2.Business.SSH
             int size = GetRemoteFileSize(ffp);
             if (size <= 0)
                 return false;  // 文件不存在或空文件  
-
-            String ret = Cat(ffp, size, shell);
-
-            return true;
+            
+            // 已Cat的方式下载文件， 根据lxf的情报, 40M为中位数
+            return Cat(ffp, d, size, shell);
         }
 
         private bool IsError()

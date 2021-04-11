@@ -77,14 +77,23 @@ namespace C2.SearchToolkit
 
             this.saveFileDialog.FileName = this.task.TaskName;
             DialogResult ret = this.saveFileDialog.ShowDialog();
-            if (ret == DialogResult.OK)
-            {
-                String dst = this.saveFileDialog.FileName;
+            if (ret != DialogResult.OK)
+                return;
 
-                // TODO ProgressBar 处理
-                using (new GuarderUtil.CursorGuarder())
-                    new BastionAPI(task).Login().DownloadGambleTaskResult(dst);
-            }
+            String done = this.saveFileDialog.FileName;
+            String temp = done + ".download";
+
+            bool succ = false;
+            // TODO ProgressBar 处理
+            using (new GuarderUtil.CursorGuarder())
+                succ = new BastionAPI(task).Login()
+                                           .DownloadGambleTaskResult(temp);
+
+           
+            if (succ) // 成功 临时文件转正
+                FileUtil.FileMove(temp, done);
+            else      // 失败 删除临时文件
+                FileUtil.DeleteFile(temp);
             
         }
 
