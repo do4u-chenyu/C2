@@ -108,6 +108,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Script\readme.txt" />
+    <Content Include="升级更新包发布说明文档.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

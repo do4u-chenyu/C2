@@ -12,7 +12,7 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private const int SecondsTimeout = 5;
+        private const int SecondsTimeout = 7;
         private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
 
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
@@ -36,9 +36,9 @@ namespace C2.Business.SSH
         public BastionAPI(TaskInfo task)
         {
             this.task = task;
-            //this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
-            this.ssh = new SshClient("114.55.248.85", "root", "aliyun.123");
-            this.ssh.ConnectionInfo.Timeout = Timeout; // 10秒超时
+            this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
+            //this.ssh = new SshClient("114.55.248.85", "root", "aliyun.123");
+            this.ssh.ConnectionInfo.Timeout = Timeout; 
         }
 
         public BastionAPI Login()
@@ -181,16 +181,19 @@ namespace C2.Business.SSH
 
             String s = Global.GambleScriptPath;
             String content = FileUtil.FileReadToEnd(s);
-            if (String.IsNullOrEmpty(content) || content.Contains("`")) // 不能有释义字符
-                return this;
 
+
+            // 0)  不能有释义字符 `
             // 1)  \\ \a \b \c \e \f \n \r \t 等转义字符的\全部替换成\\\
             // 2)  " 替换成 \"
             // 3)  换行回车替换成转义字符
-            // 4)  这里的逻辑需要优化,个人感觉当前的实现有隐患
+            // 4)  这里的逻辑需要优化,个人感觉当前的实现有隐患, TODO 根据lxf的建议改成Base64编码
             //     转义字符的安全性，效率，形式美感上都很差
             //     尤其是转义字符，如果目标脚本有rm动作, 转义字符在处理\, /, 空格等符号时如果出问题
             //     运气不好会造成删库
+            if (String.IsNullOrEmpty(content) || content.Contains("`"))
+                return this;
+
             content = Regex.Replace(content, @"\\([\\abcefnrtvx0])", @"\\\$1")
                            .Replace("\"", "\\\"")
                            .Replace("\r", @"\r")
@@ -218,8 +221,8 @@ namespace C2.Business.SSH
                 return String.Empty;
 
             EnterGambleTaskDirectory();
-            //String command = String.Format("python {0}", TargetGambleScript);
-            String command = "sleep 3600";
+            String command = String.Format("python {0}", TargetGambleScript);
+            //String command = "sleep 3600";
             String ret = RunCommand(String.Format("{0} & disown -a", command), shell);
             String pid = GetPID(ret);
             // 未获取到pid，当作模型脚本执行失败
