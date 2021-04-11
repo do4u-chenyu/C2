@@ -2,7 +2,9 @@
 using C2.SearchToolkit;
 using C2.Utils;
 using Renci.SshNet;
+using Renci.SshNet.Common;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -16,7 +18,7 @@ namespace C2.Business.SSH
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
         
-        private static readonly String TgzHead = Encoding.ASCII.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
+        private static readonly String TgzHead = Encoding.UTF8.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
 
         private readonly TaskInfo task;
 
@@ -111,15 +113,15 @@ namespace C2.Business.SSH
                 // 打印分隔符
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
 
-                int len = 0;
-                byte[] buffer = new byte[1024];
-                // 根据分隔符和timeout确定任务输出结束
-                for (int i = 0; i < size / 1024; i++)
-                {
-                    len = ssm.Read(buffer, 0, 1024);
-                    System.Threading.Thread.Sleep(1000);
-                }
-                    
+                //int len = 0;
+                //byte[] buffer = new byte[4096];
+                //// 根据分隔符和timeout确定任务输出结束
+                //for (int i = 0; i < size / buffer.Length; i++)
+                //{
+                //    len = ssm.Read(buffer, 0, buffer.Length);
+                //    System.Threading.Thread.Sleep(1000);
+                //}
+                String begin = ssm.Expect(new Regex(TgzHead), Timeout);  
 
             }
             catch { }
