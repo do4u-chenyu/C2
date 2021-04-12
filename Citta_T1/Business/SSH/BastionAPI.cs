@@ -220,7 +220,7 @@ namespace C2.Business.SSH
             // 这里可能还有超出shell缓冲区的问题
             String command = String.Format("echo -e \"{0}\" > {1}", content, d);
             if (RunCommand(command, shell).IsEmpty())
-                task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, "上传脚本失败");
+                task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
             return this;
         }
 
