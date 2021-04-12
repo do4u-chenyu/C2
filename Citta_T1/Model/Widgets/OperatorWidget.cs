@@ -2,7 +2,6 @@
 using C2.Business.Option;
 using C2.Controls;
 using C2.Core;
-using C2.Dialogs.Base;
 using C2.Dialogs.C2OperatorViews;
 using C2.Utils;
 using System;
@@ -149,29 +148,46 @@ namespace C2.Model.Widgets
         {
             if (Status == OpStatus.Ready || Status  == OpStatus.Done)
             {
-                GenType(this).ShowDialog();
+                switch (OpType) {
+                    case OpType.SqlOperator:
+                        new C2SqlOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.PythonOperator:
+                        new C2PythonOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.AvgOperator:
+                        new C2AvgOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.CustomOperator:
+                        new C2CustomOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.FilterOperator:
+                        new C2FilterOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.FreqOperator:
+                        new C2FreqOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.GroupOperator:
+                        new C2GroupOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.MaxOperator:
+                        new C2MaxOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.MinOperator:
+                        new C2MinOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.RandomOperator:
+                        new C2RandomOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.SortOperator:
+                        new C2SortOperatorView(this).ShowDialog();
+                        break;
+                    case OpType.DataFormatOperator:
+                        new C2DataFormatOperatorView(this).ShowDialog();
+                        break;
+                }
             } 
                 
-        }
-
-        public static C2BaseOperatorView GenType(OperatorWidget operatorWidget)
-        {
-            switch (operatorWidget.OpType)
-            {
-                case OpType.SqlOperator: return new C2SqlOperatorView(operatorWidget);
-                case OpType.PythonOperator: return new C2PythonOperatorView(operatorWidget);
-                case OpType.AvgOperator: return new C2AvgOperatorView(operatorWidget);
-                case OpType.CustomOperator: return new C2CustomOperatorView(operatorWidget);
-                case OpType.FilterOperator: return new C2FilterOperatorView(operatorWidget);
-                case OpType.FreqOperator: return new C2FreqOperatorView(operatorWidget);
-                case OpType.GroupOperator: return new C2GroupOperatorView(operatorWidget);
-                case OpType.MaxOperator: return new C2MaxOperatorView(operatorWidget);
-                case OpType.MinOperator: return new C2MinOperatorView(operatorWidget);
-                case OpType.RandomOperator: return new C2RandomOperatorView(operatorWidget);
-                case OpType.SortOperator: return new C2SortOperatorView(operatorWidget);
-                case OpType.DataFormatOperator: return new C2DataFormatOperatorView(operatorWidget);
-                default: return null;
-            }
         }
         public override void Deserialize(Version documentVersion, XmlElement node)
         {

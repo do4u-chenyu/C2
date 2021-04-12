@@ -234,7 +234,23 @@ namespace C2.Controls.Common
             //TODO 后期加入hive看是否复用同一个配置窗口
             if(OpWidget.DataSourceItem.DataType == DatabaseType.Oracle || OpWidget.DataSourceItem.DataType == DatabaseType.Hive || OpWidget.DataSourceItem.DataType == DatabaseType.Postgre)
                 return new C2SqlOperatorView(OpWidget);
-            return OperatorWidget.GenType(OpWidget);
+
+            switch (OpWidget.OpType)
+            {
+                case OpType.MaxOperator:return new C2MaxOperatorView(OpWidget);
+                case OpType.CustomOperator:return new C2CustomOperatorView(OpWidget);
+                case OpType.MinOperator:return new C2MinOperatorView(OpWidget);
+                case OpType.AvgOperator:return new C2AvgOperatorView(OpWidget);
+                case OpType.DataFormatOperator:return new C2DataFormatOperatorView(OpWidget);
+                case OpType.RandomOperator:return new C2RandomOperatorView(OpWidget);
+                case OpType.FreqOperator:return new C2FreqOperatorView(OpWidget);
+                case OpType.SortOperator:return new C2SortOperatorView(OpWidget);
+                case OpType.FilterOperator:return new C2FilterOperatorView(OpWidget);
+                case OpType.GroupOperator:return new C2GroupOperatorView(OpWidget);
+                case OpType.PythonOperator:return new C2PythonOperatorView(OpWidget);
+                case OpType.SqlOperator:return new C2SqlOperatorView(OpWidget);
+                default:return null;
+            }
         }
 
         private void DataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)

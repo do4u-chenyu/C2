@@ -187,8 +187,7 @@ namespace C2.Utils
             Text   = 04,  
             Hive   = 08,
             Oracle = 16,
-            Postgres = 32,
-            Database = Hive | Oracle | Postgres,
+            Database = Hive | Oracle,
         }
 
         public static Encoding EncodingEnum(string encoding,Encoding defaultEncoding = Encoding.GBK)
