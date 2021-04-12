@@ -94,29 +94,46 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 OpenSelectBossDialog();
         }
 
-        private object[] OpenMapFile(string path, char seperator, int latIndex, int lonIndex)
+        private object[] OpenMapFile(DataItem dataItem, int latIndex, int lonIndex)
         {
-            if (!File.Exists(path))
-            {
-                HelpUtil.ShowMessageBox(HelpUtil.FileNotFoundHelpInfo + ", 文件路径：" + path);
-                return new object[] { String.Empty };
-            }
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
-            String line;
             int lineCounter = 0;
-            using (StreamReader sr = new StreamReader(path, Encoding.Default))
+            if (dataItem.IsDatabase())
             {
-                while ((line = sr.ReadLine()) != null)
+                foreach (var line in BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem).Split(OpUtil.LineSeparator))
                 {
                     if (lineCounter++ == 0)
                         continue;
-                    string[] tempstr = line.Split(seperator);
+                    string[] tempstr = line.Split(dataItem.FileSep);
+                    if (tempstr.Length != 2)
+                        continue;
                     latValues.Add(tempstr[latIndex]);
                     lonValues.Add(tempstr[lonIndex]);
-                    lineCounter += 1;
                 }
             }
+            else
+            {
+                if (!File.Exists(dataItem.FilePath))
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.FileNotFoundHelpInfo + ", 文件路径：" + dataItem.FilePath);
+                    return new object[] { String.Empty };
+                }
+                String line;
+                using (StreamReader sr = new StreamReader(dataItem.FilePath, Encoding.Default))
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (lineCounter++ == 0)
+                            continue;
+                        string[] tempstr = line.Split(dataItem.FileSep);
+                        latValues.Add(tempstr[latIndex]);
+                        lonValues.Add(tempstr[lonIndex]);
+                        lineCounter += 1;
+                    }
+                }
+            }
+
             string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
             List<string> tmpList = new List<string>();
             for (int i = 0; i < latValues.Count; i++)
@@ -126,23 +143,40 @@ namespace C2.IAOLab.WebEngine.Dialogs
             string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
             return new object[] { res };
         }
-        private object[] OpenHeatMapFile(string path, char seperator, int latIndex, int lonIndex, int weightIndex)
+        private object[] OpenHeatMapFile(DataItem dataItem, int latIndex, int lonIndex, int weightIndex)
         {
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
             List<string> weightValues = new List<string>();
-            String line;
             int lineCounter = 0;
-            using (StreamReader sr = new StreamReader(path, Encoding.Default))
+            if (dataItem.IsDatabase())
             {
-                while ((line = sr.ReadLine()) != null)
+                foreach (var line in BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem).Split(OpUtil.LineSeparator))
                 {
                     if (lineCounter++ == 0)
                         continue;
-                    string[] tempstr = line.Split(seperator);
+                    string[] tempstr = line.Split(dataItem.FileSep);
+                    if (tempstr.Length != 3)
+                        continue;
                     latValues.Add(tempstr[latIndex]);
                     lonValues.Add(tempstr[lonIndex]);
                     weightValues.Add(tempstr[weightIndex]);
+                }
+            }
+            else
+            {
+                String line;
+                using (StreamReader sr = new StreamReader(dataItem.FilePath, Encoding.Default))
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (lineCounter++ == 0)
+                            continue;
+                        string[] tempstr = line.Split(dataItem.FileSep);
+                        latValues.Add(tempstr[latIndex]);
+                        lonValues.Add(tempstr[lonIndex]);
+                        weightValues.Add(tempstr[weightIndex]);
+                    }
                 }
             }
             string JSON_OBJ_Format_heat = "\"lng\": \" {0} \", \"lat\": \" {1} \", \"count\": \" {2} \"";
@@ -190,9 +224,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
             foreach (OverlapConfig oc in MapConfig.OverlapConfigList)
             {
                 DataItem di = oc.DataItem;
+                if (di.FileType == OpUtil.ExtType.Database)
+                    BCPBuffer.GetInstance().GetCachePreviewTable(di.DBItem);
                 object[] datas = oc.OverlapType == OverlapType.Heatmap ?
-                    OpenHeatMapFile(di.FilePath, di.FileSep, oc.LatIndex, oc.LngIndex, oc.WeightIndex) :
-                    OpenMapFile(di.FilePath, di.FileSep, oc.LatIndex, oc.LngIndex);
+                    OpenHeatMapFile(di, oc.LatIndex, oc.LngIndex, oc.WeightIndex) :
+                    OpenMapFile(di, oc.LatIndex, oc.LngIndex);
                 if (datas.Length == 0)
                     continue;
                 switch (oc.OverlapType)

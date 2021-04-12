@@ -108,7 +108,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
             else if (hitItem.FileType == OpUtil.ExtType.Database)
                 fileContent = BCPBuffer.GetInstance().GetCachePreviewTable(hitItem.DBItem);
             else
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidDataType);
                 return false;
+            }
             List<string> rows = new List<string>(fileContent.Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
             List<List<string>> lonValues = Utils.FileUtil.GetColumns(indexlon, hitItem, rows, upperLimit);

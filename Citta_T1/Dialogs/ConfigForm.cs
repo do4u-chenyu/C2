@@ -656,7 +656,7 @@ namespace C2.Dialogs
 
         private bool IsValidLongitude()
         {
-            return float.TryParse(this.baiduLatTB.Text, out float lon) && -180 < lon && lon < 0;
+            return float.TryParse(this.baiduLonTB.Text, out float lon) && -180 < lon && lon < 180;
         }
 
         private bool IsValidLatitude()
