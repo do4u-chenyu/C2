@@ -110,7 +110,7 @@
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("宋体", 8F);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label7.Location = new System.Drawing.Point(239, 126);
+            this.label7.Location = new System.Drawing.Point(222, 126);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(11, 11);
             this.label7.TabIndex = 46;
@@ -122,7 +122,7 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("宋体", 8F);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label6.Location = new System.Drawing.Point(239, 83);
+            this.label6.Location = new System.Drawing.Point(222, 83);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(11, 11);
             this.label6.TabIndex = 45;
@@ -134,7 +134,7 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("宋体", 8F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(239, 40);
+            this.label3.Location = new System.Drawing.Point(222, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(11, 11);
             this.label3.TabIndex = 44;
@@ -156,22 +156,22 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(3, 120);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(87, 19);
+            this.label14.Size = new System.Drawing.Size(74, 19);
             this.label14.TabIndex = 7;
-            this.label14.Text = "全文主节点IP";
+            this.label14.Text = "全文主节点";
             // 
             // searchAgentIPTB
             // 
-            this.searchAgentIPTB.Location = new System.Drawing.Point(100, 116);
+            this.searchAgentIPTB.Location = new System.Drawing.Point(81, 116);
             this.searchAgentIPTB.Name = "searchAgentIPTB";
-            this.searchAgentIPTB.Size = new System.Drawing.Size(136, 25);
+            this.searchAgentIPTB.Size = new System.Drawing.Size(137, 25);
             this.searchAgentIPTB.TabIndex = 6;
             this.searchAgentIPTB.Text = "15.0.0.1";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(29, 77);
+            this.label15.Location = new System.Drawing.Point(16, 77);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(61, 19);
             this.label15.TabIndex = 5;
@@ -189,7 +189,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(42, 35);
+            this.label17.Location = new System.Drawing.Point(29, 35);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(48, 19);
             this.label17.TabIndex = 3;
@@ -197,9 +197,9 @@
             // 
             // bastionIPTB
             // 
-            this.bastionIPTB.Location = new System.Drawing.Point(100, 75);
+            this.bastionIPTB.Location = new System.Drawing.Point(81, 75);
             this.bastionIPTB.Name = "bastionIPTB";
-            this.bastionIPTB.Size = new System.Drawing.Size(136, 25);
+            this.bastionIPTB.Size = new System.Drawing.Size(137, 25);
             this.bastionIPTB.TabIndex = 2;
             this.bastionIPTB.Text = "15.0.0.1";
             // 
@@ -213,9 +213,9 @@
             // 
             // usernameTB
             // 
-            this.usernameTB.Location = new System.Drawing.Point(100, 34);
+            this.usernameTB.Location = new System.Drawing.Point(81, 34);
             this.usernameTB.Name = "usernameTB";
-            this.usernameTB.Size = new System.Drawing.Size(136, 25);
+            this.usernameTB.Size = new System.Drawing.Size(137, 25);
             this.usernameTB.TabIndex = 0;
             // 
             // groupBox1
@@ -243,7 +243,7 @@
             this.taskInfoGB.Controls.Add(this.taskStatusLabel);
             this.taskInfoGB.Location = new System.Drawing.Point(316, 24);
             this.taskInfoGB.Name = "taskInfoGB";
-            this.taskInfoGB.Size = new System.Drawing.Size(277, 84);
+            this.taskInfoGB.Size = new System.Drawing.Size(287, 84);
             this.taskInfoGB.TabIndex = 45;
             this.taskInfoGB.TabStop = false;
             this.taskInfoGB.Text = "任务ID：";
@@ -264,7 +264,7 @@
             // taskNameTB
             // 
             this.taskNameTB.Font = new System.Drawing.Font("微软雅黑", 9.75F);
-            this.taskNameTB.Location = new System.Drawing.Point(99, 36);
+            this.taskNameTB.Location = new System.Drawing.Point(81, 36);
             this.taskNameTB.Name = "taskNameTB";
             this.taskNameTB.Size = new System.Drawing.Size(211, 25);
             this.taskNameTB.TabIndex = 0;
@@ -273,7 +273,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 39);
+            this.label5.Location = new System.Drawing.Point(16, 39);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 19);
             this.label5.TabIndex = 43;
@@ -282,7 +282,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 84);
+            this.label1.Location = new System.Drawing.Point(16, 84);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 19);
             this.label1.TabIndex = 42;
@@ -298,7 +298,7 @@
             "涉枪模型",
             "涉黄模型",
             "飞机场模型"});
-            this.taskModelComboBox.Location = new System.Drawing.Point(99, 81);
+            this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);
             this.taskModelComboBox.TabIndex = 41;
@@ -308,7 +308,7 @@
             // 
             this.downloadButton.Enabled = false;
             this.downloadButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.downloadButton.Location = new System.Drawing.Point(527, 127);
+            this.downloadButton.Location = new System.Drawing.Point(535, 126);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(68, 27);
             this.downloadButton.TabIndex = 37;
@@ -320,17 +320,17 @@
             // 
             this.remoteWorkspaceTB.BackColor = System.Drawing.SystemColors.Window;
             this.remoteWorkspaceTB.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.remoteWorkspaceTB.Location = new System.Drawing.Point(99, 128);
+            this.remoteWorkspaceTB.Location = new System.Drawing.Point(81, 128);
             this.remoteWorkspaceTB.Name = "remoteWorkspaceTB";
             this.remoteWorkspaceTB.ReadOnly = true;
-            this.remoteWorkspaceTB.Size = new System.Drawing.Size(408, 25);
+            this.remoteWorkspaceTB.Size = new System.Drawing.Size(448, 25);
             this.remoteWorkspaceTB.TabIndex = 36;
             this.remoteWorkspaceTB.Text = "/tmp/iao/search_toolkit/gamble";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(29, 130);
+            this.label4.Location = new System.Drawing.Point(16, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 19);
             this.label4.TabIndex = 35;
@@ -389,7 +389,7 @@
             this.panelTop.Size = new System.Drawing.Size(609, 169);
             this.panelTop.TabIndex = 2;
             // 
-            // saveFileDialog1
+            // saveFileDialog
             // 
             this.saveFileDialog.FileName = "全文模型结果";
             this.saveFileDialog.Filter = "tgz压缩包 (*.tgz)|*.tgz|tar.gz压缩包|*.tar.gz|zip压缩包|*.zip|所有文件|*.*";
