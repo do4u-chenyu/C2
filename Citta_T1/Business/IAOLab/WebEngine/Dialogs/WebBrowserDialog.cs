@@ -324,13 +324,24 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         AddDataItem(OverlapType.Heatmap, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                 }
-                var configMap = new ConfigForm();
-                string newCenterAndZoom = dialog.drawlontude + ',' + dialog.drawlatude + ',' + configMap.scale;
+                SaveCenterAndZoom();
+                string newCenterAndZoom = dialog.drawlontude + ',' + dialog.drawlatude + ',' + CalculateScale();
                 webBrowser1.Document.InvokeScript("centerAndZoom", new object[] { newCenterAndZoom });
             }
             else
                 return;
         }
+
+        private string CalculateScale()
+        {
+            // Fix bug 0412 导入数据之后不应该出现缩放比变大的情况
+            var configMap = new ConfigForm();
+            if (!int.TryParse(configMap.scaleStr, out int scale))
+                scale = ConfigForm.scalaMax;
+            scale = Math.Min(MapConfig.Zoom, scale);
+            return scale.ToString();
+        }
+
         /// <summary>
         /// 将数据添加到临时数组里
         /// </summary>
@@ -409,6 +420,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             dynamic data = webBrowser1.Document.InvokeScript("eval", new[] {
                 "(function() { return {lat: map.getCenter()[\"lat\"], lng: map.getCenter()[\"lng\"], zoom: map.getZoom()}; })()"
             });
+            if (data == null)
+                return;
             if (data.lat != null)
                 MapConfig.InitLat = (float)data.lat;
             if (data.lng != null)
@@ -569,11 +582,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public MapConfig()
         {
             var configForm = new ConfigForm();
-            if (!float.TryParse(configForm.latude, out this.InitLat))
+            if (!float.TryParse(configForm.latStr, out this.InitLat))
                 this.InitLat = defaultLat;
-            if (!float.TryParse(configForm.lontude, out this.InitLng))
+            if (!float.TryParse(configForm.lonStr, out this.InitLng))
                 this.InitLng = defaultLng;
-            if (!int.TryParse(configForm.scale, out this.Zoom))
+            if (!int.TryParse(configForm.scaleStr, out this.Zoom))
                 this.Zoom = defaultZoom;
             this.MapType = defaultMapType;
             this.OverlapConfigList = new List<OverlapConfig>();

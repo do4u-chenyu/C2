@@ -17,15 +17,15 @@ namespace C2.Dialogs
 {
     public partial class ConfigForm : Form
     {
-
+        public const int scalaMax = 13;
         private static readonly int PythonFFPColumnIndex = 0;
         private static readonly int AliasColumnIndex = 1;
         private static readonly int CheckBoxColumnIndex = 2;
         private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
-        public string latude;
-        public string lontude;
-        public string scale;
+        public string latStr;
+        public string lonStr;
+        public string scaleStr;
         public string baiduVerAPI;
         public string baiduHeatAPI;
         private UpdateProgressBar progressBar;
@@ -45,9 +45,9 @@ namespace C2.Dialogs
                 Client_DownloadFileCompleted = this.Client_DownloadFileCompleted,
                 Client_DownloadProgressChanged = this.Client_DownloadProgressChanged
             };
-            lontude = this.baiduLonTB.Text = Settings.Default.lontude;
-            latude = this.baiduLatTB.Text = Settings.Default.latude;
-            scale = this.baiduScaleTB.Text = Settings.Default.scale;
+            lonStr = this.baiduLonTB.Text = Settings.Default.lontude;
+            latStr = this.baiduLatTB.Text = Settings.Default.latude;
+            scaleStr = this.baiduScaleTB.Text = Settings.Default.scale;
             baiduVerAPI = this.baiduVerAPITB.Text = Settings.Default.baiduVerAPI;
         }
 
@@ -469,7 +469,7 @@ namespace C2.Dialogs
                 }
             }
             if (e.Handled == true)
-                latude = this.baiduLatTB.Text;
+                latStr = this.baiduLatTB.Text;
         }
 
         private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
@@ -499,14 +499,13 @@ namespace C2.Dialogs
                 }
             }
             if (e.Handled == true)
-                lontude = this.baiduLonTB.Text;
+                lonStr = this.baiduLonTB.Text;
         }
 
         private void BaiduGISKeyTB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(e.KeyChar.ToString(), "^([5-9])$") && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
             {
-
                 e.Handled = true;
             }
             else
@@ -514,7 +513,7 @@ namespace C2.Dialogs
                 e.Handled = false;
             }
             if (e.Handled == true)
-                scale = this.baiduScaleTB.Text;
+                scaleStr = this.baiduScaleTB.Text;
 
         }
 
@@ -631,13 +630,42 @@ namespace C2.Dialogs
 
         private void GisMapOKButton_Click(object sender, EventArgs e)
         {
+            if (!IsValidLatitude())
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidLatitude);
+                return;
+            }
+            if (!IsValidLongitude())
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidLongitude);
+                return;
+            }
+            if (!IsValidScale())
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidScaleHelpInfo);
+                return;
+            }            
             Settings.Default.latude = this.baiduLatTB.Text;
             Settings.Default.lontude = this.baiduLonTB.Text;
             Settings.Default.scale = this.baiduScaleTB.Text;
             Settings.Default.baiduVerAPI = this.baiduVerAPITB.Text;
             Settings.Default.Save();
-            WriteFile();
+            UpdateHtmlTemplate();
             this.Close();
+        }
+
+        private bool IsValidLongitude()
+        {
+            return float.TryParse(this.baiduLatTB.Text, out float lon) && -180 < lon && lon < 0;
+        }
+
+        private bool IsValidLatitude()
+        {
+            return float.TryParse(this.baiduLatTB.Text, out float lat) && -90 < lat && lat < 90;
+        }
+        private bool IsValidScale()
+        {
+            return int.TryParse(this.baiduScaleTB.Text, out int scale) && 0 < scale && scale < 13;
         }
 
         //下载进度变化触发事件
@@ -677,7 +705,7 @@ namespace C2.Dialogs
         }
 
 
-        public void WriteFile()
+        public void UpdateHtmlTemplate()
         {
             //---------------------读html模板页面到stringbuilder对象里----
             StringBuilder htmlSb = new StringBuilder();
