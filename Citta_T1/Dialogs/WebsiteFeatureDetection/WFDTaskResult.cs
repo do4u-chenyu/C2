@@ -2,13 +2,14 @@
 using C2.Controls;
 using C2.Core;
 using C2.Utils;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
@@ -77,32 +78,23 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             //列数不对或为空文件，也要重新发起请求
             if (headersAndRows.Item1.Count == 0 || headersAndRows.Item2.Count == 0)
                 return false;
-            TaskInfo.PreviewResults = TransListToWFDResult(headersAndRows.Item2);
+            TaskInfo.PreviewResults = TransListToWFDResult(headersAndRows);
 
             FillDGV();
             return true;
         }
 
-        private List<WFDResult> TransListToWFDResult(List<List<string>> contentList)
+        private List<WFDResult> TransListToWFDResult(Tuple<List<string>, List<List<string>>> headersAndRows)
         {
             List<WFDResult> results = new List<WFDResult>();
-            foreach(List<string> content in contentList)
+
+            List<string> colList = headersAndRows.Item1;
+            foreach(List<string> content in headersAndRows.Item2)
             {
                 if (content.Count < 10)
                     continue;
-                results.Add(new WFDResult
-                {
-                    url = content[0],
-                    cur_url = content[1],
-                    title = content[2],
-                    prediction = content[3],
-                    prediction_ = content[4],
-                    Fraud_label = content[5],
-                    screen_shot = content[6],
-                    login = content[7],
-                    html_content_id = content[8],
-                    html_content = content[9],
-                });
+
+                results.Add(new WFDResult( colList.Zip(content, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v) ));
             }
 
             return results;
@@ -131,10 +123,16 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             try
             {
                 sw = new StreamWriter(resultFilePath);
-                sw.WriteLine(new WFDResult().JoinMember());//将字段拼成表头
-                results = new JavaScriptSerializer().Deserialize<List<WFDResult>>(apiResults);
+                JArray json = JArray.Parse(apiResults);
+                foreach (JObject item in json)
+                {
+                    results.Add(new WFDResult(item.ToObject<Dictionary<string, string>>()));
+                }
+
+                if(results.Count > 0)
+                    sw.WriteLine(results[0].AllCol);//将字段拼成表头
                 foreach (WFDResult result in results)
-                    sw.WriteLine(result.JoinAllContent());
+                    sw.WriteLine(result.AllContent);
             }
             catch { }
             finally
