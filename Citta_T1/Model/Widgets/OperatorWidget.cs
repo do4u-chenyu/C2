@@ -147,13 +147,12 @@ namespace C2.Model.Widgets
         }
         public override void OnDoubleClick(HandledEventArgs e) 
         {
-            if (Status == OpStatus.Ready || Status  == OpStatus.Done)
+            if (Status == OpStatus.Ready || Status == OpStatus.Done)
             {
                 GenType(this).ShowDialog();
-            } 
+            }
                 
         }
-
         public static C2BaseOperatorView GenType(OperatorWidget operatorWidget)
         {
             switch (operatorWidget.OpType)

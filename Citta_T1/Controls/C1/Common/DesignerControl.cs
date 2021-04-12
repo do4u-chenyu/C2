@@ -235,6 +235,7 @@ namespace C2.Controls.Common
             if(OpWidget.DataSourceItem.DataType == DatabaseType.Oracle || OpWidget.DataSourceItem.DataType == DatabaseType.Hive || OpWidget.DataSourceItem.DataType == DatabaseType.Postgre)
                 return new C2SqlOperatorView(OpWidget);
             return OperatorWidget.GenType(OpWidget);
+           
         }
 
         private void DataSourceCombo_SelectedIndexChanged(object sender, System.EventArgs e)
