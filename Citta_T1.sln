@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2UnitTests", "C2Tests\C2Un
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C2Plugins", "C2Plugins", "{347ABCF9-220C-4D65-9170-5689273E2F50}"
 	ProjectSection(SolutionItems) = preProject
-		插件发布说明文档.txt = 插件发布说明文档.txt
+		C2Plugins\插件发布说明文档.txt = C2Plugins\插件发布说明文档.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RookieKnowledgePlugin", "C2Plugins\RookieKnowledgePlugin\RookieKnowledgePlugin.csproj", "{FABFB497-81E5-42DC-82DF-B30D71E030D0}"
