@@ -10,7 +10,6 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private const string CrLf = "\r\n";
         private const int SecondsTimeout = 7;
         private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
         
@@ -122,19 +121,20 @@ namespace C2.Business.SSH
                     return false;
                 }
 
-                byte[] buffer = new byte[1024];
+                int bufferSize = 4096 * 2;
+                byte[] buffer = new byte[bufferSize + 1];
                 Shell shell = new Shell(ssm);
 
                 long bytesLeft = Math.Max(len - TgzHead.Length, 0); // 去掉文件头
                 while(bytesLeft > 0)
                 {
                     // TODO 处理\r\n => \n问题 还是要手工写read函数
-                    int nr_read = shell.Read(buffer, 0, Shell.BufferSize, Timeout);
+                    int bytesRead = shell.Read(buffer, 0, bufferSize, Timeout);
                     
-                    if (nr_read == 0) // 超时
+                    if (bytesRead == 0) // 超时
                         break;
 
-                    long bytesRead = Math.Min(nr_read, bytesLeft);
+                    bytesRead = (int)Math.Min(bytesRead, bytesLeft);
                     bytesLeft = bytesLeft - bytesRead;
 
                     // TODO write
