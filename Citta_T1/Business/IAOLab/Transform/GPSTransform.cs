@@ -44,6 +44,8 @@ namespace C2.IAOLab.Transform
                 double lon = ConvertUtil.TryParseDouble(inputArray[1]);
                 if (double.IsNaN(lat) || double.IsNaN(lon))
                     return wrongInfo;
+                if (lat > 90 || lat < -90 || lon > 180 || lon < -180)
+                    return wrongInfo;
 
                 switch (type)
                 {
@@ -72,7 +74,7 @@ namespace C2.IAOLab.Transform
                 if (result.Count() < 2)
                     return string.Format("{0}:{1}", input, wrongInfo);
                 double deviation = Distance(lat, lon, result[0], result[1]);
-                return string.Format("{0} 输出坐标:{1:N5} {2:N5}，偏差:{3:N5}米\n", input, result[0], result[1], deviation);
+                return string.Format("{0}\t输出坐标:{1:N5} {2:N5}，偏差:{3:N5}米\n", input, result[0], result[1], deviation);
             }
         }
         public string ComputeDistance()
@@ -87,7 +89,7 @@ namespace C2.IAOLab.Transform
             bool illegalNum = double.IsNaN(lat) || double.IsNaN(lon) || double.IsNaN(blat) || double.IsNaN(blon);
             if (illegalNum)
                 return wrongInfo;
-            return string.Format("{0} 距离:{1:N5}米\n", input, Distance(lat, lon, blat, blon));
+            return string.Format("{0}\t距离:{1:N5}米\n", input, Distance(lat, lon, blat, blon));
         }
         #region 6种坐标转换方法
 

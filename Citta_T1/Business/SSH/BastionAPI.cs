@@ -57,7 +57,10 @@ namespace C2.Business.SSH
             }
             catch (Exception ex)
             {
-                task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, ex.Message);
+                task.LastErrorMsg = String.Format("登陆【{0}】成功，跳转全文机【{1}】失败：{2}",
+                    ssh.ConnectionInfo.Host, 
+                    task.SearchAgentIP, 
+                    ex.Message);
             }
                 
             return this;
@@ -67,7 +70,7 @@ namespace C2.Business.SSH
             if (IsError())
                 return;
 
-            task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, "未能跳转全文机");
+            task.LastErrorMsg = String.Format("登陆堡垒机【{0}】成功，但未能跳转全文机【{1}】", task.BastionIP, task.SearchAgentIP);
             shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
             // 等待目标机准备好
             _ = shell.ReadLine(Timeout);
@@ -217,7 +220,7 @@ namespace C2.Business.SSH
             // 这里可能还有超出shell缓冲区的问题
             String command = String.Format("echo -e \"{0}\" > {1}", content, d);
             if (RunCommand(command, shell).IsEmpty())
-                task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, "上传脚本失败");
+                task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
             return this;
         }
 

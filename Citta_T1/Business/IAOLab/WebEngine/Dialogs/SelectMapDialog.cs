@@ -51,6 +51,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             DataItems = dataItems;
             foreach (DataItem dataItem in DataItems)
             {
+                if (dataItem.FileType == OpUtil.ExtType.Database)
+                    BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem);
                 this.datasourceComboBox.Items.Add(dataItem.FileName);
             }
         }
@@ -101,30 +103,47 @@ namespace C2.IAOLab.WebEngine.Dialogs
             string fileContent;
             if (hitItem.FileType == OpUtil.ExtType.Excel)
                 fileContent = BCPBuffer.GetInstance().GetCachePreviewExcelContent(FilePath);
-            else
+            else if (hitItem.FileType == OpUtil.ExtType.Text)
                 fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(FilePath, FileEncoding);
+            else if (hitItem.FileType == OpUtil.ExtType.Database)
+                fileContent = BCPBuffer.GetInstance().GetCachePreviewTable(hitItem.DBItem);
+            else
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidDataType);
+                return false;
+            }
             List<string> rows = new List<string>(fileContent.Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
             List<List<string>> lonValues = Utils.FileUtil.GetColumns(indexlon, hitItem, rows, upperLimit);
             List<List<string>> latValues = Utils.FileUtil.GetColumns(indexlat, hitItem, rows, upperLimit);
             List<List<string>> countValues = Utils.FileUtil.GetColumns(indexcount, hitItem, rows, upperLimit);
 
+            if (latValues.Count == 0 || lonValues.Count == 0)
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidInputMapInfo);
+                return false;
+            }
             Random rm = new Random();
             drawlontude = lonValues[0][rm.Next(lonValues.Count)];
             drawlatude = latValues[0][rm.Next(latValues.Count)];
-            if (!TudeLimit())
+            if (!InvalidLonValues(lonValues))
             {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidLongitude);
                 return false;
             }
-            if (latValues.Count == 0)
+            if (!InvalidLatValues(latValues))
             {
-                HelpUtil.ShowMessageBox("文件内容为空");
-                Close();
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidLatitude);
+                return false;
+            }
+            if (!InvalidCountValues(countValues))
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidCount);
                 return false;
             }
             if (latValues[0].Count != lonValues[0].Count || latValues[0].Count != lonValues[0].Count)
             {
-                HelpUtil.ShowMessageBox("输入维度不一致");
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidDimension);
                 return false;
             }
             List<string> tmpList = new List<string>();
@@ -133,7 +152,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             {
                 if (countValues.Count == 0 || latValues[0].Count != countValues[0].Count || lonValues[0].Count != countValues[0].Count)
                 {
-                    HelpUtil.ShowMessageBox("请设置权重");
+                    HelpUtil.ShowMessageBox(HelpUtil.InvalidCount);
                     return false;
                 }
                 string JSON_OBJ_Format_heat = "\"lng\": \" {0} \", \"lat\": \" {1} \", \"count\": \" {2} \"";
@@ -159,28 +178,40 @@ namespace C2.IAOLab.WebEngine.Dialogs
             return base.OnOKButtonClick();
         }
 
-        private bool TudeLimit()
+        private bool InvalidCountValues(List<List<string>> countValues)
         {
-            try
+            if (countValues.Count == 0)
+                return true;
+            foreach (string count in countValues[0])
             {
-                if (double.Parse(drawlontude) > 180 || double.Parse(drawlontude) < -180)
-                {
-                    HelpUtil.ShowMessageBox("请重新输入正确范围的经度！");
+                if (!float.TryParse(count, out float result) || result < 0)
                     return false;
-                }
-                else if (double.Parse(drawlatude) > 90 || double.Parse(drawlatude) < -90)
-                {
-                    HelpUtil.ShowMessageBox("请重新输入正确范围的纬度！");
-                    return false;
-                }
-                else
-                    return true;
             }
-            catch {
-                HelpUtil.ShowMessageBox("请输入正确经纬度！");
+            return true;
+        }
+
+        private bool InvalidLatValues(List<List<string>> latValues)
+        {
+            if (latValues.Count == 0)
                 return false;
+            foreach (string latStr in latValues[0])
+            {
+                if (!float.TryParse(latStr, out float result) || result < -90 && result > 90)
+                    return false;
             }
-            
+            return true;
+        }
+
+        private bool InvalidLonValues(List<List<string>> lonValues)
+        {
+            if (lonValues.Count == 0)
+                return false;
+            foreach(string lonStr in lonValues[0])
+            {
+                if (!float.TryParse(lonStr, out float result) || result < -180 && result > 180)
+                    return false;
+            }
+            return true;
         }
 
         private bool OptionNotReady()

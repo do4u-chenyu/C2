@@ -94,32 +94,46 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 OpenSelectBossDialog();
         }
 
-        private object[] OpenMapFile(string path, char seperator, int latIndex, int lonIndex)
+        private object[] OpenMapFile(DataItem dataItem, int latIndex, int lonIndex)
         {
-            if (!File.Exists(path))
-            {
-                HelpUtil.ShowMessageBox(HelpUtil.FileNotFoundHelpInfo + ", 文件路径：" + path);
-                return new object[] { String.Empty };
-            }
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
-            String line;
             int lineCounter = 0;
-            using (StreamReader sr = new StreamReader(path, Encoding.Default))
+            if (dataItem.IsDatabase())
             {
-                while ((line = sr.ReadLine()) != null)
+                foreach (var line in BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem).Split(OpUtil.LineSeparator))
                 {
                     if (lineCounter++ == 0)
                         continue;
-                    string[] tempstr = line.Split(seperator);
-                    for (int i = 0; i < tempstr.Length; i++)
-                    {
-                        latValues.Add(tempstr[latIndex]);
-                        lonValues.Add(tempstr[lonIndex]);
-                    }
-                    lineCounter += 1;
+                    string[] tempstr = line.Split(dataItem.FileSep);
+                    if (tempstr.Length != 2)
+                        continue;
+                    latValues.Add(tempstr[latIndex]);
+                    lonValues.Add(tempstr[lonIndex]);
                 }
             }
+            else
+            {
+                if (!File.Exists(dataItem.FilePath))
+                {
+                    HelpUtil.ShowMessageBox(HelpUtil.FileNotFoundHelpInfo + ", 文件路径：" + dataItem.FilePath);
+                    return new object[] { String.Empty };
+                }
+                String line;
+                using (StreamReader sr = new StreamReader(dataItem.FilePath, Encoding.Default))
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (lineCounter++ == 0)
+                            continue;
+                        string[] tempstr = line.Split(dataItem.FileSep);
+                        latValues.Add(tempstr[latIndex]);
+                        lonValues.Add(tempstr[lonIndex]);
+                        lineCounter += 1;
+                    }
+                }
+            }
+
             string JSON_OBJ_Format = "\"lng\": \" {0} \", \"lat\": \" {1} \"";
             List<string> tmpList = new List<string>();
             for (int i = 0; i < latValues.Count; i++)
@@ -129,22 +143,36 @@ namespace C2.IAOLab.WebEngine.Dialogs
             string res = '[' + string.Join(",", tmpList.ToArray()) + ']';
             return new object[] { res };
         }
-        private object[] OpenHeatMapFile(string path, char seperator, int latIndex, int lonIndex, int weightIndex)
+        private object[] OpenHeatMapFile(DataItem dataItem, int latIndex, int lonIndex, int weightIndex)
         {
             List<string> latValues = new List<string>();
             List<string> lonValues = new List<string>();
             List<string> weightValues = new List<string>();
-            String line;
             int lineCounter = 0;
-            using (StreamReader sr = new StreamReader(path, Encoding.Default))
+            if (dataItem.IsDatabase())
             {
-                while ((line = sr.ReadLine()) != null)
+                foreach (var line in BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem).Split(OpUtil.LineSeparator))
                 {
                     if (lineCounter++ == 0)
                         continue;
-                    string[] tempstr = line.Split(seperator);
-                    for (int i = 0; i < tempstr.Length; i++)
+                    string[] tempstr = line.Split(dataItem.FileSep);
+                    if (tempstr.Length != 3)
+                        continue;
+                    latValues.Add(tempstr[latIndex]);
+                    lonValues.Add(tempstr[lonIndex]);
+                    weightValues.Add(tempstr[weightIndex]);
+                }
+            }
+            else
+            {
+                String line;
+                using (StreamReader sr = new StreamReader(dataItem.FilePath, Encoding.Default))
+                {
+                    while ((line = sr.ReadLine()) != null)
                     {
+                        if (lineCounter++ == 0)
+                            continue;
+                        string[] tempstr = line.Split(dataItem.FileSep);
                         latValues.Add(tempstr[latIndex]);
                         lonValues.Add(tempstr[lonIndex]);
                         weightValues.Add(tempstr[weightIndex]);
@@ -196,9 +224,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
             foreach (OverlapConfig oc in MapConfig.OverlapConfigList)
             {
                 DataItem di = oc.DataItem;
+                if (di.FileType == OpUtil.ExtType.Database)
+                    BCPBuffer.GetInstance().GetCachePreviewTable(di.DBItem);
                 object[] datas = oc.OverlapType == OverlapType.Heatmap ?
-                    OpenHeatMapFile(di.FilePath, di.FileSep, oc.LatIndex, oc.LngIndex, oc.WeightIndex) :
-                    OpenMapFile(di.FilePath, di.FileSep, oc.LatIndex, oc.LngIndex);
+                    OpenHeatMapFile(di, oc.LatIndex, oc.LngIndex, oc.WeightIndex) :
+                    OpenMapFile(di, oc.LatIndex, oc.LngIndex);
                 if (datas.Length == 0)
                     continue;
                 switch (oc.OverlapType)
@@ -324,13 +354,24 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         AddDataItem(OverlapType.Heatmap, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                 }
-                var configMap = new ConfigForm();
-                string newCenterAndZoom = dialog.drawlontude + ',' + dialog.drawlatude + ',' + configMap.scale;
+                SaveCenterAndZoom();
+                string newCenterAndZoom = dialog.drawlontude + ',' + dialog.drawlatude + ',' + CalculateScale();
                 webBrowser1.Document.InvokeScript("centerAndZoom", new object[] { newCenterAndZoom });
             }
             else
                 return;
         }
+
+        private string CalculateScale()
+        {
+            // Fix bug 0412 导入数据之后不应该出现缩放比变大的情况
+            var configMap = new ConfigForm();
+            if (!int.TryParse(configMap.scaleStr, out int scale))
+                scale = ConfigForm.scalaMax;
+            scale = Math.Min(MapConfig.Zoom, scale);
+            return scale.ToString();
+        }
+
         /// <summary>
         /// 将数据添加到临时数组里
         /// </summary>
@@ -361,6 +402,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 ShowSourceCodeMap();
                 MapConfig.MapType = MapType.SourceCodeMap;
                 LoadSourceCodeMapByConfig();
+                this.RunButton_Click(this, EventArgs.Empty);
             }
             else
             {
@@ -409,6 +451,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             dynamic data = webBrowser1.Document.InvokeScript("eval", new[] {
                 "(function() { return {lat: map.getCenter()[\"lat\"], lng: map.getCenter()[\"lng\"], zoom: map.getZoom()}; })()"
             });
+            if (data == null)
+                return;
             if (data.lat != null)
                 MapConfig.InitLat = (float)data.lat;
             if (data.lng != null)
@@ -569,11 +613,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public MapConfig()
         {
             var configForm = new ConfigForm();
-            if (!float.TryParse(configForm.latude, out this.InitLat))
+            if (!float.TryParse(configForm.latStr, out this.InitLat))
                 this.InitLat = defaultLat;
-            if (!float.TryParse(configForm.lontude, out this.InitLng))
+            if (!float.TryParse(configForm.lonStr, out this.InitLng))
                 this.InitLng = defaultLng;
-            if (!int.TryParse(configForm.scale, out this.Zoom))
+            if (!int.TryParse(configForm.scaleStr, out this.Zoom))
                 this.Zoom = defaultZoom;
             this.MapType = defaultMapType;
             this.OverlapConfigList = new List<OverlapConfig>();
