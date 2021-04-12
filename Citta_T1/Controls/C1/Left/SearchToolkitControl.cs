@@ -24,14 +24,15 @@ namespace C2.Controls.C1.Left
             if (task.IsEmpty())
                 return;
 
-            String message = String.Format("创建全文任务【{0}】 失败：{1}", task.TaskName, task.LastErrorMsg);
-            bool succ = taskManager.RunTask(task);
-            if (succ)
+            string message;
+            if (taskManager.RunTask(task))
             {
                 AddInnerButton(new SearchToolkitButton(task));
                 message = String.Format("创建全文任务【{0}】 成功", task.TaskName);
             }
-                
+            else
+                message = String.Format("创建全文任务【{0}】 失败：{1}", task.TaskName, task.LastErrorMsg);
+
             HelpUtil.ShowMessageBox(message);
         }
 
