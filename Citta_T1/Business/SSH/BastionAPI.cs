@@ -122,13 +122,14 @@ namespace C2.Business.SSH
                     return false;
                 }
 
+                byte[] buffer = new byte[1024];
                 Shell shell = new Shell(ssm);
 
                 long bytesLeft = Math.Max(len - TgzHead.Length, 0); // 去掉文件头
                 while(bytesLeft > 0)
                 {
                     // TODO 处理\r\n => \n问题 还是要手工写read函数
-                    int nr_read = shell.Read((int)Math.Min(bytesLeft, Shell.BufferSize), Timeout);
+                    int nr_read = shell.Read(buffer, 0, Shell.BufferSize, Timeout);
                     
                     if (nr_read == 0) // 超时
                         break;
