@@ -154,6 +154,7 @@
             this.Controls.Add(this.lon);
             this.Controls.Add(this.mapType);
             this.Controls.Add(this.datasource);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SelectMapDialog";
             this.Text = "配置数据源";
             this.Controls.SetChildIndex(this.datasource, 0);
