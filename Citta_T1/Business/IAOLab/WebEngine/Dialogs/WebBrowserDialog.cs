@@ -112,11 +112,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     if (lineCounter++ == 0)
                         continue;
                     string[] tempstr = line.Split(seperator);
-                    for (int i = 0; i < tempstr.Length; i++)
-                    {
-                        latValues.Add(tempstr[latIndex]);
-                        lonValues.Add(tempstr[lonIndex]);
-                    }
+                    latValues.Add(tempstr[latIndex]);
+                    lonValues.Add(tempstr[lonIndex]);
                     lineCounter += 1;
                 }
             }
@@ -143,12 +140,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     if (lineCounter++ == 0)
                         continue;
                     string[] tempstr = line.Split(seperator);
-                    for (int i = 0; i < tempstr.Length; i++)
-                    {
-                        latValues.Add(tempstr[latIndex]);
-                        lonValues.Add(tempstr[lonIndex]);
-                        weightValues.Add(tempstr[weightIndex]);
-                    }
+                    latValues.Add(tempstr[latIndex]);
+                    lonValues.Add(tempstr[lonIndex]);
+                    weightValues.Add(tempstr[weightIndex]);
                 }
             }
             string JSON_OBJ_Format_heat = "\"lng\": \" {0} \", \"lat\": \" {1} \", \"count\": \" {2} \"";
@@ -372,6 +366,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 ShowSourceCodeMap();
                 MapConfig.MapType = MapType.SourceCodeMap;
                 LoadSourceCodeMapByConfig();
+                this.RunButton_Click(this, EventArgs.Empty);
             }
             else
             {
