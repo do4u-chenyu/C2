@@ -11,8 +11,8 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private const byte CR = 0x13;
-        private const byte NL = 0x10;
+        private const byte CR = 13;
+        private const byte NL = 10;
 
         private const int M40 = 1024 * 1024 * 40;
         private const int K2 = 4096 * 2;
@@ -29,7 +29,7 @@ namespace C2.Business.SSH
 
         private readonly TaskInfo task;
 
-        private SshClient ssh;
+        private readonly SshClient ssh;
         private ShellStream shell;
 
         private bool downloadCancel = false;
