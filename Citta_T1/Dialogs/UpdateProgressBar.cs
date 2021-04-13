@@ -1,13 +1,4 @@
-﻿using C2.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace C2.Dialogs
 {
@@ -29,7 +20,7 @@ namespace C2.Dialogs
         {
             if (ProgressPercentage.Equals("100%"))
                 return;
-            DialogResult result = MessageBox.Show("下载未完成，确认结束当前更新任务","下载提示",MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("下载未完成，确认结束当前更新任务", "下载提示", MessageBoxButtons.YesNo);
             if (result == DialogResult.No)
                 e.Cancel = true;                     
         }

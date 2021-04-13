@@ -907,7 +907,8 @@ namespace C2.Properties {
         ///		&lt;item name=&quot;Show Line Arrow&quot;&gt;Show Line Arrow Cap&lt;/item&gt;
         ///		&lt;item name=&quot;Key_Add&quot;&gt;+&lt;/item&gt;
         ///		&lt;item name=&quot;Key_Subtract&quot;&gt;-&lt;/item&gt;
-        ///		&lt;item name=&quot;Key_Multiply&quot;&gt;*&lt;/ [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;item name=&quot;Key_Multiply&quot;&gt;*&lt;/item&gt;
+        ///		&lt;item na [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string en_US {
             get {
@@ -1233,7 +1234,8 @@ namespace C2.Properties {
         ///            }
         ///		    .clsTextBox 
         ///		    {
-        ///		       [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		        width:100%;
+        ///		  [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string html_content {
             get {
@@ -2339,7 +2341,7 @@ namespace C2.Properties {
         ///    &lt;style id=&quot;4le4de3fb56eob9dv2k5uds322&quot; name=&quot;&quot; type=&quot;topic&quot;&gt;
         ///      &lt;topic-properties border-line-color=&quot;#558ED5&quot; border-line-width=&quot;3pt&quot; fo:font-family=&quot;Microsoft YaHei&quot; line-class=&quot;org.xmind.branchConnection.curve&quot; line-color=&quot;#558ED5&quot; line-width=&quot;1pt&quot;/&gt;
         ///    &lt;/style&gt;
-        ///    &lt;style id=&quot;2prve [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    &lt;style id=&quot;2prve9grghbn [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string styles {
             get {
@@ -2446,7 +2448,7 @@ namespace C2.Properties {
         ///			&lt;select_color&gt;#284907&lt;/select_color&gt;
         ///			&lt;hover_color&gt;#284907&lt;/hover_color&gt;
         ///			&lt;root_back_color&gt;#363942&lt;/root_back_color&gt;
-        ///			&lt;root_fore_color&gt;#F2F0 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///			&lt;root_fore_color&gt;#F2F0E4&lt;/root_fore [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string themes {
             get {
@@ -2628,7 +2630,7 @@ namespace C2.Properties {
         ///		&lt;hover_color&gt;#800000&lt;/hover_color&gt;
         ///		&lt;root_back_color&gt;#800000&lt;/root_back_color&gt;
         ///		&lt;root_fore_color&gt;#E1E0D2&lt;/root_fore_color&gt;
-        ///		&lt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;root_border_c [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string windows_themes {
             get {
@@ -2839,7 +2841,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 思维导图 {
             get {
@@ -2884,7 +2887,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 树状图 {
             get {
@@ -2919,7 +2923,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 空模板 {
             get {
@@ -2954,7 +2959,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 组织架构图 {
             get {
@@ -2989,7 +2995,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 逻辑图 {
             get {

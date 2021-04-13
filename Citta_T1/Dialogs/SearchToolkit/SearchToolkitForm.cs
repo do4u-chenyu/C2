@@ -1,4 +1,5 @@
 ﻿using C2.Business.SSH;
+using C2.Dialogs;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -80,21 +81,21 @@ namespace C2.SearchToolkit
             if (ret != DialogResult.OK)
                 return;
 
-            String done = this.saveFileDialog.FileName;
-            String temp = done + ".download";
 
-            bool succ = false;
+            String ffp = this.saveFileDialog.FileName;
             // TODO ProgressBar 处理
-            using (new GuarderUtil.CursorGuarder())
-                succ = new BastionAPI(task).Login()
-                                           .DownloadGambleTaskResult(temp);
+            BastionDownloadProgressBar progressBar = new BastionDownloadProgressBar(task, ffp);
+            progressBar.Status = "下载中";
 
-           
-            if (succ) // 成功 临时文件转正
-                FileUtil.FileMove(temp, done);
-            else      // 失败 删除临时文件
-                FileUtil.DeleteFile(temp);
-            
+            using (GuarderUtil.WaitCursor)
+                progressBar.Download();
+
+            //progressBar.ShowDialog();
+        }
+
+        private void ProgressBar_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
