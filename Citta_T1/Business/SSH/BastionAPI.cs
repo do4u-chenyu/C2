@@ -32,6 +32,8 @@ namespace C2.Business.SSH
         private SshClient ssh;
         private ShellStream shell;
 
+        private bool downloadCancel = false;
+
         private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
         private String GambleTaskDirectory { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.TaskName, task.TaskCreateTime); }
@@ -203,7 +205,7 @@ namespace C2.Business.SSH
 
         public void StopDownloadAsync()
         {
-
+            downloadCancel = true;
         }
 
         public bool DownloadGambleTaskResult(String d)
