@@ -22,11 +22,14 @@ namespace C2.SearchToolkit
         {
             BastionAPI api = new BastionAPI(task);
             using (GuarderUtil.WaitCursor)
+            {
                 task.PID = api.Login()
                               .DeleteGambleTaskDirectory()
                               .CreateGambleTaskDirectory()
                               .UploadGambleScript()
                               .RunGambleTask();
+            }
+
         
             if (task.PID == String.Empty)
                 return false;
