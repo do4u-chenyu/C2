@@ -132,6 +132,7 @@ namespace C2.Business.SSH
                     return false;
                 }
 
+                // 根据lxf的情报, 40M 为中位数
                 int bufferSize = fileLength > M40 ? K512 : K2;  // 40M 以上的文件用大缓存，减少进程切换的消耗   
                 byte[] buffer = new byte[bufferSize + 1]; // 预留一个空白位用来存储预读字节
 
@@ -227,7 +228,6 @@ namespace C2.Business.SSH
                 return false; 
             }
 
-            // Cat的方式下载文件， 根据lxf的情报, 40M 为中位数
             bool ret = false;
             try
             {
@@ -256,13 +256,12 @@ namespace C2.Business.SSH
             int curr = 0; 
             int head = 0;
 
-
             if (count < 2)  // 不足2个字节,不可能含有CRNL
             {
                 fs.Write(buffer, head, curr + 1 - head);
                 return real;
             }
-   
+
             do
             {
                 // 找到 下一个 /r/n
@@ -356,7 +355,7 @@ namespace C2.Business.SSH
         {
             if (Oops()) return this;
             // 删除 临时目录
-            if (IsSafe(GambleTaskDirectory))
+            if (IsSafePath(GambleTaskDirectory))
                 RunCommand(String.Format("rm -rf {0};", GambleTaskDirectory), shell);
             return this;
         }
@@ -389,10 +388,10 @@ namespace C2.Business.SSH
             return Math.Abs(ts.TotalHours) >= 24 * 3;
         }
 
-        private bool IsSafe(String v)
+        private bool IsSafePath(String v)
         {
-            // 在服务器上删东西 尽量严格, 尤其不能有"空格/"或"空格/空格"
-            return v.StartsWith("/tmp/iao/search_toolkit/") && !Regex.IsMatch(v, @"\s");
+            // 在服务器上删东西 尽量严格, 尤其不能有"空格/"，"/空格" 或 "空格/空格"
+            return v.StartsWith(TaskInfo.SearchWorkspace) && !Regex.IsMatch(v, @"\s");
         }
 
         public BastionAPI KillGambleTask()
