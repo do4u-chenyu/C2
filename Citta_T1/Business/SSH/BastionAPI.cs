@@ -3,6 +3,7 @@ using C2.SearchToolkit;
 using C2.Utils;
 using Renci.SshNet;
 using System;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -10,7 +11,13 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private const int SecondsTimeout = 7;
+        private const byte CR = 0x13;
+        private const int M40 = 1024 * 1024 * 40;
+        private const int K2 = 4096 * 2;
+        private const int K512 = 1024 * 512;
+        
+
+        private const int SecondsTimeout = 10;
         private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
@@ -103,8 +110,8 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
-        private bool Cat(String ffp, String dst, long len, ShellStream ssm)
-        {
+        private bool Cat(String ffp, StreamWriter sw, long fileLength, ShellStream ssm)
+        {              
             try
             {
                 // 清理缓存
@@ -121,29 +128,52 @@ namespace C2.Business.SSH
                     return false;
                 }
 
-                int bufferSize = 4096 * 2;
-                byte[] buffer = new byte[bufferSize + 1];
+                int bufferSize = fileLength > M40 ? K512 : K2;  // 40M 以上的文件用大缓存，减少进程切换的消耗   
+                byte[] buffer = new byte[bufferSize + 1]; // 预留一个空白位用来存储预读字节
+
                 Shell shell = new Shell(ssm);
+                long left = fileLength - TgzHead.Length;  // 去掉文件头
+                int offset = 0;                           // 缓存起始位置
 
-                long bytesLeft = Math.Max(len - TgzHead.Length, 0); // 去掉文件头
-                while(bytesLeft > 0)
+                while (left > 0)
                 {
-                    // TODO 处理\r\n => \n问题 还是要手工写read函数
-                    int bytesRead = shell.Read(buffer, 0, bufferSize, Timeout);
-                    
+                    int bytesRead = shell.Read(buffer, offset, bufferSize, Timeout);
+                    offset = 0; // 读完一次, 起始位置复位
+
                     if (bytesRead == 0) // 超时
+                    {
+                        task.LastErrorMsg = String.Format("任务【{0}】下载失败：网络超时", task.TaskName);
                         break;
+                    }
+                    // 策略:
+                    // 0) cat 回传时，会把字节流的NL全部替换成CRNL,需要再替换回来
+                    // 1) 最后一个字节不是CR，替换CRNL
+                    // 2) 新字节不是CR,将新字符追加buffer位，替换CRNL
+                    // 3) 最后一个字节是CR，  再读一个字节, 新字节还是CR, 先替换CRNL，然后将CR作为buffer第一个字节，继续循环
 
-                    bytesRead = (int)Math.Min(bytesRead, bytesLeft);
-                    bytesLeft = bytesLeft - bytesRead;
-
-                    // TODO write
+                    if (buffer[bytesRead - 1] != CR)  // 情况1
+                    {
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead, sw), 0);
+                        continue;
+                    }
+  
+                    byte one = 0;
+                    if (!shell.ReadByte(ref one))
+                        break;
+                        
+                    if (one != CR)  // 情况2
+                    {
+                        buffer[bytesRead] = one;
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead + 1, sw), 0);
+                    }
+                    else            // 情况3
+                    {
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead, sw), 0);
+                        buffer[offset++] = one;
+                    }
                 }
-                // TODO 校验
-
             }
             catch { }
-
             return false;
         }
 
@@ -180,10 +210,33 @@ namespace C2.Business.SSH
             String ffp = GetRemoteFilename(s);
             long len = GetRemoteFileSize(ffp);  // 文件有可能超过2G,不能用int
             if (len <= 0)
-                return false;  // 文件不存在或空文件  
-            
-            // 已Cat的方式下载文件， 根据lxf的情报, 40M为中位数
-            return Cat(ffp, d, len, shell);
+            {
+                task.LastErrorMsg = String.Format("任务【{0}】: 文件不存在或空文件", task.TaskName);
+                return false; 
+            }
+
+            // Cat的方式下载文件， 根据lxf的情报, 40M 为中位数
+            bool ret = false;
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(d))
+                    ret = Cat(ffp, sw, len, shell);
+            } 
+            catch (Exception ex)
+            {
+                task.LastErrorMsg = ex.Message;
+                ret = false;
+            }
+
+            return ret;
+        }
+
+        private int ReplaceCRNLWrite(byte[] buffer, int offset, int count, StreamWriter sw)
+        {
+            count = Math.Min(buffer.Length, count); // 保险一下，下载错误的文件比程序崩强
+            int real = count;
+            //sw.Write(buffer,)
+            return count;
         }
 
         private bool IsError()
