@@ -300,6 +300,9 @@
     <Compile Include="Business\Database\HiveDAOImpl.cs" />
     <Compile Include="Business\Database\OracleDAOImpl.cs" />
     <Compile Include="Business\Database\PostgreDAOImpl.cs" />
+    <Compile Include="Dialogs\BastionDownloadProgressBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\IAOLab\BigAPKForm.cs">
       <SubType>Form</SubType>
     </Compile>
