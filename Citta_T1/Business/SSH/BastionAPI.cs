@@ -201,6 +201,11 @@ namespace C2.Business.SSH
             return 0;
         }
 
+        public void StopDownloadAsync()
+        {
+
+        }
+
         public bool DownloadGambleTaskResult(String d)
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
