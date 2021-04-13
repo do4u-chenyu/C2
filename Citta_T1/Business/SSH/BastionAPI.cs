@@ -268,7 +268,7 @@ namespace C2.Business.SSH
                 while (curr + 1 < count && !IsCRNL(buffer, curr))
                     curr++;
                 // 没找到, 直接到结尾处,退出
-                if (curr + 1 < count) 
+                if (curr + 1 >= count) 
                 {
                     fs.Write(buffer, head, curr + 1 - head);
                     return real += curr + 1 - head;
