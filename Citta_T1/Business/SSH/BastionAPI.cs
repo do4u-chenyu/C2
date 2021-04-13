@@ -272,14 +272,14 @@ namespace C2.Business.SSH
                 // 没找到, 直接到结尾处,退出
                 if (curr + 1 >= count) 
                 {
-                    fs.Write(buffer, head, curr + 1 - head);
-                    return real += curr + 1 - head;
+                    fs.Write(buffer, head, curr + 1 - head + 1);
+                    return real += curr + 1 - head + 1;
                 }
                 // 找到CRNL
                 buffer[curr] = NL;
-                fs.Write(buffer, head, curr - head);
+                fs.Write(buffer, head, curr - head + 1);
 
-                real += curr - head;
+                real += curr - head + 1;
                 head = ++curr;      // 游标置于当前位置
            
             } while (curr + 1 < count); 
