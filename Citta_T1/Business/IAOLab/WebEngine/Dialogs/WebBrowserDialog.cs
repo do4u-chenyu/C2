@@ -363,24 +363,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
             else
                 return;
         }
-
-        private string CalculateScale()
-        {
-            // Fix bug 0412 导入数据之后不应该出现缩放比变大的情况
-            var configMap = new ConfigForm();
-            if (!int.TryParse(configMap.scaleStr, out int scale))
-                scale = ConfigForm.scalaMax;
-            scale = Math.Min(MapConfig.Zoom, scale);
-            return scale.ToString();
-        }
         private string CalculateScale(List<MapPoint> mapPoints)
         {
             // TODO
-            string scale = new ConfigForm().scaleStr;
-            float west = 0;
-            float east = 0;
-            float north = 0;
-            float sourth = 0;
+            int scale = 10;
+            float west = int.MaxValue;
+            float east = int.MinValue;
+            float north = int.MinValue;
+            float sourth = int.MaxValue;
             foreach (var point in mapPoints)
             {
                 west = Math.Min(west, point.longitude);
@@ -388,9 +378,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 north = Math.Max(north, point.latitude);
                 sourth = Math.Min(sourth, point.latitude);
             }
-            float width = Math.Abs(west - east);
-            float height = Math.Abs(north - sourth);
-            return scale;
+            dynamic data = webBrowser1.Document.InvokeScript("eval", new[] {String.Format("getZoom({0},{1},{2},{3})", north, sourth, west, east)});
+            return data != null ? data.ToString() : scale.ToString();
         }
 
         private void Clear_Click(object sender, EventArgs e)
