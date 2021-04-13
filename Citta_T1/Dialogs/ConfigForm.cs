@@ -439,86 +439,6 @@ namespace C2.Dialogs
             if (e.TabPage == this.installedSubPage)
                 RefreshInstalledPlugins();
         }
-
-
-
-        private void BaiduGISUrlTB_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar) && e.KeyChar != 0x2E)
-            {
-                e.Handled = true;
-            }
-
-            if (e.KeyChar == '.')   //允许输入回退键
-            {
-                TextBox tb = sender as TextBox;
-
-                if (tb.Text == "")
-                {
-                    tb.Text = "0.";
-                    tb.Select(tb.Text.Length, 0);
-                    e.Handled = true;
-                }
-                else if (tb.Text.Contains("."))
-                {
-                    e.Handled = true;
-                }
-                else
-                {
-                    e.Handled = false;
-                }
-            }
-            if (e.Handled == true)
-                latStr = this.baiduLatTB.Text;
-        }
-
-        private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar) && e.KeyChar != 0x2E)
-            {
-                e.Handled = true;
-            }
-
-            if (e.KeyChar == '.')   //允许输入回退键
-            {
-                TextBox tb = sender as TextBox;
-
-                if (tb.Text == "")
-                {
-                    tb.Text = "0.";
-                    tb.Select(tb.Text.Length, 0);
-                    e.Handled = true;
-                }
-                else if (tb.Text.Contains("."))
-                {
-                    e.Handled = true;
-                }
-                else
-                {
-                    e.Handled = false;
-                }
-            }
-            if (e.Handled == true)
-                lonStr = this.baiduLonTB.Text;
-        }
-
-        private void BaiduGISKeyTB_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < '0' || e.KeyChar > '9') && ((int)e.KeyChar != (int)System.Windows.Forms.Keys.Back))
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = false;
-            }
-            if (e.Handled == true)
-                scaleStr = this.baiduScaleTB.Text;
-
-        }
-
-
-
         #region 检查更新Tab
 
         private void MainTabControl_Selected(object sender, TabControlEventArgs e)
@@ -665,7 +585,7 @@ namespace C2.Dialogs
         }
         private bool IsValidScale()
         {
-            return int.TryParse(this.baiduScaleTB.Text, out int scale) && 0 < scale && scale < 13;
+            return int.TryParse(this.baiduScaleTB.Text, out int scale) && 0 < scale && scale < 10;
         }
 
         //下载进度变化触发事件
