@@ -14,6 +14,8 @@ namespace C2.Dialogs
         private readonly String done;
         private readonly String temp;
         private BastionAPI api;
+        //private long fileLength;
+
         public BastionDownloadProgressBar(TaskInfo task, String ffp)
         {
             api = new BastionAPI(task);

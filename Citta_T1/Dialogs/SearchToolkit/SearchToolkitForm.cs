@@ -76,7 +76,7 @@ namespace C2.SearchToolkit
             if (task == TaskInfo.EmptyTaskInfo)
                 return;
 
-            this.saveFileDialog.FileName = this.task.TaskName;
+            this.saveFileDialog.FileName = String.Format("{0}_{1}", task.TaskName, task.TaskCreateTime);
             DialogResult ret = this.saveFileDialog.ShowDialog();
             if (ret != DialogResult.OK)
                 return;
@@ -84,8 +84,14 @@ namespace C2.SearchToolkit
 
             String ffp = this.saveFileDialog.FileName;
             // TODO ProgressBar 处理
-            BastionDownloadProgressBar progressBar = new BastionDownloadProgressBar(task, ffp);
-            progressBar.Status = "下载中";
+            BastionDownloadProgressBar progressBar = new BastionDownloadProgressBar(task, ffp)
+            {
+                Status = "下载中",
+                ProgressValue = 0,
+                ProgressPercentage = "0%",
+                MinimumValue = 0,   
+                MaximumValue = 100,
+            };
 
             bool succ = false;
             using (GuarderUtil.WaitCursor)
@@ -95,6 +101,8 @@ namespace C2.SearchToolkit
                 HelpUtil.ShowMessageBox(String.Format("任务【{0}】下载成功", task.TaskName));
             else if (!String.IsNullOrEmpty(task.LastErrorMsg))
                 HelpUtil.ShowMessageBox(task.LastErrorMsg);
+            else
+                HelpUtil.ShowMessageBox(String.Format("用户取消任务【{0}】下载任务", task.TaskName));
 
             //progressBar.ShowDialog();
         }
