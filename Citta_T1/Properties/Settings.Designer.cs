@@ -25,7 +25,19 @@ namespace C2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("108.876433")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js")]
+        public string baiduHeatAPI {
+            get {
+                return ((string)(this["baiduHeatAPI"]));
+            }
+            set {
+                this["baiduHeatAPI"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("118.744")]
         public string lontude {
             get {
                 return ((string)(this["lontude"]));
@@ -37,7 +49,7 @@ namespace C2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("36.269395")]
+        [global::System.Configuration.DefaultSettingValueAttribute("31.996")]
         public string latude {
             get {
                 return ((string)(this["latude"]));
@@ -49,7 +61,7 @@ namespace C2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("19")]
         public string scale {
             get {
                 return ((string)(this["scale"]));
