@@ -149,6 +149,9 @@ namespace C2.Business.SSH
                         task.LastErrorMsg = String.Format("任务【{0}】下载失败：网络超时", task.TaskName);
                         break;
                     }
+
+                    if (downloadCancel)
+                        break;
                     // 策略:
                     // 0) cat 回传时，会把字节流的NL全部替换成CRNL,需要再替换回来
                     // 1) 最后一个字节不是CR，替换CRNL
