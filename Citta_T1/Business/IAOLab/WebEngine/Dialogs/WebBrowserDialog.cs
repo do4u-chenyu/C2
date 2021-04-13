@@ -339,23 +339,23 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 {
                     case "标注图":
                         webBrowser1.Document.InvokeScript("markerPoints", args);
-                        AddDataItem(OverlapType.Marker, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
+                        this.MapConfig.AddOverlap(OverlapType.Marker, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "轨迹图":
                         webBrowser1.Document.InvokeScript("drawOrit", args);
-                        AddDataItem(OverlapType.Orit, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
+                        this.MapConfig.AddOverlap(OverlapType.Orit, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "多边形图":
                         webBrowser1.Document.InvokeScript("drawPolygon", args);
-                        AddDataItem(OverlapType.Polygon, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
+                        this.MapConfig.AddOverlap(OverlapType.Polygon, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "热力图":
                         webBrowser1.Document.InvokeScript("drawHeatmap", args);
-                        AddDataItem(OverlapType.Heatmap, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
+                        this.MapConfig.AddOverlap(OverlapType.Heatmap, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                 }
                 SaveCenterAndZoom();
-                string newCenterAndZoom = dialog.drawlontude + ',' + dialog.drawlatude + ',' + CalculateScale();
+                string newCenterAndZoom = dialog.drawlontude + ',' + dialog.drawlatude + ',' + CalculateScale(dialog.mapPoints);
                 webBrowser1.Document.InvokeScript("centerAndZoom", new object[] { newCenterAndZoom });
             }
             else
@@ -371,16 +371,24 @@ namespace C2.IAOLab.WebEngine.Dialogs
             scale = Math.Min(MapConfig.Zoom, scale);
             return scale.ToString();
         }
-
-        /// <summary>
-        /// 将数据添加到临时数组里
-        /// </summary>
-        /// <param name="overlapType"></param>
-        /// <param name="jsonData"></param>
-        private void AddDataItem(OverlapType overlapType, int latIndex, int lngIndex, int weightIndex, DataItem dataItem)
+        private string CalculateScale(List<MapPoint> mapPoints)
         {
-            OverlapConfig mdi = new OverlapConfig(latIndex, lngIndex, weightIndex, dataItem, overlapType);
-            MapConfig.OverlapConfigList.Add(mdi);
+            // TODO
+            string scale = new ConfigForm().scaleStr;
+            float west = 0;
+            float east = 0;
+            float north = 0;
+            float sourth = 0;
+            foreach (var point in mapPoints)
+            {
+                west = Math.Min(west, point.longitude);
+                east = Math.Max(east, point.longitude);
+                north = Math.Max(north, point.latitude);
+                sourth = Math.Min(sourth, point.latitude);
+            }
+            float width = Math.Abs(west - east);
+            float height = Math.Abs(north - sourth);
+            return scale;
         }
 
         private void Clear_Click(object sender, EventArgs e)
@@ -508,8 +516,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SaveFileDialog fd = new SaveFileDialog
             {
                 Filter = "图片文件(*.png)|*.png",
-                AddExtension = true
+                AddExtension = true,
+                FileName = WebType == WebType.Map ? this.MapConfig.CurrentDataName() : String.Empty
             };
+
             if (fd.ShowDialog() != DialogResult.OK)
                 return;
             File.Copy(picPath, fd.FileName, true);
@@ -607,6 +617,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public MapType MapType;
         public List<OverlapConfig> OverlapConfigList;
         public string SourceCode;
+        private OverlapConfig currOverlap;
         /// <summary>
         /// 优先解析配置窗口里的经纬度缩放比
         /// </summary>
@@ -638,6 +649,33 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public MapConfig Clone()
         {
             return new MapConfig(this.InitLat, this.InitLng, this.Zoom, this.MapType, this.OverlapConfigList, this.SourceCode);
+        }
+        public void AddOverlap(OverlapType overlapType, int latIndex, int lngIndex, int weightIndex, DataItem dataItem)
+        {
+            OverlapConfig oc = new OverlapConfig(latIndex, lngIndex, weightIndex, dataItem, overlapType);
+            this.OverlapConfigList.Add(oc);
+            this.currOverlap = oc;
+        }
+        public string CurrentDataName()
+        {
+            return String.Format("图上作战_{0}_{1}.png", currOverlap.OverlapType.ToString(), currOverlap.DataItem.FilePath);
+        }
+    }
+    class MapPoint
+    {
+        public float latitude;
+        public float longitude;
+        public MapPoint(float lon, float lat)
+        {
+            this.longitude = lon;
+            this.latitude = lat;
+        }        
+        public MapPoint(string lonStr, string latStr)
+        {
+            if (!float.TryParse(lonStr, out this.longitude))
+                this.longitude = 0;            
+            if (!float.TryParse(latStr, out this.latitude))
+                this.latitude = 0;
         }
     }
     #endregion
