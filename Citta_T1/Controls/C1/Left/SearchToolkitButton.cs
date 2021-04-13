@@ -56,7 +56,7 @@ namespace C2.Controls.C1.Left
         {
             this.task = task;
             this.toolTip.SetToolTip(this.rightPictureBox, task.BastionInfo);
-            this.toolTip.SetToolTip(this.leftPictureBox, task.PID);
+            this.toolTip.SetToolTip(this.leftPictureBox, task.TaskModel);
         }
         private void ResultToolStripMenuItem_Click(object sender, EventArgs e)
         {
