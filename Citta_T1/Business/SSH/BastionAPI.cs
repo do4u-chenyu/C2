@@ -235,8 +235,10 @@ namespace C2.Business.SSH
         {
             count = Math.Min(buffer.Length, count); // 保险一下，下载错误的文件比程序崩强
             int real = count;
-            //fs.w
-            //sw.Write(buffer,)
+
+
+
+            fs.Write(buffer, offset, real);
             return count;
         }
 
