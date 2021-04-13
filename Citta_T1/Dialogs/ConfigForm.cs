@@ -585,7 +585,7 @@ namespace C2.Dialogs
         }
         private bool IsValidScale()
         {
-            return int.TryParse(this.baiduScaleTB.Text, out int scale) && 0 < scale && scale < 10;
+            return int.TryParse(this.baiduScaleTB.Text, out int scale) && 0 < scale && scale < 20;
         }
 
         //下载进度变化触发事件
