@@ -87,8 +87,14 @@ namespace C2.SearchToolkit
             BastionDownloadProgressBar progressBar = new BastionDownloadProgressBar(task, ffp);
             progressBar.Status = "下载中";
 
+            bool succ = false;
             using (GuarderUtil.WaitCursor)
-                progressBar.Download();
+                succ = progressBar.Download();
+
+            if (succ)
+                HelpUtil.ShowMessageBox("下载成功");
+            else if (!String.IsNullOrEmpty(task.LastErrorMsg))
+                HelpUtil.ShowMessageBox("下载失败");
 
             //progressBar.ShowDialog();
         }
