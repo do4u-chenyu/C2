@@ -509,7 +509,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             {
                 Filter = "图片文件(*.png)|*.png",
                 AddExtension = true,
-                FileName = WebType == WebType.Map ? this.MapConfig.CurrentDataName() : String.Empty
+                FileName = WebType == WebType.Map ? this.MapConfig.CurrentOverlapName() : String.Empty
             };
 
             if (fd.ShowDialog() != DialogResult.OK)
@@ -607,7 +607,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public MapType MapType;
         public List<OverlapConfig> OverlapConfigList;
         public string SourceCode;
-        private OverlapConfig currOverlap;
         /// <summary>
         /// 优先解析配置窗口里的经纬度缩放比
         /// </summary>
@@ -644,11 +643,15 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             OverlapConfig oc = new OverlapConfig(latIndex, lngIndex, weightIndex, dataItem, overlapType);
             this.OverlapConfigList.Add(oc);
-            this.currOverlap = oc;
         }
-        public string CurrentDataName()
+        public string CurrentOverlapName()
         {
-            return String.Format("图上作战_{0}_{1}.png", currOverlap.OverlapType.ToString(), currOverlap.DataItem.FilePath);
+            return this.OverlapConfigList.Count == 0 ?
+                String.Format("图上作战_无数据.png") :
+                String.Format("图上作战_{0}_{1}.png", 
+                    this.OverlapConfigList[this.OverlapConfigList.Count - 1].OverlapType.ToString(), 
+                    this.OverlapConfigList[this.OverlapConfigList.Count - 1].DataItem.FileName
+                );
         }
     }
     class MapPoint
