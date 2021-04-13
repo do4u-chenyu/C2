@@ -59,11 +59,13 @@ namespace C2.SearchToolkit
 
         public String BastionInfo 
         { 
-            get => String.Format("用户名:{0}, 堡垒机IP:{1}, 全文机IP:{2}, 结果目录:{3}", 
+            get => String.Format("用户名:{0}, 堡垒机IP:{1}, 全文机IP:{2}, 结果目录:{3}/{4}_{5}", 
                 Username, 
                 BastionIP, 
                 SearchAgentIP,
-                RemoteWorkspace); 
+                RemoteWorkspace,
+                TaskName,
+                TaskCreateTime); 
         }
         
 
