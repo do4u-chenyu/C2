@@ -15,11 +15,11 @@ namespace FullTextGrammarAssistant
 {
     public partial class Form1 : Form, IPlugin
     {
-        private readonly List<string> previewTextList = new List<string>(new string[] { "","", "", "" });
+        private readonly List<string> previewTextList = new List<string>(new string[] { "","", "", "", "", "", "", "", "", "" });
+        private readonly List<string> jarTextList = new List<string>(new string[] { "", "", "", "", "", "", "", "", "", "" });
         public Form1()
         {
             InitializeComponent();
-            InitializeComponentManual();
             foreach (CheckBox ck in panel2.Controls)
             {
                 ck.CheckedChanged += checkBox1_CheckedChanged;
@@ -36,21 +36,6 @@ namespace FullTextGrammarAssistant
             {
                 ck.CheckedChanged += checkBox50_CheckedChanged;
             }
-        }
-
-        private void InitializeComponentManual()
-        {
-            this.button3.Click += new EventHandler(this.button3_Click);
-            this.tableLayoutPanel2.ColumnCount = 6;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.70732F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.29269F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 144F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 271F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 839F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(172, 470);
         }
 
         public string GetPluginDescription()
@@ -81,11 +66,25 @@ namespace FullTextGrammarAssistant
         private void Form1_Load(object sender, EventArgs e)
         {
             this.textBox1.Text = "hello AND world OR 你好";
-            this.textBox3.Text = DateTime.Now.AddYears(-1).ToString();
-            this.textBox4.Text = DateTime.Now.ToString();
-            this.previewTextList[1] = "--start " + DateTime.Now.AddYears(-1).ToString("yyyyMMddHHmmss");
-            this.previewTextList[2] = "--end " + DateTime.Now.ToString("yyyyMMddHHmmss");
+            this.textBox3.Text = DateTime.Now.AddYears(-1).ToString("yyyyMMddHHmmss");
+            this.textBox4.Text = DateTime.Now.ToString("yyyyMMddHHmmss");
+            this.comboBox1.SelectedIndex = 0;
+            this.comboBox2.SelectedIndex = 2;
+            this.textBox2.Text = "100";
+            this.comboBox5.SelectedIndex = 0;
+            this.comboBox3.SelectedIndex = 4;
+            this.comboBox4.SelectedIndex = 0;
+            this.textBox5.Text = "460013440113856";
+            this.comboBox6.SelectedIndex = 2;
+            this.comboBox7.SelectedIndex = 8;
+            this.comboBox8.SelectedIndex = 5;
+            this.textBox6.Text = "10";
+            this.previewTextList[1] = "--start " + this.textBox3.Text;
+            this.jarTextList[1] = "--startTime " + this.textBox3.Text;
+            this.previewTextList[2] = "--end " + this.textBox4.Text;
+            this.jarTextList[2] = "--endTime " + this.textBox4.Text;
             this.previewTextList[3] = "--querystring \"" + this.textBox1.Text + "\"";
+            this.jarTextList[3] = "--queryStr \"" + this.textBox1.Text + "\"";
             UpdatePreviewText();
         }
 
@@ -197,6 +196,7 @@ namespace FullTextGrammarAssistant
             {
                 foreach (CheckBox ck in panel4.Controls)
                     ck.Checked = false;
+                MessageBox.Show("请选择数据类型。", "提示");
             }
         }
 
@@ -245,63 +245,80 @@ namespace FullTextGrammarAssistant
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.tableLayoutPanel2.SuspendLayout();
-            Button button = sender as Button;
-            int lineNumber = 0;
 
-            this.tableLayoutPanel2.RowCount++;
-            this.tableLayoutPanel2.Height = this.tableLayoutPanel2.RowCount * 40;
-            this.tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-
-            if (this.tableLayoutPanel2.RowCount > 1)
-            {
-                lineNumber = button.Name == "button3" ? 0 : int.Parse(button.Name) + 1;
-                AddTableLayoutPanelControls(lineNumber);
-            }
-            CreateLine(lineNumber);
-            this.tableLayoutPanel2.ResumeLayout(true);
-        }
-        protected void AddTableLayoutPanelControls(int lineNumber)
-        {
-            for (int k = this.tableLayoutPanel2.RowCount - 2; k >= lineNumber; k--)
-            {
-                Control ctlNext = this.tableLayoutPanel2.GetControlFromPosition(0, k);
-                this.tableLayoutPanel2.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k + 1));
-                Control ctlNext1 = this.tableLayoutPanel2.GetControlFromPosition(1, k);
-                this.tableLayoutPanel2.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k + 1));
-                Control ctlNext2 = this.tableLayoutPanel2.GetControlFromPosition(2, k);
-                this.tableLayoutPanel2.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
-                Control ctlNext3 = this.tableLayoutPanel2.GetControlFromPosition(3, k);
-                this.tableLayoutPanel2.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k + 1));
-                Control ctlNext4 = this.tableLayoutPanel2.GetControlFromPosition(4, k);
-                ctlNext4.Name = (k + 1).ToString();
-                this.tableLayoutPanel2.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
-                //Control ctlNext5 = this.tableLayoutPanel1.GetControlFromPosition(5, k);
-                //ctlNext5.Name = (k + 1).ToString();
-                //this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k + 1));
-            }
-        }
-        protected void CreateLine(int addLine)
-        {
-            // And OR 选择框
-            ComboBox regBox = NewAndORComboBox();
-            this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
-        }
-
-        private ComboBox NewAndORComboBox()
-        {
-            throw new NotImplementedException();
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            this.previewTextList[1] = "--start " + Convert.ToDateTime(this.textBox3.Text).ToString("yyyyMMddHHmmss");
+            this.previewTextList[1] = "--start " + this.textBox3.Text;
+            this.jarTextList[1] = "--startTime " + this.textBox3.Text;
             UpdatePreviewText();
         }
         private void UpdatePreviewText()
         {
+            this.jarTextList[0] = "java -jar batchQueryAndExport_1.7.jar --ip 15.42.118.1 --port 9870";
             this.previewTextList[0] = "/home/search/sbin/queryclient --server 127.0.0.1 --port 9871";
+            string attrText1 = Attribute_filter(this.comboBox1.Text);
+            string attrText2 = Attribute_filter(this.comboBox3.Text);
+            string attrText3 = Attribute_filter(this.comboBox7.Text);
+            string conText1 = Condition_filter(this.comboBox2.Text);
+            string conText2 = Condition_filter(this.comboBox4.Text);
+            string conText3 = Condition_filter(this.comboBox8.Text);
+            this.previewTextList[5] = "--dbfilter " + attrText1 + " " + conText1 + " " + this.textBox2.Text + " " + this.comboBox5.Text + " " + attrText2 + " " + conText2 + " " + this.textBox5.Text + " " + this.comboBox6.Text + " " + attrText3 + " " + conText3 + " " + this.textBox6.Text;
             this.previewCmdText.Text = String.Join(" ", this.previewTextList);
+            this.textBox9.Text = String.Join(" ", this.jarTextList);
+        }
+
+        private string Condition_filter(string condition)
+        {
+            Dictionary<string, string> conditionType = new Dictionary<string, string>();
+            conditionType.Add("精确匹配", "FILESIZE");
+            conditionType.Add("模糊匹配", "AUTH_ACCOUNT");
+            conditionType.Add("大于", ">");
+            conditionType.Add("大于等于", ">=");
+            conditionType.Add("等于", "=");
+            conditionType.Add("小于", "<");
+            conditionType.Add("小于等于", "<=");
+
+            string conditionText = "";
+
+            foreach (KeyValuePair<string, string> con in conditionType)
+            {
+                if (con.Key == condition)
+                {
+                    conditionText = con.Value;
+                }
+            }
+
+            return conditionText;
+        }
+
+        private string Attribute_filter(string attribute)
+        {
+            Dictionary<string, string> attributeType = new Dictionary<string, string>();
+            attributeType.Add("文件大小（单位：字节）", "FILESIZE");
+            attributeType.Add("上网账号", "AUTH_ACCOUNT");
+            attributeType.Add("宿端口", "DST_PORT");
+            attributeType.Add("设备号", "EQUIPMENT_ID");
+            attributeType.Add("IMSI号", "IMSI");
+            attributeType.Add("源端口", "SRC_PORT");
+            attributeType.Add("源IP", "SRC_IP");
+            attributeType.Add("宿IP", "DST_IP");
+            attributeType.Add("附件数", "_ATTACHNUM");
+            attributeType.Add("域名", "DOMAIN");
+
+            string attrText = "";
+
+            foreach (KeyValuePair<string, string> attr in attributeType)
+            {
+                if (attr.Key == attribute)
+                {
+                    attrText = attr.Value;
+                }
+            }
+
+            return attrText;
+
         }
 
         private void previewCmdText_TextChanged(object sender, EventArgs e)
@@ -311,13 +328,316 @@ namespace FullTextGrammarAssistant
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            this.previewTextList[2] = "--end " + Convert.ToDateTime(this.textBox4.Text).ToString("yyyyMMddHHmmss");
+            this.previewTextList[2] = "--end " + this.textBox4.Text;
             UpdatePreviewText();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.previewTextList[3] = "--querystring \"" + this.textBox1.Text + "\"";
+            UpdatePreviewText();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void TraverPanel()
+        {
+            Dictionary<string, string> protoType = new Dictionary<string, string>();
+            protoType.Add("网页访问", "1000001");
+            protoType.Add("电子邮箱", "1011007");
+            protoType.Add("认证信息", "1020007");
+            protoType.Add("即时聊天", "1030001");
+            protoType.Add("FTP", "1050001");
+            protoType.Add("网络聊天", "1060001");
+            protoType.Add("网络论坛", "1071002");
+            protoType.Add("TELNET", "1080000");
+            protoType.Add("VOIP", "1090001");
+            protoType.Add("网络赌博", "1140005");
+            protoType.Add("博客网站", "11580001");
+            protoType.Add("社交网站", "1197007");
+
+            string protoTypeText = "";
+
+            foreach (CheckBox ch in panel2.Controls)
+            {
+                if (ch.Checked == true)
+                {
+                    foreach (KeyValuePair<string, string> proto in protoType)
+                    {
+                        if (proto.Key == ch.Text)
+                        {
+                            protoTypeText += proto.Value + " ";
+                        }
+                    }
+                }
+                else
+                    MessageBox.Show("请选择协议类型。", "提示");
+            }
+            previewTextList[4] = "--protofilter " + protoTypeText;
+        }
+        private void SearchPanel() 
+        {
+            Dictionary<string, string> searchRange = new Dictionary<string, string>();
+            searchRange.Add("正文", "_TEXT");
+            searchRange.Add("附件", "_ATTACHEMENTTEXT");
+            searchRange.Add("邮件主题", "_SUBJECT");
+
+            string searchRangeText = "";
+
+            foreach (CheckBox ch in panel2.Controls)
+            {
+                if (ch.Checked == true)
+                {
+                    foreach (KeyValuePair<string, string> search in searchRange)
+                    {
+                        if (search.Key == ch.Text)
+                        {
+                            searchRangeText += search.Value + " ";
+                        }
+                    }
+                }
+                //else
+                //return;
+            }
+            //previewTextList[4] = "--protofilter " + searchRangeText;
+
+        }
+        private void dataTypePanel()
+        {
+            Dictionary<string, string> DataType = new Dictionary<string, string>();
+            DataType.Add("正常", "normal");
+            DataType.Add("垃圾", "garbage");
+
+            string dataTypeText = "";
+
+            foreach (CheckBox ch in panel4.Controls)
+            {
+                if (ch.Checked == true)
+                {
+                    foreach (KeyValuePair<string, string> data in DataType)
+                    {
+                        if (data.Key == ch.Text)
+                        {
+                            dataTypeText += data.Value + " ";
+                        }
+                    }
+                }
+                //else
+                //return;
+            }
+            previewTextList[7] = "--datatype " + dataTypeText;
+        }
+        private void optionPanel()
+        {
+            Dictionary<string, string> OptionType = new Dictionary<string, string>();
+            OptionType.Add("含有附件", "attachment");
+            OptionType.Add("同义词", "synonymy");
+            OptionType.Add("加密文件", "encrypt");
+            OptionType.Add("过滤内容相似文件", "similar");
+            OptionType.Add("关键词精确匹配", "garbage");
+
+            string OptionTypeText = "";
+
+            foreach (CheckBox ch in panel3.Controls)
+            {
+                if (ch.Checked == true)
+                {
+                    foreach (KeyValuePair<string, string> option in OptionType)
+                    {
+                        if (option.Key == ch.Text)
+                        {
+                            OptionTypeText += option.Value + " ";
+                        }
+                    }
+                }
+                //else
+                //return;
+            }
+            previewTextList[8] = "--option " + OptionTypeText;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox13_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox12_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox10_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox15_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox49_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox52_CheckedChanged(object sender, EventArgs e)
+        {
+            dataTypePanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox47_CheckedChanged(object sender, EventArgs e)
+        {
+            optionPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox42_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox54_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox51_CheckedChanged(object sender, EventArgs e)
+        {
+            dataTypePanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox46_CheckedChanged(object sender, EventArgs e)
+        {
+            optionPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox45_CheckedChanged(object sender, EventArgs e)
+        {
+            optionPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox44_CheckedChanged(object sender, EventArgs e)
+        {
+            optionPanel();
+            UpdatePreviewText();
+        }
+
+        private void checkBox43_CheckedChanged(object sender, EventArgs e)
+        {
+            optionPanel();
+            UpdatePreviewText();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
             UpdatePreviewText();
         }
     }
