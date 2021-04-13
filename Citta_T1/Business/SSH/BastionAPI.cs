@@ -155,7 +155,7 @@ namespace C2.Business.SSH
 
                     if (buffer[bytesRead - 1] != CR)  // 情况1
                     {
-                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead, fs), 0);
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead, fs), 0);
                         continue;
                     }
   
@@ -166,11 +166,11 @@ namespace C2.Business.SSH
                     if (one != CR)  // 情况2
                     {
                         buffer[bytesRead] = one;
-                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead + 1, fs), 0);
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead + 1, fs), 0);
                     }
                     else            // 情况3
                     {
-                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead, fs), 0);
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead, fs), 0);
                         buffer[offset++] = one;
                     }
                 }
@@ -238,13 +238,13 @@ namespace C2.Business.SSH
             return buffer[offset] == CR && buffer[offset + 1] == NL;
         }
 
-        private int ReplaceCRNLWrite(byte[] buffer, int offset, int count, FileStream fs)
+        private int ReplaceCRNLWrite(byte[] buffer, int count, FileStream fs)
         {
             count = Math.Min(buffer.Length, count); // 保险一下，下载错误的文件比程序崩强
             int real = count;
 
-            int curr = 0 + offset; // 形式主义
-            int head = 0 + offset;
+            int curr = 0; 
+            int head = 0;
 
 
             if (count < 2)  // 不足2个字节,不可能含有CRNL
