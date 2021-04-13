@@ -2,20 +2,20 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="C2.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="lontude" Type="System.String" Scope="User">
-      <Value Profile="(Default)">108.876433</Value>
-    </Setting>
-    <Setting Name="latude" Type="System.String" Scope="User">
-      <Value Profile="(Default)">36.269395</Value>
-    </Setting>
-    <Setting Name="scale" Type="System.String" Scope="User">
-      <Value Profile="(Default)">5</Value>
-    </Setting>
-    <Setting Name="baiduVerAPI" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://api.map.baidu.com/api?v=1.4&amp;services=true</Value>
-    </Setting>
     <Setting Name="baiduHeatAPI" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js</Value>
+    </Setting>
+    <Setting Name="lontude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">118.744</Value>
+    </Setting>
+    <Setting Name="latude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">31.996</Value>
+    </Setting>
+    <Setting Name="scale" Type="System.String" Scope="User">
+      <Value Profile="(Default)">19</Value>
+    </Setting>
+    <Setting Name="baiduVerAPI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9</Value>
     </Setting>
   </Settings>
 </SettingsFile>

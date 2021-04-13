@@ -21,6 +21,22 @@ namespace UserInstallSet
         "      <add key=\"IAOLab\" value=\"APK, BaseStation, Wifi, Card, Tude, Ip \"/>\r\n" +
         "      <add key=\"version\" value=\"1.1.3\"/>\r\n" +
         "    </appSettings>\r\n" +
+        "    <userSettings >\r\n" +
+        "      <C2.Properties.Settings >\r\n" +
+        "       <setting name=\"lontude\" serializeAs=\"String\">\r\n" +
+        "         <value>118.744</value>\r\n" +
+        "       </setting>\r\n" +
+        "       <setting name = \"latude\" serializeAs=\"String\">\r\n" +
+        "         <value>31.996</value>\r\n" +
+        "       </setting>\r\n" +
+        "       <setting name = \"scale\" serializeAs=\"String\">\r\n" +
+        "         <value>19</value>\r\n" +
+        "       </setting>\r\n" +
+        "       <setting name = \"baiduVerAPI\" serializeAs=\"String\">\r\n" +
+        "         <value>FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9</value>\r\n" +
+        "       </setting>\r\n" +
+        "     </C2.Properties.Settings>\r\n" +
+        "    </userSettings>\r\n" +
         "</configuration>";
         //APK:非法APK； BaseStation：基站查询； Wifi：WiFi查询； Card：银行卡查询； Tude：经纬度坐标转换； Ip：时间Ip转换；
         public MyInstaller()

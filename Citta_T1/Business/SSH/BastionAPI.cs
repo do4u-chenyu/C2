@@ -262,6 +262,8 @@ namespace C2.Business.SSH
                 return real;
             }
 
+            //  |                |      [0, count - 1)             
+            // [++++++++++++++++++-]
             do
             {
                 // 找到 下一个 /r/n
