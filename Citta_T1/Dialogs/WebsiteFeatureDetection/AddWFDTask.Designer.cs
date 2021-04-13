@@ -78,11 +78,11 @@
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(363, 84);
+            this.browserButton.Location = new System.Drawing.Point(363, 85);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(59, 23);
             this.browserButton.TabIndex = 10007;
-            this.browserButton.Text = "+预览";
+            this.browserButton.Text = "+浏览";
             this.browserButton.UseVisualStyleBackColor = true;
             this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
@@ -113,6 +113,7 @@
             this.Controls.Add(this.taskNameTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AddWFDTask";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "侦察兵-新建任务";
