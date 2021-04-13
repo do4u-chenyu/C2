@@ -94,7 +94,7 @@ namespace C2.SearchToolkit
             if (succ)
                 HelpUtil.ShowMessageBox("下载成功");
             else if (!String.IsNullOrEmpty(task.LastErrorMsg))
-                HelpUtil.ShowMessageBox("下载失败");
+                HelpUtil.ShowMessageBox(task.LastErrorMsg);
 
             //progressBar.ShowDialog();
         }
