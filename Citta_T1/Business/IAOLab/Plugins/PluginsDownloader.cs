@@ -20,8 +20,8 @@ namespace C2.IAOLab.Plugins
             try
             {
                 resStream = WebRequest.Create(pluginURL)
-                                             .GetResponse()
-                                             .GetResponseStream();
+                                      .GetResponse()
+                                      .GetResponseStream();
                 resStream.ReadTimeout = 1000 * 10; // 浏览页面设置超时,后续下载不用,相隔很短,最开始做个验证即可
                 htmlContent = new StreamReader(resStream, Encoding.UTF8).ReadToEnd();
 
@@ -50,8 +50,8 @@ namespace C2.IAOLab.Plugins
                 try
                 {
                     resStream = WebRequest.Create(packageURL + pluginName)
-                                               .GetResponse()
-                                               .GetResponseStream();
+                                          .GetResponse()
+                                          .GetResponseStream();
                     string info = new StreamReader(resStream, Encoding.UTF8).ReadToEnd();
                     result.Add(info);
                 }

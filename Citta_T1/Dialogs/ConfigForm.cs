@@ -383,7 +383,7 @@ namespace C2.Dialogs
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
-            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            using (GuarderUtil.WaitCursor)
             {
                 foreach (DataGridViewRow row in this.availableDGV.Rows)
                 {

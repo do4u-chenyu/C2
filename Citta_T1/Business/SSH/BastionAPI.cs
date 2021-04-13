@@ -3,6 +3,7 @@ using C2.SearchToolkit;
 using C2.Utils;
 using Renci.SshNet;
 using System;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -10,7 +11,15 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private const int SecondsTimeout = 7;
+        private const byte CR = 0x13;
+        private const byte NL = 0x10;
+
+        private const int M40 = 1024 * 1024 * 40;
+        private const int K2 = 4096 * 2;
+        private const int K512 = 1024 * 512;
+        
+
+        private const int SecondsTimeout = 10;
         private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
@@ -22,6 +31,8 @@ namespace C2.Business.SSH
 
         private SshClient ssh;
         private ShellStream shell;
+
+        private bool downloadCancel = false;
 
         private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
         // {workspace}/pid_taskcreatetime
@@ -66,7 +77,7 @@ namespace C2.Business.SSH
         }
         private void Jump()
         {
-            if (IsError())
+            if (Oops())
                 return;
 
             task.LastErrorMsg = String.Format("登陆堡垒机【{0}】成功，但未能跳转全文机【{1}】", task.BastionIP, task.SearchAgentIP);
@@ -103,8 +114,8 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
-        private bool Cat(String ffp, String dst, long len, ShellStream ssm)
-        {
+        private bool Cat(String ffp, FileStream fs, long fileLength, ShellStream ssm)
+        {              
             try
             {
                 // 清理缓存
@@ -121,29 +132,55 @@ namespace C2.Business.SSH
                     return false;
                 }
 
-                int bufferSize = 4096 * 2;
-                byte[] buffer = new byte[bufferSize + 1];
+                int bufferSize = fileLength > M40 ? K512 : K2;  // 40M 以上的文件用大缓存，减少进程切换的消耗   
+                byte[] buffer = new byte[bufferSize + 1]; // 预留一个空白位用来存储预读字节
+
                 Shell shell = new Shell(ssm);
+                long left = fileLength - TgzHead.Length;  // 去掉文件头
+                int offset = 0;                           // 缓存起始位置
 
-                long bytesLeft = Math.Max(len - TgzHead.Length, 0); // 去掉文件头
-                while(bytesLeft > 0)
+                while (left > 0)
                 {
-                    // TODO 处理\r\n => \n问题 还是要手工写read函数
-                    int bytesRead = shell.Read(buffer, 0, bufferSize, Timeout);
-                    
+                    int bytesRead = shell.Read(buffer, offset, bufferSize, Timeout);
+                    offset = 0; // 读完一次, 起始位置复位
+
                     if (bytesRead == 0) // 超时
+                    {
+                        task.LastErrorMsg = String.Format("任务【{0}】下载失败：网络超时", task.TaskName);
                         break;
+                    }
 
-                    bytesRead = (int)Math.Min(bytesRead, bytesLeft);
-                    bytesLeft = bytesLeft - bytesRead;
+                    if (downloadCancel)
+                        break;
+                    // 策略:
+                    // 0) cat 回传时，会把字节流的NL全部替换成CRNL,需要再替换回来
+                    // 1) 最后一个字节不是CR，替换CRNL
+                    // 2) 新字节不是CR,将新字符追加buffer位，替换CRNL
+                    // 3) 最后一个字节是CR，  再读一个字节, 新字节还是CR, 先替换CRNL，然后将CR作为buffer第一个字节，继续循环
 
-                    // TODO write
+                    if (buffer[bytesRead - 1] != CR)  // 情况1
+                    {
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead, fs), 0);
+                        continue;
+                    }
+  
+                    byte one = 0;
+                    if (!shell.ReadByte(ref one))
+                        break;
+                        
+                    if (one != CR)  // 情况2
+                    {
+                        buffer[bytesRead] = one;
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead + 1, fs), 0);
+                    }
+                    else            // 情况3
+                    {
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead, fs), 0);
+                        buffer[offset++] = one;
+                    }
                 }
-                // TODO 校验
-
             }
             catch { }
-
             return false;
         }
 
@@ -169,32 +206,94 @@ namespace C2.Business.SSH
             return 0;
         }
 
+        public void StopDownloadAsync()
+        {
+            downloadCancel = true;
+        }
+
         public bool DownloadGambleTaskResult(String d)
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
             String s = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
 
-            if (IsError())
+            if (Oops())
                 return false;
 
             String ffp = GetRemoteFilename(s);
             long len = GetRemoteFileSize(ffp);  // 文件有可能超过2G,不能用int
             if (len <= 0)
-                return false;  // 文件不存在或空文件  
-            
-            // 已Cat的方式下载文件， 根据lxf的情报, 40M为中位数
-            return Cat(ffp, d, len, shell);
+            {
+                task.LastErrorMsg = String.Format("任务【{0}】: 文件不存在或空文件", task.TaskName);
+                return false; 
+            }
+
+            // Cat的方式下载文件， 根据lxf的情报, 40M 为中位数
+            bool ret = false;
+            try
+            {
+                using (FileStream fs = new FileStream(d, FileMode.Create, FileAccess.Write))
+                    ret = Cat(ffp, fs, len, shell);
+            } 
+            catch (Exception ex)
+            {
+                task.LastErrorMsg = ex.Message;
+                ret = false;
+            }
+
+            return ret;
         }
 
-        private bool IsError()
+        private bool IsCRNL(byte[] buffer, int offset)
+        {
+            return buffer[offset] == CR && buffer[offset + 1] == NL;
+        }
+
+        private int ReplaceCRNLWrite(byte[] buffer, int count, FileStream fs)
+        {
+            count = Math.Min(buffer.Length, count); // 保险一下，下载错误的文件比程序崩强
+            int real = count;
+
+            int curr = 0; 
+            int head = 0;
+
+
+            if (count < 2)  // 不足2个字节,不可能含有CRNL
+            {
+                fs.Write(buffer, head, curr + 1 - head);
+                return real;
+            }
+   
+            do
+            {
+                // 找到 下一个 /r/n
+                while (curr + 1 < count && !IsCRNL(buffer, curr))
+                    curr++;
+                // 没找到, 直接到结尾处,退出
+                if (curr + 1 < count) 
+                {
+                    fs.Write(buffer, head, curr + 1 - head);
+                    return real += curr + 1 - head;
+                }
+                // 找到CRNL
+                buffer[curr] = NL;
+                fs.Write(buffer, head, curr - head);
+
+                real += curr - head;
+                head = ++curr;      // 游标置于当前位置
+           
+            } while (curr + 1 < count); 
+
+            return real;
+        }
+
+        private bool Oops()
         {
             return !(ssh.IsConnected && task.LastErrorMsg.IsEmpty());
         }
 
         public BastionAPI UploadGambleScript()
         {
-            if (IsError())
-                return this;
+            if (Oops()) return this;
 
             String s = Global.GambleScriptPath;
             String content = FileUtil.FileReadToEnd(s);
@@ -234,8 +333,7 @@ namespace C2.Business.SSH
 
         public String RunGambleTask()
         {
-            if (IsError())
-                return String.Empty;
+            if (Oops()) return String.Empty;
 
             EnterGambleTaskDirectory();
             String command = String.Format("python {0}", TargetGambleScript);
@@ -256,8 +354,7 @@ namespace C2.Business.SSH
 
         public BastionAPI DeleteGambleTaskDirectory()
         {
-            if (IsError())
-                return this;
+            if (Oops()) return this;
             // 删除 临时目录
             if (IsSafe(GambleTaskDirectory))
                 RunCommand(String.Format("rm -rf {0};", GambleTaskDirectory), shell);
@@ -266,9 +363,7 @@ namespace C2.Business.SSH
 
         public BastionAPI CreateGambleTaskDirectory()
         {
-            if (IsError())
-                return this;
-
+            if (Oops()) return this;
             String command = String.Format("mkdir -p {0}", GambleTaskDirectory);
             RunCommand(command, shell);
             return this;

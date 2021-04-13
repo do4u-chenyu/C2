@@ -7,10 +7,8 @@ namespace C2.Business.SSH
 {
     class Shell
     {
-        public const int BufferSize = 4096 * 2;
         private readonly ShellStream shell;
-
-        private readonly AutoResetEvent dataReceivedEvent;
+        private readonly AutoResetEvent dataReceivedEvent; // 信号量
 
         private byte[] InComing { get; }
         public Shell(ShellStream ssm)
@@ -30,12 +28,11 @@ namespace C2.Business.SSH
 
         public int Read(byte[] buffer, int offset, int count, TimeSpan timeout)
         {
-            int len;
             while (true)
             {
-                len = shell.Read(buffer, offset, count);
+                int len = shell.Read(buffer, offset, count);
                 if (len > 0)  // 如果读到就返回
-                    break;
+                    return len;
 
                 if (timeout.Ticks > 0 && !dataReceivedEvent.WaitOne(timeout))
                     return 0; // 超时返回
@@ -43,19 +40,17 @@ namespace C2.Business.SSH
                     dataReceivedEvent.WaitOne();
 
             }
-            return len;
         }
 
-        public bool ReadByte(ref byte b, TimeSpan timeout)
+        public bool ReadByte(ref byte b)
         {
-            if (Read(InComing, 0, 1, timeout) > 0)
+            if (shell.Read(InComing, 0, 1) > 0)
             {
                 b = InComing[0];
                 return true;
-            }
-                
+            }         
             return false;
         }
-    
+
     }
 }

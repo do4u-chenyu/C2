@@ -46,6 +46,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
 
+        SelectBossDialog selectBossDialog;
+
         public WebBrowserDialog()
         {
             InitializeComponent();
@@ -500,11 +502,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public void OpenSelectBossDialog()
         {
-            var dialog = new SelectBossDialog(DataItems, ChartOptions, webBrowser1);
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if(selectBossDialog == null)
+                selectBossDialog = new SelectBossDialog(DataItems, ChartOptions, webBrowser1);
+            if (selectBossDialog.ShowDialog() == DialogResult.OK)
             {
-                webBrowser1.Navigate(dialog.WebUrl);
-                ChartOptions = dialog.ChartOptions;
+                webBrowser1.Navigate(selectBossDialog.WebUrl);
+                ChartOptions = selectBossDialog.ChartOptions;
             }
         }
 
@@ -531,9 +534,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if (WebType == WebType.Boss && ChartOptions.ContainsKey("Datasource"))
             {
                 string path = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("数据大屏{0}.png", HitTopic.ID));
-                Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
-                Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
-                webBrowser1.DrawToBitmap(bitmap, rectangle);
+                Bitmap bitmap = new Bitmap(webBrowser1.DrawToImage(), new Size(webBrowser1.Width, webBrowser1.Height));
                 bitmap.Save(path);
 
                 //当前webbrowser截图，作为图片挂件加入当前节点
