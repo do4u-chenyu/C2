@@ -12,6 +12,8 @@ namespace C2.Business.SSH
     public class BastionAPI
     {
         private const byte CR = 0x13;
+        private const byte NL = 0x10;
+
         private const int M40 = 1024 * 1024 * 40;
         private const int K2 = 4096 * 2;
         private const int K512 = 1024 * 512;
@@ -231,15 +233,47 @@ namespace C2.Business.SSH
             return ret;
         }
 
+        private bool IsCRNL(byte[] buffer, int offset)
+        {
+            return buffer[offset] == CR && buffer[offset + 1] == NL;
+        }
+
         private int ReplaceCRNLWrite(byte[] buffer, int offset, int count, FileStream fs)
         {
             count = Math.Min(buffer.Length, count); // 保险一下，下载错误的文件比程序崩强
             int real = count;
 
+            int curr = 0 + offset; // 形式主义
+            int head = 0 + offset;
 
 
-            fs.Write(buffer, offset, real);
-            return count;
+            if (count < 2)  // 不足2个字节,不可能含有CRNL
+            {
+                fs.Write(buffer, head, curr + 1 - head);
+                return real;
+            }
+   
+            do
+            {
+                // 找到 下一个 /r/n
+                while (curr + 1 < count && !IsCRNL(buffer, curr))
+                    curr++;
+                // 没找到, 直接到结尾处,退出
+                if (curr + 1 < count) 
+                {
+                    fs.Write(buffer, head, curr + 1 - head);
+                    return real += curr + 1 - head;
+                }
+                // 找到CRNL
+                buffer[curr] = NL;
+                fs.Write(buffer, head, curr - head);
+
+                real += curr - head;
+                head = ++curr;      // 游标置于当前位置
+           
+            } while (curr + 1 < count); 
+
+            return real;
         }
 
         private bool Oops()
