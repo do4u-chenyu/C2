@@ -73,7 +73,7 @@ namespace C2.Business.SSH
         }
         private void Jump()
         {
-            if (IsError())
+            if (Oops())
                 return;
 
             task.LastErrorMsg = String.Format("登陆堡垒机【{0}】成功，但未能跳转全文机【{1}】", task.BastionIP, task.SearchAgentIP);
@@ -110,7 +110,7 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
-        private bool Cat(String ffp, StreamWriter sw, long fileLength, ShellStream ssm)
+        private bool Cat(String ffp, FileStream fs, long fileLength, ShellStream ssm)
         {              
             try
             {
@@ -153,7 +153,7 @@ namespace C2.Business.SSH
 
                     if (buffer[bytesRead - 1] != CR)  // 情况1
                     {
-                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead, sw), 0);
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead, fs), 0);
                         continue;
                     }
   
@@ -164,11 +164,11 @@ namespace C2.Business.SSH
                     if (one != CR)  // 情况2
                     {
                         buffer[bytesRead] = one;
-                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead + 1, sw), 0);
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead + 1, fs), 0);
                     }
                     else            // 情况3
                     {
-                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead, sw), 0);
+                        left = Math.Max(left - ReplaceCRNLWrite(buffer, 0, bytesRead, fs), 0);
                         buffer[offset++] = one;
                     }
                 }
@@ -204,7 +204,7 @@ namespace C2.Business.SSH
             // 000000_queryResult_db_开始时间_结束时间.tgz
             String s = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
 
-            if (IsError())
+            if (Oops())
                 return false;
 
             String ffp = GetRemoteFilename(s);
@@ -219,8 +219,8 @@ namespace C2.Business.SSH
             bool ret = false;
             try
             {
-                using (StreamWriter sw = new StreamWriter(d))
-                    ret = Cat(ffp, sw, len, shell);
+                using (FileStream fs = new FileStream(d, FileMode.Create, FileAccess.Write))
+                    ret = Cat(ffp, fs, len, shell);
             } 
             catch (Exception ex)
             {
@@ -231,23 +231,23 @@ namespace C2.Business.SSH
             return ret;
         }
 
-        private int ReplaceCRNLWrite(byte[] buffer, int offset, int count, StreamWriter sw)
+        private int ReplaceCRNLWrite(byte[] buffer, int offset, int count, FileStream fs)
         {
             count = Math.Min(buffer.Length, count); // 保险一下，下载错误的文件比程序崩强
             int real = count;
+            //fs.w
             //sw.Write(buffer,)
             return count;
         }
 
-        private bool IsError()
+        private bool Oops()
         {
             return !(ssh.IsConnected && task.LastErrorMsg.IsEmpty());
         }
 
         public BastionAPI UploadGambleScript()
         {
-            if (IsError())
-                return this;
+            if (Oops()) return this;
 
             String s = Global.GambleScriptPath;
             String content = FileUtil.FileReadToEnd(s);
@@ -287,8 +287,7 @@ namespace C2.Business.SSH
 
         public String RunGambleTask()
         {
-            if (IsError())
-                return String.Empty;
+            if (Oops()) return String.Empty;
 
             EnterGambleTaskDirectory();
             String command = String.Format("python {0}", TargetGambleScript);
@@ -309,8 +308,7 @@ namespace C2.Business.SSH
 
         public BastionAPI DeleteGambleTaskDirectory()
         {
-            if (IsError())
-                return this;
+            if (Oops()) return this;
             // 删除 临时目录
             if (IsSafe(GambleTaskDirectory))
                 RunCommand(String.Format("rm -rf {0};", GambleTaskDirectory), shell);
@@ -319,9 +317,7 @@ namespace C2.Business.SSH
 
         public BastionAPI CreateGambleTaskDirectory()
         {
-            if (IsError())
-                return this;
-
+            if (Oops()) return this;
             String command = String.Format("mkdir -p {0}", GambleTaskDirectory);
             RunCommand(command, shell);
             return this;
