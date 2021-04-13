@@ -2613,6 +2613,10 @@
     <None Include="Resources\nav_small_first_black.bmp" />
     <None Include="Resources\logicMap.png" />
     <None Include="Resources\mindMap.png" />
+    <None Include="Resources\map_setting.png" />
+    <None Include="Resources\map_sourceCode.png" />
+    <None Include="Resources\map_save.png" />
+    <None Include="Resources\map_clear.png" />
     <Content Include="Resources\Opcontrol_ico\AI.ico" />
     <Content Include="Resources\Opcontrol_ico\python.ico" />
     <None Include="Resources\Opcontrol_ico\sql.ico" />
