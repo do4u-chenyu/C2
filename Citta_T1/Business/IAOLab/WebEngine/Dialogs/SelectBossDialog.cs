@@ -236,7 +236,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             //根据选中的模板更新界面
             BossTemplate selectBossTemplate = BossTemplateCollection.GetInstance().GetTemplateByIdx(bossType.SelectedIndex);
-            //TODO url和img抽出去好？窗口和模板内容尽量耦合度低
+
             this.pictureBox1.Image = bossTypeDict[bossType.SelectedIndex];
             this.label19.Text = bossType.Text.Substring(bossType.Text.IndexOf("（") + 1, bossType.Text.IndexOf("）") - 1 - bossType.Text.IndexOf("（"));
             this.WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", string.Format("BossIndex{0}.html", (bossType.SelectedIndex + 1).ToString()));
