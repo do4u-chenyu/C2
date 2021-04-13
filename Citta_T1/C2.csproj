@@ -161,7 +161,7 @@
     <Compile Include="Business\IAOLab\Plugins\PluginsManager.cs" />
     <Compile Include="Business\IAOLab\Transform\GPSTransform.cs" />
     <Compile Include="Business\IAOLab\Transform\TimeAndIPTransform.cs" />
-    <Compile Include="Business\IAOLab\WebEngine\Boss\BossTemplateConfig.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\BossTemplateCollection.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Bar\PictorialBar.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Line\GradientLineChart.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPictorialBar.cs" />

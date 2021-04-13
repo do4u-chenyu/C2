@@ -234,34 +234,19 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void BossType_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            //TODO 根据选中的模板更新界面
-            /*
-            if (!BossTemplateConfig.GetInstance().BossTemplateDict.TryGetValue(bossType.SelectedIndex, out BossTemplate selectBossTemplate))
-                return;
-
+            //根据选中的模板更新界面
+            BossTemplate selectBossTemplate = BossTemplateCollection.GetInstance().GetTemplateByIdx(bossType.SelectedIndex);
+            //TODO url和img抽出去好？窗口和模板内容尽量耦合度低
             this.pictureBox1.Image = bossTypeDict[bossType.SelectedIndex];
             this.label19.Text = bossType.Text.Substring(bossType.Text.IndexOf("（") + 1, bossType.Text.IndexOf("）") - 1 - bossType.Text.IndexOf("（"));
             this.WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", string.Format("BossIndex{0}.html", (bossType.SelectedIndex + 1).ToString()));
             ChangeConfigContent(selectBossTemplate);
-            */
-            
-            this.pictureBox1.Image = bossTypeDict[bossType.SelectedIndex];
-            //this.label19.Text = bossType.Text;
-            string str = bossType.Text;
-            int arr = str.IndexOf("）") - 1 - str.IndexOf("（");
-            String str2 = str.Substring(str.IndexOf("（") + 1, arr);
-            this.label19.Text = str2;
-
-            WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", string.Format("BossIndex{0}.html", (bossType.SelectedIndex + 1).ToString()));
-            //切换样式，每个图表的配置标题要发生变化
-            ChangeCaptionText();
-            
-
         }
 
         private void ChangeConfigContent(BossTemplate bossTemplate)
         {
+            this.panel1.AutoScrollPosition = new Point(0, 0);
+
             List<BossChartConfig> bossCharts = bossTemplate.BossCharts;
             //根据选中模板的内容改变配置窗口右侧panel及其内容
             foreach(Control panel in this.panel1.Controls)
@@ -280,165 +265,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     {
                         if (ct is CaptionBar)
                             (ct as CaptionBar).Text = tmp.CaptionText;
-                    }
-                        
+                    }   
                 }
-                    
-            }
-        }
-
-
-        private void ChangeCaptionText()
-        {
-            if (bossType.SelectedIndex == 0)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（左下方）";
-                basicScatterCaption.Text = "点状图（中间下方）";
-                gradientLineChartCaption.Text = "曲线图（中间下方）";
-                stackBarCaption.Text = "堆叠柱状图（右上方）";
-                pictorialBarCaption.Text = "渐变柱状图（右下方）";
-                basicMapCaption.Text = "地市分布图（中间上方）";
-            }
-            else if (bossType.SelectedIndex == 1)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（右上方）";
-                basicScatterCaption.Text = "点状图（左下方）";
-                gradientLineChartCaption.Text = "曲线图（右下方）";
-                stackBarCaption.Text = "堆叠柱状图（不展示）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（不展示）";
-            }
-            else if (bossType.SelectedIndex == 2)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（左下方）";
-                basicScatterCaption.Text = "点状图（正中间）";
-                gradientLineChartCaption.Text = "曲线图（右上方）";
-                stackBarCaption.Text = "堆叠柱状图（右下方）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（不展示）";
-            }
-            else if (bossType.SelectedIndex == 3)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（右上方）";
-                basicScatterCaption.Text = "点状图（左下方）";
-                gradientLineChartCaption.Text = "曲线图（右下方）";
-                stackBarCaption.Text = "堆叠柱状图（不展示）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（不展示）";
-            }
-            else if (bossType.SelectedIndex == 4)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（右上方）";
-                basicScatterCaption.Text = "点状图（左下方）";
-                gradientLineChartCaption.Text = "曲线图（右下方）";
-                stackBarCaption.Text = "堆叠柱状图（不展示）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（不展示）";
-            }
-            else if (bossType.SelectedIndex == 5)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（右上方）";
-                basicScatterCaption.Text = "点状图（左下方）";
-                gradientLineChartCaption.Text = "曲线图（右下方）";
-                stackBarCaption.Text = "堆叠柱状图（不展示）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（不展示）";
-            }
-            else if (bossType.SelectedIndex == 6)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（左下方）";
-                basicScatterCaption.Text = "点状图（右上方）";
-                gradientLineChartCaption.Text = "曲线图（不展示）";
-                stackBarCaption.Text = "堆叠柱状图（右下方）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（不展示）";
-            }
-            else if (bossType.SelectedIndex == 7)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（左下方）";
-                basicScatterCaption.Text = "点状图（右下方）";
-                gradientLineChartCaption.Text = "曲线图";
-                stackBarCaption.Text = "堆叠柱状图（右下方）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（中间）";
-            }
-            else if (bossType.SelectedIndex == 8)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（左下方）";
-                basicScatterCaption.Text = "点状图（不展示）";
-                gradientLineChartCaption.Text = "曲线图（右上方）";
-                stackBarCaption.Text = "堆叠柱状图（右下方）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（中间）";
-            }
-            else if (bossType.SelectedIndex == 9)
-            {
-                simpleBarCaption.Text = "柱状图（左侧）";
-                basicLineChartCaption.Text = "折线图（不展示）";
-                basicScatterCaption.Text = "点状图（不展示）";
-                gradientLineChartCaption.Text = "曲线图（中右方）";
-                stackBarCaption.Text = "堆叠柱状图（右侧）";
-                basicPieCaption.Text = "饼状图（中左方）";
-                basicMapCaption.Text = "地市分布图（中上方）";
-            }
-            else if (bossType.SelectedIndex == 10)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（左下方）";
-                basicScatterCaption.Text = "点状图（不展示）";
-                gradientLineChartCaption.Text = "曲线图（右上方）";
-                stackBarCaption.Text = "堆叠柱状图（右下方）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（中间）";
-            }
-            else if (bossType.SelectedIndex == 11)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（左下方）";
-                basicScatterCaption.Text = "点状图（不展示）";
-                gradientLineChartCaption.Text = "曲线图（右上方）";
-                stackBarCaption.Text = "堆叠柱状图（右下方）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（中间）";
-            }
-            else if (bossType.SelectedIndex == 12)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（左下方）";
-                basicScatterCaption.Text = "点状图（中间下方）";
-                gradientLineChartCaption.Text = "曲线图（中间下方）";
-                stackBarCaption.Text = "堆叠柱状图（右上方）";
-                basicPieCaption.Text = "饼状图（右下方）";
-                basicMapCaption.Text = "地市分布图（中间上方）";
-            }
-            else if (bossType.SelectedIndex == 13)
-            {
-                simpleBarCaption.Text = "柱状图（左上方）";
-                basicLineChartCaption.Text = "折线图（不展示）";
-                basicScatterCaption.Text = "点状图（不展示）";
-                gradientLineChartCaption.Text = "曲线图（左下方）";
-                stackBarCaption.Text = "堆叠柱状图（不展示）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（右侧）";
-            }
-            else if (bossType.SelectedIndex == 14)
-            {
-                simpleBarCaption.Text = "柱状图（左侧）";
-                basicLineChartCaption.Text = "折线图（不展示）";
-                basicScatterCaption.Text = "点状图（不展示）";
-                gradientLineChartCaption.Text = "曲线图（右上方）";
-                stackBarCaption.Text = "堆叠柱状图（右下方）";
-                basicPieCaption.Text = "饼状图（不展示）";
-                basicMapCaption.Text = "地市分布图（中间）";
             }
         }
 
@@ -472,10 +300,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     return;
                 PageLoaded.SetResult(true);
             };
-            //
+
             while (PageLoaded.Task.Status != TaskStatus.RanToCompletion)
             {
-                await Task.Delay(2000);//interval of 10 ms worked good for me
+                await Task.Delay(2000);
                 TimeElapsed++;
                 if (TimeElapsed >= TimeOut * 100)
                     PageLoaded.TrySetResult(true);

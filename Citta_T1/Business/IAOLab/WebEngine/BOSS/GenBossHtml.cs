@@ -1,17 +1,15 @@
-﻿using C2.Business.IAOLab.WebEngine.Boss.Charts.Bar;
+﻿using C2.Business.IAOLab.WebEngine.Boss;
+using C2.Business.IAOLab.WebEngine.Boss.Charts.Bar;
 using C2.Business.IAOLab.WebEngine.Boss.Charts.Line;
+using C2.IAOLab.WebEngine.Boss.Charts;
 using C2.IAOLab.WebEngine.Boss.Charts.Bar;
 using C2.IAOLab.WebEngine.Boss.Charts.Line;
 using C2.IAOLab.WebEngine.Boss.Charts.Map;
 using C2.IAOLab.WebEngine.Boss.Charts.Pie;
 using C2.IAOLab.WebEngine.Boss.Charts.Scatter;
 using C2.IAOLab.WebEngine.Boss.Option;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C2.IAOLab.WebEngine.Boss
 {
@@ -39,121 +37,37 @@ namespace C2.IAOLab.WebEngine.Boss
 
             int bossType = chartOptions["BossType"][0];
 
-            switch (bossType)
-            {
-                case 0:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
-                    echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);
-                    echarts[6] = new PictorialBar(dataTable, new CompleteOption(), chartOptions);//渐变柱状图
-                    echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    break;
-                case 1:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//渐变线性图
-                    break;
-                case 2:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//渐变线性图
-                    echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
-                    break;
-                case 3:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//渐变线性图
-                    break;
-                case 4:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new StackBar(dataTable, new CompleteOption(), chartOptions);
-                    break;
-                case 5:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new StackBar(dataTable, new CompleteOption(), chartOptions);
-                    break;
-                case 6:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new StackBar(dataTable, new CompleteOption(), chartOptions);
-                    break;
-                case 7:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    echarts[4] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
-                    break;
-                case 8:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
-                    echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
-                    break;
-                case 9:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    echarts[3] = new BasicPie(dataTable, new CompleteOption(), chartOptions); //饼图
-                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
-                    echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
-                    break;
-                case 10:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
-                    echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
-                    break;
-                case 11:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);//曲线图
-                    echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);//堆叠柱状图
-                    break;
-                case 12:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
-                    echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);
-                    echarts[6] = new PictorialBar(dataTable, new CompleteOption(), chartOptions);//渐变柱状图
-                    echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    break;
-                case 13:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
-                    echarts[3] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    break;
-                case 14:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    echarts[3] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
-                    echarts[4] = new StackBar(dataTable, new CompleteOption(), chartOptions);
-                    break;
-                default:
-                    echarts[1] = new SimpleBar(dataTable, new CompleteOption(), chartOptions); //柱状图
-                    echarts[2] = new BasicLineChart(dataTable, new CompleteOption(), chartOptions); //折线图
-                    echarts[3] = new BasicScatter(dataTable, new CompleteOption(), chartOptions); //散点图
-                    echarts[4] = new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
-                    echarts[5] = new StackBar(dataTable, new CompleteOption(), chartOptions);
-                    echarts[6] = new PictorialBar(dataTable, new CompleteOption(), chartOptions);//渐变柱状图
-                    echarts[7] = new BasicMap(dataTable, new CompleteOption("map"), chartOptions); //大地图
-                    break;
-            }
+            //获取当前模板的所有图表
+            List<BossChartConfig> bossCharts = BossTemplateCollection.GetInstance().GetTemplateByIdx(bossType).BossCharts;
+            foreach(BossChartConfig chart in bossCharts)
+                echarts[chart.Idx] = GenChartByType(chart.Type, dataTable, chartOptions);
 
             return echarts.Show();
+        }
+
+        private BaseCharts GenChartByType(string chartType, DataTable dataTable, Dictionary<string, int[]> chartOptions)
+        {
+            switch (chartType)
+            {
+                case "SimpleBar":
+                    return new SimpleBar(dataTable, new CompleteOption(), chartOptions);
+                case "BasicLineChart":
+                    return new BasicLineChart(dataTable, new CompleteOption(), chartOptions);
+                case "BasicScatter":
+                    return new BasicScatter(dataTable, new CompleteOption(), chartOptions);
+                case "GradientLineChart":
+                    return new GradientLineChart(dataTable, new CompleteOption(), chartOptions);
+                case "StackBar":
+                    return new StackBar(dataTable, new CompleteOption(), chartOptions);
+                case "PictorialBar":
+                    return new PictorialBar(dataTable, new CompleteOption(), chartOptions);
+                case "BasicMap":
+                    return new BasicMap(dataTable, new CompleteOption("map"), chartOptions);
+                case "BasicPie":
+                    return new BasicPie(dataTable, new CompleteOption(), chartOptions);
+                default:
+                    return new SimpleBar(dataTable, new CompleteOption(), chartOptions);
+            }
         }
 
     }
