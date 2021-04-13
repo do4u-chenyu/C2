@@ -1,5 +1,7 @@
 ﻿using C2.Dialogs;
+using C2.IAOLab.WebEngine;
 using C2.IAOLab.WebEngine.Dialogs;
+using C2.Model.MindMaps;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -92,6 +94,16 @@ namespace C2.Model.Widgets
                 }
                 catch { }
             }
+        }
+        public override void OnDoubleClick(HandledEventArgs e)
+        {
+            new WebManager()
+            {
+                Type = WebManager.WebType.Map,
+                HitTopic = (this.Container as Topic)
+                //WebUrl = mw.WebUrl
+            }.OpenWebBrowser();
+            base.OnDoubleClick(e);
         }
     }
 }
