@@ -450,8 +450,12 @@ namespace C2.Dialogs
         }
         private void CheckUpdate()
         {
-            string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
-            this.currentVersion.Text = "V" + currentVersion;
+            string currentVersion = Program.Software_Version;
+            this.Invoke((EventHandler)(delegate
+            {
+                this.currentVersion.Text = "V" + currentVersion;
+            }));
+            
             this.newSoftwareVersion = NewSoftewareVersion();
             if (IsFormNotExist())
                 return;
