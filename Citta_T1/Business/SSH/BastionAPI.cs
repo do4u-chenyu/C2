@@ -144,7 +144,7 @@ namespace C2.Business.SSH
 
                 while (left > 0)
                 {
-                    int bytesRead = shell.Read(buffer, offset, bufferSize, Timeout);
+                    int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), Timeout);
                     offset = 0; // 读完一次, 起始位置复位
 
                     if (bytesRead == 0) // 超时

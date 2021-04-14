@@ -2,10 +2,6 @@
 using C2.SearchToolkit;
 using C2.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C2.Dialogs
 {
@@ -31,7 +27,10 @@ namespace C2.Dialogs
             bool succ = api.Login()
                            .DownloadGambleTaskResult(temp);
             if (succ) // 成功 临时文件转正
+            {
+                FileUtil.DeleteFile(done);     // 先删除重名文件,要确认下载成功后再删,以免文件没下载,以前的也没有了
                 FileUtil.FileMove(temp, done);
+            }          
             else      // 失败 删除临时文件
                 FileUtil.DeleteFile(temp);
 
