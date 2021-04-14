@@ -57,6 +57,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0821CA2EF841438FBB84D228930BFAB1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_084D37012E9F4097B066FA9447E8E1AF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -69,6 +75,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_089055DA3B684EE9A149EAA02D211446"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_09BC3604E5444B0CA0403571C2161647"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -76,6 +88,12 @@
         "Entry"
         {
         "MsmKey" = "8:_0B66188BFCE543D0B29F835875365A40"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0C3177FB38AA48E7810F156E2B489D3D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -159,6 +177,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1C433E82F9624A05A47BECF5FF7AD29B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1D3CA9E62AFD4008906B5E0D05EAF01A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -237,6 +261,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_259EF0AA371C46EBB6395FCF0B4D3715"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_263DC533BD694A2589F77150F9F51CE6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -286,6 +316,12 @@
         "Entry"
         {
         "MsmKey" = "8:_2DBE09A214D34C9A89055399953ED1B4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2E0D2C6862D54502A7BC2B76B9F48613"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -393,6 +429,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3DC03A91B1174454A0AB6D843DC815E7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3E57BA2B6F6140C9A80754C312DFCB1C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -412,6 +454,12 @@
         "Entry"
         {
         "MsmKey" = "8:_3FE2C871062C482E9447F23FCD6C3ECE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_402A8E27EAF849ADB96CD8974066BB62"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -453,7 +501,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_44E643BD7832415CABEA408313CB7FBA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_45FB251F9F5E4F8985072849772F13EE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_46A0D3EC0B4347DF80251CA1ED4F0B21"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -466,13 +526,13 @@
         "Entry"
         {
         "MsmKey" = "8:_471C8E5D2AD24868BEF7CC8609F37E8D"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "OwnerKey" = "8:_DA14ED4BEFA84F6485DD7B5F1528BD50"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_471C8E5D2AD24868BEF7CC8609F37E8D"
-        "OwnerKey" = "8:_DA14ED4BEFA84F6485DD7B5F1528BD50"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -652,13 +712,13 @@
         "Entry"
         {
         "MsmKey" = "8:_581709CB6A16204F12F59FEEFE1CF665"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "OwnerKey" = "8:_72E33DBBB280492E9659F053EB817BE1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_581709CB6A16204F12F59FEEFE1CF665"
-        "OwnerKey" = "8:_72E33DBBB280492E9659F053EB817BE1"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -717,6 +777,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5F53F396F6124D0ABD03A25DCE7F8BEC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5F89341AD06D4201BE0A02F04C019607"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5FDEF99788192FCB6C403DA31F3027DA"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "MsmSig" = "8:_UNDEFINED"
@@ -742,6 +814,12 @@
         "Entry"
         {
         "MsmKey" = "8:_643106283ED14E1BBC1FDF128AACB201"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_645012450E204CB8AE08C39831F5E1D2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -825,6 +903,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6E79701826014DE0AFAA9790D51D4E88"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6FAF7370CE0441938D4F87293960F781"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -832,6 +916,12 @@
         "Entry"
         {
         "MsmKey" = "8:_72E33DBBB280492E9659F053EB817BE1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7534357684CC4129B06FF85388353C00"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -891,6 +981,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8406020105664134B46914CA04D398F6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8499BAC1E9471AE83FDA4CD610E8680A"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "MsmSig" = "8:_UNDEFINED"
@@ -898,13 +994,13 @@
         "Entry"
         {
         "MsmKey" = "8:_8499BAC1E9471AE83FDA4CD610E8680A"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "OwnerKey" = "8:_72E33DBBB280492E9659F053EB817BE1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8499BAC1E9471AE83FDA4CD610E8680A"
-        "OwnerKey" = "8:_72E33DBBB280492E9659F053EB817BE1"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -964,6 +1060,18 @@
         "Entry"
         {
         "MsmKey" = "8:_8CB4E5FB3860463EABAA068E0F2B6FDC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8FD4A5E5302B43DC9B7711DB9B79380F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_901BDEC551A34761BA02AFAC92ACAECE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1077,7 +1185,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_9F50123EC1B5423FAB0D013B5997E1D6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A0B3A58C42BF40FCB0865A5001AD3FCB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A0B7A83D375F4BA89C5B532542768BB6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1090,6 +1210,12 @@
         "Entry"
         {
         "MsmKey" = "8:_A2FFD203C8834DBDA27F565D5C5FCBC5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A4C98286458744D783C1CDF1D77D8717"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1144,6 +1270,12 @@
         "Entry"
         {
         "MsmKey" = "8:_AC57485011DF43D39503496EFF694BD8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AC7F4ACB988443CD938C26D059A08C55"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1204,6 +1336,12 @@
         "Entry"
         {
         "MsmKey" = "8:_B522AB2076DF4CF189F9C4FB82EF4754"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B553590F396D443A8CF5EB131D874D49"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1365,6 +1503,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D21C210D92B44F209E623C9CF324C4ED"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D351190D71854096B08CEDED06EEE678"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1396,6 +1540,12 @@
         "Entry"
         {
         "MsmKey" = "8:_D7A9F2E824894D86B7FA9BE570352D6A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D84AC60DD467499099144E31D970C95C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1443,6 +1593,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DCDC4A428C914136BD2A623D302E3818"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DE359BCF1E224C099138AFC943B3167F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DE7CA009A2DA4468B87D7EA212B555B6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1450,6 +1612,12 @@
         "Entry"
         {
         "MsmKey" = "8:_DEDC21EFD49B4377BF9034E2EE112E68"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E3AC4CF2D13F4E3C9C77E9AD677B1079"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1540,6 +1708,12 @@
         "Entry"
         {
         "MsmKey" = "8:_F05E5ED591D745B2980CDE3F769AFA83"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F09FC87E1DD84528BF7DF46D56D695F3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1684,12 +1858,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DA14ED4BEFA84F6485DD7B5F1528BD50"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1697,6 +1865,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_72E33DBBB280492E9659F053EB817BE1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2063,6 +2237,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0821CA2EF841438FBB84D228930BFAB1"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex5.html"
+            "TargetName" = "8:BossIndex5.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_084D37012E9F4097B066FA9447E8E1AF"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\29_涉藏.png"
@@ -2103,6 +2297,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_089055DA3B684EE9A149EAA02D211446"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex8.html"
+            "TargetName" = "8:BossIndex8.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_09BC3604E5444B0CA0403571C2161647"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\297_数字7.png"
@@ -2129,6 +2343,26 @@
             "TargetName" = "8:69_Imsi.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0C3177FB38AA48E7810F156E2B489D3D"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex14.html"
+            "TargetName" = "8:BossIndex14.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2380,6 +2614,26 @@
             "TargetName" = "8:181_票据.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1C433E82F9624A05A47BECF5FF7AD29B"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex6.html"
+            "TargetName" = "8:BossIndex6.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2654,6 +2908,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_259EF0AA371C46EBB6395FCF0B4D3715"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\BossOptions.js"
+            "TargetName" = "8:BossOptions.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_263DC533BD694A2589F77150F9F51CE6"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\221_乘号.png"
@@ -2831,6 +3105,26 @@
             "TargetName" = "8:301_数字8.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2E0D2C6862D54502A7BC2B76B9F48613"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\echarts.min.js"
+            "TargetName" = "8:echarts.min.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3198,6 +3492,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3DC03A91B1174454A0AB6D843DC815E7"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex4.html"
+            "TargetName" = "8:BossIndex4.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3E57BA2B6F6140C9A80754C312DFCB1C"
             {
             "SourcePath" = "8:C:\\Windows\\System32\\msiexec.exe"
@@ -3264,6 +3578,26 @@
             "TargetName" = "8:en.US.xml"
             "Tag" = "8:"
             "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_402A8E27EAF849ADB96CD8974066BB62"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex12.html"
+            "TargetName" = "8:BossIndex12.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3398,12 +3732,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_44E643BD7832415CABEA408313CB7FBA"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\phx.js"
+            "TargetName" = "8:phx.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_45FB251F9F5E4F8985072849772F13EE"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\253_灰旗.png"
             "TargetName" = "8:253_灰旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_46A0D3EC0B4347DF80251CA1ED4F0B21"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\phx6.js"
+            "TargetName" = "8:phx6.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4113,6 +4487,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5F53F396F6124D0ABD03A25DCE7F8BEC"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\DistanceTool_min.js"
+            "TargetName" = "8:DistanceTool_min.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5F89341AD06D4201BE0A02F04C019607"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\phx11.js"
+            "TargetName" = "8:phx11.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5FDEF99788192FCB6C403DA31F3027DA"
             {
             "AssemblyRegister" = "3:1"
@@ -4190,6 +4604,26 @@
             "TargetName" = "8:msys-iconv-2.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_645012450E204CB8AE08C39831F5E1D2"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\SourceCodeMap.html"
+            "TargetName" = "8:SourceCodeMap.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4435,6 +4869,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6E79701826014DE0AFAA9790D51D4E88"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\DrawingManager.js"
+            "TargetName" = "8:DrawingManager.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6FAF7370CE0441938D4F87293960F781"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\433_方向.png"
@@ -4472,6 +4926,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7534357684CC4129B06FF85388353C00"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\china.js"
+            "TargetName" = "8:china.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4666,6 +5140,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8406020105664134B46914CA04D398F6"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex1.html"
+            "TargetName" = "8:BossIndex1.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8499BAC1E9471AE83FDA4CD610E8680A"
             {
             "AssemblyRegister" = "3:1"
@@ -4814,6 +5308,46 @@
             "TargetName" = "8:237_勾.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8FD4A5E5302B43DC9B7711DB9B79380F"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\phx13.js"
+            "TargetName" = "8:phx13.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_901BDEC551A34761BA02AFAC92ACAECE"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\StartMap.html"
+            "TargetName" = "8:StartMap.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -5150,12 +5684,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9F50123EC1B5423FAB0D013B5997E1D6"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex11.html"
+            "TargetName" = "8:BossIndex11.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A0B3A58C42BF40FCB0865A5001AD3FCB"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\68_Imei.png"
             "TargetName" = "8:68_Imei.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A0B7A83D375F4BA89C5B532542768BB6"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex9.html"
+            "TargetName" = "8:BossIndex9.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -5196,6 +5770,26 @@
             "TargetName" = "8:13_涉恐.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A4C98286458744D783C1CDF1D77D8717"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex15.html"
+            "TargetName" = "8:BossIndex15.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -5390,6 +5984,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AC7F4ACB988443CD938C26D059A08C55"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex13.html"
+            "TargetName" = "8:BossIndex13.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ADAB44E800144DC68263F801E3A97C3D"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\77_QQ.png"
@@ -5567,6 +6181,26 @@
             "TargetName" = "8:iconv.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B553590F396D443A8CF5EB131D874D49"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex10.html"
+            "TargetName" = "8:BossIndex10.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6072,6 +6706,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D21C210D92B44F209E623C9CF324C4ED"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\DrawingManager_min.js"
+            "TargetName" = "8:DrawingManager_min.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D351190D71854096B08CEDED06EEE678"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\17_涉政.png"
@@ -6178,6 +6832,26 @@
             "TargetName" = "8:468_星期四.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D84AC60DD467499099144E31D970C95C"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex7.html"
+            "TargetName" = "8:BossIndex7.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6343,6 +7017,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCDC4A428C914136BD2A623D302E3818"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\Heatmap_min.js"
+            "TargetName" = "8:Heatmap_min.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DE359BCF1E224C099138AFC943B3167F"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex3.html"
+            "TargetName" = "8:BossIndex3.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DE7CA009A2DA4468B87D7EA212B555B6"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\101_关键词.png"
@@ -6369,6 +7083,26 @@
             "TargetName" = "8:325_星星.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E3AC4CF2D13F4E3C9C77E9AD677B1079"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\JS\\phx5.js"
+            "TargetName" = "8:phx5.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6660,6 +7394,26 @@
             "TargetName" = "8:129_分类.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F09FC87E1DD84528BF7DF46D56D695F3"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex2.html"
+            "TargetName" = "8:BossIndex2.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7114,6 +7868,61 @@
                         {
                         }
                     }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_629199D01671408FB8D25D5B471C954B"
+                    {
+                    "Name" = "8:Business"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_7DF5E79C1D9944C7BA50B4802F6CDD35"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_6176A7FFC8E24D88B233B6ADC1E9C1F8"
+                            {
+                            "Name" = "8:IAOLab"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_9187463CD2AF460096B924F8308227ED"
+                                "Folders"
+                                {
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_D065F1F4A11744B2B6C446FE1540D037"
+                                    {
+                                    "Name" = "8:WebEngine"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_38D2F62FB892445A8464CA6F4AC80861"
+                                        "Folders"
+                                        {
+                                            "{9EF0B969-E518-4E46-987F-47570745A589}:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+                                            {
+                                            "Name" = "8:JS"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "Property" = "8:_01279D01A0A346D992238CECBEDCD02D"
+                                                "Folders"
+                                                {
+                                                }
+                                            }
+                                            "{9EF0B969-E518-4E46-987F-47570745A589}:_D896FD688F60459D930F76038B4CDFC7"
+                                            {
+                                            "Name" = "8:Html"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "Property" = "8:_2E8454F999DE498A9F4A5FCB0C3536CC"
+                                                "Folders"
+                                                {
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_9382BCC0C5F5404FACD53E5A008CA47C"
                     {
                     "Name" = "8:Demo"
@@ -7287,7 +8096,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{D9151B9A-7BFE-4CE1-A451-605FFE575E17}"
+        "PackageCode" = "8:{3A858F20-CCA5-4223-BCEB-C847FF97D532}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

@@ -2291,9 +2291,6 @@
     <Content Include="Business\IAOLab\WebEngine\img\img6\bottom.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img6\center2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img6\title.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

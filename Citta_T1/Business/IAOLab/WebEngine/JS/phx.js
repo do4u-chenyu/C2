@@ -21,11 +21,11 @@
     }
     echarts.registerTheme('phx', {
         "color": [
-            "#5470c6",
-            "#91cc75",
-            "#fac858",
-            "#ee6666",
-            "#73c0de",
+            "#6192f3",
+            "#9480f3",
+            "#66dfbf",
+            "#f3a3ec",
+            "rgba(248,171,146,0.98)",
             "#3ba272",
             "#fc8452",
             "#9a60b4",
@@ -35,10 +35,10 @@
         "textStyle": {},
         "title": {
             "textStyle": {
-                "color": "#f2f2f2"
+                "color": "#464646"
             },
             "subtextStyle": {
-                "color": "#e0e0e0"
+                "color": "#6E7079"
             }
         },
         "line": {
@@ -133,11 +133,11 @@
             "symbol": "emptyCircle",
             "smooth": false,
             "color": [
-                "#5470c6",
-                "#91cc75",
-                "#fac858",
-                "#ee6666",
-                "#73c0de",
+                "#6192f3",
+                "#9480f3",
+                "#66dfbf",
+                "#f3a3ec",
+                "rgba(248,171,146,0.98)",
                 "#3ba272",
                 "#fc8452",
                 "#9a60b4",
@@ -150,7 +150,7 @@
         "map": {
             "itemStyle": {
                 "normal": {
-                    "areaColor": "#ccc",
+                    "areaColor": "#eee",
                     "borderColor": "#444",
                     "borderWidth": 0.5
                 },
@@ -163,7 +163,7 @@
             "label": {
                 "normal": {
                     "textStyle": {
-                        "color": "#ccc"
+                        "color": "#000"
                     }
                 },
                 "emphasis": {
@@ -203,19 +203,19 @@
             "axisLine": {
                 "show": true,
                 "lineStyle": {
-                    "color": "#cfcfcf"
+                    "color": "#6E7079"
                 }
             },
             "axisTick": {
                 "show": true,
                 "lineStyle": {
-                    "color": "#c4c4c4"
+                    "color": "#6E7079"
                 }
             },
             "axisLabel": {
                 "show": true,
                 "textStyle": {
-                    "color": "#d1d1d1"
+                    "color": "#6E7079"
                 }
             },
             "splitLine": {
@@ -252,14 +252,14 @@
             "axisLabel": {
                 "show": true,
                 "textStyle": {
-                    "color": "#e0e6f1"
+                    "color": "#6E7079"
                 }
             },
             "splitLine": {
                 "show": true,
                 "lineStyle": {
                     "color": [
-                        "#e0e6f1"
+                        "#E0E6F1"
                     ]
                 }
             },
@@ -289,14 +289,14 @@
             "axisLabel": {
                 "show": true,
                 "textStyle": {
-                    "color": "#e0e6f1"
+                    "color": "#6E7079"
                 }
             },
             "splitLine": {
                 "show": true,
                 "lineStyle": {
                     "color": [
-                        "#e0e6f1"
+                        "#E0E6F1"
                     ]
                 }
             },
@@ -314,19 +314,19 @@
             "axisLine": {
                 "show": true,
                 "lineStyle": {
-                    "color": "#e0e6f1"
+                    "color": "#6E7079"
                 }
             },
             "axisTick": {
                 "show": true,
                 "lineStyle": {
-                    "color": "#e0e6f1"
+                    "color": "#6E7079"
                 }
             },
             "axisLabel": {
                 "show": true,
                 "textStyle": {
-                    "color": "#e0e6f1"
+                    "color": "#6E7079"
                 }
             },
             "splitLine": {
@@ -350,26 +350,26 @@
         "toolbox": {
             "iconStyle": {
                 "normal": {
-                    "borderColor": "#e0e6f1"
+                    "borderColor": "#999"
                 },
                 "emphasis": {
-                    "borderColor": "#e0e6f1"
+                    "borderColor": "#666"
                 }
             }
         },
         "legend": {
             "textStyle": {
-                "color": "#e0e6f1"
+                "color": "#333"
             }
         },
         "tooltip": {
             "axisPointer": {
                 "lineStyle": {
-                    "color": "#e0e6f1",
+                    "color": "#ccc",
                     "width": 1
                 },
                 "crossStyle": {
-                    "color": "#e0e6f1",
+                    "color": "#ccc",
                     "width": 1
                 }
             }
@@ -422,8 +422,7 @@
                 "#bf444c",
                 "#d88273",
                 "#f6efa6"
-            ],
-			"textStyle":{"color": "#ccc" },
+            ]
         },
         "dataZoom": {
             "handleSize": "undefined%",
