@@ -41,7 +41,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
             LoadOption();
             webBrowser = browser;
         }
-
+        public void Clear()
+        {
+            foreach (var bitmap in this.bossTypeDict)
+                bitmap.Dispose();
+            this.bossTypeDict.Clear();
+        }
         //图表关联，保存配置
         private void SavaOption()
         {

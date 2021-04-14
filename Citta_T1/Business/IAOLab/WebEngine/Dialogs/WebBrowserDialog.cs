@@ -498,6 +498,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 webBrowser1.Navigate(selectBossDialog.WebUrl);
                 ChartOptions = selectBossDialog.ChartOptions;
             }
+            selectBossDialog.Clear();
+            selectBossDialog.Dispose();
         }
 
         void SavePic_Click(object sender, EventArgs e)
