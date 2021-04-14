@@ -98,7 +98,7 @@ namespace C2.SearchToolkit
                 succ = progressBar.Download();
 
             if (succ)
-                HelpUtil.ShowMessageBox(String.Format("任务【{0}】下载成功", task.TaskName));
+                HelpUtil.ShowMessageBox(String.Format("{0}-任务【{1}】下载成功", task.TaskModel, task.TaskName));
             else
                 HelpUtil.ShowMessageBox(task.LastErrorMsg);
 
