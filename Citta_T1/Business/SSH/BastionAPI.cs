@@ -20,7 +20,7 @@ namespace C2.Business.SSH
         
 
         private const int SecondsTimeout = 10;
-        private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
+        private const String SeparatorString = "TCzmiJHkvZnnlJ/lpoLkuIflj6Tplb/lpJw=";
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
@@ -47,7 +47,6 @@ namespace C2.Business.SSH
         {
             this.task = task;
             this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
-            //this.ssh = new SshClient("114.55.248.85", "root", "aliyun.123");
             this.ssh.ConnectionInfo.Timeout = Timeout; 
         }
 
