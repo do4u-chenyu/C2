@@ -42,9 +42,9 @@ namespace C2.Business.SSH
             }
         }
 
-        public bool ReadByte(ref byte b)
+        public bool ReadByte(ref byte b, TimeSpan timeout)
         {
-            if (shell.Read(InComing, 0, 1) > 0)
+            if (Read(InComing, 0, 1, timeout) > 0)
             {
                 b = InComing[0];
                 return true;

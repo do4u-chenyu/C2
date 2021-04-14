@@ -24,8 +24,9 @@ namespace C2.Business.SSH
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
-        
-        private static readonly String TgzHead = Encoding.UTF8.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
+
+        private static readonly byte[] TgzHeadBytes = new byte[] { 0x1f, 0x8b, 0x08 };  // 1f 8b 08 .tgz的文件头
+        private static readonly String TgzHeadString = Encoding.UTF8.GetString(TgzHeadBytes);
 
         private readonly TaskInfo task;
 
@@ -115,7 +116,7 @@ namespace C2.Business.SSH
         }
 
         private bool Cat(String ffp, FileStream fs, long fileLength, ShellStream ssm)
-        {              
+        {
             try
             {
                 // 清理缓存
@@ -125,7 +126,7 @@ namespace C2.Business.SSH
                 // 打印分隔符
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
 
-                String begin = ssm.Expect(new Regex(TgzHead), Timeout);  
+                String begin = ssm.Expect(new Regex(TgzHeadString), Timeout);  
                 if (null == begin)
                 {
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
@@ -137,8 +138,9 @@ namespace C2.Business.SSH
                 byte[] buffer = new byte[bufferSize + 1]; // 预留一个空白位用来存储预读字节
 
                 Shell shell = new Shell(ssm);
-                long left = fileLength - TgzHead.Length;  // 去掉文件头
-                int offset = 0;                           // 缓存起始位置
+                long left = fileLength - TgzHeadString.Length;   // 去掉文件头
+                int offset = 0;                                  // 缓存起始位置
+                fs.Write(TgzHeadBytes, 0, TgzHeadBytes.Length);  // 写入文件头
 
                 while (left > 0)
                 {
@@ -148,11 +150,15 @@ namespace C2.Business.SSH
                     if (bytesRead == 0) // 超时
                     {
                         task.LastErrorMsg = String.Format("任务【{0}】下载失败：网络超时", task.TaskName);
-                        break;
+                        return false;
                     }
 
                     if (downloadCancel)
-                        break;
+                    {
+                        task.LastErrorMsg = String.Format("用户取消任务【{0}】的下载", task.TaskName);
+                        return false;
+                    }
+                        
                     // 策略:
                     // 0) cat 回传时，会把字节流的NL全部替换成CRNL,需要再替换回来
                     // 1) 最后一个字节不是CR，替换CRNL
@@ -166,8 +172,11 @@ namespace C2.Business.SSH
                     }
   
                     byte one = 0;
-                    if (!shell.ReadByte(ref one))
-                        break;
+                    if (!shell.ReadByte(ref one, Timeout))
+                    {
+                        task.LastErrorMsg = String.Format("任务【{0}】下载失败：远端读错误", task.TaskName);
+                        return false;
+                    }
                         
                     if (one != CR)  // 情况2
                     {
@@ -181,8 +190,8 @@ namespace C2.Business.SSH
                     }
                 }
             }
-            catch { }
-            return false;
+            catch (Exception ex) { task.LastErrorMsg = ex.Message; return false; }
+            return true;
         }
 
         private String GetRemoteFilename(String s)
@@ -251,19 +260,19 @@ namespace C2.Business.SSH
         private int ReplaceCRNLWrite(byte[] buffer, int count, FileStream fs)
         {
             count = Math.Min(buffer.Length, count); // 保险一下，下载错误的文件比程序崩强
-            int real = count;
-
-            int curr = 0; 
-            int head = 0;
+            
+            int real = 0; // 实际写入字节
+            int curr = 0; // 当前游标位置
+            int head = 0; // 当前写入起始位置
 
             if (count < 2)  // 不足2个字节,不可能含有CRNL
             {
                 fs.Write(buffer, head, curr + 1 - head);
-                return real;
+                return curr - head + 1;
             }
 
             //  |                |      [0, count - 1)             
-            // [++++++++++++++++++-]
+            // [++++++\r\n++++++++++++-]
             do
             {
                 // 找到 下一个 /r/n
@@ -272,17 +281,18 @@ namespace C2.Business.SSH
                 // 没找到, 直接到结尾处,退出
                 if (curr + 1 >= count) 
                 {
-                    fs.Write(buffer, head, curr + 1 - head + 1);
-                    return real += curr + 1 - head + 1;
+                    fs.Write(buffer, head, curr - head + 1);
+                    return real += curr - head + 1;
                 }
                 // 找到CRNL
                 buffer[curr] = NL;
                 fs.Write(buffer, head, curr - head + 1);
 
                 real += curr - head + 1;
-                head = ++curr;      // 游标置于当前位置
-           
-            } while (curr + 1 < count); 
+                curr += 2;      // 游标置于当前位置
+                head = curr;
+
+            } while (head < count); 
 
             return real;
         }

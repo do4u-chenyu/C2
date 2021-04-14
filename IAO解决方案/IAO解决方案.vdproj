@@ -8070,7 +8070,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{3A858F20-CCA5-4223-BCEB-C847FF97D532}"
+        "PackageCode" = "8:{2F8EE6B5-3812-49B9-9D90-5D1A077321C2}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
