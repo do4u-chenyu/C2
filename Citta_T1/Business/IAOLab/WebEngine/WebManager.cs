@@ -59,6 +59,7 @@ namespace C2.IAOLab.WebEngine
             }
             if (wbDialog.ShowDialog() == DialogResult.OK)
                 Global.OnModifiedChange(); //数据大屏生成图片挂件，地图生成打标文档，需要置dirty
+            wbDialog.Quit();
             wbDialog.Dispose();
         }
     }

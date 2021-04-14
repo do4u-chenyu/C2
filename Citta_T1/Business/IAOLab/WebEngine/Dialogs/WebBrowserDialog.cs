@@ -498,8 +498,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 webBrowser1.Navigate(selectBossDialog.WebUrl);
                 ChartOptions = selectBossDialog.ChartOptions;
             }
-            selectBossDialog.Clear();
-            selectBossDialog.Dispose();
         }
 
         void SavePic_Click(object sender, EventArgs e)
@@ -552,6 +550,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
         protected override bool OnCancelButtonClick()
         {
             return base.OnCancelButtonClick();
+        }
+        public void Quit()
+        {
+            if (selectBossDialog != null)
+            {
+                selectBossDialog.Clear();
+                selectBossDialog.Dispose();
+            }
         }
         /// <summary>
         /// 保存地图配置信息到MapWidget中
