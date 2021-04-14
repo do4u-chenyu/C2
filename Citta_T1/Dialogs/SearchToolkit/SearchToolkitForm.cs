@@ -92,17 +92,15 @@ namespace C2.SearchToolkit
                 MinimumValue = 0,   
                 MaximumValue = 100,
             };
-
+            task.LastErrorMsg = String.Empty; // 清空错误信息
             bool succ = false;
             using (GuarderUtil.WaitCursor)
                 succ = progressBar.Download();
 
             if (succ)
                 HelpUtil.ShowMessageBox(String.Format("任务【{0}】下载成功", task.TaskName));
-            else if (!String.IsNullOrEmpty(task.LastErrorMsg))
-                HelpUtil.ShowMessageBox(task.LastErrorMsg);
             else
-                HelpUtil.ShowMessageBox(String.Format("用户取消任务【{0}】下载任务", task.TaskName));
+                HelpUtil.ShowMessageBox(task.LastErrorMsg);
 
             //progressBar.ShowDialog();
         }
