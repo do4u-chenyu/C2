@@ -41,9 +41,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public DataItem HitItem { get { return this.hitItem; } }
         public List<DataItem> DataItems;
 
-        public string drawlatude;
+        public string drawlatitude;
 
-        public string drawlontude;
+        public string drawlongitude;
 
         public SelectMapDialog(List<DataItem> dataItems)
         {
@@ -129,8 +129,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 return false;
             }
             Random rm = new Random();
-            drawlontude = lonValues[0][rm.Next(lonValues.Count)];
-            drawlatude = latValues[0][rm.Next(latValues.Count)];
+            drawlongitude = lonValues[0][rm.Next(lonValues.Count)];
+            drawlatitude = latValues[0][rm.Next(latValues.Count)];
             if (!InvalidLonValues(lonValues))
             {
                 HelpUtil.ShowMessageBox(HelpUtil.InvalidLongitude);

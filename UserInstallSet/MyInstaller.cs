@@ -23,16 +23,16 @@ namespace UserInstallSet
         "    </appSettings>\r\n" +
         "    <userSettings >\r\n" +
         "      <C2.Properties.Settings >\r\n" +
-        "       <setting name=\"lontude\" serializeAs=\"String\">\r\n" +
-        "         <value>118.744</value>\r\n" +
+        "       <setting name=\"longitude\" serializeAs=\"String\">\r\n" +
+        "         <value>118.744288</value>\r\n" +
         "       </setting>\r\n" +
-        "       <setting name = \"latude\" serializeAs=\"String\">\r\n" +
-        "         <value>31.996</value>\r\n" +
+        "       <setting name = \"latitude\" serializeAs=\"String\">\r\n" +
+        "         <value>31.996022</value>\r\n" +
         "       </setting>\r\n" +
         "       <setting name = \"scale\" serializeAs=\"String\">\r\n" +
         "         <value>19</value>\r\n" +
         "       </setting>\r\n" +
-        "       <setting name = \"baiduVerAPI\" serializeAs=\"String\">\r\n" +
+        "       <setting name = \"baiduAPIKey\" serializeAs=\"String\">\r\n" +
         "         <value>FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9</value>\r\n" +
         "       </setting>\r\n" +
         "     </C2.Properties.Settings>\r\n" +

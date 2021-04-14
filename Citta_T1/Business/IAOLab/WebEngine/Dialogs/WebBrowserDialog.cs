@@ -357,7 +357,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                         break;
                 }
                 SaveCenterAndZoom();
-                string newCenterAndZoom = dialog.drawlontude + ',' + dialog.drawlatude + ',' + CalculateScale(dialog.mapPoints);
+                string newCenterAndZoom = dialog.drawlongitude + ',' + dialog.drawlatitude + ',' + CalculateScale(dialog.mapPoints);
                 webBrowser1.Document.InvokeScript("centerAndZoom", new object[] { newCenterAndZoom });
             }
             else

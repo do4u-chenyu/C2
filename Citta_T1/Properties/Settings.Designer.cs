@@ -25,42 +25,6 @@ namespace C2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js")]
-        public string baiduHeatAPI {
-            get {
-                return ((string)(this["baiduHeatAPI"]));
-            }
-            set {
-                this["baiduHeatAPI"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("118.744")]
-        public string lontude {
-            get {
-                return ((string)(this["lontude"]));
-            }
-            set {
-                this["lontude"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("31.996")]
-        public string latude {
-            get {
-                return ((string)(this["latude"]));
-            }
-            set {
-                this["latude"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("19")]
         public string scale {
             get {
@@ -74,12 +38,36 @@ namespace C2.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9")]
-        public string baiduVerAPI {
+        public string baiduAPIKey {
             get {
-                return ((string)(this["baiduVerAPI"]));
+                return ((string)(this["baiduAPIKey"]));
             }
             set {
-                this["baiduVerAPI"] = value;
+                this["baiduAPIKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("118.744288")]
+        public string longitude {
+            get {
+                return ((string)(this["longitude"]));
+            }
+            set {
+                this["longitude"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31.996022")]
+        public string latitude {
+            get {
+                return ((string)(this["latitude"]));
+            }
+            set {
+                this["latitude"] = value;
             }
         }
     }
