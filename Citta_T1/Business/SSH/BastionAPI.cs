@@ -20,7 +20,7 @@ namespace C2.Business.SSH
         
 
         private const int SecondsTimeout = 10;
-        private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
+        private const String SeparatorString = "TCzmiJHkvZnnlJ/lpoLkuIflj6Tplb/lpJw=";
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
@@ -47,7 +47,6 @@ namespace C2.Business.SSH
         {
             this.task = task;
             this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
-            //this.ssh = new SshClient("114.55.248.85", "root", "aliyun.123");
             this.ssh.ConnectionInfo.Timeout = Timeout; 
         }
 
@@ -115,7 +114,7 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
-        private bool Cat(String ffp, FileStream fs, long fileLength, ShellStream ssm)
+        private bool CatTgzFile(String ffp, FileStream fs, long fileLength, ShellStream ssm)
         {
             try
             {
@@ -125,7 +124,7 @@ namespace C2.Business.SSH
                 ssm.WriteLine(String.Format("cat {0}", ffp));
                 // 打印分隔符
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
-
+                // 当字符串里永远没有TGZHead时，这里内存会非常大，没有啥好办法，只能外围判断必须是tgz文件
                 String begin = ssm.Expect(new Regex(TgzHeadString), Timeout);  
                 if (null == begin)
                 {
@@ -135,16 +134,17 @@ namespace C2.Business.SSH
 
                 // 根据lxf的情报, 40M 为中位数
                 int bufferSize = fileLength > M40 ? K512 : K2;  // 40M 以上的文件用大缓存，减少进程切换的消耗   
-                byte[] buffer = new byte[bufferSize + 1]; // 预留一个空白位用来存储预读字节
+                byte[] buffer = new byte[bufferSize + 1];        // 预留一个空白位用来存储预读字节
 
+                // 写入文件头
+                fs.Write(TgzHeadBytes, 0, TgzHeadBytes.Length);
+
+                int offset = 0;                                     // 读缓存起始位置, 0 或 1(情况3时)
                 Shell shell = new Shell(ssm);
-                long left = fileLength - TgzHeadString.Length;   // 去掉文件头
-                int offset = 0;                                  // 缓存起始位置
-                fs.Write(TgzHeadBytes, 0, TgzHeadBytes.Length);  // 写入文件头
-
+                long left = fileLength - TgzHeadString.Length;    // 忽略文件头
                 while (left > 0)
                 {
-                    int bytesRead = shell.Read(buffer, offset, bufferSize, Timeout);
+                    int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), Timeout);
                     offset = 0; // 读完一次, 起始位置复位
 
                     if (bytesRead == 0) // 超时
@@ -158,11 +158,11 @@ namespace C2.Business.SSH
                         task.LastErrorMsg = String.Format("用户取消任务【{0}】的下载", task.TaskName);
                         return false;
                     }
-                        
+
                     // 策略:
                     // 0) cat 回传时，会把字节流的NL全部替换成CRNL,需要再替换回来
                     // 1) 最后一个字节不是CR，替换CRNL
-                    // 2) 新字节不是CR,将新字符追加buffer位，替换CRNL
+                    // 2) 最后一个字节是CR，  再读一个字节, 新字节不是CR, 将新字符追加到buffer, 替换CRNL,继续循环
                     // 3) 最后一个字节是CR，  再读一个字节, 新字节还是CR, 先替换CRNL，然后将CR作为buffer第一个字节，继续循环
 
                     if (buffer[bytesRead - 1] != CR)  // 情况1
@@ -180,13 +180,13 @@ namespace C2.Business.SSH
                         
                     if (one != CR)  // 情况2
                     {
-                        buffer[bytesRead] = one;
+                        buffer[bytesRead] = one;  // 新字符追加到buffer
                         left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead + 1, fs), 0);
                     }
                     else            // 情况3
                     {
                         left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead, fs), 0);
-                        buffer[offset++] = one;
+                        buffer[offset++] = one;   // 新字符放置到buffer头, 起始位置置为1
                     }
                 }
             }
@@ -226,8 +226,7 @@ namespace C2.Business.SSH
             // 000000_queryResult_db_开始时间_结束时间.tgz
             String s = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
 
-            if (Oops())
-                return false;
+            if (Oops()) return false;
 
             String ffp = GetRemoteFilename(s);
             long len = GetRemoteFileSize(ffp);  // 文件有可能超过2G,不能用int
@@ -241,7 +240,7 @@ namespace C2.Business.SSH
             try
             {
                 using (FileStream fs = new FileStream(d, FileMode.Create, FileAccess.Write))
-                    ret = Cat(ffp, fs, len, shell);
+                    ret = CatTgzFile(ffp, fs, len, shell);
             } 
             catch (Exception ex)
             {
@@ -261,9 +260,9 @@ namespace C2.Business.SSH
         {
             count = Math.Min(buffer.Length, count); // 保险一下，下载错误的文件比程序崩强
             
-            int real = 0; // 实际写入字节
-            int curr = 0; // 当前游标位置
-            int head = 0; // 当前写入起始位置
+            int totalBytesWrite = 0; // 实际写入字节
+            int curr = 0;            // 当前游标位置
+            int head = 0;            // 当前写入起始位置
 
             if (count < 2)  // 不足2个字节,不可能含有CRNL
             {
@@ -276,25 +275,28 @@ namespace C2.Business.SSH
             do
             {
                 // 找到 下一个 /r/n
-                while (curr + 1 < count && !IsCRNL(buffer, curr))
+                while (curr < count - 1 && !IsCRNL(buffer, curr))
                     curr++;
-                // 没找到, 直接到结尾处,退出
-                if (curr + 1 >= count) 
-                {
-                    fs.Write(buffer, head, curr - head + 1);
-                    return real += curr - head + 1;
-                }
-                // 找到CRNL
-                buffer[curr] = NL;
-                fs.Write(buffer, head, curr - head + 1);
 
-                real += curr - head + 1;
-                curr += 2;      // 游标置于当前位置
-                head = curr;
+                int bytesWrite = curr - head + 1;
+
+                // 没找到, 直接到结尾处,退出
+                if (curr >= count - 1) 
+                {
+                    fs.Write(buffer, head, bytesWrite);
+                    return totalBytesWrite += bytesWrite;
+                }
+                // 找到CRNL 替换 成 NLNL， [head ... CRNL] => [head ... NLNL]
+                // 写入[head ... NL], curr跳过NLNL,
+                buffer[curr] = NL;
+                fs.Write(buffer, head, bytesWrite);
+                // 游标置于当前位置
+                head = curr += 2; 
+                totalBytesWrite += bytesWrite;
 
             } while (head < count); 
 
-            return real;
+            return totalBytesWrite;
         }
 
         private bool Oops()
