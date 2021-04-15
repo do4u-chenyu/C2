@@ -360,7 +360,7 @@ namespace C2.Business.SSH
         {
             if (!String.IsNullOrEmpty(s))
             {
-                String b64 = ST.EncodeBase64(s);
+                String b64 = ST.EncodeBase64(s);        // Base64果然比shell硬转码好用多了
                 // 这里可能还有超出shell缓冲区的问题
                 String command = String.Format("echo -e \"{0}\" | base64 -di > {1}", b64, d);
                 if (RunCommand(command, shell).IsEmpty())
