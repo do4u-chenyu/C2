@@ -492,7 +492,7 @@ if __name__ == '__main__':
    
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER']                                                                                                                                             
     PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
-    DATA_PATH = './_queryResult_db_'
+    DATA_PATH = './_queryResult_plane_'
     KEY_NUM = 13
     LOGIN_BUTTON = ['Account','AccountName','account_name','account_id','accountd',
                     'login_id','login_name','loginid','loginName','Name','user',

@@ -671,7 +671,7 @@ if __name__ == '__main__':
     netDay     = 'query netData days,default 0.1 days'
     emailDay   = 'query emailData days,default 10 days'
     picDay     = 'query picData days,default 15 days'
-    outInfo    = 'Output file directory,default ./result'
+    outInfo    = 'Output file directory,default ./'
     areaInfo   = 'area code,default 000000'
 
     parser = OptionParser(usage)
@@ -679,7 +679,7 @@ if __name__ == '__main__':
     parser.add_option('--netDay',dest = 'netQueryDay', help = netDay,default = '30')
     parser.add_option('--emailDay',dest = 'emailQueryDay', help = emailDay,default = '10')
     parser.add_option('--picDay',dest = 'picQueryDay', help = picDay,default = '15')
-    parser.add_option('--out',dest = 'outfilePath', help = outInfo,default = './result')
+    parser.add_option('--out',dest = 'outfilePath', help = outInfo,default = './')
     parser.add_option('--area',dest = 'areaCode', help = areaInfo,default = '000000')
     ##get input Time  parameter
     option,args = parser.parse_args()
@@ -713,7 +713,7 @@ if __name__ == '__main__':
                     'loginAdmin','loginyzm','txAccount','admin_name','txtUser']
     LOGIN_VALUE = ['admin', 'administrator', 'root','system','sys']
     init_path([dataPath,join(dataPath,"Logs"),netPath,down_path])
-    log_path = join(dataPath, "Logs", "{}.log".format(NowTime.strftime("%Y%m%d%H%M%S")))
+    log_path = join(dataPath, "Logs", "{0}.log".format(NowTime.strftime("%Y%m%d%H%M%S")))
     LOGGER = init_logger(log_path)
 
     if  len(areacode) !=6: 

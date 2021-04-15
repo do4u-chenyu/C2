@@ -29,7 +29,7 @@ class Scheduler:
         LOGGER.info('queryWords: '+ str(self.queryWords))
         for line in self.queryWords:
                 self.queryclient_keyWordQueue.put(line)
-        LOGGER.info("keyword query group number：{}".format(len(self.queryWords)))
+        LOGGER.info("keyword query group number：{0}".format(len(self.queryWords)))
             
     def scheduling(self):
         print "start flush thread"
@@ -76,7 +76,7 @@ class Query(Thread):
             self.get_num += 1
             self.queryClient(key_word)
             queryEnd = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-            LOGGER.info('query Time:{}_{}'.format(queryStart,queryEnd))
+            LOGGER.info('query Time:{0}_{1}'.format(queryStart,queryEnd))
             self.queryclient_keyWordQueue.task_done()
 
     def queryClient(self, key_word):
@@ -96,10 +96,10 @@ class Query(Thread):
         if '=' not in key_word:
             dbfilter = '\'' + ' OR '.join(['"' + value + '"' +  ' in _REFERER'  for value in  LOGIN_VALUE]) + '\''
             cmd = cmd + ['--dbfilter',dbfilter]
-        req = Popen(". /home/search/search_profile && {}".format(" ".join(cmd)), shell=True, stdout=PIPE)
+        req = Popen(". /home/search/search_profile && {0}".format(" ".join(cmd)), shell=True, stdout=PIPE)
         for line in req.stdout:
             if 'query finished' in line:
-                LOGGER.info('queryCmd:' + ". /home/search/search_profile && {}".format(" ".join(cmd)) + '-----' +line.strip())
+                LOGGER.info('queryCmd:' + ". /home/search/search_profile && {0}".format(" ".join(cmd)) + '-----' +line.strip())
             if self.queryContentFlag:
                 self.content[self.configDict.get('_QUERY_CONTENT', -1)] += (';'+line.strip())
             if ":" in line:

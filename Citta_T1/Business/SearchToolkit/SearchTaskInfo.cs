@@ -29,9 +29,9 @@ namespace C2.SearchToolkit
         private static Dictionary<String, String> taskResultPatternTable = new Dictionary<String, String>
         {
             ["涉赌模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)",
-            ["涉枪模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)",
-            ["涉黄模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)",
-            ["飞机场模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)"
+            ["涉枪模型"] = @"([^\n\r]+000000_queryResult_gun_\d+_\d+.tgz)",
+            ["涉黄模型"] = @"([^\n\r]+000000_queryResult_yellow_\d+_\d+.tgz)",
+            ["飞机场模型"] = @"([^\n\r]+000000_queryResult_plane_\d+_\d+.tgz)"
         };
 
         public String LocalScriptPath

@@ -193,7 +193,7 @@ def init_logger(logname,filename,logger_level = logging.INFO):
     return logger
 ##文件压缩
 def zip_result(DATA_PATH,ZIP_PATH):
-    pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH,  '--remove-files'], stdout=PIPE)
+    pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH,  '--remove-files'], stdout=PIPE, stderr=PIPE)
     ##tar -zcf - test |openssl des3 -salt -k 'password' | dd of=test.tgz
     ##cmd = ['tar', '-zcvf -', DATA_PATH, '--remove-files |openssl des3 -salt -k', PASSWORD, '|dd of={}'.format(ZIP_PATH)]
     # LOGGER.info('cmd:{}'.format(' '.join(cmd)))
@@ -237,7 +237,7 @@ def main(config_dict):
             auth = save(AUTH_ITEMS,auth_key,DATA_PATH,OUT_HTTP,QUERY_TYPE,secondeStart,endTime)
         LOGGER.info('QUERY END...')
         zip_result(DATA_PATH,ZIP_PATH)
-        encrypTion(ZIP_PATH)
+        #encrypTion(ZIP_PATH)
         os.rename(ZIP_PATH,ZIP_PATH.replace('.tmp',''))
     except Exception,e:
         LOGGER.info('QUERY_ERROR-{0}'.format(e))
@@ -277,7 +277,7 @@ if __name__ == '__main__':
         sys.exit(1)
     PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
     CONFIG_DICT = {
-        'DATA_PATH': areacode + '_queryResult_gun_' + defaultEnd,
+        'DATA_PATH': areacode + '_queryResult_gun_' + defaultStart + '_' + defaultEnd,
         'OUT_PASSWORD' : 'out_gun',
         'OUT_HTTP': 'out_http',
         'ALL_ITEMS' : ['_HOST','AUTH_ACCOUNT','AUTH_TYPE','CAPTURE_TIME','STRDST_IP','STRSRC_IP','CONTENT','USERNAME','PASSWORD'],
