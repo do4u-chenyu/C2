@@ -49,5 +49,10 @@ namespace C2.Controls.C1.Left
             RemoveButton(button);
             taskManager.DeleteTask(task);
         }
+
+        private void HelpInfoLable_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

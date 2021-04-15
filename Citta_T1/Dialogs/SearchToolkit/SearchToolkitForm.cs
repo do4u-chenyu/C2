@@ -226,7 +226,7 @@ namespace C2.SearchToolkit
             // 更新任务状态
             if (task.TaskStatus != "DONE")
             {
-                task.TaskStatus = new BastionAPI(task).Login().QueryGambleTaskStatus();
+                task.TaskStatus = new BastionAPI(task).Login().QueryTaskStatus();
                 task.Save();
             }
                
@@ -249,7 +249,7 @@ namespace C2.SearchToolkit
             confirmButton.Enabled = false;
 
             // 更新任务状态和界面元素
-            using (new GuarderUtil.CursorGuarder())
+            using (GuarderUtil.WaitCursor)
                 UpdateTaskInfo(task);
             // 展示任务信息时, 不需要更改
             ReadOnlyInputControls();  
