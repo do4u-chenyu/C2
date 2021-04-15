@@ -36,6 +36,10 @@
             // 
             this.titleLabel.Text = "网站侦察兵";
             // 
+            // helpInfoLable
+            // 
+            this.helpInfoLable.Click += new System.EventHandler(this.HelpInfoLable_Click);
+            // 
             // WebsiteFeatureDetectionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

@@ -236,5 +236,11 @@ namespace C2.Controls.C1.Left
             //初次加载时加载本地文件内容到button
             LoadXmlToWFDTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
         }
+
+        private void HelpInfoLable_Click(object sender, EventArgs e)
+        {
+            string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "网站侦察兵帮助文档.txt");
+            Help.ShowHelp(this, helpfile);
+        }
     }
 }

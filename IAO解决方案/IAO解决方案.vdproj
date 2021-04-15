@@ -141,12 +141,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_12F27BA9C0FE7FA1F8025AC5F47F7184"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1333830BF77F4D70915187AA98237541"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -520,18 +514,6 @@
         "Entry"
         {
         "MsmKey" = "8:_471C8E5D2AD24868BEF7CC8609F37E8D"
-        "OwnerKey" = "8:_DA14ED4BEFA84F6485DD7B5F1528BD50"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_471C8E5D2AD24868BEF7CC8609F37E8D"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_471C8E5D2AD24868BEF7CC8609F37E8D"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -567,12 +549,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_482A20198E5CA15C60E741F15ACD3758"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_48DA16859ABC4FC3A154DF04CBA885CA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -587,12 +563,6 @@
         {
         "MsmKey" = "8:_4A0E6309460F285D864DDF9D61B5A7FB"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4A0E6309460F285D864DDF9D61B5A7FB"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -712,12 +682,6 @@
         "Entry"
         {
         "MsmKey" = "8:_581709CB6A16204F12F59FEEFE1CF665"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_581709CB6A16204F12F59FEEFE1CF665"
         "OwnerKey" = "8:_2AA832A00EA04E9CBC9E6D29DBD8E7E4"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -785,12 +749,6 @@
         {
         "MsmKey" = "8:_5FDEF99788192FCB6C403DA31F3027DA"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5FDEF99788192FCB6C403DA31F3027DA"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -994,12 +952,6 @@
         "Entry"
         {
         "MsmKey" = "8:_8499BAC1E9471AE83FDA4CD610E8680A"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8499BAC1E9471AE83FDA4CD610E8680A"
         "OwnerKey" = "8:_2AA832A00EA04E9CBC9E6D29DBD8E7E4"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1029,6 +981,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_876A96881AE34F0DB62B8BAA58CEFBFA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_87BEC060322A444F8B0DBB9EA0843B0C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1043,12 +1001,6 @@
         {
         "MsmKey" = "8:_8A76874997361A509ED7856385840C07"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8A76874997361A509ED7856385840C07"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1102,12 +1054,6 @@
         "Entry"
         {
         "MsmKey" = "8:_939605B25E548810ECE2C34C26AE3247"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_939605B25E548810ECE2C34C26AE3247"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1127,12 +1073,6 @@
         {
         "MsmKey" = "8:_9BCCA61333A93021265DB2D017881898"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9BCCA61333A93021265DB2D017881898"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1295,12 +1235,6 @@
         {
         "MsmKey" = "8:_AEEBFC491139ECBDCB6F697589134BA3"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AEEBFC491139ECBDCB6F697589134BA3"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1485,12 +1419,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CE6EFAB409839D80429970FFC740DFF1"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D0DD56825F854ECCAD004B1F93550848"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1647,13 +1575,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E9237F659E3D83C1AD0A2B214C53BB6A"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "MsmKey" = "8:_E9D33B37A1FD4888B23D639DB0C80622"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E9D33B37A1FD4888B23D639DB0C80622"
+        "MsmKey" = "8:_EAA8FB81071C4DF286EF73D9F8E25ABF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1733,12 +1661,6 @@
         {
         "MsmKey" = "8:_F3584786DB84D72D066302566DDCC9A2"
         "OwnerKey" = "8:_9BCCA61333A93021265DB2D017881898"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F3584786DB84D72D066302566DDCC9A2"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1852,19 +1774,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DA14ED4BEFA84F6485DD7B5F1528BD50"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_72E33DBBB280492E9659F053EB817BE1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3331,11 +3241,6 @@
             "AssemblyAsmDisplayName" = "8:C2, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
-                    "_37039095DF6C4402A22713B87BCB6EBB"
-                    {
-                    "Name" = "8:C2.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\C2.exe"
             "TargetName" = "8:"
@@ -5205,6 +5110,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_876A96881AE34F0DB62B8BAA58CEFBFA"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\Resources\\Help\\全文工具箱帮助文档.txt"
+            "TargetName" = "8:全文工具箱帮助文档.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87BEC060322A444F8B0DBB9EA0843B0C"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\105_密码.png"
@@ -6927,11 +6852,6 @@
             "AssemblyAsmDisplayName" = "8:C2Shell, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
-                    "_DA14ED4BEFA84F6485DD7B5F1528BD50"
-                    {
-                    "Name" = "8:C2Shell.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\C2Shell\\bin\\Release\\C2Shell.exe"
             "TargetName" = "8:"
@@ -7208,6 +7128,26 @@
             "TargetName" = "8:349_进度.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EAA8FB81071C4DF286EF73D9F8E25ABF"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\Resources\\Help\\网站侦察兵帮助文档.txt"
+            "TargetName" = "8:网站侦察兵帮助文档.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -8917,7 +8857,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\obj\\Release\\C2.exe"
+            "SourcePath" = "8:..\\Citta_T1\\obj\\开发调试\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
