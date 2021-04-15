@@ -305,10 +305,10 @@ namespace C2.Business.SSH
             return !(ssh.IsConnected && task.LastErrorMsg.IsEmpty());
         }
 
-        public BastionAPI UploadGambleScript()
+        public BastionAPI UploadTaskScript()
         {
             if (Oops()) return this;
-            return UploadScript(Global.GambleScriptPath);
+            return UploadScript(task.LocalScriptPath());
         }
 
         private BastionAPI UploadScript(string s)

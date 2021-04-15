@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 
 namespace C2.SearchToolkit
 {
@@ -33,10 +34,13 @@ namespace C2.SearchToolkit
             ["飞机场模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)"
         };
 
-        public static readonly String GambelModelDescription = "胶水系统全文涉赌后台模型";
-        public static readonly String GunModelDescription = "胶水系统全文涉枪模型";
-        public static readonly String YellowModelDescription = "胶水系统全文涉黄模型";
-        public static readonly String PlaneModelDescription = "胶水系统飞机场模型";
+        public String LocalScriptPath ()
+        {
+            String s = taskScriptTable[TaskModel].Replace("_{{0}}", String.Empty);
+            return Path.Combine(Application.StartupPath, "Resources", "Script", "IAO_Search_gamble", s);
+        }
+
+
         public static readonly String SearchWorkspace = @"/tmp/iao/search_toolkit/";
 
         public static readonly TaskInfo EmptyTaskInfo = new TaskInfo();
