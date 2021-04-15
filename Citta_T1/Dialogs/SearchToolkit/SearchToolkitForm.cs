@@ -9,7 +9,7 @@ namespace C2.SearchToolkit
 {
     public partial class SearchToolkitForm : Form
     {
-        private TaskInfo task;
+        private SearchTaskInfo task;
         private String validateMessage;
         private Control[] inputControls;
 
@@ -21,7 +21,7 @@ namespace C2.SearchToolkit
 
         private void InitializeInputControls()
         {
-            task = TaskInfo.EmptyTaskInfo;
+            task = SearchTaskInfo.EmptyTaskInfo;
             validateMessage = String.Empty;
 
             inputControls = new Control[] { 
@@ -37,7 +37,7 @@ namespace C2.SearchToolkit
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
         }
 
-        private TaskInfo GenTaskInfo()
+        private SearchTaskInfo GenTaskInfo()
         {
            String value = String.Join(OpUtil.TabSeparatorString, new string[] {
                                             this.taskNameTB.Text,  // 刚开始创建时，没有ID
@@ -52,7 +52,7 @@ namespace C2.SearchToolkit
                                             this.remoteWorkspaceTB.Text
             });
 
-            return TaskInfo.StringToTaskInfo(value);
+            return SearchTaskInfo.StringToTaskInfo(value);
         }
 
         private void ReadOnlyInputControls()
@@ -63,7 +63,7 @@ namespace C2.SearchToolkit
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            if (task == TaskInfo.EmptyTaskInfo)
+            if (task == SearchTaskInfo.EmptyTaskInfo)
                 return;
 
             this.saveFileDialog.FileName = String.Format("{0}_{1}", task.TaskName, task.TaskCreateTime);
@@ -131,7 +131,7 @@ namespace C2.SearchToolkit
 
         private String GenWorkspace()
         {
-            return TaskInfo.SearchWorkspace + TaskInfo.TaskDescriptionTable[this.taskModelComboBox.Text];
+            return SearchTaskInfo.SearchWorkspace + SearchTaskInfo.TaskDescriptionTable[this.taskModelComboBox.Text];
         }
 
         private bool ValidateIP(String value)
@@ -202,15 +202,15 @@ namespace C2.SearchToolkit
             
             return String.IsNullOrEmpty(validateMessage);
         }
-        public TaskInfo ShowTaskConfigDialog()
+        public SearchTaskInfo ShowTaskConfigDialog()
         {
             taskInfoGB.Visible = false;
             confirmButton.Enabled = true;
 
-            return this.ShowDialog() == DialogResult.OK ? GenTaskInfo() : TaskInfo.EmptyTaskInfo;
+            return this.ShowDialog() == DialogResult.OK ? GenTaskInfo() : SearchTaskInfo.EmptyTaskInfo;
         }
 
-        private void UpdateTaskInfo(TaskInfo task)
+        private void UpdateTaskInfo(SearchTaskInfo task)
         {
             this.task = task;
             // 更新任务状态
@@ -233,7 +233,7 @@ namespace C2.SearchToolkit
             this.downloadButton.Enabled = task.TaskStatus == "DONE";
         }
 
-        public DialogResult ShowTaskInfoDialog(TaskInfo task)
+        public DialogResult ShowTaskInfoDialog(SearchTaskInfo task)
         {
             taskInfoGB.Visible = true;
             confirmButton.Enabled = false;

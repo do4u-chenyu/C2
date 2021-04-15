@@ -28,7 +28,7 @@ namespace C2.Business.SSH
         private static readonly byte[] TgzHeadBytes = new byte[] { 0x1f, 0x8b, 0x08 };  // 1f 8b 08 .tgz的文件头
         private static readonly String TgzHeadString = Encoding.UTF8.GetString(TgzHeadBytes);
 
-        private readonly TaskInfo task;
+        private readonly SearchTaskInfo task;
 
         private readonly SshClient ssh;
         private ShellStream shell;
@@ -46,7 +46,7 @@ namespace C2.Business.SSH
         {
             return String.Format(@"\r?\n{0}\r?\n", pattern);
         }
-        public BastionAPI(TaskInfo task)
+        public BastionAPI(SearchTaskInfo task)
         {
             this.task = task;
             this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
@@ -421,7 +421,7 @@ namespace C2.Business.SSH
         private bool IsSafePath(String v)
         {
             // 在服务器上删东西 尽量严格, 尤其不能有"空格/"，"/空格" 或 "空格/空格"
-            return v.StartsWith(TaskInfo.SearchWorkspace) && !Regex.IsMatch(v, @"\s");
+            return v.StartsWith(SearchTaskInfo.SearchWorkspace) && !Regex.IsMatch(v, @"\s");
         }
 
         public BastionAPI KillTask()

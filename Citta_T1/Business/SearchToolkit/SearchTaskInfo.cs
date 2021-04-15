@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace C2.SearchToolkit
 {
-    public class TaskInfo
+    public class SearchTaskInfo
     {
         public static Dictionary<String, String> TaskDescriptionTable = new Dictionary<String, String>
         {
@@ -47,7 +47,7 @@ namespace C2.SearchToolkit
 
         public static readonly String SearchWorkspace = @"/tmp/iao/search_toolkit/";
 
-        public static readonly TaskInfo EmptyTaskInfo = new TaskInfo();
+        public static readonly SearchTaskInfo EmptyTaskInfo = new SearchTaskInfo();
 
 
 
@@ -142,10 +142,10 @@ namespace C2.SearchToolkit
             return Encoding.UTF8.GetString(Convert.FromBase64String(value.ReverseString())).ReverseString();
         }
 
-        public static TaskInfo StringToTaskInfo(String content, bool needDecryptPass = false)
+        public static SearchTaskInfo StringToTaskInfo(String content, bool needDecryptPass = false)
         {
             if (String.IsNullOrEmpty(content))
-                return TaskInfo.EmptyTaskInfo;
+                return SearchTaskInfo.EmptyTaskInfo;
 
             // 有表头的话 取第二行
             String[] buf = content.Split(OpUtil.LineSeparator);
@@ -154,9 +154,9 @@ namespace C2.SearchToolkit
             // 小于10列不处理
             buf = content.Split(OpUtil.TabSeparator);
             if (buf.Length < 10)
-                return TaskInfo.EmptyTaskInfo;
+                return SearchTaskInfo.EmptyTaskInfo;
 
-            TaskInfo taskInfo = new TaskInfo()
+            SearchTaskInfo taskInfo = new SearchTaskInfo()
             {
                 PID = buf[0],
                 TaskName = buf[1],

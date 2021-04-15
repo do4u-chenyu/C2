@@ -7,18 +7,18 @@ using System.IO;
 
 namespace C2.SearchToolkit
 {
-    class TaskManager
+    class SearchTaskManager
     {
-        private readonly List<TaskInfo> tasks;
+        private readonly List<SearchTaskInfo> tasks;
 
-        public TaskManager() 
+        public SearchTaskManager() 
         {
-            tasks = new List<TaskInfo>();
+            tasks = new List<SearchTaskInfo>();
         }
 
-        public IEnumerable<TaskInfo> Tasks { get => tasks; }
+        public IEnumerable<SearchTaskInfo> Tasks { get => tasks; }
 
-        public bool RunTask(TaskInfo task) 
+        public bool RunTask(SearchTaskInfo task) 
         {
             
             using (GuarderUtil.WaitCursor)
@@ -46,14 +46,14 @@ namespace C2.SearchToolkit
             return FileUtil.TryListFiles(Global.SearchToolkitPath, "*.bcp");
         }
 
-        private TaskInfo LoadTaskBcp(String taskFFP)
+        private SearchTaskInfo LoadTaskBcp(String taskFFP)
         {
             try 
             {
-                return TaskInfo.StringToTaskInfo(new StreamReader(taskFFP).ReadToEnd(), true);
+                return SearchTaskInfo.StringToTaskInfo(new StreamReader(taskFFP).ReadToEnd(), true);
             } catch 
             {
-                return TaskInfo.EmptyTaskInfo;
+                return SearchTaskInfo.EmptyTaskInfo;
             }
 
         }
@@ -63,14 +63,14 @@ namespace C2.SearchToolkit
             tasks.Clear();
             foreach (String taskFFP in ListTaskBcpFiles())
             {
-                TaskInfo task = LoadTaskBcp(taskFFP);
-                if (task != TaskInfo.EmptyTaskInfo)
+                SearchTaskInfo task = LoadTaskBcp(taskFFP);
+                if (task != SearchTaskInfo.EmptyTaskInfo)
                     tasks.Add(task);
             }
             return true; 
         }
 
-        public bool DeleteTask(TaskInfo task) 
+        public bool DeleteTask(SearchTaskInfo task) 
         {
             BastionAPI api = new BastionAPI(task);
 

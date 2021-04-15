@@ -8,8 +8,8 @@ namespace C2.Controls.C1.Left
 {
     public partial class SearchToolkitButton : BaseLeftInnerButton
     {
-        private TaskInfo task;
-        public SearchToolkitButton(TaskInfo task) : base(task.TaskName)
+        private SearchTaskInfo task;
+        public SearchToolkitButton(SearchTaskInfo task) : base(task.TaskName)
         {
             InitializeComponent();
             InitButtonMenu();
@@ -52,7 +52,7 @@ namespace C2.Controls.C1.Left
 
         }
 
-        private void InitTaskInfo(TaskInfo task)
+        private void InitTaskInfo(SearchTaskInfo task)
         {
             this.task = task;
             this.toolTip.SetToolTip(this.rightPictureBox, task.BastionInfo);
