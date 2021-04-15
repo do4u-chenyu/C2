@@ -10,7 +10,7 @@ namespace C2.SearchToolkit
 {
     public class SearchTaskInfo
     {
-        public static Dictionary<String, String> TaskDescriptionTable = new Dictionary<String, String>
+        public static readonly Dictionary<String, String> TaskDescriptionTable = new Dictionary<String, String>
         {
             ["涉赌模型"] = "gamble",
             ["涉枪模型"] = "gun",
@@ -18,7 +18,7 @@ namespace C2.SearchToolkit
             ["飞机场模型"] = "plane"
         };
 
-        private static Dictionary<String, String> taskScriptTable = new Dictionary<String, String>
+        private static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
         {
             ["涉赌模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py",
             ["涉枪模型"] = "batchquery_gun_accountPass_C2_20200908_{0}.py",
@@ -26,7 +26,7 @@ namespace C2.SearchToolkit
             ["飞机场模型"] = "batchquery_plane_accountPass_C2_20210414_{0}.py"
         };
 
-        private static Dictionary<String, String> taskResultPatternTable = new Dictionary<String, String>
+        private static readonly Dictionary<String, String> TaskResultPatternTable = new Dictionary<String, String>
         {
             ["涉赌模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)",
             ["涉枪模型"] = @"([^\n\r]+000000_queryResult_gun_\d+_\d+.tgz)",
@@ -38,7 +38,7 @@ namespace C2.SearchToolkit
         {
             get
             {
-                String s = taskScriptTable[TaskModel].Replace("_{0}", String.Empty);
+                String s = TaskScriptTable[TaskModel].Replace("_{0}", String.Empty);
                 return Path.Combine(Application.StartupPath, "Resources", "Script", "IAO_Search_gamble", s);
             }
         }
@@ -63,10 +63,10 @@ namespace C2.SearchToolkit
         }
 
 
-        public String TargetScript { get => String.Format(taskScriptTable[TaskModel], TaskCreateTime); }
+        public String TargetScript { get => String.Format(TaskScriptTable[TaskModel], TaskCreateTime); }
         public String TaskDirectory { get => String.Format("{0}/{1}_{2}", RemoteWorkspace, TaskName, TaskCreateTime); }
 
-        public String TaskResultRegexPattern { get => taskResultPatternTable[TaskModel]; }
+        public String TaskResultRegexPattern { get => TaskResultPatternTable[TaskModel]; }
 
 
         private static readonly String HeadColumnLine = String.Join(OpUtil.TabSeparatorString, new string[] {
