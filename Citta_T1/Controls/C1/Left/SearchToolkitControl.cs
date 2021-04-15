@@ -24,6 +24,12 @@ namespace C2.Controls.C1.Left
             if (task.IsEmpty())
                 return;
 
+            if (task.TaskModel != "涉赌模型")
+            {
+                HelpUtil.ShowMessageBox(String.Format("该模型【{0}】还在施工中", task.TaskModel));
+                return;
+            }
+
             string message;
             if (taskManager.RunTask(task))
             {
