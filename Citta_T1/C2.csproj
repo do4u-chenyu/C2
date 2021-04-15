@@ -3128,9 +3128,15 @@
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_version20210414_无密码_有机场_bug修复_查garbage数据.py" />
-    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_gun_password_v0908.py" />
-    <Content Include="Resources\Script\IAO_Search_gamble\query_yellowWish_v4_涉黄邮件-图片-网站.py" />
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_version20210414_无密码_有机场_bug修复_查garbage数据.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_gun_password_v0908.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\query_yellowWish_v4_涉黄邮件-图片-网站.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Script\IAO_Search_gamble\query_yellowWish_v4_涉黄邮件-图片.py" />
     <Content Include="Resources\Script\IAO_Web_validation\global_method.py" />
     <Content Include="Resources\Script\IAO_Web_validation\Noesis.Javascript.dll" />
