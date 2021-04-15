@@ -97,6 +97,16 @@ namespace C2.Business.SSH
             _ = shell.Read(); // 清空buffer
         }
 
+        public void Close()
+        {
+            try 
+            {
+                if (ssh != null)      // ssh.net库有bug，这里会报ObjectDisposedException
+                    ssh.Disconnect(); // 但不主动调，链接又不释放 
+            } catch { }
+
+        }
+
         
         private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout)   
         {

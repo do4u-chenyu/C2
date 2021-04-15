@@ -20,14 +20,16 @@ namespace C2.SearchToolkit
 
         public bool RunTask(TaskInfo task) 
         {
-            BastionAPI api = new BastionAPI(task);
+            
             using (GuarderUtil.WaitCursor)
             {
+                BastionAPI api = new BastionAPI(task);
                 task.PID = api.Login()
                               .DeleteTaskDirectory()
                               .CreateTaskDirectory()
                               .UploadTaskScript()
                               .RunTask();
+                api.Close();
             }
 
         
