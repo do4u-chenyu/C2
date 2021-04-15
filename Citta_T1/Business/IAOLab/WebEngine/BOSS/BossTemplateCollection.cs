@@ -61,8 +61,16 @@ namespace C2.Business.IAOLab.WebEngine.Boss
                                                       new BossChartConfig("StackBar", "堆叠柱状图（右下方）", 5) }));
 
             bossTemplateDict.Add(3, new BossTemplate(commonConfig01));
-            bossTemplateDict.Add(4, new BossTemplate(commonConfig01));
+            //bossTemplateDict.Add(4, new BossTemplate(commonConfig01));
+            bossTemplateDict.Add(4, new BossTemplate(new List<BossChartConfig>()
+                                                    { new BossChartConfig("SimpleBar", "柱状图（左上方）", 1),
+                                                      new BossChartConfig("BasicLineChart", "折线图（左下方）", 2),
+                                                      new BossChartConfig("BasicScatter", "点状图（右上方）", 3),
+                                                      new BossChartConfig("StackBar", "堆叠柱状图（右下方）", 4) }));
+
             bossTemplateDict.Add(5, new BossTemplate(commonConfig01));
+           
+
 
             bossTemplateDict.Add(6, new BossTemplate(new List<BossChartConfig>()
                                                     { new BossChartConfig("SimpleBar", "柱状图（左上方）", 1),
@@ -86,7 +94,14 @@ namespace C2.Business.IAOLab.WebEngine.Boss
                                                       new BossChartConfig("GradientLineChart", "曲线图（中右方）", 4),
                                                       new BossChartConfig("StackBar", "堆叠柱状图（右侧）", 5) }));
 
-            bossTemplateDict.Add(10, new BossTemplate(commonConfig02));
+            //bossTemplateDict.Add(10, new BossTemplate(commonConfig02));
+            bossTemplateDict.Add(10, new BossTemplate(new List<BossChartConfig>()
+                                                    { new BossChartConfig("SimpleBar", "柱状图（左上方）", 1),
+                                                      new BossChartConfig("BasicLineChart", "折线图（左下方）", 2),
+                                                      new BossChartConfig("BasicMap", "地市分布图（中间）", 3),
+                                                      new BossChartConfig("BasicScatter", "点状图（右上方）", 4),
+                                                      new BossChartConfig("StackBar", "堆叠柱状图（右下方）", 5) }));
+
             bossTemplateDict.Add(11, new BossTemplate(commonConfig02));
 
             bossTemplateDict.Add(12, new BossTemplate(new List<BossChartConfig>()
