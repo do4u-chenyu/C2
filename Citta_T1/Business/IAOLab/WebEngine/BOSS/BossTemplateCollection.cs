@@ -81,7 +81,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss
             bossTemplateDict.Add(7, new BossTemplate(new List<BossChartConfig>()
                                                     { new BossChartConfig("SimpleBar", "柱状图（左上方）", 1),
                                                       new BossChartConfig("BasicLineChart", "折线图（左下方）", 2),
-                                                      new BossChartConfig("BasicScatter", "点状图（中间）", 3),
+                                                      new BossChartConfig("BasicMap", "地市分布图（中间）", 3),
                                                       new BossChartConfig("GradientLineChart", "曲线图（右上方）", 4),
                                                       new BossChartConfig("StackBar", "堆叠柱状图（右下方）", 5) }));
 
