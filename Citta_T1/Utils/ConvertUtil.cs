@@ -36,6 +36,18 @@ namespace C2.Utils
             }
         }
 
+        public static int TryParseDoubleToInt(double value, int defaultValue = 0)
+        {
+            try
+            {
+                return Convert.ToInt32(value);
+            }
+            catch
+            {
+                return defaultValue;
+            }
+        }
+
         public static long TryParseLong(string value, long defaultValue = 0)
         {
             if (string.IsNullOrEmpty(value)) return defaultValue;
