@@ -191,8 +191,8 @@
     <Compile Include="Business\Option\PythonInterpreterInfo.cs" />
     <Compile Include="Business\Option\PythonOPConfig.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
-    <Compile Include="Business\SearchToolkit\TaskInfo.cs" />
-    <Compile Include="Business\SearchToolkit\TaskManager.cs" />
+    <Compile Include="Business\SearchToolkit\SearchTaskInfo.cs" />
+    <Compile Include="Business\SearchToolkit\SearchTaskManager.cs" />
     <Compile Include="Business\SSH\BastionAPI.cs" />
     <Compile Include="Business\SSH\Shell.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\TOTP.cs" />

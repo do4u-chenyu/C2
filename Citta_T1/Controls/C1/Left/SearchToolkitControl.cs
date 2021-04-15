@@ -8,11 +8,11 @@ namespace C2.Controls.C1.Left
 {
     public partial class SearchToolkitControl : BaseLeftInnerPanel
     {
-        private TaskManager taskManager;
+        private SearchTaskManager taskManager;
         public SearchToolkitControl()
         {
             InitializeComponent();
-            taskManager = new TaskManager();
+            taskManager = new SearchTaskManager();
         }
 
         private void AddTaskLabel_MouseClick(object sender, MouseEventArgs e)
@@ -20,7 +20,7 @@ namespace C2.Controls.C1.Left
             if (e.Button != MouseButtons.Left)
                 return;
 
-            TaskInfo task = new SearchToolkitForm().ShowTaskConfigDialog();
+            SearchTaskInfo task = new SearchToolkitForm().ShowTaskConfigDialog();
 
             if (task.IsEmpty())
                 return;
@@ -47,11 +47,11 @@ namespace C2.Controls.C1.Left
         {
             taskManager.Refresh();
 
-            foreach (TaskInfo task in taskManager.Tasks)
+            foreach (SearchTaskInfo task in taskManager.Tasks)
                 AddInnerButton(new SearchToolkitButton(task));
         }
 
-        public void DeleteButton(SearchToolkitButton button, TaskInfo task) 
+        public void DeleteButton(SearchToolkitButton button, SearchTaskInfo task) 
         {
             RemoveButton(button);
             taskManager.DeleteTask(task);
