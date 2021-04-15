@@ -254,6 +254,7 @@ namespace C2.Business.SSH
             {
                 using (FileStream fs = new FileStream(d, FileMode.Create, FileAccess.Write))
                     ret = CatTgzFile(ffp, fs, len, shell);
+                
             } 
             catch (Exception ex)
             {

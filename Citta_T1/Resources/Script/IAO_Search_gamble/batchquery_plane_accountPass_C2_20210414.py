@@ -291,7 +291,7 @@ class Saver(Thread):
         fsize    = os.path.getsize(os.path.join(dataPath,filePath))
         fsize    = fsize/float(1024*1024)
         return round(fsize,2)
- class Airport:
+class Airport:
     def __init__(self,data_path,startTime,endTime,all_items):
         self.data_path = data_path
         self.startTime = startTime
