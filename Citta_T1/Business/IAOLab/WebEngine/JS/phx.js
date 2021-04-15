@@ -359,7 +359,7 @@
         },
         "legend": {
             "textStyle": {
-                "color": "#333"
+                "color": "#ffffff"
             }
         },
         "tooltip": {
