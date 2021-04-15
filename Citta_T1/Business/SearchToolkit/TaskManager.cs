@@ -24,10 +24,10 @@ namespace C2.SearchToolkit
             using (GuarderUtil.WaitCursor)
             {
                 task.PID = api.Login()
-                              .DeleteGambleTaskDirectory()
-                              .CreateGambleTaskDirectory()
+                              .DeleteTaskDirectory()
+                              .CreateTaskDirectory()
                               .UploadGambleScript()
-                              .RunGambleTask();
+                              .RunTask();
             }
 
         
@@ -73,8 +73,8 @@ namespace C2.SearchToolkit
             BastionAPI api = new BastionAPI(task);
 
             api.Login()
-               .DeleteGambleTaskDirectory()
-               .KillGambleTask();
+               .DeleteTaskDirectory()
+               .KillTask();
       
             return tasks.Remove(task) && FileUtil.DeleteFile(task.BcpFFP); 
         }

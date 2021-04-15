@@ -35,10 +35,11 @@ namespace C2.Business.SSH
 
         private bool downloadCancel = false;
 
-        private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
+        private String TargetScript { get => task.TargetScript; }
         // {workspace}/pid_taskcreatetime
-        private String GambleTaskDirectory { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.TaskName, task.TaskCreateTime); }
+        private String TaskDirectory { get => task.TaskDirectory; }
 
+        private String TaskResultPattern { get => task.TaskResultPattern; }
         private static String Wrap(String pattern)
         {
             return String.Format(@"\r?\n{0}\r?\n", pattern);
@@ -199,7 +200,7 @@ namespace C2.Business.SSH
             String command = String.Format("ls -l {0} | awk '{{print $9}}' | head -n 1", s);
             String content = RunCommand(command, shell);
 
-            Match mat = Regex.Match(content, Wrap(@"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)"));
+            Match mat = Regex.Match(content, Wrap(TaskResultPattern));
             if (mat.Success && mat.Groups[1].Success)
                 return mat.Groups[1].Value;
             return String.Empty;
@@ -224,7 +225,7 @@ namespace C2.Business.SSH
         public bool DownloadTaskResult(String d)
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
-            String s = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
+            String s = TaskDirectory + "/000000_queryResult_(db|yellow|gun|plane)_*_*.tgz";
 
             if (Oops()) return false;
 
@@ -307,8 +308,11 @@ namespace C2.Business.SSH
         public BastionAPI UploadGambleScript()
         {
             if (Oops()) return this;
+            return UploadScript(Global.GambleScriptPath);
+        }
 
-            String s = Global.GambleScriptPath;
+        private BastionAPI UploadScript(string s)
+        {
             String content = FileUtil.FileReadToEnd(s);
 
 
@@ -328,7 +332,7 @@ namespace C2.Business.SSH
                            .Replace("\r", @"\r")
                            .Replace("\n", @"\n");
 
-            String d = GambleTaskDirectory + "/" + TargetGambleScript;
+            String d = TaskDirectory + "/" + TargetScript;
             // 这里可能还有超出shell缓冲区的问题
             String command = String.Format("echo -e \"{0}\" > {1}", content, d);
             if (RunCommand(command, shell).IsEmpty())
@@ -344,12 +348,12 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
-        public String RunGambleTask()
+        public String RunTask()
         {
             if (Oops()) return String.Empty;
 
-            EnterGambleTaskDirectory();
-            String command = String.Format("python {0}", TargetGambleScript);
+            EnterTaskDirectory();
+            String command = String.Format("python {0}", TargetScript);
             //String command = "sleep 3600";
             String ret = RunCommand(String.Format("{0} & disown -a", command), shell);
             String pid = GetPID(ret);
@@ -359,40 +363,40 @@ namespace C2.Business.SSH
             return pid;
         }
 
-        private void EnterGambleTaskDirectory()
+        private void EnterTaskDirectory()
         {
-            String command = String.Format("cd {0}", GambleTaskDirectory);
+            String command = String.Format("cd {0}", TaskDirectory);
             RunCommand(command, shell);
         }
 
-        public BastionAPI DeleteGambleTaskDirectory()
+        public BastionAPI DeleteTaskDirectory()
         {
             if (Oops()) return this;
             // 删除 临时目录
-            if (IsSafePath(GambleTaskDirectory))
-                RunCommand(String.Format("rm -rf {0};", GambleTaskDirectory), shell);
+            if (IsSafePath(TaskDirectory))
+                RunCommand(String.Format("rm -rf {0};", TaskDirectory), shell);
             return this;
         }
 
-        public BastionAPI CreateGambleTaskDirectory()
+        public BastionAPI CreateTaskDirectory()
         {
             if (Oops()) return this;
-            String command = String.Format("mkdir -p {0}", GambleTaskDirectory);
+            String command = String.Format("mkdir -p {0}", TaskDirectory);
             RunCommand(command, shell);
             return this;
         }
 
 
-        private bool IsAliveGambleTask()
+        private bool IsAliveTask()
         {
-            String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetGambleScript), shell);
-            return Regex.IsMatch(result, Wrap(TargetGambleScript));
+            String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetScript), shell);
+            return Regex.IsMatch(result, Wrap(TargetScript));
         }
 
-        private bool IsGambleResultFileReady()
+        private bool IsResultFileReady()
         {
-            String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", GambleTaskDirectory), shell);
-            return Regex.IsMatch(result, @"000000_queryResult_db_\d+_\d+.tgz\r?\n");
+            String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
+            return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane)_\d+_\d+.tgz\r?\n");
         }
 
         private bool IsTaskTimeout()
@@ -408,9 +412,9 @@ namespace C2.Business.SSH
             return v.StartsWith(TaskInfo.SearchWorkspace) && !Regex.IsMatch(v, @"\s");
         }
 
-        public BastionAPI KillGambleTask()
+        public BastionAPI KillTask()
         {
-            if (IsAliveGambleTask()) // 确保不要误删其他复用进程
+            if (IsAliveTask()) // 确保不要误删其他复用进程
             {
                 String command = String.Format("kill -9 {0}", task.PID);
                 RunCommand(command, shell);
@@ -424,8 +428,8 @@ namespace C2.Business.SSH
                 return "连接失败";
 
             bool isTimeout = IsTaskTimeout();
-            bool isAlive = IsAliveGambleTask();
-            bool isGRFReady = IsGambleResultFileReady();
+            bool isAlive = IsAliveTask();
+            bool isGRFReady = IsResultFileReady();
 
             // 1) pid不存在且有结果文件时, 为运行成功
             if (!isAlive && isGRFReady)

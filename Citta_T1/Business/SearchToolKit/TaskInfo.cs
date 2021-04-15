@@ -1,6 +1,7 @@
 ﻿using C2.Core;
 using C2.Utils;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -8,6 +9,30 @@ namespace C2.SearchToolkit
 {
     public class TaskInfo
     {
+        public static Dictionary<String, String> TaskDescriptionTable = new Dictionary<String, String>
+        {
+            ["涉赌模型"] = "gamble",
+            ["涉枪模型"] = "gun",
+            ["涉黄模型"] = "yellow",
+            ["飞机场模型"] = "plane"
+        };
+
+        private static Dictionary<String, String> taskScriptTable = new Dictionary<String, String>
+        {
+            ["涉赌模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py",
+            ["涉枪模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py",
+            ["涉黄模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py",
+            ["飞机场模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py"
+        };
+
+        private static Dictionary<String, String> taskResultPatternTable = new Dictionary<String, String>
+        {
+            ["涉赌模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)",
+            ["涉枪模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)",
+            ["涉黄模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)",
+            ["飞机场模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)"
+        };
+
         public static readonly String GambelModelDescription = "胶水系统全文涉赌后台模型";
         public static readonly String GunModelDescription = "胶水系统全文涉枪模型";
         public static readonly String YellowModelDescription = "胶水系统全文涉黄模型";
@@ -16,14 +41,25 @@ namespace C2.SearchToolkit
 
         public static readonly TaskInfo EmptyTaskInfo = new TaskInfo();
 
+
+
         public String LastErrorMsg { get; set; } = String.Empty;
 
         public bool IsEmpty() { return this == EmptyTaskInfo; }
 
-        public String BcpFFP { 
+        public String BcpFFP
+        {
             get => Path.Combine(
-                Global.SearchToolkitPath, 
-                String.Format("{0}_{1}_{2}.bcp", TaskName, PID, TaskCreateTime)); }
+                Global.SearchToolkitPath,
+                String.Format("{0}_{1}_{2}.bcp", TaskName, PID, TaskCreateTime));
+        }
+
+
+        public String TargetScript { get => String.Format(taskScriptTable[TaskModel], TaskCreateTime); }
+        public String TaskDirectory { get => String.Format("{0}/{1}_{2}", RemoteWorkspace, TaskName, TaskCreateTime); }
+
+        public String TaskResultPattern { get => taskResultPatternTable[TaskModel]; }
+
 
         private static readonly String HeadColumnLine = String.Join(OpUtil.TabSeparatorString, new string[] {
             "PID" ,
@@ -37,8 +73,6 @@ namespace C2.SearchToolkit
             "SearchAgentIP",
             "RemoteWorkspace"
         });
-
-
 
         public String Username { get; private set; }
         public String Password { get; private set; }
@@ -57,17 +91,17 @@ namespace C2.SearchToolkit
 
         public String TaskCreateTime { get; private set; }
 
-        public String BastionInfo 
-        { 
-            get => String.Format("用户名:{0}, 堡垒机IP:{1}, 全文机IP:{2}, 结果目录:{3}/{4}_{5}", 
-                Username, 
-                BastionIP, 
+        public String BastionInfo
+        {
+            get => String.Format("用户名:{0}, 堡垒机IP:{1}, 全文机IP:{2}, 结果目录:{3}/{4}_{5}",
+                Username,
+                BastionIP,
                 SearchAgentIP,
                 RemoteWorkspace,
                 TaskName,
-                TaskCreateTime); 
+                TaskCreateTime);
         }
-        
+
 
         public override String ToString()
         {
@@ -127,11 +161,11 @@ namespace C2.SearchToolkit
                 SearchAgentIP = buf[8],
                 RemoteWorkspace = buf[9]
             };
-            
+
             return taskInfo;
         }
 
-        public bool Save() 
+        public bool Save()
         {
             try
             {

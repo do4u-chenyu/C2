@@ -13,7 +13,6 @@ namespace C2.SearchToolkit
         private TaskInfo task;
         private String validateMessage;
         private Control[] inputControls;
-        private Dictionary<String, String> taskDict;
 
         public SearchToolkitForm()
         {
@@ -35,15 +34,7 @@ namespace C2.SearchToolkit
                 this.taskModelComboBox,
                 this.taskNameTB
             };
-
-            taskDict = new Dictionary<string, string>
-            {
-                ["涉赌模型"] = "gamble",
-                ["涉枪模型"] = "gun",
-                ["涉黄模型"] = "yellow",
-                ["飞机场模型"] = "plane"
-            };
-            
+       
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
         }
 
@@ -141,7 +132,7 @@ namespace C2.SearchToolkit
 
         private String GenWorkspace()
         {
-            return TaskInfo.SearchWorkspace + taskDict[this.taskModelComboBox.Text];
+            return TaskInfo.SearchWorkspace + TaskInfo.TaskDescriptionTable[this.taskModelComboBox.Text];
         }
 
         private bool ValidateIP(String value)
