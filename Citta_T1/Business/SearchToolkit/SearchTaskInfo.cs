@@ -21,9 +21,9 @@ namespace C2.SearchToolkit
         private static Dictionary<String, String> taskScriptTable = new Dictionary<String, String>
         {
             ["涉赌模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py",
-            ["涉枪模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py",
-            ["涉黄模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py",
-            ["飞机场模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py"
+            ["涉枪模型"] = "batchquery_gun_accountPass_C2_20200908_{0}.py",
+            ["涉黄模型"] = "batchquery_yellow_accountPass_C2_eml_pic_web_20210414_{0}.py",
+            ["飞机场模型"] = "batchquery_plane_accountPass_C2_20210414_{0}.py"
         };
 
         private static Dictionary<String, String> taskResultPatternTable = new Dictionary<String, String>
