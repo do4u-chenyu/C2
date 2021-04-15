@@ -86,7 +86,7 @@ namespace C2.IAOLab.WebEngine.Boss
         
         private string TransToFunc(string id, string js)
         {
-            return "function echart_" + id + "() {try {" + js + "}catch (err){alert(err)}}";
+            return "function echart_" + id + "() {try {" + js + "}catch (err){alert(\"图表数据加载出错，请查看数据格式或配置是否正确。\")}}";
         }
 
         string InitID(string ContanerID)
