@@ -45,7 +45,7 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Map
             int mapMaxValue = 0;
             foreach (DataRow dataRow in dataTable.Rows)
             {
-                int tmpNum = ConvertUtil.TryParseInt(dataRow[idx].ToString());
+                int tmpNum = ConvertUtil.TryParseDoubleToInt(ConvertUtil.TryParseDouble(dataRow[idx].ToString()));
                 mapMaxValue = mapMaxValue > tmpNum ? mapMaxValue : tmpNum;
             }
             mapMaxValue += (5 - mapMaxValue % 5); //为了被5整除
