@@ -15,7 +15,7 @@ namespace C2.Business.SSH.Tests
         public void DownloadGambleTaskResultTest()
         {
             BastionAPI api = new BastionAPI(SearchToolkit.TaskInfo.EmptyTaskInfo);
-            api.Login().DownloadGambleTaskResult(String.Empty);
+            api.Login().DownloadTaskResult(String.Empty);
             Assert.Fail();
         }
     }

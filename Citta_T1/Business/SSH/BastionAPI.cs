@@ -221,7 +221,7 @@ namespace C2.Business.SSH
             downloadCancel = true;
         }
 
-        public bool DownloadGambleTaskResult(String d)
+        public bool DownloadTaskResult(String d)
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
             String s = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
@@ -418,7 +418,7 @@ namespace C2.Business.SSH
             return this;
         }
 
-        public String QueryGambleTaskStatus()
+        public String QueryTaskStatus()
         {
             if (!ssh.IsConnected)
                 return "连接失败";

@@ -25,7 +25,7 @@ namespace C2.Dialogs
         public bool Download()
         {
             bool succ = api.Login()
-                           .DownloadGambleTaskResult(temp);
+                           .DownloadTaskResult(temp);
             if (succ) // 成功 临时文件转正
             {
                 FileUtil.DeleteFile(done);     // 先删除重名文件,要确认下载成功后再删,以免文件没下载,以前的也没有了
