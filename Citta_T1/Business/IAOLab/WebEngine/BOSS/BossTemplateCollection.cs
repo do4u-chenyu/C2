@@ -30,8 +30,8 @@ namespace C2.Business.IAOLab.WebEngine.Boss
         {
             commonConfig01 = new List<BossChartConfig>()
                                                     { new BossChartConfig("SimpleBar", "柱状图（左上方）", 1),
-                                                      new BossChartConfig("BasicLineChart", "折线图（右上方）", 2),
-                                                      new BossChartConfig("BasicScatter", "点状图（左下方）", 3),
+                                                      new BossChartConfig("BasicLineChart", "折线图（左下方）", 2),
+                                                      new BossChartConfig("BasicScatter", "点状图（右上方）", 3),
                                                       new BossChartConfig("GradientLineChart", "曲线图（右下方）", 4) };
 
             commonConfig02 = new List<BossChartConfig>()
@@ -64,7 +64,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss
             //bossTemplateDict.Add(4, new BossTemplate(commonConfig01));
             bossTemplateDict.Add(4, new BossTemplate(new List<BossChartConfig>()
                                                     { new BossChartConfig("SimpleBar", "柱状图（左上方）", 1),
-                                                      new BossChartConfig("BasicLineChart", "折线图（左下方）", 2),
+                                                      new BossChartConfig("BasicLineChart", "曲线图（左下方）", 2),
                                                       new BossChartConfig("BasicScatter", "点状图（右上方）", 3),
                                                       new BossChartConfig("StackBar", "堆叠柱状图（右下方）", 4) }));
 
