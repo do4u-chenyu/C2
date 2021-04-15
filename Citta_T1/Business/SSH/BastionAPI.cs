@@ -12,7 +12,7 @@ namespace C2.Business.SSH
     public class BastionAPI
     {
         private const byte CR = 13;
-        private const byte NL = 10;
+        private const byte LF = 10;
 
         private const int M40 = 1024 * 1024 * 40;
         private const int K2 = 4096 * 2;
@@ -264,9 +264,9 @@ namespace C2.Business.SSH
             return ret;
         }
 
-        private bool IsCRNL(byte[] buffer, int offset)
+        private bool IsCRLF(byte[] buffer, int offset)
         {
-            return buffer[offset] == CR && buffer[offset + 1] == NL;
+            return buffer[offset] == CR && buffer[offset + 1] == LF;
         }
 
         private int ReplaceCRNLWrite(byte[] buffer, int count, FileStream fs)
@@ -288,7 +288,7 @@ namespace C2.Business.SSH
             do
             {
                 // 找到 下一个 /r/n
-                while (curr < count - 1 && !IsCRNL(buffer, curr))
+                while (curr < count - 1 && !IsCRLF(buffer, curr))
                     curr++;
 
                 int bytesWrite = curr - head + 1;
@@ -301,7 +301,7 @@ namespace C2.Business.SSH
                 }
                 // 找到CRNL 替换 成 NLNL， [head ... CRNL] => [head ... NLNL]
                 // 写入[head ... NL], curr跳过NLNL,
-                buffer[curr] = NL;
+                buffer[curr] = LF;
                 fs.Write(buffer, head, bytesWrite);
                 // 游标置于当前位置
                 head = curr += 2; 
