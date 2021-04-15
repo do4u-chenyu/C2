@@ -47,7 +47,7 @@ class Scheduler:
         LOGGER.info('queryWords: '+ str(self.queryWords))
         for line in self.queryWords:
                 self.queryclient_keyWordQueue.put(line)  #TODO
-        LOGGER.info("keyword query group number：{}".format(len(self.queryWords)))
+        LOGGER.info("keyword query group number：{0}".format(len(self.queryWords)))
             
     def scheduling(self):
         print "启动写入线程"
@@ -95,7 +95,7 @@ class Query(Thread):
             self.get_num += 1
             self.queryClient(key_word)
             queryEnd = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-            LOGGER.info('query Time:{}_{}'.format(queryStart,queryEnd))
+            LOGGER.info('query Time:{0}_{0}'.format(queryStart,queryEnd))
             self.queryclient_keyWordQueue.task_done()  # 
 
     def queryClient(self, key_word):
@@ -120,10 +120,10 @@ class Query(Thread):
             if '=' not in key_word:
                 dbfilter = '\'' + ' OR '.join(['"' + value + '"' +  ' in _REFERER'  for value in  LOGIN_VALUE]) + '\''
                 cmd = cmd + ['--dbfilter',dbfilter]
-            req = Popen(". /home/search/search_profile && {}".format(" ".join(cmd)), shell=True, stdout=PIPE)
+            req = Popen(". /home/search/search_profile && {0}".format(" ".join(cmd)), shell=True, stdout=PIPE)
         for line in req.stdout:
             if 'query finished' in line:
-                LOGGER.info('queryCmd:' + ". /home/search/search_profile && {}".format(" ".join(cmd)) + '-----' +line.strip())
+                LOGGER.info('queryCmd:' + ". /home/search/search_profile && {0}".format(" ".join(cmd)) + '-----' +line.strip())
             if self.queryContentFlag:
                 self.content[self.configDict.get('_QUERY_CONTENT', -1)] += (';'+line.strip())
             if ":" in line:
@@ -315,8 +315,8 @@ class Saver(Thread):
                 '--contextlen', '1000',
                 '--maxcount', '1000000'
             ]
-            req = Popen(". /home/search/search_profile && {}".format(" ".join(cmd)), shell=True, stdout=PIPE)
-            print ". /home/search/search_profile && {}".format(" ".join(cmd))
+            req = Popen(". /home/search/search_profile && {0}".format(" ".join(cmd)), shell=True, stdout=PIPE)
+            print ". /home/search/search_profile && {0}".format(" ".join(cmd))
             LOGGER.info('QUERYTIME:{0}_{1}\n wait...'.format(self.startTime,self.endTime)) 
             #req = Popen(['/home/search/sbin/queryclient','--server','127.0.0.1','--port', '9870','--querystring', keyWords,'--start', startTime,'--end', endTime,'--contextlen','10000','--maxcount', '10000'],stdout=PIPE)
             for line in req.stdout:
@@ -413,7 +413,7 @@ def zip_result(DATA_PATH,ZIP_PATH,type='no'):
         LOGGER.info('cmd:{}'.format(' '.join(cmd)))
         pipe = Popen(' '.join(cmd),shell=True,stdout=PIPE)
     else:
-        pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:],  '--remove-files'], stdout=PIPE)
+        pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:],  '--remove-files'], stdout=PIPE, stderr=PIPE)
     out, err = pipe.communicate()
     if pipe.returncode:
         LOGGER.warning("Compress dirs failed with error code: {0}".format(pipe.returncode))
@@ -450,24 +450,15 @@ def encrypTion(path):
         f.write(data)
 
 def main():
-    LOGGER.info('START QUERY BATCH....')
-    query_buttonValue = produceKey(LOGIN_BUTTON,LOGIN_VALUE,KEY_NUM)
-    queryBatch(query_buttonValue)
-    LOGGER.info('END QUERY BATCH')
-
     LOGGER.info('START AIRPORT QUERY BATCH....')
-    ap_path = os.path.join(DATA_PATH,"_result_airport_"+areacode)
+    ap_path = os.path.join(DATA_PATH,"_queryResult_plane_"+startTime+"_"+endTime)
     init_path(ap_path)
     ap = Airport(ap_path,startTime,endTime,ALL_ITEMS)
     ap.run_query()
-    zip_result(ap_path,ap_path+'.tgz')
     LOGGER.info('END AIRPORT QUERY BATCH')
-    overTime =  datetime.datetime.now()
-    ZIP_PATH = DATA_PATH + NowTime.strftime("%Y%m%d%H%M%S") + '_' + overTime.strftime("%Y%m%d%H%M%S") +  '.tgz.tmp'
-    zip_result(DATA_PATH,ZIP_PATH)
-    #encrypTion(ZIP_PATH)
+    zip_result(ap_path,ap_path+'.tgz.tmp')
     ZIP_SUCCEED = areacode +  ZIP_PATH[2:].replace('.tmp','')
-    os.rename(ZIP_PATH,ZIP_SUCCEED)
+    os.rename(ap_path+'.tgz.tmp',ZIP_SUCCEED)
 if __name__ == '__main__':
     ##Program description
     usage = 'python bathquery_db_password.py --start [start_time] --end [end_time] --areacode [areacode]'
