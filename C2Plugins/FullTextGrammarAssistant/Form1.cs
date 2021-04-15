@@ -20,22 +20,6 @@ namespace FullTextGrammarAssistant
         public Form1()
         {
             InitializeComponent();
-            foreach (CheckBox ck in panel2.Controls)
-            {
-                ck.CheckedChanged += checkBox1_CheckedChanged;
-            }
-            foreach (CheckBox ck in panel3.Controls)
-            {
-                ck.CheckedChanged += checkBox48_CheckedChanged;
-            }
-            foreach (CheckBox ck in panel4.Controls)
-            {
-                ck.CheckedChanged += checkBox53_CheckedChanged;
-            }
-            foreach (CheckBox ck in panel5.Controls)
-            {
-                ck.CheckedChanged += checkBox50_CheckedChanged;
-            }
         }
 
         public string GetPluginDescription()
@@ -95,34 +79,14 @@ namespace FullTextGrammarAssistant
 
         private void checkBox1_Click_1(object sender, EventArgs e)
         {
-            if (checkBox1.CheckState == CheckState.Checked)
-            {
-                foreach (CheckBox ck in panel2.Controls)
-                    ck.Checked = true;
-            }
-            else
-            {
-                foreach (CheckBox ck in panel2.Controls)
-                    ck.Checked = false;
-            }
+
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox c = sender as CheckBox;
-            if (c.Checked == true)
-            {
-                foreach (CheckBox ch in panel2.Controls)
-                {
-                    if (ch.Checked == false)
-                        return;
-                }
-                checkBox1.Checked = true;
-            }
-            else
-            {
-                checkBox1.Checked = false;
-            }
+            TraverPanel();
+            UpdatePreviewText();
+
         }
 
         private void checkBox37_CheckedChanged(object sender, EventArgs e)
@@ -137,20 +101,9 @@ namespace FullTextGrammarAssistant
 
         private void checkBox48_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox c = sender as CheckBox;
-            if (c.Checked == true)
-            {
-                foreach (CheckBox ch in panel3.Controls)
-                {
-                    if (ch.Checked == false)
-                        return;
-                }
-                checkBox48.Checked = true;
-            }
-            else
-            {
-                checkBox48.Checked = false;
-            }
+            optionPanel();
+            UpdatePreviewText();
+
         }
 
         private void checkBox48_Click(object sender, EventArgs e)
@@ -169,67 +122,26 @@ namespace FullTextGrammarAssistant
 
         private void checkBox53_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox c = sender as CheckBox;
-            if (c.Checked == true)
-            {
-                foreach (CheckBox ch in panel4.Controls)
-                {
-                    if (ch.Checked == false)
-                        return;
-                }
-                checkBox53.Checked = true;
-            }
-            else
-            {
-                checkBox53.Checked = false;
-            }
+            dataTypePanel();
+            UpdatePreviewText();
+
         }
 
         private void checkBox53_Click(object sender, EventArgs e)
         {
-            if (checkBox53.CheckState == CheckState.Checked)
-            {
-                foreach (CheckBox ck in panel4.Controls)
-                    ck.Checked = true;
-            }
-            else
-            {
-                foreach (CheckBox ck in panel4.Controls)
-                    ck.Checked = false;
-                MessageBox.Show("请选择数据类型。", "提示");
-            }
+
         }
 
         private void checkBox50_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox c = sender as CheckBox;
-            if (c.Checked == true)
-            {
-                foreach (CheckBox ch in panel5.Controls)
-                {
-                    if (ch.Checked == false)
-                        return;
-                }
-                checkBox50.Checked = true;
-            }
-            else
-            {
-                checkBox50.Checked = false;
-            }
+            SearchPanel();
+            UpdatePreviewText();
+
         }
 
         private void checkBox50_Click(object sender, EventArgs e)
         {
-            if (checkBox50.CheckState == CheckState.Checked)
-            {
-                foreach (CheckBox ck in panel5.Controls)
-                    ck.Checked = true;
-            }
-            else
-            {
-                foreach (CheckBox ck in panel5.Controls)
-                    ck.Checked = false;
-            }
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -307,7 +219,7 @@ namespace FullTextGrammarAssistant
             attributeType.Add("附件数", "_ATTACHNUM");
             attributeType.Add("域名", "DOMAIN");
 
-            string attrText = "";
+            string attrText = string.Empty;
 
             foreach (KeyValuePair<string, string> attr in attributeType)
             {
@@ -360,7 +272,7 @@ namespace FullTextGrammarAssistant
             protoType.Add("博客网站", "11580001");
             protoType.Add("社交网站", "1197007");
 
-            string protoTypeText = "";
+            string protoTypeText = String.Empty;
 
             foreach (CheckBox ch in panel2.Controls)
             {
@@ -374,21 +286,22 @@ namespace FullTextGrammarAssistant
                         }
                     }
                 }
-                else
-                    MessageBox.Show("请选择协议类型。", "提示");
             }
-            previewTextList[4] = "--protofilter " + protoTypeText;
+            if (string.IsNullOrEmpty(protoTypeText))
+                previewTextList[4] = string.Empty;
+            else
+                previewTextList[4] = "--protofilter " + protoTypeText;
         }
         private void SearchPanel() 
         {
             Dictionary<string, string> searchRange = new Dictionary<string, string>();
-            searchRange.Add("正文", "_TEXT");
-            searchRange.Add("附件", "_ATTACHEMENTTEXT");
-            searchRange.Add("邮件主题", "_SUBJECT");
+            searchRange.Add("正文", "content:");
+            searchRange.Add("附件", "attachment:");
+            searchRange.Add("邮件主题", "subject:");
 
-            string searchRangeText = "";
+            string searchRangeText = string.Empty;
 
-            foreach (CheckBox ch in panel2.Controls)
+            foreach (CheckBox ch in panel5.Controls)
             {
                 if (ch.Checked == true)
                 {
@@ -396,15 +309,13 @@ namespace FullTextGrammarAssistant
                     {
                         if (search.Key == ch.Text)
                         {
-                            searchRangeText += search.Value + " ";
+                            searchRangeText += search.Value + this.textBox1.Text + " ";
                         }
                     }
                 }
-                //else
-                //return;
             }
-            //previewTextList[4] = "--protofilter " + searchRangeText;
 
+            previewTextList[3] = "--querystring \"" + searchRangeText + "\"";
         }
         private void dataTypePanel()
         {
@@ -412,7 +323,7 @@ namespace FullTextGrammarAssistant
             DataType.Add("正常", "normal");
             DataType.Add("垃圾", "garbage");
 
-            string dataTypeText = "";
+            string dataTypeText = string.Empty;
 
             foreach (CheckBox ch in panel4.Controls)
             {
@@ -426,10 +337,11 @@ namespace FullTextGrammarAssistant
                         }
                     }
                 }
-                //else
-                //return;
             }
-            previewTextList[7] = "--datatype " + dataTypeText;
+            if (string.IsNullOrEmpty(dataTypeText))
+                previewTextList[7] = string.Empty;
+            else
+                previewTextList[7] = "--datatype " + dataTypeText;
         }
         private void optionPanel()
         {
@@ -440,7 +352,7 @@ namespace FullTextGrammarAssistant
             OptionType.Add("过滤内容相似文件", "similar");
             OptionType.Add("关键词精确匹配", "garbage");
 
-            string OptionTypeText = "";
+            string OptionTypeText = string.Empty;
 
             foreach (CheckBox ch in panel3.Controls)
             {
@@ -454,10 +366,11 @@ namespace FullTextGrammarAssistant
                         }
                     }
                 }
-                //else
-                //return;
             }
-            previewTextList[8] = "--option " + OptionTypeText;
+            if (string.IsNullOrEmpty(OptionTypeText))
+                previewTextList[8] = string.Empty;
+            else
+                previewTextList[8] = "--option " + OptionTypeText;
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -639,6 +552,19 @@ namespace FullTextGrammarAssistant
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
             UpdatePreviewText();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab.Text == "queryclient")
+                Clipboard.SetDataObject(previewCmdText.Text);
+            else
+                Clipboard.SetDataObject(textBox9.Text);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
