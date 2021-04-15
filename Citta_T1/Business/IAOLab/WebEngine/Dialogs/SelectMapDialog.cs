@@ -23,6 +23,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public string WebUrl;
         public string map;
         public string tude;
+        public List<MapPoint> mapPoints;
         private BcpInfo bcpInfo;
         private DataItem hitItem;
         private string FilePath { get => hitItem.FilePath; }
@@ -40,13 +41,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public DataItem HitItem { get { return this.hitItem; } }
         public List<DataItem> DataItems;
 
-        public string drawlatude;
+        public string drawlatitude;
 
-        public string drawlontude;
+        public string drawlongitude;
 
         public SelectMapDialog(List<DataItem> dataItems)
         {
             InitializeComponent();
+            mapPoints = new List<MapPoint>();
             WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
             DataItems = dataItems;
             foreach (DataItem dataItem in DataItems)
@@ -55,12 +57,15 @@ namespace C2.IAOLab.WebEngine.Dialogs
                     BCPBuffer.GetInstance().GetCachePreviewTable(dataItem.DBItem);
                 this.datasourceComboBox.Items.Add(dataItem.FileName);
             }
+            if (DataItems.Count == 1)
+                this.datasourceComboBox.SelectedIndex = 0;
         }
 
         private void DatasourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ClearComBox();
-            this.hitItem = DataItems[datasourceComboBox.SelectedIndex];
+            if (datasourceComboBox.SelectedIndex > -1 && DataItems.Count > 0)
+                this.hitItem = DataItems[datasourceComboBox.SelectedIndex];
             SetDropDown();
         }
         private void SetDropDown()
@@ -124,8 +129,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 return false;
             }
             Random rm = new Random();
-            drawlontude = lonValues[0][rm.Next(lonValues.Count)];
-            drawlatude = latValues[0][rm.Next(latValues.Count)];
+            drawlongitude = lonValues[0][rm.Next(lonValues.Count)];
+            drawlatitude = latValues[0][rm.Next(latValues.Count)];
             if (!InvalidLonValues(lonValues))
             {
                 HelpUtil.ShowMessageBox(HelpUtil.InvalidLongitude);
@@ -158,7 +163,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 string JSON_OBJ_Format_heat = "\"lng\": \" {0} \", \"lat\": \" {1} \", \"count\": \" {2} \"";
                 for (int i = 0; i < latValues[0].Count; i++)
                 {
-                    tmpList.Add('{' + String.Format(JSON_OBJ_Format_heat, lonValues[0][i], latValues[0][i], countValues[0][i]) + '}'); 
+                    tmpList.Add('{' + String.Format(JSON_OBJ_Format_heat, lonValues[0][i], latValues[0][i], countValues[0][i]) + '}');
+                    mapPoints.Add(new MapPoint(lonValues[0][i], latValues[0][i]));
                 }
 
             }
@@ -168,6 +174,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 for (int i = 0; i < latValues[0].Count; i++)
                 {
                     tmpList.Add('{' + String.Format(JSON_OBJ_Format , lonValues[0][i], latValues[0][i]) + '}');
+                    mapPoints.Add(new MapPoint(lonValues[0][i], latValues[0][i]));
                 }
             }
 

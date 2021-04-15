@@ -102,7 +102,7 @@ namespace C2.Business.WebsiteFeatureDetection
                     result.Datas = datas;
                     result.RespMsg = status;
                 }
-                else if(resDict.TryGetValue("error", out string error))
+                else if(resDict.TryGetValue("desc", out string error))
                     result.RespMsg = error;
                 else
                     result.RespMsg = "任务下发失败。";

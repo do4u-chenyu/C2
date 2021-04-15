@@ -396,8 +396,7 @@ namespace C2
         {
             if (Global.VersionType.Equals(Global.GreenLevel))
                 return;
-            string helpfile = Application.StartupPath;
-            helpfile += @"\Resources\Help\C2帮助文档.chm";
+            string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "C2帮助文档.chm");
             Help.ShowHelp(this, helpfile);
         }
 

@@ -57,7 +57,7 @@
             this.gisMapOKButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.baiduVerAPITB = new System.Windows.Forms.TextBox();
+            this.baiduAPIKey = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.baiduScaleTB = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -392,7 +392,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.baiduVerAPITB);
+            this.tabPage1.Controls.Add(this.baiduAPIKey);
             this.tabPage1.Controls.Add(this.label24);
             this.tabPage1.Controls.Add(this.baiduScaleTB);
             this.tabPage1.Controls.Add(this.label15);
@@ -411,11 +411,11 @@
             // 
             // baiduVerAPITB
             // 
-            this.baiduVerAPITB.Location = new System.Drawing.Point(104, 14);
-            this.baiduVerAPITB.Name = "baiduVerAPITB";
-            this.baiduVerAPITB.Size = new System.Drawing.Size(460, 23);
-            this.baiduVerAPITB.TabIndex = 16;
-            this.toolTip1.SetToolTip(this.baiduVerAPITB, "百度地图服务所需的Key");
+            this.baiduAPIKey.Location = new System.Drawing.Point(104, 14);
+            this.baiduAPIKey.Name = "baiduVerAPITB";
+            this.baiduAPIKey.Size = new System.Drawing.Size(460, 23);
+            this.baiduAPIKey.TabIndex = 16;
+            this.toolTip1.SetToolTip(this.baiduAPIKey, "百度地图服务所需的Key");
             // 
             // label24
             // 
@@ -1486,7 +1486,7 @@
         private System.Windows.Forms.TextBox checkStatus;
         private System.Windows.Forms.TextBox description;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox baiduVerAPITB;
+        private System.Windows.Forms.TextBox baiduAPIKey;
         private System.Windows.Forms.Label currentVersion;
         private System.Windows.Forms.Label label26;
     }

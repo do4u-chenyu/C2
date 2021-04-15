@@ -191,8 +191,8 @@
     <Compile Include="Business\Option\PythonInterpreterInfo.cs" />
     <Compile Include="Business\Option\PythonOPConfig.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
-    <Compile Include="Business\SearchToolkit\TaskInfo.cs" />
-    <Compile Include="Business\SearchToolkit\TaskManager.cs" />
+    <Compile Include="Business\SearchToolkit\SearchTaskInfo.cs" />
+    <Compile Include="Business\SearchToolkit\SearchTaskManager.cs" />
     <Compile Include="Business\SSH\BastionAPI.cs" />
     <Compile Include="Business\SSH\Shell.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\TOTP.cs" />
@@ -442,6 +442,11 @@
     <Compile Include="Model\MindMaps\DocxFile.cs" />
     <Compile Include="Model\MindMaps\XmindFile.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Utils\GenericSingleton.cs" />
     <Compile Include="Business\Database\IDAO.cs" />
     <Compile Include="Business\Database\PreviewDbDataForm.cs">
@@ -2012,15 +2017,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Properties\app.manifest" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -2030,6 +2026,10 @@
   <ItemGroup>
     <None Include="Demo\demo_txt.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\cross_large.png" />
     <EmbeddedResource Include="Resources\cur_scroll.cur" />
@@ -2138,14 +2138,14 @@
     <Content Include="Business\IAOLab\WebEngine\Html\StartMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Business\IAOLab\WebEngine\img\BossStyle01.png" />
-    <None Include="Business\IAOLab\WebEngine\img\BossStyle02.png" />
+    <Content Include="Business\IAOLab\WebEngine\img\BossStyle01.png" />
+    <Content Include="Business\IAOLab\WebEngine\img\BossStyle02.png" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle03.png" />
-    <None Include="Business\IAOLab\WebEngine\img\BossStyle04.png" />
-    <None Include="Business\IAOLab\WebEngine\img\BossStyle05.png" />
+    <Content Include="Business\IAOLab\WebEngine\img\BossStyle04.png" />
+    <Content Include="Business\IAOLab\WebEngine\img\BossStyle05.png" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle06.png" />
-    <None Include="Business\IAOLab\WebEngine\img\BossStyle07.png" />
-    <None Include="Business\IAOLab\WebEngine\img\BossStyle08.png" />
+    <Content Include="Business\IAOLab\WebEngine\img\BossStyle07.png" />
+    <Content Include="Business\IAOLab\WebEngine\img\BossStyle08.png" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle09.png" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle10.png" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle11.png" />
@@ -2288,12 +2288,6 @@
     <Content Include="Business\IAOLab\WebEngine\img\img6\back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img6\bottom.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img6\center2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img6\title.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2307,6 +2301,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img7\title.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\img8\bg.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img8\line1_3.png">
@@ -2343,6 +2340,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\JS\Heatmap_min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\JS\jquery-2.2.1.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\JS\phx.js">
@@ -2387,8 +2387,14 @@
     <None Include="Resources\html_content.htm" />
     <None Include="Resources\Icons\Artificialintelligence.png" />
     <None Include="Resources\Icons\Businessvw.png" />
+    <Content Include="Resources\Help\全文工具箱帮助文档.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Help\检索系统帮助.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\网站侦察兵帮助文档.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\check_update.ico" />
     <None Include="Resources\Icons\Datamanagement.png" />
@@ -3120,6 +3126,15 @@
     <Content Include="Resources\resource.h" />
     <None Include="Resources\tab_button.png" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Script\IAO_Web_validation\global_method.py" />

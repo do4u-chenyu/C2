@@ -2,10 +2,6 @@
 using C2.SearchToolkit;
 using C2.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C2.Dialogs
 {
@@ -13,8 +9,10 @@ namespace C2.Dialogs
     {
         private readonly String done;
         private readonly String temp;
-        private BastionAPI api;
-        public BastionDownloadProgressBar(TaskInfo task, String ffp)
+        private readonly BastionAPI api;
+        //private long fileLength;
+
+        public BastionDownloadProgressBar(SearchTaskInfo task, String ffp)
         {
             api = new BastionAPI(task);
             done = ffp;
@@ -27,12 +25,16 @@ namespace C2.Dialogs
         public bool Download()
         {
             bool succ = api.Login()
-                           .DownloadGambleTaskResult(temp);
+                           .DownloadTaskResult(temp);
             if (succ) // 成功 临时文件转正
+            {
+                FileUtil.DeleteFile(done);     // 先删除重名文件,要确认下载成功后再删,以免文件没下载,以前的也没有了
                 FileUtil.FileMove(temp, done);
+            }          
             else      // 失败 删除临时文件
                 FileUtil.DeleteFile(temp);
 
+            api.Close();
             return succ;
         }
 

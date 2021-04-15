@@ -166,5 +166,17 @@
         map.addOverlay(heatmapOverlay);
         heatmapOverlay.setDataSet({ data: obj, max: 100 });
     };
+    function getZoom (maxLng, minLng, maxLat, minLat) {  
+        var zoom = ["50","100","200","500","1000","2000","5000","10000","20000","25000","50000","100000","200000","500000","1000000","2000000"]//级别18到3。
+        var pointA = new BMap.Point(maxLng,maxLat);  // 创建点坐标A
+        var pointB = new BMap.Point(minLng,minLat);  // 创建点坐标B
+        var distance = map.getDistance(pointA,pointB).toFixed(1);  //获取两点距离,保留小数点后两位
+        for (var i = 0,zoomLen = zoom.length; i < zoomLen; i++) {  
+            if(zoom[i] - distance > 0){  
+                return 18-i+2;
+            }
+        };  
+        return 1;
+    }; 
 </script>
 

@@ -26,7 +26,7 @@ namespace C2.Dialogs
         public string latStr;
         public string lonStr;
         public string scaleStr;
-        public string baiduVerAPI;
+        public string baiduAPIKeyStr;
         public string baiduHeatAPI;
         private UpdateProgressBar progressBar;
         private readonly PluginsDownloader downloader;
@@ -45,10 +45,10 @@ namespace C2.Dialogs
                 Client_DownloadFileCompleted = this.Client_DownloadFileCompleted,
                 Client_DownloadProgressChanged = this.Client_DownloadProgressChanged
             };
-            lonStr = this.baiduLonTB.Text = Settings.Default.lontude;
-            latStr = this.baiduLatTB.Text = Settings.Default.latude;
+            lonStr = this.baiduLonTB.Text = Settings.Default.longitude;
+            latStr = this.baiduLatTB.Text = Settings.Default.latitude;
             scaleStr = this.baiduScaleTB.Text = Settings.Default.scale;
-            baiduVerAPI = this.baiduVerAPITB.Text = Settings.Default.baiduVerAPI;
+            baiduAPIKeyStr = this.baiduAPIKey.Text = Settings.Default.baiduAPIKey;
         }
 
 
@@ -450,8 +450,12 @@ namespace C2.Dialogs
         }
         private void CheckUpdate()
         {
-            string currentVersion = ConfigUtil.TryGetAppSettingsByKey("version").Trim();
-            this.currentVersion.Text = "V" + currentVersion;
+            string currentVersion = Program.Software_Version;
+            this.Invoke((EventHandler)(delegate
+            {
+                this.currentVersion.Text = "V" + currentVersion;
+            }));
+            
             this.newSoftwareVersion = NewSoftewareVersion();
             if (IsFormNotExist())
                 return;
@@ -565,10 +569,10 @@ namespace C2.Dialogs
                 HelpUtil.ShowMessageBox(HelpUtil.InvalidScaleHelpInfo);
                 return;
             }            
-            Settings.Default.latude = this.baiduLatTB.Text;
-            Settings.Default.lontude = this.baiduLonTB.Text;
+            Settings.Default.latitude = this.baiduLatTB.Text;
+            Settings.Default.longitude = this.baiduLonTB.Text;
             Settings.Default.scale = this.baiduScaleTB.Text;
-            Settings.Default.baiduVerAPI = this.baiduVerAPITB.Text;
+            Settings.Default.baiduAPIKey = this.baiduAPIKey.Text;
             Settings.Default.Save();
             UpdateHtmlTemplate();
             this.Close();
@@ -585,7 +589,7 @@ namespace C2.Dialogs
         }
         private bool IsValidScale()
         {
-            return int.TryParse(this.baiduScaleTB.Text, out int scale) && 0 < scale && scale < 10;
+            return int.TryParse(this.baiduScaleTB.Text, out int scale) && 0 < scale && scale < 20;
         }
 
         //下载进度变化触发事件
@@ -651,7 +655,7 @@ namespace C2.Dialogs
             }
             //----------替换html内容
             string htmlText = htmlSb.ToString();
-            htmlText = Regex.Replace(htmlText, "ak=.*\"", "ak=" + this.baiduVerAPITB.Text + "\"");
+            htmlText = Regex.Replace(htmlText, "ak=.*\"", "ak=" + this.baiduAPIKey.Text + "\"");
 
             //----------生成htm文件------------------
             try

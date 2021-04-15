@@ -41,7 +41,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
             LoadOption();
             webBrowser = browser;
         }
-
+        public void Clear()
+        {
+            foreach (var bitmap in this.bossTypeDict)
+                bitmap.Dispose();
+            this.bossTypeDict.Clear();
+        }
         //图表关联，保存配置
         private void SavaOption()
         {
@@ -60,7 +65,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void LoadOption()
         {
             LoadData();
+            LoadChartOptions();
+        }
 
+        private void LoadChartOptions()
+        {
             //加载数据源、类型加载图表配置
             LoadChartOption("SimpleBar", simpleBarX, simpleBarY);
             LoadChartOption("BasicLineChart", basicLineChartX, basicLineChartY);
@@ -71,7 +80,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             LoadChartOption("PictorialBar", pictorialBarX, pictorialBarY);
             LoadChartOption("BasicMap", basicMapX, basicMapY);
         }
-
         protected override bool OnOKButtonClick()
         {
             //前100行所有列的数据生成datatable、图表配置项生成chartOptions、生成js
@@ -157,6 +165,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if(oldDataIdx != -1)
                 ChartOptions = new Dictionary<string, int[]>();
             oldDataIdx = datasource.SelectedIndex;
+            LoadChartOptions();
         }
 
         private void ChangeControlContent()
@@ -236,7 +245,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             //根据选中的模板更新界面
             BossTemplate selectBossTemplate = BossTemplateCollection.GetInstance().GetTemplateByIdx(bossType.SelectedIndex);
-            //TODO url和img抽出去好？窗口和模板内容尽量耦合度低
+
             this.pictureBox1.Image = bossTypeDict[bossType.SelectedIndex];
             this.label19.Text = bossType.Text.Substring(bossType.Text.IndexOf("（") + 1, bossType.Text.IndexOf("）") - 1 - bossType.Text.IndexOf("（"));
             this.WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", string.Format("BossIndex{0}.html", (bossType.SelectedIndex + 1).ToString()));

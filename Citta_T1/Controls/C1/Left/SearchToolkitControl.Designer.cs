@@ -40,6 +40,10 @@
             // 
             this.addTaskLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddTaskLabel_MouseClick);
             // 
+            // helpInfoLable
+            // 
+            this.helpInfoLable.Click += new System.EventHandler(this.HelpInfoLable_Click);
+            // 
             // SearchToolkitControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

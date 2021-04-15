@@ -11,8 +11,8 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private const byte CR = 0x13;
-        private const byte NL = 0x10;
+        private const byte CR = 13;
+        private const byte LF = 10;
 
         private const int M40 = 1024 * 1024 * 40;
         private const int K2 = 4096 * 2;
@@ -20,31 +20,36 @@ namespace C2.Business.SSH
         
 
         private const int SecondsTimeout = 10;
-        private const String SeparatorString = "5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
+        private const String SeparatorString = "TCzmiJHkvZnnlJ/lpoLkuIflj6Tplb/lpJw=";
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
-        
-        private static readonly String TgzHead = Encoding.UTF8.GetString(new byte[] { 0x1f, 0x8b, 0x08 }); // 1f 8b 08 .tgz的文件头
 
-        private readonly TaskInfo task;
+        private static readonly byte[] TgzHeadBytes = new byte[] { 0x1f, 0x8b, 0x08 };  // 1f 8b 08 .tgz的文件头
+        private static readonly String TgzHeadString = Encoding.UTF8.GetString(TgzHeadBytes);
 
-        private SshClient ssh;
+        private readonly SearchTaskInfo task;
+
+        private readonly SshClient ssh;
         private ShellStream shell;
 
-        private String TargetGambleScript { get => String.Format("batchquery_db_accountPass_C2_20210324_{0}.py", task.TaskCreateTime); }
-        // {workspace}/pid_taskcreatetime
-        private String GambleTaskDirectory { get => String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.TaskName, task.TaskCreateTime); }
+        private bool downloadCancel = false;
 
+        private String TargetScript { get => task.TargetScript; }
+        // {workspace}/pid_taskcreatetime
+        private String TaskDirectory { get => task.TaskDirectory; }
+
+        private String TaskResultShellPattern { get => task.TaskResultShellPattern; }
+
+        private String TaskResultRegexPattern { get => task.TaskResultRegexPattern; }
         private static String Wrap(String pattern)
         {
             return String.Format(@"\r?\n{0}\r?\n", pattern);
         }
-        public BastionAPI(TaskInfo task)
+        public BastionAPI(SearchTaskInfo task)
         {
             this.task = task;
             this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
-            //this.ssh = new SshClient("114.55.248.85", "root", "aliyun.123");
             this.ssh.ConnectionInfo.Timeout = Timeout; 
         }
 
@@ -92,6 +97,16 @@ namespace C2.Business.SSH
             _ = shell.Read(); // 清空buffer
         }
 
+        public void Close()
+        {
+            try 
+            {
+                if (ssh != null)      // ssh.net库有bug，这里会报ObjectDisposedException
+                    ssh.Disconnect(); // 但不主动调，链接又不释放 
+            } catch { }
+
+        }
+
         
         private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout)   
         {
@@ -112,8 +127,8 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
-        private bool Cat(String ffp, FileStream fs, long fileLength, ShellStream ssm)
-        {              
+        private bool CatTgzFile(String ffp, FileStream fs, long fileLength, ShellStream ssm)
+        {
             try
             {
                 // 清理缓存
@@ -122,35 +137,45 @@ namespace C2.Business.SSH
                 ssm.WriteLine(String.Format("cat {0}", ffp));
                 // 打印分隔符
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
-
-                String begin = ssm.Expect(new Regex(TgzHead), Timeout);  
+                // 当字符串里永远没有TGZHead时，这里内存会非常大，没有啥好办法，只能外围判断必须是tgz文件
+                String begin = ssm.Expect(new Regex(TgzHeadString), Timeout);  
                 if (null == begin)
                 {
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
                     return false;
                 }
 
+                // 根据lxf的情报, 40M 为中位数
                 int bufferSize = fileLength > M40 ? K512 : K2;  // 40M 以上的文件用大缓存，减少进程切换的消耗   
-                byte[] buffer = new byte[bufferSize + 1]; // 预留一个空白位用来存储预读字节
+                byte[] buffer = new byte[bufferSize + 1];        // 预留一个空白位用来存储预读字节
 
+                // 写入文件头
+                fs.Write(TgzHeadBytes, 0, TgzHeadBytes.Length);
+
+                int offset = 0;                                     // 读缓存起始位置, 0 或 1(情况3时)
                 Shell shell = new Shell(ssm);
-                long left = fileLength - TgzHead.Length;  // 去掉文件头
-                int offset = 0;                           // 缓存起始位置
-
+                long left = fileLength - TgzHeadString.Length;    // 忽略文件头
                 while (left > 0)
                 {
-                    int bytesRead = shell.Read(buffer, offset, bufferSize, Timeout);
+                    int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), Timeout);
                     offset = 0; // 读完一次, 起始位置复位
 
                     if (bytesRead == 0) // 超时
                     {
                         task.LastErrorMsg = String.Format("任务【{0}】下载失败：网络超时", task.TaskName);
-                        break;
+                        return false;
                     }
+
+                    if (downloadCancel)
+                    {
+                        task.LastErrorMsg = String.Format("用户取消任务【{0}】的下载", task.TaskName);
+                        return false;
+                    }
+
                     // 策略:
                     // 0) cat 回传时，会把字节流的NL全部替换成CRNL,需要再替换回来
                     // 1) 最后一个字节不是CR，替换CRNL
-                    // 2) 新字节不是CR,将新字符追加buffer位，替换CRNL
+                    // 2) 最后一个字节是CR，  再读一个字节, 新字节不是CR, 将新字符追加到buffer, 替换CRNL,继续循环
                     // 3) 最后一个字节是CR，  再读一个字节, 新字节还是CR, 先替换CRNL，然后将CR作为buffer第一个字节，继续循环
 
                     if (buffer[bytesRead - 1] != CR)  // 情况1
@@ -160,23 +185,26 @@ namespace C2.Business.SSH
                     }
   
                     byte one = 0;
-                    if (!shell.ReadByte(ref one))
-                        break;
+                    if (!shell.ReadByte(ref one, Timeout))
+                    {
+                        task.LastErrorMsg = String.Format("任务【{0}】下载失败：远端读错误", task.TaskName);
+                        return false;
+                    }
                         
                     if (one != CR)  // 情况2
                     {
-                        buffer[bytesRead] = one;
+                        buffer[bytesRead] = one;  // 新字符追加到buffer
                         left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead + 1, fs), 0);
                     }
                     else            // 情况3
                     {
                         left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead, fs), 0);
-                        buffer[offset++] = one;
+                        buffer[offset++] = one;   // 新字符放置到buffer头, 起始位置置为1
                     }
                 }
             }
-            catch { }
-            return false;
+            catch (Exception ex) { task.LastErrorMsg = ex.Message; return false; }
+            return true;
         }
 
         private String GetRemoteFilename(String s)
@@ -184,7 +212,7 @@ namespace C2.Business.SSH
             String command = String.Format("ls -l {0} | awk '{{print $9}}' | head -n 1", s);
             String content = RunCommand(command, shell);
 
-            Match mat = Regex.Match(content, Wrap(@"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)"));
+            Match mat = Regex.Match(content, Wrap(TaskResultRegexPattern));
             if (mat.Success && mat.Groups[1].Success)
                 return mat.Groups[1].Value;
             return String.Empty;
@@ -203,16 +231,15 @@ namespace C2.Business.SSH
 
         public void StopDownloadAsync()
         {
-
+            downloadCancel = true;
         }
 
-        public bool DownloadGambleTaskResult(String d)
+        public bool DownloadTaskResult(String d)
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
-            String s = GambleTaskDirectory + "/000000_queryResult_db_*_*.tgz";
+            String s = TaskDirectory + "/" + TaskResultShellPattern;
 
-            if (Oops())
-                return false;
+            if (Oops()) return false;
 
             String ffp = GetRemoteFilename(s);
             long len = GetRemoteFileSize(ffp);  // 文件有可能超过2G,不能用int
@@ -222,12 +249,12 @@ namespace C2.Business.SSH
                 return false; 
             }
 
-            // Cat的方式下载文件， 根据lxf的情报, 40M 为中位数
             bool ret = false;
             try
             {
                 using (FileStream fs = new FileStream(d, FileMode.Create, FileAccess.Write))
-                    ret = Cat(ffp, fs, len, shell);
+                    ret = CatTgzFile(ffp, fs, len, shell);
+                
             } 
             catch (Exception ex)
             {
@@ -238,47 +265,52 @@ namespace C2.Business.SSH
             return ret;
         }
 
-        private bool IsCRNL(byte[] buffer, int offset)
+        private bool IsCRLF(byte[] buffer, int offset)
         {
-            return buffer[offset] == CR && buffer[offset + 1] == NL;
+            return buffer[offset] == CR && buffer[offset + 1] == LF;
         }
 
         private int ReplaceCRNLWrite(byte[] buffer, int count, FileStream fs)
         {
             count = Math.Min(buffer.Length, count); // 保险一下，下载错误的文件比程序崩强
-            int real = count;
-
-            int curr = 0; 
-            int head = 0;
-
+            
+            int totalBytesWrite = 0; // 实际写入字节
+            int curr = 0;            // 当前游标位置
+            int head = 0;            // 当前写入起始位置
 
             if (count < 2)  // 不足2个字节,不可能含有CRNL
             {
                 fs.Write(buffer, head, curr + 1 - head);
-                return real;
+                return curr - head + 1;
             }
-   
+
+            //  |                |      [0, count - 1)             
+            // [++++++\r\n++++++++++++-]
             do
             {
                 // 找到 下一个 /r/n
-                while (curr + 1 < count && !IsCRNL(buffer, curr))
+                while (curr < count - 1 && !IsCRLF(buffer, curr))
                     curr++;
+
+                int bytesWrite = curr - head + 1;
+
                 // 没找到, 直接到结尾处,退出
-                if (curr + 1 < count) 
+                if (curr >= count - 1) 
                 {
-                    fs.Write(buffer, head, curr + 1 - head);
-                    return real += curr + 1 - head;
+                    fs.Write(buffer, head, bytesWrite);
+                    return totalBytesWrite += bytesWrite;
                 }
-                // 找到CRNL
-                buffer[curr] = NL;
-                fs.Write(buffer, head, curr - head);
+                // 找到CRNL 替换 成 NLNL， [head ... CRNL] => [head ... NLNL]
+                // 写入[head ... NL], curr跳过NLNL,
+                buffer[curr] = LF;
+                fs.Write(buffer, head, bytesWrite);
+                // 游标置于当前位置
+                head = curr += 2; 
+                totalBytesWrite += bytesWrite;
 
-                real += curr - head;
-                head = ++curr;      // 游标置于当前位置
-           
-            } while (curr + 1 < count); 
+            } while (head < count); 
 
-            return real;
+            return totalBytesWrite;
         }
 
         private bool Oops()
@@ -286,14 +318,23 @@ namespace C2.Business.SSH
             return !(ssh.IsConnected && task.LastErrorMsg.IsEmpty());
         }
 
-        public BastionAPI UploadGambleScript()
+        public BastionAPI UploadTaskScript()
         {
             if (Oops()) return this;
+            return UploadScript(task.LocalScriptPath);
+        }
 
-            String s = Global.GambleScriptPath;
-            String content = FileUtil.FileReadToEnd(s);
+        private BastionAPI UploadScript(String ffp)
+        {
+            String d = TaskDirectory + "/" + TargetScript;
+            String s = FileUtil.FileReadToEnd(ffp);
+            //UploadScriptShellEscape(s, d);
+            UploadScriptBase64(s, d);
+            return this;
+        }
 
-
+        private void UploadScriptShellEscape(String s, String d)
+        {
             // 0)  不能有释义字符 `
             // 1)  \\ \a \b \c \e \f \n \r \t 等转义字符的\全部替换成\\\
             // 2)  " 替换成 \"
@@ -302,19 +343,31 @@ namespace C2.Business.SSH
             //     转义字符的安全性，效率，形式美感上都很差
             //     尤其是转义字符，如果目标脚本有rm动作, 转义字符在处理\, /, 空格等符号时如果出问题
             //     运气不好会造成删库
-            if (String.IsNullOrEmpty(content) || content.Contains("`"))
-                return this;
+            if (String.IsNullOrEmpty(s) || s.Contains("`"))
+                return;
 
-            content = Regex.Replace(content, @"\\([\\abcefnrtvx0])", @"\\\$1")
-                           .Replace("\"", "\\\"")
-                           .Replace("\r", @"\r")
-                           .Replace("\n", @"\n");
+            s = Regex.Replace(s, @"\\([\\abcefnrtvx0])", @"\\\$1")
+                     .Replace("\"", "\\\"")
+                     .Replace("\r", @"\r")
+                     .Replace("\n", @"\n");
 
-            String d = GambleTaskDirectory + "/" + TargetGambleScript;
             // 这里可能还有超出shell缓冲区的问题
-            String command = String.Format("echo -e \"{0}\" > {1}", content, d);
+            String command = String.Format("echo -e \"{0}\" > {1}", s, d);
             if (RunCommand(command, shell).IsEmpty())
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
+        }
+
+        private BastionAPI UploadScriptBase64(String s, String d)
+        {
+            if (!String.IsNullOrEmpty(s))
+            {
+                String b64 = ST.EncodeBase64(s);        // Base64果然比shell硬转码好用多了
+                // 这里可能还有超出shell缓冲区的问题
+                String command = String.Format("echo -e \"{0}\" | base64 -di > {1}", b64, d);
+                if (RunCommand(command, shell).IsEmpty())
+                    task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);  
+            }
+
             return this;
         }
 
@@ -326,12 +379,12 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
-        public String RunGambleTask()
+        public String RunTask()
         {
             if (Oops()) return String.Empty;
 
-            EnterGambleTaskDirectory();
-            String command = String.Format("python {0}", TargetGambleScript);
+            EnterTaskDirectory();
+            String command = String.Format("python {0}", TargetScript);
             //String command = "sleep 3600";
             String ret = RunCommand(String.Format("{0} & disown -a", command), shell);
             String pid = GetPID(ret);
@@ -341,40 +394,40 @@ namespace C2.Business.SSH
             return pid;
         }
 
-        private void EnterGambleTaskDirectory()
+        private void EnterTaskDirectory()
         {
-            String command = String.Format("cd {0}", GambleTaskDirectory);
+            String command = String.Format("cd {0}", TaskDirectory);
             RunCommand(command, shell);
         }
 
-        public BastionAPI DeleteGambleTaskDirectory()
+        public BastionAPI DeleteTaskDirectory()
         {
             if (Oops()) return this;
             // 删除 临时目录
-            if (IsSafe(GambleTaskDirectory))
-                RunCommand(String.Format("rm -rf {0};", GambleTaskDirectory), shell);
+            if (IsSafePath(TaskDirectory))
+                RunCommand(String.Format("rm -rf {0};", TaskDirectory), shell);
             return this;
         }
 
-        public BastionAPI CreateGambleTaskDirectory()
+        public BastionAPI CreateTaskDirectory()
         {
             if (Oops()) return this;
-            String command = String.Format("mkdir -p {0}", GambleTaskDirectory);
+            String command = String.Format("mkdir -p {0}", TaskDirectory);
             RunCommand(command, shell);
             return this;
         }
 
 
-        private bool IsAliveGambleTask()
+        private bool IsAliveTask()
         {
-            String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetGambleScript), shell);
-            return Regex.IsMatch(result, Wrap(TargetGambleScript));
+            String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetScript), shell);
+            return Regex.IsMatch(result, Wrap(TargetScript));
         }
 
-        private bool IsGambleResultFileReady()
+        private bool IsResultFileReady()
         {
-            String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", GambleTaskDirectory), shell);
-            return Regex.IsMatch(result, @"000000_queryResult_db_\d+_\d+.tgz\r?\n");
+            String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
+            return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane)_\d+_\d+.tgz\r?\n");
         }
 
         private bool IsTaskTimeout()
@@ -384,15 +437,15 @@ namespace C2.Business.SSH
             return Math.Abs(ts.TotalHours) >= 24 * 3;
         }
 
-        private bool IsSafe(String v)
+        private bool IsSafePath(String v)
         {
-            // 在服务器上删东西 尽量严格, 尤其不能有"空格/"或"空格/空格"
-            return v.StartsWith("/tmp/iao/search_toolkit/") && !Regex.IsMatch(v, @"\s");
+            // 在服务器上删东西 尽量严格, 尤其不能有"空格/"，"/空格" 或 "空格/空格"
+            return v.StartsWith(SearchTaskInfo.SearchWorkspace) && !Regex.IsMatch(v, @"\s");
         }
 
-        public BastionAPI KillGambleTask()
+        public BastionAPI KillTask()
         {
-            if (IsAliveGambleTask()) // 确保不要误删其他复用进程
+            if (IsAliveTask()) // 确保不要误删其他复用进程
             {
                 String command = String.Format("kill -9 {0}", task.PID);
                 RunCommand(command, shell);
@@ -400,14 +453,14 @@ namespace C2.Business.SSH
             return this;
         }
 
-        public String QueryGambleTaskStatus()
+        public String QueryTaskStatus()
         {
             if (!ssh.IsConnected)
                 return "连接失败";
 
             bool isTimeout = IsTaskTimeout();
-            bool isAlive = IsAliveGambleTask();
-            bool isGRFReady = IsGambleResultFileReady();
+            bool isAlive = IsAliveTask();
+            bool isGRFReady = IsResultFileReady();
 
             // 1) pid不存在且有结果文件时, 为运行成功
             if (!isAlive && isGRFReady)

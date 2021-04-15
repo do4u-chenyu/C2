@@ -114,6 +114,7 @@
             this.Controls.Add(this.userNameTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "UserAuth";
             this.Text = "侦察兵-用户认证";
             this.Controls.SetChildIndex(this.label1, 0);

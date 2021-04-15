@@ -46,6 +46,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public Dictionary<string, int[]> ChartOptions;
         public PictureWidget.PictureDesign CurrentObject;
 
+        SelectBossDialog selectBossDialog;
+
         public WebBrowserDialog()
         {
             InitializeComponent();
@@ -339,48 +341,45 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 {
                     case "标注图":
                         webBrowser1.Document.InvokeScript("markerPoints", args);
-                        AddDataItem(OverlapType.Marker, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
+                        this.MapConfig.AddOverlap(OverlapType.Marker, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "轨迹图":
                         webBrowser1.Document.InvokeScript("drawOrit", args);
-                        AddDataItem(OverlapType.Orit, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
+                        this.MapConfig.AddOverlap(OverlapType.Orit, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "多边形图":
                         webBrowser1.Document.InvokeScript("drawPolygon", args);
-                        AddDataItem(OverlapType.Polygon, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
+                        this.MapConfig.AddOverlap(OverlapType.Polygon, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                     case "热力图":
                         webBrowser1.Document.InvokeScript("drawHeatmap", args);
-                        AddDataItem(OverlapType.Heatmap, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
+                        this.MapConfig.AddOverlap(OverlapType.Heatmap, dialog.LatIndex, dialog.LngIndex, dialog.WeightIndex, dialog.HitItem);
                         break;
                 }
                 SaveCenterAndZoom();
-                string newCenterAndZoom = dialog.drawlontude + ',' + dialog.drawlatude + ',' + CalculateScale();
+                string newCenterAndZoom = dialog.drawlongitude + ',' + dialog.drawlatitude + ',' + CalculateScale(dialog.mapPoints);
                 webBrowser1.Document.InvokeScript("centerAndZoom", new object[] { newCenterAndZoom });
             }
             else
                 return;
         }
-
-        private string CalculateScale()
+        private string CalculateScale(List<MapPoint> mapPoints)
         {
-            // Fix bug 0412 导入数据之后不应该出现缩放比变大的情况
-            var configMap = new ConfigForm();
-            if (!int.TryParse(configMap.scaleStr, out int scale))
-                scale = ConfigForm.scalaMax;
-            scale = Math.Min(MapConfig.Zoom, scale);
-            return scale.ToString();
-        }
-
-        /// <summary>
-        /// 将数据添加到临时数组里
-        /// </summary>
-        /// <param name="overlapType"></param>
-        /// <param name="jsonData"></param>
-        private void AddDataItem(OverlapType overlapType, int latIndex, int lngIndex, int weightIndex, DataItem dataItem)
-        {
-            OverlapConfig mdi = new OverlapConfig(latIndex, lngIndex, weightIndex, dataItem, overlapType);
-            MapConfig.OverlapConfigList.Add(mdi);
+            // TODO
+            int scale = 10;
+            float west = int.MaxValue;
+            float east = int.MinValue;
+            float north = int.MinValue;
+            float sourth = int.MaxValue;
+            foreach (var point in mapPoints)
+            {
+                west = Math.Min(west, point.longitude);
+                east = Math.Max(east, point.longitude);
+                north = Math.Max(north, point.latitude);
+                sourth = Math.Min(sourth, point.latitude);
+            }
+            dynamic data = webBrowser1.Document.InvokeScript("eval", new[] {String.Format("getZoom({0},{1},{2},{3})", north, sourth, west, east)});
+            return data != null ? data.ToString() : scale.ToString();
         }
 
         private void Clear_Click(object sender, EventArgs e)
@@ -492,11 +491,12 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         public void OpenSelectBossDialog()
         {
-            var dialog = new SelectBossDialog(DataItems, ChartOptions, webBrowser1);
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if(selectBossDialog == null)
+                selectBossDialog = new SelectBossDialog(DataItems, ChartOptions, webBrowser1);
+            if (selectBossDialog.ShowDialog() == DialogResult.OK)
             {
-                webBrowser1.Navigate(dialog.WebUrl);
-                ChartOptions = dialog.ChartOptions;
+                webBrowser1.Navigate(selectBossDialog.WebUrl);
+                ChartOptions = selectBossDialog.ChartOptions;
             }
         }
 
@@ -508,8 +508,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SaveFileDialog fd = new SaveFileDialog
             {
                 Filter = "图片文件(*.png)|*.png",
-                AddExtension = true
+                AddExtension = true,
+                FileName = WebType == WebType.Map ? this.MapConfig.CurrentOverlapName() : String.Empty
             };
+
             if (fd.ShowDialog() != DialogResult.OK)
                 return;
             File.Copy(picPath, fd.FileName, true);
@@ -521,9 +523,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if (WebType == WebType.Boss && ChartOptions.ContainsKey("Datasource"))
             {
                 string path = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("数据大屏{0}.png", HitTopic.ID));
-                Bitmap bitmap = new Bitmap(webBrowser1.Width, webBrowser1.Height);
-                Rectangle rectangle = new Rectangle(0, 0, webBrowser1.Width, webBrowser1.Height);  // 绘图区域
-                webBrowser1.DrawToBitmap(bitmap, rectangle);
+                Bitmap bitmap = new Bitmap(webBrowser1.DrawToImage(), new Size(webBrowser1.Width, webBrowser1.Height));
                 bitmap.Save(path);
 
                 //当前webbrowser截图，作为图片挂件加入当前节点
@@ -550,6 +550,14 @@ namespace C2.IAOLab.WebEngine.Dialogs
         protected override bool OnCancelButtonClick()
         {
             return base.OnCancelButtonClick();
+        }
+        public void Quit()
+        {
+            if (selectBossDialog != null)
+            {
+                selectBossDialog.Clear();
+                selectBossDialog.Dispose();
+            }
         }
         /// <summary>
         /// 保存地图配置信息到MapWidget中
@@ -638,6 +646,37 @@ namespace C2.IAOLab.WebEngine.Dialogs
         public MapConfig Clone()
         {
             return new MapConfig(this.InitLat, this.InitLng, this.Zoom, this.MapType, this.OverlapConfigList, this.SourceCode);
+        }
+        public void AddOverlap(OverlapType overlapType, int latIndex, int lngIndex, int weightIndex, DataItem dataItem)
+        {
+            OverlapConfig oc = new OverlapConfig(latIndex, lngIndex, weightIndex, dataItem, overlapType);
+            this.OverlapConfigList.Add(oc);
+        }
+        public string CurrentOverlapName()
+        {
+            return this.OverlapConfigList.Count == 0 ?
+                String.Format("图上作战_无数据.png") :
+                String.Format("图上作战_{0}_{1}.png", 
+                    this.OverlapConfigList[this.OverlapConfigList.Count - 1].OverlapType.ToString(), 
+                    this.OverlapConfigList[this.OverlapConfigList.Count - 1].DataItem.FileName
+                );
+        }
+    }
+    class MapPoint
+    {
+        public float latitude;
+        public float longitude;
+        public MapPoint(float lon, float lat)
+        {
+            this.longitude = lon;
+            this.latitude = lat;
+        }        
+        public MapPoint(string lonStr, string latStr)
+        {
+            if (!float.TryParse(lonStr, out this.longitude))
+                this.longitude = 0;            
+            if (!float.TryParse(latStr, out this.latitude))
+                this.latitude = 0;
         }
     }
     #endregion

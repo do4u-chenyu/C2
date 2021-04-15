@@ -31,7 +31,7 @@ namespace C2
         public const long OPEN_FILES_MESSAGE = 0x0999;
         public static bool IsRunTime { get; private set; }
         public static MainForm MainForm { get; set; }
-
+        public const string Software_Version = "1.4.14";
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

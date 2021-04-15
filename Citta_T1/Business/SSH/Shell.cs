@@ -34,17 +34,19 @@ namespace C2.Business.SSH
                 if (len > 0)  // 如果读到就返回
                     return len;
 
-                if (timeout.Ticks > 0 && !dataReceivedEvent.WaitOne(timeout))
-                    return 0; // 超时返回
+                if (timeout.Ticks > 0)              // 超时等待
+                {
+                    if (!dataReceivedEvent.WaitOne(timeout))
+                        return 0;
+                }
                 else
-                    dataReceivedEvent.WaitOne();
-
+                    dataReceivedEvent.WaitOne();    // 永久等待
             }
         }
 
-        public bool ReadByte(ref byte b)
+        public bool ReadByte(ref byte b, TimeSpan timeout)
         {
-            if (shell.Read(InComing, 0, 1) > 0)
+            if (Read(InComing, 0, 1, timeout) > 0)
             {
                 b = InComing[0];
                 return true;

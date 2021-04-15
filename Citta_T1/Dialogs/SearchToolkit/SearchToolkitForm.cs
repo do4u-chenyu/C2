@@ -2,7 +2,6 @@
 using C2.Dialogs;
 using C2.Utils;
 using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -10,10 +9,9 @@ namespace C2.SearchToolkit
 {
     public partial class SearchToolkitForm : Form
     {
-        private TaskInfo task;
+        private SearchTaskInfo task;
         private String validateMessage;
         private Control[] inputControls;
-        private Dictionary<String, String> taskDict;
 
         public SearchToolkitForm()
         {
@@ -23,7 +21,7 @@ namespace C2.SearchToolkit
 
         private void InitializeInputControls()
         {
-            task = TaskInfo.EmptyTaskInfo;
+            task = SearchTaskInfo.EmptyTaskInfo;
             validateMessage = String.Empty;
 
             inputControls = new Control[] { 
@@ -35,19 +33,11 @@ namespace C2.SearchToolkit
                 this.taskModelComboBox,
                 this.taskNameTB
             };
-
-            taskDict = new Dictionary<string, string>
-            {
-                ["涉赌模型"] = "gamble",
-                ["涉枪模型"] = "gun",
-                ["涉黄模型"] = "yellow",
-                ["飞机场模型"] = "plane"
-            };
-            
+       
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
         }
 
-        private TaskInfo GenTaskInfo()
+        private SearchTaskInfo GenTaskInfo()
         {
            String value = String.Join(OpUtil.TabSeparatorString, new string[] {
                                             this.taskNameTB.Text,  // 刚开始创建时，没有ID
@@ -62,7 +52,7 @@ namespace C2.SearchToolkit
                                             this.remoteWorkspaceTB.Text
             });
 
-            return TaskInfo.StringToTaskInfo(value);
+            return SearchTaskInfo.StringToTaskInfo(value);
         }
 
         private void ReadOnlyInputControls()
@@ -73,10 +63,10 @@ namespace C2.SearchToolkit
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            if (task == TaskInfo.EmptyTaskInfo)
+            if (task == SearchTaskInfo.EmptyTaskInfo)
                 return;
 
-            this.saveFileDialog.FileName = this.task.TaskName;
+            this.saveFileDialog.FileName = String.Format("{0}_{1}", task.TaskName, task.TaskCreateTime);
             DialogResult ret = this.saveFileDialog.ShowDialog();
             if (ret != DialogResult.OK)
                 return;
@@ -84,11 +74,23 @@ namespace C2.SearchToolkit
 
             String ffp = this.saveFileDialog.FileName;
             // TODO ProgressBar 处理
-            BastionDownloadProgressBar progressBar = new BastionDownloadProgressBar(task, ffp);
-            progressBar.Status = "下载中";
-
+            BastionDownloadProgressBar progressBar = new BastionDownloadProgressBar(task, ffp)
+            {
+                Status = "下载中",
+                ProgressValue = 0,
+                ProgressPercentage = "0%",
+                MinimumValue = 0,   
+                MaximumValue = 100,
+            };
+            task.LastErrorMsg = String.Empty; // 清空错误信息
+            bool succ = false;
             using (GuarderUtil.WaitCursor)
-                progressBar.Download();
+                succ = progressBar.Download();
+
+            if (succ)
+                HelpUtil.ShowMessageBox(String.Format("{0}-任务【{1}】下载成功", task.TaskModel, task.TaskName));
+            else
+                HelpUtil.ShowMessageBox(task.LastErrorMsg);
 
             //progressBar.ShowDialog();
         }
@@ -129,7 +131,7 @@ namespace C2.SearchToolkit
 
         private String GenWorkspace()
         {
-            return TaskInfo.SearchWorkspace + taskDict[this.taskModelComboBox.Text];
+            return SearchTaskInfo.SearchWorkspace + SearchTaskInfo.TaskDescriptionTable[this.taskModelComboBox.Text];
         }
 
         private bool ValidateIP(String value)
@@ -200,21 +202,21 @@ namespace C2.SearchToolkit
             
             return String.IsNullOrEmpty(validateMessage);
         }
-        public TaskInfo ShowTaskConfigDialog()
+        public SearchTaskInfo ShowTaskConfigDialog()
         {
             taskInfoGB.Visible = false;
             confirmButton.Enabled = true;
 
-            return this.ShowDialog() == DialogResult.OK ? GenTaskInfo() : TaskInfo.EmptyTaskInfo;
+            return this.ShowDialog() == DialogResult.OK ? GenTaskInfo() : SearchTaskInfo.EmptyTaskInfo;
         }
 
-        private void UpdateTaskInfo(TaskInfo task)
+        private void UpdateTaskInfo(SearchTaskInfo task)
         {
             this.task = task;
             // 更新任务状态
             if (task.TaskStatus != "DONE")
             {
-                task.TaskStatus = new BastionAPI(task).Login().QueryGambleTaskStatus();
+                task.TaskStatus = new BastionAPI(task).Login().QueryTaskStatus();
                 task.Save();
             }
                
@@ -231,13 +233,13 @@ namespace C2.SearchToolkit
             this.downloadButton.Enabled = task.TaskStatus == "DONE";
         }
 
-        public DialogResult ShowTaskInfoDialog(TaskInfo task)
+        public DialogResult ShowTaskInfoDialog(SearchTaskInfo task)
         {
             taskInfoGB.Visible = true;
             confirmButton.Enabled = false;
 
             // 更新任务状态和界面元素
-            using (new GuarderUtil.CursorGuarder())
+            using (GuarderUtil.WaitCursor)
                 UpdateTaskInfo(task);
             // 展示任务信息时, 不需要更改
             ReadOnlyInputControls();  

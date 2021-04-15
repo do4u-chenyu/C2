@@ -64,7 +64,7 @@ namespace C2.Utils
         public static string BigAPKFormHelpInfo = "APK检测系统";
 
         public static string FileNotFoundHelpInfo = "文件不存在";
-        public static string InvalidScaleHelpInfo = "输入的缩放比有误。缩放比仅支持大于0且小于10的整数";
+        public static string InvalidScaleHelpInfo = "输入的缩放比有误。缩放比仅支持大于0且小于20的整数";
         public static string InvalidLatitude = "输入纬度有误，纬度需为一个大于-90且小于90的浮点数";
         public static string InvalidLongitude = "输入经度有误，经度需为一个大于-180且小于180的浮点数";
         public static string InvalidCount = "输入权重有误，权重需为一个大于0的浮点数";
