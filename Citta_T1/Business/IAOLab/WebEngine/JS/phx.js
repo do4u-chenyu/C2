@@ -215,7 +215,7 @@
             "axisLabel": {
                 "show": true,
                 "textStyle": {
-                    "color": "#6E7079"
+                    "color": "#FFFFFF"
                 }
             },
             "splitLine": {
@@ -252,7 +252,7 @@
             "axisLabel": {
                 "show": true,
                 "textStyle": {
-                    "color": "#6E7079"
+                    "color": "#FFFFFF"
                 }
             },
             "splitLine": {
