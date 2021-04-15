@@ -9,10 +9,10 @@ namespace C2.Dialogs
     {
         private readonly String done;
         private readonly String temp;
-        private BastionAPI api;
+        private readonly BastionAPI api;
         //private long fileLength;
 
-        public BastionDownloadProgressBar(TaskInfo task, String ffp)
+        public BastionDownloadProgressBar(SearchTaskInfo task, String ffp)
         {
             api = new BastionAPI(task);
             done = ffp;
@@ -34,6 +34,7 @@ namespace C2.Dialogs
             else      // 失败 删除临时文件
                 FileUtil.DeleteFile(temp);
 
+            api.Close();
             return succ;
         }
 

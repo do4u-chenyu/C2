@@ -28,7 +28,7 @@ namespace C2.Business.SSH
         private static readonly byte[] TgzHeadBytes = new byte[] { 0x1f, 0x8b, 0x08 };  // 1f 8b 08 .tgz的文件头
         private static readonly String TgzHeadString = Encoding.UTF8.GetString(TgzHeadBytes);
 
-        private readonly TaskInfo task;
+        private readonly SearchTaskInfo task;
 
         private readonly SshClient ssh;
         private ShellStream shell;
@@ -46,7 +46,7 @@ namespace C2.Business.SSH
         {
             return String.Format(@"\r?\n{0}\r?\n", pattern);
         }
-        public BastionAPI(TaskInfo task)
+        public BastionAPI(SearchTaskInfo task)
         {
             this.task = task;
             this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
@@ -95,6 +95,16 @@ namespace C2.Business.SSH
                 return;
             task.LastErrorMsg = String.Empty; 
             _ = shell.Read(); // 清空buffer
+        }
+
+        public void Close()
+        {
+            try 
+            {
+                if (ssh != null)      // ssh.net库有bug，这里会报ObjectDisposedException
+                    ssh.Disconnect(); // 但不主动调，链接又不释放 
+            } catch { }
+
         }
 
         
@@ -313,11 +323,17 @@ namespace C2.Business.SSH
             return UploadScript(task.LocalScriptPath);
         }
 
-        private BastionAPI UploadScript(string s)
+        private BastionAPI UploadScript(String ffp)
         {
-            String content = FileUtil.FileReadToEnd(s);
+            String d = TaskDirectory + "/" + TargetScript;
+            String s = FileUtil.FileReadToEnd(ffp);
+            //UploadScriptShellEscape(s, d);
+            UploadScriptBase64(s, d);
+            return this;
+        }
 
-
+        private void UploadScriptShellEscape(String s, String d)
+        {
             // 0)  不能有释义字符 `
             // 1)  \\ \a \b \c \e \f \n \r \t 等转义字符的\全部替换成\\\
             // 2)  " 替换成 \"
@@ -326,19 +342,31 @@ namespace C2.Business.SSH
             //     转义字符的安全性，效率，形式美感上都很差
             //     尤其是转义字符，如果目标脚本有rm动作, 转义字符在处理\, /, 空格等符号时如果出问题
             //     运气不好会造成删库
-            if (String.IsNullOrEmpty(content) || content.Contains("`"))
-                return this;
+            if (String.IsNullOrEmpty(s) || s.Contains("`"))
+                return;
 
-            content = Regex.Replace(content, @"\\([\\abcefnrtvx0])", @"\\\$1")
-                           .Replace("\"", "\\\"")
-                           .Replace("\r", @"\r")
-                           .Replace("\n", @"\n");
+            s = Regex.Replace(s, @"\\([\\abcefnrtvx0])", @"\\\$1")
+                     .Replace("\"", "\\\"")
+                     .Replace("\r", @"\r")
+                     .Replace("\n", @"\n");
 
-            String d = TaskDirectory + "/" + TargetScript;
             // 这里可能还有超出shell缓冲区的问题
-            String command = String.Format("echo -e \"{0}\" > {1}", content, d);
+            String command = String.Format("echo -e \"{0}\" > {1}", s, d);
             if (RunCommand(command, shell).IsEmpty())
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
+        }
+
+        private BastionAPI UploadScriptBase64(String s, String d)
+        {
+            if (!String.IsNullOrEmpty(s))
+            {
+                String b64 = ST.EncodeBase64(s);        // Base64果然比shell硬转码好用多了
+                // 这里可能还有超出shell缓冲区的问题
+                String command = String.Format("echo -e \"{0}\" | base64 -di > {1}", b64, d);
+                if (RunCommand(command, shell).IsEmpty())
+                    task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);  
+            }
+
             return this;
         }
 
@@ -411,7 +439,7 @@ namespace C2.Business.SSH
         private bool IsSafePath(String v)
         {
             // 在服务器上删东西 尽量严格, 尤其不能有"空格/"，"/空格" 或 "空格/空格"
-            return v.StartsWith(TaskInfo.SearchWorkspace) && !Regex.IsMatch(v, @"\s");
+            return v.StartsWith(SearchTaskInfo.SearchWorkspace) && !Regex.IsMatch(v, @"\s");
         }
 
         public BastionAPI KillTask()

@@ -191,8 +191,8 @@
     <Compile Include="Business\Option\PythonInterpreterInfo.cs" />
     <Compile Include="Business\Option\PythonOPConfig.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
-    <Compile Include="Business\SearchToolkit\TaskInfo.cs" />
-    <Compile Include="Business\SearchToolkit\TaskManager.cs" />
+    <Compile Include="Business\SearchToolkit\SearchTaskInfo.cs" />
+    <Compile Include="Business\SearchToolkit\SearchTaskManager.cs" />
     <Compile Include="Business\SSH\BastionAPI.cs" />
     <Compile Include="Business\SSH\Shell.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\TOTP.cs" />
@@ -3126,6 +3126,15 @@
     <Content Include="Resources\resource.h" />
     <None Include="Resources\tab_button.png" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Script\IAO_Web_validation\global_method.py" />
