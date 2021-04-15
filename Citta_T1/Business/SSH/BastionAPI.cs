@@ -39,7 +39,9 @@ namespace C2.Business.SSH
         // {workspace}/pid_taskcreatetime
         private String TaskDirectory { get => task.TaskDirectory; }
 
-        private String TaskResultPattern { get => task.TaskResultPattern; }
+        private String TaskResultShellPattern { get => task.TaskResultShellPattern; }
+
+        private String TaskResultRegexPattern { get => task.TaskResultRegexPattern; }
         private static String Wrap(String pattern)
         {
             return String.Format(@"\r?\n{0}\r?\n", pattern);
@@ -200,7 +202,7 @@ namespace C2.Business.SSH
             String command = String.Format("ls -l {0} | awk '{{print $9}}' | head -n 1", s);
             String content = RunCommand(command, shell);
 
-            Match mat = Regex.Match(content, Wrap(TaskResultPattern));
+            Match mat = Regex.Match(content, Wrap(TaskResultRegexPattern));
             if (mat.Success && mat.Groups[1].Success)
                 return mat.Groups[1].Value;
             return String.Empty;
@@ -225,7 +227,7 @@ namespace C2.Business.SSH
         public bool DownloadTaskResult(String d)
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
-            String s = TaskDirectory + "/000000_queryResult_(db|yellow|gun|plane)_*_*.tgz";
+            String s = TaskDirectory + "/" + TaskResultShellPattern;
 
             if (Oops()) return false;
 
@@ -308,7 +310,7 @@ namespace C2.Business.SSH
         public BastionAPI UploadTaskScript()
         {
             if (Oops()) return this;
-            return UploadScript(task.LocalScriptPath());
+            return UploadScript(task.LocalScriptPath);
         }
 
         private BastionAPI UploadScript(string s)

@@ -34,11 +34,13 @@ namespace C2.Business.SSH
                 if (len > 0)  // 如果读到就返回
                     return len;
 
-                if (timeout.Ticks > 0 && !dataReceivedEvent.WaitOne(timeout))
-                    return 0; // 超时返回
+                if (timeout.Ticks > 0)              // 超时等待
+                {
+                    if (!dataReceivedEvent.WaitOne(timeout))
+                        return 0;
+                }
                 else
-                    dataReceivedEvent.WaitOne();
-
+                    dataReceivedEvent.WaitOne();    // 永久等待
             }
         }
 

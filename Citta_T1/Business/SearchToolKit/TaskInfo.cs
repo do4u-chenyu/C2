@@ -34,12 +34,16 @@ namespace C2.SearchToolkit
             ["飞机场模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)"
         };
 
-        public String LocalScriptPath ()
+        public String LocalScriptPath
         {
-            String s = taskScriptTable[TaskModel].Replace("_{{0}}", String.Empty);
-            return Path.Combine(Application.StartupPath, "Resources", "Script", "IAO_Search_gamble", s);
+            get
+            {
+                String s = taskScriptTable[TaskModel].Replace("_{0}", String.Empty);
+                return Path.Combine(Application.StartupPath, "Resources", "Script", "IAO_Search_gamble", s);
+            }
         }
 
+        public String TaskResultShellPattern { get => "000000_queryResult_*_*_*.tgz"; }
 
         public static readonly String SearchWorkspace = @"/tmp/iao/search_toolkit/";
 
@@ -62,7 +66,7 @@ namespace C2.SearchToolkit
         public String TargetScript { get => String.Format(taskScriptTable[TaskModel], TaskCreateTime); }
         public String TaskDirectory { get => String.Format("{0}/{1}_{2}", RemoteWorkspace, TaskName, TaskCreateTime); }
 
-        public String TaskResultPattern { get => taskResultPatternTable[TaskModel]; }
+        public String TaskResultRegexPattern { get => taskResultPatternTable[TaskModel]; }
 
 
         private static readonly String HeadColumnLine = String.Join(OpUtil.TabSeparatorString, new string[] {
