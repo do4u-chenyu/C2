@@ -65,7 +65,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void LoadOption()
         {
             LoadData();
+            LoadChartOptions();
+        }
 
+        private void LoadChartOptions()
+        {
             //加载数据源、类型加载图表配置
             LoadChartOption("SimpleBar", simpleBarX, simpleBarY);
             LoadChartOption("BasicLineChart", basicLineChartX, basicLineChartY);
@@ -76,7 +80,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             LoadChartOption("PictorialBar", pictorialBarX, pictorialBarY);
             LoadChartOption("BasicMap", basicMapX, basicMapY);
         }
-
         protected override bool OnOKButtonClick()
         {
             //前100行所有列的数据生成datatable、图表配置项生成chartOptions、生成js
@@ -162,6 +165,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if(oldDataIdx != -1)
                 ChartOptions = new Dictionary<string, int[]>();
             oldDataIdx = datasource.SelectedIndex;
+            LoadChartOptions();
         }
 
         private void ChangeControlContent()
