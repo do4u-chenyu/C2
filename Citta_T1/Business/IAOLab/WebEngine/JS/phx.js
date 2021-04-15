@@ -422,7 +422,10 @@
                 "#bf444c",
                 "#d88273",
                 "#f6efa6"
-            ]
+            ],
+            "textStyle": {
+                    "color": "#ffffff"
+                }
         },
         "dataZoom": {
             "handleSize": "undefined%",
