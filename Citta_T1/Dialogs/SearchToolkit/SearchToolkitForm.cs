@@ -239,7 +239,6 @@ namespace C2.SearchToolkit
             this.taskModelComboBox.Text = task.TaskModel;
             this.searchAgentIPTB.Text = task.SearchAgentIP;
             this.remoteWorkspaceTB.Text = String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.TaskName, task.TaskCreateTime);
-            this.taskInfoGB.Text = String.IsNullOrEmpty(task.PID) ? "任务状态" : task.PID;
             this.taskStatusLabel.Text = task.TaskStatus;
             this.downloadButton.Enabled = task.TaskStatus == "DONE";
         }

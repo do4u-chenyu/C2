@@ -247,7 +247,7 @@
             this.taskInfoGB.Size = new System.Drawing.Size(287, 84);
             this.taskInfoGB.TabIndex = 45;
             this.taskInfoGB.TabStop = false;
-            this.taskInfoGB.Text = "任务ID：";
+            this.taskInfoGB.Text = "任务状态";
             this.taskInfoGB.Visible = false;
             // 
             // taskStatusLabel
