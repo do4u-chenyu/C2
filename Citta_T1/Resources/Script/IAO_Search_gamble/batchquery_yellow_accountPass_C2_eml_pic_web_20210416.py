@@ -656,7 +656,7 @@ def main():
     LOGGER.info('END QUERY BATCH\n START QUERY PIC')
     queryPicEmail()
     
-    zip_path = "{}_{}_{}.tgz_".format(areacode,'shData',defaultEnd[:8])
+    zip_path = "{}_{}_{}_{}.tgz_".format(areacode,'queryResult_yellow',defaultStart[:14],defaultEnd[:14])
     zip_result(dataPath,zip_path)
     #encrypTion(zip_path)
     succeedFilename = zip_path.strip('_') 
@@ -669,22 +669,23 @@ if __name__ == '__main__':
   
     serverInfo = 'the query addr,default 127.0.0.1'
     netDay     = 'query netData days,default 0.1 days'
-    emailDay   = 'query emailData days,default 10 days'
-    picDay     = 'query picData days,default 15 days'
+    emailDay   = 'query emailData days,default 90 days'
+    picDay     = 'query picData days,default 90 days'
     outInfo    = 'Output file directory,default ./'
     areaInfo   = 'area code,default 000000'
 
     parser = OptionParser(usage)
     parser.add_option('--server',dest = 'serverIp', help = serverInfo,default = '127.0.0.1')
-    parser.add_option('--netDay',dest = 'netQueryDay', help = netDay,default = '30')
-    parser.add_option('--emailDay',dest = 'emailQueryDay', help = emailDay,default = '10')
-    parser.add_option('--picDay',dest = 'picQueryDay', help = picDay,default = '15')
-    parser.add_option('--out',dest = 'outfilePath', help = outInfo,default = './')
+    parser.add_option('--netDay',dest = 'netQueryDay', help = netDay,default = '90')
+    parser.add_option('--emailDay',dest = 'emailQueryDay', help = emailDay,default = '90')
+    parser.add_option('--picDay',dest = 'picQueryDay', help = picDay,default = '90')
+    parser.add_option('--out',dest = 'outfilePath', help = outInfo,default = sys.path[0])
     parser.add_option('--area',dest = 'areaCode', help = areaInfo,default = '000000')
     ##get input Time  parameter
     option,args = parser.parse_args()
     
-    dataPath = option.outfilePath
+    os.mkdir(sys.path[0] + '/result')
+    dataPath = "{}/{}".format(option.outfilePath,'result')
     serverIP = option.serverIp
     areacode = option.areaCode
     netDay   = option.netQueryDay
@@ -699,6 +700,7 @@ if __name__ == '__main__':
     picQueryStart= (NowTime - datetime.timedelta(days = float(picDay))).strftime("%Y%m%d%H%M%S")
 
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
+    defaultStart = picQueryStart
    
     PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
     netPath = join(dataPath,'queryResult_net_')
