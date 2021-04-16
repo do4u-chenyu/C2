@@ -152,7 +152,7 @@ namespace C2.Business.SSH
                 // 写入文件头
                 fs.Write(TgzHeadBytes, 0, TgzHeadBytes.Length);
 
-                int offset = 0;                                     // 读缓存起始位置, 0 或 1(情况3时)
+                int offset = 0;                                   // 读缓存起始位置, 0 或 1(情况3时)
                 Shell shell = new Shell(ssm);
                 long left = fileLength - TgzHeadString.Length;    // 忽略文件头
                 while (left > 0)

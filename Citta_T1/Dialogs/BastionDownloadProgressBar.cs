@@ -30,10 +30,7 @@ namespace C2.Dialogs
             {
                 FileUtil.DeleteFile(done);     // 先删除重名文件,要确认下载成功后再删,以免文件没下载,以前的也没有了
                 FileUtil.FileMove(temp, done);
-            }          
-            else      // 失败 删除临时文件
-                FileUtil.DeleteFile(temp);
-
+            }      
             api.Close();
             return succ;
         }
