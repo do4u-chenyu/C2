@@ -6,24 +6,42 @@ using System.Windows.Forms;
 
 namespace C2.Controls.C1.Left
 {
+    struct LastOptionInfo
+    {
+        public string bastionIP;
+        public string searchAgentIP;
+        public string username;
+    };
     public partial class SearchToolkitControl : BaseLeftInnerPanel
     {
+
+        
+
         private SearchTaskManager taskManager;
+        private LastOptionInfo lastInfo;
         public SearchToolkitControl()
         {
             InitializeComponent();
             taskManager = new SearchTaskManager();
+            lastInfo = new LastOptionInfo();
         }
+
+
 
         private void AddTaskLabel_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)
                 return;
 
-            SearchTaskInfo task = new SearchToolkitForm().ShowTaskConfigDialog();
+            SearchTaskInfo task = new SearchToolkitForm().GenLastInfo(lastInfo.bastionIP, lastInfo.searchAgentIP, lastInfo.username)
+                                                         .ShowTaskConfigDialog();
 
             if (task.IsEmpty())
                 return;
+            // 保存用户配置信息
+            lastInfo.bastionIP = task.BastionIP;
+            lastInfo.searchAgentIP = task.SearchAgentIP;
+            lastInfo.username = task.Username;
 
             string message;
             if (taskManager.RunTask(task))
