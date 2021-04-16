@@ -3,7 +3,6 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
 namespace C2.SearchToolkit
@@ -134,12 +133,12 @@ namespace C2.SearchToolkit
 
         private static String EncryptPassword(String password)
         {   // 颠倒，Base64编码，颠倒
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(password.ReverseString())).ReverseString();
+            return ST.EncodeBase64(password.ReverseString()).ReverseString();
         }
 
-        private static String DecryptPassword(String value)
+        private static String DecryptPassword(String password)
         {   // 颠倒，Base64解码，颠倒
-            return Encoding.UTF8.GetString(Convert.FromBase64String(value.ReverseString())).ReverseString();
+            return ST.DecodeBase64(password.ReverseString()).ReverseString();
         }
 
         public static SearchTaskInfo StringToTaskInfo(String content, bool needDecryptPass = false)

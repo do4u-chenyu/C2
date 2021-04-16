@@ -50,7 +50,8 @@ namespace C2.SearchToolkit
         {
             try 
             {
-                return SearchTaskInfo.StringToTaskInfo(new StreamReader(taskFFP).ReadToEnd(), true);
+                using (StreamReader sw = new StreamReader(taskFFP))
+                    return SearchTaskInfo.StringToTaskInfo(sw.ReadToEnd(), true);
             } catch 
             {
                 return SearchTaskInfo.EmptyTaskInfo;
