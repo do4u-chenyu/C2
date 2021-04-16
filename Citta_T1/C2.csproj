@@ -3135,7 +3135,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Script\IAO_Web_validation\global_method.py" />
     <Content Include="Resources\Script\IAO_Web_validation\Noesis.Javascript.dll" />
