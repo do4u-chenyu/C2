@@ -87,7 +87,7 @@ namespace C2.Business.SSH
             shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
             // 等待目标机准备好
             _ = shell.ReadLine(Timeout);
-
+           
             // 跳转到目标机器
             shell.WriteLine(task.SearchAgentIP);
             // 等待跳转成功,出现root用户提示符
@@ -254,6 +254,7 @@ namespace C2.Business.SSH
             {
                 using (FileStream fs = new FileStream(d, FileMode.Create, FileAccess.Write))
                     ret = CatTgzFile(ffp, fs, len, shell);
+                
             } 
             catch (Exception ex)
             {

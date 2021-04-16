@@ -16,6 +16,9 @@ import urllib
 import datetime
 import sys
 from optparse import OptionParser
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 def queryclient(data_path,keyWords,startTime,endTime,queryType):
     batch = []
     cont_flag = False
@@ -275,7 +278,7 @@ if __name__ == '__main__':
     if  len(areacode) !=6:
         LOGGER.info('areacode error:'+ areaformat)
         sys.exit(1)
-    PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
+    ##PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
     CONFIG_DICT = {
         'DATA_PATH': areacode + '_queryResult_gun_' + defaultStart + '_' + defaultEnd,
         'OUT_PASSWORD' : 'out_gun',

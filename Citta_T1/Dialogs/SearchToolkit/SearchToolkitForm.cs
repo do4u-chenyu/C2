@@ -37,6 +37,17 @@ namespace C2.SearchToolkit
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
         }
 
+
+        public SearchToolkitForm GenLastInfo(string bIP, string sIP, string name)
+        {
+            if (!string.IsNullOrEmpty(bIP))
+                this.bastionIPTB.Text = bIP;
+            if (!string.IsNullOrEmpty(sIP))
+                this.searchAgentIPTB.Text = sIP;
+            if (!string.IsNullOrEmpty(name))
+                this.usernameTB.Text = name;
+            return this;
+        }
         private SearchTaskInfo GenTaskInfo()
         {
            String value = String.Join(OpUtil.TabSeparatorString, new string[] {
