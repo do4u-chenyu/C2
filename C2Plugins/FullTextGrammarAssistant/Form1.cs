@@ -168,7 +168,7 @@ namespace FullTextGrammarAssistant
         }
         private void UpdatePreviewText()
         {
-            this.jarTextList[0] = "java -jar batchQueryAndExport_1.7.jar --ip 15.42.118.1 --port 9870";
+            this.jarTextList[0] = "java -jar batchQueryAndExport_1.7.jar --ip 15.42.118.1 --port 9870 --queryCount 10000 --resultPath /home/result";
             this.previewTextList[0] = "/home/search/sbin/queryclient --server 127.0.0.1 --port 9871";
             string attrText1 = Attribute_filter(this.comboBox1.Text);
             string attrText2 = Attribute_filter(this.comboBox3.Text);
@@ -288,9 +288,15 @@ namespace FullTextGrammarAssistant
                 }
             }
             if (string.IsNullOrEmpty(protoTypeText))
-                previewTextList[4] = string.Empty;
-            else
-                previewTextList[4] = "--protofilter " + protoTypeText;
+            {
+                this.previewTextList[4] = string.Empty;
+                this.jarTextList[4] = string.Empty;
+            }
+            else 
+            {
+                this.previewTextList[4] = "--protofilter " + protoTypeText;
+                this.jarTextList[4] = "--protypeFilter " + protoTypeText;
+            }
         }
         private void SearchPanel() 
         {
@@ -315,7 +321,8 @@ namespace FullTextGrammarAssistant
                 }
             }
 
-            previewTextList[3] = "--querystring \"" + searchRangeText + "\"";
+            this.previewTextList[3] = "--querystring \"" + searchRangeText + "\"";
+            this.jarTextList[3] = "--queryStr \"" + searchRangeText + "\"";
         }
         private void dataTypePanel()
         {
@@ -339,9 +346,9 @@ namespace FullTextGrammarAssistant
                 }
             }
             if (string.IsNullOrEmpty(dataTypeText))
-                previewTextList[7] = string.Empty;
+                this.previewTextList[7] = string.Empty;
             else
-                previewTextList[7] = "--datatype " + dataTypeText;
+                this.previewTextList[7] = "--datatype " + dataTypeText;
         }
         private void optionPanel()
         {
@@ -368,9 +375,9 @@ namespace FullTextGrammarAssistant
                 }
             }
             if (string.IsNullOrEmpty(OptionTypeText))
-                previewTextList[8] = string.Empty;
+                this.previewTextList[8] = string.Empty;
             else
-                previewTextList[8] = "--option " + OptionTypeText;
+                this.previewTextList[8] = "--option " + OptionTypeText;
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
