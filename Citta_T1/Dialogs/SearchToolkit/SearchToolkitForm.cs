@@ -95,17 +95,18 @@ namespace C2.SearchToolkit
                 MaximumValue = 100,
             };
             task.LastErrorMsg = String.Empty; // 清空错误信息
-            bool succ = false;
             progressBar.Show();
-            using (GuarderUtil.WaitCursor)
-                succ = progressBar.Download();
+            bool succ = progressBar.Download();
+
+            // 用户提前终止任务，进度条关闭，后续无法赋值
+            if (progressBar == null || !progressBar.Visible)
+                return;
 
             if (succ)
-                HelpUtil.ShowMessageBox(String.Format("{0}-任务【{1}】下载成功", task.TaskModel, task.TaskName));
+                progressBar.Status = String.Format("{0}-任务【{1}】下载成功", task.TaskModel, task.TaskName);
             else
-                HelpUtil.ShowMessageBox(task.LastErrorMsg);
+                progressBar.Status = task.LastErrorMsg;
 
-            //progressBar.ShowDialog();
         }
 
         private void ProgressBar_FormClosed(object sender, FormClosedEventArgs e)

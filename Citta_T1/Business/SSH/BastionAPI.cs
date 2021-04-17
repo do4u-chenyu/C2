@@ -31,12 +31,12 @@ namespace C2.Business.SSH
         private ShellStream shell;
 
         private bool downloadCancel = false;
-        private double progressValue;
+
 
         private String TargetScript { get => task.TargetScript; }
         // {workspace}/pid_taskcreatetime
         private String TaskDirectory { get => task.TaskDirectory; }
-        public delegate void DownloadProgressEventHandler(double progressValue);
+        public delegate void DownloadProgressEventHandler(int progressValue);
         public event DownloadProgressEventHandler DownloadProgressEvent;
         private String TaskResultShellPattern { get => task.TaskResultShellPattern; }
 
@@ -159,8 +159,9 @@ namespace C2.Business.SSH
                 // 读缓存起始位置, 0 或 1(情况3时)
                 int offset = 0;                      
                 while (left > 0)
-                {                 
-                    double pogressValue = (double) (sum - left) / sum  * 100;
+                {
+                    // 计算文件下载进度
+                    int pogressValue = (int)Math.Truncate((float)(sum - left) / sum * 100);
                     DownloadProgressEvent?.Invoke(pogressValue);
                     int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), Timeout);
                     offset = 0; // 读完一次, 起始位置复位
@@ -208,6 +209,8 @@ namespace C2.Business.SSH
                     }
                    
                 }
+                // 下载100%
+                DownloadProgressEvent?.Invoke(100);
             }
             catch (Exception ex) { task.LastErrorMsg = ex.Message; return false; }
             return true;

@@ -2,6 +2,7 @@
 using C2.SearchToolkit;
 using C2.Utils;
 using System;
+using System.Windows.Forms;
 
 namespace C2.Dialogs
 {
@@ -12,10 +13,11 @@ namespace C2.Dialogs
         private readonly BastionAPI api;
         //private long fileLength;
 
-        private void UpdateProgressBar(double PogressValue)
+        private void UpdateProgressBar(int pogressValue)
         {
-            this.ProgressPercentage = PogressValue + "%";
-            Console.WriteLine("======下载进度======"+ this.ProgressPercentage);
+            this.ProgressPercentage = pogressValue + "%";
+            this.CurrentValue = pogressValue;
+            Application.DoEvents();
         }
         public BastionDownloadProgressBar(SearchTaskInfo task, String ffp)
         {
