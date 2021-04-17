@@ -385,7 +385,7 @@ namespace C2.Business.SSH
 
         public BastionAPI KillTask()
         {
-            if (IsAliveTask()) // 确保不要误删其他复用进程
+            if (!Oops() && IsAliveTask()) // 确保不要误删其他复用进程
             {
                 String command = String.Format("kill -9 {0}", task.PID);
                 RunCommand(command, shell);
