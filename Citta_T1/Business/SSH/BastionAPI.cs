@@ -13,9 +13,13 @@ namespace C2.Business.SSH
     {
         private const int M40 = 1024 * 1024 * 40;
         private const int K8 = 1024 * 8;
+        private const int K16 = K8 * 2;
+        private const int K32 = K16 * 2;
+        private const int K64 = K32 * 2;
+
         private const int K512 = 1024 * 512;
         
-        private const int SecondsTimeout = 10;
+        private const int SecondsTimeout = 20;
         private const String SeparatorString = "TCzmiJHkvZnnlJ/lpoLkuIflj6Tplb/lpJw=";
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
@@ -135,11 +139,11 @@ namespace C2.Business.SSH
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
                 
                 // 根据lxf的情报, 40M 为中位数
-                int bufferSize = fileLength > M40 ? K512 : K8;   // 40M 以上的文件用大缓存，减少进程切换的消耗   
+                int bufferSize = fileLength > M40 ? K512 : K64;  // 40M 以上的文件用大缓存，减少进程切换的消耗   
                 byte[] buffer = new byte[bufferSize + 1];        // 预留一个空白位用来存储预读字节
 
                 Shell shell = new Shell(ssm);
-                long left = fileLength - shell.ExpectTGZ(buffer, fs, Timeout);  // 这里有个坑，只预读最多4K
+                long left = fileLength - shell.ExpectTGZ(buffer, fs, Timeout, K32);  // 这里有个坑，只预读最多4K
                 if (left >= fileLength)  // Expect过程中没有写入任何数据,说明没遇到TGZ头
                 {
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
@@ -270,7 +274,7 @@ namespace C2.Business.SSH
         {
             if (Oops()) return this;
             String d = TaskDirectory + "/" + TargetScript;
-            return UploadScript(task.LocalPyScriptPath, d);
+            return UploadScript(task.LocalPyZipPath, d);
         }
 
         private BastionAPI UploadScript(String ffp, String d)
@@ -282,18 +286,18 @@ namespace C2.Business.SSH
             }
 
             if (ffp.EndsWith(".zip"))
-                return UploadZipBase64(ffp, d);
+                return UploadZipBase64(ffp, d, d + ".zip");
             else 
                 return UploadScriptBase64(ffp, d);
         }
 
-        private BastionAPI UploadZipBase64(String s, String d)
+        private BastionAPI UploadZipBase64(String s, String dPy, String dZip)
         {
             byte[] buf = FileUtil.FileReadBytesToEnd(s);
             // Base64果然比shell硬转码好用多了
             String b64 = Convert.ToBase64String(buf);
             // 解码，解压
-            String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip {1}", b64, d);
+            String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip -op {1}>{2}", b64, dZip, dPy);
             if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
 
@@ -340,6 +344,8 @@ namespace C2.Business.SSH
 
         public BastionAPI EnterTaskDirectory()
         {
+            if (Oops()) return this;
+
             String command = String.Format("cd {0}", TaskDirectory);
             task.LastErrorMsg = RunCommand(command, shell).IsEmpty() ? "全文机创建工作目录失败": String.Empty;
             return this;
@@ -390,7 +396,7 @@ namespace C2.Business.SSH
 
         public BastionAPI KillTask()
         {
-            if (IsAliveTask()) // 确保不要误删其他复用进程
+            if (!Oops() && IsAliveTask()) // 确保不要误删其他复用进程
             {
                 String command = String.Format("kill -9 {0}", task.PID);
                 RunCommand(command, shell);
@@ -405,26 +411,26 @@ namespace C2.Business.SSH
 
             bool isTimeout = IsTaskTimeout();
             bool isAlive = IsAliveTask();
-            bool isGRFReady = IsResultFileReady();
+            bool isRFReady = IsResultFileReady();
 
             // 1) pid不存在且有结果文件时, 为运行成功
-            if (!isAlive && isGRFReady)
+            if (!isAlive && isRFReady)
                 return "DONE";
 
             // 2) pid不存在且没有结果文件时, 为运行失败
-            if (!isAlive && !isGRFReady)
+            if (!isAlive && !isRFReady)
                 return "FAIL";
 
             // 3) pid存在且没有结果文件且在未超时范围内, 为正在运行
-            if (isAlive && !isGRFReady && !isTimeout)
+            if (isAlive && !isRFReady && !isTimeout)
                 return "RUNNING";
 
             // 4) pid存在且没有结果文件且超出运行时间(24 * 4小时), 为超时
-            if (isAlive && !isGRFReady && isTimeout)
+            if (isAlive && !isRFReady && isTimeout)
                 return "TIMEOUT";
 
             // 5) pid存在但有结果文件, 这种情况按道理不应该发生, 暂时假定运行成功
-            if (isAlive && isGRFReady)
+            if (isAlive && isRFReady)
                 return "DONE";
 
             // 其他情况, 按道理不应该发生, 全部默认为失败

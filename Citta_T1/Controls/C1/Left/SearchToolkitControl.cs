@@ -65,8 +65,9 @@ namespace C2.Controls.C1.Left
 
         public void DeleteButton(SearchToolkitButton button, SearchTaskInfo task) 
         {
+            using (GuarderUtil.WaitCursor)
+                taskManager.DeleteTask(task);
             RemoveButton(button);
-            taskManager.DeleteTask(task);
         }
 
         private void HelpInfoLable_Click(object sender, EventArgs e)

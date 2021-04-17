@@ -629,7 +629,7 @@ def queryBatch(keyWords):
     sch.saver.writer.close()
     succeedFilename = tempFilename.strip('_') + '.txt'
     os.rename(os.path.join(netPath,tempFilename), os.path.join(netPath,succeedFilename))
-    ZIP_PATH =  os.path.join(netPath,succeedFilename).replace('.txt','')
+    ZIP_PATH =  os.path.join(netPath,succeedFilename).replace('.txt','.tgz')
     zip_result(os.path.join(netPath,succeedFilename),ZIP_PATH)
 
 ##query pic&&Email shehuang
