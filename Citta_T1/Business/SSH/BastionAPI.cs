@@ -308,7 +308,7 @@ namespace C2.Business.SSH
                 String b64 = ST.EncodeBase64(s);        // Base64果然比shell硬转码好用多了
                 // 这里可能还有超出shell缓冲区的问题
                 String command = String.Format("echo -e \"{0}\" | base64 -di > {1}", b64, d);
-                if (RunCommand(command, shell).IsEmpty())
+                if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
                     task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);  
             }
 

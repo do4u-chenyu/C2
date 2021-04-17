@@ -57,13 +57,17 @@ namespace C2.Business.SSH
         // 如果超时返回0
         // 如果一个buffersize内没有等到，也返回0
         // 成功的情况下，至少大于等于3
-        public long ExpectTGZ(byte[] buffer, FileStream fs, TimeSpan timeout)
+        // 这个函数有潜在的越界风险, 调用时buffer的size要是4096的2倍以上
+        internal long ExpectTGZ(byte[] buffer, FileStream fs, TimeSpan timeout, int maxBytesRead = 4096)
         {
             int count = 0;
+            if (buffer.Length < maxBytesRead) // 有越界风险,认为失败
+                return 0;
+            int perBytesRead = (int)(maxBytesRead / 4);
 
             do
             {   // 每次读1K
-                int bytesRead = Read(buffer, count, 1024, timeout);
+                int bytesRead = Read(buffer, count, perBytesRead, timeout);
                 if (bytesRead == 0)  // 超时，退出
                     return 0;
 
@@ -81,7 +85,7 @@ namespace C2.Business.SSH
  
                 count += bytesRead;
             }
-            while (count < 1024 * 4 + 1); // 一共读4K
+            while (count < maxBytesRead); // 一共读4K
 
             return 0;
         }
@@ -150,12 +154,10 @@ namespace C2.Business.SSH
             return buffer[i] == 0x1f && buffer[i + 1] == 0x8b && buffer[i + 2] == 0x08;
         }
 
-        private bool IsCRLF(byte[] buffer, int offset)
+        private bool IsCRLF(byte[] buffer, int i)
         {
-            return buffer[offset] == OpUtil.CR && buffer[offset + 1] == OpUtil.LF;
+            return buffer[i] == OpUtil.CR && buffer[i + 1] == OpUtil.LF;
         }
-
-
 
         public bool ReadByte(ref byte b, TimeSpan timeout)
         {
