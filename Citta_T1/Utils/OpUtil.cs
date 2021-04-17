@@ -14,6 +14,8 @@ namespace C2.Utils
 {
     public class OpUtil
     {
+        public static readonly byte CR = 13;
+        public static readonly byte LF = 10;
         public static readonly string TabSeparatorString = "\t";
         public static readonly string LineSeparatorString = "\n";
 

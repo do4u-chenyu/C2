@@ -11,22 +11,15 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private const byte CR = 13;
-        private const byte LF = 10;
-
         private const int M40 = 1024 * 1024 * 40;
-        private const int K2 = 4096 * 2;
+        private const int K8 = 1024 * 8;
         private const int K512 = 1024 * 512;
         
-
         private const int SecondsTimeout = 10;
         private const String SeparatorString = "TCzmiJHkvZnnlJ/lpoLkuIflj6Tplb/lpJw=";
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
-
-        private static readonly byte[] TgzHeadBytes = new byte[] { 0x1f, 0x8b, 0x08 };  // 1f 8b 08 .tgz的文件头
-        private static readonly String TgzHeadString = Encoding.UTF8.GetString(TgzHeadBytes);
 
         private readonly SearchTaskInfo task;
 
@@ -50,7 +43,8 @@ namespace C2.Business.SSH
         {
             this.task = task;
             this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
-            this.ssh.ConnectionInfo.Timeout = Timeout; 
+            this.ssh.ConnectionInfo.Timeout = Timeout;
+            this.ssh.ConnectionInfo.Encoding = Encoding.UTF8;
         }
 
         public BastionAPI Login()
@@ -137,24 +131,20 @@ namespace C2.Business.SSH
                 ssm.WriteLine(String.Format("cat {0}", ffp));
                 // 打印分隔符
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
-                // 当字符串里永远没有TGZHead时，这里内存会非常大，没有啥好办法，只能外围判断必须是tgz文件
-                String begin = ssm.Expect(new Regex(TgzHeadString), Timeout);  
-                if (null == begin)
+                
+                // 根据lxf的情报, 40M 为中位数
+                int bufferSize = fileLength > M40 ? K512 : K8;   // 40M 以上的文件用大缓存，减少进程切换的消耗   
+                byte[] buffer = new byte[bufferSize + 1];        // 预留一个空白位用来存储预读字节
+
+                Shell shell = new Shell(ssm);
+                long left = fileLength - shell.ExpectTGZ(buffer, fs, Timeout);  // 这里有个坑，只预读最多4K
+                if (left >= fileLength)  // Expect过程中没有写入任何数据,说明没遇到TGZ头
                 {
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
                     return false;
                 }
-
-                // 根据lxf的情报, 40M 为中位数
-                int bufferSize = fileLength > M40 ? K512 : K2;  // 40M 以上的文件用大缓存，减少进程切换的消耗   
-                byte[] buffer = new byte[bufferSize + 1];        // 预留一个空白位用来存储预读字节
-
-                // 写入文件头
-                fs.Write(TgzHeadBytes, 0, TgzHeadBytes.Length);
-
-                int offset = 0;                                   // 读缓存起始位置, 0 或 1(情况3时)
-                Shell shell = new Shell(ssm);
-                long left = fileLength - TgzHeadString.Length;    // 忽略文件头
+                // 读缓存起始位置, 0 或 1(情况3时)
+                int offset = 0;                      
                 while (left > 0)
                 {
                     int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), Timeout);
@@ -178,9 +168,9 @@ namespace C2.Business.SSH
                     // 2) 最后一个字节是CR，  再读一个字节, 新字节不是CR, 将新字符追加到buffer, 替换CRNL,继续循环
                     // 3) 最后一个字节是CR，  再读一个字节, 新字节还是CR, 先替换CRNL，然后将CR作为buffer第一个字节，继续循环
 
-                    if (buffer[bytesRead - 1] != CR)  // 情况1
+                    if (buffer[bytesRead - 1] != OpUtil.CR)  // 情况1
                     {
-                        left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead, fs), 0);
+                        left = Math.Max(left - shell.ReplaceCRNLWrite(buffer, 0, bytesRead, fs), 0);
                         continue;
                     }
   
@@ -191,14 +181,14 @@ namespace C2.Business.SSH
                         return false;
                     }
                         
-                    if (one != CR)  // 情况2
+                    if (one != OpUtil.CR)  // 情况2
                     {
                         buffer[bytesRead] = one;  // 新字符追加到buffer
-                        left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead + 1, fs), 0);
+                        left = Math.Max(left - shell.ReplaceCRNLWrite(buffer, 0, bytesRead + 1, fs), 0);
                     }
                     else            // 情况3
                     {
-                        left = Math.Max(left - ReplaceCRNLWrite(buffer, bytesRead, fs), 0);
+                        left = Math.Max(left - shell.ReplaceCRNLWrite(buffer, 0, bytesRead, fs), 0);
                         buffer[offset++] = one;   // 新字符放置到buffer头, 起始位置置为1
                     }
                 }
@@ -265,53 +255,7 @@ namespace C2.Business.SSH
             return ret;
         }
 
-        private bool IsCRLF(byte[] buffer, int offset)
-        {
-            return buffer[offset] == CR && buffer[offset + 1] == LF;
-        }
 
-        private int ReplaceCRNLWrite(byte[] buffer, int count, FileStream fs)
-        {
-            count = Math.Min(buffer.Length, count); // 保险一下，下载错误的文件比程序崩强
-            
-            int totalBytesWrite = 0; // 实际写入字节
-            int curr = 0;            // 当前游标位置
-            int head = 0;            // 当前写入起始位置
-
-            if (count < 2)  // 不足2个字节,不可能含有CRNL
-            {
-                fs.Write(buffer, head, curr + 1 - head);
-                return curr - head + 1;
-            }
-
-            //  |                |      [0, count - 1)             
-            // [++++++\r\n++++++++++++-]
-            do
-            {
-                // 找到 下一个 /r/n
-                while (curr < count - 1 && !IsCRLF(buffer, curr))
-                    curr++;
-
-                int bytesWrite = curr - head + 1;
-
-                // 没找到, 直接到结尾处,退出
-                if (curr >= count - 1) 
-                {
-                    fs.Write(buffer, head, bytesWrite);
-                    return totalBytesWrite += bytesWrite;
-                }
-                // 找到CRNL 替换 成 NLNL， [head ... CRNL] => [head ... NLNL]
-                // 写入[head ... NL], curr跳过NLNL,
-                buffer[curr] = LF;
-                fs.Write(buffer, head, bytesWrite);
-                // 游标置于当前位置
-                head = curr += 2; 
-                totalBytesWrite += bytesWrite;
-
-            } while (head < count); 
-
-            return totalBytesWrite;
-        }
 
         private bool Oops()
         {
@@ -364,7 +308,7 @@ namespace C2.Business.SSH
                 String b64 = ST.EncodeBase64(s);        // Base64果然比shell硬转码好用多了
                 // 这里可能还有超出shell缓冲区的问题
                 String command = String.Format("echo -e \"{0}\" | base64 -di > {1}", b64, d);
-                if (RunCommand(command, shell).IsEmpty())
+                if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
                     task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);  
             }
 
