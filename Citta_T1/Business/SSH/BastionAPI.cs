@@ -27,11 +27,13 @@ namespace C2.Business.SSH
         private ShellStream shell;
 
         private bool downloadCancel = false;
+        private double progressValue;
 
         private String TargetScript { get => task.TargetScript; }
         // {workspace}/pid_taskcreatetime
         private String TaskDirectory { get => task.TaskDirectory; }
-
+        public delegate void DownloadProgressEventHandler(double progressValue);
+        public event DownloadProgressEventHandler DownloadProgressEvent;
         private String TaskResultShellPattern { get => task.TaskResultShellPattern; }
 
         private String TaskResultRegexPattern { get => task.TaskResultRegexPattern; }
@@ -143,11 +145,13 @@ namespace C2.Business.SSH
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
                     return false;
                 }
-
+                long sum = left;
                 // 读缓存起始位置, 0 或 1(情况3时)
                 int offset = 0;                      
                 while (left > 0)
-                {
+                {                 
+                    double pogressValue = (double) (sum - left) / sum  * 100;
+                    DownloadProgressEvent?.Invoke(pogressValue);
                     int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), Timeout);
                     offset = 0; // 读完一次, 起始位置复位
 
@@ -192,6 +196,7 @@ namespace C2.Business.SSH
                         left = Math.Max(left - shell.ReplaceCRNLWrite(buffer, 0, bytesRead, fs), 0);
                         buffer[offset++] = one;   // 新字符放置到buffer头, 起始位置置为1
                     }
+                   
                 }
             }
             catch (Exception ex) { task.LastErrorMsg = ex.Message; return false; }

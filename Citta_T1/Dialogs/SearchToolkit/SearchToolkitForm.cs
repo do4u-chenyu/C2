@@ -95,6 +95,7 @@ namespace C2.SearchToolkit
             };
             task.LastErrorMsg = String.Empty; // 清空错误信息
             bool succ = false;
+            progressBar.Show();
             using (GuarderUtil.WaitCursor)
                 succ = progressBar.Download();
 

@@ -12,12 +12,17 @@ namespace C2.Dialogs
         private readonly BastionAPI api;
         //private long fileLength;
 
+        private void UpdateProgressBar(double PogressValue)
+        {
+            this.ProgressPercentage = PogressValue + "%";
+            Console.WriteLine("======下载进度======"+ this.ProgressPercentage);
+        }
         public BastionDownloadProgressBar(SearchTaskInfo task, String ffp)
         {
             api = new BastionAPI(task);
+            api.DownloadProgressEvent += UpdateProgressBar;
             done = ffp;
             temp = done + ".download";
-
             this.FormClosed += BastionDownloadProgressBar_FormClosed;
         }
 
