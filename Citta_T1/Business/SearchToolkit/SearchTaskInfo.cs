@@ -33,7 +33,7 @@ namespace C2.SearchToolkit
             ["飞机场模型"] = @"([^\n\r]+000000_queryResult_plane_\d+_\d+.tgz)"
         };
 
-        public String LocalScriptPath
+        public String LocalPyScriptPath
         {
             get
             {
@@ -41,6 +41,8 @@ namespace C2.SearchToolkit
                 return Path.Combine(Application.StartupPath, "Resources", "Script", "IAO_Search_gamble", s);
             }
         }
+
+        public String LocalPyZipPath { get => LocalPyScriptPath + ".zip"; }
 
         public String TaskResultShellPattern { get => "000000_queryResult_*_*_*.tgz"; }
 

@@ -207,6 +207,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1444C5E62D564174B36D2D9C04D1D6A3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_14CE38EE707B4A23B4FA9C3098CB3A72"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1167,6 +1173,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_822917C55FEE41F796BA0D2CA278900B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_826F37D3898248B5A7E11B4FA7CCB485"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1455,6 +1467,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A063EFCD0CD34E12A35A62E19D0E46E1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A06DFE4FFFCA4FCABB066EB6F1549F21"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1582,6 +1600,12 @@
         "Entry"
         {
         "MsmKey" = "8:_B021CF5AD65F4DE1923D6A51D52694D6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B0B58A8148734702B12F1BB6A190D7DD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1738,12 +1762,6 @@
         "Entry"
         {
         "MsmKey" = "8:_C6C801DB384A42A1B0DDFC5B50332394"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C70281BFE9924E259E74B159138F3CE4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3140,6 +3158,26 @@
             "TargetName" = "8:381_人物.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1444C5E62D564174B36D2D9C04D1D6A3"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_gun_accountPass_C2_20200908.py.zip"
+            "TargetName" = "8:batchquery_gun_accountPass_C2_20200908.py.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_A84863BC140649D99C499CAD84190897"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6186,6 +6224,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_822917C55FEE41F796BA0D2CA278900B"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_plane_accountPass_C2_20210414.py.zip"
+            "TargetName" = "8:batchquery_plane_accountPass_C2_20210414.py.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_A84863BC140649D99C499CAD84190897"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_826F37D3898248B5A7E11B4FA7CCB485"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\195_开锁.png"
@@ -7010,6 +7068,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A063EFCD0CD34E12A35A62E19D0E46E1"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_db_accountPass_C2_20210324.py.zip"
+            "TargetName" = "8:batchquery_db_accountPass_C2_20210324.py.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_A84863BC140649D99C499CAD84190897"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A06DFE4FFFCA4FCABB066EB6F1549F21"
             {
             "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex2.html"
@@ -7427,6 +7505,26 @@
             "TargetName" = "8:165_法律依据.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B0B58A8148734702B12F1BB6A190D7DD"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py.zip"
+            "TargetName" = "8:batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_A84863BC140649D99C499CAD84190897"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7947,26 +8045,6 @@
             "TargetName" = "8:apktool_2.3.0.jar"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C70281BFE9924E259E74B159138F3CE4"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Script\\IAO_Search_gamble\\batchquery_db_accountPass_C2_20210324.py"
-            "TargetName" = "8:batchquery_db_accountPass_C2_20210324.py"
-            "Tag" = "8:"
-            "Folder" = "8:_A84863BC140649D99C499CAD84190897"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -10976,7 +11054,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\obj\\开发调试\\C2.exe"
+            "SourcePath" = "8:..\\Citta_T1\\obj\\Release\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
