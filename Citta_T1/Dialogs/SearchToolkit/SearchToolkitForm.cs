@@ -109,11 +109,6 @@ namespace C2.SearchToolkit
 
         }
 
-        private void ProgressBar_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;

@@ -149,7 +149,7 @@ namespace C2.Business.SSH
                 byte[] buffer = new byte[bufferSize + 1];        // 预留一个空白位用来存储预读字节
 
                 Shell shell = new Shell(ssm);
-                long left = fileLength - shell.ExpectTGZ(buffer, fs, Timeout, K32);  // 这里有个坑，只预读最多4K
+                long left = fileLength - shell.ExpectTGZ(buffer, fs, Timeout, K32);
                 if (left >= fileLength)  // Expect过程中没有写入任何数据,说明没遇到TGZ头
                 {
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
