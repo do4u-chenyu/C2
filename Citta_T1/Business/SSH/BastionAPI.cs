@@ -51,6 +51,12 @@ namespace C2.Business.SSH
             this.ssh.ConnectionInfo.Encoding = Encoding.UTF8;
         }
 
+        // 和Database里的测试联通函数名保持一致
+        public bool TestConn()
+        {
+            Login();
+            return task.LastErrorMsg.IsEmpty();
+        }
         public BastionAPI Login()
         {
             try 
