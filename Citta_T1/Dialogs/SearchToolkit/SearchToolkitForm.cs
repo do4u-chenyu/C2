@@ -31,7 +31,8 @@ namespace C2.SearchToolkit
                 this.searchAgentIPTB,
                 this.remoteWorkspaceTB,
                 this.taskModelComboBox,
-                this.taskNameTB
+                this.taskNameTB,
+                this.connectTestButton
             };
        
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
@@ -254,6 +255,11 @@ namespace C2.SearchToolkit
             // 展示任务信息时, 不需要更改
             ReadOnlyInputControls();  
             return this.ShowDialog();
+        }
+
+        private void ConnectTestButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

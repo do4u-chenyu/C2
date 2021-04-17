@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchToolkitForm));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.connectTestButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -70,6 +71,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox2.Controls.Add(this.connectTestButton);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
@@ -91,6 +93,18 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "堡垒机配置";
+            // 
+            // connectTestButton
+            // 
+            this.connectTestButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.connectTestButton.ForeColor = System.Drawing.Color.Black;
+            this.connectTestButton.Location = new System.Drawing.Point(254, 115);
+            this.connectTestButton.Name = "connectTestButton";
+            this.connectTestButton.Size = new System.Drawing.Size(68, 27);
+            this.connectTestButton.TabIndex = 46;
+            this.connectTestButton.Text = "测试连通";
+            this.connectTestButton.UseVisualStyleBackColor = true;
+            this.connectTestButton.Click += new System.EventHandler(this.ConnectTestButton_Click);
             // 
             // label8
             // 
@@ -457,5 +471,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button connectTestButton;
     }
 }
