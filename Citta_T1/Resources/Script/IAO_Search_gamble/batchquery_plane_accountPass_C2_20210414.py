@@ -439,7 +439,7 @@ def queryBatch(keyWords):
     sch.saver.writer.close()
     succeedFilename = tempFilename.strip('_') + '.txt'
     os.rename(os.path.join(DATA_PATH,tempFilename), os.path.join(DATA_PATH,succeedFilename))
-    ZIP_PATH =  os.path.join(DATA_PATH,succeedFilename).replace('txt','')
+    ZIP_PATH =  os.path.join(DATA_PATH,succeedFilename).replace('txt','tgz')
     zip_result(os.path.join(DATA_PATH,succeedFilename),ZIP_PATH)
 
 def encrypTion(path):
