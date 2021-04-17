@@ -13,9 +13,13 @@ namespace C2.Business.SSH
     {
         private const int M40 = 1024 * 1024 * 40;
         private const int K8 = 1024 * 8;
+        private const int K16 = K8 * 2;
+        private const int K32 = K16 * 2;
+        private const int K64 = K32 * 2;
+
         private const int K512 = 1024 * 512;
         
-        private const int SecondsTimeout = 10;
+        private const int SecondsTimeout = 20;
         private const String SeparatorString = "TCzmiJHkvZnnlJ/lpoLkuIflj6Tplb/lpJw=";
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
@@ -133,11 +137,11 @@ namespace C2.Business.SSH
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
                 
                 // 根据lxf的情报, 40M 为中位数
-                int bufferSize = fileLength > M40 ? K512 : K8;   // 40M 以上的文件用大缓存，减少进程切换的消耗   
+                int bufferSize = fileLength > M40 ? K512 : K64;  // 40M 以上的文件用大缓存，减少进程切换的消耗   
                 byte[] buffer = new byte[bufferSize + 1];        // 预留一个空白位用来存储预读字节
 
                 Shell shell = new Shell(ssm);
-                long left = fileLength - shell.ExpectTGZ(buffer, fs, Timeout);  // 这里有个坑，只预读最多4K
+                long left = fileLength - shell.ExpectTGZ(buffer, fs, Timeout, K32);  // 这里有个坑，只预读最多4K
                 if (left >= fileLength)  // Expect过程中没有写入任何数据,说明没遇到TGZ头
                 {
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
@@ -335,6 +339,8 @@ namespace C2.Business.SSH
 
         public BastionAPI EnterTaskDirectory()
         {
+            if (Oops()) return this;
+
             String command = String.Format("cd {0}", TaskDirectory);
             task.LastErrorMsg = RunCommand(command, shell).IsEmpty() ? "全文机创建工作目录失败": String.Empty;
             return this;
