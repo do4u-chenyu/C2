@@ -265,7 +265,7 @@ namespace C2.Business.SSH
         {
             if (Oops()) return this;
             String d = TaskDirectory + "/" + TargetScript;
-            return UploadScript(task.LocalPyScriptPath, d);
+            return UploadScript(task.LocalPyZipPath, d);
         }
 
         private BastionAPI UploadScript(String ffp, String d)
@@ -277,18 +277,18 @@ namespace C2.Business.SSH
             }
 
             if (ffp.EndsWith(".zip"))
-                return UploadZipBase64(ffp, d);
+                return UploadZipBase64(ffp, d, d + ".zip");
             else 
                 return UploadScriptBase64(ffp, d);
         }
 
-        private BastionAPI UploadZipBase64(String s, String d)
+        private BastionAPI UploadZipBase64(String s, String dPy, String dZip)
         {
             byte[] buf = FileUtil.FileReadBytesToEnd(s);
             // Base64果然比shell硬转码好用多了
             String b64 = Convert.ToBase64String(buf);
             // 解码，解压
-            String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip {1}", b64, d);
+            String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip -op {1}>{2}", b64, dZip, dPy);
             if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
 
