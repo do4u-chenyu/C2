@@ -309,6 +309,7 @@
             // 
             this.downloadButton.Enabled = false;
             this.downloadButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.downloadButton.ForeColor = System.Drawing.Color.DarkRed;
             this.downloadButton.Location = new System.Drawing.Point(535, 126);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(68, 27);

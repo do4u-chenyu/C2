@@ -406,26 +406,26 @@ namespace C2.Business.SSH
 
             bool isTimeout = IsTaskTimeout();
             bool isAlive = IsAliveTask();
-            bool isGRFReady = IsResultFileReady();
+            bool isRFReady = IsResultFileReady();
 
             // 1) pid不存在且有结果文件时, 为运行成功
-            if (!isAlive && isGRFReady)
+            if (!isAlive && isRFReady)
                 return "DONE";
 
             // 2) pid不存在且没有结果文件时, 为运行失败
-            if (!isAlive && !isGRFReady)
+            if (!isAlive && !isRFReady)
                 return "FAIL";
 
             // 3) pid存在且没有结果文件且在未超时范围内, 为正在运行
-            if (isAlive && !isGRFReady && !isTimeout)
+            if (isAlive && !isRFReady && !isTimeout)
                 return "RUNNING";
 
             // 4) pid存在且没有结果文件且超出运行时间(24 * 4小时), 为超时
-            if (isAlive && !isGRFReady && isTimeout)
+            if (isAlive && !isRFReady && isTimeout)
                 return "TIMEOUT";
 
             // 5) pid存在但有结果文件, 这种情况按道理不应该发生, 暂时假定运行成功
-            if (isAlive && isGRFReady)
+            if (isAlive && isRFReady)
                 return "DONE";
 
             // 其他情况, 按道理不应该发生, 全部默认为失败
