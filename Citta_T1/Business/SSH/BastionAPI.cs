@@ -373,7 +373,7 @@ namespace C2.Business.SSH
         private bool IsAliveTask()
         {
             String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetScript), shell);
-            return Regex.IsMatch(result, Wrap(TargetScript));
+            return Regex.IsMatch(result, Wrap(@"python\s+" + TargetScript));
         }
 
         private bool IsResultFileReady()
