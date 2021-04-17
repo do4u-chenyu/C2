@@ -20,7 +20,7 @@ namespace C2.Business.SSH
         private const int K512 = 1024 * 512;
         
         private const int SecondsTimeout = 20;
-        private const String SeparatorString = "TCzmiJHkvZnnlJ/lpoLkuIflj6Tplb/lpJw=";
+        private const String SeparatorString = "TCzml6DkvaDkvZnnlJ/lpoLkuIflj6Tplb/lpJw=";
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
@@ -53,6 +53,12 @@ namespace C2.Business.SSH
             this.ssh.ConnectionInfo.Encoding = Encoding.UTF8;
         }
 
+        // 和Database里的测试联通函数名保持一致
+        public bool TestConn()
+        {
+            Login();
+            return task.LastErrorMsg.IsEmpty();
+        }
         public BastionAPI Login()
         {
             try 
@@ -372,7 +378,7 @@ namespace C2.Business.SSH
         private bool IsAliveTask()
         {
             String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetScript), shell);
-            return Regex.IsMatch(result, Wrap(TargetScript));
+            return Regex.IsMatch(result, Wrap(@"python\s+" + TargetScript));
         }
 
         private bool IsResultFileReady()

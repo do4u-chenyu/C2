@@ -97,7 +97,7 @@
             // connectTestButton
             // 
             this.connectTestButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.connectTestButton.ForeColor = System.Drawing.Color.Black;
+            this.connectTestButton.ForeColor = System.Drawing.Color.Navy;
             this.connectTestButton.Location = new System.Drawing.Point(254, 115);
             this.connectTestButton.Name = "connectTestButton";
             this.connectTestButton.Size = new System.Drawing.Size(68, 27);
@@ -312,7 +312,8 @@
             "涉赌模型",
             "涉枪模型",
             "涉黄模型",
-            "飞机场模型"});
+            "飞机场模型",
+            "测试模型"});
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);

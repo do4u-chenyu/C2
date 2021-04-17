@@ -169,6 +169,12 @@ namespace C2.Business.SSH
             return false;
         }
 
+        // 针对shell中的文本信息去掉各种格式化字符串
+        public static String FormatShellString(String s)
+        {
+            return String.Empty;
+        }
+
     }
 
 }

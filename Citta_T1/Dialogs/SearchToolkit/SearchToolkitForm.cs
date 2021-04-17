@@ -260,7 +260,18 @@ namespace C2.SearchToolkit
 
         private void ConnectTestButton_Click(object sender, EventArgs e)
         {
+            if (ValidateInputControls())
+            {
+                SearchTaskInfo task = this.GenTaskInfo();
 
+                using (GuarderUtil.WaitCursor)
+                    if (new BastionAPI(task).TestConn())
+                        HelpUtil.ShowMessageBox("登陆堡垒机测试成功");
+                    else
+                        HelpUtil.ShowMessageBox(String.Format("连接失败:{0}", task.LastErrorMsg));
+            }
+            else
+                HelpUtil.ShowMessageBox(validateMessage);
         }
     }
 }

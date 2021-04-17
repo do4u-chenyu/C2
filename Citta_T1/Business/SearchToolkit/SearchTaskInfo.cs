@@ -14,7 +14,8 @@ namespace C2.SearchToolkit
             ["涉赌模型"] = "gamble",
             ["涉枪模型"] = "gun",
             ["涉黄模型"] = "yellow",
-            ["飞机场模型"] = "plane"
+            ["飞机场模型"] = "plane",
+            ["测试模型"] = "test"
         };
 
         private static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
@@ -22,7 +23,9 @@ namespace C2.SearchToolkit
             ["涉赌模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py",
             ["涉枪模型"] = "batchquery_gun_accountPass_C2_20200908_{0}.py",
             ["涉黄模型"] = "batchquery_yellow_accountPass_C2_eml_pic_web_20210414_{0}.py",
-            ["飞机场模型"] = "batchquery_plane_accountPass_C2_20210414_{0}.py"
+            ["飞机场模型"] = "batchquery_plane_accountPass_C2_20210414_{0}.py",
+            ["测试模型"] = "batchquery_db_accountPass_C2_Test_Running_{0}.py"
+
         };
 
         private static readonly Dictionary<String, String> TaskResultPatternTable = new Dictionary<String, String>
@@ -30,7 +33,8 @@ namespace C2.SearchToolkit
             ["涉赌模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)",
             ["涉枪模型"] = @"([^\n\r]+000000_queryResult_gun_\d+_\d+.tgz)",
             ["涉黄模型"] = @"([^\n\r]+000000_queryResult_yellow_\d+_\d+.tgz)",
-            ["飞机场模型"] = @"([^\n\r]+000000_queryResult_plane_\d+_\d+.tgz)"
+            ["飞机场模型"] = @"([^\n\r]+000000_queryResult_plane_\d+_\d+.tgz)",
+            ["测试模型"] = @"([^\n\r]+000000_queryResult_test_\d+_\d+.tgz)",
         };
 
         public String LocalPyScriptPath
