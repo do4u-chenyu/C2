@@ -27,6 +27,7 @@ namespace C2.SearchToolkit
                 task.PID = api.Login()
                               .DeleteTaskDirectory()
                               .CreateTaskDirectory()
+                              .EnterTaskDirectory()
                               .UploadTaskScript()
                               .RunTask();
                 api.Close();

@@ -143,6 +143,7 @@ namespace C2.Business.SSH
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
                     return false;
                 }
+
                 // 读缓存起始位置, 0 或 1(情况3时)
                 int offset = 0;                      
                 while (left > 0)
@@ -272,33 +273,8 @@ namespace C2.Business.SSH
         {
             String d = TaskDirectory + "/" + TargetScript;
             String s = FileUtil.FileReadToEnd(ffp);
-            //UploadScriptShellEscape(s, d);
-            UploadScriptBase64(s, d);
-            return this;
-        }
-
-        private void UploadScriptShellEscape(String s, String d)
-        {
-            // 0)  不能有释义字符 `
-            // 1)  \\ \a \b \c \e \f \n \r \t 等转义字符的\全部替换成\\\
-            // 2)  " 替换成 \"
-            // 3)  换行回车替换成转义字符
-            // 4)  这里的逻辑需要优化,个人感觉当前的实现有隐患, TODO 根据lxf的建议改成Base64编码
-            //     转义字符的安全性，效率，形式美感上都很差
-            //     尤其是转义字符，如果目标脚本有rm动作, 转义字符在处理\, /, 空格等符号时如果出问题
-            //     运气不好会造成删库
-            if (String.IsNullOrEmpty(s) || s.Contains("`"))
-                return;
-
-            s = Regex.Replace(s, @"\\([\\abcefnrtvx0])", @"\\\$1")
-                     .Replace("\"", "\\\"")
-                     .Replace("\r", @"\r")
-                     .Replace("\n", @"\n");
-
-            // 这里可能还有超出shell缓冲区的问题
-            String command = String.Format("echo -e \"{0}\" > {1}", s, d);
-            if (RunCommand(command, shell).IsEmpty())
-                task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
+  
+            return UploadZipBase64(s + ".zip", d + ".zip");
         }
 
         private BastionAPI UploadScriptBase64(String s, String d)
@@ -310,6 +286,22 @@ namespace C2.Business.SSH
                 String command = String.Format("echo -e \"{0}\" | base64 -di > {1}", b64, d);
                 if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
                     task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);  
+            }
+
+            return this;
+        }
+
+        private BastionAPI UploadZipBase64(String s, String d)
+        {
+            if (!String.IsNullOrEmpty(s) && File.Exists(s))
+            {
+                byte[] buf = FileUtil.FileReadBytesToEnd(s);
+                // Base64果然比shell硬转码好用多了
+                String b64 = Convert.ToBase64String(buf);  
+                // 解码，解压
+                String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip {1}", b64, d);
+                if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
+                    task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
             }
 
             return this;
@@ -327,7 +319,6 @@ namespace C2.Business.SSH
         {
             if (Oops()) return String.Empty;
 
-            EnterTaskDirectory();
             String command = String.Format("python {0}", TargetScript);
             //String command = "sleep 3600";
             String ret = RunCommand(String.Format("{0} & disown -a", command), shell);
@@ -338,10 +329,11 @@ namespace C2.Business.SSH
             return pid;
         }
 
-        private void EnterTaskDirectory()
+        public BastionAPI EnterTaskDirectory()
         {
             String command = String.Format("cd {0}", TaskDirectory);
-            RunCommand(command, shell);
+            task.LastErrorMsg = RunCommand(command, shell).IsEmpty() ? "全文机创建工作目录失败": String.Empty;
+            return this;
         }
 
         public BastionAPI DeleteTaskDirectory()

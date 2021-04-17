@@ -74,6 +74,20 @@ namespace C2.Utils
             return String.Empty;
         }
 
+        public static byte[] FileReadBytesToEnd(String ffp)
+        {
+            try
+            {
+                FileStream fs = new FileStream(ffp, FileMode.Open, FileAccess.Read);
+                byte[] buf = new byte[fs.Length];
+                fs.Read(buf, 0, buf.Length);
+                return buf;
+            }
+            catch { }
+
+            return new byte[0];
+        }
+
         // 实践中发现复制粘贴板有时会出异常
         // 非核心功能,捕捉异常忽略之
         public static bool TryClipboardSetText(string text)
