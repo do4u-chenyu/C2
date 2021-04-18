@@ -20,7 +20,7 @@ namespace C2.Business.SSH
         private const int K512 = 1024 * 512;
         
         private const int SecondsTimeout = 20;
-        private const String SeparatorString = "TCzml6DkvaDkvZnnlJ/lpoLkuIflj6Tplb/lpJw=";
+        private const String SeparatorString = "5peg5L2g5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
         
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);

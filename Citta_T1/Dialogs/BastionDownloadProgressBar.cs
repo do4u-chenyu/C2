@@ -17,11 +17,11 @@ namespace C2.Dialogs
         {
             this.ProgressPercentage = pogressValue;
             this.CurrentValue = ConvertUtil.TryParseInt(pogressValue);
-            String downloadValue = fileLength < 1048576 ? 
-                String.Format("{0:.#}K", fileLength / 1024.0) : 
+            String value = fileLength < 1048576 ?
+                String.Format("{0:.#}K", fileLength / 1024.0) :
                 String.Format("{0:.#}M", fileLength / 1048576.0);
 
-            this.SetDownloadSize(downloadValue);
+            this.SetFileLength(value);
             Application.DoEvents();
         }
         public BastionDownloadProgressBar(SearchTaskInfo task, String ffp)
@@ -47,7 +47,7 @@ namespace C2.Dialogs
             return succ;
         }
 
-        private void BastionDownloadProgressBar_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        private void BastionDownloadProgressBar_FormClosed(object sender, FormClosedEventArgs e)
         {
             api.StopDownloadAsync();
         }

@@ -15,7 +15,7 @@ namespace C2.Dialogs
         public int CurrentValue { get => this.proBarDownload.Value; set => this.proBarDownload.Value = value; }
         public string ProgressPercentage { get => this.speedValue.Text; set => this.speedValue.Text = value; }
         public int ProgressValue { get; set; }
-        public void SetDownloadSize(string value) { this.downloadSizeLabel.Text = "文件大小:" + value; }
+        public void SetFileLength(string value) { this.downloadSizeLabel.Text = "文件大小:" + value; }
 
         private void UpdateProgressBar_FormClosing(object sender, FormClosingEventArgs e)
         {
