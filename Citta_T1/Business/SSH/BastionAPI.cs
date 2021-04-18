@@ -36,7 +36,7 @@ namespace C2.Business.SSH
         private String TargetScript { get => task.TargetScript; }
         // {workspace}/pid_taskcreatetime
         private String TaskDirectory { get => task.TaskDirectory; }
-        public delegate void DownloadProgressEventHandler(String progressValue);
+        public delegate void DownloadProgressEventHandler(String progressValue, long fileLength);
         public event DownloadProgressEventHandler DownloadProgressEvent;
         private String TaskResultShellPattern { get => task.TaskResultShellPattern; }
 
@@ -161,7 +161,7 @@ namespace C2.Business.SSH
                 {
                     // 计算文件下载进度
                     String progressValue = ((fileLength - left * 1.0f) / fileLength).ToString("P0"); 
-                    DownloadProgressEvent?.Invoke(progressValue);
+                    DownloadProgressEvent?.Invoke(progressValue, fileLength);
 
                     int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), Timeout);
                     offset = 0; // 读完一次, 起始位置复位
@@ -213,7 +213,7 @@ namespace C2.Business.SSH
             catch (Exception ex) { task.LastErrorMsg = ex.Message; return false; }
 
             // 下载100%
-            DownloadProgressEvent?.Invoke("100%");
+            DownloadProgressEvent?.Invoke("100%", fileLength);
             return true;
         }
 

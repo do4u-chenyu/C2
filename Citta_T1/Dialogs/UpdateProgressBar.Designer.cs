@@ -30,17 +30,18 @@ namespace C2.Dialogs
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateProgressBar));
-            this.proBarDownLoad = new System.Windows.Forms.ProgressBar();
+            this.proBarDownload = new System.Windows.Forms.ProgressBar();
             this.speedValue = new System.Windows.Forms.Label();
             this.status = new System.Windows.Forms.Label();
+            this.downloadSizeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // proBarDownLoad
+            // proBarDownload
             // 
-            this.proBarDownLoad.Location = new System.Drawing.Point(30, 30);
-            this.proBarDownLoad.Name = "proBarDownLoad";
-            this.proBarDownLoad.Size = new System.Drawing.Size(384, 23);
-            this.proBarDownLoad.TabIndex = 0;
+            this.proBarDownload.Location = new System.Drawing.Point(30, 30);
+            this.proBarDownload.Name = "proBarDownload";
+            this.proBarDownload.Size = new System.Drawing.Size(384, 23);
+            this.proBarDownload.TabIndex = 0;
             // 
             // speedValue
             // 
@@ -60,13 +61,22 @@ namespace C2.Dialogs
             this.status.TabIndex = 3;
             this.status.Text = "下载中...";
             // 
+            // downloadSizeLabel
+            // 
+            this.downloadSizeLabel.AutoSize = true;
+            this.downloadSizeLabel.Location = new System.Drawing.Point(332, 13);
+            this.downloadSizeLabel.Name = "downloadSizeLabel";
+            this.downloadSizeLabel.Size = new System.Drawing.Size(0, 12);
+            this.downloadSizeLabel.TabIndex = 4;
+            // 
             // UpdateProgressBar
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(434, 81);
+            this.Controls.Add(this.downloadSizeLabel);
             this.Controls.Add(this.status);
             this.Controls.Add(this.speedValue);
-            this.Controls.Add(this.proBarDownLoad);
+            this.Controls.Add(this.proBarDownload);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -82,8 +92,9 @@ namespace C2.Dialogs
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar proBarDownLoad;
+        private System.Windows.Forms.ProgressBar proBarDownload;
         private System.Windows.Forms.Label speedValue;
         private System.Windows.Forms.Label status;
+        private System.Windows.Forms.Label downloadSizeLabel;
     }
 }
