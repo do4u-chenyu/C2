@@ -21,7 +21,7 @@ namespace C2.Dialogs
         {
             if (ProgressPercentage.Equals("100%"))
                 return;
-            DialogResult result = MessageBox.Show("下载正进行中，是否取消本次下载", "下载提示", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("下载正在进行中，是否取消本次下载", "下载提示", MessageBoxButtons.YesNo);
             if (result == DialogResult.No)
                 e.Cancel = true;                     
         }

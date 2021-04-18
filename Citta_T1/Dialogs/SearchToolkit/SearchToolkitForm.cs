@@ -95,7 +95,8 @@ namespace C2.SearchToolkit
                 MaximumValue = 100,
             };
             task.LastErrorMsg = String.Empty; // 清空错误信息
-            progressBar.Show();
+            progressBar.Show(this);
+
             bool succ = progressBar.Download();
 
             // 用户提前终止任务，进度条关闭，后续无法赋值
