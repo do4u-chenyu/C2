@@ -11,17 +11,24 @@ namespace C2.Dialogs
         private readonly String done;
         private readonly String temp;
         private readonly BastionAPI api;
-        //private long fileLength;
+        private DateTime time;
+        private long count;
 
-        private void UpdateProgressBar(String pogressValue, long fileLength)
+        private void UpdateProgressBar(String pogressValue, long left, long fileLength)
         {
             this.ProgressPercentage = pogressValue;
             this.CurrentValue = ConvertUtil.TryParseInt(pogressValue);
-            String value = fileLength < 1048576 ?
-                String.Format("{0:.#}K", fileLength / 1024.0) :
-                String.Format("{0:.#}M", fileLength / 1048576.0);
 
-            this.SetFileLength(value);
+            this.SetFileLength(FormatLength(fileLength));
+
+            Double secondsSpan = (DateTime.Now - time).TotalSeconds;
+            long bytesRead = count - left;
+            long speed = (long)Math.Abs(bytesRead / secondsSpan);
+            // TODO 去掉噪音数据
+            this.SetDownloadSpeed(FormatLength(speed));
+
+            time = DateTime.Now;
+            count = left;
             Application.DoEvents();
         }
         public BastionDownloadProgressBar(SearchTaskInfo task, String ffp)
@@ -31,6 +38,8 @@ namespace C2.Dialogs
             done = ffp;
             temp = done + ".download";
             this.FormClosed += BastionDownloadProgressBar_FormClosed;
+            time = DateTime.Now;
+            count = 0;
         }
 
 
@@ -42,7 +51,7 @@ namespace C2.Dialogs
             {
                 FileUtil.DeleteFile(done);     // 先删除重名文件,要确认下载成功后再删,以免文件没下载,以前的也没有了
                 FileUtil.FileMove(temp, done);
-            }      
+            }
             api.Close();
             return succ;
         }
@@ -50,6 +59,13 @@ namespace C2.Dialogs
         private void BastionDownloadProgressBar_FormClosed(object sender, FormClosedEventArgs e)
         {
             api.StopDownloadAsync();
+        }
+
+        private String FormatLength(long value)
+        {
+            return value < 1048576 ?
+                String.Format("{0:.#}K", value / 1024.0) :
+                String.Format("{0:.#}M", value / 1048576.0);
         }
     }
 }
