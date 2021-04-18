@@ -13,10 +13,10 @@ namespace C2.Dialogs
         private readonly BastionAPI api;
         //private long fileLength;
 
-        private void UpdateProgressBar(int pogressValue)
+        private void UpdateProgressBar(String pogressValue)
         {
-            this.ProgressPercentage = pogressValue + "%";
-            this.CurrentValue = pogressValue;
+            this.ProgressPercentage = pogressValue;
+            this.CurrentValue = ConvertUtil.TryParseInt(pogressValue);
             Application.DoEvents();
         }
         public BastionDownloadProgressBar(SearchTaskInfo task, String ffp)

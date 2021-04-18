@@ -36,7 +36,7 @@ namespace C2.Business.SSH
         private String TargetScript { get => task.TargetScript; }
         // {workspace}/pid_taskcreatetime
         private String TaskDirectory { get => task.TaskDirectory; }
-        public delegate void DownloadProgressEventHandler(int progressValue);
+        public delegate void DownloadProgressEventHandler(String progressValue);
         public event DownloadProgressEventHandler DownloadProgressEvent;
         private String TaskResultShellPattern { get => task.TaskResultShellPattern; }
 
@@ -155,14 +155,14 @@ namespace C2.Business.SSH
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
                     return false;
                 }
-                long sum = left;
                 // 读缓存起始位置, 0 或 1(情况3时)
                 int offset = 0;                      
                 while (left > 0)
                 {
                     // 计算文件下载进度
-                    int pogressValue = (int)Math.Truncate((float)(sum - left) / sum * 100);
-                    DownloadProgressEvent?.Invoke(pogressValue);
+                    String progressValue = ((fileLength - left * 1.0f) / fileLength).ToString("P0"); 
+                    DownloadProgressEvent?.Invoke(progressValue);
+
                     int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), Timeout);
                     offset = 0; // 读完一次, 起始位置复位
 
@@ -209,10 +209,11 @@ namespace C2.Business.SSH
                     }
                    
                 }
-                // 下载100%
-                DownloadProgressEvent?.Invoke(100);
             }
             catch (Exception ex) { task.LastErrorMsg = ex.Message; return false; }
+
+            // 下载100%
+            DownloadProgressEvent?.Invoke("100%");
             return true;
         }
 

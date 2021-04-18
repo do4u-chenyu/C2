@@ -28,7 +28,7 @@ namespace C2.Utils
             if (string.IsNullOrEmpty(value)) return defaultValue;
             try
             {
-                return int.Parse(value);
+                return int.Parse(value.TrimEnd('%'));
             }
             catch
             {
