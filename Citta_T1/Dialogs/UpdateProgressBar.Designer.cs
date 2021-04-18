@@ -64,7 +64,7 @@ namespace C2.Dialogs
             // downloadSizeLabel
             // 
             this.downloadSizeLabel.AutoSize = true;
-            this.downloadSizeLabel.Location = new System.Drawing.Point(332, 13);
+            this.downloadSizeLabel.Location = new System.Drawing.Point(327, 13);
             this.downloadSizeLabel.Name = "downloadSizeLabel";
             this.downloadSizeLabel.Size = new System.Drawing.Size(0, 12);
             this.downloadSizeLabel.TabIndex = 4;
