@@ -14,7 +14,6 @@ namespace C2.Dialogs
     public partial class InputDataForm : Form
     {
         private static LogUtil log = LogUtil.GetInstance("InputDataForm"); // 获取日志模块
-        private string[] illegalCharacters = new string[] { "*", "\\", "/", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", " ", "\\t", "\\n", "\\r", ":" };
         private OpUtil.Encoding encoding = OpUtil.Encoding.GBK;
         private OpUtil.ExtType extType = OpUtil.ExtType.Unknow;
         private string fullFilePath;
@@ -59,12 +58,11 @@ namespace C2.Dialogs
             string ext;
             OpenFileDialog fd = new OpenFileDialog
             {
-                Filter = "files|*.txt;*.csv;*.bcp;*.xls;*.xlsx"
+                Filter = "数据文件|*.txt;*.csv;*.tsv;*.bcp;*.xls;*.xlsx|所有文件|*.*"
             };
-            if (this.gbkLable.Font.Bold)
-                this.encoding = OpUtil.Encoding.GBK;
-            else
-                this.encoding = OpUtil.Encoding.UTF8;
+
+            this.encoding = this.gbkLable.Font.Bold ? OpUtil.Encoding.GBK : OpUtil.Encoding.UTF8;
+
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 fullFilePath = fd.FileName;
