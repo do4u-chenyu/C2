@@ -8,15 +8,23 @@ namespace C2.Dialogs
         {
             InitializeComponent();
         }
-       
+        private string speed;
         public string Status { get => this.status.Text; set => this.status.Text = value; }
         public int MinimumValue { get => this.proBarDownload.Minimum; set => this.proBarDownload.Minimum = value; }
         public int MaximumValue { get => this.proBarDownload.Maximum; set => this.proBarDownload.Maximum = value; }
         public int CurrentValue { get => this.proBarDownload.Value; set => this.proBarDownload.Value = value; }
-        public string ProgressPercentage { get => this.speedValue.Text; set => this.speedValue.Text = value; }
+        public string ProgressPercentage 
+        {
+            get => speed;
+            set
+            {
+                speed = value;
+                this.speedValue.Text = "下载进度:" + value;
+            }
+        }
         public int ProgressValue { get; set; }
         public void SetFileLength(string value) { this.downloadSizeLabel.Text = "文件大小:" + value; }
-        public void SetDownloadSpeed(string value) { System.Console.WriteLine("下载速度:" + value); }
+        public void SetDownloadSpeed(string value) { this.downloadSpeedLabel.Text = "下载速度:" + value; }
 
         private void UpdateProgressBar_FormClosing(object sender, FormClosingEventArgs e)
         {

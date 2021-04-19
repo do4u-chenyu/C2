@@ -34,6 +34,7 @@ namespace C2.Dialogs
             this.speedValue = new System.Windows.Forms.Label();
             this.status = new System.Windows.Forms.Label();
             this.downloadSizeLabel = new System.Windows.Forms.Label();
+            this.downloadSpeedLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // proBarDownload
@@ -61,10 +62,18 @@ namespace C2.Dialogs
             this.status.TabIndex = 3;
             this.status.Text = "下载中...";
             // 
+            // downloadSpeedLabel
+            // 
+            this.downloadSpeedLabel.AutoSize = true;
+            this.downloadSpeedLabel.Location = new System.Drawing.Point(119, 60);
+            this.downloadSpeedLabel.Name = "downloadSpeedLabel";
+            this.downloadSpeedLabel.Size = new System.Drawing.Size(0, 12);
+            this.downloadSpeedLabel.TabIndex = 5;
+            // 
             // downloadSizeLabel
             // 
             this.downloadSizeLabel.AutoSize = true;
-            this.downloadSizeLabel.Location = new System.Drawing.Point(327, 13);
+            this.downloadSizeLabel.Location = new System.Drawing.Point(235, 60);
             this.downloadSizeLabel.Name = "downloadSizeLabel";
             this.downloadSizeLabel.Size = new System.Drawing.Size(0, 12);
             this.downloadSizeLabel.TabIndex = 4;
@@ -77,6 +86,7 @@ namespace C2.Dialogs
             this.Controls.Add(this.status);
             this.Controls.Add(this.speedValue);
             this.Controls.Add(this.proBarDownload);
+            this.Controls.Add(this.downloadSpeedLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -96,5 +106,6 @@ namespace C2.Dialogs
         private System.Windows.Forms.Label speedValue;
         private System.Windows.Forms.Label status;
         private System.Windows.Forms.Label downloadSizeLabel;
+        private System.Windows.Forms.Label downloadSpeedLabel;
     }
 }

@@ -25,7 +25,7 @@ namespace C2.Dialogs
             long bytesRead = count - left;
             long speed = (long)Math.Abs(bytesRead / secondsSpan);
             // TODO 去掉噪音数据
-            this.SetDownloadSpeed(FormatLength(speed));
+            this.SetDownloadSpeed(FormatLength(speed) + "/s");
 
             time = DateTime.Now;
             count = left;
