@@ -309,7 +309,7 @@ class Airport:
                 '/home/search/sbin/queryclient',
                 '--server', '127.0.0.1',
                 '--port', '9870',
-                '--querystring', '"{}"'.format(keyWords),
+                '--querystring', '"{0}"'.format(keyWords),
                 '--start', self.startTime,
                 '--end', self.endTime,
                 '--contextlen', '1000',
@@ -409,8 +409,8 @@ def init_logger(logname,filename,logger_level = logging.INFO):
 
 def zip_result(DATA_PATH,ZIP_PATH,type='no'):
     if type == 'yes':
-        cmd = ['tar', '-zcvf -', DATA_PATH[2:], '--remove-files |openssl des3 -salt -k', PASSWORD, '|dd of={}'.format(ZIP_PATH[2:])]
-        LOGGER.info('cmd:{}'.format(' '.join(cmd)))
+        cmd = ['tar', '-zcvf -', DATA_PATH[2:], '--remove-files |openssl des3 -salt -k', PASSWORD, '|dd of={0}'.format(ZIP_PATH[2:])]
+        LOGGER.info('cmd:{0}'.format(' '.join(cmd)))
         pipe = Popen(' '.join(cmd),shell=True,stdout=PIPE)
     else:
         pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:],  '--remove-files'], stdout=PIPE, stderr=PIPE)
@@ -451,14 +451,22 @@ def encrypTion(path):
 
 def main():
     LOGGER.info('START AIRPORT QUERY BATCH....')
-    ap_path = os.path.join(DATA_PATH,"_queryResult_plane_"+startTime+"_"+endTime)
+    ap_path = os.path.join(DATA_PATH, areacode +  "_queryResult_plane_"+startTime+"_"+endTime)
     init_path(ap_path)
     ap = Airport(ap_path,startTime,endTime,ALL_ITEMS)
     ap.run_query()
     LOGGER.info('END AIRPORT QUERY BATCH')
+    
     zip_result(ap_path,ap_path+'.tgz.tmp')
-    ZIP_SUCCEED = areacode +  ZIP_PATH[2:].replace('.tmp','')
+    ZIP_SUCCEED =ap_path + '.tgz'
     os.rename(ap_path+'.tgz.tmp',ZIP_SUCCEED)
+
+    ZIP_PATH = DATA_PATH + startTime + '_' + endTime +  '.tgz.tmp'
+    zip_result(DATA_PATH,ZIP_PATH)
+    #encrypTion(ZIP_PATH)
+    ZIP_SUCCEED = areacode +  ZIP_PATH[2:].replace('.tmp','')
+    os.rename(ZIP_PATH,ZIP_SUCCEED)
+
 if __name__ == '__main__':
     ##Program description
     usage = 'python bathquery_db_password.py --start [start_time] --end [end_time] --areacode [areacode]'

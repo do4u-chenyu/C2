@@ -82,7 +82,7 @@ class Scheduler:
         LOGGER.info('queryWords: '+ str(self.queryWords))
         for line in self.queryWords:
                 self.queryclient_keyWordQueue.put(line)  #TODO
-        LOGGER.info("keyword query group number：{}".format(len(self.queryWords)))
+        LOGGER.info("keyword query group number：{0}".format(len(self.queryWords)))
             
     def scheduling(self):
         print "启动写入线程"
@@ -129,7 +129,7 @@ class Query(Thread):
             self.get_num += 1
             self.queryClient(key_word)
             queryEnd = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-            LOGGER.info('query Time:{}_{}'.format(queryStart,queryEnd))
+            LOGGER.info('query Time:{0}_{1}'.format(queryStart,queryEnd))
             self.queryclient_keyWordQueue.task_done()  # 
 
     def queryClient(self, key_word):
@@ -148,19 +148,19 @@ class Query(Thread):
         LOGGER.info("""
         Start query
         query config:
-        start_time:{}
-        end_time:{}
-        keywords:{}
+        start_time:{0}
+        end_time:{1}
+        keywords:{2}
         """.format(startTime, endTime, key_word.decode('gbk').encode('utf8')))
         if '=' not in key_word:
             dbfilter = '\'' + ' OR '.join(['"' + value + '"' +  ' in _REFERER'  for value in  LOGIN_VALUE]) + '\''
             cmd = cmd + ['--dbfilter',dbfilter]
-        _cmd = ". /home/search/search_profile && {}".format(" ".join(cmd))
-        LOGGER.info("cmd: {}".format(_cmd))
+        _cmd = ". /home/search/search_profile && {0}".format(" ".join(cmd))
+        LOGGER.info("cmd: {0}".format(_cmd))
         req = Popen(_cmd, shell=True, stdout=PIPE) 
         for line in req.stdout:
             if 'query finished' in line:
-                LOGGER.info('queryCmd:' + ". /home/search/search_profile && {}".format(" ".join(cmd)) + '-----' +line.strip())
+                LOGGER.info('queryCmd:' + ". /home/search/search_profile && {0}".format(" ".join(cmd)) + '-----' +line.strip())
             if self.queryContentFlag:
                 self.content[self.configDict.get('_QUERY_CONTENT', -1)] += (';'+line.strip())
             if ":" in line:
@@ -378,24 +378,24 @@ def queryclient(keywords, start_time, end_time, cont_item, end_item, items,
         '/home/search/sbin/queryclient',
         '--server', serverIP,
         '--port', '9870',
-        '--querystring', '"{}"'.format(keywords),
+        '--querystring', '"{0}"'.format(keywords),
         '--start', start_time,
         '--end', end_time,
         '--contextlen', contextlen,
         '--maxcount', max_count
     ]
-    _cmd = '. /home/search/search_profile && {}'.format(' '.join(cmd))
-    LOGGER.info("cmd: {}".format(_cmd))
+    _cmd = '. /home/search/search_profile && {0}'.format(' '.join(cmd))
+    LOGGER.info("cmd: {0}".format(_cmd))
     req = Popen(_cmd, shell=True, stdout=PIPE)
-    LOGGER.debug("queryclient pid: {}".format(req.pid))
+    LOGGER.debug("queryclient pid: {0}".format(req.pid))
     LOGGER.info("""
     Start query
     query config:
-        start_time:{}
-        end_time:{}
-        keywords:{}
-        contextlen:{}
-        maxcount:{}
+        start_time:{0}
+        end_time:{1}
+        keywords:{2}
+        contextlen:{3}
+        maxcount:{4}
     """.format(start_time, end_time, keywords.decode('gbk').encode('utf8'),
                contextlen, max_count))
 
@@ -449,9 +449,9 @@ def multi_query(start_time_1, end_time_1,  start_time_2,
     }
     LOGGER.info(
         "Query shehuang Email: \n"
-        "\tkeywords: {}, \n"
-        "\tstart_time: {}, \n"
-        "\tend_time: {}, \n".format(
+        "\tkeywords: {0}, \n"
+        "\tstart_time: {1}, \n"
+        "\tend_time: {2}, \n".format(
            query_config['keywords'].decode("gbk").encode("utf8"), 
            start_time_1, end_time_1, 
         ))
@@ -463,7 +463,7 @@ def multi_query(start_time_1, end_time_1,  start_time_2,
             continue
         counter += 1
         emailDicts += [data]
-    LOGGER.info("数据量：{}".format(counter))
+    LOGGER.info("数据量：{0}".format(counter))
     data_type = 'PIC'
     query_config = {
         'keywords': ITEMS[data_type]["key_words"],
@@ -503,7 +503,7 @@ def multi_query(start_time_1, end_time_1,  start_time_2,
         data['MD5'] = str(authAccount) + ':' + str(username) + ':' + str(userid)
         picDicts += [data]
         counter += 1
-    LOGGER.info("数据量：{}".format(counter))
+    LOGGER.info("数据量：{0}".format(counter))
         #break
     return emailDicts,picDicts
 
@@ -576,7 +576,7 @@ def picExact(picDicts):
 
 def zip_result(DATA_PATH,ZIP_PATH):
     LOGGER.info("ZIP DATA...")
-    _cmd = "tar -cvPf {} {} --remove-files".format(ZIP_PATH,DATA_PATH)
+    _cmd = "tar -cvPf {0} {1} --remove-files".format(ZIP_PATH,DATA_PATH)
     Popen(_cmd, shell=True).wait()
     
 def dataFormat(content):
@@ -656,7 +656,7 @@ def main():
     LOGGER.info('END QUERY BATCH\n START QUERY PIC')
     queryPicEmail()
     
-    zip_path = "{}_{}_{}_{}.tgz_".format(areacode,'queryResult_yellow',defaultStart[:14],defaultEnd[:14])
+    zip_path = "{0}_{1}_{2}_{3}.tgz_".format(areacode,'queryResult_yellow',defaultStart[:14],defaultEnd[:14])
     zip_result(dataPath,zip_path)
     #encrypTion(zip_path)
     succeedFilename = zip_path.strip('_') 
@@ -683,9 +683,9 @@ if __name__ == '__main__':
     parser.add_option('--area',dest = 'areaCode', help = areaInfo,default = '000000')
     ##get input Time  parameter
     option,args = parser.parse_args()
-    
-    os.mkdir(sys.path[0] + '/result')
-    dataPath = "{}/{}".format(option.outfilePath,'result')
+    if not os.path.exists(sys.path[0] + '/result'):
+        os.mkdir(sys.path[0] + '/result')
+    dataPath = option.outfilePath + '/result'
     serverIP = option.serverIp
     areacode = option.areaCode
     netDay   = option.netQueryDay
