@@ -90,7 +90,7 @@ namespace C2.Business.SSH
                 return;
 
             task.LastErrorMsg = String.Format("登陆堡垒机【{0}】成功，但未能跳转全文机【{1}】", task.BastionIP, task.SearchAgentIP);
-            shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
+            shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096*10);
             // 等待目标机准备好
             _ = shell.ReadLine(Timeout);
            
