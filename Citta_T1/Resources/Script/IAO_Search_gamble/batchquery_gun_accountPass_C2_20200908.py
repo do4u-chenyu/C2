@@ -36,7 +36,7 @@ def queryclient(data_path,keyWords,startTime,endTime,queryType):
             '--contextlen', '10000',
             '--maxcount', '2147483647'
         ]
-        req = Popen(". /home/search/search_profile && {}".format(" ".join(cmd)), shell=True, stdout=PIPE)
+        req = Popen(". /home/search/search_profile && {0}".format(" ".join(cmd)), shell=True, stdout=PIPE)
         LOGGER.info('QUERYTIME:{0}_{1}\n wait...'.format(startTime,endTime)) 
         #req = Popen(['/home/search/sbin/queryclient','--server','127.0.0.1','--port', '9870','--querystring', keyWords,'--start', startTime,'--end', endTime,'--contextlen','10000','--maxcount', '10000'],stdout=PIPE)
         for line in req.stdout:
@@ -220,7 +220,7 @@ def save(items,keyWords,data_path,path,querytype,startTime,endTime):
     with open(join(data_path,path),'w') as f:
         f.write('\t'.join(items)+'\n')
         for data in queryclient(data_path,keyWords,startTime,endTime,querytype):
-            auth = list(set(auth + [data.get('AUTH_ACCOUNT','')])-{''})
+            auth = list(set(auth + [data.get('AUTH_ACCOUNT','')] - [('']}))
             f.write('\t'.join([data.get(item,'') for item in items]) + '\n')
     return auth   
 
