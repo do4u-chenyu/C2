@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace C2.Dialogs
 {
@@ -228,6 +229,7 @@ namespace C2.Dialogs
             UserModelTabPage_Load();
             PythonConfigTabPage_Load();
             PluginsConfigTabPage_Load();
+            WFDConfigTabPage_Load();
         }
 
         private void PluginsConfigTabPage_Load()
@@ -679,6 +681,56 @@ namespace C2.Dialogs
             Close();
         }
 
+        private void WFDCancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
+        private void WFDOKButton_Click(object sender, EventArgs e)
+        {
+            //检验输入是否正确，并修改配置文件
+            Close();
+        }
+
+        private void WFDResetButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void WFDConfigTabPage_Load()
+        {
+            /*  初始化
+             *  
+             *  判断本地是否有配置文件，配置文件中是否有该字段，该字段是否有值？
+             *     有值  ->  填入首选项
+             *     其他  ->  默认值（有个默认值）
+             */
+            if (!LoadXmlWFDConfig())
+                return;
+            
+        }
+
+        private bool LoadXmlWFDConfig()
+        {
+            string xmlPath = Path.Combine(Global.WorkspaceDirectory, Global.GetUsername(), "侦察兵", "WFDTasks.xml");
+            if (!File.Exists(xmlPath))
+                return false;
+
+            XmlDocument xDoc = new XmlDocument();
+            try
+            {
+                xDoc.Load(xmlPath);
+                xDoc.SelectNodes(@"WFDTasks/task");
+
+
+
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
