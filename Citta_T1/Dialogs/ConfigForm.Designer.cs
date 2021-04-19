@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.pythonConfigPage = new System.Windows.Forms.TabPage();
             this.chosenPythonLable = new System.Windows.Forms.Label();
@@ -111,6 +111,19 @@
             this.label9 = new System.Windows.Forms.Label();
             this.pluginsPortTB = new System.Windows.Forms.TextBox();
             this.pluginsHostTB = new System.Windows.Forms.TextBox();
+            this.WFDConfigPage = new System.Windows.Forms.TabPage();
+            this.WFDResetButton = new System.Windows.Forms.Button();
+            this.WFDInfoTB = new System.Windows.Forms.TextBox();
+            this.WFDScreenshotTB = new System.Windows.Forms.TextBox();
+            this.WFDResultTB = new System.Windows.Forms.TextBox();
+            this.WFDClassifierTB = new System.Windows.Forms.TextBox();
+            this.WFDLoginTB = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.WFDCancelButton = new System.Windows.Forms.Button();
+            this.WFDOKButton = new System.Windows.Forms.Button();
             this.userModelConfigPage = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -162,6 +175,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.installedDGV)).BeginInit();
             this.HostSubPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.WFDConfigPage.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.checkNewVersion.SuspendLayout();
             this.newVersion.SuspendLayout();
@@ -174,6 +188,7 @@
             this.mainTabControl.Controls.Add(this.pythonConfigPage);
             this.mainTabControl.Controls.Add(this.gisMapConfigPage);
             this.mainTabControl.Controls.Add(this.pluginsConfigPage);
+            this.mainTabControl.Controls.Add(this.WFDConfigPage);
             this.mainTabControl.Controls.Add(this.userModelConfigPage);
             this.mainTabControl.Controls.Add(this.checkNewVersion);
             this.mainTabControl.Controls.Add(this.aboutConfigPage);
@@ -260,14 +275,14 @@
             this.interpreterFFPColumn,
             this.aliasColumn,
             this.chosenColumn});
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dataGridView.Location = new System.Drawing.Point(6, 93);
             this.dataGridView.MultiSelect = false;
@@ -286,8 +301,8 @@
             // interpreterFFPColumn
             // 
             this.interpreterFFPColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.interpreterFFPColumn.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.interpreterFFPColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.interpreterFFPColumn.FillWeight = 320F;
             this.interpreterFFPColumn.HeaderText = "虚拟机路径";
             this.interpreterFFPColumn.Name = "interpreterFFPColumn";
@@ -298,8 +313,8 @@
             // 
             // aliasColumn
             // 
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.aliasColumn.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.aliasColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.aliasColumn.FillWeight = 75F;
             this.aliasColumn.HeaderText = "别名";
             this.aliasColumn.Name = "aliasColumn";
@@ -409,10 +424,10 @@
             this.tabPage1.Text = "百度地图(外网)";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // baiduVerAPITB
+            // baiduAPIKey
             // 
             this.baiduAPIKey.Location = new System.Drawing.Point(104, 14);
-            this.baiduAPIKey.Name = "baiduVerAPITB";
+            this.baiduAPIKey.Name = "baiduAPIKey";
             this.baiduAPIKey.Size = new System.Drawing.Size(460, 23);
             this.baiduAPIKey.TabIndex = 16;
             this.toolTip1.SetToolTip(this.baiduAPIKey, "百度地图服务所需的Key");
@@ -740,14 +755,14 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewCheckBoxColumn2,
             this.Column1});
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle33.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.availableDGV.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.availableDGV.DefaultCellStyle = dataGridViewCellStyle6;
             this.availableDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.availableDGV.Location = new System.Drawing.Point(3, 6);
             this.availableDGV.MultiSelect = false;
@@ -764,8 +779,8 @@
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn3.FillWeight = 320F;
             this.dataGridViewTextBoxColumn3.HeaderText = "插件";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
@@ -776,8 +791,8 @@
             // 
             // dataGridViewTextBoxColumn4
             // 
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn4.FillWeight = 75F;
             this.dataGridViewTextBoxColumn4.HeaderText = "版本";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
@@ -830,14 +845,14 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewCheckBoxColumn1});
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle36.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.installedDGV.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.installedDGV.DefaultCellStyle = dataGridViewCellStyle9;
             this.installedDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.installedDGV.Location = new System.Drawing.Point(3, 6);
             this.installedDGV.MultiSelect = false;
@@ -853,8 +868,8 @@
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewTextBoxColumn1.FillWeight = 320F;
             this.dataGridViewTextBoxColumn1.HeaderText = "插件";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -865,8 +880,8 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewTextBoxColumn2.FillWeight = 75F;
             this.dataGridViewTextBoxColumn2.HeaderText = "版本";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -985,6 +1000,136 @@
             this.pluginsHostTB.Size = new System.Drawing.Size(371, 23);
             this.pluginsHostTB.TabIndex = 0;
             this.pluginsHostTB.Text = "218.94.117.234";
+            // 
+            // WFDConfigPage
+            // 
+            this.WFDConfigPage.Controls.Add(this.WFDResetButton);
+            this.WFDConfigPage.Controls.Add(this.WFDInfoTB);
+            this.WFDConfigPage.Controls.Add(this.WFDScreenshotTB);
+            this.WFDConfigPage.Controls.Add(this.WFDResultTB);
+            this.WFDConfigPage.Controls.Add(this.WFDClassifierTB);
+            this.WFDConfigPage.Controls.Add(this.WFDLoginTB);
+            this.WFDConfigPage.Controls.Add(this.label29);
+            this.WFDConfigPage.Controls.Add(this.label28);
+            this.WFDConfigPage.Controls.Add(this.label27);
+            this.WFDConfigPage.Controls.Add(this.label25);
+            this.WFDConfigPage.Controls.Add(this.WFDCancelButton);
+            this.WFDConfigPage.Controls.Add(this.WFDOKButton);
+            this.WFDConfigPage.Location = new System.Drawing.Point(4, 26);
+            this.WFDConfigPage.Name = "WFDConfigPage";
+            this.WFDConfigPage.Padding = new System.Windows.Forms.Padding(3);
+            this.WFDConfigPage.Size = new System.Drawing.Size(634, 380);
+            this.WFDConfigPage.TabIndex = 7;
+            this.WFDConfigPage.Text = "网络侦察兵";
+            this.WFDConfigPage.UseVisualStyleBackColor = true;
+            // 
+            // WFDResetButton
+            // 
+            this.WFDResetButton.Location = new System.Drawing.Point(364, 349);
+            this.WFDResetButton.Name = "WFDResetButton";
+            this.WFDResetButton.Size = new System.Drawing.Size(75, 23);
+            this.WFDResetButton.TabIndex = 15;
+            this.WFDResetButton.Text = "重置";
+            this.WFDResetButton.UseVisualStyleBackColor = true;
+            this.WFDResetButton.Click += new System.EventHandler(this.WFDResetButton_Click);
+            // 
+            // WFDInfoTB
+            // 
+            this.WFDInfoTB.Location = new System.Drawing.Point(8, 238);
+            this.WFDInfoTB.Multiline = true;
+            this.WFDInfoTB.Name = "WFDInfoTB";
+            this.WFDInfoTB.ReadOnly = true;
+            this.WFDInfoTB.Size = new System.Drawing.Size(620, 81);
+            this.WFDInfoTB.TabIndex = 14;
+            this.WFDInfoTB.Text = "网络侦察兵是。。。";
+            // 
+            // WFDScreenshotTB
+            // 
+            this.WFDScreenshotTB.Location = new System.Drawing.Point(128, 176);
+            this.WFDScreenshotTB.Name = "WFDScreenshotTB";
+            this.WFDScreenshotTB.Size = new System.Drawing.Size(463, 23);
+            this.WFDScreenshotTB.TabIndex = 13;
+            this.WFDScreenshotTB.Text = "https://113.31.119.85:53374/apis/Screenshot";
+            // 
+            // WFDResultTB
+            // 
+            this.WFDResultTB.Location = new System.Drawing.Point(128, 126);
+            this.WFDResultTB.Name = "WFDResultTB";
+            this.WFDResultTB.Size = new System.Drawing.Size(463, 23);
+            this.WFDResultTB.TabIndex = 12;
+            this.WFDResultTB.Text = "https://113.31.119.85:53374/apis/detection/task/result";
+            // 
+            // WFDClassifierTB
+            // 
+            this.WFDClassifierTB.Location = new System.Drawing.Point(128, 77);
+            this.WFDClassifierTB.Name = "WFDClassifierTB";
+            this.WFDClassifierTB.Size = new System.Drawing.Size(463, 23);
+            this.WFDClassifierTB.TabIndex = 11;
+            this.WFDClassifierTB.Text = "https://113.31.119.85:53374/apis/pro_classifier_api";
+            // 
+            // WFDLoginTB
+            // 
+            this.WFDLoginTB.Location = new System.Drawing.Point(128, 28);
+            this.WFDLoginTB.Name = "WFDLoginTB";
+            this.WFDLoginTB.Size = new System.Drawing.Size(463, 23);
+            this.WFDLoginTB.TabIndex = 10;
+            this.WFDLoginTB.Text = "https://113.31.119.85:53374/apis/Login";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(38, 179);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(68, 17);
+            this.label29.TabIndex = 9;
+            this.label29.Text = "获取截图：";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(38, 129);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(68, 17);
+            this.label28.TabIndex = 8;
+            this.label28.Text = "获取结果：";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(38, 80);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(68, 17);
+            this.label27.TabIndex = 7;
+            this.label27.Text = "任务下发：";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(38, 31);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(68, 17);
+            this.label25.TabIndex = 6;
+            this.label25.Text = "登陆验证：";
+            // 
+            // WFDCancelButton
+            // 
+            this.WFDCancelButton.Location = new System.Drawing.Point(551, 349);
+            this.WFDCancelButton.Name = "WFDCancelButton";
+            this.WFDCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.WFDCancelButton.TabIndex = 5;
+            this.WFDCancelButton.Text = "取消";
+            this.WFDCancelButton.UseVisualStyleBackColor = true;
+            this.WFDCancelButton.Click += new System.EventHandler(this.WFDCancelButton_Click);
+            // 
+            // WFDOKButton
+            // 
+            this.WFDOKButton.Location = new System.Drawing.Point(458, 349);
+            this.WFDOKButton.Name = "WFDOKButton";
+            this.WFDOKButton.Size = new System.Drawing.Size(75, 23);
+            this.WFDOKButton.TabIndex = 4;
+            this.WFDOKButton.Text = "确认";
+            this.WFDOKButton.UseVisualStyleBackColor = true;
+            this.WFDOKButton.Click += new System.EventHandler(this.WFDOKButton_Click);
             // 
             // userModelConfigPage
             // 
@@ -1368,6 +1513,8 @@
             this.HostSubPage.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.WFDConfigPage.ResumeLayout(false);
+            this.WFDConfigPage.PerformLayout();
             this.userModelConfigPage.ResumeLayout(false);
             this.userModelConfigPage.PerformLayout();
             this.checkNewVersion.ResumeLayout(false);
@@ -1489,5 +1636,18 @@
         private System.Windows.Forms.TextBox baiduAPIKey;
         private System.Windows.Forms.Label currentVersion;
         private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TabPage WFDConfigPage;
+        private System.Windows.Forms.Button WFDCancelButton;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox WFDInfoTB;
+        private System.Windows.Forms.TextBox WFDScreenshotTB;
+        private System.Windows.Forms.TextBox WFDResultTB;
+        private System.Windows.Forms.TextBox WFDClassifierTB;
+        private System.Windows.Forms.TextBox WFDLoginTB;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button WFDResetButton;
+        private System.Windows.Forms.Button WFDOKButton;
     }
 }
