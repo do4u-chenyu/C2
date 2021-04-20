@@ -3405,20 +3405,7 @@
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>$(SolutionDir)tools\zip\zip.exe  -f $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py.zip  $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py
-
-
-$(SolutionDir)tools\zip\zip.exe  -f $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_Test_Running.py.zip  $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_Test_Running.py  
-
-
-$(SolutionDir)tools\zip\zip.exe  -f $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py.zip  $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py  
-
-
-$(SolutionDir)tools\zip\zip.exe  -f $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py.zip  $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py  
-
-
-$(SolutionDir)tools\zip\zip.exe  -f $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py.zip  $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py  
-set errorlevel=0
-</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>
