@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchToolkitForm));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.interfaceIPTB = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.connectTestButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -71,6 +74,9 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.interfaceIPTB);
+            this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.connectTestButton);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
@@ -89,16 +95,44 @@
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(609, 165);
+            this.groupBox2.Size = new System.Drawing.Size(613, 165);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "堡垒机配置";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.label10.Location = new System.Drawing.Point(434, 78);
+            this.label10.Margin = new System.Windows.Forms.Padding(0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(177, 19);
+            this.label10.TabIndex = 50;
+            this.label10.Text = "选填,需要从界面机2次跳转时";
+            // 
+            // interfaceIPTB
+            // 
+            this.interfaceIPTB.Location = new System.Drawing.Point(296, 75);
+            this.interfaceIPTB.Name = "interfaceIPTB";
+            this.interfaceIPTB.Size = new System.Drawing.Size(136, 25);
+            this.interfaceIPTB.TabIndex = 49;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(244, 77);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 19);
+            this.label9.TabIndex = 48;
+            this.label9.Text = "界面机";
             // 
             // connectTestButton
             // 
             this.connectTestButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.connectTestButton.ForeColor = System.Drawing.Color.Navy;
-            this.connectTestButton.Location = new System.Drawing.Point(254, 115);
+            this.connectTestButton.Location = new System.Drawing.Point(247, 115);
             this.connectTestButton.Name = "connectTestButton";
             this.connectTestButton.Size = new System.Drawing.Size(68, 27);
             this.connectTestButton.TabIndex = 46;
@@ -112,7 +146,7 @@
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("宋体", 8F);
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(429, 40);
+            this.label8.Location = new System.Drawing.Point(435, 40);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(11, 11);
             this.label8.TabIndex = 47;
@@ -159,11 +193,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label2.Location = new System.Drawing.Point(439, 35);
+            this.label2.Location = new System.Drawing.Point(472, 36);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(165, 19);
+            this.label2.Size = new System.Drawing.Size(126, 19);
             this.label2.TabIndex = 43;
-            this.label2.Text = "申请的堡垒机用户名和密码";
+            this.label2.Text = "堡垒机用户名和密码";
             // 
             // label14
             // 
@@ -194,7 +228,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(250, 35);
+            this.label16.Location = new System.Drawing.Point(257, 35);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(35, 19);
             this.label16.TabIndex = 4;
@@ -219,7 +253,7 @@
             // 
             // passwordTB
             // 
-            this.passwordTB.Location = new System.Drawing.Point(290, 34);
+            this.passwordTB.Location = new System.Drawing.Point(296, 34);
             this.passwordTB.Name = "passwordTB";
             this.passwordTB.PasswordChar = '*';
             this.passwordTB.Size = new System.Drawing.Size(136, 25);
@@ -248,7 +282,7 @@
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(609, 169);
+            this.groupBox1.Size = new System.Drawing.Size(613, 169);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模型配置";
@@ -359,7 +393,7 @@
             this.panelCenter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelCenter.Location = new System.Drawing.Point(0, 169);
             this.panelCenter.Name = "panelCenter";
-            this.panelCenter.Size = new System.Drawing.Size(609, 165);
+            this.panelCenter.Size = new System.Drawing.Size(613, 165);
             this.panelCenter.TabIndex = 3;
             // 
             // panelBottom
@@ -370,7 +404,7 @@
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(0, 334);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(609, 50);
+            this.panelBottom.Size = new System.Drawing.Size(613, 50);
             this.panelBottom.TabIndex = 4;
             // 
             // cancelButton
@@ -403,7 +437,7 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(609, 169);
+            this.panelTop.Size = new System.Drawing.Size(613, 169);
             this.panelTop.TabIndex = 2;
             // 
             // saveFileDialog
@@ -416,7 +450,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 384);
+            this.ClientSize = new System.Drawing.Size(613, 384);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.panelCenter);
             this.Controls.Add(this.panelBottom);
@@ -473,5 +507,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Button connectTestButton;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox interfaceIPTB;
+        private System.Windows.Forms.Label label9;
     }
 }

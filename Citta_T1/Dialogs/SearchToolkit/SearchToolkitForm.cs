@@ -32,37 +32,41 @@ namespace C2.SearchToolkit
                 this.remoteWorkspaceTB,
                 this.taskModelComboBox,
                 this.taskNameTB,
-                this.connectTestButton
+                this.connectTestButton,
+                this.interfaceIPTB
             };
        
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
         }
 
 
-        public SearchToolkitForm GenLastInfo(string bIP, string sIP, string name)
+        public SearchToolkitForm GenLastInfo(string bIP, string sIP, string iIP, string name)
         {
             if (!string.IsNullOrEmpty(bIP))
                 this.bastionIPTB.Text = bIP;
             if (!string.IsNullOrEmpty(sIP))
                 this.searchAgentIPTB.Text = sIP;
+            if (!string.IsNullOrEmpty(iIP))
+                this.interfaceIPTB.Text = iIP;
             if (!string.IsNullOrEmpty(name))
                 this.usernameTB.Text = name;
             return this;
         }
         private SearchTaskInfo GenTaskInfo()
         {
-           String value = String.Join(OpUtil.TabSeparatorString, new string[] {
+            String value = String.Join(OpUtil.TabSeparatorString, new string[] {
                                             this.taskNameTB.Text,  // 刚开始创建时，没有ID
                                             this.taskNameTB.Text,
-                                            DateTime.Now.ToString("yyyyMMddHHmmss"), 
+                                            DateTime.Now.ToString("yyyyMMddHHmmss"),
                                             this.taskModelComboBox.Text,
                                             "RUNNING",  // NULL, RUNNING, DONE, FAIL, TIMEOUT, CONNECT_FAIL
                                             this.usernameTB.Text,
                                             this.passwordTB.Text,
                                             this.bastionIPTB.Text,
                                             this.searchAgentIPTB.Text,
-                                            this.remoteWorkspaceTB.Text
-            });
+                                            this.remoteWorkspaceTB.Text,
+                                            this.interfaceIPTB.Text
+            }) ;
 
             return SearchTaskInfo.StringToTaskInfo(value);
         }
@@ -146,6 +150,9 @@ namespace C2.SearchToolkit
 
         private bool ValidateIP(String value)
         {
+            if (String.IsNullOrEmpty(value))  // 有专门的不为空检测，为空时，认为符号要求, 用于可选项的校验
+                return true;
+
             return Regex.IsMatch(value, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$") && 
                 ConvertUtil.TryParseIntList(value, '.').TrueForAll(item => item >= 0 && item <= 255);
         }
@@ -181,6 +188,11 @@ namespace C2.SearchToolkit
             return ValidateIP(this.searchAgentIPTB.Text);
         }
 
+        private bool ValidateInterfaceIP()
+        {
+            return ValidateIP(this.interfaceIPTB.Text);
+        }
+
         private bool ValidateUsername()
         {
             String value = this.usernameTB.Text;
@@ -205,6 +217,7 @@ namespace C2.SearchToolkit
             validateMessage = String.Empty;
             // 从后往前验证
             validateMessage = ValidateSearchAgentIP() ? validateMessage : "全文机【IP】格式不对";
+            validateMessage = ValidateInterfaceIP() ? validateMessage : "跳转机【IP】格式不对";
             validateMessage = ValidateBastionIP() ? validateMessage : "堡垒机【IP】格式不对";
             validateMessage = ValidatePassword() ? validateMessage : "堡垒机 【密码】  不能为空, 不能超过128个字符";
             validateMessage = ValidateUsername() ? validateMessage : "堡垒机 【用户名】不能为空, 不能超过128个字符";
@@ -236,6 +249,7 @@ namespace C2.SearchToolkit
             this.taskNameTB.Text = task.TaskName;
             this.bastionIPTB.Text = task.BastionIP;
             this.taskModelComboBox.Text = task.TaskModel;
+            this.interfaceIPTB.Text = task.InterfaceIP;
             this.searchAgentIPTB.Text = task.SearchAgentIP;
             this.remoteWorkspaceTB.Text = String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.TaskName, task.TaskCreateTime);
             this.taskStatusLabel.Text = task.TaskStatus;
