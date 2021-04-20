@@ -576,7 +576,7 @@ def picExact(picDicts):
 
 def zip_result(DATA_PATH,ZIP_PATH):
     LOGGER.info("ZIP DATA...")
-    _cmd = "tar -cvPf {0} {1} --remove-files".format(ZIP_PATH,DATA_PATH)
+    _cmd = "tar -zcvf {0} {1} --remove-files".format(ZIP_PATH,DATA_PATH)
     Popen(_cmd, shell=True).wait()
     
 def dataFormat(content):
