@@ -107,7 +107,7 @@ namespace FullTextGrammarAssistant
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(63, 180);
+            this.label1.Location = new System.Drawing.Point(64, 180);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 19);
@@ -124,6 +124,7 @@ namespace FullTextGrammarAssistant
             this.label2.Size = new System.Drawing.Size(61, 19);
             this.label2.TabIndex = 4;
             this.label2.Text = "关键词：";
+            this.toolTip1.SetToolTip(this.label2, "1)支持 AND, OR的组合查询;2)支持指定字段查询,如 HOST:www.baidu.com 就是只在Host字段中查询");
             // 
             // textBox1
             // 
@@ -310,12 +311,13 @@ namespace FullTextGrammarAssistant
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(38, 241);
+            this.label4.Location = new System.Drawing.Point(12, 241);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 19);
+            this.label4.Size = new System.Drawing.Size(100, 19);
             this.label4.TabIndex = 16;
-            this.label4.Text = "条件过滤：";
+            this.label4.Text = "条件二次过滤：";
+            this.toolTip1.SetToolTip(this.label4, "在关键词查出的结果集上进行二次过滤，对应全文的dbfilter功能；queryclient支持，Jar包不支持");
             // 
             // checkBox43
             // 
@@ -326,6 +328,7 @@ namespace FullTextGrammarAssistant
             this.checkBox43.Size = new System.Drawing.Size(108, 16);
             this.checkBox43.TabIndex = 26;
             this.checkBox43.Text = "关键词精确匹配";
+            this.toolTip1.SetToolTip(this.checkBox43, "查询关键词给套上双引号,表示不切词,不做停止字符处理,直接查关键词本身");
             this.checkBox43.UseVisualStyleBackColor = true;
             this.checkBox43.CheckedChanged += new System.EventHandler(this.checkBox43_CheckedChanged);
             // 
@@ -338,6 +341,7 @@ namespace FullTextGrammarAssistant
             this.checkBox44.Size = new System.Drawing.Size(120, 16);
             this.checkBox44.TabIndex = 25;
             this.checkBox44.Text = "过滤内容相似文件";
+            this.toolTip1.SetToolTip(this.checkBox44, "查询结果中前后内容相似的结果只取1条");
             this.checkBox44.UseVisualStyleBackColor = true;
             this.checkBox44.CheckedChanged += new System.EventHandler(this.checkBox44_CheckedChanged);
             // 
@@ -350,6 +354,7 @@ namespace FullTextGrammarAssistant
             this.checkBox45.Size = new System.Drawing.Size(72, 16);
             this.checkBox45.TabIndex = 24;
             this.checkBox45.Text = "加密文件";
+            this.toolTip1.SetToolTip(this.checkBox45, "主要指类似邮件协议中上传的附件中含有带密码的rar等类型压缩包");
             this.checkBox45.UseVisualStyleBackColor = true;
             this.checkBox45.CheckedChanged += new System.EventHandler(this.checkBox45_CheckedChanged);
             // 
@@ -374,6 +379,7 @@ namespace FullTextGrammarAssistant
             this.checkBox47.Size = new System.Drawing.Size(72, 16);
             this.checkBox47.TabIndex = 22;
             this.checkBox47.Text = "含有附件";
+            this.toolTip1.SetToolTip(this.checkBox47, "主要指邮件中带有附件");
             this.checkBox47.UseVisualStyleBackColor = true;
             this.checkBox47.CheckedChanged += new System.EventHandler(this.checkBox47_CheckedChanged);
             // 
@@ -486,12 +492,12 @@ namespace FullTextGrammarAssistant
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(15, 18);
+            this.label8.Location = new System.Drawing.Point(12, 18);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(100, 19);
             this.label8.TabIndex = 36;
-            this.label8.Text = "语法对应结果：";
+            this.label8.Text = "对应查询条件：";
             // 
             // button1
             // 
@@ -786,6 +792,7 @@ namespace FullTextGrammarAssistant
             this.tabPage1.Size = new System.Drawing.Size(551, 125);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "queryclient";
+            this.toolTip1.SetToolTip(this.tabPage1, "全文主节点自带的查询工具");
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // previewCmdText
@@ -810,7 +817,8 @@ namespace FullTextGrammarAssistant
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(551, 125);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "bachQueryAndExport_1.7.jar";
+            this.tabPage2.Text = "batchQueryAndExport_1.7.jar";
+            this.toolTip1.SetToolTip(this.tabPage2, "搞不清楚历史沿革的jar包查询全文工具");
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // textBox9

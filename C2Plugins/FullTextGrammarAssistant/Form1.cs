@@ -2,13 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FullTextGrammarAssistant
@@ -49,7 +44,7 @@ namespace FullTextGrammarAssistant
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.textBox1.Text = "hello AND world OR 你好";
+            this.textBox1.Text = "hello AND world OR 你好 AND _TEXT:login OR _HOST:www.baidu.com";
             this.textBox3.Text = DateTime.Now.AddYears(-1).ToString("yyyyMMddHHmmss");
             this.textBox4.Text = DateTime.Now.ToString("yyyyMMddHHmmss");
             this.comboBox1.SelectedIndex = 0;
@@ -169,7 +164,7 @@ namespace FullTextGrammarAssistant
         private void UpdatePreviewText()
         {
             this.jarTextList[0] = "java -jar batchQueryAndExport_1.7.jar --ip 15.42.118.1 --port 9870 --queryCount 10000 --resultPath /home/result";
-            this.previewTextList[0] = "/home/search/sbin/queryclient --server 127.0.0.1 --port 9871";
+            this.previewTextList[0] = ".   /home/search/search_profile\r\n/home/search/sbin/queryclient --server 127.0.0.1 --port 9871";
             string attrText1 = Attribute_filter(this.comboBox1.Text);
             string attrText2 = Attribute_filter(this.comboBox3.Text);
             string attrText3 = Attribute_filter(this.comboBox7.Text);
@@ -177,8 +172,8 @@ namespace FullTextGrammarAssistant
             string conText2 = Condition_filter(this.comboBox4.Text);
             string conText3 = Condition_filter(this.comboBox8.Text);
             this.previewTextList[5] = "--dbfilter " + attrText1 + " " + conText1 + " " + this.textBox2.Text + " " + this.comboBox5.Text + " " + attrText2 + " " + conText2 + " " + this.textBox5.Text + " " + this.comboBox6.Text + " " + attrText3 + " " + conText3 + " " + this.textBox6.Text;
-            this.previewCmdText.Text = String.Join(" ", this.previewTextList);
-            this.textBox9.Text = String.Join(" ", this.jarTextList);
+            this.previewCmdText.Text = String.Join(" ", this.previewTextList) + "\r\n\r\n#登陆全文主节点执行#全文主节点当前针对每个查询条件一次限制返回10W行";
+            this.textBox9.Text = String.Join(" ", this.jarTextList) + "\r\n\r\n#batchQueryAndExport_1.7.jar不支持全文的dbfilter语法\r\n##全文主节点当前针对每个查询条件一次限制返回10W行\r\n##batchQueryAndExport_1.7.jar不支持选择数据类型,只能查normal类型,不能查garbage类型#";
         }
 
         private string Condition_filter(string condition)
