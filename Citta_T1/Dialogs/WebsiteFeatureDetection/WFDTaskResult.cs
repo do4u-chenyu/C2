@@ -226,7 +226,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private async void SaveScreenshotsToLocal(List<WFDResult> results)
         {
-            if (!WFDWebAPI.GetInstance().ReAuthBeforeQuery())
+            if (results == null || results.Count == 0 || !WFDWebAPI.GetInstance().ReAuthBeforeQuery())
                 return;
 
             var dialog = new FolderBrowserDialog();
