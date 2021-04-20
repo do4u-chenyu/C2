@@ -11,6 +11,8 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
+        private static readonly LogUtil log = LogUtil.GetInstance("BastionAPI");
+
         private const int M40 = 1024 * 1024 * 40;
         private const int K8 = 1024 * 8;
         private const int K16 = K8 * 2;
@@ -63,7 +65,7 @@ namespace C2.Business.SSH
         {
             try 
             { 
-                ssh.Connect(); 
+                ssh.Connect();  // 登陆堡垒
             }   
             catch (Exception ex) 
             {
@@ -72,35 +74,70 @@ namespace C2.Business.SSH
      
             try 
             { 
-                Jump(); 
+                Jump();         // 跳转
             }
             catch (Exception ex)
             {
-                task.LastErrorMsg = String.Format("登陆【{0}】成功，跳转全文机【{1}】失败：{2}",
+                task.LastErrorMsg = String.Format("登陆【{0}】成功，1阶跳转全文机【{1}】失败：{2}",
                     ssh.ConnectionInfo.Host, 
                     task.SearchAgentIP, 
                     ex.Message);
             }
-                
+
+            try 
+            {
+                // 有些地方需要二次跳转
+                if (!task.InterfaceIP.IsEmpty())
+                    SSHJump();
+            }
+            catch (Exception ex)
+            {
+                task.LastErrorMsg = String.Format("登陆【{0}】成功，2阶跳转全文机【{1}】失败：{2}",
+                    ssh.ConnectionInfo.Host,
+                    task.SearchAgentIP,
+                    ex.Message);
+            }
+
+            // 登陆堡垒机成功了，但是在跳转全文机的过程中出现了问题
+            if (!Oops() && !CheckJumpOK())
+                task.LastErrorMsg = "登陆堡垒机成功了，但是在跳转全文机的过程中出现了问题";
+
             return this;
+        }
+
+        private bool CheckJumpOK()
+        {
+            return true; // 目前没有特别好的方法能够检测真正跳转成功
         }
         private void Jump()
         {
             if (Oops())
                 return;
 
-            task.LastErrorMsg = String.Format("登陆堡垒机【{0}】成功，但未能跳转全文机【{1}】", task.BastionIP, task.SearchAgentIP);
+            // 跳转的目标机器，如果是2次跳转的情况，第一层应该是界面机
+            String targetIP = task.InterfaceIP.IsEmpty() ? task.SearchAgentIP : task.InterfaceIP;
+
+            task.LastErrorMsg = String.Format("登陆堡垒机【{0}】成功，但未能跳转到下一层目标机器【{1}】", task.BastionIP, targetIP);
             shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
             // 等待目标机准备好
             _ = shell.ReadLine(Timeout);
            
             // 跳转到目标机器
-            shell.WriteLine(task.SearchAgentIP);
+            shell.WriteLine(targetIP);
             // 等待跳转成功,出现root用户提示符
             if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), Timeout))
                 return;
             task.LastErrorMsg = String.Empty; 
             _ = shell.Read(); // 清空buffer
+        }
+
+        private void SSHJump()
+        {
+            if (Oops())
+                return;
+            String targetIP = task.SearchAgentIP;
+            String command = String.Format(@"ssh -o ""StrictHostKeyChecking no"" root@{0}", targetIP); 
+            RunCommand(command, shell);
         }
 
         public void Close()
