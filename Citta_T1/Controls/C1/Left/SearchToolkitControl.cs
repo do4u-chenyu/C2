@@ -11,6 +11,7 @@ namespace C2.Controls.C1.Left
         public string bastionIP;
         public string searchAgentIP;
         public string username;
+        public string interfaceIP;
     };
     public partial class SearchToolkitControl : BaseLeftInnerPanel
     {
@@ -33,7 +34,7 @@ namespace C2.Controls.C1.Left
             if (e.Button != MouseButtons.Left)
                 return;
 
-            SearchTaskInfo task = new SearchToolkitForm().GenLastInfo(lastInfo.bastionIP, lastInfo.searchAgentIP, lastInfo.username)
+            SearchTaskInfo task = new SearchToolkitForm().GenLastInfo(lastInfo.bastionIP, lastInfo.searchAgentIP, lastInfo.interfaceIP, lastInfo.username)
                                                          .ShowTaskConfigDialog();
 
             if (task.IsEmpty())
@@ -42,6 +43,7 @@ namespace C2.Controls.C1.Left
             lastInfo.bastionIP = task.BastionIP;
             lastInfo.searchAgentIP = task.SearchAgentIP;
             lastInfo.username = task.Username;
+            lastInfo.interfaceIP = task.InterfaceIP;
 
             string message;
             if (taskManager.RunTask(task))

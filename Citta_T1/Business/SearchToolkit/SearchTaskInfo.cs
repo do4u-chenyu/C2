@@ -84,7 +84,8 @@ namespace C2.SearchToolkit
             "Password",
             "BastionIP",
             "SearchAgentIP",
-            "RemoteWorkspace"
+            "RemoteWorkspace",
+            "InterfaceIP"
         });
 
         public String Username { get; private set; }
@@ -93,6 +94,8 @@ namespace C2.SearchToolkit
         public String SearchAgentIP { get; private set; }
 
         public String RemoteWorkspace { get; private set; }
+
+        public String InterfaceIP { get; private set; }  // 这个是后期加的,为了兼容性只能追到屁股后面
 
         public String TaskModel { get; private set; }
 
@@ -106,13 +109,14 @@ namespace C2.SearchToolkit
 
         public String BastionInfo
         {
-            get => String.Format("用户名:{0}, 堡垒机IP:{1}, 全文机IP:{2}, 结果目录:{3}/{4}_{5}",
+            get => String.Format("用户名:{0}, 堡垒机IP:{1}, 全文机IP:{2}, 界面机{6} 结果目录:{3}/{4}_{5}",
                 Username,
                 BastionIP,
                 SearchAgentIP,
                 RemoteWorkspace,
                 TaskName,
-                TaskCreateTime);
+                TaskCreateTime,
+                InterfaceIP);
         }
 
 
@@ -133,7 +137,8 @@ namespace C2.SearchToolkit
                 EncryptPassword(Password),  // 密码要加密保存
                 BastionIP,
                 SearchAgentIP,
-                RemoteWorkspace
+                RemoteWorkspace,
+                InterfaceIP
             });
         }
 
@@ -172,7 +177,8 @@ namespace C2.SearchToolkit
                 Password = needDecryptPass ? DecryptPassword(buf[6]) : buf[6],  // 堡垒机密码加密保存,反序列化时解密
                 BastionIP = buf[7],
                 SearchAgentIP = buf[8],
-                RemoteWorkspace = buf[9]
+                RemoteWorkspace = buf[9],
+                InterfaceIP = buf.Length < 11 ? String.Empty : buf[10]  // 兼容早期版本
             };
 
             return taskInfo;
