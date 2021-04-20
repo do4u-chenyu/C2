@@ -21,17 +21,24 @@ namespace C2.Dialogs
 
             this.SetFileLength(FormatLength(fileLength));
 
-            Double secondsSpan = (DateTime.Now - time).TotalMilliseconds; 
+            Double secondsSpan = (DateTime.Now - time).TotalMilliseconds;
+            
+            if (secondsSpan < 1000)
+                return;
+
             long bytesRead = count - left;
             long speed = (long)Math.Max(0, Math.Abs(bytesRead * 1000 / secondsSpan));
 
 
             // TODO 去掉噪音数据
-            if (speed >= 0)
-                this.SetDownloadSpeed(FormatLength(speed) + "/s");
+            if (speed < 0)
+                return;
 
+           
+            this.SetDownloadSpeed(FormatLength(speed) + "/s");
             time = DateTime.Now;
             count = left;
+
             Application.DoEvents();
         }
         public BastionDownloadProgressBar(SearchTaskInfo task, String ffp)
