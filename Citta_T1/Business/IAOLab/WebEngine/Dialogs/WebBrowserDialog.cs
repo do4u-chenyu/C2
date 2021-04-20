@@ -495,6 +495,15 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 selectBossDialog = new SelectBossDialog(DataItems, ChartOptions, webBrowser1);
             if (selectBossDialog.ShowDialog() == DialogResult.OK)
             {
+                try
+                {
+                    WebBrowserConfig.GetBrowserVersion();
+                }
+                catch(Exception ex)
+                {
+                    HelpUtil.ShowMessageBox(ex.Message);
+                    return;
+                }
                 webBrowser1.Navigate(selectBossDialog.WebUrl);
                 ChartOptions = selectBossDialog.ChartOptions;
             }

@@ -63,14 +63,14 @@ namespace C2.IAOLab.WebEngine
                 {
                     version = ieKey.GetValue("Version");
                     if (null == version)
-                        throw new ApplicationException("Microsoft Internet Explorer is required!");
+                        throw new ApplicationException("请安装IE浏览器!");
                 }
                 int.TryParse(version.ToString().Split('.')[0], out browserVersion);
             }
             //如果小于7  
-            if (browserVersion < 7)
+            if (browserVersion < 9)
             {
-                throw new ApplicationException("不支持的浏览器版本!");
+                throw new ApplicationException("浏览器版本过低，请升级到IE9及9以上!");
             }
             return browserVersion;
         }
