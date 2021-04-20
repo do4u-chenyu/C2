@@ -25,6 +25,7 @@ namespace C2.Dialogs
             long bytesRead = count - left;
             long speed = (long)Math.Max(0, Math.Abs(bytesRead * 1000 / secondsSpan));
 
+
             // TODO 去掉噪音数据
             if (speed >= 0)
                 this.SetDownloadSpeed(FormatLength(speed) + "/s");
