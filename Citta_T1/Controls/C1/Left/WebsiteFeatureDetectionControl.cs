@@ -193,6 +193,13 @@ namespace C2.Controls.C1.Left
 
             private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
             {
+                //删除前先判断，未超24小时且非done状态时，不支持删除
+                if (!TaskInfo.IsOverTime() && TaskInfo.Status != WFDTaskStatus.Done)
+                {
+                    HelpUtil.ShowMessageBox("当前任务正在执行中，无法删除。");
+                    return;
+                }
+                    
                 DialogResult rs = MessageBox.Show(
                     String.Format("删除任务 {0}及结果文件, 继续删除请点击 \"确定\"", ButtonText),
                     "删除", MessageBoxButtons.OKCancel,MessageBoxIcon.Information);

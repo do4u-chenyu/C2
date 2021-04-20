@@ -54,8 +54,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (TaskInfo.Status == WFDTaskStatus.Done && File.Exists(TaskInfo.ResultFilePath) && LoadLocalResultsFillTable())
                 return;
 
-            int validityPeriodTime = 86400;
-            if (ConvertUtil.TryParseInt(ConvertUtil.TransToUniversalTime(DateTime.Now)) - ConvertUtil.TryParseInt(TaskInfo.TaskCreateTime) > validityPeriodTime)
+            if (TaskInfo.IsOverTime())
             {
                 HelpUtil.ShowMessageBox("任务已过期，请在下发24小时内获取结果。");
                 return;

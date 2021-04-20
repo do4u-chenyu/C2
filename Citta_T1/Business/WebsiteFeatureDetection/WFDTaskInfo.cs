@@ -47,5 +47,11 @@ namespace C2.Business.WebsiteFeatureDetection
             TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
             PreviewResults = new List<WFDResult>();
         }
+
+        public bool IsOverTime()
+        {
+            int validityPeriodTime = 86400;//24小时的换算
+            return ConvertUtil.TryParseInt(ConvertUtil.TransToUniversalTime(DateTime.Now)) - ConvertUtil.TryParseInt(TaskCreateTime) > validityPeriodTime;
+        }
     }
 }

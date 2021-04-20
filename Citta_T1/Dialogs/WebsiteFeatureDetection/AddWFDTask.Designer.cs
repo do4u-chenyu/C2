@@ -99,7 +99,7 @@
             // 
             // ofd
             // 
-            this.ofd.Filter = "\"files|*.txt;*.bcp;*.csv\"";
+            this.ofd.Filter = "数据文件|*.txt;*.bcp;*.csv;*.tsv|所有文件|*.*";
             // 
             // AddWFDTask
             // 
