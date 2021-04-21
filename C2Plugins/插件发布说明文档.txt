@@ -1,3 +1,5 @@
+作者: 卢琪,刘晓凤
+
 1、本地插件上传到服务器方式：
 
 ?	文件上传路径：服务器：10.1.126.4    /usr/local/phx/apache-tomcat-8.5.38/webapps/C2Plugins/packages
