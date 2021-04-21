@@ -502,7 +502,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 catch(Exception ex)
                 {
                     HelpUtil.ShowMessageBox(ex.Message);
-                    return;
                 }
                 webBrowser1.Navigate(selectBossDialog.WebUrl);
                 ChartOptions = selectBossDialog.ChartOptions;
