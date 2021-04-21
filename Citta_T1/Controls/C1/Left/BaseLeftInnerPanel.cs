@@ -90,8 +90,8 @@ namespace C2.Controls.C1.Left
             List<T> controls = new List<T>();
             foreach(Control ct in this.manageButtonPanel.Controls)
             {
-                if (ct is T)
-                    controls.Add((T)ct);
+                if (ct is T t)
+                    controls.Add(t);
             }
             return controls;
         }

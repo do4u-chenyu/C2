@@ -187,9 +187,9 @@ namespace C2
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(8, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(228, 36);
+            this.label1.Size = new System.Drawing.Size(255, 36);
             this.label1.TabIndex = 0;
-            this.label1.Text = "IAO单兵作战平台";
+            this.label1.Text = "IAO单兵作战工具箱";
             // 
             // leftMainMenuPanel
             // 
@@ -399,7 +399,6 @@ namespace C2
             this.mindMapControl.Location = new System.Drawing.Point(0, 0);
             this.mindMapControl.Margin = new System.Windows.Forms.Padding(4);
             this.mindMapControl.Name = "mindMapControl";
-            this.mindMapControl.Size = new System.Drawing.Size(185, 558);
             this.mindMapControl.TabIndex = 0;
             this.mindMapControl.Visible = false;
             // 
@@ -413,7 +412,6 @@ namespace C2
             this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
             this.dataSourceControl.Margin = new System.Windows.Forms.Padding(4);
             this.dataSourceControl.Name = "dataSourceControl";
-            this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
             this.dataSourceControl.Visible = false;
             // 
@@ -427,7 +425,6 @@ namespace C2
             this.iaoLabControl.Location = new System.Drawing.Point(0, 0);
             this.iaoLabControl.Margin = new System.Windows.Forms.Padding(4);
             this.iaoLabControl.Name = "iaoLabControl";
-            this.iaoLabControl.Size = new System.Drawing.Size(185, 558);
             this.iaoLabControl.TabIndex = 0;
             this.iaoLabControl.Visible = false;
             // 
@@ -440,7 +437,6 @@ namespace C2
             this.modelMarketControl.Location = new System.Drawing.Point(0, 0);
             this.modelMarketControl.Margin = new System.Windows.Forms.Padding(4);
             this.modelMarketControl.Name = "modelMarketControl";
-            this.modelMarketControl.Size = new System.Drawing.Size(185, 558);
             this.modelMarketControl.TabIndex = 0;
             this.modelMarketControl.Visible = false;
             // 
@@ -453,7 +449,6 @@ namespace C2
             this.websiteFeatureDetectionControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.websiteFeatureDetectionControl.Location = new System.Drawing.Point(0, 0);
             this.websiteFeatureDetectionControl.Name = "websiteFeatureDetectionControl";
-            this.websiteFeatureDetectionControl.Size = new System.Drawing.Size(185, 558);
             this.websiteFeatureDetectionControl.TabIndex = 0;
             this.websiteFeatureDetectionControl.Visible = false;
             // 
@@ -466,7 +461,6 @@ namespace C2
             this.searchToolkitControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchToolkitControl.Location = new System.Drawing.Point(0, 0);
             this.searchToolkitControl.Name = "searchToolkitControl";
-            this.searchToolkitControl.Size = new System.Drawing.Size(185, 558);
             this.searchToolkitControl.TabIndex = 0;
             this.searchToolkitControl.Visible = false;
             // 
