@@ -32,7 +32,7 @@
             this.ItemLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // IaoModelPanel
+            // IAOLabPanel
             // 
             this.IAOLabPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -58,11 +58,12 @@
             this.ItemLabel.Text = "IAO实验室";
             this.ItemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // IAOModelControl
+            // IAOLabControl
             // 
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ItemLabel);
             this.Controls.Add(this.IAOLabPanel);
+            this.DoubleBuffered = true;
             this.Name = "IAOLabControl";
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.IAOLabControl_Paint);

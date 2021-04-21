@@ -48,6 +48,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.DoubleBuffered = true;
             this.Name = "SearchToolkitControl";
             this.Load += new System.EventHandler(this.SearchToolkitControl_Load);
             this.newEventPanel.ResumeLayout(false);

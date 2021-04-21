@@ -44,6 +44,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.DoubleBuffered = true;
             this.Name = "WebsiteFeatureDetectionControl";
             this.Load += new System.EventHandler(this.WebsiteFeatureDetectionControl_Load);
             this.newEventPanel.ResumeLayout(false);

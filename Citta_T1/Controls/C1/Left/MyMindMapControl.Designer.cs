@@ -96,6 +96,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ItemPanel);
             this.Controls.Add(this.MindMapPaintPanel);
+            this.DoubleBuffered = true;
             this.Name = "MyMindMapControl";
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MindMapModelControl_Paint);

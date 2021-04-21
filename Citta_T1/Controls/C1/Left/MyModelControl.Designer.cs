@@ -45,7 +45,7 @@
             this.ItemPanel.Size = new System.Drawing.Size(185, 30);
             this.ItemPanel.TabIndex = 1;
             // 
-            // MyModelCreateButton
+            // AddModelButton
             // 
             this.AddModelButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AddModelButton.BackColor = System.Drawing.Color.Transparent;
@@ -93,6 +93,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.MyModelPaintPanel);
             this.Controls.Add(this.ItemPanel);
+            this.DoubleBuffered = true;
             this.Name = "MyModelControl";
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MyModelControl_Paint);

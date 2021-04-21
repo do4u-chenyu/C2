@@ -6,6 +6,7 @@ using C2.Model;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,6 +20,8 @@ namespace C2.Controls
         private DatabaseItem _SelectedTableItem;
         private ContextMenuStrip tableContextMenuStrip;
         public event System.EventHandler SelectedTableItemChanged;
+
+        
         public TableListControl()
         {
             InitializationTableContextMenuStrip();
@@ -26,6 +29,7 @@ namespace C2.Controls
             this._SelectedTableItem = null;
             this.ItemHeight = TableItemHeight;
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), MergableProperty(false)]
         public List<DatabaseItem> DatabaseItems
         {
             get { return _DatabaseItems; }
@@ -39,6 +43,7 @@ namespace C2.Controls
 
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), MergableProperty(false)]
         public DatabaseItem SelectedTableItem
         {
             get { return _SelectedTableItem; }

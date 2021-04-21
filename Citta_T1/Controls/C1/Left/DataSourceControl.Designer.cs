@@ -31,7 +31,6 @@ namespace C2.Controls.Left
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSourceControl));
             this.dataSourceFrame = new System.Windows.Forms.Panel();
             this.externalDataLabel = new System.Windows.Forms.Label();
             this.localDataLabel = new System.Windows.Forms.Label();
@@ -184,8 +183,8 @@ namespace C2.Controls.Left
             this.tableListControl1.ItemHeight = 40;
             this.tableListControl1.Location = new System.Drawing.Point(0, 0);
             this.tableListControl1.Name = "tableListControl1";
+            this.tableListControl1.SelectedIndices = new int[0];
             this.tableListControl1.SelectedItems = new C2.Controls.C1.Left.TableListItem[0];
-            this.tableListControl1.SelectedTableItem = null;
             this.tableListControl1.Size = new System.Drawing.Size(177, 296);
             this.tableListControl1.TabIndex = 0;
             this.tableListControl1.Text = "tableListControl1";
@@ -260,6 +259,7 @@ namespace C2.Controls.Left
             this.Controls.Add(this.externalFrame);
             this.Controls.Add(this.dataSourceFrame);
             this.Controls.Add(this.dataAddLabelPanel);
+            this.DoubleBuffered = true;
             this.Name = "DataSourceControl";
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DataSourceControl_Paint);
