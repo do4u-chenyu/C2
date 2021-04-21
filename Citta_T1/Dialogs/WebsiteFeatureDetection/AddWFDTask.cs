@@ -34,10 +34,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (!IsValidityTaskName() || !IsValidityFilePath())
                 return false;
 
+            List<string> urls = GetUrlsFromFile(FilePath);
+            if (urls.Count == 0)
+                return false;
+
             WFDAPIResult result = new WFDAPIResult();
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                if (!WFDWebAPI.GetInstance().StartTask(GetUrlsFromFile(FilePath), out result))
+                if (!WFDWebAPI.GetInstance().StartTask(urls, out result))
                     return false;
             }
 
@@ -86,7 +90,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             catch
             {
-                HelpUtil.ShowMessageBox(filePath + "文件加载出错");
+                HelpUtil.ShowMessageBox(filePath + "文件加载出错，请检查文件内容。");
             }
             finally
             {
