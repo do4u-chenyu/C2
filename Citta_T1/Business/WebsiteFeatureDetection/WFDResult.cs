@@ -29,8 +29,8 @@ namespace C2.Business.WebsiteFeatureDetection
             cur_url = ResDict.TryGetValue("cur_url", out string tmpCurUrl) ? tmpCurUrl : string.Empty;
             title = ResDict.TryGetValue("title", out string tmpTitle) ? tmpTitle : string.Empty;
             prediction = ResDict.TryGetValue("prediction", out string tmpPrediction) ? tmpPrediction : string.Empty;
-            prediction_ = Global.WFDPredictionCodeDict.TryGetValue(prediction, out string tmpPre) ? tmpPre : string.Empty;
-            Fraud_label = Global.WFDFraudCodeDict.TryGetValue(prediction, out string tmpFraud) ? tmpFraud : string.Empty;
+            prediction_ = Global.WFDPredictionCodeDict.TryGetValue(prediction, out string tmpPre) ? tmpPre : prediction;
+            Fraud_label = Global.WFDFraudCodeDict.TryGetValue(prediction, out string tmpFraud) ? tmpFraud : prediction;
             screen_shot = ResDict.TryGetValue("screen_shot", out string tmpScreenShot) ? tmpScreenShot : string.Empty;
             login = ResDict.TryGetValue("login", out string tmpLogin) ? tmpLogin : string.Empty;
             html_content_id = ResDict.TryGetValue("html_content_id", out string tmpContentId) ? tmpContentId : string.Empty;
