@@ -128,7 +128,7 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 Response resp = httpHandler.Post(TaskResultUrl, pairs, Token);
                 if (resp.StatusCode == HttpStatusCode.Unauthorized)
-                    result.RespMsg = "TokenError";
+                    result.RespMsg = "Token expired, please login";
                 if (resp.StatusCode != HttpStatusCode.OK)
                     result.RespMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
