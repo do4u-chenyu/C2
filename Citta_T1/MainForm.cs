@@ -293,10 +293,13 @@ namespace C2
         private void MainForm_Load(object sender, EventArgs e)
         {
             //加载文件及数据源
-            LoadHotModel();
-            LoadDocuments();
-            LoadDataSource();
-            LoadIAOLaboratory();
+            using (GuarderUtil.WaitCursor)
+            {
+                LoadHotModel();
+                LoadDocuments();
+                LoadDataSource();
+                LoadIAOLaboratory();
+            }
         }
 
         private void LoadHotModel()
