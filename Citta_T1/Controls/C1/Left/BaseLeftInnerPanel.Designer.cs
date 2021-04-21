@@ -91,7 +91,6 @@
             this.manageButtonPanel.Font = new System.Drawing.Font("宋体", 9F);
             this.manageButtonPanel.Location = new System.Drawing.Point(0, 32);
             this.manageButtonPanel.Name = "manageButtonPanel";
-            this.manageButtonPanel.Size = new System.Drawing.Size(177, 587);
             this.manageButtonPanel.TabIndex = 1;
             // 
             // helpInfoLable
