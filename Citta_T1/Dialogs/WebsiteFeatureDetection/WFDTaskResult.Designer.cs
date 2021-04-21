@@ -35,10 +35,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.browserButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.screenShot = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taskNameLabel = new System.Windows.Forms.Label();
             this.taskIDLabel = new System.Windows.Forms.Label();
             this.taskStatusLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.statusInfoLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.progressNum = new System.Windows.Forms.Label();
             this.progressInfo = new System.Windows.Forms.Label();
@@ -47,11 +53,6 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.downloadPicsButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.screenShot = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -140,135 +141,6 @@
             this.dataGridView.TabIndex = 10008;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
             // 
-            // taskNameLabel
-            // 
-            this.taskNameLabel.AutoSize = true;
-            this.taskNameLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskNameLabel.Location = new System.Drawing.Point(161, 11);
-            this.taskNameLabel.Name = "taskNameLabel";
-            this.taskNameLabel.Size = new System.Drawing.Size(49, 19);
-            this.taskNameLabel.TabIndex = 10009;
-            this.taskNameLabel.Text = "Name";
-            // 
-            // taskIDLabel
-            // 
-            this.taskIDLabel.AutoSize = true;
-            this.taskIDLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskIDLabel.Location = new System.Drawing.Point(161, 46);
-            this.taskIDLabel.Name = "taskIDLabel";
-            this.taskIDLabel.Size = new System.Drawing.Size(23, 19);
-            this.taskIDLabel.TabIndex = 10010;
-            this.taskIDLabel.Text = "ID";
-            this.taskIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // taskStatusLabel
-            // 
-            this.taskStatusLabel.AutoSize = true;
-            this.taskStatusLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskStatusLabel.Location = new System.Drawing.Point(161, 80);
-            this.taskStatusLabel.Name = "taskStatusLabel";
-            this.taskStatusLabel.Size = new System.Drawing.Size(48, 19);
-            this.taskStatusLabel.TabIndex = 10011;
-            this.taskStatusLabel.Text = "运行中";
-            this.taskStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.browserButton);
-            this.panel1.Controls.Add(this.taskStatusLabel);
-            this.panel1.Controls.Add(this.downloadPicsButton);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.taskIDLabel);
-            this.panel1.Controls.Add(this.taskNameLabel);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(932, 152);
-            this.panel1.TabIndex = 10012;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.progressNum);
-            this.groupBox1.Controls.Add(this.progressInfo);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.progressBar1);
-            this.groupBox1.Location = new System.Drawing.Point(572, 19);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(348, 89);
-            this.groupBox1.TabIndex = 10014;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "截图下载";
-            // 
-            // progressNum
-            // 
-            this.progressNum.AutoSize = true;
-            this.progressNum.Location = new System.Drawing.Point(307, 28);
-            this.progressNum.Name = "progressNum";
-            this.progressNum.Size = new System.Drawing.Size(17, 12);
-            this.progressNum.TabIndex = 10017;
-            this.progressNum.Text = "0%";
-            // 
-            // progressInfo
-            // 
-            this.progressInfo.AutoSize = true;
-            this.progressInfo.Location = new System.Drawing.Point(80, 64);
-            this.progressInfo.Name = "progressInfo";
-            this.progressInfo.Size = new System.Drawing.Size(125, 12);
-            this.progressInfo.TabIndex = 10016;
-            this.progressInfo.Text = "已完成0张，失败0张。";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 63);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
-            this.label6.TabIndex = 10015;
-            this.label6.Text = "详细信息：";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 28);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
-            this.label5.TabIndex = 10014;
-            this.label5.Text = "进度：";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(82, 23);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(219, 23);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 10013;
-            // 
-            // downloadPicsButton
-            // 
-            this.downloadPicsButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.downloadPicsButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.downloadPicsButton.Location = new System.Drawing.Point(788, 114);
-            this.downloadPicsButton.Name = "downloadPicsButton";
-            this.downloadPicsButton.Size = new System.Drawing.Size(107, 28);
-            this.downloadPicsButton.TabIndex = 10012;
-            this.downloadPicsButton.Text = "下载全部截图";
-            this.downloadPicsButton.UseVisualStyleBackColor = false;
-            this.downloadPicsButton.Click += new System.EventHandler(this.DownloadPicsButton_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.dataGridView);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 152);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(932, 328);
-            this.panel2.TabIndex = 10013;
-            // 
             // url
             // 
             this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -318,6 +190,144 @@
             this.webContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // taskNameLabel
+            // 
+            this.taskNameLabel.AutoSize = true;
+            this.taskNameLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.taskNameLabel.Location = new System.Drawing.Point(161, 11);
+            this.taskNameLabel.Name = "taskNameLabel";
+            this.taskNameLabel.Size = new System.Drawing.Size(49, 19);
+            this.taskNameLabel.TabIndex = 10009;
+            this.taskNameLabel.Text = "Name";
+            // 
+            // taskIDLabel
+            // 
+            this.taskIDLabel.AutoSize = true;
+            this.taskIDLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.taskIDLabel.Location = new System.Drawing.Point(161, 46);
+            this.taskIDLabel.Name = "taskIDLabel";
+            this.taskIDLabel.Size = new System.Drawing.Size(23, 19);
+            this.taskIDLabel.TabIndex = 10010;
+            this.taskIDLabel.Text = "ID";
+            this.taskIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // taskStatusLabel
+            // 
+            this.taskStatusLabel.AutoSize = true;
+            this.taskStatusLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.taskStatusLabel.Location = new System.Drawing.Point(161, 80);
+            this.taskStatusLabel.Name = "taskStatusLabel";
+            this.taskStatusLabel.Size = new System.Drawing.Size(48, 19);
+            this.taskStatusLabel.TabIndex = 10011;
+            this.taskStatusLabel.Text = "运行中";
+            this.taskStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.statusInfoLabel);
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.browserButton);
+            this.panel1.Controls.Add(this.taskStatusLabel);
+            this.panel1.Controls.Add(this.downloadPicsButton);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.taskIDLabel);
+            this.panel1.Controls.Add(this.taskNameLabel);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(932, 152);
+            this.panel1.TabIndex = 10012;
+            // 
+            // statusInfoLabel
+            // 
+            this.statusInfoLabel.AutoSize = true;
+            this.statusInfoLabel.Location = new System.Drawing.Point(250, 85);
+            this.statusInfoLabel.Name = "statusInfoLabel";
+            this.statusInfoLabel.Size = new System.Drawing.Size(0, 12);
+            this.statusInfoLabel.TabIndex = 10015;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.progressNum);
+            this.groupBox1.Controls.Add(this.progressInfo);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.progressBar1);
+            this.groupBox1.Location = new System.Drawing.Point(621, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(299, 89);
+            this.groupBox1.TabIndex = 10014;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "截图下载";
+            // 
+            // progressNum
+            // 
+            this.progressNum.AutoSize = true;
+            this.progressNum.Location = new System.Drawing.Point(277, 27);
+            this.progressNum.Name = "progressNum";
+            this.progressNum.Size = new System.Drawing.Size(17, 12);
+            this.progressNum.TabIndex = 10017;
+            this.progressNum.Text = "0%";
+            // 
+            // progressInfo
+            // 
+            this.progressInfo.AutoSize = true;
+            this.progressInfo.Location = new System.Drawing.Point(80, 64);
+            this.progressInfo.Name = "progressInfo";
+            this.progressInfo.Size = new System.Drawing.Size(125, 12);
+            this.progressInfo.TabIndex = 10016;
+            this.progressInfo.Text = "已完成0张，失败0张。";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 63);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 10015;
+            this.label6.Text = "详细信息：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(32, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.TabIndex = 10014;
+            this.label5.Text = "进度：";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(82, 23);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(189, 23);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 10013;
+            // 
+            // downloadPicsButton
+            // 
+            this.downloadPicsButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.downloadPicsButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.downloadPicsButton.Location = new System.Drawing.Point(813, 114);
+            this.downloadPicsButton.Name = "downloadPicsButton";
+            this.downloadPicsButton.Size = new System.Drawing.Size(107, 28);
+            this.downloadPicsButton.TabIndex = 10012;
+            this.downloadPicsButton.Text = "下载全部截图";
+            this.downloadPicsButton.UseVisualStyleBackColor = false;
+            this.downloadPicsButton.Click += new System.EventHandler(this.DownloadPicsButton_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dataGridView);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 152);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(932, 328);
+            this.panel2.TabIndex = 10013;
+            // 
             // WFDTaskResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -366,5 +376,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn title;
         private System.Windows.Forms.DataGridViewLinkColumn screenShot;
         private System.Windows.Forms.DataGridViewTextBoxColumn webContent;
+        private System.Windows.Forms.Label statusInfoLabel;
     }
 }

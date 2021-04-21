@@ -106,11 +106,19 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 TaskInfo.Status = WFDTaskStatus.Done;
                 datas = datas.Replace("None", "''").Replace("True", "'True'").Replace("False", "'False'").Replace("''''","''");
                 TaskInfo.PreviewResults = DealData(TaskInfo.ResultFilePath, datas);
+                this.statusInfoLabel.Text = string.Empty;
             }
-            else if (respMsg == "wait")
+            else if (respMsg == "wait") 
+            {
                 TaskInfo.Status = WFDTaskStatus.Running;
+                this.statusInfoLabel.Text = "[ " + datas.Replace("\"","").Replace("{","").Replace("}","") + " ]";
+            }
             else if (respMsg == "fail")
+            {
                 TaskInfo.Status = WFDTaskStatus.Failed;
+                this.statusInfoLabel.Text = string.Empty;
+            }
+                
             this.taskStatusLabel.Text = TaskInfo.Status.ToString();
         }
 

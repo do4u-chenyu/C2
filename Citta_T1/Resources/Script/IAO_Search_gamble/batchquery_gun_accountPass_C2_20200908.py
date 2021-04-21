@@ -220,7 +220,7 @@ def save(items,keyWords,data_path,path,querytype,startTime,endTime):
     with open(join(data_path,path),'w') as f:
         f.write('\t'.join(items)+'\n')
         for data in queryclient(data_path,keyWords,startTime,endTime,querytype):
-            auth = list(set(auth + [data.get('AUTH_ACCOUNT','')] - [('']}))
+            auth = list(set(auth + [data.get('AUTH_ACCOUNT','')] - [('')]))
             f.write('\t'.join([data.get(item,'') for item in items]) + '\n')
     return auth   
 
