@@ -214,7 +214,7 @@
             this.searchAgentIPTB.Name = "searchAgentIPTB";
             this.searchAgentIPTB.Size = new System.Drawing.Size(137, 25);
             this.searchAgentIPTB.TabIndex = 6;
-            this.searchAgentIPTB.Text = "15.57.1.1";
+            this.searchAgentIPTB.Text = "15.1.1.1";
             // 
             // label15
             // 
@@ -249,7 +249,7 @@
             this.bastionIPTB.Name = "bastionIPTB";
             this.bastionIPTB.Size = new System.Drawing.Size(137, 25);
             this.bastionIPTB.TabIndex = 2;
-            this.bastionIPTB.Text = "15.34.1.1";
+            this.bastionIPTB.Text = "15.0.0.1";
             // 
             // passwordTB
             // 
@@ -265,7 +265,7 @@
             this.usernameTB.Name = "usernameTB";
             this.usernameTB.Size = new System.Drawing.Size(137, 25);
             this.usernameTB.TabIndex = 0;
-            this.usernameTB.Text = "root";
+            this.usernameTB.Text = "x1587";
             // 
             // groupBox1
             // 
@@ -346,8 +346,7 @@
             "涉赌模型",
             "涉枪模型",
             "涉黄模型",
-            "飞机场模型",
-            "测试模型"});
+            "飞机场模型"});
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);
