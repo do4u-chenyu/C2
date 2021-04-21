@@ -48,7 +48,7 @@ namespace C2.Business.WebsiteFeatureDetection
             foreach (string fixCol in fixColList)
             {
                 colList.Add(fixCol);
-                contentList.Add(ResDict.ContainsKey(fixCol) ? ResDict[fixCol] : string.Empty);
+                contentList.Add(ResDict.ContainsKey(fixCol) ? ReplaceValueSpecialChars(ResDict[fixCol]) : string.Empty);
             }
 
             var key = ResDict.Keys.GetEnumerator();
@@ -58,7 +58,7 @@ namespace C2.Business.WebsiteFeatureDetection
                     continue;
 
                 colList.Add(key.Current);
-                contentList.Add(ResDict[key.Current]);
+                contentList.Add(ReplaceValueSpecialChars(ResDict[key.Current]));
             }
 
             AllCol = string.Join("\t", colList);
@@ -66,6 +66,11 @@ namespace C2.Business.WebsiteFeatureDetection
 
         }
 
+        private string ReplaceValueSpecialChars(string value)
+        {
+            //"null"会判定为true,且不支持replace
+            return string.IsNullOrEmpty(value) ? value : value.Replace("\t", "").Replace("\n", "").Replace("\r", "");
+        }
 
         //这里成员变量名必须和返回报文字段名一致
 
