@@ -229,51 +229,55 @@ namespace C2
 
         private void ShowLeftPanel(Control leftButton, Control leftPanel)
         {
-            foreach (Control ct in this.leftPanelControls)
-                ct.Visible = false;
-            foreach (Control ct in this.leftMainButtons)
-                ct.BackColor = LeftLeaveColor;
+            using (new GuarderUtil.LayoutGuarder(leftPanel))
+            {
+                foreach (Control ct in this.leftPanelControls)
+                    ct.Visible = false;
+                foreach (Control ct in this.leftMainButtons)
+                    ct.BackColor = LeftLeaveColor;
 
-            leftPanel.Visible = true;
-            leftButton.BackColor = LeftFocusColor;
+                leftPanel.Visible = true;
+                leftButton.BackColor = LeftFocusColor;
 
-            this.ShowLeftFold();
+                if (isLeftViewPanelMinimum)
+                    this.ShowLeftFold();
+            }  
         }
 
         private void ModelMarketButton_Click(object sender, EventArgs e)
         {
-            ShowLeftPanel(modelMarketButton, modelMarketControl);
-            ShowLeftFold();
+            if (!modelMarketControl.Visible)
+                ShowLeftPanel(modelMarketButton, modelMarketControl);
         }
 
         private void MindMapButton_Click(object sender, EventArgs e)
         {
-            ShowLeftPanel(mindMapButton, mindMapControl);
-            ShowLeftFold();
+            if (!mindMapControl.Visible)
+                ShowLeftPanel(mindMapButton, mindMapControl);
         }
         
         private void DataSourceButton_Click(object sender, EventArgs e)
         {
-            ShowLeftPanel(dataSourceButton, dataSourceControl);
-            ShowLeftFold();
+            if (!dataSourceControl.Visible)
+                ShowLeftPanel(dataSourceButton, dataSourceControl);
         }
 
         private void IAOLabButton_Click(object sender, EventArgs e)
         {
-            ShowLeftPanel(iaoLabButton, iaoLabControl);
-            ShowLeftFold();
+            if (!iaoLabControl.Visible)  // 避免反复点击时的闪烁
+                ShowLeftPanel(iaoLabButton, iaoLabControl);
         }
 
         private void DetectionButton_Click(object sender, EventArgs e)
         {
-            ShowLeftPanel(detectionButton, websiteFeatureDetectionControl);
-            ShowLeftFold();
+            if (!websiteFeatureDetectionControl.Visible)
+                ShowLeftPanel(detectionButton, websiteFeatureDetectionControl);
         }
 
         private void SearchToolkitButton_Click(object sender, EventArgs e)
         {
-            ShowLeftPanel(searchToolkitButton, searchToolkitControl);
-            ShowLeftFold();
+            if (!searchToolkitControl.Visible)
+                ShowLeftPanel(searchToolkitButton, searchToolkitControl);
         }
 
         private void NewModelButton_Click(object sender, EventArgs e)
@@ -386,7 +390,6 @@ namespace C2
             {
                 int i = Array.FindIndex(leftMainButtons, v => v.BackColor == LeftFocusColor);
                 ShowLeftPanel(leftMainButtons[i], leftPanelControls[i]);
-                ShowLeftFold();
             }    
             else
                 HideLeftFold();
