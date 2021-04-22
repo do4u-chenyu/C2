@@ -139,6 +139,7 @@ namespace C2.Controls.C1.Left
                 TaskInfo = taskInfo;
                 this.ButtonText = taskInfo.TaskName;
                 this.toolTip.SetToolTip(this.rightPictureBox, TaskInfo.ResultFilePath);
+                this.toolTip.SetToolTip(this.noFocusButton, TaskInfo.TaskName);
             }
 
             private void InitButtonDoubleClick()

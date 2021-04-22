@@ -33,6 +33,7 @@ namespace C2.Controls.Left
             buttonType = ffp;
             this.ContextMenuStrip = contextMenuStrip1;
             this.txtButton.Text = Lang._(ffp);
+            toolTip1.SetToolTip(this.txtButton, this.txtButton.Text);
             switch (ffp)
             {
                 case "APK":
