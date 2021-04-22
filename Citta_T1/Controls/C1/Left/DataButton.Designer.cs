@@ -157,6 +157,7 @@ namespace C2.Controls.Left
             this.txtButton.Name = "txtButton";
             this.txtButton.Size = new System.Drawing.Size(95, 25);
             this.txtButton.TabIndex = 9;
+            this.txtButton.Text = null;
             this.txtButton.UseVisualStyleBackColor = false;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             // 

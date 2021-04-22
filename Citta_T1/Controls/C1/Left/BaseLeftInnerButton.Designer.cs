@@ -34,7 +34,7 @@
             this.textBox = new System.Windows.Forms.TextBox();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);         
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.SuspendLayout();

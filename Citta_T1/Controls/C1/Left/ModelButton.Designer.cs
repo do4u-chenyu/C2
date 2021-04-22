@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.lelfPictureBox = new System.Windows.Forms.PictureBox();
-            this.textButton = new C2.Controls.Common.NoFocusButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +41,7 @@
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox = new System.Windows.Forms.TextBox();
+            this.textButton = new C2.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lelfPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -68,24 +68,6 @@
             this.lelfPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.lelfPictureBox, "高级技战法模型");
             // 
-            // textButton
-            // 
-            this.textButton.AutoEllipsis = true;
-            this.textButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textButton.FlatAppearance.BorderSize = 0;
-            this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.textButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textButton.Location = new System.Drawing.Point(29, 3);
-            this.textButton.Name = "textButton";
-            this.textButton.Size = new System.Drawing.Size(91, 25);
-            this.textButton.TabIndex = 9;
-            this.textButton.Text = "模型";
-            this.textButton.UseVisualStyleBackColor = false;
-            this.textButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseDown);
-            this.textButton.MouseLeave += new System.EventHandler(this.TextButton_MouseLeave);
-            this.textButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseMove);
-            this.textButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseUp);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -102,7 +84,6 @@
             // 
             // OpenToolStripMenuItem
             // 
-            this.OpenToolStripMenuItem.Enabled = true;
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
             this.OpenToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.OpenToolStripMenuItem.Text = "打开";
@@ -165,6 +146,23 @@
             this.textBox.Visible = false;
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
+            // 
+            // textButton
+            // 
+            this.textButton.AutoEllipsis = true;
+            this.textButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textButton.FlatAppearance.BorderSize = 0;
+            this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.textButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textButton.Location = new System.Drawing.Point(29, 3);
+            this.textButton.Name = "textButton";
+            this.textButton.Size = new System.Drawing.Size(91, 25);
+            this.textButton.TabIndex = 9;
+            this.textButton.UseVisualStyleBackColor = false;
+            this.textButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseDown);
+            this.textButton.MouseLeave += new System.EventHandler(this.TextButton_MouseLeave);
+            this.textButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseMove);
+            this.textButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseUp);
             // 
             // ModelButton
             // 

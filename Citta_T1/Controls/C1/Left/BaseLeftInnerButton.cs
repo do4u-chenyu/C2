@@ -22,8 +22,9 @@ namespace C2.Controls.C1.Left
             InitializeComponent();
         }
 
-        public BaseLeftInnerButton(string buttonText) : this()
+        public BaseLeftInnerButton(string buttonText)
         {
+            InitializeComponent();
             ButtonText = buttonText;
         }
 
