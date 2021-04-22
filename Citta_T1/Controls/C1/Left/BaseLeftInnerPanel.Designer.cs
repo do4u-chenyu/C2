@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.newEventPanel = new System.Windows.Forms.Panel();
+            this.helpInfoLable = new System.Windows.Forms.Label();
             this.addTaskLabel = new System.Windows.Forms.Label();
             this.titleLabel = new System.Windows.Forms.Label();
             this.backPanel = new System.Windows.Forms.Panel();
             this.manageButtonPanel = new System.Windows.Forms.Panel();
-            this.helpInfoLable = new System.Windows.Forms.Label();
             this.newEventPanel.SuspendLayout();
             this.backPanel.SuspendLayout();
             this.SuspendLayout();
@@ -47,6 +47,17 @@
             this.newEventPanel.Name = "newEventPanel";
             this.newEventPanel.Size = new System.Drawing.Size(177, 32);
             this.newEventPanel.TabIndex = 0;
+            // 
+            // helpInfoLable
+            // 
+            this.helpInfoLable.AutoSize = true;
+            this.helpInfoLable.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.helpInfoLable.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.helpInfoLable.Location = new System.Drawing.Point(95, 10);
+            this.helpInfoLable.Name = "helpInfoLable";
+            this.helpInfoLable.Size = new System.Drawing.Size(75, 14);
+            this.helpInfoLable.TabIndex = 1;
+            this.helpInfoLable.Text = "+帮助说明";
             // 
             // addTaskLabel
             // 
@@ -91,24 +102,15 @@
             this.manageButtonPanel.Font = new System.Drawing.Font("宋体", 9F);
             this.manageButtonPanel.Location = new System.Drawing.Point(0, 32);
             this.manageButtonPanel.Name = "manageButtonPanel";
+            this.manageButtonPanel.Size = new System.Drawing.Size(177, 587);
             this.manageButtonPanel.TabIndex = 1;
-            // 
-            // helpInfoLable
-            // 
-            this.helpInfoLable.AutoSize = true;
-            this.helpInfoLable.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.helpInfoLable.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.helpInfoLable.Location = new System.Drawing.Point(95, 10);
-            this.helpInfoLable.Name = "helpInfoLable";
-            this.helpInfoLable.Size = new System.Drawing.Size(75, 14);
-            this.helpInfoLable.TabIndex = 1;
-            this.helpInfoLable.Text = "+帮助说明";
             // 
             // BaseLeftInnerPanel
             // 
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.backPanel);
             this.Controls.Add(this.titleLabel);
+            this.DoubleBuffered = true;
             this.Name = "BaseLeftInnerPanel";
             this.Size = new System.Drawing.Size(185, 660);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.BaseLeftInnerPanel_Paint);
