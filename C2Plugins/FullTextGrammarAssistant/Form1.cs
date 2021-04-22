@@ -47,17 +47,6 @@ namespace FullTextGrammarAssistant
             this.textBox1.Text = "hello AND world OR 你好 AND _TEXT:login OR _HOST:www.baidu.com";
             this.textBox3.Text = DateTime.Now.AddYears(-1).ToString("yyyyMMddHHmmss");
             this.textBox4.Text = DateTime.Now.ToString("yyyyMMddHHmmss");
-            this.comboBox1.SelectedIndex = 0;
-            this.comboBox2.SelectedIndex = 2;
-            this.textBox2.Text = "100";
-            this.comboBox5.SelectedIndex = 0;
-            this.comboBox3.SelectedIndex = 4;
-            this.comboBox4.SelectedIndex = 0;
-            this.textBox5.Text = "460013440113856";
-            this.comboBox6.SelectedIndex = 2;
-            this.comboBox7.SelectedIndex = 8;
-            this.comboBox8.SelectedIndex = 5;
-            this.textBox6.Text = "10";
             this.previewTextList[1] = "--start " + this.textBox3.Text;
             this.jarTextList[1] = "--startTime " + this.textBox3.Text;
             this.previewTextList[2] = "--end " + this.textBox4.Text;
@@ -247,8 +236,23 @@ namespace FullTextGrammarAssistant
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
+        }
+
+        private void TraverPanelCheck()
+        {
+            int count = 0;
+            foreach (CheckBox ch in panel2.Controls)
+            {
+                if (ch.Checked == true)
+                    count++;
+            }
+            if (count != 0)
+                checkBox1.Checked = false;
+            else
+                checkBox1.Checked = true;
         }
 
         private void TraverPanel()
@@ -377,126 +381,189 @@ namespace FullTextGrammarAssistant
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox7_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox13_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox12_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox11_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox10_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox9_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox8_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox15_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
             TraverPanel();
             UpdatePreviewText();
         }
 
         private void checkBox49_CheckedChanged(object sender, EventArgs e)
         {
+            SearchPanelCheck();
             SearchPanel();
             UpdatePreviewText();
         }
 
+        private void SearchPanelCheck()
+        {
+            int count = 0;
+            foreach (CheckBox ch in panel5.Controls)
+            {
+                if (ch.Checked == true)
+                    count++;
+            }
+            if (count != 0)
+                checkBox50.Checked = false;
+            else
+                checkBox50.Checked = true;
+        }
+
         private void checkBox52_CheckedChanged(object sender, EventArgs e)
         {
+            dataTypePanelCheck();
             dataTypePanel();
             UpdatePreviewText();
         }
 
+        private void dataTypePanelCheck()
+        {
+            int count = 0;
+            foreach (CheckBox ch in panel4.Controls)
+            {
+                if (ch.Checked == true)
+                    count++;
+            }
+            if (count != 0)
+                checkBox53.Checked = false;
+            else
+                checkBox53.Checked = true;
+        }
+
         private void checkBox47_CheckedChanged(object sender, EventArgs e)
         {
+            optionPanelCheck();
             optionPanel();
             UpdatePreviewText();
         }
 
+        private void optionPanelCheck()
+        {
+            int count = 0;
+            foreach (CheckBox ch in panel3.Controls)
+            {
+                if (ch.Checked == true)
+                    count++;
+            }
+            if (count != 0)
+                checkBox48.Checked = false;
+            else
+                checkBox48.Checked = true;
+        }
+
         private void checkBox42_CheckedChanged(object sender, EventArgs e)
         {
+            SearchPanelCheck();
             SearchPanel();
             UpdatePreviewText();
         }
 
         private void checkBox54_CheckedChanged(object sender, EventArgs e)
         {
+            SearchPanelCheck();
             SearchPanel();
             UpdatePreviewText();
         }
 
         private void checkBox51_CheckedChanged(object sender, EventArgs e)
         {
+            dataTypePanelCheck();
             dataTypePanel();
             UpdatePreviewText();
         }
 
         private void checkBox46_CheckedChanged(object sender, EventArgs e)
         {
+            optionPanelCheck();
             optionPanel();
             UpdatePreviewText();
         }
 
         private void checkBox45_CheckedChanged(object sender, EventArgs e)
         {
+            optionPanelCheck();
             optionPanel();
             UpdatePreviewText();
         }
 
         private void checkBox44_CheckedChanged(object sender, EventArgs e)
         {
+            optionPanelCheck();
             optionPanel();
             UpdatePreviewText();
         }
 
         private void checkBox43_CheckedChanged(object sender, EventArgs e)
         {
+            optionPanelCheck();
             optionPanel();
             UpdatePreviewText();
         }
@@ -567,6 +634,11 @@ namespace FullTextGrammarAssistant
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

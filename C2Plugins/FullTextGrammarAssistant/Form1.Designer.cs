@@ -79,15 +79,15 @@ namespace FullTextGrammarAssistant
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.previewCmdText = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.comboBox8 = new System.Windows.Forms.ComboBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.previewCmdText = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBox9 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -97,9 +97,9 @@ namespace FullTextGrammarAssistant
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,7 +129,7 @@ namespace FullTextGrammarAssistant
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(112, 211);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(562, 21);
             this.textBox1.TabIndex = 5;
@@ -141,7 +141,7 @@ namespace FullTextGrammarAssistant
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Location = new System.Drawing.Point(112, 337);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(72, 16);
             this.checkBox1.TabIndex = 7;
@@ -154,7 +154,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(10, 3);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(72, 16);
             this.checkBox2.TabIndex = 8;
@@ -167,7 +167,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(105, 3);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(72, 16);
             this.checkBox3.TabIndex = 9;
@@ -180,7 +180,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox5.AutoSize = true;
             this.checkBox5.Location = new System.Drawing.Point(196, 3);
-            this.checkBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(72, 16);
             this.checkBox5.TabIndex = 11;
@@ -193,7 +193,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox6.AutoSize = true;
             this.checkBox6.Location = new System.Drawing.Point(290, 3);
-            this.checkBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(72, 16);
             this.checkBox6.TabIndex = 12;
@@ -206,7 +206,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox7.AutoSize = true;
             this.checkBox7.Location = new System.Drawing.Point(389, 3);
-            this.checkBox7.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(42, 16);
             this.checkBox7.TabIndex = 13;
@@ -219,7 +219,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox13.AutoSize = true;
             this.checkBox13.Location = new System.Drawing.Point(467, 3);
-            this.checkBox13.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox13.Name = "checkBox13";
             this.checkBox13.Size = new System.Drawing.Size(72, 16);
             this.checkBox13.TabIndex = 14;
@@ -232,7 +232,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox15.AutoSize = true;
             this.checkBox15.Location = new System.Drawing.Point(467, 33);
-            this.checkBox15.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox15.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox15.Name = "checkBox15";
             this.checkBox15.Size = new System.Drawing.Size(72, 16);
             this.checkBox15.TabIndex = 16;
@@ -245,7 +245,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox12.AutoSize = true;
             this.checkBox12.Location = new System.Drawing.Point(10, 33);
-            this.checkBox12.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox12.Name = "checkBox12";
             this.checkBox12.Size = new System.Drawing.Size(72, 16);
             this.checkBox12.TabIndex = 13;
@@ -258,7 +258,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox11.AutoSize = true;
             this.checkBox11.Location = new System.Drawing.Point(105, 33);
-            this.checkBox11.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox11.Name = "checkBox11";
             this.checkBox11.Size = new System.Drawing.Size(60, 16);
             this.checkBox11.TabIndex = 12;
@@ -271,7 +271,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox10.AutoSize = true;
             this.checkBox10.Location = new System.Drawing.Point(196, 33);
-            this.checkBox10.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox10.Name = "checkBox10";
             this.checkBox10.Size = new System.Drawing.Size(48, 16);
             this.checkBox10.TabIndex = 11;
@@ -284,7 +284,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox9.AutoSize = true;
             this.checkBox9.Location = new System.Drawing.Point(290, 33);
-            this.checkBox9.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox9.Name = "checkBox9";
             this.checkBox9.Size = new System.Drawing.Size(72, 16);
             this.checkBox9.TabIndex = 10;
@@ -297,7 +297,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox8.AutoSize = true;
             this.checkBox8.Location = new System.Drawing.Point(389, 33);
-            this.checkBox8.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(72, 16);
             this.checkBox8.TabIndex = 9;
@@ -323,7 +323,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox43.AutoSize = true;
             this.checkBox43.Location = new System.Drawing.Point(426, 3);
-            this.checkBox43.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox43.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox43.Name = "checkBox43";
             this.checkBox43.Size = new System.Drawing.Size(108, 16);
             this.checkBox43.TabIndex = 26;
@@ -336,7 +336,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox44.AutoSize = true;
             this.checkBox44.Location = new System.Drawing.Point(287, 3);
-            this.checkBox44.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox44.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox44.Name = "checkBox44";
             this.checkBox44.Size = new System.Drawing.Size(120, 16);
             this.checkBox44.TabIndex = 25;
@@ -349,7 +349,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox45.AutoSize = true;
             this.checkBox45.Location = new System.Drawing.Point(195, 3);
-            this.checkBox45.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox45.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox45.Name = "checkBox45";
             this.checkBox45.Size = new System.Drawing.Size(72, 16);
             this.checkBox45.TabIndex = 24;
@@ -362,7 +362,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox46.AutoSize = true;
             this.checkBox46.Location = new System.Drawing.Point(104, 3);
-            this.checkBox46.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox46.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox46.Name = "checkBox46";
             this.checkBox46.Size = new System.Drawing.Size(60, 16);
             this.checkBox46.TabIndex = 23;
@@ -374,7 +374,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox47.AutoSize = true;
             this.checkBox47.Location = new System.Drawing.Point(10, 3);
-            this.checkBox47.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox47.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox47.Name = "checkBox47";
             this.checkBox47.Size = new System.Drawing.Size(72, 16);
             this.checkBox47.TabIndex = 22;
@@ -389,7 +389,7 @@ namespace FullTextGrammarAssistant
             this.checkBox48.Checked = true;
             this.checkBox48.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox48.Location = new System.Drawing.Point(112, 499);
-            this.checkBox48.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox48.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox48.Name = "checkBox48";
             this.checkBox48.Size = new System.Drawing.Size(48, 16);
             this.checkBox48.TabIndex = 21;
@@ -402,7 +402,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox51.AutoSize = true;
             this.checkBox51.Location = new System.Drawing.Point(82, 4);
-            this.checkBox51.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox51.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox51.Name = "checkBox51";
             this.checkBox51.Size = new System.Drawing.Size(48, 16);
             this.checkBox51.TabIndex = 30;
@@ -414,7 +414,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox52.AutoSize = true;
             this.checkBox52.Location = new System.Drawing.Point(9, 4);
-            this.checkBox52.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox52.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox52.Name = "checkBox52";
             this.checkBox52.Size = new System.Drawing.Size(48, 16);
             this.checkBox52.TabIndex = 29;
@@ -428,7 +428,7 @@ namespace FullTextGrammarAssistant
             this.checkBox53.Checked = true;
             this.checkBox53.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox53.Location = new System.Drawing.Point(513, 434);
-            this.checkBox53.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox53.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox53.Name = "checkBox53";
             this.checkBox53.Size = new System.Drawing.Size(48, 16);
             this.checkBox53.TabIndex = 28;
@@ -441,7 +441,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox42.AutoSize = true;
             this.checkBox42.Location = new System.Drawing.Point(82, 6);
-            this.checkBox42.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox42.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox42.Name = "checkBox42";
             this.checkBox42.Size = new System.Drawing.Size(48, 16);
             this.checkBox42.TabIndex = 34;
@@ -453,7 +453,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox49.AutoSize = true;
             this.checkBox49.Location = new System.Drawing.Point(10, 6);
-            this.checkBox49.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox49.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox49.Name = "checkBox49";
             this.checkBox49.Size = new System.Drawing.Size(48, 16);
             this.checkBox49.TabIndex = 33;
@@ -467,7 +467,7 @@ namespace FullTextGrammarAssistant
             this.checkBox50.Checked = true;
             this.checkBox50.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox50.Location = new System.Drawing.Point(112, 435);
-            this.checkBox50.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox50.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox50.Name = "checkBox50";
             this.checkBox50.Size = new System.Drawing.Size(72, 16);
             this.checkBox50.TabIndex = 32;
@@ -480,7 +480,7 @@ namespace FullTextGrammarAssistant
             // 
             this.checkBox54.AutoSize = true;
             this.checkBox54.Location = new System.Drawing.Point(157, 6);
-            this.checkBox54.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox54.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox54.Name = "checkBox54";
             this.checkBox54.Size = new System.Drawing.Size(72, 16);
             this.checkBox54.TabIndex = 35;
@@ -504,11 +504,11 @@ namespace FullTextGrammarAssistant
             this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button1.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.button1.Location = new System.Drawing.Point(528, 17);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(59, 27);
             this.button1.TabIndex = 37;
-            this.button1.Text = "确认";
+            this.button1.Text = "复制";
             this.toolTip1.SetToolTip(this.button1, "复制当前生成语法命令到剪贴板");
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -518,11 +518,11 @@ namespace FullTextGrammarAssistant
             this.button2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button2.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.button2.Location = new System.Drawing.Point(647, 17);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(59, 27);
             this.button2.TabIndex = 38;
-            this.button2.Text = "取消";
+            this.button2.Text = "关闭";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -541,7 +541,7 @@ namespace FullTextGrammarAssistant
             this.panel2.Controls.Add(this.checkBox12);
             this.panel2.Controls.Add(this.checkBox11);
             this.panel2.Location = new System.Drawing.Point(102, 363);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(564, 54);
             this.panel2.TabIndex = 41;
@@ -554,7 +554,7 @@ namespace FullTextGrammarAssistant
             this.panel3.Controls.Add(this.checkBox44);
             this.panel3.Controls.Add(this.checkBox43);
             this.panel3.Location = new System.Drawing.Point(102, 522);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(564, 23);
             this.panel3.TabIndex = 45;
@@ -564,7 +564,7 @@ namespace FullTextGrammarAssistant
             this.panel4.Controls.Add(this.checkBox52);
             this.panel4.Controls.Add(this.checkBox51);
             this.panel4.Location = new System.Drawing.Point(504, 460);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(161, 23);
             this.panel4.TabIndex = 46;
@@ -575,10 +575,11 @@ namespace FullTextGrammarAssistant
             this.panel5.Controls.Add(this.checkBox42);
             this.panel5.Controls.Add(this.checkBox54);
             this.panel5.Location = new System.Drawing.Point(102, 455);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(243, 28);
             this.panel5.TabIndex = 47;
+            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // comboBox5
             // 
@@ -588,7 +589,7 @@ namespace FullTextGrammarAssistant
             "OR",
             "NOT"});
             this.comboBox5.Location = new System.Drawing.Point(112, 271);
-            this.comboBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(70, 20);
             this.comboBox5.TabIndex = 42;
@@ -609,7 +610,7 @@ namespace FullTextGrammarAssistant
             "附件数",
             "域名"});
             this.comboBox3.Location = new System.Drawing.Point(185, 271);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(156, 20);
             this.comboBox3.TabIndex = 18;
@@ -627,7 +628,7 @@ namespace FullTextGrammarAssistant
             "小于",
             "小于等于"});
             this.comboBox4.Location = new System.Drawing.Point(344, 271);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(122, 20);
             this.comboBox4.TabIndex = 19;
@@ -636,7 +637,7 @@ namespace FullTextGrammarAssistant
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(469, 271);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(204, 21);
             this.textBox5.TabIndex = 20;
@@ -645,7 +646,7 @@ namespace FullTextGrammarAssistant
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(112, 180);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(277, 21);
             this.textBox3.TabIndex = 50;
@@ -654,7 +655,7 @@ namespace FullTextGrammarAssistant
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(392, 180);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(282, 21);
             this.textBox4.TabIndex = 51;
@@ -672,7 +673,7 @@ namespace FullTextGrammarAssistant
             "小于",
             "小于等于"});
             this.comboBox2.Location = new System.Drawing.Point(344, 242);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(122, 20);
             this.comboBox2.TabIndex = 18;
@@ -681,7 +682,7 @@ namespace FullTextGrammarAssistant
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(469, 242);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(204, 21);
             this.textBox2.TabIndex = 19;
@@ -702,11 +703,63 @@ namespace FullTextGrammarAssistant
             "附件数",
             "域名"});
             this.comboBox1.Location = new System.Drawing.Point(112, 242);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(229, 20);
             this.comboBox1.TabIndex = 17;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.previewCmdText);
+            this.tabPage1.Location = new System.Drawing.Point(4, 26);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Size = new System.Drawing.Size(551, 125);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "queryclient";
+            this.toolTip1.SetToolTip(this.tabPage1, "全文主节点自带的查询工具");
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // previewCmdText
+            // 
+            this.previewCmdText.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.previewCmdText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.previewCmdText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.previewCmdText.Location = new System.Drawing.Point(2, 2);
+            this.previewCmdText.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.previewCmdText.Multiline = true;
+            this.previewCmdText.Name = "previewCmdText";
+            this.previewCmdText.ReadOnly = true;
+            this.previewCmdText.Size = new System.Drawing.Size(547, 121);
+            this.previewCmdText.TabIndex = 3;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.textBox9);
+            this.tabPage2.Location = new System.Drawing.Point(4, 26);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Size = new System.Drawing.Size(551, 125);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "batchQueryAndExport_1.7.jar";
+            this.toolTip1.SetToolTip(this.tabPage2, "搞不清楚历史沿革的jar包查询全文工具");
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textBox9
+            // 
+            this.textBox9.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox9.Location = new System.Drawing.Point(2, 2);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.textBox9.Multiline = true;
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(547, 121);
+            this.textBox9.TabIndex = 3;
             // 
             // comboBox6
             // 
@@ -716,7 +769,7 @@ namespace FullTextGrammarAssistant
             "OR",
             "NOT"});
             this.comboBox6.Location = new System.Drawing.Point(112, 301);
-            this.comboBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(71, 20);
             this.comboBox6.TabIndex = 43;
@@ -734,7 +787,7 @@ namespace FullTextGrammarAssistant
             "小于",
             "小于等于"});
             this.comboBox8.Location = new System.Drawing.Point(344, 301);
-            this.comboBox8.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(122, 20);
             this.comboBox8.TabIndex = 45;
@@ -743,7 +796,7 @@ namespace FullTextGrammarAssistant
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(469, 301);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(204, 21);
             this.textBox6.TabIndex = 46;
@@ -764,7 +817,7 @@ namespace FullTextGrammarAssistant
             "附件数",
             "域名"});
             this.comboBox7.Location = new System.Drawing.Point(185, 301);
-            this.comboBox7.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(156, 20);
             this.comboBox7.TabIndex = 44;
@@ -776,71 +829,19 @@ namespace FullTextGrammarAssistant
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(115, 15);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(559, 155);
             this.tabControl1.TabIndex = 57;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.previewCmdText);
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(551, 125);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "queryclient";
-            this.toolTip1.SetToolTip(this.tabPage1, "全文主节点自带的查询工具");
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // previewCmdText
-            // 
-            this.previewCmdText.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.previewCmdText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.previewCmdText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.previewCmdText.Location = new System.Drawing.Point(2, 2);
-            this.previewCmdText.Margin = new System.Windows.Forms.Padding(1);
-            this.previewCmdText.Multiline = true;
-            this.previewCmdText.Name = "previewCmdText";
-            this.previewCmdText.ReadOnly = true;
-            this.previewCmdText.Size = new System.Drawing.Size(547, 121);
-            this.previewCmdText.TabIndex = 3;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.textBox9);
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(551, 125);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "batchQueryAndExport_1.7.jar";
-            this.toolTip1.SetToolTip(this.tabPage2, "搞不清楚历史沿革的jar包查询全文工具");
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // textBox9
-            // 
-            this.textBox9.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox9.Location = new System.Drawing.Point(2, 2);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(1);
-            this.textBox9.Multiline = true;
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(547, 121);
-            this.textBox9.TabIndex = 3;
-            // 
             // groupBox1
             // 
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(40, 432);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Size = new System.Drawing.Size(347, 61);
             this.groupBox1.TabIndex = 58;
             this.groupBox1.TabStop = false;
@@ -928,7 +929,7 @@ namespace FullTextGrammarAssistant
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
@@ -944,11 +945,11 @@ namespace FullTextGrammarAssistant
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

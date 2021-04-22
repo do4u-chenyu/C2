@@ -33,11 +33,12 @@
       <nodes>
         <node id="1" text="XXX净网专项" x="453" y="140" width="217" height="66" text_b="12, 12, 192, 42">
           <style>
-            <back_color>#599764</back_color>
-            <fore_color>White</fore_color>
+            <back_color>DarkSeaGreen</back_color>
+            <fore_color>Black</fore_color>
             <border_color>#98C8E8</border_color>
             <round_radius>5</round_radius>
             <padding>12</padding>
+            <fill_type>Solid</fill_type>
             <font font_family="微软雅黑" size="21.75" style="Bold" />
           </style>
           <nodes>

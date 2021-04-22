@@ -33,11 +33,12 @@
       <nodes>
         <node id="2" text="XXX案件分析" x="454" y="364" width="216" height="66" text_b="12, 12, 192, 42">
           <style>
-            <back_color>Teal</back_color>
-            <fore_color>White</fore_color>
+            <back_color>LightSteelBlue</back_color>
+            <fore_color>Black</fore_color>
             <border_color>#84BDAA</border_color>
             <round_radius>5</round_radius>
             <padding>12</padding>
+            <fill_type>Solid</fill_type>
             <font font_family="微软雅黑" size="21.75" style="Bold" />
           </style>
           <nodes>
