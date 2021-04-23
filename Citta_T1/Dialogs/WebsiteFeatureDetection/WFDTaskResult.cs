@@ -266,19 +266,24 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 progressNum.Text = (progressBar1.Value * 100 / progressBar1.Maximum).ToString() + "%";
                 //progressNum.Text = progressBar1.Value.ToString() + "%";
 
-                string picUrl = result.url.Replace("http://", "").Replace("https://", "").Split('/')[0];
+                string picUrl = Path.Combine(destPath, string.Format("{0}_{1}.png", result.prediction_, result.url.Replace("http://", "").Replace("https://", "").Split('/')[0]));
                 if (files._Contains(picUrl))//跳过已存在的文件
-                    continue;
-
-                WFDAPIResult APIResult = await WFDWebAPI.GetInstance().DownloadScreenshotById(result.screen_shot);
-                if (APIResult.RespMsg == "success" && Base64StringToImage(Path.Combine(destPath, string.Format("{0}_{1}.png", result.prediction_, picUrl)), APIResult.Datas))
+                {
                     doneNum++;
+                    finMsg = "success";
+                }
                 else
-                    errorNum++;
-                    //HelpUtil.ShowMessageBox(APIResult.RespMsg);
-                
+                {
+                    WFDAPIResult APIResult = await WFDWebAPI.GetInstance().DownloadScreenshotById(result.screen_shot);
+                    if (APIResult.RespMsg == "success" && Base64StringToImage(picUrl, APIResult.Datas))
+                        doneNum++;
+                    else
+                        errorNum++;
+                    finMsg = APIResult.RespMsg;
+                }
+
                 progressInfo.Text = string.Format("已完成{0}张，失败{1}张。", doneNum, errorNum);
-                finMsg = APIResult.RespMsg;
+                
             }
 
             progressBar1.Value = progressBar1.Maximum;
@@ -302,9 +307,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 bmp.Save(txtFileName, ImageFormat.Png);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                log.Error(txtFileName + "生成图片失败。" + "base64为：" + base64);
+                log.Error(txtFileName + "生成图片失败。" + ex.Message);
                 return false;
             }
         }

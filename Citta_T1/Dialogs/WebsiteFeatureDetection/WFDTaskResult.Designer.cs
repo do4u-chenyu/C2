@@ -266,7 +266,7 @@
             // progressNum
             // 
             this.progressNum.AutoSize = true;
-            this.progressNum.Location = new System.Drawing.Point(277, 27);
+            this.progressNum.Location = new System.Drawing.Point(266, 27);
             this.progressNum.Name = "progressNum";
             this.progressNum.Size = new System.Drawing.Size(17, 12);
             this.progressNum.TabIndex = 10017;
@@ -275,7 +275,7 @@
             // progressInfo
             // 
             this.progressInfo.AutoSize = true;
-            this.progressInfo.Location = new System.Drawing.Point(80, 64);
+            this.progressInfo.Location = new System.Drawing.Point(69, 64);
             this.progressInfo.Name = "progressInfo";
             this.progressInfo.Size = new System.Drawing.Size(125, 12);
             this.progressInfo.TabIndex = 10016;
@@ -284,7 +284,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 63);
+            this.label6.Location = new System.Drawing.Point(6, 63);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 10015;
@@ -293,7 +293,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 28);
+            this.label5.Location = new System.Drawing.Point(30, 28);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 10014;
@@ -301,7 +301,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(82, 23);
+            this.progressBar1.Location = new System.Drawing.Point(71, 23);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(189, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
