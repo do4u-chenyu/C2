@@ -1314,12 +1314,6 @@
     <Compile Include="Dialogs\InternetImageDialog.Designer.cs">
       <DependentUpon>InternetImageDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\ModifyShortcutsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ModifyShortcutsDialog.Designer.cs">
-      <DependentUpon>ModifyShortcutsDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\NoteWidgetDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1343,12 +1337,6 @@
     </Compile>
     <Compile Include="Dialogs\SelectChartDialog.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ShortcutKeysMapDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ShortcutKeysMapDialog.Designer.cs">
-      <DependentUpon>ShortcutKeysMapDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\SortTopicDialog.cs">
       <SubType>Form</SubType>
@@ -1854,9 +1842,6 @@
       <DependentUpon>InternetImageDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ModifyShortcutsDialog.resx">
-      <DependentUpon>ModifyShortcutsDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PrintPreviewDialog.resx">
       <DependentUpon>PrintPreviewDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1867,10 +1852,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SaveTabsDialog.resx">
       <DependentUpon>SaveTabsDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ShortcutKeysMapDialog.resx">
-      <DependentUpon>ShortcutKeysMapDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SortTopicDialog.resx">

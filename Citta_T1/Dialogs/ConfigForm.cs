@@ -39,6 +39,7 @@ namespace C2.Dialogs
         public ConfigForm()
         {
             InitializeComponent();
+            Icon = C2.Properties.Resources.logo;
             progressBar = new UpdateProgressBar();
             progressBar.FormClosed += FormClosedEventHandler;
             downloader = new PluginsDownloader
