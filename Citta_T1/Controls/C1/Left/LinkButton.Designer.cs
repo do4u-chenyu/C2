@@ -37,7 +37,7 @@ namespace C2.Controls.Left
             this.ConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtButton = new C2.Controls.Common.NoFocusButton();
+            this.txtButton = new C2.Controls.Common.AutoEllipsisButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
@@ -134,7 +134,7 @@ namespace C2.Controls.Left
 
         #endregion
 
-        private C2.Controls.Common.NoFocusButton txtButton;
+        private C2.Controls.Common.AutoEllipsisButton txtButton;
         private System.Windows.Forms.PictureBox leftPictureBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;

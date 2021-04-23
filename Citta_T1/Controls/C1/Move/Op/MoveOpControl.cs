@@ -1,7 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Business.Option;
 using C2.Business.Schedule;
-using C2.Controls.C1;
 using C2.Controls.Interface;
 using C2.Core;
 using C2.Core.UndoRedo;

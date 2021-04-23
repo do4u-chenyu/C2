@@ -7,26 +7,50 @@ namespace C2.Controls.Common
     // 这重写ShowFocusCues方法,去掉所有情况下的聚焦框
     public class NoFocusButton : Button
     {
+
+        public NoFocusButton()
+        {
+            FlatStyle = FlatStyle.Flat;
+            FlatAppearance.BorderSize = 1;
+        }
+
+        /// <summary>
+        /// 取消捕获焦点后的聚焦框
+        /// </summary>
+        protected override bool ShowFocusCues
+        {
+            get
+            {
+                return false;
+            }
+        }
+    }
+
+
+    public class AutoEllipsisButton : Button
+    {
+
         private string _Text;
-        public new string Text 
-        { 
-            get => AutoEllipsis ? _Text : base.Text; 
-            set 
+        public new string Text
+        {
+            get => AutoEllipsis ? _Text : base.Text;
+            set
             {
                 if (AutoEllipsis)
                 {
                     _Text = value;
                     base.Text = string.Empty;
-                }    
+                }
                 else
                     base.Text = value;
             }
         }
-        public NoFocusButton()
+        public AutoEllipsisButton()
         {
+            AutoEllipsis = true;
             FlatStyle = FlatStyle.Flat;
             FlatAppearance.BorderSize = 1;
-            this.Paint += NoFocusButton_Paint;
+            this.Paint += AutoEllipsis_Paint;
         }
 
         /// <summary>
@@ -40,7 +64,7 @@ namespace C2.Controls.Common
             }
         }
 
-        private void NoFocusButton_Paint(object sender, PaintEventArgs e)
+        private void AutoEllipsis_Paint(object sender, PaintEventArgs e)
         {
             if (!AutoEllipsis)
                 return;
@@ -49,5 +73,9 @@ namespace C2.Controls.Common
             TextRenderer.DrawText(e.Graphics, Text, B.Font, new Rectangle(1, B.ClientRectangle.Top + (B.ClientRectangle.Height - S.Height) / 2,
                 B.ClientRectangle.Width - 1, B.ClientRectangle.Height), B.ForeColor, Color.Transparent, TextFormatFlags.EndEllipsis | TextFormatFlags.HorizontalCenter);
         }
+
+
     }
+
+
 }

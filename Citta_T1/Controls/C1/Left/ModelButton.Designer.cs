@@ -41,7 +41,7 @@
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox = new System.Windows.Forms.TextBox();
-            this.textButton = new C2.Controls.Common.NoFocusButton();
+            this.textButton = new C2.Controls.Common.AutoEllipsisButton();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lelfPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -189,7 +189,7 @@
 
         private System.Windows.Forms.PictureBox rightPictureBox;
         private System.Windows.Forms.PictureBox lelfPictureBox;
-        private C2.Controls.Common.NoFocusButton textButton;
+        private C2.Controls.Common.AutoEllipsisButton textButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RenameToolStripMenuItem;

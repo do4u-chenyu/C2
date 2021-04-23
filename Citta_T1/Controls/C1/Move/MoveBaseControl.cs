@@ -292,7 +292,7 @@ namespace C2.Controls.Move
             if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
             {
                 txtWidth += 11;
-                this.txtButton.Text =name + "...";
+                this.txtButton.Text = name + "...";
             }
             changeStatus.Width = normalStatus.Width + txtWidth;
             ResizeControl(txtWidth, changeStatus);

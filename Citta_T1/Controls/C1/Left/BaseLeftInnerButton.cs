@@ -15,7 +15,8 @@ namespace C2.Controls.C1.Left
 {
     public partial class BaseLeftInnerButton : UserControl
     {
-        public string ButtonText { get => this.noFocusButton.Text; set => this.noFocusButton.Text = value; }
+        private String tmp;
+        public string ButtonText { get => tmp; set => tmp = value; }
 
         public BaseLeftInnerButton()
         {

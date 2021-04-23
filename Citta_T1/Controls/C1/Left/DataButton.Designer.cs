@@ -42,7 +42,7 @@ namespace C2.Controls.Left
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox = new System.Windows.Forms.TextBox();
-            this.txtButton = new C2.Controls.Common.NoFocusButton();
+            this.txtButton = new C2.Controls.Common.AutoEllipsisButton();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -186,7 +186,7 @@ namespace C2.Controls.Left
 
         #endregion
 
-        private C2.Controls.Common.NoFocusButton txtButton;
+        private C2.Controls.Common.AutoEllipsisButton txtButton;
         private System.Windows.Forms.PictureBox leftPictureBox;
         private System.Windows.Forms.PictureBox rightPictureBox;
         private System.Windows.Forms.ToolTip helpToolTip;
