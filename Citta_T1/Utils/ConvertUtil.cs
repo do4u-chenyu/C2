@@ -169,7 +169,7 @@ namespace C2.Utils
             int addValue = 10;
             if (chineseRatio == 1 && otherRatio == 0)   // chineseRatio = 1 && otherRatio = 0
                 addValue -= 10;
-            return padding * 2 + chineseRatio * 12 + otherRatio * 7 + upperRatio * 3 + addValue;
+            return padding * 2 + chineseRatio * 13 + otherRatio * 8 + upperRatio * 13 + addValue;
         }
 
         public static string TransToUniversalTime(DateTime time)

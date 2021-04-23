@@ -286,7 +286,7 @@ namespace C2.Controls.Move
             name = ConvertUtil.SubstringByte(name, 0, maxLength);
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountUpper = Regex.Matches(name, "[A-Z]").Count;
-            int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9-* \\ / $  + - & % # ! ~ `   \\t \\n \\r :_]").Count;
+            int sumCountDigit = Regex.Matches(name, "[a-z0-9\\-\\*\\/\\$\\+&%#!~`\\t\\n\\r:_]").Count;
             int txtWidth = ConvertUtil.CountTextWidth(sumCount, sumCountDigit, sumCountUpper);
             this.txtButton.Text = name;
             if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
