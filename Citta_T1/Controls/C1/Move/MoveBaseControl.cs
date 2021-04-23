@@ -284,21 +284,17 @@ namespace C2.Controls.Move
             this.Description = name;
             int maxLength = 24;
             name = ConvertUtil.SubstringByte(name, 0, maxLength);
-            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
-            int sumFatChars = Regex.Matches(name, @"[A-Z\@￥&%<>+=^]").Count;
-            int sumMiddleChars = Regex.Matches(name, @"[a-z0-9\-`~!\#$*_?\\]").Count;
-            int sumThinChars = Regex.Matches(name, @"[:{}()|,.\/;'\[\]~]").Count;
-            int sumOtherChars = Math.Max(name.Length - sumCount - sumFatChars - sumMiddleChars - sumThinChars, 0);
-            int txtWidth = ConvertUtil.CountTextWidth(sumCount, sumMiddleChars, sumFatChars, sumThinChars);
-            if (sumOtherChars > 0)
-                txtWidth += sumOtherChars * 12;//moveControl没对输入字符类型限制，所以非上述指定类型，遇到其他类型字符，宽度默认值设为12
+            Font font = new Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            Size fontSize = TextRenderer.MeasureText(name, font);
+            fontSize.Width += 4; //增加边距
+
             this.txtButton.Text = name;
             if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
             {
                 this.txtButton.Text = name + "...";
             }
-            changeStatus.Width = normalStatus.Width + txtWidth;
-            ResizeControl(txtWidth, changeStatus);
+            changeStatus.Width = normalStatus.Width + fontSize.Width;
+            ResizeControl(fontSize.Width, changeStatus);
             this.helpToolTip.SetToolTip(this.txtButton, this.Description);
         }
 
