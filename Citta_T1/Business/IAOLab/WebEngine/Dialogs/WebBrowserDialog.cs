@@ -21,6 +21,9 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
     partial class WebBrowserDialog : StandardDialog
     {
+        const int WM_NCLBUTTONDBLCLK = 0xA3;
+        const int WM_NCLBUTTONDOWN = 0x00A1;
+        const int HTCAPTION = 2;
         private ToolStripButton LoadMapData;
         private ToolStripButton LoadBossData;
         private ToolStripButton SaveHtml;
@@ -577,6 +580,15 @@ namespace C2.IAOLab.WebEngine.Dialogs
             SaveCenterAndZoom();
             MapWidget mw = HitTopic.FindWidget<MapWidget>();
             mw.MapConfig = MapConfig;
+        }
+        // 通过拦截事件，禁止双击、拖拽标题栏改变窗体大小
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_NCLBUTTONDOWN && m.WParam.ToInt32() == HTCAPTION)
+                return;
+            if (m.Msg == WM_NCLBUTTONDBLCLK)
+                return;
+            base.WndProc(ref m);
         }
     }
     #region 内部类
