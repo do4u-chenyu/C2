@@ -38,6 +38,7 @@ namespace C2.Controls.Left
             this.RefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtButton = new C2.Controls.Common.NoFocusButton();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -140,5 +141,6 @@ namespace C2.Controls.Left
         private System.Windows.Forms.ToolStripMenuItem RemoveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RefreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ConnectToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

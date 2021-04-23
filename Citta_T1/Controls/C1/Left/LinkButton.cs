@@ -3,6 +3,7 @@ using C2.Dialogs;
 using C2.Model;
 using C2.Utils;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 namespace C2.Controls.Left
@@ -32,6 +33,9 @@ namespace C2.Controls.Left
         public event EventHandler<ChangeDatabaseItemEventArgs> DatabaseItemChanged;
         public event EventHandler<SelectLinkButtonEventArgs> LinkButtonSelected;
         private DatabaseItem _DatabaseItem;
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DatabaseItem DatabaseItem
         {
             get
@@ -58,6 +62,7 @@ namespace C2.Controls.Left
             if (item.Type == DatabaseType.Postgre)
                 this.leftPictureBox.Image = global::C2.Properties.Resources.PostgreSQL;
 
+            toolTip1.SetToolTip(this.txtButton, item.PrettyDatabaseInfo);
         }
 
         #region 右键菜单
