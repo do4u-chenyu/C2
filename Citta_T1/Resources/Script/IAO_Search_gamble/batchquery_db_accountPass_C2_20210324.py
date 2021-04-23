@@ -90,7 +90,7 @@ class Query(Thread):
             '--start', startTime,
             '--end', endTime,
             '--contextlen', '1000',
-            '--datatype', 'normal,garbage',
+            '--datatype', 'all',
             '--maxcount', '2147483647'
         ]
         if '=' not in key_word:
