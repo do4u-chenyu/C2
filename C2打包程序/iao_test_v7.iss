@@ -2,12 +2,12 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 ;添加可以更改工作空间的目录
 #define MyAppName "IAO解决方案"
-#define MyAppVersion "1.0.0.0"
+#define MyAppVersion "1.1.3"
 #define MyAppPublisher "fenghuo"
 #define MyAppURL "http://smallwhite555.gitee.io/citta/index.html"
 #define MyAppPkgDir "C:\Program Files\FiberHome\IAO解决方案"
 
-#define MyAppExeName "C2.exe"
+#define MyAppExeName "C2Shell.exe"
 ; 生成 目录setup.exe 所在文件夹
 #define MySetupOutDir ".\output"
 ;生成安装包的名称
@@ -21,7 +21,7 @@
 ; 点击license 打开的网页连接
 #define MyAppLkLicenseURL 'http://smallwhite555.gitee.io/citta/index.html'
 ; 安装目录至少需要的空间 100; 100 MB，TODO 要获取一些Minisize 之类的来计算，这里先写死
-#define MyAppNeedSpaceByte 40
+#define MyAppNeedSpaceByte 45
 ; 外部程序调用本setup.exe时，会向外部传 安装进度的window api Message ID 
 #define WM_MY_INSTALL_PROGRESS 6364
 ; 安装时显示进度条，背景切换图的图片数
@@ -82,11 +82,12 @@ Source: "{#MyAppPkgDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdir
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}" 
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; AfterInstall: ShoutcutRunAsAdmin('{group}\{#MyAppName}.lnk');IconFilename:"{app}\Resources\C2\Icon\Icon.ico"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon ; AfterInstall: ShoutcutRunAsAdmin('{commondesktop}\{#MyAppName}.lnk');IconFilename:"{app}\Resources\C2\Icon\Icon.ico"
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename:"{app}\{#MyAppExeName}"; Tasks: quicklaunchicon  ; AfterInstall: ShoutcutRunAsAdmin('{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}.lnk');
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\{#MyAppName}"; Filename:"{app}\{#MyAppExeName}"; Tasks: quicklaunchicon ; AfterInstall: ShoutcutRunAsAdmin('{userappdata}\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\{#MyAppName}.lnk');
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename:"{app}\{#MyAppExeName}"; Tasks: quicklaunchicon  ; AfterInstall: ShoutcutRunAsAdmin('{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}.lnk')
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\{#MyAppName}"; Filename:"{app}\{#MyAppExeName}"; Tasks: quicklaunchicon ; AfterInstall: ShoutcutRunAsAdmin('{userappdata}\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\{#MyAppName}.lnk')
+;Name: "{userdesktop}\IAO解决方案";IconFilename:"{app}\Resources\C2\Icon\Icon.ico"
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: runascurrentuser nowait postinstall skipifsilent
@@ -330,6 +331,7 @@ begin
         '      <add key="EPPlus:ExcelPackage.LicenseContext" value="NonCommercial" />' + #13#10 +
         '      <add key="ClientSettingsProvider.ServiceUri" value="" />' + #13#10 +
         '      <add key="IAOLab" value="APK, BaseStation, Wifi, Card, Tude, Ip "/>' + #13#10 +
+        '      <add key="version" value="1.1.3"/>' + #13#10 +
         '    </appSettings>' + #13#10 +
         '</configuration>', false);
 end;
@@ -621,18 +623,17 @@ procedure InitGui_PageSelectDir();
 var
   tmpFont:TFont;
 begin
-
   lblTipWDir3 := TLabel.Create(WizardForm);
   with lblTipWDir3 do
   begin
     Parent := WizardForm;
-    Caption := '安装程序将把 IAO解决方案 安装到下面的文件夹中';
+    Caption := '安装程序将把  IAO解决方案  安装到下面的文件夹中：';
     Transparent := true;
     Font.Size:= 10
     Font.Name:='微软雅黑'
     Font.Color:=$ffffff
     Left := DpiScale(130);
-    Top := DpiScale(179);
+    Top := DpiScale(190);
   end;
 
   edtSelectDir1 := TEdit.Create(WizardForm);
@@ -640,12 +641,12 @@ begin
   begin
     Parent:= WizardForm;
     Text := WizardForm.DirEdit.Text;
-    Font.Size:= 10
+    Font.Size:= 11
     Font.Color:=$555555
     Left:= DpiScale(132);
-    Top := DpiScale(228);
+    Top := DpiScale(231);
     Width:= DpiScale(311);
-    Height:= DpiScale(24);
+    Height:= DpiScale(18);
     BorderStyle:=bsNone;
     TabStop := false;
     OnChange:=@EdtSelectDir1_EditChanged;
@@ -744,13 +745,13 @@ begin
   with lblTipWDir2 do
   begin
     Parent := WizardForm;
-    Caption := '设置你的工作空间：';
+    Caption := '正在设置您的工作空间：';
     Transparent := true;
     Font.Size:= 10
     Font.Name:='微软雅黑'
     Font.Color:=$ffffff
     Left := DpiScale(130);
-    Top := DpiScale(179);
+    Top := DpiScale(190);
   end;
 
   edtSelectDir2 := TEdit.Create(WizardForm);
@@ -758,12 +759,12 @@ begin
     begin
     Parent:= WizardForm;
     Text := WorkSpacePath;
-    Font.Size:= 10
+    Font.Size:= 11
     Font.Color:=$555555
     Left:= DpiScale(132);
-    Top := DpiScale(228);
+    Top := DpiScale(231);
     Width:= DpiScale(311);
-    Height:= DpiScale(24);
+    Height:= DpiScale(18);
     BorderStyle:=bsNone;
     TabStop := false;
     OnChange:=@EdtSelectDir2_EditChanged;

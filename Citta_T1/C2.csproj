@@ -2138,20 +2138,35 @@
     <Content Include="Business\IAOLab\WebEngine\Html\StartMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle01.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle01.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle02.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle02.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle03.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle03.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle04.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle04.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle05.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle05.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle06.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle06.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle07.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle07.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle08.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle08.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle09.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle09.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle10.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle10.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle11.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle11.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle12.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle12.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle13.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle13.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle14.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle14.png" />
+    <None Include="Business\IAOLab\WebEngine\img\BossStyle15.jpg" />
     <Content Include="Business\IAOLab\WebEngine\img\BossStyle15.png" />
     <Content Include="Business\IAOLab\WebEngine\img\img10\back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

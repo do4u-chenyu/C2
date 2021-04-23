@@ -163,13 +163,13 @@ namespace C2.Utils
             return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
         }
 
-        public static int CountTextWidth(int chineseRatio, int otherRatio, int upperRatio)
+        public static int CountTextWidth(int chineseRatio, int otherRatio, int upperRatio,int sumThinChar)
         {
             int padding = 3;
             int addValue = 10;
             if (chineseRatio == 1 && otherRatio == 0)   // chineseRatio = 1 && otherRatio = 0
                 addValue -= 10;
-            return padding * 2 + chineseRatio * 13 + otherRatio * 8 + upperRatio * 13 + addValue;
+            return padding * 5 + chineseRatio * 14 + otherRatio * 8 + upperRatio * 13 + sumThinChar*4 + addValue;
         }
 
         public static string TransToUniversalTime(DateTime time)
