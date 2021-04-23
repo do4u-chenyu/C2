@@ -417,25 +417,34 @@ namespace FullTextGrammarAssistant
             DataType.Add("垃圾", "garbage");
 
             string dataTypeText = string.Empty;
+            int count = 0;
 
             foreach (CheckBox ch in panel4.Controls)
             {
                 if (ch.Checked == true)
+                    count++;
+            }
+            if (count == 1)
+            {
+                foreach (CheckBox ch in panel4.Controls)
                 {
-                    foreach (KeyValuePair<string, string> data in DataType)
+                    if (ch.Checked == true) 
                     {
-                        if (data.Key == ch.Text)
+                        foreach (KeyValuePair<string, string> data in DataType)
                         {
-                            dataTypeText += data.Value + " ";
+                            if (data.Key == ch.Text)
+                                dataTypeText = data.Value;
                         }
                     }
                 }
             }
+
             if (string.IsNullOrEmpty(dataTypeText))
-                this.previewTextList[7] = string.Empty;
+                this.previewTextList[7] = "--datatype all";
             else
                 this.previewTextList[7] = "--datatype " + dataTypeText;
         }
+
         private void optionPanel()
         {
             Dictionary<string, string> OptionType = new Dictionary<string, string>();
