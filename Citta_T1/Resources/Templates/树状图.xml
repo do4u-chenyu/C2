@@ -33,11 +33,13 @@
       <nodes>
         <node id="1" text="xxx会战" x="356" y="128" width="146" height="66" text_b="12, 12, 122, 42">
           <style>
-            <back_color>#5A4EB1</back_color>
-            <fore_color>White</fore_color>
+            <back_color>Lavender</back_color>
+            <fore_color>Black</fore_color>
+            <line_color>Black</line_color>
             <border_color>#B68FCB</border_color>
             <round_radius>5</round_radius>
             <padding>12</padding>
+            <fill_type>Solid</fill_type>
             <font font_family="微软雅黑" size="21.75" style="Bold" />
           </style>
           <nodes>

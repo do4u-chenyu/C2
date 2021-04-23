@@ -45,7 +45,8 @@ namespace C2.Controls.Left
                                     this.ExtType,
                                     0,
                                     this.Separator == OpUtil.TabSeparator ? "TAB" : this.Separator.ToString());
-           this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+            this.helpToolTip.SetToolTip(this.txtButton, this.txtButton.Text);
         }
 
         #region 右键菜单

@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.leftPictureBox = new System.Windows.Forms.PictureBox();
-            this.noFocusButton = new C2.Controls.Common.NoFocusButton();
+            this.noFocusButton = new C2.Controls.Common.AutoEllipsisButton();
             this.textBox = new System.Windows.Forms.TextBox();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);         
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -112,7 +112,7 @@
         #endregion
 
         protected System.Windows.Forms.PictureBox leftPictureBox;
-        protected Controls.Common.NoFocusButton noFocusButton;
+        protected Controls.Common.AutoEllipsisButton noFocusButton;
         protected System.Windows.Forms.TextBox textBox;
         protected System.Windows.Forms.PictureBox rightPictureBox;
         protected System.Windows.Forms.ToolTip toolTip;

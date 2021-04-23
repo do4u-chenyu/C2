@@ -18,6 +18,7 @@ namespace C2.Controls.Left
         {
             InitializeComponent();
             this.textButton.Text = modelTitle;
+            this.toolTip1.SetToolTip(this.textButton, ModelTitle);
             this.oldTextString = modelTitle;
             fullFilePath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场", this.textButton.Text, this.textButton.Text + ".xml");
            
@@ -46,11 +47,6 @@ namespace C2.Controls.Left
             this.OpenToolStripMenuItem.Enabled = false;
             this.RenameToolStripMenuItem.Enabled = false;
             this.DeleteToolStripMenuItem.Enabled = false;
-        }
-
-        private void ShowForm(CanvasForm form)
-        {
-            throw new NotImplementedException();
         }
 
         private void ExplorerToolStripMenuItem_Click(object sender, EventArgs e)

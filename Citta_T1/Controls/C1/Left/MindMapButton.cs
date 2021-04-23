@@ -16,6 +16,7 @@ namespace C2.Controls.Left
         {
             InitializeComponent();
             this.textButton.Text = modelTitle;
+            this.toolTip1.SetToolTip(this.textButton, ModelTitle);
             this.oldTextString = modelTitle;
             FullFilePath = Path.Combine(Global.BusinessViewPath, this.textButton.Text, this.textButton.Text + ".bmd");
         }

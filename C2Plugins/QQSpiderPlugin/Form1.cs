@@ -317,7 +317,7 @@ namespace QQSpiderPlugin
         {
             QrLogin login = new QrLogin();
             byte[] imgBytes = login.GetQRCode().Content;
-            if (imgBytes.Length == 0)
+            if (imgBytes == null || imgBytes != null && imgBytes.Length == 0)
                 return;
             Image img = Image.FromStream(new MemoryStream(imgBytes));
             QrCodeForm qrCodeForm = new QrCodeForm(img);

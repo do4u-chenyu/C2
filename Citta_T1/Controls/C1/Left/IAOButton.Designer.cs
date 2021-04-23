@@ -33,12 +33,11 @@ namespace C2.Controls.Left
             this.components = new System.ComponentModel.Container();
             this.leftPictureBox = new System.Windows.Forms.PictureBox();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
-            this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.textBox = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.txtButton = new C2.Controls.Common.NoFocusButton();
+            this.txtButton = new C2.Controls.Common.AutoEllipsisButton();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -110,6 +109,7 @@ namespace C2.Controls.Left
             this.txtButton.Name = "txtButton";
             this.txtButton.Size = new System.Drawing.Size(95, 25);
             this.txtButton.TabIndex = 9;
+            this.txtButton.Text = null;
             this.txtButton.UseVisualStyleBackColor = false;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             // 
@@ -136,10 +136,9 @@ namespace C2.Controls.Left
 
         #endregion
 
-        private C2.Controls.Common.NoFocusButton txtButton;
+        private C2.Controls.Common.AutoEllipsisButton txtButton;
         private System.Windows.Forms.PictureBox leftPictureBox;
         private System.Windows.Forms.PictureBox rightPictureBox;
-        private System.Windows.Forms.ToolTip helpToolTip;
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 打开ToolStripMenuItem;
