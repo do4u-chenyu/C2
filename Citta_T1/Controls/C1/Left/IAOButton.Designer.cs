@@ -37,7 +37,7 @@ namespace C2.Controls.Left
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.txtButton = new C2.Controls.Common.NoFocusButton();
+            this.txtButton = new C2.Controls.Common.AutoEllipsisButton();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -136,7 +136,7 @@ namespace C2.Controls.Left
 
         #endregion
 
-        private C2.Controls.Common.NoFocusButton txtButton;
+        private C2.Controls.Common.AutoEllipsisButton txtButton;
         private System.Windows.Forms.PictureBox leftPictureBox;
         private System.Windows.Forms.PictureBox rightPictureBox;
         private System.Windows.Forms.TextBox textBox;

@@ -75,6 +75,14 @@ namespace C2.Controls.C1.Left
             // 用全局变量机械降神, 不是好的方式, 只是相对省事儿,不得已为之,尽量少用 
             Global.GetSearchToolkitControl().DeleteButton(this, task);
         }
+        private void NoFocusButton_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            Button B = (Button)sender;
+            Size S = TextRenderer.MeasureText(task.TaskName, B.Font);
+            TextRenderer.DrawText(e.Graphics, task.TaskName, B.Font, new Rectangle(0, B.ClientRectangle.Top + (B.ClientRectangle.Height - S.Height) / 2,
+                B.ClientRectangle.Width - 2, B.ClientRectangle.Height), B.ForeColor, Color.Transparent, TextFormatFlags.EndEllipsis | TextFormatFlags.HorizontalCenter);
+        }
+
 
         private void NoFocusButton_MouseDown(object sender, MouseEventArgs e)
         {
@@ -88,5 +96,7 @@ namespace C2.Controls.C1.Left
         {
             new SearchToolkitForm().ShowTaskInfoDialog(this.task);
         }
+
+
     }
 }

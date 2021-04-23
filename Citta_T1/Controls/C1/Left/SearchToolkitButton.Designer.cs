@@ -1,4 +1,7 @@
-﻿namespace C2.Controls.C1.Left
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace C2.Controls.C1.Left
 {
     partial class SearchToolkitButton
     {
@@ -36,7 +39,9 @@
             // 
             // noFocusButton
             // 
+            this.noFocusButton.AutoEllipsis = false;
             this.noFocusButton.FlatAppearance.BorderSize = 0;
+            this.noFocusButton.Paint += new System.Windows.Forms.PaintEventHandler(this.NoFocusButton_Paint);
             this.noFocusButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NoFocusButton_MouseDown);
             // 
             // 新建任务ToolStripMenuItem
@@ -65,6 +70,7 @@
             this.PerformLayout();
 
         }
+
 
         #endregion
 

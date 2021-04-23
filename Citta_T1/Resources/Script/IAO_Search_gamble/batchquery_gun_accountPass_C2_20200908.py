@@ -33,6 +33,7 @@ def queryclient(data_path,keyWords,startTime,endTime,queryType):
             '--querystring', keyWords,
             '--start', startTime,
             '--end', endTime,
+            '--datatype', 'all',
             '--contextlen', '10000',
             '--maxcount', '2147483647'
         ]
