@@ -620,13 +620,13 @@ namespace FullTextGrammarAssistant
             // 
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Items.AddRange(new object[] {
-            "精确匹配",
-            "模糊匹配",
             "大于",
             "大于等于",
             "等于",
+            "不等于",
             "小于",
-            "小于等于"});
+            "小于等于",
+            "正则表达式"});
             this.comboBox4.Location = new System.Drawing.Point(344, 271);
             this.comboBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox4.Name = "comboBox4";
@@ -665,13 +665,13 @@ namespace FullTextGrammarAssistant
             // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "精确匹配",
-            "模糊匹配",
             "大于",
             "大于等于",
             "等于",
+            "不等于",
             "小于",
-            "小于等于"});
+            "小于等于",
+            "正则表达式"});
             this.comboBox2.Location = new System.Drawing.Point(344, 242);
             this.comboBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox2.Name = "comboBox2";
@@ -781,13 +781,13 @@ namespace FullTextGrammarAssistant
             // 
             this.comboBox8.FormattingEnabled = true;
             this.comboBox8.Items.AddRange(new object[] {
-            "精确匹配",
-            "模糊匹配",
             "大于",
             "大于等于",
             "等于",
+            "不等于",
             "小于",
-            "小于等于"});
+            "小于等于",
+            "正则表达式"});
             this.comboBox8.Location = new System.Drawing.Point(344, 301);
             this.comboBox8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox8.Name = "comboBox8";

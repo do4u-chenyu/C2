@@ -68,18 +68,8 @@ namespace FullTextGrammarAssistant
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            int count = 0;
-            if (checkBox1.Checked == false)
-            {
-                foreach (CheckBox ch in panel2.Controls)
-                {
-                    if (ch.Checked == true)
-                        count++;
-                }
-                if (count == 0)
-                    MessageBox.Show("请选择协议类型。");
-            }
-            else if (checkBox1.Checked == true)
+
+            if (checkBox1.Checked == true)
             {
                 foreach (CheckBox ch in panel2.Controls)
                 {
@@ -103,18 +93,8 @@ namespace FullTextGrammarAssistant
 
         private void checkBox48_CheckedChanged(object sender, EventArgs e)
         {
-            int count = 0;
-            if (checkBox48.Checked == false)
-            {
-                foreach (CheckBox ch in panel3.Controls)
-                {
-                    if (ch.Checked == true)
-                        count++;
-                }
-                if (count == 0)
-                    MessageBox.Show("请选择查询方式。");
-            }
-            else if (checkBox48.Checked == true)
+
+            if (checkBox48.Checked == true)
             {
                 foreach (CheckBox ch in panel3.Controls)
                 {
@@ -133,18 +113,8 @@ namespace FullTextGrammarAssistant
 
         private void checkBox53_CheckedChanged(object sender, EventArgs e)
         {
-            int count = 0;
-            if (checkBox53.Checked == false)
-            {
-                foreach (CheckBox ch in panel4.Controls)
-                {
-                    if (ch.Checked == true)
-                        count++;
-                }
-                if (count == 0)
-                    MessageBox.Show("请选择数据类型。");
-            }
-            else if (checkBox53.Checked == true)
+
+            if (checkBox53.Checked == true)
             {
                 foreach (CheckBox ch in panel4.Controls)
                 {
@@ -163,18 +133,8 @@ namespace FullTextGrammarAssistant
 
         private void checkBox50_CheckedChanged(object sender, EventArgs e)
         {
-            int count = 0;
-            if (checkBox50.Checked == false)
-            {
-                foreach (CheckBox ch in panel5.Controls)
-                {
-                    if (ch.Checked == true)
-                        count++;
-                }
-                if (count == 0)
-                    MessageBox.Show("请选择搜索范围。");
-            }
-            else if (checkBox50.Checked == true)
+
+            if (checkBox50.Checked == true)
             {
                 foreach (CheckBox ch in panel5.Controls)
                 {
@@ -224,11 +184,21 @@ namespace FullTextGrammarAssistant
             string conText2 = Condition_filter(this.comboBox4.Text);
             string conText3 = Condition_filter(this.comboBox8.Text);
 
+            //if (this.comboBox2.Text == "正则表达式")
+                //this.textBox2.Text = "\""+ this.textBox2.Text+"\"";
+            //if (this.comboBox4.Text == "正则表达式")
+                //this.textBox5.Text = "\"" + this.textBox5.Text + "\"";
+            //if (this.comboBox8.Text == "正则表达式")
+                //this.textBox6.Text = "\"" + this.textBox6.Text + "\"";
+
             if (string.IsNullOrEmpty(attrText1))
                 this.previewTextList[5] = string.Empty;
+            else if(comboBox5.SelectedIndex == -1 & comboBox6.SelectedIndex == -1)
+                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + this.textBox2.Text + "\'";
+            else if (comboBox6.SelectedIndex == -1)
+                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + this.textBox2.Text + " " + this.comboBox5.Text + " " + attrText2 + conText2 + this.textBox5.Text + "\'";
             else
-                this.previewTextList[5] = "--dbfilter \"" + attrText1 + " " + conText1 + " " + this.textBox2.Text + " " + this.comboBox5.Text + " " + attrText2 + " " + conText2 + " " + this.textBox5.Text + " " + this.comboBox6.Text + " " + attrText3 + " " + conText3 + " " + this.textBox6.Text + "\"";
-
+                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + this.textBox2.Text + " " + this.comboBox5.Text + " " + attrText2 + conText2 + this.textBox5.Text + " " + this.comboBox6.Text + " " + attrText3 + conText3 + " " + this.textBox6.Text + "\'";
             this.previewCmdText.Text = String.Join(" ", this.previewTextList) + "\r\n\r\n#登陆全文主节点执行#全文主节点当前针对每个查询条件一次限制返回10W行";
             this.textBox9.Text = String.Join(" ", this.jarTextList) + "\r\n\r\n#batchQueryAndExport_1.7.jar不支持全文的dbfilter语法\r\n##全文主节点当前针对每个查询条件一次限制返回10W行\r\n##batchQueryAndExport_1.7.jar不支持选择查询方式及数据类型,且数据类型只能查normal类型,不能查garbage类型#";
         }
@@ -236,13 +206,13 @@ namespace FullTextGrammarAssistant
         private string Condition_filter(string condition)
         {
             Dictionary<string, string> conditionType = new Dictionary<string, string>();
-            conditionType.Add("精确匹配", "\"");
-            conditionType.Add("模糊匹配", "");
             conditionType.Add("大于", ">");
             conditionType.Add("大于等于", ">=");
             conditionType.Add("等于", "=");
+            conditionType.Add("不等于", "!=");
             conditionType.Add("小于", "<");
             conditionType.Add("小于等于", "<=");
+            conditionType.Add("正则表达式", "=~");
 
             string conditionText = string.Empty;
 
