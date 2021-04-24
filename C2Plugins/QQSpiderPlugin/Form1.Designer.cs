@@ -84,7 +84,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -512,7 +511,6 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.button3);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.label9);
@@ -556,9 +554,9 @@
             this.label9.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label9.Location = new System.Drawing.Point(90, 133);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(246, 19);
+            this.label9.Size = new System.Drawing.Size(389, 19);
             this.label9.TabIndex = 7;
-            this.label9.Text = "步骤4: 此时可以看到头像，然后添加好友";
+            this.label9.Text = "步骤4: 此时可以看到头像，然后添加好友，不用理会对方是否通过";
             // 
             // label8
             // 
@@ -612,7 +610,8 @@
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pictureBox1.Location = new System.Drawing.Point(189, 195);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(259, 220);
+            this.pictureBox1.Size = new System.Drawing.Size(250, 250);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -625,16 +624,6 @@
             this.label5.Size = new System.Drawing.Size(100, 19);
             this.label5.TabIndex = 0;
             this.label5.Text = "wxid_开头的ID";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(255, 177);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(107, 31);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "施工中...";
             // 
             // Form1
             // 
@@ -727,7 +716,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label11;
     }
 }
 

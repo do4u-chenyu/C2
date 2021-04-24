@@ -401,6 +401,9 @@ namespace QQSpiderPlugin
         private void button1_Click(object sender, EventArgs e)
         {
             string wxid = wxid_prefix + textBox1.Text.Trim();
+            ThoughtWorks.QRCode.Codec.QRCodeEncoder en = new ThoughtWorks.QRCode.Codec.QRCodeEncoder();
+            Bitmap image = en.Encode(wxid);
+            this.pictureBox1.Image = image;
         }
 
         private void button3_Click(object sender, EventArgs e)
