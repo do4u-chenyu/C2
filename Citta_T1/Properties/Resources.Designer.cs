@@ -471,16 +471,6 @@ namespace C2.Properties {
         }
         
         /// <summary>
-        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
-        /// </summary>
-        public static System.Drawing.Icon check_update1 {
-            get {
-                object obj = ResourceManager.GetObject("check_update1", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Bitmap checkUpdate {
@@ -1344,16 +1334,6 @@ namespace C2.Properties {
         /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Icon keyboard_icon {
-            get {
-                object obj = ResourceManager.GetObject("keyboard_icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
-        /// </summary>
         public static System.Drawing.Icon keyword_icon {
             get {
                 object obj = ResourceManager.GetObject("keyword_icon", resourceCulture);
@@ -1867,26 +1847,6 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap paste {
             get {
                 object obj = ResourceManager.GetObject("paste", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        public static System.Drawing.Bitmap paste_as_image {
-            get {
-                object obj = ResourceManager.GetObject("paste_as_image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        public static System.Drawing.Bitmap paste_as_remark {
-            get {
-                object obj = ResourceManager.GetObject("paste_as_remark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2704,8 +2664,7 @@ namespace C2.Properties {
         ///		&lt;item name=&quot;About&quot;&gt;关于&lt;/item&gt;
         ///		&lt;item name=&quot;Menu&quot;&gt;菜 单&lt;/item&gt;
         ///		&lt;item name=&quot;Open&quot;&gt;打开&lt;/item&gt;
-        ///		&lt;item name=&quot;New&quot;&gt;新建&lt;/item&gt;
-        ///		&lt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;item name=&quot;N [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string zh_CHS {
             get {
@@ -2850,8 +2809,7 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt;
-        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 思维导图 {
             get {
@@ -2896,8 +2854,7 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt;
-        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 树状图 {
             get {
@@ -2967,8 +2924,7 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt;
-        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 组织架构图 {
             get {
@@ -3003,8 +2959,7 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt;
-        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 逻辑图 {
             get {
