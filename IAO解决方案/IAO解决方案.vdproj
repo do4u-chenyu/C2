@@ -111,6 +111,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_085BABAF69F5118CC19DC945D5245FE2"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_099D7B5FE5EF0D1CA1E882018DB2443A"
         "OwnerKey" = "8:_6D97A6A417EE965A3571FC645C903789"
         "MsmSig" = "8:_UNDEFINED"
@@ -477,6 +483,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_302615913B366F6629D3D5176CAB08BD"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3072D455344A46B193A0356E2E5D5A4F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -557,6 +569,12 @@
         {
         "MsmKey" = "8:_3950BAA89BAD93A276C959FFF5B374DA"
         "OwnerKey" = "8:_59297E7805C877623F33696B98AC22E7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3950BAA89BAD93A276C959FFF5B374DA"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -645,12 +663,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3F93D530F64C411184B7F053B91A4F00"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3FE2C871062C482E9447F23FCD6C3ECE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -671,6 +683,12 @@
         {
         "MsmKey" = "8:_40FDBDA6AF9739BAF2F8DA6F6DB01310"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_40FDBDA6AF9739BAF2F8DA6F6DB01310"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -905,6 +923,12 @@
         {
         "MsmKey" = "8:_59297E7805C877623F33696B98AC22E7"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_59297E7805C877623F33696B98AC22E7"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1942,6 +1966,12 @@
         "Entry"
         {
         "MsmKey" = "8:_DEDC21EFD49B4377BF9034E2EE112E68"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DFE2E47F1D3C4EFCA72B0F97C4EB3C73"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4514,26 +4544,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3F93D530F64C411184B7F053B91A4F00"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Help\\C2帮助文档.chm"
-            "TargetName" = "8:C2帮助文档.chm"
-            "Tag" = "8:"
-            "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3FE2C871062C482E9447F23FCD6C3ECE"
@@ -8683,6 +8693,26 @@
             "TargetName" = "8:325_星星.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DFE2E47F1D3C4EFCA72B0F97C4EB3C73"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Help\\C2帮助文档.txt"
+            "TargetName" = "8:C2帮助文档.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
