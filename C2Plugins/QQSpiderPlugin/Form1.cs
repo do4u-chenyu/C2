@@ -1,22 +1,16 @@
 ﻿using C2.IAOLab.Plugins;
-using NPOI.HSSF.UserModel;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QQSpiderPlugin
 {
     public partial class Form1 : Form, IPlugin
     {
+        private static readonly string wxid_prefix = @"weixin://contacts/profile/";
         delegate void CloseQrForm();
         string tmpPath = @"session.txt";
         Session session;
@@ -402,6 +396,16 @@ namespace QQSpiderPlugin
                 ShowMessageBox("输出有误");
             }
             this.idDataSource = input;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string wxid = wxid_prefix + textBox1.Text.Trim();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
