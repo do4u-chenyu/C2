@@ -47,8 +47,8 @@ namespace C2.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性，对
-        ///   使用此强类型资源类的所有资源查找执行重写。
+        ///   重写当前线程的 CurrentUICulture 属性
+        ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
@@ -2014,6 +2014,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap pythonHelper1 {
+            get {
+                object obj = ResourceManager.GetObject("pythonHelper1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap pythonHelper2 {
             get {
                 object obj = ResourceManager.GetObject("pythonHelper2", resourceCulture);
@@ -2694,7 +2704,8 @@ namespace C2.Properties {
         ///		&lt;item name=&quot;About&quot;&gt;关于&lt;/item&gt;
         ///		&lt;item name=&quot;Menu&quot;&gt;菜 单&lt;/item&gt;
         ///		&lt;item name=&quot;Open&quot;&gt;打开&lt;/item&gt;
-        ///		&lt;item name=&quot;N [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;item name=&quot;New&quot;&gt;新建&lt;/item&gt;
+        ///		&lt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string zh_CHS {
             get {
@@ -2839,7 +2850,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 思维导图 {
             get {
@@ -2884,7 +2896,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 树状图 {
             get {
@@ -2954,7 +2967,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 组织架构图 {
             get {
@@ -2989,7 +3003,8 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt;
+        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 逻辑图 {
             get {
