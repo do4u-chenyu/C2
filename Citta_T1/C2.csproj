@@ -2357,7 +2357,6 @@
     </Content>
     <Content Include="Resources\Icons\check_update.ico" />
     <None Include="Resources\Icons\Datamanagement.png" />
-    <Content Include="Resources\Icons\document.ico" />
     <Content Include="Resources\Icons\exclamation.ico" />
     <Content Include="Resources\Icons\globe_network.ico" />
     <Content Include="Resources\Icons\hourglass_ico.ico" />
@@ -2381,10 +2380,6 @@
     <None Include="Resources\Images\back_color.png" />
     <None Include="Resources\Images\balloon_small.png" />
     <None Include="Resources\Images\arrow_query.png" />
-    <None Include="Resources\Icons\webDetectionIcon.jpg" />
-    <None Include="Resources\Icons\webDetectionIcon.png" />
-    <None Include="Resources\Icons\webDetectionIcon1.jpg" />
-    <None Include="Resources\Icons\webDetectionIcon1.png" />
     <Content Include="Resources\Images\bar.png" />
     <None Include="Resources\Images\bold.png" />
     <None Include="Resources\Images\calculator.png" />

@@ -454,7 +454,7 @@
             this.Controls.Add(this.panelCenter);
             this.Controls.Add(this.panelBottom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = Properties.Resources.logo;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SearchToolkitForm";

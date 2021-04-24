@@ -61,19 +61,8 @@ namespace C2
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.newModelButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.moreButton = new System.Windows.Forms.Button();
-            this.formatButton = new System.Windows.Forms.Button();
-            this.groupButton = new System.Windows.Forms.Button();
-            this.interOpButton = new System.Windows.Forms.Button();
-            this.unionButton = new System.Windows.Forms.Button();
-            this.diffButton = new System.Windows.Forms.Button();
-            this.filterButton = new System.Windows.Forms.Button();
-            this.connectOpButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.ImportDataSourceButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
             this.logLabel = new System.Windows.Forms.Label();
             this.pyControlLabel = new System.Windows.Forms.Label();
@@ -496,108 +485,12 @@ namespace C2
             this.panel5.Size = new System.Drawing.Size(200, 100);
             this.panel5.TabIndex = 0;
             // 
-            // newModelButton
-            // 
-            this.newModelButton.BackColor = System.Drawing.Color.White;
-            this.newModelButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.newModelButton.Image = ((System.Drawing.Image)(resources.GetObject("newModelButton.Image")));
-            this.newModelButton.Location = new System.Drawing.Point(3, 8);
-            this.newModelButton.Name = "newModelButton";
-            this.newModelButton.Size = new System.Drawing.Size(79, 32);
-            this.newModelButton.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.newModelButton, "新建模型");
-            this.newModelButton.UseVisualStyleBackColor = false;
-            this.newModelButton.Click += new System.EventHandler(this.NewModelButton_Click);
-            // 
             // label7
             // 
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(100, 23);
             this.label7.TabIndex = 0;
-            // 
-            // moreButton
-            // 
-            this.moreButton.Location = new System.Drawing.Point(0, 0);
-            this.moreButton.Name = "moreButton";
-            this.moreButton.Size = new System.Drawing.Size(75, 23);
-            this.moreButton.TabIndex = 0;
-            // 
-            // formatButton
-            // 
-            this.formatButton.Location = new System.Drawing.Point(0, 0);
-            this.formatButton.Name = "formatButton";
-            this.formatButton.Size = new System.Drawing.Size(75, 23);
-            this.formatButton.TabIndex = 0;
-            // 
-            // groupButton
-            // 
-            this.groupButton.Location = new System.Drawing.Point(0, 0);
-            this.groupButton.Name = "groupButton";
-            this.groupButton.Size = new System.Drawing.Size(75, 23);
-            this.groupButton.TabIndex = 0;
-            // 
-            // interOpButton
-            // 
-            this.interOpButton.Location = new System.Drawing.Point(0, 0);
-            this.interOpButton.Name = "interOpButton";
-            this.interOpButton.Size = new System.Drawing.Size(75, 23);
-            this.interOpButton.TabIndex = 0;
-            // 
-            // unionButton
-            // 
-            this.unionButton.Location = new System.Drawing.Point(0, 0);
-            this.unionButton.Name = "unionButton";
-            this.unionButton.Size = new System.Drawing.Size(75, 23);
-            this.unionButton.TabIndex = 0;
-            // 
-            // diffButton
-            // 
-            this.diffButton.Location = new System.Drawing.Point(0, 0);
-            this.diffButton.Name = "diffButton";
-            this.diffButton.Size = new System.Drawing.Size(75, 23);
-            this.diffButton.TabIndex = 0;
-            // 
-            // filterButton
-            // 
-            this.filterButton.Location = new System.Drawing.Point(0, 0);
-            this.filterButton.Name = "filterButton";
-            this.filterButton.Size = new System.Drawing.Size(75, 23);
-            this.filterButton.TabIndex = 0;
-            // 
-            // connectOpButton
-            // 
-            this.connectOpButton.Location = new System.Drawing.Point(0, 0);
-            this.connectOpButton.Name = "connectOpButton";
-            this.connectOpButton.Size = new System.Drawing.Size(75, 23);
-            this.connectOpButton.TabIndex = 0;
-            // 
-            // ImportDataSourceButton
-            // 
-            this.ImportDataSourceButton.BackColor = System.Drawing.Color.GhostWhite;
-            this.ImportDataSourceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ImportDataSourceButton.ForeColor = System.Drawing.Color.GhostWhite;
-            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.importDataSource;
-            this.ImportDataSourceButton.Location = new System.Drawing.Point(66, 0);
-            this.ImportDataSourceButton.Name = "ImportDataSourceButton";
-            this.ImportDataSourceButton.Size = new System.Drawing.Size(32, 32);
-            this.ImportDataSourceButton.TabIndex = 9;
-            this.toolTip1.SetToolTip(this.ImportDataSourceButton, "导入本地数据文件,支持bcp,txt,csv,xls四种格式");
-            this.ImportDataSourceButton.UseVisualStyleBackColor = false;
-            this.ImportDataSourceButton.Click += new System.EventHandler(this.ImportDataSource_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.GhostWhite;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.GhostWhite;
-            this.button1.Image = global::C2.Properties.Resources.importDataSource;
-            this.button1.Location = new System.Drawing.Point(94, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 32);
-            this.button1.TabIndex = 10;
-            this.toolTip1.SetToolTip(this.button1, "临时新建一个DocumentForm窗体");
-            this.button1.UseVisualStyleBackColor = false;
             // 
             // minMaxPictureBox
             // 
@@ -865,16 +758,7 @@ namespace C2
         private Controls.Common.NoFocusButton mindMapButton;
         private System.Windows.Forms.Panel leftToolBoxPanel;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button newModelButton;
         private System.Windows.Forms.Panel commonPanel;
-        private System.Windows.Forms.Button moreButton;
-        private System.Windows.Forms.Button formatButton;
-        private System.Windows.Forms.Button groupButton;
-        private System.Windows.Forms.Button interOpButton;
-        private System.Windows.Forms.Button unionButton;
-        private System.Windows.Forms.Button diffButton;
-        private System.Windows.Forms.Button filterButton;
-        private System.Windows.Forms.Button connectOpButton;
         private Controls.Left.MyMindMapControl mindMapControl;
         private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.IAOLabControl iaoLabControl;
@@ -886,8 +770,6 @@ namespace C2
         private System.Windows.Forms.ToolTip toolTip1;
         private Panel MainPanel;
         private Panel tabPanel;
-        private Button ImportDataSourceButton;
-        private Button button1;
         private Controls.TaskBar taskBar;
         private Controls.C1.Left.LeftFoldButton leftFoldButton;
         private Panel workSpacePanel;
