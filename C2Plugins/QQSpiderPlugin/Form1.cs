@@ -263,9 +263,11 @@ namespace QQSpiderPlugin
             richTextBox.AppendText(textMessage);
             richTextBox.Refresh();
         }
+
         private void Cancle_Click(object sender, EventArgs e)
         {
             this.Close();
+
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -284,24 +286,29 @@ namespace QQSpiderPlugin
 
         private void OutputButton1_Click(object sender, EventArgs e)
         {
+
             if (this.dataGridView1.Rows.Count == 0)
             {
                 ShowMessageBox("空文件无法导出");
                 return;
             }
+
             SaveFileDialog sfd = new SaveFileDialog
             {
                 Filter = "Excel Documents (*.xls)|*.xls",
             };
             if (sfd.ShowDialog() == DialogResult.OK)
             {
+
                 Util.SaveToExcel(sfd.FileName, this.dataGridView1);
+
                 ShowMessageBox("导出成功");
             }
         }
 
         private void OutputButton2_Click(object sender, EventArgs e)
         {
+
             if (this.dataGridView2.Rows.Count == 0)
             {
                 ShowMessageBox("空文件无法导出");
