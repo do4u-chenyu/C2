@@ -74,6 +74,7 @@
             this.GroupStartButton = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -511,6 +512,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.button3);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.label9);
@@ -527,6 +529,17 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "WXID查头像昵称";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(186, 301);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(253, 28);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "opps，二维码生成有问题";
+            this.label11.Visible = false;
             // 
             // button3
             // 
@@ -716,6 +729,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label11;
     }
 }
 

@@ -400,10 +400,19 @@ namespace QQSpiderPlugin
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.label11.Visible = false;
+
             string wxid = wxid_prefix + textBox1.Text.Trim();
             ThoughtWorks.QRCode.Codec.QRCodeEncoder en = new ThoughtWorks.QRCode.Codec.QRCodeEncoder();
-            Bitmap image = en.Encode(wxid);
-            this.pictureBox1.Image = image;
+            try 
+            {
+                Bitmap image = en.Encode(wxid);
+                this.pictureBox1.Image = image;
+            }
+            catch
+            {
+                this.label11.Visible = true;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
