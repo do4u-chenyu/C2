@@ -53,6 +53,9 @@ namespace FullTextGrammarAssistant
             this.jarTextList[2] = "--endTime " + this.textBox4.Text;
             this.previewTextList[3] = "--querystring \"" + this.textBox1.Text + "\"";
             this.jarTextList[3] = "--queryStr \"" + this.textBox1.Text + "\"";
+            this.comboBox1.SelectedIndex = 6;
+            this.comboBox2.SelectedIndex = 6;
+            this.textBox2.Text = "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.161";
             UpdatePreviewText();
         }
 
@@ -184,21 +187,32 @@ namespace FullTextGrammarAssistant
             string conText2 = Condition_filter(this.comboBox4.Text);
             string conText3 = Condition_filter(this.comboBox8.Text);
 
-            //if (this.comboBox2.Text == "正则表达式")
-                //this.textBox2.Text = "\""+ this.textBox2.Text+"\"";
-            //if (this.comboBox4.Text == "正则表达式")
-                //this.textBox5.Text = "\"" + this.textBox5.Text + "\"";
-            //if (this.comboBox8.Text == "正则表达式")
-                //this.textBox6.Text = "\"" + this.textBox6.Text + "\"";
+            string newTextBox2 = string.Empty;
+            string newTextBox5 = string.Empty;
+            string newTextBox6 = string.Empty;
 
-            if (string.IsNullOrEmpty(attrText1))
-                this.previewTextList[5] = string.Empty;
-            else if(comboBox5.SelectedIndex == -1 & comboBox6.SelectedIndex == -1)
-                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + this.textBox2.Text + "\'";
-            else if (comboBox6.SelectedIndex == -1)
-                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + this.textBox2.Text + " " + this.comboBox5.Text + " " + attrText2 + conText2 + this.textBox5.Text + "\'";
+            if (this.comboBox2.Text == "正则表达式")
+                newTextBox2 = "\""+ this.textBox2.Text+"\"";
             else
-                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + this.textBox2.Text + " " + this.comboBox5.Text + " " + attrText2 + conText2 + this.textBox5.Text + " " + this.comboBox6.Text + " " + attrText3 + conText3 + " " + this.textBox6.Text + "\'";
+                newTextBox2 = this.textBox2.Text;
+
+            if (this.comboBox4.Text == "正则表达式")
+                newTextBox5 = "\"" + this.textBox5.Text + "\"";
+            else
+                newTextBox5 = this.textBox5.Text;
+
+            if (this.comboBox8.Text == "正则表达式")
+                newTextBox6 = "\"" + this.textBox6.Text + "\"";
+            else
+                newTextBox6 = this.textBox6.Text;
+
+
+            if(comboBox5.SelectedIndex == -1 & comboBox6.SelectedIndex == -1)
+                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + "\'";
+            else if (comboBox6.SelectedIndex == -1)
+                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + " " + this.comboBox5.Text + " " + attrText2 + conText2 + newTextBox5 + "\'";
+            else
+                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + " " + this.comboBox5.Text + " " + attrText2 + conText2 + newTextBox5 + " " + this.comboBox6.Text + " " + attrText3 + conText3 + " " + newTextBox6 + "\'";
             this.previewCmdText.Text = String.Join(" ", this.previewTextList) + "\r\n\r\n#登陆全文主节点执行#全文主节点当前针对每个查询条件一次限制返回10W行";
             this.textBox9.Text = String.Join(" ", this.jarTextList) + "\r\n\r\n#batchQueryAndExport_1.7.jar不支持全文的dbfilter语法\r\n##全文主节点当前针对每个查询条件一次限制返回10W行\r\n##batchQueryAndExport_1.7.jar不支持选择查询方式及数据类型,且数据类型只能查normal类型,不能查garbage类型#";
         }
@@ -338,9 +352,9 @@ namespace FullTextGrammarAssistant
         private void SearchPanel() 
         {
             Dictionary<string, string> searchRange = new Dictionary<string, string>();
-            searchRange.Add("正文", "content:");
-            searchRange.Add("附件", "attachment:");
-            searchRange.Add("邮件主题", "subject:");
+            searchRange.Add("正文", "_TEXT:");
+            searchRange.Add("附件", "_ATTACHTEXT:");
+            searchRange.Add("邮件主题", "_SUBJECT:");
 
             string searchRangeText = string.Empty;
             List<string> searchRangeList = new List<string>(new string[] { "", "", "" });
