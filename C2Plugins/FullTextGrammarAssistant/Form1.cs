@@ -178,8 +178,8 @@ namespace FullTextGrammarAssistant
         }
         private void UpdatePreviewText()
         {
-            this.jarTextList[0] = "java -jar batchQueryAndExport_1.7.jar --ip 127.0.0.1 --port 9871 --queryCount 10000 --resultPath /home/result";
-            this.previewTextList[0] = ".   /home/search/search_profile\r\n/home/search/sbin/queryclient --server 127.0.0.1 --port 9871";
+            this.jarTextList[0] = "java -jar batchQueryAndExport_1.7.jar --ip 127.0.0.1 --port 9870 --queryCount 10000 --resultPath /home/result";
+            this.previewTextList[0] = ".   /home/search/search_profile\r\n/home/search/sbin/queryclient --server 127.0.0.1 --port 9870";
             string attrText1 = Attribute_filter(this.comboBox1.Text);
             string attrText2 = Attribute_filter(this.comboBox3.Text);
             string attrText3 = Attribute_filter(this.comboBox7.Text);
@@ -338,6 +338,8 @@ namespace FullTextGrammarAssistant
                     }
                 }
             }
+            string proType = "\'" + protoTypeText + "\'";
+
             if (string.IsNullOrEmpty(protoTypeText))
             {
                 this.previewTextList[4] = string.Empty;
@@ -345,8 +347,8 @@ namespace FullTextGrammarAssistant
             }
             else 
             {
-                this.previewTextList[4] = "--protofilter " + protoTypeText;
-                this.jarTextList[4] = "--protypeFilter " + protoTypeText;
+                this.previewTextList[4] = "--protofilter " + proType;
+                this.jarTextList[4] = "--protypeFilter " + proType;
             }
         }
         private void SearchPanel() 
@@ -405,26 +407,20 @@ namespace FullTextGrammarAssistant
 
             foreach (CheckBox ch in panel4.Controls)
             {
-                if (ch.Checked == true)
-                    count++;
-            }
-            if (count == 1)
-            {
-                foreach (CheckBox ch in panel4.Controls)
+                if (ch.Checked == true) 
                 {
-                    if (ch.Checked == true) 
+                    foreach (KeyValuePair<string, string> data in DataType)
                     {
-                        foreach (KeyValuePair<string, string> data in DataType)
-                        {
-                            if (data.Key == ch.Text)
-                                dataTypeText = data.Value;
-                        }
+                        if (data.Key == ch.Text)
+                            dataTypeText = data.Value;
                     }
+                    count++;
                 }
             }
 
-            if (string.IsNullOrEmpty(dataTypeText))
-                this.previewTextList[7] = "--datatype all";
+
+            if (string.IsNullOrEmpty(dataTypeText)|count==2)
+                this.previewTextList[7] = string.Empty;
             else
                 this.previewTextList[7] = "--datatype " + dataTypeText;
         }
@@ -436,7 +432,6 @@ namespace FullTextGrammarAssistant
             OptionType.Add("同义词", "synonymy");
             OptionType.Add("加密文件", "encrypt");
             OptionType.Add("过滤内容相似文件", "similar");
-            OptionType.Add("关键词精确匹配", "asyncmode");
 
             string OptionTypeText = string.Empty;
 
@@ -453,10 +448,12 @@ namespace FullTextGrammarAssistant
                     }
                 }
             }
+            string newOptionType = "\'" + OptionTypeText + "\'";
+
             if (string.IsNullOrEmpty(OptionTypeText))
                 this.previewTextList[8] = string.Empty;
             else
-                this.previewTextList[8] = "--option " + OptionTypeText;
+                this.previewTextList[8] = "--option " + newOptionType;
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)

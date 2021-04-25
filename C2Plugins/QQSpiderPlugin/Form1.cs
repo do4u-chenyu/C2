@@ -290,7 +290,16 @@ namespace QQSpiderPlugin
             };
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                Util.SaveToExcel(sfd.FileName, this.dataGridView1);
+                try
+                {
+                    Util.SaveToExcel(sfd.FileName, this.dataGridView1);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("爬虫插件异常:" + ex.Message);
+                    Console.WriteLine("爬虫插件异常:" + ex.StackTrace);
+                }
+                
                 ShowMessageBox("导出成功");
             }
         }
