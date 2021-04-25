@@ -3,6 +3,7 @@
 1、本地插件上传到服务器方式：
 
 ?	文件上传路径：服务器：10.1.126.4    /usr/local/phx/apache-tomcat-8.5.38/webapps/C2Plugins/packages
+    10.1.126.4    账号密码：root/iao123456
 
 ?	若新增插件为"b站视频-0.7.3.dll"及其info文件:
     修改/usr/local/phx/apache-tomcat-8.5.38/webapps/C2Plugins/index.html，只需要新增标签:

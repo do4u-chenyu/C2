@@ -263,8 +263,10 @@ namespace QQSpiderPlugin
             richTextBox.AppendText(textMessage);
             richTextBox.Refresh();
         }
-        private void button2_Click(object sender, EventArgs e)
+
+        private void Cancle_Click(object sender, EventArgs e)
         {
+            this.Close();
 
         }
 
@@ -284,28 +286,35 @@ namespace QQSpiderPlugin
 
         private void OutputButton1_Click(object sender, EventArgs e)
         {
+
+            if (this.dataGridView1.Rows.Count == 0)
+            {
+                ShowMessageBox("空文件无法导出");
+                return;
+            }
+
             SaveFileDialog sfd = new SaveFileDialog
             {
                 Filter = "Excel Documents (*.xls)|*.xls",
             };
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    Util.SaveToExcel(sfd.FileName, this.dataGridView1);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("爬虫插件异常:" + ex.Message);
-                    Console.WriteLine("爬虫插件异常:" + ex.StackTrace);
-                }
-                
+
+                Util.SaveToExcel(sfd.FileName, this.dataGridView1);
+
                 ShowMessageBox("导出成功");
             }
         }
 
         private void OutputButton2_Click(object sender, EventArgs e)
         {
+
+            if (this.dataGridView2.Rows.Count == 0)
+            {
+                ShowMessageBox("空文件无法导出");
+                return;
+            }
+
             SaveFileDialog sfd = new SaveFileDialog
             {
                 Filter = "Excel Documents (*.xls)|*.xls",
@@ -424,7 +433,12 @@ namespace QQSpiderPlugin
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void WXCancle_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void GroupCancle_Click(object sender, EventArgs e)
         {
             this.Close();
         }
