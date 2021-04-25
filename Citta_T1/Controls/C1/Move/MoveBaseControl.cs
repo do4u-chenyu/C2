@@ -284,14 +284,14 @@ namespace C2.Controls.Move
             this.Description = name;
             int maxLength = 24;
             name = ConvertUtil.SubstringByte(name, 0, maxLength);
-            Font font = new Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            Size fontSize = TextRenderer.MeasureText(name, font);
-            fontSize.Width += 4; //增加边距
+            Size fontSize = TextRenderer.MeasureText(name, this.txtButton.Font);
+            fontSize.Width += 16; //增加边距
 
             this.txtButton.Text = name;
             if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
             {
                 this.txtButton.Text = name + "...";
+                fontSize.Width += 25;
             }
             changeStatus.Width = normalStatus.Width + fontSize.Width;
             ResizeControl(fontSize.Width, changeStatus);
