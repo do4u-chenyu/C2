@@ -47,8 +47,8 @@ namespace C2.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性，对
-        ///   使用此强类型资源类的所有资源查找执行重写。
+        ///   重写当前线程的 CurrentUICulture 属性
+        ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
@@ -467,16 +467,6 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("Card", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
-        /// </summary>
-        public static System.Drawing.Icon check_update1 {
-            get {
-                object obj = ResourceManager.GetObject("check_update1", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -1344,16 +1334,6 @@ namespace C2.Properties {
         /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Icon keyboard_icon {
-            get {
-                object obj = ResourceManager.GetObject("keyboard_icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
-        /// </summary>
         public static System.Drawing.Icon keyword_icon {
             get {
                 object obj = ResourceManager.GetObject("keyword_icon", resourceCulture);
@@ -1874,26 +1854,6 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Bitmap paste_as_image {
-            get {
-                object obj = ResourceManager.GetObject("paste_as_image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        public static System.Drawing.Bitmap paste_as_remark {
-            get {
-                object obj = ResourceManager.GetObject("paste_as_remark", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
         public static System.Drawing.Bitmap pdfData {
             get {
                 object obj = ResourceManager.GetObject("pdfData", resourceCulture);
@@ -2007,6 +1967,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap python_op {
             get {
                 object obj = ResourceManager.GetObject("python_op", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap pythonHelper1 {
+            get {
+                object obj = ResourceManager.GetObject("pythonHelper1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -86,6 +86,37 @@
     <Compile Include="QrCodeForm.Designer.cs">
       <DependentUpon>QrCodeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="QRCodeLib\data\QRCodeBitmapImage.cs" />
+    <Compile Include="QRCodeLib\data\QRCodeImage.cs" />
+    <Compile Include="QRCodeLib\data\QRCodeSymbol.cs" />
+    <Compile Include="QRCodeLib\ecc\BCH15_5.cs" />
+    <Compile Include="QRCodeLib\ecc\ReedSolomon.cs" />
+    <Compile Include="QRCodeLib\exception\AlignmentPatternNotFoundException.cs" />
+    <Compile Include="QRCodeLib\exception\DecodingFailedException.cs" />
+    <Compile Include="QRCodeLib\exception\FinderPatternNotFoundException.cs" />
+    <Compile Include="QRCodeLib\exception\InvalidDataBlockException.cs" />
+    <Compile Include="QRCodeLib\exception\InvalidVersionException.cs" />
+    <Compile Include="QRCodeLib\exception\InvalidVersionInfoException.cs" />
+    <Compile Include="QRCodeLib\exception\SymbolNotFoundException.cs" />
+    <Compile Include="QRCodeLib\exception\VersionInformationException.cs" />
+    <Compile Include="QRCodeLib\geom\Axis.cs" />
+    <Compile Include="QRCodeLib\geom\Line.cs" />
+    <Compile Include="QRCodeLib\geom\Point.cs" />
+    <Compile Include="QRCodeLib\geom\SamplingGrid.cs" />
+    <Compile Include="QRCodeLib\QRCodeDecoder.cs" />
+    <Compile Include="QRCodeLib\QRCodeEncoder.cs" />
+    <Compile Include="QRCodeLib\reader\pattern\AlignmentPattern.cs" />
+    <Compile Include="QRCodeLib\reader\pattern\FinderPattern.cs" />
+    <Compile Include="QRCodeLib\reader\pattern\LogicalSeed.cs" />
+    <Compile Include="QRCodeLib\reader\QRCodeDataBlockReader.cs" />
+    <Compile Include="QRCodeLib\reader\QRCodeImageReader.cs" />
+    <Compile Include="QRCodeLib\util\Color.cs" />
+    <Compile Include="QRCodeLib\util\ConsoleCanvas.cs" />
+    <Compile Include="QRCodeLib\util\ContentConverter.cs" />
+    <Compile Include="QRCodeLib\util\DebugCanvas.cs" />
+    <Compile Include="QRCodeLib\util\DebugCanvasAdapter.cs" />
+    <Compile Include="QRCodeLib\util\QRCodeUtility.cs" />
+    <Compile Include="QRCodeLib\util\SystemUtils.cs" />
     <Compile Include="QrLogin.cs" />
     <Compile Include="QueryResult.cs" />
     <Compile Include="Resource.Designer.cs">
@@ -125,6 +156,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\qrv7_0.dat" />
+    <None Include="Resources\qrvfr7.dat" />
+    <None Include="Resources\rsc18.dat" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -138,6 +172,7 @@
   <ItemGroup>
     <None Include="Resources\images.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist plugins md $(SolutionDir)\Citta_T1\bin\Release\plugins  

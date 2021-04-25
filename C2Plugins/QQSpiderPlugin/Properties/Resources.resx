@@ -121,4 +121,13 @@
   <data name="not_found" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="qrv7_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\qrv7_0.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="qrvfr7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\qrvfr7.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rsc18" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rsc18.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

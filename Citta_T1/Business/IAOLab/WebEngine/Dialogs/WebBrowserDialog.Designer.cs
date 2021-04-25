@@ -32,6 +32,7 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.htmlEditorControlEx1 = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.editorPanel = new System.Windows.Forms.Panel();
+            this.foldLabel = new System.Windows.Forms.Label();
             this.resetButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.editorPanel.SuspendLayout();
@@ -72,7 +73,7 @@
             this.htmlEditorControlEx1.Font = new System.Drawing.Font("Courier New", 10F);
             this.htmlEditorControlEx1.Location = new System.Drawing.Point(24, 40);
             this.htmlEditorControlEx1.Name = "htmlEditorControlEx1";
-            this.htmlEditorControlEx1.Size = new System.Drawing.Size(104, 364);
+            this.htmlEditorControlEx1.Size = new System.Drawing.Size(165, 364);
             this.htmlEditorControlEx1.SyntaxHighlighting = "JavaScript";
             this.htmlEditorControlEx1.TabIndex = 10005;
             // 
@@ -82,15 +83,26 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.editorPanel.BackColor = System.Drawing.Color.White;
+            this.editorPanel.Controls.Add(this.foldLabel);
             this.editorPanel.Controls.Add(this.resetButton);
             this.editorPanel.Controls.Add(this.runButton);
             this.editorPanel.Controls.Add(this.htmlEditorControlEx1);
             this.editorPanel.Enabled = false;
             this.editorPanel.Location = new System.Drawing.Point(0, 39);
             this.editorPanel.Name = "editorPanel";
-            this.editorPanel.Size = new System.Drawing.Size(147, 404);
+            this.editorPanel.Size = new System.Drawing.Size(208, 404);
             this.editorPanel.TabIndex = 10006;
             this.editorPanel.Visible = false;
+            // 
+            // foldLabel
+            // 
+            this.foldLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.foldLabel.Location = new System.Drawing.Point(189, 0);
+            this.foldLabel.Name = "foldLabel";
+            this.foldLabel.Size = new System.Drawing.Size(19, 404);
+            this.foldLabel.TabIndex = 10009;
+            this.foldLabel.Text = "◀收缩";
+            this.foldLabel.Click += new System.EventHandler(this.FoldLabel_Click);
             // 
             // resetButton
             // 
@@ -126,7 +138,6 @@
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = true;
             this.Name = "WebBrowserDialog";
             this.ShowInTaskbar = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -150,5 +161,6 @@
         private System.Windows.Forms.Panel editorPanel;
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Label foldLabel;
     }
 }

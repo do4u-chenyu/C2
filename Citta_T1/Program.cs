@@ -3,7 +3,6 @@ using C2.Controls;
 using C2.Controls.OS;
 using C2.Core;
 using C2.Core.Win32Apis;
-using C2.Dialogs;
 using C2.Globalization;
 using C2.Utils;
 using System;
@@ -30,7 +29,6 @@ namespace C2
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
         public static bool IsRunTime { get; private set; }
-        public static MainForm MainForm { get; set; }
         public const string Software_Version = "1.4.14";
         /// <summary>
         /// 应用程序的主入口点。
@@ -66,7 +64,6 @@ namespace C2
             Current_OpitonsChanged(null, EventArgs.Empty);
             #endregion
             DesignerModelClass.IsDesignerMode = false;
-            MainForm = LoginForm.mainForm;
             ConfigProgram();
             Application.EnableVisualStyles();
             LanguageManage.Initialize();
@@ -74,7 +71,6 @@ namespace C2
             if (instance == null)
             {
                 //1.1 没有实例在运行
-                LoginForm loginForm = new LoginForm();
                 RunByVersion();
                 Application.EnableVisualStyles();
 
@@ -117,17 +113,7 @@ namespace C2
         private static void RunByVersion()
         {
             Global.SetUsername("IAO");
-            if (Global.VersionType.Equals(Global.GreenLevel) || Global.VersionType.Equals(Global.Nolanding))
-            {
-                
-                Business.LoginInfo lgInfo = new Business.LoginInfo();
-                lgInfo.CreatNewXml();
-                lgInfo.WriteUserInfo(Global.GetUsername());
-                lgInfo.WriteLastLogin(Global.GetUsername());
-                Application.Run(new MainForm(Global.GetUsername()));
-            }
-            else
-                Application.Run(new LoginForm());
+            Application.Run(new MainForm(Global.GetUsername()));
         }
         #region 确保程序只运行一个实例
         private static Process RunningInstance()

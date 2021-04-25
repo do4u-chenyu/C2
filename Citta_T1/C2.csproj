@@ -1279,12 +1279,6 @@
     <Compile Include="Dialogs\AddIconDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\CheckUpdate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\CheckUpdate.Designer.cs">
-      <DependentUpon>CheckUpdate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\Components\ThemeFolderNode.cs" />
     <Compile Include="Dialogs\Components\ThemeNode.cs" />
     <Compile Include="Dialogs\ExceptionDialog.cs">
@@ -1320,12 +1314,6 @@
     <Compile Include="Dialogs\InternetImageDialog.Designer.cs">
       <DependentUpon>InternetImageDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\ModifyShortcutsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ModifyShortcutsDialog.Designer.cs">
-      <DependentUpon>ModifyShortcutsDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\NoteWidgetDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1349,12 +1337,6 @@
     </Compile>
     <Compile Include="Dialogs\SelectChartDialog.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ShortcutKeysMapDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ShortcutKeysMapDialog.Designer.cs">
-      <DependentUpon>ShortcutKeysMapDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\SortTopicDialog.cs">
       <SubType>Form</SubType>
@@ -1407,7 +1389,6 @@
     <Compile Include="Controls\C1\CanvasPanel.Designer.cs">
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\LoginInfo.cs" />
     <Compile Include="Controls\C1\Common\NoFocusButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1504,12 +1485,6 @@
     </Compile>
     <Compile Include="Dialogs\InputDataForm.Designer.cs">
       <DependentUpon>InputDataForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\LoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Flow\NaviViewControl.cs">
       <SubType>UserControl</SubType>
@@ -1837,10 +1812,6 @@
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SqlOperatorView.resx">
       <DependentUpon>C2SqlOperatorView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CheckUpdate.resx">
-      <DependentUpon>CheckUpdate.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1871,12 +1842,6 @@
       <DependentUpon>InternetImageDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ModifyShortcutsDialog.resx">
-      <DependentUpon>ModifyShortcutsDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PrintPreviewDialog.resx">
       <DependentUpon>PrintPreviewDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1887,10 +1852,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SaveTabsDialog.resx">
       <DependentUpon>SaveTabsDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ShortcutKeysMapDialog.resx">
-      <DependentUpon>ShortcutKeysMapDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SortTopicDialog.resx">
@@ -2378,12 +2339,13 @@
     <Content Include="Resources\flow_back.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
-    <None Include="Resources\Help\C2帮助文档.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="Resources\Help\C2帮助文档.chm" />
     <None Include="Resources\html_content.htm" />
     <None Include="Resources\Icons\Artificialintelligence.png" />
     <None Include="Resources\Icons\Businessvw.png" />
+    <Content Include="Resources\Help\C2帮助文档.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Help\全文工具箱帮助文档.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -2395,7 +2357,6 @@
     </Content>
     <Content Include="Resources\Icons\check_update.ico" />
     <None Include="Resources\Icons\Datamanagement.png" />
-    <Content Include="Resources\Icons\document.ico" />
     <Content Include="Resources\Icons\exclamation.ico" />
     <Content Include="Resources\Icons\globe_network.ico" />
     <Content Include="Resources\Icons\hourglass_ico.ico" />
@@ -2419,10 +2380,6 @@
     <None Include="Resources\Images\back_color.png" />
     <None Include="Resources\Images\balloon_small.png" />
     <None Include="Resources\Images\arrow_query.png" />
-    <None Include="Resources\Icons\webDetectionIcon.jpg" />
-    <None Include="Resources\Icons\webDetectionIcon.png" />
-    <None Include="Resources\Icons\webDetectionIcon1.jpg" />
-    <None Include="Resources\Icons\webDetectionIcon1.png" />
     <Content Include="Resources\Images\bar.png" />
     <None Include="Resources\Images\bold.png" />
     <None Include="Resources\Images\calculator.png" />

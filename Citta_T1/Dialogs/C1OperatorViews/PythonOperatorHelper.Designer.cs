@@ -122,11 +122,11 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImage = global::C2.Properties.Resources.pythonHelper1;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(65, 42);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(725, 495);
+            this.pictureBox1.Size = new System.Drawing.Size(725, 529);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
@@ -249,7 +249,7 @@
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox4.Location = new System.Drawing.Point(148, 46);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(567, 125);
+            this.pictureBox4.Size = new System.Drawing.Size(567, 126);
             this.pictureBox4.TabIndex = 2;
             this.pictureBox4.TabStop = false;
             // 
@@ -322,7 +322,7 @@
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox5.Location = new System.Drawing.Point(16, 151);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(504, 436);
+            this.pictureBox5.Size = new System.Drawing.Size(504, 479);
             this.pictureBox5.TabIndex = 1;
             this.pictureBox5.TabStop = false;
             // 

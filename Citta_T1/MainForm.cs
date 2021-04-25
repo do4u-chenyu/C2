@@ -279,12 +279,6 @@ namespace C2
             if (!searchToolkitControl.Visible)
                 ShowLeftPanel(searchToolkitButton, searchToolkitControl);
         }
-
-        private void NewModelButton_Click(object sender, EventArgs e)
-        {
-            NewForm(FormType.CanvasForm);
-        }
-
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
@@ -402,7 +396,7 @@ namespace C2
         {
             if (Global.VersionType.Equals(Global.GreenLevel))
                 return;
-            string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "C2帮助文档.chm");
+            string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "C2帮助文档.txt");
             Help.ShowHelp(this, helpfile);
         }
 
@@ -695,13 +689,6 @@ namespace C2
             TabNew.Visible = hasForms;
         }
         #endregion
-
-        private void ImportDataSource_Click(object sender, EventArgs e)
-        {
-            this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
-            this.inputDataForm.ShowDialog();
-            this.inputDataForm.ReSetParams();
-        }
         #region 底部控件事件
         public void PreViewDataByFullFilePath(object sender, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
         {

@@ -69,5 +69,43 @@ namespace QQSpiderPlugin.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] qrv7_0 {
+            get {
+                object obj = ResourceManager.GetObject("qrv7_0", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] qrvfr7 {
+            get {
+                object obj = ResourceManager.GetObject("qrvfr7", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] rsc18 {
+            get {
+                object obj = ResourceManager.GetObject("rsc18", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+
+        internal static byte[] GetResource(string filename)
+        {
+
+            object obj = ResourceManager.GetObject(filename, resourceCulture);
+            return ((byte[])(obj));
+
+        }
     }
 }

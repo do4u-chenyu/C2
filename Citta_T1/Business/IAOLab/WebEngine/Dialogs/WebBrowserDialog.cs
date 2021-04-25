@@ -60,7 +60,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             picPath = Path.Combine(Global.TempDirectory, "boss.png");
             SourceWebUrl = string.Empty;
             WebBrowserFullLocation = this.webBrowser1.Location;
-            WebBrowserHalfLocation = new Point(this.Width / 2, this.WebBrowserFullLocation.Y);
+            WebBrowserHalfLocation = new Point(this.Width / 3, this.WebBrowserFullLocation.Y);
             Initialized = false;
         }
         public WebBrowserDialog(Topic hitTopic, WebType webType) : this()
@@ -424,6 +424,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             this.editorPanel.Visible = false;
             this.editorPanel.Enabled = false;
             this.webBrowser1.Location = WebBrowserFullLocation;
+            this.webBrowser1.Width = this.Width - 20;
             this.LoadMapData.Enabled = true;
             this.SavePic.Enabled = true;
             this.Clear.Enabled = true;
@@ -434,12 +435,42 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             this.editorPanel.Visible = true;
             this.editorPanel.Enabled = true;
-            this.editorPanel.Width = this.Width / 2;
-            this.webBrowser1.Location = WebBrowserHalfLocation;
+            //this.editorPanel.Width = this.Width / 3;
+            //this.label1.Tag = true;
+            //this.label1.Text = "◀收缩";
+            //this.webBrowser1.Location = new Point(WebBrowserFullLocation.X + this.editorPanel.Width, WebBrowserFullLocation.Y);
+            //this.webBrowser1.Width = this.Width - this.editorPanel.Width - 20;
+            ShowEditorPanel();
             this.LoadMapData.Enabled = false;
-            this.SavePic.Enabled = false;
+            this.SavePic.Enabled = true;
             this.Clear.Enabled = false;
             this.SourceCodeMapActive = !SourceCodeMapActive;
+        }
+
+        private void FoldLabel_Click(object sender, EventArgs e)
+        {
+            if ((bool)this.foldLabel.Tag)
+                HideEditorPanel();
+            else
+                ShowEditorPanel();
+        }
+
+        private void ShowEditorPanel()
+        {
+            this.foldLabel.Text = "◀收缩";
+            this.foldLabel.Tag = true;
+            this.editorPanel.Width = this.Width / 3;
+            this.webBrowser1.Location = new Point(WebBrowserFullLocation.X + this.editorPanel.Width, WebBrowserFullLocation.Y);
+            this.webBrowser1.Width = this.Width - this.editorPanel.Width - 20;
+        }
+
+        private void HideEditorPanel()
+        {
+            this.foldLabel.Text = "▶展开";
+            this.foldLabel.Tag = false;
+            this.editorPanel.Width = this.foldLabel.Width;
+            this.webBrowser1.Location = new Point(WebBrowserFullLocation.X + this.editorPanel.Width, WebBrowserFullLocation.Y); ;
+            this.webBrowser1.Width = this.Width - this.foldLabel.Width - 20;
         }
 
         private void SaveSourceCode()
