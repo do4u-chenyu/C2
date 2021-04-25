@@ -2100,38 +2100,20 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Business\IAOLab\WebEngine\img\BossStyle01.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle01.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle02.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle02.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle03.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle03.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle04.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle04.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle05.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle05.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle06.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle06.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle07.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle07.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle08.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle08.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle09.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle09.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle10.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle10.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle11.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle11.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle12.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle12.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle13.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle13.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle14.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle14.png" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle15.jpg" />
-    <Content Include="Business\IAOLab\WebEngine\img\BossStyle15.png" />
-    <Content Include="Business\IAOLab\WebEngine\img\img10\back.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img10\block1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2144,9 +2126,6 @@
     <Content Include="Business\IAOLab\WebEngine\img\img10\title.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img11\back.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img11\border.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2156,9 +2135,6 @@
     <Content Include="Business\IAOLab\WebEngine\img\img11\title.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img12\back.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img12\border.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2166,9 +2142,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img12\title.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img13\back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img13\border.png">
@@ -2216,9 +2189,6 @@
     <Content Include="Business\IAOLab\WebEngine\img\img1\bg.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img2\bg_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img2\t_bg_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2228,25 +2198,13 @@
     <Content Include="Business\IAOLab\WebEngine\img\img3\title_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img3\true_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img4\bg.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img4\border_4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img4\title_4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img5\border.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img5\title.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img6\back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img6\title.png">
@@ -2271,9 +2229,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img8\title_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Business\IAOLab\WebEngine\img\img9\back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img9\border.png">
