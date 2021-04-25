@@ -263,9 +263,9 @@ namespace QQSpiderPlugin
             richTextBox.AppendText(textMessage);
             richTextBox.Refresh();
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void Cancle_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -415,7 +415,12 @@ namespace QQSpiderPlugin
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void WXCancle_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void GroupCancle_Click(object sender, EventArgs e)
         {
             this.Close();
         }
