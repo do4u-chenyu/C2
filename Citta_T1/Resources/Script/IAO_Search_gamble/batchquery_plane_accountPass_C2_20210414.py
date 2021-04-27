@@ -281,7 +281,7 @@ class Saver(Thread):
         if self.get_FileSize(DATA_PATH) > 50:
             succeedFilename = self.save_path.strip('_') + '_' + datetime.datetime.now().strftime("%Y%m%d%H%M%S") + '.txt'
             os.rename(os.path.join(DATA_PATH,self.save_path), os.path.join(DATA_PATH,succeedFilename))
-            ZIP_PATH =  os.path.join(DATA_PATH,succeedFilename).replace('txt','')
+            ZIP_PATH =  os.path.join(DATA_PATH,succeedFilename).replace('txt','tgz')
             zip_result(os.path.join(DATA_PATH,succeedFilename),ZIP_PATH)
             self.writer.close()
             self.writer = open(os.path.join(DATA_PATH,self.save_path), 'a+')
