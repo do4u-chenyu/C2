@@ -250,8 +250,8 @@ namespace FullTextGrammarAssistant
             attributeType.Add("设备号", "EQUIPMENT_ID");
             attributeType.Add("IMSI号", "IMSI");
             attributeType.Add("源端口", "SRC_PORT");
-            attributeType.Add("源IP", "SRC_IP");
-            attributeType.Add("宿IP", "DST_IP");
+            attributeType.Add("源IP", "STRSRC_IP");
+            attributeType.Add("宿IP", "STRDST_IP");
             attributeType.Add("附件数", "_ATTACHNUM");
             attributeType.Add("域名", "DOMAIN");
 
@@ -283,6 +283,7 @@ namespace FullTextGrammarAssistant
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.previewTextList[3] = "--querystring \"" + this.textBox1.Text + "\"";
+            this.jarTextList[3] = "--queryStr \"" + this.textBox1.Text + "\"";
             UpdatePreviewText();
         }
 
