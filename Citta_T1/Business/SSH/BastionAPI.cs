@@ -50,7 +50,17 @@ namespace C2.Business.SSH
         public BastionAPI(SearchTaskInfo task)
         {
             this.task = task;
-            this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
+            if (task.BastionIP.Contains(":"))
+            {
+                string[] serverInfo = task.BastionIP.Split(':');
+                string ip = serverInfo[0].Trim();
+                int port = ConvertUtil.TryParseInt(serverInfo[1].Trim(), 22);
+                this.ssh = new SshClient(ip, port, task.Username, task.Password);
+            }
+            else
+            {
+                this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
+            }
             this.ssh.ConnectionInfo.Timeout = Timeout;
             this.ssh.ConnectionInfo.Encoding = Encoding.UTF8;
         }
