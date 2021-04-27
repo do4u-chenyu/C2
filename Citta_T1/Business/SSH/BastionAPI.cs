@@ -426,6 +426,7 @@ namespace C2.Business.SSH
         private bool IsResultFileReady()
         {
             String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
+            log.Info("任务名称: " + task.TaskName + "grep tgz，查看结果文件是否生成命令的输出结果: " + result);
             return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane)_\d+_\d+.tgz\r?\n");
         }
 
