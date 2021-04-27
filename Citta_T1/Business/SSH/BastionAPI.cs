@@ -419,6 +419,7 @@ namespace C2.Business.SSH
         private bool IsAliveTask()
         {
             String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetScript), shell);
+            log.Info("任务名称: " + task.TaskName + "ps查询进程是否存活，运行结果为: " + result);
             return Regex.IsMatch(result, Wrap(@"python\s+" + TargetScript));
         }
 
@@ -432,6 +433,7 @@ namespace C2.Business.SSH
         {
             DateTime born = ConvertUtil.TryParseDateTime(task.TaskCreateTime, "yyyyMMddHHmmss");
             TimeSpan ts = DateTime.Now.Subtract(born);
+            log.Info("任务名称: " + task.TaskName + "任务执行时间TimeSpan: " + ts );
             return Math.Abs(ts.TotalHours) >= 24 * 3;
         }
 
@@ -455,10 +457,16 @@ namespace C2.Business.SSH
         {
             if (!ssh.IsConnected)
                 return "连接失败";
-
+            log.Info("====" + "任务名称: " + task.TaskName + "任务创建时间: " + task.TaskCreateTime + "====");
             bool isTimeout = IsTaskTimeout();
             bool isAlive = IsAliveTask();
             bool isRFReady = IsResultFileReady();
+
+
+            log.Info("任务名称: " + task.TaskName + "是否超时: " + isTimeout);
+            log.Info("任务名称: " + task.TaskName + "任务是否存在: " + isAlive);
+            log.Info("任务名称: " + task.TaskName + "结果文件是否已生成完毕: " + isRFReady);
+
 
             // 1) pid不存在且有结果文件时, 为运行成功
             if (!isAlive && isRFReady)
