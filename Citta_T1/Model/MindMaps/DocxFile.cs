@@ -211,7 +211,8 @@ namespace C2.Model.MindMaps
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误:" + ex.ToString());
+                MessageBox.Show("错误:" + ex.Message);
+                throw (ex);
             }
         
     }
