@@ -30,7 +30,7 @@ namespace C2.Dialogs
                     MessageBoxIcon.Information);
 
                 if (dr == DialogResult.OK)
-                    FileUtil.ExploreDirectory(done);
+                    FileUtil.TryExploreDirectory(done);
 
                 return;
             }

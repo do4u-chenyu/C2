@@ -101,21 +101,7 @@ namespace C2.Utils
         {//判断文件的存在
             if (File.Exists(fullFilePath))
             {
-                //存在文件
-                try
-                {
-                    ProcessStartInfo processStartInfo = new ProcessStartInfo
-                    {
-                        FileName = "explorer.exe",  //资源管理器
-                        Arguments = "/e,/select," + fullFilePath
-                    };
-                    Process.Start(processStartInfo);
-                }
-                catch (Exception)
-                {
-                    //某些机器直接打开文档目录会报“拒绝访问”错误，此时换一种打开方式
-                    FileUtil.AnotherOpenFilePathMethod(fullFilePath);
-                }
+                TryExploreDirectory(fullFilePath);
             }
             else
             {
@@ -124,6 +110,24 @@ namespace C2.Utils
 
             }
             
+        }
+
+        public static void TryExploreDirectory(string fullFilePath)
+        {
+            try
+            {
+                ProcessStartInfo processStartInfo = new ProcessStartInfo
+                {
+                    FileName = "explorer.exe",  //资源管理器
+                    Arguments = "/e,/select," + fullFilePath
+                };
+                Process.Start(processStartInfo);
+            }
+            catch (Exception)
+            {
+                //某些机器直接打开文档目录会报“拒绝访问”错误，此时换一种打开方式
+                FileUtil.AnotherOpenFilePathMethod(fullFilePath);
+            }
         }
         public static long TryGetFileSize(string fullFilePath, int failCode = -1)
         {
