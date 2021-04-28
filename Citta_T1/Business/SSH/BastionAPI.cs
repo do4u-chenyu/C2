@@ -428,7 +428,7 @@ namespace C2.Business.SSH
 
         private bool IsAliveTask()
         {
-            String result = RunCommand(String.Format("ps -q {0} -o cmd | grep {1}", task.PID, TargetScript), shell);
+            String result = RunCommand(String.Format("ps -p {0} -o cmd | grep {1}", task.PID, TargetScript), shell);
             log.Info("任务名称: " + task.TaskName + "ps查询进程是否存活，运行结果为: " + result);
             return Regex.IsMatch(result, Wrap(@"python\s+" + TargetScript));
         }
