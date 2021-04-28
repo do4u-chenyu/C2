@@ -188,6 +188,10 @@ namespace C2.IAOLab.WebEngine.Dialogs
             await PageLoad(10);
             this.Cursor = Cursors.Default;
 
+            //由于异步await，存在窗口已释放的情况，此时不需要截图
+            if (webBrowser == null || webBrowser.IsDisposed)
+                return;
+
             Bitmap bitmap = new Bitmap(webBrowser.Width, webBrowser.Height);
             Rectangle rectangle = new Rectangle(0, 0, webBrowser.Width, webBrowser.Height);  // 绘图区域
             webBrowser.DrawToBitmap(bitmap, rectangle);
