@@ -21,6 +21,20 @@ namespace C2.Dialogs
 
             this.SetFileLength(FormatLength(fileLength));
 
+            // 完成时提示
+            if (pogressValue == "100%" && left == 0)
+            {
+                DialogResult dr = MessageBox.Show("下载完成，点击确定打开下载目录", 
+                    "下载完成", 
+                    MessageBoxButtons.OKCancel, 
+                    MessageBoxIcon.Information);
+
+                if (dr == DialogResult.OK)
+                    FileUtil.ExploreDirectory(done);
+
+                return;
+            }
+
             Double secondsSpan = (DateTime.Now - time).TotalMilliseconds;
             
             if (secondsSpan < 1000)
