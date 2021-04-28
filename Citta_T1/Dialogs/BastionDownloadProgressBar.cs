@@ -21,6 +21,9 @@ namespace C2.Dialogs
 
             this.SetFileLength(FormatLength(fileLength));
 
+            if (fileLength > 1024 * 1024 * 210)
+                ShowBigFileWarning();
+
             // 完成时提示
             if (pogressValue == "100%" && left == 0)
             {

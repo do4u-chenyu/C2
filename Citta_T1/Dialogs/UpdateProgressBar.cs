@@ -13,6 +13,8 @@ namespace C2.Dialogs
         public int MinimumValue { get => this.proBarDownload.Minimum; set => this.proBarDownload.Minimum = value; }
         public int MaximumValue { get => this.proBarDownload.Maximum; set => this.proBarDownload.Maximum = value; }
         public int CurrentValue { get => this.proBarDownload.Value; set => this.proBarDownload.Value = value; }
+
+        public void ShowBigFileWarning() { this.bigWarnLabel.Visible = true; }
         public string ProgressPercentage 
         {
             get => speed;

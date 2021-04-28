@@ -1740,6 +1740,9 @@
     <EmbeddedResource Include="Dialogs\Base\C2BaseOperatorView.resx">
       <DependentUpon>C2BaseOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BastionDownloadProgressBar.resx">
+      <DependentUpon>BastionDownloadProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\AvgOperatorView.resx">
       <DependentUpon>AvgOperatorView.cs</DependentUpon>
     </EmbeddedResource>
