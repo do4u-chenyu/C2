@@ -2019,6 +2019,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E857F032ECF248AABFD69098C6B44A58"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E8C528299C0A4367B99F2A7AC1DB1D7F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -8887,6 +8893,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E857F032ECF248AABFD69098C6B44A58"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\Resources\\Help\\检索系统帮助.html"
+            "TargetName" = "8:检索系统帮助.html"
+            "Tag" = "8:"
+            "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E8C528299C0A4367B99F2A7AC1DB1D7F"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\440_方向 .png"
@@ -10233,7 +10259,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{C85D9BB9-1110-4F6C-BEEE-18B7731D95EE}"
+        "PackageCode" = "8:{1AE01FCA-FB10-4F42-8C6C-462C573E4F42}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -11080,7 +11106,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\Citta_T1\\obj\\Release\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
