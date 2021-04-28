@@ -12,7 +12,7 @@ namespace C2.SearchToolkit
         private SearchTaskInfo task;
         private String validateMessage;
         private Control[] inputControls;
-
+        private static readonly LogUtil log = LogUtil.GetInstance("SearchToolkitForm");
         public SearchToolkitForm()
         {
             InitializeComponent();
@@ -153,8 +153,10 @@ namespace C2.SearchToolkit
             if (String.IsNullOrEmpty(value))  // 有专门的不为空检测，为空时，认为符号要求, 用于可选项的校验
                 return true;
 
-            return Regex.IsMatch(value, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$") && 
-                ConvertUtil.TryParseIntList(value, '.').TrueForAll(item => item >= 0 && item <= 255);
+            bool match0 = Regex.IsMatch(value, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$") &&
+               ConvertUtil.TryParseIntList(value, '.').TrueForAll(item => item >= 0 && item <= 255);
+            bool match1 = Regex.IsMatch(value, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\:\d+$");
+            return match0 || match1;
         }
 
         private bool ValidateTooLong(String value, int defaultMaxLength = 128)
@@ -240,6 +242,7 @@ namespace C2.SearchToolkit
             if (task.TaskStatus != "DONE")
             {
                 task.TaskStatus = new BastionAPI(task).Login().QueryTaskStatus();
+                log.Info("任务名称: " + task.TaskName + "任务状态: " + task.TaskStatus);
                 task.Save();
             }
                

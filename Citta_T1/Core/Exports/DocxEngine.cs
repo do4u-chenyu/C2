@@ -24,9 +24,13 @@ namespace C2.Core.Exports
             {
                 MindMap mindMap = (MindMap)chart;
                 Topic root = mindMap.Root;
-                using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-                    docxFile.Save(root, filename);
-                return true;
+                try
+                {
+                    using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+                        docxFile.Save(root, filename);
+                    return true;
+                }
+                catch { return false; }
             }
 
             return false;
