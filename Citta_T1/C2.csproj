@@ -2330,7 +2330,7 @@
     <None Include="Resources\Icons\Artificialintelligence.png" />
     <None Include="Resources\Icons\Businessvw.png" />
     <Content Include="Resources\Help\C2帮助文档.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\全文工具箱帮助文档.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
