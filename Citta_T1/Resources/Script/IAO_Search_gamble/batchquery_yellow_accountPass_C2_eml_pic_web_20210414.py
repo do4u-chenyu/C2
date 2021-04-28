@@ -566,6 +566,7 @@ def picExact(picDicts):
         shPic  += [line[:-3] for line in info]
     LOGGER.info("downloading...")
     for image in images:
+        LOGGER.info("图片名称:"+image['name']+"图片urL:"+image['url'])
         download_one(image)
 #    workers = 10
 #    with futures.ThreadPoolExecutor(workers) as executor:
@@ -578,6 +579,7 @@ def zip_result(DATA_PATH,ZIP_PATH):
     LOGGER.info("ZIP DATA...")
     _cmd = "tar -zcvf {0} {1} --remove-files".format(ZIP_PATH,DATA_PATH)
     Popen(_cmd, shell=True).wait()
+     
     
 def dataFormat(content):
     try:
@@ -676,9 +678,9 @@ if __name__ == '__main__':
 
     parser = OptionParser(usage)
     parser.add_option('--server',dest = 'serverIp', help = serverInfo,default = '127.0.0.1')
-    parser.add_option('--netDay',dest = 'netQueryDay', help = netDay,default = '90')
-    parser.add_option('--emailDay',dest = 'emailQueryDay', help = emailDay,default = '90')
-    parser.add_option('--picDay',dest = 'picQueryDay', help = picDay,default = '90')
+    parser.add_option('--netDay',dest = 'netQueryDay', help = netDay,default = '45')
+    parser.add_option('--emailDay',dest = 'emailQueryDay', help = emailDay,default = '45')
+    parser.add_option('--picDay',dest = 'picQueryDay', help = picDay,default = '15')
     parser.add_option('--out',dest = 'outfilePath', help = outInfo,default = sys.path[0])
     parser.add_option('--area',dest = 'areaCode', help = areaInfo,default = '000000')
     ##get input Time  parameter
