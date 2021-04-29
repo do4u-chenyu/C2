@@ -10,8 +10,8 @@ namespace FullTextGrammarAssistant
 {
     public partial class Form1 : Form, IPlugin
     {
-        private readonly List<string> previewTextList = new List<string>(new string[] { "","", "", "", "", "", "", "", "", "" });
-        private readonly List<string> jarTextList = new List<string>(new string[] { "", "", "", "", "", "", "", "", "", "" });
+        private readonly List<string> queryclientTextList = new List<string>(new string[] { "","", "", "", "", "", "", "", "" });
+        private readonly List<string> jarTextList = new List<string>(new string[] { "", "", "", "", "" });
         public Form1()
         {
             InitializeComponent();
@@ -44,118 +44,19 @@ namespace FullTextGrammarAssistant
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.textBox1.Text = "hello AND world OR 你好 AND _TEXT:login OR _HOST:www.baidu.com";
-            this.textBox3.Text = DateTime.Now.AddYears(-1).ToString("yyyyMMddHHmmss");
-            this.textBox4.Text = DateTime.Now.ToString("yyyyMMddHHmmss");
-            this.previewTextList[1] = "--start " + this.textBox3.Text;
-            this.jarTextList[1] = "--startTime " + this.textBox3.Text;
-            this.previewTextList[2] = "--end " + this.textBox4.Text;
-            this.jarTextList[2] = "--endTime " + this.textBox4.Text;
-            this.previewTextList[3] = "--querystring \"" + this.textBox1.Text + "\"";
-            this.jarTextList[3] = "--queryStr \"" + this.textBox1.Text + "\"";
-            this.comboBox1.SelectedIndex = 6;
-            this.comboBox2.SelectedIndex = 6;
-            this.textBox2.Text = "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.161";
+            this.KeyWordsBox.Text = "hello AND world OR 你好 AND _TEXT:login OR _HOST:www.baidu.com";
+            this.StartTimeBox.Text = DateTime.Now.AddYears(-1).ToString("yyyyMMddHHmmss");
+            this.EndTimeBox.Text = DateTime.Now.ToString("yyyyMMddHHmmss");
+            this.queryclientTextList[1] = "--start " + this.StartTimeBox.Text;
+            this.jarTextList[1] = "--startTime " + this.StartTimeBox.Text;
+            this.queryclientTextList[2] = "--end " + this.EndTimeBox.Text;
+            this.jarTextList[2] = "--endTime " + this.EndTimeBox.Text;
+            this.queryclientTextList[3] = "--querystring \"" + this.KeyWordsBox.Text + "\"";
+            this.jarTextList[3] = "--queryStr \"" + this.KeyWordsBox.Text + "\"";
+            this.SecondFilterOne.SelectedIndex = 6;
+            this.FilterConditionOne.SelectedIndex = 6;
+            this.ConditionOne.Text = "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.161";
             UpdatePreviewText();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-            if (checkBox1.Checked == true)
-            {
-                foreach (CheckBox ch in panel2.Controls)
-                {
-                    ch.Checked = false;
-                }
-            }
-            TraverPanel();
-            UpdatePreviewText();
-
-        }
-
-        private void checkBox37_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox22_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox48_CheckedChanged(object sender, EventArgs e)
-        {
-
-            if (checkBox48.Checked == true)
-            {
-                foreach (CheckBox ch in panel3.Controls)
-                {
-                    ch.Checked = false;
-                }
-            }
-            optionPanel();
-            UpdatePreviewText();
-
-        }
-
-        private void checkBox48_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox53_CheckedChanged(object sender, EventArgs e)
-        {
-
-            if (checkBox53.Checked == true)
-            {
-                foreach (CheckBox ch in panel4.Controls)
-                {
-                    ch.Checked = false;
-                }
-            }
-            dataTypePanel();
-            UpdatePreviewText();
-
-        }
-
-        private void checkBox53_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox50_CheckedChanged(object sender, EventArgs e)
-        {
-
-            if (checkBox50.Checked == true)
-            {
-                foreach (CheckBox ch in panel5.Controls)
-                {
-                    ch.Checked = false;
-                }
-            }
-            SearchPanel();
-            UpdatePreviewText();
-
-        }
-
-        private void checkBox50_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
         }
 
         private void Form1_HelpButtonClicked(object sender, CancelEventArgs e)
@@ -165,56 +66,45 @@ namespace FullTextGrammarAssistant
             Process.Start(helpfile);
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-            this.previewTextList[1] = "--start " + this.textBox3.Text;
-            this.jarTextList[1] = "--startTime " + this.textBox3.Text;
-            UpdatePreviewText();
-        }
         private void UpdatePreviewText()
         {
             this.jarTextList[0] = "java -jar batchQueryAndExport_1.7.jar --ip 127.0.0.1 --port 9870 --queryCount 10000 --resultPath /home/result";
-            this.previewTextList[0] = ".   /home/search/search_profile\r\n/home/search/sbin/queryclient --server 127.0.0.1 --port 9870";
-            string attrText1 = Attribute_filter(this.comboBox1.Text);
-            string attrText2 = Attribute_filter(this.comboBox3.Text);
-            string attrText3 = Attribute_filter(this.comboBox7.Text);
-            string conText1 = Condition_filter(this.comboBox2.Text);
-            string conText2 = Condition_filter(this.comboBox4.Text);
-            string conText3 = Condition_filter(this.comboBox8.Text);
+            this.queryclientTextList[0] = ".   /home/search/search_profile\r\n/home/search/sbin/queryclient --server 127.0.0.1 --port 9870";
+            string attrText1 = Attribute_filter(this.SecondFilterOne.Text);
+            string attrText2 = Attribute_filter(this.SecondFilterTwo.Text);
+            string attrText3 = Attribute_filter(this.SecondFilterThree.Text);
+            string conText1 = Condition_filter(this.FilterConditionOne.Text);
+            string conText2 = Condition_filter(this.FilterConditionTwo.Text);
+            string conText3 = Condition_filter(this.FilterConditionThree.Text);
 
             string newTextBox2 = string.Empty;
             string newTextBox5 = string.Empty;
             string newTextBox6 = string.Empty;
 
-            if (this.comboBox2.Text == "正则表达式")
-                newTextBox2 = "\""+ this.textBox2.Text+"\"";
+            if (this.FilterConditionOne.Text == "正则表达式")
+                newTextBox2 = "\""+ this.ConditionOne.Text+"\"";
             else
-                newTextBox2 = this.textBox2.Text;
+                newTextBox2 = this.ConditionOne.Text;
 
-            if (this.comboBox4.Text == "正则表达式")
-                newTextBox5 = "\"" + this.textBox5.Text + "\"";
+            if (this.FilterConditionTwo.Text == "正则表达式")
+                newTextBox5 = "\"" + this.ConditionTwo.Text + "\"";
             else
-                newTextBox5 = this.textBox5.Text;
+                newTextBox5 = this.ConditionTwo.Text;
 
-            if (this.comboBox8.Text == "正则表达式")
-                newTextBox6 = "\"" + this.textBox6.Text + "\"";
+            if (this.FilterConditionThree.Text == "正则表达式")
+                newTextBox6 = "\"" + this.ConditionThree.Text + "\"";
             else
-                newTextBox6 = this.textBox6.Text;
+                newTextBox6 = this.ConditionThree.Text;
 
 
-            if(comboBox5.SelectedIndex == -1 & comboBox6.SelectedIndex == -1)
-                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + "\'";
-            else if (comboBox6.SelectedIndex == -1)
-                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + " " + this.comboBox5.Text + " " + attrText2 + conText2 + newTextBox5 + "\'";
+            if(AndOrNotOne.SelectedIndex == -1 & AndOrNotTwo.SelectedIndex == -1)
+                this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + "\'";
+            else if (AndOrNotTwo.SelectedIndex == -1)
+                this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + " " + this.AndOrNotOne.Text + " " + attrText2 + conText2 + newTextBox5 + "\'";
             else
-                this.previewTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + " " + this.comboBox5.Text + " " + attrText2 + conText2 + newTextBox5 + " " + this.comboBox6.Text + " " + attrText3 + conText3 + " " + newTextBox6 + "\'";
-            this.previewCmdText.Text = String.Join(" ", this.previewTextList) + "\r\n\r\n#登陆全文主节点执行#全文主节点当前针对每个查询条件一次限制返回10W行";
-            this.textBox9.Text = String.Join(" ", this.jarTextList) + "\r\n\r\n#batchQueryAndExport_1.7.jar不支持全文的dbfilter语法\r\n##全文主节点当前针对每个查询条件一次限制返回10W行\r\n##batchQueryAndExport_1.7.jar不支持选择查询方式及数据类型,且数据类型只能查normal类型,不能查garbage类型#";
+                this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + " " + this.AndOrNotOne.Text + " " + attrText2 + conText2 + newTextBox5 + " " + this.AndOrNotTwo.Text + " " + attrText3 + conText3 + " " + newTextBox6 + "\'";
+            this.previewqueryText.Text = String.Join(" ", this.queryclientTextList) + "\r\n\r\n#登陆全文主节点执行#全文主节点当前针对每个查询条件一次限制返回10W行";
+            this.previewjarText.Text = String.Join(" ", this.jarTextList) + "\r\n\r\n#batchQueryAndExport_1.7.jar不支持全文的dbfilter语法\r\n##全文主节点当前针对每个查询条件一次限制返回10W行\r\n##batchQueryAndExport_1.7.jar不支持选择查询方式及数据类型,且数据类型只能查normal类型,不能查garbage类型#";
         }
 
         private string Condition_filter(string condition)
@@ -269,31 +159,6 @@ namespace FullTextGrammarAssistant
 
         }
 
-        private void previewCmdText_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            this.previewTextList[2] = "--end " + this.textBox4.Text;
-            UpdatePreviewText();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            this.previewTextList[3] = "--querystring \"" + this.textBox1.Text + "\"";
-            this.jarTextList[3] = "--queryStr \"" + this.textBox1.Text + "\"";
-            UpdatePreviewText();
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
         private void TraverPanelCheck()
         {
             int count = 0;
@@ -303,9 +168,9 @@ namespace FullTextGrammarAssistant
                     count++;
             }
             if (count != 0)
-                checkBox1.Checked = false;
+                AllProType.Checked = false;
             else
-                checkBox1.Checked = true;
+                AllProType.Checked = true;
         }
 
         private void TraverPanel()
@@ -343,12 +208,12 @@ namespace FullTextGrammarAssistant
 
             if (string.IsNullOrEmpty(protoTypeText))
             {
-                this.previewTextList[4] = string.Empty;
+                this.queryclientTextList[4] = string.Empty;
                 this.jarTextList[4] = string.Empty;
             }
             else 
             {
-                this.previewTextList[4] = "--protofilter " + proType;
+                this.queryclientTextList[4] = "--protofilter " + proType;
                 this.jarTextList[4] = "--protypeFilter " + proType;
             }
         }
@@ -371,7 +236,7 @@ namespace FullTextGrammarAssistant
                     {
                         if (search.Key == ch.Text)
                         {
-                            searchRangeList[count] = search.Value + this.textBox1.Text;
+                            searchRangeList[count] = search.Value + this.KeyWordsBox.Text;
                         }
                     }
                     count++;
@@ -387,17 +252,17 @@ namespace FullTextGrammarAssistant
 
             if (string.IsNullOrEmpty(searchRangeText))
             {
-                this.previewTextList[3] = "--querystring \"" + textBox1.Text + "\"";
-                this.jarTextList[3] = "--queryStr \"" + textBox1.Text + "\"";
+                this.queryclientTextList[3] = "--querystring \"" + KeyWordsBox.Text + "\"";
+                this.jarTextList[3] = "--queryStr \"" + KeyWordsBox.Text + "\"";
             }
             else 
             {
-                this.previewTextList[3] = "--querystring \"" + searchRangeText + "\"";
+                this.queryclientTextList[3] = "--querystring \"" + searchRangeText + "\"";
                 this.jarTextList[3] = "--queryStr \"" + searchRangeText + "\"";
             }
 
         }
-        private void dataTypePanel()
+        private void DataTypePanel()
         {
             Dictionary<string, string> DataType = new Dictionary<string, string>();
             DataType.Add("正常", "normal");
@@ -421,12 +286,12 @@ namespace FullTextGrammarAssistant
 
 
             if (string.IsNullOrEmpty(dataTypeText)|count==2)
-                this.previewTextList[7] = string.Empty;
+                this.queryclientTextList[7] = string.Empty;
             else
-                this.previewTextList[7] = "--datatype " + dataTypeText;
+                this.queryclientTextList[7] = "--datatype " + dataTypeText;
         }
 
-        private void optionPanel()
+        private void OptionPanel()
         {
             Dictionary<string, string> OptionType = new Dictionary<string, string>();
             OptionType.Add("含有附件", "attachment");
@@ -452,93 +317,9 @@ namespace FullTextGrammarAssistant
             string newOptionType = "\'" + OptionTypeText + "\'";
 
             if (string.IsNullOrEmpty(OptionTypeText))
-                this.previewTextList[8] = string.Empty;
+                this.queryclientTextList[8] = string.Empty;
             else
-                this.previewTextList[8] = "--option " + newOptionType;
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox7_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox13_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox12_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox11_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox10_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox9_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox8_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox15_CheckedChanged(object sender, EventArgs e)
-        {
-            TraverPanelCheck();
-            TraverPanel();
-            UpdatePreviewText();
-        }
-
-        private void checkBox49_CheckedChanged(object sender, EventArgs e)
-        {
-            SearchPanelCheck();
-            SearchPanel();
-            UpdatePreviewText();
+                this.queryclientTextList[8] = "--option " + newOptionType;
         }
 
         private void SearchPanelCheck()
@@ -550,19 +331,12 @@ namespace FullTextGrammarAssistant
                     count++;
             }
             if (count != 0)
-                checkBox50.Checked = false;
+                AllSearch.Checked = false;
             else
-                checkBox50.Checked = true;
+                AllSearch.Checked = true;
         }
 
-        private void checkBox52_CheckedChanged(object sender, EventArgs e)
-        {
-            dataTypePanelCheck();
-            dataTypePanel();
-            UpdatePreviewText();
-        }
-
-        private void dataTypePanelCheck()
+        private void DataTypePanelCheck()
         {
             int count = 0;
             foreach (CheckBox ch in panel4.Controls)
@@ -571,19 +345,12 @@ namespace FullTextGrammarAssistant
                     count++;
             }
             if (count != 0)
-                checkBox53.Checked = false;
+                AllData.Checked = false;
             else
-                checkBox53.Checked = true;
+                AllData.Checked = true;
         }
 
-        private void checkBox47_CheckedChanged(object sender, EventArgs e)
-        {
-            optionPanelCheck();
-            optionPanel();
-            UpdatePreviewText();
-        }
-
-        private void optionPanelCheck()
+        private void OptionPanelCheck()
         {
             int count = 0;
             foreach (CheckBox ch in panel3.Controls)
@@ -592,131 +359,297 @@ namespace FullTextGrammarAssistant
                     count++;
             }
             if (count != 0)
-                checkBox48.Checked = false;
+                AllSeed.Checked = false;
             else
-                checkBox48.Checked = true;
+                AllSeed.Checked = true;
         }
 
-        private void checkBox42_CheckedChanged(object sender, EventArgs e)
+        private void StartTimeBox_TextChanged(object sender, EventArgs e)
+        {
+            this.queryclientTextList[1] = "--start " + this.StartTimeBox.Text;
+            this.jarTextList[1] = "--startTime " + this.StartTimeBox.Text;
+            UpdatePreviewText();
+        }
+
+        private void EndTimeBox_TextChanged(object sender, EventArgs e)
+        {
+            this.queryclientTextList[2] = "--end " + this.EndTimeBox.Text;
+            this.jarTextList[2] = "--endTime " + this.EndTimeBox.Text;
+            UpdatePreviewText();
+        }
+
+        private void KeyWordsBox_TextChanged(object sender, EventArgs e)
+        {
+            this.queryclientTextList[3] = "--querystring \"" + this.KeyWordsBox.Text + "\"";
+            this.jarTextList[3] = "--queryStr \"" + this.KeyWordsBox.Text + "\"";
+            UpdatePreviewText();
+        }
+
+        private void SecondFilterOne_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void SecondFilterTwo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void SecondFilterThree_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void FilterConditionOne_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void FilterConditionTwo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void FilterConditionThree_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void ConditionOne_TextChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void ConditionTwo_TextChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void ConditionThree_TextChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void AndOrNotOne_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void AndOrNotTwo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewText();
+        }
+
+        private void AllProType_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AllProType.Checked == true)
+            {
+                foreach (CheckBox ch in panel2.Controls)
+                {
+                    ch.Checked = false;
+                }
+            }
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void WebAccess_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void Email_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void Account_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void IM_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void FTP_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void InternetChat_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void BBS_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void Telnet_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void Voip_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void Gamble_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void GambleNet_CheckedChanged(object sender, EventArgs e)
+        {
+            TraverPanelCheck();
+            TraverPanel();
+            UpdatePreviewText();
+        }
+
+        private void AllSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AllSearch.Checked == true)
+            {
+                foreach (CheckBox ch in panel5.Controls)
+                {
+                    ch.Checked = false;
+                }
+            }
+            SearchPanel();
+            UpdatePreviewText();
+        }
+
+        private void Attachment_CheckedChanged(object sender, EventArgs e)
         {
             SearchPanelCheck();
             SearchPanel();
             UpdatePreviewText();
         }
 
-        private void checkBox54_CheckedChanged(object sender, EventArgs e)
+        private void Subject_CheckedChanged(object sender, EventArgs e)
         {
             SearchPanelCheck();
             SearchPanel();
             UpdatePreviewText();
         }
 
-        private void checkBox51_CheckedChanged(object sender, EventArgs e)
+        private void AllData_CheckedChanged(object sender, EventArgs e)
         {
-            dataTypePanelCheck();
-            dataTypePanel();
+            if (AllData.Checked == true)
+            {
+                foreach (CheckBox ch in panel4.Controls)
+                {
+                    ch.Checked = false;
+                }
+            }
+            DataTypePanel();
             UpdatePreviewText();
         }
 
-        private void checkBox46_CheckedChanged(object sender, EventArgs e)
+        private void Normal_CheckedChanged(object sender, EventArgs e)
         {
-            optionPanelCheck();
-            optionPanel();
+            DataTypePanelCheck();
+            DataTypePanel();
             UpdatePreviewText();
         }
 
-        private void checkBox45_CheckedChanged(object sender, EventArgs e)
+        private void Garbage_CheckedChanged(object sender, EventArgs e)
         {
-            optionPanelCheck();
-            optionPanel();
+            DataTypePanelCheck();
+            DataTypePanel();
             UpdatePreviewText();
         }
 
-        private void checkBox44_CheckedChanged(object sender, EventArgs e)
+        private void AllSeed_CheckedChanged(object sender, EventArgs e)
         {
-            optionPanelCheck();
-            optionPanel();
+            if (AllSeed.Checked == true)
+            {
+                foreach (CheckBox ch in panel3.Controls)
+                {
+                    ch.Checked = false;
+                }
+            }
+            OptionPanel();
             UpdatePreviewText();
         }
 
-        private void checkBox43_CheckedChanged(object sender, EventArgs e)
+        private void Attach_CheckedChanged(object sender, EventArgs e)
         {
-            optionPanelCheck();
-            optionPanel();
+            OptionPanelCheck();
+            OptionPanel();
             UpdatePreviewText();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void Synonymy_CheckedChanged(object sender, EventArgs e)
         {
+            OptionPanelCheck();
+            OptionPanel();
             UpdatePreviewText();
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void Encrypt_CheckedChanged(object sender, EventArgs e)
         {
+            OptionPanelCheck();
+            OptionPanel();
             UpdatePreviewText();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void Similar_CheckedChanged(object sender, EventArgs e)
         {
+            OptionPanelCheck();
+            OptionPanel();
             UpdatePreviewText();
         }
 
-        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        private void Social_CheckedChanged(object sender, EventArgs e)
         {
+            TraverPanelCheck();
+            TraverPanel();
             UpdatePreviewText();
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdatePreviewText();
-        }
-
-        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdatePreviewText();
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-            UpdatePreviewText();
-        }
-
-        private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdatePreviewText();
-        }
-
-        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdatePreviewText();
-        }
-
-        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdatePreviewText();
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-            UpdatePreviewText();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void Clipboard_Click(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab.Text == "queryclient")
-                Clipboard.SetDataObject(previewCmdText.Text);
+                System.Windows.Forms.Clipboard.SetDataObject(previewqueryText.Text);
             else
-                Clipboard.SetDataObject(textBox9.Text);
+                System.Windows.Forms.Clipboard.SetDataObject(previewjarText.Text);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void panel5_Paint(object sender, PaintEventArgs e)
+        private void ContentText_CheckedChanged(object sender, EventArgs e)
         {
-
+            SearchPanelCheck();
+            SearchPanel();
+            UpdatePreviewText();
         }
     }
 }

@@ -34,58 +34,58 @@ namespace FullTextGrammarAssistant
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox13 = new System.Windows.Forms.CheckBox();
-            this.checkBox15 = new System.Windows.Forms.CheckBox();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.KeyWordsBox = new System.Windows.Forms.TextBox();
+            this.AllProType = new System.Windows.Forms.CheckBox();
+            this.WebAccess = new System.Windows.Forms.CheckBox();
+            this.Email = new System.Windows.Forms.CheckBox();
+            this.Account = new System.Windows.Forms.CheckBox();
+            this.IM = new System.Windows.Forms.CheckBox();
+            this.FTP = new System.Windows.Forms.CheckBox();
+            this.InternetChat = new System.Windows.Forms.CheckBox();
+            this.Social = new System.Windows.Forms.CheckBox();
+            this.BBS = new System.Windows.Forms.CheckBox();
+            this.Telnet = new System.Windows.Forms.CheckBox();
+            this.Voip = new System.Windows.Forms.CheckBox();
+            this.Gamble = new System.Windows.Forms.CheckBox();
+            this.GambleNet = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkBox44 = new System.Windows.Forms.CheckBox();
-            this.checkBox45 = new System.Windows.Forms.CheckBox();
-            this.checkBox46 = new System.Windows.Forms.CheckBox();
-            this.checkBox47 = new System.Windows.Forms.CheckBox();
-            this.checkBox48 = new System.Windows.Forms.CheckBox();
-            this.checkBox51 = new System.Windows.Forms.CheckBox();
-            this.checkBox52 = new System.Windows.Forms.CheckBox();
-            this.checkBox53 = new System.Windows.Forms.CheckBox();
-            this.checkBox42 = new System.Windows.Forms.CheckBox();
-            this.checkBox49 = new System.Windows.Forms.CheckBox();
-            this.checkBox50 = new System.Windows.Forms.CheckBox();
-            this.checkBox54 = new System.Windows.Forms.CheckBox();
+            this.Similar = new System.Windows.Forms.CheckBox();
+            this.Encrypt = new System.Windows.Forms.CheckBox();
+            this.Synonymy = new System.Windows.Forms.CheckBox();
+            this.Attach = new System.Windows.Forms.CheckBox();
+            this.AllSeed = new System.Windows.Forms.CheckBox();
+            this.Garbage = new System.Windows.Forms.CheckBox();
+            this.Normal = new System.Windows.Forms.CheckBox();
+            this.AllData = new System.Windows.Forms.CheckBox();
+            this.Attachment = new System.Windows.Forms.CheckBox();
+            this.ContentText = new System.Windows.Forms.CheckBox();
+            this.AllSearch = new System.Windows.Forms.CheckBox();
+            this.Subject = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.Clipboard = new System.Windows.Forms.Button();
+            this.CloseButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.AndOrNotOne = new System.Windows.Forms.ComboBox();
+            this.SecondFilterTwo = new System.Windows.Forms.ComboBox();
+            this.FilterConditionTwo = new System.Windows.Forms.ComboBox();
+            this.ConditionTwo = new System.Windows.Forms.TextBox();
+            this.StartTimeBox = new System.Windows.Forms.TextBox();
+            this.EndTimeBox = new System.Windows.Forms.TextBox();
+            this.FilterConditionOne = new System.Windows.Forms.ComboBox();
+            this.ConditionOne = new System.Windows.Forms.TextBox();
+            this.SecondFilterOne = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.previewCmdText = new System.Windows.Forms.TextBox();
+            this.previewqueryText = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.previewjarText = new System.Windows.Forms.TextBox();
+            this.AndOrNotTwo = new System.Windows.Forms.ComboBox();
+            this.FilterConditionThree = new System.Windows.Forms.ComboBox();
+            this.ConditionThree = new System.Windows.Forms.TextBox();
+            this.SecondFilterThree = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -106,10 +106,9 @@ namespace FullTextGrammarAssistant
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(64, 180);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(94, 225);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 19);
+            this.label1.Size = new System.Drawing.Size(61, 24);
             this.label1.TabIndex = 1;
             this.label1.Text = "时间：";
             // 
@@ -117,476 +116,468 @@ namespace FullTextGrammarAssistant
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(51, 211);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(77, 264);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 19);
+            this.label2.Size = new System.Drawing.Size(78, 24);
             this.label2.TabIndex = 4;
             this.label2.Text = "关键词：";
             this.toolTip1.SetToolTip(this.label2, "1)支持 AND, OR的组合查询;2)支持指定字段查询,如 HOST:www.baidu.com 就是只在Host字段中查询");
             // 
-            // textBox1
+            // KeyWordsBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(112, 211);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(562, 21);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.KeyWordsBox.Location = new System.Drawing.Point(149, 264);
+            this.KeyWordsBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.KeyWordsBox.Name = "KeyWordsBox";
+            this.KeyWordsBox.Size = new System.Drawing.Size(748, 25);
+            this.KeyWordsBox.TabIndex = 5;
+            this.KeyWordsBox.TextChanged += new System.EventHandler(this.KeyWordsBox_TextChanged);
             // 
-            // checkBox1
+            // AllProType
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(112, 337);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 16);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "全部类型";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            this.checkBox1.Click += new System.EventHandler(this.checkBox1_Click_1);
+            this.AllProType.AutoSize = true;
+            this.AllProType.Checked = true;
+            this.AllProType.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AllProType.Location = new System.Drawing.Point(149, 421);
+            this.AllProType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AllProType.Name = "AllProType";
+            this.AllProType.Size = new System.Drawing.Size(89, 19);
+            this.AllProType.TabIndex = 7;
+            this.AllProType.Text = "全部类型";
+            this.AllProType.UseVisualStyleBackColor = true;
+            this.AllProType.CheckedChanged += new System.EventHandler(this.AllProType_CheckedChanged);
             // 
-            // checkBox2
+            // WebAccess
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(10, 3);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(72, 16);
-            this.checkBox2.TabIndex = 8;
-            this.checkBox2.Text = "网页访问";
-            this.toolTip1.SetToolTip(this.checkBox2, "HTTP_POST(1000001)");
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.WebAccess.AutoSize = true;
+            this.WebAccess.Location = new System.Drawing.Point(13, 4);
+            this.WebAccess.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.WebAccess.Name = "WebAccess";
+            this.WebAccess.Size = new System.Drawing.Size(89, 19);
+            this.WebAccess.TabIndex = 8;
+            this.WebAccess.Text = "网页访问";
+            this.toolTip1.SetToolTip(this.WebAccess, "HTTP_POST(1000001)");
+            this.WebAccess.UseVisualStyleBackColor = true;
+            this.WebAccess.CheckedChanged += new System.EventHandler(this.WebAccess_CheckedChanged);
             // 
-            // checkBox3
+            // Email
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(105, 3);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(72, 16);
-            this.checkBox3.TabIndex = 9;
-            this.checkBox3.Text = "电子邮箱";
-            this.toolTip1.SetToolTip(this.checkBox3, "QQ邮箱(1011007)");
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            this.Email.AutoSize = true;
+            this.Email.Location = new System.Drawing.Point(140, 4);
+            this.Email.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Email.Name = "Email";
+            this.Email.Size = new System.Drawing.Size(89, 19);
+            this.Email.TabIndex = 9;
+            this.Email.Text = "电子邮箱";
+            this.toolTip1.SetToolTip(this.Email, "QQ邮箱(1011007)");
+            this.Email.UseVisualStyleBackColor = true;
+            this.Email.CheckedChanged += new System.EventHandler(this.Email_CheckedChanged);
             // 
-            // checkBox5
+            // Account
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(196, 3);
-            this.checkBox5.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(72, 16);
-            this.checkBox5.TabIndex = 11;
-            this.checkBox5.Text = "认证信息";
-            this.toolTip1.SetToolTip(this.checkBox5, "身份证(1020007)");
-            this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
+            this.Account.AutoSize = true;
+            this.Account.Location = new System.Drawing.Point(261, 4);
+            this.Account.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Account.Name = "Account";
+            this.Account.Size = new System.Drawing.Size(89, 19);
+            this.Account.TabIndex = 11;
+            this.Account.Text = "认证信息";
+            this.toolTip1.SetToolTip(this.Account, "身份证(1020007)");
+            this.Account.UseVisualStyleBackColor = true;
+            this.Account.CheckedChanged += new System.EventHandler(this.Account_CheckedChanged);
             // 
-            // checkBox6
+            // IM
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(290, 3);
-            this.checkBox6.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(72, 16);
-            this.checkBox6.TabIndex = 12;
-            this.checkBox6.Text = "即时聊天";
-            this.toolTip1.SetToolTip(this.checkBox6, "QQ(1030001)");
-            this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            this.IM.AutoSize = true;
+            this.IM.Location = new System.Drawing.Point(387, 4);
+            this.IM.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.IM.Name = "IM";
+            this.IM.Size = new System.Drawing.Size(89, 19);
+            this.IM.TabIndex = 12;
+            this.IM.Text = "即时聊天";
+            this.toolTip1.SetToolTip(this.IM, "QQ(1030001)");
+            this.IM.UseVisualStyleBackColor = true;
+            this.IM.CheckedChanged += new System.EventHandler(this.IM_CheckedChanged);
             // 
-            // checkBox7
+            // FTP
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(389, 3);
-            this.checkBox7.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(42, 16);
-            this.checkBox7.TabIndex = 13;
-            this.checkBox7.Text = "FTP";
-            this.toolTip1.SetToolTip(this.checkBox7, "标准FTP(1050001)");
-            this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
+            this.FTP.AutoSize = true;
+            this.FTP.Location = new System.Drawing.Point(519, 4);
+            this.FTP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FTP.Name = "FTP";
+            this.FTP.Size = new System.Drawing.Size(53, 19);
+            this.FTP.TabIndex = 13;
+            this.FTP.Text = "FTP";
+            this.toolTip1.SetToolTip(this.FTP, "标准FTP(1050001)");
+            this.FTP.UseVisualStyleBackColor = true;
+            this.FTP.CheckedChanged += new System.EventHandler(this.FTP_CheckedChanged);
             // 
-            // checkBox13
+            // InternetChat
             // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.Location = new System.Drawing.Point(467, 3);
-            this.checkBox13.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(72, 16);
-            this.checkBox13.TabIndex = 14;
-            this.checkBox13.Text = "网络聊天";
-            this.toolTip1.SetToolTip(this.checkBox13, "QQ(1060001)");
-            this.checkBox13.UseVisualStyleBackColor = true;
-            this.checkBox13.CheckedChanged += new System.EventHandler(this.checkBox13_CheckedChanged);
+            this.InternetChat.AutoSize = true;
+            this.InternetChat.Location = new System.Drawing.Point(623, 4);
+            this.InternetChat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.InternetChat.Name = "InternetChat";
+            this.InternetChat.Size = new System.Drawing.Size(89, 19);
+            this.InternetChat.TabIndex = 14;
+            this.InternetChat.Text = "网络聊天";
+            this.toolTip1.SetToolTip(this.InternetChat, "QQ(1060001)");
+            this.InternetChat.UseVisualStyleBackColor = true;
+            this.InternetChat.CheckedChanged += new System.EventHandler(this.InternetChat_CheckedChanged);
             // 
-            // checkBox15
+            // Social
             // 
-            this.checkBox15.AutoSize = true;
-            this.checkBox15.Location = new System.Drawing.Point(467, 33);
-            this.checkBox15.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox15.Name = "checkBox15";
-            this.checkBox15.Size = new System.Drawing.Size(72, 16);
-            this.checkBox15.TabIndex = 16;
-            this.checkBox15.Text = "社交网站";
-            this.toolTip1.SetToolTip(this.checkBox15, "腾讯(1197007)");
-            this.checkBox15.UseVisualStyleBackColor = true;
-            this.checkBox15.CheckedChanged += new System.EventHandler(this.checkBox15_CheckedChanged);
+            this.Social.AutoSize = true;
+            this.Social.Location = new System.Drawing.Point(623, 41);
+            this.Social.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Social.Name = "Social";
+            this.Social.Size = new System.Drawing.Size(89, 19);
+            this.Social.TabIndex = 16;
+            this.Social.Text = "社交网站";
+            this.toolTip1.SetToolTip(this.Social, "腾讯(1197007)");
+            this.Social.UseVisualStyleBackColor = true;
+            this.Social.CheckedChanged += new System.EventHandler(this.Social_CheckedChanged);
             // 
-            // checkBox12
+            // BBS
             // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.Location = new System.Drawing.Point(10, 33);
-            this.checkBox12.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(72, 16);
-            this.checkBox12.TabIndex = 13;
-            this.checkBox12.Text = "网络论坛";
-            this.toolTip1.SetToolTip(this.checkBox12, "百度贴吧(1071002)");
-            this.checkBox12.UseVisualStyleBackColor = true;
-            this.checkBox12.CheckedChanged += new System.EventHandler(this.checkBox12_CheckedChanged);
+            this.BBS.AutoSize = true;
+            this.BBS.Location = new System.Drawing.Point(13, 41);
+            this.BBS.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BBS.Name = "BBS";
+            this.BBS.Size = new System.Drawing.Size(89, 19);
+            this.BBS.TabIndex = 13;
+            this.BBS.Text = "网络论坛";
+            this.toolTip1.SetToolTip(this.BBS, "百度贴吧(1071002)");
+            this.BBS.UseVisualStyleBackColor = true;
+            this.BBS.CheckedChanged += new System.EventHandler(this.BBS_CheckedChanged);
             // 
-            // checkBox11
+            // Telnet
             // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.Location = new System.Drawing.Point(105, 33);
-            this.checkBox11.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(60, 16);
-            this.checkBox11.TabIndex = 12;
-            this.checkBox11.Text = "TELNET";
-            this.toolTip1.SetToolTip(this.checkBox11, "TELNET(1080000)");
-            this.checkBox11.UseVisualStyleBackColor = true;
-            this.checkBox11.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.Telnet.AutoSize = true;
+            this.Telnet.Location = new System.Drawing.Point(140, 41);
+            this.Telnet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Telnet.Name = "Telnet";
+            this.Telnet.Size = new System.Drawing.Size(77, 19);
+            this.Telnet.TabIndex = 12;
+            this.Telnet.Text = "TELNET";
+            this.toolTip1.SetToolTip(this.Telnet, "TELNET(1080000)");
+            this.Telnet.UseVisualStyleBackColor = true;
+            this.Telnet.CheckedChanged += new System.EventHandler(this.Telnet_CheckedChanged);
             // 
-            // checkBox10
+            // Voip
             // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(196, 33);
-            this.checkBox10.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(48, 16);
-            this.checkBox10.TabIndex = 11;
-            this.checkBox10.Text = "VOIP";
-            this.toolTip1.SetToolTip(this.checkBox10, "QQ(1090001)");
-            this.checkBox10.UseVisualStyleBackColor = true;
-            this.checkBox10.CheckedChanged += new System.EventHandler(this.checkBox10_CheckedChanged);
+            this.Voip.AutoSize = true;
+            this.Voip.Location = new System.Drawing.Point(261, 41);
+            this.Voip.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Voip.Name = "Voip";
+            this.Voip.Size = new System.Drawing.Size(61, 19);
+            this.Voip.TabIndex = 11;
+            this.Voip.Text = "VOIP";
+            this.toolTip1.SetToolTip(this.Voip, "QQ(1090001)");
+            this.Voip.UseVisualStyleBackColor = true;
+            this.Voip.CheckedChanged += new System.EventHandler(this.Voip_CheckedChanged);
             // 
-            // checkBox9
+            // Gamble
             // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(290, 33);
-            this.checkBox9.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(72, 16);
-            this.checkBox9.TabIndex = 10;
-            this.checkBox9.Text = "网络赌博";
-            this.toolTip1.SetToolTip(this.checkBox9, "皇冠(1140005)");
-            this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
+            this.Gamble.AutoSize = true;
+            this.Gamble.Location = new System.Drawing.Point(387, 41);
+            this.Gamble.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Gamble.Name = "Gamble";
+            this.Gamble.Size = new System.Drawing.Size(89, 19);
+            this.Gamble.TabIndex = 10;
+            this.Gamble.Text = "网络赌博";
+            this.toolTip1.SetToolTip(this.Gamble, "皇冠(1140005)");
+            this.Gamble.UseVisualStyleBackColor = true;
+            this.Gamble.CheckedChanged += new System.EventHandler(this.Gamble_CheckedChanged);
             // 
-            // checkBox8
+            // GambleNet
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(389, 33);
-            this.checkBox8.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(72, 16);
-            this.checkBox8.TabIndex = 9;
-            this.checkBox8.Text = "博客网站";
-            this.toolTip1.SetToolTip(this.checkBox8, "新浪博客(11580001)");
-            this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
+            this.GambleNet.AutoSize = true;
+            this.GambleNet.Location = new System.Drawing.Point(519, 41);
+            this.GambleNet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.GambleNet.Name = "GambleNet";
+            this.GambleNet.Size = new System.Drawing.Size(89, 19);
+            this.GambleNet.TabIndex = 9;
+            this.GambleNet.Text = "博客网站";
+            this.toolTip1.SetToolTip(this.GambleNet, "新浪博客(11580001)");
+            this.GambleNet.UseVisualStyleBackColor = true;
+            this.GambleNet.CheckedChanged += new System.EventHandler(this.GambleNet_CheckedChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(12, 241);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(26, 301);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 19);
+            this.label4.Size = new System.Drawing.Size(129, 24);
             this.label4.TabIndex = 16;
             this.label4.Text = "条件二次过滤：";
             this.toolTip1.SetToolTip(this.label4, "在关键词查出的结果集上进行二次过滤，对应全文的dbfilter功能；queryclient支持，Jar包不支持");
             // 
-            // checkBox44
+            // Similar
             // 
-            this.checkBox44.AutoSize = true;
-            this.checkBox44.Location = new System.Drawing.Point(414, 7);
-            this.checkBox44.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox44.Name = "checkBox44";
-            this.checkBox44.Size = new System.Drawing.Size(120, 16);
-            this.checkBox44.TabIndex = 25;
-            this.checkBox44.Text = "过滤内容相似文件";
-            this.toolTip1.SetToolTip(this.checkBox44, "查询结果中前后内容相似的结果只取1条");
-            this.checkBox44.UseVisualStyleBackColor = true;
-            this.checkBox44.CheckedChanged += new System.EventHandler(this.checkBox44_CheckedChanged);
+            this.Similar.AutoSize = true;
+            this.Similar.Location = new System.Drawing.Point(552, 9);
+            this.Similar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Similar.Name = "Similar";
+            this.Similar.Size = new System.Drawing.Size(149, 19);
+            this.Similar.TabIndex = 25;
+            this.Similar.Text = "过滤内容相似文件";
+            this.toolTip1.SetToolTip(this.Similar, "查询结果中前后内容相似的结果只取1条");
+            this.Similar.UseVisualStyleBackColor = true;
+            this.Similar.CheckedChanged += new System.EventHandler(this.Similar_CheckedChanged);
             // 
-            // checkBox45
+            // Encrypt
             // 
-            this.checkBox45.AutoSize = true;
-            this.checkBox45.Location = new System.Drawing.Point(279, 7);
-            this.checkBox45.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox45.Name = "checkBox45";
-            this.checkBox45.Size = new System.Drawing.Size(72, 16);
-            this.checkBox45.TabIndex = 24;
-            this.checkBox45.Text = "加密文件";
-            this.toolTip1.SetToolTip(this.checkBox45, "主要指类似邮件协议中上传的附件中含有带密码的rar等类型压缩包");
-            this.checkBox45.UseVisualStyleBackColor = true;
-            this.checkBox45.CheckedChanged += new System.EventHandler(this.checkBox45_CheckedChanged);
+            this.Encrypt.AutoSize = true;
+            this.Encrypt.Location = new System.Drawing.Point(372, 9);
+            this.Encrypt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Encrypt.Name = "Encrypt";
+            this.Encrypt.Size = new System.Drawing.Size(89, 19);
+            this.Encrypt.TabIndex = 24;
+            this.Encrypt.Text = "加密文件";
+            this.toolTip1.SetToolTip(this.Encrypt, "主要指类似邮件协议中上传的附件中含有带密码的rar等类型压缩包");
+            this.Encrypt.UseVisualStyleBackColor = true;
+            this.Encrypt.CheckedChanged += new System.EventHandler(this.Encrypt_CheckedChanged);
             // 
-            // checkBox46
+            // Synonymy
             // 
-            this.checkBox46.AutoSize = true;
-            this.checkBox46.Location = new System.Drawing.Point(145, 7);
-            this.checkBox46.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox46.Name = "checkBox46";
-            this.checkBox46.Size = new System.Drawing.Size(60, 16);
-            this.checkBox46.TabIndex = 23;
-            this.checkBox46.Text = "同义词";
-            this.checkBox46.UseVisualStyleBackColor = true;
-            this.checkBox46.CheckedChanged += new System.EventHandler(this.checkBox46_CheckedChanged);
+            this.Synonymy.AutoSize = true;
+            this.Synonymy.Location = new System.Drawing.Point(193, 9);
+            this.Synonymy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Synonymy.Name = "Synonymy";
+            this.Synonymy.Size = new System.Drawing.Size(74, 19);
+            this.Synonymy.TabIndex = 23;
+            this.Synonymy.Text = "同义词";
+            this.Synonymy.UseVisualStyleBackColor = true;
+            this.Synonymy.CheckedChanged += new System.EventHandler(this.Synonymy_CheckedChanged);
             // 
-            // checkBox47
+            // Attach
             // 
-            this.checkBox47.AutoSize = true;
-            this.checkBox47.Location = new System.Drawing.Point(10, 7);
-            this.checkBox47.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox47.Name = "checkBox47";
-            this.checkBox47.Size = new System.Drawing.Size(72, 16);
-            this.checkBox47.TabIndex = 22;
-            this.checkBox47.Text = "含有附件";
-            this.toolTip1.SetToolTip(this.checkBox47, "主要指邮件中带有附件");
-            this.checkBox47.UseVisualStyleBackColor = true;
-            this.checkBox47.CheckedChanged += new System.EventHandler(this.checkBox47_CheckedChanged);
+            this.Attach.AutoSize = true;
+            this.Attach.Location = new System.Drawing.Point(13, 9);
+            this.Attach.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Attach.Name = "Attach";
+            this.Attach.Size = new System.Drawing.Size(89, 19);
+            this.Attach.TabIndex = 22;
+            this.Attach.Text = "含有附件";
+            this.toolTip1.SetToolTip(this.Attach, "主要指邮件中带有附件");
+            this.Attach.UseVisualStyleBackColor = true;
+            this.Attach.CheckedChanged += new System.EventHandler(this.Attach_CheckedChanged);
             // 
-            // checkBox48
+            // AllSeed
             // 
-            this.checkBox48.AutoSize = true;
-            this.checkBox48.Checked = true;
-            this.checkBox48.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox48.Location = new System.Drawing.Point(112, 499);
-            this.checkBox48.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox48.Name = "checkBox48";
-            this.checkBox48.Size = new System.Drawing.Size(48, 16);
-            this.checkBox48.TabIndex = 21;
-            this.checkBox48.Text = "全选";
-            this.checkBox48.UseVisualStyleBackColor = true;
-            this.checkBox48.CheckedChanged += new System.EventHandler(this.checkBox48_CheckedChanged);
-            this.checkBox48.Click += new System.EventHandler(this.checkBox48_Click);
+            this.AllSeed.AutoSize = true;
+            this.AllSeed.Checked = true;
+            this.AllSeed.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AllSeed.Location = new System.Drawing.Point(149, 624);
+            this.AllSeed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AllSeed.Name = "AllSeed";
+            this.AllSeed.Size = new System.Drawing.Size(59, 19);
+            this.AllSeed.TabIndex = 21;
+            this.AllSeed.Text = "全选";
+            this.AllSeed.UseVisualStyleBackColor = true;
+            this.AllSeed.CheckedChanged += new System.EventHandler(this.AllSeed_CheckedChanged);
             // 
-            // checkBox51
+            // Garbage
             // 
-            this.checkBox51.AutoSize = true;
-            this.checkBox51.Location = new System.Drawing.Point(82, 7);
-            this.checkBox51.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox51.Name = "checkBox51";
-            this.checkBox51.Size = new System.Drawing.Size(48, 16);
-            this.checkBox51.TabIndex = 30;
-            this.checkBox51.Text = "垃圾";
-            this.checkBox51.UseVisualStyleBackColor = true;
-            this.checkBox51.CheckedChanged += new System.EventHandler(this.checkBox51_CheckedChanged);
+            this.Garbage.AutoSize = true;
+            this.Garbage.Location = new System.Drawing.Point(109, 9);
+            this.Garbage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Garbage.Name = "Garbage";
+            this.Garbage.Size = new System.Drawing.Size(59, 19);
+            this.Garbage.TabIndex = 30;
+            this.Garbage.Text = "垃圾";
+            this.Garbage.UseVisualStyleBackColor = true;
+            this.Garbage.CheckedChanged += new System.EventHandler(this.Garbage_CheckedChanged);
             // 
-            // checkBox52
+            // Normal
             // 
-            this.checkBox52.AutoSize = true;
-            this.checkBox52.Location = new System.Drawing.Point(9, 7);
-            this.checkBox52.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox52.Name = "checkBox52";
-            this.checkBox52.Size = new System.Drawing.Size(48, 16);
-            this.checkBox52.TabIndex = 29;
-            this.checkBox52.Text = "正常";
-            this.checkBox52.UseVisualStyleBackColor = true;
-            this.checkBox52.CheckedChanged += new System.EventHandler(this.checkBox52_CheckedChanged);
+            this.Normal.AutoSize = true;
+            this.Normal.Location = new System.Drawing.Point(12, 9);
+            this.Normal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Normal.Name = "Normal";
+            this.Normal.Size = new System.Drawing.Size(59, 19);
+            this.Normal.TabIndex = 29;
+            this.Normal.Text = "正常";
+            this.Normal.UseVisualStyleBackColor = true;
+            this.Normal.CheckedChanged += new System.EventHandler(this.Normal_CheckedChanged);
             // 
-            // checkBox53
+            // AllData
             // 
-            this.checkBox53.AutoSize = true;
-            this.checkBox53.Checked = true;
-            this.checkBox53.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox53.Location = new System.Drawing.Point(513, 434);
-            this.checkBox53.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox53.Name = "checkBox53";
-            this.checkBox53.Size = new System.Drawing.Size(48, 16);
-            this.checkBox53.TabIndex = 28;
-            this.checkBox53.Text = "全选";
-            this.checkBox53.UseVisualStyleBackColor = true;
-            this.checkBox53.CheckedChanged += new System.EventHandler(this.checkBox53_CheckedChanged);
-            this.checkBox53.Click += new System.EventHandler(this.checkBox53_Click);
+            this.AllData.AutoSize = true;
+            this.AllData.Checked = true;
+            this.AllData.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AllData.Location = new System.Drawing.Point(684, 542);
+            this.AllData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AllData.Name = "AllData";
+            this.AllData.Size = new System.Drawing.Size(59, 19);
+            this.AllData.TabIndex = 28;
+            this.AllData.Text = "全选";
+            this.AllData.UseVisualStyleBackColor = true;
+            this.AllData.CheckedChanged += new System.EventHandler(this.AllData_CheckedChanged);
             // 
-            // checkBox42
+            // Attachment
             // 
-            this.checkBox42.AutoSize = true;
-            this.checkBox42.Location = new System.Drawing.Point(82, 7);
-            this.checkBox42.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox42.Name = "checkBox42";
-            this.checkBox42.Size = new System.Drawing.Size(48, 16);
-            this.checkBox42.TabIndex = 34;
-            this.checkBox42.Text = "附件";
-            this.toolTip1.SetToolTip(this.checkBox42, "文件附件文本域 _ATTACHTEXT:关键词");
-            this.checkBox42.UseVisualStyleBackColor = true;
-            this.checkBox42.CheckedChanged += new System.EventHandler(this.checkBox42_CheckedChanged);
+            this.Attachment.AutoSize = true;
+            this.Attachment.Location = new System.Drawing.Point(109, 9);
+            this.Attachment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Attachment.Name = "Attachment";
+            this.Attachment.Size = new System.Drawing.Size(59, 19);
+            this.Attachment.TabIndex = 34;
+            this.Attachment.Text = "附件";
+            this.toolTip1.SetToolTip(this.Attachment, "文件附件文本域 _ATTACHTEXT:关键词");
+            this.Attachment.UseVisualStyleBackColor = true;
+            this.Attachment.CheckedChanged += new System.EventHandler(this.Attachment_CheckedChanged);
             // 
-            // checkBox49
+            // ContentText
             // 
-            this.checkBox49.AutoSize = true;
-            this.checkBox49.Location = new System.Drawing.Point(10, 7);
-            this.checkBox49.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox49.Name = "checkBox49";
-            this.checkBox49.Size = new System.Drawing.Size(48, 16);
-            this.checkBox49.TabIndex = 33;
-            this.checkBox49.Text = "正文";
-            this.toolTip1.SetToolTip(this.checkBox49, "查询正文域 _TEXT:关键词");
-            this.checkBox49.UseVisualStyleBackColor = true;
-            this.checkBox49.CheckedChanged += new System.EventHandler(this.checkBox49_CheckedChanged);
+            this.ContentText.AutoSize = true;
+            this.ContentText.Location = new System.Drawing.Point(13, 9);
+            this.ContentText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ContentText.Name = "ContentText";
+            this.ContentText.Size = new System.Drawing.Size(59, 19);
+            this.ContentText.TabIndex = 33;
+            this.ContentText.Text = "正文";
+            this.toolTip1.SetToolTip(this.ContentText, "查询正文域 _TEXT:关键词");
+            this.ContentText.UseVisualStyleBackColor = true;
+            this.ContentText.CheckedChanged += new System.EventHandler(this.ContentText_CheckedChanged);
             // 
-            // checkBox50
+            // AllSearch
             // 
-            this.checkBox50.AutoSize = true;
-            this.checkBox50.Checked = true;
-            this.checkBox50.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox50.Location = new System.Drawing.Point(112, 435);
-            this.checkBox50.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox50.Name = "checkBox50";
-            this.checkBox50.Size = new System.Drawing.Size(72, 16);
-            this.checkBox50.TabIndex = 32;
-            this.checkBox50.Text = "全部范围";
-            this.checkBox50.UseVisualStyleBackColor = true;
-            this.checkBox50.CheckedChanged += new System.EventHandler(this.checkBox50_CheckedChanged);
-            this.checkBox50.Click += new System.EventHandler(this.checkBox50_Click);
+            this.AllSearch.AutoSize = true;
+            this.AllSearch.Checked = true;
+            this.AllSearch.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AllSearch.Location = new System.Drawing.Point(149, 544);
+            this.AllSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AllSearch.Name = "AllSearch";
+            this.AllSearch.Size = new System.Drawing.Size(89, 19);
+            this.AllSearch.TabIndex = 32;
+            this.AllSearch.Text = "全部范围";
+            this.AllSearch.UseVisualStyleBackColor = true;
+            this.AllSearch.CheckedChanged += new System.EventHandler(this.AllSearch_CheckedChanged);
             // 
-            // checkBox54
+            // Subject
             // 
-            this.checkBox54.AutoSize = true;
-            this.checkBox54.Location = new System.Drawing.Point(157, 7);
-            this.checkBox54.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox54.Name = "checkBox54";
-            this.checkBox54.Size = new System.Drawing.Size(72, 16);
-            this.checkBox54.TabIndex = 35;
-            this.checkBox54.Text = "邮件主题";
-            this.toolTip1.SetToolTip(this.checkBox54, "查询邮件主题域 _SUBJECT:关键词");
-            this.checkBox54.UseVisualStyleBackColor = true;
-            this.checkBox54.CheckedChanged += new System.EventHandler(this.checkBox54_CheckedChanged);
+            this.Subject.AutoSize = true;
+            this.Subject.Location = new System.Drawing.Point(209, 9);
+            this.Subject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Subject.Name = "Subject";
+            this.Subject.Size = new System.Drawing.Size(89, 19);
+            this.Subject.TabIndex = 35;
+            this.Subject.Text = "邮件主题";
+            this.toolTip1.SetToolTip(this.Subject, "查询邮件主题域 _SUBJECT:关键词");
+            this.Subject.UseVisualStyleBackColor = true;
+            this.Subject.CheckedChanged += new System.EventHandler(this.Subject_CheckedChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(12, 18);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Location = new System.Drawing.Point(26, 22);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 19);
+            this.label8.Size = new System.Drawing.Size(129, 24);
             this.label8.TabIndex = 36;
             this.label8.Text = "对应查询条件：";
             // 
-            // button1
+            // Clipboard
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.button1.Location = new System.Drawing.Point(528, 17);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 27);
-            this.button1.TabIndex = 37;
-            this.button1.Text = "复制";
-            this.toolTip1.SetToolTip(this.button1, "复制当前生成语法命令到剪贴板");
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Clipboard.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Clipboard.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Clipboard.Location = new System.Drawing.Point(704, 21);
+            this.Clipboard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Clipboard.Name = "Clipboard";
+            this.Clipboard.Size = new System.Drawing.Size(79, 34);
+            this.Clipboard.TabIndex = 37;
+            this.Clipboard.Text = "复制";
+            this.toolTip1.SetToolTip(this.Clipboard, "复制当前生成语法命令到剪贴板");
+            this.Clipboard.UseVisualStyleBackColor = false;
+            this.Clipboard.Click += new System.EventHandler(this.Clipboard_Click);
             // 
-            // button2
+            // CloseButton
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.button2.Location = new System.Drawing.Point(647, 17);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(59, 27);
-            this.button2.TabIndex = 38;
-            this.button2.Text = "关闭";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.CloseButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.CloseButton.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.CloseButton.Location = new System.Drawing.Point(863, 21);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(79, 34);
+            this.CloseButton.TabIndex = 38;
+            this.CloseButton.Text = "关闭";
+            this.CloseButton.UseVisualStyleBackColor = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.checkBox2);
-            this.panel2.Controls.Add(this.checkBox3);
-            this.panel2.Controls.Add(this.checkBox15);
-            this.panel2.Controls.Add(this.checkBox13);
-            this.panel2.Controls.Add(this.checkBox9);
-            this.panel2.Controls.Add(this.checkBox10);
-            this.panel2.Controls.Add(this.checkBox7);
-            this.panel2.Controls.Add(this.checkBox5);
-            this.panel2.Controls.Add(this.checkBox6);
-            this.panel2.Controls.Add(this.checkBox8);
-            this.panel2.Controls.Add(this.checkBox12);
-            this.panel2.Controls.Add(this.checkBox11);
-            this.panel2.Location = new System.Drawing.Point(102, 362);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
+            this.panel2.Controls.Add(this.WebAccess);
+            this.panel2.Controls.Add(this.Email);
+            this.panel2.Controls.Add(this.Social);
+            this.panel2.Controls.Add(this.InternetChat);
+            this.panel2.Controls.Add(this.Gamble);
+            this.panel2.Controls.Add(this.Voip);
+            this.panel2.Controls.Add(this.FTP);
+            this.panel2.Controls.Add(this.Account);
+            this.panel2.Controls.Add(this.IM);
+            this.panel2.Controls.Add(this.GambleNet);
+            this.panel2.Controls.Add(this.BBS);
+            this.panel2.Controls.Add(this.Telnet);
+            this.panel2.Location = new System.Drawing.Point(136, 452);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(564, 56);
+            this.panel2.Size = new System.Drawing.Size(752, 70);
             this.panel2.TabIndex = 41;
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.checkBox47);
-            this.panel3.Controls.Add(this.checkBox46);
-            this.panel3.Controls.Add(this.checkBox45);
-            this.panel3.Controls.Add(this.checkBox44);
-            this.panel3.Location = new System.Drawing.Point(102, 522);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
+            this.panel3.Controls.Add(this.Attach);
+            this.panel3.Controls.Add(this.Synonymy);
+            this.panel3.Controls.Add(this.Encrypt);
+            this.panel3.Controls.Add(this.Similar);
+            this.panel3.Location = new System.Drawing.Point(136, 652);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(564, 28);
+            this.panel3.Size = new System.Drawing.Size(752, 35);
             this.panel3.TabIndex = 45;
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.checkBox52);
-            this.panel4.Controls.Add(this.checkBox51);
-            this.panel4.Location = new System.Drawing.Point(504, 454);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2);
+            this.panel4.Controls.Add(this.Normal);
+            this.panel4.Controls.Add(this.Garbage);
+            this.panel4.Location = new System.Drawing.Point(672, 568);
+            this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(161, 28);
+            this.panel4.Size = new System.Drawing.Size(215, 35);
             this.panel4.TabIndex = 46;
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.checkBox49);
-            this.panel5.Controls.Add(this.checkBox42);
-            this.panel5.Controls.Add(this.checkBox54);
-            this.panel5.Location = new System.Drawing.Point(102, 455);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2);
+            this.panel5.Controls.Add(this.ContentText);
+            this.panel5.Controls.Add(this.Attachment);
+            this.panel5.Controls.Add(this.Subject);
+            this.panel5.Location = new System.Drawing.Point(136, 569);
+            this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(243, 28);
+            this.panel5.Size = new System.Drawing.Size(324, 35);
             this.panel5.TabIndex = 47;
-            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
-            // comboBox5
+            // AndOrNotOne
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Items.AddRange(new object[] {
+            this.AndOrNotOne.FormattingEnabled = true;
+            this.AndOrNotOne.Items.AddRange(new object[] {
             "AND",
             "OR",
             "NOT"});
-            this.comboBox5.Location = new System.Drawing.Point(112, 271);
-            this.comboBox5.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(70, 20);
-            this.comboBox5.TabIndex = 42;
-            this.comboBox5.SelectedIndexChanged += new System.EventHandler(this.comboBox5_SelectedIndexChanged);
+            this.AndOrNotOne.Location = new System.Drawing.Point(149, 339);
+            this.AndOrNotOne.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AndOrNotOne.Name = "AndOrNotOne";
+            this.AndOrNotOne.Size = new System.Drawing.Size(92, 23);
+            this.AndOrNotOne.TabIndex = 42;
+            this.AndOrNotOne.SelectedIndexChanged += new System.EventHandler(this.AndOrNotOne_SelectedIndexChanged);
             // 
-            // comboBox3
+            // SecondFilterTwo
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.SecondFilterTwo.FormattingEnabled = true;
+            this.SecondFilterTwo.Items.AddRange(new object[] {
             "文件大小（单位：字节）",
             "上网账号",
             "宿端口",
@@ -597,17 +588,17 @@ namespace FullTextGrammarAssistant
             "宿IP",
             "附件数",
             "域名"});
-            this.comboBox3.Location = new System.Drawing.Point(185, 271);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(156, 20);
-            this.comboBox3.TabIndex = 18;
-            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            this.SecondFilterTwo.Location = new System.Drawing.Point(247, 339);
+            this.SecondFilterTwo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.SecondFilterTwo.Name = "SecondFilterTwo";
+            this.SecondFilterTwo.Size = new System.Drawing.Size(207, 23);
+            this.SecondFilterTwo.TabIndex = 18;
+            this.SecondFilterTwo.SelectedIndexChanged += new System.EventHandler(this.SecondFilterTwo_SelectedIndexChanged);
             // 
-            // comboBox4
+            // FilterConditionTwo
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
+            this.FilterConditionTwo.FormattingEnabled = true;
+            this.FilterConditionTwo.Items.AddRange(new object[] {
             "大于",
             "大于等于",
             "等于",
@@ -615,44 +606,44 @@ namespace FullTextGrammarAssistant
             "小于",
             "小于等于",
             "正则表达式"});
-            this.comboBox4.Location = new System.Drawing.Point(344, 271);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(122, 20);
-            this.comboBox4.TabIndex = 19;
-            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
+            this.FilterConditionTwo.Location = new System.Drawing.Point(459, 339);
+            this.FilterConditionTwo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FilterConditionTwo.Name = "FilterConditionTwo";
+            this.FilterConditionTwo.Size = new System.Drawing.Size(161, 23);
+            this.FilterConditionTwo.TabIndex = 19;
+            this.FilterConditionTwo.SelectedIndexChanged += new System.EventHandler(this.FilterConditionTwo_SelectedIndexChanged);
             // 
-            // textBox5
+            // ConditionTwo
             // 
-            this.textBox5.Location = new System.Drawing.Point(469, 271);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(204, 21);
-            this.textBox5.TabIndex = 20;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.ConditionTwo.Location = new System.Drawing.Point(625, 339);
+            this.ConditionTwo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ConditionTwo.Name = "ConditionTwo";
+            this.ConditionTwo.Size = new System.Drawing.Size(271, 25);
+            this.ConditionTwo.TabIndex = 20;
+            this.ConditionTwo.TextChanged += new System.EventHandler(this.ConditionTwo_TextChanged);
             // 
-            // textBox3
+            // StartTimeBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(112, 180);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(277, 21);
-            this.textBox3.TabIndex = 50;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.StartTimeBox.Location = new System.Drawing.Point(149, 225);
+            this.StartTimeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.StartTimeBox.Name = "StartTimeBox";
+            this.StartTimeBox.Size = new System.Drawing.Size(368, 25);
+            this.StartTimeBox.TabIndex = 50;
+            this.StartTimeBox.TextChanged += new System.EventHandler(this.StartTimeBox_TextChanged);
             // 
-            // textBox4
+            // EndTimeBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(392, 180);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(282, 21);
-            this.textBox4.TabIndex = 51;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.EndTimeBox.Location = new System.Drawing.Point(523, 225);
+            this.EndTimeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.EndTimeBox.Name = "EndTimeBox";
+            this.EndTimeBox.Size = new System.Drawing.Size(375, 25);
+            this.EndTimeBox.TabIndex = 51;
+            this.EndTimeBox.TextChanged += new System.EventHandler(this.EndTimeBox_TextChanged);
             // 
-            // comboBox2
+            // FilterConditionOne
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.FilterConditionOne.FormattingEnabled = true;
+            this.FilterConditionOne.Items.AddRange(new object[] {
             "大于",
             "大于等于",
             "等于",
@@ -660,26 +651,26 @@ namespace FullTextGrammarAssistant
             "小于",
             "小于等于",
             "正则表达式"});
-            this.comboBox2.Location = new System.Drawing.Point(344, 242);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(122, 20);
-            this.comboBox2.TabIndex = 18;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.FilterConditionOne.Location = new System.Drawing.Point(459, 302);
+            this.FilterConditionOne.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FilterConditionOne.Name = "FilterConditionOne";
+            this.FilterConditionOne.Size = new System.Drawing.Size(161, 23);
+            this.FilterConditionOne.TabIndex = 18;
+            this.FilterConditionOne.SelectedIndexChanged += new System.EventHandler(this.FilterConditionOne_SelectedIndexChanged);
             // 
-            // textBox2
+            // ConditionOne
             // 
-            this.textBox2.Location = new System.Drawing.Point(469, 242);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(204, 21);
-            this.textBox2.TabIndex = 19;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.ConditionOne.Location = new System.Drawing.Point(625, 302);
+            this.ConditionOne.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ConditionOne.Name = "ConditionOne";
+            this.ConditionOne.Size = new System.Drawing.Size(271, 25);
+            this.ConditionOne.TabIndex = 19;
+            this.ConditionOne.TextChanged += new System.EventHandler(this.ConditionOne_TextChanged);
             // 
-            // comboBox1
+            // SecondFilterOne
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.SecondFilterOne.FormattingEnabled = true;
+            this.SecondFilterOne.Items.AddRange(new object[] {
             "文件大小（单位：字节）",
             "上网账号",
             "宿端口",
@@ -690,85 +681,85 @@ namespace FullTextGrammarAssistant
             "宿IP",
             "附件数",
             "域名"});
-            this.comboBox1.Location = new System.Drawing.Point(112, 242);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(229, 20);
-            this.comboBox1.TabIndex = 17;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.SecondFilterOne.Location = new System.Drawing.Point(149, 302);
+            this.SecondFilterOne.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.SecondFilterOne.Name = "SecondFilterOne";
+            this.SecondFilterOne.Size = new System.Drawing.Size(304, 23);
+            this.SecondFilterOne.TabIndex = 17;
+            this.SecondFilterOne.SelectedIndexChanged += new System.EventHandler(this.SecondFilterOne_SelectedIndexChanged);
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.previewCmdText);
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage1.Controls.Add(this.previewqueryText);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(551, 125);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage1.Size = new System.Drawing.Size(737, 161);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "queryclient";
             this.toolTip1.SetToolTip(this.tabPage1, "全文主节点自带的查询工具");
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // previewCmdText
+            // previewqueryText
             // 
-            this.previewCmdText.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.previewCmdText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.previewCmdText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.previewCmdText.Location = new System.Drawing.Point(2, 2);
-            this.previewCmdText.Margin = new System.Windows.Forms.Padding(1);
-            this.previewCmdText.Multiline = true;
-            this.previewCmdText.Name = "previewCmdText";
-            this.previewCmdText.ReadOnly = true;
-            this.previewCmdText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.previewCmdText.Size = new System.Drawing.Size(547, 121);
-            this.previewCmdText.TabIndex = 3;
+            this.previewqueryText.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.previewqueryText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.previewqueryText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.previewqueryText.Location = new System.Drawing.Point(3, 2);
+            this.previewqueryText.Margin = new System.Windows.Forms.Padding(1);
+            this.previewqueryText.Multiline = true;
+            this.previewqueryText.Name = "previewqueryText";
+            this.previewqueryText.ReadOnly = true;
+            this.previewqueryText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.previewqueryText.Size = new System.Drawing.Size(731, 157);
+            this.previewqueryText.TabIndex = 3;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.textBox9);
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Controls.Add(this.previewjarText);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(551, 125);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage2.Size = new System.Drawing.Size(737, 161);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "batchQueryAndExport_1.7.jar";
             this.toolTip1.SetToolTip(this.tabPage2, "搞不清楚历史沿革的jar包查询全文工具");
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // textBox9
+            // previewjarText
             // 
-            this.textBox9.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox9.Location = new System.Drawing.Point(2, 2);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(1);
-            this.textBox9.Multiline = true;
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            this.textBox9.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox9.Size = new System.Drawing.Size(547, 121);
-            this.textBox9.TabIndex = 3;
+            this.previewjarText.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.previewjarText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.previewjarText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.previewjarText.Location = new System.Drawing.Point(3, 2);
+            this.previewjarText.Margin = new System.Windows.Forms.Padding(1);
+            this.previewjarText.Multiline = true;
+            this.previewjarText.Name = "previewjarText";
+            this.previewjarText.ReadOnly = true;
+            this.previewjarText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.previewjarText.Size = new System.Drawing.Size(731, 157);
+            this.previewjarText.TabIndex = 3;
             // 
-            // comboBox6
+            // AndOrNotTwo
             // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Items.AddRange(new object[] {
+            this.AndOrNotTwo.FormattingEnabled = true;
+            this.AndOrNotTwo.Items.AddRange(new object[] {
             "AND",
             "OR",
             "NOT"});
-            this.comboBox6.Location = new System.Drawing.Point(112, 301);
-            this.comboBox6.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(71, 20);
-            this.comboBox6.TabIndex = 43;
-            this.comboBox6.SelectedIndexChanged += new System.EventHandler(this.comboBox6_SelectedIndexChanged);
+            this.AndOrNotTwo.Location = new System.Drawing.Point(149, 376);
+            this.AndOrNotTwo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AndOrNotTwo.Name = "AndOrNotTwo";
+            this.AndOrNotTwo.Size = new System.Drawing.Size(93, 23);
+            this.AndOrNotTwo.TabIndex = 43;
+            this.AndOrNotTwo.SelectedIndexChanged += new System.EventHandler(this.AndOrNotTwo_SelectedIndexChanged);
             // 
-            // comboBox8
+            // FilterConditionThree
             // 
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Items.AddRange(new object[] {
+            this.FilterConditionThree.FormattingEnabled = true;
+            this.FilterConditionThree.Items.AddRange(new object[] {
             "大于",
             "大于等于",
             "等于",
@@ -776,26 +767,26 @@ namespace FullTextGrammarAssistant
             "小于",
             "小于等于",
             "正则表达式"});
-            this.comboBox8.Location = new System.Drawing.Point(344, 301);
-            this.comboBox8.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(122, 20);
-            this.comboBox8.TabIndex = 45;
-            this.comboBox8.SelectedIndexChanged += new System.EventHandler(this.comboBox8_SelectedIndexChanged);
+            this.FilterConditionThree.Location = new System.Drawing.Point(459, 376);
+            this.FilterConditionThree.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FilterConditionThree.Name = "FilterConditionThree";
+            this.FilterConditionThree.Size = new System.Drawing.Size(161, 23);
+            this.FilterConditionThree.TabIndex = 45;
+            this.FilterConditionThree.SelectedIndexChanged += new System.EventHandler(this.FilterConditionThree_SelectedIndexChanged);
             // 
-            // textBox6
+            // ConditionThree
             // 
-            this.textBox6.Location = new System.Drawing.Point(469, 301);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(204, 21);
-            this.textBox6.TabIndex = 46;
-            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            this.ConditionThree.Location = new System.Drawing.Point(625, 376);
+            this.ConditionThree.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ConditionThree.Name = "ConditionThree";
+            this.ConditionThree.Size = new System.Drawing.Size(271, 25);
+            this.ConditionThree.TabIndex = 46;
+            this.ConditionThree.TextChanged += new System.EventHandler(this.ConditionThree_TextChanged);
             // 
-            // comboBox7
+            // SecondFilterThree
             // 
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Items.AddRange(new object[] {
+            this.SecondFilterThree.FormattingEnabled = true;
+            this.SecondFilterThree.Items.AddRange(new object[] {
             "文件大小（单位：字节）",
             "上网账号",
             "宿端口",
@@ -806,33 +797,33 @@ namespace FullTextGrammarAssistant
             "宿IP",
             "附件数",
             "域名"});
-            this.comboBox7.Location = new System.Drawing.Point(185, 301);
-            this.comboBox7.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(156, 20);
-            this.comboBox7.TabIndex = 44;
-            this.comboBox7.SelectedIndexChanged += new System.EventHandler(this.comboBox7_SelectedIndexChanged);
+            this.SecondFilterThree.Location = new System.Drawing.Point(247, 376);
+            this.SecondFilterThree.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.SecondFilterThree.Name = "SecondFilterThree";
+            this.SecondFilterThree.Size = new System.Drawing.Size(207, 23);
+            this.SecondFilterThree.TabIndex = 44;
+            this.SecondFilterThree.SelectedIndexChanged += new System.EventHandler(this.SecondFilterThree_SelectedIndexChanged);
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabControl1.Location = new System.Drawing.Point(115, 15);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl1.Location = new System.Drawing.Point(153, 19);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(559, 155);
+            this.tabControl1.Size = new System.Drawing.Size(745, 194);
             this.tabControl1.TabIndex = 57;
             // 
             // groupBox1
             // 
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(40, 432);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(53, 540);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(347, 61);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(463, 76);
             this.groupBox1.TabIndex = 58;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "搜索范围：";
@@ -840,9 +831,11 @@ namespace FullTextGrammarAssistant
             // groupBox2
             // 
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(440, 431);
+            this.groupBox2.Location = new System.Drawing.Point(587, 539);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(234, 62);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(312, 78);
             this.groupBox2.TabIndex = 59;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "数据类型：";
@@ -850,9 +843,11 @@ namespace FullTextGrammarAssistant
             // groupBox3
             // 
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox3.Location = new System.Drawing.Point(40, 496);
+            this.groupBox3.Location = new System.Drawing.Point(53, 620);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(634, 59);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(845, 74);
             this.groupBox3.TabIndex = 60;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "查询方式：";
@@ -860,9 +855,11 @@ namespace FullTextGrammarAssistant
             // groupBox4
             // 
             this.groupBox4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox4.Location = new System.Drawing.Point(40, 334);
+            this.groupBox4.Location = new System.Drawing.Point(53, 418);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(634, 91);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Size = new System.Drawing.Size(845, 114);
             this.groupBox4.TabIndex = 61;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "协议类型：";
@@ -870,44 +867,45 @@ namespace FullTextGrammarAssistant
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.panel6.Controls.Add(this.button1);
-            this.panel6.Controls.Add(this.button2);
-            this.panel6.Location = new System.Drawing.Point(0, 570);
+            this.panel6.Controls.Add(this.Clipboard);
+            this.panel6.Controls.Add(this.CloseButton);
+            this.panel6.Location = new System.Drawing.Point(0, 712);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(717, 58);
+            this.panel6.Size = new System.Drawing.Size(956, 72);
             this.panel6.TabIndex = 62;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(717, 629);
+            this.ClientSize = new System.Drawing.Size(956, 786);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.comboBox7);
-            this.Controls.Add(this.comboBox8);
-            this.Controls.Add(this.comboBox6);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox5);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.ConditionThree);
+            this.Controls.Add(this.SecondFilterThree);
+            this.Controls.Add(this.FilterConditionThree);
+            this.Controls.Add(this.AndOrNotTwo);
+            this.Controls.Add(this.EndTimeBox);
+            this.Controls.Add(this.ConditionTwo);
+            this.Controls.Add(this.FilterConditionTwo);
+            this.Controls.Add(this.SecondFilterTwo);
+            this.Controls.Add(this.AndOrNotOne);
+            this.Controls.Add(this.ConditionOne);
+            this.Controls.Add(this.SecondFilterOne);
+            this.Controls.Add(this.FilterConditionOne);
+            this.Controls.Add(this.StartTimeBox);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.checkBox50);
-            this.Controls.Add(this.checkBox53);
-            this.Controls.Add(this.checkBox48);
+            this.Controls.Add(this.AllSearch);
+            this.Controls.Add(this.AllData);
+            this.Controls.Add(this.AllSeed);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.AllProType);
+            this.Controls.Add(this.KeyWordsBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
@@ -918,7 +916,7 @@ namespace FullTextGrammarAssistant
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
@@ -948,59 +946,59 @@ namespace FullTextGrammarAssistant
         #endregion
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.CheckBox checkBox15;
-        private System.Windows.Forms.CheckBox checkBox13;
-        private System.Windows.Forms.CheckBox checkBox12;
-        private System.Windows.Forms.CheckBox checkBox11;
-        private System.Windows.Forms.CheckBox checkBox10;
-        private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.TextBox KeyWordsBox;
+        private System.Windows.Forms.CheckBox AllProType;
+        private System.Windows.Forms.CheckBox WebAccess;
+        private System.Windows.Forms.CheckBox Email;
+        private System.Windows.Forms.CheckBox Account;
+        private System.Windows.Forms.CheckBox IM;
+        private System.Windows.Forms.CheckBox FTP;
+        private System.Windows.Forms.CheckBox Social;
+        private System.Windows.Forms.CheckBox InternetChat;
+        private System.Windows.Forms.CheckBox BBS;
+        private System.Windows.Forms.CheckBox Telnet;
+        private System.Windows.Forms.CheckBox Voip;
+        private System.Windows.Forms.CheckBox Gamble;
+        private System.Windows.Forms.CheckBox GambleNet;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBox44;
-        private System.Windows.Forms.CheckBox checkBox45;
-        private System.Windows.Forms.CheckBox checkBox46;
-        private System.Windows.Forms.CheckBox checkBox47;
-        private System.Windows.Forms.CheckBox checkBox48;
-        private System.Windows.Forms.CheckBox checkBox51;
-        private System.Windows.Forms.CheckBox checkBox52;
-        private System.Windows.Forms.CheckBox checkBox53;
-        private System.Windows.Forms.CheckBox checkBox42;
-        private System.Windows.Forms.CheckBox checkBox49;
-        private System.Windows.Forms.CheckBox checkBox50;
-        private System.Windows.Forms.CheckBox checkBox54;
+        private System.Windows.Forms.CheckBox Similar;
+        private System.Windows.Forms.CheckBox Encrypt;
+        private System.Windows.Forms.CheckBox Synonymy;
+        private System.Windows.Forms.CheckBox Attach;
+        private System.Windows.Forms.CheckBox AllSeed;
+        private System.Windows.Forms.CheckBox Garbage;
+        private System.Windows.Forms.CheckBox Normal;
+        private System.Windows.Forms.CheckBox AllData;
+        private System.Windows.Forms.CheckBox Attachment;
+        private System.Windows.Forms.CheckBox ContentText;
+        private System.Windows.Forms.CheckBox AllSearch;
+        private System.Windows.Forms.CheckBox Subject;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Clipboard;
+        private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.TextBox StartTimeBox;
+        private System.Windows.Forms.TextBox EndTimeBox;
+        private System.Windows.Forms.ComboBox SecondFilterTwo;
+        private System.Windows.Forms.ComboBox FilterConditionTwo;
+        private System.Windows.Forms.TextBox ConditionTwo;
+        private System.Windows.Forms.ComboBox FilterConditionOne;
+        private System.Windows.Forms.TextBox ConditionOne;
+        private System.Windows.Forms.ComboBox SecondFilterOne;
+        private System.Windows.Forms.ComboBox AndOrNotOne;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.ComboBox comboBox8;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.ComboBox AndOrNotTwo;
+        private System.Windows.Forms.ComboBox FilterConditionThree;
+        private System.Windows.Forms.TextBox ConditionThree;
+        private System.Windows.Forms.ComboBox SecondFilterThree;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox previewCmdText;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox previewqueryText;
+        private System.Windows.Forms.TextBox previewjarText;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
