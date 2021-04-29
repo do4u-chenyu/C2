@@ -341,7 +341,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if (image == null)
                 return;
 
-            var dialog = new C2.Dialogs.PictureViewDialog(image);
+            Icon icon = Properties.Resources.logo;
+            var dialog = new C2.Dialogs.PictureViewDialog(image,icon);
             dialog.ImageName = this.bossType.Text;
             dialog.SetZoomType(ZoomType.FitPage);
             dialog.ShowDialog();
