@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Xml;
 
 namespace UserInstallSet
 {
     [RunInstaller(true)]
     public partial class MyInstaller : System.Configuration.Install.Installer
     {
-        private String configText =
+        private const String configText =
         "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
         "<configuration>\r\n" +
         "  <configSections>" +
@@ -56,7 +57,12 @@ namespace UserInstallSet
             LogWrite("用户安装目录" + path);
             path = this.Context.Parameters["space"];
             LogWrite("模型空间" + path);
-            ConfigWrite(path.Replace("/", ""));
+
+            //string cf = ConfigRead();
+            //cf = ConfigReplace(cf, path);
+            //ConfigWrite(cf);
+
+            ConfigWrite(String.Format(configText, path.Replace("/", String.Empty)));
             base.OnAfterInstall(savedState);
         }
         public override void Install(IDictionary stateSaver)
@@ -79,7 +85,7 @@ namespace UserInstallSet
             LogWrite("Rollback");
             base.Rollback(savedState);
         }
-        public void LogWrite(string str)
+        private void LogWrite(string str)
         {
             string LogPath = this.Context.Parameters["targetdir"];
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(LogPath + @"setup.log", true))
@@ -87,15 +93,31 @@ namespace UserInstallSet
                 sw.WriteLine(DateTime.Now.ToString("[yyyy-MM-dd HH:mm:ss] ") + str + "\n");
             }
         }
-        public void ConfigWrite(string str)
+        private void ConfigWrite(string str)
         {
             string configPath = this.Context.Parameters["targetdir"];
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(configPath + @"C2.exe.config", false))
             {
-                sw.WriteLine(String.Format(configText, str));
+                sw.WriteLine(str);
             }
         }
 
+        private string ConfigRead()
+        {
+            string configPath = this.Context.Parameters["targetdir"];
+            using (System.IO.StreamReader sr = new System.IO.StreamReader(configPath + @"C2.exe.config", false))
+            {
+                return sr.ReadToEnd();
+            }
+        }
+
+        private string ConfigReplace(string v, string s)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(v);
+            XmlNode workspaceNode = doc.SelectSingleNode("/configuration/appSettings");
+            return v;
+        }
 
     }
 }
