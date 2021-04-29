@@ -678,8 +678,8 @@ if __name__ == '__main__':
 
     parser = OptionParser(usage)
     parser.add_option('--server',dest = 'serverIp', help = serverInfo,default = '127.0.0.1')
-    parser.add_option('--netDay',dest = 'netQueryDay', help = netDay,default = '45')
-    parser.add_option('--emailDay',dest = 'emailQueryDay', help = emailDay,default = '45')
+    parser.add_option('--netDay',dest = 'netQueryDay', help = netDay,default = '30
+    parser.add_option('--emailDay',dest = 'emailQueryDay', help = emailDay,default = '30)
     parser.add_option('--picDay',dest = 'picQueryDay', help = picDay,default = '15')
     parser.add_option('--out',dest = 'outfilePath', help = outInfo,default = sys.path[0])
     parser.add_option('--area',dest = 'areaCode', help = areaInfo,default = '000000')

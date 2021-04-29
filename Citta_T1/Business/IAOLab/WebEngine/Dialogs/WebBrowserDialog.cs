@@ -564,7 +564,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             if (WebType == WebType.Boss && ChartOptions.ContainsKey("Datasource"))
             {
-                string path = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("数据大屏{0}.png", HitTopic.ID));
+                string path = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("数据大屏_{0}.png",  DateTime.Now.ToString("yyyyMMdd_hhmmss")));
                 Bitmap bitmap = new Bitmap(webBrowser1.DrawToImage(), new Size(webBrowser1.Width, webBrowser1.Height));
                 bitmap.Save(path);
 

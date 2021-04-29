@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchToolkitForm));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.interfaceIPTB = new System.Windows.Forms.TextBox();
@@ -108,9 +107,9 @@
             this.label10.Location = new System.Drawing.Point(434, 78);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(177, 19);
+            this.label10.Size = new System.Drawing.Size(164, 19);
             this.label10.TabIndex = 50;
-            this.label10.Text = "选填,需要从界面机2次跳转时";
+            this.label10.Text = "选填,需从接口机2次跳转时";
             // 
             // interfaceIPTB
             // 
@@ -126,7 +125,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 19);
             this.label9.TabIndex = 48;
-            this.label9.Text = "界面机";
+            this.label9.Text = "接口机";
             // 
             // connectTestButton
             // 
@@ -454,7 +453,7 @@
             this.Controls.Add(this.panelCenter);
             this.Controls.Add(this.panelBottom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = Properties.Resources.logo;
+            this.Icon = global::C2.Properties.Resources.logo;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SearchToolkitForm";

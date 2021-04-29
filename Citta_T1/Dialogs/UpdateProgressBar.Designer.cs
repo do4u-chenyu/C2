@@ -35,6 +35,7 @@ namespace C2.Dialogs
             this.status = new System.Windows.Forms.Label();
             this.downloadSizeLabel = new System.Windows.Forms.Label();
             this.downloadSpeedLabel = new System.Windows.Forms.Label();
+            this.bigWarnLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // proBarDownload
@@ -62,14 +63,6 @@ namespace C2.Dialogs
             this.status.TabIndex = 3;
             this.status.Text = "下载中...";
             // 
-            // downloadSpeedLabel
-            // 
-            this.downloadSpeedLabel.AutoSize = true;
-            this.downloadSpeedLabel.Location = new System.Drawing.Point(119, 60);
-            this.downloadSpeedLabel.Name = "downloadSpeedLabel";
-            this.downloadSpeedLabel.Size = new System.Drawing.Size(0, 12);
-            this.downloadSpeedLabel.TabIndex = 5;
-            // 
             // downloadSizeLabel
             // 
             this.downloadSizeLabel.AutoSize = true;
@@ -78,10 +71,29 @@ namespace C2.Dialogs
             this.downloadSizeLabel.Size = new System.Drawing.Size(0, 12);
             this.downloadSizeLabel.TabIndex = 4;
             // 
+            // downloadSpeedLabel
+            // 
+            this.downloadSpeedLabel.AutoSize = true;
+            this.downloadSpeedLabel.Location = new System.Drawing.Point(119, 60);
+            this.downloadSpeedLabel.Name = "downloadSpeedLabel";
+            this.downloadSpeedLabel.Size = new System.Drawing.Size(0, 12);
+            this.downloadSpeedLabel.TabIndex = 5;
+            // 
+            // bigWarnLabel
+            // 
+            this.bigWarnLabel.AutoSize = true;
+            this.bigWarnLabel.Location = new System.Drawing.Point(285, 13);
+            this.bigWarnLabel.Name = "bigWarnLabel";
+            this.bigWarnLabel.Size = new System.Drawing.Size(137, 12);
+            this.bigWarnLabel.TabIndex = 6;
+            this.bigWarnLabel.Text = "【大文件建议手动下载】";
+            this.bigWarnLabel.Visible = false;
+            // 
             // UpdateProgressBar
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(434, 81);
+            this.Controls.Add(this.bigWarnLabel);
             this.Controls.Add(this.downloadSizeLabel);
             this.Controls.Add(this.status);
             this.Controls.Add(this.speedValue);
@@ -107,5 +119,6 @@ namespace C2.Dialogs
         private System.Windows.Forms.Label status;
         private System.Windows.Forms.Label downloadSizeLabel;
         private System.Windows.Forms.Label downloadSpeedLabel;
+        private System.Windows.Forms.Label bigWarnLabel;
     }
 }
