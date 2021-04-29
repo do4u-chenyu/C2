@@ -24,6 +24,11 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Bar
             option.yAxis = new YAxis();
             option.dataset = Common.FormatDatas;
 
+            option.grid = new Grid()
+            {
+                left = "'18%'",
+            };
+
             List<ISeries> series = new List<ISeries>();
             for (int i = 1; i< chartOptions.Length; i++)
             {
