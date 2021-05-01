@@ -366,8 +366,9 @@
     <item name="Decoration">修饰</item>
     <item name="Strike Through">删除线</item>
     <item name="Support C2 development, Save the Poor programmer!">支持 C2 的开发, 拯救苦逼的程序员!</item>
-    <item name="Advance">高级</item>
-    <item name="New Chart From Here">从此处复制并新建图</item>
+    <item name="Advance">特色功能</item>
+    <item name="Export Docx">一键生成word文档</item>
+    <item name="Export Xmind">一键生成xmind文档</item>
     <item name="Text Alignment">文本对齐</item>
     <item name="Center">中间</item>
     <item name="Picture Thumb Size">缩略图尺寸</item>
