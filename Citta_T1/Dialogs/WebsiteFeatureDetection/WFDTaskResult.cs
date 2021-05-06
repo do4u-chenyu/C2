@@ -342,9 +342,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             if (isDownloading)
             {
-                DialogResult result = MessageBox.Show("当前有截图下载任务，是否中止下载？", "关闭窗口", MessageBoxButtons.OKCancel);
-                if (result == DialogResult.Cancel)
-                    return false;
+                HelpUtil.ShowMessageBox("当前有截图下载任务，请在下载结束后重试。");
+                return false;
             }
             return true;
         }
