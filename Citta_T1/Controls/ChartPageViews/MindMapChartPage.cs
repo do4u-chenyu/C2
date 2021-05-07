@@ -10,8 +10,10 @@ using C2.Design;
 using C2.Dialogs;
 using C2.Globalization;
 using C2.Model;
+using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
+using C2.Core.Exports;
 
 namespace C2.ChartPageView
 {
@@ -544,11 +546,13 @@ namespace C2.ChartPageView
             MenuAdvance.DropDownItems.AddRange(new ToolStripItem[] { MenuExportDocx, MenuExportXmind });
 
             // MenuExportDocx
+            MenuExportDocx.Image = C2.Properties.Resources.word;
             MenuExportDocx.Name = "MenuExportDocx";
             MenuExportDocx.Text = "Export Docx";
             MenuExportDocx.Click += MenuExportDocx_Click;
 
             // MenuExportXmind
+            MenuExportXmind.Image = C2.Properties.Resources.xmind;
             MenuExportXmind.Name = "MenuExportXmind";
             MenuExportXmind.Text = "Export Xmind";
             MenuExportXmind.Click += MenuExportXmind_Click;
@@ -883,12 +887,38 @@ namespace C2.ChartPageView
 
         void MenuExportDocx_Click(object sender, EventArgs e)
         {
-            //TODO 导出doc文档 
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "Word(*.Docx) | *.Docx";
+            dialog.Title = Lang._("Export");
+            dialog.FileName = ST.EscapeFileName(this.Chart.Document.Name);
+            if (dialog.ShowDialog(Global.GetMainForm()) == DialogResult.OK)
+            {
+                DocxEngine docxEngine = new DocxEngine();
+                if (docxEngine.MindMapExportChartToFile(this.Chart.Document, this.Chart, dialog.FileName))
+                {
+                    var fld = new FileLocationDialog(dialog.FileName, dialog.FileName);
+                    fld.Text = Lang._("Export Success");
+                    fld.ShowDialog(Global.GetMainForm());
+                }
+            }
         }
 
         void MenuExportXmind_Click(object sender, EventArgs e)
         {
-            //TODO 导出xmind文档
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "Xmind(*.xmind) | *.xmind";
+            dialog.Title = Lang._("Export");
+            dialog.FileName = ST.EscapeFileName(this.Chart.Document.Name);
+            if (dialog.ShowDialog(Global.GetMainForm()) == DialogResult.OK)
+            {
+                XmindEngine xmindEngine = new XmindEngine();
+                if (xmindEngine.MindMapExportChartToFile(this.Chart.Document, this.Chart, dialog.FileName))
+                {
+                    var fld = new FileLocationDialog(dialog.FileName, dialog.FileName);
+                    fld.Text = Lang._("Export Success");
+                    fld.ShowDialog(Global.GetMainForm());
+                }
+            }
         }
         #endregion
 
