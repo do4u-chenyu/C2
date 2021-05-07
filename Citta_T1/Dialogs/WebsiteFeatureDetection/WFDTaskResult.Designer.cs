@@ -45,7 +45,7 @@
             this.taskStatusLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusInfoLabel = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.screenShotGroupBox = new System.Windows.Forms.GroupBox();
             this.progressNum = new System.Windows.Forms.Label();
             this.progressInfo = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.screenShotGroupBox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -225,7 +225,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.statusInfoLabel);
-            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.screenShotGroupBox);
             this.panel1.Controls.Add(this.browserButton);
             this.panel1.Controls.Add(this.taskStatusLabel);
             this.panel1.Controls.Add(this.downloadPicsButton);
@@ -249,19 +249,19 @@
             this.statusInfoLabel.Size = new System.Drawing.Size(0, 12);
             this.statusInfoLabel.TabIndex = 10015;
             // 
-            // groupBox1
+            // screenShotGroupBox
             // 
-            this.groupBox1.Controls.Add(this.progressNum);
-            this.groupBox1.Controls.Add(this.progressInfo);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.progressBar1);
-            this.groupBox1.Location = new System.Drawing.Point(621, 19);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(299, 89);
-            this.groupBox1.TabIndex = 10014;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "截图下载";
+            this.screenShotGroupBox.Controls.Add(this.progressNum);
+            this.screenShotGroupBox.Controls.Add(this.progressInfo);
+            this.screenShotGroupBox.Controls.Add(this.label6);
+            this.screenShotGroupBox.Controls.Add(this.label5);
+            this.screenShotGroupBox.Controls.Add(this.progressBar1);
+            this.screenShotGroupBox.Location = new System.Drawing.Point(621, 19);
+            this.screenShotGroupBox.Name = "screenShotGroupBox";
+            this.screenShotGroupBox.Size = new System.Drawing.Size(299, 89);
+            this.screenShotGroupBox.TabIndex = 10014;
+            this.screenShotGroupBox.TabStop = false;
+            this.screenShotGroupBox.Text = "截图下载";
             // 
             // progressNum
             // 
@@ -344,8 +344,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.screenShotGroupBox.ResumeLayout(false);
+            this.screenShotGroupBox.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -366,7 +366,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button downloadPicsButton;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox screenShotGroupBox;
         private System.Windows.Forms.Label progressInfo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
