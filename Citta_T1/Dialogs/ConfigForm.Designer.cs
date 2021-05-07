@@ -188,7 +188,6 @@
             this.mainTabControl.Controls.Add(this.pythonConfigPage);
             this.mainTabControl.Controls.Add(this.gisMapConfigPage);
             this.mainTabControl.Controls.Add(this.pluginsConfigPage);
-            this.mainTabControl.Controls.Add(this.WFDConfigPage);
             this.mainTabControl.Controls.Add(this.userModelConfigPage);
             this.mainTabControl.Controls.Add(this.checkNewVersion);
             this.mainTabControl.Controls.Add(this.aboutConfigPage);
