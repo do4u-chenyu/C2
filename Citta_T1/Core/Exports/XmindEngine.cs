@@ -18,7 +18,11 @@ namespace C2.Core.Exports
         {
             get { return DocumentType.Xmind.TypeMime; }
         }
-
+        public bool MindMapExportChartToFile(Document document, ChartPage chart, string filename) 
+        {
+            ExportChartToFile(document, chart, filename);
+            return true;
+        }
         protected override bool ExportChartToFile(Document document, ChartPage chart, string filename)
         {
             if (chart is MindMap)
