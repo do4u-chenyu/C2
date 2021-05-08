@@ -60,7 +60,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 450);
+            this.tabControl1.Size = new System.Drawing.Size(988, 538);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -71,7 +71,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 424);
+            this.tabPage1.Size = new System.Drawing.Size(980, 512);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Linux";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // 
             this.panel2.Controls.Add(this.linuxTextBox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(152, 3);
+            this.panel2.Location = new System.Drawing.Point(193, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(637, 418);
+            this.panel2.Size = new System.Drawing.Size(784, 506);
             this.panel2.TabIndex = 3;
             // 
             // linuxTextBox
@@ -95,7 +95,7 @@
             this.linuxTextBox.Name = "linuxTextBox";
             this.linuxTextBox.ShowSpaces = true;
             this.linuxTextBox.ShowTabs = true;
-            this.linuxTextBox.Size = new System.Drawing.Size(637, 418);
+            this.linuxTextBox.Size = new System.Drawing.Size(784, 506);
             this.linuxTextBox.SyntaxHighlighting = "Python";
             this.linuxTextBox.TabIndex = 2;
             // 
@@ -106,7 +106,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(149, 418);
+            this.panel1.Size = new System.Drawing.Size(190, 506);
             this.panel1.TabIndex = 2;
             // 
             // linuxFilterTB
@@ -114,16 +114,16 @@
             this.linuxFilterTB.Dock = System.Windows.Forms.DockStyle.Top;
             this.linuxFilterTB.Location = new System.Drawing.Point(0, 0);
             this.linuxFilterTB.Name = "linuxFilterTB";
-            this.linuxFilterTB.Size = new System.Drawing.Size(149, 21);
+            this.linuxFilterTB.Size = new System.Drawing.Size(190, 21);
             this.linuxFilterTB.TabIndex = 3;
             this.linuxFilterTB.TextChanged += new System.EventHandler(this.LinuxFilterTB_TextChanged);
             // 
             // linuxTreeView
             // 
             this.linuxTreeView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linuxTreeView.Location = new System.Drawing.Point(0, 20);
+            this.linuxTreeView.Location = new System.Drawing.Point(0, 21);
             this.linuxTreeView.Name = "linuxTreeView";
-            this.linuxTreeView.Size = new System.Drawing.Size(149, 398);
+            this.linuxTreeView.Size = new System.Drawing.Size(190, 485);
             this.linuxTreeView.TabIndex = 0;
             this.linuxTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.LinuxTreeView_AfterSelect);
             // 
@@ -135,7 +135,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 424);
+            this.tabPage2.Size = new System.Drawing.Size(980, 512);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Python";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -144,9 +144,9 @@
             // 
             this.panel4.Controls.Add(this.pythonTextBox);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(152, 3);
+            this.panel4.Location = new System.Drawing.Point(193, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(637, 418);
+            this.panel4.Size = new System.Drawing.Size(784, 506);
             this.panel4.TabIndex = 1;
             // 
             // pythonTextBox
@@ -156,7 +156,7 @@
             this.pythonTextBox.Font = new System.Drawing.Font("Courier New", 10F);
             this.pythonTextBox.Location = new System.Drawing.Point(0, 0);
             this.pythonTextBox.Name = "pythonTextBox";
-            this.pythonTextBox.Size = new System.Drawing.Size(637, 418);
+            this.pythonTextBox.Size = new System.Drawing.Size(784, 506);
             this.pythonTextBox.SyntaxHighlighting = "Python";
             this.pythonTextBox.TabIndex = 3;
             // 
@@ -167,15 +167,15 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(149, 418);
+            this.panel3.Size = new System.Drawing.Size(190, 506);
             this.panel3.TabIndex = 0;
             // 
             // pythonTreeView
             // 
             this.pythonTreeView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pythonTreeView.Location = new System.Drawing.Point(0, 20);
+            this.pythonTreeView.Location = new System.Drawing.Point(0, 21);
             this.pythonTreeView.Name = "pythonTreeView";
-            this.pythonTreeView.Size = new System.Drawing.Size(149, 398);
+            this.pythonTreeView.Size = new System.Drawing.Size(190, 485);
             this.pythonTreeView.TabIndex = 5;
             this.pythonTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.PythonTreeView_AfterSelect);
             // 
@@ -184,7 +184,7 @@
             this.pythonFilterTB.Dock = System.Windows.Forms.DockStyle.Top;
             this.pythonFilterTB.Location = new System.Drawing.Point(0, 0);
             this.pythonFilterTB.Name = "pythonFilterTB";
-            this.pythonFilterTB.Size = new System.Drawing.Size(149, 21);
+            this.pythonFilterTB.Size = new System.Drawing.Size(190, 21);
             this.pythonFilterTB.TabIndex = 4;
             this.pythonFilterTB.TextChanged += new System.EventHandler(this.PythonFilterTB_TextChanged);
             // 
@@ -192,7 +192,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(988, 538);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
