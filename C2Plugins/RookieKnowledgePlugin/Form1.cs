@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RookieKnowledgePlugin
 {
@@ -22,6 +23,28 @@ namespace RookieKnowledgePlugin
         }
         private void InitializeTrees()
         {
+            try
+            {
+                DirectoryInfo dir = new DirectoryInfo(tempPath);
+                FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //返回目录中所有文件和子目录
+                foreach (FileSystemInfo i in fileinfo)
+                {
+                    if (i is DirectoryInfo)            //判断是否文件夹
+                    {
+                        DirectoryInfo subdir = new DirectoryInfo(i.FullName);
+                        subdir.Delete(true);          //删除子目录和文件
+                    }
+                    else
+                    {
+                        File.Delete(i.FullName);      //删除指定文件
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
             if (pythonRoot == null)
                 InitializePythonTree();
             if (linuxRoot == null)
@@ -127,10 +150,6 @@ namespace RookieKnowledgePlugin
                     WriteNodes(node, node.Name);
             }
         }
-
-
-
-
 
         private void LinuxTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
