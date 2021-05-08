@@ -68,7 +68,6 @@ namespace C2.Business.SSH.Tests
                 node.Attributes["value"].Value = @"D:\work1";
 
             _= doc.ToString();
-            d
         }
     }
 }
