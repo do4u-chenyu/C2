@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0029)http://172.16.102.1:8088/help -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1, minimum-scale=1.0, maximum-scale=5.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="shortcut icon" type="image/x-icon" href="http://172.16.102.1:8088/assets/images/favicon_32.png">
+    <title>检索系统帮助</title>
+</head>
+<body>
+<p>查询关键字语法</p>
+<table width="90%" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td height="20" class="STYLE8">
+			&nbsp;&nbsp;[1]
+			<span class="STYLE9">引号&nbsp;""</span>：引号运算符会按引号中的字符串精确查询。如用引号查询
+			"你好，我是"，会用引号中的字符串精确匹配，包括逗号。
+		</td>
+	</tr>
+	<tr>
+		<td height="20" class="STYLE8">
+			&nbsp;&nbsp;[2]
+			<span class="STYLE9">括号&nbsp;()</span>：表示在查询时先做括号中的运算。
+			如查询 你们 ! (我们 &amp; 他们)，会首先查询出符合括号中表达式的结果。
+		</td>
+	</tr>
+	<tr>
+		<td height="20" class="STYLE8">
+			&nbsp;&nbsp;[3]
+			<span class="STYLE9">逻辑与&nbsp;AND, &amp;, '空格'</span>：表示与运算。如查询
+			我们 &amp; 你们，查询结果必须包含"我们"和"你们"。
+		</td>
+	</tr>
+	<tr>
+		<td height="20" class="STYLE8">
+			&nbsp;&nbsp;[4]
+			<span class="STYLE9">逻辑或&nbsp;OR, |</span>：表示或运算。如查询 我们 |
+			你们，查询结果包含"我们"或"你们"。
+		</td>
+	</tr>
+	<tr>
+		<td height="20" class="STYLE8">
+			&nbsp;&nbsp;[5]
+			<span class="STYLE9">逻辑非&nbsp;!, -</span>：表示减运算。如查询 我们 !
+			你们，查询结果中只包含"我们"，不包含"你们"。
+		</td>
+	</tr>
+	<tr>
+		<td height="20" class="STYLE8">
+			&nbsp;&nbsp;[6]
+			<span class="STYLE9">前缀查询&nbsp;*：表示根据一个单词的前缀进行查询。如查询" hell*"，
+			可以查询出：词表中以"hell"开头的词来（如hello，hello123等）。
+		</span></td>
+	</tr>
+	<tr>
+		<td height="20" class="STYLE8">
+			&nbsp;&nbsp;[7]
+			<span class="STYLE9">运算优先级</span>：引号 &gt; 括号 &gt; 逻辑与
+			&gt; 逻辑或 &gt; 逻辑非（减运算） &gt; 前缀查询
+		</td>
+	</tr>
+	<tr>
+		<td height="20" class="STYLE6">
+			【注意】 逻辑运算的运算符字母均为大写，字符均为英文半角，查询关键词不可以符号起始
+		</td>
+	</tr>
+</tbody></table>
+   <p>属性过滤串语法</p>
+		<table width="92%" border="0" cellpadding="0" cellspacing="0">
+				<tbody><tr>
+					<td height="20" class="STYLE8">
+						&nbsp;&nbsp;[1]
+						<span class="STYLE9">支持AND OR !，!是单目运算符，必须对表达式加上括号，如!(exist(_SUBJECT))</span>
+					</td>
+				</tr>
+				<tr>
+					<td height="20" class="STYLE8">
+						&nbsp;&nbsp;[2]
+						<span class="STYLE9">支持(),修改优先级</span>
+					</td>
+				</tr>
+				<tr>
+					<td height="20" class="STYLE8">
+						&nbsp;&nbsp;[3]
+						<span class="STYLE9">支持=,!= ,&gt;,&lt;,&gt;=,&lt;= ,=可以对string做比较，并且是大小写无关的</span>
+					</td>
+				</tr>
+				<tr>
+					<td height="20" class="STYLE8">
+						&nbsp;&nbsp;[4]
+						<span class="STYLE9">支持in ,如 "中国" in _SUBJECT 是大小写无关的</span>
+					</td>
+				</tr>
+				<tr>
+					<td height="20" class="STYLE8">
+						&nbsp;&nbsp;[5]
+						<span class="STYLE9">支持exist,如exist(_SUBJECT)，如果需要加上!，必须加上括号，如!(exist(_SUBJECT))</span>
+					</td>
+				</tr>
+				<tr>
+					<td height="20" class="STYLE8">
+						&nbsp;&nbsp;[6]
+						<span class="STYLE9">支持int和string，int 如25，110，string用"",里面可以用\转义</span>
+					</td>
+				</tr>
+				<tr>
+					<td height="20" class="STYLE8">
+						&nbsp;&nbsp;[7]
+						<span class="STYLE9">支持对私有属性（用户自定义属性）的过滤，如：FTP-UserName</span>
+					</td>
+				</tr>
+				<tr>
+					<td height="20" class="STYLE8">
+						&nbsp;&nbsp;[8]
+						<span class="STYLE9">支持正则表达式=~，正则表达式用""，里面的特殊字符用\\转义，正则表达式写在=~的右边</span>
+					</td>
+				</tr>
+				<tr>
+					<td height="20" class="STYLE8">
+						&nbsp;&nbsp;[9]
+						<span class="STYLE9">支持数组的解析(要求属性必须能通过json转成数组)，支持数组大小和字符串的比较，如用_ATTACHNAMES@表示_ATTACHNAMES的某一个元素。</span>
+					</td>
+				</tr>
+ 	
+				<tr>
+					<td height="20" class="STYLE8"> 
+						&nbsp;&nbsp;[11] 
+						<span class="STYLE9">例子:
+							 <table border="1">
+							 	 <tbody><tr>
+							 	 	 <td>查源端口等于25</td>
+							 	 	 <td>SRC_PORT=25</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>subject包含 中国</td>
+							 	 	 <td>"中国" in _SUBJECT</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>subject包含 中国 并且源端口大于等于25</td>
+							 	 	 <td>"中国" in _SUBJECT AND SRC_PORT&gt;=25</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>目的ip的最后一段是161</td>
+							 	 	 <td>STRDST_IP=~"\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.161"</td>
+							 	</tr>
+							 	<tr>
+							 		<td valign="top">某个附件大小为20</td>
+							 		<td valign="top">_ATTACHSIZES@=20</td>
+							 	</tr>
+							 	<tr>
+							 		<td valign="top">附件数大于10</td>
+							 		<td valign="top">_ATTACHNUM&gt;10</td>
+							 	</tr>
+							 	<tr>
+							 		<td valign="top">某个附件名包含 中国</td>
+							 		<td valign="top"> "中国" in _ATTACHNAMES@</td>
+							 	</tr>
+							 	<tr>
+							 		<td valign="top">某一个附件名能匹配 ".*\.doc"</td>
+							 		<td valign="top">_ATTACHNAMES@=~".*\\.doc"</td>
+							 	</tr> 
+						   </tbody></table>
+						</span>
+					</td>
+				</tr>
+				
+	 </tbody></table>   
+	 <p><a href="javascript:;">全文已知的私有属性列表</a>,如果要加，请在我们这里注册一下</p><p>
+	 </p><p>文档类型和mimetype的对应关系</p><p>
+	 	</p><table border="1">
+							 	 <tbody><tr>
+							 	 	 <td>eml</td>
+							 	 	 <td>message/rfc822</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>http</td>
+							 	 	 <td>application/http</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>telnet</td>
+							 	 	 <td>application/telnet</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>im</td>
+							 	 	 <td>text/html</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>htm</td>
+							 	 	 <td>message/rfc822</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>txt</td>
+							 	 	 <td>text/plain</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>mht</td>
+							 	 	 <td>""</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>rar</td>
+							 	 	 <td>default</td>
+							 	</tr>
+							 	<tr>
+							 	 	 <td>wbbs</td>
+							 	 	 <td>text/html</td>
+							 	</tr>							 	
+		</tbody></table>
+		<p>如果使用IE7无法打开telnet，请下载ie7patch: <a href="javascript:;">IE7Patch</a></p><p>
+		</p><p>
+		REGEDIT4<br>
+		[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_DISABLE_TELNET_PROTOCOL]<br>
+		"iexplore.exe"=dword:00000000
+		</p>
+
+</body></html>
