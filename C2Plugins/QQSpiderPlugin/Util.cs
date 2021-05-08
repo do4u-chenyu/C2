@@ -126,7 +126,7 @@ namespace QQSpiderPlugin
 
             FileStream fs = null;
             HSSFWorkbook workbook = null;
-            ISheet sheet = null;
+            HSSFSheet sheet = null;
 
             int rowCount = dataGridView.RowCount;
             int colCount = dataGridView.ColumnCount;
@@ -136,7 +136,7 @@ namespace QQSpiderPlugin
             {
                 fs = new FileStream(filePath, FileMode.Create, FileAccess.Write);
                 workbook = new HSSFWorkbook();
-                sheet = workbook.CreateSheet("Sheet1");
+                sheet = (HSSFSheet)workbook.CreateSheet("Sheet1");
                 IRow row = sheet.CreateRow(0);
                 for (int j = 0; j < colCount; j++)
                 {

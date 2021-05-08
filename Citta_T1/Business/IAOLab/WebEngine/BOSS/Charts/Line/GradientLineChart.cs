@@ -43,9 +43,10 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Line
             option.grid = new Grid()
             {
                 top = "'15%'",
-                left = "'5%'",
+                left = "'1%'",
                 right = "'5%'",
                 bottom = "'15%'",
+                containLabel = "true",
             };
 
             option.xAxis = new XAxis()

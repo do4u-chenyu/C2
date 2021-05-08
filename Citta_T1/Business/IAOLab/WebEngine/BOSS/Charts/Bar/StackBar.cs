@@ -23,6 +23,13 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Bar
             };
             option.yAxis = new YAxis();
             option.dataset = Common.FormatDatas;
+            option.grid = new Grid()
+            {
+                top = "'15%'",
+                left = "'1%'",
+                bottom = "'15%'",
+                containLabel = "true",
+            };
 
             List<ISeries> series = new List<ISeries>();
             for (int i = 1; i < chartOptions.Length; i++)

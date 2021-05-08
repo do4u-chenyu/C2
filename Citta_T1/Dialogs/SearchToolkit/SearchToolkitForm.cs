@@ -243,7 +243,6 @@ namespace C2.SearchToolkit
             if (task.TaskStatus != "DONE")
             {
                 task.TaskStatus = new BastionAPI(task).Login().QueryTaskStatus();
-                log.Info("任务名称: " + task.TaskName + "任务状态: " + task.TaskStatus);
                 task.Save();
             }
                

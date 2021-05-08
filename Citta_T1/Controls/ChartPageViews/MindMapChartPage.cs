@@ -10,8 +10,10 @@ using C2.Design;
 using C2.Dialogs;
 using C2.Globalization;
 using C2.Model;
+using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
+using C2.Core.Exports;
 
 namespace C2.ChartPageView
 {
@@ -233,7 +235,8 @@ namespace C2.ChartPageView
             MenuStraightening.Text = Lang._("Straightening");
             MenuInvert.Text = Lang._("Invert");
             MenuAdvance.Text = Lang._("Advance");
-            MenuNewChartFromHere.Text = Lang._("New Chart From Here");
+            MenuExportDocx.Text = Lang._("Export Docx");
+            MenuExportXmind.Text = Lang._("Export Xmind");
 
             if (MenuLayout != null)
             {
@@ -278,7 +281,8 @@ namespace C2.ChartPageView
         ToolStripMenuItem MenuEdit;
         ToolStripMenuItem MenuProperty;
         ToolStripMenuItem MenuAdvance;
-        ToolStripMenuItem MenuNewChartFromHere;
+        ToolStripMenuItem MenuExportDocx;
+        ToolStripMenuItem MenuExportXmind;
 
         protected override int ExtendActionMenuIndex
         {
@@ -329,7 +333,8 @@ namespace C2.ChartPageView
             MenuAdvance = new ToolStripMenuItem();
             MenuEdit = new ToolStripMenuItem();
             MenuProperty = new ToolStripMenuItem();
-            MenuNewChartFromHere = new ToolStripMenuItem();
+            MenuExportDocx = new ToolStripMenuItem();
+            MenuExportXmind = new ToolStripMenuItem();
 
             //
             contextMenu.Items.AddRange(new ToolStripItem[] {
@@ -338,6 +343,7 @@ namespace C2.ChartPageView
                 MenuAddTopic,
                 MenuAddSubTopic,
                 MenuAdd,
+                MenuAdvance,
                 toolStripSeparator5,
                 //MenuLink,
                 MenuFolding,
@@ -537,14 +543,19 @@ namespace C2.ChartPageView
             // MenuAdvance
             MenuAdvance.Name = "MenuAdvance";
             MenuAdvance.Text = "Advance";
-            MenuAdvance.DropDownItems.AddRange(new ToolStripItem[] { MenuNewChartFromHere });
-            MenuAdvance.Enabled = false;
+            MenuAdvance.DropDownItems.AddRange(new ToolStripItem[] { MenuExportDocx, MenuExportXmind });
 
-            // MenuNewChartFromHere
-            MenuNewChartFromHere.Name = "MenuNewChartFromHere";
-            MenuNewChartFromHere.Text = "New Chart From Here";
-            MenuNewChartFromHere.Click += MenuNewChartFromHere_Click;
-            //MenuNewChartFromHere.Enabled = false;
+            // MenuExportDocx
+            MenuExportDocx.Image = C2.Properties.Resources.word;
+            MenuExportDocx.Name = "MenuExportDocx";
+            MenuExportDocx.Text = "Export Docx";
+            MenuExportDocx.Click += MenuExportDocx_Click;
+
+            // MenuExportXmind
+            MenuExportXmind.Image = C2.Properties.Resources.xmind;
+            MenuExportXmind.Name = "MenuExportXmind";
+            MenuExportXmind.Text = "Export Xmind";
+            MenuExportXmind.Click += MenuExportXmind_Click;
 
             // MenuEdit
             MenuEdit.Image = C2.Properties.Resources.edit;
@@ -592,7 +603,6 @@ namespace C2.ChartPageView
                 MenuAddBoss.Enabled = topicCount > 0 && count == 1;
                 MenuAddProgressBar.Enabled = topicCount > 0;
                 MenuAddModelOp.Enabled = topicCount > 0 && count == 1 && string.Equals("业务拓展视图", chartName);
-                MenuNewChartFromHere.Available = topicCount == 1;
 
                 bool hasLink = false;
                 foreach (var mo in SelectedObjects)
@@ -614,7 +624,8 @@ namespace C2.ChartPageView
                 MenuFolding.Available = false;
                 MenuAdd.Enabled = false;
                 MenuLink.Available = false;
-                MenuNewChartFromHere.Available = false;
+                MenuExportDocx.Available = false;
+                MenuExportXmind.Available = false;
             }
 
             MenuCut.Enabled = mindMapView1.CanCut;
@@ -874,22 +885,39 @@ namespace C2.ChartPageView
             OnNeedShowProperty(true);
         }
 
-        void MenuNewChartFromHere_Click(object sender, EventArgs e)
+        void MenuExportDocx_Click(object sender, EventArgs e)
         {
-            if (mindMapView1.SelectedTopic != null && !ReadOnly && Owner != null)
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "Word(*.Docx) | *.Docx";
+            dialog.Title = Lang._("Export");
+            dialog.FileName = ST.EscapeFileName(this.Chart.Document.Name);
+            if (dialog.ShowDialog(Global.GetMainForm()) == DialogResult.OK)
             {
-                var root = mindMapView1.SelectedTopic.Clone();
-                root.CutFromMap();
-                var map = new MindMap(root, ST.RemoveUnvisibleCharts(root.Text));
-
-                if (ChartThemeManage.Default.DefaultTheme != null)
+                DocxEngine docxEngine = new DocxEngine();
+                if (docxEngine.MindMapExportChartToFile(this.Chart.Document, this.Chart, dialog.FileName))
                 {
-                    map.ApplyTheme(ChartThemeManage.Default.DefaultTheme);
+                    var fld = new FileLocationDialog(dialog.FileName, dialog.FileName);
+                    fld.Text = Lang._("Export Success");
+                    fld.ShowDialog(Global.GetMainForm());
                 }
+            }
+        }
 
-                root.Expand();
-                Owner.Document.Charts.Add(map);
-                Owner.ActiveChartPage(map);
+        void MenuExportXmind_Click(object sender, EventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "Xmind(*.xmind) | *.xmind";
+            dialog.Title = Lang._("Export");
+            dialog.FileName = ST.EscapeFileName(this.Chart.Document.Name);
+            if (dialog.ShowDialog(Global.GetMainForm()) == DialogResult.OK)
+            {
+                XmindEngine xmindEngine = new XmindEngine();
+                if (xmindEngine.MindMapExportChartToFile(this.Chart.Document, this.Chart, dialog.FileName))
+                {
+                    var fld = new FileLocationDialog(dialog.FileName, dialog.FileName);
+                    fld.Text = Lang._("Export Success");
+                    fld.ShowDialog(Global.GetMainForm());
+                }
             }
         }
         #endregion

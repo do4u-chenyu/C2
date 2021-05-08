@@ -152,6 +152,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
         #region 事件
         protected override bool OnOKButtonClick()
         {
+            if (OptionsHaveBlank())
+            {
+                HelpUtil.ShowMessageBox("有未配置的参数，请重新配置后再确定。");
+                return false;
+            }
             //前100行所有列的数据生成datatable、图表配置项生成chartOptions、生成js
             TranDataToHtml();
             return base.OnOKButtonClick();
@@ -209,6 +214,23 @@ namespace C2.IAOLab.WebEngine.Dialogs
         }
         #endregion
         
+        private bool OptionsHaveBlank()
+        {
+            foreach (Control panel in this.panel1.Controls)
+            {
+                if (!(panel is Panel) || !panel.Visible)
+                    continue;
+                foreach (Control ct in panel.Controls)
+                {
+                    if ( (ct is ComboBox && (ct.Name.EndsWith("X") || ct.Name.EndsWith("Y")) && (ct as ComboBox).SelectedIndex == -1)
+                         || (ct is ComCheckBoxList && (ct as ComCheckBoxList).GetItemCheckIndex().Count == 0) )
+                        return true;
+                }
+            }
+            return false;
+        }
+
+
         private void TranDataToHtml()
         {
             DataTable dataTable = GenDataTable();
@@ -341,7 +363,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if (image == null)
                 return;
 
-            var dialog = new C2.Dialogs.PictureViewDialog(image);
+            Icon icon = Properties.Resources.logo;
+            var dialog = new C2.Dialogs.PictureViewDialog(image,icon);
             dialog.ImageName = this.bossType.Text;
             dialog.SetZoomType(ZoomType.FitPage);
             dialog.ShowDialog();

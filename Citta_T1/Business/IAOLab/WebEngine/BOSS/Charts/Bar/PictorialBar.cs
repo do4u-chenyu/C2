@@ -32,8 +32,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Bar
             option.grid = new Grid()
             {
                 top = "'15%'",
-                left = "'5%'",
-                right = "'5%'",
+                left = "'1%'",
                 bottom = "'15%'",
                 containLabel = "true",
             };

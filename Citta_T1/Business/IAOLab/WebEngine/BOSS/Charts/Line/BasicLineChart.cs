@@ -24,6 +24,10 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Line
             option.yAxis = new YAxis() {
                 type = xAxisType.value,
             };
+            option.grid = new Grid()
+            {
+                left = "'18%'",
+            };
             option.dataset = Common.FormatDatas;
 
             List<ISeries> series = new List<ISeries>();

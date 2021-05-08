@@ -8,42 +8,6 @@ namespace UserInstallSet
     [RunInstaller(true)]
     public partial class MyInstaller : System.Configuration.Install.Installer
     {
-        private const String configText =
-        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
-        "<configuration>\r\n" +
-        "  <configSections>" +
-        "    <sectionGroup name=\"userSettings\" type=\"System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\">" +
-        "      <section name=\"C2.Properties.Settings\" type=\"System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\" allowExeDefinition=\"MachineToLocalUser\" requirePermission=\"false\" />" +
-        "    </sectionGroup>" +
-        "  </configSections>" +
-        "    <startup>\r\n" +
-        "        <supportedRuntime version=\"v4.0\" sku=\".NETFramework,Version=v4.5\"/>\r\n" +
-        "    </startup>\r\n" +
-        "    <appSettings>\r\n" +
-        "      <add key = \"workspace\" value=\"{0}\"/>\r\n" +
-        "      <add key = \"RunLevel\" value=\"NoLogin\"/>\r\n" +
-        "      <add key=\"EPPlus:ExcelPackage.LicenseContext\" value=\"NonCommercial\" />\r\n" +
-        "      <add key=\"ClientSettingsProvider.ServiceUri\" value=\"\" />\r\n" +
-        "      <add key=\"IAOLab\" value=\"BigAPK, APK, BaseStation, Wifi, Card, Tude, Ip \"/>\r\n" +
-        "      <add key=\"version\" value=\"1.1.3\"/>\r\n" +
-        "    </appSettings>\r\n" +
-        "    <userSettings>\r\n" +
-        "      <C2.Properties.Settings>\r\n" +
-        "       <setting name=\"longitude\" serializeAs=\"String\">\r\n" +
-        "         <value>118.744288</value>\r\n" +
-        "       </setting>\r\n" +
-        "       <setting name = \"latitude\" serializeAs=\"String\">\r\n" +
-        "         <value>31.996022</value>\r\n" +
-        "       </setting>\r\n" +
-        "       <setting name = \"scale\" serializeAs=\"String\">\r\n" +
-        "         <value>19</value>\r\n" +
-        "       </setting>\r\n" +
-        "       <setting name = \"baiduAPIKey\" serializeAs=\"String\">\r\n" +
-        "         <value>FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9</value>\r\n" +
-        "       </setting>\r\n" +
-        "     </C2.Properties.Settings>\r\n" +
-        "    </userSettings>\r\n" +
-        "</configuration>";
         //APK:非法APK； BaseStation：基站查询； Wifi：WiFi查询； Card：银行卡查询； Tude：经纬度坐标转换； Ip：时间Ip转换；
         public MyInstaller()
         {
@@ -58,11 +22,10 @@ namespace UserInstallSet
             path = this.Context.Parameters["space"];
             LogWrite("模型空间" + path);
 
-            //string cf = ConfigRead();
-            //cf = ConfigReplace(cf, path);
-            //ConfigWrite(cf);
+            string cf = ConfigRead();
+            ConfigReplace(cf, path.Replace("/", String.Empty));
 
-            ConfigWrite(String.Format(configText, path.Replace("/", String.Empty)));
+            //ConfigWrite(String.Format(configText, path.Replace("/", String.Empty)));
             base.OnAfterInstall(savedState);
         }
         public override void Install(IDictionary stateSaver)
@@ -93,14 +56,6 @@ namespace UserInstallSet
                 sw.WriteLine(DateTime.Now.ToString("[yyyy-MM-dd HH:mm:ss] ") + str + "\n");
             }
         }
-        private void ConfigWrite(string str)
-        {
-            string configPath = this.Context.Parameters["targetdir"];
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(configPath + @"C2.exe.config", false))
-            {
-                sw.WriteLine(str);
-            }
-        }
 
         private string ConfigRead()
         {
@@ -111,12 +66,17 @@ namespace UserInstallSet
             }
         }
 
-        private string ConfigReplace(string v, string s)
+        private void ConfigReplace(string v, string s)
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(v);
-            XmlNode workspaceNode = doc.SelectSingleNode("/configuration/appSettings");
-            return v;
+            XmlNode node = doc.SelectSingleNode("/configuration/appSettings/add[@key='workspace']");
+            if (node != null && node.Attributes["value"] != null)
+                node.Attributes["value"].Value = s;
+
+            string configPath = System.IO.Path.Combine(this.Context.Parameters["targetdir"], @"C2.exe.config");
+
+            doc.Save(configPath);
         }
 
     }

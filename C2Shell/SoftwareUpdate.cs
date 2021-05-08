@@ -99,9 +99,13 @@ namespace C2Shell
         {
             try
             {
-                Directory.Delete(updatePath, true);
-                Directory.Delete(rollbackPath, true);
-                Directory.Delete(installPath, true);
+                if (Directory.Exists(installPath))
+                    Directory.Delete(installPath, true);
+                if (Directory.Exists(updatePath))
+                    Directory.Delete(updatePath, true);
+                if (Directory.Exists(rollbackPath))
+                    Directory.Delete(rollbackPath, true);
+                
             }
             catch
             { }

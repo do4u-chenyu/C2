@@ -503,9 +503,10 @@ namespace C2.Model.Widgets
                     image = ThumbImage;
             }
 
+            Icon icon = Properties.Resources.logo;
             if (image != null)
             {
-                var dialog = new C2.Dialogs.PictureViewDialog(image);
+                var dialog = new C2.Dialogs.PictureViewDialog(image,icon);
                 dialog.ImageName = this.Text;
                 dialog.ShowDialog();
             }

@@ -33,7 +33,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.taskNameLabel.Text = taskInfo.TaskName;
             this.taskIDLabel.Text = taskInfo.TaskID;
             this.taskStatusLabel.Text = taskInfo.Status.ToString();
-
+            this.screenShotGroupBox.Visible = taskInfo.Status == WFDTaskStatus.Done;//任务完成才显示截图下载控件
+            this.downloadPicsButton.Visible = taskInfo.Status == WFDTaskStatus.Done;//任务完成才显示截图下载控件
         }
 
         #region 加载结果
@@ -120,6 +121,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
                 
             this.taskStatusLabel.Text = TaskInfo.Status.ToString();
+            this.screenShotGroupBox.Visible = TaskInfo.Status == WFDTaskStatus.Done;//任务完成才显示截图下载控件
+            this.downloadPicsButton.Visible = TaskInfo.Status == WFDTaskStatus.Done;//任务完成才显示截图下载控件
         }
 
         private List<WFDResult> DealData(string resultFilePath, string apiResults)
@@ -233,7 +236,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private async void SaveScreenshotsToLocal(List<WFDResult> results)
         {
-            if (results == null || results.Count == 0 || !WFDWebAPI.GetInstance().ReAuthBeforeQuery())
+            if (results == null || !WFDWebAPI.GetInstance().ReAuthBeforeQuery())
                 return;
 
             var dialog = new FolderBrowserDialog();
@@ -253,11 +256,16 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private async Task SavePicAndUpdateProgress(string destPath, List<WFDResult> results)
         {
+            if(results.Count == 0)//没有可下载的图片，流程还是要走完，提示下载完毕直接退出
+            {
+                HelpUtil.ShowMessageBox("网站截图下载完毕");
+                return;
+            }
+
             int doneNum = 0;
             int errorNum = 0;
             string finMsg = string.Empty;
             isDownloading = true;
-
             string[] files = Directory.GetFiles(destPath);
 
             foreach (WFDResult result in results)
@@ -342,9 +350,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             if (isDownloading)
             {
-                DialogResult result = MessageBox.Show("当前有截图下载任务，是否中止下载？", "关闭窗口", MessageBoxButtons.OKCancel);
-                if (result == DialogResult.Cancel)
-                    return false;
+                HelpUtil.ShowMessageBox("当前有截图下载任务，请在下载结束后重试。");
+                return false;
             }
             return true;
         }

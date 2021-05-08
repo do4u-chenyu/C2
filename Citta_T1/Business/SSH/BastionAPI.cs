@@ -11,8 +11,6 @@ namespace C2.Business.SSH
 {
     public class BastionAPI
     {
-        private static readonly LogUtil log = LogUtil.GetInstance("BastionAPI");
-
         private const int M40 = 1024 * 1024 * 40;
         private const int K8 = 1024 * 8;
         private const int K16 = K8 * 2;
@@ -429,14 +427,12 @@ namespace C2.Business.SSH
         private bool IsAliveTask()
         {
             String result = RunCommand(String.Format("ps -p {0} -o cmd | grep {1}", task.PID, TargetScript), shell);
-            log.Info("任务名称: " + task.TaskName + "ps查询进程是否存活，运行结果为: " + result);
             return Regex.IsMatch(result, Wrap(@"python\s+" + TargetScript));
         }
 
         private bool IsResultFileReady()
         {
             String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
-            log.Info("任务名称: " + task.TaskName + "grep tgz，查看结果文件是否生成命令的输出结果: " + result);
             return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane)_\d+_\d+.tgz\r?\n");
         }
 
@@ -444,7 +440,6 @@ namespace C2.Business.SSH
         {
             DateTime born = ConvertUtil.TryParseDateTime(task.TaskCreateTime, "yyyyMMddHHmmss");
             TimeSpan ts = DateTime.Now.Subtract(born);
-            log.Info("任务名称: " + task.TaskName + "任务执行时间TimeSpan: " + ts );
             return Math.Abs(ts.TotalHours) >= 24 * 3;
         }
 
@@ -468,15 +463,9 @@ namespace C2.Business.SSH
         {
             if (!ssh.IsConnected)
                 return "连接失败";
-            log.Info("====" + "任务名称: " + task.TaskName + "任务创建时间: " + task.TaskCreateTime + "====");
             bool isTimeout = IsTaskTimeout();
             bool isAlive = IsAliveTask();
             bool isRFReady = IsResultFileReady();
-
-
-            log.Info("任务名称: " + task.TaskName + "是否超时: " + isTimeout);
-            log.Info("任务名称: " + task.TaskName + "任务是否存在: " + isAlive);
-            log.Info("任务名称: " + task.TaskName + "结果文件是否已生成完毕: " + isRFReady);
 
 
             // 1) pid不存在且有结果文件时, 为运行成功

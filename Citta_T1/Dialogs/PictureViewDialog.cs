@@ -35,10 +35,11 @@ namespace C2.Dialogs
             AfterInitialize();
         }
 
-        public PictureViewDialog(Image image)
+        public PictureViewDialog(Image image,Icon icon)
             : this()
         {
             Image = image;
+            Icon = icon;
         }
 
         public Image Image
@@ -367,6 +368,26 @@ namespace C2.Dialogs
             }
 
             return false;
+        }
+
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PictureViewDialog));
+            this.SuspendLayout();
+            // 
+            // PictureViewDialog
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 251);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "PictureViewDialog";
+            this.Load += new System.EventHandler(this.PictureViewDialog_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void PictureViewDialog_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
