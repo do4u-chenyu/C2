@@ -11,7 +11,7 @@
 ; 生成 目录setup.exe 所在文件夹
 #define MySetupOutDir ".\output"
 ;生成安装包的名称
-#define MySetupOutBaseFilename "IAO_setup(" +  GetDateTimeString('yyyy-mm-dd','-',':') + ")"
+#define MySetupOutBaseFilename "分析师单兵作战(" +  GetDateTimeString('yyyy-mm-dd','-',':') + ")"
 
 ; 制作setup.exe所用的资源文件夹
 #define MyResDir ".\res"
@@ -218,11 +218,11 @@ begin
       begin 
         if RegQueryStringValue(HKEY_CURRENT_USER, '{#MyRegInstallPath_sk}', '{#MyRegInstallPath_vn}', strPath) then
         begin
-          Result := 'C:\Program Files\FiberHome\IAO解决方案';
+          Result := 'C:\Program Files\FiberHome\分析师解决方案';
         end
         else 
         begin
-           Result :='C:\Program Files\FiberHome\IAO解决方案';
+           Result :='C:\Program Files\FiberHome\分析师解决方案';
         end
       end
     else 
@@ -660,7 +660,7 @@ begin
   with lblTipWDir3 do
   begin
     Parent := WizardForm;
-    Caption := '安装程序将把  IAO解决方案  安装到下面的文件夹中：';
+    Caption := '安装程序将把  分析师单兵作战系统  安装到下面的文件夹中：';
     Transparent := true;
     Font.Size:= 10
     Font.Name:='微软雅黑'
