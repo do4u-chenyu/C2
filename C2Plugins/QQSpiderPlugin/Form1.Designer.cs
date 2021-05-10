@@ -598,9 +598,9 @@
             this.label6.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.Location = new System.Drawing.Point(90, 58);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(220, 19);
+            this.label6.Size = new System.Drawing.Size(369, 19);
             this.label6.TabIndex = 4;
-            this.label6.Text = "步骤1: 输入wxid_开头的微信内部ID";
+            this.label6.Text = "步骤1: 输入wxid_开头的微信ID,例如:wxid_1kcxldspei3x54";
             // 
             // button1
             // 
