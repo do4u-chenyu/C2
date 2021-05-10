@@ -1018,7 +1018,7 @@
             this.WFDConfigPage.Padding = new System.Windows.Forms.Padding(3);
             this.WFDConfigPage.Size = new System.Drawing.Size(634, 380);
             this.WFDConfigPage.TabIndex = 7;
-            this.WFDConfigPage.Text = "网络侦察兵";
+            this.WFDConfigPage.Text = "网站侦察兵";
             this.WFDConfigPage.UseVisualStyleBackColor = true;
             // 
             // WFDResetButton
@@ -1039,7 +1039,7 @@
             this.WFDInfoTB.ReadOnly = true;
             this.WFDInfoTB.Size = new System.Drawing.Size(620, 81);
             this.WFDInfoTB.TabIndex = 14;
-            this.WFDInfoTB.Text = "网络侦察兵是。。。";
+            this.WFDInfoTB.Text = "网站侦察兵工具是一个部署在公网上的api，核心功能是对网站进行爬取、分类并截图，最终将判别结果返回给用户。";
             // 
             // WFDScreenshotTB
             // 
