@@ -52,7 +52,7 @@ def set_safe_crlf() -> None:
         sys.exit(-3)
 
 def set_auto_crlf() -> None:
-    print("设置禁止混合换行符")
+    print("设置不自动转换crlf")
     msg, err = ex_cmd("git config --global core.autocrlf false")
     if err != None:
         print("git命令有误，请检查是否配置git环境变量")
