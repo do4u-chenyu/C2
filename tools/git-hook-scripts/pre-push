@@ -38,7 +38,7 @@ def set_hookspath() -> None:
         print("设置失败，请检查是否配置git环境变量")
         sys.exit(-2)
 
-def set_crlf() -> None:
+def set_safe_crlf() -> None:
     print("设置禁止混合换行符")
     msg, err = ex_cmd("git config --global core.safecrlf true")
     if err != None:
@@ -51,6 +51,19 @@ def set_crlf() -> None:
         print("设置失败，请检查是否配置git环境变量")
         sys.exit(-3)
 
+def set_auto_crlf() -> None:
+    print("设置禁止混合换行符")
+    msg, err = ex_cmd("git config --global core.autocrlf false")
+    if err != None:
+        print("git命令有误，请检查是否配置git环境变量")
+        sys.exit(-3)
+    msg, err = ex_cmd("git config --global core.autocrlf")
+    if msg.decode("utf8").strip() == "false":
+        print("设置成功")
+    else:
+        print("设置失败，请检查是否配置git环境变量")
+        sys.exit(-3)
+		
 
 def compile(vs_path: str) -> None:
     sln_path = getcwd()
@@ -76,7 +89,8 @@ def compile(vs_path: str) -> None:
         sys.exit(-5)
 
 def main(file_path: str) -> None:
-    set_crlf()
+    set_safe_crlf()
+    set_auto_crlf()
     if not exists(file_path):
         print("找不到文件：{}".format(abspath(file_path)))
         sys.exit(-1)
