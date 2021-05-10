@@ -1032,6 +1032,10 @@ namespace _2048
                         CreateImage();
                         CreateImage();
                     }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
             }
 
