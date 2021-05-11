@@ -1422,6 +1422,7 @@ namespace C2.Forms
 
         void TsbExport_Click(object sender, EventArgs e)
         {
+            Global.GetDocumentForm().Save();
             if (Document == null)
                 return;
             
@@ -1432,6 +1433,7 @@ namespace C2.Forms
                 if (engine == null)
                     this.ShowMessage("不支持该格式的导出", MessageBoxIcon.Error);
                 else
+                    Global.GetDocumentForm().Save();
                     engine.Export(dialog.Document, dialog.SelectedCharts);
             }
             

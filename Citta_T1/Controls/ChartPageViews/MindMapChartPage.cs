@@ -887,6 +887,7 @@ namespace C2.ChartPageView
 
         void MenuExportDocx_Click(object sender, EventArgs e)
         {
+            Global.GetDocumentForm().Save();
             var dialog = new SaveFileDialog();
             dialog.Filter = "Word(*.Docx) | *.Docx";
             dialog.Title = Lang._("Export");
@@ -905,6 +906,7 @@ namespace C2.ChartPageView
 
         void MenuExportXmind_Click(object sender, EventArgs e)
         {
+            Global.GetDocumentForm().Save();
             var dialog = new SaveFileDialog();
             dialog.Filter = "Xmind(*.xmind) | *.xmind";
             dialog.Title = Lang._("Export");
