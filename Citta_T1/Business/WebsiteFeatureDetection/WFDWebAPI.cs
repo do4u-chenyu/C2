@@ -246,6 +246,8 @@ namespace C2.Business.WebsiteFeatureDetection
                 req.ContentLength = data.Length;
                 req.Headers.Add("Authorization", "Bearer " + token);
 
+                req.KeepAlive = true;//解决GetResponse操作超时问题
+
                 using (var stream = req.GetRequestStream())
                     stream.Write(data, 0, data.Length);
                 resp = new Response((HttpWebResponse)req.GetResponse());
