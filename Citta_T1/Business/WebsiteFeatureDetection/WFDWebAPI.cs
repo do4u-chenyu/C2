@@ -233,6 +233,9 @@ namespace C2.Business.WebsiteFeatureDetection
             Response resp = new Response();
             try
             {
+                System.GC.Collect();//Http相关的资源没有正确释放引起操作超时
+                ServicePointManager.DefaultConnectionLimit = 200;//系统支持同时存在http的connection个数过少引起操作超时
+
                 ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(RemoteCertificateValidate);
 
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
