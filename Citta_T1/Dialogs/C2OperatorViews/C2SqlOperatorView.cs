@@ -143,6 +143,8 @@ namespace C2.Dialogs.C2OperatorViews
 
         private void InitializeConnection(OperatorWidget operatorWidget)
         {
+            if (operatorWidget.DataSourceItem.DBItem == null)
+                return;
             string connectionInfos = operatorWidget.DataSourceItem.DBItem.AllDatabaseInfo;
             List<string> names = new List<string>() ;
             databaseItems = Global.GetDataSourceControl().GetAllExternalData();
