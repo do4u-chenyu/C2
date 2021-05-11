@@ -19,10 +19,11 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Bar
 
             int[] chartOptions = chartOptionDict["SimpleBar"];
             option.xAxis = new XAxis() {
-                type = xAxisType.category
+                type = xAxisType.category,
+                data = Common.GetDataByIdx(dataTable, chartOptions[0])
             };
             option.yAxis = new YAxis();
-            option.dataset = Common.FormatDatas;
+            //option.dataset = Common.FormatDatas;
 
             option.grid = new Grid()
             {
@@ -32,12 +33,10 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Bar
             List<ISeries> series = new List<ISeries>();
             for (int i = 1; i< chartOptions.Length; i++)
             {
+                
                 series.Add(new SeriesBar() {
                     name = Common.FormatString(dataTable.Columns[chartOptions[i]].ToString()),
-                    encode = new Encode() {
-                        x = chartOptions[0],
-                        y = chartOptions[i]
-                    }
+                    data = Common.GetDataByIdx(dataTable, chartOptions[i])
                 });
             }
 

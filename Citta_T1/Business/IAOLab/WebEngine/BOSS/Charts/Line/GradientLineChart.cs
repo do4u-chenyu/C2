@@ -57,6 +57,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Line
                 splitArea = "{color: '#f00',lineStyle: {color: '#f00'},}",
                 axisLabel = "{color:'#fff'}",
                 boundaryGap = "false",
+                data = Common.GetDataByIdx(dataTable, chartOptions[0])
             };
 
             //最后的4个都有问题，没有能够正确显示
@@ -71,7 +72,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Line
                 axisTick = "{show:false}",
             };
 
-            option.dataset = Common.FormatDatas;
+            //option.dataset = Common.FormatDatas;
 
             List<ISeries> series = new List<ISeries>();
             string[] color_str = new string[] { "'#FFB6C1'", "'#6c50f3'", "'#00ca95'", "'#6495ED'", "'#FFA500'" };
@@ -83,11 +84,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Line
                 series.Add(new SeriesLine()
                 {
                     name = Common.FormatString(dataTable.Columns[chartOptions[i]].ToString()),
-                    encode = new Encode()
-                    {
-                        x = chartOptions[0],
-                        y = chartOptions[i]
-                    },
+                    data = Common.GetDataByIdx(dataTable, chartOptions[i]),
                     type = "'line'",
                     showAllSymbol = "true",
                     symbol = "'circle'",

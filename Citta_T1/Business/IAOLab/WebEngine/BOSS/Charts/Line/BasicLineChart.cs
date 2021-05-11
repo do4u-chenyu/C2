@@ -19,7 +19,8 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Line
 
             int[] chartOptions = chartOptionDict["BasicLineChart"];
             option.xAxis = new XAxis() {
-                type = xAxisType.category
+                type = xAxisType.category,
+                data = Common.GetDataByIdx(dataTable, chartOptions[0])
             };
             option.yAxis = new YAxis() {
                 type = xAxisType.value,
@@ -28,17 +29,14 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Line
             {
                 left = "'18%'",
             };
-            option.dataset = Common.FormatDatas;
+            //option.dataset = Common.FormatDatas;
 
             List<ISeries> series = new List<ISeries>();
             for (int i = 1; i < chartOptions.Length; i++) 
             { 
                 series.Add(new SeriesLine() { 
                     name = Common.FormatString(dataTable.Columns[chartOptions[i]].ToString()),
-                    encode = new Encode() { 
-                        x = chartOptions[0], 
-                        y = chartOptions[i]
-                    }
+                    data = Common.GetDataByIdx(dataTable, chartOptions[i])
                 });
             }
             option.series = new Series(series.ToArray());

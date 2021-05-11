@@ -55,7 +55,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Option.SeriesType
         public Encode encode { get { return _encode; } set { FlagDic["encode"] = true; _encode = value; } }
         public string seriesLayoutBy { get { return _seriesLayoutBy; } set { FlagDic["seriesLayoutBy"] = true; _seriesLayoutBy = value; } }
         public int datasetIndex { get { return _datasetIndex; } set { FlagDic["datasetIndex"] = true; _datasetIndex = value; } }
-        public BarData data { get { return _data; } set { FlagDic["data"] = true; _data = value; } }
+        public string data { get { return _data; } set { FlagDic["data"] = true; _data = value; } }
         public MarkPoint markPoint { get { return _markPoint; } set { FlagDic["markPoint"] = true; _markPoint = value; } }
         public MarkLine markLine { get { return _markLine; } set { FlagDic["markLine"] = true; _markLine = value; } }
         public MarkArea markArea { get { return _markArea; } set { FlagDic["markArea"] = true; _markArea = value; } }
@@ -112,7 +112,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Option.SeriesType
         Encode _encode;
         string _seriesLayoutBy;
         int _datasetIndex;
-        BarData _data;
+        string _data;
         MarkPoint _markPoint;
         MarkLine _markLine;
         MarkArea _markArea;
