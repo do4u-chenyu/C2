@@ -241,14 +241,17 @@ namespace C2.Model.MindMaps
              */
             // 至少存在一个图表
             PictureWidget[] pictureWidgets = topic.FindWidgets<PictureWidget>();
-           
             int firstInternalPWIndex = Math.Max(0, FindInternalPicWidgetIndex(pictureWidgets));
             for (int i = 0; i < pictureWidgets.Length; i++)
             {
-                if (i == firstInternalPWIndex && File.Exists( pictureWidgets[i].ImageUrl))
-                    SavePwAsImg(topicNode, pictureWidgets[i]);
-                else
-                    SavePwAsAttachment(topicNode, pictureWidgets[i]);
+                if (File.Exists(pictureWidgets[i].ImageUrl))
+                {
+
+                    if (i == firstInternalPWIndex)
+                        SavePwAsImg(topicNode, pictureWidgets[i]);
+                    else
+                        SavePwAsAttachment(topicNode, pictureWidgets[i]);
+                }
             }
             /*
              * 附件挂件
