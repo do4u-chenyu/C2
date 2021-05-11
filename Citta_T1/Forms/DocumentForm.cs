@@ -1425,6 +1425,7 @@ namespace C2.Forms
            
             if (Document == null)
                 return;
+
             Global.GetDocumentForm().Save();
             var dialog = new ExportDocumentDialog(Document);
             if (dialog.ShowDialog(this) == DialogResult.OK)
