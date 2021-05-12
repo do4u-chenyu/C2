@@ -488,12 +488,12 @@ begin
   with lblWelcome do
   begin
     Parent := WizardForm;
-    Caption := '欢迎安装IAO解决方案';
+    Caption := '欢迎安装分析师单兵作战系统';
     Transparent := true;
     Font.Size:= 20
     Font.Name:='黑体'
     Font.Color:=$ffffff
-    Left := DpiScale(190);
+    Left := DpiScale(150);
     Top := DpiScale(195);
   end;
 
@@ -501,12 +501,12 @@ begin
   with lblAgree do
   begin
     Parent := WizardForm;
-    Caption := '欢迎访问IAO的';
+    Caption := '欢迎访问';
     Transparent := true;
     Font.Size:= 10
     Font.Name:='微软雅黑'
     Font.Color:=$ffffff
-    Left := DpiScale(50);
+    Left := DpiScale(90);
     Top := DpiScale(408);
   end;
 
@@ -515,7 +515,7 @@ begin
   with lblLicense do
   begin
     Parent := WizardForm;
-    Caption := '《C2门户》';
+    Caption := '《分析师单兵作战门户》';
     Transparent := true;
     Font.Size:= 10
     Font.Name:='微软雅黑'
