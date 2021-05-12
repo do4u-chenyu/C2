@@ -47,6 +47,8 @@ namespace C2.IAOLab.WebEngine.Boss.Option
         */
 
         string _id;
+        string _data;
+        public string data { get => _data; set { FlagDic["data"] = true; _data = value; }  }
         public string id { get => _id; set { FlagDic["id"] = true; _id = value; }  }
         bool _show;
         public bool show { get => _show; set { FlagDic["show"] = true; _show = value; } }

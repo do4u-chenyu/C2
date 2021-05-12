@@ -244,10 +244,14 @@ namespace C2.Model.MindMaps
             int firstInternalPWIndex = Math.Max(0, FindInternalPicWidgetIndex(pictureWidgets));
             for (int i = 0; i < pictureWidgets.Length; i++)
             {
-                if (i == firstInternalPWIndex)
-                    SavePwAsImg(topicNode, pictureWidgets[i]);
-                else
-                    SavePwAsAttachment(topicNode, pictureWidgets[i]);
+                if (File.Exists(pictureWidgets[i].ImageUrl))
+                {
+
+                    if (i == firstInternalPWIndex)
+                        SavePwAsImg(topicNode, pictureWidgets[i]);
+                    else
+                        SavePwAsAttachment(topicNode, pictureWidgets[i]);
+                }
             }
             /*
              * 附件挂件

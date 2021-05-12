@@ -16,10 +16,11 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Scatter
 
             int[] chartOptions = chartOptionDict["BasicScatter"];
             option.xAxis = new XAxis() {
-                type = xAxisType.category
+                type = xAxisType.category,
+                data = Common.GetDataByIdx(dataTable, chartOptions[0])
             };
             option.yAxis = new YAxis();
-            option.dataset = Common.FormatDatas;
+            //option.dataset = Common.FormatDatas;
             option.grid = new Grid()
             {
                 top = "'20%'",
@@ -33,10 +34,7 @@ namespace C2.IAOLab.WebEngine.Boss.Charts.Scatter
             {
                 series.Add(new SeriesScatter() {
                     name = Common.FormatString(dataTable.Columns[chartOptions[i]].ToString()),
-                    encode = new Encode() {
-                        x = chartOptions[0],
-                        y = chartOptions[i]
-                    }
+                    data = Common.GetDataByIdx(dataTable, chartOptions[i])
                 });
             }
 

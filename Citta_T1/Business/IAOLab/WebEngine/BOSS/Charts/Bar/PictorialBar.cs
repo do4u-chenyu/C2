@@ -40,6 +40,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Bar
             option.xAxis = new XAxis()
             {
                 type = xAxisType.category,
+                data = Common.GetDataByIdx(dataTable, chartOptions[0]),
                 axisTick = "{'alignWithLabel': true}",
                 nameTextStyle = new SubtextStyle
                 {
@@ -58,16 +59,12 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Bar
                 axisLine = "{'show': false}",
             };
 
-            option.dataset = Common.FormatDatas;
+            //option.dataset = Common.FormatDatas;
             List<ISeries> series = new List<ISeries>();
 
             series.Add(new SeriesPictorialBar()
             {
-                encode = new Encode()
-                {
-                    x = chartOptions[0],
-                    y = chartOptions[1]
-                },
+                data = Common.GetDataByIdx(dataTable, chartOptions[1]),
                 symbolSize = "[50,15]",
                 symbolOffset = "[0,12]",
                 z = 10,

@@ -150,5 +150,17 @@ namespace C2.IAOLab.WebEngine.Boss
 
             return Common.Join(data, "", ',', "[]", true);
         }
+
+        public static string GetDataByIdx(DataTable dataTable, int idx)
+        {
+            List<string> rowData = new List<string>(dataTable.Rows.Count) { };
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                rowData.Add(row[idx].ToString());
+            }
+
+            return Common.Join(rowData.ToArray());
+        }
     }
 }
