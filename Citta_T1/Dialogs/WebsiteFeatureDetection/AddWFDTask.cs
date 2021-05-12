@@ -52,7 +52,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
 
             HelpUtil.ShowMessageBox("任务下发成功");
-            string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网络侦察兵");
+            string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网站侦察兵");
             string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.bcp", TaskName, result.Datas));
             FileUtil.CreateDirectory(destDirectory);
             using (File.Create(destFilePath)) { }
