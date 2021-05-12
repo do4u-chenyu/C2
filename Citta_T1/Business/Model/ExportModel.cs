@@ -353,6 +353,21 @@ namespace C2.Business.Model
                 }
                 foreach (string path in paths)
                 {
+
+                    // 文件夹直接返回
+                    if (Directory.Exists(path))
+                        continue;
+                    try 
+                    {
+                        if (!File.Exists(path) && string.IsNullOrEmpty(Path.GetExtension(path)))//不是无扩展名的文件，则当目录处理
+                            continue;
+                    }
+                    catch
+                    {
+                        HelpUtil.ShowMessageBox(path + "路径可能不存在，无法完成模型导出。");
+                    }
+                   
+
                     if (allPaths.ContainsKey(path))
                     {
                         // 相同数据源，直接使用已经命名好的数据源
