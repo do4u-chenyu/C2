@@ -244,14 +244,11 @@ namespace C2.Model.MindMaps
             int firstInternalPWIndex = Math.Max(0, FindInternalPicWidgetIndex(pictureWidgets));
             for (int i = 0; i < pictureWidgets.Length; i++)
             {
-                if (File.Exists(pictureWidgets[i].ImageUrl))
-                {
-
-                    if (i == firstInternalPWIndex)
-                        SavePwAsImg(topicNode, pictureWidgets[i]);
-                    else
-                        SavePwAsAttachment(topicNode, pictureWidgets[i]);
-                }
+                if (i == firstInternalPWIndex)
+                    SavePwAsImg(topicNode, pictureWidgets[i]);
+                else
+                    SavePwAsAttachment(topicNode, pictureWidgets[i]);
+                
             }
             /*
              * 附件挂件
@@ -585,6 +582,8 @@ namespace C2.Model.MindMaps
         /// <param name="parent"></param>
         private void SavePwAsAttachment(XmlElement parent, PictureWidget widget)
         {
+            if (!File.Exists(widget.ImageUrl) && Path.IsPathRooted(widget.ImageUrl))
+                return;
             AttachmentInfo attachment = new AttachmentInfo(
                 attachments.Count.ToString(),
                 attachmentTag + attachments.Count.ToString() + ".png",
@@ -804,7 +803,6 @@ namespace C2.Model.MindMaps
         {
             if (parent == null || widget.Data == null)
                 return;
-
             AttachmentInfo attachment = new AttachmentInfo(
                 attachments.Count.ToString(),
                 attachmentTag + attachments.Count.ToString(),
