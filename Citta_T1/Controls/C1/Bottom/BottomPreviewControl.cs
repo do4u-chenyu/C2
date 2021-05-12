@@ -1,5 +1,4 @@
 ﻿using C2.Core;
-using C2.Database;
 using C2.Model;
 using C2.Utils;
 using System;
@@ -29,9 +28,8 @@ namespace C2.Controls.Bottom
             List<string> headers = datas[0];
             int numOfCols = headers.Count;
             for (int i = 0; i < maxNumOfRows; i++)
-                datas.Add(new List<string>() { "", "", "", "", "", "" });
-            //_InitializeColumns(headers);
-            //_InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
+                datas.Add(new List<string>() { String.Empty, String.Empty, String.Empty, String.Empty, String.Empty, String.Empty });
+
             InitializeDGV(datas, headers, numOfCols);
             DgvUtil.DisableOrder(this.dataGridView);
         }
