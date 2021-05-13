@@ -569,7 +569,7 @@ namespace C2.Controls.MapViews
                                                         hitItem.FileSep,
                                                         hitItem.FileType,
                                                         hitItem.FileEncoding);
-            Global.GetDataSourceControl().Visible = true;
+            //Global.GetDataSourceControl().Visible = true;
         }
         #endregion
 
