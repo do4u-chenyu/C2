@@ -99,6 +99,7 @@ def main(file_path: str) -> None:
         if exists(path):
             compile(path)
             return
+    print("没有找到vs编译环境, 请将vs目录添加到tools/git-hook-scripts/vs_path")
     exit(-5)
 
 
