@@ -41,6 +41,8 @@ namespace C2.Controls.Move
                     return OpUtil.ExtType.Text;
                 if (FullFilePath.EndsWith(".csv", true, System.Globalization.CultureInfo.CurrentCulture))
                     return OpUtil.ExtType.Text;
+                if (FullFilePath.EndsWith(".tsv", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return OpUtil.ExtType.Text;
                 return OpUtil.ExtType.Unknow;
             }
         }

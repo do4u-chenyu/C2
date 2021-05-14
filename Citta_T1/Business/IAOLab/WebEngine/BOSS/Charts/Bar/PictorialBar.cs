@@ -90,17 +90,13 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Bar
 
             series.Add(new SeriesBar()
             {
+                data = Common.GetDataByIdx(dataTable, chartOptions[1]),
                 barWidth = "'40'",
                 barGap = "'10%'",
                 barCategoryGap = "'10%'",
                 itemStyle = new ItemStyle()
                 {
                     color = "new echarts.graphic.LinearGradient(0, 0, 0, 0.7, [{offset: 0,color: '#38B2E6'},{offset: 1,color: '#0B3147'}]),opacity: 0.8",
-                },
-                encode = new Encode()
-                {
-                    x = chartOptions[0],
-                    y = chartOptions[1]
                 },
 
             });

@@ -238,7 +238,7 @@ namespace C2.Dialogs
             List<List<String>> rawContents = new List<List<string>>();
             foreach (string line in raw.Split(lineSep))
             {
-                if (line != "")
+                if (line != String.Empty)
                     rawContents.Add(new List<string>(line.Split(sep)));
             }
             return rawContents;
