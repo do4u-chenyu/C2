@@ -96,8 +96,9 @@ namespace FullTextGrammarAssistant
             else
                 newTextBox6 = this.ConditionThree.Text;
 
-            //      
-            if(AndOrNotOne.SelectedIndex == -1 & AndOrNotTwo.SelectedIndex == -1)
+            if (SecondFilterOne.SelectedIndex == -1)
+                this.queryclientTextList[5] = string.Empty;
+            else if (AndOrNotOne.SelectedIndex == -1 & AndOrNotTwo.SelectedIndex == -1)
                 this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + "\'";
             else if (AndOrNotTwo.SelectedIndex == -1)
                 this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + " " + this.AndOrNotOne.Text + " " + attrText2 + conText2 + newTextBox5 + "\'";
