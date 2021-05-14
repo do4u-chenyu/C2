@@ -576,9 +576,13 @@ def picExact(picDicts):
 
 
 def zip_result(DATA_PATH,ZIP_PATH):
-    LOGGER.info("ZIP DATA...")
-    _cmd = "tar -zcvf {0} {1} --remove-files".format(ZIP_PATH,DATA_PATH)
-    Popen(_cmd, shell=True).wait()
+   pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH,  '--remove-files'], stdout=PIPE, stderr=PIPE)
+   out, err = pipe.communicate()
+   if pipe.returncode:
+        LOGGER.warning("Compress dirs failed with error code: {0}".format(pipe.returncode))
+        LOGGER.warning(err.decode())
+   else:
+        LOGGER.info("Compress dirs success!.")
      
     
 def dataFormat(content):
@@ -678,16 +682,17 @@ if __name__ == '__main__':
 
     parser = OptionParser(usage)
     parser.add_option('--server',dest = 'serverIp', help = serverInfo,default = '127.0.0.1')
-    parser.add_option('--netDay',dest = 'netQueryDay', help = netDay,default = '30
-    parser.add_option('--emailDay',dest = 'emailQueryDay', help = emailDay,default = '30)
+    parser.add_option('--netDay',dest = 'netQueryDay', help = netDay,default = '30')
+    parser.add_option('--emailDay',dest = 'emailQueryDay', help = emailDay,default = '30')
     parser.add_option('--picDay',dest = 'picQueryDay', help = picDay,default = '15')
-    parser.add_option('--out',dest = 'outfilePath', help = outInfo,default = sys.path[0])
+    parser.add_option('--out',dest = 'outfilePath', help = outInfo,default = './result')
     parser.add_option('--area',dest = 'areaCode', help = areaInfo,default = '000000')
     ##get input Time  parameter
     option,args = parser.parse_args()
-    if not os.path.exists(sys.path[0] + '/result'):
-        os.mkdir(sys.path[0] + '/result')
-    dataPath = option.outfilePath + '/result'
+    #if not os.path.exists(sys.path[0] + '/result'):
+        #os.mkdir(sys.path[0] + '/result')
+    #dataPath = option.outfilePath + '/result'
+    dataPath = option.outfilePath
     serverIP = option.serverIp
     areacode = option.areaCode
     netDay   = option.netQueryDay
@@ -717,7 +722,7 @@ if __name__ == '__main__':
                     'loginAdmin','loginyzm','txAccount','admin_name','txtUser']
     LOGIN_VALUE = ['admin', 'administrator', 'root','system','sys']
     init_path([dataPath,join(dataPath,"Logs"),netPath,down_path])
-    log_path = join(dataPath, "Logs", "{0}.log".format(NowTime.strftime("%Y%m%d%H%M%S")))
+    log_path = join(dataPath, "Logs","{0}.log".format(NowTime.strftime("%Y%m%d%H%M%S")))
     LOGGER = init_logger(log_path)
 
     if  len(areacode) !=6: 
