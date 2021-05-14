@@ -96,7 +96,7 @@ namespace FullTextGrammarAssistant
             else
                 newTextBox6 = this.ConditionThree.Text;
 
-            //   ceshi
+            //   
             if(AndOrNotOne.SelectedIndex == -1 & AndOrNotTwo.SelectedIndex == -1)
                 this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + "\'";
             else if (AndOrNotTwo.SelectedIndex == -1)
