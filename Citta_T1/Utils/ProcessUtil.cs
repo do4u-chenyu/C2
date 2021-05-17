@@ -35,7 +35,7 @@ namespace C2.Utils
         public static void ProcessOpen(string ffp)
         {
             if (ffp.EndsWith(".bcp", StringComparison.CurrentCultureIgnoreCase))
-                ProcessOpenEx(ffp);
+                FileUtil.ExploreDirectory(ffp);
             else
                 ProcessExplorer(ffp);
         }
