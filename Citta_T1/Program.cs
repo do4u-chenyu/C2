@@ -36,6 +36,8 @@ namespace C2
         [STAThread]
         static void Main(params string[] args)
         {
+            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021061700000000") > 0)
+                return;
             #region
             if (PreProcessApplicationArgs(args))
                 return;
