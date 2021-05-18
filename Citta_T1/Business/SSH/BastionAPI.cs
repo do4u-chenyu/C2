@@ -133,8 +133,12 @@ namespace C2.Business.SSH
             // 跳转到目标机器
             shell.WriteLine(targetIP);
             // 等待跳转成功,出现root用户提示符
-            if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), Timeout))
-                return;
+            if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), TimeSpan.FromSeconds(10)))
+            {   // 修复bug:某些机器改了shell提示, 这里如果也不是ifconfig的话才认为失败 
+                String ret = RunCommand("ifconfig", shell);
+                if (!ret.Contains(targetIP))
+                    return;
+            }
             task.LastErrorMsg = String.Empty; 
             _ = shell.Read(); // 清空buffer
         }
