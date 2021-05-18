@@ -231,6 +231,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 DataItem di = oc.DataItem;
                 if (di.FileType == OpUtil.ExtType.Database)
                     BCPBuffer.GetInstance().GetCachePreviewTable(di.DBItem);
+                if (di.FileType != OpUtil.ExtType.Text)
+                    continue;
                 object[] datas = oc.OverlapType == OverlapType.Heatmap ?
                     OpenHeatMapFile(di, oc.LatIndex, oc.LngIndex, oc.WeightIndex) :
                     OpenMapFile(di, oc.LatIndex, oc.LngIndex);
