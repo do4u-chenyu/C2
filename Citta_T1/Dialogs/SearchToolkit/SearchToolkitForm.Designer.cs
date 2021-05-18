@@ -248,7 +248,7 @@
             this.bastionIPTB.Name = "bastionIPTB";
             this.bastionIPTB.Size = new System.Drawing.Size(137, 25);
             this.bastionIPTB.TabIndex = 2;
-            this.bastionIPTB.Text = "15.0.0.1";
+            this.bastionIPTB.Text = "15.0.0.1:22";
             // 
             // passwordTB
             // 
