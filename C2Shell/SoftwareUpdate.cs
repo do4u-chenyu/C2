@@ -118,8 +118,14 @@ namespace C2Shell
                 process.StartInfo.FileName = C2Path;
                 process.Start();
             }
-            catch
-            { }
+            // InvalidOperationException：表示当前状态下不允许进行此操作（也就是说存在着允许进行此操作的另一种状态）
+            // ObjectDisposedException：表示对象已经 Dispose 过了，不能再使用了
+            // Win32Exception：环境错误
+            // PlatformNotSupportedException ：表示在此平台下不支持（如果程序跨平台的话）
+            catch 
+            {
+                MessageBox.Show("找不到或无法加载主程序");
+            }
 
         }
         private bool ExecuteCmdScript(string scriptPath)
