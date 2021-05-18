@@ -114,12 +114,22 @@ namespace C2Shell
         {
             try
             {
+                // C2Path 不存在
+                if (!File.Exists(C2Path))
+                {
+                    //MessageBox.Show(String.Format("找不到{0}",C2Path)+",无法启动主程序","ERROR");
+                    MessageBox.Show(String.Format("找不到{0}",C2Path)+"\n无法启动主程序","ERROR");
+                    return;
+                }
+
                 Process process = new Process();
                 process.StartInfo.FileName = C2Path;
                 process.Start();
             }
-            catch
-            { }
+            catch 
+            {
+                //MessageBox.Show("找不到C2Path，无法启动主程序,");
+            }
 
         }
         private bool ExecuteCmdScript(string scriptPath)
