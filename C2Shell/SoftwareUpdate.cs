@@ -118,7 +118,7 @@ namespace C2Shell
                 if (!File.Exists(C2Path))
                 {
                     //MessageBox.Show(String.Format("找不到{0}",C2Path)+",无法启动主程序","ERROR");
-                    MessageBox.Show(String.Format("找不到{0}", C2Path) + "\n无法启动主程序", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(String.Format("找不到{0}", C2Path) + "\n无法启动主程序", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
