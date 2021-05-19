@@ -58,6 +58,7 @@
             this.AddModelButton.Size = new System.Drawing.Size(25, 25);
             this.AddModelButton.TabIndex = 1;
             this.AddModelButton.UseVisualStyleBackColor = false;
+            this.AddModelButton.Visible = false;
             this.AddModelButton.Click += new System.EventHandler(this.AddModelButton_Click);
             this.AddModelButton.MouseHover += new System.EventHandler(this.AddModelButton_MouseHover);
             // 
