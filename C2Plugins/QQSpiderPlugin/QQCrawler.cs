@@ -212,7 +212,7 @@ namespace QQSpiderPlugin
         string country;
         string province;
         string city;
-        int gender;
+        String gender;
         int age;
         string url;
         public ActInfo()
@@ -222,7 +222,7 @@ namespace QQSpiderPlugin
             this.country = String.Empty;
             this.province = String.Empty;
             this.city = String.Empty;
-            this.gender = 0;
+            this.gender = String.Empty;
             this.age = 0;
             this.url = String.Empty;
         }
@@ -233,7 +233,7 @@ namespace QQSpiderPlugin
             this.country = String.Empty;
             this.province = String.Empty;
             this.city = String.Empty;
-            this.gender = 0;
+            this.gender = String.Empty;
             this.age = 0;
             this.url = String.Empty;
         }
@@ -244,7 +244,7 @@ namespace QQSpiderPlugin
             this.country = (string)obj["country"];
             this.province = (string)obj["province"];
             this.city = (string)obj["city"];
-            this.gender = (int)obj["gender"]; // 1 男 2 女
+            this.gender = (string)obj["gender"] == "1" ? "男" : ((string)obj["gender"] == "2" ? "女" : "未知");
             this.age = (int)obj["age"];
             this.url = (string)obj["url"];
         }
