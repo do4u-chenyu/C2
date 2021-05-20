@@ -42,6 +42,8 @@ namespace C2.Dialogs.IAOLab
                     foreach (string baseStation in inputArray)
                     {
                         ShowResult(baseStation, "baseStation", tmpResult);
+                        if (progressBar1.Value == progressBar1.Maximum)
+                            MessageBox.Show("查询完成");
                     }
                     break;
                 case "Webbrowser":
@@ -52,6 +54,8 @@ namespace C2.Dialogs.IAOLab
                     foreach (string baseStation in inputArray)
                     {
                         ShowResult(baseStation, "baseStation", tmpResult);
+                        if (progressBar1.Value == progressBar1.Maximum)
+                            MessageBox.Show("查询完成");
                     }
                     break;
                 case "Wifi":
@@ -62,6 +66,8 @@ namespace C2.Dialogs.IAOLab
                     foreach (string mac in inputArray)
                     {
                         ShowResult(mac, "mac", tmpResult);
+                        if (progressBar1.Value == progressBar1.Maximum)
+                            MessageBox.Show("查询完成");
                     }
                     break;
                 case "Card":
@@ -72,6 +78,8 @@ namespace C2.Dialogs.IAOLab
                     foreach (string bankCard in inputArray)
                     {
                         ShowResult(bankCard, "bankCard", tmpResult);
+                        if (progressBar1.Value == progressBar1.Maximum)
+                            MessageBox.Show("查询完成");
                     }
                     
                     break;             
