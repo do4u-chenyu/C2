@@ -88,15 +88,27 @@ namespace C2.Controls
 
             return tabs.ToArray();
         }
-        public List<string> OpendDocuments()
+        public List<string> OpendDocuments<T>()
+            where T : BaseForm
         {
             char[] Chars = new char[] { Utils.OpUtil.Blank, '*' };
-            var tabs = from f in GetForms<BaseDocumentForm>()
+            var tabs = from f in GetForms<T>()
                        let fn = f.Text
                        select fn.TrimEnd(Chars);
 
             return tabs.ToList();
         }
+
+        public List<string> OpendDocuments()
+        {
+            return OpendDocuments<BaseDocumentForm>();
+        }
+
+        public List<string> OpendMindMapDocuments()
+        {
+            return OpendDocuments<DocumentForm>();
+        }
+
         private void OnTaskBarChanged()
         {
             if (TaskBar != null)

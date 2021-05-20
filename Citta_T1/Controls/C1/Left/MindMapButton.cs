@@ -162,7 +162,7 @@ namespace C2.Controls.Left
 
         private void ContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Global.GetMainForm().OpendDocuments().Contains(ModelTitle))
+            if (Global.GetMainForm().OpendMindMapDocuments().Contains(ModelTitle))
             {
                 this.OpenToolStripMenuItem.Enabled = false;
                 this.RenameToolStripMenuItem.Enabled = false;
