@@ -220,7 +220,7 @@ namespace C2.SearchToolkit
             validateMessage = String.Empty;
             // 从后往前验证
             validateMessage = ValidateSearchAgentIP() ? validateMessage : "全文机【IP】格式不对";
-            validateMessage = ValidateInterfaceIP() ? validateMessage : "跳转机【IP】格式不对";
+            validateMessage = ValidateInterfaceIP() ? validateMessage : "接口机【IP】格式不对";
             validateMessage = ValidateBastionIP() ? validateMessage : "堡垒机【IP:Port】格式不对";
             validateMessage = ValidatePassword() ? validateMessage : "堡垒机 【密码】  不能为空, 不能超过128个字符";
             validateMessage = ValidateUsername() ? validateMessage : "堡垒机 【用户名】不能为空, 不能超过128个字符";
@@ -286,6 +286,11 @@ namespace C2.SearchToolkit
             }
             else
                 HelpUtil.ShowMessageBox(validateMessage);
+        }
+
+        private void interfaceIPTB_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
