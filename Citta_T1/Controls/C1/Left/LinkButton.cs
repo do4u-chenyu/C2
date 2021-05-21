@@ -128,7 +128,7 @@ namespace C2.Controls.Left
         {
             // 双击编辑
             if (e.Button == MouseButtons.Left && e.Clicks == 2)
-                DoEditDatabaseInfo();
+                ConnectToolStripMenuItem_Click(sender, e);
         }
 
         private void OnDatabaseItemChange(DatabaseItem databaseItem)
