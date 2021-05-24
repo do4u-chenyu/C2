@@ -62,15 +62,18 @@ namespace C2.Dialogs
 
     class ExportZipDialog : ZipDialog
     {
-        public ExportZipDialog() : base()
+        public ExportZipDialog() : this("业务视图")
+        { }
+
+        public ExportZipDialog(string fileName) : base()
         {
             fd = new SaveFileDialog
             {
-                FileName = "业务视图.c2",             // 保存时给一个默认的名字
+                FileName = string.Format("{0}.c2", fileName),             // 保存时给一个默认的名字
                 Filter = "业务视图文件(*.c2)|*.c2",
                 Title = "导出业务视图",
                 AddExtension = true
-        };    
+            };
             this.Text = "导出业务视图";
         }
     }
