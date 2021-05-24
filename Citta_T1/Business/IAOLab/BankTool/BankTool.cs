@@ -71,8 +71,9 @@ namespace C2.IAOLab.BankTool
                     postContentArry[1],  //  卡号
                     postContentArry[3],  //  地址
                     postContentArry[5]); //  blabla
-
-            return "银行卡格式不正确";
+            if (postContentArry.Length == 2)
+                return postContentArry[1];
+            return "查询失败";
         }
     }
    
