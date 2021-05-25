@@ -246,37 +246,37 @@ namespace C2
 
         private void ModelMarketButton_Click(object sender, EventArgs e)
         {
-            if (!modelMarketControl.Visible)
+            if (!modelMarketControl.Visible || isLeftViewPanelMinimum )
                 ShowLeftPanel(modelMarketButton, modelMarketControl);
         }
 
         private void MindMapButton_Click(object sender, EventArgs e)
         {
-            if (!mindMapControl.Visible)
+            if (!mindMapControl.Visible || isLeftViewPanelMinimum)
                 ShowLeftPanel(mindMapButton, mindMapControl);
         }
         
         private void DataSourceButton_Click(object sender, EventArgs e)
         {
-            if (!dataSourceControl.Visible)
+            if (!dataSourceControl.Visible || isLeftViewPanelMinimum)
                 ShowLeftPanel(dataSourceButton, dataSourceControl);
         }
 
         private void IAOLabButton_Click(object sender, EventArgs e)
         {
-            if (!iaoLabControl.Visible)  // 避免反复点击时的闪烁
+            if (!iaoLabControl.Visible || isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
                 ShowLeftPanel(iaoLabButton, iaoLabControl);
         }
 
         private void DetectionButton_Click(object sender, EventArgs e)
         {
-            if (!websiteFeatureDetectionControl.Visible)
+            if (!websiteFeatureDetectionControl.Visible || isLeftViewPanelMinimum)
                 ShowLeftPanel(detectionButton, websiteFeatureDetectionControl);
         }
 
         private void SearchToolkitButton_Click(object sender, EventArgs e)
         {
-            if (!searchToolkitControl.Visible)
+            if (!searchToolkitControl.Visible || isLeftViewPanelMinimum)
                 ShowLeftPanel(searchToolkitButton, searchToolkitControl);
         }
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
@@ -372,7 +372,7 @@ namespace C2
         {
             this.isLeftViewPanelMinimum = false;
             this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            this.leftToolBoxPanel.Width = 187;
+            this.leftToolBoxPanel.Width = 187; 
         }
 
         private void HideLeftFold()
