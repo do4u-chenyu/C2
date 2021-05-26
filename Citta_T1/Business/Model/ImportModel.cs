@@ -78,8 +78,8 @@ namespace C2.Business.Model
                 if (!fsinfo.Name.EndsWith(".bmd"))
                     dataSourcePath[fsinfo.Name] = fsinfo.FullName;
             }
-            if (dataSourcePath.Count == 0)
-                return;
+            //if (dataSourcePath.Count == 0)
+            //    return;
 
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(newModelFilePath);
