@@ -111,7 +111,7 @@
             // 
             this.ExportModel.Name = "ExportModel";
             this.ExportModel.Size = new System.Drawing.Size(196, 22);
-            this.ExportModel.Text = "导出模型";
+            this.ExportModel.Text = "导出";
             this.ExportModel.Click += new System.EventHandler(this.ExportModelButton_Click);
             // 
             // toolStripSeparator1

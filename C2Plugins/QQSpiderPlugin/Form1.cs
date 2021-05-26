@@ -331,7 +331,16 @@ namespace QQSpiderPlugin
             byte[] imgBytes = login.GetQRCode().Content;
             if (imgBytes == null || imgBytes != null && imgBytes.Length == 0)
                 return;
-            Image img = Image.FromStream(new MemoryStream(imgBytes));
+            Image img = null;
+            try
+            {
+                img = Image.FromStream(new MemoryStream(imgBytes));
+            }
+            catch (ArgumentException)
+            {
+                imgBytes = new byte[0];
+                return;
+            }
             QrCodeForm qrCodeForm = new QrCodeForm(img);
             Thread _thread = new Thread(() =>
             {
