@@ -1049,6 +1049,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Utils\GuarderUtil.cs" />
     <Compile Include="Utils\DbUtil.cs" />
@@ -1922,6 +1923,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="sbin\awk.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -2294,7 +2296,9 @@
     <Content Include="Business\IAOLab\WebEngine\JS\phx.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\BossStyle03.png" />
+    <None Include="Resources\BossStyle03.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\BigAPK.bmp" />
     <Content Include="Business\IAOLab\WebEngine\JS\phx11.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -3253,10 +3257,14 @@
     <None Include="Resources\WebBrowser\map_save.png" />
     <None Include="Resources\WebBrowser\map_setting.png" />
     <None Include="Resources\WebBrowser\map_sourceCode.png" />
+    <None Include="Resources\地下钱庄2.jpg" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Resources\附件.txt" />
+    <None Include="Resources\组织人员归属地.png" />
+    <None Include="Resources\调查结果详细模型.xml" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
