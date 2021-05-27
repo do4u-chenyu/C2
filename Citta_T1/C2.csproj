@@ -3257,14 +3257,10 @@
     <None Include="Resources\WebBrowser\map_save.png" />
     <None Include="Resources\WebBrowser\map_setting.png" />
     <None Include="Resources\WebBrowser\map_sourceCode.png" />
-    <None Include="Resources\地下钱庄2.jpg" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="Resources\附件.txt" />
-    <None Include="Resources\组织人员归属地.png" />
-    <None Include="Resources\调查结果详细模型.xml" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
