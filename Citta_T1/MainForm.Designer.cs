@@ -705,7 +705,6 @@ namespace C2
             this.Controls.Add(this.leftMainMenuPanel);
             this.Controls.Add(this.headPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = global::C2.Properties.Resources.logo;
             this.Name = "MainForm";
             this.Text = "烽火FiberHome";
