@@ -3262,12 +3262,6 @@
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="Resources\框选中.png" />
-    <None Include="Resources\框选 %281%29.png" />
-    <None Include="Resources\选择.png" />
-    <None Include="Resources\选择 %281%29.png" />
-    <None Include="Resources\选择 %282%29.png" />
-    <None Include="Resources\选择 %283%29.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
