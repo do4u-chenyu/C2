@@ -253,6 +253,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap Block {
+            get {
+                object obj = ResourceManager.GetObject("Block", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap blueshadow {
             get {
                 object obj = ResourceManager.GetObject("blueshadow", resourceCulture);
@@ -2962,8 +2972,8 @@ namespace C2.Properties {
         ///    &lt;item name=&quot;editor_show_sidebar&quot;&gt;True&lt;/item&gt;
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
-        ///      &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remar [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///     &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
+        ///      &lt;remark [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 逻辑图 {
             get {

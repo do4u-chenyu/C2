@@ -52,6 +52,7 @@
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ImportModelButton,
@@ -209,7 +210,7 @@
             this.FrameButton.AutoSize = false;
             this.FrameButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.FrameButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
-            this.FrameButton.Image = global::C2.Properties.Resources.cursor;
+            this.FrameButton.Image = global::C2.Properties.Resources.Block;
             this.FrameButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.FrameButton.Margin = new System.Windows.Forms.Padding(0);
             this.FrameButton.Name = "FrameButton";
