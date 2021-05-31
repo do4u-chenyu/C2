@@ -300,6 +300,7 @@
     <Compile Include="Business\Database\HiveDAOImpl.cs" />
     <Compile Include="Business\Database\OracleDAOImpl.cs" />
     <Compile Include="Business\Database\PostgreDAOImpl.cs" />
+    <Compile Include="Design\WaterMarkTypeConverter.cs" />
     <Compile Include="Dialogs\BastionDownloadProgressBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -440,6 +441,7 @@
     <Compile Include="Business\IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
     <Compile Include="Business\IAOLab\WebEngine\WebManager.cs" />
     <Compile Include="Model\MindMaps\DocxFile.cs" />
+    <Compile Include="Model\MindMaps\WaterMarkType.cs" />
     <Compile Include="Model\MindMaps\XmindFile.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

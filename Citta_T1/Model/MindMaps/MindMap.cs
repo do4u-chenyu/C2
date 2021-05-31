@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Design;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml;
-using C2.Controls;
+﻿using C2.Controls;
 using C2.Controls.MapViews;
 using C2.Core;
 using C2.Globalization;
-using C2.Model;
 using C2.Model.Documents;
 using C2.Model.Styles;
 using C2.Model.Widgets;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace C2.Model.MindMaps
 {
@@ -509,6 +507,7 @@ namespace C2.Model.MindMaps
 
         String _WaterMarkContent = String.Empty;
         Font _WaterMarkFont = new Font("微软雅黑", 20f, FontStyle.Bold);
+        WaterMarkType _WaterMarkType = WaterMarkType.Default;
 
         [DefaultValue(typeof(Color), "White")]
         [LocalDisplayName("Node Back Color"), LocalCategory("Color")]
@@ -622,6 +621,22 @@ namespace C2.Model.MindMaps
                     var old = _WaterMarkFont;
                     _WaterMarkFont = value;
                     OnPropertyChanged("WaterMarkFont", old, WaterMarkFont, ChangeTypes.Visual);
+                }
+            }
+        }
+
+        [DefaultValue(WaterMarkType.Default)]
+        [LocalDisplayName("水印类型"), LocalCategory("WaterMark")]
+        public WaterMarkType WaterMarkType
+        {
+            get { return _WaterMarkType; }
+            set 
+            {
+                if (_WaterMarkType != value)
+                {
+                    var old = _WaterMarkType;
+                    _WaterMarkType = value;
+                    OnPropertyChanged("WaterMarkType", old, WaterMarkType, ChangeTypes.Visual);
                 }
             }
         }
