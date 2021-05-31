@@ -51,12 +51,24 @@ namespace C2.Dialogs
             if (this.passwordCheckBox.Checked)
             {
                 this.passwordTextBox.Enabled = true;
+                this.showPasswordCheckBox.Visible = true;
             }
             else
             {
                 this.passwordTextBox.Enabled = false;
                 this.passwordTextBox.Text = string.Empty;
+
+                this.showPasswordCheckBox.Checked = false;
+                this.showPasswordCheckBox.Visible = false;
             }
+        }
+
+        private void ShowPasswordCheckBox_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (this.showPasswordCheckBox.Checked)
+                this.passwordTextBox.UseSystemPasswordChar = false;
+            else
+                this.passwordTextBox.UseSystemPasswordChar = true;
         }
     }
 

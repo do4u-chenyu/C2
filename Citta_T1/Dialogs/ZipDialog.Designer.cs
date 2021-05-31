@@ -34,6 +34,7 @@
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.browseButton = new System.Windows.Forms.Button();
             this.passwordCheckBox = new System.Windows.Forms.CheckBox();
+            this.showPasswordCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // modelPathLabel
@@ -96,12 +97,25 @@
             this.passwordCheckBox.UseVisualStyleBackColor = true;
             this.passwordCheckBox.CheckedChanged += new System.EventHandler(this.PasswordCheckBox_CheckedChanged);
             // 
+            // showPasswordCheckBox
+            // 
+            this.showPasswordCheckBox.AutoSize = true;
+            this.showPasswordCheckBox.Location = new System.Drawing.Point(302, 125);
+            this.showPasswordCheckBox.Name = "showPasswordCheckBox";
+            this.showPasswordCheckBox.Size = new System.Drawing.Size(48, 16);
+            this.showPasswordCheckBox.TabIndex = 10010;
+            this.showPasswordCheckBox.Text = "显示";
+            this.showPasswordCheckBox.UseVisualStyleBackColor = true;
+            this.showPasswordCheckBox.Visible = false;
+            this.showPasswordCheckBox.CheckedChanged += new System.EventHandler(this.ShowPasswordCheckBox_CheckedChanged);
+            // 
             // ZipDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(370, 201);
+            this.Controls.Add(this.showPasswordCheckBox);
             this.Controls.Add(this.passwordCheckBox);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.passwordTextBox);
@@ -117,6 +131,7 @@
             this.Controls.SetChildIndex(this.passwordTextBox, 0);
             this.Controls.SetChildIndex(this.browseButton, 0);
             this.Controls.SetChildIndex(this.passwordCheckBox, 0);
+            this.Controls.SetChildIndex(this.showPasswordCheckBox, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,5 +145,6 @@
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.CheckBox passwordCheckBox;
+        private System.Windows.Forms.CheckBox showPasswordCheckBox;
     }
 }
