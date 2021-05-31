@@ -112,7 +112,8 @@
 		<item name="Wall Paper">背影图片</item>
 		<item name="Window Back Color">窗口背景颜色</item>
 		<item name="Window Fore Color">窗口前景颜色</item>
-		<item name="Landscape">横向</item>
+    <item name="WaterMark">水印</item>
+    <item name="Landscape">横向</item>
 		<item name="Margins">边距</item>
 		<item name="UI Language">语言</item>
 		<item name="Check Update">检查更新</item>

@@ -507,6 +507,9 @@ namespace C2.Model.MindMaps
         int _LayerSpace = DefaultLayerSpace;
         int _ItemsSpace = DefaultItemsSpace;
 
+        String _WaterMarkContent = String.Empty;
+        Font _WaterMarkFont = new Font("微软雅黑", 20f, FontStyle.Bold);
+
         [DefaultValue(typeof(Color), "White")]
         [LocalDisplayName("Node Back Color"), LocalCategory("Color")]
         public Color NodeBackColor
@@ -591,6 +594,39 @@ namespace C2.Model.MindMaps
             }
         }
 
+        [DefaultValue("")]
+        [LocalDisplayName("水印内容"), LocalCategory("WaterMark")]
+        public String WaterMarkContent
+        {
+            get { return _WaterMarkContent; }
+            set
+            {
+                if (_WaterMarkContent != value)
+                {
+                    var old = _WaterMarkContent;
+                    _WaterMarkContent = value;
+                    OnPropertyChanged("WaterMarkContent", old, WaterMarkContent, ChangeTypes.Visual);
+                }
+            }
+        }
+
+        [DefaultValue(null)]
+        [LocalDisplayName("水印字体"), LocalCategory("WaterMark")]
+        public Font WaterMarkFont
+        {
+            get { return _WaterMarkFont; }
+            set
+            {
+                if (_WaterMarkFont != value)
+                {
+                    var old = _WaterMarkFont;
+                    _WaterMarkFont = value;
+                    OnPropertyChanged("WaterMarkFont", old, WaterMarkFont, ChangeTypes.Visual);
+                }
+            }
+        }
+
+        
         public override string StyleToString()
         {
             var sb = new StringBuilder();
@@ -957,6 +993,10 @@ namespace C2.Model.MindMaps
             ST.WriteTextNode(node, "widget_margin", WidgetMargin.ToString());
             ST.WriteTextNode(node, "picture_thumb_size", ST.ToString(PictureThumbSize));
 
+            // 新增水印功能
+            ST.WriteTextNode(node, "water_mark_content", WaterMarkContent);
+            ST.WriteFontNode(node, "water_mark_font", WaterMarkFont);
+
             if (LayerSpace != MindMapStyle.DefaultLayerSpace)
                 ST.WriteTextNode(node, "layer_space", LayerSpace.ToString());
 
@@ -1035,6 +1075,9 @@ namespace C2.Model.MindMaps
             ItemsSpace = ST.GetInt(ST.ReadTextNode(node, "items_space"), MindMapStyle.DefaultItemsSpace);
             WidgetMargin = ST.GetInt(ST.ReadTextNode(node, "widget_margin"), WidgetMargin);
             PictureThumbSize = ST.GetSize(ST.ReadTextNode(node, "picture_thumb_size"), PictureThumbSize);
+            // 新增水印功能
+            WaterMarkContent = ST.ReadTextNode(node, "water_mark_content");
+            WaterMarkFont = ST.GetFont(ST.ReadTextNode(node, "water_mark_font"), WaterMarkFont);
 
             var fontNode = node.SelectSingleNode("font") as XmlElement;
             if (fontNode != null)
