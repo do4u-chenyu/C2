@@ -125,6 +125,7 @@
 		<item name="Quality">品质</item>
 		<item name="PNG Options">PNG 选项</item>
 		<item name="Transparent Background">透明背景</item>
+    <item name="Transparent">透明度</item>
 		<item name="Worst">最差</item>
 		<item name="Best">最好</item>
 		<item name="Center Topic Back Color">中心节点背景色</item>

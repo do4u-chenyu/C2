@@ -505,8 +505,9 @@ namespace C2.Model.MindMaps
         int _LayerSpace = DefaultLayerSpace;
         int _ItemsSpace = DefaultItemsSpace;
 
-        String _WaterMarkContent = String.Empty;
+        int _WaterMarkTransparent = 30; // 0 - 100
         Font _WaterMarkFont = new Font("微软雅黑", 20f, FontStyle.Bold);
+        String _WaterMarkContent = String.Empty;
         WaterMarkType _WaterMarkType = WaterMarkType.Default;
 
         [DefaultValue(typeof(Color), "White")]
@@ -641,7 +642,23 @@ namespace C2.Model.MindMaps
             }
         }
 
-        
+        [DefaultValue(30)]
+        [LocalDisplayName("透明度"), LocalCategory("WaterMark")]
+        public int WaterMarkTransparent
+        {
+            get { return _WaterMarkTransparent; }
+            set
+            {
+                if (_WaterMarkTransparent != value)
+                {
+                    var old = _WaterMarkTransparent;
+                    _WaterMarkTransparent = Math.Min(Math.Max(value, 0), 100);
+                    OnPropertyChanged("WaterMarkTransparent", old, WaterMarkTransparent, ChangeTypes.Visual);
+                }
+            }
+        }
+
+
         public override string StyleToString()
         {
             var sb = new StringBuilder();
@@ -1012,6 +1029,7 @@ namespace C2.Model.MindMaps
             ST.WriteTextNode(node, "water_mark_content", WaterMarkContent);
             ST.WriteFontNode(node, "water_mark_font", WaterMarkFont);
             ST.WriteTextNode(node, "water_mark_type", ST.ToString(WaterMarkType));
+            ST.WriteTextNode(node, "water_make_transparent", WaterMarkTransparent.ToString());
 
             if (LayerSpace != MindMapStyle.DefaultLayerSpace)
                 ST.WriteTextNode(node, "layer_space", LayerSpace.ToString());
@@ -1095,6 +1113,8 @@ namespace C2.Model.MindMaps
             WaterMarkContent = ST.ReadTextNode(node, "water_mark_content");
             WaterMarkFont = ST.GetFont(ST.ReadTextNode(node, "water_mark_font"), WaterMarkFont);
             WaterMarkType = ST.GetWaterMarkType(ST.ReadTextNode(node, "water_mark_type"));
+            WaterMarkTransparent = ST.GetInt(ST.ReadTextNode(node, "water_mark_transparent"), WaterMarkTransparent);
+
             var fontNode = node.SelectSingleNode("font") as XmlElement;
             if (fontNode != null)
             {
