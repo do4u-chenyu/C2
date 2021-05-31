@@ -73,13 +73,19 @@ namespace C2.Controls.MapViews
             if (map.WaterMarkContent.IsEmpty())
                 return;
 
-            Size S = TextRenderer.MeasureText(map.WaterMarkContent, map.WaterMarkFont);
-            Point P = new Point(map.Centor.X - S.Width / 2, map.Centor.Y);
+            IFont font = args.Graphics.Font(map.WaterMarkFont);
+            IBrush brush = args.Graphics.SolidBrush(Color.FromArgb(map.WaterMarkTransparent, 0, 0, 0));
+            Size S = args.Graphics.MeasureString(map.WaterMarkContent + "...", font).ToSize();  // 土办法:强制增加尾字符增加宽度
+            Point P = new Point(map.Centor.X - S.Width / 2, map.Centor.Y - S.Height / 2);
+
+            IGraphicsState old = args.Graphics.Save();
+            args.Graphics.RotateTransform(12.0F);
             args.Graphics.DrawString(map.WaterMarkContent,
-                args.Graphics.Font(map.WaterMarkFont),
-                args.Graphics.SolidBrush(Color.FromArgb(map.WaterMarkTransparent, 0, 0, 0)),
+                font,
+                brush,
                 new Rectangle(P, S),
                 PaintHelper.SFCenter);
+            args.Graphics.Restore(old);
         }
 
         public void PaintNavigationMap(MindMap map, float zoom, PaintEventArgs e)
