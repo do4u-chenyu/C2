@@ -642,7 +642,7 @@ namespace C2.Model.MindMaps
             }
         }
 
-        [DefaultValue(30)]
+        [DefaultValue(75)]
         [LocalDisplayName("透明度"), LocalCategory("WaterMark")]
         public int WaterMarkTransparent
         {
@@ -652,11 +652,13 @@ namespace C2.Model.MindMaps
                 if (_WaterMarkTransparent != value)
                 {
                     var old = _WaterMarkTransparent;
-                    _WaterMarkTransparent = Math.Min(Math.Max(value, 0), 100);
+                    _WaterMarkTransparent = Math.Min(Math.Max(value, 0), 255);
                     OnPropertyChanged("WaterMarkTransparent", old, WaterMarkTransparent, ChangeTypes.Visual);
                 }
             }
         }
+
+
 
 
         public override string StyleToString()

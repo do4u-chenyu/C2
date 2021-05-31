@@ -55,7 +55,7 @@ namespace C2.Controls.MapViews
                 throw new ArgumentNullException();
 
             ResetObjects(args.Graphics, map);
-
+            // 画背景水印
             PaintBackground(map, args);
 
             if (map.Root != null)
@@ -77,7 +77,7 @@ namespace C2.Controls.MapViews
             Point P = new Point(map.Centor.X - S.Width / 2, map.Centor.Y);
             args.Graphics.DrawString(map.WaterMarkContent,
                 args.Graphics.Font(map.WaterMarkFont),
-                args.Graphics.SolidBrush(Color.FromArgb(100, 0, 0, 0)),
+                args.Graphics.SolidBrush(Color.FromArgb(map.WaterMarkTransparent, 0, 0, 0)),
                 new Rectangle(P, S),
                 PaintHelper.SFCenter);
         }
