@@ -51,6 +51,9 @@ namespace C2.Model.Documents
                 }
             }
         }
+        
+        [Browsable(false)]
+        public Point Centor { get { return new Point(_PageSize.Width / 2, _PageSize.Height / 2); } }
 
         [DefaultValue(typeof(Padding), "20, 20, 20, 20"), Browsable(false)]
         public Padding Margin

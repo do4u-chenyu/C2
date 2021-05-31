@@ -56,7 +56,7 @@ namespace C2.Controls.MapViews
 
             ResetObjects(args.Graphics, map);
 
-            //PaintBackground(map, args);
+            PaintBackground(map, args);
 
             if (map.Root != null)
             {
@@ -66,6 +66,20 @@ namespace C2.Controls.MapViews
                 PaintNode(map.Root, args);
                 PaintLinkLines(map.Root, args);
             }
+        }
+
+        private void PaintBackground(MindMap map, RenderArgs args)
+        {
+            if (map.WaterMarkContent.IsEmpty())
+                return;
+
+            Size S = TextRenderer.MeasureText(map.WaterMarkContent, map.WaterMarkFont);
+            Point P = new Point(map.Centor.X - S.Width / 2, map.Centor.Y);
+            args.Graphics.DrawString(map.WaterMarkContent,
+                args.Graphics.Font(map.WaterMarkFont),
+                args.Graphics.SolidBrush(Color.FromArgb(100, 0, 0, 0)),
+                new Rectangle(P, S),
+                PaintHelper.SFCenter);
         }
 
         public void PaintNavigationMap(MindMap map, float zoom, PaintEventArgs e)
