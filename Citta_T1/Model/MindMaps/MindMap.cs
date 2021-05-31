@@ -1011,6 +1011,7 @@ namespace C2.Model.MindMaps
             // 新增水印功能
             ST.WriteTextNode(node, "water_mark_content", WaterMarkContent);
             ST.WriteFontNode(node, "water_mark_font", WaterMarkFont);
+            ST.WriteTextNode(node, "water_mark_type", ST.ToString(WaterMarkType));
 
             if (LayerSpace != MindMapStyle.DefaultLayerSpace)
                 ST.WriteTextNode(node, "layer_space", LayerSpace.ToString());
@@ -1093,7 +1094,7 @@ namespace C2.Model.MindMaps
             // 新增水印功能
             WaterMarkContent = ST.ReadTextNode(node, "water_mark_content");
             WaterMarkFont = ST.GetFont(ST.ReadTextNode(node, "water_mark_font"), WaterMarkFont);
-
+            WaterMarkType = ST.GetWaterMarkType(ST.ReadTextNode(node, "water_mark_type"));
             var fontNode = node.SelectSingleNode("font") as XmlElement;
             if (fontNode != null)
             {

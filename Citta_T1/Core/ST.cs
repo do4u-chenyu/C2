@@ -980,6 +980,39 @@ namespace C2.Core
             }
         }
 
+        public static WaterMarkType GetWaterMarkType(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return WaterMarkType.Default;
+
+            switch (str.Trim().ToUpper())
+            {
+                case "DEFAULT":
+                    return WaterMarkType.Default;
+                case "FLAT":
+                    return WaterMarkType.Flat;
+                case "RAIN":
+                    return WaterMarkType.Rain;
+                default:
+                    return WaterMarkType.Default;
+            }
+        }
+
+        public static string ToString(WaterMarkType waterMarkType)
+        {
+            switch (waterMarkType)
+            {
+                case WaterMarkType.Default:
+                    return "DEFAULT";
+                case WaterMarkType.Flat:
+                    return "FLAT";
+                case WaterMarkType.Rain:
+                    return "RAIN";
+                default:
+                    return string.Empty;
+            }
+        }
+
         public static string ToString(Point point)
         {
             return string.Format("{0}, {1}", point.X, point.Y);
