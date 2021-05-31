@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using C2.Model.Widgets;
+using C2.Utils;
 using NPOI.OpenXmlFormats.Dml;
 using NPOI.OpenXmlFormats.Dml.WordProcessing;
 using NPOI.XWPF.UserModel;
@@ -17,13 +19,26 @@ namespace C2.Model.MindMaps
         {
             if (topicNote != null)
             {
-                XWPFParagraph noteText = docx.CreateParagraph();
-                noteText.Style = "a0";
-                noteText.IndentationFirstLine = 400;
-                XWPFRun xwpfRun = noteText.CreateRun();
-                xwpfRun.FontFamily = "宋体";
-                xwpfRun.SetText(topicNote.Text);
+                string relRemark = topicNote.Remark;
+                string tmpRemark = topicNote.Remark.Replace("</p>", @"\n</p>");
+                topicNote.Remark = tmpRemark;
+                string[] paragraphs = topicNote.Text.Split('\n');
+                foreach (string paragraph in paragraphs) 
+                {
+                    if(paragraph != string.Empty)
+                        WriteParagraph(paragraph, docx);
+                }
+                topicNote.Remark = relRemark;
             }
+        }
+        private void WriteParagraph(string text, XWPFDocument docx) 
+        {
+            XWPFParagraph noteText = docx.CreateParagraph();
+            noteText.Style = "a0";
+            noteText.IndentationFirstLine = 400;
+            XWPFRun xwpfRun = noteText.CreateRun();
+            xwpfRun.FontFamily = "宋体";
+            xwpfRun.SetText(text);
         }
         private Size RotateImageSize(int width, int height)
         {
