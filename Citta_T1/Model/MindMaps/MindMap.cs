@@ -1029,7 +1029,7 @@ namespace C2.Model.MindMaps
             ST.WriteTextNode(node, "water_mark_content", WaterMarkContent);
             ST.WriteFontNode(node, "water_mark_font", WaterMarkFont);
             ST.WriteTextNode(node, "water_mark_type", ST.ToString(WaterMarkType));
-            ST.WriteTextNode(node, "water_make_transparent", WaterMarkTransparent.ToString());
+            ST.WriteTextNode(node, "water_mark_transparent", WaterMarkTransparent.ToString());
 
             if (LayerSpace != MindMapStyle.DefaultLayerSpace)
                 ST.WriteTextNode(node, "layer_space", LayerSpace.ToString());
