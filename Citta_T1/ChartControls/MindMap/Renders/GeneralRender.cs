@@ -66,17 +66,41 @@ namespace C2.Controls.MapViews
                 PaintNode(map.Root, args);
                 PaintLinkLines(map.Root, args);
             }
+            // 画前景
+            PaintForeground(map, args);
         }
+
+        private void PaintForeground(MindMap map, RenderArgs args)
+        { }
 
         private void PaintBackground(MindMap map, RenderArgs args)
         {
-            if (map.WaterMarkContent.IsEmpty())
-                return;
+            if (!map.WaterMarkContent.IsEmpty())
+                PaintWaterMark(map, args);
+        }
 
+        private static void PaintWaterMark(MindMap map, RenderArgs args)
+        {
+            switch (map.WaterMarkType)
+            {
+                case WaterMarkType.Default:
+                case WaterMarkType.Flat:
+                case WaterMarkType.Rain:
+                    PaintWaterMarkDefault(map, args);
+                    break;
+                default:
+                    break;
+            }
+            PaintWaterMarkDefault(map, args);
+        }
+
+        private static void PaintWaterMarkDefault(MindMap map, RenderArgs args)
+        {
             IFont font = args.Graphics.Font(map.WaterMarkFont);
             IBrush brush = args.Graphics.SolidBrush(Color.FromArgb(map.WaterMarkTransparent, 0, 0, 0));
             Size S = args.Graphics.MeasureString(map.WaterMarkContent + "...", font).ToSize();  // 土办法:强制增加尾字符增加宽度
             Point P = new Point(map.Centor.X - S.Width / 2, map.Centor.Y - S.Height / 2);
+
 
             IGraphicsState old = args.Graphics.Save();
             args.Graphics.RotateTransform(12.0F);
