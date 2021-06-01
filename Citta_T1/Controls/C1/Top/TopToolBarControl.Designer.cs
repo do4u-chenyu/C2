@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopToolBarControl));
+            this.LinePanel = new System.Windows.Forms.Panel();
             this.toolStrip1 = new C2.Controls.ToolStripPro();
             this.ImportModelButton = new System.Windows.Forms.ToolStripButton();
             this.SaveModelButton = new System.Windows.Forms.ToolStripButton();
@@ -44,15 +45,23 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.MoveButton = new System.Windows.Forms.ToolStripButton();
             this.FrameButton = new System.Windows.Forms.ToolStripButton();
-            this.LinePanel = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // LinePanel
+            // 
+            this.LinePanel.BackColor = System.Drawing.Color.DarkGray;
+            this.LinePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.LinePanel.ForeColor = System.Drawing.Color.Black;
+            this.LinePanel.Location = new System.Drawing.Point(0, 28);
+            this.LinePanel.Name = "LinePanel";
+            this.LinePanel.Size = new System.Drawing.Size(990, 1);
+            this.LinePanel.TabIndex = 3;
             // 
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ImportModelButton,
@@ -216,16 +225,6 @@
             this.FrameButton.Name = "FrameButton";
             this.FrameButton.Size = new System.Drawing.Size(24, 25);
             this.FrameButton.Click += new System.EventHandler(this.FrameButton_Click);
-            // 
-            // LinePanel
-            // 
-            this.LinePanel.BackColor = System.Drawing.Color.DarkGray;
-            this.LinePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.LinePanel.ForeColor = System.Drawing.Color.Black;
-            this.LinePanel.Location = new System.Drawing.Point(0, 28);
-            this.LinePanel.Name = "LinePanel";
-            this.LinePanel.Size = new System.Drawing.Size(990, 1);
-            this.LinePanel.TabIndex = 3;
             // 
             // TopToolBarControl
             // 
