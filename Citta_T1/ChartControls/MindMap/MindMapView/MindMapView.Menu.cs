@@ -585,7 +585,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuAttachment = new ToolStripMenuItem();
 
                 MenuAttachment.Text = String.Format("{0}[{1}]", Path.GetFileNameWithoutExtension(path), Path.GetExtension(path).TrimStart('.'));
-                switch (Path.GetExtension(path))
+                switch ((Path.GetExtension(path)).ToLower())
                 {
                     case ".txt":
                         MenuAttachment.Image = Properties.Resources.txtData;
