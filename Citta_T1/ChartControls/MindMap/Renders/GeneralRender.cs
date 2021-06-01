@@ -55,8 +55,8 @@ namespace C2.Controls.MapViews
                 throw new ArgumentNullException();
 
             ResetObjects(args.Graphics, map);
-
-            //PaintBackground(map, args);
+            // 画背景水印
+            PaintBackground(map, args);
 
             if (map.Root != null)
             {
@@ -66,6 +66,26 @@ namespace C2.Controls.MapViews
                 PaintNode(map.Root, args);
                 PaintLinkLines(map.Root, args);
             }
+        }
+
+        private void PaintBackground(MindMap map, RenderArgs args)
+        {
+            if (map.WaterMarkContent.IsEmpty())
+                return;
+
+            IFont font = args.Graphics.Font(map.WaterMarkFont);
+            IBrush brush = args.Graphics.SolidBrush(Color.FromArgb(map.WaterMarkTransparent, 0, 0, 0));
+            Size S = args.Graphics.MeasureString(map.WaterMarkContent + "...", font).ToSize();  // 土办法:强制增加尾字符增加宽度
+            Point P = new Point(map.Centor.X - S.Width / 2, map.Centor.Y - S.Height / 2);
+
+            IGraphicsState old = args.Graphics.Save();
+            args.Graphics.RotateTransform(12.0F);
+            args.Graphics.DrawString(map.WaterMarkContent,
+                font,
+                brush,
+                new Rectangle(P, S),
+                PaintHelper.SFCenter);
+            args.Graphics.Restore(old);
         }
 
         public void PaintNavigationMap(MindMap map, float zoom, PaintEventArgs e)

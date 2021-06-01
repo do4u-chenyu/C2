@@ -25,7 +25,7 @@ namespace C2.Controls.DataCharts
             Chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
             Chart1.Series[0].CustomProperties = "PieLabelStyle = Outside";
             Legend legend2 = new Legend("#VALX");
-            legend2.Title = "图例";
+            legend2.Title = "";
             legend2.TitleBackColor = Color.Transparent;
             legend2.BackColor = Color.Transparent;
             legend2.TitleForeColor = Color.White;
@@ -33,6 +33,7 @@ namespace C2.Controls.DataCharts
             legend2.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             legend2.ForeColor = Color.White;
             Chart1.Legends[0] = legend2;
+            Chart1.Series[0].LegendText = legend2.Name;
             Chart1.Legends[0].Position.Auto = true;
             Chart1.Series[0].IsValueShownAsLabel = true;
             //是否显示图例

@@ -27,6 +27,8 @@
 		<item name="More">更多</item>
 		<item name="More Options">更多选项</item>
 		<item name="Full Screen">全屏幕</item>
+    <item name="Flat">平铺</item>
+    <item name="Rain">下雨</item>
 		<item name="Exit Full Screen">退出全屏</item>
 		<item name="Export Image">导出图片</item>
 		<item name="Export Type">导出类型</item>
@@ -112,7 +114,8 @@
 		<item name="Wall Paper">背影图片</item>
 		<item name="Window Back Color">窗口背景颜色</item>
 		<item name="Window Fore Color">窗口前景颜色</item>
-		<item name="Landscape">横向</item>
+    <item name="WaterMark">水印</item>
+    <item name="Landscape">横向</item>
 		<item name="Margins">边距</item>
 		<item name="UI Language">语言</item>
 		<item name="Check Update">检查更新</item>
@@ -122,6 +125,7 @@
 		<item name="Quality">品质</item>
 		<item name="PNG Options">PNG 选项</item>
 		<item name="Transparent Background">透明背景</item>
+    <item name="Transparent">透明度</item>
 		<item name="Worst">最差</item>
 		<item name="Best">最好</item>
 		<item name="Center Topic Back Color">中心节点背景色</item>
