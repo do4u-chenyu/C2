@@ -694,7 +694,7 @@ namespace C2
         {
             if (!File.Exists(fullFilePath))
             {
-                if (sender is MoveDtControl || sender is DataButton)
+                if (sender is MoveDtControl || sender is DataButton || sender is ToolStripMenuItem)
                     HelpUtil.ShowMessageBox("该数据文件不存在");
                 return;
             }

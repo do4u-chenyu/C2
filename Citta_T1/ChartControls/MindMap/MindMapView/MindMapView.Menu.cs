@@ -347,6 +347,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuCreateChart = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
                 ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
+                ToolStripMenuItem MenuRefresh = new ToolStripMenuItem();
                 ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 MenuOpenDataSource.Image = Properties.Resources.数据;
@@ -357,6 +358,7 @@ namespace C2.Controls.MapViews
                 MenuCreateChart,
                 MenuDelete,
                 new ToolStripSeparator(),
+                MenuRefresh,
                 MenuExploreDirectory,
                 MenuCopyFilePathToClipboard});
 
@@ -377,6 +379,11 @@ namespace C2.Controls.MapViews
                 MenuDelete.Tag = dataItem;
                 MenuDelete.Click += MenuDelete_Click;
 
+                MenuRefresh.Image = Properties.Resources.modelUpdate;
+                MenuRefresh.Text = "刷新";           //刷新
+                MenuRefresh.Tag = dataItem;
+                MenuRefresh.Click += MenuRefresh_Click;
+
                 MenuExploreDirectory.Image = Properties.Resources.dataDirectory;
                 MenuExploreDirectory.Text = Lang._("ExploreDirectory");
                 MenuExploreDirectory.Tag = dataItem.FilePath;
@@ -392,6 +399,12 @@ namespace C2.Controls.MapViews
                 WidgetMenuStrip.Items.Add(MenuOpenDataSource);           
             }
         }
+        void MenuRefresh_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            Global.GetMainForm().PreViewDataByFullFilePath((sender as ToolStripMenuItem), hitItem.FilePath, hitItem.FileSep, hitItem.FileType, hitItem.FileEncoding, true);
+        }
+
         void MenuDelete_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
