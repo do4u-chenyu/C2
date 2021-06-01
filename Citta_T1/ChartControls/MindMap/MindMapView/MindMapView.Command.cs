@@ -98,6 +98,7 @@ namespace C2.Controls.MapViews
             if (Selection.Count > 0)
             {
                 Delete(Selection.FindAll(c => !(c is C2BaseWidget)).ToArray());
+                DeleteC2Widgets(Selection.FindAll(c => (c is C2BaseWidget)).ToArray());
             }
 
         }
@@ -124,32 +125,54 @@ namespace C2.Controls.MapViews
                             CloseRelateOpTab(tmpOpw);
                         }
                     }
-                    else if (mapObject is OperatorWidget)
-                    {
-                        tmpOpw = (OperatorWidget)mapObject;
-                        CloseRelateOpTab(tmpOpw);
-                    }
-                    else if (mapObject is DataSourceWidget)
-                    {
-                        DelAllItems((Topic)mapObject.Container, ((DataSourceWidget)mapObject).DataItems);
-                    }
-                    else if (mapObject is ResultWidget)
-                    {
-                        DelAllItems((Topic)mapObject.Container, ((ResultWidget)mapObject).DataItems);
-                    }
                 }
 
                 DeleteCommand command = new DeleteCommand(mapObjects);
                 ExecuteCommand(command);
             }
         }
-        private void DelAllItems(Topic topic, List<DataItem> dataItems)
+
+        private void DeleteC2Widgets(ChartObject[] mapObjects)
         {
-            foreach (DataItem dataItem in dataItems)
+            if (mapObjects != null && mapObjects.Length > 0)
             {
-                TopicUpdate(topic, dataItem);
+                foreach (ChartObject mapObject in mapObjects)
+                {
+                    if (mapObject is OperatorWidget opWidget && !(opWidget.HasModelOperator && opWidget.OpType != OpType.Null) )
+                    {
+                        //单算子和高级模型同时存在的时候，delete快捷键没变化，其他情况下，直接删除
+                        CloseRelateOpTab(opWidget);
+                        (opWidget.Container as Topic).Widgets.Remove(opWidget);
+                        Global.OnModifiedChange();
+                    }
+                    else if (mapObject is DataSourceWidget dsWidget && dsWidget.DataItems.Count == 1)
+                    {
+                        //数据源只有一个的时候，delete删除，其他情况下没变化
+                        TopicUpdate(dsWidget.Container, dsWidget.DataItems[0]);
+                        ShowDesigner(dsWidget.Container, false);
+                        RemoveWidget(dsWidget);
+                    }
+                    else if (mapObject is ResultWidget rsWidget && rsWidget.DataItems.Count == 1)
+                    {
+                        TopicUpdate(rsWidget.Container, rsWidget.DataItems[0]);
+                        RemoveWidget(rsWidget);
+                    }
+                    else if (mapObject is ChartWidget chartWidget && chartWidget.DataItems.Count == 1)
+                        RemoveWidget(chartWidget);
+                    else if (mapObject is AttachmentWidget atWidget && atWidget.AttachmentPaths.Count == 1)
+                        RemoveWidget(atWidget);
+                    else if (mapObject is MapWidget mapWidget)
+                        RemoveWidget(mapWidget);
+                }
             }
         }
+
+        private void RemoveWidget(C2BaseWidget widget)
+        {
+            (widget.Container as Topic).Widgets.Remove(widget);
+            Global.OnModifiedChange();
+        }
+
         private void CloseRelateOpTab(OperatorWidget tmpOpw)
         {
             if (tmpOpw != null && tmpOpw.HasModelOperator && tmpOpw.ModelRelateTab != null && Global.GetMainForm().TaskBar.Items.Contains(tmpOpw.ModelRelateTab))
