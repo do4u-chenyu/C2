@@ -22,12 +22,27 @@ namespace C2.Controls.Top
         [Browsable(false)]
         public bool SelectFrame { get; set; } = false;
 
+        private C2.Dialogs.InputDataForm inputDataForm;
+
         public TopToolBarControl()
         {
             InitializeComponent();
+            InitializeInputDataForm();
             InitializeToolTip();
             InitializeOther();
         } // 恢复到编辑模式
+
+        private void InitializeInputDataForm()
+        {
+            this.inputDataForm = new Dialogs.InputDataForm();
+            this.inputDataForm.InputDataEvent += InputDataFormEvent;
+        }
+
+        private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        {
+            Global.GetDataSourceControl().GenDataButton(name, fullFilePath, separator, extType, encoding);
+            Global.GetDataSourceControl().Visible = true;
+        }
 
         private void InitializeOther()
         {
@@ -187,7 +202,9 @@ namespace C2.Controls.Top
 
         private void ImportModel_Click(object sender, EventArgs e)
         {
-            ImportModel.GetInstance().ImportIaoFile(Global.GetMainForm().UserName);
+            this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
+            this.inputDataForm.ShowDialog();
+            this.inputDataForm.ReSetParams();
         }
 
         private void SaveModelButton_Click(object sender, EventArgs e)

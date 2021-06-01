@@ -168,7 +168,7 @@ namespace C2.Forms
             // ImportDataSourceButton
             // 
             this.ImportDataSourceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.openDataFile;
+            this.ImportDataSourceButton.Image = global::C2.Properties.Resources.importModel;
             this.ImportDataSourceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ImportDataSourceButton.Name = "ImportDataSourceButton";
             this.ImportDataSourceButton.Padding = new System.Windows.Forms.Padding(2);
