@@ -88,7 +88,6 @@
             // 
             this.ImportModelButton.AutoSize = false;
             this.ImportModelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ImportModelButton.Enabled = false;
             this.ImportModelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(177)))));
             this.ImportModelButton.Image = global::C2.Properties.Resources.importModel;
             this.ImportModelButton.ImageTransparentColor = System.Drawing.Color.Magenta;

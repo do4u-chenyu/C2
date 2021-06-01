@@ -10,12 +10,12 @@ namespace C2.Model.MindMaps
     public enum WaterMarkType
     {
         [LanguageID("Default")]
-        Default = 0,     // 默认, 剧中躺平
+        Default = 0,     // 默认, 居中躺平, 倾斜12度
        
         [LanguageID("Flat")]
         Flat = 1,        // 全屏平铺
        
         [LanguageID("Rain")]
-        Rain = 2,        // 全屏倾斜, 名字可以改
+        Rain = 2,        // 全屏倾斜
     }
 }
