@@ -69,7 +69,7 @@ namespace C2.Utils
         public static string InvalidLongitude = "输入经度有误，经度需为一个大于-180且小于180的浮点数";
         public static string InvalidCount = "输入权重有误，权重需为一个大于0的浮点数";
         public static string InvalidDimension = "经纬度维度不一致，请确保输入数据每行均有经纬度且被正确分割";
-        public static string InvalidInputMapInfo = "输入数据有误，文件内容为空";
+        public static string InvalidInputMapInfo = "输入数据有误，文件内容为空或经度、纬度、权重列格式有误";
         public static string InvalidDataType = "数据格式有误，目前内部数据仅支持文本数据和excel数据，外部数据仅支持oracle, Hive, postgres库";
 
 

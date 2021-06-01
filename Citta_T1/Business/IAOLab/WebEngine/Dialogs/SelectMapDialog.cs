@@ -119,18 +119,23 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             List<string> rows = new List<string>(fileContent.Split('\n'));
             upperLimit = Math.Min(rows.Count, upperLimit);
-            List<List<string>> lonValues = Utils.FileUtil.GetColumns(indexlon, hitItem, rows, upperLimit);
-            List<List<string>> latValues = Utils.FileUtil.GetColumns(indexlat, hitItem, rows, upperLimit);
-            List<List<string>> countValues = Utils.FileUtil.GetColumns(indexcount, hitItem, rows, upperLimit);
+            List<List<string>> lonLatCountList = GetLonLatCountColumns(new List<int>() { LngIndex, LatIndex, WeightIndex }, hitItem, rows, upperLimit);
+            List<List<string>> lonValues = new List<List<string>>() { lonLatCountList[0] };
+            List<List<string>> latValues = new List<List<string>>() { lonLatCountList[1] };
+            List<List<string>> countValues = new List<List<string>>() { lonLatCountList[2] };
 
-            if (latValues.Count == 0 || lonValues.Count == 0)
+            //List<List<string>> lonValues = Utils.FileUtil.GetColumns(indexlon, hitItem, rows, upperLimit);
+            //List<List<string>> latValues = Utils.FileUtil.GetColumns(indexlat, hitItem, rows, upperLimit);
+            //List<List<string>> countValues = Utils.FileUtil.GetColumns(indexcount, hitItem, rows, upperLimit);
+
+            if (latValues[0].Count == 0 || lonValues[0].Count == 0)
             {
                 HelpUtil.ShowMessageBox(HelpUtil.InvalidInputMapInfo);
                 return false;
             }
             Random rm = new Random();
-            drawlongitude = lonValues[0][rm.Next(lonValues.Count)];
-            drawlatitude = latValues[0][rm.Next(latValues.Count)];
+            drawlongitude = lonValues[0][rm.Next(lonValues[0].Count)];
+            drawlatitude = latValues[0][rm.Next(latValues[0].Count)];
             if (!InvalidLonValues(lonValues))
             {
                 HelpUtil.ShowMessageBox(HelpUtil.InvalidLongitude);
@@ -139,11 +144,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
             if (!InvalidLatValues(latValues))
             {
                 HelpUtil.ShowMessageBox(HelpUtil.InvalidLatitude);
-                return false;
-            }
-            if (!InvalidCountValues(countValues))
-            {
-                HelpUtil.ShowMessageBox(HelpUtil.InvalidCount);
                 return false;
             }
             if (latValues[0].Count != lonValues[0].Count || latValues[0].Count != lonValues[0].Count)
@@ -155,7 +155,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
             //准备数据
             if (this.mapTypeComboBox.Text == "热力图")
             {
-                if (countValues.Count == 0 || latValues[0].Count != countValues[0].Count || lonValues[0].Count != countValues[0].Count)
+                if (countValues[0].Count == 0 || latValues[0].Count != countValues[0].Count || lonValues[0].Count != countValues[0].Count)
                 {
                     HelpUtil.ShowMessageBox(HelpUtil.InvalidCount);
                     return false;
@@ -220,6 +220,17 @@ namespace C2.IAOLab.WebEngine.Dialogs
             }
             return true;
         }
+        private bool InvalidValue(string value)
+        {
+            //是浮点类型，且是-180到180范围内
+            return (float.TryParse(value, out float result) && result > -180 && result < 180);
+        }
+
+        private bool InvalidCountValue(string value)
+        {
+            //是浮点类型，且大于0
+            return (float.TryParse(value, out float result) && result > 0);
+        }
 
         private bool OptionNotReady()
         {
@@ -248,6 +259,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 default:
                     break;
             }
+            if (this.countComboBox.Enabled && String.IsNullOrEmpty(this.countComboBox.Text))
+            {
+                HelpUtil.ShowMessageBox("请设置权重");
+                notReady = true;
+            }   
             return notReady;
         }
 
@@ -257,6 +273,36 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 countComboBox.Enabled = true;
             else
                 countComboBox.Enabled = false;
+        }
+
+        public List<List<string>> GetLonLatCountColumns(List<int> indexs, DataItem dataItem, List<string> rows, int upperLimit)
+        {
+            int lonIdx = indexs[0];
+            int latIdx = indexs[1];
+            int countIdx = indexs[2];
+
+            List<List<string>> columnValues = new List<List<string>>() { new List<string>(), new List<string>(), new List<string>()};
+            for (int i = 0; i < upperLimit; i++)
+            {
+                if (i == 0)
+                    continue;
+                string row = rows[i].TrimEnd('\r');
+
+                if (String.IsNullOrEmpty(row))
+                    continue;
+                string[] rowElement = row.Split(dataItem.FileSep);
+                if (rowElement.Length <= indexs.Max())
+                    continue;
+                //有非法格式的，跳过该行
+                if (!InvalidValue(rowElement[lonIdx]) || !InvalidValue(rowElement[latIdx]) || (countIdx != -1 && !InvalidCountValue(rowElement[countIdx])))
+                    continue;
+
+                columnValues[0].Add(rowElement[lonIdx]);
+                columnValues[1].Add(rowElement[latIdx]);
+                columnValues[2].Add(countIdx == -1 ? string.Empty : rowElement[lonIdx]);
+
+            }
+            return columnValues;
         }
     }
 }
