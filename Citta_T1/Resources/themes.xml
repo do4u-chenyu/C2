@@ -2,58 +2,58 @@
 <themes name="Internal">
 	<folder name="General">
 		<theme name="Garden">
-			<back_color>#D8CAA8</back_color>
+			<back_color>#2468a2</back_color>
 			<fore_color>Black</fore_color>
 			<line_color>#88785E</line_color>
 			<border_color>#382513</border_color>
-			<node_back_color>#5C832F</node_back_color>
-			<node_fore_color>Black</node_fore_color>
+			<node_back_color>#009ad6</node_back_color>
+			<node_fore_color>#fffffb</node_fore_color>
 			<select_color>#284907</select_color>
 			<hover_color>#284907</hover_color>
-			<root_back_color>#363942</root_back_color>
-			<root_fore_color>#F2F0E4</root_fore_color>
+			<root_back_color>#1b315e</root_back_color>
+			<root_fore_color>#fffffb</root_fore_color>
 			<root_border_color>#382513</root_border_color>
-			<link_line_color>#382513</link_line_color>
+			<link_line_color>#7bbfea</link_line_color>
 		</theme>
 		<theme name="Green">
-			<back_color>#597533</back_color>
+			<back_color>#130c0e</back_color>
 			<fore_color>#332F28</fore_color>
 			<line_color>#332F28</line_color>
 			<border_color>#332F28</border_color>
-			<node_back_color>#ECEAB0</node_back_color>
-			<node_fore_color>#332F28</node_fore_color>
+			<node_back_color>#f6f5ec</node_back_color>
+			<node_fore_color>#130c0e</node_fore_color>
 			<select_color>#61B594</select_color>
 			<hover_color>#61B594</hover_color>
-			<root_back_color>#BF4C18</root_back_color>
-			<root_fore_color>#332F28</root_fore_color>
+			<root_back_color>#aa363d</root_back_color>
+			<root_fore_color>#fffffb</root_fore_color>
 			<root_border_color>#332F28</root_border_color>
 			<link_line_color>#9ACD32</link_line_color>
 		</theme>
 		<theme name="Khaki">
-			<back_color>#EFECCA</back_color>
+			<back_color>#74787c</back_color>
 			<fore_color>#002F2F</fore_color>
 			<line_color>#A7A37E</line_color>
 			<border_color>#A7A37E</border_color>
-			<node_back_color>#E6E2AF</node_back_color>
-			<node_fore_color>#002F2F</node_fore_color>
+			<node_back_color>#ffe600</node_back_color>
+			<node_fore_color>#130c0e</node_fore_color>
 			<select_color>#046380</select_color>
 			<hover_color>#046380</hover_color>
-			<root_back_color>#046380</root_back_color>
+			<root_back_color>#f36c21</root_back_color>
 			<root_fore_color>Black</root_fore_color>
 			<root_border_color>#002F2F</root_border_color>
-			<link_line_color>#046380</link_line_color>
+			<link_line_color>#ad8b3d</link_line_color>
 		</theme>
 		<theme name="Sea Wolf">
-			<back_color>#374140</back_color>
+			<back_color>#fffef9</back_color>
 			<fore_color>Black</fore_color>
 			<line_color>#2A2C2B</line_color>
 			<border_color>#1E1E20</border_color>
-			<node_back_color>#2A2C2B</node_back_color>
-			<node_fore_color>#D9CB9E</node_fore_color>
+			<node_back_color>#d3d7d4</node_back_color>
+			<node_fore_color>#130c0e</node_fore_color>
 			<select_color>#D9CB9E</select_color>
 			<hover_color>#D9CB9E</hover_color>
-			<root_back_color>#DC3522</root_back_color>
-			<root_fore_color>Black</root_fore_color>
+			<root_back_color>#c63c26</root_back_color>
+			<root_fore_color>#fffffb</root_fore_color>
 			<root_border_color>Black</root_border_color>
 			<link_line_color>#B8860B</link_line_color>
 		</theme>
