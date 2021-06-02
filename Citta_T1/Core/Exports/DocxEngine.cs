@@ -13,6 +13,7 @@ namespace C2.Core.Exports
     class DocxEngine : ChartsExportEngine
     {
         private DocxFile docxFile = new DocxFile();
+        private tmpDocxFile tmpdocxFile = new tmpDocxFile();
         public override string TypeMime
         {
             get { return DocumentType.Docx.TypeMime; }
@@ -37,7 +38,8 @@ namespace C2.Core.Exports
                 try
                 {
                     using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-                        docxFile.Save(root, filename);
+                        //docxFile.Save(root, filename);
+                        tmpdocxFile.SaveAsDocx(root, filename);
                     return true;
                 }
                 catch { return false; }

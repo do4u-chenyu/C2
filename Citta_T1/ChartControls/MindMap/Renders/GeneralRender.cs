@@ -83,9 +83,9 @@ namespace C2.Controls.MapViews
         {
             switch (map.WaterMarkType)
             {
-                case WaterMarkType.Default:
                 case WaterMarkType.Flat:
                 case WaterMarkType.Rain:
+                case WaterMarkType.Default:
                     PaintWaterMarkDefault(map, args);
                     break;
                 default:
