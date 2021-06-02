@@ -158,6 +158,10 @@ namespace C2.Model.MindMaps
         {
             return topic.FindWidget<NoteWidget>();
         }
+        private Widget GetTopicAttachment(Topic topic)
+        {
+            return topic.FindWidget<AttachmentWidget>();
+        }
         private PictureWidget[] GetTopicPictures(Topic topic)
         {
             return topic.FindWidgets<PictureWidget>(e => File.Exists(e.ImageUrl) && (e.Data.Width > 128 || e.Data.Height > 128));
