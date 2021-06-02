@@ -258,6 +258,11 @@ namespace C2
         
         private void DataSourceButton_Click(object sender, EventArgs e)
         {
+            ShowDataSourcePanel();
+        }
+
+        public void ShowDataSourcePanel() 
+        {
             if (!dataSourceControl.Visible || isLeftViewPanelMinimum)
                 ShowLeftPanel(dataSourceButton, dataSourceControl);
         }

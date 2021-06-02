@@ -119,8 +119,7 @@ namespace C2.Forms
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             Global.GetDataSourceControl().GenDataButton(name, fullFilePath, separator, extType, encoding);
-            Global.GetDataSourceControl().Visible = true;
-        
+            Global.GetMainForm().ShowDataSourcePanel();
         }
         public ChartControl ActiveChartBox
         {
