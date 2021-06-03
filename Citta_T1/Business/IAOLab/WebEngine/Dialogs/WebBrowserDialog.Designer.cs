@@ -43,7 +43,7 @@
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(28, 26);
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(22, 22);
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
