@@ -16,7 +16,6 @@ namespace C2.Model.MindMaps
     {
         private int imgNo;
         private List<string> unsucceedAttachment = new List<string>();
-        private List<string> overweightAttachment = new List<string>();
         private void WriteNoteToDocx(Widget topicNote, Document docx)
         {
             if (topicNote != null)
@@ -42,7 +41,7 @@ namespace C2.Model.MindMaps
             builder.Font.Name = "宋体";
             builder.Font.Name = "TimesNewRoma";
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-            builder.ParagraphFormat.LineSpacing = 12;
+            builder.ParagraphFormat.LineSpacing = 18;
             builder.ParagraphFormat.FirstLineIndent = 21;
             builder.Font.Bold = false;
             builder.Writeln(text);
@@ -92,18 +91,18 @@ namespace C2.Model.MindMaps
             switch (layer)
             {
                 case 1:
-                    builder.Font.Size = 21;
+                    builder.Font.Size = 20;
                     builder.Font.Bold = true;
                     builder.Font.Name = "黑体";
                     builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-                    builder.ParagraphFormat.LineSpacing = 12;
+                    builder.ParagraphFormat.LineSpacing = 18;
                     builder.Writeln(title);
                     break;
                 case 2:
                     builder.Font.Size = 16;
-                    //builder.Font.Bold = true;
+                    builder.Font.Bold = true;
                     builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-                    builder.ParagraphFormat.LineSpacing = 12;
+                    builder.ParagraphFormat.LineSpacing = 18;
                     builder.ParagraphFormat.FirstLineIndent = 0;
                     builder.Font.Name = "黑体";
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
@@ -115,7 +114,7 @@ namespace C2.Model.MindMaps
                     builder.Font.Name = "TimesNewRoma";
                     builder.ParagraphFormat.FirstLineIndent = 0;
                     builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-                    builder.ParagraphFormat.LineSpacing = 12;
+                    builder.ParagraphFormat.LineSpacing = 18;
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
                     break;
                 case 4:
@@ -124,7 +123,7 @@ namespace C2.Model.MindMaps
                     builder.Font.Name = "宋体";
                     builder.Font.Name = "TimesNewRoma";
                     builder.ParagraphFormat.FirstLineIndent = 0;
-                    builder.ParagraphFormat.LineSpacing = 12;
+                    builder.ParagraphFormat.LineSpacing = 18;
                     builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
                     break;
@@ -133,7 +132,7 @@ namespace C2.Model.MindMaps
                     builder.Font.Bold = false;
                     builder.Font.Name = "宋体";
                     builder.Font.Name = "TimesNewRoma";
-                    builder.ParagraphFormat.LineSpacing = 12;
+                    builder.ParagraphFormat.LineSpacing = 18;
                     builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
                     builder.ParagraphFormat.FirstLineIndent = 21;
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
@@ -159,7 +158,7 @@ namespace C2.Model.MindMaps
                 var size = new FileInfo(path).Length;
                 if (size > 524288000) 
                 {
-                    overweightAttachment.Add(path);
+                    unsucceedAttachment.Add(path);
                     continue;
                 }
                 try
@@ -331,10 +330,20 @@ namespace C2.Model.MindMaps
                 try
                 {
                     docx.Save(fileName);
+                    if (unsucceedAttachment.Count > 0)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        foreach (string path in unsucceedAttachment)
+                        {
+                            sb.Append(path);
+                            sb.Append(";");
+                        }
+                        MessageBox.Show("以下附件不存在或大小超过500M:"+sb.ToString(), "提示");
+                    }
                 }
                 catch
                 {
-                        
+
                 }
 
             }
