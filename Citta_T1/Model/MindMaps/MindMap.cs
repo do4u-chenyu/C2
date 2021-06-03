@@ -870,6 +870,16 @@ namespace C2.Model.MindMaps
                 Root.Style.ForeColor = theme.RootForeColor;
                 Root.Style.BorderColor = theme.RootBorderColor;
             }
+
+            if(Root.GetAllChildren() !=null)
+            {
+                foreach (var subtopic in Root.GetAllChildren())
+                {
+                    subtopic.BackColor = theme.NodeBackColor;
+                    subtopic.ForeColor = theme.NodeForeColor;
+                }
+   
+            }
         }
 
         public override ChartTheme GetChartTheme()
