@@ -6,6 +6,7 @@ using C2.Model.Widgets;
 using Aspose.Words;
 using System.Collections.Generic;
 using Aspose.Words.Drawing;
+using System.Drawing.Imaging;
 
 namespace C2.Model.MindMaps
 {
@@ -131,13 +132,14 @@ namespace C2.Model.MindMaps
             }
            
         }
-        private void WriteAttachmentToDocx(AttachmentWidget attachmentWidget, Document docx)
+        private void WriteAttachmentToDocx(AttachmentWidget attachmentWidget, Document docx,int layer)
         {
             if (attachmentWidget == null)
                 return;
             DocumentBuilder builder = new DocumentBuilder(docx);
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
             builder.MoveToDocumentEnd();
+            int i= 0;
             foreach (string path in attachmentWidget.AttachmentPaths) 
            {
                 if (!File.Exists(path))
@@ -157,11 +159,13 @@ namespace C2.Model.MindMaps
                     byte[] bs = File.ReadAllBytes(path);
                     using (Stream stream = new MemoryStream(bs))
                     {
-                        Shape shape = builder.InsertOleObject(path,false, true, null);
+                        Image image = GetImage(path);
+                        Shape shape = builder.InsertOleObject(stream, "Package", true, image);
                         OlePackage olePackage = shape.OleFormat.OlePackage;
                         string name = Path.GetFileName(path);
-                        olePackage.FileName = ".txt";
-                        olePackage.DisplayName = "1";
+                        olePackage.FileName = string.Format("{0}.{1}{2}",layer,i, Path.GetExtension(path));
+                        i++;
+                        olePackage.DisplayName = "1.txt";
                     }
                 }
                 catch(Exception ex)
@@ -171,6 +175,67 @@ namespace C2.Model.MindMaps
             }
             builder.Writeln("");
         }
+        private Image GetImage(string path) 
+        {
+            string filename = Path.GetExtension(path);
+            string name = Path.GetFileName(path);
+            Image tmpImg;
+            try
+            {
+                string fullFileName = Path.Combine(Path.GetTempPath(), "tmp" + filename);
+                if (File.Exists(fullFileName))
+                    tmpImg = Icon.ExtractAssociatedIcon(fullFileName).ToBitmap();
+                else
+                { 
+                    File.Create(fullFileName).Close();
+                    tmpImg = Icon.ExtractAssociatedIcon(fullFileName).ToBitmap();
+                    File.Delete(fullFileName);
+                }
+             }
+            catch 
+            {
+                tmpImg = Properties.Resources.copyFilePath;
+            }
+            Image img = AddNameToImg(tmpImg, name);
+            return img;
+        }
+
+        public Bitmap AddNameToImg(Image Img,string name) 
+        {
+
+            int Width = Img.Width;
+            int Height = Img.Height;
+            //获取图片水平和垂直的分辨率
+            float dpiX = Img.HorizontalResolution;
+            float dpiY = Img.VerticalResolution;
+            //创建一个位图文件
+            Bitmap BitmapResult = new Bitmap(Width + 40, Height + 40, PixelFormat.Format24bppRgb);
+            //设置位图文件的水平和垂直分辨率  与Img一致
+            BitmapResult.SetResolution(dpiX, dpiY);
+            //在位图文件上填充一个矩形框
+            Graphics Grp = Graphics.FromImage(BitmapResult);
+            Rectangle Rec = new Rectangle(0, 0, Width + 40, Height + 40);
+            //定义一个白色的画刷
+            SolidBrush mySolidBrush = new SolidBrush(Color.White);
+            //Grp.Clear(Color.White);
+            //将矩形框填充为白色
+            Grp.FillRectangle(mySolidBrush, Rec);
+            //Grp.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            //Grp.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            //Grp.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            //向矩形框内填充Img
+            Grp.DrawImage(Img, 10, 15, Rec, GraphicsUnit.Pixel);
+            //返回位图文件
+            
+            
+            System.Drawing.Font font = new System.Drawing.Font("宋体", 9);
+            SolidBrush sbrush = new SolidBrush(Color.Black);
+            Grp.DrawString(name, font, sbrush, new PointF(10, 50));
+            Grp.Dispose();
+            GC.Collect();
+            return BitmapResult;
+        }
+
         private Widget GetTopicNote(Topic topic)
         {
             return topic.FindWidget<NoteWidget>();
@@ -201,7 +266,7 @@ namespace C2.Model.MindMaps
 
             //在图片后插入附件
           
-            WriteAttachmentToDocx(GetTopicAttachment(topic), docx);
+            WriteAttachmentToDocx(GetTopicAttachment(topic), docx, topic.GetDepth(topic));
            
 
             for (int i = 0; i < topic.Children.Count; i++)//迭代写入word
