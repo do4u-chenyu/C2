@@ -7,6 +7,8 @@ using Aspose.Words;
 using System.Collections.Generic;
 using Aspose.Words.Drawing;
 using System.Drawing.Imaging;
+using System.Diagnostics.SymbolStore;
+using System.Text;
 
 namespace C2.Model.MindMaps
 {
@@ -40,6 +42,7 @@ namespace C2.Model.MindMaps
             builder.Font.Name = "宋体";
             builder.Font.Name = "TimesNewRoma";
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+            builder.ParagraphFormat.LineSpacing = 12;
             builder.ParagraphFormat.FirstLineIndent = 21;
             builder.Font.Bold = false;
             builder.Writeln(text);
@@ -59,6 +62,7 @@ namespace C2.Model.MindMaps
             {
                 DocumentBuilder builder = new DocumentBuilder(docx);
                 builder.MoveToDocumentEnd();
+                builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
 
                 int width = pictureWidget.Data.Width;
                 int height = pictureWidget.Data.Height;
@@ -92,12 +96,14 @@ namespace C2.Model.MindMaps
                     builder.Font.Bold = true;
                     builder.Font.Name = "黑体";
                     builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+                    builder.ParagraphFormat.LineSpacing = 12;
                     builder.Writeln(title);
                     break;
                 case 2:
                     builder.Font.Size = 16;
                     //builder.Font.Bold = true;
                     builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+                    builder.ParagraphFormat.LineSpacing = 12;
                     builder.ParagraphFormat.FirstLineIndent = 0;
                     builder.Font.Name = "黑体";
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
@@ -109,6 +115,7 @@ namespace C2.Model.MindMaps
                     builder.Font.Name = "TimesNewRoma";
                     builder.ParagraphFormat.FirstLineIndent = 0;
                     builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+                    builder.ParagraphFormat.LineSpacing = 12;
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
                     break;
                 case 4:
@@ -117,6 +124,7 @@ namespace C2.Model.MindMaps
                     builder.Font.Name = "宋体";
                     builder.Font.Name = "TimesNewRoma";
                     builder.ParagraphFormat.FirstLineIndent = 0;
+                    builder.ParagraphFormat.LineSpacing = 12;
                     builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
                     break;
@@ -125,6 +133,7 @@ namespace C2.Model.MindMaps
                     builder.Font.Bold = false;
                     builder.Font.Name = "宋体";
                     builder.Font.Name = "TimesNewRoma";
+                    builder.ParagraphFormat.LineSpacing = 12;
                     builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
                     builder.ParagraphFormat.FirstLineIndent = 21;
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
@@ -153,7 +162,6 @@ namespace C2.Model.MindMaps
                     overweightAttachment.Add(path);
                     continue;
                 }
-                
                 try
                 {
                     byte[] bs = File.ReadAllBytes(path);
@@ -202,19 +210,54 @@ namespace C2.Model.MindMaps
 
         public Bitmap AddNameToImg(Image Img,string name) 
         {
-
+            var length = (UInt32)name.Length;
+            int chinese = 0;
+            int l = 0;
+            StringBuilder sb = new StringBuilder();
+            string abbreviate = "文件名超长";
+            for (int i = 0; i < name.Length; i++)
+            {
+                char j = name[i];
+                ushort s = j;
+                if (s >= 0x4E00 && s <= 0x9FA5)
+                {
+                    sb.Append(name[i]);
+                    l += 2;
+                    chinese++;
+                    if (l == 18 || l == 17)
+                        abbreviate = sb.ToString();
+                }
+                else 
+                {
+                    sb.Append(name[i]);
+                    l += 1;
+                    if (l == 18 || l == 17)
+                        abbreviate = sb.ToString();
+                }
+            }
+            int wordLength = (int)length + chinese;//一个字符4.5个像素
+            double addLength = 45;
+            if (wordLength >= 20) 
+            {
+                addLength = 90;
+                name = abbreviate + "...";
+            }                
+            if(wordLength < 3)
+                addLength = 22;
+            if(3 <= wordLength && wordLength < 21)
+                addLength = wordLength * 4.3;
             int Width = Img.Width;
             int Height = Img.Height;
             //获取图片水平和垂直的分辨率
             float dpiX = Img.HorizontalResolution;
             float dpiY = Img.VerticalResolution;
             //创建一个位图文件
-            Bitmap BitmapResult = new Bitmap(Width + 40, Height + 40, PixelFormat.Format24bppRgb);
+            Bitmap BitmapResult = new Bitmap(Width + (int)addLength, Height + 30, PixelFormat.Format24bppRgb);
             //设置位图文件的水平和垂直分辨率  与Img一致
             BitmapResult.SetResolution(dpiX, dpiY);
             //在位图文件上填充一个矩形框
             Graphics Grp = Graphics.FromImage(BitmapResult);
-            Rectangle Rec = new Rectangle(0, 0, Width + 40, Height + 40);
+            Rectangle Rec = new Rectangle(0, 0, Width + (int)addLength, Height + 30);
             //定义一个白色的画刷
             SolidBrush mySolidBrush = new SolidBrush(Color.White);
             //Grp.Clear(Color.White);
@@ -224,13 +267,13 @@ namespace C2.Model.MindMaps
             //Grp.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             //Grp.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             //向矩形框内填充Img
-            Grp.DrawImage(Img, 10, 15, Rec, GraphicsUnit.Pixel);
+            Grp.DrawImage(Img, (int)addLength /2, 5, Rec, GraphicsUnit.Pixel);
             //返回位图文件
-            
+
             
             System.Drawing.Font font = new System.Drawing.Font("宋体", 9);
             SolidBrush sbrush = new SolidBrush(Color.Black);
-            Grp.DrawString(name, font, sbrush, new PointF(10, 50));
+            Grp.DrawString(name, font, sbrush, new PointF(0, 40));
             Grp.Dispose();
             GC.Collect();
             return BitmapResult;
@@ -277,7 +320,6 @@ namespace C2.Model.MindMaps
                 WriteToDocx(topic.Children[i], docx, nSerialNumber);
             }
 
-            
         }
         public void SaveAsDocx(Topic topic, string fileName)
         {
