@@ -131,7 +131,7 @@
 		<item name="Center Topic Back Color">中心节点背景色</item>
 		<item name="Center Topic Fore Color">中心节点前景色</item>
 		<item name="Center Topic Border Color">中心节点边框色</item>
-		<item name="General">一般</item>
+		<item name="General">推荐</item>
 		<item name="Color">颜色</item>
 		<item name="Themes Manage">样式主题管理</item>
 		<item name="Internal">内部</item>
@@ -199,11 +199,11 @@
 		<item name="Dash Dot">点划线</item>
 		<item name="Dash Dot Dot">点点划线</item>
 		<item name="Link Line Color">关联线颜色</item>
-		<item name="Garden">园林</item>
-		<item name="Green">绿色</item>
-		<item name="Khaki">卡基色</item>
-		<item name="Sea Wolf">海狼</item>
-		<item name="Turquoise">绿松石</item>
+		<item name="Garden">蓝色经典</item>
+		<item name="Green">黑红办公</item>
+		<item name="Khaki">轻松活泼</item>
+		<item name="Sea Wolf">干净简洁</item>
+		<item name="Turquoise">蓝色星空</item>
 		<item name="Sidebar">侧边栏</item>
 		<item name="Add Link">添加连线</item>
 		<item name="Link">连线</item>
