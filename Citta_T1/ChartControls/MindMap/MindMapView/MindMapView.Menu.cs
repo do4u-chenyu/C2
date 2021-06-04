@@ -598,30 +598,13 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuAttachment = new ToolStripMenuItem();
 
                 MenuAttachment.Text = String.Format("{0}[{1}]", Path.GetFileNameWithoutExtension(path), Path.GetExtension(path).TrimStart('.'));
-                switch ((Path.GetExtension(path)).ToLower())
+                if (System.IO.Path.GetExtension(Path.GetExtension(path)) == "")
                 {
-                    case ".txt":
-                        MenuAttachment.Image = Properties.Resources.txtData;
-                        break;
-                    case ".bcp":
-                        MenuAttachment.Image = Properties.Resources.bcpData;
-                        break;
-                    case ".doc":
-                    case ".docx":
-                        MenuAttachment.Image = Properties.Resources.docData;
-                        break;
-                    case ".xls":
-                    case ".xlsx":
-                        MenuAttachment.Image = Properties.Resources.xlsData;
-                        break;
-                    case ".pdf":
-                        MenuAttachment.Image = Properties.Resources.pdfData;
-                        break;
-                    case ".xmind":
-                        MenuAttachment.Image = Properties.Resources.xmindData;
-                        break;
-                    default:
-                        break;
+                    MenuAttachment.Image = Properties.Resources.kbData;
+                }
+                else
+                {
+                    MenuAttachment.Image = IconExtractor.ExtractSmallIconByExtension(Path.GetExtension(path));
                 }
                 MenuAttachment.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuOpenAttachment,
