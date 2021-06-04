@@ -443,7 +443,7 @@
     </Compile>
     <Compile Include="Business\IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
     <Compile Include="Business\IAOLab\WebEngine\WebManager.cs" />
-    <Compile Include="Model\MindMaps\tmpDocxFile.cs" />
+    <Compile Include="Model\MindMaps\APEDocxFile.cs" />
     <Compile Include="Model\MindMaps\DocxFile.cs" />
     <Compile Include="Model\MindMaps\WaterMarkType.cs" />
     <Compile Include="Model\MindMaps\XmindFile.cs" />
