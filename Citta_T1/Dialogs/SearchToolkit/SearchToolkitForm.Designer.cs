@@ -345,7 +345,15 @@
             "涉赌模型",
             "涉枪模型",
             "涉黄模型",
-            "飞机场模型"});
+            "飞机场模型",
+            "黑客模型",
+            "宝塔面板模型",
+            "应用分发模型",
+            "ddos模型",
+            "xss模型",
+            "侵公模型",
+            "四方模型",
+            "秒播vps模型"});
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);

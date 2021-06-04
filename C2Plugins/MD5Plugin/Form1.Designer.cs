@@ -39,6 +39,9 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // textBox1
@@ -149,12 +152,57 @@
             this.radioButton4.UseVisualStyleBackColor = true;
             this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Font = new System.Drawing.Font("宋体", 10F);
+            this.radioButton5.Location = new System.Drawing.Point(493, 18);
+            this.radioButton5.Margin = new System.Windows.Forms.Padding(4);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(70, 23);
+            this.radioButton5.TabIndex = 9;
+            this.radioButton5.Text = "sha1";
+            this.toolTip1.SetToolTip(this.radioButton5, "使用sha1对字符串进行加密");
+            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Font = new System.Drawing.Font("宋体", 10F);
+            this.radioButton6.Location = new System.Drawing.Point(571, 18);
+            this.radioButton6.Margin = new System.Windows.Forms.Padding(4);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(90, 23);
+            this.radioButton6.TabIndex = 10;
+            this.radioButton6.Text = "sha256";
+            this.toolTip1.SetToolTip(this.radioButton6, "使用sha256对字符串进行加密");
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Font = new System.Drawing.Font("宋体", 10F);
+            this.radioButton7.Location = new System.Drawing.Point(669, 18);
+            this.radioButton7.Margin = new System.Windows.Forms.Padding(4);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(90, 23);
+            this.radioButton7.TabIndex = 11;
+            this.radioButton7.Text = "sha512";
+            this.toolTip1.SetToolTip(this.radioButton7, "使用sha512对字符串进行加密");
+            this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(1369, 684);
+            this.Controls.Add(this.radioButton7);
+            this.Controls.Add(this.radioButton6);
+            this.Controls.Add(this.radioButton5);
             this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
@@ -187,6 +235,9 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton7;
     }
 }
 

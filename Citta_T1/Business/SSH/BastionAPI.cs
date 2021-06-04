@@ -437,7 +437,7 @@ namespace C2.Business.SSH
         private bool IsResultFileReady()
         {
             String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
-            return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane)_\d+_\d+.tgz\r?\n");
+            return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane|hack|btmb|yyfa|ddos|xss|qg|sf|vps)_\d+_\d+.tgz\r?\n");
         }
 
         private bool IsTaskTimeout()

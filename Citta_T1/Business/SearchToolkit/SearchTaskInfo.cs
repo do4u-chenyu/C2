@@ -15,6 +15,14 @@ namespace C2.SearchToolkit
             ["涉枪模型"] = "gun",
             ["涉黄模型"] = "yellow",
             ["飞机场模型"] = "plane",
+            ["黑客模型"] = "hack",
+            ["宝塔面板模型"] = "btmb",
+            ["应用分发模型"] = "yyff",
+            ["ddos模型"] = "ddos",
+            ["xss模型"] = "xss",
+            ["侵公模型"] = "qg",
+            ["四方模型"] = "sf",
+            ["秒播vps模型"] = "vps",
             ["测试模型"] = "test"
         };
 
@@ -24,6 +32,14 @@ namespace C2.SearchToolkit
             ["涉枪模型"] = "batchquery_gun_accountPass_C2_20200908_{0}.py",
             ["涉黄模型"] = "batchquery_yellow_accountPass_C2_eml_pic_web_20210414_{0}.py",
             ["飞机场模型"] = "batchquery_plane_accountPass_C2_20210414_{0}.py",
+            ["黑客模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
+            ["宝塔面板模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
+            ["应用分发模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
+            ["ddos模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
+            ["xss模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
+            ["侵公模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
+            ["四方模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
+            ["秒播vps模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             ["测试模型"] = "batchquery_db_accountPass_C2_Test_Running_{0}.py"
 
         };
@@ -34,6 +50,14 @@ namespace C2.SearchToolkit
             ["涉枪模型"] = @"([^\n\r]+000000_queryResult_gun_\d+_\d+.tgz)",
             ["涉黄模型"] = @"([^\n\r]+000000_queryResult_yellow_\d+_\d+.tgz)",
             ["飞机场模型"] = @"([^\n\r]+000000_queryResult_plane_\d+_\d+.tgz)",
+            ["黑客模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
+            ["宝塔面板模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
+            ["应用分发模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
+            ["ddos模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
+            ["xss模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
+            ["侵公模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
+            ["四方模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
+            ["秒播vps模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
             ["测试模型"] = @"([^\n\r]+000000_queryResult_test_\d+_\d+.tgz)",
         };
 

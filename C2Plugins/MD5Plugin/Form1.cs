@@ -22,6 +22,9 @@ namespace MD5Plugin
             textBox1.Select(0, 0);
         }
 
+        private bool isReturnNum;
+
+
         public string GetPluginDescription()
         {
             return "将字符串进行常用的加密、解密、编码和解码操作；如MD5加密，Base64，Url编码和解码，UTF8和GBK转码等。";
@@ -97,6 +100,40 @@ namespace MD5Plugin
 
         }
 
+        //使用sha1对字符串进行加密
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            button1.Text = "加密 =>";
+            button2.Visible = false;
+            textBox1.Text = "请把你需要加密的内容粘贴在这里";
+            textBox2.Text = "加密后的结果";
+            textBox1.ForeColor = Color.DarkGray;
+            textBox2.ForeColor = Color.DarkGray;
+        }
+
+        //使用sha256对字符串进行加密
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            button1.Text = "加密 =>";
+            button2.Visible = false;
+            textBox1.Text = "请把你需要加密的内容粘贴在这里";
+            textBox2.Text = "加密后的结果";
+            textBox1.ForeColor = Color.DarkGray;
+            textBox2.ForeColor = Color.DarkGray;
+        }
+
+        //使用sha512对字符串进行加密
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            button1.Text = "加密 =>";
+            button2.Visible = false;
+            textBox1.Text = "请把你需要加密的内容粘贴在这里";
+            textBox2.Text = "加密后的结果";
+            textBox1.ForeColor = Color.DarkGray;
+            textBox2.ForeColor = Color.DarkGray;
+        }
+
+
 
         private void textBox1_MouseDown(object sender, EventArgs e)
         {
@@ -135,7 +172,18 @@ namespace MD5Plugin
             {
                 num = 4;
             }
-
+            if (radioButton5.Checked)
+            {
+                num = 5;
+            }
+            if (radioButton6.Checked)
+            {
+                num = 6;
+            }
+            if (radioButton7.Checked)
+            {
+                num = 7;
+            }
             switch (num)
             {
                 case 1:
@@ -155,6 +203,21 @@ namespace MD5Plugin
                     textBox2.ForeColor = Color.Black;
                     //Console.WriteLine("UrlDecode编码");
                     UrlEncode(textBox1.Text);
+                    break;
+                case 5:
+                    textBox2.ForeColor = Color.Black;
+                    //Console.WriteLine("sha1加密");
+                    SHA1Encrypt(textBox1.Text);
+                    break;
+                case 6:
+                    textBox2.ForeColor = Color.Black;
+                    //Console.WriteLine("sha256加密");
+                    SHA256Encrypt(textBox1.Text);
+                    break;
+                case 7:
+                    textBox2.ForeColor = Color.Black;
+                    //Console.WriteLine("sha512加密");
+                    SHA512Encrypt(textBox1.Text);
                     break;
                 default:
                     textBox2.ForeColor = Color.Black;
@@ -264,44 +327,44 @@ namespace MD5Plugin
             
         }
 
+        public void SHA1Encrypt(string str)
+        {
+            var strRes = Encoding.Default.GetBytes(str);
+            HashAlgorithm iSha = new SHA1CryptoServiceProvider();
+            strRes = iSha.ComputeHash(strRes);
+            var enText = new StringBuilder();
+            foreach (byte iByte in strRes)
+            {
+                enText.AppendFormat("{0:x2}", iByte);
+            }
+            textBox2.Text = enText.ToString();
+        }
 
+        public void SHA256Encrypt(string str)
+        {
+            byte[] bytValue = System.Text.Encoding.UTF8.GetBytes(str);
+            SHA256 sha256 = new SHA256CryptoServiceProvider();
+            byte[] retVal = sha256.ComputeHash(bytValue);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < retVal.Length; i++)
+            {
+                sb.Append(retVal[i].ToString("x2"));
+            }
+            textBox2.Text = sb.ToString();
 
+        }
 
-
-
-        //public void GetUtf8(string str)
-        //{
-        //    string ss = "";
-        //    if (!string.IsNullOrEmpty(str))
-        //    {
-        //        for (int i = 0; i < str.Length; i++)
-        //        {
-        //             ss += "&#x" + ((int)str[i]).ToString("X") + ";";
-        //        }
-
-        //        textBox2.Text = ss;
-        //    }
-        //    else
-        //    {
-        //        textBox2.Text = "";
-        //    }
-        //}
-
-        //public void GetGbk(string str)
-        //{
-        //    string ss = "";
-        //    if (!string.IsNullOrEmpty(str))
-        //    {
-        //        for (int i = 0; i < str.Length; i++)
-        //        {
-        //            ss += "\\u" + ((int)str[i]).ToString("x");
-        //        }
-        //        textBox2.Text = ss;
-        //    }
-        //    else
-        //    {
-        //        textBox2.Text = "";
-        //    }
-        //}
+        public void SHA512Encrypt(string str)
+        {
+            byte[] bytValue = Encoding.UTF8.GetBytes(str);
+            SHA512 sha512 = new SHA512CryptoServiceProvider();
+            byte[] retVal = sha512.ComputeHash(bytValue);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < retVal.Length; i++)
+            {
+                sb.Append(retVal[i].ToString("x2"));
+            }
+            textBox2.Text = sb.ToString();
+        }
     }
 }
