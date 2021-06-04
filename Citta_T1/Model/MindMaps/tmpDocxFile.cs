@@ -101,7 +101,7 @@ namespace C2.Model.MindMaps
                     //builder.Font.Name = "黑体";
                     //builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
                     //builder.ParagraphFormat.LineSpacing = 18;
-                    builder.ParagraphFormat.Style.Styles.AddCopy(styles["Heading 1"]);
+                    builder.ParagraphFormat.Style.Styles.AddCopy(styles["Heading 1"]);//第一次创建光标时添加所有样式
                     builder.ParagraphFormat.Style.Styles.AddCopy(styles["Heading 2"]);
                     builder.ParagraphFormat.Style.Styles.AddCopy(styles["Heading 3"]);
                     builder.ParagraphFormat.Style.Styles.AddCopy(styles["Heading 4"]);
@@ -111,13 +111,13 @@ namespace C2.Model.MindMaps
                     builder.Writeln(title);
                     break;
                 case 2:
+
                     //builder.Font.Size = 16;
                     //builder.Font.Bold = true;
                     //builder.ParagraphFormat.Alignment = ParagraphAlignment.Justify;
                     //builder.ParagraphFormat.LineSpacing = 18;
                     //builder.ParagraphFormat.FirstLineIndent = 0;
                     //builder.Font.Name = "黑体";
-                    
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["Heading 2"];
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
                     break;
@@ -346,7 +346,6 @@ namespace C2.Model.MindMaps
             }
 
             //在图片后插入附件
-          
             WriteAttachmentToDocx(GetTopicAttachment(topic), docx, topic.GetDepth(topic));
            
 
@@ -365,8 +364,13 @@ namespace C2.Model.MindMaps
             {
                 imgNo = 0;//word中图片编号初始化
                 Document docx = new Document();
-
+                
                 string examplePath = Path.Combine(Application.StartupPath, "Resources", "Templates", "DocxExample.dotx");//获得模板样式
+                if (!File.Exists(examplePath))
+                {
+                    MessageBox.Show("word模板文件不存在", "ERROR");
+                    return;
+                }
                 Document doct = new Document(examplePath);
                 StyleCollection styles = doct.Styles;
 
