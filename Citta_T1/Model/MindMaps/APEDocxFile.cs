@@ -7,12 +7,11 @@ using Aspose.Words;
 using System.Collections.Generic;
 using Aspose.Words.Drawing;
 using System.Drawing.Imaging;
-using System.Diagnostics.SymbolStore;
 using System.Text;
 
 namespace C2.Model.MindMaps
 {
-    public class tmpDocxFile
+    public class APEDocxFile
     {
         private int imgNo;
         private List<string> unsucceedAttachment = new List<string>();

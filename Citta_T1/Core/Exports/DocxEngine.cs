@@ -13,7 +13,7 @@ namespace C2.Core.Exports
     class DocxEngine : ChartsExportEngine
     {
         private DocxFile docxFile = new DocxFile();
-        private tmpDocxFile tmpdocxFile = new tmpDocxFile();
+        private APEDocxFile tmpdocxFile = new APEDocxFile();
         public override string TypeMime
         {
             get { return DocumentType.Docx.TypeMime; }
