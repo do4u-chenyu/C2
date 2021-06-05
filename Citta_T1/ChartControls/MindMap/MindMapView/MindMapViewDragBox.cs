@@ -16,6 +16,7 @@ namespace C2.Controls.MapViews
         None,
         Move,
         Copy,
+        Custom
     }
 
     class MindMapViewDragBox : IDisposable
@@ -240,6 +241,10 @@ namespace C2.Controls.MapViews
                     case DragTopicsMethod.Copy:
                         SubTitle = Lang.GetTextWithEllipsis("Copying");
                         SubTitleIcon = Properties.Resources.copy;
+                        break;
+                    case DragTopicsMethod.Custom:
+                        SubTitle = Lang.GetTextWithEllipsis("CustomMoving");
+                        SubTitleIcon = Properties.Resources.cut;
                         break;
                     default:
                         SubTitle = null;

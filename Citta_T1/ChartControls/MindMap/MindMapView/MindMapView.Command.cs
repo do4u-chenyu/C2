@@ -267,7 +267,39 @@ namespace C2.Controls.MapViews
                 ExecuteCommand(command);
             }
         }
+        void CustomSort(Topic topic, Topic target, Point hitPoint)
+        {
+            /*
+             * 计算上下移动的步长
+             * hitpoint在target的上左，那么移到target前一位
+             * hitpoint在target的下右，那么移到target后一位
+             *
+             * 四种情况  
+             *     topic 小于 target , before     (targetIdx - 1) - topicIdx
+             *     topic 小于 target , after      targetIdx - topicIdx
+             *     topic 大于 target , before     targetIdx - topicIdx
+             *     topic 大于 target , after      （targetIdx + 1） - topicIdx
+             */
+            int step;
+            bool isBefore = true;
+            if (hitPoint.X < target.Left || hitPoint.Y < target.Top)
+                isBefore = true;
+            if (hitPoint.X > target.Right || hitPoint.Y > target.Bottom)
+                isBefore = false;
 
+            int topicIdx = topic.ParentTopic.Children.IndexOf(topic);
+            int targetIdx = topic.ParentTopic.Children.IndexOf(target);
+
+            if (isBefore && topicIdx <= targetIdx)
+                step = (targetIdx - 1) - topicIdx;
+            else if ((!isBefore && topicIdx <= targetIdx) || (isBefore && topicIdx > targetIdx))
+                step = targetIdx - topicIdx;
+            else
+                step = (targetIdx + 1) - topicIdx;
+
+            CustomSortCommand comd = new CustomSortCommand(new Topic[] { topic }, step);
+            ExecuteCommand(comd);
+        }
         void DargDropTo(IEnumerable<ChartObject> chartObjects, Topic target, DragTopicsMethod dragMethod)
         {
             if (chartObjects.IsNullOrEmpty() || target == null || dragMethod == DragTopicsMethod.None)

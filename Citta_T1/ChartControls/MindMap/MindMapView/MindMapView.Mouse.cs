@@ -450,9 +450,14 @@ namespace C2.Controls.MapViews
             if (DragBox.Visible && !DragBox.Topics.IsNullOrEmpty())
             {
                 var htr = HitTest(e.X, e.Y);
-                if (!htr.IsEmpty && !htr.IsFoldingButton && TestDragDrop(DragBox.Topics, htr.Topic, CurrentDragMethod))
+                DragTopicsMethod type = TestDrag(DragBox.Topics, htr.Topic, PointToLogic(e.X, e.Y));
+                if (!htr.IsEmpty && !htr.IsFoldingButton )
                 {
-                    DargDropTo(DragBox.Topics, htr.Topic, CurrentDragMethod);
+                    if(type == DragTopicsMethod.Custom)
+                        CustomSort(SelectedTopic, htr.Topic, PointToLogic(e.X, e.Y));
+                    else if(type == DragTopicsMethod.Move && TestDragDrop(DragBox.Topics, htr.Topic, CurrentDragMethod))
+                        DargDropTo(DragBox.Topics, htr.Topic, CurrentDragMethod);
+
                     foreach(Topic topic in DragBox.Topics)
                         TopicUpdate(topic, null);
                 }
@@ -476,11 +481,10 @@ namespace C2.Controls.MapViews
 
             if (MouseState == ChartMouseState.Drag)
             {
-                CurrentDragMethod = Helper.TestModifierKeys(Keys.Control) ? DragTopicsMethod.Copy : DragTopicsMethod.Move;
-                //bool canDrop = TestDrop(PressObject.Topic, HitTest(e.X, e.Y).Topic);
-                //ShowDragBox(PressObject.Topic, e.X, e.Y, canDrop);
+                //CurrentDragMethod = Helper.TestModifierKeys(Keys.Control) ? DragTopicsMethod.Copy : DragTopicsMethod.Move;
+                CurrentDragMethod = TestDrag(DragBox.Topics, HitTest(e.X, e.Y).Topic, PointToLogic(e.X, e.Y));
                 bool canDrag = TestDragDrop(DragBox.Topics, HitTest(e.X, e.Y).Topic, CurrentDragMethod);
-                ShowDragBox(DragBox.Topics, e.X, e.Y, canDrag, CurrentDragMethod);
+                ShowDragBox(DragBox.Topics, e.X, e.Y, canDrag, CurrentDragMethod);    
             }
             else if (mouseMethod == ChartMouseMethod.Scroll)
             {
@@ -678,11 +682,14 @@ namespace C2.Controls.MapViews
 
         HitTestResult HitTest(Topic topic, int x, int y)
         {
+            Rectangle tmpBounds = topic.Bounds;
+            tmpBounds.Inflate(20, 20);
+
             if (topic.FoldingButtonVisible && topic.FoldingButton.Contains(x, y))
             {
                 return new HitTestResult(topic, null, true, false);
             }
-            else if (topic.Bounds.Contains(x, y))
+            else if (tmpBounds.Contains(x, y))
             {
                 foreach (Widget widget in topic.Widgets)
                 {
@@ -864,6 +871,26 @@ namespace C2.Controls.MapViews
             return true;
         }
 
+        DragTopicsMethod TestDrag(Topic[] topics, Topic target, Point hitPoint)
+        {
+            /*
+             * 拖拽检测规测：
+             * 1、平移拖拽，仅支持当前选中节点的同层拖拽；
+             * 2、当前topic，判断topic和target的相对位置：
+             *    （1）在target的上下10px，平移
+             *    （2）在target区域里，移动（成为其子节点）
+             * 3、最好有手势区分，避免错误操作
+             */
+            if (ReadOnly || topics.IsNullOrEmpty() || target == null)
+                return DragTopicsMethod.Move;
+
+            if (SelectedTopic != null && !target.IsRoot && SelectedTopic != target && SelectedTopic.ParentTopic != null && SelectedTopic.ParentTopic.Children.Contains(target) && !target.Bounds.Contains(hitPoint))
+                return DragTopicsMethod.Custom;
+            if (topics.Exists(t => t == target || t.ParentTopic == target || t.IsDescent(target)) || !target.Bounds.Contains(hitPoint))
+                return DragTopicsMethod.Move;
+
+            return DragTopicsMethod.Move;
+        }
         //protected void DropTo(Topic topic, Topic target)
         //{
         //    if (topic != null && target != null)

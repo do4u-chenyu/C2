@@ -389,7 +389,8 @@
     <item name="Fill Type">填充类型</item>
     <item name="Add Topic Front">添加主题(前面)</item>
     <item name="Copying">复制</item>
-    <item name="Moving">移动</item>
+    <item name="Moving">追加</item>
+	<item name="CustomMoving">平移</item>
     <item name="Accept Changes">确认修改</item>
     <item name="The content has changed, do you want to accept the changes?">内容已经发生改变, 是否确认修改?</item>
     <item name="Donation - Thanks for Your Generosity">捐助 - 感谢您的慷慨</item>
