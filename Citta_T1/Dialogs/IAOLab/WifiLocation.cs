@@ -42,9 +42,14 @@ namespace C2.Dialogs.IAOLab
                     foreach (string baseStation in inputArray)
                     {
                         ShowResult(baseStation, "baseStation", tmpResult);
-                        if (progressBar1.Value == progressBar1.Maximum)
+                        if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum !=0)
+                        {
                             MessageBox.Show("查询完成");
+                            progressBar1.Value = 0;
+                        }
+
                     }
+                    
                     break;
                 case "Webbrowser":
 
@@ -54,8 +59,11 @@ namespace C2.Dialogs.IAOLab
                     foreach (string baseStation in inputArray)
                     {
                         ShowResult(baseStation, "baseStation", tmpResult);
-                        if (progressBar1.Value == progressBar1.Maximum)
+                        if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                        {
                             MessageBox.Show("查询完成");
+                            progressBar1.Value = 0;
+                        }
                     }
                     break;
                 case "Wifi":
@@ -66,8 +74,12 @@ namespace C2.Dialogs.IAOLab
                     foreach (string mac in inputArray)
                     {
                         ShowResult(mac, "mac", tmpResult);
-                        if (progressBar1.Value == progressBar1.Maximum)
+                        if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                        {
                             MessageBox.Show("查询完成");
+                            progressBar1.Value = 0;
+                        }
+
                     }
                     break;
                 case "Card":
@@ -78,8 +90,11 @@ namespace C2.Dialogs.IAOLab
                     foreach (string bankCard in inputArray)
                     {
                         ShowResult(bankCard, "bankCard", tmpResult);
-                        if (progressBar1.Value == progressBar1.Maximum)
+                        if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                        {
                             MessageBox.Show("查询完成");
+                            progressBar1.Value = 0;
+                        }
                     }
                     
                     break;             
@@ -141,6 +156,17 @@ namespace C2.Dialogs.IAOLab
         {
             progressBar1.Value = 0;
             this.inputAndResult.Clear();
+        }
+
+        private void Import_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Export_Click(object sender, EventArgs e)
+        {
+            string text = inputAndResult.Text;
+
         }
     }
 }
