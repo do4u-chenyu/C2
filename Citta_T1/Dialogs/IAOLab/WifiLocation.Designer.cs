@@ -37,6 +37,8 @@
             this.tipLable = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.import = new System.Windows.Forms.Button();
+            this.export = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -134,15 +136,36 @@
             this.progressBar1.Location = new System.Drawing.Point(104, 38);
             this.progressBar1.Maximum = 1000;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(458, 23);
+            this.progressBar1.Size = new System.Drawing.Size(271, 23);
             this.progressBar1.TabIndex = 10;
-            this.progressBar1.Value = 0;
+            // 
+            // import
+            // 
+            this.import.Location = new System.Drawing.Point(424, 38);
+            this.import.Name = "import";
+            this.import.Size = new System.Drawing.Size(56, 23);
+            this.import.TabIndex = 11;
+            this.import.Text = "导入";
+            this.import.UseVisualStyleBackColor = true;
+            this.import.Click += new System.EventHandler(this.Import_Click);
+            // 
+            // export
+            // 
+            this.export.Location = new System.Drawing.Point(522, 38);
+            this.export.Name = "export";
+            this.export.Size = new System.Drawing.Size(56, 23);
+            this.export.TabIndex = 12;
+            this.export.Text = "导出";
+            this.export.UseVisualStyleBackColor = true;
+            this.export.Click += new System.EventHandler(this.Export_Click);
             // 
             // WifiLocation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(602, 341);
+            this.Controls.Add(this.export);
+            this.Controls.Add(this.import);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tipLable);
@@ -172,5 +195,7 @@
         private System.Windows.Forms.Label tipLable;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button import;
+        private System.Windows.Forms.Button export;
     }
 }

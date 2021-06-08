@@ -63,7 +63,7 @@ namespace C2.Model.MindMaps
             {
                 DocumentBuilder builder = new DocumentBuilder(docx);
                 builder.MoveToDocumentEnd();
-                builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+                builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["tips"];
 
                 int width = pictureWidget.Data.Width;
                 int height = pictureWidget.Data.Height;
@@ -76,9 +76,9 @@ namespace C2.Model.MindMaps
                 //builder.Font.Name = "Times New Roman";
                 //builder.Font.Size = 9;
                 //builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-                builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["tips"];
+                
                 builder.Writeln("图" + (imgNo + 1) + ":" + fileName);
-                builder.ParagraphFormat.ClearFormatting();
+                builder.Writeln("");//把光标移动到下一行
 
             }
             catch (Exception ex)
@@ -154,7 +154,7 @@ namespace C2.Model.MindMaps
                     //builder.ParagraphFormat.FirstLineIndent = 21;
                     builder.ParagraphFormat.Style.Styles.AddCopy(styles["IAO正文"]);
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["IAO正文"];
-                    builder.Writeln(string.Format("{0} {1}", serialNumber, title));
+                    builder.Writeln(title);
                     break;
             }
            
@@ -192,6 +192,7 @@ namespace C2.Model.MindMaps
                         string name = Path.GetFileName(path);
                         olePackage.FileName = string.Format("{0}.{1}{2}",layer,i, Path.GetExtension(path));
                         i++;
+                        builder.Write(" ");
                     }
                 }
                 catch(Exception ex)

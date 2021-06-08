@@ -18,10 +18,10 @@ namespace C2.Business.SSH
         private const int K64 = K32 * 2;
 
         private const int K512 = 1024 * 512;
-        
+
         private const int SecondsTimeout = 20;
         private const String SeparatorString = "5peg5L2g5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
-        
+
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
         private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
 
@@ -71,28 +71,28 @@ namespace C2.Business.SSH
         }
         public BastionAPI Login()
         {
-            try 
-            { 
+            try
+            {
                 ssh.Connect();  // 登陆堡垒
-            }   
-            catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, ex.Message);
             }
-     
-            try 
-            { 
+
+            try
+            {
                 Jump();         // 跳转
             }
             catch (Exception ex)
             {
                 task.LastErrorMsg = String.Format("登陆【{0}】成功，1阶跳转全文机【{1}】失败：{2}",
-                    ssh.ConnectionInfo.Host, 
-                    task.SearchAgentIP, 
+                    ssh.ConnectionInfo.Host,
+                    task.SearchAgentIP,
                     ex.Message);
             }
 
-            try 
+            try
             {
                 // 有些地方需要二次跳转
                 if (!task.InterfaceIP.IsEmpty())
@@ -129,7 +129,7 @@ namespace C2.Business.SSH
             shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
             // 等待目标机准备好
             _ = shell.ReadLine(Timeout);
-           
+
             // 跳转到目标机器
             shell.WriteLine(targetIP);
             // 等待跳转成功,出现root用户提示符
@@ -139,7 +139,7 @@ namespace C2.Business.SSH
                 if (!ret.Contains(targetIP))
                     return;
             }
-            task.LastErrorMsg = String.Empty; 
+            task.LastErrorMsg = String.Empty;
             _ = shell.Read(); // 清空buffer
         }
 
@@ -148,24 +148,25 @@ namespace C2.Business.SSH
             if (Oops())
                 return;
             String targetIP = task.SearchAgentIP;
-            String command = String.Format(@"ssh -o ""StrictHostKeyChecking no"" root@{0}", targetIP); 
+            String command = String.Format(@"ssh -o ""StrictHostKeyChecking no"" root@{0}", targetIP);
             RunCommand(command, shell);
         }
 
         public void Close()
         {
-            try 
+            try
             {
                 if (ssh != null)      // ssh.net库有bug，这里会报ObjectDisposedException
                     ssh.Disconnect(); // 但不主动调，链接又不释放 
-            } catch { }
+            }
+            catch { }
 
         }
 
-        
-        private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout)   
+
+        private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout)
         {
-            try 
+            try
             {
                 // 清理缓存
                 _ = ssm.Read();
@@ -177,7 +178,8 @@ namespace C2.Business.SSH
                 String ret = ssm.Expect(SeparatorRegex, TimeSpan.FromSeconds(timeout));
                 if (ret != null)
                     return ret;
-            } catch { }
+            }
+            catch { }
 
             return String.Empty;
         }
@@ -192,7 +194,7 @@ namespace C2.Business.SSH
                 ssm.WriteLine(String.Format("cat {0}", ffp));
                 // 打印分隔符
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
-                
+
                 // 根据lxf的情报, 40M 为中位数
                 int bufferSize = fileLength > M40 ? K512 : K64;  // 40M 以上的文件用大缓存，减少进程切换的消耗   
                 byte[] buffer = new byte[bufferSize + 1];        // 预留一个空白位用来存储预读字节
@@ -205,15 +207,14 @@ namespace C2.Business.SSH
                     return false;
                 }
                 // 读缓存起始位置, 0 或 1(情况3时)
-                int offset = 0;                      
+                int offset = 0;
                 while (left > 0)
                 {
                     // 计算文件下载进度
-                    String progressValue = ((fileLength - left * 1.0f) / fileLength).ToString("P0"); 
+                    String progressValue = ((fileLength - left * 1.0f) / fileLength).ToString("P0");
                     DownloadProgressEvent?.Invoke(progressValue, left, fileLength);
 
                     int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), Timeout);
-                    offset = 0; // 读完一次, 起始位置复位
 
                     if (bytesRead == 0) // 超时
                     {
@@ -233,30 +234,33 @@ namespace C2.Business.SSH
                     // 2) 最后一个字节是CR，  再读一个字节, 新字节不是CR, 将新字符追加到buffer, 替换CRNL,继续循环
                     // 3) 最后一个字节是CR，  再读一个字节, 新字节还是CR, 先替换CRNL，然后将CR作为buffer第一个字节，继续循环
 
-                    if (buffer[bytesRead - 1] != OpUtil.CR)  // 情况1
+                    if (buffer[offset + bytesRead - 1] != OpUtil.CR)  // 情况1
                     {
-                        left = Math.Max(left - shell.ReplaceCRNLWrite(buffer, 0, bytesRead, fs), 0);
+                        left = Math.Max(left - shell.ReplaceCRNLWrite(buffer, 0, offset + bytesRead, fs), 0);
+                        offset = 0; // 读完一次, 起始位置复位
                         continue;
                     }
-  
+
                     byte one = 0;
                     if (!shell.ReadByte(ref one, Timeout))
                     {
                         task.LastErrorMsg = String.Format("任务【{0}】下载失败：远端读错误", task.TaskName);
                         return false;
                     }
-                        
+
                     if (one != OpUtil.CR)  // 情况2
                     {
-                        buffer[bytesRead] = one;  // 新字符追加到buffer
-                        left = Math.Max(left - shell.ReplaceCRNLWrite(buffer, 0, bytesRead + 1, fs), 0);
+                        buffer[offset + bytesRead] = one;  // 新字符追加到buffer
+                        left = Math.Max(left - shell.ReplaceCRNLWrite(buffer, 0, offset + bytesRead + 1, fs), 0);
+                        offset = 0; // 读完一次, 起始位置复位
                     }
                     else            // 情况3
                     {
-                        left = Math.Max(left - shell.ReplaceCRNLWrite(buffer, 0, bytesRead, fs), 0);
-                        buffer[offset++] = one;   // 新字符放置到buffer头, 起始位置置为1
+                        left = Math.Max(left - shell.ReplaceCRNLWrite(buffer, 0, offset + bytesRead, fs), 0);
+                        buffer[0] = one;   // 新字符放置到buffer头, 起始位置置为1
+                        offset = 1;
                     }
-                   
+
                 }
             }
             catch (Exception ex) { task.LastErrorMsg = ex.Message; return false; }
@@ -282,7 +286,7 @@ namespace C2.Business.SSH
             String command = String.Format("ls -l {0} | awk '{{print $5}}' | head -n 1", s);
             String content = RunCommand(command, shell);
 
-            Match mat = Regex.Match(content, Wrap(@"(\d+)")); 
+            Match mat = Regex.Match(content, Wrap(@"(\d+)"));
             if (mat.Success && mat.Groups[1].Success)
                 return ConvertUtil.TryParseLong(mat.Groups[1].Value);
             return 0;
@@ -305,7 +309,7 @@ namespace C2.Business.SSH
             if (len <= 0)
             {
                 task.LastErrorMsg = String.Format("任务【{0}】: 文件不存在或空文件", task.TaskName);
-                return false; 
+                return false;
             }
 
             bool ret = false;
@@ -313,8 +317,8 @@ namespace C2.Business.SSH
             {
                 using (FileStream fs = new FileStream(d, FileMode.Create, FileAccess.Write))
                     ret = CatTgzFile(ffp, fs, len, shell);
-                
-            } 
+
+            }
             catch (Exception ex)
             {
                 task.LastErrorMsg = ex.Message;
@@ -346,14 +350,14 @@ namespace C2.Business.SSH
 
             if (ffp.EndsWith(".zip"))
                 return UploadZipBase64(ffp, d, d + ".zip");
-            else 
+            else
                 return UploadScriptBase64(ffp, d);
         }
 
         private BastionAPI UploadZipBase64(String s, String dPy, String dZip)
         {
             byte[] buf = FileUtil.FileReadBytesToEnd(s);
-            // Base64果然比shell硬转码好用多了
+            // Base64果然比shell硬转码好用多了,感谢lxf的脑洞
             String b64 = Convert.ToBase64String(buf);
             // 解码，解压
             String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip -op {1}>{2}", b64, dZip, dPy);
@@ -373,7 +377,7 @@ namespace C2.Business.SSH
                 // 这里可能还有超出shell缓冲区的问题
                 String command = String.Format("echo -e \"{0}\" | base64 -di > {1}", b64, d);
                 if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
-                    task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);  
+                    task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
             }
 
             return this;
@@ -406,7 +410,7 @@ namespace C2.Business.SSH
             if (Oops()) return this;
 
             String command = String.Format("cd {0}", TaskDirectory);
-            task.LastErrorMsg = RunCommand(command, shell).IsEmpty() ? "全文机创建工作目录失败": String.Empty;
+            task.LastErrorMsg = RunCommand(command, shell).IsEmpty() ? "全文机创建工作目录失败" : String.Empty;
             return this;
         }
 
