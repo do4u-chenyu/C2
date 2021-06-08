@@ -13,7 +13,7 @@ namespace C2.Business.WebsiteFeatureDetection
         public WFDResult()
         {
             //由于字典无序导致结果文件内容顺序混乱，因此记录固定列，剩余列往后放
-            fixColList = new List<string>() { "url", "cur_url", "title", "prediction", "prediction_", "Fraud_label", "screen_shot", "login", "html_content_id", "html_content" };
+            fixColList = new List<string>() { "url", "cur_url", "title", "prediction", "prediction_", "Fraud_label", "screen_shot", "login", "html_content_id", "html_content", "ip", "ip_address" };
         }
 
         public WFDResult(Dictionary<string, string> resDict) : this()
@@ -35,6 +35,8 @@ namespace C2.Business.WebsiteFeatureDetection
             login = ResDict.TryGetValue("login", out string tmpLogin) ? tmpLogin : string.Empty;
             html_content_id = ResDict.TryGetValue("html_content_id", out string tmpContentId) ? tmpContentId : string.Empty;
             html_content = ResDict.TryGetValue("html_content", out string tmpContent) ? tmpContent : string.Empty;
+            ip = ResDict.TryGetValue("ip", out string tmpIp) ? tmpIp : string.Empty;
+            ip_address = ResDict.TryGetValue("ip_address", out string tmpAddress) ? tmpAddress : string.Empty;
 
             if(!ResDict.ContainsKey("prediction_"))
                 ResDict.Add("prediction_", prediction_);
@@ -84,6 +86,8 @@ namespace C2.Business.WebsiteFeatureDetection
         public string login { get; set; }
         public string html_content_id { get; set; }
         public string html_content { get; set; }
+        public string ip { get; set; }
+        public string ip_address { get; set; }
 
 
     }

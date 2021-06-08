@@ -194,6 +194,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 textCell4.Value = data.html_content;
                 dr.Cells.Add(textCell4);
 
+                DataGridViewTextBoxCell textCell5 = new DataGridViewTextBoxCell();
+                textCell5.Value = data.ip;
+                dr.Cells.Add(textCell5);
+
+                DataGridViewTextBoxCell textCell6 = new DataGridViewTextBoxCell();
+                textCell6.Value = data.ip_address;
+                dr.Cells.Add(textCell6);
+
                 dataGridView.Rows.Add(dr);
             }
         }
