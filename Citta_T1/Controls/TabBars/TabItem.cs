@@ -23,7 +23,11 @@ namespace C2.Controls
         Color? _BackColor;
         Color? _ForeColor;
 
-        public ContextMenuStrip MenuStrip;
+        ContextMenuStrip MenuStrip;
+        ToolStripMenuItem SaveModel = new ToolStripMenuItem();
+        ToolStripMenuItem ExportModel = new ToolStripMenuItem();
+        ToolStripMenuItem Explorer = new ToolStripMenuItem();
+        ToolStripMenuItem CopyFilePathToClipboard = new ToolStripMenuItem();
 
         public event System.EventHandler IconChanged;
         public event System.EventHandler TextChanged;
@@ -273,6 +277,7 @@ namespace C2.Controls
                 if (MenuStrip == null)
                     InitMenuStrip();
 
+                SetMenuEnable();
                 MenuStrip.Show(Global.GetTaskBar(), hitPoint);
             }
         }
@@ -281,9 +286,9 @@ namespace C2.Controls
         {
             MenuStrip = new ContextMenuStrip();
 
-            ToolStripMenuItem ExportModel = new ToolStripMenuItem();
-            ToolStripMenuItem Explorer = new ToolStripMenuItem();
-            ToolStripMenuItem CopyFilePathToClipboard = new ToolStripMenuItem();
+            SaveModel.Name = "SaveModel";
+            SaveModel.Text = "保存";
+            SaveModel.Click += SaveModel_Click;
 
             ExportModel.Name = "ExportModel";
             ExportModel.Text = "导出";
@@ -298,11 +303,18 @@ namespace C2.Controls
             CopyFilePathToClipboard.Click += CopyFilePathToClipboard_Click;
 
             MenuStrip.Items.AddRange(new ToolStripItem[] {
+                    SaveModel,
                     ExportModel,
                     new ToolStripSeparator(),
                     Explorer,
                     CopyFilePathToClipboard});
 
+        }
+
+        void SaveModel_Click(object sender, EventArgs e)
+        {
+            if(this.Tag != null)
+                (this.Tag as BaseDocumentForm).Save();
         }
 
         void ExportModel_Click(object sender, EventArgs e)
@@ -333,6 +345,16 @@ namespace C2.Controls
         void CopyFilePathToClipboard_Click(object sender, EventArgs e)
         {
             FileUtil.TryClipboardSetText((this.Tag as BaseDocumentForm).Filename);
+        }
+
+        private void SetMenuEnable()
+        {
+            //没有文档路径时菜单部分不可用
+            bool enable = !string.IsNullOrEmpty((this.Tag as BaseDocumentForm).Filename);
+
+            ExportModel.Enabled = enable;
+            Explorer.Enabled = enable;
+            CopyFilePathToClipboard.Enabled = enable;
         }
     }
 }
