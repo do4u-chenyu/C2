@@ -1,6 +1,11 @@
-﻿using System;
+﻿using C2.Core;
+using C2.Dialogs;
+using C2.Forms;
+using C2.Utils;
+using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace C2.Controls
@@ -17,6 +22,8 @@ namespace C2.Controls
         int _DisplayIndex = 0;
         Color? _BackColor;
         Color? _ForeColor;
+
+        public ContextMenuStrip MenuStrip;
 
         public event System.EventHandler IconChanged;
         public event System.EventHandler TextChanged;
@@ -256,6 +263,76 @@ namespace C2.Controls
         {
             if (Click != null)
                 Click(this, EventArgs.Empty);
+        }
+
+
+        public void ShowTabItemMenu(Point hitPoint)
+        {
+            if (this.Tag != null && (this.Tag is DocumentForm) && !string.IsNullOrEmpty(this.Text))
+            {
+                if (MenuStrip == null)
+                    InitMenuStrip();
+
+                MenuStrip.Show(Global.GetTaskBar(), hitPoint);
+            }
+        }
+
+        private void InitMenuStrip()
+        {
+            MenuStrip = new ContextMenuStrip();
+
+            ToolStripMenuItem ExportModel = new ToolStripMenuItem();
+            ToolStripMenuItem Explorer = new ToolStripMenuItem();
+            ToolStripMenuItem CopyFilePathToClipboard = new ToolStripMenuItem();
+
+            ExportModel.Name = "ExportModel";
+            ExportModel.Text = "导出";
+            ExportModel.Click += ExportModel_Click;
+
+            Explorer.Name = "Explorer";
+            Explorer.Text = "打开所在文件夹";
+            Explorer.Click += Explorer_Click;
+
+            CopyFilePathToClipboard.Name = "CopyFilePathToClipboard";
+            CopyFilePathToClipboard.Text = "复制文件路径到剪切板";
+            CopyFilePathToClipboard.Click += CopyFilePathToClipboard_Click;
+
+            MenuStrip.Items.AddRange(new ToolStripItem[] {
+                    ExportModel,
+                    new ToolStripSeparator(),
+                    Explorer,
+                    CopyFilePathToClipboard});
+
+        }
+
+        void ExportModel_Click(object sender, EventArgs e)
+        {
+            string fullFilePath = (this.Tag as BaseDocumentForm).Filename;
+            if (!File.Exists(fullFilePath))
+            {
+                HelpUtil.ShowMessageBox("模型文档不存在，可能已被删除");
+                return;
+            }
+
+            ZipDialog zipDialog = new ExportZipDialog(this.Text);
+            if (zipDialog.ShowDialog() == DialogResult.OK)
+            {
+                string exportFullPath = zipDialog.ModelPath;
+                string password = zipDialog.Password;
+                if (C2.Business.Model.ExportModel.GetInstance().ExportC2Model(fullFilePath, exportFullPath, password))
+                    HelpUtil.ShowMessageBox("模型导出成功,存储路径：" + exportFullPath);
+                FileUtil.DeleteDirectory(Path.Combine(Global.TempDirectory));
+            }
+        }
+
+        void Explorer_Click(object sender, EventArgs e)
+        {
+            FileUtil.ExploreDirectory((this.Tag as BaseDocumentForm).Filename);
+        }
+
+        void CopyFilePathToClipboard_Click(object sender, EventArgs e)
+        {
+            FileUtil.TryClipboardSetText((this.Tag as BaseDocumentForm).Filename);
         }
     }
 }
