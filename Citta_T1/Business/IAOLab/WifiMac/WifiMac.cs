@@ -19,6 +19,8 @@ namespace C2.IAOLab.WifiMac
         public String MacLocate(String input)
         {
             string url = "http://218.94.117.234:8484/Test01/search.do";
+            if (input == "WiFiMac号")
+                return null;
             string location = GetInfo(url, input,"mac");
             location = location.Replace("\"", String.Empty);            
             return string.Format("{0}\t{1}\n", input,location);
@@ -82,7 +84,7 @@ namespace C2.IAOLab.WifiMac
 
             Place rt = JsonConvert.DeserializeObject<Place>(postContent);
             if (rt.state == "ok") 
-                return string.Format("纬度:{0}, 经度:{1}\t范围:{2}米\ttgdid:{3}\t地址:{4}", 
+                return string.Format("{0},{1}\t{2}\t{3}\t{4}", 
                                         rt.latitude, 
                                         rt.longitude, 
                                         rt.accuracy, 

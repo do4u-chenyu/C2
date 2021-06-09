@@ -15,6 +15,8 @@ namespace C2.IAOLab.BankTool
         }
         public string BankToolSearch(string input)
         {
+            if (input == "银行卡号")
+                return null;
             string location = GetBankTool(input);
             return string.Format("{0}{1}{2}{3}", input, "\t", location, "\n");
         }
@@ -68,9 +70,9 @@ namespace C2.IAOLab.BankTool
 
             if (postContentArry.Length >= 9)
                 return String.Format("{0}\t{1}\t{2}", 
-                    postContentArry[1],  //  卡号
-                    postContentArry[3],  //  地址
-                    postContentArry[5]); //  blabla
+                    postContentArry[1].Replace("银行名称：", ""),  //  卡号
+                    postContentArry[3].Replace("银行卡种：", ""),  //  地址
+                    postContentArry[5].Replace("银行归属地：", "")); //  blabla
             if (postContentArry.Length == 2)
                 return postContentArry[1];
             return "查询失败";
