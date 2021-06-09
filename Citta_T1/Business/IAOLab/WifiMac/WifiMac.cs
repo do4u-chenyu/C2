@@ -82,7 +82,7 @@ namespace C2.IAOLab.WifiMac
 
             Place rt = JsonConvert.DeserializeObject<Place>(postContent);
             if (rt.state == "ok") 
-                return string.Format("纬度:{0}, 经度:{1}\t范围:{2}米\ttgdid:{3}\t地址:{4}", 
+                return string.Format("{0},{1}\t{2}\t{3}\t{4}", 
                                         rt.latitude, 
                                         rt.longitude, 
                                         rt.accuracy, 

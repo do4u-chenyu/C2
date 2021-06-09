@@ -31,7 +31,6 @@
             this.inputAndResult = new System.Windows.Forms.RichTextBox();
             this.inputLabel = new System.Windows.Forms.Label();
             this.confirm = new System.Windows.Forms.Button();
-            this.cancle = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.tipLable = new System.Windows.Forms.Label();
@@ -76,22 +75,11 @@
             this.confirm.UseVisualStyleBackColor = true;
             this.confirm.Click += new System.EventHandler(this.Search_Click);
             // 
-            // cancle
-            // 
-            this.cancle.Location = new System.Drawing.Point(522, 10);
-            this.cancle.Margin = new System.Windows.Forms.Padding(2);
-            this.cancle.Name = "cancle";
-            this.cancle.Size = new System.Drawing.Size(56, 24);
-            this.cancle.TabIndex = 4;
-            this.cancle.Text = "取消";
-            this.cancle.UseVisualStyleBackColor = true;
-            this.cancle.Click += new System.EventHandler(this.Cancle_Click);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panel1.Controls.Add(this.export);
             this.panel1.Controls.Add(this.confirm);
-            this.panel1.Controls.Add(this.cancle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 297);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
@@ -136,12 +124,12 @@
             this.progressBar1.Location = new System.Drawing.Point(104, 38);
             this.progressBar1.Maximum = 1000;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(271, 23);
+            this.progressBar1.Size = new System.Drawing.Size(376, 23);
             this.progressBar1.TabIndex = 10;
             // 
             // import
             // 
-            this.import.Location = new System.Drawing.Point(424, 38);
+            this.import.Location = new System.Drawing.Point(515, 38);
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(56, 23);
             this.import.TabIndex = 11;
@@ -151,7 +139,7 @@
             // 
             // export
             // 
-            this.export.Location = new System.Drawing.Point(522, 38);
+            this.export.Location = new System.Drawing.Point(515, 10);
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(56, 23);
             this.export.TabIndex = 12;
@@ -164,7 +152,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(602, 341);
-            this.Controls.Add(this.export);
             this.Controls.Add(this.import);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
@@ -189,7 +176,6 @@
         private System.Windows.Forms.RichTextBox inputAndResult;
         private System.Windows.Forms.Label inputLabel;
         private System.Windows.Forms.Button confirm;
-        private System.Windows.Forms.Button cancle;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label tipLable;

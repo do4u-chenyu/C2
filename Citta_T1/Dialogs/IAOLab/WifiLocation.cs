@@ -1,9 +1,12 @@
 ﻿using C2.Controls;
 using C2.IAOLab.BankTool;
 using C2.IAOLab.BaseStation;
+using C2.IAOLab.WebEngine.Boss.Option;
 using C2.IAOLab.WifiMac;
 using C2.Utils;
 using System;
+using System.Configuration;
+using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -31,6 +34,7 @@ namespace C2.Dialogs.IAOLab
             StringBuilder tmpResult = new StringBuilder();
             string[] inputArray = this.inputAndResult.Text.Split('\n');
             this.Cursor = Cursors.WaitCursor;
+            string firstLine;
             switch (FormType)
             {
                
@@ -39,6 +43,8 @@ namespace C2.Dialogs.IAOLab
                     progressBar1.Value = 0;
                     progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                     progressBar1.Minimum = 0;
+                    firstLine = "基站号\t纬度, 经度\t范围\ttgdid\t地址\n";
+                    tmpResult.Append(firstLine);
                     foreach (string baseStation in inputArray)
                     {
                         ShowResult(baseStation, "baseStation", tmpResult);
@@ -67,10 +73,11 @@ namespace C2.Dialogs.IAOLab
                     }
                     break;
                 case "Wifi":
-                    
                     progressBar1.Value = 0;
                     progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                     progressBar1.Minimum = 0;
+                    firstLine = "WiFiMac号\t纬度, 经度\t范围\ttgdid\t地址\n";
+                    tmpResult.Append(firstLine);
                     foreach (string mac in inputArray)
                     {
                         ShowResult(mac, "mac", tmpResult);
@@ -87,6 +94,8 @@ namespace C2.Dialogs.IAOLab
                     progressBar1.Value = 0;
                     progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                     progressBar1.Minimum = 0;
+                    firstLine = "银行卡号\t银行名称\t卡种\t归属地\n";
+                    tmpResult.Append(firstLine);
                     foreach (string bankCard in inputArray)
                     {
                         ShowResult(bankCard, "bankCard", tmpResult);
@@ -96,7 +105,6 @@ namespace C2.Dialogs.IAOLab
                             progressBar1.Value = 0;
                         }
                     }
-                    
                     break;             
                 default:
                     break;
@@ -106,13 +114,12 @@ namespace C2.Dialogs.IAOLab
         private void ShowResult(string input, string type, StringBuilder tmpResult)
         {
 
-            if (!string.IsNullOrEmpty(input) && progressBar1.Value < 1001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
+            if (!string.IsNullOrEmpty(input) && progressBar1.Value < 5001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
             {
 
-                    if (progressBar1.Value % 50 == 0)
+                    if (progressBar1.Value % 100 == 0)
                     {
                         Thread.Sleep(500);
-
                     }
                     switch (type)
                     {
@@ -160,12 +167,89 @@ namespace C2.Dialogs.IAOLab
 
         private void Import_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
+            OpenFileDialog1.Filter = "文本文档 | *.txt;*.csv;*.bcp;*.tsv";
+            OpenFileDialog1.ShowDialog();
+            string path = OpenFileDialog1.FileName;
+            try
+            {
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    string line;
+                    StringBuilder sb = new StringBuilder();
+                    // 从文件读取并显示行，直到文件的末尾 
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        sb.Append(line);
+                        sb.Append("\n");
+                    }
+                    inputAndResult.Text = sb.TrimEndN().ToString();
+                }
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "ERROR");
+            }
         }
-
+        private void ExportData() 
+        {
+            
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Title = "请选择要导出的位置";
+            saveDialog.Filter = "文本文件|*.txt";
+            saveDialog.FileName = FormType + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
+            saveDialog.ShowDialog();
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                string firstLine = null;
+                switch (FormType)
+                {
+                    case "BaseStation":
+                        firstLine = "基站号\t纬度, 经度\t范围\ttgdid\t地址\n";
+                        break;
+                    case "Wifi":
+                        firstLine = "WiFiMac号\t纬度, 经度\t范围\ttgdid\t地址\n";
+                        break;
+                    case "Card":
+                        firstLine = "银行卡号\t银行名称\t卡种\t归属地\n";
+                        break;
+                }
+                string path = saveDialog.FileName;
+                string text = inputAndResult.Text;
+                try
+                {
+                    using (StreamWriter fs = new StreamWriter(path))
+                    {
+                        string[] lines = text.Split('\n');
+                        fs.Write(firstLine);
+                        foreach (string line in lines)
+                        {
+                            if (line.Contains("银行卡号"))
+                                continue;
+                            fs.WriteLine(line);
+                            fs.Flush();
+                        }
+                        fs.Close();
+                    }
+                    MessageBox.Show("导出成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR");
+                }
+            }
+        }
         private void Export_Click(object sender, EventArgs e)
         {
-            string text = inputAndResult.Text;
+            if (inputAndResult.Text == string.Empty)
+            {
+                MessageBox.Show("当前无数据可导出!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                ExportData();
+                
+            }
 
         }
     }

@@ -42,7 +42,7 @@ namespace C2.Model.MindMaps
             //builder.ParagraphFormat.Alignment = ParagraphAlignment.Justify;
             //builder.ParagraphFormat.LineSpacing = 18;
             //builder.Font.Bold = false;
-            
+
             builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["IAO正文"];
             builder.ParagraphFormat.FirstLineIndent = 21;
             builder.Writeln(text);
@@ -52,8 +52,8 @@ namespace C2.Model.MindMaps
         {
             return width > height ? new Size(384, height * 384 / width) : new Size(width * 384 / height, 384);
         }
-        
-        private void WriteImgToDocx(PictureWidget pictureWidget, Document docx, int imgNo) 
+
+        private void WriteImgToDocx(PictureWidget pictureWidget, Document docx, int imgNo)
         {
             string picturePath = pictureWidget.ImageUrl;
             if (!File.Exists(picturePath))
@@ -68,7 +68,7 @@ namespace C2.Model.MindMaps
                 int width = pictureWidget.Data.Width;
                 int height = pictureWidget.Data.Height;
                 Size size = RotateImageSize(width, height);
-                builder.InsertImage(picturePath,size.Width,size.Height);
+                builder.InsertImage(picturePath, size.Width, size.Height);
                 builder.Writeln("");//把光标移动到下一行
 
                 //builder.Font.Bold = false;
@@ -76,7 +76,7 @@ namespace C2.Model.MindMaps
                 //builder.Font.Name = "Times New Roman";
                 //builder.Font.Size = 9;
                 //builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-                
+
                 builder.Writeln("图" + (imgNo + 1) + ":" + fileName);
                 builder.Writeln("");//把光标移动到下一行
 
@@ -128,7 +128,7 @@ namespace C2.Model.MindMaps
                     //builder.ParagraphFormat.FirstLineIndent = 0;
                     //builder.ParagraphFormat.Alignment = ParagraphAlignment.Justify;
                     //builder.ParagraphFormat.LineSpacing = 18;
-                    
+
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["Heading 3"];
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
                     break;
@@ -140,7 +140,7 @@ namespace C2.Model.MindMaps
                     //builder.ParagraphFormat.FirstLineIndent = 0;
                     //builder.ParagraphFormat.LineSpacing = 18;
                     //builder.ParagraphFormat.Alignment = ParagraphAlignment.Justify;
-                   
+
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["Heading 4"];
                     builder.Writeln(string.Format("{0} {1}", serialNumber, title));
                     break;
@@ -157,8 +157,56 @@ namespace C2.Model.MindMaps
                     builder.Writeln(title);
                     break;
             }
-           
+
         }
+        private void WriteDataSourceToDocx(DataSourceWidget dataSourceWidget, Document docx, int layer)
+        {
+            if (dataSourceWidget == null)
+                return;
+            DocumentBuilder builder = new DocumentBuilder(docx);
+            builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+            builder.MoveToDocumentEnd();
+            int i = 0;
+            foreach (var dataSource in dataSourceWidget.DataItems)
+            {
+                if (dataSource.IsDatabase())
+                    return;
+                string path = dataSource.FilePath;
+                if (!File.Exists(path))
+                {
+                    unsucceedAttachment.Add(path);
+                    continue;
+                }
+                var size = new FileInfo(path).Length;
+                if (size > 524288000)
+                {
+                    unsucceedAttachment.Add(path);
+                    continue;
+                }
+                try
+                {
+                    byte[] bs = File.ReadAllBytes(path);
+                    using (Stream stream = new MemoryStream(bs))
+                    {
+                        builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["tips"];
+                        Image image = GetImage(path);
+                        Shape shape = builder.InsertOleObject(stream, "Package", true, image);
+                        OlePackage olePackage = shape.OleFormat.OlePackage;
+                        string name = Path.GetFileName(path);
+                        olePackage.FileName = string.Format("dataSource{0}.{1}{2}", layer, i, Path.GetExtension(path));
+                        i++;
+                        builder.Write(" ");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR");
+                }
+            }
+            builder.Writeln("");
+        }
+
+   
         private void WriteAttachmentToDocx(AttachmentWidget attachmentWidget, Document docx,int layer)
         {
             if (attachmentWidget == null)
@@ -321,6 +369,10 @@ namespace C2.Model.MindMaps
         {
             return topic.FindWidget<NoteWidget>();
         }
+        private DataSourceWidget GetDataSource(Topic topic) 
+        {
+            return topic.FindWidget<DataSourceWidget>();
+        }
         private AttachmentWidget GetTopicAttachment(Topic topic)
         {
             return topic.FindWidget<AttachmentWidget>();
@@ -347,7 +399,12 @@ namespace C2.Model.MindMaps
 
             //在图片后插入附件
             WriteAttachmentToDocx(GetTopicAttachment(topic), docx, topic.GetDepth(topic));
-           
+
+            //数据源同样以附件形式插入
+            WriteDataSourceToDocx(GetDataSource(topic), docx, topic.GetDepth(topic));
+
+
+
 
             for (int i = 0; i < topic.Children.Count; i++)//迭代写入word
             {
