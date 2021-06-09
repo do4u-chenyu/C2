@@ -22,7 +22,7 @@
         <fore_color>Black</fore_color>
         <line_color>Black</line_color>
         <border_color>#558097</border_color>
-        <node_back_color>#9DB9C8</node_back_color>
+        <node_back_color>LightSteelBlue</node_back_color>
         <node_fore_color>Black</node_fore_color>
         <select_color>#558097</select_color>
         <hover_color>#558097</hover_color>
@@ -41,7 +41,6 @@
             <back_color>Gainsboro</back_color>
             <fore_color>MidnightBlue</fore_color>
             <border_color>#88B8D8</border_color>
-            <round_radius>5</round_radius>
             <padding>12</padding>
             <fill_type>Solid</fill_type>
             <font font_family="微软雅黑" size="21.75" style="Bold" />
@@ -50,7 +49,7 @@
             <node id="22" text="子主题 1" x="588" y="373" width="134" height="48" text_b="2, 2, 130, 44">
               <style>
                 <back_color>LightSteelBlue</back_color>
-                <round_radius>5</round_radius>
+                <fore_color>Black</fore_color>
                 <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
             </node>
