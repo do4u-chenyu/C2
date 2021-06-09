@@ -122,7 +122,8 @@ namespace C2.Controls.MapViews
 
             // Text Size
             Rectangle rectText = Rectangle.Empty;
-            Font font = topic.Style.Font != null ? topic.Style.Font : e.Font;
+            Font font = topic.Style.Font != null ? topic.Style.Font : new Font("微软雅黑", 18F);
+            topic.Style.Font = font;
             Size textSize;
             if (e.Graphics == null)
                 textSize = TextRenderer.MeasureText(topic.Text, font, proposedSize);
