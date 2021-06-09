@@ -29,177 +29,181 @@
         <link_line_color>#5A4EB1</link_line_color>
         <widget_margin>2</widget_margin>
         <picture_thumb_size>100, 100</picture_thumb_size>
+        <water_mark_content>
+        </water_mark_content>
+        <water_mark_font font_family="微软雅黑" size="20" style="Bold" />
+        <water_mark_type>DEFAULT</water_mark_type>
+        <water_mark_transparent>30</water_mark_transparent>
       </style>
       <nodes>
-        <node id="1" text="xxx会战" x="356" y="128" width="146" height="66" text_b="12, 12, 122, 42">
+        <node id="1" text="xxx会战" x="313" y="61" width="177" height="77" text_b="12, 12, 153, 53">
           <style>
             <back_color>Lavender</back_color>
             <fore_color>Black</fore_color>
             <line_color>Black</line_color>
             <border_color>#B68FCB</border_color>
-            <round_radius>5</round_radius>
             <padding>12</padding>
             <fill_type>Solid</fill_type>
             <font font_family="微软雅黑" size="21.75" style="Bold" />
           </style>
           <nodes>
-            <node id="2" text="XX专项" x="509" y="204" width="107" height="35" text_b="26, 2, 79, 31" fold_btn_b="496, 215, 13, 13">
+            <node id="2" text="XX专项" x="481" y="148" width="152" height="48" text_b="38, 2, 112, 44" fold_btn_b="468, 166, 13, 13">
               <style>
-                <round_radius>5</round_radius>
-                <font font_family="微软雅黑" size="15.75" style="Regular" />
+                <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="7" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="245_黄旗.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                <widget type="PICTURE" x="4" y="8" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="245_黄旗.png" size_type="Customize" original_size="200, 200" embed_in="False">
                   <text>245_黄旗</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAALvSURBVHhe7dw/i9RQFAXwQQttFq3sVFiEJG9QS7XxC/gdLG0tbRdsbP0I2il2ti72CpaCNoKFk5ess/gyGUFw4oxcl3E5hMlM8nLJOz84zfxJbu6B3WXMOCIiIiKiIVjk0d4PGx9W1eisPER9mmWmOkmevJKHqS//FSIpc/NAnibfUCGruNQs5lNzRV5GvqAy1uNs9FVeSj6gElBcZp7LW6hLaPn1ie/JW6kLeOn1cWn0azrdvyCHoDahhW+a5S/+D3IYagtadNMUWfJEDke7QgveNmUa35bD0rbQYndJkUezxedr5+Tw1BRaahspM/NGTkFNoGW2meXvl4dyKtoEWmIX+Zle35dTUh20vK6y/DP5W1WNzsipCUGL85CXcno6DSzLX2x8X8agf+CiPGb5Y+x3MblxScYhtKRekppPMlLY4HL6TGqeymhhgktREJcld2XEsKBlaInLzTzPoz0ZNQxoEdribPxOxh0+tACtKWxyIGMPF7pwzXGZeSajDxO6aM1xafJeRh8mdNFa47J4ImMPF7pwjXFH40RGHjZ08apizSMZNQxwCQpS2vhQRgwLWkafWf2bfPXl6nkZLzxoKX1lnsZ3ZKxwocX4Du/rWoMW5Cu88xFAi+o6vDe4BlpYt+Hd87Xw0toPv1+yIbS8NsNvYDWElthG/n5H8fv4spyGNoWWuWv4Ld4doIVum8Imr+WwtC202KYpM3PE/wmiJWjBTVJMkrEcitqAlrxRQvtY3Be47JqUNnkrb6UuoKWjuDwqg/5Y3Be0/NMpJ8kteTl1DRVwktDvs+0DKqK08Ud5mnxbL2L1sfjx8c2L8hT1Yb0QeYj6xEKUYSHKsBBlWIgyLEQZFqIMC1GGhSjDQpRhIcqwEGVYiDIsRBkWogwLUYaFKMNClGEhyrAQZViIMixEGRaiDAtRhoUow0KUYSHKsBBlWIgyLEQZFqIMC1GGhSjDQpRhIcqwEGVmqXmxKqOw5rE8RERERETUqdHoD2myIAKuTxbSAAAAAElFTkSuQmCC]]></thumb>
                 </widget>
               </widgets>
               <nodes>
-                <node id="3" text="分析任务1" x="642" y="249" width="125" height="32" text_b="26, 2, 97, 28">
+                <node id="3" text="分析任务1" x="637" y="206" width="173" height="42" text_b="38, 2, 133, 38">
                   <style>
                     <back_color>Lavender</back_color>
-                    <round_radius>5</round_radius>
-                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                    <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="6" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
                       <text>94_分析任务</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJeSURBVHhe7d2/i9RAHIbx6QQrbQTBH1iI2FtaCBZiaSlYC1pbWAoWgpWVja21hYitIOgfIBaKhZXYKGgv6JuFCWv2vezebmZ2JvM88GmSSTKg3nF334uBiIiIiIiIiCrtolzBVi7LGdmpa/JT/mJyL+VQ/RZ3I0zrsYx2VtyFSOerHJi7AOk9l5XcQuRzQ/oeiVuEvPrcSeR3XcLppQMtytltcXuIvkh4unSgRbnr/hW4fUThw+BAa/aR20cUfg0OtGYfuX1E4dXgQGv2kdtHFO4ODrQmd24Pyxa5E63I1U1xz1/2TBb9EbcAeR2XRefFLUA+7+W/3olbiDxsbiHS6z9Uud6KuwhpHJO13RJ3MaZjfwayrqvyWdwNsZ3uLzsREREREVEVnZTX4r64wW7uyKH6Ju5GmNYDWZu7EOl8lANzFyC97lPDSm4h8umGTfoYti5DnzuJ/O7JbIata2jdsPUPmc2wdS01M2xdU27/0WyGrWvK7T+azbB1Tbn9R7MZtq6l7+L2Hy1yJ2pTet1v2bp9L2PYujAMWxeEYevC2NxCpMewdUEYti4Ew9aFYNiaiIiIiGizTsglcW9txma6b+Aeka27L+4LG+zuk2z8h3NU3E0wvRcy2gVxFyIt2ylxi5Fe958erOQWIp+H0vdE3CLk1edOIoQ3E3L3H5rVsHUKKXLPiWY1bJ1Cis6Je1bU/Jutx6TKPStq/s3WY1LlnhU1/2brMalyz4qaf7P1mBQ1M2ydwpQxbF0hhq0LwrB1YWxuIdJj2LogDFsXgmHrQjBsTURERERERFRJIfwDTMEHN0CaKKYAAAAASUVORK5CYII=]]></thumb>
                     </widget>
                   </widgets>
                 </node>
-                <node id="4" text="分析任务2" x="642" y="291" width="125" height="32" text_b="26, 2, 97, 28">
+                <node id="4" text="分析任务2" x="637" y="258" width="173" height="42" text_b="38, 2, 133, 38">
                   <style>
                     <back_color>Lavender</back_color>
-                    <round_radius>5</round_radius>
-                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                    <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="6" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
                       <text>94_分析任务</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJeSURBVHhe7d2/i9RAHIbx6QQrbQTBH1iI2FtaCBZiaSlYC1pbWAoWgpWVja21hYitIOgfIBaKhZXYKGgv6JuFCWv2vezebmZ2JvM88GmSSTKg3nF334uBiIiIiIiIiCrtolzBVi7LGdmpa/JT/mJyL+VQ/RZ3I0zrsYx2VtyFSOerHJi7AOk9l5XcQuRzQ/oeiVuEvPrcSeR3XcLppQMtytltcXuIvkh4unSgRbnr/hW4fUThw+BAa/aR20cUfg0OtGYfuX1E4dXgQGv2kdtHFO4ODrQmd24Pyxa5E63I1U1xz1/2TBb9EbcAeR2XRefFLUA+7+W/3olbiDxsbiHS6z9Uud6KuwhpHJO13RJ3MaZjfwayrqvyWdwNsZ3uLzsREREREVEVnZTX4r64wW7uyKH6Ju5GmNYDWZu7EOl8lANzFyC97lPDSm4h8umGTfoYti5DnzuJ/O7JbIata2jdsPUPmc2wdS01M2xdU27/0WyGrWvK7T+azbB1Tbn9R7MZtq6l7+L2Hy1yJ2pTet1v2bp9L2PYujAMWxeEYevC2NxCpMewdUEYti4Ew9aFYNiaiIiIiGizTsglcW9txma6b+Aeka27L+4LG+zuk2z8h3NU3E0wvRcy2gVxFyIt2ylxi5Fe958erOQWIp+H0vdE3CLk1edOIoQ3E3L3H5rVsHUKKXLPiWY1bJ1Cis6Je1bU/Jutx6TKPStq/s3WY1LlnhU1/2brMalyz4qaf7P1mBQ1M2ydwpQxbF0hhq0LwrB1YWxuIdJj2LogDFsXgmHrQjBsTURERERERFRJIfwDTMEHN0CaKKYAAAAASUVORK5CYII=]]></thumb>
                     </widget>
                   </widgets>
                 </node>
               </nodes>
               <lines>
-                <line target="3" begin_side="Bottom" end_side="Left" begin_rect="509, 204, 107, 35" end_rect="642, 249, 125, 32" />
-                <line target="4" begin_side="Bottom" end_side="Left" begin_rect="509, 204, 107, 35" end_rect="642, 291, 125, 32" />
+                <line target="3" begin_side="Bottom" end_side="Left" begin_rect="481, 148, 152, 48" end_rect="637, 206, 173, 42" />
+                <line target="4" begin_side="Bottom" end_side="Left" begin_rect="481, 148, 152, 48" end_rect="637, 258, 173, 42" />
               </lines>
             </node>
-            <node id="5" text="XX专项" x="509" y="333" width="107" height="35" text_b="26, 2, 79, 31" fold_btn_b="496, 344, 13, 13">
+            <node id="5" text="XX专项" x="481" y="310" width="152" height="48" text_b="38, 2, 112, 44" fold_btn_b="468, 328, 13, 13">
               <style>
-                <round_radius>5</round_radius>
-                <font font_family="微软雅黑" size="15.75" style="Regular" />
+                <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="7" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="249_橙旗.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                <widget type="PICTURE" x="4" y="8" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="249_橙旗.png" size_type="Customize" original_size="200, 200" embed_in="False">
                   <text>249_橙旗</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAM6SURBVHhe7Zw9axRRGIUXFdRGUdiZu+IHiI0o2CrYK/ofLG0tLSxiaSMYZ2YhVcAyra2CvWArxEJIYWbcJI1aKOh6Rs+N65KP3c18vDtzHjgQMrNz73ueYpkwk44QQgghhGga2fPuNf4oLPA5cY+QYRb3bvJXok68kDyDKPi29vTscR4SdTAqxCeNgjc8LKpmJyE+WRI+5GmiKlD8rkJ81uPwCk8XZYPC9xWSJ4u7m8OVzmF+TJQFyp5IiE+WuJf8qCgDlDyVEJ9Bv3eflxBFgnJnEpInjdyvzeTMOV5KFAGKnVmITxZ113g5cVBQ6IGF/Ev4gpcVs4IiCxTCxO4OLy+mBQUWLwTB98uPjcXTJ7iMmBSUV4oQnzQJ3nIpMQkorVQh24ndEy4p9gJlVSOESfvBdS4tdgIlVSqE+bK6eOkotyBGQTl1CPF5xW0ID0qpUwgTPOB2BAoxIORv8P1ykdtqLyjCjJA8uH/5NFzoHOL22gdKMCVkO7Fb4RbbBYa3KYTJEnePW20HGNq0kDxp4n6mz4KQW242GNi8EJ80dqvcdnPBoHMjxCeLwyVuv3lgwLkT4pNFvVscozlgsPkVEne/N+5P/BhsLoVksbvNEZoFhpsrIY3+/sjBkPMi5AO33GwwqGkhrboHycHQZoW07i49B4ObE9Lqx1VRgBkhg6g7aP0D3SjChJCNxF3mltoNyqhViF4KGgOl1CIEN3avuQUxCsqpVMig775+XL5wjMuLcVBSZULSKLjBZcVuoKjyheipxclBYaUJSePwHZcRk4LiCheSP/m+tXTqJJcQ04ACCxYS3uWlxSygxIKE6O2pQkCZBxKi9wsLBqXOJCR/A3drqXeelxFFgXKnFqJ31EsEBU8sRP/FoQJQ9L5C/vyfk4XOEX5ElAkK31PIej+8ylNFFaD0HYVkSfiYp4gqQfn/CUmT4D0PiToYFzJI3DIPiTqQEGNIiDEkxBgSYgwJMYaEGENCjCEhxpAQY0iIMSTEGBJiDAkxhoQYQ0KMISHGkBBjSIgxJMQYEmIMCTGGhBhDQowhIcaQEGNIiDEkxBgSYgwJMYaEGENCjCEhxpAQIYQQQghRBZ3Ob6knZQqjVEZsAAAAAElFTkSuQmCC]]></thumb>
                 </widget>
               </widgets>
               <nodes>
-                <node id="6" text="分析任务1" x="642" y="378" width="125" height="32" text_b="26, 2, 97, 28">
+                <node id="6" text="分析任务1" x="637" y="368" width="173" height="42" text_b="38, 2, 133, 38">
                   <style>
                     <back_color>Lavender</back_color>
-                    <round_radius>5</round_radius>
-                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                    <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="6" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
                       <text>94_分析任务</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJeSURBVHhe7d2/i9RAHIbx6QQrbQTBH1iI2FtaCBZiaSlYC1pbWAoWgpWVja21hYitIOgfIBaKhZXYKGgv6JuFCWv2vezebmZ2JvM88GmSSTKg3nF334uBiIiIiIiIiCrtolzBVi7LGdmpa/JT/mJyL+VQ/RZ3I0zrsYx2VtyFSOerHJi7AOk9l5XcQuRzQ/oeiVuEvPrcSeR3XcLppQMtytltcXuIvkh4unSgRbnr/hW4fUThw+BAa/aR20cUfg0OtGYfuX1E4dXgQGv2kdtHFO4ODrQmd24Pyxa5E63I1U1xz1/2TBb9EbcAeR2XRefFLUA+7+W/3olbiDxsbiHS6z9Uud6KuwhpHJO13RJ3MaZjfwayrqvyWdwNsZ3uLzsREREREVEVnZTX4r64wW7uyKH6Ju5GmNYDWZu7EOl8lANzFyC97lPDSm4h8umGTfoYti5DnzuJ/O7JbIata2jdsPUPmc2wdS01M2xdU27/0WyGrWvK7T+azbB1Tbn9R7MZtq6l7+L2Hy1yJ2pTet1v2bp9L2PYujAMWxeEYevC2NxCpMewdUEYti4Ew9aFYNiaiIiIiGizTsglcW9txma6b+Aeka27L+4LG+zuk2z8h3NU3E0wvRcy2gVxFyIt2ylxi5Fe958erOQWIp+H0vdE3CLk1edOIoQ3E3L3H5rVsHUKKXLPiWY1bJ1Cis6Je1bU/Jutx6TKPStq/s3WY1LlnhU1/2brMalyz4qaf7P1mBQ1M2ydwpQxbF0hhq0LwrB1YWxuIdJj2LogDFsXgmHrQjBsTURERERERFRJIfwDTMEHN0CaKKYAAAAASUVORK5CYII=]]></thumb>
                     </widget>
                   </widgets>
                 </node>
-                <node id="7" text="分析任务2" x="642" y="420" width="125" height="32" text_b="26, 2, 97, 28">
+                <node id="7" text="分析任务2" x="637" y="420" width="173" height="42" text_b="38, 2, 133, 38">
                   <style>
                     <back_color>Lavender</back_color>
-                    <round_radius>5</round_radius>
-                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                    <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="6" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
                       <text>94_分析任务</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJeSURBVHhe7d2/i9RAHIbx6QQrbQTBH1iI2FtaCBZiaSlYC1pbWAoWgpWVja21hYitIOgfIBaKhZXYKGgv6JuFCWv2vezebmZ2JvM88GmSSTKg3nF334uBiIiIiIiIiCrtolzBVi7LGdmpa/JT/mJyL+VQ/RZ3I0zrsYx2VtyFSOerHJi7AOk9l5XcQuRzQ/oeiVuEvPrcSeR3XcLppQMtytltcXuIvkh4unSgRbnr/hW4fUThw+BAa/aR20cUfg0OtGYfuX1E4dXgQGv2kdtHFO4ODrQmd24Pyxa5E63I1U1xz1/2TBb9EbcAeR2XRefFLUA+7+W/3olbiDxsbiHS6z9Uud6KuwhpHJO13RJ3MaZjfwayrqvyWdwNsZ3uLzsREREREVEVnZTX4r64wW7uyKH6Ju5GmNYDWZu7EOl8lANzFyC97lPDSm4h8umGTfoYti5DnzuJ/O7JbIata2jdsPUPmc2wdS01M2xdU27/0WyGrWvK7T+azbB1Tbn9R7MZtq6l7+L2Hy1yJ2pTet1v2bp9L2PYujAMWxeEYevC2NxCpMewdUEYti4Ew9aFYNiaiIiIiGizTsglcW9txma6b+Aeka27L+4LG+zuk2z8h3NU3E0wvRcy2gVxFyIt2ylxi5Fe958erOQWIp+H0vdE3CLk1edOIoQ3E3L3H5rVsHUKKXLPiWY1bJ1Cis6Je1bU/Jutx6TKPStq/s3WY1LlnhU1/2brMalyz4qaf7P1mBQ1M2ydwpQxbF0hhq0LwrB1YWxuIdJj2LogDFsXgmHrQjBsTURERERERFRJIfwDTMEHN0CaKKYAAAAASUVORK5CYII=]]></thumb>
                     </widget>
                   </widgets>
                 </node>
               </nodes>
               <lines>
-                <line target="6" begin_side="Bottom" end_side="Left" begin_rect="509, 333, 107, 35" end_rect="642, 378, 125, 32" />
-                <line target="7" begin_side="Bottom" end_side="Left" begin_rect="509, 333, 107, 35" end_rect="642, 420, 125, 32" />
+                <line target="6" begin_side="Bottom" end_side="Left" begin_rect="481, 310, 152, 48" end_rect="637, 368, 173, 42" />
+                <line target="7" begin_side="Bottom" end_side="Left" begin_rect="481, 310, 152, 48" end_rect="637, 420, 173, 42" />
               </lines>
             </node>
-            <node id="8" text="XX专项" x="509" y="462" width="107" height="35" text_b="26, 2, 79, 31" fold_btn_b="496, 473, 13, 13">
+            <node id="8" text="XX专项" x="481" y="472" width="152" height="48" text_b="38, 2, 112, 44" fold_btn_b="468, 490, 13, 13">
               <style>
-                <round_radius>5</round_radius>
-                <font font_family="微软雅黑" size="15.75" style="Regular" />
+                <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="7" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="261_红旗.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                <widget type="PICTURE" x="4" y="8" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="261_红旗.png" size_type="Customize" original_size="200, 200" embed_in="False">
                   <text>261_红旗</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAALgSURBVHhe7dy/ihNRGAXwy+ZeN82iINgld4iCiA+gNr6A72Bpa2kr2NjuI6ydYmfrYq9gKdhaaGOn7swOmJgN37phOSSZZP4c5p4fnGaSzNz5Duwm2Zl1IiIiItIH0+vu4DSG45lzA9skXTrNwuw8Zebf2mbpynIhF8WEJ/awtA0VcpY8C9OTyXBsT5O2oDKWU479N3uqtAGVgFJE/8peIk1Cw1+VYjx4ZC+VJqChr0s+CuVs4q7aLqROaOCbJs/2PttupC5o0JUTw0vbnewKDnjLlNHft93KttBgd8n888vv6S23b7uXqtBQa8p7O4RUAQZZa4rMP7VDySbQEJtIPt6f2CFlFTS8BvN95tyeHVoQMLTmE/0bO7xcBgfWXh7bMuQcGFKrmb9N/vtr4m7YcgQNqYuU48FXW1La0HA6TQyHtrQ0waEQpMz8Q1tiWtAwWDL//XIyve0ObKlpQINgSx7DR1tu/6EB0CaG57bs/oInTpwi+iNbej+hk2bO/MfXJ1t6P6GTJs4PW3Z/gZOmTBGv3LEl9xs6eaYUmX9mS00DGgJJjm2JaQGD6DRnf5OfRTe05aUHDaWrlNE/sGWlCw2m9ei6rgtwQC1FVz4CaFBNR9cGr4AGtnMi2GbR1fNroKE1Ed1fsiE0vDqjO7AqQkOsI4t7FG8OR3YY2RQa5q7RXbw7QAPdOjG8s93KtuBgK6bIwk/9J4iaoAFXyijctV1JHeCQN0hyX4u3BQ17TT7YS6UJYOAw87exf5L+WrwtaPiXU2b+nj1dmoYK+J/Ur7PtAiqizAZf7GFp23IRi6/Fo7tmD0kXlguxTdIlFUJGhZBRIWRUCBkVQkaFkFEhZFQIGRVCRoWQUSFkVAgZFUJGhZBRIWRUCBkVQkaFkFEhZFQIGRVCRoWQUSFkVAgZFUJGhZBRIWRUCBkVQkaFkFEhZFQIGRVCRoWQUSFk8uhfLwqJ4YVtEhERERFplHP/AIETN9cxXun0AAAAAElFTkSuQmCC]]></thumb>
                 </widget>
               </widgets>
               <nodes>
-                <node id="9" text="分析任务1" x="642" y="507" width="125" height="32" text_b="26, 2, 97, 28">
+                <node id="9" text="分析任务1" x="637" y="530" width="173" height="42" text_b="38, 2, 133, 38">
                   <style>
                     <back_color>Lavender</back_color>
-                    <round_radius>5</round_radius>
-                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                    <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="6" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
                       <text>94_分析任务</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJeSURBVHhe7d2/i9RAHIbx6QQrbQTBH1iI2FtaCBZiaSlYC1pbWAoWgpWVja21hYitIOgfIBaKhZXYKGgv6JuFCWv2vezebmZ2JvM88GmSSTKg3nF334uBiIiIiIiIiCrtolzBVi7LGdmpa/JT/mJyL+VQ/RZ3I0zrsYx2VtyFSOerHJi7AOk9l5XcQuRzQ/oeiVuEvPrcSeR3XcLppQMtytltcXuIvkh4unSgRbnr/hW4fUThw+BAa/aR20cUfg0OtGYfuX1E4dXgQGv2kdtHFO4ODrQmd24Pyxa5E63I1U1xz1/2TBb9EbcAeR2XRefFLUA+7+W/3olbiDxsbiHS6z9Uud6KuwhpHJO13RJ3MaZjfwayrqvyWdwNsZ3uLzsREREREVEVnZTX4r64wW7uyKH6Ju5GmNYDWZu7EOl8lANzFyC97lPDSm4h8umGTfoYti5DnzuJ/O7JbIata2jdsPUPmc2wdS01M2xdU27/0WyGrWvK7T+azbB1Tbn9R7MZtq6l7+L2Hy1yJ2pTet1v2bp9L2PYujAMWxeEYevC2NxCpMewdUEYti4Ew9aFYNiaiIiIiGizTsglcW9txma6b+Aeka27L+4LG+zuk2z8h3NU3E0wvRcy2gVxFyIt2ylxi5Fe958erOQWIp+H0vdE3CLk1edOIoQ3E3L3H5rVsHUKKXLPiWY1bJ1Cis6Je1bU/Jutx6TKPStq/s3WY1LlnhU1/2brMalyz4qaf7P1mBQ1M2ydwpQxbF0hhq0LwrB1YWxuIdJj2LogDFsXgmHrQjBsTURERERERFRJIfwDTMEHN0CaKKYAAAAASUVORK5CYII=]]></thumb>
                     </widget>
                   </widgets>
                 </node>
-                <node id="10" text="分析任务2" x="642" y="549" width="125" height="32" text_b="26, 2, 97, 28">
+                <node id="10" text="分析任务2" x="637" y="582" width="173" height="42" text_b="38, 2, 133, 38">
                   <style>
                     <back_color>Lavender</back_color>
-                    <round_radius>5</round_radius>
-                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                    <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="6" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
                       <text>94_分析任务</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJeSURBVHhe7d2/i9RAHIbx6QQrbQTBH1iI2FtaCBZiaSlYC1pbWAoWgpWVja21hYitIOgfIBaKhZXYKGgv6JuFCWv2vezebmZ2JvM88GmSSTKg3nF334uBiIiIiIiIiCrtolzBVi7LGdmpa/JT/mJyL+VQ/RZ3I0zrsYx2VtyFSOerHJi7AOk9l5XcQuRzQ/oeiVuEvPrcSeR3XcLppQMtytltcXuIvkh4unSgRbnr/hW4fUThw+BAa/aR20cUfg0OtGYfuX1E4dXgQGv2kdtHFO4ODrQmd24Pyxa5E63I1U1xz1/2TBb9EbcAeR2XRefFLUA+7+W/3olbiDxsbiHS6z9Uud6KuwhpHJO13RJ3MaZjfwayrqvyWdwNsZ3uLzsREREREVEVnZTX4r64wW7uyKH6Ju5GmNYDWZu7EOl8lANzFyC97lPDSm4h8umGTfoYti5DnzuJ/O7JbIata2jdsPUPmc2wdS01M2xdU27/0WyGrWvK7T+azbB1Tbn9R7MZtq6l7+L2Hy1yJ2pTet1v2bp9L2PYujAMWxeEYevC2NxCpMewdUEYti4Ew9aFYNiaiIiIiGizTsglcW9txma6b+Aeka27L+4LG+zuk2z8h3NU3E0wvRcy2gVxFyIt2ylxi5Fe958erOQWIp+H0vdE3CLk1edOIoQ3E3L3H5rVsHUKKXLPiWY1bJ1Cis6Je1bU/Jutx6TKPStq/s3WY1LlnhU1/2brMalyz4qaf7P1mBQ1M2ydwpQxbF0hhq0LwrB1YWxuIdJj2LogDFsXgmHrQjBsTURERERERFRJIfwDTMEHN0CaKKYAAAAASUVORK5CYII=]]></thumb>
                     </widget>
                   </widgets>
                 </node>
               </nodes>
               <lines>
-                <line target="9" begin_side="Bottom" end_side="Left" begin_rect="509, 462, 107, 35" end_rect="642, 507, 125, 32" />
-                <line target="10" begin_side="Bottom" end_side="Left" begin_rect="509, 462, 107, 35" end_rect="642, 549, 125, 32" />
+                <line target="9" begin_side="Bottom" end_side="Left" begin_rect="481, 472, 152, 48" end_rect="637, 530, 173, 42" />
+                <line target="10" begin_side="Bottom" end_side="Left" begin_rect="481, 472, 152, 48" end_rect="637, 582, 173, 42" />
               </lines>
             </node>
-            <node id="11" text="XX专项" x="509" y="591" width="107" height="35" text_b="26, 2, 79, 31" fold_btn_b="496, 602, 13, 13">
+            <node id="11" text="XX专项" x="481" y="634" width="152" height="48" text_b="38, 2, 112, 44" fold_btn_b="468, 652, 13, 13">
               <style>
-                <round_radius>5</round_radius>
-                <font font_family="微软雅黑" size="15.75" style="Regular" />
+                <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="7" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="269_蓝旗.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                <widget type="PICTURE" x="4" y="8" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="269_蓝旗.png" size_type="Customize" original_size="200, 200" embed_in="False">
                   <text>269_蓝旗</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAALMSURBVHhe7dyxa9RgHMbxoIK6mL436GIV3ETBVcFd0f/B0dXRwaGOLg6F9009HAqOXV0V3QVXefPmKHRwkU7qYEHPJvfkCIdXc7m8yS/J84EflCaX9z2+0HLH5QIiIiIi6puNHXsLP5IEI+OejSI3VXpyF7+iNuVB0gm1/Xn55cF5HKI2FIMU5iMOU9OWBMlGmfgpTqOmnBQkH6XdDZxOvpUJko12h8He9DQeRr6UDpKPcW/xUPJh5SAYFSWPcQmqU9Ug2Wj7Rxm3iUtRHdYKMh97gMvRuuoJMhtl7BtclqqqM0g+aid5gMvTqnwEyUYnR6Pt+AKWobK8BcEcv9r/hKWoDN9BCvMCS9JJGgyCiW9jafqX5oO4aRgl34Pt+Cy2QEVtBMlHRfE7bINybQaZj4mfYDskIggmjOw1bGu4JAVJJ9Tua7A1PYXtDY+0IIXZwxaHRXCQ2Rj3CFsdBvFBsrG/L76eXMKW+60bQWajtI2x7f7qUpD56HiM7fdPJ4NgVOTu4Wn0R5eDjHTyq3dv8Xc1iNLuPp5Cv3QuSJ//f6S6EkRF1mHL/SY/yIBeg6REBxnaq/SUyCBD/riqqCA6+Tb4D3SLCWLsdWxp2NoOwpuCFrQVROn4PbZARU0HCaPkx9Xd/XNYnhY1GUS9cnewLC3TUBB+arEsr0G0+4xlqCwvQXRypMaTEEvQKuoOsmHsQ1yaqqgrCO+eqsn6QXh/Ya0qB0nvwB1PruAyVJcqQXiPukcrBeG3OPhXKkj6PSdbH87gIeTT/4Ic/3m6iVOpCcuCKOOe4xRq0mKQ0LgvOERtWAyiIreLQ9QGBhGGQYRhEGEYRBgGEYZBhGEQYRhEGAYRhkGEYRBhGEQYBhGGQYRhEGEYRBgGEYZBhGEQYRhEGAYRhkGEYRBhGEQYBhGGQYRhEGEYRBgGEYZBhGEQYRhEGAYhIiIioiYEwV+j2urtyBvQXwAAAABJRU5ErkJggg==]]></thumb>
                 </widget>
               </widgets>
               <nodes>
-                <node id="12" text="分析任务1" x="642" y="636" width="125" height="32" text_b="26, 2, 97, 28">
+                <node id="12" text="分析任务1" x="637" y="692" width="173" height="42" text_b="38, 2, 133, 38">
                   <style>
                     <back_color>Lavender</back_color>
-                    <round_radius>5</round_radius>
-                    <font font_family="微软雅黑" size="14.25" style="Regular" />
+                    <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="6" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="94_分析任务.png" size_type="Customize" original_size="200, 200" embed_in="False">
                       <text>94_分析任务</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJeSURBVHhe7d2/i9RAHIbx6QQrbQTBH1iI2FtaCBZiaSlYC1pbWAoWgpWVja21hYitIOgfIBaKhZXYKGgv6JuFCWv2vezebmZ2JvM88GmSSTKg3nF334uBiIiIiIiIiCrtolzBVi7LGdmpa/JT/mJyL+VQ/RZ3I0zrsYx2VtyFSOerHJi7AOk9l5XcQuRzQ/oeiVuEvPrcSeR3XcLppQMtytltcXuIvkh4unSgRbnr/hW4fUThw+BAa/aR20cUfg0OtGYfuX1E4dXgQGv2kdtHFO4ODrQmd24Pyxa5E63I1U1xz1/2TBb9EbcAeR2XRefFLUA+7+W/3olbiDxsbiHS6z9Uud6KuwhpHJO13RJ3MaZjfwayrqvyWdwNsZ3uLzsREREREVEVnZTX4r64wW7uyKH6Ju5GmNYDWZu7EOl8lANzFyC97lPDSm4h8umGTfoYti5DnzuJ/O7JbIata2jdsPUPmc2wdS01M2xdU27/0WyGrWvK7T+azbB1Tbn9R7MZtq6l7+L2Hy1yJ2pTet1v2bp9L2PYujAMWxeEYevC2NxCpMewdUEYti4Ew9aFYNiaiIiIiGizTsglcW9txma6b+Aeka27L+4LG+zuk2z8h3NU3E0wvRcy2gVxFyIt2ylxi5Fe958erOQWIp+H0vdE3CLk1edOIoQ3E3L3H5rVsHUKKXLPiWY1bJ1Cis6Je1bU/Jutx6TKPStq/s3WY1LlnhU1/2brMalyz4qaf7P1mBQ1M2ydwpQxbF0hhq0LwrB1YWxuIdJj2LogDFsXgmHrQjBsTURERERERFRJIfwDTMEHN0CaKKYAAAAASUVORK5CYII=]]></thumb>
                     </widget>
                   </widgets>
                 </node>
               </nodes>
               <lines>
-                <line target="12" begin_side="Bottom" end_side="Left" begin_rect="509, 591, 107, 35" end_rect="642, 636, 125, 32" />
+                <line target="12" begin_side="Bottom" end_side="Left" begin_rect="481, 634, 152, 48" end_rect="637, 692, 173, 42" />
               </lines>
             </node>
           </nodes>
           <lines>
-            <line target="2" begin_side="Bottom" end_side="Left" begin_rect="356, 128, 146, 66" end_rect="496, 204, 120, 35" />
-            <line target="5" begin_side="Bottom" end_side="Left" begin_rect="356, 128, 146, 66" end_rect="496, 333, 120, 35" />
-            <line target="8" begin_side="Bottom" end_side="Left" begin_rect="356, 128, 146, 66" end_rect="496, 462, 120, 35" />
-            <line target="11" begin_side="Bottom" end_side="Left" begin_rect="356, 128, 146, 66" end_rect="496, 591, 120, 35" />
+            <line target="2" begin_side="Bottom" end_side="Left" begin_rect="313, 61, 177, 77" end_rect="468, 148, 165, 48" />
+            <line target="5" begin_side="Bottom" end_side="Left" begin_rect="313, 61, 177, 77" end_rect="468, 310, 165, 48" />
+            <line target="8" begin_side="Bottom" end_side="Left" begin_rect="313, 61, 177, 77" end_rect="468, 472, 165, 48" />
+            <line target="11" begin_side="Bottom" end_side="Left" begin_rect="313, 61, 177, 77" end_rect="468, 634, 165, 48" />
           </lines>
         </node>
       </nodes>
