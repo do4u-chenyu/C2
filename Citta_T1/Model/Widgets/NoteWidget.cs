@@ -113,7 +113,7 @@ namespace C2.Model.Widgets
 
         public override Size CalculateSize(MindMapLayoutArgs e)
         {
-                return new Size(20, 20);
+                return new Size(32, 32);
         }
 
         public override string GetTypeID()
