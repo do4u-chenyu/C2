@@ -198,7 +198,7 @@ namespace C2.Dialogs.IAOLab
             saveDialog.Title = "请选择要导出的位置";
             saveDialog.Filter = "文本文件|*.txt";
             saveDialog.FileName = FormType + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
-            saveDialog.ShowDialog();
+            //saveDialog.ShowDialog();
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
                 string firstLine = null;

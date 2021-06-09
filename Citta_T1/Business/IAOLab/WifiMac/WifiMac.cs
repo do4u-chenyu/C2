@@ -19,6 +19,8 @@ namespace C2.IAOLab.WifiMac
         public String MacLocate(String input)
         {
             string url = "http://218.94.117.234:8484/Test01/search.do";
+            if (input == "WiFiMac号")
+                return null;
             string location = GetInfo(url, input,"mac");
             location = location.Replace("\"", String.Empty);            
             return string.Format("{0}\t{1}\n", input,location);
