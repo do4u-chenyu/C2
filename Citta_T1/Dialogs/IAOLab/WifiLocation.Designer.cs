@@ -32,12 +32,12 @@
             this.inputLabel = new System.Windows.Forms.Label();
             this.confirm = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.export = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tipLable = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.import = new System.Windows.Forms.Button();
-            this.export = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,6 +87,16 @@
             this.panel1.Size = new System.Drawing.Size(602, 44);
             this.panel1.TabIndex = 5;
             // 
+            // export
+            // 
+            this.export.Location = new System.Drawing.Point(515, 10);
+            this.export.Name = "export";
+            this.export.Size = new System.Drawing.Size(56, 23);
+            this.export.TabIndex = 12;
+            this.export.Text = "导出";
+            this.export.UseVisualStyleBackColor = true;
+            this.export.Click += new System.EventHandler(this.Export_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -105,7 +115,7 @@
             this.tipLable.Size = new System.Drawing.Size(542, 30);
             this.tipLable.TabIndex = 7;
             this.tipLable.Text = "单次输入格式：04a1518006c2 或 04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最" +
-    "大支持1000条";
+    "大支持5000条";
             // 
             // label1
             // 
@@ -136,16 +146,6 @@
             this.import.Text = "导入";
             this.import.UseVisualStyleBackColor = true;
             this.import.Click += new System.EventHandler(this.Import_Click);
-            // 
-            // export
-            // 
-            this.export.Location = new System.Drawing.Point(515, 10);
-            this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(56, 23);
-            this.export.TabIndex = 12;
-            this.export.Text = "导出";
-            this.export.UseVisualStyleBackColor = true;
-            this.export.Click += new System.EventHandler(this.Export_Click);
             // 
             // WifiLocation
             // 

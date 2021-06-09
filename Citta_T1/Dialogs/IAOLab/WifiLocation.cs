@@ -43,7 +43,7 @@ namespace C2.Dialogs.IAOLab
                     progressBar1.Value = 0;
                     progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                     progressBar1.Minimum = 0;
-                    firstLine = "基站号\t纬度, 经度\t范围\ttgdid\t地址\n";
+                    firstLine = "基站号\t纬度\t经度\t范围\ttgdid\t地址\n";
                     tmpResult.Append(firstLine);
                     foreach (string baseStation in inputArray)
                     {
@@ -76,7 +76,7 @@ namespace C2.Dialogs.IAOLab
                     progressBar1.Value = 0;
                     progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                     progressBar1.Minimum = 0;
-                    firstLine = "WiFiMac号\t纬度, 经度\t范围\ttgdid\t地址\n";
+                    firstLine = "WiFiMac号\t纬度\t经度\t范围\ttgdid\t地址\n";
                     tmpResult.Append(firstLine);
                     foreach (string mac in inputArray)
                     {
@@ -205,10 +205,10 @@ namespace C2.Dialogs.IAOLab
                 switch (FormType)
                 {
                     case "BaseStation":
-                        firstLine = "基站号\t纬度, 经度\t范围\ttgdid\t地址\n";
+                        firstLine = "基站号\t纬度\t经度\t范围\ttgdid\t地址\n";
                         break;
                     case "Wifi":
-                        firstLine = "WiFiMac号\t纬度, 经度\t范围\ttgdid\t地址\n";
+                        firstLine = "WiFiMac号\t纬度\t经度\t范围\ttgdid\t地址\n";
                         break;
                     case "Card":
                         firstLine = "银行卡号\t银行名称\t卡种\t归属地\n";
@@ -225,6 +225,10 @@ namespace C2.Dialogs.IAOLab
                         foreach (string line in lines)
                         {
                             if (line.Contains("银行卡号"))
+                                continue;
+                            if (line.Contains("基站号"))
+                                continue;
+                            if (line.Contains("WiFiMac号"))
                                 continue;
                             fs.WriteLine(line);
                             fs.Flush();

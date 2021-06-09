@@ -25,11 +25,12 @@ namespace C2.Model.Widgets
         int _DisplayIndex;
         int _Padding;
         const int MaxWidgetWidth = 10000;
-        const int MinWidgetWidth = 20;
+        const int MinWidgetWidth = 32;
         const int MaxWidgetHeight = 10000;
-        const int MinWidgetHeight = 20;
+        const int MinWidgetHeight = 32;
 
         protected Bitmap widgetIcon;
+
 
         public Widget()
         {

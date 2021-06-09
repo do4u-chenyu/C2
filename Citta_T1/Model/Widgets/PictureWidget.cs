@@ -270,10 +270,10 @@ namespace C2.Model.Widgets
                     if (Data != null)
                         size = Data.Size;
                     else
-                        return new Size(20, 20);
+                        return new Size(32, 32);
                     break;
                 case PictureSizeType.Customize:
-                    size = new Size(CustomWidth ?? 20, CustomHeight ?? 20);
+                    size = new Size(CustomWidth ?? 32, CustomHeight ?? 32);
                     break;
             }
 
