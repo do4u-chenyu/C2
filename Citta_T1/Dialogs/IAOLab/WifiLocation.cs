@@ -94,7 +94,7 @@ namespace C2.Dialogs.IAOLab
                     progressBar1.Value = 0;
                     progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                     progressBar1.Minimum = 0;
-                    firstLine = "银行卡号\t银行名称\t卡种\t归属地\n";
+                    firstLine = "银行卡号\t卡种\t归属地\n";
                     tmpResult.Append(firstLine);
                     foreach (string bankCard in inputArray)
                     {
@@ -211,7 +211,7 @@ namespace C2.Dialogs.IAOLab
                         firstLine = "WiFiMac号\t纬度\t经度\t范围\ttgdid\t地址\n";
                         break;
                     case "Card":
-                        firstLine = "银行卡号\t银行名称\t卡种\t归属地\n";
+                        firstLine = "银行卡号\t卡种\t归属地\n";
                         break;
                 }
                 string path = saveDialog.FileName;
