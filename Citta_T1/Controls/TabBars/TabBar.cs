@@ -880,8 +880,8 @@ namespace C2.Controls
         {
             base.OnMouseDown(e);
 
-            if (e.Button == MouseButtons.Left)
-            {
+            //if (e.Button == MouseButtons.Left)
+            //{
                 HitResult hr = HitTest(e.X, e.Y);
                 if (HitResult.IsTabItem(hr))
                 {
@@ -903,7 +903,7 @@ namespace C2.Controls
                 }
                 DownHitResult = hr;
                 Capture = true;
-            }
+            //}
 
             MouseDownPoint = new Point(e.X, e.Y);
         }
@@ -953,6 +953,11 @@ namespace C2.Controls
                     {
                         OnTabItemClick(hr.Item);
                     }
+                }
+                else if (HitResult.IsTabItem(hr) && hr.Item == mouseDownItem && e.Button == MouseButtons.Right)
+                {
+                    DownHitResult = HitResult.Empty;
+                    OnTabItemRightClick(hr.Item, new Point(e.X, e.Y));
                 }
             }
 
@@ -1070,6 +1075,14 @@ namespace C2.Controls
             if (tabItem != null)
             {
                 tabItem.OnClick();
+            }
+        }
+
+        void OnTabItemRightClick(TabItem tabItem, Point hitPoint)
+        {
+            if (tabItem != null)
+            {
+                tabItem.ShowTabItemMenu(hitPoint);
             }
         }
         #endregion

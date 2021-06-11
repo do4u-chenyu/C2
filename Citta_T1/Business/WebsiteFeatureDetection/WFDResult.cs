@@ -13,7 +13,7 @@ namespace C2.Business.WebsiteFeatureDetection
         public WFDResult()
         {
             //由于字典无序导致结果文件内容顺序混乱，因此记录固定列，剩余列往后放
-            fixColList = new List<string>() { "url", "cur_url", "title", "prediction", "prediction_", "Fraud_label", "screen_shot", "login", "html_content_id", "html_content" };
+            fixColList = new List<string>() { "url", "cur_url", "title", "prediction", "prediction_", "Fraud_label", "screen_shot", "login", "html_content_id", "html_content", "ip", "ip_address" };
         }
 
         public WFDResult(Dictionary<string, string> resDict) : this()
@@ -25,16 +25,26 @@ namespace C2.Business.WebsiteFeatureDetection
 
         private void SetFixColValue()
         {
+            Dictionary<string, string> predictionCodeDict;
+            Dictionary<string, string> fraudCodeDict;
+            if (!WFDWebAPI.GetInstance().UpdateCategoryDict(out predictionCodeDict, out fraudCodeDict))
+            {
+                predictionCodeDict = Global.WFDPredictionCodeDict;
+                fraudCodeDict = Global.WFDFraudCodeDict;
+            }
+                
             url = ResDict.TryGetValue("url", out string tmpUrl) ? tmpUrl : string.Empty;
             cur_url = ResDict.TryGetValue("cur_url", out string tmpCurUrl) ? tmpCurUrl : string.Empty;
             title = ResDict.TryGetValue("title", out string tmpTitle) ? tmpTitle : string.Empty;
             prediction = ResDict.TryGetValue("prediction", out string tmpPrediction) ? tmpPrediction : string.Empty;
-            prediction_ = Global.WFDPredictionCodeDict.TryGetValue(prediction, out string tmpPre) ? tmpPre : prediction;
-            Fraud_label = Global.WFDFraudCodeDict.TryGetValue(prediction, out string tmpFraud) ? tmpFraud : prediction;
+            prediction_ = predictionCodeDict.TryGetValue(prediction, out string tmpPre) ? tmpPre : prediction;
+            Fraud_label = fraudCodeDict.TryGetValue(prediction, out string tmpFraud) ? tmpFraud : prediction;
             screen_shot = ResDict.TryGetValue("screen_shot", out string tmpScreenShot) ? tmpScreenShot : string.Empty;
             login = ResDict.TryGetValue("login", out string tmpLogin) ? tmpLogin : string.Empty;
             html_content_id = ResDict.TryGetValue("html_content_id", out string tmpContentId) ? tmpContentId : string.Empty;
             html_content = ResDict.TryGetValue("html_content", out string tmpContent) ? tmpContent : string.Empty;
+            ip = ResDict.TryGetValue("ip", out string tmpIp) ? tmpIp : string.Empty;
+            ip_address = ResDict.TryGetValue("ip_address", out string tmpAddress) ? tmpAddress : string.Empty;
 
             if(!ResDict.ContainsKey("prediction_"))
                 ResDict.Add("prediction_", prediction_);
@@ -84,6 +94,8 @@ namespace C2.Business.WebsiteFeatureDetection
         public string login { get; set; }
         public string html_content_id { get; set; }
         public string html_content { get; set; }
+        public string ip { get; set; }
+        public string ip_address { get; set; }
 
 
     }

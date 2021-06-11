@@ -16,28 +16,47 @@
     <chart name="业务拓展视图" type="MindMap">
       <remark>
       </remark>
-      <layout>MIND_MAP</layout>
+      <layout>LOGIC_RIGHT</layout>
       <style>
         <back_color>White</back_color>
         <fore_color>Black</fore_color>
-        <line_color>LightSlateGray</line_color>
-        <border_color>SlateGray</border_color>
-        <node_back_color>LightGray</node_back_color>
+        <line_color>Black</line_color>
+        <border_color>#558097</border_color>
+        <node_back_color>LightSteelBlue</node_back_color>
         <node_fore_color>Black</node_fore_color>
-        <select_color>RoyalBlue</select_color>
-        <hover_color>MediumSlateBlue</hover_color>
-        <link_line_color>Green</link_line_color>
+        <select_color>#558097</select_color>
+        <hover_color>#558097</hover_color>
+        <link_line_color>#558097</link_line_color>
         <widget_margin>2</widget_margin>
         <picture_thumb_size>100, 100</picture_thumb_size>
+        <water_mark_content>
+        </water_mark_content>
+        <water_mark_font font_family="微软雅黑" size="20" style="Bold" />
+        <water_mark_type>DEFAULT</water_mark_type>
+        <water_mark_transparent>30</water_mark_transparent>
       </style>
       <nodes>
-        <node id="1" text="中心主题" x="523" y="377" width="78" height="42" text_b="12, 12, 54, 18">
+        <node id="1" text="中心主题" x="322" y="359" width="186" height="77" text_b="12, 12, 162, 53">
           <style>
-            <back_color>Silver</back_color>
-            <fore_color>Black</fore_color>
-            <border_color>Black</border_color>
+            <back_color>Gainsboro</back_color>
+            <fore_color>MidnightBlue</fore_color>
+            <border_color>#88B8D8</border_color>
             <padding>12</padding>
+            <fill_type>Solid</fill_type>
+            <font font_family="微软雅黑" size="21.75" style="Bold" />
           </style>
+          <nodes>
+            <node id="22" text="子主题 1" x="588" y="373" width="134" height="48" text_b="2, 2, 130, 44">
+              <style>
+                <back_color>LightSteelBlue</back_color>
+                <fore_color>Black</fore_color>
+                <font font_family="微软雅黑" size="18" style="Regular" />
+              </style>
+            </node>
+          </nodes>
+          <lines>
+            <line target="22" begin_side="Right" end_side="Left" begin_rect="322, 359, 186, 77" end_rect="588, 373, 134, 48" />
+          </lines>
         </node>
       </nodes>
     </chart>

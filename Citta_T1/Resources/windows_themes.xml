@@ -230,7 +230,7 @@
 		<fore_color>#000000</fore_color>
 		<line_color>#000000</line_color>
 		<border_color>#558097</border_color>
-		<node_back_color>#9DB9C8</node_back_color>
+		<node_back_color>#b0c4de</node_back_color>
 		<node_fore_color>#000000</node_fore_color>
 		<select_color>#558097</select_color>
 		<hover_color>#558097</hover_color>

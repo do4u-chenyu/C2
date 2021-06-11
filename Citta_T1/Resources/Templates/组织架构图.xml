@@ -36,243 +36,234 @@
         <water_mark_transparent>30</water_mark_transparent>
       </style>
       <nodes>
-        <node id="1" text="XXX净网专项" x="453" y="140" width="217" height="66" text_b="12, 12, 192, 42">
+        <node id="1" text="XXX净网专项" x="429" y="120" width="265" height="77" text_b="12, 12, 240, 53">
           <style>
             <back_color>MediumSeaGreen</back_color>
             <fore_color>Black</fore_color>
             <border_color>#98C8E8</border_color>
-            <round_radius>5</round_radius>
             <padding>12</padding>
             <fill_type>Solid</fill_type>
             <font font_family="微软雅黑" size="21.75" style="Bold" />
           </style>
           <nodes>
-            <node id="2" text="XX1方向" x="198" y="286" width="133" height="39" text_b="26, 2, 104, 35" fold_btn_b="258, 325, 13, 13">
+            <node id="2" text="XX1方向" x="113" y="277" width="171" height="48" text_b="38, 2, 130, 44" fold_btn_b="192, 325, 13, 13">
               <style>
                 <back_color>DarkSeaGreen</back_color>
-                <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="9" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="421_方向 .png" size_type="Customize" original_size="200, 200" embed_in="False">
+                <widget type="PICTURE" x="4" y="8" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="421_方向 .png" size_type="Customize" original_size="200, 200" embed_in="False">
                   <text>421_方向 </text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJSSURBVHhe7d3NThsxFMXxPAiQLhjx/i/BQ3TbKKWl6oZ1oVg6V4qQEWP72vHH/yedDcx4bI6uhqxyAAAAAAAAABp5ut3+/bm5fws5H7fv+jFauyziMufjw7MuQQufFXEZXYqa9hRh+X1z/6jb4C2lCItuhaecIixaAh5Kigh5f6mftBRKlBZh0XLI5VVECNNRwLMIi5ZGihpFhDAdiWoVYdFj8JXaRYQwHTu0KMKiRyKmZREhTMcnWhdh0eNhrlVECNNx4ZpFWLSVtfVQRMjy09FLERZtaz29FRGy5HT0WIRFW1xDz0WELDMdvRdh0XbnNUoRIVNPx0hFWLT1uYxYRMh00zFqERYdY3yjFxEyxXTMUIRFRxrTTEWEDDsdsxVh0fHGMWsRIUNNx8xFWHTUvq1QREj307FKERYduz+n4/YS2/DM6XY6zt+2v7ENzx4dvz+xzc6ert8dsQ3PHh29Tz8Xe5EP8bkjtvFZoyP3b4V/eYf6VN6D093Dr9gf0it6DPaqWQjTkaFmIXoEUtQqhOnIVKsQLY9UNQphOgrUKERLI4d3IUxHIe9CtCxyeRbCdDjwLERLooRXIUyHE69CtBxKeRTCdDjyKERLwUNpIUyHs9JCtAy8lBTCdFRQUoiWgKfcQpiOSnIL0e3wllMI01FRTiG6FTWkFsJ0VJZaiG5DLSmFMB0NpBSiW1DT3kKYjkb2FqLLUdueQpiOhvYUokvRwleFMB2Nhe8GjBVh0WVoKVZEyPt0/NAlaO1jGU+326t+hWvi600BAAAAAIC3w+E/RzOCJ0YldvUAAAAASUVORK5CYII=]]></thumb>
                 </widget>
               </widgets>
               <nodes>
-                <node id="3" text="负责人" x="214" y="405" width="101" height="35" text_b="26, 2, 72, 31" fold_btn_b="258, 440, 13, 13">
+                <node id="3" text="负责人" x="133" y="405" width="131" height="42" text_b="38, 2, 90, 38" fold_btn_b="192, 447, 13, 13">
                   <style>
                     <back_color>Honeydew</back_color>
-                    <round_radius>5</round_radius>
                     <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="7" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="377_人物.png" size_type="Customize" original_size="200, 200" embed_in="False">
-                      <text>377_人物</text>
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="202_头像.png" size_type="Customize" original_size="512, 512" embed_in="False">
+                      <text>202_头像</text>
+                      <thumb><![CDATA[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]]></thumb>
                     </widget>
                   </widgets>
                   <nodes>
-                    <node id="4" text="子任务1" x="171" y="520" width="89" height="56" text_b="2, 2, 85, 31">
+                    <node id="4" text="子任务1" x="83" y="527" width="111" height="68" text_b="2, 2, 106, 38">
                       <style>
                         <back_color>Honeydew</back_color>
-                        <round_radius>5</round_radius>
                         <font font_family="微软雅黑" size="15.75" style="Regular" />
                       </style>
                       <widgets>
-                        <widget type="PROGRESSBAR" x="23" y="35" width="42" height="17" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="30" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
+                        <widget type="PROGRESSBAR" x="29" y="42" width="51" height="22" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="30" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
                       </widgets>
                     </node>
-                    <node id="5" text="子任务2" x="270" y="520" width="89" height="56" text_b="2, 2, 85, 31">
+                    <node id="5" text="子任务2" x="204" y="527" width="111" height="68" text_b="2, 2, 106, 38">
                       <style>
                         <back_color>Honeydew</back_color>
-                        <round_radius>5</round_radius>
                         <font font_family="微软雅黑" size="15.75" style="Regular" />
                       </style>
                       <widgets>
-                        <widget type="PROGRESSBAR" x="23" y="35" width="42" height="17" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="70" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
+                        <widget type="PROGRESSBAR" x="29" y="42" width="51" height="22" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="70" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
                       </widgets>
                     </node>
                   </nodes>
                   <lines>
-                    <line target="4" begin_side="Bottom" end_side="Top" begin_rect="214, 405, 101, 48" end_rect="171, 520, 89, 56" />
-                    <line target="5" begin_side="Bottom" end_side="Top" begin_rect="214, 405, 101, 48" end_rect="270, 520, 89, 56" />
+                    <line target="4" begin_side="Bottom" end_side="Top" begin_rect="133, 405, 131, 55" end_rect="83, 527, 111, 68" />
+                    <line target="5" begin_side="Bottom" end_side="Top" begin_rect="133, 405, 131, 55" end_rect="204, 527, 111, 68" />
                   </lines>
                 </node>
               </nodes>
               <lines>
-                <line target="3" begin_side="Bottom" end_side="Top" begin_rect="198, 286, 133, 52" end_rect="214, 405, 101, 35" />
+                <line target="3" begin_side="Bottom" end_side="Top" begin_rect="113, 277, 171, 61" end_rect="133, 405, 131, 42" />
               </lines>
             </node>
-            <node id="6" text="XX2方向" x="396" y="286" width="133" height="39" text_b="26, 2, 104, 35" fold_btn_b="456, 325, 13, 13">
+            <node id="6" text="XX2方向" x="355" y="277" width="171" height="48" text_b="38, 2, 130, 44" fold_btn_b="434, 325, 13, 13">
               <style>
                 <back_color>DarkSeaGreen</back_color>
-                <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="9" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="425_方向.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                <widget type="PICTURE" x="4" y="8" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="425_方向.png" size_type="Customize" original_size="200, 200" embed_in="False">
                   <text>425_方向</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJPSURBVHhe7d3NahsxFMXxsd//vfoQXbab0DgFb8cmteBcMEUhI+lK1sf/B2fjzGikHF+crLwBAAAAAAAAjdw+TvfP6/YZsl9OP/UyWnsu4jn7+/mPLkELXxXxHF2Kmo4UYblftx+6Dd5SirDoVnjKKcKiJeChpIiQ/eP8W0uhRGkRFi2HXF5FhDAdBTyLsGhppKhRRAjTkahWERY9Bt+pXUQI03FAiyIseiRiWhYRwnR8oXURFj0e5lVFhDAdT15ZhEVbWVsPRYQsPx29FGHRttbTWxEhS05Hj0VYtMU19FxEyDLT0XsRFm13XqMUETL1dIxUhEVbn8uIRYRMNx2jFmHRMcY3ehEhU0zHDEVYdKQxzVREyLDTMVsRFh1vHLMWETLUdMxchEVH7dsKRYR0Px2rFGHRsfvzeKdcYxueOd1Ox/5+vsQ2PHt0/P7ENjt7uv7siG149ujofXp8kN9im541Q/zfEdv4rNGR+7fCn7xDTEdP9sv5LfaL9Ioeg6NqFsJ0ZKhZiB6BFLUKYToy1SpEyyNVjUKYjgI1CtHSyOFdCNNRyLsQLYtcnoUwHQ48C9GSKOFVCNPhxKsQLYdSHoUwHY48CtFS8FBaCNPhrLQQLQMvJYUwHRWUFKIl4Cm3EKajktxCdDu85RTCdFSUU4huRQ2phTAdlaUWottQS0ohTEcDKYXoFtR0tBCmo5Gjhehy1HakEKajoSOF6FK08F0hTEdj4bsBY0VYdBlaihUR8piOX7oErf1fxu3v6a4f4ZX4elMAAAAAAOBt2/4BaGEVCJgO61kAAAAASUVORK5CYII=]]></thumb>
                 </widget>
               </widgets>
               <nodes>
-                <node id="7" text="负责人" x="412" y="405" width="101" height="35" text_b="26, 2, 72, 31" fold_btn_b="456, 440, 13, 13">
+                <node id="7" text="负责人" x="375" y="405" width="131" height="42" text_b="38, 2, 90, 38" fold_btn_b="434, 447, 13, 13">
                   <style>
                     <back_color>Honeydew</back_color>
-                    <round_radius>5</round_radius>
                     <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="7" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="385_人物.png" size_type="Customize" original_size="200, 200" embed_in="False">
-                      <text>385_人物</text>
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="203_头像.png" size_type="Customize" original_size="512, 512" embed_in="False">
+                      <text>203_头像</text>
+                      <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAioSURBVHhe7V1baBxlFF4U1GeR3WmTWi9Va59896G2ilhBRVAUKS0VfFUQFYsIRR8FBbFe8FGkpNYbgiIKGsFms5tUamPTpmJvtukl6VV6STLze75/T9JN9ux15r/sZD74IGRn/nPOd2b+mfmvOV+hVO66aGdvjxoMnlblwpawFPSFg8FAWMqfob+nVSlQjYhj9LH6nKAPZaAsXSaVzWYyNEJUWrosKgcbwnKwLSzmj4TFIJLEjkOUqcsmG7AFm2w+AxAVe3qjUv4lupr76UqekUQ0SdiEbfgAX9itxQU1suqGqLzk4XCwsIPEuCQJ5YLwBT7BN/jI7qYX0fcrboxKhU1UZYxS3Z54dZQU4Rt8hK/wmd1PD/QdMRhspOphTBLAZ8Jn+J6aOyYqF9bQFVf0+Y5oRn3HUAxRKVjNYXUf1NCSW8Ji4TN6qwmlILuRiAUxITYOsztAr5NP0RV1UgoqDURsiJHD9Rfql+U3haXChya+H3wjf89sjcY8fejTbbxSlfJDkvPpJsVMsbMMfoAeduvobWRcdjj9ROxRsbCW5XCLaCBY79PHnSvODOYv04W5nmVxA3LglcXwvGiV0AKasDx2Qbfoq/S2kZpX2qQITaANy2QH+s7IklGXOim27hTUk1k11ZxcfZl9ppCBdSE9vCQHMtYSWhl7+8K7tnevtuUepYaWKzV8V4VDd9D/lsnHOqLWLOnvFHyBe/PRt2ulUodeU+rcT0pdPa7UzAU1h/CKUlOnlTr/m1KH36RjV8llWGd+KNEvejSHyIYsstyr1NG3KAHnWP0WgGP/fYfunNvkMi0yLAcfsJzxoBsKXT/Eh++mq76fVe4AF0t0t9wrl22J+iEft0ESzcxo2ZQMWCOeCxA0Li6WK4mVbFii1jJO071u+xcKtsrxj1jRBHDqc9mGRUJTlrc96J4+151LI2uVimZYzQQQhUqNPiHbskRoSp8P7fU8ov+Ybq+iVKBVTnzFSiaIye9kWxaptW2nj14PSHDdBz58D70lXWQVEwTKRNmSTUuEttCY5W4MDHuh11z3o0P2P8cKGsC+Z2WbFgmNWxpihLFIUgHWefgNVs8ADr0u27RMaM2yy9DPjmJ+VDrZOo+9x+oZAJIt2bTMsBTsbjjwWw+hFE50wmPvsnoG4ElCQGjO8tcC41qlk5zQZJX1z4uyTQeE5iz/fETFm3u96hs/+DKrZwD7npFtOiA0h/achmvAcHzpBGcc28jqGcDex2WbjgjtOQ3XQJnqlw52RohmCnsekG06IrTnNFSAWUT0xLc+WaYu/35BRRcGWD0DOPcr3YGbZNsOCO3nzeSKisEG6UAnLC9XamqClTOIqZNe9S4iB5wOqq7KwTbpICccXqlUNMWqGQR6Fx03x1cTOdDJUNtz12MSpHSQE1q7Q8gGbEk+OKDOAeUih2nCznsEF3Lia1bNICbJhmTbEXWPIuUip+eBCwc45V+PUJVyiZUzAJQ98pBs2yUpFzk9oV760TXpTctIUlDmAX/esOaRckHfH0Gf+KMPnNjBKiaIyW9lWx4QucAQnwHpRy+YZH/6LCa+lG15QOQCAxnOSj96waNvs4oJYvxj2ZYHRC5y4aBHX+gLaaKB8dBm2ZYHRC5y0g/ecGQNKRhVhEwEVNbIg7ItT+h3QkpLlLp8gMVMAFcOVsoUbflBzxNCPLKF1UwAKEuy4RH9T0j5VrqyD7OiMYAyUJZkwyP6nxBw76NU/V9lZTsAzkUZUtmesTsSAp7+gtXtADhXKtNDdk9CTm1jdTsAzpXK9JBZQjyj3x+G1VwECdEfhl43nVRzMSREN5343LhYzTM/sLodAOdKZXrGSuOiz83vs9yzJl4/O85FGVLZHlE3v3vbQaW5VKmx9ZWpznGBMvZjGgKVKdrygOig8qoLd3hFRbTj7yt1/vf2pkC3CpSJsmEDtmBT8sUBo1LhscogB5ezpYbvVOrA80pNfkNiVS0CYAuwCdvwAb5IPlogclAZ5OBqGNCf9ys1/glVJadYGQ8AX06QT/BN8tkg54YBAVYHyu1ZXRnmE02zCh4CvsFH+CrFYIBzA+UAK0NJ/7iPgtzudyIWQieGfIbvUkwJct5QUuODrbFYzLSBB7QtwHd0J0uxJUBoX7NthpHpCHhI4oGZaDesK1AMiMXAg79mOgKQ+IQdzAX/bxcHkyIgpoTnuYsTdrCZCaZXSSd0RBOrMPgCxCbF3AGhed2NZBKb9Dn6JHmdhmqqHig2xCjF3ibrTvoEEpsWfeJTdjzFQIxS7G2y4bToxBYOOPsje51iIEYp9jZIb1eNFw4AElla4+zP7HWKgRil2Ntg06U1gEQWn8kS0pTQuOX9rWIvz5QlpCF1Q2KryzMBsRcwyxLSkFrbdhYwA2It8ZclpC47WuJvFliwUSq0KbOE1CU0ZXnbR8fLxGYJEam1jLvDW0cLKWcJqaGe9pzUzm5YJlsyUpdZQmoIDVnO+MBC8m0txp8lZAETXowfoLqv9e0qhm5Xc1tIpJWIUYp9AbVmprbVw+Yk2YYurdPohi6zmMm2PGqJiT7Em4E+bLJNwRoQ2kAjlssOsm3zZOpk2N42bxb6Tsmqrznqasr2nbEQ2darFeq+cVvPjGbQb1++7eBmkYjd+NtUu8C7tjc7uVmlh9t3zwJfo2Exv3UxPFcQI2L1doP7augGSdebiRkkYvPmedEq0MyMtn+6klLzaoxYdB9R3CZ0l0DvGF1RRWLXVmPwHTEgFg6ru4H+Yz1wohS430qpTcJn+N52H3g3AMNeMBaJrrbdPt8xfEfshq8tD9XpZmC0HoZQYlyrTx+V8AU+6SG1zUYUphUY+Y3h+CRGP1UP1pf5gE3Yhg91R6EvVmAWEb1ObsB8O0yCNPE9w98PR2ADtmpmLmWQoau1nb09eh59ubCFruQ+qtcH6Go+Q39PS2JXE8foY/U5QR/KwDxwXaa31VEu9z9s64B9kCuQ0gAAAABJRU5ErkJggg==]]></thumb>
                     </widget>
                   </widgets>
                   <nodes>
-                    <node id="8" text="子任务1" x="369" y="520" width="89" height="56" text_b="2, 2, 85, 31">
+                    <node id="8" text="子任务1" x="325" y="527" width="111" height="68" text_b="2, 2, 106, 38">
                       <style>
                         <back_color>Honeydew</back_color>
-                        <round_radius>5</round_radius>
                         <font font_family="微软雅黑" size="15.75" style="Regular" />
                       </style>
                       <widgets>
-                        <widget type="PROGRESSBAR" x="23" y="35" width="42" height="17" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="10" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
+                        <widget type="PROGRESSBAR" x="29" y="42" width="51" height="22" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="10" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
                       </widgets>
                     </node>
-                    <node id="9" text="子任务2" x="468" y="520" width="89" height="56" text_b="2, 2, 85, 31">
+                    <node id="9" text="子任务2" x="446" y="527" width="111" height="68" text_b="2, 2, 106, 38">
                       <style>
                         <back_color>Honeydew</back_color>
-                        <round_radius>5</round_radius>
                         <font font_family="微软雅黑" size="15.75" style="Regular" />
                       </style>
                       <widgets>
-                        <widget type="PROGRESSBAR" x="23" y="35" width="42" height="17" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="50" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
+                        <widget type="PROGRESSBAR" x="29" y="42" width="51" height="22" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="50" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
                       </widgets>
                     </node>
                   </nodes>
                   <lines>
-                    <line target="8" begin_side="Bottom" end_side="Top" begin_rect="412, 405, 101, 48" end_rect="369, 520, 89, 56" />
-                    <line target="9" begin_side="Bottom" end_side="Top" begin_rect="412, 405, 101, 48" end_rect="468, 520, 89, 56" />
+                    <line target="8" begin_side="Bottom" end_side="Top" begin_rect="375, 405, 131, 55" end_rect="325, 527, 111, 68" />
+                    <line target="9" begin_side="Bottom" end_side="Top" begin_rect="375, 405, 131, 55" end_rect="446, 527, 111, 68" />
                   </lines>
                 </node>
               </nodes>
               <lines>
-                <line target="7" begin_side="Bottom" end_side="Top" begin_rect="396, 286, 133, 52" end_rect="412, 405, 101, 35" />
+                <line target="7" begin_side="Bottom" end_side="Top" begin_rect="355, 277, 171, 61" end_rect="375, 405, 131, 42" />
               </lines>
             </node>
-            <node id="10" text="XX3方向" x="594" y="286" width="133" height="39" text_b="26, 2, 104, 35" fold_btn_b="654, 325, 13, 13">
+            <node id="10" text="XX3方向" x="597" y="277" width="171" height="48" text_b="38, 2, 130, 44" fold_btn_b="676, 325, 13, 13">
               <style>
                 <back_color>DarkSeaGreen</back_color>
-                <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="9" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="429_方向.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                <widget type="PICTURE" x="4" y="8" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="429_方向.png" size_type="Customize" original_size="200, 200" embed_in="False">
                   <text>429_方向</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJeSURBVHhe7ddRahsxFIVhLyU7KIyn733KU8GeBXQFdtK95KGQrCnQrXQHbQXnQiAKmZGuZEnzf3BeYo1GyuGS+AAAAAAAAABUcl2Ozw/L/PeyzK8/T1/u9GPUZkW8y3m61xLU8GERb6KlKGlNERY9ghK2FGHRo/CUUoRFW8BDThEhj+fpqK2QI7cIi7ZDKq8iQpiODJ5FWLQ1tihRRAjTsVGpIix6DT5TuogQpmOFGkVY9ErE1CwihOn4QO0iLHo9zK2KCGE63rhlERYdZd9aKCJk99PRShEWHWt/WisiZJfT0WIRFh1xH1ouImQ309F6ERYdd1y9FBEy9HT0VIRFRx9Lj0WEDDcdvRZh0TX613sRIUNMxwhFWHSlPo1UREi30zFaERZdrx+jFhHS1XSMXIRFV23bHooIaX469lKERdduz8Np/hE78Mhpdjoez1+/xw48enT99lyX6XfswCOn6b8dsQOPHl29Tdfz/BQ79Kjp4ntH7OCjRldu33WZf/3/b+tP7BKjpKtv5S24nI7fYr9Ir+g1WKtkIUxHgpKF6BXYolQhTEeiUoVoe2xVohCmI0OJQrQ1UngXwnRk8i5E2yKVZyFMhwPPQrQlcngVwnQ48SpE2yGXRyFMhyOPQrQVPOQWwnQ4yy1E28BLTiFMRwE5hWgLeEothOkoJLUQPQ5vKYUwHQWlFKJHUcLWQpiOwrYWosdQypZCmI4KthSiR1DS2kKYjkrWFqLlKG1NIUxHRWsK0VLU8FkhTMcNxIqwaAlqihURclmmSUtQ2/tCji/6CAAAAAAAACM5HP4BHzRMEm3Dm3gAAAAASUVORK5CYII=]]></thumb>
                 </widget>
               </widgets>
               <nodes>
-                <node id="11" text="负责人" x="610" y="405" width="101" height="35" text_b="26, 2, 72, 31" fold_btn_b="654, 440, 13, 13">
+                <node id="11" text="负责人" x="617" y="405" width="131" height="42" text_b="38, 2, 90, 38" fold_btn_b="676, 447, 13, 13">
                   <style>
                     <back_color>Honeydew</back_color>
-                    <round_radius>5</round_radius>
                     <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="7" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="397_人物.png" size_type="Customize" original_size="200, 200" embed_in="False">
-                      <text>397_人物</text>
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="206_头像.png" size_type="Customize" original_size="512, 512" embed_in="False">
+                      <text>206_头像</text>
+                      <thumb><![CDATA[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]]></thumb>
                     </widget>
                   </widgets>
                   <nodes>
-                    <node id="12" text="子任务1" x="567" y="520" width="89" height="56" text_b="2, 2, 85, 31">
+                    <node id="12" text="子任务1" x="567" y="527" width="111" height="68" text_b="2, 2, 106, 38">
                       <style>
                         <back_color>Honeydew</back_color>
-                        <round_radius>5</round_radius>
                         <font font_family="微软雅黑" size="15.75" style="Regular" />
                       </style>
                       <widgets>
-                        <widget type="PROGRESSBAR" x="23" y="35" width="42" height="17" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="60" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
+                        <widget type="PROGRESSBAR" x="29" y="42" width="51" height="22" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="60" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
                       </widgets>
                     </node>
-                    <node id="13" text="子任务2" x="666" y="520" width="89" height="56" text_b="2, 2, 85, 31">
+                    <node id="13" text="子任务2" x="688" y="527" width="111" height="68" text_b="2, 2, 106, 38">
                       <style>
                         <back_color>Honeydew</back_color>
-                        <round_radius>5</round_radius>
                         <font font_family="微软雅黑" size="15.75" style="Regular" />
                       </style>
                       <widgets>
-                        <widget type="PROGRESSBAR" x="23" y="35" width="42" height="17" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="20" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
+                        <widget type="PROGRESSBAR" x="29" y="42" width="51" height="22" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="20" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
                       </widgets>
                     </node>
                   </nodes>
                   <lines>
-                    <line target="12" begin_side="Bottom" end_side="Top" begin_rect="610, 405, 101, 48" end_rect="567, 520, 89, 56" />
-                    <line target="13" begin_side="Bottom" end_side="Top" begin_rect="610, 405, 101, 48" end_rect="666, 520, 89, 56" />
+                    <line target="12" begin_side="Bottom" end_side="Top" begin_rect="617, 405, 131, 55" end_rect="567, 527, 111, 68" />
+                    <line target="13" begin_side="Bottom" end_side="Top" begin_rect="617, 405, 131, 55" end_rect="688, 527, 111, 68" />
                   </lines>
                 </node>
               </nodes>
               <lines>
-                <line target="11" begin_side="Bottom" end_side="Top" begin_rect="594, 286, 133, 52" end_rect="610, 405, 101, 35" />
+                <line target="11" begin_side="Bottom" end_side="Top" begin_rect="597, 277, 171, 61" end_rect="617, 405, 131, 42" />
               </lines>
             </node>
-            <node id="14" text="XX4方向" x="792" y="286" width="133" height="39" text_b="26, 2, 104, 35" fold_btn_b="852, 325, 13, 13">
+            <node id="14" text="XX4方向" x="839" y="277" width="171" height="48" text_b="38, 2, 130, 44" fold_btn_b="918, 325, 13, 13">
               <style>
                 <back_color>DarkSeaGreen</back_color>
-                <round_radius>5</round_radius>
                 <font font_family="微软雅黑" size="18" style="Regular" />
               </style>
               <widgets>
-                <widget type="PICTURE" x="4" y="9" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="440_方向 .png" size_type="Customize" original_size="200, 200" embed_in="False">
-                  <text>440_方向 </text>
+                <widget type="PICTURE" x="4" y="8" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="433_方向.png" size_type="Customize" original_size="200, 200" embed_in="False">
+                  <text>433_方向</text>
+                  <thumb><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJXSURBVHhe7dfRaSMxFIVhdzHx2zZgD2Qb2Kc8pYXU4HHSSR4Wdmta2FbSQQLiGENQ8Ei6V5E0/wfnxdFopBwuxjsAAAAAAACgkul4/rOfz+/7efk3zacf+hi1XYv4nOVBS1DD10Vco6XwtKaIS/QIPKQUcYkehaWcIi7RFrBQUkTI4eWntkKJ4iIUbYdcVkWEMB35TItQtDVSeBQRwnSkcStC0Wtwi3cRIUzHbVWKUPRKxNQsIoTpiKtehKLX4+K7ighhOq6+tQhFR9m2FooI2fp0NFOEomNtT2tFhGxxOposQtERt6HlIkK2Mh3NF6HouOPqpYiQkaejqyIUHX0sPRYRMtp0dFuEomv0r/ciQkaYjiGKUHSlPo1UREiv0zFcEYqu149RiwjpaTqGLkLRVdu2hSJCWp+OzRSh6NrtuTsuT7EDD51Wp2M6Pj9GDzx4dP32TIfz/9iBh07L3x3RAw8eXb1Nd/P5NXboYdPD747owQeNrty+/bz83h9Ob7FLDJOefpW3YJpPv6L/SKPoNVjLtRCmI51nIXoFUrgVwnTk8SpE2yOVSyFMRz6PQrQ1cpgXwnSUsS5E2yKXaSFMRznLQrQlSpgVwnTYsCpE26GUSSFMhx2LQrQVLBQXwnTYKi1E28BKUSFMh72SQrQFLGUXwnT4yC1Ej8NaViFMh5+cQvQoPCQXwnT4Si1Ej8FLUiFMh7+UQvQIPK0uhOmoY20hWg5vqwphOupZU4iWooabhTAd9UWLULQENcWKCDks91qC2j6XMR2Xv/oTAAAAAAAARrLbfQCu6mV4ZQxGUwAAAABJRU5ErkJggg==]]></thumb>
                 </widget>
               </widgets>
               <nodes>
-                <node id="15" text="负责人" x="808" y="405" width="101" height="35" text_b="26, 2, 72, 31" fold_btn_b="852, 440, 13, 13">
+                <node id="15" text="负责人" x="859" y="405" width="131" height="42" text_b="38, 2, 90, 38" fold_btn_b="918, 447, 13, 13">
                   <style>
                     <back_color>Honeydew</back_color>
-                    <round_radius>5</round_radius>
                     <font font_family="微软雅黑" size="15.75" style="Regular" />
                   </style>
                   <widgets>
-                    <widget type="PICTURE" x="4" y="7" width="20" height="20" align="Left" hyperlink="" display_index="6" padding="0" image_url="393_人物.png" size_type="Customize" original_size="200, 200" embed_in="False">
-                      <text>393_人物</text>
+                    <widget type="PICTURE" x="4" y="5" width="32" height="32" align="Left" hyperlink="" display_index="6" padding="0" image_url="204_头像.png" size_type="Customize" original_size="512, 512" embed_in="False">
+                      <text>204_头像</text>
+                      <thumb><![CDATA[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]]></thumb>
                     </widget>
                   </widgets>
                   <nodes>
-                    <node id="16" text="子任务1" x="765" y="520" width="89" height="56" text_b="2, 2, 85, 31">
+                    <node id="16" text="子任务1" x="809" y="527" width="111" height="68" text_b="2, 2, 106, 38">
                       <style>
                         <back_color>Honeydew</back_color>
-                        <round_radius>5</round_radius>
                         <font font_family="微软雅黑" size="15.75" style="Regular" />
                       </style>
                       <widgets>
-                        <widget type="PROGRESSBAR" x="23" y="35" width="42" height="17" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="40" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
+                        <widget type="PROGRESSBAR" x="29" y="42" width="51" height="22" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="40" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
                       </widgets>
                     </node>
-                    <node id="17" text="子任务2" x="864" y="520" width="89" height="56" text_b="2, 2, 85, 31">
+                    <node id="17" text="子任务2" x="930" y="527" width="111" height="68" text_b="2, 2, 106, 38">
                       <style>
                         <back_color>Honeydew</back_color>
-                        <round_radius>5</round_radius>
                         <font font_family="微软雅黑" size="15.75" style="Regular" />
                       </style>
                       <widgets>
-                        <widget type="PROGRESSBAR" x="23" y="35" width="42" height="17" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="90" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
+                        <widget type="PROGRESSBAR" x="29" y="42" width="51" height="22" align="Bottom" hyperlink="" display_index="7" padding="0" max="100" min="0" value="90" show_text="True" auto_calculation="False" color="PaleGreen" back_color="White" fore_color="Black" />
                       </widgets>
                     </node>
                   </nodes>
                   <lines>
-                    <line target="16" begin_side="Bottom" end_side="Top" begin_rect="808, 405, 101, 48" end_rect="765, 520, 89, 56" />
-                    <line target="17" begin_side="Bottom" end_side="Top" begin_rect="808, 405, 101, 48" end_rect="864, 520, 89, 56" />
+                    <line target="16" begin_side="Bottom" end_side="Top" begin_rect="859, 405, 131, 55" end_rect="809, 527, 111, 68" />
+                    <line target="17" begin_side="Bottom" end_side="Top" begin_rect="859, 405, 131, 55" end_rect="930, 527, 111, 68" />
                   </lines>
                 </node>
               </nodes>
               <lines>
-                <line target="15" begin_side="Bottom" end_side="Top" begin_rect="792, 286, 133, 52" end_rect="808, 405, 101, 35" />
+                <line target="15" begin_side="Bottom" end_side="Top" begin_rect="839, 277, 171, 61" end_rect="859, 405, 131, 42" />
               </lines>
             </node>
           </nodes>
           <lines>
-            <line target="2" begin_side="Bottom" end_side="Top" begin_rect="453, 140, 217, 66" end_rect="198, 286, 133, 39" />
-            <line target="6" begin_side="Bottom" end_side="Top" begin_rect="453, 140, 217, 66" end_rect="396, 286, 133, 39" />
-            <line target="10" begin_side="Bottom" end_side="Top" begin_rect="453, 140, 217, 66" end_rect="594, 286, 133, 39" />
-            <line target="14" begin_side="Bottom" end_side="Top" begin_rect="453, 140, 217, 66" end_rect="792, 286, 133, 39" />
+            <line target="2" begin_side="Bottom" end_side="Top" begin_rect="429, 120, 265, 77" end_rect="113, 277, 171, 48" />
+            <line target="6" begin_side="Bottom" end_side="Top" begin_rect="429, 120, 265, 77" end_rect="355, 277, 171, 48" />
+            <line target="10" begin_side="Bottom" end_side="Top" begin_rect="429, 120, 265, 77" end_rect="597, 277, 171, 48" />
+            <line target="14" begin_side="Bottom" end_side="Top" begin_rect="429, 120, 265, 77" end_rect="839, 277, 171, 48" />
           </lines>
         </node>
       </nodes>

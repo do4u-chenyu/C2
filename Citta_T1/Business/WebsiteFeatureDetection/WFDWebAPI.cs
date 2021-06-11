@@ -1,5 +1,6 @@
 ﻿using C2.Dialogs.WebsiteFeatureDetection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,11 @@ namespace C2.Business.WebsiteFeatureDetection
         string ProClassifierUrl;
         string TaskResultUrl;
         string ScreenshotUrl;
+        string CategoryUrl;
+
+        Dictionary<string, string> PredictionCodeDict;
+        Dictionary<string, string> FraudCodeDict;
+
         HttpHandler httpHandler;
 
         private static WFDWebAPI WFDWebAPIInstance;
@@ -39,6 +45,8 @@ namespace C2.Business.WebsiteFeatureDetection
         {
             UserName = string.Empty;
             Token = string.Empty;
+            PredictionCodeDict = new Dictionary<string, string>();
+            FraudCodeDict = new Dictionary<string, string>();
 
             //APIUrl = "https://10.1.203.15:12347/apis/";//测试
             APIUrl = "https://113.31.119.85:53374/apis/";//正式
@@ -46,6 +54,7 @@ namespace C2.Business.WebsiteFeatureDetection
             ProClassifierUrl = APIUrl + "pro_classifier_api";
             TaskResultUrl = APIUrl + "detection/task/result";
             ScreenshotUrl = APIUrl + "Screenshot";
+            CategoryUrl = APIUrl + "category";
 
             httpHandler = new HttpHandler();
         }
@@ -111,6 +120,62 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 result.RespMsg = ex.Message;
             }
+            return true;
+        }
+
+        public bool UpdateCategoryDict(out Dictionary<string, string> predictionCodeDict, out Dictionary<string, string> fraudCodeDict)
+        {
+            predictionCodeDict = PredictionCodeDict;
+            fraudCodeDict = FraudCodeDict;
+
+            if (predictionCodeDict.Count > 0 && fraudCodeDict.Count > 0)//上次查询有值，后面都不需要查了
+                return true;
+
+            if (!ReAuthBeforeQuery())
+                return false;
+
+            Dictionary<string, string> pairs = new Dictionary<string, string>();
+            try
+            {
+                Response resp = httpHandler.Post(CategoryUrl, pairs, Token);
+                if (resp.StatusCode != HttpStatusCode.OK)
+                    return false;
+
+                Dictionary<string, string> resDict = resp.ResDict;
+
+                if (resDict.TryGetValue("operate_status", out string status) && status == "success")
+                {
+                    resDict.TryGetValue("data", out string datas);
+                    GenCodeDict(datas);
+                    predictionCodeDict = PredictionCodeDict;
+                    fraudCodeDict = FraudCodeDict;
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool GenCodeDict(string datas)
+        {
+            PredictionCodeDict.Clear();
+            FraudCodeDict.Clear();
+
+            JArray json = JArray.Parse(datas);
+            foreach (JObject item in json)
+            {
+                Dictionary<string,string> tmpDict = item.ToObject<Dictionary<string, string>>();
+                if(tmpDict.TryGetValue("lable", out string lable))
+                {
+                    PredictionCodeDict.Add(lable, tmpDict.TryGetValue("chinese_lable", out string chinese_lable) ? chinese_lable : string.Empty);
+                    FraudCodeDict.Add(lable, tmpDict.TryGetValue("fraud", out string fraud) ? fraud : string.Empty);
+                }
+            }
+
             return true;
         }
 

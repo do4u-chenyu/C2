@@ -34,7 +34,7 @@ namespace C2.Controls.MapViews
         //protected const int IconSpace = 5;
         //public const int FoldingButtonSize = 13;
         //Size(宽度，高度)
-        protected readonly Size MinNodeSize = new Size(20, 20);
+        protected readonly Size MinNodeSize = new Size(32, 32);
         protected readonly Size MaxNodeSize = new Size(10000, 10000);
 
         public static readonly int LineAnchorSize = 4;
@@ -107,7 +107,7 @@ namespace C2.Controls.MapViews
             //proposedSize.Width  = 0;
             proposedSize.Height = 0;
             if (topic.CustomWidth.HasValue && topic.CustomWidth.Value > 0)
-                proposedSize.Width = Math.Max(20,topic.CustomWidth.Value - topic.Style.Padding.Horizontal);
+                proposedSize.Width = Math.Max(32,topic.CustomWidth.Value - topic.Style.Padding.Horizontal);
             //if (topic.CustomHeight.HasValue && topic.CustomHeight.Value > 0)
             //    proposedSize.Height = topic.CustomHeight.Value - topic.Style.Padding.Vertical;
 
@@ -122,7 +122,8 @@ namespace C2.Controls.MapViews
 
             // Text Size
             Rectangle rectText = Rectangle.Empty;
-            Font font = topic.Style.Font != null ? topic.Style.Font : e.Font;
+            Font font = topic.Style.Font != null ? topic.Style.Font : new Font("微软雅黑", 18F);
+            topic.Style.Font = font;
             Size textSize;
             if (e.Graphics == null)
                 textSize = TextRenderer.MeasureText(topic.Text, font, proposedSize);
@@ -252,9 +253,9 @@ namespace C2.Controls.MapViews
                 else
                 {
                     if (widget.CustomWidth.HasValue)
-                        rectW.Width = 20;
+                        rectW.Width = 32;
                     if (widget.CustomHeight.HasValue)
-                        rectW.Height = 20;
+                        rectW.Height = 32;
                     widget.Bounds = rectW;
 
                     rectW.Width += e.Chart.WidgetMargin;
@@ -358,7 +359,7 @@ namespace C2.Controls.MapViews
                     if (w is ProgressBarWidget || (w is PictureWidget && (w as PictureWidget).SizeType != PictureSizeType.Customize))
                         w.Bounds = rw;
                     else
-                        w.Bounds = new Rectangle(rw.X, rw.Y + (rw.Height - 20) / 2, 20, 20);
+                        w.Bounds = new Rectangle(rw.X, rw.Y + (rw.Height - 32) / 2, 32, 32);
                 }
             }
             else if (alignment == WidgetAlignment.Top || alignment == WidgetAlignment.Bottom)
@@ -398,7 +399,7 @@ namespace C2.Controls.MapViews
                     if (w is ProgressBarWidget || (w is PictureWidget && (w as PictureWidget).SizeType != PictureSizeType.Customize))
                         w.Bounds = rw;
                     else
-                        w.Bounds = new Rectangle(rw.X + (rw.Width - 20) / 2, rw.Y, 20, 20);
+                        w.Bounds = new Rectangle(rw.X + (rw.Width - 32) / 2, rw.Y, 32, 32);
                 }
             }
         }

@@ -25,7 +25,7 @@ namespace C2.Model.Widgets
 
         public override Size CalculateSize(MindMapLayoutArgs e)
         {
-            return new Size(20, 20);
+            return new Size(32, 32);
         }
         #region 挂件 读/写
         protected void WriteDataItem(XmlElement node, List<DataItem> dataItems,string nodeName)

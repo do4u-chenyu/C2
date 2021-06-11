@@ -10,7 +10,7 @@ namespace C2.Model.Styles
 {
     public class TopicStyle : Style
     {
-        public const int DefaultRoundRadius = 0;
+        public const int DefaultRoundRadius = 5;
         public const int DefaultRootPadding = 12;
         public const int DefaultNodePadding = 2;
 
