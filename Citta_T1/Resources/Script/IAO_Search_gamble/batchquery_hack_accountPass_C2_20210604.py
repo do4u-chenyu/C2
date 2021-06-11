@@ -276,8 +276,8 @@ class Airport:
         self.endTime   = endTime
         self.all_items = ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER']
 
-    def re_verify(text):
-        #p = Phone()
+    def re_verify(self,text):
+        p = Phone()
         try:
             # 手机号
             userphone = re.finditer(r"\D(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d{8}\D", text)
@@ -286,12 +286,14 @@ class Airport:
                 s = set()
                 for m in userphone:
                     phone = m.group()[1:-1]
-                    s = s | set([phone])
+                    if p.find(phone):
+                        s = s | set([phone])
                 return len(s)
             else:
                 return 0
         except:
             return 0
+
     def ext_mainfile(self, file_url):
         """
         处理.http文件体
@@ -622,12 +624,17 @@ class Airport:
                     for data in self.queryclient(KEY_WORDS,QUREY_TYPE):
                         if data.get('_HOST', '') not in Flist:
                             #p_num = self.re_verify(data.get('_QUERY_CONTENT', ''))
-                            if data.get('_QUERY_CONTENT', ''):
-                                data['keyWords'] = KEY_WORDS
-                                try:
-                                    f.write('\t'.join([data.get(item, '') for item in self.all_items]) + '\n')
-                                except:
-                                    pass
+                            #if data.get('_QUERY_CONTENT', ''):
+                            if '13' or '145' or'147' or '15' or '166' or '173' or '176' or '177' or '18' in data.get('_QUERY_CONTENT', ''):
+                                tmp = data.get('_QUERY_CONTENT', '')
+                                p_num = self.re_verify(tmp)
+                                if p_num >= 2:
+                                    data['keyWords'] = KEY_WORDS
+                                    data['p_num'] = str(p_num)
+                                    try:
+                                        f.write('\t'.join([data.get(item, '') for item in self.all_items]) + '\n')
+                                    except:
+                                        pass
                     LOGGER.info('OUTITMES:{0}\nQUERY_KEYS:{1}\nQUERYTIME:{2}_{3}'.format(self.all_items, KEY_WORDS, self.startTime, self.endTime))
                 except Exception, e:
                     LOGGER.info('QUERY_ERROR-{0}'.format(e))
