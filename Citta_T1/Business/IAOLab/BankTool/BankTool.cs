@@ -35,8 +35,8 @@ namespace C2.IAOLab.BankTool
         public string GetBankTool(string bankCard)
         {
             Thread.Sleep(500);
-            //string strURL = "http://www.teldata2018.com/cha/kapost.php?ka="+ bankCard.Replace(" ", string.Empty);原接口，已失效
-            string strURL = "http://www.guabu.com/bank/?cardid=" + bankCard.Replace(" ", string.Empty);//新接口，不好用，查得慢，输入中文会返回锟斤拷
+            string strURL = "http://www.teldata2018.com/cha/kapost.php?ka="+ bankCard.Replace(" ", string.Empty);
+            //string strURL = "http://www.guabu.com/bank/?cardid=" + bankCard.Replace(" ", string.Empty);//新接口，不好用，查得慢，输入中文会返回锟斤拷
             //创建一个HTTP请求  
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strURL);
             //Post请求方式  
@@ -77,34 +77,34 @@ namespace C2.IAOLab.BankTool
             StreamReader sRead = new StreamReader(s);
             string postContent = sRead.ReadToEnd();
             sRead.Close();
-            List<string> cardInfo = new List<string>();
-             
-            cardInfo = subString(postContent, "<td>", "</td>"); 
-            
-            if(cardInfo.Count == 5) 
-            {
-               
-                return String.Format("{0}\t{1}",
-                                    cardInfo[2].Replace(@"""", ""),//卡种
-                                    GetChinese(cardInfo[1])); //归属地，提取值中有噪音，需要处理
-            }
-            if (cardInfo.Count == 1)
-                return cardInfo[0];
+            //List<string> cardInfo = new List<string>();
 
+            //cardInfo = subString(postContent, "<td>", "</td>"); 
+
+            //if(cardInfo.Count == 5) 
+            //{
+
+            //    return String.Format("{0}\t{1}",
+            //                        cardInfo[2].Replace(@"""", ""),//卡种
+            //                        GetChinese(cardInfo[1])); //归属地，提取值中有噪音，需要处理
+            //}
+            //if (cardInfo.Count == 1)
+            //    return cardInfo[0];
+
+            //return "查询失败";
+
+            postContent = string.Join("", postContent.Split('\r', '\n', '\t'));
+            postContent = postContent.Replace("<br />", "\t");
+            String[] postContentArry = postContent.Split('\t', '?');
+
+            if (postContentArry.Length >= 9)
+                return String.Format("{0}\t{1}\t{2}",
+                    postContentArry[1].Replace("银行名称：", ""),  //  卡号
+                    postContentArry[3].Replace("银行卡种：", ""),  //  地址
+                    postContentArry[5].Replace("银行归属地：", "")); //  blabla
+            if (postContentArry.Length == 2)
+                return postContentArry[1];
             return "查询失败";
-
-            //postContent = string.Join("", postContent.Split('\r','\n','\t'));
-            //postContent = postContent.Replace("<br />", "\t");
-            //String[] postContentArry = postContent.Split('\t','?');
-
-            //if (postContentArry.Length >= 9)
-            //    return String.Format("{0}\t{1}\t{2}", 
-            //        postContentArry[1].Replace("银行名称：", ""),  //  卡号
-            //        postContentArry[3].Replace("银行卡种：", ""),  //  地址
-            //        postContentArry[5].Replace("银行归属地：", "")); //  blabla
-            //if (postContentArry.Length == 2)
-            //    return postContentArry[1];
-            
         }
         public string GetChinese(string str)
         {
