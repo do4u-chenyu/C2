@@ -704,8 +704,8 @@
     <value>..\Resources\Images\WidgetImage\bcpData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="kbData" type="System.Resources.ResXFileRef, System.Windows.Forms">
-	<value>..\Resources\Images\WidgetImage\kbData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-</data>
+    <value>..\Resources\Images\WidgetImage\kbData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="docData" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\docData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -2084,5 +2084,11 @@
   </data>
   <data name="logicMap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logicMap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="autoFilter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StartPage\autoFilter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nothing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StartPage\nothing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

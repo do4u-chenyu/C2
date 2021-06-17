@@ -3185,6 +3185,7 @@
     <Content Include="Resources\Script\IAO_Web_validation\step5_ finnaly.py" />
     <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
     <Content Include="Resources\Script\IAO_Web_validation\util.py" />
+    <None Include="Resources\StartPage\autoFilter.png" />
     <Content Include="Resources\StartPage\bank.png" />
     <Content Include="Resources\StartPage\BusinessViewLabel.png" />
     <Content Include="Resources\StartPage\bussinessView.png" />
@@ -3195,24 +3196,13 @@
     <Content Include="Resources\StartPage\mindMap.png" />
     <Content Include="Resources\StartPage\modelTop.png" />
     <Content Include="Resources\StartPage\modelTopLabel.png" />
+    <None Include="Resources\StartPage\nothing.png" />
     <Content Include="Resources\StartPage\organization.png" />
     <Content Include="Resources\StartPage\ram.png" />
     <Content Include="Resources\StartPage\startPageTitle.png" />
     <Content Include="Resources\StartPage\tree.png" />
     <Content Include="Resources\StartPage\yellowGroup.png" />
     <None Include="Resources\Templates\DocxExample.dotx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Templates\QQ视频模型.iao">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Templates\公交色狼模型.iao">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Templates\地下钱庄线索发现.iao">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Templates\微信接单模型.iao">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Templates\树状图.xml" />

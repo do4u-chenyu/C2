@@ -181,6 +181,16 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap autoFilter {
+            get {
+                object obj = ResourceManager.GetObject("autoFilter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Icon avg_icon {
@@ -907,8 +917,7 @@ namespace C2.Properties {
         ///		&lt;item name=&quot;Show Line Arrow&quot;&gt;Show Line Arrow Cap&lt;/item&gt;
         ///		&lt;item name=&quot;Key_Add&quot;&gt;+&lt;/item&gt;
         ///		&lt;item name=&quot;Key_Subtract&quot;&gt;-&lt;/item&gt;
-        ///		&lt;item name=&quot;Key_Multiply&quot;&gt;*&lt;/item&gt;
-        ///		&lt;item na [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;item name=&quot;Key_Multiply&quot;&gt;*&lt;/ [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string en_US {
             get {
@@ -1234,8 +1243,7 @@ namespace C2.Properties {
         ///            }
         ///		    .clsTextBox 
         ///		    {
-        ///		        width:100%;
-        ///		  [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		       [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string html_content {
             get {
@@ -1709,6 +1717,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap notes {
             get {
                 object obj = ResourceManager.GetObject("notes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap nothing {
+            get {
+                object obj = ResourceManager.GetObject("nothing", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2604,7 +2622,7 @@ namespace C2.Properties {
         ///		&lt;hover_color&gt;#800000&lt;/hover_color&gt;
         ///		&lt;root_back_color&gt;#800000&lt;/root_back_color&gt;
         ///		&lt;root_fore_color&gt;#E1E0D2&lt;/root_fore_color&gt;
-        ///		&lt;root_border_c [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string windows_themes {
             get {
@@ -2836,8 +2854,7 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt;
-        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 思维导图 {
             get {
@@ -2882,8 +2899,7 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt;
-        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 树状图 {
             get {
@@ -2918,8 +2934,7 @@ namespace C2.Properties {
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
         ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark&gt;
-        ///      &lt;/remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 空模板 {
             get {
@@ -2988,8 +3003,8 @@ namespace C2.Properties {
         ///    &lt;item name=&quot;editor_show_sidebar&quot;&gt;True&lt;/item&gt;
         ///  &lt;/attributes&gt;
         ///  &lt;charts active_chart=&quot;0&quot;&gt;
-        ///     &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
-        ///      &lt;remark [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    &lt;chart name=&quot;业务拓展视图&quot; type=&quot;MindMap&quot;&gt;
+        ///      &lt;remark&gt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string 逻辑图 {
             get {
