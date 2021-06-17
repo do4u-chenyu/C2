@@ -277,7 +277,7 @@ class Airport:
         self.all_items = ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER']
 
     def re_verify(self,text):
-        p = Phone()
+        #p = Phone()
         try:
             # 手机号
             userphone = re.finditer(r"\D(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d{8}\D", text)
@@ -286,8 +286,8 @@ class Airport:
                 s = set()
                 for m in userphone:
                     phone = m.group()[1:-1]
-                    if p.find(phone):
-                        s = s | set([phone])
+                    #if p.find(phone):
+                    s = s | set([phone])
                 return len(s)
             else:
                 return 0
