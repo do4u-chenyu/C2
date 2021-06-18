@@ -448,6 +448,11 @@
     <Compile Include="Model\MindMaps\WaterMarkType.cs" />
     <Compile Include="Model\MindMaps\XmindFile.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -1051,12 +1056,6 @@
     <Compile Include="Model\Widgets\AttachmentWidget.cs" />
     <Compile Include="Model\Widgets\C2BaseWidget.cs" />
     <Compile Include="Model\Widgets\ChartWidget.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Utils\GuarderUtil.cs" />
     <Compile Include="Utils\DbUtil.cs" />
     <Compile Include="Utils\DgvUtil.cs" />
@@ -1928,8 +1927,8 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="sbin\awk.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -3186,6 +3185,7 @@
     <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
     <Content Include="Resources\Script\IAO_Web_validation\util.py" />
     <None Include="Resources\StartPage\autoFilter.png" />
+    <None Include="Resources\StartPage\autoFilter.jpg" />
     <Content Include="Resources\StartPage\bank.png" />
     <Content Include="Resources\StartPage\BusinessViewLabel.png" />
     <Content Include="Resources\StartPage\bussinessView.png" />
@@ -3197,6 +3197,7 @@
     <Content Include="Resources\StartPage\modelTop.png" />
     <Content Include="Resources\StartPage\modelTopLabel.png" />
     <None Include="Resources\StartPage\nothing.png" />
+    <None Include="Resources\StartPage\nothing.jpg" />
     <Content Include="Resources\StartPage\organization.png" />
     <Content Include="Resources\StartPage\ram.png" />
     <Content Include="Resources\StartPage\startPageTitle.png" />
