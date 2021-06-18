@@ -170,7 +170,7 @@ namespace C2.Business.Model
                 return copySuccess;
             if (!File.Exists(path))
             {
-                HelpUtil.ShowMessageBox(path + "文件不存在，无法完成模型导出。");
+                HelpUtil.ShowMessageBox(path + "文件不存在，无法完成导出。");
                 return !copySuccess;
             }
 
@@ -194,7 +194,7 @@ namespace C2.Business.Model
             // 模型文档不存在返回
             if (!File.Exists(fullXmlFilePath))
             {
-                HelpUtil.ShowMessageBox("模型文档不存在，可能已被删除");
+                HelpUtil.ShowMessageBox("文档不存在，可能已被删除");
                 return false;
             }
             xmlFullPath = fullXmlFilePath;
@@ -364,7 +364,7 @@ namespace C2.Business.Model
                     }
                     catch
                     {
-                        HelpUtil.ShowMessageBox(path + "路径可能不存在，无法完成模型导出。");
+                        HelpUtil.ShowMessageBox(path + "路径可能不存在，无法完成导出。");
                     }
                    
 
@@ -444,7 +444,7 @@ namespace C2.Business.Model
 
             if (!File.Exists(path))
             {
-                HelpUtil.ShowMessageBox(path + "文件不存在，无法完成模型导出。");
+                HelpUtil.ShowMessageBox(path + "文件不存在，无法完成导出。");
                 return !copySuccess;
             }
 

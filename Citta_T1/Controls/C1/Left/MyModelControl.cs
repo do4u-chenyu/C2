@@ -113,7 +113,7 @@ namespace C2.Controls.Left
         private void AddModelButton_MouseHover(object sender, EventArgs e)
         {
             ToolTip toolTip1 = new ToolTip();
-            toolTip1.SetToolTip(this.AddModelButton, "导入模型");
+            toolTip1.SetToolTip(this.AddModelButton, "导入业务视图");
         }
     }
 }

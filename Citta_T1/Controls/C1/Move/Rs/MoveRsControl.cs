@@ -242,14 +242,14 @@ namespace C2.Controls.Move.Rs
             //未找到op算子？？
             if (currentOp == ModelElement.Empty)
             {
-                MessageBox.Show("该算子没有对应的操作算子，请检查模型后再运行。", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("该算子没有对应的操作算子，请检查后再运行。", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             //判断模型是否保存
             if (Global.GetCurrentModelDocument().Modified)
             {
-                MessageBox.Show("当前模型没有保存，请保存后再运行模型。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("当前模型没有保存，请保存后再运行。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

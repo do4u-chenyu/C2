@@ -71,7 +71,7 @@
             this.ItemLabel.Name = "ItemLabel";
             this.ItemLabel.Size = new System.Drawing.Size(182, 30);
             this.ItemLabel.TabIndex = 0;
-            this.ItemLabel.Text = "我的模型";
+            this.ItemLabel.Text = "运算流程";
             this.ItemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MyModelPaintPanel

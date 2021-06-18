@@ -65,7 +65,7 @@ namespace C2.Controls.Left
 
             // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用
             if (count > 0)
-                rs = MessageBox.Show("有模型在使用此数据, 继续卸载请点击 \"确定\"",
+                rs = MessageBox.Show("此数据正被使用, 继续卸载请点击 \"确定\"",
                     "卸载 " + this.DataSourceName,
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Information);

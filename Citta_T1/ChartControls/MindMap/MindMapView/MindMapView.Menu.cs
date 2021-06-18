@@ -270,7 +270,7 @@ namespace C2.Controls.MapViews
             {
                 StartPosition = FormStartPosition.CenterScreen,
                 RelateMindMapView = this,
-                ModelType = "添加模型市场",
+                ModelType = "发布至聚沙成塔",
                 ModelTitle = opw.ModelDataItem.FileName
             };
             DialogResult dialogResult = createNewModelForm.ShowDialog();
@@ -295,7 +295,7 @@ namespace C2.Controls.MapViews
 
             if (!Global.GetMyModelControl().ContainModel(modelNewName))
                 Global.GetMyModelControl().AddModel(modelNewName);
-            HelpUtil.ShowMessageBox("模型成功发布到模型市场");
+            HelpUtil.ShowMessageBox("发布成功，请在左侧面板【聚沙成塔】处查看和使用。");
         }
         void MenuModelUpdate_Click(object sender, EventArgs e)
         {

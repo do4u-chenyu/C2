@@ -347,8 +347,8 @@ namespace C2
             this.modelMarketButton.Size = new System.Drawing.Size(151, 42);
             this.modelMarketButton.TabIndex = 0;
             this.modelMarketButton.TabStop = false;
-            this.modelMarketButton.Text = "   模型市场";
-            this.toolTip1.SetToolTip(this.modelMarketButton, "当前用户发布的所有模型");
+            this.modelMarketButton.Text = "   聚沙成塔";
+            this.toolTip1.SetToolTip(this.modelMarketButton, "当前用户发布的所有运算流程");
             this.modelMarketButton.UseVisualStyleBackColor = true;
             this.modelMarketButton.Click += new System.EventHandler(this.ModelMarketButton_Click);
             // 

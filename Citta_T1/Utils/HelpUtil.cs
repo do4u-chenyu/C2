@@ -23,8 +23,8 @@ namespace C2.Utils
         public static string UndoButtonHelpInfo = "撤销按钮:撤销当前操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的撤销";
         public static string RedoButtonHelpInfo = "恢复按钮:恢复上一步的撤销操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的恢复";
         public static string FormatOperatorHelpInfo = "一键排版:智能调整元素版面位置";
-        public static string SaveModelButtonHelpInfo = "保存模型";
-        public static string SaveAllButtonHelpInfo = "保存所有模型";
+        public static string SaveModelButtonHelpInfo = "保存";
+        public static string SaveAllButtonHelpInfo = "保存所有";
         public static string ImportModelHelpInfo = "导入本地数据文件,支持bcp,txt,csv,xls四种格式";
         public static string RemarkPictureBoxHelpInfo = "编写备注信息";
         public static string ZoomUpPictureBoxHelpInfo = "放大屏幕,支持三级缩放";

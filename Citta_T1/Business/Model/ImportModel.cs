@@ -214,14 +214,14 @@ namespace C2.Business.Model
             // 是否包含同名模型文档
             if (IsSameModelTitle(modelName, isC2Model))
             {
-                result = MessageBox.Show("模型文件:" + modelName + "已存在，是否覆盖该模型文档", "导入模型", MessageBoxButtons.OKCancel);
+                result = MessageBox.Show("文件:" + modelName + "已存在，是否覆盖该模型文档", "导入模型", MessageBoxButtons.OKCancel);
                 if (result == DialogResult.Cancel)
                     return !hasUnZip;
             }
 
             if (Global.GetTaskBar().ContainModel(modelName))
             {
-                HelpUtil.ShowMessageBox("模型文件:" + modelName + "已打开，请关闭该文档并重新进行导入", "关闭模型文档");
+                HelpUtil.ShowMessageBox("文件:" + modelName + "已打开，请关闭该文档并重新进行导入", "关闭模型文档");
                 return !hasUnZip;
             }
 
@@ -240,7 +240,7 @@ namespace C2.Business.Model
             FileUtil.DeleteDirectory(this.modelDir);
             if(!FileUtil.CopyDirectory(tmpDir, this.modelDir, true))
             {
-                HelpUtil.ShowMessageBox("模型导入失败");
+                HelpUtil.ShowMessageBox("导入失败");
                 FileUtil.DeleteDirectory(this.modelDir);
                 return !hasUnZip;
             }
@@ -265,7 +265,7 @@ namespace C2.Business.Model
             OpenFileDialog fd = new OpenFileDialog
             {
                 Filter = "模型文件(*.iao)|*.iao",
-                Title = "导入模型",
+                Title = "导入",
                 AddExtension = true
             };
             if (fd.ShowDialog() == DialogResult.OK)
@@ -274,7 +274,7 @@ namespace C2.Business.Model
                 if (!UnZipIaoFile(fullFilePath, userName))
                     return;
 
-                HelpUtil.ShowMessageBox("模型导入成功");
+                HelpUtil.ShowMessageBox("导入成功");
                 // 将导入模型添加到左侧模型面板
                 MyModelControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
 

@@ -145,7 +145,7 @@ namespace C2.Controls.Left
             // 模型文档不存在返回
             if (!File.Exists(this.FullFilePath))
             {
-                HelpUtil.ShowMessageBox("模型文档不存在，可能已被删除");
+                HelpUtil.ShowMessageBox("文档不存在，可能已被删除");
                 return;
             }
 
@@ -155,7 +155,7 @@ namespace C2.Controls.Left
                 string exportFullPath = zipDialog.ModelPath;
                 string password = zipDialog.Password;
                 if (C2.Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath, password))
-                    HelpUtil.ShowMessageBox("模型导出成功,存储路径：" + exportFullPath);
+                    HelpUtil.ShowMessageBox("导出成功,存储路径：" + exportFullPath);
                 FileUtil.DeleteDirectory(Path.Combine(Global.TempDirectory));
             }
         }

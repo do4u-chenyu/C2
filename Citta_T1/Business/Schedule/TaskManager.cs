@@ -106,7 +106,7 @@ namespace C2.Business.Schedule
         {
             if (CurrentModelTripleStatusNum(ElementStatus.Done) == this.currentModelTripleList.Count())
             {
-                UpdateLogDelegate("当前模型的算子均已运算完毕");
+                UpdateLogDelegate("当前算子均已运算完毕");
                 return true;
             }
             return false;

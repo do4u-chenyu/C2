@@ -102,7 +102,7 @@ namespace C2.Controls.Left
                 string fullFilePath = zipDialog.ModelPath;
                 string password = zipDialog.Password;
                 if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
-                    HelpUtil.ShowMessageBox("模型导入成功");
+                    HelpUtil.ShowMessageBox("导入成功");
             }
         }
     }

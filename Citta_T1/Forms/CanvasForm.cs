@@ -324,7 +324,7 @@ namespace C2.Forms
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentModelDocument(), "all");
                 currentManager.Reset();
                 //SetDocumentDirty();//需不需要dirty
-                MessageBox.Show("当前模型的运算结果已重置，点击‘运行’可以重新运算了", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("当前运算结果已重置，点击‘运行’可以重新运算了", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -362,13 +362,13 @@ namespace C2.Forms
                 int notReadyNum = currentManager.CountOpNullAndNoRelation();
                 if (notReadyNum > 0)
                 {
-                    MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (currentManager.IsAllOperatorDone())
                 {
-                    MessageBox.Show("当前模型的算子均已运算完毕，重新运算需要先点击‘重置’按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("当前算子均已运算完毕，重新运算需要先点击‘重置’按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 currentManager.Start();
