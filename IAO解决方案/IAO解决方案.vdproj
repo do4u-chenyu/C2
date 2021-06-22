@@ -549,6 +549,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_399780E4807A45638D144088EF341624"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3A3910385F984BAE87075D97FA7A8719"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -904,12 +910,6 @@
         "Entry"
         {
         "MsmKey" = "8:_5D582AE4D1344F54810DD306B39CAE3A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5D81E98806634E1A9D0BD28A0B72F0F3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4579,6 +4579,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_399780E4807A45638D144088EF341624"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\Resources\\Templates\\JS自动化过滤流程.iao"
+            "TargetName" = "8:JS自动化过滤流程.iao"
+            "Tag" = "8:"
+            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A3910385F984BAE87075D97FA7A8719"
             {
             "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\281_数字3.png"
@@ -5571,26 +5591,6 @@
             "TargetName" = "8:Cool Advertisement.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D81E98806634E1A9D0BD28A0B72F0F3"
-            {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Templates\\胶水涉赌自动化过滤模型.iao"
-            "TargetName" = "8:胶水涉赌自动化过滤模型.iao"
-            "Tag" = "8:"
-            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
