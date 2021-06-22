@@ -161,7 +161,7 @@ namespace C2.Controls.MapViews
                 RelateMindMapView = this,
                 OpenDocuments = Global.GetMainForm().OpendDocuments(),
                 NewFormType = FormType.CanvasForm,
-                ModelType = "新建模型视图"
+                ModelType = "新建多维运算视图"
             };
             DialogResult dialogResult = createNewModelForm.ShowDialog();
             if (dialogResult != DialogResult.OK)
@@ -177,7 +177,7 @@ namespace C2.Controls.MapViews
 
             if(opw != null && opw.HasModelOperator)
             {
-                HelpUtil.ShowMessageBox("该节点已存在高级模型，请右键算子挂件，选择对应模型进行修改或删除。", "已存在", MessageBoxIcon.Information);
+                HelpUtil.ShowMessageBox("该节点已存在多维运算流程，请右键算子挂件，选择对应流程进行修改或删除。", "已存在", MessageBoxIcon.Information);
                 return;
             }
             //需要拷贝模型市场文件夹到当前模型路径,复制之后修改XML文件中数据源路径

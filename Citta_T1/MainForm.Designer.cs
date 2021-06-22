@@ -512,7 +512,7 @@ namespace C2
             this.logLabel.Size = new System.Drawing.Size(74, 22);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
-            this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息.");
+            this.toolTip1.SetToolTip(this.logLabel, "当前多维运算流程运行情况的日志信息.");
             this.logLabel.Click += new System.EventHandler(this.LogLabel_Click);
             // 
             // pyControlLabel
@@ -538,7 +538,7 @@ namespace C2
             this.previewLabel.Size = new System.Drawing.Size(74, 22);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
-            this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览.");
+            this.toolTip1.SetToolTip(this.previewLabel, "当前视图对应数据源的部分数据预览.");
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
             // 
             // dragLineControl

@@ -249,7 +249,7 @@ namespace C2.Controls.Move.Rs
             //判断模型是否保存
             if (Global.GetCurrentModelDocument().Modified)
             {
-                MessageBox.Show("当前模型没有保存，请保存后再运行。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("当前没有保存，请保存后再运行。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

@@ -112,7 +112,7 @@ namespace C2.Controls.Move.Rs
             this.RunMenuItem.Name = "RunMenuItem";
             this.RunMenuItem.Size = new System.Drawing.Size(217, 24);
             this.RunMenuItem.Text = "运行到此";
-            this.RunMenuItem.ToolTipText = "将执行模型到本阶段为止";
+            this.RunMenuItem.ToolTipText = "将执行到本阶段为止";
             this.RunMenuItem.Click += new System.EventHandler(this.RunMenuItem_Click);
             // 
             // ErrorLogMenuItem
