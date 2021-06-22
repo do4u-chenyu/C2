@@ -176,7 +176,7 @@ namespace C2.Business.Model
             string errMsg; 
             string tmpDir;
             string fileExtension = isC2Model ? ".bmd" : ".xml";
-            string fileParentDir = isC2Model ? "业务视图" : "模型市场";
+            string fileParentDir = isC2Model ? "业务视图" : "聚沙成塔";
             DialogResult result;
             ZipInputStream s = null;
             try
@@ -214,14 +214,14 @@ namespace C2.Business.Model
             // 是否包含同名模型文档
             if (IsSameModelTitle(modelName, isC2Model))
             {
-                result = MessageBox.Show("文件:" + modelName + "已存在，是否覆盖该模型文档", "导入模型", MessageBoxButtons.OKCancel);
+                result = MessageBox.Show("文件:" + modelName + "已存在，是否覆盖该文档", "导入", MessageBoxButtons.OKCancel);
                 if (result == DialogResult.Cancel)
                     return !hasUnZip;
             }
 
             if (Global.GetTaskBar().ContainModel(modelName))
             {
-                HelpUtil.ShowMessageBox("文件:" + modelName + "已打开，请关闭该文档并重新进行导入", "关闭模型文档");
+                HelpUtil.ShowMessageBox("文件:" + modelName + "已打开，请关闭该文档并重新进行导入", "关闭文档");
                 return !hasUnZip;
             }
 
@@ -264,7 +264,7 @@ namespace C2.Business.Model
             //获取导入模型路径
             OpenFileDialog fd = new OpenFileDialog
             {
-                Filter = "模型文件(*.iao)|*.iao",
+                Filter = "多维运算(*.iao)|*.iao",
                 Title = "导入",
                 AddExtension = true
             };

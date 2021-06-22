@@ -146,7 +146,7 @@ namespace C2.Core
         public static string WorkspaceDirectory { get; set; } = string.Empty; // 用户空间根目录
         public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, username); }
         public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
-        public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "模型市场"); }
+        public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "聚沙成塔"); }
         public static string SearchToolkitPath { get => Path.Combine(UserWorkspacePath, "全文工具箱"); }
         public static string TempDirectory { get; set; }
         public const float Factor = 1.3F;

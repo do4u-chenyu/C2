@@ -553,7 +553,7 @@ namespace C2.Controls
                     Global.GetMainForm().NewDocumentForm_Click(item.Text);
                     break;
                 case ThumbItem.ModelTypes.Model:
-                    CanvasForm cf = Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.UserWorkspacePath, "模型市场", item.Text));
+                    CanvasForm cf = Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.UserWorkspacePath, "聚沙成塔", item.Text));
                     if (cf != null)
                     {
                         TabBar tabBar = Global.GetMainForm().TaskBar;
@@ -562,7 +562,7 @@ namespace C2.Controls
                             tabBar.SelectedItem = tab;
                     }
                     else
-                        Global.GetMainForm().LoadCanvasFormByXml(Path.Combine(Global.UserWorkspacePath, "模型市场"), item.Text);
+                        Global.GetMainForm().LoadCanvasFormByXml(Path.Combine(Global.UserWorkspacePath, "聚沙成塔"), item.Text);
                     break;
                 default:
                     break;

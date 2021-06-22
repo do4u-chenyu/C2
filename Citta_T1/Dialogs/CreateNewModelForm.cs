@@ -67,7 +67,7 @@ namespace C2.Dialogs
                 case FormType.DocumentForm:
                     return "业务视图名";
                 case FormType.CanvasForm:
-                    return "模型视图名";
+                    return "运算视图名";
                 default:
                     return "视图名";
             }
@@ -97,11 +97,11 @@ namespace C2.Dialogs
             }
             else if(NewFormType == FormType.CanvasForm)
             {
-                title = String.Format("模型视图{0}", TitlePostfix);
+                title = String.Format("多维运算{0}", TitlePostfix);
                 List<string> currentTitles = GetMindMapTitleList();
 
                 while (currentTitles.Contains(title))
-                    title = String.Format("模型视图{0}", ++TitlePostfix);
+                    title = String.Format("多维运算{0}", ++TitlePostfix);
             }
             else
             {
