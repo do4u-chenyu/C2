@@ -20,7 +20,7 @@ namespace C2.Controls.Left
             this.textButton.Text = modelTitle;
             this.toolTip1.SetToolTip(this.textButton, ModelTitle);
             this.oldTextString = modelTitle;
-            fullFilePath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场", this.textButton.Text, this.textButton.Text + ".xml");
+            fullFilePath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "聚沙成塔", this.textButton.Text, this.textButton.Text + ".xml");
            
         }
 
@@ -42,7 +42,7 @@ namespace C2.Controls.Left
             // 文件打开后,不能重复打开,不能删除,不能重命名
             //现在需要手动new一个canvasform
             using (new GuarderUtil.CursorGuarder())
-                Global.GetMainForm().LoadCanvasFormByXml(Path.Combine(Global.UserWorkspacePath, "模型市场"), this.textButton.Text);
+                Global.GetMainForm().LoadCanvasFormByXml(Path.Combine(Global.UserWorkspacePath, "聚沙成塔"), this.textButton.Text);
 
             this.OpenToolStripMenuItem.Enabled = false;
             this.RenameToolStripMenuItem.Enabled = false;
@@ -88,7 +88,7 @@ namespace C2.Controls.Left
             if (rs != DialogResult.OK)
                 return;
 
-            string modelDic = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "模型市场", this.textButton.Text );
+            string modelDic = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "聚沙成塔", this.textButton.Text );
             FileUtil.DeleteDirectory(modelDic);
             Global.GetMyModelControl().RemoveModelButton(this);
         }
@@ -165,7 +165,7 @@ namespace C2.Controls.Left
 
         private void ExportModelButton_Click(object sender, EventArgs e)
         {
-            C2.Business.Model.ExportModel.GetInstance().Export(this.FullFilePath, Path.GetFileNameWithoutExtension(this.FullFilePath), Path.Combine(Global.UserWorkspacePath, "模型市场"));
+            C2.Business.Model.ExportModel.GetInstance().Export(this.FullFilePath, Path.GetFileNameWithoutExtension(this.FullFilePath), Path.Combine(Global.UserWorkspacePath, "聚沙成塔"));
         }
 
         private void ContextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -185,7 +185,7 @@ namespace C2.Controls.Left
 
         private bool IsCanvasFormOpened()
         {
-            return Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.UserWorkspacePath, "模型市场", ModelTitle)) != null;
+            return Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.UserWorkspacePath, "聚沙成塔", ModelTitle)) != null;
         }
 
         private void ModelButton_Load(object sender, EventArgs e)

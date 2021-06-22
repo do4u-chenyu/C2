@@ -153,7 +153,7 @@ namespace C2.Controls.MapViews
                     RelateMindMapView = this,
                     OpenDocuments = Global.GetMainForm().OpendDocuments(),
                     NewFormType = FormType.CanvasForm,
-                    ModelType = "新建模型视图"
+                    ModelType = "新建运算视图"
                 };
                 DialogResult dialogResult = createNewModelForm.ShowDialog();
                 if (dialogResult != DialogResult.OK)
@@ -174,7 +174,7 @@ namespace C2.Controls.MapViews
                 }
                 else if (opw.HasModelOperator)
                 {
-                    HelpUtil.ShowMessageBox("该节点已存在高级模型，请右键算子挂件，选择对应模型进行修改或删除。", "已存在", MessageBoxIcon.Information);
+                    HelpUtil.ShowMessageBox("该节点已存在多维运算流程，请右键算子挂件，选择对应流程进行修改或删除。", "已存在", MessageBoxIcon.Information);
                     return;
                 }
                 else

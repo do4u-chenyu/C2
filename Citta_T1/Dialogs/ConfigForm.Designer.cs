@@ -217,7 +217,7 @@
             this.pythonConfigPage.Size = new System.Drawing.Size(634, 380);
             this.pythonConfigPage.TabIndex = 1;
             this.pythonConfigPage.Text = "Python引擎";
-            this.pythonConfigPage.ToolTipText = "导入本地的Python虚拟机,用来运行模型中使用者导入的外部自定义PY脚本,支持导入多种版本的Python虚拟机";
+            this.pythonConfigPage.ToolTipText = "导入本地的Python虚拟机,用来运行使用者导入的外部自定义PY脚本,支持导入多种版本的Python虚拟机";
             this.pythonConfigPage.UseVisualStyleBackColor = true;
             // 
             // chosenPythonLable
@@ -1142,7 +1142,7 @@
             this.userModelConfigPage.Padding = new System.Windows.Forms.Padding(3);
             this.userModelConfigPage.Size = new System.Drawing.Size(634, 380);
             this.userModelConfigPage.TabIndex = 0;
-            this.userModelConfigPage.Text = "用户模型路径";
+            this.userModelConfigPage.Text = "用户文档路径";
             this.userModelConfigPage.UseVisualStyleBackColor = true;
             // 
             // label4
@@ -1161,7 +1161,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(371, 17);
             this.label3.TabIndex = 4;
-            this.label3.Text = "用户模型目录存储了当前所有用户的模型,配置信息和运算临时文件。";
+            this.label3.Text = "用户文档目录存储了当前所有用户的文档,配置信息和运算临时文件。";
             // 
             // userModelCancelButton
             // 
@@ -1198,7 +1198,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 17);
             this.label2.TabIndex = 0;
-            this.label2.Text = "用户模型存储路径:";
+            this.label2.Text = "用户文档存储路径:";
             // 
             // checkNewVersion
             // 
@@ -1403,7 +1403,7 @@
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(537, 172);
             this.textBox4.TabIndex = 8;
-            this.textBox4.Text = "IAO可视化数据分析平台，支持BCP,XLS,CVS,TXT等多种本地数据格式，支持Oracle和Hive等外部数据源；支持多模型文档，算子并行运算，同时支持基于" +
+            this.textBox4.Text = "IAO可视化数据分析平台，支持BCP,XLS,CVS,TXT等多种本地数据格式，支持Oracle和Hive等外部数据源；支持多维运算，算子并行运算，同时支持基于" +
     "Python的自定义算子和基于Sql的自定义查询语句；具有灵活的分析能力和友善的交互界面，等学习成本低，功能丰富，是IAO自主研发的新一代可视化数据分析平台。";
             // 
             // button7

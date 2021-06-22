@@ -15,11 +15,11 @@ namespace C2.Utils
         public static string SortOperatorHelpInfo = "排序算子:根据选择字段进行排序,支持数据去重.";
         public static string GroupOperatorHelpInfo  = "分组算子:根据选择字段对文本进行分组展示.";
         public static string RelateOperatorHelpInfo = "关联算子:根据选择的关联条件将两个数据表进行连接,默认左连接.";
-        public static string CustomOperator1HelpInfo = "AI实践:灵活配置算子,用于各种模型探索和展示;一元算子,支持一个输入数据源.";
+        public static string CustomOperator1HelpInfo = "AI实践:灵活配置算子,用于各种探索和展示;一元算子,支持一个输入数据源.";
         public static string PythonOperatorHelpInfo  = "Py算子:调用自定义的第三方Python脚本完成运算.";
         public static string KeyWordOperatorHelpInfo = "关键词过滤:根据输入的关键词,对数据进行基础的关键词命中或去噪处理.";
         public static string DataFormatOperatorHelpInfo = "数据标准化:对数据进行输出列选择,顺序调整,列项重命名处理.";
-        public static string CustomOperator2HelpInfo = "多源算子:灵活配置算子,用于各种模型探索和展示;二元算子,支持两个输入数据源.";
+        public static string CustomOperator2HelpInfo = "多源算子:灵活配置算子,用于各种探索和展示;二元算子,支持两个输入数据源.";
         public static string UndoButtonHelpInfo = "撤销按钮:撤销当前操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的撤销";
         public static string RedoButtonHelpInfo = "恢复按钮:恢复上一步的撤销操作,目前支持添加,删除,重命名,移动,关系添加,关系删除6种操作的恢复";
         public static string FormatOperatorHelpInfo = "一键排版:智能调整元素版面位置";
@@ -35,8 +35,8 @@ namespace C2.Utils
 
         public static string AttachmentWidgetHelpInfo = "附件:支持添加多个附件,支持多种类型文档";
         public static string ChartWidgetHelpInfo = "图表:柱状图,折线图,饼图,环形图,雷达图等";
-        public static string OperatorWidgetHelpInfo = "算子:内置多种算子,支持Python脚本和自主建模";
-        public static string ResultWidgetHelpInfo = "运算结果:算子和高级模型运算后生成的结果,支持预览";
+        public static string OperatorWidgetHelpInfo = "算子:内置多种算子,支持Python脚本";
+        public static string ResultWidgetHelpInfo = "运算结果:算子和多维运算后生成的结果,支持预览";
         public static string DataSourceWidgetHelpInfo = "数据源:支持添加多个数据源,支持多种类型文档";
         public static string ExportImageHelpInfo = "导出图片:支持导出成多种格式的图片";
 

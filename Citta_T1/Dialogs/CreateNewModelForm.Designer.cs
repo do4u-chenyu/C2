@@ -43,7 +43,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "新建模型";
+            this.label1.Text = "新建文档";
             // 
             // label2
             // 
@@ -63,7 +63,7 @@
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(173, 34);
             this.textBox.TabIndex = 4;
-            this.textBox.Text = "我的新模型";
+            this.textBox.Text = "我的新文档";
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             this.textBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextBox_MouseDown);
             // 

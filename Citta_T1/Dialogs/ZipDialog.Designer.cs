@@ -45,7 +45,7 @@
             this.modelPathLabel.Name = "modelPathLabel";
             this.modelPathLabel.Size = new System.Drawing.Size(77, 14);
             this.modelPathLabel.TabIndex = 10003;
-            this.modelPathLabel.Text = "模型路径：";
+            this.modelPathLabel.Text = "路径：";
             // 
             // passwordLabel
             // 
