@@ -59,7 +59,7 @@ namespace C2.Controls
             Items.Add(new ThumbItem("树状图", global::C2.Properties.Resources.tree, ThumbItem.ModelTypes.Business));
             Items.Add(new ThumbItem("组织架构图", global::C2.Properties.Resources.organization, ThumbItem.ModelTypes.Business));
             Items.Add(new ThumbItem("思维导图", global::C2.Properties.Resources.mindMap, ThumbItem.ModelTypes.Business));
-            Items.Add(new ThumbItem("胶水涉赌自动化过滤模型", global::C2.Properties.Resources.autoFilter, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("JS自动化过滤流程", global::C2.Properties.Resources.autoFilter, ThumbItem.ModelTypes.Model));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.nothing, ThumbItem.ModelTypes.Null));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.nothing, ThumbItem.ModelTypes.Null));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.nothing, ThumbItem.ModelTypes.Null));
