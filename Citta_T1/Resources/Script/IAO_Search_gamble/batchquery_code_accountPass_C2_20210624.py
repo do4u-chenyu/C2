@@ -307,14 +307,14 @@ def init_path(path):
 
 ##cquey FULLTEXT 
 def queryBatch(keyWords):
-    tempFilename   = "_result_password_" + startTime + '_' + endTime 
+    tempFilename   = "_result_" + startTime + '_' + endTime 
     sch = Scheduler(startTime, endTime, tempFilename,keyWords)
     sch.scheduling()
     sch.saver.writer.close()
     succeedFilename = tempFilename.strip('_') + '.txt'
     
     os.rename(os.path.join(DATA_PATH,tempFilename), os.path.join(DATA_PATH,succeedFilename))
-    ZIP_PATH =  os.path.join(DATA_PATH,succeedFilename).replace('txt','')
+    ZIP_PATH =  os.path.join(DATA_PATH,succeedFilename).replace('txt','tgz')
     zip_result(os.path.join(DATA_PATH,succeedFilename),ZIP_PATH)
 
 def encrypTion(path):
