@@ -357,7 +357,7 @@ if __name__ == '__main__':
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
    
     PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
-    DATA_PATH = './_queryResult_db_'
+    DATA_PATH = './_queryResult_code_'
     KEY_NUM = 13
     LOGIN_BUTTON = ['password=','pwd=','pass=','passwd=','psd=']
     init_path(DATA_PATH)
