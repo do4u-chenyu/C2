@@ -86,7 +86,7 @@ namespace C2.Dialogs.IAOLab
                             }
                             catch 
                             {
-                                this.dataGridView1.Rows[index].Cells[0].Value = GetImage(Path.Combine(Application.StartupPath, @"Citta_T1\Resources\Images", "close.png"));
+                                this.dataGridView1.Rows[index].Cells[0].Value = GetImage(Path.Combine(Application.StartupPath, @"C_T1\Resources\Images", "close.png"));
                                
                             }
                             for (int i = 1; i < this.dataGridView1.Columns.Count; i++)
