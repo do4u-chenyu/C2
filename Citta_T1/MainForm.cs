@@ -187,6 +187,7 @@ namespace C2
             Global.SetDataSourceControl(this.dataSourceControl);
             Global.SetMyModelControl(this.modelMarketControl);
             Global.SetWebsiteFeatureDetectionControl(this.websiteFeatureDetectionControl);
+            Global.SetCastleBravoControl(this.castleBravoControl);
             Global.SetSearchToolkitControl(this.searchToolkitControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);

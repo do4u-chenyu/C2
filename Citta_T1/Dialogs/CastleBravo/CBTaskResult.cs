@@ -57,20 +57,20 @@ namespace C2.Dialogs.CastleBravo
             //列数不对或为空文件，也要重新发起请求
             if (headersAndRows.Item1.Count == 0 || headersAndRows.Item2.Count == 0)
                 return false;
-            TaskInfo.PreviewResults = TransListToWFDResult(headersAndRows);
+            TaskInfo.PreviewResults = TransListToCBResult(headersAndRows);
 
             FillDGV();
             return true;
         }
 
-        private List<CastleBravoResult> TransListToWFDResult(Tuple<List<string>, List<List<string>>> headersAndRows)
+        private List<CastleBravoResult> TransListToCBResult(Tuple<List<string>, List<List<string>>> headersAndRows)
         {
             List<CastleBravoResult> results = new List<CastleBravoResult>();
 
             List<string> colList = headersAndRows.Item1;
             foreach (List<string> content in headersAndRows.Item2)
             {
-                if (content.Count < 10)
+                if (content.Count < 4)
                     continue;
 
                 results.Add(new CastleBravoResult(colList.Zip(content, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v)));

@@ -32,6 +32,10 @@
             this.backPanel.SuspendLayout();
             this.SuspendLayout();
             // 
+            // titleLabel
+            // 
+            this.titleLabel.Text = "喝彩城堡";
+            // 
             // CastleBravoControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

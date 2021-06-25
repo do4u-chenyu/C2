@@ -181,8 +181,8 @@ namespace C2.Controls.C1.Left
             }
             private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
             {
-                //删除前先判断，未超24小时且非done状态时，不支持删除
-                if (TaskInfo.Status != CastleBravoTaskStatus.Done)
+                //删除前先判断，非done状态时，不支持删除
+                if (TaskInfo.Status == CastleBravoTaskStatus.Running)
                 {
                     HelpUtil.ShowMessageBox("当前任务正在执行中，无法删除。");
                     return;
@@ -195,9 +195,9 @@ namespace C2.Controls.C1.Left
                 if (rs != DialogResult.OK)
                     return;
 
-                Global.GetWebsiteFeatureDetectionControl().RemoveButton(this);
+                Global.GetCastleBravoControl().RemoveButton(this);
                 FileUtil.DeleteFile(this.TaskInfo.ResultFilePath);
-                Global.GetWebsiteFeatureDetectionControl().SaveWFDTasksToXml();//先删除后持久化
+                Global.GetCastleBravoControl().SaveWFDTasksToXml();//先删除后持久化
             }
             private void OpenDatasourceToolStripMenuItem_Click(object sender, EventArgs e)
             {
