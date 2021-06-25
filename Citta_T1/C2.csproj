@@ -3151,6 +3151,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\resource.h" />
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_code_accountPass_C2_20210624.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_code_accountPass_C2_20210624.py.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

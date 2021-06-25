@@ -23,7 +23,8 @@ namespace C2.SearchToolkit
             ["侵公模型"] = "qg",
             ["四方模型"] = "sf",
             ["秒播vps模型"] = "vps",
-            ["测试模型"] = "test"
+            ["测试模型"] = "test",
+            ["密码模型"] = "code"
         };
 
         private static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
@@ -40,8 +41,9 @@ namespace C2.SearchToolkit
             ["侵公模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             ["四方模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             ["秒播vps模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
-            ["测试模型"] = "batchquery_db_accountPass_C2_Test_Running_{0}.py"
-
+            ["测试模型"] = "batchquery_db_accountPass_C2_Test_Running_{0}.py",
+            ["密码模型"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
+            
         };
 
         private static readonly Dictionary<String, String> TaskResultPatternTable = new Dictionary<String, String>
@@ -59,6 +61,7 @@ namespace C2.SearchToolkit
             ["四方模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
             ["秒播vps模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
             ["测试模型"] = @"([^\n\r]+000000_queryResult_test_\d+_\d+.tgz)",
+            ["密码模型"] = @"([^\n\r]+000000_queryResult_code_\d+_\d+.tgz)",
         };
 
         public String LocalPyScriptPath
