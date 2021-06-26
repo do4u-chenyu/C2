@@ -434,7 +434,7 @@ namespace C2.Business.SSH
 
         private bool IsAliveTask()
         {
-            String result = RunCommand(String.Format("ps -p {0} -o cmd | grep {1}", task.PID, TargetScript), shell);
+            String result = RunCommand(String.Format("ps -p {0} -o cmd | grep --color=never {1}", task.PID, TargetScript), shell);
             return Regex.IsMatch(result, Wrap(@"python\s+" + TargetScript));
         }
 

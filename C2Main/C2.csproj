@@ -3166,7 +3166,7 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.zip" />
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py.zip" />
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -3186,8 +3186,8 @@
     <Content Include="Resources\Script\IAO_Web_validation\step1_unzip.py" />
     <Content Include="Resources\Script\IAO_Web_validation\step2_filter.py" />
     <Content Include="Resources\Script\IAO_Web_validation\step3_screen_capture.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step4_ classify.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step5_ finnaly.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\step4_classify.py" />
+    <Content Include="Resources\Script\IAO_Web_validation\step5_finnaly.py" />
     <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
     <Content Include="Resources\Script\IAO_Web_validation\util.py" />
     <None Include="Resources\StartPage\autoFilter.png" />
