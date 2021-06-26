@@ -282,7 +282,7 @@
             this.usernameTB.Name = "usernameTB";
             this.usernameTB.Size = new System.Drawing.Size(181, 31);
             this.usernameTB.TabIndex = 0;
-            this.usernameTB.Text = "x1587";
+            this.usernameTB.Text = "X1587";
             // 
             // groupBox1
             // 

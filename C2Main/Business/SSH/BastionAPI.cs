@@ -135,8 +135,8 @@ namespace C2.Business.SSH
             // 等待跳转成功,出现root用户提示符
             if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), TimeSpan.FromSeconds(10)))
             {   // 修复bug:某些机器改了shell提示, 这里如果也不是ifconfig的话才认为失败 
-                String ret = RunCommand("ifconfig", shell);
-                if (!ret.Contains(targetIP))
+                String ret = RunCommand("ifconfig", shell); // TODO ifconfig在7u4下居然被干掉了，唉
+                if (!ret.Contains(targetIP))                // TODO 要找一种 6u3 和 7u4 统一的查看本机IP的方法
                     return;
             }
             task.LastErrorMsg = String.Empty;
@@ -401,7 +401,7 @@ namespace C2.Business.SSH
             String pid = GetPID(ret);
             // 未获取到pid，当作模型脚本执行失败
             if (pid.IsEmpty())
-                task.LastErrorMsg = "全文机已连接但执行涉赌脚本失败";
+                task.LastErrorMsg = String.Format("全文机已连接但执行脚本失败:{0}", TargetScript);
             return pid;
         }
 

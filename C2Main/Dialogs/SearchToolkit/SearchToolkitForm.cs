@@ -287,10 +287,5 @@ namespace C2.SearchToolkit
             else
                 HelpUtil.ShowMessageBox(validateMessage);
         }
-
-        private void interfaceIPTB_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
