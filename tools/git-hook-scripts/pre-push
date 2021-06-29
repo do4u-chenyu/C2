@@ -68,7 +68,7 @@ def set_auto_crlf() -> None:
 def compile(vs_path: str) -> None:
     sln_path = getcwd()
     # vs_path = r"E:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
-    compile_cmd = r"Common7\Tools\VsDevCmd.bat & chdir /d {} & devenv Citta_T1.sln /Build 开发调试 /Project Citta_T1\C2.csproj".format(sln_path)
+    compile_cmd = r"Common7\Tools\VsDevCmd.bat & chdir /d {} & devenv C_T1.sln /Build 开发调试 /Project C2Main\C2.csproj".format(sln_path)
     info, err = ex_cmd(compile_cmd, vs_path)
     info = info.decode("gbk")
     pat_start_compile = re.compile(r"已启动生成")
