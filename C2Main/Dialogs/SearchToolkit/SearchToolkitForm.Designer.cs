@@ -109,7 +109,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(164, 19);
             this.label10.TabIndex = 50;
-            this.label10.Text = "选填,需从接口机2次跳转时";
+            this.label10.Text = "选填,需从界面机2次跳转时";
             // 
             // interfaceIPTB
             // 
@@ -125,7 +125,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 19);
             this.label9.TabIndex = 48;
-            this.label9.Text = "接口机";
+            this.label9.Text = "界面机";
             // 
             // connectTestButton
             // 
@@ -264,7 +264,7 @@
             this.usernameTB.Name = "usernameTB";
             this.usernameTB.Size = new System.Drawing.Size(137, 25);
             this.usernameTB.TabIndex = 0;
-            this.usernameTB.Text = "x1587";
+            this.usernameTB.Text = "X1587";
             // 
             // groupBox1
             // 
@@ -347,13 +347,14 @@
             "涉黄模型",
             "飞机场模型",
             "黑客模型",
-            "宝塔面板模型",
-            "应用分发模型",
+            "宝塔面板",
+            "应用分发",
             "ddos模型",
             "xss模型",
             "侵公模型",
             "四方模型",
-            "秒播vps模型"});
+            "秒播vps",
+            "md5逆向"});
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);

@@ -8,16 +8,13 @@ namespace C2.Controls.C1.Left
 {
     struct LastOptionInfo
     {
-        public string bastionIP;
-        public string searchAgentIP;
-        public string username;
-        public string interfaceIP;
+        public string BastionIP;
+        public string SearchAgentIP;
+        public string Username;
+        public string InterfaceIP;
     };
     public partial class SearchToolkitControl : BaseLeftInnerPanel
     {
-
-        
-
         private SearchTaskManager taskManager;
         private LastOptionInfo lastInfo;
         public SearchToolkitControl()
@@ -34,16 +31,16 @@ namespace C2.Controls.C1.Left
             if (e.Button != MouseButtons.Left)
                 return;
 
-            SearchTaskInfo task = new SearchToolkitForm().GenLastInfo(lastInfo.bastionIP, lastInfo.searchAgentIP, lastInfo.interfaceIP, lastInfo.username)
+            SearchTaskInfo task = new SearchToolkitForm().GenLastInfo(lastInfo.BastionIP, lastInfo.SearchAgentIP, lastInfo.InterfaceIP, lastInfo.Username)
                                                          .ShowTaskConfigDialog();
 
             if (task.IsEmpty())
                 return;
             // 保存用户配置信息
-            lastInfo.bastionIP = task.BastionIP;
-            lastInfo.searchAgentIP = task.SearchAgentIP;
-            lastInfo.username = task.Username;
-            lastInfo.interfaceIP = task.InterfaceIP;
+            lastInfo.BastionIP = task.BastionIP;
+            lastInfo.SearchAgentIP = task.SearchAgentIP;
+            lastInfo.Username = task.Username;
+            lastInfo.InterfaceIP = task.InterfaceIP;
 
             string message;
             if (taskManager.RunTask(task))

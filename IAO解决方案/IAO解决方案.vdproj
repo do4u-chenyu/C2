@@ -909,6 +909,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5D2A76197FD84753965AE53E35A35200"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5D582AE4D1344F54810DD306B39CAE3A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2795,7 +2801,7 @@
         {
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0281867741344A6088C6247D5397A3AC"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\SourceCodeMap.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\SourceCodeMap.html"
             "TargetName" = "8:SourceCodeMap.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -2815,7 +2821,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_02F200134E6C40FA8DB2AE5D539EAA0A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\253_黄旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\253_黄旗.png"
             "TargetName" = "8:253_黄旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -2835,7 +2841,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_03555E5623594179988EECD7CDF7FE58"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_10.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_10.css"
             "TargetName" = "8:style_10.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -2855,7 +2861,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0362DD52B581488CBA25018492515FDB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\266_数字6.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\266_数字6.png"
             "TargetName" = "8:266_数字6.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -2875,7 +2881,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_040342F4749B455F8A19AAC39D9AF208"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\_Template.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Languages\\_Template.xml"
             "TargetName" = "8:_Template.xml"
             "Tag" = "8:"
             "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
@@ -2895,7 +2901,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_04ACBE5843414ACFBA0D27E016DD48C6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\260_数字0.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\260_数字0.png"
             "TargetName" = "8:260_数字0.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -2915,7 +2921,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_06980B2876724F31AE0972D0860BFCFC"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img13\\title.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img13\\title.png"
             "TargetName" = "8:title.png"
             "Tag" = "8:"
             "Folder" = "8:_88A71F76274B4DB6AD70F03F1713BD1A"
@@ -2935,7 +2941,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_06AAFE77CA554D35B750E0D2988F5029"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img9\\title.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img9\\title.png"
             "TargetName" = "8:title.png"
             "Tag" = "8:"
             "Folder" = "8:_64F3AB25D7964A98B15540E2D59C89BF"
@@ -2955,7 +2961,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_06D8CAE8E0064DA7A3151DC5B7B6477A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\402_重点.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\402_重点.png"
             "TargetName" = "8:402_重点.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -2975,7 +2981,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_075AF70AA44445CEBB22BB0B597E9F1D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\DrawingManager_min.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\DrawingManager_min.js"
             "TargetName" = "8:DrawingManager_min.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -2995,7 +3001,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_07F89545F74548E2ABF358B5E52D6B73"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\60_话单.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\60_话单.png"
             "TargetName" = "8:60_话单.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3015,7 +3021,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0809A377FC02405080E3A1FB28519A56"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img11\\title.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img11\\title.png"
             "TargetName" = "8:title.png"
             "Tag" = "8:"
             "Folder" = "8:_7F0B509E0F0F4A94A2F276568FCC793F"
@@ -3035,7 +3041,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_083D592CC3E84A9EB1C01F74366A8FB7"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\254_黄旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\254_黄旗.png"
             "TargetName" = "8:254_黄旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3055,7 +3061,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0BA208EC27BB4E6781C19569FF972993"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img3\\line1_3.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img3\\line1_3.png"
             "TargetName" = "8:line1_3.png"
             "Tag" = "8:"
             "Folder" = "8:_D6EDAB5E2C704B30A8B22A8A92979ABD"
@@ -3075,7 +3081,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0C13CE158D1B4835853B62415DC6B108"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\200_重点区域.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\200_重点区域.png"
             "TargetName" = "8:200_重点区域.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3095,7 +3101,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0D6A81CAD6494DB1B67EE857CFF9B1BB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Deep Blue.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Deep Blue.xml"
             "TargetName" = "8:Deep Blue.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -3115,7 +3121,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0DD359702A714208BF03E205668D7532"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex1.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex1.html"
             "TargetName" = "8:BossIndex1.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -3135,7 +3141,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0EAE9FE3A25B4C548409C096DC893030"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_8.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_8.css"
             "TargetName" = "8:style_8.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -3155,7 +3161,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0EFD4C8118D44414B6FBE81EC64D9C20"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\12_涉恐.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\12_涉恐.png"
             "TargetName" = "8:12_涉恐.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3175,7 +3181,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F2D94C2C7434C1C93C30EECB8628971"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\205_头像.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\205_头像.png"
             "TargetName" = "8:205_头像.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3195,7 +3201,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F3D644D0B0C4CB08FE8CD2730B13057"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-2.0.dll"
+            "SourcePath" = "8:..\\C2Main\\sbin\\msys-2.0.dll"
             "TargetName" = "8:msys-2.0.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -3215,7 +3221,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_11852B7F686741CE814DA644B9A9D9A4"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\69_Imsi.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\69_Imsi.png"
             "TargetName" = "8:69_Imsi.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3235,7 +3241,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_11E5683183CA49AFAB53D45CA595FAB4"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\66_基站.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\66_基站.png"
             "TargetName" = "8:66_基站.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3255,7 +3261,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_12AC64AF895F41E281EFEBFF73E728F1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\65_FP.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\65_FP.png"
             "TargetName" = "8:65_FP.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3306,7 +3312,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_132555387E764586A5931C3670C0F35A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\201_loading.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\201_loading.png"
             "TargetName" = "8:201_loading.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3326,7 +3332,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_13531A3249EB4C6F8262EC8B3B06E02C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\30_涉邪教.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\30_涉邪教.png"
             "TargetName" = "8:30_涉邪教.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3346,7 +3352,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1444C5E62D564174B36D2D9C04D1D6A3"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_gun_accountPass_C2_20200908.py.zip"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_gun_accountPass_C2_20200908.py.zip"
             "TargetName" = "8:batchquery_gun_accountPass_C2_20200908.py.zip"
             "Tag" = "8:"
             "Folder" = "8:_A84863BC140649D99C499CAD84190897"
@@ -3366,7 +3372,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_150A8F2C534646E2AADFDA9F904E4153"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img2\\t_bg_2.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img2\\t_bg_2.png"
             "TargetName" = "8:t_bg_2.png"
             "Tag" = "8:"
             "Folder" = "8:_A1F8FD9C254B42DD98E2B9D71A192F96"
@@ -3417,7 +3423,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_161661E171FE45709CDFE209CB3191DE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\269_数字9.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\269_数字9.png"
             "TargetName" = "8:269_数字9.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3437,7 +3443,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_165CD1A676934A098A5F495789E72844"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img13\\back.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img13\\back.jpg"
             "TargetName" = "8:back.jpg"
             "Tag" = "8:"
             "Folder" = "8:_88A71F76274B4DB6AD70F03F1713BD1A"
@@ -3457,7 +3463,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_16F04DCFFEB246A48A4F17241DA2370D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\253_红旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\253_红旗.png"
             "TargetName" = "8:253_红旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3477,7 +3483,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1707A6139825408FA582B03A37D3DBEE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\141_银行卡.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\141_银行卡.png"
             "TargetName" = "8:141_银行卡.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3497,7 +3503,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_174A3E7AE9314B1499449C2CF87802D1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\61_APK.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\61_APK.png"
             "TargetName" = "8:61_APK.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3517,7 +3523,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_18589E7BF14842998380800ABA695E84"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\117_群聊.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\117_群聊.png"
             "TargetName" = "8:117_群聊.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3537,7 +3543,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1863D18DA81E42EB945B99730E2FDF6C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\94_分析任务.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\94_分析任务.png"
             "TargetName" = "8:94_分析任务.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3557,7 +3563,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_190260C492C2476EB93C4829F7BE11DE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img4\\title_4.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img4\\title_4.png"
             "TargetName" = "8:title_4.png"
             "Tag" = "8:"
             "Folder" = "8:_0296666E532344C4B59FF577EF383C45"
@@ -3577,7 +3583,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1A8E51EEAF5545CE98DFC817F5D3FDC7"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_15.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_15.css"
             "TargetName" = "8:style_15.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -3597,7 +3603,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E143F8C89E94A1CB01955FC28303317"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Thin Green.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Thin Green.xml"
             "TargetName" = "8:Thin Green.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -3617,7 +3623,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E457943F6014C4194831295CBD239BD"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\awk.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\awk.exe"
             "TargetName" = "8:awk.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -3637,7 +3643,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E67A78ACB2641568935F71726D710C2"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\241_叉.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\241_叉.png"
             "TargetName" = "8:241_叉.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3657,7 +3663,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E9CCDB335E24E538E0F256C76B4E6AB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\zh.CHS.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Languages\\zh.CHS.xml"
             "TargetName" = "8:zh.CHS.xml"
             "Tag" = "8:"
             "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
@@ -3677,7 +3683,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F1F525AFE124397844C05D84570E4EB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img15\\border.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img15\\border.png"
             "TargetName" = "8:border.png"
             "Tag" = "8:"
             "Folder" = "8:_AF7F56C53E0045F58C5C73EA160FDFC2"
@@ -3697,7 +3703,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F8FAF8632514BC59B27A1F277D63BE9"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\253_绿旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\253_绿旗.png"
             "TargetName" = "8:253_绿旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3717,7 +3723,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F9B614DD734432183E91E425EF5C9E7"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\403_重点.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\403_重点.png"
             "TargetName" = "8:403_重点.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3737,7 +3743,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2044F12BD0A44229A05D9B3BE68EED8F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img1\\amiddboxtbott2.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img1\\amiddboxtbott2.png"
             "TargetName" = "8:amiddboxtbott2.png"
             "Tag" = "8:"
             "Folder" = "8:_54AE56D81F974C6CBEF11A1FAE617923"
@@ -3757,7 +3763,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_20487ACA5CFE417184ECEE846C00D478"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\57_走私.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\57_走私.png"
             "TargetName" = "8:57_走私.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3777,7 +3783,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2198B301B7484A0C99751032E1C4BC4D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\472_星期五.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\472_星期五.png"
             "TargetName" = "8:472_星期五.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3797,7 +3803,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_229550EF4F5D423980107E3F64E1A4D8"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Standard.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Standard.xml"
             "TargetName" = "8:Standard.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -3817,7 +3823,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_22F4E74126674E0F9BCBF800FA734F27"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Demo\\demo_excel.xlsx"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Demo\\demo_excel.xlsx"
             "TargetName" = "8:demo_excel.xlsx"
             "Tag" = "8:"
             "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
@@ -3837,7 +3843,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_239D76A88F5E4F34B8AF7FEFFED83C65"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\237_done.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\237_done.png"
             "TargetName" = "8:237_done.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3857,7 +3863,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2612D43EC3B74FE2BEC5FE77AC9865A6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\241_no.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\241_no.png"
             "TargetName" = "8:241_no.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3877,7 +3883,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_26974A7B99564FE1A4F04B859B924340"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\85_Tiktok.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\85_Tiktok.png"
             "TargetName" = "8:85_Tiktok.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3897,7 +3903,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_27CB56BB8A2044D2B2C4B76FE861988E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\105_密码1.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\105_密码1.png"
             "TargetName" = "8:105_密码1.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -3917,7 +3923,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_28C7AC7827F14008B53568A2E3C58798"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_13.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_13.css"
             "TargetName" = "8:style_13.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -3937,7 +3943,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_291E3BE52F694418B28304F7F94479D7"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\echo.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\echo.exe"
             "TargetName" = "8:echo.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -3957,7 +3963,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2A42B1655D484E28B6CB032561C729F0"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img10\\block1.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img10\\block1.png"
             "TargetName" = "8:block1.png"
             "Tag" = "8:"
             "Folder" = "8:_D36FCC92550B4104A9EE9B9C4F6761CD"
@@ -3988,7 +3994,7 @@
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\relate.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\relate.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -4008,7 +4014,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2C29DC4FCC72466C9EE55CD193467F08"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\50_野生动物.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\50_野生动物.png"
             "TargetName" = "8:50_野生动物.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4028,7 +4034,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2C9DB057DA574BDEAF99CE23657064AB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Khaki.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Khaki.xml"
             "TargetName" = "8:Khaki.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -4048,7 +4054,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2CF83C1BC5F548A28A65A1BD6D69D662"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\273_数字1.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\273_数字1.png"
             "TargetName" = "8:273_数字1.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4068,7 +4074,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2D0B478BDA1E4241B4307C2E81257E9F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_11.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_11.css"
             "TargetName" = "8:style_11.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -4088,7 +4094,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2D6086D439AC4F42A7AA32CA24372662"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Sand and Shade.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Sand and Shade.xml"
             "TargetName" = "8:Sand and Shade.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -4108,7 +4114,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2D6ED83464CE4EF1B39A201B5E5AF0F8"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img14\\center01.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img14\\center01.png"
             "TargetName" = "8:center01.png"
             "Tag" = "8:"
             "Folder" = "8:_66D71072DFD14B5BA1333313C394ADBB"
@@ -4128,7 +4134,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2E329B7125B2415F87A8D8C144E6AF3B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\phx6.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\phx6.js"
             "TargetName" = "8:phx6.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -4148,7 +4154,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2E80778637F04CEE8232266906CA7F89"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img14\\bg_top.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img14\\bg_top.png"
             "TargetName" = "8:bg_top.png"
             "Tag" = "8:"
             "Folder" = "8:_66D71072DFD14B5BA1333313C394ADBB"
@@ -4168,7 +4174,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2F946342010B49078859CFA531C6AFF3"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\277_数字2.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\277_数字2.png"
             "TargetName" = "8:277_数字2.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4188,7 +4194,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2FF7924A9D0443CA8705D89DF51873A0"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\145_物证.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\145_物证.png"
             "TargetName" = "8:145_物证.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4208,7 +4214,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3072D455344A46B193A0356E2E5D5A4F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Templates\\树状图.xml"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\树状图.xml"
             "TargetName" = "8:树状图.xml"
             "Tag" = "8:"
             "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
@@ -4228,7 +4234,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_30B9C75FF2514845A8EE601EE7F40549"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\29_涉藏.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\29_涉藏.png"
             "TargetName" = "8:29_涉藏.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4248,7 +4254,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_311FBF0832574405B33837269B968971"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Demo\\demo_txt.txt"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Demo\\demo_txt.txt"
             "TargetName" = "8:demo_txt.txt"
             "Tag" = "8:"
             "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
@@ -4268,7 +4274,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_316BC38475D3486BAA36C1D3CBE3BE36"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\1_涉赌 (2).png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\1_涉赌 (2).png"
             "TargetName" = "8:1_涉赌 (2).png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4288,7 +4294,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_32D9BA557AA341919F7B7C17E15116B0"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\452_星期日.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\452_星期日.png"
             "TargetName" = "8:452_星期日.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4308,7 +4314,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_330B216FE03742ABA72FF3FE24985A5A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\75_QQ.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\75_QQ.png"
             "TargetName" = "8:75_QQ.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4339,7 +4345,7 @@
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\bin\\开发调试\\plugins\\RookieKnowledgePlugin.dll"
+            "SourcePath" = "8:..\\C2Main\\bin\\开发调试\\plugins\\RookieKnowledgePlugin.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
@@ -4359,7 +4365,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3386C06A166B4191895EF315A973E908"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img9\\border.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img9\\border.png"
             "TargetName" = "8:border.png"
             "Tag" = "8:"
             "Folder" = "8:_64F3AB25D7964A98B15540E2D59C89BF"
@@ -4379,7 +4385,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_34785E93D86046CEA2292317D5F086EA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img5\\border.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img5\\border.jpg"
             "TargetName" = "8:border.jpg"
             "Tag" = "8:"
             "Folder" = "8:_8D2970F0F7DA4666AA7C4F3FCFBC49A4"
@@ -4399,7 +4405,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_34C461C9C0A34F3C9B099A39947E7A73"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-pcre-1.dll"
+            "SourcePath" = "8:..\\C2Main\\sbin\\msys-pcre-1.dll"
             "TargetName" = "8:msys-pcre-1.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -4419,7 +4425,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3580CD923DE248FFA5664CF5135AC60C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img4\\border_4.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img4\\border_4.png"
             "TargetName" = "8:border_4.png"
             "Tag" = "8:"
             "Folder" = "8:_0296666E532344C4B59FF577EF383C45"
@@ -4439,7 +4445,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_35C15BCD600C4135B7AB2B6A47D45D27"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\DrawingManager.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\DrawingManager.css"
             "TargetName" = "8:DrawingManager.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -4501,7 +4507,7 @@
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\C2.exe"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -4521,7 +4527,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_38337DF6B27D458390CAF1675A9D4DA8"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Light a way.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Light a way.xml"
             "TargetName" = "8:Light a way.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -4541,7 +4547,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_38EEB6A8EDA441369FA1C33701B6A731"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\92_监控.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\92_监控.png"
             "TargetName" = "8:92_监控.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4561,7 +4567,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_396F335496484D30A91284C834272D07"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img7\\border2.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img7\\border2.png"
             "TargetName" = "8:border2.png"
             "Tag" = "8:"
             "Folder" = "8:_10F89C1BF7A24593A0EE93C1BD1CF452"
@@ -4581,7 +4587,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_399780E4807A45638D144088EF341624"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Templates\\JS自动化过滤流程.iao"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\JS自动化过滤流程.iao"
             "TargetName" = "8:JS自动化过滤流程.iao"
             "Tag" = "8:"
             "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
@@ -4601,7 +4607,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A3910385F984BAE87075D97FA7A8719"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\281_数字3.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\281_数字3.png"
             "TargetName" = "8:281_数字3.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4621,7 +4627,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A69AC2E56104BBBA99C3C1ADB95A926"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\236_done.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\236_done.png"
             "TargetName" = "8:236_done.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4641,7 +4647,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3C27E5CC67CA4FCC9C3ACA6AF87660B0"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\phx11.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\phx11.js"
             "TargetName" = "8:phx11.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -4661,7 +4667,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D83DA2BE340405FAD13014EA689B1C3"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\C2.exe.config"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\C2.exe.config"
             "TargetName" = "8:C2.exe.config"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -4712,7 +4718,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3DF6DB568490437FA9D35D70921B50DF"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img10\\title.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img10\\title.png"
             "TargetName" = "8:title.png"
             "Tag" = "8:"
             "Folder" = "8:_D36FCC92550B4104A9EE9B9C4F6761CD"
@@ -4752,7 +4758,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3FE2C871062C482E9447F23FCD6C3ECE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Languages\\en.US.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Languages\\en.US.xml"
             "TargetName" = "8:en.US.xml"
             "Tag" = "8:"
             "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
@@ -4772,7 +4778,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_400DC49E581140A7BE01BCBF744D0C25"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img14\\bg_report.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img14\\bg_report.png"
             "TargetName" = "8:bg_report.png"
             "Tag" = "8:"
             "Folder" = "8:_66D71072DFD14B5BA1333313C394ADBB"
@@ -4792,7 +4798,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_41972B4E7D7742D2A2D397C775931982"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\134_指纹.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\134_指纹.png"
             "TargetName" = "8:134_指纹.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4812,7 +4818,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_437A2A8F34AA4E3D9B0CB4AD4F49FA69"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Templates\\空模板.xml"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\空模板.xml"
             "TargetName" = "8:空模板.xml"
             "Tag" = "8:"
             "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
@@ -4832,7 +4838,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4505BD14174E4CDA878318C3A98FBC6C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\19_涉爆.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\19_涉爆.png"
             "TargetName" = "8:19_涉爆.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4852,7 +4858,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4557235F237B46C39402D5DDF109C7ED"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\433_方向.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\433_方向.png"
             "TargetName" = "8:433_方向.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4872,7 +4878,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_46A3685C4F154D2693B72A42EBCF5C0F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\265_数字5.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\265_数字5.png"
             "TargetName" = "8:265_数字5.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -4923,7 +4929,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_47EDB3DCFE4742ECA6E70F0891C368FE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-ncursesw6.dll"
+            "SourcePath" = "8:..\\C2Main\\sbin\\msys-ncursesw6.dll"
             "TargetName" = "8:msys-ncursesw6.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -4974,7 +4980,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_48DA16859ABC4FC3A154DF04CBA885CA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\xargs.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\xargs.exe"
             "TargetName" = "8:xargs.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -5025,7 +5031,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4AEB8EED8B834187B9B3128EB3A42E5E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img4\\bg.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img4\\bg.jpg"
             "TargetName" = "8:bg.jpg"
             "Tag" = "8:"
             "Folder" = "8:_0296666E532344C4B59FF577EF383C45"
@@ -5045,7 +5051,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4D009B6E703547AC9C7511D3FC38BC21"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\151_国旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\151_国旗.png"
             "TargetName" = "8:151_国旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5065,7 +5071,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4DC888F54FE84FCCAD61E7C1464A0DE4"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\73_Python.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\73_Python.png"
             "TargetName" = "8:73_Python.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5085,7 +5091,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4E5DCD52FCF84AA98681A8254EA21BD5"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Google Plus.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Google Plus.xml"
             "TargetName" = "8:Google Plus.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -5105,7 +5111,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4EDFF934DC8348EB9AE4B4F225020230"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\head.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\head.exe"
             "TargetName" = "8:head.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -5125,7 +5131,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4F4BC5F0730E40D8BA8CC3274ED8F61B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\254_红旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\254_红旗.png"
             "TargetName" = "8:254_红旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5145,7 +5151,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_504FC2CB0F6F473C83E1DC6C0BEE31EF"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Deep Gray.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Deep Gray.xml"
             "TargetName" = "8:Deep Gray.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -5165,7 +5171,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_50839075B60546C3AF8FFA34A142F70E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\150_战果.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\150_战果.png"
             "TargetName" = "8:150_战果.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5185,7 +5191,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5094B9BDA16F4BB182435D9ACDD969ED"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img14\\bg_data.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img14\\bg_data.png"
             "TargetName" = "8:bg_data.png"
             "Tag" = "8:"
             "Folder" = "8:_66D71072DFD14B5BA1333313C394ADBB"
@@ -5205,7 +5211,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_510AE55C87684A1D8880B4F01DA9FC3E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Blue Gray.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Blue Gray.xml"
             "TargetName" = "8:Blue Gray.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -5225,7 +5231,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5298187911EB487298FB5DCE47608A8D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\63_Spark.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\63_Spark.png"
             "TargetName" = "8:63_Spark.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5245,7 +5251,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_52B37019114F40B5AC10E8EE3CBBC7EE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-mpfr-6.dll"
+            "SourcePath" = "8:..\\C2Main\\sbin\\msys-mpfr-6.dll"
             "TargetName" = "8:msys-mpfr-6.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -5265,7 +5271,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_52F4A29C1C82420586EB167A23FFFA93"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\8_第四方支付.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\8_第四方支付.png"
             "TargetName" = "8:8_第四方支付.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5316,7 +5322,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_54AC58B0620447CD800AD874B74C4B55"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\77_社交网络.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\77_社交网络.png"
             "TargetName" = "8:77_社交网络.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5336,7 +5342,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_54F7ECA91C77458D85473B105BCBC926"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\8_地下钱庄.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\8_地下钱庄.png"
             "TargetName" = "8:8_地下钱庄.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5356,7 +5362,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_556FBDABFCFC46D393FF4006256F8BFA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\293_数字6.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\293_数字6.png"
             "TargetName" = "8:293_数字6.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5376,7 +5382,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_56A1D900EDE54A7DBCA31AE7D505EAEB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_9.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_9.css"
             "TargetName" = "8:style_9.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -5396,7 +5402,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_56CA4D25922A4FFCBF5BB4E09DD417BA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_2.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_2.css"
             "TargetName" = "8:style_2.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -5416,7 +5422,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_56F931DC52F94729B533711AE1C2FC07"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\74_数据库.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\74_数据库.png"
             "TargetName" = "8:74_数据库.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5436,7 +5442,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_57425358A888486D80A9CD2B4496BB9C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\cat.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\cat.exe"
             "TargetName" = "8:cat.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -5487,7 +5493,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_59983961DD54475FB4510CCF92098571"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\83_whatsapp.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\83_whatsapp.png"
             "TargetName" = "8:83_whatsapp.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5507,7 +5513,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5999DB6F229C45208D0CCE5B17044BB5"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\199_地点.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\199_地点.png"
             "TargetName" = "8:199_地点.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5527,7 +5533,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_59BE37FC540A4A75AA3FCCD425A863B1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\22_涉枪.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\22_涉枪.png"
             "TargetName" = "8:22_涉枪.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5547,7 +5553,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5AB230EBDF4143F0B16E19E56A989887"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\tr.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\tr.exe"
             "TargetName" = "8:tr.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -5567,7 +5573,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5AE7C1948BC24692BD922308A6149FE8"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_5.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_5.css"
             "TargetName" = "8:style_5.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -5585,9 +5591,29 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D2A76197FD84753965AE53E35A35200"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Script\\IAO_Search_gamble\\batchquery_code_accountPass_C2_20210624.py.zip"
+            "TargetName" = "8:batchquery_code_accountPass_C2_20210624.py.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_A84863BC140649D99C499CAD84190897"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D582AE4D1344F54810DD306B39CAE3A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Cool Advertisement.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Cool Advertisement.xml"
             "TargetName" = "8:Cool Advertisement.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -5607,7 +5633,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5E5ECF6BA12D4C49A60445FB24316725"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex15.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex15.html"
             "TargetName" = "8:BossIndex15.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -5627,7 +5653,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5E8285E959BA4D229230D7B24A500161"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\17_涉政.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\17_涉政.png"
             "TargetName" = "8:17_涉政.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5647,7 +5673,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5EADAF9A7F3645DD914FE2064C08A0CD"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\74_云服务.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\74_云服务.png"
             "TargetName" = "8:74_云服务.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5667,7 +5693,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5F8B7101CCCD4055A35A2E8E224434F9"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\37_涉税.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\37_涉税.png"
             "TargetName" = "8:37_涉税.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5718,7 +5744,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_613F39B7BCE443028609BB42DC297C86"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\DistanceTool_min.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\DistanceTool_min.js"
             "TargetName" = "8:DistanceTool_min.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -5738,7 +5764,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_61C1CDD9926E4765942F4949AE5264EF"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\195_开锁.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\195_开锁.png"
             "TargetName" = "8:195_开锁.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5758,7 +5784,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_643106283ED14E1BBC1FDF128AACB201"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-iconv-2.dll"
+            "SourcePath" = "8:..\\C2Main\\sbin\\msys-iconv-2.dll"
             "TargetName" = "8:msys-iconv-2.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -5778,7 +5804,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6491F44F483B4AD6B1182F30B892C869"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img10\\block3.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img10\\block3.png"
             "TargetName" = "8:block3.png"
             "Tag" = "8:"
             "Folder" = "8:_D36FCC92550B4104A9EE9B9C4F6761CD"
@@ -5798,7 +5824,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6574B4E69D3D46B78E94D2600F0F05E1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\68_IP.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\68_IP.png"
             "TargetName" = "8:68_IP.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5818,7 +5844,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_658C91883F2D46A39BD4A19F0174F43C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\26_涉毒.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\26_涉毒.png"
             "TargetName" = "8:26_涉毒.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5838,7 +5864,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_65CF41F8D92C47C6809BA19E13392112"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Brown Purple.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Brown Purple.xml"
             "TargetName" = "8:Brown Purple.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -5889,7 +5915,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6881FCF475A54D6595F65193E50EE9F2"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\90_人员伴随.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\90_人员伴随.png"
             "TargetName" = "8:90_人员伴随.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5909,7 +5935,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_68E301FDC2604C46ADCC93F722D47D66"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img12\\border.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img12\\border.png"
             "TargetName" = "8:border.png"
             "Tag" = "8:"
             "Folder" = "8:_3E2DCCF232AC4035860CF9F2F3BA471B"
@@ -5929,7 +5955,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6920738F0C0E474DAE9036A9837EEFF2"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Bluish Violet.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Bluish Violet.xml"
             "TargetName" = "8:Bluish Violet.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -5949,7 +5975,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6CFD3FEC8CA9437AB7D836E7ABF52A75"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex11.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex11.html"
             "TargetName" = "8:BossIndex11.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -5969,7 +5995,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D48E6D64E2B461C951FEC96546E7305"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\202_头像.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\202_头像.png"
             "TargetName" = "8:202_头像.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -5989,7 +6015,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6E14F494AAAA47C88EB9B5D5FA5D9663"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\140_身份证.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\140_身份证.png"
             "TargetName" = "8:140_身份证.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6009,7 +6035,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6E284F8B541547CAB009DF415E64D56F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\105_密码.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\105_密码.png"
             "TargetName" = "8:105_密码.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6029,7 +6055,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6E519A683AC14874B0944DB212355EC1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\253_棕旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\253_棕旗.png"
             "TargetName" = "8:253_棕旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6049,7 +6075,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6EA51C1EF3004F569568A3658F61137E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\21_涉枪.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\21_涉枪.png"
             "TargetName" = "8:21_涉枪.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6069,7 +6095,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6F70A50DA9EC4A9392C95B17167B0F51"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex4.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex4.html"
             "TargetName" = "8:BossIndex4.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -6089,7 +6115,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_70E0A0423CC544AC8F5187AD50AC0104"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\70_Wifi.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\70_Wifi.png"
             "TargetName" = "8:70_Wifi.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6109,7 +6135,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_72845AE25D6F45FF9E1F6FB5AE5B5387"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\51_个人极端.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\51_个人极端.png"
             "TargetName" = "8:51_个人极端.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6140,7 +6166,7 @@
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\cat_xls.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\cat_xls.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -6160,7 +6186,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7401A4C9734649859F9E0A7C9568BED6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\73_红包.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\73_红包.png"
             "TargetName" = "8:73_红包.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6180,7 +6206,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_757CEEA52BB04CF4AD9DB3FC182EC17E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\76_微信.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\76_微信.png"
             "TargetName" = "8:76_微信.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6200,7 +6226,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_75BF60DA766A4B0D957BCB0429D91C01"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\204_头像.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\204_头像.png"
             "TargetName" = "8:204_头像.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6220,7 +6246,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_75BF9A262D9E42A8B16E53F9E125A6E4"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\sort.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\sort.exe"
             "TargetName" = "8:sort.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -6240,7 +6266,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_75E8081B92A145B8A6570C2EA08FE1EC"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\261_数字1.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\261_数字1.png"
             "TargetName" = "8:261_数字1.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6260,7 +6286,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_75EDD98908E148F6BD699610A1CF4D1C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img8\\bg.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img8\\bg.jpg"
             "TargetName" = "8:bg.jpg"
             "Tag" = "8:"
             "Folder" = "8:_52523D547F5F46C8B96035EE1C5D14A7"
@@ -6280,7 +6306,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_766C2281FECB4DA284F62D72DACAC892"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\58_组织架构.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\58_组织架构.png"
             "TargetName" = "8:58_组织架构.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6300,7 +6326,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7763599E0BB34085AF17C63EC6A3BCFC"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img5\\title.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img5\\title.png"
             "TargetName" = "8:title.png"
             "Tag" = "8:"
             "Folder" = "8:_8D2970F0F7DA4666AA7C4F3FCFBC49A4"
@@ -6320,7 +6346,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_77CEAF8700D84F02B2A85F0B0FBEF306"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\73_二维码.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\73_二维码.png"
             "TargetName" = "8:73_二维码.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6340,7 +6366,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_785AC42B79ED41BAA33EB7A8393A5A9F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-gcc_s-seh-1.dll"
+            "SourcePath" = "8:..\\C2Main\\sbin\\msys-gcc_s-seh-1.dll"
             "TargetName" = "8:msys-gcc_s-seh-1.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -6360,7 +6386,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7B520F17C3AC40E79F8B36A281F94A68"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex7.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex7.html"
             "TargetName" = "8:BossIndex7.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -6380,7 +6406,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7CEEB5B6214F434FA36DACF2FF727436"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\53_管制刀具.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\53_管制刀具.png"
             "TargetName" = "8:53_管制刀具.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6400,7 +6426,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7E2B8F8A0D4F49E5A1A69CA27F7F4BEA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\88_家谱分析.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\88_家谱分析.png"
             "TargetName" = "8:88_家谱分析.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6420,7 +6446,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7FA2033130DC4C14960E6BBEC29712E8"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\456_星期一.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\456_星期一.png"
             "TargetName" = "8:456_星期一.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6440,7 +6466,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8063E1BA1BCB4F3EAA3B3393E69370BF"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\81_Line.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\81_Line.png"
             "TargetName" = "8:81_Line.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6460,7 +6486,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8148F265E7AB4B5BAF7812F5BC59B3A5"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_14.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_14.css"
             "TargetName" = "8:style_14.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -6480,7 +6506,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_822917C55FEE41F796BA0D2CA278900B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_plane_accountPass_C2_20210414.py.zip"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_plane_accountPass_C2_20210414.py.zip"
             "TargetName" = "8:batchquery_plane_accountPass_C2_20210414.py.zip"
             "Tag" = "8:"
             "Folder" = "8:_A84863BC140649D99C499CAD84190897"
@@ -6500,7 +6526,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_824E1BA16A1848288D6952148AC8770F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\237_yes.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\237_yes.png"
             "TargetName" = "8:237_yes.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6520,7 +6546,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_82A433932DF441D58B48E9C49DFE1B74"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_7.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_7.css"
             "TargetName" = "8:style_7.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -6540,7 +6566,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_83257A77464941C8AD5C2ED3881FB4F8"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\StartMap.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\StartMap.html"
             "TargetName" = "8:StartMap.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -6560,7 +6586,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_83E41F959F204DACB46E0781961E87EC"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\135_指纹.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\135_指纹.png"
             "TargetName" = "8:135_指纹.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6580,7 +6606,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8406020105664134B46914CA04D398F6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex1.html"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Business\\IAOLab\\WebEngine\\Html\\BossIndex1.html"
             "TargetName" = "8:BossIndex1.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -6631,7 +6657,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_85FA1A6333A440DCA2FFE3B045D7C645"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_db_accountPass_C2_Test_Running.py.zip"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_db_accountPass_C2_Test_Running.py.zip"
             "TargetName" = "8:batchquery_db_accountPass_C2_Test_Running.py.zip"
             "Tag" = "8:"
             "Folder" = "8:_A84863BC140649D99C499CAD84190897"
@@ -6651,7 +6677,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8650C1CB4AA14D358549BA5A746BEB08"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\phx13.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\phx13.js"
             "TargetName" = "8:phx13.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -6671,7 +6697,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8679CDAC6CCD4D53A8E699FCEED4BD53"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\93_监控.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\93_监控.png"
             "TargetName" = "8:93_监控.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6691,7 +6717,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_876A96881AE34F0DB62B8BAA58CEFBFA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Help\\全文工具箱帮助文档.txt"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Help\\全文工具箱帮助文档.txt"
             "TargetName" = "8:全文工具箱帮助文档.txt"
             "Tag" = "8:"
             "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
@@ -6711,7 +6737,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_878418523F854998A52A9FAEE1DD41D5"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img3\\true_3.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img3\\true_3.jpg"
             "TargetName" = "8:true_3.jpg"
             "Tag" = "8:"
             "Folder" = "8:_D6EDAB5E2C704B30A8B22A8A92979ABD"
@@ -6731,7 +6757,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87F8184E376443DBAE8CA83A14335380"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\86_浏览量.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\86_浏览量.png"
             "TargetName" = "8:86_浏览量.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6751,7 +6777,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_88003E145DB64F6B8A70D4C734772F9F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img7\\title.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img7\\title.png"
             "TargetName" = "8:title.png"
             "Tag" = "8:"
             "Folder" = "8:_10F89C1BF7A24593A0EE93C1BD1CF452"
@@ -6771,7 +6797,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_884D851067974388897EA4D4C64F19ED"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\DrawingManager_min.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\DrawingManager_min.css"
             "TargetName" = "8:DrawingManager_min.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -6791,7 +6817,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8939C17115BD4ADFA9F885ED6C92D5A2"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img2\\bg_3.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img2\\bg_3.jpg"
             "TargetName" = "8:bg_3.jpg"
             "Tag" = "8:"
             "Folder" = "8:_A1F8FD9C254B42DD98E2B9D71A192F96"
@@ -6811,7 +6837,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_89AD6A5B39E3412DB9FD966333774D15"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\9_黑灰产.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\9_黑灰产.png"
             "TargetName" = "8:9_黑灰产.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6831,7 +6857,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A187F5488B04A6D937FDF2C40805FA7"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\68_Imei.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\68_Imei.png"
             "TargetName" = "8:68_Imei.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6882,7 +6908,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A800B0B8CDF4F5F854C448D52C0506E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\87_图片分析.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\87_图片分析.png"
             "TargetName" = "8:87_图片分析.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6902,7 +6928,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A8BE01954004DF89A0AA8758CE05642"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\437_方向 .png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\437_方向 .png"
             "TargetName" = "8:437_方向 .png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6922,7 +6948,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8ACD7282DBBF475B8BA2941DB995739F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\67_IP.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\67_IP.png"
             "TargetName" = "8:67_IP.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6942,7 +6968,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8B0702C7130849C394EC0DFA5C520DD0"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\84_youtube.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\84_youtube.png"
             "TargetName" = "8:84_youtube.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -6962,7 +6988,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8E78A62B633C4309AF8DD18CFC101BD9"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img10\\back.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img10\\back.jpg"
             "TargetName" = "8:back.jpg"
             "Tag" = "8:"
             "Folder" = "8:_D36FCC92550B4104A9EE9B9C4F6761CD"
@@ -6982,7 +7008,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8EF3415EC508455CBA6B8D029669524A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\133_地点.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\133_地点.png"
             "TargetName" = "8:133_地点.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7002,7 +7028,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F5F594C0F2C49B6A7363E84968C9555"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex10.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex10.html"
             "TargetName" = "8:BossIndex10.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -7022,7 +7048,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8FC830EEB2C14363B470A7CC9CD9B508"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\256_蓝旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\256_蓝旗.png"
             "TargetName" = "8:256_蓝旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7042,7 +7068,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_90BDBD6755794D5FB77A6BBABB2BA9C5"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\rm.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\rm.exe"
             "TargetName" = "8:rm.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -7062,7 +7088,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_91F5031DC64E4A7B9BA78303C1869150"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\468_星期四.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\468_星期四.png"
             "TargetName" = "8:468_星期四.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7082,7 +7108,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_92348C5FF94B41FA907F4DA21E2E8FCE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\97_态势分析.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\97_态势分析.png"
             "TargetName" = "8:97_态势分析.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7102,7 +7128,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9239501924F549CCB122EE6179972DBA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\72_代码.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\72_代码.png"
             "TargetName" = "8:72_代码.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7122,7 +7148,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_92A6D244F39445DBB7B7847BE36E4E6F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img1\\amiddboxtbott1.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img1\\amiddboxtbott1.png"
             "TargetName" = "8:amiddboxtbott1.png"
             "Tag" = "8:"
             "Folder" = "8:_54AE56D81F974C6CBEF11A1FAE617923"
@@ -7173,7 +7199,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_94F3F70C23FA400C9EDF4B11DE05747B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img11\\border.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img11\\border.png"
             "TargetName" = "8:border.png"
             "Tag" = "8:"
             "Folder" = "8:_7F0B509E0F0F4A94A2F276568FCC793F"
@@ -7193,7 +7219,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9503EE97862F4ABFAB6C7B3CBE3A9EED"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\147_落案.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\147_落案.png"
             "TargetName" = "8:147_落案.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7213,7 +7239,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_95A043C0DAF94839AC452658178B5000"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img12\\border2.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img12\\border2.png"
             "TargetName" = "8:border2.png"
             "Tag" = "8:"
             "Folder" = "8:_3E2DCCF232AC4035860CF9F2F3BA471B"
@@ -7233,7 +7259,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A41724CA2294A6DBA1D2E75D650E69D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img8\\title_3.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img8\\title_3.png"
             "TargetName" = "8:title_3.png"
             "Tag" = "8:"
             "Folder" = "8:_52523D547F5F46C8B96035EE1C5D14A7"
@@ -7253,7 +7279,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9AFCB0E203EF48C7A867879EFADE25D6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\130_服务器.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\130_服务器.png"
             "TargetName" = "8:130_服务器.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7273,7 +7299,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9AFD385EEE354FBD9611908733C423EB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img7\\back.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img7\\back.jpg"
             "TargetName" = "8:back.jpg"
             "Tag" = "8:"
             "Folder" = "8:_10F89C1BF7A24593A0EE93C1BD1CF452"
@@ -7293,7 +7319,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B238849467A405E9949FC4921F0691F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\444_方向 .png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\444_方向 .png"
             "TargetName" = "8:444_方向 .png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7344,7 +7370,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9D9F61DB19EC4CF08C0FAC8C0E7F0A39"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\73_java.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\73_java.png"
             "TargetName" = "8:73_java.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7364,7 +7390,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9E204D2342434B529C1869147BB7A9D0"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Brilliant Yellow.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Brilliant Yellow.xml"
             "TargetName" = "8:Brilliant Yellow.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -7384,7 +7410,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9E25B8F9D40F45369C186BA93B0C5ECA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_4.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_4.css"
             "TargetName" = "8:style_4.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -7404,7 +7430,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9F47C3EB66C74C6FB0613D64B0D3E9DF"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\phx5.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\phx5.js"
             "TargetName" = "8:phx5.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -7424,7 +7450,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9FFE40074BC543A18ABC7F10B9A7230A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex13.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex13.html"
             "TargetName" = "8:BossIndex13.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -7444,7 +7470,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A063EFCD0CD34E12A35A62E19D0E46E1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_db_accountPass_C2_20210324.py.zip"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_db_accountPass_C2_20210324.py.zip"
             "TargetName" = "8:batchquery_db_accountPass_C2_20210324.py.zip"
             "Tag" = "8:"
             "Folder" = "8:_A84863BC140649D99C499CAD84190897"
@@ -7464,7 +7490,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A06DFE4FFFCA4FCABB066EB6F1549F21"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex2.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex2.html"
             "TargetName" = "8:BossIndex2.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -7484,7 +7510,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A0A0999DC14345A99E0AF6B8C58993FA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\95_态势分析.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\95_态势分析.png"
             "TargetName" = "8:95_态势分析.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7504,7 +7530,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A4704107782F46D39F47A8237BD9A391"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\44_地下钱庄.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\44_地下钱庄.png"
             "TargetName" = "8:44_地下钱庄.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7524,7 +7550,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A83BB79FB159417DAED4848EA89B94DC"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\DeviantArt.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\DeviantArt.xml"
             "TargetName" = "8:DeviantArt.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -7544,7 +7570,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A84533732BFB40BF84CEC4ADE9F7B9E1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\289_数字5.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\289_数字5.png"
             "TargetName" = "8:289_数字5.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7564,7 +7590,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A933DD7EE7A34B0DAC9EF42859066F75"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\206_头像.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\206_头像.png"
             "TargetName" = "8:206_头像.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7584,7 +7610,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AA258505E12246D28D00D0775C1579EA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Blackish Green.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Blackish Green.xml"
             "TargetName" = "8:Blackish Green.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -7604,7 +7630,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AB78018B2EFD436A8FC76D12F5500D45"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Templates\\DocxExample.dotx"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\DocxExample.dotx"
             "TargetName" = "8:DocxExample.dotx"
             "Tag" = "8:"
             "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
@@ -7624,7 +7650,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AC57485011DF43D39503496EFF694BD8"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\System.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\System.xml"
             "TargetName" = "8:System.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -7644,7 +7670,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AC9BDADFDE5F45338A6295AEB14A188A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img12\\title.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img12\\title.png"
             "TargetName" = "8:title.png"
             "Tag" = "8:"
             "Folder" = "8:_3E2DCCF232AC4035860CF9F2F3BA471B"
@@ -7664,7 +7690,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ACE6FCB9D2B3426BB2AE5E91B4F0BC87"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style.css"
             "TargetName" = "8:style.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -7684,7 +7710,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AD1F617010134A818DA0210619B770C2"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img3\\title_3.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img3\\title_3.png"
             "TargetName" = "8:title_3.png"
             "Tag" = "8:"
             "Folder" = "8:_D6EDAB5E2C704B30A8B22A8A92979ABD"
@@ -7704,7 +7730,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AD5763D7223B4424BF1F099EF90F3D10"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\45_假币.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\45_假币.png"
             "TargetName" = "8:45_假币.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7724,7 +7750,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AD9461F72ED8432B9ED8404B5FB310F1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\425_方向.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\425_方向.png"
             "TargetName" = "8:425_方向.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7755,7 +7781,7 @@
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\bin\\开发调试\\plugins\\2048.dll"
+            "SourcePath" = "8:..\\C2Main\\bin\\开发调试\\plugins\\2048.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
@@ -7806,7 +7832,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B00C0CC5EBB9454C9A419FB19DCA693F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\285_数字4.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\285_数字4.png"
             "TargetName" = "8:285_数字4.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7826,7 +7852,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B095D53874934F85A217423696AB272B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\20_涉爆.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\20_涉爆.png"
             "TargetName" = "8:20_涉爆.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7846,7 +7872,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B0B58A8148734702B12F1BB6A190D7DD"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py.zip"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py.zip"
             "TargetName" = "8:batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py.zip"
             "Tag" = "8:"
             "Folder" = "8:_A84863BC140649D99C499CAD84190897"
@@ -7866,7 +7892,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B0F27640B47549768243D31C555BDF5C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\297_数字7.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\297_数字7.png"
             "TargetName" = "8:297_数字7.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7886,7 +7912,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B34F393656A4404881AAA766DFD725C0"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img1\\arightboxtop.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img1\\arightboxtop.png"
             "TargetName" = "8:arightboxtop.png"
             "Tag" = "8:"
             "Folder" = "8:_54AE56D81F974C6CBEF11A1FAE617923"
@@ -7906,7 +7932,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B366C43E08FD47B69B36A8A4092A4AD6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\23_网安.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\23_网安.png"
             "TargetName" = "8:23_网安.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7926,7 +7952,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B36D81F5671446638D9D89DCBC9DEFD9"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\78_Telegram.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\78_Telegram.png"
             "TargetName" = "8:78_Telegram.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -7946,7 +7972,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B44249E4D6BF4E60B3CE93BD82620534"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Classic Blue.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Classic Blue.xml"
             "TargetName" = "8:Classic Blue.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -7966,7 +7992,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B522AB2076DF4CF189F9C4FB82EF4754"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\iconv.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\iconv.exe"
             "TargetName" = "8:iconv.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -7986,7 +8012,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B55C3C4977A74CDDB33B1DE444CB66C3"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Blumind.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Blumind.xml"
             "TargetName" = "8:Blumind.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -8006,7 +8032,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B6343712182B409AB0EE3D4DBFBEA649"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-readline7.dll"
+            "SourcePath" = "8:..\\C2Main\\sbin\\msys-readline7.dll"
             "TargetName" = "8:msys-readline7.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -8026,7 +8052,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B692E6BA9AB044E8B120A5556CAAC5D3"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\62_Hive.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\62_Hive.png"
             "TargetName" = "8:62_Hive.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8046,7 +8072,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B6D88C5DAB9D490D97484FE059545864"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\73_URL.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\73_URL.png"
             "TargetName" = "8:73_URL.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8066,7 +8092,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B86DCA2423DD4CA6BC080CB429C157C5"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\6_涉诈.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\6_涉诈.png"
             "TargetName" = "8:6_涉诈.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8086,7 +8112,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B89D49373E0D45BCBD3FD2D9E3EE375B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex8.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex8.html"
             "TargetName" = "8:BossIndex8.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -8117,7 +8143,7 @@
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\bin\\开发调试\\plugins\\FullTextGrammarAssistant.dll"
+            "SourcePath" = "8:..\\C2Main\\bin\\开发调试\\plugins\\FullTextGrammarAssistant.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
@@ -8137,7 +8163,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BB83949CBE474F45AD94558F48AD34D8"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img15\\back.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img15\\back.jpg"
             "TargetName" = "8:back.jpg"
             "Tag" = "8:"
             "Folder" = "8:_AF7F56C53E0045F58C5C73EA160FDFC2"
@@ -8157,7 +8183,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BC0F201D449E4B3D882A2EBC44BCE5B6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Demo\\demo_bcp.bcp"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Demo\\demo_bcp.bcp"
             "TargetName" = "8:demo_bcp.bcp"
             "Tag" = "8:"
             "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
@@ -8177,7 +8203,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BC67E9157EE4429FB789A04D5EBE020F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\193_锁.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\193_锁.png"
             "TargetName" = "8:193_锁.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8197,7 +8223,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BDC5570AAD2A4911AD33C9A6FCC44328"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\13_涉恐.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\13_涉恐.png"
             "TargetName" = "8:13_涉恐.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8217,7 +8243,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BDE2F719F8DC4B5687E9B7F314522A80"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img11\\border2.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img11\\border2.png"
             "TargetName" = "8:border2.png"
             "Tag" = "8:"
             "Folder" = "8:_7F0B509E0F0F4A94A2F276568FCC793F"
@@ -8237,7 +8263,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BDF83280D79B4CA39DD575067C250B28"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\421_方向 .png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\421_方向 .png"
             "TargetName" = "8:421_方向 .png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8257,7 +8283,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BF236C6B361D4C278C5D36A2100B354E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\52_个人极端.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\52_个人极端.png"
             "TargetName" = "8:52_个人极端.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8277,7 +8303,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C16E9408120C4144BF013C2BC1E5D332"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\460_星期二.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\460_星期二.png"
             "TargetName" = "8:460_星期二.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8297,7 +8323,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C23F3B73898C4A70B3FAA21262C88F66"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img9\\back.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img9\\back.jpg"
             "TargetName" = "8:back.jpg"
             "Tag" = "8:"
             "Folder" = "8:_64F3AB25D7964A98B15540E2D59C89BF"
@@ -8317,7 +8343,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C28EAE03D85A4015ACF32A3E5CC9EF71"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\tail.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\tail.exe"
             "TargetName" = "8:tail.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -8337,7 +8363,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C3C45A24B7CE40249E406F3C6AD70B64"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\C1\\Icon\\Icon.ico"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\C1\\Icon\\Icon.ico"
             "TargetName" = "8:Icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_965B6495790E430E84BDF8DEE405853E"
@@ -8357,7 +8383,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C3C91B207C6441338AD246B59EF1B480"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\22_网络安全.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\22_网络安全.png"
             "TargetName" = "8:22_网络安全.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8377,7 +8403,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C47D268990AD44069BB9678575E7F377"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\429_方向.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\429_方向.png"
             "TargetName" = "8:429_方向.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8397,7 +8423,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C5670395A95040678E92EAF53AA87E61"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img1\\aleftboxtbott.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img1\\aleftboxtbott.png"
             "TargetName" = "8:aleftboxtbott.png"
             "Tag" = "8:"
             "Folder" = "8:_54AE56D81F974C6CBEF11A1FAE617923"
@@ -8417,7 +8443,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C65D35B791E147C4B647F9EE2192A53A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\255_绿旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\255_绿旗.png"
             "TargetName" = "8:255_绿旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8437,7 +8463,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C6A544DE5FEB44359229B0D1A91B58E7"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\1_涉赌(3).png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\1_涉赌(3).png"
             "TargetName" = "8:1_涉赌(3).png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8457,7 +8483,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C6C801DB384A42A1B0DDFC5B50332394"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\apktool_2.3.0.jar"
+            "SourcePath" = "8:..\\C2Main\\sbin\\apktool_2.3.0.jar"
             "TargetName" = "8:apktool_2.3.0.jar"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -8477,7 +8503,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C732569066264DCD896DC9076B67A44E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Simple.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Simple.xml"
             "TargetName" = "8:Simple.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -8497,7 +8523,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C81EB530ABEB4E66B68C5BB28C8ACFA8"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img1\\amiddboxttop.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img1\\amiddboxttop.png"
             "TargetName" = "8:amiddboxttop.png"
             "Tag" = "8:"
             "Folder" = "8:_54AE56D81F974C6CBEF11A1FAE617923"
@@ -8517,7 +8543,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C86DD3320D5C4100B50FE25384C3B11A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\301_数字8.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\301_数字8.png"
             "TargetName" = "8:301_数字8.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8537,7 +8563,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C8938BC744F0446DA3FCFC0D80F1F2C4"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\49_保险.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\49_保险.png"
             "TargetName" = "8:49_保险.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8557,7 +8583,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C8AFADB4D4014DACA0E60C82A14EE0B0"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex5.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex5.html"
             "TargetName" = "8:BossIndex5.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -8577,7 +8603,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C997E30765924B36AB69580CACBEEDE9"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\86_爬虫.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\86_爬虫.png"
             "TargetName" = "8:86_爬虫.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8597,7 +8623,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C9F7D90A83774DB996A4C76D7D3F4C9D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\log4net.config"
+            "SourcePath" = "8:..\\C2Main\\log4net.config"
             "TargetName" = "8:log4net.config"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -8617,7 +8643,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CBAC5EDB14E14F2EBFF3E84F7209AA22"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\405_重点.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\405_重点.png"
             "TargetName" = "8:405_重点.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8637,7 +8663,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC611890C1BB48709B97996CB67C3E25"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img1\\bg.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img1\\bg.jpg"
             "TargetName" = "8:bg.jpg"
             "Tag" = "8:"
             "Folder" = "8:_54AE56D81F974C6CBEF11A1FAE617923"
@@ -8657,7 +8683,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CDC448771B8246B5A4322CBA86232EA0"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\203_头像.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\203_头像.png"
             "TargetName" = "8:203_头像.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8708,7 +8734,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CEEF7DC2A6B54620B873CADB5F16E08B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\476_星期六.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\476_星期六.png"
             "TargetName" = "8:476_星期六.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8728,7 +8754,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CEF07AC10BF142EC9491709473BEED82"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\464_星期三.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\464_星期三.png"
             "TargetName" = "8:464_星期三.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8748,7 +8774,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CFA887DE047A43E2B71D07E4634C41D1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\148_报警.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\148_报警.png"
             "TargetName" = "8:148_报警.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8768,7 +8794,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D0736F443070466BAE58BCF22803520B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\china.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\china.js"
             "TargetName" = "8:china.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -8788,7 +8814,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D0BAFD836036499F8621093859C1066B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\89_重点人分析.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\89_重点人分析.png"
             "TargetName" = "8:89_重点人分析.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8808,7 +8834,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D0DD56825F854ECCAD004B1F93550848"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Firebrick.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Firebrick.xml"
             "TargetName" = "8:Firebrick.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -8839,7 +8865,7 @@
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\bin\\开发调试\\plugins\\QQSpiderPlugin.dll"
+            "SourcePath" = "8:..\\C2Main\\bin\\开发调试\\plugins\\QQSpiderPlugin.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
@@ -8859,7 +8885,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D46ED829AF13402DA1442B75637F4A1A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\88_文本分析.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\88_文本分析.png"
             "TargetName" = "8:88_文本分析.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8879,7 +8905,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D51DB323AE5847D891F860F891D29A44"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_3.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_3.css"
             "TargetName" = "8:style_3.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -8899,7 +8925,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D57DA5E2BD84428584942096D8234F6A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img1\\arightboxbott.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img1\\arightboxbott.png"
             "TargetName" = "8:arightboxbott.png"
             "Tag" = "8:"
             "Folder" = "8:_54AE56D81F974C6CBEF11A1FAE617923"
@@ -8919,7 +8945,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D5FF005BFD674879AC899D5150F62DDC"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\3_涉黄.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\3_涉黄.png"
             "TargetName" = "8:3_涉黄.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8939,7 +8965,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D607F8B719C445B5A6E1BA56E16F476F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\join.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\join.exe"
             "TargetName" = "8:join.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -8959,7 +8985,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6D8D995C55145CA91F3BFA61CA01DAB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\113_手机号.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\113_手机号.png"
             "TargetName" = "8:113_手机号.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -8979,7 +9005,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6E823571AA34EFCB37996B7EFD74385"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\Heatmap_min.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\Heatmap_min.js"
             "TargetName" = "8:Heatmap_min.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -8999,7 +9025,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D7F06B0F08084594BA819BA3AB8B7CC0"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img6\\back.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img6\\back.jpg"
             "TargetName" = "8:back.jpg"
             "Tag" = "8:"
             "Folder" = "8:_E115318ED02B430C830D1E62D0BB398B"
@@ -9030,7 +9056,7 @@
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Citta_T1\\bin\\开发调试\\plugins\\MD5Plugin.dll"
+            "SourcePath" = "8:..\\C2Main\\bin\\开发调试\\plugins\\MD5Plugin.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
@@ -9070,7 +9096,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D956AF89707C4E6E86FC970650D35F98"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\uniq.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\uniq.exe"
             "TargetName" = "8:uniq.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -9121,7 +9147,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DA410C60F8174462B321127767A3B819"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\264_数字4.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\264_数字4.png"
             "TargetName" = "8:264_数字4.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9141,7 +9167,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DA7D6ECFCE8F47ED9743134F2DA95779"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\59_email.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\59_email.png"
             "TargetName" = "8:59_email.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9161,7 +9187,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DB24AEF536B943209034E706C7B6E11E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\88_关系分析.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\88_关系分析.png"
             "TargetName" = "8:88_关系分析.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9181,7 +9207,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DB300E1550404E36B4F18F2684B1D8FB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\165_法律依据.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\165_法律依据.png"
             "TargetName" = "8:165_法律依据.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9201,7 +9227,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DBBC4C70E20C483C84C798D256407310"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img10\\block2.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img10\\block2.png"
             "TargetName" = "8:block2.png"
             "Tag" = "8:"
             "Folder" = "8:_D36FCC92550B4104A9EE9B9C4F6761CD"
@@ -9221,7 +9247,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DBBEC85985004D77AC3A789B8197787C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\253_蓝旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\253_蓝旗.png"
             "TargetName" = "8:253_蓝旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9241,7 +9267,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DBD9331DC5044339B37ACE7363275DB1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\56_交管.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\56_交管.png"
             "TargetName" = "8:56_交管.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9261,7 +9287,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCB087EF7C4343FC9E46199C27C6B54F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex12.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex12.html"
             "TargetName" = "8:BossIndex12.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -9281,7 +9307,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DEB0509F3AF64B9FBD950C2EE1660386"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\263_数字3.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\263_数字3.png"
             "TargetName" = "8:263_数字3.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9301,7 +9327,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF27A99D8DF045CCAAE6F0F413D1F6DE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\440_方向 .png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\440_方向 .png"
             "TargetName" = "8:440_方向 .png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9321,7 +9347,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF720C4BDD1B4F329D167919E29216DC"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\134_犯罪现场.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\134_犯罪现场.png"
             "TargetName" = "8:134_犯罪现场.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9341,7 +9367,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DFE2E47F1D3C4EFCA72B0F97C4EB3C73"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\Help\\C2帮助文档.txt"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Help\\C2帮助文档.txt"
             "TargetName" = "8:C2帮助文档.txt"
             "Tag" = "8:"
             "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
@@ -9361,7 +9387,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E05B82306CAA4C4992D61780E74A72DA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_6.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_6.css"
             "TargetName" = "8:style_6.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -9381,7 +9407,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E06EA28A19464387B3A72F28BD2373A6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\99_全文.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\99_全文.png"
             "TargetName" = "8:99_全文.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9401,7 +9427,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E24975E356A045DCBB442BAFC224694D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\100_HTTP.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\100_HTTP.png"
             "TargetName" = "8:100_HTTP.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9421,7 +9447,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E28B5907CB3B4BB6A34E70DE21CC6C19"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex14.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex14.html"
             "TargetName" = "8:BossIndex14.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -9441,7 +9467,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E40465C9DCEB4056A788668D6114B2E9"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\86_浏览.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\86_浏览.png"
             "TargetName" = "8:86_浏览.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9461,7 +9487,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E48CD136574A4B529DE1AE8D466A325B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Old Eastbourne.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Old Eastbourne.xml"
             "TargetName" = "8:Old Eastbourne.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -9481,7 +9507,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E525B7D05FB648D1951BBB17F7BE2BD1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-intl-8.dll"
+            "SourcePath" = "8:..\\C2Main\\sbin\\msys-intl-8.dll"
             "TargetName" = "8:msys-intl-8.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -9501,7 +9527,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E5541A95CAC64BFE857BD24C76210CB5"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\98_人工智能.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\98_人工智能.png"
             "TargetName" = "8:98_人工智能.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9521,7 +9547,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E5C0127111CF42E496585DE8A21CDC30"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\71_VPN.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\71_VPN.png"
             "TargetName" = "8:71_VPN.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9541,7 +9567,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E6B952815F6143348082D40D1E5AE08D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\css\\style_12.css"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_12.css"
             "TargetName" = "8:style_12.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
@@ -9561,7 +9587,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E781B68526F24718B60C14F657A8AA3E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\305_数字9.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\305_数字9.png"
             "TargetName" = "8:305_数字9.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9581,7 +9607,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E7EF985847B7433089983B979E00B5B5"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Demo\\demo_csv.csv"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Demo\\demo_csv.csv"
             "TargetName" = "8:demo_csv.csv"
             "Tag" = "8:"
             "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
@@ -9601,7 +9627,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E857F032ECF248AABFD69098C6B44A58"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Help\\检索系统帮助.html"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Help\\检索系统帮助.html"
             "TargetName" = "8:检索系统帮助.html"
             "Tag" = "8:"
             "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
@@ -9621,7 +9647,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E87364D36889405CA9B59D80E4508F68"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\125_重点.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\125_重点.png"
             "TargetName" = "8:125_重点.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9641,7 +9667,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E895F4AC21774749A23B2DBEE52C5476"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\267_数字7.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\267_数字7.png"
             "TargetName" = "8:267_数字7.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9661,7 +9687,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E8E40AC3EB9340778509E32A7565A815"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Script\\IAO_Search_gamble\\batchquery_hack_accountPass_C2_20210604.py.zip"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Script\\IAO_Search_gamble\\batchquery_hack_accountPass_C2_20210604.py.zip"
             "TargetName" = "8:batchquery_hack_accountPass_C2_20210604.py.zip"
             "Tag" = "8:"
             "Folder" = "8:_A84863BC140649D99C499CAD84190897"
@@ -9712,7 +9738,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E9795E9EAA824737860F23652A7B1F2D"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\401_重点.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\401_重点.png"
             "TargetName" = "8:401_重点.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9732,7 +9758,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E982F8C1A1B345B2829A22C39530A7E4"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\jquery-2.2.1.min.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\jquery-2.2.1.min.js"
             "TargetName" = "8:jquery-2.2.1.min.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -9752,7 +9778,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EAA8FB81071C4DF286EF73D9F8E25ABF"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Help\\网站侦察兵帮助文档.txt"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Help\\网站侦察兵帮助文档.txt"
             "TargetName" = "8:网站侦察兵帮助文档.txt"
             "Tag" = "8:"
             "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
@@ -9772,7 +9798,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EB8D31164DEC47EFBDEC885772CB010B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Silver.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Silver.xml"
             "TargetName" = "8:Silver.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -9792,7 +9818,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EB94FF7B41394FB589C58298E8CE9EA5"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\43_钓鱼网站.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\43_钓鱼网站.png"
             "TargetName" = "8:43_钓鱼网站.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9812,7 +9838,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EBCBD76171B94942A8FF4F2A5C78C198"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\126_重点.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\126_重点.png"
             "TargetName" = "8:126_重点.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9832,7 +9858,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EC14C277C6454511AEAFFB55F52DEB7F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex3.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex3.html"
             "TargetName" = "8:BossIndex3.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -9852,7 +9878,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EC1B830F924D4BF79CD66AABAC4E1E51"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\268_数字8.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\268_数字8.png"
             "TargetName" = "8:268_数字8.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9872,7 +9898,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EC36625C4AD3408F9CC753DA40D6E3AB"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\41_传销.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\41_传销.png"
             "TargetName" = "8:41_传销.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9892,7 +9918,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED2B43E9EA6146FF825E958F8EFEBAD1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\80_facebook.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\80_facebook.png"
             "TargetName" = "8:80_facebook.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9912,7 +9938,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED54F949F0B34298A7F34EB4DCEAB0D5"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\256_紫旗.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\256_紫旗.png"
             "TargetName" = "8:256_紫旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9932,7 +9958,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED5D4B160F84479A9030C33B1B688DC3"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\91_资金分析.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\91_资金分析.png"
             "TargetName" = "8:91_资金分析.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9952,7 +9978,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE688AC407E24D689B12E11ACB32ED87"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\82_skype.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\82_skype.png"
             "TargetName" = "8:82_skype.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -9972,7 +9998,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EF19B9D5FB2944F1B0895F11AD09D000"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex9.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex9.html"
             "TargetName" = "8:BossIndex9.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -9992,7 +10018,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EFACEFD3E71E46E6B42EB2E4F4F1B7AE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img8\\line1_3.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img8\\line1_3.png"
             "TargetName" = "8:line1_3.png"
             "Tag" = "8:"
             "Folder" = "8:_52523D547F5F46C8B96035EE1C5D14A7"
@@ -10012,7 +10038,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EFC645D218674D168D3CE0A3612EF4E6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\33_涉军.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\33_涉军.png"
             "TargetName" = "8:33_涉军.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10032,7 +10058,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EFFDFB6F9C134FFF8AF51D6E7A8A5BD1"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\1_涉赌 (1).png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\1_涉赌 (1).png"
             "TargetName" = "8:1_涉赌 (1).png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10052,7 +10078,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F1D57959E1D349789A7067A42DBC2849"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Templates\\思维导图.xml"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\思维导图.xml"
             "TargetName" = "8:思维导图.xml"
             "Tag" = "8:"
             "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
@@ -10072,7 +10098,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F2567718755445DC8A9C40B964A90D9A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\10_黑客.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\10_黑客.png"
             "TargetName" = "8:10_黑客.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10092,7 +10118,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F342579A09BC45EBAD75EB3F56616DDD"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\comm.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\comm.exe"
             "TargetName" = "8:comm.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -10112,7 +10138,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F344B95CD0134DD0B9645A6D985AB088"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\238_完成.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\238_完成.png"
             "TargetName" = "8:238_完成.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10163,7 +10189,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F3E0552C0CE64310911140144333F71A"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img13\\border.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img13\\border.png"
             "TargetName" = "8:border.png"
             "Tag" = "8:"
             "Folder" = "8:_88A71F76274B4DB6AD70F03F1713BD1A"
@@ -10183,7 +10209,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F53E38596DB3411BA4614195F03F63CD"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Grass.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Grass.xml"
             "TargetName" = "8:Grass.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -10203,7 +10229,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F5FF5C857851426BB089266AE205B046"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\146_抓捕.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\146_抓捕.png"
             "TargetName" = "8:146_抓捕.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10223,7 +10249,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F646D69949754A4F9E2F5315F5ABF173"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\sleep.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\sleep.exe"
             "TargetName" = "8:sleep.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -10243,7 +10269,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F6E84130694041D3A35E253A66D8C6B4"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img11\\back.jpg"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img11\\back.jpg"
             "TargetName" = "8:back.jpg"
             "Tag" = "8:"
             "Folder" = "8:_7F0B509E0F0F4A94A2F276568FCC793F"
@@ -10263,7 +10289,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F7236FA496084AC086471E87C0A53D96"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\grep.exe"
+            "SourcePath" = "8:..\\C2Main\\sbin\\grep.exe"
             "TargetName" = "8:grep.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -10283,7 +10309,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F75B3556ED4B4213A055DB813379C0DD"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\145_抓捕.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\145_抓捕.png"
             "TargetName" = "8:145_抓捕.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10303,7 +10329,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F7AE28C189B64F3183460311429ACF06"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\150_战绩.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\150_战绩.png"
             "TargetName" = "8:150_战绩.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10323,7 +10349,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F87248ED33B84FF6BA906033652D7543"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\79_twitter.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\79_twitter.png"
             "TargetName" = "8:79_twitter.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10343,7 +10369,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F881B3166A7B41B999386AE34D68E93F"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\DrawingManager.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\DrawingManager.js"
             "TargetName" = "8:DrawingManager.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -10363,7 +10389,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F94045AA27DA47068372B0CB850D54D6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\104_用户.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\104_用户.png"
             "TargetName" = "8:104_用户.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10383,7 +10409,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F944FE50EE1D46FE9F218C914BC8825C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-gmp-10.dll"
+            "SourcePath" = "8:..\\C2Main\\sbin\\msys-gmp-10.dll"
             "TargetName" = "8:msys-gmp-10.dll"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -10403,7 +10429,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA055857379A4EC98384FC2D5AD5162C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\echarts.min.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\echarts.min.js"
             "TargetName" = "8:echarts.min.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -10423,7 +10449,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA3DA7DD1F104D7682FD6F909E1F6DB6"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\Html\\BossIndex6.html"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex6.html"
             "TargetName" = "8:BossIndex6.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
@@ -10443,7 +10469,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA7145AC3A4347C493265074CCC519E9"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Resources\\UIThemes\\Fresh Green.xml"
+            "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Fresh Green.xml"
             "TargetName" = "8:Fresh Green.xml"
             "Tag" = "8:"
             "Folder" = "8:_70CE6412A2E440F8AEFBE49BA66F6A82"
@@ -10463,7 +10489,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FB8808F9DD9242A7A8B082CEA257AA5C"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\404_重点.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\404_重点.png"
             "TargetName" = "8:404_重点.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10483,7 +10509,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FC46234E78E440D68EDE9BC4199FB1E2"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Templates\\组织架构图.xml"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\组织架构图.xml"
             "TargetName" = "8:组织架构图.xml"
             "Tag" = "8:"
             "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
@@ -10503,7 +10529,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FC4AE070080F497B9F91BAEBF6BD72FE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\Templates\\逻辑图.xml"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\逻辑图.xml"
             "TargetName" = "8:逻辑图.xml"
             "Tag" = "8:"
             "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
@@ -10523,7 +10549,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FC8622572CF44FBEB4233F4096DCE299"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\95_取证分析.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\95_取证分析.png"
             "TargetName" = "8:95_取证分析.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10543,7 +10569,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FC9C630420174D55B1CAA2185A60EEF4"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img6\\title.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img6\\title.png"
             "TargetName" = "8:title.png"
             "Tag" = "8:"
             "Folder" = "8:_E115318ED02B430C830D1E62D0BB398B"
@@ -10563,7 +10589,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FDA880E96B924CB6A4978E9BD4F2655E"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\25_涉毒.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\25_涉毒.png"
             "TargetName" = "8:25_涉毒.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10583,7 +10609,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FE456FFCD3AE40FB9349F4E3C335210B"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\img\\img7\\border.png"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img7\\border.png"
             "TargetName" = "8:border.png"
             "Tag" = "8:"
             "Folder" = "8:_10F89C1BF7A24593A0EE93C1BD1CF452"
@@ -10603,7 +10629,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FEF1FC0D27424DD0AB8B2A58738CBE05"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\262_数字2.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\262_数字2.png"
             "TargetName" = "8:262_数字2.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10623,7 +10649,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF74E04CB08F4BDA9F41992CEDE419B7"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Resources\\PictureIconLib\\86_ADSL.png"
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\86_ADSL.png"
             "TargetName" = "8:86_ADSL.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
@@ -10643,7 +10669,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF9BC880E85B4822A7554718CF135CFA"
             {
-            "SourcePath" = "8:..\\Citta_T1\\Business\\IAOLab\\WebEngine\\JS\\phx.js"
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\phx.js"
             "TargetName" = "8:phx.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
@@ -11125,7 +11151,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{A2383EB0-8D36-4463-B76D-841B9C8F7C89}"
+        "PackageCode" = "8:{8AA23804-2B32-47E5-8077-002494AEDCC5}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -11972,7 +11998,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\obj\\Release\\C2.exe"
+            "SourcePath" = "8:..\\C2Main\\obj\\Release\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"

@@ -407,7 +407,7 @@ class Airport:
         password_key = ['passwd','password']
         user_str = ''
         pass_str = ''
-        for part in re.split(r'\.\.\.',content):
+        for part in re.split(r'..', content):
             for line in re.split('[\r\n&;]+',part):
                 try:
                     [key, value] = line.split("=")
@@ -700,9 +700,9 @@ def init_path(path):
     if not os.path.exists(path):
         os.mkdir(path)
 
-##cquey FULLTEXT 
+#cquey FULLTEXT
 def queryBatch(keyWords):
-    tempFilename   = "_result_password_" + startTime + '_' + endTime 
+    tempFilename   = "_result_password_" + startTime + '_' + endTime
     sch = Scheduler(startTime, endTime, tempFilename,keyWords)
     sch.scheduling()
     sch.saver.writer.close()
@@ -721,7 +721,7 @@ def encrypTion(path):
 def main():
     LOGGER.info('START QUERY BATCH....')
     query_buttonValue = produceKey(LOGIN_BUTTON,LOGIN_VALUE,KEY_NUM)
-    queryBatch(query_buttonValue)
+    #queryBatch(query_buttonValue)
     LOGGER.info('END QUERY BATCH')
 
     # LOGGER.info('START AIRPORT QUERY BATCH....')

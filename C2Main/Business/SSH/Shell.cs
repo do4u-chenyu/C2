@@ -3,6 +3,7 @@ using Renci.SshNet;
 using Renci.SshNet.Common;
 using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 
 namespace C2.Business.SSH
@@ -12,6 +13,7 @@ namespace C2.Business.SSH
         private readonly ShellStream shell;
         private readonly AutoResetEvent dataReceivedEvent; // 信号量
 
+        private static readonly char Backspace = '\b';
         private static readonly byte[] TgzHeadBytes = new byte[] { 0x1f, 0x8b, 0x08 };  // 1f 8b 08 .tgz的文件头
 
         private byte[] InComing { get; }
@@ -169,15 +171,21 @@ namespace C2.Business.SSH
             return false;
         }
 
-        // 针对shell中的文本信息去掉各种乱七八糟的控制字符串
-        public static String FormatShellString(String s)
+        // 格式化shell返回的字符串
+        public static String Format(String s)
         {
-            //StringBuilder sb = new StringBuilder();
-            //foreach(char c in s)
-            //{
-            //    //
-            //}
-            return String.Empty;
+            int idx = 0;
+            StringBuilder sb = new StringBuilder(s);
+            while (idx < sb.Length)
+            {
+                if (sb[idx] != Backspace)
+                {
+                    idx++;
+                    continue;
+                }
+                _ = idx == 0 ? sb.Remove(0, 1) : sb.Remove(idx-- - 1, 2);
+            }
+            return sb.ToString();
         }
 
     }
