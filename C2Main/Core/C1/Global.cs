@@ -23,6 +23,7 @@ namespace C2.Core
         private static MyModelControl myModelControl;
         private static SearchToolkitControl searchToolkitControl;
         private static WebsiteFeatureDetectionControl websiteFeatureDetectionControl;
+        private static CastleBravoControl castleBravoControl;
         private static BottomLogControl logView;
         private static DataSourceControl dataSourceControl; // 左侧数据源面板
         private static Panel bottomViewPanle;
@@ -41,6 +42,7 @@ namespace C2.Core
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static WebsiteFeatureDetectionControl GetWebsiteFeatureDetectionControl() { return websiteFeatureDetectionControl; }
+        public static CastleBravoControl GetCastleBravoControl() { return castleBravoControl; }
         public static SearchToolkitControl GetSearchToolkitControl() { return searchToolkitControl; }
         public static IAOLabControl GetIAOLabControl() { return iaoLabControl; }
         public static BottomLogControl GetLogView() { return logView; }
@@ -136,6 +138,7 @@ namespace C2.Core
         public static void SetDataSourceControl(DataSourceControl dsc) { dataSourceControl = dsc; }
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
         public static void SetWebsiteFeatureDetectionControl(WebsiteFeatureDetectionControl wfdc) { websiteFeatureDetectionControl = wfdc; }
+        public static void SetCastleBravoControl(CastleBravoControl cbc) { castleBravoControl = cbc; }
         public static void SetSearchToolkitControl(SearchToolkitControl stc) { searchToolkitControl = stc; }
         public static void SetIAOLabControl(IAOLabControl ilc) { iaoLabControl = ilc; }
         public static void SetLogView(BottomLogControl lv) { logView = lv; }

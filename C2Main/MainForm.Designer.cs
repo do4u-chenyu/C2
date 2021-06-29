@@ -39,6 +39,8 @@ namespace C2
             this.usernamelabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
+            this.castleBravoButton = new C2.Controls.Common.NoFocusButton();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.searchToolkitButton = new C2.Controls.Common.NoFocusButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.detectionButton = new C2.Controls.Common.NoFocusButton();
@@ -52,6 +54,7 @@ namespace C2
             this.modelMarketButton = new C2.Controls.Common.NoFocusButton();
             this.ModelButtonPictureBox = new System.Windows.Forms.PictureBox();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
+            this.castleBravoControl = new C2.Controls.C1.Left.CastleBravoControl();
             this.mindMapControl = new C2.Controls.Left.MyMindMapControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoLabControl = new C2.Controls.Left.IAOLabControl();
@@ -88,6 +91,8 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
+            this.castleBravoButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.searchToolkitButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.detectionButton.SuspendLayout();
@@ -183,6 +188,7 @@ namespace C2
             // leftMainMenuPanel
             // 
             this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(60)))), ((int)(((byte)(85)))));
+            this.leftMainMenuPanel.Controls.Add(this.castleBravoButton);
             this.leftMainMenuPanel.Controls.Add(this.searchToolkitButton);
             this.leftMainMenuPanel.Controls.Add(this.detectionButton);
             this.leftMainMenuPanel.Controls.Add(this.iaoLabButton);
@@ -194,6 +200,34 @@ namespace C2
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
             this.leftMainMenuPanel.Size = new System.Drawing.Size(145, 560);
             this.leftMainMenuPanel.TabIndex = 1;
+            // 
+            // castleBravoButton
+            // 
+            this.castleBravoButton.Controls.Add(this.pictureBox3);
+            this.castleBravoButton.FlatAppearance.BorderSize = 0;
+            this.castleBravoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.castleBravoButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.castleBravoButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.castleBravoButton.Location = new System.Drawing.Point(0, 362);
+            this.castleBravoButton.Name = "castleBravoButton";
+            this.castleBravoButton.Size = new System.Drawing.Size(151, 42);
+            this.castleBravoButton.TabIndex = 6;
+            this.castleBravoButton.TabStop = false;
+            this.castleBravoButton.Text = "   喝彩城堡";
+            this.toolTip1.SetToolTip(this.castleBravoButton, "分析师的实验台");
+            this.castleBravoButton.UseVisualStyleBackColor = true;
+            this.castleBravoButton.Click += new System.EventHandler(this.CastleBravoButton_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox3.Image = global::C2.Properties.Resources.Artificialintelligence;
+            this.pictureBox3.Location = new System.Drawing.Point(12, 13);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox3.TabIndex = 16;
+            this.pictureBox3.TabStop = false;
             // 
             // searchToolkitButton
             // 
@@ -366,6 +400,7 @@ namespace C2
             // leftToolBoxPanel
             // 
             this.leftToolBoxPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.leftToolBoxPanel.Controls.Add(this.castleBravoControl);
             this.leftToolBoxPanel.Controls.Add(this.mindMapControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.iaoLabControl);
@@ -377,6 +412,19 @@ namespace C2
             this.leftToolBoxPanel.Name = "leftToolBoxPanel";
             this.leftToolBoxPanel.Size = new System.Drawing.Size(187, 560);
             this.leftToolBoxPanel.TabIndex = 2;
+            // 
+            // castleBravoControl
+            // 
+            this.castleBravoControl.AllowDrop = true;
+            this.castleBravoControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.castleBravoControl.BackColor = System.Drawing.Color.White;
+            this.castleBravoControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.castleBravoControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.castleBravoControl.Location = new System.Drawing.Point(0, 0);
+            this.castleBravoControl.Name = "castleBravoControl";
+            this.castleBravoControl.Size = new System.Drawing.Size(185, 558);
+            this.castleBravoControl.TabIndex = 1;
+            this.castleBravoControl.Visible = false;
             // 
             // mindMapControl
             // 
@@ -718,6 +766,8 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
+            this.castleBravoButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.searchToolkitButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.detectionButton.ResumeLayout(false);
@@ -798,5 +848,8 @@ namespace C2
         private PictureBox pictureBox2;
         private Controls.C1.Left.WebsiteFeatureDetectionControl websiteFeatureDetectionControl;
         private Controls.C1.Left.SearchToolkitControl searchToolkitControl;
+        private Controls.Common.NoFocusButton castleBravoButton;
+        private PictureBox pictureBox3;
+        private Controls.C1.Left.CastleBravoControl castleBravoControl;
     }
 }

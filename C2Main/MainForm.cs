@@ -102,7 +102,8 @@ namespace C2
                 this.dataSourceButton,
                 this.iaoLabButton,
                 this.detectionButton,
-                this.searchToolkitButton
+                this.searchToolkitButton,
+                this.castleBravoButton
             };
 
             // 注册左侧二级面板
@@ -111,7 +112,8 @@ namespace C2
                 this.dataSourceControl,
                 this.iaoLabControl,
                 this.websiteFeatureDetectionControl,
-                this.searchToolkitControl,     
+                this.searchToolkitControl,
+                this.castleBravoControl
             };
             // 默认业务视图为初始选中状态
             this.mindMapButton.BackColor = LeftFocusColor;
@@ -185,6 +187,7 @@ namespace C2
             Global.SetDataSourceControl(this.dataSourceControl);
             Global.SetMyModelControl(this.modelMarketControl);
             Global.SetWebsiteFeatureDetectionControl(this.websiteFeatureDetectionControl);
+            Global.SetCastleBravoControl(this.castleBravoControl);
             Global.SetSearchToolkitControl(this.searchToolkitControl);
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
@@ -283,6 +286,12 @@ namespace C2
         {
             if (!searchToolkitControl.Visible || isLeftViewPanelMinimum)
                 ShowLeftPanel(searchToolkitButton, searchToolkitControl);
+        }
+
+        private void CastleBravoButton_Click(object sender, EventArgs e)
+        {
+            if (!castleBravoControl.Visible || isLeftViewPanelMinimum)
+                ShowLeftPanel(castleBravoButton, castleBravoControl);
         }
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {

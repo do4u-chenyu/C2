@@ -155,6 +155,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\CastleBravo\CastleBravoAPI.cs" />
+    <Compile Include="Business\CastleBravo\CastleBravoResult.cs" />
+    <Compile Include="Business\CastleBravo\CastleBravoTaskInfo.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\IAOLab\ApkTool\ApkToolStart.cs" />
     <Compile Include="Business\IAOLab\BankTool\BankTool.cs" />
@@ -227,6 +230,12 @@
     </Compile>
     <Compile Include="Controls\C1\Left\BaseLeftInnerPanel.Designer.cs">
       <DependentUpon>BaseLeftInnerPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\C1\Left\CastleBravoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\CastleBravoControl.Designer.cs">
+      <DependentUpon>CastleBravoControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Left\IAOButton.cs">
       <SubType>UserControl</SubType>
@@ -306,6 +315,18 @@
     <Compile Include="Design\WaterMarkTypeConverter.cs" />
     <Compile Include="Dialogs\BastionDownloadProgressBar.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CastleBravo\AddCBTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CastleBravo\AddCBTask.Designer.cs">
+      <DependentUpon>AddCBTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CastleBravo\CBTaskResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CastleBravo\CBTaskResult.Designer.cs">
+      <DependentUpon>CBTaskResult.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\IAOLab\BigAPKForm.cs">
       <SubType>Form</SubType>
@@ -1626,6 +1647,9 @@
     <EmbeddedResource Include="Controls\C1\Left\BaseLeftInnerPanel.resx">
       <DependentUpon>BaseLeftInnerPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\CastleBravoControl.resx">
+      <DependentUpon>CastleBravoControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\IAOButton.resx">
       <DependentUpon>IAOButton.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1820,6 +1844,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C2OperatorViews\C2SqlOperatorView.resx">
       <DependentUpon>C2SqlOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CastleBravo\AddCBTask.resx">
+      <DependentUpon>AddCBTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CastleBravo\CBTaskResult.resx">
+      <DependentUpon>CBTaskResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
