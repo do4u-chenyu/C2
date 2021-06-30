@@ -10,7 +10,7 @@ namespace C2.Business.CastleBravo
         public static int ColumnsCount { get => HeaderColumns.Count; }
 
         public static CastleBravoResultOne Empty = new CastleBravoResultOne();
-        public string Content { get => string.Join("\t", ResDict.Values); }
+        public string Content { get => string.Join("\t", new string[] { MD5, Model, Result, Salt }); }
 
         public Dictionary<string, string> ResDict { set; get; } = new Dictionary<string, string>();
 
@@ -25,7 +25,7 @@ namespace C2.Business.CastleBravo
             return Regex.Replace(value, @"[\t\r\n]", string.Empty);
         }
 
-        public string Md5 { get => ResDict.TryGetValue("md5", out string md5) ? md5 : string.Empty;}
+        public string MD5 { get => ResDict.TryGetValue("md5", out string md5) ? md5 : string.Empty;}
         public string Model { get => ResDict.TryGetValue("model", out string model) ? model : string.Empty;}
         public string Result { get => ResDict.TryGetValue("result", out string res) ? res : string.Empty;}
         public string Salt { get => ResDict.TryGetValue("salt", out string salt) ? salt  : string.Empty;}

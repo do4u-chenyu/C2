@@ -545,9 +545,9 @@ namespace C2.Utils
             Tuple<List<string>, List<List<string>>> result;
             if (fullFilePath == null)
                 return new Tuple<List<string>, List<List<string>>>(headers, rows);
-
-            System.IO.StreamReader sr = null;
             FileStream fs = null;
+
+            StreamReader sr;
             if (encoding == OpUtil.Encoding.UTF8)
                 sr = File.OpenText(fullFilePath);
             else
@@ -562,11 +562,11 @@ namespace C2.Utils
                 {
                     String line = sr.ReadLine();
                     if (line == null)
-                        continue;
-                    String[] eles = line.Split(separator);
-                    if (eles.Length > maxColsNum)
-                        maxColsNum = eles.Length;
-                    rows.Add(new List<string>(eles));
+                        break;
+                    String[] elements = line.Split(separator);
+                    if (elements.Length > maxColsNum)
+                        maxColsNum = elements.Length;
+                    rows.Add(new List<string>(elements));
                 }
                 for (int headersColNum = headers.Count; headersColNum < maxColsNum; headersColNum++)
                     headers.Add(String.Empty);

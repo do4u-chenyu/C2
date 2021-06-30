@@ -132,7 +132,7 @@ namespace C2.Dialogs.CastleBravo
             {
                 DataGridViewRow dr = new DataGridViewRow();
 
-                dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.Md5 });
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.MD5 });
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = CastleBravoTaskInfo.Model(data.Model) });
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.Result });
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = CastleBravoTaskInfo.Salt(data.Model) });

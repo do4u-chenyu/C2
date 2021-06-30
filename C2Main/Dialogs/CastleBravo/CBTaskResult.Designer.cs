@@ -193,7 +193,7 @@
             // 
             this.type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.type.FillWeight = 22F;
-            this.type.HeaderText = "加密方式";
+            this.type.HeaderText = "模式";
             this.type.Name = "type";
             this.type.ReadOnly = true;
             // 
