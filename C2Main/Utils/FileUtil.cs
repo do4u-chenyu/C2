@@ -569,7 +569,7 @@ namespace C2.Utils
                     rows.Add(new List<string>(eles));
                 }
                 for (int headersColNum = headers.Count; headersColNum < maxColsNum; headersColNum++)
-                    headers.Add("");
+                    headers.Add(String.Empty);
             }
             catch (Exception e)
             {
