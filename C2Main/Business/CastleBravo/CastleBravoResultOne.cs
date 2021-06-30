@@ -6,11 +6,14 @@ namespace C2.Business.CastleBravo
     class CastleBravoResultOne
     {
         private static readonly List<string> HeaderColumns = new List<string>() { "md5", "model", "result", "salt" };
-        public string Content { get => string.Join("\t", ResDict.Values); }
-        public string Columns { get => string.Join("\t", HeaderColumns); }
-        public Dictionary<string, string> ResDict { set; get; }
+        public static string Columns { get => string.Join("\t", HeaderColumns); }
 
-        public CastleBravoResultOne() { }
+        public static CastleBravoResultOne Empty = new CastleBravoResultOne();
+        public string Content { get => string.Join("\t", ResDict.Values); }
+
+        public Dictionary<string, string> ResDict { set; get; } = new Dictionary<string, string>();
+
+        private CastleBravoResultOne() { }
 
         public CastleBravoResultOne(Dictionary<string, string> resDict)
         {

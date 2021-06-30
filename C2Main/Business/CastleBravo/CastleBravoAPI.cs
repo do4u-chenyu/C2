@@ -1,23 +1,18 @@
-﻿using C2.Business.WebsiteFeatureDetection;
-using Newtonsoft.Json;
+﻿using C2.Business.HTTP;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C2.Business.CastleBravo
 {
     class CastleBravoAPI
     {
-        private string APIUrl;
-        string SearchUrl;
-        string ResultUrl;
+        private readonly string APIUrl;
+        private readonly string SearchUrl;
+        private readonly string ResultUrl;
 
         private static CastleBravoAPI CastleBravoAPIInstance;
-
-        HttpHandler httpHandler;
+        readonly HttpHandler httpHandler;
 
         public static CastleBravoAPI GetInstance()
         {
@@ -38,32 +33,30 @@ namespace C2.Business.CastleBravo
         }
 
 
-        public bool StartTask(List<string> md5List, out CastleBravoAPIResponse result)
+        public bool StartTask(List<string> md5List, out CastleBravoAPIResponse cbaResp)
         {
-            result = new CastleBravoAPIResponse();
-            //Dictionary<string, string> pairs = new Dictionary<string, string> { { "md5List", JsonConvert.SerializeObject(md5List) } };
-            //Dictionary<string, string> pairs = new Dictionary<string, string> { { "md5List", string.Join(",",md5List) } };
+            cbaResp = new CastleBravoAPIResponse();
             string pairs = "md5List=" + string.Join(",", md5List);
             try
             {
                 Response resp = httpHandler.PostCode(SearchUrl, pairs);
                 if (resp.StatusCode != HttpStatusCode.OK)
-                    result.Message = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+                    cbaResp.Message = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
 
                 if (resDict.TryGetValue("status", out string status) && status == "Success")
                 {
                     resDict.TryGetValue("taskid", out string taskId);
-                    result.Data = taskId;
-                    result.Message = status;
+                    cbaResp.Data = taskId;
+                    cbaResp.Message = status;
                 }
                 else
-                    result.Message = "任务下发失败。";
+                    cbaResp.Message = "任务下发失败。";
             }
             catch (Exception ex)
             {
-                result.Message = ex.Message;
+                cbaResp.Message = ex.Message;
             }
             return true;
         }
