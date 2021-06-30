@@ -5,13 +5,8 @@ using C2.Utils;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.CastleBravo
@@ -183,5 +178,6 @@ namespace C2.Dialogs.CastleBravo
             else
                 HelpUtil.ShowMessageBox("该文件不存在。", "提示");
         }
+
     }
 }
