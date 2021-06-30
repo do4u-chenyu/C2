@@ -32,7 +32,7 @@ namespace C2.Dialogs.CastleBravo
 
         private void CBTaskResult_Shown(object sender, EventArgs e)
         {
-            if (TaskInfo.Status == CastleBravoTaskStatus.Done && ShownResults())
+            if (TaskInfo.Status == CastleBravoTaskStatus.Done && ShowResults())
                 return;
 
             CastleBravoAPIResponse resp = new CastleBravoAPIResponse();
@@ -44,7 +44,7 @@ namespace C2.Dialogs.CastleBravo
             Global.GetWebsiteFeatureDetectionControl().SaveWFDTasksToXml();//状态刷新，修改本地持久化文件
             FillDGV();
         }
-        private bool ShownResults()
+        private bool ShowResults()
         {
             if (!File.Exists(TaskInfo.ResultFilePath))
                 return false;
@@ -62,11 +62,11 @@ namespace C2.Dialogs.CastleBravo
         private List<CastleBravoResultOne> TransListToCBResult(Tuple<List<string>, List<List<string>>> headersAndRows)
         {
             List<CastleBravoResultOne> results = new List<CastleBravoResultOne>();
-
+            // TODO 去重排序
             List<string> headers = headersAndRows.Item1;
             foreach (List<string> content in headersAndRows.Item2)
             {
-                if (content.Count < 4)
+                if (content.Count < CastleBravoResultOne.ColumnsCount)
                     continue;
 
                 results.Add(new CastleBravoResultOne(headers.Zip(content, (k, v) => new {k, v}).ToDictionary(x => x.k, x => x.v)));
@@ -133,9 +133,9 @@ namespace C2.Dialogs.CastleBravo
                 DataGridViewRow dr = new DataGridViewRow();
 
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.Md5 });
-                dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.Model });
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = CastleBravoTaskInfo.Model(data.Model) });
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.Result });
-                dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.Salt });
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = CastleBravoTaskInfo.Salt(data.Model) });
 
                 dataGridView.Rows.Add(dr);
             }

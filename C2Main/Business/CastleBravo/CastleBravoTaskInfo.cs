@@ -27,35 +27,31 @@ namespace C2.Business.CastleBravo
         public string TaskCreateTime;
         public string MD5FilePath;
         public string ResultFilePath;
-        public List<CastleBravoResultOne> PreviewResults;
+        public List<CastleBravoResultOne> PreviewResults = new List<CastleBravoResultOne>();
         public CastleBravoTaskStatus Status;
         public bool IsEmpty() { return this == Empty; }
 
-        public CastleBravoTaskInfo()
-        {
-            TaskName = string.Empty;
-            TaskID = string.Empty;
-            TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
-            MD5FilePath = string.Empty;
-            ResultFilePath = string.Empty;
-            Status = CastleBravoTaskStatus.Null;
-            PreviewResults = new List<CastleBravoResultOne>();
-        }
+        public CastleBravoTaskInfo() : this(string.Empty, string.Empty, string.Empty, string.Empty, CastleBravoTaskStatus.Null)
+        { }
 
-        public CastleBravoTaskInfo(string taskName, string taskId, string datasourceFilePath, string resultFilePath, CastleBravoTaskStatus status)
+        public CastleBravoTaskInfo(string taskName, string taskId, string md5FilePath, string resultFilePath, CastleBravoTaskStatus status)
         {
             TaskName = taskName;
             TaskID = taskId;
-            MD5FilePath = datasourceFilePath;
+            MD5FilePath = md5FilePath;
             ResultFilePath = resultFilePath;
             Status = status;
             TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
-            PreviewResults = new List<CastleBravoResultOne>();
         }
 
         public static string Model(string key)
         {
             return MD5ModelTable.ContainsKey(key) ? MD5ModelTable[key] : key;
+        }
+
+        public static string Salt(string key)
+        {
+            return key == "btpwd" ? "_bt.cn" : string.Empty;
         }
 
     }

@@ -31,7 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
             this.browserButton = new System.Windows.Forms.Button();
             this.taskStatusLabel = new System.Windows.Forms.Label();
             this.taskIdLabel = new System.Windows.Forms.Label();
@@ -51,7 +50,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.browserButton);
             this.panel1.Controls.Add(this.taskStatusLabel);
             this.panel1.Controls.Add(this.taskIdLabel);
@@ -65,16 +63,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(775, 152);
             this.panel1.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(237, 80);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(128, 19);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "成功率 : 0/0    [0%]";
             // 
             // browserButton
             // 
@@ -254,7 +242,6 @@
         private System.Windows.Forms.Label taskStatusLabel;
         private System.Windows.Forms.Label taskIdLabel;
         private System.Windows.Forms.Label taskNameLabel;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewTextBoxColumn md5;
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;

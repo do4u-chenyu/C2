@@ -7,6 +7,7 @@ namespace C2.Business.CastleBravo
     {
         private static readonly List<string> HeaderColumns = new List<string>() { "md5", "model", "result", "salt" };
         public static string Columns { get => string.Join("\t", HeaderColumns); }
+        public static int ColumnsCount { get => HeaderColumns.Count; }
 
         public static CastleBravoResultOne Empty = new CastleBravoResultOne();
         public string Content { get => string.Join("\t", ResDict.Values); }

@@ -73,7 +73,7 @@ namespace C2.Business.CastleBravo
             {
                 Response resp = httpHandler.PostCode(ResultUrl, pairs);
                 if (resp.StatusCode != HttpStatusCode.OK)
-                    result.Message = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+                    result.Message = string.Format("http 状态码错误：{0}.", resp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
 
