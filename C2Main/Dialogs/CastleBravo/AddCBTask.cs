@@ -48,26 +48,26 @@ namespace C2.Dialogs.CastleBravo
             if (md5List.Count == 0)
                 return false;
 
-            CastleBravoAPIResult result = new CastleBravoAPIResult();
+            CastleBravoAPIResponse result = new CastleBravoAPIResponse();
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 if (!CastleBravoAPI.GetInstance().StartTask(md5List, out result))
                     return false;
             }
 
-            if (result.RespMsg != "Success")
+            if (result.Message != "Success")
             {
-                HelpUtil.ShowMessageBox(result.RespMsg);
+                HelpUtil.ShowMessageBox(result.Message);
                 return false;
             }
 
             HelpUtil.ShowMessageBox("任务下发成功");
             string destDirectory = Path.Combine(Global.UserWorkspacePath, "喝彩城堡");
-            string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.txt", TaskName, result.Datas));
+            string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.txt", TaskName, result.Data));
             FileUtil.CreateDirectory(destDirectory);
             using (File.Create(destFilePath)) { }
 
-            TaskInfo = new CastleBravoTaskInfo(TaskName, result.Datas, FilePath, destFilePath, CastleBravoTaskStatus.Null);
+            TaskInfo = new CastleBravoTaskInfo(TaskName, result.Data, FilePath, destFilePath, CastleBravoTaskStatus.Null);
 
             return base.OnOKButtonClick();
         }

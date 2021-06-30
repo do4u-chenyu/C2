@@ -156,7 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\CastleBravo\CastleBravoAPI.cs" />
-    <Compile Include="Business\CastleBravo\CastleBravoResult.cs" />
+    <Compile Include="Business\CastleBravo\CastleBravoResultOne.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoTaskInfo.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\IAOLab\ApkTool\ApkToolStart.cs" />
