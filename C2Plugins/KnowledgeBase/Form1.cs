@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,35 +49,40 @@ namespace KnowledgeBase
         {
             string chromePath = GetChromePath();
             if (!string.IsNullOrEmpty(chromePath))
+            {
+                //System.Diagnostics.Process.Start(chromePath, "15.73.3.241:19001/KnowledgeBase/");
                 System.Diagnostics.Process.Start(chromePath, "172.17.31.4:19001/KnowledgeBase/");
+            }
             else
                 MessageBox.Show("未能找到chrome启动路径");
-
+             
             this.Close();
         }
 
         public string GetChromePath()
         {
             RegistryKey regKey = Registry.ClassesRoot;
-            string path = "";
-            string chromeKey = "";
+            string path = string.Empty;
+            List<string> chromeKeyList = new List<string>();
             foreach (var chrome in regKey.GetSubKeyNames())
             {
                 if (chrome.ToUpper().Contains("CHROMEHTML"))
                 {
-                    chromeKey = chrome;
+                    chromeKeyList.Add(chrome);
                 }
             }
-            if (!string.IsNullOrEmpty(chromeKey))
+            foreach(string chromeKey in chromeKeyList)
             {
                 path = Registry.GetValue(@"HKEY_CLASSES_ROOT\" + chromeKey + @"\shell\open\command", null, null) as string;
                 if (path != null)
                 {
                     var split = path.Split('\"');
                     path = split.Length >= 2 ? split[1] : null;
+                    if(File.Exists(path))
+                        return path;
                 }
             }
-            return path;
+            return string.Empty;
         }
     }
 }
