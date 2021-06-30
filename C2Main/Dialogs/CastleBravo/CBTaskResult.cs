@@ -92,7 +92,7 @@ namespace C2.Dialogs.CastleBravo
                 TaskInfo.Status = CastleBravoTaskStatus.Fail;
             }
 
-            this.taskStatusLabel.Text = TaskInfo.Status.ToString();
+            this.taskStatusLabel.Text = String.Format("{0}   成功数:{1}", TaskInfo.Status.ToString(), TaskInfo.PreviewResults.Count);
         }
 
         private List<CastleBravoResultOne> DealData(string resultFilePath, string apiResults)
