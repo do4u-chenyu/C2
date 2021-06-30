@@ -38,9 +38,9 @@ namespace C2.Business.CastleBravo
         }
 
 
-        public bool StartTask(List<string> md5List, out CastleBravoAPIResult result)
+        public bool StartTask(List<string> md5List, out CastleBravoAPIResponse result)
         {
-            result = new CastleBravoAPIResult();
+            result = new CastleBravoAPIResponse();
             //Dictionary<string, string> pairs = new Dictionary<string, string> { { "md5List", JsonConvert.SerializeObject(md5List) } };
             //Dictionary<string, string> pairs = new Dictionary<string, string> { { "md5List", string.Join(",",md5List) } };
             string pairs = "md5List=" + string.Join(",", md5List);
@@ -48,30 +48,30 @@ namespace C2.Business.CastleBravo
             {
                 Response resp = httpHandler.PostCode(SearchUrl, pairs);
                 if (resp.StatusCode != HttpStatusCode.OK)
-                    result.RespMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+                    result.Message = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
 
                 if (resDict.TryGetValue("status", out string status) && status == "Success")
                 {
                     resDict.TryGetValue("taskid", out string taskId);
-                    result.Datas = taskId;
-                    result.RespMsg = status;
+                    result.Data = taskId;
+                    result.Message = status;
                 }
                 else
-                    result.RespMsg = "任务下发失败。";
+                    result.Message = "任务下发失败。";
             }
             catch (Exception ex)
             {
-                result.RespMsg = ex.Message;
+                result.Message = ex.Message;
             }
             return true;
         }
 
 
-        public bool QueryTaskResultsById(string taskId, out CastleBravoAPIResult result)
+        public bool QueryTaskResultsById(string taskId, out CastleBravoAPIResponse result)
         {
-            result = new CastleBravoAPIResult();
+            result = new CastleBravoAPIResponse();
 
             //目前默认输出全部分类结果，flag默认为1，后期有需求再改flag参数
             //Dictionary<string, string> pairs = new Dictionary<string, string> { { "taskId", taskId } };
@@ -80,22 +80,22 @@ namespace C2.Business.CastleBravo
             {
                 Response resp = httpHandler.PostCode(ResultUrl, pairs);
                 if (resp.StatusCode != HttpStatusCode.OK)
-                    result.RespMsg = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+                    result.Message = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
 
                 if (resDict.TryGetValue("status", out string status))
                 {
                     resDict.TryGetValue("content", out string datas);
-                    result.Datas = datas;
-                    result.RespMsg = status;
+                    result.Data = datas;
+                    result.Message = status;
                 }
                 else
-                    result.RespMsg = "任务结果查询失败。";
+                    result.Message = "任务结果查询失败。";
             }
             catch (Exception ex)
             {
-                result.RespMsg = ex.Message;
+                result.Message = ex.Message;
             }
             return true;
         }

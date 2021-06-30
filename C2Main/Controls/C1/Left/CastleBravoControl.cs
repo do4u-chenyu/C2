@@ -61,7 +61,7 @@ namespace C2.Controls.C1.Left
                .Write("taskName", taskInfo.TaskName)
                .Write("taskId", taskInfo.TaskID)
                .Write("taskCreateTime", taskInfo.TaskCreateTime)
-               .Write("datasourceFilePath", taskInfo.DatasourceFilePath)
+               .Write("datasourceFilePath", taskInfo.MD5FilePath)
                .Write("resultFilePath", taskInfo.ResultFilePath)
                .Write("status", taskInfo.Status);
         }
@@ -97,7 +97,7 @@ namespace C2.Controls.C1.Left
                     TaskName = xn.SelectSingleNode("taskName").InnerText,
                     TaskID = xn.SelectSingleNode("taskId").InnerText,
                     TaskCreateTime = xn.SelectSingleNode("taskCreateTime").InnerText,
-                    DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
+                    MD5FilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
                     ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
                     Status = CastleBravoTaskStatusEnum(xn.SelectSingleNode("status").InnerText)
                 };
@@ -201,8 +201,8 @@ namespace C2.Controls.C1.Left
             }
             private void OpenDatasourceToolStripMenuItem_Click(object sender, EventArgs e)
             {
-                if (File.Exists(this.TaskInfo.DatasourceFilePath))
-                    ProcessUtil.ProcessOpen(this.TaskInfo.DatasourceFilePath);
+                if (File.Exists(this.TaskInfo.MD5FilePath))
+                    ProcessUtil.ProcessOpen(this.TaskInfo.MD5FilePath);
                 else
                     HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
             }
