@@ -214,7 +214,7 @@ namespace C2
             this.castleBravoButton.TabIndex = 6;
             this.castleBravoButton.TabStop = false;
             this.castleBravoButton.Text = "   喝彩城堡";
-            this.toolTip1.SetToolTip(this.castleBravoButton, "分析师的实验台");
+            this.toolTip1.SetToolTip(this.castleBravoButton, "各种SG工具");
             this.castleBravoButton.UseVisualStyleBackColor = true;
             this.castleBravoButton.Click += new System.EventHandler(this.CastleBravoButton_Click);
             // 

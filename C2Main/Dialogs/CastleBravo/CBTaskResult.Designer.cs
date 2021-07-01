@@ -188,6 +188,8 @@
             this.md5.HeaderText = "MD5";
             this.md5.Name = "md5";
             this.md5.ReadOnly = true;
+            this.md5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.md5.ToolTipText = "Hash值";
             // 
             // type
             // 
@@ -196,6 +198,8 @@
             this.type.HeaderText = "模式";
             this.type.Name = "type";
             this.type.ReadOnly = true;
+            this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.type.ToolTipText = "Hash方式";
             // 
             // value
             // 
@@ -206,6 +210,8 @@
             this.value.HeaderText = "结果";
             this.value.Name = "value";
             this.value.ReadOnly = true;
+            this.value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.value.ToolTipText = "逆向分析结果";
             // 
             // salt
             // 
@@ -214,6 +220,7 @@
             this.salt.HeaderText = "盐(Salt)";
             this.salt.Name = "salt";
             this.salt.ReadOnly = true;
+            this.salt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // CBTaskResult
             // 

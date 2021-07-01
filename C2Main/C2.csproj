@@ -2379,7 +2379,7 @@
     <Content Include="Resources\Help\全文工具箱帮助文档.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\彩虹城堡帮助文档.txt">
+    <Content Include="Resources\Help\喝彩城堡帮助文档.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\检索系统帮助.html">
