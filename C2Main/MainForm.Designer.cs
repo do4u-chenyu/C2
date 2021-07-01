@@ -222,8 +222,8 @@ namespace C2
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox3.Image = global::C2.Properties.Resources.Artificialintelligence;
-            this.pictureBox3.Location = new System.Drawing.Point(12, 13);
+            this.pictureBox3.Image = global::C2.Properties.Resources.城堡;
+            this.pictureBox3.Location = new System.Drawing.Point(12, 10);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(20, 20);
             this.pictureBox3.TabIndex = 16;

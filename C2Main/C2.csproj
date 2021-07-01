@@ -3367,6 +3367,8 @@
     <None Include="Resources\WebBrowser\map_save.png" />
     <None Include="Resources\WebBrowser\map_setting.png" />
     <None Include="Resources\WebBrowser\map_sourceCode.png" />
+    <None Include="Resources\城堡.png" />
+    <None Include="Resources\城堡 %281%29.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
