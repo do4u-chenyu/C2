@@ -31,7 +31,7 @@ namespace C2.Dialogs.CastleBravo
 
         private void InitTaskName()
         {
-            TaskName = String.Format("任务_{0}", DateTime.Now.ToString("MMddhhmmss"));
+            TaskName = String.Format("任务_{0}", DateTime.Now.ToString("MMddhhmm"));
         }
 
         protected override bool OnOKButtonClick()

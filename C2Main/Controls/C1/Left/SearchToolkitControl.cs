@@ -71,8 +71,12 @@ namespace C2.Controls.C1.Left
 
         private void HelpInfoLable_Click(object sender, EventArgs e)
         {
-            string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "全文工具箱帮助文档.txt");
-            Help.ShowHelp(this, helpfile);
+            try 
+            {
+                string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "全文工具箱帮助文档.txt");
+                Help.ShowHelp(this, helpfile);
+            } catch { };
+
         }
     }
 }

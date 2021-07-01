@@ -26,12 +26,12 @@ namespace C2.Controls.C1.Left
             {
                 //添加按钮并持久化到本地
                 AddInnerButton(new WebsiteFeatureDetectionButton(dialog.TaskInfo));
-                SaveWFDTasksToXml();
+                Save();
             }
         }
 
         #region 持久化保存/加载
-        public void SaveWFDTasksToXml()
+        public void Save()
         {
             List<WebsiteFeatureDetectionButton> buttons = FindControls<WebsiteFeatureDetectionButton>();
 
@@ -65,7 +65,7 @@ namespace C2.Controls.C1.Left
                .Write("status", taskInfo.Status);
         }
 
-        public void LoadXmlToWFDTasks(string xmlDirectory)
+        private void LoadTasks(string xmlDirectory)
         {
             string xmlPath = Path.Combine(xmlDirectory, "侦察兵", "WFDTasks.xml");
             if (!File.Exists(xmlPath))
@@ -78,7 +78,7 @@ namespace C2.Controls.C1.Left
             }
             catch (Exception ex)
             {
-                HelpUtil.ShowMessageBox("侦察兵任务加载时发生错误:" + ex.Message);
+                HelpUtil.ShowMessageBox("任务加载时发生错误:" + ex.Message);
             }
 
             LoadUserInfo(xDoc.SelectSingleNode(@"WFDTasks/userInfo"));
@@ -210,7 +210,7 @@ namespace C2.Controls.C1.Left
 
                 Global.GetWebsiteFeatureDetectionControl().RemoveButton(this);
                 FileUtil.DeleteFile(this.TaskInfo.ResultFilePath);
-                Global.GetWebsiteFeatureDetectionControl().SaveWFDTasksToXml();//先删除后持久化
+                Global.GetWebsiteFeatureDetectionControl().Save();//先删除后持久化
             }
             private void OpenDatasourceToolStripMenuItem_Click(object sender, EventArgs e)
             {
@@ -242,13 +242,17 @@ namespace C2.Controls.C1.Left
         private void WebsiteFeatureDetectionControl_Load(object sender, EventArgs e)
         {
             //初次加载时加载本地文件内容到button
-            LoadXmlToWFDTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
+            LoadTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
         }
 
         private void HelpInfoLable_Click(object sender, EventArgs e)
         {
-            string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "网站侦察兵帮助文档.txt");
-            Help.ShowHelp(this, helpfile);
+            try
+            {
+                string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "网站侦察兵帮助文档.txt");
+                Help.ShowHelp(this, helpfile);
+            } catch { };
+
         }
     }
 }

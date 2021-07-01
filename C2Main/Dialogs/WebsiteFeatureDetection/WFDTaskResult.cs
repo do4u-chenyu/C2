@@ -69,7 +69,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
 
             UpdateTaskInfoByResp(result.RespMsg, result.Datas);
-            Global.GetWebsiteFeatureDetectionControl().SaveWFDTasksToXml();//状态刷新，修改本地持久化文件
+            Global.GetWebsiteFeatureDetectionControl().Save();//状态刷新，修改本地持久化文件
             FillDGV();
         }
         private bool LoadLocalResultsFillTable()

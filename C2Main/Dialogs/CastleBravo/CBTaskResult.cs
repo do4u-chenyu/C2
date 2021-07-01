@@ -41,7 +41,7 @@ namespace C2.Dialogs.CastleBravo
                     return;
 
             UpdateTaskInfoByResp(resp.Message, resp.Data);
-            Global.GetWebsiteFeatureDetectionControl().SaveWFDTasksToXml();//状态刷新，修改本地持久化文件
+            Global.GetCastleBravoControl().Save();//状态刷新，修改本地持久化文件
             FillDGV();
         }
         private bool ShowResults()

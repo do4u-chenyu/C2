@@ -36,6 +36,10 @@
             // 
             this.titleLabel.Text = "喝彩城堡";
             // 
+            // helpInfoLable
+            // 
+            this.helpInfoLable.Click += new System.EventHandler(this.HelpInfoLable_Click);
+            // 
             // CastleBravoControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

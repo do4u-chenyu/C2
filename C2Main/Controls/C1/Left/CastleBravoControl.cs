@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using C2.Dialogs.CastleBravo;
-using C2.Business.CastleBravo;
-using System.IO;
-using C2.Core;
-using System.Xml;
+﻿using C2.Business.CastleBravo;
 using C2.Business.Model;
+using C2.Core;
+using C2.Dialogs.CastleBravo;
 using C2.Utils;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace C2.Controls.C1.Left
 {
@@ -32,11 +26,11 @@ namespace C2.Controls.C1.Left
             {
                 //添加按钮并持久化到本地
                 AddInnerButton(new CastleBravoButton(dialog.TaskInfo));
-                SaveWFDTasksToXml();
+                Save();
             }
         }
 
-        public void SaveWFDTasksToXml()
+        public void Save()
         {
             List<CastleBravoButton> buttons = FindControls<CastleBravoButton>();
 
@@ -66,7 +60,7 @@ namespace C2.Controls.C1.Left
                .Write("status", taskInfo.Status);
         }
 
-        public void LoadXmlToWFDTasks(string xmlDirectory)
+        private void LoadTasks(string xmlDirectory)
         {
             string xmlPath = Path.Combine(xmlDirectory, "喝彩城堡", "CBTasks.xml");
             if (!File.Exists(xmlPath))
@@ -79,10 +73,10 @@ namespace C2.Controls.C1.Left
             }
             catch (Exception ex)
             {
-                HelpUtil.ShowMessageBox("侦察兵任务加载时发生错误:" + ex.Message);
+                HelpUtil.ShowMessageBox("任务加载时发生错误:" + ex.Message);
             }
 
-            foreach (XmlNode xn in xDoc.SelectNodes(@"CBTasks/task")) //要学着尽量利用XPath自己的能力
+            foreach (XmlNode xn in xDoc.SelectNodes(@"CBTasks/task")) 
                 LoadSingleTask(xn);
 
             return;
@@ -197,7 +191,7 @@ namespace C2.Controls.C1.Left
 
                 Global.GetCastleBravoControl().RemoveButton(this);
                 FileUtil.DeleteFile(this.TaskInfo.ResultFilePath);
-                Global.GetCastleBravoControl().SaveWFDTasksToXml();//先删除后持久化
+                Global.GetCastleBravoControl().Save();//先删除后持久化
             }
             private void OpenDatasourceToolStripMenuItem_Click(object sender, EventArgs e)
             {
@@ -232,7 +226,18 @@ namespace C2.Controls.C1.Left
         private void CastleBravoControl_Load(object sender, EventArgs e)
         {
             //初次加载时加载本地文件内容到button
-            LoadXmlToWFDTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
+            LoadTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
+        }
+
+        private void HelpInfoLable_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "彩虹城堡帮助文档.txt");
+                Help.ShowHelp(this, helpfile);
+            }
+            catch { };
+
         }
     }
 }

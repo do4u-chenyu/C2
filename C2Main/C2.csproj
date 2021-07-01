@@ -2379,6 +2379,9 @@
     <Content Include="Resources\Help\全文工具箱帮助文档.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Help\彩虹城堡帮助文档.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Help\检索系统帮助.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
