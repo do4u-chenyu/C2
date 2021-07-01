@@ -41,7 +41,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(36, 33);
+            this.label1.Location = new System.Drawing.Point(36, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 19);
             this.label1.TabIndex = 10003;
@@ -51,7 +51,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(22, 83);
+            this.label2.Location = new System.Drawing.Point(22, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 19);
             this.label2.TabIndex = 10004;
@@ -90,11 +90,11 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(203, 12);
             this.label3.TabIndex = 10008;
-            this.label3.Text = "*文件内容格式，一个加密字符串一行";
+            this.label3.Text = "*文件内容格式，一个hash字符串一行";
             // 
             // ofd
             // 
-            this.ofd.FileName = "openFileDialog1";
+            this.ofd.Filter = "数据文件|*.txt;*.bcp;*.csv;*.tsv|所有文件|*.*";
             // 
             // AddCBTask
             // 

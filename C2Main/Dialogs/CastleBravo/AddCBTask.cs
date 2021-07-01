@@ -4,14 +4,8 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.CastleBravo
@@ -21,6 +15,8 @@ namespace C2.Dialogs.CastleBravo
         public CastleBravoTaskInfo TaskInfo { set; get; }
         string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
+
+        private static readonly int MaxRowNumber = 2000;   // 单任务最大处理数
 
         public AddCBTask()
         {
@@ -35,7 +31,7 @@ namespace C2.Dialogs.CastleBravo
 
         private void InitTaskName()
         {
-            TaskName = String.Format("喝彩城堡{0}", DateTime.Now.ToString("MMdd"));
+            TaskName = String.Format("任务_{0}", DateTime.Now.ToString("MMddhhmmss"));
         }
 
         protected override bool OnOKButtonClick()
@@ -73,8 +69,6 @@ namespace C2.Dialogs.CastleBravo
         }
         private List<string> GetUrlsFromFile(string filePath)
         {
-            //TODO phx  MD5逆向解析读文件的最大行数
-            int maxRow = 1000;
 
             List<string> md5List = new List<string>();
             if (!File.Exists(filePath))
@@ -89,7 +83,7 @@ namespace C2.Dialogs.CastleBravo
             {
                 fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs, Encoding.Default);
-                for (int row = 0; row < maxRow && !sr.EndOfStream; row++)
+                for (int row = 0; row < MaxRowNumber && !sr.EndOfStream; row++)
                     md5List.Add(sr.ReadLine().Trim(new char[] { '\r', '\n'}));
             }
             catch
