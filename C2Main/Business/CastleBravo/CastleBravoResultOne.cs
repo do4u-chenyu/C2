@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace C2.Business.CastleBravo
@@ -35,10 +36,13 @@ namespace C2.Business.CastleBravo
     {
         public string Message { set; get; }
         public string Data { set; get; }
+
+        public HttpStatusCode StatusCode { set; get; }
         public CastleBravoAPIResponse()
         {
             Message = string.Empty;
             Data = string.Empty;
+            StatusCode = HttpStatusCode.OK;
         }
 
     }

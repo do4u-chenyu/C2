@@ -40,8 +40,9 @@ namespace C2.Business.CastleBravo
             try
             {
                 Response resp = httpHandler.PostCode(SearchUrl, pairs);
-                if (resp.StatusCode != HttpStatusCode.OK)
-                    cbaResp.Message = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+                cbaResp.StatusCode = resp.StatusCode;
+                if (cbaResp.StatusCode != HttpStatusCode.OK)
+                    cbaResp.Message = string.Format("任务下发失败, Http状态码 ：{0}。", cbaResp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
 
@@ -49,10 +50,10 @@ namespace C2.Business.CastleBravo
                 {
                     resDict.TryGetValue("taskid", out string taskId);
                     cbaResp.Data = taskId;
-                    cbaResp.Message = status;
+                    cbaResp.Message = String.Format("任务下发成功，ID:[{0}]", taskId); 
                 }
                 else
-                    cbaResp.Message = "任务下发失败。";
+                    cbaResp.Message = "网络OK，但向服务器下发任务失败";
             }
             catch (Exception ex)
             {

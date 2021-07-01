@@ -5,6 +5,7 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 
@@ -51,13 +52,14 @@ namespace C2.Dialogs.CastleBravo
                     return false;
             }
 
-            if (result.Message != "Success")
+            if (result.StatusCode != HttpStatusCode.OK)
             {
                 HelpUtil.ShowMessageBox(result.Message);
                 return false;
             }
 
-            HelpUtil.ShowMessageBox("任务下发成功");
+            HelpUtil.ShowMessageBox(result.Message);
+
             string destDirectory = Path.Combine(Global.UserWorkspacePath, "喝彩城堡");
             string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.txt", TaskName, result.Data));
             FileUtil.CreateDirectory(destDirectory);
