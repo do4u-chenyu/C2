@@ -128,5 +128,23 @@ namespace C2.Dialogs.CastleBravo
 
             return true;
         }
+
+        private void AddCBTask_Load(object sender, EventArgs e)
+        {
+            Reset();
+        }
+
+        private void Reset(int i = 0)
+        {
+            this.taskComboBox.SelectedIndex = i;
+            this.modeComboBox.SelectedIndex = 0;
+            this.modeComboBox.Visible = this.taskComboBox.SelectedIndex == 0;
+            this.label3.Visible = this.taskComboBox.SelectedIndex == 0;
+        }
+
+        private void TaskComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Reset(this.taskComboBox.SelectedIndex);
+        }
     }
 }
