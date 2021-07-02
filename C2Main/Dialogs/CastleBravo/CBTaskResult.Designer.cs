@@ -184,7 +184,7 @@
             // md5
             // 
             this.md5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.md5.FillWeight = 37F;
+            this.md5.FillWeight = 30F;
             this.md5.HeaderText = "MD5";
             this.md5.Name = "md5";
             this.md5.ReadOnly = true;
@@ -206,7 +206,7 @@
             this.value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.value.DefaultCellStyle = dataGridViewCellStyle2;
-            this.value.FillWeight = 27F;
+            this.value.FillWeight = 34F;
             this.value.HeaderText = "结果";
             this.value.Name = "value";
             this.value.ReadOnly = true;
@@ -221,6 +221,7 @@
             this.salt.Name = "salt";
             this.salt.ReadOnly = true;
             this.salt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.salt.Visible = false;
             // 
             // CBTaskResult
             // 
