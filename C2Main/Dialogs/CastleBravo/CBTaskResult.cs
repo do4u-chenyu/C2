@@ -77,21 +77,19 @@ namespace C2.Dialogs.CastleBravo
 
         private void UpdateTaskInfoByResp(string respMsg, string datas)
         {
-            if (respMsg == "Done")
-            {
-                TaskInfo.Status = CastleBravoTaskStatus.Done;;
-                TaskInfo.PreviewResults = DealData(TaskInfo.ResultFilePath, datas);
-            }
-            else if (respMsg == "Running")
-            {
-                TaskInfo.Status = CastleBravoTaskStatus.Running;
-                TaskInfo.PreviewResults = DealData(TaskInfo.ResultFilePath, datas);
-            }
-            else if (respMsg == "Error")
+            if (respMsg == "Error")
             {
                 TaskInfo.Status = CastleBravoTaskStatus.Fail;
+                this.taskStatusLabel.Text = "Fail";
+                return;
             }
 
+            if (respMsg == "Done")
+                TaskInfo.Status = CastleBravoTaskStatus.Done;
+            else if (respMsg == "Running")
+                TaskInfo.Status = CastleBravoTaskStatus.Running;
+
+            TaskInfo.PreviewResults = DealData(TaskInfo.ResultFilePath, datas);
             this.taskStatusLabel.Text = String.Format("{0}   成功数 : {1}", TaskInfo.Status.ToString(), TaskInfo.PreviewResults.Count);
         }
 

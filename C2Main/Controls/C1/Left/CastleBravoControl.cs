@@ -175,16 +175,13 @@ namespace C2.Controls.C1.Left
             }
             private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
             {
-                //删除前先判断，非done状态时，不支持删除
+                String message = String.Format("删除任务 {0} 及结果文件, 继续删除请点击 \"确定\"", ButtonText);
                 if (TaskInfo.Status == CastleBravoTaskStatus.Running)
-                {
-                    HelpUtil.ShowMessageBox("当前任务正在执行中，无法删除。");
-                    return;
-                }
+                    message = "当前任务正在执行中，" + message;
 
-                DialogResult rs = MessageBox.Show(
-                    String.Format("删除任务 {0}及结果文件, 继续删除请点击 \"确定\"", ButtonText),
-                    "删除", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                DialogResult rs = MessageBox.Show(message, "删除", 
+                    MessageBoxButtons.OKCancel, 
+                    MessageBoxIcon.Information);
 
                 if (rs != DialogResult.OK)
                     return;
