@@ -54,6 +54,7 @@ namespace C2.Controls.C1.Left
             new ModelXmlWriter("task", node)
                .Write("taskName", taskInfo.TaskName)
                .Write("taskId", taskInfo.TaskID)
+               .Write("taskCount", taskInfo.TaskCount)
                .Write("taskCreateTime", taskInfo.TaskCreateTime)
                .Write("datasourceFilePath", taskInfo.MD5FilePath)
                .Write("resultFilePath", taskInfo.ResultFilePath)
@@ -88,12 +89,13 @@ namespace C2.Controls.C1.Left
             {
                 CastleBravoTaskInfo taskInfo = new CastleBravoTaskInfo
                 {
-                    TaskName = xn.SelectSingleNode("taskName").InnerText,
-                    TaskID = xn.SelectSingleNode("taskId").InnerText,
-                    TaskCreateTime = xn.SelectSingleNode("taskCreateTime").InnerText,
-                    MD5FilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
-                    ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
-                    Status = CastleBravoTaskStatusEnum(xn.SelectSingleNode("status").InnerText)
+                    TaskID = XmlUtil.Read(xn, "taskId"),
+                    TaskName = XmlUtil.Read(xn, "taskName"),
+                    TaskCount = XmlUtil.ReadDefault(xn, "taskCount", "0"),
+                    TaskCreateTime = XmlUtil.Read(xn, "taskCreateTime"),
+                    MD5FilePath = XmlUtil.Read(xn, "datasourceFilePath"),
+                    ResultFilePath = XmlUtil.Read(xn, "resultFilePath"),
+                    Status = CastleBravoTaskStatusEnum(XmlUtil.Read(xn, "status"))
                 };
 
                 AddInnerButton(new CastleBravoButton(taskInfo));

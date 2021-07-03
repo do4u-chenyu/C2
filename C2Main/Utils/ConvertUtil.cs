@@ -73,6 +73,7 @@ namespace C2.Utils
                 return double.NaN;
             }
         }
+
         public static bool IsInt(string value)
         {
             try

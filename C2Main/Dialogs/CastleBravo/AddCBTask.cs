@@ -65,7 +65,12 @@ namespace C2.Dialogs.CastleBravo
             FileUtil.CreateDirectory(destDirectory);
             using (File.Create(destFilePath)) { }
 
-            TaskInfo = new CastleBravoTaskInfo(TaskName, result.Data, FilePath, destFilePath, CastleBravoTaskStatus.Null);
+            TaskInfo = new CastleBravoTaskInfo(md5List.Count.ToString(), 
+                                               TaskName, 
+                                               result.Data, 
+                                               FilePath,
+                                               destFilePath, 
+                                               CastleBravoTaskStatus.Null);
 
             return base.OnOKButtonClick();
         }

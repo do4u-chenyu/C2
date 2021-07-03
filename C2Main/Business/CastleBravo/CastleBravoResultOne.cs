@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Net;
-using System.Text.RegularExpressions;
 
 namespace C2.Business.CastleBravo
 {
@@ -21,10 +20,6 @@ namespace C2.Business.CastleBravo
         {
             ResDict = resDict;
         }
-        public static  string ReplaceValueSpecialChars(string value)
-        {
-            return Regex.Replace(value, @"[\t\r\n]", string.Empty);
-        }
 
         public string MD5 { get => ResDict.TryGetValue("md5", out string md5) ? md5 : string.Empty;}
         public string Model { get => ResDict.TryGetValue("model", out string model) ? model : string.Empty;}
@@ -36,7 +31,6 @@ namespace C2.Business.CastleBravo
     {
         public string Message { set; get; }
         public string Data { set; get; }
-
         public HttpStatusCode StatusCode { set; get; }
         public CastleBravoAPIResponse()
         {

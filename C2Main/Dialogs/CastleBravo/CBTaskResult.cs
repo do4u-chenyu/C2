@@ -71,7 +71,12 @@ namespace C2.Dialogs.CastleBravo
 
         private void UpdateTaskStatusLabel()
         {
-            this.taskStatusLabel.Text = String.Format("{0}   成功数 : {1}", TaskInfo.Status, TaskInfo.PreviewResults.Count);
+
+            this.taskStatusLabel.Text = String.Format("{0}  成功 : {1}/{2} = {3:0.00%}", 
+                TaskInfo.Status, 
+                TaskInfo.PreviewResults.Count, 
+                TaskInfo.TaskCount,
+                TaskInfo.PreviewResults.Count / Math.Max(1.0, ConvertUtil.TryParseDouble(TaskInfo.TaskCount)));
         }
 
         private List<CastleBravoResultOne> TransListToCBResult(Tuple<List<string>, List<List<string>>> headersAndRows)

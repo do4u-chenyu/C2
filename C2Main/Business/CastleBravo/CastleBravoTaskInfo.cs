@@ -22,20 +22,22 @@ namespace C2.Business.CastleBravo
         };
 
         public static readonly CastleBravoTaskInfo Empty = new CastleBravoTaskInfo();
+
         public string TaskName;
         public string TaskID;
+        public string TaskCount;
         public string TaskCreateTime;
         public string MD5FilePath;
         public string ResultFilePath;
         public List<CastleBravoResultOne> PreviewResults = new List<CastleBravoResultOne>();
         public CastleBravoTaskStatus Status;
-        public bool IsEmpty() { return this == Empty; }
 
-        public CastleBravoTaskInfo() : this(string.Empty, string.Empty, string.Empty, string.Empty, CastleBravoTaskStatus.Null)
+        public CastleBravoTaskInfo() : this("0", string.Empty, string.Empty, string.Empty, string.Empty, CastleBravoTaskStatus.Null)
         { }
 
-        public CastleBravoTaskInfo(string taskName, string taskId, string md5FilePath, string resultFilePath, CastleBravoTaskStatus status)
+        public CastleBravoTaskInfo(string taskCount, string taskName, string taskId, string md5FilePath, string resultFilePath, CastleBravoTaskStatus status)
         {
+            TaskCount = taskCount;
             TaskName = taskName;
             TaskID = taskId;
             MD5FilePath = md5FilePath;

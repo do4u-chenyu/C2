@@ -21,5 +21,23 @@ namespace C2.Utils
             }
             return text;
         }
+
+        public static string Read(XmlNode xn, string label)
+        {
+            return xn.SelectSingleNode(label).InnerText;
+        }
+
+        public static string ReadDefault(XmlNode xn, string label, string def = "")
+        {
+            try
+            {
+                XmlNode xnLabel = xn.SelectSingleNode(label);
+                return xnLabel == null ? def : xnLabel.InnerText;
+            }
+            catch
+            {
+                return def;
+            }
+        }
     }
 }
