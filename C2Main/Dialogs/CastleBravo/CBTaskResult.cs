@@ -119,12 +119,13 @@ namespace C2.Dialogs.CastleBravo
 
                 JArray ja = JArray.Parse(apiResults);
                 foreach (JObject jobj in ja)
-                {
-                    CastleBravoResultOne one = new CastleBravoResultOne(jobj.ToObject<Dictionary<string, string>>());
-                    results.Add(one);
-                    sw.WriteLine(one.Content);
-                }   
-                // TODO 这里去重
+                    results.Add(new CastleBravoResultOne(jobj.ToObject<Dictionary<string, string>>()));
+                
+                // Linq 去重
+                results = results.Where((x, i) => results.FindIndex(z => z.Content == x.Content) == i).ToList();
+                
+                foreach (var one in results)
+                    sw.WriteLine(one.Content); 
             }
             catch { }
             finally
