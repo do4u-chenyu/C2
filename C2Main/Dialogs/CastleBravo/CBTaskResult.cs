@@ -26,7 +26,7 @@ namespace C2.Dialogs.CastleBravo
         {
             TaskInfo = taskInfo;
 
-            this.taskNameLabel.Text = taskInfo.TaskName;
+            this.taskNameLabel.Text = String.Format("{0}   [{1}]", taskInfo.TaskName, Path.GetFileName(taskInfo.MD5FilePath));
             this.taskIdLabel.Text = taskInfo.TaskID;
             this.taskStatusLabel.Text = taskInfo.Status.ToString();
         }
