@@ -77,7 +77,6 @@ namespace C2.Dialogs.CastleBravo
         private List<CastleBravoResultOne> TransListToCBResult(Tuple<List<string>, List<List<string>>> headersAndRows)
         {
             List<CastleBravoResultOne> results = new List<CastleBravoResultOne>();
-            // TODO 去重排序
             List<string> headers = headersAndRows.Item1;
             foreach (List<string> content in headersAndRows.Item2)
             {
@@ -124,7 +123,8 @@ namespace C2.Dialogs.CastleBravo
                     CastleBravoResultOne one = new CastleBravoResultOne(jobj.ToObject<Dictionary<string, string>>());
                     results.Add(one);
                     sw.WriteLine(one.Content);
-                }         
+                }   
+                // TODO 这里去重
             }
             catch { }
             finally
